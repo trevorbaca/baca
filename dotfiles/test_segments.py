@@ -4,12 +4,11 @@ import pathlib
 import shutil
 import sys
 
-import ide
-import pytest
+import pytest  # isort:skip
 
-import abjad
-
+import abjad  # isort:skip
 import baca  # isort:skip
+import ide  # isort:skip
 
 abjad_ide = ide.AbjadIDE()
 github_workspace = os.getenv("GITHUB_WORKSPACE")
