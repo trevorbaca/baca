@@ -1,32 +1,36 @@
 #! /usr/bin/env bash
 
+source ~/baca/scr/lib-ide-replacement-commands
+source ~/baca/scr/lib-score-navigation
+
 clear
 group="OK"
 
 case $1 in
     1)
-        start-abjad-ide aka gg ipm q
-        start-abjad-ide akl gg ipm q
-        start-abjad-ide ani gg ipm q
-        start-abjad-ide dor gg ipm q
-        start-abjad-ide fab gg ipm q
+        aka; gg; ipm
+        akl; gg; ipm
+        ani; gg; ipm
+        dor; gg; ipm
+        fab; gg; ipm
         ;;
     2)
-        start-abjad-ide har gg ipm q
-        start-abjad-ide hij gg ipm q
-        start-abjad-ide hui gg ipm q
-        start-abjad-ide ikr gg ipm q
-        start-abjad-ide ins gg ipm q
-        start-abjad-ide kha gg ipm q
-        start-abjad-ide kru gg ipm q
+        har; gg; ipm
+        hij; gg; ipm
+        hui; gg; ipm
+        ikr; gg; ipm
+        ins; gg; ipm
+        kha; gg; ipm
+        kru; gg; ipm
         ;;
     3)
-        start-abjad-ide mra gg ipm q
-        start-abjad-ide myr gg ipm q
-        start-abjad-ide nae gg ipm q
-        start-abjad-ide rec gg 01 ipn q
-        start-abjad-ide str gg ipm q
-        start-abjad-ide tra gg ipm q
+        mra; gg; ipm
+        myr; gg; ipm
+        nae; gg; ipm
+        #rec; gg; 01 ipn q
+        rec; gg; 01 ipm
+        str; gg; ipm
+        tra; gg; ipm
         ;;
     *)
         echo Group not found: "$1"
