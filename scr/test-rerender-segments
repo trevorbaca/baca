@@ -13,3 +13,9 @@ directories=$(ls -d "$segments"/[0-9]*)
 echo Wrapper is "$wrapper"
 echo Segments is "$segments"
 echo Directories is "$directories"
+echo
+echo Contents of wrapper directory:
+ls "$wrapper"
+echo Contents of segments directory:
+ls "$segments"
+echo bye
