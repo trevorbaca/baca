@@ -6,9 +6,7 @@ if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 source "$DIR/lib-path-manipulation"
 source "$DIR/make-segment-pdf"
 
-echo GITHUB_WORKSPACE is "$GITHUB_WORKSPACE"
 package_name=$(basename "$GITHUB_WORKSPACE")
-echo Package name is "$package_name"
 wrapper_directory="$GITHUB_WORKSPACE"
 echo Wrapper directory is "$wrapper_directory"
 contents_directory="$wrapper_directory"/"$package_name"
@@ -34,7 +32,8 @@ for segment_directory in $segment_directories; do
     current_directory=$(pwd)
     cd "$segment_directory"
     echo Calling make_segment_pdf ...
-    make_segment_pdf "$segment_directory" --do-not-open
+    # make_segment_pdf "$segment_directory" --do-not-open
+    make_segment_pdf --do-not-open
     echo Done with make_segment_pdf ...
     cd "$current_directory"
     if [ -f "$illustration_ly" ]; then
