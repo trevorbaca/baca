@@ -48,8 +48,6 @@ for segment_directory in "$segment_directories"; do
     current_directory=$(pwd)
     cd "$segment_directory"
     echo Calling make_segment_pdf ...
-    which lilypond
-    echo "$PATH"
     make_segment_pdf "$segment_directory" --do-not-open
     echo Done with make_segment_pdf ...
     cd "$current_directory"
@@ -63,22 +61,24 @@ for segment_directory in "$segment_directories"; do
     else
         exit -1
     fi
-    differences=$(diff -I '^\\version' "$illustration_ly" "$illustration_old_ly")
+    # differences=$(diff -I '^\\version' "$illustration_ly" "$illustration_old_ly")
+    diff_command=diff -I '^\\version' "$illustration_ly" "$illustration_old_ly"
+    differences=$("$diff_command")
     if [ -z "$differences" ]; then
         echo Found matching illustration.ly files ...
     else
-        for line in $differences; do
-            echo "$line"
-        done
+        echo Found mismatched illustration.ly files ...
+        "$diff_command"
         exit -1
     fi
-    differences=$(diff -I '^\\version' "$illustration_ily" "$illustration_old_ily")
+    # differences=$(diff -I '^\\version' "$illustration_ily" "$illustration_old_ily")
+    diff_command=diff -I '^\\version' "$illustration_ily" "$illustration_old_ily"
+    differences=$("$diff_command")
     if [ -z "$differences" ]; then
         echo Found matching illustration.ily files ...
     else
-        for line in $differences; do
-            echo "$line"
-        done
+        echo Found mismatched illustration.ily files ...
+        "$diff_command"
         exit -1
     fi
 done
