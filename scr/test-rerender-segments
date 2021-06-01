@@ -32,7 +32,6 @@ for segment_directory in $segment_directories; do
     current_directory=$(pwd)
     cd "$segment_directory"
     echo Calling make_segment_pdf ...
-    # make_segment_pdf "$segment_directory" --do-not-open
     make_segment_pdf --do-not-open
     echo Done with make_segment_pdf ...
     cd "$current_directory"
@@ -62,4 +61,5 @@ for segment_directory in $segment_directories; do
         diff -I '^\\version' "$illustration_ily" "$illustration_old_ily"
         exit -1
     fi
+    echo
 done
