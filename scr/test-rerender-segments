@@ -64,12 +64,21 @@ for segment_directory in "$segment_directories"; do
         exit -1
     fi
     differences=$(diff -I '^\\version' "$illustration_ly" "$illustration_old_ly")
-    if [ ! -z "$differences" ]; then
+    if [ -z "$differences" ]; then
+        echo Found matching illustration.ly files ...
+    else
         for line in $differences; do
             echo "$line"
         done
         exit -1
+    fi
+    differences=$(diff -I '^\\version' "$illustration_ily" "$illustration_old_ily")
+    if [ -z "$differences" ]; then
+        echo Found matching illustration.ily files ...
     else
-        echo Old and new illustration.ly files compare equal ...
+        for line in $differences; do
+            echo "$line"
+        done
+        exit -1
     fi
 done
