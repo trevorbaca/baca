@@ -107,7 +107,7 @@ jobs:
 
     - name: Rerender segments
       run: |
-        export PATH=/tmp/baca/scr:${PATH}
+        export PATH=/home/runner/bin:${PATH}
         /tmp/baca/scr/test-rerender-segments "$GITHUB_WORKSPACE"/"$NAME"segments
 
 #    - name: Run pytest
