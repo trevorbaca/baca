@@ -103,7 +103,7 @@ helper() {
     fi
     if [ -a "$pdf" ]; then
         echo Found $(trim_score_path "$pdf") ...
-        if [ -f "$backup_pdf" ];
+        if [ -f "$backup_pdf" ]; then
             rm "$backup_pdf"
         fi
         if [[ "$2" != "--do-not-open" ]]; then
