@@ -63,4 +63,11 @@ for segment_directory in "$segment_directories"; do
     else
         exit -1
     fi
+    if cmp -s "$illustration_ly" "$illustration_old_ly"; then
+        echo New illustration.ly compares equal to old illustration.ly
+    else
+        echo New illustration.ly does not compare equal to old illustration.ly
+        diff "$illustration_ly" "$illustration_old_ly"
+        exit -1
+    fi
 done
