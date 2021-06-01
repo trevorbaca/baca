@@ -1,6 +1,10 @@
 #! /usr/bin/env bash
 
-source lib-path-manipulation
+if [ -z "$GITHUB_WORKSPACE" ]; then
+    source lib-path-manipulation
+else
+    source /tmp/baca/scr/lib-path-manipulation
+fi
 
 wrapper="$GITHUB_WORKSPACE"
 segments=$(realpath "$1")
