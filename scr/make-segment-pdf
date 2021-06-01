@@ -22,7 +22,7 @@ helper() {
         directory=$(dirname "$layout_py_path")
         filename=$(basename -- "$layout_py_path")
         filename="${filename%.*}"
-        layout_ly_path="$directory"/"$filename".ly
+        layout_ly_path="$directory/$filename.ly"
         SECONDS=0
         make_layout_ly "$layout_py_path"
         if [ -f "$layout_ly_path" ]; then
@@ -38,20 +38,20 @@ helper() {
     fi
 
     segment_name=$(basename "$segment_directory")
-    definition="$segment_directory"/definition.py
+    definition="$segment_directory/definition.py"
     if [ ! -f "$definition" ]; then
         echo "Can not find $definition ..."
         return
     fi
     echo "Making segment $(basename "$segment_directory") PDF ..."
-    ly="$segment_directory"/illustration.ly
+    ly="$segment_directory/illustration.ly"
     if [ -a "$ly" ]; then
         echo "Removing $(trim_score_path "$ly") ..."
         rm "$ly"
     fi
 
-    pdf="$segment_directory"/illustration.pdf
-    backup_pdf="$segment_directory"/illustration._backup.pdf
+    pdf="$segment_directory/illustration.pdf"
+    backup_pdf="$segment_directory/illustration._backup.pdf"
     if [ -a "$pdf" ]; then
         cp "$pdf" "$backup_pdf"
         echo "Removing $(trim_score_path "$pdf") ..."
@@ -59,8 +59,8 @@ helper() {
     fi
 
     maker_name=__make_segment_pdf__.py
-    maker_source="$boilerplate"/"$maker_name"
-    maker_target="$segment_directory"/"$maker_name"
+    maker_source="$boilerplate/$maker_name"
+    maker_target="$segment_directory/$maker_name"
     if [ -a "$maker_target" ]; then
         rm "$maker_target"
     fi
@@ -72,7 +72,7 @@ helper() {
         persist_statement="previous_persist = None"
     else
         previous_segment=$(get_previous_sibling_directory "$segment_directory")
-        metadata="$previous_segment"/__metadata__.py
+        metadata="$previous_segment/__metadata__.py"
         statement="file = ide.Path('$metadata')"
         statement="$statement
         lines = file.read_text()"
@@ -80,7 +80,7 @@ helper() {
         exec(lines)"
         statement="$statement
         previous_metadata = metadata"
-        persist="$previous_segment"/__persist__.py
+        persist="$previous_segment/__persist__.py"
         persist_statement="file = ide.Path('$persist')"
         persist_statement="$persist_statement
         lines = file.read_text()"
@@ -97,13 +97,15 @@ helper() {
     python "$maker_target"
     echo Removing $(trim_score_path "$maker_target") ...
     rm "$maker_target"
-    ly="$segment_directory"/illustration.ly
+    ly="$segment_directory/illustration.ly"
     if [ -a "$ly" ]; then
         echo Found $(trim_score_path "$ly") ...
     fi
     if [ -a "$pdf" ]; then
         echo Found $(trim_score_path "$pdf") ...
-        rm "$backup_pdf"
+        if [ -f "$backup_pdf" ];
+            rm "$backup_pdf"
+        fi
         if [[ "$2" != "--do-not-open" ]]; then
             echo Opening $(trim_score_path "$pdf") ...
             open "$pdf"
