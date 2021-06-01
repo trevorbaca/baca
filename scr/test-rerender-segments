@@ -6,16 +6,20 @@ else
     source /tmp/baca/scr/lib-path-manipulation
 fi
 
-wrapper="$GITHUB_WORKSPACE"
-segments=$(realpath "$1")
-directories=$(ls -d "$segments"/[0-9]*)
+echo GITHUB_WORKSPACE is "$GITHUB_WORKSPACE"
+package_name=$(basename "$GITHUB_WORKSPACE")
+echo Package name is "$package_name"
+wrapper_directory="$GITHUB_WORKSPACE"
+echo Wrapper directory is "$wrapper_directory"
+contents_directory="$wrapper_directory"/"$package_name"
+echo Contents directory is "$contents_directory"
+segments_directory=$(realpath "$1")
+echo Segments directory is "$segments_directory"
 
-echo Wrapper is "$wrapper"
-echo Segments is "$segments"
-echo Directories is "$directories"
-echo
-echo Contents of wrapper directory:
-ls "$wrapper"
-echo Contents of segments directory:
-ls "$segments"
-echo bye
+#directories=$(ls -d "$segments_directory"/[0-9]*)
+#echo Directories is "$directories"
+#echo Contents of wrapper directory:
+#ls "$wrapper_directory"
+#echo Contents of segments directory:
+#ls "$segments_directory"
+#echo bye
