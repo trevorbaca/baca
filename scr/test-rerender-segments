@@ -17,3 +17,9 @@ segments_directory="$contents_directory"/segments
 echo Segments directory is "$segments_directory"
 segment_directories=$(ls -d "$segments_directory"/[0-9]*)
 echo Segment directories are "$segment_directories"
+echo
+echo Contents of contents directory:
+ls "$contents_directory"
+echo Contents of segments directory:
+ls "$segments_directory"
+echo bye
