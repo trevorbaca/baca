@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
-source lib-path-manipulation
-source make-layout-ly
+source ./lib-path-manipulation
+source ./make-layout-ly
 
 boilerplate=/Users/trevorbaca/ide/boilerplate
 

@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-source lib-path-manipulation
+source ./lib-path-manipulation
 
 make_layout_ly() {
     layout_py_path="$1"

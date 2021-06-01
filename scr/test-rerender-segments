@@ -1,12 +1,15 @@
 #! /usr/bin/env bash
 
-if [ -z "$GITHUB_WORKSPACE" ]; then
-    source lib-path-manipulation
-    source make-segment-pdf
-else
-    source /tmp/baca/scr/lib-path-manipulation
-    source /tmp/baca/scr/make-segment-pdf
-fi
+#if [ -z "$GITHUB_WORKSPACE" ]; then
+#    source lib-path-manipulation
+#    source make-segment-pdf
+#else
+#    source /tmp/baca/scr/lib-path-manipulation
+#    source /tmp/baca/scr/make-segment-pdf
+#fi
+
+source ./lib-path-manipulation
+source ./make-segment-pdf
 
 echo GITHUB_WORKSPACE is "$GITHUB_WORKSPACE"
 package_name=$(basename "$GITHUB_WORKSPACE")
@@ -55,3 +58,4 @@ for segment_directory in "$segment_directories"; do
     else
         exit -1
     fi
+done
