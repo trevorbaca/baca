@@ -47,7 +47,9 @@ for segment_directory in "$segment_directories"; do
     rm "$illustration_ily"
     current_directory=$(pwd)
     cd "$segment_directory"
+    echo Calling make_segment_pdf ...
     make_segment_pdf "$segment_directory" --do-not-open
+    echo Done with make_segment_pdf ...
     cd "$current_directory"
     if [ -f "$illustration_ly" ]; then
         echo Found "$illustration_ly" ...

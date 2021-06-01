@@ -13,6 +13,8 @@ else
     boilerplate=/tmp/ide/boilerplate
 fi
 
+echo In make-segment-pdf boilerplate directory is "$boilerplate" ...
+
 helper() {
 
     segment_directory=$1
