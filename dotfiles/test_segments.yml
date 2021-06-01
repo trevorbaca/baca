@@ -105,19 +105,23 @@ jobs:
         export PATH=/tmp/baca/scr:${PATH}
         /tmp/baca/scr/dpc
 
-    - name: Run pytest
+    - name: Rerender segments
       run: |
-        export PATH=/home/runner/bin:${PATH}
-        NAME=$(basename "$GITHUB_WORKSPACE")
-        if [ -e "$GITHUB_WORKSPACE"/$NAME/test_custom.py ]; then
-            echo found test_custom.py
-            py.test -rf "$GITHUB_WORKSPACE"/"$NAME"/test_custom.py
-        else
-            echo did NOT find test_custom.py
-        fi
-        if [ -e "$GITHUB_WORKSPACE"/$NAME/test.py ]; then
-            echo found test.py
-            py.test -rf "$GITHUB_WORKSPACE"/"$NAME"/test.py
-        else
-            echo did NOT find test.py
-        fi
+        /tmp/baca/scr/test-rerender-segments "$GITHUB_WORKSPACE"/"$NAME"/segments
+
+#    - name: Run pytest
+#      run: |
+#        export PATH=/home/runner/bin:${PATH}
+#        NAME=$(basename "$GITHUB_WORKSPACE")
+#        if [ -e "$GITHUB_WORKSPACE"/$NAME/test_custom.py ]; then
+#            echo found test_custom.py
+#            py.test -rf "$GITHUB_WORKSPACE"/"$NAME"/test_custom.py
+#        else
+#            echo did NOT find test_custom.py
+#        fi
+#        if [ -e "$GITHUB_WORKSPACE"/$NAME/test.py ]; then
+#            echo found test.py
+#            py.test -rf "$GITHUB_WORKSPACE"/"$NAME"/test.py
+#        else
+#            echo did NOT find test.py
+#        fi
