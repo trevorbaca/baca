@@ -47,6 +47,7 @@ for segment_directory in "$segment_directories"; do
     illustration_old_ily="$segment_directory"/illustration.old.ily
     if [ -f "$illustration_ily" ]; then
         cp "$illustration_ily" "$illustration_old_ily"
+    fi
     make_segment_pdf "$segment_directory" --do-not-open
     if [ -f "$illustration_ly" ]; then
         echo Found "$illustration_ly" ...
