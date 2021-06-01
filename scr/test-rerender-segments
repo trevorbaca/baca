@@ -13,7 +13,7 @@ wrapper_directory=$(dirname "$GITHUB_WORKSPACE")
 echo Wrapper directory is "$wrapper_directory"
 contents_directory="$GITHUB_WORKSPACE"
 echo Contents directory is "$contents_directory"
-segments_directory=$("$contents_directory"/"$package_name")
+segments_directory="$contents_directory"/"$package_name"
 echo Segments directory is "$segments_directory"
 
 #directories=$(ls -d "$segments_directory"/[0-9]*)
