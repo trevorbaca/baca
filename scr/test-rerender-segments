@@ -1,5 +1,11 @@
 #! /usr/bin/env bash
 
-echo hello
-echo $1
-echo bye
+source lib-path-manipulation
+
+wrapper="$GITHUB_WORKSPACE"
+segments=$(realpath "$1")
+directories=$(ls -d "$segments"[0-9]*)
+
+echo Wrapper is "$wrapper"
+echo Segments is "$segments"
+echo Directories is "$directories"
