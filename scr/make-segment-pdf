@@ -6,8 +6,12 @@ if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 source "$DIR/lib-path-manipulation"
 source "$DIR/make-layout-ly"
 
-boilerplate=/Users/trevorbaca/ide/boilerplate
-
+if [ -d /Users/trevorbaca/ide ]; then
+    boilerplate=/Users/trevorbaca/ide/boilerplate
+else
+    # GitHub actions
+    boilerplate=/tmp/ide/boilerplate
+fi
 
 helper() {
 
@@ -86,7 +90,7 @@ helper() {
         previous_persist = persist"
     fi
 
-    boil "$maker_target" previous_segment_metadata_import_statement "$statement" \
+    "$DIR/boil" "$maker_target" previous_segment_metadata_import_statement "$statement" \
         previous_segment_persist_import_statement "$persist_statement"
 
     echo Interpreting $(trim_score_path "$maker_target") ...
