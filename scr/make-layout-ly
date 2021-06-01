@@ -5,9 +5,15 @@ if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
 source "$DIR/lib-path-manipulation"
 
+if [ -d /Users/trevorbaca/ide ]; then
+    boilerplate=/Users/trevorbaca/ide/boilerplate
+else
+    # GitHub actions
+    boilerplate=/tmp/ide/boilerplate
+fi
+
 make_layout_ly() {
     layout_py_path="$1"
-    boilerplate=/Users/trevorbaca/ide/boilerplate
     directory=$(dirname "$layout_py_path")
     stem=$(basename -- "$layout_py_path")
     stem="${stem%.*}"
