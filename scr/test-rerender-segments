@@ -1,10 +1,10 @@
 #! /usr/bin/env bash
 
-#if [ -z "$GITHUB_WORKSPACE" ]; then
-#    source lib-path-manipulation
-#else
-#    source /tmp/baca/scr/lib-path-manipulation
-#fi
+if [ -z "$GITHUB_WORKSPACE" ]; then
+    source lib-path-manipulation
+else
+    source /tmp/baca/scr/lib-path-manipulation
+fi
 
 echo GITHUB_WORKSPACE is "$GITHUB_WORKSPACE"
 package_name=$(basename "$GITHUB_WORKSPACE")
@@ -14,7 +14,7 @@ echo
 wrapper_directory="$GITHUB_WORKSPACE"
 echo Wrapper directory is "$wrapper_directory"
 echo Contents of wrapper directory:
-echo "$wrapper_directory"
+ls "$wrapper_directory"
 echo
 
 contents_directory="$wrapper_directory"/"$package_name"
@@ -27,3 +27,6 @@ segments_directory="$contents_directory"/segments
 echo Segments directory is "$segments_directory"
 echo Contents of segments directory:
 ls "$segments_directory"
+
+segment_directories=$(ls -d "$segments_directory"/[0-9]*)
+echo Segment directories are "$segment_directories"
