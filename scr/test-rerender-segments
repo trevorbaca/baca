@@ -61,24 +61,20 @@ for segment_directory in "$segment_directories"; do
     else
         exit -1
     fi
-    # differences=$(diff -I '^\\version' "$illustration_ly" "$illustration_old_ly")
-    diff_command=diff -I '^\\version' "$illustration_ly" "$illustration_old_ly"
-    differences=$("$diff_command")
+    differences=$(diff -I '^\\version' "$illustration_ly" "$illustration_old_ly")
     if [ -z "$differences" ]; then
         echo Found matching illustration.ly files ...
     else
         echo Found mismatched illustration.ly files ...
-        "$diff_command"
+        diff -I '^\\version' "$illustration_ly" "$illustration_old_ly"
         exit -1
     fi
-    # differences=$(diff -I '^\\version' "$illustration_ily" "$illustration_old_ily")
-    diff_command=diff -I '^\\version' "$illustration_ily" "$illustration_old_ily"
-    differences=$("$diff_command")
+    differences=$(diff -I '^\\version' "$illustration_ily" "$illustration_old_ily")
     if [ -z "$differences" ]; then
         echo Found matching illustration.ily files ...
     else
         echo Found mismatched illustration.ily files ...
-        "$diff_command"
+        diff -I '^\\version' "$illustration_ily" "$illustration_old_ily"
         exit -1
     fi
 done
