@@ -62,7 +62,6 @@ jobs:
         echo "$GITHUB_WORKSPACE"/$NAME/test.py
         rm -f "$GITHUB_WORKSPACE"/$NAME/test.py
         ln -s /tmp/baca/dotfiles/test_segments.py "$GITHUB_WORKSPACE"/$NAME/test.py
-        ln -s /tmp/baca/dotfiles/mypy.ini ~/.mypy.ini
 
     - name: Install IDE
       run: |
@@ -86,18 +85,13 @@ jobs:
         black --version
         flake8 --version
         isort --version
-        mypy --version
         pytest --version
 
-    - name: Run black, flake8, isort, mypy
+    - name: Run black, flake8, isort
       run: |
         make black-check
         make flake8
         make isort-check
-        export MYPYPATH=/tmp/abjad:/tmp/abjad-ext-rmakers:/tmp/baca:/tmp/ide
-        echo $MYPYPATH
-        # uncomment after mypy 0.800 fixes are made in all scores
-        # make mypy
 
     - name: Run doctest
       run: |

@@ -8,9 +8,7 @@ import pytest  # isort:skip
 
 import abjad  # isort:skip
 import baca  # isort:skip
-import ide  # isort:skip
 
-abjad_ide = ide.AbjadIDE()
 github_workspace = os.getenv("GITHUB_WORKSPACE")
 assert isinstance(github_workspace, str), repr(github_workspace)
 wrapper = pathlib.Path(github_workspace)
@@ -26,7 +24,6 @@ def test_segments(directory):
     # only run on GitHub because segment illustration usually takes a while
     if not os.getenv("GITHUB_WORKSPACE"):
         return
-    abjad_ide = ide.AbjadIDE()
     with abjad.FilesystemState(keep=[directory]):
         ly = directory / "illustration.ly"
         ly_old = directory / "illustration.old.ly"
@@ -36,9 +33,11 @@ def test_segments(directory):
         ily_old = directory / "illustration.old.ily"
         if ily.exists():
             shutil.copyfile(ily, ily_old)
-        exit_code = abjad_ide.make_illustration_pdf(directory, open_after=False)
-        if exit_code != 0:
-            sys.exit(exit_code)
+        # exit_code = abjad_ide.make_illustration_pdf(directory, open_after=False)
+        # if exit_code != 0:
+        #    sys.exit(exit_code)
+        os.system("source /tmp/baca/scr/make-segment-pdf")
+        os.system(f"make_segment_pdf {directory} --do-not-open")
         if not ly_old.exists():
             return
         assert ly.exists()
