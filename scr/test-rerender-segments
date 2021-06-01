@@ -2,8 +2,10 @@
 
 if [ -z "$GITHUB_WORKSPACE" ]; then
     source lib-path-manipulation
+    source make-segment-pdf
 else
     source /tmp/baca/scr/lib-path-manipulation
+    source /tmp/baca/scr/make-segment-pdf
 fi
 
 echo GITHUB_WORKSPACE is "$GITHUB_WORKSPACE"
@@ -30,3 +32,26 @@ ls "$segments_directory"
 
 segment_directories=$(ls -d "$segments_directory"/[0-9]*)
 echo Segment directories are "$segment_directories"
+
+for segment_directory in "$segment_directories"; do
+    echo "$segment_directory"
+    illustration_ly="$segment_directory"/illustration.ly
+    illustration_old_ly="$segment_directory"/illustration.old.ly
+    if [ -f "$illustration_ly" ]; then
+        cp "$illustration_ly" "$illustration_old_ly"
+    fi
+    illustration_ily="$segment_directory"/illustration.ily
+    illustration_old_ily="$segment_directory"/illustration.old.ily
+    if [ -f "$illustration_ily" ]; then
+        cp "$illustration_ily" "$illustration_old_ily"
+    make_segment_pdf "$segment_directory" --do-not-open
+    if [ -f "$illustration_ly" ]; then
+        echo Found "$illustration_ly" ...
+    else
+        exit -1
+    fi
+    if [ -f "$illustration_old_ly" ]; then
+        echo Found "$illustration_old_ly" ...
+    else
+        exit -1
+    fi
