@@ -3,14 +3,6 @@
 DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
-#if [ -z "$GITHUB_WORKSPACE" ]; then
-#    source lib-path-manipulation
-#    source make-segment-pdf
-#else
-#    source /tmp/baca/scr/lib-path-manipulation
-#    source /tmp/baca/scr/make-segment-pdf
-#fi
-
 source "$DIR/lib-path-manipulation"
 source "$DIR/make-segment-pdf"
 
@@ -53,7 +45,10 @@ for segment_directory in "$segment_directories"; do
         cp "$illustration_ily" "$illustration_old_ily"
     fi
     rm "$illustration_ily"
+    current_directory=$(pwd)
+    cd "$segment_directory"
     make_segment_pdf "$segment_directory" --do-not-open
+    cd "$current_directory"
     if [ -f "$illustration_ly" ]; then
         echo Found "$illustration_ly" ...
     else

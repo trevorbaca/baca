@@ -1,7 +1,10 @@
 #! /usr/bin/env bash
 
-source ./lib-path-manipulation
-source ./make-layout-ly
+DIR="${BASH_SOURCE%/*}"
+if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
+
+source "$DIR/lib-path-manipulation"
+source "$DIR/make-layout-ly"
 
 boilerplate=/Users/trevorbaca/ide/boilerplate
 
