@@ -31,7 +31,7 @@ ls "$segments_directory"
 segment_directories=$(ls -d "$segments_directory"/[0-9]*)
 echo Segment directories are "$segment_directories"
 
-for segment_directory in "$segment_directories"; do
+for segment_directory in $segment_directories; do
     echo Segment directory "$segment_directory" ...
     illustration_ly="$segment_directory/illustration.ly"
     echo Illustration.ly "$illustration_ly" ...
