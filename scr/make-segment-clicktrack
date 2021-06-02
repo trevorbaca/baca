@@ -1,0 +1,72 @@
+#! /usr/bin/env bash
+
+source lib-path-manipulation
+
+boilerplate=/Users/trevorbaca/ide/boilerplate
+
+make_segment_clicktrack() {
+    definition_py_path=$(realpath "$1")
+    if [ ! -f "$definition_py_path" ]; then
+        echo Can not find "$definition_py_path" ...
+    fi
+    echo Making clicktrack ...
+    segment_directory=$(dirname "$definition_py_path")
+    segment_name=$(basename "$segment_directory")
+    contents_directory=$(dirname $(dirname "$segment_directory"))
+    score_name=$(basename "$contents_directory")
+    illustration_ly="$segment_directory/$score_name-$segment_name-clicktrack.ly"
+    if [ -f "$illustration_ly" ]; then
+        echo Removing $(trim_score_path "$illustration_ly") ...
+    fi
+    midi="$segment_directory/$score_name-$segment_name-clicktrack.midi"
+    if [ -f "$midi" ]; then
+        echo Removing $(trim_score_path "$midi") ...
+    fi
+    maker_name=__make_segment_clicktrack__.py
+    maker_source="$boilerplate/$maker_name"
+    maker_target="$segment_directory/$maker_name"
+    if [ -f "$maker_target" ]; then
+        rm "$maker_target"
+    fi
+    echo Writing $(trim_score_path "$maker_target") ...
+    cp "$maker_source" "$maker_target"
+    if [ "$segment_name" == "01" ]; then
+        statement="previous_metadata = None"
+        persist_statement="previous_persist = None"
+    else
+        previous_segment=$(get_previous_sibling_directory "$segment_directory")
+        metadata="$previous_segment/__metadata__.py"
+        statement="file = ide.Path('$metadata')"
+        statement="$statement
+        lines = file.read_text()"
+        statement="$statement
+        exec(lines)"
+        statement="$statement
+        previous_metadata = metadata"
+        persist="$previous_segment/__persist__.py"
+        persist_statement="file = ide.Path('$persist')"
+        persist_statement="$persist_statement
+        lines = file.read_text()"
+        persist_statement="$persist_statement
+        exec(lines)"
+        persist_statement="$persist_statement
+        previous_persist = persist"
+        echo hi
+    fi
+    boil "$maker_target" previous_segment_metadata_import_statement "$statement" \
+        previous_segment_persist_import_statement "$persist_statement"
+    echo Interpreting $(trim_score_path "$maker_target") ...
+    python "$maker_target"
+    echo Removing $(trim_score_path "$maker_target") ...
+    rm "$maker_target"
+    if [ -f "$midi" ]; then
+        echo Found $(trim_score_path "$midi") ...
+        if [[ "$2" != "--do-not-open" ]]; then
+            echo Opening $(trim_score_path "$midi") ...
+            open "$midi"
+        fi
+    fi
+
+}
+
+make_segment_clicktrack "$1"
