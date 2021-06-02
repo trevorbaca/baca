@@ -51,7 +51,6 @@ make_segment_clicktrack() {
         exec(lines)"
         persist_statement="$persist_statement
         previous_persist = persist"
-        echo hi
     fi
     boil "$maker_target" previous_segment_metadata_import_statement "$statement" \
         previous_segment_persist_import_statement "$persist_statement"
