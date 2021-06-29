@@ -1,0 +1,137 @@
+#! /usr/bin/env python
+import os
+
+import ide
+from ide import jobs as _jobs
+from ide import tags as _tags
+
+import abjad
+
+
+def _collect_segment_lys(directory):
+    paths = directory.segments.list_paths()
+    names = [_.name for _ in paths]
+    sources, targets = [], []
+    for name in names:
+        source = directory.segments / name / "illustration.ly"
+        if not source.is_file():
+            continue
+        target = "segment-" + name.replace("_", "-") + ".ly"
+        target = directory._segments / target
+        sources.append(source)
+        targets.append(target)
+    if not directory.builds.is_dir():
+        directory.builds.mkdir()
+    return zip(sources, targets)
+
+
+def _run(
+    job,
+    *,
+    quiet=False,
+):
+    """
+    Runs ``job`` on ``path``.
+    """
+    message_zero = not bool(quiet)
+    job = abjad.new(job, message_zero=message_zero)
+    messages = job()
+    for message in messages:
+        print(" " + message)
+
+
+directory = os.getcwd()
+directory = ide.Path(directory)
+assert directory.is_build() or directory.is__segments()
+print("Handling build tags ...")
+
+pairs = _collect_segment_lys(directory.build)
+final_source, final_target = list(pairs)[-1]
+final_file_name = final_target.with_suffix(".ily").name
+
+def match_left_broken_should_deactivate(tags):
+    if _tags.LEFT_BROKEN in tags and _tags.SPANNER_START in tags:
+        return True
+    if (
+        _tags.LEFT_BROKEN in tags
+        and _tags.SPANNER_STOP in tags
+        and _tags.EXPLICIT_DYNAMIC in tags
+    ):
+        return True
+    return False
+
+def match_phantom_should_activate(tags):
+    if _tags.PHANTOM not in tags:
+        return False
+    if _tags.ONE_VOICE_COMMAND in tags:
+        return True
+    if _tags.SHOW_TO_JOIN_BROKEN_SPANNERS in tags:
+        return True
+    if _tags.SPANNER_STOP in tags:
+        return True
+    return False
+
+def match_phantom_should_deactivate(tags):
+    if _tags.PHANTOM not in tags:
+        return False
+    if _tags.SPANNER_START in tags and _tags.LEFT_BROKEN in tags:
+        return True
+    if _tags.SPANNER_STOP in tags and _tags.RIGHT_BROKEN in tags:
+        return True
+    if _tags.HIDE_TO_JOIN_BROKEN_SPANNERS in tags:
+        return True
+    return False
+
+_segments = directory._segments
+for job in [
+    _jobs.handle_edition_tags(_segments),
+    _jobs.handle_fermata_bar_lines(directory),
+    _jobs.handle_shifted_clefs(_segments),
+    _jobs.handle_mol_tags(_segments),
+    _jobs.color_persistent_indicators(_segments, undo=True),
+    _jobs.show_music_annotations(_segments, undo=True),
+    _jobs.join_broken_spanners(_segments),
+    _jobs.show_tag(
+        _segments,
+        "left-broken-should-deactivate",
+        match=match_left_broken_should_deactivate,
+        undo=True,
+    ),
+    _jobs.show_tag(_segments, _tags.PHANTOM, skip_file_name=final_file_name),
+    _jobs.show_tag(
+        _segments,
+        _tags.PHANTOM,
+        prepend_empty_chord=True,
+        skip_file_name=final_file_name,
+        undo=True,
+    ),
+    _jobs.show_tag(
+        _segments,
+        "phantom-should-activate",
+        match=match_phantom_should_activate,
+        skip_file_name=final_file_name,
+    ),
+    _jobs.show_tag(
+        _segments,
+        "phantom-should-deactivate",
+        match=match_phantom_should_deactivate,
+        skip_file_name=final_file_name,
+        undo=True,
+    ),
+    _jobs.show_tag(
+        _segments,
+        _tags.EOS_STOP_MM_SPANNER,
+        skip_file_name=final_file_name,
+    ),
+    _jobs.show_tag(
+        _segments,
+        _tags.METRIC_MODULATION_IS_STRIPPED,
+        undo=True,
+    ),
+    _jobs.show_tag(
+        _segments,
+        _tags.METRIC_MODULATION_IS_SCALED,
+        undo=True,
+    ),
+]:
+    _run(job, quiet=False)

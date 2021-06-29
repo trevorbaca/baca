@@ -1,0 +1,35 @@
+#! /usr/bin/env bash
+
+# THIS SCRIPT IS INCOMPLETE
+# THE COMPLETE SCRIPT IS IMPLEMENTED IN PYTHON
+
+source lib-score-navigation
+
+echo Collecting segment lys ...
+parent_directory=$(dirname "$PWD")
+parent_name=$(basename "$parent_directory")
+if [ "$parent_name" != builds ]; then
+    echo Must run script in build directory ...
+    exit 1
+fi
+
+contents_directory=$(find_score_contents_directory)
+segments_directory="$contents_directory/segments"
+
+sources=()
+targets=()
+for segment_directory in $(echo "$segments_directory/[0-9]*"); do
+    segment_name=$(basename "$segment_directory")
+    source_ly="$segment_directory/illustration.ly"
+    if [ ! -f "$source_ly" ]; then
+        continue
+    fi
+    target_ly="$segments_directory/segment-${segment_name}.ly"
+    sources+=("$source_ly")
+    targets+=("$target_ly")
+done
+
+if [ 0 -eq ${#sources[@]} ]; then
+    echo ... no segment lys found.
+    exit 1
+fi

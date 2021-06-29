@@ -1,0 +1,166 @@
+#! /usr/bin/env python
+import os
+import sys
+
+import ide
+
+import abjad
+
+
+def _activate(
+    path,
+    tag,
+    deactivate=False,
+    message_zero=False,
+    name=None,
+):
+    """
+    Activates ``tag`` in ``path``.
+    """
+    if isinstance(tag, str):
+        tag_ = abjad.Tag(tag)
+    else:
+        assert callable(tag)
+        tag_ = tag
+    assert isinstance(tag_, abjad.Tag) or callable(tag_)
+    if deactivate:
+        result = path.deactivate(
+            tag_, message_zero=message_zero, name=name
+        )
+        assert result is not None
+        count, skipped, messages = result
+    else:
+        result = path.activate(
+            tag_, message_zero=message_zero, name=name
+        )
+        assert result is not None
+        count, skipped, messages = result
+    for message in messages:
+        print(" " + message)
+
+
+def _deactivate(
+    path,
+    tag,
+    message_zero=False,
+    name=None,
+):
+    """
+    Deactivates ``tag`` in ``path``.
+    """
+    _activate(
+        path,
+        tag,
+        name=name,
+        deactivate=True,
+        message_zero=message_zero,
+    )
+
+
+def _parse_part_identifier(path):
+    if path.suffix == ".ly":
+        part_identifier = None
+        with path.open("r") as pointer:
+            for line in pointer.readlines():
+                if line.startswith("% part_identifier = "):
+                    line = line.strip("% part_identifier = ")
+                    part_identifier = eval(line)
+                    return part_identifier
+    elif path.name.endswith("layout.py"):
+        part_identifier = None
+        with path.open("r") as pointer:
+            for line in pointer.readlines():
+                if line.startswith("part_identifier = "):
+                    line = line.strip("part_identifier = ")
+                    part_identifier = eval(line)
+                    return part_identifier
+    else:
+        raise TypeError(path)
+
+
+directory = os.getcwd()
+directory = ide.Path(directory)
+assert directory.is_part(), repr(directory)
+parts_directory = directory.parent
+print("Handling part tags ...")
+music_ly = directory / "music.ly"
+_activate(
+    parts_directory,
+    "+PARTS",
+    message_zero=True,
+)
+_deactivate(
+    parts_directory,
+    "-PARTS",
+    message_zero=True,
+)
+_deactivate(
+    parts_directory,
+    "HIDE_IN_PARTS",
+    message_zero=True,
+)
+part_identifier = _parse_part_identifier(music_ly)
+if part_identifier is None:
+    message = f"No part identifier found in {music_ly.trim()} ..."
+    print(message)
+    sys.exit()
+parts_directory_name = abjad.String(parts_directory.name)
+parts_directory_name = parts_directory_name.to_shout_case()
+name = f"{parts_directory_name}_{part_identifier}"
+_activate(
+    parts_directory,
+    f"+{name}",
+    message_zero=True,
+)
+_deactivate(
+    parts_directory,
+    f"-{name}",
+    message_zero=True,
+)
+_deactivate(
+    parts_directory,
+    str(_tags.METRIC_MODULATION_IS_SCALED),
+    message_zero=True,
+)
+_deactivate(
+    parts_directory,
+    str(_tags.METRIC_MODULATION_IS_NOT_SCALED),
+    message_zero=True,
+)
+_activate(
+    parts_directory,
+    str(_tags.METRIC_MODULATION_IS_STRIPPED),
+    message_zero=True,
+)
+# HACK TO HIDE ALL POST-FERMATA-MEASURE TRANSPARENT BAR LINES;
+# this only works if parts contain no EOL fermata measure:
+_deactivate(
+    parts_directory,
+    str(_tags.FERMATA_MEASURE),
+    message_zero=True,
+)
+_activate(
+    parts_directory,
+    "NOT_TOPMOST",
+    message_zero=True,
+)
+_deactivate(
+    parts_directory,
+    "FERMATA_MEASURE_EMPTY_BAR_EXTENT",
+    message_zero=True,
+)
+_deactivate(
+    parts_directory,
+    "FERMATA_MEASURE_NEXT_BAR_EXTENT",
+    message_zero=True,
+)
+_deactivate(
+    parts_directory,
+    "FERMATA_MEASURE_RESUME_BAR_EXTENT",
+    message_zero=True,
+)
+_deactivate(
+    parts_directory,
+    str(_tags.EXPLICIT_BAR_EXTENT),
+    message_zero=True,
+)

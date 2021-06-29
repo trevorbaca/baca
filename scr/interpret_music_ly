@@ -1,0 +1,217 @@
+#! /usr/bin/env python
+"""
+Interprets ``music.ly`` (after first collecting segments and handling tags).
+"""
+import os
+
+import ide
+from ide import path as _path
+from ide import segments as _segments
+
+import abjad
+
+_ide_configuration = ide.Configuration()
+abjad_configuration = abjad.Configuration()
+
+
+def _check_layout_time_signatures(path, indent=0):
+    message = "checking layout time signatures ..."
+    print(message)
+    layout_ly = path.name.replace("music.ly", "layout.ly")
+    layout_ly = path.parent / layout_ly
+    if not layout_ly.exists():
+        message = f"no {layout_ly.trim()} found ..."
+        print(" " + message)
+        return
+    print(f" Found {layout_ly.trim()} ...")
+    metadata_time_signatures = path.parent.get_time_signature_metadata()
+    metadata_time_signatures = [str(_) for _ in metadata_time_signatures]
+    if metadata_time_signatures:
+        message = "found time signature metadata ..."
+        print(" " + message)
+    layout_time_signatures = _segments.get_preamble_time_signatures(layout_ly)
+    partial_score = _segments.get_preamble_partial_score(layout_ly)
+    if partial_score:
+        print(" Found partial score ...")
+        return
+    if layout_time_signatures == metadata_time_signatures:
+        message = "layout time signatures"
+        message += f" ({len(layout_time_signatures)})"
+        message += " match metadata time signatures"
+        message += f" ({len(metadata_time_signatures)}) ..."
+        print(" " + message)
+        return
+    message = "layout time signatures"
+    message += f" ({len(layout_time_signatures)})"
+    message += " do not match metadata time signatures"
+    message += f" ({len(metadata_time_signatures)}) ..."
+    print(" " + message)
+    message = f"remaking {layout_ly.trim()} ..."
+    print(" " + message)
+    layout_py = layout_ly.with_suffix(".py")
+    _make_layout_ly(layout_py)
+    layout_time_signatures = _segments.get_preamble_time_signatures(layout_ly)
+    if layout_time_signatures == metadata_time_signatures:
+        message = "layout time signatures"
+        message += f" ({len(layout_time_signatures)})"
+        message += " match metadata time signatures"
+        message += f" ({len(metadata_time_signatures)}) ..."
+    else:
+        message = "layout time signatures"
+        message += f" ({len(layout_time_signatures)})"
+        message += " still do not match metadata time signatures"
+        message += f" ({len(metadata_time_signatures)}) ..."
+    print(" " + message)
+
+
+def _copy_boilerplate(directory, source_name, target_name=None, values=None):
+    target_name = target_name or source_name
+    target = directory / target_name
+    if target.exists():
+        print(f"Removing {target.trim()} ...")
+    print(f"Writing {target.trim()} ...")
+    values = values or {}
+    boilerplate = _path.Path(_ide_configuration.boilerplate_directory)
+    source = boilerplate / source_name
+    target_name = target_name or source_name
+    target = directory / target_name
+    shutil.copyfile(str(source), str(target))
+    if not values:
+        return
+    template = target.read_text()
+    template = template.format(**values)
+    target.write_text(template)
+
+
+def _display_lilypond_log_errors(log=None):
+    if log is None:
+        log = abjad_configuration.lilypond_log_file_path
+    log = _path.Path(log)
+    with log.open() as file_pointer:
+        lines = file_pointer.readlines()
+    for line in lines:
+        if (
+            "fatal" in line
+            or ("error" in line and "programming error" not in line)
+            or "failed" in line
+        ):
+            print("ERROR IN LILYPOND LOG FILE ...")
+            break
+
+
+def _interpret_file(path):
+    path = _path.Path(path)
+    if not path.exists():
+        print(f"Missing {path} ...")
+    if path.suffix == ".py":
+        command = f"python {path}"
+    elif path.suffix == ".ly":
+        command = f"lilypond -dno-point-and-click {path}"
+    else:
+        message = f"can not interpret {path}."
+        raise Exception(message)
+    directory = path.parent
+    directory = abjad.TemporaryDirectoryChange(directory)
+    string_buffer = io.StringIO()
+    with directory, string_buffer:
+        process = subprocess.Popen(
+            command,
+            shell=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        for line in process.stdout:
+            line = line.decode("utf-8")
+            print(line, end="")
+            string_buffer.write(line)
+        process.wait()
+        stdout_lines = string_buffer.getvalue().splitlines()
+        stderr_lines = abjad.io._read_from_pipe(process.stderr)
+        stderr_lines = stderr_lines.splitlines()
+    exit_code = process.returncode
+    if path.suffix == ".ly":
+        log = directory / ".log"
+        _display_lilypond_log_errors(log=log)
+    return stdout_lines, stderr_lines, exit_code
+
+
+
+def _make_layout_ly(path):
+    assert path.suffix == ".py"
+    maker = "__make_layout_ly__.py"
+    maker = path.parent / maker
+    #with self.cleanup([maker]):
+    with abjad.FilesystemState([maker]):
+        _copy_boilerplate(
+            path.parent,
+            maker.name,
+            values={"layout_module_name": path.stem},
+        )
+        print(f"Interpreting {maker.trim()} ...")
+        result = _interpret_file(maker)
+        print(f"Removing {maker.trim()} ...")
+    stdout_lines, stderr_lines, exit_code = result
+    if exit_code:
+        for string in stderr_lines:
+            print(string)
+
+
+def _run_lilypond(ly, indent=0):
+    assert ly.exists()
+    if not abjad.io.find_executable("lilypond"):
+        raise ValueError("cannot find LilyPond executable.")
+    print(f"Running LilyPond on {ly.trim()} ...")
+    directory = ly.parent
+    pdf = ly.with_suffix(".pdf")
+    backup_pdf = ly.with_suffix("._backup.pdf")
+    log = directory / ".log"
+    if backup_pdf.exists():
+        backup_pdf.remove()
+    if pdf.exists():
+        print(f" Removing {pdf.trim()} ...")
+        pdf.remove()
+    assert not pdf.exists()
+    #with self.change(directory):
+    with abjad.TemporaryDirectoryChange(directory=directory):
+        print(f" Interpreting {ly.trim()} ...")
+        abjad.io.run_lilypond(str(ly), lilypond_log_file_path=str(log))
+        _segments.remove_lilypond_warnings(
+            log,
+            crescendo_too_small=True,
+            decrescendo_too_small=True,
+            overwriting_glissando=True,
+        )
+        _display_lilypond_log_errors(log=log)
+        if pdf.is_file():
+            print(f" Found {pdf.trim()} ...")
+        else:
+            print(f" Can not produce {pdf.trim()} ...")
+
+
+directory = os.getcwd()
+directory = ide.Path(directory)
+assert directory.is__segments() or directory.is_build()
+build = directory.build
+assert build is not None, repr(directory)
+message = f"Interpreting {build.trim()} music.ly files ..."
+print(message)
+build_directory = directory.build
+assert build_directory is not None
+paths = [build_directory / "music.ly"]
+path_count = len(paths)
+for path in paths:
+    print(f"Found {path.trim()} ...")
+os.system("collect_segment_lys")
+
+for i, path in enumerate(paths):
+    if path.parent.is_part():
+        os.system("handle_part_tags")
+    _check_layout_time_signatures(path)
+    _run_lilypond(path)
+    if 0 < path_count and i + 1 < path_count:
+        print()
+if len(paths) == 1:
+    target = path.with_suffix(".pdf")
+    if target.is_file():
+        print(f"Opening {target.trim()} ...")
+        os.system(f"open {target}")
