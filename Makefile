@@ -49,9 +49,13 @@ project = baca
 
 pytest:
 	pytest .
+	find . -name __pycache__ -type d -exec rm -r {} +
+	find . -name .pytest_cache -type d -exec rm -r {} +
 
 pytest-x:
 	pytest -x .
+	find . -name __pycache__ -type d -exec rm -r {} +
+	find . -name .pytest_cache -type d -exec rm -r {} +
 
 reformat:
 	make black-reformat

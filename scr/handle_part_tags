@@ -24,15 +24,11 @@ def _activate(
         tag_ = tag
     assert isinstance(tag_, abjad.Tag) or callable(tag_)
     if deactivate:
-        result = path.deactivate(
-            tag_, message_zero=message_zero, name=name
-        )
+        result = path.deactivate(tag_, message_zero=message_zero, name=name)
         assert result is not None
         count, skipped, messages = result
     else:
-        result = path.activate(
-            tag_, message_zero=message_zero, name=name
-        )
+        result = path.activate(tag_, message_zero=message_zero, name=name)
         assert result is not None
         count, skipped, messages = result
     for message in messages:

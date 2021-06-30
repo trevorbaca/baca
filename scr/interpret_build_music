@@ -140,7 +140,6 @@ def _interpret_file(path):
     return stdout_lines, stderr_lines, exit_code
 
 
-
 def _make_layout_ly(path):
     assert path.suffix == ".py"
     maker = "__make_layout_ly__.py"

@@ -1,0 +1,111 @@
+#! /usr/bin/env python
+import os
+import shutil
+
+import ide
+from ide import path as _path
+from ide import segments as _segments
+
+import abjad
+
+
+# TODO: externalize to copy_boilerplate script
+def _copy_boilerplate(directory, source_name, target_name=None, values=None):
+    target_name = target_name or source_name
+    target = directory / target_name
+    if target.exists():
+        print(f"Removing {target.trim()} ...")
+    print(f"Writing {target.trim()} ...")
+    values = values or {}
+    boilerplate = _path.Path(ide.Configuration().boilerplate_directory)
+    source = boilerplate / source_name
+    target_name = target_name or source_name
+    target = directory / target_name
+    shutil.copyfile(str(source), str(target))
+    if not values:
+        return
+    template = target.read_text()
+    template = template.format(**values)
+    target.write_text(template)
+
+
+directory = os.getcwd()
+directory = ide.Path(directory)
+if directory.parent.name != "builds":
+    print("Call script in build directory ...")
+    sys.exit(-1)
+
+path = directory / "music.ly"
+print(f"Generating {path.trim()} ...")
+if path.exists():
+    print(f"Removing {path.trim()} ...")
+    path.remove()
+segments = path.segments.list_paths()
+if not segments:
+    print("No segments found ...")
+for segment in segments:
+    if not segment.is_segment():
+        continue
+    print(f"Examining {segment.trim()} ...")
+names = [_.stem.replace("_", "-") for _ in segments]
+score_skeleton = _segments.score_skeleton(path)
+if score_skeleton is None:
+    boilerplate = "score-music.ly"
+else:
+    boilerplate = "full-score-music.ly"
+    text = abjad.lilypond(score_skeleton)
+    lines = text.split("\n")
+    lines = [lines[0]] + [8 * " " + _ for _ in lines[1:]]
+    score_skeleton = "\n".join(lines)
+_copy_boilerplate(path.build, boilerplate, target_name=path.name)
+lines, ily_lines = [], []
+for i, name in enumerate(names):
+    name = "segment-" + name + ".ly"
+    ly = path.build._segments / name
+    if ly.is_file():
+        line = rf'\include "_segments/{name}"'
+    else:
+        line = rf'%\include "_segments/{name}"'
+    ily_lines.append(line.replace(".ly", ".ily"))
+    if 0 < i:
+        line = 8 * " " + line
+    lines.append(line)
+if lines:
+    segment_ly_include_statements = "\n".join(lines)
+    segment_ily_include_statements = "\n".join(ily_lines)
+else:
+    segment_ly_include_statements = ""
+    segment_ily_include_statements = ""
+language_token = abjad.LilyPondLanguageToken()
+lilypond_language_directive = abjad.lilypond(language_token)
+version_token = abjad.LilyPondVersionToken()
+lilypond_version_directive = abjad.lilypond(version_token)
+annotated_title = path.contents.get_title(year=True)
+if annotated_title:
+    score_title = annotated_title
+forces_tagline = path.contents.get_metadatum("forces_tagline", "")
+if forces_tagline:
+    forces_tagline = forces_tagline.replace("\\", "")
+assert path.is_file(), repr(path)
+template = path.read_text()
+if boilerplate == "score-music.ly":
+    assert path.parent.is_score_build()
+    template = template.format(
+        forces_tagline=forces_tagline,
+        lilypond_language_directive=lilypond_language_directive,
+        lilypond_version_directive=lilypond_version_directive,
+        score_title=score_title,
+        segment_ily_include_statements=segment_ily_include_statements,
+        segment_ly_include_statements=segment_ly_include_statements,
+    )
+elif boilerplate == "full-score-music.ly":
+    assert path.parent.is_score_build()
+    template = template.format(
+        forces_tagline=forces_tagline,
+        lilypond_language_directive=lilypond_language_directive,
+        lilypond_version_directive=lilypond_version_directive,
+        score_title=score_title,
+        segment_ily_include_statements=segment_ily_include_statements,
+        score_skeleton=score_skeleton,
+    )
+path.write_text(template)

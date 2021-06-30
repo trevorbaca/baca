@@ -49,6 +49,7 @@ pairs = _collect_segment_lys(directory.build)
 final_source, final_target = list(pairs)[-1]
 final_file_name = final_target.with_suffix(".ily").name
 
+
 def match_left_broken_should_deactivate(tags):
     if _tags.LEFT_BROKEN in tags and _tags.SPANNER_START in tags:
         return True
@@ -59,6 +60,7 @@ def match_left_broken_should_deactivate(tags):
     ):
         return True
     return False
+
 
 def match_phantom_should_activate(tags):
     if _tags.PHANTOM not in tags:
@@ -71,6 +73,7 @@ def match_phantom_should_activate(tags):
         return True
     return False
 
+
 def match_phantom_should_deactivate(tags):
     if _tags.PHANTOM not in tags:
         return False
@@ -81,6 +84,7 @@ def match_phantom_should_deactivate(tags):
     if _tags.HIDE_TO_JOIN_BROKEN_SPANNERS in tags:
         return True
     return False
+
 
 _segments = directory._segments
 for job in [
