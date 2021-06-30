@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 import os
+import sys
 
 import ide
 from ide import jobs as _jobs
@@ -8,6 +9,7 @@ from ide import tags as _tags
 import abjad
 
 
+# TODO: externalize
 def _collect_segment_lys(directory):
     paths = directory.segments.list_paths()
     names = [_.name for _ in paths]
@@ -39,8 +41,12 @@ def _run(
     for message in messages:
         print(" " + message)
 
-
-directory = os.getcwd()
+for string in sys.argv[1:]:
+    if string.startswith("--directory="):
+        directory = string[12:]
+        break
+else:
+    directory = os.getcwd()
 directory = ide.Path(directory)
 assert directory.is_build() or directory.is__segments()
 print("Handling build tags ...")
