@@ -190,9 +190,6 @@ for path_ in sorted(directory.iterdir()):
 if not part_directories:
     sys.exit()
 
-part_directories = part_directories[:2]
-
-
 part_directory_count = len(part_directories)
 for i, part_directory in enumerate(part_directories):
     path = part_directory / "music.ly"
