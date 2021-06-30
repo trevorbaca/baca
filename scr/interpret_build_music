@@ -1,8 +1,13 @@
 #! /usr/bin/env python
 """
-Interprets ``music.ly`` (after first collecting segments and handling tags).
+Interprets music.ly in build directory.
+
+Collects segments (and handles tags).
+
+Skips segment collection when called with --skip-segment-collection.
 """
 import os
+import sys
 
 import ide
 from ide import path as _path
@@ -15,53 +20,53 @@ abjad_configuration = abjad.Configuration()
 
 
 def _check_layout_time_signatures(path, indent=0):
-    message = "checking layout time signatures ..."
+    message = "Checking layout time signatures ..."
     print(message)
     layout_ly = path.name.replace("music.ly", "layout.ly")
     layout_ly = path.parent / layout_ly
     if not layout_ly.exists():
-        message = f"no {layout_ly.trim()} found ..."
-        print(" " + message)
+        message = f" No {layout_ly.trim()} found ..."
+        print(message)
         return
     print(f" Found {layout_ly.trim()} ...")
     metadata_time_signatures = path.parent.get_time_signature_metadata()
     metadata_time_signatures = [str(_) for _ in metadata_time_signatures]
     if metadata_time_signatures:
-        message = "found time signature metadata ..."
-        print(" " + message)
+        message = " Found time signature metadata ..."
+        print(message)
     layout_time_signatures = _segments.get_preamble_time_signatures(layout_ly)
     partial_score = _segments.get_preamble_partial_score(layout_ly)
     if partial_score:
         print(" Found partial score ...")
         return
     if layout_time_signatures == metadata_time_signatures:
-        message = "layout time signatures"
+        message = " Layout time signatures"
         message += f" ({len(layout_time_signatures)})"
         message += " match metadata time signatures"
         message += f" ({len(metadata_time_signatures)}) ..."
-        print(" " + message)
+        print(message)
         return
-    message = "layout time signatures"
+    message = " Layout time signatures"
     message += f" ({len(layout_time_signatures)})"
     message += " do not match metadata time signatures"
     message += f" ({len(metadata_time_signatures)}) ..."
-    print(" " + message)
-    message = f"remaking {layout_ly.trim()} ..."
-    print(" " + message)
+    print(message)
+    message = f" Remaking {layout_ly.trim()} ..."
+    print(message)
     layout_py = layout_ly.with_suffix(".py")
     _make_layout_ly(layout_py)
     layout_time_signatures = _segments.get_preamble_time_signatures(layout_ly)
     if layout_time_signatures == metadata_time_signatures:
-        message = "layout time signatures"
+        message = " Layout time signatures"
         message += f" ({len(layout_time_signatures)})"
         message += " match metadata time signatures"
         message += f" ({len(metadata_time_signatures)}) ..."
     else:
-        message = "layout time signatures"
+        message = " Layout time signatures"
         message += f" ({len(layout_time_signatures)})"
         message += " still do not match metadata time signatures"
         message += f" ({len(metadata_time_signatures)}) ..."
-    print(" " + message)
+    print(message)
 
 
 def _copy_boilerplate(directory, source_name, target_name=None, values=None):
@@ -140,7 +145,6 @@ def _make_layout_ly(path):
     assert path.suffix == ".py"
     maker = "__make_layout_ly__.py"
     maker = path.parent / maker
-    #with self.cleanup([maker]):
     with abjad.FilesystemState([maker]):
         _copy_boilerplate(
             path.parent,
@@ -171,7 +175,6 @@ def _run_lilypond(ly, indent=0):
         print(f" Removing {pdf.trim()} ...")
         pdf.remove()
     assert not pdf.exists()
-    #with self.change(directory):
     with abjad.TemporaryDirectoryChange(directory=directory):
         print(f" Interpreting {ly.trim()} ...")
         abjad.io.run_lilypond(str(ly), lilypond_log_file_path=str(log))
@@ -201,11 +204,16 @@ paths = [build_directory / "music.ly"]
 path_count = len(paths)
 for path in paths:
     print(f"Found {path.trim()} ...")
-os.system("collect_segment_lys")
-
+if "--skip-segment-collection" in sys.argv:
+    print("Skipping segment collection ...")
+else:
+    os.system("collect_segment_lys")
 for i, path in enumerate(paths):
     if path.parent.is_part():
-        os.system("handle_part_tags")
+        if "--skip-segment-collection" in sys.argv:
+            print("Skipping tag handling ...")
+        else:
+            os.system("handle_part_tags")
     _check_layout_time_signatures(path)
     _run_lilypond(path)
     if 0 < path_count and i + 1 < path_count:
