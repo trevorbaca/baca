@@ -220,7 +220,7 @@ for i, path in enumerate(paths):
     _run_lilypond(path)
     if 0 < path_count and i + 1 < path_count:
         print()
-if len(paths) == 1:
+if len(paths) == 1 and "--do-not-open" not in sys.argv[1:]:
     target = path.with_suffix(".pdf")
     if target.is_file():
         print(f"Opening {target.trim()} ...")
