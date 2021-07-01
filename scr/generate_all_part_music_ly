@@ -1,6 +1,8 @@
 #! /usr/bin/env python
 """
 This script only works with scores that make container_to_part_assignment settings.
+
+Create music.ly files by hand for part builds in other scores.
 """
 import os
 import shutil
