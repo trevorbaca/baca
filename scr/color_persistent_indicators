@@ -1,0 +1,30 @@
+#! /usr/bin/env python
+import os
+import sys
+
+import abjad
+import ide
+
+directory = os.getcwd()
+directory = ide.Path(directory)
+if directory.parent.name != "segments":
+    print("Must call in segment directory ...")
+    sys.exit(-1)
+
+undo = "--undo" in sys.argv[1:]
+
+for job in (
+    ide.jobs.color_clefs,
+    ide.jobs.color_dynamics,
+    ide.jobs.color_instruments,
+    ide.jobs.color_margin_markup,
+    ide.jobs.color_metronome_marks,
+    ide.jobs.color_persistent_indicators,
+    ide.jobs.color_staff_lines,
+    ide.jobs.color_time_signatures,
+):
+    job = job(directory, undo=undo)
+    job = abjad.new(job, message_zero=True)
+    messages = job()
+    for message in messages:
+        print(message)
