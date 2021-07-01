@@ -2,8 +2,9 @@
 import os
 import sys
 
-import abjad
 import ide
+
+import abjad
 
 directory = os.getcwd()
 directory = ide.Path(directory)

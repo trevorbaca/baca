@@ -1,0 +1,66 @@
+#! /usr/bin/env python
+import os
+import sys
+
+import ide
+
+import abjad
+
+
+def _make_annotation_jobs(directory, undo=False):
+    def _annotation_spanners(tags):
+        tags_ = (
+            ide.tags.MATERIAL_ANNOTATION_SPANNER,
+            ide.tags.PITCH_ANNOTATION_SPANNER,
+            ide.tags.RHYTHM_ANNOTATION_SPANNER,
+        )
+        return bool(set(tags) & set(tags_))
+
+    annotation_spanners = ide.jobs.show_tag(
+        directory,
+        "annotation spanners",
+        match=_annotation_spanners,
+        undo=undo,
+    )
+
+    def _spacing(tags):
+        tags_ = (
+            ide.tags.SPACING,
+            ide.tags.SPACING_OVERRIDE,
+        )
+        return bool(set(tags) & set(tags_))
+
+    spacing = ide.jobs.show_tag(directory, "spacing", match=_spacing, undo=undo)
+
+    jobs = [
+        annotation_spanners,
+        ide.jobs.show_tag(directory, ide.tags.CLOCK_TIME, undo=undo),
+        ide.jobs.show_tag(directory, ide.tags.FIGURE_NAME, undo=undo),
+        ide.jobs.show_tag(directory, ide.tags.INVISIBLE_MUSIC_COMMAND, undo=not undo),
+        ide.jobs.show_tag(directory, ide.tags.INVISIBLE_MUSIC_COLORING, undo=undo),
+        ide.jobs.show_tag(directory, ide.tags.LOCAL_MEASURE_NUMBER, undo=undo),
+        ide.jobs.show_tag(directory, ide.tags.MEASURE_NUMBER, undo=undo),
+        ide.jobs.show_tag(directory, ide.tags.MOCK_COLORING, undo=undo),
+        ide.jobs.show_music_annotations(directory, undo=undo),
+        ide.jobs.show_tag(directory, ide.tags.NOT_YET_PITCHED_COLORING, undo=undo),
+        ide.jobs.show_tag(directory, ide.tags.RHYTHM_ANNOTATION_SPANNER, undo=undo),
+        spacing,
+        ide.jobs.show_tag(directory, ide.tags.STAGE_NUMBER, undo=undo),
+    ]
+
+    return jobs
+
+
+directory = os.getcwd()
+directory = ide.Path(directory)
+if directory.parent.name != "segments":
+    print("Must call in segment directory ...")
+    sys.exit(-1)
+
+undo = "--undo" in sys.argv[1:]
+
+for job in _make_annotation_jobs(directory, undo=undo):
+    job = abjad.new(job, message_zero=True)
+    messages = job()
+    for message in messages:
+        print(message)
