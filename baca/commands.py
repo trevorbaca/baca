@@ -1,21 +1,14 @@
 import inspect
 import typing
 
-import ide
-
 import abjad
 
-from . import (
-    classes,
-    commandclasses,
-    const,
-    indicatorcommands,
-    indicators,
-    overrides,
-    pitchcommands,
-    scoping,
-    typings,
-)
+from . import classes, commandclasses, const, indicatorcommands, indicators, overrides
+from . import path as _path
+from . import pitchcommands, scoping
+from . import segments as _segments
+from . import tags as _tags
+from . import typings
 
 
 def _site(frame, n=None):
@@ -2393,7 +2386,7 @@ def invisible_music(
 
     """
     tag = _site(inspect.currentframe(), 1)
-    tag = tag.append(ide.tags.INVISIBLE_MUSIC_COMMAND)
+    tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
     command_1 = commandclasses.IndicatorCommand(
         [abjad.LilyPondLiteral(r"\abjad-invisible-music")],
         deactivate=True,
@@ -2402,7 +2395,7 @@ def invisible_music(
         tags=[tag],
     )
     tag = _site(inspect.currentframe(), 2)
-    tag = tag.append(ide.tags.INVISIBLE_MUSIC_COLORING)
+    tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
     command_2 = commandclasses.IndicatorCommand(
         [abjad.LilyPondLiteral(r"\abjad-invisible-music-coloring")],
         map=map,
@@ -2744,7 +2737,7 @@ def metronome_mark(
 
 
 def parts(
-    part_assignment: ide.PartAssignment,
+    part_assignment: _segments.PartAssignment,
     *,
     selector=lambda _: classes.Selection(_).leaves(),
 ) -> commandclasses.PartAssignmentCommand:
@@ -2753,7 +2746,6 @@ def parts(
 
     ..  container:: example
 
-        >>> import ide
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.StringTrioScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -2762,7 +2754,7 @@ def parts(
         >>> maker(
         ...     'Violin_Music_Voice',
         ...     baca.make_notes(),
-        ...     baca.parts(ide.PartAssignment('Violin')),
+        ...     baca.parts(baca.segments.PartAssignment('Violin')),
         ...     baca.pitch('E4'),
         ...     )
 
@@ -3028,7 +3020,7 @@ def parts(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> part_assignment = ide.PartAssignment('Flute')
+        >>> part_assignment = baca.segments.PartAssignment('Flute')
 
         >>> maker(
         ...     'Violin_Music_Voice',
@@ -3044,7 +3036,7 @@ def parts(
             PartAssignment('Flute')
 
     """
-    if not isinstance(part_assignment, ide.PartAssignment):
+    if not isinstance(part_assignment, _segments.PartAssignment):
         message = "part_assignment must be part assignment"
         message += f" (not {part_assignment!r})."
         raise Exception(message)
@@ -3084,10 +3076,10 @@ def previous_metadata(path: str) -> abjad.OrderedDict:
     """
     Gets previous segment metadata before ``path``.
     """
-    # reproduces ide.Path.get_previous_path()
+    # reproduces baca.path.Path.get_previous_path()
     # because Travis isn't configured for scores-directory calculations
-    definition_py = ide.Path(path)
-    segment = ide.Path(definition_py).parent
+    definition_py = _path.Path(path)
+    segment = _path.Path(definition_py).parent
     assert segment.is_segment(), repr(segment)
     segments = segment.parent
     assert segments.is_segments(), repr(segments)

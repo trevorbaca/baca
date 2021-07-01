@@ -1,7 +1,7 @@
 import abjad
-import ide
 
 from . import const
+from . import jobs
 from . import selectors
 from . import tonality
 from .classes import *
@@ -12,6 +12,7 @@ from .indicatorcommands import *
 from .indicators import *
 from .mathx import *
 from .overrides import *
+from .path import *
 from .persistence import *
 from .piecewise import *
 from .pitcharray import *
@@ -21,12 +22,10 @@ from .rhythmcommands import *
 from .scoping import *
 from .segmentclasses import *
 from .segmentmaker import *
+from .segments import *
 from .spannercommands import *
 from .templates import *
 from .typings import *
-
-Path = ide.Path
-tags = ide.tags
 
 
 def pleaves(*arguments, **keywords):

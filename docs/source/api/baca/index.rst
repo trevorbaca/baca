@@ -28,6 +28,7 @@ baca
    figuremaker
    indicatorcommands
    indicators
+   jobs
    mathx
    overrides
    path
@@ -39,8 +40,10 @@ baca
    scoping
    segmentclasses
    segmentmaker
+   segments
    selectors
    spannercommands
+   tags
    templates
    tonality
 
@@ -53,6 +56,7 @@ baca
    figuremaker
    indicatorcommands
    indicators
+   jobs
    mathx
    overrides
    path
@@ -64,8 +68,10 @@ baca
    scoping
    segmentclasses
    segmentmaker
+   segments
    selectors
    spannercommands
+   tags
    templates
    tonality
 

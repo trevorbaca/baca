@@ -2,12 +2,11 @@ import copy
 import math
 import typing
 
-import ide
-
 import abjad
 from abjadext import rmakers
 
 from . import classes, commandclasses, const, pitchclasses, rhythmcommands
+from . import tags as _tags
 
 ### CLASSES ###
 
@@ -3844,7 +3843,7 @@ class Accumulator:
             figure_name_markup,
             leaf,
             deactivate=True,
-            tag=ide.tags.FIGURE_NAME,
+            tag=_tags.FIGURE_NAME,
         )
 
     def _make_voice_dictionary(self):

@@ -1,11 +1,10 @@
 import inspect
 import typing
 
-import ide
-
 import abjad
 
 from . import classes, commandclasses, const, indicators, scoping
+from . import tags as _tags
 
 
 def _site(frame):
@@ -3123,7 +3122,7 @@ def staff_lines(
     command_1 = commandclasses.IndicatorCommand(
         indicators=[indicators.BarExtent(n)],
         selector=selector,
-        tags=[ide.tags.NOT_PARTS],
+        tags=[_tags.NOT_PARTS],
     )
     command_2 = commandclasses.IndicatorCommand(
         indicators=[indicators.StaffLines(n)],
@@ -3177,7 +3176,7 @@ def start_markup(
     command = commandclasses.IndicatorCommand(
         indicators=[start_markup],
         selector=selector,
-        tags=[_site(inspect.currentframe()), ide.tags.NOT_PARTS],
+        tags=[_site(inspect.currentframe()), _tags.NOT_PARTS],
     )
     return command
 

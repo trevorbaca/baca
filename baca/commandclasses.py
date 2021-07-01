@@ -1,11 +1,12 @@
 import collections
 import typing
 
-import ide
-
 import abjad
 
-from . import classes, const, indicators, scoping, typings
+from . import classes, const, indicators, scoping
+from . import segments as _segments
+from . import tags as _tags
+from . import typings
 
 ### CLASSES ###
 
@@ -1432,7 +1433,7 @@ class GlobalFermataCommand(scoping.Command):
             abjad.attach(
                 const.FERMATA_MEASURE,
                 leaf,
-                tag=ide.tags.FERMATA_MEASURE,
+                tag=_tags.FERMATA_MEASURE,
             )
             abjad.annotate(leaf, const.FERMATA_DURATION, fermata_duration)
 
@@ -1821,7 +1822,7 @@ class PartAssignmentCommand(scoping.Command):
         map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
-        part_assignment: ide.PartAssignment = None,
+        part_assignment: _segments.PartAssignment = None,
         scope: scoping.ScopeTyping = None,
         selector=lambda _: classes.Selection(_).leaves(),
     ) -> None:
@@ -1834,7 +1835,7 @@ class PartAssignmentCommand(scoping.Command):
             selector=selector,
         )
         if part_assignment is not None:
-            if not isinstance(part_assignment, ide.PartAssignment):
+            if not isinstance(part_assignment, _segments.PartAssignment):
                 message = "part_assignment must be part assignment"
                 message += f" (not {part_assignment!r})."
                 raise Exception(message)
@@ -1877,7 +1878,7 @@ class PartAssignmentCommand(scoping.Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def part_assignment(self) -> typing.Optional[ide.PartAssignment]:
+    def part_assignment(self) -> typing.Optional[_segments.PartAssignment]:
         """
         Gets part assignment.
         """

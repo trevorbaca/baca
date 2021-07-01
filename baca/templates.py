@@ -3,12 +3,13 @@ Score template library.
 """
 import typing
 
-import ide
 import roman
 
 import abjad
 
 from . import const
+from . import segments as _segments
+from . import tags as _tags
 
 ### CLASSES ###
 
@@ -22,7 +23,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
 
     __slots__ = ("_defaults",)
 
-    _part_manifest: ide.PartManifest = ide.PartManifest()
+    _part_manifest: _segments.PartManifest = _segments.PartManifest()
 
     voice_colors: dict = {}
 
@@ -105,18 +106,18 @@ class ScoreTemplate(abjad.ScoreTemplate):
         return self._defaults
 
     @property
-    def part_manifest(self) -> typing.Optional[ide.PartManifest]:
+    def part_manifest(self) -> typing.Optional[_segments.PartManifest]:
         """
         Gets part manifest.
         """
         if self._part_manifest is not None:
-            assert isinstance(self._part_manifest, ide.PartManifest)
+            assert isinstance(self._part_manifest, _segments.PartManifest)
         return self._part_manifest
 
     ### PUBLIC METHODS ###
 
     def allows_part_assignment(
-        self, voice_name: str, part_assignment: ide.PartAssignment
+        self, voice_name: str, part_assignment: _segments.PartAssignment
     ) -> bool:
         """
         Is true when ``voice_name`` allows ``part_assignment``.
@@ -203,7 +204,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
                     wrapper = abjad.attach(
                         margin_markup,
                         leaf,
-                        tag=ide.tags.NOT_PARTS.append(
+                        tag=_tags.NOT_PARTS.append(
                             abjad.Tag("abjad.ScoreTemplate.attach_defaults(2)")
                         ),
                         wrapper=True,
@@ -736,10 +737,10 @@ class StringTrioScoreTemplate(ScoreTemplate):
 
     ### CLASS VARIABLES ###
 
-    _part_manifest = ide.PartManifest(
-        ide.Part(section="Violin", section_abbreviation="VN"),
-        ide.Part(section="Viola", section_abbreviation="VA"),
-        ide.Part(section="Cello", section_abbreviation="VC"),
+    _part_manifest = _segments.PartManifest(
+        _segments.Part(section="Violin", section_abbreviation="VN"),
+        _segments.Part(section="Viola", section_abbreviation="VA"),
+        _segments.Part(section="Cello", section_abbreviation="VC"),
     )
 
     ### SPECIAL METHODS ###

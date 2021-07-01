@@ -1,11 +1,11 @@
 import inspect
 import typing
 
-import ide
-
 import abjad
 
-from . import classes, scoping, typings
+from . import classes, scoping
+from . import tags as _tags
+from . import typings
 
 
 def _site(frame):
@@ -101,8 +101,8 @@ class SpannerIndicatorCommand(scoping.Command):
                     first_leaf,
                     deactivate=self.deactivate,
                     tag=abjad.Tag("baca.SpannerIndicatorCommand._call(1)")
-                    .append(ide.tags.SPANNER_START)
-                    .append(ide.tags.LEFT_BROKEN),
+                    .append(_tags.SPANNER_START)
+                    .append(_tags.LEFT_BROKEN),
                 )
             else:
                 self._attach_indicator(
@@ -110,7 +110,7 @@ class SpannerIndicatorCommand(scoping.Command):
                     first_leaf,
                     deactivate=self.deactivate,
                     tag=abjad.Tag("baca.SpannerIndicatorCommand._call(2)").append(
-                        ide.tags.SPANNER_START
+                        _tags.SPANNER_START
                     ),
                 )
         if self.stop_indicator is not None:
@@ -125,8 +125,8 @@ class SpannerIndicatorCommand(scoping.Command):
                     final_leaf,
                     deactivate=self.deactivate,
                     tag=abjad.Tag("baca.SpannerIndicatorCommand._call(3)")
-                    .append(ide.tags.SPANNER_STOP)
-                    .append(ide.tags.RIGHT_BROKEN),
+                    .append(_tags.SPANNER_STOP)
+                    .append(_tags.RIGHT_BROKEN),
                 )
             else:
                 self._attach_indicator(
@@ -134,7 +134,7 @@ class SpannerIndicatorCommand(scoping.Command):
                     final_leaf,
                     deactivate=self.deactivate,
                     tag=abjad.Tag("baca.SpannerIndicatorCommand._call(4)").append(
-                        ide.tags.SPANNER_STOP
+                        _tags.SPANNER_STOP
                     ),
                 )
 

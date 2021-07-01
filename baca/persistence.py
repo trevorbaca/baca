@@ -284,7 +284,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     ide.Momento(
+        ...     baca.Momento(
         ...         context='Music_Voice',
         ...         prototype='abjad.Clef',
         ...         value='treble',
@@ -425,7 +425,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     ide.Momento(
+        ...     baca.Momento(
         ...         context='Music_Voice',
         ...         prototype='abjad.Clef',
         ...         value='treble',
@@ -714,7 +714,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     ide.Momento(
+        ...     baca.Momento(
         ...         context='Music_Voice',
         ...         prototype='abjad.Clef',
         ...         value='treble',
@@ -845,7 +845,7 @@ r"""
         Explicit dynamics color blue:
 
         >>> maker = baca.SegmentMaker(
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -965,7 +965,7 @@ r"""
         Even after a previous dynamic:
 
         >>> maker = baca.SegmentMaker(
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -979,7 +979,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Voice'] = [
-        ...     ide.Momento(
+        ...     baca.Momento(
         ...         context='Music_Voice',
         ...         prototype='abjad.Dynamic',
         ...         value='f',
@@ -1102,7 +1102,7 @@ r"""
         Reapplied dynamics color green:
 
         >>> maker = baca.SegmentMaker(
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -1115,7 +1115,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Voice'] = [
-        ...     ide.Momento(
+        ...     baca.Momento(
         ...         context='Music_Voice',
         ...         prototype='abjad.Dynamic',
         ...         value='f',
@@ -1238,7 +1238,7 @@ r"""
         Redundant dynamics color pink:
 
         >>> maker = baca.SegmentMaker(
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -1361,7 +1361,7 @@ r"""
         Even at the beginning of a segment:
 
         >>> maker = baca.SegmentMaker(
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -1375,7 +1375,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Voice'] = [
-        ...     ide.Momento(
+        ...     baca.Momento(
         ...         context='Music_Voice',
         ...         prototype='abjad.Dynamic',
         ...         value='f',
@@ -1496,7 +1496,7 @@ r"""
         Sforzando dynamics do not count as redundant:
 
         >>> maker = baca.SegmentMaker(
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -1619,7 +1619,7 @@ r"""
         Even at the beginning of a segment:
 
         >>> maker = baca.SegmentMaker(
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -1633,7 +1633,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Voice'] = [
-        ...     ide.Momento(
+        ...     baca.Momento(
         ...         context='Music_Voice',
         ...         prototype='abjad.Dynamic',
         ...         value='sfz',
@@ -1757,7 +1757,7 @@ r"""
         nonredundantly:
 
         >>> maker = baca.SegmentMaker(
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -1904,7 +1904,7 @@ r"""
         >>> score_template.defaults.append(triple)
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     instruments=instruments,
         ...     score_template=score_template,
         ...     spacing=baca.minimum_duration((1, 24)),
@@ -2031,7 +2031,7 @@ r"""
         >>> score = lilypond_file[abjad.Score]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-        >>> tags_ = ide.tags.instrument_color_tags()
+        >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
@@ -2145,7 +2145,7 @@ r"""
             <BLANKLINE>
             >>
 
-        >>> tags_ = ide.tags.instrument_color_tags()
+        >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -2264,7 +2264,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     instruments=instruments,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
@@ -2392,7 +2392,7 @@ r"""
         >>> score = lilypond_file[abjad.Score]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-        >>> tags_ = ide.tags.instrument_color_tags()
+        >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
@@ -2506,7 +2506,7 @@ r"""
             <BLANKLINE>
             >>
 
-        >>> tags_ = ide.tags.instrument_color_tags()
+        >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
@@ -2624,7 +2624,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     instruments=instruments,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
@@ -2639,7 +2639,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     ide.Momento(
+        ...     baca.Momento(
         ...         context='Music_Voice',
         ...         manifest='instruments',
         ...         value='Piccolo',
@@ -2767,7 +2767,7 @@ r"""
         >>> score = lilypond_file[abjad.Score]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-        >>> tags_ = ide.tags.instrument_color_tags()
+        >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
@@ -2882,7 +2882,7 @@ r"""
             <BLANKLINE>
             >>
 
-        >>> tags_ = ide.tags.instrument_color_tags()
+        >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -3002,7 +3002,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     instruments=instruments,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
@@ -3016,7 +3016,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     ide.Momento(
+        ...     baca.Momento(
         ...         context='Music_Voice',
         ...         manifest='instruments',
         ...         value='Flute',
@@ -3144,7 +3144,7 @@ r"""
         >>> score = lilypond_file[abjad.Score]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-        >>> tags_ = ide.tags.instrument_color_tags()
+        >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
@@ -3259,7 +3259,7 @@ r"""
             <BLANKLINE>
             >>
 
-        >>> tags_ = ide.tags.instrument_color_tags()
+        >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
@@ -3386,7 +3386,7 @@ r"""
         ...     )
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     instruments=instruments,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
@@ -3528,7 +3528,7 @@ r"""
         >>> score = lilypond_file[abjad.Score]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-        >>> tags_ = ide.tags.instrument_color_tags()
+        >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
@@ -3652,7 +3652,7 @@ r"""
             <BLANKLINE>
             >>
 
-        >>> tags_ = ide.tags.instrument_color_tags()
+        >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -3785,7 +3785,7 @@ r"""
         ...     )
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     instruments=instruments,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
@@ -3800,7 +3800,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     ide.Momento(
+        ...     baca.Momento(
         ...         context='Music_Voice',
         ...         manifest='instruments',
         ...         value='Flute',
@@ -3928,7 +3928,7 @@ r"""
         >>> score = lilypond_file[abjad.Score]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-        >>> tags_ = ide.tags.instrument_color_tags()
+        >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
@@ -4043,7 +4043,7 @@ r"""
             <BLANKLINE>
             >>
 
-        >>> tags_ = ide.tags.instrument_color_tags()
+        >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -4192,7 +4192,7 @@ r"""
         >>> score_template.defaults.append(triple)
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     margin_markups=margin_markups,
         ...     score_template=score_template,
         ...     spacing=baca.minimum_duration((1, 24)),
@@ -4325,7 +4325,7 @@ r"""
         >>> score = lilypond_file[abjad.Score]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-        >>> tags_ = ide.tags.margin_markup_color_tags()
+        >>> tags_ = baca.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
@@ -4445,7 +4445,7 @@ r"""
             <BLANKLINE>
             >>
 
-        >>> tags_ = ide.tags.margin_markup_color_tags()
+        >>> tags_ = baca.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -4570,7 +4570,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
@@ -4704,7 +4704,7 @@ r"""
         >>> score = lilypond_file[abjad.Score]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-        >>> tags_ = ide.tags.margin_markup_color_tags()
+        >>> tags_ = baca.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
@@ -4824,7 +4824,7 @@ r"""
             <BLANKLINE>
             >>
 
-        >>> tags_ = ide.tags.margin_markup_color_tags()
+        >>> tags_ = baca.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -4947,7 +4947,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
@@ -4962,7 +4962,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     ide.Momento(
+        ...     baca.Momento(
         ...         context='Music_Voice',
         ...         manifest='margin_markups',
         ...         value='I+II',
@@ -5098,7 +5098,7 @@ r"""
         >>> score = lilypond_file[abjad.Score]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-        >>> tags_ = ide.tags.margin_markup_color_tags()
+        >>> tags_ = baca.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
@@ -5221,7 +5221,7 @@ r"""
             <BLANKLINE>
             >>
 
-        >>> tags_ = ide.tags.margin_markup_color_tags()
+        >>> tags_ = baca.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -5349,7 +5349,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
@@ -5363,7 +5363,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     ide.Momento(
+        ...     baca.Momento(
         ...         context='Music_Voice',
         ...         manifest='margin_markups',
         ...         value='I+II',
@@ -5499,7 +5499,7 @@ r"""
         >>> score = lilypond_file[abjad.Score]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-        >>> tags_ = ide.tags.margin_markup_color_tags()
+        >>> tags_ = baca.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
@@ -5622,7 +5622,7 @@ r"""
             <BLANKLINE>
             >>
 
-        >>> tags_ = ide.tags.margin_markup_color_tags()
+        >>> tags_ = baca.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -5756,7 +5756,7 @@ r"""
         ...     )
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
@@ -5910,7 +5910,7 @@ r"""
         >>> score = lilypond_file[abjad.Score]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-        >>> tags_ = ide.tags.margin_markup_color_tags()
+        >>> tags_ = baca.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
@@ -6046,7 +6046,7 @@ r"""
             <BLANKLINE>
             >>
 
-        >>> tags_ = ide.tags.margin_markup_color_tags()
+        >>> tags_ = baca.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -6191,7 +6191,7 @@ r"""
         ...     )
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
@@ -6206,7 +6206,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     ide.Momento(
+        ...     baca.Momento(
         ...         context='Music_Voice',
         ...         manifest='margin_markups',
         ...         value='I+II',
@@ -6342,7 +6342,7 @@ r"""
         >>> score = lilypond_file[abjad.Score]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
-        >>> tags_ = ide.tags.margin_markup_color_tags()
+        >>> tags_ = baca.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
@@ -6465,7 +6465,7 @@ r"""
             <BLANKLINE>
             >>
 
-        >>> tags_ = ide.tags.margin_markup_color_tags()
+        >>> tags_ = baca.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -6599,7 +6599,7 @@ r"""
         ...     )
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
@@ -6608,16 +6608,16 @@ r"""
         >>> maker(
         ...     'Music_Voice',
         ...     baca.tag(
-        ...         ide.tags.NOT_PARTS,
+        ...         baca.tags.NOT_PARTS,
         ...         baca.margin_markup(margin_markups['I+II']),
         ...         ),
         ...     baca.tag(
-        ...         ide.tags.NOT_PARTS,
+        ...         baca.tags.NOT_PARTS,
         ...         baca.margin_markup(margin_markups['III+IV']),
         ...         deactivate=True,
         ...         ),
         ...     baca.tag(
-        ...         ide.tags.NOT_PARTS,
+        ...         baca.tags.NOT_PARTS,
         ...         baca.margin_markup(margin_markups['III+IV']),
         ...         deactivate=True,
         ...         ),
@@ -6776,7 +6776,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 25)),
@@ -6912,7 +6912,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
@@ -6931,7 +6931,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Score'] = [
-        ...     ide.Momento(
+        ...     baca.Momento(
         ...         context='Global_Skips',
         ...         manifest='metronome_marks',
         ...         value='90',
@@ -7068,7 +7068,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
@@ -7086,7 +7086,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Score'] = [
-        ...     ide.Momento(
+        ...     baca.Momento(
         ...         context='Global_Skips',
         ...         manifest='metronome_marks',
         ...         value='90',
@@ -7223,7 +7223,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
@@ -7367,7 +7367,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
@@ -7386,7 +7386,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Score'] = [
-        ...     ide.Momento(
+        ...     baca.Momento(
         ...         context='Global_Skips',
         ...         manifest='metronome_marks',
         ...         value='112',
@@ -7530,7 +7530,7 @@ r"""
         ...     spacing=baca.minimum_duration((1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> override = ide.PersistentOverride(
+        >>> override = baca.PersistentOverride(
         ...     attribute="bar_extent",
         ...     context="Staff",
         ...     grob="BarLine",
@@ -7666,33 +7666,33 @@ r"""
                 (
                     'Music_Staff',
                     [
-                        ide.Momento(
+                        baca.Momento(
                             context='Music_Voice',
                             edition=abjad.Tag('-PARTS'),
                             prototype='baca.BarExtent',
                             value=1,
                             ),
-                        ide.Momento(
+                        baca.Momento(
                             context='Music_Voice',
-                            prototype='baca.StaffLines',
-                            value=1,
-                            ),
-                        ide.Momento(
-                            context='Music_Voice',
-                            prototype='ide.PersistentOverride',
-                            value=ide.PersistentOverride(
+                            prototype='baca.PersistentOverride',
+                            value=baca.PersistentOverride(
                                 attribute='bar_extent',
                                 context='Staff',
                                 grob='BarLine',
                                 value="#'(0 . 0)",
                                 ),
                             ),
+                        baca.Momento(
+                            context='Music_Voice',
+                            prototype='baca.StaffLines',
+                            value=1,
+                            ),
                         ],
                     ),
                 (
                     'Score',
                     [
-                        ide.Momento(
+                        baca.Momento(
                             context='Global_Skips',
                             prototype='abjad.TimeSignature',
                             value='3/8',
@@ -7719,10 +7719,10 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Voice'] = [
-        ...     ide.Momento(
+        ...     baca.Momento(
         ...         context='Music_Voice',
-        ...         prototype='ide.PersistentOverride',
-        ...         value=ide.PersistentOverride(
+        ...         prototype='baca.PersistentOverride',
+        ...         value=baca.PersistentOverride(
         ...             after=True,
         ...             attribute='bar_extent',
         ...             context='Staff',
@@ -7849,7 +7849,7 @@ r"""
         ...     spacing=baca.minimum_duration((1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> override = ide.PersistentOverride(
+        >>> override = baca.PersistentOverride(
         ...     attribute="bar_extent",
         ...     context="Staff",
         ...     grob="BarLine",
@@ -7868,10 +7868,10 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Voice'] = [
-        ...     ide.Momento(
+        ...     baca.Momento(
         ...         context='Music_Voice',
-        ...         prototype='ide.PersistentOverride',
-        ...         value=ide.PersistentOverride(
+        ...         prototype='baca.PersistentOverride',
+        ...         value=baca.PersistentOverride(
         ...             after=True,
         ...             attribute='bar_extent',
         ...             context='Staff',
@@ -8000,7 +8000,7 @@ r"""
         Explicit staff lines color blue:
 
         >>> maker = baca.SegmentMaker(
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -8123,7 +8123,7 @@ r"""
         Even after previous staff lines:
 
         >>> maker = baca.SegmentMaker(
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -8137,7 +8137,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     ide.Momento(
+        ...     baca.Momento(
         ...         context='Music_Voice',
         ...         prototype='baca.StaffLines',
         ...         value=5,
@@ -8263,7 +8263,7 @@ r"""
         Reapplied staff lines color green:
 
         >>> maker = baca.SegmentMaker(
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -8276,7 +8276,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     ide.Momento(
+        ...     baca.Momento(
         ...         context='Music_Voice',
         ...         prototype='baca.StaffLines',
         ...         value=5,
@@ -8401,7 +8401,7 @@ r"""
         Redundant staff lines color pink:
 
         >>> maker = baca.SegmentMaker(
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -8530,7 +8530,7 @@ r"""
         Even at the beginning of a segment:
 
         >>> maker = baca.SegmentMaker(
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -8544,7 +8544,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     ide.Momento(
+        ...     baca.Momento(
         ...         context='Music_Voice',
         ...         prototype='baca.StaffLines',
         ...         value=5,
@@ -8682,7 +8682,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 25)),
@@ -8822,7 +8822,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
@@ -8841,7 +8841,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Score'] = [
-        ...     ide.Momento(
+        ...     baca.Momento(
         ...         context='Global_Skips',
         ...         prototype='baca.Ritardando',
         ...         )
@@ -8981,7 +8981,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
@@ -8999,7 +8999,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Score'] = [
-        ...     ide.Momento(
+        ...     baca.Momento(
         ...         context='Global_Skips',
         ...         prototype='baca.Accelerando',
         ...         )
@@ -9139,7 +9139,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
@@ -9303,7 +9303,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
-        ...     deactivate=[ide.tags.NOT_YET_PITCHED_COLORING],
+        ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
@@ -9322,7 +9322,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Score'] = [
-        ...     ide.Momento(
+        ...     baca.Momento(
         ...         context='Global_Skips',
         ...         prototype='baca.Accelerando',
         ...         )

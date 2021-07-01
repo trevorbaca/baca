@@ -4,12 +4,12 @@ Rhythm commands.
 import inspect
 import typing
 
-import ide
-
 import abjad
 from abjadext import rmakers
 
-from . import classes, const, overrides, scoping, typings
+from . import classes, const, overrides, scoping
+from . import tags as _tags
+from . import typings
 
 RhythmMakerTyping = typing.Union[
     rmakers.Assignment, rmakers.RhythmMaker, rmakers.Stack, rmakers.Bind
@@ -1354,7 +1354,7 @@ def tacet(
     Colors multimeasure rests.
     """
     command = overrides.mmrest_color(color, selector=selector)
-    scoping.tag(ide.tags.TACET_COLORING, command)
+    scoping.tag(_tags.TACET_COLORING, command)
     scoping.tag(_site(inspect.currentframe()), command)
     command_ = scoping.new(command, measures=measures)
     assert isinstance(command_, overrides.OverrideCommand)

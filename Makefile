@@ -1,10 +1,12 @@
+black_exclude = --exclude='boilerplate'
+
 black-check:
-	black --check --diff --target-version=py38 .
+	black --check --diff ${black_exclude} --target-version=py38 .
 
 black-reformat:
-	black --target-version=py38 .
+	black ${black_exclude} --target-version=py38 .
 
-flake_exclude = --exclude=baca/__init__.py
+flake_exclude = --exclude=baca/__init__.py,boilerplate
 flake_ignore = --ignore=E203,E266,E501,W503
 flake_options = --isolated --max-line-length=88
 
@@ -25,7 +27,7 @@ isort-check:
 	--thirdparty=uqbar \
 	--trailing-comma \
 	--use-parentheses \
-	.
+	baca scr
 
 isort-reformat:
 	isort \
@@ -40,7 +42,7 @@ isort-reformat:
 	--thirdparty=uqbar \
 	--trailing-comma \
 	--use-parentheses \
-	.
+	baca scr
 
 mypy:
 	# mypy baca
@@ -48,12 +50,12 @@ mypy:
 project = baca
 
 pytest:
-	pytest .
+	pytest baca
 	find . -name __pycache__ -type d -exec rm -r {} +
 	find . -name .pytest_cache -type d -exec rm -r {} +
 
 pytest-x:
-	pytest -x .
+	pytest -x baca
 	find . -name __pycache__ -type d -exec rm -r {} +
 	find . -name .pytest_cache -type d -exec rm -r {} +
 

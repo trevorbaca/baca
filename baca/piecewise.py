@@ -4,11 +4,11 @@ Piecewise library.
 import inspect
 import typing
 
-import ide
-
 import abjad
 
-from . import classes, commandclasses, const, scoping, typings
+from . import classes, commandclasses, const, scoping
+from . import tags as _tags
+from . import typings
 
 
 def _site(frame):
@@ -265,7 +265,7 @@ class PiecewiseCommand(scoping.Command):
             if is_final_piece and self.right_broken:
                 bundle = Bundle(spanner_start=self.right_broken)
                 tag = abjad.Tag("baca.PiecewiseCommand._call(1)")
-                tag = tag.append(ide.tags.RIGHT_BROKEN)
+                tag = tag.append(_tags.RIGHT_BROKEN)
                 self._attach_indicators(bundle, stop_leaf, i, total_pieces, tag=tag)
             if bookend_pattern.matches_index(i, piece_count) and 1 < len(piece):
                 should_bookend = True
@@ -313,9 +313,9 @@ class PiecewiseCommand(scoping.Command):
             if is_first_piece or previous_had_bookend:
                 bundle = abjad.new(bundle, spanner_stop=None)
                 if self.left_broken:
-                    tag = tag.append(ide.tags.LEFT_BROKEN)
+                    tag = tag.append(_tags.LEFT_BROKEN)
             if is_final_piece and self.right_broken:
-                tag = tag.append(ide.tags.RIGHT_BROKEN)
+                tag = tag.append(_tags.RIGHT_BROKEN)
             autodetected_right_padding = None
             # solution is merely heuristic;
             # TextSpanner.bound-details.right.to-extent = ##t implementation
@@ -348,7 +348,7 @@ class PiecewiseCommand(scoping.Command):
             if should_bookend:
                 tag = abjad.Tag("baca.PiecewiseCommand._call(3)")
                 if is_final_piece and self.right_broken:
-                    tag = tag.append(ide.tags.RIGHT_BROKEN)
+                    tag = tag.append(_tags.RIGHT_BROKEN)
                 if bundle.bookended_spanner_start is not None:
                     next_bundle = abjad.new(next_bundle, spanner_start=None)
                 if next_bundle.compound():
@@ -369,7 +369,7 @@ class PiecewiseCommand(scoping.Command):
                 bundle = Bundle(spanner_stop=spanner_stop)
                 tag = abjad.Tag("baca.PiecewiseCommand._call(4)")
                 if self.right_broken:
-                    tag = tag.append(ide.tags.RIGHT_BROKEN)
+                    tag = tag.append(_tags.RIGHT_BROKEN)
                 self._attach_indicators(bundle, stop_leaf, i, total_pieces, tag=tag)
             previous_had_bookend = should_bookend
 
@@ -403,17 +403,17 @@ class PiecewiseCommand(scoping.Command):
                 abjad.tweak(
                     indicator,
                     tag=self.tag.append(tag)
-                    .append(ide.tags.AUTODETECT)
-                    .append(ide.tags.SPANNER_START),
+                    .append(_tags.AUTODETECT)
+                    .append(_tags.SPANNER_START),
                 ).bound_details__right__padding = number
             if self.tweaks and hasattr(indicator, "_tweaks"):
                 self._apply_tweaks(indicator, self.tweaks, i=i, total=total_pieces)
             reapplied = scoping.Command._remove_reapplied_wrappers(leaf, indicator)
             tag_ = self.tag.append(tag)
             if getattr(indicator, "spanner_start", None) is True:
-                tag_ = tag_.append(ide.tags.SPANNER_START)
+                tag_ = tag_.append(_tags.SPANNER_START)
             if getattr(indicator, "spanner_stop", None) is True:
-                tag_ = tag_.append(ide.tags.SPANNER_STOP)
+                tag_ = tag_.append(_tags.SPANNER_STOP)
             wrapper = abjad.attach(indicator, leaf, tag=tag_, wrapper=True)
             if scoping.compare_persistent_indicators(indicator, reapplied):
                 status = "redundant"
@@ -534,7 +534,7 @@ def bow_speed_spanner(
     Makes bow speed spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(ide.tags.BOW_SPEED_SPANNER)
+    tag = tag.append(_tags.BOW_SPEED_SPANNER)
     command = text_spanner(
         items,
         *tweaks,
@@ -573,7 +573,7 @@ def circle_bow_spanner(
     Makes circle bow spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(ide.tags.CIRCLE_BOW_SPANNER)
+    tag = tag.append(_tags.CIRCLE_BOW_SPANNER)
     if qualifier is None:
         string = r"\baca-circle-markup =|"
     else:
@@ -618,7 +618,7 @@ def clb_spanner(
     Makes clb spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(ide.tags.CLB_SPANNER)
+    tag = tag.append(_tags.CLB_SPANNER)
     assert string_number in (1, 2, 3, 4), repr(string_number)
     if string_number == 1:
         markup = r"\baca-damp-clb-one-markup"
@@ -669,7 +669,7 @@ def covered_spanner(
     Makes covered spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(ide.tags.COVERED_SPANNER)
+    tag = tag.append(_tags.COVERED_SPANNER)
     command = text_spanner(
         argument,
         *tweaks,
@@ -708,7 +708,7 @@ def damp_spanner(
     Makes damp spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(ide.tags.DAMP_SPANNER)
+    tag = tag.append(_tags.DAMP_SPANNER)
     command = text_spanner(
         r"\baca-damp-markup =|",
         *tweaks,
@@ -3823,7 +3823,7 @@ def half_clt_spanner(
     Makes 1/2 clt spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(ide.tags.HALF_CLT_SPANNER)
+    tag = tag.append(_tags.HALF_CLT_SPANNER)
     command = text_spanner(
         "½ clt =|",
         *tweaks,
@@ -4148,7 +4148,7 @@ def material_annotation_spanner(
     Makes material annotation spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(ide.tags.MATERIAL_ANNOTATION_SPANNER)
+    tag = tag.append(_tags.MATERIAL_ANNOTATION_SPANNER)
     command = text_spanner(
         items,
         *tweaks,
@@ -4188,7 +4188,7 @@ def metric_modulation_spanner(
     # red_tweak = abjad.tweak("#red").color
     # tweaks = tweaks + (red_tweak,)
     tag = _site(inspect.currentframe())
-    tag = tag.append(ide.tags.METRIC_MODULATION_SPANNER)
+    tag = tag.append(_tags.METRIC_MODULATION_SPANNER)
     command = text_spanner(
         argument,
         *tweaks,
@@ -4379,7 +4379,7 @@ def pitch_annotation_spanner(
     Makes pitch annotation spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(ide.tags.PITCH_ANNOTATION_SPANNER)
+    tag = tag.append(_tags.PITCH_ANNOTATION_SPANNER)
     command = text_spanner(
         items,
         *tweaks,
@@ -4417,7 +4417,7 @@ def pizzicato_spanner(
     Makes pizzicato spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(ide.tags.PIZZICATO_SPANNER)
+    tag = tag.append(_tags.PIZZICATO_SPANNER)
     command = text_spanner(
         r"\baca-pizz-markup =|",
         *tweaks,
@@ -4455,7 +4455,7 @@ def rhythm_annotation_spanner(
     Makes rhythm command spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(ide.tags.RHYTHM_ANNOTATION_SPANNER)
+    tag = tag.append(_tags.RHYTHM_ANNOTATION_SPANNER)
     command = text_spanner(
         items,
         *tweaks,
@@ -4496,7 +4496,7 @@ def scp_spanner(
     Makes SCP spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(ide.tags.SCP_SPANNER)
+    tag = tag.append(_tags.SCP_SPANNER)
     command = text_spanner(
         items,
         *tweaks,
@@ -4537,7 +4537,7 @@ def spazzolato_spanner(
     Makes spazzolato spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(ide.tags.SPAZZOLATO_SPANNER)
+    tag = tag.append(_tags.SPAZZOLATO_SPANNER)
     command = text_spanner(
         items,
         *tweaks,
@@ -4578,7 +4578,7 @@ def string_number_spanner(
     Makes string number spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(ide.tags.STRING_NUMBER_SPANNER)
+    tag = tag.append(_tags.STRING_NUMBER_SPANNER)
     command = text_spanner(
         items,
         *tweaks,
@@ -4619,7 +4619,7 @@ def tasto_spanner(
     Makes tasto spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(ide.tags.TASTO_SPANNER)
+    tag = tag.append(_tags.TASTO_SPANNER)
     command = text_spanner(
         "T =|",
         *tweaks,
@@ -7400,7 +7400,7 @@ def vibrato_spanner(
     Makes vibrato spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(ide.tags.VIBRATO_SPANNER)
+    tag = tag.append(_tags.VIBRATO_SPANNER)
     command = text_spanner(
         items,
         *tweaks,
@@ -7441,7 +7441,7 @@ def xfb_spanner(
     Makes XFB spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(ide.tags.BOW_SPEED_SPANNER)
+    tag = tag.append(_tags.BOW_SPEED_SPANNER)
     command = text_spanner(
         "XFB =|",
         *tweaks,

@@ -1,14 +1,13 @@
 import collections
 import typing
 
-import ide
-
 import abjad
 
 from . import classes, commandclasses, indicators
-from . import path as baca_path
+from . import path as _path
 from . import scoping
 from . import selectors as _selectors
+from . import tags as _tags
 
 ### CLASSES ###
 
@@ -369,8 +368,8 @@ class BreakMeasureMap:
     ) -> None:
         tags = scoping.Command._preprocess_tags(tags)
         assert scoping.Command._validate_tags(tags), repr(tags)
-        if ide.tags.BREAK not in tags:
-            tags.append(ide.tags.BREAK)
+        if _tags.BREAK not in tags:
+            tags.append(_tags.BREAK)
         self._tags = tags
         self._bol_measure_numbers: typing.List[int] = []
         self._deactivate = deactivate
@@ -1701,7 +1700,7 @@ class HorizontalSpacingSpecifier:
             if measure_index == total - 1:
                 duration = abjad.Duration(1, 4)
             spacing_section = indicators.SpacingSection(duration=duration)
-            tag = ide.tags.SPACING_COMMAND
+            tag = _tags.SPACING_COMMAND
             abjad.attach(
                 spacing_section,
                 skip,
@@ -1711,7 +1710,7 @@ class HorizontalSpacingSpecifier:
             )
             string_ = self._make_annotation(duration, eol_adjusted, duration_)
             if measure_index < total - 1:
-                tag = ide.tags.SPACING
+                tag = _tags.SPACING
                 string = r"- \baca-start-spm-left-only"
                 string += f' "{string_}"'
                 start_text_span = abjad.StartTextSpan(
@@ -1727,7 +1726,7 @@ class HorizontalSpacingSpecifier:
                     ),
                 )
             if 0 < measure_index:
-                tag = ide.tags.SPACING
+                tag = _tags.SPACING
                 stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanSPM")
                 abjad.attach(
                     stop_text_span,
@@ -2770,7 +2769,7 @@ def page(*systems: typing.Any, number: int = None) -> PageSpecifier:
 
 
 def scorewide_spacing(
-    path: typing.Union[str, ide.Path, typing.Tuple[int, int, list]],
+    path: typing.Union[str, _path.Path, typing.Tuple[int, int, list]],
     fallback_duration: abjad.DurationTyping,
     breaks: BreakMeasureMap = None,
     fermata_measure_duration: abjad.DurationTyping = (1, 4),
@@ -2827,8 +2826,8 @@ def scorewide_spacing(
         assert len(path) == 3, repr(path)
         first_measure_number, measure_count, fermata_measure_numbers = path
     else:
-        path = ide.Path(path)
-        tuple_ = baca_path.get_measure_profile_metadata(path)
+        path = _path.Path(path)
+        tuple_ = _path.get_measure_profile_metadata(path)
         first_measure_number = tuple_[0]
         measure_count = tuple_[1]
         fermata_measure_numbers = tuple_[2]

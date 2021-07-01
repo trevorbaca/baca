@@ -289,6 +289,40 @@ Bača API
 
    <hr/>
 
+.. rubric:: :ref:`baca.jobs <baca--jobs>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.jobs.color_clefs
+   ~baca.jobs.color_dynamics
+   ~baca.jobs.color_instruments
+   ~baca.jobs.color_margin_markup
+   ~baca.jobs.color_metronome_marks
+   ~baca.jobs.color_persistent_indicators
+   ~baca.jobs.color_staff_lines
+   ~baca.jobs.color_time_signatures
+   ~baca.jobs.handle_edition_tags
+   ~baca.jobs.handle_fermata_bar_lines
+   ~baca.jobs.handle_mol_tags
+   ~baca.jobs.handle_shifted_clefs
+   ~baca.jobs.hide_default_clefs
+   ~baca.jobs.join_broken_spanners
+   ~baca.jobs.show_music_annotations
+   ~baca.jobs.show_tag
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: :ref:`baca.mathx <baca--mathx>`
    :class: section-header
 
@@ -490,6 +524,18 @@ Override library.
 
 .. rubric:: :ref:`baca.path <baca--path>`
    :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Classes
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.path.Path
 
 .. raw:: html
 
@@ -840,6 +886,53 @@ Rhythm commands.
 
    <hr/>
 
+.. rubric:: :ref:`baca.segments <baca--segments>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Classes
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.segments.Job
+   ~baca.segments.Momento
+   ~baca.segments.Part
+   ~baca.segments.PartAssignment
+   ~baca.segments.PartManifest
+   ~baca.segments.PersistentOverride
+   ~baca.segments.Section
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.segments.get_measure_profile_metadata
+   ~baca.segments.get_part_identifier
+   ~baca.segments.get_part_manifest
+   ~baca.segments.get_preamble_page_count_overview
+   ~baca.segments.get_preamble_partial_score
+   ~baca.segments.get_preamble_time_signatures
+   ~baca.segments.global_skip_identifiers
+   ~baca.segments.part_to_identifiers
+   ~baca.segments.path_to_part
+   ~baca.segments.remove_lilypond_warnings
+   ~baca.segments.score_skeleton
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: :ref:`baca.selectors <baca--selectors>`
    :class: section-header
 
@@ -940,6 +1033,43 @@ Rhythm commands.
    ~baca.spannercommands.slur
    ~baca.spannercommands.sustain_pedal
    ~baca.spannercommands.trill_spanner
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: :ref:`baca.tags <baca--tags>`
+   :class: section-header
+
+Tags.
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.tags.clef_color_tags
+   ~baca.tags.documentation_removal_tags
+   ~baca.tags.dynamic_color_tags
+   ~baca.tags.has_persistence_tag
+   ~baca.tags.instrument_color_tags
+   ~baca.tags.layout_removal_tags
+   ~baca.tags.margin_markup_color_tags
+   ~baca.tags.metronome_mark_color_expression_tags
+   ~baca.tags.metronome_mark_color_suppression_tags
+   ~baca.tags.music_annotation_tags
+   ~baca.tags.persistent_indicator_color_expression_tags
+   ~baca.tags.persistent_indicator_color_suppression_tags
+   ~baca.tags.persistent_indicator_tags
+   ~baca.tags.spacing_markup_tags
+   ~baca.tags.spacing_tags
+   ~baca.tags.staff_lines_color_tags
+   ~baca.tags.time_signature_color_tags
 
 .. raw:: html
 
