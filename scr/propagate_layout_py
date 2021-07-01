@@ -1,0 +1,72 @@
+#! /usr/bin/env python
+"""
+Call in any directory; set --source= and --target= parameter.
+
+Only works when:
+    1. a *_layout.py file already exists in each part directory
+    2. each *_layout.py file contains a part_identifier = 'BSN-1' assignment
+"""
+import os
+import sys
+
+import ide
+from ide import segments as _segments
+
+
+# TODO: externalize?
+def _parse_part_identifier(path):
+    if path.suffix == ".ly":
+        part_identifier = None
+        with path.open("r") as pointer:
+            for line in pointer.readlines():
+                if line.startswith("% part_identifier = "):
+                    line = line.strip("% part_identifier = ")
+                    part_identifier = eval(line)
+                    return part_identifier
+    elif path.name.endswith("layout.py"):
+        part_identifier = None
+        with path.open("r") as pointer:
+            for line in pointer.readlines():
+                if line.startswith("part_identifier = "):
+                    line = line.strip("part_identifier = ")
+                    part_identifier = eval(line)
+                    return part_identifier
+    else:
+        raise TypeError(path)
+
+
+source, target = None, None
+for string in sys.argv[1:]:
+    key = "--source="
+    if string.startswith(key):
+        source = string[len(key) :]
+        source = ide.Path(source)
+    key = "--target="
+    if string.startswith(key):
+        target = string[len(key) :]
+        target = ide.Path(target)
+if source is None:
+    print("Missing --source=/path/to/source_layout.py ...")
+    sys.exit(-1)
+if target is None:
+    print("Missing --target=/path/to/target_layout.py ...")
+    sys.exit(-1)
+
+if not source.is_file():
+    print(f"Source {source.trim()} must exist ...")
+    sys.exit(-1)
+
+if not target.is_file():
+    print(f"Target {target.trim()} must exist ...")
+    sys.exit(-1)
+
+print(f"Using {source.trim()} as source ...")
+source_part_identifier = _parse_part_identifier(source)
+if source_part_identifier is None:
+    print(f"No part identifier found in {source.name} ...")
+    sys.exit(-1)
+source_text = source.read_text()
+part_identifier = _segments.get_part_identifier(target)
+target_text = source_text.replace(source_part_identifier, part_identifier)
+print(f"Writing {target.trim()} ...")
+target.write_text(target_text)
