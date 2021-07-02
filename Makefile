@@ -44,9 +44,6 @@ isort-reformat:
 	--use-parentheses \
 	baca scr
 
-mypy:
-	# mypy baca
-
 project = baca
 
 pytest:
@@ -67,11 +64,9 @@ check:
 	make black-check
 	make flake8
 	make isort-check
-	make mypy
 
 test:
 	make black-check
 	make flake8
 	make isort-check
-	make mypy
 	make pytest

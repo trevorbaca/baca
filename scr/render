@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-source ~/baca/scr/lib-ide-replacement-commands
+source ~/baca/scr/lib-replacement-commands
 source ~/baca/scr/lib-score-navigation
 
 clear

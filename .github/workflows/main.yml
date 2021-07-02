@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 env:
-  MYPYPATH: /tmp/abjad:/tmp/abjad-ext-rmakers:/tmp/ide
+  MYPYPATH: /tmp/abjad:/tmp/abjad-ext-rmakers
 
 jobs:
   build:
@@ -51,12 +51,6 @@ jobs:
       run: |
         git clone https://github.com/Abjad/abjad-ext-rmakers.git /tmp/abjad-ext-rmakers
         pip install /tmp/abjad-ext-rmakers
-
-    - name: Install IDE
-      run: |
-        # must install -e editable for ide/scores directory in wrapper:
-        git clone https://github.com/Abjad/ide.git /tmp/ide
-        pip install -e /tmp/ide
 
     - name: Install this package
       run: |
