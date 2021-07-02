@@ -63,22 +63,11 @@ jobs:
         rm -f "$GITHUB_WORKSPACE"/$NAME/test.py
         ln -s /tmp/baca/dotfiles/test_segments.py "$GITHUB_WORKSPACE"/$NAME/test.py
 
-    - name: Install IDE
-      run: |
-        # must install -e editable for ide/scores directory in wrapper:
-        git clone https://github.com/Abjad/ide.git /tmp/ide
-        pip install -e /tmp/ide
-
     - name: Install this score
       run: pip install -e .
 
     - name: Prime parser tables
       run: /tmp/abjad/scr/prime-parser-tables
-
-    - name: Set scores directory for IDE path management
-      run: |
-        echo composer_scores_directory = $(dirname "$GITHUB_WORKSPACE") > ~/.abjad/abjad.cfg
-        cat ~/.abjad/abjad.cfg
 
     - name: Log versions
       run: |
