@@ -5,8 +5,8 @@ if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
 source "$DIR/lib-path-manipulation"
 
-if [ -d /Users/trevorbaca/ide ]; then
-    boilerplate=/Users/trevorbaca/ide/boilerplate
+if [ -d /Users/trevorbaca/baca/boilerplate ]; then
+    boilerplate=/Users/trevorbaca/baca/boilerplate
 else
     # GitHub actions
     boilerplate=/tmp/ide/boilerplate

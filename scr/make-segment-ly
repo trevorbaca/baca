@@ -2,7 +2,7 @@
 
 source lib-path-manipulation
 
-boilerplate=/Users/trevorbaca/ide/boilerplate
+boilerplate=/Users/trevorbaca/baca/boilerplate
 
 make_segment_ly() {
     definition_py_path=$(realpath "$1")
@@ -30,7 +30,7 @@ make_segment_ly() {
     else
         previous_segment=$(get_previous_sibling_directory "$segment_directory")
         metadata="$previous_segment/__metadata__.py"
-        statement="file = ide.Path('$metadata')"
+        statement="file = baca.Path('$metadata')"
         statement="$statement
         lines = file.read_text()"
         statement="$statement
@@ -38,7 +38,7 @@ make_segment_ly() {
         statement="$statement
         previous_metadata = metadata"
         persist="$previous_segment/__persist__.py"
-        persist_statement="file = ide.Path('$persist')"
+        persist_statement="file = baca.Path('$persist')"
         persist_statement="$persist_statement
         lines = file.read_text()"
         persist_statement="$persist_statement
