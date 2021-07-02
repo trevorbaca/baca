@@ -69,6 +69,11 @@ jobs:
     - name: Prime parser tables
       run: /tmp/abjad/scr/prime-parser-tables
 
+    - name: Set scores directory for path management
+      run: |
+        echo composer_scores_directory = $(dirname "$GITHUB_WORKSPACE") > ~/.abjad/abjad.cfg
+        cat ~/.abjad/abjad.cfg
+
     - name: Log versions
       run: |
         black --version
