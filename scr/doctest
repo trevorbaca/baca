@@ -38,8 +38,6 @@ def _get_globs():
     globs["baca"] = baca
     # eventually remove:
     globs.update(baca.__dict__)
-    ide = importlib.import_module("ide")
-    globs["ide"] = ide
     return globs
 
 

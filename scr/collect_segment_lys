@@ -15,9 +15,8 @@ import os
 import shutil
 import sys
 
-import ide
-
 import abjad
+import baca
 
 
 def _collect_segment_lys(directory):
@@ -84,14 +83,14 @@ for string in sys.argv[1:]:
         break
 else:
     directory = os.getcwd()
-directory = ide.Path(directory)
+directory = baca.Path(directory)
 assert directory.is_build() or directory.is__segments()
 print("Collecting segment lys ...")
 pairs = _collect_segment_lys(directory.build)
 if not pairs:
     print("... no segment lys found.")
     sys.exit(1)
-_make__assets_directory(directory.build)
+# _make__assets_directory(directory.build)
 _make__segments_directory(directory.build)
 
 fermata_measure_numbers = abjad.OrderedDict()

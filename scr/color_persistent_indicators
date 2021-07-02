@@ -2,12 +2,11 @@
 import os
 import sys
 
-import ide
-
 import abjad
+import baca
 
 directory = os.getcwd()
-directory = ide.Path(directory)
+directory = baca.Path(directory)
 if directory.parent.name != "segments":
     print("Must call in segment directory ...")
     sys.exit(-1)
@@ -15,14 +14,14 @@ if directory.parent.name != "segments":
 undo = "--undo" in sys.argv[1:]
 
 for job in (
-    ide.jobs.color_clefs,
-    ide.jobs.color_dynamics,
-    ide.jobs.color_instruments,
-    ide.jobs.color_margin_markup,
-    ide.jobs.color_metronome_marks,
-    ide.jobs.color_persistent_indicators,
-    ide.jobs.color_staff_lines,
-    ide.jobs.color_time_signatures,
+    baca.jobs.color_clefs,
+    baca.jobs.color_dynamics,
+    baca.jobs.color_instruments,
+    baca.jobs.color_margin_markup,
+    baca.jobs.color_metronome_marks,
+    baca.jobs.color_persistent_indicators,
+    baca.jobs.color_staff_lines,
+    baca.jobs.color_time_signatures,
 ):
     job = job(directory, undo=undo)
     job = abjad.new(job, message_zero=True)

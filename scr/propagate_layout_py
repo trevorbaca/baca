@@ -9,8 +9,8 @@ Only works when:
 import os
 import sys
 
-import ide
-from ide import segments as _segments
+import baca
+from baca import segments as _segments
 
 
 # TODO: externalize?
@@ -40,11 +40,11 @@ for string in sys.argv[1:]:
     key = "--source="
     if string.startswith(key):
         source = string[len(key) :]
-        source = ide.Path(source)
+        source = baca.Path(source)
     key = "--target="
     if string.startswith(key):
         target = string[len(key) :]
-        target = ide.Path(target)
+        target = baca.Path(target)
 if source is None:
     print("Missing --source=/path/to/source_layout.py ...")
     sys.exit(-1)

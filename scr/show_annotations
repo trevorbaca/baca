@@ -2,21 +2,20 @@
 import os
 import sys
 
-import ide
-
 import abjad
+import baca
 
 
 def _make_annotation_jobs(directory, undo=False):
     def _annotation_spanners(tags):
         tags_ = (
-            ide.tags.MATERIAL_ANNOTATION_SPANNER,
-            ide.tags.PITCH_ANNOTATION_SPANNER,
-            ide.tags.RHYTHM_ANNOTATION_SPANNER,
+            baca.tags.MATERIAL_ANNOTATION_SPANNER,
+            baca.tags.PITCH_ANNOTATION_SPANNER,
+            baca.tags.RHYTHM_ANNOTATION_SPANNER,
         )
         return bool(set(tags) & set(tags_))
 
-    annotation_spanners = ide.jobs.show_tag(
+    annotation_spanners = baca.jobs.show_tag(
         directory,
         "annotation spanners",
         match=_annotation_spanners,
@@ -25,34 +24,34 @@ def _make_annotation_jobs(directory, undo=False):
 
     def _spacing(tags):
         tags_ = (
-            ide.tags.SPACING,
-            ide.tags.SPACING_OVERRIDE,
+            baca.tags.SPACING,
+            baca.tags.SPACING_OVERRIDE,
         )
         return bool(set(tags) & set(tags_))
 
-    spacing = ide.jobs.show_tag(directory, "spacing", match=_spacing, undo=undo)
+    spacing = baca.jobs.show_tag(directory, "spacing", match=_spacing, undo=undo)
 
     jobs = [
         annotation_spanners,
-        ide.jobs.show_tag(directory, ide.tags.CLOCK_TIME, undo=undo),
-        ide.jobs.show_tag(directory, ide.tags.FIGURE_NAME, undo=undo),
-        ide.jobs.show_tag(directory, ide.tags.INVISIBLE_MUSIC_COMMAND, undo=not undo),
-        ide.jobs.show_tag(directory, ide.tags.INVISIBLE_MUSIC_COLORING, undo=undo),
-        ide.jobs.show_tag(directory, ide.tags.LOCAL_MEASURE_NUMBER, undo=undo),
-        ide.jobs.show_tag(directory, ide.tags.MEASURE_NUMBER, undo=undo),
-        ide.jobs.show_tag(directory, ide.tags.MOCK_COLORING, undo=undo),
-        ide.jobs.show_music_annotations(directory, undo=undo),
-        ide.jobs.show_tag(directory, ide.tags.NOT_YET_PITCHED_COLORING, undo=undo),
-        ide.jobs.show_tag(directory, ide.tags.RHYTHM_ANNOTATION_SPANNER, undo=undo),
+        baca.jobs.show_tag(directory, baca.tags.CLOCK_TIME, undo=undo),
+        baca.jobs.show_tag(directory, baca.tags.FIGURE_NAME, undo=undo),
+        baca.jobs.show_tag(directory, baca.tags.INVISIBLE_MUSIC_COMMAND, undo=not undo),
+        baca.jobs.show_tag(directory, baca.tags.INVISIBLE_MUSIC_COLORING, undo=undo),
+        baca.jobs.show_tag(directory, baca.tags.LOCAL_MEASURE_NUMBER, undo=undo),
+        baca.jobs.show_tag(directory, baca.tags.MEASURE_NUMBER, undo=undo),
+        baca.jobs.show_tag(directory, baca.tags.MOCK_COLORING, undo=undo),
+        baca.jobs.show_music_annotations(directory, undo=undo),
+        baca.jobs.show_tag(directory, baca.tags.NOT_YET_PITCHED_COLORING, undo=undo),
+        baca.jobs.show_tag(directory, baca.tags.RHYTHM_ANNOTATION_SPANNER, undo=undo),
         spacing,
-        ide.jobs.show_tag(directory, ide.tags.STAGE_NUMBER, undo=undo),
+        baca.jobs.show_tag(directory, baca.tags.STAGE_NUMBER, undo=undo),
     ]
 
     return jobs
 
 
 directory = os.getcwd()
-directory = ide.Path(directory)
+directory = baca.Path(directory)
 if directory.parent.name != "segments":
     print("Must call in segment directory ...")
     sys.exit(-1)

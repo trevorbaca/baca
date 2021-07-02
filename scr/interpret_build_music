@@ -9,13 +9,11 @@ Skips segment collection when called with --skip-segment-collection.
 import os
 import sys
 
-import ide
-from ide import path as _path
-from ide import segments as _segments
-
 import abjad
+import baca
+from baca import path as _path
+from baca import segments as _segments
 
-_ide_configuration = ide.Configuration()
 abjad_configuration = abjad.Configuration()
 
 
@@ -76,7 +74,7 @@ def _copy_boilerplate(directory, source_name, target_name=None, values=None):
         print(f"Removing {target.trim()} ...")
     print(f"Writing {target.trim()} ...")
     values = values or {}
-    boilerplate = _path.Path(_ide_configuration.boilerplate_directory)
+    boilerplate = _path.Path(baca.__file__).parent.parent / "boilerplate"
     source = boilerplate / source_name
     target_name = target_name or source_name
     target = directory / target_name
@@ -194,7 +192,7 @@ def _run_lilypond(ly, indent=0):
 
 
 directory = os.getcwd()
-directory = ide.Path(directory)
+directory = baca.Path(directory)
 assert directory.is__segments() or directory.is_build()
 build = directory.build
 assert build is not None, repr(directory)

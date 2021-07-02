@@ -2,11 +2,10 @@
 import os
 import sys
 
-import ide
-from ide import jobs as _jobs
-from ide import tags as _tags
-
 import abjad
+import baca
+from baca import jobs as _jobs
+from baca import tags as _tags
 
 
 # TODO: externalize
@@ -47,7 +46,7 @@ for string in sys.argv[1:]:
         break
 else:
     directory = os.getcwd()
-directory = ide.Path(directory)
+directory = baca.Path(directory)
 assert directory.is_build() or directory.is__segments()
 print("Handling build tags ...")
 

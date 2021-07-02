@@ -10,7 +10,7 @@ else:
     arguments = ""
     print(f"Running xpdf ...")
 
-log = "~/.abjad/ide/latex.log"
+log = "~/.abjad/latex.log"
 for path in sys.argv[1:]:
     path = pathlib.Path(path)
     command = f"date > {log};"

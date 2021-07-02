@@ -2,9 +2,8 @@
 import os
 import sys
 
-import ide
-
 import abjad
+import baca
 
 
 def _activate(
@@ -75,7 +74,7 @@ def _parse_part_identifier(path):
 
 
 directory = os.getcwd()
-directory = ide.Path(directory)
+directory = baca.Path(directory)
 assert directory.is_part(), repr(directory)
 parts_directory = directory.parent
 print("Handling part tags ...")
