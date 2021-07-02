@@ -1,8 +1,7 @@
 import importlib
+import pathlib
 
 import abjad
-
-from . import path as _path
 
 
 class Job:
@@ -63,7 +62,7 @@ class Job:
                 assert isinstance(self.deactivate, tuple)
                 match, name = self.deactivate
                 if match is not None:
-                    if isinstance(self.path, _path.Path):
+                    if isinstance(self.path, pathlib.Path):
                         result = self.path.deactivate(
                             match,
                             indent=1,
@@ -77,7 +76,7 @@ class Job:
                         messages.extend(messages_)
                         total_count += count
                     else:
-                        assert isinstance(self.path, str)
+                        assert isinstance(self.path, str), repr(self.path)
                         result = abjad.deactivate(
                             text,
                             match,
@@ -91,7 +90,7 @@ class Job:
             assert isinstance(self.activate, tuple)
             match, name = self.activate
             if match is not None:
-                if isinstance(self.path, _path.Path):
+                if isinstance(self.path, pathlib.Path):
                     result = self.path.activate(
                         match,
                         indent=1,
@@ -116,7 +115,7 @@ class Job:
                 assert isinstance(self.deactivate, tuple)
                 match, name = self.deactivate
                 if match is not None:
-                    if isinstance(self.path, _path.Path):
+                    if isinstance(self.path, pathlib.Path):
                         result = self.path.deactivate(
                             match,
                             indent=1,
@@ -140,7 +139,7 @@ class Job:
                         )
         if total_count == 0 and not self.message_zero:
             messages = []
-        if isinstance(self.path, _path.Path):
+        if isinstance(self.path, pathlib.Path):
             return messages
         else:
             assert isinstance(self.path, str)
