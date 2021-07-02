@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-repos=("$ABJAD" "$IDE" "$BACA" "$MISCELLANEOUS")
+repos=("$ABJAD" "$BACA" "$MISCELLANEOUS")
 current_directory=$(pwd)
 
 clear;
