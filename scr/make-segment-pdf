@@ -10,7 +10,7 @@ if [ -d /Users/trevorbaca/baca/boilerplate ]; then
     boilerplate=/Users/trevorbaca/baca/boilerplate
 else
     # GitHub actions
-    boilerplate=/tmp/ide/boilerplate
+    boilerplate=/tmp/baca/boilerplate
 fi
 
 helper() {
