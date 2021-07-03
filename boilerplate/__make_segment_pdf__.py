@@ -214,8 +214,10 @@ if __name__ == "__main__":
         lilypond_log_file_path = illustration_ily.parent / ".log"
         with abjad.Timer() as timer:
             print(" Running LilyPond ...")
-            baca_path = os.getenv("BACA")
-            flags = f"--include={{baca_path}}/lilypond"
+            baca_repo_path = os.getenv("BACA")
+            flags = f"--include={{baca_repo_path}}/lilypond"
+            abjad_repo_path = os.getenv("ABJAD")
+            flags += f" --include={{abjad_repo_path}}/docs/source/_stylesheets"
             abjad.io.run_lilypond(
                 illustration_ly,
                 flags=flags,
