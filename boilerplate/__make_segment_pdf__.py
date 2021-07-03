@@ -214,8 +214,12 @@ if __name__ == "__main__":
         lilypond_log_file_path = illustration_ily.parent / ".log"
         with abjad.Timer() as timer:
             print(" Running LilyPond ...")
+            baca_path = os.getenv("BACA")
+            flags = f"--include={{baca_path}}/lilypond"
             abjad.io.run_lilypond(
-                illustration_ly, lilypond_log_file_path=lilypond_log_file_path
+                illustration_ly,
+                flags=flags,
+                lilypond_log_file_path=lilypond_log_file_path,
             )
         baca.segments.remove_lilypond_warnings(
             lilypond_log_file_path,
