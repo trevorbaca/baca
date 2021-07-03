@@ -42,14 +42,6 @@ gg() {
 }
 export -f gg
 
-yy() {
-    clear;
-    contents_directory=$(find_score_contents_directory)
-    cd ${contents_directory}/stylesheets
-    ls;
-}
-export -f yy
-
 ww() {
     clear;
     contents_directory=$(find_score_contents_directory)

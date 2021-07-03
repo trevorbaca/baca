@@ -145,7 +145,7 @@ trim_score_path() {
     trimmed_path=""
     IFS=/
     for word in $1; do
-        if [[ $word != Users && $word != trevorbaca && $word != Scores ]]; then
+        if [[ $word != Users && $word != $(whoami) && $word != Scores ]]; then
             trimmed_path="$trimmed_path$word/"
         fi
     done

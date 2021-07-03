@@ -5,8 +5,13 @@ if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
 source "$DIR/lib-path-manipulation"
 
-if [ -d /Users/trevorbaca/baca/boilerplate ]; then
-    boilerplate=/Users/trevorbaca/baca/boilerplate
+if [ -z $BACA ]; then
+    echo Must set BACA environment variable ...
+    exit -1
+fi
+
+if [ -d $BACA/boilerplate ]; then
+    boilerplate=$BACA/boilerplate
 else
     # GitHub actions
     boilerplate=/tmp/baca/boilerplate

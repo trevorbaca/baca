@@ -1,7 +1,0 @@
-#! /usr/bin/env bash
-
-source make-segment-pdf
-
-ipm() {
-    make_segment_pdf "$1"
-}
