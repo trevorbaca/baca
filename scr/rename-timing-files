@@ -1,8 +1,0 @@
-#! /usr/bin/env bash
-
-current_directory=$(pwd)
-
-clear;
-for file in $(find . -name .optimization); do
-    git mv $file $(dirname "$file")/.timing
-done

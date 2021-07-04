@@ -1,6 +1,0 @@
-#! /usr/bin/env bash
-
-SECONDS=0
-ack --type-set defpy:match:/definition.py/ --defpy --sort-files $1
-echo
-echo Total time "$SECONDS" seconds.

@@ -1,8 +1,0 @@
-#! /usr/bin/env bash
-
-current_directory=$(pwd)
-
-clear;
-for repo in $(ls -d "$SCORES"/*/); do
-    cd "$repo"; echo $(pwd) ...; git st; echo;
-done

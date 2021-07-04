@@ -1,3 +1,0 @@
-#! /usr/bin/env bash
-
-vim -c "grep '$1' --sort-files --type=python"

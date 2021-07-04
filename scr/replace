@@ -1,5 +1,0 @@
-#! /usr/bin/env bash
-
-
-pattern='s/'$1'/'$2'/g'
-find . -type f -name "*.py" -exec sed -i '' $pattern {} +

@@ -37,3 +37,38 @@ make_layout_ly() {
     echo Removing $(trim_score_path "$maker_target") ...
     rm "$maker_target"
 }
+
+
+# TODO: optional code that can be used to make this script iterate segment directories
+#paths=$(find . -name *layout.py | sort)
+#for path in $paths; do
+#    echo Interpreting $(realpath "$path") ...
+#done
+#path_count=$(echo $paths | wc -w | xargs)
+#
+#if [ 1 -lt $path_count ]; then
+#    prompt="${path_count} files ok?> "
+#    read -p "$prompt" confirm && [[ $confirm == y ]] || exit 1
+#fi
+#echo
+#
+#for path in $paths; do
+#    layout_py_path=$(realpath $path)
+#    directory=$(dirname "$layout_py_path")
+#    filename=$(basename -- "$layout_py_path")
+#    filename="${filename%.*}"
+#    layout_ly_path="$directory"/"$filename".ly
+#    SECONDS=0
+#    make_layout_ly "$layout_py_path"
+#    if [ -f "$layout_ly_path" ]; then
+#        echo Found "$layout_ly_path" ...
+#    else
+#        echo Can not produce "$layout_ly_path" ...
+#    fi
+#    if [ "$SECONDS" -eq 1 ]; then
+#        echo "Total time ${SECONDS} second ..."
+#    else
+#        echo "Total time ${SECONDS} seconds ..."
+#    fi
+#    echo
+#done
