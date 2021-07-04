@@ -97,11 +97,12 @@ jobs:
         NAME=$(basename "$GITHUB_WORKSPACE")
         cd "$GITHUB_WORKSPACE"/"$NAME"/segments
         export PATH=/tmp/baca/scr:${PATH}
-        /tmp/baca/scr/dpc
+        /tmp/baca/scr/check-definition-files
 
     - name: Rerender segments
       run: |
         export PATH=/home/runner/bin:${PATH}
+        export BACA=/tmp/baca
         /tmp/baca/scr/test-rerender-segments "$GITHUB_WORKSPACE"/"$NAME"segments
 
 #    - name: Run pytest
