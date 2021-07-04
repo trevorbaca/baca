@@ -1,5 +1,4 @@
-\include "/Users/trevorbaca/abjad/docs/source/_stylesheets/abjad.ily"
-#(ly:set-option 'relative-includes #t)
+\include "abjad.ily"
 \include "baca-articulations.ily"
 \include "baca-circle-bow-markups.ily"
 \include "baca-coloring.ily"
