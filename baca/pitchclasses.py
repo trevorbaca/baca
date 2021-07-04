@@ -7380,7 +7380,6 @@ class PitchTree(classes.Tree):
         lilypond_file = abjad.LilyPondFile(
             date_time_token=False,
             global_staff_size=global_staff_size,
-            includes=["/Users/trevorbaca/baca/lilypond/baca.ily"],
             items=[preamble, score],
         )
         abjad.override(score).SpacingSpanner.strict_grace_spacing = True
