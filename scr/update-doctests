@@ -10,7 +10,8 @@ def update_file(name):
     """
     Updates file with ``name``
     """
-    output = pathlib.Path("/Users/trevorbaca/.tmp/doctest.out")
+    HOME = os.getenv("HOME")
+    output = pathlib.Path(f"{HOME}/.tmp/doctest.out")
     os.system(f"doctest {name} > {str(output)}")
     file_location_line = None
     got = False

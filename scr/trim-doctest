@@ -11,7 +11,8 @@ else:
     arguments = ""
     print(f"Running trim-doctest ...")
 
-output = pathlib.Path("/Users/trevorbaca/.tmp/doctest.out")
+HOME = os.getenv("HOME")
+output = pathlib.Path(f"{HOME}/.tmp/doctest.out")
 os.system(f"ajv doctest --external-modules=baca -x {arguments} > {str(output)}")
 os.system(f"cat {str(output)}")
 

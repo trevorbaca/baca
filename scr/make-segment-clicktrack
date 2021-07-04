@@ -2,7 +2,7 @@
 
 source lib-path-manipulation
 
-boilerplate=/Users/trevorbaca/baca/boilerplate
+boilerplate=$BACA/boilerplate
 
 make_segment_clicktrack() {
     definition_py_path=$(realpath "$1")

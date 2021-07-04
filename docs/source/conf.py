@@ -104,7 +104,6 @@ uqbar_api_member_documenter_classes = [
 uqbar_book_console_setup = [
     "import abjad",
     "import baca",
-    "import ide",
     "from abjadext import rmakers",
 ]
 uqbar_book_console_teardown = []

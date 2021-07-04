@@ -109,7 +109,8 @@ def _interpret_tex_file(tex):
         executable_name = "pdflatex"
     else:
         executable_name = "xelatex"
-    log = baca.Path("/Users/trevorbaca/.abjad/latex.log")
+    HOME = os.getenv("HOME")
+    log = baca.Path(f"{HOME}/.abjad/latex.log")
     command = f"date > {log};"
     command += f" {executable_name} -halt-on-error"
     command += " -interaction=nonstopmode"
@@ -127,7 +128,7 @@ def _interpret_tex_file(tex):
         print(f"Found {pdf.trim()} ...")
     else:
         print("ERROR IN LATEX LOG FILE ...")
-        log _file= baca.Path("/Users/trevorbaca/.abjad/latex.log")
+        log _file= baca.Path(f"{HOME}/.abjad/latex.log")
         with log_file.open() as file_pointer:
             lines = [_.strip("\n") for _ in file_pointer.readlines()]
         for line in lines:

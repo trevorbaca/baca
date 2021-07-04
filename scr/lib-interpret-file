@@ -36,7 +36,7 @@ interpret_tex() {
 
     echo "Interpreting ${TEX} ..."
 
-    LOG="/Users/trevorbaca/.abjad/latex.log"
+    LOG="$HOME/.abjad/latex.log"
     OPTIONS="-halt-on-error -interaction=nonstopmode --jobname=$1"
 
     date > "$LOG"
