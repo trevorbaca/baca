@@ -1,3 +1,5 @@
+# This workflow is hardlinked into every Bača score directory.
+
 name: CI
 
 on:
@@ -38,7 +40,7 @@ jobs:
       run: |
         lilypond=/tmp/lilypond
         lilypond_url=http://lilypond.org/download/binaries/linux-64/
-        lilypond_source=lilypond-2.21.82-1.linux-64.sh
+        lilypond_source=lilypond-2.23.3-1.linux-64.sh
         wget -q -O $lilypond $lilypond_url/$lilypond_source
         sh $lilypond --batch
 
@@ -56,9 +58,6 @@ jobs:
       run: |
         git clone https://github.com/trevorbaca/baca.git /tmp/baca
         pip install /tmp/baca
-        rm "$GITHUB_WORKSPACE"/Makefile
-        ln -s /tmp/baca/dotfiles/Makefile "$GITHUB_WORKSPACE"/Makefile
-        NAME=$(basename "$GITHUB_WORKSPACE")
 
     - name: Install this score
       run: pip install -e .
@@ -69,7 +68,7 @@ jobs:
     - name: Set scores directory for path management
       run: |
         CFG=~/.abjad/abjad.cfg
-        echo composer_scores_directory = $(dirname "$GITHUB_WORKSPACE") > $CFG
+        echo composer_scores_directory = $(dirname $GITHUB_WORKSPACE) > $CFG
         cat ~/.abjad/abjad.cfg
 
     - name: Log versions
@@ -87,27 +86,27 @@ jobs:
 
     - name: Run doctest
       run: |
-        export PATH=/home/runner/bin:${PATH}
-        /tmp/baca/scr/doctest "$GITHUB_WORKSPACE"
+        export PATH=/home/runner/bin:$PATH
+        /tmp/baca/scr/doctest $GITHUB_WORKSPACE
 
     - name: Check definition files
       run: |
-        NAME=$(basename "$GITHUB_WORKSPACE")
-        cd "$GITHUB_WORKSPACE"/"$NAME"/segments
+        NAME=$(basename $GITHUB_WORKSPACE)
+        cd $GITHUB_WORKSPACE/$NAME/segments
         export PATH=/tmp/baca/scr:${PATH}
         /tmp/baca/scr/check-definition-files
 
     - name: Rerender segments
       run: |
-        export PATH=/home/runner/bin:${PATH}
+        export PATH=/home/runner/bin:$PATH
         export BACA=/tmp/baca
-        NAME=$(basename "$GITHUB_WORKSPACE")
-        /tmp/baca/scr/test-rerender-segments "$GITHUB_WORKSPACE"/"$NAME"/segments
+        NAME=$(basename $GITHUB_WORKSPACE)
+        /tmp/baca/scr/test-rerender-segments $GITHUB_WORKSPACE/$NAME/segments
 
     - name: Run pytest
       run: |
         export PATH=/home/runner/bin:${PATH}
-        NAME=$(basename "$GITHUB_WORKSPACE")
-        if [ -e "$GITHUB_WORKSPACE"/$NAME/test.py ]; then
-            py.test -rf "$GITHUB_WORKSPACE"/$NAME/test.py
+        NAME=$(basename $GITHUB_WORKSPACE)
+        if [ -e $GITHUB_WORKSPACE/$NAME/test.py ]; then
+            py.test -rf $GITHUB_WORKSPACE/$NAME/test.py
         fi
