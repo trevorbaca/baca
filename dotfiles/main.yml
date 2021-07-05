@@ -61,7 +61,7 @@ jobs:
         NAME=$(basename "$GITHUB_WORKSPACE")
         echo "$GITHUB_WORKSPACE"/$NAME/test.py
         rm -f "$GITHUB_WORKSPACE"/$NAME/test.py
-        ln -s /tmp/baca/dotfiles/test_segments.py "$GITHUB_WORKSPACE"/$NAME/test.py
+        # ln -s /tmp/baca/dotfiles/test.py "$GITHUB_WORKSPACE"/$NAME/test.py
 
     - name: Install this score
       run: pip install -e .
