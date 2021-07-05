@@ -71,7 +71,8 @@ jobs:
 
     - name: Set scores directory for path management
       run: |
-        echo composer_scores_directory = $(dirname "$GITHUB_WORKSPACE") > ~/.abjad/abjad.cfg
+        CFG=~/.abjad/abjad.cfg
+        echo composer_scores_directory = $(dirname "$GITHUB_WORKSPACE") > $CFG
         cat ~/.abjad/abjad.cfg
 
     - name: Log versions
@@ -105,19 +106,10 @@ jobs:
         export BACA=/tmp/baca
         /tmp/baca/scr/test-rerender-segments "$GITHUB_WORKSPACE"/"$NAME"segments
 
-#    - name: Run pytest
-#      run: |
-#        export PATH=/home/runner/bin:${PATH}
-#        NAME=$(basename "$GITHUB_WORKSPACE")
-#        if [ -e "$GITHUB_WORKSPACE"/$NAME/test_custom.py ]; then
-#            echo found test_custom.py
-#            py.test -rf "$GITHUB_WORKSPACE"/"$NAME"/test_custom.py
-#        else
-#            echo did NOT find test_custom.py
-#        fi
-#        if [ -e "$GITHUB_WORKSPACE"/$NAME/test.py ]; then
-#            echo found test.py
-#            py.test -rf "$GITHUB_WORKSPACE"/"$NAME"/test.py
-#        else
-#            echo did NOT find test.py
-#        fi
+    - name: Run pytest
+      run: |
+        export PATH=/home/runner/bin:${PATH}
+        NAME=$(basename "$GITHUB_WORKSPACE")
+        if [ -e "$GITHUB_WORKSPACE"/$NAME/test_custom.py ]; then
+            py.test -rf "$GITHUB_WORKSPACE"/"$NAME"/test_custom.py
+        fi
