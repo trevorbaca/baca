@@ -1,3 +1,5 @@
+# This makefile is hardlinked into every Bača score directory.
+
 black-check:
 	black --check --diff --target-version=py38 .
 
@@ -41,9 +43,6 @@ isort-reformat:
 	--use-parentheses \
 	.
 
-mypy:
-	mypy .
-
 reformat:
 	make black-reformat
 	make isort-reformat
@@ -52,11 +51,8 @@ check:
 	make black-check
 	make flake8
 	make isort-check
-	# teach mypy to iterate segment directories individually
-	# make mypy
 
 test:
 	make black-check
 	make flake8
 	make isort-check
-	make mypy
