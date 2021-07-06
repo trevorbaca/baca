@@ -129,6 +129,9 @@ jobs:
         echo Contents directory is "$contents_directory"
         segments_directory="$contents_directory"/segments
         echo Segments directory is "$segments_directory"
+        if [ ! -d "$segments_directory"/01 ]; then
+            exit 0
+        fi
         segment_directories=$(ls -d "$segments_directory"/[0-9]*)
         for segment_directory in $segment_directories; do
             echo Segment directory "$segment_directory" ...
