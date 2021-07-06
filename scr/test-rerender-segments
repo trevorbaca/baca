@@ -1,5 +1,10 @@
 #! /usr/bin/env bash
 
+if [ -z $BACA ]; then
+    echo Must set BACA environment variable to local Bača repo ...
+    exit -1
+fi
+
 DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
@@ -31,7 +36,7 @@ for segment_directory in $segment_directories; do
     current_directory=$(pwd)
     cd "$segment_directory"
     echo Calling make_segment_pdf ...
-    make_segment_pdf --do-not-open
+    $BACA/scr/make_segment_pdf --do-not-open
     echo Done with make_segment_pdf ...
     cd "$current_directory"
     if [ -f "$illustration_ly" ]; then
