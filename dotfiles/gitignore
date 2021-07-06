@@ -1,4 +1,4 @@
-# This gitignore file is hardlinked into every Bača score directory.
+# This gitignore file is copied into every Bača score directory.
 
 # Byte-compiled objects
 *.py[cod]

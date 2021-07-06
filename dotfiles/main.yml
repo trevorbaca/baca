@@ -1,4 +1,4 @@
-# This workflow is hardlinked into every Bača score directory.
+# This workflow is copied into every Bača score directory.
 
 name: CI
 
@@ -57,7 +57,8 @@ jobs:
     - name: Install Bača
       run: |
         git clone https://github.com/trevorbaca/baca.git /tmp/baca
-        pip install /tmp/baca
+        # -e to make sure baca/boilerplate directory is copied
+        pip install -e /tmp/baca
 
     - name: Install this score
       run: pip install -e .

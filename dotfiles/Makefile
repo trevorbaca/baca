@@ -1,4 +1,4 @@
-# This makefile is hardlinked into every Bača score directory.
+# This makefile is copied into every Bača score directory.
 
 black-check:
 	black --check --diff --target-version=py38 .
