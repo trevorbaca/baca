@@ -50,6 +50,7 @@ def _display_lilypond_log_errors(lilypond_log_file_path=None):
             print(line)
 
 
+# TODO: replace?
 def _interpret_file(path):
     path = baca.Path(path)
     if not path.exists():
@@ -86,7 +87,7 @@ def _interpret_file(path):
     return stdout_lines, stderr_lines, exit_code
 
 
-def _interpret_tex_file(tex):
+def _interpret_tex_file(tex, open_after=False):
     if not tex.is_file():
         print(f"Can not find {tex.trim()} ...")
         return
@@ -120,6 +121,8 @@ def _interpret_tex_file(tex):
             path.remove()
     if pdf.is_file():
         print(f"Found {pdf.trim()} ...")
+        if open_after:
+            os.system(f"open {pdf}")
     else:
         print(f"Can not produce {pdf.trim()} ...")
         sys.exit(-1)
@@ -146,7 +149,7 @@ def _make_layout_ly(path):
     pycache.remove()
 
 
-def _run_lilypond(ly_file_path, indent=0):
+def _run_lilypond(ly_file_path):
     assert ly_file_path.exists()
     if not abjad.io.find_executable("lilypond"):
         raise ValueError("cannot find LilyPond executable.")
