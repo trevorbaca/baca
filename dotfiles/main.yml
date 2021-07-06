@@ -95,7 +95,20 @@ jobs:
         NAME=$(basename $GITHUB_WORKSPACE)
         cd $GITHUB_WORKSPACE/$NAME/segments
         export PATH=/tmp/baca/scr:${PATH}
-        /tmp/baca/scr/check-definition-files
+        RC=0
+        for path in $(find . -name definition.py | sort); do
+            echo -n "Checking $path ... "
+            SECONDS=0
+            python $path 1>/dev/null 2>&1
+            if [ $? -eq 0 ]; then
+                echo OK "($SECONDS sec.)"
+            else
+                RC=1
+                echo FAIL "($SECONDS sec.)"
+            fi
+        done
+        echo
+        exit $RC
 
     - name: Rerender segments
       run: |
