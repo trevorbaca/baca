@@ -130,6 +130,7 @@ jobs:
         segments_directory="$contents_directory"/segments
         echo Segments directory is "$segments_directory"
         if [ ! -d "$segments_directory"/01 ]; then
+            echo Score contains no segments ...
             exit 0
         fi
         segment_directories=$(ls -d "$segments_directory"/[0-9]*)
