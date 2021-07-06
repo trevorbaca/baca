@@ -10,6 +10,22 @@ import baca
 abjad_configuration = abjad.Configuration()
 
 
+# lilypond.org/doc/v2.19/Documentation/notation/predefined-paper-sizes
+paper_size_to_paper_dimensions = {
+    "a3": "297 x 420 mm",
+    "a4": "210 x 297 mm",
+    "arch a": "9 x 12 in",
+    "arch b": "12 x 18 in",
+    "arch c": "18 x 24 in",
+    "arch d": "24 x 36 in",
+    "arch e": "36 x 48 in",
+    "legal": "8.5 x 14 in",
+    "ledger": "17 x 11 in",
+    "letter": "8.5 x 11 in",
+    "tabloid": "11 x 17 in",
+}
+
+
 def _collect_segment_lys(directory):
     paths = directory.segments.list_paths()
     names = [_.name for _ in paths]
@@ -333,3 +349,17 @@ def _run_lilypond(ly_file_path):
         else:
             print(f"Can not produce {pdf.trim()} ...")
         assert lilypond_log_file_path.exists()
+
+
+def _to_paper_dimensions(paper_size, orientation="portrait"):
+    orientations = ("landscape", "portrait", None)
+    assert orientation in orientations, repr(orientation)
+    paper_dimensions = paper_size_to_paper_dimensions[paper_size]
+    paper_dimensions = paper_dimensions.replace(" x ", " ")
+    width, height, unit = paper_dimensions.split()
+    if orientation == "landscape":
+        height_ = width
+        width_ = height
+        height = height_
+        width = width_
+    return width, height, unit

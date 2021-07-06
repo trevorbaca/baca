@@ -1,8 +1,0 @@
-#! /usr/bin/env bash
-
-LILYPOND="/Applications/LilyPond.app/Contents/Resources/bin/lilypond"
-
-${LILYPOND} \
-    --include=$ABJAD/docs/source/_stylesheets \
-    --include=$BACA/lilypond \
-    -dno-point-and-click $1
