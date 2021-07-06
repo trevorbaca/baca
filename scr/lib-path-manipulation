@@ -6,6 +6,7 @@ find_score_contents_directory() {
     package_name=$(IFS=/; echo "${dirs[*]:0:1}")
     echo ${SCORES}/${package_name}/${package_name}
 }
+export -f find_score_contents_directory
 
 get_next_score() {
     package_subtree=${1#$SCORES/}
@@ -136,6 +137,7 @@ go_to_score() {
     cd ${contents};
     ls
 }
+export -f go_to_score
 
 realpath() {
     [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
