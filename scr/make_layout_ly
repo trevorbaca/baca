@@ -1,0 +1,34 @@
+#! /usr/bin/env python
+import os
+import shutil
+import sys
+
+import helpers
+
+import abjad
+import baca
+
+for string in sys.argv[1:]:
+    if string.startswith("--layout-py="):
+        layout_py = string[12:]
+        layout_py = baca.Path(layout_py)
+        break
+else:
+    directory = os.getcwd()
+    directory = baca.Path(directory)
+    layout_py = directory / "layout.py"
+directory = layout_py.parent
+if not (directory.is_segment() or directory.is_segments()):
+    print("Must call script in segment or segments directory ...")
+    sys.exit(-1)
+
+if directory.is_segment():
+    helpers._make_layout_ly(layout_py)
+else:
+    paths = directory.list_paths()
+    paths = [_ for _ in paths if _.is_dir()]
+    for i, path in enumerate(paths):
+        layout_py = path / "layout.py"
+        helpers._make_layout_ly(layout_py)
+        if i + 1 < len(paths):
+            print()

@@ -95,7 +95,7 @@ else:
     paths = directory.list_paths()
     paths = [_ for _ in paths if _.is_dir()]
     for i, path in enumerate(paths):
-        exit_ = _make_segment_pdf(path, open_after=False)
+        _make_segment_pdf(path, open_after=False)
         if i + 1 < len(paths):
             print()
         else:

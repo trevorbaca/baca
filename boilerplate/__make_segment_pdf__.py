@@ -178,7 +178,7 @@ if __name__ == "__main__":
                     message += " layout time signatures ..."
                     print(message)
                     print(f" Remaking {{layout_ly.trim()}} ...")
-                    os.system(f"make-layout-ly {{layout_py}}")
+                    os.system(f"make_layout_ly --layout-py={{layout_py}}")
                     counter = abjad.String("measure").pluralize(measure_count)
                     message = f" Found {{measure_count}} {{counter}}"
                     message += f" in {{illustration_ly.trim()}} ..."
