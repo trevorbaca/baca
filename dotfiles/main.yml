@@ -90,6 +90,14 @@ jobs:
         export PATH=/home/runner/bin:$PATH
         /tmp/baca/scr/doctest $GITHUB_WORKSPACE
 
+    - name: Run pytest
+      run: |
+        export PATH=/home/runner/bin:${PATH}
+        NAME=$(basename $GITHUB_WORKSPACE)
+        if [ -e $GITHUB_WORKSPACE/$NAME/test.py ]; then
+            py.test -rf $GITHUB_WORKSPACE/$NAME/test.py
+        fi
+
     - name: Check definition files
       run: |
         NAME=$(basename $GITHUB_WORKSPACE)
@@ -160,7 +168,7 @@ jobs:
                 diff -I '^\\version' "$illustration_ly" "$illustration_old_ly"
                 exit -1
             fi
-            differences=$(diff -I '^\\version' "$illustration_ily" "$illustration_old_ily")
+            differences=$(diff -I '^\\version' $illustration_ily $illustration_old_ily)
             if [ -z "$differences" ]; then
                 echo Found matching illustration.ily files ...
             else
@@ -170,11 +178,3 @@ jobs:
             fi
             echo
         done
-
-    - name: Run pytest
-      run: |
-        export PATH=/home/runner/bin:${PATH}
-        NAME=$(basename $GITHUB_WORKSPACE)
-        if [ -e $GITHUB_WORKSPACE/$NAME/test.py ]; then
-            py.test -rf $GITHUB_WORKSPACE/$NAME/test.py
-        fi
