@@ -2483,7 +2483,7 @@ def remove_lilypond_warnings(
     """
     Removes LilyPond warnings from ``.log``.
     """
-    assert path.name == ".log", repr(path)
+    assert path.name.endswith(".log"), repr(path)
     lines = []
     skip = 0
     with open(path) as pointer:

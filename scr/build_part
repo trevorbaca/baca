@@ -11,181 +11,10 @@ import shutil
 import subprocess
 import sys
 
+import helpers
+
 import abjad
 import baca
-from baca import path as _path
-from baca import segments as _segments
-
-
-# TODO: externalize
-def _copy_boilerplate(directory, source_name, target_name=None, values=None):
-    target_name = target_name or source_name
-    target = directory / target_name
-    if target.exists():
-        print(f"Removing {target.trim()} ...")
-    print(f"Writing {target.trim()} ...")
-    values = values or {}
-    boilerplate = _path.Path(baca.__file__).parent.parent / "boilerplate"
-    source = boilerplate / source_name
-    target_name = target_name or source_name
-    target = directory / target_name
-    shutil.copyfile(str(source), str(target))
-    if not values:
-        return
-    template = target.read_text()
-    template = template.format(**values)
-    target.write_text(template)
-
-
-# TODO: externalize
-def _display_lilypond_log_errors(log=None):
-    if log is None:
-        log = abjad_configuration.lilypond_log_file_path
-    log = _path.Path(log)
-    with log.open() as file_pointer:
-        lines = file_pointer.readlines()
-    for line in lines:
-        if (
-            "fatal" in line
-            or ("error" in line and "programming error" not in line)
-            or "failed" in line
-        ):
-            print("ERROR IN LILYPOND LOG FILE ...")
-            break
-
-
-# TODO: externalize
-def _interpret_file(path):
-    path = _path.Path(path)
-    if not path.exists():
-        print(f"Missing {path} ...")
-    if path.suffix == ".py":
-        command = f"python {path}"
-    elif path.suffix == ".ly":
-        command = f"lilypond -dno-point-and-click {path}"
-    else:
-        message = f"can not interpret {path}."
-        raise Exception(message)
-    directory = path.parent
-    directory = abjad.TemporaryDirectoryChange(directory)
-    string_buffer = io.StringIO()
-    with directory, string_buffer:
-        process = subprocess.Popen(
-            command,
-            shell=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-        )
-        for line in process.stdout:
-            line = line.decode("utf-8")
-            print(line, end="")
-            string_buffer.write(line)
-        process.wait()
-        stdout_lines = string_buffer.getvalue().splitlines()
-        stderr_lines = abjad.io._read_from_pipe(process.stderr)
-        stderr_lines = stderr_lines.splitlines()
-    exit_code = process.returncode
-    if path.suffix == ".ly":
-        log = directory / ".log"
-        _display_lilypond_log_errors(log=log)
-    return stdout_lines, stderr_lines, exit_code
-
-
-# TODO: externalize
-def _interpret_tex_file(tex):
-    if not tex.is_file():
-        print(f"Can not find {tex.trim()} ...")
-        return
-    pdf = tex.with_suffix(".pdf")
-    if pdf.exists():
-        print(f"Removing {pdf.trim()} ...")
-        pdf.remove()
-    print(f"Interpreting {tex.trim()} ...")
-    if not tex.is_file():
-        return
-    executables = abjad.io.find_executable("xelatex")
-    executables = [_path.Path(_) for _ in executables]
-    if not executables:
-        executable_name = "pdflatex"
-    else:
-        executable_name = "xelatex"
-    HOME = os.getenv("HOME")
-    log = baca.Path(f"{HOME}/.abjad/latex.log")
-    command = f"date > {log};"
-    command += f" {executable_name} -halt-on-error"
-    command += " -interaction=nonstopmode"
-    command += f" --jobname={tex.stem}"
-    command += f" -output-directory={tex.parent} {tex}"
-    command += f" >> {log} 2>&1"
-    command_called_twice = f"{command}; {command}"
-    with abjad.TemporaryDirectoryChange(directory=tex.parent):
-        abjad.io.spawn_subprocess(command_called_twice)
-        for path in sorted(tex.parent.glob("*.aux")):
-            path.remove()
-        for path in sorted(tex.parent.glob("*.log")):
-            path.remove()
-    if pdf.is_file():
-        print(f"Found {pdf.trim()} ...")
-    else:
-        print("ERROR IN LATEX LOG FILE ...")
-        log _file= baca.Path(f"{HOME}/.abjad/latex.log")
-        with log_file.open() as file_pointer:
-            lines = [_.strip("\n") for _ in file_pointer.readlines()]
-        for line in lines:
-            print(line)
-
-
-# TODO: externalize?
-def _make_layout_ly(path):
-    assert path.suffix == ".py"
-    maker = "__make_layout_ly__.py"
-    maker = path.parent / maker
-    with abjad.FilesystemState(remove=[maker]):
-        _copy_boilerplate(
-            path.parent,
-            maker.name,
-            values={"layout_module_name": path.stem},
-        )
-        print(f"Interpreting {maker.trim()} ...")
-        result = _interpret_file(maker)
-        print(f"Removing {maker.trim()} ...")
-    stdout_lines, stderr_lines, exit_code = result
-    if exit_code:
-        for string in stderr_lines:
-            print(string)
-
-
-# TODO: externalize
-def _run_lilypond(ly, indent=0):
-    assert ly.exists()
-    if not abjad.io.find_executable("lilypond"):
-        raise ValueError("cannot find LilyPond executable.")
-    print(f"Running LilyPond on {ly.trim()} ...")
-    directory = ly.parent
-    pdf = ly.with_suffix(".pdf")
-    backup_pdf = ly.with_suffix("._backup.pdf")
-    log = directory / ".log"
-    if backup_pdf.exists():
-        backup_pdf.remove()
-    if pdf.exists():
-        print(f" Removing {pdf.trim()} ...")
-        pdf.remove()
-    assert not pdf.exists()
-    with abjad.TemporaryDirectoryChange(directory=directory):
-        print(f" Interpreting {ly.trim()} ...")
-        abjad.io.run_lilypond(str(ly), lilypond_log_file_path=str(log))
-        _segments.remove_lilypond_warnings(
-            log,
-            crescendo_too_small=True,
-            decrescendo_too_small=True,
-            overwriting_glissando=True,
-        )
-        _display_lilypond_log_errors(log=log)
-        if pdf.is_file():
-            print(f" Found {pdf.trim()} ...")
-        else:
-            print(f" Can not produce {pdf.trim()} ...")
-
 
 for string in sys.argv[1:]:
     if string.startswith("--directory="):
@@ -201,7 +30,7 @@ if not directory.is_part():
 
 file_name = directory.name + "-music.ly"
 path = directory / file_name
-part = _segments.path_to_part(path)
+part = baca.segments.path_to_part(path)
 dashed_part_name = abjad.String(part.name).to_dash_case()
 part_directory = directory
 part_pdf_path = part_directory / dashed_part_name
@@ -210,28 +39,28 @@ print(f"Building {part_pdf_path.trim()} ...")
 snake_part_name = abjad.String(part.name).to_snake_case()
 file_name = f"{snake_part_name}_layout.py"
 path = part_directory / file_name
-_make_layout_ly(path)
+helpers._make_layout_ly(path)
 print()
 file_name = f"{dashed_part_name}-front-cover.tex"
 path = part_directory / file_name
-_interpret_tex_file(path)
+helpers._interpret_tex_file(path)
 print()
 file_name = f"{dashed_part_name}-preface.tex"
 path = part_directory / file_name
-_interpret_tex_file(path)
+helpers._interpret_tex_file(path)
 print()
 file_name = f"{dashed_part_name}-music.ly"
 path = part_directory / file_name
-_run_lilypond(path)
+LOG = part_directory / "lilypond.log"
+helpers._run_lilypond(path)
 print()
 file_name = f"{dashed_part_name}-back-cover.tex"
 path = part_directory / file_name
-_interpret_tex_file(path)
+helpers._interpret_tex_file(path)
 print()
 file_name = f"{dashed_part_name}-part.tex"
 path = part_directory / file_name
-_interpret_tex_file(path)
-
+helpers._interpret_tex_file(path)
 if "--do-not-open" not in sys.argv[1:]:
     file_name = f"{dashed_part_name}-part.pdf"
     path = part_directory / file_name

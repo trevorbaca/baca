@@ -90,7 +90,6 @@ pairs = _collect_segment_lys(directory.build)
 if not pairs:
     print("... no segment lys found.")
     sys.exit(1)
-# _make__assets_directory(directory.build)
 _make__segments_directory(directory.build)
 
 fermata_measure_numbers = abjad.OrderedDict()
