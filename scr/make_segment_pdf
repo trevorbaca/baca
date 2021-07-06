@@ -65,7 +65,8 @@ def _make_segment_pdf(directory, layout=True, open_after=True):
         sys.exit(exit_code)
     if pdf.is_file() and open_after:
         os.system(f"open {pdf}")
-
+    __pycache__ = directory / "__pycache__"
+    __pycache__.remove()
 
 
 for string in sys.argv[1:]:
@@ -79,11 +80,17 @@ if not (directory.is_segment() or directory.is_segments()):
     print("Must call script in segment or segments directory ...")
     sys.exit(-1)
 
-
 if directory.is_segment():
-    _make_segment_pdf(directory)
+    if "--do-not-open" in sys.argv[1:]:
+        open_after = False
+    else:
+        open_after = True
+    _make_segment_pdf(directory, open_after=open_after)
 else:
     assert directory.is_segments()
+    if "--do-not-open" in sys.argv[1:]:
+        print("Use --do-not-open only in segment directory ...")
+        sys.exit(-1)
     exit = 0
     paths = directory.list_paths()
     paths = [_ for _ in paths if _.is_dir()]

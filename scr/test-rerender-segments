@@ -4,7 +4,6 @@ DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
 source "$DIR/lib-path-manipulation"
-source "$DIR/make-segment-pdf"
 
 package_name=$(basename "$GITHUB_WORKSPACE")
 wrapper_directory="$GITHUB_WORKSPACE"
