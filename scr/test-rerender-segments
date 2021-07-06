@@ -8,8 +8,6 @@ fi
 DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
-source "$DIR/lib-path-manipulation"
-
 package_name=$(basename "$GITHUB_WORKSPACE")
 wrapper_directory="$GITHUB_WORKSPACE"
 echo Wrapper directory is "$wrapper_directory"
