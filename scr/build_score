@@ -5,60 +5,10 @@ import shutil
 import subprocess
 import sys
 
+import helpers
+
 import abjad
 import baca
-
-# lilypond.org/doc/v2.19/Documentation/notation/predefined-paper-sizes
-paper_size_to_paper_dimensions = {
-    "a3": "297 x 420 mm",
-    "a4": "210 x 297 mm",
-    "arch a": "9 x 12 in",
-    "arch b": "12 x 18 in",
-    "arch c": "18 x 24 in",
-    "arch d": "24 x 36 in",
-    "arch e": "36 x 48 in",
-    "legal": "8.5 x 14 in",
-    "ledger": "17 x 11 in",
-    "letter": "8.5 x 11 in",
-    "tabloid": "11 x 17 in",
-}
-
-
-# TODO: externalize
-def _copy_boilerplate(directory, source_name, target_name=None, values=None):
-    target_name = target_name or source_name
-    target = directory / target_name
-    if target.exists():
-        print(f"Removing {target.trim()} ...")
-    print(f"Writing {target.trim()} ...")
-    values = values or {}
-    boilerplate = baca.Path(baca.__file__).parent.parent / "boilerpate"
-    source = boilerplate / source_name
-    target_name = target_name or source_name
-    target = directory / target_name
-    shutil.copyfile(str(source), str(target))
-    if not values:
-        return
-    template = target.read_text()
-    template = template.format(**values)
-    target.write_text(template)
-
-
-# TODO: externalize
-def _display_lilypond_log_errors(log=None):
-    if log is None:
-        log = abjad_configuration.lilypond_log_file_path
-    log = baca.Path(log)
-    with log.open() as file_pointer:
-        lines = file_pointer.readlines()
-    for line in lines:
-        if (
-            "fatal" in line
-            or ("error" in line and "programming error" not in line)
-            or "failed" in line
-        ):
-            print("ERROR IN LILYPOND LOG FILE ...")
-            break
 
 
 def _generate_document(path):
@@ -66,7 +16,7 @@ def _generate_document(path):
     values = {}
     paper_size = directory.get_metadatum("paper_size", "letter")
     orientation = directory.get_metadatum("orientation")
-    paper_size = _to_paper_dimensions(paper_size, orientation)
+    paper_size = helpers._to_paper_dimensions(paper_size, orientation)
     width, height, unit = paper_size
     paper_size = f"{{{width}{unit}, {height}{unit}}}"
     values["paper_size"] = paper_size
@@ -78,65 +28,7 @@ def _generate_document(path):
         values["dashed_part_name"] = dashed_part_name
     else:
         raise ValueError(path.name)
-    _copy_boilerplate(directory, name, target_name=path.name, values=values)
-
-
-# TODO: externalize
-def _interpret_tex_file(tex):
-    if not tex.is_file():
-        print(f"Can not find {tex.trim()} ...")
-        return
-    pdf = tex.with_suffix(".pdf")
-    if pdf.exists():
-        print(f"Removing {pdf.trim()} ...")
-        pdf.remove()
-    print(f"Interpreting {tex.trim()} ...")
-    if not tex.is_file():
-        return
-    executables = abjad.io.find_executable("xelatex")
-    executables = [baca.Path(_) for _ in executables]
-    if not executables:
-        executable_name = "pdflatex"
-    else:
-        executable_name = "xelatex"
-    HOME = os.getenv("HOME")
-    log = baca.Path(f"{HOME}/.abjad/latex.log")
-    command = f"date > {log};"
-    command += f" {executable_name} -halt-on-error"
-    command += " -interaction=nonstopmode"
-    command += f" --jobname={tex.stem}"
-    command += f" -output-directory={tex.parent} {tex}"
-    command += f" >> {log} 2>&1"
-    command_called_twice = f"{command}; {command}"
-    with abjad.TemporaryDirectoryChange(directory=tex.parent):
-        abjad.io.spawn_subprocess(command_called_twice)
-        for path in sorted(tex.parent.glob("*.aux")):
-            path.remove()
-        for path in sorted(tex.parent.glob("*.log")):
-            path.remove()
-    if pdf.is_file():
-        print(f"Found {pdf.trim()} ...")
-    else:
-        print("ERROR IN LATEX LOG FILE ...")
-        log_file = baca.Path(f"{HOME}/.abjad/latex.log")
-        with log_file.open() as file_pointer:
-            lines = [_.strip("\n") for _ in file_pointer.readlines()]
-        for line in lines:
-            print(line)
-
-
-def _to_paper_dimensions(paper_size, orientation="portrait"):
-    orientations = ("landscape", "portrait", None)
-    assert orientation in orientations, repr(orientation)
-    paper_dimensions = paper_size_to_paper_dimensions[paper_size]
-    paper_dimensions = paper_dimensions.replace(" x ", " ")
-    width, height, unit = paper_dimensions.split()
-    if orientation == "landscape":
-        height_ = width
-        width_ = height
-        height = height_
-        width = width_
-    return width, height, unit
+    helpers._copy_boilerplate(directory, name, target_name=path.name, values=values)
 
 
 for string in sys.argv[1:]:
@@ -157,7 +49,7 @@ print()
 tex = directory.build / "front-cover.tex"
 pdf = directory.build / "front-cover.pdf"
 if tex.is_file():
-    _interpret_tex_file(directory.build / "front-cover.tex")
+    helpers._interpret_tex_file(directory.build / "front-cover.tex")
 elif pdf.is_file():
     print(f"Using existing {pdf.trim()} ...")
 else:
@@ -167,7 +59,7 @@ print()
 tex = directory.build / "preface.tex"
 pdf = directory.build / "preface.pdf"
 if tex.is_file():
-    _interpret_tex_file(directory.build / "preface.tex")
+    helpers._interpret_tex_file(directory.build / "preface.tex")
 elif pdf:
     print(f"Using existing {pdf.trim()} ...")
 else:
@@ -177,7 +69,7 @@ print()
 tex = directory.build / "back-cover.tex"
 pdf = directory.build / "back-cover.pdf"
 if tex.is_file():
-    _interpret_tex_file(directory.build / "back-cover.tex")
+    helpers._interpret_tex_file(directory.build / "back-cover.tex")
 elif pdf.is_file():
     print(f"Using existing {pdf.trim()} ...")
 else:
@@ -188,7 +80,7 @@ print("Generating score ...")
 path = directory.build / "score.tex"
 _generate_document(path)
 print()
-_interpret_tex_file(path)
+helpers._interpret_tex_file(path)
 score_pdf = directory.build / "score.pdf"
 print(f"Opening {score_pdf.trim()} ...")
 os.system(f"open {score_pdf}")
