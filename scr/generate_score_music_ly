@@ -2,31 +2,10 @@
 import os
 import shutil
 
+import helpers
+
 import abjad
 import baca
-from baca import path as _path
-from baca import segments as _segments
-
-
-# TODO: externalize to copy_boilerplate script
-def _copy_boilerplate(directory, source_name, target_name=None, values=None):
-    target_name = target_name or source_name
-    target = directory / target_name
-    if target.exists():
-        print(f"Removing {target.trim()} ...")
-    print(f"Writing {target.trim()} ...")
-    values = values or {}
-    boilerplate = _path.Path(baca.__file__).parent.parent / "boilerplate"
-    source = boilerplate / source_name
-    target_name = target_name or source_name
-    target = directory / target_name
-    shutil.copyfile(str(source), str(target))
-    if not values:
-        return
-    template = target.read_text()
-    template = template.format(**values)
-    target.write_text(template)
-
 
 directory = os.getcwd()
 directory = baca.Path(directory)
@@ -47,7 +26,7 @@ for segment in segments:
         continue
     print(f"Examining {segment.trim()} ...")
 names = [_.stem.replace("_", "-") for _ in segments]
-score_skeleton = _segments.score_skeleton(path)
+score_skeleton = baca.segments.score_skeleton(path)
 if score_skeleton is None:
     boilerplate = "score-music.ly"
 else:
@@ -56,7 +35,7 @@ else:
     lines = text.split("\n")
     lines = [lines[0]] + [8 * " " + _ for _ in lines[1:]]
     score_skeleton = "\n".join(lines)
-_copy_boilerplate(path.build, boilerplate, target_name=path.name)
+helpers._copy_boilerplate(path.build, boilerplate, target_name=path.name)
 lines, ily_lines = [], []
 for i, name in enumerate(names):
     name = "segment-" + name + ".ly"

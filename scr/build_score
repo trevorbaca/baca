@@ -7,8 +7,6 @@ import sys
 
 import abjad
 import baca
-from baca import path as _path
-from baca import segments as _segments
 
 # lilypond.org/doc/v2.19/Documentation/notation/predefined-paper-sizes
 paper_size_to_paper_dimensions = {
@@ -34,7 +32,7 @@ def _copy_boilerplate(directory, source_name, target_name=None, values=None):
         print(f"Removing {target.trim()} ...")
     print(f"Writing {target.trim()} ...")
     values = values or {}
-    boilerplate = _path.Path(baca.__file__).parent.parent / "boilerpate"
+    boilerplate = baca.Path(baca.__file__).parent.parent / "boilerpate"
     source = boilerplate / source_name
     target_name = target_name or source_name
     target = directory / target_name
@@ -50,7 +48,7 @@ def _copy_boilerplate(directory, source_name, target_name=None, values=None):
 def _display_lilypond_log_errors(log=None):
     if log is None:
         log = abjad_configuration.lilypond_log_file_path
-    log = _path.Path(log)
+    log = baca.Path(log)
     with log.open() as file_pointer:
         lines = file_pointer.readlines()
     for line in lines:
@@ -96,7 +94,7 @@ def _interpret_tex_file(tex):
     if not tex.is_file():
         return
     executables = abjad.io.find_executable("xelatex")
-    executables = [_path.Path(_) for _ in executables]
+    executables = [baca.Path(_) for _ in executables]
     if not executables:
         executable_name = "pdflatex"
     else:

@@ -10,6 +10,23 @@ import baca
 abjad_configuration = abjad.Configuration()
 
 
+def _collect_segment_lys(directory):
+    paths = directory.segments.list_paths()
+    names = [_.name for _ in paths]
+    sources, targets = [], []
+    for name in names:
+        source = directory.segments / name / "illustration.ly"
+        if not source.is_file():
+            continue
+        target = "segment-" + name.replace("_", "-") + ".ly"
+        target = directory._segments / target
+        sources.append(source)
+        targets.append(target)
+    if not directory.builds.is_dir():
+        directory.builds.mkdir()
+    return zip(sources, targets)
+
+
 def _copy_boilerplate(directory, source_name, target_name=None, values=None):
     target_name = target_name or source_name
     target = directory / target_name
@@ -48,6 +65,95 @@ def _display_lilypond_log_errors(lilypond_log_file_path=None):
     if error:
         for line in lines[:10]:
             print(line)
+
+
+def _generate_part_music_ly(
+    path,
+    dashed_part_name=None,
+    forces_tagline=None,
+    keep_with_tag=None,
+    part=None,
+    part_subtitle=None,
+):
+    assert path.build.exists(), repr(path)
+    print(f"Generating {path.trim()} ...")
+    if path.exists():
+        print(f"Removing {path.trim()} ...")
+        path.remove()
+    segments = path.segments.list_paths()
+    if not segments:
+        print("No segments found ...")
+    for segment in segments:
+        if not segment.is_segment():
+            continue
+        message = f"examining {segment.trim()} ..."
+        print(message)
+    names = [_.stem.replace("_", "-") for _ in segments]
+    boilerplate = "part-music.ly"
+    _copy_boilerplate(path.build, boilerplate, target_name=path.name)
+    lines, ily_lines = [], []
+    for i, name in enumerate(names):
+        name = "segment-" + name + ".ly"
+        ly = path.build._segments / name
+        if ly.is_file():
+            line = rf'\include "../_segments/{name}"'
+        else:
+            line = rf'%\include "../_segments/{name}"'
+        ily_lines.append(line.replace(".ly", ".ily"))
+        if 0 < i:
+            line = 8 * " " + line
+        lines.append(line)
+    if lines:
+        segment_ily_include_statements = "\n".join(ily_lines)
+    else:
+        segment_ily_include_statements = ""
+    language_token = abjad.LilyPondLanguageToken()
+    lilypond_language_directive = abjad.lilypond(language_token)
+    version_token = abjad.LilyPondVersionToken()
+    lilypond_version_directive = abjad.lilypond(version_token)
+    annotated_title = path.contents.get_title(year=True)
+    if annotated_title:
+        score_title = annotated_title
+    else:
+        score_title = path.contents.get_title(year=False)
+    score_title_without_year = path.contents.get_title(year=False)
+    if forces_tagline is None:
+        string = "forces_tagline"
+        forces_tagline = path.contents.get_metadatum(string, "")
+    if forces_tagline:
+        forces_tagline = forces_tagline.replace("\\", "")
+    assert path.is_file(), repr(path)
+    template = path.read_text()
+    if path.parent.is_part():
+        identifiers = baca.segments.global_skip_identifiers(path)
+        identifiers = ["\\" + _ for _ in identifiers]
+        newline = "\n" + 24 * " "
+        global_skip_identifiers = newline.join(identifiers)
+        dictionary = _make_container_to_part_assignment(path)
+        identifiers = baca.segments.part_to_identifiers(path, part, dictionary)
+        if isinstance(identifiers, str):
+            print(identifiers + " ...")
+            message = f"removing {path.trim()} ..."
+            print(message)
+            path.remove()
+            return
+        identifiers = ["\\" + _ for _ in identifiers]
+        newline = "\n" + 24 * " "
+        segment_ly_include_statements = newline.join(identifiers)
+        template = template.format(
+            dashed_part_name=dashed_part_name,
+            forces_tagline=forces_tagline,
+            global_skip_identifiers=global_skip_identifiers,
+            lilypond_language_directive=lilypond_language_directive,
+            lilypond_version_directive=lilypond_version_directive,
+            part_identifier=repr(part.identifier),
+            part_subtitle=part_subtitle,
+            score_title=score_title,
+            score_title_without_year=score_title_without_year,
+            segment_ily_include_statements=segment_ily_include_statements,
+            segment_ly_include_statements=segment_ly_include_statements,
+        )
+    path.write_text(template)
 
 
 # TODO: replace?
@@ -128,6 +234,22 @@ def _interpret_tex_file(tex, open_after=False):
         sys.exit(-1)
 
 
+def _make_container_to_part_assignment(directory):
+    pairs = _collect_segment_lys(directory.build)
+    if not pairs:
+        print("... no segment lys found.")
+        return
+    container_to_part_assignment = abjad.OrderedDict()
+    for source, target in pairs:
+        segment = source.parent
+        value = segment.get_metadatum(
+            "container_to_part_assignment", file_name="__persist__.py"
+        )
+        if value:
+            container_to_part_assignment[segment.name] = value
+    return container_to_part_assignment
+
+
 def _make_layout_ly(path):
     assert path.suffix == ".py"
     maker = "__make_layout_ly__.py"
@@ -147,6 +269,23 @@ def _make_layout_ly(path):
             print(string)
     pycache = path.parent / "__pycache__"
     pycache.remove()
+
+
+def _part_subtitle(part_name, parentheses=False):
+    words = abjad.String(part_name).delimit_words()
+    number = None
+    try:
+        number = int(words[-1])
+    except ValueError:
+        pass
+    if number is not None:
+        if parentheses:
+            words[-1] = f"({number})"
+        else:
+            words[-1] = str(number)
+    words = [_.lower() for _ in words]
+    part_subtitle = " ".join(words)
+    return part_subtitle
 
 
 def _run_lilypond(ly_file_path):

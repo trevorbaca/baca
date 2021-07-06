@@ -5,8 +5,6 @@ import sys
 
 import abjad
 import baca
-from baca import path as _path
-from baca import segments as _segments
 
 # lilypond.org/doc/v2.19/Documentation/notation/predefined-paper-sizes
 paper_size_to_paper_dimensions = {
@@ -52,7 +50,7 @@ def _copy_boilerplate(directory, source_name, target_name=None, values=None):
         print(f"Removing {target.trim()} ...")
     print(f"Writing {target.trim()} ...")
     values = values or {}
-    boilerplate = _path.Path(baca.__file__).parent.parent / "boilerplate"
+    boilerplate = baca.Path(baca.__file__).parent.parent / "boilerplate"
     source = boilerplate / source_name
     target_name = target_name or source_name
     target = directory / target_name
@@ -157,90 +155,6 @@ def _generate_front_cover_tex(path, forces_tagline=None):
     target_name = path
     _copy_boilerplate(directory, name, target_name=target_name, values=values)
 
-def _generate_part_music_ly(
-    path,
-    dashed_part_name=None,
-    forces_tagline=None,
-    keep_with_tag=None,
-    part=None,
-    part_subtitle=None,
-    silent=None,
-):
-    assert path.build.exists(), repr(path)
-    print(f"Generating {path.trim()} ...")
-    if path.exists():
-        print(f" Removing {path.trim()} ...")
-        path.remove()
-    segments = path.segments.list_paths()
-    if not segments:
-        print(" No segments found ...")
-    names = [_.stem.replace("_", "-") for _ in segments]
-    boilerplate = "part-music.ly"
-    _copy_boilerplate(path.build, boilerplate, target_name=path.name)
-    lines, ily_lines = [], []
-    for i, name in enumerate(names):
-        name = "segment-" + name + ".ly"
-        ly = path.build._segments / name
-        if ly.is_file():
-            line = rf'\include "../_segments/{name}"'
-        else:
-            line = rf'%\include "../_segments/{name}"'
-        ily_lines.append(line.replace(".ly", ".ily"))
-        if 0 < i:
-            line = 8 * " " + line
-        lines.append(line)
-    if lines:
-        segment_ily_include_statements = "\n".join(ily_lines)
-    else:
-        segment_ily_include_statements = ""
-    language_token = abjad.LilyPondLanguageToken()
-    lilypond_language_directive = abjad.lilypond(language_token)
-    version_token = abjad.LilyPondVersionToken()
-    lilypond_version_directive = abjad.lilypond(version_token)
-    annotated_title = path.contents.get_title(year=True)
-    if annotated_title:
-        score_title = annotated_title
-    else:
-        score_title = path.contents.get_title(year=False)
-    score_title_without_year = path.contents.get_title(year=False)
-    if forces_tagline is None:
-        string = "forces_tagline"
-        forces_tagline = path.contents.get_metadatum(string, "")
-    if forces_tagline:
-        forces_tagline = forces_tagline.replace("\\", "")
-    assert path.is_file(), repr(path)
-    template = path.read_text()
-    if path.parent.is_part():
-        identifiers = _segments.global_skip_identifiers(path)
-        identifiers = ["\\" + _ for _ in identifiers]
-        newline = "\n" + 24 * " "
-        global_skip_identifiers = newline.join(identifiers)
-        dictionary = _make_container_to_part_assignment(path)
-        identifiers = _segments.part_to_identifiers(path, part, dictionary)
-        if isinstance(identifiers.capitalize(), str):
-            print(" " + identifiers)
-            message = f" Removing {path.trim()} ..."
-            print(message)
-            path.remove()
-            return
-        identifiers = ["\\" + _ for _ in identifiers]
-        newline = "\n" + 24 * " "
-        segment_ly_include_statements = newline.join(identifiers)
-        template = template.format(
-            dashed_part_name=dashed_part_name,
-            forces_tagline=forces_tagline,
-            global_skip_identifiers=global_skip_identifiers,
-            lilypond_language_directive=lilypond_language_directive,
-            lilypond_version_directive=lilypond_version_directive,
-            part_identifier=repr(part.identifier),
-            part_subtitle=part_subtitle,
-            score_title=score_title,
-            score_title_without_year=score_title_without_year,
-            segment_ily_include_statements=segment_ily_include_statements,
-            segment_ly_include_statements=segment_ly_include_statements,
-        )
-    path.write_text(template)
-
 def _generate_part_tex(path, dashed_part_name):
     assert path.build.exists(), repr(path)
     assert path.build.is_parts() or path.build.is_part(), repr(path)
@@ -300,40 +214,6 @@ def _generate_preface_tex(path):
         target_name = path.name
     _copy_boilerplate(directory, name, target_name=target_name, values=values)
 
-# TODO: externalize    
-def _make_container_to_part_assignment(directory):
-    pairs = _collect_segment_lys(directory.build)
-    if not pairs:
-        print("... no segment lys found.")
-        sys.exit(-1)
-    container_to_part_assignment = abjad.OrderedDict()
-    for source, target in pairs:
-        segment = source.parent
-        value = segment.get_metadatum(
-            "container_to_part_assignment", file_name="__persist__.py"
-        )
-        if value:
-            container_to_part_assignment[segment.name] = value
-    return container_to_part_assignment
-
-
-# TODO: externalize?
-def _part_subtitle(part_name, parentheses=False):
-    words = abjad.String(part_name).delimit_words()
-    number = None
-    try:
-        number = int(words[-1])
-    except ValueError:
-        pass
-    if number is not None:
-        if parentheses:
-            words[-1] = f"({number})"
-        else:
-            words[-1] = str(number)
-    words = [_.lower() for _ in words]
-    part_subtitle = " ".join(words)
-    return part_subtitle
-
 
 def _to_paper_dimensions(paper_size, orientation="portrait"):
     orientations = ("landscape", "portrait", None)
@@ -365,7 +245,7 @@ if build_name is None:
     sys.exit(-1)
 
 print("Getting part names from score template ...")
-part_manifest = _segments.get_part_manifest(directory)
+part_manifest = baca.segments.get_part_manifest(directory)
 part_names = [_.name for _ in part_manifest]
 for part_name in part_names:
     print(f"Found {part_name} ...")
@@ -422,8 +302,8 @@ for i, part in enumerate(part_manifest):
     part_directory = parts_directory / dashed_part_name
     part_directory.mkdir()
     snake_part_name = abjad.String(part.name).to_snake_case()
-    part_subtitle = _part_subtitle(part.name, parentheses=True)
-    forces_tagline = _part_subtitle(part.name) + " part"
+    part_subtitle = helpers._part_subtitle(part.name, parentheses=True)
+    forces_tagline = helpers._part_subtitle(part.name) + " part"
     _generate_back_cover_tex(
         part_directory / f"{dashed_part_name}-back-cover.tex",
         price=f"{part.identifier} ({part.number}/{total_parts})",
@@ -432,7 +312,7 @@ for i, part in enumerate(part_manifest):
         part_directory / f"{dashed_part_name}-front-cover.tex",
         forces_tagline=forces_tagline,
     )
-    _generate_part_music_ly(
+    helpers._generate_part_music_ly(
         part_directory / f"{dashed_part_name}-music.ly",
         dashed_part_name=dashed_part_name,
         forces_tagline=forces_tagline,
