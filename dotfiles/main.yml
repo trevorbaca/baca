@@ -150,8 +150,8 @@ jobs:
             rm "$illustration_ily"
             current_directory=$(pwd)
             cd "$segment_directory"
-            echo Calling make_segment_pdf ...
-            $BACA/scr/make_segment_pdf --do-not-open
+            echo Calling make-segment-pdf ...
+            $BACA/scr/make-segment-pdf --do-not-open
             echo Done with make_segment_pdf ...
             cd "$current_directory"
             if [ -f "$illustration_ly" ]; then
