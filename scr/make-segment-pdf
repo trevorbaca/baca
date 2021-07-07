@@ -9,6 +9,8 @@ import baca
 
 def _make_segment_pdf(directory, layout=True, open_after=True):
     assert directory.is_segment()
+    if str(directory) not in sys.path:
+        sys.path.append(str(directory))
     if layout is True:
         baca.build._make_layout_ly(directory / "layout.py")
     definition = directory / "definition.py"
