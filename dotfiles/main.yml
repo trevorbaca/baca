@@ -120,8 +120,8 @@ jobs:
 
     - name: Rerender segments
       run: |
-        export PATH=/home/runner/bin:$PATH
         export BACA=/tmp/baca
+        export PATH=$BACA/scr:/home/runner/bin:$PATH
         package_name=$(basename "$GITHUB_WORKSPACE")
         wrapper_directory="$GITHUB_WORKSPACE"
         echo Wrapper directory is "$wrapper_directory"
@@ -154,8 +154,10 @@ jobs:
             echo Current directory is now $(pwd) ...
             ls
             echo Calling make-segment-pdf ...
-            $BACA/scr/make-segment-pdf --do-not-open
-            echo Done with make_segment_pdf ...
+            # $BACA/scr/make-segment-pdf --do-not-open
+            which make-segment-pdf
+            make-segment-pdf --do-not-open
+            echo Done with make-segment-pdf
             cd "$current_directory"
             echo Current directory is now "$current_directory" ...
             if [ -f "$illustration_ly" ]; then
