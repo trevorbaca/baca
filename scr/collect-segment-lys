@@ -132,4 +132,4 @@ else:
     message = " Removing time signatures from metadata ..."
     print(message)
     directory.contents.remove_metadatum(key)
-os.system(f"handle_build_tags --directory={directory}")
+os.system(f"handle-build-tags --directory={directory}")

@@ -100,13 +100,13 @@ for path in paths:
 if "--skip-segment-collection" in sys.argv:
     print("Skipping segment collection ...")
 else:
-    os.system("collect_segment_lys")
+    os.system("collect-segment-lys")
 for i, path in enumerate(paths):
     if path.parent.is_part():
         if "--skip-segment-collection" in sys.argv:
             print("Skipping tag handling ...")
         else:
-            os.system("handle_part_tags")
+            os.system("handle-part-tags")
     _check_layout_time_signatures(path)
     baca.build._run_lilypond(path)
     if 0 < path_count and i + 1 < path_count:

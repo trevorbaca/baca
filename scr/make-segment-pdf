@@ -1,5 +1,4 @@
 #! /usr/bin/env python
-import importlib
 import os
 import sys
 import time
@@ -17,18 +16,17 @@ def _make_segment_pdf(directory, layout=True, open_after=True):
         print(f"Can not find {definition.trim()} ...")
         sys.exit(-1)
     print(f"Making segment {directory.name} PDF ...")
+    import definition
+    from __metadata__ import metadata as metadata
+    from __persist__ import persist as persist
     ly = directory / "illustration.ly"
     if ly.exists():
         print(f"Removing {ly.trim()} ...")
         ly.remove()
     pdf = directory / "illustration.pdf"
     if pdf.exists():
-        print(f"removing {pdf.trim()} ...")
+        print(f"Removing {pdf.trim()} ...")
         pdf.remove()
-
-    if "definition" in sys.modules:
-        definition = importlib.reload(sys.modules["definition"])
-    definition = importlib.import_module("definition")
 
     previous_segment = directory.get_previous_package()
     if previous_segment is None:
@@ -46,16 +44,6 @@ def _make_segment_pdf(directory, layout=True, open_after=True):
         lines = file.read_text()
         exec(lines, dictionary)
         previous_persist = dictionary["persist"]
-
-    if "__metadata__" in sys.modules:
-        __metadata__ = importlib.reload(sys.modules["__metadata__"])
-    __metadata__ = importlib.import_module("__metadata__")
-    from __metadata__ import metadata as metadata
-
-    if "__persist__" in sys.modules:
-        __persist__ = importlib.reload(sys.modules["__persist__"])
-    __persist__ = importlib.import_module("__persist__")
-    from __persist__ import persist as persist
 
     segment_directory = directory
     segment_directory = baca.Path(segment_directory)
@@ -174,7 +162,7 @@ def _make_segment_pdf(directory, layout=True, open_after=True):
                 message += " layout time signatures ..."
                 print(message)
                 print(f" Remaking {layout_ly.trim()} ...")
-                os.system(f"make_layout_ly --layout-py={layout_py}")
+                os.system(f"make-layout-ly --layout-py={layout_py}")
                 counter = abjad.String("measure").pluralize(measure_count)
                 message = f" Found {measure_count} {counter}"
                 message += f" in {illustration_ly.trim()} ..."
@@ -296,15 +284,7 @@ else:
     paths = [_ for _ in paths if _.is_dir()]
     for i, path in enumerate(paths):
         with abjad.TemporaryDirectoryChange(path):
-            path_string = str(path)
-            if path_string in sys.path:
-                was_in_sys_path = True
-            else:
-                was_in_sys_path = False
-                sys.path.append(path_string)
-            _make_segment_pdf(path, open_after=False)
-            if not was_in_sys_path:
-                sys.path.remove(path_string)
+            os.system("make-segment-pdf --do-not-open")
         if i + 1 < len(paths):
             print()
         else:
