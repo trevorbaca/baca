@@ -11,8 +11,6 @@ import shutil
 import subprocess
 import sys
 
-import helpers
-
 import abjad
 import baca
 
@@ -39,28 +37,28 @@ print(f"Building {part_pdf_path.trim()} ...")
 snake_part_name = abjad.String(part.name).to_snake_case()
 file_name = f"{snake_part_name}_layout.py"
 path = part_directory / file_name
-helpers._make_layout_ly(path)
+baca.build._make_layout_ly(path)
 print()
 file_name = f"{dashed_part_name}-front-cover.tex"
 path = part_directory / file_name
-helpers._interpret_tex_file(path)
+baca.build._interpret_tex_file(path)
 print()
 file_name = f"{dashed_part_name}-preface.tex"
 path = part_directory / file_name
-helpers._interpret_tex_file(path)
+baca.build._interpret_tex_file(path)
 print()
 file_name = f"{dashed_part_name}-music.ly"
 path = part_directory / file_name
 LOG = part_directory / "lilypond.log"
-helpers._run_lilypond(path)
+baca.build._run_lilypond(path)
 print()
 file_name = f"{dashed_part_name}-back-cover.tex"
 path = part_directory / file_name
-helpers._interpret_tex_file(path)
+baca.build._interpret_tex_file(path)
 print()
 file_name = f"{dashed_part_name}-part.tex"
 path = part_directory / file_name
-helpers._interpret_tex_file(path)
+baca.build._interpret_tex_file(path)
 if "--do-not-open" not in sys.argv[1:]:
     file_name = f"{dashed_part_name}-part.pdf"
     path = part_directory / file_name

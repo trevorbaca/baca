@@ -9,8 +9,6 @@ Skips segment collection when called with --skip-segment-collection.
 import os
 import sys
 
-import helpers
-
 import abjad
 import baca
 
@@ -52,7 +50,7 @@ def _check_layout_time_signatures(path, indent=0):
     message = f" Remaking {layout_ly.trim()} ..."
     print(message)
     layout_py = layout_ly.with_suffix(".py")
-    helpers._make_layout_ly(layout_py)
+    baca.build._make_layout_ly(layout_py)
     layout_time_signatures = baca.segments.get_preamble_time_signatures(layout_ly)
     if layout_time_signatures == metadata_time_signatures:
         message = " Layout time signatures"
@@ -110,7 +108,7 @@ for i, path in enumerate(paths):
         else:
             os.system("handle_part_tags")
     _check_layout_time_signatures(path)
-    helpers._run_lilypond(path)
+    baca.build._run_lilypond(path)
     if 0 < path_count and i + 1 < path_count:
         print()
 if len(paths) == 1 and "--do-not-open" not in sys.argv[1:]:

@@ -3,8 +3,6 @@ import os
 import shutil
 import sys
 
-import helpers
-
 import abjad
 import baca
 
@@ -12,7 +10,7 @@ import baca
 def _make_segment_pdf(directory, layout=True, open_after=True):
     assert directory.is_segment()
     if layout is True:
-        helpers._make_layout_ly(directory / "layout.py")
+        baca.build._make_layout_ly(directory / "layout.py")
     definition = directory / "definition.py"
     if not definition.is_file():
         print(f"Can not find {definition.trim()} ...")
@@ -29,7 +27,7 @@ def _make_segment_pdf(directory, layout=True, open_after=True):
     maker = directory / "__make_segment_pdf__.py"
     maker.remove()
     with abjad.FilesystemState(remove=[maker]):
-        helpers._copy_boilerplate(directory, maker.name)
+        baca.build._copy_boilerplate(directory, maker.name)
         previous_segment = directory.get_previous_package()
         if previous_segment is None:
             statement = "previous_metadata = None"
@@ -52,7 +50,7 @@ def _make_segment_pdf(directory, layout=True, open_after=True):
         )
         maker.write_text(completed_template)
         print(f"Interpreting {maker.trim()} ...")
-        result = helpers._interpret_file(maker)
+        result = baca.build._interpret_file(maker)
         if ly.is_file():
             print(f"Found {ly.trim()} ...")
         if pdf.is_file():

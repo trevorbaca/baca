@@ -3,8 +3,6 @@ import os
 import shutil
 import sys
 
-import helpers
-
 import abjad
 import baca
 
@@ -23,12 +21,12 @@ if not (directory.is_segment() or directory.is_segments()):
     sys.exit(-1)
 
 if directory.is_segment():
-    helpers._make_layout_ly(layout_py)
+    baca.build._make_layout_ly(layout_py)
 else:
     paths = directory.list_paths()
     paths = [_ for _ in paths if _.is_dir()]
     for i, path in enumerate(paths):
         layout_py = path / "layout.py"
-        helpers._make_layout_ly(layout_py)
+        baca.build._make_layout_ly(layout_py)
         if i + 1 < len(paths):
             print()
