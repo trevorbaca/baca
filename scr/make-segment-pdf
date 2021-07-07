@@ -263,6 +263,7 @@ for string in sys.argv[1:]:
 else:
     directory = os.getcwd()
 directory = baca.Path(directory)
+print(f"Script called for {directory.trim()} ...")
 if not (directory.is_segment() or directory.is_segments()):
     print("Must call script in segment or segments directory ...")
     sys.exit(-1)
