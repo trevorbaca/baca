@@ -18,8 +18,6 @@ def _make_segment_pdf(directory, layout=True, open_after=True):
         print(f"Can not find {definition.trim()} ...")
         sys.exit(-1)
     print(f"Making segment {directory.name} PDF ...")
-    for path in sorted(sys.path):
-        print(path)
     import definition
     from __metadata__ import metadata as metadata
     from __persist__ import persist as persist
