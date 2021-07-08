@@ -10,6 +10,9 @@ Trims top-level comments, header block, paper block from each file.
 Keeps score block in each file.
 
 Handles build tags.
+
+The build/_segments directory should be considered disposable:
+the builds/.gitignore file should ignore all _segments directories.
 """
 import os
 import shutil
@@ -34,23 +37,6 @@ def _collect_segment_lys(directory):
     if not directory.builds.is_dir():
         directory.builds.mkdir()
     return zip(sources, targets)
-
-
-def _make__assets_directory(directory):
-    if directory._assets.exists():
-        return
-    directory._assets.mkdir()
-    gitignore = directory._assets / ".gitignore"
-    gitignore.write_text("")
-
-
-def _make__segments_directory(directory):
-    if directory._segments.exists():
-        return
-    directory._segments.mkdir()
-    gitignore = directory._segments / ".gitignore"
-    gitignore.write_text("*.ily")
-    gitignore.write_text("*.ly")
 
 
 def _trim_illustration_ly(ly):
@@ -90,7 +76,8 @@ pairs = _collect_segment_lys(directory.build)
 if not pairs:
     print("... no segment lys found.")
     sys.exit(1)
-_make__segments_directory(directory.build)
+if not directory._segments.exists():
+    directory._segments.mkdir()
 
 fermata_measure_numbers = abjad.OrderedDict()
 time_signatures = abjad.OrderedDict()
@@ -98,13 +85,13 @@ for source, target in pairs:
     source_ily = source.with_suffix(".ily")
     target_ily = target.with_suffix(".ily")
     if target_ily.exists():
-        print(f" Removing {target_ily.trim()} ...")
+        print(f"Removing {target_ily.trim()} ...")
     if source_ily.is_file():
-        print(f" Writing {target_ily.trim()} ...")
+        print(f"Writing {target_ily.trim()} ...")
         shutil.copyfile(str(source_ily), target_ily)
     if target.exists():
-        print(f" Removing {target.trim()} ...")
-    print(f" Writing {target.trim()} ...")
+        print(f"Removing {target.trim()} ...")
+    print(f"Writing {target.trim()} ...")
     text = _trim_illustration_ly(source)
     target.write_text(text)
     segment = source.parent
@@ -116,20 +103,20 @@ for source, target in pairs:
         time_signatures[segment.name] = value
 key = "fermata_measure_numbers"
 if bool(fermata_measure_numbers):
-    message = " Writing fermata measure numbers to metadata ..."
+    message = "Writing fermata measure numbers to metadata ..."
     print(message)
     directory.contents.add_metadatum(key, fermata_measure_numbers)
 else:
-    message = " Removing fermata measure numbers from metadata ..."
+    message = "Removing fermata measure numbers from metadata ..."
     print(message)
     directory.contents.remove_metadatum(key)
 key = "time_signatures"
 if bool(time_signatures):
-    message = " Writing time signatures to metadata ..."
+    message = "Writing time signatures to metadata ..."
     print(message)
     directory.contents.add_metadatum(key, time_signatures)
 else:
-    message = " Removing time signatures from metadata ..."
+    message = "Removing time signatures from metadata ..."
     print(message)
     directory.contents.remove_metadatum(key)
 os.system(f"handle-build-tags --directory={directory}")

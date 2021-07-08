@@ -65,7 +65,6 @@ class Job:
                     if isinstance(self.path, pathlib.Path):
                         result = self.path.deactivate(
                             match,
-                            indent=1,
                             message_zero=True,
                             name=name,
                             prepend_empty_chord=self.prepend_empty_chord,
@@ -93,7 +92,6 @@ class Job:
                 if isinstance(self.path, pathlib.Path):
                     result = self.path.activate(
                         match,
-                        indent=1,
                         message_zero=True,
                         name=name,
                         skip_file_name=self.skip_file_name,
@@ -118,7 +116,6 @@ class Job:
                     if isinstance(self.path, pathlib.Path):
                         result = self.path.deactivate(
                             match,
-                            indent=1,
                             message_zero=True,
                             name=name,
                             prepend_empty_chord=self.prepend_empty_chord,

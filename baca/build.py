@@ -238,7 +238,7 @@ def _interpret_tex_file(tex, open_after=False):
         name = "." + tex.stem + ".tex.log"
         target = tex.with_name(name)
         shutil.move(str(source), str(target))
-        print(f"Logging {target.trim()} ...")
+        print(f"Logging to {target.trim()} ...")
         for path in sorted(tex.parent.glob("*.aux")):
             path.remove()
     if pdf.is_file():
@@ -322,7 +322,7 @@ def _run_lilypond(ly_file_path):
     assert not pdf.exists()
     with abjad.TemporaryDirectoryChange(directory=directory):
         print(f"Interpreting {ly_file_path.trim()} ...")
-        print(f"Logging {lilypond_log_file_path.trim()} ...")
+        print(f"Logging to {lilypond_log_file_path.trim()} ...")
         ABJAD = os.getenv("ABJAD")
         if ABJAD is None:
             print("Must set ABJAD environment variable to local copy of Abjad repo ...")

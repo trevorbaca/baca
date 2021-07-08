@@ -18,7 +18,7 @@ def _run(
     job = abjad.new(job, message_zero=message_zero)
     messages = job()
     for message in messages:
-        print(" " + message)
+        print(message)
 
 for string in sys.argv[1:]:
     if string.startswith("--directory="):
