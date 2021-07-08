@@ -1220,9 +1220,7 @@ class Path(pathlib.PosixPath):
 
         """
         if self.is_build():
-            if self.name.endswith("-parts"):
-                return False
-            if self.name.endswith("-part"):
+            if "-part" in str(self):
                 return False
             if self.get_metadatum("parts_directory") is True:
                 return False

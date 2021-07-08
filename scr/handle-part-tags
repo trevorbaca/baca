@@ -75,7 +75,9 @@ def _parse_part_identifier(path):
 
 directory = os.getcwd()
 directory = baca.Path(directory)
-assert directory.is_part(), repr(directory)
+if not directory.is_part():
+    print("Must run script in part directory ...")
+    sys.exit(-1)
 parts_directory = directory.parent
 print("Handling part tags ...")
 music_ly = directory / "music.ly"

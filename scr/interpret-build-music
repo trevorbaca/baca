@@ -86,7 +86,9 @@ def _copy_boilerplate(directory, source_name, target_name=None, values=None):
 
 directory = os.getcwd()
 directory = baca.Path(directory)
-assert directory.is__segments() or directory.is_build()
+if not (directory.is_score_build() or directory.is_part()):
+    print("Must call script in score build directory or part build directory ...")
+    sys.exit(-1)
 build = directory.build
 assert build is not None, repr(directory)
 message = f"Interpreting {build.trim()} music.ly files ..."
