@@ -50,7 +50,7 @@ def _check_layout_time_signatures(path, indent=0):
     message = f" Remaking {layout_ly.trim()} ..."
     print(message)
     layout_py = layout_ly.with_suffix(".py")
-    baca.build._make_layout_ly(layout_py)
+    os.system(f"make-layout-ly {layout_py}")
     layout_time_signatures = baca.segments.get_preamble_time_signatures(layout_ly)
     if layout_time_signatures == metadata_time_signatures:
         message = " Layout time signatures"

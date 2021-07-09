@@ -37,7 +37,7 @@ print(f"Building {part_pdf_path.trim()} ...")
 snake_part_name = abjad.String(part.name).to_snake_case()
 file_name = f"{snake_part_name}_layout.py"
 path = part_directory / file_name
-baca.build._make_layout_ly(path)
+os.system(f"make-layout-ly {path}")
 print()
 file_name = f"{dashed_part_name}-front-cover.tex"
 path = part_directory / file_name

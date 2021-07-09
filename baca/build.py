@@ -266,27 +266,6 @@ def _make_container_to_part_assignment(directory):
     return container_to_part_assignment
 
 
-def _make_layout_ly(path):
-    assert path.suffix == ".py"
-    maker = "__make_layout_ly__.py"
-    maker = path.parent / maker
-    with abjad.FilesystemState(remove=[maker]):
-        _copy_boilerplate(
-            path.parent,
-            maker.name,
-            values={"layout_module_name": path.stem},
-        )
-        print(f"Interpreting {maker.trim()} ...")
-        result = _interpret_file(maker)
-        print(f"Removing {maker.trim()} ...")
-    stdout_lines, stderr_lines, exit_code = result
-    if exit_code:
-        for string in stderr_lines:
-            print(string)
-    pycache = path.parent / "__pycache__"
-    pycache.remove()
-
-
 def _part_subtitle(part_name, parentheses=False):
     words = abjad.String(part_name).delimit_words()
     number = None

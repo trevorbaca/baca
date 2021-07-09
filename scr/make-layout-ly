@@ -1,10 +1,142 @@
 #! /usr/bin/env python
+import importlib
 import os
+import pathlib
+import pprint
 import shutil
 import sys
+import traceback
 
 import abjad
 import baca
+
+
+def _make_layout_ly(layout_py):
+    layout_module_name = layout_py.with_suffix("").name
+    layout_module = importlib.import_module(layout_module_name)
+    if "breaks" in dir(layout_module):
+        breaks = layout_module.breaks
+    else:
+        print(f"No breaks in {{layout_py.trim()}} ...")
+        sys.exit(-1)
+    if "spacing" in dir(layout_module):
+        spacing = layout_module.spacing
+        prototype = baca.HorizontalSpacingSpecifier
+        assert isinstance(spacing, prototype), repr(spacing)
+    else:
+        spacing = None
+    buildspace_directory = layout_py.parent
+    document_name = abjad.String(buildspace_directory.name).to_shout_case()
+    if buildspace_directory.get_metadatum("parts_directory") is True:
+        part_identifier = layout_module.part_identifier
+        assert abjad.String(part_identifier).is_shout_case()
+        document_name = f"{document_name}_{part_identifier}"
+    if buildspace_directory.is_segment():
+        string = "first_measure_number"
+        first_measure_number = buildspace_directory.get_metadatum(string)
+        if not bool(first_measure_number):
+            print("Can not find first measure number ...")
+            first_measure_number = False
+        assert isinstance(first_measure_number, int)
+    else:
+        first_measure_number = 1
+    if first_measure_number is False:
+        print("Skipping layout ...")
+        sys.exit(-1)
+    assert abjad.String(document_name).is_shout_case()
+    string = "first_measure_number"
+    first_measure_number = buildspace_directory.get_metadatum(string, 1)
+    time_signatures = buildspace_directory.get_time_signature_metadata()
+    if breaks.partial_score is not None:
+        time_signatures = time_signatures[: breaks.partial_score]
+    maker = baca.SegmentMaker(
+        breaks=breaks,
+        do_not_check_persistence=True,
+        do_not_include_layout_ly=True,
+        first_measure_number=first_measure_number,
+        score_template=baca.SingleStaffScoreTemplate(),
+        spacing=spacing,
+        time_signatures=time_signatures,
+    )
+    lilypond_file = maker.run(
+        do_not_print_timing=True,
+        environment="layout",
+        remove=baca.tags.layout_removal_tags(),
+    )
+    context = lilypond_file["Global_Skips"]
+    context.lilypond_type = "PageLayout"
+    context.name = "Page_Layout"
+    skips = baca.select(context).skips()
+    for skip in skips:
+        abjad.detach(abjad.TimeSignature, skip)
+    score = lilypond_file["Score"]
+    del score["Music_Context"]
+    score = lilypond_file["Score"]
+    text = abjad.lilypond(score, tags=True)
+    text = text.replace("Global_Skips", "Page_Layout")
+    text = abjad.LilyPondFormatManager.left_shift_tags(text)
+    layout_ly = layout_module_name.replace("_", "-") + ".ly"
+    layout_ly = buildspace_directory / layout_ly
+    lines = []
+    if breaks.partial_score is not None:
+        lines.append(f"% partial_score = True")
+    if buildspace_directory.is_segment():
+        first_segment = buildspace_directory.segments.get_next_package()
+        if buildspace_directory.name != first_segment.name:
+            previous_segment = buildspace_directory.get_previous_package()
+            previous_layout_ly = previous_segment / "layout.ly"
+            result = baca.segments.get_preamble_page_count_overview(previous_layout_ly)
+            if result is not None:
+                _, _, final_page_number = result
+                first_page_number = final_page_number + 1
+                line = f"% first_page_number = {first_page_number}"
+                lines.append(line)
+    page_count = breaks.page_count
+    lines.append(f"% page_count = {page_count}")
+    time_signatures = [str(_) for _ in time_signatures]
+    measure_count = len(time_signatures)
+    lines.append(f"% measure_count = {measure_count} + 1")
+    string = pprint.pformat(time_signatures, compact=True, width=80 - 3)
+    lines_ = string.split("\n")
+    lines_ = [_.strip("[").strip("]") for _ in lines_]
+    lines_ = ["% " + _ for _ in lines_]
+    lines_.insert(0, "% time_signatures = [")
+    lines_.append("%  ]")
+    lines.extend(lines_)
+    header = "\n".join(lines) + "\n\n"
+    layout_ly.write_text(header + text)
+    counter = abjad.String("measure").pluralize(measure_count)
+    print(f"Writing {measure_count} + 1 {counter} to {layout_ly.trim()} ...")
+
+    bol_measure_numbers = []
+    prototype = abjad.LilyPondLiteral
+    skips = abjad.iterate(score["Page_Layout"]).leaves(abjad.Skip)
+    for i, skip in enumerate(skips):
+        for literal in abjad.get.indicators(skip, prototype):
+            if literal.argument in (r"\break", r"\pageBreak"):
+                measure_number = first_measure_number + i
+                bol_measure_numbers.append(measure_number)
+                continue
+    bols = bol_measure_numbers
+    count = len(bols)
+    numbers = abjad.String("number").pluralize(count)
+    if count <= 4:
+        items = ", ".join([str(_) for _ in bols])
+        print(f"Writing BOL measure {numbers} {items} to metadata ...")
+    else:
+        print(f"Writing BOL measure {numbers} to metadata ...")
+        string = pprint.pformat(bols, compact=True, width=80 - 3)
+        lines = string.split("\n")
+        lines = ["  " + _.strip("[").strip("]").strip() for _ in lines]
+        lines[-1] = lines[-1] + " ..."
+        for line in lines:
+            print(line)
+    buildspace_directory.add_buildspace_metadatum(
+        "bol_measure_numbers",
+        bol_measure_numbers,
+        document_name=document_name,
+    )
+
 
 for string in sys.argv[1:]:
     if string.startswith("--layout-py="):
@@ -16,17 +148,8 @@ else:
     directory = baca.Path(directory)
     layout_py = directory / "layout.py"
 directory = layout_py.parent
-if not (directory.is_segment() or directory.is_segments() or directory.is_build()):
-    print("Must call script in segment or segments directory ...")
+if not directory.is_segment() and not directory.is_build():
+    print("Must call script in segment or build directory ...")
     sys.exit(-1)
 
-if directory.is_segment() or directory.is_build():
-    baca.build._make_layout_ly(layout_py)
-else:
-    paths = directory.list_paths()
-    paths = [_ for _ in paths if _.is_dir()]
-    for i, path in enumerate(paths):
-        layout_py = path / "layout.py"
-        baca.build._make_layout_ly(layout_py)
-        if i + 1 < len(paths):
-            print()
+_make_layout_ly(layout_py)

@@ -2452,7 +2452,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _collect_metadata(self):
         metadata, persist = abjad.OrderedDict(), abjad.OrderedDict()
         persist["alive_during_segment"] = self._collect_alive_during_segment()
-        # __make_layout_ly__ adds bol measure numbers to metadata
+        # make-layout-ly scripts adds bol measure numbers to metadata
         bol_measure_numbers = self.metadata.get("bol_measure_numbers")
         if bol_measure_numbers:
             metadata["bol_measure_numbers"] = bol_measure_numbers

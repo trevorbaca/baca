@@ -12,7 +12,7 @@ def _make_segment_pdf(directory, do_not_interpret_ly=False, layout=True, open_af
     if str(directory) not in sys.path:
         sys.path.append(str(directory))
     if layout is True:
-        baca.build._make_layout_ly(directory / "layout.py")
+        os.system(f"make-layout-ly {directory / 'layout.py'}")
     definition = directory / "definition.py"
     if not definition.is_file():
         print(f"Can not find {definition.trim()} ...")
