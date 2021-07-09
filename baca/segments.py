@@ -2338,7 +2338,6 @@ def get_part_manifest(path):
     score_template = _import_score_template(path)
     score_template = score_template()
     part_manifest = score_template.part_manifest
-    assert isinstance(part_manifest, PartManifest), repr(part_manifest)
     return part_manifest
 
 

@@ -23,7 +23,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
 
     __slots__ = ("_defaults",)
 
-    _part_manifest: _segments.PartManifest = _segments.PartManifest()
+    _part_manifest = None
 
     voice_colors: dict = {}
 
@@ -72,7 +72,9 @@ class ScoreTemplate(abjad.ScoreTemplate):
         for tag_ in tag.split("."):
             if not abjad.String(tag_).is_lilypond_identifier():
                 raise Exception(f"invalid LilyPond identifier: {tag_!r}.")
-            part_names = [_.name for _ in self.part_manifest.parts]
+            part_names = []
+            if self.part_manifest is not None:
+                part_names = [_.name for _ in self.part_manifest.parts]
             if part_names and tag_ not in part_names:
                 raise Exception(f"not listed in parts manifest: {tag_!r}.")
         literal = abjad.LilyPondLiteral(fr"\tag {tag}", "before")
@@ -110,8 +112,6 @@ class ScoreTemplate(abjad.ScoreTemplate):
         """
         Gets part manifest.
         """
-        if self._part_manifest is not None:
-            assert isinstance(self._part_manifest, _segments.PartManifest)
         return self._part_manifest
 
     ### PUBLIC METHODS ###
