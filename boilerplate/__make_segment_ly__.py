@@ -48,7 +48,7 @@ if __name__ == "__main__":
         segment_directory = baca.Path(segment_directory)
         assert segment_directory.is_score_package_path(), repr(segment_directory)
         illustration_ly = segment_directory / "illustration.ly"
-        print(" Running segment-maker ...")
+        print("Running segment-maker ...")
         with abjad.Timer() as timer:
             lilypond_file = maker.run(
                 metadata=metadata,
@@ -60,13 +60,13 @@ if __name__ == "__main__":
         segment_maker_runtime = int(timer.elapsed_time)
         count = segment_maker_runtime
         counter = abjad.String("second").pluralize(count)
-        message = f" Segment-maker runtime {{count}} {{counter}} ..."
+        message = f"Segment-maker runtime {{count}} {{counter}} ..."
         print(message)
         segment_maker_runtime = (count, counter)
-        print(" Writing __metadata__.py ...")
+        print("Writing __metadata__.py ...")
         segment_directory.write_metadata_py(maker.metadata)
         os.system("black --target-version=py38 __metadata__.py")
-        print(" Writing __persist__.py ...")
+        print("Writing __persist__.py ...")
         segment_directory.write_metadata_py(
             maker.persist,
             file_name="__persist__.py",
@@ -92,7 +92,7 @@ if __name__ == "__main__":
         abjad_format_time = int(result[1])
         count = abjad_format_time
         counter = abjad.String("second").pluralize(count)
-        message = f" Abjad format time {{count}} {{counter}} ..."
+        message = f"Abjad format time {{count}} {{counter}} ..."
         print(message)
         abjad_format_time = (count, counter)
     except Exception:
@@ -104,7 +104,7 @@ if __name__ == "__main__":
             context = lilypond_file["Global_Skips"]
             measure_count = len(context)
             counter = abjad.String("measure").pluralize(measure_count)
-            message = f" Wrote {{measure_count}} {{counter}}"
+            message = f"Wrote {{measure_count}} {{counter}}"
             message += f" to {{illustration_ly.trim()}} ..."
             print(message)
             time_signatures = []
@@ -134,7 +134,7 @@ if __name__ == "__main__":
             baca.jobs.handle_mol_tags(segment_directory),
         ]:
             for message in job():
-                print(" " + message)
+                print(message)
     except Exception:
         traceback.print_exc()
         sys.exit(1)
@@ -142,11 +142,11 @@ if __name__ == "__main__":
     try:
         layout_py = segment_directory / "layout.py"
         if not layout_py.exists():
-            print(" Writing stub layout.py ...")
+            print("Writing stub layout.py ...")
             layout_py.write_text("")
         layout_ly = segment_directory / "layout.ly"
         if not layout_ly.exists():
-            print(" Writing stub layout.ly ...")
+            print("Writing stub layout.ly ...")
             layout_ly.write_text("")
     except Exception:
         traceback.print_exc()
@@ -158,7 +158,7 @@ if __name__ == "__main__":
         else:
             empty_layout = False
         if empty_layout:
-            print(f" Ignoring empty {{layout_py.trim()}} ...")
+            print(f"Ignoring empty {{layout_py.trim()}} ...")
         else:
             layout_time_signatures = baca.segments.get_preamble_time_signatures(
                 layout_ly
@@ -167,21 +167,21 @@ if __name__ == "__main__":
                 assert isinstance(layout_time_signatures, list)
                 layout_measure_count = len(layout_time_signatures)
                 counter = abjad.String("measure").pluralize(layout_measure_count)
-                message = f" Found {{layout_measure_count}} {{counter}}"
+                message = f"Found {{layout_measure_count}} {{counter}}"
                 message += f" in {{layout_ly.trim()}} ..."
                 print(message)
                 if layout_time_signatures == time_signatures:
-                    message = " Music time signatures match"
+                    message = "Music time signatures match"
                     message += " layout time signatures ..."
                     print(message)
                 else:
                     message = "Music time signatures do not match"
                     message += " layout time signatures ..."
                     print(message)
-                    print(f" Remaking {{layout_ly.trim()}} ...")
+                    print(f"Remaking {{layout_ly.trim()}} ...")
                     os.system(f"make-layout-ly --layout-py={{layout_py}}")
                     counter = abjad.String("measure").pluralize(measure_count)
-                    message = f" Found {{measure_count}} {{counter}}"
+                    message = f"Found {{measure_count}} {{counter}}"
                     message += f" in {{illustration_ly.trim()}} ..."
                     print(message)
                     layout_time_signatures = baca.segments.get_preamble_time_signatures(
@@ -189,11 +189,11 @@ if __name__ == "__main__":
                     )
                     layout_measure_count = len(layout_time_signatures)
                     counter = abjad.String("measure").pluralize(layout_measure_count)
-                    message = f" Found {{layout_measure_count}} {{counter}}"
+                    message = f"Found {{layout_measure_count}} {{counter}}"
                     message += f" in {{layout_ly.trim()}} ..."
                     print(message)
                     if layout_time_signatures != time_signatures:
-                        message = " Music time signatures still do not match"
+                        message = "Music time signatures still do not match"
                         message += " layout time signatures ..."
                         print(message)
     except Exception:
@@ -211,11 +211,11 @@ if __name__ == "__main__":
                 title="deactivating NOT_TOPMOST ...",
             )
             for message in not_topmost():
-                print(" " + message)
+                print(message)
 # TODO: this is the only block that's different than __make_sgment_pdf__.py
 #        lilypond_log_file_path = illustration_ily.parent / ".log"
 #        with abjad.Timer() as timer:
-#            print(" Running LilyPond ...")
+#            print("Running LilyPond ...")
 #            abjad.io.run_lilypond(
 #                illustration_ly, lilypond_log_file_path=lilypond_log_file_path
 #            )
@@ -228,7 +228,7 @@ if __name__ == "__main__":
 #        lilypond_runtime = int(timer.elapsed_time)
 #        count = lilypond_runtime
 #        counter = abjad.String("second").pluralize(count)
-#        message = f" LilyPond runtime {{count}} {{counter}} ..."
+#        message = f"LilyPond runtime {{count}} {{counter}} ..."
 #        print(message)
 #        lilypond_runtime = (count, counter)
     except Exception:
@@ -261,10 +261,10 @@ if __name__ == "__main__":
             line = time.strftime("%Y-%m-%d %H:%M:%S") + "\n"
             pointer.write(line)
             count, counter = segment_maker_runtime
-            line = f" Segment-maker runtime: {{count}} {{counter}}\n"
+            line = f"Segment-maker runtime: {{count}} {{counter}}\n"
             pointer.write(line)
             count, counter = abjad_format_time
-            line = f" Abjad format time: {{count}} {{counter}}\n"
+            line = f"Abjad format time: {{count}} {{counter}}\n"
             pointer.write(line)
     except Exception:
         traceback.print_exc()

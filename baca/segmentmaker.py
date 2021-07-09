@@ -5945,7 +5945,7 @@ class SegmentMaker(abjad.SegmentMaker):
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
         if not do_not_print_timing and self.environment != "docs":
-            print(f"  Score initialization {count} {seconds} ...")
+            print(f"Score initialization {count} {seconds} ...")
         with abjad.Timer() as timer:
             with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
                 command_count = self._call_rhythm_commands()
@@ -5954,7 +5954,7 @@ class SegmentMaker(abjad.SegmentMaker):
         seconds = abjad.String("second").pluralize(count)
         commands = abjad.String("command").pluralize(command_count)
         if not do_not_print_timing and self.environment != "docs":
-            message = f"  Rhythm commands {count} {seconds}"
+            message = f"Rhythm commands {count} {seconds}"
             message += f" [for {command_count} {commands}] ..."
             print(message)
         with abjad.Timer() as timer:
@@ -5968,7 +5968,7 @@ class SegmentMaker(abjad.SegmentMaker):
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
         if not do_not_print_timing and self.environment != "docs":
-            print(f"  After-rhythm methods {count} {seconds} ...")
+            print(f"After-rhythm methods {count} {seconds} ...")
         with abjad.Timer() as timer:
             with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
                 command_count = self._call_commands()
@@ -5976,7 +5976,7 @@ class SegmentMaker(abjad.SegmentMaker):
         seconds = abjad.String("second").pluralize(count)
         commands = abjad.String("command").pluralize(command_count)
         if not do_not_print_timing and self.environment != "docs":
-            message = f"  Nonrhythm commands {count} {seconds}"
+            message = f"Nonrhythm commands {count} {seconds}"
             message += f" [for {command_count} {commands}] ..."
             print(message)
         # TODO: optimize by consolidating score iteration:
@@ -6025,14 +6025,14 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.environment == "layout" or (
             not do_not_print_timing and self.environment != "docs"
         ):
-            print(f"  Postprocessing {count} {seconds} ...")
+            print(f"Postprocessing {count} {seconds} ...")
         with abjad.Timer() as timer:
             method = getattr(self.score, "_update_now")
             method(offsets_in_seconds=True)
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
         if not do_not_print_timing and self.environment != "docs":
-            print(f"  Offsets-in-seconds update {count} {seconds} ...")
+            print(f"Offsets-in-seconds update {count} {seconds} ...")
         with abjad.Timer() as timer:
             self._label_clock_time()
             self._activate_tags(activate)
@@ -6041,6 +6041,6 @@ class SegmentMaker(abjad.SegmentMaker):
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
         if not do_not_print_timing and self.environment != "docs":
-            print(f"  Clocktime markup {count} {seconds} ...")
+            print(f"Clocktime markup {count} {seconds} ...")
         assert isinstance(self.lilypond_file, abjad.LilyPondFile)
         return self.lilypond_file

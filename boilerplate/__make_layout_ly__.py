@@ -136,7 +136,7 @@ if __name__ == '__main__':
         header = '\n'.join(lines) + '\n\n'
         layout_ly.write_text(header + text)
         counter = abjad.String('measure').pluralize(measure_count)
-        message = f' Writing {{measure_count}} + 1 {{counter}}'
+        message = f'Writing {{measure_count}} + 1 {{counter}}'
         message += f' to {{layout_ly.trim()}} ...'
         print(message)
     except Exception:
@@ -159,9 +159,9 @@ if __name__ == '__main__':
         if count <= 4:
             items = ', '.join([str(_) for _ in bols])
             print(
-                f' Writing BOL measure {{numbers}} {{items}} to metadata ...')
+                f'Writing BOL measure {{numbers}} {{items}} to metadata ...')
         else:
-            print(f' Writing BOL measure {{numbers}} to metadata ...')
+            print(f'Writing BOL measure {{numbers}} to metadata ...')
             string = pprint.pformat(bols, compact=True, width=80 - 3)
             lines = string.split('\n')
             lines = ['  ' + _.strip('[').strip(']').strip() for _ in lines]
