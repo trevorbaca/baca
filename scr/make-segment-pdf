@@ -7,7 +7,7 @@ import abjad
 import baca
 
 
-def _make_segment_pdf(directory, layout=True, open_after=True):
+def _make_segment_pdf(directory, do_not_interpret_ly=False, layout=True, open_after=True):
     assert directory.is_segment()
     if str(directory) not in sys.path:
         sys.path.append(str(directory))
@@ -29,7 +29,6 @@ def _make_segment_pdf(directory, layout=True, open_after=True):
     if pdf.exists():
         print(f"Removing {pdf.trim()} ...")
         pdf.remove()
-
     previous_segment = directory.get_previous_package()
     if previous_segment is None:
         previous_metadata = None
@@ -46,7 +45,6 @@ def _make_segment_pdf(directory, layout=True, open_after=True):
         lines = file.read_text()
         exec(lines, dictionary)
         previous_persist = dictionary["persist"]
-
     segment_directory = directory
     segment_directory = baca.Path(segment_directory)
     assert segment_directory.is_score_package_path(), repr(segment_directory)
@@ -68,14 +66,14 @@ def _make_segment_pdf(directory, layout=True, open_after=True):
     segment_maker_runtime = (count, counter)
     print("Writing __metadata__.py ...")
     segment_directory.write_metadata_py(definition.maker.metadata)
-    os.system("black --target-version=py38 __metadata__.py")
+    os.system("black --target-version=py38 __metadata__.py 1>/dev/null 2>&1")
     print("Writing __persist__.py ...")
     segment_directory.write_metadata_py(
         definition.maker.persist,
         file_name="__persist__.py",
         variable_name="persist",
     )
-    os.system("black --target-version=py38 __persist__.py")
+    os.system("black --target-version=py38 __persist__.py 1>/dev/null 2>&1")
     first_segment = segment_directory.segments.get_next_package()
     if segment_directory.name != first_segment.name:
         layout_ly = segment_directory / "layout.ly"
@@ -98,7 +96,6 @@ def _make_segment_pdf(directory, layout=True, open_after=True):
     message = f"Abjad format time {count} {counter} ..."
     print(message)
     abjad_format_time = (count, counter)
-
     if "Global_Skips" in lilypond_file:
         context = lilypond_file["Global_Skips"]
         measure_count = len(context)
@@ -118,7 +115,6 @@ def _make_segment_pdf(directory, layout=True, open_after=True):
     else:
         measure_count = None
         time_signatures = None
-
     text = illustration_ly.read_text()
     text = abjad.LilyPondFormatManager.left_shift_tags(text)
     illustration_ly.write_text(text)
@@ -130,7 +126,6 @@ def _make_segment_pdf(directory, layout=True, open_after=True):
     ]:
         for message in job():
             print(message)
-
     layout_py = segment_directory / "layout.py"
     if not layout_py.exists():
         print("Writing stub layout.py ...")
@@ -139,7 +134,6 @@ def _make_segment_pdf(directory, layout=True, open_after=True):
     if not layout_ly.exists():
         print("Writing stub layout.ly ...")
         layout_ly.write_text("")
-
     if layout_py.read_text() == "":
         empty_layout = True
     else:
@@ -181,7 +175,6 @@ def _make_segment_pdf(directory, layout=True, open_after=True):
                     message = "Music time signatures still do not match"
                     message += " layout time signatures ..."
                     print(message)
-
     if getattr(definition.maker, "do_not_externalize", False) is not True:
         illustration_ly.extern()
         illustration_ily = illustration_ly.with_suffix(".ily")
@@ -193,31 +186,30 @@ def _make_segment_pdf(directory, layout=True, open_after=True):
         )
         for message in not_topmost():
             print(message)
-    lilypond_log_file_path = illustration_ily.parent / ".log"
-    with abjad.Timer() as timer:
-        print("Running LilyPond ...")
-        baca_repo_path = os.getenv("BACA")
-        flags = f"--include={baca_repo_path}/lilypond"
-        abjad_repo_path = os.getenv("ABJAD")
-        flags += f" --include={abjad_repo_path}/docs/source/_stylesheets"
-        abjad.io.run_lilypond(
-            illustration_ly,
-            flags=flags,
-            lilypond_log_file_path=lilypond_log_file_path,
+    if not do_not_interpret_ly:
+        lilypond_log_file_path = illustration_ily.parent / ".log"
+        with abjad.Timer() as timer:
+            print("Running LilyPond ...")
+            baca_repo_path = os.getenv("BACA")
+            flags = f"--include={baca_repo_path}/lilypond"
+            abjad_repo_path = os.getenv("ABJAD")
+            flags += f" --include={abjad_repo_path}/docs/source/_stylesheets"
+            abjad.io.run_lilypond(
+                illustration_ly,
+                flags=flags,
+                lilypond_log_file_path=lilypond_log_file_path,
+            )
+        baca.segments.remove_lilypond_warnings(
+            lilypond_log_file_path,
+            crescendo_too_small=True,
+            decrescendo_too_small=True,
+            overwriting_glissando=True,
         )
-    baca.segments.remove_lilypond_warnings(
-        lilypond_log_file_path,
-        crescendo_too_small=True,
-        decrescendo_too_small=True,
-        overwriting_glissando=True,
-    )
-    lilypond_runtime = int(timer.elapsed_time)
-    count = lilypond_runtime
-    counter = abjad.String("second").pluralize(count)
-    message = f"LilyPond runtime {count} {counter} ..."
-    print(message)
-    lilypond_runtime = (count, counter)
-
+        lilypond_runtime = int(timer.elapsed_time)
+        count = lilypond_runtime
+        counter = abjad.String("second").pluralize(count)
+        print(f"LilyPond runtime {count} {counter} ...")
+        lilypond_runtime = (count, counter)
     for name in ["illustration.ly", "illustration.ily", "layout.ly"]:
         tagged = segment_directory / name
         if not tagged.exists():
@@ -232,28 +224,28 @@ def _make_segment_pdf(directory, layout=True, open_after=True):
         base, extension = name.split(".")
         untagged = segment_directory / f"{base}.untagged.{extension}"
         untagged.write_text(string)
-
-    timing = segment_directory / ".timing"
-    with timing.open(mode="a") as pointer:
-        pointer.write("\n")
-        line = time.strftime("%Y-%m-%d %H:%M:%S") + "\n"
-        pointer.write(line)
-        count, counter = segment_maker_runtime
-        line = f"Segment-maker runtime: {count} {counter}\n"
-        pointer.write(line)
-        count, counter = abjad_format_time
-        line = f"Abjad format time: {count} {counter}\n"
-        pointer.write(line)
-        count, counter = lilypond_runtime
-        line = f"LilyPond runtime: {count} {counter}\n"
-        pointer.write(line)
-
-        if ly.is_file():
-            print(f"Found {ly.trim()} ...")
+    if not do_not_interpret_ly:
+        timing = segment_directory / ".timing"
+        with timing.open(mode="a") as pointer:
+            pointer.write("\n")
+            line = time.strftime("%Y-%m-%d %H:%M:%S") + "\n"
+            pointer.write(line)
+            count, counter = segment_maker_runtime
+            line = f"Segment-maker runtime: {count} {counter}\n"
+            pointer.write(line)
+            count, counter = abjad_format_time
+            line = f"Abjad format time: {count} {counter}\n"
+            pointer.write(line)
+            count, counter = lilypond_runtime
+            line = f"LilyPond runtime: {count} {counter}\n"
+            pointer.write(line)
+    if ly.is_file():
+        print(f"Found {ly.trim()} ...")
+    if not do_not_interpret_ly:
         if pdf.is_file():
             print(f"Found {pdf.trim()} ...")
-    if pdf.is_file() and open_after:
-        os.system(f"open {pdf}")
+        if pdf.is_file() and open_after:
+            os.system(f"open {pdf}")
     __pycache__ = directory / "__pycache__"
     __pycache__.remove()
 
@@ -271,13 +263,19 @@ if not (directory.is_segment() or directory.is_segments()):
 
 print(f"Script called for {directory.trim()} ...")
 
+do_not_interpret_ly = "--do-not-interpret-ly" in sys.argv
+
 if directory.is_segment():
     if "--do-not-open" in sys.argv[1:]:
         open_after = False
     else:
         open_after = True
     with abjad.TemporaryDirectoryChange(directory):
-        _make_segment_pdf(directory, open_after=open_after)
+        _make_segment_pdf(
+            directory,
+            do_not_interpret_ly=do_not_interpret_ly,
+            open_after=open_after,
+        )
 else:
     assert directory.is_segments()
     if "--do-not-open" in sys.argv[1:]:
