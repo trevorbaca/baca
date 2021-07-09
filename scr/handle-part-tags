@@ -13,9 +13,6 @@ def _activate(
     message_zero=False,
     name=None,
 ):
-    """
-    Activates ``tag`` in ``path``.
-    """
     if isinstance(tag, str):
         tag_ = abjad.Tag(tag)
     else:
@@ -40,9 +37,6 @@ def _deactivate(
     message_zero=False,
     name=None,
 ):
-    """
-    Deactivates ``tag`` in ``path``.
-    """
     _activate(
         path,
         tag,
@@ -76,7 +70,7 @@ def _parse_part_identifier(path):
 directory = os.getcwd()
 directory = baca.Path(directory)
 if not directory.is_part():
-    print("Must run script in part directory ...")
+    print("Must call script in part directory ...")
     sys.exit(-1)
 parts_directory = directory.parent
 print("Handling part tags ...")

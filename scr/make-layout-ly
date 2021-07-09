@@ -16,10 +16,7 @@ else:
     directory = baca.Path(directory)
     layout_py = directory / "layout.py"
 directory = layout_py.parent
-if not (
-    directory.is_segment() or directory.is_segments()
-    or directory.is_build()
-    ):
+if not (directory.is_segment() or directory.is_segments() or directory.is_build()):
     print("Must call script in segment or segments directory ...")
     sys.exit(-1)
 

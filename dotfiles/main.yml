@@ -101,7 +101,11 @@ jobs:
     - name: Check definition files
       run: |
         NAME=$(basename $GITHUB_WORKSPACE)
-        cd $GITHUB_WORKSPACE/$NAME/segments
+        segment_directory=$GITHUB_WORKSPACE/$NAME/segments
+        if [ ! -d $segment_directory ]; then
+            exit 0
+        fi
+        cd $segment_directory
         export PATH=/tmp/baca/scr:${PATH}
         RC=0
         for path in $(find . -name definition.py | sort); do

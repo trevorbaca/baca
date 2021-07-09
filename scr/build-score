@@ -38,7 +38,7 @@ else:
 directory = baca.Path(directory)
 
 if not directory.is_score_build():
-    print("Must run script in score build directory ...")
+    print("Must call script in score build directory ...")
     sys.exit(-1)
 
 print("Building score ...")

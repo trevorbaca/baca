@@ -23,7 +23,7 @@ else:
 directory = baca.Path(directory)
 
 if not directory.is_part():
-    print("Must run script in part build directory ...")
+    print("Must call script in part build directory ...")
     sys.exit(-1)
 
 file_name = directory.name + "-music.ly"
