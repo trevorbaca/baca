@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 """
-Interprets music.ly in build directory.
+Interprets build directory music.ly file.
 
 Collects segments (and handles tags).
 
@@ -12,90 +12,85 @@ import sys
 import abjad
 import baca
 
-abjad_configuration = abjad.Configuration()
 
-
-def _check_layout_time_signatures(path, indent=0):
-    message = "Checking layout time signatures ..."
-    print(message)
-    layout_ly = path.name.replace("music.ly", "layout.ly")
-    layout_ly = path.parent / layout_ly
-    if not layout_ly.exists():
-        message = f" No {layout_ly.trim()} found ..."
-        print(message)
+def _check_layout_time_signatures(music_ly_file_path):
+    print("Checking layout time signatures ...")
+    build_directory = music_ly_file_path.parent
+    layout_ly_file_path = build_directory / "layout.ly"
+    if not layout_ly_file_path.is_file():
+        print(f"No {layout_ly_file_path.trim()} found ...")
         return
-    print(f" Found {layout_ly.trim()} ...")
-    metadata_time_signatures = path.parent.get_time_signature_metadata()
+    print(f"Found {layout_ly_file_path.trim()} ...")
+    partial_score = baca.segments.get_preamble_partial_score(layout_ly_file_path)
+    if partial_score:
+        print(f"Found {layout_y_file_path.trim()} partial score comment ...")
+        print("Aborting layout time signature check ...")
+        return
+    metadata_time_signatures = build_directory.get_time_signature_metadata()
     metadata_time_signatures = [str(_) for _ in metadata_time_signatures]
     if metadata_time_signatures:
-        message = " Found time signature metadata ..."
-        print(message)
-    layout_time_signatures = baca.segments.get_preamble_time_signatures(layout_ly)
-    partial_score = baca.segments.get_preamble_partial_score(layout_ly)
-    if partial_score:
-        print(" Found partial score ...")
-        return
+        print("Found time signature metadata ...")
+    layout_time_signatures = baca.segments.get_preamble_time_signatures(
+        layout_ly_file_path
+    )
     if layout_time_signatures == metadata_time_signatures:
-        message = " Layout time signatures"
+        message = "Layout time signatures"
         message += f" ({len(layout_time_signatures)})"
         message += " match metadata time signatures"
         message += f" ({len(metadata_time_signatures)}) ..."
         print(message)
         return
-    message = " Layout time signatures"
+    message = "Layout time signatures"
     message += f" ({len(layout_time_signatures)})"
     message += " do not match metadata time signatures"
     message += f" ({len(metadata_time_signatures)}) ..."
     print(message)
-    message = f" Remaking {layout_ly.trim()} ..."
-    print(message)
-    layout_py = layout_ly.with_suffix(".py")
+    print(f"Remaking {layout_ly_file_path.trim()} ...")
+    layout_py = layout_ly_file_path.with_suffix(".py")
     os.system(f"make-layout-ly {layout_py}")
-    layout_time_signatures = baca.segments.get_preamble_time_signatures(layout_ly)
+    layout_time_signatures = baca.segments.get_preamble_time_signatures(
+        layout_ly_file_path
+    )
     if layout_time_signatures == metadata_time_signatures:
-        message = " Layout time signatures"
+        message = "Layout time signatures"
         message += f" ({len(layout_time_signatures)})"
         message += " match metadata time signatures"
         message += f" ({len(metadata_time_signatures)}) ..."
     else:
-        message = " Layout time signatures"
+        message = "Layout time signatures"
         message += f" ({len(layout_time_signatures)})"
         message += " still do not match metadata time signatures"
         message += f" ({len(metadata_time_signatures)}) ..."
     print(message)
 
 
-directory = os.getcwd()
-directory = baca.Path(directory)
-if not (directory.is_score_build() or directory.is_part()):
+build_directory = os.getcwd()
+build_directory = baca.Path(build_directory)
+if not build_directory.is_score_build() and not build_directory.is_part():
     print("Must call script in score build directory or part build directory ...")
     sys.exit(-1)
-build = directory.build
-assert build is not None, repr(directory)
-message = f"Interpreting {build.trim()} music.ly files ..."
-print(message)
-build_directory = directory.build
-assert build_directory is not None
-paths = [build_directory / "music.ly"]
-path_count = len(paths)
-for path in paths:
-    print(f"Found {path.trim()} ...")
+
+music_ly_file_path = build_directory / "music.ly"
+if music_ly_file_path.is_file():
+    print(f"Found {music_ly_file_path.trim()} ...")
+else:
+    print(f"Missing {music_ly_file_path.trim()} ...")
+    sys.exit(-1)
+
 if "--skip-segment-collection" in sys.argv:
     print("Skipping segment collection ...")
 else:
     os.system("collect-segment-lys")
-for i, path in enumerate(paths):
-    if path.parent.is_part():
-        if "--skip-segment-collection" in sys.argv:
-            print("Skipping tag handling ...")
-        else:
-            os.system("handle-part-tags")
-    _check_layout_time_signatures(path)
-    baca.build.run_lilypond(path)
-    if 0 < path_count and i + 1 < path_count:
-        print()
-if len(paths) == 1 and "--do-not-open" not in sys.argv[1:]:
-    target = path.with_suffix(".pdf")
-    if target.is_file():
-        print(f"Opening {target.trim()} ...")
-        os.system(f"open {target}")
+
+if build_directory.is_part():
+    if "--skip-segment-collection" in sys.argv:
+        print("Skipping tag handling ...")
+    else:
+        os.system("handle-part-tags")
+
+_check_layout_time_signatures(music_ly_file_path)
+baca.build.run_lilypond(music_ly_file_path)
+
+if build_directory._segments.is_dir():
+    print(f"Removing {build_directory._segments.trim()} ...")
+    build_directory._segments.remove()

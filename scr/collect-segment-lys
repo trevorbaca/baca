@@ -22,23 +22,6 @@ import abjad
 import baca
 
 
-def collect_segment_lys(directory):
-    paths = directory.segments.list_paths()
-    names = [_.name for _ in paths]
-    sources, targets = [], []
-    for name in names:
-        source = directory.segments / name / "illustration.ly"
-        if not source.is_file():
-            continue
-        target = "segment-" + name.replace("_", "-") + ".ly"
-        target = directory._segments / target
-        sources.append(source)
-        targets.append(target)
-    if not directory.builds.is_dir():
-        directory.builds.mkdir()
-    return zip(sources, targets)
-
-
 def _trim_illustration_ly(ly):
     assert ly.is_file()
     lines = []
@@ -74,7 +57,7 @@ if not directory.is_build():
     print("Must call script in build directory ...")
     sys.exit(-1)
 print("Collecting segment lys ...")
-pairs = collect_segment_lys(directory.build)
+pairs = baca.build.collect_segment_lys(directory.build)
 if not pairs:
     print("... no segment lys found.")
     sys.exit(1)
