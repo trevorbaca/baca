@@ -975,22 +975,6 @@ class Path(pathlib.PosixPath):
         cyclic_wrappers = abjad.CyclicTuple(wrappers)
         return cyclic_wrappers[index - 1]
 
-    def get_time_signature_metadata(self):
-        """
-        Gets time signature metadata.
-        """
-        if self.is_segment():
-            time_signatures = self.get_metadatum("time_signatures", [])
-            return time_signatures
-        time_signatures = self.contents.get_metadatum("time_signatures")
-        if time_signatures is None:
-            return []
-        assert isinstance(time_signatures, abjad.OrderedDict)
-        time_signatures_ = []
-        for segment_name, strings in time_signatures.items():
-            time_signatures_.extend(strings)
-        return time_signatures_
-
     def get_title(self, year=True):
         """
         Gets score title.

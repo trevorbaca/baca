@@ -57,7 +57,6 @@ path
       get_next_score
       get_previous_package
       get_previous_score
-      get_time_signature_metadata
       get_title
       is__assets
       is__segments
@@ -220,8 +219,6 @@ path
    .. automethod:: Path.get_previous_package
 
    .. automethod:: Path.get_previous_score
-
-   .. automethod:: Path.get_time_signature_metadata
 
    .. automethod:: Path.get_title
 

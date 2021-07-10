@@ -26,8 +26,10 @@ def _check_layout_time_signatures(music_ly_file_path):
         print(f"Found {layout_y_file_path.trim()} partial score comment ...")
         print("Aborting layout time signature check ...")
         return
-    metadata_time_signatures = build_directory.get_time_signature_metadata()
-    metadata_time_signatures = [str(_) for _ in metadata_time_signatures]
+    metadata_time_signatures = []
+    for segment_directory in build_directory.segments.list_paths():
+        time_signatures = segment_directory.get_metadatum("time_signatures")
+        metadata_time_signatures.extend(time_signatures)
     if metadata_time_signatures:
         print("Found time signature metadata ...")
     layout_time_signatures = baca.segments.get_preamble_time_signatures(
