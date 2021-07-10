@@ -19,8 +19,8 @@ def _make_segment_pdf(directory, do_not_interpret_ly=False, layout=True):
         sys.exit(-1)
     print(f"Making segment {directory.name} PDF ...")
     import definition
-    from __metadata__ import metadata as metadata
-    from __persist__ import persist as persist
+    metadata = directory.get_metadata()
+    persist = directory.get_metadata(file_name="__persist__.py")
     ly = directory / "illustration.ly"
     if ly.exists():
         print(f"Removing {ly.trim()} ...")
@@ -37,14 +37,16 @@ def _make_segment_pdf(directory, do_not_interpret_ly=False, layout=True):
         path = previous_segment / "__metadata__.py"
         file = baca.Path(path)
         string = file.read_text()
-        dictionary = {}
-        exec(string, dictionary)
-        previous_metadata = dictionary["metadata"]
+        #dictionary = {}
+        #exec(string, dictionary)
+        #previous_metadata = dictionary["metadata"]
+        previous_metadata = eval(string)
         path = previous_segment / "__persist__.py"
         file = baca.Path(path)
         lines = file.read_text()
-        exec(lines, dictionary)
-        previous_persist = dictionary["persist"]
+        #exec(lines, dictionary)
+        #previous_persist = dictionary["persist"]
+        previous_persist = eval(lines)
     segment_directory = directory
     segment_directory = baca.Path(segment_directory)
     assert segment_directory.is_score_package_path(), repr(segment_directory)
