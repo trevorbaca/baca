@@ -1,65 +1,11 @@
-import io
 import os
 import shutil
-import subprocess
 import sys
 
 import abjad
 import baca
 
 abjad_configuration = abjad.Configuration()
-
-
-# lilypond.org/doc/v2.19/Documentation/notation/predefined-paper-sizes
-paper_size_to_paper_dimensions = {
-    "a3": "297 x 420 mm",
-    "a4": "210 x 297 mm",
-    "arch a": "9 x 12 in",
-    "arch b": "12 x 18 in",
-    "arch c": "18 x 24 in",
-    "arch d": "24 x 36 in",
-    "arch e": "36 x 48 in",
-    "legal": "8.5 x 14 in",
-    "ledger": "17 x 11 in",
-    "letter": "8.5 x 11 in",
-    "tabloid": "11 x 17 in",
-}
-
-
-def _collect_segment_lys(directory):
-    paths = directory.segments.list_paths()
-    names = [_.name for _ in paths]
-    sources, targets = [], []
-    for name in names:
-        source = directory.segments / name / "illustration.ly"
-        if not source.is_file():
-            continue
-        target = "segment-" + name.replace("_", "-") + ".ly"
-        target = directory._segments / target
-        sources.append(source)
-        targets.append(target)
-    if not directory.builds.is_dir():
-        directory.builds.mkdir()
-    return zip(sources, targets)
-
-
-def _copy_boilerplate(directory, source_name, target_name=None, values=None):
-    target_name = target_name or source_name
-    target = directory / target_name
-    if target.exists():
-        print(f"Removing {target.trim()} ...")
-    print(f"Writing {target.trim()} ...")
-    values = values or {}
-    boilerplate = baca.Path(baca.__file__).parent.parent / "boilerplate"
-    source = boilerplate / source_name
-    target_name = target_name or source_name
-    target = directory / target_name
-    shutil.copyfile(str(source), str(target))
-    if not values:
-        return
-    template = target.read_text()
-    template = template.format(**values)
-    target.write_text(template)
 
 
 def _display_lilypond_log_errors(lilypond_log_file_path=None):
@@ -83,7 +29,59 @@ def _display_lilypond_log_errors(lilypond_log_file_path=None):
             print(line)
 
 
-def _generate_part_music_ly(
+def _make_container_to_part_assignment(directory):
+    pairs = collect_segment_lys(directory.build)
+    if not pairs:
+        print("... no segment lys found.")
+        return
+    container_to_part_assignment = abjad.OrderedDict()
+    for source, target in pairs:
+        segment = source.parent
+        value = segment.get_metadatum(
+            "container_to_part_assignment", file_name="__persist__.py"
+        )
+        if value:
+            container_to_part_assignment[segment.name] = value
+    return container_to_part_assignment
+
+
+def collect_segment_lys(directory):
+    paths = directory.segments.list_paths()
+    names = [_.name for _ in paths]
+    sources, targets = [], []
+    for name in names:
+        source = directory.segments / name / "illustration.ly"
+        if not source.is_file():
+            continue
+        target = "segment-" + name.replace("_", "-") + ".ly"
+        target = directory._segments / target
+        sources.append(source)
+        targets.append(target)
+    if not directory.builds.is_dir():
+        directory.builds.mkdir()
+    return zip(sources, targets)
+
+
+def copy_boilerplate(directory, source_name, target_name=None, values=None):
+    target_name = target_name or source_name
+    target = directory / target_name
+    if target.exists():
+        print(f"Removing {target.trim()} ...")
+    print(f"Writing {target.trim()} ...")
+    values = values or {}
+    boilerplate = baca.Path(baca.__file__).parent.parent / "boilerplate"
+    source = boilerplate / source_name
+    target_name = target_name or source_name
+    target = directory / target_name
+    shutil.copyfile(str(source), str(target))
+    if not values:
+        return
+    template = target.read_text()
+    template = template.format(**values)
+    target.write_text(template)
+
+
+def generate_part_music_ly(
     path,
     dashed_part_name=None,
     forces_tagline=None,
@@ -106,7 +104,7 @@ def _generate_part_music_ly(
         print(message)
     names = [_.stem.replace("_", "-") for _ in segments]
     boilerplate = "part-music.ly"
-    _copy_boilerplate(path.build, boilerplate, target_name=path.name)
+    copy_boilerplate(path.build, boilerplate, target_name=path.name)
     lines, ily_lines = [], []
     for i, name in enumerate(names):
         name = "segment-" + name + ".ly"
@@ -172,44 +170,7 @@ def _generate_part_music_ly(
     path.write_text(template)
 
 
-# TODO: replace?
-def _interpret_file(path):
-    path = baca.Path(path)
-    if not path.exists():
-        print(f"Missing {path} ...")
-    if path.suffix == ".py":
-        command = f"python {path}"
-    elif path.suffix == ".ly":
-        command = f"lilypond -dno-point-and-click {path}"
-    else:
-        message = f"can not interpret {path}."
-        raise Exception(message)
-    directory = path.parent
-    directory = abjad.TemporaryDirectoryChange(directory)
-    string_buffer = io.StringIO()
-    with directory, string_buffer:
-        process = subprocess.Popen(
-            command,
-            shell=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-        )
-        for line in process.stdout:
-            line = line.decode("utf-8")
-            print(line, end="")
-            string_buffer.write(line)
-        process.wait()
-        stdout_lines = string_buffer.getvalue().splitlines()
-        stderr_lines = abjad.io._read_from_pipe(process.stderr)
-        stderr_lines = stderr_lines.splitlines()
-    exit_code = process.returncode
-    if path.suffix == ".ly":
-        lilypond_log_file_path = directory / ".log"
-        _display_lilypond_log_errors(lilypond_log_file_path=lilypond_log_file_path)
-    return stdout_lines, stderr_lines, exit_code
-
-
-def _interpret_tex_file(tex, open_after=False):
+def interpret_tex_file(tex, open_after=False):
     if not tex.is_file():
         print(f"Can not find {tex.trim()} ...")
         return
@@ -250,23 +211,7 @@ def _interpret_tex_file(tex, open_after=False):
         sys.exit(-1)
 
 
-def _make_container_to_part_assignment(directory):
-    pairs = _collect_segment_lys(directory.build)
-    if not pairs:
-        print("... no segment lys found.")
-        return
-    container_to_part_assignment = abjad.OrderedDict()
-    for source, target in pairs:
-        segment = source.parent
-        value = segment.get_metadatum(
-            "container_to_part_assignment", file_name="__persist__.py"
-        )
-        if value:
-            container_to_part_assignment[segment.name] = value
-    return container_to_part_assignment
-
-
-def _part_subtitle(part_name, parentheses=False):
+def part_subtitle(part_name, parentheses=False):
     words = abjad.String(part_name).delimit_words()
     number = None
     try:
@@ -283,7 +228,7 @@ def _part_subtitle(part_name, parentheses=False):
     return part_subtitle
 
 
-def _run_lilypond(ly_file_path):
+def run_lilypond(ly_file_path):
     assert ly_file_path.exists()
     if not abjad.io.find_executable("lilypond"):
         raise ValueError("cannot find LilyPond executable.")
@@ -330,10 +275,23 @@ def _run_lilypond(ly_file_path):
         assert lilypond_log_file_path.exists()
 
 
-def _to_paper_dimensions(paper_size, orientation="portrait"):
+def to_paper_dimensions(paper_size, orientation="portrait"):
     orientations = ("landscape", "portrait", None)
     assert orientation in orientations, repr(orientation)
-    paper_dimensions = paper_size_to_paper_dimensions[paper_size]
+    # lilypond.org/doc/v2.19/Documentation/notation/predefined-paper-sizes
+    paper_dimensions = {
+        "a3": "297 x 420 mm",
+        "a4": "210 x 297 mm",
+        "arch a": "9 x 12 in",
+        "arch b": "12 x 18 in",
+        "arch c": "18 x 24 in",
+        "arch d": "24 x 36 in",
+        "arch e": "36 x 48 in",
+        "legal": "8.5 x 14 in",
+        "ledger": "17 x 11 in",
+        "letter": "8.5 x 11 in",
+        "tabloid": "11 x 17 in",
+    }[paper_size]
     paper_dimensions = paper_dimensions.replace(" x ", " ")
     width, height, unit = paper_dimensions.split()
     if orientation == "landscape":

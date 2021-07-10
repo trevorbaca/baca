@@ -22,6 +22,7 @@ baca
 .. toctree::
    :hidden:
 
+   build
    classes
    commandclasses
    commands
@@ -50,6 +51,7 @@ baca
 .. autosummary::
    :nosignatures:
 
+   build
    classes
    commandclasses
    commands

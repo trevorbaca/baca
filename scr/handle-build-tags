@@ -30,7 +30,7 @@ directory = baca.Path(directory)
 assert directory.is_build() or directory.is__segments()
 print("Handling build tags ...")
 
-pairs = baca.build._collect_segment_lys(directory.build)
+pairs = baca.build.collect_segment_lys(directory.build)
 final_source, final_target = list(pairs)[-1]
 final_file_name = final_target.with_suffix(".ily").name
 

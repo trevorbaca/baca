@@ -22,7 +22,7 @@ import abjad
 import baca
 
 
-def _collect_segment_lys(directory):
+def collect_segment_lys(directory):
     paths = directory.segments.list_paths()
     names = [_.name for _ in paths]
     sources, targets = [], []
@@ -74,7 +74,7 @@ if not directory.is_build():
     print("Must call script in build directory ...")
     sys.exit(-1)
 print("Collecting segment lys ...")
-pairs = _collect_segment_lys(directory.build)
+pairs = collect_segment_lys(directory.build)
 if not pairs:
     print("... no segment lys found.")
     sys.exit(1)

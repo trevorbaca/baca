@@ -14,7 +14,7 @@ def _generate_document(path):
     values = {}
     paper_size = directory.get_metadatum("paper_size", "letter")
     orientation = directory.get_metadatum("orientation")
-    paper_size = baca.build._to_paper_dimensions(paper_size, orientation)
+    paper_size = baca.build.to_paper_dimensions(paper_size, orientation)
     width, height, unit = paper_size
     paper_size = f"{{{width}{unit}, {height}{unit}}}"
     values["paper_size"] = paper_size
@@ -26,7 +26,7 @@ def _generate_document(path):
         values["dashed_part_name"] = dashed_part_name
     else:
         raise ValueError(path.name)
-    baca.build._copy_boilerplate(directory, name, target_name=path.name, values=values)
+    baca.build.copy_boilerplate(directory, name, target_name=path.name, values=values)
 
 
 for string in sys.argv[1:]:
@@ -47,7 +47,7 @@ print()
 tex = directory.build / "front-cover.tex"
 pdf = directory.build / "front-cover.pdf"
 if tex.is_file():
-    baca.build._interpret_tex_file(directory.build / "front-cover.tex")
+    baca.build.interpret_tex_file(directory.build / "front-cover.tex")
 elif pdf.is_file():
     print(f"Using existing {pdf.trim()} ...")
 else:
@@ -57,7 +57,7 @@ print()
 tex = directory.build / "preface.tex"
 pdf = directory.build / "preface.pdf"
 if tex.is_file():
-    baca.build._interpret_tex_file(directory.build / "preface.tex")
+    baca.build.interpret_tex_file(directory.build / "preface.tex")
 elif pdf:
     print(f"Using existing {pdf.trim()} ...")
 else:
@@ -67,7 +67,7 @@ print()
 tex = directory.build / "back-cover.tex"
 pdf = directory.build / "back-cover.pdf"
 if tex.is_file():
-    baca.build._interpret_tex_file(directory.build / "back-cover.tex")
+    baca.build.interpret_tex_file(directory.build / "back-cover.tex")
 elif pdf.is_file():
     print(f"Using existing {pdf.trim()} ...")
 else:
@@ -78,7 +78,7 @@ print("Generating score ...")
 path = directory.build / "score.tex"
 _generate_document(path)
 print()
-baca.build._interpret_tex_file(path)
+baca.build.interpret_tex_file(path)
 score_pdf = directory.build / "score.pdf"
 print(f"Opening {score_pdf.trim()} ...")
 os.system(f"open {score_pdf}")

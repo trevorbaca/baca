@@ -41,24 +41,24 @@ os.system(f"make-layout-ly {path}")
 print()
 file_name = f"{dashed_part_name}-front-cover.tex"
 path = part_directory / file_name
-baca.build._interpret_tex_file(path)
+baca.build.interpret_tex_file(path)
 print()
 file_name = f"{dashed_part_name}-preface.tex"
 path = part_directory / file_name
-baca.build._interpret_tex_file(path)
+baca.build.interpret_tex_file(path)
 print()
 file_name = f"{dashed_part_name}-music.ly"
 path = part_directory / file_name
 LOG = part_directory / "lilypond.log"
-baca.build._run_lilypond(path)
+baca.build.run_lilypond(path)
 print()
 file_name = f"{dashed_part_name}-back-cover.tex"
 path = part_directory / file_name
-baca.build._interpret_tex_file(path)
+baca.build.interpret_tex_file(path)
 print()
 file_name = f"{dashed_part_name}-part.tex"
 path = part_directory / file_name
-baca.build._interpret_tex_file(path)
+baca.build.interpret_tex_file(path)
 if "--do-not-open" not in sys.argv[1:]:
     file_name = f"{dashed_part_name}-part.pdf"
     path = part_directory / file_name

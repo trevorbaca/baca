@@ -30,6 +30,31 @@ Bača API
 
    <hr/>
 
+.. rubric:: :ref:`baca.build <baca--build>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.build.collect_segment_lys
+   ~baca.build.copy_boilerplate
+   ~baca.build.generate_part_music_ly
+   ~baca.build.interpret_tex_file
+   ~baca.build.part_subtitle
+   ~baca.build.run_lilypond
+   ~baca.build.to_paper_dimensions
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: :ref:`baca.classes <baca--classes>`
    :class: section-header
 
