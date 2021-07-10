@@ -17,7 +17,7 @@ def _make_layout_ly(layout_py):
     if "breaks" in dir(layout_module):
         breaks = layout_module.breaks
     else:
-        print(f"No breaks in {{layout_py.trim()}} ...")
+        print(f"No breaks in {layout_py.trim()} ...")
         sys.exit(-1)
     if "spacing" in dir(layout_module):
         spacing = layout_module.spacing
