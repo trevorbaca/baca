@@ -7,7 +7,7 @@ import abjad
 import baca
 
 
-def _make_segment_pdf(directory, do_not_interpret_ly=False, layout=True, open_after=True):
+def _make_segment_pdf(directory, do_not_interpret_ly=False, layout=True):
     assert directory.is_segment()
     if str(directory) not in sys.path:
         sys.path.append(str(directory))
@@ -244,8 +244,6 @@ def _make_segment_pdf(directory, do_not_interpret_ly=False, layout=True, open_af
     if not do_not_interpret_ly:
         if pdf.is_file():
             print(f"Found {pdf.trim()} ...")
-        if pdf.is_file() and open_after:
-            os.system(f"open {pdf}")
     __pycache__ = directory / "__pycache__"
     __pycache__.remove()
 
@@ -266,27 +264,15 @@ print(f"Script called for {directory.trim()} ...")
 do_not_interpret_ly = "--do-not-interpret-ly" in sys.argv
 
 if directory.is_segment():
-    if "--do-not-open" in sys.argv[1:]:
-        open_after = False
-    else:
-        open_after = True
     with abjad.TemporaryDirectoryChange(directory):
-        _make_segment_pdf(
-            directory,
-            do_not_interpret_ly=do_not_interpret_ly,
-            open_after=open_after,
-        )
+        _make_segment_pdf(directory, do_not_interpret_ly=do_not_interpret_ly)
 else:
     assert directory.is_segments()
-    if "--do-not-open" in sys.argv[1:]:
-        print("Use --do-not-open only in segment directory ...")
-        sys.exit(-1)
-    exit = 0
     paths = directory.list_paths()
     paths = [_ for _ in paths if _.is_dir()]
     for i, path in enumerate(paths):
         with abjad.TemporaryDirectoryChange(path):
-            os.system("make-segment-pdf --do-not-open")
+            os.system("make-segment-pdf")
         if i + 1 < len(paths):
             print()
         else:
