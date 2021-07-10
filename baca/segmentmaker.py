@@ -3097,7 +3097,10 @@ class SegmentMaker(abjad.SegmentMaker):
         time_signatures_ = list(time_signatures)
         time_signatures_ = []
         for time_signature in time_signatures:
-            time_signature = abjad.TimeSignature(time_signature)
+            if isinstance(time_signature, str):
+                time_signature = abjad.TimeSignature.from_string(time_signature)
+            else:
+                time_signature = abjad.TimeSignature(time_signature)
             time_signatures_.append(time_signature)
         time_signatures_ = tuple(time_signatures_)
         if not time_signatures_:

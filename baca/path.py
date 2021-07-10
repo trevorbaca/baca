@@ -977,13 +977,10 @@ class Path(pathlib.PosixPath):
 
     def get_time_signature_metadata(self):
         """
-        Gets time signature metadata for buildspace directory.
+        Gets time signature metadata.
         """
         if self.is_segment():
             time_signatures = self.get_metadatum("time_signatures", [])
-            time_signatures = [
-                abjad.TimeSignature.from_string(_) for _ in time_signatures
-            ]
             return time_signatures
         time_signatures = self.contents.get_metadatum("time_signatures")
         if time_signatures is None:
@@ -991,9 +988,7 @@ class Path(pathlib.PosixPath):
         assert isinstance(time_signatures, abjad.OrderedDict)
         time_signatures_ = []
         for segment_name, strings in time_signatures.items():
-            for string in strings:
-                time_signature = abjad.TimeSignature.from_string(string)
-                time_signatures_.append(time_signature)
+            time_signatures_.extend(strings)
         return time_signatures_
 
     def get_title(self, year=True):
