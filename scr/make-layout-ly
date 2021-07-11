@@ -110,7 +110,7 @@ def _make_layout_ly(layout_py):
     lines_.append("%  ]")
     lines.extend(lines_)
     header = "\n".join(lines) + "\n\n"
-    layout_ly.write_text(header + text)
+    layout_ly.write_text(header + text + "\n")
     counter = abjad.String("measure").pluralize(measure_count)
     print(f"Writing {measure_count} + 1 {counter} to {layout_ly.trim()} ...")
 
