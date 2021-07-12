@@ -7,7 +7,7 @@ black-reformat:
 	black --target-version=py38 .
 
 flake_ignore = --ignore=E203,E266,E501,W503
-flake_options = --exclude=__metadata__.py,__persist__.py --isolated --max-line-length=88
+flake_options = --isolated --max-line-length=88
 
 flake8:
 	flake8 ${flake_exclude} ${flake_ignore} ${flake_options}
