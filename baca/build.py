@@ -78,7 +78,7 @@ def copy_boilerplate(directory, source_name, target_name=None, values=None):
         return
     template = target.read_text()
     template = template.format(**values)
-    target.write_text(template)
+    target.write_text(template + "\n")
 
 
 def generate_part_music_ly(
@@ -167,7 +167,7 @@ def generate_part_music_ly(
             segment_ily_include_statements=segment_ily_include_statements,
             segment_ly_include_statements=segment_ly_include_statements,
         )
-    path.write_text(template)
+    path.write_text(template + "\n")
 
 
 def interpret_tex_file(tex, open_after=False):

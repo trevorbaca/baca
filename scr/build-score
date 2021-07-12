@@ -9,26 +9,6 @@ import abjad
 import baca
 
 
-def _generate_document(path):
-    directory = path.parent
-    values = {}
-    paper_size = directory.get_metadatum("paper_size", "letter")
-    orientation = directory.get_metadatum("orientation")
-    paper_size = baca.build.to_paper_dimensions(paper_size, orientation)
-    width, height, unit = paper_size
-    paper_size = f"{{{width}{unit}, {height}{unit}}}"
-    values["paper_size"] = paper_size
-    if path.name.endswith("score.tex"):
-        name = "score.tex"
-    elif path.name.endswith("part.tex"):
-        name = "part.tex"
-        dashed_part_name = path.name.strip("-part.tex")
-        values["dashed_part_name"] = dashed_part_name
-    else:
-        raise ValueError(path.name)
-    baca.build.copy_boilerplate(directory, name, target_name=path.name, values=values)
-
-
 for string in sys.argv[1:]:
     if string.startswith("--directory="):
         directory = string[12:]
@@ -74,11 +54,9 @@ else:
     print("Missing back cover ...")
     sys.exit(-1)
 print()
-print("Generating score ...")
-path = directory.build / "score.tex"
-_generate_document(path)
-print()
-baca.build.interpret_tex_file(path)
+score_tex = directory.build / "score.tex"
+baca.build.interpret_tex_file(score_tex)
 score_pdf = directory.build / "score.pdf"
-print(f"Opening {score_pdf.trim()} ...")
-os.system(f"open {score_pdf}")
+if not score_pdf.is_file():
+    print(f"Could not produce {score_pdf.trim()} ...")
+    sys.exit(-1)
