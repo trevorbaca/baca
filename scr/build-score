@@ -8,7 +8,6 @@ import sys
 import abjad
 import baca
 
-
 for string in sys.argv[1:]:
     if string.startswith("--directory="):
         directory = string[12:]
