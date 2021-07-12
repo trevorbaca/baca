@@ -7,7 +7,7 @@ import abjad
 import baca
 
 
-def _make_segment_pdf(directory, do_not_interpret_ly=False, layout=True):
+def _make_segment_pdf(directory, do_not_interpret_ly=False, layout=True, timing=False):
     assert directory.is_segment()
     if str(directory) not in sys.path:
         sys.path.append(str(directory))
@@ -37,15 +37,10 @@ def _make_segment_pdf(directory, do_not_interpret_ly=False, layout=True):
         path = previous_segment / "__metadata__.py"
         file = baca.Path(path)
         string = file.read_text()
-        #dictionary = {}
-        #exec(string, dictionary)
-        #previous_metadata = dictionary["metadata"]
         previous_metadata = eval(string)
         path = previous_segment / "__persist__.py"
         file = baca.Path(path)
         lines = file.read_text()
-        #exec(lines, dictionary)
-        #previous_persist = dictionary["persist"]
         previous_persist = eval(lines)
     segment_directory = directory
     segment_directory = baca.Path(segment_directory)
@@ -77,11 +72,8 @@ def _make_segment_pdf(directory, do_not_interpret_ly=False, layout=True):
     )
     os.system("black --target-version=py38 __persist__.py 1>/dev/null 2>&1")
     first_segment = segment_directory.segments.get_next_package()
-    if segment_directory.name != first_segment.name:
-        layout_ly = segment_directory / "layout.ly"
-        if not layout_ly.is_file():
-            message = f"{layout_ly.trim()} does not exit."
-            raise Exception(message)
+    layout_ly = segment_directory / "layout.ly"
+    if layout_ly.is_file() and segment_directory.name != first_segment.name:
         result = baca.segments.get_preamble_page_count_overview(layout_ly)
         if result is not None:
             first_page_number, _, _ = result
@@ -130,18 +122,22 @@ def _make_segment_pdf(directory, do_not_interpret_ly=False, layout=True):
             print(message)
     layout_py = segment_directory / "layout.py"
     if not layout_py.exists():
-        print("Writing stub layout.py ...")
-        layout_py.write_text("")
+        #print("Writing stub layout.py ...")
+        #layout_py.write_text("")
+        pass
     layout_ly = segment_directory / "layout.ly"
     if not layout_ly.exists():
-        print("Writing stub layout.ly ...")
-        layout_ly.write_text("")
-    if layout_py.read_text() == "":
-        empty_layout = True
-    else:
-        empty_layout = False
-    if empty_layout:
-        print(f"Ignoring empty {layout_py.trim()} ...")
+        #print("Writing stub layout.ly ...")
+        #layout_ly.write_text("")
+        pass
+#    if layout_py.read_text() == "":
+#        empty_layout = True
+#    else:
+#        empty_layout = False
+    #if empty_layout:
+    if not layout_py.exists():
+        #print(f"Ignoring empty {layout_py.trim()} ...")
+        print(f"No {layout_py.trim()} found ...")
     else:
         layout_time_signatures = baca.segments.get_preamble_time_signatures(layout_ly)
         if layout_time_signatures is not None:
@@ -226,9 +222,10 @@ def _make_segment_pdf(directory, do_not_interpret_ly=False, layout=True):
         base, extension = name.split(".")
         untagged = segment_directory / f"{base}.untagged.{extension}"
         untagged.write_text(string)
-    if not do_not_interpret_ly:
+    if timing and not do_not_interpret_ly:
         timing = segment_directory / ".timing"
         with timing.open(mode="a") as pointer:
+            print(f"Writing timing to {timing.trim()} ...")
             pointer.write("\n")
             line = time.strftime("%Y-%m-%d %H:%M:%S") + "\n"
             pointer.write(line)
@@ -250,31 +247,42 @@ def _make_segment_pdf(directory, do_not_interpret_ly=False, layout=True):
     __pycache__.remove()
 
 
+directory = None
+timing = False
 for string in sys.argv[1:]:
     if string.startswith("--directory="):
         directory = string[12:]
-        break
-else:
-    directory = os.getcwd()
+    if string == "--timing":
+        timing = True
+
+directory = directory or os.getcwd()
 directory = baca.Path(directory)
 if not (directory.is_segment() or directory.is_segments()):
     print("Must call script in segment or segments directory ...")
     sys.exit(-1)
 
-print(f"Script called for {directory.trim()} ...")
+print(f"Calling make-segment-pdf on {directory.trim()} ...")
 
 do_not_interpret_ly = "--do-not-interpret-ly" in sys.argv
 
 if directory.is_segment():
     with abjad.TemporaryDirectoryChange(directory):
-        _make_segment_pdf(directory, do_not_interpret_ly=do_not_interpret_ly)
+        _make_segment_pdf(
+            directory,
+            do_not_interpret_ly=do_not_interpret_ly,
+            timing=timing,
+        )
 else:
     assert directory.is_segments()
     paths = directory.list_paths()
     paths = [_ for _ in paths if _.is_dir()]
     for i, path in enumerate(paths):
         with abjad.TemporaryDirectoryChange(path):
-            os.system("make-segment-pdf")
+            if timing:
+                timing_string = "--timing"
+            else:
+                timing_string = ""
+            os.system(f"make-segment-pdf {timing_string}")
         if i + 1 < len(paths):
             print()
         else:

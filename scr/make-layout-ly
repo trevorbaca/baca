@@ -12,6 +12,9 @@ import baca
 
 
 def _make_layout_ly(layout_py):
+    if not layout_py.is_file():
+        print(f"Skipping layout because no {layout_py.trim()} found ...")
+        return
     layout_module_name = layout_py.with_suffix("").name
     layout_module = importlib.import_module(layout_module_name)
     if "breaks" in dir(layout_module):
@@ -91,12 +94,15 @@ def _make_layout_ly(layout_py):
         if buildspace_directory.name != first_segment.name:
             previous_segment = buildspace_directory.get_previous_package()
             previous_layout_ly = previous_segment / "layout.ly"
-            result = baca.segments.get_preamble_page_count_overview(previous_layout_ly)
-            if result is not None:
-                _, _, final_page_number = result
-                first_page_number = final_page_number + 1
-                line = f"% first_page_number = {first_page_number}"
-                lines.append(line)
+            if previous_layout_ly.is_file():
+                result = baca.segments.get_preamble_page_count_overview(
+                    previous_layout_ly
+                )
+                if result is not None:
+                    _, _, final_page_number = result
+                    first_page_number = final_page_number + 1
+                    line = f"% first_page_number = {first_page_number}"
+                    lines.append(line)
     page_count = breaks.page_count
     lines.append(f"% page_count = {page_count}")
     time_signatures = [str(_) for _ in time_signatures]
