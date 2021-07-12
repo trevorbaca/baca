@@ -37,8 +37,8 @@ class Path(pathlib.PosixPath):
         "__init__.py",
         "__make_pdf__.py",
         "__make_midi__.py",
-        "__metadata__.py",
-        "__persist__.py",
+        "__metadata__",
+        "__persist__",
         "_assets",
         "_segments",
         "illustration.untagged.ily",
@@ -475,7 +475,7 @@ class Path(pathlib.PosixPath):
         else:
             self.add_metadatum(name, value)
 
-    def add_metadatum(self, name, value, *, file_name="__metadata__.py"):
+    def add_metadatum(self, name, value, *, file_name="__metadata__"):
         """
         Adds metadatum.
         """
@@ -797,30 +797,15 @@ class Path(pathlib.PosixPath):
             result = self.name
         return abjad.String(result)
 
-    def get_metadata(self, file_name="__metadata__.py"):
+    def get_metadata(self, file_name="__metadata__"):
         """
         Gets metadata.
         """
-        assert file_name in ("__metadata__.py", "__persist__.py"), repr(file_name)
-        #        if file_name == "__metadata__.py":
-        #            attribute_names = ("metadata",)
-        #        else:
-        #            attribute_names = ("persist",)
+        assert file_name in ("__metadata__", "__persist__"), repr(file_name)
         metadata_py_path = self / file_name
         metadata = None
         if metadata_py_path.is_file():
             file_contents_string = metadata_py_path.read_text()
-            #            try:
-            #                result = abjad.io.execute_string(
-            #                    file_contents_string,
-            #                    attribute_names=attribute_names,
-            #                )
-            #            except NameError as e:
-            #                raise Exception(repr(metadata_py_path), e)
-            #            if result:
-            #                metadata = result[0]
-            #            else:
-            #                metadata = None
             import baca
 
             namespace = {"abjad": abjad, "baca": baca}
@@ -832,7 +817,7 @@ class Path(pathlib.PosixPath):
         metadatum_name,
         default=None,
         *,
-        file_name="__metadata__.py",
+        file_name="__metadata__",
     ):
         """
         Gets metadatum.
@@ -1450,7 +1435,7 @@ class Path(pathlib.PosixPath):
         elif self.is_dir():
             shutil.rmtree(str(self))
 
-    def remove_metadatum(self, name, *, file_name="__metadata__.py"):
+    def remove_metadatum(self, name, *, file_name="__metadata__"):
         """
         Removes metadatum.
         """
@@ -1550,7 +1535,7 @@ class Path(pathlib.PosixPath):
         self,
         metadata,
         *,
-        file_name="__metadata__.py",
+        file_name="__metadata__",
         variable_name="metadata",
     ):
         """
@@ -1564,23 +1549,11 @@ class Path(pathlib.PosixPath):
         dictionary = abjad.OrderedDict(items)
         if dictionary:
             line = abjad.storage(dictionary)
-            # line = f"{variable_name} = {line}"
             lines.append(line)
         else:
-            # lines.append(f"{variable_name} = abjad.OrderedDict()")
             lines.append("abjad.OrderedDict()")
         lines.append("")
         text = "\n".join(lines)
-        #        import_statements = []
-        #        if "abjad." in text:
-        #            import_statements.append("import abjad")
-        #        if "baca." in text:
-        #            import_statements.append("import baca")
-        #        if import_statements:
-        #            import_statements.sort()
-        #            import_statements.append("")
-        #            import_text = "\n".join(import_statements)
-        #            text = import_text + text
         metadata_py_path.write_text(text)
         os.system(f"black --target-version=py38 {metadata_py_path} > /dev/null 2>&1")
 

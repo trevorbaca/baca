@@ -20,7 +20,7 @@ def _make_segment_pdf(directory, do_not_interpret_ly=False, layout=True, timing=
     print(f"Making segment {directory.name} PDF ...")
     import definition
     metadata = directory.get_metadata()
-    persist = directory.get_metadata(file_name="__persist__.py")
+    persist = directory.get_metadata(file_name="__persist__")
     ly = directory / "illustration.ly"
     if ly.exists():
         print(f"Removing {ly.trim()} ...")
@@ -34,11 +34,11 @@ def _make_segment_pdf(directory, do_not_interpret_ly=False, layout=True, timing=
         previous_metadata = None
         previous_persist = None
     else:
-        path = previous_segment / "__metadata__.py"
+        path = previous_segment / "__metadata__"
         file = baca.Path(path)
         string = file.read_text()
         previous_metadata = eval(string)
-        path = previous_segment / "__persist__.py"
+        path = previous_segment / "__persist__"
         file = baca.Path(path)
         lines = file.read_text()
         previous_persist = eval(lines)
@@ -61,16 +61,16 @@ def _make_segment_pdf(directory, do_not_interpret_ly=False, layout=True, timing=
     message = f"Segment-maker runtime {count} {counter} ..."
     print(message)
     segment_maker_runtime = (count, counter)
-    print("Writing __metadata__.py ...")
+    print("Writing __metadata__ ...")
     segment_directory.write_metadata_py(definition.maker.metadata)
-    os.system("black --target-version=py38 __metadata__.py 1>/dev/null 2>&1")
-    print("Writing __persist__.py ...")
+    os.system("black --target-version=py38 __metadata__ 1>/dev/null 2>&1")
+    print("Writing __persist__ ...")
     segment_directory.write_metadata_py(
         definition.maker.persist,
-        file_name="__persist__.py",
+        file_name="__persist__",
         variable_name="persist",
     )
-    os.system("black --target-version=py38 __persist__.py 1>/dev/null 2>&1")
+    os.system("black --target-version=py38 __persist__ 1>/dev/null 2>&1")
     first_segment = segment_directory.segments.get_next_package()
     layout_ly = segment_directory / "layout.ly"
     if layout_ly.is_file() and segment_directory.name != first_segment.name:
