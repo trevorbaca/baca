@@ -1,12 +1,10 @@
-black_exclude = --exclude='boilerplate'
-
 black-check:
-	black --check --diff ${black_exclude} --target-version=py38 .
+	black --check --diff --target-version=py38 .
 
 black-reformat:
-	black ${black_exclude} --target-version=py38 .
+	black --target-version=py38 .
 
-flake_exclude = --exclude=baca/__init__.py,boilerplate
+flake_exclude = --exclude=baca/__init__.py
 flake_ignore = --ignore=E203,E266,E501,W503
 flake_options = --isolated --max-line-length=88
 
