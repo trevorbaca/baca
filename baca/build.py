@@ -102,8 +102,7 @@ def generate_part_music_ly(
             continue
         print(f"Examining {segment.trim()} ...")
     names = [_.stem.replace("_", "-") for _ in segments]
-    boilerplate = "part-music.ly"
-    copy_boilerplate(path.build, boilerplate, target_name=path.name)
+    copy_boilerplate(path.build, "part-music.ly", target_name=path.name)
     lines, ily_lines = [], []
     for i, name in enumerate(names):
         name = "segment-" + name + ".ly"

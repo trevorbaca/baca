@@ -662,6 +662,7 @@ class SegmentMaker(abjad.SegmentMaker):
         "_voice_names",
     )
 
+    # TODO: don't use absolute paths with LilyPond includes
     _absolute_string_trio_stylesheet_path = pathlib.Path(
         "/",
         "Users",
@@ -673,6 +674,7 @@ class SegmentMaker(abjad.SegmentMaker):
         "string-trio.ily",
     )
 
+    # TODO: don't use absolute paths with LilyPond includes
     _absolute_two_voice_staff_stylesheet_path = pathlib.Path(
         "/",
         "Users",
@@ -710,10 +712,6 @@ class SegmentMaker(abjad.SegmentMaker):
         "reapplied": "OliveDrab",
         "redundant": "DeepPink4",
     }
-
-    _score_package_stylesheet_path = pathlib.Path(
-        "..", "..", "stylesheets", "stylesheet.ily"
-    )
 
     ### INITIALIZER ###
 
@@ -2902,9 +2900,6 @@ class SegmentMaker(abjad.SegmentMaker):
             string = f"stage-number-extra-offset = {string}"
             literal = abjad.LilyPondLiteral(string)
             includes.append(literal)
-        # if not self.first_segment:
-        #     path = pathlib.Path("..", "..", "stylesheets", "nonfirst-segment.ily")
-        #    includes.append(path)
         includes.extend(self.includes or [])
         return includes
 

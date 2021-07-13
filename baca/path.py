@@ -18,12 +18,6 @@ class Path(pathlib.PosixPath):
         >>> path = baca.Path("/path/to/scores/my_score/my_score")
         >>> path.mock_scores = "/path/to/scores"
 
-        >>> path.stylesheets
-        Path('/path/to/scores/my_score/my_score/stylesheets')
-
-        >>> path.stylesheets / "contexts.ily"
-        Path('/path/to/scores/my_score/my_score/stylesheets/contexts.ily')
-
     """
 
     ### CLASS VARIABLES ###
@@ -310,25 +304,6 @@ class Path(pathlib.PosixPath):
         """
         if self.contents:
             return self.contents / "segments"
-        else:
-            return None
-
-    @property
-    def stylesheets(self):
-        """
-        Gets stylesheets directory.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-            >>> path.stylesheets
-            Path('/path/to/scores/my_score/my_score/stylesheets')
-            >>> path.stylesheets / "stylesheet.ily"
-            Path('/path/to/scores/my_score/my_score/stylesheets/stylesheet.ily')
-
-        """
-        if self.contents:
-            return self.contents / "stylesheets"
         else:
             return None
 
@@ -714,9 +689,6 @@ class Path(pathlib.PosixPath):
             >>> path.segments.get_asset_type()
             'package'
 
-            >>> path.stylesheets.get_asset_type()
-            'file'
-
             >>> path.wrapper.get_asset_type()
             'asset'
 
@@ -746,7 +718,6 @@ class Path(pathlib.PosixPath):
                 "distribution",
                 "etc",
                 "segment",
-                "stylesheets",
             )
         ):
             return "file"
@@ -1225,9 +1196,6 @@ class Path(pathlib.PosixPath):
             >>> path.contents.is_score_package_path()
             True
 
-            >>> path.stylesheets.is_score_package_path()
-            True
-
             >>> path = path / "build" / "_assets"
             >>> path.is_score_package_path()
             True
@@ -1323,19 +1291,6 @@ class Path(pathlib.PosixPath):
         """
         return self.name == "segments" and self.parent.name != "abjad"
 
-    def is_stylesheets(self):
-        """
-        Is true when path is stylesheets directory.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-            >>> path.stylesheets.is_stylesheets()
-            True
-
-        """
-        return self.name == "stylesheets"
-
     def is_wrapper(self):
         """
         Is true when path is wrapper directory
@@ -1370,8 +1325,6 @@ class Path(pathlib.PosixPath):
                 continue
             if name in ("__init__.py", "__pycache__"):
                 continue
-            if name == "stylesheet.ily" and self.is_stylesheets():
-                pass
             elif name in self._secondary_names:
                 continue
             path = self / name
@@ -1421,8 +1374,6 @@ class Path(pathlib.PosixPath):
         paths = []
         for path in sorted(self.glob("*")):
             if path.name in sorted(self._secondary_names):
-                if path.name == "stylesheet.ily" and self.is_stylesheets():
-                    continue
                 paths.append(type(self)(path))
         return paths
 
