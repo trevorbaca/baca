@@ -35,6 +35,22 @@ else:
     sys.exit(-1)
 print()
 
+tex = directory.build / "blank.tex"
+pdf = directory.build / "blank.pdf"
+if tex.is_file():
+    baca.build.interpret_tex_file(tex)
+elif pdf.is_file():
+    print(f"Using existing {pdf.trim()} ...")
+print()
+
+tex = directory.build / "inscription.tex"
+pdf = directory.build / "inscription.pdf"
+if tex.is_file():
+    baca.build.interpret_tex_file(tex)
+elif pdf.is_file():
+    print(f"Using existing {pdf.trim()} ...")
+print()
+
 tex = directory.build / "preface.tex"
 pdf = directory.build / "preface.pdf"
 if tex.is_file():
@@ -55,14 +71,6 @@ elif pdf.is_file():
 else:
     print("Missing back cover ...")
     sys.exit(-1)
-print()
-
-tex = directory.build / "blank.tex"
-pdf = directory.build / "blank.pdf"
-if tex.is_file():
-    baca.build.interpret_tex_file(tex)
-elif pdf.is_file():
-    print(f"Using existing {pdf.trim()} ...")
 print()
 
 score_tex = directory.build / "score.tex"
