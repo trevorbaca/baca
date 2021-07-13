@@ -24,7 +24,6 @@ build
 
    ~collect_segment_lys
    ~copy_boilerplate
-   ~generate_part_music_ly
    ~interpret_tex_file
    ~part_subtitle
    ~run_lilypond
@@ -33,8 +32,6 @@ build
 .. autofunction:: collect_segment_lys
 
 .. autofunction:: copy_boilerplate
-
-.. autofunction:: generate_part_music_ly
 
 .. autofunction:: interpret_tex_file
 

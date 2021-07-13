@@ -45,7 +45,6 @@ Bača API
 
    ~baca.build.collect_segment_lys
    ~baca.build.copy_boilerplate
-   ~baca.build.generate_part_music_ly
    ~baca.build.interpret_tex_file
    ~baca.build.part_subtitle
    ~baca.build.run_lilypond

@@ -75,7 +75,6 @@ path
       is_scores
       is_segment
       is_segments
-      is_stylesheets
       is_wrapper
       list_paths
       list_secondary_paths
@@ -84,7 +83,6 @@ path
       scores
       segments
       sort_segment_names
-      stylesheets
       trim
       with_name
       wrapper
@@ -304,8 +302,6 @@ path
 
       .. automethod:: Path.is_socket
 
-   .. automethod:: Path.is_stylesheets
-
    .. container:: inherited
 
       .. automethod:: Path.is_symlink
@@ -503,8 +499,6 @@ path
    .. container:: inherited
 
       .. autoattribute:: Path.stem
-
-   .. autoattribute:: Path.stylesheets
 
    .. container:: inherited
 
