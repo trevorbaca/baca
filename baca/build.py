@@ -62,25 +62,6 @@ def collect_segment_lys(directory):
     return zip(sources, targets)
 
 
-def copy_boilerplate(directory, source_name, target_name=None, values=None):
-    target_name = target_name or source_name
-    target = directory / target_name
-    if target.exists():
-        print(f"Removing {target.trim()} ...")
-    print(f"Writing {target.trim()} ...")
-    values = values or {}
-    boilerplate = baca.Path(baca.__file__).parent.parent / "boilerplate"
-    source = boilerplate / source_name
-    target_name = target_name or source_name
-    target = directory / target_name
-    shutil.copyfile(str(source), str(target))
-    if not values:
-        return
-    template = target.read_text()
-    template = template.format(**values)
-    target.write_text(template + "\n")
-
-
 def interpret_tex_file(tex, open_after=False):
     if not tex.is_file():
         print(f"Can not find {tex.trim()} ...")

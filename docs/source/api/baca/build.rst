@@ -23,15 +23,12 @@ build
    :nosignatures:
 
    ~collect_segment_lys
-   ~copy_boilerplate
    ~interpret_tex_file
    ~part_subtitle
    ~run_lilypond
    ~to_paper_dimensions
 
 .. autofunction:: collect_segment_lys
-
-.. autofunction:: copy_boilerplate
 
 .. autofunction:: interpret_tex_file
 
