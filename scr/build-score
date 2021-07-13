@@ -23,6 +23,7 @@ if not directory.is_score_build():
 print("Building score ...")
 os.system("interpret-build-music --do-not-open")
 print()
+
 tex = directory.build / "front-cover.tex"
 pdf = directory.build / "front-cover.pdf"
 if tex.is_file():
@@ -33,6 +34,7 @@ else:
     print("Missing front cover ...")
     sys.exit(-1)
 print()
+
 tex = directory.build / "preface.tex"
 pdf = directory.build / "preface.pdf"
 if tex.is_file():
@@ -43,6 +45,7 @@ else:
     print("Missing preface ...")
     sys.exit(-1)
 print()
+
 tex = directory.build / "back-cover.tex"
 pdf = directory.build / "back-cover.pdf"
 if tex.is_file():
@@ -53,6 +56,15 @@ else:
     print("Missing back cover ...")
     sys.exit(-1)
 print()
+
+tex = directory.build / "blank.tex"
+pdf = directory.build / "blank.pdf"
+if tex.is_file():
+    baca.build.interpret_tex_file(tex)
+elif pdf.is_file():
+    print(f"Using existing {pdf.trim()} ...")
+print()
+
 score_tex = directory.build / "score.tex"
 baca.build.interpret_tex_file(score_tex)
 score_pdf = directory.build / "score.pdf"
