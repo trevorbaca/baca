@@ -4,6 +4,8 @@ Call from a single part directory.
 
 A short driver script will benecessary to loop this script over all part directories
 in a build.
+
+TODO: figure out the right way to integrate segment collection.
 """
 import io
 import os
@@ -59,7 +61,3 @@ print()
 file_name = f"{dashed_part_name}-part.tex"
 path = part_directory / file_name
 baca.build.interpret_tex_file(path)
-if "--do-not-open" not in sys.argv[1:]:
-    file_name = f"{dashed_part_name}-part.pdf"
-    path = part_directory / file_name
-    os.system(f"open {path}")

@@ -38,7 +38,7 @@ def _make_container_to_part_assignment(directory):
     for source, target in pairs:
         segment = source.parent
         value = segment.get_metadatum(
-            "container_to_part_assignment", file_name="__persist__.py"
+            "container_to_part_assignment", file_name="__persist__"
         )
         if value:
             container_to_part_assignment[segment.name] = value
@@ -100,8 +100,7 @@ def generate_part_music_ly(
     for segment in segments:
         if not segment.is_segment():
             continue
-        message = f"examining {segment.trim()} ..."
-        print(message)
+        print(f"Examining {segment.trim()} ...")
     names = [_.stem.replace("_", "-") for _ in segments]
     boilerplate = "part-music.ly"
     copy_boilerplate(path.build, boilerplate, target_name=path.name)
@@ -147,8 +146,7 @@ def generate_part_music_ly(
         identifiers = baca.segments.part_to_identifiers(path, part, dictionary)
         if isinstance(identifiers, str):
             print(identifiers + " ...")
-            message = f"removing {path.trim()} ..."
-            print(message)
+            print(f"Removing {path.trim()} ...")
             path.remove()
             return
         identifiers = ["\\" + _ for _ in identifiers]

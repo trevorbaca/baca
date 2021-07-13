@@ -2115,7 +2115,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for segment in self.segment_directory.parent.list_paths():
             if segment == self.segment_directory:
                 break
-            contexts_ = segment.get_metadatum(string, file_name="__persist__.py")
+            contexts_ = segment.get_metadatum(string, file_name="__persist__")
             contexts.update(contexts_)
         self._previously_alive_contexts.extend(sorted(contexts))
 

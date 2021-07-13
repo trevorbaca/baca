@@ -2233,7 +2233,7 @@ def _instrument_to_staff_identifiers(path, instrument):
         paths = []
     for segment in paths:
         dictionary = segment.get_metadatum(
-            "alive_during_segment", [], file_name="__persist__.py"
+            "alive_during_segment", [], file_name="__persist__"
         )
         alive_during_segment[segment.name] = dictionary
     staves_in_score = []
