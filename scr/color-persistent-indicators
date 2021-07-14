@@ -2,29 +2,8 @@
 import os
 import sys
 
-import abjad
 import baca
 
 directory = os.getcwd()
-directory = baca.Path(directory)
-if directory.parent.name != "segments":
-    print("Must call in segment directory ...")
-    sys.exit(-1)
-
 undo = "--undo" in sys.argv[1:]
-
-for job in (
-    baca.jobs.color_clefs,
-    baca.jobs.color_dynamics,
-    baca.jobs.color_instruments,
-    baca.jobs.color_margin_markup,
-    baca.jobs.color_metronome_marks,
-    baca.jobs.color_persistent_indicators,
-    baca.jobs.color_staff_lines,
-    baca.jobs.color_time_signatures,
-):
-    job = job(directory, undo=undo)
-    job = abjad.new(job, message_zero=True)
-    messages = job()
-    for message in messages:
-        print(message)
+baca.build.color_persistent_indicators(directory, undo=undo)

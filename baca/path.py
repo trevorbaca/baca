@@ -382,7 +382,7 @@ class Path(pathlib.PosixPath):
                     text, count, skipped = abjad.activate(text, tag, skipped=True)
                 self.write_text(text)
         else:
-            assert self.is_dir()
+            assert self.is_dir(), repr(self)
             count, skipped = 0, 0
             for path in sorted(self.glob("**/*")):
                 path = type(self)(path)

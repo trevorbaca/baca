@@ -2,21 +2,12 @@
 import os
 import sys
 
-import abjad
 import baca
 
 directory = os.getcwd()
-directory = baca.Path(directory)
-
 if len(sys.argv) < 2:
     print("Missing mandatory tag parameter ...")
     sys.exit(-1)
-
+tag = sys.argv[1]
 undo = "--undo" in sys.argv[2:]
-
-string = sys.argv[1]
-tag = abjad.Tag(string)
-job = baca.jobs.show_tag(directory, tag, undo=undo)
-job = abjad.new(job, message_zero=True)
-for message in job():
-    print(message)
+baca.build.show_tag(directory, tag, undo=undo)

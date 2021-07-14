@@ -2,23 +2,7 @@
 import os
 import sys
 
-import abjad
 import baca
-
-
-def _run(
-    job,
-    *,
-    quiet=False,
-):
-    """
-    Runs ``job`` on ``path``.
-    """
-    message_zero = not bool(quiet)
-    job = abjad.new(job, message_zero=message_zero)
-    messages = job()
-    for message in messages:
-        print(message)
 
 for string in sys.argv[1:]:
     if string.startswith("--directory="):
@@ -26,101 +10,4 @@ for string in sys.argv[1:]:
         break
 else:
     directory = os.getcwd()
-directory = baca.Path(directory)
-assert directory.is_build() or directory.is__segments()
-print("Handling build tags ...")
-
-pairs = baca.build.collect_segment_lys(directory.build)
-final_source, final_target = list(pairs)[-1]
-final_file_name = final_target.with_suffix(".ily").name
-
-
-def match_left_broken_should_deactivate(tags):
-    if baca.tags.LEFT_BROKEN in tags and baca.tags.SPANNER_START in tags:
-        return True
-    if (
-        baca.tags.LEFT_BROKEN in tags
-        and baca.tags.SPANNER_STOP in tags
-        and baca.tags.EXPLICIT_DYNAMIC in tags
-    ):
-        return True
-    return False
-
-
-def match_phantom_should_activate(tags):
-    if baca.tags.PHANTOM not in tags:
-        return False
-    if baca.tags.ONE_VOICE_COMMAND in tags:
-        return True
-    if baca.tags.SHOW_TO_JOIN_BROKEN_SPANNERS in tags:
-        return True
-    if baca.tags.SPANNER_STOP in tags:
-        return True
-    return False
-
-
-def match_phantom_should_deactivate(tags):
-    if baca.tags.PHANTOM not in tags:
-        return False
-    if baca.tags.SPANNER_START in tags and baca.tags.LEFT_BROKEN in tags:
-        return True
-    if baca.tags.SPANNER_STOP in tags and baca.tags.RIGHT_BROKEN in tags:
-        return True
-    if baca.tags.HIDE_TO_JOIN_BROKEN_SPANNERS in tags:
-        return True
-    return False
-
-
-_segments = directory._segments
-for job in [
-    baca.jobs.handle_edition_tags(_segments),
-    baca.jobs.handle_fermata_bar_lines(directory),
-    baca.jobs.handle_shifted_clefs(_segments),
-    baca.jobs.handle_mol_tags(_segments),
-    baca.jobs.color_persistent_indicators(_segments, undo=True),
-    baca.jobs.show_music_annotations(_segments, undo=True),
-    baca.jobs.join_broken_spanners(_segments),
-    baca.jobs.show_tag(
-        _segments,
-        "left-broken-should-deactivate",
-        match=match_left_broken_should_deactivate,
-        undo=True,
-    ),
-    baca.jobs.show_tag(_segments, baca.tags.PHANTOM, skip_file_name=final_file_name),
-    baca.jobs.show_tag(
-        _segments,
-        baca.tags.PHANTOM,
-        prepend_empty_chord=True,
-        skip_file_name=final_file_name,
-        undo=True,
-    ),
-    baca.jobs.show_tag(
-        _segments,
-        "phantom-should-activate",
-        match=match_phantom_should_activate,
-        skip_file_name=final_file_name,
-    ),
-    baca.jobs.show_tag(
-        _segments,
-        "phantom-should-deactivate",
-        match=match_phantom_should_deactivate,
-        skip_file_name=final_file_name,
-        undo=True,
-    ),
-    baca.jobs.show_tag(
-        _segments,
-        baca.tags.EOS_STOP_MM_SPANNER,
-        skip_file_name=final_file_name,
-    ),
-    baca.jobs.show_tag(
-        _segments,
-        baca.tags.METRIC_MODULATION_IS_STRIPPED,
-        undo=True,
-    ),
-    baca.jobs.show_tag(
-        _segments,
-        baca.tags.METRIC_MODULATION_IS_SCALED,
-        undo=True,
-    ),
-]:
-    _run(job, quiet=False)
+baca.build.handle_build_tags(directory)

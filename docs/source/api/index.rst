@@ -44,9 +44,14 @@ Bača API
    :nosignatures:
 
    ~baca.build.collect_segment_lys
+   ~baca.build.color_persistent_indicators
+   ~baca.build.handle_build_tags
+   ~baca.build.handle_part_tags
    ~baca.build.interpret_tex_file
    ~baca.build.part_subtitle
    ~baca.build.run_lilypond
+   ~baca.build.show_annotations
+   ~baca.build.show_tag
    ~baca.build.to_paper_dimensions
 
 .. raw:: html
