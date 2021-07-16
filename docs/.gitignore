@@ -1,4 +1,0 @@
-build/
-# exclude all directories in source directory
-!source/**
-__pycache__
