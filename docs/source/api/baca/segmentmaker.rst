@@ -84,7 +84,6 @@ segmentmaker
       test_container_identifiers
       time_signatures
       transpose_score
-      validate_measure_count
       voice_metadata
 
    .. raw:: html
@@ -246,7 +245,5 @@ segmentmaker
    .. autoattribute:: SegmentMaker.time_signatures
 
    .. autoattribute:: SegmentMaker.transpose_score
-
-   .. autoattribute:: SegmentMaker.validate_measure_count
 
    .. autoattribute:: SegmentMaker.voice_metadata

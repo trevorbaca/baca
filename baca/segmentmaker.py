@@ -657,7 +657,6 @@ class SegmentMaker(abjad.SegmentMaker):
         "_test_container_identifiers",
         "_time_signatures",
         "_transpose_score",
-        "_validate_measure_count",
         "_voice_metadata",
         "_voice_names",
     )
@@ -765,7 +764,6 @@ class SegmentMaker(abjad.SegmentMaker):
             ]
         ] = None,
         transpose_score: bool = None,
-        validate_measure_count: int = None,
     ) -> None:
         super().__init__()
         if activate is not None:
@@ -844,13 +842,11 @@ class SegmentMaker(abjad.SegmentMaker):
             test_container_identifiers = bool(test_container_identifiers)
         self._test_container_identifiers = test_container_identifiers
         self._transpose_score = transpose_score
-        self._validate_measure_count = validate_measure_count
         self._voice_metadata: abjad.OrderedDict = abjad.OrderedDict()
         self._voice_names: typing.Optional[typing.Tuple[str, ...]] = None
         self._commands: typing.List[scoping.Command] = []
         self._import_manifests()
         self._initialize_time_signatures(time_signatures)
-        self._validate_measure_count_()
 
     ### SPECIAL METHODS ###
 
@@ -4382,15 +4378,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self.score._update_now(offsets=True)
         self.score._is_forbidden_to_update = is_forbidden_to_update
 
-    def _validate_measure_count_(self):
-        if not self.validate_measure_count:
-            return
-        found = len(self.time_signatures)
-        if found != self.validate_measure_count:
-            message = f"found {found} measures"
-            message += f" (not {self.validate_measure_count})."
-            raise Exception(message)
-
     def _voice_to_rhythm_commands(self, voice):
         commands = []
         for command in self.commands:
@@ -5858,27 +5845,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
         """
         return self._transpose_score
-
-    @property
-    def validate_measure_count(self) -> typing.Optional[int]:
-        """
-        Gets validate measure count.
-
-        ..  container:: example exception
-
-            Raises exception when measures found do not equal validate count:
-
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     validate_measure_count=6,
-            ...     )
-            Traceback (most recent call last):
-                ...
-            Exception: found 4 measures (not 6).
-
-        """
-        return self._validate_measure_count
 
     @property
     def voice_metadata(self) -> abjad.OrderedDict:
