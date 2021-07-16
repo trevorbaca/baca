@@ -661,30 +661,6 @@ class SegmentMaker(abjad.SegmentMaker):
         "_voice_names",
     )
 
-    # TODO: don't use absolute paths with LilyPond includes
-    _absolute_string_trio_stylesheet_path = pathlib.Path(
-        "/",
-        "Users",
-        "trevorbaca",
-        "baca",
-        "docs",
-        "source",
-        "_stylesheets",
-        "string-trio.ily",
-    )
-
-    # TODO: don't use absolute paths with LilyPond includes
-    _absolute_two_voice_staff_stylesheet_path = pathlib.Path(
-        "/",
-        "Users",
-        "trevorbaca",
-        "baca",
-        "docs",
-        "source",
-        "_stylesheets",
-        "two-voice-staff.ily",
-    )
-
     _prototype_to_manifest_name = {
         "abjad.Instrument": "instruments",
         "abjad.MetronomeMark": "metronome_marks",
@@ -2853,11 +2829,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 return ["three-voice-staff.ily"]
             else:
                 return ["string-trio.ily"]
-        elif self.environment == "external":
-            if abjad.get.indicator(self.score, const.TWO_VOICE):
-                return [self._absolute_two_voice_staff_stylesheet_path]
-            else:
-                return [self._absolute_string_trio_stylesheet_path]
         includes = []
         path = pathlib.Path("..", "..", "stylesheet.ily")
         includes.append(path)
@@ -5871,26 +5842,6 @@ class SegmentMaker(abjad.SegmentMaker):
     ) -> abjad.LilyPondFile:
         """
         Runs segment-maker.
-
-        :param deactivate: tags to deactivate in LilyPond file output.
-
-        :param environment: stylesheet path control parameter. Leave set to
-            none to render segments in real score.
-            Set to ``"docs"`` for API examples.
-            Set to ``"external"`` to debug API examples in a separate file.
-            Set to ``"layout"`` when making layout.ly file.
-
-        :param metadata: metadata found in current segment directory.
-
-        :param midi: set to true to generate MIDI output.
-
-        :param previous_metadata: metadata found in previous segment directory.
-
-        :param remove: tags to remove in LilyPond file output.
-
-        :param segment_directory: path providing access to current segment
-            directory.
-
         """
         self._environment = environment
         self._metadata: abjad.OrderedDict = abjad.OrderedDict(metadata)
