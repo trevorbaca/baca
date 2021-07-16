@@ -2822,14 +2822,16 @@ class SegmentMaker(abjad.SegmentMaker):
                     return key
 
     def _get_lilypond_includes(self):
-        if self.environment == "docs":
-            if abjad.get.indicator(self.score, const.TWO_VOICE):
-                return ["two-voice-staff.ily"]
-            elif abjad.get.indicator(self.score, const.THREE_VOICE):
-                return ["three-voice-staff.ily"]
-            else:
-                return ["string-trio.ily"]
         includes = []
+        if self.environment == "docs":
+            includes.append("baca.ily")
+            if abjad.get.indicator(self.score, const.TWO_VOICE):
+                includes.append("baca-two-voice-staff.ily")
+            elif abjad.get.indicator(self.score, const.THREE_VOICE):
+                includes.append("baca-three-voice-staff.ily")
+            else:
+                includes.append("baca-string-trio.ily")
+            return includes
         path = pathlib.Path("..", "..", "stylesheet.ily")
         includes.append(path)
         if self.clock_time_extra_offset is not None:
