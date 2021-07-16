@@ -132,17 +132,8 @@ def _make_layout_ly(layout_py):
     bols = bol_measure_numbers
     count = len(bols)
     numbers = abjad.String("number").pluralize(count)
-    if count <= 4:
-        items = ", ".join([str(_) for _ in bols])
-        print(f"Writing BOL measure {numbers} {items} to metadata ...")
-    else:
-        print(f"Writing BOL measure {numbers} to metadata ...")
-        string = pprint.pformat(bols, compact=True, width=80 - 3)
-        lines = string.split("\n")
-        lines = ["  " + _.strip("[").strip("]").strip() for _ in lines]
-        lines[-1] = lines[-1] + " ..."
-        for line in lines:
-            print(line)
+    items = ", ".join([str(_) for _ in bols])
+    print(f"Writing BOL measure {numbers} {items} to metadata ...")
     buildspace_directory.add_buildspace_metadatum(
         "bol_measure_numbers",
         bol_measure_numbers,
