@@ -114,7 +114,7 @@ else:
         sys.exit(1)
     if build_directory._segments.exists():
         print(f"Removing {build_directory._segments.trim()} ...")
-        build_directory._segments.remove()
+        shutil.rmtree(str(build_directory._segments))
     build_directory._segments.mkdir()
     for source, target in pairs:
         source_ily = source.with_suffix(".ily")
@@ -143,4 +143,4 @@ baca.build.run_lilypond(music_ly_file_path)
 
 if build_directory._segments.is_dir():
     print(f"Removing {build_directory._segments.trim()} ...")
-    build_directory._segments.remove()
+    shutil.rmtree(str(build_directory._segments))

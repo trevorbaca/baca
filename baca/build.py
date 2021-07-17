@@ -130,7 +130,7 @@ def color_persistent_indicators(directory, undo=False):
 
 def handle_build_tags(directory):
     directory = baca.Path(directory)
-    assert directory.is_build() or directory.is__segments()
+    assert directory.is_build() or directory.name == "_segments"
     print("Handling build tags ...")
     pairs = baca.build.collect_segment_lys(directory.build)
     final_source, final_target = list(pairs)[-1]
@@ -389,7 +389,7 @@ def interpret_tex_file(tex, open_after=False):
     pdf = tex.with_suffix(".pdf")
     if pdf.exists():
         print(f"Removing {pdf.trim()} ...")
-        pdf.remove()
+        pdf.unlink()
     print(f"Interpreting {tex.trim()} ...")
     if not tex.is_file():
         return
@@ -413,7 +413,7 @@ def interpret_tex_file(tex, open_after=False):
         shutil.move(str(source), str(target))
         print(f"Logging to {target.trim()} ...")
         for path in sorted(tex.parent.glob("*.aux")):
-            path.remove()
+            path.unlink()
     if pdf.is_file():
         print(f"Found {pdf.trim()} ...")
         if open_after:
@@ -451,10 +451,10 @@ def run_lilypond(ly_file_path):
     lilypond_log_file_name = "." + ly_file_path.name + ".log"
     lilypond_log_file_path = directory / lilypond_log_file_name
     if backup_pdf.exists():
-        backup_pdf.remove()
+        backup_pdf.unlink()
     if pdf.exists():
         print(f"Removing {pdf.trim()} ...")
-        pdf.remove()
+        pdf.unlink()
     assert not pdf.exists()
     with abjad.TemporaryDirectoryChange(directory=directory):
         print(f"Interpreting {ly_file_path.trim()} ...")

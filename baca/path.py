@@ -5,32 +5,11 @@ import typing
 
 import abjad
 
-configuration = abjad.Configuration()
-
 
 class Path(pathlib.PosixPath):
     """
     Path in score package.
     """
-
-    ### CLASS VARIABLES ###
-
-    _secondary_names = (
-        ".gitignore",
-        ".log",
-        ".timing",
-        "__init__.py",
-        "__make_pdf__.py",
-        "__make_midi__.py",
-        "__metadata__",
-        "__persist__",
-        "_assets",
-        "_segments",
-        "illustration.untagged.ily",
-        "illustration.untagged.ly",
-        "layout.untagged.ly",
-        "stylesheet.ily",
-    )
 
     ### PRIVATE PROPERTIES ###
 
@@ -39,34 +18,14 @@ class Path(pathlib.PosixPath):
         """
         Gets _assets directory.
         """
-        if self.is_builds():
-            return self / "_assets"
-        if self.is_score_build():
-            return self / "_assets"
-        if self.is_parts():
-            return self / "_assets"
-        if self.is_part():
-            return self.parent / "_assets"
-        return None
+        return self / "_assets"
 
     @property
     def _segments(self):
         """
         Gets _segments directory.
         """
-        if self.is__assets():
-            return self.parent / "_segments"
-        if self.is__segments():
-            return self
-        if self.is_score_build():
-            return self / "_segments"
-        if self.is_parts():
-            return self / "_segments"
-        if self.is_part():
-            return self.parent / "_segments"
-        if self.parent._segments is not None:
-            return self.parent._segments
-        return None
+        return self / "_segments"
 
     ### PUBLIC PROPERTIES ###
 
@@ -87,10 +46,7 @@ class Path(pathlib.PosixPath):
         """
         Gets builds directory.
         """
-        if self.contents:
-            return self.contents / "builds"
-        else:
-            return None
+        return self.contents / "builds"
 
     @property
     def contents(self):
@@ -114,40 +70,21 @@ class Path(pathlib.PosixPath):
         """
         Gets distribution directory.
         """
-        if self.contents:
-            return self.contents / "distribution"
-        else:
-            return None
+        return self.contents / "distribution"
 
     @property
     def etc(self):
         """
         Gets etc directory.
         """
-        if self.contents:
-            return self.contents / "etc"
-        else:
-            return None
-
-    @property
-    def scores(self):
-        """
-        Gets scores directory.
-        """
-        path = os.path.expanduser("~")
-        path = Path(path) / "Scores"
-        return None
-        return path
+        return self.contents / "etc"
 
     @property
     def segments(self):
         """
         Gets segments directory.
         """
-        if self.contents:
-            return self.contents / "segments"
-        else:
-            return None
+        return self.contents / "segments"
 
     @property
     def wrapper(self):
@@ -503,51 +440,6 @@ class Path(pathlib.PosixPath):
         text = "".join(lines)
         include_path.write_text(text)
 
-    def get_asset_type(self):
-        """
-        Gets asset identifier.
-        """
-        if self.is_wrapper():
-            return "asset"
-        elif self.is_contents():
-            return "directory"
-        elif self.is_segments():
-            return "package"
-        elif self.is_builds():
-            return "directory"
-        else:
-            return "asset"
-
-    def get_files_ending_with(self, name):
-        """
-        Gets files in path ending with ``name``.
-        """
-        paths = []
-        for path in self.list_paths():
-            if path.name.endswith(name):
-                paths.append(path)
-        return paths
-
-    def get_identifier(self):
-        """
-        Gets identifier.
-
-        Returns title when path is contents directory.
-
-        Returns name metadatum when name metadatum exists.
-
-        Returns path name otherwise.
-        """
-        if self.is_wrapper():
-            result = self.contents.get_title()
-        elif self.is_contents():
-            result = self.get_title()
-        elif self.is_dir():
-            result = self.get_metadatum("name", self.name)
-        else:
-            result = self.name
-        return abjad.String(result)
-
     def get_metadata(self, file_name="__metadata__"):
         """
         Gets metadata.
@@ -579,40 +471,6 @@ class Path(pathlib.PosixPath):
             metadatum = default
         return metadatum
 
-    def get_next_score(self, cyclic=False):
-        """
-        Gets next score.
-        """
-        if not self.is_dir():
-            return None
-        wrappers = []
-        if not wrappers:
-            return None
-        wrapper = self.wrapper
-        if wrapper == wrappers[-1] and not cyclic:
-            return None
-        assert isinstance(wrapper, Path)
-        index = wrappers.index(wrapper)
-        cyclic_wrappers = abjad.CyclicTuple(wrappers)
-        return cyclic_wrappers[index + 1]
-
-    def get_previous_score(self, cyclic=False):
-        """
-        Gets previous score.
-        """
-        if not self.is_dir():
-            return None
-        wrappers = []
-        if not wrappers:
-            return None
-        wrapper = self.wrapper
-        if wrapper == wrappers[0] and not cyclic:
-            return None
-        assert wrapper is not None
-        index = wrappers.index(wrapper)
-        cyclic_wrappers = abjad.CyclicTuple(wrappers)
-        return cyclic_wrappers[index - 1]
-
     def get_title(self, year=True):
         """
         Gets score title.
@@ -626,18 +484,6 @@ class Path(pathlib.PosixPath):
             result = self.get_metadatum("title")
             result = result or self.name
             return result
-
-    def is__assets(self):
-        """
-        Is true when path is _assets directory.
-        """
-        return self.name == "_assets"
-
-    def is__segments(self):
-        """
-        Is true when path is _segments directory.
-        """
-        return self.name == "_segments"
 
     def is_build(self):
         """
@@ -670,7 +516,7 @@ class Path(pathlib.PosixPath):
         """
         if self.is_build() or self.is_builds():
             return True
-        if self.is__segments() or self.is_segment() or self.is_segments():
+        if self.name == "_segments" or self.is_segment() or self.is_segments():
             return True
         return False
 
@@ -767,13 +613,7 @@ class Path(pathlib.PosixPath):
         names = []
         for name in sorted([_.name for _ in self.iterdir()]):
             name = abjad.String(name)
-            if name.startswith("_") and not is_segments:
-                continue
-            if name in (".DS_Store", ".cache", ".git", ".gitmodules"):
-                continue
-            if name in ("__init__.py", "__pycache__"):
-                continue
-            elif name in self._secondary_names:
+            if not name[0].isalnum():
                 continue
             path = self / name
             try:
@@ -784,8 +624,7 @@ class Path(pathlib.PosixPath):
         if is_segments:
             names = [_ for _ in names if not _.endswith("backup")]
             names = [_ for _ in names if not _.startswith(".")]
-            names = Path.sort_segment_names(names)
-        if self.is__segments():
+        if self.name == "_segments":
             prefix = "segment-"
             names = [_ for _ in names if _.startswith(prefix)]
             single_character_names, double_character_names = [], []
@@ -808,15 +647,6 @@ class Path(pathlib.PosixPath):
         paths = [self / _ for _ in names]
         return paths
 
-    def remove(self):
-        """
-        Removes path if it exists.
-        """
-        if self.is_file():
-            self.unlink()
-        elif self.is_dir():
-            shutil.rmtree(str(self))
-
     def remove_metadatum(self, name, *, file_name="__metadata__"):
         """
         Removes metadatum.
@@ -828,53 +658,6 @@ class Path(pathlib.PosixPath):
         except KeyError:
             pass
         self.write_metadata_py(metadata, file_name=file_name)
-
-    @staticmethod
-    def sort_segment_names(strings):
-        """
-        Sorts segment name ``strings``.
-
-        ..  container:: example
-
-            >>> strings = ['AA', 'Z', '_11', '_9']
-            >>> baca.Path.sort_segment_names(strings)
-            ['_9', '_11', 'Z', 'AA']
-
-        """
-        names = []
-        for string in strings:
-            name = abjad.String(string)
-            names.append(name)
-
-        def _compare(name_1, name_2):
-            letter_1 = name_1.segment_letter()
-            letter_2 = name_2.segment_letter()
-            rank_1 = name_1.segment_rank()
-            rank_2 = name_2.segment_rank()
-            if letter_1 == letter_2:
-                if rank_1 < rank_2:
-                    return -1
-                if rank_1 == rank_2:
-                    return 0
-                if rank_1 > rank_2:
-                    return 1
-            if letter_1 == "_":
-                return -1
-            if letter_2 == "_":
-                return 1
-            if len(letter_1) == len(letter_2):
-                if letter_1 < letter_2:
-                    return -1
-                if letter_2 < letter_1:
-                    return 1
-            if len(letter_1) < len(letter_2):
-                return -1
-            assert len(letter_2) < len(letter_1)
-            return 1
-
-        names_ = abjad.TypedList(names)
-        names_.sort(cmp=_compare)
-        return list(names_)
 
     def trim(self):
         """

@@ -24,11 +24,11 @@ def _make_segment_pdf(directory, do_not_interpret_ly=False, layout=True, timing=
     ly = directory / "illustration.ly"
     if ly.exists():
         print(f"Removing {ly.trim()} ...")
-        ly.remove()
+        ly.unlink()
     pdf = directory / "illustration.pdf"
     if pdf.exists():
         print(f"Removing {pdf.trim()} ...")
-        pdf.remove()
+        pdf.unlink()
     if directory.name == "01":
         previous_metadata = None
         previous_persist = None
@@ -244,7 +244,7 @@ def _make_segment_pdf(directory, do_not_interpret_ly=False, layout=True, timing=
         if pdf.is_file():
             print(f"Found {pdf.trim()} ...")
     __pycache__ = directory / "__pycache__"
-    __pycache__.remove()
+    shutil.rmtree(str(__pycache__))
 
 
 directory = None
