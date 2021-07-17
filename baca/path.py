@@ -107,9 +107,11 @@ class Path(pathlib.PosixPath):
         """
         parts = str(self).split(os.sep)
         previous_part = None
-        for i, part in enumerate(parts):
+        for i, part in enumerate(reversed(parts)):
             if part == previous_part:
-                wrapper = os.sep.join(parts[: i + 1])
+                if i == 1:
+                    return self
+                wrapper = os.sep.join(parts[: -(i - 1)])
                 wrapper = Path(wrapper)
                 return wrapper
             previous_part = part
@@ -162,9 +164,9 @@ class Path(pathlib.PosixPath):
         """
         parts = str(self).split(os.sep)
         previous_part = None
-        for i, part in enumerate(parts):
+        for i, part in enumerate(reversed(parts)):
             if part == previous_part:
-                wrapper = os.sep.join(parts[:i])
+                wrapper = os.sep.join(parts[:-i])
                 wrapper = Path(wrapper)
                 return wrapper
             previous_part = part
