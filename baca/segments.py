@@ -2189,7 +2189,6 @@ def _global_rest_identifiers(path):
     """
     Gets global rest identifiers.
     """
-    assert not path.is_external(), repr(path)
     identifiers = []
     if path.segments is not None:
         paths = path.segments.list_paths()
@@ -2224,7 +2223,6 @@ def _instrument_to_staff_identifiers(path, instrument):
     """
     Changes ``instrument`` to staff identifiers dictionary.
     """
-    assert not path.is_external(), repr(path)
     alive_during_segment = abjad.OrderedDict()
     if path.segments is not None:
         paths = path.segments.list_paths()
@@ -2404,7 +2402,6 @@ def global_skip_identifiers(path):
     """
     Gets global skip identifiers.
     """
-    assert not path.is_external(), repr(path)
     identifiers = []
     if path.segments is not None:
         paths = path.segments.list_paths()
@@ -2422,7 +2419,6 @@ def part_to_identifiers(path, part, container_to_part_assignment):
     Changes ``part`` to (part container) identifiers (using
     ``container_to_part_assignment`` dictionary).
     """
-    assert not path.is_external(), repr(path)
     if not isinstance(part, Part):
         raise TypeError(f"must be part (not {part!r}).")
     identifiers = []
@@ -2505,7 +2501,6 @@ def score_skeleton(path):
 
     Only works when score template defines ``skeleton()`` method.
     """
-    assert not path.is_external(), repr(path)
     score_template = _import_score_template(path)
     if not hasattr(score_template, "skeleton"):
         return None

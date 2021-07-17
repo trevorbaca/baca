@@ -32,14 +32,6 @@ class Path(pathlib.PosixPath):
         "stylesheet.ily",
     )
 
-    ### SPECIAL METHODS ###
-
-    def __repr__(self):
-        """
-        Gets interpreter representation of path.
-        """
-        return f"Path('{self}')"
-
     ### PRIVATE PROPERTIES ###
 
     @property
@@ -515,9 +507,7 @@ class Path(pathlib.PosixPath):
         """
         Gets asset identifier.
         """
-        if self.is_scores():
-            return "package"
-        elif self.is_wrapper():
+        if self.is_wrapper():
             return "asset"
         elif self.is_contents():
             return "directory"
@@ -595,14 +585,7 @@ class Path(pathlib.PosixPath):
         """
         if not self.is_dir():
             return None
-        if self.is_scores():
-            wrappers = self.list_paths()
-            if wrappers:
-                return wrappers[0]
-        if self.scores is not None:
-            wrappers = self.scores.list_paths()
-        else:
-            wrappers = []
+        wrappers = []
         if not wrappers:
             return None
         wrapper = self.wrapper
@@ -619,14 +602,7 @@ class Path(pathlib.PosixPath):
         """
         if not self.is_dir():
             return None
-        if self.is_scores():
-            wrappers = self.list_paths()
-            if wrappers:
-                return wrappers[-1]
-        if self.scores is not None:
-            wrappers = self.scores.list_paths()
-        else:
-            wrappers = []
+        wrappers = []
         if not wrappers:
             return None
         wrapper = self.wrapper
@@ -702,10 +678,7 @@ class Path(pathlib.PosixPath):
         """
         Is true when path is contents directory.
         """
-        if self.scores is not None:
-            return self.scores / self.name / self.name == self
-        else:
-            return False
+        return self == self.contents
 
     def is_definitionspace(self):
         """
@@ -728,14 +701,6 @@ class Path(pathlib.PosixPath):
         Is true when path is etc directory.
         """
         return self.name == "etc"
-
-    def is_external(self):
-        """
-        Is true when path is not a score package path.
-        """
-        if str(self).startswith(str(self.scores)):
-            return False
-        return True
 
     def is_part(self):
         """
@@ -770,12 +735,6 @@ class Path(pathlib.PosixPath):
         else:
             return False
 
-    def is_scores(self):
-        """
-        Is true when path is scores directory.
-        """
-        return self == self.scores
-
     def is_segment(self):
         """
         Is true when path is segment directory.
@@ -795,10 +754,7 @@ class Path(pathlib.PosixPath):
         """
         Is true when path is wrapper directory
         """
-        if self.scores is not None:
-            return self.scores / self.name == self
-        else:
-            return False
+        return self == self.wrapper
 
     def list_paths(self):
         """
@@ -807,12 +763,11 @@ class Path(pathlib.PosixPath):
         paths = []
         if not self.exists():
             return paths
-        is_external = self.is_external()
         is_segments = self.is_segments()
         names = []
         for name in sorted([_.name for _ in self.iterdir()]):
             name = abjad.String(name)
-            if name.startswith("_") and not (is_external or is_segments):
+            if name.startswith("_") and not is_segments:
                 continue
             if name in (".DS_Store", ".cache", ".git", ".gitmodules"):
                 continue
@@ -851,16 +806,6 @@ class Path(pathlib.PosixPath):
                     raise NotImplementedError(segment_name)
             names = single_character_names + double_character_names
         paths = [self / _ for _ in names]
-        return paths
-
-    def list_secondary_paths(self):
-        """
-        Lists secondary paths.
-        """
-        paths = []
-        for path in sorted(self.glob("*")):
-            if path.name in sorted(self._secondary_names):
-                paths.append(type(self)(path))
         return paths
 
     def remove(self):
@@ -935,10 +880,7 @@ class Path(pathlib.PosixPath):
         """
         Trims path.
         """
-        if self.is_external():
-            return str(self)
-        assert self.scores is not None, repr(self)
-        count = len(self.scores.parts) + 1
+        count = len(self.wrapper.parts)
         parts = self.parts
         parts = parts[count:]
         path = pathlib.Path(*parts)
