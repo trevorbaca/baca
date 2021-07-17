@@ -44,7 +44,6 @@ def _make_segment_pdf(directory, do_not_interpret_ly=False, layout=True, timing=
         previous_persist = eval(lines)
     segment_directory = directory
     segment_directory = baca.Path(segment_directory)
-    assert segment_directory.is_score_package_path(), repr(segment_directory)
     illustration_ly = segment_directory / "illustration.ly"
     print("Running segment-maker ...")
     with abjad.Timer() as timer:

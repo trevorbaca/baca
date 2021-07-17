@@ -2203,7 +2203,6 @@ def _global_rest_identifiers(path):
 
 
 def _import_score_package(path):
-    assert path.is_score_package_path()
     try:
         module = importlib.import_module(path.contents.name)
     except Exception:
@@ -2334,7 +2333,6 @@ def get_part_manifest(path):
     """
     Gets part manifest from ``path``.
     """
-    assert path.is_score_package_path()
     score_template = _import_score_template(path)
     score_template = score_template()
     part_manifest = score_template.part_manifest

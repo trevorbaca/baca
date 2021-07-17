@@ -105,16 +105,15 @@ class Path(pathlib.PosixPath):
         """
         Gets contents directory.
         """
-        scores = self.scores
-        if not scores:
-            return None
-        if self.is_external():
-            return None
-        parts = self.relative_to(scores).parts
-        if not parts:
-            return None
-        result = scores / parts[0] / parts[0]
-        return result
+        parts = str(self).split(os.sep)
+        previous_part = None
+        for i, part in enumerate(parts):
+            if part == previous_part:
+                wrapper = os.sep.join(parts[: i + 1])
+                wrapper = Path(wrapper)
+                return wrapper
+            previous_part = part
+        return None
 
     @property
     def distribution(self):
@@ -143,6 +142,7 @@ class Path(pathlib.PosixPath):
         """
         path = os.path.expanduser("~")
         path = Path(path) / "Scores"
+        return None
         return path
 
     @property
@@ -160,11 +160,15 @@ class Path(pathlib.PosixPath):
         """
         Gets wrapper directory.
         """
-        if self.contents:
-            result = type(self)(self.contents).parent
-            return result
-        else:
-            return None
+        parts = str(self).split(os.sep)
+        previous_part = None
+        for i, part in enumerate(parts):
+            if part == previous_part:
+                wrapper = os.sep.join(parts[:i])
+                wrapper = Path(wrapper)
+                return wrapper
+            previous_part = part
+        return None
 
     ### PUBLIC METHODS ###
 
@@ -519,17 +523,6 @@ class Path(pathlib.PosixPath):
             return "package"
         elif self.is_builds():
             return "directory"
-        elif self.is_score_package_path(
-            (
-                "_assets",
-                "_segments",
-                "build",
-                "distribution",
-                "etc",
-                "segment",
-            )
-        ):
-            return "file"
         else:
             return "asset"
 
@@ -612,8 +605,6 @@ class Path(pathlib.PosixPath):
         """
         if not self.is_dir():
             return None
-        if not (self.is_score_package_path() or self.is_scores()):
-            return None
         if self.is_scores():
             wrappers = self.list_paths()
             if wrappers:
@@ -650,8 +641,6 @@ class Path(pathlib.PosixPath):
         Gets previous score.
         """
         if not self.is_dir():
-            return None
-        if not (self.is_score_package_path() or self.is_scores()):
             return None
         if self.is_scores():
             wrappers = self.list_paths()
@@ -803,50 +792,6 @@ class Path(pathlib.PosixPath):
             return True
         else:
             return False
-
-    def is_score_package_path(self, prototype=()):
-        """
-        Is true when path is package path.
-        """
-        if self.is_external():
-            return False
-        if self.is_scores():
-            return False
-        if not self.scores:
-            return False
-        if not self.name[0].isalpha() and not (
-            self.is_segment() or self.is__assets() or self.is__segments()
-        ):
-            return False
-        if not prototype:
-            return True
-        if isinstance(prototype, str):
-            prototype = (prototype,)
-        assert isinstance(prototype, tuple), repr(prototype)
-        assert all(isinstance(_, str) for _ in prototype)
-        if "scores" in prototype:
-            raise Exception(self, prototype)
-        if self.name in prototype:
-            return True
-        if "build" in prototype and self.is_build():
-            return True
-        if "buildspace" in prototype:
-            if self.is_buildspace():
-                return True
-        if "contents" in prototype and self.is_contents():
-            return True
-        if "definitionspace" in prototype:
-            if self.is_definitionspace():
-                return True
-        if "part" in prototype and self.is_part():
-            return True
-        if "parts" in prototype and self.is_parts():
-            return True
-        if "segment" in prototype and self.is_segment():
-            return True
-        if "wrapper" in prototype and self.is_wrapper():
-            return True
-        return False
 
     def is_scores(self):
         """
