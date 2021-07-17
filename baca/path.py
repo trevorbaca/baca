@@ -554,47 +554,10 @@ class Path(pathlib.PosixPath):
         Lists paths.
         """
         paths = []
-        if not self.exists():
-            return paths
-        if self.name == "segments":
-            is_segments = True
-        else:
-            is_segments = False
-        names = []
-        for name in sorted([_.name for _ in self.iterdir()]):
-            name = abjad.String(name)
-            if not name[0].isalnum():
+        for path in sorted(self.glob("*")):
+            if not path.name[0].isalnum():
                 continue
-            path = self / name
-            try:
-                path.relative_to(self)
-            except ValueError:
-                continue
-            names.append(name)
-        if is_segments:
-            names = [_ for _ in names if not _.endswith("backup")]
-            names = [_ for _ in names if not _.startswith(".")]
-        if self.name == "_segments":
-            prefix = "segment-"
-            names = [_ for _ in names if _.startswith(prefix)]
-            single_character_names, double_character_names = [], []
-            for name in names:
-                segment_name = name[len(prefix) :]
-                segment_name = segment_name.replace("-", "_")
-                if segment_name.endswith(".ly"):
-                    segment_name = segment_name[:-3]
-                elif segment_name.endswith(".ily"):
-                    segment_name = segment_name[:-4]
-                else:
-                    raise ValueError(segment_name)
-                if len(segment_name) == 1:
-                    single_character_names.append(name)
-                elif len(segment_name) == 2:
-                    double_character_names.append(name)
-                else:
-                    raise NotImplementedError(segment_name)
-            names = single_character_names + double_character_names
-        paths = [self / _ for _ in names]
+            paths.append(path)
         return paths
 
     def remove_metadatum(self, name, *, file_name="__metadata__"):
