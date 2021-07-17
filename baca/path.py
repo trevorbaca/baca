@@ -593,6 +593,7 @@ class Path(pathlib.PosixPath):
         """
         paths = list(sorted(self.parent.glob("*")))
         paths = [_ for _ in paths if _.name[0].isalnum()]
+        assert self in paths, repr(self, paths)
         index = paths.index(self)
         if index == len(paths) - 1 and not cyclic:
             return None
@@ -630,6 +631,7 @@ class Path(pathlib.PosixPath):
         assert self.is_dir()
         paths = list(sorted(self.parent.glob("*")))
         paths = [_ for _ in paths if _.name[0].isalnum()]
+        assert self in paths, repr(self, paths)
         index = paths.index(self)
         if index == 0 and not cyclic:
             return None
