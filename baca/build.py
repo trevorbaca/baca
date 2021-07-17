@@ -108,7 +108,7 @@ def collect_segment_lys(directory):
 
 def color_persistent_indicators(directory, undo=False):
     directory = baca.Path(directory)
-    if not directory.is_segment():
+    if directory.parent.name != "segments":
         print("Must call in segment directory ...")
         sys.exit(-1)
     for job in (
@@ -489,7 +489,7 @@ def run_lilypond(ly_file_path):
 
 def show_annotations(directory, undo=False):
     directory = baca.Path(directory)
-    if not directory.is_segment():
+    if directory.parent.name != "segments":
         print("Must call in segment directory ...")
         sys.exit(-1)
     for job in _make_annotation_jobs(directory, undo=undo):

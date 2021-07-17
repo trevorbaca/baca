@@ -9,7 +9,7 @@ import baca
 
 
 def _make_segment_pdf(directory, do_not_interpret_ly=False, layout=True, timing=False):
-    assert directory.is_segment()
+    assert directory.parent.name == "segments"
     if layout is True:
         os.system(f"make-layout-ly {directory / 'layout.py'}")
     definition = directory / "definition.py"
@@ -258,7 +258,7 @@ for string in sys.argv[1:]:
 
 directory = directory or os.getcwd()
 directory = baca.Path(directory)
-if not (directory.is_segment() or directory.is_segments()):
+if not (directory.parent.name == "segments" or directory.name == "segments"):
     print("Must call script in segment or segments directory ...")
     sys.exit(-1)
 
@@ -266,7 +266,7 @@ print(f"Calling make-segment-pdf on {directory.trim()} ...")
 
 do_not_interpret_ly = "--do-not-interpret-ly" in sys.argv
 
-if directory.is_segment():
+if directory.parent.name == "segments":
     with abjad.TemporaryDirectoryChange(directory):
         _make_segment_pdf(
             directory,
@@ -274,7 +274,7 @@ if directory.is_segment():
             timing=timing,
         )
 else:
-    assert directory.is_segments()
+    assert directory.name == "segments"
     paths = directory.list_paths()
     paths = [_ for _ in paths if _.is_dir()]
     for i, path in enumerate(paths):

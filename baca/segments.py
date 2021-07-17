@@ -2286,7 +2286,7 @@ def get_measure_profile_metadata(path):
     Returns tuple of three metadata: first measure number; measure count;
     list of fermata measure numbers.
     """
-    if path.parent.is_segment():
+    if path.parent.parent.name == "segments":
         string = "first_measure_number"
         first_measure_number = path.parent.get_metadatum(string)
         time_signatures = path.parent.get_metadatum("time_signatures")

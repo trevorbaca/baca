@@ -231,7 +231,7 @@ def handle_edition_tags(path):
     ..  todo: Tests.
 
     """
-    if path.parent.is_segment():
+    if path.parent.parent.name == "segments":
         my_name = "SEGMENT"
     elif path.is_score_build() or path.parent.is_score_build():
         my_name = "SCORE"

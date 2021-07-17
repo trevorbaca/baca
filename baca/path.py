@@ -496,12 +496,6 @@ class Path(pathlib.PosixPath):
             return True
         return False
 
-    def is_builds(self):
-        """
-        Is true when path is builds directory.
-        """
-        return self.name == "builds"
-
     def is_buildspace(self):
         """
         Is true when path is buildspace.
@@ -513,9 +507,15 @@ class Path(pathlib.PosixPath):
             * _segments
 
         """
-        if self.is_build() or self.is_builds():
+        if self.is_build():
             return True
-        if self.name == "_segments" or self.is_segment() or self.is_segments():
+        if self.name == "builds":
+            return True
+        if self.name == "_segments":
+            return True
+        if self.name == "segments":
+            return True
+        if self.parent.name == "segments":
             return True
         return False
 
@@ -524,28 +524,6 @@ class Path(pathlib.PosixPath):
         Is true when path is contents directory.
         """
         return self == self.contents
-
-    def is_definitionspace(self):
-        """
-        Is true when path is any of segment or segments directories.
-        """
-        if self.is_segment():
-            return True
-        if self.is_segments():
-            return True
-        return False
-
-    def is_distribution(self):
-        """
-        Is true when path is distribution directory.
-        """
-        return self.name == "distribution"
-
-    def is_etc(self):
-        """
-        Is true when path is etc directory.
-        """
-        return self.name == "etc"
 
     def is_part(self):
         """
@@ -557,43 +535,13 @@ class Path(pathlib.PosixPath):
         """
         Is true when directory is parts directory.
         """
-        if self.is_build():
-            if self.name.endswith("-parts"):
-                return True
-            else:
-                return self.get_metadatum("parts_directory") is True
-        else:
-            return False
+        return self.name.endswith("-parts")
 
     def is_score_build(self):
         """
         Is true when directory is score build directory.
         """
-        if self.is_build():
-            if "-part" in str(self):
-                return False
-            if self.get_metadatum("parts_directory") is True:
-                return False
-            if self.parent.get_metadatum("parts_directory") is True:
-                return False
-            return True
-        else:
-            return False
-
-    def is_segment(self):
-        """
-        Is true when path is segment directory.
-        """
-        if self.name[0] == ".":
-            return False
-        return self.parent.name == "segments" and self.parent.parent.name != "abjad"
-
-    def is_segments(self):
-        """
-        Is true when path is segments directory.
-
-        """
-        return self.name == "segments" and self.parent.name != "abjad"
+        return self.name.endswith("-score")
 
     def is_wrapper(self):
         """
@@ -608,7 +556,10 @@ class Path(pathlib.PosixPath):
         paths = []
         if not self.exists():
             return paths
-        is_segments = self.is_segments()
+        if self.name == "segments":
+            is_segments = True
+        else:
+            is_segments = False
         names = []
         for name in sorted([_.name for _ in self.iterdir()]):
             name = abjad.String(name)
@@ -714,7 +665,7 @@ def get_measure_profile_metadata(path) -> typing.Tuple[int, int, list]:
     Returns tuple of three metadata: first measure number; measure count;
     list of fermata measure numbers.
     """
-    if path.parent.is_segment():
+    if path.parent.parent.name == "segments":
         string = "first_measure_number"
         first_measure_number = path.parent.get_metadatum(string)
         time_signatures = path.parent.get_metadatum("time_signatures")

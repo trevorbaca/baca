@@ -3080,9 +3080,9 @@ def previous_metadata(path: str) -> abjad.OrderedDict:
     # because Travis isn't configured for scores-directory calculations
     definition_py = _path.Path(path)
     segment = _path.Path(definition_py).parent
-    assert segment.is_segment(), repr(segment)
+    assert segment.parent.name == "segments", repr(segment)
     segments = segment.parent
-    assert segments.is_segments(), repr(segments)
+    assert segments.name == "segments", repr(segments)
     paths = segments.list_paths()
     paths = [_ for _ in paths if not _.name.startswith(".")]
     assert all(_.is_dir() for _ in paths), repr(paths)

@@ -332,7 +332,7 @@ def clef_color_tags(path=None):
         REDUNDANT_CLEF_COLOR,
         REDUNDANT_CLEF_REDRAW_COLOR,
     ]
-    if path and not path.is_segment() and not path.is_segments():
+    if path and path.parent.name != "segments" and path.name != "segments":
         tags.append(REAPPLIED_CLEF)
     return tags
 
@@ -1018,7 +1018,7 @@ def staff_lines_color_tags(path=None):
         REAPPLIED_STAFF_LINES_COLOR,
         REDUNDANT_STAFF_LINES_COLOR,
     ]
-    if path and not path.is_segment():
+    if path and path.parent.name != "segments":
         tags.append(REAPPLIED_STAFF_LINES)
     return tags
 
@@ -1066,7 +1066,7 @@ def time_signature_color_tags(path=None):
         REAPPLIED_TIME_SIGNATURE_COLOR,
         REDUNDANT_TIME_SIGNATURE_COLOR,
     ]
-    if path and not path.is_segment():
+    if path and path.parent.name != "segments":
         tags.append(REAPPLIED_TIME_SIGNATURE)
     return tags
 
