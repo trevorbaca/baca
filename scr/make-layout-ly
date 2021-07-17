@@ -55,7 +55,8 @@ def _make_layout_ly(layout_py):
         time_signatures = buildspace_directory.get_metadatum("time_signatures")
     else:
         time_signatures = []
-        for segment_directory in sorted(buildspace_directory.segments.glob("*")):
+        segments_directory = buildsspace_directory.contents / segments
+        for segment_directory in sorted(segments_directory.glob("*")):
             time_signatures_ = segment_directory.get_metadatum("time_signatures")
             time_signatures.extend(time_signatures_)
     if breaks.partial_score is not None:
@@ -92,10 +93,7 @@ def _make_layout_ly(layout_py):
     if breaks.partial_score is not None:
         lines.append(f"% partial_score = True")
     if buildspace_directory.parent.name == "segments":
-        assert buildspace_directory.is_dir(), repr(buildspace_directory)
-        assert buildspace_directory.segments.is_dir()
-        first_segment = buildspace_directory.segments / "01"
-        assert first_segment.is_dir(), repr(first_segment)
+        first_segment = buildspace_directory.parent / "01"
         if buildspace_directory.name != first_segment.name:
             previous_segment = str(int(buildspace_directory.name) - 1).zfill(2)
             previous_segment = buildspace_directory.with_name(previous_segment)

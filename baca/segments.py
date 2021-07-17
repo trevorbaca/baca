@@ -2136,7 +2136,8 @@ def _context_name_to_first_appearance_margin_markup(path, context_name):
         return []
     dictionary = abjad.OrderedDict()
     string = "first_appearance_margin_markup"
-    for segment in sorted(path.segments.glob("*")):
+    segments_directory = path.contents / "segments"
+    for segment in sorted(segments_directory.glob("*")):
         dictionary_ = segment.get_metadatum(string, [])
         dictionary.update(dictionary_)
     key = dictionary.get(context_name)
@@ -2190,8 +2191,9 @@ def _global_rest_identifiers(path):
     Gets global rest identifiers.
     """
     identifiers = []
-    if path.segments is not None:
-        paths = list(sorted(path.segments.glob("*")))
+    segments_directory = path.contents / "segments"
+    if segments_directory is not None:
+        paths = list(sorted(segments_directory.glob("*")))
     else:
         paths = []
     for segment in paths:
@@ -2224,8 +2226,9 @@ def _instrument_to_staff_identifiers(path, instrument):
     Changes ``instrument`` to staff identifiers dictionary.
     """
     alive_during_segment = abjad.OrderedDict()
-    if path.segments is not None:
-        paths = list(sorted(path.segments.glob("*")))
+    segments_directory = path.contents / "segments"
+    if segments_directory is not None:
+        paths = list(sorted(segments_directory.glob("*")))
     else:
         paths = []
     for segment in paths:
@@ -2403,8 +2406,9 @@ def global_skip_identifiers(path):
     Gets global skip identifiers.
     """
     identifiers = []
-    if path.segments is not None:
-        paths = list(sorted(path.segments.glob("*")))
+    segments_directory = path.contents / "segments"
+    if segments_directory is not None:
+        paths = list(sorted(segments_directory.glob("*")))
     else:
         paths = []
     for segment in paths:

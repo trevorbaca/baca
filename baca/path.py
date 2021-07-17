@@ -10,22 +10,6 @@ class Path(pathlib.PosixPath):
     Path in score package.
     """
 
-    ### PRIVATE PROPERTIES ###
-
-    @property
-    def _assets(self):
-        """
-        Gets _assets directory.
-        """
-        return self / "_assets"
-
-    @property
-    def _segments(self):
-        """
-        Gets _segments directory.
-        """
-        return self / "_segments"
-
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -39,13 +23,6 @@ class Path(pathlib.PosixPath):
             return self.parent
         else:
             return None
-
-    @property
-    def builds(self):
-        """
-        Gets builds directory.
-        """
-        return self.contents / "builds"
 
     @property
     def contents(self):
@@ -63,27 +40,6 @@ class Path(pathlib.PosixPath):
                 return wrapper
             previous_part = part
         return None
-
-    @property
-    def distribution(self):
-        """
-        Gets distribution directory.
-        """
-        return self.contents / "distribution"
-
-    @property
-    def etc(self):
-        """
-        Gets etc directory.
-        """
-        return self.contents / "etc"
-
-    @property
-    def segments(self):
-        """
-        Gets segments directory.
-        """
-        return self.contents / "segments"
 
     @property
     def wrapper(self):

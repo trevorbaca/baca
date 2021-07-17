@@ -72,7 +72,7 @@ def _make_segment_pdf(directory, do_not_interpret_ly=False, layout=True, timing=
         variable_name="persist",
     )
     os.system("black --target-version=py38 __persist__ 1>/dev/null 2>&1")
-    first_segment = segment_directory.segments / "01"
+    first_segment = segment_directory.parent / "01"
     layout_ly = segment_directory / "layout.ly"
     if layout_ly.is_file() and segment_directory.name != first_segment.name:
         result = baca.segments.get_preamble_page_count_overview(layout_ly)

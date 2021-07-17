@@ -90,19 +90,21 @@ def _make_annotation_jobs(directory, undo=False):
 
 
 def collect_segment_lys(directory):
-    paths = sorted(directory.segments.glob("*"))
+    segments_directory = directory.contents / "segments"
+    paths = sorted(segments_directory.glob("*"))
     names = [_.name for _ in paths]
     sources, targets = [], []
     for name in names:
-        source = directory.segments / name / "illustration.ly"
+        source = segments_directory / name / "illustration.ly"
         if not source.is_file():
             continue
         target = "segment-" + name.replace("_", "-") + ".ly"
-        target = directory._segments / target
+        target = directory / "_segments" / target
         sources.append(source)
         targets.append(target)
-    if not directory.builds.is_dir():
-        directory.builds.mkdir()
+    builds_directory = directory / "builds"
+    if not builds_directory.is_dir():
+        builds_directory.mkdir()
     return zip(sources, targets)
 
 
@@ -176,7 +178,7 @@ def handle_build_tags(directory):
         for message in messages:
             print(message)
 
-    _segments = directory._segments
+    _segments = directory / "_segments"
     for job in [
         baca.jobs.handle_edition_tags(_segments),
         baca.jobs.handle_fermata_bar_lines(directory),

@@ -28,7 +28,8 @@ def _check_layout_time_signatures(music_ly_file_path):
         print("Aborting layout time signature check ...")
         return
     metadata_time_signatures = []
-    for segment_directory in sorted(build_directory.segments.glob("*")):
+    segments_directory = build_directory / "segments"
+    for segment_directory in sorted(segments_directory.glob("*")):
         time_signatures = segment_directory.get_metadatum("time_signatures")
         metadata_time_signatures.extend(time_signatures)
     if metadata_time_signatures:
@@ -104,6 +105,7 @@ else:
     print(f"Missing {music_ly_file_path.trim()} ...")
     sys.exit(-1)
 
+_segments = build_directory / "_segments"
 if "--skip-segment-collection" in sys.argv:
     print("Skipping segment collection ...")
 else:
@@ -112,10 +114,10 @@ else:
     if not pairs:
         print("... no segment lys found.")
         sys.exit(1)
-    if build_directory._segments.exists():
-        print(f"Removing {build_directory._segments.trim()} ...")
-        shutil.rmtree(str(build_directory._segments))
-    build_directory._segments.mkdir()
+    if _segments.exists():
+        print(f"Removing {_segments.trim()} ...")
+        shutil.rmtree(str(_segments))
+    _segments.mkdir()
     for source, target in pairs:
         source_ily = source.with_suffix(".ily")
         target_ily = target.with_suffix(".ily")
@@ -141,6 +143,6 @@ if build_directory.is_part():
 _check_layout_time_signatures(music_ly_file_path)
 baca.build.run_lilypond(music_ly_file_path)
 
-if build_directory._segments.is_dir():
-    print(f"Removing {build_directory._segments.trim()} ...")
-    shutil.rmtree(str(build_directory._segments))
+if _segments.is_dir():
+    print(f"Removing {_segments.trim()} ...")
+    shutil.rmtree(str(_segments))
