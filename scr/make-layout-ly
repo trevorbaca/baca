@@ -36,7 +36,7 @@ def _make_layout_ly(layout_py):
         part_identifier = layout_module.part_identifier
         assert abjad.String(part_identifier).is_shout_case()
         document_name = f"{document_name}_{part_identifier}"
-    if buildspace_directory.parents.name == "segments":
+    if buildspace_directory.parent.name == "segments":
         string = "first_measure_number"
         first_measure_number = buildspace_directory.get_metadatum(string)
         if not bool(first_measure_number):
@@ -51,7 +51,7 @@ def _make_layout_ly(layout_py):
     assert abjad.String(document_name).is_shout_case()
     string = "first_measure_number"
     first_measure_number = buildspace_directory.get_metadatum(string, 1)
-    if buildspace_directory.parents.name == "segments":
+    if buildspace_directory.parent.name == "segments":
         time_signatures = buildspace_directory.get_metadatum("time_signatures")
     else:
         time_signatures = []
@@ -158,7 +158,8 @@ else:
     directory = baca.Path(directory)
     layout_py = directory / "layout.py"
 directory = layout_py.parent
-if directory.parent.name != "segment" and not directory.is_build():
+print(f"Calling make-layout-ly on {directory.trim()} ...")
+if directory.parent.name != "segments" and not directory.is_build():
     print("Must call script in segment or build directory ...")
     sys.exit(-1)
 
