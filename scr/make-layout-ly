@@ -92,9 +92,14 @@ def _make_layout_ly(layout_py):
     if breaks.partial_score is not None:
         lines.append(f"% partial_score = True")
     if buildspace_directory.is_segment():
-        first_segment = buildspace_directory.segments.get_next_package()
+        assert buildspace_directory.is_dir(), repr(buildspace_directory)
+        assert buildspace_directory.segments.is_dir()
+        first_segment = buildspace_directory.segments / "01"
+        assert first_segment.is_dir(), repr(first_segment)
         if buildspace_directory.name != first_segment.name:
-            previous_segment = buildspace_directory.get_previous_package()
+            previous_segment = str(int(buildspace_directory.name) - 1).zfill(2)
+            previous_segment = buildspace_directory.with_name(previous_segment)
+            assert previous_segment.is_dir(), repr(previous_segment)
             previous_layout_ly = previous_segment / "layout.ly"
             if previous_layout_ly.is_file():
                 result = baca.segments.get_preamble_page_count_overview(
