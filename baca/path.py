@@ -598,24 +598,12 @@ class Path(pathlib.PosixPath):
         """
         Gets next package.
         """
-        if not self.is_dir():
+        paths = list(sorted(self.parent.glob("*")))
+        paths = [_ for _ in paths if _.name[0].isalnum()]
+        index = paths.index(self)
+        if index == len(paths) - 1 and not cyclic:
             return None
-        if self.is_segment():
-            if self.segments is not None:
-                paths = self.segments.list_paths()
-            else:
-                paths = []
-            if self == paths[-1] and not cyclic:
-                path = None
-            else:
-                index = paths.index(self)
-                cyclic_paths = abjad.CyclicTuple(paths)
-                path = cyclic_paths[index + 1]
-        elif self.is_segments():
-            paths = self.list_paths()
-            path = paths[0]
-        else:
-            raise ValueError(self)
+        path = abjad.CyclicTuple(paths)[index + 1]
         return path
 
     def get_next_score(self, cyclic=False):
@@ -648,32 +636,13 @@ class Path(pathlib.PosixPath):
         """
         Gets previous package.
         """
-        if not self.is_dir():
+        assert self.is_dir()
+        paths = list(sorted(self.parent.glob("*")))
+        paths = [_ for _ in paths if _.name[0].isalnum()]
+        index = paths.index(self)
+        if index == 0 and not cyclic:
             return None
-        if self.is_segment():
-            if self.segments is not None:
-                paths = self.segments.list_paths()
-            else:
-                paths = []
-            if not paths:
-                print(type(self))
-                print(self)
-                print(self.scores)
-                print(self.wrapper)
-                print(self.contents)
-                print(self.segments)
-                raise Exception("HERE")
-            if self == paths[0] and not cyclic:
-                path = None
-            else:
-                index = paths.index(self)
-                cyclic_paths = abjad.CyclicTuple(paths)
-                path = cyclic_paths[index - 1]
-        elif self.is_segments():
-            paths = self.list_paths()
-            path = paths[-1]
-        else:
-            raise ValueError(self)
+        path = abjad.CyclicTuple(paths)[index - 1]
         return path
 
     def get_previous_score(self, cyclic=False):
