@@ -589,19 +589,6 @@ class Path(pathlib.PosixPath):
             metadatum = default
         return metadatum
 
-    def get_next_package(self, cyclic=False):
-        """
-        Gets next package.
-        """
-        paths = list(sorted(self.parent.glob("*")))
-        paths = [_ for _ in paths if _.name[0].isalnum()]
-        assert self in paths, repr((self, paths))
-        index = paths.index(self)
-        if index == len(paths) - 1 and not cyclic:
-            return None
-        path = abjad.CyclicTuple(paths)[index + 1]
-        return path
-
     def get_next_score(self, cyclic=False):
         """
         Gets next score.
@@ -625,20 +612,6 @@ class Path(pathlib.PosixPath):
         index = wrappers.index(wrapper)
         cyclic_wrappers = abjad.CyclicTuple(wrappers)
         return cyclic_wrappers[index + 1]
-
-    def get_previous_package(self, cyclic=False):
-        """
-        Gets previous package.
-        """
-        assert self.is_dir()
-        paths = list(sorted(self.parent.glob("*")))
-        paths = [_ for _ in paths if _.name[0].isalnum()]
-        assert self in paths, repr((self, paths))
-        index = paths.index(self)
-        if index == 0 and not cyclic:
-            return None
-        path = abjad.CyclicTuple(paths)[index - 1]
-        return path
 
     def get_previous_score(self, cyclic=False):
         """
