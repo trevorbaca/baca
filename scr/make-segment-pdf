@@ -9,8 +9,6 @@ import baca
 
 def _make_segment_pdf(directory, do_not_interpret_ly=False, layout=True, timing=False):
     assert directory.is_segment()
-    if str(directory) not in sys.path:
-        sys.path.append(str(directory))
     if layout is True:
         os.system(f"make-layout-ly {directory / 'layout.py'}")
     definition = directory / "definition.py"
@@ -18,6 +16,8 @@ def _make_segment_pdf(directory, do_not_interpret_ly=False, layout=True, timing=
         print(f"Can not find {definition.trim()} ...")
         sys.exit(-1)
     print(f"Making segment {directory.name} PDF ...")
+    if str(directory) not in sys.path:
+        sys.path.append(str(directory))
     import definition
     metadata = directory.get_metadata()
     persist = directory.get_metadata(file_name="__persist__")

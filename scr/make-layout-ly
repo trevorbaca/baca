@@ -16,6 +16,8 @@ def _make_layout_ly(layout_py):
         print(f"Skipping layout because no {layout_py.trim()} found ...")
         return
     layout_module_name = layout_py.with_suffix("").name
+    if str(directory) not in sys.path:
+        sys.path.append(str(directory))
     layout_module = importlib.import_module(layout_module_name)
     if "breaks" in dir(layout_module):
         breaks = layout_module.breaks

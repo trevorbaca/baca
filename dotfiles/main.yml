@@ -122,7 +122,7 @@ jobs:
         echo
         exit $RC
 
-    - name: Rerender segments
+    - name: Make segments
       run: |
         export BACA=/tmp/baca
         export PATH=$BACA/scr:/home/runner/bin:$PATH
