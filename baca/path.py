@@ -285,7 +285,7 @@ class Path(pathlib.PosixPath):
             return Path(self._test_scores_directory)
         if self._mock_scores is not None:
             return Path(self._mock_scores)
-        directory = configuration.composer_scores_directory
+        directory = configuration["composer_scores_directory"]
         return Path(directory)
 
     @property
