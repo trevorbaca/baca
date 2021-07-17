@@ -549,17 +549,6 @@ class Path(pathlib.PosixPath):
         """
         return self == self.wrapper
 
-    def list_paths(self):
-        """
-        Lists paths.
-        """
-        paths = []
-        for path in sorted(self.glob("*")):
-            if not path.name[0].isalnum():
-                continue
-            paths.append(path)
-        return paths
-
     def remove_metadatum(self, name, *, file_name="__metadata__"):
         """
         Removes metadatum.

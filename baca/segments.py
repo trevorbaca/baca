@@ -2136,7 +2136,7 @@ def _context_name_to_first_appearance_margin_markup(path, context_name):
         return []
     dictionary = abjad.OrderedDict()
     string = "first_appearance_margin_markup"
-    for segment in path.segments.list_paths():
+    for segment in sorted(path.segments.glob("*")):
         dictionary_ = segment.get_metadatum(string, [])
         dictionary.update(dictionary_)
     key = dictionary.get(context_name)
@@ -2191,7 +2191,7 @@ def _global_rest_identifiers(path):
     """
     identifiers = []
     if path.segments is not None:
-        paths = path.segments.list_paths()
+        paths = list(sorted(path.segments.glob("*")))
     else:
         paths = []
     for segment in paths:
@@ -2225,7 +2225,7 @@ def _instrument_to_staff_identifiers(path, instrument):
     """
     alive_during_segment = abjad.OrderedDict()
     if path.segments is not None:
-        paths = path.segments.list_paths()
+        paths = list(sorted(path.segments.glob("*")))
     else:
         paths = []
     for segment in paths:
@@ -2404,7 +2404,7 @@ def global_skip_identifiers(path):
     """
     identifiers = []
     if path.segments is not None:
-        paths = path.segments.list_paths()
+        paths = list(sorted(path.segments.glob("*")))
     else:
         paths = []
     for segment in paths:

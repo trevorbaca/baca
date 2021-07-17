@@ -55,7 +55,7 @@ def _make_layout_ly(layout_py):
         time_signatures = buildspace_directory.get_metadatum("time_signatures")
     else:
         time_signatures = []
-        for segment_directory in buildspace_directory.segments.list_paths():
+        for segment_directory in sorted(buildspace_directory.segments.glob("*")):
             time_signatures_ = segment_directory.get_metadatum("time_signatures")
             time_signatures.extend(time_signatures_)
     if breaks.partial_score is not None:

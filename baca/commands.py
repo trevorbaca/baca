@@ -3083,7 +3083,7 @@ def previous_metadata(path: str) -> abjad.OrderedDict:
     assert segment.parent.name == "segments", repr(segment)
     segments = segment.parent
     assert segments.name == "segments", repr(segments)
-    paths = segments.list_paths()
+    paths = list(sorted(segments.glob("*")))
     paths = [_ for _ in paths if not _.name.startswith(".")]
     assert all(_.is_dir() for _ in paths), repr(paths)
     index = paths.index(segment)

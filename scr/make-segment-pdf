@@ -275,7 +275,7 @@ if directory.parent.name == "segments":
         )
 else:
     assert directory.name == "segments"
-    paths = directory.list_paths()
+    paths = sorted(directory.glob("*"))
     paths = [_ for _ in paths if _.is_dir()]
     for i, path in enumerate(paths):
         with abjad.TemporaryDirectoryChange(path):

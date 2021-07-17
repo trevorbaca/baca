@@ -90,7 +90,7 @@ def _make_annotation_jobs(directory, undo=False):
 
 
 def collect_segment_lys(directory):
-    paths = directory.segments.list_paths()
+    paths = sorted(directory.segments.glob("*"))
     names = [_.name for _ in paths]
     sources, targets = [], []
     for name in names:

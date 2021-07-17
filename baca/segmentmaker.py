@@ -2082,7 +2082,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         contexts: typing.Set[str] = set()
         string = "alive_during_segment"
-        for segment in self.segment_directory.parent.list_paths():
+        for segment in sorted(self.segment_directory.parent.glob("*")):
             if segment == self.segment_directory:
                 break
             contexts_ = segment.get_metadatum(string, file_name="__persist__")
