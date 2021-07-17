@@ -10,19 +10,10 @@ configuration = abjad.Configuration()
 
 class Path(pathlib.PosixPath):
     """
-    Path in an Abjad score package.
-
-    ..  container:: example
-
-        >>> baca.Path._mock_scores = "/path/to/scores"
-        >>> path = baca.Path("/path/to/scores/my_score/my_score")
-        >>> path.mock_scores = "/path/to/scores"
-
+    Path in score package.
     """
 
     ### CLASS VARIABLES ###
-
-    _mock_scores = None
 
     _secondary_names = (
         ".gitignore",
@@ -40,8 +31,6 @@ class Path(pathlib.PosixPath):
         "layout.untagged.ly",
         "stylesheet.ily",
     )
-
-    _test_scores_directory = pathlib.Path(__file__).parent.parent / "scores"
 
     ### SPECIAL METHODS ###
 
@@ -72,48 +61,6 @@ class Path(pathlib.PosixPath):
     def _segments(self):
         """
         Gets _segments directory.
-
-        Directory must be build directory, _segments direcotry or part
-        directory.
-
-        ..  container:: example
-
-            >>> string = "/path/to/scores/my_score/my_score/builds/letter-score"
-            >>> build = baca.Path(string)
-
-            Works when path is build directory:
-
-            >>> build._segments
-            Path('/path/to/scores/my_score/my_score/builds/letter-score/_segments')
-
-            Works when path is _segments directory:
-
-            >>> (build / "_segments")._segments
-            Path('/path/to/scores/my_score/my_score/builds/letter-score/_segments')
-
-            Works when path is _assets directory:
-
-            >>> (build / "_assets")._segments
-            Path('/path/to/scores/my_score/my_score/builds/letter-score/_segments')
-
-            Works when path is parts directory:
-
-            >>> parts = "/path/to/scores/my_score/my_score/builds/letter-parts"
-            >>> parts = baca.Path(parts)
-
-            >>> parts._segments
-            Path('/path/to/scores/my_score/my_score/builds/letter-parts/_segments')
-
-            Works when path is part directory:
-
-            >>> (parts / "bass-clarinet-part")._segments
-            Path('/path/to/scores/my_score/my_score/builds/letter-parts/_segments')
-
-            Works when path is file in part directory:
-
-            >>> (parts / "bass-clarinet-part" / "layout.ly")._segments
-            Path('/path/to/scores/my_score/my_score/builds/letter-parts/_segments')
-
         """
         if self.is__assets():
             return self.parent / "_segments"
@@ -135,48 +82,6 @@ class Path(pathlib.PosixPath):
     def build(self):
         """
         Gets build directory.
-
-        Directory must be build directory, _segments direcotry or part
-        directory.
-
-        ..  container:: example
-
-            >>> string = "/path/to/scores/my_score/my_score/builds/letter-score"
-            >>> build = baca.Path(string)
-
-            Works when path is build directory:
-
-            >>> build.build
-            Path('/path/to/scores/my_score/my_score/builds/letter-score')
-
-            Works when path is _segments directory:
-
-            >>> (build / "_segments").build
-            Path('/path/to/scores/my_score/my_score/builds/letter-score')
-
-            Works when path is _assets directory:
-
-            >>> (build / "_assets").build
-            Path('/path/to/scores/my_score/my_score/builds/letter-score')
-
-            Works when path is parts directory:
-
-            >>> string = "/path/to/scores/my_score/my_score/builds/letter-parts"
-            >>> parts = baca.Path(string)
-
-            >>> parts.build
-            Path('/path/to/scores/my_score/my_score/builds/letter-parts')
-
-            Works when path is part directory:
-
-            >>> (parts / "bass-clarinet-part").build
-            Path('/path/to/scores/my_score/my_score/builds/letter-parts/bass-clarinet-part')
-
-            Works when path is file in part directory:
-
-            >>> (parts / "bass-clarinet-part" / "layout.ly").build
-            Path('/path/to/scores/my_score/my_score/builds/letter-parts/bass-clarinet-part')
-
         """
         if self.is_build():
             return self
@@ -189,15 +94,6 @@ class Path(pathlib.PosixPath):
     def builds(self):
         """
         Gets builds directory.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-            >>> path.builds
-            Path('/path/to/scores/my_score/my_score/builds')
-            >>> path.builds/ "letter"
-            Path('/path/to/scores/my_score/my_score/builds/letter')
-
         """
         if self.contents:
             return self.contents / "builds"
@@ -208,15 +104,6 @@ class Path(pathlib.PosixPath):
     def contents(self):
         """
         Gets contents directory.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-            >>> path.contents
-            Path('/path/to/scores/my_score/my_score')
-            >>> path.contents / "etc" / "notes.txt"
-            Path('/path/to/scores/my_score/my_score/etc/notes.txt')
-
         """
         scores = self.scores
         if not scores:
@@ -233,15 +120,6 @@ class Path(pathlib.PosixPath):
     def distribution(self):
         """
         Gets distribution directory.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-            >>> path.distribution
-            Path('/path/to/scores/my_score/my_score/distribution')
-            >>> path.distribution/ "score.pdf"
-            Path('/path/to/scores/my_score/my_score/distribution/score.pdf')
-
         """
         if self.contents:
             return self.contents / "distribution"
@@ -252,15 +130,6 @@ class Path(pathlib.PosixPath):
     def etc(self):
         """
         Gets etc directory.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-            >>> path.etc
-            Path('/path/to/scores/my_score/my_score/etc')
-            >>> path.etc / "notes.txt"
-            Path('/path/to/scores/my_score/my_score/etc/notes.txt')
-
         """
         if self.contents:
             return self.contents / "etc"
@@ -271,36 +140,15 @@ class Path(pathlib.PosixPath):
     def scores(self):
         """
         Gets scores directory.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-            >>> path.scores
-            Path('/path/to/scores')
-            >>> path.scores / "red_score" / "red_score"
-            Path('/path/to/scores/red_score/red_score')
-
         """
-        if str(self).startswith(str(self._test_scores_directory)):
-            return Path(self._test_scores_directory)
-        if self._mock_scores is not None:
-            return Path(self._mock_scores)
-        directory = configuration["composer_scores_directory"]
-        return Path(directory)
+        path = os.path.expanduser("~")
+        path = Path(path) / "Scores"
+        return path
 
     @property
     def segments(self):
         """
         Gets segments directory.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-            >>> path.segments
-            Path('/path/to/scores/my_score/my_score/segments')
-            >>> path.segments / "segment_01"
-            Path('/path/to/scores/my_score/my_score/segments/segment_01')
-
         """
         if self.contents:
             return self.contents / "segments"
@@ -311,15 +159,6 @@ class Path(pathlib.PosixPath):
     def wrapper(self):
         """
         Gets wrapper directory.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-            >>> path.wrapper
-            Path('/path/to/scores/my_score')
-            >>> path.wrapper / "my_score" / "etc"
-            Path('/path/to/scores/my_score/my_score/etc')
-
         """
         if self.contents:
             result = type(self)(self.contents).parent
@@ -669,36 +508,6 @@ class Path(pathlib.PosixPath):
     def get_asset_type(self):
         """
         Gets asset identifier.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-
-            >>> path.builds.get_asset_type()
-            'directory'
-
-            >>> path.contents.get_asset_type()
-            'directory'
-
-            >>> path.distribution.get_asset_type()
-            'file'
-
-            >>> path.etc.get_asset_type()
-            'file'
-
-            >>> path.segments.get_asset_type()
-            'package'
-
-            >>> path.wrapper.get_asset_type()
-            'asset'
-
-        ..  container:: example
-
-            With external path:
-
-            >>> baca.Path("/path/to/external").get_asset_type()
-            'asset'
-
         """
         if self.is_scores():
             return "package"
@@ -737,20 +546,6 @@ class Path(pathlib.PosixPath):
     def get_identifier(self):
         """
         Gets identifier.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-
-            >>> path.contents.get_identifier()
-            'my_score'
-
-            >>> segment = path.segments / "segment_01"
-            >>> segment.get_identifier()
-            'segment_01'
-
-            >>> path.segments.get_identifier()
-            'segments'
 
         Returns title when path is contents directory.
 
@@ -802,13 +597,6 @@ class Path(pathlib.PosixPath):
     def get_next_package(self, cyclic=False):
         """
         Gets next package.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-            >>> path.get_next_package() is None
-            True
-
         """
         if not self.is_dir():
             return None
@@ -833,13 +621,6 @@ class Path(pathlib.PosixPath):
     def get_next_score(self, cyclic=False):
         """
         Gets next score.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-            >>> path.get_next_score() is None
-            True
-
         """
         if not self.is_dir():
             return None
@@ -866,13 +647,6 @@ class Path(pathlib.PosixPath):
     def get_previous_package(self, cyclic=False):
         """
         Gets previous package.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-            >>> path.get_previous_package() is None
-            True
-
         """
         if not self.is_dir():
             return None
@@ -905,13 +679,6 @@ class Path(pathlib.PosixPath):
     def get_previous_score(self, cyclic=False):
         """
         Gets previous score.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-            >>> path.get_previous_score() is None
-            True
-
         """
         if not self.is_dir():
             return None
@@ -938,13 +705,6 @@ class Path(pathlib.PosixPath):
     def get_title(self, year=True):
         """
         Gets score title.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-            >>> path.get_title()
-            'my_score'
-
         """
         if year and self.get_metadatum("year"):
             title = self.get_title(year=False)
@@ -959,42 +719,18 @@ class Path(pathlib.PosixPath):
     def is__assets(self):
         """
         Is true when path is _assets directory.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-            >>> path = path / "build" / "_assets"
-            >>> path.is__assets()
-            True
-
         """
         return self.name == "_assets"
 
     def is__segments(self):
         """
         Is true when path is _segments directory.
-
-        ..  container:: example
-
-            >>> string = "/path/to/scores/my_score/my_score/builds/letter/_segments"
-            >>> path = baca.Path(string)
-            >>> path.is__segments()
-            True
-
         """
         return self.name == "_segments"
 
     def is_build(self):
         """
         Is true when path is build directory.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-            >>> build = path.builds / "letter"
-            >>> build.is_build()
-            True
-
         """
         if self.name in ("_assets", "_segments"):
             return False
@@ -1007,13 +743,6 @@ class Path(pathlib.PosixPath):
     def is_builds(self):
         """
         Is true when path is builds directory.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-            >>> path.builds.is_builds()
-            True
-
         """
         return self.name == "builds"
 
@@ -1037,13 +766,6 @@ class Path(pathlib.PosixPath):
     def is_contents(self):
         """
         Is true when path is contents directory.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-            >>> path.contents.is_contents()
-            True
-
         """
         if self.scores is not None:
             return self.scores / self.name / self.name == self
@@ -1063,38 +785,18 @@ class Path(pathlib.PosixPath):
     def is_distribution(self):
         """
         Is true when path is distribution directory.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-            >>> path.distribution.is_distribution()
-            True
-
         """
         return self.name == "distribution"
 
     def is_etc(self):
         """
         Is true when path is etc directory.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-            >>> path.etc.is_etc()
-            True
-
         """
         return self.name == "etc"
 
     def is_external(self):
         """
         Is true when path is not a score package path.
-
-        ..  container:: example
-
-            >>> baca.Path("/path/to/location").is_external()
-            True
-
         """
         if str(self).startswith(str(self.scores)):
             return False
@@ -1103,36 +805,12 @@ class Path(pathlib.PosixPath):
     def is_part(self):
         """
         Is true when directory is part directory.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-
-            >>> path.builds.is_part()
-            False
-
-            >>> build = path.builds / "arch-a-parts"
-            >>> build.is_part()
-            False
-
         """
         return self.parent.is_parts()
 
     def is_parts(self):
         """
         Is true when directory is parts directory.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-
-            >>> path.builds.is_parts()
-            False
-
-            >>> build = path.builds / "arch-a-score"
-            >>> build.is_parts()
-            False
-
         """
         if self.is_build():
             if self.name.endswith("-parts"):
@@ -1145,18 +823,6 @@ class Path(pathlib.PosixPath):
     def is_score_build(self):
         """
         Is true when directory is score build directory.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-
-            >>> path.builds.is_score_build()
-            False
-
-            >>> build = path.builds / "arch-a-score"
-            >>> build.is_score_build()
-            True
-
         """
         if self.is_build():
             if "-part" in str(self):
@@ -1172,34 +838,6 @@ class Path(pathlib.PosixPath):
     def is_score_package_path(self, prototype=()):
         """
         Is true when path is package path.
-
-        ..  container:: example
-
-            External path returns false:
-
-            >>> baca.Path("/path/to/location").is_score_package_path()
-            False
-
-        ..  container:: example
-
-            Scores directory returns false:
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-            >>> path.scores.is_score_package_path()
-            False
-
-        ..  container:: example
-
-            Package paths return true:
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-            >>> path.contents.is_score_package_path()
-            True
-
-            >>> path = path / "build" / "_assets"
-            >>> path.is_score_package_path()
-            True
-
         """
         if self.is_external():
             return False
@@ -1250,23 +888,6 @@ class Path(pathlib.PosixPath):
     def is_segment(self):
         """
         Is true when path is segment directory.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-            >>> segment = path.segments / "segment_01"
-            >>> segment.is_segment()
-            True
-
-        ..  container:: example
-
-            REGRESSION. Abjad segments directory is excluded:
-
-            >>> path = baca.Path("/path/to/abjad/abjad/segments")
-            >>> path /= "segment_01"
-            >>> path.is_segment()
-            False
-
         """
         if self.name[0] == ".":
             return False
@@ -1275,18 +896,6 @@ class Path(pathlib.PosixPath):
     def is_segments(self):
         """
         Is true when path is segments directory.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-            >>> path.segments.is_segments()
-            True
-
-            Excludes Abjad segments directory:
-
-            >>> path = baca.Path("/path/to/abjad/abjad/segments")
-            >>> path.is_segments()
-            False
 
         """
         return self.name == "segments" and self.parent.name != "abjad"
@@ -1303,13 +912,6 @@ class Path(pathlib.PosixPath):
     def list_paths(self):
         """
         Lists paths.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-            >>> path.list_paths()
-            []
-
         """
         paths = []
         if not self.exists():
@@ -1363,13 +965,6 @@ class Path(pathlib.PosixPath):
     def list_secondary_paths(self):
         """
         Lists secondary paths.
-
-        ..  container:: example
-
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-            >>> path.list_secondary_paths()
-            []
-
         """
         paths = []
         for path in sorted(self.glob("*")):
@@ -1448,22 +1043,6 @@ class Path(pathlib.PosixPath):
     def trim(self):
         """
         Trims path.
-
-        ..  container:: example
-
-            >>> baca.Path._mock_scores = "/path/to/scores"
-            >>> path = baca.Path("/path/to/scores/my_score/my_score")
-
-            >>> path.contents.trim()
-            'my_score'
-
-            >>> path.segments.trim()
-            'my_score/segments'
-
-            >>> segment = path.segments / "segment_01"
-            >>> segment.trim()
-            'my_score/segments/segment_01'
-
         """
         if self.is_external():
             return str(self)
