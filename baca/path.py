@@ -426,20 +426,6 @@ class Path(pathlib.PosixPath):
             metadatum = default
         return metadatum
 
-    def get_title(self, year=True):
-        """
-        Gets score title.
-        """
-        if year and self.get_metadatum("year"):
-            title = self.get_title(year=False)
-            year = self.get_metadatum("year")
-            result = f"{title} ({year})"
-            return result
-        else:
-            result = self.get_metadatum("title")
-            result = result or self.name
-            return result
-
     def is_build(self):
         """
         Is true when path is build directory.
