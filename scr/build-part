@@ -30,7 +30,7 @@ if not directory.parent.name.endswith("-parts"):
 
 file_name = directory.name + "-music.ly"
 path = directory / file_name
-part = baca.segments.path_to_part(path)
+part = baca.segments.part_build_directory_to_part(directory)
 dashed_part_name = abjad.String(part.name).to_dash_case()
 part_directory = directory
 part_pdf_path = part_directory / dashed_part_name

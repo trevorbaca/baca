@@ -80,7 +80,6 @@ def collect_segment_lys(_segments):
         if not source.is_file():
             continue
         target = "segment-" + name.replace("_", "-") + ".ly"
-        # target = directory / "_segments" / target
         target = _segments / target
         sources.append(source)
         targets.append(target)
