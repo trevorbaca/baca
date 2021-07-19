@@ -96,7 +96,7 @@ def _make_layout_ly(layout_py):
         first_segment = buildspace_directory.parent / "01"
         if buildspace_directory.name != first_segment.name:
             previous_segment = str(int(buildspace_directory.name) - 1).zfill(2)
-            previous_segment = buildspace_directory.with_name(previous_segment)
+            previous_segment = buildspace_directory.parent / previous_segment
             assert previous_segment.is_dir(), repr(previous_segment)
             previous_layout_ly = previous_segment / "layout.ly"
             if previous_layout_ly.is_file():
@@ -157,8 +157,4 @@ else:
     layout_py = directory / "layout.py"
 directory = layout_py.parent
 print(f"Calling make-layout-ly on {directory.trim()} ...")
-if directory.parent.name != "segments" and not directory.is_build():
-    print("Must call script in segment or build directory ...")
-    sys.exit(-1)
-
 _make_layout_ly(layout_py)

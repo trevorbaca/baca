@@ -35,7 +35,7 @@ def _make_segment_pdf(directory, do_not_interpret_ly=False, layout=True, timing=
         previous_persist = None
     else:
         previous_segment = str(int(directory.name) - 1).zfill(2)
-        previous_segment = directory.with_name(previous_segment)
+        previous_segment = directory.parent / previous_segment
         path = previous_segment / "__metadata__"
         file = baca.Path(path)
         string = file.read_text()

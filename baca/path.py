@@ -7,7 +7,7 @@ import abjad
 
 class Path(pathlib.PosixPath):
     """
-    Path in score package.
+    Path.
     """
 
     ### PUBLIC PROPERTIES ###
@@ -164,11 +164,10 @@ class Path(pathlib.PosixPath):
 
     def add_buildspace_metadatum(self, name, value, document_name=None):
         """
-        Adds metadatum with ``name`` and ``value`` into buildspace metadata
-        with optional ``document_name``.
+        Adds metadatum with ``name`` and ``value`` into buildspace metadata with
+        optional ``document_name``.
         """
-        assert self.is_buildspace(), repr(self)
-        if self.is_parts():
+        if self.name.endswith("-parts"):
             if document_name is not None:
                 part_dictionary = self.get_metadatum(document_name, abjad.OrderedDict())
             else:
@@ -176,6 +175,7 @@ class Path(pathlib.PosixPath):
             part_dictionary[name] = value
             assert abjad.String(document_name).is_shout_case()
             self.add_metadatum(document_name, part_dictionary)
+        # build, builds, segment, segments, _segments
         else:
             self.add_metadatum(name, value)
 
@@ -438,59 +438,6 @@ class Path(pathlib.PosixPath):
             return True
         return False
 
-    def is_buildspace(self):
-        """
-        Is true when path is buildspace.
-
-            * build
-            * builds
-            * segment
-            * segments
-            * _segments
-
-        """
-        if self.is_build():
-            return True
-        if self.name == "builds":
-            return True
-        if self.name == "_segments":
-            return True
-        if self.name == "segments":
-            return True
-        if self.parent.name == "segments":
-            return True
-        return False
-
-    def is_contents(self):
-        """
-        Is true when path is contents directory.
-        """
-        return self == self.contents
-
-    def is_part(self):
-        """
-        Is true when directory is part directory.
-        """
-        return self.parent.is_parts()
-
-    def is_parts(self):
-        """
-        Is true when directory is parts directory.
-        """
-        return self.name.endswith("-parts")
-
-    def is_score_build(self):
-        """
-        Is true when directory is score build directory.
-        """
-        return self.name.endswith("-score")
-
-    def is_wrapper(self):
-        """
-        Is true when path is wrapper directory
-        """
-        return self == self.wrapper
-
     def remove_metadatum(self, name, *, file_name="__metadata__"):
         """
         Removes metadatum.
@@ -514,12 +461,6 @@ class Path(pathlib.PosixPath):
         if str(path) == ".":
             return str(self)
         return str(path)
-
-    def with_name(self, name):
-        """
-        Gets path with ``name``.
-        """
-        return self.parent / name
 
     def write_metadata_py(
         self,

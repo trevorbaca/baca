@@ -233,9 +233,11 @@ def handle_edition_tags(path):
     """
     if path.parent.parent.name == "segments":
         my_name = "SEGMENT"
-    elif path.is_score_build() or path.parent.is_score_build():
+    elif path.name.endswith("-score") or path.parent.name.endswith("-score"):
         my_name = "SCORE"
-    elif path.is_parts() or path.is_part():
+    elif path.name.endswith("-parts"):
+        my_name = "PARTS"
+    elif path.parent.name.endswith("-parts"):
         my_name = "PARTS"
     else:
         raise Exception(path)

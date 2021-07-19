@@ -69,8 +69,9 @@ def _make_annotation_jobs(directory, undo=False):
     return jobs
 
 
-def collect_segment_lys(directory):
-    segments_directory = directory.contents / "segments"
+def collect_segment_lys(_segments):
+    assert _segments.name == "_segments", repr(_segments)
+    segments_directory = _segments.contents / "segments"
     paths = sorted(segments_directory.glob("*"))
     names = [_.name for _ in paths]
     sources, targets = [], []
@@ -79,10 +80,17 @@ def collect_segment_lys(directory):
         if not source.is_file():
             continue
         target = "segment-" + name.replace("_", "-") + ".ly"
-        target = directory / "_segments" / target
+        # target = directory / "_segments" / target
+        target = _segments / target
         sources.append(source)
         targets.append(target)
     return zip(sources, targets)
+
+
+def collect_segment_lys_CLEAN(directory):
+    segments_directory = directory.contents / "segments"
+    paths = sorted(segments_directory.glob("**/illustration.ly"))
+    return paths
 
 
 def color_persistent_indicators(directory, undo=False):
@@ -107,11 +115,12 @@ def color_persistent_indicators(directory, undo=False):
             print(message)
 
 
-def handle_build_tags(directory):
-    directory = baca.Path(directory)
-    assert directory.is_build() or directory.name == "_segments"
-    print("Handling build tags ...")
-    pairs = baca.build.collect_segment_lys(directory.build)
+# def handle_build_tags(directory):
+def handle_build_tags(_segments):
+    # directory = baca.Path(directory)
+    print(f"Handling {_segments.trim()} build tags ...")
+    # pairs = baca.build.collect_segment_lys(directory.build)
+    pairs = baca.build.collect_segment_lys(_segments)
     final_source, final_target = list(pairs)[-1]
     final_file_name = final_target.with_suffix(".ily").name
 
@@ -155,10 +164,11 @@ def handle_build_tags(directory):
         for message in messages:
             print(message)
 
-    _segments = directory / "_segments"
+    # _segments = directory / "_segments"
     for job in [
         baca.jobs.handle_edition_tags(_segments),
-        baca.jobs.handle_fermata_bar_lines(directory),
+        # baca.jobs.handle_fermata_bar_lines(directory),
+        baca.jobs.handle_fermata_bar_lines(_segments),
         baca.jobs.handle_shifted_clefs(_segments),
         baca.jobs.handle_mol_tags(_segments),
         baca.jobs.color_persistent_indicators(_segments, undo=True),
@@ -214,7 +224,7 @@ def handle_build_tags(directory):
 
 def handle_part_tags(directory):
     directory = baca.Path(directory)
-    if not directory.is_part():
+    if not directory.parent.name.endswith("-parts"):
         print("Must call script in part directory ...")
         sys.exit(-1)
     parts_directory = directory.parent
@@ -242,7 +252,7 @@ def handle_part_tags(directory):
             assert result is not None
             count, skipped, messages = result
         for message in messages:
-            print(" " + message)
+            print(message)
 
     def _deactivate(
         path,
@@ -278,7 +288,8 @@ def handle_part_tags(directory):
         else:
             raise TypeError(path)
 
-    music_ly = directory / "music.ly"
+    # music_ly = directory / "music.ly"
+    music_ly = list(directory.glob("*music.ly"))[0]
     _activate(
         parts_directory,
         "+PARTS",
@@ -388,7 +399,7 @@ def interpret_tex_file(tex, open_after=False):
         abjad.io.spawn_subprocess(command_called_twice)
         source = tex.with_suffix(".log")
         name = "." + tex.stem + ".tex.log"
-        target = tex.with_name(name)
+        target = tex.parent / name
         shutil.move(str(source), str(target))
         print(f"Logging to {target.trim()} ...")
         for path in sorted(tex.parent.glob("*.aux")):

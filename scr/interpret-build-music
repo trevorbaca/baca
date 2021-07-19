@@ -94,47 +94,62 @@ def _trim_illustration_ly(ly):
 
 build_directory = os.getcwd()
 build_directory = baca.Path(build_directory)
-if not build_directory.is_score_build() and not build_directory.is_part():
+build_type = None
+if build_directory.name.endswith("-score"):
+    build_type = "score" 
+if build_directory.parent.name.endswith("-parts"):
+    build_type = "part"
+if build_type is None:
     print("Must call script in score build directory or part build directory ...")
     sys.exit(-1)
 
-music_ly_file_path = build_directory / "music.ly"
-if music_ly_file_path.is_file():
-    print(f"Found {music_ly_file_path.trim()} ...")
-else:
+music_ly_file_paths = list(build_directory.glob("*music.ly"))
+if not music_ly_file_paths:
     print(f"Missing {music_ly_file_path.trim()} ...")
     sys.exit(-1)
+else:
+    assert len(music_ly_file_paths) == 1, repr(music_ly_file_paths)
+    music_ly_file_path = music_ly_file_paths[0]
+    assert music_ly_file_path.is_file(), repr(music_ly_file_path)
+    print(f"Found {music_ly_file_path.trim()} ...")
 
-_segments = build_directory / "_segments"
+if build_type == "score":
+    _segments = build_directory / "_segments"
+elif build_type == "part":
+    _segments = build_directory.parent / "_segments"
+else:
+    raise Exception(build_type)
+
 if "--skip-segment-collection" in sys.argv:
     print("Skipping segment collection ...")
 else:
     print("Collecting segment lys ...")
-    pairs = baca.build.collect_segment_lys(build_directory.build)
-    if not pairs:
-        print("... no segment lys found.")
+    segment_lys = baca.build.collect_segment_lys_CLEAN(build_directory)
+    if not segment_lys:
+        print("Missing segment lys ...")
         sys.exit(1)
     if _segments.exists():
         print(f"Removing {_segments.trim()} ...")
         shutil.rmtree(str(_segments))
+    print(f"Making {_segments.trim()} ...")
     _segments.mkdir()
-    for source, target in pairs:
-        source_ily = source.with_suffix(".ily")
-        target_ily = target.with_suffix(".ily")
-        if target_ily.exists():
-            print(f"Removing {target_ily.trim()} ...")
+    print(f"Writing", end=" ")
+    for source_ly in segment_lys:
+        text = _trim_illustration_ly(source_ly)
+        segment_number = source_ly.parent.name
+        target_ly = _segments / f"segment-{segment_number}.ly"
+        print(f"{target_ly.name.split('-')[-1]}", end=" ")
+        target_ly.write_text(text)
+        source_ily = source_ly.with_suffix(".ily")
         if source_ily.is_file():
-            print(f"Writing {target_ily.trim()} ...")
-            shutil.copyfile(str(source_ily), target_ily)
-        if target.exists():
-            print(f"Removing {target.trim()} ...")
-        print(f"Writing {target.trim()} ...")
-        text = _trim_illustration_ly(source)
-        target.write_text(text)
-        segment = source.parent
-    baca.build.handle_build_tags(build_directory)
+            target_ily = target_ly.with_suffix(".ily")
+            print(f"{target_ily.name.split('-')[-1]}", end=" ")
+            shutil.copyfile(str(source_ily), str(target_ily))
+    print("...")
+    #baca.build.handle_build_tags(build_directory)
+    baca.build.handle_build_tags(_segments)
 
-if build_directory.is_part():
+if build_directory.parent.name.endswith("-parts"):
     if "--skip-segment-collection" in sys.argv:
         print("Skipping tag handling ...")
     else:

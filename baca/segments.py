@@ -2417,7 +2417,7 @@ def path_to_part(path):
     """
     Changes path to part.
     """
-    assert path.parent.is_part(), repr(path)
+    assert path.parent.parent.name.endswith("-parts"), repr(path)
     words = path.parent.name.split("-")
     part_manifest = get_part_manifest(path)
     if not part_manifest:

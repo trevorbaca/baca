@@ -24,7 +24,7 @@ else:
     directory = os.getcwd()
 directory = baca.Path(directory)
 
-if not directory.is_part():
+if not directory.parent.name.endswith("-parts"):
     print("Must call script in part build directory ...")
     sys.exit(-1)
 
@@ -49,11 +49,12 @@ file_name = f"{dashed_part_name}-preface.tex"
 path = part_directory / file_name
 baca.build.interpret_tex_file(path)
 print()
-file_name = f"{dashed_part_name}-music.ly"
-path = part_directory / file_name
-LOG = part_directory / "lilypond.log"
-baca.build.run_lilypond(path)
+
+#music_ly = part_directory / f"{dashed_part_name}-music.ly"
+#baca.build.run_lilypond(music_ly)
+os.system("interpret-build-music")
 print()
+
 file_name = f"{dashed_part_name}-back-cover.tex"
 path = part_directory / file_name
 baca.build.interpret_tex_file(path)
