@@ -5,12 +5,8 @@ import sys
 import abjad
 import baca
 
-abjad_configuration = abjad.Configuration()
 
-
-def _display_lilypond_log_errors(lilypond_log_file_path=None):
-    if lilypond_log_file_path is None:
-        lilypond_log_file_path = abjad_configuration.lilypond_log_file_path
+def _display_lilypond_log_errors(lilypond_log_file_path):
     lilypond_log_file_path = baca.Path(lilypond_log_file_path)
     with lilypond_log_file_path.open() as file_pointer:
         lines = file_pointer.readlines()
@@ -27,22 +23,6 @@ def _display_lilypond_log_errors(lilypond_log_file_path=None):
     if error:
         for line in lines[:10]:
             print(line)
-
-
-def _make_container_to_part_assignment(directory):
-    pairs = collect_segment_lys(directory.build)
-    if not pairs:
-        print("... no segment lys found.")
-        return
-    container_to_part_assignment = abjad.OrderedDict()
-    for source, target in pairs:
-        segment = source.parent
-        value = segment.get_metadatum(
-            "container_to_part_assignment", file_name="__persist__"
-        )
-        if value:
-            container_to_part_assignment[segment.name] = value
-    return container_to_part_assignment
 
 
 def _make_annotation_jobs(directory, undo=False):
@@ -102,9 +82,6 @@ def collect_segment_lys(directory):
         target = directory / "_segments" / target
         sources.append(source)
         targets.append(target)
-    builds_directory = directory / "builds"
-    if not builds_directory.is_dir():
-        builds_directory.mkdir()
     return zip(sources, targets)
 
 
@@ -425,23 +402,6 @@ def interpret_tex_file(tex, open_after=False):
         sys.exit(-1)
 
 
-def part_subtitle(part_name, parentheses=False):
-    words = abjad.String(part_name).delimit_words()
-    number = None
-    try:
-        number = int(words[-1])
-    except ValueError:
-        pass
-    if number is not None:
-        if parentheses:
-            words[-1] = f"({number})"
-        else:
-            words[-1] = str(number)
-    words = [_.lower() for _ in words]
-    part_subtitle = " ".join(words)
-    return part_subtitle
-
-
 def run_lilypond(ly_file_path):
     assert ly_file_path.exists()
     if not abjad.io.find_executable("lilypond"):
@@ -481,7 +441,7 @@ def run_lilypond(ly_file_path):
             decrescendo_too_small=True,
             overwriting_glissando=True,
         )
-        _display_lilypond_log_errors(lilypond_log_file_path=lilypond_log_file_path)
+        _display_lilypond_log_errors(lilypond_log_file_path)
         if pdf.is_file():
             print(f"Found {pdf.trim()} ...")
         else:
@@ -508,30 +468,3 @@ def show_tag(directory, tag, undo=False):
     job = abjad.new(job, message_zero=True)
     for message in job():
         print(message)
-
-
-def to_paper_dimensions(paper_size, orientation="portrait"):
-    orientations = ("landscape", "portrait", None)
-    assert orientation in orientations, repr(orientation)
-    # lilypond.org/doc/v2.19/Documentation/notation/predefined-paper-sizes
-    paper_dimensions = {
-        "a3": "297 x 420 mm",
-        "a4": "210 x 297 mm",
-        "arch a": "9 x 12 in",
-        "arch b": "12 x 18 in",
-        "arch c": "18 x 24 in",
-        "arch d": "24 x 36 in",
-        "arch e": "36 x 48 in",
-        "legal": "8.5 x 14 in",
-        "ledger": "17 x 11 in",
-        "letter": "8.5 x 11 in",
-        "tabloid": "11 x 17 in",
-    }[paper_size]
-    paper_dimensions = paper_dimensions.replace(" x ", " ")
-    width, height, unit = paper_dimensions.split()
-    if orientation == "landscape":
-        height_ = width
-        width_ = height
-        height = height_
-        width = width_
-    return width, height, unit
