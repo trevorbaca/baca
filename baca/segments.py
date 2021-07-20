@@ -2130,7 +2130,7 @@ class PersistentOverride:
 
 
 def _context_name_to_first_appearance_margin_markup(path, context_name):
-    module = _import_score_package(path)
+    module = _import_score_package(path.contents)
     margin_markups = getattr(module, "margin_markups", None)
     if not margin_markups:
         return []
@@ -2203,18 +2203,20 @@ def _global_rest_identifiers(path):
     return identifiers
 
 
-def _import_score_package(path):
+def _import_score_package(contents_directory):
+    assert contents_directory.contents == contents_directory, repr(contents_directory)
     try:
-        module = importlib.import_module(path.contents.name)
+        module = importlib.import_module(contents_directory.name)
     except Exception:
         return
     return module
 
 
-def _import_score_template(path):
-    module = _import_score_package(path)
+def _import_score_template(contents_directory):
+    assert contents_directory.contents == contents_directory, repr(contents_directory)
+    module = _import_score_package(contents_directory)
     if not module:
-        raise Exception(f"can not import score package: {path}, {path.contents}.")
+        raise Exception(f"can not import score package: {contents_directory}.")
     score_template = getattr(module, "ScoreTemplate", None)
     if not score_template:
         raise Exception("can not import score template.")
@@ -2261,7 +2263,7 @@ def _instrument_to_staff_identifiers(path, instrument):
 
 
 def _part_name_to_default_clef(path, part_name):
-    module = _import_score_package(path)
+    module = _import_score_package(path.contents)
     instruments = getattr(module, "instruments", None)
     if not instruments:
         raise Exception(f"can not find instruments: {path!r}.")
@@ -2293,11 +2295,12 @@ def get_part_identifier(path):
     return None
 
 
-def get_part_manifest(path):
+def get_part_manifest(contents_directory):
     """
-    Gets part manifest from ``path``.
+    Gets part manifest from ``contents_directory``.
     """
-    score_template = _import_score_template(path)
+    assert contents_directory.contents == contents_directory, repr(contents_directory)
+    score_template = _import_score_template(contents_directory)
     score_template = score_template()
     part_manifest = score_template.part_manifest
     return part_manifest
@@ -2468,7 +2471,7 @@ def score_skeleton(path):
 
     Only works when score template defines ``skeleton()`` method.
     """
-    score_template = _import_score_template(path)
+    score_template = _import_score_template(path.contents)
     if not hasattr(score_template, "skeleton"):
         return None
     skeleton = score_template.skeleton()
@@ -2483,7 +2486,7 @@ def score_skeleton(path):
     strings = ["\\" + _ for _ in identifiers]
     literal = abjad.LilyPondLiteral(strings)
     abjad.attach(literal, context)
-    module = _import_score_package(path)
+    module = _import_score_package(path.contents)
     instruments = getattr(module, "instruments", None)
     for staff_group in abjad.Iteration(skeleton).components(abjad.StaffGroup):
         if staff_group:

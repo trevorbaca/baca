@@ -109,12 +109,18 @@ def _import_definition_and_run_segment_maker(segment_directory, midi=False):
         previous_segment = segment_directory.parent / previous_segment
         path = previous_segment / "__metadata__"
         file = baca.Path(path)
-        string = file.read_text()
-        previous_metadata = eval(string)
+        if file.is_file():
+            string = file.read_text()
+            previous_metadata = eval(string)
+        else:
+            previous_metadata = None
         path = previous_segment / "__persist__"
         file = baca.Path(path)
-        lines = file.read_text()
-        previous_persist = eval(lines)
+        if file.is_file():
+            lines = file.read_text()
+            previous_persist = eval(lines)
+        else:
+            previous_persist = None
     print("Running segment-maker ...")
     with abjad.Timer() as timer:
         lilypond_file = definition.maker.run(
@@ -745,7 +751,6 @@ def make_layout_ly(layout_py):
         if buildspace_directory.name != first_segment.name:
             previous_segment = str(int(buildspace_directory.name) - 1).zfill(2)
             previous_segment = buildspace_directory.parent / previous_segment
-            assert previous_segment.is_dir(), repr(previous_segment)
             previous_layout_ly = previous_segment / "layout.ly"
             if previous_layout_ly.is_file():
                 result = baca.segments.get_preamble_page_count_overview(
@@ -803,10 +808,8 @@ def make_segment_pdf(
     if layout is True:
         os.system(f"make-layout-ly {segment_directory / 'layout.py'}")
     print(f"Making segment {segment_directory.name} PDF ...")
-
     result = _import_definition_and_run_segment_maker(segment_directory)
     definition, metadata, persist, lilypond_file, runtime = result
-
     print("Writing __metadata__ ...")
     segment_directory.write_metadata_py(definition.maker.metadata)
     os.system("black --target-version=py38 __metadata__ 1>/dev/null 2>&1")

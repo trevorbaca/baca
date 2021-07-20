@@ -13,18 +13,6 @@ class Path(pathlib.PosixPath):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def build(self):
-        """
-        Gets build directory.
-        """
-        if self.is_build():
-            return self
-        elif self.parent.is_build():
-            return self.parent
-        else:
-            return None
-
-    @property
     def contents(self):
         """
         Gets contents directory.
@@ -425,18 +413,6 @@ class Path(pathlib.PosixPath):
         if not metadatum:
             metadatum = default
         return metadatum
-
-    def is_build(self):
-        """
-        Is true when path is build directory.
-        """
-        if self.name in ("_assets", "_segments"):
-            return False
-        if self.parent.name == "builds":
-            return True
-        if self.parent.parent.name == "builds" and self.suffix == "":
-            return True
-        return False
 
     def remove_metadatum(self, name, *, file_name="__metadata__"):
         """
