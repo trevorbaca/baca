@@ -9,19 +9,6 @@ import abjad
 import abjadext
 import baca
 
-# try:
-#    from abjadext import tonality
-# except ImportError:
-#    # ignore when running this script against scores on GitHub actions
-#    pass
-#
-# try:
-#    from abjadext import nauert
-# except ImportError:
-#    # ignore when running this script against scores on GitHub actions
-#    pass
-
-
 _colors = {
     "BLUE": "\033[94m",
     "RED": "\033[91m",
