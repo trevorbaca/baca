@@ -1,6 +1,5 @@
 #! /usr/bin/env python
 import doctest
-import importlib
 import io
 import os
 import pathlib
@@ -10,17 +9,17 @@ import abjad
 import abjadext
 import baca
 
-try:
-    from abjadext import tonality
-except ImportError:
-    # ignore when running this script against scores on Travis
-    pass
-
-try:
-    from abjadext import nauert
-except ImportError:
-    # ignore when running this script against scores on Travis
-    pass
+# try:
+#    from abjadext import tonality
+# except ImportError:
+#    # ignore when running this script against scores on GitHub actions
+#    pass
+#
+# try:
+#    from abjadext import nauert
+# except ImportError:
+#    # ignore when running this script against scores on GitHub actions
+#    pass
 
 
 _colors = {
@@ -52,7 +51,6 @@ def _doctest_files(files, globs, report_only_first_failure=False):
         optionflags = doctest.NORMALIZE_WHITESPACE | doctest.ELLIPSIS
     failed_file_paths, error_messages = [], []
     failure_count, test_count = 0, 0
-    current_directory = pathlib.Path(".").absolute()
     for file_ in files:
         assert file_.is_file(), repr(file_)
         relative_path = os.path.relpath(file_)
@@ -60,7 +58,10 @@ def _doctest_files(files, globs, report_only_first_failure=False):
         with abjad.RedirectedStreams(stdout=string_buffer):
             try:
                 failure_count_, test_count_ = doctest.testfile(
-                    file_, module_relative=False, globs=globs, optionflags=optionflags,
+                    file_,
+                    module_relative=False,
+                    globs=globs,
+                    optionflags=optionflags,
                 )
             except UnicodeDecodeError:
                 continue
@@ -70,9 +71,21 @@ def _doctest_files(files, globs, report_only_first_failure=False):
         if failure_count_:
             failed_file_paths.append(os.path.relpath(file_))
             error_messages.append(doctest_output)
-            result_code = "".join((_colors["RED"], "FAILED", _colors["END"],))
+            result_code = "".join(
+                (
+                    _colors["RED"],
+                    "FAILED",
+                    _colors["END"],
+                )
+            )
         else:
-            result_code = "".join((_colors["BLUE"], "OK", _colors["END"],))
+            result_code = "".join(
+                (
+                    _colors["BLUE"],
+                    "OK",
+                    _colors["END"],
+                )
+            )
         print(f"{relative_path} {result_code}")
     if failed_file_paths:
         print()
@@ -97,7 +110,7 @@ def _doctest_files(files, globs, report_only_first_failure=False):
 
 if __name__ == "__main__":
     if len(sys.argv) <= 1:
-        print(f"Must specify one or more files ...")
+        print("Must specify one or more files ...")
         sys.exit()
     names = sys.argv[1:]
     if names[0] == "--report-only-first-failure":
@@ -121,6 +134,8 @@ if __name__ == "__main__":
             files.append(path)
     files.sort()
     exit_code = _doctest_files(
-        files, globs, report_only_first_failure=report_only_first_failure,
+        files,
+        globs,
+        report_only_first_failure=report_only_first_failure,
     )
     sys.exit(exit_code)

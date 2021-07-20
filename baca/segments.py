@@ -2413,17 +2413,15 @@ def part_to_identifiers(path, part, container_to_part_assignment):
     return identifiers
 
 
-def part_build_directory_to_part(part_build_directory):
+def part_directory_to_part(part_directory):
     """
     Changes part build directory to part.
     """
-    assert part_build_directory.parent.name.endswith("-parts"), repr(
-        part_build_directory
-    )
-    words = part_build_directory.name.split("-")
-    part_manifest = get_part_manifest(part_build_directory.contents)
+    assert part_directory.parent.name.endswith("-parts"), repr(part_directory)
+    words = part_directory.name.split("-")
+    part_manifest = get_part_manifest(part_directory.contents)
     if not part_manifest:
-        raise Exception(f"no part manifest: {part_build_directory}.")
+        raise Exception(f"no part manifest: {part_directory}.")
     assert isinstance(part_manifest, PartManifest), repr(part_manifest)
     words = [abjad.String(_).capitalize_start() for _ in words]
     part_name = "".join(words)

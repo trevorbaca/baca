@@ -1,86 +1,8 @@
 #! /usr/bin/env python
-import io
 import os
-import shutil
-import subprocess
-import sys
 
-import abjad
 import baca
 
-for string in sys.argv[1:]:
-    if string.startswith("--directory="):
-        directory = string[12:]
-        break
-else:
-    directory = os.getcwd()
+directory = os.getcwd()
 directory = baca.Path(directory)
-
-if not directory.name.endswith("-score"):
-    print("Must call script in score build directory ...")
-    sys.exit(-1)
-
-print("Building score ...")
-os.system("interpret-build-music --do-not-open")
-print()
-
-tex = directory.build / "front-cover.tex"
-pdf = directory.build / "front-cover.pdf"
-if tex.is_file():
-    baca.build.interpret_tex_file(directory.build / "front-cover.tex")
-    print()
-elif pdf.is_file():
-    print(f"Using existing {pdf.trim()} ...")
-    print()
-else:
-    print("Missing front cover ...")
-    sys.exit(-1)
-
-tex = directory.build / "blank.tex"
-pdf = directory.build / "blank.pdf"
-if tex.is_file():
-    baca.build.interpret_tex_file(tex)
-    print()
-elif pdf.is_file():
-    print(f"Using existing {pdf.trim()} ...")
-    print()
-
-tex = directory.build / "inscription.tex"
-pdf = directory.build / "inscription.pdf"
-if tex.is_file():
-    baca.build.interpret_tex_file(tex)
-    print()
-elif pdf.is_file():
-    print(f"Using existing {pdf.trim()} ...")
-    print()
-
-tex = directory.build / "preface.tex"
-pdf = directory.build / "preface.pdf"
-if tex.is_file():
-    baca.build.interpret_tex_file(directory.build / "preface.tex")
-    print()
-elif pdf:
-    print(f"Using existing {pdf.trim()} ...")
-    print()
-else:
-    print("Missing preface ...")
-    sys.exit(-1)
-
-tex = directory.build / "back-cover.tex"
-pdf = directory.build / "back-cover.pdf"
-if tex.is_file():
-    baca.build.interpret_tex_file(directory.build / "back-cover.tex")
-    print()
-elif pdf.is_file():
-    print(f"Using existing {pdf.trim()} ...")
-    print()
-else:
-    print("Missing back cover ...")
-    sys.exit(-1)
-
-score_tex = directory.build / "score.tex"
-baca.build.interpret_tex_file(score_tex)
-score_pdf = directory.build / "score.pdf"
-if not score_pdf.is_file():
-    print(f"Could not produce {score_pdf.trim()} ...")
-    sys.exit(-1)
+baca.build.build_score(directory)
