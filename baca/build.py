@@ -90,8 +90,8 @@ def _import_definition_and_run_segment_maker(segment_directory, midi=False):
     if str(segment_directory) not in sys.path:
         sys.path.append(str(segment_directory))
     definition = importlib.import_module("definition")
-    metadata = segment_directory.get_metadata()
-    persist = segment_directory.get_metadata(file_name="__persist__")
+    metadata = baca.path.get_metadata(segment_directory)
+    persist = baca.path.get_metadata(segment_directory, file_name="__persist__")
     if not midi:
         ly = segment_directory / "illustration.ly"
         if ly.exists():
@@ -434,11 +434,15 @@ def handle_part_tags(directory):
             tag_ = tag
         assert isinstance(tag_, abjad.Tag) or callable(tag_)
         if deactivate:
-            result = path.deactivate(tag_, message_zero=message_zero, name=name)
+            result = baca.path.deactivate(
+                path, tag_, message_zero=message_zero, name=name
+            )
             assert result is not None
             count, skipped, messages = result
         else:
-            result = path.activate(tag_, message_zero=message_zero, name=name)
+            result = baca.path.activate(
+                path, tag_, message_zero=message_zero, name=name
+            )
             assert result is not None
             count, skipped, messages = result
         for message in messages:
@@ -791,11 +795,23 @@ def make_layout_ly(layout_py):
     numbers = abjad.String("number").pluralize(count)
     items = ", ".join([str(_) for _ in bols])
     print(f"Writing BOL measure {numbers} {items} to metadata ...")
-    buildspace_directory.add_buildspace_metadatum(
-        "bol_measure_numbers",
-        bol_measure_numbers,
-        document_name=document_name,
-    )
+    if buildspace_directory.name.endswith("-parts"):
+        if document_name is not None:
+            part_dictionary = buildspace_directory.get_metadatum(
+                document_name,
+                abjad.OrderedDict(),
+            )
+        else:
+            part_dictionary = abjad.OrderedDict()
+        part_dictionary["bol_measure_numbers"] = bol_measure_numbers
+        assert abjad.String(document_name).is_shout_case()
+        baca.path.add_metadatum(buildspace_directory, document_name, part_dictionary)
+    else:
+        baca.path.add_metadatum(
+            buildspace_directory,
+            "bol_measure_numbers",
+            bol_measure_numbers,
+        )
 
 
 def make_segment_pdf(
@@ -811,10 +827,11 @@ def make_segment_pdf(
     result = _import_definition_and_run_segment_maker(segment_directory)
     definition, metadata, persist, lilypond_file, runtime = result
     print("Writing __metadata__ ...")
-    segment_directory.write_metadata_py(definition.maker.metadata)
+    baca.path.write_metadata_py(segment_directory, definition.maker.metadata)
     os.system("black --target-version=py38 __metadata__ 1>/dev/null 2>&1")
     print("Writing __persist__ ...")
-    segment_directory.write_metadata_py(
+    baca.path.write_metadata_py(
+        segment_directory,
         definition.maker.persist,
         file_name="__persist__",
         variable_name="persist",
@@ -910,7 +927,7 @@ def make_segment_pdf(
                     message += " layout time signatures ..."
                     print(message)
     if getattr(definition.maker, "do_not_externalize", False) is not True:
-        illustration_ly.extern()
+        baca.path.extern(illustration_ly)
         illustration_ily = illustration_ly.with_suffix(".ily")
         assert illustration_ily.is_file()
         not_topmost = baca.Job(

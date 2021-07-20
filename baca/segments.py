@@ -3,6 +3,8 @@ import pathlib
 
 import abjad
 
+from . import path as _path
+
 
 class Job:
     """
@@ -63,7 +65,8 @@ class Job:
                 match, name = self.deactivate
                 if match is not None:
                     if isinstance(self.path, pathlib.Path):
-                        result = self.path.deactivate(
+                        result = _path.deactivate(
+                            self.path,
                             match,
                             message_zero=True,
                             name=name,
@@ -90,7 +93,8 @@ class Job:
             match, name = self.activate
             if match is not None:
                 if isinstance(self.path, pathlib.Path):
-                    result = self.path.activate(
+                    result = _path.activate(
+                        self.path,
                         match,
                         message_zero=True,
                         name=name,
@@ -114,7 +118,8 @@ class Job:
                 match, name = self.deactivate
                 if match is not None:
                     if isinstance(self.path, pathlib.Path):
-                        result = self.path.deactivate(
+                        result = _path.deactivate(
+                            self.path,
                             match,
                             message_zero=True,
                             name=name,

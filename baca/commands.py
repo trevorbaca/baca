@@ -3091,7 +3091,7 @@ def previous_metadata(path: str) -> abjad.OrderedDict:
         return abjad.OrderedDict()
     previous_index = index - 1
     previous_segment = paths[previous_index]
-    previous_metadata = previous_segment.get_metadata()
+    previous_metadata = _path.get_metadata(previous_segment)
     return previous_metadata
 
 
