@@ -11,7 +11,7 @@ from .commands import *
 from .figuremaker import *
 from .indicatorcommands import *
 from .indicators import *
-from .mathx import *
+from .math import *
 from .overrides import *
 from .path import *
 from .persistence import *
