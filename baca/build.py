@@ -82,6 +82,58 @@ def _display_lilypond_log_errors(lilypond_log_file_path):
             print(line)
 
 
+def _import_definition_and_run_segment_maker(segment_directory, midi=False):
+    assert segment_directory.parent.name == "segments", repr(segment_directory)
+    definition = segment_directory / "definition.py"
+    if not definition.is_file():
+        raise Exception(f"Can not find {definition.trim()} ...")
+    if str(segment_directory) not in sys.path:
+        sys.path.append(str(segment_directory))
+    definition = importlib.import_module("definition")
+    metadata = segment_directory.get_metadata()
+    persist = segment_directory.get_metadata(file_name="__persist__")
+    if not midi:
+        ly = segment_directory / "illustration.ly"
+        if ly.exists():
+            print(f"Removing {ly.trim()} ...")
+            ly.unlink()
+        pdf = segment_directory / "illustration.pdf"
+        if pdf.exists():
+            print(f"Removing {pdf.trim()} ...")
+            pdf.unlink()
+    if segment_directory.name == "01":
+        previous_metadata = None
+        previous_persist = None
+    else:
+        previous_segment = str(int(segment_directory.name) - 1).zfill(2)
+        previous_segment = segment_directory.parent / previous_segment
+        path = previous_segment / "__metadata__"
+        file = baca.Path(path)
+        string = file.read_text()
+        previous_metadata = eval(string)
+        path = previous_segment / "__persist__"
+        file = baca.Path(path)
+        lines = file.read_text()
+        previous_persist = eval(lines)
+    print("Running segment-maker ...")
+    with abjad.Timer() as timer:
+        lilypond_file = definition.maker.run(
+            metadata=metadata,
+            midi=midi,
+            persist=persist,
+            previous_metadata=previous_metadata,
+            previous_persist=previous_persist,
+            segment_directory=segment_directory,
+        )
+    segment_maker_runtime = int(timer.elapsed_time)
+    count = segment_maker_runtime
+    counter = abjad.String("second").pluralize(count)
+    message = f"Segment-maker runtime {count} {counter} ..."
+    print(message)
+    runtime = (count, counter)
+    return definition, metadata, persist, lilypond_file, runtime
+
+
 def _make_annotation_jobs(directory, undo=False):
     def _annotation_spanners(tags):
         tags_ = (
@@ -741,61 +793,20 @@ def make_layout_ly(layout_py):
     )
 
 
-def make_segment_pdf(directory, do_not_interpret_ly=False, layout=True, timing=False):
-    assert directory.parent.name == "segments"
+def make_segment_pdf(
+    segment_directory,
+    do_not_interpret_ly=False,
+    layout=True,
+    timing=False,
+):
+    assert segment_directory.parent.name == "segments"
     if layout is True:
-        os.system(f"make-layout-ly {directory / 'layout.py'}")
-    definition = directory / "definition.py"
-    if not definition.is_file():
-        print(f"Can not find {definition.trim()} ...")
-        sys.exit(-1)
-    print(f"Making segment {directory.name} PDF ...")
-    if str(directory) not in sys.path:
-        sys.path.append(str(directory))
-    import definition
+        os.system(f"make-layout-ly {segment_directory / 'layout.py'}")
+    print(f"Making segment {segment_directory.name} PDF ...")
 
-    metadata = directory.get_metadata()
-    persist = directory.get_metadata(file_name="__persist__")
-    ly = directory / "illustration.ly"
-    if ly.exists():
-        print(f"Removing {ly.trim()} ...")
-        ly.unlink()
-    pdf = directory / "illustration.pdf"
-    if pdf.exists():
-        print(f"Removing {pdf.trim()} ...")
-        pdf.unlink()
-    if directory.name == "01":
-        previous_metadata = None
-        previous_persist = None
-    else:
-        previous_segment = str(int(directory.name) - 1).zfill(2)
-        previous_segment = directory.parent / previous_segment
-        path = previous_segment / "__metadata__"
-        file = baca.Path(path)
-        string = file.read_text()
-        previous_metadata = eval(string)
-        path = previous_segment / "__persist__"
-        file = baca.Path(path)
-        lines = file.read_text()
-        previous_persist = eval(lines)
-    segment_directory = directory
-    segment_directory = baca.Path(segment_directory)
-    illustration_ly = segment_directory / "illustration.ly"
-    print("Running segment-maker ...")
-    with abjad.Timer() as timer:
-        lilypond_file = definition.maker.run(
-            metadata=metadata,
-            persist=persist,
-            previous_metadata=previous_metadata,
-            previous_persist=previous_persist,
-            segment_directory=segment_directory,
-        )
-    segment_maker_runtime = int(timer.elapsed_time)
-    count = segment_maker_runtime
-    counter = abjad.String("second").pluralize(count)
-    message = f"Segment-maker runtime {count} {counter} ..."
-    print(message)
-    segment_maker_runtime = (count, counter)
+    result = _import_definition_and_run_segment_maker(segment_directory)
+    definition, metadata, persist, lilypond_file, runtime = result
+
     print("Writing __metadata__ ...")
     segment_directory.write_metadata_py(definition.maker.metadata)
     os.system("black --target-version=py38 __metadata__ 1>/dev/null 2>&1")
@@ -818,6 +829,7 @@ def make_segment_pdf(directory, do_not_interpret_ly=False, layout=True, timing=F
             lines = abjad.tag.double_tag([line], "__make_segment_pdf__")
             lines.append("")
             lilypond_file.items[-1:-1] = lines
+    illustration_ly = segment_directory / "illustration.ly"
     result = abjad.persist.as_ly(lilypond_file, illustration_ly)
     abjad_format_time = int(result[1])
     count = abjad_format_time
@@ -905,6 +917,7 @@ def make_segment_pdf(directory, do_not_interpret_ly=False, layout=True, timing=F
         )
         for message in not_topmost():
             print(message)
+    illustration_ly = segment_directory / "illustration.ly"
     if not do_not_interpret_ly:
         lilypond_log_file_path = illustration_ily.parent / ".log"
         with abjad.Timer() as timer:
@@ -950,7 +963,7 @@ def make_segment_pdf(directory, do_not_interpret_ly=False, layout=True, timing=F
             pointer.write("\n")
             line = time.strftime("%Y-%m-%d %H:%M:%S") + "\n"
             pointer.write(line)
-            count, counter = segment_maker_runtime
+            count, counter = runtime
             line = f"Segment-maker runtime: {count} {counter}\n"
             pointer.write(line)
             count, counter = abjad_format_time
@@ -959,12 +972,13 @@ def make_segment_pdf(directory, do_not_interpret_ly=False, layout=True, timing=F
             count, counter = lilypond_runtime
             line = f"LilyPond runtime: {count} {counter}\n"
             pointer.write(line)
-    if ly.is_file():
-        print(f"Found {ly.trim()} ...")
+    if illustration_ly.is_file():
+        print(f"Found {illustration_ly.trim()} ...")
+    illustration_pdf = segment_directory / "illustration.pdf"
     if not do_not_interpret_ly:
-        if pdf.is_file():
-            print(f"Found {pdf.trim()} ...")
-    __pycache__ = directory / "__pycache__"
+        if illustration_pdf.is_file():
+            print(f"Found {illustration_pdf.trim()} ...")
+    __pycache__ = segment_directory / "__pycache__"
     shutil.rmtree(str(__pycache__))
 
 
