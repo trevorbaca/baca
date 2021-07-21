@@ -273,7 +273,8 @@ def clef_color_tags(path=None):
 
         Segment:
 
-        >>> path = baca.Path('etude', 'segments', '_')
+        >>> import pathlib
+        >>> path = pathlib.Path('etude', 'segments', '_')
         >>> for tag in baca.tags.clef_color_tags(path=path):
         ...     tag
         ...
@@ -290,7 +291,7 @@ def clef_color_tags(path=None):
 
         Segments:
 
-        >>> path = baca.Path('etude', 'segments')
+        >>> path = pathlib.Path('etude', 'segments')
         >>> for tag in baca.tags.clef_color_tags(path=path):
         ...     tag
         ...
@@ -307,7 +308,7 @@ def clef_color_tags(path=None):
 
         Build:
 
-        >>> path = baca.Path('etude', 'builds', 'letter-score')
+        >>> path = pathlib.Path('etude', 'builds', 'letter-score')
         >>> for tag in baca.tags.clef_color_tags(path=path):
         ...     tag
         ...
@@ -581,6 +582,8 @@ def persistent_indicator_color_expression_tags(path=None):
     """
     Gets persistent indicator color expression tags.
 
+    >>> import pathlib
+
     ..  container:: example
 
         >>> tags = baca.tags.persistent_indicator_color_expression_tags()
@@ -637,7 +640,7 @@ def persistent_indicator_color_expression_tags(path=None):
 
         Segment:
 
-        >>> path = baca.Path('etude', 'segments', '_')
+        >>> path = pathlib.Path('etude', 'segments', '_')
         >>> tags = baca.tags.persistent_indicator_color_expression_tags(path)
         >>> for tag in tags:
         ...     tag
@@ -692,7 +695,7 @@ def persistent_indicator_color_expression_tags(path=None):
 
         Segments:
 
-        >>> path = baca.Path('etude', 'segments')
+        >>> path = pathlib.Path('etude', 'segments')
         >>> tags = baca.tags.persistent_indicator_color_expression_tags(path)
         >>> for tag in tags:
         ...     tag
@@ -749,7 +752,7 @@ def persistent_indicator_color_expression_tags(path=None):
 
         Build:
 
-        >>> path = baca.Path('etude', 'builds', 'letter-score')
+        >>> path = pathlib.Path('etude', 'builds', 'letter-score')
         >>> tags = baca.tags.persistent_indicator_color_expression_tags(path)
         >>> for tag in tags:
         ...     tag
@@ -832,7 +835,8 @@ def persistent_indicator_color_suppression_tags(path=None):
 
         Segment:
 
-        >>> path = baca.Path('etude', 'segments', '_')
+        >>> import pathlib
+        >>> path = pathlib.Path('etude', 'segments', '_')
         >>> tags = baca.tags.persistent_indicator_color_suppression_tags(path)
         >>> for tag in tags:
         ...     tag
@@ -844,7 +848,7 @@ def persistent_indicator_color_suppression_tags(path=None):
 
         Build:
 
-        >>> path = baca.Path('etude', 'builds', 'letter-score')
+        >>> path = pathlib.Path('etude', 'builds', 'letter-score')
         >>> tags = baca.tags.persistent_indicator_color_suppression_tags(path)
         >>> for tag in tags:
         ...     tag
@@ -991,7 +995,8 @@ def staff_lines_color_tags(path=None):
 
         Segment:
 
-        >>> path = baca.Path('etude', 'segments', '_')
+        >>> import pathlib
+        >>> path = pathlib.Path('etude', 'segments', '_')
         >>> for tag in baca.tags.staff_lines_color_tags(path):
         ...     tag
         ...
@@ -1003,7 +1008,7 @@ def staff_lines_color_tags(path=None):
 
         Build:
 
-        >>> path = baca.Path('etude', 'builds', 'letter-score')
+        >>> path = pathlib.Path('etude', 'builds', 'letter-score')
         >>> for tag in baca.tags.staff_lines_color_tags(path):
         ...     tag
         ...
@@ -1040,7 +1045,8 @@ def time_signature_color_tags(path=None):
 
         Segment:
 
-        >>> path = baca.Path('etude', 'segments', '_')
+        >>> import pathlib
+        >>> path = pathlib.Path('etude', 'segments', '_')
         >>> for tag in baca.tags.time_signature_color_tags():
         ...     tag
         ...
@@ -1052,7 +1058,7 @@ def time_signature_color_tags(path=None):
 
         Build:
 
-        >>> path = baca.Path('etude', 'builds', 'letter-score')
+        >>> path = pathlib.Path('etude', 'builds', 'letter-score')
         >>> for tag in baca.tags.time_signature_color_tags():
         ...     tag
         ...

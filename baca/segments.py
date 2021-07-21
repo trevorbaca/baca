@@ -2135,13 +2135,14 @@ class PersistentOverride:
 
 
 def _context_name_to_first_appearance_margin_markup(path, context_name):
-    module = _import_score_package(path.contents)
+    contents_directory = _path.get_contents_directory(path)
+    module = _import_score_package(contents_directory)
     margin_markups = getattr(module, "margin_markups", None)
     if not margin_markups:
         return []
     dictionary = abjad.OrderedDict()
     string = "first_appearance_margin_markup"
-    segments_directory = path.contents / "segments"
+    segments_directory = contents_directory / "segments"
     for segment in sorted(segments_directory.glob("*")):
         dictionary_ = _path.get_metadatum(segment, string, [])
         dictionary.update(dictionary_)
@@ -2196,7 +2197,8 @@ def _global_rest_identifiers(path):
     Gets global rest identifiers.
     """
     identifiers = []
-    segments_directory = path.contents / "segments"
+    contents_directory = _path.get_contents_directory(path)
+    segments_directory = contents_directory / "segments"
     if segments_directory is not None:
         paths = list(sorted(segments_directory.glob("*")))
     else:
@@ -2209,7 +2211,7 @@ def _global_rest_identifiers(path):
 
 
 def _import_score_package(contents_directory):
-    assert contents_directory.contents == contents_directory, repr(contents_directory)
+    assert contents_directory.name == contents_directory.parent.name
     try:
         module = importlib.import_module(contents_directory.name)
     except Exception:
@@ -2218,7 +2220,7 @@ def _import_score_package(contents_directory):
 
 
 def _import_score_template(contents_directory):
-    assert contents_directory.contents == contents_directory, repr(contents_directory)
+    assert contents_directory.name == contents_directory.parent.name
     module = _import_score_package(contents_directory)
     if not module:
         raise Exception(f"can not import score package: {contents_directory}.")
@@ -2233,7 +2235,8 @@ def _instrument_to_staff_identifiers(path, instrument):
     Changes ``instrument`` to staff identifiers dictionary.
     """
     alive_during_segment = abjad.OrderedDict()
-    segments_directory = path.contents / "segments"
+    contents_directory = _path.get_contents_directory(path)
+    segments_directory = contents_directory / "segments"
     if segments_directory is not None:
         paths = list(sorted(segments_directory.glob("*")))
     else:
@@ -2268,7 +2271,8 @@ def _instrument_to_staff_identifiers(path, instrument):
 
 
 def _part_name_to_default_clef(path, part_name):
-    module = _import_score_package(path.contents)
+    contents_directory = _path.get_contents_directory(path)
+    module = _import_score_package(contents_directory)
     instruments = getattr(module, "instruments", None)
     if not instruments:
         raise Exception(f"can not find instruments: {path!r}.")
@@ -2304,7 +2308,7 @@ def get_part_manifest(contents_directory):
     """
     Gets part manifest from ``contents_directory``.
     """
-    assert contents_directory.contents == contents_directory, repr(contents_directory)
+    assert contents_directory.name == contents_directory.parent.name
     score_template = _import_score_template(contents_directory)
     score_template = score_template()
     part_manifest = score_template.part_manifest
@@ -2377,7 +2381,8 @@ def global_skip_identifiers(path):
     Gets global skip identifiers.
     """
     identifiers = []
-    segments_directory = path.contents / "segments"
+    contents_directory = _path.get_contents_directory(path)
+    segments_directory = contents_directory / "segments"
     if segments_directory is not None:
         paths = list(sorted(segments_directory.glob("*")))
     else:
@@ -2427,7 +2432,8 @@ def part_directory_to_part(part_directory):
     """
     assert part_directory.parent.name.endswith("-parts"), repr(part_directory)
     words = part_directory.name.split("-")
-    part_manifest = get_part_manifest(part_directory.contents)
+    contents_directory = _path.get_contents_directory(part_directory)
+    part_manifest = get_part_manifest(contents_directory)
     if not part_manifest:
         raise Exception(f"no part manifest: {part_directory}.")
     assert isinstance(part_manifest, PartManifest), repr(part_manifest)
@@ -2476,7 +2482,8 @@ def score_skeleton(path):
 
     Only works when score template defines ``skeleton()`` method.
     """
-    score_template = _import_score_template(path.contents)
+    contents_directory = _path.get_contents_directory(path)
+    score_template = _import_score_template(contents_directory)
     if not hasattr(score_template, "skeleton"):
         return None
     skeleton = score_template.skeleton()
@@ -2491,7 +2498,8 @@ def score_skeleton(path):
     strings = ["\\" + _ for _ in identifiers]
     literal = abjad.LilyPondLiteral(strings)
     abjad.attach(literal, context)
-    module = _import_score_package(path.contents)
+    contents_directory = _path.get_contents_directory(path)
+    module = _import_score_package(contents_directory)
     instruments = getattr(module, "instruments", None)
     for staff_group in abjad.Iteration(skeleton).components(abjad.StaffGroup):
         if staff_group:

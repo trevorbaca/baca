@@ -725,7 +725,7 @@ class SegmentMaker(abjad.SegmentMaker):
         phantom: bool = None,
         remove_phantom_measure: bool = None,
         score_template: templates.ScoreTemplate = None,
-        segment_directory: _path.Path = None,
+        segment_directory: pathlib.Path = None,
         skips_instead_of_rests: bool = None,
         spacing: segmentclasses.HorizontalSpacingSpecifier = None,
         spacing_extra_offset: typing.Union[bool, typings.Pair] = None,
@@ -803,8 +803,8 @@ class SegmentMaker(abjad.SegmentMaker):
         self._score_template = score_template
         self._segment_bol_measure_numbers: typing.List[int] = []
         if segment_directory is not None:
-            segment_directory = _path.Path(segment_directory)
-        self._segment_directory: typing.Optional[_path.Path] = segment_directory
+            segment_directory = pathlib.Path(segment_directory)
+        self._segment_directory: typing.Optional[pathlib.Path] = segment_directory
         self._segment_duration: typing.Optional[abjad.DurationTyping] = None
         self._skips_instead_of_rests = skips_instead_of_rests
         self._sounds_during_segment: abjad.OrderedDict = abjad.OrderedDict()
@@ -5840,7 +5840,7 @@ class SegmentMaker(abjad.SegmentMaker):
         previous_metadata: abjad.OrderedDict = None,
         previous_persist: abjad.OrderedDict = None,
         remove: typing.List[abjad.Tag] = None,
-        segment_directory: _path.Path = None,
+        segment_directory: pathlib.Path = None,
     ) -> abjad.LilyPondFile:
         """
         Runs segment-maker.

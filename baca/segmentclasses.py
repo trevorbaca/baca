@@ -1,4 +1,5 @@
 import collections
+import pathlib
 import typing
 
 import abjad
@@ -2769,7 +2770,7 @@ def page(*systems: typing.Any, number: int = None) -> PageSpecifier:
 
 
 def scorewide_spacing(
-    path: typing.Union[str, _path.Path, typing.Tuple[int, int, list]],
+    path: typing.Union[str, pathlib.Path, typing.Tuple[int, int, list]],
     fallback_duration: abjad.DurationTyping,
     breaks: BreakMeasureMap = None,
     fermata_measure_duration: abjad.DurationTyping = (1, 4),
@@ -2826,7 +2827,7 @@ def scorewide_spacing(
         assert len(path) == 3, repr(path)
         first_measure_number, measure_count, fermata_measure_numbers = path
     else:
-        path = _path.Path(path)
+        path = pathlib.Path(path)
         tuple_ = _path.get_measure_profile_metadata(path)
         first_measure_number = tuple_[0]
         measure_count = tuple_[1]

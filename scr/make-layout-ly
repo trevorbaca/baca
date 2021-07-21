@@ -1,9 +1,10 @@
 #! /usr/bin/env python
 import os
+import pathlib
 
 import baca
 
 directory = os.getcwd()
-directory = baca.Path(directory)
+directory = pathlib.Path(directory)
 layout_py = directory / "layout.py"
 baca.build.make_layout_ly(layout_py)

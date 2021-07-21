@@ -1,5 +1,6 @@
 import importlib
 import os
+import pathlib
 import pprint
 import shutil
 import sys
@@ -64,7 +65,7 @@ def _check_layout_time_signatures(music_ly):
 
 
 def _display_lilypond_log_errors(lilypond_log_file_path):
-    lilypond_log_file_path = baca.Path(lilypond_log_file_path)
+    lilypond_log_file_path = pathlib.Path(lilypond_log_file_path)
     with lilypond_log_file_path.open() as file_pointer:
         lines = file_pointer.readlines()
     error = False
@@ -108,14 +109,14 @@ def _import_definition_and_run_segment_maker(segment_directory, midi=False):
         previous_segment = str(int(segment_directory.name) - 1).zfill(2)
         previous_segment = segment_directory.parent / previous_segment
         path = previous_segment / "__metadata__"
-        file = baca.Path(path)
+        file = pathlib.Path(path)
         if file.is_file():
             string = file.read_text()
             previous_metadata = eval(string)
         else:
             previous_metadata = None
         path = previous_segment / "__persist__"
-        file = baca.Path(path)
+        file = pathlib.Path(path)
         if file.is_file():
             lines = file.read_text()
             previous_persist = eval(lines)
@@ -265,7 +266,8 @@ def build_score(score_directory):
 
 def collect_segment_lys(_segments):
     assert _segments.name == "_segments", repr(_segments)
-    segments_directory = _segments.contents / "segments"
+    contents_directory = baca.path.get_contents_directory(_segments)
+    segments_directory = contents_directory / "segments"
     paths = sorted(segments_directory.glob("*"))
     names = [_.name for _ in paths]
     sources, targets = [], []
@@ -281,13 +283,14 @@ def collect_segment_lys(_segments):
 
 
 def collect_segment_lys_CLEAN(directory):
-    segments_directory = directory.contents / "segments"
+    contents_directory = baca.path.get_contents_directory(directory)
+    segments_directory = contents_directory / "segments"
     paths = sorted(segments_directory.glob("**/illustration.ly"))
     return paths
 
 
 def color_persistent_indicators(directory, undo=False):
-    directory = baca.Path(directory)
+    directory = pathlib.Path(directory)
     if directory.parent.name != "segments":
         print("Must call in segment directory ...")
         sys.exit(1)
@@ -413,7 +416,7 @@ def handle_build_tags(_segments):
 
 
 def handle_part_tags(directory):
-    directory = baca.Path(directory)
+    directory = pathlib.Path(directory)
     if not directory.parent.name.endswith("-parts"):
         print("Must call script in part directory ...")
         sys.exit(1)
@@ -640,7 +643,7 @@ def interpret_tex_file(tex, open_after=False):
     if not tex.is_file():
         return
     executables = abjad.io.find_executable("xelatex")
-    executables = [baca.Path(_) for _ in executables]
+    executables = [pathlib.Path(_) for _ in executables]
     if not executables:
         executable_name = "pdflatex"
     else:
@@ -716,7 +719,8 @@ def make_layout_ly(layout_py):
         time_signatures = baca.path.get_metadatum(layout_directory, "time_signatures")
     else:
         time_signatures = []
-        segments_directory = layout_directory.contents / "segments"
+        contents_directory = baca.path.get_contents_directory(layout_directory)
+        segments_directory = contents_directory / "segments"
         for segment_directory in sorted(segments_directory.glob("*")):
             if not segment_directory.is_dir():
                 continue
@@ -1059,7 +1063,7 @@ def run_lilypond(ly_file_path):
 
 
 def show_annotations(directory, undo=False):
-    directory = baca.Path(directory)
+    directory = pathlib.Path(directory)
     if directory.parent.name != "segments":
         print("Must call in segment directory ...")
         sys.exit(1)
@@ -1071,7 +1075,7 @@ def show_annotations(directory, undo=False):
 
 
 def show_tag(directory, tag, undo=False):
-    directory = baca.Path(directory)
+    directory = pathlib.Path(directory)
     tag = abjad.Tag(tag)
     job = baca.jobs.show_tag(directory, tag, undo=undo)
     job = abjad.new(job, message_zero=True)

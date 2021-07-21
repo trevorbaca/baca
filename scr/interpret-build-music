@@ -1,11 +1,12 @@
 #! /usr/bin/env python
 import os
+import pathlib
 import sys
 
 import baca
 
 directory = os.getcwd()
-directory = baca.Path(directory)
+directory = pathlib.Path(directory)
 skip_segment_collection = "--skip-segment-collection" in sys.argv[1:]
 baca.build.interpret_build_music(
     directory,

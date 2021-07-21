@@ -6,48 +6,6 @@ import typing
 import abjad
 
 
-class Path(pathlib.PosixPath):
-    """
-    Path.
-    """
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def contents(self):
-        """
-        Gets contents directory.
-        """
-        parts = str(self).split(os.sep)
-        previous_part = None
-        for i, part in enumerate(reversed(parts)):
-            if part == previous_part:
-                if i == 1:
-                    return self
-                wrapper = os.sep.join(parts[: -(i - 1)])
-                wrapper = Path(wrapper)
-                return wrapper
-            previous_part = part
-        return None
-
-    @property
-    def wrapper(self):
-        """
-        Gets wrapper directory.
-        """
-        parts = str(self).split(os.sep)
-        previous_part = None
-        for i, part in enumerate(reversed(parts)):
-            if part == previous_part:
-                wrapper = os.sep.join(parts[:-i])
-                wrapper = Path(wrapper)
-                return wrapper
-            previous_part = part
-        return None
-
-    ### PUBLIC METHODS ###
-
-
 def activate(
     path,
     tag,
@@ -375,6 +333,38 @@ def extern(
     include_path.write_text(text)
 
 
+def get_contents_directory(path):
+    """
+    Gets contents directory.
+    """
+    parts = str(path).split(os.sep)
+    previous_part = None
+    for i, part in enumerate(reversed(parts)):
+        if part == previous_part:
+            if i == 1:
+                return path
+            wrapper = os.sep.join(parts[: -(i - 1)])
+            wrapper = pathlib.Path(wrapper)
+            return wrapper
+        previous_part = part
+    return None
+
+
+def get_wrapper_directory(path):
+    """
+    Gets wrapper directory.
+    """
+    parts = str(path).split(os.sep)
+    previous_part = None
+    for i, part in enumerate(reversed(parts)):
+        if part == previous_part:
+            wrapper = os.sep.join(parts[:-i])
+            wrapper = pathlib.Path(wrapper)
+            return wrapper
+        previous_part = part
+    return None
+
+
 def get_measure_profile_metadata(path) -> typing.Tuple[int, int, list]:
     """
     Gets measure profile metadata.
@@ -400,7 +390,8 @@ def get_measure_profile_metadata(path) -> typing.Tuple[int, int, list]:
         first_measure_number = 1
         measure_count = 0
         fermata_measure_numbers = []
-        segments_directory = path.contents / "segments"
+        contents_directory = get_contents_directory(path)
+        segments_directory = contents_directory / "segments"
         segment_directories = list(sorted(segments_directory.glob("*")))
         for segment_directory in segment_directories:
             if not segment_directory.is_dir():
@@ -465,7 +456,8 @@ def trim(path):
     """
     Trims path.
     """
-    count = len(path.wrapper.parts)
+    wrapper_directory = get_wrapper_directory(path)
+    count = len(wrapper_directory.parts)
     parts = path.parts
     parts = parts[count:]
     path = pathlib.Path(*parts)
