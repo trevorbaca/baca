@@ -47,7 +47,7 @@ def _check_layout_time_signatures(music_ly):
     print(message)
     print(f"Remaking {baca.path.trim(layout_ly_file_path)} ...")
     layout_py = layout_ly_file_path.with_suffix(".py")
-    os.system(f"make-layout-ly {layout_py}")
+    make_layout_ly(layout_py)
     layout_time_signatures = baca.segments.get_preamble_time_signatures(
         layout_ly_file_path
     )
@@ -217,9 +217,9 @@ def build_part(part_directory):
     print(f"Building {baca.path.trim(part_pdf)} ...")
     snake_part_name = abjad.String(part.name).to_snake_case()
     layout_py = part_directory / f"{snake_part_name}_layout.py"
-    os.system(f"make-layout-ly {layout_py}")
+    make_layout_ly(layout_py)
     print()
-    os.system("interpret-build-music")
+    interpret_build_music(part_directory)
     print()
     front_cover_tex = part_directory / f"{dashed_part_name}-front-cover.tex"
     interpret_tex_file(front_cover_tex)
@@ -238,7 +238,7 @@ def build_score(score_directory):
     assert score_directory.name.endswith("-score"), repr(score_directory)
     assert score_directory.parent.name == "builds", repr(score_directory)
     print("Building score ...")
-    os.system("interpret-build-music")
+    interpret_build_music(score_directory)
     print()
     for stem in (
         "front-cover",
@@ -623,7 +623,7 @@ def interpret_build_music(build_directory, skip_segment_collection=False):
         if skip_segment_collection:
             print("Skipping tag handling ...")
         else:
-            os.system("handle-part-tags")
+            handle_part_tags(build_directory)
     _check_layout_time_signatures(music_ly)
     run_lilypond(music_ly)
     if _segments.is_dir():
@@ -835,7 +835,8 @@ def make_segment_pdf(
 ):
     assert segment_directory.parent.name == "segments"
     if layout is True:
-        os.system(f"make-layout-ly {segment_directory / 'layout.py'}")
+        layout_py = segment_directory / "layout.py"
+        make_layout_ly(layout_py)
     print(f"Making segment {segment_directory.name} PDF ...")
     result = _import_definition_and_run_segment_maker(segment_directory)
     definition, metadata, persist, lilypond_file, runtime = result
@@ -922,7 +923,7 @@ def make_segment_pdf(
                 message += " layout time signatures ..."
                 print(message)
                 print(f"Remaking {baca.path.trim(layout_ly)} ...")
-                os.system(f"make-layout-ly --layout-py={layout_py}")
+                make_layout_ly(layout_py)
                 counter = abjad.String("measure").pluralize(measure_count)
                 message = f"Found {measure_count} {counter}"
                 message += f" in {baca.path.trim(illustration_ly)} ..."
