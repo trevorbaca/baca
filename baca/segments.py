@@ -2143,7 +2143,7 @@ def _context_name_to_first_appearance_margin_markup(path, context_name):
     string = "first_appearance_margin_markup"
     segments_directory = path.contents / "segments"
     for segment in sorted(segments_directory.glob("*")):
-        dictionary_ = segment.get_metadatum(string, [])
+        dictionary_ = _path.get_metadatum(segment, string, [])
         dictionary.update(dictionary_)
     key = dictionary.get(context_name)
     if key is None:
@@ -2239,8 +2239,8 @@ def _instrument_to_staff_identifiers(path, instrument):
     else:
         paths = []
     for segment in paths:
-        dictionary = segment.get_metadatum(
-            "alive_during_segment", [], file_name="__persist__"
+        dictionary = _path.get_metadatum(
+            segment, "alive_during_segment", [], file_name="__persist__"
         )
         alive_during_segment[segment.name] = dictionary
     staves_in_score = []

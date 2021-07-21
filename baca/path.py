@@ -47,34 +47,6 @@ class Path(pathlib.PosixPath):
 
     ### PUBLIC METHODS ###
 
-    def get_metadatum(
-        self,
-        metadatum_name,
-        default=None,
-        *,
-        file_name="__metadata__",
-    ):
-        """
-        Gets metadatum.
-        """
-        metadata = get_metadata(self, file_name=file_name)
-        metadatum = metadata.get(metadatum_name)
-        if not metadatum:
-            metadatum = default
-        return metadatum
-
-    def trim(self):
-        """
-        Trims path.
-        """
-        count = len(self.wrapper.parts)
-        parts = self.parts
-        parts = parts[count:]
-        path = pathlib.Path(*parts)
-        if str(path) == ".":
-            return str(self)
-        return str(path)
-
 
 def activate(
     path,
@@ -416,14 +388,14 @@ def get_measure_profile_metadata(path) -> typing.Tuple[int, int, list]:
     """
     if path.parent.parent.name == "segments":
         string = "first_measure_number"
-        first_measure_number = path.parent.get_metadatum(string)
-        time_signatures = path.parent.get_metadatum("time_signatures")
+        first_measure_number = get_metadatum(path.parent, string)
+        time_signatures = get_metadatum(path.parent, "time_signatures")
         if bool(time_signatures):
             measure_count = len(time_signatures)
         else:
             measure_count = 0
         string = "fermata_measure_numbers"
-        fermata_measure_numbers = path.parent.get_metadatum(string)
+        fermata_measure_numbers = get_metadatum(path.parent, string)
     else:
         first_measure_number = 1
         measure_count = 0
@@ -433,9 +405,10 @@ def get_measure_profile_metadata(path) -> typing.Tuple[int, int, list]:
         for segment_directory in segment_directories:
             if not segment_directory.is_dir():
                 continue
-            time_signatures = segment_directory.get_metadatum("time_signatures")
+            time_signatures = get_metadatum(segment_directory, "time_signatures")
             measure_count += len(time_signatures)
-            fermata_measure_numbers_ = segment_directory.get_metadatum(
+            fermata_measure_numbers_ = get_metadatum(
+                segment_directory,
                 "fermata_measure_numbers",
                 [],
             )
@@ -458,6 +431,23 @@ def get_metadata(path, file_name="__metadata__"):
     return abjad.OrderedDict(metadata)
 
 
+def get_metadatum(
+    path,
+    metadatum_name,
+    default=None,
+    *,
+    file_name="__metadata__",
+):
+    """
+    Gets metadatum.
+    """
+    metadata = get_metadata(path, file_name=file_name)
+    metadatum = metadata.get(metadatum_name)
+    if not metadatum:
+        metadatum = default
+    return metadatum
+
+
 def remove_metadatum(path, name, *, file_name="__metadata__"):
     """
     Removes metadatum.
@@ -469,6 +459,19 @@ def remove_metadatum(path, name, *, file_name="__metadata__"):
     except KeyError:
         pass
     write_metadata_py(path, metadata, file_name=file_name)
+
+
+def trim(path):
+    """
+    Trims path.
+    """
+    count = len(path.wrapper.parts)
+    parts = path.parts
+    parts = parts[count:]
+    path = pathlib.Path(*parts)
+    if str(path) == ".":
+        return str(path)
+    return str(path)
 
 
 def write_metadata_py(
