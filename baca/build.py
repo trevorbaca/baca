@@ -485,7 +485,6 @@ def handle_part_tags(directory):
         else:
             raise TypeError(path)
 
-    # music_ly = directory / "music.ly"
     music_ly = list(directory.glob("*music.ly"))[0]
     _activate(
         parts_directory,
@@ -672,33 +671,12 @@ def interpret_tex_file(tex, open_after=False):
         sys.exit(1)
 
 
-def make_layout_ly(layout_py):
+def make_layout_ly(layout_py, breaks, spacing=None, *, part_identifier=None):
     layout_py = pathlib.Path(layout_py)
-    if not layout_py.is_file():
-        print(f"Skipping layout because no {baca.path.trim(layout_py)} found ...")
-        return
-    print(f"Making {baca.path.trim(layout_py)} ...")
     layout_module_name = layout_py.stem
-    if str(layout_py.parent) not in sys.path:
-        sys.path.append(str(layout_py.parent))
-    layout_module = importlib.import_module(layout_module_name)
-    if "breaks" in dir(layout_module):
-        breaks = layout_module.breaks
-        print(f"Found {baca.path.trim(layout_py)} breaks ...")
-    else:
-        print(f"No breaks in {baca.path.trim(layout_py)} ...")
-        sys.exit(1)
-    if "spacing" in dir(layout_module):
-        spacing = layout_module.spacing
-        prototype = baca.HorizontalSpacingSpecifier
-        assert isinstance(spacing, prototype), repr(spacing)
-        print(f"Found {baca.path.trim(layout_py)} spacing ...")
-    else:
-        spacing = None
     layout_directory = layout_py.parent
     document_name = abjad.String(layout_directory.name).to_shout_case()
     if baca.path.get_metadatum(layout_directory, "parts_directory") is True:
-        part_identifier = layout_module.part_identifier
         assert abjad.String(part_identifier).is_shout_case()
         document_name = f"{document_name}_{part_identifier}"
     if layout_directory.parent.name == "segments":
