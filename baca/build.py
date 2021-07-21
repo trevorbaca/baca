@@ -47,7 +47,7 @@ def _check_layout_time_signatures(music_ly):
     print(message)
     print(f"Remaking {baca.path.trim(layout_ly_file_path)} ...")
     layout_py = layout_ly_file_path.with_suffix(".py")
-    make_layout_ly(layout_py)
+    os.system(f"python {layout_py}")
     layout_time_signatures = baca.segments.get_preamble_time_signatures(
         layout_ly_file_path
     )
@@ -217,7 +217,7 @@ def build_part(part_directory):
     print(f"Building {baca.path.trim(part_pdf)} ...")
     snake_part_name = abjad.String(part.name).to_snake_case()
     layout_py = part_directory / f"{snake_part_name}_layout.py"
-    make_layout_ly(layout_py)
+    os.system(f"python {layout_py}")
     print()
     interpret_build_music(part_directory)
     print()
@@ -673,6 +673,7 @@ def interpret_tex_file(tex, open_after=False):
 
 
 def make_layout_ly(layout_py):
+    layout_py = pathlib.Path(layout_py)
     if not layout_py.is_file():
         print(f"Skipping layout because no {baca.path.trim(layout_py)} found ...")
         return
@@ -836,7 +837,7 @@ def make_segment_pdf(
     assert segment_directory.parent.name == "segments"
     if layout is True:
         layout_py = segment_directory / "layout.py"
-        make_layout_ly(layout_py)
+        os.system(f"python {layout_py}")
     print(f"Making segment {segment_directory.name} PDF ...")
     result = _import_definition_and_run_segment_maker(segment_directory)
     definition, metadata, persist, lilypond_file, runtime = result
@@ -923,7 +924,7 @@ def make_segment_pdf(
                 message += " layout time signatures ..."
                 print(message)
                 print(f"Remaking {baca.path.trim(layout_ly)} ...")
-                make_layout_ly(layout_py)
+                os.system(f"python {layout_py}")
                 counter = abjad.String("measure").pluralize(measure_count)
                 message = f"Found {measure_count} {counter}"
                 message += f" in {baca.path.trim(illustration_ly)} ..."
