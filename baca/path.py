@@ -426,16 +426,19 @@ def get_measure_profile_metadata(path) -> typing.Tuple[int, int, list]:
         fermata_measure_numbers = path.parent.get_metadatum(string)
     else:
         first_measure_number = 1
-        dictionary = path.contents.get_metadatum("time_signatures")
-        dictionary = dictionary or abjad.OrderedDict()
         measure_count = 0
-        for segment, time_signatures in dictionary.items():
-            measure_count += len(time_signatures)
-        string = "fermata_measure_numbers"
-        dictionary = path.contents.get_metadatum(string)
-        dictionary = dictionary or abjad.OrderedDict()
         fermata_measure_numbers = []
-        for segment, fermata_measure_numbers_ in dictionary.items():
+        segments_directory = path.contents / "segments"
+        segment_directories = list(sorted(segments_directory.glob("*")))
+        for segment_directory in segment_directories:
+            if not segment_directory.is_dir():
+                continue
+            time_signatures = segment_directory.get_metadatum("time_signatures")
+            measure_count += len(time_signatures)
+            fermata_measure_numbers_ = segment_directory.get_metadatum(
+                "fermata_measure_numbers",
+                [],
+            )
             fermata_measure_numbers.extend(fermata_measure_numbers_)
     return (first_measure_number, measure_count, fermata_measure_numbers)
 

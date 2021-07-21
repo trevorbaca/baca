@@ -260,7 +260,7 @@ def build_score(score_directory):
     score_pdf = score_directory / "score.pdf"
     if not score_pdf.is_file():
         print(f"Could not produce {score_pdf.trim()} ...")
-        sys.exit(-1)
+        sys.exit(1)
 
 
 def collect_segment_lys(_segments):
@@ -290,7 +290,7 @@ def color_persistent_indicators(directory, undo=False):
     directory = baca.Path(directory)
     if directory.parent.name != "segments":
         print("Must call in segment directory ...")
-        sys.exit(-1)
+        sys.exit(1)
     for job in (
         baca.jobs.color_clefs,
         baca.jobs.color_dynamics,
@@ -416,7 +416,7 @@ def handle_part_tags(directory):
     directory = baca.Path(directory)
     if not directory.parent.name.endswith("-parts"):
         print("Must call script in part directory ...")
-        sys.exit(-1)
+        sys.exit(1)
     parts_directory = directory.parent
     print("Handling part tags ...")
 
@@ -581,7 +581,7 @@ def interpret_build_music(build_directory, skip_segment_collection=False):
         build_type = "part"
     if build_type is None:
         print("Must call script in score directory or part directory ...")
-        sys.exit(-1)
+        sys.exit(1)
     music_ly = list(build_directory.glob("*music.ly"))[0]
     if build_type == "score":
         _segments = build_directory / "_segments"
@@ -666,37 +666,40 @@ def interpret_tex_file(tex, open_after=False):
             os.system(f"open {pdf}")
     else:
         print(f"Can not produce {pdf.trim()} ...")
-        sys.exit(-1)
+        sys.exit(1)
 
 
 def make_layout_ly(layout_py):
     if not layout_py.is_file():
         print(f"Skipping layout because no {layout_py.trim()} found ...")
         return
-    layout_module_name = layout_py.with_suffix("").name
+    print(f"Making {layout_py.trim()} ...")
+    layout_module_name = layout_py.stem
     if str(layout_py.parent) not in sys.path:
         sys.path.append(str(layout_py.parent))
     layout_module = importlib.import_module(layout_module_name)
     if "breaks" in dir(layout_module):
         breaks = layout_module.breaks
+        print(f"Found {layout_py.trim()} breaks ...")
     else:
         print(f"No breaks in {layout_py.trim()} ...")
-        sys.exit(-1)
+        sys.exit(1)
     if "spacing" in dir(layout_module):
         spacing = layout_module.spacing
         prototype = baca.HorizontalSpacingSpecifier
         assert isinstance(spacing, prototype), repr(spacing)
+        print(f"Found {layout_py.trim()} spacing ...")
     else:
         spacing = None
-    buildspace_directory = layout_py.parent
-    document_name = abjad.String(buildspace_directory.name).to_shout_case()
-    if buildspace_directory.get_metadatum("parts_directory") is True:
+    layout_directory = layout_py.parent
+    document_name = abjad.String(layout_directory.name).to_shout_case()
+    if layout_directory.get_metadatum("parts_directory") is True:
         part_identifier = layout_module.part_identifier
         assert abjad.String(part_identifier).is_shout_case()
         document_name = f"{document_name}_{part_identifier}"
-    if buildspace_directory.parent.name == "segments":
+    if layout_directory.parent.name == "segments":
         string = "first_measure_number"
-        first_measure_number = buildspace_directory.get_metadatum(string)
+        first_measure_number = layout_directory.get_metadatum(string)
         if not bool(first_measure_number):
             print("Can not find first measure number ...")
             first_measure_number = False
@@ -704,17 +707,19 @@ def make_layout_ly(layout_py):
     else:
         first_measure_number = 1
     if first_measure_number is False:
-        print("Skipping layout ...")
-        sys.exit(-1)
+        print(f"Skipping {layout_py.trim()} ...")
+        sys.exit(1)
     assert abjad.String(document_name).is_shout_case()
     string = "first_measure_number"
-    first_measure_number = buildspace_directory.get_metadatum(string, 1)
-    if buildspace_directory.parent.name == "segments":
-        time_signatures = buildspace_directory.get_metadatum("time_signatures")
+    first_measure_number = layout_directory.get_metadatum(string, 1)
+    if layout_directory.parent.name == "segments":
+        time_signatures = layout_directory.get_metadatum("time_signatures")
     else:
         time_signatures = []
-        segments_directory = buildspace_directory.contents / "segments"
+        segments_directory = layout_directory.contents / "segments"
         for segment_directory in sorted(segments_directory.glob("*")):
+            if not segment_directory.is_dir():
+                continue
             time_signatures_ = segment_directory.get_metadatum("time_signatures")
             time_signatures.extend(time_signatures_)
     if breaks.partial_score is not None:
@@ -746,15 +751,15 @@ def make_layout_ly(layout_py):
     text = text.replace("Global_Skips", "Page_Layout")
     text = abjad.LilyPondFormatManager.left_shift_tags(text)
     layout_ly = layout_module_name.replace("_", "-") + ".ly"
-    layout_ly = buildspace_directory / layout_ly
+    layout_ly = layout_directory / layout_ly
     lines = []
     if breaks.partial_score is not None:
         lines.append("% partial_score = True")
-    if buildspace_directory.parent.name == "segments":
-        first_segment = buildspace_directory.parent / "01"
-        if buildspace_directory.name != first_segment.name:
-            previous_segment = str(int(buildspace_directory.name) - 1).zfill(2)
-            previous_segment = buildspace_directory.parent / previous_segment
+    if layout_directory.parent.name == "segments":
+        first_segment = layout_directory.parent / "01"
+        if layout_directory.name != first_segment.name:
+            previous_segment = str(int(layout_directory.name) - 1).zfill(2)
+            previous_segment = layout_directory.parent / previous_segment
             previous_layout_ly = previous_segment / "layout.ly"
             if previous_layout_ly.is_file():
                 result = baca.segments.get_preamble_page_count_overview(
@@ -795,9 +800,9 @@ def make_layout_ly(layout_py):
     numbers = abjad.String("number").pluralize(count)
     items = ", ".join([str(_) for _ in bols])
     print(f"Writing BOL measure {numbers} {items} to metadata ...")
-    if buildspace_directory.name.endswith("-parts"):
+    if layout_directory.name.endswith("-parts"):
         if document_name is not None:
-            part_dictionary = buildspace_directory.get_metadatum(
+            part_dictionary = layout_directory.get_metadatum(
                 document_name,
                 abjad.OrderedDict(),
             )
@@ -805,10 +810,10 @@ def make_layout_ly(layout_py):
             part_dictionary = abjad.OrderedDict()
         part_dictionary["bol_measure_numbers"] = bol_measure_numbers
         assert abjad.String(document_name).is_shout_case()
-        baca.path.add_metadatum(buildspace_directory, document_name, part_dictionary)
+        baca.path.add_metadatum(layout_directory, document_name, part_dictionary)
     else:
         baca.path.add_metadatum(
-            buildspace_directory,
+            layout_directory,
             "bol_measure_numbers",
             bol_measure_numbers,
         )
@@ -1024,11 +1029,11 @@ def run_lilypond(ly_file_path):
         ABJAD = os.getenv("ABJAD")
         if ABJAD is None:
             print("Must set ABJAD environment variable to local copy of Abjad repo ...")
-            sys.exit(-1)
+            sys.exit(1)
         BACA = os.getenv("BACA")
         if BACA is None:
             print("Must set BACA environment variable to local copy of Bača repo ...")
-            sys.exit(-1)
+            sys.exit(1)
         flags = "--include=$ABJAD/docs/source/_stylesheets --include=$BACA/lilypond"
         abjad.io.run_lilypond(
             str(ly_file_path),
@@ -1053,7 +1058,7 @@ def show_annotations(directory, undo=False):
     directory = baca.Path(directory)
     if directory.parent.name != "segments":
         print("Must call in segment directory ...")
-        sys.exit(-1)
+        sys.exit(1)
     for job in _make_annotation_jobs(directory, undo=undo):
         job = abjad.new(job, message_zero=True)
         messages = job()
