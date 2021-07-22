@@ -285,7 +285,6 @@ def _trim_illustration_ly(ly):
 
 def build_part(part_directory):
     assert part_directory.parent.name.endswith("-parts"), repr(part_directory)
-    part = baca.segments.part_directory_to_part(part_directory)
     part_pdf = part_directory / "part.pdf"
     print(f"Building {baca.path.trim(part_pdf)} ...")
     layout_py = part_directory / "layout.py"
