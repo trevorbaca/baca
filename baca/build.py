@@ -126,6 +126,87 @@ def _make_annotation_jobs(directory, undo=False):
     return jobs
 
 
+def _make_segment_clicktrack(maker):
+    segment_directory = maker.segment_directory
+    print(f"Making clicktrack for segment {segment_directory.name} ...")
+    result = _run_segment_maker(maker, midi=True)
+    metadata, persist, lilypond_file, runtime = result
+    print("Configuring LilyPond file ...")
+    time_signatures = maker.time_signatures
+    global_skips = lilypond_file["Global_Skips"]
+    skips = abjad.select(global_skips).leaves()[:-1]
+    metronome_marks = []
+    for skip in skips:
+        metronome_mark = abjad.get.effective(skip, abjad.MetronomeMark)
+        metronome_marks.append(metronome_mark)
+    staff = abjad.Staff()
+    abjad.setting(staff).midiInstrument = '#"drums"'
+    score = abjad.Score([staff], simultaneous=False)
+    fermata_measure_numbers = maker.fermata_measure_empty_overrides or []
+    for i, time_signature in enumerate(time_signatures):
+        measure_number = i + 1
+        if measure_number in fermata_measure_numbers:
+            metronome_mark = abjad.MetronomeMark((1, 4), 60)
+            time_signature = abjad.TimeSignature((3, 4))
+            notes = [abjad.Rest("r2.")]
+        else:
+            metronome_mark = metronome_marks[i]
+            units_per_minute = round(metronome_mark.units_per_minute)
+            metronome_mark = abjad.new(
+                metronome_mark,
+                hide=False,
+                units_per_minute=units_per_minute,
+            )
+            time_signature = abjad.new(time_signature)
+            numerator, denominator = time_signature.pair
+            notes = []
+            for _ in range(numerator):
+                note = abjad.Note.from_pitch_and_duration(-18, (1, denominator))
+                notes.append(note)
+            notes[0].written_pitch = -23
+        abjad.attach(time_signature, notes[0])
+        abjad.attach(metronome_mark, notes[0])
+        measure = abjad.Container(notes)
+        staff.append(measure)
+    score_block = abjad.Block(name="score")
+    score_block.items.append(score)
+    midi_block = abjad.Block(name="midi")
+    score_block.items.append(midi_block)
+    lilypond_file = abjad.LilyPondFile(items=[score_block])
+    clicktrack_file_name = "clicktrack.midi"
+    print("Persisting LilyPond file ...")
+    with abjad.Timer() as timer:
+        abjad.persist.as_midi(lilypond_file, clicktrack_file_name, remove_ly=True)
+    count = int(timer.elapsed_time)
+    counter = abjad.String("second").pluralize(count)
+    print(f"LilyPond runtime {count} {counter} ...")
+    clicktrack_path = segment_directory / clicktrack_file_name
+    if clicktrack_path.is_file():
+        print(f"Found {baca.path.trim(clicktrack_path)} ...")
+    else:
+        print(f"Could not make {baca.path.trim(clicktrack_path)} ...")
+
+
+def _make_segment_midi(maker):
+    segment_directory = maker.segment_directory
+    print(f"Making MIDI for segment {segment_directory.name} ...")
+    music_midi = segment_directory / "music.midi"
+    if music_midi.exists():
+        print(f"Removing {baca.path.trim(music_midi)} ...")
+        music_midi.unlink()
+    result = _run_segment_maker(maker, midi=True)
+    metadata, persist, lilypond_file, runtime = result
+    with abjad.Timer() as timer:
+        abjad.persist.as_midi(lilypond_file, music_midi.name, remove_ly=True)
+    count = int(timer.elapsed_time)
+    counter = abjad.String("second").pluralize(count)
+    print(f"LilyPond runtime {count} {counter} ...")
+    if music_midi.is_file():
+        print(f"Found {baca.path.trim(music_midi)} ...")
+    else:
+        print(f"Could not produce {baca.path.trim(music_midi)} ...")
+
+
 def _run_segment_maker(maker, midi=False):
     segment_directory = maker.segment_directory
     metadata = baca.path.get_metadata(segment_directory)
@@ -799,16 +880,17 @@ def make_layout_ly(layout_py, breaks, spacing=None, *, part_identifier=None):
         )
 
 
-def make_segment_pdf(
-    maker,
-    do_not_interpret_ly=False,
-    layout=True,
-):
+def make_segment_pdf(maker):
+    if "--clicktrack" in sys.argv:
+        _make_segment_clicktrack(maker)
+        return
+    if "--midi" in sys.argv:
+        _make_segment_midi(maker)
+        return
     segment_directory = maker.segment_directory
-    assert segment_directory.parent.name == "segments"
     timing = "--timing" in sys.argv[1:]
     layout_py = segment_directory / "layout.py"
-    if layout is True and layout_py.is_file():
+    if "--no-layout" not in sys.argv[1:] and layout_py.is_file():
         os.system(f"python {layout_py}")
     print(f"Making segment {segment_directory.name} PDF ...")
     result = _run_segment_maker(maker)
@@ -925,13 +1007,13 @@ def make_segment_pdf(
         for message in not_topmost():
             print(message)
     illustration_ly = segment_directory / "illustration.ly"
-    if not do_not_interpret_ly:
+    if "--no-pdf" not in sys.argv:
         lilypond_log_file_path = illustration_ily.parent / ".log"
         with abjad.Timer() as timer:
             print("Running LilyPond ...")
-            baca_repo_path = os.getenv("BACA")
+            baca_repo_path = pathlib.Path(baca.__file__).parent.parent
             flags = f"--include={baca_repo_path}/lilypond"
-            abjad_repo_path = os.getenv("ABJAD")
+            abjad_repo_path = pathlib.Path(abjad.__file__).parent.parent
             flags += f" --include={abjad_repo_path}/docs/source/_stylesheets"
             abjad.io.run_lilypond(
                 illustration_ly,
@@ -963,7 +1045,7 @@ def make_segment_pdf(
         base, extension = name.split(".")
         untagged = segment_directory / f"{base}.untagged.{extension}"
         untagged.write_text(string)
-    if timing and not do_not_interpret_ly:
+    if "--timing" in sys.argv and "--no-pdf" not in sys.argv:
         timing = segment_directory / ".timing"
         with timing.open(mode="a") as pointer:
             print(f"Writing timing to {baca.path.trim(timing)} ...")
@@ -982,9 +1064,8 @@ def make_segment_pdf(
     if illustration_ly.is_file():
         print(f"Found {baca.path.trim(illustration_ly)} ...")
     illustration_pdf = segment_directory / "illustration.pdf"
-    if not do_not_interpret_ly:
-        if illustration_pdf.is_file():
-            print(f"Found {baca.path.trim(illustration_pdf)} ...")
+    if "--no-pdf" not in sys.argv and illustration_pdf.is_file():
+        print(f"Found {baca.path.trim(illustration_pdf)} ...")
 
 
 def run_lilypond(ly_file_path):
@@ -1006,15 +1087,10 @@ def run_lilypond(ly_file_path):
     with abjad.TemporaryDirectoryChange(directory=directory):
         print(f"Interpreting {baca.path.trim(ly_file_path)} ...")
         print(f"Logging to {baca.path.trim(lilypond_log_file_path)} ...")
-        ABJAD = os.getenv("ABJAD")
-        if ABJAD is None:
-            print("Must set ABJAD environment variable to local copy of Abjad repo ...")
-            sys.exit(1)
-        BACA = os.getenv("BACA")
-        if BACA is None:
-            print("Must set BACA environment variable to local copy of Bača repo ...")
-            sys.exit(1)
-        flags = "--include=$ABJAD/docs/source/_stylesheets --include=$BACA/lilypond"
+        abjad_repo = pathlib.Path(abjad.__file__).parent.parent
+        baca_repo = pathlib.path(baca.__file__).parent.parent
+        flags = f"--include={abjad_repo}/docs/source/_stylesheets"
+        flags += f" --include={baca_repo}/lilypond"
         abjad.io.run_lilypond(
             str(ly_file_path),
             flags=flags,
