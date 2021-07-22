@@ -1088,7 +1088,7 @@ def run_lilypond(ly_file_path):
         print(f"Interpreting {baca.path.trim(ly_file_path)} ...")
         print(f"Logging to {baca.path.trim(lilypond_log_file_path)} ...")
         abjad_repo = pathlib.Path(abjad.__file__).parent.parent
-        baca_repo = pathlib.path(baca.__file__).parent.parent
+        baca_repo = pathlib.Path(baca.__file__).parent.parent
         flags = f"--include={abjad_repo}/docs/source/_stylesheets"
         flags += f" --include={baca_repo}/lilypond"
         abjad.io.run_lilypond(
