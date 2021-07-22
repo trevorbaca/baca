@@ -286,25 +286,23 @@ def _trim_illustration_ly(ly):
 def build_part(part_directory):
     assert part_directory.parent.name.endswith("-parts"), repr(part_directory)
     part = baca.segments.part_directory_to_part(part_directory)
-    dashed_part_name = abjad.String(part.name).to_dash_case()
-    part_pdf = part_directory / f"{dashed_part_name}.pdf"
+    part_pdf = part_directory / "part.pdf"
     print(f"Building {baca.path.trim(part_pdf)} ...")
-    snake_part_name = abjad.String(part.name).to_snake_case()
-    layout_py = part_directory / f"{snake_part_name}_layout.py"
+    layout_py = part_directory / "layout.py"
     os.system(f"python {layout_py}")
     print()
     interpret_build_music(part_directory)
     print()
-    front_cover_tex = part_directory / f"{dashed_part_name}-front-cover.tex"
+    front_cover_tex = part_directory / "front-cover.tex"
     interpret_tex_file(front_cover_tex)
     print()
-    preface_tex = part_directory / f"{dashed_part_name}-preface.tex"
+    preface_tex = part_directory / "preface.tex"
     interpret_tex_file(preface_tex)
     print()
-    back_cover_tex = part_directory / f"{dashed_part_name}-back-cover.tex"
+    back_cover_tex = part_directory / "back-cover.tex"
     interpret_tex_file(back_cover_tex)
     print()
-    part_tex = part_directory / f"{dashed_part_name}-part.tex"
+    part_tex = part_directory / "part.tex"
     interpret_tex_file(part_tex)
 
 
