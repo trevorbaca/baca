@@ -2376,19 +2376,15 @@ def get_preamble_time_signatures(path):
     return None
 
 
-def global_skip_identifiers(path):
+def global_skip_identifiers(segments_directory):
     """
     Gets global skip identifiers.
     """
+    assert segments_directory.name == "segments", repr(segments_directory)
     identifiers = []
-    contents_directory = _path.get_contents_directory(path)
-    segments_directory = contents_directory / "segments"
-    if segments_directory is not None:
-        paths = list(sorted(segments_directory.glob("*")))
-    else:
-        paths = []
-    for segment in paths:
-        identifier = abjad.String(segment.name).to_segment_lilypond_identifier()
+    for segment_directory in sorted(segments_directory.glob("*")):
+        segment_name = segment_directory.name
+        identifier = abjad.String(segment_name).to_segment_lilypond_identifier()
         identifier = abjad.String(f"{identifier}_GlobalSkips")
         identifiers.append(identifier)
     return identifiers
@@ -2489,7 +2485,8 @@ def score_skeleton(path):
     skeleton = score_template.skeleton()
     indent = abjad.LilyPondFormatBundle.indent
     context = skeleton["Global_Skips"]
-    identifiers = global_skip_identifiers(path)
+    segments_directory = contents_directory / "segments"
+    identifiers = global_skip_identifiers(segments_directory)
     strings = ["\\" + _ for _ in identifiers]
     literal = abjad.LilyPondLiteral(strings)
     abjad.attach(literal, context)
