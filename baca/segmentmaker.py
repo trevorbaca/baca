@@ -2998,17 +2998,18 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         name = self.segment_directory.parent.parent.name
         score_package = importlib.import_module(name)
+        library = score_package.library
         if not self.instruments:
-            instruments = getattr(score_package, "instruments", None)
+            instruments = getattr(library, "instruments", None)
             self._instruments = instruments
         if not self.margin_markups:
-            margin_markups = getattr(score_package, "margin_markups", None)
+            margin_markups = getattr(library, "margin_markups", None)
             self._margin_markups = margin_markups
         if not self.metronome_marks:
-            metronome_marks = getattr(score_package, "metronome_marks", None)
+            metronome_marks = getattr(library, "metronome_marks", None)
             self._metronome_marks = metronome_marks
         if not self.score_template:
-            score_template = getattr(score_package, "ScoreTemplate", None)
+            score_template = getattr(library, "ScoreTemplate", None)
             if score_template is not None:
                 score_template = score_template()
             self._score_template = score_template
