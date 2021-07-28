@@ -1,3 +1,5 @@
+import sys
+
 import abjad
 
 from . import build
@@ -34,3 +36,7 @@ def pleaves(*arguments, **keywords):
 
 
 pleaves.__doc__ = Selection.pleaves.__doc__
+
+if sys.version_info[:2] < (3, 9):
+    raise ImportError("Requires Python 3.9 or later")
+del sys
