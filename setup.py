@@ -4,7 +4,7 @@ import sys
 import setuptools
 
 CURRENT_PYTHON = sys.version_info[:2]
-REQUIRED_PYTHON = (3, 6)
+REQUIRED_PYTHON = (3, 9)
 
 if CURRENT_PYTHON < REQUIRED_PYTHON:
     sys.stderr.write(
@@ -31,33 +31,25 @@ version of Python.
     )
     sys.exit(1)
 
-install_requires = [
-    "abjad",
-    "mypy",
-    "roman",
-    "sphinx",
-    "sphinx-rtd-theme",
-    "uqbar>=0.2.13",
-]
-
-keywords = [
-    "abjad",
-    "lilypond",
-    "music composition",
-    "music notation",
-]
-
 if __name__ == "__main__":
     setuptools.setup(
         author="Trevor Bača",
         author_email="trevor.baca@gmail.com",
         description="Trevor Bača's Abjad library.",
-        install_requires=install_requires,
-        keywords=", ".join(keywords),
+        install_requires=[
+            "abjad",
+            "mypy",
+            "roman",
+            "sphinx",
+            "sphinx-rtd-theme",
+            "uqbar>=0.2.13",
+        ],
+        keywords="abjad, lilypond, music composition, music notation",
         license="MIT",
         name="baca",
         packages=["baca"],
         platforms="Any",
+        python_requires=">=3.9",
         url="https://github.com/trevorbaca/baca",
         version="3.2",
     )
