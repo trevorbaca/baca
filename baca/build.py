@@ -212,11 +212,11 @@ def _run_segment_maker(maker, midi=False):
     metadata = baca.path.get_metadata(segment_directory)
     persist = baca.path.get_metadata(segment_directory, file_name="__persist__")
     if not midi:
-        ly = segment_directory / "illustration.ly"
+        ly = segment_directory / "music.ly"
         if ly.exists():
             print(f"Removing {baca.path.trim(ly)} ...")
             ly.unlink()
-        pdf = segment_directory / "illustration.pdf"
+        pdf = segment_directory / "music.pdf"
         if pdf.exists():
             print(f"Removing {baca.path.trim(pdf)} ...")
             pdf.unlink()
@@ -259,7 +259,7 @@ def _run_segment_maker(maker, midi=False):
     return metadata, persist, lilypond_file, runtime
 
 
-def _trim_illustration_ly(ly):
+def _trim_music_ly(ly):
     assert ly.is_file()
     lines = []
     with ly.open() as file_pointer:
@@ -343,7 +343,7 @@ def collect_segment_lys(_segments):
     names = [_.name for _ in paths]
     sources, targets = [], []
     for name in names:
-        source = segments_directory / name / "illustration.ly"
+        source = segments_directory / name / "music.ly"
         if not source.is_file():
             continue
         target = "segment-" + name.replace("_", "-") + ".ly"
@@ -356,7 +356,7 @@ def collect_segment_lys(_segments):
 def collect_segment_lys_CLEAN(directory):
     contents_directory = baca.path.get_contents_directory(directory)
     segments_directory = contents_directory / "segments"
-    paths = sorted(segments_directory.glob("**/illustration.ly"))
+    paths = sorted(segments_directory.glob("**/music.ly"))
     return paths
 
 
@@ -677,7 +677,7 @@ def interpret_build_music(build_directory, skip_segment_collection=False):
         _segments.mkdir()
         print("Writing", end=" ")
         for source_ly in segment_lys:
-            text = _trim_illustration_ly(source_ly)
+            text = _trim_music_ly(source_ly)
             segment_number = source_ly.parent.name
             target_ly = _segments / f"segment-{segment_number}.ly"
             print(f"{target_ly.name.split('-')[-1]}", end=" ")
@@ -915,8 +915,8 @@ def make_segment_pdf(maker):
             lines = abjad.tag.double_tag([line], "__make_segment_pdf__")
             lines.append("")
             lilypond_file.items[-1:-1] = lines
-    illustration_ly = segment_directory / "illustration.ly"
-    result = abjad.persist.as_ly(lilypond_file, illustration_ly)
+    music_ly = segment_directory / "music.ly"
+    result = abjad.persist.as_ly(lilypond_file, music_ly)
     abjad_format_time = int(result[1])
     count = abjad_format_time
     counter = abjad.String("second").pluralize(count)
@@ -928,7 +928,7 @@ def make_segment_pdf(maker):
         measure_count = len(context)
         counter = abjad.String("measure").pluralize(measure_count)
         message = f"Wrote {measure_count} {counter}"
-        message += f" to {baca.path.trim(illustration_ly)} ..."
+        message += f" to {baca.path.trim(music_ly)} ..."
         print(message)
         time_signatures = []
         prototype = abjad.TimeSignature
@@ -942,11 +942,11 @@ def make_segment_pdf(maker):
     else:
         measure_count = None
         time_signatures = None
-    text = illustration_ly.read_text()
+    text = music_ly.read_text()
     text = abjad.LilyPondFormatManager.left_shift_tags(text)
-    illustration_ly.write_text(text)
+    music_ly.write_text(text)
     for job in [
-        baca.jobs.handle_edition_tags(illustration_ly),
+        baca.jobs.handle_edition_tags(music_ly),
         baca.jobs.handle_fermata_bar_lines(segment_directory),
         baca.jobs.handle_shifted_clefs(segment_directory),
         baca.jobs.handle_mol_tags(segment_directory),
@@ -978,7 +978,7 @@ def make_segment_pdf(maker):
                 os.system(f"python {layout_py}")
                 counter = abjad.String("measure").pluralize(measure_count)
                 message = f"Found {measure_count} {counter}"
-                message += f" in {baca.path.trim(illustration_ly)} ..."
+                message += f" in {baca.path.trim(music_ly)} ..."
                 print(message)
                 layout_time_signatures = baca.segments.get_preamble_time_signatures(
                     layout_ly
@@ -993,9 +993,9 @@ def make_segment_pdf(maker):
                     message += " layout time signatures ..."
                     print(message)
     if getattr(maker, "do_not_externalize", False) is not True:
-        baca.path.extern(illustration_ly)
-        illustration_ily = illustration_ly.with_suffix(".ily")
-        assert illustration_ily.is_file()
+        baca.path.extern(music_ly)
+        music_ly = music_ly.with_suffix(".ily")
+        assert music_ly.is_file()
         not_topmost = baca.Job(
             deactivate=(abjad.Tag("NOT_TOPMOST"), "not topmost"),
             path=segment_directory,
@@ -1003,9 +1003,9 @@ def make_segment_pdf(maker):
         )
         for message in not_topmost():
             print(message)
-    illustration_ly = segment_directory / "illustration.ly"
+    music_ly = segment_directory / "music.ly"
     if "--no-pdf" not in sys.argv:
-        lilypond_log_file_path = illustration_ily.parent / ".log"
+        lilypond_log_file_path = music_ly.parent / ".log"
         with abjad.Timer() as timer:
             print("Running LilyPond ...")
             baca_repo_path = pathlib.Path(baca.__file__).parent.parent
@@ -1013,7 +1013,7 @@ def make_segment_pdf(maker):
             abjad_repo_path = pathlib.Path(abjad.__file__).parent.parent
             flags += f" --include={abjad_repo_path}/docs/source/_stylesheets"
             abjad.io.run_lilypond(
-                illustration_ly,
+                music_ly,
                 flags=flags,
                 lilypond_log_file_path=lilypond_log_file_path,
             )
@@ -1028,7 +1028,7 @@ def make_segment_pdf(maker):
         counter = abjad.String("second").pluralize(count)
         print(f"LilyPond runtime {count} {counter} ...")
         lilypond_runtime = (count, counter)
-    for name in ["illustration.ly", "illustration.ily", "layout.ly"]:
+    for name in ["music.ly", "music.ily", "layout.ly"]:
         tagged = segment_directory / name
         if not tagged.exists():
             continue
@@ -1058,11 +1058,11 @@ def make_segment_pdf(maker):
             count, counter = lilypond_runtime
             line = f"LilyPond runtime: {count} {counter}\n"
             pointer.write(line)
-    if illustration_ly.is_file():
-        print(f"Found {baca.path.trim(illustration_ly)} ...")
-    illustration_pdf = segment_directory / "illustration.pdf"
-    if "--no-pdf" not in sys.argv and illustration_pdf.is_file():
-        print(f"Found {baca.path.trim(illustration_pdf)} ...")
+    if music_ly.is_file():
+        print(f"Found {baca.path.trim(music_ly)} ...")
+    music_pdf = segment_directory / "music.pdf"
+    if "--no-pdf" not in sys.argv and music_pdf.is_file():
+        print(f"Found {baca.path.trim(music_pdf)} ...")
 
 
 def run_lilypond(ly_file_path):

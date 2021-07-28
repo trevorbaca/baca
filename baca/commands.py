@@ -3079,8 +3079,8 @@ def previous_metadata(path: str) -> abjad.OrderedDict:
     """
     # reproduces baca.path.Path.get_previous_path()
     # because Travis isn't configured for scores-directory calculations
-    definition_py = pathlib.Path(path)
-    segment = pathlib.Path(definition_py).parent
+    music_py = pathlib.Path(path)
+    segment = pathlib.Path(music_py).parent
     assert segment.parent.name == "segments", repr(segment)
     segments = segment.parent
     assert segments.name == "segments", repr(segments)

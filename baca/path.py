@@ -22,12 +22,11 @@ def activate(
 
     Case 0: path is a non-LilyPond file. Method does nothing.
 
-    Case 1: path is a LilyPond (.ily, .ly) file starting with
-    ``illustration``, ``layout`` or ``segment``. Method activates ``tag``
-    in file.
+    Case 1: path is a LilyPond (.ily, .ly) file starting with ``music``, ``layout`` or
+    ``segment``. Method activates ``tag`` in file.
 
-    Case 2: path is a directory. Method descends directory recursively and
-    activates ``tag`` in LilyPond files given in case 1.
+    Case 2: path is a directory. Method descends directory recursively and activates
+    ``tag`` in LilyPond files given in case 1.
 
     Returns triple.
 
@@ -35,8 +34,7 @@ def activate(
 
     Second item in pair is count of already-active tags skipped by method.
 
-    Third item in pair is list of canonical string messages that explain
-    what happened.
+    Third item in pair is list of canonical string messages that explain what happened.
     """
     if isinstance(tag, str):
         raise Exception(f"must be tag or callable: {tag!r}")
@@ -66,7 +64,7 @@ def activate(
             if path.suffix not in (".ily", ".ly"):
                 continue
             if not (
-                path.name.startswith("illustration")
+                path.name.startswith("music")
                 or path.name.startswith("layout")
                 or path.name.startswith("segment")
             ):
