@@ -127,7 +127,8 @@ def _make_annotation_jobs(directory, undo=False):
 
 
 def _make_segment_clicktrack(maker):
-    segment_directory = maker.segment_directory
+    # segment_directory = maker.segment_directory
+    segment_directory = pathlib.Path(os.getcwd())
     print(f"Making clicktrack for segment {segment_directory.name} ...")
     result = _run_segment_maker(maker, midi=True)
     metadata, persist, lilypond_file, runtime = result
@@ -188,7 +189,8 @@ def _make_segment_clicktrack(maker):
 
 
 def _make_segment_midi(maker):
-    segment_directory = maker.segment_directory
+    # segment_directory = maker.segment_directory
+    segment_directory = pathlib.Path(os.getcwd())
     print(f"Making MIDI for segment {segment_directory.name} ...")
     music_midi = segment_directory / "music.midi"
     if music_midi.exists():
@@ -208,7 +210,8 @@ def _make_segment_midi(maker):
 
 
 def _run_segment_maker(maker, midi=False):
-    segment_directory = maker.segment_directory
+    # segment_directory = maker.segment_directory
+    segment_directory = pathlib.Path(os.getcwd())
     metadata = baca.path.get_metadata(segment_directory)
     persist = baca.path.get_metadata(segment_directory, file_name="__persist__")
     if not midi:
@@ -887,7 +890,8 @@ def make_segment_pdf(maker):
     if "--midi" in sys.argv:
         _make_segment_midi(maker)
         return
-    segment_directory = maker.segment_directory
+    # segment_directory = maker.segment_directory
+    segment_directory = pathlib.Path(os.getcwd())
     timing = "--timing" in sys.argv[1:]
     layout_py = segment_directory / "layout.py"
     if "--no-layout" not in sys.argv[1:] and layout_py.is_file():

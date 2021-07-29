@@ -1,6 +1,7 @@
 import copy
 import importlib
 import inspect
+import os
 import pathlib
 import typing
 
@@ -804,7 +805,8 @@ class SegmentMaker(abjad.SegmentMaker):
         self._segment_bol_measure_numbers: typing.List[int] = []
         if segment_directory is not None:
             segment_directory = pathlib.Path(segment_directory)
-        self._segment_directory: typing.Optional[pathlib.Path] = segment_directory
+        # self._segment_directory: typing.Optional[pathlib.Path] = segment_directory
+        self._segment_directory = pathlib.Path(os.getcwd())
         self._segment_duration: typing.Optional[abjad.DurationTyping] = None
         self._skips_instead_of_rests = skips_instead_of_rests
         self._sounds_during_segment: abjad.OrderedDict = abjad.OrderedDict()
@@ -2997,7 +2999,10 @@ class SegmentMaker(abjad.SegmentMaker):
         if not self.segment_directory:
             return
         name = self.segment_directory.parent.parent.name
-        score_package = importlib.import_module(name)
+        try:
+            score_package = importlib.import_module(name)
+        except ModuleNotFoundError:
+            return
         library = score_package.library
         if not self.instruments:
             instruments = getattr(library, "instruments", None)
