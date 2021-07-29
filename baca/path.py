@@ -42,7 +42,8 @@ def activate(
         return None
     assert isinstance(indent, int), repr(indent)
     if path.is_file():
-        if path.suffix not in (".ily", ".ly"):
+        # if path.suffix not in (".ily", ".ly"):
+        if path.suffix not in (".ily", ".ly", ".tagged"):
             count, skipped = 0, 0
         else:
             text = path.read_text()
@@ -61,11 +62,13 @@ def activate(
         count, skipped = 0, 0
         for path in sorted(path.glob("**/*")):
             path = type(path)(path)
-            if path.suffix not in (".ily", ".ly"):
+            # if path.suffix not in (".ily", ".ly"):
+            if path.suffix not in (".ily", ".ly", ".tagged"):
                 continue
             if not (
                 path.name.startswith("music")
                 or path.name.startswith("layout")
+                # TODO: remove this last "segment" case
                 or path.name.startswith("segment")
             ):
                 continue
@@ -183,8 +186,8 @@ def deactivate(
 
 def extern(
     path,
+    include_path,
     *,
-    include_path=None,
     score_path=None,
 ):
     """
@@ -193,20 +196,16 @@ def extern(
     Produces skeleton ``.ly`` together with ``.ily``.
 
     Writes skeleton ``.ly`` to ``score_path`` when ``score_path`` is set.
-    Overwrites this path with skeleton ``.ly`` when ``score_path`` is
-    unset.
 
-    Writes ``.ily`` to ``include_path`` when ``include_path`` is set.
-    Writes ``.ily`` to this path with ``.ily` suffix when ``include_path``
-    is not set.
+    Overwrites ``path`` with skeleton ``.ly`` when ``score_path`` is none.
+
+    Writes ``.ily`` to ``include_path``.
     """
     # TODO: change tag to baca.path.extern()
     tag = abjad.Tag("baca.Path.extern()")
-    if not path.suffix == ".ly":
-        raise Exception(f"must be lilypond file: {path}.")
-    if include_path is None:
-        include_path = path.with_suffix(".ily")
     assert isinstance(include_path, type(path)), repr(include_path)
+    # TODO: remove unused score_path keyword
+    assert score_path is None
     if score_path is None:
         score_path = path
     assert isinstance(score_path, type(path)), repr(score_path)
