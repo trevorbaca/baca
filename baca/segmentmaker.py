@@ -800,6 +800,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if remove_phantom_measure is not None:
             remove_phantom_measure = bool(remove_phantom_measure)
         self._remove_phantom_measure = remove_phantom_measure
+        assert score_template is not None, repr(score_template)
         self._score_template = score_template
         self._segment_bol_measure_numbers: typing.List[int] = []
         here = pathlib.Path(os.getcwd())
@@ -3013,11 +3014,6 @@ class SegmentMaker(abjad.SegmentMaker):
         if not self.metronome_marks:
             metronome_marks = getattr(library, "metronome_marks", None)
             self._metronome_marks = metronome_marks
-        if not self.score_template:
-            score_template = getattr(library, "ScoreTemplate", None)
-            if score_template is not None:
-                score_template = score_template()
-            self._score_template = score_template
 
     @staticmethod
     def _indicator_to_grob(indicator):
@@ -3561,8 +3557,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _make_score(self):
         score_template = getattr(self, "score_template")
         if score_template is None:
-            message = "segment-maker can not find score template."
-            raise Exception(message)
+            raise Exception("segment-maker can not find score template.")
         score = score_template()
         self._score = score
         if self.do_not_include_layout_ly:
