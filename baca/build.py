@@ -127,7 +127,6 @@ def _make_annotation_jobs(directory, undo=False):
 
 
 def _make_segment_clicktrack(maker):
-    # segment_directory = maker.segment_directory
     segment_directory = pathlib.Path(os.getcwd())
     print(f"Making clicktrack for segment {segment_directory.name} ...")
     result = _run_segment_maker(maker, midi=True)
@@ -189,7 +188,6 @@ def _make_segment_clicktrack(maker):
 
 
 def _make_segment_midi(maker):
-    # segment_directory = maker.segment_directory
     segment_directory = pathlib.Path(os.getcwd())
     print(f"Making MIDI for segment {segment_directory.name} ...")
     music_midi = segment_directory / "music.midi"
@@ -210,7 +208,6 @@ def _make_segment_midi(maker):
 
 
 def _run_segment_maker(maker, midi=False):
-    # segment_directory = maker.segment_directory
     segment_directory = pathlib.Path(os.getcwd())
     metadata = baca.path.get_metadata(segment_directory)
     persist = baca.path.get_metadata(segment_directory, file_name="__persist__")
@@ -251,7 +248,6 @@ def _run_segment_maker(maker, midi=False):
             persist=persist,
             previous_metadata=previous_metadata,
             previous_persist=previous_persist,
-            segment_directory=segment_directory,
         )
     segment_maker_runtime = int(timer.elapsed_time)
     count = segment_maker_runtime
@@ -890,7 +886,6 @@ def make_segment_pdf(maker):
     if "--midi" in sys.argv:
         _make_segment_midi(maker)
         return
-    # segment_directory = maker.segment_directory
     segment_directory = pathlib.Path(os.getcwd())
     timing = "--timing" in sys.argv[1:]
     layout_py = segment_directory / "layout.py"
