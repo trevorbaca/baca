@@ -2669,17 +2669,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             local_measure_number = measure_number - first_measure_number
             local_measure_number += 1
-            # TODO: remove segment name from measure number comments
-            if self.segment_name:
-                name = self.segment_name + " "
-            else:
-                name = ""
             context = abjad.get.parentage(leaf).get(abjad.Context)
             if self.first_segment or self.environment == "docs":
-                string = f"% [{name}{context.name}"
+                string = f"% [{context.name}"
                 string += f" measure {measure_number}]"
             else:
-                string = f"% [{name}{context.name}"
+                string = f"% [{context.name}"
                 string += f" measure {measure_number} /"
                 string += f" measure {local_measure_number}]"
             literal = abjad.LilyPondLiteral(string, format_slot="absolute_before")
