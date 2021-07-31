@@ -1,5 +1,4 @@
 import copy
-import importlib
 import inspect
 import os
 import pathlib
@@ -824,7 +823,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._voice_metadata: abjad.OrderedDict = abjad.OrderedDict()
         self._voice_names: typing.Optional[typing.Tuple[str, ...]] = None
         self._commands: typing.List[scoping.Command] = []
-        self._import_manifests()
         self._initialize_time_signatures(time_signatures)
 
     ### SPECIAL METHODS ###
@@ -2995,25 +2993,6 @@ class SegmentMaker(abjad.SegmentMaker):
         if hasattr(command, "_mutates_score") and command._mutates_score():
             self._cache = None
             self._update_score_one_time()
-
-    def _import_manifests(self):
-        if not self.segment_directory:
-            return
-        name = self.segment_directory.parent.parent.name
-        try:
-            score_package = importlib.import_module(name)
-        except ModuleNotFoundError:
-            return
-        library = score_package.library
-        if not self.instruments:
-            instruments = getattr(library, "instruments", None)
-            self._instruments = instruments
-        if not self.margin_markups:
-            margin_markups = getattr(library, "margin_markups", None)
-            self._margin_markups = margin_markups
-        if not self.metronome_marks:
-            metronome_marks = getattr(library, "metronome_marks", None)
-            self._metronome_marks = metronome_marks
 
     @staticmethod
     def _indicator_to_grob(indicator):
@@ -5851,7 +5830,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._persist = abjad.OrderedDict(persist)
         self._previous_metadata = abjad.OrderedDict(previous_metadata)
         self._previous_persist = abjad.OrderedDict(previous_persist)
-        self._import_manifests()
         with abjad.Timer() as timer:
             self._make_score()
             self._make_lilypond_file()
