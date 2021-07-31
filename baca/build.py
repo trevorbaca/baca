@@ -334,9 +334,9 @@ def build_score(score_directory):
         sys.exit(1)
 
 
-def collect_segment_lys(_segments):
-    assert _segments.name == "_segments", repr(_segments)
-    contents_directory = baca.path.get_contents_directory(_segments)
+def collect_segment_lys(_segments_directory):
+    assert _segments_directory.name == "_segments", repr(_segments_directory)
+    contents_directory = baca.path.get_contents_directory(_segments_directory)
     segments_directory = contents_directory / "segments"
     paths = sorted(segments_directory.glob("*"))
     names = [_.name for _ in paths]
@@ -346,7 +346,7 @@ def collect_segment_lys(_segments):
         if not source.is_file():
             continue
         target = "segment-" + name.replace("_", "-") + ".ly"
-        target = _segments / target
+        target = _segments_directory / target
         sources.append(source)
         targets.append(target)
     return zip(sources, targets)
@@ -355,7 +355,7 @@ def collect_segment_lys(_segments):
 def collect_segment_lys_CLEAN(directory):
     contents_directory = baca.path.get_contents_directory(directory)
     segments_directory = contents_directory / "segments"
-    paths = sorted(segments_directory.glob("**/music.ly"))
+    paths = sorted(segments_directory.glob("**/music.ly.tagged"))
     return paths
 
 
@@ -381,9 +381,9 @@ def color_persistent_indicators(directory, undo=False):
             print(message)
 
 
-def handle_build_tags(_segments):
-    print(f"Handling {baca.path.trim(_segments)} build tags ...")
-    pairs = baca.build.collect_segment_lys(_segments)
+def handle_build_tags(_segments_directory):
+    print(f"Handling {baca.path.trim(_segments_directory)} build tags ...")
+    pairs = baca.build.collect_segment_lys(_segments_directory)
     final_source, final_target = list(pairs)[-1]
     final_file_name = final_target.with_suffix(".ily").name
 
@@ -427,57 +427,55 @@ def handle_build_tags(_segments):
         for message in messages:
             print(message)
 
-    # _segments = directory / "_segments"
     for job in [
-        baca.jobs.handle_edition_tags(_segments),
-        # baca.jobs.handle_fermata_bar_lines(directory),
-        baca.jobs.handle_fermata_bar_lines(_segments),
-        baca.jobs.handle_shifted_clefs(_segments),
-        baca.jobs.handle_mol_tags(_segments),
-        baca.jobs.color_persistent_indicators(_segments, undo=True),
-        baca.jobs.show_music_annotations(_segments, undo=True),
-        baca.jobs.join_broken_spanners(_segments),
+        baca.jobs.handle_edition_tags(_segments_directory),
+        baca.jobs.handle_fermata_bar_lines(_segments_directory),
+        baca.jobs.handle_shifted_clefs(_segments_directory),
+        baca.jobs.handle_mol_tags(_segments_directory),
+        baca.jobs.color_persistent_indicators(_segments_directory, undo=True),
+        baca.jobs.show_music_annotations(_segments_directory, undo=True),
+        baca.jobs.join_broken_spanners(_segments_directory),
         baca.jobs.show_tag(
-            _segments,
+            _segments_directory,
             "left-broken-should-deactivate",
             match=match_left_broken_should_deactivate,
             undo=True,
         ),
         baca.jobs.show_tag(
-            _segments, baca.tags.PHANTOM, skip_file_name=final_file_name
+            _segments_directory, baca.tags.PHANTOM, skip_file_name=final_file_name
         ),
         baca.jobs.show_tag(
-            _segments,
+            _segments_directory,
             baca.tags.PHANTOM,
             prepend_empty_chord=True,
             skip_file_name=final_file_name,
             undo=True,
         ),
         baca.jobs.show_tag(
-            _segments,
+            _segments_directory,
             "phantom-should-activate",
             match=match_phantom_should_activate,
             skip_file_name=final_file_name,
         ),
         baca.jobs.show_tag(
-            _segments,
+            _segments_directory,
             "phantom-should-deactivate",
             match=match_phantom_should_deactivate,
             skip_file_name=final_file_name,
             undo=True,
         ),
         baca.jobs.show_tag(
-            _segments,
+            _segments_directory,
             baca.tags.EOS_STOP_MM_SPANNER,
             skip_file_name=final_file_name,
         ),
         baca.jobs.show_tag(
-            _segments,
+            _segments_directory,
             baca.tags.METRIC_MODULATION_IS_STRIPPED,
             undo=True,
         ),
         baca.jobs.show_tag(
-            _segments,
+            _segments_directory,
             baca.tags.METRIC_MODULATION_IS_SCALED,
             undo=True,
         ),
@@ -640,7 +638,7 @@ def handle_part_tags(directory):
 
 def interpret_build_music(build_directory, skip_segment_collection=False):
     """
-    Interprets music.ly file in (score or part) build directory.
+    Interprets music.ly file in build directory.
 
     Collects segments and handles tags.
 
@@ -654,13 +652,12 @@ def interpret_build_music(build_directory, skip_segment_collection=False):
     if build_type is None:
         print("Must call script in score directory or part directory ...")
         sys.exit(1)
-    music_ly = list(build_directory.glob("*music.ly"))[0]
+    music_ly = build_directory / "music.ly"
     if build_type == "score":
-        _segments = build_directory / "_segments"
-    elif build_type == "part":
-        _segments = build_directory.parent / "_segments"
+        _segments_directory = build_directory / "_segments"
     else:
-        raise Exception(build_type)
+        assert build_type == "part"
+        _segments_directory = build_directory.parent / "_segments"
     if skip_segment_collection:
         print("Skipping segment collection ...")
     else:
@@ -669,25 +666,27 @@ def interpret_build_music(build_directory, skip_segment_collection=False):
         if not segment_lys:
             print("Missing segment lys ...")
             sys.exit(1)
-        if _segments.exists():
-            print(f"Removing {baca.path.trim(_segments)} ...")
-            shutil.rmtree(str(_segments))
-        print(f"Making {baca.path.trim(_segments)} ...")
-        _segments.mkdir()
+        if _segments_directory.exists():
+            print(f"Removing {baca.path.trim(_segments_directory)} ...")
+            shutil.rmtree(str(_segments_directory))
+        print(f"Making {baca.path.trim(_segments_directory)} ...")
+        _segments_directory.mkdir()
         print("Writing", end=" ")
         for source_ly in segment_lys:
             text = _trim_music_ly(source_ly)
             segment_number = source_ly.parent.name
-            target_ly = _segments / f"segment-{segment_number}.ly"
-            print(f"{target_ly.name.split('-')[-1]}", end=" ")
+            target_ly = _segments_directory / f"segment-{segment_number}.ly"
+            print(f"{target_ly.name}", end=", ")
             target_ly.write_text(text)
-            source_ily = source_ly.with_suffix(".ily")
+            name = source_ly.name.removesuffix(".tagged").removesuffix(".ly")
+            name += ".ily.tagged"
+            source_ily = source_ly.parent / name
             if source_ily.is_file():
                 target_ily = target_ly.with_suffix(".ily")
-                print(f"{target_ily.name.split('-')[-1]}", end=" ")
+                print(f"{target_ily.name}", end=", ")
                 shutil.copyfile(str(source_ily), str(target_ily))
         print("...")
-        handle_build_tags(_segments)
+        handle_build_tags(_segments_directory)
     if build_directory.parent.name.endswith("-parts"):
         if skip_segment_collection:
             print("Skipping tag handling ...")
@@ -695,9 +694,9 @@ def interpret_build_music(build_directory, skip_segment_collection=False):
             handle_part_tags(build_directory)
     _check_layout_time_signatures(music_ly)
     run_lilypond(music_ly)
-    if _segments.is_dir():
-        print(f"Removing {baca.path.trim(_segments)} ...")
-        shutil.rmtree(str(_segments))
+    if _segments_directory.is_dir():
+        print(f"Removing {baca.path.trim(_segments_directory)} ...")
+        shutil.rmtree(str(_segments_directory))
 
 
 def interpret_tex_file(tex, open_after=False):
