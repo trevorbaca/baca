@@ -9,7 +9,6 @@ from abjadext import rmakers
 
 from . import classes, const, indicators
 from . import overrides as baca_overrides
-from . import path as _path
 from . import pitchclasses, pitchcommands, rhythmcommands, scoping, segmentclasses
 from . import segments as _segments
 from . import tags as _tags
@@ -644,8 +643,8 @@ class SegmentMaker(abjad.SegmentMaker):
         "_score",
         "_score_template",
         "_segment_bol_measure_numbers",
-        "_segment_directory",
         "_segment_duration",
+        "_segment_name",
         "_skips_instead_of_rests",
         "_sounds_during_segment",
         "_spacing",
@@ -802,12 +801,12 @@ class SegmentMaker(abjad.SegmentMaker):
         assert score_template is not None, repr(score_template)
         self._score_template = score_template
         self._segment_bol_measure_numbers: typing.List[int] = []
-        here = pathlib.Path(os.getcwd())
-        if here.parent.name == "segments":
-            self._segment_directory = pathlib.Path(os.getcwd())
-        else:
-            self._segment_directory = None
         self._segment_duration: typing.Optional[abjad.DurationTyping] = None
+        here = pathlib.Path(os.getcwd())
+        segment_name = None
+        if here.parent.name == "segments":
+            segment_name = here.name
+        self._segment_name = segment_name
         self._skips_instead_of_rests = skips_instead_of_rests
         self._sounds_during_segment: abjad.OrderedDict = abjad.OrderedDict()
         self._spacing = spacing
@@ -2077,18 +2076,6 @@ class SegmentMaker(abjad.SegmentMaker):
                         measure_number, []
                     )
                     cached_leaves.append(leaf)
-
-    def _cache_previously_alive_contexts(self) -> None:
-        if self.segment_directory is None:
-            return
-        contexts: typing.Set[str] = set()
-        string = "alive_during_segment"
-        for segment in sorted(self.segment_directory.parent.glob("*")):
-            if segment == self.segment_directory:
-                break
-            contexts_ = _path.get_metadatum(segment, string, file_name="__persist__")
-            contexts.update(contexts_)
-        self._previously_alive_contexts.extend(sorted(contexts))
 
     def _cache_voice_names(self):
         if self._voice_names is not None:
@@ -5167,20 +5154,15 @@ class SegmentMaker(abjad.SegmentMaker):
     def score_template(self) -> typing.Optional[abjad.ScoreTemplate]:
         """
         Gets score template.
-
-        ..  container:: example
-
-            Gets score template:
-
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     )
-
-            >>> maker.score_template
-            SingleStaffScoreTemplate()
-
         """
         return self._score_template
+
+    @property
+    def segment_name(self):
+        """
+        Gets segment name.
+        """
+        return self._segment_name
 
     @property
     def skips_instead_of_rests(self) -> typing.Optional[bool]:
