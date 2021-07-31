@@ -248,6 +248,7 @@ def _run_segment_maker(maker, midi=False):
             persist=persist,
             previous_metadata=previous_metadata,
             previous_persist=previous_persist,
+            segment_name=segment_directory.name,
         )
     segment_maker_runtime = int(timer.elapsed_time)
     count = segment_maker_runtime
@@ -345,7 +346,7 @@ def collect_segment_lys(_segments_directory):
         source = segments_directory / name / "music.ly"
         if not source.is_file():
             continue
-        target = "segment-" + name.replace("_", "-") + ".ly"
+        target = name + ".ly"
         target = _segments_directory / target
         sources.append(source)
         targets.append(target)
@@ -669,13 +670,12 @@ def interpret_build_music(build_directory, skip_segment_collection=False):
         if _segments_directory.exists():
             print(f"Removing {baca.path.trim(_segments_directory)} ...")
             shutil.rmtree(str(_segments_directory))
-        print(f"Making {baca.path.trim(_segments_directory)} ...")
         _segments_directory.mkdir()
-        print("Writing", end=" ")
+        print(f"Writing {baca.path.trim(_segments_directory)}/", end="")
         for source_ly in segment_lys:
             text = _trim_music_ly(source_ly)
             segment_number = source_ly.parent.name
-            target_ly = _segments_directory / f"segment-{segment_number}.ly"
+            target_ly = _segments_directory / f"{segment_number}.ly"
             print(f"{target_ly.name}", end=", ")
             target_ly.write_text(text)
             name = source_ly.name.removesuffix(".tagged").removesuffix(".ly")
@@ -789,10 +789,16 @@ def make_layout_ly(layout_py, breaks, spacing=None, *, part_identifier=None):
         spacing=spacing,
         time_signatures=time_signatures,
     )
+    # TODO: remove segment_name here because it's never necessary
+    if layout_directory.parent.name == "segments":
+        segment_name = layout_directory.name
+    else:
+        segment_name = None
     lilypond_file = maker.run(
         do_not_print_timing=True,
         environment="layout",
         remove=baca.tags.layout_removal_tags(),
+        segment_name=segment_name,
     )
     context = lilypond_file["Global_Skips"]
     context.lilypond_type = "PageLayout"
@@ -1035,7 +1041,6 @@ def make_segment_pdf(maker):
         counter = abjad.String("second").pluralize(count)
         print(f"LilyPond runtime {count} {counter} ...")
         lilypond_runtime = (count, counter)
-    # for name in ["music.ly", "music.ily", "layout.ly"]:
     for name in ["music.ly.tagged", "music.ily.tagged", "layout.ly.tagged"]:
         tagged = segment_directory / name
         if not tagged.exists():
@@ -1047,8 +1052,6 @@ def make_segment_pdf(maker):
                     lines.append(line)
         string = "".join(lines)
         string = abjad.format.remove_tags(string)
-        # base, extension = name.split(".")
-        # untagged = segment_directory / f"{base}.untagged.{extension}"
         untagged = segment_directory / name.removesuffix(".tagged")
         untagged.write_text(string)
     if "--timing" in sys.argv and "--no-pdf" not in sys.argv:

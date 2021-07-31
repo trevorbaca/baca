@@ -42,7 +42,6 @@ def activate(
         return None
     assert isinstance(indent, int), repr(indent)
     if path.is_file():
-        # if path.suffix not in (".ily", ".ly"):
         if path.suffix not in (".ily", ".ly", ".tagged"):
             count, skipped = 0, 0
         else:
@@ -62,14 +61,12 @@ def activate(
         count, skipped = 0, 0
         for path in sorted(path.glob("**/*")):
             path = type(path)(path)
-            # if path.suffix not in (".ily", ".ly"):
             if path.suffix not in (".ily", ".ly", ".tagged"):
                 continue
             if not (
                 path.name.startswith("music")
                 or path.name.startswith("layout")
-                # TODO: remove this last "segment" case
-                or path.name.startswith("segment")
+                or path.name[0].isdigit()
             ):
                 continue
             if path.name == skip_file_name:

@@ -1,6 +1,5 @@
 import copy
 import inspect
-import os
 import pathlib
 import typing
 
@@ -802,11 +801,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._score_template = score_template
         self._segment_bol_measure_numbers: typing.List[int] = []
         self._segment_duration: typing.Optional[abjad.DurationTyping] = None
-        here = pathlib.Path(os.getcwd())
-        segment_name = None
-        if here.parent.name == "segments":
-            segment_name = here.name
-        self._segment_name = segment_name
         self._skips_instead_of_rests = skips_instead_of_rests
         self._sounds_during_segment: abjad.OrderedDict = abjad.OrderedDict()
         self._spacing = spacing
@@ -2431,8 +2425,10 @@ class SegmentMaker(abjad.SegmentMaker):
         dictionary = self._collect_persistent_indicators()
         if dictionary:
             persist["persistent_indicators"] = dictionary
+        # TODO: probably do not need to store segment name in metadata
         if self.segment_name is not None:
             metadata["segment_name"] = self.segment_name
+        # TODO: probably do not need to store segment number in metadata
         metadata["segment_number"] = self._get_segment_number()
         if self._start_clock_time is not None:
             metadata["start_clock_time"] = self._start_clock_time
@@ -2673,6 +2669,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             local_measure_number = measure_number - first_measure_number
             local_measure_number += 1
+            # TODO: remove segment name from measure number comments
             if self.segment_name:
                 name = self.segment_name + " "
             else:
@@ -5792,17 +5789,18 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def run(
         self,
-        activate: typing.List[abjad.Tag] = None,
-        deactivate: typing.List[abjad.Tag] = None,
-        do_not_print_timing: bool = None,
-        environment: str = None,
-        metadata: abjad.OrderedDict = None,
-        midi: bool = None,
-        persist: abjad.OrderedDict = None,
-        previous_metadata: abjad.OrderedDict = None,
-        previous_persist: abjad.OrderedDict = None,
-        remove: typing.List[abjad.Tag] = None,
-    ) -> abjad.LilyPondFile:
+        activate=None,
+        deactivate=None,
+        do_not_print_timing=False,
+        environment=None,
+        metadata=None,
+        midi=False,
+        persist=None,
+        previous_metadata=None,
+        previous_persist=None,
+        remove=None,
+        segment_name=None,
+    ):
         """
         Runs segment-maker.
         """
@@ -5812,6 +5810,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._persist = abjad.OrderedDict(persist)
         self._previous_metadata = abjad.OrderedDict(previous_metadata)
         self._previous_persist = abjad.OrderedDict(previous_persist)
+        self._segment_name = segment_name
         with abjad.Timer() as timer:
             self._make_score()
             self._make_lilypond_file()
