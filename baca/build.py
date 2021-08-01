@@ -301,7 +301,7 @@ def _remove_lilypond_warnings(
     path.write_text(text)
 
 
-def _run_segment_maker(maker, midi=False):
+def _run_segment_maker(maker, first_segment=False, midi=False):
     segment_directory = pathlib.Path(os.getcwd())
     metadata = baca.path.get_metadata(segment_directory)
     persist = baca.path.get_metadata(segment_directory, file_name="__persist__")
@@ -335,8 +335,13 @@ def _run_segment_maker(maker, midi=False):
         else:
             previous_persist = None
     print("Running segment-maker ...")
+    if first_segment is True:
+        pass
+    else:
+        first_segment = segment_directory.name == "01"
     with abjad.Timer() as timer:
         lilypond_file = maker.run(
+            first_segment=first_segment,
             metadata=metadata,
             midi=midi,
             persist=persist,
@@ -892,6 +897,7 @@ def make_layout_ly(layout_py, breaks, spacing=None, *, part_identifier=None):
     lilypond_file = maker.run(
         do_not_print_timing=True,
         environment="layout",
+        first_segment=True,
         segment_name=segment_name,
     )
     context = lilypond_file["Global_Skips"]
@@ -976,7 +982,7 @@ def make_layout_ly(layout_py, breaks, spacing=None, *, part_identifier=None):
         )
 
 
-def make_segment_pdf(maker):
+def make_segment_pdf(maker, first_segment=False):
     if "--clicktrack" in sys.argv:
         _make_segment_clicktrack(maker)
         return
@@ -989,9 +995,8 @@ def make_segment_pdf(maker):
     if "--no-layout" not in sys.argv[1:] and layout_py.is_file():
         os.system(f"python {layout_py}")
     print(f"Making segment {segment_directory.name} PDF ...")
-    result = _run_segment_maker(maker)
+    result = _run_segment_maker(maker, first_segment=first_segment)
     metadata, persist, lilypond_file, runtime = result
-
     print("Writing __metadata__ ...")
     baca.path.write_metadata_py(segment_directory, maker.metadata)
     os.system("black --target-version=py38 __metadata__ 1>/dev/null 2>&1")

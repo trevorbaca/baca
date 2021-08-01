@@ -25,8 +25,8 @@ from .pitchclasses import *
 from .pitchcommands import *
 from .rhythmcommands import *
 from .scoping import *
-from .segmentclasses import *
 from .segmentmaker import *
+from .spacing import *
 from .spannercommands import *
 from .templates import *
 from .typings import *

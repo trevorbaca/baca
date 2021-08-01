@@ -8,7 +8,7 @@ from . import classes, const, indicators
 from . import memento as _memento
 from . import overrides as _overrides
 from . import parts as _parts
-from . import pitchclasses, pitchcommands, rhythmcommands, scoping, segmentclasses
+from . import pitchclasses, pitchcommands, rhythmcommands, scoping
 from . import tags as _tags
 
 
@@ -696,7 +696,7 @@ class SegmentMaker:
         *,
         activate=None,
         allow_empty_selections=False,
-        breaks: segmentclasses.BreakMeasureMap = None,
+        breaks=None,
         check_all_are_pitched=False,
         clock_time_extra_offset=None,
         clock_time_override=None,
@@ -711,7 +711,6 @@ class SegmentMaker:
         fermata_measure_empty_overrides=None,
         final_segment=False,
         first_measure_number=None,
-        first_segment=None,
         ignore_repeat_pitch_classes=False,
         includes=None,
         instruments=None,
@@ -771,9 +770,6 @@ class SegmentMaker:
         self._fermata_start_offsets = []
         self._fermata_stop_offsets = []
         self._first_measure_number = first_measure_number
-        if first_segment is not None:
-            first_segment = bool(first_segment)
-        self._first_segment = first_segment
         self._ignore_repeat_pitch_classes = ignore_repeat_pitch_classes
         self._instruments = instruments
         self._final_measure_is_fermata = False
@@ -2471,11 +2467,6 @@ class SegmentMaker:
         dictionary = self._collect_persistent_indicators()
         if dictionary:
             persist["persistent_indicators"] = dictionary
-        # TODO: probably do not need to store segment name in metadata
-        if self.segment_name is not None:
-            metadata["segment_name"] = self.segment_name
-        # TODO: probably do not need to store segment number in metadata
-        metadata["segment_number"] = self._get_segment_number()
         if self._start_clock_time is not None:
             metadata["start_clock_time"] = self._start_clock_time
         if self._stop_clock_time is not None:
@@ -2987,16 +2978,6 @@ class SegmentMaker:
         first_measure_number = self._get_first_measure_number()
         final_measure_number = self._get_final_measure_number()
         return list(range(first_measure_number, final_measure_number + 1))
-
-    def _get_segment_number(self):
-        if not self.previous_metadata:
-            segment_number = 0
-        else:
-            segment_number = self.previous_metadata.get("segment_number")
-            if segment_number is None:
-                message = "previous metadata missing segment number."
-                raise Exception(message)
-        return segment_number + 1
 
     @staticmethod
     def _get_tag(status, stem, prefix=None, suffix=None):
@@ -4852,15 +4833,12 @@ class SegmentMaker:
         """
         return self._first_measure_number
 
-    # TODO: simplify
     @property
     def first_segment(self):
         """
         Is true when segment is first in score.
         """
-        if self._first_segment is not None:
-            return self._first_segment
-        return self._get_segment_number() == 1
+        return self._first_segment
 
     @property
     def ignore_repeat_pitch_classes(self):
@@ -4955,7 +4933,6 @@ class SegmentMaker:
             ...         value="alto",
             ...     )
             ... ]
-            >>> metadata["segment_number"] = 1
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -4963,6 +4940,7 @@ class SegmentMaker:
 
             >>> lilypond_file = maker.run(
             ...     environment="docs",
+            ...     first_segment=False,
             ...     previous_metadata=metadata,
             ...     previous_persist=persist,
             ... )
@@ -5083,7 +5061,6 @@ class SegmentMaker:
                 [
                     ('final_measure_number', 4),
                     ('first_measure_number', 1),
-                    ('segment_number', 2),
                     (
                         'time_signatures',
                         ['4/8', '3/8', '4/8', '3/8'],
@@ -5843,6 +5820,7 @@ class SegmentMaker:
         self,
         do_not_print_timing=False,
         environment=None,
+        first_segment=True,
         metadata=None,
         midi=False,
         persist=None,
@@ -5854,6 +5832,8 @@ class SegmentMaker:
         Runs segment-maker.
         """
         self._environment = environment
+        assert isinstance(first_segment, bool), repr(first_segment)
+        self._first_segment = first_segment
         self._metadata = abjad.OrderedDict(metadata)
         self._midi = midi
         self._persist = abjad.OrderedDict(persist)

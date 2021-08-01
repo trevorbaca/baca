@@ -290,9 +290,9 @@ r"""
         ...         value='treble',
         ...         )
         ...     ]
-        >>> metadata['segment_number'] = 1
         >>> lilypond_file = maker.run(
         ...     environment='docs',
+        ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
@@ -431,9 +431,9 @@ r"""
         ...         value='treble',
         ...         )
         ...     ]
-        >>> metadata['segment_number'] = 1
         >>> lilypond_file = maker.run(
         ...     environment='docs',
+        ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
@@ -720,9 +720,9 @@ r"""
         ...         value='treble',
         ...         )
         ...     ]
-        >>> metadata['segment_number'] = 1
         >>> lilypond_file = maker.run(
         ...     environment='docs',
+        ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
@@ -985,9 +985,9 @@ r"""
         ...         value='f',
         ...         )
         ...     ]
-        >>> metadata['segment_number'] = 1
         >>> lilypond_file = maker.run(
         ...     environment='docs',
+        ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
@@ -1121,9 +1121,9 @@ r"""
         ...         value='f',
         ...         )
         ...     ]
-        >>> metadata['segment_number'] = 1
         >>> lilypond_file = maker.run(
         ...     environment='docs',
+        ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
@@ -1381,9 +1381,9 @@ r"""
         ...         value='f',
         ...         )
         ...     ]
-        >>> metadata['segment_number'] = 1
         >>> lilypond_file = maker.run(
         ...     environment='docs',
+        ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
@@ -1639,9 +1639,9 @@ r"""
         ...         value='sfz',
         ...         )
         ...     ]
-        >>> metadata['segment_number'] = 1
         >>> lilypond_file = maker.run(
         ...     environment='docs',
+        ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
@@ -2645,9 +2645,9 @@ r"""
         ...         value='Piccolo',
         ...         )
         ...     ]
-        >>> metadata['segment_number'] = 1
         >>> lilypond_file = maker.run(
         ...     environment='docs',
+        ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
@@ -3022,9 +3022,9 @@ r"""
         ...         value='Flute',
         ...         )
         ...     ]
-        >>> metadata['segment_number'] = 1
         >>> lilypond_file = maker.run(
         ...     environment='docs',
+        ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
@@ -3806,9 +3806,9 @@ r"""
         ...         value='Flute',
         ...         )
         ...     ]
-        >>> metadata['segment_number'] = 1
         >>> lilypond_file = maker.run(
         ...     environment='docs',
+        ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
@@ -4968,9 +4968,9 @@ r"""
         ...         value='I+II',
         ...         )
         ...     ]
-        >>> metadata['segment_number'] = 1
         >>> lilypond_file = maker.run(
         ...     environment='docs',
+        ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
@@ -5369,9 +5369,9 @@ r"""
         ...         value='I+II',
         ...         )
         ...     ]
-        >>> metadata['segment_number'] = 1
         >>> lilypond_file = maker.run(
         ...     environment='docs',
+        ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
@@ -6212,9 +6212,9 @@ r"""
         ...         value='I+II',
         ...         )
         ...     ]
-        >>> metadata['segment_number'] = 1
         >>> lilypond_file = maker.run(
         ...     environment='docs',
+        ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
@@ -6937,9 +6937,9 @@ r"""
         ...         value='90',
         ...         )
         ...     ]
-        >>> metadata['segment_number'] = 1
         >>> lilypond_file = maker.run(
         ...     environment='docs',
+        ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
@@ -7092,9 +7092,9 @@ r"""
         ...         value='90',
         ...         )
         ...     ]
-        >>> metadata['segment_number'] = 1
         >>> lilypond_file = maker.run(
         ...     environment='docs',
+        ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
@@ -7392,9 +7392,9 @@ r"""
         ...         value='112',
         ...         )
         ...     ]
-        >>> metadata['segment_number'] = 1
         >>> lilypond_file = maker.run(
         ...     environment='docs',
+        ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
@@ -7731,9 +7731,9 @@ r"""
         ...             ),
         ...         )
         ...     ]
-        >>> metadata['segment_number'] = 1
         >>> lilypond_file = maker.run(
         ...     environment='docs',
+        ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
@@ -7880,9 +7880,9 @@ r"""
         ...             ),
         ...         )
         ...     ]
-        >>> metadata['segment_number'] = 1
         >>> lilypond_file = maker.run(
         ...     environment='docs',
+        ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
@@ -8143,9 +8143,9 @@ r"""
         ...         value=5,
         ...         )
         ...     ]
-        >>> metadata['segment_number'] = 1
         >>> lilypond_file = maker.run(
         ...     environment='docs',
+        ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
@@ -8282,9 +8282,9 @@ r"""
         ...         value=5,
         ...         )
         ...     ]
-        >>> metadata['segment_number'] = 1
         >>> lilypond_file = maker.run(
         ...     environment='docs',
+        ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
@@ -8550,9 +8550,9 @@ r"""
         ...         value=5,
         ...         )
         ...     ]
-        >>> metadata['segment_number'] = 1
         >>> lilypond_file = maker.run(
         ...     environment='docs',
+        ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
@@ -8846,9 +8846,9 @@ r"""
         ...         prototype='baca.Ritardando',
         ...         )
         ...     ]
-        >>> metadata['segment_number'] = 1
         >>> lilypond_file = maker.run(
         ...     environment='docs',
+        ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
@@ -9004,9 +9004,9 @@ r"""
         ...         prototype='baca.Accelerando',
         ...         )
         ...     ]
-        >>> metadata['segment_number'] = 1
         >>> lilypond_file = maker.run(
         ...     environment='docs',
+        ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
@@ -9327,9 +9327,9 @@ r"""
         ...         prototype='baca.Accelerando',
         ...         )
         ...     ]
-        >>> metadata['segment_number'] = 1
         >>> lilypond_file = maker.run(
         ...     environment='docs',
+        ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )

@@ -717,6 +717,131 @@ class RhythmCommand(scoping.Command):
         return self._state
 
 
+class TimeSignatureMaker:
+    """
+    Time-signature-maker.
+
+    ..  container:: example
+
+        >>> time_signatures = [
+        ...     [(1, 16), (2, 16), (3, 16)],
+        ...     [(1, 8), (2, 8), (3, 8)],
+        ...     ]
+        >>> maker = baca.TimeSignatureMaker(
+        ...     time_signatures=time_signatures,
+        ...     count=5,
+        ...     fermata_measures=[5],
+        ...     )
+        >>> maker.run()
+        [(1, 16), (2, 16), (3, 16), (1, 8), TimeSignature((1, 4))]
+
+    """
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = (
+        "_count",
+        "_fermata_measures",
+        "_rotation",
+        "_time_signatures",
+    )
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        time_signatures,
+        *,
+        count: int = None,
+        fermata_measures: abjad.IntegerSequence = None,
+        rotation: int = None,
+    ) -> None:
+        self._time_signatures = time_signatures
+        if count is not None:
+            assert isinstance(count, int), repr(count)
+        self._count = count
+        if fermata_measures is not None:
+            assert all(isinstance(_, int) for _ in fermata_measures)
+            fermata_measures = list(fermata_measures)
+        self._fermata_measures = fermata_measures
+        self._rotation = rotation
+
+    ### PRIVATE METHODS ###
+
+    def _normalize_fermata_measures(self):
+        fermata_measures = []
+        if self.fermata_measures is None:
+            return fermata_measures
+        for n in self.fermata_measures:
+            if 0 < n:
+                fermata_measures.append(n)
+            elif n == 0:
+                raise ValueError(n)
+            else:
+                fermata_measures.append(self.count - abs(n) + 1)
+        fermata_measures.sort()
+        return fermata_measures
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def count(self) -> typing.Optional[int]:
+        """
+        Gets count.
+        """
+        return self._count
+
+    @property
+    def fermata_measures(self) -> typing.Optional[typing.List[int]]:
+        """
+        Gets fermata measures.
+        """
+        return self._fermata_measures
+
+    @property
+    def rotation(self) -> typing.Optional[int]:
+        """
+        Gets rotation.
+        """
+        return self._rotation
+
+    @property
+    def time_signatures(self) -> typing.List[abjad.TimeSignature]:
+        """
+        Gets time signatures.
+        """
+        return self._time_signatures
+
+    ### PUBLIC METHODS ###
+
+    def run(self) -> typing.List[abjad.TimeSignature]:
+        """
+        Makes time signatures (without stages).
+
+        Accounts for fermata measures.
+
+        Does not account for stages.
+        """
+        if not self.count:
+            raise Exception("must specify count with run().")
+        result = []
+        time_signatures = abjad.Sequence(self.time_signatures)
+        time_signatures = time_signatures.rotate(self.rotation)
+        time_signatures = time_signatures.flatten(depth=1)
+        time_signatures_ = abjad.CyclicTuple(time_signatures)
+        i = 0
+        fermata_measures = self._normalize_fermata_measures()
+        for j in range(self.count):
+            measure_number = j + 1
+            if measure_number in fermata_measures:
+                result.append(abjad.TimeSignature((1, 4)))
+            else:
+                time_signature = time_signatures_[i]
+                result.append(time_signature)
+                i += 1
+        return result
+
+
 ### FACTORY FUNCTIONS ###
 
 
