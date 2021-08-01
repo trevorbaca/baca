@@ -17,7 +17,7 @@ def _check_layout_time_signatures(music_ly):
         print(f"No {baca.path.trim(layout_ly_file_path)} found ...")
         return
     print(f"Found {baca.path.trim(layout_ly_file_path)} ...")
-    partial_score = baca.segments.get_preamble_partial_score(layout_ly_file_path)
+    partial_score = _get_preamble_partial_score(layout_ly_file_path)
     if partial_score:
         print(f"Found {baca.path.trim(layout_ly_file_path)} partial score comment ...")
         print("Aborting layout time signature check ...")
@@ -29,9 +29,7 @@ def _check_layout_time_signatures(music_ly):
         metadata_time_signatures.extend(time_signatures)
     if metadata_time_signatures:
         print("Found time signature metadata ...")
-    layout_time_signatures = baca.segments.get_preamble_time_signatures(
-        layout_ly_file_path
-    )
+    layout_time_signatures = _get_preamble_time_signatures(layout_ly_file_path)
     if layout_time_signatures == metadata_time_signatures:
         message = "Layout time signatures"
         message += f" ({len(layout_time_signatures)})"
@@ -47,9 +45,7 @@ def _check_layout_time_signatures(music_ly):
     print(f"Remaking {baca.path.trim(layout_ly_file_path)} ...")
     layout_py = layout_ly_file_path.with_suffix(".py")
     os.system(f"python {layout_py}")
-    layout_time_signatures = baca.segments.get_preamble_time_signatures(
-        layout_ly_file_path
-    )
+    layout_time_signatures = _get_preamble_time_signatures(layout_ly_file_path)
     if layout_time_signatures == metadata_time_signatures:
         message = "Layout time signatures"
         message += f" ({len(layout_time_signatures)})"
@@ -80,6 +76,67 @@ def _display_lilypond_log_errors(lilypond_log_file_path):
     if error:
         for line in lines[:10]:
             print(line)
+
+
+def _get_preamble_page_count_overview(path):
+    """
+    Gets preamble page count overview.
+    """
+    assert path.is_file(), repr(path)
+    first_page_number, page_count = 1, None
+    with open(path) as pointer:
+        for line in pointer.readlines():
+            if line.startswith("% first_page_number = "):
+                line = line.strip("% first_page_number = ")
+                first_page_number = eval(line)
+            if line.startswith("% page_count = "):
+                line = line.strip("% page_count = ")
+                page_count = eval(line)
+    if isinstance(page_count, int):
+        final_page_number = first_page_number + page_count - 1
+        return first_page_number, page_count, final_page_number
+    return None
+
+
+def _get_preamble_partial_score(path):
+    """
+    Gets preamble time signatures.
+    """
+    assert path.is_file(), repr(path)
+    prefix = "% partial_score ="
+    with open(path) as pointer:
+        for line in pointer.readlines():
+            if line.startswith(prefix):
+                line = line[len(prefix) :]
+                partial_score = eval(line)
+                return partial_score
+    return False
+
+
+def _get_preamble_time_signatures(path):
+    """
+    Gets preamble time signatures.
+    """
+    assert path.is_file(), repr(path)
+    start_line = "% time_signatures = ["
+    stop_line = "%  ]"
+    lines = []
+    with open(path) as pointer:
+        for line in pointer.readlines():
+            if line.startswith(stop_line):
+                lines.append("]")
+                break
+            if lines:
+                lines.append(line.strip("%").strip("\n"))
+            elif line.startswith(start_line):
+                lines.append("[")
+        string = "".join(lines)
+        try:
+            time_signatures = eval(string)
+        except Exception:
+            return []
+        return time_signatures
+    return None
 
 
 def _make_annotation_jobs(directory, undo=False):
@@ -205,6 +262,37 @@ def _make_segment_midi(maker):
         print(f"Found {baca.path.trim(music_midi)} ...")
     else:
         print(f"Could not produce {baca.path.trim(music_midi)} ...")
+
+
+def _remove_lilypond_warnings(
+    path,
+    crescendo_too_small=None,
+    decrescendo_too_small=None,
+    overwriting_glissando=None,
+):
+    """
+    Removes LilyPond warnings from ``.log``.
+    """
+    assert path.name.endswith(".log"), repr(path)
+    lines = []
+    skip = 0
+    with open(path) as pointer:
+        for line in pointer.readlines():
+            if 0 < skip:
+                skip -= 1
+                continue
+            if crescendo_too_small and "crescendo too small" in line:
+                skip = 2
+                continue
+            if decrescendo_too_small and "decrescendo too small" in line:
+                skip = 2
+                continue
+            if overwriting_glissando and "overwriting glissando" in line:
+                skip = 1
+                continue
+            lines.append(line)
+    text = "".join(lines)
+    path.write_text(text)
 
 
 def _run_segment_maker(maker, midi=False):
@@ -823,9 +911,7 @@ def make_layout_ly(layout_py, breaks, spacing=None, *, part_identifier=None):
             previous_segment = layout_directory.parent / previous_segment
             previous_layout_ly = previous_segment / "layout.ly.tagged"
             if previous_layout_ly.is_file():
-                result = baca.segments.get_preamble_page_count_overview(
-                    previous_layout_ly
-                )
+                result = _get_preamble_page_count_overview(previous_layout_ly)
                 if result is not None:
                     _, _, final_page_number = result
                     first_page_number = final_page_number + 1
@@ -914,7 +1000,7 @@ def make_segment_pdf(maker):
     first_segment = segment_directory.parent / "01"
     layout_ly_tagged = segment_directory / "layout.ly.tagged"
     if layout_ly_tagged.is_file() and segment_directory.name != first_segment.name:
-        result = baca.segments.get_preamble_page_count_overview(layout_ly_tagged)
+        result = _get_preamble_page_count_overview(layout_ly_tagged)
         if result is not None:
             first_page_number, _, _ = result
             line = r"\paper { first-page-number = #"
@@ -966,9 +1052,7 @@ def make_segment_pdf(maker):
         print(f"No {baca.path.trim(layout_py)} found ...")
     else:
         layout_ly_tagged = segment_directory / "layout.ly.tagged"
-        layout_time_signatures = baca.segments.get_preamble_time_signatures(
-            layout_ly_tagged
-        )
+        layout_time_signatures = _get_preamble_time_signatures(layout_ly_tagged)
         if layout_time_signatures is not None:
             assert isinstance(layout_time_signatures, list)
             layout_measure_count = len(layout_time_signatures)
@@ -990,9 +1074,7 @@ def make_segment_pdf(maker):
                 message = f"Found {measure_count} {counter}"
                 message += f" in {baca.path.trim(music_ly_tagged)} ..."
                 print(message)
-                layout_time_signatures = baca.segments.get_preamble_time_signatures(
-                    layout_ly_tagged
-                )
+                layout_time_signatures = _get_preamble_time_signatures(layout_ly_tagged)
                 layout_measure_count = len(layout_time_signatures)
                 counter = abjad.String("measure").pluralize(layout_measure_count)
                 message = f"Found {layout_measure_count} {counter}"
@@ -1006,7 +1088,7 @@ def make_segment_pdf(maker):
         music_ily_tagged = segment_directory / "music.ily.tagged"
         baca.path.extern(music_ly_tagged, music_ily_tagged)
         assert music_ily_tagged.is_file()
-        not_topmost = baca.Job(
+        not_topmost = baca.jobs.Job(
             deactivate=(abjad.Tag("NOT_TOPMOST"), "not topmost"),
             path=segment_directory,
             title="deactivating NOT_TOPMOST ...",
@@ -1030,7 +1112,7 @@ def make_segment_pdf(maker):
             if music_ly_pdf.is_file():
                 music_pdf = segment_directory / "music.pdf"
                 shutil.move(str(music_ly_pdf), str(music_pdf))
-        baca.segments.remove_lilypond_warnings(
+        _remove_lilypond_warnings(
             lilypond_log_file_path,
             crescendo_too_small=True,
             decrescendo_too_small=True,
@@ -1105,7 +1187,7 @@ def run_lilypond(ly_file_path):
             flags=flags,
             lilypond_log_file_path=(lilypond_log_file_path),
         )
-        baca.segments.remove_lilypond_warnings(
+        _remove_lilypond_warnings(
             lilypond_log_file_path,
             crescendo_too_small=True,
             decrescendo_too_small=True,

@@ -5,9 +5,10 @@ import abjad
 from abjadext import rmakers
 
 from . import classes, const, indicators
+from . import memento as _memento
 from . import overrides as _overrides
+from . import parts as _parts
 from . import pitchclasses, pitchcommands, rhythmcommands, scoping, segmentclasses
-from . import segments as _segments
 from . import tags as _tags
 
 
@@ -1367,7 +1368,7 @@ class SegmentMaker:
                     part_container_count += 1
                     part = container.identifier.strip("%*% ")
                     globals_ = globals()
-                    globals_["PartAssignment"] = _segments.PartAssignment
+                    globals_["PartAssignment"] = _parts.PartAssignment
                     part = eval(part, globals_)
                     suffix = abjad.String().base_26(part_container_count).lower()
                     container_identifier = f"{context_identifier}_{suffix}"
@@ -1507,7 +1508,7 @@ class SegmentMaker:
             return
         if getattr(wrapper.indicator, "parameter", None) == "METRONOME_MARK":
             return
-        if isinstance(wrapper.indicator, _segments.PersistentOverride):
+        if isinstance(wrapper.indicator, _memento.PersistentOverride):
             return
         if isinstance(wrapper.indicator, indicators.BarExtent):
             return
@@ -2574,7 +2575,7 @@ class SegmentMaker:
                     editions = abjad.Tag(string)
                 else:
                     editions = None
-                momento = _segments.Momento(
+                momento = _memento.Momento(
                     context=first_context.name,
                     edition=editions,
                     manifest=manifest,
@@ -3046,7 +3047,7 @@ class SegmentMaker:
             key = SegmentMaker._get_key(manifests["abjad.MetronomeMark"], indicator)
         elif isinstance(indicator, abjad.MarginMarkup):
             key = SegmentMaker._get_key(manifests["abjad.MarginMarkup"], indicator)
-        elif isinstance(indicator, _segments.PersistentOverride):
+        elif isinstance(indicator, _memento.PersistentOverride):
             key = indicator
         elif isinstance(indicator, indicators.BarExtent):
             key = indicator.line_count

@@ -1,8 +1,215 @@
+import pathlib
+
 import abjad
 
 from . import path as _path
-from . import segments as _segments
 from . import tags as _tags
+
+
+class Job:
+    """
+    Job.
+    """
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = (
+        "_activate",
+        "_deactivate",
+        "_deactivate_first",
+        "_message_zero",
+        "_path",
+        "_prepend_empty_chord",
+        "_skip_file_name",
+        "_title",
+    )
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        *,
+        activate=None,
+        deactivate=None,
+        deactivate_first=None,
+        message_zero=None,
+        path=None,
+        prepend_empty_chord=None,
+        skip_file_name=None,
+        title=None,
+    ):
+        self._activate = activate
+        self._deactivate = deactivate
+        self._deactivate_first = deactivate_first
+        self._message_zero = message_zero
+        self._path = path
+        self._prepend_empty_chord = prepend_empty_chord
+        self._skip_file_name = skip_file_name
+        self._title = title
+
+    ### SPECIAL METHODS ###
+
+    def __call__(self):
+        """
+        Calls job on job ``path``.
+        """
+        messages = []
+        if self.title is not None:
+            messages.append(abjad.String(self.title).capitalize_start())
+        total_count = 0
+        if isinstance(self.path, str):
+            text = self.path
+        if self.deactivate_first is True:
+            if self.deactivate is not None:
+                assert isinstance(self.deactivate, tuple)
+                match, name = self.deactivate
+                if match is not None:
+                    if isinstance(self.path, pathlib.Path):
+                        result = _path.deactivate(
+                            self.path,
+                            match,
+                            message_zero=True,
+                            name=name,
+                            prepend_empty_chord=self.prepend_empty_chord,
+                            skip_file_name=self.skip_file_name,
+                        )
+                        assert result is not None
+                        count, skipped, messages_ = result
+                        messages.extend(messages_)
+                        total_count += count
+                    else:
+                        assert isinstance(self.path, str), repr(self.path)
+                        result = abjad.deactivate(
+                            text,
+                            match,
+                            prepend_empty_chord=self.prepend_empty_chord,
+                            skip_file_name=self.skip_file_name,
+                            skipped=True,
+                        )
+                        assert result is not None
+                        text, count, skipped = result
+        if self.activate is not None:
+            assert isinstance(self.activate, tuple)
+            match, name = self.activate
+            if match is not None:
+                if isinstance(self.path, pathlib.Path):
+                    result = _path.activate(
+                        self.path,
+                        match,
+                        message_zero=True,
+                        name=name,
+                        skip_file_name=self.skip_file_name,
+                    )
+                    assert result is not None
+                    count, skipped, messages_ = result
+                    messages.extend(messages_)
+                    total_count += count
+                else:
+                    assert isinstance(self.path, str)
+                    text, count, skipped = abjad.activate(
+                        text,
+                        match,
+                        skip_file_name=self.skip_file_name,
+                        skipped=True,
+                    )
+        if self.deactivate_first is not True:
+            if self.deactivate is not None:
+                assert isinstance(self.deactivate, tuple)
+                match, name = self.deactivate
+                if match is not None:
+                    if isinstance(self.path, pathlib.Path):
+                        result = _path.deactivate(
+                            self.path,
+                            match,
+                            message_zero=True,
+                            name=name,
+                            prepend_empty_chord=self.prepend_empty_chord,
+                            skip_file_name=self.skip_file_name,
+                        )
+                        assert result is not None
+                        count, skipped, messages_ = result
+                        messages.extend(messages_)
+                        total_count += count
+                    else:
+                        assert isinstance(self.path, str)
+                        text, count, skipped = abjad.deactivate(
+                            text,
+                            match,
+                            prepend_empty_chord=self.prepend_empty_chord,
+                            skip_file_name=self.skip_file_name,
+                            skipped=True,
+                        )
+        if total_count == 0 and not self.message_zero:
+            messages = []
+        if isinstance(self.path, pathlib.Path):
+            return messages
+        else:
+            assert isinstance(self.path, str)
+            return text
+
+    def __repr__(self):
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def activate(self):
+        """
+        Gets activate match / message pair.
+        """
+        return self._activate
+
+    @property
+    def deactivate(self):
+        """
+        Gets deactivate match / message pair.
+        """
+        return self._deactivate
+
+    @property
+    def deactivate_first(self):
+        """
+        Is true when deactivate runs first.
+        """
+        return self._deactivate_first
+
+    @property
+    def message_zero(self):
+        """
+        Is true when job returns messages even when no matches are found.
+        """
+        return self._message_zero
+
+    @property
+    def path(self):
+        """
+        Gets path.
+        """
+        return self._path
+
+    @property
+    def prepend_empty_chord(self):
+        """
+        Is true when deactivate prepends LilyPond empty chord ``<>`` command.
+        """
+        return self._prepend_empty_chord
+
+    @property
+    def skip_file_name(self):
+        """
+        Gets skip file name.
+        """
+        return self._skip_file_name
+
+    @property
+    def title(self):
+        """
+        Gets title.
+        """
+        return self._title
 
 
 def color_clefs(path, undo=False):
@@ -13,15 +220,13 @@ def color_clefs(path, undo=False):
         return bool(set(tags) & set(tags_))
 
     if undo:
-        return _segments.Job(
+        return Job(
             deactivate=(match, name),
             path=path,
             title="uncoloring clefs ...",
         )
     else:
-        return _segments.Job(
-            activate=(match, name), path=path, title="coloring clefs ..."
-        )
+        return Job(activate=(match, name), path=path, title="coloring clefs ...")
 
 
 def color_dynamics(path, undo=False):
@@ -32,13 +237,13 @@ def color_dynamics(path, undo=False):
         return bool(set(tags) & set(tags_))
 
     if undo:
-        return _segments.Job(
+        return Job(
             deactivate=(match, name),
             path=path,
             title="uncoloring dynamics ...",
         )
     else:
-        return _segments.Job(
+        return Job(
             activate=(match, name),
             path=path,
             title="coloring dynamics ...",
@@ -56,13 +261,13 @@ def color_instruments(path, undo=False):
         return bool(set(tags) & set(tags_))
 
     if undo:
-        return _segments.Job(
+        return Job(
             deactivate=(match, name),
             path=path,
             title="uncoloring instruments ...",
         )
     else:
-        return _segments.Job(
+        return Job(
             activate=(match, name),
             path=path,
             title="coloring instruments ...",
@@ -80,13 +285,13 @@ def color_margin_markup(path, undo=False):
         return bool(set(tags) & set(tags_))
 
     if undo:
-        return _segments.Job(
+        return Job(
             deactivate=(match, name),
             path=path,
             title="uncoloring margin markup ...",
         )
     else:
-        return _segments.Job(
+        return Job(
             activate=(match, name),
             path=path,
             title="coloring margin markup ...",
@@ -107,14 +312,14 @@ def color_metronome_marks(path, undo=False):
         return bool(set(tags) & set(tags_))
 
     if undo:
-        return _segments.Job(
+        return Job(
             activate=(deactivate, "metronome mark color suppression"),
             deactivate=(activate, "metronome mark color expression"),
             path=path,
             title="uncoloring metronome marks ...",
         )
     else:
-        return _segments.Job(
+        return Job(
             activate=(activate, "metronome mark color expression"),
             deactivate=(deactivate, "metronome mark color suppression"),
             path=path,
@@ -140,14 +345,14 @@ def color_persistent_indicators(path, undo=False):
         return bool(set(tags) & set(tags_))
 
     if undo:
-        return _segments.Job(
+        return Job(
             activate=(deactivate, deactivate_name),
             deactivate=(activate, activate_name),
             path=path,
             title=f"uncoloring {name}s ...",
         )
     else:
-        return _segments.Job(
+        return Job(
             activate=(activate, activate_name),
             deactivate=(deactivate, deactivate_name),
             path=path,
@@ -166,13 +371,13 @@ def color_staff_lines(path, undo=False):
         return bool(set(tags) & set(tags_))
 
     if undo:
-        return _segments.Job(
+        return Job(
             deactivate=(match, name),
             path=path,
             title="uncoloring staff lines ...",
         )
     else:
-        return _segments.Job(
+        return Job(
             activate=(match, name),
             path=path,
             title="coloring staff lines ...",
@@ -190,13 +395,13 @@ def color_time_signatures(path, undo=False):
         return bool(set(tags) & set(tags_))
 
     if undo:
-        return _segments.Job(
+        return Job(
             deactivate=(match, name),
             path=path,
             title="uncoloring time signatures ...",
         )
     else:
-        return _segments.Job(
+        return Job(
             activate=(match, name),
             path=path,
             title="coloring time signatures ...",
@@ -270,7 +475,7 @@ def handle_edition_tags(path):
                 return True
         return bool(set(tags) & set([this_edition, this_directory]))
 
-    return _segments.Job(
+    return Job(
         activate=(activate, "this-edition"),
         deactivate=(deactivate, "other-edition"),
         deactivate_first=True,
@@ -306,7 +511,7 @@ def handle_fermata_bar_lines(path):
 
     else:
         deactivate = None
-    return _segments.Job(
+    return Job(
         activate=(activate, "bar line adjustment"),
         deactivate=(deactivate, "EOL fermata bar line"),
         path=path,
@@ -348,7 +553,7 @@ def handle_mol_tags(path):
 
     else:
         deactivate = None
-    return _segments.Job(
+    return Job(
         activate=(activate, "MOL"),
         deactivate=(deactivate, "conflicting MOL"),
         path=path,
@@ -383,7 +588,7 @@ def handle_shifted_clefs(path):
 
     else:
         deactivate = None
-    return _segments.Job(
+    return Job(
         activate=(activate, "shifted clef"),
         deactivate=(deactivate, "BOL clef"),
         path=path,
@@ -402,13 +607,13 @@ def hide_default_clefs(path, undo=False):
         return bool(set(tags) & set(tags_))
 
     if undo:
-        return _segments.Job(
+        return Job(
             activate=(match, name),
             path=path,
             title="showing default clefs ...",
         )
     else:
-        return _segments.Job(
+        return Job(
             deactivate=(match, name),
             path=path,
             title="hiding default clefs ...",
@@ -428,7 +633,7 @@ def join_broken_spanners(path):
         tags_ = [_tags.HIDE_TO_JOIN_BROKEN_SPANNERS]
         return bool(set(tags) & set(tags_))
 
-    return _segments.Job(
+    return Job(
         activate=(activate, "broken spanner expression"),
         deactivate=(deactivate, "broken spanner suppression"),
         path=path,
@@ -451,14 +656,14 @@ def show_music_annotations(path, undo=False):
         return bool(set(tags) & set(tags_))
 
     if undo:
-        return _segments.Job(
+        return Job(
             activate=(match_2, name),
             deactivate=(match, name),
             path=path,
             title=f"hiding {name}s ...",
         )
     else:
-        return _segments.Job(
+        return Job(
             activate=(match, name),
             deactivate=(match_2, name),
             path=path,
@@ -491,7 +696,7 @@ def show_tag(
             return bool(set(tags) & set(tags_))
 
     if undo:
-        return _segments.Job(
+        return Job(
             deactivate=(match, name),
             path=path,
             prepend_empty_chord=prepend_empty_chord,
@@ -499,7 +704,7 @@ def show_tag(
             title=f"hiding {name} tags ...",
         )
     else:
-        return _segments.Job(
+        return Job(
             activate=(match, name),
             path=path,
             skip_file_name=skip_file_name,

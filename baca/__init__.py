@@ -14,7 +14,9 @@ from .figuremaker import *
 from .indicatorcommands import *
 from .indicators import *
 from .math import *
+from .memento import *
 from .overrides import *
+from .parts import *
 from .path import *
 from .persistence import *
 from .piecewise import *
@@ -25,7 +27,6 @@ from .rhythmcommands import *
 from .scoping import *
 from .segmentclasses import *
 from .segmentmaker import *
-from .segments import *
 from .spannercommands import *
 from .templates import *
 from .typings import *

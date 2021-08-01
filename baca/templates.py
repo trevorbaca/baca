@@ -8,7 +8,7 @@ import roman
 import abjad
 
 from . import const
-from . import segments as _segments
+from . import parts as _parts
 from . import tags as _tags
 
 ### CLASSES ###
@@ -108,7 +108,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
         return self._defaults
 
     @property
-    def part_manifest(self) -> typing.Optional[_segments.PartManifest]:
+    def part_manifest(self) -> typing.Optional[_parts.PartManifest]:
         """
         Gets part manifest.
         """
@@ -117,7 +117,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
     ### PUBLIC METHODS ###
 
     def allows_part_assignment(
-        self, voice_name: str, part_assignment: _segments.PartAssignment
+        self, voice_name: str, part_assignment: _parts.PartAssignment
     ) -> bool:
         """
         Is true when ``voice_name`` allows ``part_assignment``.
@@ -737,10 +737,10 @@ class StringTrioScoreTemplate(ScoreTemplate):
 
     ### CLASS VARIABLES ###
 
-    _part_manifest = _segments.PartManifest(
-        _segments.Part(section="Violin", section_abbreviation="VN"),
-        _segments.Part(section="Viola", section_abbreviation="VA"),
-        _segments.Part(section="Cello", section_abbreviation="VC"),
+    _part_manifest = _parts.PartManifest(
+        _parts.Part(section="Violin", section_abbreviation="VN"),
+        _parts.Part(section="Viola", section_abbreviation="VA"),
+        _parts.Part(section="Cello", section_abbreviation="VC"),
     )
 
     ### SPECIAL METHODS ###

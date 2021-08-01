@@ -3,8 +3,9 @@ import typing
 
 import abjad
 
-from . import classes, const, indicators, scoping
-from . import segments as _segments
+from . import classes, const, indicators
+from . import parts as _parts
+from . import scoping
 from . import tags as _tags
 from . import typings
 
@@ -1822,7 +1823,7 @@ class PartAssignmentCommand(scoping.Command):
         map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
-        part_assignment: _segments.PartAssignment = None,
+        part_assignment: _parts.PartAssignment = None,
         scope: scoping.ScopeTyping = None,
         selector=lambda _: classes.Selection(_).leaves(),
     ) -> None:
@@ -1835,7 +1836,7 @@ class PartAssignmentCommand(scoping.Command):
             selector=selector,
         )
         if part_assignment is not None:
-            if not isinstance(part_assignment, _segments.PartAssignment):
+            if not isinstance(part_assignment, _parts.PartAssignment):
                 message = "part_assignment must be part assignment"
                 message += f" (not {part_assignment!r})."
                 raise Exception(message)
@@ -1878,7 +1879,7 @@ class PartAssignmentCommand(scoping.Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def part_assignment(self) -> typing.Optional[_segments.PartAssignment]:
+    def part_assignment(self) -> typing.Optional[_parts.PartAssignment]:
         """
         Gets part assignment.
         """
