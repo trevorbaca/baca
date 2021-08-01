@@ -1506,20 +1506,16 @@ def _import_score_package(contents_directory):
 def _import_score_template(contents_directory):
     assert contents_directory.name == contents_directory.parent.name
     module = _import_score_package(contents_directory)
-    if not module:
-        raise Exception(f"can not import score package: {contents_directory}.")
-    score_template = getattr(module, "ScoreTemplate", None)
-    if not score_template:
-        raise Exception("can not import score template.")
+    library = getattr(module, "library")
+    score_template = library.ScoreTemplate
     return score_template
 
 
 def _part_name_to_default_clef(path, part_name):
     contents_directory = _path.get_contents_directory(path)
     module = _import_score_package(contents_directory)
-    instruments = getattr(module, "instruments", None)
-    if not instruments:
-        raise Exception(f"can not find instruments: {path!r}.")
+    library = getattr(module, "library")
+    instruments = library.instruments
     words = abjad.String(part_name).delimit_words()
     if words[-1].isdigit():
         words = words[:-1]
