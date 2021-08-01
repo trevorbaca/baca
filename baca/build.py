@@ -254,7 +254,13 @@ def _make_segment_midi(maker):
     result = _run_segment_maker(maker, midi=True)
     metadata, persist, lilypond_file, runtime = result
     with abjad.Timer() as timer:
-        abjad.persist.as_midi(lilypond_file, music_midi.name, remove_ly=True)
+        tmp_midi = segment_directory / "tmp.midi"
+        abjad.persist.as_midi(lilypond_file, tmp_midi)
+        if tmp_midi.is_file():
+            shutil.move(tmp_midi, music_midi)
+        tmp_ly = tmp_midi.with_suffix(".ly")
+        if tmp_ly.exists():
+            tmp_ly.unlink()
     count = int(timer.elapsed_time)
     counter = abjad.String("second").pluralize(count)
     print(f"LilyPond runtime {count} {counter} ...")
