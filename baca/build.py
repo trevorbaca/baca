@@ -879,6 +879,7 @@ def make_layout_ly(layout_py, breaks, spacing=None, *, part_identifier=None):
         do_not_check_persistence=True,
         do_not_include_layout_ly=True,
         first_measure_number=first_measure_number,
+        remove=baca.tags.layout_removal_tags(),
         score_template=baca.SingleStaffScoreTemplate(),
         spacing=spacing,
         time_signatures=time_signatures,
@@ -891,7 +892,6 @@ def make_layout_ly(layout_py, breaks, spacing=None, *, part_identifier=None):
     lilypond_file = maker.run(
         do_not_print_timing=True,
         environment="layout",
-        remove=baca.tags.layout_removal_tags(),
         segment_name=segment_name,
     )
     context = lilypond_file["Global_Skips"]

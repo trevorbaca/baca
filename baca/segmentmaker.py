@@ -641,6 +641,7 @@ class SegmentMaker:
         "_persist",
         "_previous_metadata",
         "_previous_persist",
+        "_remove",
         "_remove_phantom_measure",
         "_score",
         "_score_template",
@@ -721,6 +722,7 @@ class SegmentMaker:
         metronome_marks=None,
         parts_metric_modulation_multiplier=None,
         phantom=False,
+        remove=None,
         remove_phantom_measure=False,
         score_template=None,
         skips_instead_of_rests=False,
@@ -732,7 +734,6 @@ class SegmentMaker:
         time_signatures=None,
         transpose_score=False,
     ):
-        # super().__init__()
         if activate is not None:
             assert all(isinstance(_, abjad.Tag) for _ in activate)
         self._activate = activate
@@ -796,6 +797,9 @@ class SegmentMaker:
         self._persist = abjad.OrderedDict()
         self._previous_metadata = None
         self._previous_persist = None
+        if remove is not None:
+            assert all(isinstance(_, abjad.Tag) for _ in remove)
+        self._remove = remove
         self._remove_phantom_measure = remove_phantom_measure
         self._score = None
         assert score_template is not None, repr(score_template)
@@ -1300,10 +1304,8 @@ class SegmentMaker:
 
     ### PRIVATE METHODS ###
 
-    def _activate_tags(self, tags):
-        tags = tags or []
-        tags = set(tags)
-        tags.update(self.activate or [])
+    def _activate_tags(self):
+        tags = self.activate
         if not tags:
             return
         assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
@@ -2724,10 +2726,8 @@ class SegmentMaker:
             literal = abjad.LilyPondLiteral(string, format_slot="absolute_before")
             abjad.attach(literal, leaf, tag=_site(inspect.currentframe()))
 
-    def _deactivate_tags(self, tags):
-        tags = tags or []
-        tags = set(tags)
-        tags.update(self.deactivate or [])
+    def _deactivate_tags(self):
+        tags = self.deactivate
         if not tags:
             return
         assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
@@ -3779,9 +3779,8 @@ class SegmentMaker:
             else:
                 previous_time_signature = time_signature
 
-    def _remove_tags(self, tags):
-        tags = tags or []
-        tags = list(tags)
+    def _remove_docs_tags(self):
+        tags = self.remove or []
         if self.environment == "docs":
             tags += _tags.documentation_removal_tags()
         assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
@@ -5184,6 +5183,13 @@ class SegmentMaker:
         return self._previous_persist
 
     @property
+    def remove(self):
+        """
+        Gets tags to remove
+        """
+        return self._remove
+
+    @property
     def remove_phantom_measure(self):
         """
         Is true when segment-maker removes phantom measure.
@@ -5835,8 +5841,6 @@ class SegmentMaker:
 
     def run(
         self,
-        activate=None,  # TODO: remove in favor of init keyword
-        deactivate=None,  # TODO: remove in favor of init keyword
         do_not_print_timing=False,
         environment=None,
         metadata=None,
@@ -5844,7 +5848,6 @@ class SegmentMaker:
         persist=None,
         previous_metadata=None,
         previous_persist=None,
-        remove=None,  # TODO: replace with init keyword
         segment_name=None,
     ):
         """
@@ -5932,8 +5935,8 @@ class SegmentMaker:
                 self._apply_breaks()
                 self._style_fermata_measures()
                 self._shift_measure_initial_clefs()
-                self._deactivate_tags(deactivate)
-                self._remove_tags(remove)
+                self._deactivate_tags()
+                self._remove_docs_tags()
                 self._add_container_identifiers()
                 self._check_all_music_in_part_containers()
                 self._check_duplicate_part_assignments()
@@ -5956,7 +5959,7 @@ class SegmentMaker:
             print(f"Offsets-in-seconds update {count} {seconds} ...")
         with abjad.Timer() as timer:
             self._label_clock_time()
-            self._activate_tags(activate)
+            self._activate_tags()
             self._collect_metadata()
             self._style_phantom_measures()
         count = int(timer.elapsed_time)
