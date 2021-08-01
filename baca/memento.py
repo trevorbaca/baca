@@ -1,9 +1,9 @@
 import abjad
 
 
-class Momento:
+class Memento:
     """
-    Momento.
+    Memento.
     """
 
     ### CLASS VARIABLES ###

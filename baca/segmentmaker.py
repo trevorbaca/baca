@@ -1399,21 +1399,21 @@ class SegmentMaker:
         names = self.previous_persist.get("alive_during_segment", [])
         return context.name in names
 
-    def _analyze_momento(self, context, momento):
-        previous_indicator = self._momento_to_indicator(momento)
+    def _analyze_memento(self, context, memento):
+        previous_indicator = self._memento_to_indicator(memento)
         if previous_indicator is None:
             return
         if isinstance(previous_indicator, indicators.SpacingSection):
             return
-        if momento.context in self.score:
+        if memento.context in self.score:
             for context in abjad.iterate(self.score).components(abjad.Context):
-                if context.name == momento.context:
-                    momento_context = context
+                if context.name == memento.context:
+                    memento_context = context
                     break
         else:
             # context alive in previous segment doesn't exist in this segment
             return
-        leaf = abjad.get.leaf(momento_context, 0)
+        leaf = abjad.get.leaf(memento_context, 0)
         if isinstance(previous_indicator, abjad.Instrument):
             prototype = abjad.Instrument
         else:
@@ -1428,12 +1428,12 @@ class SegmentMaker:
             status = "reapplied"
         else:
             status = "redundant"
-        edition = momento.edition or abjad.Tag()
-        if momento.synthetic_offset is None:
+        edition = memento.edition or abjad.Tag()
+        if memento.synthetic_offset is None:
             synthetic_offset = None
         else:
-            assert 0 < momento.synthetic_offset, repr(momento)
-            synthetic_offset = -momento.synthetic_offset
+            assert 0 < memento.synthetic_offset, repr(memento)
+            synthetic_offset = -memento.synthetic_offset
         return leaf, previous_indicator, status, edition, synthetic_offset
 
     @staticmethod
@@ -2516,7 +2516,7 @@ class SegmentMaker:
             abjad.TimeSignature,
         )
         for name, dependent_wrappers in name_to_wrappers.items():
-            momentos = []
+            mementos = []
             wrappers = []
             dictionary = abjad._inspect._get_persistent_wrappers(
                 dependent_wrappers=dependent_wrappers,
@@ -2575,7 +2575,7 @@ class SegmentMaker:
                     editions = abjad.Tag(string)
                 else:
                     editions = None
-                momento = _memento.Momento(
+                memento = _memento.Memento(
                     context=first_context.name,
                     edition=editions,
                     manifest=manifest,
@@ -2583,15 +2583,15 @@ class SegmentMaker:
                     synthetic_offset=wrapper.synthetic_offset,
                     value=value,
                 )
-                momentos.append(momento)
-            if momentos:
-                momentos.sort(key=lambda _: abjad.storage(_))
-                result[name] = momentos
+                mementos.append(memento)
+            if mementos:
+                mementos.sort(key=lambda _: abjad.storage(_))
+                result[name] = mementos
         dictionary = self.previous_persist.get("persistent_indicators")
         if dictionary:
-            for context_name, momentos in dictionary.items():
+            for context_name, mementos in dictionary.items():
                 if context_name not in result:
-                    result[context_name] = momentos
+                    result[context_name] = mementos
         return result
 
     def _color_mock_pitch(self):
@@ -2948,14 +2948,14 @@ class SegmentMaker:
         dictionary = self.previous_persist.get("persistent_indicators")
         if not dictionary:
             return
-        momentos = dictionary.get(context.name)
-        if not momentos:
+        mementos = dictionary.get(context.name)
+        if not mementos:
             return
         prototype_string = self._prototype_string(prototype)
-        for momento in momentos:
-            if momento.prototype == prototype_string:
-                indicator = self._key_to_indicator(momento.value, prototype)
-                return (indicator, momento.context)
+        for memento in mementos:
+            if memento.prototype == prototype_string:
+                indicator = self._key_to_indicator(memento.value, prototype)
+                return (indicator, memento.context)
 
     def _get_previous_segment_voice_metadata(self, voice_name):
         if not self.previous_persist:
@@ -3577,34 +3577,34 @@ class SegmentMaker:
             if first_measure_number != 1:
                 abjad.setting(score).current_bar_number = first_measure_number
 
-    def _momento_to_indicator(self, momento):
+    def _memento_to_indicator(self, memento):
         import baca
 
-        if momento.manifest is not None:
-            dictionary = getattr(self, momento.manifest)
+        if memento.manifest is not None:
+            dictionary = getattr(self, memento.manifest)
             if dictionary is None:
-                raise Exception(f"can not find {momento.manifest!r} manifest.")
-            return dictionary.get(momento.value)
+                raise Exception(f"can not find {memento.manifest!r} manifest.")
+            return dictionary.get(memento.value)
         globals_ = globals()
         globals_["baca"] = baca
-        class_ = eval(momento.prototype, globals_)
+        class_ = eval(memento.prototype, globals_)
         if hasattr(class_, "from_string"):
-            indicator = class_.from_string(momento.value)
-        elif class_ is abjad.Dynamic and momento.value.startswith("\\"):
-            indicator = class_(name="", command=momento.value)
-        elif isinstance(momento.value, class_):
-            indicator = momento.value
+            indicator = class_.from_string(memento.value)
+        elif class_ is abjad.Dynamic and memento.value.startswith("\\"):
+            indicator = class_(name="", command=memento.value)
+        elif isinstance(memento.value, class_):
+            indicator = memento.value
         elif class_ is indicators.StaffLines:
-            indicator = class_(line_count=momento.value)
-        elif momento.value is None:
+            indicator = class_(line_count=memento.value)
+        elif memento.value is None:
             indicator = class_()
-        elif isinstance(momento.value, dict):
-            indicator = class_(**momento.value)
+        elif isinstance(memento.value, dict):
+            indicator = class_(**memento.value)
         else:
             try:
-                indicator = class_(momento.value)
+                indicator = class_(memento.value)
             except Exception:
-                raise Exception(abjad.storage(momento))
+                raise Exception(abjad.storage(memento))
         return indicator
 
     def _move_global_rests(self):
@@ -3689,11 +3689,11 @@ class SegmentMaker:
         if not dictionary:
             return
         for context in abjad.iterate(self.score).components(abjad.Context):
-            momentos = dictionary.get(context.name)
-            if not momentos:
+            mementos = dictionary.get(context.name)
+            if not mementos:
                 continue
-            for momento in momentos:
-                result = self._analyze_momento(context, momento)
+            for memento in mementos:
+                result = self._analyze_memento(context, memento)
                 if result is None:
                     continue
                 (
@@ -4950,7 +4950,7 @@ class SegmentMaker:
             >>> persist = abjad.OrderedDict()
             >>> persist["persistent_indicators"] = abjad.OrderedDict()
             >>> persist["persistent_indicators"]["MusicStaff"] = [
-            ...     baca.Momento(
+            ...     baca.Memento(
             ...         context="Music_Voice",
             ...         prototype="abjad.Clef",
             ...         value="alto",
@@ -5115,7 +5115,7 @@ class SegmentMaker:
                                 (
                                     'MusicStaff',
                                     [
-                                        baca.Momento(
+                                        baca.Memento(
                                             context='Music_Voice',
                                             prototype='abjad.Clef',
                                             value='alto',
@@ -5125,7 +5125,7 @@ class SegmentMaker:
                                 (
                                     'Score',
                                     [
-                                        baca.Momento(
+                                        baca.Memento(
                                             context='Global_Skips',
                                             prototype='abjad.TimeSignature',
                                             value='3/8',

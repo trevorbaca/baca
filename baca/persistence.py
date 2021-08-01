@@ -284,7 +284,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     baca.Momento(
+        ...     baca.Memento(
         ...         context='Music_Voice',
         ...         prototype='abjad.Clef',
         ...         value='treble',
@@ -425,7 +425,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     baca.Momento(
+        ...     baca.Memento(
         ...         context='Music_Voice',
         ...         prototype='abjad.Clef',
         ...         value='treble',
@@ -714,7 +714,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     baca.Momento(
+        ...     baca.Memento(
         ...         context='Music_Voice',
         ...         prototype='abjad.Clef',
         ...         value='treble',
@@ -979,7 +979,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Voice'] = [
-        ...     baca.Momento(
+        ...     baca.Memento(
         ...         context='Music_Voice',
         ...         prototype='abjad.Dynamic',
         ...         value='f',
@@ -1115,7 +1115,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Voice'] = [
-        ...     baca.Momento(
+        ...     baca.Memento(
         ...         context='Music_Voice',
         ...         prototype='abjad.Dynamic',
         ...         value='f',
@@ -1375,7 +1375,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Voice'] = [
-        ...     baca.Momento(
+        ...     baca.Memento(
         ...         context='Music_Voice',
         ...         prototype='abjad.Dynamic',
         ...         value='f',
@@ -1633,7 +1633,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Voice'] = [
-        ...     baca.Momento(
+        ...     baca.Memento(
         ...         context='Music_Voice',
         ...         prototype='abjad.Dynamic',
         ...         value='sfz',
@@ -2639,7 +2639,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     baca.Momento(
+        ...     baca.Memento(
         ...         context='Music_Voice',
         ...         manifest='instruments',
         ...         value='Piccolo',
@@ -3016,7 +3016,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     baca.Momento(
+        ...     baca.Memento(
         ...         context='Music_Voice',
         ...         manifest='instruments',
         ...         value='Flute',
@@ -3800,7 +3800,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     baca.Momento(
+        ...     baca.Memento(
         ...         context='Music_Voice',
         ...         manifest='instruments',
         ...         value='Flute',
@@ -4962,7 +4962,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     baca.Momento(
+        ...     baca.Memento(
         ...         context='Music_Voice',
         ...         manifest='margin_markups',
         ...         value='I+II',
@@ -5363,7 +5363,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     baca.Momento(
+        ...     baca.Memento(
         ...         context='Music_Voice',
         ...         manifest='margin_markups',
         ...         value='I+II',
@@ -6206,7 +6206,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     baca.Momento(
+        ...     baca.Memento(
         ...         context='Music_Voice',
         ...         manifest='margin_markups',
         ...         value='I+II',
@@ -6931,7 +6931,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Score'] = [
-        ...     baca.Momento(
+        ...     baca.Memento(
         ...         context='Global_Skips',
         ...         manifest='metronome_marks',
         ...         value='90',
@@ -7086,7 +7086,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Score'] = [
-        ...     baca.Momento(
+        ...     baca.Memento(
         ...         context='Global_Skips',
         ...         manifest='metronome_marks',
         ...         value='90',
@@ -7386,7 +7386,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Score'] = [
-        ...     baca.Momento(
+        ...     baca.Memento(
         ...         context='Global_Skips',
         ...         manifest='metronome_marks',
         ...         value='112',
@@ -7666,13 +7666,13 @@ r"""
                 (
                     'Music_Staff',
                     [
-                        baca.Momento(
+                        baca.Memento(
                             context='Music_Voice',
                             edition=abjad.Tag('-PARTS'),
                             prototype='baca.BarExtent',
                             value=1,
                             ),
-                        baca.Momento(
+                        baca.Memento(
                             context='Music_Voice',
                             prototype='baca.PersistentOverride',
                             value=baca.PersistentOverride(
@@ -7682,7 +7682,7 @@ r"""
                                 value="#'(0 . 0)",
                                 ),
                             ),
-                        baca.Momento(
+                        baca.Memento(
                             context='Music_Voice',
                             prototype='baca.StaffLines',
                             value=1,
@@ -7692,7 +7692,7 @@ r"""
                 (
                     'Score',
                     [
-                        baca.Momento(
+                        baca.Memento(
                             context='Global_Skips',
                             prototype='abjad.TimeSignature',
                             value='3/8',
@@ -7719,7 +7719,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Voice'] = [
-        ...     baca.Momento(
+        ...     baca.Memento(
         ...         context='Music_Voice',
         ...         prototype='baca.PersistentOverride',
         ...         value=baca.PersistentOverride(
@@ -7868,7 +7868,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Voice'] = [
-        ...     baca.Momento(
+        ...     baca.Memento(
         ...         context='Music_Voice',
         ...         prototype='baca.PersistentOverride',
         ...         value=baca.PersistentOverride(
@@ -8137,7 +8137,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     baca.Momento(
+        ...     baca.Memento(
         ...         context='Music_Voice',
         ...         prototype='baca.StaffLines',
         ...         value=5,
@@ -8276,7 +8276,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     baca.Momento(
+        ...     baca.Memento(
         ...         context='Music_Voice',
         ...         prototype='baca.StaffLines',
         ...         value=5,
@@ -8544,7 +8544,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     baca.Momento(
+        ...     baca.Memento(
         ...         context='Music_Voice',
         ...         prototype='baca.StaffLines',
         ...         value=5,
@@ -8841,7 +8841,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Score'] = [
-        ...     baca.Momento(
+        ...     baca.Memento(
         ...         context='Global_Skips',
         ...         prototype='baca.Ritardando',
         ...         )
@@ -8999,7 +8999,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Score'] = [
-        ...     baca.Momento(
+        ...     baca.Memento(
         ...         context='Global_Skips',
         ...         prototype='baca.Accelerando',
         ...         )
@@ -9322,7 +9322,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Score'] = [
-        ...     baca.Momento(
+        ...     baca.Memento(
         ...         context='Global_Skips',
         ...         prototype='baca.Accelerando',
         ...         )
