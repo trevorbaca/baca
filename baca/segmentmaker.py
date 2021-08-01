@@ -1,17 +1,14 @@
 import copy
 import inspect
-import pathlib
-import typing
 
 import abjad
 from abjadext import rmakers
 
 from . import classes, const, indicators
-from . import overrides as baca_overrides
+from . import overrides as _overrides
 from . import pitchclasses, pitchcommands, rhythmcommands, scoping, segmentclasses
 from . import segments as _segments
 from . import tags as _tags
-from . import templates, typings
 
 
 def _site(frame, n=None):
@@ -34,14 +31,14 @@ class SegmentMaker(abjad.SegmentMaker):
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_even_divisions(),
-        ...     )
+        ... )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -225,13 +222,13 @@ class SegmentMaker(abjad.SegmentMaker):
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
         ...     time_signatures=time_signatures,
-        ...     )
+        ... )
         >>> maker(
-        ...     ('Music_Voice', 1),
+        ...     ("Music_Voice", 1),
         ...     baca.music(figures, do_not_check_total_duration=True),
-        ...     )
+        ... )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -421,15 +418,15 @@ class SegmentMaker(abjad.SegmentMaker):
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
         ...     time_signatures=time_signatures,
-        ...     )
+        ... )
         >>> maker(
-        ...     ('Music_Voice', 1),
+        ...     ("Music_Voice", 1),
         ...     baca.instrument(abjad.Violin()),
         ...     baca.music(figures, do_not_check_total_duration=True),
-        ...     )
+        ... )
 
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.setting(lilypond_file['Score']).autoBeaming = False
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> abjad.setting(lilypond_file["Score"]).autoBeaming = False
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -637,7 +634,6 @@ class SegmentMaker(abjad.SegmentMaker):
         "_metronome_marks",
         "_midi",
         "_offset_to_measure_number",
-        "_previously_alive_contexts",
         "_remove_phantom_measure",
         "_score",
         "_score_template",
@@ -645,7 +641,6 @@ class SegmentMaker(abjad.SegmentMaker):
         "_segment_duration",
         "_segment_name",
         "_skips_instead_of_rests",
-        "_sounds_during_segment",
         "_spacing",
         "_spacing_extra_offset",
         "_stage_markup",
@@ -691,53 +686,45 @@ class SegmentMaker(abjad.SegmentMaker):
     def __init__(
         self,
         *,
-        activate: typing.List[abjad.Tag] = None,
-        allow_empty_selections: bool = None,
+        activate=None,
+        allow_empty_selections=False,
         breaks: segmentclasses.BreakMeasureMap = None,
-        check_all_are_pitched: bool = None,
-        clock_time_extra_offset: typing.Union[bool, typings.Pair] = None,
-        clock_time_override: abjad.MetronomeMark = None,
-        color_octaves: bool = None,
-        deactivate: typing.List[abjad.Tag] = None,
-        do_not_check_beamed_long_notes: bool = None,
-        do_not_check_out_of_range_pitches: bool = None,
-        do_not_check_persistence: bool = None,
-        do_not_check_wellformedness: bool = None,
-        do_not_force_nonnatural_accidentals: bool = None,
-        do_not_include_layout_ly: bool = None,
-        fermata_measure_empty_overrides: typing.Sequence[int] = None,
-        final_segment: bool = None,
-        first_measure_number: int = None,
-        first_segment: bool = None,
-        ignore_repeat_pitch_classes: bool = None,
-        includes: typing.Sequence[str] = None,
-        instruments: abjad.OrderedDict = None,
-        local_measure_number_extra_offset: typing.Union[bool, typings.Pair] = None,
-        magnify_staves: typing.Union[
-            abjad.Multiplier, typing.Tuple[abjad.Multiplier, str]
-        ] = None,
-        margin_markups: abjad.OrderedDict = None,
-        measure_number_extra_offset: typing.Union[bool, typings.Pair] = None,
-        metronome_marks: abjad.OrderedDict = None,
-        parts_metric_modulation_multiplier: abjad.NumberPair = None,
-        phantom: bool = None,
-        remove_phantom_measure: bool = None,
-        score_template: templates.ScoreTemplate = None,
-        skips_instead_of_rests: bool = None,
-        spacing: segmentclasses.HorizontalSpacingSpecifier = None,
-        spacing_extra_offset: typing.Union[bool, typings.Pair] = None,
-        stage_markup: typing.Sequence[typing.Tuple] = None,
-        stage_number_extra_offset: typing.Union[bool, typings.Pair] = None,
-        test_container_identifiers: bool = None,
-        time_signatures: typing.Sequence[
-            typing.Union[
-                abjad.NonreducedFraction,
-                abjad.TimeSignature,
-                abjad.IntegerPair,
-            ]
-        ] = None,
-        transpose_score: bool = None,
-    ) -> None:
+        check_all_are_pitched=False,
+        clock_time_extra_offset=None,
+        clock_time_override=None,
+        color_octaves=False,
+        deactivate=None,
+        do_not_check_beamed_long_notes=False,
+        do_not_check_out_of_range_pitches=False,
+        do_not_check_persistence=False,
+        do_not_check_wellformedness=False,
+        do_not_force_nonnatural_accidentals=False,
+        do_not_include_layout_ly=False,
+        fermata_measure_empty_overrides=None,
+        final_segment=False,
+        first_measure_number=None,
+        first_segment=None,
+        ignore_repeat_pitch_classes=False,
+        includes=None,
+        instruments=None,
+        local_measure_number_extra_offset=None,
+        magnify_staves=None,
+        margin_markups=None,
+        measure_number_extra_offset=None,
+        metronome_marks=None,
+        parts_metric_modulation_multiplier=None,
+        phantom=False,
+        remove_phantom_measure=False,
+        score_template=None,
+        skips_instead_of_rests=False,
+        spacing=None,
+        spacing_extra_offset=None,
+        stage_markup=None,
+        stage_number_extra_offset=None,
+        test_container_identifiers=False,
+        time_signatures=None,
+        transpose_score=False,
+    ):
         super().__init__()
         if activate is not None:
             assert all(isinstance(_, abjad.Tag) for _ in activate)
@@ -756,7 +743,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._clock_time_override = clock_time_override
         self._color_octaves = color_octaves
         self._cache = None
-        self._cached_time_signatures: typing.List[abjad.TimeSignature] = []
+        self._cached_time_signatures = []
         if deactivate is not None:
             assert all(isinstance(_, abjad.Tag) for _ in deactivate)
         self._deactivate = deactivate
@@ -768,11 +755,11 @@ class SegmentMaker(abjad.SegmentMaker):
         self._do_not_check_wellformedness = do_not_check_wellformedness
         self._do_not_force_nonnatural_accidentals = do_not_force_nonnatural_accidentals
         self._do_not_include_layout_ly = do_not_include_layout_ly
-        self._duration: typing.Optional[abjad.DurationTyping] = None
+        self._duration = None
         self._fermata_measure_empty_overrides = fermata_measure_empty_overrides
-        self._fermata_measure_numbers: typing.List = []
-        self._fermata_start_offsets: typing.List[abjad.Offset] = []
-        self._fermata_stop_offsets: typing.List[abjad.Offset] = []
+        self._fermata_measure_numbers = []
+        self._fermata_start_offsets = []
+        self._fermata_stop_offsets = []
         self._first_measure_number = first_measure_number
         if first_segment is not None:
             first_segment = bool(first_segment)
@@ -787,44 +774,39 @@ class SegmentMaker(abjad.SegmentMaker):
         self._margin_markups = margin_markups
         self._measure_number_extra_offset = measure_number_extra_offset
         self._metronome_marks = metronome_marks
-        self._midi: typing.Optional[bool] = None
-        self._offset_to_measure_number: typing.Dict[abjad.Offset, int] = {}
+        self._midi = False
+        self._offset_to_measure_number = {}
         if parts_metric_modulation_multiplier is not None:
             assert isinstance(parts_metric_modulation_multiplier, tuple)
             assert len(parts_metric_modulation_multiplier) == 2
         self._parts_metric_modulation_multiplier = parts_metric_modulation_multiplier
-        self._previously_alive_contexts: typing.List[str] = []
         if remove_phantom_measure is not None:
             remove_phantom_measure = bool(remove_phantom_measure)
         self._remove_phantom_measure = remove_phantom_measure
         assert score_template is not None, repr(score_template)
         self._score_template = score_template
-        self._segment_bol_measure_numbers: typing.List[int] = []
-        self._segment_duration: typing.Optional[abjad.DurationTyping] = None
+        self._segment_bol_measure_numbers = []
+        # TODO: harmonize _duration, _semgent_duration
+        self._segment_duration = None
         self._skips_instead_of_rests = skips_instead_of_rests
-        self._sounds_during_segment: abjad.OrderedDict = abjad.OrderedDict()
         self._spacing = spacing
         self._spacing_extra_offset = spacing_extra_offset
         self._stage_markup = stage_markup
         self._stage_number_extra_offset = stage_number_extra_offset
-        self._start_clock_time: typing.Optional[str] = None
-        self._stop_clock_time: typing.Optional[str] = None
+        self._start_clock_time = None
+        self._stop_clock_time = None
         if test_container_identifiers is not None:
             test_container_identifiers = bool(test_container_identifiers)
         self._test_container_identifiers = test_container_identifiers
         self._transpose_score = transpose_score
-        self._voice_metadata: abjad.OrderedDict = abjad.OrderedDict()
-        self._voice_names: typing.Optional[typing.Tuple[str, ...]] = None
-        self._commands: typing.List[scoping.Command] = []
+        self._voice_metadata = abjad.OrderedDict()
+        self._voice_names = None
+        self._commands = []
         self._initialize_time_signatures(time_signatures)
 
     ### SPECIAL METHODS ###
 
-    def __call__(
-        self,
-        scopes: typing.Union[scoping.Scope, scoping.TimelineScope, typings.ScopeTyping],
-        *commands: typing.Union[scoping.Command, scoping.Suite, None],
-    ) -> None:
+    def __call__(self, scopes, *commands):
         r"""
         Wraps each command in ``commands`` with each scope in ``scopes``.
 
@@ -833,15 +815,15 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+            ... )
 
             >>> maker(
-            ...     'Music_Voice',
+            ...     "Music_Voice",
             ...     baca.make_even_divisions(),
             ...     baca.label(lambda _: abjad.Label(_).with_indices()),
-            ...     )
+            ... )
 
-            >>> lilypond_file = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment="docs")
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -1018,18 +1000,18 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+            ... )
 
             >>> commands = []
             >>> commands.append(baca.make_even_divisions())
             >>> commands.append(baca.label(lambda _: abjad.Label(_).with_indices()))
 
             >>> maker(
-            ...     'Music_Voice',
+            ...     "Music_Voice",
             ...     commands,
-            ...     )
+            ... )
 
-            >>> lilypond_file = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment="docs")
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -1204,9 +1186,9 @@ class SegmentMaker(abjad.SegmentMaker):
             Raises exception on noncommand input:
 
             >>> maker(
-            ...     'Music_Voice',
-            ...     'text',
-            ...     )
+            ...     "Music_Voice",
+            ...     "text",
+            ... )
             Traceback (most recent call last):
                 ...
             Exception:
@@ -1220,9 +1202,9 @@ class SegmentMaker(abjad.SegmentMaker):
             Raises exception on unknown voice name:
 
             >>> maker(
-            ...     'Percussion_Voice',
+            ...     "Percussion_Voice",
             ...     baca.make_repeated_duration_notes([(1, 4)]),
-            ...     )
+            ... )
             Traceback (most recent call last):
                 ...
             Exception: unknown voice name 'Percussion_Voice'.
@@ -1374,13 +1356,13 @@ class SegmentMaker(abjad.SegmentMaker):
     def _alive_during_any_previous_segment(self, context) -> bool:
         assert isinstance(context, abjad.Context), repr(context)
         assert self.previous_persist is not None
-        names: typing.List = self.previous_persist.get("alive_during_segment", [])
+        names = self.previous_persist.get("alive_during_segment", [])
         return context.name in names
 
     def _alive_during_previous_segment(self, context) -> bool:
         assert isinstance(context, abjad.Context), repr(context)
         assert self.previous_persist is not None
-        names: typing.List = self.previous_persist.get("alive_during_segment", [])
+        names = self.previous_persist.get("alive_during_segment", [])
         return context.name in names
 
     def _analyze_momento(self, context, momento):
@@ -2812,8 +2794,7 @@ class SegmentMaker(abjad.SegmentMaker):
             else:
                 includes.append("baca-string-trio.ily")
             return includes
-        path = pathlib.Path("..", "..", "stylesheet.ily")
-        includes.append(path)
+        includes.append("../../stylesheet.ily")
         if self.clock_time_extra_offset is not None:
             value = self.clock_time_extra_offset
             assert isinstance(value, tuple)
@@ -3828,7 +3809,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 if measure_number is None:
                     continue
                 clef = wrapper.indicator
-                suite = baca_overrides.clef_shift(
+                suite = _overrides.clef_shift(
                     clef, selector=lambda _: classes.Selection(_).leaf(0)
                 )
                 runtime = self._bundle_manifests()
@@ -4221,8 +4202,7 @@ class SegmentMaker(abjad.SegmentMaker):
             voice_names = scopes[0]
         assert isinstance(voice_names, list), repr(voice_names)
         assert all(isinstance(_, str) for _ in voice_names)
-        token_type = typing.Union[int, abjad.IntegerPair]
-        measure_tokens: typing.List[token_type] = []
+        measure_tokens = []
         if isinstance(scopes[1], int):
             measure_tokens.append(scopes[1])
         elif isinstance(scopes[1], tuple):
@@ -4253,7 +4233,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _unpack_scopes(self, scopes, abbreviations):
         scope_type = (scoping.Scope, scoping.TimelineScope)
-        scopes__: typing.List[scoping.ScopeTyping]
         if isinstance(scopes, str):
             result = abbreviations.get(scopes, scopes)
             if isinstance(result, str):
@@ -4336,14 +4315,14 @@ class SegmentMaker(abjad.SegmentMaker):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def activate(self) -> typing.Optional[typing.List[abjad.Tag]]:
+    def activate(self):
         """
         Gets tags to activate in LilyPond output.
         """
         return self._activate
 
     @property
-    def allow_empty_selections(self) -> typing.Optional[bool]:
+    def allow_empty_selections(self):
         """
         Is true when segment allows empty selectors.
 
@@ -4352,37 +4331,35 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._allow_empty_selections
 
     @property
-    def breaks(self) -> typing.Optional[segmentclasses.BreakMeasureMap]:
+    def breaks(self):
         """
         Gets breaks.
         """
         return self._breaks
 
     @property
-    def check_all_are_pitched(self) -> typing.Optional[bool]:
+    def check_all_are_pitched(self):
         """
         Is true when segment-maker checks for NOT_YET_PITCHED indicators.
         """
         return self._check_all_are_pitched
 
     @property
-    def clock_time_extra_offset(
-        self,
-    ) -> typing.Union[bool, typings.Pair, None]:
+    def clock_time_extra_offset(self):
         """
         Gets clock time extra offset.
         """
         return self._clock_time_extra_offset
 
     @property
-    def clock_time_override(self) -> typing.Optional[abjad.MetronomeMark]:
+    def clock_time_override(self):
         """
         Gets clock time override.
         """
         return self._clock_time_override
 
     @property
-    def color_octaves(self) -> typing.Optional[bool]:
+    def color_octaves(self):
         r"""
         Is true when segment-maker colors octaves.
 
@@ -4395,23 +4372,23 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     score_template=baca.StringTrioScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 31)),
             ...     time_signatures=[(6, 16), (6, 16)],
-            ...     )
+            ... )
 
             >>> figure = baca.figure([1], 16)
             >>> selection = figure([[2, 4, 5, 7, 9, 11]])
             >>> maker(
-            ...     ('Violin_Music_Voice', 1),
+            ...     ("Violin_Music_Voice", 1),
             ...     baca.music(selection),
-            ...     )
+            ... )
 
             >>> selection = figure([[-3, -5, -7, -8, -10, -12]])
             >>> maker(
-            ...     ('Cello_Music_Voice', 1),
+            ...     ("Cello_Music_Voice", 1),
             ...     baca.music(selection),
-            ...     )
+            ... )
 
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.setting(lilypond_file['Score']).autoBeaming = False
+            >>> lilypond_file = maker.run(environment="docs")
+            >>> abjad.setting(lilypond_file["Score"]).autoBeaming = False
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -4720,86 +4697,85 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._color_octaves
 
     @property
-    def commands(self) -> typing.List[scoping.Command]:
+    def commands(self):
         """
         Gets commands.
         """
         return self._commands
 
     @property
-    def deactivate(self) -> typing.Optional[typing.List[abjad.Tag]]:
+    def deactivate(self):
         """
         Gets tags to deactivate in LilyPond output.
         """
         return self._deactivate
 
     @property
-    def do_not_check_beamed_long_notes(self) -> typing.Optional[bool]:
+    def do_not_check_beamed_long_notes(self):
         """
         Is true when segment does not check beamed long notes.
         """
         return self._do_not_check_beamed_long_notes
 
     @property
-    def do_not_check_out_of_range_pitches(self) -> typing.Optional[bool]:
+    def do_not_check_out_of_range_pitches(self):
         """
         Is true when segment does not check out-of-range pitches.
         """
         return self._do_not_check_out_of_range_pitches
 
     @property
-    def do_not_check_persistence(self) -> typing.Optional[bool]:
+    def do_not_check_persistence(self):
         """
         Is true when segment-maker does not check persistent indicators.
         """
         return self._do_not_check_persistence
 
     @property
-    def do_not_check_wellformedness(self) -> typing.Optional[bool]:
+    def do_not_check_wellformedness(self):
         """
         Is true when segment does not check wellformedness.
         """
         return self._do_not_check_wellformedness
 
     @property
-    def do_not_force_nonnatural_accidentals(self) -> typing.Optional[bool]:
+    def do_not_force_nonnatural_accidentals(self):
         """
         Is true when segment-maker does not force nonnatural accidentals.
         """
         return self._do_not_force_nonnatural_accidentals
 
     @property
-    def do_not_include_layout_ly(self) -> typing.Optional[bool]:
+    def do_not_include_layout_ly(self):
         """
         Is true when segment-maker does not include layout.ly.
         """
         return self._do_not_include_layout_ly
 
     @property
-    def fermata_measure_empty_overrides(
-        self,
-    ) -> typing.Optional[typing.Sequence[int]]:
+    def fermata_measure_empty_overrides(self):
         """
         Gets fermata measure empty overrides.
         """
         return self._fermata_measure_empty_overrides
 
     @property
-    def final_segment(self) -> typing.Optional[bool]:
+    def final_segment(self):
         """
         Is true when composer declares segment to be last in score.
         """
         return self._final_segment
 
     @property
-    def first_measure_number(self) -> typing.Optional[int]:
+    def first_measure_number(self):
         """
         Gets user-defined first measure number.
         """
         return self._first_measure_number
 
+    # TODO: simplify
     @property
-    def first_segment(self) -> typing.Optional[bool]:
+    def first_segment(self):
         """
         Is true when segment is first in score.
         """
@@ -4808,53 +4784,49 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._get_segment_number() == 1
 
     @property
-    def ignore_repeat_pitch_classes(self) -> typing.Optional[bool]:
+    def ignore_repeat_pitch_classes(self):
         """
         Is true when segment ignores repeat pitch-classes.
         """
         return self._ignore_repeat_pitch_classes
 
     @property
-    def includes(self) -> typing.Optional[typing.Sequence[str]]:
+    def includes(self):
         """
         Gets includes.
         """
         return self._includes
 
     @property
-    def instruments(self) -> typing.Optional[abjad.OrderedDict]:
+    def instruments(self):
         """
         Gets instruments.
         """
         return self._instruments
 
     @property
-    def lilypond_file(self) -> typing.Optional[abjad.LilyPondFile]:
+    def lilypond_file(self):
         """
         Gets LilyPond file.
         """
         return self._lilypond_file
 
     @property
-    def local_measure_number_extra_offset(
-        self,
-    ) -> typing.Union[bool, typings.Pair, None]:
+    def local_measure_number_extra_offset(self):
         """
         Gets local measure number extra offset.
         """
         return self._local_measure_number_extra_offset
 
     @property
-    def magnify_staves(
-        self,
-    ) -> typing.Union[abjad.Multiplier, typing.Tuple[abjad.Multiplier, str], None]:
+    def magnify_staves(self):
         """
         Gets staff magnification.
         """
         return self._magnify_staves
 
     @property
-    def manifests(self) -> abjad.OrderedDict:
+    def manifests(self):
         """
         Gets manifests.
         """
@@ -4865,14 +4837,14 @@ class SegmentMaker(abjad.SegmentMaker):
         return manifests
 
     @property
-    def margin_markups(self) -> typing.Optional[abjad.OrderedDict]:
+    def margin_markups(self):
         """
         Gets margin markups.
         """
         return self._margin_markups
 
     @property
-    def measure_count(self) -> int:
+    def measure_count(self):
         """
         Gets measure count.
         """
@@ -4881,16 +4853,14 @@ class SegmentMaker(abjad.SegmentMaker):
         return 0
 
     @property
-    def measure_number_extra_offset(
-        self,
-    ) -> typing.Union[bool, typings.Pair, None]:
+    def measure_number_extra_offset(self):
         """
         Gets measure number extra offset.
         """
         return self._measure_number_extra_offset
 
     @property
-    def metadata(self) -> abjad.OrderedDict:
+    def metadata(self):
         r"""
         Gets segment metadata.
 
@@ -4898,25 +4868,25 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> metadata = abjad.OrderedDict()
             >>> persist = abjad.OrderedDict()
-            >>> persist['persistent_indicators'] = abjad.OrderedDict()
-            >>> persist['persistent_indicators']['MusicStaff'] = [
+            >>> persist["persistent_indicators"] = abjad.OrderedDict()
+            >>> persist["persistent_indicators"]["MusicStaff"] = [
             ...     baca.Momento(
-            ...         context='Music_Voice',
-            ...         prototype='abjad.Clef',
-            ...         value='alto',
-            ...         )
-            ...     ]
-            >>> metadata['segment_number'] = 1
+            ...         context="Music_Voice",
+            ...         prototype="abjad.Clef",
+            ...         value="alto",
+            ...     )
+            ... ]
+            >>> metadata["segment_number"] = 1
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+            ... )
 
             >>> lilypond_file = maker.run(
-            ...     environment='docs',
+            ...     environment="docs",
             ...     previous_metadata=metadata,
             ...     previous_persist=persist,
-            ...     )
+            ... )
 
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5092,58 +5062,56 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._metadata
 
     @property
-    def metronome_marks(self) -> typing.Optional[abjad.OrderedDict]:
+    def metronome_marks(self):
         """
         Gets metronome marks.
         """
         return self._metronome_marks
 
     @property
-    def midi(self) -> typing.Optional[bool]:
+    def midi(self):
         """
         Is true when segment-maker outputs MIDI.
         """
         return self._midi
 
     @property
-    def parts_metric_modulation_multiplier(
-        self,
-    ) -> typing.Optional[abjad.NumberPair]:
+    def parts_metric_modulation_multiplier(self):
         """
         Gets parts metric modulation multiplier.
         """
         return self._parts_metric_modulation_multiplier
 
     @property
-    def persist(self) -> abjad.OrderedDict:
+    def persist(self):
         """
         Gets persist metadata.
         """
         return self._persist
 
     @property
-    def previous_metadata(self) -> typing.Optional[abjad.OrderedDict]:
+    def previous_metadata(self):
         """
         Gets previous segment metadata.
         """
         return self._previous_metadata
 
     @property
-    def previous_persist(self) -> typing.Optional[abjad.OrderedDict]:
+    def previous_persist(self):
         """
         Gets previous segment persist.
         """
         return self._previous_persist
 
     @property
-    def remove_phantom_measure(self) -> typing.Optional[bool]:
+    def remove_phantom_measure(self):
         """
         Is true when segment-maker removes phantom measure.
         """
         return self._remove_phantom_measure
 
     @property
-    def score_template(self) -> typing.Optional[abjad.ScoreTemplate]:
+    def score_template(self):
         """
         Gets score template.
         """
@@ -5157,7 +5125,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._segment_name
 
     @property
-    def skips_instead_of_rests(self) -> typing.Optional[bool]:
+    def skips_instead_of_rests(self):
         r"""
         Is true when segment fills empty measures with skips.
 
@@ -5168,9 +5136,9 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+            ... )
 
-            >>> lilypond_file = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment="docs")
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5288,9 +5256,9 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     skips_instead_of_rests=True,
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+            ... )
 
-            >>> lilypond_file = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment="docs")
 
             ..  docs::
 
@@ -5393,39 +5361,35 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._skips_instead_of_rests
 
     @property
-    def spacing(
-        self,
-    ) -> typing.Optional[segmentclasses.HorizontalSpacingSpecifier]:
+    def spacing(self):
         """
         Gets spacing.
         """
         return self._spacing
 
     @property
-    def spacing_extra_offset(self) -> typing.Union[bool, typings.Pair, None]:
+    def spacing_extra_offset(self):
         """
         Gets spacing extra offset.
         """
         return self._spacing_extra_offset
 
     @property
-    def stage_markup(self) -> typing.Optional[typing.Sequence[typing.Tuple]]:
+    def stage_markup(self):
         """
         Gets stage markup.
         """
         return self._stage_markup
 
     @property
-    def stage_number_extra_offset(
-        self,
-    ) -> typing.Union[bool, typings.Pair, None]:
+    def stage_number_extra_offset(self):
         """
         Gets stage number extra offset.
         """
         return self._stage_number_extra_offset
 
     @property
-    def test_container_identifiers(self) -> typing.Optional[bool]:
+    def test_container_identifiers(self):
         """
         Is true when segment-maker adds container identifiers in docs
         environment.
@@ -5433,14 +5397,14 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._test_container_identifiers
 
     @property
-    def time_signatures(self) -> typing.List[abjad.TimeSignature]:
+    def time_signatures(self):
         """
         Gets time signatures.
         """
         return self._time_signatures
 
     @property
-    def transpose_score(self) -> typing.Optional[bool]:
+    def transpose_score(self):
         r"""
         Is true when segment transposes score.
 
@@ -5449,22 +5413,22 @@ class SegmentMaker(abjad.SegmentMaker):
             Transposes score:
 
             >>> instruments = abjad.OrderedDict()
-            >>> instruments['clarinet'] = abjad.ClarinetInBFlat()
+            >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
             >>> maker = baca.SegmentMaker(
             ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     transpose_score=True,
-            ...     )
+            ... )
 
             >>> maker(
-            ...     'Music_Voice',
-            ...     baca.instrument(instruments['clarinet']),
+            ...     "Music_Voice",
+            ...     baca.instrument(instruments["clarinet"]),
             ...     baca.make_even_divisions(),
-            ...     baca.pitches('E4 F4'),
-            ...     )
+            ...     baca.pitches("E4 F4"),
+            ... )
 
-            >>> lilypond_file = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment="docs")
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5612,22 +5576,22 @@ class SegmentMaker(abjad.SegmentMaker):
             Does not transpose score:
 
             >>> instruments = abjad.OrderedDict()
-            >>> instruments['clarinet'] = abjad.ClarinetInBFlat()
+            >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
             >>> maker = baca.SegmentMaker(
             ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     transpose_score=False,
-            ...     )
+            ... )
 
             >>> maker(
-            ...     'Music_Voice',
-            ...     baca.instrument(instruments['clarinet']),
+            ...     "Music_Voice",
+            ...     baca.instrument(instruments["clarinet"]),
             ...     baca.make_even_divisions(),
-            ...     baca.pitches('E4 F4'),
-            ...     )
+            ...     baca.pitches("E4 F4"),
+            ... )
 
-            >>> lilypond_file = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment="docs")
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5774,7 +5738,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._transpose_score
 
     @property
-    def voice_metadata(self) -> abjad.OrderedDict:
+    def voice_metadata(self):
         """
         Gets voice metadata.
         """
@@ -5784,8 +5748,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def run(
         self,
-        activate=None,
-        deactivate=None,
+        activate=None,  # TODO: remove in favor of init keyword
+        deactivate=None,  # TODO: remove in favor of init keyword
         do_not_print_timing=False,
         environment=None,
         metadata=None,
@@ -5793,14 +5757,14 @@ class SegmentMaker(abjad.SegmentMaker):
         persist=None,
         previous_metadata=None,
         previous_persist=None,
-        remove=None,
+        remove=None,  # TODO: replace with init keyword
         segment_name=None,
     ):
         """
         Runs segment-maker.
         """
         self._environment = environment
-        self._metadata: abjad.OrderedDict = abjad.OrderedDict(metadata)
+        self._metadata = abjad.OrderedDict(metadata)
         self._midi = midi
         self._persist = abjad.OrderedDict(persist)
         self._previous_metadata = abjad.OrderedDict(previous_metadata)
