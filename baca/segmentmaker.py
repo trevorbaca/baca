@@ -21,7 +21,7 @@ nonfirst_preamble = r"""\header { composer = ##f poet = ##f title = ##f }
 \paper { print-first-page-number = ##t }"""
 
 
-class SegmentMaker(abjad.SegmentMaker):
+class SegmentMaker:
     r"""
     Segment-maker.
 
@@ -606,6 +606,7 @@ class SegmentMaker(abjad.SegmentMaker):
         "_clock_time_override",
         "_color_octaves",
         "_commands",
+        "_container_to_part_assignment",
         "_deactivate",
         "_do_not_check_beamed_long_notes",
         "_do_not_check_out_of_range_pitches",
@@ -626,14 +627,19 @@ class SegmentMaker(abjad.SegmentMaker):
         "_ignore_repeat_pitch_classes",
         "_includes",
         "_instruments",
+        "_lilypond_file",
         "_local_measure_number_extra_offset",
         "_magnify_staves",
         "_margin_markups",
         "_measure_number_extra_offset",
+        "_metadata",
         "_parts_metric_modulation_multiplier",
         "_metronome_marks",
         "_midi",
         "_offset_to_measure_number",
+        "_persist",
+        "_previous_metadata",
+        "_previous_persist",
         "_remove_phantom_measure",
         "_score",
         "_score_template",
@@ -725,7 +731,7 @@ class SegmentMaker(abjad.SegmentMaker):
         time_signatures=None,
         transpose_score=False,
     ):
-        super().__init__()
+        # super().__init__()
         if activate is not None:
             assert all(isinstance(_, abjad.Tag) for _ in activate)
         self._activate = activate
@@ -746,6 +752,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._cached_time_signatures = []
         if deactivate is not None:
             assert all(isinstance(_, abjad.Tag) for _ in deactivate)
+        self._container_to_part_assignment = None
         self._deactivate = deactivate
         if do_not_check_out_of_range_pitches is not None:
             do_not_check_out_of_range_pitches = bool(do_not_check_out_of_range_pitches)
@@ -756,6 +763,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._do_not_force_nonnatural_accidentals = do_not_force_nonnatural_accidentals
         self._do_not_include_layout_ly = do_not_include_layout_ly
         self._duration = None
+        self._environment = None
         self._fermata_measure_empty_overrides = fermata_measure_empty_overrides
         self._fermata_measure_numbers = []
         self._fermata_start_offsets = []
@@ -769,10 +777,12 @@ class SegmentMaker(abjad.SegmentMaker):
         self._final_measure_is_fermata = False
         self._final_segment = final_segment
         self._includes = includes
+        self._lilypond_file = None
         self._local_measure_number_extra_offset = local_measure_number_extra_offset
         self._magnify_staves = magnify_staves
         self._margin_markups = margin_markups
         self._measure_number_extra_offset = measure_number_extra_offset
+        self._metadata = abjad.OrderedDict()
         self._metronome_marks = metronome_marks
         self._midi = False
         self._offset_to_measure_number = {}
@@ -782,7 +792,11 @@ class SegmentMaker(abjad.SegmentMaker):
         self._parts_metric_modulation_multiplier = parts_metric_modulation_multiplier
         if remove_phantom_measure is not None:
             remove_phantom_measure = bool(remove_phantom_measure)
+        self._persist = abjad.OrderedDict()
+        self._previous_metadata = None
+        self._previous_persist = None
         self._remove_phantom_measure = remove_phantom_measure
+        self._score = None
         assert score_template is not None, repr(score_template)
         self._score_template = score_template
         self._segment_bol_measure_numbers = []
@@ -1263,6 +1277,25 @@ class SegmentMaker(abjad.SegmentMaker):
                         scope_ = abjad.new(current_scope)
                     command_ = abjad.new(command_, scope=scope_)
                     self.commands.append(command_)
+
+    def __eq__(self, expr):
+        """
+        Is true if ``expr`` is a segment-maker with equivalent properties.
+        """
+        return abjad.StorageFormatManager.compare_objects(self, expr)
+
+    def __hash__(self):
+        """
+        Hashes segment-maker.
+        """
+        hash_values = abjad.StorageFormatManager(self).get_hash_values()
+        return hash(hash_values)
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
 
     ### PRIVATE METHODS ###
 
@@ -2252,6 +2285,34 @@ class SegmentMaker(abjad.SegmentMaker):
                 for dynamic in dynamics:
                     message += f"\n   {dynamic!s}"
                 raise Exception(message)
+
+    def _check_duplicate_part_assignments(self):
+        dictionary = self._container_to_part_assignment
+        if not dictionary:
+            return
+        if not self.score_template:
+            return
+        part_manifest = self.score_template.part_manifest
+        if not part_manifest:
+            return
+        part_to_timespans = abjad.OrderedDict()
+        for identifier, (part_assignment, timespan) in dictionary.items():
+            for part in part_manifest.expand(part_assignment):
+                if part.name not in part_to_timespans:
+                    part_to_timespans[part.name] = []
+                part_to_timespans[part.name].append(timespan)
+        messages = []
+        for part_name, timespans in part_to_timespans.items():
+            if len(timespans) <= 1:
+                continue
+            timespan_list = abjad.TimespanList(timespans)
+            if timespan_list.compute_logical_and():
+                message = f"  Part {part_name!r} is assigned"
+                message += " to overlapping containers ..."
+                messages.append(message)
+        if messages:
+            message = "\n" + "\n".join(messages)
+            raise Exception(message)
 
     def _check_persistent_indicators(self):
         if self.do_not_check_persistence:
@@ -3300,6 +3361,17 @@ class SegmentMaker(abjad.SegmentMaker):
             assert first_leaf is not None
             literal = abjad.LilyPondLiteral(string)
             abjad.attach(literal, first_leaf, tag=tag)
+
+    def _make_global_context(self):
+        global_rests = abjad.Context(lilypond_type="GlobalRests", name="Global_Rests")
+        global_skips = abjad.Context(lilypond_type="GlobalSkips", name="Global_Skips")
+        global_context = abjad.Context(
+            [global_rests, global_skips],
+            lilypond_type="GlobalContext",
+            simultaneous=True,
+            name="Global_Context",
+        )
+        return global_context
 
     def _make_global_rests(self):
         rests = []
@@ -4753,6 +4825,13 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._do_not_include_layout_ly
 
     @property
+    def environment(self):
+        """
+        Gets environment.
+        """
+        return self._environment
+
+    @property
     def fermata_measure_empty_overrides(self):
         """
         Gets fermata measure empty overrides.
@@ -5109,6 +5188,13 @@ class SegmentMaker(abjad.SegmentMaker):
         Is true when segment-maker removes phantom measure.
         """
         return self._remove_phantom_measure
+
+    @property
+    def score(self):
+        """
+        Gets score.
+        """
+        return self._score
 
     @property
     def score_template(self):
