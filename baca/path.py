@@ -184,28 +184,18 @@ def deactivate(
 def extern(
     path,
     include_path,
-    *,
-    score_path=None,
 ):
     """
     Externalizes LilyPond file parsable chunks.
 
     Produces skeleton ``.ly`` together with ``.ily``.
 
-    Writes skeleton ``.ly`` to ``score_path`` when ``score_path`` is set.
-
-    Overwrites ``path`` with skeleton ``.ly`` when ``score_path`` is none.
+    Overwrites ``path`` with skeleton ``.ly``.
 
     Writes ``.ily`` to ``include_path``.
     """
-    # TODO: change tag to baca.path.extern()
-    tag = abjad.Tag("baca.Path.extern()")
+    tag = abjad.Tag("baca.path.extern()")
     assert isinstance(include_path, type(path)), repr(include_path)
-    # TODO: remove unused score_path keyword
-    assert score_path is None
-    if score_path is None:
-        score_path = path
-    assert isinstance(score_path, type(path)), repr(score_path)
     preamble_lines, score_lines = [], []
     stack, finished_variables = abjad.OrderedDict(), abjad.OrderedDict()
     found_score = False
@@ -234,7 +224,7 @@ def extern(
                     del stack[name]
                     count = len(line) - len(line.lstrip())
                     indent = count * " "
-                    dereference = indent + fr"\{name}"
+                    dereference = indent + fr"{{ \{name} }}"
                     first_line = finished_variables[name][0]
                     # these 4 lines can be removed after right-side tags:
                     if "NOT_TOPMOST" in first_line:
@@ -278,7 +268,7 @@ def extern(
     for line in lines:
         lines_.append(line)
     text = "".join(lines_)
-    score_path.write_text(text)
+    path.write_text(text)
     lines = []
     items = list(finished_variables.items())
     total = len(items)

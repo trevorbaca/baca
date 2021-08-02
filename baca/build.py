@@ -908,6 +908,7 @@ def make_layout_ly(layout_py, breaks, spacing=None, *, part_identifier=None):
     score = lilypond_file["Score"]
     text = abjad.lilypond(score, tags=True)
     text = text.replace("Global_Skips", "Page_Layout")
+    text = text.replace("Global.Skips", "Page.Layout")
     text = abjad.LilyPondFormatManager.left_shift_tags(text)
     layout_ly_tagged = layout_directory / "layout.ly.tagged"
     lines = []
@@ -1101,10 +1102,11 @@ def make_segment_pdf(maker, first_segment=False):
         for message in not_topmost():
             print(message)
     if "--no-pdf" not in sys.argv:
-        log_file_name = "." + music_ly_tagged.name + ".log"
-        lilypond_log_file_path = music_ly_tagged.parent / log_file_name
+        lilypond_log_file_name = "." + music_ly_tagged.name + ".log"
+        lilypond_log_file_path = music_ly_tagged.parent / lilypond_log_file_name
         with abjad.Timer() as timer:
             print(f"Calling LilyPond on {baca.path.trim(music_ly_tagged)} ...")
+            print(f"Logging to {baca.path.trim(lilypond_log_file_path)} ...")
             baca_repo_path = pathlib.Path(baca.__file__).parent.parent
             flags = f"--include={baca_repo_path}/lilypond"
             abjad_repo_path = pathlib.Path(abjad.__file__).parent.parent

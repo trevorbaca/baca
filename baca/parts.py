@@ -1470,27 +1470,15 @@ def _global_rest_identifier(segment_name):
 
     ..  container:: example
 
-        >>> baca.parts._global_rest_identifier("_")
-        'i_Global_Rests'
+        >>> baca.parts._global_rest_identifier("01")
+        'segment.01.Global.Rests'
 
-        >>> baca.parts._global_rest_identifier("_1")
-        'i_a_Global_Rests'
-
-        >>> baca.parts._global_rest_identifier("_2")
-        'i_b_Global_Rests'
-
-        >>> baca.parts._global_rest_identifier("A")
-        'A_Global_Rests'
-
-        >>> baca.parts._global_rest_identifier("A1")
-        'A_a_Global_Rests'
-
-        >>> baca.parts._global_rest_identifier("A2")
-        'A_b_Global_Rests'
+        >>> baca.parts._global_rest_identifier("02")
+        'segment.02.Global.Rests'
 
     """
-    identifier = abjad.String(segment_name).to_segment_lilypond_identifier()
-    identifier = abjad.String(f"{identifier}_Global_Rests")
+    identifier = abjad.String(f"segment_{segment_name}_Global_Rests")
+    identifier = identifier.replace("_", ".")
     return identifier
 
 

@@ -1323,7 +1323,8 @@ class SegmentMaker:
         ):
             return
         segment_name = self.segment_name or ""
-        segment_name = abjad.String(segment_name).to_segment_lilypond_identifier()
+        if segment_name:
+            segment_name = f"segment_{segment_name}"
         contexts = []
         try:
             context = self.score["Global_Skips"]
@@ -1343,9 +1344,7 @@ class SegmentMaker:
         context_name_counts = {}
         for context in contexts:
             if context.name is None:
-                message = "all contexts must be named:\n"
-                message += f"    {repr(context)}"
-                raise Exception(message)
+                raise Exception("all contexts must be named:\n    {repr(context)}")
             count = context_name_counts.get(context.name, 0)
             if count == 0:
                 suffixed_context_name = context.name
@@ -1357,6 +1356,7 @@ class SegmentMaker:
                 context_identifier = f"{segment_name}_{suffixed_context_name}"
             else:
                 context_identifier = suffixed_context_name
+            context_identifier = context_identifier.replace("_", ".")
             context.identifier = f"%*% {context_identifier}"
             part_container_count = 0
             for container in abjad.iterate(context).components(abjad.Container):
@@ -1371,6 +1371,7 @@ class SegmentMaker:
                     suffix = abjad.String().base_26(part_container_count).lower()
                     container_identifier = f"{context_identifier}_{suffix}"
                     container_identifier = abjad.String(container_identifier)
+                    assert "_" not in container_identifier, repr(container_identifier)
                     assert container_identifier.is_lilypond_identifier()
                     assert container_identifier not in container_to_part_assignment
                     timespan = container._get_timespan()
@@ -1382,6 +1383,7 @@ class SegmentMaker:
                 context_identifier = f"{segment_name}_{staff.name}"
             else:
                 context_identifier = staff.name
+            context_identifier = context_identifier.replace("_", ".")
             staff.identifier = f"%*% {context_identifier}"
         self._container_to_part_assignment = container_to_part_assignment
 
