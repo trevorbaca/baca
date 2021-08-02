@@ -617,6 +617,7 @@ class SegmentMaker:
         "_do_not_force_nonnatural_accidentals",
         "_duration",
         "_environment",
+        "_fermata_extra_offset_y",
         "_fermata_measure_empty_overrides",
         "_fermata_measure_numbers",
         "_fermata_start_offsets",
@@ -709,6 +710,7 @@ class SegmentMaker:
         do_not_check_wellformedness=False,
         do_not_force_nonnatural_accidentals=False,
         do_not_include_layout_ly=False,
+        fermata_extra_offset_y=2.5,
         fermata_measure_empty_overrides=None,
         final_segment=False,
         first_measure_number=None,
@@ -767,6 +769,7 @@ class SegmentMaker:
         self._do_not_include_layout_ly = do_not_include_layout_ly
         self._duration = None
         self._environment = None
+        self._fermata_extra_offset_y = fermata_extra_offset_y
         self._fermata_measure_empty_overrides = fermata_measure_empty_overrides
         self._fermata_measure_numbers = []
         self._fermata_start_offsets = []
@@ -4067,7 +4070,7 @@ class SegmentMaker:
             measure_index = measure_number - 1
             rest = rests[measure_index]
             grob = abjad.override(rest).multi_measure_rest_text
-            grob.extra_offset = (0, 2.5)
+            grob.extra_offset = (0, self.fermata_extra_offset_y)
 
     def _style_phantom_measures(self):
         if self.remove_phantom_measure:
@@ -4871,6 +4874,13 @@ class SegmentMaker:
         Gets environment.
         """
         return self._environment
+
+    @property
+    def fermata_extra_offset_y(self):
+        """
+        Gets fermata extra offset y.
+        """
+        return self._fermata_extra_offset_y
 
     @property
     def fermata_measure_empty_overrides(self):
