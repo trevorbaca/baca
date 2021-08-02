@@ -1101,7 +1101,8 @@ def make_segment_pdf(maker, first_segment=False):
         for message in not_topmost():
             print(message)
     if "--no-pdf" not in sys.argv:
-        lilypond_log_file_path = music_ly_tagged.parent / ".log"
+        log_file_name = "." + music_ly_tagged.name + ".log"
+        lilypond_log_file_path = music_ly_tagged.parent / log_file_name
         with abjad.Timer() as timer:
             print(f"Calling LilyPond on {baca.path.trim(music_ly_tagged)} ...")
             baca_repo_path = pathlib.Path(baca.__file__).parent.parent
