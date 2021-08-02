@@ -637,6 +637,7 @@ class SegmentMaker:
         "_parts_metric_modulation_multiplier",
         "_metronome_marks",
         "_midi",
+        "_moment_markup",
         "_offset_to_measure_number",
         "_persist",
         "_previous_metadata",
@@ -719,6 +720,7 @@ class SegmentMaker:
         margin_markups=None,
         measure_number_extra_offset=None,
         metronome_marks=None,
+        moment_markup=None,
         parts_metric_modulation_multiplier=None,
         phantom=False,
         remove=None,
@@ -783,6 +785,7 @@ class SegmentMaker:
         self._metadata = abjad.OrderedDict()
         self._metronome_marks = metronome_marks
         self._midi = False
+        self._moment_markup = moment_markup
         self._offset_to_measure_number = {}
         if parts_metric_modulation_multiplier is not None:
             assert isinstance(parts_metric_modulation_multiplier, tuple)
@@ -3273,6 +3276,61 @@ class SegmentMaker:
                     tag=tag,
                 )
 
+    def _label_moment_numbers(self):
+        skips = classes.Selection(self.score["Global_Skips"]).skips()
+        if not self.moment_markup:
+            return
+        for i, item in enumerate(self.moment_markup):
+            if len(item) == 2:
+                value, lmn = item
+                color = None
+            elif len(item) == 3:
+                value, lmn, color = item
+            else:
+                raise Exception(item)
+            measure_index = lmn - 1
+            skip = skips[measure_index]
+            tag = _tags.MOMENT_NUMBER
+            tag = tag.append(_site(inspect.currentframe()))
+            if color is not None:
+                string = r"- \baca-start-xnm-colored-left-only"
+                string += f' "{value}" {color}'
+            else:
+                string = r"- \baca-start-xnm-left-only"
+                string += f' "{value}"'
+            start_text_span = abjad.StartTextSpan(
+                command=r"\bacaStartTextSpanXNM", left_text=string
+            )
+            abjad.attach(
+                start_text_span,
+                skip,
+                context="GlobalSkips",
+                deactivate=True,
+                tag=tag,
+            )
+            if 0 < i:
+                tag = _tags.MOMENT_NUMBER
+                tag = tag.append(_site(inspect.currentframe()))
+                stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanXNM")
+                abjad.attach(
+                    stop_text_span,
+                    skip,
+                    context="GlobalSkips",
+                    deactivate=True,
+                    tag=tag,
+                )
+        skip = skips[-1]
+        tag = _tags.MOMENT_NUMBER
+        tag = tag.append(_site(inspect.currentframe()))
+        stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanXNM")
+        abjad.attach(
+            stop_text_span,
+            skip,
+            context="GlobalSkips",
+            deactivate=True,
+            tag=tag,
+        )
+
     def _label_stage_numbers(self):
         skips = classes.Selection(self.score["Global_Skips"]).skips()
         if not self.stage_markup:
@@ -5134,6 +5192,13 @@ class SegmentMaker:
         return self._midi
 
     @property
+    def moment_markup(self):
+        """
+        Gets moment markup.
+        """
+        return self._moment_markup
+
+    @property
     def parts_metric_modulation_multiplier(self):
         """
         Gets parts metric modulation multiplier.
@@ -5848,6 +5913,7 @@ class SegmentMaker:
             self._make_global_skips()
             self._label_measure_numbers()
             self._label_stage_numbers()
+            self._label_moment_numbers()
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
         if not do_not_print_timing and self.environment != "docs":

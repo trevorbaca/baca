@@ -880,6 +880,132 @@ baca-colored-bracketed-mixed-number-metric-modulation-tuplet-rhs = #(
     #}
     )
 
+%%% MOMENT NUMBER SPANNER %%%
+
+moment-number-extra-offset = #'(0 . 16)
+
+bacaStartTextSpanXNM = #(
+    make-music 'TextSpanEvent 'span-direction START 'spanner-id "XNM"
+    )
+
+bacaStopTextSpanXNM = #(
+    make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "XNM"
+    )
+
+#(define-markup-command
+    (baca-xnm-left-markup layout props xnm)
+    (string?)
+    (interpret-markup layout props
+        #{
+        \markup
+        \fontsize #-3
+        \upright
+        \concat { #xnm \hspace #0.75 }
+        #}
+        )
+    )
+
+#(define-markup-command
+    (baca-xnm-colored-left-markup layout props xnm color)
+    (string? color?)
+    (interpret-markup layout props
+        #{
+        \markup
+        \with-color #color
+        \fontsize #-3
+        \upright
+        \concat { #xnm \hspace #0.75 }
+        #}
+        )
+    )
+
+baca-xnm-left-text-tweak = #(
+    define-music-function
+    (parser location left music)
+    (string? ly:music?)
+    #{
+    \tweak bound-details.left.text \markup \baca-xnm-left-markup #left
+    $music
+    #}
+    )
+
+baca-xnm-colored-left-text-tweak = #(
+    define-music-function
+    (parser location left color music)
+    (string? color? ly:music?)
+    #{
+    \tweak bound-details.left.text \markup
+        \baca-xnm-colored-left-markup #left #color
+    $music
+    #}
+    )
+
+#(define-markup-command
+    (baca-xnm-right-markup layout props xnm)
+    (string?)
+    (interpret-markup layout props
+        #{
+        \markup 
+        \with-color #(x11-color 'red)
+        \fontsize #-3
+        \upright
+        #xnm
+        #}
+        )
+    )
+
+baca-xnm-right-text-tweak = #(
+    define-music-function
+    (parser location right music)
+    (string? ly:music?)
+    #{
+    \tweak bound-details.right.text \markup \baca-xnm-right-markup #right
+    $music
+    #}
+    ) 
+
+baca-start-xnm-left-only = #(
+    define-music-function
+    (parser location left music)
+    (string? ly:music?)
+    #{
+    - \abjad-dashed-line-with-hook
+    - \baca-xnm-left-text-tweak #left
+    - \tweak extra-offset #moment-number-extra-offset
+    - \tweak bound-details.right.padding 1.25
+    $music
+    #}
+    )
+
+baca-start-xnm-colored-left-only = #(
+    define-music-function
+    (parser location left color music)
+    (string? color? ly:music?)
+    #{
+    - \abjad-dashed-line-with-hook
+    - \baca-xnm-colored-left-text-tweak #left #color
+    - \tweak extra-offset #moment-number-extra-offset
+    - \tweak bound-details.right.padding 1.25
+    - \tweak color #color
+    $music
+    #}
+    )
+
+baca-start-xnm-both = #(
+    define-music-function
+    (parser location left right music)
+    (string? string? ly:music?)
+    #{
+    - \abjad-dashed-line-with-hook
+    - \baca-xnm-left-text-tweak #left
+    - \baca-xnm-right-text-tweak #right
+    - \tweak extra-offset #moment-number-extra-offset
+    - \tweak bound-details.right.padding 0
+    - \tweak bound-details.right.stencil-align-dir-y #center
+    $music
+    #}
+    )
+
 %%% PITCH ANNOTATION SPANNER %%%
 
 bacaStartTextSpanPitchAnnotation = #(
@@ -1035,7 +1161,7 @@ bacaStopTextSpanSNM = #(
         \markup
         \fontsize #-3
         \upright
-        \concat { #snm \hspace #-0.25 }
+        \concat { #snm \hspace #0.75 }
         #}
         )
     )
@@ -1049,7 +1175,7 @@ bacaStopTextSpanSNM = #(
         \with-color #color
         \fontsize #-3
         \upright
-        \concat { #snm \hspace #-0.25 }
+        \concat { #snm \hspace #0.75 }
         #}
         )
     )
@@ -1104,7 +1230,7 @@ baca-start-snm-left-only = #(
     (parser location left music)
     (string? ly:music?)
     #{
-    - \abjad-solid-line-with-hook
+    - \abjad-dashed-line-with-hook
     - \baca-snm-left-text-tweak #left
     - \tweak extra-offset #stage-number-extra-offset
     - \tweak bound-details.right.padding 1.25
@@ -1117,7 +1243,7 @@ baca-start-snm-colored-left-only = #(
     (parser location left color music)
     (string? color? ly:music?)
     #{
-    - \abjad-solid-line-with-hook
+    - \abjad-dashed-line-with-hook
     - \baca-snm-colored-left-text-tweak #left #color
     - \tweak extra-offset #stage-number-extra-offset
     - \tweak bound-details.right.padding 1.25
@@ -1131,7 +1257,7 @@ baca-start-snm-both = #(
     (parser location left right music)
     (string? string? ly:music?)
     #{
-    - \abjad-solid-line-with-hook
+    - \abjad-dashed-line-with-hook
     - \baca-snm-left-text-tweak #left
     - \baca-snm-right-text-tweak #right
     - \tweak extra-offset #stage-number-extra-offset
