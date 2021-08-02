@@ -5926,9 +5926,7 @@ class SegmentMaker:
             self._check_wellformedness()
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
-        if self.environment == "layout" or (
-            not do_not_print_timing and self.environment != "docs"
-        ):
+        if not do_not_print_timing and self.environment != "docs":
             print(f"Postprocessing {count} {seconds} ...")
         with abjad.Timer() as timer:
             method = getattr(self.score, "_update_now")

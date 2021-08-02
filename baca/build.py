@@ -334,7 +334,6 @@ def _run_segment_maker(maker, first_segment=False, midi=False):
             previous_persist = eval(lines)
         else:
             previous_persist = None
-    print("Running segment-maker ...")
     if first_segment is True:
         pass
     else:
@@ -352,8 +351,7 @@ def _run_segment_maker(maker, first_segment=False, midi=False):
     segment_maker_runtime = int(timer.elapsed_time)
     count = segment_maker_runtime
     counter = abjad.String("second").pluralize(count)
-    message = f"Segment-maker runtime {count} {counter} ..."
-    print(message)
+    print(f"Segment-maker runtime {count} {counter} ...")
     runtime = (count, counter)
     return metadata, persist, lilypond_file, runtime
 
@@ -671,8 +669,7 @@ def handle_part_tags(directory):
     )
     part_identifier = _parse_part_identifier(music_ly)
     if part_identifier is None:
-        message = f"No part identifier found in {baca.path.trim(music_ly)} ..."
-        print(message)
+        print(f"No part identifier found in {baca.path.trim(music_ly)} ...")
         sys.exit()
     parts_directory_name = abjad.String(parts_directory.name)
     parts_directory_name = parts_directory_name.to_shout_case()
@@ -961,7 +958,8 @@ def make_layout_ly(layout_py, breaks, spacing=None, *, part_identifier=None):
     count = len(bols)
     numbers = abjad.String("number").pluralize(count)
     items = ", ".join([str(_) for _ in bols])
-    print(f"Writing BOL measure {numbers} {items} to metadata ...")
+    metadata = layout_directory / "__metadata__"
+    print(f"Writing BOL measure {numbers} {items} to {baca.path.trim(metadata)} ...")
     if layout_directory.name.endswith("-parts"):
         if document_name is not None:
             part_dictionary = baca.path.get_metadatum(
@@ -994,13 +992,14 @@ def make_segment_pdf(maker, first_segment=False):
     layout_py = segment_directory / "layout.py"
     if "--no-layout" not in sys.argv[1:] and layout_py.is_file():
         os.system(f"python {layout_py}")
-    print(f"Making segment {segment_directory.name} PDF ...")
     result = _run_segment_maker(maker, first_segment=first_segment)
     metadata, persist, lilypond_file, runtime = result
-    print("Writing __metadata__ ...")
+    metadata_file = segment_directory / "__metadata__"
+    print(f"Writing {baca.path.trim(metadata_file)} ...")
     baca.path.write_metadata_py(segment_directory, maker.metadata)
     os.system("black --target-version=py38 __metadata__ 1>/dev/null 2>&1")
-    print("Writing __persist__ ...")
+    persist_file = segment_directory / "__persist__"
+    print(f"Writing {baca.path.trim(persist_file)} ...")
     baca.path.write_metadata_py(
         segment_directory,
         maker.persist,
@@ -1025,8 +1024,7 @@ def make_segment_pdf(maker, first_segment=False):
     abjad_format_time = int(result[1])
     count = abjad_format_time
     counter = abjad.String("second").pluralize(count)
-    message = f"Abjad format time {count} {counter} ..."
-    print(message)
+    print(f"Abjad format time {count} {counter} ...")
     abjad_format_time = (count, counter)
     if "Global_Skips" in lilypond_file:
         context = lilypond_file["Global_Skips"]
@@ -1072,13 +1070,9 @@ def make_segment_pdf(maker, first_segment=False):
             message += f" in {baca.path.trim(layout_ly_tagged)} ..."
             print(message)
             if layout_time_signatures == time_signatures:
-                message = "Music time signatures match"
-                message += " layout time signatures ..."
-                print(message)
+                print("Music time signatures match layout time signatures ...")
             else:
-                message = "Music time signatures do not match"
-                message += " layout time signatures ..."
-                print(message)
+                print("Music time signatures do not match layout time signatures ...")
                 print(f"Remaking {baca.path.trim(layout_ly_tagged)} ...")
                 os.system(f"python {layout_py}")
                 counter = abjad.String("measure").pluralize(measure_count)
@@ -1109,7 +1103,7 @@ def make_segment_pdf(maker, first_segment=False):
     if "--no-pdf" not in sys.argv:
         lilypond_log_file_path = music_ly_tagged.parent / ".log"
         with abjad.Timer() as timer:
-            print("Running LilyPond ...")
+            print(f"Calling LilyPond on {baca.path.trim(music_ly_tagged)} ...")
             baca_repo_path = pathlib.Path(baca.__file__).parent.parent
             flags = f"--include={baca_repo_path}/lilypond"
             abjad_repo_path = pathlib.Path(abjad.__file__).parent.parent
