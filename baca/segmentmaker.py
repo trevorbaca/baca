@@ -1349,17 +1349,15 @@ class SegmentMaker:
         container_to_part_assignment = abjad.OrderedDict()
         context_name_counts = {}
         for context in contexts:
-            if context.name is None:
-                raise Exception("all contexts must be named:\n    {repr(context)}")
+            assert context.name is not None, repr(context)
             count = context_name_counts.get(context.name, 0)
             if count == 0:
                 suffixed_context_name = context.name
             else:
-                suffix = abjad.String.base_26(count)
-                suffixed_context_name = f"{context.name}_{suffix}"
+                suffixed_context_name = f"{context.name}.{count}"
             context_name_counts[context.name] = count + 1
             if segment_name:
-                context_identifier = f"{segment_name}_{suffixed_context_name}"
+                context_identifier = f"{segment_name}.{suffixed_context_name}"
             else:
                 context_identifier = suffixed_context_name
             context_identifier = context_identifier.replace("_", ".")
@@ -1374,11 +1372,11 @@ class SegmentMaker:
                     globals_ = globals()
                     globals_["PartAssignment"] = _parts.PartAssignment
                     part = eval(part, globals_)
-                    suffix = abjad.String().base_26(part_container_count).lower()
-                    container_identifier = f"{context_identifier}_{suffix}"
+                    container_identifier = (
+                        f"{context_identifier}.{part_container_count}"
+                    )
                     container_identifier = abjad.String(container_identifier)
                     assert "_" not in container_identifier, repr(container_identifier)
-                    assert container_identifier.is_lilypond_identifier()
                     assert container_identifier not in container_to_part_assignment
                     timespan = container._get_timespan()
                     pair = (part, timespan)
@@ -1386,7 +1384,7 @@ class SegmentMaker:
                     container.identifier = f"%*% {container_identifier}"
         for staff in abjad.iterate(self.score).components(abjad.Staff):
             if segment_name:
-                context_identifier = f"{segment_name}_{staff.name}"
+                context_identifier = f"{segment_name}.{staff.name}"
             else:
                 context_identifier = staff.name
             context_identifier = context_identifier.replace("_", ".")
