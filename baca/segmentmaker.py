@@ -650,6 +650,7 @@ class SegmentMaker:
         "_segment_bol_measure_numbers",
         "_segment_duration",
         "_segment_name",
+        "_segment_number",
         "_skips_instead_of_rests",
         "_spacing",
         "_spacing_extra_offset",
@@ -809,6 +810,7 @@ class SegmentMaker:
         self._segment_bol_measure_numbers = []
         # TODO: harmonize _duration, _semgent_duration
         self._segment_duration = None
+        self._segment_number = None
         self._skips_instead_of_rests = skips_instead_of_rests
         self._spacing = spacing
         self._spacing_extra_offset = spacing_extra_offset
@@ -1328,9 +1330,9 @@ class SegmentMaker:
             self, "test_container_identifiers", False
         ):
             return
-        segment_name = self.segment_name or ""
-        if segment_name:
-            segment_name = f"segment_{segment_name}"
+        segment_name = self.segment_number
+        assert segment_name, repr(segment_name)
+        segment_name = f"segment.{segment_name}"
         contexts = []
         try:
             context = self.score["Global_Skips"]
@@ -5270,6 +5272,13 @@ class SegmentMaker:
         return self._segment_name
 
     @property
+    def segment_number(self):
+        """
+        Gets segment number.
+        """
+        return self._segment_number
+
+    @property
     def skips_instead_of_rests(self):
         r"""
         Is true when segment fills empty measures with skips.
@@ -5902,6 +5911,7 @@ class SegmentMaker:
         previous_metadata=None,
         previous_persist=None,
         segment_name=None,
+        segment_number=None,
     ):
         """
         Runs segment-maker.
@@ -5915,6 +5925,7 @@ class SegmentMaker:
         self._previous_metadata = abjad.OrderedDict(previous_metadata)
         self._previous_persist = abjad.OrderedDict(previous_persist)
         self._segment_name = segment_name
+        self._segment_number = segment_number
         with abjad.Timer() as timer:
             self._make_score()
             self._make_lilypond_file()

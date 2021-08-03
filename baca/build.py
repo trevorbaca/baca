@@ -347,6 +347,7 @@ def _run_segment_maker(maker, first_segment=False, midi=False):
             previous_metadata=previous_metadata,
             previous_persist=previous_persist,
             segment_name=segment_directory.name,
+            segment_number=segment_directory.name,
         )
     segment_maker_runtime = int(timer.elapsed_time)
     count = segment_maker_runtime
