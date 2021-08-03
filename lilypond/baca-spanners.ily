@@ -900,7 +900,7 @@ bacaStopTextSpanXNM = #(
         \markup
         \fontsize #-3
         \upright
-        \concat { #xnm \hspace #0.75 }
+        \concat { #xnm \hspace #-0.25 }
         #}
         )
     )
@@ -914,7 +914,7 @@ bacaStopTextSpanXNM = #(
         \with-color #color
         \fontsize #-3
         \upright
-        \concat { #xnm \hspace #0.75 }
+        \concat { #xnm \hspace #-0.25 }
         #}
         )
     )
@@ -969,7 +969,7 @@ baca-start-xnm-left-only = #(
     (parser location left music)
     (string? ly:music?)
     #{
-    - \abjad-dashed-line-with-hook
+    - \abjad-solid-line-with-hook
     - \baca-xnm-left-text-tweak #left
     - \tweak extra-offset #moment-number-extra-offset
     - \tweak bound-details.right.padding 1.25
@@ -982,7 +982,7 @@ baca-start-xnm-colored-left-only = #(
     (parser location left color music)
     (string? color? ly:music?)
     #{
-    - \abjad-dashed-line-with-hook
+    - \abjad-solid-line-with-hook
     - \baca-xnm-colored-left-text-tweak #left #color
     - \tweak extra-offset #moment-number-extra-offset
     - \tweak bound-details.right.padding 1.25
@@ -996,7 +996,7 @@ baca-start-xnm-both = #(
     (parser location left right music)
     (string? string? ly:music?)
     #{
-    - \abjad-dashed-line-with-hook
+    - \abjad-solid-line-with-hook
     - \baca-xnm-left-text-tweak #left
     - \baca-xnm-right-text-tweak #right
     - \tweak extra-offset #moment-number-extra-offset
@@ -1161,7 +1161,7 @@ bacaStopTextSpanSNM = #(
         \markup
         \fontsize #-3
         \upright
-        \concat { #snm \hspace #0.75 }
+        \concat { #snm \hspace #-0.25 }
         #}
         )
     )
@@ -1175,7 +1175,7 @@ bacaStopTextSpanSNM = #(
         \with-color #color
         \fontsize #-3
         \upright
-        \concat { #snm \hspace #0.75 }
+        \concat { #snm \hspace #-0.25 }
         #}
         )
     )
@@ -1230,7 +1230,7 @@ baca-start-snm-left-only = #(
     (parser location left music)
     (string? ly:music?)
     #{
-    - \abjad-dashed-line-with-hook
+    - \abjad-solid-line-with-hook
     - \baca-snm-left-text-tweak #left
     - \tweak extra-offset #stage-number-extra-offset
     - \tweak bound-details.right.padding 1.25
@@ -1243,7 +1243,7 @@ baca-start-snm-colored-left-only = #(
     (parser location left color music)
     (string? color? ly:music?)
     #{
-    - \abjad-dashed-line-with-hook
+    - \abjad-solid-line-with-hook
     - \baca-snm-colored-left-text-tweak #left #color
     - \tweak extra-offset #stage-number-extra-offset
     - \tweak bound-details.right.padding 1.25
@@ -1257,7 +1257,7 @@ baca-start-snm-both = #(
     (parser location left right music)
     (string? string? ly:music?)
     #{
-    - \abjad-dashed-line-with-hook
+    - \abjad-solid-line-with-hook
     - \baca-snm-left-text-tweak #left
     - \baca-snm-right-text-tweak #right
     - \tweak extra-offset #stage-number-extra-offset
