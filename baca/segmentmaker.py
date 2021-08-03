@@ -1330,9 +1330,8 @@ class SegmentMaker:
             self, "test_container_identifiers", False
         ):
             return
-        segment_name = self.segment_number
-        assert segment_name, repr(segment_name)
-        segment_name = f"segment.{segment_name}"
+        assert self.segment_number, repr(self.segment_number)
+        segment_name = f"segment.{self.segment_number}"
         contexts = []
         try:
             context = self.score["Global_Skips"]

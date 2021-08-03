@@ -897,6 +897,7 @@ def make_layout_ly(layout_py, breaks, spacing=None, *, part_identifier=None):
         environment="layout",
         first_segment=True,
         segment_name=segment_name,
+        segment_number=segment_name,
     )
     context = lilypond_file["Global_Skips"]
     context.lilypond_type = "PageLayout"
