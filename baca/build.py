@@ -346,7 +346,6 @@ def _run_segment_maker(maker, first_segment=False, midi=False):
             persist=persist,
             previous_metadata=previous_metadata,
             previous_persist=previous_persist,
-            segment_name=segment_directory.name,
             segment_number=segment_directory.name,
         )
     segment_maker_runtime = int(timer.elapsed_time)
@@ -887,17 +886,16 @@ def make_layout_ly(layout_py, breaks, spacing=None, *, part_identifier=None):
         spacing=spacing,
         time_signatures=time_signatures,
     )
-    # TODO: remove segment_name here because it's never necessary
+    # TODO: can segment_number be removed from all layout files?
     if layout_directory.parent.name == "segments":
-        segment_name = layout_directory.name
+        segment_number = layout_directory.name
     else:
-        segment_name = None
+        segment_number = None
     lilypond_file = maker.run(
         do_not_print_timing=True,
         environment="layout",
         first_segment=True,
-        segment_name=segment_name,
-        segment_number=segment_name,
+        segment_number=segment_number,
     )
     context = lilypond_file["Global_Skips"]
     context.lilypond_type = "PageLayout"

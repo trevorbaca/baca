@@ -649,7 +649,6 @@ class SegmentMaker:
         "_score_template",
         "_segment_bol_measure_numbers",
         "_segment_duration",
-        "_segment_name",
         "_segment_number",
         "_skips_instead_of_rests",
         "_spacing",
@@ -1331,7 +1330,7 @@ class SegmentMaker:
         ):
             return
         assert self.segment_number, repr(self.segment_number)
-        segment_name = f"segment.{self.segment_number}"
+        segment_number = f"segment.{self.segment_number}"
         contexts = []
         try:
             context = self.score["Global_Skips"]
@@ -1357,8 +1356,8 @@ class SegmentMaker:
             else:
                 suffixed_context_name = f"{context.name}.{count}"
             context_name_counts[context.name] = count + 1
-            if segment_name:
-                context_identifier = f"{segment_name}.{suffixed_context_name}"
+            if segment_number:
+                context_identifier = f"{segment_number}.{suffixed_context_name}"
             else:
                 context_identifier = suffixed_context_name
             context_identifier = context_identifier.replace("_", ".")
@@ -1384,8 +1383,8 @@ class SegmentMaker:
                     container_to_part_assignment[container_identifier] = pair
                     container.identifier = f"%*% {container_identifier}"
         for staff in abjad.iterate(self.score).components(abjad.Staff):
-            if segment_name:
-                context_identifier = f"{segment_name}.{staff.name}"
+            if segment_number:
+                context_identifier = f"{segment_number}.{staff.name}"
             else:
                 context_identifier = staff.name
             context_identifier = context_identifier.replace("_", ".")
@@ -5264,13 +5263,6 @@ class SegmentMaker:
         return self._score_template
 
     @property
-    def segment_name(self):
-        """
-        Gets segment name.
-        """
-        return self._segment_name
-
-    @property
     def segment_number(self):
         """
         Gets segment number.
@@ -5909,7 +5901,6 @@ class SegmentMaker:
         persist=None,
         previous_metadata=None,
         previous_persist=None,
-        segment_name=None,
         segment_number=None,
     ):
         """
@@ -5923,7 +5914,6 @@ class SegmentMaker:
         self._persist = abjad.OrderedDict(persist)
         self._previous_metadata = abjad.OrderedDict(previous_metadata)
         self._previous_persist = abjad.OrderedDict(previous_persist)
-        self._segment_name = segment_name
         self._segment_number = segment_number
         with abjad.Timer() as timer:
             self._make_score()

@@ -1464,7 +1464,7 @@ class PartManifest:
 ### FUNCTIONS ###
 
 
-def _global_rest_identifier(segment_name):
+def _global_rest_identifier(segment_number):
     """
     Gets global rest identifier.
 
@@ -1477,8 +1477,8 @@ def _global_rest_identifier(segment_name):
         'segment.02.Global.Rests'
 
     """
-    identifier = abjad.String(f"segment_{segment_name}_Global_Rests")
-    identifier = identifier.replace("_", ".")
+    identifier = abjad.String(f"segment.{segment_number}.Global.Rests")
+    assert "_" not in identifier, repr(identifier)
     return identifier
 
 
@@ -1579,7 +1579,7 @@ def part_to_identifiers(path, part, container_to_part_assignment):
     if not dictionary:
         message = "empty container-to-part-assignment dictionary"
         return message
-    for i, (segment_name, dictionary_) in enumerate(dictionary.items()):
+    for i, (segment_number, dictionary_) in enumerate(dictionary.items()):
         pairs = []
         for identifier, (part_assignment, timespan) in dictionary_.items():
             if part in part_assignment:
@@ -1589,6 +1589,6 @@ def part_to_identifiers(path, part, container_to_part_assignment):
             identifiers_ = [_[0] for _ in pairs]
             identifiers.extend(identifiers_)
         else:
-            identifier = _global_rest_identifier(segment_name)
+            identifier = _global_rest_identifier(segment_number)
             identifiers.append(identifier)
     return identifiers
