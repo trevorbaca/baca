@@ -1,14 +1,6 @@
 """
 Tags.
-
-..  container:: example
-
-    >>> baca.tags.SHOW_TO_JOIN_BROKEN_SPANNERS
-    Tag('SHOW_TO_JOIN_BROKEN_SPANNERS')
-
 """
-import typing
-
 import abjad
 
 ### BAR EXTENT ###
@@ -43,6 +35,7 @@ ONE_VOICE_COMMAND = abjad.Tag("ONE_VOICE_COMMAND")
 ### DOCUMENT ANNOTATIONS ###
 
 BREAK = abjad.Tag("BREAK")
+COLORED_PHRASING_SLUR = abjad.Tag("COLORED_PHRASING_SLUR")
 CLOCK_TIME = abjad.Tag("CLOCK_TIME")
 EMPTY_START_BAR = abjad.Tag("EMPTY_START_BAR")
 FERMATA_MEASURE = abjad.Tag("FERMATA_MEASURE")
@@ -808,7 +801,7 @@ def persistent_indicator_color_expression_tags(path=None):
         Tag('REAPPLIED_TIME_SIGNATURE')
 
     """
-    tags: typing.List[abjad.Tag] = []
+    tags = []
     tags.extend(clef_color_tags(path))
     tags.extend(dynamic_color_tags(path))
     tags.extend(instrument_color_tags(path))
@@ -858,7 +851,7 @@ def persistent_indicator_color_suppression_tags(path=None):
         Tag('REDUNDANT_METRONOME_MARK')
 
     """
-    tags: typing.List[abjad.Tag] = []
+    tags = []
     tags.extend(metronome_mark_color_suppression_tags())
     return tags
 
