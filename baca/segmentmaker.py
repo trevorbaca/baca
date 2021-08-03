@@ -1354,7 +1354,7 @@ class SegmentMaker:
             if count == 0:
                 suffixed_context_name = context.name
             else:
-                suffixed_context_name = f"{context.name}.{count}"
+                suffixed_context_name = f"{context.name}.count.{count}"
             context_name_counts[context.name] = count + 1
             if segment_number:
                 context_identifier = f"{segment_number}.{suffixed_context_name}"
@@ -1373,7 +1373,7 @@ class SegmentMaker:
                     globals_["PartAssignment"] = _parts.PartAssignment
                     part = eval(part, globals_)
                     container_identifier = (
-                        f"{context_identifier}.{part_container_count}"
+                        f"{context_identifier}.part.{part_container_count}"
                     )
                     container_identifier = abjad.String(container_identifier)
                     assert "_" not in container_identifier, repr(container_identifier)

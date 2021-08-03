@@ -3,8 +3,6 @@ Score template library.
 """
 import typing
 
-import roman
-
 import abjad
 
 from . import const
@@ -39,8 +37,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
     def _assert_lilypond_identifiers(score):
         for context in abjad.iterate(score).components(abjad.Context):
             if not abjad.String(context.name).is_lilypond_identifier():
-                message = f"invalid LilyPond identifier: {context.name!r}"
-                raise Exception(message)
+                raise Exception(f"invalid LilyPond identifier: {context.name!r}")
 
     @staticmethod
     def _assert_matching_custom_context_names(score):
@@ -85,10 +82,6 @@ class ScoreTemplate(abjad.ScoreTemplate):
     @staticmethod
     def _set_square_delimiter(staff_group):
         abjad.setting(staff_group).system_start_delimiter = "#'SystemStartSquare"
-
-    @staticmethod
-    def _to_roman(n):
-        return roman.toRoman(n)
 
     def _validate_voice_names(self, score):
         voice_names = []
