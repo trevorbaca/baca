@@ -1,4 +1,5 @@
 import copy
+import importlib
 import inspect
 
 import abjad
@@ -2541,6 +2542,8 @@ class SegmentMaker:
                     continue
                 if isinstance(indicator, abjad.StopBeam):
                     continue
+                if isinstance(indicator, abjad.StopPhrasingSlur):
+                    continue
                 if isinstance(indicator, abjad.StopPianoPedal):
                     continue
                 if isinstance(indicator, abjad.StopSlur):
@@ -3620,8 +3623,7 @@ class SegmentMaker:
                 abjad.setting(score).current_bar_number = first_measure_number
 
     def _memento_to_indicator(self, memento):
-        import baca
-
+        baca = importlib.import_module("baca")
         if memento.manifest is not None:
             dictionary = getattr(self, memento.manifest)
             if dictionary is None:
