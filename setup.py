@@ -8,8 +8,6 @@ if __name__ == "__main__":
         description="Trevor Bača's Abjad library.",
         install_requires=[
             "abjad",
-            "mypy",
-            "roman",
             "sphinx",
             "sphinx-rtd-theme",
             "uqbar>=0.2.13",

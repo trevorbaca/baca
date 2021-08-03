@@ -21,7 +21,6 @@ isort-check:
 	--project=abjadext \
 	--skip=baca/__init__.py \
 	--thirdparty=ply \
-	--thirdparty=roman \
 	--thirdparty=uqbar \
 	--trailing-comma \
 	--use-parentheses \
@@ -36,7 +35,6 @@ isort-reformat:
 	--project=abjadext \
 	--skip=baca/__init__.py \
 	--thirdparty=ply \
-	--thirdparty=roman \
 	--thirdparty=uqbar \
 	--trailing-comma \
 	--use-parentheses \
