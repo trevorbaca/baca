@@ -403,6 +403,7 @@ class Command:
             "OTTAVA",
             "PEDAL",
             "PERSISTENT_OVERRIDE",
+            "PHRASING_SLUR",
             "REPEAT_TIE",
             "SLUR",
             "STAFF_LINES",

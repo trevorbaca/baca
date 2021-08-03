@@ -585,6 +585,7 @@ def ottava_bassa(
 def slur(
     *tweaks: abjad.TweakInterface,
     map: abjad.Expression = None,
+    phrasing_slur=False,
     selector=lambda _: classes.Selection(_).tleaves(),
     start_slur: abjad.StartSlur = None,
     stop_slur: abjad.StopSlur = None,
@@ -671,8 +672,12 @@ def slur(
             >>
 
     """
-    start_slur = start_slur or abjad.StartSlur()
-    stop_slur = stop_slur or abjad.StopSlur()
+    if phrasing_slur is True:
+        start_slur = start_slur or abjad.StartPhrasingSlur()
+        stop_slur = stop_slur or abjad.StopPhrasingSlur()
+    else:
+        start_slur = start_slur or abjad.StartSlur()
+        stop_slur = stop_slur or abjad.StopSlur()
     return SpannerIndicatorCommand(
         map=map,
         selector=selector,
