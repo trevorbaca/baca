@@ -886,16 +886,10 @@ def make_layout_ly(layout_py, breaks, spacing=None, *, part_identifier=None):
         spacing=spacing,
         time_signatures=time_signatures,
     )
-    # TODO: can segment_number be removed from all layout files?
-    if layout_directory.parent.name == "segments":
-        segment_number = layout_directory.name
-    else:
-        segment_number = None
     lilypond_file = maker.run(
         do_not_print_timing=True,
         environment="layout",
         first_segment=True,
-        segment_number=segment_number,
     )
     context = lilypond_file["Global_Skips"]
     context.lilypond_type = "PageLayout"
