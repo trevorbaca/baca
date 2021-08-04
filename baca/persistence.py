@@ -9,10 +9,10 @@ r"""
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         [1, 0, (11,)],
-        ...         [2, 15, (11,)],
-        ...         ),
-        ...     )
+        ...         baca.system((11,), measure=1, y_offset=0),
+        ...         baca.system((11,), measure=2, y_offset=15),
+        ...     ),
+        ... )
         >>> score_template = baca.SingleStaffScoreTemplate()
         >>> triple = ('Music_Staff', 'default_clef', abjad.Clef('treble'))
         >>> score_template.defaults.append(triple)
@@ -138,10 +138,10 @@ r"""
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         [1, 0, (11,)],
-        ...         [2, 15, (11,)],
-        ...         ),
-        ...     )
+        ...         baca.system((11,), measure=1, y_offset=0),
+        ...         baca.system((11,), measure=2, y_offset=15),
+        ...     ),
+        ... )
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -266,10 +266,10 @@ r"""
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         [1, 0, (11,)],
-        ...         [2, 15, (11,)],
-        ...         ),
-        ...     )
+        ...         baca.system((11,), measure=1, y_offset=0),
+        ...         baca.system((11,), measure=2, y_offset=15),
+        ...     ),
+        ... )
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -411,10 +411,10 @@ r"""
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         [1, 0, (11,)],
-        ...         [2, 15, (11,)],
-        ...         ),
-        ...     )
+        ...         baca.system((11,), measure=1, y_offset=0),
+        ...         baca.system((11,), measure=2, y_offset=15),
+        ...     ),
+        ... )
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -553,10 +553,10 @@ r"""
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         [1, 0, (11,)],
-        ...         [3, 15, (11,)],
-        ...         ),
-        ...     )
+        ...         baca.system((11,), measure=1, y_offset=0),
+        ...         baca.system((11,), measure=3, y_offset=15),
+        ...     ),
+        ... )
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -696,10 +696,10 @@ r"""
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         [1, 0, (11,)],
-        ...         [2, 15, (11,)],
-        ...         ),
-        ...     )
+        ...         baca.system((11,), measure=1, y_offset=0),
+        ...         baca.system((11,), measure=2, y_offset=15),
+        ...     ),
+        ... )
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -1890,10 +1890,10 @@ r"""
         >>> instruments['Piccolo'] = abjad.Piccolo()
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         [1, 0, (11,)],
-        ...         [2, 15, (11,)],
-        ...         ),
-        ...     )
+        ...         baca.system((11,), measure=1, y_offset=0),
+        ...         baca.system((11,), measure=2, y_offset=15),
+        ...     ),
+        ... )
 
     ..  container:: example
 
@@ -3380,10 +3380,10 @@ r"""
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         [1, 0, (11,)],
-        ...         [3, 15, (11,)],
-        ...         ),
-        ...     )
+        ...         baca.system((11,), measure=1, y_offset=0),
+        ...         baca.system((11,), measure=3, y_offset=15),
+        ...     ),
+        ... )
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
@@ -3779,10 +3779,10 @@ r"""
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         [1, 0, (11,)],
-        ...         [2, 15, (11,)],
-        ...         ),
-        ...     )
+        ...         baca.system((11,), measure=1, y_offset=0),
+        ...         baca.system((11,), measure=2, y_offset=15),
+        ...     ),
+        ... )
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
@@ -4174,10 +4174,10 @@ r"""
         ...     )
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         [1, 0, (11,)],
-        ...         [2, 15, (11,)],
-        ...         ),
-        ...     )
+        ...         baca.system((11,), measure=1, y_offset=0),
+        ...         baca.system((11,), measure=2, y_offset=15),
+        ...     ),
+        ... )
 
     ..  container:: example
 
@@ -5750,10 +5750,10 @@ r"""
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         [1, 0, (11,)],
-        ...         [3, 15, (11,)],
-        ...         ),
-        ...     )
+        ...         baca.system((11,), measure=1, y_offset=0),
+        ...         baca.system((11,), measure=3, y_offset=15),
+        ...     ),
+        ... )
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
@@ -6185,10 +6185,10 @@ r"""
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         [1, 0, (11,)],
-        ...         [2, 15, (11,)],
-        ...         ),
-        ...     )
+        ...         baca.system((11,), measure=1, y_offset=0),
+        ...         baca.system((11,), measure=2, y_offset=15),
+        ...     ),
+        ... )
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
@@ -6593,10 +6593,10 @@ r"""
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         [1, 0, (11,)],
-        ...         [2, 15, (11,)],
-        ...         ),
-        ...     )
+        ...         baca.system((11,), measure=1, y_offset=0),
+        ...         baca.system((11,), measure=2, y_offset=15),
+        ...     ),
+        ... )
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
@@ -6765,7 +6765,11 @@ r"""
 
     ..  container:: example
 
-        >>> breaks = baca.breaks(baca.page([1, 4, (8,)]))
+        >>> breaks = baca.breaks(
+        ...     baca.page(
+        ...         baca.system((8,), measure=1, y_offset=4),
+        ...     ),
+        ... )
         >>> metronome_marks = abjad.OrderedDict()
         >>> metronome_marks['90'] = abjad.MetronomeMark((1, 4), 90)
         >>> metronome_marks['112'] = abjad.MetronomeMark((1, 4), 112)
@@ -8671,7 +8675,11 @@ r"""
 
     ..  container:: example
 
-        >>> breaks = baca.breaks(baca.page([1, 4, (8,)]))
+        >>> breaks = baca.breaks(
+        ...     baca.page(
+        ...         baca.system((8,), measure=1, y_offset=4),
+        ...     ),
+        ... )
         >>> metronome_marks = abjad.OrderedDict()
         >>> metronome_marks['90'] = abjad.MetronomeMark((1, 4), 90)
         >>> metronome_marks['112'] = abjad.MetronomeMark((1, 4), 112)

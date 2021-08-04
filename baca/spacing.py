@@ -22,8 +22,12 @@ class BreakMeasureMap:
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.StringTrioScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8), (4, 8)],
-        ...     breaks=baca.breaks(baca.page([1, 0, (10, 20,)])),
-        ...     )
+        ...     breaks=baca.breaks(
+        ...         baca.page(
+        ...             baca.system((10, 20), measure=1, y_offset=0),
+        ...         ),
+        ...     ),
+        ... )
 
         >>> maker(
         ...     'Violin_Music_Voice',
@@ -1852,8 +1856,11 @@ class HorizontalSpacingSpecifier:
         ..  container:: example
 
             >>> breaks = baca.breaks(
-            ...     baca.page([1, 15, (10, 20)], [9, 115, (10, 20)])
-            ...     )
+            ...     baca.page(
+            ...         baca.system((10, 20), measure=1, y_offset=15),
+            ...         baca.system((10, 20), measure=9, y_offset=115),
+            ...     ),
+            ... )
             >>> spacing = baca.scorewide_spacing(
             ...     (95, 18, [103, 105]),
             ...     breaks=breaks,
@@ -1889,8 +1896,11 @@ class HorizontalSpacingSpecifier:
         ..  container:: example
 
             >>> breaks = baca.breaks(
-            ...     baca.page([1, 15, (10, 20)], [9, 115, (10, 20)])
-            ...     )
+            ...     baca.page(
+            ...         baca.system((10, 20), measure=1, y_offset=15),
+            ...         baca.system((10, 20), measure=9, y_offset=115),
+            ...     ),
+            ... )
             >>> spacing = baca.scorewide_spacing(
             ...     (95, 18, [103, 105]),
             ...     breaks=breaks,
@@ -1925,8 +1935,11 @@ class HorizontalSpacingSpecifier:
         ..  container:: example
 
             >>> breaks = baca.breaks(
-            ...     baca.page([1, 15, (10, 20)], [9, 115, (10, 20)])
-            ...     )
+            ...     baca.page(
+            ...         baca.system((10, 20), measure=1, y_offset=15),
+            ...         baca.system((10, 20), measure=9, y_offset=115),
+            ...     ),
+            ... )
             >>> spacing = baca.scorewide_spacing(
             ...     (95, 18, [103, 105]),
             ...     breaks=breaks,
@@ -1947,8 +1960,11 @@ class HorizontalSpacingSpecifier:
         ..  container:: example
 
             >>> breaks = baca.breaks(
-            ...     baca.page([1, 15, (10, 20)], [9, 115, (10, 20)])
-            ...     )
+            ...     baca.page(
+            ...         baca.system((10, 20), measure=1, y_offset=15),
+            ...         baca.system((10, 20), measure=9, y_offset=115),
+            ...     ),
+            ... )
             >>> spacing = baca.scorewide_spacing(
             ...     (95, 18, [103, 105]),
             ...     breaks=breaks,
@@ -1975,8 +1991,11 @@ class HorizontalSpacingSpecifier:
         ..  container:: example
 
             >>> breaks = baca.breaks(
-            ...     baca.page([1, 15, (10, 20)], [9, 115, (10, 20)])
-            ...     )
+            ...     baca.page(
+            ...         baca.system((10, 20), measure=1, y_offset=15),
+            ...         baca.system((10, 20), measure=9, y_offset=115),
+            ...     ),
+            ... )
             >>> spacing = baca.scorewide_spacing(
             ...     (95, 18, [103, 105]),
             ...     breaks=breaks,
@@ -1997,8 +2016,11 @@ class HorizontalSpacingSpecifier:
         ..  container
 
             >>> breaks = baca.breaks(
-            ...     baca.page([1, 15, (10, 20)], [9, 115, (10, 20)])
-            ...     )
+            ...     baca.page(
+            ...         baca.system((10, 20), measure=1, y_offset=15),
+            ...         baca.system((10, 20), measure=9, y_offset=115),
+            ...     ),
+            ... )
             >>> spacing = baca.scorewide_spacing(
             ...     (95, 18, [103, 105]),
             ...     breaks=breaks,
@@ -2022,8 +2044,11 @@ class HorizontalSpacingSpecifier:
         ..  container:: example
 
             >>> breaks = baca.breaks(
-            ...     baca.page([1, 15, (10, 20)], [9, 115, (10, 20)])
-            ...     )
+            ...     baca.page(
+            ...         baca.system((10, 20), measure=1, y_offset=15),
+            ...         baca.system((10, 20), measure=9, y_offset=115),
+            ...     ),
+            ... )
             >>> spacing = baca.scorewide_spacing(
             ...     (95, 18, [103, 105]),
             ...     breaks=breaks,
@@ -2082,13 +2107,15 @@ class HorizontalSpacingSpecifier:
         ..  container:: example
 
             >>> breaks = baca.breaks(
-            ...     baca.page([1, 15, (10, 20)]),
-            ...     )
+            ...     baca.page(
+            ...         baca.system((10, 20), measure=1, y_offset=15),
+            ...     ),
+            ... )
             >>> spacing = baca.scorewide_spacing(
             ...     (95, 5, []),
             ...     breaks=breaks,
             ...     fallback_duration=(1, 20),
-            ...     )
+            ... )
 
             >>> string = abjad.storage(spacing.measures)
             >>> print(string)
@@ -2424,44 +2451,38 @@ class SystemSpecifier:
     def __init__(
         self,
         *,
-        distances: typing.Sequence[abjad.Number] = None,
-        measure: int = None,
-        y_offset: abjad.Number = None,
-    ) -> None:
-        distances_: typing.Optional[typing.List[abjad.Number]] = None
-        if distances is not None:
-            assert isinstance(distances, collections.abc.Iterable), repr(distances)
-            for distance in distances:
-                assert isinstance(distance, (int, float)), repr(distance)
-            distances_ = list(distances)
-        else:
-            distances_ = None
-        self._distances = distances_
-        if measure is not None:
-            assert isinstance(measure, int), repr(measure)
+        distances,
+        measure,
+        y_offset,
+    ):
+        assert isinstance(distances, collections.abc.Iterable), repr(distances)
+        for distance in distances:
+            assert isinstance(distance, (int, float)), repr(distance)
+        distances = list(distances)
+        self._distances = distances
+        assert isinstance(measure, int), repr(measure)
         self._measure = measure
-        if y_offset is not None:
-            assert isinstance(y_offset, (int, float)), repr(y_offset)
+        assert isinstance(y_offset, (int, float)), repr(y_offset)
         self._y_offset = y_offset
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def distances(self) -> typing.Optional[typing.List[abjad.Number]]:
+    def distances(self):
         """
         Gets distances.
         """
         return self._distances
 
     @property
-    def measure(self) -> typing.Optional[int]:
+    def measure(self):
         """
         Gets start measure.
         """
         return self._measure
 
     @property
-    def y_offset(self) -> typing.Optional[abjad.Number]:
+    def y_offset(self):
         """
         Gets Y-offset.
         """
@@ -2483,13 +2504,13 @@ def breaks(
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         [1, 20, [15, 20, 20]],
-        ...         [13, 140, [15, 20, 20]],
-        ...         ),
+        ...         baca.system([15, 20, 20], measure=1, y_offset=20),
+        ...         baca.system([15, 20, 20], measure=13, y_offset=140),
+        ...     ),
         ...     baca.page(
-        ...         [23, 20, [15, 20, 20]],
-        ...         ),
-        ...     )
+        ...         baca.system([15, 20, 20], measure=23, y_offset=20),
+        ...     ),
+        ... )
 
     Set ``partial_score`` when rendering only the first measures of a
     score; leave ``partial_score`` set to none when rendering a complete
@@ -2501,15 +2522,15 @@ def breaks(
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         [1, 20, [15, 20, 20]],
-        ...         [13, 140, [15, 20, 20]],
+        ...         baca.system([15, 20, 20], measure=1, y_offset=20),
+        ...         baca.system([15, 20, 20], measure=13, y_offset=140),
         ...         number=1,
-        ...         ),
+        ...     ),
         ...     baca.page(
-        ...         [23, 20, [15, 20, 20]],
-        ...         number=9,
-        ...         ),
-        ...     )
+        ...         baca.system([15, 20, 20], measure=23, y_offset=20),
+        ...         number=9
+        ...     ),
+        ... )
         Traceback (most recent call last):
             ...
         Exception: page number (9) is not 2.
@@ -2522,11 +2543,14 @@ def breaks(
         ...     score_template=baca.StringTrioScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8), (4, 8)],
         ...     breaks=baca.breaks(
-        ...         baca.page([99, 0, (10, 20,)]),
-        ...         baca.page([109, 0, (10, 20,)]),
+        ...         baca.page(
+        ...             baca.system((10, 20), measure=99, y_offset=0),
         ...         ),
-        ...     )
-
+        ...         baca.page(
+        ...             baca.system((10, 20), measure=109, y_offset=0),
+        ...         ),
+        ...     ),
+        ... )
         >>> maker(
         ...     'Violin_Music_Voice',
         ...     baca.make_even_divisions(),
@@ -2616,7 +2640,7 @@ def minimum_duration(
     return HorizontalSpacingSpecifier(minimum_duration=duration)
 
 
-def page(*systems: typing.Any, number: int = None) -> PageSpecifier:
+def page(*systems, number=None, page_number=None):
     r"""
     Makes page specifier.
 
@@ -2625,22 +2649,20 @@ def page(*systems: typing.Any, number: int = None) -> PageSpecifier:
         Raises exception when systems overlap at Y-offset:
 
         >>> baca.page(
-        ...     [1, 60, (20, 20,)],
-        ...     [4, 60, (20, 20,)],
+        ...     baca.system((20, 20), measure=1, y_offset=60),
+        ...     baca.system((20, 20), measure=4, y_offset=60),
+        ...     page_number=1,
         ...     )
         Traceback (most recent call last):
             ...
         Exception: systems overlap at Y-offset 60.
 
     """
-    if systems is None:
-        systems_ = None
-    else:
-        systems_ = []
-        prototype = (list, SystemSpecifier)
-        for system in systems:
-            assert isinstance(system, prototype), repr(system)
-            systems_.append(system)
+    systems_ = []
+    number = page_number or number
+    for system in systems:
+        assert isinstance(system, SystemSpecifier), repr(system)
+        systems_.append(system)
     return PageSpecifier(number=number, systems=systems_)
 
 
@@ -2668,13 +2690,16 @@ def scorewide_spacing(
     ..  container:: example
 
         >>> breaks = baca.breaks(
-        ...     baca.page([1, 15, (10, 20)], [9, 115, (10, 20)])
-        ...     )
+        ...     baca.page(
+        ...         baca.system((10, 20), measure=1, y_offset=15),
+        ...         baca.system((10, 20), measure=9, y_offset=115),
+        ...     ),
+        ... )
         >>> spacing = baca.scorewide_spacing(
         ...     (95, 18, [105, 107]),
         ...     breaks=breaks,
         ...     fallback_duration=(1, 20),
-        ...     )
+        ... )
 
         >>> spacing.bol_measure_numbers
         [95, 103]
@@ -2725,11 +2750,9 @@ def scorewide_spacing(
     return specifier
 
 
-def system(
-    *distances: typing.Any, measure: int = None, y_offset: abjad.Number = None
-) -> SystemSpecifier:
+def system(*distances, measure=None, y_offset=None):
     """
     Makes system specifier.
     """
-    distances_ = classes.Sequence(distances).flatten()
-    return SystemSpecifier(distances=distances_, measure=measure, y_offset=y_offset)
+    distances = classes.Sequence(distances).flatten(depth=-1)
+    return SystemSpecifier(distances=distances, measure=measure, y_offset=y_offset)
