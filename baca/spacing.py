@@ -4,9 +4,11 @@ import typing
 
 import abjad
 
-from . import classes, commandclasses, indicators
+from . import classes as _classes
+from . import commandclasses as _commandclasses
+from . import indicators as _indicators
 from . import path as _path
-from . import scoping
+from . import scoping as _scoping
 from . import selectors as _selectors
 from . import tags as _tags
 
@@ -30,11 +32,11 @@ class BreakMeasureMap:
         ... )
 
         >>> maker(
-        ...     'Violin_Music_Voice',
+        ...     "Violin_Music_Voice",
         ...     baca.make_even_divisions(),
-        ...     baca.pitch('E4'),
-        ...     )
-        >>> lilypond_file = maker.run(environment='docs')
+        ...     baca.pitch("E4"),
+        ... )
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -371,8 +373,8 @@ class BreakMeasureMap:
         partial_score: int = None,
         tags: typing.List[abjad.Tag] = None,
     ) -> None:
-        tags = scoping.Command._preprocess_tags(tags)
-        assert scoping.Command._validate_tags(tags), repr(tags)
+        tags = _scoping.Command._preprocess_tags(tags)
+        assert _scoping.Command._validate_tags(tags), repr(tags)
         if _tags.BREAK not in tags:
             tags.append(_tags.BREAK)
         self._tags = tags
@@ -407,7 +409,7 @@ class BreakMeasureMap:
         """
         if context is None:
             return
-        skips = classes.Selection(context).skips()
+        skips = _classes.Selection(context).skips()
         measure_count = self.partial_score or len(skips)
         final_measure_number = self.first_measure_number + measure_count - 1
         literal = abjad.LilyPondLiteral(r"\autoPageBreaksOff", "before")
@@ -520,7 +522,7 @@ class BreakMeasureMap:
         """
         Gets tags.
         """
-        assert scoping.Command._validate_tags(self._tags), repr(self._tags)
+        assert _scoping.Command._validate_tags(self._tags), repr(self._tags)
         return self._tags[:]
 
 
@@ -535,15 +537,15 @@ class HorizontalSpacingSpecifier:
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
-        ...     )
+        ... )
 
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 F4'),
+        ...     baca.pitches("E4 F4"),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -697,15 +699,15 @@ class HorizontalSpacingSpecifier:
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.HorizontalSpacingSpecifier(),
         ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
-        ...     )
+        ... )
 
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 F4'),
-        ...     )
+        ...     baca.pitches("E4 F4"),
+        ... )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -864,17 +866,17 @@ class HorizontalSpacingSpecifier:
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.HorizontalSpacingSpecifier(
         ...         multiplier=abjad.Multiplier(1),
-        ...         ),
+        ...     ),
         ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
-        ...     )
+        ... )
 
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 F4'),
-        ...     )
+        ...     baca.pitches("E4 F4"),
+        ... )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1034,17 +1036,17 @@ class HorizontalSpacingSpecifier:
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.HorizontalSpacingSpecifier(
         ...         multiplier=abjad.Multiplier(2),
-        ...         ),
+        ...     ),
         ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
-        ...     )
+        ... )
 
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 F4'),
-        ...     )
+        ...     baca.pitches("E4 F4"),
+        ... )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1205,17 +1207,17 @@ class HorizontalSpacingSpecifier:
         ...     spacing=baca.HorizontalSpacingSpecifier(
         ...         multiplier=abjad.Multiplier(2),
         ...         minimum_duration=abjad.Duration(1, 8),
-        ...         ),
+        ...     ),
         ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
-        ...     )
+        ... )
 
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 F4'),
-        ...     )
+        ...     baca.pitches("E4 F4"),
+        ... )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1374,13 +1376,13 @@ class HorizontalSpacingSpecifier:
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.HorizontalSpacingSpecifier(
         ...         minimum_duration=abjad.Duration(1, 8),
-        ...         ),
+        ...     ),
         ...     time_signatures=[(4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> maker(
-        ...     'Music_Voice',
-        ...     baca.pitches('E4 F4'),
+        ...     "Music_Voice",
+        ...     baca.pitches("E4 F4"),
         ...     baca.rhythm(
         ...         rmakers.accelerando([(1, 8), (1, 20), (1, 16)]),
         ...         rmakers.feather_beam(),
@@ -1388,7 +1390,7 @@ class HorizontalSpacingSpecifier:
         ...     ),
         ... )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1680,7 +1682,7 @@ class HorizontalSpacingSpecifier:
         Calls command on ``segment_maker``.
         """
         score = segment_maker.score
-        skips = classes.Selection(score["Global_Skips"]).skips()
+        skips = _classes.Selection(score["Global_Skips"]).skips()
         programmatic = True
         if self.measures and len(self.measures) == len(skips):
             programmatic = False
@@ -1704,7 +1706,7 @@ class HorizontalSpacingSpecifier:
             )
             if measure_index == total - 1:
                 duration = abjad.Duration(1, 4)
-            spacing_section = indicators.SpacingSection(duration=duration)
+            spacing_section = _indicators.SpacingSection(duration=duration)
             tag = _tags.SPACING_COMMAND
             abjad.attach(
                 spacing_section,
@@ -1865,7 +1867,7 @@ class HorizontalSpacingSpecifier:
             ...     (95, 18, [103, 105]),
             ...     breaks=breaks,
             ...     fallback_duration=(1, 20),
-            ...     )
+            ... )
 
             >>> spacing.bol_measure_numbers
             [95, 103]
@@ -1905,7 +1907,7 @@ class HorizontalSpacingSpecifier:
             ...     (95, 18, [103, 105]),
             ...     breaks=breaks,
             ...     fallback_duration=(1, 20),
-            ...     )
+            ... )
 
             >>> spacing.eol_measure_numbers
             [102]
@@ -1944,7 +1946,7 @@ class HorizontalSpacingSpecifier:
             ...     (95, 18, [103, 105]),
             ...     breaks=breaks,
             ...     fallback_duration=(1, 20),
-            ...     )
+            ... )
 
             >>> spacing.fermata_measure_numbers
             [103, 105]
@@ -1969,7 +1971,7 @@ class HorizontalSpacingSpecifier:
             ...     (95, 18, [103, 105]),
             ...     breaks=breaks,
             ...     fallback_duration=(1, 20),
-            ...     )
+            ... )
 
             >>> spacing.final_measure_number
             112
@@ -2000,7 +2002,7 @@ class HorizontalSpacingSpecifier:
             ...     (95, 18, [103, 105]),
             ...     breaks=breaks,
             ...     fallback_duration=(1, 20),
-            ...     )
+            ... )
 
             >>> spacing.first_measure_number
             95
@@ -2025,7 +2027,7 @@ class HorizontalSpacingSpecifier:
             ...     (95, 18, [103, 105]),
             ...     breaks=breaks,
             ...     fallback_duration=(1, 20),
-            ...     )
+            ... )
 
             >>> spacing.magic_lilypond_eol_adjustment
             Multiplier(35, 24)
@@ -2053,7 +2055,7 @@ class HorizontalSpacingSpecifier:
             ...     (95, 18, [103, 105]),
             ...     breaks=breaks,
             ...     fallback_duration=(1, 20),
-            ...     )
+            ... )
 
             >>> spacing.measure_count
             18
@@ -2343,19 +2345,17 @@ class LBSD:
 
     ### CLASS VARIABLES ###
 
-    __slots__ = ("_alignment_distances", "_y_offset")
-
     _override = r"\overrideProperty"
     _override += " Score.NonMusicalPaperColumn.line-break-system-details"
 
     ### INITIALIZER ###
 
     def __init__(self, *, y_offset=None, alignment_distances=None):
-        self._y_offset = y_offset
+        self.y_offset = y_offset
         if alignment_distances is not None:
             assert isinstance(alignment_distances, collections.abc.Iterable)
             alignment_distances = tuple(alignment_distances)
-        self._alignment_distances = alignment_distances
+        self.alignment_distances = alignment_distances
 
     ### PRIVATE METHODS ###
 
@@ -2366,31 +2366,11 @@ class LBSD:
         bundle.before.commands.append(string)
         return bundle
 
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def alignment_distances(self):
-        """
-        Gets alignment distances.
-        """
-        return self._alignment_distances
-
-    @property
-    def y_offset(self):
-        """
-        Gets Y offset.
-        """
-        return self._y_offset
-
 
 class PageSpecifier:
     """
     Page specifier.
     """
-
-    ### CLASS VARIABLES ###
-
-    __slots__ = ("_number", "_systems")
 
     ### INITIALIZER ###
 
@@ -2403,7 +2383,7 @@ class PageSpecifier:
         if number is not None:
             assert isinstance(number, int), repr(number)
             assert 1 <= number, repr(number)
-        self._number = number
+        self.number = number
         if systems is not None:
             y_offsets: list = []
             for system in systems:
@@ -2416,35 +2396,13 @@ class PageSpecifier:
                     raise Exception(message)
                 else:
                     y_offsets.append(y_offset)
-        self._systems = systems
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def number(self) -> typing.Optional[int]:
-        """
-        Gets page number.
-        """
-        return self._number
-
-    @property
-    def systems(
-        self,
-    ) -> typing.Optional[typing.List[typing.Union[list, "SystemSpecifier"]]]:
-        """
-        Gets systems.
-        """
-        return self._systems
+        self.systems = systems
 
 
 class SystemSpecifier:
     """
     System specifier.
     """
-
-    ### CLASS VARIABLES ###
-
-    __slots__ = ("_distances", "_measure", "_y_offset")
 
     ### INITIALIZER ###
 
@@ -2459,44 +2417,21 @@ class SystemSpecifier:
         for distance in distances:
             assert isinstance(distance, (int, float)), repr(distance)
         distances = list(distances)
-        self._distances = distances
+        self.distances = distances
         assert isinstance(measure, int), repr(measure)
-        self._measure = measure
+        self.measure = measure
         assert isinstance(y_offset, (int, float)), repr(y_offset)
-        self._y_offset = y_offset
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def distances(self):
-        """
-        Gets distances.
-        """
-        return self._distances
-
-    @property
-    def measure(self):
-        """
-        Gets start measure.
-        """
-        return self._measure
-
-    @property
-    def y_offset(self):
-        """
-        Gets Y-offset.
-        """
-        return self._y_offset
+        self.y_offset = y_offset
 
 
 ### FACTORY FUNCTIONS ###
 
 
 def breaks(
-    *page_specifiers: typing.Any,
-    local_measure_numbers: bool = None,
-    partial_score: typing.Optional[int] = None,
-) -> BreakMeasureMap:
+    *page_specifiers,
+    local_measure_numbers=False,
+    partial_score=None,
+):
     r"""
     Makes breaks.
 
@@ -2552,16 +2487,16 @@ def breaks(
         ...     ),
         ... )
         >>> maker(
-        ...     'Violin_Music_Voice',
+        ...     "Violin_Music_Voice",
         ...     baca.make_even_divisions(),
-        ...     baca.pitch('E4'),
+        ...     baca.pitch("E4"),
         ...     )
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         Traceback (most recent call last):
           File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/doctest.py", line 1330, in __run
             compileflags, 1), test.globs)
           File "<doctest spacing.py[82]>", line 1, in <module>
-            lilypond_file = maker.run(environment='docs')
+            lilypond_file = maker.run(environment="docs")
           File "/Users/trevorbaca/baca/baca/segmentmaker.py", line 7390, in run
             self._apply_breaks()
           File "/Users/trevorbaca/baca/baca/segmentmaker.py", line 999, in _apply_breaks
@@ -2611,13 +2546,13 @@ def breaks(
                 break_ = abjad.LilyPondLiteral(r"\pageBreak")
             else:
                 break_ = abjad.LilyPondLiteral(r"\break")
-            command = commandclasses.IndicatorCommand(
+            command = _commandclasses.IndicatorCommand(
                 indicators=[break_], selector=selector
             )
-            alignment_distances = classes.Sequence(alignment_distances)
+            alignment_distances = _classes.Sequence(alignment_distances)
             alignment_distances = alignment_distances.flatten()
             lbsd = LBSD(alignment_distances=alignment_distances, y_offset=y_offset)
-            lbsd_command = commandclasses.IndicatorCommand(
+            lbsd_command = _commandclasses.IndicatorCommand(
                 indicators=[lbsd], selector=selector
             )
             commands[measure_number] = [command, lbsd_command]
@@ -2631,9 +2566,7 @@ def breaks(
     return breaks
 
 
-def minimum_duration(
-    duration: abjad.DurationTyping,
-) -> HorizontalSpacingSpecifier:
+def minimum_duration(duration):
     """
     Makes horizontal spacing specifier with ``duration`` minimum width.
     """
@@ -2652,7 +2585,7 @@ def page(*systems, number=None, page_number=None):
         ...     baca.system((20, 20), measure=1, y_offset=60),
         ...     baca.system((20, 20), measure=4, y_offset=60),
         ...     page_number=1,
-        ...     )
+        ... )
         Traceback (most recent call last):
             ...
         Exception: systems overlap at Y-offset 60.
@@ -2667,11 +2600,11 @@ def page(*systems, number=None, page_number=None):
 
 
 def scorewide_spacing(
-    path: typing.Union[str, pathlib.Path, typing.Tuple[int, int, list]],
-    fallback_duration: abjad.DurationTyping,
-    breaks: BreakMeasureMap = None,
-    fermata_measure_duration: abjad.DurationTyping = (1, 4),
-) -> HorizontalSpacingSpecifier:
+    path,
+    fallback_duration,
+    breaks=None,
+    fermata_measure_duration=(1, 4),
+):
     r"""
     Makes scorewide spacing.
 
@@ -2750,9 +2683,9 @@ def scorewide_spacing(
     return specifier
 
 
-def system(*distances, measure=None, y_offset=None):
+def system(distances, measure=None, y_offset=None):
     """
     Makes system specifier.
     """
-    distances = classes.Sequence(distances).flatten(depth=-1)
+    distances = _classes.Sequence(distances).flatten(depth=-1)
     return SystemSpecifier(distances=distances, measure=measure, y_offset=y_offset)
