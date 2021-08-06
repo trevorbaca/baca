@@ -1156,34 +1156,35 @@ def make_segment_pdf(maker, first_segment=False):
         counter = abjad.String("second").pluralize(count)
         print(f"LilyPond runtime {count} {counter} ...")
         lilypond_runtime = (count, counter)
-    # for name in ["music.ly.tagged", "music.ily.tagged", "layout.ly.tagged"]:
-    for name in ("music.ly", "music.ily", "layout.ly"):
-        tagged = segment_directory / name
-        if not tagged.exists():
-            continue
-        with tagged.open() as pointer:
-            lines = []
-            for line in pointer.readlines():
-                if "%@%" not in line:
-                    lines.append(line)
-        string = "".join(lines)
-        string = abjad.format.remove_tags(string)
-        # untagged = segment_directory / name.removesuffix(".tagged")
-        parts = []
-        for part in tagged.parts:
-            if part == os.path.sep:
-                pass
-            elif part == "Scores":
-                parts.append("untagged")
-            else:
-                parts.append(part)
-        # parts.insert(0, os.path.sep)
-        untagged = "/" + os.path.sep.join(parts)
-        untagged = pathlib.Path(untagged)
-        print(untagged)
-        if not untagged.parent.is_dir():
-            untagged.parent.mkdir(parents=True)
-        untagged.write_text(string)
+    if "--also-untagged" in sys.argv:
+        # for name in ["music.ly.tagged", "music.ily.tagged", "layout.ly.tagged"]:
+        for name in ("music.ly", "music.ily", "layout.ly"):
+            tagged = segment_directory / name
+            if not tagged.exists():
+                continue
+            with tagged.open() as pointer:
+                lines = []
+                for line in pointer.readlines():
+                    if "%@%" not in line:
+                        lines.append(line)
+            string = "".join(lines)
+            string = abjad.format.remove_tags(string)
+            # untagged = segment_directory / name.removesuffix(".tagged")
+            parts = []
+            for part in tagged.parts:
+                if part == os.path.sep:
+                    pass
+                elif part == "Scores":
+                    parts.append("untagged")
+                else:
+                    parts.append(part)
+            # parts.insert(0, os.path.sep)
+            untagged = "/" + os.path.sep.join(parts)
+            untagged = pathlib.Path(untagged)
+            if not untagged.parent.is_dir():
+                untagged.parent.mkdir(parents=True)
+            print(f"Writing {untagged} ...")
+            untagged.write_text(string)
     if "--timing" in sys.argv and "--no-pdf" not in sys.argv:
         timing = segment_directory / ".timing"
         with timing.open(mode="a") as pointer:
