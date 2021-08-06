@@ -9,22 +9,22 @@ r"""
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         baca.system((11,), measure=1, y_offset=0),
-        ...         baca.system((11,), measure=2, y_offset=15),
+        ...         baca.system(measure=1, y_offset=0, distances=(11,)),
+        ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
         >>> score_template = baca.SingleStaffScoreTemplate()
-        >>> triple = ('Music_Staff', 'default_clef', abjad.Clef('treble'))
+        >>> triple = ("Music_Staff", "default_clef", abjad.Clef("treble"))
         >>> score_template.defaults.append(triple)
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
         ...     score_template=score_template,
         ...     spacing=baca.minimum_duration((1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
 
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> block = abjad.Block(name='layout')
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -138,8 +138,8 @@ r"""
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         baca.system((11,), measure=1, y_offset=0),
-        ...         baca.system((11,), measure=2, y_offset=15),
+        ...         baca.system(measure=1, y_offset=0, distances=(11,)),
+        ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
@@ -147,14 +147,14 @@ r"""
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> maker(
-        ...     'Music_Voice',
-        ...     baca.clef('treble'),
-        ...     )
+        ...     "Music_Voice",
+        ...     baca.clef("treble"),
+        ... )
 
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> block = abjad.Block(name='layout')
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -266,8 +266,8 @@ r"""
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         baca.system((11,), measure=1, y_offset=0),
-        ...         baca.system((11,), measure=2, y_offset=15),
+        ...         baca.system(measure=1, y_offset=0, distances=(11,)),
+        ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
@@ -275,28 +275,28 @@ r"""
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> maker(
-        ...     'Music_Voice',
-        ...     baca.clef('alto'),
-        ...     )
+        ...     "Music_Voice",
+        ...     baca.clef("alto"),
+        ... )
 
         >>> metadata, persist = {}, {}
-        >>> persist['persistent_indicators'] = {}
-        >>> persist['persistent_indicators']['Music_Staff'] = [
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]["Music_Staff"] = [
         ...     baca.Memento(
-        ...         context='Music_Voice',
-        ...         prototype='abjad.Clef',
-        ...         value='treble',
-        ...         )
-        ...     ]
+        ...         context="Music_Voice",
+        ...         prototype="abjad.Clef",
+        ...         value="treble",
+        ...     )
+        ... ]
         >>> lilypond_file = maker.run(
-        ...     environment='docs',
+        ...     environment="docs",
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
-        ...     )
-        >>> block = abjad.Block(name='layout')
+        ... )
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -411,8 +411,8 @@ r"""
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         baca.system((11,), measure=1, y_offset=0),
-        ...         baca.system((11,), measure=2, y_offset=15),
+        ...         baca.system(measure=1, y_offset=0, distances=(11,)),
+        ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
@@ -420,24 +420,24 @@ r"""
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> metadata, persist = {}, {}
-        >>> persist['persistent_indicators'] = {}
-        >>> persist['persistent_indicators']['Music_Staff'] = [
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]["Music_Staff"] = [
         ...     baca.Memento(
-        ...         context='Music_Voice',
-        ...         prototype='abjad.Clef',
-        ...         value='treble',
-        ...         )
-        ...     ]
+        ...         context="Music_Voice",
+        ...         prototype="abjad.Clef",
+        ...         value="treble",
+        ...     )
+        ... ]
         >>> lilypond_file = maker.run(
-        ...     environment='docs',
+        ...     environment="docs",
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
-        ...     )
-        >>> block = abjad.Block(name='layout')
+        ... )
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
 
@@ -553,8 +553,8 @@ r"""
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         baca.system((11,), measure=1, y_offset=0),
-        ...         baca.system((11,), measure=3, y_offset=15),
+        ...         baca.system(measure=1, y_offset=0, distances=(11,)),
+        ...         baca.system(measure=3, y_offset=15, distances=(11,)),
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
@@ -562,14 +562,14 @@ r"""
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> maker(
-        ...     'Music_Voice',
-        ...     baca.clef('treble', selector=baca.selectors.leaf(0)),
-        ...     baca.clef('treble', selector=baca.selectors.leaf(1)),
-        ...     )
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> block = abjad.Block(name='layout')
+        ...     "Music_Voice",
+        ...     baca.clef("treble", selector=baca.selectors.leaf(0)),
+        ...     baca.clef("treble", selector=baca.selectors.leaf(1)),
+        ... )
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
 
@@ -696,8 +696,8 @@ r"""
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         baca.system((11,), measure=1, y_offset=0),
-        ...         baca.system((11,), measure=2, y_offset=15),
+        ...         baca.system(measure=1, y_offset=0, distances=(11,)),
+        ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
@@ -705,28 +705,28 @@ r"""
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> maker(
-        ...     'Music_Voice',
-        ...     baca.clef('treble'),
-        ...     )
+        ...     "Music_Voice",
+        ...     baca.clef("treble"),
+        ... )
 
         >>> metadata, persist = {}, {}
-        >>> persist['persistent_indicators'] = {}
-        >>> persist['persistent_indicators']['Music_Staff'] = [
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]["Music_Staff"] = [
         ...     baca.Memento(
-        ...         context='Music_Voice',
-        ...         prototype='abjad.Clef',
-        ...         value='treble',
-        ...         )
-        ...     ]
+        ...         context="Music_Voice",
+        ...         prototype="abjad.Clef",
+        ...         value="treble",
+        ...     )
+        ... ]
         >>> lilypond_file = maker.run(
-        ...     environment='docs',
+        ...     environment="docs",
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
-        ...     )
-        >>> block = abjad.Block(name='layout')
+        ... )
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
 
@@ -851,13 +851,13 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.dynamic('f'),
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> block = abjad.Block(name='layout')
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -971,27 +971,27 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.dynamic('p'),
         ...     )
 
         >>> metadata, persist = {}, {}
-        >>> persist['persistent_indicators'] = {}
-        >>> persist['persistent_indicators']['Music_Voice'] = [
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]["Music_Voice"] = [
         ...     baca.Memento(
-        ...         context='Music_Voice',
+        ...         context="Music_Voice",
         ...         prototype='abjad.Dynamic',
         ...         value='f',
         ...         )
         ...     ]
         >>> lilypond_file = maker.run(
-        ...     environment='docs',
+        ...     environment="docs",
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
-        >>> block = abjad.Block(name='layout')
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1108,26 +1108,26 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
 
         >>> metadata, persist = {}, {}
-        >>> persist['persistent_indicators'] = {}
-        >>> persist['persistent_indicators']['Music_Voice'] = [
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]["Music_Voice"] = [
         ...     baca.Memento(
-        ...         context='Music_Voice',
+        ...         context="Music_Voice",
         ...         prototype='abjad.Dynamic',
         ...         value='f',
         ...         )
         ...     ]
         >>> lilypond_file = maker.run(
-        ...     environment='docs',
+        ...     environment="docs",
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
-        >>> block = abjad.Block(name='layout')
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1244,14 +1244,14 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.dynamic('f'),
         ...     baca.dynamic('f', selector=baca.selectors.leaf(1)),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> block = abjad.Block(name='layout')
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1367,27 +1367,27 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.dynamic('f'),
         ...     )
 
         >>> metadata, persist = {}, {}
-        >>> persist['persistent_indicators'] = {}
-        >>> persist['persistent_indicators']['Music_Voice'] = [
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]["Music_Voice"] = [
         ...     baca.Memento(
-        ...         context='Music_Voice',
+        ...         context="Music_Voice",
         ...         prototype='abjad.Dynamic',
         ...         value='f',
         ...         )
         ...     ]
         >>> lilypond_file = maker.run(
-        ...     environment='docs',
+        ...     environment="docs",
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
-        >>> block = abjad.Block(name='layout')
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1502,14 +1502,14 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.dynamic('sfz'),
         ...     baca.dynamic('sfz', selector=baca.selectors.leaf(1)),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> block = abjad.Block(name='layout')
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1625,27 +1625,27 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.dynamic('sfz'),
         ...     )
 
         >>> metadata, persist = {}, {}
-        >>> persist['persistent_indicators'] = {}
-        >>> persist['persistent_indicators']['Music_Voice'] = [
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]["Music_Voice"] = [
         ...     baca.Memento(
-        ...         context='Music_Voice',
+        ...         context="Music_Voice",
         ...         prototype='abjad.Dynamic',
         ...         value='sfz',
         ...         )
         ...     ]
         >>> lilypond_file = maker.run(
-        ...     environment='docs',
+        ...     environment="docs",
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
-        >>> block = abjad.Block(name='layout')
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1763,14 +1763,14 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.dynamic('mf'),
         ...     baca.dynamic('"mf"', selector=baca.selectors.leaf(1)),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> block = abjad.Block(name='layout')
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1890,8 +1890,8 @@ r"""
         >>> instruments['Piccolo'] = abjad.Piccolo()
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         baca.system((11,), measure=1, y_offset=0),
-        ...         baca.system((11,), measure=2, y_offset=15),
+        ...         baca.system(measure=1, y_offset=0, distances=(11,)),
+        ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
 
@@ -1900,7 +1900,7 @@ r"""
         Default instruments color purple and redraw dull purple:
 
         >>> score_template = baca.SingleStaffScoreTemplate()
-        >>> triple = ('Music_Staff', 'default_instrument', abjad.Flute())
+        >>> triple = ("Music_Staff", 'default_instrument', abjad.Flute())
         >>> score_template.defaults.append(triple)
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
@@ -1911,12 +1911,12 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> block = abjad.Block(name='layout')
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2271,13 +2271,13 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.instrument(instruments['Flute']),
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> block = abjad.Block(name='layout')
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2631,27 +2631,27 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.instrument(instruments['Flute']),
         ...     baca.make_notes(),
         ...     )
 
         >>> metadata, persist = {}, {}
-        >>> persist['persistent_indicators'] = {}
-        >>> persist['persistent_indicators']['Music_Staff'] = [
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]["Music_Staff"] = [
         ...     baca.Memento(
-        ...         context='Music_Voice',
+        ...         context="Music_Voice",
         ...         manifest='instruments',
         ...         value='Piccolo',
         ...         )
         ...     ]
         >>> lilypond_file = maker.run(
-        ...     environment='docs',
+        ...     environment="docs",
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
-        >>> block = abjad.Block(name='layout')
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -3009,26 +3009,26 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
 
         >>> metadata, persist = {}, {}
-        >>> persist['persistent_indicators'] = {}
-        >>> persist['persistent_indicators']['Music_Staff'] = [
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]["Music_Staff"] = [
         ...     baca.Memento(
-        ...         context='Music_Voice',
+        ...         context="Music_Voice",
         ...         manifest='instruments',
         ...         value='Flute',
         ...         )
         ...     ]
         >>> lilypond_file = maker.run(
-        ...     environment='docs',
+        ...     environment="docs",
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
-        >>> block = abjad.Block(name='layout')
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -3380,8 +3380,8 @@ r"""
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         baca.system((11,), measure=1, y_offset=0),
-        ...         baca.system((11,), measure=3, y_offset=15),
+        ...         baca.system(measure=1, y_offset=0, distances=(11,)),
+        ...         baca.system(measure=3, y_offset=15, distances=(11,)),
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
@@ -3393,7 +3393,7 @@ r"""
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.instrument(instruments['Flute']),
         ...     baca.new(
         ...         baca.instrument(instruments['Flute']),
@@ -3402,8 +3402,8 @@ r"""
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> block = abjad.Block(name='layout')
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -3779,8 +3779,8 @@ r"""
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         baca.system((11,), measure=1, y_offset=0),
-        ...         baca.system((11,), measure=2, y_offset=15),
+        ...         baca.system(measure=1, y_offset=0, distances=(11,)),
+        ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
@@ -3792,27 +3792,27 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.instrument(instruments['Flute']),
         ...     baca.make_notes(),
         ...     )
 
         >>> metadata, persist = {}, {}
-        >>> persist['persistent_indicators'] = {}
-        >>> persist['persistent_indicators']['Music_Staff'] = [
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]["Music_Staff"] = [
         ...     baca.Memento(
-        ...         context='Music_Voice',
+        ...         context="Music_Voice",
         ...         manifest='instruments',
         ...         value='Flute',
         ...         )
         ...     ]
         >>> lilypond_file = maker.run(
-        ...     environment='docs',
+        ...     environment="docs",
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
-        >>> block = abjad.Block(name='layout')
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -4174,8 +4174,8 @@ r"""
         ...     )
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         baca.system((11,), measure=1, y_offset=0),
-        ...         baca.system((11,), measure=2, y_offset=15),
+        ...         baca.system(measure=1, y_offset=0, distances=(11,)),
+        ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
 
@@ -4185,7 +4185,7 @@ r"""
 
         >>> score_template = baca.SingleStaffScoreTemplate()
         >>> triple = (
-        ...     'Music_Staff',
+        ...     "Music_Staff",
         ...     'default_margin_markup',
         ...     margin_markups['I+II'],
         ...     )
@@ -4199,12 +4199,12 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> block = abjad.Block(name='layout')
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -4577,13 +4577,13 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.margin_markup(margin_markups['I+II']),
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> block = abjad.Block(name='layout')
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -4954,27 +4954,27 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.margin_markup(margin_markups['III+IV']),
         ...     baca.make_notes(),
         ...     )
 
         >>> metadata, persist = {}, {}
-        >>> persist['persistent_indicators'] = {}
-        >>> persist['persistent_indicators']['Music_Staff'] = [
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]["Music_Staff"] = [
         ...     baca.Memento(
-        ...         context='Music_Voice',
+        ...         context="Music_Voice",
         ...         manifest='margin_markups',
         ...         value='I+II',
         ...         )
         ...     ]
         >>> lilypond_file = maker.run(
-        ...     environment='docs',
+        ...     environment="docs",
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
-        >>> block = abjad.Block(name='layout')
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -5356,26 +5356,26 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
 
         >>> metadata, persist = {}, {}
-        >>> persist['persistent_indicators'] = {}
-        >>> persist['persistent_indicators']['Music_Staff'] = [
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]["Music_Staff"] = [
         ...     baca.Memento(
-        ...         context='Music_Voice',
+        ...         context="Music_Voice",
         ...         manifest='margin_markups',
         ...         value='I+II',
         ...         )
         ...     ]
         >>> lilypond_file = maker.run(
-        ...     environment='docs',
+        ...     environment="docs",
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
-        >>> block = abjad.Block(name='layout')
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -5750,8 +5750,8 @@ r"""
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         baca.system((11,), measure=1, y_offset=0),
-        ...         baca.system((11,), measure=3, y_offset=15),
+        ...         baca.system(measure=1, y_offset=0, distances=(11,)),
+        ...         baca.system(measure=3, y_offset=15, distances=(11,)),
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
@@ -5763,7 +5763,7 @@ r"""
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.margin_markup(margin_markups['I+II']),
         ...     baca.new(
         ...         baca.margin_markup(margin_markups['I+II']),
@@ -5772,8 +5772,8 @@ r"""
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> block = abjad.Block(name='layout')
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -6185,8 +6185,8 @@ r"""
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         baca.system((11,), measure=1, y_offset=0),
-        ...         baca.system((11,), measure=2, y_offset=15),
+        ...         baca.system(measure=1, y_offset=0, distances=(11,)),
+        ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
@@ -6198,27 +6198,27 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.margin_markup(margin_markups['I+II']),
         ...     baca.make_notes(),
         ...     )
 
         >>> metadata, persist = {}, {}
-        >>> persist['persistent_indicators'] = {}
-        >>> persist['persistent_indicators']['Music_Staff'] = [
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]["Music_Staff"] = [
         ...     baca.Memento(
-        ...         context='Music_Voice',
+        ...         context="Music_Voice",
         ...         manifest='margin_markups',
         ...         value='I+II',
         ...         )
         ...     ]
         >>> lilypond_file = maker.run(
-        ...     environment='docs',
+        ...     environment="docs",
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
-        >>> block = abjad.Block(name='layout')
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -6593,8 +6593,8 @@ r"""
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         baca.system((11,), measure=1, y_offset=0),
-        ...         baca.system((11,), measure=2, y_offset=15),
+        ...         baca.system(measure=1, y_offset=0, distances=(11,)),
+        ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
@@ -6606,7 +6606,7 @@ r"""
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.tag(
         ...         baca.tags.NOT_PARTS,
         ...         baca.margin_markup(margin_markups['I+II']),
@@ -6624,8 +6624,8 @@ r"""
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> block = abjad.Block(name='layout')
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -6767,7 +6767,7 @@ r"""
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         baca.system((8,), measure=1, y_offset=4),
+        ...         baca.system(measure=1, y_offset=4, distances=(8,)),
         ...     ),
         ... )
         >>> metronome_marks = abjad.OrderedDict()
@@ -6787,16 +6787,16 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Global_Skips',
+        ...     "Global_Skips",
         ...     baca.metronome_mark('112'),
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> block = abjad.Block(name='layout')
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -6923,31 +6923,31 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Global_Skips',
+        ...     "Global_Skips",
         ...     baca.metronome_mark('112'),
         ...     baca.text_spanner_staff_padding(4),
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
 
         >>> metadata, persist = {}, {}
-        >>> persist['persistent_indicators'] = {}
-        >>> persist['persistent_indicators']['Score'] = [
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]['Score'] = [
         ...     baca.Memento(
-        ...         context='Global_Skips',
+        ...         context="Global_Skips",
         ...         manifest='metronome_marks',
         ...         value='90',
         ...         )
         ...     ]
         >>> lilypond_file = maker.run(
-        ...     environment='docs',
+        ...     environment="docs",
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
-        >>> block = abjad.Block(name='layout')
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -7079,30 +7079,30 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
         >>> maker(
-        ...     'Global_Skips',
+        ...     "Global_Skips",
         ...     baca.text_spanner_staff_padding(4),
         ...     )
 
         >>> metadata, persist = {}, {}
-        >>> persist['persistent_indicators'] = {}
-        >>> persist['persistent_indicators']['Score'] = [
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]['Score'] = [
         ...     baca.Memento(
-        ...         context='Global_Skips',
+        ...         context="Global_Skips",
         ...         manifest='metronome_marks',
         ...         value='90',
         ...         )
         ...     ]
         >>> lilypond_file = maker.run(
-        ...     environment='docs',
+        ...     environment="docs",
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
-        >>> block = abjad.Block(name='layout')
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -7234,17 +7234,17 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Global_Skips',
+        ...     "Global_Skips",
         ...     baca.metronome_mark('112'),
         ...     baca.metronome_mark('112', selector=baca.selectors.leaf(1)),
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> block = abjad.Block(name='layout')
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -7378,31 +7378,31 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Global_Skips',
+        ...     "Global_Skips",
         ...     baca.metronome_mark('112'),
         ...     baca.text_spanner_staff_padding(4),
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
 
         >>> metadata, persist = {}, {}
-        >>> persist['persistent_indicators'] = {}
-        >>> persist['persistent_indicators']['Score'] = [
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]['Score'] = [
         ...     baca.Memento(
-        ...         context='Global_Skips',
+        ...         context="Global_Skips",
         ...         manifest='metronome_marks',
         ...         value='112',
         ...         )
         ...     ]
         >>> lilypond_file = maker.run(
-        ...     environment='docs',
+        ...     environment="docs",
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
-        >>> block = abjad.Block(name='layout')
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -7546,15 +7546,15 @@ r"""
         ... )
 
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     command,
         ...     baca.make_notes(),
         ...     baca.staff_lines(1),
         ...     baca.staff_position(0),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> block = abjad.Block(name='layout')
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -7663,7 +7663,7 @@ r"""
 
         Persistent overrides also appear in segment metadata:
 
-        >>> string = abjad.storage(maker.persist['persistent_indicators'])
+        >>> string = abjad.storage(maker.persist["persistent_indicators"])
         >>> print(string)
         abjad.OrderedDict(
             [
@@ -7716,15 +7716,15 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
 
         >>> metadata, persist = {}, {}
-        >>> persist['persistent_indicators'] = {}
-        >>> persist['persistent_indicators']['Music_Voice'] = [
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]["Music_Voice"] = [
         ...     baca.Memento(
-        ...         context='Music_Voice',
+        ...         context="Music_Voice",
         ...         prototype='baca.PersistentOverride',
         ...         value=baca.PersistentOverride(
         ...             after=True,
@@ -7736,12 +7736,12 @@ r"""
         ...         )
         ...     ]
         >>> lilypond_file = maker.run(
-        ...     environment='docs',
+        ...     environment="docs",
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
-        >>> block = abjad.Block(name='layout')
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -7864,16 +7864,16 @@ r"""
         ...     indicators=[override], selector=baca.selectors.leaf(0), tags=[tag]
         ... )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     command,
         ...     baca.make_notes(),
         ...     )
 
         >>> metadata, persist = {}, {}
-        >>> persist['persistent_indicators'] = {}
-        >>> persist['persistent_indicators']['Music_Voice'] = [
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]["Music_Voice"] = [
         ...     baca.Memento(
-        ...         context='Music_Voice',
+        ...         context="Music_Voice",
         ...         prototype='baca.PersistentOverride',
         ...         value=baca.PersistentOverride(
         ...             after=True,
@@ -7885,12 +7885,12 @@ r"""
         ...         )
         ...     ]
         >>> lilypond_file = maker.run(
-        ...     environment='docs',
+        ...     environment="docs",
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
-        >>> block = abjad.Block(name='layout')
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -8010,13 +8010,13 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.staff_lines(5),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> block = abjad.Block(name='layout')
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -8133,27 +8133,27 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.staff_lines(1),
         ...     )
 
         >>> metadata, persist = {}, {}
-        >>> persist['persistent_indicators'] = {}
-        >>> persist['persistent_indicators']['Music_Staff'] = [
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]["Music_Staff"] = [
         ...     baca.Memento(
-        ...         context='Music_Voice',
+        ...         context="Music_Voice",
         ...         prototype='baca.StaffLines',
         ...         value=5,
         ...         )
         ...     ]
         >>> lilypond_file = maker.run(
-        ...     environment='docs',
+        ...     environment="docs",
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
-        >>> block = abjad.Block(name='layout')
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -8273,26 +8273,26 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
 
         >>> metadata, persist = {}, {}
-        >>> persist['persistent_indicators'] = {}
-        >>> persist['persistent_indicators']['Music_Staff'] = [
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]["Music_Staff"] = [
         ...     baca.Memento(
-        ...         context='Music_Voice',
+        ...         context="Music_Voice",
         ...         prototype='baca.StaffLines',
         ...         value=5,
         ...         )
         ...     ]
         >>> lilypond_file = maker.run(
-        ...     environment='docs',
+        ...     environment="docs",
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
-        >>> block = abjad.Block(name='layout')
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -8411,14 +8411,14 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.staff_lines(5),
         ...     baca.staff_lines(5, selector=baca.selectors.leaf(1)),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> block = abjad.Block(name='layout')
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -8540,27 +8540,27 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.staff_lines(5),
         ...     )
 
         >>> metadata, persist = {}, {}
-        >>> persist['persistent_indicators'] = {}
-        >>> persist['persistent_indicators']['Music_Staff'] = [
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]["Music_Staff"] = [
         ...     baca.Memento(
-        ...         context='Music_Voice',
+        ...         context="Music_Voice",
         ...         prototype='baca.StaffLines',
         ...         value=5,
         ...         )
         ...     ]
         >>> lilypond_file = maker.run(
-        ...     environment='docs',
+        ...     environment="docs",
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
-        >>> block = abjad.Block(name='layout')
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -8677,7 +8677,7 @@ r"""
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         baca.system((8,), measure=1, y_offset=4),
+        ...         baca.system(measure=1, y_offset=4, distances=(8,)),
         ...     ),
         ... )
         >>> metronome_marks = abjad.OrderedDict()
@@ -8697,16 +8697,16 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Global_Skips',
+        ...     "Global_Skips",
         ...     baca.metronome_mark(baca.Accelerando()),
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> block = abjad.Block(name='layout')
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -8837,30 +8837,30 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Global_Skips',
+        ...     "Global_Skips",
         ...     baca.metronome_mark(baca.Accelerando()),
         ...     baca.text_spanner_staff_padding(4),
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
 
         >>> metadata, persist = {}, {}
-        >>> persist['persistent_indicators'] = {}
-        >>> persist['persistent_indicators']['Score'] = [
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]['Score'] = [
         ...     baca.Memento(
-        ...         context='Global_Skips',
+        ...         context="Global_Skips",
         ...         prototype='baca.Ritardando',
         ...         )
         ...     ]
         >>> lilypond_file = maker.run(
-        ...     environment='docs',
+        ...     environment="docs",
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
-        >>> block = abjad.Block(name='layout')
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -8996,29 +8996,29 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
         >>> maker(
-        ...     'Global_Skips',
+        ...     "Global_Skips",
         ...     baca.text_spanner_staff_padding(4),
         ...     )
 
         >>> metadata, persist = {}, {}
-        >>> persist['persistent_indicators'] = {}
-        >>> persist['persistent_indicators']['Score'] = [
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]['Score'] = [
         ...     baca.Memento(
-        ...         context='Global_Skips',
+        ...         context="Global_Skips",
         ...         prototype='baca.Accelerando',
         ...         )
         ...     ]
         >>> lilypond_file = maker.run(
-        ...     environment='docs',
+        ...     environment="docs",
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
-        >>> block = abjad.Block(name='layout')
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -9154,7 +9154,7 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Global_Skips',
+        ...     "Global_Skips",
         ...     baca.metronome_mark(baca.Accelerando()),
         ...     baca.metronome_mark(
         ...         baca.Accelerando(),
@@ -9162,12 +9162,12 @@ r"""
         ...         ),
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> block = abjad.Block(name='layout')
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -9318,30 +9318,30 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
-        ...     'Global_Skips',
+        ...     "Global_Skips",
         ...     baca.metronome_mark(baca.Accelerando()),
         ...     baca.text_spanner_staff_padding(4),
         ...     )
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
 
         >>> metadata, persist = {}, {}
-        >>> persist['persistent_indicators'] = {}
-        >>> persist['persistent_indicators']['Score'] = [
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]['Score'] = [
         ...     baca.Memento(
-        ...         context='Global_Skips',
+        ...         context="Global_Skips",
         ...         prototype='baca.Accelerando',
         ...         )
         ...     ]
         >>> lilypond_file = maker.run(
-        ...     environment='docs',
+        ...     environment="docs",
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
-        >>> block = abjad.Block(name='layout')
+        >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file) # doctest: +SKIP

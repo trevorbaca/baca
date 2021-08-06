@@ -26,7 +26,7 @@ class BreakMeasureMap:
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8), (4, 8)],
         ...     breaks=baca.breaks(
         ...         baca.page(
-        ...             baca.system((10, 20), measure=1, y_offset=0),
+        ...             baca.system(measure=1, y_offset=0, distances=(10, 20)),
         ...         ),
         ...     ),
         ... )
@@ -366,13 +366,13 @@ class BreakMeasureMap:
     def __init__(
         self,
         *,
-        commands: abjad.OrderedDict = None,
-        deactivate: bool = None,
-        local_measure_numbers: bool = None,
-        page_count: int = None,
-        partial_score: int = None,
-        tags: typing.List[abjad.Tag] = None,
-    ) -> None:
+        commands=None,
+        deactivate=False,
+        local_measure_numbers=False,
+        page_count=None,
+        partial_score=None,
+        tags=None,
+    ):
         tags = _scoping.Command._preprocess_tags(tags)
         assert _scoping.Command._validate_tags(tags), repr(tags)
         if _tags.BREAK not in tags:
@@ -403,7 +403,7 @@ class BreakMeasureMap:
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, context: abjad.Context = None) -> None:
+    def __call__(self, context=None):
         """
         Calls map on ``context``.
         """
@@ -437,21 +437,10 @@ class BreakMeasureMap:
             for command in commands:
                 command(context)
 
-    def __repr__(self):
-        """
-        Gets interpreter representation.
-        """
-        return abjad.StorageFormatManager(self).get_repr_format()
-
-    ### PRIVATE METHODS ###
-
-    def _get_format_specification(self):
-        return abjad.FormatSpecification()
-
     ### PUBLIC PROPERTIES ###
 
     @property
-    def bol_measure_numbers(self) -> typing.List[int]:
+    def bol_measure_numbers(self):
         """
         Gets beginning-of-line measure numbers.
 
@@ -460,42 +449,42 @@ class BreakMeasureMap:
         return self._bol_measure_numbers
 
     @property
-    def commands(self) -> typing.Optional[abjad.OrderedDict]:
+    def commands(self):
         """
         Gets commands.
         """
         return self._commands
 
     @property
-    def deactivate(self) -> typing.Optional[bool]:
+    def deactivate(self):
         """
         Is true when tags should write deactivated.
         """
         return self._deactivate
 
     @property
-    def first_measure_number(self) -> int:
+    def first_measure_number(self):
         """
         Gets first measure number.
         """
         return self.bol_measure_numbers[0]
 
     @property
-    def local_measure_numbers(self) -> typing.Optional[bool]:
+    def local_measure_numbers(self):
         """
         Is true when segment measures numbers starting from 1.
         """
         return self._local_measure_numbers
 
     @property
-    def page_count(self) -> typing.Optional[int]:
+    def page_count(self):
         """
         Gets page count.
         """
         return self._page_count
 
     @property
-    def partial_score(self) -> typing.Optional[int]:
+    def partial_score(self):
         """
         Gets number of measures in partial score.
 
@@ -506,7 +495,7 @@ class BreakMeasureMap:
         return self._partial_score
 
     @property
-    def tag(self) -> abjad.Tag:
+    def tag(self):
         """
         Gets tag.
         """
@@ -518,7 +507,7 @@ class BreakMeasureMap:
             return abjad.Tag()
 
     @property
-    def tags(self) -> typing.List[abjad.Tag]:
+    def tags(self):
         """
         Gets tags.
         """
@@ -543,7 +532,7 @@ class HorizontalSpacingSpecifier:
         ...     "Music_Voice",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 F4"),
-        ...     )
+        ... )
 
         >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1628,16 +1617,16 @@ class HorizontalSpacingSpecifier:
     def __init__(
         self,
         *,
-        breaks: BreakMeasureMap = None,
-        fermata_measure_numbers: typing.List[int] = None,
-        fermata_measure_duration: abjad.DurationTyping = (1, 4),
-        first_measure_number: int = None,
-        measure_count: int = None,
-        measures: abjad.OrderedDict = None,
-        minimum_duration: abjad.DurationTyping = None,
-        multiplier: abjad.IntegerPair = None,
-        phantom: bool = None,
-    ) -> None:
+        breaks=None,
+        fermata_measure_numbers=None,
+        fermata_measure_duration=(1, 4),
+        first_measure_number=None,
+        measure_count=None,
+        measures=None,
+        minimum_duration=None,
+        multiplier=None,
+        phantom=False,
+    ):
         if breaks is not None:
             assert isinstance(breaks, BreakMeasureMap), repr(breaks)
         self._breaks = breaks
@@ -1671,13 +1660,12 @@ class HorizontalSpacingSpecifier:
             measures = abjad.OrderedDict()
         self._measures = measures
         self._overriden_fermata_measures: typing.List[int] = []
-        if phantom is not None:
-            phantom = bool(phantom)
+        assert isinstance(phantom, bool), repr(phantom)
         self._phantom = phantom
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, segment_maker=None) -> None:
+    def __call__(self, segment_maker=None):
         """
         Calls command on ``segment_maker``.
         """
@@ -1851,7 +1839,7 @@ class HorizontalSpacingSpecifier:
     ### PUBLIC PROPERTIES ###
 
     @property
-    def bol_measure_numbers(self) -> typing.List[int]:
+    def bol_measure_numbers(self):
         """
         Gets beginning-of-line measure numbers.
 
@@ -1859,8 +1847,8 @@ class HorizontalSpacingSpecifier:
 
             >>> breaks = baca.breaks(
             ...     baca.page(
-            ...         baca.system((10, 20), measure=1, y_offset=15),
-            ...         baca.system((10, 20), measure=9, y_offset=115),
+            ...         baca.system(measure=1, y_offset=15, distances=(10, 20)),
+            ...         baca.system(measure=9, y_offset=115, distances=(10, 20)),
             ...     ),
             ... )
             >>> spacing = baca.scorewide_spacing(
@@ -1884,14 +1872,14 @@ class HorizontalSpacingSpecifier:
         return bol_measure_numbers
 
     @property
-    def breaks(self) -> typing.Optional[BreakMeasureMap]:
+    def breaks(self):
         """
         Gets break measure map.
         """
         return self._breaks
 
     @property
-    def eol_measure_numbers(self) -> typing.List[int]:
+    def eol_measure_numbers(self):
         """
         Gets end-of-line measure numbers.
 
@@ -1899,8 +1887,8 @@ class HorizontalSpacingSpecifier:
 
             >>> breaks = baca.breaks(
             ...     baca.page(
-            ...         baca.system((10, 20), measure=1, y_offset=15),
-            ...         baca.system((10, 20), measure=9, y_offset=115),
+            ...         baca.system(measure=1, y_offset=15, distances=(10, 20)),
+            ...         baca.system(measure=9, y_offset=115, distances=(10, 20)),
             ...     ),
             ... )
             >>> spacing = baca.scorewide_spacing(
@@ -1920,17 +1908,17 @@ class HorizontalSpacingSpecifier:
         return eol_measure_numbers
 
     @property
-    def fermata_measure_duration(self) -> typing.Optional[abjad.Duration]:
+    def fermata_measure_duration(self):
         """
         Gets fermata measure duration.
 
-        Sets fermata measures to exactly this duration when set; ignores
-        minimum duration and multiplier.
+        Sets fermata measures to exactly this duration when set; ignores minimum duration
+        and multiplier.
         """
         return self._fermata_measure_duration
 
     @property
-    def fermata_measure_numbers(self) -> typing.List[int]:
+    def fermata_measure_numbers(self):
         """
         Gets fermata measure numbers.
 
@@ -1938,8 +1926,8 @@ class HorizontalSpacingSpecifier:
 
             >>> breaks = baca.breaks(
             ...     baca.page(
-            ...         baca.system((10, 20), measure=1, y_offset=15),
-            ...         baca.system((10, 20), measure=9, y_offset=115),
+            ...         baca.system(measure=1, y_offset=15, distances=(10, 20)),
+            ...         baca.system(measure=9, y_offset=115, distances=(10, 20)),
             ...     ),
             ... )
             >>> spacing = baca.scorewide_spacing(
@@ -1955,7 +1943,7 @@ class HorizontalSpacingSpecifier:
         return self._fermata_measure_numbers
 
     @property
-    def final_measure_number(self) -> typing.Optional[int]:
+    def final_measure_number(self):
         """
         Gets last measure number.
 
@@ -1963,8 +1951,8 @@ class HorizontalSpacingSpecifier:
 
             >>> breaks = baca.breaks(
             ...     baca.page(
-            ...         baca.system((10, 20), measure=1, y_offset=15),
-            ...         baca.system((10, 20), measure=9, y_offset=115),
+            ...         baca.system(measure=1, y_offset=15, distances=(10, 20)),
+            ...         baca.system(measure=9, y_offset=115, distances=(10, 20)),
             ...     ),
             ... )
             >>> spacing = baca.scorewide_spacing(
@@ -1986,7 +1974,7 @@ class HorizontalSpacingSpecifier:
             return None
 
     @property
-    def first_measure_number(self) -> typing.Optional[int]:
+    def first_measure_number(self):
         """
         Gets first measure number.
 
@@ -1994,8 +1982,8 @@ class HorizontalSpacingSpecifier:
 
             >>> breaks = baca.breaks(
             ...     baca.page(
-            ...         baca.system((10, 20), measure=1, y_offset=15),
-            ...         baca.system((10, 20), measure=9, y_offset=115),
+            ...         baca.system(measure=1, y_offset=15, distances=(10, 20)),
+            ...         baca.system(measure=9, y_offset=115, distances=(10, 20)),
             ...     ),
             ... )
             >>> spacing = baca.scorewide_spacing(
@@ -2019,8 +2007,8 @@ class HorizontalSpacingSpecifier:
 
             >>> breaks = baca.breaks(
             ...     baca.page(
-            ...         baca.system((10, 20), measure=1, y_offset=15),
-            ...         baca.system((10, 20), measure=9, y_offset=115),
+            ...         baca.system(measure=1, y_offset=15, distances=(10, 20)),
+            ...         baca.system(measure=9, y_offset=115, distances=(10, 20)),
             ...     ),
             ... )
             >>> spacing = baca.scorewide_spacing(
@@ -2039,7 +2027,7 @@ class HorizontalSpacingSpecifier:
         return self._magic_lilypond_eol_adjustment
 
     @property
-    def measure_count(self) -> typing.Optional[int]:
+    def measure_count(self):
         """
         Gets measure count.
 
@@ -2047,8 +2035,8 @@ class HorizontalSpacingSpecifier:
 
             >>> breaks = baca.breaks(
             ...     baca.page(
-            ...         baca.system((10, 20), measure=1, y_offset=15),
-            ...         baca.system((10, 20), measure=9, y_offset=115),
+            ...         baca.system(measure=1, y_offset=15, distances=(10, 20)),
+            ...         baca.system(measure=9, y_offset=115, distances=(10, 20)),
             ...     ),
             ... )
             >>> spacing = baca.scorewide_spacing(
@@ -2064,14 +2052,14 @@ class HorizontalSpacingSpecifier:
         return self._measure_count
 
     @property
-    def measures(self) -> abjad.OrderedDict:
+    def measures(self):
         """
         Gets measure overrides.
         """
         return self._measures
 
     @property
-    def minimum_duration(self) -> typing.Optional[abjad.NonreducedFraction]:
+    def minimum_duration(self):
         """
         Gets minimum duration.
 
@@ -2080,14 +2068,14 @@ class HorizontalSpacingSpecifier:
         return self._minimum_duration
 
     @property
-    def multiplier(self) -> typing.Optional[abjad.Multiplier]:
+    def multiplier(self):
         """
         Gets multiplier.
         """
         return self._multiplier
 
     @property
-    def phantom(self) -> typing.Optional[bool]:
+    def phantom(self):
         """
         Is true when segment concludes with phantom measure.
         """
@@ -2097,11 +2085,11 @@ class HorizontalSpacingSpecifier:
 
     def override(
         self,
-        measures: typing.Union[int, tuple, list],
-        pair: typing.Union[abjad.IntegerPair, str],
+        measures,
+        pair,
         *,
-        fermata: bool = None,
-        force_local: bool = None,
+        fermata=False,
+        force_local=False,
     ) -> None:
         r"""
         Overrides ``measures`` with spacing ``pair``.
@@ -2110,7 +2098,7 @@ class HorizontalSpacingSpecifier:
 
             >>> breaks = baca.breaks(
             ...     baca.page(
-            ...         baca.system((10, 20), measure=1, y_offset=15),
+            ...         baca.system(measure=1, y_offset=15, distances=(10, 20)),
             ...     ),
             ... )
             >>> spacing = baca.scorewide_spacing(
@@ -2332,8 +2320,7 @@ class HorizontalSpacingSpecifier:
                 self.measures[number] = duration
                 measures_.append(number)
         else:
-            message = f"measures must be int, pair or list (not {measures!r})."
-            raise TypeError(message)
+            raise TypeError(f"measures must be int, pair or list (not {measures!r}).")
         if fermata:
             self._overriden_fermata_measures.extend(measures_)
 
@@ -2377,9 +2364,9 @@ class PageSpecifier:
     def __init__(
         self,
         *,
-        number: int = None,
-        systems: typing.List[typing.Union[list, "SystemSpecifier"]] = None,
-    ) -> None:
+        number=None,
+        systems=None,
+    ):
         if number is not None:
             assert isinstance(number, int), repr(number)
             assert 1 <= number, repr(number)
@@ -2392,8 +2379,7 @@ class PageSpecifier:
                 elif isinstance(system, list):
                     y_offset = system[1]
                 if y_offset in y_offsets:
-                    message = f"systems overlap at Y-offset {y_offset}."
-                    raise Exception(message)
+                    raise Exception(f"systems overlap at Y-offset {y_offset}.")
                 else:
                     y_offsets.append(y_offset)
         self.systems = systems
@@ -2408,20 +2394,19 @@ class SystemSpecifier:
 
     def __init__(
         self,
-        *,
-        distances,
         measure,
         y_offset,
+        distances,
     ):
+        assert isinstance(measure, int), repr(measure)
+        self.measure = measure
+        assert isinstance(y_offset, (int, float)), repr(y_offset)
+        self.y_offset = y_offset
         assert isinstance(distances, collections.abc.Iterable), repr(distances)
         for distance in distances:
             assert isinstance(distance, (int, float)), repr(distance)
         distances = list(distances)
         self.distances = distances
-        assert isinstance(measure, int), repr(measure)
-        self.measure = measure
-        assert isinstance(y_offset, (int, float)), repr(y_offset)
-        self.y_offset = y_offset
 
 
 ### FACTORY FUNCTIONS ###
@@ -2439,11 +2424,11 @@ def breaks(
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         baca.system([15, 20, 20], measure=1, y_offset=20),
-        ...         baca.system([15, 20, 20], measure=13, y_offset=140),
+        ...         baca.system(measure=1, y_offset=20, distances=(15, 20, 20)),
+        ...         baca.system(measure=13, y_offset=140, distances=(15, 20, 20)),
         ...     ),
         ...     baca.page(
-        ...         baca.system([15, 20, 20], measure=23, y_offset=20),
+        ...         baca.system(measure=23, y_offset=20, distances=(15, 20, 20)),
         ...     ),
         ... )
 
@@ -2457,12 +2442,12 @@ def breaks(
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         baca.system([15, 20, 20], measure=1, y_offset=20),
-        ...         baca.system([15, 20, 20], measure=13, y_offset=140),
+        ...         baca.system(measure=1, y_offset=20, distances=(15, 20, 20)),
+        ...         baca.system(measure=13, y_offset=140, distances=(15, 20, 20)),
         ...         number=1,
         ...     ),
         ...     baca.page(
-        ...         baca.system([15, 20, 20], measure=23, y_offset=20),
+        ...         baca.system(measure=23, y_offset=20, distances=(15, 20, 20)),
         ...         number=9
         ...     ),
         ... )
@@ -2479,10 +2464,10 @@ def breaks(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8), (4, 8)],
         ...     breaks=baca.breaks(
         ...         baca.page(
-        ...             baca.system((10, 20), measure=99, y_offset=0),
+        ...             baca.system(measure=99, y_offset=0, distances=(10, 20)),
         ...         ),
         ...         baca.page(
-        ...             baca.system((10, 20), measure=109, y_offset=0),
+        ...             baca.system(measure=109, y_offset=0, distances=(10, 20)),
         ...         ),
         ...     ),
         ... )
@@ -2573,7 +2558,7 @@ def minimum_duration(duration):
     return HorizontalSpacingSpecifier(minimum_duration=duration)
 
 
-def page(*systems, number=None, page_number=None):
+def page(*systems, number=None):
     r"""
     Makes page specifier.
 
@@ -2582,9 +2567,9 @@ def page(*systems, number=None, page_number=None):
         Raises exception when systems overlap at Y-offset:
 
         >>> baca.page(
-        ...     baca.system((20, 20), measure=1, y_offset=60),
-        ...     baca.system((20, 20), measure=4, y_offset=60),
-        ...     page_number=1,
+        ...     baca.system(measure=1, y_offset=60, distances=(20, 20)),
+        ...     baca.system(measure=4, y_offset=60, distances=(20, 20)),
+        ...     number=1,
         ... )
         Traceback (most recent call last):
             ...
@@ -2592,7 +2577,6 @@ def page(*systems, number=None, page_number=None):
 
     """
     systems_ = []
-    number = page_number or number
     for system in systems:
         assert isinstance(system, SystemSpecifier), repr(system)
         systems_.append(system)
@@ -2601,6 +2585,7 @@ def page(*systems, number=None, page_number=None):
 
 def scorewide_spacing(
     path,
+    *,
     fallback_duration,
     breaks=None,
     fermata_measure_duration=(1, 4),
@@ -2624,8 +2609,8 @@ def scorewide_spacing(
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         baca.system((10, 20), measure=1, y_offset=15),
-        ...         baca.system((10, 20), measure=9, y_offset=115),
+        ...         baca.system(measure=1, y_offset=15, distances=(10, 20)),
+        ...         baca.system(measure=9, y_offset=115, distances=(10, 20)),
         ...     ),
         ... )
         >>> spacing = baca.scorewide_spacing(
@@ -2683,9 +2668,9 @@ def scorewide_spacing(
     return specifier
 
 
-def system(distances, measure=None, y_offset=None):
+def system(*, measure, y_offset, distances):
     """
     Makes system specifier.
     """
     distances = _classes.Sequence(distances).flatten(depth=-1)
-    return SystemSpecifier(distances=distances, measure=measure, y_offset=y_offset)
+    return SystemSpecifier(measure=measure, y_offset=y_offset, distances=distances)
