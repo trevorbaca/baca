@@ -1458,8 +1458,6 @@ class SegmentMaker:
         if self.breaks is None:
             return
         self.breaks(self.score["Global_Skips"])
-        if self.breaks.local_measure_numbers:
-            abjad.setting(self.score).current_bar_number = 1
 
     def _apply_spacing(self):
         if self.spacing is None:

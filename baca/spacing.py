@@ -355,7 +355,6 @@ class BreakMeasureMap:
         "_bol_measure_numbers",
         "_commands",
         "_deactivate",
-        "_local_measure_numbers",
         "_page_count",
         "_partial_score",
         "_tags",
@@ -368,7 +367,6 @@ class BreakMeasureMap:
         *,
         commands=None,
         deactivate=False,
-        local_measure_numbers=False,
         page_count=None,
         partial_score=None,
         tags=None,
@@ -380,9 +378,6 @@ class BreakMeasureMap:
         self._tags = tags
         self._bol_measure_numbers: typing.List[int] = []
         self._deactivate = deactivate
-        if local_measure_numbers is not None:
-            local_measure_numbers = bool(local_measure_numbers)
-        self._local_measure_numbers = local_measure_numbers
         if page_count is not None:
             assert isinstance(page_count, int), repr(page_count)
         self._page_count = page_count
@@ -468,13 +463,6 @@ class BreakMeasureMap:
         Gets first measure number.
         """
         return self.bol_measure_numbers[0]
-
-    @property
-    def local_measure_numbers(self):
-        """
-        Is true when segment measures numbers starting from 1.
-        """
-        return self._local_measure_numbers
 
     @property
     def page_count(self):
@@ -2414,7 +2402,6 @@ class SystemSpecifier:
 
 def breaks(
     *page_specifiers,
-    local_measure_numbers=False,
     partial_score=None,
 ):
     r"""
@@ -2543,7 +2530,6 @@ def breaks(
             commands[measure_number] = [command, lbsd_command]
     breaks = BreakMeasureMap(
         commands=commands,
-        local_measure_numbers=local_measure_numbers,
         page_count=page_count,
         partial_score=partial_score,
     )
@@ -2593,17 +2579,15 @@ def scorewide_spacing(
     r"""
     Makes scorewide spacing.
 
-    :param path: path from which first measure number, measure count,
-        and fermata measure numbers metadata will be read;
-        triple may be passed directly for tests.
+    Uses ``path`` for first measure number, measure count, and fermata measure
+    numbers metadata; triple may be passed directly for tests.
 
-    :param fallback_duration: spacing for measures without override.
+    Uses ``fallback_duration`` spacing for measures without override.
 
-    :param breaks: break measure map giving beginning-of-line and
-        end-of-line measure numbers.
+    Uses ``breaks`` measure map for beginning-of-line and end-of-line measure numbers.
 
-    :param fermata_measure_duration: spacing for measures found in fermata
-        measure numbers path metadata.
+    Uses ``fermata_measure_duration`` spacing for measures found in fermata measure
+    numbers path metadata.
 
     ..  container:: example
 
