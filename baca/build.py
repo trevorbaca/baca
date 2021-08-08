@@ -17,11 +17,6 @@ def _check_layout_time_signatures(music_ly):
         print(f"No {baca.path.trim(layout_ly_file_path)} found ...")
         return
     print(f"Found {baca.path.trim(layout_ly_file_path)} ...")
-    partial_score = _get_preamble_partial_score(layout_ly_file_path)
-    if partial_score:
-        print(f"Found {baca.path.trim(layout_ly_file_path)} partial score comment ...")
-        print("Aborting layout time signature check ...")
-        return
     metadata_time_signatures = []
     segments_directory = build_directory / "segments"
     for segment_directory in sorted(segments_directory.glob("*")):
@@ -96,21 +91,6 @@ def _get_preamble_page_count_overview(path):
         final_page_number = first_page_number + page_count - 1
         return first_page_number, page_count, final_page_number
     return None
-
-
-def _get_preamble_partial_score(path):
-    """
-    Gets preamble time signatures.
-    """
-    assert path.is_file(), repr(path)
-    prefix = "% partial_score ="
-    with open(path) as pointer:
-        for line in pointer.readlines():
-            if line.startswith(prefix):
-                line = line[len(prefix) :]
-                partial_score = eval(line)
-                return partial_score
-    return False
 
 
 def _get_preamble_time_signatures(path):
@@ -874,8 +854,6 @@ def make_layout_ly(layout_py, breaks, spacing=None, *, part_identifier=None):
                 "time_signatures",
             )
             time_signatures.extend(time_signatures_)
-    if breaks.partial_score is not None:
-        time_signatures = time_signatures[: breaks.partial_score]
     maker = baca.SegmentMaker(
         breaks=breaks,
         do_not_check_persistence=True,
@@ -906,8 +884,6 @@ def make_layout_ly(layout_py, breaks, spacing=None, *, part_identifier=None):
     text = abjad.LilyPondFormatManager.left_shift_tags(text)
     layout_ly = layout_directory / "layout.ly"
     lines = []
-    if breaks.partial_score is not None:
-        lines.append("% partial_score = True")
     if layout_directory.parent.name == "segments":
         first_segment = layout_directory.parent / "01"
         if layout_directory.name != first_segment.name:
