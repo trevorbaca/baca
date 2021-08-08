@@ -1329,7 +1329,6 @@ Classes and functions for spacing.
 """
 import collections
 import pathlib
-import typing
 
 import abjad
 
@@ -1376,7 +1375,7 @@ class BreakMeasureMap:
         if _tags.BREAK not in tags:
             tags.append(_tags.BREAK)
         self._tags = tags
-        self._bol_measure_numbers: typing.List[int] = []
+        self._bol_measure_numbers = []
         self._deactivate = deactivate
         if page_count is not None:
             assert isinstance(page_count, int), repr(page_count)
@@ -1516,7 +1515,6 @@ class SpacingSpecifier:
         "_fermata_measure_duration",
         "_fermata_start_offsets",
         "_first_measure_number",
-        "_forbid_segment_maker_adjustments",
         "_measure_count",
         "_measures",
         "_minimum_duration",
@@ -1553,12 +1551,11 @@ class SpacingSpecifier:
         if fermata_measure_duration is not None:
             duration_ = abjad.Duration(fermata_measure_duration)
         self._fermata_measure_duration = duration_
-        self._fermata_start_offsets: typing.List[abjad.Offset] = []
+        self._fermata_start_offsets = []
         if first_measure_number is not None:
             assert isinstance(first_measure_number, int)
             assert 1 <= first_measure_number
         self._first_measure_number = first_measure_number
-        self._forbid_segment_maker_adjustments: typing.Optional[bool] = None
         if measure_count is not None:
             assert isinstance(measure_count, int)
             assert 0 <= measure_count
@@ -1574,7 +1571,7 @@ class SpacingSpecifier:
         else:
             measures = abjad.OrderedDict()
         self._measures = measures
-        self._overriden_fermata_measures: typing.List[int] = []
+        self._overriden_fermata_measures = []
         assert isinstance(phantom, bool), repr(phantom)
         self._phantom = phantom
 
@@ -2356,7 +2353,6 @@ def scorewide_spacing(
         measure_count=measure_count,
         measures=measures,
     )
-    specifier._forbid_segment_maker_adjustments = True
     return specifier
 
 
