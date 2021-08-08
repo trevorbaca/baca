@@ -1412,10 +1412,10 @@ Module-level docs.
     measures is not int, pair or list:
 
     >>> spacing = baca.scorewide_spacing(
-    ...     (95, 18, [103, 105]),
+    ...     (1, 18, [4, 6]),
     ...     fallback_duration=(1, 20),
     ... )
-    >>> spacing.override('all', (1, 16))
+    >>> spacing.override("all", (1, 16))
     Traceback (most recent call last):
         ...
     TypeError: measures must be int, pair or list (not 'all').
@@ -1921,24 +1921,6 @@ class HorizontalSpacingSpecifier:
     def bol_measure_numbers(self):
         """
         Gets beginning-of-line measure numbers.
-
-        ..  container:: example
-
-            >>> breaks = baca.breaks(
-            ...     baca.page(
-            ...         baca.system(measure=1, y_offset=15, distances=(10, 20)),
-            ...         baca.system(measure=9, y_offset=115, distances=(10, 20)),
-            ...     ),
-            ... )
-            >>> spacing = baca.scorewide_spacing(
-            ...     (95, 18, [103, 105]),
-            ...     breaks=breaks,
-            ...     fallback_duration=(1, 20),
-            ... )
-
-            >>> spacing.bol_measure_numbers
-            [95, 103]
-
         """
         bol_measure_numbers = []
         if self.breaks and self.breaks.bol_measure_numbers:
@@ -1961,24 +1943,6 @@ class HorizontalSpacingSpecifier:
     def eol_measure_numbers(self):
         """
         Gets end-of-line measure numbers.
-
-        ..  container:: example
-
-            >>> breaks = baca.breaks(
-            ...     baca.page(
-            ...         baca.system(measure=1, y_offset=15, distances=(10, 20)),
-            ...         baca.system(measure=9, y_offset=115, distances=(10, 20)),
-            ...     ),
-            ... )
-            >>> spacing = baca.scorewide_spacing(
-            ...     (95, 18, [103, 105]),
-            ...     breaks=breaks,
-            ...     fallback_duration=(1, 20),
-            ... )
-
-            >>> spacing.eol_measure_numbers
-            [102]
-
         """
         eol_measure_numbers = []
         for bol_measure_number in self.bol_measure_numbers[1:]:
@@ -2000,48 +1964,13 @@ class HorizontalSpacingSpecifier:
     def fermata_measure_numbers(self):
         """
         Gets fermata measure numbers.
-
-        ..  container:: example
-
-            >>> breaks = baca.breaks(
-            ...     baca.page(
-            ...         baca.system(measure=1, y_offset=15, distances=(10, 20)),
-            ...         baca.system(measure=9, y_offset=115, distances=(10, 20)),
-            ...     ),
-            ... )
-            >>> spacing = baca.scorewide_spacing(
-            ...     (95, 18, [103, 105]),
-            ...     breaks=breaks,
-            ...     fallback_duration=(1, 20),
-            ... )
-
-            >>> spacing.fermata_measure_numbers
-            [103, 105]
-
         """
         return self._fermata_measure_numbers
 
     @property
     def final_measure_number(self):
         """
-        Gets last measure number.
-
-        ..  container:: example
-
-            >>> breaks = baca.breaks(
-            ...     baca.page(
-            ...         baca.system(measure=1, y_offset=15, distances=(10, 20)),
-            ...         baca.system(measure=9, y_offset=115, distances=(10, 20)),
-            ...     ),
-            ... )
-            >>> spacing = baca.scorewide_spacing(
-            ...     (95, 18, [103, 105]),
-            ...     breaks=breaks,
-            ...     fallback_duration=(1, 20),
-            ... )
-
-            >>> spacing.final_measure_number
-            112
+        Gets final measure number.
 
         Gives none when first measure number is not defined.
 
@@ -2056,24 +1985,6 @@ class HorizontalSpacingSpecifier:
     def first_measure_number(self):
         """
         Gets first measure number.
-
-        ..  container:: example
-
-            >>> breaks = baca.breaks(
-            ...     baca.page(
-            ...         baca.system(measure=1, y_offset=15, distances=(10, 20)),
-            ...         baca.system(measure=9, y_offset=115, distances=(10, 20)),
-            ...     ),
-            ... )
-            >>> spacing = baca.scorewide_spacing(
-            ...     (95, 18, [103, 105]),
-            ...     breaks=breaks,
-            ...     fallback_duration=(1, 20),
-            ... )
-
-            >>> spacing.first_measure_number
-            95
-
         """
         return self._first_measure_number
 
@@ -2081,23 +1992,6 @@ class HorizontalSpacingSpecifier:
     def magic_lilypond_eol_adjustment(self):
         """
         Gets magic LilyPond EOL adjustment.
-
-        ..  container
-
-            >>> breaks = baca.breaks(
-            ...     baca.page(
-            ...         baca.system(measure=1, y_offset=15, distances=(10, 20)),
-            ...         baca.system(measure=9, y_offset=115, distances=(10, 20)),
-            ...     ),
-            ... )
-            >>> spacing = baca.scorewide_spacing(
-            ...     (95, 18, [103, 105]),
-            ...     breaks=breaks,
-            ...     fallback_duration=(1, 20),
-            ... )
-
-            >>> spacing.magic_lilypond_eol_adjustment
-            Multiplier(35, 24)
 
         Optically determined to correct LilyPond end-of-line spacing bug.
 
@@ -2109,24 +2003,6 @@ class HorizontalSpacingSpecifier:
     def measure_count(self):
         """
         Gets measure count.
-
-        ..  container:: example
-
-            >>> breaks = baca.breaks(
-            ...     baca.page(
-            ...         baca.system(measure=1, y_offset=15, distances=(10, 20)),
-            ...         baca.system(measure=9, y_offset=115, distances=(10, 20)),
-            ...     ),
-            ... )
-            >>> spacing = baca.scorewide_spacing(
-            ...     (95, 18, [103, 105]),
-            ...     breaks=breaks,
-            ...     fallback_duration=(1, 20),
-            ... )
-
-            >>> spacing.measure_count
-            18
-
         """
         return self._measure_count
 
@@ -2181,7 +2057,7 @@ class HorizontalSpacingSpecifier:
             ...     ),
             ... )
             >>> spacing = baca.scorewide_spacing(
-            ...     (95, 5, []),
+            ...     (1, 5, []),
             ...     breaks=breaks,
             ...     fallback_duration=(1, 20),
             ... )
@@ -2191,23 +2067,23 @@ class HorizontalSpacingSpecifier:
             abjad.OrderedDict(
                 [
                     (
-                        95,
+                        1,
                         abjad.NonreducedFraction(1, 20),
                         ),
                     (
-                        96,
+                        2,
                         abjad.NonreducedFraction(1, 20),
                         ),
                     (
-                        97,
+                        3,
                         abjad.NonreducedFraction(1, 20),
                         ),
                     (
-                        98,
+                        4,
                         abjad.NonreducedFraction(1, 20),
                         ),
                     (
-                        99,
+                        5,
                         abjad.NonreducedFraction(1, 20),
                         ),
                     ]
@@ -2219,23 +2095,23 @@ class HorizontalSpacingSpecifier:
             abjad.OrderedDict(
                 [
                     (
-                        95,
+                        1,
                         abjad.NonreducedFraction(1, 24),
                         ),
                     (
-                        96,
+                        2,
                         abjad.NonreducedFraction(1, 24),
                         ),
                     (
-                        97,
+                        3,
                         abjad.NonreducedFraction(1, 24),
                         ),
                     (
-                        98,
+                        4,
                         abjad.NonreducedFraction(1, 24),
                         ),
                     (
-                        99,
+                        5,
                         abjad.NonreducedFraction(1, 24),
                         ),
                     ]
@@ -2244,29 +2120,29 @@ class HorizontalSpacingSpecifier:
             Works with measure number:
 
             >>> spacing.override((1, -1), (1, 16))
-            >>> spacing.override(95, (1, 24))
+            >>> spacing.override(1, (1, 24))
             >>> string = abjad.storage(spacing.measures)
             >>> print(string)
             abjad.OrderedDict(
                 [
                     (
-                        95,
+                        1,
                         abjad.NonreducedFraction(1, 24),
                         ),
                     (
-                        96,
+                        2,
                         abjad.NonreducedFraction(1, 16),
                         ),
                     (
-                        97,
+                        3,
                         abjad.NonreducedFraction(1, 16),
                         ),
                     (
-                        98,
+                        4,
                         abjad.NonreducedFraction(1, 16),
                         ),
                     (
-                        99,
+                        5,
                         abjad.NonreducedFraction(1, 16),
                         ),
                     ]
@@ -2275,29 +2151,29 @@ class HorizontalSpacingSpecifier:
             Works with range of measure numbers:
 
             >>> spacing.override((1, -1), (1, 16))
-            >>> spacing.override((95, 97), (1, 24))
+            >>> spacing.override((1, 3), (1, 24))
             >>> string = abjad.storage(spacing.measures)
             >>> print(string)
             abjad.OrderedDict(
                 [
                     (
-                        95,
+                        1,
                         abjad.NonreducedFraction(1, 24),
                         ),
                     (
-                        96,
+                        2,
                         abjad.NonreducedFraction(1, 24),
                         ),
                     (
-                        97,
+                        3,
                         abjad.NonreducedFraction(1, 24),
                         ),
                     (
-                        98,
+                        4,
                         abjad.NonreducedFraction(1, 16),
                         ),
                     (
-                        99,
+                        5,
                         abjad.NonreducedFraction(1, 16),
                         ),
                     ]
@@ -2306,29 +2182,29 @@ class HorizontalSpacingSpecifier:
             Works with list of measure numbers:
 
             >>> spacing.override((1, -1), (1, 16))
-            >>> spacing.override([95, 97, 99], (1, 24))
+            >>> spacing.override([1, 3, 5], (1, 24))
             >>> string = abjad.storage(spacing.measures)
             >>> print(string)
             abjad.OrderedDict(
                 [
                     (
-                        95,
+                        1,
                         abjad.NonreducedFraction(1, 24),
                         ),
                     (
-                        96,
+                        2,
                         abjad.NonreducedFraction(1, 16),
                         ),
                     (
-                        97,
+                        3,
                         abjad.NonreducedFraction(1, 24),
                         ),
                     (
-                        98,
+                        4,
                         abjad.NonreducedFraction(1, 16),
                         ),
                     (
-                        99,
+                        5,
                         abjad.NonreducedFraction(1, 24),
                         ),
                     ]
@@ -2343,23 +2219,23 @@ class HorizontalSpacingSpecifier:
             abjad.OrderedDict(
                 [
                     (
-                        95,
+                        1,
                         abjad.NonreducedFraction(1, 16),
                         ),
                     (
-                        96,
+                        2,
                         abjad.NonreducedFraction(1, 16),
                         ),
                     (
-                        97,
+                        3,
                         abjad.NonreducedFraction(1, 24),
                         ),
                     (
-                        98,
+                        4,
                         abjad.NonreducedFraction(1, 16),
                         ),
                     (
-                        99,
+                        5,
                         abjad.NonreducedFraction(1, 24),
                         ),
                     ]
@@ -2487,7 +2363,7 @@ def breaks(
     partial_score=None,
 ):
     r"""
-    Makes breaks.
+    Makes break measure map.
 
     ..  container:: example
 
@@ -2609,25 +2485,25 @@ def scorewide_spacing(
         ...     ),
         ... )
         >>> spacing = baca.scorewide_spacing(
-        ...     (95, 18, [105, 107]),
+        ...     (1, 18, [4, 6]),
         ...     breaks=breaks,
         ...     fallback_duration=(1, 20),
         ... )
 
         >>> spacing.bol_measure_numbers
-        [95, 103]
+        [1, 9]
 
         >>> spacing.eol_measure_numbers
-        [102]
+        [8]
 
         >>> spacing.fermata_measure_numbers
-        [105, 107]
+        [4, 6]
 
         >>> spacing.first_measure_number
-        95
+        1
 
         >>> spacing.final_measure_number
-        112
+        18
 
         >>> spacing.measure_count
         18
