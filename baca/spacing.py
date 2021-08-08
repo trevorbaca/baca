@@ -1,5 +1,5 @@
 r"""
-Module-level docs.
+Classes and functions for spacing.
 
 ..  container:: example
 
@@ -333,172 +333,11 @@ Module-level docs.
 
 ..  container:: example
 
-    Example 2. No spacing command:
+    Example 2. Spacing specifier used as null spacing command:
 
     >>> maker = baca.SegmentMaker(
     ...     score_template=baca.SingleStaffScoreTemplate(),
-    ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
-    ... )
-
-    >>> maker(
-    ...     "Music_Voice",
-    ...     baca.make_even_divisions(),
-    ...     baca.pitches("E4 F4"),
-    ... )
-
-    >>> lilypond_file = maker.run(environment="docs")
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-    ..  docs::
-
-        >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-        >>> print(string)
-        <BLANKLINE>
-        \context Score = "Score"
-        <<
-        <BLANKLINE>
-            \context GlobalContext = "Global_Context"
-            <<
-        <BLANKLINE>
-                \context GlobalSkips = "Global_Skips"
-                {
-        <BLANKLINE>
-                    % [Global_Skips measure 1]
-                    \time 8/16
-                    \baca-time-signature-color #'blue
-                    s1 * 1/2
-        <BLANKLINE>
-                    % [Global_Skips measure 2]
-                    \time 4/8
-                    \baca-time-signature-color #'blue
-                    s1 * 1/2
-        <BLANKLINE>
-                    % [Global_Skips measure 3]
-                    \time 2/4
-                    \baca-time-signature-color #'blue
-                    s1 * 1/2
-        <BLANKLINE>
-                    % [Global_Skips measure 4]
-                    \time 1/2
-                    \baca-time-signature-color #'blue
-                    s1 * 1/2
-        <BLANKLINE>
-                    % [Global_Skips measure 5]
-                    \time 1/4
-                    \baca-time-signature-transparent
-                    s1 * 1/4
-                    \once \override Score.BarLine.transparent = ##t
-                    \once \override Score.SpanBar.transparent = ##t
-        <BLANKLINE>
-                }
-        <BLANKLINE>
-            >>
-        <BLANKLINE>
-            \context MusicContext = "Music_Context"
-            <<
-        <BLANKLINE>
-                \context Staff = "Music_Staff"
-                {
-        <BLANKLINE>
-                    \context Voice = "Music_Voice"
-                    {
-        <BLANKLINE>
-                        % [Music_Voice measure 1]
-                        e'8
-                        [
-                        - \abjad-dashed-line-with-hook
-                        - \baca-text-spanner-left-text "make_even_divisions()"
-                        - \tweak bound-details.right.padding 2.75
-                        - \tweak color #darkcyan
-                        - \tweak staff-padding 8
-                        \bacaStartTextSpanRhythmAnnotation
-        <BLANKLINE>
-                        f'8
-        <BLANKLINE>
-                        e'8
-        <BLANKLINE>
-                        f'8
-                        ]
-        <BLANKLINE>
-                        % [Music_Voice measure 2]
-                        e'8
-                        [
-        <BLANKLINE>
-                        f'8
-        <BLANKLINE>
-                        e'8
-        <BLANKLINE>
-                        f'8
-                        ]
-        <BLANKLINE>
-                        % [Music_Voice measure 3]
-                        e'8
-                        [
-        <BLANKLINE>
-                        f'8
-        <BLANKLINE>
-                        e'8
-        <BLANKLINE>
-                        f'8
-                        ]
-        <BLANKLINE>
-                        % [Music_Voice measure 4]
-                        e'8
-                        [
-        <BLANKLINE>
-                        f'8
-        <BLANKLINE>
-                        e'8
-        <BLANKLINE>
-                        f'8
-                        ]
-                        <> \bacaStopTextSpanRhythmAnnotation
-        <BLANKLINE>
-                        <<
-        <BLANKLINE>
-                            \context Voice = "Music_Voice"
-                            {
-        <BLANKLINE>
-                                % [Music_Voice measure 5]
-                                \abjad-invisible-music-coloring
-                                %@% \abjad-invisible-music
-                                \baca-not-yet-pitched-coloring
-                                b'1 * 1/4
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-        <BLANKLINE>
-                            }
-        <BLANKLINE>
-                            \context Voice = "Rest_Voice"
-                            {
-        <BLANKLINE>
-                                % [Rest_Voice measure 5]
-                                \once \override Score.TimeSignature.X-extent = ##f
-                                \once \override MultiMeasureRest.transparent = ##t
-                                \stopStaff
-                                \once \override Staff.StaffSymbol.transparent = ##t
-                                \startStaff
-                                R1 * 1/4
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-        <BLANKLINE>
-                            }
-        <BLANKLINE>
-                        >>
-        <BLANKLINE>
-                    }
-        <BLANKLINE>
-                }
-        <BLANKLINE>
-            >>
-        <BLANKLINE>
-        >>
-
-..  container:: example
-
-    Example 3. Horizontal spacing specifier used as null spacing command:
-
-    >>> maker = baca.SegmentMaker(
-    ...     score_template=baca.SingleStaffScoreTemplate(),
-    ...     spacing=baca.HorizontalSpacingSpecifier(),
+    ...     spacing=baca.SpacingSpecifier(),
     ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
     ... )
 
@@ -661,12 +500,12 @@ Module-level docs.
 
 ..  container:: example
 
-    Example 4. Horizontal spacing specifier used for measurewise proportional spacing
-    based on minimum duration per measure:
+    Example 3. Spacing specifier used for measurewise proportional spacing based on
+    minimum duration per measure:
 
     >>> maker = baca.SegmentMaker(
     ...     score_template=baca.SingleStaffScoreTemplate(),
-    ...     spacing=baca.HorizontalSpacingSpecifier(
+    ...     spacing=baca.SpacingSpecifier(
     ...         multiplier=abjad.Multiplier(1),
     ...     ),
     ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
@@ -831,12 +670,12 @@ Module-level docs.
 
 ..  container:: example
 
-    Example 5. Horizontal spacing specifier used for measurewise proportional spacing
-    based on twice the minimum duration per measure:
+    Example 4. Spacing specifier used for measurewise proportional spacing based on twice
+    the minimum duration per measure:
 
     >>> maker = baca.SegmentMaker(
     ...     score_template=baca.SingleStaffScoreTemplate(),
-    ...     spacing=baca.HorizontalSpacingSpecifier(
+    ...     spacing=baca.SpacingSpecifier(
     ...         multiplier=abjad.Multiplier(2),
     ...     ),
     ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
@@ -1001,13 +840,12 @@ Module-level docs.
 
 ..  container:: example
 
-    Example 6. Horizontal spacing specifier used for measurewise proportional spacing
-    based on twice the minimum duration per measure with minimum duration equal to an
-    eighth note:
+    Example 5. Spacing specifier used for measurewise proportional spacing based on twice
+    the minimum duration per measure with minimum duration equal to an eighth note:
 
     >>> maker = baca.SegmentMaker(
     ...     score_template=baca.SingleStaffScoreTemplate(),
-    ...     spacing=baca.HorizontalSpacingSpecifier(
+    ...     spacing=baca.SpacingSpecifier(
     ...         multiplier=abjad.Multiplier(2),
     ...         minimum_duration=abjad.Duration(1, 8),
     ...     ),
@@ -1173,12 +1011,11 @@ Module-level docs.
 
 ..  container:: example
 
-    Example 7. Horizontal spacing specifier works with accelerando and ritardando
-    figures:
+    Example 6. Spacing specifier works with accelerando and ritardando figures:
 
     >>> maker = baca.SegmentMaker(
     ...     score_template=baca.SingleStaffScoreTemplate(),
-    ...     spacing=baca.HorizontalSpacingSpecifier(
+    ...     spacing=baca.SpacingSpecifier(
     ...         minimum_duration=abjad.Duration(1, 8),
     ...     ),
     ...     time_signatures=[(4, 8), (3, 8)],
@@ -1408,8 +1245,8 @@ Module-level docs.
 
 ..  container:: example exception
 
-    Exception 1. Horizontal spacing specifier override method raises exception when
-    measures is not int, pair or list:
+    Exception 1. Spacing specifier override method raises exception when measures is not
+    int, pair or list:
 
     >>> spacing = baca.scorewide_spacing(
     ...     (1, 18, [4, 6]),
@@ -1442,8 +1279,7 @@ Module-level docs.
 
 ..  container:: example exception
 
-    Exception 3. Horizontal spacing specifier raises exception when score contains too
-    few measures:
+    Exception 3. Spacing specifier raises exception when score contains too few measures:
 
     >>> maker = baca.SegmentMaker(
     ...     score_template=baca.StringTrioScoreTemplate(),
@@ -1667,9 +1503,9 @@ class BreakMeasureMap:
         return self._tags[:]
 
 
-class HorizontalSpacingSpecifier:
+class SpacingSpecifier:
     """
-    Horizontal spacing specifier.
+    Spacing specifier.
     """
 
     ### CLASS VARIABLES ###
@@ -1746,7 +1582,7 @@ class HorizontalSpacingSpecifier:
 
     def __call__(self, segment_maker=None):
         """
-        Calls horizontal spacing specifier on ``segment_maker``.
+        Calls spacing specifier on ``segment_maker``.
         """
         score = segment_maker.score
         skips = _classes.Selection(score["Global_Skips"]).skips()
@@ -1778,9 +1614,7 @@ class HorizontalSpacingSpecifier:
             abjad.attach(
                 spacing_section,
                 skip,
-                tag=tag.append(
-                    abjad.Tag("baca.HorizontalSpacingSpecifier.__call__(1)")
-                ),
+                tag=tag.append(abjad.Tag("baca.SpacingSpecifier.__call__(1)")),
             )
             string_ = self._make_annotation(duration, eol_adjusted, duration_)
             if measure_index < total - 1:
@@ -1795,9 +1629,7 @@ class HorizontalSpacingSpecifier:
                     skip,
                     context="GlobalSkips",
                     deactivate=True,
-                    tag=tag.append(
-                        abjad.Tag("baca.HorizontalSpacingSpecifier.__call__(2)")
-                    ),
+                    tag=tag.append(abjad.Tag("baca.SpacingSpecifier.__call__(2)")),
                 )
             if 0 < measure_index:
                 tag = _tags.SPACING
@@ -1807,9 +1639,7 @@ class HorizontalSpacingSpecifier:
                     skip,
                     context="GlobalSkips",
                     deactivate=True,
-                    tag=tag.append(
-                        abjad.Tag("baca.HorizontalSpacingSpecifier.__call__(3)")
-                    ),
+                    tag=tag.append(abjad.Tag("baca.SpacingSpecifier.__call__(3)")),
                 )
 
     ### PRIVATE METHODS ###
@@ -2355,7 +2185,7 @@ class SystemSpecifier:
         self.distances = distances
 
 
-### FACTORY FUNCTIONS ###
+### FUNCTIONS ###
 
 
 def breaks(
@@ -2364,18 +2194,6 @@ def breaks(
 ):
     r"""
     Makes break measure map.
-
-    ..  container:: example
-
-        >>> breaks = baca.breaks(
-        ...     baca.page(
-        ...         baca.system(measure=1, y_offset=20, distances=(15, 20, 20)),
-        ...         baca.system(measure=13, y_offset=140, distances=(15, 20, 20)),
-        ...     ),
-        ...     baca.page(
-        ...         baca.system(measure=23, y_offset=20, distances=(15, 20, 20)),
-        ...     ),
-        ... )
 
     Set ``partial_score`` when rendering only the first measures of a score; leave
     ``partial_score`` set to none when rendering a complete score.
@@ -2440,9 +2258,9 @@ def breaks(
 
 def minimum_duration(duration):
     """
-    Makes horizontal spacing specifier with ``duration`` minimum width.
+    Makes spacing specifier with ``duration`` minimum width.
     """
-    return HorizontalSpacingSpecifier(minimum_duration=duration)
+    return SpacingSpecifier(minimum_duration=duration)
 
 
 def page(*systems, number=None):
@@ -2466,8 +2284,8 @@ def scorewide_spacing(
     r"""
     Makes scorewide spacing.
 
-    Uses ``path`` for first measure number, measure count, and fermata measure
-    numbers metadata; triple may be passed directly for tests.
+    Uses ``path`` for first measure number, measure count, and fermata measure numbers
+    metadata; triple may be passed directly for tests.
 
     Uses ``fallback_duration`` spacing for measures without override.
 
@@ -2478,15 +2296,14 @@ def scorewide_spacing(
 
     ..  container:: example
 
-        >>> breaks = baca.breaks(
-        ...     baca.page(
-        ...         baca.system(measure=1, y_offset=15, distances=(10, 20)),
-        ...         baca.system(measure=9, y_offset=115, distances=(10, 20)),
-        ...     ),
-        ... )
         >>> spacing = baca.scorewide_spacing(
         ...     (1, 18, [4, 6]),
-        ...     breaks=breaks,
+        ...     breaks=baca.breaks(
+        ...         baca.page(
+        ...             baca.system(measure=1, y_offset=15, distances=(10, 20)),
+        ...             baca.system(measure=9, y_offset=115, distances=(10, 20)),
+        ...         ),
+        ...     ),
         ...     fallback_duration=(1, 20),
         ... )
 
@@ -2531,7 +2348,7 @@ def scorewide_spacing(
     final_measure_number = first_measure_number + measure_count - 1
     for n in range(first_measure_number, final_measure_number + 1):
         measures[n] = fallback_fraction
-    specifier = HorizontalSpacingSpecifier(
+    specifier = SpacingSpecifier(
         breaks=breaks,
         fermata_measure_duration=fermata_measure_duration,
         fermata_measure_numbers=fermata_measure_numbers,
