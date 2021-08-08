@@ -1670,17 +1670,14 @@ class SpacingSpecifier:
             eol_adjusted = True
         return duration, eol_adjusted, duration_
 
-    def _coerce_measure_number(self, measure_number):
-        if measure_number == 0:
-            raise Exception("zero-valued measure number not allowed.")
-        if measure_number < 0:
-            measure_number = self.final_measure_number - abs(measure_number) + 1
-        if self.final_measure_number < measure_number:
+    def _check_measure_number(self, number):
+        if number < 1:
+            raise Exception(f"Nonpositive measure number ({number}) not allowed.")
+        if self.final_measure_number < number:
             raise Exception(
-                f"measure number {measure_number} greater than"
+                f"measure number {number} greater than"
                 f" last measure number ({self.final_measure_number})."
             )
-        return measure_number
 
     def _get_minimum_durations_by_measure(self, skips, leaves):
         measure_timespans = []
@@ -1910,7 +1907,7 @@ class SpacingSpecifier:
                     ]
                 )
 
-            >>> spacing.override((1, -1), (1, 24))
+            >>> spacing.override((1, 5), (1, 24))
             >>> string = abjad.storage(spacing.measures)
             >>> print(string)
             abjad.OrderedDict(
@@ -1940,7 +1937,7 @@ class SpacingSpecifier:
 
             Works with measure number:
 
-            >>> spacing.override((1, -1), (1, 16))
+            >>> spacing.override((1, 5), (1, 16))
             >>> spacing.override(1, (1, 24))
             >>> string = abjad.storage(spacing.measures)
             >>> print(string)
@@ -1971,7 +1968,7 @@ class SpacingSpecifier:
 
             Works with range of measure numbers:
 
-            >>> spacing.override((1, -1), (1, 16))
+            >>> spacing.override((1, 5), (1, 16))
             >>> spacing.override((1, 3), (1, 24))
             >>> string = abjad.storage(spacing.measures)
             >>> print(string)
@@ -2002,7 +1999,7 @@ class SpacingSpecifier:
 
             Works with list of measure numbers:
 
-            >>> spacing.override((1, -1), (1, 16))
+            >>> spacing.override((1, 5), (1, 16))
             >>> spacing.override([1, 3, 5], (1, 24))
             >>> string = abjad.storage(spacing.measures)
             >>> print(string)
@@ -2031,57 +2028,26 @@ class SpacingSpecifier:
                     ]
                 )
 
-            Works with negative indices:
-
-            >>> spacing.override((1, -1), (1, 16))
-            >>> spacing.override([-3, -1], (1, 24))
-            >>> string = abjad.storage(spacing.measures)
-            >>> print(string)
-            abjad.OrderedDict(
-                [
-                    (
-                        1,
-                        abjad.NonreducedFraction(1, 16),
-                        ),
-                    (
-                        2,
-                        abjad.NonreducedFraction(1, 16),
-                        ),
-                    (
-                        3,
-                        abjad.NonreducedFraction(1, 24),
-                        ),
-                    (
-                        4,
-                        abjad.NonreducedFraction(1, 16),
-                        ),
-                    (
-                        5,
-                        abjad.NonreducedFraction(1, 24),
-                        ),
-                    ]
-                )
-
         """
         measures_ = []
         duration = abjad.NonreducedFraction(pair)
         if isinstance(measures, int):
-            number = self._coerce_measure_number(measures)
-            self.measures[number] = duration
-            measures_.append(number)
+            self._check_measure_number(measures)
+            self.measures[measures] = duration
+            measures_.append(measures)
         elif isinstance(measures, tuple):
             assert len(measures) == 2, repr(measures)
             start_measure, stop_measure = measures
-            start_measure = self._coerce_measure_number(start_measure)
-            stop_measure = self._coerce_measure_number(stop_measure)
+            self._check_measure_number(start_measure)
+            self._check_measure_number(stop_measure)
             for number in range(start_measure, stop_measure + 1):
                 self.measures[number] = duration
                 measures_.append(number)
         elif isinstance(measures, list):
             for measure in measures:
-                number = self._coerce_measure_number(measure)
-                self.measures[number] = duration
-                measures_.append(number)
+                self._check_measure_number(measure)
+                self.measures[measure] = duration
+                measures_.append(measure)
         else:
             raise TypeError(f"measures must be int, pair or list (not {measures!r}).")
         if fermata:
