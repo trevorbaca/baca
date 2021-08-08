@@ -3606,17 +3606,6 @@ class SegmentMaker:
                 abjad.attach(const.PHANTOM, component)
         return container
 
-    def _make_score(self):
-        score_template = getattr(self, "score_template")
-        if score_template is None:
-            raise Exception("segment-maker can not find score template.")
-        score = score_template()
-        self._score = score
-        if self.do_not_include_layout_ly:
-            first_measure_number = self._get_first_measure_number()
-            if first_measure_number != 1:
-                abjad.setting(score).current_bar_number = first_measure_number
-
     def _memento_to_indicator(self, memento):
         baca = importlib.import_module("baca")
         if memento.manifest is not None:
@@ -5915,7 +5904,7 @@ class SegmentMaker:
         self._previous_persist = abjad.OrderedDict(previous_persist)
         self._segment_number = segment_number
         with abjad.Timer() as timer:
-            self._make_score()
+            self._score = self.score_template()
             self._make_lilypond_file()
             self._make_global_skips()
             self._label_measure_numbers()
