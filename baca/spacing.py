@@ -1553,8 +1553,7 @@ class SpacingSpecifier:
         self._fermata_measure_duration = duration_
         self._fermata_start_offsets = []
         if first_measure_number is not None:
-            assert isinstance(first_measure_number, int)
-            assert 1 <= first_measure_number
+            assert 1 == first_measure_number, repr(first_measure_number)
         self._first_measure_number = first_measure_number
         if measure_count is not None:
             assert isinstance(measure_count, int)
@@ -1671,15 +1670,11 @@ class SpacingSpecifier:
             eol_adjusted = True
         return duration, eol_adjusted, duration_
 
-    def _coerce_measure_number(self, measure_number, force_local=False):
+    def _coerce_measure_number(self, measure_number):
         if measure_number == 0:
             raise Exception("zero-valued measure number not allowed.")
-        if force_local is True:
-            measure_number = self.first_measure_number + measure_number - 1
         if measure_number < 0:
             measure_number = self.final_measure_number - abs(measure_number) + 1
-        if measure_number < self.first_measure_number:
-            measure_number += self.first_measure_number - 1
         if self.final_measure_number < measure_number:
             raise Exception(
                 f"measure number {measure_number} greater than"
@@ -1871,7 +1866,6 @@ class SpacingSpecifier:
         pair,
         *,
         fermata=False,
-        force_local=False,
     ):
         r"""
         Overrides ``measures`` with spacing ``pair``.
@@ -2072,24 +2066,20 @@ class SpacingSpecifier:
         measures_ = []
         duration = abjad.NonreducedFraction(pair)
         if isinstance(measures, int):
-            number = self._coerce_measure_number(measures, force_local=force_local)
+            number = self._coerce_measure_number(measures)
             self.measures[number] = duration
             measures_.append(number)
         elif isinstance(measures, tuple):
             assert len(measures) == 2, repr(measures)
             start_measure, stop_measure = measures
-            start_measure = self._coerce_measure_number(
-                start_measure, force_local=force_local
-            )
-            stop_measure = self._coerce_measure_number(
-                stop_measure, force_local=force_local
-            )
+            start_measure = self._coerce_measure_number(start_measure)
+            stop_measure = self._coerce_measure_number(stop_measure)
             for number in range(start_measure, stop_measure + 1):
                 self.measures[number] = duration
                 measures_.append(number)
         elif isinstance(measures, list):
             for measure in measures:
-                number = self._coerce_measure_number(measure, force_local=force_local)
+                number = self._coerce_measure_number(measure)
                 self.measures[number] = duration
                 measures_.append(number)
         else:
