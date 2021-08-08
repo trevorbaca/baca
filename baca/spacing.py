@@ -2078,7 +2078,7 @@ class HorizontalSpacingSpecifier:
         *,
         fermata=False,
         force_local=False,
-    ) -> None:
+    ):
         r"""
         Overrides ``measures`` with spacing ``pair``.
 
@@ -2451,10 +2451,10 @@ def breaks(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8), (4, 8)],
         ...     breaks=baca.breaks(
         ...         baca.page(
-        ...             baca.system(measure=99, y_offset=0, distances=(10, 20)),
+        ...             baca.system(measure=1, y_offset=0, distances=(10, 20)),
         ...         ),
         ...         baca.page(
-        ...             baca.system(measure=109, y_offset=0, distances=(10, 20)),
+        ...             baca.system(measure=11, y_offset=0, distances=(10, 20)),
         ...         ),
         ...     ),
         ... )
@@ -2462,7 +2462,7 @@ def breaks(
         ...     "Violin_Music_Voice",
         ...     baca.make_even_divisions(),
         ...     baca.pitch("E4"),
-        ...     )
+        ... )
         >>> lilypond_file = maker.run(environment="docs")
         Traceback (most recent call last):
           File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/doctest.py", line 1330, in __run
@@ -2475,7 +2475,7 @@ def breaks(
             self.breaks(self.score['Global_Skips'])
           File "/Users/trevorbaca/baca/baca/spacing.py", line 319, in __call__
             raise Exception(message)
-        Exception: score ends at measure 104 (not 109).
+        Exception: score ends at measure 6 (not 11).
 
     """
     commands = abjad.OrderedDict()
@@ -2485,10 +2485,9 @@ def breaks(
             commands=commands, page_count=0, partial_score=partial_score
         )
     first_system = page_specifiers[0].systems[0]
-    if hasattr(first_system, "measure"):
-        first_measure_number = first_system.measure
-    else:
-        first_measure_number = first_system[0]
+    assert isinstance(first_system, SystemSpecifier), repr(first_system)
+    first_measure_number = first_system.measure
+    assert first_measure_number == 1, repr(first_measure_number)
     bol_measure_numbers = []
     for i, page_specifier in enumerate(page_specifiers):
         page_number = i + 1
