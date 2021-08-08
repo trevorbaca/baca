@@ -2717,13 +2717,7 @@ class SegmentMaker:
             local_measure_number = measure_number - first_measure_number
             local_measure_number += 1
             context = abjad.get.parentage(leaf).get(abjad.Context)
-            if self.first_segment or self.environment == "docs":
-                string = f"% [{context.name}"
-                string += f" measure {measure_number}]"
-            else:
-                string = f"% [{context.name}"
-                string += f" measure {measure_number} /"
-                string += f" measure {local_measure_number}]"
+            string = f"% [{context.name} measure {local_measure_number}]"
             literal = abjad.LilyPondLiteral(string, format_slot="absolute_before")
             abjad.attach(literal, leaf, tag=_site(inspect.currentframe()))
 
