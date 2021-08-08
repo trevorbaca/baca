@@ -2520,8 +2520,12 @@ def scorewide_spacing(
         tuple_ = _path.get_measure_profile_metadata(path)
         first_measure_number = tuple_[0]
         measure_count = tuple_[1]
-        fermata_measure_numbers = tuple_[2]
+        fermata_measure_numbers = tuple_[2] or []
         first_measure_number = first_measure_number or 1
+        fermata_measure_numbers = [
+            _ - (first_measure_number - 1) for _ in fermata_measure_numbers
+        ]
+    first_measure_number = 1
     fallback_fraction = abjad.NonreducedFraction(fallback_duration)
     measures = abjad.OrderedDict()
     final_measure_number = first_measure_number + measure_count - 1
