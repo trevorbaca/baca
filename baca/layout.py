@@ -6,7 +6,7 @@ Classes and functions for spacing.
     Exception 1. Spacing specifier override method raises exception when measures is not
     int, pair or list:
 
-    >>> spacing = baca.scorewide_spacing(
+    >>> spacing = baca.spacing(
     ...     (1, 18, [4, 6]),
     ...     fallback_duration=(1, 20),
     ... )
@@ -530,7 +530,7 @@ class SpacingSpecifier:
             ...         baca.system(measure=1, y_offset=15, distances=(10, 20)),
             ...     ),
             ... )
-            >>> spacing = baca.scorewide_spacing(
+            >>> spacing = baca.spacing(
             ...     (1, 5, []),
             ...     breaks=breaks,
             ...     fallback_duration=(1, 20),
@@ -861,7 +861,7 @@ def page(*systems, number=None):
     return PageSpecifier(number=number, systems=systems_)
 
 
-def scorewide_spacing(
+def spacing(
     path,
     *,
     fallback_duration,
@@ -882,7 +882,7 @@ def scorewide_spacing(
 
     ..  container:: example
 
-        >>> spacing = baca.scorewide_spacing(
+        >>> spacing = baca.spacing(
         ...     (1, 18, [4, 6]),
         ...     breaks=baca.breaks(
         ...         baca.page(

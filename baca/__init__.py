@@ -13,6 +13,7 @@ from .commands import *
 from .figuremaker import *
 from .indicatorcommands import *
 from .indicators import *
+from .layout import *
 from .math import *
 from .memento import *
 from .overrides import *
@@ -26,7 +27,6 @@ from .pitchcommands import *
 from .rhythmcommands import *
 from .scoping import *
 from .segmentmaker import *
-from .spacing import *
 from .spannercommands import *
 from .templates import *
 from .typings import *
