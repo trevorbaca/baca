@@ -9,8 +9,10 @@ Classes and functions for spacing.
     >>> spacing = baca.spacing(
     ...     (1, 18, [4, 6]),
     ...     fallback_duration=(1, 20),
+    ...     overrides=(
+    ...         baca.space("all", (1, 16)),
+    ...     ),
     ... )
-    >>> spacing.override("all", (1, 16))
     Traceback (most recent call last):
         ...
     TypeError: measures must be int, pair or list (not 'all').
@@ -513,26 +515,24 @@ class SpacingSpecifier:
 
     ### PUBLIC METHODS ###
 
-    def override(
+    def add_override(
         self,
         measures,
         pair,
-        *,
-        fermata=False,
+        fermata,
     ):
         r"""
         Overrides ``measures`` with spacing ``pair``.
 
         ..  container:: example
 
-            >>> breaks = baca.breaks(
-            ...     baca.page(
-            ...         baca.system(measure=1, y_offset=15, distances=(10, 20)),
-            ...     ),
-            ... )
             >>> spacing = baca.spacing(
             ...     (1, 5, []),
-            ...     breaks=breaks,
+            ...     breaks=baca.breaks(
+            ...         baca.page(
+            ...             baca.system(measure=1, y_offset=15, distances=(10, 20)),
+            ...         ),
+            ...     ),
             ...     fallback_duration=(1, 20),
             ... )
 
@@ -563,7 +563,18 @@ class SpacingSpecifier:
                     ]
                 )
 
-            >>> spacing.override((1, 5), (1, 24))
+            >>> spacing = baca.spacing(
+            ...     (1, 5, []),
+            ...     breaks=baca.breaks(
+            ...         baca.page(
+            ...             baca.system(measure=1, y_offset=15, distances=(10, 20)),
+            ...         ),
+            ...     ),
+            ...     fallback_duration=(1, 20),
+            ...     overrides=(
+            ...         baca.space((1, 5), (1, 24)),
+            ...     ),
+            ... )
             >>> string = abjad.storage(spacing.measures)
             >>> print(string)
             abjad.OrderedDict(
@@ -593,8 +604,19 @@ class SpacingSpecifier:
 
             Works with measure number:
 
-            >>> spacing.override((1, 5), (1, 16))
-            >>> spacing.override(1, (1, 24))
+            >>> spacing = baca.spacing(
+            ...     (1, 5, []),
+            ...     breaks=baca.breaks(
+            ...         baca.page(
+            ...             baca.system(measure=1, y_offset=15, distances=(10, 20)),
+            ...         ),
+            ...     ),
+            ...     fallback_duration=(1, 20),
+            ...     overrides=(
+            ...         baca.space((1, 5), (1, 16)),
+            ...         baca.space(1, (1, 24)),
+            ...     ),
+            ... )
             >>> string = abjad.storage(spacing.measures)
             >>> print(string)
             abjad.OrderedDict(
@@ -624,8 +646,19 @@ class SpacingSpecifier:
 
             Works with range of measure numbers:
 
-            >>> spacing.override((1, 5), (1, 16))
-            >>> spacing.override((1, 3), (1, 24))
+            >>> spacing = baca.spacing(
+            ...     (1, 5, []),
+            ...     breaks=baca.breaks(
+            ...         baca.page(
+            ...             baca.system(measure=1, y_offset=15, distances=(10, 20)),
+            ...         ),
+            ...     ),
+            ...     fallback_duration=(1, 20),
+            ...     overrides=(
+            ...         baca.space((1, 5), (1, 16)),
+            ...         baca.space((1, 3), (1, 24)),
+            ...     ),
+            ... )
             >>> string = abjad.storage(spacing.measures)
             >>> print(string)
             abjad.OrderedDict(
@@ -655,8 +688,19 @@ class SpacingSpecifier:
 
             Works with list of measure numbers:
 
-            >>> spacing.override((1, 5), (1, 16))
-            >>> spacing.override([1, 3, 5], (1, 24))
+            >>> spacing = baca.spacing(
+            ...     (1, 5, []),
+            ...     breaks=baca.breaks(
+            ...         baca.page(
+            ...             baca.system(measure=1, y_offset=15, distances=(10, 20)),
+            ...         ),
+            ...     ),
+            ...     fallback_duration=(1, 20),
+            ...     overrides=(
+            ...         baca.space((1, 5), (1, 16)),
+            ...         baca.space([1, 3, 5], (1, 24)),
+            ...     ),
+            ... )
             >>> string = abjad.storage(spacing.measures)
             >>> print(string)
             abjad.OrderedDict(
@@ -867,6 +911,7 @@ def spacing(
     fallback_duration,
     breaks=None,
     fermata_measure_duration=(1, 4),
+    overrides=None,
 ):
     r"""
     Makes scorewide spacing.
@@ -942,6 +987,8 @@ def spacing(
         measure_count=measure_count,
         measures=measures,
     )
+    for override in overrides or []:
+        specifier.add_override(*override)
     return specifier
 
 
@@ -951,3 +998,10 @@ def system(*, measure, y_offset, distances):
     """
     distances = _classes.Sequence(distances).flatten(depth=-1)
     return SystemSpecifier(measure=measure, y_offset=y_offset, distances=distances)
+
+
+space = collections.namedtuple(
+    "space",
+    ["measures", "duration", "fermata"],
+    defaults=[False],
+)
