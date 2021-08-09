@@ -788,39 +788,12 @@ class PageSpecifier:
         if systems is not None:
             y_offsets: list = []
             for system in systems:
-                if isinstance(system, SystemSpecifier):
-                    y_offset = system.y_offset
-                elif isinstance(system, list):
-                    y_offset = system[1]
+                y_offset = system.y_offset
                 if y_offset in y_offsets:
                     raise Exception(f"systems overlap at Y-offset {y_offset}.")
                 else:
                     y_offsets.append(y_offset)
         self.systems = systems
-
-
-class SystemSpecifier:
-    """
-    System specifier.
-    """
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        measure,
-        y_offset,
-        distances,
-    ):
-        assert isinstance(measure, int), repr(measure)
-        self.measure = measure
-        assert isinstance(y_offset, (int, float)), repr(y_offset)
-        self.y_offset = y_offset
-        assert isinstance(distances, collections.abc.Iterable), repr(distances)
-        for distance in distances:
-            assert isinstance(distance, (int, float)), repr(distance)
-        distances = list(distances)
-        self.distances = distances
 
 
 def breaks(*page_specifiers):
@@ -831,7 +804,6 @@ def breaks(*page_specifiers):
     page_count = len(page_specifiers)
     assert 0 < page_count, repr(page_count)
     first_system = page_specifiers[0].systems[0]
-    assert isinstance(first_system, SystemSpecifier), repr(first_system)
     assert first_system.measure == 1, repr(first_system)
     bol_measure_numbers = []
     for i, page_specifier in enumerate(page_specifiers):
@@ -857,7 +829,7 @@ def breaks(*page_specifiers):
                 indicators=[literal], selector=selector
             )
             alignment_distances = _classes.Sequence(alignment_distances)
-            alignment_distances = alignment_distances.flatten()
+            alignment_distances = alignment_distances.flatten(depth=-1)
             lbsd = LBSD(alignment_distances=alignment_distances, y_offset=y_offset)
             lbsd_command = _commandclasses.IndicatorCommand(
                 indicators=[lbsd], selector=selector
@@ -882,10 +854,7 @@ def page(*systems, number=None):
     """
     Makes page specifier.
     """
-    systems_ = []
-    for system in systems:
-        assert isinstance(system, SystemSpecifier), repr(system)
-        systems_.append(system)
+    systems_ = list(systems)
     return PageSpecifier(number=number, systems=systems_)
 
 
@@ -970,16 +939,14 @@ def spacing(
     return specifier
 
 
-def system(*, measure, y_offset, distances):
-    """
-    Makes system specifier.
-    """
-    distances = _classes.Sequence(distances).flatten(depth=-1)
-    return SystemSpecifier(measure=measure, y_offset=y_offset, distances=distances)
-
-
 space = collections.namedtuple(
     "space",
     ["measures", "duration", "fermata"],
     defaults=[False],
+)
+
+
+system = collections.namedtuple(
+    "system",
+    ["measure", "y_offset", "distances"],
 )
