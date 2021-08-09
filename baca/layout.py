@@ -7,7 +7,7 @@ Classes and functions for spacing.
     int, pair or list:
 
     >>> spacing = baca.spacing(
-    ...     (1, 18, [4, 6]),
+    ...     (18, [4, 6]),
     ...     fallback_duration=(1, 20),
     ...     overrides=(
     ...         baca.space("all", (1, 16)),
@@ -196,7 +196,6 @@ class SpacingSpecifier:
         breaks=None,
         fermata_measure_numbers=None,
         fermata_measure_duration=(1, 4),
-        first_measure_number=None,
         measure_count=None,
         measures=None,
         minimum_duration=None,
@@ -215,9 +214,6 @@ class SpacingSpecifier:
             duration_ = abjad.Duration(fermata_measure_duration)
         self._fermata_measure_duration = duration_
         self._fermata_start_offsets = []
-        if first_measure_number is not None:
-            assert 1 == first_measure_number, repr(first_measure_number)
-        self._first_measure_number = first_measure_number
         if measure_count is not None:
             assert isinstance(measure_count, int)
             assert 0 <= measure_count
@@ -256,10 +252,9 @@ class SpacingSpecifier:
             minimum_durations_by_measure = []
         string = "_fermata_start_offsets"
         self._fermata_start_offsets = getattr(segment_maker, string, [])
-        first_measure_number = self.first_measure_number or 1
         total = len(skips)
         for measure_index, skip in enumerate(skips):
-            measure_number = first_measure_number + measure_index
+            measure_number = measure_index + 1
             duration, eol_adjusted, duration_ = self._calculate_duration(
                 measure_index,
                 measure_number,
@@ -453,17 +448,7 @@ class SpacingSpecifier:
 
         Gives none when measure count is not defined.
         """
-        if self.first_measure_number is not None and self.measure_count is not None:
-            return self.first_measure_number + self.measure_count - 1
-        else:
-            return None
-
-    @property
-    def first_measure_number(self):
-        """
-        Gets first measure number.
-        """
-        return self._first_measure_number
+        return self.measure_count
 
     @property
     def magic_lilypond_eol_adjustment(self):
@@ -527,7 +512,7 @@ class SpacingSpecifier:
         ..  container:: example
 
             >>> spacing = baca.spacing(
-            ...     (1, 5, []),
+            ...     (5, []),
             ...     breaks=baca.breaks(
             ...         baca.page(
             ...             baca.system(measure=1, y_offset=15, distances=(10, 20)),
@@ -564,7 +549,7 @@ class SpacingSpecifier:
                 )
 
             >>> spacing = baca.spacing(
-            ...     (1, 5, []),
+            ...     (5, []),
             ...     breaks=baca.breaks(
             ...         baca.page(
             ...             baca.system(measure=1, y_offset=15, distances=(10, 20)),
@@ -605,7 +590,7 @@ class SpacingSpecifier:
             Works with measure number:
 
             >>> spacing = baca.spacing(
-            ...     (1, 5, []),
+            ...     (5, []),
             ...     breaks=baca.breaks(
             ...         baca.page(
             ...             baca.system(measure=1, y_offset=15, distances=(10, 20)),
@@ -647,7 +632,7 @@ class SpacingSpecifier:
             Works with range of measure numbers:
 
             >>> spacing = baca.spacing(
-            ...     (1, 5, []),
+            ...     (5, []),
             ...     breaks=baca.breaks(
             ...         baca.page(
             ...             baca.system(measure=1, y_offset=15, distances=(10, 20)),
@@ -689,7 +674,7 @@ class SpacingSpecifier:
             Works with list of measure numbers:
 
             >>> spacing = baca.spacing(
-            ...     (1, 5, []),
+            ...     (5, []),
             ...     breaks=baca.breaks(
             ...         baca.page(
             ...             baca.system(measure=1, y_offset=15, distances=(10, 20)),
@@ -847,8 +832,7 @@ def breaks(*page_specifiers):
     assert 0 < page_count, repr(page_count)
     first_system = page_specifiers[0].systems[0]
     assert isinstance(first_system, SystemSpecifier), repr(first_system)
-    first_measure_number = first_system.measure
-    assert first_measure_number == 1, repr(first_measure_number)
+    assert first_system.measure == 1, repr(first_system)
     bol_measure_numbers = []
     for i, page_specifier in enumerate(page_specifiers):
         page_number = i + 1
@@ -860,7 +844,7 @@ def breaks(*page_specifiers):
         for j, system in enumerate(page_specifier.systems):
             measure_number = system.measure
             bol_measure_numbers.append(measure_number)
-            skip_index = measure_number - first_measure_number
+            skip_index = measure_number - 1
             y_offset = system.y_offset
             alignment_distances = system.distances
             assert 0 <= skip_index
@@ -914,7 +898,7 @@ def spacing(
     overrides=None,
 ):
     r"""
-    Makes scorewide spacing.
+    Makes spacing specifier.
 
     Reads first measure number, measure count, fermata measure numbers from ``path``
     metadata. Pass triple directly for tests.
@@ -928,7 +912,7 @@ def spacing(
     ..  container:: example
 
         >>> spacing = baca.spacing(
-        ...     (1, 18, [4, 6]),
+        ...     (18, [4, 6]),
         ...     breaks=baca.breaks(
         ...         baca.page(
         ...             baca.system(measure=1, y_offset=15, distances=(10, 20)),
@@ -947,9 +931,6 @@ def spacing(
         >>> spacing.fermata_measure_numbers
         [4, 6]
 
-        >>> spacing.first_measure_number
-        1
-
         >>> spacing.final_measure_number
         18
 
@@ -961,8 +942,8 @@ def spacing(
 
     """
     if isinstance(path, tuple):
-        assert len(path) == 3, repr(path)
-        first_measure_number, measure_count, fermata_measure_numbers = path
+        assert len(path) == 2, repr(path)
+        measure_count, fermata_measure_numbers = path
     else:
         path = pathlib.Path(path)
         tuple_ = _path.get_measure_profile_metadata(path)
@@ -973,17 +954,14 @@ def spacing(
         fermata_measure_numbers = [
             _ - (first_measure_number - 1) for _ in fermata_measure_numbers
         ]
-    first_measure_number = 1
     fallback_fraction = abjad.NonreducedFraction(fallback_duration)
     measures = abjad.OrderedDict()
-    final_measure_number = first_measure_number + measure_count - 1
-    for n in range(first_measure_number, final_measure_number + 1):
+    for n in range(1, measure_count + 1):
         measures[n] = fallback_fraction
     specifier = SpacingSpecifier(
         breaks=breaks,
         fermata_measure_duration=fermata_measure_duration,
         fermata_measure_numbers=fermata_measure_numbers,
-        first_measure_number=first_measure_number,
         measure_count=measure_count,
         measures=measures,
     )
