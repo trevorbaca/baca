@@ -1151,7 +1151,7 @@ def make_segment_pdf(maker, first_segment=False):
 
 
 def run_lilypond(ly_file_path):
-    assert ly_file_path.exists()
+    assert ly_file_path.exists(), repr(ly_file_path)
     if not abjad.io.find_executable("lilypond"):
         raise ValueError("cannot find LilyPond executable.")
     print(f"Running LilyPond on {baca.path.trim(ly_file_path)} ...")

@@ -176,7 +176,6 @@ class SpacingSpecifier:
         "_breaks",
         "_fermata_measure_numbers",
         "_fermata_measure_duration",
-        "_fermata_start_offsets",
         "_first_measure_number",
         "_measure_count",
         "_measures",
@@ -206,14 +205,12 @@ class SpacingSpecifier:
             assert isinstance(breaks, BreakMeasureMap), repr(breaks)
         self._breaks = breaks
         if fermata_measure_numbers is not None:
-            assert isinstance(fermata_measure_numbers, collections.abc.Iterable)
             assert all(isinstance(_, int) for _ in fermata_measure_numbers)
         self._fermata_measure_numbers = fermata_measure_numbers or []
         duration_ = None
         if fermata_measure_duration is not None:
             duration_ = abjad.Duration(fermata_measure_duration)
         self._fermata_measure_duration = duration_
-        self._fermata_start_offsets = []
         if measure_count is not None:
             assert isinstance(measure_count, int)
             assert 0 <= measure_count
@@ -225,9 +222,9 @@ class SpacingSpecifier:
             multiplier = abjad.Multiplier(multiplier)
         self._multiplier = multiplier
         if measures is not None:
-            assert isinstance(measures, abjad.OrderedDict), repr(measures)
+            assert isinstance(measures, dict), repr(measures)
         else:
-            measures = abjad.OrderedDict()
+            measures = {}
         self._measures = measures
         self._overriden_fermata_measures = []
         assert isinstance(phantom, bool), repr(phantom)
@@ -250,8 +247,6 @@ class SpacingSpecifier:
             minimum_durations_by_measure = method(skips, leaves)
         else:
             minimum_durations_by_measure = []
-        string = "_fermata_start_offsets"
-        self._fermata_start_offsets = getattr(segment_maker, string, [])
         total = len(skips)
         for measure_index, skip in enumerate(skips):
             measure_number = measure_index + 1
@@ -376,13 +371,7 @@ class SpacingSpecifier:
         return minimum_durations_by_measure
 
     def _is_fermata_measure(self, measure_number, skip):
-        if (
-            self.fermata_measure_numbers
-            and measure_number in self.fermata_measure_numbers
-        ):
-            return True
-        measure_timespan = abjad.get.timespan(skip)
-        return measure_timespan.start_offset in self._fermata_start_offsets
+        return measure_number in self.fermata_measure_numbers
 
     def _make_annotation(self, duration, eol_adjusted, duration_):
         if eol_adjusted:
@@ -509,6 +498,8 @@ class SpacingSpecifier:
         r"""
         Overrides ``measures`` with spacing ``pair``.
 
+        >>> import pprint
+
         ..  container:: example
 
             >>> spacing = baca.spacing(
@@ -520,33 +511,12 @@ class SpacingSpecifier:
             ...     ),
             ...     fallback_duration=(1, 20),
             ... )
-
-            >>> string = abjad.storage(spacing.measures)
-            >>> print(string)
-            abjad.OrderedDict(
-                [
-                    (
-                        1,
-                        abjad.NonreducedFraction(1, 20),
-                        ),
-                    (
-                        2,
-                        abjad.NonreducedFraction(1, 20),
-                        ),
-                    (
-                        3,
-                        abjad.NonreducedFraction(1, 20),
-                        ),
-                    (
-                        4,
-                        abjad.NonreducedFraction(1, 20),
-                        ),
-                    (
-                        5,
-                        abjad.NonreducedFraction(1, 20),
-                        ),
-                    ]
-                )
+            >>> pprint.pprint(spacing.measures)
+            {1: NonreducedFraction(1, 20),
+            2: NonreducedFraction(1, 20),
+            3: NonreducedFraction(1, 20),
+            4: NonreducedFraction(1, 20),
+            5: NonreducedFraction(1, 20)}
 
             >>> spacing = baca.spacing(
             ...     (5, []),
@@ -560,32 +530,12 @@ class SpacingSpecifier:
             ...         baca.space((1, 5), (1, 24)),
             ...     ),
             ... )
-            >>> string = abjad.storage(spacing.measures)
-            >>> print(string)
-            abjad.OrderedDict(
-                [
-                    (
-                        1,
-                        abjad.NonreducedFraction(1, 24),
-                        ),
-                    (
-                        2,
-                        abjad.NonreducedFraction(1, 24),
-                        ),
-                    (
-                        3,
-                        abjad.NonreducedFraction(1, 24),
-                        ),
-                    (
-                        4,
-                        abjad.NonreducedFraction(1, 24),
-                        ),
-                    (
-                        5,
-                        abjad.NonreducedFraction(1, 24),
-                        ),
-                    ]
-                )
+            >>> pprint.pprint(spacing.measures)
+            {1: NonreducedFraction(1, 24),
+            2: NonreducedFraction(1, 24),
+            3: NonreducedFraction(1, 24),
+            4: NonreducedFraction(1, 24),
+            5: NonreducedFraction(1, 24)}
 
             Works with measure number:
 
@@ -602,32 +552,12 @@ class SpacingSpecifier:
             ...         baca.space(1, (1, 24)),
             ...     ),
             ... )
-            >>> string = abjad.storage(spacing.measures)
-            >>> print(string)
-            abjad.OrderedDict(
-                [
-                    (
-                        1,
-                        abjad.NonreducedFraction(1, 24),
-                        ),
-                    (
-                        2,
-                        abjad.NonreducedFraction(1, 16),
-                        ),
-                    (
-                        3,
-                        abjad.NonreducedFraction(1, 16),
-                        ),
-                    (
-                        4,
-                        abjad.NonreducedFraction(1, 16),
-                        ),
-                    (
-                        5,
-                        abjad.NonreducedFraction(1, 16),
-                        ),
-                    ]
-                )
+            >>> pprint.pprint(spacing.measures)
+            {1: NonreducedFraction(1, 24),
+            2: NonreducedFraction(1, 16),
+            3: NonreducedFraction(1, 16),
+            4: NonreducedFraction(1, 16),
+            5: NonreducedFraction(1, 16)}
 
             Works with range of measure numbers:
 
@@ -644,32 +574,12 @@ class SpacingSpecifier:
             ...         baca.space((1, 3), (1, 24)),
             ...     ),
             ... )
-            >>> string = abjad.storage(spacing.measures)
-            >>> print(string)
-            abjad.OrderedDict(
-                [
-                    (
-                        1,
-                        abjad.NonreducedFraction(1, 24),
-                        ),
-                    (
-                        2,
-                        abjad.NonreducedFraction(1, 24),
-                        ),
-                    (
-                        3,
-                        abjad.NonreducedFraction(1, 24),
-                        ),
-                    (
-                        4,
-                        abjad.NonreducedFraction(1, 16),
-                        ),
-                    (
-                        5,
-                        abjad.NonreducedFraction(1, 16),
-                        ),
-                    ]
-                )
+            >>> pprint.pprint(spacing.measures)
+            {1: NonreducedFraction(1, 24),
+            2: NonreducedFraction(1, 24),
+            3: NonreducedFraction(1, 24),
+            4: NonreducedFraction(1, 16),
+            5: NonreducedFraction(1, 16)}
 
             Works with list of measure numbers:
 
@@ -686,32 +596,12 @@ class SpacingSpecifier:
             ...         baca.space([1, 3, 5], (1, 24)),
             ...     ),
             ... )
-            >>> string = abjad.storage(spacing.measures)
-            >>> print(string)
-            abjad.OrderedDict(
-                [
-                    (
-                        1,
-                        abjad.NonreducedFraction(1, 24),
-                        ),
-                    (
-                        2,
-                        abjad.NonreducedFraction(1, 16),
-                        ),
-                    (
-                        3,
-                        abjad.NonreducedFraction(1, 24),
-                        ),
-                    (
-                        4,
-                        abjad.NonreducedFraction(1, 16),
-                        ),
-                    (
-                        5,
-                        abjad.NonreducedFraction(1, 24),
-                        ),
-                    ]
-                )
+            >>> pprint.pprint(spacing.measures)
+            {1: NonreducedFraction(1, 24),
+            2: NonreducedFraction(1, 16),
+            3: NonreducedFraction(1, 24),
+            4: NonreducedFraction(1, 16),
+            5: NonreducedFraction(1, 24)}
 
         """
         measures_ = []
@@ -924,7 +814,7 @@ def spacing(
             _ - (first_measure_number - 1) for _ in fermata_measure_numbers
         ]
     fallback_fraction = abjad.NonreducedFraction(fallback_duration)
-    measures = abjad.OrderedDict()
+    measures = {}
     for n in range(1, measure_count + 1):
         measures[n] = fallback_fraction
     specifier = SpacingSpecifier(
