@@ -627,10 +627,9 @@ def page(*systems, number=None):
 
 
 def spacing(
-    path,
     *,
-    fallback_duration,
     breaks=None,
+    fallback_duration=None,
     fermata_measure_duration=(1, 4),
     overrides=None,
 ):
