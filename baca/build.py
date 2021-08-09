@@ -816,8 +816,9 @@ def interpret_tex_file(tex, open_after=False):
         sys.exit(1)
 
 
-def make_layout_ly(layout_py, breaks, spacing=None, *, part_identifier=None):
-    layout_py = pathlib.Path(layout_py)
+def make_layout_ly(breaks, spacing=None, *, part_identifier=None):
+    layout_directory = pathlib.Path(os.getcwd())
+    layout_py = layout_directory / "layout.py"
     layout_module_name = layout_py.stem
     assert layout_module_name == "layout", repr(layout_module_name)
     layout_directory = layout_py.parent
