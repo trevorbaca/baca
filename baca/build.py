@@ -819,6 +819,27 @@ def interpret_tex_file(tex, open_after=False):
 def make_layout_ly(breaks, spacing=None, *, part_identifier=None):
     layout_directory = pathlib.Path(os.getcwd())
     layout_py = layout_directory / "layout.py"
+    if spacing is not None:
+        tuple_ = baca.path.get_measure_profile_metadata(layout_py)
+        first_measure_number = tuple_[0]
+        measure_count = tuple_[1]
+        fermata_measure_numbers = tuple_[2] or []
+        first_measure_number = first_measure_number or 1
+        fermata_measure_numbers = [
+            _ - (first_measure_number - 1) for _ in fermata_measure_numbers
+        ]
+        measures = {}
+        for n in range(1, measure_count + 1):
+            measures[n] = spacing._fallback_duration
+        overrides = spacing._overrides
+        spacing = abjad.new(
+            spacing,
+            fermata_measure_numbers=fermata_measure_numbers,
+            measure_count=measure_count,
+            measures=measures,
+        )
+        for override in overrides or []:
+            spacing.add_override(*override)
     layout_module_name = layout_py.stem
     assert layout_module_name == "layout", repr(layout_module_name)
     layout_directory = layout_py.parent

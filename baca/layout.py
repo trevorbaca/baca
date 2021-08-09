@@ -3,23 +3,7 @@ Classes and functions for spacing.
 
 ..  container:: example exception
 
-    Exception 1. Spacing specifier override method raises exception when measures is not
-    int, pair or list:
-
-    >>> spacing = baca.spacing(
-    ...     (18, [4, 6]),
-    ...     fallback_duration=(1, 20),
-    ...     overrides=(
-    ...         baca.space("all", (1, 16)),
-    ...     ),
-    ... )
-    Traceback (most recent call last):
-        ...
-    TypeError: measures must be int, pair or list (not 'all').
-
-..  container:: example exception
-
-    Exception 2. Breaks factory function raises exception on out-of-sequence page
+    Exception 1. Breaks factory function raises exception on out-of-sequence page
     specifiers:
 
     >>> breaks = baca.breaks(
@@ -39,7 +23,7 @@ Classes and functions for spacing.
 
 ..  container:: example exception
 
-    Exception 3. Spacing specifier raises exception when score contains too few measures:
+    Exception 2. Spacing specifier raises exception when score contains too few measures:
 
     >>> maker = baca.SegmentMaker(
     ...     score_template=baca.StringTrioScoreTemplate(),
@@ -74,7 +58,7 @@ Classes and functions for spacing.
 
 ..  container:: example exception
 
-    Exception 4. Page specifier factory function raises exception when system specifier
+    Exception 3. Page specifier factory function raises exception when system specifier
     Y-offsets overlap:
 
     >>> baca.page(
@@ -88,14 +72,12 @@ Classes and functions for spacing.
 
 """
 import collections
-import pathlib
 
 import abjad
 
 from . import classes as _classes
 from . import commandclasses as _commandclasses
 from . import indicators as _indicators
-from . import path as _path
 from . import selectors as _selectors
 from . import tags as _tags
 
@@ -174,6 +156,7 @@ class SpacingSpecifier:
 
     __slots__ = (
         "_breaks",
+        "_fallback_duration",
         "_fermata_measure_numbers",
         "_fermata_measure_duration",
         "_first_measure_number",
@@ -182,6 +165,7 @@ class SpacingSpecifier:
         "_minimum_duration",
         "_multiplier",
         "_overriden_fermata_measures",
+        "_overrides",
         "_phantom",
     )
 
@@ -495,114 +479,8 @@ class SpacingSpecifier:
         pair,
         fermata,
     ):
-        r"""
+        """
         Overrides ``measures`` with spacing ``pair``.
-
-        >>> import pprint
-
-        ..  container:: example
-
-            >>> spacing = baca.spacing(
-            ...     (5, []),
-            ...     breaks=baca.breaks(
-            ...         baca.page(
-            ...             baca.system(measure=1, y_offset=15, distances=(10, 20)),
-            ...         ),
-            ...     ),
-            ...     fallback_duration=(1, 20),
-            ... )
-            >>> pprint.pprint(spacing.measures)
-            {1: NonreducedFraction(1, 20),
-            2: NonreducedFraction(1, 20),
-            3: NonreducedFraction(1, 20),
-            4: NonreducedFraction(1, 20),
-            5: NonreducedFraction(1, 20)}
-
-            >>> spacing = baca.spacing(
-            ...     (5, []),
-            ...     breaks=baca.breaks(
-            ...         baca.page(
-            ...             baca.system(measure=1, y_offset=15, distances=(10, 20)),
-            ...         ),
-            ...     ),
-            ...     fallback_duration=(1, 20),
-            ...     overrides=(
-            ...         baca.space((1, 5), (1, 24)),
-            ...     ),
-            ... )
-            >>> pprint.pprint(spacing.measures)
-            {1: NonreducedFraction(1, 24),
-            2: NonreducedFraction(1, 24),
-            3: NonreducedFraction(1, 24),
-            4: NonreducedFraction(1, 24),
-            5: NonreducedFraction(1, 24)}
-
-            Works with measure number:
-
-            >>> spacing = baca.spacing(
-            ...     (5, []),
-            ...     breaks=baca.breaks(
-            ...         baca.page(
-            ...             baca.system(measure=1, y_offset=15, distances=(10, 20)),
-            ...         ),
-            ...     ),
-            ...     fallback_duration=(1, 20),
-            ...     overrides=(
-            ...         baca.space((1, 5), (1, 16)),
-            ...         baca.space(1, (1, 24)),
-            ...     ),
-            ... )
-            >>> pprint.pprint(spacing.measures)
-            {1: NonreducedFraction(1, 24),
-            2: NonreducedFraction(1, 16),
-            3: NonreducedFraction(1, 16),
-            4: NonreducedFraction(1, 16),
-            5: NonreducedFraction(1, 16)}
-
-            Works with range of measure numbers:
-
-            >>> spacing = baca.spacing(
-            ...     (5, []),
-            ...     breaks=baca.breaks(
-            ...         baca.page(
-            ...             baca.system(measure=1, y_offset=15, distances=(10, 20)),
-            ...         ),
-            ...     ),
-            ...     fallback_duration=(1, 20),
-            ...     overrides=(
-            ...         baca.space((1, 5), (1, 16)),
-            ...         baca.space((1, 3), (1, 24)),
-            ...     ),
-            ... )
-            >>> pprint.pprint(spacing.measures)
-            {1: NonreducedFraction(1, 24),
-            2: NonreducedFraction(1, 24),
-            3: NonreducedFraction(1, 24),
-            4: NonreducedFraction(1, 16),
-            5: NonreducedFraction(1, 16)}
-
-            Works with list of measure numbers:
-
-            >>> spacing = baca.spacing(
-            ...     (5, []),
-            ...     breaks=baca.breaks(
-            ...         baca.page(
-            ...             baca.system(measure=1, y_offset=15, distances=(10, 20)),
-            ...         ),
-            ...     ),
-            ...     fallback_duration=(1, 20),
-            ...     overrides=(
-            ...         baca.space((1, 5), (1, 16)),
-            ...         baca.space([1, 3, 5], (1, 24)),
-            ...     ),
-            ... )
-            >>> pprint.pprint(spacing.measures)
-            {1: NonreducedFraction(1, 24),
-            2: NonreducedFraction(1, 16),
-            3: NonreducedFraction(1, 24),
-            4: NonreducedFraction(1, 16),
-            5: NonreducedFraction(1, 24)}
-
         """
         measures_ = []
         duration = abjad.NonreducedFraction(pair)
@@ -759,73 +637,19 @@ def spacing(
     r"""
     Makes spacing specifier.
 
-    Reads first measure number, measure count, fermata measure numbers from ``path``
-    metadata. Pass triple directly for tests.
-
     Uses ``fallback_duration`` spacing for measures without override.
 
     Reads beginning-of-line, end-of-line measure numbers from ``breaks`` measure map.
 
-    Uses ``fermata_measure_duration`` spacing for fermta measures.
-
-    ..  container:: example
-
-        >>> spacing = baca.spacing(
-        ...     (18, [4, 6]),
-        ...     breaks=baca.breaks(
-        ...         baca.page(
-        ...             baca.system(measure=1, y_offset=15, distances=(10, 20)),
-        ...             baca.system(measure=9, y_offset=115, distances=(10, 20)),
-        ...         ),
-        ...     ),
-        ...     fallback_duration=(1, 20),
-        ... )
-
-        >>> spacing.bol_measure_numbers
-        [1, 9]
-
-        >>> spacing.eol_measure_numbers
-        [8]
-
-        >>> spacing.fermata_measure_numbers
-        [4, 6]
-
-        >>> spacing.final_measure_number
-        18
-
-        >>> spacing.measure_count
-        18
-
-        >>> len(spacing.measures)
-        18
-
+    Uses ``fermata_measure_duration`` spacing for fermata measures.
     """
-    if isinstance(path, tuple):
-        assert len(path) == 2, repr(path)
-        measure_count, fermata_measure_numbers = path
-    else:
-        path = pathlib.Path(path)
-        tuple_ = _path.get_measure_profile_metadata(path)
-        first_measure_number = tuple_[0]
-        measure_count = tuple_[1]
-        fermata_measure_numbers = tuple_[2] or []
-        first_measure_number = first_measure_number or 1
-        fermata_measure_numbers = [
-            _ - (first_measure_number - 1) for _ in fermata_measure_numbers
-        ]
-    fallback_fraction = abjad.NonreducedFraction(fallback_duration)
-    measures = {}
-    for n in range(1, measure_count + 1):
-        measures[n] = fallback_fraction
+    fallback_duration = abjad.NonreducedFraction(fallback_duration)
     specifier = SpacingSpecifier(
         breaks=breaks,
         fermata_measure_duration=fermata_measure_duration,
-        fermata_measure_numbers=fermata_measure_numbers,
-        measure_count=measure_count,
-        measures=measures,
     )
-    for override in overrides or []:
-        specifier.add_override(*override)
+    specifier._fallback_duration = fallback_duration
+    specifier._overrides = overrides
     return specifier
 
 
