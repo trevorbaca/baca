@@ -846,6 +846,7 @@ def make_layout_ly(
                 measures[n] = fermata_measure_duration
             else:
                 measures[n] = fallback_duration
+            measures[n + 1] = fermata_measure_duration
         eol_measure_numbers = []
         for bol_measure_number in breaks.bol_measure_numbers[1:]:
             eol_measure_number = bol_measure_number - 1

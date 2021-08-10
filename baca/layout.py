@@ -140,17 +140,14 @@ class SpacingSpecifier:
             minimum_durations_by_measure = method(skips, leaves)
         else:
             minimum_durations_by_measure = []
-        total = len(skips)
+        measure_count = len(skips)
         for measure_index, skip in enumerate(skips):
             measure_number = measure_index + 1
             duration, eol_adjusted, duration_ = self._calculate_duration(
-                measure_index,
                 measure_number,
-                skip,
                 minimum_durations_by_measure,
+                measure_count,
             )
-            if measure_index == total - 1:
-                duration = abjad.Duration(1, 4)
             spacing_section = _indicators.SpacingSection(duration=duration)
             tag = _tags.SPACING_COMMAND
             abjad.attach(
@@ -158,8 +155,12 @@ class SpacingSpecifier:
                 skip,
                 tag=tag.append(abjad.Tag("baca.SpacingSpecifier.__call__(1)")),
             )
-            string_ = self._make_annotation(duration, eol_adjusted, duration_)
-            if measure_index < total - 1:
+            if eol_adjusted:
+                multiplier = self.magic_lilypond_eol_adjustment
+                string_ = f"[[{duration_!s} * {multiplier!s}]]"
+            else:
+                string_ = f"[{duration!s}]"
+            if measure_index < measure_count - 1:
                 tag = _tags.SPACING
                 string = r"- \baca-start-spm-left-only"
                 string += f' "{string_}"'
@@ -187,16 +188,21 @@ class SpacingSpecifier:
     ### PRIVATE METHODS ###
 
     def _calculate_duration(
-        self, measure_index, measure_number, skip, minimum_durations_by_measure
+        self,
+        measure_number,
+        minimum_durations_by_measure,
+        measure_count,
     ):
-        if self.measures and measure_number in self.measures:
+        if self.measures:
             duration = self.measures[measure_number]
             duration = abjad.NonreducedFraction(duration)
         else:
-            duration = minimum_durations_by_measure[measure_index]
+            duration = minimum_durations_by_measure[measure_number - 1]
             if self.minimum_duration is not None:
                 if self.minimum_duration < duration:
                     duration = self.minimum_duration
+            if measure_number == measure_count:
+                duration = abjad.Duration(1, 4)
         eol_adjusted, duration_ = False, None
         if measure_number in self.eol_measure_numbers:
             duration_ = duration
@@ -250,17 +256,6 @@ class SpacingSpecifier:
                 durations_by_measure[measure_index].append(leaf_duration)
         minimum_durations_by_measure = [min(_) for _ in durations_by_measure]
         return minimum_durations_by_measure
-
-    def _is_fermata_measure(self, measure_number):
-        return measure_number in self.fermata_measure_numbers
-
-    def _make_annotation(self, duration, eol_adjusted, duration_):
-        if eol_adjusted:
-            multiplier = self.magic_lilypond_eol_adjustment
-            string = f"[[{duration_!s} * {multiplier!s}]]"
-        else:
-            string = f"[{duration!s}]"
-        return string
 
     ### PUBLIC METHODS ###
 
