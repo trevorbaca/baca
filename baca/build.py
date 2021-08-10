@@ -816,10 +816,21 @@ def interpret_tex_file(tex, open_after=False):
         sys.exit(1)
 
 
-def make_layout_ly(breaks, spacing=None, *, part_identifier=None):
+def make_layout_ly(
+    breaks,
+    *,
+    fallback_duration=None,
+    fermata_measure_duration=(1, 4),
+    overrides=None,
+    part_identifier=None,
+):
     layout_directory = pathlib.Path(os.getcwd())
     layout_py = layout_directory / "layout.py"
-    if spacing is not None:
+    if overrides is not None:
+        assert fallback_duration is not None
+    if fallback_duration is None:
+        spacing = None
+    else:
         tuple_ = baca.path.get_measure_profile_metadata(layout_py)
         first_measure_number = tuple_[0]
         measure_count = tuple_[1]
@@ -829,11 +840,12 @@ def make_layout_ly(breaks, spacing=None, *, part_identifier=None):
             _ - (first_measure_number - 1) for _ in fermata_measure_numbers
         ]
         measures = {}
+        fallback_duration = abjad.NonreducedFraction(fallback_duration)
         for n in range(1, measure_count + 1):
-            measures[n] = spacing._fallback_duration
-        overrides = spacing._overrides
-        spacing = abjad.new(
-            spacing,
+            measures[n] = fallback_duration
+        spacing = baca.SpacingSpecifier(
+            breaks=breaks,
+            fermata_measure_duration=fermata_measure_duration,
             fermata_measure_numbers=fermata_measure_numbers,
             measure_count=measure_count,
             measures=measures,

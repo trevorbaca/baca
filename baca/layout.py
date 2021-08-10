@@ -626,32 +626,6 @@ def page(*systems, number=None):
     return PageSpecifier(number=number, systems=systems_)
 
 
-def spacing(
-    *,
-    breaks=None,
-    fallback_duration=None,
-    fermata_measure_duration=(1, 4),
-    overrides=None,
-):
-    r"""
-    Makes spacing specifier.
-
-    Uses ``fallback_duration`` spacing for measures without override.
-
-    Reads beginning-of-line, end-of-line measure numbers from ``breaks`` measure map.
-
-    Uses ``fermata_measure_duration`` spacing for fermata measures.
-    """
-    fallback_duration = abjad.NonreducedFraction(fallback_duration)
-    specifier = SpacingSpecifier(
-        breaks=breaks,
-        fermata_measure_duration=fermata_measure_duration,
-    )
-    specifier._fallback_duration = fallback_duration
-    specifier._overrides = overrides
-    return specifier
-
-
 space = collections.namedtuple(
     "space",
     ["measures", "duration", "fermata"],
