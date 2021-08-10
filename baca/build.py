@@ -843,8 +843,12 @@ def make_layout_ly(
         fallback_duration = abjad.NonreducedFraction(fallback_duration)
         for n in range(1, measure_count + 1):
             measures[n] = fallback_duration
+        eol_measure_numbers = []
+        for bol_measure_number in breaks.bol_measure_numbers[1:]:
+            eol_measure_number = bol_measure_number - 1
+            eol_measure_numbers.append(eol_measure_number)
         spacing = baca.SpacingSpecifier(
-            breaks=breaks,
+            eol_measure_numbers=eol_measure_numbers,
             fermata_measure_duration=fermata_measure_duration,
             fermata_measure_numbers=fermata_measure_numbers,
             measure_count=measure_count,

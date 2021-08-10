@@ -3,8 +3,7 @@ Classes and functions for spacing.
 
 ..  container:: example exception
 
-    Exception 1. Breaks factory function raises exception on out-of-sequence page
-    specifiers:
+    Exception 1. Breaks function raises exception on out-of-sequence page specifiers:
 
     >>> breaks = baca.breaks(
     ...     baca.page(
@@ -82,71 +81,6 @@ from . import selectors as _selectors
 from . import tags as _tags
 
 
-class BreakMeasureMap:
-    """
-    Break measure map.
-    """
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        bol_measure_numbers=None,
-        commands=None,
-        page_count=None,
-    ):
-        bol_measure_numbers = bol_measure_numbers or []
-        self.bol_measure_numbers = bol_measure_numbers[:]
-        if page_count is not None:
-            assert isinstance(page_count, int), repr(page_count)
-        self.page_count = page_count
-        if commands is not None:
-            commands_ = {}
-            for measure_number, list_ in commands.items():
-                commands_[measure_number] = []
-                for command in list_:
-                    command_ = abjad.new(command, tags=[_tags.BREAK])
-                    commands_[measure_number].append(command_)
-            commands = commands_
-        self.commands = commands
-
-    ### SPECIAL METHODS ###
-
-    def __call__(self, context=None):
-        """
-        Calls break measure map on ``context``.
-        """
-        if context is None:
-            return
-        skips = _classes.Selection(context).skips()
-        measure_count = len(skips)
-        literal = abjad.LilyPondLiteral(r"\autoPageBreaksOff", "before")
-        abjad.attach(
-            literal,
-            skips[0],
-            tag=_tags.BREAK.append(abjad.Tag("baca.BreakMeasureMap.__call__(1)")),
-        )
-        for skip in skips[:measure_count]:
-            if not abjad.get.has_indicator(skip, LBSD):
-                literal = abjad.LilyPondLiteral(r"\noBreak", "before")
-                abjad.attach(
-                    literal,
-                    skip,
-                    tag=_tags.BREAK.append(
-                        abjad.Tag("baca.BreakMeasureMap.__call__(2)")
-                    ),
-                )
-        assert self.commands is not None
-        for measure_number, commands in self.commands.items():
-            if measure_count < measure_number:
-                message = f"score ends at measure {measure_count}"
-                message += f" (not {measure_number})."
-                raise Exception(message)
-            for command in commands:
-                command(context)
-
-
 class SpacingSpecifier:
     """
     Spacing specifier.
@@ -154,65 +88,52 @@ class SpacingSpecifier:
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        "_breaks",
-        "_fallback_duration",
-        "_fermata_measure_numbers",
-        "_fermata_measure_duration",
-        "_first_measure_number",
-        "_measure_count",
-        "_measures",
-        "_minimum_duration",
-        "_multiplier",
-        "_overriden_fermata_measures",
-        "_overrides",
-        "_phantom",
-    )
-
-    _magic_lilypond_eol_adjustment = abjad.Multiplier(35, 24)
+    magic_lilypond_eol_adjustment = abjad.Multiplier(35, 24)
 
     ### INITIALIZER ###
 
     def __init__(
         self,
         *,
-        breaks=None,
+        eol_measure_numbers=None,
         fermata_measure_numbers=None,
         fermata_measure_duration=(1, 4),
         measure_count=None,
         measures=None,
         minimum_duration=None,
+        # TODO: remove multiplier
         multiplier=None,
+        # TODO: remove phantom
         phantom=False,
     ):
-        if breaks is not None:
-            assert isinstance(breaks, BreakMeasureMap), repr(breaks)
-        self._breaks = breaks
+        self.eol_measure_numbers = eol_measure_numbers or []
         if fermata_measure_numbers is not None:
             assert all(isinstance(_, int) for _ in fermata_measure_numbers)
-        self._fermata_measure_numbers = fermata_measure_numbers or []
+        self.fermata_measure_numbers = fermata_measure_numbers or []
         duration_ = None
         if fermata_measure_duration is not None:
             duration_ = abjad.Duration(fermata_measure_duration)
-        self._fermata_measure_duration = duration_
+        self.fermata_measure_duration = duration_
         if measure_count is not None:
             assert isinstance(measure_count, int)
             assert 0 <= measure_count
-        self._measure_count = measure_count
+        self.measure_count = measure_count
         if minimum_duration is not None:
             minimum_duration = abjad.Duration(minimum_duration)
-        self._minimum_duration = minimum_duration
+        self.minimum_duration = minimum_duration
+        assert multiplier is None, repr(multiplier)
         if multiplier is not None:
             multiplier = abjad.Multiplier(multiplier)
-        self._multiplier = multiplier
+        self.multiplier = multiplier
         if measures is not None:
             assert isinstance(measures, dict), repr(measures)
         else:
             measures = {}
-        self._measures = measures
-        self._overriden_fermata_measures = []
+        self.measures = measures
+        self.overriden_fermata_measures = []
         assert isinstance(phantom, bool), repr(phantom)
-        self._phantom = phantom
+        assert phantom is False, repr(phantom)
+        self.phantom = phantom
 
     ### SPECIAL METHODS ###
 
@@ -281,13 +202,13 @@ class SpacingSpecifier:
         self, measure_index, measure_number, skip, minimum_durations_by_measure
     ):
         if (
-            self._is_fermata_measure(measure_number, skip)
-            and measure_number in self._overriden_fermata_measures
+            self._is_fermata_measure(measure_number)
+            and measure_number in self.overriden_fermata_measures
         ):
             duration = self.measures[measure_number]
             duration = abjad.NonreducedFraction(duration)
         elif self.fermata_measure_duration is not None and self._is_fermata_measure(
-            measure_number, skip
+            measure_number
         ):
             duration = self.fermata_measure_duration
         elif self.measures and measure_number in self.measures:
@@ -303,17 +224,17 @@ class SpacingSpecifier:
         eol_adjusted, duration_ = False, None
         if measure_number in self.eol_measure_numbers:
             duration_ = duration
-            duration *= self._magic_lilypond_eol_adjustment
+            duration *= self.magic_lilypond_eol_adjustment
             eol_adjusted = True
         return duration, eol_adjusted, duration_
 
     def _check_measure_number(self, number):
         if number < 1:
             raise Exception(f"Nonpositive measure number ({number}) not allowed.")
-        if self.final_measure_number < number:
+        if self.measure_count < number:
             raise Exception(
                 f"measure number {number} greater than"
-                f" last measure number ({self.final_measure_number})."
+                f" last measure number ({self.measure_count})."
             )
 
     def _get_minimum_durations_by_measure(self, skips, leaves):
@@ -354,122 +275,16 @@ class SpacingSpecifier:
         minimum_durations_by_measure = [min(_) for _ in durations_by_measure]
         return minimum_durations_by_measure
 
-    def _is_fermata_measure(self, measure_number, skip):
+    def _is_fermata_measure(self, measure_number):
         return measure_number in self.fermata_measure_numbers
 
     def _make_annotation(self, duration, eol_adjusted, duration_):
         if eol_adjusted:
-            multiplier = self._magic_lilypond_eol_adjustment
+            multiplier = self.magic_lilypond_eol_adjustment
             string = f"[[{duration_!s} * {multiplier!s}]]"
         else:
             string = f"[{duration!s}]"
         return string
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def bol_measure_numbers(self):
-        """
-        Gets beginning-of-line measure numbers.
-        """
-        if self.breaks:
-            return self.breaks.bol_measure_numbers or []
-        else:
-            return []
-
-    @property
-    def breaks(self):
-        """
-        Gets break measure map.
-        """
-        return self._breaks
-
-    @property
-    def eol_measure_numbers(self):
-        """
-        Gets end-of-line measure numbers.
-        """
-        eol_measure_numbers = []
-        for bol_measure_number in self.bol_measure_numbers[1:]:
-            eol_measure_number = bol_measure_number - 1
-            eol_measure_numbers.append(eol_measure_number)
-        return eol_measure_numbers
-
-    @property
-    def fermata_measure_duration(self):
-        """
-        Gets fermata measure duration.
-
-        Sets fermata measures to exactly this duration when set; ignores minimum duration
-        and multiplier.
-        """
-        return self._fermata_measure_duration
-
-    @property
-    def fermata_measure_numbers(self):
-        """
-        Gets fermata measure numbers.
-        """
-        return self._fermata_measure_numbers
-
-    @property
-    def final_measure_number(self):
-        """
-        Gets final measure number.
-
-        Gives none when first measure number is not defined.
-
-        Gives none when measure count is not defined.
-        """
-        return self.measure_count
-
-    @property
-    def magic_lilypond_eol_adjustment(self):
-        """
-        Gets magic LilyPond EOL adjustment.
-
-        Optically determined to correct LilyPond end-of-line spacing bug.
-
-        Class property.
-        """
-        return self._magic_lilypond_eol_adjustment
-
-    @property
-    def measure_count(self):
-        """
-        Gets measure count.
-        """
-        return self._measure_count
-
-    @property
-    def measures(self):
-        """
-        Gets measure overrides.
-        """
-        return self._measures
-
-    @property
-    def minimum_duration(self):
-        """
-        Gets minimum duration.
-
-        Defaults to none and interprets none equal to ``1/8``.
-        """
-        return self._minimum_duration
-
-    @property
-    def multiplier(self):
-        """
-        Gets multiplier.
-        """
-        return self._multiplier
-
-    @property
-    def phantom(self):
-        """
-        Is true when segment concludes with phantom measure.
-        """
-        return self._phantom
 
     ### PUBLIC METHODS ###
 
@@ -504,7 +319,7 @@ class SpacingSpecifier:
         else:
             raise TypeError(f"measures must be int, pair or list (not {measures!r}).")
         if fermata:
-            self._overriden_fermata_measures.extend(measures_)
+            self.overriden_fermata_measures.extend(measures_)
 
 
 class LBSD:
@@ -603,6 +418,13 @@ def breaks(*page_specifiers):
                 indicators=[lbsd], selector=selector
             )
             commands[measure_number] = [command, lbsd_command]
+    commands_ = {}
+    for measure_number, list_ in commands.items():
+        commands_[measure_number] = []
+        for command in list_:
+            command_ = abjad.new(command, tags=[_tags.BREAK])
+            commands_[measure_number].append(command_)
+    commands = commands_
     breaks = BreakMeasureMap(
         bol_measure_numbers=bol_measure_numbers,
         commands=commands,
@@ -630,6 +452,12 @@ space = collections.namedtuple(
     "space",
     ["measures", "duration", "fermata"],
     defaults=[False],
+)
+
+
+BreakMeasureMap = collections.namedtuple(
+    "BreakMeasureMap",
+    ["bol_measure_numbers", "commands", "page_count"],
 )
 
 

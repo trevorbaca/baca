@@ -6,6 +6,7 @@ import abjad
 from abjadext import rmakers
 
 from . import classes, const, indicators
+from . import layout as _layout
 from . import memento as _memento
 from . import overrides as _overrides
 from . import parts as _parts
@@ -1457,7 +1458,33 @@ class SegmentMaker:
     def _apply_breaks(self):
         if self.breaks is None:
             return
-        self.breaks(self.score["Global_Skips"])
+        global_skips = self.score["Global_Skips"]
+        skips = classes.Selection(global_skips).skips()
+        measure_count = len(skips)
+        literal = abjad.LilyPondLiteral(r"\autoPageBreaksOff", "before")
+        abjad.attach(
+            literal,
+            skips[0],
+            tag=_tags.BREAK.append(abjad.Tag("baca.BreakMeasureMap.__call__(1)")),
+        )
+        for skip in skips[:measure_count]:
+            if not abjad.get.has_indicator(skip, _layout.LBSD):
+                literal = abjad.LilyPondLiteral(r"\noBreak", "before")
+                abjad.attach(
+                    literal,
+                    skip,
+                    tag=_tags.BREAK.append(
+                        abjad.Tag("baca.BreakMeasureMap.__call__(2)")
+                    ),
+                )
+        assert self.breaks.commands is not None
+        for measure_number, commands in self.breaks.commands.items():
+            if measure_count < measure_number:
+                message = f"score ends at measure {measure_count}"
+                message += f" (not {measure_number})."
+                raise Exception(message)
+            for command in commands:
+                command(global_skips)
 
     def _apply_spacing(self):
         if self.spacing is None:
