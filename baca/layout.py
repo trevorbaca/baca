@@ -86,8 +86,6 @@ class SpacingSpecifier:
     Spacing specifier.
     """
 
-    ### CLASS VARIABLES ###
-
     magic_lilypond_eol_adjustment = abjad.Multiplier(35, 24)
 
     ### INITIALIZER ###
@@ -126,28 +124,22 @@ class SpacingSpecifier:
     ### SPECIAL METHODS ###
 
     def __call__(self, segment_maker=None):
-        """
-        Calls spacing specifier on ``segment_maker``.
-        """
-        score = segment_maker.score
-        skips = _classes.Selection(score["Global_Skips"]).skips()
-        programmatic = True
-        if self.measures and len(self.measures) == len(skips):
-            programmatic = False
-        if programmatic:
-            leaves = abjad.iterate(score).leaves(grace=False)
-            method = self._get_minimum_durations_by_measure
-            minimum_durations_by_measure = method(skips, leaves)
-        else:
-            minimum_durations_by_measure = []
+        skips = _classes.Selection(segment_maker.score["Global_Skips"]).skips()
         measure_count = len(skips)
         for measure_index, skip in enumerate(skips):
             measure_number = measure_index + 1
-            duration, eol_adjusted, duration_ = self._calculate_duration(
-                measure_number,
-                minimum_durations_by_measure,
-                measure_count,
-            )
+            if measure_number == measure_count:
+                duration = abjad.Duration(1, 4)
+            elif self.measures:
+                duration = self.measures[measure_number]
+                duration = abjad.NonreducedFraction(duration)
+            else:
+                duration = self.minimum_duration
+            eol_adjusted, duration_ = False, None
+            if measure_number in self.eol_measure_numbers:
+                duration_ = duration
+                duration *= self.magic_lilypond_eol_adjustment
+                eol_adjusted = True
             spacing_section = _indicators.SpacingSection(duration=duration)
             tag = _tags.SPACING_COMMAND
             abjad.attach(
@@ -187,29 +179,6 @@ class SpacingSpecifier:
 
     ### PRIVATE METHODS ###
 
-    def _calculate_duration(
-        self,
-        measure_number,
-        minimum_durations_by_measure,
-        measure_count,
-    ):
-        if self.measures:
-            duration = self.measures[measure_number]
-            duration = abjad.NonreducedFraction(duration)
-        else:
-            duration = minimum_durations_by_measure[measure_number - 1]
-            if self.minimum_duration is not None:
-                if self.minimum_duration < duration:
-                    duration = self.minimum_duration
-            if measure_number == measure_count:
-                duration = abjad.Duration(1, 4)
-        eol_adjusted, duration_ = False, None
-        if measure_number in self.eol_measure_numbers:
-            duration_ = duration
-            duration *= self.magic_lilypond_eol_adjustment
-            eol_adjusted = True
-        return duration, eol_adjusted, duration_
-
     def _check_measure_number(self, number):
         if number < 1:
             raise Exception(f"Nonpositive measure number ({number}) not allowed.")
@@ -218,44 +187,6 @@ class SpacingSpecifier:
                 f"measure number {number} greater than"
                 f" last measure number ({self.measure_count})."
             )
-
-    def _get_minimum_durations_by_measure(self, skips, leaves):
-        measure_timespans = []
-        durations_by_measure = []
-        for skip in skips:
-            measure_timespan = abjad.get.timespan(skip)
-            measure_timespans.append(measure_timespan)
-            durations_by_measure.append([])
-        leaf_timespans = set()
-        leaf_count = 0
-        for leaf in leaves:
-            leaf_timespan = abjad.get.timespan(leaf)
-            leaf_duration = leaf_timespan.duration
-            if leaf.multiplier is not None:
-                leaf_duration = leaf_duration / leaf.multiplier
-            pair = (leaf_timespan, leaf_duration)
-            leaf_timespans.add(pair)
-            leaf_count += 1
-        measure_index = 0
-        measure_timespan = measure_timespans[measure_index]
-        leaf_timespans = list(leaf_timespans)
-        leaf_timespans.sort(key=lambda _: _[0].start_offset)
-        start_offset = 0
-        for pair in leaf_timespans:
-            leaf_timespan, leaf_duration = pair
-            assert start_offset <= leaf_timespan.start_offset
-            start_offset = leaf_timespan.start_offset
-            if leaf_timespan.starts_during_timespan(measure_timespan):
-                durations_by_measure[measure_index].append(leaf_duration)
-            else:
-                measure_index += 1
-                if len(measure_timespans) <= measure_index:
-                    continue
-                measure_timespan = measure_timespans[measure_index]
-                assert leaf_timespan.starts_during_timespan(measure_timespan)
-                durations_by_measure[measure_index].append(leaf_duration)
-        minimum_durations_by_measure = [min(_) for _ in durations_by_measure]
-        return minimum_durations_by_measure
 
     ### PUBLIC METHODS ###
 

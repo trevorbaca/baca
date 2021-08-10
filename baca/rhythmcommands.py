@@ -456,7 +456,7 @@ class RhythmCommand(scoping.Command):
 
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_duration((1, 12)),
+            ...     spacing=baca.minimum_duration((1, 16)),
             ...     time_signatures=5 * [(4, 8)],
             ...     )
 
@@ -520,11 +520,11 @@ class RhythmCommand(scoping.Command):
                             s1 * 1/2
                 <BLANKLINE>
                             % [Global_Skips measure 2]
-                            \baca-new-spacing-section #1 #12
+                            \baca-new-spacing-section #1 #16
                             s1 * 1/2
                 <BLANKLINE>
                             % [Global_Skips measure 3]
-                            \baca-new-spacing-section #1 #12
+                            \baca-new-spacing-section #1 #16
                             s1 * 1/2
                 <BLANKLINE>
                             % [Global_Skips measure 4]
