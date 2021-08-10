@@ -102,7 +102,7 @@ class BreakMeasureMap:
             assert isinstance(page_count, int), repr(page_count)
         self.page_count = page_count
         if commands is not None:
-            commands_ = abjad.OrderedDict()
+            commands_ = {}
             for measure_number, list_ in commands.items():
                 commands_[measure_number] = []
                 for command in list_:
@@ -568,7 +568,7 @@ def breaks(*page_specifiers):
     """
     Makes break measure map.
     """
-    commands = abjad.OrderedDict()
+    commands = {}
     page_count = len(page_specifiers)
     assert 0 < page_count, repr(page_count)
     first_system = page_specifiers[0].systems[0]

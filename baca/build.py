@@ -852,9 +852,6 @@ def make_layout_ly(
         )
         for override in overrides or []:
             spacing.add_override(*override)
-    layout_module_name = layout_py.stem
-    assert layout_module_name == "layout", repr(layout_module_name)
-    layout_directory = layout_py.parent
     document_name = abjad.String(layout_directory.name).to_shout_case()
     if baca.path.get_metadatum(layout_directory, "parts_directory") is True:
         assert abjad.String(part_identifier).is_shout_case()
@@ -866,17 +863,9 @@ def make_layout_ly(
             print("Can not find first measure number ...")
             first_measure_number = False
         assert isinstance(first_measure_number, int)
-    else:
-        first_measure_number = 1
-    if first_measure_number is False:
-        print(f"Skipping {baca.path.trim(layout_py)} ...")
-        sys.exit(1)
-    assert abjad.String(document_name).is_shout_case()
-    string = "first_measure_number"
-    first_measure_number = baca.path.get_metadatum(layout_directory, string, 1)
-    if layout_directory.parent.name == "segments":
         time_signatures = baca.path.get_metadatum(layout_directory, "time_signatures")
     else:
+        first_measure_number = 1
         time_signatures = []
         contents_directory = baca.path.get_contents_directory(layout_directory)
         segments_directory = contents_directory / "segments"
@@ -888,6 +877,11 @@ def make_layout_ly(
                 "time_signatures",
             )
             time_signatures.extend(time_signatures_)
+    if first_measure_number is False:
+        raise Exception("first_measure_number should not be false")
+        print(f"Skipping {baca.path.trim(layout_py)} ...")
+        sys.exit(1)
+    assert abjad.String(document_name).is_shout_case()
     maker = baca.SegmentMaker(
         breaks=breaks,
         do_not_check_persistence=True,
@@ -918,12 +912,14 @@ def make_layout_ly(
     text = abjad.LilyPondFormatManager.left_shift_tags(text)
     layout_ly = layout_directory / "layout.ly"
     lines = []
+    # TODO: remove first_page_number embedding
     if layout_directory.parent.name == "segments":
-        first_segment = layout_directory.parent / "01"
-        if layout_directory.name != first_segment.name:
-            previous_segment = str(int(layout_directory.name) - 1).zfill(2)
-            previous_segment = layout_directory.parent / previous_segment
-            previous_layout_ly = previous_segment / "layout.ly"
+        if layout_directory.name != "01":
+            previous_segment_number = str(int(layout_directory.name) - 1).zfill(2)
+            previous_segment_directory = (
+                layout_directory.parent / previous_segment_number
+            )
+            previous_layout_ly = previous_segment_directory / "layout.ly"
             if previous_layout_ly.is_file():
                 result = _get_preamble_page_count_overview(previous_layout_ly)
                 if result is not None:
@@ -946,22 +942,20 @@ def make_layout_ly(
     header = "\n".join(lines) + "\n\n"
     layout_ly.write_text(header + text + "\n")
     counter = abjad.String("measure").pluralize(measure_count)
-    print(
-        f"Writing {measure_count} + 1 {counter} to" f" {baca.path.trim(layout_ly)} ..."
-    )
+    message = f"Writing {measure_count} + 1 {counter} to"
+    message += f" {baca.path.trim(layout_ly)} ..."
+    print(message)
     bol_measure_numbers = []
-    prototype = abjad.LilyPondLiteral
     skips = abjad.iterate(score["Page_Layout"]).leaves(abjad.Skip)
     for i, skip in enumerate(skips):
-        for literal in abjad.get.indicators(skip, prototype):
+        for literal in abjad.get.indicators(skip, abjad.LilyPondLiteral):
             if literal.argument in (r"\break", r"\pageBreak"):
                 measure_number = first_measure_number + i
                 bol_measure_numbers.append(measure_number)
                 continue
-    bols = bol_measure_numbers
-    count = len(bols)
+    count = len(bol_measure_numbers)
     numbers = abjad.String("number").pluralize(count)
-    items = ", ".join([str(_) for _ in bols])
+    items = ", ".join([str(_) for _ in bol_measure_numbers])
     metadata = layout_directory / "__metadata__"
     print(f"Writing BOL measure {numbers} {items} to {baca.path.trim(metadata)} ...")
     if layout_directory.name.endswith("-parts"):
@@ -1038,10 +1032,9 @@ def make_segment_pdf(maker, first_segment=False):
         message += f" to {baca.path.trim(music_ly)} ..."
         print(message)
         time_signatures = []
-        prototype = abjad.TimeSignature
         for skip in context:
-            time_signature = abjad.get.effective(skip, prototype)
-            assert isinstance(time_signature, prototype), repr(time_signature)
+            time_signature = abjad.get.effective(skip, abjad.TimeSignature)
+            assert isinstance(time_signature, abjad.TimeSignature), repr(time_signature)
             time_signatures.append(str(time_signature))
         # for phantom measure at end
         if 0 < len(time_signatures):
