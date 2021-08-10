@@ -122,7 +122,6 @@ class SpacingSpecifier:
         else:
             measures = {}
         self.measures = measures
-        self.overriden_fermata_measures = []
 
     ### SPECIAL METHODS ###
 
@@ -265,12 +264,7 @@ class SpacingSpecifier:
 
     ### PUBLIC METHODS ###
 
-    def add_override(
-        self,
-        measures,
-        pair,
-        fermata,
-    ):
+    def add_override(self, measures, pair):
         """
         Overrides ``measures`` with spacing ``pair``.
         """
@@ -295,8 +289,6 @@ class SpacingSpecifier:
                 measures_.append(measure)
         else:
             raise TypeError(f"measures must be int, pair or list (not {measures!r}).")
-        if fermata:
-            self.overriden_fermata_measures.extend(measures_)
 
 
 class LBSD:
@@ -427,8 +419,7 @@ def page(*systems, number=None):
 
 space = collections.namedtuple(
     "space",
-    ["measures", "duration", "fermata"],
-    defaults=[False],
+    ["measures", "duration"],
 )
 
 
