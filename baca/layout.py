@@ -190,17 +190,7 @@ class SpacingSpecifier:
     def _calculate_duration(
         self, measure_index, measure_number, skip, minimum_durations_by_measure
     ):
-        if (
-            self._is_fermata_measure(measure_number)
-            and measure_number in self.overriden_fermata_measures
-        ):
-            duration = self.measures[measure_number]
-            duration = abjad.NonreducedFraction(duration)
-        elif self.fermata_measure_duration is not None and self._is_fermata_measure(
-            measure_number
-        ):
-            duration = self.fermata_measure_duration
-        elif self.measures and measure_number in self.measures:
+        if self.measures and measure_number in self.measures:
             duration = self.measures[measure_number]
             duration = abjad.NonreducedFraction(duration)
         else:

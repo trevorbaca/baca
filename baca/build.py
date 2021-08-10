@@ -842,7 +842,10 @@ def make_layout_ly(
         measures = {}
         fallback_duration = abjad.NonreducedFraction(fallback_duration)
         for n in range(1, measure_count + 1):
-            measures[n] = fallback_duration
+            if n in fermata_measure_numbers:
+                measures[n] = fermata_measure_duration
+            else:
+                measures[n] = fallback_duration
         eol_measure_numbers = []
         for bol_measure_number in breaks.bol_measure_numbers[1:]:
             eol_measure_number = bol_measure_number - 1
