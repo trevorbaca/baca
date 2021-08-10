@@ -98,7 +98,7 @@ class SpacingSpecifier:
         fermata_measure_duration=(1, 4),
         measure_count=None,
         measures=None,
-        minimum_duration=None,
+        force_duration=None,
     ):
         self.eol_measure_numbers = eol_measure_numbers or []
         if fermata_measure_numbers is not None:
@@ -112,9 +112,9 @@ class SpacingSpecifier:
             assert isinstance(measure_count, int)
             assert 0 <= measure_count
         self.measure_count = measure_count
-        if minimum_duration is not None:
-            minimum_duration = abjad.Duration(minimum_duration)
-        self.minimum_duration = minimum_duration
+        if force_duration is not None:
+            force_duration = abjad.Duration(force_duration)
+        self.force_duration = force_duration
         if measures is not None:
             assert isinstance(measures, dict), repr(measures)
         else:
@@ -134,7 +134,7 @@ class SpacingSpecifier:
                 duration = self.measures[measure_number]
                 duration = abjad.NonreducedFraction(duration)
             else:
-                duration = self.minimum_duration
+                duration = self.force_duration
             eol_adjusted, duration_ = False, None
             if measure_number in self.eol_measure_numbers:
                 duration_ = duration
@@ -326,13 +326,6 @@ def breaks(*page_specifiers):
         page_count=page_count,
     )
     return breaks
-
-
-def minimum_duration(duration):
-    """
-    Makes spacing specifier with ``duration`` minimum width.
-    """
-    return SpacingSpecifier(minimum_duration=duration)
 
 
 def page(*systems, number=None):

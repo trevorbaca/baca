@@ -223,7 +223,7 @@ class SegmentMaker:
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 24)),
+        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
         ...     time_signatures=time_signatures,
         ... )
         >>> maker(
@@ -419,7 +419,7 @@ class SegmentMaker:
         >>> maker = baca.SegmentMaker(
         ...     do_not_check_out_of_range_pitches=True,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 24)),
+        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
         ...     time_signatures=time_signatures,
         ... )
         >>> maker(
@@ -4499,7 +4499,7 @@ class SegmentMaker:
             >>> maker = baca.SegmentMaker(
             ...     color_octaves=True,
             ...     score_template=baca.StringTrioScoreTemplate(),
-            ...     spacing=baca.minimum_duration((1, 31)),
+            ...     spacing=baca.SpacingSpecifier(force_duration=(1, 31)),
             ...     time_signatures=[(6, 16), (6, 16)],
             ... )
 

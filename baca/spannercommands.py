@@ -227,7 +227,7 @@ def beam(
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 

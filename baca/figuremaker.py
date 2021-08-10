@@ -2189,7 +2189,7 @@ class Imbrication:
             >>> maker = baca.SegmentMaker(
             ...     ignore_repeat_pitch_classes=True,
             ...     score_template=baca.TwoVoiceStaffScoreTemplate(),
-            ...     spacing=baca.minimum_duration((1, 32)),
+            ...     spacing=baca.SpacingSpecifier(force_duration=(1, 32)),
             ...     time_signatures=accumulator.time_signatures,
             ... )
             >>> accumulator.populate_segment_maker(maker)
@@ -2519,7 +2519,7 @@ class Imbrication:
             >>> maker = baca.SegmentMaker(
             ...     ignore_repeat_pitch_classes=True,
             ...     score_template=baca.TwoVoiceStaffScoreTemplate(),
-            ...     spacing=baca.minimum_duration((1, 32)),
+            ...     spacing=baca.SpacingSpecifier(force_duration=(1, 32)),
             ...     time_signatures=accumulator.time_signatures,
             ... )
             >>> accumulator.populate_segment_maker(maker)
@@ -2844,7 +2844,7 @@ class Imbrication:
 
             >>> maker = baca.SegmentMaker(
             ...     score_template=template,
-            ...     spacing=baca.minimum_duration((1, 32)),
+            ...     spacing=baca.SpacingSpecifier(force_duration=(1, 32)),
             ...     time_signatures=accumulator.time_signatures,
             ... )
             >>> accumulator.populate_segment_maker(maker)
@@ -3198,7 +3198,7 @@ class Imbrication:
 
             >>> maker = baca.SegmentMaker(
             ...     score_template=template,
-            ...     spacing=baca.minimum_duration((1, 32)),
+            ...     spacing=baca.SpacingSpecifier(force_duration=(1, 32)),
             ...     time_signatures=accumulator.time_signatures,
             ... )
             >>> accumulator.populate_segment_maker(maker)
@@ -7775,7 +7775,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=template,
-        ...     spacing=baca.minimum_duration((1, 32)),
+        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
         >>> accumulator.populate_segment_maker(maker)
@@ -8040,7 +8040,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=template,
-        ...     spacing=baca.minimum_duration((1, 32)),
+        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
         >>> accumulator.populate_segment_maker(maker)
@@ -8359,7 +8359,7 @@ def extend_beam(
         >>> maker = baca.SegmentMaker(
         ...     ignore_repeat_pitch_classes=True,
         ...     score_template=baca.TwoVoiceStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 32)),
+        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
         >>> accumulator.populate_segment_maker(maker)
@@ -8682,7 +8682,7 @@ def imbricate(
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=template,
-        ...     spacing=baca.minimum_duration((1, 32)),
+        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
         >>> accumulator.populate_segment_maker(maker)
@@ -8996,7 +8996,7 @@ def imbricate(
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=template,
-        ...     spacing=baca.minimum_duration((1, 32)),
+        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
         >>> accumulator.populate_segment_maker(maker)
@@ -9408,7 +9408,7 @@ def imbricate(
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=template,
-        ...     spacing=baca.minimum_duration((1, 32)),
+        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
         >>> accumulator.populate_segment_maker(maker)
@@ -9740,7 +9740,7 @@ def imbricate(
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=template,
-        ...     spacing=baca.minimum_duration((1, 24)),
+        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
         >>> accumulator.populate_segment_maker(maker)
@@ -9994,7 +9994,7 @@ def imbricate(
         >>> maker = baca.SegmentMaker(
         ...     ignore_repeat_pitch_classes=True,
         ...     score_template=baca.TwoVoiceStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 32)),
+        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
         >>> accumulator.populate_segment_maker(maker)
@@ -10276,7 +10276,7 @@ def imbricate(
         >>> maker = baca.SegmentMaker(
         ...     ignore_repeat_pitch_classes=True,
         ...     score_template=baca.TwoVoiceStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 32)),
+        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
         >>> accumulator.populate_segment_maker(maker)

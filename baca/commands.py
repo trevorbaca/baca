@@ -355,7 +355,7 @@ def bcps(
 
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_duration((1, 16)),
+            ...     spacing=baca.SpacingSpecifier(force_duration=(1, 16)),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -983,7 +983,7 @@ def cross_staff(
         >>> maker = baca.SegmentMaker(
         ...     ignore_repeat_pitch_classes=True,
         ...     score_template=accumulator.score_template,
-        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 12)),
         ...     time_signatures=accumulator.time_signatures,
         ...     )
         >>> accumulator.populate_segment_maker(maker)
@@ -1516,7 +1516,7 @@ def finger_pressure_transition(
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
@@ -2558,7 +2558,7 @@ def invisible_music(
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
