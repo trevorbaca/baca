@@ -101,10 +101,6 @@ class SpacingSpecifier:
         measure_count=None,
         measures=None,
         minimum_duration=None,
-        # TODO: remove multiplier
-        multiplier=None,
-        # TODO: remove phantom
-        phantom=False,
     ):
         self.eol_measure_numbers = eol_measure_numbers or []
         if fermata_measure_numbers is not None:
@@ -121,19 +117,12 @@ class SpacingSpecifier:
         if minimum_duration is not None:
             minimum_duration = abjad.Duration(minimum_duration)
         self.minimum_duration = minimum_duration
-        assert multiplier is None, repr(multiplier)
-        if multiplier is not None:
-            multiplier = abjad.Multiplier(multiplier)
-        self.multiplier = multiplier
         if measures is not None:
             assert isinstance(measures, dict), repr(measures)
         else:
             measures = {}
         self.measures = measures
         self.overriden_fermata_measures = []
-        assert isinstance(phantom, bool), repr(phantom)
-        assert phantom is False, repr(phantom)
-        self.phantom = phantom
 
     ### SPECIAL METHODS ###
 
@@ -219,8 +208,6 @@ class SpacingSpecifier:
             if self.minimum_duration is not None:
                 if self.minimum_duration < duration:
                     duration = self.minimum_duration
-            if self.multiplier is not None:
-                duration = duration / self.multiplier
         eol_adjusted, duration_ = False, None
         if measure_number in self.eol_measure_numbers:
             duration_ = duration
