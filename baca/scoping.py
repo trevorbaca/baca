@@ -847,7 +847,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 12)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
@@ -1045,7 +1045,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 12)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
@@ -1297,7 +1297,7 @@ def only_parts(command: _command_typing) -> _command_typing:
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 12)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 

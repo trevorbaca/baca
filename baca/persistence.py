@@ -19,7 +19,7 @@ r"""
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
         ...     score_template=score_template,
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
 
@@ -145,7 +145,7 @@ r"""
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> maker(
@@ -273,7 +273,7 @@ r"""
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> maker(
@@ -418,7 +418,7 @@ r"""
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
 
@@ -560,7 +560,7 @@ r"""
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
         ... )
         >>> maker(
@@ -703,7 +703,7 @@ r"""
         >>> maker = baca.SegmentMaker(
         ...     breaks=breaks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> maker(
@@ -847,7 +847,7 @@ r"""
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -967,7 +967,7 @@ r"""
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -1104,7 +1104,7 @@ r"""
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -1240,7 +1240,7 @@ r"""
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -1363,7 +1363,7 @@ r"""
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -1498,7 +1498,7 @@ r"""
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -1621,7 +1621,7 @@ r"""
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -1759,7 +1759,7 @@ r"""
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -1907,7 +1907,7 @@ r"""
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     instruments=instruments,
         ...     score_template=score_template,
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -2267,7 +2267,7 @@ r"""
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     instruments=instruments,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -2627,7 +2627,7 @@ r"""
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     instruments=instruments,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -3005,7 +3005,7 @@ r"""
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     instruments=instruments,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -3389,7 +3389,7 @@ r"""
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     instruments=instruments,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
         ...     )
         >>> maker(
@@ -3788,7 +3788,7 @@ r"""
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     instruments=instruments,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -4195,7 +4195,7 @@ r"""
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     margin_markups=margin_markups,
         ...     score_template=score_template,
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -4573,7 +4573,7 @@ r"""
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -4950,7 +4950,7 @@ r"""
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -5352,7 +5352,7 @@ r"""
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -5759,7 +5759,7 @@ r"""
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
         ...     )
         >>> maker(
@@ -6194,7 +6194,7 @@ r"""
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -6602,7 +6602,7 @@ r"""
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
         ...     )
         >>> maker(
@@ -6783,7 +6783,7 @@ r"""
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 25)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 25)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -6919,7 +6919,7 @@ r"""
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -7075,7 +7075,7 @@ r"""
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -7230,7 +7230,7 @@ r"""
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -7374,7 +7374,7 @@ r"""
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -7531,7 +7531,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> override = baca.PersistentOverride(
@@ -7712,7 +7712,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -7850,7 +7850,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> override = baca.PersistentOverride(
@@ -8006,7 +8006,7 @@ r"""
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -8129,7 +8129,7 @@ r"""
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -8269,7 +8269,7 @@ r"""
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -8407,7 +8407,7 @@ r"""
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -8536,7 +8536,7 @@ r"""
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -8693,7 +8693,7 @@ r"""
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 25)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 25)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -8833,7 +8833,7 @@ r"""
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -8992,7 +8992,7 @@ r"""
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -9150,7 +9150,7 @@ r"""
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -9314,7 +9314,7 @@ r"""
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(

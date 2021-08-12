@@ -32,7 +32,7 @@ class RhythmCommand(scoping.Command):
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 12)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(3, 8), (4, 8), (3,8), (4, 8)],
         ...     )
 
@@ -456,7 +456,7 @@ class RhythmCommand(scoping.Command):
 
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.SpacingSpecifier(force_duration=(1, 16)),
+            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ...     time_signatures=5 * [(4, 8)],
             ...     )
 
@@ -902,7 +902,7 @@ def make_monads(
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 12)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 4)],
         ...     )
 
@@ -1097,7 +1097,7 @@ def make_repeat_tied_notes(
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(force_duration=(1, 12)),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(10, 8)],
         ...     )
 

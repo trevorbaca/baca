@@ -88,44 +88,45 @@ class SpacingSpecifier:
 
     magic_lilypond_eol_adjustment = abjad.Multiplier(35, 24)
 
+    fermata_measure_duration = abjad.Duration(1, 4)
+
     ### INITIALIZER ###
 
     def __init__(
         self,
+        fallback_duration,
         *,
         eol_measure_numbers=None,
         fermata_measure_numbers=None,
-        fermata_measure_duration=(1, 4),
-        force_duration=None,
         measure_count=None,
-        measures=None,
         overrides=None,
     ):
+        self.fallback_duration = abjad.Duration(fallback_duration)
         self.eol_measure_numbers = eol_measure_numbers or []
         if fermata_measure_numbers is not None:
             assert all(isinstance(_, int) for _ in fermata_measure_numbers)
         self.fermata_measure_numbers = fermata_measure_numbers or []
-        duration_ = None
-        if fermata_measure_duration is not None:
-            duration_ = abjad.Duration(fermata_measure_duration)
-        self.fermata_measure_duration = duration_
         if measure_count is not None:
             assert isinstance(measure_count, int)
             assert 0 <= measure_count
         self.measure_count = measure_count
-        if force_duration is not None:
-            force_duration = abjad.Duration(force_duration)
-        self.force_duration = force_duration
-        if measures is not None:
-            assert isinstance(measures, dict), repr(measures)
-        else:
-            measures = {}
-        self.measures = measures
         self.overrides = overrides
 
     ### SPECIAL METHODS ###
 
     def __call__(self, segment_maker=None):
+        skips = _classes.Selection(segment_maker.score["Global_Skips"]).skips()
+        if self.measure_count is not None:
+            measure_count = self.measure_count
+        else:
+            measure_count = len(skips)
+        measures = {}
+        for n in range(1, measure_count + 1):
+            if n in self.fermata_measure_numbers:
+                measures[n] = self.fermata_measure_duration
+            else:
+                measures[n] = self.fallback_duration
+            measures[n + 1] = self.fermata_measure_duration
         for token, duration in self.overrides or []:
             duration = abjad.NonreducedFraction(duration)
             measure_numbers = []
@@ -142,24 +143,23 @@ class SpacingSpecifier:
             for n in measure_numbers:
                 if n < 1:
                     message = f"Nonpositive measure number ({n}) not allowed."
-                elif self.measure_count < n:
+                elif measure_count < n:
                     message = f"measure number {n} greater than"
-                    message += f" last measure number ({self.measure_count})."
+                    message += f" last measure number ({measure_count})."
                 else:
-                    self.measures[n] = duration
+                    measures[n] = duration
                     continue
                 raise Exception(message)
-        skips = _classes.Selection(segment_maker.score["Global_Skips"]).skips()
         measure_count = len(skips)
         for measure_index, skip in enumerate(skips):
             measure_number = measure_index + 1
             if measure_number == measure_count:
                 duration = abjad.Duration(1, 4)
-            elif self.measures:
-                duration = self.measures[measure_number]
+            elif measures:
+                duration = measures[measure_number]
                 duration = abjad.NonreducedFraction(duration)
             else:
-                duration = self.force_duration
+                duration = self.fallback_duration
             eol_adjusted, duration_ = False, None
             if measure_number in self.eol_measure_numbers:
                 duration_ = duration

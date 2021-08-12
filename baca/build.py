@@ -820,10 +820,10 @@ def make_layout_ly(
     breaks,
     *,
     fallback_duration=None,
-    fermata_measure_duration=(1, 4),
     overrides=None,
     part_identifier=None,
 ):
+    assert part_identifier is None, repr(part_identifier)
     layout_directory = pathlib.Path(os.getcwd())
     layout_py = layout_directory / "layout.py"
     if overrides is not None:
@@ -839,24 +839,15 @@ def make_layout_ly(
         fermata_measure_numbers = [
             _ - (first_measure_number - 1) for _ in fermata_measure_numbers
         ]
-        measures = {}
-        fallback_duration = abjad.NonreducedFraction(fallback_duration)
-        for n in range(1, measure_count + 1):
-            if n in fermata_measure_numbers:
-                measures[n] = fermata_measure_duration
-            else:
-                measures[n] = fallback_duration
-            measures[n + 1] = fermata_measure_duration
         eol_measure_numbers = []
         for bol_measure_number in breaks.bol_measure_numbers[1:]:
             eol_measure_number = bol_measure_number - 1
             eol_measure_numbers.append(eol_measure_number)
         spacing = baca.SpacingSpecifier(
+            fallback_duration,
             eol_measure_numbers=eol_measure_numbers,
-            fermata_measure_duration=fermata_measure_duration,
             fermata_measure_numbers=fermata_measure_numbers,
             measure_count=measure_count,
-            measures=measures,
             overrides=overrides,
         )
     document_name = abjad.String(layout_directory.name).to_shout_case()
