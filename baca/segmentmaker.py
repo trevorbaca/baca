@@ -641,6 +641,7 @@ class SegmentMaker:
         "_midi",
         "_moment_markup",
         "_offset_to_measure_number",
+        "_page_layout_profile",
         "_persist",
         "_previous_metadata",
         "_previous_persist",
@@ -5905,6 +5906,7 @@ class SegmentMaker:
         first_segment=True,
         metadata=None,
         midi=False,
+        page_layout_profile=None,
         persist=None,
         previous_metadata=None,
         previous_persist=None,
@@ -5918,6 +5920,7 @@ class SegmentMaker:
         self._first_segment = first_segment
         self._metadata = abjad.OrderedDict(metadata)
         self._midi = midi
+        self._page_layout_profile = page_layout_profile
         self._persist = abjad.OrderedDict(persist)
         self._previous_metadata = abjad.OrderedDict(previous_metadata)
         self._previous_persist = abjad.OrderedDict(previous_persist)

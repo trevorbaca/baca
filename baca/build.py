@@ -845,14 +845,16 @@ def make_layout_ly(
         for bol_measure_number in breaks.bol_measure_numbers[1:]:
             eol_measure_number = bol_measure_number - 1
             eol_measure_numbers.append(eol_measure_number)
+    page_layout_profile = {
+        "eol_measure_numbers": eol_measure_numbers,
+        "fermata_measure_numbers": fermata_measure_numbers,
+        "measure_count": measure_count,
+    }
     if overrides is not None:
         assert fallback_duration is not None
     spacing = baca.SpacingSpecifier(
         breaks=breaks,
-        eol_measure_numbers=eol_measure_numbers,
         fallback_duration=fallback_duration,
-        fermata_measure_numbers=fermata_measure_numbers,
-        measure_count=measure_count,
         overrides=overrides,
     )
     document_name = abjad.String(layout_directory.name).to_shout_case()
@@ -895,6 +897,7 @@ def make_layout_ly(
         do_not_print_timing=True,
         environment="layout",
         first_segment=True,
+        page_layout_profile=page_layout_profile,
     )
     context = lilypond_file["Global_Skips"]
     context.lilypond_type = "PageLayout"

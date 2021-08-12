@@ -44,15 +44,15 @@ from . import indicators as _indicators
 from . import selectors as _selectors
 from . import tags as _tags
 
+magic_lilypond_eol_adjustment = abjad.Multiplier(35, 24)
+
+fermata_measure_duration = abjad.Duration(1, 4)
+
 
 class SpacingSpecifier:
     """
     Spacing specifier.
     """
-
-    magic_lilypond_eol_adjustment = abjad.Multiplier(35, 24)
-
-    fermata_measure_duration = abjad.Duration(1, 4)
 
     ### INITIALIZER ###
 
@@ -60,10 +60,7 @@ class SpacingSpecifier:
         self,
         *,
         breaks=None,
-        eol_measure_numbers=None,
         fallback_duration=None,
-        fermata_measure_numbers=None,
-        measure_count=None,
         overrides=None,
     ):
         if breaks is not None:
@@ -72,14 +69,6 @@ class SpacingSpecifier:
         if fallback_duration is not None:
             fallback_duration = abjad.Duration(fallback_duration)
         self.fallback_duration = fallback_duration
-        self.eol_measure_numbers = eol_measure_numbers or []
-        if fermata_measure_numbers is not None:
-            assert all(isinstance(_, int) for _ in fermata_measure_numbers)
-        self.fermata_measure_numbers = fermata_measure_numbers or []
-        if measure_count is not None:
-            assert isinstance(measure_count, int)
-            assert 0 <= measure_count
-        self.measure_count = measure_count
         self.overrides = overrides
 
     ### SPECIAL METHODS ###
@@ -87,18 +76,18 @@ class SpacingSpecifier:
     def __call__(self, segment_maker=None):
         if self.fallback_duration is None:
             return
+        page_layout_profile = segment_maker._page_layout_profile or {}
         skips = _classes.Selection(segment_maker.score["Global_Skips"]).skips()
-        if self.measure_count is not None:
-            measure_count = self.measure_count
-        else:
-            measure_count = len(skips)
+        measure_count = page_layout_profile.get("measure_count") or len(skips)
+        fermata_measure_numbers = page_layout_profile.get("fermata_measure_numbers", [])
+        eol_measure_numbers = page_layout_profile.get("eol_measure_numbers", [])
         measures = {}
         for n in range(1, measure_count + 1):
-            if n in self.fermata_measure_numbers:
-                measures[n] = self.fermata_measure_duration
+            if n in fermata_measure_numbers:
+                measures[n] = fermata_measure_duration
             else:
                 measures[n] = self.fallback_duration
-            measures[n + 1] = self.fermata_measure_duration
+            measures[n + 1] = fermata_measure_duration
         for token, duration in self.overrides or []:
             duration = abjad.NonreducedFraction(duration)
             measure_numbers = []
@@ -133,9 +122,9 @@ class SpacingSpecifier:
             else:
                 duration = self.fallback_duration
             eol_adjusted, duration_ = False, None
-            if measure_number in self.eol_measure_numbers:
+            if measure_number in eol_measure_numbers:
                 duration_ = duration
-                duration *= self.magic_lilypond_eol_adjustment
+                duration *= magic_lilypond_eol_adjustment
                 eol_adjusted = True
             spacing_section = _indicators.SpacingSection(duration=duration)
             tag = _tags.SPACING_COMMAND
@@ -145,7 +134,7 @@ class SpacingSpecifier:
                 tag=tag.append(abjad.Tag("baca.SpacingSpecifier.__call__(1)")),
             )
             if eol_adjusted:
-                multiplier = self.magic_lilypond_eol_adjustment
+                multiplier = magic_lilypond_eol_adjustment
                 string_ = f"[[{duration_!s} * {multiplier!s}]]"
             else:
                 string_ = f"[{duration!s}]"
