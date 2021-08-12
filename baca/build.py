@@ -857,9 +857,8 @@ def make_layout_ly(
             fermata_measure_numbers=fermata_measure_numbers,
             measure_count=measure_count,
             measures=measures,
+            overrides=overrides,
         )
-        for override in overrides or []:
-            spacing.add_override(*override)
     document_name = abjad.String(layout_directory.name).to_shout_case()
     if baca.path.get_metadatum(layout_directory, "parts_directory") is True:
         assert abjad.String(part_identifier).is_shout_case()

@@ -96,9 +96,10 @@ class SpacingSpecifier:
         eol_measure_numbers=None,
         fermata_measure_numbers=None,
         fermata_measure_duration=(1, 4),
+        force_duration=None,
         measure_count=None,
         measures=None,
-        force_duration=None,
+        overrides=None,
     ):
         self.eol_measure_numbers = eol_measure_numbers or []
         if fermata_measure_numbers is not None:
@@ -120,10 +121,34 @@ class SpacingSpecifier:
         else:
             measures = {}
         self.measures = measures
+        self.overrides = overrides
 
     ### SPECIAL METHODS ###
 
     def __call__(self, segment_maker=None):
+        for token, duration in self.overrides or []:
+            duration = abjad.NonreducedFraction(duration)
+            measure_numbers = []
+            if isinstance(token, int):
+                measure_numbers.append(token)
+            elif isinstance(token, tuple):
+                start, stop = token
+                for measure_number in range(start, stop + 1):
+                    measure_numbers.append(measure_number)
+            elif isinstance(token, list):
+                measure_numbers.extend(token)
+            else:
+                raise TypeError(f"token must be int, pair or list (not {token!r}).")
+            for n in measure_numbers:
+                if n < 1:
+                    message = f"Nonpositive measure number ({n}) not allowed."
+                elif self.measure_count < n:
+                    message = f"measure number {n} greater than"
+                    message += f" last measure number ({self.measure_count})."
+                else:
+                    self.measures[n] = duration
+                    continue
+                raise Exception(message)
         skips = _classes.Selection(segment_maker.score["Global_Skips"]).skips()
         measure_count = len(skips)
         for measure_index, skip in enumerate(skips):
@@ -176,45 +201,6 @@ class SpacingSpecifier:
                     deactivate=True,
                     tag=tag.append(abjad.Tag("baca.SpacingSpecifier.__call__(3)")),
                 )
-
-    ### PRIVATE METHODS ###
-
-    def _check_measure_number(self, number):
-        if number < 1:
-            raise Exception(f"Nonpositive measure number ({number}) not allowed.")
-        if self.measure_count < number:
-            raise Exception(
-                f"measure number {number} greater than"
-                f" last measure number ({self.measure_count})."
-            )
-
-    ### PUBLIC METHODS ###
-
-    def add_override(self, measures, pair):
-        """
-        Overrides ``measures`` with spacing ``pair``.
-        """
-        measures_ = []
-        duration = abjad.NonreducedFraction(pair)
-        if isinstance(measures, int):
-            self._check_measure_number(measures)
-            self.measures[measures] = duration
-            measures_.append(measures)
-        elif isinstance(measures, tuple):
-            assert len(measures) == 2, repr(measures)
-            start_measure, stop_measure = measures
-            self._check_measure_number(start_measure)
-            self._check_measure_number(stop_measure)
-            for number in range(start_measure, stop_measure + 1):
-                self.measures[number] = duration
-                measures_.append(number)
-        elif isinstance(measures, list):
-            for measure in measures:
-                self._check_measure_number(measure)
-                self.measures[measure] = duration
-                measures_.append(measure)
-        else:
-            raise TypeError(f"measures must be int, pair or list (not {measures!r}).")
 
 
 class LBSD:
