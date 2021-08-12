@@ -829,7 +829,9 @@ def make_layout_ly(
     if overrides is not None:
         assert fallback_duration is not None
     if fallback_duration is None:
-        spacing = None
+        eol_measure_numbers = None
+        fermata_measure_numbers = None
+        measure_count = None
     else:
         tuple_ = baca.path.get_measure_profile_metadata(layout_py)
         first_measure_number = tuple_[0]
@@ -843,13 +845,14 @@ def make_layout_ly(
         for bol_measure_number in breaks.bol_measure_numbers[1:]:
             eol_measure_number = bol_measure_number - 1
             eol_measure_numbers.append(eol_measure_number)
-        spacing = baca.SpacingSpecifier(
-            fallback_duration,
-            eol_measure_numbers=eol_measure_numbers,
-            fermata_measure_numbers=fermata_measure_numbers,
-            measure_count=measure_count,
-            overrides=overrides,
-        )
+    spacing = baca.SpacingSpecifier(
+        breaks=breaks,
+        eol_measure_numbers=eol_measure_numbers,
+        fallback_duration=fallback_duration,
+        fermata_measure_numbers=fermata_measure_numbers,
+        measure_count=measure_count,
+        overrides=overrides,
+    )
     document_name = abjad.String(layout_directory.name).to_shout_case()
     if baca.path.get_metadatum(layout_directory, "parts_directory") is True:
         assert abjad.String(part_identifier).is_shout_case()
@@ -881,7 +884,6 @@ def make_layout_ly(
         sys.exit(1)
     assert abjad.String(document_name).is_shout_case()
     maker = baca.SegmentMaker(
-        breaks=breaks,
         do_not_check_persistence=True,
         do_not_include_layout_ly=True,
         first_measure_number=first_measure_number,

@@ -22,43 +22,7 @@ Classes and functions for spacing.
 
 ..  container:: example exception
 
-    Exception 2. Spacing specifier raises exception when score contains too few measures:
-
-    >>> maker = baca.SegmentMaker(
-    ...     score_template=baca.StringTrioScoreTemplate(),
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8), (4, 8)],
-    ...     breaks=baca.breaks(
-    ...         baca.page(
-    ...             baca.system(measure=1, y_offset=0, distances=(10, 20)),
-    ...         ),
-    ...         baca.page(
-    ...             baca.system(measure=11, y_offset=0, distances=(10, 20)),
-    ...         ),
-    ...     ),
-    ... )
-    >>> maker(
-    ...     "Violin_Music_Voice",
-    ...     baca.make_even_divisions(),
-    ...     baca.pitch("E4"),
-    ... )
-    >>> lilypond_file = maker.run(environment="docs")
-    Traceback (most recent call last):
-        File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/doctest.py", line 1330, in __run
-        compileflags, 1), test.globs)
-        File "<doctest spacing.py[82]>", line 1, in <module>
-        lilypond_file = maker.run(environment="docs")
-        File "/Users/trevorbaca/baca/baca/segmentmaker.py", line 7390, in run
-        self._apply_breaks()
-        File "/Users/trevorbaca/baca/baca/segmentmaker.py", line 999, in _apply_breaks
-        self.breaks(self.score['Global_Skips'])
-        File "/Users/trevorbaca/baca/baca/spacing.py", line 319, in __call__
-        raise Exception(message)
-    Exception: score ends at measure 6 (not 11).
-
-..  container:: example exception
-
-    Exception 3. Page specifier factory function raises exception when system specifier
-    Y-offsets overlap:
+    Exception 2. Page function raises exception when Y-offsets overlap:
 
     >>> baca.page(
     ...     baca.system(measure=1, y_offset=60, distances=(20, 20)),
@@ -94,14 +58,20 @@ class SpacingSpecifier:
 
     def __init__(
         self,
-        fallback_duration,
         *,
+        breaks=None,
         eol_measure_numbers=None,
+        fallback_duration=None,
         fermata_measure_numbers=None,
         measure_count=None,
         overrides=None,
     ):
-        self.fallback_duration = abjad.Duration(fallback_duration)
+        if breaks is not None:
+            assert isinstance(breaks, BreakMeasureMap), repr(breaks)
+        self.breaks = breaks
+        if fallback_duration is not None:
+            fallback_duration = abjad.Duration(fallback_duration)
+        self.fallback_duration = fallback_duration
         self.eol_measure_numbers = eol_measure_numbers or []
         if fermata_measure_numbers is not None:
             assert all(isinstance(_, int) for _ in fermata_measure_numbers)
@@ -115,6 +85,8 @@ class SpacingSpecifier:
     ### SPECIAL METHODS ###
 
     def __call__(self, segment_maker=None):
+        if self.fallback_duration is None:
+            return
         skips = _classes.Selection(segment_maker.score["Global_Skips"]).skips()
         if self.measure_count is not None:
             measure_count = self.measure_count

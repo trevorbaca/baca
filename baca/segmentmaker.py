@@ -601,7 +601,6 @@ class SegmentMaker:
     __slots__ = (
         "_activate",
         "_allow_empty_selections",
-        "_breaks",
         "_cache",
         "_cached_time_signatures",
         "_check_all_are_pitched",
@@ -700,7 +699,6 @@ class SegmentMaker:
         *,
         activate=None,
         allow_empty_selections=False,
-        breaks=None,
         check_all_are_pitched=False,
         clock_time_extra_offset=None,
         clock_time_override=None,
@@ -743,7 +741,6 @@ class SegmentMaker:
             assert all(isinstance(_, abjad.Tag) for _ in activate)
         self._activate = activate
         self._allow_empty_selections = allow_empty_selections
-        self._breaks = breaks
         if check_all_are_pitched is not None:
             check_all_are_pitched = bool(check_all_are_pitched)
         self._check_all_are_pitched = check_all_are_pitched
@@ -1456,7 +1453,9 @@ class SegmentMaker:
             wrapper.tag = tag_
 
     def _apply_breaks(self):
-        if self.breaks is None:
+        if self.spacing is None:
+            return
+        if self.spacing.breaks is None:
             return
         global_skips = self.score["Global_Skips"]
         skips = classes.Selection(global_skips).skips()
@@ -1477,8 +1476,8 @@ class SegmentMaker:
                         abjad.Tag("baca.BreakMeasureMap.__call__(2)")
                     ),
                 )
-        assert self.breaks.commands is not None
-        for measure_number, commands in self.breaks.commands.items():
+        assert self.spacing.breaks.commands is not None
+        for measure_number, commands in self.spacing.breaks.commands.items():
             if measure_count < measure_number:
                 message = f"score ends at measure {measure_count}"
                 message += f" (not {measure_number})."
@@ -4458,13 +4457,6 @@ class SegmentMaker:
         Otherwise segment raises exception on empty selectors.
         """
         return self._allow_empty_selections
-
-    @property
-    def breaks(self):
-        """
-        Gets breaks.
-        """
-        return self._breaks
 
     @property
     def check_all_are_pitched(self):

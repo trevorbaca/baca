@@ -17,9 +17,11 @@ r"""
         >>> triple = ("Music_Staff", "default_clef", abjad.Clef("treble"))
         >>> score_template.defaults.append(triple)
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     score_template=score_template,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
 
@@ -143,9 +145,11 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> maker(
@@ -271,9 +275,11 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> maker(
@@ -416,9 +422,11 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
 
@@ -558,9 +566,11 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
         ... )
         >>> maker(
@@ -701,9 +711,11 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> maker(
@@ -1903,11 +1915,13 @@ r"""
         >>> triple = ("Music_Staff", 'default_instrument', abjad.Flute())
         >>> score_template.defaults.append(triple)
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     instruments=instruments,
         ...     score_template=score_template,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -2263,11 +2277,13 @@ r"""
         Explicit instruments color blue and redraw dull blue:
 
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     instruments=instruments,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -2623,11 +2639,13 @@ r"""
         Even after a previous instrument:
 
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     instruments=instruments,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -3001,11 +3019,13 @@ r"""
         Reapplied instruments color green and redraw dull green:
 
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     instruments=instruments,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -3385,11 +3405,13 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     instruments=instruments,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
         ...     )
         >>> maker(
@@ -3784,11 +3806,13 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     instruments=instruments,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -4191,11 +4215,13 @@ r"""
         ...     )
         >>> score_template.defaults.append(triple)
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     margin_markups=margin_markups,
         ...     score_template=score_template,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -4569,11 +4595,13 @@ r"""
         Explicit margin markup color blue and redraw dull blue:
 
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -4946,11 +4974,13 @@ r"""
         Even after previous margin markup:
 
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -5348,11 +5378,13 @@ r"""
         Reapplied margin markup color green and redraw dull green:
 
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -5755,11 +5787,13 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
         ...     )
         >>> maker(
@@ -6190,11 +6224,13 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -6598,11 +6634,13 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
         ...     )
         >>> maker(
@@ -6779,11 +6817,13 @@ r"""
         Explicit metronome marks color blue:
 
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 25)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 25),
+        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -6915,11 +6955,13 @@ r"""
         Even after a previous metronome mark:
 
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -7071,11 +7113,13 @@ r"""
         Reapplied metronome marks color green:
 
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -7226,11 +7270,13 @@ r"""
         Redundant metronome marks color pink:
 
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -7370,11 +7416,13 @@ r"""
         Even at the beginning of a segment:
 
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -8689,11 +8737,13 @@ r"""
         Explicit tempo trends color blue:
 
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 25)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 25),
+        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -8829,11 +8879,13 @@ r"""
         Even after a previous tempo trend:
 
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -8988,11 +9040,13 @@ r"""
         Reapplied tempo trends color green:
 
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -9146,11 +9200,13 @@ r"""
         Redundant tempo trends color pink:
 
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
         ...     )
         >>> maker(
@@ -9310,11 +9366,13 @@ r"""
         Even at the beginning of a segment:
 
         >>> maker = baca.SegmentMaker(
-        ...     breaks=breaks,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> maker(
