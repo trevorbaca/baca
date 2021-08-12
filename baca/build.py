@@ -816,19 +816,17 @@ def interpret_tex_file(tex, open_after=False):
         sys.exit(1)
 
 
-def make_layout_ly(
-    breaks,
-    *,
-    fallback_duration=None,
-    overrides=None,
-):
+def make_layout_ly(spacing):
+    assert isinstance(spacing, baca.SpacingSpecifier), repr(spacing)
     layout_directory = pathlib.Path(os.getcwd())
     layout_py = layout_directory / "layout.py"
     layout_ly = layout_directory / "layout.ly"
     if layout_ly.is_file():
         print(f"Removing {baca.path.trim(layout_ly)} ...")
         layout_ly.unlink()
-    if fallback_duration is None:
+    if spacing.overrides is not None:
+        assert spacing.fallback_duration is not None
+    if spacing.fallback_duration is None:
         eol_measure_numbers = None
         fermata_measure_numbers = None
         measure_count = None
@@ -842,7 +840,7 @@ def make_layout_ly(
             _ - (first_measure_number - 1) for _ in fermata_measure_numbers
         ]
         eol_measure_numbers = []
-        for bol_measure_number in breaks.bol_measure_numbers[1:]:
+        for bol_measure_number in spacing.breaks.bol_measure_numbers[1:]:
             eol_measure_number = bol_measure_number - 1
             eol_measure_numbers.append(eol_measure_number)
     page_layout_profile = {
@@ -850,13 +848,6 @@ def make_layout_ly(
         "fermata_measure_numbers": fermata_measure_numbers,
         "measure_count": measure_count,
     }
-    if overrides is not None:
-        assert fallback_duration is not None
-    spacing = baca.SpacingSpecifier(
-        breaks=breaks,
-        fallback_duration=fallback_duration,
-        overrides=overrides,
-    )
     document_name = abjad.String(layout_directory.name).to_shout_case()
     if layout_directory.parent.name == "segments":
         string = "first_measure_number"
@@ -929,7 +920,7 @@ def make_layout_ly(
                     first_page_number = final_page_number + 1
                     line = f"% first_page_number = {first_page_number}"
                     lines.append(line)
-    page_count = breaks.page_count
+    page_count = spacing.breaks.page_count
     lines.append(f"% page_count = {page_count}")
     time_signatures = [str(_) for _ in time_signatures]
     measure_count = len(time_signatures)
