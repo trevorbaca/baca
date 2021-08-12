@@ -821,9 +821,7 @@ def make_layout_ly(
     *,
     fallback_duration=None,
     overrides=None,
-    part_identifier=None,
 ):
-    assert part_identifier is None, repr(part_identifier)
     layout_directory = pathlib.Path(os.getcwd())
     layout_py = layout_directory / "layout.py"
     layout_ly = layout_directory / "layout.ly"
@@ -858,9 +856,6 @@ def make_layout_ly(
         overrides=overrides,
     )
     document_name = abjad.String(layout_directory.name).to_shout_case()
-    if baca.path.get_metadatum(layout_directory, "parts_directory") is True:
-        assert abjad.String(part_identifier).is_shout_case()
-        document_name = f"{document_name}_{part_identifier}"
     if layout_directory.parent.name == "segments":
         string = "first_measure_number"
         first_measure_number = baca.path.get_metadatum(layout_directory, string)
