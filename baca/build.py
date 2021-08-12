@@ -826,8 +826,10 @@ def make_layout_ly(
     assert part_identifier is None, repr(part_identifier)
     layout_directory = pathlib.Path(os.getcwd())
     layout_py = layout_directory / "layout.py"
-    if overrides is not None:
-        assert fallback_duration is not None
+    layout_ly = layout_directory / "layout.ly"
+    if layout_ly.is_file():
+        print(f"Removing {baca.path.trim(layout_ly)} ...")
+        layout_ly.unlink()
     if fallback_duration is None:
         eol_measure_numbers = None
         fermata_measure_numbers = None
@@ -845,6 +847,8 @@ def make_layout_ly(
         for bol_measure_number in breaks.bol_measure_numbers[1:]:
             eol_measure_number = bol_measure_number - 1
             eol_measure_numbers.append(eol_measure_number)
+    if overrides is not None:
+        assert fallback_duration is not None
     spacing = baca.SpacingSpecifier(
         breaks=breaks,
         eol_measure_numbers=eol_measure_numbers,
