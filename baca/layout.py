@@ -7,13 +7,13 @@ Classes and functions for spacing.
 
     >>> breaks = baca.breaks(
     ...     baca.page(
+    ...         1,
     ...         baca.system(measure=1, y_offset=20, distances=(15, 20, 20)),
     ...         baca.system(measure=13, y_offset=140, distances=(15, 20, 20)),
-    ...         number=1,
     ...     ),
     ...     baca.page(
+    ...         9,
     ...         baca.system(measure=23, y_offset=20, distances=(15, 20, 20)),
-    ...         number=9
     ...     ),
     ... )
     Traceback (most recent call last):
@@ -25,9 +25,9 @@ Classes and functions for spacing.
     Exception 2. Page function raises exception when Y-offsets overlap:
 
     >>> baca.page(
+    ...     1,
     ...     baca.system(measure=1, y_offset=60, distances=(20, 20)),
     ...     baca.system(measure=4, y_offset=60, distances=(20, 20)),
-    ...     number=1,
     ... )
     Traceback (most recent call last):
         ...
@@ -179,7 +179,6 @@ class LBSD:
     def __init__(self, *, y_offset=None, alignment_distances=None):
         self.y_offset = y_offset
         if alignment_distances is not None:
-            assert isinstance(alignment_distances, collections.abc.Iterable)
             alignment_distances = tuple(alignment_distances)
         self.alignment_distances = alignment_distances
 
@@ -200,24 +199,17 @@ class PageSpecifier:
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        *,
-        number=None,
-        systems=None,
-    ):
-        if number is not None:
-            assert isinstance(number, int), repr(number)
-            assert 1 <= number, repr(number)
+    def __init__(self, *, number, systems):
+        assert isinstance(number, int), repr(number)
+        assert 1 <= number, repr(number)
         self.number = number
-        if systems is not None:
-            y_offsets: list = []
-            for system in systems:
-                y_offset = system.y_offset
-                if y_offset in y_offsets:
-                    raise Exception(f"systems overlap at Y-offset {y_offset}.")
-                else:
-                    y_offsets.append(y_offset)
+        y_offsets = []
+        for system in systems:
+            y_offset = system.y_offset
+            if y_offset in y_offsets:
+                raise Exception(f"systems overlap at Y-offset {y_offset}.")
+            else:
+                y_offsets.append(y_offset)
         self.systems = systems
 
 
@@ -275,7 +267,7 @@ def breaks(*page_specifiers):
     return breaks
 
 
-def page(*systems, number=None):
+def page(number, *systems):
     """
     Makes page specifier.
     """
