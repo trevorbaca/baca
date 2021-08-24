@@ -291,3 +291,19 @@ system = collections.namedtuple(
     "system",
     ["measure", "y_offset", "distances"],
 )
+
+
+def make_layout(
+    *pages,
+    fallback_duration=None,
+    overrides=None,
+):
+    """
+    Makes layout.
+    """
+    breaks_ = breaks(*pages)
+    return SpacingSpecifier(
+        breaks=breaks_,
+        fallback_duration=fallback_duration,
+        overrides=overrides,
+    )
