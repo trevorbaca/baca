@@ -11,8 +11,6 @@ import abjad
 
 from . import classes
 
-### CLASSES ###
-
 
 class ArpeggiationSpacingSpecifier:
     """
@@ -2748,15 +2746,11 @@ class Constellation:
         ...     [[-10, -2, 0, 5], [-5, 3, 13, 16], [11, 30, 32, 45]],
         ...     [[-10, -2, 5, 15, 25], [-1, 7, 18, 20], [0, 28, 33]],
         ...     [[-12, 17, 27, 37], [-1, 7, 18, 21], [2, 10, 16, 20]],
-        ...     ]
-        >>> range_ = abjad.PitchRange('[A0, C8]')
-        >>> constellation_circuit = baca.ConstellationCircuit(
-        ...     cells,
-        ...     range_,
-        ...     )
-
+        ... ]
+        >>> range_ = abjad.PitchRange("[A0, C8]")
+        >>> constellation_circuit = baca.ConstellationCircuit(cells, range_)
         >>> for constellation in constellation_circuit:
-        ...     constellation
+        ...     print(constellation)
         Constellation(180)
         Constellation(140)
         Constellation(80)
@@ -2767,8 +2761,6 @@ class Constellation:
         Constellation(108)
 
     """
-
-    ### CLASS VARIABLES ###
 
     ### INITIALIZER ###
 
@@ -2781,7 +2773,7 @@ class Constellation:
 
     ### SPECIAL METHODS ###
 
-    def __contains__(self, pitch_set) -> bool:
+    def __contains__(self, pitch_set):
         """
         Is true when constellation contains ``pitch_set``.
 
@@ -2790,7 +2782,7 @@ class Constellation:
             >>> pitch_numbers = [
             ...     -38, -36, -34, -29, -28, -25,
             ...     -21, -20, -19, -18, -15, -11,
-            ...     ]
+            ... ]
             >>> pitch_set = baca.Sequence(items=pitch_numbers)
             >>> class_ = baca.ConstellationCircuit
             >>> constellation_circuit = class_.make_constellation_circuit_1()
@@ -2807,7 +2799,7 @@ class Constellation:
         """
         return pitch_set in self._pitch_number_lists
 
-    def __getitem__(self, argument) -> list:
+    def __getitem__(self, argument):
         """
         Gets item or slice identified by ``argument``.
 
@@ -2822,7 +2814,7 @@ class Constellation:
         """
         return self._pitch_number_lists.__getitem__(argument)
 
-    def __len__(self) -> int:
+    def __len__(self):
         """
         Gets length of constellation.
 
@@ -2837,7 +2829,7 @@ class Constellation:
         """
         return len(self._pitch_number_lists)
 
-    def __repr__(self) -> str:
+    def __repr__(self):
         """
         Gets interpreter representation of constellation.
 
@@ -2945,9 +2937,7 @@ class Constellation:
                 )
         prototype = (abjad.Chord, abjad.PitchSet)
         if not isinstance(pitch_carrier, prototype):
-            message = "must be chord or pitch-set: {!r}"
-            message = message.format(pitch_carrier)
-            raise TypeError(message)
+            raise TypeError(f"must be chord or pitch-set: {pitch_carrier!r}")
         result = []
         interval = abjad.NumberedInterval(-12)
         while True:
@@ -2991,7 +2981,7 @@ class Constellation:
     ### PUBLIC PROPERTIES ###
 
     @property
-    def constellation_number(self) -> int:
+    def constellation_number(self):
         """
         Gets constellation number.
 
@@ -3032,7 +3022,7 @@ class Constellation:
         return generator_chord
 
     @property
-    def partitioned_generator_pitch_numbers(self) -> typing.List[list]:
+    def partitioned_generator_pitch_numbers(self):
         """
         Gets partitioned generator pitch numbers.
 
@@ -3098,7 +3088,7 @@ class Constellation:
     ### PUBLIC METHODS ###
 
     @staticmethod
-    def constellate(cells, range) -> typing.List[classes.Sequence]:
+    def constellate(cells, range_):
         """
         Constellates ``cells``.
 
@@ -3133,14 +3123,13 @@ class Constellation:
             Sequence([7, 15, 17, 28, 32, 35])
             Sequence([19, 27, 28, 29, 32, 35])
 
-        Takes outer product of octave transpositions of ``cells`` in
-        ``range``.
+        Takes outer product of octave transpositions of ``cells`` in ``range_``.
         """
-        if not isinstance(range, abjad.PitchRange):
-            raise TypeError(f"pitch range only: {range!r}.")
+        if not isinstance(range_, abjad.PitchRange):
+            raise TypeError(f"pitch range only: {range_!r}.")
         transposition_list = []
         for cell in cells:
-            transpositions = Constellation._list_octave_transpositions(range, cell)
+            transpositions = Constellation._list_octave_transpositions(range_, cell)
             transposition_list.append(transpositions)
         result = abjad.enumerate.yield_outer_product(transposition_list)
         result = list(result)
@@ -3150,7 +3139,7 @@ class Constellation:
             result[i] = cell.sort()
         return result
 
-    def get_chord(self, chord_number) -> classes.Sequence:
+    def get_chord(self, chord_number):
         """
         Gets chord with 1-indexed chord number.
 
@@ -3244,11 +3233,9 @@ class ConstellationCircuit:
 
     ..  container:: example
 
-        >>> range_ = abjad.PitchRange('[A0, C8]')
-        >>> constellation_circuit = baca.ConstellationCircuit(
-        ...     baca.ConstellationCircuit.CC1,
-        ...     range_,
-        ...     )
+        >>> circuit = baca.ConstellationCircuit.CC1
+        >>> range_ = abjad.PitchRange("[A0, C8]")
+        >>> constellation_circuit = baca.ConstellationCircuit(circuit, range_)
 
         >>> for constellation in constellation_circuit:
         ...     constellation
@@ -3288,15 +3275,14 @@ class ConstellationCircuit:
 
     ### SPECIAL METHODS ###
 
-    def __getitem__(self, argument) -> "Constellation":
+    def __getitem__(self, argument):
         """
         Gets item or slice identified by ``argument``.
 
         ..  container:: example
 
-            >>> class_ = baca.ConstellationCircuit
-            >>> constellation_circuit = class_.make_constellation_circuit_1()
-            >>> constellation_circuit[-1]
+            >>> circuit = baca.ConstellationCircuit.make_constellation_circuit_1()
+            >>> circuit[-1]
             Constellation(108)
 
         """
@@ -3308,23 +3294,21 @@ class ConstellationCircuit:
 
         ..  container:: example
 
-            >>> class_ = baca.ConstellationCircuit
-            >>> constellation_circuit = class_.make_constellation_circuit_1()
-            >>> len(constellation_circuit)
+            >>> circuit = baca.ConstellationCircuit.make_constellation_circuit_1()
+            >>> len(circuit)
             8
 
         """
         return len(self._constellations)
 
-    def __repr__(self) -> str:
+    def __repr__(self):
         """
         Gets interpreter representation of circuit.
 
         ..  container:: example
 
-            >>> class_ = baca.ConstellationCircuit
-            >>> constellation_circuit = class_.make_constellation_circuit_1()
-            >>> constellation_circuit
+            >>> circuit = baca.ConstellationCircuit.make_constellation_circuit_1()
+            >>> circuit
             ConstellationCircuit(8)
 
         """
@@ -3385,15 +3369,14 @@ class ConstellationCircuit:
     ### PUBLIC PROPERTIES ###
 
     @property
-    def generator_chords(self) -> typing.List[abjad.Chord]:
+    def generator_chords(self):
         """
         Gets generator chords.
 
         ..  container:: example
 
-            >>> class_ = baca.ConstellationCircuit
-            >>> constellation_circuit = class_.make_constellation_circuit_1()
-            >>> for chord in constellation_circuit.generator_chords:
+            >>> circuit = baca.ConstellationCircuit.make_constellation_circuit_1()
+            >>> for chord in circuit.generator_chords:
             ...     chord
             Chord("<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4")
             Chord("<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4")
@@ -3411,30 +3394,28 @@ class ConstellationCircuit:
         return result
 
     @property
-    def pitch_range(self) -> abjad.PitchRange:
+    def pitch_range(self):
         """
         Gets pitch range.
 
         ..  container:: example
 
-            >>> class_ = baca.ConstellationCircuit
-            >>> constellation_circuit = class_.make_constellation_circuit_1()
-            >>> constellation_circuit.pitch_range
+            >>> circuit = baca.ConstellationCircuit.make_constellation_circuit_1()
+            >>> circuit.pitch_range
             PitchRange('[A0, C8]')
 
         """
         return self._pitch_range
 
     @property
-    def pivot_chords(self) -> typing.List[abjad.Chord]:
+    def pivot_chords(self):
         """
         Gets pivot chords.
 
         ..  container:: example
 
-            >>> class_ = baca.ConstellationCircuit
-            >>> constellation_circuit = class_.make_constellation_circuit_1()
-            >>> for chord in constellation_circuit.pivot_chords:
+            >>> circuit = baca.ConstellationCircuit.make_constellation_circuit_1()
+            >>> for chord in circuit.pivot_chords:
             ...     chord
             ...
             Chord("<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4")
@@ -3454,7 +3435,7 @@ class ConstellationCircuit:
 
     ### PUBLIC METHODS ###
 
-    def get(self, *arguments) -> typing.Union["Constellation", classes.Sequence]:
+    def get(self, *arguments):
         """
         Gets constellation in circuit.
 
@@ -3484,15 +3465,14 @@ class ConstellationCircuit:
             return constellation.get_chord(chord_number)
         raise IndexError
 
-    def illustrate_colored_generator_chords(self) -> abjad.LilyPondFile:
+    def illustrate_colored_generator_chords(self):
         r"""
         Illustrates colored generator chords.
 
         ..  container:: example
 
-            >>> class_ = baca.ConstellationCircuit
-            >>> constellation_circuit = class_.make_constellation_circuit_1()
-            >>> lilypond_file = constellation_circuit.illustrate_colored_generator_chords()
+            >>> circuit = baca.ConstellationCircuit.make_constellation_circuit_1()
+            >>> lilypond_file = circuit.illustrate_colored_generator_chords()
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3542,17 +3522,14 @@ class ConstellationCircuit:
         """
         return self._illustrate_chords(self._colored_generator_chords)
 
-    def illustrate_colored_generator_chords_and_pivot_chords(
-        self,
-    ) -> abjad.LilyPondFile:
+    def illustrate_colored_generator_chords_and_pivot_chords(self):
         r"""
         Illustrates colored generator chords and pivot chords.
 
         ..  container:: example
 
-            >>> class_ = baca.ConstellationCircuit
-            >>> constellation_circuit = class_.make_constellation_circuit_1()
-            >>> lilypond_file = constellation_circuit.illustrate_colored_generator_chords_and_pivot_chords()
+            >>> circuit = baca.ConstellationCircuit.make_constellation_circuit_1()
+            >>> lilypond_file = circuit.illustrate_colored_generator_chords_and_pivot_chords()
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3620,15 +3597,14 @@ class ConstellationCircuit:
         chords_ = classes.Sequence(chords).flatten(depth=1)
         return self._illustrate_chords(chords_)
 
-    def illustrate_generator_chords(self) -> abjad.LilyPondFile:
+    def illustrate_generator_chords(self):
         r"""
         Illustrates generator chords.
 
         ..  container:: example
 
-            >>> class_ = baca.ConstellationCircuit
-            >>> constellation_circuit = class_.make_constellation_circuit_1()
-            >>> lilypond_file = constellation_circuit.illustrate_generator_chords()
+            >>> circuit = baca.ConstellationCircuit.make_constellation_circuit_1()
+            >>> lilypond_file = circuit.illustrate_generator_chords()
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3678,17 +3654,14 @@ class ConstellationCircuit:
         """
         return self._illustrate_chords(self.generator_chords)
 
-    def illustrate_generator_chords_and_pivot_chords(
-        self,
-    ) -> abjad.LilyPondFile:
+    def illustrate_generator_chords_and_pivot_chords(self):
         r"""
         Illustrates generator chords and pivot chords.
 
         ..  container:: example
 
-            >>> class_ = baca.ConstellationCircuit
-            >>> constellation_circuit = class_.make_constellation_circuit_1()
-            >>> lilypond_file = constellation_circuit.illustrate_generator_chords_and_pivot_chords()
+            >>> circuit = baca.ConstellationCircuit.make_constellation_circuit_1()
+            >>> lilypond_file = circuit.illustrate_generator_chords_and_pivot_chords()
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3756,15 +3729,14 @@ class ConstellationCircuit:
         chords_ = classes.Sequence(chords).flatten(depth=1)
         return self._illustrate_chords(chords_)
 
-    def illustrate_pivot_chords(self) -> abjad.LilyPondFile:
+    def illustrate_pivot_chords(self):
         r"""
         Illustrates pivot chords.
 
         ..  container:: example
 
-            >>> class_ = baca.ConstellationCircuit
-            >>> constellation_circuit = class_.make_constellation_circuit_1()
-            >>> lilypond_file = constellation_circuit.illustrate_pivot_chords()
+            >>> circuit = baca.ConstellationCircuit.make_constellation_circuit_1()
+            >>> lilypond_file = circuit.illustrate_pivot_chords()
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3815,13 +3787,12 @@ class ConstellationCircuit:
         return self._illustrate_chords(self.pivot_chords)
 
     @classmethod
-    def make_constellation_circuit_1(class_) -> "ConstellationCircuit":
+    def make_constellation_circuit_1(class_):
         """
         Makes constellation circuit 1.
 
-            >>> class_ = baca.ConstellationCircuit
-            >>> constellation_circuit = class_.make_constellation_circuit_1()
-            >>> for constellation in constellation_circuit:
+            >>> circuit = baca.ConstellationCircuit.make_constellation_circuit_1()
+            >>> for constellation in circuit:
             ...     constellation
             Constellation(180)
             Constellation(140)
