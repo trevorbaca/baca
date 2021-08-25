@@ -178,6 +178,7 @@ class Constellation:
     def _label_chord(self, chord):
         chord_number = self.get_number_of_chord(chord)
         label = f"{self._constellation_number}-{chord_number}"
+        # TODO: literal=True
         markup = abjad.Markup(label)
         abjad.attach(markup, chord)
 
@@ -234,23 +235,31 @@ class Constellation:
                 break
         return result
 
-    def _make_lilypond_file_and_score_from_chords(self, chords):
-        score, treble, bass = abjad.illustrators.make_piano_score(
-            leaves=chords, sketch=True
-        )
-        score.override.TextScript.staff_padding = 10
-        score.set.proportionalNotationDuration = "#(ly:make-moment 1 30)"
-        lilypond_file = abjad.LilyPondFile(items=[score])
-        lilypond_file.default_paper_size = "letter", "landscape"
-        lilypond_file.global_staff_size = 18
-        lilypond_file.layout_block.indent = 0
-        lilypond_file.layout_block.ragged_right = True
-        lilypond_file.paper_block.top_margin = 24
-        return lilypond_file, score
+    def _make_chords(self):
+        result = []
+        for pitch_number_list in self._pitch_number_lists:
+            chord = abjad.Chord(pitch_number_list, self._chord_duration)
+            result.append(chord)
+        return result
+
+    def _make_labeled_chords(self):
+        result = self._make_chords()
+        for chord in result:
+            self._label_chord(chord)
+        return result
+
+    # TODO: unused?
+    def _make_labeled_colored_chords(self):
+        result = self._make_labeled_chords()
+        for chord in result:
+            abjad.Label(chord).color_note_heads(self._color_map)
+        return result
 
     def _show_chords(self, chords):
-        lilypond_file, score = self._make_lilypond_file_and_score_from_chords(chords)
-        abjad.show(lilypond_file)
+        result = abjad.illustrators.make_piano_score(leaves=chords, sketch=True)
+        score, treble, bass = result
+        lilypond_file = abjad.LilyPondFile(items=[score])
+        return lilypond_file
 
     ### PUBLIC PROPERTIES ###
 
@@ -445,77 +454,238 @@ class Constellation:
                 return i + 1
         raise ValueError(f"{chord} not in {self}")
 
-    def make_chords(self):
-        """
-        Makes chords.
-        """
-        result = []
-        for pitch_number_list in self._pitch_number_lists:
-            chord = abjad.Chord(pitch_number_list, self._chord_duration)
-            result.append(chord)
-        return result
-
-    def make_labeled_chords(self):
-        """
-        Makes labeled chords.
-        """
-        result = self.make_chords()
-        for chord in result:
-            self._label_chord(chord)
-        return result
-
-    def make_labeled_colored_chords(self):
-        """
-        Makes labeled colored chords.
-        """
-        result = self.make_labeled_chords()
-        for chord in result:
-            abjad.Label(chord).color_note_heads(self._color_map)
-        return result
-
     def show_colored_generator_chord(self):
-        """
+        r"""
         Shows colored generator chord.
+
+        ..  container:: example
+
+            >>> circuit = baca.ConstellationCircuit.make_constellation_circuit_1()
+            >>> constellation = circuit[0]
+            >>> lilypond_file = constellation.show_colored_generator_chord()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
+                \new Score
+                \with
+                {
+                    \override BarLine.stencil = ##f
+                    \override BarNumber.transparent = ##t
+                    \override SpanBar.stencil = ##f
+                    \override TimeSignature.stencil = ##f
+                }
+                <<
+                    \new PianoStaff
+                    <<
+                        \context Staff = "Treble_Staff"
+                        {
+                            \clef "treble"
+                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                        }
+                        \context Staff = "Bass_Staff"
+                        {
+                            \clef "bass"
+                            <c d bf>4
+                        }
+                    >>
+                >>
+
         """
         colored_generator = self._colored_generator
         self._label_chord(colored_generator)
-        self._show_chords([colored_generator])
+        lilypond_file = self._show_chords([colored_generator])
+        return lilypond_file
 
     def show_colored_generator_chord_and_pivot_chord(self):
-        """
+        r"""
         Shows colored generator chord and pivot chord.
+
+        ..  container:: example
+
+            >>> circuit = baca.ConstellationCircuit.make_constellation_circuit_1()
+            >>> constellation = circuit[0]
+            >>> lilypond_file = constellation.show_colored_generator_chord_and_pivot_chord()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
+                \new Score
+                \with
+                {
+                    \override BarLine.stencil = ##f
+                    \override BarNumber.transparent = ##t
+                    \override SpanBar.stencil = ##f
+                    \override TimeSignature.stencil = ##f
+                }
+                <<
+                    \new PianoStaff
+                    <<
+                        \context Staff = "Treble_Staff"
+                        {
+                            \clef "treble"
+                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                        }
+                        \context Staff = "Bass_Staff"
+                        {
+                            \clef "bass"
+                            <c d bf>4
+                            <c d bf>4
+                        }
+                    >>
+                >>
+
         """
         colored_generator = self._colored_generator
         self._label_chord(colored_generator)
         pivot = self.pivot_chord
         self._label_chord(pivot)
-        self._show_chords([colored_generator, pivot])
+        lilypond_file = self._show_chords([colored_generator, pivot])
+        return lilypond_file
 
     def show_generator_chord(self):
-        """
+        r"""
         Shows generator chord.
+
+        ..  container:: example
+
+            >>> circuit = baca.ConstellationCircuit.make_constellation_circuit_1()
+            >>> constellation = circuit[0]
+            >>> lilypond_file = constellation.show_generator_chord()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
+                \new Score
+                \with
+                {
+                    \override BarLine.stencil = ##f
+                    \override BarNumber.transparent = ##t
+                    \override SpanBar.stencil = ##f
+                    \override TimeSignature.stencil = ##f
+                }
+                <<
+                    \new PianoStaff
+                    <<
+                        \context Staff = "Treble_Staff"
+                        {
+                            \clef "treble"
+                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                        }
+                        \context Staff = "Bass_Staff"
+                        {
+                            \clef "bass"
+                            <c d bf>4
+                        }
+                    >>
+                >>
+
         """
         generator = self.generator_chord
         self._label_chord(generator)
-        self._show_chords([generator])
+        lilypond_file = self._show_chords([generator])
+        return lilypond_file
 
     def show_generator_chord_and_pivot_chord(self):
-        """
+        r"""
         Shows generator chord and pivot chord.
+
+        ..  container:: example
+
+            >>> circuit = baca.ConstellationCircuit.make_constellation_circuit_1()
+            >>> constellation = circuit[0]
+            >>> lilypond_file = constellation.show_generator_chord_and_pivot_chord()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
+                \new Score
+                \with
+                {
+                    \override BarLine.stencil = ##f
+                    \override BarNumber.transparent = ##t
+                    \override SpanBar.stencil = ##f
+                    \override TimeSignature.stencil = ##f
+                }
+                <<
+                    \new PianoStaff
+                    <<
+                        \context Staff = "Treble_Staff"
+                        {
+                            \clef "treble"
+                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                        }
+                        \context Staff = "Bass_Staff"
+                        {
+                            \clef "bass"
+                            <c d bf>4
+                            <c d bf>4
+                        }
+                    >>
+                >>
+
         """
         generator = self.generator_chord
         self._label_chord(generator)
         pivot = self.pivot_chord
         self._label_chord(pivot)
-        self._show_chords([generator, pivot])
+        lilypond_file = self._show_chords([generator, pivot])
+        return lilypond_file
 
     def show_pivot_chord(self):
-        """
+        r"""
         Shows pivot chord.
+
+        ..  container:: example
+
+            >>> circuit = baca.ConstellationCircuit.make_constellation_circuit_1()
+            >>> constellation = circuit[0]
+            >>> lilypond_file = constellation.show_pivot_chord()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
+                \new Score
+                \with
+                {
+                    \override BarLine.stencil = ##f
+                    \override BarNumber.transparent = ##t
+                    \override SpanBar.stencil = ##f
+                    \override TimeSignature.stencil = ##f
+                }
+                <<
+                    \new PianoStaff
+                    <<
+                        \context Staff = "Treble_Staff"
+                        {
+                            \clef "treble"
+                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                        }
+                        \context Staff = "Bass_Staff"
+                        {
+                            \clef "bass"
+                            <c d bf>4
+                        }
+                    >>
+                >>
+
         """
         pivot = self.pivot_chord
         self._label_chord(pivot)
-        self._show_chords([pivot])
+        lilypond_file = self._show_chords([pivot])
+        return lilypond_file
 
 
 class ConstellationCircuit:
@@ -716,6 +886,20 @@ class ConstellationCircuit:
     def CC1_numbers():
         """
         Gets constellation circuit 1 numbers.
+
+        ..  container:: example
+
+            >>> for list_ in baca.ConstellationCircuit.CC1_numbers():
+            ...     print(list_)
+            [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]]
+            [[-12, -10, -2], [4, 11, 27, 33, 37], [8, 17, 19, 30]]
+            [[-8, 2, 15, 25], [-1, 20, 29, 31], [0, 10, 21, 42]]
+            [[-8, 2, 10, 21], [0, 11, 32, 41], [15, 25, 42, 43]]
+            [[-12, -9, 1, 4], [-1, 18, 20, 33], [14, 19, 22, 29]]
+            [[-10, -2, 0, 5], [-5, 3, 13, 16], [11, 30, 32, 45]]
+            [[-10, -2, 5, 15, 25], [-1, 7, 18, 20], [0, 28, 33]]
+            [[-12, 17, 27, 37], [-1, 7, 18, 21], [2, 10, 16, 20]]
+
         """
         return [
             [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]],
@@ -1081,6 +1265,8 @@ class ConstellationCircuit:
     def make_constellation_circuit_1(class_):
         """
         Makes constellation circuit 1.
+
+        ..  container:: example
 
             >>> circuit = baca.ConstellationCircuit.make_constellation_circuit_1()
             >>> for constellation in circuit:
