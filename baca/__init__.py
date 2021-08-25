@@ -7,6 +7,7 @@ from . import const
 from . import jobs
 from . import selectors
 from . import tonality
+from .array import *
 from .classes import *
 from .commandclasses import *
 from .commands import *
@@ -21,7 +22,6 @@ from .parts import *
 from .path import *
 from .persistence import *
 from .piecewise import *
-from .pitcharray import *
 from .pitchclasses import *
 from .pitchcommands import *
 from .rhythmcommands import *
