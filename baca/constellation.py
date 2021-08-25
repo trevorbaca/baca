@@ -255,7 +255,7 @@ class Constellation:
             abjad.Label(chord).color_note_heads(self._color_map)
         return result
 
-    def _show_chords(self, chords):
+    def _illustrate_chords(self, chords):
         result = abjad.illustrators.make_piano_score(leaves=chords, sketch=True)
         score, treble, bass = result
         lilypond_file = abjad.LilyPondFile(items=[score])
@@ -454,7 +454,7 @@ class Constellation:
                 return i + 1
         raise ValueError(f"{chord} not in {self}")
 
-    def show_colored_generator_chord(self):
+    def illustrate_colored_generator_chord(self):
         r"""
         Shows colored generator chord.
 
@@ -462,7 +462,7 @@ class Constellation:
 
             >>> circuit = baca.ConstellationCircuit.make_constellation_circuit_1()
             >>> constellation = circuit[0]
-            >>> lilypond_file = constellation.show_colored_generator_chord()
+            >>> lilypond_file = constellation.illustrate_colored_generator_chord()
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -496,10 +496,10 @@ class Constellation:
         """
         colored_generator = self._colored_generator
         self._label_chord(colored_generator)
-        lilypond_file = self._show_chords([colored_generator])
+        lilypond_file = self._illustrate_chords([colored_generator])
         return lilypond_file
 
-    def show_colored_generator_chord_and_pivot_chord(self):
+    def illustrate_colored_generator_chord_and_pivot_chord(self):
         r"""
         Shows colored generator chord and pivot chord.
 
@@ -507,7 +507,7 @@ class Constellation:
 
             >>> circuit = baca.ConstellationCircuit.make_constellation_circuit_1()
             >>> constellation = circuit[0]
-            >>> lilypond_file = constellation.show_colored_generator_chord_and_pivot_chord()
+            >>> lilypond_file = constellation.illustrate_colored_generator_chord_and_pivot_chord()
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -545,10 +545,10 @@ class Constellation:
         self._label_chord(colored_generator)
         pivot = self.pivot_chord
         self._label_chord(pivot)
-        lilypond_file = self._show_chords([colored_generator, pivot])
+        lilypond_file = self._illustrate_chords([colored_generator, pivot])
         return lilypond_file
 
-    def show_generator_chord(self):
+    def illustrate_generator_chord(self):
         r"""
         Shows generator chord.
 
@@ -556,7 +556,7 @@ class Constellation:
 
             >>> circuit = baca.ConstellationCircuit.make_constellation_circuit_1()
             >>> constellation = circuit[0]
-            >>> lilypond_file = constellation.show_generator_chord()
+            >>> lilypond_file = constellation.illustrate_generator_chord()
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -590,10 +590,10 @@ class Constellation:
         """
         generator = self.generator_chord
         self._label_chord(generator)
-        lilypond_file = self._show_chords([generator])
+        lilypond_file = self._illustrate_chords([generator])
         return lilypond_file
 
-    def show_generator_chord_and_pivot_chord(self):
+    def illustrate_generator_chord_and_pivot_chord(self):
         r"""
         Shows generator chord and pivot chord.
 
@@ -601,7 +601,7 @@ class Constellation:
 
             >>> circuit = baca.ConstellationCircuit.make_constellation_circuit_1()
             >>> constellation = circuit[0]
-            >>> lilypond_file = constellation.show_generator_chord_and_pivot_chord()
+            >>> lilypond_file = constellation.illustrate_generator_chord_and_pivot_chord()
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -639,10 +639,10 @@ class Constellation:
         self._label_chord(generator)
         pivot = self.pivot_chord
         self._label_chord(pivot)
-        lilypond_file = self._show_chords([generator, pivot])
+        lilypond_file = self._illustrate_chords([generator, pivot])
         return lilypond_file
 
-    def show_pivot_chord(self):
+    def illustrate_pivot_chord(self):
         r"""
         Shows pivot chord.
 
@@ -650,7 +650,7 @@ class Constellation:
 
             >>> circuit = baca.ConstellationCircuit.make_constellation_circuit_1()
             >>> constellation = circuit[0]
-            >>> lilypond_file = constellation.show_pivot_chord()
+            >>> lilypond_file = constellation.illustrate_pivot_chord()
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -684,7 +684,7 @@ class Constellation:
         """
         pivot = self.pivot_chord
         self._label_chord(pivot)
-        lilypond_file = self._show_chords([pivot])
+        lilypond_file = self._illustrate_chords([pivot])
         return lilypond_file
 
 
