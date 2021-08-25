@@ -11,6 +11,7 @@ from .array import *
 from .classes import *
 from .commandclasses import *
 from .commands import *
+from .constellation import *
 from .figuremaker import *
 from .indicatorcommands import *
 from .indicators import *
