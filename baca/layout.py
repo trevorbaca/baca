@@ -295,7 +295,7 @@ system = collections.namedtuple(
 
 def make_layout(
     *pages,
-    fallback_duration=None,
+    spacing=None,
     overrides=None,
 ):
     """
@@ -304,6 +304,6 @@ def make_layout(
     breaks_ = breaks(*pages)
     return SpacingSpecifier(
         breaks=breaks_,
-        fallback_duration=fallback_duration,
+        fallback_duration=spacing,
         overrides=overrides,
     )
