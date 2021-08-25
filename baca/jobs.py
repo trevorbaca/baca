@@ -1,3 +1,6 @@
+"""
+Jobs.
+"""
 import pathlib
 
 import abjad

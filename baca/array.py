@@ -1,5 +1,5 @@
 """
-Pitch array library.
+Array.
 """
 import copy
 import numbers

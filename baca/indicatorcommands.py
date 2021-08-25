@@ -1,3 +1,6 @@
+"""
+Indicator commands.
+"""
 import inspect
 import typing
 

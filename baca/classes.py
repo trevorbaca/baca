@@ -1,3 +1,6 @@
+"""
+Classes.
+"""
 import collections
 import copy
 import inspect

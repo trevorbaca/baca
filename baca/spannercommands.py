@@ -1,3 +1,6 @@
+"""
+Spanner commands.
+"""
 import inspect
 import typing
 

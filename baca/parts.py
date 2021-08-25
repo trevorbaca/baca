@@ -1,3 +1,6 @@
+"""
+Parts.
+"""
 import importlib
 
 import abjad

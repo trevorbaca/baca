@@ -1,5 +1,5 @@
 """
-Piecewise library.
+Piecewise.
 """
 import inspect
 import typing

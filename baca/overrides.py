@@ -1,5 +1,5 @@
 """
-Override library.
+Overrides.
 """
 import inspect
 import typing

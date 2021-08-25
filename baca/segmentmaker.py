@@ -1,3 +1,6 @@
+"""
+Segment-maker.
+"""
 import copy
 import importlib
 import inspect

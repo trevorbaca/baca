@@ -1,5 +1,5 @@
 """
-Pitch library.
+Pitch classes.
 """
 import collections as collections_module
 import copy

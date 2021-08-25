@@ -1,3 +1,6 @@
+"""
+Memento.
+"""
 import abjad
 
 

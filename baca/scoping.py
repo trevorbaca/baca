@@ -1,3 +1,6 @@
+"""
+Scoping.
+"""
 import functools
 import inspect
 import typing

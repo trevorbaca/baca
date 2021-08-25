@@ -1,5 +1,5 @@
 r"""
-Classes and functions for spacing.
+Layout.
 
 ..  container:: example exception
 

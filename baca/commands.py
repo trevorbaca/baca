@@ -1,3 +1,6 @@
+"""
+Commands.
+"""
 import inspect
 import pathlib
 import typing

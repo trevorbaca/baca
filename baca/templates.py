@@ -1,5 +1,5 @@
 """
-Score template library.
+Templates.
 """
 import typing
 

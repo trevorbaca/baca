@@ -1,3 +1,6 @@
+"""
+Pitch commands.
+"""
 import collections
 import numbers
 import typing

@@ -1,3 +1,6 @@
+"""
+Figure-maker.
+"""
 import copy
 import math
 import typing

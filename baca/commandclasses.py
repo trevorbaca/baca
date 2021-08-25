@@ -1,3 +1,6 @@
+"""
+Command classes.
+"""
 import collections
 import typing
 

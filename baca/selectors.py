@@ -1,3 +1,6 @@
+"""
+Selectors.
+"""
 import typing
 
 import abjad

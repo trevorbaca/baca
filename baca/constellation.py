@@ -1,3 +1,6 @@
+"""
+Constellation.
+"""
 import collections as collections_module
 import copy
 
