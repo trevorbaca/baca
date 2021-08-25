@@ -15,7 +15,7 @@ class Constellation:
 
     ..  container:: example
 
-        >>> cells = [
+        >>> generators = [
         ...     [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]],
         ...     [[-12, -10, -2], [4, 11, 27, 33, 37], [8, 17, 19, 30]],
         ...     [[-8, 2, 15, 25], [-1, 20, 29, 31], [0, 10, 21, 42]],
@@ -26,27 +26,18 @@ class Constellation:
         ...     [[-12, 17, 27, 37], [-1, 7, 18, 21], [2, 10, 16, 20]],
         ... ]
         >>> range_ = abjad.PitchRange("[A0, C8]")
-        >>> circuit = baca.ConstellationCircuit(cells, range_)
-        >>> for constellation in circuit:
-        ...     print(constellation)
+        >>> circuit = baca.ConstellationCircuit(generators, range_)
+        >>> circuit[0]
         Constellation(180)
-        Constellation(140)
-        Constellation(80)
-        Constellation(100)
-        Constellation(180)
-        Constellation(150)
-        Constellation(120)
-        Constellation(108)
 
     """
 
     ### INITIALIZER ###
 
-    def __init__(self, circuit, partitioned_generator_pitch_numbers):
+    def __init__(self, circuit, generators):
         self._circuit = circuit
-        self._partitioned_generator_pitch_numbers = partitioned_generator_pitch_numbers
-        self._constellate_partitioned_generator_pitch_numbers()
-        self._chord_duration = abjad.Duration(1, 4)
+        self._generators = generators
+        self._constellate_generators()
         self._chords = []
 
     ### SPECIAL METHODS ###
@@ -122,7 +113,7 @@ class Constellation:
 
     @property
     def _color_map(self):
-        pitches = self._partitioned_generator_pitch_numbers
+        pitches = self._generators
         colors = ["#red", "#blue", "#green"]
         return abjad.ColorMap(colors=colors, pitch_iterables=pitches)
 
@@ -144,7 +135,7 @@ class Constellation:
 
     @property
     def _generator_pitch_numbers(self):
-        result = self._partitioned_generator_pitch_numbers
+        result = self._generators
         result = classes.Sequence(result).flatten(depth=-1)
         return list(sorted(result))
 
@@ -170,10 +161,8 @@ class Constellation:
         next_constellation = self._circuit._constellations[next_idx]
         return next_constellation
 
-    def _constellate_partitioned_generator_pitch_numbers(self):
-        self._pitch_number_lists = self.constellate(
-            self._partitioned_generator_pitch_numbers, self.pitch_range
-        )
+    def _constellate_generators(self):
+        self._pitch_number_lists = self.constellate(self._generators, self.range_)
 
     def _label_chord(self, chord):
         chord_number = self.get_number_of_chord(chord)
@@ -183,11 +172,11 @@ class Constellation:
         abjad.attach(markup, chord)
 
     @staticmethod
-    def _list_numeric_octave_transpositions(pitch_range, pitch_number_list):
+    def _list_numeric_octave_transpositions(range_, pitch_number_list):
         result = []
         pitch_number_set = set(pitch_number_list)
-        start_pitch_number = pitch_range.start_pitch.number
-        stop_pitch_number = pitch_range.stop_pitch.number
+        start_pitch_number = range_.start_pitch.number
+        stop_pitch_number = range_.stop_pitch.number
         range_set = set(range(start_pitch_number, stop_pitch_number + 1))
         while pitch_number_set.issubset(range_set):
             next_pitch_number = list(pitch_number_set)
@@ -204,11 +193,11 @@ class Constellation:
         return result
 
     @staticmethod
-    def _list_octave_transpositions(pitch_range, pitch_carrier):
+    def _list_octave_transpositions(range_, pitch_carrier):
         if isinstance(pitch_carrier, collections_module.abc.Iterable):
             if all(isinstance(x, (int, float)) for x in pitch_carrier):
                 return Constellation._list_numeric_octave_transpositions(
-                    pitch_range, pitch_carrier
+                    range_, pitch_carrier
                 )
         prototype = (abjad.Chord, abjad.PitchSet)
         if not isinstance(pitch_carrier, prototype):
@@ -218,7 +207,7 @@ class Constellation:
         while True:
             pitch_carrier_copy = copy.copy(pitch_carrier)
             candidate = interval.transpose(pitch_carrier_copy)
-            if candidate in pitch_range:
+            if candidate in range_:
                 result.append(candidate)
                 interval -= 12
             else:
@@ -228,7 +217,7 @@ class Constellation:
         while True:
             pitch_carrier_copy = copy.copy(pitch_carrier)
             candidate = interval.transpose(pitch_carrier_copy)
-            if candidate in pitch_range:
+            if candidate in range_:
                 result.append(candidate)
                 interval += abjad.NumberedInterval(12)
             else:
@@ -238,7 +227,7 @@ class Constellation:
     def _make_chords(self):
         result = []
         for pitch_number_list in self._pitch_number_lists:
-            chord = abjad.Chord(pitch_number_list, self._chord_duration)
+            chord = abjad.Chord(pitch_number_list, (1, 4))
             result.append(chord)
         return result
 
@@ -303,7 +292,7 @@ class Constellation:
         return generator_chord
 
     @property
-    def partitioned_generator_pitch_numbers(self):
+    def generators(self):
         """
         Gets partitioned generator pitch numbers.
 
@@ -311,7 +300,7 @@ class Constellation:
 
             >>> circuit = baca.ConstellationCircuit.make_constellation_circuit_1()
             >>> for constellation in circuit:
-            ...     constellation.partitioned_generator_pitch_numbers
+            ...     constellation.generators
             [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]]
             [[-12, -10, -2], [4, 11, 27, 33, 37], [8, 17, 19, 30]]
             [[-8, 2, 15, 25], [-1, 20, 29, 31], [0, 10, 21, 42]]
@@ -322,10 +311,10 @@ class Constellation:
             [[-12, 17, 27, 37], [-1, 7, 18, 21], [2, 10, 16, 20]]
 
         """
-        return self._partitioned_generator_pitch_numbers
+        return self._generators
 
     @property
-    def pitch_range(self):
+    def range_(self):
         """
         Gets pitch range of constellation.
 
@@ -333,11 +322,11 @@ class Constellation:
 
             >>> circuit = baca.ConstellationCircuit.make_constellation_circuit_1()
             >>> constellation = circuit[0]
-            >>> constellation.pitch_range
+            >>> constellation.range_
             PitchRange('[A0, C8]')
 
         """
-        return self._circuit.pitch_range
+        return self._circuit.range_
 
     @property
     def pivot_chord(self):
@@ -715,10 +704,10 @@ class ConstellationCircuit:
 
     ### INITIALIZER ###
 
-    def __init__(self, partitioned_generator_pnls, pitch_range):
-        self._partitioned_generator_pnls = partitioned_generator_pnls
-        self._pitch_range = pitch_range
-        self._constellate_partitioned_generator_pnls()
+    def __init__(self, generators, range_):
+        self._generators = generators
+        self._range = range_
+        self._constellate_generators()
 
     ### SPECIAL METHODS ###
 
@@ -787,30 +776,17 @@ class ConstellationCircuit:
 
     ### PRIVATE METHODS ###
 
-    def _constellate_partitioned_generator_pnls(self):
+    def _constellate_generators(self):
         self._constellations = []
-        enumeration = enumerate(self._partitioned_generator_pnls)
-        for i, partitioned_generator_pnl in enumeration:
-            constellation = Constellation(self, partitioned_generator_pnl)
+        enumeration = enumerate(self._generators)
+        for i, generator in enumeration:
+            constellation = Constellation(self, generator)
             self._constellations.append(constellation)
 
     def _illustrate_chords(self, chords):
         result = abjad.illustrators.make_piano_score(leaves=chords, sketch=True)
         score, treble, bass = result
-        abjad.override(score).TextScript.staff_padding = 10
-        abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 30)"
-        preamble = r"""#(set-global-staff-size 18)
-
-\layout {
-    indent = 0
-    ragged-right = True
-}
-
-\paper {
-    system-system-spacing = #'((basic-distance . 0) (minimum-distance . 0) (padding . 12) (stretchability . 0))
-    top-margin = 24
-}"""
-        lilypond_file = abjad.LilyPondFile(items=[preamble, score])
+        lilypond_file = abjad.LilyPondFile(items=[score])
         return lilypond_file
 
     ### PUBLIC PROPERTIES ###
@@ -841,18 +817,18 @@ class ConstellationCircuit:
         return result
 
     @property
-    def pitch_range(self):
+    def range_(self):
         """
         Gets pitch range.
 
         ..  container:: example
 
             >>> circuit = baca.ConstellationCircuit.make_constellation_circuit_1()
-            >>> circuit.pitch_range
+            >>> circuit.range_
             PitchRange('[A0, C8]')
 
         """
-        return self._pitch_range
+        return self._range
 
     @property
     def pivot_chords(self):
@@ -960,9 +936,7 @@ class ConstellationCircuit:
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
                     \override SpanBar.stencil = ##f
-                    \override TextScript.staff-padding = 10
                     \override TimeSignature.stencil = ##f
-                    proportionalNotationDuration = #(ly:make-moment 1 30)
                 }
                 <<
                     \new PianoStaff
@@ -1017,9 +991,7 @@ class ConstellationCircuit:
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
                     \override SpanBar.stencil = ##f
-                    \override TextScript.staff-padding = 10
                     \override TimeSignature.stencil = ##f
-                    proportionalNotationDuration = #(ly:make-moment 1 30)
                 }
                 <<
                     \new PianoStaff
@@ -1092,9 +1064,7 @@ class ConstellationCircuit:
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
                     \override SpanBar.stencil = ##f
-                    \override TextScript.staff-padding = 10
                     \override TimeSignature.stencil = ##f
-                    proportionalNotationDuration = #(ly:make-moment 1 30)
                 }
                 <<
                     \new PianoStaff
@@ -1149,9 +1119,7 @@ class ConstellationCircuit:
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
                     \override SpanBar.stencil = ##f
-                    \override TextScript.staff-padding = 10
                     \override TimeSignature.stencil = ##f
-                    proportionalNotationDuration = #(ly:make-moment 1 30)
                 }
                 <<
                     \new PianoStaff
@@ -1224,9 +1192,7 @@ class ConstellationCircuit:
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
                     \override SpanBar.stencil = ##f
-                    \override TextScript.staff-padding = 10
                     \override TimeSignature.stencil = ##f
-                    proportionalNotationDuration = #(ly:make-moment 1 30)
                 }
                 <<
                     \new PianoStaff
