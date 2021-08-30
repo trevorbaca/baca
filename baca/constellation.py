@@ -479,22 +479,31 @@ class Constellation:
                         {
                             \clef "treble"
                             <
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 e'
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 af'
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 b'
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 f''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 g''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 ef'''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 fs'''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 a'''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 cs''''
                             >4
@@ -503,10 +512,13 @@ class Constellation:
                         {
                             \clef "bass"
                             <
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 c
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 d
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 bf
                             >4
@@ -550,22 +562,31 @@ class Constellation:
                         {
                             \clef "treble"
                             <
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 e'
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 af'
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 b'
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 f''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 g''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 ef'''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 fs'''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 a'''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 cs''''
                             >4
@@ -575,10 +596,13 @@ class Constellation:
                         {
                             \clef "bass"
                             <
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 c
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 d
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 bf
                             >4
@@ -957,178 +981,258 @@ class ConstellationCircuit:
                         {
                             \clef "treble"
                             <
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 e'
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 af'
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 b'
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 f''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 g''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 ef'''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 fs'''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 a'''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 cs''''
                             >4
                             <
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 e'
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 af'
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 b'
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 f''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 g''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 ef'''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 fs'''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 a'''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 cs''''
                             >4
                             <
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 b
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 c'
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 d'
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 bf'
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 ef''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 af''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 a''
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 cs'''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 f'''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 g'''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 fs''''
                             >4
                             <
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 c'
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 d'
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 bf'
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 b'
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 ef''
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 a''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 cs'''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 af'''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 f''''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 fs''''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 g''''
                             >4
                             <
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 b
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 cs'
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 e'
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 d''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 fs''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 g''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 af''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 bf''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 f'''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 a'''
                             >4
                             <
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 c'
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 ef'
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 f'
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 b'
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 cs''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 e''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 fs'''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 af'''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 a''''
                             >4
                             <
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 b
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 c'
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 f'
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 g'
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 ef''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 fs''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 af''
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 cs'''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 e'''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 a'''
                             >4
                             <
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 b
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 d'
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 g'
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 bf'
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 e''
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 f''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 fs''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 af''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 a''
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 ef'''
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 cs''''
                             >4
@@ -1137,45 +1241,61 @@ class ConstellationCircuit:
                         {
                             \clef "bass"
                             <
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 c
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 d
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 bf
                             >4
                             <
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 c
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 d
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 bf
                             >4
+                            \tweak Accidental.color #red
                             \tweak color #red
                             e4
+                            \tweak Accidental.color #red
                             \tweak color #red
                             e4
                             <
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 c
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 ef
                             >4
                             <
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 d
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 g
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 bf
                             >4
                             <
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 d
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 bf
                             >4
+                            \tweak Accidental.color #red
                             \tweak color #red
                             c4
                         }
@@ -1215,185 +1335,265 @@ class ConstellationCircuit:
                         {
                             \clef "treble"
                             <
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 e'
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 af'
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 b'
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 f''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 g''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 ef'''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 fs'''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 a'''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 cs''''
                             >4
                             <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
                             <
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 e'
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 af'
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 b'
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 f''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 g''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 ef'''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 fs'''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 a'''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 cs''''
                             >4
                             <b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4
                             <
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 b
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 c'
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 d'
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 bf'
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 ef''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 af''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 a''
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 cs'''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 f'''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 g'''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 fs''''
                             >4
                             <c' d' bf' b' ef'' a'' cs''' af''' f'''' fs'''' g''''>4
                             <
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 c'
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 d'
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 bf'
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 b'
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 ef''
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 a''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 cs'''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 af'''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 f''''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 fs''''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 g''''
                             >4
                             <b cs' e' d'' fs'' g'' af'' bf'' f''' a'''>4
                             <
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 b
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 cs'
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 e'
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 d''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 fs''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 g''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 af''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 bf''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 f'''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 a'''
                             >4
                             <c' ef' f' b' cs'' e'' fs''' af''' a''''>4
                             <
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 c'
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 ef'
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 f'
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 b'
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 cs''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 e''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 fs'''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 af'''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 a''''
                             >4
                             <b c' f' g' ef'' fs'' af'' cs''' e''' a'''>4
                             <
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 b
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 c'
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 f'
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 g'
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 ef''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 fs''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 af''
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 cs'''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 e'''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 a'''
                             >4
                             <b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4
                             <
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 b
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 d'
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 g'
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 bf'
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 e''
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 f''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 fs''
+                                \tweak Accidental.color #green
                                 \tweak color #green
                                 af''
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 a''
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 ef'''
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 cs''''
                             >4
@@ -1403,52 +1603,68 @@ class ConstellationCircuit:
                         {
                             \clef "bass"
                             <
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 c
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 d
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 bf
                             >4
                             <c d bf>4
                             <
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 c
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 d
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 bf
                             >4
                             e4
+                            \tweak Accidental.color #red
                             \tweak color #red
                             e4
                             e4
+                            \tweak Accidental.color #red
                             \tweak color #red
                             e4
                             <c ef>4
                             <
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 c
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 ef
                             >4
                             <d g bf>4
                             <
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 d
+                                \tweak Accidental.color #blue
                                 \tweak color #blue
                                 g
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 bf
                             >4
                             <d bf>4
                             <
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 d
+                                \tweak Accidental.color #red
                                 \tweak color #red
                                 bf
                             >4
                             c4
+                            \tweak Accidental.color #red
                             \tweak color #red
                             c4
                             <c d bf>4
