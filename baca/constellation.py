@@ -478,12 +478,38 @@ class Constellation:
                         \context Staff = "Treble_Staff"
                         {
                             \clef "treble"
-                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                            <
+                                \tweak color #red
+                                e'
+                                \tweak color #blue
+                                af'
+                                \tweak color #blue
+                                b'
+                                \tweak color #blue
+                                f''
+                                \tweak color #green
+                                g''
+                                \tweak color #green
+                                ef'''
+                                \tweak color #green
+                                fs'''
+                                \tweak color #green
+                                a'''
+                                \tweak color #green
+                                cs''''
+                            >4
                         }
                         \context Staff = "Bass_Staff"
                         {
                             \clef "bass"
-                            <c d bf>4
+                            <
+                                \tweak color #red
+                                c
+                                \tweak color #red
+                                d
+                                \tweak color #blue
+                                bf
+                            >4
                         }
                     >>
                 >>
@@ -523,13 +549,39 @@ class Constellation:
                         \context Staff = "Treble_Staff"
                         {
                             \clef "treble"
-                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                            <
+                                \tweak color #red
+                                e'
+                                \tweak color #blue
+                                af'
+                                \tweak color #blue
+                                b'
+                                \tweak color #blue
+                                f''
+                                \tweak color #green
+                                g''
+                                \tweak color #green
+                                ef'''
+                                \tweak color #green
+                                fs'''
+                                \tweak color #green
+                                a'''
+                                \tweak color #green
+                                cs''''
+                            >4
                             <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
                         }
                         \context Staff = "Bass_Staff"
                         {
                             \clef "bass"
-                            <c d bf>4
+                            <
+                                \tweak color #red
+                                c
+                                \tweak color #red
+                                d
+                                \tweak color #blue
+                                bf
+                            >4
                             <c d bf>4
                         }
                     >>
@@ -904,25 +956,227 @@ class ConstellationCircuit:
                         \context Staff = "Treble_Staff"
                         {
                             \clef "treble"
-                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
-                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
-                            <b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4
-                            <c' d' bf' b' ef'' a'' cs''' af''' f'''' fs'''' g''''>4
-                            <b cs' e' d'' fs'' g'' af'' bf'' f''' a'''>4
-                            <c' ef' f' b' cs'' e'' fs''' af''' a''''>4
-                            <b c' f' g' ef'' fs'' af'' cs''' e''' a'''>4
-                            <b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4
+                            <
+                                \tweak color #red
+                                e'
+                                \tweak color #blue
+                                af'
+                                \tweak color #blue
+                                b'
+                                \tweak color #blue
+                                f''
+                                \tweak color #green
+                                g''
+                                \tweak color #green
+                                ef'''
+                                \tweak color #green
+                                fs'''
+                                \tweak color #green
+                                a'''
+                                \tweak color #green
+                                cs''''
+                            >4
+                            <
+                                \tweak color #blue
+                                e'
+                                \tweak color #green
+                                af'
+                                \tweak color #blue
+                                b'
+                                \tweak color #green
+                                f''
+                                \tweak color #green
+                                g''
+                                \tweak color #blue
+                                ef'''
+                                \tweak color #green
+                                fs'''
+                                \tweak color #blue
+                                a'''
+                                \tweak color #blue
+                                cs''''
+                            >4
+                            <
+                                \tweak color #blue
+                                b
+                                \tweak color #green
+                                c'
+                                \tweak color #red
+                                d'
+                                \tweak color #green
+                                bf'
+                                \tweak color #red
+                                ef''
+                                \tweak color #blue
+                                af''
+                                \tweak color #green
+                                a''
+                                \tweak color #red
+                                cs'''
+                                \tweak color #blue
+                                f'''
+                                \tweak color #blue
+                                g'''
+                                \tweak color #green
+                                fs''''
+                            >4
+                            <
+                                \tweak color #blue
+                                c'
+                                \tweak color #red
+                                d'
+                                \tweak color #red
+                                bf'
+                                \tweak color #blue
+                                b'
+                                \tweak color #green
+                                ef''
+                                \tweak color #red
+                                a''
+                                \tweak color #green
+                                cs'''
+                                \tweak color #blue
+                                af'''
+                                \tweak color #blue
+                                f''''
+                                \tweak color #green
+                                fs''''
+                                \tweak color #green
+                                g''''
+                            >4
+                            <
+                                \tweak color #blue
+                                b
+                                \tweak color #red
+                                cs'
+                                \tweak color #red
+                                e'
+                                \tweak color #green
+                                d''
+                                \tweak color #blue
+                                fs''
+                                \tweak color #green
+                                g''
+                                \tweak color #blue
+                                af''
+                                \tweak color #green
+                                bf''
+                                \tweak color #green
+                                f'''
+                                \tweak color #blue
+                                a'''
+                            >4
+                            <
+                                \tweak color #red
+                                c'
+                                \tweak color #blue
+                                ef'
+                                \tweak color #red
+                                f'
+                                \tweak color #green
+                                b'
+                                \tweak color #blue
+                                cs''
+                                \tweak color #blue
+                                e''
+                                \tweak color #green
+                                fs'''
+                                \tweak color #green
+                                af'''
+                                \tweak color #green
+                                a''''
+                            >4
+                            <
+                                \tweak color #blue
+                                b
+                                \tweak color #green
+                                c'
+                                \tweak color #red
+                                f'
+                                \tweak color #blue
+                                g'
+                                \tweak color #red
+                                ef''
+                                \tweak color #blue
+                                fs''
+                                \tweak color #blue
+                                af''
+                                \tweak color #red
+                                cs'''
+                                \tweak color #green
+                                e'''
+                                \tweak color #green
+                                a'''
+                            >4
+                            <
+                                \tweak color #blue
+                                b
+                                \tweak color #green
+                                d'
+                                \tweak color #blue
+                                g'
+                                \tweak color #green
+                                bf'
+                                \tweak color #green
+                                e''
+                                \tweak color #red
+                                f''
+                                \tweak color #blue
+                                fs''
+                                \tweak color #green
+                                af''
+                                \tweak color #blue
+                                a''
+                                \tweak color #red
+                                ef'''
+                                \tweak color #red
+                                cs''''
+                            >4
                         }
                         \context Staff = "Bass_Staff"
                         {
                             \clef "bass"
-                            <c d bf>4
-                            <c d bf>4
+                            <
+                                \tweak color #red
+                                c
+                                \tweak color #red
+                                d
+                                \tweak color #blue
+                                bf
+                            >4
+                            <
+                                \tweak color #red
+                                c
+                                \tweak color #red
+                                d
+                                \tweak color #red
+                                bf
+                            >4
+                            \tweak color #red
                             e4
+                            \tweak color #red
                             e4
-                            <c ef>4
-                            <d g bf>4
-                            <d bf>4
+                            <
+                                \tweak color #red
+                                c
+                                \tweak color #red
+                                ef
+                            >4
+                            <
+                                \tweak color #red
+                                d
+                                \tweak color #blue
+                                g
+                                \tweak color #red
+                                bf
+                            >4
+                            <
+                                \tweak color #red
+                                d
+                                \tweak color #red
+                                bf
+                            >4
+                            \tweak color #red
                             c4
                         }
                     >>
@@ -960,40 +1214,242 @@ class ConstellationCircuit:
                         \context Staff = "Treble_Staff"
                         {
                             \clef "treble"
+                            <
+                                \tweak color #red
+                                e'
+                                \tweak color #blue
+                                af'
+                                \tweak color #blue
+                                b'
+                                \tweak color #blue
+                                f''
+                                \tweak color #green
+                                g''
+                                \tweak color #green
+                                ef'''
+                                \tweak color #green
+                                fs'''
+                                \tweak color #green
+                                a'''
+                                \tweak color #green
+                                cs''''
+                            >4
                             <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
-                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
-                            <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                            <
+                                \tweak color #blue
+                                e'
+                                \tweak color #green
+                                af'
+                                \tweak color #blue
+                                b'
+                                \tweak color #green
+                                f''
+                                \tweak color #green
+                                g''
+                                \tweak color #blue
+                                ef'''
+                                \tweak color #green
+                                fs'''
+                                \tweak color #blue
+                                a'''
+                                \tweak color #blue
+                                cs''''
+                            >4
                             <b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4
-                            <b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4
+                            <
+                                \tweak color #blue
+                                b
+                                \tweak color #green
+                                c'
+                                \tweak color #red
+                                d'
+                                \tweak color #green
+                                bf'
+                                \tweak color #red
+                                ef''
+                                \tweak color #blue
+                                af''
+                                \tweak color #green
+                                a''
+                                \tweak color #red
+                                cs'''
+                                \tweak color #blue
+                                f'''
+                                \tweak color #blue
+                                g'''
+                                \tweak color #green
+                                fs''''
+                            >4
                             <c' d' bf' b' ef'' a'' cs''' af''' f'''' fs'''' g''''>4
-                            <c' d' bf' b' ef'' a'' cs''' af''' f'''' fs'''' g''''>4
+                            <
+                                \tweak color #blue
+                                c'
+                                \tweak color #red
+                                d'
+                                \tweak color #red
+                                bf'
+                                \tweak color #blue
+                                b'
+                                \tweak color #green
+                                ef''
+                                \tweak color #red
+                                a''
+                                \tweak color #green
+                                cs'''
+                                \tweak color #blue
+                                af'''
+                                \tweak color #blue
+                                f''''
+                                \tweak color #green
+                                fs''''
+                                \tweak color #green
+                                g''''
+                            >4
                             <b cs' e' d'' fs'' g'' af'' bf'' f''' a'''>4
-                            <b cs' e' d'' fs'' g'' af'' bf'' f''' a'''>4
+                            <
+                                \tweak color #blue
+                                b
+                                \tweak color #red
+                                cs'
+                                \tweak color #red
+                                e'
+                                \tweak color #green
+                                d''
+                                \tweak color #blue
+                                fs''
+                                \tweak color #green
+                                g''
+                                \tweak color #blue
+                                af''
+                                \tweak color #green
+                                bf''
+                                \tweak color #green
+                                f'''
+                                \tweak color #blue
+                                a'''
+                            >4
                             <c' ef' f' b' cs'' e'' fs''' af''' a''''>4
-                            <c' ef' f' b' cs'' e'' fs''' af''' a''''>4
+                            <
+                                \tweak color #red
+                                c'
+                                \tweak color #blue
+                                ef'
+                                \tweak color #red
+                                f'
+                                \tweak color #green
+                                b'
+                                \tweak color #blue
+                                cs''
+                                \tweak color #blue
+                                e''
+                                \tweak color #green
+                                fs'''
+                                \tweak color #green
+                                af'''
+                                \tweak color #green
+                                a''''
+                            >4
                             <b c' f' g' ef'' fs'' af'' cs''' e''' a'''>4
-                            <b c' f' g' ef'' fs'' af'' cs''' e''' a'''>4
+                            <
+                                \tweak color #blue
+                                b
+                                \tweak color #green
+                                c'
+                                \tweak color #red
+                                f'
+                                \tweak color #blue
+                                g'
+                                \tweak color #red
+                                ef''
+                                \tweak color #blue
+                                fs''
+                                \tweak color #blue
+                                af''
+                                \tweak color #red
+                                cs'''
+                                \tweak color #green
+                                e'''
+                                \tweak color #green
+                                a'''
+                            >4
                             <b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4
-                            <b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4
+                            <
+                                \tweak color #blue
+                                b
+                                \tweak color #green
+                                d'
+                                \tweak color #blue
+                                g'
+                                \tweak color #green
+                                bf'
+                                \tweak color #green
+                                e''
+                                \tweak color #red
+                                f''
+                                \tweak color #blue
+                                fs''
+                                \tweak color #green
+                                af''
+                                \tweak color #blue
+                                a''
+                                \tweak color #red
+                                ef'''
+                                \tweak color #red
+                                cs''''
+                            >4
                             <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
                         }
                         \context Staff = "Bass_Staff"
                         {
                             \clef "bass"
+                            <
+                                \tweak color #red
+                                c
+                                \tweak color #red
+                                d
+                                \tweak color #blue
+                                bf
+                            >4
                             <c d bf>4
-                            <c d bf>4
-                            <c d bf>4
+                            <
+                                \tweak color #red
+                                c
+                                \tweak color #red
+                                d
+                                \tweak color #red
+                                bf
+                            >4
+                            e4
+                            \tweak color #red
                             e4
                             e4
-                            e4
+                            \tweak color #red
                             e4
                             <c ef>4
-                            <c ef>4
+                            <
+                                \tweak color #red
+                                c
+                                \tweak color #red
+                                ef
+                            >4
                             <d g bf>4
-                            <d g bf>4
+                            <
+                                \tweak color #red
+                                d
+                                \tweak color #blue
+                                g
+                                \tweak color #red
+                                bf
+                            >4
                             <d bf>4
-                            <d bf>4
+                            <
+                                \tweak color #red
+                                d
+                                \tweak color #red
+                                bf
+                            >4
                             c4
+                            \tweak color #red
                             c4
                             <c d bf>4
                         }
