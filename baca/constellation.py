@@ -99,13 +99,13 @@ def constellate(generator, range_):
     return segments
 
 
-def make_constellation_circuit_1():
+def CC1():
     """
     Makes constellation circuit 1.
 
     ..  container:: example
 
-        >>> circuit = baca.constellation.make_constellation_circuit_1()
+        >>> circuit = baca.constellation.CC1()
         >>> for constellation in circuit:
         ...     constellation
         Constellation(180)
@@ -128,8 +128,7 @@ def make_constellation_circuit_1():
         [[-10, -2, 5, 15, 25], [-1, 7, 18, 20], [0, 28, 33]],
         [[-12, 17, 27, 37], [-1, 7, 18, 21], [2, 10, 16, 20]],
     ]
-    range_ = abjad.PitchRange("[A0, C8]")
-    return ConstellationCircuit(generators, range_)
+    return ConstellationCircuit(generators, "[A0, C8]")
 
 
 class Constellation:
@@ -148,8 +147,7 @@ class Constellation:
         ...     [[-10, -2, 5, 15, 25], [-1, 7, 18, 20], [0, 28, 33]],
         ...     [[-12, 17, 27, 37], [-1, 7, 18, 21], [2, 10, 16, 20]],
         ... ]
-        >>> range_ = abjad.PitchRange("[A0, C8]")
-        >>> circuit = baca.ConstellationCircuit(generators, range_)
+        >>> circuit = baca.ConstellationCircuit(generators, "[A0, C8]")
         >>> circuit[0]
         Constellation(180)
 
@@ -165,30 +163,21 @@ class Constellation:
 
     ### SPECIAL METHODS ###
 
-    def __contains__(self, pitch_set):
+    def __contains__(self, segment):
         """
-        Is true when constellation contains ``pitch_set``.
+        Is true when constellation contains ``segment``.
 
         ..  container:: example
 
-            >>> pitch_numbers = [
-            ...     -38, -36, -34, -29, -28, -25,
-            ...     -21, -20, -19, -18, -15, -11,
-            ... ]
-            >>> pitch_set = abjad.Sequence(items=pitch_numbers)
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> numbers = [-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11]
+            >>> segment = abjad.Sequence(numbers)
+            >>> circuit = baca.constellation.CC1()
             >>> constellation = circuit[0]
-            >>> pitch_set in constellation
+            >>> segment in constellation
             True
 
-        ..  container:: example
-
-            >>> constellation = circuit[0]
-            >>> [-38] in constellation
-            False
-
         """
-        return pitch_set in self._pitch_number_lists
+        return segment in self._pitch_number_lists
 
     def __getitem__(self, argument):
         """
@@ -196,7 +185,7 @@ class Constellation:
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> circuit = baca.constellation.CC1()
             >>> constellation = circuit[0]
             >>> constellation[0]
             Sequence([-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11])
@@ -210,7 +199,7 @@ class Constellation:
 
         ..  container::
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> circuit = baca.constellation.CC1()
             >>> constellation = circuit[0]
             >>> len(constellation)
             180
@@ -224,7 +213,7 @@ class Constellation:
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> circuit = baca.constellation.CC1()
             >>> constellation = circuit[0]
             >>> constellation
             Constellation(180)
@@ -304,7 +293,7 @@ class Constellation:
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> circuit = baca.constellation.CC1()
             >>> constellation = circuit[0]
             >>> constellation.constellation_number
             1
@@ -319,7 +308,7 @@ class Constellation:
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> circuit = baca.constellation.CC1()
             >>> constellation = circuit[0]
             >>> abjad.show(constellation.generator_chord) # doctest: +SKIP
 
@@ -339,11 +328,11 @@ class Constellation:
     @property
     def generators(self):
         """
-        Gets partitioned generator pitch numbers.
+        Gets generators.
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> circuit = baca.constellation.CC1()
             >>> for constellation in circuit:
             ...     constellation.generators
             [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]]
@@ -361,11 +350,11 @@ class Constellation:
     @property
     def range_(self):
         """
-        Gets pitch range of constellation.
+        Gets pitch range.
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> circuit = baca.constellation.CC1()
             >>> constellation = circuit[0]
             >>> constellation.range_
             PitchRange('[A0, C8]')
@@ -380,7 +369,7 @@ class Constellation:
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> circuit = baca.constellation.CC1()
             >>> constellation = circuit[0]
             >>> abjad.show(constellation.pivot_chord) # doctest: +SKIP
 
@@ -405,7 +394,7 @@ class Constellation:
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> circuit = baca.constellation.CC1()
             >>> constellation = circuit[0]
             >>> constellation.get_chord(1)
             Sequence([-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11])
@@ -421,7 +410,7 @@ class Constellation:
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> circuit = baca.constellation.CC1()
             >>> constellation = circuit[0]
             >>> chord = constellation.get_chord(17)
             >>> constellation.get_number_of_chord(chord)
@@ -442,7 +431,7 @@ class Constellation:
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> circuit = baca.constellation.CC1()
             >>> constellation = circuit[0]
             >>> lilypond_file = constellation.illustrate_colored_generator_chord()
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -525,7 +514,7 @@ class Constellation:
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> circuit = baca.constellation.CC1()
             >>> constellation = circuit[0]
             >>> lilypond_file = constellation.illustrate_colored_generator_chord_and_pivot_chord()
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -612,7 +601,7 @@ class Constellation:
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> circuit = baca.constellation.CC1()
             >>> constellation = circuit[0]
             >>> lilypond_file = constellation.illustrate_generator_chord()
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -657,7 +646,7 @@ class Constellation:
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> circuit = baca.constellation.CC1()
             >>> constellation = circuit[0]
             >>> lilypond_file = constellation.illustrate_generator_chord_and_pivot_chord()
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -706,7 +695,7 @@ class Constellation:
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> circuit = baca.constellation.CC1()
             >>> constellation = circuit[0]
             >>> lilypond_file = constellation.illustrate_pivot_chord()
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -752,7 +741,7 @@ class ConstellationCircuit:
 
     ..  container:: example
 
-        >>> circuit = baca.constellation.make_constellation_circuit_1()
+        >>> circuit = baca.constellation.CC1()
         >>> for constellation in circuit:
         ...     constellation
         Constellation(180)
@@ -770,6 +759,7 @@ class ConstellationCircuit:
 
     def __init__(self, generators, range_):
         self._generators = generators
+        range_ = abjad.PitchRange(range_)
         self._range = range_
         self._constellate_generators()
 
@@ -777,11 +767,11 @@ class ConstellationCircuit:
 
     def __getitem__(self, argument):
         """
-        Gets item or slice identified by ``argument``.
+        Gets ``argument`` in circuit.
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> circuit = baca.constellation.CC1()
             >>> circuit[-1]
             Constellation(108)
 
@@ -794,7 +784,7 @@ class ConstellationCircuit:
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> circuit = baca.constellation.CC1()
             >>> len(circuit)
             8
 
@@ -807,8 +797,7 @@ class ConstellationCircuit:
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
-            >>> circuit
+            >>> baca.constellation.CC1()
             ConstellationCircuit(8)
 
         """
@@ -851,7 +840,7 @@ class ConstellationCircuit:
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> circuit = baca.constellation.CC1()
             >>> for chord in circuit.generator_chords:
             ...     chord
             Chord("<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4")
@@ -876,8 +865,7 @@ class ConstellationCircuit:
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
-            >>> circuit.range_
+            >>> baca.constellation.CC1().range_
             PitchRange('[A0, C8]')
 
         """
@@ -890,7 +878,7 @@ class ConstellationCircuit:
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> circuit = baca.constellation.CC1()
             >>> for chord in circuit.pivot_chords:
             ...     chord
             ...
@@ -917,13 +905,13 @@ class ConstellationCircuit:
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> circuit = baca.constellation.CC1()
             >>> circuit.get(8)
             Constellation(108)
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> circuit = baca.constellation.CC1()
             >>> circuit.get(8, 108)
             Sequence([-12, 17, 23, 26, 27, 31, 34, 37, 40, 42, 44, 45])
 
@@ -945,7 +933,7 @@ class ConstellationCircuit:
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> circuit = baca.constellation.CC1()
             >>> lilypond_file = circuit.illustrate_colored_generator_chords()
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1299,7 +1287,7 @@ class ConstellationCircuit:
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> circuit = baca.constellation.CC1()
             >>> lilypond_file = circuit.illustrate_colored_generator_chords_and_pivot_chords()
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1670,7 +1658,7 @@ class ConstellationCircuit:
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> circuit = baca.constellation.CC1()
             >>> lilypond_file = circuit.illustrate_generator_chords()
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1725,7 +1713,7 @@ class ConstellationCircuit:
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> circuit = baca.constellation.CC1()
             >>> lilypond_file = circuit.illustrate_generator_chords_and_pivot_chords()
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1798,7 +1786,7 @@ class ConstellationCircuit:
 
         ..  container:: example
 
-            >>> circuit = baca.constellation.make_constellation_circuit_1()
+            >>> circuit = baca.constellation.CC1()
             >>> lilypond_file = circuit.illustrate_pivot_chords()
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
