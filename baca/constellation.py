@@ -86,7 +86,8 @@ Constellation.
 
     >>> circuit = baca.constellation.CC1()
     >>> constellation = circuit[0]
-    >>> generator = constellation.generator_chord
+    >>> generator = abjad.Sequence(constellation.generator).flatten()
+    >>> generator = abjad.Chord(generator, (1, 4))
     >>> constellation.color_chord(generator)
     >>> constellation.label_chord(generator)
     >>> pivot = constellation.pivot
@@ -169,7 +170,8 @@ Constellation.
 
     >>> circuit = baca.constellation.CC1()
     >>> constellation = circuit[0]
-    >>> generator = constellation.generator_chord
+    >>> generator = abjad.Sequence(constellation.generator).flatten()
+    >>> generator = abjad.Chord(generator, (1, 4))
     >>> constellation.label_chord(generator)
     >>> leaves = [generator]
     >>> score, _, _ = abjad.illustrators.make_piano_score(leaves, sketch=True)
@@ -209,7 +211,8 @@ Constellation.
 
     >>> circuit = baca.constellation.CC1()
     >>> constellation = circuit[0]
-    >>> generator = constellation.generator_chord
+    >>> generator = abjad.Sequence(constellation.generator).flatten()
+    >>> generator = abjad.Chord(generator, (1, 4))
     >>> constellation.label_chord(generator)
     >>> pivot = constellation.pivot
     >>> constellation.label_chord(pivot)
@@ -294,7 +297,8 @@ Constellation.
     >>> circuit = baca.constellation.CC1()
     >>> generators = []
     >>> for constellation in circuit:
-    ...     generator = constellation.generator_chord
+    ...     generator = abjad.Sequence(constellation.generator).flatten()
+    ...     generator = abjad.Chord(generator, (1, 4))
     ...     constellation.color_chord(generator)
     ...     generators.append(generator)
 
@@ -648,7 +652,8 @@ Constellation.
     >>> circuit = baca.constellation.CC1()
     >>> generators = []
     >>> for constellation in circuit:
-    ...     generator = constellation.generator_chord
+    ...     generator = abjad.Sequence(constellation.generator).flatten()
+    ...     generator = abjad.Chord(generator, (1, 4))
     ...     constellation.color_chord(generator)
     ...     generators.append(generator)
 
@@ -1019,7 +1024,12 @@ Constellation.
     Here's the generator for each constellation in CC1:
 
     >>> circuit = baca.constellation.CC1()
-    >>> generators = [_.generator_chord for _ in circuit]
+    >>> generators = []
+    >>> for constellation in circuit:
+    ...     generator = abjad.Sequence(constellation.generator).flatten()
+    ...     generator = abjad.Chord(generator, (1, 4))
+    ...     generators.append(generator)
+
     >>> score, _, _ = abjad.illustrators.make_piano_score(generators, sketch=True)
     >>> abjad.show(score) # doctest: +SKIP
 
@@ -1070,7 +1080,12 @@ Constellation.
     Here's the generator chord and pivot chord for each constellation in CC1:
 
     >>> circuit = baca.constellation.CC1()
-    >>> generators = [_.generator_chord for _ in circuit]
+    >>> generators = []
+    >>> for constellation in circuit:
+    ...     generator = abjad.Sequence(constellation.generator).flatten()
+    ...     generator = abjad.Chord(generator, (1, 4))
+    ...     generators.append(generator)
+
     >>> pivots = [_.pivot for _ in circuit]
     >>> chords = list(zip(generators, pivots))
     >>> chords_ = abjad.Sequence(chords).flatten()
@@ -1187,57 +1202,52 @@ Constellation.
         >>
 
 """
-import collections
-import copy
-
 import abjad
 
 
-def _list_numeric_octave_transpositions(range_, numbers):
-    result = []
+def _list_numeric_octave_transpositions(numbers, range_):
+    transpositions = []
     pitch_number_set = set(numbers)
     range_set = set(range(range_.start_pitch.number, range_.stop_pitch.number + 1))
     while pitch_number_set.issubset(range_set):
         next_pitch_number = list(pitch_number_set)
         next_pitch_number.sort()
-        result.extend([next_pitch_number])
+        transpositions.extend([next_pitch_number])
         pitch_number_set = set([_ + 12 for _ in pitch_number_set])
     pitch_number_set = set([_ - 12 for _ in numbers])
     while pitch_number_set.issubset(range_set):
         next_pitch_number = list(pitch_number_set)
         next_pitch_number.sort()
-        result.extend([next_pitch_number])
+        transpositions.extend([next_pitch_number])
         pitch_number_set = set([_ - 12 for _ in pitch_number_set])
-    result.sort()
-    return result
+    transpositions.sort()
+    # OPTIMIZE: outer product of pitch segments take 3 times as long as lists
+    # transpositions = [abjad.PitchSegment(_) for _ in transpositions]
+    return transpositions
 
 
-def _list_octave_transpositions(pitch_carrier, range_):
+def _list_octave_transpositions(segment, range_):
     range_ = abjad.PitchRange(range_)
-    if isinstance(pitch_carrier, collections.abc.Iterable):
-        if all(isinstance(x, (int, float)) for x in pitch_carrier):
-            return _list_numeric_octave_transpositions(range_, pitch_carrier)
-    prototype = (abjad.Chord, abjad.PitchSet)
-    if not isinstance(pitch_carrier, prototype):
-        raise TypeError(f"must be chord or pitch-set: {pitch_carrier!r}")
+    if all(isinstance(x, (int, float)) for x in segment):
+        return _list_numeric_octave_transpositions(segment, range_)
+    assert isinstance(segment, list)
+    segment = abjad.PitchSegment(segment)
     result = []
-    interval = abjad.NumberedInterval(-12)
+    interval = -12
     while True:
-        pitch_carrier_copy = copy.copy(pitch_carrier)
-        candidate = interval.transpose(pitch_carrier_copy)
-        if candidate in range_:
+        candidate = segment.transpose(interval)
+        if all(pitch in range_ for pitch in candidate):
             result.append(candidate)
             interval -= 12
         else:
             break
     result.reverse()
-    interval = abjad.NumberedInterval(0)
+    interval = 0
     while True:
-        pitch_carrier_copy = copy.copy(pitch_carrier)
-        candidate = interval.transpose(pitch_carrier_copy)
-        if candidate in range_:
+        candidate = segment.transpose(interval)
+        if all(pitch in range_ for pitch in candidate):
             result.append(candidate)
-            interval += abjad.NumberedInterval(12)
+            interval += 12
         else:
             break
     return result
@@ -1416,7 +1426,7 @@ class Constellation:
 
     @property
     def circuit(self):
-        r"""
+        """
         Gets circuit to which constellation belongs.
 
         ..  container:: example
@@ -1431,31 +1441,6 @@ class Constellation:
 
         """
         return self._circuit
-
-    @property
-    def generator_chord(self):
-        r"""
-        Gets generator chord.
-
-        ..  container:: example
-
-            >>> circuit = baca.constellation.CC1()
-            >>> constellation = circuit[0]
-            >>> chord = constellation.generator_chord
-            >>> constellation.label_chord(chord)
-            >>> abjad.show(chord) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> string = abjad.lilypond(chord)
-                >>> print(string)
-                <c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
-                ^ \markup { 1-80 }
-
-        """
-        numbers = abjad.Sequence(self.generator).flatten()
-        generator_chord = abjad.Chord(numbers, (1, 4))
-        return generator_chord
 
     @property
     def generator(self):
@@ -1509,7 +1494,7 @@ class Constellation:
         color_map = abjad.ColorMap(colors=colors, pitch_iterables=self.generator)
         abjad.Label(chord).color_note_heads(color_map)
 
-    # TODO: check me
+    # TODO: teach abjad.illustrators.make_piano_score() to preserve markup
     def label_chord(self, chord):
         """
         Labels ``chord`` with constellation and chord number.
