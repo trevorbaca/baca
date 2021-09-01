@@ -7,11 +7,11 @@ Constellation.
 
     >>> circuit = baca.constellation.CC1()
     >>> constellation = circuit[0]
-    >>> generator = constellation.generator_chord
+    >>> generator = abjad.Sequence(constellation.generator).flatten()
+    >>> generator = abjad.Chord(generator, (1, 4))
     >>> constellation.color_chord(generator)
     >>> constellation.label_chord(generator)
-    >>> leaves = [generator]
-    >>> score, _, _ = abjad.illustrators.make_piano_score(leaves=leaves, sketch=True)
+    >>> score, _, _ = abjad.illustrators.make_piano_score([generator], sketch=True)
     >>> abjad.show(score) # doctest: +SKIP
 
     ..  docs::
@@ -92,7 +92,7 @@ Constellation.
     >>> pivot = constellation.pivot
     >>> constellation.label_chord(pivot)
     >>> leaves = [generator, pivot]
-    >>> score, _, _ = abjad.illustrators.make_piano_score(leaves=leaves, sketch=True)
+    >>> score, _, _ = abjad.illustrators.make_piano_score(leaves, sketch=True)
     >>> abjad.show(score) # doctest: +SKIP
 
     ..  docs::
@@ -172,7 +172,7 @@ Constellation.
     >>> generator = constellation.generator_chord
     >>> constellation.label_chord(generator)
     >>> leaves = [generator]
-    >>> score, _, _ = abjad.illustrators.make_piano_score(leaves=leaves, sketch=True)
+    >>> score, _, _ = abjad.illustrators.make_piano_score(leaves, sketch=True)
     >>> abjad.show(score) # doctest: +SKIP
 
     ..  docs::
@@ -214,7 +214,7 @@ Constellation.
     >>> pivot = constellation.pivot
     >>> constellation.label_chord(pivot)
     >>> leaves = [generator, pivot]
-    >>> score, _, _ = abjad.illustrators.make_piano_score(leaves=leaves, sketch=True)
+    >>> score, _, _ = abjad.illustrators.make_piano_score(leaves, sketch=True)
     >>> abjad.show(score) # doctest: +SKIP
 
     ..  docs::
@@ -256,7 +256,7 @@ Constellation.
     >>> pivot = constellation.pivot
     >>> constellation.label_chord(pivot)
     >>> leaves = [pivot]
-    >>> score, _, _ = abjad.illustrators.make_piano_score(leaves=leaves, sketch=True)
+    >>> score, _, _ = abjad.illustrators.make_piano_score(leaves, sketch=True)
     >>> abjad.show(score) # doctest: +SKIP
 
     ..  docs::
@@ -298,7 +298,7 @@ Constellation.
     ...     constellation.color_chord(generator)
     ...     generators.append(generator)
 
-    >>> score, _, _ = abjad.illustrators.make_piano_score(leaves=generators, sketch=True)
+    >>> score, _, _ = abjad.illustrators.make_piano_score(generators, sketch=True)
     >>> abjad.show(score) # doctest: +SKIP
 
     ..  docs::
@@ -655,7 +655,7 @@ Constellation.
     >>> pivots = [_.pivot for _ in circuit]
     >>> chords = list(zip(generators, pivots))
     >>> chords_ = abjad.Sequence(chords).flatten()
-    >>> score, _, _ = abjad.illustrators.make_piano_score(leaves=chords_, sketch=True)
+    >>> score, _, _ = abjad.illustrators.make_piano_score(chords_, sketch=True)
     >>> abjad.show(score) # doctest: +SKIP
 
     ..  docs::
@@ -1020,7 +1020,7 @@ Constellation.
 
     >>> circuit = baca.constellation.CC1()
     >>> generators = [_.generator_chord for _ in circuit]
-    >>> score, _, _ = abjad.illustrators.make_piano_score(leaves=generators, sketch=True)
+    >>> score, _, _ = abjad.illustrators.make_piano_score(generators, sketch=True)
     >>> abjad.show(score) # doctest: +SKIP
 
     ..  docs::
@@ -1074,7 +1074,7 @@ Constellation.
     >>> pivots = [_.pivot for _ in circuit]
     >>> chords = list(zip(generators, pivots))
     >>> chords_ = abjad.Sequence(chords).flatten()
-    >>> score, _, _ = abjad.illustrators.make_piano_score(leaves=chords_, sketch=True)
+    >>> score, _, _ = abjad.illustrators.make_piano_score(chords_, sketch=True)
     >>> abjad.show(score) # doctest: +SKIP
 
     ..  docs::
@@ -1141,7 +1141,7 @@ Constellation.
 
     >>> circuit = baca.constellation.CC1()
     >>> pivots = [_.pivot for _ in circuit]
-    >>> score, _, _ = abjad.illustrators.make_piano_score(leaves=pivots, sketch=True)
+    >>> score, _, _ = abjad.illustrators.make_piano_score(pivots, sketch=True)
     >>> abjad.show(score) # doctest: +SKIP
 
     ..  docs::
@@ -1253,15 +1253,15 @@ def constellate(generator, range_):
         >>> segments = baca.constellation.constellate(generator, "[C4, C#7]")
         >>> for segment in segments:
         ...     segment
-        Sequence([0, 2, 4, 7, 8, 10])
-        Sequence([0, 2, 10, 16, 19, 20])
-        Sequence([0, 2, 10, 28, 31, 32])
-        Sequence([4, 7, 8, 12, 14, 22])
-        Sequence([12, 14, 16, 19, 20, 22])
-        Sequence([12, 14, 22, 28, 31, 32])
-        Sequence([4, 7, 8, 24, 26, 34])
-        Sequence([16, 19, 20, 24, 26, 34])
-        Sequence([24, 26, 28, 31, 32, 34])
+        PitchSegment([0, 2, 4, 7, 8, 10])
+        PitchSegment([0, 2, 10, 16, 19, 20])
+        PitchSegment([0, 2, 10, 28, 31, 32])
+        PitchSegment([4, 7, 8, 12, 14, 22])
+        PitchSegment([12, 14, 16, 19, 20, 22])
+        PitchSegment([12, 14, 22, 28, 31, 32])
+        PitchSegment([4, 7, 8, 24, 26, 34])
+        PitchSegment([16, 19, 20, 24, 26, 34])
+        PitchSegment([24, 26, 28, 31, 32, 34])
 
     ..  container:: example
 
@@ -1269,17 +1269,18 @@ def constellate(generator, range_):
         >>> segments = baca.constellation.constellate(generator, "[C4, C#7]")
         >>> for segment in segments:
         ...     segment
-        Sequence([4, 7, 8, 11, 15, 17])
-        Sequence([4, 8, 11, 19, 27, 29])
-        Sequence([7, 15, 16, 17, 20, 23])
-        Sequence([16, 19, 20, 23, 27, 29])
-        Sequence([7, 15, 17, 28, 32, 35])
-        Sequence([19, 27, 28, 29, 32, 35])
+        PitchSegment([4, 7, 8, 11, 15, 17])
+        PitchSegment([4, 8, 11, 19, 27, 29])
+        PitchSegment([7, 15, 16, 17, 20, 23])
+        PitchSegment([16, 19, 20, 23, 27, 29])
+        PitchSegment([7, 15, 17, 28, 32, 35])
+        PitchSegment([19, 27, 28, 29, 32, 35])
 
     """
+    assert isinstance(generator, list), repr(generator)
     transpositions = [_list_octave_transpositions(_, range_) for _ in generator]
     sequences = abjad.enumerate.yield_outer_product(transpositions)
-    segments = [_.flatten().sort() for _ in sequences]
+    segments = [abjad.PitchSegment(_.flatten().sort()) for _ in sequences]
     return segments
 
 
@@ -1360,7 +1361,7 @@ class Constellation:
         ..  container:: example
 
             >>> numbers = [-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11]
-            >>> segment = abjad.Sequence(numbers)
+            >>> segment = abjad.PitchSegment(numbers)
             >>> circuit = baca.constellation.CC1()
             >>> constellation = circuit[0]
             >>> segment in constellation
@@ -1378,7 +1379,7 @@ class Constellation:
             >>> circuit = baca.constellation.CC1()
             >>> constellation = circuit[0]
             >>> constellation[0]
-            Sequence([-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11])
+            PitchSegment([-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11])
 
         """
         return self._segments.__getitem__(argument)
@@ -1464,16 +1465,9 @@ class Constellation:
         ..  container:: example
 
             >>> circuit = baca.constellation.CC1()
-            >>> for constellation in circuit:
-            ...     constellation.generator
+            >>> constellation = circuit[0]
+            >>> constellation.generator
             [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]]
-            [[-12, -10, -2], [4, 11, 27, 33, 37], [8, 17, 19, 30]]
-            [[-8, 2, 15, 25], [-1, 20, 29, 31], [0, 10, 21, 42]]
-            [[-8, 2, 10, 21], [0, 11, 32, 41], [15, 25, 42, 43]]
-            [[-12, -9, 1, 4], [-1, 18, 20, 33], [14, 19, 22, 29]]
-            [[-10, -2, 0, 5], [-5, 3, 13, 16], [11, 30, 32, 45]]
-            [[-10, -2, 5, 15, 25], [-1, 7, 18, 20], [0, 28, 33]]
-            [[-12, 17, 27, 37], [-1, 7, 18, 21], [2, 10, 16, 20]]
 
         """
         return self._generator
@@ -1515,15 +1509,16 @@ class Constellation:
         color_map = abjad.ColorMap(colors=colors, pitch_iterables=self.generator)
         abjad.Label(chord).color_note_heads(color_map)
 
+    # TODO: check me
     def label_chord(self, chord):
         """
         Labels ``chord`` with constellation and chord number.
         """
         assert isinstance(chord, abjad.Chord)
-        constellation_index = self._circuit._constellations.index(self)
+        constellation_index = self.circuit._constellations.index(self)
         constellation_number = constellation_index + 1
         numbers = [_.number for _ in chord.written_pitches]
-        segment = abjad.Sequence(numbers)
+        segment = abjad.PitchSegment(numbers)
         chord_index = self._segments.index(segment)
         chord_number = chord_index + 1
         string = rf"\markup {{ {constellation_number}-{chord_number} }}"
