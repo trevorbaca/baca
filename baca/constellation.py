@@ -1289,8 +1289,10 @@ def constellate(generator, range_):
     """
     assert isinstance(generator, list), repr(generator)
     transpositions = [_list_octave_transpositions(_, range_) for _ in generator]
-    sequences = abjad.enumerate.yield_outer_product(transpositions)
-    segments = [abjad.PitchSegment(_.flatten().sort()) for _ in sequences]
+    sequences = abjad.enumerate.outer_product(transpositions)
+    segments = [
+        abjad.PitchSegment(abjad.Sequence(_).flatten().sort()) for _ in sequences
+    ]
     return segments
 
 
