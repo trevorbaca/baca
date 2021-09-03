@@ -1205,32 +1205,9 @@ Constellation.
 import abjad
 
 
-def _list_numeric_octave_transpositions(numbers, range_):
-    transpositions = []
-    pitch_number_set = set(numbers)
-    range_set = set(range(range_.start_pitch.number, range_.stop_pitch.number + 1))
-    while pitch_number_set.issubset(range_set):
-        next_pitch_number = list(pitch_number_set)
-        next_pitch_number.sort()
-        transpositions.extend([next_pitch_number])
-        pitch_number_set = set([_ + 12 for _ in pitch_number_set])
-    pitch_number_set = set([_ - 12 for _ in numbers])
-    while pitch_number_set.issubset(range_set):
-        next_pitch_number = list(pitch_number_set)
-        next_pitch_number.sort()
-        transpositions.extend([next_pitch_number])
-        pitch_number_set = set([_ - 12 for _ in pitch_number_set])
-    transpositions.sort()
-    # OPTIMIZE: outer product of pitch segments take 3 times as long as lists
-    # transpositions = [abjad.PitchSegment(_) for _ in transpositions]
-    return transpositions
-
-
 def _list_octave_transpositions(segment, range_):
-    range_ = abjad.PitchRange(range_)
-    if all(isinstance(x, (int, float)) for x in segment):
-        return _list_numeric_octave_transpositions(segment, range_)
     assert isinstance(segment, list)
+    range_ = abjad.PitchRange(range_)
     segment = abjad.PitchSegment(segment)
     result = []
     interval = -12
@@ -1250,6 +1227,7 @@ def _list_octave_transpositions(segment, range_):
             interval += 12
         else:
             break
+    result = [[_.number for _ in segment] for segment in result]
     return result
 
 
@@ -1290,9 +1268,11 @@ def constellate(generator, range_):
     assert isinstance(generator, list), repr(generator)
     transpositions = [_list_octave_transpositions(_, range_) for _ in generator]
     sequences = abjad.enumerate.outer_product(transpositions)
-    segments = [
-        abjad.PitchSegment(abjad.Sequence(_).flatten().sort()) for _ in sequences
-    ]
+    segments = []
+    for sequence in sequences:
+        numbers = abjad.Sequence(sequence).flatten().sort()
+        segment = abjad.PitchSegment(numbers)
+        segments.append(segment)
     return segments
 
 
