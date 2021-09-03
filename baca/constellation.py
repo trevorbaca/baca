@@ -1205,109 +1205,6 @@ Constellation.
 import abjad
 
 
-def _list_octave_transpositions(segment, range_):
-    assert isinstance(segment, list)
-    range_ = abjad.PitchRange(range_)
-    segment = abjad.PitchSegment(segment)
-    result = []
-    interval = -12
-    while True:
-        candidate = segment.transpose(interval)
-        if all(pitch in range_ for pitch in candidate):
-            result.append(candidate)
-            interval -= 12
-        else:
-            break
-    result.reverse()
-    interval = 0
-    while True:
-        candidate = segment.transpose(interval)
-        if all(pitch in range_ for pitch in candidate):
-            result.append(candidate)
-            interval += 12
-        else:
-            break
-    result = [[_.number for _ in segment] for segment in result]
-    return result
-
-
-def constellate(generator, range_):
-    """
-    Constellates ``generator`` in ``range_``.
-
-    ..  container:: example
-
-        >>> generator = [[0, 2, 10], [16, 19, 20]]
-        >>> segments = baca.constellation.constellate(generator, "[C4, C#7]")
-        >>> for segment in segments:
-        ...     segment
-        PitchSegment([0, 2, 4, 7, 8, 10])
-        PitchSegment([0, 2, 10, 16, 19, 20])
-        PitchSegment([0, 2, 10, 28, 31, 32])
-        PitchSegment([4, 7, 8, 12, 14, 22])
-        PitchSegment([12, 14, 16, 19, 20, 22])
-        PitchSegment([12, 14, 22, 28, 31, 32])
-        PitchSegment([4, 7, 8, 24, 26, 34])
-        PitchSegment([16, 19, 20, 24, 26, 34])
-        PitchSegment([24, 26, 28, 31, 32, 34])
-
-    ..  container:: example
-
-        >>> generator = [[4, 8, 11], [7, 15, 17]]
-        >>> segments = baca.constellation.constellate(generator, "[C4, C#7]")
-        >>> for segment in segments:
-        ...     segment
-        PitchSegment([4, 7, 8, 11, 15, 17])
-        PitchSegment([4, 8, 11, 19, 27, 29])
-        PitchSegment([7, 15, 16, 17, 20, 23])
-        PitchSegment([16, 19, 20, 23, 27, 29])
-        PitchSegment([7, 15, 17, 28, 32, 35])
-        PitchSegment([19, 27, 28, 29, 32, 35])
-
-    """
-    assert isinstance(generator, list), repr(generator)
-    transpositions = [_list_octave_transpositions(_, range_) for _ in generator]
-    sequences = abjad.enumerate.outer_product(transpositions)
-    segments = []
-    for sequence in sequences:
-        numbers = abjad.Sequence(sequence).flatten().sort()
-        segment = abjad.PitchSegment(numbers)
-        segments.append(segment)
-    return segments
-
-
-def CC1():
-    """
-    Makes constellation circuit 1.
-
-    ..  container:: example
-
-        >>> circuit = baca.CC1()
-        >>> for constellation in circuit:
-        ...     constellation
-        Constellation(180)
-        Constellation(140)
-        Constellation(80)
-        Constellation(100)
-        Constellation(180)
-        Constellation(150)
-        Constellation(120)
-        Constellation(108)
-
-    """
-    generators = [
-        [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]],
-        [[-12, -10, -2], [4, 11, 27, 33, 37], [8, 17, 19, 30]],
-        [[-8, 2, 15, 25], [-1, 20, 29, 31], [0, 10, 21, 42]],
-        [[-8, 2, 10, 21], [0, 11, 32, 41], [15, 25, 42, 43]],
-        [[-12, -9, 1, 4], [-1, 18, 20, 33], [14, 19, 22, 29]],
-        [[-10, -2, 0, 5], [-5, 3, 13, 16], [11, 30, 32, 45]],
-        [[-10, -2, 5, 15, 25], [-1, 7, 18, 20], [0, 28, 33]],
-        [[-12, 17, 27, 37], [-1, 7, 18, 21], [2, 10, 16, 20]],
-    ]
-    return Circuit(generators, "[A0, C8]")
-
-
 class Constellation:
     """
     Constellation.
@@ -1341,8 +1238,7 @@ class Constellation:
     def __init__(self, circuit, generator):
         self._circuit = circuit
         self._generator = generator
-        constellations = constellate(generator, circuit.range_)
-        self._segments = constellations
+        self._segments = self._constellate(generator, circuit.range_)
 
     ### SPECIAL METHODS ###
 
@@ -1403,6 +1299,79 @@ class Constellation:
 
         """
         return f"{type(self).__name__}({len(self)})"
+
+    ### PRIVATE METHODS ###
+
+    @staticmethod
+    def _constellate(generator, range_):
+        """
+        Constellates ``generator`` in ``range_``.
+
+        ..  container:: example
+
+            >>> generator = [[0, 2, 10], [16, 19, 20]]
+            >>> segments = baca.Constellation._constellate(generator, "[C4, C#7]")
+            >>> for segment in segments:
+            ...     segment
+            PitchSegment([0, 2, 4, 7, 8, 10])
+            PitchSegment([0, 2, 10, 16, 19, 20])
+            PitchSegment([0, 2, 10, 28, 31, 32])
+            PitchSegment([4, 7, 8, 12, 14, 22])
+            PitchSegment([12, 14, 16, 19, 20, 22])
+            PitchSegment([12, 14, 22, 28, 31, 32])
+            PitchSegment([4, 7, 8, 24, 26, 34])
+            PitchSegment([16, 19, 20, 24, 26, 34])
+            PitchSegment([24, 26, 28, 31, 32, 34])
+
+        ..  container:: example
+
+            >>> generator = [[4, 8, 11], [7, 15, 17]]
+            >>> segments = baca.Constellation._constellate(generator, "[C4, C#7]")
+            >>> for segment in segments:
+            ...     segment
+            PitchSegment([4, 7, 8, 11, 15, 17])
+            PitchSegment([4, 8, 11, 19, 27, 29])
+            PitchSegment([7, 15, 16, 17, 20, 23])
+            PitchSegment([16, 19, 20, 23, 27, 29])
+            PitchSegment([7, 15, 17, 28, 32, 35])
+            PitchSegment([19, 27, 28, 29, 32, 35])
+
+        """
+        assert isinstance(generator, list), repr(generator)
+        range_ = abjad.PitchRange(range_)
+        transpositions = []
+        for part in generator:
+            assert isinstance(part, list)
+            part = abjad.PitchSegment(part)
+            transpositions_ = []
+            interval = -12
+            while True:
+                candidate = part.transpose(interval)
+                if all(pitch in range_ for pitch in candidate):
+                    transpositions_.append(candidate)
+                    interval -= 12
+                else:
+                    break
+            transpositions_.reverse()
+            interval = 0
+            while True:
+                candidate = part.transpose(interval)
+                if all(pitch in range_ for pitch in candidate):
+                    transpositions_.append(candidate)
+                    interval += 12
+                else:
+                    break
+            transpositions_ = [
+                [_.number for _ in segment] for segment in transpositions_
+            ]
+            transpositions.append(transpositions_)
+        sequences = abjad.enumerate.outer_product(transpositions)
+        segments = []
+        for sequence in sequences:
+            numbers = abjad.Sequence(sequence).flatten().sort()
+            segment = abjad.PitchSegment(numbers)
+            segments.append(segment)
+        return segments
 
     ### PUBLIC PROPERTIES ###
 
@@ -1585,3 +1554,35 @@ class Circuit:
 
         """
         return self._range
+
+
+def CC1():
+    """
+    Makes constellation circuit 1.
+
+    ..  container:: example
+
+        >>> circuit = baca.CC1()
+        >>> for constellation in circuit:
+        ...     constellation
+        Constellation(180)
+        Constellation(140)
+        Constellation(80)
+        Constellation(100)
+        Constellation(180)
+        Constellation(150)
+        Constellation(120)
+        Constellation(108)
+
+    """
+    generators = [
+        [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]],
+        [[-12, -10, -2], [4, 11, 27, 33, 37], [8, 17, 19, 30]],
+        [[-8, 2, 15, 25], [-1, 20, 29, 31], [0, 10, 21, 42]],
+        [[-8, 2, 10, 21], [0, 11, 32, 41], [15, 25, 42, 43]],
+        [[-12, -9, 1, 4], [-1, 18, 20, 33], [14, 19, 22, 29]],
+        [[-10, -2, 0, 5], [-5, 3, 13, 16], [11, 30, 32, 45]],
+        [[-10, -2, 5, 15, 25], [-1, 7, 18, 20], [0, 28, 33]],
+        [[-12, 17, 27, 37], [-1, 7, 18, 21], [2, 10, 16, 20]],
+    ]
+    return Circuit(generators, "[A0, C8]")
