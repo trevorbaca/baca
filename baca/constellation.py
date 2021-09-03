@@ -1248,10 +1248,10 @@ class Constellation:
 
         ..  container:: example
 
+            >>> generator = [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]]
+            >>> constellation = baca.Constellation._constellate(generator, "[A0, C8]")
             >>> numbers = [-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11]
             >>> segment = abjad.PitchSegment(numbers)
-            >>> circuit = baca.CC1()
-            >>> constellation = circuit[0]
             >>> segment in constellation
             True
 
@@ -1264,8 +1264,8 @@ class Constellation:
 
         ..  container:: example
 
-            >>> circuit = baca.CC1()
-            >>> constellation = circuit[0]
+            >>> generator = [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]]
+            >>> constellation = baca.Constellation._constellate(generator, "[A0, C8]")
             >>> constellation[0]
             PitchSegment([-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11])
 
@@ -1278,8 +1278,8 @@ class Constellation:
 
         ..  container::
 
-            >>> circuit = baca.CC1()
-            >>> constellation = circuit[0]
+            >>> generator = [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]]
+            >>> constellation = baca.Constellation._constellate(generator, "[A0, C8]")
             >>> len(constellation)
             180
 
