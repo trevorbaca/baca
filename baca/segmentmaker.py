@@ -14,6 +14,7 @@ from . import memento as _memento
 from . import overrides as _overrides
 from . import parts as _parts
 from . import pitchclasses, pitchcommands, rhythmcommands, scoping
+from . import sequence as _sequence
 from . import tags as _tags
 
 
@@ -1235,7 +1236,7 @@ class SegmentMaker:
             Exception: unknown voice name 'Percussion_Voice'.
 
         """
-        commands_ = classes.Sequence(commands).flatten(
+        commands_ = _sequence.Sequence(commands).flatten(
             classes=(list, scoping.Suite), depth=-1
         )
         commands = tuple(commands_)
@@ -1274,7 +1275,7 @@ class SegmentMaker:
                 if not command._matches_scope_index(scope_count, i):
                     continue
                 if isinstance(command, scoping.Command):
-                    commands_ = classes.Sequence([command])
+                    commands_ = _sequence.Sequence([command])
                 else:
                     commands_ = command
                 for command_ in commands_:

@@ -28,6 +28,7 @@ from .pitchcommands import *
 from .rhythmcommands import *
 from .scoping import *
 from .segmentmaker import *
+from .sequence import *
 from .spannercommands import *
 from .templates import *
 from .typings import *

@@ -9,6 +9,7 @@ import abjad
 from . import classes, const, indicators
 from . import parts as _parts
 from . import scoping
+from . import sequence as _sequence
 from . import tags as _tags
 from . import typings
 
@@ -79,7 +80,7 @@ class BCPCommand(scoping.Command):
             return
         if self.selector:
             argument = self.selector(argument)
-        bcps_ = classes.Sequence(self.bcps)
+        bcps_ = _sequence.Sequence(self.bcps)
         if self.helper:
             bcps_ = self.helper(bcps_, argument)
         bcps = abjad.CyclicTuple(bcps_)

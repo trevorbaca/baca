@@ -9,6 +9,7 @@ import typing
 import abjad
 
 from . import classes
+from . import sequence as _sequence
 
 
 class ArpeggiationSpacingSpecifier:
@@ -1436,7 +1437,7 @@ class CollectionList(collections_module.abc.Sequence):
             PitchClassSegment([5, 9, 6])
 
         """
-        sequence = classes.Sequence(items=self)
+        sequence = _sequence.Sequence(items=self)
         collections: typing.List[CollectionTyping] = []
         for sequence_ in sequence.accumulate(operands=operands):
             collections.extend(sequence_)
@@ -2004,7 +2005,7 @@ class CollectionList(collections_module.abc.Sequence):
             PitchSegment([5, 4])
 
         """
-        collections = classes.Sequence(items=self)
+        collections = _sequence.Sequence(items=self)
         collections = collections.helianthate(n=n, m=m)
         return abjad.new(self, collections=collections)
 
@@ -2033,7 +2034,7 @@ class CollectionList(collections_module.abc.Sequence):
 
     def partition(
         self, argument, cyclic=False, join=False, overhang=False
-    ) -> typing.Union["CollectionList", "PitchSegment", classes.Sequence]:
+    ) -> typing.Union["CollectionList", "PitchSegment", _sequence.Sequence]:
         """
         Partitions collections according to ``argument``.
 
@@ -2099,14 +2100,14 @@ class CollectionList(collections_module.abc.Sequence):
         if isinstance(argument, abjad.Ratio):
             message = "implement ratio-partition at some point."
             raise NotImplementedError(message)
-        sequence = classes.Sequence(self)
+        sequence = _sequence.Sequence(self)
         parts = sequence.partition_by_counts(argument, cyclic=cyclic, overhang=overhang)
         collection_lists = [abjad.new(self, collections=_) for _ in parts]
         if join:
             collections = [_.join()[0] for _ in collection_lists]
             result = abjad.new(self, collections=collections)
         else:
-            result = classes.Sequence(collection_lists)
+            result = _sequence.Sequence(collection_lists)
         return result
 
     def read(self, counts=None, check=None) -> "CollectionList":
@@ -2186,7 +2187,7 @@ class CollectionList(collections_module.abc.Sequence):
             CollectionList([<2, 3>, <4>])
 
         """
-        sequence = classes.Sequence(items=self)
+        sequence = _sequence.Sequence(items=self)
         collections = sequence.remove(indices=indices, period=period)
         return abjad.new(self, collections=collections)
 
@@ -2441,7 +2442,7 @@ class CollectionList(collections_module.abc.Sequence):
             CollectionList([<0, 1>, <4>, <7>])
 
         """
-        sequence = classes.Sequence(items=self)
+        sequence = _sequence.Sequence(items=self)
         collections = sequence.retain(indices=indices, period=period)
         return abjad.new(self, collections=collections)
 
@@ -4005,7 +4006,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
         Returns sequence.
         """
-        return classes.Sequence(self)
+        return _sequence.Sequence(self)
 
     def space_down(self, bass=None, semitones=None, soprano=None):
         r"""
@@ -7987,7 +7988,7 @@ class ZaggedPitchClassMaker:
 
         Returns pitch-class tree.
         """
-        pc_cells = classes.Sequence(self.pc_cells)
+        pc_cells = _sequence.Sequence(self.pc_cells)
         pc_cells = pc_cells.helianthate(-1, 1)
         prototype = (tuple, abjad.Ratio)
         if self.division_ratios is None:
@@ -7995,7 +7996,7 @@ class ZaggedPitchClassMaker:
         elif all(isinstance(_, prototype) for _ in self.division_ratios):
             division_ratios = self.division_ratios
         elif all(isinstance(_, list) for _ in self.division_ratios):
-            division_ratios = classes.Sequence(self.division_ratios)
+            division_ratios = _sequence.Sequence(self.division_ratios)
             division_ratios = division_ratios.helianthate(-1, 1)
             division_ratios = division_ratios.flatten(depth=1)
         division_ratios = [abjad.Ratio(_) for _ in division_ratios]
@@ -8003,17 +8004,17 @@ class ZaggedPitchClassMaker:
         pc_cells_copy = pc_cells[:]
         pc_cells = []
         for i, pc_segment in enumerate(pc_cells_copy):
-            parts = classes.Sequence(pc_segment).partition_by_ratio_of_lengths(
+            parts = _sequence.Sequence(pc_segment).partition_by_ratio_of_lengths(
                 division_ratios[i]
             )
             pc_cells.extend(parts)
         grouping_counts = self.grouping_counts or [1]
-        pc_cells = classes.Sequence(pc_cells).partition_by_counts(
+        pc_cells = _sequence.Sequence(pc_cells).partition_by_counts(
             grouping_counts, cyclic=True, overhang=True
         )
         # this block was uncommented during krummzeit
         # pc_cells = [abjad.join_subsequences(x) for x in pc_cells]
-        # pc_cells = classes.Sequence(pc_cells).partition_by_counts(
+        # pc_cells = _sequence.Sequence(pc_cells).partition_by_counts(
         #    grouping_counts,
         #    cyclic=True,
         #    overhang=True,

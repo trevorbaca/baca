@@ -7,7 +7,7 @@ import typing
 
 import abjad
 
-from . import classes
+from . import sequence as _sequence
 
 ### CLASSES ###
 
@@ -326,7 +326,7 @@ class PitchArray:
         Returns tuple.
         """
         columns = []
-        cells = classes.Sequence(self.rows).zip(truncate=False)
+        cells = _sequence.Sequence(self.rows).zip(truncate=False)
         for i, cells in enumerate(cells):
             column = PitchArrayColumn(cells)
             column._parent_array = self
@@ -396,7 +396,7 @@ class PitchArray:
 
         Returns tuple.
         """
-        return classes.Sequence(self.pitches_by_row).flatten(depth=-1)
+        return _sequence.Sequence(self.pitches_by_row).flatten(depth=-1)
 
     @property
     def pitches_by_row(self):
@@ -715,7 +715,7 @@ class PitchArray:
             parts = abjad.mutate.split(items, durations, cyclic=False)
             part_lengths = [len(part) for part in parts]
             cells = pitch_array_row.cells
-            grouped_cells = classes.Sequence(cells).partition_by_counts(
+            grouped_cells = _sequence.Sequence(cells).partition_by_counts(
                 part_lengths, cyclic=False, overhang=False
             )
             for group in grouped_cells:

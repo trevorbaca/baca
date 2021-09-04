@@ -9,6 +9,7 @@ import abjad
 from abjadext import rmakers
 
 from . import classes, commandclasses, const, pitchclasses, rhythmcommands
+from . import sequence as _sequence
 from . import tags as _tags
 
 ### CLASSES ###
@@ -2007,9 +2008,9 @@ class Imbrication:
         container = copy.deepcopy(container)
         abjad.override(container).TupletBracket.stencil = False
         abjad.override(container).TupletNumber.stencil = False
-        segment = classes.Sequence(self.segment).flatten(depth=-1)
+        segment = _sequence.Sequence(self.segment).flatten(depth=-1)
         if self.by_pitch_class:
-            segment = classes.Sequence([abjad.NumberedPitchClass(_) for _ in segment])
+            segment = _sequence.Sequence([abjad.NumberedPitchClass(_) for _ in segment])
         cursor = classes.Cursor(
             singletons=True, source=segment, suppress_exception=True
         )

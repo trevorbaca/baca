@@ -8,6 +8,7 @@ import abjad
 from abjadext import rmakers
 
 from . import classes, const, overrides, scoping
+from . import sequence as _sequence
 from . import tags as _tags
 from . import typings
 
@@ -883,7 +884,7 @@ def make_fused_tuplet_monads(
             rmakers.trivialize(),
             rmakers.extract_trivial(),
             rmakers.force_repeat_tie(),
-            preprocessor=lambda _: classes.Sequence([classes.Sequence(_).sum()]),
+            preprocessor=lambda _: _sequence.Sequence([_sequence.Sequence(_).sum()]),
             tag=_site(inspect.currentframe()),
         ),
         annotation_spanner_color="#darkcyan",
@@ -1252,7 +1253,7 @@ def make_repeated_duration_notes(
         durations = [abjad.Duration(durations)]
 
     def preprocessor(divisions):
-        divisions = classes.Sequence(divisions)
+        divisions = _sequence.Sequence(divisions)
         divisions = divisions.fuse()
         divisions = divisions.split_divisions(durations, cyclic=True)
         return divisions
@@ -1368,7 +1369,7 @@ def make_tied_repeated_durations(
     specifiers.append(tie_specifier)
 
     def preprocessor(divisions):
-        divisions = classes.Sequence(divisions)
+        divisions = _sequence.Sequence(divisions)
         divisions = divisions.fuse()
         divisions = divisions.split_divisions(durations, cyclic=True)
         return divisions

@@ -6,8 +6,6 @@ import math
 
 import abjad
 
-from .classes import Sequence
-
 
 def increase_elements(sequence, addenda, indices=None):
     """
@@ -69,7 +67,7 @@ def increase_elements(sequence, addenda, indices=None):
     else:
         # assert no overlaps
         tmp = [tuple(range(i, len(addenda))) for i in indices]
-        tmp = Sequence(tmp).flatten()
+        tmp = abjad.Sequence(tmp).flatten()
         assert len(tmp) == len(set(tmp))
         result = sequence[:]
         for i in indices:
@@ -481,7 +479,7 @@ def partition_nested_into_inward_pointing_parts(list_, target="negative"):
             # 5 in middle
             if 5 in new:
                 new = [(4, 1) if element == 5 else element for element in new]
-                new = Sequence(new).flatten()
+                new = abjad.Sequence(new).flatten()
                 new = list(new)
             result.append(new)
     return result

@@ -7,6 +7,7 @@ import typing
 import abjad
 
 from . import classes, commandclasses, const, scoping
+from . import sequence as _sequence
 from . import tags as _tags
 from . import typings
 
@@ -4343,7 +4344,7 @@ def parse_hairpin_descriptor(
             bundle = Bundle(indicator=indicators[0])
         bundles.append(bundle)
         return bundles
-    for left, right in classes.Sequence(indicators).nwise():
+    for left, right in _sequence.Sequence(indicators).nwise():
         if isinstance(left, abjad.StartHairpin) and isinstance(
             right, abjad.StartHairpin
         ):
