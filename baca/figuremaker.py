@@ -9,6 +9,7 @@ import abjad
 from abjadext import rmakers
 
 from . import classes, commandclasses, const, pitchclasses, rhythmcommands
+from . import selection as _selection
 from . import sequence as _sequence
 from . import tags as _tags
 
@@ -2081,7 +2082,7 @@ class Imbrication:
         self._call_commands(container)
         selection = abjad.select(container)
         if not self.hocket:
-            pleaves = classes.Selection(container).pleaves()
+            pleaves = _selection.Selection(container).pleaves()
             assert isinstance(pleaves, abjad.Selection)
             for pleaf in pleaves:
                 abjad.attach(const.ALLOW_OCTAVE, pleaf)
@@ -3766,7 +3767,7 @@ class Accumulator:
         if remote_selector is None:
 
             def remote_selector(argument):
-                return classes.Selection(argument).leaf(0)
+                return _selection.Selection(argument).leaf(0)
 
         floating_selections = self._floating_selections[remote_voice_name]
         selections = [_.annotation for _ in floating_selections]
@@ -8321,7 +8322,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
 
 def extend_beam(
-    selector=lambda _: classes.Selection(_).leaf(-1),
+    selector=lambda _: _selection.Selection(_).leaf(-1),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches RIGHT_BROKEN_BEAM to selector output.
@@ -11232,7 +11233,7 @@ def resume_after(remote_voice_name) -> Anchor:
     Resumes music after remote selection.
     """
     return Anchor(
-        remote_selector=lambda _: classes.Selection(_).leaf(-1),
+        remote_selector=lambda _: _selection.Selection(_).leaf(-1),
         remote_voice_name=remote_voice_name,
         use_remote_stop_offset=True,
     )

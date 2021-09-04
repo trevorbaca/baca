@@ -6,9 +6,10 @@ import typing
 
 import abjad
 
-from . import classes, const, indicators
+from . import const, indicators
 from . import parts as _parts
 from . import scoping
+from . import selection as _selection
 from . import sequence as _sequence
 from . import tags as _tags
 from . import typings
@@ -84,8 +85,8 @@ class BCPCommand(scoping.Command):
         if self.helper:
             bcps_ = self.helper(bcps_, argument)
         bcps = abjad.CyclicTuple(bcps_)
-        lts = classes.Selection(argument).lts()
-        assert isinstance(lts, classes.Selection)
+        lts = _selection.Selection(argument).lts()
+        assert isinstance(lts, _selection.Selection)
         add_right_text_to_me = None
         if not self.final_spanner:
             rest_count, nonrest_count = 0, 0
@@ -877,7 +878,7 @@ class ColorCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
-        selector=lambda _: classes.Selection(_).leaves(),
+        selector=lambda _: _selection.Selection(_).leaves(),
     ) -> None:
         assert selector is not None
         scoping.Command.__init__(
@@ -1057,7 +1058,7 @@ class ContainerCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
-        selector=lambda _: classes.Selection(_).leaves(),
+        selector=lambda _: _selection.Selection(_).leaves(),
     ) -> None:
         scoping.Command.__init__(
             self,
@@ -1091,7 +1092,7 @@ class ContainerCommand(scoping.Command):
         else:
             identifier = f"%*% {self.identifier}"
         container = abjad.Container(identifier=identifier)
-        components = classes.Selection(argument).leaves().top()
+        components = _selection.Selection(argument).leaves().top()
         abjad.mutate.wrap(components, container)
 
     ### PRIVATE METHODS ###
@@ -1156,7 +1157,7 @@ class DetachCommand(scoping.Command):
             return
         assert self.selector is not None
         argument = self.selector(argument)
-        leaves = classes.Selection(argument).leaves()
+        leaves = _selection.Selection(argument).leaves()
         assert isinstance(leaves, abjad.Selection)
         for leaf in leaves:
             for argument in self.arguments:
@@ -1210,7 +1211,7 @@ class GlissandoCommand(scoping.Command):
         right_broken: bool = None,
         right_broken_show_next: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector=lambda _: classes.Selection(_).tleaves(),
+        selector=lambda _: _selection.Selection(_).tleaves(),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
         zero_padding: bool = None,
@@ -1247,7 +1248,7 @@ class GlissandoCommand(scoping.Command):
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        leaves = classes.Selection(argument).leaves()
+        leaves = _selection.Selection(argument).leaves()
         tweaks_: typing.List[abjad.IndexedTweakManager] = []
         prototype = (abjad.TweakInterface, tuple)
         for tweak in self.tweaks or []:
@@ -1375,7 +1376,7 @@ class GlobalFermataCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
-        selector=lambda _: classes.Selection(_).leaf(0),
+        selector=lambda _: _selection.Selection(_).leaf(0),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
     ) -> None:
         scoping.Command.__init__(
@@ -1484,7 +1485,7 @@ class IndicatorCommand(scoping.Command):
         predicate: typing.Callable = None,
         redundant: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector=lambda _: classes.Selection(_).pheads(),
+        selector=lambda _: _selection.Selection(_).pheads(),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
     ) -> None:
@@ -1537,7 +1538,7 @@ class IndicatorCommand(scoping.Command):
             argument = self.selector(argument)
         if not argument:
             return
-        leaves = classes.Selection(argument).leaves()
+        leaves = _selection.Selection(argument).leaves()
         for i, leaf in enumerate(leaves):
             if self.predicate and not self.predicate(leaf):
                 continue
@@ -1670,7 +1671,7 @@ class LabelCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
-        selector=lambda _: classes.Selection(_).leaves(),
+        selector=lambda _: _selection.Selection(_).leaves(),
     ) -> None:
         scoping.Command.__init__(
             self,
@@ -1729,7 +1730,7 @@ class MetronomeMarkCommand(scoping.Command):
         measures: typings.SliceTyping = None,
         redundant: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector=lambda _: classes.Selection(_).leaf(0),
+        selector=lambda _: _selection.Selection(_).leaf(0),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
     ) -> None:
         scoping.Command.__init__(
@@ -1775,7 +1776,7 @@ class MetronomeMarkCommand(scoping.Command):
             argument = self.selector(argument)
         if not argument:
             return
-        leaf = classes.Selection(argument).leaf(0)
+        leaf = _selection.Selection(argument).leaf(0)
         reapplied = self._remove_reapplied_wrappers(leaf, indicator)
         wrapper = abjad.attach(
             indicator,
@@ -1829,7 +1830,7 @@ class PartAssignmentCommand(scoping.Command):
         measures: typings.SliceTyping = None,
         part_assignment: _parts.PartAssignment = None,
         scope: scoping.ScopeTyping = None,
-        selector=lambda _: classes.Selection(_).leaves(),
+        selector=lambda _: _selection.Selection(_).leaves(),
     ) -> None:
         scoping.Command.__init__(
             self,
@@ -1871,7 +1872,7 @@ class PartAssignmentCommand(scoping.Command):
                 raise Exception(message)
         identifier = f"%*% {self.part_assignment!s}"
         container = abjad.Container(identifier=identifier)
-        components = classes.Selection(argument).leaves().top()
+        components = _selection.Selection(argument).leaves().top()
         abjad.mutate.wrap(components, container)
 
     ### PRIVATE METHODS ###

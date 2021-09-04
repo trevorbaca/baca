@@ -38,9 +38,9 @@ import collections
 
 import abjad
 
-from . import classes as _classes
 from . import commandclasses as _commandclasses
 from . import indicators as _indicators
+from . import selection as _selection
 from . import selectors as _selectors
 from . import sequence as _sequence
 from . import tags as _tags
@@ -78,7 +78,7 @@ class SpacingSpecifier:
         if self.fallback_duration is None:
             return
         page_layout_profile = segment_maker._page_layout_profile or {}
-        skips = _classes.Selection(segment_maker.score["Global_Skips"]).skips()
+        skips = _selection.Selection(segment_maker.score["Global_Skips"]).skips()
         measure_count = page_layout_profile.get("measure_count") or len(skips)
         fermata_measure_numbers = page_layout_profile.get("fermata_measure_numbers", [])
         eol_measure_numbers = page_layout_profile.get("eol_measure_numbers", [])

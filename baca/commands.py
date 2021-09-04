@@ -7,10 +7,11 @@ import typing
 
 import abjad
 
-from . import classes, commandclasses, const, indicatorcommands, indicators, overrides
+from . import commandclasses, const, indicatorcommands, indicators, overrides
 from . import parts as _parts
 from . import path as _path
 from . import pitchcommands, scoping
+from . import selection as _selection
 from . import tags as _tags
 from . import typings
 
@@ -24,7 +25,7 @@ def _site(frame, n=None):
 
 
 def allow_octaves(
-    *, selector=lambda _: classes.Selection(_).leaves()
+    *, selector=lambda _: _selection.Selection(_).leaves()
 ) -> commandclasses.IndicatorCommand:
     """
     Attaches ALLOW_OCTAVE constant.
@@ -37,7 +38,7 @@ def allow_octaves(
 def assign_parts(
     part_assignment: _parts.PartAssignment,
     *,
-    selector=lambda _: classes.Selection(_).leaves(),
+    selector=lambda _: _selection.Selection(_).leaves(),
 ) -> commandclasses.PartAssignmentCommand:
     r"""
     Inserts ``selector`` output in container and sets part assignment.
@@ -349,7 +350,7 @@ def bcps(
     bow_change_tweaks: abjad.IndexedTweakManagers = None,
     final_spanner: bool = None,
     helper: typing.Callable = None,
-    selector=lambda _: classes.Selection(_).leaves(),
+    selector=lambda _: _selection.Selection(_).leaves(),
 ) -> commandclasses.BCPCommand:
     r"""
     Makes bow contact point command.
@@ -603,7 +604,7 @@ def bcps(
 
 
 def close_volta(
-    selector=lambda _: classes.Selection(_).leaf(0),
+    selector=lambda _: _selection.Selection(_).leaf(0),
     *,
     format_slot: str = "before",
 ) -> scoping.Suite:
@@ -620,7 +621,7 @@ def close_volta(
 
 
 def color(
-    selector=lambda _: classes.Selection(_).leaves(),
+    selector=lambda _: _selection.Selection(_).leaves(),
     lone=False,
 ) -> commandclasses.ColorCommand:
     r"""
@@ -791,7 +792,7 @@ def color(
 def container(
     identifier: str = None,
     *,
-    selector=lambda _: classes.Selection(_).leaves(),
+    selector=lambda _: _selection.Selection(_).leaves(),
 ) -> commandclasses.ContainerCommand:
     r"""
     Makes container with ``identifier`` and extends container with
@@ -940,7 +941,7 @@ def container(
 
 
 def cross_staff(
-    *, selector=lambda _: classes.Selection(_).phead(0)
+    *, selector=lambda _: _selection.Selection(_).phead(0)
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches cross-staff command.
@@ -1293,7 +1294,7 @@ def cross_staff(
 
 
 def double_volta(
-    selector=lambda _: classes.Selection(_).leaf(0),
+    selector=lambda _: _selection.Selection(_).leaf(0),
 ) -> scoping.Suite:
     """
     Attaches bar line and overrides bar line X-extent.
@@ -1306,7 +1307,7 @@ def double_volta(
 
 
 def dynamic_down(
-    *, selector=lambda _: classes.Selection(_).leaf(0)
+    *, selector=lambda _: _selection.Selection(_).leaf(0)
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches dynamic-down command.
@@ -1398,7 +1399,7 @@ def dynamic_down(
 
 
 def dynamic_up(
-    *, selector=lambda _: classes.Selection(_).leaf(0)
+    *, selector=lambda _: _selection.Selection(_).leaf(0)
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches dynamic-up command.
@@ -1509,7 +1510,7 @@ def edition(
 
 def finger_pressure_transition(
     *,
-    selector=lambda _: classes.Selection(_).tleaves(),
+    selector=lambda _: _selection.Selection(_).tleaves(),
     right_broken: bool = None,
 ) -> commandclasses.GlissandoCommand:
     r"""
@@ -1696,7 +1697,7 @@ def flat_glissando(
     right_broken: bool = None,
     right_broken_show_next: bool = None,
     rleak: bool = None,
-    selector=lambda _: classes.Selection(_).pleaves(),
+    selector=lambda _: _selection.Selection(_).pleaves(),
     stop_pitch: typing.Union[str, abjad.NamedPitch, abjad.StaffPosition] = None,
 ) -> scoping.Suite:
     """
@@ -1792,7 +1793,7 @@ def glissando(
     map: abjad.Expression = None,
     right_broken: bool = None,
     right_broken_show_next: bool = None,
-    selector=lambda _: classes.Selection(_).tleaves(),
+    selector=lambda _: _selection.Selection(_).tleaves(),
     style: str = None,
     zero_padding: bool = None,
 ) -> commandclasses.GlissandoCommand:
@@ -2513,7 +2514,7 @@ def glissando(
 
 def global_fermata(
     description: str = "fermata",
-    selector=lambda _: classes.Selection(_).leaf(0),
+    selector=lambda _: _selection.Selection(_).leaf(0),
 ) -> commandclasses.GlobalFermataCommand:
     """
     Attaches global fermata.
@@ -2532,7 +2533,7 @@ def global_fermata(
 
 def instrument(
     instrument: abjad.Instrument,
-    selector=lambda _: classes.Selection(_).leaf(0),
+    selector=lambda _: _selection.Selection(_).leaf(0),
 ) -> commandclasses.InstrumentChangeCommand:
     """
     Makes instrument change command.
@@ -2548,7 +2549,7 @@ def instrument(
 
 
 def invisible_music(
-    selector=lambda _: classes.Selection(_).leaf(0),
+    selector=lambda _: _selection.Selection(_).leaf(0),
     *,
     map: abjad.Expression = None,
 ) -> scoping.Suite:
@@ -2720,7 +2721,7 @@ def invisible_music(
 
 def label(
     callable_,
-    selector=lambda _: classes.Selection(_).leaves(),
+    selector=lambda _: _selection.Selection(_).leaves(),
 ) -> commandclasses.LabelCommand:
     r"""
     Applies label ``callable_`` to ``selector`` output.
@@ -2820,7 +2821,7 @@ def markup(
     map: abjad.Expression = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    selector=lambda _: classes.Selection(_).pleaf(0),
+    selector=lambda _: _selection.Selection(_).pleaf(0),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Makes markup and inserts into indicator command.
@@ -3019,7 +3020,7 @@ def markup(
         raise Exception(message)
 
     def select_phead_0(argument):
-        return classes.Selection(argument).phead(0)
+        return _selection.Selection(argument).phead(0)
 
     selector = selector or select_phead_0
     return commandclasses.IndicatorCommand(
@@ -3035,7 +3036,7 @@ def markup(
 
 def metronome_mark(
     key: typing.Union[str, indicators.Accelerando, indicators.Ritardando],
-    selector=lambda _: classes.Selection(_).leaf(0),
+    selector=lambda _: _selection.Selection(_).leaf(0),
     *,
     redundant: bool = None,
 ) -> typing.Optional[commandclasses.MetronomeMarkCommand]:
@@ -3050,7 +3051,7 @@ def metronome_mark(
 
 
 def one_voice(
-    selector=lambda _: classes.Selection(_).leaf(0),
+    selector=lambda _: _selection.Selection(_).leaf(0),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Makes LilyPond ``\oneVoice`` command.
@@ -3064,7 +3065,7 @@ def one_voice(
 
 
 def open_volta(
-    selector=lambda _: classes.Selection(_).leaf(0),
+    selector=lambda _: _selection.Selection(_).leaf(0),
 ) -> scoping.Suite:
     """
     Attaches bar line and overrides bar line X-extent.
@@ -3107,7 +3108,7 @@ def untie(selector: abjad.Expression) -> commandclasses.DetachCommand:
 
 
 def voice_four(
-    selector=lambda _: classes.Selection(_).leaf(0),
+    selector=lambda _: _selection.Selection(_).leaf(0),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Makes LilyPond ``\voiceFour`` command.
@@ -3121,7 +3122,7 @@ def voice_four(
 
 
 def voice_one(
-    selector=lambda _: classes.Selection(_).leaf(0),
+    selector=lambda _: _selection.Selection(_).leaf(0),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Makes LilyPond ``\voiceOne`` command.
@@ -3135,7 +3136,7 @@ def voice_one(
 
 
 def voice_three(
-    selector=lambda _: classes.Selection(_).leaf(0),
+    selector=lambda _: _selection.Selection(_).leaf(0),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Makes LilyPond ``\voiceThree`` command.
@@ -3149,7 +3150,7 @@ def voice_three(
 
 
 def voice_two(
-    selector=lambda _: classes.Selection(_).leaf(0),
+    selector=lambda _: _selection.Selection(_).leaf(0),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Makes LilyPond ``\voiceTwo`` command.
