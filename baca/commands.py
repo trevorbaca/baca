@@ -1691,7 +1691,7 @@ def flat_glissando(
     do_not_hide_middle_note_heads: bool = None,
     mock: bool = None,
     hide_middle_stems: bool = None,
-    hide_stem_selector: abjad.Expression = None,
+    hide_stem_selector: typing.Callable = None,
     left_broken: bool = None,
     right_broken: bool = None,
     right_broken_show_next: bool = None,
@@ -1787,7 +1787,7 @@ def glissando(
     allow_ties: bool = None,
     hide_middle_note_heads: bool = None,
     hide_middle_stems: bool = None,
-    hide_stem_selector: abjad.Expression = None,
+    hide_stem_selector: typing.Callable = None,
     left_broken: bool = None,
     map: abjad.Expression = None,
     right_broken: bool = None,
@@ -2719,11 +2719,11 @@ def invisible_music(
 
 
 def label(
-    expression: abjad.Expression,
+    callable_,
     selector=lambda _: classes.Selection(_).leaves(),
 ) -> commandclasses.LabelCommand:
     r"""
-    Labels ``selector`` output with label ``expression``.
+    Applies label ``callable_`` to ``selector`` output.
 
     ..  container:: example
 
@@ -2808,7 +2808,7 @@ def label(
             >>
 
     """
-    return commandclasses.LabelCommand(expression=expression, selector=selector)
+    return commandclasses.LabelCommand(callable_=callable_, selector=selector)
 
 
 def markup(

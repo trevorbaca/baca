@@ -3,7 +3,6 @@ Pitch classes.
 """
 import collections as collections_module
 import copy
-import inspect
 import math
 import typing
 
@@ -962,7 +961,7 @@ class CollectionList(collections_module.abc.Sequence):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = ("_collections", "_expression", "_item_class")
+    __slots__ = ("_collections", "_item_class")
 
     _item_class_prototype = (
         abjad.NumberedPitch,
@@ -974,7 +973,6 @@ class CollectionList(collections_module.abc.Sequence):
     ### INITIALIZER ###
 
     def __init__(self, collections=None, *, item_class=None):
-        self._expression = None
         if item_class is not None:
             if item_class not in self._item_class_prototype:
                 raise TypeError(f"only pitch or pitch-class: {item_class!r}.")
@@ -1211,8 +1209,6 @@ class CollectionList(collections_module.abc.Sequence):
         collections = self.collections or []
         collections_ = ", ".join([str(_) for _ in collections])
         string = f"{type(self).__name__}([{collections_}])"
-        if self._expression:
-            string = "*" + string
         return string
 
     ### PRIVATE METHODS ###
@@ -3227,8 +3223,6 @@ class PitchClassSegment(abjad.PitchClassSegment):
             True
 
         """
-        if self._expression:
-            return self._update_expression(inspect.currentframe())
         numbers = []
         for pc in self:
             pc = abs(float(pc.number))
@@ -6383,15 +6377,6 @@ class PitchTree(classes.Tree):
         else:
             assert node._payload is not None
             note = abjad.Note(node._payload, abjad.Duration(1, 8))
-            if node._is_leftmost_leaf():
-                for parent in node._get_parentage():
-                    if parent._expression is not None:
-                        node_markup = parent._expression.get_markup()
-                        if node_markup is not None:
-                            node_markup = abjad.new(
-                                node_markup, direction=markup_direction
-                            )
-                            abjad.attach(node_markup, note)
             voice.append(note)
             if node._is_rightmost_leaf():
                 if after_cell_spacing:

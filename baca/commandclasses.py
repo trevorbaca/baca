@@ -1200,7 +1200,7 @@ class GlissandoCommand(scoping.Command):
         allow_ties: bool = None,
         hide_middle_note_heads: bool = None,
         hide_middle_stems: bool = None,
-        hide_stem_selector: abjad.Expression = None,
+        hide_stem_selector: typing.Callable = None,
         left_broken: bool = None,
         map: abjad.Expression = None,
         match: typings.Indices = None,
@@ -1299,7 +1299,7 @@ class GlissandoCommand(scoping.Command):
         return self._hide_middle_stems
 
     @property
-    def hide_stem_selector(self) -> typing.Optional[abjad.Expression]:
+    def hide_stem_selector(self) -> typing.Optional[typing.Callable]:
         """
         Gets hide-stem selector.
         """
@@ -1657,14 +1657,14 @@ class LabelCommand(scoping.Command):
 
     ### CLASS VARIABLES ##
 
-    __slots__ = ("_expression",)
+    __slots__ = ("_callable",)
 
     ### INITIALIZER ###
 
     def __init__(
         self,
         *,
-        expression=None,
+        callable_=None,
         map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
@@ -1679,7 +1679,7 @@ class LabelCommand(scoping.Command):
             scope=scope,
             selector=selector,
         )
-        self._expression = expression
+        self._callable = callable_
 
     ### SPECIAL METHODS ###
 
@@ -1691,20 +1691,20 @@ class LabelCommand(scoping.Command):
         """
         if argument is None:
             return
-        if self.expression is None:
+        if self.callable_ is None:
             return
         if self.selector:
             argument = self.selector(argument)
-        self.expression(argument)
+        self.callable_(argument)
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def expression(self) -> typing.Optional[abjad.Expression]:
+    def callable_(self):
         """
-        Gets expression.
+        Gets callable.
         """
-        return self._expression
+        return self._callable
 
 
 class MetronomeMarkCommand(scoping.Command):

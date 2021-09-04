@@ -8686,7 +8686,6 @@ class Tree:
         "_children",
         "_item_class",
         "_items",
-        "_equivalence_markup",
         "_expression",
         "_parent",
         "_payload",
@@ -9377,10 +9376,8 @@ class Tree:
         children = []
         for item in items:
             expression = getattr(item, "_expression", None)
-            equivalence_markup = getattr(item, "_equivalence_markup", None)
             child = type(self)(items=item, item_class=self.item_class)
             child._expression = expression
-            child._equivalence_markup = equivalence_markup
             child._parent = self
             children.append(child)
         self._children = children
