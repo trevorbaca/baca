@@ -2940,7 +2940,7 @@ class HarmonicSeries:
         abjad.override(staff).TimeSignature.stencil = False
         score = abjad.Score([staff])
         abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 8)"
-        lilypond_file = abjad.LilyPondFile(items=[score])
+        lilypond_file = abjad.LilyPondFile([score])
         return lilypond_file
 
     ### PUBLIC PROPERTIES ###

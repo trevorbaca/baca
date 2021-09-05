@@ -212,7 +212,7 @@ def _make_segment_clicktrack(maker):
     score_block.items.append(score)
     midi_block = abjad.Block(name="midi")
     score_block.items.append(midi_block)
-    lilypond_file = abjad.LilyPondFile(items=[score_block])
+    lilypond_file = abjad.LilyPondFile([score_block])
     clicktrack_file_name = "clicktrack.midi"
     print("Persisting LilyPond file ...")
     with abjad.Timer() as timer:
