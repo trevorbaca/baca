@@ -61,6 +61,7 @@ Constellation.
                         \tweak color #green
                         cs''''
                     >4
+                    ^ \markup { 1-80 }
                 }
                 \context Staff = "Bass_Staff"
                 {
@@ -144,7 +145,9 @@ Constellation.
                         \tweak color #green
                         cs''''
                     >4
+                    ^ \markup { 1-80 }
                     <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                    ^ \markup { 1-80 }
                 }
                 \context Staff = "Bass_Staff"
                 {
@@ -197,6 +200,7 @@ Constellation.
                 {
                     \clef "treble"
                     <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                    ^ \markup { 1-80 }
                 }
                 \context Staff = "Bass_Staff"
                 {
@@ -241,7 +245,9 @@ Constellation.
                 {
                     \clef "treble"
                     <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                    ^ \markup { 1-80 }
                     <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                    ^ \markup { 1-80 }
                 }
                 \context Staff = "Bass_Staff"
                 {
@@ -284,6 +290,7 @@ Constellation.
                 {
                     \clef "treble"
                     <e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                    ^ \markup { 1-80 }
                 }
                 \context Staff = "Bass_Staff"
                 {
@@ -1383,7 +1390,7 @@ class Constellation:
         sequences = abjad.enumerate.outer_product(transpositions)
         sets = []
         for sequence in sequences:
-            numbers = abjad.Sequence(sequence).flatten().sort()
+            numbers = abjad.Sequence(sequence).flatten()
             set_ = abjad.PitchSet(numbers)
             sets.append(set_)
         return sets
@@ -1535,7 +1542,7 @@ class Circuit:
         """
         Finds pivot from ``constellation_a`` to ``constellation_b``.
         """
-        b_generator = abjad.Sequence(constellation_b.generator).flatten().sort()
+        b_generator = abjad.Sequence(constellation_b.generator).flatten()
         b_generator = abjad.PitchSet(b_generator)
         for set_ in constellation_a:
             if set_ == b_generator:
