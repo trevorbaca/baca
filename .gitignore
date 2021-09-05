@@ -3,17 +3,17 @@
 
 # Distribution / packaging
 .Python
-env/
-develop-eggs/
-dist/
-downloads/
-eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-*.egg-info/
+env
+develop-eggs
+dist
+downloads
+eggs
+lib
+lib64
+parts
+sdist
+var
+*.egg-info
 .installed.cfg
 *.egg
 
@@ -27,42 +27,40 @@ pip-delete-this-directory.txt
 # mypy
 .mypy_cache
 
-# OS X
+# macOS
 .DS_Store
 
 # PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
 
 # Pytest
 .pytest_cache
-htmlcov/
+htmlcov
 
 # Python
 *.py[cod]
-__pycache__/
+__pycache__
 
 # Sphinx documentation
-docs/build/
-docs/source/api/
+*/docs/build
+docs/source/api
 
 # Translations
 *.mo
 *.pot
 
 # Unit test / coverage reports
-htmlcov/
-.tox/
+htmlcov
+.tox
 .coverage
 .cache
 nosetests.xml
 coverage.xml
 
 # Virtual Environments
-venv/
-Envs/
-ENV/
+venv
+Envs
+ENV
 .virtualenvs
 .python-version
