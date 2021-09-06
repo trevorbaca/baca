@@ -1020,7 +1020,11 @@ class SpacingSection:
 
         >>> staff = abjad.Staff("c'4 d' e' f'")
         >>> abjad.attach(baca.SpacingSection((2, 24)), staff[0])
-        >>> abjad.show(staff) # doctest: +SKIP
+        >>> lilypond_file = abjad.LilyPondFile(
+        ...     [staff],
+        ...     includes=["baca.ily"],
+        ...  )
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 

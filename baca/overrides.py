@@ -5614,7 +5614,10 @@ def text_spanner_staff_padding(
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     selection,
+        ...     includes=["baca.ily", "rhythm-maker-docs.ily"],
+        ...  )
         >>> abjad.illustrators.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
