@@ -68,7 +68,7 @@ class Stack:
 
     def __hash__(self) -> int:
         """
-        Delegates to format manager.
+        Hashes stack.
         """
         hash_values = abjad.StorageFormatManager(self).get_hash_values()
         try:
@@ -237,14 +237,9 @@ class LMR:
 
     def __hash__(self) -> int:
         """
-        Delegates to format manager.
+        Hashes LMR.
         """
-        hash_values = abjad.StorageFormatManager(self).get_hash_values()
-        try:
-            result = hash(hash_values)
-        except TypeError:
-            raise TypeError(f"unhashable type: {self}")
-        return result
+        return hash(self.__class__.__name__ + str(self))
 
     def __repr__(self) -> str:
         """
@@ -1012,14 +1007,9 @@ class Acciaccatura:
 
     def __hash__(self) -> int:
         """
-        Delegates to format manager.
+        Hashes acciaccatura.
         """
-        hash_values = abjad.StorageFormatManager(self).get_hash_values()
-        try:
-            result = hash(hash_values)
-        except TypeError:
-            raise TypeError(f"unhashable type: {self}")
-        return result
+        return hash(self.__class__.__name__ + str(self))
 
     def __repr__(self) -> str:
         """
@@ -1862,7 +1852,7 @@ class Anchor:
 
     def __hash__(self) -> int:
         """
-        Delegates to format manager.
+        Hashes anchor.
         """
         hash_values = abjad.StorageFormatManager(self).get_hash_values()
         try:
@@ -4246,7 +4236,7 @@ class Nest:
 
     def __hash__(self) -> int:
         """
-        Delegates to format manager.
+        Hashes nest.
         """
         hash_values = abjad.StorageFormatManager(self).get_hash_values()
         try:
@@ -4381,14 +4371,9 @@ class RestAffix:
 
     def __hash__(self) -> int:
         """
-        Delegates to format manager.
+        Hashes rest affix.
         """
-        hash_values = abjad.StorageFormatManager(self).get_hash_values()
-        try:
-            result = hash(hash_values)
-        except TypeError:
-            raise TypeError(f"unhashable type: {self}")
-        return result
+        return hash(self.__class__.__name__ + str(self))
 
     def __repr__(self) -> str:
         """
@@ -5005,7 +4990,7 @@ class FigureMaker:
 
     def __hash__(self) -> int:
         """
-        Delegates to format manager.
+        Hashes figure-maker.
         """
         hash_values = abjad.StorageFormatManager(self).get_hash_values()
         try:
@@ -7554,7 +7539,7 @@ class Assignment:
 
     def __hash__(self) -> int:
         """
-        Delegates to format manager.
+        Hashes assignment.
         """
         hash_values = abjad.StorageFormatManager(self).get_hash_values()
         try:
@@ -7650,7 +7635,7 @@ class Bind:
 
     def __hash__(self) -> int:
         """
-        Delegates to format manager.
+        Hashes bind.
         """
         hash_values = abjad.StorageFormatManager(self).get_hash_values()
         try:

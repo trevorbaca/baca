@@ -113,14 +113,9 @@ class ArpeggiationSpacingSpecifier:
 
     def __hash__(self) -> int:
         """
-        Delegates to format manager.
+        Hashes arpeggiation spacing specifier.
         """
-        hash_values = abjad.StorageFormatManager(self).get_hash_values()
-        try:
-            result = hash(hash_values)
-        except TypeError:
-            raise TypeError(f"unhashable type: {self}")
-        return result
+        return hash(self.__class__.__name__ + str(self))
 
     def __repr__(self) -> str:
         """
@@ -381,14 +376,9 @@ class ChordalSpacingSpecifier:
 
     def __hash__(self) -> int:
         """
-        Delegates to format manager.
+        Hashes chordal spacing specifier.
         """
-        hash_values = abjad.StorageFormatManager(self).get_hash_values()
-        try:
-            result = hash(hash_values)
-        except TypeError:
-            raise TypeError(f"unhashable type: {self}")
-        return result
+        return hash(self.__class__.__name__ + str(self))
 
     def __repr__(self) -> str:
         """
@@ -7758,14 +7748,9 @@ class Registration:
 
     def __hash__(self) -> int:
         """
-        Delegates to format manager.
+        Hashes registration.
         """
-        hash_values = abjad.StorageFormatManager(self).get_hash_values()
-        try:
-            result = hash(hash_values)
-        except TypeError:
-            raise TypeError(f"unhashable type: {self}")
-        return result
+        return hash(self.__class__.__name__ + str(self))
 
     def __repr__(self) -> str:
         """
@@ -7849,14 +7834,9 @@ class RegistrationComponent:
 
     def __hash__(self):
         """
-        Delegates to format manager.
+        Hashes registration component.
         """
-        hash_values = abjad.StorageFormatManager(self).get_hash_values()
-        try:
-            result = hash(hash_values)
-        except TypeError:
-            raise TypeError(f"unhashable type: {self}")
-        return result
+        return hash(self.__class__.__name__ + str(self))
 
     def __repr__(self) -> str:
         """
@@ -8030,14 +8010,9 @@ class ZaggedPitchClassMaker:
 
     def __hash__(self):
         """
-        Delegates to format manager.
+        Hashes zagged pitch-class maker.
         """
-        hash_values = abjad.StorageFormatManager(self).get_hash_values()
-        try:
-            result = hash(hash_values)
-        except TypeError:
-            raise TypeError(f"unhashable type: {self}")
-        return result
+        return hash(self.__class__.__name__ + str(self))
 
     ### PUBLIC PROPERTIES ###
 

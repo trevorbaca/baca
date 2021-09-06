@@ -240,8 +240,6 @@ class Cursor:
         """
         Hashes cursor.
 
-        Required to be explicitly redefined on Python 3 if __eq__ changes.
-
         Returns integer.
         """
         return super().__hash__()
@@ -1007,8 +1005,6 @@ class PaddedTuple:
     def __hash__(self) -> int:
         """
         Hashes padded tuple.
-
-        Redefined in tandem with __eq__.
         """
         return super().__hash__()
 
@@ -1702,8 +1698,6 @@ class Tree:
     def __hash__(self):
         """
         Hashes tree.
-
-        Required to be explicitly redefined on Python 3 if __eq__ changes.
 
         Returns integer.
         """

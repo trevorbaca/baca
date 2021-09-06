@@ -137,12 +137,7 @@ class ScaleDegree:
 
         Returns integer.
         """
-        hash_values = abjad.StorageFormatManager(self).get_hash_values()
-        try:
-            result = hash(hash_values)
-        except TypeError:
-            raise TypeError(f"unhashable type: {self}")
-        return result
+        return hash(self.__class__.__name__ + str(self))
 
     def __repr__(self) -> str:
         """
@@ -759,12 +754,7 @@ class ChordExtent:
         """
         Hashes chord extent.
         """
-        hash_values = abjad.StorageFormatManager(self).get_hash_values()
-        try:
-            result = hash(hash_values)
-        except TypeError:
-            raise TypeError(f"unhashable type: {self}")
-        return result
+        return hash(self.__class__.__name__ + str(self))
 
     def __repr__(self) -> str:
         """
@@ -908,15 +898,8 @@ class ChordInversion:
     def __hash__(self) -> int:
         """
         Hashes chord inversion.
-
-        Required to be explicitly redefined on Python 3 if __eq__ changes.
         """
-        hash_values = abjad.StorageFormatManager(self).get_hash_values()
-        try:
-            result = hash(hash_values)
-        except TypeError:
-            raise TypeError(f"unhashable type: {self}")
-        return result
+        return hash(self.__class__.__name__ + str(self))
 
     def __repr__(self) -> str:
         """
@@ -1121,12 +1104,7 @@ class ChordQuality:
         """
         Hashes chord quality.
         """
-        hash_values = abjad.StorageFormatManager(self).get_hash_values()
-        try:
-            result = hash(hash_values)
-        except TypeError:
-            raise TypeError(f"unhashable type: {self}")
-        return result
+        return hash(self.__class__.__name__ + str(self))
 
     def __repr__(self) -> str:
         """
@@ -1275,12 +1253,7 @@ class ChordSuspension:
         """
         Hashes chord suspension.
         """
-        hash_values = abjad.StorageFormatManager(self).get_hash_values()
-        try:
-            result = hash(hash_values)
-        except TypeError:
-            raise TypeError(f"unhashable type: {self}")
-        return result
+        return hash(self.__class__.__name__ + str(self))
 
     def __repr__(self) -> str:
         """
@@ -1887,7 +1860,7 @@ class RootedChordClass(abjad.PitchClassSet):
         """
         Hashes rooted chord-class.
         """
-        return super(RootedChordClass, self).__hash__()
+        return super().__hash__()
 
     def __repr__(self) -> str:
         """
@@ -2377,12 +2350,7 @@ class RomanNumeral:
         """
         Hashes Roman numeral.
         """
-        hash_values = abjad.StorageFormatManager(self).get_hash_values()
-        try:
-            result = hash(hash_values)
-        except TypeError:
-            raise TypeError(f"unhashable type: {self}")
-        return result
+        return hash(self.__class__.__name__ + str(self))
 
     def __repr__(self) -> str:
         """

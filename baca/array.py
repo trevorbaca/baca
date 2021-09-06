@@ -158,7 +158,7 @@ class PitchArray:
 
     def __hash__(self):
         """
-        Delegates to format manager.
+        Hashes pitch array.
         """
         return super().__hash__()
 
@@ -1710,8 +1710,6 @@ class PitchArrayColumn:
         """
         Hashes pitch array column.
 
-        Required to be explicitly redefined on Python 3 if __eq__ changes.
-
         Returns integer.
         """
         return super().__hash__()
@@ -2438,8 +2436,6 @@ class PitchArrayRow:
     def __hash__(self):
         """
         Hashes pitch array row.
-
-        Required to be explicitly redefined on Python 3 if __eq__ changes.
 
         Returns integer.
         """

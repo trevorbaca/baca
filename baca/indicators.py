@@ -86,14 +86,9 @@ class Accelerando:
 
     def __hash__(self) -> int:
         """
-        Delegates to format manager.
+        Hashes accelerando.
         """
-        hash_values = abjad.StorageFormatManager(self).get_hash_values()
-        try:
-            result = hash(hash_values)
-        except TypeError:
-            raise TypeError(f"unhashable type: {self}")
-        return result
+        return hash(self.__class__.__name__ + str(self))
 
     def __repr__(self) -> str:
         """
@@ -624,14 +619,9 @@ class Ritardando:
 
     def __hash__(self) -> int:
         """
-        Delegates to format manager.
+        Hashes ritardando.
         """
-        hash_values = abjad.StorageFormatManager(self).get_hash_values()
-        try:
-            result = hash(hash_values)
-        except TypeError:
-            raise TypeError(f"unhashable type: {self}")
-        return result
+        return hash(self.__class__.__name__ + str(self))
 
     def __repr__(self) -> str:
         """
@@ -1098,7 +1088,7 @@ class SpacingSection:
 
     def __hash__(self):
         """
-        Delegates to format manager.
+        Hashes spacing section.
         """
         return super().__hash__()
 
