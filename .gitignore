@@ -1,66 +1,24 @@
-# C extensions
-*.so
-
-# Distribution / packaging
-.Python
-env
-develop-eggs
-dist
-downloads
-eggs
-lib
-lib64
-parts
-sdist
-var
-*.egg-info
-.installed.cfg
-*.egg
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# LaTeX intermediate files
-*.synctex.gz
-
-# mypy
-.mypy_cache
+# docs
+docs/build
+docs/source/api
 
 # macOS
 .DS_Store
 
-# PyInstaller
-*.manifest
-*.spec
+# mypy
+.mypy_cache
 
-# Pytest
+# pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# pytest
+.coverage
 .pytest_cache
 htmlcov
 
-# Python
+# python
+*.egg
+*.egg-info
 *.py[cod]
 __pycache__
-
-# Sphinx documentation
-*/docs/build
-docs/source/api
-
-# Translations
-*.mo
-*.pot
-
-# Unit test / coverage reports
-htmlcov
-.tox
-.coverage
-.cache
-nosetests.xml
-coverage.xml
-
-# Virtual Environments
-venv
-Envs
-ENV
-.virtualenvs
-.python-version
