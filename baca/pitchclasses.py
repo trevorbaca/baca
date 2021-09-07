@@ -6254,7 +6254,7 @@ class PitchTree(classes.Tree):
         literal = abjad.LilyPondLiteral(string, "after")
         abjad.attach(literal, final_leaf)
         abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 16)"
-        preamble = "#(set-global-staff-size 16)"
+        preamble = "#(set-global-staff-size 16)\n"
         lilypond_file = abjad.LilyPondFile(
             date_time_token=False,
             global_staff_size=global_staff_size,

@@ -54,7 +54,9 @@ Constellation.
     ...     left-margin = 0\in
     ...     right-margin = 0\in
     ... }
+    ...
     ... \layout {
+    ...     indent = 0
     ...     ragged-right = ##t
     ...     \context {
     ...         \Staff
@@ -62,20 +64,27 @@ Constellation.
     ...     }
     ...     \context {
     ...         \Score
+    ...         \remove Bar_number_engraver
     ...         \override Accidental.X-extent = ##f
     ...         \override BarLine.stencil = ##f
+    ...         \override BarNumber.stencil = ##f
     ...         \override Clef.space-alist.first-note = #'(extra-space . 8)
     ...         \override Rest.transparent = ##t
+    ...         \override SpacingSpanner.uniform-stretching = ##t
     ...         \override SpanBar.stencil = ##f
     ...         \override TextScript.color = #blue
     ...         \override TextScript.staff-padding = 10
     ...         \override TimeSignature.stencil = ##f
     ...         proportionalNotationDuration = #(ly:make-moment 1 24)
     ...     }
-    ... }'''
+    ... }
+    ... '''
 
-    >>> lilypond_file = abjad.LilyPondFile([preamble, score])
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
+    ..  book::
+        :lilypond/no-stylesheet:
+
+        >>> lilypond_file = abjad.LilyPondFile([preamble, score])
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
