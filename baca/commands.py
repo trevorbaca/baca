@@ -645,9 +645,14 @@ def color(
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  book::
+            :lilypond/no-stylesheet:
+
+            >>> lilypond_file = baca.figuremaker.lilypond_file(
+            ...     selection, includes=["abjad.ily"]
+            ... )
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -655,21 +660,14 @@ def color(
             >>> print(string)
             \new Score
             <<
-                \new GlobalContext
-                {
-                    \time 11/8
-                    s1 * 11/8
-                }
                 \new Staff
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         \override TupletBracket.staff-padding = 2
+                        \time 11/8
                         \abjad-color-music #'red
                         r8
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         \abjad-color-music #'blue
                         c'16
                         \abjad-color-music #'red
@@ -728,9 +726,14 @@ def color(
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  book::
+            :lilypond/no-stylesheet:
+
+            >>> lilypond_file = baca.figuremaker.lilypond_file(
+            ...     selection, includes=["abjad.ily"]
+            ... )
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -738,20 +741,13 @@ def color(
             >>> print(string)
             \new Score
             <<
-                \new GlobalContext
-                {
-                    \time 11/8
-                    s1 * 11/8
-                }
                 \new Staff
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         \override TupletBracket.staff-padding = 2
+                        \time 11/8
                         r8
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'16
                         d'16
                         bf'4
@@ -1331,9 +1327,12 @@ def dynamic_down(
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  book::
+            :lilypond/no-stylesheet:
+
+            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -1341,21 +1340,14 @@ def dynamic_down(
             >>> print(string)
             \new Score
             <<
-                \new GlobalContext
-                {
-                    \time 11/8
-                    s1 * 11/8
-                }
                 \new Staff
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         \override TupletBracket.staff-padding = 2
+                        \time 11/8
                         \dynamicDown
                         r8
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'16
                         \p
                         [
@@ -1423,9 +1415,12 @@ def dynamic_up(
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  book::
+            :lilypond/no-stylesheet:
+
+            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -1433,21 +1428,14 @@ def dynamic_up(
             >>> print(string)
             \new Score
             <<
-                \new GlobalContext
-                {
-                    \time 11/8
-                    s1 * 11/8
-                }
                 \new Staff
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         \override TupletBracket.staff-padding = 2
+                        \time 11/8
                         \dynamicUp
                         r8
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'16
                         \p
                         [
@@ -2743,9 +2731,12 @@ def label(
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  book::
+            :lilypond/no-stylesheet:
+
+            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -2753,20 +2744,13 @@ def label(
             >>> print(string)
             \new Score
             <<
-                \new GlobalContext
-                {
-                    \time 11/8
-                    s1 * 11/8
-                }
                 \new Staff
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         \override TupletBracket.staff-padding = 2
+                        \time 11/8
                         r8
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'16
                         ^ \markup { C4 }
                         [
@@ -2844,9 +2828,12 @@ def markup(
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  book::
+            :lilypond/no-stylesheet:
+
+            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -2854,21 +2841,14 @@ def markup(
             >>> print(string)
             \new Score
             <<
-                \new GlobalContext
-                {
-                    \time 11/8
-                    s1 * 11/8
-                }
                 \new Staff
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         \override TupletBracket.outside-staff-priority = 1000
                         \override TupletBracket.staff-padding = 2
+                        \time 11/8
                         r8
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'16
                         ^ \markup { più mosso }
                         [
@@ -2924,12 +2904,15 @@ def markup(
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     selection,
-        ...     includes=["baca.ily", "rhythm-maker-docs.ily"],
-        ... )
-        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  book::
+            :lilypond/no-stylesheet:
+
+            >>> lilypond_file = baca.figuremaker.lilypond_file(
+            ...     selection,
+            ...     includes=["baca.ily"],
+            ... )
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -2937,21 +2920,14 @@ def markup(
             >>> print(string)
             \new Score
             <<
-                \new GlobalContext
-                {
-                    \time 11/8
-                    s1 * 11/8
-                }
                 \new Staff
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         \override TupletBracket.outside-staff-priority = 1000
                         \override TupletBracket.staff-padding = 2
+                        \time 11/8
                         r8
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'16
                         ^ \markup { \baca-triple-diamond-markup }
                         [

@@ -10611,7 +10611,7 @@ def figure(
     )
 
 
-def lilypond_file(selection):
+def lilypond_file(selection, includes=None):
     """
     Wraps ``selection`` in LilyPond file for doc examples.
     """
@@ -10627,7 +10627,7 @@ def lilypond_file(selection):
     }
 }
 """
-    lilypond_file = abjad.LilyPondFile([preamble, score])
+    lilypond_file = abjad.LilyPondFile([preamble, score], includes=includes)
     return lilypond_file
 
 

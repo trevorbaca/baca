@@ -142,9 +142,12 @@ class ArpeggiationSpacingSpecifier:
             >>> collections = baca.CollectionList(collections)
             >>> collections = collections.arpeggiate_up()
             >>> selection = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -152,18 +155,11 @@ class ArpeggiationSpacingSpecifier:
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 9/16
-                        s1 * 9/16
-                    }
                     \new Staff
                     {
                         \scaleDurations #'(1 . 1) {
+                            \time 9/16
                             c,16
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                             [
                             d,16
                             bf,16
@@ -196,9 +192,12 @@ class ArpeggiationSpacingSpecifier:
             >>> collections = baca.CollectionList(collections)
             >>> collections = collections.arpeggiate_down()
             >>> selection = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -206,18 +205,11 @@ class ArpeggiationSpacingSpecifier:
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 9/16
-                        s1 * 9/16
-                    }
                     \new Staff
                     {
                         \scaleDurations #'(1 . 1) {
+                            \time 9/16
                             c'16
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                             [
                             d16
                             bf,16
