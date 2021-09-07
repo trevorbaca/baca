@@ -13,8 +13,6 @@ from . import selection as _selection
 from . import sequence as _sequence
 from . import tags as _tags
 
-### CLASSES ###
-
 
 class Stack:
     """
@@ -967,8 +965,6 @@ class Acciaccatura:
     ) -> typing.Tuple[typing.List[typing.Optional[abjad.BeforeGraceContainer]], list]:
         """
         Calls acciaccatura on ``collection``.
-
-        :param collection: collection.
         """
         prototype = (list, abjad.Segment)
         assert isinstance(collection, prototype), repr(collection)
@@ -1041,45 +1037,36 @@ class Acciaccatura:
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
             ... ]
-            >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> score = lilypond_file[abjad.Score]
-            >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
-            >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> selection = stack(collections)
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
                 \new Score
-                \with
-                {
-                    \override SpacingSpanner.strict-grace-spacing = ##f
-                    \override SpacingSpanner.strict-note-spacing = ##f
-                }
                 <<
-                    \new GlobalContext
-                    {
-                        \time 3/4
-                        s1 * 3/4
-                    }
                     \new Staff
                     {
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \time 3/4
                             c'8
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 d'16
                             }
                             bf'8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 fs''16
                                 [
@@ -1088,7 +1075,8 @@ class Acciaccatura:
                             }
                             ef''8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 af''16
                                 [
@@ -1098,7 +1086,8 @@ class Acciaccatura:
                             }
                             c'8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 d'16
                                 [
@@ -1109,7 +1098,8 @@ class Acciaccatura:
                             }
                             ef''8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 af''16
                                 [
@@ -1143,36 +1133,24 @@ class Acciaccatura:
             ...     [20, 19, 9, 0, 2, 10],
             ... ]
             >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> score = lilypond_file[abjad.Score]
-            >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
-            >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
                 \new Score
-                \with
-                {
-                    \override SpacingSpanner.strict-grace-spacing = ##f
-                    \override SpacingSpanner.strict-note-spacing = ##f
-                }
                 <<
-                    \new GlobalContext
-                    {
-                        \time 3/4
-                        s1 * 3/4
-                    }
                     \new Staff
                     {
                         \scaleDurations #'(1 . 1) {
+                            \time 3/4
                             c'8
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
@@ -1251,36 +1229,24 @@ class Acciaccatura:
             ...     [20, 19, 9, 0, 2, 10],
             ... ]
             >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> score = lilypond_file[abjad.Score]
-            >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
-            >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
                 \new Score
-                \with
-                {
-                    \override SpacingSpanner.strict-grace-spacing = ##f
-                    \override SpacingSpanner.strict-note-spacing = ##f
-                }
                 <<
-                    \new GlobalContext
-                    {
-                        \time 3/4
-                        s1 * 3/4
-                    }
                     \new Staff
                     {
                         \scaleDurations #'(1 . 1) {
+                            \time 3/4
                             c'8
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
@@ -1359,36 +1325,24 @@ class Acciaccatura:
             ...     [20, 19, 9, 0, 2, 10],
             ... ]
             >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> score = lilypond_file[abjad.Score]
-            >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
-            >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
                 \new Score
-                \with
-                {
-                    \override SpacingSpanner.strict-grace-spacing = ##f
-                    \override SpacingSpanner.strict-note-spacing = ##f
-                }
                 <<
-                    \new GlobalContext
-                    {
-                        \time 3/2
-                        s1 * 3/2
-                    }
                     \new Staff
                     {
                         \scaleDurations #'(1 . 1) {
+                            \time 3/2
                             c'8
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
@@ -1473,36 +1427,24 @@ class Acciaccatura:
             ...     [20, 19, 9, 0, 2, 10],
             ... ]
             >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> score = lilypond_file[abjad.Score]
-            >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
-            >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
                 \new Score
-                \with
-                {
-                    \override SpacingSpanner.strict-grace-spacing = ##f
-                    \override SpacingSpanner.strict-note-spacing = ##f
-                }
                 <<
-                    \new GlobalContext
-                    {
-                        \time 3/2
-                        s1 * 3/2
-                    }
                     \new Staff
                     {
                         \scaleDurations #'(1 . 1) {
+                            \time 3/2
                             c'8
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
@@ -1589,36 +1531,24 @@ class Acciaccatura:
             ...     [20, 19, 9, 0, 2, 10],
             ... ]
             >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> score = lilypond_file[abjad.Score]
-            >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
-            >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
                 \new Score
-                \with
-                {
-                    \override SpacingSpanner.strict-grace-spacing = ##f
-                    \override SpacingSpanner.strict-note-spacing = ##f
-                }
                 <<
-                    \new GlobalContext
-                    {
-                        \time 9/8
-                        s1 * 9/8
-                    }
                     \new Staff
                     {
                         \scaleDurations #'(1 . 1) {
+                            \time 9/8
                             c'8
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
@@ -1702,36 +1632,24 @@ class Acciaccatura:
             ...     [20, 19, 9, 0, 2, 10],
             ... ]
             >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> score = lilypond_file[abjad.Score]
-            >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
-            >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
                 \new Score
-                \with
-                {
-                    \override SpacingSpanner.strict-grace-spacing = ##f
-                    \override SpacingSpanner.strict-note-spacing = ##f
-                }
                 <<
-                    \new GlobalContext
-                    {
-                        \time 11/8
-                        s1 * 11/8
-                    }
                     \new Staff
                     {
                         \scaleDurations #'(1 . 1) {
+                            \time 11/8
                             c'8
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                         }
                         \scaleDurations #'(1 . 1) {
                             d'8
@@ -1992,8 +1910,6 @@ class Imbrication:
     ) -> typing.Dict[str, abjad.Selection]:
         """
         Calls imbrication on ``container``.
-
-        :param container: container.
         """
         original_container = container
         container = copy.deepcopy(container)
@@ -3553,20 +3469,8 @@ class Accumulator:
         hide_time_signature: bool = None,
         signature: int = None,
     ) -> None:
-        r"""
+        """
         Calls music-accumulator.
-
-        :param voice_name: voice name.
-
-        :param collections: collections.
-
-        :param anchor: anchor.
-
-        :param figure_name: figure name.
-
-        :param hide_time_signature: hide time signature.
-
-        :param signature: signature
         """
         voice_name = self._abbreviation(voice_name)
         self._check_collections(collections)
@@ -4016,9 +3920,12 @@ class Nest:
         ...     [19, 13, 9, 8],
         ... ]
         >>> selection = stack(collections)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  book::
+            :lilypond/no-stylesheet:
+
+            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -4026,22 +3933,17 @@ class Nest:
             >>> print(string)
             \new Score
             <<
-                \new GlobalContext
-                {
-                    \time 3/4
-                    s1 * 3/4
-                }
                 \new Staff
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 12/11 {
-                        \scaleDurations #'(1 . 1) {
+                    \times 12/11
+                    {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \set stemLeftBeamCount = 0
                             \set stemRightBeamCount = 2
+                            \time 3/4
                             c'16
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                             [
                             \set stemLeftBeamCount = 2
                             \set stemRightBeamCount = 2
@@ -4053,7 +3955,8 @@ class Nest:
                             \set stemRightBeamCount = 1
                             fs''16
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \set stemLeftBeamCount = 1
                             \set stemRightBeamCount = 2
                             e''16
@@ -4064,7 +3967,8 @@ class Nest:
                             \set stemRightBeamCount = 1
                             b''16
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \set stemLeftBeamCount = 1
                             \set stemRightBeamCount = 2
                             g''16
@@ -4129,9 +4033,12 @@ class Nest:
             ...     [19, 13, 9, 8],
             ... ]
             >>> selection = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4139,20 +4046,15 @@ class Nest:
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 17/16
-                        s1 * 17/16
-                    }
                     \new Staff
                     {
                         \tweak text #tuplet-number::calc-fraction-text
-                        \times 17/16 {
-                            \scaleDurations #'(1 . 1) {
+                        \times 17/16
+                        {
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \time 17/16
                                 r8
-                                - \tweak staff-padding 11
-                                - \tweak transparent ##t
-                                ^ \markup I
                                 \set stemLeftBeamCount = 0
                                 \set stemRightBeamCount = 2
                                 c'16
@@ -4167,7 +4069,8 @@ class Nest:
                                 \set stemRightBeamCount = 1
                                 fs''16
                             }
-                            \scaleDurations #'(1 . 1) {
+                            \scaleDurations #'(1 . 1)
+                            {
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 2
                                 e''16
@@ -4178,7 +4081,8 @@ class Nest:
                                 \set stemRightBeamCount = 1
                                 b''16
                             }
-                            \scaleDurations #'(1 . 1) {
+                            \scaleDurations #'(1 . 1)
+                            {
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 2
                                 g''16
@@ -4345,12 +4249,8 @@ class RestAffix:
         typing.Optional[abjad.IntegerSequence],
         typing.Optional[abjad.IntegerSequence],
     ]:
-        r"""
+        """
         Calls rest affix.
-
-        :param collection_index: collection index.
-
-        :param total_collections: total collections.
         """
         if self.pattern is None:
             if collection_index == 0 and collection_index == total_collections - 1:
@@ -4403,9 +4303,12 @@ class RestAffix:
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selection = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4413,19 +4316,13 @@ class RestAffix:
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 15/16
-                        s1 * 15/16
-                    }
                     \new Staff
                     {
                         \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/4 {
+                        \times 5/4
+                        {
+                            \time 15/16
                             r16
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                             c'16
                             [
                             d'16
@@ -4433,7 +4330,8 @@ class RestAffix:
                             ]
                         }
                         \tweak text #tuplet-number::calc-fraction-text
-                        \times 6/5 {
+                        \times 6/5
+                        {
                             fs''16
                             [
                             e''16
@@ -4443,7 +4341,8 @@ class RestAffix:
                             ]
                         }
                         \tweak text #tuplet-number::calc-fraction-text
-                        \times 4/3 {
+                        \times 4/3
+                        {
                             a'16
                             r8
                         }
@@ -4465,9 +4364,12 @@ class RestAffix:
 
             >>> collections = [[18, 16, 15, 20, 19]]
             >>> selection = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4475,19 +4377,13 @@ class RestAffix:
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 9/16
-                        s1 * 9/16
-                    }
                     \new Staff
                     {
                         \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/8 {
+                        \times 9/8
+                        {
+                            \time 9/16
                             r16
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                             fs''16
                             [
                             e''16
@@ -4516,9 +4412,12 @@ class RestAffix:
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selection = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4526,19 +4425,13 @@ class RestAffix:
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 9/8
-                        s1 * 9/8
-                    }
                     \new Staff
                     {
                         \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/6 {
+                        \times 7/6
+                        {
+                            \time 9/8
                             r16
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                             c'16
                             [
                             d'16
@@ -4547,7 +4440,8 @@ class RestAffix:
                             r8
                         }
                         \tweak text #tuplet-number::calc-fraction-text
-                        \times 6/5 {
+                        \times 6/5
+                        {
                             fs''16
                             [
                             e''16
@@ -4557,7 +4451,8 @@ class RestAffix:
                             ]
                         }
                         \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/4 {
+                        \times 5/4
+                        {
                             r16
                             a'16
                             r8
@@ -4581,9 +4476,12 @@ class RestAffix:
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selection = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4591,19 +4489,13 @@ class RestAffix:
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 21/16
-                        s1 * 21/16
-                    }
                     \new Staff
                     {
                         \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/6 {
+                        \times 7/6
+                        {
+                            \time 21/16
                             r16
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                             c'16
                             [
                             d'16
@@ -4612,7 +4504,8 @@ class RestAffix:
                             r8
                         }
                         \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/8 {
+                        \times 9/8
+                        {
                             r16
                             fs''16
                             [
@@ -4624,7 +4517,8 @@ class RestAffix:
                             r8
                         }
                         \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/4 {
+                        \times 5/4
+                        {
                             r16
                             a'16
                             r8
@@ -4650,9 +4544,12 @@ class RestAffix:
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selection = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4660,25 +4557,20 @@ class RestAffix:
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 3/4
-                        s1 * 3/4
-                    }
                     \new Staff
                     {
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \time 3/4
                             r8.
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                             c'16
                             [
                             d'16
                             bf'16
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             fs''16
                             [
                             e''16
@@ -4687,7 +4579,8 @@ class RestAffix:
                             g''16
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             a'16
                         }
                     }
@@ -4718,9 +4611,12 @@ class RestAffix:
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selection = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4728,24 +4624,19 @@ class RestAffix:
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 3/4
-                        s1 * 3/4
-                    }
                     \new Staff
                     {
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \time 3/4
                             c'16
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                             [
                             d'16
                             bf'16
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             fs''16
                             [
                             e''16
@@ -4754,7 +4645,8 @@ class RestAffix:
                             g''16
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             a'16
                             r8.
                         }
@@ -4841,14 +4733,6 @@ class FigureMaker:
         r"""
         Calls figure-maker.
 
-        :param collections: collections.
-
-        :param collection_index: collection index.
-
-        :param state: state.
-
-        :param total_collections: total collections.
-
         ..  container:: example
 
             Without state manifest:
@@ -4860,9 +4744,12 @@ class FigureMaker:
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4870,24 +4757,19 @@ class FigureMaker:
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 3/4
-                        s1 * 3/4
-                    }
                     \new Staff
                     {
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \time 3/4
                             c'16
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                             [
                             d'16
                             bf'8
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             fs''16
                             [
                             e''16
@@ -4896,7 +4778,8 @@ class FigureMaker:
                             g''16
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             a'8
                         }
                     }
@@ -4914,9 +4797,12 @@ class FigureMaker:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> state = {'_next_attack': 2}
             >>> selections = stack(collections, state=state)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4924,24 +4810,19 @@ class FigureMaker:
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 3/4
-                        s1 * 3/4
-                    }
                     \new Staff
                     {
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \time 3/4
                             c'8
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                             [
                             d'16
                             bf'16
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             fs''8
                             [
                             e''16
@@ -4950,7 +4831,8 @@ class FigureMaker:
                             g''16
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             a'16
                         }
                     }
@@ -5451,44 +5333,35 @@ class FigureMaker:
             ...     [20, 19, 9, 0, 2, 10],
             ... ]
             >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> score = lilypond_file[abjad.Score]
-            >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
-            >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
                 \new Score
-                \with
-                {
-                    \override SpacingSpanner.strict-grace-spacing = ##f
-                    \override SpacingSpanner.strict-note-spacing = ##f
-                }
                 <<
-                    \new GlobalContext
-                    {
-                        \time 3/4
-                        s1 * 3/4
-                    }
                     \new Staff
                     {
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \time 3/4
                             c'8
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 d'16
                             }
                             bf'8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 fs''16
                                 [
@@ -5497,7 +5370,8 @@ class FigureMaker:
                             }
                             ef''8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 af''16
                                 [
@@ -5507,7 +5381,8 @@ class FigureMaker:
                             }
                             c'8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 d'16
                                 [
@@ -5518,7 +5393,8 @@ class FigureMaker:
                             }
                             ef''8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 af''16
                                 [
@@ -5551,44 +5427,35 @@ class FigureMaker:
             ...     [20, 19, 9, 0, 2, 10],
             ... ]
             >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> score = lilypond_file[abjad.Score]
-            >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
-            >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
                 \new Score
-                \with
-                {
-                    \override SpacingSpanner.strict-grace-spacing = ##f
-                    \override SpacingSpanner.strict-note-spacing = ##f
-                }
                 <<
-                    \new GlobalContext
-                    {
-                        \time 3/2
-                        s1 * 3/2
-                    }
                     \new Staff
                     {
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \time 3/2
                             c'4
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 d'16
                             }
                             bf'4
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 fs''16
                                 [
@@ -5597,7 +5464,8 @@ class FigureMaker:
                             }
                             ef''4
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 af''16
                                 [
@@ -5607,7 +5475,8 @@ class FigureMaker:
                             }
                             c'4
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 d'16
                                 [
@@ -5618,7 +5487,8 @@ class FigureMaker:
                             }
                             ef''4
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 af''16
                                 [
@@ -5674,9 +5544,12 @@ class FigureMaker:
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5684,18 +5557,12 @@ class FigureMaker:
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 39/32
-                        s1 * 39/32
-                    }
                     \new Staff
                     {
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \time 39/32
                             c'8
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                             [
                             d'8
                             bf'8
@@ -5703,7 +5570,8 @@ class FigureMaker:
                             bf'32
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             fs''8
                             [
                             e''8
@@ -5714,7 +5582,8 @@ class FigureMaker:
                             g''8
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             a'8
                             ~
                             [
@@ -5740,9 +5609,12 @@ class FigureMaker:
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5750,18 +5622,12 @@ class FigureMaker:
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 39/32
-                        s1 * 39/32
-                    }
                     \new Staff
                     {
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \time 39/32
                             c'8
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                             [
                             d'8
                             bf'32
@@ -5769,7 +5635,8 @@ class FigureMaker:
                             bf'8
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             fs''8
                             [
                             e''8
@@ -5780,7 +5647,8 @@ class FigureMaker:
                             g''8
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             a'32
                             ~
                             [
@@ -5809,9 +5677,12 @@ class FigureMaker:
 
             >>> collections = [[0, 2, 10, 8]]
             >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5819,18 +5690,12 @@ class FigureMaker:
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 5/16
-                        s1 * 5/16
-                    }
                     \new Staff
                     {
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \time 5/16
                             c'16
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                             [
                             d'16
                             bf'8
@@ -5842,9 +5707,12 @@ class FigureMaker:
 
             >>> collections = [[18, 16, 15, 20, 19]]
             >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5852,18 +5720,12 @@ class FigureMaker:
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 3/8
-                        s1 * 3/8
-                    }
                     \new Staff
                     {
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \time 3/8
                             fs''16
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                             [
                             e''16
                             ef''8
@@ -5876,9 +5738,12 @@ class FigureMaker:
 
             >>> collections = [[9]]
             >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5886,27 +5751,24 @@ class FigureMaker:
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 1/16
-                        s1 * 1/16
-                    }
                     \new Staff
                     {
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \time 1/16
                             a'16
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                         }
                     }
                 >>
 
             >>> collections = [[0, 2, 10, 8], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5914,25 +5776,20 @@ class FigureMaker:
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 13/16
-                        s1 * 13/16
-                    }
                     \new Staff
                     {
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \time 13/16
                             c'16
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                             [
                             d'16
                             bf'8
                             af'16
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             fs''16
                             [
                             e''8
@@ -5941,7 +5798,8 @@ class FigureMaker:
                             g''8
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             a'16
                         }
                     }
@@ -5961,9 +5819,12 @@ class FigureMaker:
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5971,19 +5832,13 @@ class FigureMaker:
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 3/2
-                        s1 * 3/2
-                    }
                     \new Staff
                     {
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \time 3/2
                             \override Staff.Stem.stemlet-length = 1.5
                             c'8.
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                             [
                             r16
                             d'8
@@ -5991,7 +5846,8 @@ class FigureMaker:
                             bf'8
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \override Staff.Stem.stemlet-length = 1.5
                             fs''8.
                             [
@@ -6004,7 +5860,8 @@ class FigureMaker:
                             g''8
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             a'8
                         }
                     }
@@ -6022,9 +5879,12 @@ class FigureMaker:
 
             >>> collections = [[0, 2]]
             >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6032,18 +5892,12 @@ class FigureMaker:
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 29/32
-                        s1 * 29/32
-                    }
                     \new Staff
                     {
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \time 29/32
                             c'4..
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                             c'64
                             \repeatTie
                             d'4..
@@ -6074,9 +5928,12 @@ class FigureMaker:
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6084,26 +5941,21 @@ class FigureMaker:
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 15/16
-                        s1 * 15/16
-                    }
                     \new Staff
                     {
                         \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/4 {
+                        \times 5/4
+                        {
+                            \time 15/16
                             c'16
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                             [
                             d'16
                             bf'8
                             ]
                         }
                         \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/6 {
+                        \times 7/6
+                        {
                             fs''16
                             [
                             e''16
@@ -6113,7 +5965,8 @@ class FigureMaker:
                             ]
                         }
                         \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/2 {
+                        \times 3/2
+                        {
                             a'8
                         }
                     }
@@ -6130,9 +5983,12 @@ class FigureMaker:
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6140,26 +5996,21 @@ class FigureMaker:
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 5/8
-                        s1 * 5/8
-                    }
                     \new Staff
                     {
                         \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/4 {
+                        \times 3/4
+                        {
+                            \time 5/8
                             c'16
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                             [
                             d'16
                             bf'8
                             ]
                         }
                         \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/6 {
+                        \times 5/6
+                        {
                             fs''16
                             [
                             e''16
@@ -6168,7 +6019,8 @@ class FigureMaker:
                             g''16
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             a'8
                         }
                     }
@@ -6192,9 +6044,12 @@ class FigureMaker:
             ...     [20, 19, 9, 0, 2, 10],
             ... ]
             >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6202,18 +6057,12 @@ class FigureMaker:
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 21/16
-                        s1 * 21/16
-                    }
                     \new Staff
                     {
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \time 21/16
                             c'16
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                         }
                         \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
                             {
@@ -6245,12 +6094,14 @@ class FigureMaker:
                                         c'8
                                     }
                                 >>
-                                \layout {
+                                \layout
+                                {
                                     indent = 0
                                     ragged-right = ##t
                                 }
                             }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \once \override Beam.grow-direction = #right
                             d'16 * 1328/1024
                             [
@@ -6288,12 +6139,14 @@ class FigureMaker:
                                         c'8.
                                     }
                                 >>
-                                \layout {
+                                \layout
+                                {
                                     indent = 0
                                     ragged-right = ##t
                                 }
                             }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \once \override Beam.grow-direction = #right
                             fs''16 * 1552/1024
                             [
@@ -6332,12 +6185,14 @@ class FigureMaker:
                                         c'4
                                     }
                                 >>
-                                \layout {
+                                \layout
+                                {
                                     indent = 0
                                     ragged-right = ##t
                                 }
                             }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \once \override Beam.grow-direction = #right
                             af''16 * 1728/1024
                             [
@@ -6379,12 +6234,14 @@ class FigureMaker:
                                         c'16
                                     }
                                 >>
-                                \layout {
+                                \layout
+                                {
                                     indent = 0
                                     ragged-right = ##t
                                 }
                             }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \once \override Beam.grow-direction = #right
                             d'16 * 1872/1024
                             [
@@ -6425,12 +6282,14 @@ class FigureMaker:
                                         c'4.
                                     }
                                 >>
-                                \layout {
+                                \layout
+                                {
                                     indent = 0
                                     ragged-right = ##t
                                 }
                             }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \once \override Beam.grow-direction = #right
                             af''16 * 2000/1024
                             [
@@ -6463,9 +6322,12 @@ class FigureMaker:
             ...     [20, 19, 9, 0, 2, 10],
             ... ]
             >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6473,18 +6335,12 @@ class FigureMaker:
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 21/16
-                        s1 * 21/16
-                    }
                     \new Staff
                     {
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \time 21/16
                             c'16
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                         }
                         \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
                             {
@@ -6516,12 +6372,14 @@ class FigureMaker:
                                         c'8
                                     }
                                 >>
-                                \layout {
+                                \layout
+                                {
                                     indent = 0
                                     ragged-right = ##t
                                 }
                             }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \once \override Beam.grow-direction = #left
                             d'16 * 656/1024
                             [
@@ -6559,12 +6417,14 @@ class FigureMaker:
                                         c'8.
                                     }
                                 >>
-                                \layout {
+                                \layout
+                                {
                                     indent = 0
                                     ragged-right = ##t
                                 }
                             }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \once \override Beam.grow-direction = #left
                             fs''16 * 512/1024
                             [
@@ -6603,12 +6463,14 @@ class FigureMaker:
                                         c'4
                                     }
                                 >>
-                                \layout {
+                                \layout
+                                {
                                     indent = 0
                                     ragged-right = ##t
                                 }
                             }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \once \override Beam.grow-direction = #left
                             af''16 * 432/1024
                             [
@@ -6650,12 +6512,14 @@ class FigureMaker:
                                         c'16
                                     }
                                 >>
-                                \layout {
+                                \layout
+                                {
                                     indent = 0
                                     ragged-right = ##t
                                 }
                             }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \once \override Beam.grow-direction = #left
                             d'16 * 368/1024
                             [
@@ -6696,12 +6560,14 @@ class FigureMaker:
                                         c'4.
                                     }
                                 >>
-                                \layout {
+                                \layout
+                                {
                                     indent = 0
                                     ragged-right = ##t
                                 }
                             }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \once \override Beam.grow-direction = #left
                             af''16 * 336/1024
                             [
@@ -6734,9 +6600,12 @@ class FigureMaker:
             ...     [19, 9, 0, 2, 10, 18],
             ... ]
             >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6744,11 +6613,6 @@ class FigureMaker:
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 11/8
-                        s1 * 11/8
-                    }
                     \new Staff
                     {
                         \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
@@ -6783,17 +6647,17 @@ class FigureMaker:
                                         c'16
                                     }
                                 >>
-                                \layout {
+                                \layout
+                                {
                                     indent = 0
                                     ragged-right = ##t
                                 }
                             }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \once \override Beam.grow-direction = #right
+                            \time 11/8
                             c'16 * 1872/1024
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                             [
                             d'16 * 1008/1024
                             bf'16 * 832/1024
@@ -6832,12 +6696,14 @@ class FigureMaker:
                                         c'4.
                                     }
                                 >>
-                                \layout {
+                                \layout
+                                {
                                     indent = 0
                                     ragged-right = ##t
                                 }
                             }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \once \override Beam.grow-direction = #left
                             ef''16 * 336/1024
                             [
@@ -6881,12 +6747,14 @@ class FigureMaker:
                                         c'16
                                     }
                                 >>
-                                \layout {
+                                \layout
+                                {
                                     indent = 0
                                     ragged-right = ##t
                                 }
                             }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \once \override Beam.grow-direction = #right
                             bf'16 * 1872/1024
                             [
@@ -6927,12 +6795,14 @@ class FigureMaker:
                                         c'4.
                                     }
                                 >>
-                                \layout {
+                                \layout
+                                {
                                     indent = 0
                                     ragged-right = ##t
                                 }
                             }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \once \override Beam.grow-direction = #left
                             g''16 * 336/1024
                             [
@@ -6965,9 +6835,12 @@ class FigureMaker:
             ...     [19, 9, 0, 2, 10],
             ... ]
             >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6975,11 +6848,6 @@ class FigureMaker:
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 13/8
-                        s1 * 13/8
-                    }
                     \new Staff
                     {
                         \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
@@ -7014,17 +6882,17 @@ class FigureMaker:
                                         c'16
                                     }
                                 >>
-                                \layout {
+                                \layout
+                                {
                                     indent = 0
                                     ragged-right = ##t
                                 }
                             }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \once \override Beam.grow-direction = #right
+                            \time 13/8
                             c'16 * 1872/1024
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                             [
                             d'16 * 1008/1024
                             bf'16 * 832/1024
@@ -7034,7 +6902,8 @@ class FigureMaker:
                         }
                         \revert TupletNumber.text
                         \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/5 {
+                        \times 3/5
+                        {
                             ef''16
                             [
                             af''16
@@ -7075,12 +6944,14 @@ class FigureMaker:
                                         c'16
                                     }
                                 >>
-                                \layout {
+                                \layout
+                                {
                                     indent = 0
                                     ragged-right = ##t
                                 }
                             }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \once \override Beam.grow-direction = #left
                             d'16 * 368/1024
                             [
@@ -7123,12 +6994,14 @@ class FigureMaker:
                                         c'16
                                     }
                                 >>
-                                \layout {
+                                \layout
+                                {
                                     indent = 0
                                     ragged-right = ##t
                                 }
                             }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \once \override Beam.grow-direction = #right
                             af''16 * 1872/1024
                             [
@@ -7140,7 +7013,8 @@ class FigureMaker:
                         }
                         \revert TupletNumber.text
                         \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/5 {
+                        \times 3/5
+                        {
                             bf'16
                             [
                             fs''16
@@ -7181,12 +7055,14 @@ class FigureMaker:
                                         c'16
                                     }
                                 >>
-                                \layout {
+                                \layout
+                                {
                                     indent = 0
                                     ragged-right = ##t
                                 }
                             }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \once \override Beam.grow-direction = #left
                             g''16 * 368/1024
                             [
@@ -7194,9 +7070,6 @@ class FigureMaker:
                             c'16 * 1072/1024
                             d'16 * 1328/1024
                             bf'16 * 1568/1024
-                            - \tweak staff-padding 18
-                            - \tweak transparent ##t
-                            ^ \markup I
                             ]
                         }
                         \revert TupletNumber.text
@@ -7221,46 +7094,45 @@ class FigureMaker:
             ...     [20, 19, 9, 0, 2, 10],
             ... ]
             >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Score]
-            >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
-            >>> abjad.override(staff).Stem.direction = abjad.Down
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
+                >>> abjad.override(staff).Stem.direction = abjad.Down
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
                 \new Score
-                \with
-                {
-                    \override Beam.positions = #'(-6 . -6)
-                    \override Stem.direction = #down
-                }
                 <<
-                    \new GlobalContext
-                    {
-                        \time 7/4
-                        s1 * 7/4
-                    }
                     \new Staff
+                    \with
+                    {
+                        \override Beam.positions = #'(-6 . -6)
+                        \override Stem.direction = #down
+                    }
                     {
                         \tweak edge-height #'(0.7 . 0)
-                        \times 2/3 {
+                        \times 2/3
+                        {
+                            \time 7/4
                             c'8
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                         }
                         \tweak edge-height #'(0.7 . 0)
-                        \times 2/3 {
+                        \times 2/3
+                        {
                             d'8
                             [
                             bf'8
                             ]
                         }
-                        \times 2/3 {
+                        \times 2/3
+                        {
                             fs''8
                             [
                             e''8
@@ -7268,7 +7140,8 @@ class FigureMaker:
                             ]
                         }
                         \tweak edge-height #'(0.7 . 0)
-                        \times 2/3 {
+                        \times 2/3
+                        {
                             af''8
                             [
                             g''8
@@ -7277,7 +7150,8 @@ class FigureMaker:
                             ]
                         }
                         \tweak edge-height #'(0.7 . 0)
-                        \times 2/3 {
+                        \times 2/3
+                        {
                             d'8
                             [
                             bf'8
@@ -7286,7 +7160,8 @@ class FigureMaker:
                             ef''8
                             ]
                         }
-                        \times 2/3 {
+                        \times 2/3
+                        {
                             af''8
                             [
                             g''8
@@ -7294,9 +7169,6 @@ class FigureMaker:
                             c'8
                             d'8
                             bf'8
-                            - \tweak staff-padding 18
-                            - \tweak transparent ##t
-                            ^ \markup I
                             ]
                         }
                     }
@@ -7321,51 +7193,51 @@ class FigureMaker:
             ...     [20, 19, 9, 0, 2, 10],
             ... ]
             >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Score]
-            >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
-            >>> abjad.override(staff).Stem.direction = abjad.Down
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
+                >>> abjad.override(staff).Stem.direction = abjad.Down
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
                 \new Score
-                \with
-                {
-                    \override Beam.positions = #'(-6 . -6)
-                    \override Stem.direction = #down
-                }
                 <<
-                    \new GlobalContext
-                    {
-                        \time 3/2
-                        s1 * 3/2
-                    }
                     \new Staff
+                    \with
                     {
-                        \scaleDurations #'(1 . 1) {
+                        \override Beam.positions = #'(-6 . -6)
+                        \override Stem.direction = #down
+                    }
+                    {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \time 3/2
                             c'4
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             d'8
                             [
                             bf'8
                             ]
                         }
-                        \times 4/6 {
+                        \times 4/6
+                        {
                             fs''8
                             [
                             e''8
                             ef''8
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             af''16
                             [
                             g''16
@@ -7373,7 +7245,8 @@ class FigureMaker:
                             c'16
                             ]
                         }
-                        \times 4/5 {
+                        \times 4/5
+                        {
                             d'16
                             [
                             bf'16
@@ -7382,7 +7255,8 @@ class FigureMaker:
                             ef''16
                             ]
                         }
-                        \times 4/6 {
+                        \times 4/6
+                        {
                             af''16
                             [
                             g''16
@@ -7415,36 +7289,33 @@ class FigureMaker:
             ...     [19, 9, 0, 2, 10],
             ... ]
             >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Score]
-            >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
-            >>> abjad.override(staff).Stem.direction = abjad.Down
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
+                >>> abjad.override(staff).Stem.direction = abjad.Down
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
                 \new Score
-                \with
-                {
-                    \override Beam.positions = #'(-6 . -6)
-                    \override Stem.direction = #down
-                }
                 <<
-                    \new GlobalContext
-                    {
-                        \time 15/8
-                        s1 * 15/8
-                    }
                     \new Staff
+                    \with
                     {
-                        \times 4/6 {
+                        \override Beam.positions = #'(-6 . -6)
+                        \override Stem.direction = #down
+                    }
+                    {
+                        \times 4/6
+                        {
+                            \time 15/8
                             c'16
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                             [
                             d'16
                             bf'8
@@ -7453,7 +7324,8 @@ class FigureMaker:
                             ]
                         }
                         \tweak text #tuplet-number::calc-fraction-text
-                        \times 6/7 {
+                        \times 6/7
+                        {
                             ef''8
                             [
                             af''16
@@ -7462,7 +7334,8 @@ class FigureMaker:
                             c'16
                             ]
                         }
-                        \times 4/7 {
+                        \times 4/7
+                        {
                             d'16
                             [
                             bf'8
@@ -7471,7 +7344,8 @@ class FigureMaker:
                             ef''8
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             af''16
                             [
                             g''16
@@ -7480,7 +7354,8 @@ class FigureMaker:
                             d'16
                             ]
                         }
-                        \times 4/7 {
+                        \times 4/7
+                        {
                             bf'8
                             [
                             fs''16
@@ -7490,16 +7365,14 @@ class FigureMaker:
                             ]
                         }
                         \tweak text #tuplet-number::calc-fraction-text
-                        \times 6/7 {
+                        \times 6/7
+                        {
                             g''16
                             [
                             a'8
                             c'16
                             d'16
                             bf'8
-                            - \tweak staff-padding 18
-                            - \tweak transparent ##t
-                            ^ \markup I
                             ]
                         }
                     }
@@ -7595,8 +7468,6 @@ class Bind:
     def __call__(self, collections: typing.Sequence) -> abjad.Selection:
         """
         Calls bind.
-
-        :param collections: collections.
         """
         collection_count = len(collections)
         matches = []
@@ -7660,24 +7531,14 @@ class Bind:
         return self._assignments
 
 
-### FACTORY FUNCTIONS ###
-
-
 def anchor(
     remote_voice_name: str,
     remote_selector: abjad.Expression = None,
     local_selector: abjad.Expression = None,
 ) -> Anchor:
     """
-    Anchors music in this figure (filtered by ``local_selector``) to
-    start offset of ``remote_voice_name`` (filtered by
-    ``remote_selector``).
-
-    :param remote_voice_name: remote voice name.
-
-    :param remote_selector: remote selector.
-
-    :param local_selector: local selector.
+    Anchors music in this figure (filtered by ``local_selector``) to start offset of
+    ``remote_voice_name`` (filtered by ``remote_selector``).
     """
     return Anchor(
         local_selector=local_selector,
@@ -7692,14 +7553,8 @@ def anchor_after(
     local_selector: abjad.Expression = None,
 ) -> Anchor:
     """
-    Anchors music in this figure (filtered by ``local_selector``) to
-    stop offset of ``remote_voice_name`` (filtered by ``remote_selector``).
-
-    :param remote_voice_name: remote voice name.
-
-    :param remote_selector: remote selector.
-
-    :param local_selector: local selector.
+    Anchors music in this figure (filtered by ``local_selector``) to stop offset of
+    ``remote_voice_name`` (filtered by ``remote_selector``).
     """
     return Anchor(
         local_selector=local_selector,
@@ -7712,8 +7567,6 @@ def anchor_after(
 def anchor_to_figure(figure_name: str) -> Anchor:
     """
     Anchors music in this figure to start of ``figure_name``.
-
-    :param figure_name: figure name.
     """
     return Anchor(figure_name=figure_name)
 
@@ -7736,8 +7589,6 @@ def bind(*assignments: Assignment) -> Bind:
 def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
     r"""
     Coats ``pitch``.
-
-    :param pitch: pitch.
 
     ..  container:: example
 
@@ -10662,9 +10513,13 @@ def nest(treatments: typing.Sequence, *, lmr: LMR = None) -> Nest:
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  book::
+            :lilypond/no-stylesheet:
+
+            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> staff = lilypond_file[abjad.Score][0]
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -10672,22 +10527,17 @@ def nest(treatments: typing.Sequence, *, lmr: LMR = None) -> Nest:
             >>> print(string)
             \new Score
             <<
-                \new GlobalContext
-                {
-                    \time 13/8
-                    s1 * 13/8
-                }
                 \new Staff
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 13/11 {
+                    \times 13/11
+                    {
                         \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                        \times 9/10
+                        {
                             \override TupletBracket.staff-padding = 2
+                            \time 13/8
                             r8
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                             c'16
                             [
                             d'16
@@ -10698,7 +10548,8 @@ def nest(treatments: typing.Sequence, *, lmr: LMR = None) -> Nest:
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                        \times 9/10
+                        {
                             fs''16
                             [
                             e''16
@@ -10712,12 +10563,10 @@ def nest(treatments: typing.Sequence, *, lmr: LMR = None) -> Nest:
                             g''16
                             ]
                         }
-                        \times 4/5 {
+                        \times 4/5
+                        {
                             a'16
                             r4
-                            - \tweak staff-padding 18
-                            - \tweak transparent ##t
-                            ^ \markup I
                             \revert TupletBracket.staff-padding
                         }
                     }
@@ -10762,6 +10611,26 @@ def figure(
     )
 
 
+def lilypond_file(selection):
+    """
+    Wraps ``selection`` in LilyPond file for doc examples.
+    """
+    duration = abjad.get.duration(selection)
+    time_signature = abjad.TimeSignature(duration)
+    abjad.attach(time_signature, abjad.select(selection).leaf(0))
+    staff = abjad.Staff(selection)
+    score = abjad.Score([staff])
+    preamble = r"""\layout {
+    \context {
+        \Score
+        proportionalNotationDuration = #(ly:make-moment 1 24)
+    }
+}
+"""
+    lilypond_file = abjad.LilyPondFile([preamble, score])
+    return lilypond_file
+
+
 def rests_after(counts: typing.Sequence[int]) -> RestAffix:
     r"""
     Makes rests after music.
@@ -10780,9 +10649,12 @@ def rests_after(counts: typing.Sequence[int]) -> RestAffix:
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  book::
+            :lilypond/no-stylesheet:
+
+            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -10790,20 +10662,14 @@ def rests_after(counts: typing.Sequence[int]) -> RestAffix:
             >>> print(string)
             \new Score
             <<
-                \new GlobalContext
-                {
-                    \time 9/8
-                    s1 * 9/8
-                }
                 \new Staff
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 7/8 {
+                    \times 7/8
+                    {
                         \override TupletBracket.staff-padding = 2
+                        \time 9/8
                         c'16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         [
                         d'16
                         ]
@@ -10813,7 +10679,8 @@ def rests_after(counts: typing.Sequence[int]) -> RestAffix:
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         fs''16
                         [
                         e''16
@@ -10827,7 +10694,8 @@ def rests_after(counts: typing.Sequence[int]) -> RestAffix:
                         g''16
                         ]
                     }
-                    \times 2/3 {
+                    \times 2/3
+                    {
                         a'16
                         r8
                         \revert TupletBracket.staff-padding
@@ -10857,9 +10725,12 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  book::
+            :lilypond/no-stylesheet:
+
+            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -10867,20 +10738,14 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
             >>> print(string)
             \new Score
             <<
-                \new GlobalContext
-                {
-                    \time 5/4
-                    s1 * 5/4
-                }
                 \new Staff
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         \override TupletBracket.staff-padding = 2
+                        \time 5/4
                         r8
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'16
                         [
                         d'16
@@ -10891,7 +10756,8 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         fs''16
                         [
                         e''16
@@ -10905,7 +10771,8 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
                         g''16
                         ]
                     }
-                    \times 2/3 {
+                    \times 2/3
+                    {
                         a'16
                         r8
                         \revert TupletBracket.staff-padding
@@ -10929,35 +10796,32 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> selection = stack(collections)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-        >>> staff = lilypond_file[abjad.Score]
-        >>> abjad.override(staff).TupletBracket.staff_padding = 4
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  book::
+            :lilypond/no-stylesheet:
+
+            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> staff = lilypond_file[abjad.Score][0]
+            >>> abjad.override(staff).TupletBracket.staff_padding = 4
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
             \new Score
-            \with
-            {
-                \override TupletBracket.staff-padding = 4
-            }
             <<
-                \new GlobalContext
-                {
-                    \time 13/8
-                    s1 * 13/8
-                }
                 \new Staff
+                \with
+                {
+                    \override TupletBracket.staff-padding = 4
+                }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/8 {
+                    \times 9/8
+                    {
+                        \time 13/8
                         r8
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'16
                         r16
                         d'16
@@ -10966,7 +10830,8 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 11/10 {
+                    \times 11/10
+                    {
                         fs''16
                         r16
                         e''16
@@ -10979,13 +10844,11 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 6/5 {
+                    \times 6/5
+                    {
                         a'16
                         r16
                         r8.
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
             >>
@@ -11003,35 +10866,32 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
         ... )
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> selection = stack(collections)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-        >>> staff = lilypond_file[abjad.Score]
-        >>> abjad.override(staff).TupletBracket.staff_padding = 4
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  book::
+            :lilypond/no-stylesheet:
+
+            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> staff = lilypond_file[abjad.Score][0]
+            >>> abjad.override(staff).TupletBracket.staff_padding = 4
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
             \new Score
-            \with
-            {
-                \override TupletBracket.staff-padding = 4
-            }
             <<
-                \new GlobalContext
-                {
-                    \time 13/8
-                    s1 * 13/8
-                }
                 \new Staff
+                \with
+                {
+                    \override TupletBracket.staff-padding = 4
+                }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/8 {
+                    \times 9/8
+                    {
+                        \time 13/8
                         r8
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         r16
                         c'16
                         r16
@@ -11040,7 +10900,8 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
                         bf'16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 11/10 {
+                    \times 11/10
+                    {
                         r16
                         fs''16
                         r16
@@ -11053,13 +10914,11 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
                         g''16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 6/5 {
+                    \times 6/5
+                    {
                         r16
                         a'16
                         r8.
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
             >>
@@ -11080,9 +10939,12 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> selection = stack(collections)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  book::
+            :lilypond/no-stylesheet:
+
+            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -11090,26 +10952,21 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
             >>> print(string)
             \new Score
             <<
-                \new GlobalContext
-                {
-                    \time 9/16
-                    s1 * 9/16
-                }
                 \new Staff
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 3/4 {
+                    \times 3/4
+                    {
+                        \time 9/16
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'16
                         [
                         d'16
                         bf'16
                         ]
                     }
-                    \times 4/5 {
+                    \times 4/5
+                    {
                         fs''16
                         [
                         e''16
@@ -11118,7 +10975,8 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
                         g''16
                         ]
                     }
-                    \scaleDurations #'(1 . 1) {
+                    \scaleDurations #'(1 . 1)
+                    {
                         a'16
                         r16
                     }
@@ -11147,9 +11005,12 @@ def rests_before(counts: typing.List[int]) -> RestAffix:
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  book::
+            :lilypond/no-stylesheet:
+
+            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -11157,20 +11018,14 @@ def rests_before(counts: typing.List[int]) -> RestAffix:
             >>> print(string)
             \new Score
             <<
-                \new GlobalContext
-                {
-                    \time 19/16
-                    s1 * 19/16
-                }
                 \new Staff
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         \override TupletBracket.staff-padding = 2
+                        \time 19/16
                         r8
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'16
                         [
                         d'16
@@ -11181,7 +11036,8 @@ def rests_before(counts: typing.List[int]) -> RestAffix:
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         fs''16
                         [
                         e''16
@@ -11195,7 +11051,8 @@ def rests_before(counts: typing.List[int]) -> RestAffix:
                         g''16
                         ]
                     }
-                    \scaleDurations #'(1 . 1) {
+                    \scaleDurations #'(1 . 1)
+                    {
                         a'16
                         \revert TupletBracket.staff-padding
                     }
@@ -11242,9 +11099,12 @@ def skips_after(counts: typing.List[int]) -> RestAffix:
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  book::
+            :lilypond/no-stylesheet:
+
+            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -11252,20 +11112,14 @@ def skips_after(counts: typing.List[int]) -> RestAffix:
             >>> print(string)
             \new Score
             <<
-                \new GlobalContext
-                {
-                    \time 9/8
-                    s1 * 9/8
-                }
                 \new Staff
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 7/8 {
+                    \times 7/8
+                    {
                         \override TupletBracket.staff-padding = 2
+                        \time 9/8
                         c'16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         [
                         d'16
                         ]
@@ -11275,7 +11129,8 @@ def skips_after(counts: typing.List[int]) -> RestAffix:
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         fs''16
                         [
                         e''16
@@ -11289,7 +11144,8 @@ def skips_after(counts: typing.List[int]) -> RestAffix:
                         g''16
                         ]
                     }
-                    \times 2/3 {
+                    \times 2/3
+                    {
                         a'16
                         s8
                         \revert TupletBracket.staff-padding
@@ -11319,9 +11175,12 @@ def skips_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  book::
+            :lilypond/no-stylesheet:
+
+            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -11329,20 +11188,14 @@ def skips_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
             >>> print(string)
             \new Score
             <<
-                \new GlobalContext
-                {
-                    \time 5/4
-                    s1 * 5/4
-                }
                 \new Staff
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         \override TupletBracket.staff-padding = 2
+                        \time 5/4
                         s8
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'16
                         [
                         d'16
@@ -11353,7 +11206,8 @@ def skips_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         fs''16
                         [
                         e''16
@@ -11367,7 +11221,8 @@ def skips_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
                         g''16
                         ]
                     }
-                    \times 2/3 {
+                    \times 2/3
+                    {
                         a'16
                         s8
                         \revert TupletBracket.staff-padding
@@ -11399,9 +11254,12 @@ def skips_before(
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  book::
+            :lilypond/no-stylesheet:
+
+            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -11409,20 +11267,14 @@ def skips_before(
             >>> print(string)
             \new Score
             <<
-                \new GlobalContext
-                {
-                    \time 19/16
-                    s1 * 19/16
-                }
                 \new Staff
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         \override TupletBracket.staff-padding = 2
+                        \time 19/16
                         s8
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'16
                         [
                         d'16
@@ -11433,7 +11285,8 @@ def skips_before(
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         fs''16
                         [
                         e''16
@@ -11447,7 +11300,8 @@ def skips_before(
                         g''16
                         ]
                     }
-                    \scaleDurations #'(1 . 1) {
+                    \scaleDurations #'(1 . 1)
+                    {
                         a'16
                         \revert TupletBracket.staff-padding
                     }
@@ -11479,36 +11333,33 @@ def stack(*commands) -> Stack:
         ...     [19, 9, 0, 2, 10],
         ...     ]
         >>> selections = stack(collections)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-        >>> staff = lilypond_file[abjad.Score]
-        >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
-        >>> abjad.override(staff).Stem.direction = abjad.Down
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  book::
+            :lilypond/no-stylesheet:
+
+            >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+            >>> staff = lilypond_file[abjad.Score][0]
+            >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
+            >>> abjad.override(staff).Stem.direction = abjad.Down
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
             \new Score
-            \with
-            {
-                \override Beam.positions = #'(-6 . -6)
-                \override Stem.direction = #down
-            }
             <<
-                \new GlobalContext
-                {
-                    \time 15/8
-                    s1 * 15/8
-                }
                 \new Staff
+                \with
                 {
-                    \times 4/6 {
+                    \override Beam.positions = #'(-6 . -6)
+                    \override Stem.direction = #down
+                }
+                {
+                    \times 4/6
+                    {
+                        \time 15/8
                         c'16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         [
                         d'16
                         bf'8
@@ -11517,7 +11368,8 @@ def stack(*commands) -> Stack:
                         ]
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 6/7 {
+                    \times 6/7
+                    {
                         ef''8
                         [
                         af''16
@@ -11526,7 +11378,8 @@ def stack(*commands) -> Stack:
                         c'16
                         ]
                     }
-                    \times 4/7 {
+                    \times 4/7
+                    {
                         d'16
                         [
                         bf'8
@@ -11535,7 +11388,8 @@ def stack(*commands) -> Stack:
                         ef''8
                         ]
                     }
-                    \scaleDurations #'(1 . 1) {
+                    \scaleDurations #'(1 . 1)
+                    {
                         af''16
                         [
                         g''16
@@ -11544,7 +11398,8 @@ def stack(*commands) -> Stack:
                         d'16
                         ]
                     }
-                    \times 4/7 {
+                    \times 4/7
+                    {
                         bf'8
                         [
                         fs''16
@@ -11554,16 +11409,14 @@ def stack(*commands) -> Stack:
                         ]
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 6/7 {
+                    \times 6/7
+                    {
                         g''16
                         [
                         a'8
                         c'16
                         d'16
                         bf'8
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                         ]
                     }
                 }

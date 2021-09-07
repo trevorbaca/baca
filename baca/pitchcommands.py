@@ -3833,12 +3833,6 @@ class RegisterInterpolationCommand(scoping.Command):
     r"""
     Register interpolation command.
 
-    :param selector: command selector.
-
-    :param start_pitch: interpolation start pitch.
-
-    :param stop_pitch: interpolation stop pitch.
-
     ..  container:: example
 
         With music-maker:
@@ -6247,16 +6241,8 @@ class StaffPositionCommand(scoping.Command):
 
 
 class StaffPositionInterpolationCommand(scoping.Command):
-    r"""
+    """
     Staff position interpolation command.
-
-    :param selector: selector.
-
-    :param start: start pitch or start staff position.
-
-    :param stop: stop pitch or stop staff position.
-
-
     """
 
     ### CLASS VARIABLES ###

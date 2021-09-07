@@ -116,8 +116,6 @@ def alternate_bow_strokes(
     r"""
     Attaches alternate bow strokes.
 
-    :param downbow_first: is true when first stroke is down-bow.
-
     ..  container:: example
 
         Attaches alternate bow strokes to pitched heads (down-bow first):
