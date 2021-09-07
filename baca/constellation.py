@@ -3,12 +3,9 @@ Constellation.
 
 ..  container:: example
 
-    Instantiate circuit 1 like this:
+    Here are the 8 constellations in CC1:
 
     >>> circuit = baca.CC1()
-
-    Circuit 1 contains 8 constellations:
-
     >>> for constellation in circuit:
     ...     constellation
     Constellation(180)
@@ -29,26 +26,68 @@ Constellation.
     ...     constellation.label_chord(chord)
     ...     chords.append(chord)
 
-    >>> score = abjad.illustrators.make_piano_score(chords, sketch=True)
-    >>> abjad.show(score) # doctest: +SKIP
+    >>> score = abjad.illustrators.make_piano_score(chords)
+    >>> time_signature = abjad.TimeSignature((1, 4))
+    >>> first_leaf = abjad.select(score).leaf(0)
+    >>> abjad.attach(time_signature, first_leaf)
+    >>> last_leaf = abjad.select(score).leaf(-1)
+    >>> bar_line = abjad.BarLine("|.")
+    >>> abjad.attach(bar_line, last_leaf)
+    >>> for string in  (
+    ...     r"\override Score.BarLine.stencil = ##t",
+    ...     r"\override Score.SpanBar.stencil = ##t",
+    ... ):
+    ...     literal = abjad.LilyPondLiteral(string, format_slot="after")
+    ...     abjad.attach(literal, last_leaf)
+
+    >>> leaves = abjad.select(score["Treble_Staff"]).leaves()
+    >>> for i, leaf in enumerate(leaves):
+    ...     if 0 < i and i % 12 == 0:
+    ...         strut = abjad.Markup(r"\markup A", direction=abjad.Up, literal=True)
+    ...         abjad.tweak(strut).staff_padding = 22
+    ...         abjad.tweak(strut).transparent = True
+    ...         abjad.attach(strut, leaf)
+
+    >>> preamble = r'''#(set-global-staff-size 12)
+    ...
+    ... \paper {
+    ...     left-margin = 0\in
+    ...     right-margin = 0\in
+    ... }
+    ... \layout {
+    ...     ragged-right = ##t
+    ...     \context {
+    ...         \Staff
+    ...         \override VerticalAxisGroup.staff-staff-spacing.minimum-distance = 6
+    ...     }
+    ...     \context {
+    ...         \Score
+    ...         \override Accidental.X-extent = ##f
+    ...         \override BarLine.stencil = ##f
+    ...         \override Clef.space-alist.first-note = #'(extra-space . 8)
+    ...         \override Rest.transparent = ##t
+    ...         \override SpanBar.stencil = ##f
+    ...         \override TextScript.color = #blue
+    ...         \override TextScript.staff-padding = 10
+    ...         \override TimeSignature.stencil = ##f
+    ...         proportionalNotationDuration = #(ly:make-moment 1 24)
+    ...     }
+    ... }'''
+
+    >>> lilypond_file = abjad.LilyPondFile([preamble, score])
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \new Score
-        \with
-        {
-            \override BarLine.stencil = ##f
-            \override BarNumber.transparent = ##t
-            \override SpanBar.stencil = ##f
-            \override TimeSignature.stencil = ##f
-        }
         <<
             \new PianoStaff
             <<
                 \context Staff = "Treble_Staff"
                 {
+                    \time 1/4
                     \clef "treble"
                     r4
                     ^ \markup { 1-1 }
@@ -76,6 +115,9 @@ Constellation.
                     ^ \markup { 1-12 }
                     <b ef' f' fs' a' cs''>4
                     ^ \markup { 1-13 }
+                    - \tweak staff-padding 22
+                    - \tweak transparent ##t
+                    ^ \markup A
                     <b f' g' ef'' fs'' a'' cs'''>4
                     ^ \markup { 1-14 }
                     <b f' g'' ef''' fs''' a''' cs''''>4
@@ -100,6 +142,9 @@ Constellation.
                     ^ \markup { 1-24 }
                     <bf' g'' af'' b'' ef''' f''' fs''' a''' cs''''>4
                     ^ \markup { 1-25 }
+                    - \tweak staff-padding 22
+                    - \tweak transparent ##t
+                    ^ \markup A
                     <bf'' af''' b''' f''''>4
                     ^ \markup { 1-26 }
                     <cs' bf'' af''' b''' f''''>4
@@ -124,6 +169,9 @@ Constellation.
                     ^ \markup { 1-36 }
                     cs'4
                     ^ \markup { 1-37 }
+                    - \tweak staff-padding 22
+                    - \tweak transparent ##t
+                    ^ \markup A
                     <ef' fs' a' cs''>4
                     ^ \markup { 1-38 }
                     <g' ef'' fs'' a'' cs'''>4
@@ -148,6 +196,9 @@ Constellation.
                     ^ \markup { 1-48 }
                     <g' af' b' ef'' f'' fs'' a'' cs'''>4
                     ^ \markup { 1-49 }
+                    - \tweak staff-padding 22
+                    - \tweak transparent ##t
+                    ^ \markup A
                     <af' b' f'' g'' ef''' fs''' a''' cs''''>4
                     ^ \markup { 1-50 }
                     <bf' af'' b'' f'''>4
@@ -172,6 +223,9 @@ Constellation.
                     ^ \markup { 1-60 }
                     e'4
                     ^ \markup { 1-61 }
+                    - \tweak staff-padding 22
+                    - \tweak transparent ##t
+                    ^ \markup A
                     <cs' e'>4
                     ^ \markup { 1-62 }
                     <ef' e' fs' a' cs''>4
@@ -196,6 +250,9 @@ Constellation.
                     ^ \markup { 1-72 }
                     <b ef' e' f' fs' a' cs''>4
                     ^ \markup { 1-73 }
+                    - \tweak staff-padding 22
+                    - \tweak transparent ##t
+                    ^ \markup A
                     <b e' f' g' ef'' fs'' a'' cs'''>4
                     ^ \markup { 1-74 }
                     <b e' f' g'' ef''' fs''' a''' cs''''>4
@@ -220,6 +277,9 @@ Constellation.
                     ^ \markup { 1-84 }
                     <e' bf' g'' af'' b'' ef''' f''' fs''' a''' cs''''>4
                     ^ \markup { 1-85 }
+                    - \tweak staff-padding 22
+                    - \tweak transparent ##t
+                    ^ \markup A
                     <e' bf'' af''' b''' f''''>4
                     ^ \markup { 1-86 }
                     <cs' e' bf'' af''' b''' f''''>4
@@ -244,6 +304,9 @@ Constellation.
                     ^ \markup { 1-96 }
                     <c' cs' d' e''>4
                     ^ \markup { 1-97 }
+                    - \tweak staff-padding 22
+                    - \tweak transparent ##t
+                    ^ \markup A
                     <c' d' ef' fs' a' cs'' e''>4
                     ^ \markup { 1-98 }
                     <c' d' g' ef'' e'' fs'' a'' cs'''>4
@@ -268,6 +331,9 @@ Constellation.
                     ^ \markup { 1-108 }
                     <c' d' g' af' b' ef'' e'' f'' fs'' a'' cs'''>4
                     ^ \markup { 1-109 }
+                    - \tweak staff-padding 22
+                    - \tweak transparent ##t
+                    ^ \markup A
                     <c' d' af' b' e'' f'' g'' ef''' fs''' a''' cs''''>4
                     ^ \markup { 1-110 }
                     <c' d' bf' e'' af'' b'' f'''>4
@@ -292,6 +358,9 @@ Constellation.
                     ^ \markup { 1-120 }
                     <c'' d'' e'''>4
                     ^ \markup { 1-121 }
+                    - \tweak staff-padding 22
+                    - \tweak transparent ##t
+                    ^ \markup A
                     <cs' c'' d'' e'''>4
                     ^ \markup { 1-122 }
                     <ef' fs' a' c'' cs'' d'' e'''>4
@@ -316,6 +385,9 @@ Constellation.
                     ^ \markup { 1-132 }
                     <b ef' f' fs' a' c'' cs'' d'' e'''>4
                     ^ \markup { 1-133 }
+                    - \tweak staff-padding 22
+                    - \tweak transparent ##t
+                    ^ \markup A
                     <b f' g' c'' d'' ef'' fs'' a'' cs''' e'''>4
                     ^ \markup { 1-134 }
                     <b f' c'' d'' g'' ef''' e''' fs''' a''' cs''''>4
@@ -340,6 +412,9 @@ Constellation.
                     ^ \markup { 1-144 }
                     <bf' c'' d'' g'' af'' b'' ef''' e''' f''' fs''' a''' cs''''>4
                     ^ \markup { 1-145 }
+                    - \tweak staff-padding 22
+                    - \tweak transparent ##t
+                    ^ \markup A
                     <c'' d'' bf'' e''' af''' b''' f''''>4
                     ^ \markup { 1-146 }
                     <cs' c'' d'' bf'' e''' af''' b''' f''''>4
@@ -364,6 +439,9 @@ Constellation.
                     ^ \markup { 1-156 }
                     <cs' c''' d''' e''''>4
                     ^ \markup { 1-157 }
+                    - \tweak staff-padding 22
+                    - \tweak transparent ##t
+                    ^ \markup A
                     <ef' fs' a' cs'' c''' d''' e''''>4
                     ^ \markup { 1-158 }
                     <g' ef'' fs'' a'' c''' cs''' d''' e''''>4
@@ -388,6 +466,9 @@ Constellation.
                     ^ \markup { 1-168 }
                     <g' af' b' ef'' f'' fs'' a'' c''' cs''' d''' e''''>4
                     ^ \markup { 1-169 }
+                    - \tweak staff-padding 22
+                    - \tweak transparent ##t
+                    ^ \markup A
                     <af' b' f'' g'' c''' d''' ef''' fs''' a''' cs'''' e''''>4
                     ^ \markup { 1-170 }
                     <bf' af'' b'' c''' d''' f''' e''''>4
@@ -594,6 +675,9 @@ Constellation.
                     g4
                     r4
                     r4
+                    \bar "|."
+                    \override Score.BarLine.stencil = ##t
+                    \override Score.SpanBar.stencil = ##t
                 }
             >>
         >>
