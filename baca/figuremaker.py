@@ -10611,13 +10611,21 @@ def figure(
     )
 
 
-def lilypond_file(selection, includes=None):
+def lilypond_file(selection, time_signatures=None, *, includes=None):
     """
     Wraps ``selection`` in LilyPond file for doc examples.
     """
-    duration = abjad.get.duration(selection)
-    time_signature = abjad.TimeSignature(duration)
-    abjad.attach(time_signature, abjad.select(selection).leaf(0))
+    if time_signatures is None:
+        duration = abjad.get.duration(selection)
+        time_signature = abjad.TimeSignature(duration)
+        abjad.attach(time_signature, abjad.select(selection).leaf(0))
+    else:
+        leaves = abjad.select(selection).leaves()
+        parts = leaves.partition_by_durations(time_signatures)
+        assert len(parts) == len(time_signatures)
+        for time_signature, part in zip(time_signatures, parts):
+            time_signature = abjad.TimeSignature(time_signature)
+            abjad.attach(time_signature, abjad.select(part).leaf(0))
     staff = abjad.Staff(selection)
     score = abjad.Score([staff])
     preamble = r"""\layout {

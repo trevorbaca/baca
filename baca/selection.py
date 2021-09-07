@@ -35,12 +35,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).chead(-1)
             >>> result
@@ -63,10 +67,8 @@ class Selection(abjad.Selection):
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -93,9 +95,6 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -122,12 +121,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).cheads()
             >>> for item in result:
@@ -156,11 +159,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         bf'16
                         \abjad-color-music #'red
                         <a'' b''>16
@@ -170,7 +172,8 @@ class Selection(abjad.Selection):
                         ~
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         bf'16
                         \abjad-color-music #'red
@@ -182,7 +185,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         bf'16
                         \abjad-color-music #'red
@@ -192,9 +196,6 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -221,12 +222,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).clparts([2, 3, 4])
             >>> for item in result:
@@ -255,12 +260,11 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         \abjad-color-music #'red
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         \abjad-color-music #'red
                         bf'16
                         \abjad-color-music #'blue
@@ -273,7 +277,8 @@ class Selection(abjad.Selection):
                         \abjad-color-music #'red
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         \abjad-color-music #'red
                         r16
                         \abjad-color-music #'red
@@ -289,7 +294,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         \abjad-color-music #'red
                         r16
                         \abjad-color-music #'red
@@ -303,9 +309,6 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'blue
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -406,12 +409,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).leaves().enchain([5])
             >>> for item in result:
@@ -450,11 +457,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         ^ \markup { \bold \with-color #red * }
                         bf'16
                         ^ \markup { \bold \with-color #red * }
@@ -469,7 +475,8 @@ class Selection(abjad.Selection):
                         <d' e'>16
                         _ \markup { \bold \with-color #blue * }
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         _ \markup { \bold \with-color #blue * }
                         bf'16
@@ -486,7 +493,8 @@ class Selection(abjad.Selection):
                         ^ \markup { \bold \with-color #red * }
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         ^ \markup { \bold \with-color #red * }
                         _ \markup { \bold \with-color #blue * }
@@ -501,9 +509,6 @@ class Selection(abjad.Selection):
                         _ \markup { \bold \with-color #blue * }
                         ~
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                         ^ \markup { \bold \with-color #red * }
                     }
                 }
@@ -770,12 +775,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).tuplets()[1:2].lleaf(0)
             >>> result
@@ -797,11 +806,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -810,7 +818,8 @@ class Selection(abjad.Selection):
                         \abjad-color-music #'green
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         bf'16
                         <a'' b''>16
@@ -820,7 +829,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         bf'16
                         <a'' b''>16
@@ -828,9 +838,6 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -914,12 +921,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).tuplets()[1:2].lleaves()
             >>> for item in result:
@@ -949,11 +960,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -962,7 +972,8 @@ class Selection(abjad.Selection):
                         \abjad-color-music #'red
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         \abjad-color-music #'blue
                         r16
                         \abjad-color-music #'red
@@ -978,7 +989,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         bf'16
                         <a'' b''>16
@@ -986,9 +998,6 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -1015,12 +1024,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).lparts([2, 3, 4])
             >>> for item in result:
@@ -1046,12 +1059,11 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         \abjad-color-music #'red
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         \abjad-color-music #'red
                         bf'16
                         \abjad-color-music #'blue
@@ -1064,7 +1076,8 @@ class Selection(abjad.Selection):
                         \abjad-color-music #'red
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         \abjad-color-music #'red
                         r16
                         \abjad-color-music #'red
@@ -1077,7 +1090,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         bf'16
                         <a'' b''>16
@@ -1085,9 +1099,6 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -1114,12 +1125,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).lt(-1)
             >>> result
@@ -1141,11 +1156,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -1153,7 +1167,8 @@ class Selection(abjad.Selection):
                         ~
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         bf'16
                         <a'' b''>16
@@ -1163,7 +1178,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         bf'16
                         <a'' b''>16
@@ -1173,9 +1189,6 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'green
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -1202,12 +1215,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).ltleaf(0)
             >>> result
@@ -1229,11 +1246,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         \abjad-color-music #'green
                         bf'16
                         <a'' b''>16
@@ -1242,7 +1258,8 @@ class Selection(abjad.Selection):
                         ~
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         bf'16
                         <a'' b''>16
@@ -1252,16 +1269,14 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         bf'16
                         <a'' b''>16
                         e'16
                         r4
                         r16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -1288,12 +1303,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).ltleaves()
             >>> for item in result:
@@ -1333,11 +1352,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         \abjad-color-music #'red
                         bf'16
                         \abjad-color-music #'blue
@@ -1350,7 +1368,8 @@ class Selection(abjad.Selection):
                         \abjad-color-music #'red
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         \abjad-color-music #'blue
                         r16
                         \abjad-color-music #'red
@@ -1366,7 +1385,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         \abjad-color-music #'blue
                         r16
                         \abjad-color-music #'red
@@ -1379,9 +1399,6 @@ class Selection(abjad.Selection):
                         r4
                         \abjad-color-music #'red
                         r16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -1408,12 +1425,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).ltqrun(-1)
             >>> result
@@ -1435,11 +1456,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'16
                         c'16
                         c'16
@@ -1447,7 +1467,8 @@ class Selection(abjad.Selection):
                         ~
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         d'16
                         d'16
@@ -1457,7 +1478,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         e'16
                         e'16
@@ -1467,9 +1489,6 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'green
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -1496,12 +1515,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).ltqruns()
             >>> for item in result:
@@ -1530,11 +1553,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         \abjad-color-music #'red
                         c'16
                         \abjad-color-music #'red
@@ -1547,7 +1569,8 @@ class Selection(abjad.Selection):
                         \abjad-color-music #'blue
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         \abjad-color-music #'red
                         d'16
@@ -1562,7 +1585,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         \abjad-color-music #'red
                         e'16
@@ -1575,9 +1599,6 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'blue
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -1612,12 +1633,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).ltrun(-1)
             >>> result
@@ -1639,11 +1664,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'16
                         c'16
                         c'16
@@ -1651,7 +1675,8 @@ class Selection(abjad.Selection):
                         ~
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         d'16
                         d'16
@@ -1661,7 +1686,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         \abjad-color-music #'green
                         e'16
@@ -1674,9 +1700,6 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'green
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -1703,12 +1726,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).ltruns()
             >>> for item in result:
@@ -1734,11 +1761,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         \abjad-color-music #'red
                         c'16
                         \abjad-color-music #'red
@@ -1751,7 +1777,8 @@ class Selection(abjad.Selection):
                         \abjad-color-music #'red
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         \abjad-color-music #'blue
                         d'16
@@ -1766,7 +1793,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         \abjad-color-music #'red
                         e'16
@@ -1779,9 +1807,6 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'red
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -1812,12 +1837,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).lts()
             >>> for item in result:
@@ -1855,12 +1884,11 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         \abjad-color-music #'red
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         \abjad-color-music #'blue
                         bf'16
                         \abjad-color-music #'red
@@ -1873,7 +1901,8 @@ class Selection(abjad.Selection):
                         \abjad-color-music #'red
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         \abjad-color-music #'blue
                         r16
                         \abjad-color-music #'red
@@ -1889,7 +1918,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         \abjad-color-music #'red
                         r16
                         \abjad-color-music #'blue
@@ -1903,9 +1933,6 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'red
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -2215,12 +2242,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).ntrun(-1)
             >>> result
@@ -2242,11 +2273,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'16
                         c'16
                         c'16
@@ -2254,7 +2284,8 @@ class Selection(abjad.Selection):
                         ~
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         d'16
                         d'16
@@ -2264,7 +2295,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         \abjad-color-music #'green
                         e'16
@@ -2277,9 +2309,6 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'green
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -2306,12 +2335,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).ntruns()
             >>> for item in result:
@@ -2337,11 +2370,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         \abjad-color-music #'red
                         c'16
                         \abjad-color-music #'red
@@ -2354,7 +2386,8 @@ class Selection(abjad.Selection):
                         \abjad-color-music #'red
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         \abjad-color-music #'blue
                         d'16
@@ -2369,7 +2402,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         \abjad-color-music #'red
                         e'16
@@ -2382,9 +2416,6 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'red
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -2504,12 +2535,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).phead(-1)
             >>> result
@@ -2531,11 +2566,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -2543,7 +2577,8 @@ class Selection(abjad.Selection):
                         ~
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         bf'16
                         <a'' b''>16
@@ -2553,7 +2588,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         bf'16
                         <a'' b''>16
@@ -2562,9 +2598,6 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -2591,13 +2624,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).pheads()
             >>> for item in result:
@@ -2632,11 +2668,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         \abjad-color-music #'red
                         bf'16
                         \abjad-color-music #'blue
@@ -2648,7 +2683,8 @@ class Selection(abjad.Selection):
                         ~
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         \abjad-color-music #'red
                         bf'16
@@ -2662,7 +2698,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         \abjad-color-music #'red
                         bf'16
@@ -2674,9 +2711,6 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -2706,12 +2740,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).pleaf(-1)
             >>> result
@@ -2733,11 +2771,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -2745,7 +2782,8 @@ class Selection(abjad.Selection):
                         ~
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         bf'16
                         <a'' b''>16
@@ -2755,7 +2793,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         bf'16
                         <a'' b''>16
@@ -2764,9 +2803,6 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'green
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -2793,12 +2829,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).pleaves()
             >>> for item in result:
@@ -2836,11 +2876,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         \abjad-color-music #'red
                         bf'16
                         \abjad-color-music #'blue
@@ -2853,7 +2892,8 @@ class Selection(abjad.Selection):
                         \abjad-color-music #'red
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         \abjad-color-music #'blue
                         bf'16
@@ -2868,7 +2908,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         \abjad-color-music #'red
                         bf'16
@@ -2881,9 +2922,6 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'red
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -2910,12 +2948,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).plt(-1)
             >>> result
@@ -2937,11 +2979,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -2949,7 +2990,8 @@ class Selection(abjad.Selection):
                         ~
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         bf'16
                         <a'' b''>16
@@ -2959,7 +3001,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         bf'16
                         <a'' b''>16
@@ -2969,9 +3012,6 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'green
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -2998,12 +3038,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).plts()
             >>> for item in result:
@@ -3038,11 +3082,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         \abjad-color-music #'red
                         bf'16
                         \abjad-color-music #'blue
@@ -3055,7 +3098,8 @@ class Selection(abjad.Selection):
                         \abjad-color-music #'blue
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         \abjad-color-music #'red
                         bf'16
@@ -3070,7 +3114,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         \abjad-color-music #'red
                         bf'16
@@ -3083,9 +3128,6 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'blue
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -3112,12 +3154,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).ptail(-1)
             >>> result
@@ -3139,11 +3185,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -3151,7 +3196,8 @@ class Selection(abjad.Selection):
                         ~
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         bf'16
                         <a'' b''>16
@@ -3161,7 +3207,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         bf'16
                         <a'' b''>16
@@ -3170,9 +3217,6 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'green
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -3199,12 +3243,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).ptails()
             >>> for item in result:
@@ -3239,11 +3287,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         \abjad-color-music #'red
                         bf'16
                         \abjad-color-music #'blue
@@ -3255,7 +3302,8 @@ class Selection(abjad.Selection):
                         \abjad-color-music #'blue
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         \abjad-color-music #'red
                         bf'16
@@ -3269,7 +3317,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         \abjad-color-music #'red
                         bf'16
@@ -3281,9 +3330,6 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'blue
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -3313,12 +3359,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).ptlt(-1)
             >>> result
@@ -3340,11 +3390,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -3352,7 +3401,8 @@ class Selection(abjad.Selection):
                         ~
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         bf'16
                         <a'' b''>16
@@ -3362,7 +3412,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         bf'16
                         <a'' b''>16
@@ -3371,9 +3422,6 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -3400,12 +3448,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).ptlts()
             >>> for item in result:
@@ -3437,11 +3489,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         \abjad-color-music #'red
                         bf'16
                         \abjad-color-music #'blue
@@ -3452,7 +3503,8 @@ class Selection(abjad.Selection):
                         ~
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         \abjad-color-music #'blue
                         bf'16
@@ -3465,7 +3517,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         \abjad-color-music #'red
                         bf'16
@@ -3476,9 +3529,6 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -3505,12 +3555,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).qrun(-1)
             >>> result
@@ -3532,11 +3586,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'16
                         c'16
                         c'16
@@ -3544,7 +3597,8 @@ class Selection(abjad.Selection):
                         ~
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         d'16
                         d'16
@@ -3554,7 +3608,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         e'16
                         e'16
@@ -3564,9 +3619,6 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'green
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -3593,13 +3645,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).qruns()
             >>> for item in result:
@@ -3628,11 +3683,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         \abjad-color-music #'red
                         c'16
                         \abjad-color-music #'red
@@ -3645,7 +3699,8 @@ class Selection(abjad.Selection):
                         \abjad-color-music #'blue
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         \abjad-color-music #'red
                         d'16
@@ -3660,7 +3715,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         \abjad-color-music #'red
                         e'16
@@ -3673,9 +3729,6 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'blue
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -3709,13 +3762,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).tuplets()[1:2].rleaf(-1)
             >>> result
@@ -3737,11 +3793,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -3749,7 +3804,8 @@ class Selection(abjad.Selection):
                         ~
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         bf'16
                         <a'' b''>16
@@ -3759,7 +3815,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         \abjad-color-music #'green
                         r16
                         bf'16
@@ -3768,9 +3825,6 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -3856,12 +3910,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).tuplets()[1:2].rleaves()
             >>> for item in result:
@@ -3891,11 +3949,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -3903,7 +3960,8 @@ class Selection(abjad.Selection):
                         ~
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         \abjad-color-music #'red
                         r16
                         \abjad-color-music #'blue
@@ -3919,7 +3977,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         \abjad-color-music #'red
                         r16
                         bf'16
@@ -3928,9 +3987,6 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -4020,12 +4076,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).rrun(1)
             >>> result
@@ -4047,11 +4107,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'16
                         c'16
                         c'16
@@ -4059,7 +4118,8 @@ class Selection(abjad.Selection):
                         ~
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         \abjad-color-music #'green
                         d'16
@@ -4074,7 +4134,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         \abjad-color-music #'green
                         r16
                         e'16
@@ -4083,9 +4144,6 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -4112,12 +4170,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).rruns()
             >>> for item in result:
@@ -4143,11 +4205,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         \abjad-color-music #'red
                         c'16
                         \abjad-color-music #'red
@@ -4160,7 +4221,8 @@ class Selection(abjad.Selection):
                         \abjad-color-music #'red
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         \abjad-color-music #'red
                         r16
                         \abjad-color-music #'blue
@@ -4176,7 +4238,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         \abjad-color-music #'blue
                         r16
                         \abjad-color-music #'red
@@ -4190,9 +4253,6 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'red
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -4331,12 +4391,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).tleaf(0)
             >>> result
@@ -4358,11 +4422,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         \abjad-color-music #'green
                         bf'16
                         <a'' b''>16
@@ -4371,7 +4434,8 @@ class Selection(abjad.Selection):
                         ~
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         bf'16
                         <a'' b''>16
@@ -4381,7 +4445,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         bf'16
                         <a'' b''>16
@@ -4389,9 +4454,6 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -4418,12 +4480,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).tleaves()
             >>> for item in result:
@@ -4463,11 +4529,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         \abjad-color-music #'red
                         bf'16
                         \abjad-color-music #'blue
@@ -4480,7 +4545,8 @@ class Selection(abjad.Selection):
                         \abjad-color-music #'red
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         \abjad-color-music #'blue
                         r16
                         \abjad-color-music #'red
@@ -4496,7 +4562,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         \abjad-color-music #'blue
                         r16
                         \abjad-color-music #'red
@@ -4510,9 +4577,6 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'red
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -4539,12 +4603,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).tuplets()[1:2].wleaf(0)
             >>> result
@@ -4566,11 +4634,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -4579,7 +4646,8 @@ class Selection(abjad.Selection):
                         \abjad-color-music #'green
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         bf'16
                         <a'' b''>16
@@ -4589,7 +4657,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         r16
                         bf'16
                         <a'' b''>16
@@ -4597,9 +4666,6 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -4615,12 +4681,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).tuplets()[1:2].wleaf(-1)
             >>> result
@@ -4642,11 +4712,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -4654,7 +4723,8 @@ class Selection(abjad.Selection):
                         ~
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         r16
                         bf'16
                         <a'' b''>16
@@ -4664,7 +4734,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         \abjad-color-music #'green
                         r16
                         bf'16
@@ -4673,9 +4744,6 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 
@@ -4702,12 +4770,16 @@ class Selection(abjad.Selection):
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> staff = lilypond_file[abjad.Staff]
-            >>> abjad.setting(staff).autoBeaming = False
-            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(tuplets)
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> abjad.setting(staff).autoBeaming = False
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).tuplets()[1:2].wleaves()
             >>> for item in result:
@@ -4738,11 +4810,10 @@ class Selection(abjad.Selection):
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
+                        \time 7/4
                         r16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -4751,7 +4822,8 @@ class Selection(abjad.Selection):
                         \abjad-color-music #'red
                         <d' e'>16
                     }
-                    \times 8/9 {
+                    \times 8/9
+                    {
                         \abjad-color-music #'blue
                         r16
                         \abjad-color-music #'red
@@ -4767,7 +4839,8 @@ class Selection(abjad.Selection):
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9 {
+                    \times 10/9
+                    {
                         \abjad-color-music #'blue
                         r16
                         bf'16
@@ -4776,9 +4849,6 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 }
 

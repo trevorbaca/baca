@@ -433,9 +433,12 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, divisions)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(music, divisions)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -443,13 +446,9 @@ class Sequence(abjad.Sequence):
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
+                    \new Staff
                     {
                         \time 15/8
-                        s1 * 15/8
-                    }
-                    \new RhythmicStaff
-                    {
                         c'1...
                     }
                 >>
@@ -467,9 +466,12 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(music)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -477,21 +479,11 @@ class Sequence(abjad.Sequence):
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
+                    \new Staff
                     {
                         \time 2/1
-                        s1 * 2
-                    }
-                    \new RhythmicStaff
-                    {
                         c'2
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'1.
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 >>
 
@@ -509,9 +501,12 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(music)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -519,22 +514,12 @@ class Sequence(abjad.Sequence):
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
+                    \new Staff
                     {
                         \time 2/1
-                        s1 * 2
-                    }
-                    \new RhythmicStaff
-                    {
                         c'2
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'1
                         c'2
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 >>
 
@@ -557,9 +542,12 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(music)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -567,22 +555,12 @@ class Sequence(abjad.Sequence):
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
+                    \new Staff
                     {
                         \time 15/8
-                        s1 * 15/8
-                    }
-                    \new RhythmicStaff
-                    {
                         c'2.
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'2..
                         c'4
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 >>
 
@@ -623,9 +601,12 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(music)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -633,17 +614,10 @@ class Sequence(abjad.Sequence):
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
+                    \new Staff
                     {
                         \time 15/8
-                        s1 * 15/8
-                    }
-                    \new RhythmicStaff
-                    {
                         c'16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'16
                         c'16
                         c'16
@@ -667,9 +641,6 @@ class Sequence(abjad.Sequence):
                         c'4
                         ~
                         c'16
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 >>
 
@@ -1049,9 +1020,12 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(music)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1059,17 +1033,10 @@ class Sequence(abjad.Sequence):
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
+                    \new Staff
                     {
                         \time 15/8
-                        s1 * 15/8
-                    }
-                    \new RhythmicStaff
-                    {
                         c'4
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'4
                         c'4
                         c'8
@@ -1078,9 +1045,6 @@ class Sequence(abjad.Sequence):
                         c'4
                         c'4
                         c'8
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 >>
 
@@ -1118,9 +1082,12 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(music, time_signatures)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1128,27 +1095,21 @@ class Sequence(abjad.Sequence):
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
+                    \new Staff
                     {
                         \time 5/8
-                        s1 * 5/8
-                        \time 6/8
-                        s1 * 3/4
-                    }
-                    \new RhythmicStaff
-                    {
                         c'2
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         ~
                         c'8
                         \tweak edge-height #'(0.7 . 0)
-                        \times 16/24 {
+                        \times 16/24
+                        {
+                            \time 6/8
                             c'4..
                         }
                         \tweak edge-height #'(0.7 . 0)
-                        \times 16/24 {
+                        \times 16/24
+                        {
                             c'2
                             ~
                             c'8.
@@ -1173,9 +1134,12 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(music, time_signatures)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1183,21 +1147,13 @@ class Sequence(abjad.Sequence):
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
+                    \new Staff
                     {
                         \time 5/8
-                        s1 * 5/8
-                        \time 6/8
-                        s1 * 3/4
-                    }
-                    \new RhythmicStaff
-                    {
                         c'2
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         ~
                         c'8
+                        \time 6/8
                         c'4
                         c'2
                     }
@@ -1224,9 +1180,12 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(music, time_signatures)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1234,30 +1193,24 @@ class Sequence(abjad.Sequence):
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 5/8
-                        s1 * 5/8
-                        \time 6/8
-                        s1 * 3/4
-                    }
-                    \new RhythmicStaff
+                    \new Staff
                     {
                         \tweak edge-height #'(0.7 . 0)
-                        \times 16/24 {
+                        \times 16/24
+                        {
+                            \time 5/8
                             c'2
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                             ~
                             c'8
                         }
                         \tweak edge-height #'(0.7 . 0)
-                        \times 16/24 {
+                        \times 16/24
+                        {
                             c'4
                             ~
                             c'16
                         }
+                        \time 6/8
                         c'2
                         c'4
                     }
@@ -1282,9 +1235,12 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(music, time_signatures)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1292,20 +1248,12 @@ class Sequence(abjad.Sequence):
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
+                    \new Staff
                     {
                         \time 5/8
-                        s1 * 5/8
-                        \time 6/8
-                        s1 * 3/4
-                    }
-                    \new RhythmicStaff
-                    {
                         c'4.
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'4
+                        \time 6/8
                         c'2
                         c'4
                     }
@@ -1339,9 +1287,12 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(music, time_signatures)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1349,30 +1300,24 @@ class Sequence(abjad.Sequence):
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
-                    {
-                        \time 5/8
-                        s1 * 5/8
-                        \time 6/8
-                        s1 * 3/4
-                    }
-                    \new RhythmicStaff
+                    \new Staff
                     {
                         \tweak edge-height #'(0.7 . 0)
-                        \times 16/24 {
+                        \times 16/24
+                        {
+                            \time 5/8
                             c'2
-                            - \tweak staff-padding 11
-                            - \tweak transparent ##t
-                            ^ \markup I
                             ~
                             c'8
                         }
                         \tweak edge-height #'(0.7 . 0)
-                        \times 16/24 {
+                        \times 16/24
+                        {
                             c'4
                             ~
                             c'16
                         }
+                        \time 6/8
                         c'4
                         c'4
                         c'4
@@ -1405,9 +1350,12 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(music, time_signatures)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1415,20 +1363,12 @@ class Sequence(abjad.Sequence):
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
+                    \new Staff
                     {
                         \time 5/8
-                        s1 * 5/8
-                        \time 6/8
-                        s1 * 3/4
-                    }
-                    \new RhythmicStaff
-                    {
                         c'4.
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'4
+                        \time 6/8
                         c'4
                         c'4
                         c'4
@@ -1741,9 +1681,12 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(music)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1751,17 +1694,10 @@ class Sequence(abjad.Sequence):
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
+                    \new Staff
                     {
                         \time 15/8
-                        s1 * 15/8
-                    }
-                    \new RhythmicStaff
-                    {
                         c'4
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'4
                         c'4
                         c'4
@@ -1769,9 +1705,6 @@ class Sequence(abjad.Sequence):
                         c'4
                         c'4
                         c'8
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 >>
 
@@ -1797,9 +1730,12 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(music)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1807,26 +1743,16 @@ class Sequence(abjad.Sequence):
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
+                    \new Staff
                     {
                         \time 15/8
-                        s1 * 15/8
-                    }
-                    \new RhythmicStaff
-                    {
                         c'4
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'4
                         c'4
                         c'4
                         c'4
                         c'4
                         c'4.
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 >>
 
@@ -1855,9 +1781,12 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(music)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1865,17 +1794,10 @@ class Sequence(abjad.Sequence):
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
+                    \new Staff
                     {
                         \time 15/8
-                        s1 * 15/8
-                    }
-                    \new RhythmicStaff
-                    {
                         c'8
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'4
                         c'4
                         c'4
@@ -1883,9 +1805,6 @@ class Sequence(abjad.Sequence):
                         c'4
                         c'4
                         c'4
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 >>
 
@@ -1912,9 +1831,12 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(music)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1922,26 +1844,16 @@ class Sequence(abjad.Sequence):
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
+                    \new Staff
                     {
                         \time 15/8
-                        s1 * 15/8
-                    }
-                    \new RhythmicStaff
-                    {
                         c'4.
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'4
                         c'4
                         c'4
                         c'4
                         c'4
                         c'4
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 >>
 
@@ -1978,9 +1890,12 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(music, time_signatures)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1988,33 +1903,21 @@ class Sequence(abjad.Sequence):
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
+                    \new Staff
                     {
                         \time 7/8
-                        s1 * 7/8
+                        c'4
+                        c'4
+                        c'4
+                        c'8
                         \time 7/8
-                        s1 * 7/8
+                        c'4
+                        c'4
+                        c'4
+                        c'8
                         \time 7/16
-                        s1 * 7/16
-                    }
-                    \new RhythmicStaff
-                    {
-                        c'4
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
-                        c'4
-                        c'4
-                        c'8
-                        c'4
-                        c'4
-                        c'4
-                        c'8
                         c'4
                         c'8.
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 >>
 
@@ -2051,9 +1954,12 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(music, time_signatures)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2061,33 +1967,21 @@ class Sequence(abjad.Sequence):
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
+                    \new Staff
                     {
                         \time 7/8
-                        s1 * 7/8
+                        c'8
+                        c'4
+                        c'4
+                        c'4
                         \time 7/8
-                        s1 * 7/8
+                        c'8
+                        c'4
+                        c'4
+                        c'4
                         \time 7/16
-                        s1 * 7/16
-                    }
-                    \new RhythmicStaff
-                    {
-                        c'8
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
-                        c'4
-                        c'4
-                        c'4
-                        c'8
-                        c'4
-                        c'4
-                        c'4
                         c'8.
                         c'4
-                        - \tweak staff-padding 18
-                        - \tweak transparent ##t
-                        ^ \markup I
                     }
                 >>
 
@@ -2118,9 +2012,12 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(music, time_signatures)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2128,17 +2025,10 @@ class Sequence(abjad.Sequence):
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
+                    \new Staff
                     {
                         \time 5/8
-                        s1 * 5/8
-                    }
-                    \new RhythmicStaff
-                    {
                         c'4
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'4.
                     }
                 >>
@@ -2171,10 +2061,12 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(
-            ...     music, time_signatures
-            ...     )
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(music, time_signatures)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2182,13 +2074,9 @@ class Sequence(abjad.Sequence):
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
+                    \new Staff
                     {
                         \time 5/8
-                        s1 * 5/8
-                    }
-                    \new RhythmicStaff
-                    {
                         c'4.
                         c'4
                     }
@@ -2221,9 +2109,12 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(music, time_signatures)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2231,21 +2122,13 @@ class Sequence(abjad.Sequence):
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
+                    \new Staff
                     {
                         \time 3/4
-                        s1 * 3/4
+                        c'4
+                        c'4
+                        c'4
                         \time 6/8
-                        s1 * 3/4
-                    }
-                    \new RhythmicStaff
-                    {
-                        c'4
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
-                        c'4
-                        c'4
                         c'4.
                         c'4.
                     }
@@ -2287,9 +2170,12 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> divisions = divisions.flatten(depth=-1)
             >>> music = rhythm_maker(divisions)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
-            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  book::
+                :lilypond/no-stylesheet:
+
+                >>> lilypond_file = baca.figuremaker.lilypond_file(music, time_signatures)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2297,26 +2183,17 @@ class Sequence(abjad.Sequence):
                 >>> print(string)
                 \new Score
                 <<
-                    \new GlobalContext
+                    \new Staff
                     {
                         \time 7/16
-                        s1 * 7/16
-                        \time 7/16
-                        s1 * 7/16
-                        \time 7/16
-                        s1 * 7/16
-                    }
-                    \new RhythmicStaff
-                    {
                         c'16
-                        - \tweak staff-padding 11
-                        - \tweak transparent ##t
-                        ^ \markup I
                         c'8
                         c'4
+                        \time 7/16
                         c'8
                         c'4
                         c'16
+                        \time 7/16
                         c'4
                         c'16
                         c'8
