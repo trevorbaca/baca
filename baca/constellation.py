@@ -692,7 +692,7 @@ Constellation.
     >>> generator = abjad.Chord(generator, (1, 4))
     >>> constellation.color_chord(generator)
     >>> constellation.label_chord(generator)
-    >>> score = abjad.illustrators.make_piano_score([generator], sketch=True)
+    >>> score = abjad.illustrators.make_piano_score([generator])
     >>> abjad.show(score) # doctest: +SKIP
 
     ..  docs::
@@ -700,13 +700,6 @@ Constellation.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \new Score
-        \with
-        {
-            \override BarLine.stencil = ##f
-            \override BarNumber.transparent = ##t
-            \override SpanBar.stencil = ##f
-            \override TimeSignature.stencil = ##f
-        }
         <<
             \new PianoStaff
             <<
@@ -776,7 +769,7 @@ Constellation.
     >>> pivot = abjad.Chord(pivot, (1, 4))
     >>> constellation.label_chord(pivot)
     >>> leaves = [generator, pivot]
-    >>> score = abjad.illustrators.make_piano_score(leaves, sketch=True)
+    >>> score = abjad.illustrators.make_piano_score(leaves)
     >>> abjad.show(score) # doctest: +SKIP
 
     ..  docs::
@@ -784,13 +777,6 @@ Constellation.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \new Score
-        \with
-        {
-            \override BarLine.stencil = ##f
-            \override BarNumber.transparent = ##t
-            \override SpanBar.stencil = ##f
-            \override TimeSignature.stencil = ##f
-        }
         <<
             \new PianoStaff
             <<
@@ -859,7 +845,7 @@ Constellation.
     >>> generator = abjad.Chord(generator, (1, 4))
     >>> constellation.label_chord(generator)
     >>> leaves = [generator]
-    >>> score = abjad.illustrators.make_piano_score(leaves, sketch=True)
+    >>> score = abjad.illustrators.make_piano_score(leaves)
     >>> abjad.show(score) # doctest: +SKIP
 
     ..  docs::
@@ -867,13 +853,6 @@ Constellation.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \new Score
-        \with
-        {
-            \override BarLine.stencil = ##f
-            \override BarNumber.transparent = ##t
-            \override SpanBar.stencil = ##f
-            \override TimeSignature.stencil = ##f
-        }
         <<
             \new PianoStaff
             <<
@@ -904,7 +883,7 @@ Constellation.
     >>> pivot = abjad.Chord(pivot, (1, 4))
     >>> constellation.label_chord(pivot)
     >>> leaves = [generator, pivot]
-    >>> score = abjad.illustrators.make_piano_score(leaves, sketch=True)
+    >>> score = abjad.illustrators.make_piano_score(leaves)
     >>> abjad.show(score) # doctest: +SKIP
 
     ..  docs::
@@ -912,13 +891,6 @@ Constellation.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \new Score
-        \with
-        {
-            \override BarLine.stencil = ##f
-            \override BarNumber.transparent = ##t
-            \override SpanBar.stencil = ##f
-            \override TimeSignature.stencil = ##f
-        }
         <<
             \new PianoStaff
             <<
@@ -949,7 +921,7 @@ Constellation.
     >>> pivot = abjad.Chord(pivot, (1, 4))
     >>> constellation.label_chord(pivot)
     >>> leaves = [pivot]
-    >>> score = abjad.illustrators.make_piano_score(leaves, sketch=True)
+    >>> score = abjad.illustrators.make_piano_score(leaves)
     >>> abjad.show(score) # doctest: +SKIP
 
     ..  docs::
@@ -957,13 +929,6 @@ Constellation.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \new Score
-        \with
-        {
-            \override BarLine.stencil = ##f
-            \override BarNumber.transparent = ##t
-            \override SpanBar.stencil = ##f
-            \override TimeSignature.stencil = ##f
-        }
         <<
             \new PianoStaff
             <<
@@ -993,7 +958,7 @@ Constellation.
     ...     constellation.color_chord(generator)
     ...     generators.append(generator)
 
-    >>> score = abjad.illustrators.make_piano_score(generators, sketch=True)
+    >>> score = abjad.illustrators.make_piano_score(generators)
     >>> abjad.show(score) # doctest: +SKIP
 
     ..  docs::
@@ -1001,13 +966,6 @@ Constellation.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \new Score
-        \with
-        {
-            \override BarLine.stencil = ##f
-            \override BarNumber.transparent = ##t
-            \override SpanBar.stencil = ##f
-            \override TimeSignature.stencil = ##f
-        }
         <<
             \new PianoStaff
             <<
@@ -1355,7 +1313,7 @@ Constellation.
 
     >>> chords = list(zip(generators, pivots))
     >>> chords_ = abjad.Sequence(chords).flatten()
-    >>> score = abjad.illustrators.make_piano_score(chords_, sketch=True)
+    >>> score = abjad.illustrators.make_piano_score(chords_)
     >>> abjad.show(score) # doctest: +SKIP
 
     ..  docs::
@@ -1363,13 +1321,6 @@ Constellation.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \new Score
-        \with
-        {
-            \override BarLine.stencil = ##f
-            \override BarNumber.transparent = ##t
-            \override SpanBar.stencil = ##f
-            \override TimeSignature.stencil = ##f
-        }
         <<
             \new PianoStaff
             <<
@@ -1725,7 +1676,7 @@ Constellation.
     ...     generator = abjad.Chord(generator, (1, 4))
     ...     generators.append(generator)
 
-    >>> score = abjad.illustrators.make_piano_score(generators, sketch=True)
+    >>> score = abjad.illustrators.make_piano_score(generators)
     >>> abjad.show(score) # doctest: +SKIP
 
     ..  docs::
@@ -1733,13 +1684,6 @@ Constellation.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \new Score
-        \with
-        {
-            \override BarLine.stencil = ##f
-            \override BarNumber.transparent = ##t
-            \override SpanBar.stencil = ##f
-            \override TimeSignature.stencil = ##f
-        }
         <<
             \new PianoStaff
             <<
@@ -1788,7 +1732,7 @@ Constellation.
 
     >>> chords = list(zip(generators, pivots))
     >>> chords_ = abjad.Sequence(chords).flatten()
-    >>> score = abjad.illustrators.make_piano_score(chords_, sketch=True)
+    >>> score = abjad.illustrators.make_piano_score(chords_)
     >>> abjad.show(score) # doctest: +SKIP
 
     ..  docs::
@@ -1796,13 +1740,6 @@ Constellation.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \new Score
-        \with
-        {
-            \override BarLine.stencil = ##f
-            \override BarNumber.transparent = ##t
-            \override SpanBar.stencil = ##f
-            \override TimeSignature.stencil = ##f
-        }
         <<
             \new PianoStaff
             <<
@@ -1861,7 +1798,7 @@ Constellation.
     ...     pivot = abjad.Chord(pivot, (1, 4))
     ...     pivots.append(pivot)
 
-    >>> score = abjad.illustrators.make_piano_score(pivots, sketch=True)
+    >>> score = abjad.illustrators.make_piano_score(pivots)
     >>> abjad.show(score) # doctest: +SKIP
 
     ..  docs::
@@ -1869,13 +1806,6 @@ Constellation.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \new Score
-        \with
-        {
-            \override BarLine.stencil = ##f
-            \override BarNumber.transparent = ##t
-            \override SpanBar.stencil = ##f
-            \override TimeSignature.stencil = ##f
-        }
         <<
             \new PianoStaff
             <<

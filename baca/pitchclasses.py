@@ -4040,7 +4040,6 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 \with
                 {
                     \override BarLine.stencil = ##f
-                    \override BarNumber.transparent = ##t
                     \override Rest.transparent = ##t
                     \override SpanBar.stencil = ##f
                     \override TimeSignature.stencil = ##f
@@ -4126,7 +4125,6 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 \with
                 {
                     \override BarLine.stencil = ##f
-                    \override BarNumber.transparent = ##t
                     \override Rest.transparent = ##t
                     \override SpanBar.stencil = ##f
                     \override TimeSignature.stencil = ##f
