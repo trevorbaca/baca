@@ -3081,7 +3081,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>> voice = lilypond_file[abjad.Score][0][0]
                 >>> string = abjad.lilypond(voice)
                 >>> print(string)
-                \new Voice
+                \context Voice = "Voice"
                 {
                     bf'8
                     bqf'8
@@ -3159,7 +3159,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     >>> voice = lilypond_file[abjad.Score][0][0]
                     >>> string = abjad.lilypond(voice)
                     >>> print(string)
-                    \new Voice
+                    \context Voice = "Voice"
                     {
                         b'8
                         bqs'8
@@ -3189,7 +3189,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     >>> voice = lilypond_file[abjad.Score][0][0]
                     >>> string = abjad.lilypond(voice)
                     >>> print(string)
-                    \new Voice
+                    \context Voice = "Voice"
                     {
                         bf'8
                         bqf'8
@@ -3250,7 +3250,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
                     \context Staff = "Treble_Staff"
                     {
@@ -3300,7 +3300,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
                     \context Staff = "Treble_Staff"
                     {
@@ -3350,7 +3350,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>> voice = lilypond_file[abjad.Score][0][0]
                 >>> string = abjad.lilypond(voice)
                 >>> print(string)
-                \new Voice
+                \context Voice = "Voice"
                 {
                     <fs' g' bf' bqf'>1
                 }
@@ -3853,7 +3853,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>> voice = lilypond_file[abjad.Score][0][0]
                 >>> string = abjad.lilypond(voice)
                 >>> print(string)
-                \new Voice
+                \context Voice = "Voice"
                 {
                     bf'8
                     bqf'8
@@ -3878,7 +3878,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>> voice = lilypond_file[abjad.Score][0][0]
                 >>> string = abjad.lilypond(voice)
                 >>> print(string)
-                \new Voice
+                \context Voice = "Voice"
                 {
                     bf'8
                     bqf'8
@@ -3913,7 +3913,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>> voice = lilypond_file[abjad.Score][0][0]
                 >>> string = abjad.lilypond(voice)
                 >>> print(string)
-                \new Voice
+                \context Voice = "Voice"
                 {
                     bf'8
                     bqf'8
@@ -3940,7 +3940,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>> voice = lilypond_file[abjad.Score][0][0]
                 >>> string = abjad.lilypond(voice)
                 >>> print(string)
-                \new Voice
+                \context Voice = "Voice"
                 {
                     bf'8
                     bqf'8
@@ -3978,7 +3978,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>> voice = lilypond_file[abjad.Score][0][0]
                 >>> string = abjad.lilypond(voice)
                 >>> print(string)
-                \new Voice
+                \context Voice = "Voice"
                 {
                     bf'8
                     b'8
@@ -4011,7 +4011,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>> voice = lilypond_file[abjad.Score][0][0]
                 >>> string = abjad.lilypond(voice)
                 >>> print(string)
-                \new Voice
+                \context Voice = "Voice"
                 {
                     bf'8
                     b'8
@@ -4034,7 +4034,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>> score = lilypond_file[abjad.Score]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 \with
                 {
                     \override BarLine.stencil = ##f
@@ -4043,7 +4043,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     \override TimeSignature.stencil = ##f
                 }
                 <<
-                    \new PianoStaff
+                    \context PianoStaff = "Piano_Staff"
                     <<
                         \context Staff = "Treble_Staff"
                         {
@@ -4096,7 +4096,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>> voice = lilypond_file[abjad.Score][0][0]
                 >>> string = abjad.lilypond(voice)
                 >>> print(string)
-                \new Voice
+                \context Voice = "Voice"
                 {
                     bf'8
                     b'8
@@ -4119,7 +4119,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>> score = lilypond_file[abjad.Score]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 \with
                 {
                     \override BarLine.stencil = ##f
@@ -4128,7 +4128,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     \override TimeSignature.stencil = ##f
                 }
                 <<
-                    \new PianoStaff
+                    \context PianoStaff = "Piano_Staff"
                     <<
                         \context Staff = "Treble_Staff"
                         {
@@ -4186,7 +4186,7 @@ class PitchClassSet(abjad.PitchClassSet):
                 >>> voice = lilypond_file[abjad.Score][0][0]
                 >>> string = abjad.lilypond(voice)
                 >>> print(string)
-                \new Voice
+                \context Voice = "Voice"
                 {
                     <fs' g' bf' bqf'>1
                 }
@@ -4286,7 +4286,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
                     \context Staff = "Treble_Staff"
                     {
@@ -4337,7 +4337,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
                     \context Staff = "Treble_Staff"
                     {
@@ -4373,7 +4373,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
                     \context Staff = "Treble_Staff"
                     {
@@ -4424,7 +4424,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
                     \context Staff = "Treble_Staff"
                     {
@@ -4460,7 +4460,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
                     \context Staff = "Treble_Staff"
                     {
@@ -4515,18 +4515,18 @@ class PitchSegment(abjad.PitchSegment):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
-                    \new Staff
+                    \context Staff = "Treble_Staff"
                     {
-                        \new Voice
+                        \context Voice = "Treble_Voice"
                         {
                             <fs' g'>1
                         }
                     }
-                    \new Staff
+                    \context Staff = "Bass_Staff"
                     {
-                        \new Voice
+                        \context Voice = "Bass_Voice"
                         {
                             <bf bqf>1
                         }
@@ -4552,7 +4552,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
                     \context Staff = "Treble_Staff"
                     {
@@ -4588,7 +4588,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
                     \context Staff = "Treble_Staff"
                     {
@@ -4639,7 +4639,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
                     \context Staff = "Treble_Staff"
                     {
@@ -4671,7 +4671,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
                     \context Staff = "Treble_Staff"
                     {
@@ -4704,7 +4704,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
                     \context Staff = "Treble_Staff"
                     {
@@ -4736,7 +4736,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
                     \context Staff = "Treble_Staff"
                     {
@@ -4785,7 +4785,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
                     \context Staff = "Treble_Staff"
                     {
@@ -4817,7 +4817,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
                     \context Staff = "Treble_Staff"
                     {
@@ -4850,7 +4850,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
                     \context Staff = "Treble_Staff"
                     {
@@ -4882,7 +4882,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
                     \context Staff = "Treble_Staff"
                     {
@@ -4932,7 +4932,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
                     \context Staff = "Treble_Staff"
                     {
@@ -4969,7 +4969,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
                     \context Staff = "Treble_Staff"
                     {
@@ -4998,7 +4998,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
                     \context Staff = "Treble_Staff"
                     {
@@ -5048,20 +5048,20 @@ class PitchSet(abjad.PitchSet):
                 >>> score = lilypond_file[abjad.Score]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new PianoStaff
+                    \context PianoStaff = "Piano_Staff"
                     <<
-                        \new Staff
+                        \context Staff = "Treble_Staff"
                         {
-                            \new Voice
+                            \context Voice = "Treble_Voice"
                             {
                                 <fs' g'>1
                             }
                         }
-                        \new Staff
+                        \context Staff = "Bass_Staff"
                         {
-                            \new Voice
+                            \context Voice = "Bass_Voice"
                             {
                                 <bf bqf>1
                             }
@@ -5118,18 +5118,18 @@ class PitchSet(abjad.PitchSet):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
-                    \new Staff
+                    \context Staff = "Treble_Staff"
                     {
-                        \new Voice
+                        \context Voice = "Treble_Voice"
                         {
                             <c'' d'' a'' bf''>1
                         }
                     }
-                    \new Staff
+                    \context Staff = "Bass_Staff"
                     {
-                        \new Voice
+                        \context Voice = "Bass_Voice"
                         {
                             s1
                         }
@@ -5148,18 +5148,18 @@ class PitchSet(abjad.PitchSet):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
-                    \new Staff
+                    \context Staff = "Treble_Staff"
                     {
-                        \new Voice
+                        \context Voice = "Treble_Voice"
                         {
                             <c' a' bf' d''>1
                         }
                     }
-                    \new Staff
+                    \context Staff = "Bass_Staff"
                     {
-                        \new Voice
+                        \context Voice = "Bass_Voice"
                         {
                             s1
                         }
@@ -5179,18 +5179,18 @@ class PitchSet(abjad.PitchSet):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
-                    \new Staff
+                    \context Staff = "Treble_Staff"
                     {
-                        \new Voice
+                        \context Voice = "Treble_Voice"
                         {
                             <c'' d'' a'' bf''>1
                         }
                     }
-                    \new Staff
+                    \context Staff = "Bass_Staff"
                     {
-                        \new Voice
+                        \context Voice = "Bass_Voice"
                         {
                             s1
                         }
@@ -5209,18 +5209,18 @@ class PitchSet(abjad.PitchSet):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
-                    \new Staff
+                    \context Staff = "Treble_Staff"
                     {
-                        \new Voice
+                        \context Voice = "Treble_Voice"
                         {
                             <d' a' bf' c''>1
                         }
                     }
-                    \new Staff
+                    \context Staff = "Bass_Staff"
                     {
-                        \new Voice
+                        \context Voice = "Bass_Voice"
                         {
                             s1
                         }
@@ -5256,18 +5256,18 @@ class PitchSet(abjad.PitchSet):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
-                    \new Staff
+                    \context Staff = "Treble_Staff"
                     {
-                        \new Voice
+                        \context Voice = "Treble_Voice"
                         {
                             <c'' d'' a'' bf''>1
                         }
                     }
-                    \new Staff
+                    \context Staff = "Bass_Staff"
                     {
-                        \new Voice
+                        \context Voice = "Bass_Voice"
                         {
                             s1
                         }
@@ -5286,18 +5286,18 @@ class PitchSet(abjad.PitchSet):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
-                    \new Staff
+                    \context Staff = "Treble_Staff"
                     {
-                        \new Voice
+                        \context Voice = "Treble_Voice"
                         {
                             <c' d' a' bf'>1
                         }
                     }
-                    \new Staff
+                    \context Staff = "Bass_Staff"
                     {
-                        \new Voice
+                        \context Voice = "Bass_Voice"
                         {
                             s1
                         }
@@ -5317,18 +5317,18 @@ class PitchSet(abjad.PitchSet):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
-                    \new Staff
+                    \context Staff = "Treble_Staff"
                     {
-                        \new Voice
+                        \context Voice = "Treble_Voice"
                         {
                             <c'' d'' a'' bf''>1
                         }
                     }
-                    \new Staff
+                    \context Staff = "Bass_Staff"
                     {
-                        \new Voice
+                        \context Voice = "Bass_Voice"
                         {
                             s1
                         }
@@ -5347,18 +5347,18 @@ class PitchSet(abjad.PitchSet):
                 >>> staff_group = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
-                \new PianoStaff
+                \context PianoStaff = "Piano_Staff"
                 <<
-                    \new Staff
+                    \context Staff = "Treble_Staff"
                     {
-                        \new Voice
+                        \context Voice = "Treble_Voice"
                         {
                             <d' a' bf' c''>1
                         }
                     }
-                    \new Staff
+                    \context Staff = "Bass_Staff"
                     {
-                        \new Voice
+                        \context Voice = "Bass_Voice"
                         {
                             s1
                         }

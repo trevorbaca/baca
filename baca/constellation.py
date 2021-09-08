@@ -90,9 +90,9 @@ Constellation.
 
         >>> string = abjad.lilypond(score)
         >>> print(string)
-        \new Score
+        \context Score = "Score"
         <<
-            \new PianoStaff
+            \context PianoStaff = "Piano_Staff"
             <<
                 \context Staff = "Treble_Staff"
                 {
@@ -708,9 +708,9 @@ Constellation.
 
         >>> string = abjad.lilypond(score)
         >>> print(string)
-        \new Score
+        \context Score = "Score"
         <<
-            \new PianoStaff
+            \context PianoStaff = "Piano_Staff"
             <<
                 \context Staff = "Treble_Staff"
                 {
@@ -785,9 +785,9 @@ Constellation.
 
         >>> string = abjad.lilypond(score)
         >>> print(string)
-        \new Score
+        \context Score = "Score"
         <<
-            \new PianoStaff
+            \context PianoStaff = "Piano_Staff"
             <<
                 \context Staff = "Treble_Staff"
                 {
@@ -861,9 +861,9 @@ Constellation.
 
         >>> string = abjad.lilypond(score)
         >>> print(string)
-        \new Score
+        \context Score = "Score"
         <<
-            \new PianoStaff
+            \context PianoStaff = "Piano_Staff"
             <<
                 \context Staff = "Treble_Staff"
                 {
@@ -899,9 +899,9 @@ Constellation.
 
         >>> string = abjad.lilypond(score)
         >>> print(string)
-        \new Score
+        \context Score = "Score"
         <<
-            \new PianoStaff
+            \context PianoStaff = "Piano_Staff"
             <<
                 \context Staff = "Treble_Staff"
                 {
@@ -937,9 +937,9 @@ Constellation.
 
         >>> string = abjad.lilypond(score)
         >>> print(string)
-        \new Score
+        \context Score = "Score"
         <<
-            \new PianoStaff
+            \context PianoStaff = "Piano_Staff"
             <<
                 \context Staff = "Treble_Staff"
                 {
@@ -974,9 +974,9 @@ Constellation.
 
         >>> string = abjad.lilypond(score)
         >>> print(string)
-        \new Score
+        \context Score = "Score"
         <<
-            \new PianoStaff
+            \context PianoStaff = "Piano_Staff"
             <<
                 \context Staff = "Treble_Staff"
                 {
@@ -1329,9 +1329,9 @@ Constellation.
 
         >>> string = abjad.lilypond(score)
         >>> print(string)
-        \new Score
+        \context Score = "Score"
         <<
-            \new PianoStaff
+            \context PianoStaff = "Piano_Staff"
             <<
                 \context Staff = "Treble_Staff"
                 {
@@ -1692,9 +1692,9 @@ Constellation.
 
         >>> string = abjad.lilypond(score)
         >>> print(string)
-        \new Score
+        \context Score = "Score"
         <<
-            \new PianoStaff
+            \context PianoStaff = "Piano_Staff"
             <<
                 \context Staff = "Treble_Staff"
                 {
@@ -1748,9 +1748,9 @@ Constellation.
 
         >>> string = abjad.lilypond(score)
         >>> print(string)
-        \new Score
+        \context Score = "Score"
         <<
-            \new PianoStaff
+            \context PianoStaff = "Piano_Staff"
             <<
                 \context Staff = "Treble_Staff"
                 {
@@ -1814,9 +1814,9 @@ Constellation.
 
         >>> string = abjad.lilypond(score)
         >>> print(string)
-        \new Score
+        \context Score = "Score"
         <<
-            \new PianoStaff
+            \context PianoStaff = "Piano_Staff"
             <<
                 \context Staff = "Treble_Staff"
                 {
