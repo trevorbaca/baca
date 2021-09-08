@@ -54,7 +54,8 @@ class RhythmCommand(scoping.Command):
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -503,7 +504,8 @@ class RhythmCommand(scoping.Command):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file["Score"])
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
@@ -918,7 +920,8 @@ def make_monads(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -1113,7 +1116,8 @@ def make_repeat_tied_notes(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
