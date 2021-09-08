@@ -444,9 +444,9 @@ class Sequence(abjad.Sequence):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \time 15/8
                         c'1...
@@ -477,9 +477,9 @@ class Sequence(abjad.Sequence):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \time 2/1
                         c'2
@@ -512,9 +512,9 @@ class Sequence(abjad.Sequence):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \time 2/1
                         c'2
@@ -553,9 +553,9 @@ class Sequence(abjad.Sequence):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \time 15/8
                         c'2.
@@ -612,9 +612,9 @@ class Sequence(abjad.Sequence):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \time 15/8
                         c'16
@@ -1031,9 +1031,9 @@ class Sequence(abjad.Sequence):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \time 15/8
                         c'4
@@ -1093,9 +1093,9 @@ class Sequence(abjad.Sequence):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \time 5/8
                         c'2
@@ -1145,9 +1145,9 @@ class Sequence(abjad.Sequence):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \time 5/8
                         c'2
@@ -1191,9 +1191,9 @@ class Sequence(abjad.Sequence):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \tweak edge-height #'(0.7 . 0)
                         \times 16/24
@@ -1246,9 +1246,9 @@ class Sequence(abjad.Sequence):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \time 5/8
                         c'4.
@@ -1298,9 +1298,9 @@ class Sequence(abjad.Sequence):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \tweak edge-height #'(0.7 . 0)
                         \times 16/24
@@ -1361,9 +1361,9 @@ class Sequence(abjad.Sequence):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \time 5/8
                         c'4.
@@ -1692,9 +1692,9 @@ class Sequence(abjad.Sequence):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \time 15/8
                         c'4
@@ -1741,9 +1741,9 @@ class Sequence(abjad.Sequence):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \time 15/8
                         c'4
@@ -1792,9 +1792,9 @@ class Sequence(abjad.Sequence):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \time 15/8
                         c'8
@@ -1842,9 +1842,9 @@ class Sequence(abjad.Sequence):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \time 15/8
                         c'4.
@@ -1901,9 +1901,9 @@ class Sequence(abjad.Sequence):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \time 7/8
                         c'4
@@ -1965,9 +1965,9 @@ class Sequence(abjad.Sequence):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \time 7/8
                         c'8
@@ -2023,9 +2023,9 @@ class Sequence(abjad.Sequence):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \time 5/8
                         c'4
@@ -2072,9 +2072,9 @@ class Sequence(abjad.Sequence):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \time 5/8
                         c'4.
@@ -2120,9 +2120,9 @@ class Sequence(abjad.Sequence):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \time 3/4
                         c'4
@@ -2181,9 +2181,9 @@ class Sequence(abjad.Sequence):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \time 7/16
                         c'16

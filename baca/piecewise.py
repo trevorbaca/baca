@@ -771,12 +771,13 @@ def dynamic(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         \override TupletBracket.staff-padding = 2
                         \time 11/8
                         r8
@@ -791,7 +792,8 @@ def dynamic(
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         fs''16
                         [
                         e''16
@@ -805,7 +807,8 @@ def dynamic(
                         g''16
                         ]
                     }
-                    \times 4/5 {
+                    \times 4/5
+                    {
                         a'16
                         r4
                         \revert TupletBracket.staff-padding
@@ -844,12 +847,13 @@ def dynamic(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         \override TupletBracket.staff-padding = 2
                         \time 11/8
                         r8
@@ -864,7 +868,8 @@ def dynamic(
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         fs''16
                         [
                         e''16
@@ -878,7 +883,8 @@ def dynamic(
                         g''16
                         ]
                     }
-                    \times 4/5 {
+                    \times 4/5
+                    {
                         a'16
                         r4
                         \revert TupletBracket.staff-padding

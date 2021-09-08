@@ -53,9 +53,9 @@ def accent(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -143,9 +143,9 @@ def alternate_bow_strokes(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -224,9 +224,9 @@ def alternate_bow_strokes(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -307,9 +307,9 @@ def alternate_bow_strokes(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -407,9 +407,9 @@ def arpeggio(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -569,9 +569,9 @@ def clef(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -688,9 +688,9 @@ def double_staccato(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -768,9 +768,9 @@ def down_arpeggio(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -869,9 +869,9 @@ def down_bow(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -944,9 +944,9 @@ def down_bow(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -1037,9 +1037,9 @@ def espressivo(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -1125,9 +1125,9 @@ def fermata(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -1212,9 +1212,9 @@ def flageolet(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -1449,9 +1449,9 @@ def laissez_vibrer(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -1553,9 +1553,9 @@ def long_fermata(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -1640,9 +1640,9 @@ def marcato(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -1911,9 +1911,9 @@ def parenthesize(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -2040,9 +2040,9 @@ def repeat_tie(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -2130,9 +2130,9 @@ def short_fermata(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -2230,9 +2230,9 @@ def staccatissimo(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -2317,9 +2317,9 @@ def staccato(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -3210,9 +3210,9 @@ def stem_tremolo(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -3303,9 +3303,9 @@ def stop_on_string(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -3412,9 +3412,9 @@ def stopped(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -3503,9 +3503,9 @@ def tie(selector: abjad.Expression) -> commandclasses.IndicatorCommand:
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -3590,9 +3590,9 @@ def tenuto(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -3683,9 +3683,9 @@ def up_arpeggio(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -3782,9 +3782,9 @@ def up_bow(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -3874,9 +3874,9 @@ def very_long_fermata(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10

@@ -603,9 +603,9 @@ def beam_positions(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \times 4/5
                     {
@@ -815,9 +815,9 @@ def dls_staff_padding(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -920,9 +920,9 @@ def dls_up(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -1097,9 +1097,9 @@ def dynamic_text_extra_offset(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -2568,9 +2568,9 @@ def note_head_style_cross(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -2658,9 +2658,9 @@ def note_head_style_harmonic(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -2929,9 +2929,9 @@ def repeat_tie_down(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -3075,9 +3075,9 @@ def repeat_tie_up(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -3184,9 +3184,9 @@ def rest_down(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -3295,9 +3295,9 @@ def rest_position(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -3385,9 +3385,9 @@ def rest_transparent(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -3475,9 +3475,9 @@ def rest_up(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -3586,9 +3586,9 @@ def script_color(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -3686,9 +3686,9 @@ def script_down(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -3787,9 +3787,9 @@ def script_extra_offset(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -3918,9 +3918,9 @@ def script_up(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -4039,9 +4039,9 @@ def slur_down(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -4142,9 +4142,9 @@ def slur_up(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -4301,9 +4301,9 @@ def stem_color(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -4392,9 +4392,9 @@ def stem_down(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -4544,9 +4544,9 @@ def stem_up(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -4657,9 +4657,9 @@ def sustain_pedal_staff_padding(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -4762,9 +4762,9 @@ def text_script_color(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -4890,9 +4890,9 @@ def text_script_down(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -5090,9 +5090,9 @@ def text_script_padding(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -5265,9 +5265,9 @@ def text_script_staff_padding(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -5393,9 +5393,9 @@ def text_script_up(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -5600,9 +5600,9 @@ def text_spanner_staff_padding(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -5749,9 +5749,9 @@ def tie_down(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -5839,9 +5839,9 @@ def tie_up(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -5928,9 +5928,9 @@ def time_signature_extra_offset(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -6035,9 +6035,9 @@ def time_signature_transparent(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -6142,9 +6142,9 @@ def tuplet_bracket_down(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -6233,9 +6233,9 @@ def tuplet_bracket_extra_offset(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -6370,9 +6370,9 @@ def tuplet_bracket_staff_padding(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -6473,9 +6473,9 @@ def tuplet_bracket_up(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -6579,9 +6579,9 @@ def tuplet_number_extra_offset(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10

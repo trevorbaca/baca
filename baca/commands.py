@@ -658,12 +658,13 @@ def color(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         \override TupletBracket.staff-padding = 2
                         \time 11/8
                         \abjad-color-music #'red
@@ -681,7 +682,8 @@ def color(
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         \abjad-color-music #'red
                         fs''16
                         \abjad-color-music #'blue
@@ -698,7 +700,8 @@ def color(
                         \abjad-color-music #'red
                         g''16
                     }
-                    \times 4/5 {
+                    \times 4/5
+                    {
                         \abjad-color-music #'blue
                         a'16
                         \abjad-color-music #'red
@@ -739,12 +742,13 @@ def color(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         \override TupletBracket.staff-padding = 2
                         \time 11/8
                         r8
@@ -756,7 +760,8 @@ def color(
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         \abjad-color-music #'red
                         fs''16
                         \abjad-color-music #'blue
@@ -773,7 +778,8 @@ def color(
                         \abjad-color-music #'red
                         g''16
                     }
-                    \times 4/5 {
+                    \times 4/5
+                    {
                         a'16
                         r4
                         \revert TupletBracket.staff-padding
@@ -1338,12 +1344,13 @@ def dynamic_down(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         \override TupletBracket.staff-padding = 2
                         \time 11/8
                         \dynamicDown
@@ -1359,7 +1366,8 @@ def dynamic_down(
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         fs''16
                         \f
                         [
@@ -1374,7 +1382,8 @@ def dynamic_down(
                         g''16
                         ]
                     }
-                    \times 4/5 {
+                    \times 4/5
+                    {
                         a'16
                         r4
                         \revert TupletBracket.staff-padding
@@ -1426,12 +1435,13 @@ def dynamic_up(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         \override TupletBracket.staff-padding = 2
                         \time 11/8
                         \dynamicUp
@@ -1447,7 +1457,8 @@ def dynamic_up(
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         fs''16
                         \f
                         [
@@ -1462,7 +1473,8 @@ def dynamic_up(
                         g''16
                         ]
                     }
-                    \times 4/5 {
+                    \times 4/5
+                    {
                         a'16
                         r4
                         \revert TupletBracket.staff-padding
@@ -2742,12 +2754,13 @@ def label(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         \override TupletBracket.staff-padding = 2
                         \time 11/8
                         r8
@@ -2764,7 +2777,8 @@ def label(
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         fs''16
                         ^ \markup { "F#5" }
                         [
@@ -2783,7 +2797,8 @@ def label(
                         ^ \markup { G5 }
                         ]
                     }
-                    \times 4/5 {
+                    \times 4/5
+                    {
                         a'16
                         ^ \markup { A4 }
                         r4
@@ -2839,12 +2854,13 @@ def markup(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         \override TupletBracket.outside-staff-priority = 1000
                         \override TupletBracket.staff-padding = 2
                         \time 11/8
@@ -2860,7 +2876,8 @@ def markup(
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         fs''16
                         [
                         e''16
@@ -2874,7 +2891,8 @@ def markup(
                         g''16
                         ]
                     }
-                    \times 4/5 {
+                    \times 4/5
+                    {
                         a'16
                         r4
                         \revert TupletBracket.outside-staff-priority
@@ -2918,12 +2936,13 @@ def markup(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         \override TupletBracket.outside-staff-priority = 1000
                         \override TupletBracket.staff-padding = 2
                         \time 11/8
@@ -2939,7 +2958,8 @@ def markup(
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         fs''16
                         [
                         e''16
@@ -2953,7 +2973,8 @@ def markup(
                         g''16
                         ]
                     }
-                    \times 4/5 {
+                    \times 4/5
+                    {
                         a'16
                         r4
                         \revert TupletBracket.outside-staff-priority

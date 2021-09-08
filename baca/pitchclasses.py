@@ -153,11 +153,12 @@ class ArpeggiationSpacingSpecifier:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \time 9/16
                             c,16
                             [
@@ -165,7 +166,8 @@ class ArpeggiationSpacingSpecifier:
                             bf,16
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             fs,16
                             [
                             e16
@@ -174,7 +176,8 @@ class ArpeggiationSpacingSpecifier:
                             g''16
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             a,16
                         }
                     }
@@ -203,11 +206,12 @@ class ArpeggiationSpacingSpecifier:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \time 9/16
                             c'16
                             [
@@ -215,7 +219,8 @@ class ArpeggiationSpacingSpecifier:
                             bf,16
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             fs16
                             [
                             e16
@@ -224,7 +229,8 @@ class ArpeggiationSpacingSpecifier:
                             g,16
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             a,16
                         }
                     }

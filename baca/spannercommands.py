@@ -436,12 +436,13 @@ def ottava(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         \override TupletBracket.staff-padding = 2
                         \time 11/8
                         r8
@@ -456,7 +457,8 @@ def ottava(
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         fs''16
                         [
                         e''16
@@ -470,7 +472,8 @@ def ottava(
                         g''16
                         ]
                     }
-                    \times 4/5 {
+                    \times 4/5
+                    {
                         a'16
                         \ottava 0
                         r4
@@ -526,12 +529,13 @@ def ottava_bassa(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         \override TupletBracket.staff-padding = 2
                         \time 11/8
                         r8
@@ -546,7 +550,8 @@ def ottava_bassa(
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         fs''16
                         [
                         e''16
@@ -560,7 +565,8 @@ def ottava_bassa(
                         g''16
                         ]
                     }
-                    \times 4/5 {
+                    \times 4/5
+                    {
                         a'16
                         \ottava 0
                         r4
@@ -618,12 +624,13 @@ def slur(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         \override Slur.direction = #down
                         \override TupletBracket.staff-padding = 2
                         \time 11/8
@@ -639,7 +646,8 @@ def slur(
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         fs''16
                         [
                         e''16
@@ -653,7 +661,8 @@ def slur(
                         g''16
                         ]
                     }
-                    \times 4/5 {
+                    \times 4/5
+                    {
                         a'16
                         )
                         r4
@@ -718,12 +727,13 @@ def sustain_pedal(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         \override Staff.SustainPedalLineSpanner.staff-padding = 4
                         \override TupletBracket.staff-padding = 2
                         \time 11/8
@@ -739,7 +749,8 @@ def sustain_pedal(
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         fs''16
                         [
                         e''16
@@ -753,7 +764,8 @@ def sustain_pedal(
                         g''16
                         ]
                     }
-                    \times 4/5 {
+                    \times 4/5
+                    {
                         a'16
                         r4
                         \sustainOff
@@ -816,12 +828,13 @@ def trill_spanner(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         \override TupletBracket.staff-padding = 2
                         \time 11/8
                         r8
@@ -836,7 +849,8 @@ def trill_spanner(
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         fs''16
                         [
                         e''16
@@ -850,7 +864,8 @@ def trill_spanner(
                         g''16
                         ]
                     }
-                    \times 4/5 {
+                    \times 4/5
+                    {
                         a'16
                         r4
                         \stopTrillSpan
@@ -891,12 +906,13 @@ def trill_spanner(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         \override TupletBracket.staff-padding = 2
                         \time 11/8
                         r8
@@ -912,7 +928,8 @@ def trill_spanner(
                         \stopTrillSpan
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         fs''16
                         [
                         \startTrillSpan
@@ -930,7 +947,8 @@ def trill_spanner(
                         \stopTrillSpan
                         ]
                     }
-                    \times 4/5 {
+                    \times 4/5
+                    {
                         a'16
                         \startTrillSpan
                         r4
@@ -973,12 +991,13 @@ def trill_spanner(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         \override TupletBracket.staff-padding = 2
                         \time 11/8
                         r8
@@ -995,7 +1014,8 @@ def trill_spanner(
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10 {
+                    \times 9/10
+                    {
                         fs''16
                         [
                         e''16
@@ -1009,7 +1029,8 @@ def trill_spanner(
                         g''16
                         ]
                     }
-                    \times 4/5 {
+                    \times 4/5
+                    {
                         a'16
                         r4
                         \stopTrillSpan

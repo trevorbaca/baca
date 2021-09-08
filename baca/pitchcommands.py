@@ -288,9 +288,9 @@ class ClusterCommand(scoping.Command):
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -3503,9 +3503,9 @@ class RegisterCommand(scoping.Command):
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -3719,9 +3719,9 @@ class RegisterCommand(scoping.Command):
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -3851,9 +3851,9 @@ class RegisterInterpolationCommand(scoping.Command):
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -3919,9 +3919,9 @@ class RegisterInterpolationCommand(scoping.Command):
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -5148,9 +5148,9 @@ class RegisterInterpolationCommand(scoping.Command):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \scaleDurations #'(1 . 1)
                         {
@@ -5228,9 +5228,9 @@ class RegisterInterpolationCommand(scoping.Command):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \scaleDurations #'(1 . 1)
                         {
@@ -5311,9 +5311,9 @@ class RegisterInterpolationCommand(scoping.Command):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \scaleDurations #'(1 . 1)
                         {
@@ -5424,9 +5424,9 @@ class RegisterToOctaveCommand(scoping.Command):
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -5457,9 +5457,9 @@ class RegisterToOctaveCommand(scoping.Command):
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -5490,9 +5490,9 @@ class RegisterToOctaveCommand(scoping.Command):
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -5527,9 +5527,9 @@ class RegisterToOctaveCommand(scoping.Command):
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -5564,9 +5564,9 @@ class RegisterToOctaveCommand(scoping.Command):
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -5601,9 +5601,9 @@ class RegisterToOctaveCommand(scoping.Command):
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -5642,9 +5642,9 @@ class RegisterToOctaveCommand(scoping.Command):
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -5679,9 +5679,9 @@ class RegisterToOctaveCommand(scoping.Command):
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -5716,9 +5716,9 @@ class RegisterToOctaveCommand(scoping.Command):
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -6418,9 +6418,9 @@ def bass_to_octave(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -6509,9 +6509,9 @@ def bass_to_octave(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -6610,9 +6610,9 @@ def center_to_octave(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -6701,9 +6701,9 @@ def center_to_octave(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -6848,9 +6848,9 @@ def displacement(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -6921,9 +6921,9 @@ def displacement(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -7136,9 +7136,9 @@ def interpolate_pitches(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -7206,9 +7206,9 @@ def interpolate_pitches(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -7574,9 +7574,9 @@ def register(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -7647,9 +7647,9 @@ def register(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -7726,9 +7726,9 @@ def register(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -7800,9 +7800,9 @@ def register(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -7894,9 +7894,9 @@ def soprano_to_octave(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -7985,9 +7985,9 @@ def soprano_to_octave(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \scaleDurations #'(1 . 1)
                     {

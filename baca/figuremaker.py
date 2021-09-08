@@ -1049,9 +1049,9 @@ class Acciaccatura:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \scaleDurations #'(1 . 1)
                         {
@@ -1144,21 +1144,24 @@ class Acciaccatura:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \time 3/4
                             c'8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 d'8
                             }
                             bf'8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 fs''8
                                 [
@@ -1167,7 +1170,8 @@ class Acciaccatura:
                             }
                             ef''8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 af''8
                                 [
@@ -1177,7 +1181,8 @@ class Acciaccatura:
                             }
                             c'8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 d'8
                                 [
@@ -1188,7 +1193,8 @@ class Acciaccatura:
                             }
                             ef''8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 af''8
                                 [
@@ -1240,21 +1246,24 @@ class Acciaccatura:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \time 3/4
                             c'8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 d'16
                             }
                             bf'8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 fs''16
                                 [
@@ -1263,7 +1272,8 @@ class Acciaccatura:
                             }
                             ef''8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 af''16
                                 [
@@ -1273,7 +1283,8 @@ class Acciaccatura:
                             }
                             c'8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 d'16
                                 [
@@ -1284,7 +1295,8 @@ class Acciaccatura:
                             }
                             ef''8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 af''16
                                 [
@@ -1336,21 +1348,24 @@ class Acciaccatura:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \time 3/2
                             c'8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 d'16
                             }
                             bf'8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 fs''16
                                 [
@@ -1359,7 +1374,8 @@ class Acciaccatura:
                             }
                             ef''8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 af''16
                                 [
@@ -1371,7 +1387,8 @@ class Acciaccatura:
                             c'8
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 d'16
                                 [
@@ -1384,7 +1401,8 @@ class Acciaccatura:
                             ef''8
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 af''16
                                 [
@@ -1438,21 +1456,24 @@ class Acciaccatura:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \time 3/2
                             c'8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 d'16
                             }
                             bf'8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 fs''16
                                 [
@@ -1461,7 +1482,8 @@ class Acciaccatura:
                             }
                             ef''8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             af''8
                             [
                             \acciaccatura {
@@ -1473,7 +1495,8 @@ class Acciaccatura:
                             c'8
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             d'8
                             [
                             bf'8
@@ -1486,7 +1509,8 @@ class Acciaccatura:
                             ef''8
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             af''8
                             [
                             g''8
@@ -1542,21 +1566,24 @@ class Acciaccatura:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \time 9/8
                             c'8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 d'16
                             }
                             bf'8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 fs''16
                                 [
@@ -1565,7 +1592,8 @@ class Acciaccatura:
                             }
                             ef''8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 af''16
                                 [
@@ -1577,7 +1605,8 @@ class Acciaccatura:
                             c'8
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 d'16
                                 [
@@ -1592,7 +1621,8 @@ class Acciaccatura:
                             ef''8
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \acciaccatura {
                                 af''16
                                 [
@@ -1643,21 +1673,24 @@ class Acciaccatura:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             \time 11/8
                             c'8
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             d'8
                             [
                             bf'8
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             fs''8
                             [
                             \acciaccatura {
@@ -1666,7 +1699,8 @@ class Acciaccatura:
                             ef''8
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             af''8
                             [
                             \acciaccatura {
@@ -1678,7 +1712,8 @@ class Acciaccatura:
                             c'8
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             d'8
                             [
                             \acciaccatura {
@@ -1691,7 +1726,8 @@ class Acciaccatura:
                             ef''8
                             ]
                         }
-                        \scaleDurations #'(1 . 1) {
+                        \scaleDurations #'(1 . 1)
+                        {
                             af''8
                             [
                             \acciaccatura {
@@ -3931,9 +3967,9 @@ class Nest:
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 12/11
@@ -4044,9 +4080,9 @@ class Nest:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 17/16
@@ -4314,9 +4350,9 @@ class RestAffix:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 5/4
@@ -4375,9 +4411,9 @@ class RestAffix:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/8
@@ -4423,9 +4459,9 @@ class RestAffix:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/6
@@ -4487,9 +4523,9 @@ class RestAffix:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/6
@@ -4555,9 +4591,9 @@ class RestAffix:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \scaleDurations #'(1 . 1)
                         {
@@ -4622,9 +4658,9 @@ class RestAffix:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \scaleDurations #'(1 . 1)
                         {
@@ -4755,9 +4791,9 @@ class FigureMaker:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \scaleDurations #'(1 . 1)
                         {
@@ -4808,9 +4844,9 @@ class FigureMaker:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \scaleDurations #'(1 . 1)
                         {
@@ -5344,9 +5380,9 @@ class FigureMaker:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \scaleDurations #'(1 . 1)
                         {
@@ -5438,9 +5474,9 @@ class FigureMaker:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \scaleDurations #'(1 . 1)
                         {
@@ -5555,9 +5591,9 @@ class FigureMaker:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \scaleDurations #'(1 . 1)
                         {
@@ -5620,9 +5656,9 @@ class FigureMaker:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \scaleDurations #'(1 . 1)
                         {
@@ -5688,9 +5724,9 @@ class FigureMaker:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \scaleDurations #'(1 . 1)
                         {
@@ -5718,9 +5754,9 @@ class FigureMaker:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \scaleDurations #'(1 . 1)
                         {
@@ -5749,9 +5785,9 @@ class FigureMaker:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \scaleDurations #'(1 . 1)
                         {
@@ -5774,9 +5810,9 @@ class FigureMaker:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \scaleDurations #'(1 . 1)
                         {
@@ -5830,9 +5866,9 @@ class FigureMaker:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \scaleDurations #'(1 . 1)
                         {
@@ -5890,9 +5926,9 @@ class FigureMaker:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \scaleDurations #'(1 . 1)
                         {
@@ -5939,9 +5975,9 @@ class FigureMaker:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 5/4
@@ -5994,9 +6030,9 @@ class FigureMaker:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 3/4
@@ -6055,9 +6091,9 @@ class FigureMaker:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \scaleDurations #'(1 . 1)
                         {
@@ -6333,9 +6369,9 @@ class FigureMaker:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \scaleDurations #'(1 . 1)
                         {
@@ -6611,9 +6647,9 @@ class FigureMaker:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
                             {
@@ -6846,9 +6882,9 @@ class FigureMaker:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
                             {
@@ -7099,7 +7135,7 @@ class FigureMaker:
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> staff = lilypond_file[abjad.Score][0]
+                >>> staff = lilypond_file[abjad.Score]["Staff"]
                 >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
                 >>> abjad.override(staff).Stem.direction = abjad.Down
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -7108,9 +7144,9 @@ class FigureMaker:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     \with
                     {
                         \override Beam.positions = #'(-6 . -6)
@@ -7198,7 +7234,7 @@ class FigureMaker:
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> staff = lilypond_file[abjad.Score][0]
+                >>> staff = lilypond_file[abjad.Score]["Staff"]
                 >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
                 >>> abjad.override(staff).Stem.direction = abjad.Down
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -7207,9 +7243,9 @@ class FigureMaker:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     \with
                     {
                         \override Beam.positions = #'(-6 . -6)
@@ -7294,7 +7330,7 @@ class FigureMaker:
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> staff = lilypond_file[abjad.Score][0]
+                >>> staff = lilypond_file[abjad.Score]["Staff"]
                 >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
                 >>> abjad.override(staff).Stem.direction = abjad.Down
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -7303,9 +7339,9 @@ class FigureMaker:
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     \with
                     {
                         \override Beam.positions = #'(-6 . -6)
@@ -10518,16 +10554,16 @@ def nest(treatments: typing.Sequence, *, lmr: LMR = None) -> Nest:
             :lilypond/no-stylesheet:
 
             >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> staff = lilypond_file[abjad.Score][0]
+            >>> staff = lilypond_file[abjad.Score]["Staff"]
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 13/11
@@ -10668,9 +10704,9 @@ def rests_after(counts: typing.Sequence[int]) -> RestAffix:
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 7/8
@@ -10744,9 +10780,9 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -10809,7 +10845,7 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
             :lilypond/no-stylesheet:
 
             >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> staff = lilypond_file[abjad.Score][0]
+            >>> staff = lilypond_file[abjad.Score]["Staff"]
             >>> abjad.override(staff).TupletBracket.staff_padding = 4
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -10817,9 +10853,9 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 \with
                 {
                     \override TupletBracket.staff-padding = 4
@@ -10879,7 +10915,7 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
             :lilypond/no-stylesheet:
 
             >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> staff = lilypond_file[abjad.Score][0]
+            >>> staff = lilypond_file[abjad.Score]["Staff"]
             >>> abjad.override(staff).TupletBracket.staff_padding = 4
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -10887,9 +10923,9 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 \with
                 {
                     \override TupletBracket.staff-padding = 4
@@ -10958,9 +10994,9 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 3/4
@@ -11024,9 +11060,9 @@ def rests_before(counts: typing.List[int]) -> RestAffix:
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -11118,9 +11154,9 @@ def skips_after(counts: typing.List[int]) -> RestAffix:
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 7/8
@@ -11194,9 +11230,9 @@ def skips_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -11273,9 +11309,9 @@ def skips_before(
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
@@ -11346,7 +11382,7 @@ def stack(*commands) -> Stack:
             :lilypond/no-stylesheet:
 
             >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> staff = lilypond_file[abjad.Score][0]
+            >>> staff = lilypond_file[abjad.Score]["Staff"]
             >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
             >>> abjad.override(staff).Stem.direction = abjad.Down
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -11355,9 +11391,9 @@ def stack(*commands) -> Stack:
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 \with
                 {
                     \override Beam.positions = #'(-6 . -6)
