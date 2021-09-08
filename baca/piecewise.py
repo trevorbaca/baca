@@ -769,7 +769,7 @@ def dynamic(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             \context Score = "Score"
             <<
@@ -845,7 +845,7 @@ def dynamic(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             \context Score = "Score"
             <<
@@ -920,7 +920,7 @@ def dynamic(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -1092,7 +1092,7 @@ def dynamic(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -1300,7 +1300,7 @@ def hairpin(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -1473,7 +1473,7 @@ def hairpin(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -1648,7 +1648,7 @@ def hairpin(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -1822,7 +1822,7 @@ def hairpin(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -2003,7 +2003,7 @@ def hairpin(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -2187,7 +2187,7 @@ def hairpin(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -2365,7 +2365,7 @@ def hairpin(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -2552,7 +2552,7 @@ def hairpin(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -2737,7 +2737,7 @@ def hairpin(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -2930,7 +2930,7 @@ def hairpin(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -3099,7 +3099,7 @@ def hairpin(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -3278,7 +3278,7 @@ def hairpin(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -3445,7 +3445,7 @@ def hairpin(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -3621,7 +3621,7 @@ def hairpin(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -4691,7 +4691,7 @@ def text_spanner(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -4863,7 +4863,7 @@ def text_spanner(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -5035,7 +5035,7 @@ def text_spanner(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -5207,7 +5207,7 @@ def text_spanner(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -5379,7 +5379,7 @@ def text_spanner(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -5557,7 +5557,7 @@ def text_spanner(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -5747,7 +5747,7 @@ def text_spanner(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -5938,7 +5938,7 @@ def text_spanner(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -6138,7 +6138,7 @@ def text_spanner(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -6344,7 +6344,7 @@ def text_spanner(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -6510,7 +6510,7 @@ def text_spanner(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -6687,7 +6687,7 @@ def text_spanner(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -6878,7 +6878,7 @@ def text_spanner(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -7062,7 +7062,7 @@ def text_spanner(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"

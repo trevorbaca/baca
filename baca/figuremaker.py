@@ -1047,7 +1047,7 @@ class Acciaccatura:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -1142,7 +1142,7 @@ class Acciaccatura:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -1244,7 +1244,7 @@ class Acciaccatura:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -1346,7 +1346,7 @@ class Acciaccatura:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -1454,7 +1454,7 @@ class Acciaccatura:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -1564,7 +1564,7 @@ class Acciaccatura:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -1671,7 +1671,7 @@ class Acciaccatura:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -2145,7 +2145,7 @@ class Imbrication:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
@@ -2475,7 +2475,7 @@ class Imbrication:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
@@ -2800,7 +2800,7 @@ class Imbrication:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
@@ -3154,7 +3154,7 @@ class Imbrication:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
@@ -3965,7 +3965,7 @@ class Nest:
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             \context Score = "Score"
             <<
@@ -4078,7 +4078,7 @@ class Nest:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -4348,7 +4348,7 @@ class RestAffix:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -4409,7 +4409,7 @@ class RestAffix:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -4457,7 +4457,7 @@ class RestAffix:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -4521,7 +4521,7 @@ class RestAffix:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -4589,7 +4589,7 @@ class RestAffix:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -4656,7 +4656,7 @@ class RestAffix:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -4789,7 +4789,7 @@ class FigureMaker:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -4842,7 +4842,7 @@ class FigureMaker:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -5378,7 +5378,7 @@ class FigureMaker:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -5472,7 +5472,7 @@ class FigureMaker:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -5589,7 +5589,7 @@ class FigureMaker:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -5654,7 +5654,7 @@ class FigureMaker:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -5722,7 +5722,7 @@ class FigureMaker:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -5752,7 +5752,7 @@ class FigureMaker:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -5783,7 +5783,7 @@ class FigureMaker:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -5808,7 +5808,7 @@ class FigureMaker:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -5864,7 +5864,7 @@ class FigureMaker:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -5924,7 +5924,7 @@ class FigureMaker:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -5973,7 +5973,7 @@ class FigureMaker:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -6028,7 +6028,7 @@ class FigureMaker:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -6089,7 +6089,7 @@ class FigureMaker:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -6367,7 +6367,7 @@ class FigureMaker:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -6645,7 +6645,7 @@ class FigureMaker:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -6880,7 +6880,7 @@ class FigureMaker:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -7135,14 +7135,14 @@ class FigureMaker:
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
                 >>> abjad.override(staff).Stem.direction = abjad.Down
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -7234,14 +7234,14 @@ class FigureMaker:
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
                 >>> abjad.override(staff).Stem.direction = abjad.Down
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -7330,14 +7330,14 @@ class FigureMaker:
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
                 >>> abjad.override(staff).Stem.direction = abjad.Down
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -7661,7 +7661,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -7926,7 +7926,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -8245,7 +8245,7 @@ def extend_beam(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -8568,7 +8568,7 @@ def imbricate(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -8882,7 +8882,7 @@ def imbricate(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -9294,7 +9294,7 @@ def imbricate(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -9626,7 +9626,7 @@ def imbricate(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -9880,7 +9880,7 @@ def imbricate(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -10162,7 +10162,7 @@ def imbricate(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -10554,12 +10554,12 @@ def nest(treatments: typing.Sequence, *, lmr: LMR = None) -> Nest:
             :lilypond/no-stylesheet:
 
             >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> staff = lilypond_file[abjad.Score]["Staff"]
+            >>> staff = lilypond_file["Staff"]
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             \context Score = "Score"
             <<
@@ -10674,7 +10674,7 @@ def rests_after(counts: typing.Sequence[int]) -> RestAffix:
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             \context Score = "Score"
             <<
@@ -10750,7 +10750,7 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             \context Score = "Score"
             <<
@@ -10817,13 +10817,13 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
             :lilypond/no-stylesheet:
 
             >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> staff = lilypond_file[abjad.Score]["Staff"]
+            >>> staff = lilypond_file["Staff"]
             >>> abjad.override(staff).TupletBracket.staff_padding = 4
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             \context Score = "Score"
             <<
@@ -10887,13 +10887,13 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
             :lilypond/no-stylesheet:
 
             >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> staff = lilypond_file[abjad.Score]["Staff"]
+            >>> staff = lilypond_file["Staff"]
             >>> abjad.override(staff).TupletBracket.staff_padding = 4
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             \context Score = "Score"
             <<
@@ -10964,7 +10964,7 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             \context Score = "Score"
             <<
@@ -11030,7 +11030,7 @@ def rests_before(counts: typing.List[int]) -> RestAffix:
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             \context Score = "Score"
             <<
@@ -11124,7 +11124,7 @@ def skips_after(counts: typing.List[int]) -> RestAffix:
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             \context Score = "Score"
             <<
@@ -11200,7 +11200,7 @@ def skips_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             \context Score = "Score"
             <<
@@ -11279,7 +11279,7 @@ def skips_before(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             \context Score = "Score"
             <<
@@ -11354,14 +11354,14 @@ def stack(*commands) -> Stack:
             :lilypond/no-stylesheet:
 
             >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> staff = lilypond_file[abjad.Score]["Staff"]
+            >>> staff = lilypond_file["Staff"]
             >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
             >>> abjad.override(staff).Stem.direction = abjad.Down
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             \context Score = "Score"
             <<

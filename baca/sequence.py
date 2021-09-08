@@ -28,7 +28,7 @@ class Sequence(abjad.Sequence):
 
         ..  docs::
 
-            >>> voice = lilypond_file[abjad.Score]["Voice"]
+            >>> voice = lilypond_file["Voice"]
             >>> string = abjad.lilypond(voice)
             >>> print(string)
             \context Voice = "Voice"
@@ -68,7 +68,7 @@ class Sequence(abjad.Sequence):
 
         ..  docs::
 
-            >>> voice = lilypond_file[abjad.Score]["Voice"]
+            >>> voice = lilypond_file["Voice"]
             >>> string = abjad.lilypond(voice)
             >>> print(string)
             \context Voice = "Voice"
@@ -442,7 +442,7 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -475,7 +475,7 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -510,7 +510,7 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -551,7 +551,7 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -610,7 +610,7 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -1029,7 +1029,7 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -1091,7 +1091,7 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -1143,7 +1143,7 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -1189,7 +1189,7 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -1244,7 +1244,7 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -1296,7 +1296,7 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -1359,7 +1359,7 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -1690,7 +1690,7 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -1739,7 +1739,7 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -1790,7 +1790,7 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -1840,7 +1840,7 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -1899,7 +1899,7 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -1963,7 +1963,7 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -2021,7 +2021,7 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -2070,7 +2070,7 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -2118,7 +2118,7 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -2179,7 +2179,7 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<

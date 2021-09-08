@@ -151,7 +151,7 @@ class ArpeggiationSpacingSpecifier:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -204,7 +204,7 @@ class ArpeggiationSpacingSpecifier:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -1108,7 +1108,7 @@ class CollectionList(collections_module.abc.Sequence):
             ..  docs::
 
                 >>> lilypond_file = collections.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -2728,7 +2728,7 @@ class HarmonicSeries:
         ..  docs::
 
             >>> lilypond_file = harmonic_series.__illustrate__()
-            >>> staff = lilypond_file[abjad.Score]["Staff"]
+            >>> staff = lilypond_file["Staff"]
             >>> string = abjad.lilypond(staff)
             >>> print(string)
             \context Staff = "Staff"
@@ -2826,7 +2826,7 @@ class HarmonicSeries:
             ..  docs::
 
                 >>> lilypond_file = harmonic_series.__illustrate__()
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> string = abjad.lilypond(staff)
                 >>> print(string)
                 \context Staff = "Staff"
@@ -3078,7 +3078,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> voice = lilypond_file[abjad.Score]["Voice"]
+                >>> voice = lilypond_file["Voice"]
                 >>> string = abjad.lilypond(voice)
                 >>> print(string)
                 \context Voice = "Voice"
@@ -3156,7 +3156,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 ..  docs::
 
-                    >>> voice = lilypond_file[abjad.Score]["Voice"]
+                    >>> voice = lilypond_file["Voice"]
                     >>> string = abjad.lilypond(voice)
                     >>> print(string)
                     \context Voice = "Voice"
@@ -3186,7 +3186,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 ..  docs::
 
-                    >>> voice = lilypond_file[abjad.Score]["Voice"]
+                    >>> voice = lilypond_file["Voice"]
                     >>> string = abjad.lilypond(voice)
                     >>> print(string)
                     \context Voice = "Voice"
@@ -3247,7 +3247,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -3297,7 +3297,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -3347,7 +3347,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> voice = lilypond_file[abjad.Score]["Voice"]
+                >>> voice = lilypond_file["Voice"]
                 >>> string = abjad.lilypond(voice)
                 >>> print(string)
                 \context Voice = "Voice"
@@ -3850,7 +3850,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> voice = lilypond_file[abjad.Score]["Voice"]
+                >>> voice = lilypond_file["Voice"]
                 >>> string = abjad.lilypond(voice)
                 >>> print(string)
                 \context Voice = "Voice"
@@ -3875,7 +3875,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> voice = lilypond_file[abjad.Score]["Voice"]
+                >>> voice = lilypond_file["Voice"]
                 >>> string = abjad.lilypond(voice)
                 >>> print(string)
                 \context Voice = "Voice"
@@ -3910,7 +3910,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> voice = lilypond_file[abjad.Score]["Voice"]
+                >>> voice = lilypond_file["Voice"]
                 >>> string = abjad.lilypond(voice)
                 >>> print(string)
                 \context Voice = "Voice"
@@ -3937,7 +3937,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> voice = lilypond_file[abjad.Score]["Voice"]
+                >>> voice = lilypond_file["Voice"]
                 >>> string = abjad.lilypond(voice)
                 >>> print(string)
                 \context Voice = "Voice"
@@ -3975,7 +3975,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> voice = lilypond_file[abjad.Score]["Voice"]
+                >>> voice = lilypond_file["Voice"]
                 >>> string = abjad.lilypond(voice)
                 >>> print(string)
                 \context Voice = "Voice"
@@ -4008,7 +4008,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> voice = lilypond_file[abjad.Score]["Voice"]
+                >>> voice = lilypond_file["Voice"]
                 >>> string = abjad.lilypond(voice)
                 >>> print(string)
                 \context Voice = "Voice"
@@ -4031,7 +4031,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> score = lilypond_file[abjad.Score]
+                >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
@@ -4093,7 +4093,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> voice = lilypond_file[abjad.Score]["Voice"]
+                >>> voice = lilypond_file["Voice"]
                 >>> string = abjad.lilypond(voice)
                 >>> print(string)
                 \context Voice = "Voice"
@@ -4116,7 +4116,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> score = lilypond_file[abjad.Score]
+                >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
@@ -4183,7 +4183,7 @@ class PitchClassSet(abjad.PitchClassSet):
 
             ..  docs::
 
-                >>> voice = lilypond_file[abjad.Score]["Voice"]
+                >>> voice = lilypond_file["Voice"]
                 >>> string = abjad.lilypond(voice)
                 >>> print(string)
                 \context Voice = "Voice"
@@ -4283,7 +4283,7 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -4334,7 +4334,7 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -4370,7 +4370,7 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -4421,7 +4421,7 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -4457,7 +4457,7 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -4512,7 +4512,7 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -4549,7 +4549,7 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -4585,7 +4585,7 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -4636,7 +4636,7 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -4668,7 +4668,7 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -4701,7 +4701,7 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -4733,7 +4733,7 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -4782,7 +4782,7 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -4814,7 +4814,7 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -4847,7 +4847,7 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -4879,7 +4879,7 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -4929,7 +4929,7 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -4966,7 +4966,7 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -4995,7 +4995,7 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -5045,7 +5045,7 @@ class PitchSet(abjad.PitchSet):
 
             ..  docs::
 
-                >>> score = lilypond_file[abjad.Score]
+                >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
@@ -5115,7 +5115,7 @@ class PitchSet(abjad.PitchSet):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -5145,7 +5145,7 @@ class PitchSet(abjad.PitchSet):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -5176,7 +5176,7 @@ class PitchSet(abjad.PitchSet):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -5206,7 +5206,7 @@ class PitchSet(abjad.PitchSet):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -5253,7 +5253,7 @@ class PitchSet(abjad.PitchSet):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -5283,7 +5283,7 @@ class PitchSet(abjad.PitchSet):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -5314,7 +5314,7 @@ class PitchSet(abjad.PitchSet):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -5344,7 +5344,7 @@ class PitchSet(abjad.PitchSet):
 
             ..  docs::
 
-                >>> staff_group = lilypond_file[abjad.Score]["Piano_Staff"]
+                >>> staff_group = lilypond_file["Piano_Staff"]
                 >>> string = abjad.lilypond(staff_group)
                 >>> print(string)
                 \context PianoStaff = "Piano_Staff"
@@ -5421,7 +5421,7 @@ class PitchTree(classes.Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             \context Score = "Score"
             \with
@@ -5499,7 +5499,7 @@ class PitchTree(classes.Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             \context Score = "Score"
             \with
@@ -5573,7 +5573,7 @@ class PitchTree(classes.Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             \context Score = "Score"
             \with
@@ -5651,7 +5651,7 @@ class PitchTree(classes.Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             \context Score = "Score"
             \with
@@ -5728,7 +5728,7 @@ class PitchTree(classes.Tree):
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             \context Score = "Score"
             \with
@@ -5801,7 +5801,7 @@ class PitchTree(classes.Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__(cell_indices=False)
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             \context Score = "Score"
             \with
@@ -5876,7 +5876,7 @@ class PitchTree(classes.Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__(cell_indices=False)
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             \context Score = "Score"
             \with
@@ -5974,7 +5974,7 @@ class PitchTree(classes.Tree):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -6048,7 +6048,7 @@ class PitchTree(classes.Tree):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -6151,7 +6151,7 @@ class PitchTree(classes.Tree):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -6408,7 +6408,7 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -6491,7 +6491,7 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -6561,7 +6561,7 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = inversion.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -6631,7 +6631,7 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = inversion.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -6701,7 +6701,7 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = inversion.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -6790,7 +6790,7 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -6860,7 +6860,7 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = retrograde.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -6948,7 +6948,7 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -7018,7 +7018,7 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = rotation.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -7088,7 +7088,7 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = rotation.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -7158,7 +7158,7 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = rotation.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -7247,7 +7247,7 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -7317,7 +7317,7 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = transposition.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -7387,7 +7387,7 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = transposition.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -7457,7 +7457,7 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = transposition.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.lilypond(lilypond_file["Score"])
                 >>> print(string)
                 \context Score = "Score"
                 \with

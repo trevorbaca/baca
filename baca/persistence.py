@@ -34,7 +34,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -167,7 +167,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -312,7 +312,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -457,7 +457,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -592,7 +592,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -752,7 +752,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -882,7 +882,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -1016,7 +1016,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -1152,7 +1152,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -1276,7 +1276,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -1412,7 +1412,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -1534,7 +1534,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -1670,7 +1670,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -1795,7 +1795,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -1944,7 +1944,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -2049,7 +2049,7 @@ r"""
             <BLANKLINE>
             >>
 
-        >>> score = lilypond_file[abjad.Score]
+        >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
         >>> tags_ = baca.tags.instrument_color_tags()
@@ -2307,7 +2307,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -2412,7 +2412,7 @@ r"""
             <BLANKLINE>
             >>
 
-        >>> score = lilypond_file[abjad.Score]
+        >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
         >>> tags_ = baca.tags.instrument_color_tags()
@@ -2683,7 +2683,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -2789,7 +2789,7 @@ r"""
             <BLANKLINE>
             >>
 
-        >>> score = lilypond_file[abjad.Score]
+        >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
         >>> tags_ = baca.tags.instrument_color_tags()
@@ -3062,7 +3062,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -3168,7 +3168,7 @@ r"""
             <BLANKLINE>
             >>
 
-        >>> score = lilypond_file[abjad.Score]
+        >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
         >>> tags_ = baca.tags.instrument_color_tags()
@@ -3440,7 +3440,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -3555,7 +3555,7 @@ r"""
             <BLANKLINE>
             >>
 
-        >>> score = lilypond_file[abjad.Score]
+        >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
         >>> tags_ = baca.tags.instrument_color_tags()
@@ -3852,7 +3852,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -3958,7 +3958,7 @@ r"""
             <BLANKLINE>
             >>
 
-        >>> score = lilypond_file[abjad.Score]
+        >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
         >>> tags_ = baca.tags.instrument_color_tags()
@@ -4247,7 +4247,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -4358,7 +4358,7 @@ r"""
             <BLANKLINE>
             >>
 
-        >>> score = lilypond_file[abjad.Score]
+        >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
         >>> tags_ = baca.tags.margin_markup_color_tags()
@@ -4628,7 +4628,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -4739,7 +4739,7 @@ r"""
             <BLANKLINE>
             >>
 
-        >>> score = lilypond_file[abjad.Score]
+        >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
         >>> tags_ = baca.tags.margin_markup_color_tags()
@@ -5021,7 +5021,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -5135,7 +5135,7 @@ r"""
             <BLANKLINE>
             >>
 
-        >>> score = lilypond_file[abjad.Score]
+        >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
         >>> tags_ = baca.tags.margin_markup_color_tags()
@@ -5424,7 +5424,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -5538,7 +5538,7 @@ r"""
             <BLANKLINE>
             >>
 
-        >>> score = lilypond_file[abjad.Score]
+        >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
         >>> tags_ = baca.tags.margin_markup_color_tags()
@@ -5825,7 +5825,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -5952,7 +5952,7 @@ r"""
             <BLANKLINE>
             >>
 
-        >>> score = lilypond_file[abjad.Score]
+        >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
         >>> tags_ = baca.tags.margin_markup_color_tags()
@@ -6273,7 +6273,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -6387,7 +6387,7 @@ r"""
             <BLANKLINE>
             >>
 
-        >>> score = lilypond_file[abjad.Score]
+        >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
         >>> tags_ = baca.tags.margin_markup_color_tags()
@@ -6683,7 +6683,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -6857,7 +6857,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -7010,7 +7010,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -7167,7 +7167,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -7311,7 +7311,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -7471,7 +7471,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -7623,7 +7623,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -7810,7 +7810,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -7959,7 +7959,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -8085,7 +8085,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -8222,7 +8222,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -8361,7 +8361,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -8487,7 +8487,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -8629,7 +8629,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -8778,7 +8778,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -8934,7 +8934,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -9094,7 +9094,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -9245,7 +9245,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -9421,7 +9421,7 @@ r"""
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.lilypond(lilypond_file["Score"])
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"

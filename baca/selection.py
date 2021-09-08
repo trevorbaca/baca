@@ -40,7 +40,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -129,7 +129,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -230,7 +230,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -417,7 +417,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -783,7 +783,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -929,7 +929,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -1032,7 +1032,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -1133,7 +1133,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -1223,7 +1223,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -1311,7 +1311,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -1433,7 +1433,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -1523,7 +1523,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -1641,7 +1641,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -1734,7 +1734,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -1845,7 +1845,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -2250,7 +2250,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -2343,7 +2343,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -2543,7 +2543,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -2632,7 +2632,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -2748,7 +2748,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -2837,7 +2837,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -2956,7 +2956,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -3046,7 +3046,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -3162,7 +3162,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -3251,7 +3251,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -3367,7 +3367,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -3456,7 +3456,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -3563,7 +3563,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -3653,7 +3653,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -3770,7 +3770,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -3918,7 +3918,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -4084,7 +4084,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -4178,7 +4178,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -4399,7 +4399,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -4488,7 +4488,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -4611,7 +4611,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -4689,7 +4689,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
@@ -4778,7 +4778,7 @@ class Selection(abjad.Selection):
                 :lilypond/no-stylesheet:
 
                 >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file[abjad.Score]["Staff"]
+                >>> staff = lilypond_file["Staff"]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
                 >>> abjad.override(staff).TupletBracket.staff_padding = 3
