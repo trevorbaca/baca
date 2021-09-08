@@ -1110,7 +1110,7 @@ class CollectionList(collections_module.abc.Sequence):
                 >>> lilypond_file = collections.__illustrate__()
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 \with
                 {
                     \override BarLine.transparent = ##t
@@ -1128,7 +1128,7 @@ class CollectionList(collections_module.abc.Sequence):
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \new Voice
                         \with
@@ -2731,7 +2731,7 @@ class HarmonicSeries:
             >>> staff = lilypond_file[abjad.Score][0]
             >>> string = abjad.lilypond(staff)
             >>> print(string)
-            \new Staff
+            \context Staff = "Staff"
             \with
             {
                 \override BarLine.stencil = ##f
@@ -2829,7 +2829,7 @@ class HarmonicSeries:
                 >>> staff = lilypond_file[abjad.Score][0]
                 >>> string = abjad.lilypond(staff)
                 >>> print(string)
-                \new Staff
+                \context Staff = "Staff"
                 \with
                 {
                     \override BarLine.stencil = ##f
@@ -2899,7 +2899,7 @@ class HarmonicSeries:
                 }
 
         """
-        staff = abjad.Staff()
+        staff = abjad.Staff(name="Staff")
         for n in range(1, 20 + 1):
             partial = self.partial(n)
             pitch = partial.approximation
@@ -2926,7 +2926,7 @@ class HarmonicSeries:
         abjad.override(staff).TextScript.font_size = -1
         abjad.override(staff).TextScript.staff_padding = 6
         abjad.override(staff).TimeSignature.stencil = False
-        score = abjad.Score([staff])
+        score = abjad.Score([staff], name="Score")
         abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 8)"
         lilypond_file = abjad.LilyPondFile([score])
         return lilypond_file
@@ -5423,7 +5423,7 @@ class PitchTree(classes.Tree):
             >>> lilypond_file = tree.__illustrate__()
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             \with
             {
                 \override BarLine.transparent = ##t
@@ -5441,7 +5441,7 @@ class PitchTree(classes.Tree):
                 proportionalNotationDuration = #(ly:make-moment 1 16)
             }
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \new Voice
                     \with
@@ -5501,7 +5501,7 @@ class PitchTree(classes.Tree):
             >>> lilypond_file = tree.__illustrate__()
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             \with
             {
                 \override BarLine.transparent = ##t
@@ -5519,7 +5519,7 @@ class PitchTree(classes.Tree):
                 proportionalNotationDuration = #(ly:make-moment 1 16)
             }
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \new Voice
                     \with
@@ -5575,7 +5575,7 @@ class PitchTree(classes.Tree):
             >>> lilypond_file = tree.__illustrate__()
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             \with
             {
                 \override BarLine.transparent = ##t
@@ -5593,7 +5593,7 @@ class PitchTree(classes.Tree):
                 proportionalNotationDuration = #(ly:make-moment 1 16)
             }
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \new Voice
                     \with
@@ -5653,7 +5653,7 @@ class PitchTree(classes.Tree):
             >>> lilypond_file = tree.__illustrate__()
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             \with
             {
                 \override BarLine.transparent = ##t
@@ -5671,7 +5671,7 @@ class PitchTree(classes.Tree):
                 proportionalNotationDuration = #(ly:make-moment 1 16)
             }
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \new Voice
                     \with
@@ -5730,7 +5730,7 @@ class PitchTree(classes.Tree):
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             \with
             {
                 \override BarLine.transparent = ##t
@@ -5748,7 +5748,7 @@ class PitchTree(classes.Tree):
                 proportionalNotationDuration = #(ly:make-moment 1 16)
             }
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \new Voice
                     \with
@@ -5803,7 +5803,7 @@ class PitchTree(classes.Tree):
             >>> lilypond_file = tree.__illustrate__(cell_indices=False)
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             \with
             {
                 \override BarLine.transparent = ##t
@@ -5821,7 +5821,7 @@ class PitchTree(classes.Tree):
                 proportionalNotationDuration = #(ly:make-moment 1 16)
             }
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \new Voice
                     \with
@@ -5878,7 +5878,7 @@ class PitchTree(classes.Tree):
             >>> lilypond_file = tree.__illustrate__(cell_indices=False)
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             \with
             {
                 \override BarLine.transparent = ##t
@@ -5896,7 +5896,7 @@ class PitchTree(classes.Tree):
                 proportionalNotationDuration = #(ly:make-moment 1 16)
             }
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     \new Voice
                     \with
@@ -5976,7 +5976,7 @@ class PitchTree(classes.Tree):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 \with
                 {
                     \override BarLine.transparent = ##t
@@ -5994,7 +5994,7 @@ class PitchTree(classes.Tree):
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \new Voice
                         \with
@@ -6050,7 +6050,7 @@ class PitchTree(classes.Tree):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 \with
                 {
                     \override BarLine.transparent = ##t
@@ -6068,7 +6068,7 @@ class PitchTree(classes.Tree):
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \new Voice
                         \with
@@ -6153,7 +6153,7 @@ class PitchTree(classes.Tree):
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 \with
                 {
                     \override BarLine.transparent = ##t
@@ -6171,7 +6171,7 @@ class PitchTree(classes.Tree):
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \new Voice
                         \with
@@ -6221,8 +6221,8 @@ class PitchTree(classes.Tree):
         assert cell_indices in (True, False, abjad.Up, abjad.Down), repr(cell_indices)
         voice = abjad.Voice()
         voice.consists_commands.append("Horizontal_bracket_engraver")
-        staff = abjad.Staff([voice])
-        score = abjad.Score([staff])
+        staff = abjad.Staff([voice], name="Staff")
+        score = abjad.Score([staff], name="Score")
         leaf_list_stack = []
         leaf_groups = self._populate_voice(
             leaf_list_stack,
@@ -6410,7 +6410,7 @@ class PitchTree(classes.Tree):
                 >>> lilypond_file = tree.__illustrate__()
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 \with
                 {
                     \override BarLine.transparent = ##t
@@ -6428,7 +6428,7 @@ class PitchTree(classes.Tree):
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \new Voice
                         \with
@@ -6493,7 +6493,7 @@ class PitchTree(classes.Tree):
                 >>> lilypond_file = tree.__illustrate__()
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 \with
                 {
                     \override BarLine.transparent = ##t
@@ -6511,7 +6511,7 @@ class PitchTree(classes.Tree):
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \new Voice
                         \with
@@ -6563,7 +6563,7 @@ class PitchTree(classes.Tree):
                 >>> lilypond_file = inversion.__illustrate__()
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 \with
                 {
                     \override BarLine.transparent = ##t
@@ -6581,7 +6581,7 @@ class PitchTree(classes.Tree):
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \new Voice
                         \with
@@ -6633,7 +6633,7 @@ class PitchTree(classes.Tree):
                 >>> lilypond_file = inversion.__illustrate__()
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 \with
                 {
                     \override BarLine.transparent = ##t
@@ -6651,7 +6651,7 @@ class PitchTree(classes.Tree):
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \new Voice
                         \with
@@ -6703,7 +6703,7 @@ class PitchTree(classes.Tree):
                 >>> lilypond_file = inversion.__illustrate__()
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 \with
                 {
                     \override BarLine.transparent = ##t
@@ -6721,7 +6721,7 @@ class PitchTree(classes.Tree):
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \new Voice
                         \with
@@ -6792,7 +6792,7 @@ class PitchTree(classes.Tree):
                 >>> lilypond_file = tree.__illustrate__()
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 \with
                 {
                     \override BarLine.transparent = ##t
@@ -6810,7 +6810,7 @@ class PitchTree(classes.Tree):
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \new Voice
                         \with
@@ -6862,7 +6862,7 @@ class PitchTree(classes.Tree):
                 >>> lilypond_file = retrograde.__illustrate__()
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 \with
                 {
                     \override BarLine.transparent = ##t
@@ -6880,7 +6880,7 @@ class PitchTree(classes.Tree):
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \new Voice
                         \with
@@ -6950,7 +6950,7 @@ class PitchTree(classes.Tree):
                 >>> lilypond_file = tree.__illustrate__()
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 \with
                 {
                     \override BarLine.transparent = ##t
@@ -6968,7 +6968,7 @@ class PitchTree(classes.Tree):
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \new Voice
                         \with
@@ -7020,7 +7020,7 @@ class PitchTree(classes.Tree):
                 >>> lilypond_file = rotation.__illustrate__()
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 \with
                 {
                     \override BarLine.transparent = ##t
@@ -7038,7 +7038,7 @@ class PitchTree(classes.Tree):
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \new Voice
                         \with
@@ -7090,7 +7090,7 @@ class PitchTree(classes.Tree):
                 >>> lilypond_file = rotation.__illustrate__()
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 \with
                 {
                     \override BarLine.transparent = ##t
@@ -7108,7 +7108,7 @@ class PitchTree(classes.Tree):
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \new Voice
                         \with
@@ -7160,7 +7160,7 @@ class PitchTree(classes.Tree):
                 >>> lilypond_file = rotation.__illustrate__()
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 \with
                 {
                     \override BarLine.transparent = ##t
@@ -7178,7 +7178,7 @@ class PitchTree(classes.Tree):
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \new Voice
                         \with
@@ -7249,7 +7249,7 @@ class PitchTree(classes.Tree):
                 >>> lilypond_file = tree.__illustrate__()
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 \with
                 {
                     \override BarLine.transparent = ##t
@@ -7267,7 +7267,7 @@ class PitchTree(classes.Tree):
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \new Voice
                         \with
@@ -7319,7 +7319,7 @@ class PitchTree(classes.Tree):
                 >>> lilypond_file = transposition.__illustrate__()
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 \with
                 {
                     \override BarLine.transparent = ##t
@@ -7337,7 +7337,7 @@ class PitchTree(classes.Tree):
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \new Voice
                         \with
@@ -7389,7 +7389,7 @@ class PitchTree(classes.Tree):
                 >>> lilypond_file = transposition.__illustrate__()
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 \with
                 {
                     \override BarLine.transparent = ##t
@@ -7407,7 +7407,7 @@ class PitchTree(classes.Tree):
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \new Voice
                         \with
@@ -7459,7 +7459,7 @@ class PitchTree(classes.Tree):
                 >>> lilypond_file = transposition.__illustrate__()
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 \with
                 {
                     \override BarLine.transparent = ##t
@@ -7477,7 +7477,7 @@ class PitchTree(classes.Tree):
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
                 <<
-                    \new Staff
+                    \context Staff = "Staff"
                     {
                         \new Voice
                         \with

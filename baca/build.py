@@ -181,7 +181,7 @@ def _make_segment_clicktrack(maker):
         metronome_marks.append(metronome_mark)
     staff = abjad.Staff()
     abjad.setting(staff).midiInstrument = '#"drums"'
-    score = abjad.Score([staff], simultaneous=False)
+    score = abjad.Score([staff], name="Score", simultaneous=False)
     fermata_measure_numbers = maker.fermata_measure_empty_overrides or []
     for i, time_signature in enumerate(time_signatures):
         measure_number = i + 1

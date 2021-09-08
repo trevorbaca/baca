@@ -16,8 +16,8 @@ class Accelerando:
 
     ..  container:: example
 
-        >>> staff = abjad.Staff("c'4 d' e' f'")
-        >>> score = abjad.Score([staff])
+        >>> staff = abjad.Staff("c'4 d' e' f'", name="Staff")
+        >>> score = abjad.Score([staff], name="Score")
         >>> accelerando = baca.Accelerando()
         >>> abjad.attach(accelerando, staff[0])
         >>> abjad.show(score) # doctest: +SKIP
@@ -26,9 +26,9 @@ class Accelerando:
 
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     c'4
                     ^ \markup {
@@ -514,8 +514,8 @@ class Ritardando:
 
         Default ritardando:
 
-        >>> staff = abjad.Staff("c'4 d' e' f'")
-        >>> score = abjad.Score([staff])
+        >>> staff = abjad.Staff("c'4 d' e' f'", name="Staff")
+        >>> score = abjad.Score([staff], name="Score")
         >>> ritardando = baca.Ritardando()
         >>> abjad.attach(ritardando, staff[0])
         >>> abjad.show(score) # doctest: +SKIP
@@ -524,9 +524,9 @@ class Ritardando:
 
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     c'4
                     ^ \markup {
@@ -546,8 +546,8 @@ class Ritardando:
 
         >>> markup = abjad.Markup(r'\bold { \italic { ritardando } }')
         >>> ritardando = baca.Ritardando(markup=markup)
-        >>> staff = abjad.Staff("c'4 d' e' f'")
-        >>> score = abjad.Score([staff])
+        >>> staff = abjad.Staff("c'4 d' e' f'", name="Staff")
+        >>> score = abjad.Score([staff], name="Score")
         >>> abjad.attach(ritardando, staff[0])
         >>> abjad.show(score) # doctest: +SKIP
 
@@ -555,9 +555,9 @@ class Ritardando:
 
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            \new Score
+            \context Score = "Score"
             <<
-                \new Staff
+                \context Staff = "Staff"
                 {
                     c'4
                     ^ \markup {

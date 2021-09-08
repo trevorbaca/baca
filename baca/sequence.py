@@ -28,7 +28,7 @@ class Sequence(abjad.Sequence):
 
         ..  docs::
 
-            >>> voice = lilypond_file[abjad.Score][0][0]
+            >>> voice = lilypond_file[abjad.Score]["Voice"]
             >>> string = abjad.lilypond(voice)
             >>> print(string)
             \context Voice = "Voice"
@@ -68,7 +68,7 @@ class Sequence(abjad.Sequence):
 
         ..  docs::
 
-            >>> voice = lilypond_file[abjad.Score][0][0]
+            >>> voice = lilypond_file[abjad.Score]["Voice"]
             >>> string = abjad.lilypond(voice)
             >>> print(string)
             \context Voice = "Voice"

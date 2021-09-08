@@ -591,42 +591,46 @@ class PitchArray:
 
             Makes empty pitch array from score:
 
-            >>> score = abjad.Score([])
-            >>> score.append(abjad.Staff("c'8 d'8 e'8 f'8"))
-            >>> score.append(abjad.Staff("c'4 d'4"))
+            >>> score = abjad.Score(name="Score")
+            >>> score.append(abjad.Staff("c'8 d'8 e'8 f'8", name="Staff_1"))
+            >>> score.append(abjad.Staff("c'4 d'4", name="Staff_2"))
             >>> tuplet = abjad.Tuplet((2, 3), "c'8 d'8 e'8")
             >>> staff = abjad.Staff([
             ...     abjad.Tuplet((2, 3), "c'8 d'8 e'8"),
             ...     abjad.Tuplet((2, 3), "c'8 d'8 e'8"),
-            ... ])
+            ...     ],
+            ...     name="Staff_3",
+            ... )
             >>> score.append(staff)
 
             ..  docs::
 
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff_1"
                     {
                         c'8
                         d'8
                         e'8
                         f'8
                     }
-                    \new Staff
+                    \context Staff = "Staff_2"
                     {
                         c'4
                         d'4
                     }
-                    \new Staff
+                    \context Staff = "Staff_3"
                     {
-                        \times 2/3 {
+                        \times 2/3
+                        {
                             c'8
                             d'8
                             e'8
                         }
-                        \times 2/3 {
+                        \times 2/3
+                        {
                             c'8
                             d'8
                             e'8
@@ -648,41 +652,45 @@ class PitchArray:
 
             Makes populated pitch array from ``score``:
 
-            >>> score = abjad.Score([])
-            >>> score.append(abjad.Staff("c'8 d'8 e'8 f'8"))
-            >>> score.append(abjad.Staff("c'4 d'4"))
+            >>> score = abjad.Score(name="Score")
+            >>> score.append(abjad.Staff("c'8 d'8 e'8 f'8", name="Staff_1"))
+            >>> score.append(abjad.Staff("c'4 d'4", name="Staff_2"))
             >>> staff = abjad.Staff([
             ...     abjad.Tuplet((2, 3), "c'8 d'8 e'8"),
             ...     abjad.Tuplet((2, 3), "c'8 d'8 e'8"),
-            ... ])
+            ...     ],
+            ...     name="Staff_3",
+            ... )
             >>> score.append(staff)
 
             ..  docs::
 
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new Staff
+                    \context Staff = "Staff_1"
                     {
                         c'8
                         d'8
                         e'8
                         f'8
                     }
-                    \new Staff
+                    \context Staff = "Staff_2"
                     {
                         c'4
                         d'4
                     }
-                    \new Staff
+                    \context Staff = "Staff_3"
                     {
-                        \times 2/3 {
+                        \times 2/3
+                        {
                             c'8
                             d'8
                             e'8
                         }
-                        \times 2/3 {
+                        \times 2/3
+                        {
                             c'8
                             d'8
                             e'8
@@ -2217,11 +2225,11 @@ class PitchArrayList(abjad.TypedList):
 
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
-                \new Score
+                \context Score = "Score"
                 <<
-                    \new StaffGroup
+                    \context StaffGroup = "Staff_Group"
                     <<
-                        \new Staff
+                        \context Staff = "Staff"
                         {
                             {
                                 \time 4/8
@@ -2236,7 +2244,7 @@ class PitchArrayList(abjad.TypedList):
                                 r8
                             }
                         }
-                        \new Staff
+                        \context Staff = "Staff"
                         {
                             {
                                 \time 4/8
@@ -2256,11 +2264,11 @@ class PitchArrayList(abjad.TypedList):
 
         Creates one staff per pitch-array row.
         """
-        score = abjad.Score([])
-        staff_group = abjad.StaffGroup([])
+        score = abjad.Score(name="Score")
+        staff_group = abjad.StaffGroup(name="Staff_Group")
         score.append(staff_group)
         number_staves = self[0].depth
-        staff = abjad.Staff()
+        staff = abjad.Staff(name="Staff")
         staves = abjad.mutate.copy(staff, number_staves)
         staff_group.extend(staves)
         for pitch_array in self:
