@@ -146,7 +146,7 @@ class ArpeggiationSpacingSpecifier:
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+                >>> lilypond_file = abjad.illustrators.selection(selection)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -196,7 +196,7 @@ class ArpeggiationSpacingSpecifier:
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+                >>> lilypond_file = abjad.illustrators.selection(selection)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::

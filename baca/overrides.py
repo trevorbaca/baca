@@ -596,7 +596,7 @@ def beam_positions(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selections)
+            >>> lilypond_file = abjad.illustrators.selection(selections)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -808,7 +808,7 @@ def dls_staff_padding(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -913,7 +913,7 @@ def dls_up(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1090,7 +1090,7 @@ def dynamic_text_extra_offset(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2561,7 +2561,7 @@ def note_head_style_cross(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2651,7 +2651,7 @@ def note_head_style_harmonic(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2922,7 +2922,7 @@ def repeat_tie_down(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3068,7 +3068,7 @@ def repeat_tie_up(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3177,7 +3177,7 @@ def rest_down(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3288,7 +3288,7 @@ def rest_position(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3378,7 +3378,7 @@ def rest_transparent(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3468,7 +3468,7 @@ def rest_up(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3579,7 +3579,7 @@ def script_color(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3679,7 +3679,7 @@ def script_down(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3780,7 +3780,7 @@ def script_extra_offset(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3911,7 +3911,7 @@ def script_up(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -4032,7 +4032,7 @@ def slur_down(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -4135,7 +4135,7 @@ def slur_up(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -4294,7 +4294,7 @@ def stem_color(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -4385,7 +4385,7 @@ def stem_down(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -4537,7 +4537,7 @@ def stem_up(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -4650,7 +4650,7 @@ def sustain_pedal_staff_padding(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -4755,7 +4755,7 @@ def text_script_color(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -4883,7 +4883,7 @@ def text_script_down(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5083,7 +5083,7 @@ def text_script_padding(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5258,7 +5258,7 @@ def text_script_staff_padding(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5386,7 +5386,7 @@ def text_script_up(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5591,7 +5591,7 @@ def text_spanner_staff_padding(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(
+            >>> lilypond_file = abjad.illustrators.selection(
             ...     selection, includes=["baca.ily"]
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -5742,7 +5742,7 @@ def tie_down(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5832,7 +5832,7 @@ def tie_up(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5921,7 +5921,7 @@ def time_signature_extra_offset(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -6028,7 +6028,7 @@ def time_signature_transparent(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -6135,7 +6135,7 @@ def tuplet_bracket_down(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -6226,7 +6226,7 @@ def tuplet_bracket_extra_offset(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -6363,7 +6363,7 @@ def tuplet_bracket_staff_padding(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -6466,7 +6466,7 @@ def tuplet_bracket_up(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -6572,7 +6572,7 @@ def tuplet_number_extra_offset(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::

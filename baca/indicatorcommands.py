@@ -46,7 +46,7 @@ def accent(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -136,7 +136,7 @@ def alternate_bow_strokes(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -217,7 +217,7 @@ def alternate_bow_strokes(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -298,7 +298,7 @@ def alternate_bow_strokes(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(
+            >>> lilypond_file = abjad.illustrators.selection(
             ...     selection, includes=["baca.ily"]
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -400,7 +400,7 @@ def arpeggio(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -562,7 +562,7 @@ def clef(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -679,7 +679,7 @@ def double_staccato(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(
+            >>> lilypond_file = abjad.illustrators.selection(
             ...     selection, includes=["baca.ily"]
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -761,7 +761,7 @@ def down_arpeggio(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -860,7 +860,7 @@ def down_bow(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(
+            >>> lilypond_file = abjad.illustrators.selection(
             ...     selection, includes=["baca.ily"]
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -935,7 +935,7 @@ def down_bow(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(
+            >>> lilypond_file = abjad.illustrators.selection(
             ...     selection, includes=["baca.ily"]
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1030,7 +1030,7 @@ def espressivo(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1118,7 +1118,7 @@ def fermata(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1205,7 +1205,7 @@ def flageolet(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1442,7 +1442,7 @@ def laissez_vibrer(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1546,7 +1546,7 @@ def long_fermata(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1633,7 +1633,7 @@ def marcato(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1904,7 +1904,7 @@ def parenthesize(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2033,7 +2033,7 @@ def repeat_tie(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2123,7 +2123,7 @@ def short_fermata(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2223,7 +2223,7 @@ def staccatissimo(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2310,7 +2310,7 @@ def staccato(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3203,7 +3203,7 @@ def stem_tremolo(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3294,7 +3294,7 @@ def stop_on_string(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(
+            >>> lilypond_file = abjad.illustrators.selection(
             ...     selection, includes=["baca.ily"]
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -3405,7 +3405,7 @@ def stopped(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3496,7 +3496,7 @@ def tie(selector: abjad.Expression) -> commandclasses.IndicatorCommand:
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3583,7 +3583,7 @@ def tenuto(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3676,7 +3676,7 @@ def up_arpeggio(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3775,7 +3775,7 @@ def up_bow(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3867,7 +3867,7 @@ def very_long_fermata(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::

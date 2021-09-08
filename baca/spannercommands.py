@@ -429,7 +429,7 @@ def ottava(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -519,7 +519,7 @@ def ottava_bassa(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -611,7 +611,7 @@ def slur(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -711,7 +711,7 @@ def sustain_pedal(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -809,7 +809,7 @@ def trill_spanner(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -884,7 +884,7 @@ def trill_spanner(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -966,7 +966,7 @@ def trill_spanner(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::

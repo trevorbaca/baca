@@ -649,7 +649,7 @@ def color(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(
+            >>> lilypond_file = abjad.illustrators.selection(
             ...     selection, includes=["abjad.ily"]
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -730,7 +730,7 @@ def color(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(
+            >>> lilypond_file = abjad.illustrators.selection(
             ...     selection, includes=["abjad.ily"]
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1331,7 +1331,7 @@ def dynamic_down(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1419,7 +1419,7 @@ def dynamic_up(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2735,7 +2735,7 @@ def label(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2832,7 +2832,7 @@ def markup(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2908,7 +2908,7 @@ def markup(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(
+            >>> lilypond_file = abjad.illustrators.selection(
             ...     selection,
             ...     includes=["baca.ily"],
             ... )

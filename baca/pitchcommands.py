@@ -281,7 +281,7 @@ class ClusterCommand(scoping.Command):
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3496,7 +3496,7 @@ class RegisterCommand(scoping.Command):
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3712,7 +3712,7 @@ class RegisterCommand(scoping.Command):
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3844,7 +3844,7 @@ class RegisterInterpolationCommand(scoping.Command):
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3912,7 +3912,7 @@ class RegisterInterpolationCommand(scoping.Command):
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5139,7 +5139,7 @@ class RegisterInterpolationCommand(scoping.Command):
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(
+                >>> lilypond_file = abjad.illustrators.selection(
                 ...     selection, includes=["abjad.ily"]
                 ... )
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -5219,7 +5219,7 @@ class RegisterInterpolationCommand(scoping.Command):
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(
+                >>> lilypond_file = abjad.illustrators.selection(
                 ...     selection, includes=["abjad.ily"]
                 ... )
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -5302,7 +5302,7 @@ class RegisterInterpolationCommand(scoping.Command):
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(
+                >>> lilypond_file = abjad.illustrators.selection(
                 ...     selection, includes=["abjad.ily"]
                 ... )
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -5417,7 +5417,7 @@ class RegisterToOctaveCommand(scoping.Command):
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5450,7 +5450,7 @@ class RegisterToOctaveCommand(scoping.Command):
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5483,7 +5483,7 @@ class RegisterToOctaveCommand(scoping.Command):
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5520,7 +5520,7 @@ class RegisterToOctaveCommand(scoping.Command):
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5557,7 +5557,7 @@ class RegisterToOctaveCommand(scoping.Command):
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5594,7 +5594,7 @@ class RegisterToOctaveCommand(scoping.Command):
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5635,7 +5635,7 @@ class RegisterToOctaveCommand(scoping.Command):
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5672,7 +5672,7 @@ class RegisterToOctaveCommand(scoping.Command):
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5709,7 +5709,7 @@ class RegisterToOctaveCommand(scoping.Command):
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -6409,7 +6409,7 @@ def bass_to_octave(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(
+            >>> lilypond_file = abjad.illustrators.selection(
             ...     selection, includes=["abjad.ily"]
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -6500,7 +6500,7 @@ def bass_to_octave(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(
+            >>> lilypond_file = abjad.illustrators.selection(
             ...     selection, includes=["abjad.ily"]
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -6601,7 +6601,7 @@ def center_to_octave(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(
+            >>> lilypond_file = abjad.illustrators.selection(
             ...     selection, includes=["abjad.ily"]
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -6692,7 +6692,7 @@ def center_to_octave(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(
+            >>> lilypond_file = abjad.illustrators.selection(
             ...     selection, includes=["abjad.ily"]
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -6841,7 +6841,7 @@ def displacement(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -6914,7 +6914,7 @@ def displacement(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -7129,7 +7129,7 @@ def interpolate_pitches(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -7199,7 +7199,7 @@ def interpolate_pitches(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -7567,7 +7567,7 @@ def register(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -7638,7 +7638,7 @@ def register(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(
+            >>> lilypond_file = abjad.illustrators.selection(
             ...     selection, includes=["abjad.ily"]
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -7719,7 +7719,7 @@ def register(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(selection)
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -7791,7 +7791,7 @@ def register(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(
+            >>> lilypond_file = abjad.illustrators.selection(
             ...     selection, includes=["abjad.ily"]
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -7885,7 +7885,7 @@ def soprano_to_octave(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(
+            >>> lilypond_file = abjad.illustrators.selection(
             ...     selection, includes=["abjad.ily"]
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -7976,7 +7976,7 @@ def soprano_to_octave(
         ..  book::
             :lilypond/no-stylesheet:
 
-            >>> lilypond_file = baca.figuremaker.lilypond_file(
+            >>> lilypond_file = abjad.illustrators.selection(
             ...     selection, includes=["abjad.ily"]
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP

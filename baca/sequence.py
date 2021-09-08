@@ -437,7 +437,7 @@ class Sequence(abjad.Sequence):
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(music, divisions)
+                >>> lilypond_file = abjad.illustrators.selection(music, divisions)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -470,7 +470,7 @@ class Sequence(abjad.Sequence):
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(music)
+                >>> lilypond_file = abjad.illustrators.selection(music)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -505,7 +505,7 @@ class Sequence(abjad.Sequence):
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(music)
+                >>> lilypond_file = abjad.illustrators.selection(music)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -546,7 +546,7 @@ class Sequence(abjad.Sequence):
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(music)
+                >>> lilypond_file = abjad.illustrators.selection(music)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -605,7 +605,7 @@ class Sequence(abjad.Sequence):
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(music)
+                >>> lilypond_file = abjad.illustrators.selection(music)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -1024,7 +1024,7 @@ class Sequence(abjad.Sequence):
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(music)
+                >>> lilypond_file = abjad.illustrators.selection(music)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -1086,7 +1086,7 @@ class Sequence(abjad.Sequence):
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(music, time_signatures)
+                >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -1138,7 +1138,7 @@ class Sequence(abjad.Sequence):
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(music, time_signatures)
+                >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -1184,7 +1184,7 @@ class Sequence(abjad.Sequence):
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(music, time_signatures)
+                >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -1239,7 +1239,7 @@ class Sequence(abjad.Sequence):
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(music, time_signatures)
+                >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -1291,7 +1291,7 @@ class Sequence(abjad.Sequence):
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(music, time_signatures)
+                >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -1354,7 +1354,7 @@ class Sequence(abjad.Sequence):
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(music, time_signatures)
+                >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -1685,7 +1685,7 @@ class Sequence(abjad.Sequence):
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(music)
+                >>> lilypond_file = abjad.illustrators.selection(music)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -1734,7 +1734,7 @@ class Sequence(abjad.Sequence):
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(music)
+                >>> lilypond_file = abjad.illustrators.selection(music)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -1785,7 +1785,7 @@ class Sequence(abjad.Sequence):
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(music)
+                >>> lilypond_file = abjad.illustrators.selection(music)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -1835,7 +1835,7 @@ class Sequence(abjad.Sequence):
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(music)
+                >>> lilypond_file = abjad.illustrators.selection(music)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -1894,7 +1894,7 @@ class Sequence(abjad.Sequence):
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(music, time_signatures)
+                >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -1958,7 +1958,7 @@ class Sequence(abjad.Sequence):
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(music, time_signatures)
+                >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -2016,7 +2016,7 @@ class Sequence(abjad.Sequence):
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(music, time_signatures)
+                >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -2065,7 +2065,7 @@ class Sequence(abjad.Sequence):
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(music, time_signatures)
+                >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -2113,7 +2113,7 @@ class Sequence(abjad.Sequence):
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(music, time_signatures)
+                >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -2174,7 +2174,7 @@ class Sequence(abjad.Sequence):
             ..  book::
                 :lilypond/no-stylesheet:
 
-                >>> lilypond_file = baca.figuremaker.lilypond_file(music, time_signatures)
+                >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
