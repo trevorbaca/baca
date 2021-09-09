@@ -957,8 +957,9 @@ def cross_staff(
 
         Attaches cross-staff command to last two pitched leaves:
 
-        >>> score_template = baca.StringTrioScoreTemplate()
-        >>> accumulator = baca.Accumulator(score_template=score_template)
+        >>> template = baca.StringTrioScoreTemplate()
+        >>> score = template()
+        >>> accumulator = baca.Accumulator(score)
         >>> commands = [
         ...     baca.figure([1], 8, signature=8),
         ...     rmakers.beam(),
@@ -993,7 +994,7 @@ def cross_staff(
 
         >>> maker = baca.SegmentMaker(
         ...     ignore_repeat_pitch_classes=True,
-        ...     score_template=accumulator.score_template,
+        ...     score_template=template,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=accumulator.time_signatures,
         ...     )
