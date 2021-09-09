@@ -285,7 +285,8 @@ class BCPCommand(scoping.Command):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file["Score"])
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
@@ -578,7 +579,8 @@ class BCPCommand(scoping.Command):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file["Score"])
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
@@ -925,7 +927,8 @@ class ContainerCommand(scoping.Command):
 
         >>> lilypond_file = maker.run(environment='docs')
 
-        >>> string = abjad.lilypond(lilypond_file["Score"])
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
         >>> print(string)
         <BLANKLINE>
         \context Score = "Score"

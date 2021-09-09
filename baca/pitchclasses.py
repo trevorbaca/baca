@@ -151,7 +151,8 @@ class ArpeggiationSpacingSpecifier:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file["Score"])
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -204,7 +205,8 @@ class ArpeggiationSpacingSpecifier:
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file["Score"])
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
                 <<
@@ -1108,7 +1110,8 @@ class CollectionList(collections_module.abc.Sequence):
             ..  docs::
 
                 >>> lilypond_file = collections.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file["Score"])
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -5421,7 +5424,8 @@ class PitchTree(classes.Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             \with
@@ -5499,7 +5503,8 @@ class PitchTree(classes.Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             \with
@@ -5573,7 +5578,8 @@ class PitchTree(classes.Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             \with
@@ -5651,7 +5657,8 @@ class PitchTree(classes.Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             \with
@@ -5728,7 +5735,8 @@ class PitchTree(classes.Tree):
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             \with
@@ -5801,7 +5809,8 @@ class PitchTree(classes.Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__(cell_indices=False)
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             \with
@@ -5876,7 +5885,8 @@ class PitchTree(classes.Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__(cell_indices=False)
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             \with
@@ -5974,7 +5984,8 @@ class PitchTree(classes.Tree):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file["Score"])
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -6048,7 +6059,8 @@ class PitchTree(classes.Tree):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file["Score"])
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -6151,7 +6163,8 @@ class PitchTree(classes.Tree):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file["Score"])
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -6408,7 +6421,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file["Score"])
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -6491,7 +6505,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file["Score"])
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -6561,7 +6576,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = inversion.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file["Score"])
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -6631,7 +6647,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = inversion.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file["Score"])
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -6701,7 +6718,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = inversion.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file["Score"])
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -6790,7 +6808,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file["Score"])
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -6860,7 +6879,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = retrograde.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file["Score"])
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -6948,7 +6968,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file["Score"])
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -7018,7 +7039,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = rotation.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file["Score"])
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -7088,7 +7110,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = rotation.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file["Score"])
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -7158,7 +7181,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = rotation.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file["Score"])
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -7247,7 +7271,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file["Score"])
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -7317,7 +7342,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = transposition.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file["Score"])
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -7387,7 +7413,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = transposition.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file["Score"])
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
                 \with
@@ -7457,7 +7484,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = transposition.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file["Score"])
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
                 \with

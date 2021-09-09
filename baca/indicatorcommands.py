@@ -51,7 +51,8 @@ def accent(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -141,7 +142,8 @@ def alternate_bow_strokes(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -222,7 +224,8 @@ def alternate_bow_strokes(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -305,7 +308,8 @@ def alternate_bow_strokes(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -405,7 +409,8 @@ def arpeggio(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -567,7 +572,8 @@ def clef(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -686,7 +692,8 @@ def double_staccato(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -766,7 +773,8 @@ def down_arpeggio(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -867,7 +875,8 @@ def down_bow(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -942,7 +951,8 @@ def down_bow(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -1035,7 +1045,8 @@ def espressivo(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -1123,7 +1134,8 @@ def fermata(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -1210,7 +1222,8 @@ def flageolet(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -1289,7 +1302,8 @@ def hide_black_note_heads(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -1447,7 +1461,8 @@ def laissez_vibrer(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -1551,7 +1566,8 @@ def long_fermata(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -1638,7 +1654,8 @@ def marcato(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -1722,7 +1739,8 @@ def margin_markup(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -1909,7 +1927,8 @@ def parenthesize(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -2038,7 +2057,8 @@ def repeat_tie(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -2128,7 +2148,8 @@ def short_fermata(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -2228,7 +2249,8 @@ def staccatissimo(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -2315,7 +2337,8 @@ def staccato(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -2399,7 +2422,8 @@ def staff_lines(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -2546,7 +2570,8 @@ def staff_lines(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -2694,7 +2719,8 @@ def staff_lines(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -2840,7 +2866,8 @@ def staff_lines(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -2986,7 +3013,8 @@ def staff_lines(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -3208,7 +3236,8 @@ def stem_tremolo(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -3301,7 +3330,8 @@ def stop_on_string(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -3410,7 +3440,8 @@ def stopped(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -3501,7 +3532,8 @@ def tie(selector: abjad.Expression) -> commandclasses.IndicatorCommand:
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -3588,7 +3620,8 @@ def tenuto(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -3681,7 +3714,8 @@ def up_arpeggio(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -3780,7 +3814,8 @@ def up_bow(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<
@@ -3872,7 +3907,8 @@ def very_long_fermata(
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
             <<

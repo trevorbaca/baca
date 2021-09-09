@@ -332,7 +332,8 @@ class SingleStaffScoreTemplate(ScoreTemplate):
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -485,7 +486,8 @@ class StringTrioScoreTemplate(ScoreTemplate):
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -843,7 +845,8 @@ class ThreeVoiceStaffScoreTemplate(ScoreTemplate):
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -1110,7 +1113,8 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -1324,7 +1328,8 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
 
         ..  docs::
 
-            >>> string = abjad.lilypond(lilypond_file["Score"])
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
