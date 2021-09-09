@@ -125,6 +125,15 @@
         \voiceTwo
     }
 
+    % VOICE THREE
+    \context {
+        \Voice
+        \name MusicVoiceThree
+        \type Engraver_group
+        \alias Voice
+        \voiceThree
+    }
+
     % MUSIC STAFF
     \context {
         \Staff
@@ -133,6 +142,7 @@
         \alias Staff
         \accepts MusicVoiceOne
         \accepts MusicVoiceTwo
+        \accepts MusicVoiceThree
     }
 
     % MUSIC CONTEXT

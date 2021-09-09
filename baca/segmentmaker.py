@@ -2883,8 +2883,6 @@ class SegmentMaker:
             includes.append("baca.ily")
             if abjad.get.indicator(self.score, const.TWO_VOICE):
                 includes.append("baca-two-voice-staff.ily")
-            elif abjad.get.indicator(self.score, const.THREE_VOICE):
-                includes.append("baca-three-voice-staff.ily")
             else:
                 includes.append("baca-string-trio.ily")
             return includes

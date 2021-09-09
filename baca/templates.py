@@ -1093,7 +1093,7 @@ class ThreeVoiceStaffScoreTemplate(ScoreTemplate):
 
         # SCORE
         score = abjad.Score([global_context, music_context], name="Score", tag=tag)
-        abjad.attach(const.THREE_VOICE, score, tag=None)
+        abjad.attach(const.TWO_VOICE, score, tag=None)
         return score
 
 
