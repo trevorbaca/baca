@@ -1246,7 +1246,9 @@ class SegmentMaker:
             classes=(list, scoping.Suite), depth=-1
         )
         commands = tuple(commands_)
-        if self.score_template is not None:
+        if self.score_template is not None and hasattr(
+            self.score_template, "voice_abbreviations"
+        ):
             self._cache_voice_names()
             abbreviations = self.score_template.voice_abbreviations
         else:
@@ -1624,7 +1626,9 @@ class SegmentMaker:
         )
 
     def _attach_fermatas(self):
-        always_make_global_rests = self.score_template.always_make_global_rests
+        always_make_global_rests = getattr(
+            self.score_template, "always_make_global_rests", False
+        )
         if not always_make_global_rests:
             del self.score["Global_Rests"]
             return
@@ -1649,6 +1653,8 @@ class SegmentMaker:
 
     def _attach_first_segment_score_template_defaults(self):
         if not self.first_segment:
+            return
+        if not hasattr(self.score_template, "attach_defaults"):
             return
         for wrapper in self.score_template.attach_defaults(self.score):
             self._treat_persistent_wrapper(self.manifests, wrapper, "default")

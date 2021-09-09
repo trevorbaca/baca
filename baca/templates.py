@@ -5,11 +5,9 @@ import typing
 
 import abjad
 
-from . import const
+from . import const as _const
 from . import parts as _parts
 from . import tags as _tags
-
-### CLASSES ###
 
 
 class ScoreTemplate(abjad.ScoreTemplate):
@@ -134,7 +132,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
             argument
         )
         wrappers: typing.List[abjad.Wrapper] = []
-        tag = const.REMOVE_ALL_EMPTY_STAVES
+        tag = _const.REMOVE_ALL_EMPTY_STAVES
         empty_prototype = (abjad.MultimeasureRest, abjad.Skip)
         prototype = (abjad.Staff, abjad.StaffGroup)
         if isinstance(argument, abjad.Score):
@@ -155,7 +153,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
             for voice in voices:
                 leaves = []
                 for leaf_ in abjad.Iteration(voice).leaves():
-                    if abjad.get.has_indicator(leaf_, const.HIDDEN):
+                    if abjad.get.has_indicator(leaf_, _const.HIDDEN):
                         leaves.append(leaf_)
                 if not all(isinstance(_, empty_prototype) for _ in leaves):
                     leaf = abjad.get.leaf(voice, 0)
@@ -1093,222 +1091,7 @@ class ThreeVoiceStaffScoreTemplate(ScoreTemplate):
 
         # SCORE
         score = abjad.Score([global_context, music_context], name="Score", tag=tag)
-        abjad.attach(const.TWO_VOICE, score, tag=None)
-        return score
-
-
-class TwoVoiceStaffScoreTemplate(ScoreTemplate):
-    r"""
-    Two-voice staff score template.
-
-    ..  container:: example
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.TwoVoiceStaffScoreTemplate(),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            <BLANKLINE>
-            \context Score = "Score"
-            <<
-            <BLANKLINE>
-                \context GlobalContext = "Global_Context"
-                <<
-            <BLANKLINE>
-                    \context GlobalSkips = "Global_Skips"
-                    {
-            <BLANKLINE>
-                        % [Global_Skips measure 1]
-                        \time 4/8
-                        \baca-time-signature-color #'blue
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [Global_Skips measure 2]
-                        \time 3/8
-                        \baca-time-signature-color #'blue
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [Global_Skips measure 3]
-                        \time 4/8
-                        \baca-time-signature-color #'blue
-                        s1 * 1/2
-            <BLANKLINE>
-                        % [Global_Skips measure 4]
-                        \time 3/8
-                        \baca-time-signature-color #'blue
-                        s1 * 3/8
-            <BLANKLINE>
-                        % [Global_Skips measure 5]
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
-                    }
-            <BLANKLINE>
-                >>
-            <BLANKLINE>
-                \context MusicContext = "Music_Context"
-                <<
-            <BLANKLINE>
-                    \context MusicStaff = "Music_Staff"
-                    <<
-            <BLANKLINE>
-                        \context MusicVoiceOne = "Music_Voice_One"
-                        {
-            <BLANKLINE>
-                            % [Music_Voice_One measure 1]
-                            R1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-            <BLANKLINE>
-                            % [Music_Voice_One measure 2]
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-            <BLANKLINE>
-                            % [Music_Voice_One measure 3]
-                            R1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-            <BLANKLINE>
-                            % [Music_Voice_One measure 4]
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-            <BLANKLINE>
-                            <<
-            <BLANKLINE>
-                                \context Voice = "Music_Voice_One"
-                                {
-            <BLANKLINE>
-                                    % [Music_Voice_One measure 5]
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
-                                }
-            <BLANKLINE>
-                                \context Voice = "Rest_Voice_One"
-                                {
-            <BLANKLINE>
-                                    % [Rest_Voice_One measure 5]
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
-                                }
-            <BLANKLINE>
-                            >>
-            <BLANKLINE>
-                        }
-            <BLANKLINE>
-                        \context MusicVoiceTwo = "Music_Voice_Two"
-                        {
-            <BLANKLINE>
-                            % [Music_Voice_Two measure 1]
-                            R1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-            <BLANKLINE>
-                            % [Music_Voice_Two measure 2]
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-            <BLANKLINE>
-                            % [Music_Voice_Two measure 3]
-                            R1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-            <BLANKLINE>
-                            % [Music_Voice_Two measure 4]
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-            <BLANKLINE>
-                            <<
-            <BLANKLINE>
-                                \context Voice = "Music_Voice_Two"
-                                {
-            <BLANKLINE>
-                                    % [Music_Voice_Two measure 5]
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
-                                }
-            <BLANKLINE>
-                                \context Voice = "Rest_Voice_Two"
-                                {
-            <BLANKLINE>
-                                    % [Rest_Voice_Two measure 5]
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
-                                }
-            <BLANKLINE>
-                            >>
-            <BLANKLINE>
-                        }
-            <BLANKLINE>
-                    >>
-            <BLANKLINE>
-                >>
-            <BLANKLINE>
-            >>
-
-    """
-
-    ### SPECIAL METHODS ###
-
-    def __call__(self) -> abjad.Score:
-        """
-        Calls two-voice staff score template.
-        """
-        site = "baca.TwoVoiceStaffScoreTemplate.__call__()"
-        tag = abjad.Tag(site)
-        # GLOBAL CONTEXT
-        global_context = self._make_global_context()
-
-        # MUSIC STAFF
-        music_voice_1 = abjad.Voice(
-            lilypond_type="MusicVoiceOne", name="Music_Voice_One", tag=tag
-        )
-        music_voice_2 = abjad.Voice(
-            lilypond_type="MusicVoiceTwo", name="Music_Voice_Two", tag=tag
-        )
-        music_staff = abjad.Staff(
-            [music_voice_1, music_voice_2],
-            lilypond_type="MusicStaff",
-            simultaneous=True,
-            name="Music_Staff",
-            tag=tag,
-        )
-
-        # MUSIC CONTEXT
-        music_context = abjad.Context(
-            [music_staff],
-            lilypond_type="MusicContext",
-            simultaneous=True,
-            name="Music_Context",
-            tag=tag,
-        )
-
-        # SCORE
-        score = abjad.Score([global_context, music_context], name="Score", tag=tag)
-        abjad.attach(const.TWO_VOICE, score, tag=None)
+        abjad.attach(_const.TWO_VOICE, score, tag=None)
         return score
 
 
@@ -1486,3 +1269,52 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
         # SCORE
         score = abjad.Score([global_context, music_context], name="Score", tag=tag)
         return score
+
+
+def make_empty_score_with_multivoice_staff(count=2):
+    """
+    Makes empty score with one staff that contains two voices.
+    """
+    assert count in (2, 3), repr(count)
+
+    site = "baca.TwoVoiceStaffScoreTemplate.__call__()"
+    tag = abjad.Tag(site)
+    # GLOBAL CONTEXT
+    global_context = abjad.ScoreTemplate._make_global_context()
+
+    # MUSIC STAFF
+    voices = []
+    music_voice_1 = abjad.Voice(
+        lilypond_type="MusicVoiceOne", name="Music_Voice_One", tag=tag
+    )
+    voices.append(music_voice_1)
+    music_voice_2 = abjad.Voice(
+        lilypond_type="MusicVoiceTwo", name="Music_Voice_Two", tag=tag
+    )
+    voices.append(music_voice_2)
+    if count == 3:
+        music_voice_3 = abjad.Voice(
+            lilypond_type="MusicVoiceThree", name="Music_Voice_Three", tag=tag
+        )
+        voices.append(music_voice_3)
+    music_staff = abjad.Staff(
+        voices,
+        lilypond_type="MusicStaff",
+        simultaneous=True,
+        name="Music_Staff",
+        tag=tag,
+    )
+
+    # MUSIC CONTEXT
+    music_context = abjad.Context(
+        [music_staff],
+        lilypond_type="MusicContext",
+        simultaneous=True,
+        name="Music_Context",
+        tag=tag,
+    )
+
+    # SCORE
+    score = abjad.Score([global_context, music_context], name="Score", tag=tag)
+    abjad.attach(_const.TWO_VOICE, score, tag=None)
+    return score

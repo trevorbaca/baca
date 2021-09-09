@@ -2118,7 +2118,7 @@ class Imbrication:
 
             Allows unused pitches:
 
-            >>> template = baca.TwoVoiceStaffScoreTemplate()
+            >>> template = baca.make_empty_score_with_multivoice_staff
             >>> accumulator = baca.Accumulator(template)
 
             >>> collections = [
@@ -2142,7 +2142,7 @@ class Imbrication:
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_repeat_pitch_classes=True,
-            ...     score_template=baca.TwoVoiceStaffScoreTemplate(),
+            ...     score_template=baca.make_empty_score_with_multivoice_staff,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ...     time_signatures=accumulator.time_signatures,
             ... )
@@ -2396,7 +2396,7 @@ class Imbrication:
 
             Raises exception on unused pitches:
 
-            >>> template = baca.TwoVoiceStaffScoreTemplate()
+            >>> template = baca.make_empty_score_with_multivoice_staff
             >>> accumulator = baca.Accumulator(template)
             >>> collections = [
             ...     [0, 2, 10, 18, 16],
@@ -2448,7 +2448,7 @@ class Imbrication:
 
             Hockets voices:
 
-            >>> template = baca.TwoVoiceStaffScoreTemplate()
+            >>> template = baca.make_empty_score_with_multivoice_staff
             >>> accumulator = baca.Accumulator(template)
 
             >>> collections = [
@@ -2473,7 +2473,7 @@ class Imbrication:
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_repeat_pitch_classes=True,
-            ...     score_template=baca.TwoVoiceStaffScoreTemplate(),
+            ...     score_template=baca.make_empty_score_with_multivoice_staff,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ...     time_signatures=accumulator.time_signatures,
             ... )
@@ -2776,7 +2776,7 @@ class Imbrication:
 
             Selects last nine notes:
 
-            >>> template = baca.TwoVoiceStaffScoreTemplate()
+            >>> template = baca.make_empty_score_with_multivoice_staff
             >>> accumulator = baca.Accumulator(template)
 
             >>> collections = [
@@ -3136,7 +3136,7 @@ class Imbrication:
 
             Truncates ties:
 
-            >>> template = baca.TwoVoiceStaffScoreTemplate()
+            >>> template = baca.make_empty_score_with_multivoice_staff
             >>> accumulator = baca.Accumulator(template)
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -3590,6 +3590,8 @@ class Accumulator:
     ### PRIVATE METHODS ###
 
     def _abbreviation(self, voice_name):
+        if not hasattr(self.score_template, "voice_abbreviations"):
+            return voice_name
         return self.score_template.voice_abbreviations.get(voice_name, voice_name)
 
     def _cache_figure_name(self, contribution):
@@ -3602,9 +3604,10 @@ class Accumulator:
 
     def _cache_floating_selection(self, contribution):
         for voice_name in contribution:
-            voice_name = self.score_template.voice_abbreviations.get(
-                voice_name, voice_name
-            )
+            if hasattr(self.score_template, "voice_abbreviations"):
+                voice_name = self.score_template.voice_abbreviations.get(
+                    voice_name, voice_name
+                )
             selection = contribution[voice_name]
             if not selection:
                 continue
@@ -7670,7 +7673,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
         Coats pitches:
 
-        >>> template = baca.TwoVoiceStaffScoreTemplate()
+        >>> template = baca.make_empty_score_with_multivoice_staff
         >>> accumulator = baca.Accumulator(template)
 
         >>> accumulator(
@@ -7930,7 +7933,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
         Skips wrapped pitches:
 
-        >>> template = baca.TwoVoiceStaffScoreTemplate()
+        >>> template = baca.make_empty_score_with_multivoice_staff
         >>> accumulator = baca.Accumulator(template)
 
         >>> collections = [
@@ -8245,7 +8248,7 @@ def extend_beam(
 
         Extends beam:
 
-        >>> template = baca.TwoVoiceStaffScoreTemplate()
+        >>> template = baca.make_empty_score_with_multivoice_staff
         >>> accumulator = baca.Accumulator(template)
 
         >>> accumulator(
@@ -8277,7 +8280,7 @@ def extend_beam(
 
         >>> maker = baca.SegmentMaker(
         ...     ignore_repeat_pitch_classes=True,
-        ...     score_template=baca.TwoVoiceStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_with_multivoice_staff,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
@@ -8580,7 +8583,7 @@ def imbricate(
 
     ..  container:: example
 
-        >>> template = baca.TwoVoiceStaffScoreTemplate()
+        >>> template = baca.make_empty_score_with_multivoice_staff
         >>> accumulator = baca.Accumulator(template)
 
         >>> collections = [
@@ -9306,7 +9309,7 @@ def imbricate(
 
         Hides tuplet brackets above imbricated voice:
 
-        >>> template = baca.TwoVoiceStaffScoreTemplate()
+        >>> template = baca.make_empty_score_with_multivoice_staff
         >>> accumulator = baca.Accumulator(template)
 
         >>> collections = [
@@ -9638,7 +9641,7 @@ def imbricate(
 
         Works with pitch-classes:
 
-        >>> template = baca.TwoVoiceStaffScoreTemplate()
+        >>> template = baca.make_empty_score_with_multivoice_staff
         >>> accumulator = baca.Accumulator(template)
 
         >>> segment = [
@@ -9895,7 +9898,7 @@ def imbricate(
 
         Works with chords:
 
-        >>> template = baca.TwoVoiceStaffScoreTemplate()
+        >>> template = baca.make_empty_score_with_multivoice_staff
         >>> accumulator = baca.Accumulator(template)
 
         >>> collections = [
@@ -9917,7 +9920,7 @@ def imbricate(
 
         >>> maker = baca.SegmentMaker(
         ...     ignore_repeat_pitch_classes=True,
-        ...     score_template=baca.TwoVoiceStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_with_multivoice_staff,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
@@ -10178,7 +10181,7 @@ def imbricate(
 
         Works with rests:
 
-        >>> template = baca.TwoVoiceStaffScoreTemplate()
+        >>> template = baca.make_empty_score_with_multivoice_staff
         >>> accumulator = baca.Accumulator(template)
 
         >>> collections = [
@@ -10200,7 +10203,7 @@ def imbricate(
 
         >>> maker = baca.SegmentMaker(
         ...     ignore_repeat_pitch_classes=True,
-        ...     score_template=baca.TwoVoiceStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_with_multivoice_staff,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
