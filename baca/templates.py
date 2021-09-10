@@ -827,13 +827,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
         return score
 
 
-def make_empty_score_with_multivoice_staff(count=2):
+def make_empty_score(count=2):
     """
-    Makes empty score with one staff that contains two voices.
+    Makes empty score for doc examples.
     """
     assert count in (2, 3), repr(count)
 
-    site = "baca.TwoVoiceStaffScoreTemplate.__call__()"
+    site = "baca.make_empty_score()"
     tag = abjad.Tag(site)
     # GLOBAL CONTEXT
     global_context = abjad.ScoreTemplate._make_global_context()
@@ -841,16 +841,16 @@ def make_empty_score_with_multivoice_staff(count=2):
     # MUSIC STAFF
     voices = []
     music_voice_1 = abjad.Voice(
-        lilypond_type="MusicVoiceOne", name="Music_Voice_One", tag=tag
+        lilypond_type="MusicVoiceOne", name="Music_Voice_1", tag=tag
     )
     voices.append(music_voice_1)
     music_voice_2 = abjad.Voice(
-        lilypond_type="MusicVoiceTwo", name="Music_Voice_Two", tag=tag
+        lilypond_type="MusicVoiceTwo", name="Music_Voice_2", tag=tag
     )
     voices.append(music_voice_2)
     if count == 3:
         music_voice_3 = abjad.Voice(
-            lilypond_type="MusicVoiceThree", name="Music_Voice_Three", tag=tag
+            lilypond_type="MusicVoiceThree", name="Music_Voice_3", tag=tag
         )
         voices.append(music_voice_3)
     music_staff = abjad.Staff(

@@ -2118,7 +2118,7 @@ class Imbrication:
 
             Allows unused pitches:
 
-            >>> template = baca.make_empty_score_with_multivoice_staff(count=2)
+            >>> template = baca.make_empty_score(count=2)
             >>> accumulator = baca.Accumulator(template)
 
             >>> collections = [
@@ -2126,12 +2126,12 @@ class Imbrication:
             ...     [15, 20, 19, 9, 0],
             ... ]
             >>> accumulator(
-            ...     "Music_Voice_Two",
+            ...     "Music_Voice_2",
             ...     collections,
             ...     baca.figure([1], 16),
             ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.imbricate(
-            ...         "Music_Voice_One",
+            ...         "Music_Voice_1",
             ...         [2, 19, 9, 18, 16],
             ...         baca.accent(selector=baca.selectors.pheads()),
             ...         rmakers.beam_groups(beam_rests=True),
@@ -2142,7 +2142,7 @@ class Imbrication:
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_repeat_pitch_classes=True,
-            ...     score_template=baca.make_empty_score_with_multivoice_staff,
+            ...     score_template=baca.make_empty_score,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ...     time_signatures=accumulator.time_signatures,
             ... )
@@ -2189,7 +2189,7 @@ class Imbrication:
                         \context MusicStaff = "Music_Staff"
                         <<
                 <BLANKLINE>
-                            \context MusicVoiceOne = "Music_Voice_One"
+                            \context MusicVoiceOne = "Music_Voice_1"
                             {
                 <BLANKLINE>
                                 {
@@ -2198,7 +2198,7 @@ class Imbrication:
                 <BLANKLINE>
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [Music_Voice_One measure 1]
+                                        % [Music_Voice_1 measure 1]
                                         s16
                                         [
                                         - \abjad-dashed-line-with-hook
@@ -2249,10 +2249,10 @@ class Imbrication:
                 <BLANKLINE>
                                 <<
                 <BLANKLINE>
-                                    \context Voice = "Music_Voice_One"
+                                    \context Voice = "Music_Voice_1"
                                     {
                 <BLANKLINE>
-                                        % [Music_Voice_One measure 2]
+                                        % [Music_Voice_1 measure 2]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
@@ -2261,10 +2261,10 @@ class Imbrication:
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
-                                    \context Voice = "Rest_Voice_One"
+                                    \context Voice = "Rest_Voice_1"
                                     {
                 <BLANKLINE>
-                                        % [Rest_Voice_One measure 2]
+                                        % [Rest_Voice_1 measure 2]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
                                         \stopStaff
@@ -2279,14 +2279,14 @@ class Imbrication:
                 <BLANKLINE>
                             }
                 <BLANKLINE>
-                            \context MusicVoiceTwo = "Music_Voice_Two"
+                            \context MusicVoiceTwo = "Music_Voice_2"
                             {
                 <BLANKLINE>
                                 {
                 <BLANKLINE>
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [Music_Voice_Two measure 1]
+                                        % [Music_Voice_2 measure 1]
                                         \set stemLeftBeamCount = 0
                                         \set stemRightBeamCount = 2
                                         c'16
@@ -2356,10 +2356,10 @@ class Imbrication:
                 <BLANKLINE>
                                 <<
                 <BLANKLINE>
-                                    \context Voice = "Music_Voice_Two"
+                                    \context Voice = "Music_Voice_2"
                                     {
                 <BLANKLINE>
-                                        % [Music_Voice_Two measure 2]
+                                        % [Music_Voice_2 measure 2]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
@@ -2368,10 +2368,10 @@ class Imbrication:
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
-                                    \context Voice = "Rest_Voice_Two"
+                                    \context Voice = "Rest_Voice_2"
                                     {
                 <BLANKLINE>
-                                        % [Rest_Voice_Two measure 2]
+                                        % [Rest_Voice_2 measure 2]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
                                         \stopStaff
@@ -2396,19 +2396,19 @@ class Imbrication:
 
             Raises exception on unused pitches:
 
-            >>> template = baca.make_empty_score_with_multivoice_staff(count=2)
+            >>> template = baca.make_empty_score(count=2)
             >>> accumulator = baca.Accumulator(template)
             >>> collections = [
             ...     [0, 2, 10, 18, 16],
             ...     [15, 20, 19, 9, 0],
             ... ]
             >>> accumulator(
-            ...     "Music_Voice_Two",
+            ...     "Music_Voice_2",
             ...     collections,
             ...     baca.figure([1], 16),
             ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.imbricate(
-            ...         "Music_Voice_One",
+            ...         "Music_Voice_1",
             ...         [2, 19, 9, 18, 16],
             ...         baca.accent(selector=baca.selectors.pheads()),
             ...         rmakers.beam_groups(beam_rests=True),
@@ -2448,7 +2448,7 @@ class Imbrication:
 
             Hockets voices:
 
-            >>> template = baca.make_empty_score_with_multivoice_staff(count=2)
+            >>> template = baca.make_empty_score(count=2)
             >>> accumulator = baca.Accumulator(template)
 
             >>> collections = [
@@ -2457,12 +2457,12 @@ class Imbrication:
             ...     [2, 10, 18, 16, 15],
             ... ]
             >>> accumulator(
-            ...     "Music_Voice_Two",
+            ...     "Music_Voice_2",
             ...     collections,
             ...     baca.figure([1], 16),
             ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.imbricate(
-            ...         "Music_Voice_One",
+            ...         "Music_Voice_1",
             ...         [2, 19, 9, 18, 16],
             ...         baca.accent(selector=baca.selectors.pheads()),
             ...         rmakers.beam_groups(beam_rests=True),
@@ -2473,7 +2473,7 @@ class Imbrication:
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_repeat_pitch_classes=True,
-            ...     score_template=baca.make_empty_score_with_multivoice_staff,
+            ...     score_template=baca.make_empty_score,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ...     time_signatures=accumulator.time_signatures,
             ... )
@@ -2520,7 +2520,7 @@ class Imbrication:
                         \context MusicStaff = "Music_Staff"
                         <<
                 <BLANKLINE>
-                            \context MusicVoiceOne = "Music_Voice_One"
+                            \context MusicVoiceOne = "Music_Voice_1"
                             {
                 <BLANKLINE>
                                 {
@@ -2529,7 +2529,7 @@ class Imbrication:
                 <BLANKLINE>
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [Music_Voice_One measure 1]
+                                        % [Music_Voice_1 measure 1]
                                         s16
                                         [
                                         - \abjad-dashed-line-with-hook
@@ -2600,10 +2600,10 @@ class Imbrication:
                 <BLANKLINE>
                                 <<
                 <BLANKLINE>
-                                    \context Voice = "Music_Voice_One"
+                                    \context Voice = "Music_Voice_1"
                                     {
                 <BLANKLINE>
-                                        % [Music_Voice_One measure 2]
+                                        % [Music_Voice_1 measure 2]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
@@ -2612,10 +2612,10 @@ class Imbrication:
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
-                                    \context Voice = "Rest_Voice_One"
+                                    \context Voice = "Rest_Voice_1"
                                     {
                 <BLANKLINE>
-                                        % [Rest_Voice_One measure 2]
+                                        % [Rest_Voice_1 measure 2]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
                                         \stopStaff
@@ -2630,14 +2630,14 @@ class Imbrication:
                 <BLANKLINE>
                             }
                 <BLANKLINE>
-                            \context MusicVoiceTwo = "Music_Voice_Two"
+                            \context MusicVoiceTwo = "Music_Voice_2"
                             {
                 <BLANKLINE>
                                 {
                 <BLANKLINE>
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [Music_Voice_Two measure 1]
+                                        % [Music_Voice_2 measure 1]
                                         \set stemLeftBeamCount = 0
                                         \set stemRightBeamCount = 2
                                         c'16
@@ -2721,10 +2721,10 @@ class Imbrication:
                 <BLANKLINE>
                                 <<
                 <BLANKLINE>
-                                    \context Voice = "Music_Voice_Two"
+                                    \context Voice = "Music_Voice_2"
                                     {
                 <BLANKLINE>
-                                        % [Music_Voice_Two measure 2]
+                                        % [Music_Voice_2 measure 2]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
@@ -2733,10 +2733,10 @@ class Imbrication:
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
-                                    \context Voice = "Rest_Voice_Two"
+                                    \context Voice = "Rest_Voice_2"
                                     {
                 <BLANKLINE>
-                                        % [Rest_Voice_Two measure 2]
+                                        % [Rest_Voice_2 measure 2]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
                                         \stopStaff
@@ -2776,7 +2776,7 @@ class Imbrication:
 
             Selects last nine notes:
 
-            >>> template = baca.make_empty_score_with_multivoice_staff(count=2)
+            >>> template = baca.make_empty_score(count=2)
             >>> accumulator = baca.Accumulator(template)
 
             >>> collections = [
@@ -2784,12 +2784,12 @@ class Imbrication:
             ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
             ... ]
             >>> accumulator(
-            ...     "Music_Voice_Two",
+            ...     "Music_Voice_2",
             ...     collections,
             ...     baca.figure([1], 16),
             ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.imbricate(
-            ...         "Music_Voice_One",
+            ...         "Music_Voice_1",
             ...         [2, 18, 16, 15],
             ...         baca.accent(selector=baca.selectors.pheads()),
             ...         rmakers.beam_groups(beam_rests=True),
@@ -2799,7 +2799,7 @@ class Imbrication:
             ... )
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.make_empty_score_with_multivoice_staff,
+            ...     score_template=baca.make_empty_score,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ...     time_signatures=accumulator.time_signatures,
             ... )
@@ -2846,7 +2846,7 @@ class Imbrication:
                         \context MusicStaff = "Music_Staff"
                         <<
                 <BLANKLINE>
-                            \context MusicVoiceOne = "Music_Voice_One"
+                            \context MusicVoiceOne = "Music_Voice_1"
                             {
                 <BLANKLINE>
                                 {
@@ -2855,7 +2855,7 @@ class Imbrication:
                 <BLANKLINE>
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [Music_Voice_One measure 1]
+                                        % [Music_Voice_1 measure 1]
                                         s16
                                         [
                                         - \abjad-dashed-line-with-hook
@@ -2933,10 +2933,10 @@ class Imbrication:
                 <BLANKLINE>
                                 <<
                 <BLANKLINE>
-                                    \context Voice = "Music_Voice_One"
+                                    \context Voice = "Music_Voice_1"
                                     {
                 <BLANKLINE>
-                                        % [Music_Voice_One measure 2]
+                                        % [Music_Voice_1 measure 2]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
@@ -2945,10 +2945,10 @@ class Imbrication:
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
-                                    \context Voice = "Rest_Voice_One"
+                                    \context Voice = "Rest_Voice_1"
                                     {
                 <BLANKLINE>
-                                        % [Rest_Voice_One measure 2]
+                                        % [Rest_Voice_1 measure 2]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
                                         \stopStaff
@@ -2963,14 +2963,14 @@ class Imbrication:
                 <BLANKLINE>
                             }
                 <BLANKLINE>
-                            \context MusicVoiceTwo = "Music_Voice_Two"
+                            \context MusicVoiceTwo = "Music_Voice_2"
                             {
                 <BLANKLINE>
                                 {
                 <BLANKLINE>
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [Music_Voice_Two measure 1]
+                                        % [Music_Voice_2 measure 1]
                                         \set stemLeftBeamCount = 0
                                         \set stemRightBeamCount = 2
                                         c'16
@@ -3088,10 +3088,10 @@ class Imbrication:
                 <BLANKLINE>
                                 <<
                 <BLANKLINE>
-                                    \context Voice = "Music_Voice_Two"
+                                    \context Voice = "Music_Voice_2"
                                     {
                 <BLANKLINE>
-                                        % [Music_Voice_Two measure 2]
+                                        % [Music_Voice_2 measure 2]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
@@ -3100,10 +3100,10 @@ class Imbrication:
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
-                                    \context Voice = "Rest_Voice_Two"
+                                    \context Voice = "Rest_Voice_2"
                                     {
                 <BLANKLINE>
-                                        % [Rest_Voice_Two measure 2]
+                                        % [Rest_Voice_2 measure 2]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
                                         \stopStaff
@@ -3136,17 +3136,17 @@ class Imbrication:
 
             Truncates ties:
 
-            >>> template = baca.make_empty_score_with_multivoice_staff(count=2)
+            >>> template = baca.make_empty_score(count=2)
             >>> accumulator = baca.Accumulator(template)
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> accumulator(
-            ...     "Music_Voice_Two",
+            ...     "Music_Voice_2",
             ...     collections,
             ...     baca.figure([5], 32),
             ...     rmakers.beam(),
             ...     baca.imbricate(
-            ...         "Music_Voice_One",
+            ...         "Music_Voice_1",
             ...         [2, 10, 18, 19, 9],
             ...         rmakers.beam_groups(beam_rests=True),
             ...         truncate_ties=True,
@@ -3154,7 +3154,7 @@ class Imbrication:
             ... )
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.make_empty_score_with_multivoice_staff,
+            ...     score_template=baca.make_empty_score,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ...     time_signatures=accumulator.time_signatures,
             ... )
@@ -3201,7 +3201,7 @@ class Imbrication:
                         \context MusicStaff = "Music_Staff"
                         <<
                 <BLANKLINE>
-                            \context MusicVoiceOne = "Music_Voice_One"
+                            \context MusicVoiceOne = "Music_Voice_1"
                             {
                 <BLANKLINE>
                                 {
@@ -3210,7 +3210,7 @@ class Imbrication:
                 <BLANKLINE>
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [Music_Voice_One measure 1]
+                                        % [Music_Voice_1 measure 1]
                                         s8
                                         [
                                         - \abjad-dashed-line-with-hook
@@ -3282,10 +3282,10 @@ class Imbrication:
                 <BLANKLINE>
                                 <<
                 <BLANKLINE>
-                                    \context Voice = "Music_Voice_One"
+                                    \context Voice = "Music_Voice_1"
                                     {
                 <BLANKLINE>
-                                        % [Music_Voice_One measure 2]
+                                        % [Music_Voice_1 measure 2]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
@@ -3294,10 +3294,10 @@ class Imbrication:
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
-                                    \context Voice = "Rest_Voice_One"
+                                    \context Voice = "Rest_Voice_1"
                                     {
                 <BLANKLINE>
-                                        % [Rest_Voice_One measure 2]
+                                        % [Rest_Voice_1 measure 2]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
                                         \stopStaff
@@ -3312,14 +3312,14 @@ class Imbrication:
                 <BLANKLINE>
                             }
                 <BLANKLINE>
-                            \context MusicVoiceTwo = "Music_Voice_Two"
+                            \context MusicVoiceTwo = "Music_Voice_2"
                             {
                 <BLANKLINE>
                                 {
                 <BLANKLINE>
                                     \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
-                                        % [Music_Voice_Two measure 1]
+                                        % [Music_Voice_2 measure 1]
                                         c'8
                                         ~
                                         [
@@ -3392,10 +3392,10 @@ class Imbrication:
                 <BLANKLINE>
                                 <<
                 <BLANKLINE>
-                                    \context Voice = "Music_Voice_Two"
+                                    \context Voice = "Music_Voice_2"
                                     {
                 <BLANKLINE>
-                                        % [Music_Voice_Two measure 2]
+                                        % [Music_Voice_2 measure 2]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
@@ -3404,10 +3404,10 @@ class Imbrication:
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
-                                    \context Voice = "Rest_Voice_Two"
+                                    \context Voice = "Rest_Voice_2"
                                     {
                 <BLANKLINE>
-                                        % [Rest_Voice_Two measure 2]
+                                        % [Rest_Voice_2 measure 2]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
                                         \stopStaff
@@ -3447,7 +3447,7 @@ class Accumulator:
 
         Raises exception on duplicate figure name.
 
-        >>> template = baca.make_empty_score_with_multivoice_staff(count=2)
+        >>> template = baca.make_empty_score(count=2)
         >>> accumulator = baca.Accumulator(template)
 
         >>> commands = [
@@ -3456,14 +3456,14 @@ class Accumulator:
         ... ]
 
         >>> accumulator(
-        ...     "Music_Voice_One",
+        ...     "Music_Voice_1",
         ...     [[0, 1, 2, 3]],
         ...     *commands,
         ...     figure_name='D',
         ... )
 
         >>> accumulator(
-        ...     "Music_Voice_One",
+        ...     "Music_Voice_1",
         ...     [[4, 5, 6, 7]],
         ...     *commands,
         ...     figure_name='D',
@@ -7680,11 +7680,11 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
         Coats pitches:
 
-        >>> template = baca.make_empty_score_with_multivoice_staff(count=2)
+        >>> template = baca.make_empty_score(count=2)
         >>> accumulator = baca.Accumulator(template)
 
         >>> accumulator(
-        ...     "Music_Voice_Two",
+        ...     "Music_Voice_2",
         ...     3 * [[0, 2, 10]],
         ...     baca.figure(
         ...         [1],
@@ -7694,14 +7694,14 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...     ),
         ...     rmakers.beam(),
         ...     baca.imbricate(
-        ...         "Music_Voice_One",
+        ...         "Music_Voice_1",
         ...         [baca.coat(0), baca.coat(2), 10, 0, 2],
         ...         rmakers.beam_groups(),
         ...     ),
         ... )
 
         >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.make_empty_score_with_multivoice_staff,
+        ...     score_template=baca.make_empty_score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
@@ -7748,7 +7748,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                     \context MusicStaff = "Music_Staff"
                     <<
             <BLANKLINE>
-                        \context MusicVoiceOne = "Music_Voice_One"
+                        \context MusicVoiceOne = "Music_Voice_1"
                         {
             <BLANKLINE>
                             {
@@ -7757,7 +7757,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             <BLANKLINE>
                                 \times 4/5 {
             <BLANKLINE>
-                                    % [Music_Voice_One measure 1]
+                                    % [Music_Voice_1 measure 1]
                                     s8
                                     - \abjad-dashed-line-with-hook
                                     - \baca-text-spanner-left-text "baca.music()"
@@ -7812,10 +7812,10 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             <BLANKLINE>
                             <<
             <BLANKLINE>
-                                \context Voice = "Music_Voice_One"
+                                \context Voice = "Music_Voice_1"
                                 {
             <BLANKLINE>
-                                    % [Music_Voice_One measure 2]
+                                    % [Music_Voice_1 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -7824,10 +7824,10 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \context Voice = "Rest_Voice_One"
+                                \context Voice = "Rest_Voice_1"
                                 {
             <BLANKLINE>
-                                    % [Rest_Voice_One measure 2]
+                                    % [Rest_Voice_1 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -7842,14 +7842,14 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             <BLANKLINE>
                         }
             <BLANKLINE>
-                        \context MusicVoiceTwo = "Music_Voice_Two"
+                        \context MusicVoiceTwo = "Music_Voice_2"
                         {
             <BLANKLINE>
                             {
             <BLANKLINE>
                                 \times 4/5 {
             <BLANKLINE>
-                                    % [Music_Voice_Two measure 1]
+                                    % [Music_Voice_2 measure 1]
                                     r8
                                     - \abjad-dashed-line-with-hook
                                     - \baca-text-spanner-left-text "baca.music()"
@@ -7900,10 +7900,10 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             <BLANKLINE>
                             <<
             <BLANKLINE>
-                                \context Voice = "Music_Voice_Two"
+                                \context Voice = "Music_Voice_2"
                                 {
             <BLANKLINE>
-                                    % [Music_Voice_Two measure 2]
+                                    % [Music_Voice_2 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -7912,10 +7912,10 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \context Voice = "Rest_Voice_Two"
+                                \context Voice = "Rest_Voice_2"
                                 {
             <BLANKLINE>
-                                    % [Rest_Voice_Two measure 2]
+                                    % [Rest_Voice_2 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -7940,7 +7940,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
         Skips wrapped pitches:
 
-        >>> template = baca.make_empty_score_with_multivoice_staff(count=2)
+        >>> template = baca.make_empty_score(count=2)
         >>> accumulator = baca.Accumulator(template)
 
         >>> collections = [
@@ -7954,12 +7954,12 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...     10, 18,
         ... ]
         >>> accumulator(
-        ...     "Music_Voice_Two",
+        ...     "Music_Voice_2",
         ...     collections,
         ...     baca.figure([1], 16),
         ...     rmakers.beam(),
         ...     baca.imbricate(
-        ...         "Music_Voice_One",
+        ...         "Music_Voice_1",
         ...         segment,
         ...         baca.accent(selector=baca.selectors.pheads()),
         ...         rmakers.beam_groups(beam_rests=True),
@@ -7967,7 +7967,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ... )
 
         >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.make_empty_score_with_multivoice_staff,
+        ...     score_template=baca.make_empty_score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
@@ -8014,7 +8014,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                     \context MusicStaff = "Music_Staff"
                     <<
             <BLANKLINE>
-                        \context MusicVoiceOne = "Music_Voice_One"
+                        \context MusicVoiceOne = "Music_Voice_1"
                         {
             <BLANKLINE>
                             {
@@ -8023,7 +8023,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             <BLANKLINE>
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                    % [Music_Voice_One measure 1]
+                                    % [Music_Voice_1 measure 1]
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
@@ -8098,10 +8098,10 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             <BLANKLINE>
                             <<
             <BLANKLINE>
-                                \context Voice = "Music_Voice_One"
+                                \context Voice = "Music_Voice_1"
                                 {
             <BLANKLINE>
-                                    % [Music_Voice_One measure 2]
+                                    % [Music_Voice_1 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -8110,10 +8110,10 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \context Voice = "Rest_Voice_One"
+                                \context Voice = "Rest_Voice_1"
                                 {
             <BLANKLINE>
-                                    % [Rest_Voice_One measure 2]
+                                    % [Rest_Voice_1 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -8128,14 +8128,14 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             <BLANKLINE>
                         }
             <BLANKLINE>
-                        \context MusicVoiceTwo = "Music_Voice_Two"
+                        \context MusicVoiceTwo = "Music_Voice_2"
                         {
             <BLANKLINE>
                             {
             <BLANKLINE>
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                    % [Music_Voice_Two measure 1]
+                                    % [Music_Voice_2 measure 1]
                                     c'16
                                     [
                                     - \abjad-dashed-line-with-hook
@@ -8205,10 +8205,10 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             <BLANKLINE>
                             <<
             <BLANKLINE>
-                                \context Voice = "Music_Voice_Two"
+                                \context Voice = "Music_Voice_2"
                                 {
             <BLANKLINE>
-                                    % [Music_Voice_Two measure 2]
+                                    % [Music_Voice_2 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -8217,10 +8217,10 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \context Voice = "Rest_Voice_Two"
+                                \context Voice = "Rest_Voice_2"
                                 {
             <BLANKLINE>
-                                    % [Rest_Voice_Two measure 2]
+                                    % [Rest_Voice_2 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -8255,16 +8255,16 @@ def extend_beam(
 
         Extends beam:
 
-        >>> template = baca.make_empty_score_with_multivoice_staff(count=2)
+        >>> template = baca.make_empty_score(count=2)
         >>> accumulator = baca.Accumulator(template)
 
         >>> accumulator(
-        ...     "Music_Voice_Two",
+        ...     "Music_Voice_2",
         ...     [[0, 2, 10, 18], [16, 15, 23]],
         ...     baca.figure([1], 16),
         ...     rmakers.beam_groups(),
         ...     baca.imbricate(
-        ...         "Music_Voice_One",
+        ...         "Music_Voice_1",
         ...         [2, 10],
         ...         baca.staccato(selector=baca.selectors.pheads()),
         ...         rmakers.beam_groups(beam_rests=True),
@@ -8273,12 +8273,12 @@ def extend_beam(
         ... )
 
         >>> accumulator(
-        ...     "Music_Voice_Two",
+        ...     "Music_Voice_2",
         ...     [[19, 13, 9, 8]],
         ...     baca.figure([1], 16),
         ...     rmakers.beam_groups(),
         ...     baca.imbricate(
-        ...         "Music_Voice_One",
+        ...         "Music_Voice_1",
         ...         [13, 9],
         ...         baca.staccato(selector=baca.selectors.pheads()),
         ...         rmakers.beam_groups(beam_rests=True),
@@ -8287,7 +8287,7 @@ def extend_beam(
 
         >>> maker = baca.SegmentMaker(
         ...     ignore_repeat_pitch_classes=True,
-        ...     score_template=baca.make_empty_score_with_multivoice_staff,
+        ...     score_template=baca.make_empty_score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
@@ -8339,7 +8339,7 @@ def extend_beam(
                     \context MusicStaff = "Music_Staff"
                     <<
             <BLANKLINE>
-                        \context MusicVoiceOne = "Music_Voice_One"
+                        \context MusicVoiceOne = "Music_Voice_1"
                         {
             <BLANKLINE>
                             {
@@ -8348,7 +8348,7 @@ def extend_beam(
             <BLANKLINE>
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                    % [Music_Voice_One measure 1]
+                                    % [Music_Voice_1 measure 1]
                                     s16
                                     [
                                     - \abjad-dashed-line-with-hook
@@ -8394,7 +8394,7 @@ def extend_beam(
             <BLANKLINE>
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                    % [Music_Voice_One measure 2]
+                                    % [Music_Voice_1 measure 2]
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     s16
@@ -8421,10 +8421,10 @@ def extend_beam(
             <BLANKLINE>
                             <<
             <BLANKLINE>
-                                \context Voice = "Music_Voice_One"
+                                \context Voice = "Music_Voice_1"
                                 {
             <BLANKLINE>
-                                    % [Music_Voice_One measure 3]
+                                    % [Music_Voice_1 measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -8433,10 +8433,10 @@ def extend_beam(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \context Voice = "Rest_Voice_One"
+                                \context Voice = "Rest_Voice_1"
                                 {
             <BLANKLINE>
-                                    % [Rest_Voice_One measure 3]
+                                    % [Rest_Voice_1 measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -8451,14 +8451,14 @@ def extend_beam(
             <BLANKLINE>
                         }
             <BLANKLINE>
-                        \context MusicVoiceTwo = "Music_Voice_Two"
+                        \context MusicVoiceTwo = "Music_Voice_2"
                         {
             <BLANKLINE>
                             {
             <BLANKLINE>
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                    % [Music_Voice_Two measure 1]
+                                    % [Music_Voice_2 measure 1]
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
@@ -8507,7 +8507,7 @@ def extend_beam(
             <BLANKLINE>
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                    % [Music_Voice_Two measure 2]
+                                    % [Music_Voice_2 measure 2]
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     g''16
@@ -8533,10 +8533,10 @@ def extend_beam(
             <BLANKLINE>
                             <<
             <BLANKLINE>
-                                \context Voice = "Music_Voice_Two"
+                                \context Voice = "Music_Voice_2"
                                 {
             <BLANKLINE>
-                                    % [Music_Voice_Two measure 3]
+                                    % [Music_Voice_2 measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -8545,10 +8545,10 @@ def extend_beam(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \context Voice = "Rest_Voice_Two"
+                                \context Voice = "Rest_Voice_2"
                                 {
             <BLANKLINE>
-                                    % [Rest_Voice_Two measure 3]
+                                    % [Rest_Voice_2 measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -8590,7 +8590,7 @@ def imbricate(
 
     ..  container:: example
 
-        >>> template = baca.make_empty_score_with_multivoice_staff(count=2)
+        >>> template = baca.make_empty_score(count=2)
         >>> accumulator = baca.Accumulator(template)
 
         >>> collections = [
@@ -8599,19 +8599,19 @@ def imbricate(
         ...     [2, 10, 18, 16, 15],
         ... ]
         >>> accumulator(
-        ...     "Music_Voice_Two",
+        ...     "Music_Voice_2",
         ...     collections,
         ...     baca.figure([1], 16),
         ...     rmakers.beam_groups(),
         ...     baca.imbricate(
-        ...         "Music_Voice_One",
+        ...         "Music_Voice_1",
         ...         [2, 19, 9, 18, 16],
         ...         rmakers.beam_groups(),
         ...     ),
         ... )
 
         >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.make_empty_score_with_multivoice_staff,
+        ...     score_template=baca.make_empty_score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
@@ -8658,7 +8658,7 @@ def imbricate(
                     \context MusicStaff = "Music_Staff"
                     <<
             <BLANKLINE>
-                        \context MusicVoiceOne = "Music_Voice_One"
+                        \context MusicVoiceOne = "Music_Voice_1"
                         {
             <BLANKLINE>
                             {
@@ -8667,7 +8667,7 @@ def imbricate(
             <BLANKLINE>
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                    % [Music_Voice_One measure 1]
+                                    % [Music_Voice_1 measure 1]
                                     s16
                                     - \abjad-dashed-line-with-hook
                                     - \baca-text-spanner-left-text "baca.music()"
@@ -8735,10 +8735,10 @@ def imbricate(
             <BLANKLINE>
                             <<
             <BLANKLINE>
-                                \context Voice = "Music_Voice_One"
+                                \context Voice = "Music_Voice_1"
                                 {
             <BLANKLINE>
-                                    % [Music_Voice_One measure 2]
+                                    % [Music_Voice_1 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -8747,10 +8747,10 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \context Voice = "Rest_Voice_One"
+                                \context Voice = "Rest_Voice_1"
                                 {
             <BLANKLINE>
-                                    % [Rest_Voice_One measure 2]
+                                    % [Rest_Voice_1 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -8765,14 +8765,14 @@ def imbricate(
             <BLANKLINE>
                         }
             <BLANKLINE>
-                        \context MusicVoiceTwo = "Music_Voice_Two"
+                        \context MusicVoiceTwo = "Music_Voice_2"
                         {
             <BLANKLINE>
                             {
             <BLANKLINE>
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                    % [Music_Voice_Two measure 1]
+                                    % [Music_Voice_2 measure 1]
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
@@ -8856,10 +8856,10 @@ def imbricate(
             <BLANKLINE>
                             <<
             <BLANKLINE>
-                                \context Voice = "Music_Voice_Two"
+                                \context Voice = "Music_Voice_2"
                                 {
             <BLANKLINE>
-                                    % [Music_Voice_Two measure 2]
+                                    % [Music_Voice_2 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -8868,10 +8868,10 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \context Voice = "Rest_Voice_Two"
+                                \context Voice = "Rest_Voice_2"
                                 {
             <BLANKLINE>
-                                    % [Rest_Voice_Two measure 2]
+                                    % [Rest_Voice_2 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -8897,7 +8897,7 @@ def imbricate(
         Multiple imbricated voices:
 
         >>> def closure():
-        ...     return baca.make_empty_score_with_multivoice_staff(count=3)
+        ...     return baca.make_empty_score(count=3)
 
         >>> score = closure()
         >>> accumulator = baca.Accumulator(score)
@@ -8908,18 +8908,18 @@ def imbricate(
         ...     [2, 10, 18, 16, 15],
         ... ]
         >>> accumulator(
-        ...     "Music_Voice_Two",
+        ...     "Music_Voice_2",
         ...     collections,
         ...     baca.figure([1], 16),
         ...     baca.imbricate(
-        ...         "Music_Voice_One",
+        ...         "Music_Voice_1",
         ...         [2, 19, 9],
         ...         rmakers.beam_groups(beam_rests=True),
         ...         baca.beam_positions(6),
         ...         baca.staccato(selector=baca.selectors.pheads()),
         ...         ),
         ...     baca.imbricate(
-        ...         "Music_Voice_Three",
+        ...         "Music_Voice_3",
         ...         [16, 10, 18],
         ...         rmakers.beam_groups(beam_rests=True),
         ...         baca.beam_positions(8),
@@ -8976,7 +8976,7 @@ def imbricate(
                     \context MusicStaff = "Music_Staff"
                     <<
             <BLANKLINE>
-                        \context MusicVoiceOne = "Music_Voice_One"
+                        \context MusicVoiceOne = "Music_Voice_1"
                         {
             <BLANKLINE>
                             {
@@ -8985,7 +8985,7 @@ def imbricate(
             <BLANKLINE>
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                    % [Music_Voice_One measure 1]
+                                    % [Music_Voice_1 measure 1]
                                     \override Beam.positions = #'(6 . 6)
                                     s16
                                     [
@@ -9052,10 +9052,10 @@ def imbricate(
             <BLANKLINE>
                             <<
             <BLANKLINE>
-                                \context Voice = "Music_Voice_One"
+                                \context Voice = "Music_Voice_1"
                                 {
             <BLANKLINE>
-                                    % [Music_Voice_One measure 2]
+                                    % [Music_Voice_1 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -9064,10 +9064,10 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \context Voice = "Rest_Voice_One"
+                                \context Voice = "Rest_Voice_1"
                                 {
             <BLANKLINE>
-                                    % [Rest_Voice_One measure 2]
+                                    % [Rest_Voice_1 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -9082,14 +9082,14 @@ def imbricate(
             <BLANKLINE>
                         }
             <BLANKLINE>
-                        \context MusicVoiceTwo = "Music_Voice_Two"
+                        \context MusicVoiceTwo = "Music_Voice_2"
                         {
             <BLANKLINE>
                             {
             <BLANKLINE>
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                    % [Music_Voice_Two measure 1]
+                                    % [Music_Voice_2 measure 1]
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
@@ -9173,10 +9173,10 @@ def imbricate(
             <BLANKLINE>
                             <<
             <BLANKLINE>
-                                \context Voice = "Music_Voice_Two"
+                                \context Voice = "Music_Voice_2"
                                 {
             <BLANKLINE>
-                                    % [Music_Voice_Two measure 2]
+                                    % [Music_Voice_2 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -9185,10 +9185,10 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \context Voice = "Rest_Voice_Two"
+                                \context Voice = "Rest_Voice_2"
                                 {
             <BLANKLINE>
-                                    % [Rest_Voice_Two measure 2]
+                                    % [Rest_Voice_2 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -9203,7 +9203,7 @@ def imbricate(
             <BLANKLINE>
                         }
             <BLANKLINE>
-                        \context MusicVoiceThree = "Music_Voice_Three"
+                        \context MusicVoiceThree = "Music_Voice_3"
                         {
             <BLANKLINE>
                             {
@@ -9212,7 +9212,7 @@ def imbricate(
             <BLANKLINE>
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                    % [Music_Voice_Three measure 1]
+                                    % [Music_Voice_3 measure 1]
                                     \override Beam.positions = #'(8 . 8)
                                     s16
                                     [
@@ -9279,10 +9279,10 @@ def imbricate(
             <BLANKLINE>
                             <<
             <BLANKLINE>
-                                \context Voice = "Music_Voice_Three"
+                                \context Voice = "Music_Voice_3"
                                 {
             <BLANKLINE>
-                                    % [Music_Voice_Three measure 2]
+                                    % [Music_Voice_3 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -9291,10 +9291,10 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \context Voice = "Rest_Voice_Three"
+                                \context Voice = "Rest_Voice_3"
                                 {
             <BLANKLINE>
-                                    % [Rest_Voice_Three measure 2]
+                                    % [Rest_Voice_3 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -9319,7 +9319,7 @@ def imbricate(
 
         Hides tuplet brackets above imbricated voice:
 
-        >>> template = baca.make_empty_score_with_multivoice_staff(count=2)
+        >>> template = baca.make_empty_score(count=2)
         >>> accumulator = baca.Accumulator(template)
 
         >>> collections = [
@@ -9328,12 +9328,12 @@ def imbricate(
         ...     [2, 10, 18, 16, 15],
         ... ]
         >>> accumulator(
-        ...     "Music_Voice_Two",
+        ...     "Music_Voice_2",
         ...     collections,
         ...     baca.figure([1], 16, treatments=[1]),
         ...     rmakers.beam_groups(beam_rests=True),
         ...     baca.imbricate(
-        ...         "Music_Voice_One",
+        ...         "Music_Voice_1",
         ...         [2, 19, 9, 18, 16],
         ...         baca.accent(selector=baca.selectors.pheads()),
         ...         rmakers.beam_groups(beam_rests=True),
@@ -9342,7 +9342,7 @@ def imbricate(
         ... )
 
         >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.make_empty_score_with_multivoice_staff,
+        ...     score_template=baca.make_empty_score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
@@ -9389,7 +9389,7 @@ def imbricate(
                     \context MusicStaff = "Music_Staff"
                     <<
             <BLANKLINE>
-                        \context MusicVoiceOne = "Music_Voice_One"
+                        \context MusicVoiceOne = "Music_Voice_1"
                         {
             <BLANKLINE>
                             {
@@ -9399,7 +9399,7 @@ def imbricate(
                                 \tweak text #tuplet-number::calc-fraction-text
                                 \times 6/5 {
             <BLANKLINE>
-                                    % [Music_Voice_One measure 1]
+                                    % [Music_Voice_1 measure 1]
                                     s16
                                     [
                                     - \abjad-dashed-line-with-hook
@@ -9472,10 +9472,10 @@ def imbricate(
             <BLANKLINE>
                             <<
             <BLANKLINE>
-                                \context Voice = "Music_Voice_One"
+                                \context Voice = "Music_Voice_1"
                                 {
             <BLANKLINE>
-                                    % [Music_Voice_One measure 2]
+                                    % [Music_Voice_1 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -9484,10 +9484,10 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \context Voice = "Rest_Voice_One"
+                                \context Voice = "Rest_Voice_1"
                                 {
             <BLANKLINE>
-                                    % [Rest_Voice_One measure 2]
+                                    % [Rest_Voice_1 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -9502,7 +9502,7 @@ def imbricate(
             <BLANKLINE>
                         }
             <BLANKLINE>
-                        \context MusicVoiceTwo = "Music_Voice_Two"
+                        \context MusicVoiceTwo = "Music_Voice_2"
                         {
             <BLANKLINE>
                             {
@@ -9510,7 +9510,7 @@ def imbricate(
                                 \tweak text #tuplet-number::calc-fraction-text
                                 \times 6/5 {
             <BLANKLINE>
-                                    % [Music_Voice_Two measure 1]
+                                    % [Music_Voice_2 measure 1]
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
@@ -9611,10 +9611,10 @@ def imbricate(
             <BLANKLINE>
                             <<
             <BLANKLINE>
-                                \context Voice = "Music_Voice_Two"
+                                \context Voice = "Music_Voice_2"
                                 {
             <BLANKLINE>
-                                    % [Music_Voice_Two measure 2]
+                                    % [Music_Voice_2 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -9623,10 +9623,10 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \context Voice = "Rest_Voice_Two"
+                                \context Voice = "Rest_Voice_2"
                                 {
             <BLANKLINE>
-                                    % [Rest_Voice_Two measure 2]
+                                    % [Rest_Voice_2 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -9651,7 +9651,7 @@ def imbricate(
 
         Works with pitch-classes:
 
-        >>> template = baca.make_empty_score_with_multivoice_staff(count=2)
+        >>> template = baca.make_empty_score(count=2)
         >>> accumulator = baca.Accumulator(template)
 
         >>> segment = [
@@ -9662,12 +9662,12 @@ def imbricate(
         ... ]
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> accumulator(
-        ...     "Music_Voice_Two",
+        ...     "Music_Voice_2",
         ...     collections,
         ...     baca.figure([3], 16),
         ...     rmakers.beam(),
         ...     baca.imbricate(
-        ...         "Music_Voice_One",
+        ...         "Music_Voice_1",
         ...         segment,
         ...         baca.accent(selector=baca.selectors.pheads()),
         ...         rmakers.beam_groups(beam_rests=True),
@@ -9675,7 +9675,7 @@ def imbricate(
         ... )
 
         >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.make_empty_score_with_multivoice_staff,
+        ...     score_template=baca.make_empty_score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
@@ -9722,7 +9722,7 @@ def imbricate(
                     \context MusicStaff = "Music_Staff"
                     <<
             <BLANKLINE>
-                        \context MusicVoiceOne = "Music_Voice_One"
+                        \context MusicVoiceOne = "Music_Voice_1"
                         {
             <BLANKLINE>
                             {
@@ -9731,7 +9731,7 @@ def imbricate(
             <BLANKLINE>
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                    % [Music_Voice_One measure 1]
+                                    % [Music_Voice_1 measure 1]
                                     s8.
                                     [
                                     - \abjad-dashed-line-with-hook
@@ -9787,10 +9787,10 @@ def imbricate(
             <BLANKLINE>
                             <<
             <BLANKLINE>
-                                \context Voice = "Music_Voice_One"
+                                \context Voice = "Music_Voice_1"
                                 {
             <BLANKLINE>
-                                    % [Music_Voice_One measure 2]
+                                    % [Music_Voice_1 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -9799,10 +9799,10 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \context Voice = "Rest_Voice_One"
+                                \context Voice = "Rest_Voice_1"
                                 {
             <BLANKLINE>
-                                    % [Rest_Voice_One measure 2]
+                                    % [Rest_Voice_1 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -9817,14 +9817,14 @@ def imbricate(
             <BLANKLINE>
                         }
             <BLANKLINE>
-                        \context MusicVoiceTwo = "Music_Voice_Two"
+                        \context MusicVoiceTwo = "Music_Voice_2"
                         {
             <BLANKLINE>
                             {
             <BLANKLINE>
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                    % [Music_Voice_Two measure 1]
+                                    % [Music_Voice_2 measure 1]
                                     c'8.
                                     [
                                     - \abjad-dashed-line-with-hook
@@ -9868,10 +9868,10 @@ def imbricate(
             <BLANKLINE>
                             <<
             <BLANKLINE>
-                                \context Voice = "Music_Voice_Two"
+                                \context Voice = "Music_Voice_2"
                                 {
             <BLANKLINE>
-                                    % [Music_Voice_Two measure 2]
+                                    % [Music_Voice_2 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -9880,10 +9880,10 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \context Voice = "Rest_Voice_Two"
+                                \context Voice = "Rest_Voice_2"
                                 {
             <BLANKLINE>
-                                    % [Rest_Voice_Two measure 2]
+                                    % [Rest_Voice_2 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -9908,7 +9908,7 @@ def imbricate(
 
         Works with chords:
 
-        >>> template = baca.make_empty_score_with_multivoice_staff(count=2)
+        >>> template = baca.make_empty_score(count=2)
         >>> accumulator = baca.Accumulator(template)
 
         >>> collections = [
@@ -9917,12 +9917,12 @@ def imbricate(
         ...     [2, 10, 18, 16, 15],
         ... ]
         >>> accumulator(
-        ...     "Music_Voice_Two",
+        ...     "Music_Voice_2",
         ...     collections,
         ...     baca.figure([1], 16),
         ...     rmakers.beam_groups(),
         ...     baca.imbricate(
-        ...         "Music_Voice_One",
+        ...         "Music_Voice_1",
         ...         [2, 19, 9, 18, 16],
         ...         rmakers.beam_groups(),
         ...     ),
@@ -9930,7 +9930,7 @@ def imbricate(
 
         >>> maker = baca.SegmentMaker(
         ...     ignore_repeat_pitch_classes=True,
-        ...     score_template=baca.make_empty_score_with_multivoice_staff,
+        ...     score_template=baca.make_empty_score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
@@ -9977,7 +9977,7 @@ def imbricate(
                     \context MusicStaff = "Music_Staff"
                     <<
             <BLANKLINE>
-                        \context MusicVoiceOne = "Music_Voice_One"
+                        \context MusicVoiceOne = "Music_Voice_1"
                         {
             <BLANKLINE>
                             {
@@ -9986,7 +9986,7 @@ def imbricate(
             <BLANKLINE>
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                    % [Music_Voice_One measure 1]
+                                    % [Music_Voice_1 measure 1]
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
@@ -10046,10 +10046,10 @@ def imbricate(
             <BLANKLINE>
                             <<
             <BLANKLINE>
-                                \context Voice = "Music_Voice_One"
+                                \context Voice = "Music_Voice_1"
                                 {
             <BLANKLINE>
-                                    % [Music_Voice_One measure 2]
+                                    % [Music_Voice_1 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -10058,10 +10058,10 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \context Voice = "Rest_Voice_One"
+                                \context Voice = "Rest_Voice_1"
                                 {
             <BLANKLINE>
-                                    % [Rest_Voice_One measure 2]
+                                    % [Rest_Voice_1 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -10076,14 +10076,14 @@ def imbricate(
             <BLANKLINE>
                         }
             <BLANKLINE>
-                        \context MusicVoiceTwo = "Music_Voice_Two"
+                        \context MusicVoiceTwo = "Music_Voice_2"
                         {
             <BLANKLINE>
                             {
             <BLANKLINE>
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                    % [Music_Voice_Two measure 1]
+                                    % [Music_Voice_2 measure 1]
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     <c' d' bf'! e'' fs''!>16
@@ -10151,10 +10151,10 @@ def imbricate(
             <BLANKLINE>
                             <<
             <BLANKLINE>
-                                \context Voice = "Music_Voice_Two"
+                                \context Voice = "Music_Voice_2"
                                 {
             <BLANKLINE>
-                                    % [Music_Voice_Two measure 2]
+                                    % [Music_Voice_2 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -10163,10 +10163,10 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \context Voice = "Rest_Voice_Two"
+                                \context Voice = "Rest_Voice_2"
                                 {
             <BLANKLINE>
-                                    % [Rest_Voice_Two measure 2]
+                                    % [Rest_Voice_2 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -10191,7 +10191,7 @@ def imbricate(
 
         Works with rests:
 
-        >>> template = baca.make_empty_score_with_multivoice_staff(count=2)
+        >>> template = baca.make_empty_score(count=2)
         >>> accumulator = baca.Accumulator(template)
 
         >>> collections = [
@@ -10200,12 +10200,12 @@ def imbricate(
         ...     [2, 10, 18, 16, 15],
         ... ]
         >>> accumulator(
-        ...     "Music_Voice_Two",
+        ...     "Music_Voice_2",
         ...     collections,
         ...     baca.figure([1], 16, affix=baca.rests_around([2], [2])),
         ...     rmakers.beam_groups(),
         ...     baca.imbricate(
-        ...         "Music_Voice_One",
+        ...         "Music_Voice_1",
         ...         [2, 19, 9, 18, 16],
         ...         rmakers.beam_groups(),
         ...     ),
@@ -10213,7 +10213,7 @@ def imbricate(
 
         >>> maker = baca.SegmentMaker(
         ...     ignore_repeat_pitch_classes=True,
-        ...     score_template=baca.make_empty_score_with_multivoice_staff,
+        ...     score_template=baca.make_empty_score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
@@ -10260,7 +10260,7 @@ def imbricate(
                     \context MusicStaff = "Music_Staff"
                     <<
             <BLANKLINE>
-                        \context MusicVoiceOne = "Music_Voice_One"
+                        \context MusicVoiceOne = "Music_Voice_1"
                         {
             <BLANKLINE>
                             {
@@ -10269,7 +10269,7 @@ def imbricate(
             <BLANKLINE>
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                    % [Music_Voice_One measure 1]
+                                    % [Music_Voice_1 measure 1]
                                     s8
                                     - \abjad-dashed-line-with-hook
                                     - \baca-text-spanner-left-text "baca.music()"
@@ -10341,10 +10341,10 @@ def imbricate(
             <BLANKLINE>
                             <<
             <BLANKLINE>
-                                \context Voice = "Music_Voice_One"
+                                \context Voice = "Music_Voice_1"
                                 {
             <BLANKLINE>
-                                    % [Music_Voice_One measure 2]
+                                    % [Music_Voice_1 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -10353,10 +10353,10 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \context Voice = "Rest_Voice_One"
+                                \context Voice = "Rest_Voice_1"
                                 {
             <BLANKLINE>
-                                    % [Rest_Voice_One measure 2]
+                                    % [Rest_Voice_1 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -10371,14 +10371,14 @@ def imbricate(
             <BLANKLINE>
                         }
             <BLANKLINE>
-                        \context MusicVoiceTwo = "Music_Voice_Two"
+                        \context MusicVoiceTwo = "Music_Voice_2"
                         {
             <BLANKLINE>
                             {
             <BLANKLINE>
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
-                                    % [Music_Voice_Two measure 1]
+                                    % [Music_Voice_2 measure 1]
                                     r8
                                     - \abjad-dashed-line-with-hook
                                     - \baca-text-spanner-left-text "baca.music()"
@@ -10466,10 +10466,10 @@ def imbricate(
             <BLANKLINE>
                             <<
             <BLANKLINE>
-                                \context Voice = "Music_Voice_Two"
+                                \context Voice = "Music_Voice_2"
                                 {
             <BLANKLINE>
-                                    % [Music_Voice_Two measure 2]
+                                    % [Music_Voice_2 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -10478,10 +10478,10 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \context Voice = "Rest_Voice_Two"
+                                \context Voice = "Rest_Voice_2"
                                 {
             <BLANKLINE>
-                                    % [Rest_Voice_Two measure 2]
+                                    % [Rest_Voice_2 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
