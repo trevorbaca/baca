@@ -2885,7 +2885,7 @@ class SegmentMaker:
 
     def _get_lilypond_includes(self):
         if self.environment == "docs":
-            return self.includes or ("baca.ily", "baca-string-trio.ily")
+            return self.includes or ("baca.ily", "baca-global-context.ily")
         includes = ["../../stylesheet.ily"]
         if self.clock_time_extra_offset is not None:
             value = self.clock_time_extra_offset
