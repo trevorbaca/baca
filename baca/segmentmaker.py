@@ -2886,12 +2886,15 @@ class SegmentMaker:
     def _get_lilypond_includes(self):
         includes = []
         if self.environment == "docs":
-            includes.append("baca.ily")
-            if abjad.get.indicator(self.score, const.TWO_VOICE):
-                includes.append("baca-two-voice-staff.ily")
+            if self.includes:
+                return self.includes
             else:
-                includes.append("baca-string-trio.ily")
-            return includes
+                includes.append("baca.ily")
+                if abjad.get.indicator(self.score, const.TWO_VOICE):
+                    includes.append("baca-two-voice-staff.ily")
+                else:
+                    includes.append("baca-string-trio.ily")
+                return includes
         includes.append("../../stylesheet.ily")
         if self.clock_time_extra_offset is not None:
             value = self.clock_time_extra_offset
@@ -4503,28 +4506,40 @@ class SegmentMaker:
 
             Colors octaves:
 
+            >>> def make_empty_score():
+            ...     global_context = abjad.ScoreTemplate._make_global_context()
+            ...     staves = [
+            ...         abjad.Staff([abjad.Voice(name="Voice_1")], name="Staff_1"),
+            ...         abjad.Staff([abjad.Voice(name="Voice_2")], name="Staff_2"),
+            ...     ]
+            ...     staff_group = abjad.StaffGroup(staves, name="Staff_Group")
+            ...     music_context = abjad.Context(
+            ...         [staff_group],
+            ...         lilypond_type="MusicContext",
+            ...         simultaneous=True,
+            ...         name="Music_Context",
+            ...     )
+            ...     return abjad.Score([global_context, music_context], name="Score")
+
             >>> maker = baca.SegmentMaker(
             ...     color_octaves=True,
-            ...     score_template=baca.StringTrioScoreTemplate(),
-            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 31)),
-            ...     time_signatures=[(6, 16), (6, 16)],
+            ...     includes=["baca.ily", "baca-global-context.ily"],
+            ...     score_template=make_empty_score,
+            ...     time_signatures=[(6, 4)],
             ... )
 
-            >>> figure = baca.figure([1], 16)
-            >>> selection = figure([[2, 4, 5, 7, 9, 11]])
             >>> maker(
-            ...     ("Violin_Music_Voice", 1),
-            ...     baca.music(selection),
+            ...     ("Voice_1", 1),
+            ...     baca.music(abjad.Container("d'4 e' f' g' a' b'")[:]),
             ... )
 
-            >>> selection = figure([[-3, -5, -7, -8, -10, -12]])
             >>> maker(
-            ...     ("Cello_Music_Voice", 1),
-            ...     baca.music(selection),
+            ...     ("Voice_2", 1),
+            ...     baca.music(abjad.Container("a4 g f e d c")[:]),
+            ...     baca.clef("bass"),
             ... )
 
             >>> lilypond_file = maker.run(environment="docs")
-            >>> abjad.setting(lilypond_file["Score"]).autoBeaming = False
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -4534,10 +4549,6 @@ class SegmentMaker:
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
-                \with
-                {
-                    autoBeaming = ##f
-                }
                 <<
                 <BLANKLINE>
                     \context GlobalContext = "Global_Context"
@@ -4547,17 +4558,11 @@ class SegmentMaker:
                         {
                 <BLANKLINE>
                             % [Global_Skips measure 1]
-                            \baca-new-spacing-section #1 #31
-                            \time 6/16
+                            \time 6/4
                             \baca-time-signature-color #'blue
-                            s1 * 3/8
+                            s1 * 3/2
                 <BLANKLINE>
                             % [Global_Skips measure 2]
-                            \baca-new-spacing-section #1 #31
-                            s1 * 3/8
-                <BLANKLINE>
-                            % [Global_Skips measure 3]
-                            \baca-new-spacing-section #1 #4
                             \time 1/4
                             \baca-time-signature-transparent
                             s1 * 1/4
@@ -4571,91 +4576,56 @@ class SegmentMaker:
                     \context MusicContext = "Music_Context"
                     <<
                 <BLANKLINE>
-                        \context StringSectionStaffGroup = "String_Section_Staff_Group"
+                        \context StaffGroup = "Staff_Group"
                         <<
                 <BLANKLINE>
-                            \tag Violin
-                            \context ViolinMusicStaff = "Violin_Music_Staff"
+                            \context Staff = "Staff_1"
                             {
                 <BLANKLINE>
-                                \context ViolinMusicVoice = "Violin_Music_Voice"
+                                \context Voice = "Voice_1"
                                 {
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    % [Voice_1 measure 1]
+                                    d'4
+                                    - \abjad-dashed-line-with-hook
+                                    - \baca-text-spanner-left-text "baca.music()"
+                                    - \tweak bound-details.right.padding 2.75
+                                    - \tweak color #darkcyan
+                                    - \tweak staff-padding 8
+                                    \bacaStartTextSpanRhythmAnnotation
                 <BLANKLINE>
-                                        % [Violin_Music_Voice measure 1]
-                                        \clef "treble"
-                                        \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet)
-                                        %@% \override ViolinMusicStaff.Clef.color = ##f
-                                        \set ViolinMusicStaff.forceClef = ##t
-                                        d'16
-                                        ^ \baca-default-indicator-markup "(Violin)"
-                                        - \abjad-dashed-line-with-hook
-                                        - \baca-text-spanner-left-text "baca.music()"
-                                        - \tweak bound-details.right.padding 2.75
-                                        - \tweak color #darkcyan
-                                        - \tweak staff-padding 8
-                                        \bacaStartTextSpanRhythmAnnotation
-                                        \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)
+                                    e'4
                 <BLANKLINE>
-                                        e'16
+                                    \baca-octave-coloring
+                                    f'4
+                                    - \tweak color #red
+                                    ^ \markup { OCTAVE }
                 <BLANKLINE>
-                                        \baca-octave-coloring
-                                        f'16
-                                        - \tweak color #red
-                                        ^ \markup { OCTAVE }
+                                    g'4
                 <BLANKLINE>
-                                        g'16
+                                    a'4
                 <BLANKLINE>
-                                        a'16
-                <BLANKLINE>
-                                        b'16
-                                        <> \bacaStopTextSpanRhythmAnnotation
-                <BLANKLINE>
-                                    }
+                                    b'4
+                                    <> \bacaStopTextSpanRhythmAnnotation
                 <BLANKLINE>
                                     <<
                 <BLANKLINE>
-                                        \context Voice = "Violin_Music_Voice"
+                                        \context Voice = "Voice_1"
                                         {
                 <BLANKLINE>
-                                            % [Violin_Music_Voice measure 2]
+                                            % [Voice_1 measure 2]
                                             \abjad-invisible-music-coloring
                                             %@% \abjad-invisible-music
                                             \baca-not-yet-pitched-coloring
-                                            b'1 * 3/8
-                                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                <BLANKLINE>
-                                        }
-                <BLANKLINE>
-                                        \context Voice = "Violin_Rest_Voice"
-                                        {
-                <BLANKLINE>
-                                            % [Violin_Rest_Voice measure 2]
-                                            R1 * 3/8
-                                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                <BLANKLINE>
-                                        }
-                <BLANKLINE>
-                                    >>
-                <BLANKLINE>
-                                    <<
-                <BLANKLINE>
-                                        \context Voice = "Violin_Music_Voice"
-                                        {
-                <BLANKLINE>
-                                            % [Violin_Music_Voice measure 3]
-                                            \abjad-invisible-music-coloring
-                                            %@% \abjad-invisible-music
-                                            R1 * 1/4
+                                            b'1 * 1/4
                                             %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                 <BLANKLINE>
                                         }
                 <BLANKLINE>
-                                        \context Voice = "Violin_Rest_Voice"
+                                        \context Voice = "Rest_Voice_1"
                                         {
                 <BLANKLINE>
-                                            % [Violin_Rest_Voice measure 3]
+                                            % [Rest_Voice_1 measure 2]
                                             \once \override Score.TimeSignature.X-extent = ##f
                                             \once \override MultiMeasureRest.transparent = ##t
                                             \stopStaff
@@ -4672,142 +4642,58 @@ class SegmentMaker:
                 <BLANKLINE>
                             }
                 <BLANKLINE>
-                            \tag Viola
-                            \context ViolaMusicStaff = "Viola_Music_Staff"
+                            \context Staff = "Staff_2"
                             {
                 <BLANKLINE>
-                                \context ViolaMusicVoice = "Viola_Music_Voice"
+                                \context Voice = "Voice_2"
                                 {
                 <BLANKLINE>
-                                    % [Viola_Music_Voice measure 1]
-                                    \clef "alto"
-                                    \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet)
-                                    %@% \override ViolaMusicStaff.Clef.color = ##f
-                                    \set ViolaMusicStaff.forceClef = ##t
-                                    R1 * 6/16
-                                    ^ \baca-default-indicator-markup "(Viola)"
-                                    %@% ^ \baca-duration-multiplier-markup #"6" #"16"
-                                    \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)
+                                    % [Voice_2 measure 1]
+                                    \clef "bass"
+                                    \once \override Staff.Clef.color = #(x11-color 'blue)
+                                    %@% \override Staff.Clef.color = ##f
+                                    \set Staff.forceClef = ##t
+                                    a4
+                                    - \abjad-dashed-line-with-hook
+                                    - \baca-text-spanner-left-text "baca.music()"
+                                    - \tweak bound-details.right.padding 2.75
+                                    - \tweak color #darkcyan
+                                    - \tweak staff-padding 8
+                                    \bacaStartTextSpanRhythmAnnotation
+                                    \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                 <BLANKLINE>
-                                    % [Viola_Music_Voice measure 2]
-                                    R1 * 6/16
-                                    %@% ^ \baca-duration-multiplier-markup #"6" #"16"
+                                    g4
+                <BLANKLINE>
+                                    \baca-octave-coloring
+                                    f4
+                                    - \tweak color #red
+                                    ^ \markup { OCTAVE }
+                <BLANKLINE>
+                                    e4
+                <BLANKLINE>
+                                    d4
+                <BLANKLINE>
+                                    c4
+                                    <> \bacaStopTextSpanRhythmAnnotation
                 <BLANKLINE>
                                     <<
                 <BLANKLINE>
-                                        \context Voice = "Viola_Music_Voice"
+                                        \context Voice = "Voice_2"
                                         {
                 <BLANKLINE>
-                                            % [Viola_Music_Voice measure 3]
-                                            \abjad-invisible-music-coloring
-                                            %@% \abjad-invisible-music
-                                            R1 * 1/4
-                                            %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
-                                        }
-                <BLANKLINE>
-                                        \context Voice = "Viola_Rest_Voice"
-                                        {
-                <BLANKLINE>
-                                            % [Viola_Rest_Voice measure 3]
-                                            \once \override Score.TimeSignature.X-extent = ##f
-                                            \once \override MultiMeasureRest.transparent = ##t
-                                            \stopStaff
-                                            \once \override Staff.StaffSymbol.transparent = ##t
-                                            \startStaff
-                                            R1 * 1/4
-                                            %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
-                                        }
-                <BLANKLINE>
-                                    >>
-                <BLANKLINE>
-                                }
-                <BLANKLINE>
-                            }
-                <BLANKLINE>
-                            \tag Cello
-                            \context CelloMusicStaff = "Cello_Music_Staff"
-                            {
-                <BLANKLINE>
-                                \context CelloMusicVoice = "Cello_Music_Voice"
-                                {
-                <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
-                <BLANKLINE>
-                                        % [Cello_Music_Voice measure 1]
-                                        \clef "bass"
-                                        \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet)
-                                        %@% \override CelloMusicStaff.Clef.color = ##f
-                                        \set CelloMusicStaff.forceClef = ##t
-                                        a16
-                                        ^ \baca-default-indicator-markup "(Cello)"
-                                        - \abjad-dashed-line-with-hook
-                                        - \baca-text-spanner-left-text "baca.music()"
-                                        - \tweak bound-details.right.padding 2.75
-                                        - \tweak color #darkcyan
-                                        - \tweak staff-padding 8
-                                        \bacaStartTextSpanRhythmAnnotation
-                                        \override CelloMusicStaff.Clef.color = #(x11-color 'violet)
-                <BLANKLINE>
-                                        g16
-                <BLANKLINE>
-                                        \baca-octave-coloring
-                                        f16
-                                        - \tweak color #red
-                                        ^ \markup { OCTAVE }
-                <BLANKLINE>
-                                        e16
-                <BLANKLINE>
-                                        d16
-                <BLANKLINE>
-                                        c16
-                                        <> \bacaStopTextSpanRhythmAnnotation
-                <BLANKLINE>
-                                    }
-                <BLANKLINE>
-                                    <<
-                <BLANKLINE>
-                                        \context Voice = "Cello_Music_Voice"
-                                        {
-                <BLANKLINE>
-                                            % [Cello_Music_Voice measure 2]
+                                            % [Voice_2 measure 2]
                                             \abjad-invisible-music-coloring
                                             %@% \abjad-invisible-music
                                             \baca-not-yet-pitched-coloring
-                                            d1 * 3/8
-                                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                <BLANKLINE>
-                                        }
-                <BLANKLINE>
-                                        \context Voice = "Cello_Rest_Voice"
-                                        {
-                <BLANKLINE>
-                                            % [Cello_Rest_Voice measure 2]
-                                            R1 * 3/8
-                                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                <BLANKLINE>
-                                        }
-                <BLANKLINE>
-                                    >>
-                <BLANKLINE>
-                                    <<
-                <BLANKLINE>
-                                        \context Voice = "Cello_Music_Voice"
-                                        {
-                <BLANKLINE>
-                                            % [Cello_Music_Voice measure 3]
-                                            \abjad-invisible-music-coloring
-                                            %@% \abjad-invisible-music
-                                            R1 * 1/4
+                                            d1 * 1/4
                                             %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                 <BLANKLINE>
                                         }
                 <BLANKLINE>
-                                        \context Voice = "Cello_Rest_Voice"
+                                        \context Voice = "Rest_Voice_2"
                                         {
                 <BLANKLINE>
-                                            % [Cello_Rest_Voice measure 3]
+                                            % [Rest_Voice_2 measure 2]
                                             \once \override Score.TimeSignature.X-extent = ##f
                                             \once \override MultiMeasureRest.transparent = ##t
                                             \stopStaff
