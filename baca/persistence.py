@@ -18,6 +18,7 @@ r"""
         >>> triple = ("Music_Staff", "default_clef", abjad.Clef("treble"))
         >>> score_template.defaults.append(triple)
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=score_template,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -148,6 +149,7 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -280,6 +282,7 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -429,6 +432,7 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -575,6 +579,7 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -722,6 +727,7 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -870,6 +876,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -991,6 +998,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -1129,6 +1137,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -1266,6 +1275,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -1390,6 +1400,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -1526,6 +1537,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -1650,6 +1662,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -1789,6 +1802,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -1937,6 +1951,7 @@ r"""
         >>> score_template.defaults.append(triple)
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     instruments=instruments,
         ...     score_template=score_template,
         ...     spacing=baca.SpacingSpecifier(
@@ -2300,6 +2315,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     instruments=instruments,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(
@@ -2663,6 +2679,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     instruments=instruments,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(
@@ -3044,6 +3061,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     instruments=instruments,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(
@@ -3432,6 +3450,7 @@ r"""
         ... )
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     instruments=instruments,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(
@@ -3835,6 +3854,7 @@ r"""
         ... )
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     instruments=instruments,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(
@@ -4246,6 +4266,7 @@ r"""
         >>> score_template.defaults.append(triple)
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     margin_markups=margin_markups,
         ...     score_template=score_template,
         ...     spacing=baca.SpacingSpecifier(
@@ -4627,6 +4648,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(
@@ -5007,6 +5029,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(
@@ -5412,6 +5435,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(
@@ -5823,6 +5847,7 @@ r"""
         ... )
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(
@@ -6262,6 +6287,7 @@ r"""
         ... )
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(
@@ -6674,6 +6700,7 @@ r"""
         ... )
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(
@@ -6859,6 +6886,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(
@@ -6998,6 +7026,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(
@@ -7157,6 +7186,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(
@@ -7315,6 +7345,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(
@@ -7462,6 +7493,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(
@@ -7624,6 +7656,7 @@ r"""
         Explicit persistent overrides work but do not color:
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -7806,6 +7839,7 @@ r"""
         Reapplied persistent overrides work but do not color:
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -7945,6 +7979,7 @@ r"""
         Even at the beginning of a segment:
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -8102,6 +8137,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -8226,6 +8262,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -8367,6 +8404,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -8506,6 +8544,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -8636,6 +8675,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -8793,6 +8833,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(
@@ -8936,6 +8977,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(
@@ -9098,6 +9140,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(
@@ -9259,6 +9302,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(
@@ -9426,6 +9470,7 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(

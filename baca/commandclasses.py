@@ -259,6 +259,7 @@ class BCPCommand(scoping.Command):
             PATTERN. Define chunkwise spanners like this:
 
             >>> maker = baca.SegmentMaker(
+            ...     includes=["baca.ily", "baca-global-context.ily"],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -555,6 +556,7 @@ class BCPCommand(scoping.Command):
             Tweaks LilyPond ``TextSpanner`` grob:
 
             >>> maker = baca.SegmentMaker(
+            ...     includes=["baca.ily", "baca-global-context.ily"],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -913,6 +915,7 @@ class ContainerCommand(scoping.Command):
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )

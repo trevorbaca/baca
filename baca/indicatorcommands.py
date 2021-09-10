@@ -1287,6 +1287,7 @@ def hide_black_note_heads(
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1723,6 +1724,7 @@ def margin_markup(
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -2404,6 +2406,7 @@ def staff_lines(
         Single-line staff with percussion clef:
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
@@ -2552,6 +2555,7 @@ def staff_lines(
         Single-line staff with bass clef:
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
@@ -2701,6 +2705,7 @@ def staff_lines(
         Two-line staff with percussion clef:
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
@@ -2848,6 +2853,7 @@ def staff_lines(
         Two-line staff with bass clef; clef set before staff positions:
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
@@ -2995,6 +3001,7 @@ def staff_lines(
         Two-line staff with bass clef; staff positions set before clef:
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],

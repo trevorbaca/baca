@@ -27,6 +27,7 @@ class AccidentalAdjustmentCommand(scoping.Command):
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -559,6 +560,7 @@ class ClusterCommand(scoping.Command):
             Hides flat markup:
 
             >>> maker = baca.SegmentMaker(
+            ...     includes=["baca.ily", "baca-global-context.ily"],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
@@ -748,6 +750,7 @@ class ClusterCommand(scoping.Command):
             Takes start pitch from input notes:
 
             >>> maker = baca.SegmentMaker(
+            ...     includes=["baca.ily", "baca-global-context.ily"],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
@@ -938,6 +941,7 @@ class ClusterCommand(scoping.Command):
             Sets start pitch explicitly:
 
             >>> maker = baca.SegmentMaker(
+            ...     includes=["baca.ily", "baca-global-context.ily"],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
@@ -1135,6 +1139,7 @@ class ClusterCommand(scoping.Command):
             Increasing widths:
 
             >>> maker = baca.SegmentMaker(
+            ...     includes=["baca.ily", "baca-global-context.ily"],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
@@ -1324,6 +1329,7 @@ class ClusterCommand(scoping.Command):
             Patterned widths:
 
             >>> maker = baca.SegmentMaker(
+            ...     includes=["baca.ily", "baca-global-context.ily"],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
@@ -1513,6 +1519,7 @@ class ClusterCommand(scoping.Command):
             Leaves notes and chords unchanged:
 
             >>> maker = baca.SegmentMaker(
+            ...     includes=["baca.ily", "baca-global-context.ily"],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
@@ -1655,6 +1662,7 @@ class ColorFingeringCommand(scoping.Command):
         With segment-maker:
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -2100,6 +2108,7 @@ class MicrotoneDeviationCommand(scoping.Command):
         With alternating up- and down-quatertones:
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -2342,6 +2351,7 @@ class OctaveDisplacementCommand(scoping.Command):
         Displaces octaves:
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -2594,6 +2604,7 @@ class PitchCommand(scoping.Command):
         With pitch numbers:
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -2752,6 +2763,7 @@ class PitchCommand(scoping.Command):
         With pitch numbers:
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -2910,6 +2922,7 @@ class PitchCommand(scoping.Command):
         Large chord:
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -3555,6 +3568,7 @@ class RegisterCommand(scoping.Command):
         With segment-maker:
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -3974,11 +3988,12 @@ class RegisterInterpolationCommand(scoping.Command):
 
         Holds register constant:
 
-            >>> time_signatures = 4 * [(4, 8), (3, 8)]
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=time_signatures,
-            ...     )
+        >>> time_signatures = 4 * [(4, 8), (3, 8)]
+        >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     time_signatures=time_signatures,
+        ...     )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> maker(
@@ -4194,11 +4209,12 @@ class RegisterInterpolationCommand(scoping.Command):
 
         Octave-transposes to a target interpolated from 12 down to 0:
 
-            >>> time_signatures = 4 * [(4, 8), (3, 8)]
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=time_signatures,
-            ...     )
+        >>> time_signatures = 4 * [(4, 8), (3, 8)]
+        >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     time_signatures=time_signatures,
+        ...     )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> maker(
@@ -4414,11 +4430,12 @@ class RegisterInterpolationCommand(scoping.Command):
 
         Octave-transposes to a target interpolated from 0 up to 12:
 
-            >>> time_signatures = 4 * [(4, 8), (3, 8)]
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=time_signatures,
-            ...     )
+        >>> time_signatures = 4 * [(4, 8), (3, 8)]
+        >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     time_signatures=time_signatures,
+        ...     )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> maker(
@@ -4634,11 +4651,12 @@ class RegisterInterpolationCommand(scoping.Command):
 
         Octave-transposes to a target interpolated from 12 down to -12:
 
-            >>> time_signatures = 4 * [(4, 8), (3, 8)]
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=time_signatures,
-            ...     )
+        >>> time_signatures = 4 * [(4, 8), (3, 8)]
+        >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     time_signatures=time_signatures,
+        ...     )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> maker(
@@ -4854,11 +4872,12 @@ class RegisterInterpolationCommand(scoping.Command):
 
         Octave-transposes to a target interpolated from -12 up to 12:
 
-            >>> time_signatures = 4 * [(4, 8), (3, 8)]
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=time_signatures,
-            ...     )
+        >>> time_signatures = 4 * [(4, 8), (3, 8)]
+        >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     time_signatures=time_signatures,
+        ...     )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> maker(
@@ -7012,6 +7031,7 @@ def force_accidental(
         Inverts edition-specific tags:
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -7390,6 +7410,7 @@ def pitch(
         type to another (note to chord in this example):
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )

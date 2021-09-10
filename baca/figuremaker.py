@@ -9122,6 +9122,7 @@ def imbricate(
         ... )
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=closure,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,

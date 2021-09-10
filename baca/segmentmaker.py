@@ -37,6 +37,7 @@ class SegmentMaker:
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -228,6 +229,7 @@ class SegmentMaker:
         >>> figures = abjad.select(figures_)
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=time_signatures,
@@ -425,6 +427,7 @@ class SegmentMaker:
 
         >>> maker = baca.SegmentMaker(
         ...     do_not_check_out_of_range_pitches=True,
+        ...     includes=["baca.ily", "baca-global-context.ily"],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=time_signatures,
@@ -843,6 +846,7 @@ class SegmentMaker:
         ..  container:: example
 
             >>> maker = baca.SegmentMaker(
+            ...     includes=["baca.ily", "baca-global-context.ily"],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -1029,6 +1033,7 @@ class SegmentMaker:
             Commands may be grouped into lists:
 
             >>> maker = baca.SegmentMaker(
+            ...     includes=["baca.ily", "baca-global-context.ily"],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -2885,7 +2890,8 @@ class SegmentMaker:
 
     def _get_lilypond_includes(self):
         if self.environment == "docs":
-            return self.includes or ("baca.ily", "baca-global-context.ily")
+            assert self.includes, repr(self.includes)
+            return self.includes
         includes = ["../../stylesheet.ily"]
         if self.clock_time_extra_offset is not None:
             value = self.clock_time_extra_offset
@@ -4890,6 +4896,7 @@ class SegmentMaker:
             ...     )
             ... ]
             >>> maker = baca.SegmentMaker(
+            ...     includes=["baca.ily", "baca-global-context.ily"],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -5168,6 +5175,7 @@ class SegmentMaker:
             Fills empty measures with multimeasure rests:
 
             >>> maker = baca.SegmentMaker(
+            ...     includes=["baca.ily", "baca-global-context.ily"],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -5288,6 +5296,7 @@ class SegmentMaker:
             Fills empty measures with skips:
 
             >>> maker = baca.SegmentMaker(
+            ...     includes=["baca.ily", "baca-global-context.ily"],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     skips_instead_of_rests=True,
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -5451,6 +5460,7 @@ class SegmentMaker:
             >>> instruments = abjad.OrderedDict()
             >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
             >>> maker = baca.SegmentMaker(
+            ...     includes=["baca.ily", "baca-global-context.ily"],
             ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -5615,6 +5625,7 @@ class SegmentMaker:
             >>> instruments = abjad.OrderedDict()
             >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
             >>> maker = baca.SegmentMaker(
+            ...     includes=["baca.ily", "baca-global-context.ily"],
             ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
