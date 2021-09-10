@@ -1866,9 +1866,8 @@ class PartAssignmentCommand(scoping.Command):
         voice = abjad.get.parentage(first_leaf).get(abjad.Voice, -1)
         if voice is not None and self.part_assignment is not None:
             assert isinstance(voice, abjad.Voice)
-            if not self.runtime["score_template"].allows_part_assignment(
-                voice.name, self.part_assignment
-            ):
+            section = self.part_assignment.section or "ZZZ"
+            if not voice.name.startswith(section):
                 message = f"{voice.name} does not allow"
                 message += f" {self.part_assignment.section} part assignment:"
                 message += f"\n  {self.part_assignment}"

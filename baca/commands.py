@@ -45,19 +45,22 @@ def assign_parts(
 
     ..  container:: example
 
+        >>> def closure():
+        ...     return baca.make_configurable_empty_score(1)
+
         >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.StringTrioScoreTemplate(),
+        ...     score_template=closure,
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
         >>> maker(
-        ...     'Violin_Music_Voice',
+        ...     "Example_Voice",
         ...     baca.make_notes(),
-        ...     baca.assign_parts(baca.parts.PartAssignment('Violin')),
-        ...     baca.pitch('E4'),
-        ...     )
+        ...     baca.assign_parts(baca.parts.PartAssignment("Example_Voice")),
+        ...     baca.pitch("E4"),
+        ... )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         >>> score = lilypond_file["Score"]
@@ -105,208 +108,72 @@ def assign_parts(
             >>
         <BLANKLINE>
             \context MusicContext = "Music_Context"
-            <<
+            {
         <BLANKLINE>
-                \context StringSectionStaffGroup = "String_Section_Staff_Group"
-                <<
+                \context Staff = "Example_Staff"
+                {
         <BLANKLINE>
-                    \tag Violin
-                    \context ViolinMusicStaff = "Violin_Music_Staff"
+                    \context Voice = "Example_Voice"
                     {
         <BLANKLINE>
-                        \context ViolinMusicVoice = "Violin_Music_Voice"
-                        {
+                        {   %*% PartAssignment('Example_Voice')
         <BLANKLINE>
-                            {   %*% PartAssignment('Violin')
+                            % [Example_Voice measure 1]
+                            e'2
+                            - \abjad-dashed-line-with-hook
+                            - \baca-text-spanner-left-text "make_notes()"
+                            - \tweak bound-details.right.padding 2.75
+                            - \tweak color #darkcyan
+                            - \tweak staff-padding 8
+                            \bacaStartTextSpanRhythmAnnotation
         <BLANKLINE>
-                                % [Violin_Music_Voice measure 1]
-                                \clef "treble"
-                                \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet)
-                                %@% \override ViolinMusicStaff.Clef.color = ##f
-                                \set ViolinMusicStaff.forceClef = ##t
-                                e'2
-                                ^ \baca-default-indicator-markup "(Violin)"
-                                - \abjad-dashed-line-with-hook
-                                - \baca-text-spanner-left-text "make_notes()"
-                                - \tweak bound-details.right.padding 2.75
-                                - \tweak color #darkcyan
-                                - \tweak staff-padding 8
-                                \bacaStartTextSpanRhythmAnnotation
-                                \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)
+                            % [Example_Voice measure 2]
+                            e'4.
         <BLANKLINE>
-                                % [Violin_Music_Voice measure 2]
-                                e'4.
+                            % [Example_Voice measure 3]
+                            e'2
         <BLANKLINE>
-                                % [Violin_Music_Voice measure 3]
-                                e'2
+                            % [Example_Voice measure 4]
+                            e'4.
+                            <> \bacaStopTextSpanRhythmAnnotation
         <BLANKLINE>
-                                % [Violin_Music_Voice measure 4]
-                                e'4.
-                                <> \bacaStopTextSpanRhythmAnnotation
+                        }   %*% PartAssignment('Example_Voice')
         <BLANKLINE>
-                            }   %*% PartAssignment('Violin')
+                        <<
         <BLANKLINE>
-                            <<
+                            \context Voice = "Example_Voice"
+                            {
         <BLANKLINE>
-                                \context Voice = "Violin_Music_Voice"
-                                {
+                                % [Example_Voice measure 5]
+                                \abjad-invisible-music-coloring
+                                %@% \abjad-invisible-music
+                                \baca-not-yet-pitched-coloring
+                                b'1 * 1/4
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
         <BLANKLINE>
-                                    % [Violin_Music_Voice measure 5]
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
+                            }
         <BLANKLINE>
-                                }
+                            \context Voice = "Example_Rest_Voice"
+                            {
         <BLANKLINE>
-                                \context Voice = "Violin_Rest_Voice"
-                                {
+                                % [Example_Rest_Voice measure 5]
+                                \once \override Score.TimeSignature.X-extent = ##f
+                                \once \override MultiMeasureRest.transparent = ##t
+                                \stopStaff
+                                \once \override Staff.StaffSymbol.transparent = ##t
+                                \startStaff
+                                R1 * 1/4
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
         <BLANKLINE>
-                                    % [Violin_Rest_Voice measure 5]
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
+                            }
         <BLANKLINE>
-                                }
-        <BLANKLINE>
-                            >>
-        <BLANKLINE>
-                        }
+                        >>
         <BLANKLINE>
                     }
         <BLANKLINE>
-                    \tag Viola
-                    \context ViolaMusicStaff = "Viola_Music_Staff"
-                    {
+                }
         <BLANKLINE>
-                        \context ViolaMusicVoice = "Viola_Music_Voice"
-                        {
-        <BLANKLINE>
-                            % [Viola_Music_Voice measure 1]
-                            \clef "alto"
-                            \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet)
-                            %@% \override ViolaMusicStaff.Clef.color = ##f
-                            \set ViolaMusicStaff.forceClef = ##t
-                            R1 * 4/8
-                            ^ \baca-default-indicator-markup "(Viola)"
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                            \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)
-        <BLANKLINE>
-                            % [Viola_Music_Voice measure 2]
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-        <BLANKLINE>
-                            % [Viola_Music_Voice measure 3]
-                            R1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-        <BLANKLINE>
-                            % [Viola_Music_Voice measure 4]
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-        <BLANKLINE>
-                            <<
-        <BLANKLINE>
-                                \context Voice = "Viola_Music_Voice"
-                                {
-        <BLANKLINE>
-                                    % [Viola_Music_Voice measure 5]
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-        <BLANKLINE>
-                                }
-        <BLANKLINE>
-                                \context Voice = "Viola_Rest_Voice"
-                                {
-        <BLANKLINE>
-                                    % [Viola_Rest_Voice measure 5]
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-        <BLANKLINE>
-                                }
-        <BLANKLINE>
-                            >>
-        <BLANKLINE>
-                        }
-        <BLANKLINE>
-                    }
-        <BLANKLINE>
-                    \tag Cello
-                    \context CelloMusicStaff = "Cello_Music_Staff"
-                    {
-        <BLANKLINE>
-                        \context CelloMusicVoice = "Cello_Music_Voice"
-                        {
-        <BLANKLINE>
-                            % [Cello_Music_Voice measure 1]
-                            \clef "bass"
-                            \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet)
-                            %@% \override CelloMusicStaff.Clef.color = ##f
-                            \set CelloMusicStaff.forceClef = ##t
-                            R1 * 4/8
-                            ^ \baca-default-indicator-markup "(Cello)"
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                            \override CelloMusicStaff.Clef.color = #(x11-color 'violet)
-        <BLANKLINE>
-                            % [Cello_Music_Voice measure 2]
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-        <BLANKLINE>
-                            % [Cello_Music_Voice measure 3]
-                            R1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-        <BLANKLINE>
-                            % [Cello_Music_Voice measure 4]
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-        <BLANKLINE>
-                            <<
-        <BLANKLINE>
-                                \context Voice = "Cello_Music_Voice"
-                                {
-        <BLANKLINE>
-                                    % [Cello_Music_Voice measure 5]
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-        <BLANKLINE>
-                                }
-        <BLANKLINE>
-                                \context Voice = "Cello_Rest_Voice"
-                                {
-        <BLANKLINE>
-                                    % [Cello_Rest_Voice measure 5]
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-        <BLANKLINE>
-                                }
-        <BLANKLINE>
-                            >>
-        <BLANKLINE>
-                        }
-        <BLANKLINE>
-                    }
-        <BLANKLINE>
-                >>
-        <BLANKLINE>
-            >>
+            }
         <BLANKLINE>
         >>
 
@@ -315,7 +182,7 @@ def assign_parts(
         Raises exception when voice does not allow part assignment:
 
         >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.StringTrioScoreTemplate(),
+        ...     score_template=closure,
         ...     test_container_identifiers=True,
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -323,17 +190,17 @@ def assign_parts(
         >>> part_assignment = baca.parts.PartAssignment('Flute')
 
         >>> maker(
-        ...     'Violin_Music_Voice',
+        ...     "Example_Voice",
         ...     baca.make_notes(),
-        ...     baca.assign_parts(part_assignment),
-        ...     baca.pitches('E4 F4'),
-        ...     )
+        ...     baca.assign_parts(baca.parts.PartAssignment("Flute_Voice")),
+        ...     baca.pitches("E4 F4"),
+        ... )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         Traceback (most recent call last):
             ...
-        Exception: Violin_Music_Voice does not allow Flute part assignment:
-            PartAssignment('Flute')
+        Exception: Example_Voice does not allow Flute_Voice part assignment:
+            PartAssignment('Flute_Voice')
 
     """
     if not isinstance(part_assignment, _parts.PartAssignment):
@@ -365,7 +232,7 @@ def bcps(
             ...     )
 
             >>> maker(
-            ...     'Music_Voice',
+            ...     "Music_Voice",
             ...     baca.make_even_divisions(),
             ...     baca.bcps(
             ...         [(1, 5), (3, 5), (2, 5), (4, 5), (5, 5)],
@@ -375,7 +242,7 @@ def bcps(
             ...     baca.text_spanner_staff_padding(2.5),
             ...     )
 
-            >>> lilypond_file = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment="docs")
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -812,14 +679,14 @@ def container(
         ...     )
 
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.container('ViolinI', selector=baca.selectors.leaves((None, 2))),
         ...     baca.container('ViolinII', selector=baca.selectors.leaves((2, None))),
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.pitches('E4 F4'),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
 
         >>> score = lilypond_file["Score"]
         >>> string = abjad.lilypond(score)
@@ -999,7 +866,7 @@ def cross_staff(
         ...     time_signatures=accumulator.time_signatures,
         ...     )
         >>> accumulator.populate_segment_maker(maker)
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1534,7 +1401,7 @@ def finger_pressure_transition(
         ...     )
 
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.finger_pressure_transition(selector=baca.selectors.notes((None, 2))),
         ...     baca.finger_pressure_transition(selector=baca.selectors.notes((2, None))),
         ...     baca.make_notes(),
@@ -1543,7 +1410,7 @@ def finger_pressure_transition(
         ...     baca.pitch('C5'),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1820,13 +1687,13 @@ def glissando(
         ...     )
 
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.glissando()
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1992,14 +1859,14 @@ def glissando(
         ...     )
 
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.make_even_divisions(),
         ...     baca.glissando(selector=baca.selectors.plts((None, 2))),
         ...     baca.glissando(selector=baca.selectors.plts((-2, None))),
         ... )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2154,7 +2021,7 @@ def glissando(
         ...     )
 
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.glissando(
@@ -2162,7 +2029,7 @@ def glissando(
         ...         ),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2341,7 +2208,7 @@ def glissando(
         ...     )
 
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.glissando(
@@ -2350,7 +2217,7 @@ def glissando(
         ...         ),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2581,7 +2448,7 @@ def invisible_music(
         ...     )
 
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.invisible_music(
         ...         selector=baca.selectors.leaves((1, -1)),
         ...         ),
@@ -2589,7 +2456,7 @@ def invisible_music(
         ...     baca.pitch('C5'),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::

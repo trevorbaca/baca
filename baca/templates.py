@@ -107,21 +107,10 @@ class ScoreTemplate(abjad.ScoreTemplate):
 
     ### PUBLIC METHODS ###
 
-    def allows_part_assignment(
-        self, voice_name: str, part_assignment: _parts.PartAssignment
-    ) -> bool:
-        """
-        Is true when ``voice_name`` allows ``part_assignment``.
-        """
-        section = part_assignment.section or "ZZZ"
-        if voice_name.startswith(section):
-            return True
-        return False
-
     def attach_defaults(self, argument) -> typing.List:
         """
-        Attaches defaults to all staff and staff group contexts in
-        ``argument`` when ``argument`` is a score.
+        Attaches defaults to all staff and staff group contexts in ``argument`` when
+        ``argument`` is a score.
 
         Attaches defaults to ``argument`` (without iterating ``argument``) when
         ``argument`` is a staff or staff group.
@@ -896,9 +885,9 @@ def make_configurable_empty_score(*counts):
             >>
             \context MusicContext = "Music_Context"
             {
-                \context Staff = "Staff"
+                \context Staff = "Example_Staff"
                 {
-                    \context Voice = "Voice"
+                    \context Voice = "Example_Voice"
                     {
                     }
                 }
@@ -923,18 +912,18 @@ def make_configurable_empty_score(*counts):
             >>
             \context MusicContext = "Music_Context"
             {
-                \context Staff = "Staff"
+                \context Staff = "Example_Staff"
                 <<
-                    \context Voice = "Voice_1"
+                    \context Voice = "Example_Voice_1"
                     {
                     }
-                    \context Voice = "Voice_2"
+                    \context Voice = "Example_Voice_2"
                     {
                     }
-                    \context Voice = "Voice_3"
+                    \context Voice = "Example_Voice_3"
                     {
                     }
-                    \context Voice = "Voice_4"
+                    \context Voice = "Example_Voice_4"
                     {
                     }
                 >>
@@ -959,29 +948,29 @@ def make_configurable_empty_score(*counts):
             >>
             \context MusicContext = "Music_Context"
             <<
-                \context StaffGroup = "Staff_Group"
+                \context StaffGroup = "Example_Staff_Group"
                 <<
-                    \context Staff = "Staff_1"
+                    \context Staff = "Example_Staff_1"
                     {
-                        \context Voice = "Voice_1"
+                        \context Voice = "Example_Voice_1"
                         {
                         }
                     }
-                    \context Staff = "Staff_2"
+                    \context Staff = "Example_Staff_2"
                     {
-                        \context Voice = "Voice_2"
+                        \context Voice = "Example_Voice_2"
                         {
                         }
                     }
-                    \context Staff = "Staff_3"
+                    \context Staff = "Example_Staff_3"
                     {
-                        \context Voice = "Voice_3"
+                        \context Voice = "Example_Voice_3"
                         {
                         }
                     }
-                    \context Staff = "Staff_4"
+                    \context Staff = "Example_Staff_4"
                     {
-                        \context Voice = "Voice_4"
+                        \context Voice = "Example_Voice_4"
                         {
                         }
                     }
@@ -1007,26 +996,26 @@ def make_configurable_empty_score(*counts):
             >>
             \context MusicContext = "Music_Context"
             <<
-                \context StaffGroup = "Staff_Group"
+                \context StaffGroup = "Example_Staff_Group"
                 <<
-                    \context Staff = "Staff_1"
+                    \context Staff = "Example_Staff_1"
                     {
-                        \context Voice = "Voice_1"
+                        \context Voice = "Example_Voice_1"
                         {
                         }
                     }
-                    \context Staff = "Staff_2"
+                    \context Staff = "Example_Staff_2"
                     <<
-                        \context Voice = "Voice_2"
+                        \context Voice = "Example_Voice_2"
                         {
                         }
-                        \context Voice = "Voice_3"
+                        \context Voice = "Example_Voice_3"
                         {
                         }
                     >>
-                    \context Staff = "Staff_3"
+                    \context Staff = "Example_Staff_3"
                     {
-                        \context Voice = "Voice_4"
+                        \context Voice = "Example_Voice_4"
                         {
                         }
                     }
@@ -1044,18 +1033,18 @@ def make_configurable_empty_score(*counts):
     staves, voice_number = [], 1
     for staff_index, voice_count in enumerate(counts):
         if single_staff:
-            name = "Staff"
+            name = "Example_Staff"
         else:
             staff_number = staff_index + 1
-            name = f"Staff_{staff_number}"
+            name = f"Example_Staff_{staff_number}"
         simultaneous = 1 < voice_count
         staff = abjad.Staff(name=name, simultaneous=simultaneous, tag=tag)
         voices = []
         for voice_index in range(voice_count):
             if single_voice:
-                name = "Voice"
+                name = "Example_Voice"
             else:
-                name = f"Voice_{voice_number}"
+                name = f"Example_Voice_{voice_number}"
             voice = abjad.Voice(name=name, tag=tag)
             voices.append(voice)
             voice_number += 1
@@ -1066,7 +1055,7 @@ def make_configurable_empty_score(*counts):
         music = staves
         simultaneous = False
     else:
-        music = [abjad.StaffGroup(staves, name="Staff_Group")]
+        music = [abjad.StaffGroup(staves, name="Example_Staff_Group")]
         simultaneous = True
 
     music_context = abjad.Context(
