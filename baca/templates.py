@@ -872,3 +872,210 @@ def make_empty_score(count=2):
     # SCORE
     score = abjad.Score([global_context, music_context], name="Score", tag=tag)
     return score
+
+
+def make_configurable_empty_score(*counts):
+    r"""
+    Makes empty score for doc examples.
+
+    ..  container:: example
+
+        >>> score = baca.make_configurable_empty_score(1)
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        <<
+            \context GlobalContext = "Global_Context"
+            <<
+                \context GlobalRests = "Global_Rests"
+                {
+                }
+                \context GlobalSkips = "Global_Skips"
+                {
+                }
+            >>
+            \context MusicContext = "Music_Context"
+            {
+                \context Staff = "Staff"
+                {
+                    \context Voice = "Voice"
+                    {
+                    }
+                }
+            }
+        >>
+
+    ..  container:: example
+
+        >>> score = baca.make_configurable_empty_score(4)
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        <<
+            \context GlobalContext = "Global_Context"
+            <<
+                \context GlobalRests = "Global_Rests"
+                {
+                }
+                \context GlobalSkips = "Global_Skips"
+                {
+                }
+            >>
+            \context MusicContext = "Music_Context"
+            {
+                \context Staff = "Staff"
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                    }
+                    \context Voice = "Voice_2"
+                    {
+                    }
+                    \context Voice = "Voice_3"
+                    {
+                    }
+                    \context Voice = "Voice_4"
+                    {
+                    }
+                >>
+            }
+        >>
+
+    ..  container:: example
+
+        >>> score = baca.make_configurable_empty_score(1, 1, 1, 1)
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        <<
+            \context GlobalContext = "Global_Context"
+            <<
+                \context GlobalRests = "Global_Rests"
+                {
+                }
+                \context GlobalSkips = "Global_Skips"
+                {
+                }
+            >>
+            \context MusicContext = "Music_Context"
+            <<
+                \context StaffGroup = "Staff_Group"
+                <<
+                    \context Staff = "Staff_1"
+                    {
+                        \context Voice = "Voice_1"
+                        {
+                        }
+                    }
+                    \context Staff = "Staff_2"
+                    {
+                        \context Voice = "Voice_2"
+                        {
+                        }
+                    }
+                    \context Staff = "Staff_3"
+                    {
+                        \context Voice = "Voice_3"
+                        {
+                        }
+                    }
+                    \context Staff = "Staff_4"
+                    {
+                        \context Voice = "Voice_4"
+                        {
+                        }
+                    }
+                >>
+            >>
+        >>
+
+    ..  container:: example
+
+        >>> score = baca.make_configurable_empty_score(1, 2, 1)
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        <<
+            \context GlobalContext = "Global_Context"
+            <<
+                \context GlobalRests = "Global_Rests"
+                {
+                }
+                \context GlobalSkips = "Global_Skips"
+                {
+                }
+            >>
+            \context MusicContext = "Music_Context"
+            <<
+                \context StaffGroup = "Staff_Group"
+                <<
+                    \context Staff = "Staff_1"
+                    {
+                        \context Voice = "Voice_1"
+                        {
+                        }
+                    }
+                    \context Staff = "Staff_2"
+                    <<
+                        \context Voice = "Voice_2"
+                        {
+                        }
+                        \context Voice = "Voice_3"
+                        {
+                        }
+                    >>
+                    \context Staff = "Staff_3"
+                    {
+                        \context Voice = "Voice_4"
+                        {
+                        }
+                    }
+                >>
+            >>
+        >>
+
+    """
+
+    site = "baca.make_configuration_empty_score()"
+    tag = abjad.Tag(site)
+    global_context = abjad.ScoreTemplate._make_global_context()
+    single_staff = len(counts) == 1
+    single_voice = single_staff and counts[0] == 1
+    staves, voice_number = [], 1
+    for staff_index, voice_count in enumerate(counts):
+        if single_staff:
+            name = "Staff"
+        else:
+            staff_number = staff_index + 1
+            name = f"Staff_{staff_number}"
+        simultaneous = 1 < voice_count
+        staff = abjad.Staff(name=name, simultaneous=simultaneous, tag=tag)
+        voices = []
+        for voice_index in range(voice_count):
+            if single_voice:
+                name = "Voice"
+            else:
+                name = f"Voice_{voice_number}"
+            voice = abjad.Voice(name=name, tag=tag)
+            voices.append(voice)
+            voice_number += 1
+        staff.extend(voices)
+        staves.append(staff)
+
+    if len(staves) == 1:
+        music = staves
+        simultaneous = False
+    else:
+        music = [abjad.StaffGroup(staves, name="Staff_Group")]
+        simultaneous = True
+
+    music_context = abjad.Context(
+        music,
+        lilypond_type="MusicContext",
+        simultaneous=simultaneous,
+        name="Music_Context",
+        tag=tag,
+    )
+
+    score = abjad.Score([global_context, music_context], name="Score", tag=tag)
+    return score
