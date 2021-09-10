@@ -4504,7 +4504,7 @@ class SegmentMaker:
             Colors octaves:
 
             >>> def closure():
-            ...     return baca.make_configurable_empty_score(1, 1)
+            ...     return baca.make_empty_score(1, 1)
 
             >>> maker = baca.SegmentMaker(
             ...     color_octaves=True,

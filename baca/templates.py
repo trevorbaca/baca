@@ -458,13 +458,13 @@ class SingleStaffScoreTemplate(ScoreTemplate):
         return score
 
 
-def make_configurable_empty_score(*counts):
+def make_empty_score(*counts):
     r"""
     Makes empty score for doc examples.
 
     ..  container:: example
 
-        >>> score = baca.make_configurable_empty_score(1)
+        >>> score = baca.make_empty_score(1)
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
@@ -491,7 +491,7 @@ def make_configurable_empty_score(*counts):
 
     ..  container:: example
 
-        >>> score = baca.make_configurable_empty_score(4)
+        >>> score = baca.make_empty_score(4)
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
@@ -527,7 +527,7 @@ def make_configurable_empty_score(*counts):
 
     ..  container:: example
 
-        >>> score = baca.make_configurable_empty_score(1, 1, 1, 1)
+        >>> score = baca.make_empty_score(1, 1, 1, 1)
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
@@ -575,7 +575,7 @@ def make_configurable_empty_score(*counts):
 
     ..  container:: example
 
-        >>> score = baca.make_configurable_empty_score(1, 2, 1)
+        >>> score = baca.make_empty_score(1, 2, 1)
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"

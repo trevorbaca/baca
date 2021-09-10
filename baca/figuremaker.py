@@ -2119,7 +2119,7 @@ class Imbrication:
             Allows unused pitches:
 
             >>> def closure():
-            ...     return baca.make_configurable_empty_score(2)
+            ...     return baca.make_empty_score(2)
 
             >>> score = closure()
             >>> accumulator = baca.Accumulator(score)
@@ -2418,7 +2418,7 @@ class Imbrication:
             Raises exception on unused pitches:
 
             >>> def closure():
-            ...     return baca.make_configurable_empty_score(2)
+            ...     return baca.make_empty_score(2)
 
             >>> score = closure()
             >>> accumulator = baca.Accumulator(score)
@@ -2474,7 +2474,7 @@ class Imbrication:
             Hockets voices:
 
             >>> def closure():
-            ...     return baca.make_configurable_empty_score(2)
+            ...     return baca.make_empty_score(2)
 
             >>> score = closure()
             >>> accumulator = baca.Accumulator(score)
@@ -2825,7 +2825,7 @@ class Imbrication:
             Selects last nine notes:
 
             >>> def closure():
-            ...     return baca.make_configurable_empty_score(2)
+            ...     return baca.make_empty_score(2)
 
             >>> score = closure()
             >>> accumulator = baca.Accumulator(score)
@@ -3210,7 +3210,7 @@ class Imbrication:
             Truncates ties:
 
             >>> def closure():
-            ...     return baca.make_configurable_empty_score(2)
+            ...     return baca.make_empty_score(2)
 
             >>> score = closure()
             >>> accumulator = baca.Accumulator(score)
@@ -3544,7 +3544,7 @@ class Accumulator:
         Raises exception on duplicate figure name.
 
         >>> def closure():
-        ...     return baca.make_configurable_empty_score(2)
+        ...     return baca.make_empty_score(2)
 
         >>> score = closure()
         >>> accumulator = baca.Accumulator(score)
@@ -7780,7 +7780,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         Coats pitches:
 
         >>> def closure():
-        ...     return baca.make_configurable_empty_score(2)
+        ...     return baca.make_empty_score(2)
 
         >>> score = closure()
         >>> accumulator = baca.Accumulator(score)
@@ -8063,7 +8063,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         Skips wrapped pitches:
 
         >>> def closure():
-        ...     return baca.make_configurable_empty_score(2)
+        ...     return baca.make_empty_score(2)
 
         >>> score = closure()
         >>> accumulator = baca.Accumulator(score)
@@ -8403,7 +8403,7 @@ def extend_beam(
         Extends beam:
 
         >>> def closure():
-        ...     return baca.make_configurable_empty_score(2)
+        ...     return baca.make_empty_score(2)
 
         >>> score = closure()
         >>> accumulator = baca.Accumulator(score)
@@ -8761,7 +8761,7 @@ def imbricate(
     ..  container:: example
 
         >>> def closure():
-        ...     return baca.make_configurable_empty_score(2)
+        ...     return baca.make_empty_score(2)
 
         >>> score = closure()
         >>> accumulator = baca.Accumulator(score)
@@ -9090,7 +9090,7 @@ def imbricate(
         Multiple imbricated voices:
 
         >>> def closure():
-        ...     return baca.make_configurable_empty_score(3)
+        ...     return baca.make_empty_score(3)
 
         >>> score = closure()
         >>> accumulator = baca.Accumulator(score)
@@ -9523,7 +9523,7 @@ def imbricate(
         Hides tuplet brackets above imbricated voice:
 
         >>> def closure():
-        ...     return baca.make_configurable_empty_score(2)
+        ...     return baca.make_empty_score(2)
 
         >>> score = closure()
         >>> accumulator = baca.Accumulator(score)
@@ -9878,7 +9878,7 @@ def imbricate(
         Works with pitch-classes:
 
         >>> def closure():
-        ...     return baca.make_configurable_empty_score(2)
+        ...     return baca.make_empty_score(2)
 
         >>> score = closure()
         >>> accumulator = baca.Accumulator(score)
@@ -10158,7 +10158,7 @@ def imbricate(
         Works with chords:
 
         >>> def closure():
-        ...     return baca.make_configurable_empty_score(2)
+        ...     return baca.make_empty_score(2)
 
         >>> score = closure()
         >>> accumulator = baca.Accumulator(score)
@@ -10464,7 +10464,7 @@ def imbricate(
         Works with rests:
 
         >>> def closure():
-        ...     return baca.make_configurable_empty_score(2)
+        ...     return baca.make_empty_score(2)
 
         >>> score = closure()
         >>> accumulator = baca.Accumulator(score)

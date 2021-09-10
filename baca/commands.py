@@ -46,7 +46,7 @@ def assign_parts(
     ..  container:: example
 
         >>> def closure():
-        ...     return baca.make_configurable_empty_score(1)
+        ...     return baca.make_empty_score(1)
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily", "baca-global-context.ily"],
@@ -829,7 +829,7 @@ def cross_staff(
         Attaches cross-staff command to last two pitched leaves:
 
         >>> def closure():
-        ...     return baca.make_configurable_empty_score(1, 1)
+        ...     return baca.make_empty_score(1, 1)
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily", "baca-global-context.ily"],
