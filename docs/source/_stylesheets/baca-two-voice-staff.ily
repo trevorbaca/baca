@@ -137,9 +137,6 @@
     % MUSIC STAFF
     \context {
         \Staff
-        \name MusicStaff
-        \type Engraver_group
-        \alias Staff
         \accepts MusicVoiceOne
         \accepts MusicVoiceTwo
         \accepts MusicVoiceThree
@@ -150,7 +147,7 @@
         \name MusicContext
         \type Engraver_group
         \consists System_start_delimiter_engraver
-        \accepts MusicStaff
+        \accepts Staff
     }
 
     % SCORE

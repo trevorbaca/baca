@@ -855,9 +855,8 @@ def make_empty_score(count=2):
         voices.append(music_voice_3)
     music_staff = abjad.Staff(
         voices,
-        lilypond_type="MusicStaff",
         simultaneous=True,
-        name="Music_Staff",
+        name="Staff",
         tag=tag,
     )
 
@@ -872,5 +871,4 @@ def make_empty_score(count=2):
 
     # SCORE
     score = abjad.Score([global_context, music_context], name="Score", tag=tag)
-    abjad.attach(_const.TWO_VOICE, score, tag=None)
     return score

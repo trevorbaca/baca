@@ -2142,6 +2142,7 @@ class Imbrication:
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_repeat_pitch_classes=True,
+            ...     includes=["baca.ily", "baca-two-voice-staff.ily"],
             ...     score_template=baca.make_empty_score,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ...     time_signatures=accumulator.time_signatures,
@@ -2186,7 +2187,7 @@ class Imbrication:
                     \context MusicContext = "Music_Context"
                     <<
                 <BLANKLINE>
-                        \context MusicStaff = "Music_Staff"
+                        \context Staff = "Staff"
                         <<
                 <BLANKLINE>
                             \context MusicVoiceOne = "Music_Voice_1"
@@ -2196,7 +2197,8 @@ class Imbrication:
                                     \override TupletBracket.stencil = ##f
                                     \override TupletNumber.stencil = ##f
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1)
+                                    {
                 <BLANKLINE>
                                         % [Music_Voice_1 measure 1]
                                         s16
@@ -2221,7 +2223,8 @@ class Imbrication:
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1)
+                                    {
                 <BLANKLINE>
                                         s16
                 <BLANKLINE>
@@ -2284,7 +2287,8 @@ class Imbrication:
                 <BLANKLINE>
                                 {
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1)
+                                    {
                 <BLANKLINE>
                                         % [Music_Voice_2 measure 1]
                                         \set stemLeftBeamCount = 0
@@ -2321,7 +2325,8 @@ class Imbrication:
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1)
+                                    {
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
@@ -2473,6 +2478,7 @@ class Imbrication:
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_repeat_pitch_classes=True,
+            ...     includes=["baca.ily", "baca-two-voice-staff.ily"],
             ...     score_template=baca.make_empty_score,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ...     time_signatures=accumulator.time_signatures,
@@ -2517,7 +2523,7 @@ class Imbrication:
                     \context MusicContext = "Music_Context"
                     <<
                 <BLANKLINE>
-                        \context MusicStaff = "Music_Staff"
+                        \context Staff = "Staff"
                         <<
                 <BLANKLINE>
                             \context MusicVoiceOne = "Music_Voice_1"
@@ -2527,7 +2533,8 @@ class Imbrication:
                                     \override TupletBracket.stencil = ##f
                                     \override TupletNumber.stencil = ##f
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1)
+                                    {
                 <BLANKLINE>
                                         % [Music_Voice_1 measure 1]
                                         s16
@@ -2552,7 +2559,8 @@ class Imbrication:
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1)
+                                    {
                 <BLANKLINE>
                                         s16
                 <BLANKLINE>
@@ -2572,7 +2580,8 @@ class Imbrication:
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1)
+                                    {
                 <BLANKLINE>
                                         s16
                 <BLANKLINE>
@@ -2635,7 +2644,8 @@ class Imbrication:
                 <BLANKLINE>
                                 {
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1)
+                                    {
                 <BLANKLINE>
                                         % [Music_Voice_2 measure 1]
                                         \set stemLeftBeamCount = 0
@@ -2669,7 +2679,8 @@ class Imbrication:
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1)
+                                    {
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
@@ -2692,7 +2703,8 @@ class Imbrication:
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1)
+                                    {
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
@@ -2799,6 +2811,7 @@ class Imbrication:
             ... )
 
             >>> maker = baca.SegmentMaker(
+            ...     includes=["baca.ily", "baca-two-voice-staff.ily"],
             ...     score_template=baca.make_empty_score,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ...     time_signatures=accumulator.time_signatures,
@@ -2843,7 +2856,7 @@ class Imbrication:
                     \context MusicContext = "Music_Context"
                     <<
                 <BLANKLINE>
-                        \context MusicStaff = "Music_Staff"
+                        \context Staff = "Staff"
                         <<
                 <BLANKLINE>
                             \context MusicVoiceOne = "Music_Voice_1"
@@ -2853,7 +2866,8 @@ class Imbrication:
                                     \override TupletBracket.stencil = ##f
                                     \override TupletNumber.stencil = ##f
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1)
+                                    {
                 <BLANKLINE>
                                         % [Music_Voice_1 measure 1]
                                         s16
@@ -2875,7 +2889,8 @@ class Imbrication:
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1)
+                                    {
                 <BLANKLINE>
                                         s16
                 <BLANKLINE>
@@ -2887,7 +2902,8 @@ class Imbrication:
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1)
+                                    {
                 <BLANKLINE>
                                         s16
                 <BLANKLINE>
@@ -2910,7 +2926,8 @@ class Imbrication:
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1)
+                                    {
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
@@ -2968,7 +2985,8 @@ class Imbrication:
                 <BLANKLINE>
                                 {
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1)
+                                    {
                 <BLANKLINE>
                                         % [Music_Voice_2 measure 1]
                                         \set stemLeftBeamCount = 0
@@ -3005,7 +3023,8 @@ class Imbrication:
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1)
+                                    {
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
@@ -3029,7 +3048,8 @@ class Imbrication:
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1)
+                                    {
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
@@ -3058,7 +3078,8 @@ class Imbrication:
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1)
+                                    {
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
@@ -3154,6 +3175,7 @@ class Imbrication:
             ... )
 
             >>> maker = baca.SegmentMaker(
+            ...     includes=["baca.ily", "baca-two-voice-staff.ily"],
             ...     score_template=baca.make_empty_score,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ...     time_signatures=accumulator.time_signatures,
@@ -3198,7 +3220,7 @@ class Imbrication:
                     \context MusicContext = "Music_Context"
                     <<
                 <BLANKLINE>
-                        \context MusicStaff = "Music_Staff"
+                        \context Staff = "Staff"
                         <<
                 <BLANKLINE>
                             \context MusicVoiceOne = "Music_Voice_1"
@@ -3208,7 +3230,8 @@ class Imbrication:
                                     \override TupletBracket.stencil = ##f
                                     \override TupletNumber.stencil = ##f
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1)
+                                    {
                 <BLANKLINE>
                                         % [Music_Voice_1 measure 1]
                                         s8
@@ -3236,7 +3259,8 @@ class Imbrication:
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1)
+                                    {
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 1
@@ -3264,7 +3288,8 @@ class Imbrication:
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1)
+                                    {
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 1
@@ -3317,7 +3342,8 @@ class Imbrication:
                 <BLANKLINE>
                                 {
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1)
+                                    {
                 <BLANKLINE>
                                         % [Music_Voice_2 measure 1]
                                         c'8
@@ -3345,7 +3371,8 @@ class Imbrication:
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1)
+                                    {
                 <BLANKLINE>
                                         fs''!8
                                         ~
@@ -3376,7 +3403,8 @@ class Imbrication:
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1)
+                                    {
                 <BLANKLINE>
                                         a'8
                                         ~
@@ -7701,6 +7729,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ... )
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-two-voice-staff.ily"],
         ...     score_template=baca.make_empty_score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
@@ -7745,7 +7774,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                 \context MusicContext = "Music_Context"
                 <<
             <BLANKLINE>
-                    \context MusicStaff = "Music_Staff"
+                    \context Staff = "Staff"
                     <<
             <BLANKLINE>
                         \context MusicVoiceOne = "Music_Voice_1"
@@ -7755,7 +7784,8 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
             <BLANKLINE>
-                                \times 4/5 {
+                                \times 4/5
+                                {
             <BLANKLINE>
                                     % [Music_Voice_1 measure 1]
                                     s8
@@ -7777,7 +7807,8 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \times 2/3 {
+                                \times 2/3
+                                {
             <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
@@ -7793,7 +7824,8 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                 }
             <BLANKLINE>
                                 \tweak text #tuplet-number::calc-fraction-text
-                                \times 6/7 {
+                                \times 6/7
+                                {
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -7847,7 +7879,8 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             <BLANKLINE>
                             {
             <BLANKLINE>
-                                \times 4/5 {
+                                \times 4/5
+                                {
             <BLANKLINE>
                                     % [Music_Voice_2 measure 1]
                                     r8
@@ -7868,7 +7901,8 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \times 2/3 {
+                                \times 2/3
+                                {
             <BLANKLINE>
                                     c'16
                                     [
@@ -7881,7 +7915,8 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                 }
             <BLANKLINE>
                                 \tweak text #tuplet-number::calc-fraction-text
-                                \times 6/7 {
+                                \times 6/7
+                                {
             <BLANKLINE>
                                     c'16
                                     [
@@ -7967,6 +8002,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ... )
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-two-voice-staff.ily"],
         ...     score_template=baca.make_empty_score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
@@ -8011,7 +8047,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                 \context MusicContext = "Music_Context"
                 <<
             <BLANKLINE>
-                    \context MusicStaff = "Music_Staff"
+                    \context Staff = "Staff"
                     <<
             <BLANKLINE>
                         \context MusicVoiceOne = "Music_Voice_1"
@@ -8021,7 +8057,8 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     % [Music_Voice_1 measure 1]
                                     \set stemLeftBeamCount = 0
@@ -8046,7 +8083,8 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -8058,7 +8096,8 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -8078,7 +8117,8 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -8133,7 +8173,8 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             <BLANKLINE>
                             {
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     % [Music_Voice_2 measure 1]
                                     c'16
@@ -8156,7 +8197,8 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     ef''!16
                                     [
@@ -8170,7 +8212,8 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     c'16
                                     [
@@ -8186,7 +8229,8 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     ef''!16
                                     [
@@ -8287,6 +8331,7 @@ def extend_beam(
 
         >>> maker = baca.SegmentMaker(
         ...     ignore_repeat_pitch_classes=True,
+        ...     includes=["baca.ily", "baca-two-voice-staff.ily"],
         ...     score_template=baca.make_empty_score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
@@ -8336,7 +8381,7 @@ def extend_beam(
                 \context MusicContext = "Music_Context"
                 <<
             <BLANKLINE>
-                    \context MusicStaff = "Music_Staff"
+                    \context Staff = "Staff"
                     <<
             <BLANKLINE>
                         \context MusicVoiceOne = "Music_Voice_1"
@@ -8346,7 +8391,8 @@ def extend_beam(
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     % [Music_Voice_1 measure 1]
                                     s16
@@ -8372,7 +8418,8 @@ def extend_beam(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -8392,7 +8439,8 @@ def extend_beam(
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     % [Music_Voice_1 measure 2]
                                     \set stemLeftBeamCount = 1
@@ -8456,7 +8504,8 @@ def extend_beam(
             <BLANKLINE>
                             {
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     % [Music_Voice_2 measure 1]
                                     \set stemLeftBeamCount = 0
@@ -8484,7 +8533,8 @@ def extend_beam(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
@@ -8505,7 +8555,8 @@ def extend_beam(
             <BLANKLINE>
                             {
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     % [Music_Voice_2 measure 2]
                                     \set stemLeftBeamCount = 0
@@ -8611,6 +8662,7 @@ def imbricate(
         ... )
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-two-voice-staff.ily"],
         ...     score_template=baca.make_empty_score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
@@ -8655,7 +8707,7 @@ def imbricate(
                 \context MusicContext = "Music_Context"
                 <<
             <BLANKLINE>
-                    \context MusicStaff = "Music_Staff"
+                    \context Staff = "Staff"
                     <<
             <BLANKLINE>
                         \context MusicVoiceOne = "Music_Voice_1"
@@ -8665,7 +8717,8 @@ def imbricate(
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     % [Music_Voice_1 measure 1]
                                     s16
@@ -8688,7 +8741,8 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -8708,7 +8762,8 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -8770,7 +8825,8 @@ def imbricate(
             <BLANKLINE>
                             {
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     % [Music_Voice_2 measure 1]
                                     \set stemLeftBeamCount = 0
@@ -8802,7 +8858,8 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
@@ -8826,7 +8883,8 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
@@ -8973,7 +9031,7 @@ def imbricate(
                 \context MusicContext = "Music_Context"
                 <<
             <BLANKLINE>
-                    \context MusicStaff = "Music_Staff"
+                    \context Staff = "Staff"
                     <<
             <BLANKLINE>
                         \context MusicVoiceOne = "Music_Voice_1"
@@ -8983,7 +9041,8 @@ def imbricate(
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     % [Music_Voice_1 measure 1]
                                     \override Beam.positions = #'(6 . 6)
@@ -9009,7 +9068,8 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -9029,7 +9089,8 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -9087,7 +9148,8 @@ def imbricate(
             <BLANKLINE>
                             {
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     % [Music_Voice_2 measure 1]
                                     \set stemLeftBeamCount = 0
@@ -9119,7 +9181,8 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
@@ -9143,7 +9206,8 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
@@ -9210,7 +9274,8 @@ def imbricate(
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     % [Music_Voice_3 measure 1]
                                     \override Beam.positions = #'(8 . 8)
@@ -9236,7 +9301,8 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -9250,7 +9316,8 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -9342,6 +9409,7 @@ def imbricate(
         ... )
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-two-voice-staff.ily"],
         ...     score_template=baca.make_empty_score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
@@ -9386,7 +9454,7 @@ def imbricate(
                 \context MusicContext = "Music_Context"
                 <<
             <BLANKLINE>
-                    \context MusicStaff = "Music_Staff"
+                    \context Staff = "Staff"
                     <<
             <BLANKLINE>
                         \context MusicVoiceOne = "Music_Voice_1"
@@ -9397,7 +9465,8 @@ def imbricate(
                                 \override TupletNumber.stencil = ##f
             <BLANKLINE>
                                 \tweak text #tuplet-number::calc-fraction-text
-                                \times 6/5 {
+                                \times 6/5
+                                {
             <BLANKLINE>
                                     % [Music_Voice_1 measure 1]
                                     s16
@@ -9423,7 +9492,8 @@ def imbricate(
                                 }
             <BLANKLINE>
                                 \tweak text #tuplet-number::calc-fraction-text
-                                \times 6/5 {
+                                \times 6/5
+                                {
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -9444,7 +9514,8 @@ def imbricate(
                                 }
             <BLANKLINE>
                                 \tweak text #tuplet-number::calc-fraction-text
-                                \times 6/5 {
+                                \times 6/5
+                                {
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -9508,7 +9579,8 @@ def imbricate(
                             {
             <BLANKLINE>
                                 \tweak text #tuplet-number::calc-fraction-text
-                                \times 6/5 {
+                                \times 6/5
+                                {
             <BLANKLINE>
                                     % [Music_Voice_2 measure 1]
                                     \set stemLeftBeamCount = 0
@@ -9546,7 +9618,8 @@ def imbricate(
                                 }
             <BLANKLINE>
                                 \tweak text #tuplet-number::calc-fraction-text
-                                \times 6/5 {
+                                \times 6/5
+                                {
             <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
@@ -9576,7 +9649,8 @@ def imbricate(
                                 }
             <BLANKLINE>
                                 \tweak text #tuplet-number::calc-fraction-text
-                                \times 6/5 {
+                                \times 6/5
+                                {
             <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
@@ -9675,6 +9749,7 @@ def imbricate(
         ... )
 
         >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily", "baca-two-voice-staff.ily"],
         ...     score_template=baca.make_empty_score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=accumulator.time_signatures,
@@ -9719,7 +9794,7 @@ def imbricate(
                 \context MusicContext = "Music_Context"
                 <<
             <BLANKLINE>
-                    \context MusicStaff = "Music_Staff"
+                    \context Staff = "Staff"
                     <<
             <BLANKLINE>
                         \context MusicVoiceOne = "Music_Voice_1"
@@ -9729,7 +9804,8 @@ def imbricate(
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     % [Music_Voice_1 measure 1]
                                     s8.
@@ -9750,7 +9826,8 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
@@ -9773,7 +9850,8 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     s8.
                                     ]
@@ -9822,7 +9900,8 @@ def imbricate(
             <BLANKLINE>
                             {
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     % [Music_Voice_2 measure 1]
                                     c'8.
@@ -9841,7 +9920,8 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     fs''!8.
                                     [
@@ -9857,7 +9937,8 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     a'8.
                                     <> \bacaStopTextSpanRhythmAnnotation
@@ -9930,6 +10011,7 @@ def imbricate(
 
         >>> maker = baca.SegmentMaker(
         ...     ignore_repeat_pitch_classes=True,
+        ...     includes=["baca.ily", "baca-two-voice-staff.ily"],
         ...     score_template=baca.make_empty_score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
@@ -9974,7 +10056,7 @@ def imbricate(
                 \context MusicContext = "Music_Context"
                 <<
             <BLANKLINE>
-                    \context MusicStaff = "Music_Staff"
+                    \context Staff = "Staff"
                     <<
             <BLANKLINE>
                         \context MusicVoiceOne = "Music_Voice_1"
@@ -9984,7 +10066,8 @@ def imbricate(
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     % [Music_Voice_1 measure 1]
                                     \set stemLeftBeamCount = 2
@@ -9999,7 +10082,8 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -10019,7 +10103,8 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -10081,7 +10166,8 @@ def imbricate(
             <BLANKLINE>
                             {
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     % [Music_Voice_2 measure 1]
                                     \set stemLeftBeamCount = 2
@@ -10097,7 +10183,8 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
@@ -10121,7 +10208,8 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
@@ -10213,6 +10301,7 @@ def imbricate(
 
         >>> maker = baca.SegmentMaker(
         ...     ignore_repeat_pitch_classes=True,
+        ...     includes=["baca.ily", "baca-two-voice-staff.ily"],
         ...     score_template=baca.make_empty_score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
@@ -10257,7 +10346,7 @@ def imbricate(
                 \context MusicContext = "Music_Context"
                 <<
             <BLANKLINE>
-                    \context MusicStaff = "Music_Staff"
+                    \context Staff = "Staff"
                     <<
             <BLANKLINE>
                         \context MusicVoiceOne = "Music_Voice_1"
@@ -10267,7 +10356,8 @@ def imbricate(
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     % [Music_Voice_1 measure 1]
                                     s8
@@ -10292,7 +10382,8 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -10312,7 +10403,8 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -10376,7 +10468,8 @@ def imbricate(
             <BLANKLINE>
                             {
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     % [Music_Voice_2 measure 1]
                                     r8
@@ -10410,7 +10503,8 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
@@ -10434,7 +10528,8 @@ def imbricate(
             <BLANKLINE>
                                 }
             <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {
+                                \scaleDurations #'(1 . 1)
+                                {
             <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2

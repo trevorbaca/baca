@@ -2884,18 +2884,9 @@ class SegmentMaker:
                     return key
 
     def _get_lilypond_includes(self):
-        includes = []
         if self.environment == "docs":
-            if self.includes:
-                return self.includes
-            else:
-                includes.append("baca.ily")
-                if abjad.get.indicator(self.score, const.TWO_VOICE):
-                    includes.append("baca-two-voice-staff.ily")
-                else:
-                    includes.append("baca-string-trio.ily")
-                return includes
-        includes.append("../../stylesheet.ily")
+            return self.includes or ("baca.ily", "baca-string-trio.ily")
+        includes = ["../../stylesheet.ily"]
         if self.clock_time_extra_offset is not None:
             value = self.clock_time_extra_offset
             assert isinstance(value, tuple)
