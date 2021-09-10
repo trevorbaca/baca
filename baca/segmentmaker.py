@@ -4497,35 +4497,23 @@ class SegmentMaker:
 
             Colors octaves:
 
-            >>> def make_empty_score():
-            ...     global_context = abjad.ScoreTemplate._make_global_context()
-            ...     staves = [
-            ...         abjad.Staff([abjad.Voice(name="Voice_1")], name="Staff_1"),
-            ...         abjad.Staff([abjad.Voice(name="Voice_2")], name="Staff_2"),
-            ...     ]
-            ...     staff_group = abjad.StaffGroup(staves, name="Staff_Group")
-            ...     music_context = abjad.Context(
-            ...         [staff_group],
-            ...         lilypond_type="MusicContext",
-            ...         simultaneous=True,
-            ...         name="Music_Context",
-            ...     )
-            ...     return abjad.Score([global_context, music_context], name="Score")
+            >>> def closure():
+            ...     return baca.make_configurable_empty_score(1, 1)
 
             >>> maker = baca.SegmentMaker(
             ...     color_octaves=True,
             ...     includes=["baca.ily", "baca-global-context.ily"],
-            ...     score_template=make_empty_score,
+            ...     score_template=closure,
             ...     time_signatures=[(6, 4)],
             ... )
 
             >>> maker(
-            ...     ("Voice_1", 1),
+            ...     ("Example_Voice_1", 1),
             ...     baca.music(abjad.Container("d'4 e' f' g' a' b'")[:]),
             ... )
 
             >>> maker(
-            ...     ("Voice_2", 1),
+            ...     ("Example_Voice_2", 1),
             ...     baca.music(abjad.Container("a4 g f e d c")[:]),
             ...     baca.clef("bass"),
             ... )
@@ -4567,16 +4555,16 @@ class SegmentMaker:
                     \context MusicContext = "Music_Context"
                     <<
                 <BLANKLINE>
-                        \context StaffGroup = "Staff_Group"
+                        \context StaffGroup = "Example_Staff_Group"
                         <<
                 <BLANKLINE>
-                            \context Staff = "Staff_1"
+                            \context Staff = "Example_Staff_1"
                             {
                 <BLANKLINE>
-                                \context Voice = "Voice_1"
+                                \context Voice = "Example_Voice_1"
                                 {
                 <BLANKLINE>
-                                    % [Voice_1 measure 1]
+                                    % [Example_Voice_1 measure 1]
                                     d'4
                                     - \abjad-dashed-line-with-hook
                                     - \baca-text-spanner-left-text "baca.music()"
@@ -4601,10 +4589,10 @@ class SegmentMaker:
                 <BLANKLINE>
                                     <<
                 <BLANKLINE>
-                                        \context Voice = "Voice_1"
+                                        \context Voice = "Example_Voice_1"
                                         {
                 <BLANKLINE>
-                                            % [Voice_1 measure 2]
+                                            % [Example_Voice_1 measure 2]
                                             \abjad-invisible-music-coloring
                                             %@% \abjad-invisible-music
                                             \baca-not-yet-pitched-coloring
@@ -4613,10 +4601,10 @@ class SegmentMaker:
                 <BLANKLINE>
                                         }
                 <BLANKLINE>
-                                        \context Voice = "Rest_Voice_1"
+                                        \context Voice = "Example_Rest_Voice_1"
                                         {
                 <BLANKLINE>
-                                            % [Rest_Voice_1 measure 2]
+                                            % [Example_Rest_Voice_1 measure 2]
                                             \once \override Score.TimeSignature.X-extent = ##f
                                             \once \override MultiMeasureRest.transparent = ##t
                                             \stopStaff
@@ -4633,13 +4621,13 @@ class SegmentMaker:
                 <BLANKLINE>
                             }
                 <BLANKLINE>
-                            \context Staff = "Staff_2"
+                            \context Staff = "Example_Staff_2"
                             {
                 <BLANKLINE>
-                                \context Voice = "Voice_2"
+                                \context Voice = "Example_Voice_2"
                                 {
                 <BLANKLINE>
-                                    % [Voice_2 measure 1]
+                                    % [Example_Voice_2 measure 1]
                                     \clef "bass"
                                     \once \override Staff.Clef.color = #(x11-color 'blue)
                                     %@% \override Staff.Clef.color = ##f
@@ -4669,10 +4657,10 @@ class SegmentMaker:
                 <BLANKLINE>
                                     <<
                 <BLANKLINE>
-                                        \context Voice = "Voice_2"
+                                        \context Voice = "Example_Voice_2"
                                         {
                 <BLANKLINE>
-                                            % [Voice_2 measure 2]
+                                            % [Example_Voice_2 measure 2]
                                             \abjad-invisible-music-coloring
                                             %@% \abjad-invisible-music
                                             \baca-not-yet-pitched-coloring
@@ -4681,10 +4669,10 @@ class SegmentMaker:
                 <BLANKLINE>
                                         }
                 <BLANKLINE>
-                                        \context Voice = "Rest_Voice_2"
+                                        \context Voice = "Example_Rest_Voice_2"
                                         {
                 <BLANKLINE>
-                                            % [Rest_Voice_2 measure 2]
+                                            % [Example_Rest_Voice_2 measure 2]
                                             \once \override Score.TimeSignature.X-extent = ##f
                                             \once \override MultiMeasureRest.transparent = ##t
                                             \stopStaff

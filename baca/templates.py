@@ -457,53 +457,6 @@ class SingleStaffScoreTemplate(ScoreTemplate):
         return score
 
 
-def make_empty_score(count=2):
-    """
-    Makes empty score for doc examples.
-    """
-    assert count in (2, 3), repr(count)
-
-    site = "baca.make_empty_score()"
-    tag = abjad.Tag(site)
-    # GLOBAL CONTEXT
-    global_context = abjad.ScoreTemplate._make_global_context()
-
-    # MUSIC STAFF
-    voices = []
-    music_voice_1 = abjad.Voice(
-        lilypond_type="MusicVoiceOne", name="Music_Voice_1", tag=tag
-    )
-    voices.append(music_voice_1)
-    music_voice_2 = abjad.Voice(
-        lilypond_type="MusicVoiceTwo", name="Music_Voice_2", tag=tag
-    )
-    voices.append(music_voice_2)
-    if count == 3:
-        music_voice_3 = abjad.Voice(
-            lilypond_type="MusicVoiceThree", name="Music_Voice_3", tag=tag
-        )
-        voices.append(music_voice_3)
-    music_staff = abjad.Staff(
-        voices,
-        simultaneous=True,
-        name="Staff",
-        tag=tag,
-    )
-
-    # MUSIC CONTEXT
-    music_context = abjad.Context(
-        [music_staff],
-        lilypond_type="MusicContext",
-        simultaneous=True,
-        name="Music_Context",
-        tag=tag,
-    )
-
-    # SCORE
-    score = abjad.Score([global_context, music_context], name="Score", tag=tag)
-    return score
-
-
 def make_configurable_empty_score(*counts):
     r"""
     Makes empty score for doc examples.
