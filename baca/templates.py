@@ -310,7 +310,8 @@ class SingleStaffScoreTemplate(ScoreTemplate):
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )

@@ -49,7 +49,8 @@ def assign_parts(
         ...     return baca.make_empty_score(1)
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=closure,
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -183,7 +184,8 @@ def assign_parts(
         Raises exception when voice does not allow part assignment:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=closure,
         ...     test_container_identifiers=True,
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -228,7 +230,8 @@ def bcps(
         ..  container:: example
 
             >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily", "baca-global-context.ily"],
+            ...     includes=["baca.ily"],
+            ...     preamble=[baca.global_context_string()],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -677,7 +680,8 @@ def container(
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -832,7 +836,8 @@ def cross_staff(
         ...     return baca.make_empty_score(1, 1)
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=closure,
         ...     time_signatures=[(4, 4)],
         ... )
@@ -1244,7 +1249,8 @@ def finger_pressure_transition(
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -1532,7 +1538,8 @@ def glissando(
         With segment-maker:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1705,7 +1712,8 @@ def glissando(
         First and last PLTs:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1868,7 +1876,8 @@ def glissando(
         Works with tweaks:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -2056,7 +2065,8 @@ def glissando(
         Works with indexed tweaks:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -2296,7 +2306,8 @@ def invisible_music(
         Attaches ``\baca-invisible-music`` literal to middle leaves:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],

@@ -33,7 +33,8 @@ class RhythmCommand(scoping.Command):
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(3, 8), (4, 8), (3,8), (4, 8)],
@@ -459,7 +460,8 @@ class RhythmCommand(scoping.Command):
             Talea rhythm-maker remembers previous state across gaps:
 
             >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily", "baca-global-context.ily"],
+            ...     includes=["baca.ily"],
+            ...     preamble=[baca.global_context_string()],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ...     time_signatures=5 * [(4, 8)],
@@ -907,7 +909,8 @@ def make_monads(
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 4)],
@@ -1104,7 +1107,8 @@ def make_repeat_tied_notes(
         colored gold), even tied notes resulting from meter rewriting:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(10, 8)],

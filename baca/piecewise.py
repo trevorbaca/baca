@@ -899,7 +899,8 @@ def dynamic(
         Works with hairpins:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 13)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -1078,7 +1079,8 @@ def dynamic(
         Works with tweaks:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -1288,7 +1290,8 @@ def hairpin(
         Conventional dynamics:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -1463,7 +1466,8 @@ def hairpin(
         Effort dynamic al niente:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -1640,7 +1644,8 @@ def hairpin(
         Effort dynamic dal niente:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -1816,7 +1821,8 @@ def hairpin(
         Effort dynamic constante:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -1992,7 +1998,8 @@ def hairpin(
         Effort dynamics crescendo subito, decrescendo subito:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -2182,7 +2189,8 @@ def hairpin(
         Piece selector groups leaves by measures:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -2362,7 +2370,8 @@ def hairpin(
         With hairpins:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -2550,7 +2559,8 @@ def hairpin(
         Bookends each piece:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -2737,7 +2747,8 @@ def hairpin(
         With hairpins:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -2936,7 +2947,8 @@ def hairpin(
         REGRESSION. Works with lone dynamic:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -3107,7 +3119,8 @@ def hairpin(
         REGRESSION. Works with lone hairpin:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -3279,7 +3292,8 @@ def hairpin(
         REGRESSION. Works with to-barline tweak:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -3453,7 +3467,8 @@ def hairpin(
         Works with interposed niente dynamics:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -3635,7 +3650,8 @@ def hairpin(
         Works with parenthesized dynamics:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -4707,7 +4723,8 @@ def text_spanner(
         Dashed line with arrow:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -4881,7 +4898,8 @@ def text_spanner(
         Dashed line with hook:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -5055,7 +5073,8 @@ def text_spanner(
         Solid line with arrow:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -5229,7 +5248,8 @@ def text_spanner(
         Solid line with hook:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -5403,7 +5423,8 @@ def text_spanner(
         Invisible lines:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -5579,7 +5600,8 @@ def text_spanner(
         Piece selector groups leaves by measures:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -5771,7 +5793,8 @@ def text_spanner(
         With spanners:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -5963,7 +5986,8 @@ def text_spanner(
         Bookends each piece:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -6165,7 +6189,8 @@ def text_spanner(
         With spanners:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -6370,7 +6395,8 @@ def text_spanner(
         on pieces 0, 1, 2 but piece 3 carries only a stop text span:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -6541,7 +6567,8 @@ def text_spanner(
         REGRESSION. Handles backslashed markup correctly:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -6721,7 +6748,8 @@ def text_spanner(
         REGRESSION. Kerns bookended hooks:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -6915,7 +6943,8 @@ def text_spanner(
         REGRESSION. Backsteals left text from length-1 final piece:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8), (4, 8), (3, 8)],
@@ -7100,7 +7129,8 @@ def text_spanner(
         REGRESSION. Backsteals left text from spannerless final piece:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],

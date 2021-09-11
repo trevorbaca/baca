@@ -2145,7 +2145,8 @@ class Imbrication:
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_repeat_pitch_classes=True,
-            ...     includes=["baca.ily", "baca-global-context.ily"],
+            ...     includes=["baca.ily"],
+            ...     preamble=[baca.global_context_string()],
             ...     score_template=closure,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ...     time_signatures=accumulator.time_signatures,
@@ -2501,7 +2502,8 @@ class Imbrication:
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_repeat_pitch_classes=True,
-            ...     includes=["baca.ily", "baca-global-context.ily"],
+            ...     includes=["baca.ily"],
+            ...     preamble=[baca.global_context_string()],
             ...     score_template=closure,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ...     time_signatures=accumulator.time_signatures,
@@ -2850,7 +2852,8 @@ class Imbrication:
             ... )
 
             >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily", "baca-global-context.ily"],
+            ...     includes=["baca.ily"],
+            ...     preamble=[baca.global_context_string()],
             ...     score_template=closure,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ...     time_signatures=accumulator.time_signatures,
@@ -3230,7 +3233,8 @@ class Imbrication:
             ... )
 
             >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily", "baca-global-context.ily"],
+            ...     includes=["baca.ily"],
+            ...     preamble=[baca.global_context_string()],
             ...     score_template=closure,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ...     time_signatures=accumulator.time_signatures,
@@ -7803,7 +7807,8 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ... )
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=closure,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
@@ -8092,7 +8097,8 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ... )
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=closure,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
@@ -8437,7 +8443,8 @@ def extend_beam(
 
         >>> maker = baca.SegmentMaker(
         ...     ignore_repeat_pitch_classes=True,
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=closure,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
@@ -8784,7 +8791,8 @@ def imbricate(
         ... )
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=closure,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
@@ -9122,7 +9130,8 @@ def imbricate(
         ... )
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=closure,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
@@ -9548,7 +9557,8 @@ def imbricate(
         ... )
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=closure,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
@@ -9904,7 +9914,8 @@ def imbricate(
         ... )
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=closure,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=accumulator.time_signatures,
@@ -10182,7 +10193,8 @@ def imbricate(
 
         >>> maker = baca.SegmentMaker(
         ...     ignore_repeat_pitch_classes=True,
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=closure,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
@@ -10488,7 +10500,8 @@ def imbricate(
 
         >>> maker = baca.SegmentMaker(
         ...     ignore_repeat_pitch_classes=True,
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=closure,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,

@@ -849,7 +849,8 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         Applies leaf selector to commands:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -1049,7 +1050,8 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         Applies measure selector to commands:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -1303,7 +1305,8 @@ def only_parts(command: _command_typing) -> _command_typing:
         REGRESSION. Dynamic status color tweaks copy dynamic edition tags:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
