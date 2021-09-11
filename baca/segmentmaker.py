@@ -39,7 +39,7 @@ class SegmentMaker:
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
 
@@ -98,7 +98,7 @@ class SegmentMaker:
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -201,7 +201,7 @@ class SegmentMaker:
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -232,7 +232,7 @@ class SegmentMaker:
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=time_signatures,
         ... )
@@ -296,7 +296,7 @@ class SegmentMaker:
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -304,7 +304,8 @@ class SegmentMaker:
                         \context Voice = "Music_Voice"
                         {
             <BLANKLINE>
-                            \scaleDurations #'(1 . 1) {
+                            \scaleDurations #'(1 . 1)
+                            {
             <BLANKLINE>
                                 % [Music_Voice measure 1]
                                 e'16
@@ -317,7 +318,8 @@ class SegmentMaker:
             <BLANKLINE>
                             }
             <BLANKLINE>
-                            \scaleDurations #'(1 . 1) {
+                            \scaleDurations #'(1 . 1)
+                            {
             <BLANKLINE>
                                 % [Music_Voice measure 2]
                                 fs'!16
@@ -338,14 +340,16 @@ class SegmentMaker:
             <BLANKLINE>
                             }
             <BLANKLINE>
-                            \scaleDurations #'(1 . 1) {
+                            \scaleDurations #'(1 . 1)
+                            {
             <BLANKLINE>
                                 % [Music_Voice measure 3]
                                 b'16
             <BLANKLINE>
                             }
             <BLANKLINE>
-                            \scaleDurations #'(1 . 1) {
+                            \scaleDurations #'(1 . 1)
+                            {
             <BLANKLINE>
                                 % [Music_Voice measure 4]
                                 bf'!16
@@ -399,7 +403,7 @@ class SegmentMaker:
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
