@@ -6,20 +6,30 @@ import typing
 import abjad
 
 from . import const as _const
-from . import parts as _parts
 from . import tags as _tags
 
 
-class ScoreTemplate(abjad.ScoreTemplate):
+class ScoreTemplate:
     """
     Score template.
     """
 
     ### CLASS VARIABLES ###
 
+    __slots__ = ("_voice_abbreviations",)
+
+    _always_make_global_rests = False
+
+    _do_not_require_margin_markup = False
+
     _part_manifest = None
 
     voice_colors: dict = {}
+
+    ### INITIALIZER ###
+
+    def __init__(self):
+        self._voice_abbreviations = abjad.OrderedDict()
 
     ### PRIVATE METHODS ###
 
@@ -64,6 +74,29 @@ class ScoreTemplate(abjad.ScoreTemplate):
         abjad.attach(literal, context, tag=tag)
 
     @staticmethod
+    def _make_global_context():
+        site = "abjad.ScoreTemplate._make_global_context()"
+        tag = abjad.Tag(site)
+        global_rests = abjad.Context(
+            lilypond_type="GlobalRests",
+            name="Global_Rests",
+            tag=tag,
+        )
+        global_skips = abjad.Context(
+            lilypond_type="GlobalSkips",
+            name="Global_Skips",
+            tag=tag,
+        )
+        global_context = abjad.Context(
+            [global_rests, global_skips],
+            lilypond_type="GlobalContext",
+            simultaneous=True,
+            name="Global_Context",
+            tag=tag,
+        )
+        return global_context
+
+    @staticmethod
     def _set_square_delimiter(staff_group):
         abjad.setting(staff_group).system_start_delimiter = "#'SystemStartSquare"
 
@@ -78,15 +111,46 @@ class ScoreTemplate(abjad.ScoreTemplate):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def part_manifest(self) -> typing.Optional[_parts.PartManifest]:
+    def always_make_global_rests(self):
+        """
+        Is true when score template always makes global rests.
+        """
+        return self._always_make_global_rests
+
+    @property
+    def do_not_require_margin_markup(self):
+        """
+        Is true when score template does not require margin markup.
+
+        Conventionally, solos do not require margin markup.
+        """
+        return self._do_not_require_margin_markup
+
+    @property
+    def part_manifest(self):
         """
         Gets part manifest.
         """
         return self._part_manifest
 
+    @property
+    def voice_abbreviations(self):
+        """
+        Gets voice abbreviations.
+        """
+        return self._voice_abbreviations
+
     ### PUBLIC METHODS ###
 
-    def attach_defaults(self, argument) -> typing.List:
+    def allows_instrument(self, staff_name, instrument):
+        """
+        Is true when ``staff_name`` allows ``instrument``.
+
+        To be implemented by concrete score template classes.
+        """
+        return True
+
+    def attach_defaults(self, argument):
         """
         Attaches defaults to all staff and staff group contexts in ``argument`` when
         ``argument`` is a score.
@@ -594,7 +658,7 @@ def make_empty_score(*counts):
 
     site = "baca.make_configuration_empty_score()"
     tag = abjad.Tag(site)
-    global_context = abjad.ScoreTemplate._make_global_context()
+    global_context = ScoreTemplate._make_global_context()
     single_staff = len(counts) == 1
     single_voice = single_staff and counts[0] == 1
     staves, voice_number = [], 1
