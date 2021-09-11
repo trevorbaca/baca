@@ -452,9 +452,9 @@ def make_empty_score(*counts):
             >>
             \context MusicContext = "Music_Context"
             {
-                \context Staff = "Example_Staff"
+                \context Staff = "Music_Staff"
                 {
-                    \context Voice = "Example_Voice"
+                    \context Voice = "Music_Voice"
                     {
                     }
                 }
@@ -479,18 +479,18 @@ def make_empty_score(*counts):
             >>
             \context MusicContext = "Music_Context"
             {
-                \context Staff = "Example_Staff"
+                \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Example_Voice_1"
+                    \context Voice = "Music_Voice_1"
                     {
                     }
-                    \context Voice = "Example_Voice_2"
+                    \context Voice = "Music_Voice_2"
                     {
                     }
-                    \context Voice = "Example_Voice_3"
+                    \context Voice = "Music_Voice_3"
                     {
                     }
-                    \context Voice = "Example_Voice_4"
+                    \context Voice = "Music_Voice_4"
                     {
                     }
                 >>
@@ -515,29 +515,29 @@ def make_empty_score(*counts):
             >>
             \context MusicContext = "Music_Context"
             <<
-                \context StaffGroup = "Example_Staff_Group"
+                \context StaffGroup = "Music_Staff_Group"
                 <<
-                    \context Staff = "Example_Staff_1"
+                    \context Staff = "Music_Staff_1"
                     {
-                        \context Voice = "Example_Voice_1"
+                        \context Voice = "Music_Voice_1"
                         {
                         }
                     }
-                    \context Staff = "Example_Staff_2"
+                    \context Staff = "Music_Staff_2"
                     {
-                        \context Voice = "Example_Voice_2"
+                        \context Voice = "Music_Voice_2"
                         {
                         }
                     }
-                    \context Staff = "Example_Staff_3"
+                    \context Staff = "Music_Staff_3"
                     {
-                        \context Voice = "Example_Voice_3"
+                        \context Voice = "Music_Voice_3"
                         {
                         }
                     }
-                    \context Staff = "Example_Staff_4"
+                    \context Staff = "Music_Staff_4"
                     {
-                        \context Voice = "Example_Voice_4"
+                        \context Voice = "Music_Voice_4"
                         {
                         }
                     }
@@ -563,26 +563,26 @@ def make_empty_score(*counts):
             >>
             \context MusicContext = "Music_Context"
             <<
-                \context StaffGroup = "Example_Staff_Group"
+                \context StaffGroup = "Music_Staff_Group"
                 <<
-                    \context Staff = "Example_Staff_1"
+                    \context Staff = "Music_Staff_1"
                     {
-                        \context Voice = "Example_Voice_1"
+                        \context Voice = "Music_Voice_1"
                         {
                         }
                     }
-                    \context Staff = "Example_Staff_2"
+                    \context Staff = "Music_Staff_2"
                     <<
-                        \context Voice = "Example_Voice_2"
+                        \context Voice = "Music_Voice_2"
                         {
                         }
-                        \context Voice = "Example_Voice_3"
+                        \context Voice = "Music_Voice_3"
                         {
                         }
                     >>
-                    \context Staff = "Example_Staff_3"
+                    \context Staff = "Music_Staff_3"
                     {
-                        \context Voice = "Example_Voice_4"
+                        \context Voice = "Music_Voice_4"
                         {
                         }
                     }
@@ -600,18 +600,18 @@ def make_empty_score(*counts):
     staves, voice_number = [], 1
     for staff_index, voice_count in enumerate(counts):
         if single_staff:
-            name = "Example_Staff"
+            name = "Music_Staff"
         else:
             staff_number = staff_index + 1
-            name = f"Example_Staff_{staff_number}"
+            name = f"Music_Staff_{staff_number}"
         simultaneous = 1 < voice_count
         staff = abjad.Staff(name=name, simultaneous=simultaneous, tag=tag)
         voices = []
         for voice_index in range(voice_count):
             if single_voice:
-                name = "Example_Voice"
+                name = "Music_Voice"
             else:
-                name = f"Example_Voice_{voice_number}"
+                name = f"Music_Voice_{voice_number}"
             voice = abjad.Voice(name=name, tag=tag)
             voices.append(voice)
             voice_number += 1
@@ -622,7 +622,7 @@ def make_empty_score(*counts):
         music = staves
         simultaneous = False
     else:
-        music = [abjad.StaffGroup(staves, name="Example_Staff_Group")]
+        music = [abjad.StaffGroup(staves, name="Music_Staff_Group")]
         simultaneous = True
 
     music_context = abjad.Context(

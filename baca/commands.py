@@ -56,9 +56,9 @@ def assign_parts(
         ...     )
 
         >>> maker(
-        ...     "Example_Voice",
+        ...     "Music_Voice",
         ...     baca.make_notes(),
-        ...     baca.assign_parts(baca.parts.PartAssignment("Example_Voice")),
+        ...     baca.assign_parts(baca.parts.PartAssignment("Music_Voice")),
         ...     baca.pitch("E4"),
         ... )
 
@@ -112,15 +112,15 @@ def assign_parts(
             \context MusicContext = "Music_Context"
             {
         <BLANKLINE>
-                \context Staff = "Example_Staff"
+                \context Staff = "Music_Staff"
                 {
         <BLANKLINE>
-                    \context Voice = "Example_Voice"
+                    \context Voice = "Music_Voice"
                     {
         <BLANKLINE>
-                        {   %*% PartAssignment('Example_Voice')
+                        {   %*% PartAssignment('Music_Voice')
         <BLANKLINE>
-                            % [Example_Voice measure 1]
+                            % [Music_Voice measure 1]
                             e'2
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
@@ -129,24 +129,24 @@ def assign_parts(
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
         <BLANKLINE>
-                            % [Example_Voice measure 2]
+                            % [Music_Voice measure 2]
                             e'4.
         <BLANKLINE>
-                            % [Example_Voice measure 3]
+                            % [Music_Voice measure 3]
                             e'2
         <BLANKLINE>
-                            % [Example_Voice measure 4]
+                            % [Music_Voice measure 4]
                             e'4.
                             <> \bacaStopTextSpanRhythmAnnotation
         <BLANKLINE>
-                        }   %*% PartAssignment('Example_Voice')
+                        }   %*% PartAssignment('Music_Voice')
         <BLANKLINE>
                         <<
         <BLANKLINE>
-                            \context Voice = "Example_Voice"
+                            \context Voice = "Music_Voice"
                             {
         <BLANKLINE>
-                                % [Example_Voice measure 5]
+                                % [Music_Voice measure 5]
                                 \abjad-invisible-music-coloring
                                 %@% \abjad-invisible-music
                                 \baca-not-yet-pitched-coloring
@@ -155,10 +155,10 @@ def assign_parts(
         <BLANKLINE>
                             }
         <BLANKLINE>
-                            \context Voice = "Example_Rest_Voice"
+                            \context Voice = "Rest_Voice"
                             {
         <BLANKLINE>
-                                % [Example_Rest_Voice measure 5]
+                                % [Rest_Voice measure 5]
                                 \once \override Score.TimeSignature.X-extent = ##f
                                 \once \override MultiMeasureRest.transparent = ##t
                                 \stopStaff
@@ -194,7 +194,7 @@ def assign_parts(
         >>> part_assignment = baca.parts.PartAssignment('Flute')
 
         >>> maker(
-        ...     "Example_Voice",
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.assign_parts(baca.parts.PartAssignment("Flute_Voice")),
         ...     baca.pitches("E4 F4"),
@@ -203,8 +203,8 @@ def assign_parts(
         >>> lilypond_file = maker.run(environment="docs")
         Traceback (most recent call last):
             ...
-        Exception: Example_Voice does not allow Flute_Voice part assignment:
-            PartAssignment('Flute_Voice')
+        Exception: Music_Voice does not allow Flute_Voice part assignment:
+          PartAssignment('Flute_Voice')
 
     """
     if not isinstance(part_assignment, _parts.PartAssignment):
@@ -843,12 +843,12 @@ def cross_staff(
         ... )
 
         >>> maker(
-        ...     ("Example_Voice_1", 1),
+        ...     ("Music_Voice_1", 1),
         ...     baca.music(abjad.Container("e'4 f' g' a'")[:]),
         ... )
 
         >>> maker(
-        ...     ("Example_Voice_2", 1),
+        ...     ("Music_Voice_2", 1),
         ...     baca.music(abjad.Container("c'4 d' e' f'")[:]),
         ...     baca.cross_staff(
         ...         selector=baca.selectors.pleaves((-2, None)),
@@ -856,7 +856,6 @@ def cross_staff(
         ... )
 
         >>> lilypond_file = maker.run(environment="docs")
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -892,16 +891,16 @@ def cross_staff(
                 \context MusicContext = "Music_Context"
                 <<
             <BLANKLINE>
-                    \context StaffGroup = "Example_Staff_Group"
+                    \context StaffGroup = "Music_Staff_Group"
                     <<
             <BLANKLINE>
-                        \context Staff = "Example_Staff_1"
+                        \context Staff = "Music_Staff_1"
                         {
             <BLANKLINE>
-                            \context Voice = "Example_Voice_1"
+                            \context Voice = "Music_Voice_1"
                             {
             <BLANKLINE>
-                                % [Example_Voice_1 measure 1]
+                                % [Music_Voice_1 measure 1]
                                 e'4
                                 - \abjad-dashed-line-with-hook
                                 - \baca-text-spanner-left-text "baca.music()"
@@ -919,10 +918,10 @@ def cross_staff(
             <BLANKLINE>
                                 <<
             <BLANKLINE>
-                                    \context Voice = "Example_Voice_1"
+                                    \context Voice = "Music_Voice_1"
                                     {
             <BLANKLINE>
-                                        % [Example_Voice_1 measure 2]
+                                        % [Music_Voice_1 measure 2]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
@@ -931,10 +930,10 @@ def cross_staff(
             <BLANKLINE>
                                     }
             <BLANKLINE>
-                                    \context Voice = "Example_Rest_Voice_1"
+                                    \context Voice = "Rest_Voice_1"
                                     {
             <BLANKLINE>
-                                        % [Example_Rest_Voice_1 measure 2]
+                                        % [Rest_Voice_1 measure 2]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
                                         \stopStaff
@@ -951,13 +950,13 @@ def cross_staff(
             <BLANKLINE>
                         }
             <BLANKLINE>
-                        \context Staff = "Example_Staff_2"
+                        \context Staff = "Music_Staff_2"
                         {
             <BLANKLINE>
-                            \context Voice = "Example_Voice_2"
+                            \context Voice = "Music_Voice_2"
                             {
             <BLANKLINE>
-                                % [Example_Voice_2 measure 1]
+                                % [Music_Voice_2 measure 1]
                                 c'4
                                 - \abjad-dashed-line-with-hook
                                 - \baca-text-spanner-left-text "baca.music()"
@@ -977,10 +976,10 @@ def cross_staff(
             <BLANKLINE>
                                 <<
             <BLANKLINE>
-                                    \context Voice = "Example_Voice_2"
+                                    \context Voice = "Music_Voice_2"
                                     {
             <BLANKLINE>
-                                        % [Example_Voice_2 measure 2]
+                                        % [Music_Voice_2 measure 2]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
@@ -989,10 +988,10 @@ def cross_staff(
             <BLANKLINE>
                                     }
             <BLANKLINE>
-                                    \context Voice = "Example_Rest_Voice_2"
+                                    \context Voice = "Rest_Voice_2"
                                     {
             <BLANKLINE>
-                                        % [Example_Rest_Voice_2 measure 2]
+                                        % [Rest_Voice_2 measure 2]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
                                         \stopStaff
