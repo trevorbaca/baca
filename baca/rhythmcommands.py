@@ -35,7 +35,7 @@ class RhythmCommand(scoping.Command):
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(3, 8), (4, 8), (3,8), (4, 8)],
         ...     )
@@ -106,7 +106,7 @@ class RhythmCommand(scoping.Command):
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -202,7 +202,7 @@ class RhythmCommand(scoping.Command):
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -462,7 +462,7 @@ class RhythmCommand(scoping.Command):
             >>> maker = baca.SegmentMaker(
             ...     includes=["baca.ily"],
             ...     preamble=[baca.global_context_string()],
-            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     score_template=baca.make_empty_score_maker(1),
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ...     time_signatures=5 * [(4, 8)],
             ...     )
@@ -556,7 +556,7 @@ class RhythmCommand(scoping.Command):
                     >>
                 <BLANKLINE>
                     \context MusicContext = "Music_Context"
-                    <<
+                    {
                 <BLANKLINE>
                         \context Staff = "Music_Staff"
                         {
@@ -708,7 +708,7 @@ class RhythmCommand(scoping.Command):
                 <BLANKLINE>
                         }
                 <BLANKLINE>
-                    >>
+                    }
                 <BLANKLINE>
                 >>
 
@@ -911,7 +911,7 @@ def make_monads(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 4)],
         ...     )
@@ -958,7 +958,7 @@ def make_monads(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -967,7 +967,8 @@ def make_monads(
                         {
             <BLANKLINE>
                             \tweak edge-height #'(0.7 . 0)
-                            \times 4/5 {
+                            \times 4/5
+                            {
             <BLANKLINE>
                                 % [Music_Voice measure 1]
                                 \baca-not-yet-pitched-coloring
@@ -982,7 +983,8 @@ def make_monads(
                             }
             <BLANKLINE>
                             \tweak edge-height #'(0.7 . 0)
-                            \times 4/5 {
+                            \times 4/5
+                            {
             <BLANKLINE>
                                 \baca-not-yet-pitched-coloring
                                 b'2
@@ -990,7 +992,8 @@ def make_monads(
                             }
             <BLANKLINE>
                             \tweak edge-height #'(0.7 . 0)
-                            \times 4/5 {
+                            \times 4/5
+                            {
             <BLANKLINE>
                                 \baca-not-yet-pitched-coloring
                                 b'4
@@ -1032,7 +1035,7 @@ def make_monads(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -1109,7 +1112,7 @@ def make_repeat_tied_notes(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(10, 8)],
         ...     )
@@ -1156,7 +1159,7 @@ def make_repeat_tied_notes(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -1227,7 +1230,7 @@ def make_repeat_tied_notes(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 

@@ -851,7 +851,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -922,7 +922,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -1041,7 +1041,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -1052,7 +1052,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1123,7 +1123,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -1242,7 +1242,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -1307,7 +1307,7 @@ def only_parts(command: _command_typing) -> _command_typing:
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1375,7 +1375,7 @@ def only_parts(command: _command_typing) -> _command_typing:
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -1446,7 +1446,7 @@ def only_parts(command: _command_typing) -> _command_typing:
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 

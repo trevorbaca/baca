@@ -261,7 +261,7 @@ class BCPCommand(scoping.Command):
             >>> maker = baca.SegmentMaker(
             ...     includes=["baca.ily"],
             ...     preamble=[baca.global_context_string()],
-            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     score_template=baca.make_empty_score_maker(1),
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
@@ -337,7 +337,7 @@ class BCPCommand(scoping.Command):
                     >>
                 <BLANKLINE>
                     \context MusicContext = "Music_Context"
-                    <<
+                    {
                 <BLANKLINE>
                         \context Staff = "Music_Staff"
                         {
@@ -492,7 +492,7 @@ class BCPCommand(scoping.Command):
                 <BLANKLINE>
                         }
                 <BLANKLINE>
-                    >>
+                    }
                 <BLANKLINE>
                 >>
 
@@ -559,7 +559,7 @@ class BCPCommand(scoping.Command):
             >>> maker = baca.SegmentMaker(
             ...     includes=["baca.ily"],
             ...     preamble=[baca.global_context_string()],
-            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     score_template=baca.make_empty_score_maker(1),
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
@@ -633,7 +633,7 @@ class BCPCommand(scoping.Command):
                     >>
                 <BLANKLINE>
                     \context MusicContext = "Music_Context"
-                    <<
+                    {
                 <BLANKLINE>
                         \context Staff = "Music_Staff"
                         {
@@ -816,7 +816,7 @@ class BCPCommand(scoping.Command):
                 <BLANKLINE>
                         }
                 <BLANKLINE>
-                    >>
+                    }
                 <BLANKLINE>
                 >>
 
@@ -919,7 +919,7 @@ class ContainerCommand(scoping.Command):
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
@@ -978,7 +978,7 @@ class ContainerCommand(scoping.Command):
             >>
         <BLANKLINE>
             \context MusicContext = "Music_Context"
-            <<
+            {
         <BLANKLINE>
                 \context Staff = "Music_Staff"
                 {
@@ -1047,7 +1047,7 @@ class ContainerCommand(scoping.Command):
         <BLANKLINE>
                 }
         <BLANKLINE>
-            >>
+            }
         <BLANKLINE>
         >>
 

@@ -1289,7 +1289,7 @@ def hide_black_note_heads(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
@@ -1349,7 +1349,7 @@ def hide_black_note_heads(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -1416,7 +1416,7 @@ def hide_black_note_heads(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -1727,7 +1727,7 @@ def margin_markup(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
@@ -1788,7 +1788,7 @@ def margin_markup(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -1856,7 +1856,7 @@ def margin_markup(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -2410,7 +2410,7 @@ def staff_lines(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
         ...     )
@@ -2476,7 +2476,7 @@ def staff_lines(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -2550,7 +2550,7 @@ def staff_lines(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -2560,7 +2560,7 @@ def staff_lines(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
         ...     )
@@ -2626,7 +2626,7 @@ def staff_lines(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -2700,7 +2700,7 @@ def staff_lines(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -2711,7 +2711,7 @@ def staff_lines(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
         ...     )
@@ -2777,7 +2777,7 @@ def staff_lines(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -2851,7 +2851,7 @@ def staff_lines(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -2860,7 +2860,7 @@ def staff_lines(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
         ...     )
@@ -2926,7 +2926,7 @@ def staff_lines(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -3000,7 +3000,7 @@ def staff_lines(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -3009,7 +3009,7 @@ def staff_lines(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
         ...     )
@@ -3075,7 +3075,7 @@ def staff_lines(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -3149,7 +3149,7 @@ def staff_lines(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 

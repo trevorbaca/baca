@@ -901,7 +901,7 @@ def dynamic(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 13)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -974,7 +974,7 @@ def dynamic(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -1070,7 +1070,7 @@ def dynamic(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -1081,7 +1081,7 @@ def dynamic(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1149,7 +1149,7 @@ def dynamic(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -1243,7 +1243,7 @@ def dynamic(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -1292,7 +1292,7 @@ def hairpin(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1360,7 +1360,7 @@ def hairpin(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -1457,7 +1457,7 @@ def hairpin(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -1468,7 +1468,7 @@ def hairpin(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1536,7 +1536,7 @@ def hairpin(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -1635,7 +1635,7 @@ def hairpin(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -1646,7 +1646,7 @@ def hairpin(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1714,7 +1714,7 @@ def hairpin(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -1812,7 +1812,7 @@ def hairpin(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -1823,7 +1823,7 @@ def hairpin(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1891,7 +1891,7 @@ def hairpin(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -1989,7 +1989,7 @@ def hairpin(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -2000,7 +2000,7 @@ def hairpin(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -2075,7 +2075,7 @@ def hairpin(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -2180,7 +2180,7 @@ def hairpin(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -2191,7 +2191,7 @@ def hairpin(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -2262,7 +2262,7 @@ def hairpin(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -2363,7 +2363,7 @@ def hairpin(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -2372,7 +2372,7 @@ def hairpin(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -2443,7 +2443,7 @@ def hairpin(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -2552,7 +2552,7 @@ def hairpin(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -2561,7 +2561,7 @@ def hairpin(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -2633,7 +2633,7 @@ def hairpin(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -2740,7 +2740,7 @@ def hairpin(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -2749,7 +2749,7 @@ def hairpin(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -2821,7 +2821,7 @@ def hairpin(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -2938,7 +2938,7 @@ def hairpin(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -2949,7 +2949,7 @@ def hairpin(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -3017,7 +3017,7 @@ def hairpin(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -3110,7 +3110,7 @@ def hairpin(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -3121,7 +3121,7 @@ def hairpin(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -3189,7 +3189,7 @@ def hairpin(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -3283,7 +3283,7 @@ def hairpin(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -3294,7 +3294,7 @@ def hairpin(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -3371,7 +3371,7 @@ def hairpin(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -3458,7 +3458,7 @@ def hairpin(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -3469,7 +3469,7 @@ def hairpin(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -3541,7 +3541,7 @@ def hairpin(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -3641,7 +3641,7 @@ def hairpin(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -3652,7 +3652,7 @@ def hairpin(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -3720,7 +3720,7 @@ def hairpin(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -3817,7 +3817,7 @@ def hairpin(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -4725,7 +4725,7 @@ def text_spanner(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -4793,7 +4793,7 @@ def text_spanner(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -4891,7 +4891,7 @@ def text_spanner(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -4900,7 +4900,7 @@ def text_spanner(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -4968,7 +4968,7 @@ def text_spanner(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -5066,7 +5066,7 @@ def text_spanner(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -5075,7 +5075,7 @@ def text_spanner(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -5143,7 +5143,7 @@ def text_spanner(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -5241,7 +5241,7 @@ def text_spanner(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -5250,7 +5250,7 @@ def text_spanner(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -5318,7 +5318,7 @@ def text_spanner(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -5416,7 +5416,7 @@ def text_spanner(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -5425,7 +5425,7 @@ def text_spanner(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -5493,7 +5493,7 @@ def text_spanner(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -5591,7 +5591,7 @@ def text_spanner(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -5602,7 +5602,7 @@ def text_spanner(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -5674,7 +5674,7 @@ def text_spanner(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -5786,7 +5786,7 @@ def text_spanner(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -5795,7 +5795,7 @@ def text_spanner(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -5867,7 +5867,7 @@ def text_spanner(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -5979,7 +5979,7 @@ def text_spanner(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -5988,7 +5988,7 @@ def text_spanner(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -6061,7 +6061,7 @@ def text_spanner(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -6182,7 +6182,7 @@ def text_spanner(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -6191,7 +6191,7 @@ def text_spanner(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -6264,7 +6264,7 @@ def text_spanner(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -6385,7 +6385,7 @@ def text_spanner(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -6397,7 +6397,7 @@ def text_spanner(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -6473,7 +6473,7 @@ def text_spanner(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -6558,7 +6558,7 @@ def text_spanner(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -6569,7 +6569,7 @@ def text_spanner(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -6642,7 +6642,7 @@ def text_spanner(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -6739,7 +6739,7 @@ def text_spanner(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -6750,7 +6750,7 @@ def text_spanner(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -6822,7 +6822,7 @@ def text_spanner(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -6934,7 +6934,7 @@ def text_spanner(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -6945,7 +6945,7 @@ def text_spanner(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -7028,7 +7028,7 @@ def text_spanner(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -7120,7 +7120,7 @@ def text_spanner(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -7131,7 +7131,7 @@ def text_spanner(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -7203,7 +7203,7 @@ def text_spanner(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -7288,7 +7288,7 @@ def text_spanner(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 

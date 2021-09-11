@@ -29,7 +29,7 @@ class AccidentalAdjustmentCommand(scoping.Command):
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
@@ -90,7 +90,7 @@ class AccidentalAdjustmentCommand(scoping.Command):
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -151,7 +151,7 @@ class AccidentalAdjustmentCommand(scoping.Command):
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -563,7 +563,7 @@ class ClusterCommand(scoping.Command):
             >>> maker = baca.SegmentMaker(
             ...     includes=["baca.ily"],
             ...     preamble=[baca.global_context_string()],
-            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -623,7 +623,7 @@ class ClusterCommand(scoping.Command):
                     >>
                 <BLANKLINE>
                     \context MusicContext = "Music_Context"
-                    <<
+                    {
                 <BLANKLINE>
                         \context Staff = "Music_Staff"
                         {
@@ -728,7 +728,7 @@ class ClusterCommand(scoping.Command):
                 <BLANKLINE>
                         }
                 <BLANKLINE>
-                    >>
+                    }
                 <BLANKLINE>
                 >>
 
@@ -754,7 +754,7 @@ class ClusterCommand(scoping.Command):
             >>> maker = baca.SegmentMaker(
             ...     includes=["baca.ily"],
             ...     preamble=[baca.global_context_string()],
-            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -814,7 +814,7 @@ class ClusterCommand(scoping.Command):
                     >>
                 <BLANKLINE>
                     \context MusicContext = "Music_Context"
-                    <<
+                    {
                 <BLANKLINE>
                         \context Staff = "Music_Staff"
                         {
@@ -935,7 +935,7 @@ class ClusterCommand(scoping.Command):
                 <BLANKLINE>
                         }
                 <BLANKLINE>
-                    >>
+                    }
                 <BLANKLINE>
                 >>
 
@@ -946,7 +946,7 @@ class ClusterCommand(scoping.Command):
             >>> maker = baca.SegmentMaker(
             ...     includes=["baca.ily"],
             ...     preamble=[baca.global_context_string()],
-            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -1005,7 +1005,7 @@ class ClusterCommand(scoping.Command):
                     >>
                 <BLANKLINE>
                     \context MusicContext = "Music_Context"
-                    <<
+                    {
                 <BLANKLINE>
                         \context Staff = "Music_Staff"
                         {
@@ -1126,7 +1126,7 @@ class ClusterCommand(scoping.Command):
                 <BLANKLINE>
                         }
                 <BLANKLINE>
-                    >>
+                    }
                 <BLANKLINE>
                 >>
 
@@ -1145,7 +1145,7 @@ class ClusterCommand(scoping.Command):
             >>> maker = baca.SegmentMaker(
             ...     includes=["baca.ily"],
             ...     preamble=[baca.global_context_string()],
-            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -1204,7 +1204,7 @@ class ClusterCommand(scoping.Command):
                     >>
                 <BLANKLINE>
                     \context MusicContext = "Music_Context"
-                    <<
+                    {
                 <BLANKLINE>
                         \context Staff = "Music_Staff"
                         {
@@ -1325,7 +1325,7 @@ class ClusterCommand(scoping.Command):
                 <BLANKLINE>
                         }
                 <BLANKLINE>
-                    >>
+                    }
                 <BLANKLINE>
                 >>
 
@@ -1336,7 +1336,7 @@ class ClusterCommand(scoping.Command):
             >>> maker = baca.SegmentMaker(
             ...     includes=["baca.ily"],
             ...     preamble=[baca.global_context_string()],
-            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -1395,7 +1395,7 @@ class ClusterCommand(scoping.Command):
                     >>
                 <BLANKLINE>
                     \context MusicContext = "Music_Context"
-                    <<
+                    {
                 <BLANKLINE>
                         \context Staff = "Music_Staff"
                         {
@@ -1516,7 +1516,7 @@ class ClusterCommand(scoping.Command):
                 <BLANKLINE>
                         }
                 <BLANKLINE>
-                    >>
+                    }
                 <BLANKLINE>
                 >>
 
@@ -1527,7 +1527,7 @@ class ClusterCommand(scoping.Command):
             >>> maker = baca.SegmentMaker(
             ...     includes=["baca.ily"],
             ...     preamble=[baca.global_context_string()],
-            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -1588,7 +1588,7 @@ class ClusterCommand(scoping.Command):
                     >>
                 <BLANKLINE>
                     \context MusicContext = "Music_Context"
-                    <<
+                    {
                 <BLANKLINE>
                         \context Staff = "Music_Staff"
                         {
@@ -1649,7 +1649,7 @@ class ClusterCommand(scoping.Command):
                 <BLANKLINE>
                         }
                 <BLANKLINE>
-                    >>
+                    }
                 <BLANKLINE>
                 >>
 
@@ -1671,7 +1671,7 @@ class ColorFingeringCommand(scoping.Command):
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
@@ -1732,7 +1732,7 @@ class ColorFingeringCommand(scoping.Command):
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -1796,7 +1796,7 @@ class ColorFingeringCommand(scoping.Command):
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -2118,7 +2118,7 @@ class MicrotoneDeviationCommand(scoping.Command):
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
@@ -2179,7 +2179,7 @@ class MicrotoneDeviationCommand(scoping.Command):
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -2268,7 +2268,7 @@ class MicrotoneDeviationCommand(scoping.Command):
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -2362,7 +2362,7 @@ class OctaveDisplacementCommand(scoping.Command):
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
@@ -2425,7 +2425,7 @@ class OctaveDisplacementCommand(scoping.Command):
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -2514,7 +2514,7 @@ class OctaveDisplacementCommand(scoping.Command):
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -2616,7 +2616,7 @@ class PitchCommand(scoping.Command):
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
@@ -2676,7 +2676,7 @@ class PitchCommand(scoping.Command):
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -2765,7 +2765,7 @@ class PitchCommand(scoping.Command):
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -2776,7 +2776,7 @@ class PitchCommand(scoping.Command):
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
@@ -2836,7 +2836,7 @@ class PitchCommand(scoping.Command):
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -2925,7 +2925,7 @@ class PitchCommand(scoping.Command):
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -2936,7 +2936,7 @@ class PitchCommand(scoping.Command):
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
@@ -2996,7 +2996,7 @@ class PitchCommand(scoping.Command):
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -3085,7 +3085,7 @@ class PitchCommand(scoping.Command):
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -3583,7 +3583,7 @@ class RegisterCommand(scoping.Command):
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
@@ -3647,7 +3647,7 @@ class RegisterCommand(scoping.Command):
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -3736,7 +3736,7 @@ class RegisterCommand(scoping.Command):
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -4006,7 +4006,7 @@ class RegisterInterpolationCommand(scoping.Command):
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
         ...     )
 
@@ -4087,7 +4087,7 @@ class RegisterInterpolationCommand(scoping.Command):
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -4216,7 +4216,7 @@ class RegisterInterpolationCommand(scoping.Command):
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -4228,7 +4228,7 @@ class RegisterInterpolationCommand(scoping.Command):
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
         ...     )
 
@@ -4309,7 +4309,7 @@ class RegisterInterpolationCommand(scoping.Command):
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -4438,7 +4438,7 @@ class RegisterInterpolationCommand(scoping.Command):
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -4450,7 +4450,7 @@ class RegisterInterpolationCommand(scoping.Command):
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
         ...     )
 
@@ -4531,7 +4531,7 @@ class RegisterInterpolationCommand(scoping.Command):
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -4660,7 +4660,7 @@ class RegisterInterpolationCommand(scoping.Command):
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -4672,7 +4672,7 @@ class RegisterInterpolationCommand(scoping.Command):
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
         ...     )
 
@@ -4753,7 +4753,7 @@ class RegisterInterpolationCommand(scoping.Command):
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -4882,7 +4882,7 @@ class RegisterInterpolationCommand(scoping.Command):
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -4894,7 +4894,7 @@ class RegisterInterpolationCommand(scoping.Command):
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
         ...     )
 
@@ -4975,7 +4975,7 @@ class RegisterInterpolationCommand(scoping.Command):
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -5104,7 +5104,7 @@ class RegisterInterpolationCommand(scoping.Command):
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -7052,7 +7052,7 @@ def force_accidental(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
@@ -7115,7 +7115,7 @@ def force_accidental(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -7178,7 +7178,7 @@ def force_accidental(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
@@ -7432,7 +7432,7 @@ def pitch(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
-        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
 
@@ -7495,7 +7495,7 @@ def pitch(
                 >>
             <BLANKLINE>
                 \context MusicContext = "Music_Context"
-                <<
+                {
             <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
@@ -7553,7 +7553,7 @@ def pitch(
             <BLANKLINE>
                     }
             <BLANKLINE>
-                >>
+                }
             <BLANKLINE>
             >>
 
