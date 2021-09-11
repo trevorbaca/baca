@@ -37,7 +37,8 @@ class SegmentMaker:
 
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -229,7 +230,8 @@ class SegmentMaker:
         >>> figures = abjad.select(figures_)
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=time_signatures,
@@ -427,7 +429,8 @@ class SegmentMaker:
 
         >>> maker = baca.SegmentMaker(
         ...     do_not_check_out_of_range_pitches=True,
-        ...     includes=["baca.ily", "baca-global-context.ily"],
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=time_signatures,
@@ -654,6 +657,7 @@ class SegmentMaker:
         "_offset_to_measure_number",
         "_page_layout_profile",
         "_persist",
+        "_preamble",
         "_previous_metadata",
         "_previous_persist",
         "_remove",
@@ -737,6 +741,7 @@ class SegmentMaker:
         moment_markup=None,
         parts_metric_modulation_multiplier=None,
         phantom=False,
+        preamble=None,
         remove=None,
         remove_phantom_measure=False,
         score_template=None,
@@ -808,6 +813,10 @@ class SegmentMaker:
         if remove_phantom_measure is not None:
             remove_phantom_measure = bool(remove_phantom_measure)
         self._persist = abjad.OrderedDict()
+        preamble = preamble or ()
+        if preamble:
+            assert all(isinstance(_, str) for _ in preamble), repr(preamble)
+        self._preamble = tuple(preamble)
         self._previous_metadata = None
         self._previous_persist = None
         if remove is not None:
@@ -846,7 +855,8 @@ class SegmentMaker:
         ..  container:: example
 
             >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily", "baca-global-context.ily"],
+            ...     includes=["baca.ily"],
+            ...     preamble=[baca.global_context_string()],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -1033,7 +1043,8 @@ class SegmentMaker:
             Commands may be grouped into lists:
 
             >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily", "baca-global-context.ily"],
+            ...     includes=["baca.ily"],
+            ...     preamble=[baca.global_context_string()],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -3517,6 +3528,9 @@ class SegmentMaker:
             lines = abjad.tag.double_tag(nonfirst_preamble.split("\n"), tag)
             line = "\n".join(lines)
             items.append(line)
+        if self.preamble:
+            string = "\n".join(self.preamble)
+            items.append(string)
         block = abjad.Block(name="score")
         block.items.append(self.score)
         items.append(block)
@@ -4508,7 +4522,8 @@ class SegmentMaker:
 
             >>> maker = baca.SegmentMaker(
             ...     color_octaves=True,
-            ...     includes=["baca.ily", "baca-global-context.ily"],
+            ...     includes=["baca.ily"],
+            ...     preamble=[baca.global_context_string()],
             ...     score_template=closure,
             ...     time_signatures=[(6, 4)],
             ... )
@@ -4896,7 +4911,8 @@ class SegmentMaker:
             ...     )
             ... ]
             >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily", "baca-global-context.ily"],
+            ...     includes=["baca.ily"],
+            ...     preamble=[baca.global_context_string()],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -5117,6 +5133,13 @@ class SegmentMaker:
         return self._persist
 
     @property
+    def preamble(self):
+        """
+        Gets preamble strings.
+        """
+        return self._preamble
+
+    @property
     def previous_metadata(self):
         """
         Gets previous segment metadata.
@@ -5167,241 +5190,8 @@ class SegmentMaker:
 
     @property
     def skips_instead_of_rests(self):
-        r"""
-        Is true when segment fills empty measures with skips.
-
-        ..  container:: example
-
-            Fills empty measures with multimeasure rests:
-
-            >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily", "baca-global-context.ily"],
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ... )
-
-            >>> lilypond_file = maker.run(environment="docs")
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                <BLANKLINE>
-                \context Score = "Score"
-                <<
-                <BLANKLINE>
-                    \context GlobalContext = "Global_Context"
-                    <<
-                <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"
-                        {
-                <BLANKLINE>
-                            % [Global_Skips measure 1]
-                            \time 4/8
-                            \baca-time-signature-color #'blue
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [Global_Skips measure 2]
-                            \time 3/8
-                            \baca-time-signature-color #'blue
-                            s1 * 3/8
-                <BLANKLINE>
-                            % [Global_Skips measure 3]
-                            \time 4/8
-                            \baca-time-signature-color #'blue
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [Global_Skips measure 4]
-                            \time 3/8
-                            \baca-time-signature-color #'blue
-                            s1 * 3/8
-                <BLANKLINE>
-                            % [Global_Skips measure 5]
-                            \time 1/4
-                            \baca-time-signature-transparent
-                            s1 * 1/4
-                            \once \override Score.BarLine.transparent = ##t
-                            \once \override Score.SpanBar.transparent = ##t
-                <BLANKLINE>
-                        }
-                <BLANKLINE>
-                    >>
-                <BLANKLINE>
-                    \context MusicContext = "Music_Context"
-                    <<
-                <BLANKLINE>
-                        \context Staff = "Music_Staff"
-                        {
-                <BLANKLINE>
-                            \context Voice = "Music_Voice"
-                            {
-                <BLANKLINE>
-                                % [Music_Voice measure 1]
-                                R1 * 4/8
-                                %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                <BLANKLINE>
-                                % [Music_Voice measure 2]
-                                R1 * 3/8
-                                %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                <BLANKLINE>
-                                % [Music_Voice measure 3]
-                                R1 * 4/8
-                                %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                <BLANKLINE>
-                                % [Music_Voice measure 4]
-                                R1 * 3/8
-                                %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                <BLANKLINE>
-                                <<
-                <BLANKLINE>
-                                    \context Voice = "Music_Voice"
-                                    {
-                <BLANKLINE>
-                                        % [Music_Voice measure 5]
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
-                                    }
-                <BLANKLINE>
-                                    \context Voice = "Rest_Voice"
-                                    {
-                <BLANKLINE>
-                                        % [Rest_Voice measure 5]
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
-                                    }
-                <BLANKLINE>
-                                >>
-                <BLANKLINE>
-                            }
-                <BLANKLINE>
-                        }
-                <BLANKLINE>
-                    >>
-                <BLANKLINE>
-                >>
-
-        ..  container:: example
-
-            Fills empty measures with skips:
-
-            >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily", "baca-global-context.ily"],
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     skips_instead_of_rests=True,
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ... )
-
-            >>> lilypond_file = maker.run(environment="docs")
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                <BLANKLINE>
-                \context Score = "Score"
-                <<
-                <BLANKLINE>
-                    \context GlobalContext = "Global_Context"
-                    <<
-                <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"
-                        {
-                <BLANKLINE>
-                            % [Global_Skips measure 1]
-                            \time 4/8
-                            \baca-time-signature-color #'blue
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [Global_Skips measure 2]
-                            \time 3/8
-                            \baca-time-signature-color #'blue
-                            s1 * 3/8
-                <BLANKLINE>
-                            % [Global_Skips measure 3]
-                            \time 4/8
-                            \baca-time-signature-color #'blue
-                            s1 * 1/2
-                <BLANKLINE>
-                            % [Global_Skips measure 4]
-                            \time 3/8
-                            \baca-time-signature-color #'blue
-                            s1 * 3/8
-                <BLANKLINE>
-                            % [Global_Skips measure 5]
-                            \time 1/4
-                            \baca-time-signature-transparent
-                            s1 * 1/4
-                            \once \override Score.BarLine.transparent = ##t
-                            \once \override Score.SpanBar.transparent = ##t
-                <BLANKLINE>
-                        }
-                <BLANKLINE>
-                    >>
-                <BLANKLINE>
-                    \context MusicContext = "Music_Context"
-                    <<
-                <BLANKLINE>
-                        \context Staff = "Music_Staff"
-                        {
-                <BLANKLINE>
-                            \context Voice = "Music_Voice"
-                            {
-                <BLANKLINE>
-                                % [Music_Voice measure 1]
-                                s1 * 4/8
-                <BLANKLINE>
-                                % [Music_Voice measure 2]
-                                s1 * 3/8
-                <BLANKLINE>
-                                % [Music_Voice measure 3]
-                                s1 * 4/8
-                <BLANKLINE>
-                                % [Music_Voice measure 4]
-                                s1 * 3/8
-                <BLANKLINE>
-                                <<
-                <BLANKLINE>
-                                    \context Voice = "Music_Voice"
-                                    {
-                <BLANKLINE>
-                                        % [Music_Voice measure 5]
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
-                                    }
-                <BLANKLINE>
-                                    \context Voice = "Rest_Voice"
-                                    {
-                <BLANKLINE>
-                                        % [Rest_Voice measure 5]
-                                        s1 * 1/4
-                <BLANKLINE>
-                                    }
-                <BLANKLINE>
-                                >>
-                <BLANKLINE>
-                            }
-                <BLANKLINE>
-                        }
-                <BLANKLINE>
-                    >>
-                <BLANKLINE>
-                >>
-
+        """
+        Is true when segment fills empty measures with skips instead of rests.
         """
         return self._skips_instead_of_rests
 
@@ -5460,7 +5250,8 @@ class SegmentMaker:
             >>> instruments = abjad.OrderedDict()
             >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
             >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily", "baca-global-context.ily"],
+            ...     includes=["baca.ily"],
+            ...     preamble=[baca.global_context_string()],
             ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -5625,7 +5416,8 @@ class SegmentMaker:
             >>> instruments = abjad.OrderedDict()
             >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
             >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily", "baca-global-context.ily"],
+            ...     includes=["baca.ily"],
+            ...     preamble=[baca.global_context_string()],
             ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
