@@ -643,6 +643,7 @@ class SegmentMaker:
         "_first_segment",
         "_ignore_repeat_pitch_classes",
         "_includes",
+        "_indicator_defaults",
         "_instruments",
         "_lilypond_file",
         "_local_measure_number_extra_offset",
@@ -731,6 +732,7 @@ class SegmentMaker:
         final_segment=False,
         first_measure_number=None,
         ignore_repeat_pitch_classes=False,
+        indicator_defaults=None,
         includes=None,
         instruments=None,
         local_measure_number_extra_offset=None,
@@ -791,6 +793,7 @@ class SegmentMaker:
         self._fermata_start_offsets = []
         self._fermata_stop_offsets = []
         self._first_measure_number = first_measure_number
+        self._indicator_defaults = indicator_defaults
         self._ignore_repeat_pitch_classes = ignore_repeat_pitch_classes
         self._instruments = instruments
         self._final_measure_is_fermata = False
@@ -3661,6 +3664,13 @@ class SegmentMaker:
                 abjad.attach(const.PHANTOM, component)
         return container
 
+    def _make_score(self):
+        score = self.score_template()
+        for lilypond_type, annotation, indicator in self.indicator_defaults or ():
+            context = score[lilypond_type]
+            abjad.annotate(context, annotation, indicator)
+        self._score = score
+
     def _memento_to_indicator(self, memento):
         baca = importlib.import_module("baca")
         if memento.manifest is not None:
@@ -4818,6 +4828,13 @@ class SegmentMaker:
         return self._first_segment
 
     @property
+    def indicator_defaults(self):
+        """
+        Gets indicator defaults for persistence tests.
+        """
+        return self._indicator_defaults
+
+    @property
     def ignore_repeat_pitch_classes(self):
         """
         Is true when segment ignores repeat pitch-classes.
@@ -5614,7 +5631,7 @@ class SegmentMaker:
         self._previous_persist = abjad.OrderedDict(previous_persist)
         self._segment_number = segment_number
         with abjad.Timer() as timer:
-            self._score = self.score_template()
+            self._make_score()
             self._make_lilypond_file()
             self._make_global_skips()
             self._label_measure_numbers()

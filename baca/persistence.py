@@ -16,8 +16,8 @@ r"""
         ... )
         >>> score_template = baca.SingleStaffScoreTemplate()
         >>> triple = ("Music_Staff", "default_clef", abjad.Clef("treble"))
-        >>> score_template.defaults.append(triple)
         >>> maker = baca.SegmentMaker(
+        ...     indicator_defaults=[triple],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
         ...     score_template=score_template,
@@ -1962,9 +1962,9 @@ r"""
 
         >>> score_template = baca.SingleStaffScoreTemplate()
         >>> triple = ("Music_Staff", 'default_instrument', abjad.Flute())
-        >>> score_template.defaults.append(triple)
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     indicator_defaults=[triple],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
         ...     instruments=instruments,
@@ -4283,9 +4283,9 @@ r"""
         ...     'default_margin_markup',
         ...     margin_markups['I+II'],
         ...     )
-        >>> score_template.defaults.append(triple)
         >>> maker = baca.SegmentMaker(
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
+        ...     indicator_defaults=[triple],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
         ...     margin_markups=margin_markups,

@@ -17,17 +17,9 @@ class ScoreTemplate(abjad.ScoreTemplate):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = ("_defaults",)
-
     _part_manifest = None
 
     voice_colors: dict = {}
-
-    ### INITIALIZER ###
-
-    def __init__(self) -> None:
-        super().__init__()
-        self._defaults: list = []
 
     ### PRIVATE METHODS ###
 
@@ -57,12 +49,6 @@ class ScoreTemplate(abjad.ScoreTemplate):
             if context.name in names:
                 raise Exception(f"duplicate context name: {context.name!r}.")
 
-    def _attach_calltime_defaults(self, score):
-        assert isinstance(score, abjad.Score)
-        for lilypond_type, annotation, indicator in self.defaults:
-            context = score[lilypond_type]
-            abjad.annotate(context, annotation, indicator)
-
     def _attach_lilypond_tag(self, tag, context):
         for tag_ in tag.split("."):
             if not abjad.String(tag_).is_lilypond_identifier():
@@ -90,13 +76,6 @@ class ScoreTemplate(abjad.ScoreTemplate):
                 raise Exception(f"voice not in score: {voice_name!r}.")
 
     ### PUBLIC PROPERTIES ###
-
-    @property
-    def defaults(self) -> list:
-        """
-        Gets defaults.
-        """
-        return self._defaults
 
     @property
     def part_manifest(self) -> typing.Optional[_parts.PartManifest]:
@@ -437,14 +416,9 @@ class SingleStaffScoreTemplate(ScoreTemplate):
         """
         site = "baca.SingleStaffScoreTemplate.__call__()"
         tag = abjad.Tag(site)
-        # GLOBAL CONTEXT
         global_context = self._make_global_context()
-
-        # MUSIC VOICE, MUSIC STAFF
         music_voice = abjad.Voice(name="Music_Voice", tag=tag)
         music_staff = abjad.Staff([music_voice], name="Music_Staff", tag=tag)
-
-        # MUSIC CONTEXT
         music_context = abjad.Context(
             [music_staff],
             lilypond_type="MusicContext",
@@ -452,10 +426,7 @@ class SingleStaffScoreTemplate(ScoreTemplate):
             name="Music_Context",
             tag=tag,
         )
-
-        # SCORE
         score = abjad.Score([global_context, music_context], name="Score", tag=tag)
-        self._attach_calltime_defaults(score)
         return score
 
 
