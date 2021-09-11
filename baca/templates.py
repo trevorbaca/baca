@@ -637,6 +637,17 @@ def make_empty_score(*counts):
     return score
 
 
+def make_empty_score_maker(*counts):
+    """
+    Makes empty score maker.
+    """
+
+    def closure():
+        return make_empty_score(*counts)
+
+    return closure
+
+
 _global_context_string = r"""\layout
 {
 
