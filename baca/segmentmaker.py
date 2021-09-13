@@ -17,6 +17,7 @@ from . import pitchclasses, pitchcommands, rhythmcommands, scoping
 from . import selection as _selection
 from . import sequence as _sequence
 from . import tags as _tags
+from . import templates as _templates
 
 
 def _site(frame, n=None):
@@ -1675,17 +1676,13 @@ class SegmentMaker:
         for staff__group in abjad.iterate(self.score).components(staff__group):
             if staff__group.name in dictionary:
                 continue
-            if not hasattr(self.score_template, "attach_defaults"):
-                continue
-            for wrapper in self.score_template.attach_defaults(staff__group):
+            for wrapper in _templates.attach_defaults(staff__group):
                 self._treat_persistent_wrapper(self.manifests, wrapper, "default")
 
     def _attach_first_segment_score_template_defaults(self):
         if not self.first_segment:
             return
-        if not hasattr(self.score_template, "attach_defaults"):
-            return
-        for wrapper in self.score_template.attach_defaults(self.score):
+        for wrapper in _templates.attach_defaults(self.score):
             self._treat_persistent_wrapper(self.manifests, wrapper, "default")
 
     @staticmethod
