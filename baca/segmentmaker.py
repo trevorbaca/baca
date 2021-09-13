@@ -1675,6 +1675,8 @@ class SegmentMaker:
         for staff__group in abjad.iterate(self.score).components(staff__group):
             if staff__group.name in dictionary:
                 continue
+            if not hasattr(self.score_template, "attach_defaults"):
+                continue
             for wrapper in self.score_template.attach_defaults(staff__group):
                 self._treat_persistent_wrapper(self.manifests, wrapper, "default")
 
@@ -4938,7 +4940,7 @@ class SegmentMaker:
             >>> maker = baca.SegmentMaker(
             ...     includes=["baca.ily"],
             ...     preamble=[baca.global_context_string()],
-            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
 
@@ -4999,7 +5001,7 @@ class SegmentMaker:
                     >>
                 <BLANKLINE>
                     \context MusicContext = "Music_Context"
-                    <<
+                    {
                 <BLANKLINE>
                         \context Staff = "Music_Staff"
                         {
@@ -5056,7 +5058,7 @@ class SegmentMaker:
                 <BLANKLINE>
                         }
                 <BLANKLINE>
-                    >>
+                    }
                 <BLANKLINE>
                 >>
 
@@ -5278,7 +5280,7 @@ class SegmentMaker:
             ...     includes=["baca.ily"],
             ...     preamble=[baca.global_context_string()],
             ...     instruments=instruments,
-            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     transpose_score=True,
             ... )
@@ -5340,7 +5342,7 @@ class SegmentMaker:
                     >>
                 <BLANKLINE>
                     \context MusicContext = "Music_Context"
-                    <<
+                    {
                 <BLANKLINE>
                         \context Staff = "Music_Staff"
                         {
@@ -5430,7 +5432,7 @@ class SegmentMaker:
                 <BLANKLINE>
                         }
                 <BLANKLINE>
-                    >>
+                    }
                 <BLANKLINE>
                 >>
 
@@ -5444,7 +5446,7 @@ class SegmentMaker:
             ...     includes=["baca.ily"],
             ...     preamble=[baca.global_context_string()],
             ...     instruments=instruments,
-            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     transpose_score=False,
             ... )
@@ -5506,7 +5508,7 @@ class SegmentMaker:
                     >>
                 <BLANKLINE>
                     \context MusicContext = "Music_Context"
-                    <<
+                    {
                 <BLANKLINE>
                         \context Staff = "Music_Staff"
                         {
@@ -5596,7 +5598,7 @@ class SegmentMaker:
                 <BLANKLINE>
                         }
                 <BLANKLINE>
-                    >>
+                    }
                 <BLANKLINE>
                 >>
 
