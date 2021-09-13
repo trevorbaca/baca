@@ -6267,9 +6267,10 @@ class PitchTree(classes.Tree):
         abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 16)"
         preamble = "#(set-global-staff-size 16)\n"
         lilypond_file = abjad.LilyPondFile(
+            [preamble, score],
             date_time_token=False,
             global_staff_size=global_staff_size,
-            items=[preamble, score],
+            includes=["abjad.ily"],
         )
         abjad.override(score).SpacingSpanner.strict_grace_spacing = True
         abjad.override(score).SpacingSpanner.strict_note_spacing = True
@@ -6400,8 +6401,8 @@ class PitchTree(classes.Tree):
                 >>> tree = baca.PitchTree(items=items)
                 >>> abjad.show(tree) # doctest: +SKIP
 
-            >>> tree.has_repeats()
-            True
+                >>> tree.has_repeats()
+                True
 
             ..  docs::
 
