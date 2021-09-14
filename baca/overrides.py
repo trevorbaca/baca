@@ -406,115 +406,82 @@ def bar_line_transparent(
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 5]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
-            <BLANKLINE>
                         \context Voice = "Music_Voice"
                         {
-            <BLANKLINE>
                             % [Music_Voice measure 1]
                             e'8
                             [
-            <BLANKLINE>
                             d''8
-            <BLANKLINE>
                             f'8
                             ]
-            <BLANKLINE>
                             r8
-            <BLANKLINE>
                             % [Music_Voice measure 2]
                             \override Score.BarLine.transparent = ##t
                             e''8
                             [
-            <BLANKLINE>
                             g'8
-            <BLANKLINE>
                             f''8
                             ]
                             \revert Score.BarLine.transparent
-            <BLANKLINE>
                             % [Music_Voice measure 3]
                             r8
-            <BLANKLINE>
                             e'8
                             [
-            <BLANKLINE>
                             d''8
-            <BLANKLINE>
                             f'8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 4]
                             r8
-            <BLANKLINE>
                             e''8
                             [
-            <BLANKLINE>
                             g'8
                             ]
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -523,17 +490,11 @@ def bar_line_transparent(
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     """
@@ -1476,90 +1437,67 @@ def mmrest_color(
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 5]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
-            <BLANKLINE>
                         \context Voice = "Music_Voice"
                         {
-            <BLANKLINE>
                             % [Music_Voice measure 1]
                             \override MultiMeasureRest.color = #(x11-color 'DarkOrchid)
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-            <BLANKLINE>
                             % [Music_Voice measure 2]
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-            <BLANKLINE>
                             % [Music_Voice measure 3]
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-            <BLANKLINE>
                             % [Music_Voice measure 4]
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             \revert MultiMeasureRest.color
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -1568,17 +1506,11 @@ def mmrest_color(
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     """
@@ -1642,91 +1574,68 @@ def mmrest_text_color(
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 5]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
-            <BLANKLINE>
                         \context Voice = "Music_Voice"
                         {
-            <BLANKLINE>
                             % [Music_Voice measure 1]
                             \override MultiMeasureRestText.color = #red
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-            <BLANKLINE>
                             % [Music_Voice measure 2]
                             R1 * 3/8
                             ^ \baca-boxed-markup still
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-            <BLANKLINE>
                             % [Music_Voice measure 3]
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-            <BLANKLINE>
                             % [Music_Voice measure 4]
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             \revert MultiMeasureRestText.color
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -1735,17 +1644,11 @@ def mmrest_text_color(
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     ..  container:: example exception
@@ -1822,91 +1725,68 @@ def mmrest_text_extra_offset(
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 5]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
-            <BLANKLINE>
                         \context Voice = "Music_Voice"
                         {
-            <BLANKLINE>
                             % [Music_Voice measure 1]
                             \override MultiMeasureRestText.extra-offset = #'(0 . 2)
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-            <BLANKLINE>
                             % [Music_Voice measure 2]
                             R1 * 3/8
                             ^ \baca-boxed-markup still
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-            <BLANKLINE>
                             % [Music_Voice measure 3]
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-            <BLANKLINE>
                             % [Music_Voice measure 4]
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             \revert MultiMeasureRestText.extra-offset
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -1915,17 +1795,11 @@ def mmrest_text_extra_offset(
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     """
@@ -1973,91 +1847,68 @@ def mmrest_text_padding(
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 5]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
-            <BLANKLINE>
                         \context Voice = "Music_Voice"
                         {
-            <BLANKLINE>
                             % [Music_Voice measure 1]
                             \override MultiMeasureRestText.padding = 2
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-            <BLANKLINE>
                             % [Music_Voice measure 2]
                             R1 * 3/8
                             ^ \baca-boxed-markup still
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-            <BLANKLINE>
                             % [Music_Voice measure 3]
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-            <BLANKLINE>
                             % [Music_Voice measure 4]
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             \revert MultiMeasureRestText.padding
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -2066,17 +1917,11 @@ def mmrest_text_padding(
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     """
@@ -2123,91 +1968,68 @@ def mmrest_text_parent_center(
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 5]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
-            <BLANKLINE>
                         \context Voice = "Music_Voice"
                         {
-            <BLANKLINE>
                             % [Music_Voice measure 1]
                             \override MultiMeasureRestText.parent-alignment-X = 0
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-            <BLANKLINE>
                             % [Music_Voice measure 2]
                             R1 * 3/8
                             ^ \baca-boxed-markup still
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-            <BLANKLINE>
                             % [Music_Voice measure 3]
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-            <BLANKLINE>
                             % [Music_Voice measure 4]
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             \revert MultiMeasureRestText.parent-alignment-X
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -2216,17 +2038,11 @@ def mmrest_text_parent_center(
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     """
@@ -2274,91 +2090,68 @@ def mmrest_text_staff_padding(
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 5]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
-            <BLANKLINE>
                         \context Voice = "Music_Voice"
                         {
-            <BLANKLINE>
                             % [Music_Voice measure 1]
                             \override MultiMeasureRestText.staff-padding = 2
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-            <BLANKLINE>
                             % [Music_Voice measure 2]
                             R1 * 3/8
                             ^ \baca-boxed-markup still
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-            <BLANKLINE>
                             % [Music_Voice measure 3]
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-            <BLANKLINE>
                             % [Music_Voice measure 4]
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             \revert MultiMeasureRestText.staff-padding
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -2367,17 +2160,11 @@ def mmrest_text_staff_padding(
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     """

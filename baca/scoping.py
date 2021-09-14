@@ -875,40 +875,32 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -916,20 +908,14 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
-            <BLANKLINE>
                         \context Voice = "Music_Voice"
                         {
-            <BLANKLINE>
                             % [Music_Voice measure 1]
                             \baca-not-yet-pitched-coloring
                             b'8
@@ -940,17 +926,13 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                             \baca-not-yet-pitched-coloring
                             b'8
-            <BLANKLINE>
                             \baca-not-yet-pitched-coloring
                             b'8
-            <BLANKLINE>
                             \baca-not-yet-pitched-coloring
                             b'8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 2]
                             \baca-not-yet-pitched-coloring
                             b'8
@@ -958,72 +940,57 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                             - \staccato
                             [
                             (
-            <BLANKLINE>
                             \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
                             - \staccato
-            <BLANKLINE>
                             \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
                             - \staccato
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 3]
                             \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
                             - \staccato
                             [
-            <BLANKLINE>
                             \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
                             - \staccato
-            <BLANKLINE>
                             \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
                             - \staccato
-            <BLANKLINE>
                             \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
                             - \staccato
                             )
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 4]
                             \baca-not-yet-pitched-coloring
                             b'8
                             [
-            <BLANKLINE>
                             \baca-not-yet-pitched-coloring
                             b'8
-            <BLANKLINE>
                             \baca-not-yet-pitched-coloring
                             b'8
                             ]
                             <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -1032,17 +999,11 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     ..  container:: example
@@ -1076,40 +1037,32 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -1117,20 +1070,14 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
-            <BLANKLINE>
                         \context Voice = "Music_Voice"
                         {
-            <BLANKLINE>
                             % [Music_Voice measure 1]
                             \baca-not-yet-pitched-coloring
                             b'8
@@ -1141,17 +1088,13 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                             \baca-not-yet-pitched-coloring
                             b'8
-            <BLANKLINE>
                             \baca-not-yet-pitched-coloring
                             b'8
-            <BLANKLINE>
                             \baca-not-yet-pitched-coloring
                             b'8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 2]
                             \baca-not-yet-pitched-coloring
                             b'8
@@ -1159,72 +1102,57 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                             - \staccato
                             [
                             (
-            <BLANKLINE>
                             \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
                             - \staccato
-            <BLANKLINE>
                             \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
                             - \staccato
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 3]
                             \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
                             - \staccato
                             [
-            <BLANKLINE>
                             \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
                             - \staccato
-            <BLANKLINE>
                             \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
                             - \staccato
-            <BLANKLINE>
                             \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
                             - \staccato
                             )
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 4]
                             \baca-not-yet-pitched-coloring
                             b'8
                             [
-            <BLANKLINE>
                             \baca-not-yet-pitched-coloring
                             b'8
-            <BLANKLINE>
                             \baca-not-yet-pitched-coloring
                             b'8
                             ]
                             <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -1233,17 +1161,11 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     """
@@ -1328,40 +1250,32 @@ def only_parts(command: _command_typing) -> _command_typing:
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -1369,20 +1283,14 @@ def only_parts(command: _command_typing) -> _command_typing:
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
-            <BLANKLINE>
                         \context Voice = "Music_Voice"
                         {
-            <BLANKLINE>
                             % [Music_Voice measure 1]
                             \baca-not-yet-pitched-coloring
                             b'2
@@ -1396,39 +1304,30 @@ def only_parts(command: _command_typing) -> _command_typing:
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                             % [Music_Voice measure 2]
                             \baca-not-yet-pitched-coloring
                             b'4.
-            <BLANKLINE>
                             % [Music_Voice measure 3]
                             \baca-not-yet-pitched-coloring
                             b'2
-            <BLANKLINE>
                             % [Music_Voice measure 4]
                             \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'blue)
                             \f
                             <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -1437,17 +1336,11 @@ def only_parts(command: _command_typing) -> _command_typing:
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     """

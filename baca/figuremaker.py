@@ -2150,22 +2150,17 @@ class Imbrication:
                 >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
-                <BLANKLINE>
                 \context Score = "Score"
                 <<
-                <BLANKLINE>
                     \context GlobalContext = "Global_Context"
                     <<
-                <BLANKLINE>
                         \context GlobalSkips = "Global_Skips"
                         {
-                <BLANKLINE>
                             % [Global_Skips measure 1]
                             \baca-new-spacing-section #1 #32
                             \time 5/8
                             \baca-time-signature-color #'blue
                             s1 * 5/8
-                <BLANKLINE>
                             % [Global_Skips measure 2]
                             \baca-new-spacing-section #1 #4
                             \time 1/4
@@ -2173,27 +2168,19 @@ class Imbrication:
                             s1 * 1/4
                             \once \override Score.BarLine.transparent = ##t
                             \once \override Score.SpanBar.transparent = ##t
-                <BLANKLINE>
                         }
-                <BLANKLINE>
                     >>
-                <BLANKLINE>
                     \context MusicContext = "Music_Context"
                     {
-                <BLANKLINE>
                         \context Staff = "Music_Staff"
                         <<
-                <BLANKLINE>
                             \context Voice = "Music_Voice_1"
                             {
-                <BLANKLINE>
                                 {
                                     \override TupletBracket.stencil = ##f
                                     \override TupletNumber.stencil = ##f
-                <BLANKLINE>
                                     \scaleDurations #'(1 . 1)
                                     {
-                <BLANKLINE>
                                         % [Music_Voice_1 measure 1]
                                         \voiceOne
                                         s16
@@ -2204,64 +2191,45 @@ class Imbrication:
                                         - \tweak color #darkcyan
                                         - \tweak staff-padding 8
                                         \bacaStartTextSpanRhythmAnnotation
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         d'16
                                         - \accent
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \scaleDurations #'(1 . 1)
                                     {
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         g''16
                                         - \accent
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         a'16
                                         - \accent
-                <BLANKLINE>
                                         s16
                                         ]
                                         <> \bacaStopTextSpanRhythmAnnotation
-                <BLANKLINE>
                                     }
                                     \revert TupletBracket.stencil
                                     \revert TupletNumber.stencil
-                <BLANKLINE>
                                 }
-                <BLANKLINE>
                                 <<
-                <BLANKLINE>
                                     \context Voice = "Music_Voice_1"
                                     {
-                <BLANKLINE>
                                         % [Music_Voice_1 measure 2]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \context Voice = "Rest_Voice_1"
                                     {
-                <BLANKLINE>
                                         % [Rest_Voice_1 measure 2]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
@@ -2270,21 +2238,14 @@ class Imbrication:
                                         \startStaff
                                         R1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                 >>
-                <BLANKLINE>
                             }
-                <BLANKLINE>
                             \context Voice = "Music_Voice_2"
                             {
-                <BLANKLINE>
                                 {
-                <BLANKLINE>
                                     \scaleDurations #'(1 . 1)
                                     {
-                <BLANKLINE>
                                         % [Music_Voice_2 measure 1]
                                         \set stemLeftBeamCount = 0
                                         \set stemRightBeamCount = 2
@@ -2298,80 +2259,61 @@ class Imbrication:
                                         - \tweak color #darkcyan
                                         - \tweak staff-padding 8
                                         \bacaStartTextSpanRhythmAnnotation
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         d'16
                                         - \staccato
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         bf'!16
                                         - \staccato
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         fs''!16
                                         - \staccato
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 1
                                         e''16
                                         - \staccato
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \scaleDurations #'(1 . 1)
                                     {
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
                                         ef''!16
                                         - \staccato
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         af''!16
                                         - \staccato
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         g''16
                                         - \staccato
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         a'16
                                         - \staccato
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 0
                                         c'16
                                         - \staccato
                                         ]
                                         <> \bacaStopTextSpanRhythmAnnotation
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                 }
-                <BLANKLINE>
                                 <<
-                <BLANKLINE>
                                     \context Voice = "Music_Voice_2"
                                     {
-                <BLANKLINE>
                                         % [Music_Voice_2 measure 2]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \context Voice = "Rest_Voice_2"
                                     {
-                <BLANKLINE>
                                         % [Rest_Voice_2 measure 2]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
@@ -2380,17 +2322,11 @@ class Imbrication:
                                         \startStaff
                                         R1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                 >>
-                <BLANKLINE>
                             }
-                <BLANKLINE>
                         >>
-                <BLANKLINE>
                     }
-                <BLANKLINE>
                 >>
 
         ..  container:: example exception
@@ -2507,22 +2443,17 @@ class Imbrication:
                 >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
-                <BLANKLINE>
                 \context Score = "Score"
                 <<
-                <BLANKLINE>
                     \context GlobalContext = "Global_Context"
                     <<
-                <BLANKLINE>
                         \context GlobalSkips = "Global_Skips"
                         {
-                <BLANKLINE>
                             % [Global_Skips measure 1]
                             \baca-new-spacing-section #1 #32
                             \time 15/16
                             \baca-time-signature-color #'blue
                             s1 * 15/16
-                <BLANKLINE>
                             % [Global_Skips measure 2]
                             \baca-new-spacing-section #1 #4
                             \time 1/4
@@ -2530,27 +2461,19 @@ class Imbrication:
                             s1 * 1/4
                             \once \override Score.BarLine.transparent = ##t
                             \once \override Score.SpanBar.transparent = ##t
-                <BLANKLINE>
                         }
-                <BLANKLINE>
                     >>
-                <BLANKLINE>
                     \context MusicContext = "Music_Context"
                     {
-                <BLANKLINE>
                         \context Staff = "Music_Staff"
                         <<
-                <BLANKLINE>
                             \context Voice = "Music_Voice_1"
                             {
-                <BLANKLINE>
                                 {
                                     \override TupletBracket.stencil = ##f
                                     \override TupletNumber.stencil = ##f
-                <BLANKLINE>
                                     \scaleDurations #'(1 . 1)
                                     {
-                <BLANKLINE>
                                         % [Music_Voice_1 measure 1]
                                         \voiceOne
                                         s16
@@ -2561,85 +2484,59 @@ class Imbrication:
                                         - \tweak color #darkcyan
                                         - \tweak staff-padding 8
                                         \bacaStartTextSpanRhythmAnnotation
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         d'16
                                         - \accent
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \scaleDurations #'(1 . 1)
                                     {
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         g''16
                                         - \accent
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         a'16
                                         - \accent
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \scaleDurations #'(1 . 1)
                                     {
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         fs''!16
                                         - \accent
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         e''16
                                         - \accent
-                <BLANKLINE>
                                         s16
                                         ]
                                         <> \bacaStopTextSpanRhythmAnnotation
-                <BLANKLINE>
                                     }
                                     \revert TupletBracket.stencil
                                     \revert TupletNumber.stencil
-                <BLANKLINE>
                                 }
-                <BLANKLINE>
                                 <<
-                <BLANKLINE>
                                     \context Voice = "Music_Voice_1"
                                     {
-                <BLANKLINE>
                                         % [Music_Voice_1 measure 2]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \context Voice = "Rest_Voice_1"
                                     {
-                <BLANKLINE>
                                         % [Rest_Voice_1 measure 2]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
@@ -2648,21 +2545,14 @@ class Imbrication:
                                         \startStaff
                                         R1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                 >>
-                <BLANKLINE>
                             }
-                <BLANKLINE>
                             \context Voice = "Music_Voice_2"
                             {
-                <BLANKLINE>
                                 {
-                <BLANKLINE>
                                     \scaleDurations #'(1 . 1)
                                     {
-                <BLANKLINE>
                                         % [Music_Voice_2 measure 1]
                                         \set stemLeftBeamCount = 0
                                         \set stemRightBeamCount = 2
@@ -2676,95 +2566,69 @@ class Imbrication:
                                         - \tweak color #darkcyan
                                         - \tweak staff-padding 8
                                         \bacaStartTextSpanRhythmAnnotation
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         bf'!16
                                         - \staccato
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         fs''!16
                                         - \staccato
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 1
                                         e''16
                                         - \staccato
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \scaleDurations #'(1 . 1)
                                     {
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
                                         ef''!16
                                         - \staccato
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         af''!16
                                         - \staccato
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 1
                                         c'16
                                         - \staccato
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \scaleDurations #'(1 . 1)
                                     {
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
                                         d'16
                                         - \staccato
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         bf'!16
                                         - \staccato
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 0
                                         ef''!16
                                         - \staccato
                                         ]
                                         <> \bacaStopTextSpanRhythmAnnotation
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                 }
-                <BLANKLINE>
                                 <<
-                <BLANKLINE>
                                     \context Voice = "Music_Voice_2"
                                     {
-                <BLANKLINE>
                                         % [Music_Voice_2 measure 2]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \context Voice = "Rest_Voice_2"
                                     {
-                <BLANKLINE>
                                         % [Rest_Voice_2 measure 2]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
@@ -2773,17 +2637,11 @@ class Imbrication:
                                         \startStaff
                                         R1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                 >>
-                <BLANKLINE>
                             }
-                <BLANKLINE>
                         >>
-                <BLANKLINE>
                     }
-                <BLANKLINE>
                 >>
 
         """
@@ -2857,22 +2715,17 @@ class Imbrication:
                 >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
-                <BLANKLINE>
                 \context Score = "Score"
                 <<
-                <BLANKLINE>
                     \context GlobalContext = "Global_Context"
                     <<
-                <BLANKLINE>
                         \context GlobalSkips = "Global_Skips"
                         {
-                <BLANKLINE>
                             % [Global_Skips measure 1]
                             \baca-new-spacing-section #1 #32
                             \time 9/8
                             \baca-time-signature-color #'blue
                             s1 * 9/8
-                <BLANKLINE>
                             % [Global_Skips measure 2]
                             \baca-new-spacing-section #1 #4
                             \time 1/4
@@ -2880,27 +2733,19 @@ class Imbrication:
                             s1 * 1/4
                             \once \override Score.BarLine.transparent = ##t
                             \once \override Score.SpanBar.transparent = ##t
-                <BLANKLINE>
                         }
-                <BLANKLINE>
                     >>
-                <BLANKLINE>
                     \context MusicContext = "Music_Context"
                     {
-                <BLANKLINE>
                         \context Staff = "Music_Staff"
                         <<
-                <BLANKLINE>
                             \context Voice = "Music_Voice_1"
                             {
-                <BLANKLINE>
                                 {
                                     \override TupletBracket.stencil = ##f
                                     \override TupletNumber.stencil = ##f
-                <BLANKLINE>
                                     \scaleDurations #'(1 . 1)
                                     {
-                <BLANKLINE>
                                         % [Music_Voice_1 measure 1]
                                         \voiceOne
                                         s16
@@ -2911,93 +2756,62 @@ class Imbrication:
                                         - \tweak color #darkcyan
                                         - \tweak staff-padding 8
                                         \bacaStartTextSpanRhythmAnnotation
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \scaleDurations #'(1 . 1)
                                     {
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \scaleDurations #'(1 . 1)
                                     {
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         d'16
                                         - \accent
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         fs''!16
                                         - \accent
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 1
                                         e''16
                                         - \accent
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \scaleDurations #'(1 . 1)
                                     {
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
                                         ef''!16
                                         - \accent
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                         s16
-                <BLANKLINE>
                                         s16
                                         ]
                                         <> \bacaStopTextSpanRhythmAnnotation
-                <BLANKLINE>
                                     }
                                     \revert TupletBracket.stencil
                                     \revert TupletNumber.stencil
-                <BLANKLINE>
                                 }
-                <BLANKLINE>
                                 <<
-                <BLANKLINE>
                                     \context Voice = "Music_Voice_1"
                                     {
-                <BLANKLINE>
                                         % [Music_Voice_1 measure 2]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \context Voice = "Rest_Voice_1"
                                     {
-                <BLANKLINE>
                                         % [Rest_Voice_1 measure 2]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
@@ -3006,21 +2820,14 @@ class Imbrication:
                                         \startStaff
                                         R1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                 >>
-                <BLANKLINE>
                             }
-                <BLANKLINE>
                             \context Voice = "Music_Voice_2"
                             {
-                <BLANKLINE>
                                 {
-                <BLANKLINE>
                                     \scaleDurations #'(1 . 1)
                                     {
-                <BLANKLINE>
                                         % [Music_Voice_2 measure 1]
                                         \set stemLeftBeamCount = 0
                                         \set stemRightBeamCount = 2
@@ -3034,130 +2841,99 @@ class Imbrication:
                                         - \tweak color #darkcyan
                                         - \tweak staff-padding 8
                                         \bacaStartTextSpanRhythmAnnotation
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         d'16
                                         - \staccato
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         bf'!16
                                         - \staccato
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         fs''!16
                                         - \staccato
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 1
                                         e''16
                                         - \staccato
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \scaleDurations #'(1 . 1)
                                     {
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
                                         ef''!16
                                         - \staccato
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         af''!16
                                         - \staccato
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         g''16
                                         - \staccato
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 1
                                         a'16
                                         - \staccato
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \scaleDurations #'(1 . 1)
                                     {
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
                                         c'16
                                         - \staccato
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         d'16
                                         - \staccato
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         bf'!16
                                         - \staccato
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         fs''!16
                                         - \staccato
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 1
                                         e''16
                                         - \staccato
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \scaleDurations #'(1 . 1)
                                     {
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
                                         ef''!16
                                         - \staccato
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         af''!16
                                         - \staccato
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         g''16
                                         - \staccato
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 0
                                         a'16
                                         - \staccato
                                         ]
                                         <> \bacaStopTextSpanRhythmAnnotation
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                 }
-                <BLANKLINE>
                                 <<
-                <BLANKLINE>
                                     \context Voice = "Music_Voice_2"
                                     {
-                <BLANKLINE>
                                         % [Music_Voice_2 measure 2]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \context Voice = "Rest_Voice_2"
                                     {
-                <BLANKLINE>
                                         % [Rest_Voice_2 measure 2]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
@@ -3166,17 +2942,11 @@ class Imbrication:
                                         \startStaff
                                         R1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                 >>
-                <BLANKLINE>
                             }
-                <BLANKLINE>
                         >>
-                <BLANKLINE>
                     }
-                <BLANKLINE>
                 >>
 
         """
@@ -3238,22 +3008,17 @@ class Imbrication:
                 >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
-                <BLANKLINE>
                 \context Score = "Score"
                 <<
-                <BLANKLINE>
                     \context GlobalContext = "Global_Context"
                     <<
-                <BLANKLINE>
                         \context GlobalSkips = "Global_Skips"
                         {
-                <BLANKLINE>
                             % [Global_Skips measure 1]
                             \baca-new-spacing-section #1 #32
                             \time 45/32
                             \baca-time-signature-color #'blue
                             s1 * 45/32
-                <BLANKLINE>
                             % [Global_Skips measure 2]
                             \baca-new-spacing-section #1 #4
                             \time 1/4
@@ -3261,27 +3026,19 @@ class Imbrication:
                             s1 * 1/4
                             \once \override Score.BarLine.transparent = ##t
                             \once \override Score.SpanBar.transparent = ##t
-                <BLANKLINE>
                         }
-                <BLANKLINE>
                     >>
-                <BLANKLINE>
                     \context MusicContext = "Music_Context"
                     {
-                <BLANKLINE>
                         \context Staff = "Music_Staff"
                         <<
-                <BLANKLINE>
                             \context Voice = "Music_Voice_1"
                             {
-                <BLANKLINE>
                                 {
                                     \override TupletBracket.stencil = ##f
                                     \override TupletNumber.stencil = ##f
-                <BLANKLINE>
                                     \scaleDurations #'(1 . 1)
                                     {
-                <BLANKLINE>
                                         % [Music_Voice_1 measure 1]
                                         \voiceOne
                                         s8
@@ -3292,86 +3049,57 @@ class Imbrication:
                                         - \tweak color #darkcyan
                                         - \tweak staff-padding 8
                                         \bacaStartTextSpanRhythmAnnotation
-                <BLANKLINE>
                                         s32
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 1
                                         d'8
-                <BLANKLINE>
                                         s32
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 1
                                         bf'!8
-                <BLANKLINE>
                                         s32
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \scaleDurations #'(1 . 1)
                                     {
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 1
                                         fs''!8
-                <BLANKLINE>
                                         s32
-                <BLANKLINE>
                                         s8
-                <BLANKLINE>
                                         s32
-                <BLANKLINE>
                                         s8
-                <BLANKLINE>
                                         s32
-                <BLANKLINE>
                                         s8
-                <BLANKLINE>
                                         s32
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 1
                                         g''8
-                <BLANKLINE>
                                         s32
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \scaleDurations #'(1 . 1)
                                     {
-                <BLANKLINE>
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 1
                                         a'8
-                <BLANKLINE>
                                         s32
                                         ]
                                         <> \bacaStopTextSpanRhythmAnnotation
-                <BLANKLINE>
                                     }
                                     \revert TupletBracket.stencil
                                     \revert TupletNumber.stencil
-                <BLANKLINE>
                                 }
-                <BLANKLINE>
                                 <<
-                <BLANKLINE>
                                     \context Voice = "Music_Voice_1"
                                     {
-                <BLANKLINE>
                                         % [Music_Voice_1 measure 2]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \context Voice = "Rest_Voice_1"
                                     {
-                <BLANKLINE>
                                         % [Rest_Voice_1 measure 2]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
@@ -3380,21 +3108,14 @@ class Imbrication:
                                         \startStaff
                                         R1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                 >>
-                <BLANKLINE>
                             }
-                <BLANKLINE>
                             \context Voice = "Music_Voice_2"
                             {
-                <BLANKLINE>
                                 {
-                <BLANKLINE>
                                     \scaleDurations #'(1 . 1)
                                     {
-                <BLANKLINE>
                                         % [Music_Voice_2 measure 1]
                                         \voiceTwo
                                         c'8
@@ -3406,86 +3127,57 @@ class Imbrication:
                                         - \tweak color #darkcyan
                                         - \tweak staff-padding 8
                                         \bacaStartTextSpanRhythmAnnotation
-                <BLANKLINE>
                                         c'32
-                <BLANKLINE>
                                         d'8
                                         ~
-                <BLANKLINE>
                                         d'32
-                <BLANKLINE>
                                         bf'!8
                                         ~
-                <BLANKLINE>
                                         bf'32
                                         ]
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \scaleDurations #'(1 . 1)
                                     {
-                <BLANKLINE>
                                         fs''!8
                                         ~
                                         [
-                <BLANKLINE>
                                         fs''32
-                <BLANKLINE>
                                         e''8
                                         ~
-                <BLANKLINE>
                                         e''32
-                <BLANKLINE>
                                         ef''!8
                                         ~
-                <BLANKLINE>
                                         ef''32
-                <BLANKLINE>
                                         af''!8
                                         ~
-                <BLANKLINE>
                                         af''32
-                <BLANKLINE>
                                         g''8
                                         ~
-                <BLANKLINE>
                                         g''32
                                         ]
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \scaleDurations #'(1 . 1)
                                     {
-                <BLANKLINE>
                                         a'8
                                         ~
                                         [
-                <BLANKLINE>
                                         a'32
                                         ]
                                         <> \bacaStopTextSpanRhythmAnnotation
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                 }
-                <BLANKLINE>
                                 <<
-                <BLANKLINE>
                                     \context Voice = "Music_Voice_2"
                                     {
-                <BLANKLINE>
                                         % [Music_Voice_2 measure 2]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \context Voice = "Rest_Voice_2"
                                     {
-                <BLANKLINE>
                                         % [Rest_Voice_2 measure 2]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
@@ -3494,17 +3186,11 @@ class Imbrication:
                                         \startStaff
                                         R1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                 >>
-                <BLANKLINE>
                             }
-                <BLANKLINE>
                         >>
-                <BLANKLINE>
                     }
-                <BLANKLINE>
                 >>
 
         """
@@ -7725,22 +7411,17 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #32
                         \time 3/4
                         \baca-time-signature-color #'blue
                         s1 * 3/4
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -7748,27 +7429,19 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     <<
-            <BLANKLINE>
                         \context Voice = "Music_Voice_1"
                         {
-            <BLANKLINE>
                             {
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
-            <BLANKLINE>
                                 \times 4/5
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_1 measure 1]
                                     \voiceOne
                                     s8
@@ -7778,70 +7451,48 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     - \tweak color #darkcyan
                                     - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     bf'!16
                                     [
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \times 2/3
                                 {
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     c'16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 0
                                     d'16
                                     ]
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \tweak text #tuplet-number::calc-fraction-text
                                 \times 6/7
                                 {
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s4
                                     <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
-            <BLANKLINE>
                             }
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice_1"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_1 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice_1"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice_1 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -7850,21 +7501,14 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                         \context Voice = "Music_Voice_2"
                         {
-            <BLANKLINE>
                             {
-            <BLANKLINE>
                                 \times 4/5
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_2 measure 1]
                                     \voiceTwo
                                     r8
@@ -7874,66 +7518,44 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     - \tweak color #darkcyan
                                     - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                                     c'16
                                     [
-            <BLANKLINE>
                                     d'16
-            <BLANKLINE>
                                     bf'!16
                                     ]
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \times 2/3
                                 {
-            <BLANKLINE>
                                     c'16
                                     [
-            <BLANKLINE>
                                     d'16
-            <BLANKLINE>
                                     bf'!16
                                     ]
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \tweak text #tuplet-number::calc-fraction-text
                                 \times 6/7
                                 {
-            <BLANKLINE>
                                     c'16
                                     [
-            <BLANKLINE>
                                     d'16
-            <BLANKLINE>
                                     bf'!16
                                     ]
-            <BLANKLINE>
                                     r4
                                     <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             }
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice_2"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_2 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice_2"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice_2 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -7942,17 +7564,11 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     >>
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     ..  container:: example
@@ -8015,22 +7631,17 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #32
                         \time 9/8
                         \baca-time-signature-color #'blue
                         s1 * 9/8
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -8038,27 +7649,19 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     <<
-            <BLANKLINE>
                         \context Voice = "Music_Voice_1"
                         {
-            <BLANKLINE>
                             {
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_1 measure 1]
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
@@ -8072,87 +7675,56 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     - \tweak color #darkcyan
                                     - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'!16
                                     - \accent
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''!16
                                     - \accent
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
                                     ]
                                     <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
-            <BLANKLINE>
                             }
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice_1"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_1 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice_1"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice_1 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -8161,21 +7733,14 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                         \context Voice = "Music_Voice_2"
                         {
-            <BLANKLINE>
                             {
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_2 measure 1]
                                     \voiceTwo
                                     c'16
@@ -8186,85 +7751,54 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     - \tweak color #darkcyan
                                     - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                                     d'16
-            <BLANKLINE>
                                     bf'!16
-            <BLANKLINE>
                                     fs''!16
-            <BLANKLINE>
                                     e''16
                                     ]
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     ef''!16
                                     [
-            <BLANKLINE>
                                     af''!16
-            <BLANKLINE>
                                     g''16
-            <BLANKLINE>
                                     a'16
                                     ]
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     c'16
                                     [
-            <BLANKLINE>
                                     d'16
-            <BLANKLINE>
                                     bf'!16
-            <BLANKLINE>
                                     fs''!16
-            <BLANKLINE>
                                     e''16
                                     ]
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     ef''!16
                                     [
-            <BLANKLINE>
                                     af''!16
-            <BLANKLINE>
                                     g''16
-            <BLANKLINE>
                                     a'16
                                     ]
                                     <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             }
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice_2"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_2 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice_2"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice_2 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -8273,17 +7807,11 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     >>
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     """
@@ -8361,55 +7889,41 @@ def extend_beam(
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #32
                         \time 7/16
                         \baca-time-signature-color #'blue
                         s1 * 7/16
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #32
                         \time 1/4
                         \baca-time-signature-color #'blue
                         s1 * 1/4
-            <BLANKLINE>
                         % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \baca-time-signature-transparent
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     <<
-            <BLANKLINE>
                         \context Voice = "Music_Voice_1"
                         {
-            <BLANKLINE>
                             {
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_1 measure 1]
                                     \voiceOne
                                     s16
@@ -8420,87 +7934,63 @@ def extend_beam(
                                     - \tweak color #darkcyan
                                     - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
                                     - \staccato
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'!16
                                     - \staccato
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     s16
-            <BLANKLINE>
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
-            <BLANKLINE>
                             }
-            <BLANKLINE>
                             {
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_1 measure 2]
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     s16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     cs''!16
                                     - \staccato
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     a'16
                                     - \staccato
-            <BLANKLINE>
                                     s16
                                     ]
                                     <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
-            <BLANKLINE>
                             }
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice_1"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_1 measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice_1"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice_1 measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -8509,21 +7999,14 @@ def extend_beam(
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                         \context Voice = "Music_Voice_2"
                         {
-            <BLANKLINE>
                             {
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_2 measure 1]
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
@@ -8536,87 +8019,63 @@ def extend_beam(
                                     - \tweak color #darkcyan
                                     - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'!16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     fs''!16
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     e''16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     ef''!16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 0
                                     b''16
                                     ]
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             }
-            <BLANKLINE>
                             {
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_2 measure 2]
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     g''16
                                     [
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     cs''!16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     a'16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 0
                                     af'!16
                                     ]
                                     <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             }
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice_2"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_2 measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice_2"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice_2 measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -8625,17 +8084,11 @@ def extend_beam(
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     >>
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     """
@@ -8709,22 +8162,17 @@ def imbricate(
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #32
                         \time 15/16
                         \baca-time-signature-color #'blue
                         s1 * 15/16
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -8732,27 +8180,19 @@ def imbricate(
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     <<
-            <BLANKLINE>
                         \context Voice = "Music_Voice_1"
                         {
-            <BLANKLINE>
                             {
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_1 measure 1]
                                     \voiceOne
                                     s16
@@ -8762,83 +8202,57 @@ def imbricate(
                                     - \tweak color #darkcyan
                                     - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     g''16
                                     [
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 0
                                     a'16
                                     ]
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     fs''!16
                                     [
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 0
                                     e''16
                                     ]
-            <BLANKLINE>
                                     s16
                                     <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
-            <BLANKLINE>
                             }
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice_1"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_1 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice_1"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice_1 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -8847,21 +8261,14 @@ def imbricate(
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                         \context Voice = "Music_Voice_2"
                         {
-            <BLANKLINE>
                             {
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_2 measure 1]
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
@@ -8874,96 +8281,70 @@ def imbricate(
                                     - \tweak color #darkcyan
                                     - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'!16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''!16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     e''16
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''!16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     af''!16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     g''16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     a'16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     c'16
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     d'16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'!16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''!16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     e''16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 0
                                     ef''!16
                                     ]
                                     <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             }
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice_2"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_2 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice_2"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice_2 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -8972,17 +8353,11 @@ def imbricate(
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     >>
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     ..  container:: example
@@ -9037,22 +8412,17 @@ def imbricate(
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #32
                         \time 15/16
                         \baca-time-signature-color #'blue
                         s1 * 15/16
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -9060,27 +8430,19 @@ def imbricate(
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     <<
-            <BLANKLINE>
                         \context Voice = "Music_Voice_1"
                         {
-            <BLANKLINE>
                             {
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_1 measure 1]
                                     \override Beam.positions = #'(6 . 6)
                                     s16
@@ -9091,80 +8453,54 @@ def imbricate(
                                     - \tweak color #darkcyan
                                     - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
                                     - \staccato
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     g''16
                                     - \staccato
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     a'16
                                     - \staccato
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
                                     ]
                                     \revert Beam.positions
                                     <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
-            <BLANKLINE>
                             }
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice_1"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_1 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice_1"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice_1 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -9173,21 +8509,14 @@ def imbricate(
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                         \context Voice = "Music_Voice_2"
                         {
-            <BLANKLINE>
                             {
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_2 measure 1]
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
@@ -9199,96 +8528,70 @@ def imbricate(
                                     - \tweak color #darkcyan
                                     - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'!16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''!16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     e''16
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''!16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     af''!16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     g''16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     a'16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     c'16
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     d'16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'!16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''!16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     e''16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 0
                                     ef''!16
                                     ]
                                     <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             }
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice_2"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_2 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice_2"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice_2 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -9297,23 +8600,16 @@ def imbricate(
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                         \context Voice = "Music_Voice_3"
                         {
-            <BLANKLINE>
                             {
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_3 measure 1]
                                     \override Beam.positions = #'(8 . 8)
                                     s16
@@ -9324,80 +8620,54 @@ def imbricate(
                                     - \tweak color #darkcyan
                                     - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     e''16
                                     - \accent
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'!16
                                     - \accent
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''!16
                                     - \accent
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
                                     ]
                                     \revert Beam.positions
                                     <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
-            <BLANKLINE>
                             }
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice_3"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_3 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice_3"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice_3 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -9406,17 +8676,11 @@ def imbricate(
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     >>
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     ..  container:: example
@@ -9475,22 +8739,17 @@ def imbricate(
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #32
                         \time 9/8
                         \baca-time-signature-color #'blue
                         s1 * 9/8
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -9498,28 +8757,20 @@ def imbricate(
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     <<
-            <BLANKLINE>
                         \context Voice = "Music_Voice_1"
                         {
-            <BLANKLINE>
                             {
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
-            <BLANKLINE>
                                 \tweak text #tuplet-number::calc-fraction-text
                                 \times 6/5
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_1 measure 1]
                                     \voiceOne
                                     s16
@@ -9530,87 +8781,61 @@ def imbricate(
                                     - \tweak color #darkcyan
                                     - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
                                     - \accent
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \tweak text #tuplet-number::calc-fraction-text
                                 \times 6/5
                                 {
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     g''16
                                     - \accent
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     a'16
                                     - \accent
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \tweak text #tuplet-number::calc-fraction-text
                                 \times 6/5
                                 {
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''!16
                                     - \accent
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     e''16
                                     - \accent
-            <BLANKLINE>
                                     s16
                                     ]
                                     <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
-            <BLANKLINE>
                             }
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice_1"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_1 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice_1"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice_1 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -9619,22 +8844,15 @@ def imbricate(
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                         \context Voice = "Music_Voice_2"
                         {
-            <BLANKLINE>
                             {
-            <BLANKLINE>
                                 \tweak text #tuplet-number::calc-fraction-text
                                 \times 6/5
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_2 measure 1]
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
@@ -9648,112 +8866,86 @@ def imbricate(
                                     - \tweak color #darkcyan
                                     - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
                                     - \staccato
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'!16
                                     - \staccato
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''!16
                                     - \staccato
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     e''16
                                     - \staccato
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \tweak text #tuplet-number::calc-fraction-text
                                 \times 6/5
                                 {
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''!16
                                     - \staccato
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     af''!16
                                     - \staccato
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     g''16
                                     - \staccato
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     a'16
                                     - \staccato
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     c'16
                                     - \staccato
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \tweak text #tuplet-number::calc-fraction-text
                                 \times 6/5
                                 {
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     d'16
                                     - \staccato
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'!16
                                     - \staccato
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''!16
                                     - \staccato
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     e''16
                                     - \staccato
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 0
                                     ef''!16
                                     - \staccato
                                     ]
                                     <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             }
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice_2"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_2 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice_2"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice_2 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -9762,17 +8954,11 @@ def imbricate(
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     >>
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     ..  container:: example
@@ -9832,22 +9018,17 @@ def imbricate(
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \time 27/16
                         \baca-time-signature-color #'blue
                         s1 * 27/16
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -9855,27 +9036,19 @@ def imbricate(
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     <<
-            <BLANKLINE>
                         \context Voice = "Music_Voice_1"
                         {
-            <BLANKLINE>
                             {
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_1 measure 1]
                                     \voiceOne
                                     s8.
@@ -9886,70 +9059,50 @@ def imbricate(
                                     - \tweak color #darkcyan
                                     - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                                     s8.
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
                                     bf'!8.
                                     - \accent
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
                                     fs''!8.
                                     - \accent
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
                                     e''8.
                                     - \accent
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
                                     ef''!8.
                                     - \accent
-            <BLANKLINE>
                                     s8.
-            <BLANKLINE>
                                     s8.
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     s8.
                                     ]
                                     <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
-            <BLANKLINE>
                             }
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice_1"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_1 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice_1"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice_1 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -9958,21 +9111,14 @@ def imbricate(
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                         \context Voice = "Music_Voice_2"
                         {
-            <BLANKLINE>
                             {
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_2 measure 1]
                                     \voiceTwo
                                     c'8.
@@ -9983,58 +9129,38 @@ def imbricate(
                                     - \tweak color #darkcyan
                                     - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                                     d'8.
-            <BLANKLINE>
                                     bf'!8.
                                     ]
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     fs''!8.
                                     [
-            <BLANKLINE>
                                     e''8.
-            <BLANKLINE>
                                     ef''!8.
-            <BLANKLINE>
                                     af''!8.
-            <BLANKLINE>
                                     g''8.
                                     ]
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     a'8.
                                     <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             }
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice_2"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_2 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice_2"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice_2 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -10043,17 +9169,11 @@ def imbricate(
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     >>
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     ..  container:: example
@@ -10111,22 +9231,17 @@ def imbricate(
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #32
                         \time 11/16
                         \baca-time-signature-color #'blue
                         s1 * 11/16
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -10134,27 +9249,19 @@ def imbricate(
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     <<
-            <BLANKLINE>
                         \context Voice = "Music_Voice_1"
                         {
-            <BLANKLINE>
                             {
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_1 measure 1]
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
@@ -10166,73 +9273,51 @@ def imbricate(
                                     - \tweak color #darkcyan
                                     - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     g''16
                                     [
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 0
                                     a'16
                                     ]
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     fs''!16
                                     [
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 0
                                     e''16
                                     ]
-            <BLANKLINE>
                                     s16
                                     <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
-            <BLANKLINE>
                             }
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice_1"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_1 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice_1"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice_1 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -10241,21 +9326,14 @@ def imbricate(
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                         \context Voice = "Music_Voice_2"
                         {
-            <BLANKLINE>
                             {
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_2 measure 1]
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
@@ -10268,80 +9346,58 @@ def imbricate(
                                     - \tweak color #darkcyan
                                     - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''!16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     af''!16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     g''16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     a'16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     c'16
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     d'16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'!16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''!16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     e''16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 0
                                     ef''!16
                                     ]
                                     <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             }
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice_2"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_2 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice_2"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice_2 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -10350,17 +9406,11 @@ def imbricate(
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     >>
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     ..  container:: example
@@ -10418,22 +9468,17 @@ def imbricate(
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #32
                         \time 19/16
                         \baca-time-signature-color #'blue
                         s1 * 19/16
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -10441,27 +9486,19 @@ def imbricate(
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     <<
-            <BLANKLINE>
                         \context Voice = "Music_Voice_1"
                         {
-            <BLANKLINE>
                             {
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_1 measure 1]
                                     \voiceOne
                                     s8
@@ -10471,87 +9508,59 @@ def imbricate(
                                     - \tweak color #darkcyan
                                     - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     g''16
                                     [
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 0
                                     a'16
                                     ]
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     fs''!16
                                     [
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 0
                                     e''16
                                     ]
-            <BLANKLINE>
                                     s16
-            <BLANKLINE>
                                     s8
                                     <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
-            <BLANKLINE>
                             }
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice_1"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_1 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice_1"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice_1 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -10560,21 +9569,14 @@ def imbricate(
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                         \context Voice = "Music_Voice_2"
                         {
-            <BLANKLINE>
                             {
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_2 measure 1]
                                     \voiceTwo
                                     r8
@@ -10584,103 +9586,75 @@ def imbricate(
                                     - \tweak color #darkcyan
                                     - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
                                     [
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'!16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''!16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     e''16
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''!16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     af''!16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     g''16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     a'16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     c'16
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \scaleDurations #'(1 . 1)
                                 {
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     d'16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'!16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''!16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     e''16
-            <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 0
                                     ef''!16
                                     ]
-            <BLANKLINE>
                                     r8
                                     <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             }
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice_2"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice_2 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice_2"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice_2 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -10689,17 +9663,11 @@ def imbricate(
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     >>
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     """

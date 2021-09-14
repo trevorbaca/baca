@@ -48,56 +48,42 @@ class AccidentalAdjustmentCommand(scoping.Command):
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 5]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
-            <BLANKLINE>
                         \context Voice = "Music_Voice"
                         {
-            <BLANKLINE>
                             % [Music_Voice measure 1]
                             e'!2
                             - \abjad-dashed-line-with-hook
@@ -106,34 +92,25 @@ class AccidentalAdjustmentCommand(scoping.Command):
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                             % [Music_Voice measure 2]
                             f'!4.
-            <BLANKLINE>
                             % [Music_Voice measure 3]
                             e'2
-            <BLANKLINE>
                             % [Music_Voice measure 4]
                             f'4.
                             <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -142,17 +119,11 @@ class AccidentalAdjustmentCommand(scoping.Command):
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     """
@@ -578,56 +549,42 @@ class ClusterCommand(scoping.Command):
                 >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
-                <BLANKLINE>
                 \context Score = "Score"
                 <<
-                <BLANKLINE>
                     \context GlobalContext = "Global_Context"
                     <<
-                <BLANKLINE>
                         \context GlobalSkips = "Global_Skips"
                         {
-                <BLANKLINE>
                             % [Global_Skips measure 1]
                             \time 4/8
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                <BLANKLINE>
                             % [Global_Skips measure 2]
                             \time 3/8
                             \baca-time-signature-color #'blue
                             s1 * 3/8
-                <BLANKLINE>
                             % [Global_Skips measure 3]
                             \time 4/8
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                <BLANKLINE>
                             % [Global_Skips measure 4]
                             \time 3/8
                             \baca-time-signature-color #'blue
                             s1 * 3/8
-                <BLANKLINE>
                             % [Global_Skips measure 5]
                             \time 1/4
                             \baca-time-signature-transparent
                             s1 * 1/4
                             \once \override Score.BarLine.transparent = ##t
                             \once \override Score.SpanBar.transparent = ##t
-                <BLANKLINE>
                         }
-                <BLANKLINE>
                     >>
-                <BLANKLINE>
                     \context MusicContext = "Music_Context"
                     {
-                <BLANKLINE>
                         \context Staff = "Music_Staff"
                         {
-                <BLANKLINE>
                             \context Voice = "Music_Voice"
                             {
-                <BLANKLINE>
                                 % [Music_Voice measure 1]
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
@@ -647,7 +604,6 @@ class ClusterCommand(scoping.Command):
                                 - \tweak color #darkcyan
                                 - \tweak staff-padding 8
                                 \bacaStartTextSpanRhythmAnnotation
-                <BLANKLINE>
                                 % [Music_Voice measure 2]
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
@@ -661,7 +617,6 @@ class ClusterCommand(scoping.Command):
                                     \center-align
                                         \natural
                                     }
-                <BLANKLINE>
                                 % [Music_Voice measure 3]
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
@@ -675,7 +630,6 @@ class ClusterCommand(scoping.Command):
                                     \center-align
                                         \natural
                                     }
-                <BLANKLINE>
                                 % [Music_Voice measure 4]
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
@@ -690,24 +644,18 @@ class ClusterCommand(scoping.Command):
                                         \natural
                                     }
                                 <> \bacaStopTextSpanRhythmAnnotation
-                <BLANKLINE>
                                 <<
-                <BLANKLINE>
                                     \context Voice = "Music_Voice"
                                     {
-                <BLANKLINE>
                                         % [Music_Voice measure 5]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \context Voice = "Rest_Voice"
                                     {
-                <BLANKLINE>
                                         % [Rest_Voice measure 5]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
@@ -716,17 +664,11 @@ class ClusterCommand(scoping.Command):
                                         \startStaff
                                         R1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                 >>
-                <BLANKLINE>
                             }
-                <BLANKLINE>
                         }
-                <BLANKLINE>
                     }
-                <BLANKLINE>
                 >>
 
         """
@@ -769,56 +711,42 @@ class ClusterCommand(scoping.Command):
                 >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
-                <BLANKLINE>
                 \context Score = "Score"
                 <<
-                <BLANKLINE>
                     \context GlobalContext = "Global_Context"
                     <<
-                <BLANKLINE>
                         \context GlobalSkips = "Global_Skips"
                         {
-                <BLANKLINE>
                             % [Global_Skips measure 1]
                             \time 4/8
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                <BLANKLINE>
                             % [Global_Skips measure 2]
                             \time 3/8
                             \baca-time-signature-color #'blue
                             s1 * 3/8
-                <BLANKLINE>
                             % [Global_Skips measure 3]
                             \time 4/8
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                <BLANKLINE>
                             % [Global_Skips measure 4]
                             \time 3/8
                             \baca-time-signature-color #'blue
                             s1 * 3/8
-                <BLANKLINE>
                             % [Global_Skips measure 5]
                             \time 1/4
                             \baca-time-signature-transparent
                             s1 * 1/4
                             \once \override Score.BarLine.transparent = ##t
                             \once \override Score.SpanBar.transparent = ##t
-                <BLANKLINE>
                         }
-                <BLANKLINE>
                     >>
-                <BLANKLINE>
                     \context MusicContext = "Music_Context"
                     {
-                <BLANKLINE>
                         \context Staff = "Music_Staff"
                         {
-                <BLANKLINE>
                             \context Voice = "Music_Voice"
                             {
-                <BLANKLINE>
                                 % [Music_Voice measure 1]
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
@@ -842,7 +770,6 @@ class ClusterCommand(scoping.Command):
                                 - \tweak color #darkcyan
                                 - \tweak staff-padding 8
                                 \bacaStartTextSpanRhythmAnnotation
-                <BLANKLINE>
                                 % [Music_Voice measure 2]
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
@@ -860,7 +787,6 @@ class ClusterCommand(scoping.Command):
                                                 \flat
                                             }
                                     }
-                <BLANKLINE>
                                 % [Music_Voice measure 3]
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
@@ -878,7 +804,6 @@ class ClusterCommand(scoping.Command):
                                                 \flat
                                             }
                                     }
-                <BLANKLINE>
                                 % [Music_Voice measure 4]
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
@@ -897,24 +822,18 @@ class ClusterCommand(scoping.Command):
                                             }
                                     }
                                 <> \bacaStopTextSpanRhythmAnnotation
-                <BLANKLINE>
                                 <<
-                <BLANKLINE>
                                     \context Voice = "Music_Voice"
                                     {
-                <BLANKLINE>
                                         % [Music_Voice measure 5]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \context Voice = "Rest_Voice"
                                     {
-                <BLANKLINE>
                                         % [Rest_Voice measure 5]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
@@ -923,17 +842,11 @@ class ClusterCommand(scoping.Command):
                                         \startStaff
                                         R1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                 >>
-                <BLANKLINE>
                             }
-                <BLANKLINE>
                         }
-                <BLANKLINE>
                     }
-                <BLANKLINE>
                 >>
 
         ..  container:: example
@@ -960,56 +873,42 @@ class ClusterCommand(scoping.Command):
                 >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
-                <BLANKLINE>
                 \context Score = "Score"
                 <<
-                <BLANKLINE>
                     \context GlobalContext = "Global_Context"
                     <<
-                <BLANKLINE>
                         \context GlobalSkips = "Global_Skips"
                         {
-                <BLANKLINE>
                             % [Global_Skips measure 1]
                             \time 4/8
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                <BLANKLINE>
                             % [Global_Skips measure 2]
                             \time 3/8
                             \baca-time-signature-color #'blue
                             s1 * 3/8
-                <BLANKLINE>
                             % [Global_Skips measure 3]
                             \time 4/8
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                <BLANKLINE>
                             % [Global_Skips measure 4]
                             \time 3/8
                             \baca-time-signature-color #'blue
                             s1 * 3/8
-                <BLANKLINE>
                             % [Global_Skips measure 5]
                             \time 1/4
                             \baca-time-signature-transparent
                             s1 * 1/4
                             \once \override Score.BarLine.transparent = ##t
                             \once \override Score.SpanBar.transparent = ##t
-                <BLANKLINE>
                         }
-                <BLANKLINE>
                     >>
-                <BLANKLINE>
                     \context MusicContext = "Music_Context"
                     {
-                <BLANKLINE>
                         \context Staff = "Music_Staff"
                         {
-                <BLANKLINE>
                             \context Voice = "Music_Voice"
                             {
-                <BLANKLINE>
                                 % [Music_Voice measure 1]
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
@@ -1033,7 +932,6 @@ class ClusterCommand(scoping.Command):
                                 - \tweak color #darkcyan
                                 - \tweak staff-padding 8
                                 \bacaStartTextSpanRhythmAnnotation
-                <BLANKLINE>
                                 % [Music_Voice measure 2]
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
@@ -1051,7 +949,6 @@ class ClusterCommand(scoping.Command):
                                                 \flat
                                             }
                                     }
-                <BLANKLINE>
                                 % [Music_Voice measure 3]
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
@@ -1069,7 +966,6 @@ class ClusterCommand(scoping.Command):
                                                 \flat
                                             }
                                     }
-                <BLANKLINE>
                                 % [Music_Voice measure 4]
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
@@ -1088,24 +984,18 @@ class ClusterCommand(scoping.Command):
                                             }
                                     }
                                 <> \bacaStopTextSpanRhythmAnnotation
-                <BLANKLINE>
                                 <<
-                <BLANKLINE>
                                     \context Voice = "Music_Voice"
                                     {
-                <BLANKLINE>
                                         % [Music_Voice measure 5]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \context Voice = "Rest_Voice"
                                     {
-                <BLANKLINE>
                                         % [Rest_Voice measure 5]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
@@ -1114,17 +1004,11 @@ class ClusterCommand(scoping.Command):
                                         \startStaff
                                         R1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                 >>
-                <BLANKLINE>
                             }
-                <BLANKLINE>
                         }
-                <BLANKLINE>
                     }
-                <BLANKLINE>
                 >>
 
         """
@@ -1159,56 +1043,42 @@ class ClusterCommand(scoping.Command):
                 >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
-                <BLANKLINE>
                 \context Score = "Score"
                 <<
-                <BLANKLINE>
                     \context GlobalContext = "Global_Context"
                     <<
-                <BLANKLINE>
                         \context GlobalSkips = "Global_Skips"
                         {
-                <BLANKLINE>
                             % [Global_Skips measure 1]
                             \time 4/8
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                <BLANKLINE>
                             % [Global_Skips measure 2]
                             \time 3/8
                             \baca-time-signature-color #'blue
                             s1 * 3/8
-                <BLANKLINE>
                             % [Global_Skips measure 3]
                             \time 4/8
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                <BLANKLINE>
                             % [Global_Skips measure 4]
                             \time 3/8
                             \baca-time-signature-color #'blue
                             s1 * 3/8
-                <BLANKLINE>
                             % [Global_Skips measure 5]
                             \time 1/4
                             \baca-time-signature-transparent
                             s1 * 1/4
                             \once \override Score.BarLine.transparent = ##t
                             \once \override Score.SpanBar.transparent = ##t
-                <BLANKLINE>
                         }
-                <BLANKLINE>
                     >>
-                <BLANKLINE>
                     \context MusicContext = "Music_Context"
                     {
-                <BLANKLINE>
                         \context Staff = "Music_Staff"
                         {
-                <BLANKLINE>
                             \context Voice = "Music_Voice"
                             {
-                <BLANKLINE>
                                 % [Music_Voice measure 1]
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
@@ -1232,7 +1102,6 @@ class ClusterCommand(scoping.Command):
                                 - \tweak color #darkcyan
                                 - \tweak staff-padding 8
                                 \bacaStartTextSpanRhythmAnnotation
-                <BLANKLINE>
                                 % [Music_Voice measure 2]
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
@@ -1250,7 +1119,6 @@ class ClusterCommand(scoping.Command):
                                                 \flat
                                             }
                                     }
-                <BLANKLINE>
                                 % [Music_Voice measure 3]
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
@@ -1268,7 +1136,6 @@ class ClusterCommand(scoping.Command):
                                                 \flat
                                             }
                                     }
-                <BLANKLINE>
                                 % [Music_Voice measure 4]
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
@@ -1287,24 +1154,18 @@ class ClusterCommand(scoping.Command):
                                             }
                                     }
                                 <> \bacaStopTextSpanRhythmAnnotation
-                <BLANKLINE>
                                 <<
-                <BLANKLINE>
                                     \context Voice = "Music_Voice"
                                     {
-                <BLANKLINE>
                                         % [Music_Voice measure 5]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \context Voice = "Rest_Voice"
                                     {
-                <BLANKLINE>
                                         % [Rest_Voice measure 5]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
@@ -1313,17 +1174,11 @@ class ClusterCommand(scoping.Command):
                                         \startStaff
                                         R1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                 >>
-                <BLANKLINE>
                             }
-                <BLANKLINE>
                         }
-                <BLANKLINE>
                     }
-                <BLANKLINE>
                 >>
 
         ..  container:: example
@@ -1350,56 +1205,42 @@ class ClusterCommand(scoping.Command):
                 >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
-                <BLANKLINE>
                 \context Score = "Score"
                 <<
-                <BLANKLINE>
                     \context GlobalContext = "Global_Context"
                     <<
-                <BLANKLINE>
                         \context GlobalSkips = "Global_Skips"
                         {
-                <BLANKLINE>
                             % [Global_Skips measure 1]
                             \time 4/8
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                <BLANKLINE>
                             % [Global_Skips measure 2]
                             \time 3/8
                             \baca-time-signature-color #'blue
                             s1 * 3/8
-                <BLANKLINE>
                             % [Global_Skips measure 3]
                             \time 4/8
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                <BLANKLINE>
                             % [Global_Skips measure 4]
                             \time 3/8
                             \baca-time-signature-color #'blue
                             s1 * 3/8
-                <BLANKLINE>
                             % [Global_Skips measure 5]
                             \time 1/4
                             \baca-time-signature-transparent
                             s1 * 1/4
                             \once \override Score.BarLine.transparent = ##t
                             \once \override Score.SpanBar.transparent = ##t
-                <BLANKLINE>
                         }
-                <BLANKLINE>
                     >>
-                <BLANKLINE>
                     \context MusicContext = "Music_Context"
                     {
-                <BLANKLINE>
                         \context Staff = "Music_Staff"
                         {
-                <BLANKLINE>
                             \context Voice = "Music_Voice"
                             {
-                <BLANKLINE>
                                 % [Music_Voice measure 1]
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
@@ -1423,7 +1264,6 @@ class ClusterCommand(scoping.Command):
                                 - \tweak color #darkcyan
                                 - \tweak staff-padding 8
                                 \bacaStartTextSpanRhythmAnnotation
-                <BLANKLINE>
                                 % [Music_Voice measure 2]
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
@@ -1441,7 +1281,6 @@ class ClusterCommand(scoping.Command):
                                                 \flat
                                             }
                                     }
-                <BLANKLINE>
                                 % [Music_Voice measure 3]
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
@@ -1459,7 +1298,6 @@ class ClusterCommand(scoping.Command):
                                                 \flat
                                             }
                                     }
-                <BLANKLINE>
                                 % [Music_Voice measure 4]
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
@@ -1478,24 +1316,18 @@ class ClusterCommand(scoping.Command):
                                             }
                                     }
                                 <> \bacaStopTextSpanRhythmAnnotation
-                <BLANKLINE>
                                 <<
-                <BLANKLINE>
                                     \context Voice = "Music_Voice"
                                     {
-                <BLANKLINE>
                                         % [Music_Voice measure 5]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \context Voice = "Rest_Voice"
                                     {
-                <BLANKLINE>
                                         % [Rest_Voice measure 5]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
@@ -1504,17 +1336,11 @@ class ClusterCommand(scoping.Command):
                                         \startStaff
                                         R1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                 >>
-                <BLANKLINE>
                             }
-                <BLANKLINE>
                         }
-                <BLANKLINE>
                     }
-                <BLANKLINE>
                 >>
 
         ..  container:: example
@@ -1543,56 +1369,42 @@ class ClusterCommand(scoping.Command):
                 >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
-                <BLANKLINE>
                 \context Score = "Score"
                 <<
-                <BLANKLINE>
                     \context GlobalContext = "Global_Context"
                     <<
-                <BLANKLINE>
                         \context GlobalSkips = "Global_Skips"
                         {
-                <BLANKLINE>
                             % [Global_Skips measure 1]
                             \time 4/8
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                <BLANKLINE>
                             % [Global_Skips measure 2]
                             \time 3/8
                             \baca-time-signature-color #'blue
                             s1 * 3/8
-                <BLANKLINE>
                             % [Global_Skips measure 3]
                             \time 4/8
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                <BLANKLINE>
                             % [Global_Skips measure 4]
                             \time 3/8
                             \baca-time-signature-color #'blue
                             s1 * 3/8
-                <BLANKLINE>
                             % [Global_Skips measure 5]
                             \time 1/4
                             \baca-time-signature-transparent
                             s1 * 1/4
                             \once \override Score.BarLine.transparent = ##t
                             \once \override Score.SpanBar.transparent = ##t
-                <BLANKLINE>
                         }
-                <BLANKLINE>
                     >>
-                <BLANKLINE>
                     \context MusicContext = "Music_Context"
                     {
-                <BLANKLINE>
                         \context Staff = "Music_Staff"
                         {
-                <BLANKLINE>
                             \context Voice = "Music_Voice"
                             {
-                <BLANKLINE>
                                 % [Music_Voice measure 1]
                                 e'2
                                 - \abjad-dashed-line-with-hook
@@ -1601,34 +1413,25 @@ class ClusterCommand(scoping.Command):
                                 - \tweak color #darkcyan
                                 - \tweak staff-padding 8
                                 \bacaStartTextSpanRhythmAnnotation
-                <BLANKLINE>
                                 % [Music_Voice measure 2]
                                 e'4.
-                <BLANKLINE>
                                 % [Music_Voice measure 3]
                                 e'2
-                <BLANKLINE>
                                 % [Music_Voice measure 4]
                                 e'4.
                                 <> \bacaStopTextSpanRhythmAnnotation
-                <BLANKLINE>
                                 <<
-                <BLANKLINE>
                                     \context Voice = "Music_Voice"
                                     {
-                <BLANKLINE>
                                         % [Music_Voice measure 5]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                     \context Voice = "Rest_Voice"
                                     {
-                <BLANKLINE>
                                         % [Rest_Voice measure 5]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
@@ -1637,17 +1440,11 @@ class ClusterCommand(scoping.Command):
                                         \startStaff
                                         R1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                <BLANKLINE>
                                     }
-                <BLANKLINE>
                                 >>
-                <BLANKLINE>
                             }
-                <BLANKLINE>
                         }
-                <BLANKLINE>
                     }
-                <BLANKLINE>
                 >>
 
         Inteprets positive integers as widths in thirds.
@@ -1687,56 +1484,42 @@ class ColorFingeringCommand(scoping.Command):
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 5]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
-            <BLANKLINE>
                         \context Voice = "Music_Voice"
                         {
-            <BLANKLINE>
                             % [Music_Voice measure 1]
                             e'2
                             - \abjad-dashed-line-with-hook
@@ -1745,37 +1528,28 @@ class ColorFingeringCommand(scoping.Command):
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                             % [Music_Voice measure 2]
                             e'4.
                             ^ \markup { \override #'(circle-padding . 0.25) \circle \finger 1 }
-            <BLANKLINE>
                             % [Music_Voice measure 3]
                             e'2
                             ^ \markup { \override #'(circle-padding . 0.25) \circle \finger 2 }
-            <BLANKLINE>
                             % [Music_Voice measure 4]
                             e'4.
                             ^ \markup { \override #'(circle-padding . 0.25) \circle \finger 1 }
                             <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -1784,17 +1558,11 @@ class ColorFingeringCommand(scoping.Command):
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     """
@@ -2134,56 +1902,42 @@ class MicrotoneDeviationCommand(scoping.Command):
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 5]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
-            <BLANKLINE>
                         \context Voice = "Music_Voice"
                         {
-            <BLANKLINE>
                             % [Music_Voice measure 1]
                             e'8
                             [
@@ -2193,61 +1947,42 @@ class MicrotoneDeviationCommand(scoping.Command):
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                             eqs'!8
-            <BLANKLINE>
                             e'8
-            <BLANKLINE>
                             eqf'!8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 2]
                             e'8
                             [
-            <BLANKLINE>
                             eqs'!8
-            <BLANKLINE>
                             e'8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 3]
                             eqf'!8
                             [
-            <BLANKLINE>
                             e'8
-            <BLANKLINE>
                             eqs'!8
-            <BLANKLINE>
                             e'8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 4]
                             eqf'!8
                             [
-            <BLANKLINE>
                             e'8
-            <BLANKLINE>
                             eqs'!8
                             ]
                             <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -2256,17 +1991,11 @@ class MicrotoneDeviationCommand(scoping.Command):
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     """
@@ -2380,56 +2109,42 @@ class OctaveDisplacementCommand(scoping.Command):
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 5]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
-            <BLANKLINE>
                         \context Voice = "Music_Voice"
                         {
-            <BLANKLINE>
                             % [Music_Voice measure 1]
                             g'8
                             [
@@ -2439,61 +2154,42 @@ class OctaveDisplacementCommand(scoping.Command):
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                             g'8
-            <BLANKLINE>
                             g''8
-            <BLANKLINE>
                             g''8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 2]
                             g'8
                             [
-            <BLANKLINE>
                             g'8
-            <BLANKLINE>
                             g8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 3]
                             g8
                             [
-            <BLANKLINE>
                             g'''8
-            <BLANKLINE>
                             g'''8
-            <BLANKLINE>
                             g'8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 4]
                             g'8
                             [
-            <BLANKLINE>
                             g''8
-            <BLANKLINE>
                             g''8
                             ]
                             <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -2502,17 +2198,11 @@ class OctaveDisplacementCommand(scoping.Command):
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     """
@@ -2631,56 +2321,42 @@ class PitchCommand(scoping.Command):
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 5]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
-            <BLANKLINE>
                         \context Voice = "Music_Voice"
                         {
-            <BLANKLINE>
                             % [Music_Voice measure 1]
                             g''8
                             [
@@ -2690,61 +2366,42 @@ class PitchCommand(scoping.Command):
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                             cs''!8
-            <BLANKLINE>
                             ef''!8
-            <BLANKLINE>
                             e''8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 2]
                             f''8
                             [
-            <BLANKLINE>
                             b''8
-            <BLANKLINE>
                             g''8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 3]
                             cs''!8
                             [
-            <BLANKLINE>
                             ef''!8
-            <BLANKLINE>
                             e''8
-            <BLANKLINE>
                             f''8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 4]
                             b''8
                             [
-            <BLANKLINE>
                             g''8
-            <BLANKLINE>
                             cs''!8
                             ]
                             <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -2753,17 +2410,11 @@ class PitchCommand(scoping.Command):
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     ..  container:: example
@@ -2791,56 +2442,42 @@ class PitchCommand(scoping.Command):
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 5]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
-            <BLANKLINE>
                         \context Voice = "Music_Voice"
                         {
-            <BLANKLINE>
                             % [Music_Voice measure 1]
                             c'8
                             [
@@ -2850,61 +2487,42 @@ class PitchCommand(scoping.Command):
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                             f'8
-            <BLANKLINE>
                             fs'!8
-            <BLANKLINE>
                             <b' cs''!>8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 2]
                             d''8
                             [
-            <BLANKLINE>
                             c'8
-            <BLANKLINE>
                             f'8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 3]
                             fs'!8
                             [
-            <BLANKLINE>
                             <b' cs''!>8
-            <BLANKLINE>
                             d''8
-            <BLANKLINE>
                             c'8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 4]
                             f'8
                             [
-            <BLANKLINE>
                             fs'!8
-            <BLANKLINE>
                             <b' cs''!>8
                             ]
                             <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -2913,17 +2531,11 @@ class PitchCommand(scoping.Command):
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     ..  container:: example
@@ -2951,56 +2563,42 @@ class PitchCommand(scoping.Command):
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 5]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
-            <BLANKLINE>
                         \context Voice = "Music_Voice"
                         {
-            <BLANKLINE>
                             % [Music_Voice measure 1]
                             <c' d' e' f' g' a' b'>8
                             [
@@ -3010,61 +2608,42 @@ class PitchCommand(scoping.Command):
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                             <c' d' e' f' g' a' b'>8
-            <BLANKLINE>
                             <c' d' e' f' g' a' b'>8
-            <BLANKLINE>
                             <c' d' e' f' g' a' b'>8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 2]
                             <c' d' e' f' g' a' b'>8
                             [
-            <BLANKLINE>
                             <c' d' e' f' g' a' b'>8
-            <BLANKLINE>
                             <c' d' e' f' g' a' b'>8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 3]
                             <c' d' e' f' g' a' b'>8
                             [
-            <BLANKLINE>
                             <c' d' e' f' g' a' b'>8
-            <BLANKLINE>
                             <c' d' e' f' g' a' b'>8
-            <BLANKLINE>
                             <c' d' e' f' g' a' b'>8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 4]
                             <c' d' e' f' g' a' b'>8
                             [
-            <BLANKLINE>
                             <c' d' e' f' g' a' b'>8
-            <BLANKLINE>
                             <c' d' e' f' g' a' b'>8
                             ]
                             <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -3073,17 +2652,11 @@ class PitchCommand(scoping.Command):
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     ..  container:: example
@@ -3599,56 +3172,42 @@ class RegisterCommand(scoping.Command):
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 5]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
-            <BLANKLINE>
                         \context Voice = "Music_Voice"
                         {
-            <BLANKLINE>
                             % [Music_Voice measure 1]
                             g''8
                             [
@@ -3658,61 +3217,42 @@ class RegisterCommand(scoping.Command):
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                             gqs''!8
-            <BLANKLINE>
                             gs''!8
-            <BLANKLINE>
                             gtqs''!8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 2]
                             aqf''!8
                             [
-            <BLANKLINE>
                             af''!8
-            <BLANKLINE>
                             atqf''!8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 3]
                             g''8
                             [
-            <BLANKLINE>
                             gqs''!8
-            <BLANKLINE>
                             gs''!8
-            <BLANKLINE>
                             gtqs''!8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 4]
                             aqf''!8
                             [
-            <BLANKLINE>
                             af''!8
-            <BLANKLINE>
                             atqf''!8
                             ]
                             <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -3721,17 +3261,11 @@ class RegisterCommand(scoping.Command):
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     ..  container:: example
@@ -4010,76 +3544,58 @@ class RegisterInterpolationCommand(scoping.Command):
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 5]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 6]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 7]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 8]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 9]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
-            <BLANKLINE>
                         \context Voice = "Music_Voice"
                         {
-            <BLANKLINE>
                             % [Music_Voice measure 1]
                             fs''!8
                             [
@@ -4089,101 +3605,68 @@ class RegisterInterpolationCommand(scoping.Command):
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                             e''8
-            <BLANKLINE>
                             ef''!8
-            <BLANKLINE>
                             f''8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 2]
                             a''8
                             [
-            <BLANKLINE>
                             bf''!8
-            <BLANKLINE>
                             c''8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 3]
                             b''8
                             [
-            <BLANKLINE>
                             af''!8
-            <BLANKLINE>
                             g''8
-            <BLANKLINE>
                             cs''!8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 4]
                             d''8
                             [
-            <BLANKLINE>
                             fs''!8
-            <BLANKLINE>
                             e''8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 5]
                             ef''!8
                             [
-            <BLANKLINE>
                             f''8
-            <BLANKLINE>
                             a''8
-            <BLANKLINE>
                             bf''!8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 6]
                             c''8
                             [
-            <BLANKLINE>
                             b''8
-            <BLANKLINE>
                             af''!8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 7]
                             g''8
                             [
-            <BLANKLINE>
                             cs''!8
-            <BLANKLINE>
                             d''8
-            <BLANKLINE>
                             fs''!8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 8]
                             e''8
                             [
-            <BLANKLINE>
                             ef''!8
-            <BLANKLINE>
                             f''8
                             ]
                             <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice measure 9]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice measure 9]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -4192,17 +3675,11 @@ class RegisterInterpolationCommand(scoping.Command):
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     ..  container:: example
@@ -4232,76 +3709,58 @@ class RegisterInterpolationCommand(scoping.Command):
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 5]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 6]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 7]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 8]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 9]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
-            <BLANKLINE>
                         \context Voice = "Music_Voice"
                         {
-            <BLANKLINE>
                             % [Music_Voice measure 1]
                             fs''!8
                             [
@@ -4311,101 +3770,68 @@ class RegisterInterpolationCommand(scoping.Command):
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                             e''8
-            <BLANKLINE>
                             ef''!8
-            <BLANKLINE>
                             f''8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 2]
                             a''8
                             [
-            <BLANKLINE>
                             bf'!8
-            <BLANKLINE>
                             c''8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 3]
                             b'8
                             [
-            <BLANKLINE>
                             af'!8
-            <BLANKLINE>
                             g''8
-            <BLANKLINE>
                             cs''!8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 4]
                             d''8
                             [
-            <BLANKLINE>
                             fs'!8
-            <BLANKLINE>
                             e''8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 5]
                             ef''!8
                             [
-            <BLANKLINE>
                             f'8
-            <BLANKLINE>
                             a'8
-            <BLANKLINE>
                             bf'!8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 6]
                             c''8
                             [
-            <BLANKLINE>
                             b'8
-            <BLANKLINE>
                             af'!8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 7]
                             g'8
                             [
-            <BLANKLINE>
                             cs''!8
-            <BLANKLINE>
                             d'8
-            <BLANKLINE>
                             fs'!8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 8]
                             e'8
                             [
-            <BLANKLINE>
                             ef'!8
-            <BLANKLINE>
                             f'8
                             ]
                             <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice measure 9]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice measure 9]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -4414,17 +3840,11 @@ class RegisterInterpolationCommand(scoping.Command):
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     ..  container:: example
@@ -4454,76 +3874,58 @@ class RegisterInterpolationCommand(scoping.Command):
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 5]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 6]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 7]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 8]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 9]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
-            <BLANKLINE>
                         \context Voice = "Music_Voice"
                         {
-            <BLANKLINE>
                             % [Music_Voice measure 1]
                             fs'!8
                             [
@@ -4533,101 +3935,68 @@ class RegisterInterpolationCommand(scoping.Command):
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                             e'8
-            <BLANKLINE>
                             ef'!8
-            <BLANKLINE>
                             f'8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 2]
                             a'8
                             [
-            <BLANKLINE>
                             bf'!8
-            <BLANKLINE>
                             c''8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 3]
                             b'8
                             [
-            <BLANKLINE>
                             af'!8
-            <BLANKLINE>
                             g'8
-            <BLANKLINE>
                             cs''!8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 4]
                             d''8
                             [
-            <BLANKLINE>
                             fs'!8
-            <BLANKLINE>
                             e''8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 5]
                             ef''!8
                             [
-            <BLANKLINE>
                             f''8
-            <BLANKLINE>
                             a'8
-            <BLANKLINE>
                             bf'!8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 6]
                             c''8
                             [
-            <BLANKLINE>
                             b'8
-            <BLANKLINE>
                             af'!8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 7]
                             g''8
                             [
-            <BLANKLINE>
                             cs''!8
-            <BLANKLINE>
                             d''8
-            <BLANKLINE>
                             fs''!8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 8]
                             e''8
                             [
-            <BLANKLINE>
                             ef''!8
-            <BLANKLINE>
                             f''8
                             ]
                             <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice measure 9]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice measure 9]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -4636,17 +4005,11 @@ class RegisterInterpolationCommand(scoping.Command):
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     ..  container:: example
@@ -4676,76 +4039,58 @@ class RegisterInterpolationCommand(scoping.Command):
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 5]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 6]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 7]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 8]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 9]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
-            <BLANKLINE>
                         \context Voice = "Music_Voice"
                         {
-            <BLANKLINE>
                             % [Music_Voice measure 1]
                             fs''!8
                             [
@@ -4755,101 +4100,68 @@ class RegisterInterpolationCommand(scoping.Command):
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                             e''8
-            <BLANKLINE>
                             ef''!8
-            <BLANKLINE>
                             f''8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 2]
                             a'8
                             [
-            <BLANKLINE>
                             bf'!8
-            <BLANKLINE>
                             c''8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 3]
                             b'8
                             [
-            <BLANKLINE>
                             af'!8
-            <BLANKLINE>
                             g'8
-            <BLANKLINE>
                             cs''!8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 4]
                             d'8
                             [
-            <BLANKLINE>
                             fs'!8
-            <BLANKLINE>
                             e'8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 5]
                             ef'!8
                             [
-            <BLANKLINE>
                             f'8
-            <BLANKLINE>
                             a'8
-            <BLANKLINE>
                             bf!8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 6]
                             c'8
                             [
-            <BLANKLINE>
                             b8
-            <BLANKLINE>
                             af!8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 7]
                             g8
                             [
-            <BLANKLINE>
                             cs'!8
-            <BLANKLINE>
                             d'8
-            <BLANKLINE>
                             fs!8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 8]
                             e8
                             [
-            <BLANKLINE>
                             ef!8
-            <BLANKLINE>
                             f8
                             ]
                             <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice measure 9]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice measure 9]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -4858,17 +4170,11 @@ class RegisterInterpolationCommand(scoping.Command):
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     ..  container:: example
@@ -4898,76 +4204,58 @@ class RegisterInterpolationCommand(scoping.Command):
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 5]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 6]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 7]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 8]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 9]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
-            <BLANKLINE>
                         \context Voice = "Music_Voice"
                         {
-            <BLANKLINE>
                             % [Music_Voice measure 1]
                             fs!8
                             [
@@ -4977,101 +4265,68 @@ class RegisterInterpolationCommand(scoping.Command):
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                             e8
-            <BLANKLINE>
                             ef!8
-            <BLANKLINE>
                             f8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 2]
                             a8
                             [
-            <BLANKLINE>
                             bf!8
-            <BLANKLINE>
                             c'8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 3]
                             b8
                             [
-            <BLANKLINE>
                             af!8
-            <BLANKLINE>
                             g'8
-            <BLANKLINE>
                             cs'!8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 4]
                             d'8
                             [
-            <BLANKLINE>
                             fs'!8
-            <BLANKLINE>
                             e'8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 5]
                             ef'!8
                             [
-            <BLANKLINE>
                             f'8
-            <BLANKLINE>
                             a'8
-            <BLANKLINE>
                             bf'!8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 6]
                             c''8
                             [
-            <BLANKLINE>
                             b'8
-            <BLANKLINE>
                             af'!8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 7]
                             g'8
                             [
-            <BLANKLINE>
                             cs''!8
-            <BLANKLINE>
                             d''8
-            <BLANKLINE>
                             fs''!8
                             ]
-            <BLANKLINE>
                             % [Music_Voice measure 8]
                             e''8
                             [
-            <BLANKLINE>
                             ef''!8
-            <BLANKLINE>
                             f''8
                             ]
                             <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice measure 9]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice measure 9]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -5080,17 +4335,11 @@ class RegisterInterpolationCommand(scoping.Command):
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     """
@@ -7004,56 +6253,42 @@ def force_accidental(
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 5]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
-            <BLANKLINE>
                         \context Voice = "Music_Voice"
                         {
-            <BLANKLINE>
                             % [Music_Voice measure 1]
                             e'2
                             %@% e'!2
@@ -7063,35 +6298,26 @@ def force_accidental(
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-            <BLANKLINE>
                             % [Music_Voice measure 2]
                             f'4.
                             %@% f'!4.
-            <BLANKLINE>
                             % [Music_Voice measure 3]
                             e'2
-            <BLANKLINE>
                             % [Music_Voice measure 4]
                             f'4.
                             <> \bacaStopTextSpanRhythmAnnotation
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -7100,17 +6326,11 @@ def force_accidental(
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     """
@@ -7378,89 +6598,66 @@ def pitch(
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
-            <BLANKLINE>
             \context Score = "Score"
             <<
-            <BLANKLINE>
                 \context GlobalContext = "Global_Context"
                 <<
-            <BLANKLINE>
                     \context GlobalSkips = "Global_Skips"
                     {
-            <BLANKLINE>
                         % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-            <BLANKLINE>
                         % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-            <BLANKLINE>
                         % [Global_Skips measure 5]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 >>
-            <BLANKLINE>
                 \context MusicContext = "Music_Context"
                 {
-            <BLANKLINE>
                     \context Staff = "Music_Staff"
                     {
-            <BLANKLINE>
                         \context Voice = "Music_Voice"
                         {
-            <BLANKLINE>
                             % [Music_Voice measure 1]
                             <c' d' e'>1 * 1/2
                             %@% ^ \baca-duration-multiplier-markup #"1" #"2"
-            <BLANKLINE>
                             % [Music_Voice measure 2]
                             <c' d' e'>1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-            <BLANKLINE>
                             % [Music_Voice measure 3]
                             <c' d' e'>1 * 1/2
                             %@% ^ \baca-duration-multiplier-markup #"1" #"2"
-            <BLANKLINE>
                             % [Music_Voice measure 4]
                             <c' d' e'>1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-            <BLANKLINE>
                             <<
-            <BLANKLINE>
                                 \context Voice = "Music_Voice"
                                 {
-            <BLANKLINE>
                                     % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                                 \context Voice = "Rest_Voice"
                                 {
-            <BLANKLINE>
                                     % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
@@ -7469,17 +6666,11 @@ def pitch(
                                     \startStaff
                                     R1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-            <BLANKLINE>
                                 }
-            <BLANKLINE>
                             >>
-            <BLANKLINE>
                         }
-            <BLANKLINE>
                     }
-            <BLANKLINE>
                 }
-            <BLANKLINE>
             >>
 
     """
