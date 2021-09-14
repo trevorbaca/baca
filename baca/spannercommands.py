@@ -291,12 +291,6 @@ def beam(
                         \context Voice = "Music_Voice"
                         {
                             c'8
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             _ [
                             c'8
                             c'8
@@ -312,7 +306,6 @@ def beam(
                             c'8
                             c'8
                             ]
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {

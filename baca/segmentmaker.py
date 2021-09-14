@@ -122,12 +122,6 @@ class SegmentMaker:
                             %@% \baca-not-yet-pitched-coloring
                             b'8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'8
                             %@% \baca-not-yet-pitched-coloring
@@ -161,7 +155,6 @@ class SegmentMaker:
                             %@% \baca-not-yet-pitched-coloring
                             b'8
                             ]
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -270,12 +263,6 @@ class SegmentMaker:
                             \scaleDurations #'(1 . 1)
                             {
                                 e'16
-                                - \abjad-dashed-line-with-hook
-                                - \baca-text-spanner-left-text "baca.music()"
-                                - \tweak bound-details.right.padding 2.75
-                                - \tweak color #darkcyan
-                                - \tweak staff-padding 8
-                                \bacaStartTextSpanRhythmAnnotation
                             }
                             \scaleDurations #'(1 . 1)
                             {
@@ -303,7 +290,6 @@ class SegmentMaker:
                                 \baca-repeat-pitch-class-coloring
                                 c'16
                                 f'16
-                                <> \bacaStopTextSpanRhythmAnnotation
                             }
                             <<
                                 \context Voice = "Music_Voice"
@@ -421,12 +407,6 @@ class SegmentMaker:
                             {
                                 e'16
                                 ^ \baca-explicit-indicator-markup "(Violin)"
-                                - \abjad-dashed-line-with-hook
-                                - \baca-text-spanner-left-text "baca.music()"
-                                - \tweak bound-details.right.padding 2.75
-                                - \tweak color #darkcyan
-                                - \tweak staff-padding 8
-                                \bacaStartTextSpanRhythmAnnotation
                             }
                             \scaleDurations #'(1 . 1)
                             {
@@ -451,7 +431,6 @@ class SegmentMaker:
                                 bf'!16
                                 c'16
                                 f'16
-                                <> \bacaStopTextSpanRhythmAnnotation
                             }
                             <<
                                 \context Voice = "Music_Voice"
@@ -785,12 +764,6 @@ class SegmentMaker:
                                 b'8
                                 ^ \markup { 0 }
                                 [
-                                - \abjad-dashed-line-with-hook
-                                - \baca-text-spanner-left-text "make_even_divisions()"
-                                - \tweak bound-details.right.padding 2.75
-                                - \tweak color #darkcyan
-                                - \tweak staff-padding 8
-                                \bacaStartTextSpanRhythmAnnotation
                                 \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 1 }
@@ -837,7 +810,6 @@ class SegmentMaker:
                                 b'8
                                 ^ \markup { 13 }
                                 ]
-                                <> \bacaStopTextSpanRhythmAnnotation
                                 <<
                                     \context Voice = "Music_Voice"
                                     {
@@ -926,12 +898,6 @@ class SegmentMaker:
                                 b'8
                                 ^ \markup { 0 }
                                 [
-                                - \abjad-dashed-line-with-hook
-                                - \baca-text-spanner-left-text "make_even_divisions()"
-                                - \tweak bound-details.right.padding 2.75
-                                - \tweak color #darkcyan
-                                - \tweak staff-padding 8
-                                \bacaStartTextSpanRhythmAnnotation
                                 \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 1 }
@@ -978,7 +944,6 @@ class SegmentMaker:
                                 b'8
                                 ^ \markup { 13 }
                                 ]
-                                <> \bacaStopTextSpanRhythmAnnotation
                                 <<
                                     \context Voice = "Music_Voice"
                                     {
@@ -2048,7 +2013,7 @@ class SegmentMaker:
                 except Exception:
                     print(f"Interpreting ...\n\n{abjad.storage(command)}\n")
                     raise
-                if selection is not None:
+                if selection is not None and self.environment != "docs":
                     _attach_rhythm_annotation_spanner(command, selection)
                 timespan = abjad.AnnotatedTimespan(
                     start_offset=start_offset, annotation=selection
@@ -4357,12 +4322,6 @@ class SegmentMaker:
                                 \context Voice = "Music_Voice_1"
                                 {
                                     d'4
-                                    - \abjad-dashed-line-with-hook
-                                    - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding 2.75
-                                    - \tweak color #darkcyan
-                                    - \tweak staff-padding 8
-                                    \bacaStartTextSpanRhythmAnnotation
                                     e'4
                                     \baca-octave-coloring
                                     f'4
@@ -4371,7 +4330,6 @@ class SegmentMaker:
                                     g'4
                                     a'4
                                     b'4
-                                    <> \bacaStopTextSpanRhythmAnnotation
                                     <<
                                         \context Voice = "Music_Voice_1"
                                         {
@@ -4403,12 +4361,6 @@ class SegmentMaker:
                                     %@% \override Staff.Clef.color = ##f
                                     \set Staff.forceClef = ##t
                                     a4
-                                    - \abjad-dashed-line-with-hook
-                                    - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding 2.75
-                                    - \tweak color #darkcyan
-                                    - \tweak staff-padding 8
-                                    \bacaStartTextSpanRhythmAnnotation
                                     \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                                     g4
                                     \baca-octave-coloring
@@ -4418,7 +4370,6 @@ class SegmentMaker:
                                     e4
                                     d4
                                     c4
-                                    <> \bacaStopTextSpanRhythmAnnotation
                                     <<
                                         \context Voice = "Music_Voice_2"
                                         {
@@ -5003,12 +4954,6 @@ class SegmentMaker:
                                 fs'!8
                                 ^ \baca-explicit-indicator-markup "(“clarinet”)"
                                 [
-                                - \abjad-dashed-line-with-hook
-                                - \baca-text-spanner-left-text "make_even_divisions()"
-                                - \tweak bound-details.right.padding 2.75
-                                - \tweak color #darkcyan
-                                - \tweak staff-padding 8
-                                \bacaStartTextSpanRhythmAnnotation
                                 g'8
                                 fs'!8
                                 g'8
@@ -5029,7 +4974,6 @@ class SegmentMaker:
                                 fs'!8
                                 g'8
                                 ]
-                                <> \bacaStopTextSpanRhythmAnnotation
                                 <<
                                     \context Voice = "Music_Voice"
                                     {
@@ -5119,12 +5063,6 @@ class SegmentMaker:
                                 e'8
                                 ^ \baca-explicit-indicator-markup "(“clarinet”)"
                                 [
-                                - \abjad-dashed-line-with-hook
-                                - \baca-text-spanner-left-text "make_even_divisions()"
-                                - \tweak bound-details.right.padding 2.75
-                                - \tweak color #darkcyan
-                                - \tweak staff-padding 8
-                                \bacaStartTextSpanRhythmAnnotation
                                 f'8
                                 e'8
                                 f'8
@@ -5145,7 +5083,6 @@ class SegmentMaker:
                                 e'8
                                 f'8
                                 ]
-                                <> \bacaStopTextSpanRhythmAnnotation
                                 <<
                                     \context Voice = "Music_Voice"
                                     {

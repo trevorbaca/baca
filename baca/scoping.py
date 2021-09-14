@@ -914,12 +914,6 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                             \baca-not-yet-pitched-coloring
                             b'8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \baca-not-yet-pitched-coloring
                             b'8
                             \baca-not-yet-pitched-coloring
@@ -969,7 +963,6 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                             \baca-not-yet-pitched-coloring
                             b'8
                             ]
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -1065,12 +1058,6 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                             \baca-not-yet-pitched-coloring
                             b'8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \baca-not-yet-pitched-coloring
                             b'8
                             \baca-not-yet-pitched-coloring
@@ -1120,7 +1107,6 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                             \baca-not-yet-pitched-coloring
                             b'8
                             ]
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -1270,12 +1256,6 @@ def only_parts(command: _command_typing) -> _command_typing:
                             \p
                             - \tweak color #(x11-color 'blue)
                             \<
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \baca-not-yet-pitched-coloring
                             b'4.
                             \baca-not-yet-pitched-coloring
@@ -1284,7 +1264,6 @@ def only_parts(command: _command_typing) -> _command_typing:
                             b'4.
                             - \tweak color #(x11-color 'blue)
                             \f
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {

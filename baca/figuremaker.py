@@ -2182,12 +2182,6 @@ class Imbrication:
                                         \voiceOne
                                         s16
                                         [
-                                        - \abjad-dashed-line-with-hook
-                                        - \baca-text-spanner-left-text "baca.music()"
-                                        - \tweak bound-details.right.padding 2.75
-                                        - \tweak color #darkcyan
-                                        - \tweak staff-padding 8
-                                        \bacaStartTextSpanRhythmAnnotation
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         d'16
@@ -2210,7 +2204,6 @@ class Imbrication:
                                         - \accent
                                         s16
                                         ]
-                                        <> \bacaStopTextSpanRhythmAnnotation
                                     }
                                     \revert TupletBracket.stencil
                                     \revert TupletNumber.stencil
@@ -2247,12 +2240,6 @@ class Imbrication:
                                         c'16
                                         - \staccato
                                         [
-                                        - \abjad-dashed-line-with-hook
-                                        - \baca-text-spanner-left-text "baca.music()"
-                                        - \tweak bound-details.right.padding 2.75
-                                        - \tweak color #darkcyan
-                                        - \tweak staff-padding 8
-                                        \bacaStartTextSpanRhythmAnnotation
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         d'16
@@ -2293,7 +2280,6 @@ class Imbrication:
                                         c'16
                                         - \staccato
                                         ]
-                                        <> \bacaStopTextSpanRhythmAnnotation
                                     }
                                 }
                                 <<
@@ -2467,12 +2453,6 @@ class Imbrication:
                                         \voiceOne
                                         s16
                                         [
-                                        - \abjad-dashed-line-with-hook
-                                        - \baca-text-spanner-left-text "baca.music()"
-                                        - \tweak bound-details.right.padding 2.75
-                                        - \tweak color #darkcyan
-                                        - \tweak staff-padding 8
-                                        \bacaStartTextSpanRhythmAnnotation
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         d'16
@@ -2509,7 +2489,6 @@ class Imbrication:
                                         - \accent
                                         s16
                                         ]
-                                        <> \bacaStopTextSpanRhythmAnnotation
                                     }
                                     \revert TupletBracket.stencil
                                     \revert TupletNumber.stencil
@@ -2546,12 +2525,6 @@ class Imbrication:
                                         c'16
                                         - \staccato
                                         [
-                                        - \abjad-dashed-line-with-hook
-                                        - \baca-text-spanner-left-text "baca.music()"
-                                        - \tweak bound-details.right.padding 2.75
-                                        - \tweak color #darkcyan
-                                        - \tweak staff-padding 8
-                                        \bacaStartTextSpanRhythmAnnotation
                                         s16
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
@@ -2600,7 +2573,6 @@ class Imbrication:
                                         ef''!16
                                         - \staccato
                                         ]
-                                        <> \bacaStopTextSpanRhythmAnnotation
                                     }
                                 }
                                 <<
@@ -2731,12 +2703,6 @@ class Imbrication:
                                         \voiceOne
                                         s16
                                         [
-                                        - \abjad-dashed-line-with-hook
-                                        - \baca-text-spanner-left-text "baca.music()"
-                                        - \tweak bound-details.right.padding 2.75
-                                        - \tweak color #darkcyan
-                                        - \tweak staff-padding 8
-                                        \bacaStartTextSpanRhythmAnnotation
                                         s16
                                         s16
                                         s16
@@ -2776,7 +2742,6 @@ class Imbrication:
                                         s16
                                         s16
                                         ]
-                                        <> \bacaStopTextSpanRhythmAnnotation
                                     }
                                     \revert TupletBracket.stencil
                                     \revert TupletNumber.stencil
@@ -2813,12 +2778,6 @@ class Imbrication:
                                         c'16
                                         - \staccato
                                         [
-                                        - \abjad-dashed-line-with-hook
-                                        - \baca-text-spanner-left-text "baca.music()"
-                                        - \tweak bound-details.right.padding 2.75
-                                        - \tweak color #darkcyan
-                                        - \tweak staff-padding 8
-                                        \bacaStartTextSpanRhythmAnnotation
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         d'16
@@ -2897,7 +2856,6 @@ class Imbrication:
                                         a'16
                                         - \staccato
                                         ]
-                                        <> \bacaStopTextSpanRhythmAnnotation
                                     }
                                 }
                                 <<
@@ -3016,12 +2974,6 @@ class Imbrication:
                                         \voiceOne
                                         s8
                                         [
-                                        - \abjad-dashed-line-with-hook
-                                        - \baca-text-spanner-left-text "baca.music()"
-                                        - \tweak bound-details.right.padding 2.75
-                                        - \tweak color #darkcyan
-                                        - \tweak staff-padding 8
-                                        \bacaStartTextSpanRhythmAnnotation
                                         s32
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 1
@@ -3056,7 +3008,6 @@ class Imbrication:
                                         a'8
                                         s32
                                         ]
-                                        <> \bacaStopTextSpanRhythmAnnotation
                                     }
                                     \revert TupletBracket.stencil
                                     \revert TupletNumber.stencil
@@ -3091,12 +3042,6 @@ class Imbrication:
                                         c'8
                                         ~
                                         [
-                                        - \abjad-dashed-line-with-hook
-                                        - \baca-text-spanner-left-text "baca.music()"
-                                        - \tweak bound-details.right.padding 2.75
-                                        - \tweak color #darkcyan
-                                        - \tweak staff-padding 8
-                                        \bacaStartTextSpanRhythmAnnotation
                                         c'32
                                         d'8
                                         ~
@@ -3133,7 +3078,6 @@ class Imbrication:
                                         [
                                         a'32
                                         ]
-                                        <> \bacaStopTextSpanRhythmAnnotation
                                     }
                                 }
                                 <<
@@ -7410,12 +7354,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                 {
                                     \voiceOne
                                     s8
-                                    - \abjad-dashed-line-with-hook
-                                    - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding 2.75
-                                    - \tweak color #darkcyan
-                                    - \tweak staff-padding 8
-                                    \bacaStartTextSpanRhythmAnnotation
                                     s16
                                     s16
                                     \set stemLeftBeamCount = 0
@@ -7441,7 +7379,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     s16
                                     s16
                                     s4
-                                    <> \bacaStopTextSpanRhythmAnnotation
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
@@ -7474,12 +7411,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                 {
                                     \voiceTwo
                                     r8
-                                    - \abjad-dashed-line-with-hook
-                                    - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding 2.75
-                                    - \tweak color #darkcyan
-                                    - \tweak staff-padding 8
-                                    \bacaStartTextSpanRhythmAnnotation
                                     c'16
                                     [
                                     d'16
@@ -7503,7 +7434,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     bf'!16
                                     ]
                                     r4
-                                    <> \bacaStopTextSpanRhythmAnnotation
                                 }
                             }
                             <<
@@ -7626,12 +7556,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     c'16
                                     - \accent
                                     [
-                                    - \abjad-dashed-line-with-hook
-                                    - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding 2.75
-                                    - \tweak color #darkcyan
-                                    - \tweak staff-padding 8
-                                    \bacaStartTextSpanRhythmAnnotation
                                     s16
                                     s16
                                     s16
@@ -7665,7 +7589,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     s16
                                     s16
                                     ]
-                                    <> \bacaStopTextSpanRhythmAnnotation
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
@@ -7699,12 +7622,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     \voiceTwo
                                     c'16
                                     [
-                                    - \abjad-dashed-line-with-hook
-                                    - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding 2.75
-                                    - \tweak color #darkcyan
-                                    - \tweak staff-padding 8
-                                    \bacaStartTextSpanRhythmAnnotation
                                     d'16
                                     bf'!16
                                     fs''!16
@@ -7738,7 +7655,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     g''16
                                     a'16
                                     ]
-                                    <> \bacaStopTextSpanRhythmAnnotation
                                 }
                             }
                             <<
@@ -7876,12 +7792,6 @@ def extend_beam(
                                     \voiceOne
                                     s16
                                     [
-                                    - \abjad-dashed-line-with-hook
-                                    - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding 2.75
-                                    - \tweak color #darkcyan
-                                    - \tweak staff-padding 8
-                                    \bacaStartTextSpanRhythmAnnotation
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
@@ -7921,7 +7831,6 @@ def extend_beam(
                                     - \staccato
                                     s16
                                     ]
-                                    <> \bacaStopTextSpanRhythmAnnotation
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
@@ -7957,12 +7866,6 @@ def extend_beam(
                                     \voiceTwo
                                     c'16
                                     [
-                                    - \abjad-dashed-line-with-hook
-                                    - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding 2.75
-                                    - \tweak color #darkcyan
-                                    - \tweak staff-padding 8
-                                    \bacaStartTextSpanRhythmAnnotation
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
@@ -8004,7 +7907,6 @@ def extend_beam(
                                     \set stemRightBeamCount = 0
                                     af'!16
                                     ]
-                                    <> \bacaStopTextSpanRhythmAnnotation
                                 }
                             }
                             <<
@@ -8134,12 +8036,6 @@ def imbricate(
                                 {
                                     \voiceOne
                                     s16
-                                    - \abjad-dashed-line-with-hook
-                                    - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding 2.75
-                                    - \tweak color #darkcyan
-                                    - \tweak staff-padding 8
-                                    \bacaStartTextSpanRhythmAnnotation
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
@@ -8174,7 +8070,6 @@ def imbricate(
                                     e''16
                                     ]
                                     s16
-                                    <> \bacaStopTextSpanRhythmAnnotation
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
@@ -8210,12 +8105,6 @@ def imbricate(
                                     \voiceTwo
                                     c'16
                                     [
-                                    - \abjad-dashed-line-with-hook
-                                    - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding 2.75
-                                    - \tweak color #darkcyan
-                                    - \tweak staff-padding 8
-                                    \bacaStartTextSpanRhythmAnnotation
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
@@ -8265,7 +8154,6 @@ def imbricate(
                                     \set stemRightBeamCount = 0
                                     ef''!16
                                     ]
-                                    <> \bacaStopTextSpanRhythmAnnotation
                                 }
                             }
                             <<
@@ -8377,12 +8265,6 @@ def imbricate(
                                     \override Beam.positions = #'(6 . 6)
                                     s16
                                     [
-                                    - \abjad-dashed-line-with-hook
-                                    - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding 2.75
-                                    - \tweak color #darkcyan
-                                    - \tweak staff-padding 8
-                                    \bacaStartTextSpanRhythmAnnotation
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
@@ -8414,7 +8296,6 @@ def imbricate(
                                     s16
                                     ]
                                     \revert Beam.positions
-                                    <> \bacaStopTextSpanRhythmAnnotation
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
@@ -8449,12 +8330,6 @@ def imbricate(
                                     \set stemRightBeamCount = 2
                                     c'16
                                     [
-                                    - \abjad-dashed-line-with-hook
-                                    - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding 2.75
-                                    - \tweak color #darkcyan
-                                    - \tweak staff-padding 8
-                                    \bacaStartTextSpanRhythmAnnotation
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
@@ -8504,7 +8379,6 @@ def imbricate(
                                     \set stemRightBeamCount = 0
                                     ef''!16
                                     ]
-                                    <> \bacaStopTextSpanRhythmAnnotation
                                 }
                             }
                             <<
@@ -8538,12 +8412,6 @@ def imbricate(
                                     \override Beam.positions = #'(8 . 8)
                                     s16
                                     [
-                                    - \abjad-dashed-line-with-hook
-                                    - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding 2.75
-                                    - \tweak color #darkcyan
-                                    - \tweak staff-padding 8
-                                    \bacaStartTextSpanRhythmAnnotation
                                     s16
                                     s16
                                     s16
@@ -8575,7 +8443,6 @@ def imbricate(
                                     s16
                                     ]
                                     \revert Beam.positions
-                                    <> \bacaStopTextSpanRhythmAnnotation
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
@@ -8694,12 +8561,6 @@ def imbricate(
                                     \voiceOne
                                     s16
                                     [
-                                    - \abjad-dashed-line-with-hook
-                                    - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding 2.75
-                                    - \tweak color #darkcyan
-                                    - \tweak staff-padding 8
-                                    \bacaStartTextSpanRhythmAnnotation
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
@@ -8738,7 +8599,6 @@ def imbricate(
                                     - \accent
                                     s16
                                     ]
-                                    <> \bacaStopTextSpanRhythmAnnotation
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
@@ -8776,12 +8636,6 @@ def imbricate(
                                     c'16
                                     - \staccato
                                     [
-                                    - \abjad-dashed-line-with-hook
-                                    - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding 2.75
-                                    - \tweak color #darkcyan
-                                    - \tweak staff-padding 8
-                                    \bacaStartTextSpanRhythmAnnotation
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
@@ -8847,7 +8701,6 @@ def imbricate(
                                     ef''!16
                                     - \staccato
                                     ]
-                                    <> \bacaStopTextSpanRhythmAnnotation
                                 }
                             }
                             <<
@@ -8964,12 +8817,6 @@ def imbricate(
                                     \voiceOne
                                     s8.
                                     [
-                                    - \abjad-dashed-line-with-hook
-                                    - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding 2.75
-                                    - \tweak color #darkcyan
-                                    - \tweak staff-padding 8
-                                    \bacaStartTextSpanRhythmAnnotation
                                     s8.
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
@@ -8997,7 +8844,6 @@ def imbricate(
                                 {
                                     s8.
                                     ]
-                                    <> \bacaStopTextSpanRhythmAnnotation
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
@@ -9031,12 +8877,6 @@ def imbricate(
                                     \voiceTwo
                                     c'8.
                                     [
-                                    - \abjad-dashed-line-with-hook
-                                    - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding 2.75
-                                    - \tweak color #darkcyan
-                                    - \tweak staff-padding 8
-                                    \bacaStartTextSpanRhythmAnnotation
                                     d'8.
                                     bf'!8.
                                     ]
@@ -9054,7 +8894,6 @@ def imbricate(
                                 \scaleDurations #'(1 . 1)
                                 {
                                     a'8.
-                                    <> \bacaStopTextSpanRhythmAnnotation
                                 }
                             }
                             <<
@@ -9170,12 +9009,6 @@ def imbricate(
                                     \set stemRightBeamCount = 2
                                     \voiceOne
                                     d'16
-                                    - \abjad-dashed-line-with-hook
-                                    - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding 2.75
-                                    - \tweak color #darkcyan
-                                    - \tweak staff-padding 8
-                                    \bacaStartTextSpanRhythmAnnotation
                                 }
                                 \scaleDurations #'(1 . 1)
                                 {
@@ -9204,7 +9037,6 @@ def imbricate(
                                     e''16
                                     ]
                                     s16
-                                    <> \bacaStopTextSpanRhythmAnnotation
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
@@ -9240,12 +9072,6 @@ def imbricate(
                                     \voiceTwo
                                     <c' d' bf'! e'' fs''!>16
                                     [
-                                    - \abjad-dashed-line-with-hook
-                                    - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding 2.75
-                                    - \tweak color #darkcyan
-                                    - \tweak staff-padding 8
-                                    \bacaStartTextSpanRhythmAnnotation
                                 }
                                 \scaleDurations #'(1 . 1)
                                 {
@@ -9283,7 +9109,6 @@ def imbricate(
                                     \set stemRightBeamCount = 0
                                     ef''!16
                                     ]
-                                    <> \bacaStopTextSpanRhythmAnnotation
                                 }
                             }
                             <<
@@ -9397,12 +9222,6 @@ def imbricate(
                                 {
                                     \voiceOne
                                     s8
-                                    - \abjad-dashed-line-with-hook
-                                    - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding 2.75
-                                    - \tweak color #darkcyan
-                                    - \tweak staff-padding 8
-                                    \bacaStartTextSpanRhythmAnnotation
                                     s16
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
@@ -9439,7 +9258,6 @@ def imbricate(
                                     ]
                                     s16
                                     s8
-                                    <> \bacaStopTextSpanRhythmAnnotation
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
@@ -9472,12 +9290,6 @@ def imbricate(
                                 {
                                     \voiceTwo
                                     r8
-                                    - \abjad-dashed-line-with-hook
-                                    - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding 2.75
-                                    - \tweak color #darkcyan
-                                    - \tweak staff-padding 8
-                                    \bacaStartTextSpanRhythmAnnotation
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
@@ -9532,7 +9344,6 @@ def imbricate(
                                     ef''!16
                                     ]
                                     r8
-                                    <> \bacaStopTextSpanRhythmAnnotation
                                 }
                             }
                             <<

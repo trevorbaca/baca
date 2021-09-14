@@ -331,12 +331,6 @@ class BCPCommand(scoping.Command):
                                 e'8
                                 - \downbow
                                 [
-                                - \abjad-dashed-line-with-hook
-                                - \baca-text-spanner-left-text "make_even_divisions()"
-                                - \tweak bound-details.right.padding 2.75
-                                - \tweak color #darkcyan
-                                - \tweak staff-padding 8
-                                \bacaStartTextSpanRhythmAnnotation
                                 - \abjad-solid-line-with-arrow
                                 - \baca-bcp-spanner-left-text #1 #5
                                 \bacaStartTextSpanBCP
@@ -420,7 +414,6 @@ class BCPCommand(scoping.Command):
                                 ]
                                 \revert Script.staff-padding
                                 \revert TextSpanner.staff-padding
-                                <> \bacaStopTextSpanRhythmAnnotation
                                 <<
                                     \context Voice = "Music_Voice"
                                     {
@@ -576,12 +569,6 @@ class BCPCommand(scoping.Command):
                                 e'8
                                 - \downbow
                                 [
-                                - \abjad-dashed-line-with-hook
-                                - \baca-text-spanner-left-text "make_even_divisions()"
-                                - \tweak bound-details.right.padding 2.75
-                                - \tweak color #darkcyan
-                                - \tweak staff-padding 8
-                                \bacaStartTextSpanRhythmAnnotation
                                 - \abjad-solid-line-with-arrow
                                 - \baca-bcp-spanner-left-text #1 #5
                                 - \tweak color #red
@@ -694,7 +681,6 @@ class BCPCommand(scoping.Command):
                                 \bacaStopTextSpanBCP
                                 ]
                                 \revert Script.staff-padding
-                                <> \bacaStopTextSpanRhythmAnnotation
                                 <<
                                     \context Voice = "Music_Voice"
                                     {
@@ -869,18 +855,11 @@ class ContainerCommand(scoping.Command):
                     {
                         {   %*% ViolinI
                             e'2
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes(repeat_ties=True)"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             f'4.
                         }   %*% ViolinI
                         {   %*% ViolinII
                             e'2
                             f'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                         }   %*% ViolinII
                         <<
                             \context Voice = "Music_Voice"

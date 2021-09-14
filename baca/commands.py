@@ -101,16 +101,9 @@ def assign_parts(
                     {
                         {   %*% PartAssignment('Music_Voice')
                             e'2
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             e'4.
                             e'2
                             e'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                         }   %*% PartAssignment('Music_Voice')
                         <<
                             \context Voice = "Music_Voice"
@@ -255,12 +248,6 @@ def bcps(
                                 e'8
                                 - \downbow
                                 [
-                                - \abjad-dashed-line-with-hook
-                                - \baca-text-spanner-left-text "make_even_divisions()"
-                                - \tweak bound-details.right.padding 2.75
-                                - \tweak color #darkcyan
-                                - \tweak staff-padding 8
-                                \bacaStartTextSpanRhythmAnnotation
                                 - \abjad-solid-line-with-arrow
                                 - \baca-bcp-spanner-left-text #1 #5
                                 \bacaStartTextSpanBCP
@@ -346,7 +333,6 @@ def bcps(
                                 ]
                                 \revert Script.staff-padding
                                 \revert TextSpanner.staff-padding
-                                <> \bacaStopTextSpanRhythmAnnotation
                                 <<
                                     \context Voice = "Music_Voice"
                                     {
@@ -634,18 +620,11 @@ def container(
                     {
                         {   %*% ViolinI
                             e'2
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes(repeat_ties=True)"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             f'4.
                         }   %*% ViolinI
                         {   %*% ViolinII
                             e'2
                             f'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                         }   %*% ViolinII
                         <<
                             \context Voice = "Music_Voice"
@@ -745,16 +724,9 @@ def cross_staff(
                             \context Voice = "Music_Voice_1"
                             {
                                 e'4
-                                - \abjad-dashed-line-with-hook
-                                - \baca-text-spanner-left-text "baca.music()"
-                                - \tweak bound-details.right.padding 2.75
-                                - \tweak color #darkcyan
-                                - \tweak staff-padding 8
-                                \bacaStartTextSpanRhythmAnnotation
                                 f'4
                                 g'4
                                 a'4
-                                <> \bacaStopTextSpanRhythmAnnotation
                                 <<
                                     \context Voice = "Music_Voice_1"
                                     {
@@ -782,18 +754,11 @@ def cross_staff(
                             \context Voice = "Music_Voice_2"
                             {
                                 c'4
-                                - \abjad-dashed-line-with-hook
-                                - \baca-text-spanner-left-text "baca.music()"
-                                - \tweak bound-details.right.padding 2.75
-                                - \tweak color #darkcyan
-                                - \tweak staff-padding 8
-                                \bacaStartTextSpanRhythmAnnotation
                                 d'4
                                 \crossStaff
                                 e'4
                                 \crossStaff
                                 f'4
-                                <> \bacaStopTextSpanRhythmAnnotation
                                 <<
                                     \context Voice = "Music_Voice_2"
                                     {
@@ -1111,12 +1076,6 @@ def finger_pressure_transition(
                         {
                             \once \override NoteHead.style = #'harmonic
                             c''2
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             - \tweak arrow-length 2
                             - \tweak arrow-width 0.5
                             - \tweak bound-details.right.arrow ##t
@@ -1131,7 +1090,6 @@ def finger_pressure_transition(
                             - \tweak thickness 3
                             \glissando
                             c''4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -1351,12 +1309,6 @@ def glissando(
                         {
                             e'8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \glissando
                             d''8
                             \glissando
@@ -1390,7 +1342,6 @@ def glissando(
                             \glissando
                             d''8
                             ]
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -1476,12 +1427,6 @@ def glissando(
                         {
                             e'8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \glissando
                             d''8
                             f'8
@@ -1504,7 +1449,6 @@ def glissando(
                             \glissando
                             d''8
                             ]
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -1591,12 +1535,6 @@ def glissando(
                         {
                             e'8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             - \tweak color #red
                             \glissando
                             d''8
@@ -1643,7 +1581,6 @@ def glissando(
                             \glissando
                             d''8
                             ]
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -1731,12 +1668,6 @@ def glissando(
                         {
                             e'8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             - \tweak color #red
                             \glissando
                             d''8
@@ -1772,7 +1703,6 @@ def glissando(
                             \glissando
                             d''8
                             ]
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -1926,12 +1856,6 @@ def invisible_music(
                         \context Voice = "Music_Voice"
                         {
                             c''2
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \abjad-invisible-music
                             \abjad-invisible-music-coloring
                             c''4.
@@ -1939,7 +1863,6 @@ def invisible_music(
                             \abjad-invisible-music-coloring
                             c''2
                             c''4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {

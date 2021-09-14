@@ -739,15 +739,8 @@ r"""
                             b'4.
                             - \tweak color #(x11-color 'blue)
                             \f
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -845,15 +838,8 @@ r"""
                             b'4.
                             - \tweak color #(x11-color 'blue)
                             \p
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -952,15 +938,8 @@ r"""
                             b'4.
                             - \tweak color #(x11-color 'green4)
                             \f
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -1046,17 +1025,10 @@ r"""
                             b'4.
                             - \tweak color #(x11-color 'blue)
                             \f
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'DeepPink1)
                             \f
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -1154,15 +1126,8 @@ r"""
                             b'4.
                             - \tweak color #(x11-color 'DeepPink1)
                             \f
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -1246,17 +1211,10 @@ r"""
                             b'4.
                             - \tweak color #(x11-color 'blue)
                             \sfz
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'blue)
                             \sfz
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -1354,15 +1312,8 @@ r"""
                             b'4.
                             - \tweak color #(x11-color 'blue)
                             \sfz
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -1449,17 +1400,10 @@ r"""
                             b'4.
                             - \tweak color #(x11-color 'blue)
                             \mf
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'blue)
                             \baca-effort-mf
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -1576,15 +1520,8 @@ r"""
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-default-indicator-markup "(“Flute”)"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -1661,15 +1598,8 @@ r"""
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-default-indicator-markup "(“Flute”)"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -1742,15 +1672,8 @@ r"""
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-default-indicator-markup "(“Flute”)"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -1846,15 +1769,8 @@ r"""
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -1931,15 +1847,8 @@ r"""
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -2013,15 +1922,8 @@ r"""
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -2130,15 +2032,8 @@ r"""
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -2216,15 +2111,8 @@ r"""
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -2298,15 +2186,8 @@ r"""
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -2416,15 +2297,8 @@ r"""
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-reapplied-indicator-markup "(“Flute”)"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -2502,15 +2376,8 @@ r"""
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-reapplied-indicator-markup "(“Flute”)"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -2585,15 +2452,8 @@ r"""
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-reapplied-indicator-markup "(“Flute”)"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -2703,18 +2563,11 @@ r"""
                             %@% \baca-not-yet-pitched-coloring
                             b'2
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'2
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
                             %@% \baca-not-yet-pitched-coloring
                             b'2
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -2794,18 +2647,11 @@ r"""
                             %@% \baca-not-yet-pitched-coloring
                             b'2
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'2
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
                             %@% \baca-not-yet-pitched-coloring
                             b'2
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -2881,18 +2727,11 @@ r"""
                             %@% \baca-not-yet-pitched-coloring
                             b'2
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'2
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
                             %@% \baca-not-yet-pitched-coloring
                             b'2
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -3008,15 +2847,8 @@ r"""
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -3094,15 +2926,8 @@ r"""
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -3176,15 +3001,8 @@ r"""
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -3312,18 +3130,11 @@ r"""
                             \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)
                             b'4.
                             ^ \baca-default-indicator-markup "[“I+II”]"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'violet)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -3403,18 +3214,11 @@ r"""
                             \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)
                             b'4.
                             ^ \baca-default-indicator-markup "[“I+II”]"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'violet)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -3490,18 +3294,11 @@ r"""
                             \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)
                             b'4.
                             ^ \baca-default-indicator-markup "[“I+II”]"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'violet)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -3600,18 +3397,11 @@ r"""
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                             b'4.
                             ^ \baca-explicit-indicator-markup "[“I+II”]"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -3691,18 +3481,11 @@ r"""
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                             b'4.
                             ^ \baca-explicit-indicator-markup "[“I+II”]"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -3778,18 +3561,11 @@ r"""
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                             b'4.
                             ^ \baca-explicit-indicator-markup "[“I+II”]"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -3903,18 +3679,11 @@ r"""
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                             b'4.
                             ^ \baca-explicit-indicator-markup "[“III+IV”]"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { III+IV }
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -3997,18 +3766,11 @@ r"""
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                             b'4.
                             ^ \baca-explicit-indicator-markup "[“III+IV”]"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { III+IV }
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -4087,18 +3849,11 @@ r"""
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                             b'4.
                             ^ \baca-explicit-indicator-markup "[“III+IV”]"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { III+IV }
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -4213,18 +3968,11 @@ r"""
                             \once \override Staff.InstrumentName.color = #(x11-color 'green4)
                             b'4.
                             ^ \baca-reapplied-indicator-markup "[“I+II”]"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -4307,18 +4055,11 @@ r"""
                             \once \override Staff.InstrumentName.color = #(x11-color 'green4)
                             b'4.
                             ^ \baca-reapplied-indicator-markup "[“I+II”]"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -4397,18 +4138,11 @@ r"""
                             \once \override Staff.InstrumentName.color = #(x11-color 'green4)
                             b'4.
                             ^ \baca-reapplied-indicator-markup "[“I+II”]"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -4521,12 +4255,6 @@ r"""
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                             b'2
                             ^ \baca-explicit-indicator-markup "[“I+II”]"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
@@ -4541,7 +4269,6 @@ r"""
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
                             b'2
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -4624,12 +4351,6 @@ r"""
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                             b'2
                             ^ \baca-explicit-indicator-markup "[“I+II”]"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
@@ -4644,7 +4365,6 @@ r"""
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
                             b'2
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -4723,12 +4443,6 @@ r"""
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                             b'2
                             ^ \baca-explicit-indicator-markup "[“I+II”]"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
@@ -4743,7 +4457,6 @@ r"""
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
                             b'2
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -4864,18 +4577,11 @@ r"""
                             \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                             b'4.
                             ^ \baca-redundant-indicator-markup "[“I+II”]"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -4958,18 +4664,11 @@ r"""
                             \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                             b'4.
                             ^ \baca-redundant-indicator-markup "[“I+II”]"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -5048,18 +4747,11 @@ r"""
                             \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                             b'4.
                             ^ \baca-redundant-indicator-markup "[“I+II”]"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -5185,12 +4877,6 @@ r"""
                             b'2
                             ^ \baca-explicit-indicator-markup "[“I+II”]"
                             %@% ^ \baca-explicit-indicator-markup "[“III+IV”]"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
@@ -5201,7 +4887,6 @@ r"""
                             b'2
                             %@% \baca-not-yet-pitched-coloring
                             b'2
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -5320,15 +5005,8 @@ r"""
                         {
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -5447,15 +5125,8 @@ r"""
                         {
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -5575,15 +5246,8 @@ r"""
                         {
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -5694,15 +5358,8 @@ r"""
                         {
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -5821,15 +5478,8 @@ r"""
                         {
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -5933,14 +5583,7 @@ r"""
                             \startStaff
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
                             b'4.
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -6087,16 +5730,9 @@ r"""
                         {
                             \baca-not-yet-pitched-coloring
                             b'4.
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.BarLine.bar-extent = #'(0 . 0)
                             \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -6208,15 +5844,8 @@ r"""
                             \override Staff.BarLine.bar-extent = #'(0 . 0)
                             \baca-not-yet-pitched-coloring
                             b'4.
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -6308,15 +5937,8 @@ r"""
                             %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
                             b'4.
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -6417,15 +6039,8 @@ r"""
                             %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
                             b'4.
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -6526,15 +6141,8 @@ r"""
                             %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.StaffSymbol.color = #(x11-color 'green4)
                             b'4.
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -6623,12 +6231,6 @@ r"""
                             %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
                             b'4.
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.BarLine.bar-extent = #'(-2 . 2)
                             \stopStaff
                             \once \override Staff.StaffSymbol.line-count = 5
@@ -6636,7 +6238,6 @@ r"""
                             %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -6737,15 +6338,8 @@ r"""
                             %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)
                             b'4.
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -6868,15 +6462,8 @@ r"""
                         {
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -6998,15 +6585,8 @@ r"""
                         {
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -7129,15 +6709,8 @@ r"""
                         {
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -7262,17 +6835,10 @@ r"""
                         {
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -7394,15 +6960,8 @@ r"""
                         {
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {

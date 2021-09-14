@@ -1301,12 +1301,6 @@ def hide_black_note_heads(
                         {
                             \baca-not-yet-pitched-coloring
                             b'2
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \baca-not-yet-pitched-coloring
                             \once \override NoteHead.transparent = ##t
                             b'4.
@@ -1315,7 +1309,6 @@ def hide_black_note_heads(
                             \baca-not-yet-pitched-coloring
                             \once \override NoteHead.transparent = ##t
                             b'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -1694,19 +1687,12 @@ def margin_markup(
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                             e'2
                             ^ \baca-explicit-indicator-markup "[MarginMarkup]"
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes(repeat_ties=True)"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { Fl. }
                             f'4.
                             e'2
                             f'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -2330,18 +2316,11 @@ def staff_lines(
                             \set Staff.forceClef = ##t
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
                             a4.
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             b4.
                             c'4.
                             d'4.
                             e'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -2436,18 +2415,11 @@ def staff_lines(
                             \set Staff.forceClef = ##t
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
                             b,4.
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             c4.
                             d4.
                             e4.
                             f4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -2543,18 +2515,11 @@ def staff_lines(
                             \set Staff.forceClef = ##t
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
                             a4.
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             b4.
                             c'4.
                             d'4.
                             e'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -2648,18 +2613,11 @@ def staff_lines(
                             \set Staff.forceClef = ##t
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
                             b,4.
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             c4.
                             d4.
                             e4.
                             f4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -2753,18 +2711,11 @@ def staff_lines(
                             %@% \override Staff.Clef.color = ##f
                             \set Staff.forceClef = ##t
                             g'4.
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             a'4.
                             b'4.
                             c''4.
                             d''4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {

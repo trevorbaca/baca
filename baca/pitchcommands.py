@@ -80,16 +80,9 @@ class AccidentalAdjustmentCommand(scoping.Command):
                         \context Voice = "Music_Voice"
                         {
                             e'!2
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes(repeat_ties=True)"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             f'!4.
                             e'2
                             f'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -581,12 +574,6 @@ class ClusterCommand(scoping.Command):
                                     \center-align
                                         \natural
                                     }
-                                - \abjad-dashed-line-with-hook
-                                - \baca-text-spanner-left-text "make_notes(repeat_ties=True)"
-                                - \tweak bound-details.right.padding 2.75
-                                - \tweak color #darkcyan
-                                - \tweak staff-padding 8
-                                \bacaStartTextSpanRhythmAnnotation
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -623,7 +610,6 @@ class ClusterCommand(scoping.Command):
                                     \center-align
                                         \natural
                                     }
-                                <> \bacaStopTextSpanRhythmAnnotation
                                 <<
                                     \context Voice = "Music_Voice"
                                     {
@@ -736,12 +722,6 @@ class ClusterCommand(scoping.Command):
                                                 \flat
                                             }
                                     }
-                                - \abjad-dashed-line-with-hook
-                                - \baca-text-spanner-left-text "make_notes(repeat_ties=True)"
-                                - \tweak bound-details.right.padding 2.75
-                                - \tweak color #darkcyan
-                                - \tweak staff-padding 8
-                                \bacaStartTextSpanRhythmAnnotation
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -790,7 +770,6 @@ class ClusterCommand(scoping.Command):
                                                 \flat
                                             }
                                     }
-                                <> \bacaStopTextSpanRhythmAnnotation
                                 <<
                                     \context Voice = "Music_Voice"
                                     {
@@ -887,12 +866,6 @@ class ClusterCommand(scoping.Command):
                                                 \flat
                                             }
                                     }
-                                - \abjad-dashed-line-with-hook
-                                - \baca-text-spanner-left-text "make_notes(repeat_ties=True)"
-                                - \tweak bound-details.right.padding 2.75
-                                - \tweak color #darkcyan
-                                - \tweak staff-padding 8
-                                \bacaStartTextSpanRhythmAnnotation
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -941,7 +914,6 @@ class ClusterCommand(scoping.Command):
                                                 \flat
                                             }
                                     }
-                                <> \bacaStopTextSpanRhythmAnnotation
                                 <<
                                     \context Voice = "Music_Voice"
                                     {
@@ -1046,12 +1018,6 @@ class ClusterCommand(scoping.Command):
                                                 \flat
                                             }
                                     }
-                                - \abjad-dashed-line-with-hook
-                                - \baca-text-spanner-left-text "make_notes(repeat_ties=True)"
-                                - \tweak bound-details.right.padding 2.75
-                                - \tweak color #darkcyan
-                                - \tweak staff-padding 8
-                                \bacaStartTextSpanRhythmAnnotation
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1100,7 +1066,6 @@ class ClusterCommand(scoping.Command):
                                                 \flat
                                             }
                                     }
-                                <> \bacaStopTextSpanRhythmAnnotation
                                 <<
                                     \context Voice = "Music_Voice"
                                     {
@@ -1197,12 +1162,6 @@ class ClusterCommand(scoping.Command):
                                                 \flat
                                             }
                                     }
-                                - \abjad-dashed-line-with-hook
-                                - \baca-text-spanner-left-text "make_notes(repeat_ties=True)"
-                                - \tweak bound-details.right.padding 2.75
-                                - \tweak color #darkcyan
-                                - \tweak staff-padding 8
-                                \bacaStartTextSpanRhythmAnnotation
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1251,7 +1210,6 @@ class ClusterCommand(scoping.Command):
                                                 \flat
                                             }
                                     }
-                                <> \bacaStopTextSpanRhythmAnnotation
                                 <<
                                     \context Voice = "Music_Voice"
                                     {
@@ -1335,16 +1293,9 @@ class ClusterCommand(scoping.Command):
                             \context Voice = "Music_Voice"
                             {
                                 e'2
-                                - \abjad-dashed-line-with-hook
-                                - \baca-text-spanner-left-text "make_notes(repeat_ties=True)"
-                                - \tweak bound-details.right.padding 2.75
-                                - \tweak color #darkcyan
-                                - \tweak staff-padding 8
-                                \bacaStartTextSpanRhythmAnnotation
                                 e'4.
                                 e'2
                                 e'4.
-                                <> \bacaStopTextSpanRhythmAnnotation
                                 <<
                                     \context Voice = "Music_Voice"
                                     {
@@ -1439,19 +1390,12 @@ class ColorFingeringCommand(scoping.Command):
                         \context Voice = "Music_Voice"
                         {
                             e'2
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes(repeat_ties=True)"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             e'4.
                             ^ \markup { \override #'(circle-padding . 0.25) \circle \finger 1 }
                             e'2
                             ^ \markup { \override #'(circle-padding . 0.25) \circle \finger 2 }
                             e'4.
                             ^ \markup { \override #'(circle-padding . 0.25) \circle \finger 1 }
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -1847,12 +1791,6 @@ class MicrotoneDeviationCommand(scoping.Command):
                         {
                             e'8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             eqs'!8
                             e'8
                             eqf'!8
@@ -1873,7 +1811,6 @@ class MicrotoneDeviationCommand(scoping.Command):
                             e'8
                             eqs'!8
                             ]
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -2043,12 +1980,6 @@ class OctaveDisplacementCommand(scoping.Command):
                         {
                             g'8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             g'8
                             g''8
                             g''8
@@ -2069,7 +2000,6 @@ class OctaveDisplacementCommand(scoping.Command):
                             g''8
                             g''8
                             ]
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -2244,12 +2174,6 @@ class PitchCommand(scoping.Command):
                         {
                             g''8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             cs''!8
                             ef''!8
                             e''8
@@ -2270,7 +2194,6 @@ class PitchCommand(scoping.Command):
                             g''8
                             cs''!8
                             ]
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -2354,12 +2277,6 @@ class PitchCommand(scoping.Command):
                         {
                             c'8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             f'8
                             fs'!8
                             <b' cs''!>8
@@ -2380,7 +2297,6 @@ class PitchCommand(scoping.Command):
                             fs'!8
                             <b' cs''!>8
                             ]
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -2464,12 +2380,6 @@ class PitchCommand(scoping.Command):
                         {
                             <c' d' e' f' g' a' b'>8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             <c' d' e' f' g' a' b'>8
                             <c' d' e' f' g' a' b'>8
                             <c' d' e' f' g' a' b'>8
@@ -2490,7 +2400,6 @@ class PitchCommand(scoping.Command):
                             <c' d' e' f' g' a' b'>8
                             <c' d' e' f' g' a' b'>8
                             ]
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -3062,12 +2971,6 @@ class RegisterCommand(scoping.Command):
                         {
                             g''8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             gqs''!8
                             gs''!8
                             gtqs''!8
@@ -3088,7 +2991,6 @@ class RegisterCommand(scoping.Command):
                             af''!8
                             atqf''!8
                             ]
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -3435,12 +3337,6 @@ class RegisterInterpolationCommand(scoping.Command):
                         {
                             fs''!8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             e''8
                             ef''!8
                             f''8
@@ -3483,7 +3379,6 @@ class RegisterInterpolationCommand(scoping.Command):
                             ef''!8
                             f''8
                             ]
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -3581,12 +3476,6 @@ class RegisterInterpolationCommand(scoping.Command):
                         {
                             fs''!8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             e''8
                             ef''!8
                             f''8
@@ -3629,7 +3518,6 @@ class RegisterInterpolationCommand(scoping.Command):
                             ef'!8
                             f'8
                             ]
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -3727,12 +3615,6 @@ class RegisterInterpolationCommand(scoping.Command):
                         {
                             fs'!8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             e'8
                             ef'!8
                             f'8
@@ -3775,7 +3657,6 @@ class RegisterInterpolationCommand(scoping.Command):
                             ef''!8
                             f''8
                             ]
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -3873,12 +3754,6 @@ class RegisterInterpolationCommand(scoping.Command):
                         {
                             fs''!8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             e''8
                             ef''!8
                             f''8
@@ -3921,7 +3796,6 @@ class RegisterInterpolationCommand(scoping.Command):
                             ef!8
                             f8
                             ]
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -4019,12 +3893,6 @@ class RegisterInterpolationCommand(scoping.Command):
                         {
                             fs!8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             e8
                             ef!8
                             f8
@@ -4067,7 +3935,6 @@ class RegisterInterpolationCommand(scoping.Command):
                             ef''!8
                             f''8
                             ]
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -6037,17 +5904,10 @@ def force_accidental(
                         {
                             e'2
                             %@% e'!2
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes(repeat_ties=True)"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             f'4.
                             %@% f'!4.
                             e'2
                             f'4.
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {

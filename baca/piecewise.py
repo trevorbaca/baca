@@ -963,12 +963,6 @@ def dynamic(
                             - \tweak color #(x11-color 'blue)
                             \<
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             d''8
                             f'8
                             c''8
@@ -991,7 +985,6 @@ def dynamic(
                             \!
                             ]
                             \revert DynamicLineSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -1087,12 +1080,6 @@ def dynamic(
                             - \tweak extra-offset #'(-4 . 0)
                             \p
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             d''8
                             f'8
                             c''8
@@ -1114,7 +1101,6 @@ def dynamic(
                             d''8
                             ]
                             \revert DynamicLineSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -1249,12 +1235,6 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)
                             \<
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             d''8
                             f'8
                             e''8
@@ -1278,7 +1258,6 @@ def hairpin(
                             \f
                             ]
                             \revert DynamicLineSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -1377,12 +1356,6 @@ def hairpin(
                             - \tweak circled-tip ##t
                             \>
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             d''8
                             f'8
                             c''8
@@ -1406,7 +1379,6 @@ def hairpin(
                             \!
                             ]
                             \revert DynamicLineSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -1504,12 +1476,6 @@ def hairpin(
                             - \tweak circled-tip ##t
                             \<
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             d''8
                             f'8
                             c''8
@@ -1533,7 +1499,6 @@ def hairpin(
                             \baca-effort-ff
                             ]
                             \revert DynamicLineSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -1631,12 +1596,6 @@ def hairpin(
                             - \tweak stencil #constante-hairpin
                             \<
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             d''8
                             f'8
                             c''8
@@ -1660,7 +1619,6 @@ def hairpin(
                             \f
                             ]
                             \revert DynamicLineSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -1765,12 +1723,6 @@ def hairpin(
                             - \tweak stencil #abjad-flared-hairpin
                             \<
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             d''8
                             f'8
                             c''8
@@ -1801,7 +1753,6 @@ def hairpin(
                             \baca-effort-p
                             ]
                             \revert DynamicLineSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -1899,12 +1850,6 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)
                             \p
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             d''8
                             f'8
                             e''8
@@ -1934,7 +1879,6 @@ def hairpin(
                             \p
                             ]
                             \revert DynamicLineSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -2032,12 +1976,6 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)
                             \<
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             d''8
                             f'8
                             e''8
@@ -2073,7 +2011,6 @@ def hairpin(
                             \p
                             ]
                             \revert DynamicLineSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -2170,12 +2107,6 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)
                             \p
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             d''8
                             f'8
                             e''8
@@ -2211,7 +2142,6 @@ def hairpin(
                             \p
                             ]
                             \revert DynamicLineSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -2311,12 +2241,6 @@ def hairpin(
                             - \tweak stencil #constante-hairpin
                             \<
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             d''8
                             f'8
                             e''8
@@ -2359,7 +2283,6 @@ def hairpin(
                             \p
                             ]
                             \revert DynamicLineSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -2454,12 +2377,6 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)
                             \f
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             d''8
                             f'8
                             c''8
@@ -2481,7 +2398,6 @@ def hairpin(
                             d''8
                             ]
                             \revert DynamicLineSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -2576,12 +2492,6 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)
                             \<
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             d''8
                             f'8
                             c''8
@@ -2604,7 +2514,6 @@ def hairpin(
                             \!
                             ]
                             \revert DynamicLineSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -2713,12 +2622,6 @@ def hairpin(
                                 - \tweak to-barline ##t
                                 - \tweak stencil #constante-hairpin
                                 \<
-                                - \abjad-dashed-line-with-hook
-                                - \baca-text-spanner-left-text "baca.skeleton()"
-                                - \tweak bound-details.right.padding 2.75
-                                - \tweak color #darkcyan
-                                - \tweak staff-padding 8
-                                \bacaStartTextSpanRhythmAnnotation
                                 r4.
                                 - \tweak color #(x11-color 'blue)
                                 - \tweak to-barline ##t
@@ -2736,7 +2639,6 @@ def hairpin(
                                 - \tweak to-barline ##t
                                 \!
                                 \revert DynamicLineSpanner.staff-padding
-                                <> \bacaStopTextSpanRhythmAnnotation
                             }
                             <<
                                 \context Voice = "Music_Voice"
@@ -2836,12 +2738,6 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)
                             \mf
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             d''8
                             f'8
                             e''8
@@ -2870,7 +2766,6 @@ def hairpin(
                             d''8
                             ]
                             \revert DynamicLineSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -2967,12 +2862,6 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)
                             \<
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             d''8
                             f'8
                             e''8
@@ -2996,7 +2885,6 @@ def hairpin(
                             \mf
                             ]
                             \revert DynamicLineSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -3986,12 +3874,6 @@ def text_spanner(
                             \override TextSpanner.staff-padding = 4.5
                             e'8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             - \abjad-dashed-line-with-arrow
                             - \baca-text-spanner-left-text "pont."
                             - \baca-text-spanner-right-text "ord."
@@ -4020,7 +3902,6 @@ def text_spanner(
                             \stopTextSpan
                             ]
                             \revert TextSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -4112,12 +3993,6 @@ def text_spanner(
                             e'8
                             [
                             - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
-                            - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "pont."
                             - \tweak bound-details.right.text \markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75 \general-align #Y #1 \upright ord. }
                             - \tweak bound-details.right.padding 1.25
@@ -4145,7 +4020,6 @@ def text_spanner(
                             \stopTextSpan
                             ]
                             \revert TextSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -4236,12 +4110,6 @@ def text_spanner(
                             \override TextSpanner.staff-padding = 4.5
                             e'8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             - \abjad-solid-line-with-arrow
                             - \baca-text-spanner-left-text "pont."
                             - \baca-text-spanner-right-text "ord."
@@ -4270,7 +4138,6 @@ def text_spanner(
                             \stopTextSpan
                             ]
                             \revert TextSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -4361,12 +4228,6 @@ def text_spanner(
                             \override TextSpanner.staff-padding = 4.5
                             e'8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             - \abjad-solid-line-with-hook
                             - \baca-text-spanner-left-text "pont."
                             - \tweak bound-details.right.text \markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75 \general-align #Y #1 \upright ord. }
@@ -4395,7 +4256,6 @@ def text_spanner(
                             \stopTextSpan
                             ]
                             \revert TextSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -4486,12 +4346,6 @@ def text_spanner(
                             \override TextSpanner.staff-padding = 4.5
                             e'8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             - \abjad-invisible-line
                             - \baca-text-spanner-left-text "pont."
                             - \baca-text-spanner-right-text "ord."
@@ -4520,7 +4374,6 @@ def text_spanner(
                             \stopTextSpan
                             ]
                             \revert TextSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -4618,12 +4471,6 @@ def text_spanner(
                             \override TextSpanner.staff-padding = 4.5
                             e'8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             - \abjad-invisible-line
                             - \baca-text-spanner-left-text "A"
                             \startTextSpan
@@ -4665,7 +4512,6 @@ def text_spanner(
                             ]
                             \revert DynamicLineSpanner.staff-padding
                             \revert TextSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -4761,12 +4607,6 @@ def text_spanner(
                             \override TextSpanner.staff-padding = 4.5
                             e'8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             - \abjad-solid-line-with-arrow
                             - \baca-text-spanner-left-text "A"
                             \startTextSpan
@@ -4808,7 +4648,6 @@ def text_spanner(
                             ]
                             \revert DynamicLineSpanner.staff-padding
                             \revert TextSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -4905,12 +4744,6 @@ def text_spanner(
                             \override TextSpanner.staff-padding = 4.5
                             e'8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             - \abjad-invisible-line
                             - \baca-text-spanner-left-text "A"
                             - \baca-text-spanner-right-text "B"
@@ -4961,7 +4794,6 @@ def text_spanner(
                             ]
                             \revert DynamicLineSpanner.staff-padding
                             \revert TextSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -5058,12 +4890,6 @@ def text_spanner(
                             \override TextSpanner.staff-padding = 4.5
                             e'8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             - \abjad-solid-line-with-arrow
                             - \baca-text-spanner-left-text "A"
                             - \baca-text-spanner-right-text "B"
@@ -5114,7 +4940,6 @@ def text_spanner(
                             ]
                             \revert DynamicLineSpanner.staff-padding
                             \revert TextSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -5216,12 +5041,6 @@ def text_spanner(
                             {
                                 \override TextSpanner.staff-padding = 4.5
                                 c'2
-                                - \abjad-dashed-line-with-hook
-                                - \baca-text-spanner-left-text "baca.skeleton()"
-                                - \tweak bound-details.right.padding 2.75
-                                - \tweak color #darkcyan
-                                - \tweak staff-padding 8
-                                \bacaStartTextSpanRhythmAnnotation
                                 - \abjad-solid-line-with-arrow
                                 - \baca-text-spanner-left-text "P"
                                 - \tweak color #red
@@ -5244,7 +5063,6 @@ def text_spanner(
                                 f'4.
                                 \stopTextSpan
                                 \revert TextSpanner.staff-padding
-                                <> \bacaStopTextSpanRhythmAnnotation
                             }
                             <<
                                 \context Voice = "Music_Voice"
@@ -5345,12 +5163,6 @@ def text_spanner(
                             e'8
                             [
                             - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
-                            - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-markup \baca-damp-markup
                             \startTextSpan
                             d''8
@@ -5376,7 +5188,6 @@ def text_spanner(
                             ]
                             \revert DynamicLineSpanner.staff-padding
                             \revert TextSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -5474,12 +5285,6 @@ def text_spanner(
                             \override TextSpanner.staff-padding = 4.5
                             e'8
                             [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             - \abjad-solid-line-with-hook
                             - \baca-text-spanner-left-text "A"
                             \startTextSpan
@@ -5521,7 +5326,6 @@ def text_spanner(
                             ]
                             \revert DynamicLineSpanner.staff-padding
                             \revert TextSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -5624,12 +5428,6 @@ def text_spanner(
                         {
                             \override TextSpanner.staff-padding = 4.5
                             c'2
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             - \abjad-solid-line-with-arrow
                             - \baca-text-spanner-left-text "P"
                             \startTextSpan
@@ -5659,7 +5457,6 @@ def text_spanner(
                             a'4.
                             \stopTextSpan
                             \revert TextSpanner.staff-padding
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
@@ -5756,12 +5553,6 @@ def text_spanner(
                             {
                                 \override TextSpanner.staff-padding = 4.5
                                 c'2
-                                - \abjad-dashed-line-with-hook
-                                - \baca-text-spanner-left-text "baca.skeleton()"
-                                - \tweak bound-details.right.padding 2.75
-                                - \tweak color #darkcyan
-                                - \tweak staff-padding 8
-                                \bacaStartTextSpanRhythmAnnotation
                                 - \abjad-solid-line-with-arrow
                                 - \baca-text-spanner-left-text "P"
                                 \startTextSpan
@@ -5783,7 +5574,6 @@ def text_spanner(
                                 ~
                                 f'8
                                 \revert TextSpanner.staff-padding
-                                <> \bacaStopTextSpanRhythmAnnotation
                             }
                             <<
                                 \context Voice = "Music_Voice"

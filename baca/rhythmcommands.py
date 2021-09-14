@@ -825,12 +825,6 @@ def make_monads(
                             {
                                 \baca-not-yet-pitched-coloring
                                 b'2
-                                - \abjad-dashed-line-with-hook
-                                - \baca-text-spanner-left-text "make_monads('2/5 2/5 1/5')"
-                                - \tweak bound-details.right.padding 2.75
-                                - \tweak color #darkcyan
-                                - \tweak staff-padding 8
-                                \bacaStartTextSpanRhythmAnnotation
                             }
                             \tweak edge-height #'(0.7 . 0)
                             \times 4/5
@@ -843,7 +837,6 @@ def make_monads(
                             {
                                 \baca-not-yet-pitched-coloring
                                 b'4
-                                <> \bacaStopTextSpanRhythmAnnotation
                             }
                             <<
                                 \context Voice = "Music_Voice"
@@ -987,12 +980,6 @@ def make_repeat_tied_notes(
                         {
                             \baca-not-yet-pitched-coloring
                             b'4.
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "make_repeat_tied_notes()"
-                            - \tweak bound-details.right.padding 2.75
-                            - \tweak color #darkcyan
-                            - \tweak staff-padding 8
-                            \bacaStartTextSpanRhythmAnnotation
                             - \tweak stencil ##f
                             ~
                             \baca-not-yet-pitched-coloring
@@ -1008,7 +995,6 @@ def make_repeat_tied_notes(
                             \baca-not-yet-pitched-coloring
                             b'4
                             \repeatTie
-                            <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
