@@ -8,13 +8,17 @@ import inspect
 import abjad
 from abjadext import rmakers
 
-from . import const, indicators
+from . import const as _const
+from . import indicators as _indicators
 from . import layout as _layout
 from . import memento as _memento
 from . import overrides as _overrides
 from . import parts as _parts
 from . import piecewise as _piecewise
-from . import pitchclasses, pitchcommands, rhythmcommands, scoping
+from . import pitchclasses as _pitchclasses
+from . import pitchcommands as _pitchcommands
+from . import rhythmcommands as _rhythmcommands
+from . import scoping as _scoping
 from . import selection as _selection
 from . import sequence as _sequence
 from . import tags as _tags
@@ -23,7 +27,7 @@ from . import templates as _templates
 
 def _site(frame, n=None):
     prefix = "baca.SegmentMaker"
-    return scoping.site(frame, prefix, n=n)
+    return _scoping.site(frame, prefix, n=n)
 
 
 nonfirst_preamble = r"""\header { composer = ##f poet = ##f title = ##f }
@@ -950,7 +954,7 @@ class SegmentMaker:
 
         """
         commands_ = _sequence.Sequence(commands).flatten(
-            classes=(list, scoping.Suite), depth=-1
+            classes=(list, _scoping.Suite), depth=-1
         )
         commands = tuple(commands_)
         self._cache_voice_names()
@@ -962,14 +966,14 @@ class SegmentMaker:
             abbreviations = abjad.OrderedDict()
         abbreviations = abbreviations or abjad.OrderedDict()
         scopes_ = self._unpack_scopes(scopes, abbreviations)
-        scope_type = (scoping.Scope, scoping.TimelineScope)
+        scope_type = (_scoping.Scope, _scoping.TimelineScope)
         assert all(isinstance(_, scope_type) for _ in scopes_), repr(scopes_)
         for command in commands:
             if command is None:
                 continue
             if isinstance(command, list):
                 raise Exception("use baca.suite().")
-            if not isinstance(command, scoping.Command):
+            if not isinstance(command, _scoping.Command):
                 message = "\n\nMust be command:"
                 message += f"\n\n{repr(command)}"
                 raise Exception(message)
@@ -978,7 +982,7 @@ class SegmentMaker:
             if self._voice_names and current_scope.voice_name not in self._voice_names:
                 message = f"unknown voice name {current_scope.voice_name!r}."
                 raise Exception(message)
-            if isinstance(current_scope, scoping.TimelineScope):
+            if isinstance(current_scope, _scoping.TimelineScope):
                 for scope_ in current_scope.scopes:
                     if scope_.voice_name in abbreviations:
                         voice_name = abbreviations[scope_.voice_name]
@@ -986,15 +990,15 @@ class SegmentMaker:
             for command in commands:
                 if command is None:
                     continue
-                assert isinstance(command, scoping.Command), repr(command)
+                assert isinstance(command, _scoping.Command), repr(command)
                 if not command._matches_scope_index(scope_count, i):
                     continue
-                if isinstance(command, scoping.Command):
+                if isinstance(command, _scoping.Command):
                     commands_ = _sequence.Sequence([command])
                 else:
                     commands_ = command
                 for command_ in commands_:
-                    assert isinstance(command_, scoping.Command), repr(command_)
+                    assert isinstance(command_, _scoping.Command), repr(command_)
                     measures = command_.measures
                     if isinstance(measures, int):
                         measures = (measures, measures)
@@ -1065,7 +1069,7 @@ class SegmentMaker:
         except ValueError:
             pass
         for voice in abjad.iterate(self.score).components(abjad.Voice):
-            if voice._has_indicator(const.INTERMITTENT):
+            if voice._has_indicator(_const.INTERMITTENT):
                 continue
             contexts.append(voice)
         container_to_part_assignment = abjad.OrderedDict()
@@ -1129,7 +1133,7 @@ class SegmentMaker:
         previous_indicator = self._memento_to_indicator(memento)
         if previous_indicator is None:
             return
-        if isinstance(previous_indicator, indicators.SpacingSection):
+        if isinstance(previous_indicator, _indicators.SpacingSection):
             return
         if memento.context in self.score:
             for context in abjad.iterate(self.score).components(abjad.Context):
@@ -1148,7 +1152,7 @@ class SegmentMaker:
         status = None
         if indicator is None:
             status = "reapplied"
-        elif not scoping.compare_persistent_indicators(previous_indicator, indicator):
+        elif not _scoping.compare_persistent_indicators(previous_indicator, indicator):
             status = "explicit"
         elif isinstance(previous_indicator, abjad.TimeSignature):
             status = "reapplied"
@@ -1262,9 +1266,9 @@ class SegmentMaker:
             return
         if isinstance(wrapper.indicator, _memento.PersistentOverride):
             return
-        if isinstance(wrapper.indicator, indicators.BarExtent):
+        if isinstance(wrapper.indicator, _indicators.BarExtent):
             return
-        stem = scoping.Command._to_indicator_stem(wrapper.indicator)
+        stem = _scoping.Command._to_indicator_stem(wrapper.indicator)
         grob = SegmentMaker._indicator_to_grob(wrapper.indicator)
         context = wrapper._find_correct_effective_context()
         assert isinstance(context, abjad.Context), repr(context)
@@ -1419,8 +1423,8 @@ class SegmentMaker:
         if final_leaf_metronome_mark:
             tempo_prototype = (
                 abjad.MetronomeMark,
-                indicators.Accelerando,
-                indicators.Ritardando,
+                _indicators.Accelerando,
+                _indicators.Ritardando,
             )
             for skip in reversed(skips[:-1]):
                 if abjad.get.has_indicator(skip, tempo_prototype):
@@ -1429,8 +1433,8 @@ class SegmentMaker:
         for i, skip in enumerate(skips):
             metronome_mark = abjad.get.indicator(skip, abjad.MetronomeMark)
             metric_modulation = abjad.get.indicator(skip, abjad.MetricModulation)
-            accelerando = abjad.get.indicator(skip, indicators.Accelerando)
-            ritardando = abjad.get.indicator(skip, indicators.Ritardando)
+            accelerando = abjad.get.indicator(skip, _indicators.Accelerando)
+            ritardando = abjad.get.indicator(skip, _indicators.Ritardando)
             if (
                 metronome_mark is None
                 and metric_modulation is None
@@ -1452,9 +1456,9 @@ class SegmentMaker:
             if metronome_mark is None and metric_modulation is not None:
                 wrapper = abjad.get.wrapper(skip, abjad.MetricModulation)
             if metronome_mark is None and accelerando is not None:
-                wrapper = abjad.get.wrapper(skip, indicators.Accelerando)
+                wrapper = abjad.get.wrapper(skip, _indicators.Accelerando)
             if metronome_mark is None and ritardando is not None:
-                wrapper = abjad.get.wrapper(skip, indicators.Ritardando)
+                wrapper = abjad.get.wrapper(skip, _indicators.Ritardando)
             has_trend = accelerando is not None or ritardando is not None
             indicator_count += 1
             tag = wrapper.tag
@@ -1709,11 +1713,11 @@ class SegmentMaker:
         for voice in abjad.iterate(self.score).components(abjad.Voice):
             pleaves = []
             for pleaf in _selection.Selection(voice).pleaves():
-                if abjad.get.has_indicator(pleaf, const.PHANTOM):
+                if abjad.get.has_indicator(pleaf, _const.PHANTOM):
                     continue
                 pleaves.append(pleaf)
             if bool(pleaves):
-                abjad.attach(const.SOUNDS_DURING_SEGMENT, voice)
+                abjad.attach(_const.SOUNDS_DURING_SEGMENT, voice)
 
     def _born_this_segment(self, component):
         prototype = (abjad.Staff, abjad.StaffGroup)
@@ -1806,7 +1810,7 @@ class SegmentMaker:
         final_measure_index = len(rests) - 1
         final_measure_index -= 1
         first_measure_number = self._get_first_measure_number()
-        indicator = const.FERMATA_MEASURE
+        indicator = _const.FERMATA_MEASURE
         for measure_index, rest in enumerate(rests):
             if not abjad.get.has_indicator(rest, indicator):
                 continue
@@ -1887,7 +1891,7 @@ class SegmentMaker:
                 duration = abjad.get.duration(skip, in_seconds=True)
             else:
                 rest = rests[local_measure_index]
-                fermata_duration = abjad.get.annotation(rest, const.FERMATA_DURATION)
+                fermata_duration = abjad.get.annotation(rest, _const.FERMATA_DURATION)
                 duration = abjad.Duration(fermata_duration)
                 clock_times.append(duration)
             start_offset += duration
@@ -1906,8 +1910,8 @@ class SegmentMaker:
     def _call_commands(self):
         command_count = 0
         for command in self.commands:
-            assert isinstance(command, scoping.Command)
-            if isinstance(command, rhythmcommands.RhythmCommand):
+            assert isinstance(command, _scoping.Command)
+            if isinstance(command, _rhythmcommands.RhythmCommand):
                 continue
             command_count += 1
             selection = self._scope_to_leaf_selection(command)
@@ -2002,7 +2006,7 @@ class SegmentMaker:
     def _check_all_are_pitched_(self):
         if not self.check_all_are_pitched:
             return
-        indicator = const.NOT_YET_PITCHED
+        indicator = _const.NOT_YET_PITCHED
         for voice in abjad.iterate(self.score).components(abjad.Voice):
             for leaf in abjad.iterate(voice).leaves():
                 if abjad.get.has_indicator(leaf, indicator):
@@ -2014,12 +2018,12 @@ class SegmentMaker:
         name = "all_music_in_part_containers"
         if getattr(self.score_template, name, None) is not True:
             return
-        indicator = const.MULTIMEASURE_REST_CONTAINER
+        indicator = _const.MULTIMEASURE_REST_CONTAINER
         for voice in abjad.iterate(self.score).components(abjad.Voice):
             for component in voice:
                 if isinstance(component, (abjad.MultimeasureRest, abjad.Skip)):
                     continue
-                if abjad.get.has_indicator(component, const.HIDDEN):
+                if abjad.get.has_indicator(component, _const.HIDDEN):
                     continue
                 if abjad.get.has_indicator(component, indicator):
                     continue
@@ -2077,7 +2081,7 @@ class SegmentMaker:
             return
         if self.environment == "docs":
             return
-        indicator = const.SOUNDS_DURING_SEGMENT
+        indicator = _const.SOUNDS_DURING_SEGMENT
         for voice in abjad.iterate(self.score).components(abjad.Voice):
             if not abjad.get.has_indicator(voice, indicator):
                 continue
@@ -2086,9 +2090,9 @@ class SegmentMaker:
 
     def _check_persistent_indicators_for_leaf(self, voice, leaf, i):
         prototype = (
-            indicators.Accelerando,
+            _indicators.Accelerando,
             abjad.MetronomeMark,
-            indicators.Ritardando,
+            _indicators.Ritardando,
         )
         mark = abjad.get.effective(leaf, prototype)
         if mark is None:
@@ -2272,7 +2276,7 @@ class SegmentMaker:
             wrappers = []
             dictionary = abjad._inspect._get_persistent_wrappers(
                 dependent_wrappers=dependent_wrappers,
-                omit_with_indicator=const.PHANTOM,
+                omit_with_indicator=_const.PHANTOM,
             )
             for wrapper in dictionary.values():
                 if isinstance(wrapper.indicator, do_not_persist_on_phantom_measure):
@@ -2349,7 +2353,7 @@ class SegmentMaker:
         return result
 
     def _color_mock_pitch(self):
-        indicator = const.MOCK
+        indicator = _const.MOCK
         tag = _site(inspect.currentframe())
         tag = tag.append(_tags.MOCK_COLORING)
         leaves = []
@@ -2364,7 +2368,7 @@ class SegmentMaker:
     def _color_not_yet_pitched(self):
         if self.environment == "docs":
             return
-        indicator = const.NOT_YET_PITCHED
+        indicator = _const.NOT_YET_PITCHED
         tag = _site(inspect.currentframe())
         tag = tag.append(_tags.NOT_YET_PITCHED_COLORING)
         leaves = []
@@ -2374,15 +2378,15 @@ class SegmentMaker:
             string = r"\baca-not-yet-pitched-coloring"
             literal = abjad.LilyPondLiteral(string, format_slot="before")
             tag_ = tag
-            if abjad.get.has_indicator(pleaf, const.HIDDEN):
+            if abjad.get.has_indicator(pleaf, _const.HIDDEN):
                 tag_ = tag_.append(_tags.HIDDEN)
-            if abjad.get.has_indicator(pleaf, const.NOTE):
+            if abjad.get.has_indicator(pleaf, _const.NOTE):
                 tag_ = tag_.append(_tags.NOTE)
             abjad.attach(literal, pleaf, tag=tag_)
             leaves.append(pleaf)
 
     def _color_not_yet_registered(self):
-        indicator = const.NOT_YET_REGISTERED
+        indicator = _const.NOT_YET_REGISTERED
         tag = _site(inspect.currentframe())
         tag = tag.append(_tags.NOT_YET_REGISTERED_COLORING)
         for pleaf in abjad.iterate(self.score).leaves(pitched=True):
@@ -2404,9 +2408,9 @@ class SegmentMaker:
         for vertical_moment in vertical_moments:
             pleaves, pitches = [], []
             for leaf in vertical_moment.leaves:
-                if abjad.get.has_indicator(leaf, const.HIDDEN):
+                if abjad.get.has_indicator(leaf, _const.HIDDEN):
                     continue
-                if abjad.get.has_indicator(leaf, const.STAFF_POSITION):
+                if abjad.get.has_indicator(leaf, _const.STAFF_POSITION):
                     continue
                 if isinstance(leaf, abjad.Note):
                     pleaves.append(leaf)
@@ -2417,10 +2421,10 @@ class SegmentMaker:
             if not pitches:
                 continue
             pitch_classes = [_.pitch_class for _ in pitches]
-            if pitchclasses.PitchClassSegment(pitch_classes).has_duplicates():
+            if _pitchclasses.PitchClassSegment(pitch_classes).has_duplicates():
                 color = True
                 for pleaf in pleaves:
-                    if abjad.get.has_indicator(pleaf, const.ALLOW_OCTAVE):
+                    if abjad.get.has_indicator(pleaf, _const.ALLOW_OCTAVE):
                         color = False
                 if not color:
                     continue
@@ -2431,12 +2435,12 @@ class SegmentMaker:
                     abjad.attach(literal, pleaf, tag=tag)
 
     def _color_out_of_range(self):
-        indicator = const.ALLOW_OUT_OF_RANGE
+        indicator = _const.ALLOW_OUT_OF_RANGE
         tag = _site(inspect.currentframe())
         tag = tag.append(_tags.OUT_OF_RANGE_COLORING)
         for voice in abjad.iterate(self.score).components(abjad.Voice):
             for pleaf in abjad.iterate(voice).leaves(pitched=True):
-                if abjad.get.has_indicator(pleaf, const.HIDDEN):
+                if abjad.get.has_indicator(pleaf, _const.HIDDEN):
                     continue
                 if abjad.get.has_indicator(pleaf, indicator):
                     continue
@@ -2526,18 +2530,18 @@ class SegmentMaker:
 
     def _extend_beams(self):
         for leaf in abjad.iterate(self.score).leaves():
-            if abjad.get.indicator(leaf, const.RIGHT_BROKEN_BEAM):
+            if abjad.get.indicator(leaf, _const.RIGHT_BROKEN_BEAM):
                 self._extend_beam(leaf)
 
     @staticmethod
     def _find_repeat_pitch_classes(argument):
         violators = []
         for voice in abjad.iterate(argument).components(abjad.Voice):
-            if abjad.get.has_indicator(voice, const.INTERMITTENT):
+            if abjad.get.has_indicator(voice, _const.INTERMITTENT):
                 continue
             previous_lt, previous_pcs = None, []
             for lt in abjad.iterate(voice).logical_ties():
-                if abjad.get.has_indicator(lt.head, const.HIDDEN):
+                if abjad.get.has_indicator(lt.head, _const.HIDDEN):
                     written_pitches = []
                 elif isinstance(lt.head, abjad.Note):
                     written_pitches = [lt.head.written_pitch]
@@ -2545,10 +2549,10 @@ class SegmentMaker:
                     written_pitches = lt.head.written_pitches
                 else:
                     written_pitches = []
-                pcs = pitchclasses.PitchClassSet(written_pitches)
+                pcs = _pitchclasses.PitchClassSet(written_pitches)
                 if abjad.get.has_indicator(
-                    lt.head, const.NOT_YET_PITCHED
-                ) or abjad.get.has_indicator(lt.head, const.ALLOW_REPEAT_PITCH):
+                    lt.head, _const.NOT_YET_PITCHED
+                ) or abjad.get.has_indicator(lt.head, _const.ALLOW_REPEAT_PITCH):
                     pass
                 elif pcs & previous_pcs:
                     if previous_lt not in violators:
@@ -2759,7 +2763,7 @@ class SegmentMaker:
             return "TextScript"
         elif isinstance(indicator, abjad.MarginMarkup):
             return "InstrumentName"
-        elif isinstance(indicator, indicators.StaffLines):
+        elif isinstance(indicator, _indicators.StaffLines):
             return "StaffSymbol"
         return type(indicator).__name__
 
@@ -2782,11 +2786,11 @@ class SegmentMaker:
             key = SegmentMaker._get_key(manifests["abjad.MarginMarkup"], indicator)
         elif isinstance(indicator, _memento.PersistentOverride):
             key = indicator
-        elif isinstance(indicator, indicators.BarExtent):
+        elif isinstance(indicator, _indicators.BarExtent):
             key = indicator.line_count
-        elif isinstance(indicator, indicators.StaffLines):
+        elif isinstance(indicator, _indicators.StaffLines):
             key = indicator.line_count
-        elif isinstance(indicator, (indicators.Accelerando, indicators.Ritardando)):
+        elif isinstance(indicator, (_indicators.Accelerando, _indicators.Ritardando)):
             key = {"hide": indicator.hide}
         else:
             key = str(indicator)
@@ -2857,8 +2861,8 @@ class SegmentMaker:
             indicator = self.metronome_marks.get(key)
         elif prototype is abjad.TimeSignature:
             indicator = abjad.TimeSignature.from_string(key)
-        elif prototype is indicators.StaffLines:
-            indicator = indicators.StaffLines(line_count=key)
+        elif prototype is _indicators.StaffLines:
+            indicator = _indicators.StaffLines(line_count=key)
         else:
             raise Exception(prototype)
         return indicator
@@ -2952,15 +2956,15 @@ class SegmentMaker:
                 string += f' #"{n}" #"{d}"'
                 markup = abjad.Markup(string, direction=abjad.Up, literal=True)
                 tag_ = tag
-                if abjad.get.has_indicator(leaf, const.HIDDEN):
+                if abjad.get.has_indicator(leaf, _const.HIDDEN):
                     tag_ = tag_.append(_tags.HIDDEN)
-                if abjad.get.has_indicator(leaf, const.MULTIMEASURE_REST):
+                if abjad.get.has_indicator(leaf, _const.MULTIMEASURE_REST):
                     tag_ = tag_.append(_tags.MULTIMEASURE_REST)
-                if abjad.get.has_indicator(leaf, const.NOTE):
+                if abjad.get.has_indicator(leaf, _const.NOTE):
                     tag_ = tag_.append(_tags.NOTE)
-                if abjad.get.has_indicator(leaf, const.PHANTOM):
+                if abjad.get.has_indicator(leaf, _const.PHANTOM):
                     tag_ = tag_.append(_tags.PHANTOM)
-                if abjad.get.has_indicator(leaf, const.REST_VOICE):
+                if abjad.get.has_indicator(leaf, _const.REST_VOICE):
                     tag_ = tag_.append(_tags.REST_VOICE)
                 abjad.attach(markup, leaf, deactivate=True, tag=tag_)
                 already_labeled.add(leaf)
@@ -3174,7 +3178,7 @@ class SegmentMaker:
         if not self.remove_phantom_measure:
             tag = _site(inspect.currentframe(), 2).append(_tags.PHANTOM)
             rest = abjad.MultimeasureRest(abjad.Duration(1), multiplier=(1, 4), tag=tag)
-            abjad.attach(const.PHANTOM, rest)
+            abjad.attach(_const.PHANTOM, rest)
             rests.append(rest)
         return rests
 
@@ -3197,7 +3201,7 @@ class SegmentMaker:
             tag = _site(inspect.currentframe(), 3)
             tag = tag.append(_tags.PHANTOM)
             skip = abjad.Skip(1, multiplier=(1, 4), tag=tag)
-            abjad.attach(const.PHANTOM, skip)
+            abjad.attach(_const.PHANTOM, skip)
             context.append(skip)
             if time_signature != abjad.TimeSignature((1, 4)):
                 time_signature = abjad.TimeSignature((1, 4))
@@ -3297,14 +3301,14 @@ class SegmentMaker:
             note_or_rest = _tags.NOTE
             tag = tag.append(_tags.NOTE)
             note = abjad.Note("c'1", multiplier=duration, tag=tag)
-            abjad.attach(const.NOTE, note)
-            abjad.attach(const.NOT_YET_PITCHED, note)
+            abjad.attach(_const.NOTE, note)
+            abjad.attach(_const.NOT_YET_PITCHED, note)
         else:
             note_or_rest = _tags.MULTIMEASURE_REST
             tag = tag.append(_tags.MULTIMEASURE_REST)
             note = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
-            abjad.attach(const.MULTIMEASURE_REST, note)
-        abjad.attach(const.HIDDEN, note)
+            abjad.attach(_const.MULTIMEASURE_REST, note)
+        abjad.attach(_const.HIDDEN, note)
         tag = _site(inspect.currentframe(), 2)
         tag = tag.append(phantom_tag)
         tag = tag.append(note_or_rest)
@@ -3319,23 +3323,23 @@ class SegmentMaker:
         tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
         literal = abjad.LilyPondLiteral(r"\abjad-invisible-music", format_slot="before")
         abjad.attach(literal, note, deactivate=True, tag=tag)
-        abjad.attach(const.HIDDEN, note)
+        abjad.attach(_const.HIDDEN, note)
         tag = _site(inspect.currentframe(), 4)
         tag = tag.append(phantom_tag)
         hidden_note_voice = abjad.Voice([note], name=voice_name, tag=tag)
-        abjad.attach(const.INTERMITTENT, hidden_note_voice)
+        abjad.attach(_const.INTERMITTENT, hidden_note_voice)
         tag = _site(inspect.currentframe(), 5)
         tag = tag.append(phantom_tag)
         tag = tag.append(_tags.REST_VOICE)
         if self.skips_instead_of_rests:
             tag = tag.append(_tags.SKIP)
             rest = abjad.Skip(1, multiplier=duration, tag=tag)
-            abjad.attach(const.SKIP, rest)
+            abjad.attach(_const.SKIP, rest)
         else:
             tag = tag.append(_tags.MULTIMEASURE_REST)
             rest = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
-            abjad.attach(const.MULTIMEASURE_REST, rest)
-        abjad.attach(const.REST_VOICE, rest)
+            abjad.attach(_const.MULTIMEASURE_REST, rest)
+        abjad.attach(_const.REST_VOICE, rest)
         if "Music_Voice" in voice_name:
             name = voice_name.replace("Music_Voice", "Rest_Voice")
         else:
@@ -3343,7 +3347,7 @@ class SegmentMaker:
         tag = _site(inspect.currentframe(), 6)
         tag = tag.append(phantom_tag)
         multimeasure_rest_voice = abjad.Voice([rest], name=name, tag=tag)
-        abjad.attach(const.INTERMITTENT, multimeasure_rest_voice)
+        abjad.attach(_const.INTERMITTENT, multimeasure_rest_voice)
         tag = _site(inspect.currentframe(), 7)
         tag = tag.append(phantom_tag)
         container = abjad.Container(
@@ -3351,10 +3355,10 @@ class SegmentMaker:
             simultaneous=True,
             tag=tag,
         )
-        abjad.attach(const.MULTIMEASURE_REST_CONTAINER, container)
+        abjad.attach(_const.MULTIMEASURE_REST_CONTAINER, container)
         if phantom is True:
             for component in abjad.iterate(container).components():
-                abjad.attach(const.PHANTOM, component)
+                abjad.attach(_const.PHANTOM, component)
         return container
 
     def _make_score(self):
@@ -3380,7 +3384,7 @@ class SegmentMaker:
             indicator = class_(name="", command=memento.value)
         elif isinstance(memento.value, class_):
             indicator = memento.value
-        elif class_ is indicators.StaffLines:
+        elif class_ is _indicators.StaffLines:
             indicator = class_(line_count=memento.value)
         elif memento.value is None:
             indicator = class_()
@@ -3501,9 +3505,9 @@ class SegmentMaker:
                     continue
                 # TODO: change to parameter comparison
                 prototype = (
-                    indicators.Accelerando,
+                    _indicators.Accelerando,
                     abjad.MetronomeMark,
-                    indicators.Ritardando,
+                    _indicators.Ritardando,
                 )
                 if isinstance(previous_indicator, prototype):
                     site = _site(inspect.currentframe(), 2)
@@ -3592,17 +3596,17 @@ class SegmentMaker:
             else:
                 raise Exception(message)
         assert selection.are_leaves(), repr(selection)
-        if isinstance(command.scope, scoping.TimelineScope):
+        if isinstance(command.scope, _scoping.TimelineScope):
             selection = command.scope._sort_by_timeline(selection)
         return selection
 
     def _scope_to_leaf_selections(self, scope):
         if self._cache is None:
             self._cache_leaves()
-        if isinstance(scope, scoping.Scope):
+        if isinstance(scope, _scoping.Scope):
             scopes = [scope]
         else:
-            assert isinstance(scope, scoping.TimelineScope)
+            assert isinstance(scope, _scoping.TimelineScope)
             scopes = list(scope.scopes)
         leaf_selections = []
         for scope in scopes:
@@ -3627,14 +3631,15 @@ class SegmentMaker:
             leaf_selections.append(abjad.select(leaves))
         return leaf_selections
 
+    # HERE
     def _set_not_yet_pitched_to_staff_position_zero(self):
-        indicator = const.NOT_YET_PITCHED
+        indicator = _const.NOT_YET_PITCHED
         pleaves = []
         for pleaf in abjad.iterate(self.score).leaves(pitched=True):
             if not abjad.get.has_indicator(pleaf, indicator):
                 continue
             pleaves.append(pleaf)
-        command = pitchcommands.staff_position(
+        command = _pitchcommands.staff_position(
             0,
             lambda _: _selection.Selection(_).plts(),
             set_chord_pitches_equal=True,
@@ -3643,7 +3648,7 @@ class SegmentMaker:
 
     def _set_status_tag(wrapper, status, redraw=None, stem=None):
         assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
-        stem = stem or scoping.Command._to_indicator_stem(wrapper.indicator)
+        stem = stem or _scoping.Command._to_indicator_stem(wrapper.indicator)
         prefix = None
         if redraw is True:
             prefix = "redrawn"
@@ -3685,7 +3690,7 @@ class SegmentMaker:
             empty_fermata_measure_start_offsets.append(timespan.start_offset)
         for staff in abjad.iterate(self.score).components(abjad.Staff):
             for leaf in abjad.iterate(staff).leaves():
-                if abjad.get.has_indicator(leaf, const.PHANTOM):
+                if abjad.get.has_indicator(leaf, _const.PHANTOM):
                     continue
                 start_offset = abjad.get.timespan(leaf).start_offset
                 if start_offset not in self._fermata_start_offsets:
@@ -3695,24 +3700,24 @@ class SegmentMaker:
                     continue
                 if start_offset not in empty_fermata_measure_start_offsets:
                     continue
-                empty_staff_lines = indicators.StaffLines(0)
-                empty_bar_extent = indicators.BarExtent(0)
-                previous_staff_lines = abjad.get.effective(leaf, indicators.StaffLines)
-                previous_bar_extent = abjad.get.effective(leaf, indicators.BarExtent)
+                empty_staff_lines = _indicators.StaffLines(0)
+                empty_bar_extent = _indicators.BarExtent(0)
+                previous_staff_lines = abjad.get.effective(leaf, _indicators.StaffLines)
+                previous_bar_extent = abjad.get.effective(leaf, _indicators.BarExtent)
                 next_leaf = abjad.get.leaf(leaf, 1)
-                if abjad.get.has_indicator(next_leaf, const.PHANTOM):
+                if abjad.get.has_indicator(next_leaf, _const.PHANTOM):
                     next_leaf = None
                 next_staff_lines = None
                 if next_leaf is not None:
                     next_staff_lines = abjad.get.effective(
-                        next_leaf, indicators.StaffLines
+                        next_leaf, _indicators.StaffLines
                     )
                     next_bar_extent = abjad.get.effective(
-                        next_leaf, indicators.BarExtent
+                        next_leaf, _indicators.BarExtent
                     )
                 if (
                     previous_staff_lines != empty_staff_lines
-                ) and not abjad.get.has_indicator(leaf, indicators.StaffLines):
+                ) and not abjad.get.has_indicator(leaf, _indicators.StaffLines):
                     abjad.attach(
                         empty_staff_lines,
                         leaf,
@@ -3728,15 +3733,15 @@ class SegmentMaker:
                         )
                 if next_leaf is not None and empty_staff_lines != next_staff_lines:
                     if next_staff_lines is None:
-                        next_staff_lines_ = indicators.StaffLines(5)
+                        next_staff_lines_ = _indicators.StaffLines(5)
                     else:
                         next_staff_lines_ = next_staff_lines
                     if next_bar_extent is None:
-                        next_bar_extent_ = indicators.StaffLines(5)
+                        next_bar_extent_ = _indicators.StaffLines(5)
                     else:
                         next_bar_extent_ = next_bar_extent
                     wrapper = abjad.get.effective_wrapper(
-                        next_leaf, indicators.StaffLines
+                        next_leaf, _indicators.StaffLines
                     )
                     next_leaf_start_offset = abjad.get.timespan(next_leaf).start_offset
                     if wrapper is None or (
@@ -3758,7 +3763,7 @@ class SegmentMaker:
                     previous_line_count = 5
                     if previous_staff_lines is not None:
                         previous_line_count = previous_staff_lines.line_count
-                    resume_staff_lines = indicators.StaffLines(
+                    resume_staff_lines = _indicators.StaffLines(
                         previous_line_count, hide=True
                     )
                     abjad.attach(
@@ -3770,7 +3775,7 @@ class SegmentMaker:
                     previous_line_count = 5
                     if previous_bar_extent is not None:
                         previous_line_count = previous_bar_extent.line_count
-                    resume_bar_extent = indicators.BarExtent(
+                    resume_bar_extent = _indicators.BarExtent(
                         previous_line_count, hide=True
                     )
                     abjad.attach(
@@ -3851,7 +3856,7 @@ class SegmentMaker:
                 _site(inspect.currentframe(), 4).append(_tags.PHANTOM),
             )
         start_offset = abjad.get.timespan(skip).start_offset
-        enumeration = const.MULTIMEASURE_REST_CONTAINER
+        enumeration = _const.MULTIMEASURE_REST_CONTAINER
         containers = []
         for container in abjad.select(self.score).components(abjad.Container):
             if not abjad.get.has_indicator(container, enumeration):
@@ -3875,7 +3880,7 @@ class SegmentMaker:
                 )
                 if not isinstance(leaf, abjad.MultimeasureRest):
                     continue
-                if abjad.get.has_indicator(leaf, const.HIDDEN):
+                if abjad.get.has_indicator(leaf, _const.HIDDEN):
                     continue
                 literal = abjad.LilyPondLiteral(string_1)
                 abjad.attach(
@@ -3900,9 +3905,9 @@ class SegmentMaker:
         if not self.transpose_score:
             return
         for pleaf in _selection.Selection(self.score).pleaves():
-            if abjad.get.has_indicator(pleaf, const.DO_NOT_TRANSPOSE):
+            if abjad.get.has_indicator(pleaf, _const.DO_NOT_TRANSPOSE):
                 continue
-            if abjad.get.has_indicator(pleaf, const.STAFF_POSITION):
+            if abjad.get.has_indicator(pleaf, _const.STAFF_POSITION):
                 continue
             abjad.iterpitches.transpose_from_sounding_pitch(pleaf)
 
@@ -3937,7 +3942,7 @@ class SegmentMaker:
         leaf = wrapper.component
         assert isinstance(leaf, abjad.Leaf), repr(wrapper)
         existing_tag = wrapper.tag
-        tempo_trend = (indicators.Accelerando, indicators.Ritardando)
+        tempo_trend = (_indicators.Accelerando, _indicators.Ritardando)
         if isinstance(indicator, abjad.MetronomeMark) and abjad.get.has_indicator(
             leaf, tempo_trend
         ):
@@ -3994,7 +3999,7 @@ class SegmentMaker:
         ) and not getattr(indicator, "hide", False):
             strings = indicator._get_lilypond_format(context=context)
             literal = abjad.LilyPondLiteral(strings, format_slot="after")
-            stem = scoping.Command._to_indicator_stem(indicator)
+            stem = _scoping.Command._to_indicator_stem(indicator)
             wrapper_ = abjad.attach(
                 literal,
                 leaf,
@@ -4008,9 +4013,9 @@ class SegmentMaker:
             return
         dynamic_prototype = (abjad.Dynamic, abjad.StartHairpin)
         tempo_prototype = (
-            indicators.Accelerando,
+            _indicators.Accelerando,
             abjad.MetronomeMark,
-            indicators.Ritardando,
+            _indicators.Ritardando,
         )
         for leaf in abjad.iterate(self.score).leaves():
             for wrapper in abjad.get.wrappers(leaf):
@@ -4028,7 +4033,7 @@ class SegmentMaker:
                     prototype = type(wrapper.indicator)
                 # TODO: optimize
                 previous_indicator = abjad.get.effective(leaf, prototype, n=-1)
-                if scoping.compare_persistent_indicators(
+                if _scoping.compare_persistent_indicators(
                     previous_indicator, wrapper.indicator
                 ):
                     status = "redundant"
@@ -4085,14 +4090,14 @@ class SegmentMaker:
         voice_names = voice_names_
         for voice_name in voice_names:
             for measure_token in measure_tokens:
-                scope = scoping.Scope(measures=measure_token, voice_name=voice_name)
+                scope = _scoping.Scope(measures=measure_token, voice_name=voice_name)
                 scopes_.append(scope)
-        prototype = (scoping.Scope, scoping.TimelineScope)
+        prototype = (_scoping.Scope, _scoping.TimelineScope)
         assert all(isinstance(_, prototype) for _ in scopes_)
         return scopes_
 
     def _unpack_scopes(self, scopes, abbreviations):
-        scope_type = (scoping.Scope, scoping.TimelineScope)
+        scope_type = (_scoping.Scope, _scoping.TimelineScope)
         if isinstance(scopes, str):
             result = abbreviations.get(scopes, scopes)
             if isinstance(result, str):
@@ -4102,7 +4107,7 @@ class SegmentMaker:
                 voice_names = result
             scopes__ = []
             for voice_name in voice_names:
-                scope = scoping.Scope(voice_name=voice_name)
+                scope = _scoping.Scope(voice_name=voice_name)
                 scopes__.append(scope)
         elif isinstance(scopes, tuple):
             scopes__ = self._unpack_scope_pair(scopes, abbreviations)
@@ -4123,7 +4128,7 @@ class SegmentMaker:
         for scope in scopes__:
             if isinstance(scope, str):
                 voice_name = abbreviations.get(scope, scope)
-                scope_ = scoping.Scope(voice_name=voice_name)
+                scope_ = _scoping.Scope(voice_name=voice_name)
                 scopes_.append(scope_)
             elif isinstance(scope, tuple):
                 voice_name, measures = scope
@@ -4131,12 +4136,12 @@ class SegmentMaker:
                 if isinstance(measures, list):
                     measures = self._unpack_measure_token_list(measures)
                     for measure_token in measures:
-                        scope_ = scoping.Scope(
+                        scope_ = _scoping.Scope(
                             measures=measure_token, voice_name=voice_name
                         )
                         scopes_.append(scope_)
                 else:
-                    scope_ = scoping.Scope(measures=measures, voice_name=voice_name)
+                    scope_ = _scoping.Scope(measures=measures, voice_name=voice_name)
                     scopes_.append(scope_)
             else:
                 scope_ = scope
@@ -4152,7 +4157,7 @@ class SegmentMaker:
     def _voice_to_rhythm_commands(self, voice):
         commands = []
         for command in self.commands:
-            if not isinstance(command, rhythmcommands.RhythmCommand):
+            if not isinstance(command, _rhythmcommands.RhythmCommand):
                 continue
             if command.scope.voice_name == voice.name:
                 commands.append(command)
