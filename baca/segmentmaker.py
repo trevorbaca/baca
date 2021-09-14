@@ -3631,7 +3631,20 @@ class SegmentMaker:
             leaf_selections.append(abjad.select(leaves))
         return leaf_selections
 
-    # HERE
+    def _set_intermittent_to_staff_position_zero(self):
+        pleaves = []
+        for voice in abjad.iterate(self.score).components(abjad.Voice):
+            if voice._has_indicator(_const.INTERMITTENT):
+                for pleaf in abjad.iterate(voice).leaves(pitched=True):
+                    if abjad.get.has_indicator(pleaf, _const.NOT_YET_PITCHED):
+                        pleaves.append(pleaf)
+        command = _pitchcommands.staff_position(
+            0,
+            lambda _: _selection.Selection(_).plts(),
+            set_chord_pitches_equal=True,
+        )
+        command(pleaves)
+
     def _set_not_yet_pitched_to_staff_position_zero(self):
         indicator = _const.NOT_YET_PITCHED
         pleaves = []
@@ -5160,6 +5173,7 @@ class SegmentMaker:
                 self._transpose_score_()
                 self._color_not_yet_registered()
                 self._color_mock_pitch()
+                self._set_intermittent_to_staff_position_zero()
                 self._color_not_yet_pitched()
                 self._set_not_yet_pitched_to_staff_position_zero()
                 self._clean_up_repeat_tie_direction()
