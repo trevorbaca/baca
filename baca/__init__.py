@@ -12,6 +12,7 @@ from .classes import *
 from .commandclasses import *
 from .commands import *
 from .constellation import *
+from .docs import global_context_string
 from .figuremaker import *
 from .indicatorcommands import *
 from .indicators import *

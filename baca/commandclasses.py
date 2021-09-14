@@ -296,27 +296,22 @@ class BCPCommand(scoping.Command):
                     <<
                         \context GlobalSkips = "Global_Skips"
                         {
-                            % [Global_Skips measure 1]
                             \baca-new-spacing-section #1 #16
                             \time 4/8
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                            % [Global_Skips measure 2]
                             \baca-new-spacing-section #1 #16
                             \time 3/8
                             \baca-time-signature-color #'blue
                             s1 * 3/8
-                            % [Global_Skips measure 3]
                             \baca-new-spacing-section #1 #16
                             \time 4/8
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                            % [Global_Skips measure 4]
                             \baca-new-spacing-section #1 #16
                             \time 3/8
                             \baca-time-signature-color #'blue
                             s1 * 3/8
-                            % [Global_Skips measure 5]
                             \baca-new-spacing-section #1 #4
                             \time 1/4
                             \baca-time-signature-transparent
@@ -331,7 +326,6 @@ class BCPCommand(scoping.Command):
                         {
                             \context Voice = "Music_Voice"
                             {
-                                % [Music_Voice measure 1]
                                 \override Script.staff-padding = 5.5
                                 \override TextSpanner.staff-padding = 2.5
                                 e'8
@@ -365,7 +359,6 @@ class BCPCommand(scoping.Command):
                                 - \abjad-solid-line-with-arrow
                                 - \baca-bcp-spanner-left-text #2 #5
                                 \bacaStartTextSpanBCP
-                                % [Music_Voice measure 2]
                                 e'8
                                 - \downbow
                                 \bacaStopTextSpanBCP
@@ -383,7 +376,6 @@ class BCPCommand(scoping.Command):
                                 e'8
                                 \bacaStopTextSpanBCP
                                 ]
-                                % [Music_Voice measure 3]
                                 f'8
                                 - \downbow
                                 [
@@ -409,7 +401,6 @@ class BCPCommand(scoping.Command):
                                 - \abjad-solid-line-with-arrow
                                 - \baca-bcp-spanner-left-text #4 #5
                                 \bacaStartTextSpanBCP
-                                % [Music_Voice measure 4]
                                 f'8
                                 - \downbow
                                 \bacaStopTextSpanBCP
@@ -433,7 +424,6 @@ class BCPCommand(scoping.Command):
                                 <<
                                     \context Voice = "Music_Voice"
                                     {
-                                        % [Music_Voice measure 5]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
@@ -442,7 +432,6 @@ class BCPCommand(scoping.Command):
                                     }
                                     \context Voice = "Rest_Voice"
                                     {
-                                        % [Rest_Voice measure 5]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
                                         \stopStaff
@@ -553,27 +542,22 @@ class BCPCommand(scoping.Command):
                     <<
                         \context GlobalSkips = "Global_Skips"
                         {
-                            % [Global_Skips measure 1]
                             \baca-new-spacing-section #1 #16
                             \time 4/8
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                            % [Global_Skips measure 2]
                             \baca-new-spacing-section #1 #16
                             \time 3/8
                             \baca-time-signature-color #'blue
                             s1 * 3/8
-                            % [Global_Skips measure 3]
                             \baca-new-spacing-section #1 #16
                             \time 4/8
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                            % [Global_Skips measure 4]
                             \baca-new-spacing-section #1 #16
                             \time 3/8
                             \baca-time-signature-color #'blue
                             s1 * 3/8
-                            % [Global_Skips measure 5]
                             \baca-new-spacing-section #1 #4
                             \time 1/4
                             \baca-time-signature-transparent
@@ -588,7 +572,6 @@ class BCPCommand(scoping.Command):
                         {
                             \context Voice = "Music_Voice"
                             {
-                                % [Music_Voice measure 1]
                                 \override Script.staff-padding = 5
                                 e'8
                                 - \downbow
@@ -629,7 +612,6 @@ class BCPCommand(scoping.Command):
                                 - \tweak color #red
                                 - \tweak staff-padding 2.5
                                 \bacaStartTextSpanBCP
-                                % [Music_Voice measure 2]
                                 e'8
                                 - \downbow
                                 \bacaStopTextSpanBCP
@@ -656,7 +638,6 @@ class BCPCommand(scoping.Command):
                                 - \tweak color #red
                                 - \tweak staff-padding 2.5
                                 \bacaStartTextSpanBCP
-                                % [Music_Voice measure 3]
                                 f'8
                                 - \upbow
                                 \bacaStopTextSpanBCP
@@ -691,7 +672,6 @@ class BCPCommand(scoping.Command):
                                 - \tweak color #red
                                 - \tweak staff-padding 2.5
                                 \bacaStartTextSpanBCP
-                                % [Music_Voice measure 4]
                                 f'8
                                 - \upbow
                                 \bacaStopTextSpanBCP
@@ -718,7 +698,6 @@ class BCPCommand(scoping.Command):
                                 <<
                                     \context Voice = "Music_Voice"
                                     {
-                                        % [Music_Voice measure 5]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
@@ -727,7 +706,6 @@ class BCPCommand(scoping.Command):
                                     }
                                     \context Voice = "Rest_Voice"
                                     {
-                                        % [Rest_Voice measure 5]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
                                         \stopStaff
@@ -864,23 +842,18 @@ class ContainerCommand(scoping.Command):
             <<
                 \context GlobalSkips = "Global_Skips"
                 {
-                    % [Global_Skips measure 1]
                     \time 4/8
                     \baca-time-signature-color #'blue
                     s1 * 1/2
-                    % [Global_Skips measure 2]
                     \time 3/8
                     \baca-time-signature-color #'blue
                     s1 * 3/8
-                    % [Global_Skips measure 3]
                     \time 4/8
                     \baca-time-signature-color #'blue
                     s1 * 1/2
-                    % [Global_Skips measure 4]
                     \time 3/8
                     \baca-time-signature-color #'blue
                     s1 * 3/8
-                    % [Global_Skips measure 5]
                     \time 1/4
                     \baca-time-signature-transparent
                     s1 * 1/4
@@ -895,7 +868,6 @@ class ContainerCommand(scoping.Command):
                     \context Voice = "Music_Voice"
                     {
                         {   %*% ViolinI
-                            % [Music_Voice measure 1]
                             e'2
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes(repeat_ties=True)"
@@ -903,20 +875,16 @@ class ContainerCommand(scoping.Command):
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             f'4.
                         }   %*% ViolinI
                         {   %*% ViolinII
-                            % [Music_Voice measure 3]
                             e'2
-                            % [Music_Voice measure 4]
                             f'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                         }   %*% ViolinII
                         <<
                             \context Voice = "Music_Voice"
                             {
-                                % [Music_Voice measure 5]
                                 \abjad-invisible-music-coloring
                                 %@% \abjad-invisible-music
                                 \baca-not-yet-pitched-coloring
@@ -925,7 +893,6 @@ class ContainerCommand(scoping.Command):
                             }
                             \context Voice = "Rest_Voice"
                             {
-                                % [Rest_Voice measure 5]
                                 \once \override Score.TimeSignature.X-extent = ##f
                                 \once \override MultiMeasureRest.transparent = ##t
                                 \stopStaff

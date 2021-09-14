@@ -63,23 +63,18 @@ class SegmentMaker:
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
@@ -93,7 +88,6 @@ class SegmentMaker:
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'8
                             [
@@ -110,7 +104,6 @@ class SegmentMaker:
                             %@% \baca-not-yet-pitched-coloring
                             b'8
                             ]
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'8
                             [
@@ -119,7 +112,6 @@ class SegmentMaker:
                             %@% \baca-not-yet-pitched-coloring
                             b'8
                             ]
-                            % [Music_Voice measure 3]
                             %@% \baca-not-yet-pitched-coloring
                             b'8
                             [
@@ -130,7 +122,6 @@ class SegmentMaker:
                             %@% \baca-not-yet-pitched-coloring
                             b'8
                             ]
-                            % [Music_Voice measure 4]
                             %@% \baca-not-yet-pitched-coloring
                             b'8
                             [
@@ -143,7 +134,6 @@ class SegmentMaker:
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -152,7 +142,6 @@ class SegmentMaker:
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -217,27 +206,22 @@ class SegmentMaker:
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \time 1/16
                         \baca-time-signature-color #'blue
                         s1 * 1/16
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \time 7/16
                         \baca-time-signature-color #'blue
                         s1 * 7/16
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #24
                         \time 1/16
                         \baca-time-signature-color #'blue
                         s1 * 1/16
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #24
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -254,7 +238,6 @@ class SegmentMaker:
                         {
                             \scaleDurations #'(1 . 1)
                             {
-                                % [Music_Voice measure 1]
                                 e'16
                                 - \abjad-dashed-line-with-hook
                                 - \baca-text-spanner-left-text "baca.music()"
@@ -265,7 +248,6 @@ class SegmentMaker:
                             }
                             \scaleDurations #'(1 . 1)
                             {
-                                % [Music_Voice measure 2]
                                 fs'!16
                                 d'16
                                 ef'!16
@@ -278,12 +260,10 @@ class SegmentMaker:
                             }
                             \scaleDurations #'(1 . 1)
                             {
-                                % [Music_Voice measure 3]
                                 b'16
                             }
                             \scaleDurations #'(1 . 1)
                             {
-                                % [Music_Voice measure 4]
                                 bf'!16
                                 g'16
                                 a'16
@@ -297,7 +277,6 @@ class SegmentMaker:
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -306,7 +285,6 @@ class SegmentMaker:
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -378,27 +356,22 @@ class SegmentMaker:
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \time 1/16
                         \baca-time-signature-color #'blue
                         s1 * 1/16
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \time 7/16
                         \baca-time-signature-color #'blue
                         s1 * 7/16
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #24
                         \time 1/16
                         \baca-time-signature-color #'blue
                         s1 * 1/16
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #24
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -415,7 +388,6 @@ class SegmentMaker:
                         {
                             \scaleDurations #'(1 . 1)
                             {
-                                % [Music_Voice measure 1]
                                 e'16
                                 ^ \baca-explicit-indicator-markup "(Violin)"
                                 - \abjad-dashed-line-with-hook
@@ -427,7 +399,6 @@ class SegmentMaker:
                             }
                             \scaleDurations #'(1 . 1)
                             {
-                                % [Music_Voice measure 2]
                                 \baca-out-of-range-coloring
                                 c16
                                 d'16
@@ -439,12 +410,10 @@ class SegmentMaker:
                             }
                             \scaleDurations #'(1 . 1)
                             {
-                                % [Music_Voice measure 3]
                                 b'16
                             }
                             \scaleDurations #'(1 . 1)
                             {
-                                % [Music_Voice measure 4]
                                 bf'!16
                                 g'16
                                 a'16
@@ -456,7 +425,6 @@ class SegmentMaker:
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -465,7 +433,6 @@ class SegmentMaker:
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -758,23 +725,18 @@ class SegmentMaker:
                     <<
                         \context GlobalSkips = "Global_Skips"
                         {
-                            % [Global_Skips measure 1]
                             \time 4/8
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                            % [Global_Skips measure 2]
                             \time 3/8
                             \baca-time-signature-color #'blue
                             s1 * 3/8
-                            % [Global_Skips measure 3]
                             \time 4/8
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                            % [Global_Skips measure 4]
                             \time 3/8
                             \baca-time-signature-color #'blue
                             s1 * 3/8
-                            % [Global_Skips measure 5]
                             \time 1/4
                             \baca-time-signature-transparent
                             s1 * 1/4
@@ -788,7 +750,6 @@ class SegmentMaker:
                         {
                             \context Voice = "Music_Voice"
                             {
-                                % [Music_Voice measure 1]
                                 \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 0 }
@@ -809,7 +770,6 @@ class SegmentMaker:
                                 b'8
                                 ^ \markup { 3 }
                                 ]
-                                % [Music_Voice measure 2]
                                 \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 4 }
@@ -821,7 +781,6 @@ class SegmentMaker:
                                 b'8
                                 ^ \markup { 6 }
                                 ]
-                                % [Music_Voice measure 3]
                                 \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 7 }
@@ -836,7 +795,6 @@ class SegmentMaker:
                                 b'8
                                 ^ \markup { 10 }
                                 ]
-                                % [Music_Voice measure 4]
                                 \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 11 }
@@ -852,7 +810,6 @@ class SegmentMaker:
                                 <<
                                     \context Voice = "Music_Voice"
                                     {
-                                        % [Music_Voice measure 5]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
@@ -861,7 +818,6 @@ class SegmentMaker:
                                     }
                                     \context Voice = "Rest_Voice"
                                     {
-                                        % [Rest_Voice measure 5]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
                                         \stopStaff
@@ -910,23 +866,18 @@ class SegmentMaker:
                     <<
                         \context GlobalSkips = "Global_Skips"
                         {
-                            % [Global_Skips measure 1]
                             \time 4/8
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                            % [Global_Skips measure 2]
                             \time 3/8
                             \baca-time-signature-color #'blue
                             s1 * 3/8
-                            % [Global_Skips measure 3]
                             \time 4/8
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                            % [Global_Skips measure 4]
                             \time 3/8
                             \baca-time-signature-color #'blue
                             s1 * 3/8
-                            % [Global_Skips measure 5]
                             \time 1/4
                             \baca-time-signature-transparent
                             s1 * 1/4
@@ -940,7 +891,6 @@ class SegmentMaker:
                         {
                             \context Voice = "Music_Voice"
                             {
-                                % [Music_Voice measure 1]
                                 \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 0 }
@@ -961,7 +911,6 @@ class SegmentMaker:
                                 b'8
                                 ^ \markup { 3 }
                                 ]
-                                % [Music_Voice measure 2]
                                 \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 4 }
@@ -973,7 +922,6 @@ class SegmentMaker:
                                 b'8
                                 ^ \markup { 6 }
                                 ]
-                                % [Music_Voice measure 3]
                                 \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 7 }
@@ -988,7 +936,6 @@ class SegmentMaker:
                                 b'8
                                 ^ \markup { 10 }
                                 ]
-                                % [Music_Voice measure 4]
                                 \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 11 }
@@ -1004,7 +951,6 @@ class SegmentMaker:
                                 <<
                                     \context Voice = "Music_Voice"
                                     {
-                                        % [Music_Voice measure 5]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
@@ -1013,7 +959,6 @@ class SegmentMaker:
                                     }
                                     \context Voice = "Rest_Voice"
                                     {
-                                        % [Rest_Voice measure 5]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
                                         \stopStaff
@@ -2562,6 +2507,8 @@ class SegmentMaker:
                 abjad.attach(literal, leaf, tag=tag)
 
     def _comment_measure_numbers(self):
+        if self.environment == "docs":
+            return
         first_measure_number = self._get_first_measure_number()
         for leaf in abjad.iterate(self.score).leaves():
             offset = abjad.get.timespan(leaf).start_offset
@@ -4258,6 +4205,8 @@ class SegmentMaker:
         return commands
 
     def _whitespace_leaves(self):
+        if self.environment == "docs":
+            return
         for leaf in abjad.iterate(self.score).leaves():
             literal = abjad.LilyPondLiteral("", format_slot="absolute_before")
             abjad.attach(literal, leaf, tag=None)
@@ -4355,11 +4304,9 @@ class SegmentMaker:
                     <<
                         \context GlobalSkips = "Global_Skips"
                         {
-                            % [Global_Skips measure 1]
                             \time 6/4
                             \baca-time-signature-color #'blue
                             s1 * 3/2
-                            % [Global_Skips measure 2]
                             \time 1/4
                             \baca-time-signature-transparent
                             s1 * 1/4
@@ -4375,7 +4322,6 @@ class SegmentMaker:
                             {
                                 \context Voice = "Music_Voice_1"
                                 {
-                                    % [Music_Voice_1 measure 1]
                                     d'4
                                     - \abjad-dashed-line-with-hook
                                     - \baca-text-spanner-left-text "baca.music()"
@@ -4395,7 +4341,6 @@ class SegmentMaker:
                                     <<
                                         \context Voice = "Music_Voice_1"
                                         {
-                                            % [Music_Voice_1 measure 2]
                                             \abjad-invisible-music-coloring
                                             %@% \abjad-invisible-music
                                             \baca-not-yet-pitched-coloring
@@ -4404,7 +4349,6 @@ class SegmentMaker:
                                         }
                                         \context Voice = "Rest_Voice_1"
                                         {
-                                            % [Rest_Voice_1 measure 2]
                                             \once \override Score.TimeSignature.X-extent = ##f
                                             \once \override MultiMeasureRest.transparent = ##t
                                             \stopStaff
@@ -4420,7 +4364,6 @@ class SegmentMaker:
                             {
                                 \context Voice = "Music_Voice_2"
                                 {
-                                    % [Music_Voice_2 measure 1]
                                     \clef "bass"
                                     \once \override Staff.Clef.color = #(x11-color 'blue)
                                     %@% \override Staff.Clef.color = ##f
@@ -4445,7 +4388,6 @@ class SegmentMaker:
                                     <<
                                         \context Voice = "Music_Voice_2"
                                         {
-                                            % [Music_Voice_2 measure 2]
                                             \abjad-invisible-music-coloring
                                             %@% \abjad-invisible-music
                                             \baca-not-yet-pitched-coloring
@@ -4454,7 +4396,6 @@ class SegmentMaker:
                                         }
                                         \context Voice = "Rest_Voice_2"
                                         {
-                                            % [Rest_Voice_2 measure 2]
                                             \once \override Score.TimeSignature.X-extent = ##f
                                             \once \override MultiMeasureRest.transparent = ##t
                                             \stopStaff
@@ -4698,24 +4639,19 @@ class SegmentMaker:
                     <<
                         \context GlobalSkips = "Global_Skips"
                         {
-                            % [Global_Skips measure 1]
                             \time 4/8
                             \bar ""
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                            % [Global_Skips measure 2]
                             \time 3/8
                             \baca-time-signature-color #'blue
                             s1 * 3/8
-                            % [Global_Skips measure 3]
                             \time 4/8
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                            % [Global_Skips measure 4]
                             \time 3/8
                             \baca-time-signature-color #'blue
                             s1 * 3/8
-                            % [Global_Skips measure 5]
                             \time 1/4
                             \baca-time-signature-transparent
                             s1 * 1/4
@@ -4729,22 +4665,17 @@ class SegmentMaker:
                         {
                             \context Voice = "Music_Voice"
                             {
-                                % [Music_Voice measure 1]
                                 R1 * 4/8
                                 %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                                % [Music_Voice measure 2]
                                 R1 * 3/8
                                 %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                                % [Music_Voice measure 3]
                                 R1 * 4/8
                                 %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                                % [Music_Voice measure 4]
                                 R1 * 3/8
                                 %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                                 <<
                                     \context Voice = "Music_Voice"
                                     {
-                                        % [Music_Voice measure 5]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         R1 * 1/4
@@ -4752,7 +4683,6 @@ class SegmentMaker:
                                     }
                                     \context Voice = "Rest_Voice"
                                     {
-                                        % [Rest_Voice measure 5]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
                                         \stopStaff
@@ -5011,23 +4941,18 @@ class SegmentMaker:
                     <<
                         \context GlobalSkips = "Global_Skips"
                         {
-                            % [Global_Skips measure 1]
                             \time 4/8
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                            % [Global_Skips measure 2]
                             \time 3/8
                             \baca-time-signature-color #'blue
                             s1 * 3/8
-                            % [Global_Skips measure 3]
                             \time 4/8
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                            % [Global_Skips measure 4]
                             \time 3/8
                             \baca-time-signature-color #'blue
                             s1 * 3/8
-                            % [Global_Skips measure 5]
                             \time 1/4
                             \baca-time-signature-transparent
                             s1 * 1/4
@@ -5041,7 +4966,6 @@ class SegmentMaker:
                         {
                             \context Voice = "Music_Voice"
                             {
-                                % [Music_Voice measure 1]
                                 fs'!8
                                 ^ \baca-explicit-indicator-markup "(“clarinet”)"
                                 [
@@ -5055,20 +4979,17 @@ class SegmentMaker:
                                 fs'!8
                                 g'8
                                 ]
-                                % [Music_Voice measure 2]
                                 fs'!8
                                 [
                                 g'8
                                 fs'!8
                                 ]
-                                % [Music_Voice measure 3]
                                 g'8
                                 [
                                 fs'!8
                                 g'8
                                 fs'!8
                                 ]
-                                % [Music_Voice measure 4]
                                 g'8
                                 [
                                 fs'!8
@@ -5078,7 +4999,6 @@ class SegmentMaker:
                                 <<
                                     \context Voice = "Music_Voice"
                                     {
-                                        % [Music_Voice measure 5]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
@@ -5087,7 +5007,6 @@ class SegmentMaker:
                                     }
                                     \context Voice = "Rest_Voice"
                                     {
-                                        % [Rest_Voice measure 5]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
                                         \stopStaff
@@ -5138,23 +5057,18 @@ class SegmentMaker:
                     <<
                         \context GlobalSkips = "Global_Skips"
                         {
-                            % [Global_Skips measure 1]
                             \time 4/8
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                            % [Global_Skips measure 2]
                             \time 3/8
                             \baca-time-signature-color #'blue
                             s1 * 3/8
-                            % [Global_Skips measure 3]
                             \time 4/8
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                            % [Global_Skips measure 4]
                             \time 3/8
                             \baca-time-signature-color #'blue
                             s1 * 3/8
-                            % [Global_Skips measure 5]
                             \time 1/4
                             \baca-time-signature-transparent
                             s1 * 1/4
@@ -5168,7 +5082,6 @@ class SegmentMaker:
                         {
                             \context Voice = "Music_Voice"
                             {
-                                % [Music_Voice measure 1]
                                 e'8
                                 ^ \baca-explicit-indicator-markup "(“clarinet”)"
                                 [
@@ -5182,20 +5095,17 @@ class SegmentMaker:
                                 e'8
                                 f'8
                                 ]
-                                % [Music_Voice measure 2]
                                 e'8
                                 [
                                 f'8
                                 e'8
                                 ]
-                                % [Music_Voice measure 3]
                                 f'8
                                 [
                                 e'8
                                 f'8
                                 e'8
                                 ]
-                                % [Music_Voice measure 4]
                                 f'8
                                 [
                                 e'8
@@ -5205,7 +5115,6 @@ class SegmentMaker:
                                 <<
                                     \context Voice = "Music_Voice"
                                     {
-                                        % [Music_Voice measure 5]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
@@ -5214,7 +5123,6 @@ class SegmentMaker:
                                     }
                                     \context Voice = "Rest_Voice"
                                     {
-                                        % [Rest_Voice measure 5]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
                                         \stopStaff

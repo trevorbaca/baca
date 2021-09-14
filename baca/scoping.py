@@ -881,27 +881,22 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -916,7 +911,6 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \baca-not-yet-pitched-coloring
                             b'8
                             [
@@ -933,7 +927,6 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                             \baca-not-yet-pitched-coloring
                             b'8
                             ]
-                            % [Music_Voice measure 2]
                             \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
@@ -949,7 +942,6 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                             - \marcato
                             - \staccato
                             ]
-                            % [Music_Voice measure 3]
                             \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
@@ -969,7 +961,6 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                             - \staccato
                             )
                             ]
-                            % [Music_Voice measure 4]
                             \baca-not-yet-pitched-coloring
                             b'8
                             [
@@ -982,7 +973,6 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -991,7 +981,6 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -1043,27 +1032,22 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1078,7 +1062,6 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \baca-not-yet-pitched-coloring
                             b'8
                             [
@@ -1095,7 +1078,6 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                             \baca-not-yet-pitched-coloring
                             b'8
                             ]
-                            % [Music_Voice measure 2]
                             \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
@@ -1111,7 +1093,6 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                             - \marcato
                             - \staccato
                             ]
-                            % [Music_Voice measure 3]
                             \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
@@ -1131,7 +1112,6 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                             - \staccato
                             )
                             ]
-                            % [Music_Voice measure 4]
                             \baca-not-yet-pitched-coloring
                             b'8
                             [
@@ -1144,7 +1124,6 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -1153,7 +1132,6 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -1256,27 +1234,22 @@ def only_parts(command: _command_typing) -> _command_typing:
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1291,7 +1264,6 @@ def only_parts(command: _command_typing) -> _command_typing:
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \baca-not-yet-pitched-coloring
                             b'2
                             - \tweak color #(x11-color 'blue)
@@ -1304,13 +1276,10 @@ def only_parts(command: _command_typing) -> _command_typing:
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             \baca-not-yet-pitched-coloring
                             b'4.
-                            % [Music_Voice measure 3]
                             \baca-not-yet-pitched-coloring
                             b'2
-                            % [Music_Voice measure 4]
                             \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'blue)
@@ -1319,7 +1288,6 @@ def only_parts(command: _command_typing) -> _command_typing:
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -1328,7 +1296,6 @@ def only_parts(command: _command_typing) -> _command_typing:
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff

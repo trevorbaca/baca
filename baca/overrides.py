@@ -412,23 +412,18 @@ def bar_line_transparent(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
@@ -442,14 +437,12 @@ def bar_line_transparent(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             e'8
                             [
                             d''8
                             f'8
                             ]
                             r8
-                            % [Music_Voice measure 2]
                             \override Score.BarLine.transparent = ##t
                             e''8
                             [
@@ -457,14 +450,12 @@ def bar_line_transparent(
                             f''8
                             ]
                             \revert Score.BarLine.transparent
-                            % [Music_Voice measure 3]
                             r8
                             e'8
                             [
                             d''8
                             f'8
                             ]
-                            % [Music_Voice measure 4]
                             r8
                             e''8
                             [
@@ -473,7 +464,6 @@ def bar_line_transparent(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -482,7 +472,6 @@ def bar_line_transparent(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -1443,23 +1432,18 @@ def mmrest_color(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
@@ -1473,24 +1457,19 @@ def mmrest_color(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override MultiMeasureRest.color = #(x11-color 'DarkOrchid)
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                            % [Music_Voice measure 2]
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            % [Music_Voice measure 3]
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                            % [Music_Voice measure 4]
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             \revert MultiMeasureRest.color
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     R1 * 1/4
@@ -1498,7 +1477,6 @@ def mmrest_color(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -1580,23 +1558,18 @@ def mmrest_text_color(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
@@ -1610,25 +1583,20 @@ def mmrest_text_color(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override MultiMeasureRestText.color = #red
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                            % [Music_Voice measure 2]
                             R1 * 3/8
                             ^ \baca-boxed-markup still
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            % [Music_Voice measure 3]
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                            % [Music_Voice measure 4]
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             \revert MultiMeasureRestText.color
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     R1 * 1/4
@@ -1636,7 +1604,6 @@ def mmrest_text_color(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -1731,23 +1698,18 @@ def mmrest_text_extra_offset(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
@@ -1761,25 +1723,20 @@ def mmrest_text_extra_offset(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override MultiMeasureRestText.extra-offset = #'(0 . 2)
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                            % [Music_Voice measure 2]
                             R1 * 3/8
                             ^ \baca-boxed-markup still
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            % [Music_Voice measure 3]
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                            % [Music_Voice measure 4]
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             \revert MultiMeasureRestText.extra-offset
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     R1 * 1/4
@@ -1787,7 +1744,6 @@ def mmrest_text_extra_offset(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -1853,23 +1809,18 @@ def mmrest_text_padding(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
@@ -1883,25 +1834,20 @@ def mmrest_text_padding(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override MultiMeasureRestText.padding = 2
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                            % [Music_Voice measure 2]
                             R1 * 3/8
                             ^ \baca-boxed-markup still
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            % [Music_Voice measure 3]
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                            % [Music_Voice measure 4]
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             \revert MultiMeasureRestText.padding
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     R1 * 1/4
@@ -1909,7 +1855,6 @@ def mmrest_text_padding(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -1974,23 +1919,18 @@ def mmrest_text_parent_center(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
@@ -2004,25 +1944,20 @@ def mmrest_text_parent_center(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override MultiMeasureRestText.parent-alignment-X = 0
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                            % [Music_Voice measure 2]
                             R1 * 3/8
                             ^ \baca-boxed-markup still
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            % [Music_Voice measure 3]
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                            % [Music_Voice measure 4]
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             \revert MultiMeasureRestText.parent-alignment-X
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     R1 * 1/4
@@ -2030,7 +1965,6 @@ def mmrest_text_parent_center(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -2096,23 +2030,18 @@ def mmrest_text_staff_padding(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \time 1/4
                         \baca-time-signature-transparent
                         s1 * 1/4
@@ -2126,25 +2055,20 @@ def mmrest_text_staff_padding(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override MultiMeasureRestText.staff-padding = 2
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                            % [Music_Voice measure 2]
                             R1 * 3/8
                             ^ \baca-boxed-markup still
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            % [Music_Voice measure 3]
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                            % [Music_Voice measure 4]
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             \revert MultiMeasureRestText.staff-padding
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     R1 * 1/4
@@ -2152,7 +2076,6 @@ def mmrest_text_staff_padding(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff

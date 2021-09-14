@@ -65,27 +65,22 @@ class RhythmCommand(scoping.Command):
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -100,7 +95,6 @@ class RhythmCommand(scoping.Command):
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \baca-not-yet-pitched-coloring
                             b'8
                             [
@@ -109,7 +103,6 @@ class RhythmCommand(scoping.Command):
                             \baca-not-yet-pitched-coloring
                             b'8
                             ]
-                            % [Music_Voice measure 2]
                             \baca-not-yet-pitched-coloring
                             b'8
                             [
@@ -120,7 +113,6 @@ class RhythmCommand(scoping.Command):
                             \baca-not-yet-pitched-coloring
                             b'8
                             ]
-                            % [Music_Voice measure 3]
                             \baca-not-yet-pitched-coloring
                             b'8
                             [
@@ -129,7 +121,6 @@ class RhythmCommand(scoping.Command):
                             \baca-not-yet-pitched-coloring
                             b'8
                             ]
-                            % [Music_Voice measure 4]
                             \baca-not-yet-pitched-coloring
                             b'8
                             [
@@ -143,7 +134,6 @@ class RhythmCommand(scoping.Command):
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -152,7 +142,6 @@ class RhythmCommand(scoping.Command):
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -478,24 +467,18 @@ class RhythmCommand(scoping.Command):
                     <<
                         \context GlobalSkips = "Global_Skips"
                         {
-                            % [Global_Skips measure 1]
                             \baca-new-spacing-section #1 #16
                             \time 4/8
                             \baca-time-signature-color #'blue
                             s1 * 1/2
-                            % [Global_Skips measure 2]
                             \baca-new-spacing-section #1 #16
                             s1 * 1/2
-                            % [Global_Skips measure 3]
                             \baca-new-spacing-section #1 #16
                             s1 * 1/2
-                            % [Global_Skips measure 4]
                             \baca-new-spacing-section #1 #16
                             s1 * 1/2
-                            % [Global_Skips measure 5]
                             \baca-new-spacing-section #1 #16
                             s1 * 1/2
-                            % [Global_Skips measure 6]
                             \baca-new-spacing-section #1 #4
                             \time 1/4
                             \baca-time-signature-transparent
@@ -510,7 +493,6 @@ class RhythmCommand(scoping.Command):
                         {
                             \context Voice = "Music_Voice"
                             {
-                                % [Music_Voice measure 1]
                                 \override TextScript.font-size = -2
                                 \override TextScript.staff-padding = 5
                                 \baca-not-yet-pitched-coloring
@@ -535,7 +517,6 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                                 ~
-                                % [Music_Voice measure 2]
                                 \baca-not-yet-pitched-coloring
                                 b'8
                                 \baca-not-yet-pitched-coloring
@@ -552,14 +533,12 @@ class RhythmCommand(scoping.Command):
                                         2
                                         16
                                     }
-                                % [Music_Voice measure 3]
                                 r2
                                 _ \markup {
                                     \fraction
                                         8
                                         16
                                     }
-                                % [Music_Voice measure 4]
                                 \baca-not-yet-pitched-coloring
                                 b'16
                                 _ \markup {
@@ -581,7 +560,6 @@ class RhythmCommand(scoping.Command):
                                         3
                                         16
                                     }
-                                % [Music_Voice measure 5]
                                 \baca-not-yet-pitched-coloring
                                 b'4
                                 _ \markup {
@@ -610,7 +588,6 @@ class RhythmCommand(scoping.Command):
                                 <<
                                     \context Voice = "Music_Voice"
                                     {
-                                        % [Music_Voice measure 6]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
@@ -619,7 +596,6 @@ class RhythmCommand(scoping.Command):
                                     }
                                     \context Voice = "Rest_Voice"
                                     {
-                                        % [Rest_Voice measure 6]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
                                         \stopStaff
@@ -857,12 +833,10 @@ def make_monads(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/4
                         \baca-time-signature-color #'blue
                         s1 * 1
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -880,7 +854,6 @@ def make_monads(
                             \tweak edge-height #'(0.7 . 0)
                             \times 4/5
                             {
-                                % [Music_Voice measure 1]
                                 \baca-not-yet-pitched-coloring
                                 b'2
                                 - \abjad-dashed-line-with-hook
@@ -906,7 +879,6 @@ def make_monads(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -915,7 +887,6 @@ def make_monads(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -1027,12 +998,10 @@ def make_repeat_tied_notes(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 10/8
                         \baca-time-signature-color #'blue
                         s1 * 5/4
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1047,7 +1016,6 @@ def make_repeat_tied_notes(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \baca-not-yet-pitched-coloring
                             b'4.
                             - \abjad-dashed-line-with-hook
@@ -1075,7 +1043,6 @@ def make_repeat_tied_notes(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -1084,7 +1051,6 @@ def make_repeat_tied_notes(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff

@@ -2156,12 +2156,10 @@ class Imbrication:
                     <<
                         \context GlobalSkips = "Global_Skips"
                         {
-                            % [Global_Skips measure 1]
                             \baca-new-spacing-section #1 #32
                             \time 5/8
                             \baca-time-signature-color #'blue
                             s1 * 5/8
-                            % [Global_Skips measure 2]
                             \baca-new-spacing-section #1 #4
                             \time 1/4
                             \baca-time-signature-transparent
@@ -2181,7 +2179,6 @@ class Imbrication:
                                     \override TupletNumber.stencil = ##f
                                     \scaleDurations #'(1 . 1)
                                     {
-                                        % [Music_Voice_1 measure 1]
                                         \voiceOne
                                         s16
                                         [
@@ -2221,7 +2218,6 @@ class Imbrication:
                                 <<
                                     \context Voice = "Music_Voice_1"
                                     {
-                                        % [Music_Voice_1 measure 2]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
@@ -2230,7 +2226,6 @@ class Imbrication:
                                     }
                                     \context Voice = "Rest_Voice_1"
                                     {
-                                        % [Rest_Voice_1 measure 2]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
                                         \stopStaff
@@ -2246,7 +2241,6 @@ class Imbrication:
                                 {
                                     \scaleDurations #'(1 . 1)
                                     {
-                                        % [Music_Voice_2 measure 1]
                                         \set stemLeftBeamCount = 0
                                         \set stemRightBeamCount = 2
                                         \voiceTwo
@@ -2305,7 +2299,6 @@ class Imbrication:
                                 <<
                                     \context Voice = "Music_Voice_2"
                                     {
-                                        % [Music_Voice_2 measure 2]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
@@ -2314,7 +2307,6 @@ class Imbrication:
                                     }
                                     \context Voice = "Rest_Voice_2"
                                     {
-                                        % [Rest_Voice_2 measure 2]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
                                         \stopStaff
@@ -2449,12 +2441,10 @@ class Imbrication:
                     <<
                         \context GlobalSkips = "Global_Skips"
                         {
-                            % [Global_Skips measure 1]
                             \baca-new-spacing-section #1 #32
                             \time 15/16
                             \baca-time-signature-color #'blue
                             s1 * 15/16
-                            % [Global_Skips measure 2]
                             \baca-new-spacing-section #1 #4
                             \time 1/4
                             \baca-time-signature-transparent
@@ -2474,7 +2464,6 @@ class Imbrication:
                                     \override TupletNumber.stencil = ##f
                                     \scaleDurations #'(1 . 1)
                                     {
-                                        % [Music_Voice_1 measure 1]
                                         \voiceOne
                                         s16
                                         [
@@ -2528,7 +2517,6 @@ class Imbrication:
                                 <<
                                     \context Voice = "Music_Voice_1"
                                     {
-                                        % [Music_Voice_1 measure 2]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
@@ -2537,7 +2525,6 @@ class Imbrication:
                                     }
                                     \context Voice = "Rest_Voice_1"
                                     {
-                                        % [Rest_Voice_1 measure 2]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
                                         \stopStaff
@@ -2553,7 +2540,6 @@ class Imbrication:
                                 {
                                     \scaleDurations #'(1 . 1)
                                     {
-                                        % [Music_Voice_2 measure 1]
                                         \set stemLeftBeamCount = 0
                                         \set stemRightBeamCount = 2
                                         \voiceTwo
@@ -2620,7 +2606,6 @@ class Imbrication:
                                 <<
                                     \context Voice = "Music_Voice_2"
                                     {
-                                        % [Music_Voice_2 measure 2]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
@@ -2629,7 +2614,6 @@ class Imbrication:
                                     }
                                     \context Voice = "Rest_Voice_2"
                                     {
-                                        % [Rest_Voice_2 measure 2]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
                                         \stopStaff
@@ -2721,12 +2705,10 @@ class Imbrication:
                     <<
                         \context GlobalSkips = "Global_Skips"
                         {
-                            % [Global_Skips measure 1]
                             \baca-new-spacing-section #1 #32
                             \time 9/8
                             \baca-time-signature-color #'blue
                             s1 * 9/8
-                            % [Global_Skips measure 2]
                             \baca-new-spacing-section #1 #4
                             \time 1/4
                             \baca-time-signature-transparent
@@ -2746,7 +2728,6 @@ class Imbrication:
                                     \override TupletNumber.stencil = ##f
                                     \scaleDurations #'(1 . 1)
                                     {
-                                        % [Music_Voice_1 measure 1]
                                         \voiceOne
                                         s16
                                         [
@@ -2803,7 +2784,6 @@ class Imbrication:
                                 <<
                                     \context Voice = "Music_Voice_1"
                                     {
-                                        % [Music_Voice_1 measure 2]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
@@ -2812,7 +2792,6 @@ class Imbrication:
                                     }
                                     \context Voice = "Rest_Voice_1"
                                     {
-                                        % [Rest_Voice_1 measure 2]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
                                         \stopStaff
@@ -2828,7 +2807,6 @@ class Imbrication:
                                 {
                                     \scaleDurations #'(1 . 1)
                                     {
-                                        % [Music_Voice_2 measure 1]
                                         \set stemLeftBeamCount = 0
                                         \set stemRightBeamCount = 2
                                         \voiceTwo
@@ -2925,7 +2903,6 @@ class Imbrication:
                                 <<
                                     \context Voice = "Music_Voice_2"
                                     {
-                                        % [Music_Voice_2 measure 2]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
@@ -2934,7 +2911,6 @@ class Imbrication:
                                     }
                                     \context Voice = "Rest_Voice_2"
                                     {
-                                        % [Rest_Voice_2 measure 2]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
                                         \stopStaff
@@ -3014,12 +2990,10 @@ class Imbrication:
                     <<
                         \context GlobalSkips = "Global_Skips"
                         {
-                            % [Global_Skips measure 1]
                             \baca-new-spacing-section #1 #32
                             \time 45/32
                             \baca-time-signature-color #'blue
                             s1 * 45/32
-                            % [Global_Skips measure 2]
                             \baca-new-spacing-section #1 #4
                             \time 1/4
                             \baca-time-signature-transparent
@@ -3039,7 +3013,6 @@ class Imbrication:
                                     \override TupletNumber.stencil = ##f
                                     \scaleDurations #'(1 . 1)
                                     {
-                                        % [Music_Voice_1 measure 1]
                                         \voiceOne
                                         s8
                                         [
@@ -3091,7 +3064,6 @@ class Imbrication:
                                 <<
                                     \context Voice = "Music_Voice_1"
                                     {
-                                        % [Music_Voice_1 measure 2]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
@@ -3100,7 +3072,6 @@ class Imbrication:
                                     }
                                     \context Voice = "Rest_Voice_1"
                                     {
-                                        % [Rest_Voice_1 measure 2]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
                                         \stopStaff
@@ -3116,7 +3087,6 @@ class Imbrication:
                                 {
                                     \scaleDurations #'(1 . 1)
                                     {
-                                        % [Music_Voice_2 measure 1]
                                         \voiceTwo
                                         c'8
                                         ~
@@ -3169,7 +3139,6 @@ class Imbrication:
                                 <<
                                     \context Voice = "Music_Voice_2"
                                     {
-                                        % [Music_Voice_2 measure 2]
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
                                         \baca-not-yet-pitched-coloring
@@ -3178,7 +3147,6 @@ class Imbrication:
                                     }
                                     \context Voice = "Rest_Voice_2"
                                     {
-                                        % [Rest_Voice_2 measure 2]
                                         \once \override Score.TimeSignature.X-extent = ##f
                                         \once \override MultiMeasureRest.transparent = ##t
                                         \stopStaff
@@ -7417,12 +7385,10 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #32
                         \time 3/4
                         \baca-time-signature-color #'blue
                         s1 * 3/4
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -7442,7 +7408,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                 \override TupletNumber.stencil = ##f
                                 \times 4/5
                                 {
-                                    % [Music_Voice_1 measure 1]
                                     \voiceOne
                                     s8
                                     - \abjad-dashed-line-with-hook
@@ -7484,7 +7449,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                             <<
                                 \context Voice = "Music_Voice_1"
                                 {
-                                    % [Music_Voice_1 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -7493,7 +7457,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                 }
                                 \context Voice = "Rest_Voice_1"
                                 {
-                                    % [Rest_Voice_1 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -7509,7 +7472,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                             {
                                 \times 4/5
                                 {
-                                    % [Music_Voice_2 measure 1]
                                     \voiceTwo
                                     r8
                                     - \abjad-dashed-line-with-hook
@@ -7547,7 +7509,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                             <<
                                 \context Voice = "Music_Voice_2"
                                 {
-                                    % [Music_Voice_2 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -7556,7 +7517,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                 }
                                 \context Voice = "Rest_Voice_2"
                                 {
-                                    % [Rest_Voice_2 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -7637,12 +7597,10 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #32
                         \time 9/8
                         \baca-time-signature-color #'blue
                         s1 * 9/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -7662,7 +7620,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                 \override TupletNumber.stencil = ##f
                                 \scaleDurations #'(1 . 1)
                                 {
-                                    % [Music_Voice_1 measure 1]
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     \voiceOne
@@ -7716,7 +7673,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                             <<
                                 \context Voice = "Music_Voice_1"
                                 {
-                                    % [Music_Voice_1 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -7725,7 +7681,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                 }
                                 \context Voice = "Rest_Voice_1"
                                 {
-                                    % [Rest_Voice_1 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -7741,7 +7696,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                             {
                                 \scaleDurations #'(1 . 1)
                                 {
-                                    % [Music_Voice_2 measure 1]
                                     \voiceTwo
                                     c'16
                                     [
@@ -7790,7 +7744,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                             <<
                                 \context Voice = "Music_Voice_2"
                                 {
-                                    % [Music_Voice_2 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -7799,7 +7752,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                 }
                                 \context Voice = "Rest_Voice_2"
                                 {
-                                    % [Rest_Voice_2 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -7895,17 +7847,14 @@ def extend_beam(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #32
                         \time 7/16
                         \baca-time-signature-color #'blue
                         s1 * 7/16
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #32
                         \time 1/4
                         \baca-time-signature-color #'blue
                         s1 * 1/4
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \baca-time-signature-transparent
                         s1 * 1/4
@@ -7924,7 +7873,6 @@ def extend_beam(
                                 \override TupletNumber.stencil = ##f
                                 \scaleDurations #'(1 . 1)
                                 {
-                                    % [Music_Voice_1 measure 1]
                                     \voiceOne
                                     s16
                                     [
@@ -7960,7 +7908,6 @@ def extend_beam(
                                 \override TupletNumber.stencil = ##f
                                 \scaleDurations #'(1 . 1)
                                 {
-                                    % [Music_Voice_1 measure 2]
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     s16
@@ -7982,7 +7929,6 @@ def extend_beam(
                             <<
                                 \context Voice = "Music_Voice_1"
                                 {
-                                    % [Music_Voice_1 measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -7991,7 +7937,6 @@ def extend_beam(
                                 }
                                 \context Voice = "Rest_Voice_1"
                                 {
-                                    % [Rest_Voice_1 measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -8007,7 +7952,6 @@ def extend_beam(
                             {
                                 \scaleDurations #'(1 . 1)
                                 {
-                                    % [Music_Voice_2 measure 1]
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     \voiceTwo
@@ -8046,7 +7990,6 @@ def extend_beam(
                             {
                                 \scaleDurations #'(1 . 1)
                                 {
-                                    % [Music_Voice_2 measure 2]
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     g''16
@@ -8067,7 +8010,6 @@ def extend_beam(
                             <<
                                 \context Voice = "Music_Voice_2"
                                 {
-                                    % [Music_Voice_2 measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -8076,7 +8018,6 @@ def extend_beam(
                                 }
                                 \context Voice = "Rest_Voice_2"
                                 {
-                                    % [Rest_Voice_2 measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -8168,12 +8109,10 @@ def imbricate(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #32
                         \time 15/16
                         \baca-time-signature-color #'blue
                         s1 * 15/16
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -8193,7 +8132,6 @@ def imbricate(
                                 \override TupletNumber.stencil = ##f
                                 \scaleDurations #'(1 . 1)
                                 {
-                                    % [Music_Voice_1 measure 1]
                                     \voiceOne
                                     s16
                                     - \abjad-dashed-line-with-hook
@@ -8244,7 +8182,6 @@ def imbricate(
                             <<
                                 \context Voice = "Music_Voice_1"
                                 {
-                                    % [Music_Voice_1 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -8253,7 +8190,6 @@ def imbricate(
                                 }
                                 \context Voice = "Rest_Voice_1"
                                 {
-                                    % [Rest_Voice_1 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -8269,7 +8205,6 @@ def imbricate(
                             {
                                 \scaleDurations #'(1 . 1)
                                 {
-                                    % [Music_Voice_2 measure 1]
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     \voiceTwo
@@ -8336,7 +8271,6 @@ def imbricate(
                             <<
                                 \context Voice = "Music_Voice_2"
                                 {
-                                    % [Music_Voice_2 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -8345,7 +8279,6 @@ def imbricate(
                                 }
                                 \context Voice = "Rest_Voice_2"
                                 {
-                                    % [Rest_Voice_2 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -8418,12 +8351,10 @@ def imbricate(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #32
                         \time 15/16
                         \baca-time-signature-color #'blue
                         s1 * 15/16
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -8443,7 +8374,6 @@ def imbricate(
                                 \override TupletNumber.stencil = ##f
                                 \scaleDurations #'(1 . 1)
                                 {
-                                    % [Music_Voice_1 measure 1]
                                     \override Beam.positions = #'(6 . 6)
                                     s16
                                     [
@@ -8492,7 +8422,6 @@ def imbricate(
                             <<
                                 \context Voice = "Music_Voice_1"
                                 {
-                                    % [Music_Voice_1 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -8501,7 +8430,6 @@ def imbricate(
                                 }
                                 \context Voice = "Rest_Voice_1"
                                 {
-                                    % [Rest_Voice_1 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -8517,7 +8445,6 @@ def imbricate(
                             {
                                 \scaleDurations #'(1 . 1)
                                 {
-                                    % [Music_Voice_2 measure 1]
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
@@ -8583,7 +8510,6 @@ def imbricate(
                             <<
                                 \context Voice = "Music_Voice_2"
                                 {
-                                    % [Music_Voice_2 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -8592,7 +8518,6 @@ def imbricate(
                                 }
                                 \context Voice = "Rest_Voice_2"
                                 {
-                                    % [Rest_Voice_2 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -8610,7 +8535,6 @@ def imbricate(
                                 \override TupletNumber.stencil = ##f
                                 \scaleDurations #'(1 . 1)
                                 {
-                                    % [Music_Voice_3 measure 1]
                                     \override Beam.positions = #'(8 . 8)
                                     s16
                                     [
@@ -8659,7 +8583,6 @@ def imbricate(
                             <<
                                 \context Voice = "Music_Voice_3"
                                 {
-                                    % [Music_Voice_3 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -8668,7 +8591,6 @@ def imbricate(
                                 }
                                 \context Voice = "Rest_Voice_3"
                                 {
-                                    % [Rest_Voice_3 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -8745,12 +8667,10 @@ def imbricate(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #32
                         \time 9/8
                         \baca-time-signature-color #'blue
                         s1 * 9/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -8771,7 +8691,6 @@ def imbricate(
                                 \tweak text #tuplet-number::calc-fraction-text
                                 \times 6/5
                                 {
-                                    % [Music_Voice_1 measure 1]
                                     \voiceOne
                                     s16
                                     [
@@ -8827,7 +8746,6 @@ def imbricate(
                             <<
                                 \context Voice = "Music_Voice_1"
                                 {
-                                    % [Music_Voice_1 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -8836,7 +8754,6 @@ def imbricate(
                                 }
                                 \context Voice = "Rest_Voice_1"
                                 {
-                                    % [Rest_Voice_1 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -8853,7 +8770,6 @@ def imbricate(
                                 \tweak text #tuplet-number::calc-fraction-text
                                 \times 6/5
                                 {
-                                    % [Music_Voice_2 measure 1]
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     \voiceTwo
@@ -8937,7 +8853,6 @@ def imbricate(
                             <<
                                 \context Voice = "Music_Voice_2"
                                 {
-                                    % [Music_Voice_2 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -8946,7 +8861,6 @@ def imbricate(
                                 }
                                 \context Voice = "Rest_Voice_2"
                                 {
-                                    % [Rest_Voice_2 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -9024,12 +8938,10 @@ def imbricate(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \time 27/16
                         \baca-time-signature-color #'blue
                         s1 * 27/16
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -9049,7 +8961,6 @@ def imbricate(
                                 \override TupletNumber.stencil = ##f
                                 \scaleDurations #'(1 . 1)
                                 {
-                                    % [Music_Voice_1 measure 1]
                                     \voiceOne
                                     s8.
                                     [
@@ -9094,7 +9005,6 @@ def imbricate(
                             <<
                                 \context Voice = "Music_Voice_1"
                                 {
-                                    % [Music_Voice_1 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -9103,7 +9013,6 @@ def imbricate(
                                 }
                                 \context Voice = "Rest_Voice_1"
                                 {
-                                    % [Rest_Voice_1 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -9119,7 +9028,6 @@ def imbricate(
                             {
                                 \scaleDurations #'(1 . 1)
                                 {
-                                    % [Music_Voice_2 measure 1]
                                     \voiceTwo
                                     c'8.
                                     [
@@ -9152,7 +9060,6 @@ def imbricate(
                             <<
                                 \context Voice = "Music_Voice_2"
                                 {
-                                    % [Music_Voice_2 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -9161,7 +9068,6 @@ def imbricate(
                                 }
                                 \context Voice = "Rest_Voice_2"
                                 {
-                                    % [Rest_Voice_2 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -9237,12 +9143,10 @@ def imbricate(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #32
                         \time 11/16
                         \baca-time-signature-color #'blue
                         s1 * 11/16
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -9262,7 +9166,6 @@ def imbricate(
                                 \override TupletNumber.stencil = ##f
                                 \scaleDurations #'(1 . 1)
                                 {
-                                    % [Music_Voice_1 measure 1]
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     \voiceOne
@@ -9309,7 +9212,6 @@ def imbricate(
                             <<
                                 \context Voice = "Music_Voice_1"
                                 {
-                                    % [Music_Voice_1 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -9318,7 +9220,6 @@ def imbricate(
                                 }
                                 \context Voice = "Rest_Voice_1"
                                 {
-                                    % [Rest_Voice_1 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -9334,7 +9235,6 @@ def imbricate(
                             {
                                 \scaleDurations #'(1 . 1)
                                 {
-                                    % [Music_Voice_2 measure 1]
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     \voiceTwo
@@ -9389,7 +9289,6 @@ def imbricate(
                             <<
                                 \context Voice = "Music_Voice_2"
                                 {
-                                    % [Music_Voice_2 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -9398,7 +9297,6 @@ def imbricate(
                                 }
                                 \context Voice = "Rest_Voice_2"
                                 {
-                                    % [Rest_Voice_2 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -9474,12 +9372,10 @@ def imbricate(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #32
                         \time 19/16
                         \baca-time-signature-color #'blue
                         s1 * 19/16
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -9499,7 +9395,6 @@ def imbricate(
                                 \override TupletNumber.stencil = ##f
                                 \scaleDurations #'(1 . 1)
                                 {
-                                    % [Music_Voice_1 measure 1]
                                     \voiceOne
                                     s8
                                     - \abjad-dashed-line-with-hook
@@ -9552,7 +9447,6 @@ def imbricate(
                             <<
                                 \context Voice = "Music_Voice_1"
                                 {
-                                    % [Music_Voice_1 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -9561,7 +9455,6 @@ def imbricate(
                                 }
                                 \context Voice = "Rest_Voice_1"
                                 {
-                                    % [Rest_Voice_1 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -9577,7 +9470,6 @@ def imbricate(
                             {
                                 \scaleDurations #'(1 . 1)
                                 {
-                                    % [Music_Voice_2 measure 1]
                                     \voiceTwo
                                     r8
                                     - \abjad-dashed-line-with-hook
@@ -9646,7 +9538,6 @@ def imbricate(
                             <<
                                 \context Voice = "Music_Voice_2"
                                 {
-                                    % [Music_Voice_2 measure 2]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -9655,7 +9546,6 @@ def imbricate(
                                 }
                                 \context Voice = "Rest_Voice_2"
                                 {
-                                    % [Rest_Voice_2 measure 2]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff

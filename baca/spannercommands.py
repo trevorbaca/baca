@@ -260,27 +260,22 @@ def beam(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -295,7 +290,6 @@ def beam(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             c'8
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_even_divisions()"
@@ -307,16 +301,13 @@ def beam(
                             c'8
                             c'8
                             c'8
-                            % [Music_Voice measure 2]
-                            c'8
-                            c'8
-                            c'8
-                            % [Music_Voice measure 3]
                             c'8
                             c'8
                             c'8
                             c'8
-                            % [Music_Voice measure 4]
+                            c'8
+                            c'8
+                            c'8
                             c'8
                             c'8
                             c'8
@@ -325,7 +316,6 @@ def beam(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -334,7 +324,6 @@ def beam(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff

@@ -45,7 +45,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -54,13 +53,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -76,7 +73,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \clef "treble"
                             \once \override Staff.Clef.color = #(x11-color 'DarkViolet)
                             %@% \override Staff.Clef.color = ##f
@@ -84,13 +80,11 @@ r"""
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             \override Staff.Clef.color = #(x11-color 'violet)
-                            % [Music_Voice measure 2]
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     R1 * 1/4
@@ -98,7 +92,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -156,7 +149,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -165,13 +157,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -187,7 +177,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \clef "treble"
                             \once \override Staff.Clef.color = #(x11-color 'blue)
                             %@% \override Staff.Clef.color = ##f
@@ -195,13 +184,11 @@ r"""
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
-                            % [Music_Voice measure 2]
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     R1 * 1/4
@@ -209,7 +196,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -279,7 +265,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -289,13 +274,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -311,7 +294,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \clef "alto"
                             \once \override Staff.Clef.color = #(x11-color 'blue)
                             %@% \override Staff.Clef.color = ##f
@@ -319,13 +301,11 @@ r"""
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
-                            % [Music_Voice measure 2]
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     R1 * 1/4
@@ -333,7 +313,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -402,7 +381,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -412,13 +390,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -434,7 +410,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \clef "treble"
                             \once \override Staff.Clef.color = #(x11-color 'green4)
                             %@% \override Staff.Clef.color = ##f
@@ -442,13 +417,11 @@ r"""
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             \override Staff.Clef.color = #(x11-color 'OliveDrab)
-                            % [Music_Voice measure 2]
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     R1 * 1/4
@@ -456,7 +429,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -515,7 +487,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -524,17 +495,14 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -550,7 +518,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \clef "treble"
                             \once \override Staff.Clef.color = #(x11-color 'blue)
                             %@% \override Staff.Clef.color = ##f
@@ -558,7 +525,6 @@ r"""
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
-                            % [Music_Voice measure 2]
                             \clef "treble"
                             \once \override Staff.Clef.color = #(x11-color 'DeepPink1)
                             %@% \override Staff.Clef.color = ##f
@@ -566,13 +532,11 @@ r"""
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             \override Staff.Clef.color = #(x11-color 'DeepPink4)
-                            % [Music_Voice measure 3]
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 4]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     R1 * 1/4
@@ -580,7 +544,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 4]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -651,7 +614,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -661,13 +623,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -683,7 +643,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \clef "treble"
                             \once \override Staff.Clef.color = #(x11-color 'DeepPink1)
                             %@% \override Staff.Clef.color = ##f
@@ -691,13 +650,11 @@ r"""
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             \override Staff.Clef.color = #(x11-color 'DeepPink4)
-                            % [Music_Voice measure 2]
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     R1 * 1/4
@@ -705,7 +662,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -759,15 +715,12 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -782,7 +735,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'blue)
@@ -793,14 +745,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -809,7 +759,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -871,16 +820,13 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \time 3/8
                         \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -895,7 +841,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'blue)
@@ -906,14 +851,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -922,7 +865,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -985,16 +927,13 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \time 3/8
                         \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1009,7 +948,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'green4)
@@ -1020,14 +958,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -1036,7 +972,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -1087,15 +1022,12 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1110,7 +1042,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'blue)
@@ -1121,7 +1052,6 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'DeepPink1)
@@ -1130,7 +1060,6 @@ r"""
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -1139,7 +1068,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -1201,16 +1129,13 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \time 3/8
                         \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1225,7 +1150,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'DeepPink1)
@@ -1236,14 +1160,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -1252,7 +1174,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -1301,15 +1222,12 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1324,7 +1242,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'blue)
@@ -1335,7 +1252,6 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'blue)
@@ -1344,7 +1260,6 @@ r"""
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -1353,7 +1268,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -1415,16 +1329,13 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \time 3/8
                         \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1439,7 +1350,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'blue)
@@ -1450,14 +1360,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -1466,7 +1374,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -1518,15 +1425,12 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1541,7 +1445,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'blue)
@@ -1552,7 +1455,6 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'blue)
@@ -1561,7 +1463,6 @@ r"""
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -1570,7 +1471,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -1645,7 +1545,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -1654,13 +1553,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -1676,7 +1573,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-default-indicator-markup "(“Flute”)"
@@ -1686,14 +1582,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -1702,7 +1596,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -1737,7 +1630,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -1746,13 +1638,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -1768,7 +1658,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-default-indicator-markup "(“Flute”)"
@@ -1778,14 +1667,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -1794,7 +1681,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -1825,7 +1711,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -1834,13 +1719,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -1856,7 +1739,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-default-indicator-markup "(“Flute”)"
@@ -1866,14 +1748,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -1882,7 +1762,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -1936,7 +1815,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -1945,13 +1823,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -1967,7 +1843,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
@@ -1977,14 +1852,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -1993,7 +1866,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -2028,7 +1900,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -2037,13 +1908,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -2059,7 +1928,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
@@ -2069,14 +1937,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -2085,7 +1951,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -2117,7 +1982,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -2126,13 +1990,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -2148,7 +2010,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
@@ -2158,14 +2019,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -2174,7 +2033,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -2240,7 +2098,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -2250,13 +2107,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -2272,7 +2127,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
@@ -2282,14 +2136,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -2298,7 +2150,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -2333,7 +2184,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -2343,13 +2193,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -2365,7 +2213,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
@@ -2375,14 +2222,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -2391,7 +2236,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -2422,7 +2266,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -2432,13 +2275,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -2454,7 +2295,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
@@ -2464,14 +2304,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -2480,7 +2318,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -2547,7 +2384,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -2557,13 +2393,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -2579,7 +2413,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-reapplied-indicator-markup "(“Flute”)"
@@ -2589,14 +2422,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -2605,7 +2436,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -2640,7 +2470,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -2650,13 +2479,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -2672,7 +2499,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-reapplied-indicator-markup "(“Flute”)"
@@ -2682,14 +2508,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -2698,7 +2522,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -2730,7 +2553,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -2740,13 +2562,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -2762,7 +2582,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-reapplied-indicator-markup "(“Flute”)"
@@ -2772,14 +2591,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -2788,7 +2605,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -2853,7 +2669,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -2862,17 +2677,14 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 1/2
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -2888,7 +2700,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'2
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
@@ -2898,18 +2709,15 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'2
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
-                            % [Music_Voice measure 3]
                             %@% \baca-not-yet-pitched-coloring
                             b'2
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 4]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -2918,7 +2726,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 4]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -2953,7 +2760,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -2962,17 +2768,14 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 1/2
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -2988,7 +2791,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'2
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
@@ -2998,18 +2800,15 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'2
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
-                            % [Music_Voice measure 3]
                             %@% \baca-not-yet-pitched-coloring
                             b'2
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 4]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -3018,7 +2817,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 4]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -3049,7 +2847,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -3058,17 +2855,14 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 1/2
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -3084,7 +2878,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'2
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
@@ -3094,18 +2887,15 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'2
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
-                            % [Music_Voice measure 3]
                             %@% \baca-not-yet-pitched-coloring
                             b'2
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 4]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -3114,7 +2904,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 4]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -3187,7 +2976,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -3197,13 +2985,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -3219,7 +3005,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
@@ -3229,14 +3014,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -3245,7 +3028,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -3280,7 +3062,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -3290,13 +3071,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -3312,7 +3091,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
@@ -3322,14 +3100,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -3338,7 +3114,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -3369,7 +3144,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -3379,13 +3153,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -3401,7 +3173,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
@@ -3411,14 +3182,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -3427,7 +3196,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -3510,7 +3278,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -3519,13 +3286,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -3541,7 +3306,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
@@ -3557,14 +3321,12 @@ r"""
                             \override Staff.InstrumentName.color = #(x11-color 'violet)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -3573,7 +3335,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -3608,7 +3369,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -3617,13 +3377,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -3639,7 +3397,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
@@ -3655,14 +3412,12 @@ r"""
                             \override Staff.InstrumentName.color = #(x11-color 'violet)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -3671,7 +3426,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -3702,7 +3456,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -3711,13 +3464,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -3733,7 +3484,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
@@ -3749,14 +3499,12 @@ r"""
                             \override Staff.InstrumentName.color = #(x11-color 'violet)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -3765,7 +3513,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -3819,7 +3566,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -3828,13 +3574,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -3850,7 +3594,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
@@ -3866,14 +3609,12 @@ r"""
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -3882,7 +3623,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -3917,7 +3657,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -3926,13 +3665,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -3948,7 +3685,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
@@ -3964,14 +3700,12 @@ r"""
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -3980,7 +3714,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -4011,7 +3744,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -4020,13 +3752,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -4042,7 +3772,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
@@ -4058,14 +3787,12 @@ r"""
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -4074,7 +3801,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -4140,7 +3866,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -4150,13 +3875,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -4172,7 +3895,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \set Staff.shortInstrumentName =
                             \markup { III+IV }
                             \set Staff.instrumentName =
@@ -4190,14 +3912,12 @@ r"""
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { III+IV }
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -4206,7 +3926,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -4241,7 +3960,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -4251,13 +3969,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -4273,7 +3989,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \set Staff.shortInstrumentName =
                             \markup { III+IV }
                             \set Staff.instrumentName =
@@ -4291,14 +4006,12 @@ r"""
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { III+IV }
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -4307,7 +4020,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -4338,7 +4050,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -4348,13 +4059,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -4370,7 +4079,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \set Staff.shortInstrumentName =
                             \markup { III+IV }
                             \set Staff.instrumentName =
@@ -4388,14 +4096,12 @@ r"""
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { III+IV }
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -4404,7 +4110,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -4471,7 +4176,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -4481,13 +4185,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -4503,7 +4205,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             \set Staff.instrumentName =
@@ -4521,14 +4222,12 @@ r"""
                             \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -4537,7 +4236,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -4572,7 +4270,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -4582,13 +4279,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -4604,7 +4299,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             \set Staff.instrumentName =
@@ -4622,14 +4316,12 @@ r"""
                             \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -4638,7 +4330,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -4669,7 +4360,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -4679,13 +4369,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -4701,7 +4389,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             \set Staff.instrumentName =
@@ -4719,14 +4406,12 @@ r"""
                             \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -4735,7 +4420,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -4800,7 +4484,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -4809,17 +4492,14 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 1/2
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -4835,7 +4515,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
@@ -4851,7 +4530,6 @@ r"""
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            % [Music_Voice measure 2]
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
@@ -4861,14 +4539,12 @@ r"""
                             \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            % [Music_Voice measure 3]
                             %@% \baca-not-yet-pitched-coloring
                             b'2
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 4]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -4877,7 +4553,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 4]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -4912,7 +4587,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -4921,17 +4595,14 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 1/2
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -4947,7 +4618,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
@@ -4963,7 +4633,6 @@ r"""
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            % [Music_Voice measure 2]
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
@@ -4973,14 +4642,12 @@ r"""
                             \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            % [Music_Voice measure 3]
                             %@% \baca-not-yet-pitched-coloring
                             b'2
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 4]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -4989,7 +4656,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 4]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -5020,7 +4686,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -5029,17 +4694,14 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 1/2
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -5055,7 +4717,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
@@ -5071,7 +4732,6 @@ r"""
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            % [Music_Voice measure 2]
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             %@% \baca-not-yet-pitched-coloring
@@ -5081,14 +4741,12 @@ r"""
                             \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            % [Music_Voice measure 3]
                             %@% \baca-not-yet-pitched-coloring
                             b'2
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 4]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -5097,7 +4755,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 4]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -5170,7 +4827,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -5180,13 +4836,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -5202,7 +4856,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             \set Staff.instrumentName =
@@ -5220,14 +4873,12 @@ r"""
                             \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -5236,7 +4887,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -5271,7 +4921,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -5281,13 +4930,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -5303,7 +4950,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             \set Staff.instrumentName =
@@ -5321,14 +4967,12 @@ r"""
                             \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -5337,7 +4981,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -5368,7 +5011,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -5378,13 +5020,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -5400,7 +5040,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             \set Staff.instrumentName =
@@ -5418,14 +5057,12 @@ r"""
                             \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -5434,7 +5071,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -5508,7 +5144,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -5517,17 +5152,14 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 1/2
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -5543,7 +5175,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             %@% \set Staff.shortInstrumentName =
@@ -5566,17 +5197,14 @@ r"""
                             %@% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { III+IV }
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'2
-                            % [Music_Voice measure 3]
                             %@% \baca-not-yet-pitched-coloring
                             b'2
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 4]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -5585,7 +5213,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 4]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -5658,7 +5285,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #25
                         \autoPageBreaksOff
                         \noBreak
@@ -5673,11 +5299,9 @@ r"""
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'blue
                         \bacaStartTextSpanMM
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #25
                         \noBreak
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -5694,7 +5318,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \abjad-dashed-line-with-hook
@@ -5703,14 +5326,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -5719,7 +5340,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -5789,7 +5409,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \override TextSpanner.staff-padding = 4
                         \autoPageBreaksOff
@@ -5806,12 +5425,10 @@ r"""
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'blue
                         \bacaStartTextSpanMM
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8
                         \revert TextSpanner.staff-padding
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -5828,7 +5445,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \abjad-dashed-line-with-hook
@@ -5837,14 +5453,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -5853,7 +5467,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -5924,7 +5537,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \override TextSpanner.staff-padding = 4
                         \autoPageBreaksOff
@@ -5941,12 +5553,10 @@ r"""
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "90" #'green4
                         \bacaStartTextSpanMM
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8
                         \revert TextSpanner.staff-padding
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -5963,7 +5573,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \abjad-dashed-line-with-hook
@@ -5972,14 +5581,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -5988,7 +5595,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -6046,7 +5652,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -6061,7 +5666,6 @@ r"""
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'blue
                         \bacaStartTextSpanMM
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8
@@ -6072,7 +5676,6 @@ r"""
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'DeepPink1
                         \bacaStartTextSpanMM
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -6089,7 +5692,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \abjad-dashed-line-with-hook
@@ -6098,14 +5700,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -6114,7 +5714,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -6184,7 +5783,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \override TextSpanner.staff-padding = 4
                         \autoPageBreaksOff
@@ -6201,12 +5799,10 @@ r"""
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'DeepPink1
                         \bacaStartTextSpanMM
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8
                         \revert TextSpanner.staff-padding
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -6223,7 +5819,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \abjad-dashed-line-with-hook
@@ -6232,14 +5827,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -6248,7 +5841,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -6314,15 +5906,12 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -6337,7 +5926,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override Staff.BarLine.bar-extent = #'(0 . 0)
                             \override Staff.BarLine.bar-extent = #'(0 . 0)
                             \stopStaff
@@ -6351,13 +5939,11 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -6366,7 +5952,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -6479,16 +6064,13 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \time 3/8
                         \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -6503,7 +6085,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \baca-not-yet-pitched-coloring
                             b'4.
                             - \abjad-dashed-line-with-hook
@@ -6513,14 +6094,12 @@ r"""
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.BarLine.bar-extent = #'(0 . 0)
-                            % [Music_Voice measure 2]
                             \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -6529,7 +6108,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -6606,16 +6184,13 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \time 3/8
                         \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -6630,7 +6205,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override Staff.BarLine.bar-extent = #'(0 . 0)
                             \baca-not-yet-pitched-coloring
                             b'4.
@@ -6640,14 +6214,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -6656,7 +6228,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -6710,15 +6281,12 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -6733,7 +6301,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override Staff.BarLine.bar-extent = #'(-2 . 2)
                             \stopStaff
                             \once \override Staff.StaffSymbol.line-count = 5
@@ -6747,14 +6314,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -6763,7 +6328,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -6825,16 +6389,13 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \time 3/8
                         \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -6849,7 +6410,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override Staff.BarLine.bar-extent = #'(0 . 0)
                             \stopStaff
                             \once \override Staff.StaffSymbol.line-count = 1
@@ -6863,14 +6423,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -6879,7 +6437,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -6942,16 +6499,13 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \time 3/8
                         \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -6966,7 +6520,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \stopStaff
                             \once \override Staff.StaffSymbol.line-count = 5
                             \startStaff
@@ -6979,14 +6532,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -6995,7 +6546,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -7046,15 +6596,12 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -7069,7 +6616,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override Staff.BarLine.bar-extent = #'(-2 . 2)
                             \stopStaff
                             \once \override Staff.StaffSymbol.line-count = 5
@@ -7083,7 +6629,6 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             \override Staff.BarLine.bar-extent = #'(-2 . 2)
                             \stopStaff
                             \once \override Staff.StaffSymbol.line-count = 5
@@ -7095,7 +6640,6 @@ r"""
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -7104,7 +6648,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -7166,16 +6709,13 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \time 3/8
                         \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -7190,7 +6730,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override Staff.BarLine.bar-extent = #'(-2 . 2)
                             \stopStaff
                             \once \override Staff.StaffSymbol.line-count = 5
@@ -7204,14 +6743,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -7220,7 +6757,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -7293,7 +6829,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #25
                         \autoPageBreaksOff
                         \noBreak
@@ -7312,11 +6847,9 @@ r"""
                             \upright
                                 accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #25
                         \noBreak
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -7333,7 +6866,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \abjad-dashed-line-with-hook
@@ -7342,14 +6874,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -7358,7 +6888,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -7427,7 +6956,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \override TextSpanner.staff-padding = 4
                         \autoPageBreaksOff
@@ -7448,12 +6976,10 @@ r"""
                             \upright
                                 accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8
                         \revert TextSpanner.staff-padding
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -7470,7 +6996,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \abjad-dashed-line-with-hook
@@ -7479,14 +7004,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -7495,7 +7018,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -7565,7 +7087,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \override TextSpanner.staff-padding = 4
                         \autoPageBreaksOff
@@ -7586,12 +7107,10 @@ r"""
                             \upright
                                 accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8
                         \revert TextSpanner.staff-padding
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -7608,7 +7127,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \abjad-dashed-line-with-hook
@@ -7617,14 +7135,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -7633,7 +7149,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -7694,7 +7209,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
                         \noBreak
@@ -7713,7 +7227,6 @@ r"""
                             \upright
                                 accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8
@@ -7728,11 +7241,9 @@ r"""
                             \upright
                                 accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -7749,7 +7260,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \abjad-dashed-line-with-hook
@@ -7758,17 +7268,14 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            % [Music_Voice measure 3]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 4]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -7777,7 +7284,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 4]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -7846,7 +7352,6 @@ r"""
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
                         \override TextSpanner.staff-padding = 4
                         \autoPageBreaksOff
@@ -7867,12 +7372,10 @@ r"""
                             \upright
                                 accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8
                         \revert TextSpanner.staff-padding
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \time 1/4
@@ -7889,7 +7392,6 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \abjad-dashed-line-with-hook
@@ -7898,14 +7400,12 @@ r"""
                             - \tweak color #darkcyan
                             - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            % [Music_Voice measure 2]
                             %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <> \bacaStopTextSpanRhythmAnnotation
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 3]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     %@% \baca-not-yet-pitched-coloring
@@ -7914,7 +7414,6 @@ r"""
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 3]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff

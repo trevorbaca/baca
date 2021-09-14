@@ -926,27 +926,22 @@ def dynamic(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #13
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #13
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #13
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #13
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -961,7 +956,6 @@ def dynamic(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override DynamicLineSpanner.staff-padding = 5
                             e'8
                             - \tweak color #(x11-color 'blue)
@@ -979,20 +973,17 @@ def dynamic(
                             f'8
                             c''8
                             ]
-                            % [Music_Voice measure 2]
                             g'8
                             [
                             f''8
                             e'8
                             ]
-                            % [Music_Voice measure 3]
                             d''8
                             [
                             f'8
                             c''8
                             g'8
                             ]
-                            % [Music_Voice measure 4]
                             f''8
                             [
                             e'8
@@ -1004,7 +995,6 @@ def dynamic(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -1013,7 +1003,6 @@ def dynamic(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -1062,27 +1051,22 @@ def dynamic(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1097,7 +1081,6 @@ def dynamic(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override DynamicLineSpanner.staff-padding = 5
                             e'8
                             - \tweak color #(x11-color 'blue)
@@ -1114,20 +1097,17 @@ def dynamic(
                             f'8
                             c''8
                             ]
-                            % [Music_Voice measure 2]
                             g'8
                             [
                             f''8
                             e'8
                             ]
-                            % [Music_Voice measure 3]
                             d''8
                             [
                             f'8
                             c''8
                             g'8
                             ]
-                            % [Music_Voice measure 4]
                             f''8
                             [
                             e'8
@@ -1138,7 +1118,6 @@ def dynamic(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -1147,7 +1126,6 @@ def dynamic(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -1234,27 +1212,22 @@ def hairpin(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1269,7 +1242,6 @@ def hairpin(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override DynamicLineSpanner.staff-padding = 5
                             e'8
                             - \tweak color #(x11-color 'blue)
@@ -1287,20 +1259,17 @@ def hairpin(
                             f'8
                             e''8
                             ]
-                            % [Music_Voice measure 2]
                             g'8
                             [
                             f''8
                             e'8
                             ]
-                            % [Music_Voice measure 3]
                             d''8
                             [
                             f'8
                             e''8
                             g'8
                             ]
-                            % [Music_Voice measure 4]
                             f''8
                             [
                             e'8
@@ -1313,7 +1282,6 @@ def hairpin(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -1322,7 +1290,6 @@ def hairpin(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -1371,27 +1338,22 @@ def hairpin(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1406,7 +1368,6 @@ def hairpin(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override DynamicLineSpanner.staff-padding = 5
                             e'8
                             - \tweak color #(x11-color 'blue)
@@ -1426,20 +1387,17 @@ def hairpin(
                             f'8
                             c''8
                             ]
-                            % [Music_Voice measure 2]
                             g'8
                             [
                             f''8
                             e'8
                             ]
-                            % [Music_Voice measure 3]
                             d''8
                             [
                             f'8
                             c''8
                             g'8
                             ]
-                            % [Music_Voice measure 4]
                             f''8
                             [
                             e'8
@@ -1452,7 +1410,6 @@ def hairpin(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -1461,7 +1418,6 @@ def hairpin(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -1510,27 +1466,22 @@ def hairpin(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1545,7 +1496,6 @@ def hairpin(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override DynamicLineSpanner.staff-padding = 5
                             e'8
                             - \tweak color #(x11-color 'blue)
@@ -1564,20 +1514,17 @@ def hairpin(
                             f'8
                             c''8
                             ]
-                            % [Music_Voice measure 2]
                             g'8
                             [
                             f''8
                             e'8
                             ]
-                            % [Music_Voice measure 3]
                             d''8
                             [
                             f'8
                             c''8
                             g'8
                             ]
-                            % [Music_Voice measure 4]
                             f''8
                             [
                             e'8
@@ -1590,7 +1537,6 @@ def hairpin(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -1599,7 +1545,6 @@ def hairpin(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -1648,27 +1593,22 @@ def hairpin(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1683,7 +1623,6 @@ def hairpin(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override DynamicLineSpanner.staff-padding = 5
                             e'8
                             - \tweak color #(x11-color 'blue)
@@ -1702,20 +1641,17 @@ def hairpin(
                             f'8
                             c''8
                             ]
-                            % [Music_Voice measure 2]
                             g'8
                             [
                             f''8
                             e'8
                             ]
-                            % [Music_Voice measure 3]
                             d''8
                             [
                             f'8
                             c''8
                             g'8
                             ]
-                            % [Music_Voice measure 4]
                             f''8
                             [
                             e'8
@@ -1728,7 +1664,6 @@ def hairpin(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -1737,7 +1672,6 @@ def hairpin(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -1793,27 +1727,22 @@ def hairpin(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1828,7 +1757,6 @@ def hairpin(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override DynamicLineSpanner.staff-padding = 5
                             e'8
                             - \tweak color #(x11-color 'blue)
@@ -1847,7 +1775,6 @@ def hairpin(
                             f'8
                             c''8
                             ]
-                            % [Music_Voice measure 2]
                             g'8
                             [
                             f''8
@@ -1855,7 +1782,6 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)
                             \baca-effort-f
                             ]
-                            % [Music_Voice measure 3]
                             d''8
                             - \tweak color #(x11-color 'blue)
                             \baca-effort-mf
@@ -1867,7 +1793,6 @@ def hairpin(
                             c''8
                             g'8
                             ]
-                            % [Music_Voice measure 4]
                             f''8
                             [
                             e'8
@@ -1880,7 +1805,6 @@ def hairpin(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -1889,7 +1813,6 @@ def hairpin(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -1941,27 +1864,22 @@ def hairpin(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1976,7 +1894,6 @@ def hairpin(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override DynamicLineSpanner.staff-padding = 5
                             e'8
                             - \tweak color #(x11-color 'blue)
@@ -1992,7 +1909,6 @@ def hairpin(
                             f'8
                             e''8
                             ]
-                            % [Music_Voice measure 2]
                             g'8
                             - \tweak color #(x11-color 'blue)
                             \f
@@ -2000,7 +1916,6 @@ def hairpin(
                             f''8
                             e'8
                             ]
-                            % [Music_Voice measure 3]
                             d''8
                             - \tweak color #(x11-color 'blue)
                             \p
@@ -2009,7 +1924,6 @@ def hairpin(
                             e''8
                             g'8
                             ]
-                            % [Music_Voice measure 4]
                             f''8
                             - \tweak color #(x11-color 'blue)
                             \f
@@ -2024,7 +1938,6 @@ def hairpin(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -2033,7 +1946,6 @@ def hairpin(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -2083,27 +1995,22 @@ def hairpin(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -2118,7 +2025,6 @@ def hairpin(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override DynamicLineSpanner.staff-padding = 5
                             e'8
                             - \tweak color #(x11-color 'blue)
@@ -2136,7 +2042,6 @@ def hairpin(
                             f'8
                             e''8
                             ]
-                            % [Music_Voice measure 2]
                             g'8
                             - \tweak color #(x11-color 'blue)
                             \f
@@ -2146,7 +2051,6 @@ def hairpin(
                             f''8
                             e'8
                             ]
-                            % [Music_Voice measure 3]
                             d''8
                             - \tweak color #(x11-color 'blue)
                             \p
@@ -2157,7 +2061,6 @@ def hairpin(
                             e''8
                             g'8
                             ]
-                            % [Music_Voice measure 4]
                             f''8
                             - \tweak color #(x11-color 'blue)
                             \f
@@ -2174,7 +2077,6 @@ def hairpin(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -2183,7 +2085,6 @@ def hairpin(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -2234,27 +2135,22 @@ def hairpin(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -2269,7 +2165,6 @@ def hairpin(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override DynamicLineSpanner.staff-padding = 5
                             e'8
                             - \tweak color #(x11-color 'blue)
@@ -2287,7 +2182,6 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)
                             \f
                             ]
-                            % [Music_Voice measure 2]
                             g'8
                             - \tweak color #(x11-color 'DeepPink1)
                             \f
@@ -2297,7 +2191,6 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)
                             \p
                             ]
-                            % [Music_Voice measure 3]
                             d''8
                             - \tweak color #(x11-color 'DeepPink1)
                             \p
@@ -2308,7 +2201,6 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)
                             \f
                             ]
-                            % [Music_Voice measure 4]
                             f''8
                             - \tweak color #(x11-color 'DeepPink1)
                             \f
@@ -2323,7 +2215,6 @@ def hairpin(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -2332,7 +2223,6 @@ def hairpin(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -2383,27 +2273,22 @@ def hairpin(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -2418,7 +2303,6 @@ def hairpin(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override DynamicLineSpanner.staff-padding = 5
                             e'8
                             - \tweak color #(x11-color 'blue)
@@ -2439,7 +2323,6 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)
                             \f
                             ]
-                            % [Music_Voice measure 2]
                             g'8
                             - \tweak color #(x11-color 'blue)
                             \f
@@ -2451,7 +2334,6 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)
                             \p
                             ]
-                            % [Music_Voice measure 3]
                             d''8
                             - \tweak color #(x11-color 'blue)
                             \p
@@ -2465,7 +2347,6 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)
                             \f
                             ]
-                            % [Music_Voice measure 4]
                             f''8
                             - \tweak color #(x11-color 'blue)
                             \f
@@ -2482,7 +2363,6 @@ def hairpin(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -2491,7 +2371,6 @@ def hairpin(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -2540,27 +2419,22 @@ def hairpin(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -2575,7 +2449,6 @@ def hairpin(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override DynamicLineSpanner.staff-padding = 5
                             e'8
                             - \tweak color #(x11-color 'blue)
@@ -2591,20 +2464,17 @@ def hairpin(
                             f'8
                             c''8
                             ]
-                            % [Music_Voice measure 2]
                             g'8
                             [
                             f''8
                             e'8
                             ]
-                            % [Music_Voice measure 3]
                             d''8
                             [
                             f'8
                             c''8
                             g'8
                             ]
-                            % [Music_Voice measure 4]
                             f''8
                             [
                             e'8
@@ -2615,7 +2485,6 @@ def hairpin(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -2624,7 +2493,6 @@ def hairpin(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -2673,27 +2541,22 @@ def hairpin(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -2708,7 +2571,6 @@ def hairpin(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override DynamicLineSpanner.staff-padding = 5
                             e'8
                             - \tweak color #(x11-color 'blue)
@@ -2724,20 +2586,17 @@ def hairpin(
                             f'8
                             c''8
                             ]
-                            % [Music_Voice measure 2]
                             g'8
                             [
                             f''8
                             e'8
                             ]
-                            % [Music_Voice measure 3]
                             d''8
                             [
                             f'8
                             c''8
                             g'8
                             ]
-                            % [Music_Voice measure 4]
                             f''8
                             [
                             e'8
@@ -2749,7 +2608,6 @@ def hairpin(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -2758,7 +2616,6 @@ def hairpin(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -2816,27 +2673,22 @@ def hairpin(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -2852,7 +2704,6 @@ def hairpin(
                         \context Voice = "Music_Voice"
                         {
                             {
-                                % [Music_Voice measure 1]
                                 \override DynamicLineSpanner.staff-padding = 4
                                 c'2
                                 - \tweak color #(x11-color 'blue)
@@ -2868,12 +2719,10 @@ def hairpin(
                                 - \tweak color #darkcyan
                                 - \tweak staff-padding 8
                                 \bacaStartTextSpanRhythmAnnotation
-                                % [Music_Voice measure 2]
                                 r4.
                                 - \tweak color #(x11-color 'blue)
                                 - \tweak to-barline ##t
                                 \!
-                                % [Music_Voice measure 3]
                                 d'2
                                 - \tweak color #(x11-color 'blue)
                                 - \tweak to-barline ##t
@@ -2882,7 +2731,6 @@ def hairpin(
                                 - \tweak to-barline ##t
                                 - \tweak stencil #constante-hairpin
                                 \<
-                                % [Music_Voice measure 4]
                                 r4.
                                 - \tweak color #(x11-color 'blue)
                                 - \tweak to-barline ##t
@@ -2893,7 +2741,6 @@ def hairpin(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -2902,7 +2749,6 @@ def hairpin(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -2955,27 +2801,22 @@ def hairpin(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -2990,7 +2831,6 @@ def hairpin(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override DynamicLineSpanner.staff-padding = 4
                             e'8
                             - \tweak color #(x11-color 'blue)
@@ -3006,7 +2846,6 @@ def hairpin(
                             f'8
                             e''8
                             ]
-                            % [Music_Voice measure 2]
                             g'8
                             - \tweak color #(x11-color 'blue)
                             \!
@@ -3017,14 +2856,12 @@ def hairpin(
                             f''8
                             e'8
                             ]
-                            % [Music_Voice measure 3]
                             d''8
                             [
                             f'8
                             e''8
                             g'8
                             ]
-                            % [Music_Voice measure 4]
                             f''8
                             - \tweak color #(x11-color 'blue)
                             \p
@@ -3037,7 +2874,6 @@ def hairpin(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -3046,7 +2882,6 @@ def hairpin(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -3095,27 +2930,22 @@ def hairpin(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -3130,7 +2960,6 @@ def hairpin(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override DynamicLineSpanner.staff-padding = 4
                             e'8
                             - \tweak color #(x11-color 'blue)
@@ -3148,20 +2977,17 @@ def hairpin(
                             f'8
                             e''8
                             ]
-                            % [Music_Voice measure 2]
                             g'8
                             [
                             f''8
                             e'8
                             ]
-                            % [Music_Voice measure 3]
                             d''8
                             [
                             f'8
                             e''8
                             g'8
                             ]
-                            % [Music_Voice measure 4]
                             f''8
                             [
                             e'8
@@ -3174,7 +3000,6 @@ def hairpin(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -3183,7 +3008,6 @@ def hairpin(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -4129,27 +3953,22 @@ def text_spanner(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -4164,7 +3983,6 @@ def text_spanner(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override TextSpanner.staff-padding = 4.5
                             e'8
                             [
@@ -4184,20 +4002,17 @@ def text_spanner(
                             f'8
                             e''8
                             ]
-                            % [Music_Voice measure 2]
                             g'8
                             [
                             f''8
                             e'8
                             ]
-                            % [Music_Voice measure 3]
                             d''8
                             [
                             f'8
                             e''8
                             g'8
                             ]
-                            % [Music_Voice measure 4]
                             f''8
                             [
                             e'8
@@ -4209,7 +4024,6 @@ def text_spanner(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -4218,7 +4032,6 @@ def text_spanner(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -4265,27 +4078,22 @@ def text_spanner(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -4300,7 +4108,6 @@ def text_spanner(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override TextSpanner.staff-padding = 4.5
                             e'8
                             [
@@ -4320,20 +4127,17 @@ def text_spanner(
                             f'8
                             e''8
                             ]
-                            % [Music_Voice measure 2]
                             g'8
                             [
                             f''8
                             e'8
                             ]
-                            % [Music_Voice measure 3]
                             d''8
                             [
                             f'8
                             e''8
                             g'8
                             ]
-                            % [Music_Voice measure 4]
                             f''8
                             [
                             e'8
@@ -4345,7 +4149,6 @@ def text_spanner(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -4354,7 +4157,6 @@ def text_spanner(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -4401,27 +4203,22 @@ def text_spanner(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -4436,7 +4233,6 @@ def text_spanner(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override TextSpanner.staff-padding = 4.5
                             e'8
                             [
@@ -4456,20 +4252,17 @@ def text_spanner(
                             f'8
                             e''8
                             ]
-                            % [Music_Voice measure 2]
                             g'8
                             [
                             f''8
                             e'8
                             ]
-                            % [Music_Voice measure 3]
                             d''8
                             [
                             f'8
                             e''8
                             g'8
                             ]
-                            % [Music_Voice measure 4]
                             f''8
                             [
                             e'8
@@ -4481,7 +4274,6 @@ def text_spanner(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -4490,7 +4282,6 @@ def text_spanner(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -4537,27 +4328,22 @@ def text_spanner(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -4572,7 +4358,6 @@ def text_spanner(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override TextSpanner.staff-padding = 4.5
                             e'8
                             [
@@ -4592,20 +4377,17 @@ def text_spanner(
                             f'8
                             e''8
                             ]
-                            % [Music_Voice measure 2]
                             g'8
                             [
                             f''8
                             e'8
                             ]
-                            % [Music_Voice measure 3]
                             d''8
                             [
                             f'8
                             e''8
                             g'8
                             ]
-                            % [Music_Voice measure 4]
                             f''8
                             [
                             e'8
@@ -4617,7 +4399,6 @@ def text_spanner(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -4626,7 +4407,6 @@ def text_spanner(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -4673,27 +4453,22 @@ def text_spanner(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -4708,7 +4483,6 @@ def text_spanner(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override TextSpanner.staff-padding = 4.5
                             e'8
                             [
@@ -4728,20 +4502,17 @@ def text_spanner(
                             f'8
                             e''8
                             ]
-                            % [Music_Voice measure 2]
                             g'8
                             [
                             f''8
                             e'8
                             ]
-                            % [Music_Voice measure 3]
                             d''8
                             [
                             f'8
                             e''8
                             g'8
                             ]
-                            % [Music_Voice measure 4]
                             f''8
                             [
                             e'8
@@ -4753,7 +4524,6 @@ def text_spanner(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -4762,7 +4532,6 @@ def text_spanner(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -4815,27 +4584,22 @@ def text_spanner(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -4850,7 +4614,6 @@ def text_spanner(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override DynamicLineSpanner.staff-padding = 5
                             \override TextSpanner.staff-padding = 4.5
                             e'8
@@ -4868,7 +4631,6 @@ def text_spanner(
                             f'8
                             e''8
                             ]
-                            % [Music_Voice measure 2]
                             g'8
                             \stopTextSpan
                             [
@@ -4878,7 +4640,6 @@ def text_spanner(
                             f''8
                             e'8
                             ]
-                            % [Music_Voice measure 3]
                             d''8
                             \stopTextSpan
                             [
@@ -4889,7 +4650,6 @@ def text_spanner(
                             e''8
                             g'8
                             ]
-                            % [Music_Voice measure 4]
                             f''8
                             \stopTextSpan
                             [
@@ -4909,7 +4669,6 @@ def text_spanner(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -4918,7 +4677,6 @@ def text_spanner(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -4969,27 +4727,22 @@ def text_spanner(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -5004,7 +4757,6 @@ def text_spanner(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override DynamicLineSpanner.staff-padding = 5
                             \override TextSpanner.staff-padding = 4.5
                             e'8
@@ -5022,7 +4774,6 @@ def text_spanner(
                             f'8
                             e''8
                             ]
-                            % [Music_Voice measure 2]
                             g'8
                             \stopTextSpan
                             [
@@ -5032,7 +4783,6 @@ def text_spanner(
                             f''8
                             e'8
                             ]
-                            % [Music_Voice measure 3]
                             d''8
                             \stopTextSpan
                             [
@@ -5043,7 +4793,6 @@ def text_spanner(
                             e''8
                             g'8
                             ]
-                            % [Music_Voice measure 4]
                             f''8
                             \stopTextSpan
                             [
@@ -5063,7 +4812,6 @@ def text_spanner(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -5072,7 +4820,6 @@ def text_spanner(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -5124,27 +4871,22 @@ def text_spanner(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -5159,7 +4901,6 @@ def text_spanner(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override DynamicLineSpanner.staff-padding = 5
                             \override TextSpanner.staff-padding = 4.5
                             e'8
@@ -5181,7 +4922,6 @@ def text_spanner(
                             e''8
                             \stopTextSpan
                             ]
-                            % [Music_Voice measure 2]
                             g'8
                             [
                             - \abjad-invisible-line
@@ -5194,7 +4934,6 @@ def text_spanner(
                             e'8
                             \stopTextSpan
                             ]
-                            % [Music_Voice measure 3]
                             d''8
                             [
                             - \abjad-invisible-line
@@ -5208,7 +4947,6 @@ def text_spanner(
                             g'8
                             \stopTextSpan
                             ]
-                            % [Music_Voice measure 4]
                             f''8
                             [
                             - \abjad-invisible-line
@@ -5227,7 +4965,6 @@ def text_spanner(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -5236,7 +4973,6 @@ def text_spanner(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -5288,27 +5024,22 @@ def text_spanner(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -5323,7 +5054,6 @@ def text_spanner(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override DynamicLineSpanner.staff-padding = 5
                             \override TextSpanner.staff-padding = 4.5
                             e'8
@@ -5345,7 +5075,6 @@ def text_spanner(
                             e''8
                             \stopTextSpan
                             ]
-                            % [Music_Voice measure 2]
                             g'8
                             [
                             - \abjad-solid-line-with-arrow
@@ -5358,7 +5087,6 @@ def text_spanner(
                             e'8
                             \stopTextSpan
                             ]
-                            % [Music_Voice measure 3]
                             d''8
                             [
                             - \abjad-solid-line-with-arrow
@@ -5372,7 +5100,6 @@ def text_spanner(
                             g'8
                             \stopTextSpan
                             ]
-                            % [Music_Voice measure 4]
                             f''8
                             [
                             - \abjad-solid-line-with-arrow
@@ -5391,7 +5118,6 @@ def text_spanner(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -5400,7 +5126,6 @@ def text_spanner(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -5458,27 +5183,22 @@ def text_spanner(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -5494,7 +5214,6 @@ def text_spanner(
                         \context Voice = "Music_Voice"
                         {
                             {
-                                % [Music_Voice measure 1]
                                 \override TextSpanner.staff-padding = 4.5
                                 c'2
                                 - \abjad-dashed-line-with-hook
@@ -5507,14 +5226,12 @@ def text_spanner(
                                 - \baca-text-spanner-left-text "P"
                                 - \tweak color #red
                                 \startTextSpan
-                                % [Music_Voice measure 2]
                                 d'4.
                                 \stopTextSpan
                                 - \abjad-solid-line-with-arrow
                                 - \baca-text-spanner-left-text "T"
                                 - \tweak color #blue
                                 \startTextSpan
-                                % [Music_Voice measure 3]
                                 e'2
                                 \stopTextSpan
                                 - \abjad-solid-line-with-arrow
@@ -5524,7 +5241,6 @@ def text_spanner(
                                 - \tweak bound-details.right.stencil-align-dir-y #center
                                 - \tweak color #green
                                 \startTextSpan
-                                % [Music_Voice measure 4]
                                 f'4.
                                 \stopTextSpan
                                 \revert TextSpanner.staff-padding
@@ -5533,7 +5249,6 @@ def text_spanner(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -5542,7 +5257,6 @@ def text_spanner(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -5596,27 +5310,22 @@ def text_spanner(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -5631,7 +5340,6 @@ def text_spanner(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override DynamicLineSpanner.staff-padding = 5
                             \override TextSpanner.staff-padding = 4.5
                             e'8
@@ -5649,13 +5357,11 @@ def text_spanner(
                             f'8
                             e''8
                             ]
-                            % [Music_Voice measure 2]
                             g'8
                             [
                             f''8
                             e'8
                             ]
-                            % [Music_Voice measure 3]
                             d''8
                             \stopTextSpan
                             [
@@ -5663,7 +5369,6 @@ def text_spanner(
                             e''8
                             g'8
                             ]
-                            % [Music_Voice measure 4]
                             f''8
                             [
                             e'8
@@ -5675,7 +5380,6 @@ def text_spanner(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -5684,7 +5388,6 @@ def text_spanner(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -5737,27 +5440,22 @@ def text_spanner(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -5772,7 +5470,6 @@ def text_spanner(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override DynamicLineSpanner.staff-padding = 5
                             \override TextSpanner.staff-padding = 4.5
                             e'8
@@ -5790,7 +5487,6 @@ def text_spanner(
                             f'8
                             e''8
                             ]
-                            % [Music_Voice measure 2]
                             g'8
                             \stopTextSpan
                             [
@@ -5800,7 +5496,6 @@ def text_spanner(
                             f''8
                             e'8
                             ]
-                            % [Music_Voice measure 3]
                             d''8
                             \stopTextSpan
                             [
@@ -5811,7 +5506,6 @@ def text_spanner(
                             e''8
                             g'8
                             ]
-                            % [Music_Voice measure 4]
                             f''8
                             \stopTextSpan
                             [
@@ -5831,7 +5525,6 @@ def text_spanner(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -5840,7 +5533,6 @@ def text_spanner(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -5892,37 +5584,30 @@ def text_spanner(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 6]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 7]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -5937,7 +5622,6 @@ def text_spanner(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            % [Music_Voice measure 1]
                             \override TextSpanner.staff-padding = 4.5
                             c'2
                             - \abjad-dashed-line-with-hook
@@ -5949,25 +5633,21 @@ def text_spanner(
                             - \abjad-solid-line-with-arrow
                             - \baca-text-spanner-left-text "P"
                             \startTextSpan
-                            % [Music_Voice measure 2]
                             d'4.
                             \stopTextSpan
                             - \abjad-solid-line-with-arrow
                             - \baca-text-spanner-left-text "T"
                             \startTextSpan
-                            % [Music_Voice measure 3]
                             e'2
                             \stopTextSpan
                             - \abjad-invisible-line
                             - \baca-text-spanner-left-text "P"
                             \startTextSpan
-                            % [Music_Voice measure 4]
                             f'4.
                             \stopTextSpan
                             - \abjad-solid-line-with-arrow
                             - \baca-text-spanner-left-text "P"
                             \startTextSpan
-                            % [Music_Voice measure 5]
                             g'2
                             \stopTextSpan
                             - \abjad-solid-line-with-arrow
@@ -5976,7 +5656,6 @@ def text_spanner(
                             - \tweak bound-details.right.padding 0.5
                             - \tweak bound-details.right.stencil-align-dir-y #center
                             \startTextSpan
-                            % [Music_Voice measure 6]
                             a'4.
                             \stopTextSpan
                             \revert TextSpanner.staff-padding
@@ -5984,7 +5663,6 @@ def text_spanner(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 7]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -5993,7 +5671,6 @@ def text_spanner(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 7]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
@@ -6046,27 +5723,22 @@ def text_spanner(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 2]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 3]
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         \baca-time-signature-color #'blue
                         s1 * 1/2
-                        % [Global_Skips measure 4]
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        % [Global_Skips measure 5]
                         \baca-new-spacing-section #1 #4
                         \time 1/4
                         \baca-time-signature-transparent
@@ -6082,7 +5754,6 @@ def text_spanner(
                         \context Voice = "Music_Voice"
                         {
                             {
-                                % [Music_Voice measure 1]
                                 \override TextSpanner.staff-padding = 4.5
                                 c'2
                                 - \abjad-dashed-line-with-hook
@@ -6094,13 +5765,11 @@ def text_spanner(
                                 - \abjad-solid-line-with-arrow
                                 - \baca-text-spanner-left-text "P"
                                 \startTextSpan
-                                % [Music_Voice measure 2]
                                 d'4.
                                 \stopTextSpan
                                 - \abjad-solid-line-with-arrow
                                 - \baca-text-spanner-left-text "T"
                                 \startTextSpan
-                                % [Music_Voice measure 3]
                                 e'2
                                 \stopTextSpan
                                 - \abjad-solid-line-with-arrow
@@ -6109,7 +5778,6 @@ def text_spanner(
                                 - \tweak bound-details.right.padding 0.5
                                 - \tweak bound-details.right.stencil-align-dir-y #center
                                 \startTextSpan
-                                % [Music_Voice measure 4]
                                 f'4
                                 \stopTextSpan
                                 ~
@@ -6120,7 +5788,6 @@ def text_spanner(
                             <<
                                 \context Voice = "Music_Voice"
                                 {
-                                    % [Music_Voice measure 5]
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
                                     \baca-not-yet-pitched-coloring
@@ -6129,7 +5796,6 @@ def text_spanner(
                                 }
                                 \context Voice = "Rest_Voice"
                                 {
-                                    % [Rest_Voice measure 5]
                                     \once \override Score.TimeSignature.X-extent = ##f
                                     \once \override MultiMeasureRest.transparent = ##t
                                     \stopStaff
