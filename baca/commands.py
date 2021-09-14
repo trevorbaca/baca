@@ -521,13 +521,10 @@ def color(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
 
-        ..  book::
-            :lilypond/no-stylesheet:
-
-            >>> lilypond_file = abjad.illustrators.selection(
-            ...     selection, includes=["abjad.ily"]
-            ... )
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> lilypond_file = abjad.illustrators.selection(
+        ...     selection, includes=["abjad.ily"]
+        ... )
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -606,13 +603,10 @@ def color(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
 
-        ..  book::
-            :lilypond/no-stylesheet:
-
-            >>> lilypond_file = abjad.illustrators.selection(
-            ...     selection, includes=["abjad.ily"]
-            ... )
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> lilypond_file = abjad.illustrators.selection(
+        ...     selection, includes=["abjad.ily"]
+        ... )
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -1061,11 +1055,8 @@ def dynamic_down(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
 
-        ..  book::
-            :lilypond/no-stylesheet:
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -1153,11 +1144,8 @@ def dynamic_up(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
 
-        ..  book::
-            :lilypond/no-stylesheet:
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -2491,11 +2479,8 @@ def label(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
 
-        ..  book::
-            :lilypond/no-stylesheet:
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -2592,11 +2577,8 @@ def markup(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
 
-        ..  book::
-            :lilypond/no-stylesheet:
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -2672,14 +2654,11 @@ def markup(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
 
-        ..  book::
-            :lilypond/no-stylesheet:
-
-            >>> lilypond_file = abjad.illustrators.selection(
-            ...     selection,
-            ...     includes=["baca.ily"],
-            ... )
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> lilypond_file = abjad.illustrators.selection(
+        ...     selection,
+        ...     includes=["baca.ily"],
+        ... )
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 

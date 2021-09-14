@@ -143,11 +143,8 @@ class ArpeggiationSpacingSpecifier:
             >>> collections = collections.arpeggiate_up()
             >>> selection = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selection)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selection)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -197,11 +194,8 @@ class ArpeggiationSpacingSpecifier:
             >>> collections = collections.arpeggiate_down()
             >>> selection = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selection)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selection)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 

@@ -36,15 +36,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).chead(-1)
             >>> result
@@ -125,15 +122,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).cheads()
             >>> for item in result:
@@ -226,15 +220,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).clparts([2, 3, 4])
             >>> for item in result:
@@ -414,15 +405,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).leaves().enchain([5])
             >>> for item in result:
@@ -784,15 +772,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).tuplets()[1:2].lleaf(0)
             >>> result
@@ -931,15 +916,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).tuplets()[1:2].lleaves()
             >>> for item in result:
@@ -1034,15 +1016,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).lparts([2, 3, 4])
             >>> for item in result:
@@ -1135,15 +1114,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).lt(-1)
             >>> result
@@ -1225,15 +1201,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).ltleaf(0)
             >>> result
@@ -1313,15 +1286,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).ltleaves()
             >>> for item in result:
@@ -1435,15 +1405,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).ltqrun(-1)
             >>> result
@@ -1525,15 +1492,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).ltqruns()
             >>> for item in result:
@@ -1643,15 +1607,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).ltrun(-1)
             >>> result
@@ -1736,15 +1697,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).ltruns()
             >>> for item in result:
@@ -1847,15 +1805,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).lts()
             >>> for item in result:
@@ -2258,15 +2213,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).ntrun(-1)
             >>> result
@@ -2351,15 +2303,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).ntruns()
             >>> for item in result:
@@ -2552,15 +2501,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).phead(-1)
             >>> result
@@ -2641,15 +2587,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).pheads()
             >>> for item in result:
@@ -2757,15 +2700,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).pleaf(-1)
             >>> result
@@ -2846,15 +2786,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).pleaves()
             >>> for item in result:
@@ -2965,15 +2902,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).plt(-1)
             >>> result
@@ -3055,15 +2989,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).plts()
             >>> for item in result:
@@ -3171,15 +3102,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).ptail(-1)
             >>> result
@@ -3260,15 +3188,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).ptails()
             >>> for item in result:
@@ -3376,15 +3301,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).ptlt(-1)
             >>> result
@@ -3465,15 +3387,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).ptlts()
             >>> for item in result:
@@ -3572,15 +3491,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).qrun(-1)
             >>> result
@@ -3662,15 +3578,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).qruns()
             >>> for item in result:
@@ -3779,15 +3692,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).tuplets()[1:2].rleaf(-1)
             >>> result
@@ -3928,15 +3838,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).tuplets()[1:2].rleaves()
             >>> for item in result:
@@ -4095,15 +4002,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).rrun(1)
             >>> result
@@ -4189,15 +4093,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).rruns()
             >>> for item in result:
@@ -4412,15 +4313,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).tleaf(0)
             >>> result
@@ -4501,15 +4399,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).tleaves()
             >>> for item in result:
@@ -4624,15 +4519,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).tuplets()[1:2].wleaf(0)
             >>> result
@@ -4702,15 +4594,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).tuplets()[1:2].wleaf(-1)
             >>> result
@@ -4791,15 +4680,12 @@ class Selection(abjad.Selection):
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(tuplets)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(tuplets)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> result = baca.select(staff).tuplets()[1:2].wleaves()
             >>> for item in result:

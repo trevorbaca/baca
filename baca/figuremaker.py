@@ -1039,11 +1039,8 @@ class Acciaccatura:
             ... ]
             >>> selection = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selection)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selection)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1135,11 +1132,8 @@ class Acciaccatura:
             ... ]
             >>> selections = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1238,11 +1232,8 @@ class Acciaccatura:
             ... ]
             >>> selections = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1341,11 +1332,8 @@ class Acciaccatura:
             ... ]
             >>> selections = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1450,11 +1438,8 @@ class Acciaccatura:
             ... ]
             >>> selections = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1561,11 +1546,8 @@ class Acciaccatura:
             ... ]
             >>> selections = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1669,11 +1651,8 @@ class Acciaccatura:
             ... ]
             >>> selections = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4081,11 +4060,8 @@ class Nest:
         ... ]
         >>> selection = stack(collections)
 
-        ..  book::
-            :lilypond/no-stylesheet:
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -4195,11 +4171,8 @@ class Nest:
             ... ]
             >>> selection = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selection)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selection)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4466,11 +4439,8 @@ class RestAffix:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selection = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selection)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selection)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4528,11 +4498,8 @@ class RestAffix:
             >>> collections = [[18, 16, 15, 20, 19]]
             >>> selection = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selection)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selection)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4577,11 +4544,8 @@ class RestAffix:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selection = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selection)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selection)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4642,11 +4606,8 @@ class RestAffix:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selection = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selection)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selection)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4711,11 +4672,8 @@ class RestAffix:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selection = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selection)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selection)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4779,11 +4737,8 @@ class RestAffix:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selection = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selection)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selection)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4913,11 +4868,8 @@ class FigureMaker:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4967,11 +4919,8 @@ class FigureMaker:
             >>> state = {'_next_attack': 2}
             >>> selections = stack(collections, state=state)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5504,11 +5453,8 @@ class FigureMaker:
             ... ]
             >>> selections = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5599,11 +5545,8 @@ class FigureMaker:
             ... ]
             >>> selections = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5717,11 +5660,8 @@ class FigureMaker:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5783,11 +5723,8 @@ class FigureMaker:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5852,11 +5789,8 @@ class FigureMaker:
             >>> collections = [[0, 2, 10, 8]]
             >>> selections = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5883,11 +5817,8 @@ class FigureMaker:
             >>> collections = [[18, 16, 15, 20, 19]]
             >>> selections = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5915,11 +5846,8 @@ class FigureMaker:
             >>> collections = [[9]]
             >>> selections = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5941,11 +5869,8 @@ class FigureMaker:
             >>> collections = [[0, 2, 10, 8], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5998,11 +5923,8 @@ class FigureMaker:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6059,11 +5981,8 @@ class FigureMaker:
             >>> collections = [[0, 2]]
             >>> selections = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6109,11 +6028,8 @@ class FigureMaker:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6165,11 +6081,8 @@ class FigureMaker:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6227,11 +6140,8 @@ class FigureMaker:
             ... ]
             >>> selections = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6506,11 +6416,8 @@ class FigureMaker:
             ... ]
             >>> selections = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6785,11 +6692,8 @@ class FigureMaker:
             ... ]
             >>> selections = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -7021,11 +6925,8 @@ class FigureMaker:
             ... ]
             >>> selections = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -7281,14 +7182,11 @@ class FigureMaker:
             ... ]
             >>> selections = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
-                >>> abjad.override(staff).Stem.direction = abjad.Down
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
+            >>> abjad.override(staff).Stem.direction = abjad.Down
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -7381,14 +7279,11 @@ class FigureMaker:
             ... ]
             >>> selections = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
-                >>> abjad.override(staff).Stem.direction = abjad.Down
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
+            >>> abjad.override(staff).Stem.direction = abjad.Down
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -7478,14 +7373,11 @@ class FigureMaker:
             ... ]
             >>> selections = stack(collections)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(selections)
-                >>> staff = lilypond_file["Staff"]
-                >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
-                >>> abjad.override(staff).Stem.direction = abjad.Down
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(selections)
+            >>> staff = lilypond_file["Staff"]
+            >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
+            >>> abjad.override(staff).Stem.direction = abjad.Down
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -10920,12 +10812,9 @@ def nest(treatments: typing.Sequence, *, lmr: LMR = None) -> Nest:
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
 
-        ..  book::
-            :lilypond/no-stylesheet:
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> staff = lilypond_file["Staff"]
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> staff = lilypond_file["Staff"]
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -11037,11 +10926,8 @@ def rests_after(counts: typing.Sequence[int]) -> RestAffix:
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
 
-        ..  book::
-            :lilypond/no-stylesheet:
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -11114,11 +11000,8 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
 
-        ..  book::
-            :lilypond/no-stylesheet:
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -11186,13 +11069,10 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> selection = stack(collections)
 
-        ..  book::
-            :lilypond/no-stylesheet:
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> staff = lilypond_file["Staff"]
-            >>> abjad.override(staff).TupletBracket.staff_padding = 4
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> staff = lilypond_file["Staff"]
+        >>> abjad.override(staff).TupletBracket.staff_padding = 4
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -11257,13 +11137,10 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> selection = stack(collections)
 
-        ..  book::
-            :lilypond/no-stylesheet:
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> staff = lilypond_file["Staff"]
-            >>> abjad.override(staff).TupletBracket.staff_padding = 4
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> staff = lilypond_file["Staff"]
+        >>> abjad.override(staff).TupletBracket.staff_padding = 4
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -11331,11 +11208,8 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> selection = stack(collections)
 
-        ..  book::
-            :lilypond/no-stylesheet:
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -11398,11 +11272,8 @@ def rests_before(counts: typing.List[int]) -> RestAffix:
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
 
-        ..  book::
-            :lilypond/no-stylesheet:
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -11493,11 +11364,8 @@ def skips_after(counts: typing.List[int]) -> RestAffix:
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
 
-        ..  book::
-            :lilypond/no-stylesheet:
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -11570,11 +11438,8 @@ def skips_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
 
-        ..  book::
-            :lilypond/no-stylesheet:
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -11650,11 +11515,8 @@ def skips_before(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
 
-        ..  book::
-            :lilypond/no-stylesheet:
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -11730,14 +11592,11 @@ def stack(*commands) -> Stack:
         ...     ]
         >>> selections = stack(collections)
 
-        ..  book::
-            :lilypond/no-stylesheet:
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> staff = lilypond_file["Staff"]
-            >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
-            >>> abjad.override(staff).Stem.direction = abjad.Down
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> staff = lilypond_file["Staff"]
+        >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
+        >>> abjad.override(staff).Stem.direction = abjad.Down
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 

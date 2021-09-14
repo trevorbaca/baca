@@ -80,11 +80,8 @@ Constellation.
     ... }
     ... '''
 
-    ..  book::
-        :lilypond/no-stylesheet:
-
-        >>> lilypond_file = abjad.LilyPondFile([preamble, score])
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+    >>> lilypond_file = abjad.LilyPondFile([preamble, score])
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 

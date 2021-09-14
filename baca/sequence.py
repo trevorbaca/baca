@@ -434,11 +434,8 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(music, divisions)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(music, divisions)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -468,11 +465,8 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(music)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(music)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -504,11 +498,8 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(music)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(music)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -546,11 +537,8 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(music)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(music)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -606,11 +594,8 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(music)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(music)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1026,11 +1011,8 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(music)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(music)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1089,11 +1071,8 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1142,11 +1121,8 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1189,11 +1165,8 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1245,11 +1218,8 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1298,11 +1268,8 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1362,11 +1329,8 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1694,11 +1658,8 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(music)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(music)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1744,11 +1705,8 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(music)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(music)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1796,11 +1754,8 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(music)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(music)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1847,11 +1802,8 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(music)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(music)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1907,11 +1859,8 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1972,11 +1921,8 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2031,11 +1977,8 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2081,11 +2024,8 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2130,11 +2070,8 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2192,11 +2129,8 @@ class Sequence(abjad.Sequence):
             >>> divisions = divisions.flatten(depth=-1)
             >>> music = rhythm_maker(divisions)
 
-            ..  book::
-                :lilypond/no-stylesheet:
-
-                >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
