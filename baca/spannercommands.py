@@ -146,7 +146,7 @@ class SpannerIndicatorCommand(scoping.Command):
 
     def _attach_indicator(self, indicator, leaf, deactivate=None, tag=None):
         # TODO: factor out late import
-        from .segmentmaker import SegmentMaker
+        from .segmentmaker import _treat_persistent_wrapper
 
         assert isinstance(tag, abjad.Tag), repr(tag)
         reapplied = scoping.Command._remove_reapplied_wrappers(leaf, indicator)
@@ -156,9 +156,7 @@ class SpannerIndicatorCommand(scoping.Command):
         )
         if scoping.compare_persistent_indicators(indicator, reapplied):
             status = "redundant"
-            SegmentMaker._treat_persistent_wrapper(
-                self.runtime["manifests"], wrapper, status
-            )
+            _treat_persistent_wrapper(self.runtime["manifests"], wrapper, status)
 
     ### PUBLIC PROPERTIES ###
 

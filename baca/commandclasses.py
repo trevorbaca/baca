@@ -1367,7 +1367,7 @@ class IndicatorCommand(scoping.Command):
         Calls command on ``argument``.
         """
         # TODO: externalize late import
-        from .segmentmaker import SegmentMaker
+        from .segmentmaker import _treat_persistent_wrapper
 
         if argument is None:
             return
@@ -1399,7 +1399,7 @@ class IndicatorCommand(scoping.Command):
                 )
                 if scoping.compare_persistent_indicators(indicator, reapplied):
                     status = "redundant"
-                    SegmentMaker._treat_persistent_wrapper(
+                    _treat_persistent_wrapper(
                         self.runtime["manifests"], wrapper, status
                     )
 
@@ -1599,7 +1599,7 @@ class MetronomeMarkCommand(scoping.Command):
         """
         Applies command to result of selector called on ``argument``.
         """
-        from .segmentmaker import SegmentMaker
+        from .segmentmaker import _treat_persistent_wrapper
 
         if argument is None:
             return
@@ -1628,9 +1628,7 @@ class MetronomeMarkCommand(scoping.Command):
             wrapper=True,
         )
         if indicator == reapplied:
-            SegmentMaker._treat_persistent_wrapper(
-                self.runtime["manifests"], wrapper, "redundant"
-            )
+            _treat_persistent_wrapper(self.runtime["manifests"], wrapper, "redundant")
 
     ### PUBLIC PROPERTIES ###
 
