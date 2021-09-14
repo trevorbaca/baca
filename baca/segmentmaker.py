@@ -13,6 +13,7 @@ from . import layout as _layout
 from . import memento as _memento
 from . import overrides as _overrides
 from . import parts as _parts
+from . import piecewise as _piecewise
 from . import pitchclasses, pitchcommands, rhythmcommands, scoping
 from . import selection as _selection
 from . import sequence as _sequence
@@ -28,6 +29,36 @@ def _site(frame, n=None):
 nonfirst_preamble = r"""\header { composer = ##f poet = ##f title = ##f }
 \layout { indent = 0 }
 \paper { print-first-page-number = ##t }"""
+
+
+def _attach_rhythm_annotation_spanner(command, selection):
+    if not command.annotation_spanner_text and not command.frame:
+        return
+    leaves = []
+    for leaf in abjad.iterate(selection).leaves():
+        if abjad.get.parentage(leaf).get(abjad.OnBeatGraceContainer):
+            continue
+        leaves.append(leaf)
+    container = abjad.get.before_grace_container(leaves[0])
+    if container is not None:
+        leaves_ = abjad.select(container).leaves()
+        leaves[0:0] = leaves_
+    container = abjad.get.after_grace_container(leaves[-1])
+    if container is not None:
+        leaves_ = abjad.select(container).leaves()
+        leaves.extend(leaves_)
+    string = command.annotation_spanner_text
+    if string is None:
+        string = command._make_rhythm_annotation_string()
+    color = command.annotation_spanner_color or "#darkyellow"
+    command_ = _piecewise.rhythm_annotation_spanner(
+        string,
+        abjad.tweak(color).color,
+        abjad.tweak(8).staff_padding,
+        leak_spanner_stop=True,
+        selector=lambda _: _selection.Selection(_).leaves(),
+    )
+    command_(leaves)
 
 
 class SegmentMaker:
@@ -2011,11 +2042,14 @@ class SegmentMaker:
                 result = self._get_measure_time_signatures(*measures)
                 start_offset, time_signatures = result
                 runtime = self._bundle_manifests(voice.name)
+                selection = None
                 try:
                     selection = command._make_selection(time_signatures, runtime)
                 except Exception:
                     print(f"Interpreting ...\n\n{abjad.storage(command)}\n")
                     raise
+                if selection is not None:
+                    _attach_rhythm_annotation_spanner(command, selection)
                 timespan = abjad.AnnotatedTimespan(
                     start_offset=start_offset, annotation=selection
                 )

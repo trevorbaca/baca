@@ -7818,9 +7818,9 @@ class RegistrationComponent:
 
     ..  container:: example
 
-        Initializes a registration component that specifies that all pitches
-        from A0 up to and including C8 should be transposed to the octave
-        starting at Eb5 (numbered pitch 15):
+        Initializes a registration component that specifies that all pitches from A0 up
+        to and including C8 should be transposed to the octave starting at Eb5 (numbered
+        pitch 15):
 
         >>> component = baca.RegistrationComponent('[A0, C8]', 15)
         >>> component

@@ -221,37 +221,6 @@ class RhythmCommand(scoping.Command):
             else:
                 raise TypeError(leaf)
 
-    def _attach_rhythm_annotation_spanner(self, selection):
-        from . import piecewise
-
-        if not self.annotation_spanner_text and not self.frame:
-            return
-        leaves = []
-        for leaf in abjad.iterate(selection).leaves():
-            if abjad.get.parentage(leaf).get(abjad.OnBeatGraceContainer):
-                continue
-            leaves.append(leaf)
-        container = abjad.get.before_grace_container(leaves[0])
-        if container is not None:
-            leaves_ = abjad.select(container).leaves()
-            leaves[0:0] = leaves_
-        container = abjad.get.after_grace_container(leaves[-1])
-        if container is not None:
-            leaves_ = abjad.select(container).leaves()
-            leaves.extend(leaves_)
-        string = self.annotation_spanner_text
-        if string is None:
-            string = self._make_rhythm_annotation_string()
-        color = self.annotation_spanner_color or "#darkyellow"
-        command = piecewise.rhythm_annotation_spanner(
-            string,
-            abjad.tweak(color).color,
-            abjad.tweak(8).staff_padding,
-            leak_spanner_stop=True,
-            selector=lambda _: _selection.Selection(_).leaves(),
-        )
-        command(leaves)
-
     def _check_rhythm_maker_input(self, rhythm_maker):
         if rhythm_maker is None:
             return
@@ -328,7 +297,7 @@ class RhythmCommand(scoping.Command):
             container = abjad.Container(selection, name="Dummy")
             self._attach_not_yet_pitched_(container)
             container[:] = []
-        self._attach_rhythm_annotation_spanner(selection)
+        # self._attach_rhythm_annotation_spanner(selection)
         return selection
 
     def _previous_segment_stop_state(self, runtime):
