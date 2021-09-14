@@ -88,7 +88,6 @@ class AccidentalAdjustmentCommand(scoping.Command):
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -615,7 +614,6 @@ class ClusterCommand(scoping.Command):
                                     {
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
-                                        \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                     }
@@ -775,7 +773,6 @@ class ClusterCommand(scoping.Command):
                                     {
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
-                                        \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                     }
@@ -919,7 +916,6 @@ class ClusterCommand(scoping.Command):
                                     {
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
-                                        \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                     }
@@ -1071,7 +1067,6 @@ class ClusterCommand(scoping.Command):
                                     {
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
-                                        \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                     }
@@ -1215,7 +1210,6 @@ class ClusterCommand(scoping.Command):
                                     {
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
-                                        \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                     }
@@ -1301,7 +1295,6 @@ class ClusterCommand(scoping.Command):
                                     {
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
-                                        \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                     }
@@ -1401,7 +1394,6 @@ class ColorFingeringCommand(scoping.Command):
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -1816,7 +1808,6 @@ class MicrotoneDeviationCommand(scoping.Command):
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -2005,7 +1996,6 @@ class OctaveDisplacementCommand(scoping.Command):
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -2199,7 +2189,6 @@ class PitchCommand(scoping.Command):
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -2302,7 +2291,6 @@ class PitchCommand(scoping.Command):
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -2405,7 +2393,6 @@ class PitchCommand(scoping.Command):
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -2996,7 +2983,6 @@ class RegisterCommand(scoping.Command):
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -3384,7 +3370,6 @@ class RegisterInterpolationCommand(scoping.Command):
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -3523,7 +3508,6 @@ class RegisterInterpolationCommand(scoping.Command):
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -3662,7 +3646,6 @@ class RegisterInterpolationCommand(scoping.Command):
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -3801,7 +3784,6 @@ class RegisterInterpolationCommand(scoping.Command):
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -3940,7 +3922,6 @@ class RegisterInterpolationCommand(scoping.Command):
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -5913,7 +5894,6 @@ def force_accidental(
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -6242,7 +6222,6 @@ def pitch(
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }

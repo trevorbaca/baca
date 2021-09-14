@@ -735,18 +735,15 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'blue)
                             \f
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -834,18 +831,15 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'blue)
                             \p
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -934,18 +928,15 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'green4)
                             \f
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -1021,11 +1012,9 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'blue)
                             \f
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'DeepPink1)
                             \f
@@ -1034,7 +1023,6 @@ r"""
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -1122,18 +1110,15 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'DeepPink1)
                             \f
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -1207,11 +1192,9 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'blue)
                             \sfz
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'blue)
                             \sfz
@@ -1220,7 +1203,6 @@ r"""
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -1308,18 +1290,15 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'blue)
                             \sfz
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -1396,11 +1375,9 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'blue)
                             \mf
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'blue)
                             \baca-effort-mf
@@ -1409,7 +1386,6 @@ r"""
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -1517,17 +1493,14 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-default-indicator-markup "(“Flute”)"
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -1595,17 +1568,14 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-default-indicator-markup "(“Flute”)"
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -1669,17 +1639,14 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-default-indicator-markup "(“Flute”)"
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -1766,17 +1733,14 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -1844,17 +1808,14 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -1919,17 +1880,14 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -2029,17 +1987,14 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -2108,17 +2063,14 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -2183,17 +2135,14 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -2294,17 +2243,14 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-reapplied-indicator-markup "(“Flute”)"
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -2373,17 +2319,14 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-reapplied-indicator-markup "(“Flute”)"
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -2449,17 +2392,14 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-reapplied-indicator-markup "(“Flute”)"
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -2560,20 +2500,16 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'2
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            %@% \baca-not-yet-pitched-coloring
                             b'2
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
-                            %@% \baca-not-yet-pitched-coloring
                             b'2
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -2644,20 +2580,16 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'2
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            %@% \baca-not-yet-pitched-coloring
                             b'2
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
-                            %@% \baca-not-yet-pitched-coloring
                             b'2
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -2724,20 +2656,16 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'2
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            %@% \baca-not-yet-pitched-coloring
                             b'2
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
-                            %@% \baca-not-yet-pitched-coloring
                             b'2
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -2844,17 +2772,14 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -2923,17 +2848,14 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -2998,17 +2920,14 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -3126,21 +3045,18 @@ r"""
                         {
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)
                             b'4.
                             ^ \baca-default-indicator-markup "[“I+II”]"
                             \override Staff.InstrumentName.color = #(x11-color 'violet)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -3210,21 +3126,18 @@ r"""
                         {
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)
                             b'4.
                             ^ \baca-default-indicator-markup "[“I+II”]"
                             \override Staff.InstrumentName.color = #(x11-color 'violet)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -3290,21 +3203,18 @@ r"""
                         {
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)
                             b'4.
                             ^ \baca-default-indicator-markup "[“I+II”]"
                             \override Staff.InstrumentName.color = #(x11-color 'violet)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -3393,21 +3303,18 @@ r"""
                         {
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                             b'4.
                             ^ \baca-explicit-indicator-markup "[“I+II”]"
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -3477,21 +3384,18 @@ r"""
                         {
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                             b'4.
                             ^ \baca-explicit-indicator-markup "[“I+II”]"
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -3557,21 +3461,18 @@ r"""
                         {
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                             b'4.
                             ^ \baca-explicit-indicator-markup "[“I+II”]"
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -3675,21 +3576,18 @@ r"""
                             \markup { III+IV }
                             \set Staff.instrumentName =
                             \markup { III+IV }
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                             b'4.
                             ^ \baca-explicit-indicator-markup "[“III+IV”]"
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { III+IV }
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -3762,21 +3660,18 @@ r"""
                             \markup { III+IV }
                             \set Staff.instrumentName =
                             \markup { III+IV }
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                             b'4.
                             ^ \baca-explicit-indicator-markup "[“III+IV”]"
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { III+IV }
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -3845,21 +3740,18 @@ r"""
                             \markup { III+IV }
                             \set Staff.instrumentName =
                             \markup { III+IV }
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                             b'4.
                             ^ \baca-explicit-indicator-markup "[“III+IV”]"
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { III+IV }
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -3964,21 +3856,18 @@ r"""
                             \markup { I+II }
                             \set Staff.instrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.InstrumentName.color = #(x11-color 'green4)
                             b'4.
                             ^ \baca-reapplied-indicator-markup "[“I+II”]"
                             \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -4051,21 +3940,18 @@ r"""
                             \markup { I+II }
                             \set Staff.instrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.InstrumentName.color = #(x11-color 'green4)
                             b'4.
                             ^ \baca-reapplied-indicator-markup "[“I+II”]"
                             \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -4134,21 +4020,18 @@ r"""
                             \markup { I+II }
                             \set Staff.instrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.InstrumentName.color = #(x11-color 'green4)
                             b'4.
                             ^ \baca-reapplied-indicator-markup "[“I+II”]"
                             \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -4251,7 +4134,6 @@ r"""
                         {
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                             b'2
                             ^ \baca-explicit-indicator-markup "[“I+II”]"
@@ -4260,21 +4142,18 @@ r"""
                             \markup { I+II }
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                             b'2
                             ^ \baca-redundant-indicator-markup "[“I+II”]"
                             \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             b'2
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -4347,7 +4226,6 @@ r"""
                         {
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                             b'2
                             ^ \baca-explicit-indicator-markup "[“I+II”]"
@@ -4356,21 +4234,18 @@ r"""
                             \markup { I+II }
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                             b'2
                             ^ \baca-redundant-indicator-markup "[“I+II”]"
                             \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             b'2
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -4439,7 +4314,6 @@ r"""
                         {
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                             b'2
                             ^ \baca-explicit-indicator-markup "[“I+II”]"
@@ -4448,21 +4322,18 @@ r"""
                             \markup { I+II }
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                             b'2
                             ^ \baca-redundant-indicator-markup "[“I+II”]"
                             \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             b'2
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -4573,21 +4444,18 @@ r"""
                             \markup { I+II }
                             \set Staff.instrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                             b'4.
                             ^ \baca-redundant-indicator-markup "[“I+II”]"
                             \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -4660,21 +4528,18 @@ r"""
                             \markup { I+II }
                             \set Staff.instrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                             b'4.
                             ^ \baca-redundant-indicator-markup "[“I+II”]"
                             \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -4743,21 +4608,18 @@ r"""
                             \markup { I+II }
                             \set Staff.instrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                             b'4.
                             ^ \baca-redundant-indicator-markup "[“I+II”]"
                             \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -4871,7 +4733,6 @@ r"""
                             \markup { I+II }
                             %@% \set Staff.shortInstrumentName =
                             %@% \markup { III+IV }
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                             %@% \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                             b'2
@@ -4883,16 +4744,13 @@ r"""
                             %@% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
                             \markup { III+IV }
-                            %@% \baca-not-yet-pitched-coloring
                             b'2
-                            %@% \baca-not-yet-pitched-coloring
                             b'2
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -5003,16 +4861,13 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -5123,16 +4978,13 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -5244,16 +5096,13 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -5356,16 +5205,13 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -5476,16 +5322,13 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -5589,7 +5432,6 @@ r"""
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -5728,17 +5570,14 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            \baca-not-yet-pitched-coloring
                             b'4.
                             \override Staff.BarLine.bar-extent = #'(0 . 0)
-                            \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -5842,16 +5681,13 @@ r"""
                         \context Voice = "Music_Voice"
                         {
                             \override Staff.BarLine.bar-extent = #'(0 . 0)
-                            \baca-not-yet-pitched-coloring
                             b'4.
-                            \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -5934,17 +5770,14 @@ r"""
                             \stopStaff
                             \once \override Staff.StaffSymbol.line-count = 5
                             \startStaff
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
                             b'4.
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -6036,17 +5869,14 @@ r"""
                             \stopStaff
                             \once \override Staff.StaffSymbol.line-count = 1
                             \startStaff
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
                             b'4.
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -6138,17 +5968,14 @@ r"""
                             \stopStaff
                             \once \override Staff.StaffSymbol.line-count = 5
                             \startStaff
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.StaffSymbol.color = #(x11-color 'green4)
                             b'4.
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -6228,14 +6055,12 @@ r"""
                             \stopStaff
                             \once \override Staff.StaffSymbol.line-count = 5
                             \startStaff
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
                             b'4.
                             \override Staff.BarLine.bar-extent = #'(-2 . 2)
                             \stopStaff
                             \once \override Staff.StaffSymbol.line-count = 5
                             \startStaff
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)
                             b'4.
                             <<
@@ -6243,7 +6068,6 @@ r"""
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -6335,17 +6159,14 @@ r"""
                             \stopStaff
                             \once \override Staff.StaffSymbol.line-count = 5
                             \startStaff
-                            %@% \baca-not-yet-pitched-coloring
                             \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)
                             b'4.
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -6460,16 +6281,13 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -6583,16 +6401,13 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -6707,16 +6522,13 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -6833,18 +6645,14 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -6958,16 +6766,13 @@ r"""
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
-                            %@% \baca-not-yet-pitched-coloring
                             b'4.
                             <<
                                 \context Voice = "Music_Voice"
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }

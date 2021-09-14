@@ -911,56 +911,42 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                     {
                         \context Voice = "Music_Voice"
                         {
-                            \baca-not-yet-pitched-coloring
                             b'8
                             [
-                            \baca-not-yet-pitched-coloring
                             b'8
-                            \baca-not-yet-pitched-coloring
                             b'8
-                            \baca-not-yet-pitched-coloring
                             b'8
                             ]
-                            \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
                             - \staccato
                             [
                             (
-                            \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
                             - \staccato
-                            \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
                             - \staccato
                             ]
-                            \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
                             - \staccato
                             [
-                            \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
                             - \staccato
-                            \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
                             - \staccato
-                            \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
                             - \staccato
                             )
                             ]
-                            \baca-not-yet-pitched-coloring
                             b'8
                             [
-                            \baca-not-yet-pitched-coloring
                             b'8
-                            \baca-not-yet-pitched-coloring
                             b'8
                             ]
                             <<
@@ -968,7 +954,6 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -1055,56 +1040,42 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                     {
                         \context Voice = "Music_Voice"
                         {
-                            \baca-not-yet-pitched-coloring
                             b'8
                             [
-                            \baca-not-yet-pitched-coloring
                             b'8
-                            \baca-not-yet-pitched-coloring
                             b'8
-                            \baca-not-yet-pitched-coloring
                             b'8
                             ]
-                            \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
                             - \staccato
                             [
                             (
-                            \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
                             - \staccato
-                            \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
                             - \staccato
                             ]
-                            \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
                             - \staccato
                             [
-                            \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
                             - \staccato
-                            \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
                             - \staccato
-                            \baca-not-yet-pitched-coloring
                             b'8
                             - \marcato
                             - \staccato
                             )
                             ]
-                            \baca-not-yet-pitched-coloring
                             b'8
                             [
-                            \baca-not-yet-pitched-coloring
                             b'8
-                            \baca-not-yet-pitched-coloring
                             b'8
                             ]
                             <<
@@ -1112,7 +1083,6 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -1250,17 +1220,13 @@ def only_parts(command: _command_typing) -> _command_typing:
                     {
                         \context Voice = "Music_Voice"
                         {
-                            \baca-not-yet-pitched-coloring
                             b'2
                             - \tweak color #(x11-color 'blue)
                             \p
                             - \tweak color #(x11-color 'blue)
                             \<
-                            \baca-not-yet-pitched-coloring
                             b'4.
-                            \baca-not-yet-pitched-coloring
                             b'2
-                            \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak color #(x11-color 'blue)
                             \f
@@ -1269,7 +1235,6 @@ def only_parts(command: _command_typing) -> _command_typing:
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }

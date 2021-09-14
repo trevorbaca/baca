@@ -419,7 +419,6 @@ class BCPCommand(scoping.Command):
                                     {
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
-                                        \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                     }
@@ -686,7 +685,6 @@ class BCPCommand(scoping.Command):
                                     {
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
-                                        \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                     }
@@ -866,7 +864,6 @@ class ContainerCommand(scoping.Command):
                             {
                                 \abjad-invisible-music-coloring
                                 %@% \abjad-invisible-music
-                                \baca-not-yet-pitched-coloring
                                 b'1 * 1/4
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                             }

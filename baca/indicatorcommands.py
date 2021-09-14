@@ -1299,14 +1299,10 @@ def hide_black_note_heads(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            \baca-not-yet-pitched-coloring
                             b'2
-                            \baca-not-yet-pitched-coloring
                             \once \override NoteHead.transparent = ##t
                             b'4.
-                            \baca-not-yet-pitched-coloring
                             b'2
-                            \baca-not-yet-pitched-coloring
                             \once \override NoteHead.transparent = ##t
                             b'4.
                             <<
@@ -1314,7 +1310,6 @@ def hide_black_note_heads(
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -1698,7 +1693,6 @@ def margin_markup(
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -2326,7 +2320,6 @@ def staff_lines(
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     c'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -2425,7 +2418,6 @@ def staff_lines(
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     d1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -2525,7 +2517,6 @@ def staff_lines(
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     c'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -2623,7 +2614,6 @@ def staff_lines(
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     d1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -2721,7 +2711,6 @@ def staff_lines(
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     d1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }

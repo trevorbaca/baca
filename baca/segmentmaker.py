@@ -119,40 +119,26 @@ class SegmentMaker:
                     {
                         \context Voice = "Music_Voice"
                         {
-                            %@% \baca-not-yet-pitched-coloring
                             b'8
                             [
-                            %@% \baca-not-yet-pitched-coloring
                             b'8
-                            %@% \baca-not-yet-pitched-coloring
                             b'8
-                            %@% \baca-not-yet-pitched-coloring
                             b'8
                             ]
-                            %@% \baca-not-yet-pitched-coloring
                             b'8
                             [
-                            %@% \baca-not-yet-pitched-coloring
                             b'8
-                            %@% \baca-not-yet-pitched-coloring
                             b'8
                             ]
-                            %@% \baca-not-yet-pitched-coloring
                             b'8
                             [
-                            %@% \baca-not-yet-pitched-coloring
                             b'8
-                            %@% \baca-not-yet-pitched-coloring
                             b'8
-                            %@% \baca-not-yet-pitched-coloring
                             b'8
                             ]
-                            %@% \baca-not-yet-pitched-coloring
                             b'8
                             [
-                            %@% \baca-not-yet-pitched-coloring
                             b'8
-                            %@% \baca-not-yet-pitched-coloring
                             b'8
                             ]
                             <<
@@ -160,7 +146,6 @@ class SegmentMaker:
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    %@% \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -296,7 +281,6 @@ class SegmentMaker:
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -437,7 +421,6 @@ class SegmentMaker:
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -760,53 +743,39 @@ class SegmentMaker:
                         {
                             \context Voice = "Music_Voice"
                             {
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 0 }
                                 [
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 1 }
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 2 }
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 3 }
                                 ]
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 4 }
                                 [
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 5 }
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 6 }
                                 ]
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 7 }
                                 [
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 8 }
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 9 }
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 10 }
                                 ]
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 11 }
                                 [
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 12 }
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 13 }
                                 ]
@@ -815,7 +784,6 @@ class SegmentMaker:
                                     {
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
-                                        \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                     }
@@ -894,53 +862,39 @@ class SegmentMaker:
                         {
                             \context Voice = "Music_Voice"
                             {
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 0 }
                                 [
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 1 }
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 2 }
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 3 }
                                 ]
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 4 }
                                 [
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 5 }
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 6 }
                                 ]
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 7 }
                                 [
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 8 }
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 9 }
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 10 }
                                 ]
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 11 }
                                 [
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 12 }
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 ^ \markup { 13 }
                                 ]
@@ -949,7 +903,6 @@ class SegmentMaker:
                                     {
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
-                                        \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                     }
@@ -2409,6 +2362,8 @@ class SegmentMaker:
             leaves.append(pleaf)
 
     def _color_not_yet_pitched(self):
+        if self.environment == "docs":
+            return
         indicator = const.NOT_YET_PITCHED
         tag = _site(inspect.currentframe())
         tag = tag.append(_tags.NOT_YET_PITCHED_COLORING)
@@ -4335,7 +4290,6 @@ class SegmentMaker:
                                         {
                                             \abjad-invisible-music-coloring
                                             %@% \abjad-invisible-music
-                                            \baca-not-yet-pitched-coloring
                                             b'1 * 1/4
                                             %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                         }
@@ -4375,7 +4329,6 @@ class SegmentMaker:
                                         {
                                             \abjad-invisible-music-coloring
                                             %@% \abjad-invisible-music
-                                            \baca-not-yet-pitched-coloring
                                             d1 * 1/4
                                             %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                         }
@@ -4979,7 +4932,6 @@ class SegmentMaker:
                                     {
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
-                                        \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                     }
@@ -5088,7 +5040,6 @@ class SegmentMaker:
                                     {
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
-                                        \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                     }

@@ -95,40 +95,26 @@ class RhythmCommand(scoping.Command):
                     {
                         \context Voice = "Music_Voice"
                         {
-                            \baca-not-yet-pitched-coloring
                             b'8
                             [
-                            \baca-not-yet-pitched-coloring
                             b'8
-                            \baca-not-yet-pitched-coloring
                             b'8
                             ]
-                            \baca-not-yet-pitched-coloring
                             b'8
                             [
-                            \baca-not-yet-pitched-coloring
                             b'8
-                            \baca-not-yet-pitched-coloring
                             b'8
-                            \baca-not-yet-pitched-coloring
                             b'8
                             ]
-                            \baca-not-yet-pitched-coloring
                             b'8
                             [
-                            \baca-not-yet-pitched-coloring
                             b'8
-                            \baca-not-yet-pitched-coloring
                             b'8
                             ]
-                            \baca-not-yet-pitched-coloring
                             b'8
                             [
-                            \baca-not-yet-pitched-coloring
                             b'8
-                            \baca-not-yet-pitched-coloring
                             b'8
-                            \baca-not-yet-pitched-coloring
                             b'8
                             ]
                             <<
@@ -136,7 +122,6 @@ class RhythmCommand(scoping.Command):
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -464,21 +449,18 @@ class RhythmCommand(scoping.Command):
                             {
                                 \override TextScript.font-size = -2
                                 \override TextScript.staff-padding = 5
-                                \baca-not-yet-pitched-coloring
                                 b'8.
                                 _ \markup {
                                     \fraction
                                         3
                                         16
                                     }
-                                \baca-not-yet-pitched-coloring
                                 b'4
                                 _ \markup {
                                     \fraction
                                         4
                                         16
                                     }
-                                \baca-not-yet-pitched-coloring
                                 b'16
                                 _ \markup {
                                     \fraction
@@ -486,16 +468,13 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                                 ~
-                                \baca-not-yet-pitched-coloring
                                 b'8
-                                \baca-not-yet-pitched-coloring
                                 b'4
                                 _ \markup {
                                     \fraction
                                         4
                                         16
                                     }
-                                \baca-not-yet-pitched-coloring
                                 b'8
                                 _ \markup {
                                     \fraction
@@ -508,35 +487,30 @@ class RhythmCommand(scoping.Command):
                                         8
                                         16
                                     }
-                                \baca-not-yet-pitched-coloring
                                 b'16
                                 _ \markup {
                                     \fraction
                                         1
                                         16
                                     }
-                                \baca-not-yet-pitched-coloring
                                 b'4
                                 _ \markup {
                                     \fraction
                                         4
                                         16
                                     }
-                                \baca-not-yet-pitched-coloring
                                 b'8.
                                 _ \markup {
                                     \fraction
                                         3
                                         16
                                     }
-                                \baca-not-yet-pitched-coloring
                                 b'4
                                 _ \markup {
                                     \fraction
                                         4
                                         16
                                     }
-                                \baca-not-yet-pitched-coloring
                                 b'8.
                                 _ \markup {
                                     \fraction
@@ -544,7 +518,6 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                                 [
-                                \baca-not-yet-pitched-coloring
                                 b'16
                                 _ \markup {
                                     \fraction
@@ -559,7 +532,6 @@ class RhythmCommand(scoping.Command):
                                     {
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
-                                        \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                     }
@@ -823,19 +795,16 @@ def make_monads(
                             \tweak edge-height #'(0.7 . 0)
                             \times 4/5
                             {
-                                \baca-not-yet-pitched-coloring
                                 b'2
                             }
                             \tweak edge-height #'(0.7 . 0)
                             \times 4/5
                             {
-                                \baca-not-yet-pitched-coloring
                                 b'2
                             }
                             \tweak edge-height #'(0.7 . 0)
                             \times 4/5
                             {
-                                \baca-not-yet-pitched-coloring
                                 b'4
                             }
                             <<
@@ -843,7 +812,6 @@ def make_monads(
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -978,21 +946,17 @@ def make_repeat_tied_notes(
                     {
                         \context Voice = "Music_Voice"
                         {
-                            \baca-not-yet-pitched-coloring
                             b'4.
                             - \tweak stencil ##f
                             ~
-                            \baca-not-yet-pitched-coloring
                             b'4
                             \repeatTie
                             - \tweak stencil ##f
                             ~
-                            \baca-not-yet-pitched-coloring
                             b'4.
                             \repeatTie
                             - \tweak stencil ##f
                             ~
-                            \baca-not-yet-pitched-coloring
                             b'4
                             \repeatTie
                             <<
@@ -1000,7 +964,6 @@ def make_repeat_tied_notes(
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }

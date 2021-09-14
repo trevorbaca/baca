@@ -110,7 +110,6 @@ def assign_parts(
                             {
                                 \abjad-invisible-music-coloring
                                 %@% \abjad-invisible-music
-                                \baca-not-yet-pitched-coloring
                                 b'1 * 1/4
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                             }
@@ -338,7 +337,6 @@ def bcps(
                                     {
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
-                                        \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                     }
@@ -631,7 +629,6 @@ def container(
                             {
                                 \abjad-invisible-music-coloring
                                 %@% \abjad-invisible-music
-                                \baca-not-yet-pitched-coloring
                                 b'1 * 1/4
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                             }
@@ -732,7 +729,6 @@ def cross_staff(
                                     {
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
-                                        \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                     }
@@ -764,7 +760,6 @@ def cross_staff(
                                     {
                                         \abjad-invisible-music-coloring
                                         %@% \abjad-invisible-music
-                                        \baca-not-yet-pitched-coloring
                                         b'1 * 1/4
                                         %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                     }
@@ -1095,7 +1090,6 @@ def finger_pressure_transition(
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -1347,7 +1341,6 @@ def glissando(
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -1454,7 +1447,6 @@ def glissando(
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -1586,7 +1578,6 @@ def glissando(
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -1708,7 +1699,6 @@ def glissando(
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
@@ -1868,7 +1858,6 @@ def invisible_music(
                                 {
                                     \abjad-invisible-music-coloring
                                     %@% \abjad-invisible-music
-                                    \baca-not-yet-pitched-coloring
                                     b'1 * 1/4
                                     %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                                 }
