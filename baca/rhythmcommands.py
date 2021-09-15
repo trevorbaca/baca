@@ -51,7 +51,7 @@ class RhythmCommand(scoping.Command):
         ...     command,
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -402,7 +402,7 @@ class RhythmCommand(scoping.Command):
             ...     command,
             ...     )
 
-            >>> lilypond_file = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment="docs")
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -755,7 +755,7 @@ def make_monads(
         ...     baca.make_monads('2/5 2/5 1/5'),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -909,7 +909,7 @@ def make_repeat_tied_notes(
         ...     baca.make_repeat_tied_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::

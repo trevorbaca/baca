@@ -7,15 +7,15 @@ import typing
 
 import abjad
 
-from . import const, pitchclasses, scoping
+from . import const as _const
+from . import pitchclasses as _pitchclasses
+from . import scoping as _scoping
 from . import selection as _selection
 from . import selectors as _selectors
 from . import typings
 
-### CLASSES ###
 
-
-class AccidentalAdjustmentCommand(scoping.Command):
+class AccidentalAdjustmentCommand(_scoping.Command):
     r"""
     Accidental adjustment command.
 
@@ -31,16 +31,16 @@ class AccidentalAdjustmentCommand(scoping.Command):
         ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> maker(
         ...     'Music_Voice',
         ...     baca.force_accidental(selector=baca.selectors.pleaves((None, 2))),
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.pitches('E4 F4'),
-        ...     )
+        ... )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -124,11 +124,11 @@ class AccidentalAdjustmentCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         parenthesized: bool = None,
-        scope: scoping.ScopeTyping = None,
+        scope: _scoping.ScopeTyping = None,
         selector=lambda _: _selection.Selection(_).pleaf(0),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
     ) -> None:
-        scoping.Command.__init__(
+        _scoping.Command.__init__(
             self,
             map=map,
             match=match,
@@ -218,7 +218,7 @@ class AccidentalAdjustmentCommand(scoping.Command):
         return self._parenthesized
 
 
-class ClusterCommand(scoping.Command):
+class ClusterCommand(_scoping.Command):
     r"""
     Cluster command.
 
@@ -421,12 +421,12 @@ class ClusterCommand(scoping.Command):
         map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
-        scope: scoping.ScopeTyping = None,
+        scope: _scoping.ScopeTyping = None,
         selector=lambda _: _selection.Selection(_).plts(),
         start_pitch=None,
         widths=None,
     ) -> None:
-        scoping.Command.__init__(
+        _scoping.Command.__init__(
             self,
             map=map,
             match=match,
@@ -483,8 +483,8 @@ class ClusterCommand(scoping.Command):
                 abjad.attach(indicator, chord)
             abjad.mutate.replace(pleaf, chord)
             abjad.attach(key_cluster, chord)
-            abjad.attach(const.ALLOW_REPEAT_PITCH, chord)
-            abjad.detach(const.NOT_YET_PITCHED, chord)
+            abjad.attach(_const.ALLOW_REPEAT_PITCH, chord)
+            abjad.detach(_const.NOT_YET_PITCHED, chord)
 
     def _make_pitches(self, start_pitch, width):
         pitches = [start_pitch]
@@ -514,16 +514,16 @@ class ClusterCommand(scoping.Command):
             ...     preamble=[baca.global_context_string()],
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+            ... )
 
             >>> maker(
             ...     'Music_Voice',
             ...     baca.pitch('E4'),
             ...     baca.make_notes(repeat_ties=True),
             ...     baca.natural_clusters(widths=[3]),
-            ...     )
+            ... )
 
-            >>> lilypond_file = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment="docs")
 
             ..  docs::
 
@@ -657,16 +657,16 @@ class ClusterCommand(scoping.Command):
             ...     preamble=[baca.global_context_string()],
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+            ... )
 
             >>> maker(
             ...     'Music_Voice',
             ...     baca.make_notes(repeat_ties=True),
             ...     baca.pitches('C4 D4 E4 F4'),
             ...     baca.clusters([3]),
-            ...     )
+            ... )
 
-            >>> lilypond_file = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment="docs")
 
             ..  docs::
 
@@ -801,15 +801,15 @@ class ClusterCommand(scoping.Command):
             ...     preamble=[baca.global_context_string()],
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+            ... )
 
             >>> maker(
             ...     'Music_Voice',
             ...     baca.make_notes(repeat_ties=True),
             ...     baca.clusters([3], start_pitch='G4'),
-            ...     )
+            ... )
 
-            >>> lilypond_file = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment="docs")
 
             ..  docs::
 
@@ -960,7 +960,7 @@ class ClusterCommand(scoping.Command):
             ...     baca.make_notes(repeat_ties=True),
             ...     )
 
-            >>> lilypond_file = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment="docs")
 
             ..  docs::
 
@@ -1103,7 +1103,7 @@ class ClusterCommand(scoping.Command):
             ...     baca.make_notes(repeat_ties=True),
             ...     )
 
-            >>> lilypond_file = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment="docs")
 
             ..  docs::
 
@@ -1247,7 +1247,7 @@ class ClusterCommand(scoping.Command):
             ...     baca.clusters([]),
             ...     )
 
-            >>> lilypond_file = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment="docs")
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -1321,7 +1321,7 @@ class ClusterCommand(scoping.Command):
         return self._widths
 
 
-class ColorFingeringCommand(scoping.Command):
+class ColorFingeringCommand(_scoping.Command):
     r"""
     Color fingering command.
 
@@ -1343,7 +1343,7 @@ class ColorFingeringCommand(scoping.Command):
         ...     baca.ColorFingeringCommand(numbers=[0, 1, 2, 1]),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1428,11 +1428,11 @@ class ColorFingeringCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         numbers=None,
-        scope: scoping.ScopeTyping = None,
+        scope: _scoping.ScopeTyping = None,
         selector=lambda _: _selection.Selection(_).pheads(),
         tweaks: abjad.IndexedTweakManagers = None,
     ) -> None:
-        scoping.Command.__init__(
+        _scoping.Command.__init__(
             self,
             map=map,
             match=match,
@@ -1495,7 +1495,7 @@ class ColorFingeringCommand(scoping.Command):
         return self._tweaks
 
 
-class DiatonicClusterCommand(scoping.Command):
+class DiatonicClusterCommand(_scoping.Command):
     r"""
     Diatonic cluster command.
 
@@ -1532,11 +1532,11 @@ class DiatonicClusterCommand(scoping.Command):
         map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
-        scope: scoping.ScopeTyping = None,
+        scope: _scoping.ScopeTyping = None,
         widths,
         selector=lambda _: _selection.Selection(_).plts(),
     ) -> None:
-        scoping.Command.__init__(
+        _scoping.Command.__init__(
             self,
             map=map,
             match=match,
@@ -1720,7 +1720,7 @@ class Loop(abjad.CyclicTuple):
         return self._items
 
 
-class MicrotoneDeviationCommand(scoping.Command):
+class MicrotoneDeviationCommand(_scoping.Command):
     r"""
     Microtone deviation command.
 
@@ -1742,7 +1742,7 @@ class MicrotoneDeviationCommand(scoping.Command):
         ...     baca.deviation([0, 0.5, 0, -0.5]),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1842,10 +1842,10 @@ class MicrotoneDeviationCommand(scoping.Command):
         map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
-        scope: scoping.ScopeTyping = None,
+        scope: _scoping.ScopeTyping = None,
         selector=lambda _: _selection.Selection(_).plts(),
     ) -> None:
-        scoping.Command.__init__(
+        _scoping.Command.__init__(
             self,
             map=map,
             match=match,
@@ -1906,7 +1906,7 @@ class MicrotoneDeviationCommand(scoping.Command):
         return self._deviations
 
 
-class OctaveDisplacementCommand(scoping.Command):
+class OctaveDisplacementCommand(_scoping.Command):
     r"""
     Octave displacement command.
 
@@ -1930,7 +1930,7 @@ class OctaveDisplacementCommand(scoping.Command):
         ...         ),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2030,10 +2030,10 @@ class OctaveDisplacementCommand(scoping.Command):
         map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
-        scope: scoping.ScopeTyping = None,
+        scope: _scoping.ScopeTyping = None,
         selector=lambda _: _selection.Selection(_).plts(),
     ) -> None:
-        scoping.Command.__init__(
+        _scoping.Command.__init__(
             self,
             map=map,
             match=match,
@@ -2102,7 +2102,118 @@ class OctaveDisplacementCommand(scoping.Command):
         return self._displacements
 
 
-class PitchCommand(scoping.Command):
+def _parse_string(string):
+    items, current_chord = [], []
+    for part in string.split():
+        if "<" in part:
+            assert not current_chord
+            current_chord.append(part)
+        elif ">" in part:
+            assert current_chord
+            current_chord.append(part)
+            item = " ".join(current_chord)
+            items.append(item)
+            current_chord = []
+        elif current_chord:
+            current_chord.append(part)
+        else:
+            items.append(part)
+    assert not current_chord, repr(current_chord)
+    return items
+
+
+def _coerce_pitches(pitches):
+    if isinstance(pitches, str):
+        pitches = _parse_string(pitches)
+    items = []
+    for item in pitches:
+        if isinstance(item, str) and "<" in item and ">" in item:
+            item = item.strip("<")
+            item = item.strip(">")
+            item = abjad.PitchSet(item, abjad.NamedPitch)
+        elif isinstance(item, str):
+            item = abjad.NamedPitch(item)
+        elif isinstance(item, collections.abc.Iterable):
+            item = abjad.PitchSet(item, abjad.NamedPitch)
+        else:
+            item = abjad.NamedPitch(item)
+        items.append(item)
+    if isinstance(pitches, Loop):
+        pitches = type(pitches)(items=items, intervals=pitches.intervals)
+    else:
+        pitches = abjad.CyclicTuple(items)
+    return pitches
+
+
+def _set_lt_pitch(
+    lt,
+    pitch,
+    *,
+    allow_repitch=False,
+    mock=False,
+    set_chord_pitches_equal=False,
+):
+    new_lt = None
+    already_pitched = _const.ALREADY_PITCHED
+    for leaf in lt:
+        abjad.detach(_const.NOT_YET_PITCHED, leaf)
+        if mock is True:
+            abjad.attach(_const.MOCK, leaf)
+        if allow_repitch:
+            continue
+        if abjad.get.has_indicator(leaf, already_pitched):
+            voice = abjad.get.parentage(leaf).get(abjad.Voice)
+            if voice is None:
+                name = "no voice"
+            else:
+                name = voice.name
+            message = f"already pitched {repr(leaf)} in {name}."
+            raise Exception(message)
+        abjad.attach(already_pitched, leaf)
+    if pitch is None:
+        if not lt.is_pitched:
+            pass
+        else:
+            for leaf in lt:
+                rest = abjad.Rest(leaf.written_duration, multiplier=leaf.multiplier)
+                abjad.mutate.replace(leaf, rest, wrappers=True)
+            new_lt = abjad.get.logical_tie(rest)
+    elif isinstance(pitch, collections.abc.Iterable):
+        if isinstance(lt.head, abjad.Chord):
+            for chord in lt:
+                chord.written_pitches = pitch
+        else:
+            assert isinstance(lt.head, (abjad.Note, abjad.Rest))
+            for leaf in lt:
+                chord = abjad.Chord(
+                    pitch,
+                    leaf.written_duration,
+                    multiplier=leaf.multiplier,
+                )
+                abjad.mutate.replace(leaf, chord, wrappers=True)
+            new_lt = abjad.get.logical_tie(chord)
+    else:
+        if isinstance(lt.head, abjad.Note):
+            for note in lt:
+                note.written_pitch = pitch
+        elif set_chord_pitches_equal is True and isinstance(lt.head, abjad.Chord):
+            for chord in lt:
+                for note_head in chord.note_heads:
+                    note_head.written_pitch = pitch
+        else:
+            assert isinstance(lt.head, (abjad.Chord, abjad.Rest))
+            for leaf in lt:
+                note = abjad.Note(
+                    pitch,
+                    leaf.written_duration,
+                    multiplier=leaf.multiplier,
+                )
+                abjad.mutate.replace(leaf, note, wrappers=True)
+            new_lt = abjad.get.logical_tie(note)
+    return new_lt
+
+
+class PitchCommand(_scoping.Command):
     r"""
     Pitch command.
 
@@ -2123,7 +2234,7 @@ class PitchCommand(scoping.Command):
         ...     baca.pitches([19, 13, 15, 16, 17, 23]),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2225,7 +2336,7 @@ class PitchCommand(scoping.Command):
         ...     baca.pitches('C4 F4 F#4 <B4 C#5> D5'),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2327,7 +2438,7 @@ class PitchCommand(scoping.Command):
         ...     baca.pitches('<C4 D4 E4 F4 G4 A4 B4 C4>', allow_repeats=True)
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2479,10 +2590,10 @@ class PitchCommand(scoping.Command):
         measures: typings.SliceTyping = None,
         persist: str = None,
         pitches: typing.Union[typing.Sequence, Loop] = None,
-        scope: scoping.ScopeTyping = None,
+        scope: _scoping.ScopeTyping = None,
         selector: abjad.Expression = None,
     ) -> None:
-        scoping.Command.__init__(
+        _scoping.Command.__init__(
             self,
             map=map,
             match=match,
@@ -2519,7 +2630,7 @@ class PitchCommand(scoping.Command):
             assert isinstance(persist, str), repr(persist)
         self._persist = persist
         if pitches is not None:
-            pitches = self._coerce_pitches(pitches)
+            pitches = _coerce_pitches(pitches)
         self._pitches = pitches
         self._state: abjad.OrderedDict = abjad.OrderedDict()
 
@@ -2552,7 +2663,7 @@ class PitchCommand(scoping.Command):
         pitches_consumed = 0
         for i, plt in enumerate(plts):
             pitch = pitches[i + previous_pitches_consumed]
-            new_plt = self._set_lt_pitch(
+            new_plt = _set_lt_pitch(
                 plt, pitch, allow_repitch=self.allow_repitch, mock=self.mock
             )
             if new_plt is not None:
@@ -2560,16 +2671,16 @@ class PitchCommand(scoping.Command):
                 plt = new_plt
             if self.allow_octaves:
                 for pleaf in plt:
-                    abjad.attach(const.ALLOW_OCTAVE, pleaf)
+                    abjad.attach(_const.ALLOW_OCTAVE, pleaf)
             if self.allow_out_of_range:
                 for pleaf in plt:
-                    abjad.attach(const.ALLOW_OUT_OF_RANGE, pleaf)
+                    abjad.attach(_const.ALLOW_OUT_OF_RANGE, pleaf)
             if self.allow_repeats:
                 for pleaf in plt:
-                    abjad.attach(const.ALLOW_REPEAT_PITCH, pleaf)
+                    abjad.attach(_const.ALLOW_REPEAT_PITCH, pleaf)
             if self.do_not_transpose is True:
                 for pleaf in plt:
-                    abjad.attach(const.DO_NOT_TRANSPOSE, pleaf)
+                    abjad.attach(_const.DO_NOT_TRANSPOSE, pleaf)
             pitches_consumed += 1
         self._state = abjad.OrderedDict()
         pitches_consumed += previous_pitches_consumed
@@ -2586,60 +2697,17 @@ class PitchCommand(scoping.Command):
             message += f"{self!r} and {plts!r}."
             raise Exception(message)
 
-    @staticmethod
-    def _coerce_pitches(pitches):
-        if isinstance(pitches, str):
-            pitches = PitchCommand._parse_string(pitches)
-        items = []
-        for item in pitches:
-            if isinstance(item, str) and "<" in item and ">" in item:
-                item = item.strip("<")
-                item = item.strip(">")
-                item = abjad.PitchSet(item, abjad.NamedPitch)
-            elif isinstance(item, str):
-                item = abjad.NamedPitch(item)
-            elif isinstance(item, collections.abc.Iterable):
-                item = abjad.PitchSet(item, abjad.NamedPitch)
-            else:
-                item = abjad.NamedPitch(item)
-            items.append(item)
-        if isinstance(pitches, Loop):
-            pitches = type(pitches)(items=items, intervals=pitches.intervals)
-        else:
-            pitches = abjad.CyclicTuple(items)
-        return pitches
-
     def _mutates_score(self):
         pitches = self.pitches or []
         if any(isinstance(_, collections.abc.Iterable) for _ in pitches):
             return True
         return self._mutated_score
 
-    @staticmethod
-    def _parse_string(string):
-        items, current_chord = [], []
-        for part in string.split():
-            if "<" in part:
-                assert not current_chord
-                current_chord.append(part)
-            elif ">" in part:
-                assert current_chord
-                current_chord.append(part)
-                item = " ".join(current_chord)
-                items.append(item)
-                current_chord = []
-            elif current_chord:
-                current_chord.append(part)
-            else:
-                items.append(part)
-        assert not current_chord, repr(current_chord)
-        return items
-
     def _previous_pitches_consumed(self):
         dictionary = self.runtime.get("previous_segment_voice_metadata", None)
         if not dictionary:
             return 0
-        dictionary = dictionary.get(const.PITCH, None)
+        dictionary = dictionary.get(_const.PITCH, None)
         if not dictionary:
             return 0
         if dictionary.get("name") != self.persist:
@@ -2651,79 +2719,11 @@ class PitchCommand(scoping.Command):
         if self.ignore_incomplete:
             return pitches_consumed
         dictionary = self.runtime["previous_segment_voice_metadata"]
-        dictionary = dictionary.get(const.RHYTHM, None)
+        dictionary = dictionary.get(_const.RHYTHM, None)
         if dictionary:
             if dictionary.get("incomplete_final_note", False):
                 pitches_consumed -= 1
         return pitches_consumed
-
-    @staticmethod
-    def _set_lt_pitch(
-        lt,
-        pitch,
-        *,
-        allow_repitch=False,
-        mock=False,
-        set_chord_pitches_equal=False,
-    ):
-        new_lt = None
-        already_pitched = const.ALREADY_PITCHED
-        for leaf in lt:
-            abjad.detach(const.NOT_YET_PITCHED, leaf)
-            if mock is True:
-                abjad.attach(const.MOCK, leaf)
-            if allow_repitch:
-                continue
-            if abjad.get.has_indicator(leaf, already_pitched):
-                voice = abjad.get.parentage(leaf).get(abjad.Voice)
-                if voice is None:
-                    name = "no voice"
-                else:
-                    name = voice.name
-                message = f"already pitched {repr(leaf)} in {name}."
-                raise Exception(message)
-            abjad.attach(already_pitched, leaf)
-        if pitch is None:
-            if not lt.is_pitched:
-                pass
-            else:
-                for leaf in lt:
-                    rest = abjad.Rest(leaf.written_duration, multiplier=leaf.multiplier)
-                    abjad.mutate.replace(leaf, rest, wrappers=True)
-                new_lt = abjad.get.logical_tie(rest)
-        elif isinstance(pitch, collections.abc.Iterable):
-            if isinstance(lt.head, abjad.Chord):
-                for chord in lt:
-                    chord.written_pitches = pitch
-            else:
-                assert isinstance(lt.head, (abjad.Note, abjad.Rest))
-                for leaf in lt:
-                    chord = abjad.Chord(
-                        pitch,
-                        leaf.written_duration,
-                        multiplier=leaf.multiplier,
-                    )
-                    abjad.mutate.replace(leaf, chord, wrappers=True)
-                new_lt = abjad.get.logical_tie(chord)
-        else:
-            if isinstance(lt.head, abjad.Note):
-                for note in lt:
-                    note.written_pitch = pitch
-            elif set_chord_pitches_equal is True and isinstance(lt.head, abjad.Chord):
-                for chord in lt:
-                    for note_head in chord.note_heads:
-                        note_head.written_pitch = pitch
-            else:
-                assert isinstance(lt.head, (abjad.Chord, abjad.Rest))
-                for leaf in lt:
-                    note = abjad.Note(
-                        pitch,
-                        leaf.written_duration,
-                        multiplier=leaf.multiplier,
-                    )
-                    abjad.mutate.replace(leaf, note, wrappers=True)
-                new_lt = abjad.get.logical_tie(note)
-        return new_lt
 
     ### PUBLIC PROPERTIES ###
 
@@ -2795,7 +2795,7 @@ class PitchCommand(scoping.Command):
             'PITCH'
 
         """
-        return const.PITCH
+        return _const.PITCH
 
     @property
     def persist(self) -> typing.Optional[str]:
@@ -2837,7 +2837,7 @@ class PitchCommand(scoping.Command):
         return self._state
 
 
-class RegisterCommand(scoping.Command):
+class RegisterCommand(_scoping.Command):
     r"""
     Register command.
 
@@ -2918,7 +2918,7 @@ class RegisterCommand(scoping.Command):
         ...         ),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
 
         ..  docs::
 
@@ -3050,10 +3050,10 @@ class RegisterCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         registration=None,
-        scope: scoping.ScopeTyping = None,
+        scope: _scoping.ScopeTyping = None,
         selector=lambda _: _selection.Selection(_).plts(),
     ) -> None:
-        scoping.Command.__init__(
+        _scoping.Command.__init__(
             self,
             map=map,
             match=match,
@@ -3062,7 +3062,7 @@ class RegisterCommand(scoping.Command):
             selector=selector,
         )
         if registration is not None:
-            prototype = pitchclasses.Registration
+            prototype = _pitchclasses.Registration
             assert isinstance(registration, prototype), repr(registration)
         self._registration = registration
 
@@ -3092,12 +3092,12 @@ class RegisterCommand(scoping.Command):
                     pleaf.written_pitches = pitches
                 else:
                     raise TypeError(pleaf)
-                abjad.detach(const.NOT_YET_REGISTERED, pleaf)
+                abjad.detach(_const.NOT_YET_REGISTERED, pleaf)
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def registration(self) -> typing.Optional[pitchclasses.Registration]:
+    def registration(self) -> typing.Optional[_pitchclasses.Registration]:
         """
         Gets registration.
 
@@ -3128,7 +3128,7 @@ class RegisterCommand(scoping.Command):
         return self._registration
 
 
-class RegisterInterpolationCommand(scoping.Command):
+class RegisterInterpolationCommand(_scoping.Command):
     r"""
     Register interpolation command.
 
@@ -3271,7 +3271,7 @@ class RegisterInterpolationCommand(scoping.Command):
         ...     baca.register(12, 12),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
 
         ..  docs::
 
@@ -3409,7 +3409,7 @@ class RegisterInterpolationCommand(scoping.Command):
         ...     baca.register(12, 0),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
 
         ..  docs::
 
@@ -3547,7 +3547,7 @@ class RegisterInterpolationCommand(scoping.Command):
         ...     baca.register(0, 12),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
 
         ..  docs::
 
@@ -3685,7 +3685,7 @@ class RegisterInterpolationCommand(scoping.Command):
         ...     baca.register(12, -12),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
 
         ..  docs::
 
@@ -3823,7 +3823,7 @@ class RegisterInterpolationCommand(scoping.Command):
         ...     baca.register(-12, 12),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
 
         ..  docs::
 
@@ -3955,12 +3955,12 @@ class RegisterInterpolationCommand(scoping.Command):
         map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
-        scope: scoping.ScopeTyping = None,
+        scope: _scoping.ScopeTyping = None,
         selector=lambda _: _selection.Selection(_).plts(),
         start_pitch: typing.Union[abjad.Number, abjad.NumberedPitch] = 0,
         stop_pitch: typing.Union[abjad.Number, abjad.NumberedPitch] = 0,
     ) -> None:
-        scoping.Command.__init__(
+        _scoping.Command.__init__(
             self,
             map=map,
             match=match,
@@ -3996,7 +3996,7 @@ class RegisterInterpolationCommand(scoping.Command):
                     pleaf.written_pitches = written_pitches
                 else:
                     raise TypeError(pleaf)
-                abjad.detach(const.NOT_YET_REGISTERED, pleaf)
+                abjad.detach(_const.NOT_YET_REGISTERED, pleaf)
 
     ### PRIVATE METHODS ###
 
@@ -4008,7 +4008,7 @@ class RegisterInterpolationCommand(scoping.Command):
         addendum = fraction * compass
         current_pitch = start_pitch + addendum
         current_pitch = int(current_pitch)
-        return pitchclasses.Registration([("[A0, C8]", current_pitch)])
+        return _pitchclasses.Registration([("[A0, C8]", current_pitch)])
 
     ### PUBLIC PROPERTIES ###
 
@@ -4284,7 +4284,7 @@ class RegisterInterpolationCommand(scoping.Command):
         return self._stop_pitch
 
 
-class RegisterToOctaveCommand(scoping.Command):
+class RegisterToOctaveCommand(_scoping.Command):
     r"""
     Register-to-octave command.
 
@@ -4624,10 +4624,10 @@ class RegisterToOctaveCommand(scoping.Command):
         map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
-        scope: scoping.ScopeTyping = None,
+        scope: _scoping.ScopeTyping = None,
         selector=lambda _: _selection.Selection(_).plts(),
     ) -> None:
-        scoping.Command.__init__(
+        _scoping.Command.__init__(
             self,
             map=map,
             match=match,
@@ -4683,17 +4683,13 @@ class RegisterToOctaveCommand(scoping.Command):
         elif anchor == abjad.Up:
             pitch = pitches[-1]
         elif anchor == abjad.Center:
-            pitch = self._get_centroid(pitches)
+            soprano = max(pitches)
+            bass = min(pitches)
+            centroid = (soprano.number + bass.number) / 2.0
+            pitch = abjad.NumberedPitch(centroid)
         else:
             raise ValueError(anchor)
         return pitch.octave.number
-
-    @staticmethod
-    def _get_centroid(pitches):
-        soprano = max(pitches)
-        bass = min(pitches)
-        centroid = (soprano.number + bass.number) / 2.0
-        return abjad.NumberedPitch(centroid)
 
     def _set_pitch(self, leaf, transposition):
         if isinstance(leaf, abjad.Note):
@@ -4702,7 +4698,7 @@ class RegisterToOctaveCommand(scoping.Command):
         elif isinstance(leaf, abjad.Chord):
             pitches = [transposition(_) for _ in leaf.written_pitches]
             leaf.written_pitches = pitches
-        abjad.detach(const.NOT_YET_REGISTERED, leaf)
+        abjad.detach(_const.NOT_YET_REGISTERED, leaf)
 
     ### PUBLIC PROPERTIES ###
 
@@ -4848,7 +4844,7 @@ class RegisterToOctaveCommand(scoping.Command):
         return self._octave_number
 
 
-class StaffPositionCommand(scoping.Command):
+class StaffPositionCommand(_scoping.Command):
     r"""
     Staff position command.
 
@@ -4923,11 +4919,11 @@ class StaffPositionCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         mock: bool = None,
-        scope: scoping.ScopeTyping = None,
+        scope: _scoping.ScopeTyping = None,
         selector=lambda _: _selection.Selection(_).plts(),
         set_chord_pitches_equal: bool = None,
     ) -> None:
-        scoping.Command.__init__(
+        _scoping.Command.__init__(
             self,
             map=map,
             match=match,
@@ -4982,7 +4978,7 @@ class StaffPositionCommand(scoping.Command):
             if isinstance(number, list):
                 positions = [abjad.StaffPosition(_) for _ in number]
                 pitches = [_.to_pitch(clef) for _ in positions]
-                new_lt = PitchCommand._set_lt_pitch(
+                new_lt = _set_lt_pitch(
                     plt,
                     pitches,
                     allow_repitch=self.allow_repitch,
@@ -4995,7 +4991,7 @@ class StaffPositionCommand(scoping.Command):
             else:
                 position = abjad.StaffPosition(number)
                 pitch = position.to_pitch(clef)
-                new_lt = PitchCommand._set_lt_pitch(
+                new_lt = _set_lt_pitch(
                     plt,
                     pitch,
                     allow_repitch=self.allow_repitch,
@@ -5007,12 +5003,12 @@ class StaffPositionCommand(scoping.Command):
                     plt = new_lt
             plt_count += 1
             for pleaf in plt:
-                abjad.attach(const.STAFF_POSITION, pleaf)
+                abjad.attach(_const.STAFF_POSITION, pleaf)
                 if self.allow_out_of_range:
-                    abjad.attach(const.ALLOW_OUT_OF_RANGE, pleaf)
+                    abjad.attach(_const.ALLOW_OUT_OF_RANGE, pleaf)
                 if self.allow_repeats:
-                    abjad.attach(const.ALLOW_REPEAT_PITCH, pleaf)
-                    abjad.attach(const.DO_NOT_TRANSPOSE, pleaf)
+                    abjad.attach(_const.ALLOW_REPEAT_PITCH, pleaf)
+                    abjad.attach(_const.DO_NOT_TRANSPOSE, pleaf)
         if self.exact and plt_count != len(self.numbers):
             message = f"PLT count ({plt_count}) does not match"
             message += f" staff position count ({len(self.numbers)})."
@@ -5079,7 +5075,7 @@ class StaffPositionCommand(scoping.Command):
         return self._set_chord_pitches_equal
 
 
-class StaffPositionInterpolationCommand(scoping.Command):
+class StaffPositionInterpolationCommand(_scoping.Command):
     """
     Staff position interpolation command.
     """
@@ -5105,10 +5101,10 @@ class StaffPositionInterpolationCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         pitches_instead_of_staff_positions: bool = None,
-        scope: scoping.ScopeTyping = None,
+        scope: _scoping.ScopeTyping = None,
         selector=lambda _: _selection.Selection(_).plts(),
     ) -> None:
-        scoping.Command.__init__(
+        _scoping.Command.__init__(
             self,
             map=map,
             match=match,
@@ -5187,14 +5183,12 @@ class StaffPositionInterpolationCommand(scoping.Command):
                 default=abjad.Clef("treble"),
             )
             pitch = staff_position.to_pitch(clef)
-            new_lt = PitchCommand._set_lt_pitch(
-                plt, pitch, allow_repitch=True, mock=self.mock
-            )
+            new_lt = _set_lt_pitch(plt, pitch, allow_repitch=True, mock=self.mock)
             assert new_lt is None, repr(new_lt)
             for leaf in plt:
-                abjad.attach(const.ALLOW_REPEAT_PITCH, leaf)
+                abjad.attach(_const.ALLOW_REPEAT_PITCH, leaf)
                 if not self.pitches_instead_of_staff_positions:
-                    abjad.attach(const.STAFF_POSITION, leaf)
+                    abjad.attach(_const.STAFF_POSITION, leaf)
         if isinstance(self.start, abjad.NamedPitch):
             start_pitch = self.start
         else:
@@ -5204,9 +5198,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
                 default=abjad.Clef("treble"),
             )
             start_pitch = self.start.to_pitch(clef)
-        new_lt = PitchCommand._set_lt_pitch(
-            plts[0], start_pitch, allow_repitch=True, mock=self.mock
-        )
+        new_lt = _set_lt_pitch(plts[0], start_pitch, allow_repitch=True, mock=self.mock)
         assert new_lt is None, repr(new_lt)
         if isinstance(self.stop, abjad.NamedPitch):
             stop_pitch = self.stop
@@ -5217,9 +5209,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
                 default=abjad.Clef("treble"),
             )
             stop_pitch = self.stop.to_pitch(clef=clef)
-        new_lt = PitchCommand._set_lt_pitch(
-            plts[-1], stop_pitch, allow_repitch=True, mock=self.mock
-        )
+        new_lt = _set_lt_pitch(plts[-1], stop_pitch, allow_repitch=True, mock=self.mock)
         assert new_lt is None, repr(new_lt)
 
     ### PUBLIC PROPERTIES ###
@@ -5254,12 +5244,9 @@ class StaffPositionInterpolationCommand(scoping.Command):
         return self._stop
 
 
-### FACTORY FUNCTIONS ###
-
-
 def bass_to_octave(
     n: int,
-    selector=_selectors.plts(exclude=const.HIDDEN),
+    selector=_selectors.plts(exclude=_const.HIDDEN),
 ) -> RegisterToOctaveCommand:
     r"""
     Octave-transposes music.
@@ -5447,7 +5434,7 @@ def bass_to_octave(
 
 def center_to_octave(
     n: int,
-    selector=_selectors.plts(exclude=const.HIDDEN),
+    selector=_selectors.plts(exclude=_const.HIDDEN),
 ) -> RegisterToOctaveCommand:
     r"""
     Octave-transposes music.
@@ -5635,7 +5622,7 @@ def center_to_octave(
 
 def clusters(
     widths: typing.List[int],
-    selector=_selectors.plts(exclude=const.HIDDEN),
+    selector=_selectors.plts(exclude=_const.HIDDEN),
     *,
     start_pitch: typing.Union[int, str, abjad.NamedPitch] = None,
 ) -> ClusterCommand:
@@ -5648,7 +5635,7 @@ def clusters(
 def color_fingerings(
     numbers: typing.List[abjad.Number],
     *tweaks: abjad.IndexedTweakManager,
-    selector=_selectors.pheads(exclude=const.HIDDEN),
+    selector=_selectors.pheads(exclude=_const.HIDDEN),
 ) -> ColorFingeringCommand:
     """
     Adds color fingerings.
@@ -5658,7 +5645,7 @@ def color_fingerings(
 
 def deviation(
     deviations: typing.List[abjad.Number],
-    selector=_selectors.plts(exclude=const.HIDDEN),
+    selector=_selectors.plts(exclude=_const.HIDDEN),
 ) -> MicrotoneDeviationCommand:
     """
     Sets microtone ``deviations``.
@@ -5668,7 +5655,7 @@ def deviation(
 
 def diatonic_clusters(
     widths: typing.List[int],
-    selector=_selectors.plts(exclude=const.HIDDEN),
+    selector=_selectors.plts(exclude=_const.HIDDEN),
 ) -> DiatonicClusterCommand:
     """
     Makes diatonic clusters with ``widths``.
@@ -5678,7 +5665,7 @@ def diatonic_clusters(
 
 def displacement(
     displacements: typing.List[int],
-    selector=_selectors.plts(exclude=const.HIDDEN),
+    selector=_selectors.plts(exclude=_const.HIDDEN),
 ) -> OctaveDisplacementCommand:
     r"""
     Octave-displaces ``selector`` output.
@@ -5819,7 +5806,7 @@ def displacement(
 
 
 def force_accidental(
-    selector=_selectors.pleaf(0, exclude=const.HIDDEN),
+    selector=_selectors.pleaf(0, exclude=_const.HIDDEN),
 ) -> AccidentalAdjustmentCommand:
     r"""
     Forces accidental.
@@ -5844,7 +5831,7 @@ def force_accidental(
         ...     baca.pitches('E4 F4'),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5920,7 +5907,7 @@ def force_accidental(
 def interpolate_pitches(
     start: typing.Union[int, str, abjad.NamedPitch],
     stop: typing.Union[int, str, abjad.NamedPitch],
-    selector=_selectors.plts(exclude=const.HIDDEN),
+    selector=_selectors.plts(exclude=_const.HIDDEN),
     *,
     mock: bool = None,
 ) -> StaffPositionInterpolationCommand:
@@ -6085,7 +6072,7 @@ def interpolate_pitches(
 def interpolate_staff_positions(
     start: typing.Union[int, abjad.StaffPosition],
     stop: typing.Union[int, abjad.StaffPosition],
-    selector=_selectors.plts(exclude=const.HIDDEN),
+    selector=_selectors.plts(exclude=_const.HIDDEN),
     *,
     mock: bool = None,
 ) -> StaffPositionInterpolationCommand:
@@ -6110,7 +6097,7 @@ def levine_multiphonic(n: int) -> abjad.Markup:
 def loop(
     items: typing.Sequence,
     intervals: typing.Sequence,
-    selector=_selectors.plts(exclude=const.HIDDEN),
+    selector=_selectors.plts(exclude=_const.HIDDEN),
 ) -> PitchCommand:
     """
     Loops ``items`` at ``intervals``.
@@ -6121,7 +6108,7 @@ def loop(
 
 def natural_clusters(
     widths: typing.Sequence[int],
-    selector=_selectors.plts(exclude=const.HIDDEN),
+    selector=_selectors.plts(exclude=_const.HIDDEN),
     *,
     start_pitch: typing.Union[int, str, abjad.NamedPitch] = None,
 ) -> ClusterCommand:
@@ -6138,7 +6125,7 @@ def natural_clusters(
 
 def pitch(
     pitch,
-    selector=lambda _: _selection.Selection(_).plts(exclude=const.HIDDEN),
+    selector=lambda _: _selection.Selection(_).plts(exclude=_const.HIDDEN),
     *,
     allow_out_of_range: bool = None,
     allow_repitch: bool = None,
@@ -6170,7 +6157,7 @@ def pitch(
         ...     baca.pitch("<C4 D4 E4>"),
         ... )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -6267,7 +6254,7 @@ def pitch(
 
 def pitches(
     pitches,
-    selector=lambda _: _selection.Selection(_).plts(exclude=const.HIDDEN),
+    selector=lambda _: _selection.Selection(_).plts(exclude=_const.HIDDEN),
     *,
     allow_octaves: bool = None,
     allow_repeats: bool = None,
@@ -6313,7 +6300,7 @@ def register(
     start: int,
     stop: int = None,
     *,
-    selector=lambda _: _selection.Selection(_).plts(exclude=const.HIDDEN),
+    selector=lambda _: _selection.Selection(_).plts(exclude=_const.HIDDEN),
 ) -> typing.Union[RegisterCommand, RegisterInterpolationCommand]:
     r"""
     Octave-transposes ``selector`` output.
@@ -6618,7 +6605,7 @@ def register(
     """
     if stop is None:
         return RegisterCommand(
-            registration=pitchclasses.Registration([("[A0, C8]", start)]),
+            registration=_pitchclasses.Registration([("[A0, C8]", start)]),
             selector=selector,
         )
     return RegisterInterpolationCommand(
@@ -6628,7 +6615,7 @@ def register(
 
 def soprano_to_octave(
     n: int,
-    selector=lambda _: _selection.Selection(_).plts(exclude=const.HIDDEN),
+    selector=lambda _: _selection.Selection(_).plts(exclude=_const.HIDDEN),
 ) -> RegisterToOctaveCommand:
     r"""
     Octave-transposes music.
@@ -6814,7 +6801,7 @@ def soprano_to_octave(
 
 def staff_position(
     argument: typing.Union[int, list, abjad.StaffPosition],
-    selector=lambda _: _selection.Selection(_).plts(exclude=const.HIDDEN),
+    selector=lambda _: _selection.Selection(_).plts(exclude=_const.HIDDEN),
     *,
     allow_out_of_range: bool = None,
     allow_repitch: bool = None,
@@ -6840,7 +6827,7 @@ def staff_position(
 
 def staff_positions(
     numbers,
-    selector=lambda _: _selection.Selection(_).plts(exclude=const.HIDDEN),
+    selector=lambda _: _selection.Selection(_).plts(exclude=_const.HIDDEN),
     *,
     allow_out_of_range: bool = None,
     allow_repeats: bool = None,

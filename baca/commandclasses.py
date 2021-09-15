@@ -282,7 +282,7 @@ class BCPCommand(scoping.Command):
             ...     baca.text_spanner_staff_padding(2.5),
             ...     )
 
-            >>> lilypond_file = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment="docs")
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -518,7 +518,7 @@ class BCPCommand(scoping.Command):
             ...     baca.script_staff_padding(5),
             ...     )
 
-            >>> lilypond_file = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(environment="docs")
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             Style LilyPond ``Script`` grob with overrides (instead of tweaks).
@@ -815,7 +815,7 @@ class ContainerCommand(scoping.Command):
         ...     baca.pitches('E4 F4'),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(environment="docs")
 
         >>> score = lilypond_file["Score"]
         >>> string = abjad.lilypond(score)
