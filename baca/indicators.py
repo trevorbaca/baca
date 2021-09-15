@@ -1122,20 +1122,6 @@ class SpacingSection:
 
     ### PUBLIC PROPERTIES ###
 
-    #    @property
-    #    def context(self):
-    #        """
-    #        Gets class constant ``'Score'``.
-    #
-    #        ..  container:: example
-    #
-    #            >>> baca.SpacingSection((2, 24)).context
-    #            'Score'
-    #
-    #        Returns ``'Score'``.
-    #        """
-    #        return self._context
-
     @property
     def duration(self):
         """
@@ -1149,20 +1135,6 @@ class SpacingSection:
         Returns nonreduced fraction or none.
         """
         return self._duration
-
-    #    @property
-    #    def persistent(self):
-    #        """
-    #        Is true.
-    #
-    #        ..  container:: example
-    #
-    #            >>> baca.SpacingSection((2, 24)).persistent
-    #            True
-    #
-    #        Class constant.
-    #        """
-    #        return self._persistent
 
     ### PUBLIC METHODS ###
 

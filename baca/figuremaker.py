@@ -1871,6 +1871,46 @@ class Coat:
         return self._argument
 
 
+def _matches_pitch(pitched_leaf, pitch_object):
+    if isinstance(pitch_object, Coat):
+        pitch_object = pitch_object.argument
+    if pitch_object is None:
+        return False
+    if isinstance(pitched_leaf, abjad.Note):
+        written_pitches = [pitched_leaf.written_pitch]
+    elif isinstance(pitched_leaf, abjad.Chord):
+        written_pitches = pitched_leaf.written_pitches
+    else:
+        raise TypeError(pitched_leaf)
+    if isinstance(pitch_object, (int, float)):
+        source = [_.number for _ in written_pitches]
+    elif isinstance(pitch_object, abjad.NamedPitch):
+        source = written_pitches
+    elif isinstance(pitch_object, abjad.NumberedPitch):
+        source = [abjad.NumberedPitch(_) for _ in written_pitches]
+    elif isinstance(pitch_object, abjad.NamedPitchClass):
+        source = [abjad.NamedPitchClass(_) for _ in written_pitches]
+    elif isinstance(pitch_object, abjad.NumberedPitchClass):
+        source = [abjad.NumberedPitchClass(_) for _ in written_pitches]
+    else:
+        raise TypeError(f"unknown pitch object: {pitch_object!r}.")
+    if not type(source[0]) is type(pitch_object):
+        raise TypeError(f"{source!r} type must match {pitch_object!r}.")
+    return pitch_object in source
+
+
+def _trim_matching_chord(logical_tie, pitch_object):
+    if isinstance(logical_tie.head, abjad.Note):
+        return
+    assert isinstance(logical_tie.head, abjad.Chord), repr(logical_tie)
+    if isinstance(pitch_object, abjad.PitchClass):
+        raise NotImplementedError(logical_tie, pitch_object)
+    for chord in logical_tie:
+        duration = chord.written_duration
+        note = abjad.Note(pitch_object, duration)
+        abjad.mutate.replace(chord, [note])
+
+
 class Imbrication:
     """
     Imbrication.
@@ -1972,7 +2012,7 @@ class Imbrication:
                     abjad.mutate.replace(leaf, [skip])
             elif isinstance(logical_tie.head, abjad.Skip):
                 pass
-            elif self._matches_pitch(logical_tie.head, pitch_number):
+            elif _matches_pitch(logical_tie.head, pitch_number):
                 if isinstance(pitch_number, Coat):
                     for leaf in logical_tie:
                         duration = leaf.written_duration
@@ -1980,7 +2020,7 @@ class Imbrication:
                         abjad.mutate.replace(leaf, [skip])
                     pitch_number = cursor.next()
                     continue
-                self._trim_matching_chord(logical_tie, pitch_number)
+                _trim_matching_chord(logical_tie, pitch_number)
                 pitch_number = cursor.next()
                 if self.truncate_ties:
                     head = logical_tie.head
@@ -2045,46 +2085,6 @@ class Imbrication:
         if nested_selections is not None:
             return nested_selections
         return selections
-
-    @staticmethod
-    def _matches_pitch(pitched_leaf, pitch_object):
-        if isinstance(pitch_object, Coat):
-            pitch_object = pitch_object.argument
-        if pitch_object is None:
-            return False
-        if isinstance(pitched_leaf, abjad.Note):
-            written_pitches = [pitched_leaf.written_pitch]
-        elif isinstance(pitched_leaf, abjad.Chord):
-            written_pitches = pitched_leaf.written_pitches
-        else:
-            raise TypeError(pitched_leaf)
-        if isinstance(pitch_object, (int, float)):
-            source = [_.number for _ in written_pitches]
-        elif isinstance(pitch_object, abjad.NamedPitch):
-            source = written_pitches
-        elif isinstance(pitch_object, abjad.NumberedPitch):
-            source = [abjad.NumberedPitch(_) for _ in written_pitches]
-        elif isinstance(pitch_object, abjad.NamedPitchClass):
-            source = [abjad.NamedPitchClass(_) for _ in written_pitches]
-        elif isinstance(pitch_object, abjad.NumberedPitchClass):
-            source = [abjad.NumberedPitchClass(_) for _ in written_pitches]
-        else:
-            raise TypeError(f"unknown pitch object: {pitch_object!r}.")
-        if not type(source[0]) is type(pitch_object):
-            raise TypeError(f"{source!r} type must match {pitch_object!r}.")
-        return pitch_object in source
-
-    @staticmethod
-    def _trim_matching_chord(logical_tie, pitch_object):
-        if isinstance(logical_tie.head, abjad.Note):
-            return
-        assert isinstance(logical_tie.head, abjad.Chord), repr(logical_tie)
-        if isinstance(pitch_object, abjad.PitchClass):
-            raise NotImplementedError(logical_tie, pitch_object)
-        for chord in logical_tie:
-            duration = chord.written_duration
-            note = abjad.Note(pitch_object, duration)
-            abjad.mutate.replace(chord, [note])
 
     ### PUBLIC PROPERTIES ###
 
@@ -3197,7 +3197,18 @@ class Accumulator:
         Calls music-accumulator.
         """
         voice_name = self._abbreviation(voice_name)
-        self._check_collections(collections)
+        prototype = (
+            list,
+            str,
+            abjad.Segment,
+            abjad.Sequence,
+            abjad.Set,
+            pitchclasses.CollectionList,
+        )
+        if not isinstance(collections, prototype):
+            message = "collections must be coerceable:\n"
+            message += f"   {abjad.storage(collections)}"
+            raise Exception(collections)
         commands_ = list(commands)
         for command in commands_:
             if isinstance(command, Imbrication):
@@ -3305,21 +3316,6 @@ class Accumulator:
         ):
             self.time_signatures.append(contribution.time_signature)
 
-    @staticmethod
-    def _check_collections(collections):
-        prototype = (
-            list,
-            str,
-            abjad.Segment,
-            abjad.Sequence,
-            abjad.Set,
-            pitchclasses.CollectionList,
-        )
-        if not isinstance(collections, prototype):
-            message = "collections must be coerceable:\n"
-            message += f"   {abjad.storage(collections)}"
-            raise Exception(collections)
-
     def _get_figure_start_offset(self, figure_name):
         for voice_name in sorted(self._floating_selections.keys()):
             for floating_selection in self._floating_selections[voice_name]:
@@ -3411,34 +3407,6 @@ class Accumulator:
         start_offset = remote_anchor_offset - local_anchor_offset
         return start_offset
 
-    @staticmethod
-    def _insert_skips(floating_selections, voice_name):
-        for floating_selection in floating_selections:
-            assert isinstance(floating_selection, abjad.AnnotatedTimespan)
-        floating_selections = list(floating_selections)
-        floating_selections.sort()
-        try:
-            first_start_offset = floating_selections[0].start_offset
-        except Exception:
-            raise Exception(floating_selections, voice_name)
-        timespans = abjad.TimespanList(floating_selections)
-        gaps = ~timespans
-        if 0 < first_start_offset:
-            first_gap = abjad.Timespan(0, first_start_offset)
-            gaps.append(first_gap)
-        selections = floating_selections + list(gaps)
-        selections.sort()
-        fused_selection = []
-        for selection in selections:
-            if isinstance(selection, abjad.AnnotatedTimespan):
-                fused_selection.extend(selection.annotation)
-            else:
-                assert isinstance(selection, abjad.Timespan)
-                skip = abjad.Skip(1, multiplier=selection.duration)
-                fused_selection.append(skip)
-        fused_selection = abjad.select(fused_selection)
-        return fused_selection
-
     def _label_figure_name_(self, container, figure_name):
         figure_index = self._figure_index
         original_figure_name = figure_name
@@ -3502,7 +3470,31 @@ class Accumulator:
         floating_selections = self._floating_selections[voice_name]
         if not floating_selections:
             return None
-        selection = self._insert_skips(floating_selections, voice_name)
+        for floating_selection in floating_selections:
+            assert isinstance(floating_selection, abjad.AnnotatedTimespan)
+        floating_selections = list(floating_selections)
+        floating_selections.sort()
+        try:
+            first_start_offset = floating_selections[0].start_offset
+        except Exception:
+            raise Exception(floating_selections, voice_name)
+        timespans = abjad.TimespanList(floating_selections)
+        gaps = ~timespans
+        if 0 < first_start_offset:
+            first_gap = abjad.Timespan(0, first_start_offset)
+            gaps.append(first_gap)
+        selections = floating_selections + list(gaps)
+        selections.sort()
+        fused_selection = []
+        for selection in selections:
+            if isinstance(selection, abjad.AnnotatedTimespan):
+                fused_selection.extend(selection.annotation)
+            else:
+                assert isinstance(selection, abjad.Timespan)
+                skip = abjad.Skip(1, multiplier=selection.duration)
+                fused_selection.append(skip)
+        fused_selection = abjad.select(fused_selection)
+        selection = fused_selection
         assert isinstance(selection, abjad.Selection), repr(selection)
         return selection
 
@@ -3729,9 +3721,8 @@ class Nest:
         lmr: LMR = None,
     ) -> None:
         assert isinstance(treatments, (list, tuple))
-        is_treatment = FigureMaker._is_treatment
         for treatment in treatments:
-            assert is_treatment(treatment), repr(treatment)
+            assert _is_treatment(treatment), repr(treatment)
         self._treatments = treatments
         if lmr is not None:
             assert isinstance(lmr, LMR), repr(lmr)
@@ -3852,7 +3843,28 @@ class Nest:
             if treatment is None:
                 tuplets.extend(tuplet_selection)
             else:
-                nested_tuplet = self._make_nested_tuplet(tuplet_selection, treatment)
+                assert isinstance(tuplet_selection, abjad.Selection)
+                for tuplet in tuplet_selection:
+                    assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
+                if isinstance(treatment, str):
+                    addendum = abjad.Duration(treatment)
+                    contents_duration = abjad.get.duration(tuplet_selection)
+                    target_duration = contents_duration + addendum
+                    multiplier = target_duration / contents_duration
+                    tuplet = abjad.Tuplet(multiplier, [])
+                    abjad.mutate.wrap(tuplet_selection, tuplet)
+                elif treatment.__class__ is abjad.Multiplier:
+                    tuplet = abjad.Tuplet(treatment, [])
+                    abjad.mutate.wrap(tuplet_selection, tuplet)
+                elif treatment.__class__ is abjad.Duration:
+                    target_duration = treatment
+                    contents_duration = abjad.get.duration(tuplet_selection)
+                    multiplier = target_duration / contents_duration
+                    tuplet = abjad.Tuplet(multiplier, [])
+                    abjad.mutate.wrap(tuplet_selection, tuplet)
+                else:
+                    raise Exception(f"bad time treatment: {treatment!r}.")
+                nested_tuplet = tuplet
                 tuplets.append(nested_tuplet)
         selection = abjad.select(tuplets)
         return selection
@@ -3885,31 +3897,6 @@ class Nest:
     def _get_treatments(self):
         if self.treatments:
             return abjad.CyclicTuple(self.treatments)
-
-    @staticmethod
-    def _make_nested_tuplet(tuplet_selection, treatment):
-        assert isinstance(tuplet_selection, abjad.Selection)
-        for tuplet in tuplet_selection:
-            assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
-        if isinstance(treatment, str):
-            addendum = abjad.Duration(treatment)
-            contents_duration = abjad.get.duration(tuplet_selection)
-            target_duration = contents_duration + addendum
-            multiplier = target_duration / contents_duration
-            tuplet = abjad.Tuplet(multiplier, [])
-            abjad.mutate.wrap(tuplet_selection, tuplet)
-        elif treatment.__class__ is abjad.Multiplier:
-            tuplet = abjad.Tuplet(treatment, [])
-            abjad.mutate.wrap(tuplet_selection, tuplet)
-        elif treatment.__class__ is abjad.Duration:
-            target_duration = treatment
-            contents_duration = abjad.get.duration(tuplet_selection)
-            multiplier = target_duration / contents_duration
-            tuplet = abjad.Tuplet(multiplier, [])
-            abjad.mutate.wrap(tuplet_selection, tuplet)
-        else:
-            raise Exception(f"bad time treatment: {treatment!r}.")
-        return tuplet
 
     ### PUBLIC PROPERTIES ###
 
@@ -4370,6 +4357,106 @@ class RestAffix:
         return self._suffix
 
 
+def _add_rest_affixes(
+    leaves,
+    talea,
+    rest_prefix,
+    rest_suffix,
+    affix_skips_instead_of_rests,
+    increase_monotonic,
+):
+    if rest_prefix:
+        durations = [(_, talea.denominator) for _ in rest_prefix]
+        maker = abjad.LeafMaker(
+            increase_monotonic=increase_monotonic,
+            skips_instead_of_rests=affix_skips_instead_of_rests,
+        )
+        leaves_ = maker([None], durations)
+        leaves[0:0] = leaves_
+    if rest_suffix:
+        durations = [(_, talea.denominator) for _ in rest_suffix]
+        maker = abjad.LeafMaker(
+            increase_monotonic=increase_monotonic,
+            skips_instead_of_rests=affix_skips_instead_of_rests,
+        )
+        leaves_ = maker([None], durations)
+        leaves.extend(leaves_)
+    return leaves
+
+
+def _coerce_collections(collections) -> pitchclasses.CollectionList:
+    prototype = (abjad.Segment, abjad.Set)
+    if isinstance(collections, prototype):
+        return pitchclasses.CollectionList(collections=[collections])
+    item_class: typing.Type = abjad.NumberedPitch
+    for collection in collections:
+        for item in collection:
+            if isinstance(item, str):
+                item_class = abjad.NamedPitch
+                break
+    return pitchclasses.CollectionList(collections=collections, item_class=item_class)
+
+
+def _fix_rounding_error(durations, total_duration):
+    current_duration = sum(durations)
+    if current_duration < total_duration:
+        missing_duration = total_duration - current_duration
+        if durations[0] < durations[-1]:
+            durations[-1] += missing_duration
+        else:
+            durations[0] += missing_duration
+    elif sum(durations) == total_duration:
+        return durations
+    elif total_duration < current_duration:
+        extra_duration = current_duration - total_duration
+        if durations[0] < durations[-1]:
+            durations[-1] -= extra_duration
+        else:
+            durations[0] -= extra_duration
+    assert sum(durations) == total_duration
+    return durations
+
+
+def _is_treatment(argument):
+    if argument is None:
+        return True
+    elif isinstance(argument, int):
+        return True
+    elif isinstance(argument, str):
+        return True
+    elif isinstance(argument, tuple) and len(argument) == 2:
+        return True
+    elif isinstance(argument, abjad.Ratio):
+        return True
+    elif isinstance(argument, abjad.Multiplier):
+        return True
+    elif argument.__class__ is abjad.Duration:
+        return True
+    elif argument in ("accel", "rit"):
+        return True
+    return False
+
+
+def _make_tuplet_with_extra_count(leaf_selection, extra_count, denominator):
+    contents_duration = abjad.get.duration(leaf_selection)
+    contents_duration = contents_duration.with_denominator(denominator)
+    contents_count = contents_duration.numerator
+    if 0 < extra_count:
+        extra_count %= contents_count
+    elif extra_count < 0:
+        extra_count = abs(extra_count)
+        extra_count %= math.ceil(contents_count / 2.0)
+        extra_count *= -1
+    new_contents_count = contents_count + extra_count
+    tuplet_multiplier = abjad.Multiplier(new_contents_count, contents_count)
+    if not tuplet_multiplier.normalized():
+        message = f"{leaf_selection!r} gives {tuplet_multiplier}"
+        message += " with {contents_count} and {new_contents_count}."
+        raise Exception(message)
+    tuplet = abjad.Tuplet(tuplet_multiplier, leaf_selection)
+    return tuplet
+
+
 class FigureMaker:
     """
     figure-maker.
@@ -4548,7 +4635,7 @@ class FigureMaker:
                 >>
 
         """
-        collections = self._coerce_collections(collections)
+        collections = _coerce_collections(collections)
         self._state = state or abjad.OrderedDict()
         self._apply_state(state=state)
         tuplets: typing.List[abjad.Tuplet] = []
@@ -4598,33 +4685,6 @@ class FigureMaker:
 
     ### PRIVATE METHODS ###
 
-    @staticmethod
-    def _add_rest_affixes(
-        leaves,
-        talea,
-        rest_prefix,
-        rest_suffix,
-        affix_skips_instead_of_rests,
-        increase_monotonic,
-    ):
-        if rest_prefix:
-            durations = [(_, talea.denominator) for _ in rest_prefix]
-            maker = abjad.LeafMaker(
-                increase_monotonic=increase_monotonic,
-                skips_instead_of_rests=affix_skips_instead_of_rests,
-            )
-            leaves_ = maker([None], durations)
-            leaves[0:0] = leaves_
-        if rest_suffix:
-            durations = [(_, talea.denominator) for _ in rest_suffix]
-            maker = abjad.LeafMaker(
-                increase_monotonic=increase_monotonic,
-                skips_instead_of_rests=affix_skips_instead_of_rests,
-            )
-            leaves_ = maker([None], durations)
-            leaves.extend(leaves_)
-        return leaves
-
     def _apply_state(self, state=None):
         for name in self._state_variables:
             value = setattr(self, name, 0)
@@ -4636,43 +4696,8 @@ class FigureMaker:
 
     def _check_treatments(self, treatments):
         for treatment in treatments:
-            if not self._is_treatment(treatment):
+            if not _is_treatment(treatment):
                 raise Exception(f"bad time treatment: {treatment!r}.")
-
-    @staticmethod
-    def _coerce_collections(collections) -> pitchclasses.CollectionList:
-        prototype = (abjad.Segment, abjad.Set)
-        if isinstance(collections, prototype):
-            return pitchclasses.CollectionList(collections=[collections])
-        item_class: typing.Type = abjad.NumberedPitch
-        for collection in collections:
-            for item in collection:
-                if isinstance(item, str):
-                    item_class = abjad.NamedPitch
-                    break
-        return pitchclasses.CollectionList(
-            collections=collections, item_class=item_class
-        )
-
-    @staticmethod
-    def _fix_rounding_error(durations, total_duration):
-        current_duration = sum(durations)
-        if current_duration < total_duration:
-            missing_duration = total_duration - current_duration
-            if durations[0] < durations[-1]:
-                durations[-1] += missing_duration
-            else:
-                durations[0] += missing_duration
-        elif sum(durations) == total_duration:
-            return durations
-        elif total_duration < current_duration:
-            extra_duration = current_duration - total_duration
-            if durations[0] < durations[-1]:
-                durations[-1] -= extra_duration
-            else:
-                durations[0] -= extra_duration
-        assert sum(durations) == total_duration
-        return durations
 
     def _get_acciaccatura_specifier(self, collection_index, total_collections):
         if not self.acciaccatura:
@@ -4695,26 +4720,6 @@ class FigureMaker:
         if not self.treatments:
             return abjad.CyclicTuple([0])
         return abjad.CyclicTuple(self.treatments)
-
-    @staticmethod
-    def _is_treatment(argument):
-        if argument is None:
-            return True
-        elif isinstance(argument, int):
-            return True
-        elif isinstance(argument, str):
-            return True
-        elif isinstance(argument, tuple) and len(argument) == 2:
-            return True
-        elif isinstance(argument, abjad.Ratio):
-            return True
-        elif isinstance(argument, abjad.Multiplier):
-            return True
-        elif argument.__class__ is abjad.Duration:
-            return True
-        elif argument in ("accel", "rit"):
-            return True
-        return False
 
     @classmethod
     def _make_accelerando(class_, leaf_selection, accelerando_indicator):
@@ -4811,7 +4816,7 @@ class FigureMaker:
         start_offsets_.append(float(total_duration))
         durations_ = abjad.math.difference_series(start_offsets_)
         durations_ = rhythm_maker_class._round_durations(durations_, 2 ** 10)
-        durations_ = class_._fix_rounding_error(durations_, total_duration)
+        durations_ = _fix_rounding_error(durations_, total_duration)
         multipliers = []
         assert len(durations) == len(durations_)
         for duration_, duration in zip(durations_, durations):
@@ -4933,7 +4938,7 @@ class FigureMaker:
                 leaves_ = maker([None], [duration])
                 leaves.extend(leaves_)
                 count = self._next_attack
-        leaves = self._add_rest_affixes(
+        leaves = _add_rest_affixes(
             leaves,
             talea,
             rest_prefix,
@@ -4943,7 +4948,7 @@ class FigureMaker:
         )
         leaf_selection = abjad.select(leaves)
         if isinstance(treatment, int):
-            tuplet = self._make_tuplet_with_extra_count(
+            tuplet = _make_tuplet_with_extra_count(
                 leaf_selection, treatment, talea.denominator
             )
         elif treatment in ("accel", "rit"):
@@ -4987,35 +4992,6 @@ class FigureMaker:
             tuplet.hide = True
         assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
         return tuplet
-
-    @staticmethod
-    def _make_tuplet_with_extra_count(leaf_selection, extra_count, denominator):
-        contents_duration = abjad.get.duration(leaf_selection)
-        contents_duration = contents_duration.with_denominator(denominator)
-        contents_count = contents_duration.numerator
-        if 0 < extra_count:
-            extra_count %= contents_count
-        elif extra_count < 0:
-            extra_count = abs(extra_count)
-            extra_count %= math.ceil(contents_count / 2.0)
-            extra_count *= -1
-        new_contents_count = contents_count + extra_count
-        tuplet_multiplier = abjad.Multiplier(new_contents_count, contents_count)
-        if not tuplet_multiplier.normalized():
-            message = f"{leaf_selection!r} gives {tuplet_multiplier}"
-            message += " with {contents_count} and {new_contents_count}."
-            raise Exception(message)
-        tuplet = abjad.Tuplet(tuplet_multiplier, leaf_selection)
-        return tuplet
-
-    @staticmethod
-    def _normalize_multiplier(multiplier):
-        assert 0 < multiplier, repr(multiplier)
-        while multiplier <= abjad.Multiplier(1, 2):
-            multiplier *= 2
-        while abjad.Multiplier(2) <= multiplier:
-            multiplier /= 2
-        return multiplier
 
     ### PUBLIC PROPERTIES ###
 

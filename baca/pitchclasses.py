@@ -80,7 +80,6 @@ class ArpeggiationSpacingSpecifier:
         pattern = self.pattern or abjad.index_all()
         collections_ = []
         total_length = len(collections)
-        class_ = ChordalSpacingSpecifier
         direction = self.direction or abjad.Up
         for i in range(total_length):
             if pattern.matches_index(i, total_length):
@@ -90,11 +89,9 @@ class ArpeggiationSpacingSpecifier:
                 else:
                     pitch_classes = list(pitch_class_collection)
                 if direction == abjad.Up:
-                    pitches = class_._to_tightly_spaced_pitches_ascending(pitch_classes)
+                    pitches = _to_tightly_spaced_pitches_ascending(pitch_classes)
                 else:
-                    pitches = class_._to_tightly_spaced_pitches_descending(
-                        pitch_classes
-                    )
+                    pitches = _to_tightly_spaced_pitches_descending(pitch_classes)
                 collection_: CollectionTyping
                 if isinstance(pitch_class_collection, abjad.Set):
                     collection_ = PitchSet(items=pitches)
@@ -241,6 +238,45 @@ class ArpeggiationSpacingSpecifier:
         Gets pattern.
         """
         return self._pattern
+
+
+def _to_tightly_spaced_pitches_ascending(pitch_classes):
+    pitches = []
+    pitch_class = pitch_classes[0]
+    pitch = abjad.NumberedPitch((pitch_class, 4))
+    pitches.append(pitch)
+    for pitch_class in pitch_classes[1:]:
+        candidate_octave = pitches[-1].octave.number
+        candidate = abjad.NumberedPitch((pitch_class, candidate_octave))
+        if pitches[-1] <= candidate:
+            pitches.append(candidate)
+        else:
+            octave = candidate_octave + 1
+            pitch = abjad.NumberedPitch((pitch_class, octave))
+            assert pitches[-1] <= pitch
+            pitches.append(pitch)
+    return pitches
+
+
+def _to_tightly_spaced_pitches_descending(pitch_classes):
+    pitches = []
+    pitch_class = pitch_classes[0]
+    pitch = abjad.NumberedPitch((pitch_class, 4))
+    pitches.append(pitch)
+    for pitch_class in pitch_classes[1:]:
+        candidate_octave = pitches[-1].octave.number
+        candidate = abjad.NumberedPitch((pitch_class, candidate_octave))
+        if candidate <= pitches[-1]:
+            pitches.append(candidate)
+        else:
+            octave = candidate_octave - 1
+            pitch = abjad.NumberedPitch((pitch_class, octave))
+            assert pitch <= pitches[-1]
+            pitches.append(pitch)
+    collection = PitchSegment(pitches)
+    while collection[-1].octave.number < 4:
+        collection = collection.transpose(n=12)
+    return collection
 
 
 class ChordalSpacingSpecifier:
@@ -462,7 +498,7 @@ class ChordalSpacingSpecifier:
             pitch_classes.extend(inner)
             if soprano:
                 pitch_classes.append(soprano)
-            pitches = self._to_tightly_spaced_pitches_ascending(pitch_classes)
+            pitches = _to_tightly_spaced_pitches_ascending(pitch_classes)
         else:
             if soprano is not None:
                 pitch_classes.append(soprano)
@@ -476,50 +512,11 @@ class ChordalSpacingSpecifier:
             pitch_classes.extend(inner)
             if bass:
                 pitch_classes.append(bass)
-            pitches = self._to_tightly_spaced_pitches_descending(pitch_classes)
+            pitches = _to_tightly_spaced_pitches_descending(pitch_classes)
         if isinstance(original_collection, abjad.Set):
             return PitchSet(pitches)
         else:
             return PitchSegment(pitches)
-
-    @staticmethod
-    def _to_tightly_spaced_pitches_ascending(pitch_classes):
-        pitches = []
-        pitch_class = pitch_classes[0]
-        pitch = abjad.NumberedPitch((pitch_class, 4))
-        pitches.append(pitch)
-        for pitch_class in pitch_classes[1:]:
-            candidate_octave = pitches[-1].octave.number
-            candidate = abjad.NumberedPitch((pitch_class, candidate_octave))
-            if pitches[-1] <= candidate:
-                pitches.append(candidate)
-            else:
-                octave = candidate_octave + 1
-                pitch = abjad.NumberedPitch((pitch_class, octave))
-                assert pitches[-1] <= pitch
-                pitches.append(pitch)
-        return pitches
-
-    @staticmethod
-    def _to_tightly_spaced_pitches_descending(pitch_classes):
-        pitches = []
-        pitch_class = pitch_classes[0]
-        pitch = abjad.NumberedPitch((pitch_class, 4))
-        pitches.append(pitch)
-        for pitch_class in pitch_classes[1:]:
-            candidate_octave = pitches[-1].octave.number
-            candidate = abjad.NumberedPitch((pitch_class, candidate_octave))
-            if candidate <= pitches[-1]:
-                pitches.append(candidate)
-            else:
-                octave = candidate_octave - 1
-                pitch = abjad.NumberedPitch((pitch_class, octave))
-                assert pitch <= pitches[-1]
-                pitches.append(pitch)
-        collection = PitchSegment(pitches)
-        while collection[-1].octave.number < 4:
-            collection = collection.transpose(n=12)
-        return collection
 
     ### PUBLIC PROPERTIES ###
 
@@ -757,6 +754,40 @@ class ChordalSpacingSpecifier:
 
         """
         return self._soprano
+
+
+def _to_baca_collection(collection):
+    abjad_prototype = (
+        abjad.PitchClassSegment,
+        abjad.PitchClassSet,
+        abjad.PitchSegment,
+        abjad.PitchSet,
+    )
+    assert isinstance(collection, abjad_prototype), repr(collection)
+    baca_prototype = (
+        PitchClassSegment,
+        PitchClassSet,
+        PitchSegment,
+        PitchSet,
+    )
+    if isinstance(collection, baca_prototype):
+        pass
+    elif isinstance(collection, abjad.PitchClassSegment):
+        collection = PitchClassSegment(
+            items=collection, item_class=collection.item_class
+        )
+    elif isinstance(collection, abjad.PitchClassSet):
+        collection = PitchClassSet(items=collection, item_class=collection.item_class)
+    elif isinstance(collection, abjad.PitchSegment):
+        collection = PitchSegment(items=collection, item_class=collection.item_class)
+    elif isinstance(collection, abjad.PitchSet):
+        collection = PitchSet(items=collection, item_class=collection.item_class)
+    elif isinstance(collection, abjad.PitchSet):
+        collection = PitchSet(items=collection, item_class=collection.item_class)
+    else:
+        raise TypeError(collection)
+    assert isinstance(collection, baca_prototype)
+    return collection
 
 
 class CollectionList(collections_module.abc.Sequence):
@@ -1210,7 +1241,7 @@ class CollectionList(collections_module.abc.Sequence):
             else:
                 collection_ = self._initialize_collection(item)
                 collections_.append(collection_)
-        collections_ = [self._to_baca_collection(_) for _ in collections_]
+        collections_ = [_to_baca_collection(_) for _ in collections_]
         assert all(isinstance(_, prototype) for _ in collections_)
         return collections_
 
@@ -1264,68 +1295,6 @@ class CollectionList(collections_module.abc.Sequence):
                 return PitchSegment(items=items, item_class=abjad.NumberedPitch)
             else:
                 raise TypeError(f"only string or iterable: {argument!r}.")
-
-    @staticmethod
-    def _to_baca_collection(collection):
-        abjad_prototype = (
-            abjad.PitchClassSegment,
-            abjad.PitchClassSet,
-            abjad.PitchSegment,
-            abjad.PitchSet,
-        )
-        assert isinstance(collection, abjad_prototype), repr(collection)
-        baca_prototype = (
-            PitchClassSegment,
-            PitchClassSet,
-            PitchSegment,
-            PitchSet,
-        )
-        if isinstance(collection, baca_prototype):
-            pass
-        elif isinstance(collection, abjad.PitchClassSegment):
-            collection = PitchClassSegment(
-                items=collection, item_class=collection.item_class
-            )
-        elif isinstance(collection, abjad.PitchClassSet):
-            collection = PitchClassSet(
-                items=collection, item_class=collection.item_class
-            )
-        elif isinstance(collection, abjad.PitchSegment):
-            collection = PitchSegment(
-                items=collection, item_class=collection.item_class
-            )
-        elif isinstance(collection, abjad.PitchSet):
-            collection = PitchSet(items=collection, item_class=collection.item_class)
-        elif isinstance(collection, abjad.PitchSet):
-            collection = PitchSet(items=collection, item_class=collection.item_class)
-        else:
-            raise TypeError(collection)
-        assert isinstance(collection, baca_prototype)
-        return collection
-
-    @staticmethod
-    def _to_pitch_class_item_class(item_class):
-        item_class = item_class or abjad.NumberedPitch
-        if item_class in (abjad.NamedPitchClass, abjad.NumberedPitchClass):
-            return item_class
-        elif item_class is abjad.NamedPitch:
-            return abjad.NamedPitchClass
-        elif item_class is abjad.NumberedPitch:
-            return abjad.NumberedPitchClass
-        else:
-            raise TypeError(item_class)
-
-    @staticmethod
-    def _to_pitch_item_class(item_class):
-        item_class = item_class or abjad.NumberedPitch
-        if item_class in (abjad.NamedPitch, abjad.NumberedPitch):
-            return item_class
-        elif item_class is abjad.NamedPitchClass:
-            return abjad.NamedPitch
-        elif item_class is abjad.NumberedPitchClass:
-            return abjad.NumberedPitch
-        else:
-            raise TypeError(item_class)
 
     ### PUBLIC PROPERTIES ###
 
@@ -2586,7 +2555,15 @@ class CollectionList(collections_module.abc.Sequence):
                 CollectionList([PC<c d fs f>, PC<e af g>])
 
         """
-        item_class = self._to_pitch_class_item_class(self.item_class)
+        item_class = self.item_class or abjad.NumberedPitch
+        if item_class in (abjad.NamedPitchClass, abjad.NumberedPitchClass):
+            pass
+        elif item_class is abjad.NamedPitch:
+            item_class = abjad.NamedPitchClass
+        elif item_class is abjad.NumberedPitch:
+            item_class = abjad.NumberedPitchClass
+        else:
+            raise TypeError(item_class)
         collections_ = []
         for collection in self:
             collection_ = collection.to_pitch_classes()
@@ -2646,7 +2623,15 @@ class CollectionList(collections_module.abc.Sequence):
                 CollectionList([<c' d' fs' f'>, <e' af' g'>])
 
         """
-        item_class = self._to_pitch_item_class(self.item_class)
+        item_class = self.item_class or abjad.NumberedPitch
+        if item_class in (abjad.NamedPitch, abjad.NumberedPitch):
+            pass
+        elif item_class is abjad.NamedPitchClass:
+            item_class = abjad.NamedPitch
+        elif item_class is abjad.NumberedPitchClass:
+            item_class = abjad.NumberedPitch
+        else:
+            raise TypeError(item_class)
         collections_ = []
         for collection in self:
             collection_ = collection.to_pitches()
@@ -7552,6 +7537,31 @@ class PitchTree(classes.Tree):
         return self._apply_to_leaves_and_emit_new_tree(operator)
 
 
+def _apply_operator(segment, operator):
+    assert isinstance(segment, PitchClassSegment)
+    assert isinstance(operator, str), repr(operator)
+    if operator.startswith("T"):
+        index = int(operator[1:])
+        segment = segment.transpose(index)
+    elif operator == "I":
+        segment = segment.invert()
+    elif operator.startswith("M"):
+        index = int(operator[1:])
+        segment = segment.multiply(index)
+    elif operator == "alpha":
+        segment = segment.alpha()
+    else:
+        raise Exception(f"unrecognized operator: {operator!r}.")
+    return segment
+
+
+def _check_duplicate_pitch_classes(design):
+    leaves = design.get_payload()
+    for leaf_1, leaf_2 in abjad.Sequence(leaves).nwise():
+        if leaf_1 == leaf_2:
+            raise Exception(f"duplicate {leaf_1!r}.")
+
+
 class DesignMaker:
     """
     Design-maker.
@@ -7581,7 +7591,7 @@ class DesignMaker:
         Calls design-maker.
         """
         design = PitchTree(items=self._result)
-        self._check_duplicate_pitch_classes(design)
+        _check_duplicate_pitch_classes(design)
         return design
 
     def __repr__(self):
@@ -7589,33 +7599,6 @@ class DesignMaker:
         Gets interpreter representation.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
-
-    ### PRIVATE METHODS ###
-
-    @staticmethod
-    def _apply_operator(segment, operator):
-        assert isinstance(segment, PitchClassSegment)
-        assert isinstance(operator, str), repr(operator)
-        if operator.startswith("T"):
-            index = int(operator[1:])
-            segment = segment.transpose(index)
-        elif operator == "I":
-            segment = segment.invert()
-        elif operator.startswith("M"):
-            index = int(operator[1:])
-            segment = segment.multiply(index)
-        elif operator == "alpha":
-            segment = segment.alpha()
-        else:
-            raise Exception(f"unrecognized operator: {operator!r}.")
-        return segment
-
-    @staticmethod
-    def _check_duplicate_pitch_classes(design):
-        leaves = design.get_payload()
-        for leaf_1, leaf_2 in abjad.Sequence(leaves).nwise():
-            if leaf_1 == leaf_2:
-                raise Exception(f"duplicate {leaf_1!r}.")
 
     ### PUBLIC METHODS ###
 
@@ -7632,7 +7615,7 @@ class DesignMaker:
         segment = PitchClassSegment(items=list_)
         operators = operators or []
         for operator in operators:
-            segment = self._apply_operator(segment, operator)
+            segment = _apply_operator(segment, operator)
         sequence = abjad.Sequence(segment)
         parts = sequence.partition_by_counts(counts, overhang=True)
         parts_ = [PitchClassSegment(_) for _ in parts]
@@ -7653,7 +7636,7 @@ class DesignMaker:
         segment = PitchClassSegment(items=list_)
         operators = operators or []
         for operator in operators:
-            segment = self._apply_operator(segment, operator)
+            segment = _apply_operator(segment, operator)
         sequence = abjad.Sequence(segment)
         parts = sequence.partition_by_counts(counts, cyclic=True, overhang=True)
         parts = [PitchClassSegment(_) for _ in parts]

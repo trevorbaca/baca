@@ -9,6 +9,55 @@ from . import const as _const
 from . import tags as _tags
 
 
+def assert_lilypond_identifiers(score):
+    for context in abjad.iterate(score).components(abjad.Context):
+        if not abjad.String(context.name).is_lilypond_identifier():
+            raise Exception(f"invalid LilyPond identifier: {context.name!r}")
+
+
+def assert_matching_custom_context_names(score):
+    for context in abjad.iterate(score).components(abjad.Context):
+        if context.lilypond_type in abjad.Context.lilypond_types:
+            continue
+        if context.name == context.lilypond_type:
+            continue
+        if context.name.replace("_", "") == context.lilypond_type:
+            continue
+        message = f"context {context.lilypond_type}"
+        message += f" has name {context.name!r}."
+        raise Exception(message)
+
+
+def assert_unique_context_names(score):
+    names = []
+    for context in abjad.iterate(score).components(abjad.Context):
+        if context.name in names:
+            raise Exception(f"duplicate context name: {context.name!r}.")
+
+
+def make_global_context():
+    site = "abjad.ScoreTemplate._make_global_context()"
+    tag = abjad.Tag(site)
+    global_rests = abjad.Context(
+        lilypond_type="GlobalRests",
+        name="Global_Rests",
+        tag=tag,
+    )
+    global_skips = abjad.Context(
+        lilypond_type="GlobalSkips",
+        name="Global_Skips",
+        tag=tag,
+    )
+    global_context = abjad.Context(
+        [global_rests, global_skips],
+        lilypond_type="GlobalContext",
+        simultaneous=True,
+        name="Global_Context",
+        tag=tag,
+    )
+    return global_context
+
+
 class ScoreTemplate:
     """
     Score template.
@@ -33,32 +82,6 @@ class ScoreTemplate:
 
     ### PRIVATE METHODS ###
 
-    @staticmethod
-    def _assert_lilypond_identifiers(score):
-        for context in abjad.iterate(score).components(abjad.Context):
-            if not abjad.String(context.name).is_lilypond_identifier():
-                raise Exception(f"invalid LilyPond identifier: {context.name!r}")
-
-    @staticmethod
-    def _assert_matching_custom_context_names(score):
-        for context in abjad.iterate(score).components(abjad.Context):
-            if context.lilypond_type in abjad.Context.lilypond_types:
-                continue
-            if context.name == context.lilypond_type:
-                continue
-            if context.name.replace("_", "") == context.lilypond_type:
-                continue
-            message = f"context {context.lilypond_type}"
-            message += f" has name {context.name!r}."
-            raise Exception(message)
-
-    @staticmethod
-    def _assert_unique_context_names(score):
-        names = []
-        for context in abjad.iterate(score).components(abjad.Context):
-            if context.name in names:
-                raise Exception(f"duplicate context name: {context.name!r}.")
-
     def _attach_lilypond_tag(self, tag, context):
         for tag_ in tag.split("."):
             if not abjad.String(tag_).is_lilypond_identifier():
@@ -72,33 +95,6 @@ class ScoreTemplate:
         site = "baca.ScoreTemplate._attach_liypond_tag()"
         tag = abjad.Tag(site)
         abjad.attach(literal, context, tag=tag)
-
-    @staticmethod
-    def _make_global_context():
-        site = "abjad.ScoreTemplate._make_global_context()"
-        tag = abjad.Tag(site)
-        global_rests = abjad.Context(
-            lilypond_type="GlobalRests",
-            name="Global_Rests",
-            tag=tag,
-        )
-        global_skips = abjad.Context(
-            lilypond_type="GlobalSkips",
-            name="Global_Skips",
-            tag=tag,
-        )
-        global_context = abjad.Context(
-            [global_rests, global_skips],
-            lilypond_type="GlobalContext",
-            simultaneous=True,
-            name="Global_Context",
-            tag=tag,
-        )
-        return global_context
-
-    @staticmethod
-    def _set_square_delimiter(staff_group):
-        abjad.setting(staff_group).system_start_delimiter = "#'SystemStartSquare"
 
     def _validate_voice_names(self, score):
         voice_names = []
@@ -227,7 +223,7 @@ class ScoreTemplate:
         elif 1 < len(contexts):
             name = f"{stem}_Square_Staff_Group"
             staff_group = abjad.StaffGroup(contexts, name=name, tag=tag)
-            self._set_square_delimiter(staff_group)
+            abjad.setting(staff_group).system_start_delimiter = "#'SystemStartSquare"
             result = staff_group
         return result
 
@@ -511,7 +507,7 @@ def make_empty_score(*counts):
 
     site = "baca.make_configuration_empty_score()"
     tag = abjad.Tag(site)
-    global_context = ScoreTemplate._make_global_context()
+    global_context = make_global_context()
     single_staff = len(counts) == 1
     single_voice = single_staff and counts[0] == 1
     staves, voice_number = [], 1

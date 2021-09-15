@@ -382,9 +382,9 @@ class PartAssignment:
     def __init__(self, section=None, token=None):
         self._section = section
         if token is not None:
-            assert self._is_token(token), repr(token)
+            assert _is_part_assignment_token(token), repr(token)
         self._token = token
-        members = self._expand_members(token)
+        members = _expand_members(token)
         self._members = members
         parts = self._expand_parts()
         assert isinstance(parts, list), repr(parts)
@@ -542,22 +542,6 @@ class PartAssignment:
 
     ### PRIVATE METHODS ###
 
-    @staticmethod
-    def _expand_members(token):
-        if token is None:
-            return
-        members = []
-        if isinstance(token, int):
-            members.append(token)
-        elif isinstance(token, tuple):
-            assert len(token) == 2, repr(token)
-            for member in range(token[0], token[1] + 1):
-                members.append(member)
-        else:
-            assert isinstance(token, list), repr(token)
-            members.extend(token)
-        return members
-
     def _expand_parts(self):
         parts = []
         if self.members is None:
@@ -583,26 +567,6 @@ class PartAssignment:
             storage_format_is_indented=repr_is_indented,
             storage_format_keyword_names=repr_keyword_names,
         )
-
-    @staticmethod
-    def _is_token(argument):
-        if isinstance(argument, int) and 1 <= argument:
-            return True
-        if (
-            isinstance(argument, tuple)
-            and len(argument) == 2
-            and isinstance(argument[0], int)
-            and isinstance(argument[1], int)
-        ):
-            return True
-        if isinstance(argument, list):
-            for item in argument:
-                if not isinstance(item, int):
-                    return False
-                if not 1 <= item:
-                    return False
-            return True
-        return False
 
     ### PUBLIC PROPERTIES ###
 
@@ -1464,7 +1428,20 @@ class PartManifest:
         return parts
 
 
-### FUNCTIONS ###
+def _expand_members(token):
+    if token is None:
+        return
+    members = []
+    if isinstance(token, int):
+        members.append(token)
+    elif isinstance(token, tuple):
+        assert len(token) == 2, repr(token)
+        for member in range(token[0], token[1] + 1):
+            members.append(member)
+    else:
+        assert isinstance(token, list), repr(token)
+        members.extend(token)
+    return members
 
 
 def _global_rest_identifier(segment_number):
@@ -1500,6 +1477,26 @@ def _import_score_template(contents_directory):
     library = getattr(module, "library")
     score_template = library.ScoreTemplate
     return score_template
+
+
+def _is_part_assignment_token(argument):
+    if isinstance(argument, int) and 1 <= argument:
+        return True
+    if (
+        isinstance(argument, tuple)
+        and len(argument) == 2
+        and isinstance(argument[0], int)
+        and isinstance(argument[1], int)
+    ):
+        return True
+    if isinstance(argument, list):
+        for item in argument:
+            if not isinstance(item, int):
+                return False
+            if not 1 <= item:
+                return False
+        return True
+    return False
 
 
 def _part_name_to_default_clef(path, part_name):

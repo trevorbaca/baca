@@ -195,17 +195,6 @@ class RhythmCommand(scoping.Command):
 
     ### PRIVATE METHODS ###
 
-    @staticmethod
-    def _attach_not_yet_pitched_(argument):
-        rest_prototype = (abjad.MultimeasureRest, abjad.Rest, abjad.Skip)
-        for leaf in abjad.iterate(argument).leaves():
-            if isinstance(leaf, (abjad.Note, abjad.Chord)):
-                abjad.attach(const.NOT_YET_PITCHED, leaf, tag=None)
-            elif isinstance(leaf, rest_prototype):
-                pass
-            else:
-                raise TypeError(leaf)
-
     def _check_rhythm_maker_input(self, rhythm_maker):
         if rhythm_maker is None:
             return
@@ -280,9 +269,15 @@ class RhythmCommand(scoping.Command):
             self.rhythm_maker, abjad.Selection
         ):
             container = abjad.Container(selection, name="Dummy")
-            self._attach_not_yet_pitched_(container)
+            rest_prototype = (abjad.MultimeasureRest, abjad.Rest, abjad.Skip)
+            for leaf in abjad.iterate(container).leaves():
+                if isinstance(leaf, (abjad.Note, abjad.Chord)):
+                    abjad.attach(const.NOT_YET_PITCHED, leaf, tag=None)
+                elif isinstance(leaf, rest_prototype):
+                    pass
+                else:
+                    raise TypeError(leaf)
             container[:] = []
-        # self._attach_rhythm_annotation_spanner(selection)
         return selection
 
     def _previous_segment_stop_state(self, runtime):

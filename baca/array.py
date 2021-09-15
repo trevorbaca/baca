@@ -9,7 +9,29 @@ import abjad
 
 from . import sequence as _sequence
 
-### CLASSES ###
+
+def _get_leaf_offsets(argment):
+    offsets = []
+    for leaf in abjad.iterate(argment).leaves():
+        start_offset = abjad.get.timespan(leaf).start_offset
+        if start_offset not in offsets:
+            offsets.append(start_offset)
+        stop_offset = abjad.get.timespan(leaf).stop_offset
+        if stop_offset not in offsets:
+            offsets.append(stop_offset)
+    offsets.sort()
+    return list(abjad.math.difference_series(offsets))
+
+
+def _make_multiplied_quarter_notes(durations):
+    notes = []
+    written_duration = abjad.Duration(1, 4)
+    for duration in durations:
+        multiplier = duration / written_duration
+        note = abjad.Note(0, written_duration, multiplier=multiplier)
+        notes.append(note)
+    notes = abjad.Selection(notes)
+    return notes
 
 
 class PitchArray:
@@ -261,30 +283,6 @@ class PitchArray:
 
     def _get_format_specification(self):
         return abjad.FormatSpecification(client=self)
-
-    @staticmethod
-    def _get_leaf_offsets(argment):
-        offsets = []
-        for leaf in abjad.iterate(argment).leaves():
-            start_offset = abjad.get.timespan(leaf).start_offset
-            if start_offset not in offsets:
-                offsets.append(start_offset)
-            stop_offset = abjad.get.timespan(leaf).stop_offset
-            if stop_offset not in offsets:
-                offsets.append(stop_offset)
-        offsets.sort()
-        return list(abjad.math.difference_series(offsets))
-
-    @staticmethod
-    def _make_multiplied_quarter_notes(durations):
-        notes = []
-        written_duration = abjad.Duration(1, 4)
-        for duration in durations:
-            multiplier = duration / written_duration
-            note = abjad.Note(0, written_duration, multiplier=multiplier)
-            notes.append(note)
-        notes = abjad.Selection(notes)
-        return notes
 
     ### PUBLIC PROPERTIES ###
 
@@ -710,11 +708,11 @@ class PitchArray:
 
         Returns pitch array.
         """
-        offsets = class_._get_leaf_offsets(score)
+        offsets = _get_leaf_offsets(score)
         array_width = len(offsets)
         array_depth = len(score)
         pitch_array = class_.from_counts(array_depth, array_width)
-        items = class_._make_multiplied_quarter_notes(offsets)
+        items = _make_multiplied_quarter_notes(offsets)
         for leaf_iterable, pitch_array_row in zip(score, pitch_array.rows):
             durations = []
             leaves = abjad.iterate(leaf_iterable).leaves()
