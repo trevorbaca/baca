@@ -40,8 +40,6 @@ isort-reformat:
 	--use-parentheses \
 	baca scr
 
-project = baca
-
 pytest:
 	pytest baca
 	find . \( -path '*/__pycache__/*' -o -name __pycache__ \) -delete
