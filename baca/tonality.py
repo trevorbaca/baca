@@ -2,7 +2,6 @@
 Tonality.
 """
 import re
-import typing
 
 import abjad
 
@@ -13,7 +12,7 @@ class ScaleDegree:
 
     ..  container:: example
 
-        >>> baca.tonality.ScaleDegree('#4')
+        >>> baca.tonality.ScaleDegree("#4")
         ScaleDegree('#4')
 
     """
@@ -97,13 +96,13 @@ class ScaleDegree:
 
     def __eq__(self, argument):
         """
-        Is true when ``argument`` is a scale degree with number and
-        accidental equal to those of this scale degree.
+        Is true when ``argument`` is a scale degree with number and accidental equal to
+        those of this scale degree.
 
         ..  container:: example
 
-            >>> degree_1 = baca.tonality.ScaleDegree('#4')
-            >>> degree_2 = baca.tonality.ScaleDegree('#4')
+            >>> degree_1 = baca.tonality.ScaleDegree("#4")
+            >>> degree_2 = baca.tonality.ScaleDegree("#4")
             >>> degree_3 = baca.tonality.ScaleDegree(5)
 
             >>> degree_1 == degree_1
@@ -139,7 +138,7 @@ class ScaleDegree:
         """
         return hash(self.__class__.__name__ + str(self))
 
-    def __repr__(self) -> str:
+    def __repr__(self):
         """
         Gets interpreter representation.
         """
@@ -151,7 +150,7 @@ class ScaleDegree:
 
         ..  container:: example
 
-            >>> str(baca.tonality.ScaleDegree('#4'))
+            >>> str(baca.tonality.ScaleDegree("#4"))
             '#4'
 
         Returns string.
@@ -179,7 +178,7 @@ class ScaleDegree:
         ..  container:: example
 
             >>> class_ = baca.tonality.ScaleDegree
-            >>> class_.from_accidental_and_number('sharp', 4)
+            >>> class_.from_accidental_and_number("sharp", 4)
             ScaleDegree('#4')
 
         Returns new scale degree.
@@ -197,7 +196,7 @@ class ScaleDegree:
 
         ..  container:: example
 
-            >>> baca.tonality.ScaleDegree('#4').accidental
+            >>> baca.tonality.ScaleDegree("#4").accidental
             Accidental('sharp')
 
         Returns accidental.
@@ -240,7 +239,7 @@ class ScaleDegree:
 
         ..  container:: example
 
-            >>> baca.tonality.ScaleDegree('#4').number
+            >>> baca.tonality.ScaleDegree("#4").number
             4
 
         Returns integer from 1 to 7, inclusive.
@@ -254,7 +253,7 @@ class ScaleDegree:
 
         ..  container:: example
 
-            >>> degree = baca.tonality.ScaleDegree('#4')
+            >>> degree = baca.tonality.ScaleDegree("#4")
             >>> degree.roman_numeral_string
             'IV'
 
@@ -270,13 +269,13 @@ class ScaleDegree:
 
         ..  container:: example
 
-            >>> baca.tonality.ScaleDegree('b4').string
+            >>> baca.tonality.ScaleDegree("b4").string
             'b4'
 
-            >>> baca.tonality.ScaleDegree('4').string
+            >>> baca.tonality.ScaleDegree("4").string
             '4'
 
-            >>> baca.tonality.ScaleDegree('#4').string
+            >>> baca.tonality.ScaleDegree("#4").string
             '#4'
 
         Returns string.
@@ -290,13 +289,13 @@ class ScaleDegree:
 
         ..  container:: example
 
-            >>> baca.tonality.ScaleDegree('b4').title_string
+            >>> baca.tonality.ScaleDegree("b4").title_string
             'FlatFour'
 
-            >>> baca.tonality.ScaleDegree('4').title_string
+            >>> baca.tonality.ScaleDegree("4").title_string
             'Four'
 
-            >>> baca.tonality.ScaleDegree('#4').title_string
+            >>> baca.tonality.ScaleDegree("#4").title_string
             'SharpFour'
 
         Returns string.
@@ -317,7 +316,7 @@ class Scale(abjad.PitchClassSegment):
 
         Initializes from pair:
 
-        >>> baca.tonality.Scale(('c', 'minor'))
+        >>> baca.tonality.Scale(("c", "minor"))
         Scale("c d ef f g af bf")
 
     """
@@ -405,10 +404,10 @@ class Scale(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            >>> baca.tonality.Scale(('c', 'minor')).dominant
+            >>> baca.tonality.Scale(("c", "minor")).dominant
             NamedPitchClass('g')
 
-        Return pitch-class.
+        Returns pitch-class.
         """
         return self[4]
 
@@ -419,7 +418,7 @@ class Scale(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            >>> baca.tonality.Scale(('c', 'minor')).key_signature
+            >>> baca.tonality.Scale(("c", "minor")).key_signature
             KeySignature(NamedPitchClass('c'), Mode('minor'))
 
         Returns key signature.
@@ -433,7 +432,7 @@ class Scale(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            >>> baca.tonality.Scale(('c', 'minor')).leading_tone
+            >>> baca.tonality.Scale(("c", "minor")).leading_tone
             NamedPitchClass('bf')
 
         Returns pitch-class.
@@ -447,7 +446,7 @@ class Scale(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            >>> baca.tonality.Scale(('c', 'minor')).mediant
+            >>> baca.tonality.Scale(("c", "minor")).mediant
             NamedPitchClass('ef')
 
         Returns pitch-class.
@@ -461,11 +460,11 @@ class Scale(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            >>> scale = baca.tonality.Scale(('c', 'minor'))
+            >>> scale = baca.tonality.Scale(("c", "minor"))
             >>> str(scale.named_interval_class_segment)
             '<+M2, +m2, +M2, +M2, +m2, +M2, +M2>'
 
-            >>> scale = baca.tonality.Scale(('d', 'dorian'))
+            >>> scale = baca.tonality.Scale(("d", "dorian"))
             >>> str(scale.named_interval_class_segment)
             '<+M2, +m2, +M2, +M2, +M2, +m2, +M2>'
 
@@ -487,7 +486,7 @@ class Scale(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            >>> baca.tonality.Scale(('c', 'minor')).subdominant
+            >>> baca.tonality.Scale(("c", "minor")).subdominant
             NamedPitchClass('f')
 
         Returns pitch-class.
@@ -501,7 +500,7 @@ class Scale(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            >>> baca.tonality.Scale(('c', 'minor')).submediant
+            >>> baca.tonality.Scale(("c", "minor")).submediant
             NamedPitchClass('af')
 
         Returns pitch-class.
@@ -515,7 +514,7 @@ class Scale(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            >>> baca.tonality.Scale(('c', 'minor')).superdominant
+            >>> baca.tonality.Scale(("c", "minor")).superdominant
             NamedPitchClass('d')
 
         Returns pitch-class.
@@ -529,7 +528,7 @@ class Scale(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            >>> baca.tonality.Scale(('c', 'minor')).tonic
+            >>> baca.tonality.Scale(("c", "minor")).tonic
             NamedPitchClass('c')
 
         Returns pitch-class.
@@ -576,23 +575,23 @@ class Scale(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            >>> scale = baca.tonality.Scale(('c', 'major'))
-            >>> scale.named_pitch_class_to_scale_degree('c')
+            >>> scale = baca.tonality.Scale(("c", "major"))
+            >>> scale.named_pitch_class_to_scale_degree("c")
             ScaleDegree('1')
-            >>> scale.named_pitch_class_to_scale_degree('d')
+            >>> scale.named_pitch_class_to_scale_degree("d")
             ScaleDegree('2')
-            >>> scale.named_pitch_class_to_scale_degree('e')
+            >>> scale.named_pitch_class_to_scale_degree("e")
             ScaleDegree('3')
-            >>> scale.named_pitch_class_to_scale_degree('f')
+            >>> scale.named_pitch_class_to_scale_degree("f")
             ScaleDegree('4')
-            >>> scale.named_pitch_class_to_scale_degree('g')
+            >>> scale.named_pitch_class_to_scale_degree("g")
             ScaleDegree('5')
-            >>> scale.named_pitch_class_to_scale_degree('a')
+            >>> scale.named_pitch_class_to_scale_degree("a")
             ScaleDegree('6')
-            >>> scale.named_pitch_class_to_scale_degree('b')
+            >>> scale.named_pitch_class_to_scale_degree("b")
             ScaleDegree('7')
 
-            >>> scale.named_pitch_class_to_scale_degree('df')
+            >>> scale.named_pitch_class_to_scale_degree("df")
             ScaleDegree('b2')
 
         Returns scale degree.
@@ -617,23 +616,23 @@ class Scale(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            >>> scale = baca.tonality.Scale(('c', 'major'))
-            >>> scale.scale_degree_to_named_pitch_class('1')
+            >>> scale = baca.tonality.Scale(("c", "major"))
+            >>> scale.scale_degree_to_named_pitch_class("1")
             NamedPitchClass('c')
-            >>> scale.scale_degree_to_named_pitch_class('2')
+            >>> scale.scale_degree_to_named_pitch_class("2")
             NamedPitchClass('d')
-            >>> scale.scale_degree_to_named_pitch_class('3')
+            >>> scale.scale_degree_to_named_pitch_class("3")
             NamedPitchClass('e')
-            >>> scale.scale_degree_to_named_pitch_class('4')
+            >>> scale.scale_degree_to_named_pitch_class("4")
             NamedPitchClass('f')
-            >>> scale.scale_degree_to_named_pitch_class('5')
+            >>> scale.scale_degree_to_named_pitch_class("5")
             NamedPitchClass('g')
-            >>> scale.scale_degree_to_named_pitch_class('6')
+            >>> scale.scale_degree_to_named_pitch_class("6")
             NamedPitchClass('a')
-            >>> scale.scale_degree_to_named_pitch_class('7')
+            >>> scale.scale_degree_to_named_pitch_class("7")
             NamedPitchClass('b')
 
-            >>> scale.scale_degree_to_named_pitch_class('b2')
+            >>> scale.scale_degree_to_named_pitch_class("b2")
             NamedPitchClass('df')
 
         Returns named pitch-class.
@@ -650,8 +649,8 @@ class Scale(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            >>> scale = baca.tonality.Scale(('c', 'major'))
-            >>> scale_degrees = [1, 3, 'b5', 7, '#9']
+            >>> scale = baca.tonality.Scale(("c", "major"))
+            >>> scale_degrees = [1, 3, "b5", 7, "#9"]
             >>> segment = scale.voice_scale_degrees_in_open_position(scale_degrees)
             >>> segment
             PitchSegment("c' e' gf' b' ds''")
@@ -678,14 +677,8 @@ class ChordExtent:
 
     ..  container:: example
 
-        Initializes from number:
-
         >>> baca.tonality.ChordExtent(7)
         ChordExtent(7)
-
-    ..  container:: example
-
-        Initializes from other chord extent:
 
         >>> extent = baca.tonality.ChordExtent(7)
         >>> baca.tonality.ChordExtent(extent)
@@ -715,10 +708,10 @@ class ChordExtent:
 
     ### SPECIAL METHODS ###
 
-    def __eq__(self, argument) -> bool:
+    def __eq__(self, argument):
         """
-        Is true when ``argument`` is a chord extent with number equal to that
-        of this chord extent.
+        Is true when ``argument`` is a chord extent with number equal to that of this
+        chord extent.
 
         ..  container:: example
 
@@ -750,13 +743,13 @@ class ChordExtent:
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
-    def __hash__(self) -> int:
+    def __hash__(self):
         """
         Hashes chord extent.
         """
         return hash(self.__class__.__name__ + str(self))
 
-    def __repr__(self) -> str:
+    def __repr__(self):
         """
         Gets interpreter representation.
         """
@@ -776,7 +769,7 @@ class ChordExtent:
     ### PUBLIC PROPERTIES ###
 
     @property
-    def name(self) -> str:
+    def name(self):
         """
         Gets name.
 
@@ -792,7 +785,7 @@ class ChordExtent:
         return self._extent_number_to_extent_name[self.number]
 
     @property
-    def number(self) -> int:
+    def number(self):
         """
         Gets number.
 
@@ -860,10 +853,10 @@ class ChordInversion:
 
     ### SPECIAL METHODS ###
 
-    def __eq__(self, argument) -> bool:
+    def __eq__(self, argument):
         """
-        Is true when ``argument`` is a chord inversion with number equal to
-        that of this chord inversion.
+        Is true when ``argument`` is a chord inversion with number equal to that of this
+        chord inversion.
 
         ..  container:: example
 
@@ -895,13 +888,13 @@ class ChordInversion:
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
-    def __hash__(self) -> int:
+    def __hash__(self):
         """
         Hashes chord inversion.
         """
         return hash(self.__class__.__name__ + str(self))
 
-    def __repr__(self) -> str:
+    def __repr__(self):
         """
         Gets interpreter representation.
         """
@@ -920,7 +913,7 @@ class ChordInversion:
 
     ### PUBLIC METHODS ###
 
-    def extent_to_figured_bass_string(self, extent) -> str:
+    def extent_to_figured_bass_string(self, extent):
         """
         Changes ``extent`` to figured bass string.
 
@@ -959,7 +952,7 @@ class ChordInversion:
     ### PUBLIC PROPERTIES ###
 
     @property
-    def name(self) -> str:
+    def name(self):
         """
         Gets name.
 
@@ -978,7 +971,7 @@ class ChordInversion:
         return self._inversion_number_to_inversion_name[self.number]
 
     @property
-    def number(self) -> int:
+    def number(self):
         """
         Number of chord inversion.
 
@@ -997,7 +990,7 @@ class ChordInversion:
         return self._number
 
     @property
-    def title(self) -> str:
+    def title(self):
         """
         Title of chord inversion.
 
@@ -1025,14 +1018,8 @@ class ChordQuality:
 
     ..  container:: example
 
-        Initializes from string:
-
         >>> baca.tonality.ChordQuality("major")
         ChordQuality('major')
-
-    ..  container:: example
-
-        Initializes from other chord quality:
 
         >>> quality = baca.tonality.ChordQuality("major")
         >>> baca.tonality.ChordQuality(quality)
@@ -1065,10 +1052,10 @@ class ChordQuality:
 
     ### SPECIAL METHODS ###
 
-    def __eq__(self, argument) -> bool:
+    def __eq__(self, argument):
         """
-        Is true when ``argument`` is a chord quality with quality string
-        equal to that of this chord quality.
+        Is true when ``argument`` is a chord quality with quality string equal to that of
+        this chord quality.
 
         ..  container:: example
 
@@ -1100,26 +1087,25 @@ class ChordQuality:
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
-    def __hash__(self) -> int:
+    def __hash__(self):
         """
         Hashes chord quality.
         """
         return hash(self.__class__.__name__ + str(self))
 
-    def __repr__(self) -> str:
+    def __repr__(self):
         """
         Gets interpreter representation.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
-    def __str__(self) -> str:
+    def __str__(self):
         """
         Gets string representation of chord quality.
 
         ..  container:: example
 
-            >>> quality = baca.tonality.ChordQuality("major")
-            >>> str(quality)
+            >>> str(baca.tonality.ChordQuality("major"))
             'major'
 
         """
@@ -1139,7 +1125,7 @@ class ChordQuality:
     ### PUBLIC PROPERTIES ###
 
     @property
-    def is_uppercase(self) -> bool:
+    def is_uppercase(self):
         """
         Is true when chord quality is uppercase.
 
@@ -1155,7 +1141,7 @@ class ChordQuality:
         return self.quality_string in self._uppercase_quality_strings
 
     @property
-    def quality_string(self) -> str:
+    def quality_string(self):
         """
         Gets quality string.
 
@@ -1177,21 +1163,15 @@ class ChordSuspension:
 
     ..  container:: example
 
-        Initializes from numbers:
-
         >>> baca.tonality.ChordSuspension("4-b3")
         ChordSuspension('4-b3')
-
-    ..  container:: example
-
-        Initializes from other suspension:
 
         >>> suspension = baca.tonality.ChordSuspension("4-3")
         >>> baca.tonality.ChordSuspension(suspension)
         ChordSuspension('4-3')
 
-    9-8, 7-6, 4-3, 2-1 and other types of suspension typical of, for example,
-    the Bach chorales.
+    9-8, 7-6, 4-3, 2-1 and other types of suspension typical of, for example, the Bach
+    chorales.
     """
 
     ### CLASS VARIABLES ###
@@ -1211,10 +1191,10 @@ class ChordSuspension:
 
     ### SPECIAL METHODS ###
 
-    def __eq__(self, argument) -> bool:
+    def __eq__(self, argument):
         """
-        Is true when ``argument`` is a chord suspension when start and stop
-        equal to those of this chord suspension.
+        Is true when ``argument`` is a chord suspension when start and stop equal to
+        those of this chord suspension.
 
         ..  container:: example
 
@@ -1249,19 +1229,19 @@ class ChordSuspension:
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
-    def __hash__(self) -> int:
+    def __hash__(self):
         """
         Hashes chord suspension.
         """
         return hash(self.__class__.__name__ + str(self))
 
-    def __repr__(self) -> str:
+    def __repr__(self):
         """
         Gets interpreter representation.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
-    def __str__(self) -> str:
+    def __str__(self):
         """
         Gets string representation of chord suspension.
         """
@@ -1307,7 +1287,7 @@ class ChordSuspension:
     ### PUBLIC PROPERTIES ###
 
     @property
-    def chord_name(self) -> str:
+    def chord_name(self):
         """
         Gets chord name.
 
@@ -1323,7 +1303,7 @@ class ChordSuspension:
         return f"sus{self.start!s}"
 
     @property
-    def figured_bass_pair(self) -> typing.Tuple[str, str]:
+    def figured_bass_pair(self):
         """
         Gets figured bass pair.
 
@@ -1339,7 +1319,7 @@ class ChordSuspension:
         return str(self.start), str(self.stop)
 
     @property
-    def figured_bass_string(self) -> str:
+    def figured_bass_string(self):
         """
         Gets figured bass string.
 
@@ -1355,10 +1335,11 @@ class ChordSuspension:
         return f"{self.start!s}-{self.stop!s}"
 
     @property
-    def start(self) -> ScaleDegree:
+    def start(self):
         """
         Gets start.
 
+        ..  container:: example
 
             >>> baca.tonality.ChordSuspension("4-b3").start
             ScaleDegree('4')
@@ -1370,7 +1351,7 @@ class ChordSuspension:
         return self._start
 
     @property
-    def stop(self) -> ScaleDegree:
+    def stop(self):
         """
         Gets stop.
 
@@ -1386,7 +1367,7 @@ class ChordSuspension:
         return self._stop
 
     @property
-    def title_string(self) -> str:
+    def title_string(self):
         """
         Gets title string.
 
@@ -1415,14 +1396,10 @@ class RootlessChordClass(abjad.IntervalSegment):
         >>> baca.tonality.RootlessChordClass("major")
         MajorTriadInRootPosition('P1', '+M3', '+P5')
 
-    ..  container:: example
-
         Dominant seventh in root position:
 
         >>> baca.tonality.RootlessChordClass("dominant", 7)
         DominantSeventhInRootPosition('P1', '+M3', '+P5', '+m7')
-
-    ..  container:: example
 
         German augmented sixth in root position:
 
@@ -1432,6 +1409,25 @@ class RootlessChordClass(abjad.IntervalSegment):
     """
 
     ### CLASS VARIABLES ###
+
+    _augmented_sixth_quality_to_intervals = {
+        "French": ["M3", "M2", "M3"],
+        "German": ["M3", "m3", "aug2"],
+        "Italian": ["M3", "P1", "aug4"],
+        "Swiss": ["M3", "aug2", "m3"],
+    }
+
+    _inversion_string_to_rotation = {
+        "root": 0,
+        "first": -1,
+        "second": -2,
+        "third": -3,
+        "fourth": -4,
+    }
+
+    _ninth_quality_to_intervals = {
+        "dominant": ["M3", "P5", "m7", "M9"],
+    }
 
     _segment_to_quality_and_extent = {
         "<+m3, +m3>": ("diminished", 5),
@@ -1450,23 +1446,44 @@ class RootlessChordClass(abjad.IntervalSegment):
         "<+M3, +m3, +m3, +M3>": ("dominant", 9),
     }
 
+    _seventh_quality_to_intervals = {
+        "dominant": ["M3", "P5", "m7"],
+        "major": ["M3", "P5", "M7"],
+        "minor": ["m3", "P5", "m7"],
+        "diminished": ["m3", "dim5", "dim7"],
+        "fully diminished": ["m3", "dim5", "dim7"],
+        "half diminished": ["m3", "P5", "dim7"],
+    }
+
+    _triad_quality_to_intervals = {
+        "major": ["M3", "P5"],
+        "minor": ["m3", "P5"],
+        "diminished": ["m3", "dim5"],
+        "augmented": ["M3", "aug5"],
+    }
+
     __slots__ = ("_quality_string", "_rotation")
 
     ### INITIALIZER ###
 
     def __init__(self, quality_string="major", extent="triad", inversion="root"):
         if extent in ("triad", 5):
-            intervals = self._initialize_triad(quality_string)
+            intervals = self._triad_quality_to_intervals[quality_string]
         elif extent in ("seventh", 7):
-            intervals = self._initialize_seventh(quality_string)
+            intervals = self._seventh_quality_to_intervals[quality_string]
         elif extent in ("ninth", 9):
-            intervals = self._initialize_ninth(quality_string)
+            intervals = self._ninth_quality_to_intervals[quality_string]
         elif extent in ("augmented sixth", 6):
-            intervals = self._initialize_augmented_sixth(quality_string)
+            intervals = self._augmented_sixth_quality_to_intervals[quality_string]
         else:
-            message = "unknown chord quality arguments."
-            raise ValueError(message)
-        intervals, rotation = self._invert_chord_quality(intervals, inversion)
+            raise ValueError("unknown chord quality arguments.")
+        intervals = [abjad.NamedInterval(_) for _ in intervals]
+        intervals.insert(0, "P1")
+        if isinstance(inversion, int):
+            rotation = -inversion
+        else:
+            rotation = RootlessChordClass._inversion_string_to_rotation[inversion]
+        intervals = abjad.Sequence(intervals).rotate(n=rotation)
         abjad.IntervalSegment.__init__(
             self, items=intervals, item_class=abjad.NamedInterval
         )
@@ -1475,147 +1492,22 @@ class RootlessChordClass(abjad.IntervalSegment):
 
     ### SPECIAL METHODS ###
 
-    def __repr__(self) -> str:
+    def __repr__(self):
         """
         Gets interpreter representation of rootless chord-class.
         """
         parts = []
         if self.item_class.__name__.startswith("Named"):
-            parts = [repr(str(x)) for x in self]
+            parts = [repr(str(_)) for _ in self]
         else:
-            parts = [str(x) for x in self]
+            parts = [str(_) for _ in self]
         string = ", ".join(parts)
         return f"{self._title_case_name}({string})"
-
-    ### PRIVATE METHODS ###
-
-    @staticmethod
-    def _initialize_augmented_sixth(quality_string):
-        if quality_string == "French":
-            intervals = [
-                abjad.NamedInterval("M3"),
-                abjad.NamedInterval("M2"),
-                abjad.NamedInterval("M3"),
-            ]
-        elif quality_string == "German":
-            intervals = [
-                abjad.NamedInterval("M3"),
-                abjad.NamedInterval("m3"),
-                abjad.NamedInterval("aug2"),
-            ]
-        elif quality_string == "Italian":
-            intervals = [
-                abjad.NamedInterval("M3"),
-                abjad.NamedInterval("P1"),
-                abjad.NamedInterval("aug4"),
-            ]
-        elif quality_string == "Swiss":
-            intervals = [
-                abjad.NamedInterval("M3"),
-                abjad.NamedInterval("aug2"),
-                abjad.NamedInterval("m3"),
-            ]
-        else:
-            message = "unaccpetable quality string."
-            raise ValueError(message)
-        intervals.insert(0, abjad.NamedInterval("P1"))
-        return intervals
-
-    @staticmethod
-    def _initialize_ninth(quality_string):
-        if quality_string == "dominant":
-            intervals = [
-                abjad.NamedInterval("M3"),
-                abjad.NamedInterval("P5"),
-                abjad.NamedInterval("m7"),
-                abjad.NamedInterval("M9"),
-            ]
-        else:
-            message = "unacceptable quality string."
-            raise ValueError(message)
-        intervals.insert(0, abjad.NamedInterval("P1"))
-        return intervals
-
-    @staticmethod
-    def _initialize_seventh(quality_string):
-        if quality_string == "dominant":
-            intervals = [
-                abjad.NamedInterval("M3"),
-                abjad.NamedInterval("P5"),
-                abjad.NamedInterval("m7"),
-            ]
-        elif quality_string == "major":
-            intervals = [
-                abjad.NamedInterval("M3"),
-                abjad.NamedInterval("P5"),
-                abjad.NamedInterval("M7"),
-            ]
-        elif quality_string == "minor":
-            intervals = [
-                abjad.NamedInterval("m3"),
-                abjad.NamedInterval("P5"),
-                abjad.NamedInterval("m7"),
-            ]
-        elif quality_string in ("diminished", "fully diminished"):
-            intervals = [
-                abjad.NamedInterval("m3"),
-                abjad.NamedInterval("dim5"),
-                abjad.NamedInterval("dim7"),
-            ]
-        elif quality_string == "half diminished":
-            intervals = [
-                abjad.NamedInterval("m3"),
-                abjad.NamedInterval("P5"),
-                abjad.NamedInterval("dim7"),
-            ]
-        else:
-            message = "unacceptable quality string."
-            raise ValueError(message)
-        intervals.insert(0, abjad.NamedInterval("P1"))
-        return intervals
-
-    @staticmethod
-    def _initialize_triad(quality_string):
-        if quality_string == "major":
-            intervals = [abjad.NamedInterval("M3"), abjad.NamedInterval("P5")]
-        elif quality_string == "minor":
-            intervals = [abjad.NamedInterval("m3"), abjad.NamedInterval("P5")]
-        elif quality_string == "diminished":
-            intervals = [abjad.NamedInterval("m3"), abjad.NamedInterval("dim5")]
-        elif quality_string == "augmented":
-            intervals = [abjad.NamedInterval("M3"), abjad.NamedInterval("aug5")]
-        else:
-            raise ValueError(f"unacceptable quality string: {quality_string!r}.")
-        intervals.insert(0, abjad.NamedInterval("P1"))
-        return intervals
-
-    @staticmethod
-    def _invert_chord_quality(intervals, inversion):
-        if isinstance(inversion, int):
-            intervals = abjad.Sequence(intervals).rotate(n=-inversion)
-            rotation = -inversion
-        elif inversion == "root":
-            rotation = 0
-        elif inversion == "first":
-            intervals = abjad.Sequence(intervals).rotate(n=-1)
-            rotation = -1
-        elif inversion == "second":
-            intervals = abjad.Sequence(intervals).rotate(n=-2)
-            rotation = -2
-        elif inversion == "third":
-            intervals = abjad.Sequence(intervals).rotate(n=-3)
-            rotation = -3
-        elif inversion == "fourth":
-            intervals = abjad.Sequence(intervals).rotate(n=-4)
-            rotation = -4
-        else:
-            raise ValueError(f"unknown chord inversion: {inversion!r}.")
-        return intervals, rotation
 
     ### PUBLIC METHODS ###
 
     @staticmethod
-    def from_interval_class_segment(segment) -> "RootlessChordClass":
+    def from_interval_class_segment(segment):
         """
         Makes new rootless chord-class from ``segment``.
 
@@ -1650,9 +1542,8 @@ class RootlessChordClass(abjad.IntervalSegment):
             MajorTriadInRootPosition('P1', '+M3', '+P5')
 
         """
-        quality, extent = RootlessChordClass._segment_to_quality_and_extent[
-            str(segment)
-        ]
+        dictionary = RootlessChordClass._segment_to_quality_and_extent
+        quality, extent = dictionary[str(segment)]
         return RootlessChordClass(quality, extent=extent)
 
     ### PRIVATE PROPERTIES ###
@@ -1684,7 +1575,7 @@ class RootlessChordClass(abjad.IntervalSegment):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def cardinality(self) -> int:
+    def cardinality(self):
         """
         Gets cardinality.
 
@@ -1697,7 +1588,7 @@ class RootlessChordClass(abjad.IntervalSegment):
         return len(self)
 
     @property
-    def extent(self) -> int:
+    def extent(self):
         """
         Gets extent.
 
@@ -1707,10 +1598,10 @@ class RootlessChordClass(abjad.IntervalSegment):
             7
 
         """
-        return RootedChordClass.cardinality_to_extent(self.cardinality)
+        return RootedChordClass._cardinality_to_extent[self.cardinality]
 
     @property
-    def extent_name(self) -> str:
+    def extent_name(self):
         """
         Gets extent name.
 
@@ -1722,10 +1613,10 @@ class RootlessChordClass(abjad.IntervalSegment):
         """
         if self._quality_string.lower() in self._acceptable_augmented_sixth_qualities:
             return "augmented sixth"
-        return RootedChordClass.extent_to_extent_name(self.extent)
+        return RootedChordClass._extent_to_extent_name[self.extent]
 
     @property
-    def inversion(self) -> int:
+    def inversion(self):
         """
         Gets inversion.
 
@@ -1738,7 +1629,7 @@ class RootlessChordClass(abjad.IntervalSegment):
         return abs(self.rotation)
 
     @property
-    def position(self) -> str:
+    def position(self):
         """
         Gets position.
 
@@ -1762,7 +1653,7 @@ class RootlessChordClass(abjad.IntervalSegment):
             raise ValueError(f"unknown chord position: {self!r}.")
 
     @property
-    def quality_string(self) -> str:
+    def quality_string(self):
         """
         Gets quality string.
 
@@ -1775,7 +1666,7 @@ class RootlessChordClass(abjad.IntervalSegment):
         return self._quality_string
 
     @property
-    def rotation(self) -> int:
+    def rotation(self):
         """
         Gets rotation.
 
@@ -1794,20 +1685,14 @@ class RootedChordClass(abjad.PitchClassSet):
 
     ..  container:: example
 
-        Initializes from pair:
-
         >>> baca.tonality.RootedChordClass("g", "major")
         GMajorTriadInRootPosition
-
-    ..  container:: example
-
-        Initializes from triple:
 
         >>> baca.tonality.RootedChordClass("g", "dominant", 7)
         GDominantSeventhInRootPosition
 
-    G dominant seventh represents a class of chords because there are many
-    different spacings of a G dominant seventh.
+    G dominant seventh represents a class of chords because there are many different
+    spacings of a G dominant seventh.
     """
 
     ### CLASS VARIABLES ###
@@ -1849,20 +1734,20 @@ class RootedChordClass(abjad.PitchClassSet):
 
     ### SPECIAL METHODS ###
 
-    def __eq__(self, argument) -> bool:
+    def __eq__(self, argument):
         """
-        Is true when ``argument`` is a rooted chord-class with root, chord
-        quality and inversion equal to those of this rooted chord-class.
+        Is true when ``argument`` is a rooted chord-class with root, chord quality and
+        inversion equal to those of this rooted chord-class.
         """
         return super(RootedChordClass, self).__eq__(argument)
 
-    def __hash__(self) -> int:
+    def __hash__(self):
         """
         Hashes rooted chord-class.
         """
         return super().__hash__()
 
-    def __repr__(self) -> str:
+    def __repr__(self):
         """
         Gets interpreter representation of rooted chord-class.
         """
@@ -1870,9 +1755,8 @@ class RootedChordClass(abjad.PitchClassSet):
         quality = self.chord_quality._title_case_name
         return root + quality
 
-    ### PRIVATE PROPERTIES ###
+    ### PRIVATE METHODS ###
 
-    @property
     def _markup_root(self):
         if self.chord_quality._quality_string in ("major", "augmented", "dominant"):
             root = str(self.root).upper()
@@ -1888,7 +1772,6 @@ class RootedChordClass(abjad.PitchClassSet):
                 raise ValueError(f"unknown note name: {root}")
         return root
 
-    @property
     def _markup_symbol(self):
         circle = r"\draw-circle #0.35 #0 ##f"
         if self.chord_quality._quality_string == "augmented":
@@ -1909,7 +1792,7 @@ class RootedChordClass(abjad.PitchClassSet):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def bass(self) -> abjad.NamedPitchClass:
+    def bass(self):
         """
         Gets bass.
 
@@ -1922,7 +1805,7 @@ class RootedChordClass(abjad.PitchClassSet):
         return self._bass
 
     @property
-    def cardinality(self) -> int:
+    def cardinality(self):
         """
         Gets cardinality.
 
@@ -1935,7 +1818,7 @@ class RootedChordClass(abjad.PitchClassSet):
         return len(self)
 
     @property
-    def chord_quality(self) -> RootlessChordClass:
+    def chord_quality(self):
         """
         Gets chord quality.
 
@@ -1948,7 +1831,7 @@ class RootedChordClass(abjad.PitchClassSet):
         return self._chord_quality
 
     @property
-    def extent(self) -> ChordExtent:
+    def extent(self):
         """
         Gets extent.
 
@@ -1958,11 +1841,11 @@ class RootedChordClass(abjad.PitchClassSet):
             ChordExtent(7)
 
         """
-        extent = self.cardinality_to_extent(self.cardinality)
+        extent = self._cardinality_to_extent[self.cardinality]
         return ChordExtent(extent)
 
     @property
-    def figured_bass(self) -> str:
+    def figured_bass(self):
         """
         Gets figured bass.
 
@@ -2003,7 +1886,7 @@ class RootedChordClass(abjad.PitchClassSet):
         raise Exception
 
     @property
-    def inversion(self) -> int:
+    def inversion(self):
         """
         Gets inversion.
 
@@ -2016,64 +1899,7 @@ class RootedChordClass(abjad.PitchClassSet):
         return self._chord_quality.inversion
 
     @property
-    def markup(self) -> abjad.Markup:
-        r"""
-        Markup of rooted chord-class.
-
-        ..  container:: example
-
-            >>> chord_class = baca.tonality.RootedChordClass("g", "dominant", 7)
-            >>> markup = chord_class.markup
-            >>> markup = abjad.new(markup, direction=None)
-            >>> lilypond_file = abjad.LilyPondFile()
-            >>> lilypond_file.items.append(markup)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> string = abjad.lilypond(markup)
-                >>> print(string)
-                \markup {
-                    \fontsize
-                        #1
-                        G
-                    \hspace
-                        #-0.5
-                    \raise
-                        #1
-                        \fontsize
-                            #-3
-                            \override
-                                #'(baseline-skip . 1.5)
-                                \column
-                                    {
-                                        7
-                                    }
-                    }
-
-        """
-        markups = [self._markup_root, self._markup_symbol, self.figured_bass]
-        markup = "".join(markups)
-        markup = rf"\fontsize #1 {self._markup_root} \hspace #-0.5"
-        symbol = self._markup_symbol
-        if symbol:
-            markup += rf" \hspace #0.5 \raise #1 \fontsize #-3 {symbol}"
-            if "circle" in symbol:
-                if "sharp" in self._markup_root:
-                    markup += r" \hspace #0"
-                else:
-                    markup += r" \hspace #-1.2"
-        inversion = self.figured_bass
-        if inversion:
-            inv = r" \raise #1 \fontsize #-3 \override #'(baseline-skip . 1.5)"
-            string = " ".join(inversion.split("/"))
-            inv += rf" \column {{ {string} }}"
-            markup += inv
-            markup = rf"\markup {{ {markup} }}"
-        return abjad.Markup(markup, direction=abjad.Down, literal=True)
-
-    @property
-    def quality_pair(self) -> typing.Tuple[str, str]:
+    def quality_pair(self):
         """
         Gets quality pair.
 
@@ -2102,7 +1928,7 @@ class RootedChordClass(abjad.PitchClassSet):
         return chord_quality.quality_string, chord_quality.extent_name
 
     @property
-    def root(self) -> abjad.NamedPitchClass:
+    def root(self):
         """
         Gets root.
 
@@ -2130,27 +1956,21 @@ class RootedChordClass(abjad.PitchClassSet):
         return self._root
 
     @property
-    def root_string(self) -> str:
+    def root_string(self):
         """
         Gets root string.
 
         ..  container:: example
 
             >>> chord_class = baca.tonality.RootedChordClass(
-            ...     "c",
-            ...     "major",
-            ...     "triad",
-            ...     "root",
-            ...     )
+            ...     "c", "major", "triad", "root"
+            ... )
             >>> chord_class.root_string
             'C'
 
             >>> chord_class = baca.tonality.RootedChordClass(
-            ...     "g",
-            ...     "dominant",
-            ...     7,
-            ...     "second",
-            ...     )
+            ...     "g", "dominant", 7, "second"
+            ... )
             >>> chord_class.root_string
             'G'
 
@@ -2166,68 +1986,61 @@ class RootedChordClass(abjad.PitchClassSet):
 
     ### PUBLIC METHODS ###
 
-    @staticmethod
-    def cardinality_to_extent(cardinality) -> int:
-        """
-        Change ``cardinality`` to extent.
+    def markup(self):
+        r"""
+        Gets markup of rooted chord-class.
 
         ..  container:: example
 
-            >>> baca.tonality.RootedChordClass.cardinality_to_extent(3)
-            5
-            >>> baca.tonality.RootedChordClass.cardinality_to_extent(4)
-            7
-            >>> baca.tonality.RootedChordClass.cardinality_to_extent(5)
-            9
-            >>> baca.tonality.RootedChordClass.cardinality_to_extent(6)
-            11
-            >>> baca.tonality.RootedChordClass.cardinality_to_extent(7)
-            13
+            >>> chord_class = baca.tonality.RootedChordClass("g", "dominant", 7)
+            >>> markup = chord_class.markup()
+            >>> markup = abjad.new(markup, direction=None)
+            >>> lilypond_file = abjad.LilyPondFile()
+            >>> lilypond_file.items.append(markup)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> string = abjad.lilypond(markup)
+                >>> print(string)
+                \markup {
+                    \fontsize
+                        #1
+                        G
+                    \hspace
+                        #-0.5
+                    \raise
+                        #1
+                        \fontsize
+                            #-3
+                            \override
+                                #'(baseline-skip . 1.5)
+                                \column
+                                    {
+                                        7
+                                    }
+                    }
 
         """
-        return RootedChordClass._cardinality_to_extent[cardinality]
-
-    @staticmethod
-    def extent_to_cardinality(extent) -> int:
-        """
-        Changes ``extent`` to cardinality.
-
-        ..  container:: example
-
-            >>> baca.tonality.RootedChordClass.extent_to_cardinality(5)
-            3
-            >>> baca.tonality.RootedChordClass.extent_to_cardinality(7)
-            4
-            >>> baca.tonality.RootedChordClass.extent_to_cardinality(9)
-            5
-            >>> baca.tonality.RootedChordClass.extent_to_cardinality(11)
-            6
-            >>> baca.tonality.RootedChordClass.extent_to_cardinality(13)
-            7
-
-        """
-        return RootedChordClass._extent_to_cardinality[extent]
-
-    @staticmethod
-    def extent_to_extent_name(extent) -> str:
-        """
-        Changes ``extent`` to extent name.
-
-        ..  container:: example
-
-            >>> baca.tonality.RootedChordClass.extent_to_extent_name(5)
-            'triad'
-            >>> baca.tonality.RootedChordClass.extent_to_extent_name(7)
-            'seventh'
-            >>> baca.tonality.RootedChordClass.extent_to_extent_name(9)
-            'ninth'
-            >>> baca.tonality.RootedChordClass.extent_to_extent_name(11)
-            'eleventh'
-            >>> baca.tonality.RootedChordClass.extent_to_extent_name(13)
-            'thirteenth'
-
-        """
-        return RootedChordClass._extent_to_extent_name[extent]
+        markups = [self._markup_root(), self._markup_symbol(), self.figured_bass]
+        markup = "".join(markups)
+        markup = rf"\fontsize #1 {self._markup_root()} \hspace #-0.5"
+        symbol = self._markup_symbol()
+        if symbol:
+            markup += rf" \hspace #0.5 \raise #1 \fontsize #-3 {symbol}"
+            if "circle" in symbol:
+                if "sharp" in self._markup_root():
+                    markup += r" \hspace #0"
+                else:
+                    markup += r" \hspace #-1.2"
+        inversion = self.figured_bass
+        if inversion:
+            inv = r" \raise #1 \fontsize #-3 \override #'(baseline-skip . 1.5)"
+            string = " ".join(inversion.split("/"))
+            inv += rf" \column {{ {string} }}"
+            markup += inv
+            markup = rf"\markup {{ {markup} }}"
+        return abjad.Markup(markup, direction=abjad.Down, literal=True)
 
 
 class RomanNumeral:
@@ -2235,8 +2048,6 @@ class RomanNumeral:
     Roman numeral.
 
     ..  container:: example
-
-        Initializes from string:
 
         >>> baca.tonality.RomanNumeral("bII6/4")
         RomanNumeral('bII6/4')
@@ -2309,17 +2120,16 @@ class RomanNumeral:
 
     ### SPECIAL METHODS ###
 
-    def __eq__(self, argument) -> bool:
+    def __eq__(self, argument):
         """
-        Is true when ``argument`` is a Roman numeral with scale degree,
-        quality, extent, inversion and suspension equal to those of this Roman
-        numeral.
+        Is true when ``argument`` is a Roman numeral with scale degree, quality, extent,
+        inversion and suspension equal to those of this Roman numeral.
 
         ..  container:: example
 
-            >>> roman_numeral_1 = baca.tonality.RomanNumeral('I')
-            >>> roman_numeral_2 = baca.tonality.RomanNumeral('I')
-            >>> roman_numeral_3 = baca.tonality.RomanNumeral('V7')
+            >>> roman_numeral_1 = baca.tonality.RomanNumeral("I")
+            >>> roman_numeral_2 = baca.tonality.RomanNumeral("I")
+            >>> roman_numeral_3 = baca.tonality.RomanNumeral("V7")
 
             >>> roman_numeral_1 == roman_numeral_1
             True
@@ -2346,13 +2156,13 @@ class RomanNumeral:
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
-    def __hash__(self) -> int:
+    def __hash__(self):
         """
         Hashes Roman numeral.
         """
         return hash(self.__class__.__name__ + str(self))
 
-    def __repr__(self) -> str:
+    def __repr__(self):
         """
         Gets interpreter representation.
         """
@@ -2445,7 +2255,7 @@ class RomanNumeral:
     ### PUBLIC PROPERTIES ###
 
     @property
-    def bass_scale_degree(self) -> ScaleDegree:
+    def bass_scale_degree(self):
         """
         Gets bass scale degree.
 
@@ -2467,7 +2277,7 @@ class RomanNumeral:
         return bass_scale_degree
 
     @property
-    def extent(self) -> ChordExtent:
+    def extent(self):
         """
         Gets extent.
 
@@ -2480,7 +2290,7 @@ class RomanNumeral:
         return self._extent
 
     @property
-    def figured_bass_string(self) -> str:
+    def figured_bass_string(self):
         """
         Gets figured bass string.
 
@@ -2506,7 +2316,7 @@ class RomanNumeral:
         return figured_bass_string
 
     @property
-    def inversion(self) -> ChordInversion:
+    def inversion(self):
         """
         Gets inversion.
 
@@ -2519,7 +2329,7 @@ class RomanNumeral:
         return self._inversion
 
     @property
-    def markup(self) -> abjad.Markup:
+    def markup(self):
         r"""
         Gets markup.
 
@@ -2534,7 +2344,7 @@ class RomanNumeral:
         return abjad.Markup(symbol, direction=abjad.Down)
 
     @property
-    def quality(self) -> ChordQuality:
+    def quality(self):
         """
         Gets quality.
 
@@ -2547,7 +2357,7 @@ class RomanNumeral:
         return self._quality
 
     @property
-    def root_scale_degree(self) -> ScaleDegree:
+    def root_scale_degree(self):
         """
         Gets root scale degree.
 
@@ -2563,7 +2373,7 @@ class RomanNumeral:
         return self._root_scale_degree
 
     @property
-    def suspension(self) -> typing.Optional[ChordSuspension]:
+    def suspension(self):
         """
         Gets suspension.
 
@@ -2579,7 +2389,7 @@ class RomanNumeral:
         return self._suspension
 
     @property
-    def symbol(self) -> str:
+    def symbol(self):
         """
         Gets symbolc of Roman numeral.
 
@@ -2604,7 +2414,7 @@ class RomanNumeral:
     @staticmethod
     def from_scale_degree_quality_extent_and_inversion(
         scale_degree, quality, extent, inversion
-    ) -> "RomanNumeral":
+    ):
         """
         Makes Roman numeral from ``scale_degree``, ``quality``, ``extent`` and
         ``inversion``.
@@ -2619,9 +2429,6 @@ class RomanNumeral:
         roman_numeral._extent = extent
         roman_numeral._inversion = inversion
         return roman_numeral
-
-
-### PRIVATE FUNCTIONS ###
 
 
 def _analyze_chord(argument):
@@ -2667,7 +2474,6 @@ def _analyze_incomplete_chord(argument):
     dicv = abjad.IntervalClassVector(
         items=npcset, item_class=abjad.NamedInversionEquivalentIntervalClass
     )
-    # TODO: eliminate code duplication #
     if dicv == _make_dicv("c", "ef"):
         model_npcs = ["c", "ef"]
         quality, extent = "minor", "triad"
@@ -2780,10 +2586,7 @@ def _make_dicv(*named_pitch_classes):
     )
 
 
-### PUBLIC FUNCTIONS ###
-
-
-def analyze_chords(selection) -> typing.Optional[typing.List[RootedChordClass]]:
+def analyze_chords(selection):
     r"""
     Analyzes chords in selection.
 
@@ -2793,7 +2596,7 @@ def analyze_chords(selection) -> typing.Optional[typing.List[RootedChordClass]]:
         ...     abjad.Chord([0, 4, 7], (1, 4)),
         ...     abjad.Chord([4, 7, 12], (1, 4)),
         ...     abjad.Chord([7, 12, 16], (1, 4)),
-        ...     ]
+        ... ]
         >>> staff = abjad.Staff(chords)
         >>> abjad.show(staff) # doctest: +SKIP
 
@@ -2817,13 +2620,13 @@ def analyze_chords(selection) -> typing.Optional[typing.List[RootedChordClass]]:
 
     ..  container:: example
 
-        The three inversions of an a minor triad:
+        The three inversions of a minor triad:
 
         >>> chords = [
         ...     abjad.Chord([9, 12, 16], (1, 4)),
         ...     abjad.Chord([12, 16, 21], (1, 4)),
         ...     abjad.Chord([16, 21, 24], (1, 4)),
-        ...     ]
+        ... ]
         >>> staff = abjad.Staff(chords)
         >>> abjad.show(staff) # doctest: +SKIP
 
@@ -2854,7 +2657,7 @@ def analyze_chords(selection) -> typing.Optional[typing.List[RootedChordClass]]:
         ...     abjad.Chord([4, 7, 10, 12], (1, 4)),
         ...     abjad.Chord([7, 10, 12, 16], (1, 4)),
         ...     abjad.Chord([10, 12, 16, 19], (1, 4)),
-        ...     ]
+        ... ]
         >>> staff = abjad.Staff(chords)
         >>> abjad.show(staff) # doctest: +SKIP
 
@@ -2888,7 +2691,7 @@ def analyze_chords(selection) -> typing.Optional[typing.List[RootedChordClass]]:
         ...     abjad.Chord([7, 10, 12, 14, 16], (1, 4)),
         ...     abjad.Chord([10, 12, 14, 16, 19], (1, 4)),
         ...     abjad.Chord([2, 10, 12, 16, 19], (1, 4)),
-        ...     ]
+        ... ]
         >>> staff = abjad.Staff(chords)
         >>> abjad.show(staff) # doctest: +SKIP
 
@@ -2922,9 +2725,7 @@ def analyze_chords(selection) -> typing.Optional[typing.List[RootedChordClass]]:
     return result
 
 
-def analyze_incomplete_chords(
-    selection,
-) -> typing.Optional[typing.List[RootedChordClass]]:
+def analyze_incomplete_chords(selection):
     """
     Analyzes incomplete chords.
 
@@ -2954,11 +2755,9 @@ def analyze_incomplete_chords(
     return result
 
 
-def analyze_incomplete_tonal_functions(
-    selection, key_signature
-) -> typing.Optional[typing.List[RomanNumeral]]:
+def analyze_incomplete_tonal_functions(selection, key_signature):
     """
-    Analyzes incomplete tonal functions of chords in client according to
+    Analyzes incomplete tonal functions of chords in ``selection`` according to
     ``key_signature``.
 
     ..  container:: example
@@ -2994,9 +2793,9 @@ def analyze_incomplete_tonal_functions(
     return result
 
 
-def analyze_neighbor_notes(selection) -> typing.List[bool]:
+def analyze_neighbor_notes(selection):
     r"""
-    Is true when ``note`` in client is preceeded by a stepwise interval in one
+    Is true when note in ``selection`` is preceeded by a stepwise interval in one
     direction and followed by a stepwise interval in the other direction.
 
     ..  container:: example
@@ -3027,9 +2826,9 @@ def analyze_neighbor_notes(selection) -> typing.List[bool]:
     return result
 
 
-def analyze_passing_tones(selection) -> typing.List[bool]:
+def analyze_passing_tones(selection):
     r"""
-    Is true when note in client is both preceeded and followed by scalewise notes.
+    Is true when note in ``selection`` is both preceeded and followed by scalewise notes.
 
     ..  container:: example
 
@@ -3059,68 +2858,68 @@ def analyze_passing_tones(selection) -> typing.List[bool]:
     return result
 
 
-def analyze_tonal_functions(selection, key_signature) -> typing.List[RomanNumeral]:
+def analyze_tonal_functions(selection, key_signature):
     """
-    Analyzes tonal function of chords in client according to ``key_signature``.
+    Analyzes tonal function of chords in ``selection`` according to ``key_signature``.
 
     ..  container:: example
 
-        >>> chord = abjad.Chord('<ef g bf>4')
-        >>> key_signature = abjad.KeySignature('c', 'major')
+        >>> chord = abjad.Chord("<ef g bf>4")
+        >>> key_signature = abjad.KeySignature("c", "major")
         >>> baca.tonality.analyze_tonal_functions([chord], key_signature)
         [RomanNumeral('bIII')]
 
-        >>> key_signature = abjad.KeySignature('c', 'major')
-        >>> chord = abjad.Chord('<c e g>4')
+        >>> key_signature = abjad.KeySignature("c", "major")
+        >>> chord = abjad.Chord("<c e g>4")
         >>> baca.tonality.analyze_tonal_functions([chord], key_signature)
         [RomanNumeral('I')]
 
-        >>> chord = abjad.Chord(['e', 'g', "c'"], (1, 4))
+        >>> chord = abjad.Chord(["e", "g", "c'"], (1, 4))
         >>> baca.tonality.analyze_tonal_functions([chord], key_signature)
         [RomanNumeral('I6')]
 
-        >>> chord = abjad.Chord(['g', "c'", "e'"], (1, 4))
+        >>> chord = abjad.Chord(["g", "c'", "e'"], (1, 4))
         >>> baca.tonality.analyze_tonal_functions([chord], key_signature)
         [RomanNumeral('I6/4')]
 
     ..  container:: example
 
-        >>> key_signature = abjad.KeySignature('c', 'major')
-        >>> chord = abjad.Chord(['c', 'ef', 'g'], (1, 4))
+        >>> key_signature = abjad.KeySignature("c", "major")
+        >>> chord = abjad.Chord(["c", "ef", "g"], (1, 4))
         >>> baca.tonality.analyze_tonal_functions([chord], key_signature)
         [RomanNumeral('i')]
 
-        >>> chord = abjad.Chord(['ef', 'g', "c'"], (1, 4))
+        >>> chord = abjad.Chord(["ef", "g", "c'"], (1, 4))
         >>> baca.tonality.analyze_tonal_functions([chord], key_signature)
         [RomanNumeral('i6')]
 
-        >>> chord = abjad.Chord(['g', "c'", "ef'"], (1, 4))
+        >>> chord = abjad.Chord(["g", "c'", "ef'"], (1, 4))
         >>> baca.tonality.analyze_tonal_functions([chord], key_signature)
         [RomanNumeral('i6/4')]
 
     ..  container:: example
 
-        >>> key_signature = abjad.KeySignature('c', 'major')
-        >>> chord = abjad.Chord(['c', 'e', 'g', 'bf'], (1, 4))
+        >>> key_signature = abjad.KeySignature("c", "major")
+        >>> chord = abjad.Chord(["c", "e", "g", "bf"], (1, 4))
         >>> baca.tonality.analyze_tonal_functions([chord], key_signature)
         [RomanNumeral('I7')]
 
-        >>> chord = abjad.Chord(['e', 'g', 'bf', "c'"], (1, 4))
+        >>> chord = abjad.Chord(["e", "g", "bf", "c'"], (1, 4))
         >>> baca.tonality.analyze_tonal_functions([chord], key_signature)
         [RomanNumeral('I6/5')]
 
-        >>> chord = abjad.Chord(['g', 'bf', "c'", "e'"], (1, 4))
+        >>> chord = abjad.Chord(["g", "bf", "c'", "e'"], (1, 4))
         >>> baca.tonality.analyze_tonal_functions([chord], key_signature)
         [RomanNumeral('I4/3')]
 
-        >>> chord = abjad.Chord(['bf', "c'", "e'", "g'"], (1, 4))
+        >>> chord = abjad.Chord(["bf", "c'", "e'", "g'"], (1, 4))
         >>> baca.tonality.analyze_tonal_functions([chord], key_signature)
         [RomanNumeral('I4/2')]
 
     ..  container:: example
 
-        >>> key_signature = abjad.KeySignature('c', 'major')
-        >>> chord = abjad.Chord(['c', 'cs', 'd'], (1, 4))
+        >>> key_signature = abjad.KeySignature("c", "major")
+        >>> chord = abjad.Chord(["c", "cs", "d"], (1, 4))
         >>> baca.tonality.analyze_tonal_functions([chord], key_signature)
         [None]
 
@@ -3132,9 +2931,9 @@ def analyze_tonal_functions(selection, key_signature) -> typing.List[RomanNumera
     return result
 
 
-def are_scalar_notes(selection) -> bool:
+def are_scalar_notes(selection):
     """
-    Is true when notes in client are scalar.
+    Is true when notes in ``selection`` are scalar.
 
     ..  container:: example
 
@@ -3180,9 +2979,9 @@ def are_scalar_notes(selection) -> bool:
     return True
 
 
-def are_stepwise_ascending_notes(selection) -> bool:
+def are_stepwise_ascending_notes(selection):
     """
-    Is true when notes in client are stepwise ascending.
+    Is true when notes in ``selection`` are stepwise ascending.
 
     ..  container:: example
 
@@ -3224,9 +3023,9 @@ def are_stepwise_ascending_notes(selection) -> bool:
     return True
 
 
-def are_stepwise_descending_notes(selection) -> bool:
+def are_stepwise_descending_notes(selection):
     """
-    Is true when notes in client are stepwise descending.
+    Is true when notes in ``selection`` are stepwise descending.
 
     ..  container:: example
 
@@ -3268,9 +3067,9 @@ def are_stepwise_descending_notes(selection) -> bool:
     return True
 
 
-def are_stepwise_notes(selection) -> bool:
+def are_stepwise_notes(selection):
     """
-    Is true when notes in client are stepwise.
+    Is true when notes in ``selection`` are stepwise.
 
     ..  container:: example
 
