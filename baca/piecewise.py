@@ -387,9 +387,6 @@ class PiecewiseCommand(_scoping.Command):
         just_bookended_leaf=None,
         tag=None,
     ):
-        # TODO: factor out late import
-        from .segmentmaker import _treat_persistent_wrapper
-
         assert isinstance(tag, abjad.Tag), repr(tag)
         for indicator in bundle:
             if indicator in (True, False):
@@ -419,7 +416,9 @@ class PiecewiseCommand(_scoping.Command):
             wrapper = abjad.attach(indicator, leaf, tag=tag_, wrapper=True)
             if _scoping.compare_persistent_indicators(indicator, reapplied):
                 status = "redundant"
-                _treat_persistent_wrapper(self.runtime["manifests"], wrapper, status)
+                _scoping.treat_persistent_wrapper(
+                    self.runtime["manifests"], wrapper, status
+                )
 
     ### PUBLIC PROPERTIES ###
 

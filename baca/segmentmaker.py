@@ -40,159 +40,6 @@ def _append_tag_to_wrappers(leaf, tag):
         wrapper.tag = tag_
 
 
-def _attach_color_cancelation_literal(
-    wrapper, status, existing_deactivate=None, existing_tag=None
-):
-    if getattr(wrapper.indicator, "latent", False):
-        return
-    if getattr(wrapper.indicator, "hide", False):
-        return
-    if not getattr(wrapper.indicator, "redraw", False):
-        return
-    _attach_color_literal(
-        wrapper,
-        status,
-        existing_deactivate=wrapper.deactivate,
-        cancelation=True,
-    )
-
-
-def _attach_color_literal(
-    wrapper,
-    status,
-    existing_deactivate=None,
-    redraw=False,
-    cancelation=False,
-):
-    assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
-    if getattr(wrapper.indicator, "hide", False) is True:
-        return
-    if isinstance(wrapper.indicator, abjad.Instrument):
-        return
-    if not getattr(wrapper.indicator, "persistent", False):
-        return
-    if getattr(wrapper.indicator, "parameter", None) == "METRONOME_MARK":
-        return
-    if isinstance(wrapper.indicator, _memento.PersistentOverride):
-        return
-    if isinstance(wrapper.indicator, _indicators.BarExtent):
-        return
-    stem = _scoping.to_indicator_stem(wrapper.indicator)
-    grob = _indicator_to_grob(wrapper.indicator)
-    context = wrapper._find_correct_effective_context()
-    assert isinstance(context, abjad.Context), repr(context)
-    string = rf"\override {context.lilypond_type}.{grob}.color ="
-    if cancelation is True:
-        string += " ##f"
-    elif redraw is True:
-        color = SegmentMaker._status_to_redraw_color[status]
-        string += f" #(x11-color '{color})"
-    else:
-        string = rf"\once {string}"
-        color = SegmentMaker._status_to_color[status]
-        string += f" #(x11-color '{color})"
-    if redraw:
-        literal = abjad.LilyPondLiteral(string, format_slot="after")
-    else:
-        literal = abjad.LilyPondLiteral(string)
-    if getattr(wrapper.indicator, "latent", False):
-        if redraw:
-            prefix = "redrawn"
-        else:
-            prefix = None
-        if cancelation:
-            suffix = "color_cancellation"
-        else:
-            suffix = "color"
-    else:
-        prefix = None
-        if redraw:
-            suffix = "redraw_color"
-        elif cancelation:
-            suffix = "color_cancellation"
-        else:
-            suffix = "color"
-    status_tag = _get_tag(status, stem, prefix=prefix, suffix=suffix)
-    if isinstance(wrapper.indicator, abjad.TimeSignature):
-        string = rf"\baca-time-signature-color #'{color}"
-        literal = abjad.LilyPondLiteral(string)
-    if cancelation is True:
-        tag = _site(inspect.currentframe(), 1)
-        tag = tag.append(status_tag)
-        abjad.attach(literal, wrapper.component, deactivate=True, tag=tag)
-    else:
-        tag = _site(inspect.currentframe(), 2)
-        tag = tag.append(status_tag)
-        abjad.attach(
-            literal,
-            wrapper.component,
-            deactivate=existing_deactivate,
-            tag=tag,
-        )
-
-
-def _attach_color_redraw_literal(
-    wrapper, status, existing_deactivate=None, existing_tag=None
-):
-    if not getattr(wrapper.indicator, "redraw", False):
-        return
-    if getattr(wrapper.indicator, "hide", False):
-        return
-    _attach_color_literal(
-        wrapper,
-        status,
-        existing_deactivate=wrapper.deactivate,
-        redraw=True,
-    )
-
-
-def _attach_latent_indicator_alert(
-    manifests, wrapper, status, existing_deactivate=None
-):
-    if not getattr(wrapper.indicator, "latent", False):
-        return
-    leaf = wrapper.component
-    indicator = wrapper.indicator
-    assert indicator.latent, repr(indicator)
-    if isinstance(indicator, abjad.Clef):
-        return
-    key = _indicator_to_key(indicator, manifests)
-    if key is not None:
-        key = f"“{key}”"
-    else:
-        key = type(indicator).__name__
-    if isinstance(indicator, abjad.Instrument):
-        if status == "default":
-            tag = _tags.DEFAULT_INSTRUMENT_ALERT
-        elif status == "explicit":
-            tag = _tags.EXPLICIT_INSTRUMENT_ALERT
-        elif status == "reapplied":
-            tag = _tags.REAPPLIED_INSTRUMENT_ALERT
-        else:
-            assert status == "redundant", repr(status)
-            tag = _tags.REDUNDANT_INSTRUMENT_ALERT
-        left, right = "(", ")"
-    else:
-        assert isinstance(indicator, abjad.MarginMarkup)
-        if status == "default":
-            tag = _tags.DEFAULT_MARGIN_MARKUP_ALERT
-        elif status == "explicit":
-            tag = _tags.EXPLICIT_MARGIN_MARKUP_ALERT
-        elif status == "reapplied":
-            tag = _tags.REAPPLIED_MARGIN_MARKUP_ALERT
-        else:
-            assert status == "redundant", repr(status)
-            tag = _tags.REDUNDANT_MARGIN_MARKUP_ALERT
-        left, right = "[", "]"
-    assert isinstance(tag, abjad.Tag), repr(tag)
-    string = f"{left}{key}{right}"
-    markup_function = SegmentMaker._status_to_markup_function[status]
-    string = fr'\{markup_function} "{string}"'
-    markup = abjad.Markup(string, direction=abjad.Up, literal=True)
-    tag = tag.append(_site(inspect.currentframe()))
-    abjad.attach(markup, leaf, deactivate=existing_deactivate, tag=tag)
-
-
 def _attach_rhythm_annotation_spanner(command, selection):
     if not command.annotation_spanner_text and not command.frame:
         return
@@ -353,86 +200,11 @@ def _find_repeat_pitch_classes(argument):
     return violators
 
 
-def _get_key(dictionary, value):
-    if dictionary is not None:
-        for key, value_ in dictionary.items():
-            if value_ == value:
-                return key
-
-
-def _get_tag(status, stem, prefix=None, suffix=None):
-    stem = abjad.String(stem).delimit_words()
-    stem = "_".join([_.upper() for _ in stem])
-    if suffix is not None:
-        name = f"{status.upper()}_{stem}_{suffix.upper()}"
-    else:
-        name = f"{status.upper()}_{stem}"
-    if prefix is not None:
-        name = f"{prefix.upper()}_{name}"
-    tag = getattr(_tags, name)
-    return tag
-
-
-def _indicator_to_grob(indicator):
-    if isinstance(indicator, abjad.Dynamic):
-        return "DynamicText"
-    elif isinstance(indicator, abjad.Instrument):
-        return "InstrumentName"
-    elif isinstance(indicator, abjad.MetronomeMark):
-        return "TextScript"
-    elif isinstance(indicator, abjad.MarginMarkup):
-        return "InstrumentName"
-    elif isinstance(indicator, _indicators.StaffLines):
-        return "StaffSymbol"
-    return type(indicator).__name__
-
-
-def _indicator_to_key(indicator, manifests):
-    if isinstance(indicator, abjad.Clef):
-        key = indicator.name
-    elif isinstance(indicator, abjad.Dynamic):
-        if indicator.name == "niente":
-            key = "niente"
-        else:
-            key = indicator.command or indicator.name
-    elif isinstance(indicator, abjad.StartHairpin):
-        key = indicator.shape
-    elif isinstance(indicator, abjad.Instrument):
-        key = _get_key(manifests["abjad.Instrument"], indicator)
-    elif isinstance(indicator, abjad.MetronomeMark):
-        key = _get_key(manifests["abjad.MetronomeMark"], indicator)
-    elif isinstance(indicator, abjad.MarginMarkup):
-        key = _get_key(manifests["abjad.MarginMarkup"], indicator)
-    elif isinstance(indicator, _memento.PersistentOverride):
-        key = indicator
-    elif isinstance(indicator, _indicators.BarExtent):
-        key = indicator.line_count
-    elif isinstance(indicator, _indicators.StaffLines):
-        key = indicator.line_count
-    elif isinstance(indicator, (_indicators.Accelerando, _indicators.Ritardando)):
-        key = {"hide": indicator.hide}
-    else:
-        key = str(indicator)
-    return key
-
-
 def _prototype_string(class_):
     parts = class_.__module__.split(".")
     if parts[-1] != class_.__name__:
         parts.append(class_.__name__)
     return f"{parts[0]}.{parts[-1]}"
-
-
-def _set_status_tag(wrapper, status, redraw=None, stem=None):
-    assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
-    stem = stem or _scoping.to_indicator_stem(wrapper.indicator)
-    prefix = None
-    if redraw is True:
-        prefix = "redrawn"
-    tag = wrapper.tag.append(_site(inspect.currentframe()))
-    status_tag = _get_tag(status, stem, prefix=prefix)
-    tag = tag.append(status_tag)
-    wrapper.tag = tag
 
 
 def _site(frame, n=None):
@@ -461,101 +233,6 @@ def _sort_by_timeline(leaves):
     leaves = list(leaves)
     leaves.sort(key=functools.cmp_to_key(compare))
     return abjad.select(leaves)
-
-
-def _treat_persistent_wrapper(manifests, wrapper, status):
-    assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
-    assert bool(wrapper.indicator.persistent), repr(wrapper)
-    assert isinstance(status, str), repr(status)
-    indicator = wrapper.indicator
-    prototype = (
-        abjad.Glissando,
-        abjad.Ottava,
-        abjad.RepeatTie,
-        abjad.StartBeam,
-        abjad.StartPhrasingSlur,
-        abjad.StartPianoPedal,
-        abjad.StartSlur,
-        abjad.StartTextSpan,
-        abjad.StartTrillSpan,
-        abjad.StopBeam,
-        abjad.StopPhrasingSlur,
-        abjad.StopPianoPedal,
-        abjad.StopSlur,
-        abjad.StopTextSpan,
-        abjad.StopTrillSpan,
-        abjad.Tie,
-    )
-    if isinstance(indicator, prototype):
-        return
-    context = wrapper._find_correct_effective_context()
-    assert isinstance(context, abjad.Context), repr(wrapper)
-    leaf = wrapper.component
-    assert isinstance(leaf, abjad.Leaf), repr(wrapper)
-    existing_tag = wrapper.tag
-    tempo_trend = (_indicators.Accelerando, _indicators.Ritardando)
-    if isinstance(indicator, abjad.MetronomeMark) and abjad.get.has_indicator(
-        leaf, tempo_trend
-    ):
-        status = "explicit"
-    if isinstance(wrapper.indicator, abjad.Dynamic) and abjad.get.indicators(
-        leaf, abjad.StartHairpin
-    ):
-        status = "explicit"
-    if isinstance(wrapper.indicator, (abjad.Dynamic, abjad.StartHairpin)):
-        color = SegmentMaker._status_to_color[status]
-        words = [
-            f"{status.upper()}_DYNAMIC_COLOR",
-            "_treat_persistent_wrapper(1)",
-        ]
-        words.extend(existing_tag.editions())
-        words = [str(_) for _ in words]
-        string = ":".join(words)
-        tag_ = abjad.Tag(string)
-        string = f"#(x11-color '{color})"
-        abjad.tweak(wrapper.indicator, tag=tag_).color = string
-        _set_status_tag(wrapper, status)
-        return
-    _attach_color_literal(wrapper, status, existing_deactivate=wrapper.deactivate)
-    _attach_latent_indicator_alert(
-        manifests, wrapper, status, existing_deactivate=wrapper.deactivate
-    )
-    _attach_color_cancelation_literal(
-        wrapper,
-        status,
-        existing_deactivate=wrapper.deactivate,
-        existing_tag=existing_tag,
-    )
-    if isinstance(wrapper.indicator, abjad.Clef):
-        string = rf"\set {context.lilypond_type}.forceClef = ##t"
-        literal = abjad.LilyPondLiteral(string)
-        wrapper_ = abjad.attach(
-            literal,
-            wrapper.component,
-            tag=wrapper.tag.append(_site(inspect.currentframe(), 2)),
-            wrapper=True,
-        )
-        _set_status_tag(wrapper_, status, stem="CLEF")
-    _set_status_tag(wrapper, status)
-    _attach_color_redraw_literal(
-        wrapper,
-        status,
-        existing_deactivate=wrapper.deactivate,
-        existing_tag=existing_tag,
-    )
-    if isinstance(indicator, (abjad.Instrument, abjad.MarginMarkup)) and not getattr(
-        indicator, "hide", False
-    ):
-        strings = indicator._get_lilypond_format(context=context)
-        literal = abjad.LilyPondLiteral(strings, format_slot="after")
-        stem = _scoping.to_indicator_stem(indicator)
-        wrapper_ = abjad.attach(
-            literal,
-            leaf,
-            tag=existing_tag.append(_site(inspect.currentframe(), 3)),
-            wrapper=True,
-        )
-        _set_status_tag(wrapper_, status, redraw=True, stem=stem)
 
 
 def _unpack_measure_token_list(measure_token_list):
@@ -1036,27 +713,6 @@ class SegmentMaker:
         "abjad.Instrument": "instruments",
         "abjad.MetronomeMark": "metronome_marks",
         "abjad.MarginMarkup": "margin_markups",
-    }
-
-    _status_to_color = {
-        "default": "DarkViolet",
-        "explicit": "blue",
-        "reapplied": "green4",
-        "redundant": "DeepPink1",
-    }
-
-    _status_to_markup_function = {
-        "default": "baca-default-indicator-markup",
-        "explicit": "baca-explicit-indicator-markup",
-        "reapplied": "baca-reapplied-indicator-markup",
-        "redundant": "baca-redundant-indicator-markup",
-    }
-
-    _status_to_redraw_color = {
-        "default": "violet",
-        "explicit": "DeepSkyBlue2",
-        "reapplied": "OliveDrab",
-        "redundant": "DeepPink4",
     }
 
     ### INITIALIZER ###
@@ -1756,13 +1412,13 @@ class SegmentMaker:
             if staff__group.name in dictionary:
                 continue
             for wrapper in _templates.attach_defaults(staff__group):
-                _treat_persistent_wrapper(self.manifests, wrapper, "default")
+                _scoping.treat_persistent_wrapper(self.manifests, wrapper, "default")
 
     def _attach_first_segment_score_template_defaults(self):
         if not self.first_segment:
             return
         for wrapper in _templates.attach_defaults(self.score):
-            _treat_persistent_wrapper(self.manifests, wrapper, "default")
+            _scoping.treat_persistent_wrapper(self.manifests, wrapper, "default")
 
     def _attach_metronome_marks(self):
         indicator_count = 0
@@ -1970,7 +1626,7 @@ class SegmentMaker:
             else:
                 status = None
             assert status is not None
-            color = self._status_to_color[status]
+            color = _scoping._status_to_color[status]
             string = f"{status.upper()}_METRONOME_MARK_WITH_COLOR"
             tag = abjad.Tag(string)
             if isinstance(left_text, str):
@@ -2013,7 +1669,7 @@ class SegmentMaker:
                 else:
                     status = None
                 assert status is not None
-                color = self._status_to_color[status]
+                color = _scoping._status_to_color[status]
                 color = f"(x11-color '{color})"
                 assert len(right_text.contents) == 1, repr(right_text)
                 right_text_with_color = abjad.Markup(
@@ -2602,7 +2258,7 @@ class SegmentMaker:
                 else:
                     prototype = type(indicator)
                     prototype = _prototype_string(prototype)
-                value = _indicator_to_key(indicator, self.manifests)
+                value = _scoping._indicator_to_key(indicator, self.manifests)
                 if value is None and self.environment != "docs":
                     raise Exception(
                         "can not find persistent indicator in manifest:\n\n"
@@ -3619,7 +3275,9 @@ class SegmentMaker:
                 if isinstance(
                     wrapper.indicator, abjad.Dynamic
                 ) and abjad.get.indicators(leaf, abjad.StartHairpin):
-                    _treat_persistent_wrapper(self.manifests, wrapper, "explicit")
+                    _scoping.treat_persistent_wrapper(
+                        self.manifests, wrapper, "explicit"
+                    )
 
     def _reapply_persistent_indicators(self):
         if self.first_segment:
@@ -3650,7 +3308,7 @@ class SegmentMaker:
                     site = _site(inspect.currentframe(), 1)
                     edition = edition.append(site)
                     wrapper.tag = wrapper.tag.append(edition)
-                    _treat_persistent_wrapper(self.manifests, wrapper, status)
+                    _scoping.treat_persistent_wrapper(self.manifests, wrapper, status)
                     continue
                 # TODO: change to parameter comparison
                 prototype = (
@@ -3668,7 +3326,9 @@ class SegmentMaker:
                             tag=edition.append(site),
                             wrapper=True,
                         )
-                        _treat_persistent_wrapper(self.manifests, wrapper, status)
+                        _scoping.treat_persistent_wrapper(
+                            self.manifests, wrapper, status
+                        )
                     else:
                         assert status in ("redundant", None), repr(status)
                         if status is None:
@@ -3683,7 +3343,9 @@ class SegmentMaker:
                             prototype = abjad.MetronomeMark
                             wrapper = abjad.get.wrapper(leaf, prototype)
                         wrapper.tag = wrapper.tag.append(edition)
-                        _treat_persistent_wrapper(self.manifests, wrapper, status)
+                        _scoping.treat_persistent_wrapper(
+                            self.manifests, wrapper, status
+                        )
                     continue
                 attached = False
                 site = _site(inspect.currentframe(), 3)
@@ -3702,7 +3364,7 @@ class SegmentMaker:
                 except abjad.PersistentIndicatorError:
                     pass
                 if attached:
-                    _treat_persistent_wrapper(self.manifests, wrapper, status)
+                    _scoping.treat_persistent_wrapper(self.manifests, wrapper, status)
 
     def _remove_redundant_time_signatures(self):
         previous_time_signature = None
@@ -4093,7 +3755,7 @@ class SegmentMaker:
                     status = "redundant"
                 else:
                     status = "explicit"
-                _treat_persistent_wrapper(self.manifests, wrapper, status)
+                _scoping.treat_persistent_wrapper(self.manifests, wrapper, status)
 
     def _unpack_scope_pair(self, scopes, abbreviations):
         assert isinstance(scopes, tuple), repr(scopes)
