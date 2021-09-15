@@ -6,7 +6,7 @@ import typing
 
 import abjad
 
-from . import scoping
+from . import scoping as _scoping
 from . import selection as _selection
 from . import tags as _tags
 from . import typings
@@ -14,13 +14,13 @@ from . import typings
 
 def _site(frame):
     prefix = "baca"
-    return scoping.site(frame, prefix)
+    return _scoping.site(frame, prefix)
 
 
 ### CLASSES ###
 
 
-class SpannerIndicatorCommand(scoping.Command):
+class SpannerIndicatorCommand(_scoping.Command):
     """
     Spanner indicator command.
     """
@@ -49,14 +49,14 @@ class SpannerIndicatorCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         right_broken: bool = None,
-        scope: scoping.ScopeTyping = None,
+        scope: _scoping.ScopeTyping = None,
         selector=lambda _: _selection.Selection(_).leaves(),
         start_indicator: typing.Any = None,
         stop_indicator: typing.Any = None,
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
     ) -> None:
-        scoping.Command.__init__(
+        _scoping.Command.__init__(
             self,
             deactivate=deactivate,
             map=map,
@@ -77,7 +77,7 @@ class SpannerIndicatorCommand(scoping.Command):
         self._right_broken = right_broken
         self._start_indicator = start_indicator
         self._stop_indicator = stop_indicator
-        self._validate_indexed_tweaks(tweaks)
+        _scoping.validate_indexed_tweaks(tweaks)
         self._tweaks = tweaks
 
     ### SPECIAL METHODS ###
@@ -97,7 +97,7 @@ class SpannerIndicatorCommand(scoping.Command):
             if self.detach_first:
                 for leaf in abjad.iterate(argument).leaves(grace=False):
                     abjad.detach(type(start_indicator), leaf)
-            self._apply_tweaks(start_indicator, self.tweaks)
+            _scoping.apply_tweaks(start_indicator, self.tweaks)
             first_leaf = abjad.select(argument).leaf(0)
             if self.left_broken:
                 self._attach_indicator(
@@ -149,12 +149,12 @@ class SpannerIndicatorCommand(scoping.Command):
         from .segmentmaker import _treat_persistent_wrapper
 
         assert isinstance(tag, abjad.Tag), repr(tag)
-        reapplied = scoping.Command._remove_reapplied_wrappers(leaf, indicator)
+        reapplied = _scoping.remove_reapplied_wrappers(leaf, indicator)
         tag_ = self.tag.append(tag)
         wrapper = abjad.attach(
             indicator, leaf, deactivate=deactivate, tag=tag_, wrapper=True
         )
-        if scoping.compare_persistent_indicators(indicator, reapplied):
+        if _scoping.compare_persistent_indicators(indicator, reapplied):
             status = "redundant"
             _treat_persistent_wrapper(self.runtime["manifests"], wrapper, status)
 

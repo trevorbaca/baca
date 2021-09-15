@@ -1444,7 +1444,7 @@ class ColorFingeringCommand(_scoping.Command):
             assert abjad.math.all_are_nonnegative_integers(numbers)
             numbers = abjad.CyclicTuple(numbers)
         self._numbers = numbers
-        self._validate_indexed_tweaks(tweaks)
+        _scoping.validate_indexed_tweaks(tweaks)
         self._tweaks = tweaks
 
     ### SPECIAL METHODS ###
@@ -1467,7 +1467,7 @@ class ColorFingeringCommand(_scoping.Command):
             number = self.numbers[i]
             if number != 0:
                 fingering = abjad.ColorFingering(number)
-                self._apply_tweaks(fingering, self.tweaks, i=i, total=total)
+                _scoping.apply_tweaks(fingering, self.tweaks, i=i, total=total)
                 abjad.attach(fingering, phead)
 
     ### PUBLIC PROPERTIES ###

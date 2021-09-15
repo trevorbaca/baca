@@ -6,18 +6,35 @@ import typing
 
 import abjad
 
-from . import const, indicators
+from . import const as _const
+from . import indicators as _indicators
 from . import parts as _parts
-from . import scoping
+from . import scoping as _scoping
 from . import selection as _selection
 from . import sequence as _sequence
 from . import tags as _tags
 from . import typings
 
-### CLASSES ###
+
+def _is_rest(argument):
+    prototype = (abjad.Rest, abjad.MultimeasureRest, abjad.Skip)
+    if isinstance(argument, prototype):
+        return True
+    annotation = abjad.get.annotation(argument, "is_sounding")
+    if annotation is False:
+        return True
+    return False
 
 
-class BCPCommand(scoping.Command):
+def _validate_bcps(bcps):
+    if bcps is None:
+        return
+    for bcp in bcps:
+        assert isinstance(bcp, tuple), repr(bcp)
+        assert len(bcp) == 2, repr(bcp)
+
+
+class BCPCommand(_scoping.Command):
     """
     Bow contact point command.
     """
@@ -43,12 +60,12 @@ class BCPCommand(scoping.Command):
         map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
-        scope: scoping.ScopeTyping = None,
+        scope: _scoping.ScopeTyping = None,
         selector: abjad.Expression = None,
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
     ) -> None:
-        scoping.Command.__init__(
+        _scoping.Command.__init__(
             self,
             map=map,
             match=match,
@@ -58,10 +75,10 @@ class BCPCommand(scoping.Command):
             tags=tags,
         )
         if bcps is None:
-            self._validate_bcps(bcps)
+            _validate_bcps(bcps)
         self._bow_contact_points = bcps
         self._bow_change_tweaks = None
-        self._validate_indexed_tweaks(bow_change_tweaks)
+        _scoping.validate_indexed_tweaks(bow_change_tweaks)
         self._bow_change_tweaks = bow_change_tweaks
         if final_spanner is not None:
             final_spanner = bool(final_spanner)
@@ -69,7 +86,7 @@ class BCPCommand(scoping.Command):
         if helper is not None:
             assert callable(helper), repr(helper)
         self._helper = helper
-        self._validate_indexed_tweaks(tweaks)
+        _scoping.validate_indexed_tweaks(tweaks)
         self._tweaks = tweaks
 
     ### SPECIAL METHODS ###
@@ -92,7 +109,7 @@ class BCPCommand(scoping.Command):
             rest_count, nonrest_count = 0, 0
             lt: abjad.LogicalTie
             for lt in reversed(lts):
-                if self._is_rest(lt.head):
+                if _is_rest(lt.head):
                     rest_count += 1
                 else:
                     if 0 < rest_count and nonrest_count == 0:
@@ -102,7 +119,7 @@ class BCPCommand(scoping.Command):
                         add_right_text_to_me = lt.head
                         break
                     nonrest_count += 1
-        if self.final_spanner and not self._is_rest(lts[-1]) and len(lts[-1]) == 1:
+        if self.final_spanner and not _is_rest(lts[-1]) and len(lts[-1]) == 1:
             next_leaf_after_argument = abjad.get.leaf(lts[-1][-1], 1)
             if next_leaf_after_argument is None:
                 message = "can not attach final spanner:"
@@ -112,7 +129,7 @@ class BCPCommand(scoping.Command):
         i = 0
         for lt in lts:
             stop_text_span = abjad.StopTextSpan(command=self.stop_command)
-            if not self.final_spanner and lt is lts[-1] and not self._is_rest(lt.head):
+            if not self.final_spanner and lt is lts[-1] and not _is_rest(lt.head):
                 abjad.attach(
                     stop_text_span,
                     lt.head,
@@ -121,13 +138,11 @@ class BCPCommand(scoping.Command):
                 break
             previous_leaf = abjad.get.leaf(lt.head, -1)
             next_leaf = abjad.get.leaf(lt.head, 1)
-            if self._is_rest(lt.head) and (
-                self._is_rest(previous_leaf) or previous_leaf is None
-            ):
+            if _is_rest(lt.head) and (_is_rest(previous_leaf) or previous_leaf is None):
                 continue
             if (
                 isinstance(lt.head, abjad.Note)
-                and self._is_rest(previous_leaf)
+                and _is_rest(previous_leaf)
                 and previous_bcp is not None
             ):
                 numerator, denominator = previous_bcp
@@ -143,7 +158,7 @@ class BCPCommand(scoping.Command):
                     style = "solid-line-with-arrow"
                 else:
                     style = "invisible-line"
-            elif not self._is_rest(lt.head):
+            elif not _is_rest(lt.head):
                 style = "solid-line-with-arrow"
             else:
                 style = "invisible-line"
@@ -159,10 +174,8 @@ class BCPCommand(scoping.Command):
                 style=style,
             )
             if self.tweaks:
-                self._apply_tweaks(start_text_span, self.tweaks)
-            if self._is_rest(lt.head) and (
-                self._is_rest(next_leaf) or next_leaf is None
-            ):
+                _scoping.apply_tweaks(start_text_span, self.tweaks)
+            if _is_rest(lt.head) and (_is_rest(next_leaf) or next_leaf is None):
                 pass
             else:
                 abjad.attach(
@@ -184,13 +197,13 @@ class BCPCommand(scoping.Command):
                 )
             bcp_fraction = abjad.Fraction(*bcp)
             next_bcp_fraction = abjad.Fraction(*bcps[i])
-            if self._is_rest(lt.head):
+            if _is_rest(lt.head):
                 pass
-            elif self._is_rest(previous_leaf) or previous_bcp is None:
+            elif _is_rest(previous_leaf) or previous_bcp is None:
                 if bcp_fraction > next_bcp_fraction:
                     articulation = abjad.Articulation("upbow")
                     if self.bow_change_tweaks:
-                        self._apply_tweaks(articulation, self.bow_change_tweaks)
+                        _scoping.apply_tweaks(articulation, self.bow_change_tweaks)
                     abjad.attach(
                         articulation,
                         lt.head,
@@ -199,7 +212,7 @@ class BCPCommand(scoping.Command):
                 elif bcp_fraction < next_bcp_fraction:
                     articulation = abjad.Articulation("downbow")
                     if self.bow_change_tweaks:
-                        self._apply_tweaks(articulation, self.bow_change_tweaks)
+                        _scoping.apply_tweaks(articulation, self.bow_change_tweaks)
                     abjad.attach(
                         articulation,
                         lt.head,
@@ -210,7 +223,7 @@ class BCPCommand(scoping.Command):
                 if previous_bcp_fraction < bcp_fraction > next_bcp_fraction:
                     articulation = abjad.Articulation("upbow")
                     if self.bow_change_tweaks:
-                        self._apply_tweaks(articulation, self.bow_change_tweaks)
+                        _scoping.apply_tweaks(articulation, self.bow_change_tweaks)
                     abjad.attach(
                         articulation,
                         lt.head,
@@ -219,33 +232,13 @@ class BCPCommand(scoping.Command):
                 elif previous_bcp_fraction > bcp_fraction < next_bcp_fraction:
                     articulation = abjad.Articulation("downbow")
                     if self.bow_change_tweaks:
-                        self._apply_tweaks(articulation, self.bow_change_tweaks)
+                        _scoping.apply_tweaks(articulation, self.bow_change_tweaks)
                     abjad.attach(
                         articulation,
                         lt.head,
                         tag=self.tag.append(abjad.Tag("baca.BCPCommand._call(8)")),
                     )
             previous_bcp = bcp
-
-    ### PRIVATE METHODS ###
-
-    @staticmethod
-    def _is_rest(argument):
-        prototype = (abjad.Rest, abjad.MultimeasureRest, abjad.Skip)
-        if isinstance(argument, prototype):
-            return True
-        annotation = abjad.get.annotation(argument, "is_sounding")
-        if annotation is False:
-            return True
-        return False
-
-    @staticmethod
-    def _validate_bcps(bcps):
-        if bcps is None:
-            return
-        for bcp in bcps:
-            assert isinstance(bcp, tuple), repr(bcp)
-            assert len(bcp) == 2, repr(bcp)
 
     ### PUBLIC PROPERTIES ###
 
@@ -749,7 +742,7 @@ class BCPCommand(scoping.Command):
         return self._tweaks
 
 
-class ColorCommand(scoping.Command):
+class ColorCommand(_scoping.Command):
     """
     Color command.
     """
@@ -767,11 +760,11 @@ class ColorCommand(scoping.Command):
         map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
-        scope: scoping.ScopeTyping = None,
+        scope: _scoping.ScopeTyping = None,
         selector=lambda _: _selection.Selection(_).leaves(),
     ) -> None:
         assert selector is not None
-        scoping.Command.__init__(
+        _scoping.Command.__init__(
             self,
             map=map,
             match=match,
@@ -794,7 +787,7 @@ class ColorCommand(scoping.Command):
         abjad.Label(argument).by_selector(self.selector, lone=self.lone)
 
 
-class ContainerCommand(scoping.Command):
+class ContainerCommand(_scoping.Command):
     r"""
     Container command.
 
@@ -898,10 +891,10 @@ class ContainerCommand(scoping.Command):
         map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
-        scope: scoping.ScopeTyping = None,
+        scope: _scoping.ScopeTyping = None,
         selector=lambda _: _selection.Selection(_).leaves(),
     ) -> None:
-        scoping.Command.__init__(
+        _scoping.Command.__init__(
             self,
             map=map,
             match=match,
@@ -951,7 +944,7 @@ class ContainerCommand(scoping.Command):
         return self._identifier
 
 
-class DetachCommand(scoping.Command):
+class DetachCommand(_scoping.Command):
     """
     Detach command.
 
@@ -976,9 +969,9 @@ class DetachCommand(scoping.Command):
         map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
-        scope: scoping.ScopeTyping = None,
+        scope: _scoping.ScopeTyping = None,
     ) -> None:
-        scoping.Command.__init__(
+        _scoping.Command.__init__(
             self,
             map=map,
             match=match,
@@ -1014,7 +1007,7 @@ class DetachCommand(scoping.Command):
         return self._arguments
 
 
-class GlissandoCommand(scoping.Command):
+class GlissandoCommand(_scoping.Command):
     """
     Glissando command.
     """
@@ -1051,13 +1044,13 @@ class GlissandoCommand(scoping.Command):
         parenthesize_repeats: bool = None,
         right_broken: bool = None,
         right_broken_show_next: bool = None,
-        scope: scoping.ScopeTyping = None,
+        scope: _scoping.ScopeTyping = None,
         selector=lambda _: _selection.Selection(_).tleaves(),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
         zero_padding: bool = None,
     ) -> None:
-        scoping.Command.__init__(
+        _scoping.Command.__init__(
             self,
             map=map,
             match=match,
@@ -1075,7 +1068,7 @@ class GlissandoCommand(scoping.Command):
         self._parenthesize_repeats = parenthesize_repeats
         self._right_broken = right_broken
         self._right_broken_show_next = right_broken_show_next
-        self._validate_indexed_tweaks(tweaks)
+        _scoping.validate_indexed_tweaks(tweaks)
         self._tweaks = tweaks
         self._zero_padding = zero_padding
 
@@ -1191,7 +1184,7 @@ class GlissandoCommand(scoping.Command):
         return self._zero_padding
 
 
-class GlobalFermataCommand(scoping.Command):
+class GlobalFermataCommand(_scoping.Command):
     """
     Global fermata command.
     """
@@ -1216,11 +1209,11 @@ class GlobalFermataCommand(scoping.Command):
         map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
-        scope: scoping.ScopeTyping = None,
+        scope: _scoping.ScopeTyping = None,
         selector=lambda _: _selection.Selection(_).leaf(0),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
     ) -> None:
-        scoping.Command.__init__(
+        _scoping.Command.__init__(
             self,
             map=map,
             match=match,
@@ -1274,15 +1267,15 @@ class GlobalFermataCommand(scoping.Command):
                 leaf,
                 tag=self.tag.append(abjad.Tag("baca.GlobalFermataCommand._call(2)")),
             )
-            tag = abjad.Tag(const.FERMATA_MEASURE)
+            tag = abjad.Tag(_const.FERMATA_MEASURE)
             tag = tag.append(self.tag)
             tag = tag.append(abjad.Tag("baca.GlobalFermataCommand._call(3)"))
             abjad.attach(
-                const.FERMATA_MEASURE,
+                _const.FERMATA_MEASURE,
                 leaf,
                 tag=_tags.FERMATA_MEASURE,
             )
-            abjad.annotate(leaf, const.FERMATA_DURATION, fermata_duration)
+            abjad.annotate(leaf, _const.FERMATA_DURATION, fermata_duration)
 
     ### PUBLIC PROPERTIES ###
 
@@ -1294,7 +1287,18 @@ class GlobalFermataCommand(scoping.Command):
         return self._description
 
 
-class IndicatorCommand(scoping.Command):
+def _token_to_indicators(token):
+    result = []
+    if not isinstance(token, (tuple, list)):
+        token = [token]
+    for item in token:
+        if item is None:
+            continue
+        result.append(item)
+    return result
+
+
+class IndicatorCommand(_scoping.Command):
     r"""
     Indicator command.
     """
@@ -1325,12 +1329,12 @@ class IndicatorCommand(scoping.Command):
         measures: typings.SliceTyping = None,
         predicate: typing.Callable = None,
         redundant: bool = None,
-        scope: scoping.ScopeTyping = None,
+        scope: _scoping.ScopeTyping = None,
         selector=lambda _: _selection.Selection(_).pheads(),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
     ) -> None:
-        scoping.Command.__init__(
+        _scoping.Command.__init__(
             self,
             deactivate=deactivate,
             map=map,
@@ -1357,7 +1361,7 @@ class IndicatorCommand(scoping.Command):
         if redundant is not None:
             redundant = bool(redundant)
         self._redundant = redundant
-        self._validate_indexed_tweaks(tweaks)
+        _scoping.validate_indexed_tweaks(tweaks)
         self._tweaks = tweaks
 
     ### SPECIAL METHODS ###
@@ -1384,10 +1388,10 @@ class IndicatorCommand(scoping.Command):
             if self.predicate and not self.predicate(leaf):
                 continue
             indicators = self.indicators[i]
-            indicators = self._token_to_indicators(indicators)
+            indicators = _token_to_indicators(indicators)
             for indicator in indicators:
-                self._apply_tweaks(indicator, self.tweaks)
-                reapplied = self._remove_reapplied_wrappers(leaf, indicator)
+                _scoping.apply_tweaks(indicator, self.tweaks)
+                reapplied = _scoping.remove_reapplied_wrappers(leaf, indicator)
                 wrapper = abjad.attach(
                     indicator,
                     leaf,
@@ -1397,24 +1401,11 @@ class IndicatorCommand(scoping.Command):
                     tag=self.tag.append(abjad.Tag("baca.IndicatorCommand._call()")),
                     wrapper=True,
                 )
-                if scoping.compare_persistent_indicators(indicator, reapplied):
+                if _scoping.compare_persistent_indicators(indicator, reapplied):
                     status = "redundant"
                     _treat_persistent_wrapper(
                         self.runtime["manifests"], wrapper, status
                     )
-
-    ### PRIVATE METHODS ###
-
-    @staticmethod
-    def _token_to_indicators(token):
-        result = []
-        if not isinstance(token, (tuple, list)):
-            token = [token]
-        for item in token:
-            if item is None:
-                continue
-            result.append(item)
-        return result
 
     ### PUBLIC PROPERTIES ###
 
@@ -1494,7 +1485,7 @@ class InstrumentChangeCommand(IndicatorCommand):
         super()._call(argument)
 
 
-class LabelCommand(scoping.Command):
+class LabelCommand(_scoping.Command):
     r"""
     Label command.
     """
@@ -1512,10 +1503,10 @@ class LabelCommand(scoping.Command):
         map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
-        scope: scoping.ScopeTyping = None,
+        scope: _scoping.ScopeTyping = None,
         selector=lambda _: _selection.Selection(_).leaves(),
     ) -> None:
-        scoping.Command.__init__(
+        _scoping.Command.__init__(
             self,
             map=map,
             match=match,
@@ -1551,7 +1542,7 @@ class LabelCommand(scoping.Command):
         return self._callable
 
 
-class MetronomeMarkCommand(scoping.Command):
+class MetronomeMarkCommand(_scoping.Command):
     """
     Metronome mark command.
     """
@@ -1566,16 +1557,16 @@ class MetronomeMarkCommand(scoping.Command):
         self,
         *,
         deactivate: bool = None,
-        key: typing.Union[str, indicators.Accelerando, indicators.Ritardando] = None,
+        key: typing.Union[str, _indicators.Accelerando, _indicators.Ritardando] = None,
         map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         redundant: bool = None,
-        scope: scoping.ScopeTyping = None,
+        scope: _scoping.ScopeTyping = None,
         selector=lambda _: _selection.Selection(_).leaf(0),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
     ) -> None:
-        scoping.Command.__init__(
+        _scoping.Command.__init__(
             self,
             deactivate=deactivate,
             map=map,
@@ -1585,7 +1576,7 @@ class MetronomeMarkCommand(scoping.Command):
             selector=selector,
             tags=tags,
         )
-        prototype = (str, indicators.Accelerando, indicators.Ritardando)
+        prototype = (str, _indicators.Accelerando, _indicators.Ritardando)
         if key is not None:
             assert isinstance(key, prototype), repr(key)
         self._key = key
@@ -1619,7 +1610,7 @@ class MetronomeMarkCommand(scoping.Command):
         if not argument:
             return
         leaf = _selection.Selection(argument).leaf(0)
-        reapplied = self._remove_reapplied_wrappers(leaf, indicator)
+        reapplied = _scoping.remove_reapplied_wrappers(leaf, indicator)
         wrapper = abjad.attach(
             indicator,
             leaf,
@@ -1636,7 +1627,7 @@ class MetronomeMarkCommand(scoping.Command):
     def key(
         self,
     ) -> typing.Optional[
-        typing.Union[str, indicators.Accelerando, indicators.Ritardando]
+        typing.Union[str, _indicators.Accelerando, _indicators.Ritardando]
     ]:
         """
         Gets metronome mark key.
@@ -1651,7 +1642,7 @@ class MetronomeMarkCommand(scoping.Command):
         return self._redundant
 
 
-class PartAssignmentCommand(scoping.Command):
+class PartAssignmentCommand(_scoping.Command):
     """
     Part assignment command.
     """
@@ -1669,10 +1660,10 @@ class PartAssignmentCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         part_assignment: _parts.PartAssignment = None,
-        scope: scoping.ScopeTyping = None,
+        scope: _scoping.ScopeTyping = None,
         selector=lambda _: _selection.Selection(_).leaves(),
     ) -> None:
-        scoping.Command.__init__(
+        _scoping.Command.__init__(
             self,
             map=map,
             match=match,

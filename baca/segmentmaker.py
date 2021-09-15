@@ -2,6 +2,7 @@
 Segment-maker.
 """
 import copy
+import functools
 import importlib
 import inspect
 
@@ -76,7 +77,7 @@ def _attach_color_literal(
         return
     if isinstance(wrapper.indicator, _indicators.BarExtent):
         return
-    stem = _scoping.Command._to_indicator_stem(wrapper.indicator)
+    stem = _scoping.to_indicator_stem(wrapper.indicator)
     grob = _indicator_to_grob(wrapper.indicator)
     context = wrapper._find_correct_effective_context()
     assert isinstance(context, abjad.Context), repr(context)
@@ -424,7 +425,7 @@ def _prototype_string(class_):
 
 def _set_status_tag(wrapper, status, redraw=None, stem=None):
     assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
-    stem = stem or _scoping.Command._to_indicator_stem(wrapper.indicator)
+    stem = stem or _scoping.to_indicator_stem(wrapper.indicator)
     prefix = None
     if redraw is True:
         prefix = "redrawn"
@@ -437,6 +438,29 @@ def _set_status_tag(wrapper, status, redraw=None, stem=None):
 def _site(frame, n=None):
     prefix = "baca.SegmentMaker"
     return _scoping.site(frame, prefix, n=n)
+
+
+def _sort_by_timeline(leaves):
+    assert leaves.are_leaves(), repr(leaves)
+
+    def compare(leaf_1, leaf_2):
+        start_offset_1 = abjad.get.timespan(leaf_1).start_offset
+        start_offset_2 = abjad.get.timespan(leaf_2).start_offset
+        if start_offset_1 < start_offset_2:
+            return -1
+        if start_offset_2 < start_offset_1:
+            return 1
+        index_1 = abjad.get.parentage(leaf_1).score_index()
+        index_2 = abjad.get.parentage(leaf_2).score_index()
+        if index_1 < index_2:
+            return -1
+        if index_2 < index_1:
+            return 1
+        return 0
+
+    leaves = list(leaves)
+    leaves.sort(key=functools.cmp_to_key(compare))
+    return abjad.select(leaves)
 
 
 def _treat_persistent_wrapper(manifests, wrapper, status):
@@ -524,7 +548,7 @@ def _treat_persistent_wrapper(manifests, wrapper, status):
     ):
         strings = indicator._get_lilypond_format(context=context)
         literal = abjad.LilyPondLiteral(strings, format_slot="after")
-        stem = _scoping.Command._to_indicator_stem(indicator)
+        stem = _scoping.to_indicator_stem(indicator)
         wrapper_ = abjad.attach(
             literal,
             leaf,
@@ -3722,7 +3746,7 @@ class SegmentMaker:
                 raise Exception(message)
         assert selection.are_leaves(), repr(selection)
         if isinstance(command.scope, _scoping.TimelineScope):
-            selection = command.scope._sort_by_timeline(selection)
+            selection = _sort_by_timeline(selection)
         return selection
 
     def _scope_to_leaf_selections(self, scope):

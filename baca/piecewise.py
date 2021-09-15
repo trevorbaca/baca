@@ -6,7 +6,10 @@ import typing
 
 import abjad
 
-from . import classes, commandclasses, const, scoping
+from . import classes as _classes
+from . import commandclasses as _commandclasses
+from . import const as _const
+from . import scoping as _scoping
 from . import selection as _selection
 from . import sequence as _sequence
 from . import tags as _tags
@@ -15,10 +18,7 @@ from . import typings
 
 def _site(frame):
     prefix = "baca"
-    return scoping.site(frame, prefix)
-
-
-### CLASSES ###
+    return _scoping.site(frame, prefix)
 
 
 class Bundle:
@@ -145,7 +145,7 @@ class Bundle:
         return False
 
 
-class PiecewiseCommand(scoping.Command):
+class PiecewiseCommand(_scoping.Command):
     """
     Piecewise indicator command.
     """
@@ -183,12 +183,12 @@ class PiecewiseCommand(scoping.Command):
         pieces=lambda _: _selection.Selection(_).leaves(),
         remove_length_1_spanner_start: bool = None,
         right_broken: typing.Any = None,
-        scope: scoping.ScopeTyping = None,
+        scope: _scoping.ScopeTyping = None,
         selector=lambda _: _selection.Selection(_).leaves(),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
     ) -> None:
-        scoping.Command.__init__(
+        _scoping.Command.__init__(
             self,
             map=map,
             match=match,
@@ -223,7 +223,7 @@ class PiecewiseCommand(scoping.Command):
             remove_length_1_spanner_start = bool(remove_length_1_spanner_start)
         self._remove_length_1_spanner_start = remove_length_1_spanner_start
         self._right_broken = right_broken
-        self._validate_indexed_tweaks(tweaks)
+        _scoping.validate_indexed_tweaks(tweaks)
         self._tweaks = tweaks
 
     ### SPECIAL METHODS ###
@@ -323,7 +323,7 @@ class PiecewiseCommand(scoping.Command):
             # TextSpanner.bound-details.right.to-extent = ##t implementation
             # only 100% workable solution
             if is_final_piece and self.autodetect_right_padding:
-                if abjad.get.annotation(stop_leaf, const.PHANTOM) is True:
+                if abjad.get.annotation(stop_leaf, _const.PHANTOM) is True:
                     autodetected_right_padding = 2.5
                 # stop leaf multiplied whole note on fermata measure downbeat
                 elif (
@@ -409,15 +409,15 @@ class PiecewiseCommand(scoping.Command):
                     .append(_tags.SPANNER_START),
                 ).bound_details__right__padding = number
             if self.tweaks and hasattr(indicator, "_tweaks"):
-                self._apply_tweaks(indicator, self.tweaks, i=i, total=total_pieces)
-            reapplied = scoping.Command._remove_reapplied_wrappers(leaf, indicator)
+                _scoping.apply_tweaks(indicator, self.tweaks, i=i, total=total_pieces)
+            reapplied = _scoping.remove_reapplied_wrappers(leaf, indicator)
             tag_ = self.tag.append(tag)
             if getattr(indicator, "spanner_start", None) is True:
                 tag_ = tag_.append(_tags.SPANNER_START)
             if getattr(indicator, "spanner_stop", None) is True:
                 tag_ = tag_.append(_tags.SPANNER_STOP)
             wrapper = abjad.attach(indicator, leaf, tag=tag_, wrapper=True)
-            if scoping.compare_persistent_indicators(indicator, reapplied):
+            if _scoping.compare_persistent_indicators(indicator, reapplied):
                 status = "redundant"
                 _treat_persistent_wrapper(self.runtime["manifests"], wrapper, status)
 
@@ -509,9 +509,6 @@ class PiecewiseCommand(scoping.Command):
         Gets tweaks.
         """
         return self._tweaks
-
-
-### FACTORY FUNCTIONS ###
 
 
 def bow_speed_spanner(
@@ -737,7 +734,7 @@ def dynamic(
     measures: typings.SliceTyping = None,
     selector=lambda _: _selection.Selection(_).phead(0),
     redundant: bool = None,
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches dynamic.
 
@@ -1129,7 +1126,7 @@ def dynamic(
         indicator = dynamic
     prototype = (abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin)
     assert isinstance(indicator, prototype), repr(indicator)
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         context="Voice",
         indicators=[indicator],
         map=map,
@@ -3162,7 +3159,7 @@ def make_dynamic(
 
     """
     assert isinstance(string, str), repr(string)
-    scheme_manifest = classes.SchemeManifest()
+    scheme_manifest = _classes.SchemeManifest()
     known_shapes = abjad.StartHairpin("<").known_shapes
     indicator: typing.Union[abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin]
     if "_" in string:
@@ -3445,7 +3442,7 @@ def parse_hairpin_descriptor(
             string, forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line
         )
         if tweaks and hasattr(indicator, "_tweaks"):
-            PiecewiseCommand._apply_tweaks(indicator, tweaks)
+            _scoping.apply_tweaks(indicator, tweaks)
         indicators.append(indicator)
     if len(indicators) == 1:
         if isinstance(indicators[0], abjad.StartHairpin):

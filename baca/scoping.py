@@ -1,17 +1,14 @@
 """
 Scoping.
 """
-import functools
 import inspect
 import typing
 
 import abjad
 
-from . import indicators
+from . import indicators as _indicators
 from . import tags as _tags
 from . import typings
-
-### CLASSES ###
 
 
 class Scope:
@@ -22,8 +19,8 @@ class Scope:
 
         >>> scope = baca.Scope(
         ...     measures=(1, 9),
-        ...     voice_name='ViolinMusicVoice',
-        ...     )
+        ...     voice_name="ViolinMusicVoice",
+        ... )
 
         >>> string = abjad.storage(scope)
         >>> print(string)
@@ -97,11 +94,11 @@ class TimelineScope:
     ..  container:: example
 
         >>> scope = baca.timeline([
-        ...     ('PianoMusicVoice', (5, 9)),
-        ...     ('ClarinetMusicVoice', (7, 12)),
-        ...     ('ViolinMusicVoice', (8, 12)),
-        ...     ('OboeMusicVoice', (9, 12)),
-        ...     ])
+        ...     ("PianoMusicVoice", (5, 9)),
+        ...     ("ClarinetMusicVoice", (7, 12)),
+        ...     ("ViolinMusicVoice", (8, 12)),
+        ...     ("OboeMusicVoice", (9, 12)),
+        ... ])
 
         >>> string = abjad.storage(scope)
         >>> print(string)
@@ -159,31 +156,6 @@ class TimelineScope:
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
-    ### PRIVATE METHODS ###
-
-    @staticmethod
-    def _sort_by_timeline(leaves):
-        assert leaves.are_leaves(), repr(leaves)
-
-        def compare(leaf_1, leaf_2):
-            start_offset_1 = abjad.get.timespan(leaf_1).start_offset
-            start_offset_2 = abjad.get.timespan(leaf_2).start_offset
-            if start_offset_1 < start_offset_2:
-                return -1
-            if start_offset_2 < start_offset_1:
-                return 1
-            index_1 = abjad.get.parentage(leaf_1).score_index()
-            index_2 = abjad.get.parentage(leaf_2).score_index()
-            if index_1 < index_2:
-                return -1
-            if index_2 < index_1:
-                return 1
-            return 0
-
-        leaves = list(leaves)
-        leaves.sort(key=functools.cmp_to_key(compare))
-        return abjad.select(leaves)
-
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -202,6 +174,185 @@ class TimelineScope:
 
 
 ScopeTyping = typing.Union[Scope, TimelineScope]
+
+
+def apply_tweaks(argument, tweaks, i=None, total=None):
+    if not tweaks:
+        return
+    manager = abjad.tweak(argument)
+    literals = []
+    for item in tweaks:
+        if isinstance(item, tuple):
+            assert len(item) == 2
+            manager_, i_ = item
+            if 0 <= i_ and i_ != i:
+                continue
+            if i_ < 0 and i_ != -(total - i):
+                continue
+        else:
+            manager_ = item
+        assert isinstance(manager_, abjad.TweakInterface)
+        literals.append(bool(manager_._literal))
+        if manager_._literal is True:
+            manager._literal = True
+        tuples = manager_._get_attribute_tuples()
+        for attribute, value in tuples:
+            setattr(manager, attribute, value)
+    if True in literals and False in literals:
+        message = "all tweaks must be literal"
+        message += ", or else all tweaks must be nonliteral:\n"
+        strings = [f"    {repr(_)}" for _ in tweaks]
+        string = "\n".join(strings)
+        message += string
+        raise Exception(message)
+
+
+def remove_reapplied_wrappers(leaf, indicator):
+    if not getattr(indicator, "persistent", False):
+        return
+    if getattr(indicator, "parameter", None) == "TEXT_SPANNER":
+        return
+    if abjad.get.timespan(leaf).start_offset != 0:
+        return
+    dynamic_prototype = (abjad.Dynamic, abjad.StartHairpin)
+    tempo_prototype = (
+        abjad.MetronomeMark,
+        _indicators.Accelerando,
+        _indicators.Ritardando,
+    )
+    if isinstance(indicator, abjad.Instrument):
+        prototype = abjad.Instrument
+    elif isinstance(indicator, dynamic_prototype):
+        prototype = dynamic_prototype
+    elif isinstance(indicator, tempo_prototype):
+        prototype = tempo_prototype
+    else:
+        prototype = type(indicator)
+    stem = to_indicator_stem(indicator)
+    assert stem in (
+        "BAR_EXTENT",
+        "BEAM",
+        "CLEF",
+        "DYNAMIC",
+        "INSTRUMENT",
+        "MARGIN_MARKUP",
+        "METRONOME_MARK",
+        "OTTAVA",
+        "PEDAL",
+        "PERSISTENT_OVERRIDE",
+        "PHRASING_SLUR",
+        "REPEAT_TIE",
+        "SLUR",
+        "STAFF_LINES",
+        "TIE",
+        "TRILL",
+    ), repr(stem)
+    reapplied_wrappers = []
+    reapplied_indicators = []
+    wrappers = list(abjad.get.wrappers(leaf))
+    effective_wrapper = abjad.get.effective_wrapper(leaf, prototype)
+    if effective_wrapper and effective_wrapper not in wrappers:
+        component = effective_wrapper.component
+        start_1 = abjad.get.timespan(leaf).start_offset
+        start_2 = abjad.get.timespan(component).start_offset
+        if start_1 == start_2:
+            wrappers_ = abjad.get.wrappers(component)
+            wrappers.extend(wrappers_)
+    for wrapper in wrappers:
+        if not wrapper.tag:
+            continue
+        is_reapplied_wrapper = False
+        for word in abjad.Tag(wrapper.tag):
+            if f"REAPPLIED_{stem}" in word or f"DEFAULT_{stem}" in word:
+                is_reapplied_wrapper = True
+        if not is_reapplied_wrapper:
+            continue
+        reapplied_wrappers.append(wrapper)
+        if isinstance(wrapper.indicator, prototype):
+            reapplied_indicators.append(wrapper.indicator)
+        abjad.detach(wrapper, wrapper.component)
+    if reapplied_wrappers:
+        count = len(reapplied_indicators)
+        if count != 1:
+            for reapplied_wrapper in reapplied_wrappers:
+                print(reapplied_wrapper)
+            counter = abjad.String("indicator").pluralize(count)
+            message = f"found {count} reapplied {counter};"
+            message += " expecting 1.\n\n"
+            raise Exception(message)
+        return reapplied_indicators[0]
+
+
+def to_indicator_stem(indicator) -> abjad.String:
+    """
+    Changes ``indicator`` to stem.
+
+    ..  container:: example
+
+        >>> baca.scoping.to_indicator_stem(abjad.Clef("alto"))
+        'CLEF'
+
+        >>> baca.scoping.to_indicator_stem(abjad.Clef("treble"))
+        'CLEF'
+
+        >>> baca.scoping.to_indicator_stem(abjad.Dynamic("f"))
+        'DYNAMIC'
+
+        >>> baca.scoping.to_indicator_stem(abjad.StartHairpin("<"))
+        'DYNAMIC'
+
+        >>> baca.scoping.to_indicator_stem(abjad.Cello())
+        'INSTRUMENT'
+
+        >>> baca.scoping.to_indicator_stem(abjad.Violin())
+        'INSTRUMENT'
+
+        >>> metronome_mark = abjad.MetronomeMark((1, 4), 58)
+        >>> baca.scoping.to_indicator_stem(metronome_mark)
+        'METRONOME_MARK'
+
+        >>> start_text_span = abjad.StartTextSpan()
+        >>> baca.scoping.to_indicator_stem(start_text_span)
+        'TEXT_SPANNER'
+
+        >>> stop_text_span = abjad.StopTextSpan()
+        >>> baca.scoping.to_indicator_stem(stop_text_span)
+        'TEXT_SPANNER'
+
+    """
+    assert getattr(indicator, "persistent", False), repr(indicator)
+    if isinstance(indicator, abjad.Instrument):
+        stem = "INSTRUMENT"
+    elif getattr(indicator, "parameter", None) == "TEMPO":
+        stem = "METRONOME_MARK"
+    elif hasattr(indicator, "parameter"):
+        stem = indicator.parameter
+    else:
+        stem = type(indicator).__name__
+    return abjad.String(stem).to_shout_case()
+
+
+def validate_indexed_tweaks(tweaks):
+    if tweaks is None:
+        return
+    assert isinstance(tweaks, tuple), repr(tweaks)
+    for tweak in tweaks:
+        if isinstance(tweak, abjad.TweakInterface):
+            continue
+        if (
+            isinstance(tweak, tuple)
+            and len(tweak) == 2
+            and isinstance(tweak[0], abjad.TweakInterface)
+        ):
+            continue
+        raise Exception(tweak)
+
+
+def _validate_tags(tags):
+    assert isinstance(tags, list), repr(tags)
+    assert "" not in tags, repr(tags)
+    assert not any(":" in _ for _ in tags), repr(tags)
+    return True
 
 
 class Command:
@@ -286,37 +437,6 @@ class Command:
 
     ### PRIVATE METHODS ###
 
-    @staticmethod
-    def _apply_tweaks(argument, tweaks, i=None, total=None):
-        if not tweaks:
-            return
-        manager = abjad.tweak(argument)
-        literals = []
-        for item in tweaks:
-            if isinstance(item, tuple):
-                assert len(item) == 2
-                manager_, i_ = item
-                if 0 <= i_ and i_ != i:
-                    continue
-                if i_ < 0 and i_ != -(total - i):
-                    continue
-            else:
-                manager_ = item
-            assert isinstance(manager_, abjad.TweakInterface)
-            literals.append(bool(manager_._literal))
-            if manager_._literal is True:
-                manager._literal = True
-            tuples = manager_._get_attribute_tuples()
-            for attribute, value in tuples:
-                setattr(manager, attribute, value)
-        if True in literals and False in literals:
-            message = "all tweaks must be literal"
-            message += ", or else all tweaks must be nonliteral:\n"
-            strings = [f"    {repr(_)}" for _ in tweaks]
-            string = "\n".join(strings)
-            message += string
-            raise Exception(message)
-
     def _call(self, argument=None):
         pass
 
@@ -354,170 +474,6 @@ class Command:
             assert all(isinstance(_, int) for _ in self.match)
             if i not in self.match:
                 return False
-        return True
-
-    @staticmethod
-    def _preprocess_tags(tags) -> typing.List:
-        if tags is None:
-            return []
-        if isinstance(tags, str):
-            tags = tags.split(":")
-        assert isinstance(tags, list), repr(tags)
-        tags_: typing.List[typing.Union[str, abjad.Tag]] = []
-        for item in tags:
-            if isinstance(item, abjad.Tag):
-                tags_.append(item)
-            else:
-                assert isinstance(item, str), repr(item)
-                tags_.extend(item.split(":"))
-        return tags_
-
-    @staticmethod
-    def _remove_reapplied_wrappers(leaf, indicator):
-        if not getattr(indicator, "persistent", False):
-            return
-        if getattr(indicator, "parameter", None) == "TEXT_SPANNER":
-            return
-        if abjad.get.timespan(leaf).start_offset != 0:
-            return
-        dynamic_prototype = (abjad.Dynamic, abjad.StartHairpin)
-        tempo_prototype = (
-            abjad.MetronomeMark,
-            indicators.Accelerando,
-            indicators.Ritardando,
-        )
-        if isinstance(indicator, abjad.Instrument):
-            prototype = abjad.Instrument
-        elif isinstance(indicator, dynamic_prototype):
-            prototype = dynamic_prototype
-        elif isinstance(indicator, tempo_prototype):
-            prototype = tempo_prototype
-        else:
-            prototype = type(indicator)
-        stem = Command._to_indicator_stem(indicator)
-        assert stem in (
-            "BAR_EXTENT",
-            "BEAM",
-            "CLEF",
-            "DYNAMIC",
-            "INSTRUMENT",
-            "MARGIN_MARKUP",
-            "METRONOME_MARK",
-            "OTTAVA",
-            "PEDAL",
-            "PERSISTENT_OVERRIDE",
-            "PHRASING_SLUR",
-            "REPEAT_TIE",
-            "SLUR",
-            "STAFF_LINES",
-            "TIE",
-            "TRILL",
-        ), repr(stem)
-        reapplied_wrappers = []
-        reapplied_indicators = []
-        wrappers = list(abjad.get.wrappers(leaf))
-        effective_wrapper = abjad.get.effective_wrapper(leaf, prototype)
-        if effective_wrapper and effective_wrapper not in wrappers:
-            component = effective_wrapper.component
-            start_1 = abjad.get.timespan(leaf).start_offset
-            start_2 = abjad.get.timespan(component).start_offset
-            if start_1 == start_2:
-                wrappers_ = abjad.get.wrappers(component)
-                wrappers.extend(wrappers_)
-        for wrapper in wrappers:
-            if not wrapper.tag:
-                continue
-            is_reapplied_wrapper = False
-            for word in abjad.Tag(wrapper.tag):
-                if f"REAPPLIED_{stem}" in word or f"DEFAULT_{stem}" in word:
-                    is_reapplied_wrapper = True
-            if not is_reapplied_wrapper:
-                continue
-            reapplied_wrappers.append(wrapper)
-            if isinstance(wrapper.indicator, prototype):
-                reapplied_indicators.append(wrapper.indicator)
-            abjad.detach(wrapper, wrapper.component)
-        if reapplied_wrappers:
-            count = len(reapplied_indicators)
-            if count != 1:
-                for reapplied_wrapper in reapplied_wrappers:
-                    print(reapplied_wrapper)
-                counter = abjad.String("indicator").pluralize(count)
-                message = f"found {count} reapplied {counter};"
-                message += " expecting 1.\n\n"
-                raise Exception(message)
-            return reapplied_indicators[0]
-
-    @staticmethod
-    def _to_indicator_stem(indicator) -> abjad.String:
-        """
-        Changes ``indicator`` to stem.
-
-        ..  container:: example
-
-            >>> baca.Command._to_indicator_stem(abjad.Clef("alto"))
-            'CLEF'
-
-            >>> baca.Command._to_indicator_stem(abjad.Clef("treble"))
-            'CLEF'
-
-            >>> baca.Command._to_indicator_stem(abjad.Dynamic("f"))
-            'DYNAMIC'
-
-            >>> baca.Command._to_indicator_stem(abjad.StartHairpin("<"))
-            'DYNAMIC'
-
-            >>> baca.Command._to_indicator_stem(abjad.Cello())
-            'INSTRUMENT'
-
-            >>> baca.Command._to_indicator_stem(abjad.Violin())
-            'INSTRUMENT'
-
-            >>> metronome_mark = abjad.MetronomeMark((1, 4), 58)
-            >>> baca.Command._to_indicator_stem(metronome_mark)
-            'METRONOME_MARK'
-
-            >>> start_text_span = abjad.StartTextSpan()
-            >>> baca.Command._to_indicator_stem(start_text_span)
-            'TEXT_SPANNER'
-
-            >>> stop_text_span = abjad.StopTextSpan()
-            >>> baca.Command._to_indicator_stem(stop_text_span)
-            'TEXT_SPANNER'
-
-        """
-        assert getattr(indicator, "persistent", False), repr(indicator)
-        if isinstance(indicator, abjad.Instrument):
-            stem = "INSTRUMENT"
-        elif getattr(indicator, "parameter", None) == "TEMPO":
-            stem = "METRONOME_MARK"
-        elif hasattr(indicator, "parameter"):
-            stem = indicator.parameter
-        else:
-            stem = type(indicator).__name__
-        return abjad.String(stem).to_shout_case()
-
-    @staticmethod
-    def _validate_indexed_tweaks(tweaks):
-        if tweaks is None:
-            return
-        assert isinstance(tweaks, tuple), repr(tweaks)
-        for tweak in tweaks:
-            if isinstance(tweak, abjad.TweakInterface):
-                continue
-            if (
-                isinstance(tweak, tuple)
-                and len(tweak) == 2
-                and isinstance(tweak[0], abjad.TweakInterface)
-            ):
-                continue
-            raise Exception(tweak)
-
-    @staticmethod
-    def _validate_tags(tags):
-        assert isinstance(tags, list), repr(tags)
-        assert "" not in tags, repr(tags)
-        assert not any(":" in _ for _ in tags), repr(tags)
         return True
 
     ### PUBLIC PROPERTIES ###
@@ -598,7 +554,7 @@ class Command:
         """
         Gets tags.
         """
-        assert self._validate_tags(self._tags)
+        assert _validate_tags(self._tags)
         result: typing.List[abjad.Tag] = []
         if self._tags:
             result = self._tags[:]
@@ -640,7 +596,7 @@ class Suite:
         ...     baca.tenuto(),
         ...     measures=(1, 2),
         ...     selector=baca.selectors.pleaves(),
-        ...     )
+        ... )
 
         >>> string = abjad.storage(suite)
         >>> print(string)
@@ -679,7 +635,7 @@ class Suite:
         ...     baca.accent(),
         ...     baca.tenuto(),
         ...     measures=(1, 2),
-        ...     )
+        ... )
         >>> string = abjad.storage(suite)
         >>> print(string)
         baca.Suite(
@@ -815,9 +771,6 @@ class Suite:
 CommandTyping = typing.Union[Command, Suite]
 
 
-### FACTORY FUNCTIONS ###
-
-
 def chunk(*commands: CommandTyping, **keywords) -> Suite:
     """
     Chunks commands.
@@ -854,10 +807,10 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.new(
         ...         baca.marcato(),
         ...         baca.slur(),
@@ -865,7 +818,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         ...         selector=baca.selectors.leaves((4, -3)),
         ...         ),
         ...     baca.make_even_divisions(),
-        ...     )
+        ... )
 
         >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -983,18 +936,18 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.new(
         ...         baca.marcato(),
         ...         baca.slur(),
         ...         baca.staccato(),
         ...         selector=lambda _: baca.Selection(_).cmgroups()[1:-1],
-        ...         ),
+        ...     ),
         ...     baca.make_even_divisions(),
-        ...     )
+        ... )
 
         >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1166,15 +1119,15 @@ def only_parts(command: _command_typing) -> _command_typing:
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.only_parts(
-        ...         baca.hairpin('p < f'),
-        ...         ),
-        ...     )
+        ...         baca.hairpin("p < f"),
+        ...     ),
+        ... )
 
         >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1295,7 +1248,7 @@ def suite(*commands: CommandTyping, **keywords) -> Suite:
 
         Raises exception on noncommand:
 
-        >>> baca.suite('Allegro')
+        >>> baca.suite("Allegro")
         Traceback (most recent call last):
             ...
         Exception:
@@ -1341,7 +1294,7 @@ def tag(
         message += f" (not {tags!r})."
         raise Exception(message)
     assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
-    assert Command._validate_tags(tags), repr(tags)
+    assert _validate_tags(tags), repr(tags)
     if not isinstance(command, (Command, Suite)):
         raise Exception("can only tag command or suite.")
     if isinstance(command, Suite):
