@@ -34,10 +34,10 @@ class AccidentalAdjustmentCommand(_scoping.Command):
         ... )
 
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.force_accidental(selector=baca.selectors.pleaves((None, 2))),
         ...     baca.make_notes(repeat_ties=True),
-        ...     baca.pitches('E4 F4'),
+        ...     baca.pitches("E4 F4"),
         ... )
 
         >>> lilypond_file = maker.run(environment="docs")
@@ -517,8 +517,8 @@ class ClusterCommand(_scoping.Command):
             ... )
 
             >>> maker(
-            ...     'Music_Voice',
-            ...     baca.pitch('E4'),
+            ...     "Music_Voice",
+            ...     baca.pitch("E4"),
             ...     baca.make_notes(repeat_ties=True),
             ...     baca.natural_clusters(widths=[3]),
             ... )
@@ -660,9 +660,9 @@ class ClusterCommand(_scoping.Command):
             ... )
 
             >>> maker(
-            ...     'Music_Voice',
+            ...     "Music_Voice",
             ...     baca.make_notes(repeat_ties=True),
-            ...     baca.pitches('C4 D4 E4 F4'),
+            ...     baca.pitches("C4 D4 E4 F4"),
             ...     baca.clusters([3]),
             ... )
 
@@ -804,9 +804,9 @@ class ClusterCommand(_scoping.Command):
             ... )
 
             >>> maker(
-            ...     'Music_Voice',
+            ...     "Music_Voice",
             ...     baca.make_notes(repeat_ties=True),
-            ...     baca.clusters([3], start_pitch='G4'),
+            ...     baca.clusters([3], start_pitch="G4"),
             ... )
 
             >>> lilypond_file = maker.run(environment="docs")
@@ -952,13 +952,13 @@ class ClusterCommand(_scoping.Command):
             ...     preamble=[baca.global_context_string()],
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+            ... )
 
             >>> maker(
-            ...     'Music_Voice',
-            ...     baca.clusters([1, 2, 3, 4], start_pitch='E4'),
+            ...     "Music_Voice",
+            ...     baca.clusters([1, 2, 3, 4], start_pitch="E4"),
             ...     baca.make_notes(repeat_ties=True),
-            ...     )
+            ... )
 
             >>> lilypond_file = maker.run(environment="docs")
 
@@ -1095,13 +1095,13 @@ class ClusterCommand(_scoping.Command):
             ...     preamble=[baca.global_context_string()],
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+            ... )
 
             >>> maker(
-            ...     'Music_Voice',
-            ...     baca.clusters([1, 3], start_pitch='E4'),
+            ...     "Music_Voice",
+            ...     baca.clusters([1, 3], start_pitch="E4"),
             ...     baca.make_notes(repeat_ties=True),
-            ...     )
+            ... )
 
             >>> lilypond_file = maker.run(environment="docs")
 
@@ -1238,14 +1238,14 @@ class ClusterCommand(_scoping.Command):
             ...     preamble=[baca.global_context_string()],
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+            ... )
 
             >>> maker(
-            ...     'Music_Voice',
+            ...     "Music_Voice",
             ...     baca.make_notes(repeat_ties=True),
-            ...     baca.pitch('E4'),
+            ...     baca.pitch("E4"),
             ...     baca.clusters([]),
-            ...     )
+            ... )
 
             >>> lilypond_file = maker.run(environment="docs")
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1334,14 +1334,14 @@ class ColorFingeringCommand(_scoping.Command):
         ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> maker(
-        ...     'Music_Voice',
-        ...     baca.pitch('E4'),
+        ...     "Music_Voice",
+        ...     baca.pitch("E4"),
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.ColorFingeringCommand(numbers=[0, 1, 2, 1]),
-        ...     )
+        ... )
 
         >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1733,14 +1733,14 @@ class MicrotoneDeviationCommand(_scoping.Command):
         ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> maker(
-        ...     'Music_Voice',
-        ...     baca.pitches('E4'),
+        ...     "Music_Voice",
+        ...     baca.pitches("E4"),
         ...     baca.make_even_divisions(),
         ...     baca.deviation([0, 0.5, 0, -0.5]),
-        ...     )
+        ... )
 
         >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1919,16 +1919,16 @@ class OctaveDisplacementCommand(_scoping.Command):
         ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_even_divisions(),
         ...     baca.suite(
-        ...         baca.pitch('G4'),
+        ...         baca.pitch("G4"),
         ...         baca.displacement([0, 0, 1, 1, 0, 0, -1, -1, 2, 2]),
-        ...         ),
-        ...     )
+        ...     ),
+        ... )
 
         >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2092,9 +2092,7 @@ class OctaveDisplacementCommand(_scoping.Command):
 
         ..  container:: example
 
-            >>> command = baca.displacement(
-            ...     [0, 0, 0, 1, 1, 0, 0, 0, -1, 1, 1, 2, 2],
-            ...     )
+            >>> command = baca.displacement([0, 0, 0, 1, 1, 0, 0, 0, -1, 1, 1, 2, 2])
             >>> command.displacements
             CyclicTuple([0, 0, 0, 1, 1, 0, 0, 0, -1, 1, 1, 2, 2])
 
@@ -2167,8 +2165,7 @@ def _set_lt_pitch(
                 name = "no voice"
             else:
                 name = voice.name
-            message = f"already pitched {repr(leaf)} in {name}."
-            raise Exception(message)
+            raise Exception(f"already pitched {repr(leaf)} in {name}.")
         abjad.attach(already_pitched, leaf)
     if pitch is None:
         if not lt.is_pitched:
@@ -2226,13 +2223,13 @@ class PitchCommand(_scoping.Command):
         ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_even_divisions(),
         ...     baca.pitches([19, 13, 15, 16, 17, 23]),
-        ...     )
+        ... )
 
         >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2328,13 +2325,13 @@ class PitchCommand(_scoping.Command):
         ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('C4 F4 F#4 <B4 C#5> D5'),
-        ...     )
+        ...     baca.pitches("C4 F4 F#4 <B4 C#5> D5"),
+        ... )
 
         >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2430,13 +2427,13 @@ class PitchCommand(_scoping.Command):
         ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('<C4 D4 E4 F4 G4 A4 B4 C4>', allow_repeats=True)
-        ...     )
+        ...     baca.pitches("<C4 D4 E4 F4 G4 A4 B4 C4>", allow_repeats=True)
+        ... )
 
         >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2530,7 +2527,7 @@ class PitchCommand(_scoping.Command):
         >>> command = baca.PitchCommand(
         ...     cyclic=True,
         ...     pitches=[19, 13, 15, 16, 17, 23],
-        ...     )
+        ... )
 
         >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
         >>> command(staff)
@@ -2815,7 +2812,7 @@ class PitchCommand(_scoping.Command):
 
             >>> command = baca.PitchCommand(
             ...     pitches=[19, 13, 15, 16, 17, 23],
-            ...     )
+            ... )
 
             >>> for pitch in command.pitches:
             ...     pitch
@@ -2851,8 +2848,8 @@ class RegisterCommand(_scoping.Command):
         ...     baca.RegisterCommand(
         ...         registration=baca.Registration(
         ...             [('[A0, C8]', 15)],
-        ...             ),
         ...         ),
+        ...     ),
         ... )
         >>> selection = stack([[10, 12, 14], [10, 12, 14], [10, 12, 14]])
 
@@ -2905,18 +2902,16 @@ class RegisterCommand(_scoping.Command):
         ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> maker(
-        ...     'Music_Voice',
-        ...     baca.pitches('G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4'),
+        ...     "Music_Voice",
+        ...     baca.pitches("G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4"),
         ...     baca.make_even_divisions(),
         ...     baca.RegisterCommand(
-        ...         registration=baca.Registration(
-        ...             [('[A0, C8]', 15)],
-        ...             ),
-        ...         ),
-        ...     )
+        ...         registration=baca.Registration([("[A0, C8]", 15)]),
+        ...     ),
+        ... )
 
         >>> lilypond_file = maker.run(environment="docs")
 
@@ -3010,8 +3005,8 @@ class RegisterCommand(_scoping.Command):
         ...     baca.figure([1], 16),
         ...     rmakers.beam(),
         ...     baca.RegisterCommand(
-        ...         registration=baca.Registration([('[A0, C8]', -6)]),
-        ...         ),
+        ...         registration=baca.Registration([("[A0, C8]", -6)]),
+        ...     ),
         ... )
         >>> selection = stack([{10, 12, 14}])
 
@@ -3105,9 +3100,9 @@ class RegisterCommand(_scoping.Command):
 
             >>> command = baca.RegisterCommand(
             ...     registration=baca.Registration(
-            ...         [('[A0, C4)', 15), ('[C4, C8)', 27)],
-            ...         ),
-            ...     )
+            ...         [("[A0, C4)", 15), ("[C4, C8)", 27)],
+            ...     ),
+            ... )
 
             >>> string = abjad.storage(command.registration)
             >>> print(string)
@@ -3207,7 +3202,7 @@ class RegisterInterpolationCommand(_scoping.Command):
 
         >>> collections = [
         ...     [6, 4], [3, 5], [9, 10], [0, 11], [8, 7], [1, 2],
-        ...     ]
+        ... ]
         >>> collections = [set(_) for _ in collections]
         >>> selection = stack(collections)
 
@@ -3261,15 +3256,15 @@ class RegisterInterpolationCommand(_scoping.Command):
         ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
-        ...     )
+        ... )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.pitches(pitches),
         ...     baca.make_even_divisions(),
         ...     baca.register(12, 12),
-        ...     )
+        ... )
 
         >>> lilypond_file = maker.run(environment="docs")
 
@@ -3399,15 +3394,15 @@ class RegisterInterpolationCommand(_scoping.Command):
         ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
-        ...     )
+        ... )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.pitches(pitches),
         ...     baca.make_even_divisions(),
         ...     baca.register(12, 0),
-        ...     )
+        ... )
 
         >>> lilypond_file = maker.run(environment="docs")
 
@@ -3537,15 +3532,15 @@ class RegisterInterpolationCommand(_scoping.Command):
         ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
-        ...     )
+        ... )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.pitches(pitches),
         ...     baca.make_even_divisions(),
         ...     baca.register(0, 12),
-        ...     )
+        ... )
 
         >>> lilypond_file = maker.run(environment="docs")
 
@@ -3675,15 +3670,15 @@ class RegisterInterpolationCommand(_scoping.Command):
         ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
-        ...     )
+        ... )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.pitches(pitches),
         ...     baca.make_even_divisions(),
         ...     baca.register(12, -12),
-        ...     )
+        ... )
 
         >>> lilypond_file = maker.run(environment="docs")
 
@@ -3813,15 +3808,15 @@ class RegisterInterpolationCommand(_scoping.Command):
         ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
-        ...     )
+        ... )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.pitches(pitches),
         ...     baca.make_even_divisions(),
         ...     baca.register(-12, 12),
-        ...     )
+        ... )
 
         >>> lilypond_file = maker.run(environment="docs")
 
@@ -4184,7 +4179,7 @@ class RegisterInterpolationCommand(_scoping.Command):
             ...     baca.new(
             ...         baca.register(0, 24),
             ...         map=baca.selectors.tuplets(),
-            ...         ),
+            ...     ),
             ... )
 
             >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
@@ -4298,7 +4293,7 @@ class RegisterToOctaveCommand(_scoping.Command):
         ...     baca.RegisterToOctaveCommand(
         ...         anchor=abjad.Down,
         ...         octave_number=4,
-        ...         ),
+        ...     ),
         ... )
 
         >>> selection = stack([{0, 14, 28}])
@@ -4360,7 +4355,7 @@ class RegisterToOctaveCommand(_scoping.Command):
         ...     baca.RegisterToOctaveCommand(
         ...         anchor=abjad.Up,
         ...         octave_number=4,
-        ...         ),
+        ...     ),
         ... )
 
         >>> selection = stack([{0, 14, 28}])
@@ -4395,7 +4390,7 @@ class RegisterToOctaveCommand(_scoping.Command):
         ...     baca.RegisterToOctaveCommand(
         ...         anchor=abjad.Down,
         ...         octave_number=4,
-        ...         ),
+        ...     ),
         ... )
 
         >>> selection = stack([[0, 14, 28]])
@@ -4465,7 +4460,7 @@ class RegisterToOctaveCommand(_scoping.Command):
         ...     baca.RegisterToOctaveCommand(
         ...         anchor=abjad.Up,
         ...         octave_number=4,
-        ...         ),
+        ...     ),
         ... )
 
         >>> selection = stack([[0, 14, 28]])
@@ -4504,7 +4499,7 @@ class RegisterToOctaveCommand(_scoping.Command):
         ...     baca.RegisterToOctaveCommand(
         ...         anchor=abjad.Down,
         ...         octave_number=4,
-        ...         ),
+        ...     ),
         ... )
 
         >>> selection = stack([[10, 12, 14]])
@@ -4539,7 +4534,7 @@ class RegisterToOctaveCommand(_scoping.Command):
         ...     baca.RegisterToOctaveCommand(
         ...         anchor=abjad.Center,
         ...         octave_number=4,
-        ...         ),
+        ...     ),
         ... )
 
         >>> selection = stack([[10, 12, 14]])
@@ -4574,7 +4569,7 @@ class RegisterToOctaveCommand(_scoping.Command):
         ...     baca.RegisterToOctaveCommand(
         ...         anchor=abjad.Up,
         ...         octave_number=4,
-        ...         ),
+        ...     ),
         ... )
 
         >>> selection = stack([[10, 12, 14]])
@@ -4715,7 +4710,7 @@ class RegisterToOctaveCommand(_scoping.Command):
             >>> command = baca.RegisterToOctaveCommand(
             ...     anchor=abjad.Down,
             ...     octave_number=5,
-            ...     )
+            ... )
             >>> command(chord)
 
             ..  docs::
@@ -4732,7 +4727,7 @@ class RegisterToOctaveCommand(_scoping.Command):
             >>> command = baca.RegisterToOctaveCommand(
             ...     anchor=abjad.Center,
             ...     octave_number=5,
-            ...     )
+            ... )
             >>> command(chord)
 
             ..  docs::
@@ -4749,7 +4744,7 @@ class RegisterToOctaveCommand(_scoping.Command):
             >>> command = baca.RegisterToOctaveCommand(
             ...     anchor=abjad.Up,
             ...     octave_number=5,
-            ...     )
+            ... )
             >>> command(chord)
 
             ..  docs::
@@ -5253,8 +5248,8 @@ def bass_to_octave(
 
     ..  container:: example
 
-        Octave-transposes music such that the lowest note in the entire
-        selection appears in octave 3:
+        Octave-transposes music such that the lowest note in the entire selection appears
+        in octave 3:
 
         >>> stack = baca.stack(
         ...     baca.figure([5, -3], 32),
@@ -5339,8 +5334,8 @@ def bass_to_octave(
 
     ..  container:: example
 
-        Octave-transposes music such that the lowest pitch in each pitched
-        logical tie appears in octave 3:
+        Octave-transposes music such that the lowest pitch in each pitched logical tie
+        appears in octave 3:
 
         >>> stack = baca.stack(
         ...     baca.figure([5, -3], 32),
@@ -5348,7 +5343,7 @@ def bass_to_octave(
         ...     baca.new(
         ...         baca.bass_to_octave(3),
         ...         map=baca.selectors.plts(),
-        ...         ),
+        ...     ),
         ...     baca.color(baca.selectors.plts()),
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
@@ -5441,8 +5436,7 @@ def center_to_octave(
 
     ..  container:: example
 
-        Octave-transposes music such that the centroid of all PLTs appears
-        in octave 3:
+        Octave-transposes music such that the centroid of all PLTs appears in octave 3:
 
         >>> stack = baca.stack(
         ...     baca.figure([5, -3], 32),
@@ -5527,8 +5521,8 @@ def center_to_octave(
 
     ..  container:: example
 
-        Octave-transposes music such that the centroid of each pitched
-        logical tie appears in octave 3:
+        Octave-transposes music such that the centroid of each pitched logical tie
+        appears in octave 3:
 
         >>> stack = baca.stack(
         ...     baca.figure([5, -3], 32),
@@ -5536,7 +5530,7 @@ def center_to_octave(
         ...     baca.new(
         ...         baca.center_to_octave(3),
         ...         map=baca.selectors.plts(),
-        ...         ),
+        ...     ),
         ...     baca.color(baca.selectors.plts()),
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
@@ -5820,16 +5814,18 @@ def force_accidental(
         ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> maker(
-        ...     'Music_Voice',
-        ...     baca.not_parts(baca.force_accidental(
-        ...         selector=baca.selectors.pleaves((None, 2)),
-        ...     )),
+        ...     "Music_Voice",
+        ...     baca.not_parts(
+        ...         baca.force_accidental(
+        ...             selector=baca.selectors.pleaves((None, 2)),
+        ...         ),
+        ...     ),
         ...     baca.make_notes(repeat_ties=True),
-        ...     baca.pitches('E4 F4'),
-        ...     )
+        ...     baca.pitches("E4 F4"),
+        ... )
 
         >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -5912,8 +5908,8 @@ def interpolate_pitches(
     mock: bool = None,
 ) -> StaffPositionInterpolationCommand:
     r"""
-    Interpolates from staff position of ``start`` pitch to staff
-    position of ``stop`` pitch.
+    Interpolates from staff position of ``start`` pitch to staff position of ``stop``
+    pitch.
 
     ..  container:: example
 
@@ -5983,12 +5979,12 @@ def interpolate_pitches(
         >>> stack = baca.stack(
         ...     baca.figure([1], 16),
         ...     rmakers.beam(),
-        ...     baca.clef('treble'),
-        ...     baca.interpolate_pitches('Eb4', 'F#5'),
+        ...     baca.clef("treble"),
+        ...     baca.interpolate_pitches("Eb4", "F#5"),
         ...     baca.glissando(
         ...         allow_repeats=True,
         ...         hide_middle_note_heads=True,
-        ...         ),
+        ...     ),
         ...     baca.glissando_thickness(3),
         ... )
 
@@ -6138,8 +6134,8 @@ def pitch(
 
     ..  container:: example
 
-        REGRESSION. Preserves duration multipliers when leaves cast from one
-        type to another (note to chord in this example):
+        REGRESSION. Preserves duration multipliers when leaves cast from one type to
+        another (note to chord in this example):
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
@@ -6523,8 +6519,7 @@ def register(
                 }
             >>
 
-        Octave-transposes PLTs in tuplet 1 to an octave interpolated from
-        -6 to 18:
+        Octave-transposes PLTs in tuplet 1 to an octave interpolated from -6 to 18:
 
         >>> stack = baca.stack(
         ...     baca.figure(
@@ -6622,8 +6617,8 @@ def soprano_to_octave(
 
     ..  container:: example
 
-        Octave-transposes music such that the highest note in the
-        collection of all PLTs appears in octave 3:
+        Octave-transposes music such that the highest note in the collection of all PLTs
+        appears in octave 3:
 
         >>> stack = baca.stack(
         ...     baca.figure([5, -3], 32),
@@ -6708,8 +6703,8 @@ def soprano_to_octave(
 
     ..  container:: example
 
-        Octave-transposes music that such that the highest note in each
-        pitched logical tie appears in octave 3:
+        Octave-transposes music that such that the highest note in each pitched logical
+        tie appears in octave 3:
 
         >>> stack = baca.stack(
         ...     baca.figure([5, -3], 32),
