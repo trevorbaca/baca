@@ -7,7 +7,9 @@ import typing
 import abjad
 from abjadext import rmakers
 
-from . import const, overrides, scoping
+from . import const as _const
+from . import overrides as _overrides
+from . import scoping as _scoping
 from . import selection as _selection
 from . import sequence as _sequence
 from . import tags as _tags
@@ -20,13 +22,13 @@ RhythmMakerTyping = typing.Union[
 
 def _site(frame):
     prefix = "baca"
-    return scoping.site(frame, prefix)
+    return _scoping.site(frame, prefix)
 
 
 ### CLASSES ###
 
 
-class RhythmCommand(scoping.Command):
+class RhythmCommand(_scoping.Command):
     r"""
     Rhythm command.
 
@@ -170,9 +172,9 @@ class RhythmCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         persist: str = None,
-        scope: scoping.ScopeTyping = None,
+        scope: _scoping.ScopeTyping = None,
     ) -> None:
-        scoping.Command.__init__(self, match=match, measures=measures, scope=scope)
+        _scoping.Command.__init__(self, match=match, measures=measures, scope=scope)
         if annotation_spanner_color is not None:
             assert isinstance(annotation_spanner_color, str)
         self._annotation_spanner_color = annotation_spanner_color
@@ -272,7 +274,7 @@ class RhythmCommand(scoping.Command):
             rest_prototype = (abjad.MultimeasureRest, abjad.Rest, abjad.Skip)
             for leaf in abjad.iterate(container).leaves():
                 if isinstance(leaf, (abjad.Note, abjad.Chord)):
-                    abjad.attach(const.NOT_YET_PITCHED, leaf, tag=None)
+                    abjad.attach(_const.NOT_YET_PITCHED, leaf, tag=None)
                 elif isinstance(leaf, rest_prototype):
                     pass
                 else:
@@ -284,7 +286,7 @@ class RhythmCommand(scoping.Command):
         previous_segment_stop_state = None
         dictionary = runtime.get("previous_segment_voice_metadata")
         if dictionary:
-            previous_segment_stop_state = dictionary.get(const.RHYTHM)
+            previous_segment_stop_state = dictionary.get(_const.RHYTHM)
             if (
                 previous_segment_stop_state is not None
                 and previous_segment_stop_state.get("name") != self.persist
@@ -340,7 +342,7 @@ class RhythmCommand(scoping.Command):
             'RHYTHM'
 
         """
-        return const.RHYTHM
+        return _const.RHYTHM
 
     @property
     def persist(self) -> typing.Optional[str]:
@@ -1235,15 +1237,15 @@ def tacet(
     *,
     measures: typings.SliceTyping = None,
     selector=lambda _: _selection.Selection(_).mmrests(),
-) -> overrides.OverrideCommand:
+) -> _overrides.OverrideCommand:
     """
     Colors multimeasure rests.
     """
-    command = overrides.mmrest_color(color, selector=selector)
-    scoping.tag(_tags.TACET_COLORING, command)
-    scoping.tag(_site(inspect.currentframe()), command)
-    command_ = scoping.new(command, measures=measures)
-    assert isinstance(command_, overrides.OverrideCommand)
+    command = _overrides.mmrest_color(color, selector=selector)
+    _scoping.tag(_tags.TACET_COLORING, command)
+    _scoping.tag(_site(inspect.currentframe()), command)
+    command_ = _scoping.new(command, measures=measures)
+    assert isinstance(command_, _overrides.OverrideCommand)
     return command_
 
 

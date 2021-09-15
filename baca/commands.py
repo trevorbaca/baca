@@ -7,7 +7,11 @@ import typing
 
 import abjad
 
-from . import commandclasses, const, indicatorcommands, indicators, overrides
+from . import commandclasses as _commandclasses
+from . import const as _const
+from . import indicatorcommands as _indicatorcommands
+from . import indicators as _indicators
+from . import overrides as _overrides
 from . import parts as _parts
 from . import path as _path
 from . import pitchcommands, scoping
@@ -26,12 +30,12 @@ def _site(frame, n=None):
 
 def allow_octaves(
     *, selector=lambda _: _selection.Selection(_).leaves()
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     """
     Attaches ALLOW_OCTAVE constant.
     """
-    return commandclasses.IndicatorCommand(
-        indicators=[const.ALLOW_OCTAVE], selector=selector
+    return _commandclasses.IndicatorCommand(
+        indicators=[_const.ALLOW_OCTAVE], selector=selector
     )
 
 
@@ -39,7 +43,7 @@ def assign_parts(
     part_assignment: _parts.PartAssignment,
     *,
     selector=lambda _: _selection.Selection(_).leaves(),
-) -> commandclasses.PartAssignmentCommand:
+) -> _commandclasses.PartAssignmentCommand:
     r"""
     Inserts ``selector`` output in container and sets part assignment.
 
@@ -161,7 +165,7 @@ def assign_parts(
         message = "part_assignment must be part assignment"
         message += f" (not {part_assignment!r})."
         raise Exception(message)
-    return commandclasses.PartAssignmentCommand(
+    return _commandclasses.PartAssignmentCommand(
         part_assignment=part_assignment, selector=selector
     )
 
@@ -173,7 +177,7 @@ def bcps(
     final_spanner: bool = None,
     helper: typing.Callable = None,
     selector=lambda _: _selection.Selection(_).leaves(),
-) -> commandclasses.BCPCommand:
+) -> _commandclasses.BCPCommand:
     r"""
     Makes bow contact point command.
 
@@ -359,7 +363,7 @@ def bcps(
     """
     if final_spanner is not None:
         final_spanner = bool(final_spanner)
-    return commandclasses.BCPCommand(
+    return _commandclasses.BCPCommand(
         bcps=bcps,
         bow_change_tweaks=bow_change_tweaks,
         final_spanner=final_spanner,
@@ -382,15 +386,15 @@ def close_volta(
     after = format_slot == "after"
     # does not require not_mol() tagging, just only_mol() tagging:
     return scoping.suite(
-        indicatorcommands.bar_line(":|.", selector, format_slot=format_slot),
-        scoping.only_mol(overrides.bar_line_x_extent((0, 1.5), selector, after=after)),
+        _indicatorcommands.bar_line(":|.", selector, format_slot=format_slot),
+        scoping.only_mol(_overrides.bar_line_x_extent((0, 1.5), selector, after=after)),
     )
 
 
 def color(
     selector=lambda _: _selection.Selection(_).leaves(),
     lone=False,
-) -> commandclasses.ColorCommand:
+) -> _commandclasses.ColorCommand:
     r"""
     Makes color command.
 
@@ -551,14 +555,14 @@ def color(
             >>
 
     """
-    return commandclasses.ColorCommand(selector=selector, lone=lone)
+    return _commandclasses.ColorCommand(selector=selector, lone=lone)
 
 
 def container(
     identifier: str = None,
     *,
     selector=lambda _: _selection.Selection(_).leaves(),
-) -> commandclasses.ContainerCommand:
+) -> _commandclasses.ContainerCommand:
     r"""
     Makes container with ``identifier`` and extends container with
     ``selector`` output.
@@ -653,12 +657,12 @@ def container(
         if not isinstance(identifier, str):
             message = f"identifier must be string (not {identifier!r})."
             raise Exception(message)
-    return commandclasses.ContainerCommand(identifier=identifier, selector=selector)
+    return _commandclasses.ContainerCommand(identifier=identifier, selector=selector)
 
 
 def cross_staff(
     *, selector=lambda _: _selection.Selection(_).phead(0)
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches cross-staff command.
 
@@ -781,7 +785,7 @@ def cross_staff(
             >>
 
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r"\crossStaff")],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -795,15 +799,15 @@ def double_volta(
     Attaches bar line and overrides bar line X-extent.
     """
     return scoping.suite(
-        indicatorcommands.bar_line(":.|.:", selector, format_slot="before"),
-        scoping.not_mol(overrides.bar_line_x_extent((0, 3), selector)),
-        scoping.only_mol(overrides.bar_line_x_extent((0, 4), selector)),
+        _indicatorcommands.bar_line(":.|.:", selector, format_slot="before"),
+        scoping.not_mol(_overrides.bar_line_x_extent((0, 3), selector)),
+        scoping.only_mol(_overrides.bar_line_x_extent((0, 4), selector)),
     )
 
 
 def dynamic_down(
     *, selector=lambda _: _selection.Selection(_).leaf(0)
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches dynamic-down command.
 
@@ -883,7 +887,7 @@ def dynamic_down(
             >>
 
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r"\dynamicDown")],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -892,7 +896,7 @@ def dynamic_down(
 
 def dynamic_up(
     *, selector=lambda _: _selection.Selection(_).leaf(0)
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches dynamic-up command.
 
@@ -972,7 +976,7 @@ def dynamic_up(
             >>
 
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r"\dynamicUp")],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -980,19 +984,19 @@ def dynamic_up(
 
 
 def edition(
-    not_parts: typing.Union[str, abjad.Markup, commandclasses.IndicatorCommand],
-    only_parts: typing.Union[str, abjad.Markup, commandclasses.IndicatorCommand],
+    not_parts: typing.Union[str, abjad.Markup, _commandclasses.IndicatorCommand],
+    only_parts: typing.Union[str, abjad.Markup, _commandclasses.IndicatorCommand],
 ) -> scoping.Suite:
     """
     Makes not-parts / only-parts markup suite.
     """
     if isinstance(not_parts, (str, abjad.Markup)):
         not_parts = markup(not_parts)
-    assert isinstance(not_parts, commandclasses.IndicatorCommand)
+    assert isinstance(not_parts, _commandclasses.IndicatorCommand)
     not_parts_ = scoping.not_parts(not_parts)
     if isinstance(only_parts, (str, abjad.Markup)):
         only_parts = markup(only_parts)
-    assert isinstance(only_parts, commandclasses.IndicatorCommand)
+    assert isinstance(only_parts, _commandclasses.IndicatorCommand)
     only_parts_ = scoping.only_parts(only_parts)
     return scoping.suite(not_parts_, only_parts_)
 
@@ -1001,7 +1005,7 @@ def finger_pressure_transition(
     *,
     selector=lambda _: _selection.Selection(_).tleaves(),
     right_broken: bool = None,
-) -> commandclasses.GlissandoCommand:
+) -> _commandclasses.GlissandoCommand:
     r"""
     Makes finger pressure transition glissando.
 
@@ -1110,7 +1114,7 @@ def finger_pressure_transition(
             >>
 
     """
-    return commandclasses.GlissandoCommand(
+    return _commandclasses.GlissandoCommand(
         allow_repeats=True,
         right_broken=right_broken,
         selector=selector,
@@ -1240,7 +1244,7 @@ def glissando(
     selector=lambda _: _selection.Selection(_).tleaves(),
     style: str = None,
     zero_padding: bool = None,
-) -> commandclasses.GlissandoCommand:
+) -> _commandclasses.GlissandoCommand:
     r"""
     Attaches glissando.
 
@@ -1719,7 +1723,7 @@ def glissando(
             >>
 
     """
-    return commandclasses.GlissandoCommand(
+    return _commandclasses.GlissandoCommand(
         allow_repeats=allow_repeats,
         allow_ties=allow_ties,
         hide_middle_note_heads=hide_middle_note_heads,
@@ -1739,16 +1743,16 @@ def glissando(
 def global_fermata(
     description: str = "fermata",
     selector=lambda _: _selection.Selection(_).leaf(0),
-) -> commandclasses.GlobalFermataCommand:
+) -> _commandclasses.GlobalFermataCommand:
     """
     Attaches global fermata.
     """
-    fermatas = commandclasses.GlobalFermataCommand.description_to_command.keys()
+    fermatas = _commandclasses.GlobalFermataCommand.description_to_command.keys()
     if description not in fermatas:
         message = f"must be in {repr(', '.join(fermatas))}:\n"
         message += f"   {repr(description)}"
         raise Exception(message)
-    return commandclasses.GlobalFermataCommand(
+    return _commandclasses.GlobalFermataCommand(
         description=description,
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -1758,14 +1762,14 @@ def global_fermata(
 def instrument(
     instrument: abjad.Instrument,
     selector=lambda _: _selection.Selection(_).leaf(0),
-) -> commandclasses.InstrumentChangeCommand:
+) -> _commandclasses.InstrumentChangeCommand:
     """
     Makes instrument change command.
     """
     if not isinstance(instrument, abjad.Instrument):
         message = f"instrument must be instrument (not {instrument!r})."
         raise Exception(message)
-    return commandclasses.InstrumentChangeCommand(
+    return _commandclasses.InstrumentChangeCommand(
         indicators=[instrument],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -1880,7 +1884,7 @@ def invisible_music(
     """
     tag = _site(inspect.currentframe(), 1)
     tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
-    command_1 = commandclasses.IndicatorCommand(
+    command_1 = _commandclasses.IndicatorCommand(
         [abjad.LilyPondLiteral(r"\abjad-invisible-music")],
         deactivate=True,
         map=map,
@@ -1889,7 +1893,7 @@ def invisible_music(
     )
     tag = _site(inspect.currentframe(), 2)
     tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
-    command_2 = commandclasses.IndicatorCommand(
+    command_2 = _commandclasses.IndicatorCommand(
         [abjad.LilyPondLiteral(r"\abjad-invisible-music-coloring")],
         map=map,
         selector=selector,
@@ -1901,7 +1905,7 @@ def invisible_music(
 def label(
     callable_,
     selector=lambda _: _selection.Selection(_).leaves(),
-) -> commandclasses.LabelCommand:
+) -> _commandclasses.LabelCommand:
     r"""
     Applies label ``callable_`` to ``selector`` output.
 
@@ -1985,7 +1989,7 @@ def label(
             >>
 
     """
-    return commandclasses.LabelCommand(callable_=callable_, selector=selector)
+    return _commandclasses.LabelCommand(callable_=callable_, selector=selector)
 
 
 def markup(
@@ -1998,7 +2002,7 @@ def markup(
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
     selector=lambda _: _selection.Selection(_).pleaf(0),
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     r"""
     Makes markup and inserts into indicator command.
 
@@ -2196,7 +2200,7 @@ def markup(
         return _selection.Selection(argument).phead(0)
 
     selector = selector or select_phead_0
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[markup],
         map=map,
         match=match,
@@ -2208,29 +2212,29 @@ def markup(
 
 
 def metronome_mark(
-    key: typing.Union[str, indicators.Accelerando, indicators.Ritardando],
+    key: typing.Union[str, _indicators.Accelerando, _indicators.Ritardando],
     selector=lambda _: _selection.Selection(_).leaf(0),
     *,
     redundant: bool = None,
-) -> typing.Optional[commandclasses.MetronomeMarkCommand]:
+) -> typing.Optional[_commandclasses.MetronomeMarkCommand]:
     """
     Attaches metronome mark matching ``key`` metronome mark manifest.
     """
     if redundant is True:
         return None
-    return commandclasses.MetronomeMarkCommand(
+    return _commandclasses.MetronomeMarkCommand(
         key=key, redundant=redundant, selector=selector
     )
 
 
 def one_voice(
     selector=lambda _: _selection.Selection(_).leaf(0),
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     r"""
     Makes LilyPond ``\oneVoice`` command.
     """
     literal = abjad.LilyPondLiteral(r"\oneVoice")
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[literal],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -2244,9 +2248,9 @@ def open_volta(
     Attaches bar line and overrides bar line X-extent.
     """
     return scoping.suite(
-        indicatorcommands.bar_line(".|:", selector, format_slot="before"),
-        scoping.not_mol(overrides.bar_line_x_extent((0, 2), selector)),
-        scoping.only_mol(overrides.bar_line_x_extent((0, 3), selector)),
+        _indicatorcommands.bar_line(".|:", selector, format_slot="before"),
+        scoping.not_mol(_overrides.bar_line_x_extent((0, 2), selector)),
+        scoping.only_mol(_overrides.bar_line_x_extent((0, 3), selector)),
     )
 
 
@@ -2273,21 +2277,23 @@ def previous_metadata(path: str) -> abjad.OrderedDict:
     return previous_metadata
 
 
-def untie(selector: abjad.Expression) -> commandclasses.DetachCommand:
+def untie(selector: abjad.Expression) -> _commandclasses.DetachCommand:
     """
     Makes (repeat-)tie detach command.
     """
-    return commandclasses.DetachCommand([abjad.Tie, abjad.RepeatTie], selector=selector)
+    return _commandclasses.DetachCommand(
+        [abjad.Tie, abjad.RepeatTie], selector=selector
+    )
 
 
 def voice_four(
     selector=lambda _: _selection.Selection(_).leaf(0),
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     r"""
     Makes LilyPond ``\voiceFour`` command.
     """
     literal = abjad.LilyPondLiteral(r"\voiceFour")
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[literal],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -2296,12 +2302,12 @@ def voice_four(
 
 def voice_one(
     selector=lambda _: _selection.Selection(_).leaf(0),
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     r"""
     Makes LilyPond ``\voiceOne`` command.
     """
     literal = abjad.LilyPondLiteral(r"\voiceOne")
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[literal],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -2310,12 +2316,12 @@ def voice_one(
 
 def voice_three(
     selector=lambda _: _selection.Selection(_).leaf(0),
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     r"""
     Makes LilyPond ``\voiceThree`` command.
     """
     literal = abjad.LilyPondLiteral(r"\voiceThree")
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[literal],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -2324,12 +2330,12 @@ def voice_three(
 
 def voice_two(
     selector=lambda _: _selection.Selection(_).leaf(0),
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     r"""
     Makes LilyPond ``\voiceTwo`` command.
     """
     literal = abjad.LilyPondLiteral(r"\voiceTwo")
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[literal],
         selector=selector,
         tags=[_site(inspect.currentframe())],

@@ -8,7 +8,11 @@ import typing
 import abjad
 from abjadext import rmakers
 
-from . import classes, commandclasses, const, pitchclasses, rhythmcommands
+from . import classes as _classes
+from . import commandclasses as _commandclasses
+from . import const as _const
+from . import pitchclasses as _pitchclasses
+from . import rhythmcommands as _rhythmcommands
 from . import selection as _selection
 from . import sequence as _sequence
 from . import tags as _tags
@@ -1980,7 +1984,7 @@ class Imbrication:
         segment = _sequence.Sequence(self.segment).flatten(depth=-1)
         if self.by_pitch_class:
             segment = _sequence.Sequence([abjad.NumberedPitchClass(_) for _ in segment])
-        cursor = classes.Cursor(
+        cursor = _classes.Cursor(
             singletons=True, source=segment, suppress_exception=True
         )
         pitch_number = cursor.next()
@@ -2053,7 +2057,7 @@ class Imbrication:
             pleaves = _selection.Selection(container).pleaves()
             assert isinstance(pleaves, abjad.Selection)
             for pleaf in pleaves:
-                abjad.attach(const.ALLOW_OCTAVE, pleaf)
+                abjad.attach(_const.ALLOW_OCTAVE, pleaf)
         return {self.voice_name: selection}
 
     ### PRIVATE METHODS ###
@@ -2066,7 +2070,7 @@ class Imbrication:
         for command in commands:
             if isinstance(command, Assignment):
                 continue
-            if isinstance(command, rhythmcommands.RhythmCommand):
+            if isinstance(command, _rhythmcommands.RhythmCommand):
                 continue
             if isinstance(command, Imbrication):
                 continue
@@ -3203,7 +3207,7 @@ class Accumulator:
             abjad.Segment,
             abjad.Sequence,
             abjad.Set,
-            pitchclasses.CollectionList,
+            _pitchclasses.CollectionList,
         )
         if not isinstance(collections, prototype):
             message = "collections must be coerceable:\n"
@@ -3508,7 +3512,7 @@ class Accumulator:
                 continue
             segment_maker(
                 (voice_name, 1),
-                rhythmcommands.music(
+                _rhythmcommands.music(
                     selection, do_not_check_total_duration=True, tag=None
                 ),
             )
@@ -4384,17 +4388,17 @@ def _add_rest_affixes(
     return leaves
 
 
-def _coerce_collections(collections) -> pitchclasses.CollectionList:
+def _coerce_collections(collections) -> _pitchclasses.CollectionList:
     prototype = (abjad.Segment, abjad.Set)
     if isinstance(collections, prototype):
-        return pitchclasses.CollectionList(collections=[collections])
+        return _pitchclasses.CollectionList(collections=[collections])
     item_class: typing.Type = abjad.NumberedPitch
     for collection in collections:
         for item in collection:
             if isinstance(item, str):
                 item_class = abjad.NamedPitch
                 break
-    return pitchclasses.CollectionList(collections=collections, item_class=item_class)
+    return _pitchclasses.CollectionList(collections=collections, item_class=item_class)
 
 
 def _fix_rounding_error(durations, total_duration):
@@ -7652,7 +7656,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
 def extend_beam(
     selector=lambda _: _selection.Selection(_).leaf(-1),
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches RIGHT_BROKEN_BEAM to selector output.
 
@@ -7897,8 +7901,8 @@ def extend_beam(
             >>
 
     """
-    return commandclasses.IndicatorCommand(
-        indicators=[const.RIGHT_BROKEN_BEAM], selector=selector
+    return _commandclasses.IndicatorCommand(
+        indicators=[_const.RIGHT_BROKEN_BEAM], selector=selector
     )
 
 

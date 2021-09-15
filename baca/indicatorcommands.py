@@ -6,22 +6,25 @@ import typing
 
 import abjad
 
-from . import commandclasses, const, indicators, scoping
+from . import commandclasses as _commandclasses
+from . import const as _const
+from . import indicators as _indicators
+from . import scoping as _scoping
 from . import selection as _selection
 from . import tags as _tags
 
 
 def _site(frame):
     prefix = "baca"
-    return scoping.site(frame, prefix)
+    return _scoping.site(frame, prefix)
 
 
 ### FACTORY FUNCTIONS ###
 
 
 def accent(
-    selector=lambda _: _selection.Selection(_).phead(0, exclude=const.HIDDEN),
-) -> commandclasses.IndicatorCommand:
+    selector=lambda _: _selection.Selection(_).phead(0, exclude=_const.HIDDEN),
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches accent.
 
@@ -97,7 +100,7 @@ def accent(
             >>
 
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation(">")],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -105,11 +108,11 @@ def accent(
 
 
 def alternate_bow_strokes(
-    selector=lambda _: _selection.Selection(_).pheads(exclude=const.HIDDEN),
+    selector=lambda _: _selection.Selection(_).pheads(exclude=_const.HIDDEN),
     *tweaks: abjad.TweakInterface,
     downbow_first: bool = True,
     full: bool = None,
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches alternate bow strokes.
 
@@ -364,7 +367,7 @@ def alternate_bow_strokes(
         else:
             strings = ["upbow", "downbow"]
     indicators = [abjad.Articulation(_) for _ in strings]
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=indicators,
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -373,8 +376,8 @@ def alternate_bow_strokes(
 
 
 def arpeggio(
-    selector=lambda _: _selection.Selection(_).chead(0, exclude=const.HIDDEN),
-) -> commandclasses.IndicatorCommand:
+    selector=lambda _: _selection.Selection(_).chead(0, exclude=_const.HIDDEN),
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches arpeggio.
 
@@ -452,7 +455,7 @@ def arpeggio(
             >>
 
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("arpeggio")],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -461,13 +464,13 @@ def arpeggio(
 
 def articulation(
     articulation: str,
-    selector=lambda _: _selection.Selection(_).phead(0, exclude=const.HIDDEN),
-) -> commandclasses.IndicatorCommand:
+    selector=lambda _: _selection.Selection(_).phead(0, exclude=_const.HIDDEN),
+) -> _commandclasses.IndicatorCommand:
     """
     Attaches articulation.
     """
     articulation_ = abjad.Articulation(articulation)
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[articulation_],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -476,12 +479,12 @@ def articulation(
 
 def articulations(
     articulations: typing.List,
-    selector=lambda _: _selection.Selection(_).pheads(exclude=const.HIDDEN),
-) -> commandclasses.IndicatorCommand:
+    selector=lambda _: _selection.Selection(_).pheads(exclude=_const.HIDDEN),
+) -> _commandclasses.IndicatorCommand:
     """
     Attaches articulations.
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=articulations,
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -493,12 +496,12 @@ def bar_line(
     selector=lambda _: _selection.Selection(_).leaf(0),
     *,
     format_slot: str = "after",
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     """
     Attaches bar line.
     """
     indicator = abjad.BarLine(abbreviation, format_slot=format_slot)
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[indicator],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -506,15 +509,15 @@ def bar_line(
 
 
 def breathe(
-    selector=lambda _: _selection.Selection(_).pleaf(-1, exclude=const.HIDDEN),
+    selector=lambda _: _selection.Selection(_).pleaf(-1, exclude=_const.HIDDEN),
     *tweaks: abjad.TweakInterface,
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     """
     Attaches breathe command.
     """
     # TODO: change to abjad.Articulation("breathe", format_slot="after")?
     breathe = abjad.LilyPondLiteral(r"\breathe", format_slot="after")
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[breathe],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -527,7 +530,7 @@ def clef(
     selector=lambda _: _selection.Selection(_).leaf(0),
     *,
     redundant: bool = None,
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches clef.
 
@@ -604,7 +607,7 @@ def clef(
 
     """
     indicator = abjad.Clef(clef)
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[indicator],
         redundant=redundant,
         selector=selector,
@@ -613,13 +616,13 @@ def clef(
 
 
 def damp(
-    selector=lambda _: _selection.Selection(_).phead(0, exclude=const.HIDDEN),
+    selector=lambda _: _selection.Selection(_).phead(0, exclude=_const.HIDDEN),
     *tweaks: abjad.TweakInterface,
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     """
     Attaches damp.
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("baca-damp")],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -628,12 +631,12 @@ def damp(
 
 
 def double_flageolet(
-    selector=lambda _: _selection.Selection(_).phead(0, exclude=const.HIDDEN),
-) -> commandclasses.IndicatorCommand:
+    selector=lambda _: _selection.Selection(_).phead(0, exclude=_const.HIDDEN),
+) -> _commandclasses.IndicatorCommand:
     """
     Attaches double flageolet.
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("baca-double-flageolet")],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -641,8 +644,8 @@ def double_flageolet(
 
 
 def double_staccato(
-    selector=lambda _: _selection.Selection(_).phead(0, exclude=const.HIDDEN),
-) -> commandclasses.IndicatorCommand:
+    selector=lambda _: _selection.Selection(_).phead(0, exclude=_const.HIDDEN),
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches double-staccato.
 
@@ -720,7 +723,7 @@ def double_staccato(
             >>
 
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("baca-staccati #2")],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -728,8 +731,8 @@ def double_staccato(
 
 
 def down_arpeggio(
-    selector=lambda _: _selection.Selection(_).chead(0, exclude=const.HIDDEN),
-) -> commandclasses.IndicatorCommand:
+    selector=lambda _: _selection.Selection(_).chead(0, exclude=_const.HIDDEN),
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches down-arpeggio.
 
@@ -808,7 +811,7 @@ def down_arpeggio(
             >>
 
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.Arpeggio(direction=abjad.Down)],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -816,10 +819,10 @@ def down_arpeggio(
 
 
 def down_bow(
-    selector=lambda _: _selection.Selection(_).phead(0, exclude=const.HIDDEN),
+    selector=lambda _: _selection.Selection(_).phead(0, exclude=_const.HIDDEN),
     *tweaks: abjad.TweakInterface,
     full: bool = None,
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches down-bow.
 
@@ -974,7 +977,7 @@ def down_bow(
         articulation = abjad.Articulation("baca-full-downbow")
     else:
         articulation = abjad.Articulation("downbow")
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[articulation],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -983,9 +986,9 @@ def down_bow(
 
 
 def espressivo(
-    selector=lambda _: _selection.Selection(_).phead(0, exclude=const.HIDDEN),
+    selector=lambda _: _selection.Selection(_).phead(0, exclude=_const.HIDDEN),
     *tweaks: abjad.TweakInterface,
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches espressivo.
 
@@ -1061,7 +1064,7 @@ def espressivo(
             >>
 
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("espressivo")],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -1071,7 +1074,7 @@ def espressivo(
 
 def fermata(
     selector=lambda _: _selection.Selection(_).leaf(0),
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches fermata.
 
@@ -1147,7 +1150,7 @@ def fermata(
             >>
 
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("fermata")],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -1155,8 +1158,8 @@ def fermata(
 
 
 def flageolet(
-    selector=lambda _: _selection.Selection(_).phead(0, exclude=const.HIDDEN),
-) -> commandclasses.IndicatorCommand:
+    selector=lambda _: _selection.Selection(_).phead(0, exclude=_const.HIDDEN),
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches flageolet.
 
@@ -1232,7 +1235,7 @@ def flageolet(
             >>
 
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("flageolet")],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -1240,8 +1243,8 @@ def flageolet(
 
 
 def hide_black_note_heads(
-    selector=lambda _: _selection.Selection(_).leaves(exclude=const.HIDDEN),
-) -> commandclasses.IndicatorCommand:
+    selector=lambda _: _selection.Selection(_).leaves(exclude=_const.HIDDEN),
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches note-head stencil false to black note-heads.
 
@@ -1332,7 +1335,7 @@ def hide_black_note_heads(
     """
     string = r"\once \override NoteHead.transparent = ##t"
     literal = abjad.LilyPondLiteral(string)
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[literal],
         predicate=lambda _: _.written_duration < abjad.Duration(1, 2),
         selector=selector,
@@ -1341,8 +1344,8 @@ def hide_black_note_heads(
 
 
 def laissez_vibrer(
-    selector=lambda _: _selection.Selection(_).ptail(0, exclude=const.HIDDEN),
-) -> commandclasses.IndicatorCommand:
+    selector=lambda _: _selection.Selection(_).ptail(0, exclude=_const.HIDDEN),
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches laissez vibrer.
 
@@ -1418,7 +1421,7 @@ def laissez_vibrer(
             >>
 
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.LaissezVibrer()],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -1430,12 +1433,12 @@ def literal(
     selector=lambda _: _selection.Selection(_).leaf(0),
     *,
     format_slot: str = "before",
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     """
     Attaches LilyPond literal.
     """
     literal = abjad.LilyPondLiteral(string, format_slot=format_slot)
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[literal],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -1444,7 +1447,7 @@ def literal(
 
 def long_fermata(
     selector=lambda _: _selection.Selection(_).leaf(0),
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches long fermata.
 
@@ -1520,7 +1523,7 @@ def long_fermata(
             >>
 
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("longfermata")],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -1528,8 +1531,8 @@ def long_fermata(
 
 
 def marcato(
-    selector=lambda _: _selection.Selection(_).phead(0, exclude=const.HIDDEN),
-) -> commandclasses.IndicatorCommand:
+    selector=lambda _: _selection.Selection(_).phead(0, exclude=_const.HIDDEN),
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches marcato.
 
@@ -1605,7 +1608,7 @@ def marcato(
             >>
 
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("marcato")],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -1616,9 +1619,9 @@ def margin_markup(
     argument: str,
     selector=lambda _: _selection.Selection(_).leaf(0),
     *,
-    alert: commandclasses.IndicatorCommand = None,
+    alert: _commandclasses.IndicatorCommand = None,
     context: str = "Staff",
-) -> typing.Union[commandclasses.IndicatorCommand, scoping.Suite]:
+) -> typing.Union[_commandclasses.IndicatorCommand, _scoping.Suite]:
     r"""
     Attaches margin markup.
 
@@ -1721,14 +1724,14 @@ def margin_markup(
     else:
         raise TypeError(argument)
     assert isinstance(margin_markup, abjad.MarginMarkup)
-    command = commandclasses.IndicatorCommand(
+    command = _commandclasses.IndicatorCommand(
         indicators=[margin_markup],
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
     if bool(alert):
-        assert isinstance(alert, commandclasses.IndicatorCommand), repr(alert)
-        return scoping.suite(command, alert)
+        assert isinstance(alert, _commandclasses.IndicatorCommand), repr(alert)
+        return _scoping.suite(command, alert)
     else:
         return command
 
@@ -1737,13 +1740,13 @@ def mark(
     argument: str,
     selector=lambda _: _selection.Selection(_).leaf(0),
     *tweaks: abjad.TweakInterface,
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     """
     Attaches mark.
     """
     assert isinstance(argument, (abjad.Markup, str)), repr(argument)
     rehearsal_mark = abjad.RehearsalMark(markup=argument)
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[rehearsal_mark],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -1752,8 +1755,8 @@ def mark(
 
 
 def parenthesize(
-    selector=lambda _: _selection.Selection(_).phead(0, exclude=const.HIDDEN),
-) -> commandclasses.IndicatorCommand:
+    selector=lambda _: _selection.Selection(_).phead(0, exclude=_const.HIDDEN),
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches LilyPond ``\parenthesize`` command.
 
@@ -1829,7 +1832,7 @@ def parenthesize(
             >>
 
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r"\parenthesize")],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -1837,12 +1840,12 @@ def parenthesize(
 
 
 def quadruple_staccato(
-    selector=lambda _: _selection.Selection(_).phead(0, exclude=const.HIDDEN),
-) -> commandclasses.IndicatorCommand:
+    selector=lambda _: _selection.Selection(_).phead(0, exclude=_const.HIDDEN),
+) -> _commandclasses.IndicatorCommand:
     """
     Attaches quadruple-staccato.
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("baca-staccati #4")],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -1854,7 +1857,7 @@ def rehearsal_mark(
     selector=lambda _: _selection.Selection(_).leaf(0),
     *tweaks: abjad.TweakInterface,
     font_size: int = 10,
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     """
     Attaches rehearsal mark.
     """
@@ -1862,7 +1865,7 @@ def rehearsal_mark(
     assert isinstance(font_size, (int, float)), repr(font_size)
     string = rf'\baca-rehearsal-mark-markup "{argument}" #{font_size}'
     markup = abjad.Markup(string, direction=abjad.Center, literal=True)
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[markup],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -1872,7 +1875,7 @@ def rehearsal_mark(
 
 def repeat_tie(
     selector: abjad.Expression, *, allow_rest: bool = None
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches repeat-tie.
 
@@ -1958,7 +1961,7 @@ def repeat_tie(
     """
     if allow_rest is not None:
         allow_rest = bool(allow_rest)
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         do_not_test=allow_rest,
         indicators=[abjad.RepeatTie()],
         selector=selector,
@@ -1968,7 +1971,7 @@ def repeat_tie(
 
 def short_fermata(
     selector=lambda _: _selection.Selection(_).leaf(0),
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches short fermata.
 
@@ -2044,7 +2047,7 @@ def short_fermata(
             >>
 
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("shortfermata")],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -2052,12 +2055,12 @@ def short_fermata(
 
 
 def snap_pizzicato(
-    selector=lambda _: _selection.Selection(_).phead(0, exclude=const.HIDDEN),
-) -> commandclasses.IndicatorCommand:
+    selector=lambda _: _selection.Selection(_).phead(0, exclude=_const.HIDDEN),
+) -> _commandclasses.IndicatorCommand:
     """
     Attaches snap pizzicato.
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("snappizzicato")],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -2065,8 +2068,8 @@ def snap_pizzicato(
 
 
 def staccatissimo(
-    selector=lambda _: _selection.Selection(_).phead(0, exclude=const.HIDDEN),
-) -> commandclasses.IndicatorCommand:
+    selector=lambda _: _selection.Selection(_).phead(0, exclude=_const.HIDDEN),
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches staccatissimo.
 
@@ -2142,7 +2145,7 @@ def staccatissimo(
             >>
 
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("staccatissimo")],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -2150,8 +2153,8 @@ def staccatissimo(
 
 
 def staccato(
-    selector=lambda _: _selection.Selection(_).phead(0, exclude=const.HIDDEN),
-) -> commandclasses.IndicatorCommand:
+    selector=lambda _: _selection.Selection(_).phead(0, exclude=_const.HIDDEN),
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches staccato.
 
@@ -2227,7 +2230,7 @@ def staccato(
             >>
 
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("staccato")],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -2236,7 +2239,7 @@ def staccato(
 
 def staff_lines(
     n: int, selector=lambda _: _selection.Selection(_).leaf(0)
-) -> scoping.Suite:
+) -> _scoping.Suite:
     r"""
     Makes staff line command.
 
@@ -2731,17 +2734,17 @@ def staff_lines(
             >>
 
     """
-    command_1 = commandclasses.IndicatorCommand(
-        indicators=[indicators.BarExtent(n)],
+    command_1 = _commandclasses.IndicatorCommand(
+        indicators=[_indicators.BarExtent(n)],
         selector=selector,
         tags=[_tags.NOT_PARTS],
     )
-    command_2 = commandclasses.IndicatorCommand(
-        indicators=[indicators.StaffLines(n)],
+    command_2 = _commandclasses.IndicatorCommand(
+        indicators=[_indicators.StaffLines(n)],
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
-    return scoping.suite(command_1, command_2)
+    return _scoping.suite(command_1, command_2)
 
 
 def start_markup(
@@ -2751,7 +2754,7 @@ def start_markup(
     context: str = "Staff",
     hcenter_in: abjad.Number = None,
     literal: bool = None,
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     """
     Attaches start markup.
     """
@@ -2785,7 +2788,7 @@ def start_markup(
         raise TypeError(argument)
     assert isinstance(start_markup, abjad.StartMarkup)
     start_markup = abjad.new(start_markup, context=context)
-    command = commandclasses.IndicatorCommand(
+    command = _commandclasses.IndicatorCommand(
         indicators=[start_markup],
         selector=selector,
         tags=[_site(inspect.currentframe()), _tags.NOT_PARTS],
@@ -2794,10 +2797,10 @@ def start_markup(
 
 
 def stem_tremolo(
-    selector=lambda _: _selection.Selection(_).pleaf(0, exclude=const.HIDDEN),
+    selector=lambda _: _selection.Selection(_).pleaf(0, exclude=_const.HIDDEN),
     *,
     tremolo_flags: int = 32,
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches stem tremolo.
 
@@ -2873,7 +2876,7 @@ def stem_tremolo(
             >>
 
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.StemTremolo(tremolo_flags=tremolo_flags)],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -2881,10 +2884,10 @@ def stem_tremolo(
 
 
 def stop_on_string(
-    selector=lambda _: _selection.Selection(_).phead(0, exclude=const.HIDDEN),
+    selector=lambda _: _selection.Selection(_).phead(0, exclude=_const.HIDDEN),
     *,
     map: abjad.Expression = None,
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches stop-on-string.
 
@@ -2965,7 +2968,7 @@ def stop_on_string(
 
     """
     articulation = abjad.Articulation("baca-stop-on-string")
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[articulation],
         map=map,
         selector=selector,
@@ -2975,7 +2978,7 @@ def stop_on_string(
 
 def stop_trill(
     selector=lambda _: _selection.Selection(_).leaf(0),
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches stop trill to closing-slot.
 
@@ -2994,8 +2997,8 @@ def stop_trill(
 
 
 def stopped(
-    selector=lambda _: _selection.Selection(_).phead(0, exclude=const.HIDDEN),
-) -> commandclasses.IndicatorCommand:
+    selector=lambda _: _selection.Selection(_).phead(0, exclude=_const.HIDDEN),
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches stopped +-sign.
 
@@ -3071,14 +3074,14 @@ def stopped(
             >>
 
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("stopped")],
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
 
 
-def tie(selector: abjad.Expression) -> commandclasses.IndicatorCommand:
+def tie(selector: abjad.Expression) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches tie.
 
@@ -3160,7 +3163,7 @@ def tie(selector: abjad.Expression) -> commandclasses.IndicatorCommand:
             >>
 
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.Tie()],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -3168,8 +3171,8 @@ def tie(selector: abjad.Expression) -> commandclasses.IndicatorCommand:
 
 
 def tenuto(
-    selector=lambda _: _selection.Selection(_).phead(0, exclude=const.HIDDEN),
-) -> commandclasses.IndicatorCommand:
+    selector=lambda _: _selection.Selection(_).phead(0, exclude=_const.HIDDEN),
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches tenuto.
 
@@ -3245,7 +3248,7 @@ def tenuto(
             >>
 
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("tenuto")],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -3253,12 +3256,12 @@ def tenuto(
 
 
 def triple_staccato(
-    selector=lambda _: _selection.Selection(_).phead(0, exclude=const.HIDDEN),
-) -> commandclasses.IndicatorCommand:
+    selector=lambda _: _selection.Selection(_).phead(0, exclude=_const.HIDDEN),
+) -> _commandclasses.IndicatorCommand:
     """
     Attaches triple-staccato.
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("baca-staccati #3")],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -3266,8 +3269,8 @@ def triple_staccato(
 
 
 def up_arpeggio(
-    selector=lambda _: _selection.Selection(_).chead(0, exclude=const.HIDDEN),
-) -> commandclasses.IndicatorCommand:
+    selector=lambda _: _selection.Selection(_).chead(0, exclude=_const.HIDDEN),
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches up-arpeggio.
 
@@ -3346,7 +3349,7 @@ def up_arpeggio(
             >>
 
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.Arpeggio(direction=abjad.Up)],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -3354,10 +3357,10 @@ def up_arpeggio(
 
 
 def up_bow(
-    selector=lambda _: _selection.Selection(_).phead(0, exclude=const.HIDDEN),
+    selector=lambda _: _selection.Selection(_).phead(0, exclude=_const.HIDDEN),
     *tweaks: abjad.TweakInterface,
     full: bool = None,
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches up-bow.
 
@@ -3437,7 +3440,7 @@ def up_bow(
         articulation = abjad.Articulation("baca-full-upbow")
     else:
         articulation = abjad.Articulation("upbow")
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[articulation],
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -3447,7 +3450,7 @@ def up_bow(
 
 def very_long_fermata(
     selector=lambda _: _selection.Selection(_).leaf(0),
-) -> commandclasses.IndicatorCommand:
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches very long fermata.
 
@@ -3523,7 +3526,7 @@ def very_long_fermata(
             >>
 
     """
-    return commandclasses.IndicatorCommand(
+    return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("verylongfermata")],
         selector=selector,
         tags=[_site(inspect.currentframe())],

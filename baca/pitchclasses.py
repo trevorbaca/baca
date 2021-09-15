@@ -8,7 +8,7 @@ import typing
 
 import abjad
 
-from . import classes
+from . import classes as _classes
 from . import sequence as _sequence
 
 
@@ -1637,7 +1637,7 @@ class CollectionList(collections_module.abc.Sequence):
                 collections.append(collection)
         return abjad.new(self, collections=collections)
 
-    def cursor(self, cyclic=None, singletons=None) -> classes.Cursor:
+    def cursor(self, cyclic=None, singletons=None) -> _classes.Cursor:
         """
         Wraps collections in cursor.
 
@@ -1678,7 +1678,7 @@ class CollectionList(collections_module.abc.Sequence):
             [PitchSegment([16, 17])]
 
         """
-        return classes.Cursor(cyclic=cyclic, singletons=singletons, source=self)
+        return _classes.Cursor(cyclic=cyclic, singletons=singletons, source=self)
 
     def flatten(self) -> "CollectionTyping":
         """
@@ -5388,7 +5388,7 @@ class PitchSet(abjad.PitchSet):
 CollectionTyping = typing.Union[PitchSet, PitchSegment]
 
 
-class PitchTree(classes.Tree):
+class PitchTree(_classes.Tree):
     r"""
     Pitch tree.
 
@@ -5934,7 +5934,7 @@ class PitchTree(classes.Tree):
 
     def __init__(self, items=None, *, item_class=None):
         item_class = item_class or abjad.NumberedPitch
-        classes.Tree.__init__(self, items=items, item_class=item_class)
+        _classes.Tree.__init__(self, items=items, item_class=item_class)
 
     ### SPECIAL METHODS ###
 

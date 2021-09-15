@@ -6,7 +6,7 @@ import typing
 
 import abjad
 
-from . import scoping
+from . import scoping as _scoping
 from . import selection as _selection
 from . import tags as _tags
 from . import typings
@@ -14,13 +14,10 @@ from . import typings
 
 def _site(frame):
     prefix = "baca"
-    return scoping.site(frame, prefix)
+    return _scoping.site(frame, prefix)
 
 
-### CLASSES ###
-
-
-class OverrideCommand(scoping.Command):
+class OverrideCommand(_scoping.Command):
     r"""
     Override command.
 
@@ -36,7 +33,7 @@ class OverrideCommand(scoping.Command):
     __slots__ = (
         "_after",
         "_attribute",
-        "_blacklist",
+        "_blocklist",
         "_context",
         "_grob",
         "_tags",
@@ -51,21 +48,21 @@ class OverrideCommand(scoping.Command):
         *,
         after: bool = None,
         attribute: str = None,
-        blacklist: typing.Tuple[type] = None,
+        blocklist: typing.Tuple[type] = None,
         context: str = None,
         deactivate: bool = None,
         grob: str = None,
         map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
-        scope: scoping.ScopeTyping = None,
+        scope: _scoping.ScopeTyping = None,
         selector=lambda _: _selection.Selection(_).leaves(),
         tag_measure_number: bool = None,
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
         value: typing.Any = None,
         whitelist: typing.Tuple[type] = None,
     ) -> None:
-        scoping.Command.__init__(
+        _scoping.Command.__init__(
             self,
             deactivate=deactivate,
             map=map,
@@ -82,10 +79,10 @@ class OverrideCommand(scoping.Command):
         if attribute is not None:
             assert isinstance(attribute, str), repr(attribute)
         self._attribute = attribute
-        if blacklist is not None:
-            assert isinstance(blacklist, tuple), repr(blacklist)
-            assert all(issubclass(_, abjad.Leaf) for _ in blacklist)
-        self._blacklist = blacklist
+        if blocklist is not None:
+            assert isinstance(blocklist, tuple), repr(blocklist)
+            assert all(issubclass(_, abjad.Leaf) for _ in blocklist)
+        self._blocklist = blocklist
         if context is not None:
             assert isinstance(context, str), repr(context)
         self._context = context
@@ -111,9 +108,9 @@ class OverrideCommand(scoping.Command):
         if not argument:
             return
         leaves = abjad.select(argument).leaves()
-        if self.blacklist:
+        if self.blocklist:
             for leaf in leaves:
-                if isinstance(leaf, self.blacklist):
+                if isinstance(leaf, self.blocklist):
                     message = f"{type(leaf).__name__} is forbidden."
                     raise Exception(message)
         if self.whitelist:
@@ -179,11 +176,11 @@ class OverrideCommand(scoping.Command):
         return self._attribute
 
     @property
-    def blacklist(self) -> typing.Optional[typing.Tuple[type]]:
+    def blocklist(self) -> typing.Optional[typing.Tuple[type]]:
         """
-        Gets blacklist leaves.
+        Gets blocklist leaves.
         """
-        return self._blacklist
+        return self._blocklist
 
     @property
     def context(self) -> typing.Optional[str]:
@@ -212,9 +209,6 @@ class OverrideCommand(scoping.Command):
         Gets whitelist leaves.
         """
         return self._whitelist
-
-
-### FACTORY FUNCTIONS ###
 
 
 def accidental_extra_offset(
@@ -654,7 +648,7 @@ def clef_extra_offset(
 def clef_shift(
     clef: typing.Union[str, abjad.Clef],
     selector=lambda _: _selection.Selection(_).leaf(0),
-) -> scoping.Suite:
+) -> _scoping.Suite:
     """
     Shifts clef to left by width of clef.
     """
@@ -667,9 +661,11 @@ def clef_shift(
         assert isinstance(clef, abjad.Clef)
         width = clef._to_width[clef.name]
         extra_offset_x = -width
-    suite = scoping.suite(clef_x_extent_false(), clef_extra_offset((extra_offset_x, 0)))
-    scoping.tag(_site(inspect.currentframe()), suite)
-    scoping.tag(_tags.SHIFTED_CLEF, suite, tag_measure_number=True)
+    suite = _scoping.suite(
+        clef_x_extent_false(), clef_extra_offset((extra_offset_x, 0))
+    )
+    _scoping.tag(_site(inspect.currentframe()), suite)
+    _scoping.tag(_tags.SHIFTED_CLEF, suite, tag_measure_number=True)
     return suite
 
 
@@ -1301,7 +1297,7 @@ def hairpin_shorten_pair(
 def hairpin_start_shift(
     dynamic: typing.Union[str, abjad.Dynamic],
     selector=lambda _: _selection.Selection(_).leaf(0),
-) -> scoping.Suite:
+) -> _scoping.Suite:
     """
     Shifts hairpin start dynamic to left by width of dynamic.
     """
@@ -1309,12 +1305,12 @@ def hairpin_start_shift(
     width = dynamic._to_width[dynamic.name]
     extra_offset_x = -width
     hairpin_shorten_left = width - 1.25
-    suite = scoping.suite(
+    suite = _scoping.suite(
         dynamic_text_extra_offset((extra_offset_x, 0)),
         dynamic_text_x_extent_zero(),
         hairpin_shorten_pair((hairpin_shorten_left, 0)),
     )
-    scoping.tag(_site(inspect.currentframe()), suite)
+    _scoping.tag(_site(inspect.currentframe()), suite)
     return suite
 
 
@@ -4524,12 +4520,12 @@ def text_script_color(
 
     """
     if allow_mmrests is True:
-        blacklist = None
+        blocklist = None
     else:
-        blacklist = (abjad.MultimeasureRest,)
+        blocklist = (abjad.MultimeasureRest,)
     return OverrideCommand(
         attribute="color",
-        blacklist=blacklist,
+        blocklist=blocklist,
         value=color,
         grob="TextScript",
         selector=selector,
@@ -4652,12 +4648,12 @@ def text_script_down(
 
     """
     if allow_mmrests is True:
-        blacklist = None
+        blocklist = None
     else:
-        blacklist = (abjad.MultimeasureRest,)
+        blocklist = (abjad.MultimeasureRest,)
     return OverrideCommand(
         attribute="direction",
-        blacklist=blacklist,
+        blocklist=blocklist,
         value=abjad.Down,
         grob="TextScript",
         selector=selector,
@@ -4702,12 +4698,12 @@ def text_script_extra_offset(
 
     """
     if allow_mmrests is True:
-        blacklist = None
+        blocklist = None
     else:
-        blacklist = (abjad.MultimeasureRest,)
+        blocklist = (abjad.MultimeasureRest,)
     return OverrideCommand(
         attribute="extra_offset",
-        blacklist=blacklist,
+        blocklist=blocklist,
         value=f"#'({pair[0]} . {pair[1]})",
         grob="TextScript",
         selector=selector,
@@ -4725,12 +4721,12 @@ def text_script_font_size(
     Overrides text script font size.
     """
     if allow_mmrests is True:
-        blacklist = None
+        blocklist = None
     else:
-        blacklist = (abjad.MultimeasureRest,)
+        blocklist = (abjad.MultimeasureRest,)
     return OverrideCommand(
         attribute="font_size",
-        blacklist=blacklist,
+        blocklist=blocklist,
         value=n,
         grob="TextScript",
         selector=selector,
@@ -4854,12 +4850,12 @@ def text_script_padding(
 
     """
     if allow_mmrests is True:
-        blacklist = None
+        blocklist = None
     else:
-        blacklist = (abjad.MultimeasureRest,)
+        blocklist = (abjad.MultimeasureRest,)
     return OverrideCommand(
         attribute="padding",
-        blacklist=blacklist,
+        blocklist=blocklist,
         value=n,
         grob="TextScript",
         selector=selector,
@@ -4877,12 +4873,12 @@ def text_script_parent_alignment_x(
     Overrides text script parent-alignment-X.
     """
     if allow_mmrests is True:
-        blacklist = None
+        blocklist = None
     else:
-        blacklist = (abjad.MultimeasureRest,)
+        blocklist = (abjad.MultimeasureRest,)
     return OverrideCommand(
         attribute="parent_alignment_X",
-        blacklist=blacklist,
+        blocklist=blocklist,
         grob="TextScript",
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -4900,12 +4896,12 @@ def text_script_self_alignment_x(
     Overrides text script self-alignment-X.
     """
     if allow_mmrests is True:
-        blacklist = None
+        blocklist = None
     else:
-        blacklist = (abjad.MultimeasureRest,)
+        blocklist = (abjad.MultimeasureRest,)
     return OverrideCommand(
         attribute="self_alignment_X",
-        blacklist=blacklist,
+        blocklist=blocklist,
         grob="TextScript",
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -5029,12 +5025,12 @@ def text_script_staff_padding(
 
     """
     if allow_mmrests is True:
-        blacklist = None
+        blocklist = None
     else:
-        blacklist = (abjad.MultimeasureRest,)
+        blocklist = (abjad.MultimeasureRest,)
     return OverrideCommand(
         attribute="staff_padding",
-        blacklist=blacklist,
+        blocklist=blocklist,
         value=n,
         grob="TextScript",
         selector=selector,
@@ -5157,12 +5153,12 @@ def text_script_up(
 
     """
     if allow_mmrests is True:
-        blacklist = None
+        blocklist = None
     else:
-        blacklist = (abjad.MultimeasureRest,)
+        blocklist = (abjad.MultimeasureRest,)
     return OverrideCommand(
         attribute="direction",
-        blacklist=blacklist,
+        blocklist=blocklist,
         grob="TextScript",
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -5180,12 +5176,12 @@ def text_script_x_offset(
     Overrides text script X-offset.
     """
     if allow_mmrests is True:
-        blacklist = None
+        blocklist = None
     else:
-        blacklist = (abjad.MultimeasureRest,)
+        blocklist = (abjad.MultimeasureRest,)
     return OverrideCommand(
         attribute="X_offset",
-        blacklist=blacklist,
+        blocklist=blocklist,
         grob="TextScript",
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -5203,12 +5199,12 @@ def text_script_y_offset(
     Overrides text script Y-offset.
     """
     if allow_mmrests is True:
-        blacklist = None
+        blocklist = None
     else:
-        blacklist = (abjad.MultimeasureRest,)
+        blocklist = (abjad.MultimeasureRest,)
     return OverrideCommand(
         attribute="Y_offset",
-        blacklist=blacklist,
+        blocklist=blocklist,
         grob="TextScript",
         selector=selector,
         tags=[_site(inspect.currentframe())],
