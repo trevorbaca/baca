@@ -6,7 +6,6 @@ from . import build
 from . import const
 from . import jobs
 from . import selectors
-from . import tonality
 from .array import *
 from .classes import *
 from .commandclasses import *
