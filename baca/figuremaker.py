@@ -4468,8 +4468,6 @@ class FigureMaker:
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = "Classes"
-
     __slots__ = (
         "_acciaccatura",
         "_affix",

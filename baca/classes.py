@@ -1207,17 +1207,14 @@ class SchemeManifest:
     """
     Scheme manifest.
 
-    New functions defined in ``~/baca/lilypond/baca.ily`` must
-    currently be added here by hand.
+    New functions defined in ``~/baca/lilypond/baca.ily`` must currently be added here by
+    hand.
 
-    TODO: eliminate duplication. Define custom Scheme functions here
-    (``SchemeManifest``) and teach ``SchemeManifest`` to write
-    ``~/baca/lilypond/baca.ily`` automatically.
+    TODO: eliminate duplication. Define custom Scheme functions here (``SchemeManifest``)
+    and teach ``SchemeManifest`` to write ``~/baca/lilypond/baca.ily`` automatically.
     """
 
     ### CLASS VARIABLES ###
-
-    __documentation_section__ = "Classes"
 
     _dynamics = (
         ("baca-appena-udibile", "appena udibile"),

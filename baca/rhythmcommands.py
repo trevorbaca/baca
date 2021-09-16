@@ -2,7 +2,6 @@
 Rhythm commands.
 """
 import inspect
-import typing
 
 import abjad
 from abjadext import rmakers
@@ -13,19 +12,11 @@ from . import scoping as _scoping
 from . import selection as _selection
 from . import sequence as _sequence
 from . import tags as _tags
-from . import typings
-
-RhythmMakerTyping = typing.Union[
-    rmakers.Assignment, rmakers.RhythmMaker, rmakers.Stack, rmakers.Bind
-]
 
 
 def _site(frame):
     prefix = "baca"
     return _scoping.site(frame, prefix)
-
-
-### CLASSES ###
 
 
 class RhythmCommand(_scoping.Command):
@@ -40,7 +31,7 @@ class RhythmCommand(_scoping.Command):
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(3, 8), (4, 8), (3,8), (4, 8)],
-        ...     )
+        ... )
 
         >>> command = baca.rhythm(
         ...     rmakers.even_division([8]),
@@ -49,9 +40,9 @@ class RhythmCommand(_scoping.Command):
         ... )
 
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     command,
-        ...     )
+        ... )
 
         >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -162,18 +153,18 @@ class RhythmCommand(_scoping.Command):
 
     def __init__(
         self,
-        rhythm_maker: RhythmMakerTyping,
+        rhythm_maker,
         *,
-        annotation_spanner_color: str = None,
-        annotation_spanner_text: str = None,
-        attach_not_yet_pitched: bool = None,
-        do_not_check_total_duration: bool = None,
+        annotation_spanner_color=None,
+        annotation_spanner_text=None,
+        attach_not_yet_pitched=None,
+        do_not_check_total_duration=None,
         frame=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        persist: str = None,
-        scope: _scoping.ScopeTyping = None,
-    ) -> None:
+        match=None,
+        measures=None,
+        persist=None,
+        scope=None,
+    ):
         _scoping.Command.__init__(self, match=match, measures=measures, scope=scope)
         if annotation_spanner_color is not None:
             assert isinstance(annotation_spanner_color, str)
@@ -193,7 +184,7 @@ class RhythmCommand(_scoping.Command):
         self._check_rhythm_maker_input(rhythm_maker)
         self._frame = frame
         self._rhythm_maker = rhythm_maker
-        self._state: typing.Optional[abjad.OrderedDict] = None
+        self._state = None
 
     ### PRIVATE METHODS ###
 
@@ -229,14 +220,13 @@ class RhythmCommand(_scoping.Command):
 
     def _make_selection(
         self,
-        time_signatures: typing.Sequence[abjad.IntegerPair],
-        runtime: abjad.OrderedDict = None,
-    ) -> abjad.Selection:
+        time_signatures,
+        runtime=None,
+    ):
         """
         Calls ``RhythmCommand`` on ``time_signatures``.
         """
         rhythm_maker = self.rhythm_maker
-        selection: abjad.Selection
         if isinstance(rhythm_maker, abjad.Selection):
             selection = rhythm_maker
             total_duration = sum([_.duration for _ in time_signatures])
@@ -249,7 +239,6 @@ class RhythmCommand(_scoping.Command):
                 message += f" equal total duration ({total_duration})."
                 raise Exception(message)
         else:
-            rcommand: rmakers.Stack
             if isinstance(self.rhythm_maker, rmakers.Stack):
                 rcommand = self.rhythm_maker
             else:
@@ -297,28 +286,28 @@ class RhythmCommand(_scoping.Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def annotation_spanner_color(self) -> typing.Optional[str]:
+    def annotation_spanner_color(self):
         """
         Gets annotation spanner color.
         """
         return self._annotation_spanner_color
 
     @property
-    def annotation_spanner_text(self) -> typing.Optional[str]:
+    def annotation_spanner_text(self):
         """
         Gets annotation spanner text.
         """
         return self._annotation_spanner_text
 
     @property
-    def attach_not_yet_pitched(self) -> typing.Optional[bool]:
+    def attach_not_yet_pitched(self):
         """
         Is true when command attaches NOT_YET_PITCHED indicator.
         """
         return self._attach_not_yet_pitched
 
     @property
-    def do_not_check_total_duration(self) -> typing.Optional[bool]:
+    def do_not_check_total_duration(self):
         """
         Is true when command does not check total duration.
         """
@@ -332,7 +321,7 @@ class RhythmCommand(_scoping.Command):
         return self._frame
 
     @property
-    def parameter(self) -> str:
+    def parameter(self):
         """
         Gets persistence parameter.
 
@@ -345,14 +334,14 @@ class RhythmCommand(_scoping.Command):
         return _const.RHYTHM
 
     @property
-    def persist(self) -> typing.Optional[str]:
+    def persist(self):
         """
         Gets persist name.
         """
         return self._persist
 
     @property
-    def rhythm_maker(self) -> RhythmMakerTyping:
+    def rhythm_maker(self):
         r"""
         Gets selection, rhythm-maker or division assignment.
 
@@ -366,7 +355,7 @@ class RhythmCommand(_scoping.Command):
             ...     score_template=baca.make_empty_score_maker(1),
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ...     time_signatures=5 * [(4, 8)],
-            ...     )
+            ... )
 
             >>> note_command = rmakers.stack(
             ...     rmakers.note(),
@@ -397,12 +386,12 @@ class RhythmCommand(_scoping.Command):
             ...         denominator=16,
             ...     )
             >>> maker(
-            ...     'Music_Voice',
+            ...     "Music_Voice",
             ...     baca.label(label_with_durations),
             ...     baca.text_script_font_size(-2),
             ...     baca.text_script_staff_padding(5),
             ...     command,
-            ...     )
+            ... )
 
             >>> lilypond_file = maker.run(environment="docs")
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -552,7 +541,7 @@ class RhythmCommand(_scoping.Command):
         return self._rhythm_maker
 
     @property
-    def state(self) -> typing.Optional[abjad.OrderedDict]:
+    def state(self):
         """
         Gets postcall state of rhythm command.
 
@@ -570,12 +559,12 @@ class TimeSignatureMaker:
         >>> time_signatures = [
         ...     [(1, 16), (2, 16), (3, 16)],
         ...     [(1, 8), (2, 8), (3, 8)],
-        ...     ]
+        ... ]
         >>> maker = baca.TimeSignatureMaker(
         ...     time_signatures=time_signatures,
         ...     count=5,
         ...     fermata_measures=[5],
-        ...     )
+        ... )
         >>> maker.run()
         [(1, 16), (2, 16), (3, 16), (1, 8), TimeSignature((1, 4))]
 
@@ -596,10 +585,10 @@ class TimeSignatureMaker:
         self,
         time_signatures,
         *,
-        count: int = None,
-        fermata_measures: abjad.IntegerSequence = None,
-        rotation: int = None,
-    ) -> None:
+        count=None,
+        fermata_measures=None,
+        rotation=None,
+    ):
         self._time_signatures = time_signatures
         if count is not None:
             assert isinstance(count, int), repr(count)
@@ -629,28 +618,28 @@ class TimeSignatureMaker:
     ### PUBLIC PROPERTIES ###
 
     @property
-    def count(self) -> typing.Optional[int]:
+    def count(self):
         """
         Gets count.
         """
         return self._count
 
     @property
-    def fermata_measures(self) -> typing.Optional[typing.List[int]]:
+    def fermata_measures(self):
         """
         Gets fermata measures.
         """
         return self._fermata_measures
 
     @property
-    def rotation(self) -> typing.Optional[int]:
+    def rotation(self):
         """
         Gets rotation.
         """
         return self._rotation
 
     @property
-    def time_signatures(self) -> typing.List[abjad.TimeSignature]:
+    def time_signatures(self):
         """
         Gets time signatures.
         """
@@ -658,7 +647,7 @@ class TimeSignatureMaker:
 
     ### PUBLIC METHODS ###
 
-    def run(self) -> typing.List[abjad.TimeSignature]:
+    def run(self):
         """
         Makes time signatures (without stages).
 
@@ -686,10 +675,7 @@ class TimeSignatureMaker:
         return result
 
 
-### FACTORY FUNCTIONS ###
-
-
-def make_even_divisions(*, measures: typings.SliceTyping = None) -> RhythmCommand:
+def make_even_divisions(*, measures=None):
     """
     Makes even divisions.
     """
@@ -708,9 +694,9 @@ def make_even_divisions(*, measures: typings.SliceTyping = None) -> RhythmComman
 
 def make_fused_tuplet_monads(
     *,
-    measures: typings.SliceTyping = None,
-    tuplet_ratio: typing.Tuple[int] = None,
-) -> RhythmCommand:
+    measures=None,
+    tuplet_ratio=None,
+):
     """
     Makes fused tuplet monads.
     """
@@ -736,9 +722,7 @@ def make_fused_tuplet_monads(
     )
 
 
-def make_monads(
-    fractions: str,
-) -> RhythmCommand:
+def make_monads(fractions):
     r"""
     Makes monads.
 
@@ -750,12 +734,12 @@ def make_monads(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 4)],
-        ...     )
+        ... )
 
         >>> maker(
-        ...     'Music_Voice',
-        ...     baca.make_monads('2/5 2/5 1/5'),
-        ...     )
+        ...     "Music_Voice",
+        ...     baca.make_monads("2/5 2/5 1/5"),
+        ... )
 
         >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -829,7 +813,7 @@ def make_monads(
             >>
 
     """
-    components: typing.List[abjad.Component] = []
+    components = []
     maker = abjad.LeafMaker()
     pitch = 0
     for fraction in fractions.split():
@@ -846,24 +830,11 @@ def make_monads(
     )
 
 
-# TODO: REMOVE?
-def make_multimeasure_rests(*, measures: typings.SliceTyping = None) -> RhythmCommand:
-    """
-    Makes multiplied-duration multimeasure rests.
-    """
-    return RhythmCommand(
-        rmakers.multiplied_duration(
-            abjad.MultimeasureRest, tag=_site(inspect.currentframe())
-        ),
-        measures=measures,
-    )
-
-
 def make_notes(
     *specifiers,
-    measures: typings.SliceTyping = None,
-    repeat_ties: bool = False,
-) -> RhythmCommand:
+    measures=None,
+    repeat_ties=False,
+):
     """
     Makes notes; rewrites meter.
     """
@@ -886,17 +857,17 @@ def make_notes(
 
 
 def make_repeat_tied_notes(
-    *specifiers: rmakers.Command,
-    do_not_rewrite_meter: bool = None,
-    measures: typings.SliceTyping = None,
-) -> RhythmCommand:
+    *specifiers,
+    do_not_rewrite_meter=None,
+    measures=None,
+):
     r"""
     Makes repeat-tied notes; rewrites meter.
 
     ..  container:: example
 
-        REGRESSION. All notes below are tagged NOT_YET_PITCHED_COLORING (and
-        colored gold), even tied notes resulting from meter rewriting:
+        REGRESSION. All notes below are tagged NOT_YET_PITCHED_COLORING (and colored
+        gold), even tied notes resulting from meter rewriting:
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
@@ -904,12 +875,12 @@ def make_repeat_tied_notes(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(10, 8)],
-        ...     )
+        ... )
 
         >>> maker(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_repeat_tied_notes(),
-        ...     )
+        ... )
 
         >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -981,7 +952,6 @@ def make_repeat_tied_notes(
             >>
 
     """
-    specifier: rmakers.Command
     specifiers_ = list(specifiers)
     specifier = rmakers.beam(lambda _: _selection.Selection(_).plts())
     specifiers_.append(specifier)
@@ -1000,11 +970,11 @@ def make_repeat_tied_notes(
 
 
 def make_repeated_duration_notes(
-    durations: typing.Sequence[abjad.DurationTyping],
-    *specifiers: rmakers.Command,
-    do_not_rewrite_meter: bool = None,
-    measures: typings.SliceTyping = None,
-) -> RhythmCommand:
+    durations,
+    *specifiers,
+    do_not_rewrite_meter=None,
+    measures=None,
+):
     """
     Makes repeated-duration notes; rewrites meter.
     """
@@ -1020,7 +990,7 @@ def make_repeated_duration_notes(
         divisions = divisions.split_divisions(durations, cyclic=True)
         return divisions
 
-    rewrite_specifiers: typing.List[rmakers.Command] = []
+    rewrite_specifiers = []
     if not do_not_rewrite_meter:
         rewrite_specifiers.append(rmakers.rewrite_meter())
     return RhythmCommand(
@@ -1038,7 +1008,7 @@ def make_repeated_duration_notes(
     )
 
 
-def make_rests(*, measures: typings.SliceTyping = None) -> RhythmCommand:
+def make_rests(*, measures=None):
     """
     Makes rests.
     """
@@ -1054,9 +1024,7 @@ def make_rests(*, measures: typings.SliceTyping = None) -> RhythmCommand:
     )
 
 
-def make_single_attack(
-    duration, *, measures: typings.SliceTyping = None
-) -> RhythmCommand:
+def make_single_attack(duration, *, measures=None):
     """
     Makes single attacks with ``duration``.
     """
@@ -1081,18 +1049,7 @@ def make_single_attack(
     )
 
 
-# TODO: REMOVE?
-def make_skips(*, measures: typings.SliceTyping = None) -> RhythmCommand:
-    """
-    Makes multiplied-duration skips.
-    """
-    return RhythmCommand(
-        rmakers.multiplied_duration(abjad.Skip, tag=_site(inspect.currentframe())),
-        measures=measures,
-    )
-
-
-def make_tied_notes(*, measures: typings.SliceTyping = None) -> RhythmCommand:
+def make_tied_notes(*, measures=None):
     """
     Makes tied notes; rewrites meter.
     """
@@ -1110,21 +1067,16 @@ def make_tied_notes(*, measures: typings.SliceTyping = None) -> RhythmCommand:
     )
 
 
-def make_tied_repeated_durations(
-    durations: typing.Sequence[abjad.DurationTyping],
-    *,
-    measures: typings.SliceTyping = None,
-) -> RhythmCommand:
+def make_tied_repeated_durations(durations, *, measures=None):
     """
     Makes tied repeated durations; does not rewrite meter.
     """
-    specifiers: typing.List[rmakers.Command] = []
+    specifiers = []
     if isinstance(durations, abjad.Duration):
         durations = [durations]
     elif isinstance(durations, tuple):
         assert len(durations) == 2
         durations = [abjad.Duration(durations)]
-    tie_specifier: rmakers.Command
     tie_specifier = rmakers.repeat_tie(lambda _: _selection.Selection(_).pheads()[1:])
     specifiers.append(tie_specifier)
     tie_specifier = rmakers.force_repeat_tie()
@@ -1150,11 +1102,11 @@ def make_tied_repeated_durations(
 
 
 def music(
-    argument: typing.Union[str, abjad.Selection],
+    argument,
     *,
-    do_not_check_total_duration: bool = None,
-    tag: typing.Optional[abjad.Tag] = abjad.Tag("baca.music()"),
-) -> RhythmCommand:
+    do_not_check_total_duration=None,
+    tag=abjad.Tag("baca.music()"),
+):
     """
     Makes rhythm command from string or selection ``argument``.
     """
@@ -1181,11 +1133,11 @@ def music(
 def rhythm(
     *arguments,
     frame=None,
-    preprocessor: abjad.Expression = None,
-    measures: typings.SliceTyping = None,
-    persist: str = None,
-    tag: abjad.Tag = None,
-) -> RhythmCommand:
+    preprocessor=None,
+    measures=None,
+    persist=None,
+    tag=None,
+):
     """
     Makes rhythm command from ``argument``.
     """
@@ -1202,14 +1154,14 @@ def rhythm(
 
 
 def skeleton(
-    argument: typing.Union[str, abjad.Selection],
+    argument,
     *,
-    do_not_check_total_duration: bool = None,
-    tag: typing.Optional[abjad.Tag] = abjad.Tag("baca.skeleton()"),
-) -> RhythmCommand:
+    do_not_check_total_duration=None,
+    tag=abjad.Tag("baca.skeleton()"),
+):
     """
-    Makes rhythm command from ``string`` and attaches NOT_YET_PITCHED
-    indicators to music.
+    Makes rhythm command from ``string`` and attaches NOT_YET_PITCHED indicators to
+    music.
     """
     if isinstance(argument, str):
         string = f"{{ {argument} }}"
@@ -1233,11 +1185,11 @@ def skeleton(
 
 
 def tacet(
-    color: str = "#green",
+    color="#green",
     *,
-    measures: typings.SliceTyping = None,
+    measures=None,
     selector=lambda _: _selection.Selection(_).mmrests(),
-) -> _overrides.OverrideCommand:
+):
     """
     Colors multimeasure rests.
     """
@@ -1249,7 +1201,7 @@ def tacet(
     return command_
 
 
-def tag_selection(selection: abjad.Selection, tag: abjad.Tag) -> None:
+def tag_selection(selection, tag):
     """
     Tags selection.
     """

@@ -250,6 +250,437 @@ def _unpack_measure_token_list(measure_token_list):
     return measure_tokens
 
 
+def color_octaves(score):
+    r"""
+    Colors octaves in ``score``.
+
+    ..  container:: example
+
+        Colors octaves:
+
+        >>> def closure():
+        ...     return baca.make_empty_score(1, 1)
+
+        >>> maker = baca.SegmentMaker(
+        ...     color_octaves=True,
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
+        ...     score_template=closure,
+        ...     time_signatures=[(6, 4)],
+        ... )
+
+        >>> maker(
+        ...     ("Music_Voice_1", 1),
+        ...     baca.music(abjad.Container("d'4 e' f' g' a' b'")[:]),
+        ... )
+
+        >>> maker(
+        ...     ("Music_Voice_2", 1),
+        ...     baca.music(abjad.Container("a4 g f e d c")[:]),
+        ...     baca.clef("bass"),
+        ... )
+
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "Global_Context"
+                <<
+                    \context GlobalSkips = "Global_Skips"
+                    {
+                        \time 6/4
+                        \baca-time-signature-color #'blue
+                        s1 * 3/2
+                        \time 1/4
+                        \baca-time-signature-transparent
+                        s1 * 1/4
+                        \once \override Score.BarLine.transparent = ##t
+                        \once \override Score.SpanBar.transparent = ##t
+                    }
+                >>
+                \context MusicContext = "Music_Context"
+                <<
+                    \context StaffGroup = "Music_Staff_Group"
+                    <<
+                        \context Staff = "Music_Staff_1"
+                        {
+                            \context Voice = "Music_Voice_1"
+                            {
+                                d'4
+                                e'4
+                                \baca-octave-coloring
+                                f'4
+                                - \tweak color #red
+                                ^ \markup { OCTAVE }
+                                g'4
+                                a'4
+                                b'4
+                                <<
+                                    \context Voice = "Music_Voice_1"
+                                    {
+                                        \abjad-invisible-music-coloring
+                                        %@% \abjad-invisible-music
+                                        b'1 * 1/4
+                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
+                                    }
+                                    \context Voice = "Rest_Voice_1"
+                                    {
+                                        \once \override Score.TimeSignature.X-extent = ##f
+                                        \once \override MultiMeasureRest.transparent = ##t
+                                        \stopStaff
+                                        \once \override Staff.StaffSymbol.transparent = ##t
+                                        \startStaff
+                                        R1 * 1/4
+                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
+                                    }
+                                >>
+                            }
+                        }
+                        \context Staff = "Music_Staff_2"
+                        {
+                            \context Voice = "Music_Voice_2"
+                            {
+                                \clef "bass"
+                                \once \override Staff.Clef.color = #(x11-color 'blue)
+                                %@% \override Staff.Clef.color = ##f
+                                \set Staff.forceClef = ##t
+                                a4
+                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
+                                g4
+                                \baca-octave-coloring
+                                f4
+                                - \tweak color #red
+                                ^ \markup { OCTAVE }
+                                e4
+                                d4
+                                c4
+                                <<
+                                    \context Voice = "Music_Voice_2"
+                                    {
+                                        \abjad-invisible-music-coloring
+                                        %@% \abjad-invisible-music
+                                        d1 * 1/4
+                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
+                                    }
+                                    \context Voice = "Rest_Voice_2"
+                                    {
+                                        \once \override Score.TimeSignature.X-extent = ##f
+                                        \once \override MultiMeasureRest.transparent = ##t
+                                        \stopStaff
+                                        \once \override Staff.StaffSymbol.transparent = ##t
+                                        \startStaff
+                                        R1 * 1/4
+                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
+                                    }
+                                >>
+                            }
+                        }
+                    >>
+                >>
+            >>
+
+    """
+    vertical_moments = abjad.iterate_vertical_moments(score)
+    markup = abjad.Markup("OCTAVE", direction=abjad.Up)
+    abjad.tweak(markup).color = "#red"
+    tag = _site(inspect.currentframe())
+    tag = tag.append(_tags.OCTAVE_COLORING)
+    for vertical_moment in vertical_moments:
+        pleaves, pitches = [], []
+        for leaf in vertical_moment.leaves:
+            if abjad.get.has_indicator(leaf, _const.HIDDEN):
+                continue
+            if abjad.get.has_indicator(leaf, _const.STAFF_POSITION):
+                continue
+            if isinstance(leaf, abjad.Note):
+                pleaves.append(leaf)
+                pitches.append(leaf.written_pitch)
+            elif isinstance(leaf, abjad.Chord):
+                pleaves.append(leaf)
+                pitches.extend(leaf.written_pitches)
+        if not pitches:
+            continue
+        pitch_classes = [_.pitch_class for _ in pitches]
+        if _pitchclasses.PitchClassSegment(pitch_classes).has_duplicates():
+            color = True
+            for pleaf in pleaves:
+                if abjad.get.has_indicator(pleaf, _const.ALLOW_OCTAVE):
+                    color = False
+            if not color:
+                continue
+            for pleaf in pleaves:
+                abjad.attach(markup, pleaf, tag=tag)
+                string = r"\baca-octave-coloring"
+                literal = abjad.LilyPondLiteral(string, format_slot="before")
+                abjad.attach(literal, pleaf, tag=tag)
+
+
+def color_repeat_pitch_classes(score):
+    """
+    Colors repeat pitch-classes in ``score``.
+    """
+    # tag = _site(inspect.currentframe())
+    tag = abjad.Tag("baca.SegmentMaker._color_repeat_pitch_classes_()")
+    tag = tag.append(_tags.REPEAT_PITCH_CLASS_COLORING)
+    lts = _find_repeat_pitch_classes(score)
+    for lt in lts:
+        for leaf in lt:
+            string = r"\baca-repeat-pitch-class-coloring"
+            literal = abjad.LilyPondLiteral(string, format_slot="before")
+            abjad.attach(literal, leaf, tag=tag)
+
+
+def error_on_not_yet_pitched(score):
+    """
+    Errors on ``NOT_YET_PITCHED``.
+    """
+    violators = []
+    for voice in abjad.iterate(score).components(abjad.Voice):
+        for leaf in abjad.iterate(voice).leaves():
+            if abjad.get.has_indicator(leaf, _const.NOT_YET_PITCHED):
+                violators.append((voice.name, leaf))
+    if violators:
+        strings = [f"{len(violators)} leaves not yet pitched ..."]
+        strings.extend([f"    {_[0]} {repr(_[1])}" for _ in violators])
+        message = "\n".join(strings)
+        raise Exception(message)
+
+
+def transpose_score(score):
+    r"""
+    Transposes ``score``.
+
+    ..  container:: example
+
+        Transposes score:
+
+        >>> instruments = abjad.OrderedDict()
+        >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
+        >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
+        ...     instruments=instruments,
+        ...     score_template=baca.make_empty_score_maker(1),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     transpose_score=True,
+        ... )
+
+        >>> maker(
+        ...     "Music_Voice",
+        ...     baca.instrument(instruments["clarinet"]),
+        ...     baca.make_even_divisions(),
+        ...     baca.pitches("E4 F4"),
+        ... )
+
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "Global_Context"
+                <<
+                    \context GlobalSkips = "Global_Skips"
+                    {
+                        \time 4/8
+                        \baca-time-signature-color #'blue
+                        s1 * 1/2
+                        \time 3/8
+                        \baca-time-signature-color #'blue
+                        s1 * 3/8
+                        \time 4/8
+                        \baca-time-signature-color #'blue
+                        s1 * 1/2
+                        \time 3/8
+                        \baca-time-signature-color #'blue
+                        s1 * 3/8
+                        \time 1/4
+                        \baca-time-signature-transparent
+                        s1 * 1/4
+                        \once \override Score.BarLine.transparent = ##t
+                        \once \override Score.SpanBar.transparent = ##t
+                    }
+                >>
+                \context MusicContext = "Music_Context"
+                {
+                    \context Staff = "Music_Staff"
+                    {
+                        \context Voice = "Music_Voice"
+                        {
+                            fs'!8
+                            ^ \baca-explicit-indicator-markup "(“clarinet”)"
+                            [
+                            g'8
+                            fs'!8
+                            g'8
+                            ]
+                            fs'!8
+                            [
+                            g'8
+                            fs'!8
+                            ]
+                            g'8
+                            [
+                            fs'!8
+                            g'8
+                            fs'!8
+                            ]
+                            g'8
+                            [
+                            fs'!8
+                            g'8
+                            ]
+                            <<
+                                \context Voice = "Music_Voice"
+                                {
+                                    \abjad-invisible-music-coloring
+                                    %@% \abjad-invisible-music
+                                    b'1 * 1/4
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
+                                }
+                                \context Voice = "Rest_Voice"
+                                {
+                                    \once \override Score.TimeSignature.X-extent = ##f
+                                    \once \override MultiMeasureRest.transparent = ##t
+                                    \stopStaff
+                                    \once \override Staff.StaffSymbol.transparent = ##t
+                                    \startStaff
+                                    R1 * 1/4
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
+                                }
+                            >>
+                        }
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Does not transpose score:
+
+        >>> instruments = abjad.OrderedDict()
+        >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
+        >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily"],
+        ...     preamble=[baca.global_context_string()],
+        ...     instruments=instruments,
+        ...     score_template=baca.make_empty_score_maker(1),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     transpose_score=False,
+        ... )
+
+        >>> maker(
+        ...     "Music_Voice",
+        ...     baca.instrument(instruments["clarinet"]),
+        ...     baca.make_even_divisions(),
+        ...     baca.pitches("E4 F4"),
+        ... )
+
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context GlobalContext = "Global_Context"
+                <<
+                    \context GlobalSkips = "Global_Skips"
+                    {
+                        \time 4/8
+                        \baca-time-signature-color #'blue
+                        s1 * 1/2
+                        \time 3/8
+                        \baca-time-signature-color #'blue
+                        s1 * 3/8
+                        \time 4/8
+                        \baca-time-signature-color #'blue
+                        s1 * 1/2
+                        \time 3/8
+                        \baca-time-signature-color #'blue
+                        s1 * 3/8
+                        \time 1/4
+                        \baca-time-signature-transparent
+                        s1 * 1/4
+                        \once \override Score.BarLine.transparent = ##t
+                        \once \override Score.SpanBar.transparent = ##t
+                    }
+                >>
+                \context MusicContext = "Music_Context"
+                {
+                    \context Staff = "Music_Staff"
+                    {
+                        \context Voice = "Music_Voice"
+                        {
+                            e'8
+                            ^ \baca-explicit-indicator-markup "(“clarinet”)"
+                            [
+                            f'8
+                            e'8
+                            f'8
+                            ]
+                            e'8
+                            [
+                            f'8
+                            e'8
+                            ]
+                            f'8
+                            [
+                            e'8
+                            f'8
+                            e'8
+                            ]
+                            f'8
+                            [
+                            e'8
+                            f'8
+                            ]
+                            <<
+                                \context Voice = "Music_Voice"
+                                {
+                                    \abjad-invisible-music-coloring
+                                    %@% \abjad-invisible-music
+                                    b'1 * 1/4
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
+                                }
+                                \context Voice = "Rest_Voice"
+                                {
+                                    \once \override Score.TimeSignature.X-extent = ##f
+                                    \once \override MultiMeasureRest.transparent = ##t
+                                    \stopStaff
+                                    \once \override Staff.StaffSymbol.transparent = ##t
+                                    \startStaff
+                                    R1 * 1/4
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
+                                }
+                            >>
+                        }
+                    }
+                }
+            >>
+
+    """
+    for pleaf in _selection.Selection(score).pleaves():
+        if abjad.get.has_indicator(pleaf, _const.DO_NOT_TRANSPOSE):
+            continue
+        if abjad.get.has_indicator(pleaf, _const.STAFF_POSITION):
+            continue
+        abjad.iterpitches.transpose_from_sounding_pitch(pleaf)
+
+
 class SegmentMaker:
     r"""
     Segment-maker.
@@ -635,8 +1066,6 @@ class SegmentMaker:
 
     """
 
-    __documentation_section__ = "Classes"
-
     ### CLASS ATTRIBUTES ###
 
     __slots__ = (
@@ -644,10 +1073,8 @@ class SegmentMaker:
         "_allow_empty_selections",
         "_cache",
         "_cached_time_signatures",
-        "_check_all_are_pitched",
         "_clock_time_extra_offset",
         "_clock_time_override",
-        "_color_octaves",
         "_commands",
         "_container_to_part_assignment",
         "_deactivate",
@@ -674,7 +1101,6 @@ class SegmentMaker:
         "_instruments",
         "_lilypond_file",
         "_local_measure_number_extra_offset",
-        "_magnify_staves",
         "_margin_markups",
         "_measure_number_extra_offset",
         "_metadata",
@@ -704,9 +1130,13 @@ class SegmentMaker:
         "_stop_clock_time",
         "_test_container_identifiers",
         "_time_signatures",
-        "_transpose_score",
         "_voice_metadata",
         "_voice_names",
+        "check_all_are_pitched",
+        "color_octaves",
+        "functions",
+        "magnify_staves",
+        "transpose_score",
     )
 
     _prototype_to_manifest_name = {
@@ -719,7 +1149,7 @@ class SegmentMaker:
 
     def __init__(
         self,
-        *,
+        *functions,
         activate=None,
         allow_empty_selections=False,
         check_all_are_pitched=False,
@@ -762,13 +1192,13 @@ class SegmentMaker:
         time_signatures=None,
         transpose_score=False,
     ):
+        self.functions = functions or ()
         if activate is not None:
             assert all(isinstance(_, abjad.Tag) for _ in activate)
         self._activate = activate
         self._allow_empty_selections = allow_empty_selections
-        if check_all_are_pitched is not None:
-            check_all_are_pitched = bool(check_all_are_pitched)
-        self._check_all_are_pitched = check_all_are_pitched
+        assert check_all_are_pitched in (True, False)
+        self.check_all_are_pitched = check_all_are_pitched
         if clock_time_extra_offset not in (False, None):
             assert isinstance(clock_time_extra_offset, tuple)
             assert len(clock_time_extra_offset) == 2
@@ -776,7 +1206,8 @@ class SegmentMaker:
         if clock_time_override is not None:
             assert isinstance(clock_time_override, abjad.MetronomeMark)
         self._clock_time_override = clock_time_override
-        self._color_octaves = color_octaves
+        assert color_octaves in (True, False)
+        self.color_octaves = color_octaves
         self._cache = None
         self._cached_time_signatures = []
         if deactivate is not None:
@@ -807,7 +1238,7 @@ class SegmentMaker:
         self._includes = includes
         self._lilypond_file = None
         self._local_measure_number_extra_offset = local_measure_number_extra_offset
-        self._magnify_staves = magnify_staves
+        self.magnify_staves = magnify_staves
         self._margin_markups = margin_markups
         self._measure_number_extra_offset = measure_number_extra_offset
         self._metadata = abjad.OrderedDict()
@@ -836,7 +1267,7 @@ class SegmentMaker:
         assert score_template is not None, repr(score_template)
         self._score_template = score_template
         self._segment_bol_measure_numbers = []
-        # TODO: harmonize _duration, _semgent_duration
+        # TODO: harmonize _duration, _segment_duration
         self._segment_duration = None
         self._segment_number = None
         self._skips_instead_of_rests = skips_instead_of_rests
@@ -849,7 +1280,8 @@ class SegmentMaker:
         if test_container_identifiers is not None:
             test_container_identifiers = bool(test_container_identifiers)
         self._test_container_identifiers = test_container_identifiers
-        self._transpose_score = transpose_score
+        assert transpose_score in (True, False)
+        self.transpose_score = transpose_score
         self._voice_metadata = abjad.OrderedDict()
         self._voice_names = None
         self._commands = []
@@ -1190,7 +1622,7 @@ class SegmentMaker:
         hash_values = abjad.StorageFormatManager(self).get_hash_values()
         return hash(hash_values)
 
-    def __repr__(self) -> str:
+    def __repr__(self):
         """
         Gets interpreter representation.
         """
@@ -1285,13 +1717,13 @@ class SegmentMaker:
             staff.identifier = f"%*% {context_identifier}"
         self._container_to_part_assignment = container_to_part_assignment
 
-    def _alive_during_any_previous_segment(self, context) -> bool:
+    def _alive_during_any_previous_segment(self, context):
         assert isinstance(context, abjad.Context), repr(context)
         assert self.previous_persist is not None
         names = self.previous_persist.get("alive_during_segment", [])
         return context.name in names
 
-    def _alive_during_previous_segment(self, context) -> bool:
+    def _alive_during_previous_segment(self, context):
         assert isinstance(context, abjad.Context), repr(context)
         assert self.previous_persist is not None
         names = self.previous_persist.get("alive_during_segment", [])
@@ -1941,16 +2373,9 @@ class SegmentMaker:
             voice.extend(selections)
         return command_count
 
-    def _check_all_are_pitched_(self):
-        if not self.check_all_are_pitched:
-            return
-        indicator = _const.NOT_YET_PITCHED
-        for voice in abjad.iterate(self.score).components(abjad.Voice):
-            for leaf in abjad.iterate(voice).leaves():
-                if abjad.get.has_indicator(leaf, indicator):
-                    message = "not yet pitched:\n"
-                    message += f"   {repr(leaf)} in {voice.name}"
-                    raise Exception(message)
+    def _check_all_are_pitched(self):
+        if self.check_all_are_pitched:
+            error_on_not_yet_pitched(self.score)
 
     def _check_all_music_in_part_containers(self):
         name = "all_music_in_part_containers"
@@ -2334,43 +2759,9 @@ class SegmentMaker:
             literal = abjad.LilyPondLiteral(string, format_slot="before")
             abjad.attach(literal, pleaf, tag=tag)
 
-    def _color_octaves_(self):
-        if not self.color_octaves:
-            return
-        score = self.score
-        vertical_moments = abjad.iterate_vertical_moments(score)
-        markup = abjad.Markup("OCTAVE", direction=abjad.Up)
-        abjad.tweak(markup).color = "#red"
-        tag = _site(inspect.currentframe())
-        tag = tag.append(_tags.OCTAVE_COLORING)
-        for vertical_moment in vertical_moments:
-            pleaves, pitches = [], []
-            for leaf in vertical_moment.leaves:
-                if abjad.get.has_indicator(leaf, _const.HIDDEN):
-                    continue
-                if abjad.get.has_indicator(leaf, _const.STAFF_POSITION):
-                    continue
-                if isinstance(leaf, abjad.Note):
-                    pleaves.append(leaf)
-                    pitches.append(leaf.written_pitch)
-                elif isinstance(leaf, abjad.Chord):
-                    pleaves.append(leaf)
-                    pitches.extend(leaf.written_pitches)
-            if not pitches:
-                continue
-            pitch_classes = [_.pitch_class for _ in pitches]
-            if _pitchclasses.PitchClassSegment(pitch_classes).has_duplicates():
-                color = True
-                for pleaf in pleaves:
-                    if abjad.get.has_indicator(pleaf, _const.ALLOW_OCTAVE):
-                        color = False
-                if not color:
-                    continue
-                for pleaf in pleaves:
-                    abjad.attach(markup, pleaf, tag=tag)
-                    string = r"\baca-octave-coloring"
-                    literal = abjad.LilyPondLiteral(string, format_slot="before")
-                    abjad.attach(literal, pleaf, tag=tag)
+    def _color_octaves(self):
+        if self.color_octaves:
+            color_octaves(self.score)
 
     def _color_out_of_range(self):
         indicator = _const.ALLOW_OUT_OF_RANGE
@@ -2391,16 +2782,6 @@ class SegmentMaker:
                     string = r"\baca-out-of-range-coloring"
                     literal = abjad.LilyPondLiteral(string, format_slot="before")
                     abjad.attach(literal, pleaf, tag=tag)
-
-    def _color_repeat_pitch_classes_(self):
-        tag = _site(inspect.currentframe())
-        tag = tag.append(_tags.REPEAT_PITCH_CLASS_COLORING)
-        lts = _find_repeat_pitch_classes(self.score)
-        for lt in lts:
-            for leaf in lt:
-                string = r"\baca-repeat-pitch-class-coloring"
-                literal = abjad.LilyPondLiteral(string, format_slot="before")
-                abjad.attach(literal, leaf, tag=tag)
 
     def _comment_measure_numbers(self):
         if self.environment == "docs":
@@ -2949,7 +3330,7 @@ class SegmentMaker:
             tag=tag,
         )
 
-    def _magnify_staves_(self):
+    def _magnify_staves(self):
         if self.magnify_staves is None:
             return
         if isinstance(self.magnify_staves, tuple):
@@ -3457,10 +3838,9 @@ class SegmentMaker:
         command(pleaves)
 
     def _set_not_yet_pitched_to_staff_position_zero(self):
-        indicator = _const.NOT_YET_PITCHED
         pleaves = []
         for pleaf in abjad.iterate(self.score).leaves(pitched=True):
-            if not abjad.get.has_indicator(pleaf, indicator):
+            if not abjad.get.has_indicator(pleaf, _const.NOT_YET_PITCHED):
                 continue
             pleaves.append(pleaf)
         command = _pitchcommands.staff_position(
@@ -3714,15 +4094,9 @@ class SegmentMaker:
                     tag=_site(inspect.currentframe(), 8).append(_tags.PHANTOM),
                 )
 
-    def _transpose_score_(self):
-        if not self.transpose_score:
-            return
-        for pleaf in _selection.Selection(self.score).pleaves():
-            if abjad.get.has_indicator(pleaf, _const.DO_NOT_TRANSPOSE):
-                continue
-            if abjad.get.has_indicator(pleaf, _const.STAFF_POSITION):
-                continue
-            abjad.iterpitches.transpose_from_sounding_pitch(pleaf)
+    def _transpose_score(self):
+        if self.transpose_score:
+            transpose_score(self.score)
 
     def _treat_untreated_persistent_wrappers(self):
         if self.environment == "layout":
@@ -3899,13 +4273,6 @@ class SegmentMaker:
         return self._allow_empty_selections
 
     @property
-    def check_all_are_pitched(self):
-        """
-        Is true when segment-maker checks for NOT_YET_PITCHED indicators.
-        """
-        return self._check_all_are_pitched
-
-    @property
     def clock_time_extra_offset(self):
         """
         Gets clock time extra offset.
@@ -3918,145 +4285,6 @@ class SegmentMaker:
         Gets clock time override.
         """
         return self._clock_time_override
-
-    @property
-    def color_octaves(self):
-        r"""
-        Is true when segment-maker colors octaves.
-
-        ..  container:: example
-
-            Colors octaves:
-
-            >>> def closure():
-            ...     return baca.make_empty_score(1, 1)
-
-            >>> maker = baca.SegmentMaker(
-            ...     color_octaves=True,
-            ...     includes=["baca.ily"],
-            ...     preamble=[baca.global_context_string()],
-            ...     score_template=closure,
-            ...     time_signatures=[(6, 4)],
-            ... )
-
-            >>> maker(
-            ...     ("Music_Voice_1", 1),
-            ...     baca.music(abjad.Container("d'4 e' f' g' a' b'")[:]),
-            ... )
-
-            >>> maker(
-            ...     ("Music_Voice_2", 1),
-            ...     baca.music(abjad.Container("a4 g f e d c")[:]),
-            ...     baca.clef("bass"),
-            ... )
-
-            >>> lilypond_file = maker.run(environment="docs")
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "Global_Context"
-                    <<
-                        \context GlobalSkips = "Global_Skips"
-                        {
-                            \time 6/4
-                            \baca-time-signature-color #'blue
-                            s1 * 3/2
-                            \time 1/4
-                            \baca-time-signature-transparent
-                            s1 * 1/4
-                            \once \override Score.BarLine.transparent = ##t
-                            \once \override Score.SpanBar.transparent = ##t
-                        }
-                    >>
-                    \context MusicContext = "Music_Context"
-                    <<
-                        \context StaffGroup = "Music_Staff_Group"
-                        <<
-                            \context Staff = "Music_Staff_1"
-                            {
-                                \context Voice = "Music_Voice_1"
-                                {
-                                    d'4
-                                    e'4
-                                    \baca-octave-coloring
-                                    f'4
-                                    - \tweak color #red
-                                    ^ \markup { OCTAVE }
-                                    g'4
-                                    a'4
-                                    b'4
-                                    <<
-                                        \context Voice = "Music_Voice_1"
-                                        {
-                                            \abjad-invisible-music-coloring
-                                            %@% \abjad-invisible-music
-                                            b'1 * 1/4
-                                            %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                        }
-                                        \context Voice = "Rest_Voice_1"
-                                        {
-                                            \once \override Score.TimeSignature.X-extent = ##f
-                                            \once \override MultiMeasureRest.transparent = ##t
-                                            \stopStaff
-                                            \once \override Staff.StaffSymbol.transparent = ##t
-                                            \startStaff
-                                            R1 * 1/4
-                                            %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                        }
-                                    >>
-                                }
-                            }
-                            \context Staff = "Music_Staff_2"
-                            {
-                                \context Voice = "Music_Voice_2"
-                                {
-                                    \clef "bass"
-                                    \once \override Staff.Clef.color = #(x11-color 'blue)
-                                    %@% \override Staff.Clef.color = ##f
-                                    \set Staff.forceClef = ##t
-                                    a4
-                                    \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
-                                    g4
-                                    \baca-octave-coloring
-                                    f4
-                                    - \tweak color #red
-                                    ^ \markup { OCTAVE }
-                                    e4
-                                    d4
-                                    c4
-                                    <<
-                                        \context Voice = "Music_Voice_2"
-                                        {
-                                            \abjad-invisible-music-coloring
-                                            %@% \abjad-invisible-music
-                                            d1 * 1/4
-                                            %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                        }
-                                        \context Voice = "Rest_Voice_2"
-                                        {
-                                            \once \override Score.TimeSignature.X-extent = ##f
-                                            \once \override MultiMeasureRest.transparent = ##t
-                                            \stopStaff
-                                            \once \override Staff.StaffSymbol.transparent = ##t
-                                            \startStaff
-                                            R1 * 1/4
-                                            %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                        }
-                                    >>
-                                }
-                            }
-                        >>
-                    >>
-                >>
-
-        """
-        return self._color_octaves
 
     @property
     def commands(self):
@@ -4197,13 +4425,6 @@ class SegmentMaker:
         Gets local measure number extra offset.
         """
         return self._local_measure_number_extra_offset
-
-    @property
-    def magnify_staves(self):
-        """
-        Gets staff magnification.
-        """
-        return self._magnify_staves
 
     @property
     def manifests(self):
@@ -4545,230 +4766,6 @@ class SegmentMaker:
         return self._time_signatures
 
     @property
-    def transpose_score(self):
-        r"""
-        Is true when segment transposes score.
-
-        ..  container:: example
-
-            Transposes score:
-
-            >>> instruments = abjad.OrderedDict()
-            >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
-            >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily"],
-            ...     preamble=[baca.global_context_string()],
-            ...     instruments=instruments,
-            ...     score_template=baca.make_empty_score_maker(1),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     transpose_score=True,
-            ... )
-
-            >>> maker(
-            ...     "Music_Voice",
-            ...     baca.instrument(instruments["clarinet"]),
-            ...     baca.make_even_divisions(),
-            ...     baca.pitches("E4 F4"),
-            ... )
-
-            >>> lilypond_file = maker.run(environment="docs")
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "Global_Context"
-                    <<
-                        \context GlobalSkips = "Global_Skips"
-                        {
-                            \time 4/8
-                            \baca-time-signature-color #'blue
-                            s1 * 1/2
-                            \time 3/8
-                            \baca-time-signature-color #'blue
-                            s1 * 3/8
-                            \time 4/8
-                            \baca-time-signature-color #'blue
-                            s1 * 1/2
-                            \time 3/8
-                            \baca-time-signature-color #'blue
-                            s1 * 3/8
-                            \time 1/4
-                            \baca-time-signature-transparent
-                            s1 * 1/4
-                            \once \override Score.BarLine.transparent = ##t
-                            \once \override Score.SpanBar.transparent = ##t
-                        }
-                    >>
-                    \context MusicContext = "Music_Context"
-                    {
-                        \context Staff = "Music_Staff"
-                        {
-                            \context Voice = "Music_Voice"
-                            {
-                                fs'!8
-                                ^ \baca-explicit-indicator-markup "(“clarinet”)"
-                                [
-                                g'8
-                                fs'!8
-                                g'8
-                                ]
-                                fs'!8
-                                [
-                                g'8
-                                fs'!8
-                                ]
-                                g'8
-                                [
-                                fs'!8
-                                g'8
-                                fs'!8
-                                ]
-                                g'8
-                                [
-                                fs'!8
-                                g'8
-                                ]
-                                <<
-                                    \context Voice = "Music_Voice"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        b'1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Does not transpose score:
-
-            >>> instruments = abjad.OrderedDict()
-            >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
-            >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily"],
-            ...     preamble=[baca.global_context_string()],
-            ...     instruments=instruments,
-            ...     score_template=baca.make_empty_score_maker(1),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     transpose_score=False,
-            ... )
-
-            >>> maker(
-            ...     "Music_Voice",
-            ...     baca.instrument(instruments["clarinet"]),
-            ...     baca.make_even_divisions(),
-            ...     baca.pitches("E4 F4"),
-            ... )
-
-            >>> lilypond_file = maker.run(environment="docs")
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context GlobalContext = "Global_Context"
-                    <<
-                        \context GlobalSkips = "Global_Skips"
-                        {
-                            \time 4/8
-                            \baca-time-signature-color #'blue
-                            s1 * 1/2
-                            \time 3/8
-                            \baca-time-signature-color #'blue
-                            s1 * 3/8
-                            \time 4/8
-                            \baca-time-signature-color #'blue
-                            s1 * 1/2
-                            \time 3/8
-                            \baca-time-signature-color #'blue
-                            s1 * 3/8
-                            \time 1/4
-                            \baca-time-signature-transparent
-                            s1 * 1/4
-                            \once \override Score.BarLine.transparent = ##t
-                            \once \override Score.SpanBar.transparent = ##t
-                        }
-                    >>
-                    \context MusicContext = "Music_Context"
-                    {
-                        \context Staff = "Music_Staff"
-                        {
-                            \context Voice = "Music_Voice"
-                            {
-                                e'8
-                                ^ \baca-explicit-indicator-markup "(“clarinet”)"
-                                [
-                                f'8
-                                e'8
-                                f'8
-                                ]
-                                e'8
-                                [
-                                f'8
-                                e'8
-                                ]
-                                f'8
-                                [
-                                e'8
-                                f'8
-                                e'8
-                                ]
-                                f'8
-                                [
-                                e'8
-                                f'8
-                                ]
-                                <<
-                                    \context Voice = "Music_Voice"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        b'1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
-                            }
-                        }
-                    }
-                >>
-
-        """
-        return self._transpose_score
-
-    @property
     def voice_metadata(self):
         """
         Gets voice metadata.
@@ -4858,7 +4855,7 @@ class SegmentMaker:
                 self._attach_metronome_marks()
                 self._reanalyze_trending_dynamics()
                 self._reanalyze_reapplied_synthetic_wrappers()
-                self._transpose_score_()
+                self._transpose_score()
                 self._color_not_yet_registered()
                 self._color_mock_pitch()
                 self._set_intermittent_to_staff_position_zero()
@@ -4866,16 +4863,16 @@ class SegmentMaker:
                 self._set_not_yet_pitched_to_staff_position_zero()
                 self._clean_up_repeat_tie_direction()
                 self._clean_up_laissez_vibrer_tie_direction()
-                self._check_all_are_pitched_()
+                self._check_all_are_pitched()
                 self._check_doubled_dynamics()
                 self._color_out_of_range()
                 self._check_persistent_indicators()
-                self._color_repeat_pitch_classes_()
-                self._color_octaves_()
+                color_repeat_pitch_classes(self.score)
+                self._color_octaves()
                 self._attach_shadow_tie_indicators()
                 self._force_nonnatural_accidentals()
                 self._label_duration_multipliers()
-                self._magnify_staves_()
+                self._magnify_staves()
                 self._whitespace_leaves()
                 self._comment_measure_numbers()
                 self._apply_breaks()

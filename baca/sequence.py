@@ -87,8 +87,6 @@ class Sequence(abjad.Sequence):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = "Classes"
-
     __slots__ = ()
 
     ### PUBLIC METHODS ###
