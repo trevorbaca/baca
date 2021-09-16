@@ -67,15 +67,9 @@ class RhythmCommand(_scoping.Command):
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #12
+                        \baca-new-spacing-section #1 #4
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -106,25 +100,6 @@ class RhythmCommand(_scoping.Command):
                             b'8
                             b'8
                             ]
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -412,14 +387,8 @@ class RhythmCommand(_scoping.Command):
                             s1 * 1/2
                             \baca-new-spacing-section #1 #16
                             s1 * 1/2
-                            \baca-new-spacing-section #1 #16
-                            s1 * 1/2
                             \baca-new-spacing-section #1 #4
-                            \time 1/4
-                            \baca-time-signature-transparent
-                            s1 * 1/4
-                            \once \override Score.BarLine.transparent = ##t
-                            \once \override Score.SpanBar.transparent = ##t
+                            s1 * 1/2
                         }
                     >>
                     \context MusicContext = "Music_Context"
@@ -508,25 +477,6 @@ class RhythmCommand(_scoping.Command):
                                 ]
                                 \revert TextScript.font-size
                                 \revert TextScript.staff-padding
-                                <<
-                                    \context Voice = "Music_Voice"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        b'1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
                             }
                         }
                     }
@@ -750,15 +700,9 @@ def make_monads(fractions):
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        \baca-new-spacing-section #1 #12
+                        \baca-new-spacing-section #1 #4
                         \time 4/4
                         s1 * 1
-                        \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -782,25 +726,6 @@ def make_monads(fractions):
                             {
                                 b'4
                             }
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -890,15 +815,9 @@ def make_repeat_tied_notes(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        \baca-new-spacing-section #1 #12
+                        \baca-new-spacing-section #1 #4
                         \time 10/8
                         s1 * 5/4
-                        \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -920,25 +839,6 @@ def make_repeat_tied_notes(
                             ~
                             b'4
                             \repeatTie
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }

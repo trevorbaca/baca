@@ -266,15 +266,9 @@ def beam(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #12
+                        \baca-new-spacing-section #1 #4
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -299,25 +293,6 @@ def beam(
                             c'8
                             c'8
                             ]
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }

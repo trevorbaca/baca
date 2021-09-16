@@ -298,15 +298,9 @@ class BCPCommand(_scoping.Command):
                             \baca-new-spacing-section #1 #16
                             \time 4/8
                             s1 * 1/2
-                            \baca-new-spacing-section #1 #16
+                            \baca-new-spacing-section #1 #4
                             \time 3/8
                             s1 * 3/8
-                            \baca-new-spacing-section #1 #4
-                            \time 1/4
-                            \baca-time-signature-transparent
-                            s1 * 1/4
-                            \once \override Score.BarLine.transparent = ##t
-                            \once \override Score.SpanBar.transparent = ##t
                         }
                     >>
                     \context MusicContext = "Music_Context"
@@ -403,25 +397,6 @@ class BCPCommand(_scoping.Command):
                                 ]
                                 \revert Script.staff-padding
                                 \revert TextSpanner.staff-padding
-                                <<
-                                    \context Voice = "Music_Voice"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        b'1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
                             }
                         }
                     }
@@ -532,15 +507,9 @@ class BCPCommand(_scoping.Command):
                             \baca-new-spacing-section #1 #16
                             \time 4/8
                             s1 * 1/2
-                            \baca-new-spacing-section #1 #16
+                            \baca-new-spacing-section #1 #4
                             \time 3/8
                             s1 * 3/8
-                            \baca-new-spacing-section #1 #4
-                            \time 1/4
-                            \baca-time-signature-transparent
-                            s1 * 1/4
-                            \once \override Score.BarLine.transparent = ##t
-                            \once \override Score.SpanBar.transparent = ##t
                         }
                     >>
                     \context MusicContext = "Music_Context"
@@ -665,25 +634,6 @@ class BCPCommand(_scoping.Command):
                                 \bacaStopTextSpanBCP
                                 ]
                                 \revert Script.staff-padding
-                                <<
-                                    \context Voice = "Music_Voice"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        b'1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
                             }
                         }
                     }
@@ -819,11 +769,6 @@ class ContainerCommand(_scoping.Command):
                     s1 * 1/2
                     \time 3/8
                     s1 * 3/8
-                    \time 1/4
-                    \baca-time-signature-transparent
-                    s1 * 1/4
-                    \once \override Score.BarLine.transparent = ##t
-                    \once \override Score.SpanBar.transparent = ##t
                 }
             >>
             \context MusicContext = "Music_Context"
@@ -840,25 +785,6 @@ class ContainerCommand(_scoping.Command):
                             e'2
                             f'4.
                         }   %*% ViolinII
-                        <<
-                            \context Voice = "Music_Voice"
-                            {
-                                \abjad-invisible-music-coloring
-                                %@% \abjad-invisible-music
-                                b'1 * 1/4
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                            }
-                            \context Voice = "Rest_Voice"
-                            {
-                                \once \override Score.TimeSignature.X-extent = ##f
-                                \once \override MultiMeasureRest.transparent = ##t
-                                \stopStaff
-                                \once \override Staff.StaffSymbol.transparent = ##t
-                                \startStaff
-                                R1 * 1/4
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                            }
-                        >>
                     }
                 }
             }

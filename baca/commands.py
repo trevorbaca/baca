@@ -86,11 +86,6 @@ def assign_parts(
                     s1 * 1/2
                     \time 3/8
                     s1 * 3/8
-                    \time 1/4
-                    \baca-time-signature-transparent
-                    s1 * 1/4
-                    \once \override Score.BarLine.transparent = ##t
-                    \once \override Score.SpanBar.transparent = ##t
                 }
             >>
             \context MusicContext = "Music_Context"
@@ -105,25 +100,6 @@ def assign_parts(
                             e'2
                             e'4.
                         }   %*% PartAssignment('Music_Voice')
-                        <<
-                            \context Voice = "Music_Voice"
-                            {
-                                \abjad-invisible-music-coloring
-                                %@% \abjad-invisible-music
-                                b'1 * 1/4
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                            }
-                            \context Voice = "Rest_Voice"
-                            {
-                                \once \override Score.TimeSignature.X-extent = ##f
-                                \once \override MultiMeasureRest.transparent = ##t
-                                \stopStaff
-                                \once \override Staff.StaffSymbol.transparent = ##t
-                                \startStaff
-                                R1 * 1/4
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                            }
-                        >>
                     }
                 }
             }
@@ -221,15 +197,9 @@ def bcps(
                             \baca-new-spacing-section #1 #16
                             \time 4/8
                             s1 * 1/2
-                            \baca-new-spacing-section #1 #16
+                            \baca-new-spacing-section #1 #4
                             \time 3/8
                             s1 * 3/8
-                            \baca-new-spacing-section #1 #4
-                            \time 1/4
-                            \baca-time-signature-transparent
-                            s1 * 1/4
-                            \once \override Score.BarLine.transparent = ##t
-                            \once \override Score.SpanBar.transparent = ##t
                         }
                     >>
                     \context MusicContext = "Music_Context"
@@ -328,25 +298,6 @@ def bcps(
                                 ]
                                 \revert Script.staff-padding
                                 \revert TextSpanner.staff-padding
-                                <<
-                                    \context Voice = "Music_Voice"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        b'1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
                             }
                         }
                     }
@@ -595,11 +546,6 @@ def container(
                     s1 * 1/2
                     \time 3/8
                     s1 * 3/8
-                    \time 1/4
-                    \baca-time-signature-transparent
-                    s1 * 1/4
-                    \once \override Score.BarLine.transparent = ##t
-                    \once \override Score.SpanBar.transparent = ##t
                 }
             >>
             \context MusicContext = "Music_Context"
@@ -616,25 +562,6 @@ def container(
                             e'2
                             f'4.
                         }   %*% ViolinII
-                        <<
-                            \context Voice = "Music_Voice"
-                            {
-                                \abjad-invisible-music-coloring
-                                %@% \abjad-invisible-music
-                                b'1 * 1/4
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                            }
-                            \context Voice = "Rest_Voice"
-                            {
-                                \once \override Score.TimeSignature.X-extent = ##f
-                                \once \override MultiMeasureRest.transparent = ##t
-                                \stopStaff
-                                \once \override Staff.StaffSymbol.transparent = ##t
-                                \startStaff
-                                R1 * 1/4
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                            }
-                        >>
                     }
                 }
             }
@@ -696,11 +623,6 @@ def cross_staff(
                     {
                         \time 4/4
                         s1 * 1
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -715,25 +637,6 @@ def cross_staff(
                                 f'4
                                 g'4
                                 a'4
-                                <<
-                                    \context Voice = "Music_Voice_1"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        b'1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice_1"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
                             }
                         }
                         \context Staff = "Music_Staff_2"
@@ -746,25 +649,6 @@ def cross_staff(
                                 e'4
                                 \crossStaff
                                 f'4
-                                <<
-                                    \context Voice = "Music_Voice_2"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        b'1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice_2"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
                             }
                         }
                     >>
@@ -1039,15 +923,9 @@ def finger_pressure_transition(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #12
+                        \baca-new-spacing-section #1 #4
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -1072,25 +950,6 @@ def finger_pressure_transition(
                             - \tweak thickness 3
                             \glissando
                             c''4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -1271,11 +1130,6 @@ def glissando(
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -1319,25 +1173,6 @@ def glissando(
                             \glissando
                             d''8
                             ]
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -1384,11 +1219,6 @@ def glissando(
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -1421,25 +1251,6 @@ def glissando(
                             \glissando
                             d''8
                             ]
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -1487,11 +1298,6 @@ def glissando(
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -1548,25 +1354,6 @@ def glissando(
                             \glissando
                             d''8
                             ]
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -1615,11 +1402,6 @@ def glissando(
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -1665,25 +1447,6 @@ def glissando(
                             \glissando
                             d''8
                             ]
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -1795,15 +1558,9 @@ def invisible_music(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #12
+                        \baca-new-spacing-section #1 #4
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -1820,25 +1577,6 @@ def invisible_music(
                             \abjad-invisible-music-coloring
                             c''2
                             c''4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }

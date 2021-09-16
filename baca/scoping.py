@@ -1195,15 +1195,9 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #12
+                        \baca-new-spacing-section #1 #4
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -1250,25 +1244,6 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                             b'8
                             b'8
                             ]
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -1320,15 +1295,9 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #12
+                        \baca-new-spacing-section #1 #4
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -1375,25 +1344,6 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                             b'8
                             b'8
                             ]
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -1496,15 +1446,9 @@ def only_parts(command: _command_typing) -> _command_typing:
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #12
+                        \baca-new-spacing-section #1 #4
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -1521,25 +1465,6 @@ def only_parts(command: _command_typing) -> _command_typing:
                             b'2
                             b'4.
                             \f
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }

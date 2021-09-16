@@ -62,11 +62,6 @@ class AccidentalAdjustmentCommand(_scoping.Command):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -79,25 +74,6 @@ class AccidentalAdjustmentCommand(_scoping.Command):
                             f'!4.
                             e'2
                             f'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -540,11 +516,6 @@ class ClusterCommand(_scoping.Command):
                             s1 * 1/2
                             \time 3/8
                             s1 * 3/8
-                            \time 1/4
-                            \baca-time-signature-transparent
-                            s1 * 1/4
-                            \once \override Score.BarLine.transparent = ##t
-                            \once \override Score.SpanBar.transparent = ##t
                         }
                     >>
                     \context MusicContext = "Music_Context"
@@ -601,25 +572,6 @@ class ClusterCommand(_scoping.Command):
                                     \center-align
                                         \natural
                                     }
-                                <<
-                                    \context Voice = "Music_Voice"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        b'1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
                             }
                         }
                     }
@@ -679,11 +631,6 @@ class ClusterCommand(_scoping.Command):
                             s1 * 1/2
                             \time 3/8
                             s1 * 3/8
-                            \time 1/4
-                            \baca-time-signature-transparent
-                            s1 * 1/4
-                            \once \override Score.BarLine.transparent = ##t
-                            \once \override Score.SpanBar.transparent = ##t
                         }
                     >>
                     \context MusicContext = "Music_Context"
@@ -756,25 +703,6 @@ class ClusterCommand(_scoping.Command):
                                                 \flat
                                             }
                                     }
-                                <<
-                                    \context Voice = "Music_Voice"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        b'1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
                             }
                         }
                     }
@@ -818,11 +746,6 @@ class ClusterCommand(_scoping.Command):
                             s1 * 1/2
                             \time 3/8
                             s1 * 3/8
-                            \time 1/4
-                            \baca-time-signature-transparent
-                            s1 * 1/4
-                            \once \override Score.BarLine.transparent = ##t
-                            \once \override Score.SpanBar.transparent = ##t
                         }
                     >>
                     \context MusicContext = "Music_Context"
@@ -895,25 +818,6 @@ class ClusterCommand(_scoping.Command):
                                                 \flat
                                             }
                                     }
-                                <<
-                                    \context Voice = "Music_Voice"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        b'1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
                             }
                         }
                     }
@@ -965,11 +869,6 @@ class ClusterCommand(_scoping.Command):
                             s1 * 1/2
                             \time 3/8
                             s1 * 3/8
-                            \time 1/4
-                            \baca-time-signature-transparent
-                            s1 * 1/4
-                            \once \override Score.BarLine.transparent = ##t
-                            \once \override Score.SpanBar.transparent = ##t
                         }
                     >>
                     \context MusicContext = "Music_Context"
@@ -1042,25 +941,6 @@ class ClusterCommand(_scoping.Command):
                                                 \flat
                                             }
                                     }
-                                <<
-                                    \context Voice = "Music_Voice"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        b'1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
                             }
                         }
                     }
@@ -1104,11 +984,6 @@ class ClusterCommand(_scoping.Command):
                             s1 * 1/2
                             \time 3/8
                             s1 * 3/8
-                            \time 1/4
-                            \baca-time-signature-transparent
-                            s1 * 1/4
-                            \once \override Score.BarLine.transparent = ##t
-                            \once \override Score.SpanBar.transparent = ##t
                         }
                     >>
                     \context MusicContext = "Music_Context"
@@ -1181,25 +1056,6 @@ class ClusterCommand(_scoping.Command):
                                                 \flat
                                             }
                                     }
-                                <<
-                                    \context Voice = "Music_Voice"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        b'1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
                             }
                         }
                     }
@@ -1245,11 +1101,6 @@ class ClusterCommand(_scoping.Command):
                             s1 * 1/2
                             \time 3/8
                             s1 * 3/8
-                            \time 1/4
-                            \baca-time-signature-transparent
-                            s1 * 1/4
-                            \once \override Score.BarLine.transparent = ##t
-                            \once \override Score.SpanBar.transparent = ##t
                         }
                     >>
                     \context MusicContext = "Music_Context"
@@ -1262,25 +1113,6 @@ class ClusterCommand(_scoping.Command):
                                 e'4.
                                 e'2
                                 e'4.
-                                <<
-                                    \context Voice = "Music_Voice"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        b'1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
                             }
                         }
                     }
@@ -1337,11 +1169,6 @@ class ColorFingeringCommand(_scoping.Command):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -1357,25 +1184,6 @@ class ColorFingeringCommand(_scoping.Command):
                             ^ \markup { \override #'(circle-padding . 0.25) \circle \finger 2 }
                             e'4.
                             ^ \markup { \override #'(circle-padding . 0.25) \circle \finger 1 }
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -1732,11 +1540,6 @@ class MicrotoneDeviationCommand(_scoping.Command):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -1767,25 +1570,6 @@ class MicrotoneDeviationCommand(_scoping.Command):
                             e'8
                             eqs'!8
                             ]
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -1916,11 +1700,6 @@ class OctaveDisplacementCommand(_scoping.Command):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -1951,25 +1730,6 @@ class OctaveDisplacementCommand(_scoping.Command):
                             g''8
                             g''8
                             ]
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -2213,11 +1973,6 @@ class PitchCommand(_scoping.Command):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -2248,25 +2003,6 @@ class PitchCommand(_scoping.Command):
                             g''8
                             cs''!8
                             ]
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -2311,11 +2047,6 @@ class PitchCommand(_scoping.Command):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -2346,25 +2077,6 @@ class PitchCommand(_scoping.Command):
                             fs'!8
                             <b' cs''!>8
                             ]
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -2409,11 +2121,6 @@ class PitchCommand(_scoping.Command):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -2444,25 +2151,6 @@ class PitchCommand(_scoping.Command):
                             <c' d' e' f' g' a' b'>8
                             <c' d' e' f' g' a' b'>8
                             ]
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -2882,11 +2570,6 @@ class RegisterCommand(_scoping.Command):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -2917,25 +2600,6 @@ class RegisterCommand(_scoping.Command):
                             af''!8
                             atqf''!8
                             ]
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -3239,11 +2903,6 @@ class RegisterInterpolationCommand(_scoping.Command):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -3296,25 +2955,6 @@ class RegisterInterpolationCommand(_scoping.Command):
                             ef''!8
                             f''8
                             ]
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -3369,11 +3009,6 @@ class RegisterInterpolationCommand(_scoping.Command):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -3426,25 +3061,6 @@ class RegisterInterpolationCommand(_scoping.Command):
                             ef'!8
                             f'8
                             ]
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -3499,11 +3115,6 @@ class RegisterInterpolationCommand(_scoping.Command):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -3556,25 +3167,6 @@ class RegisterInterpolationCommand(_scoping.Command):
                             ef''!8
                             f''8
                             ]
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -3629,11 +3221,6 @@ class RegisterInterpolationCommand(_scoping.Command):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -3686,25 +3273,6 @@ class RegisterInterpolationCommand(_scoping.Command):
                             ef!8
                             f8
                             ]
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -3759,11 +3327,6 @@ class RegisterInterpolationCommand(_scoping.Command):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -3816,25 +3379,6 @@ class RegisterInterpolationCommand(_scoping.Command):
                             ef''!8
                             f''8
                             ]
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -5753,11 +5297,6 @@ def force_accidental(
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -5772,25 +5311,6 @@ def force_accidental(
                             %@% f'!4.
                             e'2
                             f'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -6075,11 +5595,6 @@ def pitch(
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -6096,25 +5611,6 @@ def pitch(
                             %@% ^ \baca-duration-multiplier-markup #"1" #"2"
                             <c' d' e'>1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }

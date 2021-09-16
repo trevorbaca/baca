@@ -2160,15 +2160,9 @@ class Imbrication:
                     <<
                         \context GlobalSkips = "Global_Skips"
                         {
-                            \baca-new-spacing-section #1 #32
+                            \baca-new-spacing-section #1 #4
                             \time 5/8
                             s1 * 5/8
-                            \baca-new-spacing-section #1 #4
-                            \time 1/4
-                            \baca-time-signature-transparent
-                            s1 * 1/4
-                            \once \override Score.BarLine.transparent = ##t
-                            \once \override Score.SpanBar.transparent = ##t
                         }
                     >>
                     \context MusicContext = "Music_Context"
@@ -2211,25 +2205,6 @@ class Imbrication:
                                     \revert TupletBracket.stencil
                                     \revert TupletNumber.stencil
                                 }
-                                <<
-                                    \context Voice = "Music_Voice_1"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        b'1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice_1"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
                             }
                             \context Voice = "Music_Voice_2"
                             {
@@ -2284,25 +2259,6 @@ class Imbrication:
                                         ]
                                     }
                                 }
-                                <<
-                                    \context Voice = "Music_Voice_2"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        b'1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice_2"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
                             }
                         >>
                     }
@@ -2428,15 +2384,9 @@ class Imbrication:
                     <<
                         \context GlobalSkips = "Global_Skips"
                         {
-                            \baca-new-spacing-section #1 #32
+                            \baca-new-spacing-section #1 #4
                             \time 15/16
                             s1 * 15/16
-                            \baca-new-spacing-section #1 #4
-                            \time 1/4
-                            \baca-time-signature-transparent
-                            s1 * 1/4
-                            \once \override Score.BarLine.transparent = ##t
-                            \once \override Score.SpanBar.transparent = ##t
                         }
                     >>
                     \context MusicContext = "Music_Context"
@@ -2493,25 +2443,6 @@ class Imbrication:
                                     \revert TupletBracket.stencil
                                     \revert TupletNumber.stencil
                                 }
-                                <<
-                                    \context Voice = "Music_Voice_1"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        b'1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice_1"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
                             }
                             \context Voice = "Music_Voice_2"
                             {
@@ -2574,25 +2505,6 @@ class Imbrication:
                                         ]
                                     }
                                 }
-                                <<
-                                    \context Voice = "Music_Voice_2"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        b'1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice_2"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
                             }
                         >>
                     }
@@ -2675,15 +2587,9 @@ class Imbrication:
                     <<
                         \context GlobalSkips = "Global_Skips"
                         {
-                            \baca-new-spacing-section #1 #32
+                            \baca-new-spacing-section #1 #4
                             \time 9/8
                             s1 * 9/8
-                            \baca-new-spacing-section #1 #4
-                            \time 1/4
-                            \baca-time-signature-transparent
-                            s1 * 1/4
-                            \once \override Score.BarLine.transparent = ##t
-                            \once \override Score.SpanBar.transparent = ##t
                         }
                     >>
                     \context MusicContext = "Music_Context"
@@ -2743,25 +2649,6 @@ class Imbrication:
                                     \revert TupletBracket.stencil
                                     \revert TupletNumber.stencil
                                 }
-                                <<
-                                    \context Voice = "Music_Voice_1"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        b'1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice_1"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
                             }
                             \context Voice = "Music_Voice_2"
                             {
@@ -2854,25 +2741,6 @@ class Imbrication:
                                         ]
                                     }
                                 }
-                                <<
-                                    \context Voice = "Music_Voice_2"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        b'1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice_2"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
                             }
                         >>
                     }
@@ -2943,15 +2811,9 @@ class Imbrication:
                     <<
                         \context GlobalSkips = "Global_Skips"
                         {
-                            \baca-new-spacing-section #1 #32
+                            \baca-new-spacing-section #1 #4
                             \time 45/32
                             s1 * 45/32
-                            \baca-new-spacing-section #1 #4
-                            \time 1/4
-                            \baca-time-signature-transparent
-                            s1 * 1/4
-                            \once \override Score.BarLine.transparent = ##t
-                            \once \override Score.SpanBar.transparent = ##t
                         }
                     >>
                     \context MusicContext = "Music_Context"
@@ -3006,25 +2868,6 @@ class Imbrication:
                                     \revert TupletBracket.stencil
                                     \revert TupletNumber.stencil
                                 }
-                                <<
-                                    \context Voice = "Music_Voice_1"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        b'1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice_1"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
                             }
                             \context Voice = "Music_Voice_2"
                             {
@@ -3073,25 +2916,6 @@ class Imbrication:
                                         ]
                                     }
                                 }
-                                <<
-                                    \context Voice = "Music_Voice_2"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        b'1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice_2"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
                             }
                         >>
                     }
@@ -7295,15 +7119,9 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        \baca-new-spacing-section #1 #32
+                        \baca-new-spacing-section #1 #4
                         \time 3/4
                         s1 * 3/4
-                        \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -7348,25 +7166,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
                             }
-                            <<
-                                \context Voice = "Music_Voice_1"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice_1"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                         \context Voice = "Music_Voice_2"
                         {
@@ -7400,25 +7199,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     r4
                                 }
                             }
-                            <<
-                                \context Voice = "Music_Voice_2"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice_2"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     >>
                 }
@@ -7490,15 +7270,9 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        \baca-new-spacing-section #1 #32
+                        \baca-new-spacing-section #1 #4
                         \time 9/8
                         s1 * 9/8
-                        \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -7555,25 +7329,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
                             }
-                            <<
-                                \context Voice = "Music_Voice_1"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice_1"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                         \context Voice = "Music_Voice_2"
                         {
@@ -7618,25 +7373,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     ]
                                 }
                             }
-                            <<
-                                \context Voice = "Music_Voice_2"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice_2"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     >>
                 }
@@ -7726,14 +7462,9 @@ def extend_beam(
                         \baca-new-spacing-section #1 #32
                         \time 7/16
                         s1 * 7/16
-                        \baca-new-spacing-section #1 #32
+                        \baca-new-spacing-section #1 #4
                         \time 1/4
                         s1 * 1/4
-                        \baca-new-spacing-section #1 #4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -7793,25 +7524,6 @@ def extend_beam(
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
                             }
-                            <<
-                                \context Voice = "Music_Voice_1"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice_1"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                         \context Voice = "Music_Voice_2"
                         {
@@ -7866,25 +7578,6 @@ def extend_beam(
                                     ]
                                 }
                             }
-                            <<
-                                \context Voice = "Music_Voice_2"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice_2"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     >>
                 }
@@ -7967,15 +7660,9 @@ def imbricate(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        \baca-new-spacing-section #1 #32
+                        \baca-new-spacing-section #1 #4
                         \time 15/16
                         s1 * 15/16
-                        \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -8029,25 +7716,6 @@ def imbricate(
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
                             }
-                            <<
-                                \context Voice = "Music_Voice_1"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice_1"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                         \context Voice = "Music_Voice_2"
                         {
@@ -8110,25 +7778,6 @@ def imbricate(
                                     ]
                                 }
                             }
-                            <<
-                                \context Voice = "Music_Voice_2"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice_2"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     >>
                 }
@@ -8192,15 +7841,9 @@ def imbricate(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        \baca-new-spacing-section #1 #32
+                        \baca-new-spacing-section #1 #4
                         \time 15/16
                         s1 * 15/16
-                        \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -8252,25 +7895,6 @@ def imbricate(
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
                             }
-                            <<
-                                \context Voice = "Music_Voice_1"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice_1"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                         \context Voice = "Music_Voice_2"
                         {
@@ -8332,25 +7956,6 @@ def imbricate(
                                     ]
                                 }
                             }
-                            <<
-                                \context Voice = "Music_Voice_2"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice_2"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                         \context Voice = "Music_Voice_3"
                         {
@@ -8397,25 +8002,6 @@ def imbricate(
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
                             }
-                            <<
-                                \context Voice = "Music_Voice_3"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice_3"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     >>
                 }
@@ -8483,15 +8069,9 @@ def imbricate(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        \baca-new-spacing-section #1 #32
+                        \baca-new-spacing-section #1 #4
                         \time 9/8
                         s1 * 9/8
-                        \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -8551,25 +8131,6 @@ def imbricate(
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
                             }
-                            <<
-                                \context Voice = "Music_Voice_1"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice_1"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                         \context Voice = "Music_Voice_2"
                         {
@@ -8650,25 +8211,6 @@ def imbricate(
                                     ]
                                 }
                             }
-                            <<
-                                \context Voice = "Music_Voice_2"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice_2"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     >>
                 }
@@ -8737,15 +8279,9 @@ def imbricate(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \time 27/16
                         s1 * 27/16
-                        \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -8793,25 +8329,6 @@ def imbricate(
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
                             }
-                            <<
-                                \context Voice = "Music_Voice_1"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice_1"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                         \context Voice = "Music_Voice_2"
                         {
@@ -8840,25 +8357,6 @@ def imbricate(
                                     a'8.
                                 }
                             }
-                            <<
-                                \context Voice = "Music_Voice_2"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice_2"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     >>
                 }
@@ -8925,15 +8423,9 @@ def imbricate(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        \baca-new-spacing-section #1 #32
+                        \baca-new-spacing-section #1 #4
                         \time 11/16
                         s1 * 11/16
-                        \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -8983,25 +8475,6 @@ def imbricate(
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
                             }
-                            <<
-                                \context Voice = "Music_Voice_1"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice_1"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                         \context Voice = "Music_Voice_2"
                         {
@@ -9052,25 +8525,6 @@ def imbricate(
                                     ]
                                 }
                             }
-                            <<
-                                \context Voice = "Music_Voice_2"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice_2"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     >>
                 }
@@ -9137,15 +8591,9 @@ def imbricate(
                 <<
                     \context GlobalSkips = "Global_Skips"
                     {
-                        \baca-new-spacing-section #1 #32
+                        \baca-new-spacing-section #1 #4
                         \time 19/16
                         s1 * 19/16
-                        \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -9201,25 +8649,6 @@ def imbricate(
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
                             }
-                            <<
-                                \context Voice = "Music_Voice_1"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice_1"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                         \context Voice = "Music_Voice_2"
                         {
@@ -9284,25 +8713,6 @@ def imbricate(
                                     r8
                                 }
                             }
-                            <<
-                                \context Voice = "Music_Voice_2"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice_2"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     >>
                 }

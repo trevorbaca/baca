@@ -15,6 +15,7 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     indicator_defaults=[
         ...         ("Music_Staff", "default_clef", abjad.Clef("treble"))
         ...     ],
@@ -54,18 +55,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -83,25 +77,6 @@ r"""
                             \override Staff.Clef.color = #(x11-color 'violet)
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -119,6 +94,7 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
@@ -159,18 +135,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -188,25 +157,6 @@ r"""
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -222,6 +172,7 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
@@ -277,18 +228,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -306,25 +250,6 @@ r"""
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -342,6 +267,7 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
@@ -394,18 +320,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -423,25 +342,6 @@ r"""
                             \override Staff.Clef.color = #(x11-color 'OliveDrab)
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -459,6 +359,7 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
@@ -503,18 +404,11 @@ r"""
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -539,25 +433,6 @@ r"""
                             \override Staff.Clef.color = #(x11-color 'DeepPink4)
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -573,6 +448,7 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
@@ -629,18 +505,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -658,25 +527,6 @@ r"""
                             \override Staff.Clef.color = #(x11-color 'DeepPink4)
                             R1 * 3/8
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -691,6 +541,7 @@ r"""
         Explicit dynamics color blue:
 
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -726,14 +577,8 @@ r"""
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
-                        s1 * 3/8
                         \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
+                        s1 * 3/8
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -746,25 +591,6 @@ r"""
                             - \tweak color #(x11-color 'blue)
                             \f
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -773,6 +599,7 @@ r"""
         Even after a previous dynamic:
 
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -823,14 +650,8 @@ r"""
                         \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
-                        s1 * 3/8
                         \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
+                        s1 * 3/8
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -843,25 +664,6 @@ r"""
                             - \tweak color #(x11-color 'blue)
                             \p
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -872,6 +674,7 @@ r"""
         Reapplied dynamics color green:
 
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -921,14 +724,8 @@ r"""
                         \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
-                        s1 * 3/8
                         \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
+                        s1 * 3/8
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -941,25 +738,6 @@ r"""
                             - \tweak color #(x11-color 'green4)
                             \f
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -970,6 +748,7 @@ r"""
         Redundant dynamics color pink:
 
         >>> maker = baca.SegmentMaker(
+        ...     #SAFEappend_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -1006,14 +785,8 @@ r"""
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
-                        s1 * 3/8
                         \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
+                        s1 * 3/8
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -1028,25 +801,6 @@ r"""
                             b'4.
                             - \tweak color #(x11-color 'DeepPink1)
                             \f
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -1055,6 +809,7 @@ r"""
         Even at the beginning of a segment:
 
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -1105,14 +860,8 @@ r"""
                         \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
-                        s1 * 3/8
                         \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
+                        s1 * 3/8
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -1125,25 +874,6 @@ r"""
                             - \tweak color #(x11-color 'DeepPink1)
                             \f
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -1152,6 +882,7 @@ r"""
         Sforzando dynamics do not count as redundant:
 
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -1188,14 +919,8 @@ r"""
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
-                        s1 * 3/8
                         \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
+                        s1 * 3/8
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -1210,25 +935,6 @@ r"""
                             b'4.
                             - \tweak color #(x11-color 'blue)
                             \sfz
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -1237,6 +943,7 @@ r"""
         Even at the beginning of a segment:
 
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -1287,14 +994,8 @@ r"""
                         \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
-                        s1 * 3/8
                         \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
+                        s1 * 3/8
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -1307,25 +1008,6 @@ r"""
                             - \tweak color #(x11-color 'blue)
                             \sfz
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -1337,6 +1019,7 @@ r"""
         nonredundantly:
 
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -1373,14 +1056,8 @@ r"""
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
-                        s1 * 3/8
                         \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
+                        s1 * 3/8
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -1395,25 +1072,6 @@ r"""
                             b'4.
                             - \tweak color #(x11-color 'blue)
                             \baca-effort-mf
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -1445,6 +1103,7 @@ r"""
         >>> score_template = baca.make_empty_score_maker(1)
         >>> triple = ("Music_Staff", 'default_instrument', abjad.Flute())
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     indicator_defaults=[triple],
         ...     includes=["baca.ily"],
@@ -1488,18 +1147,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -1511,25 +1163,6 @@ r"""
                             b'4.
                             ^ \baca-default-indicator-markup "(“Flute”)"
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -1563,18 +1196,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -1586,25 +1212,6 @@ r"""
                             b'4.
                             ^ \baca-default-indicator-markup "(“Flute”)"
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -1634,18 +1241,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -1657,25 +1257,6 @@ r"""
                             b'4.
                             ^ \baca-default-indicator-markup "(“Flute”)"
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -1686,6 +1267,7 @@ r"""
         Explicit instruments color blue and redraw dull blue:
 
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -1729,18 +1311,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -1752,25 +1327,6 @@ r"""
                             b'4.
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -1804,18 +1360,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -1827,25 +1376,6 @@ r"""
                             b'4.
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -1876,18 +1406,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -1899,25 +1422,6 @@ r"""
                             b'4.
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -1926,6 +1430,7 @@ r"""
         Even after a previous instrument:
 
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -1984,18 +1489,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -2007,25 +1505,6 @@ r"""
                             b'4.
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -2060,18 +1539,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -2083,25 +1555,6 @@ r"""
                             b'4.
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -2132,18 +1585,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -2155,25 +1601,6 @@ r"""
                             b'4.
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -2184,6 +1611,7 @@ r"""
         Reapplied instruments color green and redraw dull green:
 
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -2241,18 +1669,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -2264,25 +1685,6 @@ r"""
                             b'4.
                             ^ \baca-reapplied-indicator-markup "(“Flute”)"
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -2317,18 +1719,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -2340,25 +1735,6 @@ r"""
                             b'4.
                             ^ \baca-reapplied-indicator-markup "(“Flute”)"
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -2390,18 +1766,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -2413,25 +1782,6 @@ r"""
                             b'4.
                             ^ \baca-reapplied-indicator-markup "(“Flute”)"
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -2449,6 +1799,7 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -2499,18 +1850,11 @@ r"""
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -2524,25 +1868,6 @@ r"""
                             b'2
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
                             b'2
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -2579,18 +1904,11 @@ r"""
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -2604,25 +1922,6 @@ r"""
                             b'2
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
                             b'2
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -2655,18 +1954,11 @@ r"""
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -2680,25 +1972,6 @@ r"""
                             b'2
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
                             b'2
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -2714,6 +1987,7 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
+        ...     #SAFE2append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -2772,18 +2046,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -2795,25 +2062,6 @@ r"""
                             b'4.
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -2848,18 +2096,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -2871,25 +2112,6 @@ r"""
                             b'4.
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -2920,18 +2142,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -2943,25 +2158,6 @@ r"""
                             b'4.
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -3001,6 +2197,7 @@ r"""
         ...     margin_markups['I+II'],
         ...     )
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     indicator_defaults=[triple],
         ...     includes=["baca.ily"],
@@ -3044,18 +2241,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -3073,25 +2263,6 @@ r"""
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -3125,18 +2296,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -3154,25 +2318,6 @@ r"""
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -3202,18 +2347,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -3231,25 +2369,6 @@ r"""
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -3260,6 +2379,7 @@ r"""
         Explicit margin markup color blue and redraw dull blue:
 
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -3303,18 +2423,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -3332,25 +2445,6 @@ r"""
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -3384,18 +2478,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -3413,25 +2500,6 @@ r"""
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -3461,18 +2529,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -3490,25 +2551,6 @@ r"""
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -3517,6 +2559,7 @@ r"""
         Even after previous margin markup:
 
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -3575,18 +2618,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -3606,25 +2642,6 @@ r"""
                             \set Staff.shortInstrumentName =
                             \markup { III+IV }
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -3659,18 +2676,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -3690,25 +2700,6 @@ r"""
                             \set Staff.shortInstrumentName =
                             \markup { III+IV }
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -3739,18 +2730,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -3770,25 +2754,6 @@ r"""
                             \set Staff.shortInstrumentName =
                             \markup { III+IV }
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -3799,6 +2764,7 @@ r"""
         Reapplied margin markup color green and redraw dull green:
 
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -3856,18 +2822,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -3887,25 +2846,6 @@ r"""
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -3940,18 +2880,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -3971,25 +2904,6 @@ r"""
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -4020,18 +2934,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -4051,25 +2958,6 @@ r"""
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -4087,6 +2975,7 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -4137,18 +3026,11 @@ r"""
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -4174,25 +3056,6 @@ r"""
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             b'2
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -4229,18 +3092,11 @@ r"""
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -4266,25 +3122,6 @@ r"""
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             b'2
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -4317,18 +3154,11 @@ r"""
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -4354,25 +3184,6 @@ r"""
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             b'2
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -4388,6 +3199,7 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -4446,18 +3258,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -4477,25 +3282,6 @@ r"""
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -4530,18 +3316,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -4561,25 +3340,6 @@ r"""
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -4610,18 +3370,11 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -4641,25 +3394,6 @@ r"""
                             \set Staff.shortInstrumentName =
                             \markup { I+II }
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -4677,6 +3411,7 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -4738,16 +3473,9 @@ r"""
                         \baca-lbsd #15 #'(11)
                         \break
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #24
-                        \noBreak
-                        s1 * 1/2
                         \baca-new-spacing-section #1 #4
                         \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
+                        s1 * 1/2
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -4773,25 +3501,6 @@ r"""
                             \markup { III+IV }
                             b'2
                             b'2
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -4818,6 +3527,7 @@ r"""
         Explicit metronome marks color blue:
 
         >>> maker = baca.SegmentMaker(
+        ...     append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -4918,6 +3628,7 @@ r"""
         Even after a previous metronome mark:
 
         >>> maker = baca.SegmentMaker(
+        ...     append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -5038,6 +3749,7 @@ r"""
         Reapplied metronome marks color green:
 
         >>> maker = baca.SegmentMaker(
+        ...     #SAFE3append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -5106,18 +3818,11 @@ r"""
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "90" #'green4
                         \bacaStartTextSpanMM
-                        \baca-new-spacing-section #1 #24
-                        \noBreak
-                        s1 * 3/8
-                        \revert TextSpanner.staff-padding
                         \baca-new-spacing-section #1 #4
                         \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
+                        s1 * 3/8
                         \bacaStopTextSpanMM
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
+                        \revert TextSpanner.staff-padding
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -5128,25 +3833,6 @@ r"""
                         {
                             b'4.
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -5157,6 +3843,7 @@ r"""
         Redundant metronome marks color pink:
 
         >>> maker = baca.SegmentMaker(
+        ...     append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -5265,6 +3952,7 @@ r"""
         Even at the beginning of a segment:
 
         >>> maker = baca.SegmentMaker(
+        ...     append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -5389,6 +4077,7 @@ r"""
         Explicit persistent overrides work but do not color:
 
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
@@ -5436,14 +4125,8 @@ r"""
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
-                        s1 * 3/8
                         \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
+                        s1 * 3/8
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -5460,25 +4143,6 @@ r"""
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
                             b'4.
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -5534,6 +4198,7 @@ r"""
         Reapplied persistent overrides work but do not color:
 
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
@@ -5588,14 +4253,8 @@ r"""
                         \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
-                        s1 * 3/8
                         \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
+                        s1 * 3/8
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -5607,25 +4266,6 @@ r"""
                             b'4.
                             \override Staff.BarLine.bar-extent = #'(0 . 0)
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -5634,6 +4274,7 @@ r"""
         Even at the beginning of a segment:
 
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
@@ -5699,14 +4340,8 @@ r"""
                         \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
-                        s1 * 3/8
                         \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
+                        s1 * 3/8
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -5718,25 +4353,6 @@ r"""
                             \override Staff.BarLine.bar-extent = #'(0 . 0)
                             b'4.
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -5751,6 +4367,7 @@ r"""
         Explicit staff lines color blue:
 
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -5786,14 +4403,8 @@ r"""
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
-                        s1 * 3/8
                         \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
+                        s1 * 3/8
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -5809,25 +4420,6 @@ r"""
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
                             b'4.
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -5836,6 +4428,7 @@ r"""
         Even after previous staff lines:
 
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -5886,14 +4479,8 @@ r"""
                         \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
-                        s1 * 3/8
                         \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
+                        s1 * 3/8
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -5909,25 +4496,6 @@ r"""
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
                             b'4.
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -5938,6 +4506,7 @@ r"""
         Reapplied staff lines color green:
 
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -5987,14 +4556,8 @@ r"""
                         \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
-                        s1 * 3/8
                         \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
+                        s1 * 3/8
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -6009,25 +4572,6 @@ r"""
                             \once \override Staff.StaffSymbol.color = #(x11-color 'green4)
                             b'4.
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -6038,6 +4582,7 @@ r"""
         Redundant staff lines color pink:
 
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -6074,14 +4619,8 @@ r"""
                         \time 3/8
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
-                        s1 * 3/8
                         \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
+                        s1 * 3/8
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -6102,25 +4641,6 @@ r"""
                             \startStaff
                             \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -6129,6 +4649,7 @@ r"""
         Even at the beginning of a segment:
 
         >>> maker = baca.SegmentMaker(
+        ...     #SAFE5append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -6179,14 +4700,8 @@ r"""
                         \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
-                        s1 * 3/8
                         \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
+                        s1 * 3/8
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -6202,25 +4717,6 @@ r"""
                             \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)
                             b'4.
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -6247,6 +4743,7 @@ r"""
         Explicit tempo trends color blue:
 
         >>> maker = baca.SegmentMaker(
+        ...     append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -6351,6 +4848,7 @@ r"""
         Even after a previous tempo trend:
 
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -6423,18 +4921,11 @@ r"""
                             \upright
                                 accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        \baca-new-spacing-section #1 #24
-                        \noBreak
-                        s1 * 3/8
-                        \revert TextSpanner.staff-padding
                         \baca-new-spacing-section #1 #4
                         \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
+                        s1 * 3/8
                         \bacaStopTextSpanMM
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
+                        \revert TextSpanner.staff-padding
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -6445,25 +4936,6 @@ r"""
                         {
                             b'4.
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -6474,6 +4946,7 @@ r"""
         Reapplied tempo trends color green:
 
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -6545,18 +5018,11 @@ r"""
                             \upright
                                 accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        \baca-new-spacing-section #1 #24
-                        \noBreak
-                        s1 * 3/8
-                        \revert TextSpanner.staff-padding
                         \baca-new-spacing-section #1 #4
                         \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
+                        s1 * 3/8
                         \bacaStopTextSpanMM
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
+                        \revert TextSpanner.staff-padding
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -6567,25 +5033,6 @@ r"""
                         {
                             b'4.
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -6596,6 +5043,7 @@ r"""
         Redundant tempo trends color pink:
 
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -6670,17 +5118,10 @@ r"""
                             \upright
                                 accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        \baca-new-spacing-section #1 #24
-                        \noBreak
-                        s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
+                        s1 * 3/8
                         \bacaStopTextSpanMM
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -6692,25 +5133,6 @@ r"""
                             b'4.
                             b'4.
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -6719,6 +5141,7 @@ r"""
         Even at the beginning of a segment:
 
         >>> maker = baca.SegmentMaker(
+        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     preamble=[baca.global_context_string()],
@@ -6791,18 +5214,11 @@ r"""
                             \upright
                                 accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        \baca-new-spacing-section #1 #24
-                        \noBreak
-                        s1 * 3/8
-                        \revert TextSpanner.staff-padding
                         \baca-new-spacing-section #1 #4
                         \noBreak
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
+                        s1 * 3/8
                         \bacaStopTextSpanMM
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
+                        \revert TextSpanner.staff-padding
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -6813,25 +5229,6 @@ r"""
                         {
                             b'4.
                             b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }

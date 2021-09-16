@@ -296,11 +296,6 @@ def color_octaves(score):
                     {
                         \time 6/4
                         s1 * 3/2
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -320,25 +315,6 @@ def color_octaves(score):
                                 g'4
                                 a'4
                                 b'4
-                                <<
-                                    \context Voice = "Music_Voice_1"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        b'1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice_1"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
                             }
                         }
                         \context Staff = "Music_Staff_2"
@@ -355,25 +331,6 @@ def color_octaves(score):
                                 e4
                                 d4
                                 c4
-                                <<
-                                    \context Voice = "Music_Voice_2"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        d1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice_2"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
                             }
                         }
                     >>
@@ -495,11 +452,6 @@ def transpose_score(score):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -530,25 +482,6 @@ def transpose_score(score):
                             fs'!8
                             g'8
                             ]
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -598,11 +531,6 @@ def transpose_score(score):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -633,25 +561,6 @@ def transpose_score(score):
                             e'8
                             f'8
                             ]
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -706,11 +615,6 @@ class SegmentMaker:
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -741,25 +645,6 @@ class SegmentMaker:
                             b'8
                             b'8
                             ]
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -829,15 +714,9 @@ class SegmentMaker:
                         \baca-new-spacing-section #1 #24
                         \time 1/16
                         s1 * 1/16
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -877,25 +756,6 @@ class SegmentMaker:
                                 c'16
                                 f'16
                             }
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -967,15 +827,9 @@ class SegmentMaker:
                         \baca-new-spacing-section #1 #24
                         \time 1/16
                         s1 * 1/16
-                        \baca-new-spacing-section #1 #24
+                        \baca-new-spacing-section #1 #4
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
-                        \time 1/4
-                        \baca-time-signature-transparent
-                        s1 * 1/4
-                        \once \override Score.BarLine.transparent = ##t
-                        \once \override Score.SpanBar.transparent = ##t
                     }
                 >>
                 \context MusicContext = "Music_Context"
@@ -1012,25 +866,6 @@ class SegmentMaker:
                                 c'16
                                 f'16
                             }
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
                         }
                     }
                 }
@@ -1050,6 +885,7 @@ class SegmentMaker:
         "_commands",
         "_container_to_part_assignment",
         "_deactivate",
+        "_do_not_append_phantom_measure",
         "_do_not_check_beamed_long_notes",
         "_do_not_check_out_of_range_pitches",
         "_do_not_check_persistence",
@@ -1087,7 +923,6 @@ class SegmentMaker:
         "_previous_metadata",
         "_previous_persist",
         "_remove",
-        "_remove_phantom_measure",
         "_score",
         "_score_template",
         "_segment_bol_measure_numbers",
@@ -1104,6 +939,7 @@ class SegmentMaker:
         "_time_signatures",
         "_voice_metadata",
         "_voice_names",
+        "append_phantom_measure_in_docs",
         "check_all_are_pitched",
         "color_octaves",
         "functions",
@@ -1125,11 +961,13 @@ class SegmentMaker:
         *functions,
         activate=None,
         allow_empty_selections=False,
+        append_phantom_measure_in_docs=False,
         check_all_are_pitched=False,
         clock_time_extra_offset=None,
         clock_time_override=None,
         color_octaves=False,
         deactivate=None,
+        do_not_append_phantom_measure=False,
         do_not_check_beamed_long_notes=False,
         do_not_check_out_of_range_pitches=False,
         do_not_check_persistence=False,
@@ -1154,7 +992,6 @@ class SegmentMaker:
         phantom=False,
         preamble=None,
         remove=None,
-        remove_phantom_measure=False,
         score_template=None,
         skips_instead_of_rests=False,
         spacing=None,
@@ -1171,6 +1008,8 @@ class SegmentMaker:
             assert all(isinstance(_, abjad.Tag) for _ in activate)
         self._activate = activate
         self._allow_empty_selections = allow_empty_selections
+        assert append_phantom_measure_in_docs in (True, False)
+        self.append_phantom_measure_in_docs = append_phantom_measure_in_docs
         assert check_all_are_pitched in (True, False)
         self.check_all_are_pitched = check_all_are_pitched
         if clock_time_extra_offset not in (False, None):
@@ -1188,6 +1027,9 @@ class SegmentMaker:
             assert all(isinstance(_, abjad.Tag) for _ in deactivate)
         self._container_to_part_assignment = None
         self._deactivate = deactivate
+        if do_not_append_phantom_measure is not None:
+            do_not_append_phantom_measure = bool(do_not_append_phantom_measure)
+        self._do_not_append_phantom_measure = do_not_append_phantom_measure
         if do_not_check_out_of_range_pitches is not None:
             do_not_check_out_of_range_pitches = bool(do_not_check_out_of_range_pitches)
         self._do_not_check_beamed_long_notes = do_not_check_beamed_long_notes
@@ -1224,8 +1066,6 @@ class SegmentMaker:
             assert isinstance(parts_metric_modulation_multiplier, tuple)
             assert len(parts_metric_modulation_multiplier) == 2
         self._parts_metric_modulation_multiplier = parts_metric_modulation_multiplier
-        if remove_phantom_measure is not None:
-            remove_phantom_measure = bool(remove_phantom_measure)
         self._persist = abjad.OrderedDict()
         preamble = preamble or ()
         if preamble:
@@ -1236,7 +1076,6 @@ class SegmentMaker:
         if remove is not None:
             assert all(isinstance(_, abjad.Tag) for _ in remove)
         self._remove = remove
-        self._remove_phantom_measure = remove_phantom_measure
         self._score = None
         assert score_template is not None, repr(score_template)
         self._score_template = score_template
@@ -1306,11 +1145,6 @@ class SegmentMaker:
                             s1 * 1/2
                             \time 3/8
                             s1 * 3/8
-                            \time 1/4
-                            \baca-time-signature-transparent
-                            s1 * 1/4
-                            \once \override Score.BarLine.transparent = ##t
-                            \once \override Score.SpanBar.transparent = ##t
                         }
                     >>
                     \context MusicContext = "Music_Context"
@@ -1355,25 +1189,6 @@ class SegmentMaker:
                                 b'8
                                 ^ \markup { 13 }
                                 ]
-                                <<
-                                    \context Voice = "Music_Voice"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        b'1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
                             }
                         }
                     }
@@ -1421,11 +1236,6 @@ class SegmentMaker:
                             s1 * 1/2
                             \time 3/8
                             s1 * 3/8
-                            \time 1/4
-                            \baca-time-signature-transparent
-                            s1 * 1/4
-                            \once \override Score.BarLine.transparent = ##t
-                            \once \override Score.SpanBar.transparent = ##t
                         }
                     >>
                     \context MusicContext = "Music_Context"
@@ -1470,25 +1280,6 @@ class SegmentMaker:
                                 b'8
                                 ^ \markup { 13 }
                                 ]
-                                <<
-                                    \context Voice = "Music_Voice"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        b'1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
                             }
                         }
                     }
@@ -2288,7 +2079,7 @@ class SegmentMaker:
                 selection = silence_maker(self.time_signatures)
                 assert isinstance(selection, abjad.Selection), repr(selection)
                 voice.extend(selection)
-                if not self.remove_phantom_measure:
+                if not self.do_not_append_phantom_measure:
                     container = self._make_multimeasure_rest_container(
                         voice.name, (1, 4), phantom=True, suppress_note=True
                     )
@@ -2325,7 +2116,7 @@ class SegmentMaker:
             timespans.sort()
             self._assert_nonoverlapping_rhythms(timespans, voice.name)
             selections = self._intercalate_silences(timespans, voice.name)
-            if not self.remove_phantom_measure:
+            if not self.do_not_append_phantom_measure:
                 suppress_note = False
                 final_leaf = abjad.get.leaf(selections, -1)
                 if isinstance(final_leaf, abjad.MultimeasureRest):
@@ -3336,7 +3127,7 @@ class SegmentMaker:
                 tag=_site(inspect.currentframe(), 1),
             )
             rests.append(rest)
-        if not self.remove_phantom_measure:
+        if not self.do_not_append_phantom_measure:
             tag = _site(inspect.currentframe(), 2).append(_tags.PHANTOM)
             rest = abjad.MultimeasureRest(abjad.Duration(1), multiplier=(1, 4), tag=tag)
             abjad.attach(_const.PHANTOM, rest)
@@ -3358,7 +3149,7 @@ class SegmentMaker:
                 tag=_site(inspect.currentframe(), 2),
             )
             context.append(skip)
-        if not self.remove_phantom_measure:
+        if not self.do_not_append_phantom_measure:
             tag = _site(inspect.currentframe(), 3)
             tag = tag.append(_tags.PHANTOM)
             skip = abjad.Skip(1, multiplier=(1, 4), tag=tag)
@@ -3719,7 +3510,7 @@ class SegmentMaker:
         previous_time_signature = None
         self._cached_time_signatures = []
         skips = _selection.Selection(self.score["Global_Skips"]).skips()
-        if not self.remove_phantom_measure:
+        if not self.do_not_append_phantom_measure:
             skips = skips[:-1]
         for skip in skips:
             time_signature = abjad.get.indicator(skip, abjad.TimeSignature)
@@ -3981,7 +3772,7 @@ class SegmentMaker:
             grob.extra_offset = (0, self.fermata_extra_offset_y)
 
     def _style_phantom_measures(self):
-        if self.remove_phantom_measure:
+        if self.do_not_append_phantom_measure:
             return
         skip = abjad.get.leaf(self.score["Global_Skips"], -1)
         for literal in abjad.get.indicators(skip, abjad.LilyPondLiteral):
@@ -4271,6 +4062,15 @@ class SegmentMaker:
         return self._deactivate
 
     @property
+    def do_not_append_phantom_measure(self):
+        """
+        Is true when segment-maker does not append phantom measure.
+        """
+        if self.environment == "docs":
+            return not self.append_phantom_measure_in_docs
+        return self._do_not_append_phantom_measure
+
+    @property
     def do_not_check_beamed_long_notes(self):
         """
         Is true when segment does not check beamed long notes.
@@ -4483,11 +4283,6 @@ class SegmentMaker:
                             s1 * 1/2
                             \time 3/8
                             s1 * 3/8
-                            \time 1/4
-                            \baca-time-signature-transparent
-                            s1 * 1/4
-                            \once \override Score.BarLine.transparent = ##t
-                            \once \override Score.SpanBar.transparent = ##t
                         }
                     >>
                     \context MusicContext = "Music_Context"
@@ -4504,25 +4299,6 @@ class SegmentMaker:
                                 %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                                 R1 * 3/8
                                 %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                                <<
-                                    \context Voice = "Music_Voice"
-                                    {
-                                        \abjad-invisible-music-coloring
-                                        %@% \abjad-invisible-music
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                    \context Voice = "Rest_Voice"
-                                    {
-                                        \once \override Score.TimeSignature.X-extent = ##f
-                                        \once \override MultiMeasureRest.transparent = ##t
-                                        \stopStaff
-                                        \once \override Staff.StaffSymbol.transparent = ##t
-                                        \startStaff
-                                        R1 * 1/4
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                    }
-                                >>
                             }
                         }
                     }
@@ -4554,7 +4330,6 @@ class SegmentMaker:
                             'Music_Context',
                             'Music_Staff',
                             'Music_Voice',
-                            'Rest_Voice',
                             ],
                         ),
                     (
@@ -4652,13 +4427,6 @@ class SegmentMaker:
         Gets tags to remove
         """
         return self._remove
-
-    @property
-    def remove_phantom_measure(self):
-        """
-        Is true when segment-maker removes phantom measure.
-        """
-        return self._remove_phantom_measure
 
     @property
     def score(self):
