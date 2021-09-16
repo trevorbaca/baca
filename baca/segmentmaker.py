@@ -295,7 +295,6 @@ def color_octaves(score):
                     \context GlobalSkips = "Global_Skips"
                     {
                         \time 6/4
-                        \baca-time-signature-color #'blue
                         s1 * 3/2
                         \time 1/4
                         \baca-time-signature-transparent
@@ -347,11 +346,7 @@ def color_octaves(score):
                             \context Voice = "Music_Voice_2"
                             {
                                 \clef "bass"
-                                \once \override Staff.Clef.color = #(x11-color 'blue)
-                                %@% \override Staff.Clef.color = ##f
-                                \set Staff.forceClef = ##t
                                 a4
-                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                                 g4
                                 \baca-octave-coloring
                                 f4
@@ -493,16 +488,12 @@ def transpose_score(score):
                     \context GlobalSkips = "Global_Skips"
                     {
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 1/4
                         \baca-time-signature-transparent
@@ -518,7 +509,6 @@ def transpose_score(score):
                         \context Voice = "Music_Voice"
                         {
                             fs'!8
-                            ^ \baca-explicit-indicator-markup "(“clarinet”)"
                             [
                             g'8
                             fs'!8
@@ -601,16 +591,12 @@ def transpose_score(score):
                     \context GlobalSkips = "Global_Skips"
                     {
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 1/4
                         \baca-time-signature-transparent
@@ -626,7 +612,6 @@ def transpose_score(score):
                         \context Voice = "Music_Voice"
                         {
                             e'8
-                            ^ \baca-explicit-indicator-markup "(“clarinet”)"
                             [
                             f'8
                             e'8
@@ -714,16 +699,12 @@ class SegmentMaker:
                     \context GlobalSkips = "Global_Skips"
                     {
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 1/4
                         \baca-time-signature-transparent
@@ -841,19 +822,15 @@ class SegmentMaker:
                     {
                         \baca-new-spacing-section #1 #24
                         \time 1/16
-                        \baca-time-signature-color #'blue
                         s1 * 1/16
                         \baca-new-spacing-section #1 #24
                         \time 7/16
-                        \baca-time-signature-color #'blue
                         s1 * 7/16
                         \baca-new-spacing-section #1 #24
                         \time 1/16
-                        \baca-time-signature-color #'blue
                         s1 * 1/16
                         \baca-new-spacing-section #1 #24
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -983,19 +960,15 @@ class SegmentMaker:
                     {
                         \baca-new-spacing-section #1 #24
                         \time 1/16
-                        \baca-time-signature-color #'blue
                         s1 * 1/16
                         \baca-new-spacing-section #1 #24
                         \time 7/16
-                        \baca-time-signature-color #'blue
                         s1 * 7/16
                         \baca-new-spacing-section #1 #24
                         \time 1/16
-                        \baca-time-signature-color #'blue
                         s1 * 1/16
                         \baca-new-spacing-section #1 #24
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -1014,7 +987,6 @@ class SegmentMaker:
                             \scaleDurations #'(1 . 1)
                             {
                                 e'16
-                                ^ \baca-explicit-indicator-markup "(Violin)"
                             }
                             \scaleDurations #'(1 . 1)
                             {
@@ -1136,6 +1108,7 @@ class SegmentMaker:
         "color_octaves",
         "functions",
         "magnify_staves",
+        "treat_untreated_persistent_wrappers",
         "transpose_score",
     )
 
@@ -1191,6 +1164,7 @@ class SegmentMaker:
         test_container_identifiers=False,
         time_signatures=None,
         transpose_score=False,
+        treat_untreated_persistent_wrappers=False,
     ):
         self.functions = functions or ()
         if activate is not None:
@@ -1282,6 +1256,8 @@ class SegmentMaker:
         self._test_container_identifiers = test_container_identifiers
         assert transpose_score in (True, False)
         self.transpose_score = transpose_score
+        assert treat_untreated_persistent_wrappers in (True, False)
+        self.treat_untreated_persistent_wrappers = treat_untreated_persistent_wrappers
         self._voice_metadata = abjad.OrderedDict()
         self._voice_names = None
         self._commands = []
@@ -1323,16 +1299,12 @@ class SegmentMaker:
                         \context GlobalSkips = "Global_Skips"
                         {
                             \time 4/8
-                            \baca-time-signature-color #'blue
                             s1 * 1/2
                             \time 3/8
-                            \baca-time-signature-color #'blue
                             s1 * 3/8
                             \time 4/8
-                            \baca-time-signature-color #'blue
                             s1 * 1/2
                             \time 3/8
-                            \baca-time-signature-color #'blue
                             s1 * 3/8
                             \time 1/4
                             \baca-time-signature-transparent
@@ -1442,16 +1414,12 @@ class SegmentMaker:
                         \context GlobalSkips = "Global_Skips"
                         {
                             \time 4/8
-                            \baca-time-signature-color #'blue
                             s1 * 1/2
                             \time 3/8
-                            \baca-time-signature-color #'blue
                             s1 * 3/8
                             \time 4/8
-                            \baca-time-signature-color #'blue
                             s1 * 1/2
                             \time 3/8
-                            \baca-time-signature-color #'blue
                             s1 * 3/8
                             \time 1/4
                             \baca-time-signature-transparent
@@ -4099,6 +4067,8 @@ class SegmentMaker:
             transpose_score(self.score)
 
     def _treat_untreated_persistent_wrappers(self):
+        if self.environment == "docs" and not self.treat_untreated_persistent_wrappers:
+            return
         if self.environment == "layout":
             return
         dynamic_prototype = (abjad.Dynamic, abjad.StartHairpin)
@@ -4506,16 +4476,12 @@ class SegmentMaker:
                         {
                             \time 4/8
                             \bar ""
-                            \baca-time-signature-color #'blue
                             s1 * 1/2
                             \time 3/8
-                            \baca-time-signature-color #'blue
                             s1 * 3/8
                             \time 4/8
-                            \baca-time-signature-color #'blue
                             s1 * 1/2
                             \time 3/8
-                            \baca-time-signature-color #'blue
                             s1 * 3/8
                             \time 1/4
                             \baca-time-signature-transparent

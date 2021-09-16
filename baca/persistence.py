@@ -26,6 +26,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
 
         >>> lilypond_file = maker.run(environment="docs")
@@ -126,6 +127,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> maker(
         ...     "Music_Voice",
@@ -228,6 +230,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> maker(
         ...     "Music_Voice",
@@ -347,6 +350,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
 
         >>> metadata, persist = {}, {}
@@ -463,6 +467,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> maker(
         ...     "Music_Voice",
@@ -576,6 +581,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> maker(
         ...     "Music_Voice",
@@ -691,6 +697,7 @@ r"""
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -772,6 +779,7 @@ r"""
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -870,6 +878,7 @@ r"""
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -967,6 +976,7 @@ r"""
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -1051,6 +1061,7 @@ r"""
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -1147,6 +1158,7 @@ r"""
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -1231,6 +1243,7 @@ r"""
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -1330,6 +1343,7 @@ r"""
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -1442,6 +1456,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -1681,6 +1696,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -1920,6 +1936,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -2177,6 +2194,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -2441,6 +2459,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -2705,6 +2724,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -2992,6 +3012,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -3249,6 +3270,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -3505,6 +3527,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -3786,6 +3809,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -4073,6 +4097,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -4373,6 +4398,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -4661,6 +4687,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -4801,6 +4828,7 @@ r"""
         ...         fallback_duration=(1, 25),
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Global_Skips",
@@ -4900,6 +4928,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Global_Skips",
@@ -5019,6 +5048,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -5137,6 +5167,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Global_Skips",
@@ -5244,6 +5275,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Global_Skips",
@@ -5362,6 +5394,7 @@ r"""
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> override = baca.PersistentOverride(
         ...     attribute="bar_extent",
@@ -5506,6 +5539,7 @@ r"""
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -5605,6 +5639,7 @@ r"""
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> override = baca.PersistentOverride(
         ...     attribute="bar_extent",
@@ -5722,6 +5757,7 @@ r"""
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -5806,6 +5842,7 @@ r"""
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -5907,6 +5944,7 @@ r"""
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -6006,6 +6044,7 @@ r"""
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -6096,6 +6135,7 @@ r"""
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -6217,6 +6257,7 @@ r"""
         ...         fallback_duration=(1, 25),
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Global_Skips",
@@ -6320,6 +6361,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Global_Skips",
@@ -6442,6 +6484,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -6563,6 +6606,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Global_Skips",
@@ -6685,6 +6729,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Global_Skips",

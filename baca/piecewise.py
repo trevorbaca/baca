@@ -922,19 +922,15 @@ def dynamic(
                     {
                         \baca-new-spacing-section #1 #13
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #13
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #13
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #13
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -954,7 +950,6 @@ def dynamic(
                             e'8
                             - \tweak color #(x11-color 'blue)
                             \p
-                            - \tweak color #(x11-color 'blue)
                             \<
                             [
                             d''8
@@ -1039,19 +1034,15 @@ def dynamic(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -1069,7 +1060,6 @@ def dynamic(
                         {
                             \override DynamicLineSpanner.staff-padding = 5
                             e'8
-                            - \tweak color #(x11-color 'blue)
                             - \tweak extra-offset #'(-4 . 0)
                             \p
                             [
@@ -1192,19 +1182,15 @@ def hairpin(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -1224,7 +1210,6 @@ def hairpin(
                             e'8
                             - \tweak color #(x11-color 'blue)
                             \p
-                            - \tweak color #(x11-color 'blue)
                             \<
                             [
                             d''8
@@ -1246,7 +1231,6 @@ def hairpin(
                             [
                             e'8
                             d''8
-                            - \tweak color #(x11-color 'blue)
                             \f
                             ]
                             \revert DynamicLineSpanner.staff-padding
@@ -1310,19 +1294,15 @@ def hairpin(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -1342,7 +1322,6 @@ def hairpin(
                             e'8
                             - \tweak color #(x11-color 'blue)
                             \baca-effort-ff
-                            - \tweak color #(x11-color 'blue)
                             - \tweak to-barline ##t
                             - \tweak circled-tip ##t
                             \>
@@ -1366,7 +1345,6 @@ def hairpin(
                             [
                             e'8
                             d''8
-                            - \tweak color #(x11-color 'blue)
                             \!
                             ]
                             \revert DynamicLineSpanner.staff-padding
@@ -1430,19 +1408,15 @@ def hairpin(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -1462,7 +1436,6 @@ def hairpin(
                             e'8
                             - \tweak color #(x11-color 'blue)
                             \!
-                            - \tweak color #(x11-color 'blue)
                             - \tweak circled-tip ##t
                             \<
                             [
@@ -1485,7 +1458,6 @@ def hairpin(
                             [
                             e'8
                             d''8
-                            - \tweak color #(x11-color 'blue)
                             \baca-effort-ff
                             ]
                             \revert DynamicLineSpanner.staff-padding
@@ -1549,19 +1521,15 @@ def hairpin(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -1581,7 +1549,6 @@ def hairpin(
                             e'8
                             - \tweak color #(x11-color 'blue)
                             \baca-effort-p
-                            - \tweak color #(x11-color 'blue)
                             - \tweak stencil #constante-hairpin
                             \<
                             [
@@ -1604,7 +1571,6 @@ def hairpin(
                             [
                             e'8
                             d''8
-                            - \tweak color #(x11-color 'blue)
                             \f
                             ]
                             \revert DynamicLineSpanner.staff-padding
@@ -1675,19 +1641,15 @@ def hairpin(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -1707,7 +1669,6 @@ def hairpin(
                             e'8
                             - \tweak color #(x11-color 'blue)
                             \baca-effort-mp
-                            - \tweak color #(x11-color 'blue)
                             - \tweak stencil #abjad-flared-hairpin
                             \<
                             [
@@ -1719,13 +1680,11 @@ def hairpin(
                             [
                             f''8
                             e'8
-                            - \tweak color #(x11-color 'blue)
                             \baca-effort-f
                             ]
                             d''8
                             - \tweak color #(x11-color 'blue)
                             \baca-effort-mf
-                            - \tweak color #(x11-color 'blue)
                             - \tweak stencil #abjad-flared-hairpin
                             \>
                             [
@@ -1737,7 +1696,6 @@ def hairpin(
                             [
                             e'8
                             d''8
-                            - \tweak color #(x11-color 'blue)
                             \baca-effort-p
                             ]
                             \revert DynamicLineSpanner.staff-padding
@@ -1804,19 +1762,15 @@ def hairpin(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -1834,7 +1788,6 @@ def hairpin(
                         {
                             \override DynamicLineSpanner.staff-padding = 5
                             e'8
-                            - \tweak color #(x11-color 'blue)
                             \p
                             [
                             d''8
@@ -1842,14 +1795,12 @@ def hairpin(
                             e''8
                             ]
                             g'8
-                            - \tweak color #(x11-color 'blue)
                             \f
                             [
                             f''8
                             e'8
                             ]
                             d''8
-                            - \tweak color #(x11-color 'blue)
                             \p
                             [
                             f'8
@@ -1857,12 +1808,10 @@ def hairpin(
                             g'8
                             ]
                             f''8
-                            - \tweak color #(x11-color 'blue)
                             \f
                             [
                             e'8
                             d''8
-                            - \tweak color #(x11-color 'blue)
                             \p
                             ]
                             \revert DynamicLineSpanner.staff-padding
@@ -1927,19 +1876,15 @@ def hairpin(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -1959,7 +1904,6 @@ def hairpin(
                             e'8
                             - \tweak color #(x11-color 'blue)
                             \p
-                            - \tweak color #(x11-color 'blue)
                             \<
                             [
                             d''8
@@ -1969,7 +1913,6 @@ def hairpin(
                             g'8
                             - \tweak color #(x11-color 'blue)
                             \f
-                            - \tweak color #(x11-color 'blue)
                             \>
                             [
                             f''8
@@ -1978,7 +1921,6 @@ def hairpin(
                             d''8
                             - \tweak color #(x11-color 'blue)
                             \p
-                            - \tweak color #(x11-color 'blue)
                             \<
                             [
                             f'8
@@ -1988,12 +1930,10 @@ def hairpin(
                             f''8
                             - \tweak color #(x11-color 'blue)
                             \f
-                            - \tweak color #(x11-color 'blue)
                             \>
                             [
                             e'8
                             d''8
-                            - \tweak color #(x11-color 'blue)
                             \p
                             ]
                             \revert DynamicLineSpanner.staff-padding
@@ -2059,19 +1999,15 @@ def hairpin(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -2089,41 +2025,33 @@ def hairpin(
                         {
                             \override DynamicLineSpanner.staff-padding = 5
                             e'8
-                            - \tweak color #(x11-color 'blue)
                             \p
                             [
                             d''8
                             f'8
                             e''8
-                            - \tweak color #(x11-color 'blue)
                             \f
                             ]
                             g'8
-                            - \tweak color #(x11-color 'DeepPink1)
                             \f
                             [
                             f''8
                             e'8
-                            - \tweak color #(x11-color 'blue)
                             \p
                             ]
                             d''8
-                            - \tweak color #(x11-color 'DeepPink1)
                             \p
                             [
                             f'8
                             e''8
                             g'8
-                            - \tweak color #(x11-color 'blue)
                             \f
                             ]
                             f''8
-                            - \tweak color #(x11-color 'DeepPink1)
                             \f
                             [
                             e'8
                             d''8
-                            - \tweak color #(x11-color 'blue)
                             \p
                             ]
                             \revert DynamicLineSpanner.staff-padding
@@ -2189,19 +2117,15 @@ def hairpin(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -2221,49 +2145,41 @@ def hairpin(
                             e'8
                             - \tweak color #(x11-color 'blue)
                             \p
-                            - \tweak color #(x11-color 'blue)
                             - \tweak stencil #constante-hairpin
                             \<
                             [
                             d''8
                             f'8
                             e''8
-                            - \tweak color #(x11-color 'blue)
                             \f
                             ]
                             g'8
                             - \tweak color #(x11-color 'blue)
                             \f
-                            - \tweak color #(x11-color 'blue)
                             \>
                             [
                             f''8
                             e'8
-                            - \tweak color #(x11-color 'blue)
                             \p
                             ]
                             d''8
                             - \tweak color #(x11-color 'blue)
                             \p
-                            - \tweak color #(x11-color 'blue)
                             - \tweak stencil #constante-hairpin
                             \<
                             [
                             f'8
                             e''8
                             g'8
-                            - \tweak color #(x11-color 'blue)
                             \f
                             ]
                             f''8
                             - \tweak color #(x11-color 'blue)
                             \f
-                            - \tweak color #(x11-color 'blue)
                             \>
                             [
                             e'8
                             d''8
-                            - \tweak color #(x11-color 'blue)
                             \p
                             ]
                             \revert DynamicLineSpanner.staff-padding
@@ -2327,19 +2243,15 @@ def hairpin(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -2357,7 +2269,6 @@ def hairpin(
                         {
                             \override DynamicLineSpanner.staff-padding = 5
                             e'8
-                            - \tweak color #(x11-color 'blue)
                             \f
                             [
                             d''8
@@ -2441,19 +2352,15 @@ def hairpin(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -2471,7 +2378,6 @@ def hairpin(
                         {
                             \override DynamicLineSpanner.staff-padding = 5
                             e'8
-                            - \tweak color #(x11-color 'blue)
                             \<
                             [
                             d''8
@@ -2565,19 +2471,15 @@ def hairpin(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -2599,24 +2501,20 @@ def hairpin(
                                 - \tweak color #(x11-color 'blue)
                                 - \tweak to-barline ##t
                                 \p
-                                - \tweak color #(x11-color 'blue)
                                 - \tweak to-barline ##t
                                 - \tweak stencil #constante-hairpin
                                 \<
                                 r4.
-                                - \tweak color #(x11-color 'blue)
                                 - \tweak to-barline ##t
                                 \!
                                 d'2
                                 - \tweak color #(x11-color 'blue)
                                 - \tweak to-barline ##t
                                 \f
-                                - \tweak color #(x11-color 'blue)
                                 - \tweak to-barline ##t
                                 - \tweak stencil #constante-hairpin
                                 \<
                                 r4.
-                                - \tweak color #(x11-color 'blue)
                                 - \tweak to-barline ##t
                                 \!
                                 \revert DynamicLineSpanner.staff-padding
@@ -2685,19 +2583,15 @@ def hairpin(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -2715,7 +2609,6 @@ def hairpin(
                         {
                             \override DynamicLineSpanner.staff-padding = 4
                             e'8
-                            - \tweak color #(x11-color 'blue)
                             \mf
                             [
                             d''8
@@ -2725,7 +2618,6 @@ def hairpin(
                             g'8
                             - \tweak color #(x11-color 'blue)
                             \!
-                            - \tweak color #(x11-color 'blue)
                             - \tweak circled-tip ##t
                             \<
                             [
@@ -2739,7 +2631,6 @@ def hairpin(
                             g'8
                             ]
                             f''8
-                            - \tweak color #(x11-color 'blue)
                             \p
                             [
                             e'8
@@ -2806,19 +2697,15 @@ def hairpin(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -2838,7 +2725,6 @@ def hairpin(
                             e'8
                             - \tweak color #(x11-color 'blue)
                             \baca-mp-parenthesized
-                            - \tweak color #(x11-color 'blue)
                             \<
                             [
                             d''8
@@ -2860,7 +2746,6 @@ def hairpin(
                             [
                             e'8
                             d''8
-                            - \tweak color #(x11-color 'blue)
                             \mf
                             ]
                             \revert DynamicLineSpanner.staff-padding
@@ -3821,19 +3706,15 @@ def text_spanner(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -3938,19 +3819,15 @@ def text_spanner(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -4055,19 +3932,15 @@ def text_spanner(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -4172,19 +4045,15 @@ def text_spanner(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -4289,19 +4158,15 @@ def text_spanner(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -4412,19 +4277,15 @@ def text_spanner(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -4547,19 +4408,15 @@ def text_spanner(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -4683,19 +4540,15 @@ def text_spanner(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -4828,19 +4681,15 @@ def text_spanner(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -4979,19 +4828,15 @@ def text_spanner(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -5098,19 +4943,15 @@ def text_spanner(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -5220,19 +5061,15 @@ def text_spanner(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -5356,27 +5193,21 @@ def text_spanner(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -5487,19 +5318,15 @@ def text_spanner(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4

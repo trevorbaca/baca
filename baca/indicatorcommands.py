@@ -1278,16 +1278,12 @@ def hide_black_note_heads(
                     \context GlobalSkips = "Global_Skips"
                     {
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1656,16 +1652,12 @@ def margin_markup(
                     \context GlobalSkips = "Global_Skips"
                     {
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1682,12 +1674,7 @@ def margin_markup(
                         {
                             \set Staff.shortInstrumentName =
                             \markup { Fl. }
-                            \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                             e'2
-                            ^ \baca-explicit-indicator-markup "[MarginMarkup]"
-                            \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
-                            \set Staff.shortInstrumentName =
-                            \markup { Fl. }
                             f'4.
                             e'2
                             f'4.
@@ -2279,7 +2266,6 @@ def staff_lines(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         s1 * 3/8
@@ -2308,12 +2294,7 @@ def staff_lines(
                             \once \override Staff.StaffSymbol.line-count = 1
                             \startStaff
                             \clef "percussion"
-                            \once \override Staff.Clef.color = #(x11-color 'blue)
-                            %@% \override Staff.Clef.color = ##f
-                            \set Staff.forceClef = ##t
-                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
                             a4.
-                            \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             b4.
                             c'4.
                             d'4.
@@ -2377,7 +2358,6 @@ def staff_lines(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         s1 * 3/8
@@ -2406,12 +2386,7 @@ def staff_lines(
                             \once \override Staff.StaffSymbol.line-count = 1
                             \startStaff
                             \clef "bass"
-                            \once \override Staff.Clef.color = #(x11-color 'blue)
-                            %@% \override Staff.Clef.color = ##f
-                            \set Staff.forceClef = ##t
-                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
                             b,4.
-                            \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             c4.
                             d4.
                             e4.
@@ -2476,7 +2451,6 @@ def staff_lines(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         s1 * 3/8
@@ -2505,12 +2479,7 @@ def staff_lines(
                             \once \override Staff.StaffSymbol.line-count = 2
                             \startStaff
                             \clef "percussion"
-                            \once \override Staff.Clef.color = #(x11-color 'blue)
-                            %@% \override Staff.Clef.color = ##f
-                            \set Staff.forceClef = ##t
-                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
                             a4.
-                            \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             b4.
                             c'4.
                             d'4.
@@ -2573,7 +2542,6 @@ def staff_lines(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         s1 * 3/8
@@ -2602,12 +2570,7 @@ def staff_lines(
                             \once \override Staff.StaffSymbol.line-count = 2
                             \startStaff
                             \clef "bass"
-                            \once \override Staff.Clef.color = #(x11-color 'blue)
-                            %@% \override Staff.Clef.color = ##f
-                            \set Staff.forceClef = ##t
-                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
                             b,4.
-                            \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             c4.
                             d4.
                             e4.
@@ -2670,7 +2633,6 @@ def staff_lines(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         s1 * 3/8
@@ -2699,12 +2661,7 @@ def staff_lines(
                             \once \override Staff.StaffSymbol.line-count = 2
                             \startStaff
                             \clef "bass"
-                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
-                            \once \override Staff.Clef.color = #(x11-color 'blue)
-                            %@% \override Staff.Clef.color = ##f
-                            \set Staff.forceClef = ##t
                             g'4.
-                            \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             a'4.
                             b'4.
                             c''4.

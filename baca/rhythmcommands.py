@@ -60,19 +60,15 @@ class RhythmCommand(_scoping.Command):
                     {
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -409,7 +405,6 @@ class RhythmCommand(_scoping.Command):
                         {
                             \baca-new-spacing-section #1 #16
                             \time 4/8
-                            \baca-time-signature-color #'blue
                             s1 * 1/2
                             \baca-new-spacing-section #1 #16
                             s1 * 1/2
@@ -757,7 +752,6 @@ def make_monads(fractions):
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/4
-                        \baca-time-signature-color #'blue
                         s1 * 1
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -898,7 +892,6 @@ def make_repeat_tied_notes(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 10/8
-                        \baca-time-signature-color #'blue
                         s1 * 5/4
                         \baca-new-spacing-section #1 #4
                         \time 1/4

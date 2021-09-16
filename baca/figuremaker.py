@@ -2162,7 +2162,6 @@ class Imbrication:
                         {
                             \baca-new-spacing-section #1 #32
                             \time 5/8
-                            \baca-time-signature-color #'blue
                             s1 * 5/8
                             \baca-new-spacing-section #1 #4
                             \time 1/4
@@ -2431,7 +2430,6 @@ class Imbrication:
                         {
                             \baca-new-spacing-section #1 #32
                             \time 15/16
-                            \baca-time-signature-color #'blue
                             s1 * 15/16
                             \baca-new-spacing-section #1 #4
                             \time 1/4
@@ -2679,7 +2677,6 @@ class Imbrication:
                         {
                             \baca-new-spacing-section #1 #32
                             \time 9/8
-                            \baca-time-signature-color #'blue
                             s1 * 9/8
                             \baca-new-spacing-section #1 #4
                             \time 1/4
@@ -2948,7 +2945,6 @@ class Imbrication:
                         {
                             \baca-new-spacing-section #1 #32
                             \time 45/32
-                            \baca-time-signature-color #'blue
                             s1 * 45/32
                             \baca-new-spacing-section #1 #4
                             \time 1/4
@@ -7301,7 +7297,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                     {
                         \baca-new-spacing-section #1 #32
                         \time 3/4
-                        \baca-time-signature-color #'blue
                         s1 * 3/4
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -7497,7 +7492,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                     {
                         \baca-new-spacing-section #1 #32
                         \time 9/8
-                        \baca-time-signature-color #'blue
                         s1 * 9/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -7731,11 +7725,9 @@ def extend_beam(
                     {
                         \baca-new-spacing-section #1 #32
                         \time 7/16
-                        \baca-time-signature-color #'blue
                         s1 * 7/16
                         \baca-new-spacing-section #1 #32
                         \time 1/4
-                        \baca-time-signature-color #'blue
                         s1 * 1/4
                         \baca-new-spacing-section #1 #4
                         \baca-time-signature-transparent
@@ -7977,7 +7969,6 @@ def imbricate(
                     {
                         \baca-new-spacing-section #1 #32
                         \time 15/16
-                        \baca-time-signature-color #'blue
                         s1 * 15/16
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -8203,7 +8194,6 @@ def imbricate(
                     {
                         \baca-new-spacing-section #1 #32
                         \time 15/16
-                        \baca-time-signature-color #'blue
                         s1 * 15/16
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -8495,7 +8485,6 @@ def imbricate(
                     {
                         \baca-new-spacing-section #1 #32
                         \time 9/8
-                        \baca-time-signature-color #'blue
                         s1 * 9/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -8750,7 +8739,6 @@ def imbricate(
                     {
                         \baca-new-spacing-section #1 #24
                         \time 27/16
-                        \baca-time-signature-color #'blue
                         s1 * 27/16
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -8939,7 +8927,6 @@ def imbricate(
                     {
                         \baca-new-spacing-section #1 #32
                         \time 11/16
-                        \baca-time-signature-color #'blue
                         s1 * 11/16
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -9152,7 +9139,6 @@ def imbricate(
                     {
                         \baca-new-spacing-section #1 #32
                         \time 19/16
-                        \baca-time-signature-color #'blue
                         s1 * 19/16
                         \baca-new-spacing-section #1 #4
                         \time 1/4

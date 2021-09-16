@@ -79,16 +79,12 @@ def assign_parts(
                 \context GlobalSkips = "Global_Skips"
                 {
                     \time 4/8
-                    \baca-time-signature-color #'blue
                     s1 * 1/2
                     \time 3/8
-                    \baca-time-signature-color #'blue
                     s1 * 3/8
                     \time 4/8
-                    \baca-time-signature-color #'blue
                     s1 * 1/2
                     \time 3/8
-                    \baca-time-signature-color #'blue
                     s1 * 3/8
                     \time 1/4
                     \baca-time-signature-transparent
@@ -218,19 +214,15 @@ def bcps(
                         {
                             \baca-new-spacing-section #1 #16
                             \time 4/8
-                            \baca-time-signature-color #'blue
                             s1 * 1/2
                             \baca-new-spacing-section #1 #16
                             \time 3/8
-                            \baca-time-signature-color #'blue
                             s1 * 3/8
                             \baca-new-spacing-section #1 #16
                             \time 4/8
-                            \baca-time-signature-color #'blue
                             s1 * 1/2
                             \baca-new-spacing-section #1 #16
                             \time 3/8
-                            \baca-time-signature-color #'blue
                             s1 * 3/8
                             \baca-new-spacing-section #1 #4
                             \time 1/4
@@ -596,16 +588,12 @@ def container(
                 \context GlobalSkips = "Global_Skips"
                 {
                     \time 4/8
-                    \baca-time-signature-color #'blue
                     s1 * 1/2
                     \time 3/8
-                    \baca-time-signature-color #'blue
                     s1 * 3/8
                     \time 4/8
-                    \baca-time-signature-color #'blue
                     s1 * 1/2
                     \time 3/8
-                    \baca-time-signature-color #'blue
                     s1 * 3/8
                     \time 1/4
                     \baca-time-signature-transparent
@@ -707,7 +695,6 @@ def cross_staff(
                     \context GlobalSkips = "Global_Skips"
                     {
                         \time 4/4
-                        \baca-time-signature-color #'blue
                         s1 * 1
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1045,19 +1032,15 @@ def finger_pressure_transition(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -1281,16 +1264,12 @@ def glissando(
                     \context GlobalSkips = "Global_Skips"
                     {
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1398,16 +1377,12 @@ def glissando(
                     \context GlobalSkips = "Global_Skips"
                     {
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1505,16 +1480,12 @@ def glissando(
                     \context GlobalSkips = "Global_Skips"
                     {
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1637,16 +1608,12 @@ def glissando(
                     \context GlobalSkips = "Global_Skips"
                     {
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1821,19 +1788,15 @@ def invisible_music(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4

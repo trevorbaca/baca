@@ -259,19 +259,15 @@ def beam(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4

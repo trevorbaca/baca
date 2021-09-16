@@ -407,16 +407,12 @@ def bar_line_transparent(
                     \context GlobalSkips = "Global_Skips"
                     {
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1428,16 +1424,12 @@ def mmrest_color(
                     \context GlobalSkips = "Global_Skips"
                     {
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1554,16 +1546,12 @@ def mmrest_text_color(
                     \context GlobalSkips = "Global_Skips"
                     {
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1694,16 +1682,12 @@ def mmrest_text_extra_offset(
                     \context GlobalSkips = "Global_Skips"
                     {
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1805,16 +1789,12 @@ def mmrest_text_padding(
                     \context GlobalSkips = "Global_Skips"
                     {
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 1/4
                         \baca-time-signature-transparent
@@ -1915,16 +1895,12 @@ def mmrest_text_parent_center(
                     \context GlobalSkips = "Global_Skips"
                     {
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 1/4
                         \baca-time-signature-transparent
@@ -2026,16 +2002,12 @@ def mmrest_text_staff_padding(
                     \context GlobalSkips = "Global_Skips"
                     {
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \time 1/4
                         \baca-time-signature-transparent

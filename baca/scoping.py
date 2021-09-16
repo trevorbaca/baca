@@ -1188,19 +1188,15 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -1317,19 +1313,15 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -1497,19 +1489,15 @@ def only_parts(command: _command_typing) -> _command_typing:
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        \baca-time-signature-color #'blue
                         s1 * 1/2
                         \baca-new-spacing-section #1 #12
                         \time 3/8
-                        \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         \time 1/4
@@ -1528,12 +1516,10 @@ def only_parts(command: _command_typing) -> _command_typing:
                             b'2
                             - \tweak color #(x11-color 'blue)
                             \p
-                            - \tweak color #(x11-color 'blue)
                             \<
                             b'4.
                             b'2
                             b'4.
-                            - \tweak color #(x11-color 'blue)
                             \f
                             <<
                                 \context Voice = "Music_Voice"

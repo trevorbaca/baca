@@ -291,19 +291,15 @@ class BCPCommand(_scoping.Command):
                         {
                             \baca-new-spacing-section #1 #16
                             \time 4/8
-                            \baca-time-signature-color #'blue
                             s1 * 1/2
                             \baca-new-spacing-section #1 #16
                             \time 3/8
-                            \baca-time-signature-color #'blue
                             s1 * 3/8
                             \baca-new-spacing-section #1 #16
                             \time 4/8
-                            \baca-time-signature-color #'blue
                             s1 * 1/2
                             \baca-new-spacing-section #1 #16
                             \time 3/8
-                            \baca-time-signature-color #'blue
                             s1 * 3/8
                             \baca-new-spacing-section #1 #4
                             \time 1/4
@@ -529,19 +525,15 @@ class BCPCommand(_scoping.Command):
                         {
                             \baca-new-spacing-section #1 #16
                             \time 4/8
-                            \baca-time-signature-color #'blue
                             s1 * 1/2
                             \baca-new-spacing-section #1 #16
                             \time 3/8
-                            \baca-time-signature-color #'blue
                             s1 * 3/8
                             \baca-new-spacing-section #1 #16
                             \time 4/8
-                            \baca-time-signature-color #'blue
                             s1 * 1/2
                             \baca-new-spacing-section #1 #16
                             \time 3/8
-                            \baca-time-signature-color #'blue
                             s1 * 3/8
                             \baca-new-spacing-section #1 #4
                             \time 1/4
@@ -820,16 +812,12 @@ class ContainerCommand(_scoping.Command):
                 \context GlobalSkips = "Global_Skips"
                 {
                     \time 4/8
-                    \baca-time-signature-color #'blue
                     s1 * 1/2
                     \time 3/8
-                    \baca-time-signature-color #'blue
                     s1 * 3/8
                     \time 4/8
-                    \baca-time-signature-color #'blue
                     s1 * 1/2
                     \time 3/8
-                    \baca-time-signature-color #'blue
                     s1 * 3/8
                     \time 1/4
                     \baca-time-signature-transparent
