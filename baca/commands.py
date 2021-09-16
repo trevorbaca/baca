@@ -53,8 +53,6 @@ def assign_parts(
         ...     return baca.make_empty_score(1)
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=closure,
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -73,10 +71,10 @@ def assign_parts(
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
-            \context GlobalContext = "Global_Context"
+        {
+            \context Staff = "Music_Staff"
             <<
-                \context GlobalSkips = "Global_Skips"
+                \context Voice = "Global_Skips"
                 {
                     \time 4/8
                     s1 * 1/2
@@ -86,24 +84,18 @@ def assign_parts(
                     s1 * 1/2
                     \time 3/8
                     s1 * 3/8
+                }
+                \context Voice = "Music_Voice"
+                {
+                    {   %*% PartAssignment('Music_Voice')
+                        e'2
+                        e'4.
+                        e'2
+                        e'4.
+                    }   %*% PartAssignment('Music_Voice')
                 }
             >>
-            \context MusicContext = "Music_Context"
-            {
-                \context Staff = "Music_Staff"
-                {
-                    \context Voice = "Music_Voice"
-                    {
-                        {   %*% PartAssignment('Music_Voice')
-                            e'2
-                            e'4.
-                            e'2
-                            e'4.
-                        }   %*% PartAssignment('Music_Voice')
-                    }
-                }
-            }
-        >>
+        }
 
     ..  container:: example exception
 
@@ -111,7 +103,6 @@ def assign_parts(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=closure,
         ...     test_container_identifiers=True,
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -157,7 +148,6 @@ def bcps(
 
             >>> maker = baca.SegmentMaker(
             ...     includes=["baca.ily"],
-            ...     preamble=[baca.global_context_string()],
             ...     score_template=baca.make_empty_score_maker(1),
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -183,10 +173,10 @@ def bcps(
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
-                <<
-                    \context GlobalContext = "Global_Context"
+                {
+                    \context Staff = "Music_Staff"
                     <<
-                        \context GlobalSkips = "Global_Skips"
+                        \context Voice = "Global_Skips"
                         {
                             \baca-new-spacing-section #1 #16
                             \time 4/8
@@ -201,107 +191,101 @@ def bcps(
                             \time 3/8
                             s1 * 3/8
                         }
-                    >>
-                    \context MusicContext = "Music_Context"
-                    {
-                        \context Staff = "Music_Staff"
+                        \context Voice = "Music_Voice"
                         {
-                            \context Voice = "Music_Voice"
-                            {
-                                \override Script.staff-padding = 5.5
-                                \override TextSpanner.staff-padding = 2.5
-                                e'8
-                                - \downbow
-                                [
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #1 #5
-                                \bacaStartTextSpanBCP
-                                f'8
-                                - \upbow
-                                \bacaStopTextSpanBCP
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #3 #5
-                                \bacaStartTextSpanBCP
-                                e'8
-                                - \downbow
-                                \bacaStopTextSpanBCP
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #2 #5
-                                \bacaStartTextSpanBCP
-                                f'8
-                                \bacaStopTextSpanBCP
-                                ]
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #4 #5
-                                \bacaStartTextSpanBCP
-                                e'8
-                                - \upbow
-                                \bacaStopTextSpanBCP
-                                [
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #5 #5
-                                \bacaStartTextSpanBCP
-                                f'8
-                                - \downbow
-                                \bacaStopTextSpanBCP
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #1 #5
-                                \bacaStartTextSpanBCP
-                                e'8
-                                - \upbow
-                                \bacaStopTextSpanBCP
-                                ]
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #3 #5
-                                \bacaStartTextSpanBCP
-                                f'8
-                                - \downbow
-                                \bacaStopTextSpanBCP
-                                [
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #2 #5
-                                \bacaStartTextSpanBCP
-                                e'8
-                                \bacaStopTextSpanBCP
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #4 #5
-                                \bacaStartTextSpanBCP
-                                f'8
-                                - \upbow
-                                \bacaStopTextSpanBCP
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #5 #5
-                                \bacaStartTextSpanBCP
-                                e'8
-                                - \downbow
-                                \bacaStopTextSpanBCP
-                                ]
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #1 #5
-                                \bacaStartTextSpanBCP
-                                f'8
-                                - \upbow
-                                \bacaStopTextSpanBCP
-                                [
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #3 #5
-                                \bacaStartTextSpanBCP
-                                e'8
-                                - \downbow
-                                \bacaStopTextSpanBCP
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #2 #5
-                                - \baca-bcp-spanner-right-text #4 #5
-                                \bacaStartTextSpanBCP
-                                f'8
-                                \bacaStopTextSpanBCP
-                                ]
-                                \revert Script.staff-padding
-                                \revert TextSpanner.staff-padding
-                            }
+                            \override Script.staff-padding = 5.5
+                            \override TextSpanner.staff-padding = 2.5
+                            e'8
+                            - \downbow
+                            [
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #1 #5
+                            \bacaStartTextSpanBCP
+                            f'8
+                            - \upbow
+                            \bacaStopTextSpanBCP
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #3 #5
+                            \bacaStartTextSpanBCP
+                            e'8
+                            - \downbow
+                            \bacaStopTextSpanBCP
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #2 #5
+                            \bacaStartTextSpanBCP
+                            f'8
+                            \bacaStopTextSpanBCP
+                            ]
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #4 #5
+                            \bacaStartTextSpanBCP
+                            e'8
+                            - \upbow
+                            \bacaStopTextSpanBCP
+                            [
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #5 #5
+                            \bacaStartTextSpanBCP
+                            f'8
+                            - \downbow
+                            \bacaStopTextSpanBCP
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #1 #5
+                            \bacaStartTextSpanBCP
+                            e'8
+                            - \upbow
+                            \bacaStopTextSpanBCP
+                            ]
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #3 #5
+                            \bacaStartTextSpanBCP
+                            f'8
+                            - \downbow
+                            \bacaStopTextSpanBCP
+                            [
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #2 #5
+                            \bacaStartTextSpanBCP
+                            e'8
+                            \bacaStopTextSpanBCP
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #4 #5
+                            \bacaStartTextSpanBCP
+                            f'8
+                            - \upbow
+                            \bacaStopTextSpanBCP
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #5 #5
+                            \bacaStartTextSpanBCP
+                            e'8
+                            - \downbow
+                            \bacaStopTextSpanBCP
+                            ]
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #1 #5
+                            \bacaStartTextSpanBCP
+                            f'8
+                            - \upbow
+                            \bacaStopTextSpanBCP
+                            [
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #3 #5
+                            \bacaStartTextSpanBCP
+                            e'8
+                            - \downbow
+                            \bacaStopTextSpanBCP
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #2 #5
+                            - \baca-bcp-spanner-right-text #4 #5
+                            \bacaStartTextSpanBCP
+                            f'8
+                            \bacaStopTextSpanBCP
+                            ]
+                            \revert Script.staff-padding
+                            \revert TextSpanner.staff-padding
                         }
-                    }
-                >>
+                    >>
+                }
 
     """
     if final_spanner is not None:
@@ -514,7 +498,6 @@ def container(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -533,10 +516,10 @@ def container(
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
-            \context GlobalContext = "Global_Context"
+        {
+            \context Staff = "Music_Staff"
             <<
-                \context GlobalSkips = "Global_Skips"
+                \context Voice = "Global_Skips"
                 {
                     \time 4/8
                     s1 * 1/2
@@ -546,26 +529,20 @@ def container(
                     s1 * 1/2
                     \time 3/8
                     s1 * 3/8
+                }
+                \context Voice = "Music_Voice"
+                {
+                    {   %*% ViolinI
+                        e'2
+                        f'4.
+                    }   %*% ViolinI
+                    {   %*% ViolinII
+                        e'2
+                        f'4.
+                    }   %*% ViolinII
                 }
             >>
-            \context MusicContext = "Music_Context"
-            {
-                \context Staff = "Music_Staff"
-                {
-                    \context Voice = "Music_Voice"
-                    {
-                        {   %*% ViolinI
-                            e'2
-                            f'4.
-                        }   %*% ViolinI
-                        {   %*% ViolinII
-                            e'2
-                            f'4.
-                        }   %*% ViolinII
-                    }
-                }
-            }
-        >>
+        }
 
     """
     if identifier is not None:
@@ -590,7 +567,6 @@ def cross_staff(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=closure,
         ...     time_signatures=[(4, 4)],
         ... )
@@ -616,44 +592,38 @@ def cross_staff(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context StaffGroup = "Music_Staff_Group"
                 <<
-                    \context GlobalSkips = "Global_Skips"
-                    {
-                        \time 4/4
-                        s1 * 1
-                    }
-                >>
-                \context MusicContext = "Music_Context"
-                <<
-                    \context StaffGroup = "Music_Staff_Group"
+                    \context Staff = "Music_Staff_1"
                     <<
-                        \context Staff = "Music_Staff_1"
+                        \context Voice = "Global_Skips"
                         {
-                            \context Voice = "Music_Voice_1"
-                            {
-                                e'4
-                                f'4
-                                g'4
-                                a'4
-                            }
+                            \time 4/4
+                            s1 * 1
                         }
-                        \context Staff = "Music_Staff_2"
+                        \context Voice = "Music_Voice_1"
                         {
-                            \context Voice = "Music_Voice_2"
-                            {
-                                c'4
-                                d'4
-                                \crossStaff
-                                e'4
-                                \crossStaff
-                                f'4
-                            }
+                            e'4
+                            f'4
+                            g'4
+                            a'4
                         }
                     >>
+                    \context Staff = "Music_Staff_2"
+                    {
+                        \context Voice = "Music_Voice_2"
+                        {
+                            c'4
+                            d'4
+                            \crossStaff
+                            e'4
+                            \crossStaff
+                            f'4
+                        }
+                    }
                 >>
-            >>
+            }
 
     """
     return _commandclasses.IndicatorCommand(
@@ -884,7 +854,6 @@ def finger_pressure_transition(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -909,10 +878,10 @@ def finger_pressure_transition(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -927,33 +896,27 @@ def finger_pressure_transition(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \once \override NoteHead.style = #'harmonic
-                            c''2
-                            - \tweak arrow-length 2
-                            - \tweak arrow-width 0.5
-                            - \tweak bound-details.right.arrow ##t
-                            - \tweak thickness 3
-                            \glissando
-                            c''4.
-                            \once \override NoteHead.style = #'harmonic
-                            c''2
-                            - \tweak arrow-length 2
-                            - \tweak arrow-width 0.5
-                            - \tweak bound-details.right.arrow ##t
-                            - \tweak thickness 3
-                            \glissando
-                            c''4.
-                        }
+                        \once \override NoteHead.style = #'harmonic
+                        c''2
+                        - \tweak arrow-length 2
+                        - \tweak arrow-width 0.5
+                        - \tweak bound-details.right.arrow ##t
+                        - \tweak thickness 3
+                        \glissando
+                        c''4.
+                        \once \override NoteHead.style = #'harmonic
+                        c''2
+                        - \tweak arrow-length 2
+                        - \tweak arrow-width 0.5
+                        - \tweak bound-details.right.arrow ##t
+                        - \tweak thickness 3
+                        \glissando
+                        c''4.
                     }
-                }
-            >>
+                >>
+            }
 
     """
     return _commandclasses.GlissandoCommand(
@@ -1095,8 +1058,6 @@ def glissando(
         With segment-maker:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1117,10 +1078,10 @@ def glissando(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1130,61 +1091,53 @@ def glissando(
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        e'8
+                        [
+                        \glissando
+                        d''8
+                        \glissando
+                        f'8
+                        \glissando
+                        e''8
+                        ]
+                        \glissando
+                        g'8
+                        [
+                        \glissando
+                        f''8
+                        \glissando
+                        e'8
+                        ]
+                        \glissando
+                        d''8
+                        [
+                        \glissando
+                        f'8
+                        \glissando
+                        e''8
+                        \glissando
+                        g'8
+                        ]
+                        \glissando
+                        f''8
+                        [
+                        \glissando
+                        e'8
+                        \glissando
+                        d''8
+                        ]
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            e'8
-                            [
-                            \glissando
-                            d''8
-                            \glissando
-                            f'8
-                            \glissando
-                            e''8
-                            ]
-                            \glissando
-                            g'8
-                            [
-                            \glissando
-                            f''8
-                            \glissando
-                            e'8
-                            ]
-                            \glissando
-                            d''8
-                            [
-                            \glissando
-                            f'8
-                            \glissando
-                            e''8
-                            \glissando
-                            g'8
-                            ]
-                            \glissando
-                            f''8
-                            [
-                            \glissando
-                            e'8
-                            \glissando
-                            d''8
-                            ]
-                        }
-                    }
-                }
-            >>
+            }
 
     ..  container:: example
 
         First and last PLTs:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1206,10 +1159,10 @@ def glissando(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1219,50 +1172,42 @@ def glissando(
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        e'8
+                        [
+                        \glissando
+                        d''8
+                        f'8
+                        e''8
+                        ]
+                        g'8
+                        [
+                        f''8
+                        e'8
+                        ]
+                        d''8
+                        [
+                        f'8
+                        e''8
+                        g'8
+                        ]
+                        f''8
+                        [
+                        e'8
+                        \glissando
+                        d''8
+                        ]
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            e'8
-                            [
-                            \glissando
-                            d''8
-                            f'8
-                            e''8
-                            ]
-                            g'8
-                            [
-                            f''8
-                            e'8
-                            ]
-                            d''8
-                            [
-                            f'8
-                            e''8
-                            g'8
-                            ]
-                            f''8
-                            [
-                            e'8
-                            \glissando
-                            d''8
-                            ]
-                        }
-                    }
-                }
-            >>
+            }
 
     ..  container:: example
 
         Works with tweaks:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1285,10 +1230,10 @@ def glissando(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1298,74 +1243,66 @@ def glissando(
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        e'8
+                        [
+                        - \tweak color #red
+                        \glissando
+                        d''8
+                        - \tweak color #red
+                        \glissando
+                        f'8
+                        - \tweak color #red
+                        \glissando
+                        e''8
+                        ]
+                        - \tweak color #red
+                        \glissando
+                        g'8
+                        [
+                        - \tweak color #red
+                        \glissando
+                        f''8
+                        - \tweak color #red
+                        \glissando
+                        e'8
+                        ]
+                        - \tweak color #red
+                        \glissando
+                        d''8
+                        [
+                        - \tweak color #red
+                        \glissando
+                        f'8
+                        - \tweak color #red
+                        \glissando
+                        e''8
+                        - \tweak color #red
+                        \glissando
+                        g'8
+                        ]
+                        - \tweak color #red
+                        \glissando
+                        f''8
+                        [
+                        - \tweak color #red
+                        \glissando
+                        e'8
+                        - \tweak color #red
+                        \glissando
+                        d''8
+                        ]
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            e'8
-                            [
-                            - \tweak color #red
-                            \glissando
-                            d''8
-                            - \tweak color #red
-                            \glissando
-                            f'8
-                            - \tweak color #red
-                            \glissando
-                            e''8
-                            ]
-                            - \tweak color #red
-                            \glissando
-                            g'8
-                            [
-                            - \tweak color #red
-                            \glissando
-                            f''8
-                            - \tweak color #red
-                            \glissando
-                            e'8
-                            ]
-                            - \tweak color #red
-                            \glissando
-                            d''8
-                            [
-                            - \tweak color #red
-                            \glissando
-                            f'8
-                            - \tweak color #red
-                            \glissando
-                            e''8
-                            - \tweak color #red
-                            \glissando
-                            g'8
-                            ]
-                            - \tweak color #red
-                            \glissando
-                            f''8
-                            [
-                            - \tweak color #red
-                            \glissando
-                            e'8
-                            - \tweak color #red
-                            \glissando
-                            d''8
-                            ]
-                        }
-                    }
-                }
-            >>
+            }
 
     ..  container:: example
 
         Works with indexed tweaks:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1389,10 +1326,10 @@ def glissando(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1402,55 +1339,49 @@ def glissando(
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        e'8
+                        [
+                        - \tweak color #red
+                        \glissando
+                        d''8
+                        \glissando
+                        f'8
+                        \glissando
+                        e''8
+                        ]
+                        \glissando
+                        g'8
+                        [
+                        \glissando
+                        f''8
+                        \glissando
+                        e'8
+                        ]
+                        \glissando
+                        d''8
+                        [
+                        \glissando
+                        f'8
+                        \glissando
+                        e''8
+                        \glissando
+                        g'8
+                        ]
+                        \glissando
+                        f''8
+                        [
+                        \glissando
+                        e'8
+                        - \tweak color #red
+                        \glissando
+                        d''8
+                        ]
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            e'8
-                            [
-                            - \tweak color #red
-                            \glissando
-                            d''8
-                            \glissando
-                            f'8
-                            \glissando
-                            e''8
-                            ]
-                            \glissando
-                            g'8
-                            [
-                            \glissando
-                            f''8
-                            \glissando
-                            e'8
-                            ]
-                            \glissando
-                            d''8
-                            [
-                            \glissando
-                            f'8
-                            \glissando
-                            e''8
-                            \glissando
-                            g'8
-                            ]
-                            \glissando
-                            f''8
-                            [
-                            \glissando
-                            e'8
-                            - \tweak color #red
-                            \glissando
-                            d''8
-                            ]
-                        }
-                    }
-                }
-            >>
+            }
 
     """
     return _commandclasses.GlissandoCommand(
@@ -1520,7 +1451,6 @@ def invisible_music(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -1544,10 +1474,10 @@ def invisible_music(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -1562,25 +1492,19 @@ def invisible_music(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            c''2
-                            %@% \abjad-invisible-music
-                            \abjad-invisible-music-coloring
-                            c''4.
-                            %@% \abjad-invisible-music
-                            \abjad-invisible-music-coloring
-                            c''2
-                            c''4.
-                        }
+                        c''2
+                        %@% \abjad-invisible-music
+                        \abjad-invisible-music-coloring
+                        c''4.
+                        %@% \abjad-invisible-music
+                        \abjad-invisible-music-coloring
+                        c''2
+                        c''4.
                     }
-                }
-            >>
+                >>
+            }
 
     """
     tag = _site(inspect.currentframe(), 1)

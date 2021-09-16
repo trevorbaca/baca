@@ -374,7 +374,6 @@ def bar_line_transparent(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -401,10 +400,10 @@ def bar_line_transparent(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -414,42 +413,36 @@ def bar_line_transparent(
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        e'8
+                        [
+                        d''8
+                        f'8
+                        ]
+                        r8
+                        \override Score.BarLine.transparent = ##t
+                        e''8
+                        [
+                        g'8
+                        f''8
+                        ]
+                        \revert Score.BarLine.transparent
+                        r8
+                        e'8
+                        [
+                        d''8
+                        f'8
+                        ]
+                        r8
+                        e''8
+                        [
+                        g'8
+                        ]
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            e'8
-                            [
-                            d''8
-                            f'8
-                            ]
-                            r8
-                            \override Score.BarLine.transparent = ##t
-                            e''8
-                            [
-                            g'8
-                            f''8
-                            ]
-                            \revert Score.BarLine.transparent
-                            r8
-                            e'8
-                            [
-                            d''8
-                            f'8
-                            ]
-                            r8
-                            e''8
-                            [
-                            g'8
-                            ]
-                        }
-                    }
-                }
-            >>
+            }
 
     """
     return OverrideCommand(
@@ -1375,7 +1368,6 @@ def mmrest_color(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1394,10 +1386,10 @@ def mmrest_color(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1407,28 +1399,22 @@ def mmrest_color(
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        \override MultiMeasureRest.color = #(x11-color 'DarkOrchid)
+                        R1 * 4/8
+                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
+                        R1 * 3/8
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                        R1 * 4/8
+                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
+                        R1 * 3/8
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                        \revert MultiMeasureRest.color
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override MultiMeasureRest.color = #(x11-color 'DarkOrchid)
-                            R1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            R1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            \revert MultiMeasureRest.color
-                        }
-                    }
-                }
-            >>
+            }
 
     """
     return OverrideCommand(
@@ -1468,7 +1454,6 @@ def mmrest_text_color(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1492,10 +1477,10 @@ def mmrest_text_color(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1505,29 +1490,23 @@ def mmrest_text_color(
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        \override MultiMeasureRestText.color = #red
+                        R1 * 4/8
+                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
+                        R1 * 3/8
+                        ^ \baca-boxed-markup still
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                        R1 * 4/8
+                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
+                        R1 * 3/8
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                        \revert MultiMeasureRestText.color
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override MultiMeasureRestText.color = #red
-                            R1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                            R1 * 3/8
-                            ^ \baca-boxed-markup still
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            R1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            \revert MultiMeasureRestText.color
-                        }
-                    }
-                }
-            >>
+            }
 
     ..  container:: example exception
 
@@ -1536,7 +1515,6 @@ def mmrest_text_color(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1580,7 +1558,6 @@ def mmrest_text_extra_offset(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1604,10 +1581,10 @@ def mmrest_text_extra_offset(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1617,29 +1594,23 @@ def mmrest_text_extra_offset(
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        \override MultiMeasureRestText.extra-offset = #'(0 . 2)
+                        R1 * 4/8
+                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
+                        R1 * 3/8
+                        ^ \baca-boxed-markup still
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                        R1 * 4/8
+                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
+                        R1 * 3/8
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                        \revert MultiMeasureRestText.extra-offset
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override MultiMeasureRestText.extra-offset = #'(0 . 2)
-                            R1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                            R1 * 3/8
-                            ^ \baca-boxed-markup still
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            R1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            \revert MultiMeasureRestText.extra-offset
-                        }
-                    }
-                }
-            >>
+            }
 
     """
     return OverrideCommand(
@@ -1663,7 +1634,6 @@ def mmrest_text_padding(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1687,10 +1657,10 @@ def mmrest_text_padding(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1700,29 +1670,23 @@ def mmrest_text_padding(
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        \override MultiMeasureRestText.padding = 2
+                        R1 * 4/8
+                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
+                        R1 * 3/8
+                        ^ \baca-boxed-markup still
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                        R1 * 4/8
+                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
+                        R1 * 3/8
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                        \revert MultiMeasureRestText.padding
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override MultiMeasureRestText.padding = 2
-                            R1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                            R1 * 3/8
-                            ^ \baca-boxed-markup still
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            R1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            \revert MultiMeasureRestText.padding
-                        }
-                    }
-                }
-            >>
+            }
 
     """
     return OverrideCommand(
@@ -1745,7 +1709,6 @@ def mmrest_text_parent_center(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1769,10 +1732,10 @@ def mmrest_text_parent_center(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1782,29 +1745,23 @@ def mmrest_text_parent_center(
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        \override MultiMeasureRestText.parent-alignment-X = 0
+                        R1 * 4/8
+                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
+                        R1 * 3/8
+                        ^ \baca-boxed-markup still
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                        R1 * 4/8
+                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
+                        R1 * 3/8
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                        \revert MultiMeasureRestText.parent-alignment-X
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override MultiMeasureRestText.parent-alignment-X = 0
-                            R1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                            R1 * 3/8
-                            ^ \baca-boxed-markup still
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            R1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            \revert MultiMeasureRestText.parent-alignment-X
-                        }
-                    }
-                }
-            >>
+            }
 
     """
     return OverrideCommand(
@@ -1828,7 +1785,6 @@ def mmrest_text_staff_padding(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1852,10 +1808,10 @@ def mmrest_text_staff_padding(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1865,29 +1821,23 @@ def mmrest_text_staff_padding(
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        \override MultiMeasureRestText.staff-padding = 2
+                        R1 * 4/8
+                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
+                        R1 * 3/8
+                        ^ \baca-boxed-markup still
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                        R1 * 4/8
+                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
+                        R1 * 3/8
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                        \revert MultiMeasureRestText.staff-padding
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override MultiMeasureRestText.staff-padding = 2
-                            R1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                            R1 * 3/8
-                            ^ \baca-boxed-markup still
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            R1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            \revert MultiMeasureRestText.staff-padding
-                        }
-                    }
-                }
-            >>
+            }
 
     """
     return OverrideCommand(
@@ -4302,7 +4252,6 @@ def text_script_color(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -4430,7 +4379,6 @@ def text_script_down(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -4480,7 +4428,6 @@ def text_script_extra_offset(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -4632,7 +4579,6 @@ def text_script_padding(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -4807,7 +4753,6 @@ def text_script_staff_padding(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -4935,7 +4880,6 @@ def text_script_up(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )

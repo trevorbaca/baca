@@ -27,7 +27,6 @@ class RhythmCommand(_scoping.Command):
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(3, 8), (4, 8), (3,8), (4, 8)],
@@ -53,10 +52,10 @@ class RhythmCommand(_scoping.Command):
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 3/8
@@ -71,39 +70,33 @@ class RhythmCommand(_scoping.Command):
                         \time 4/8
                         s1 * 1/2
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'8
-                            [
-                            b'8
-                            b'8
-                            ]
-                            b'8
-                            [
-                            b'8
-                            b'8
-                            b'8
-                            ]
-                            b'8
-                            [
-                            b'8
-                            b'8
-                            ]
-                            b'8
-                            [
-                            b'8
-                            b'8
-                            b'8
-                            ]
-                        }
+                        b'8
+                        [
+                        b'8
+                        b'8
+                        ]
+                        b'8
+                        [
+                        b'8
+                        b'8
+                        b'8
+                        ]
+                        b'8
+                        [
+                        b'8
+                        b'8
+                        ]
+                        b'8
+                        [
+                        b'8
+                        b'8
+                        b'8
+                        ]
                     }
-                }
-            >>
+                >>
+            }
 
     """
 
@@ -322,7 +315,6 @@ class RhythmCommand(_scoping.Command):
 
             >>> maker = baca.SegmentMaker(
             ...     includes=["baca.ily"],
-            ...     preamble=[baca.global_context_string()],
             ...     score_template=baca.make_empty_score_maker(1),
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ...     time_signatures=5 * [(4, 8)],
@@ -373,10 +365,10 @@ class RhythmCommand(_scoping.Command):
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
-                <<
-                    \context GlobalContext = "Global_Context"
+                {
+                    \context Staff = "Music_Staff"
                     <<
-                        \context GlobalSkips = "Global_Skips"
+                        \context Voice = "Global_Skips"
                         {
                             \baca-new-spacing-section #1 #16
                             \time 4/8
@@ -390,97 +382,91 @@ class RhythmCommand(_scoping.Command):
                             \baca-new-spacing-section #1 #4
                             s1 * 1/2
                         }
-                    >>
-                    \context MusicContext = "Music_Context"
-                    {
-                        \context Staff = "Music_Staff"
+                        \context Voice = "Music_Voice"
                         {
-                            \context Voice = "Music_Voice"
-                            {
-                                \override TextScript.font-size = -2
-                                \override TextScript.staff-padding = 5
-                                b'8.
-                                _ \markup {
-                                    \fraction
-                                        3
-                                        16
-                                    }
-                                b'4
-                                _ \markup {
-                                    \fraction
-                                        4
-                                        16
-                                    }
-                                b'16
-                                _ \markup {
-                                    \fraction
-                                        3
-                                        16
-                                    }
-                                ~
-                                b'8
-                                b'4
-                                _ \markup {
-                                    \fraction
-                                        4
-                                        16
-                                    }
-                                b'8
-                                _ \markup {
-                                    \fraction
-                                        2
-                                        16
-                                    }
-                                r2
-                                _ \markup {
-                                    \fraction
-                                        8
-                                        16
-                                    }
-                                b'16
-                                _ \markup {
-                                    \fraction
-                                        1
-                                        16
-                                    }
-                                b'4
-                                _ \markup {
-                                    \fraction
-                                        4
-                                        16
-                                    }
-                                b'8.
-                                _ \markup {
-                                    \fraction
-                                        3
-                                        16
-                                    }
-                                b'4
-                                _ \markup {
-                                    \fraction
-                                        4
-                                        16
-                                    }
-                                b'8.
-                                _ \markup {
-                                    \fraction
-                                        3
-                                        16
-                                    }
-                                [
-                                b'16
-                                _ \markup {
-                                    \fraction
-                                        1
-                                        16
-                                    }
-                                ]
-                                \revert TextScript.font-size
-                                \revert TextScript.staff-padding
-                            }
+                            \override TextScript.font-size = -2
+                            \override TextScript.staff-padding = 5
+                            b'8.
+                            _ \markup {
+                                \fraction
+                                    3
+                                    16
+                                }
+                            b'4
+                            _ \markup {
+                                \fraction
+                                    4
+                                    16
+                                }
+                            b'16
+                            _ \markup {
+                                \fraction
+                                    3
+                                    16
+                                }
+                            ~
+                            b'8
+                            b'4
+                            _ \markup {
+                                \fraction
+                                    4
+                                    16
+                                }
+                            b'8
+                            _ \markup {
+                                \fraction
+                                    2
+                                    16
+                                }
+                            r2
+                            _ \markup {
+                                \fraction
+                                    8
+                                    16
+                                }
+                            b'16
+                            _ \markup {
+                                \fraction
+                                    1
+                                    16
+                                }
+                            b'4
+                            _ \markup {
+                                \fraction
+                                    4
+                                    16
+                                }
+                            b'8.
+                            _ \markup {
+                                \fraction
+                                    3
+                                    16
+                                }
+                            b'4
+                            _ \markup {
+                                \fraction
+                                    4
+                                    16
+                                }
+                            b'8.
+                            _ \markup {
+                                \fraction
+                                    3
+                                    16
+                                }
+                            [
+                            b'16
+                            _ \markup {
+                                \fraction
+                                    1
+                                    16
+                                }
+                            ]
+                            \revert TextScript.font-size
+                            \revert TextScript.staff-padding
                         }
-                    }
-                >>
+                    >>
+                }
 
         """
         return self._rhythm_maker
@@ -675,7 +661,6 @@ def make_monads(fractions):
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 4)],
@@ -695,41 +680,35 @@ def make_monads(fractions):
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #4
                         \time 4/4
                         s1 * 1
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
+                        \tweak edge-height #'(0.7 . 0)
+                        \times 4/5
                         {
-                            \tweak edge-height #'(0.7 . 0)
-                            \times 4/5
-                            {
-                                b'2
-                            }
-                            \tweak edge-height #'(0.7 . 0)
-                            \times 4/5
-                            {
-                                b'2
-                            }
-                            \tweak edge-height #'(0.7 . 0)
-                            \times 4/5
-                            {
-                                b'4
-                            }
+                            b'2
+                        }
+                        \tweak edge-height #'(0.7 . 0)
+                        \times 4/5
+                        {
+                            b'2
+                        }
+                        \tweak edge-height #'(0.7 . 0)
+                        \times 4/5
+                        {
+                            b'4
                         }
                     }
-                }
-            >>
+                >>
+            }
 
     """
     components = []
@@ -790,7 +769,6 @@ def make_repeat_tied_notes(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(10, 8)],
@@ -810,39 +788,33 @@ def make_repeat_tied_notes(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #4
                         \time 10/8
                         s1 * 5/4
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            - \tweak stencil ##f
-                            ~
-                            b'4
-                            \repeatTie
-                            - \tweak stencil ##f
-                            ~
-                            b'4.
-                            \repeatTie
-                            - \tweak stencil ##f
-                            ~
-                            b'4
-                            \repeatTie
-                        }
+                        b'4.
+                        - \tweak stencil ##f
+                        ~
+                        b'4
+                        \repeatTie
+                        - \tweak stencil ##f
+                        ~
+                        b'4.
+                        \repeatTie
+                        - \tweak stencil ##f
+                        ~
+                        b'4
+                        \repeatTie
                     }
-                }
-            >>
+                >>
+            }
 
     """
     specifiers_ = list(specifiers)

@@ -264,7 +264,6 @@ def color_octaves(score):
         >>> maker = baca.SegmentMaker(
         ...     color_octaves=True,
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=closure,
         ...     time_signatures=[(6, 4)],
         ... )
@@ -289,53 +288,47 @@ def color_octaves(score):
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context StaffGroup = "Music_Staff_Group"
                 <<
-                    \context GlobalSkips = "Global_Skips"
-                    {
-                        \time 6/4
-                        s1 * 3/2
-                    }
-                >>
-                \context MusicContext = "Music_Context"
-                <<
-                    \context StaffGroup = "Music_Staff_Group"
+                    \context Staff = "Music_Staff_1"
                     <<
-                        \context Staff = "Music_Staff_1"
+                        \context Voice = "Global_Skips"
                         {
-                            \context Voice = "Music_Voice_1"
-                            {
-                                d'4
-                                e'4
-                                \baca-octave-coloring
-                                f'4
-                                - \tweak color #red
-                                ^ \markup { OCTAVE }
-                                g'4
-                                a'4
-                                b'4
-                            }
+                            \time 6/4
+                            s1 * 3/2
                         }
-                        \context Staff = "Music_Staff_2"
+                        \context Voice = "Music_Voice_1"
                         {
-                            \context Voice = "Music_Voice_2"
-                            {
-                                \clef "bass"
-                                a4
-                                g4
-                                \baca-octave-coloring
-                                f4
-                                - \tweak color #red
-                                ^ \markup { OCTAVE }
-                                e4
-                                d4
-                                c4
-                            }
+                            d'4
+                            e'4
+                            \baca-octave-coloring
+                            f'4
+                            - \tweak color #red
+                            ^ \markup { OCTAVE }
+                            g'4
+                            a'4
+                            b'4
                         }
                     >>
+                    \context Staff = "Music_Staff_2"
+                    {
+                        \context Voice = "Music_Voice_2"
+                        {
+                            \clef "bass"
+                            a4
+                            g4
+                            \baca-octave-coloring
+                            f4
+                            - \tweak color #red
+                            ^ \markup { OCTAVE }
+                            e4
+                            d4
+                            c4
+                        }
+                    }
                 >>
-            >>
+            }
 
     """
     vertical_moments = abjad.iterate_vertical_moments(score)
@@ -415,8 +408,6 @@ def transpose_score(score):
         >>> instruments = abjad.OrderedDict()
         >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -439,10 +430,10 @@ def transpose_score(score):
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -452,40 +443,34 @@ def transpose_score(score):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        fs'!8
+                        [
+                        g'8
+                        fs'!8
+                        g'8
+                        ]
+                        fs'!8
+                        [
+                        g'8
+                        fs'!8
+                        ]
+                        g'8
+                        [
+                        fs'!8
+                        g'8
+                        fs'!8
+                        ]
+                        g'8
+                        [
+                        fs'!8
+                        g'8
+                        ]
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            fs'!8
-                            [
-                            g'8
-                            fs'!8
-                            g'8
-                            ]
-                            fs'!8
-                            [
-                            g'8
-                            fs'!8
-                            ]
-                            g'8
-                            [
-                            fs'!8
-                            g'8
-                            fs'!8
-                            ]
-                            g'8
-                            [
-                            fs'!8
-                            g'8
-                            ]
-                        }
-                    }
-                }
-            >>
+            }
 
     ..  container:: example
 
@@ -494,8 +479,6 @@ def transpose_score(score):
         >>> instruments = abjad.OrderedDict()
         >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -518,10 +501,10 @@ def transpose_score(score):
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -531,40 +514,34 @@ def transpose_score(score):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        e'8
+                        [
+                        f'8
+                        e'8
+                        f'8
+                        ]
+                        e'8
+                        [
+                        f'8
+                        e'8
+                        ]
+                        f'8
+                        [
+                        e'8
+                        f'8
+                        e'8
+                        ]
+                        f'8
+                        [
+                        e'8
+                        f'8
+                        ]
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            e'8
-                            [
-                            f'8
-                            e'8
-                            f'8
-                            ]
-                            e'8
-                            [
-                            f'8
-                            e'8
-                            ]
-                            f'8
-                            [
-                            e'8
-                            f'8
-                            e'8
-                            ]
-                            f'8
-                            [
-                            e'8
-                            f'8
-                            ]
-                        }
-                    }
-                }
-            >>
+            }
 
     """
     for pleaf in _selection.Selection(score).pleaves():
@@ -582,8 +559,6 @@ class SegmentMaker:
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -602,10 +577,10 @@ class SegmentMaker:
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -615,40 +590,34 @@ class SegmentMaker:
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        b'8
+                        [
+                        b'8
+                        b'8
+                        b'8
+                        ]
+                        b'8
+                        [
+                        b'8
+                        b'8
+                        ]
+                        b'8
+                        [
+                        b'8
+                        b'8
+                        b'8
+                        ]
+                        b'8
+                        [
+                        b'8
+                        b'8
+                        ]
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'8
-                            [
-                            b'8
-                            b'8
-                            b'8
-                            ]
-                            b'8
-                            [
-                            b'8
-                            b'8
-                            ]
-                            b'8
-                            [
-                            b'8
-                            b'8
-                            b'8
-                            ]
-                            b'8
-                            [
-                            b'8
-                            b'8
-                            ]
-                        }
-                    }
-                }
-            >>
+            }
 
     ..  container:: example
 
@@ -676,9 +645,7 @@ class SegmentMaker:
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=time_signatures,
         ... )
         >>> maker(
@@ -700,66 +667,56 @@ class SegmentMaker:
             {
                 autoBeaming = ##f
             }
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
-                        \baca-new-spacing-section #1 #24
                         \time 1/16
                         s1 * 1/16
-                        \baca-new-spacing-section #1 #24
                         \time 7/16
                         s1 * 7/16
-                        \baca-new-spacing-section #1 #24
                         \time 1/16
                         s1 * 1/16
-                        \baca-new-spacing-section #1 #4
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
+                        \scaleDurations #'(1 . 1)
                         {
-                            \scaleDurations #'(1 . 1)
-                            {
-                                e'16
-                            }
-                            \scaleDurations #'(1 . 1)
-                            {
-                                fs'!16
-                                d'16
-                                ef'!16
-                                f'16
-                                \baca-repeat-pitch-class-coloring
-                                a'16
-                                \baca-repeat-pitch-class-coloring
-                                a'16
-                                c'16
-                            }
-                            \scaleDurations #'(1 . 1)
-                            {
-                                b'16
-                            }
-                            \scaleDurations #'(1 . 1)
-                            {
-                                bf'!16
-                                g'16
-                                a'16
-                                \baca-repeat-pitch-class-coloring
-                                c''16
-                                \baca-repeat-pitch-class-coloring
-                                c'16
-                                f'16
-                            }
+                            e'16
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            fs'!16
+                            d'16
+                            ef'!16
+                            f'16
+                            \baca-repeat-pitch-class-coloring
+                            a'16
+                            \baca-repeat-pitch-class-coloring
+                            a'16
+                            c'16
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            b'16
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            bf'!16
+                            g'16
+                            a'16
+                            \baca-repeat-pitch-class-coloring
+                            c''16
+                            \baca-repeat-pitch-class-coloring
+                            c'16
+                            f'16
                         }
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -788,9 +745,7 @@ class SegmentMaker:
         >>> maker = baca.SegmentMaker(
         ...     do_not_check_out_of_range_pitches=True,
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=time_signatures,
         ... )
         >>> maker(
@@ -813,63 +768,53 @@ class SegmentMaker:
             {
                 autoBeaming = ##f
             }
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
-                        \baca-new-spacing-section #1 #24
                         \time 1/16
                         s1 * 1/16
-                        \baca-new-spacing-section #1 #24
                         \time 7/16
                         s1 * 7/16
-                        \baca-new-spacing-section #1 #24
                         \time 1/16
                         s1 * 1/16
-                        \baca-new-spacing-section #1 #4
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
+                        \scaleDurations #'(1 . 1)
                         {
-                            \scaleDurations #'(1 . 1)
-                            {
-                                e'16
-                            }
-                            \scaleDurations #'(1 . 1)
-                            {
-                                \baca-out-of-range-coloring
-                                c16
-                                d'16
-                                ef'!16
-                                f'16
-                                af'!16
-                                a'16
-                                c'16
-                            }
-                            \scaleDurations #'(1 . 1)
-                            {
-                                b'16
-                            }
-                            \scaleDurations #'(1 . 1)
-                            {
-                                bf'!16
-                                g'16
-                                a'16
-                                bf'!16
-                                c'16
-                                f'16
-                            }
+                            e'16
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \baca-out-of-range-coloring
+                            c16
+                            d'16
+                            ef'!16
+                            f'16
+                            af'!16
+                            a'16
+                            c'16
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            b'16
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            bf'!16
+                            g'16
+                            a'16
+                            bf'!16
+                            c'16
+                            f'16
                         }
                     }
-                }
-            >>
+                >>
+            }
 
     """
 
@@ -1111,8 +1056,6 @@ class SegmentMaker:
         ..  container:: example
 
             >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily"],
-            ...     preamble=[baca.global_context_string()],
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -1132,10 +1075,10 @@ class SegmentMaker:
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
-                <<
-                    \context GlobalContext = "Global_Context"
+                {
+                    \context Staff = "Music_Staff"
                     <<
-                        \context GlobalSkips = "Global_Skips"
+                        \context Voice = "Global_Skips"
                         {
                             \time 4/8
                             s1 * 1/2
@@ -1145,62 +1088,54 @@ class SegmentMaker:
                             s1 * 1/2
                             \time 3/8
                             s1 * 3/8
+                        }
+                        \context Voice = "Music_Voice"
+                        {
+                            b'8
+                            ^ \markup { 0 }
+                            [
+                            b'8
+                            ^ \markup { 1 }
+                            b'8
+                            ^ \markup { 2 }
+                            b'8
+                            ^ \markup { 3 }
+                            ]
+                            b'8
+                            ^ \markup { 4 }
+                            [
+                            b'8
+                            ^ \markup { 5 }
+                            b'8
+                            ^ \markup { 6 }
+                            ]
+                            b'8
+                            ^ \markup { 7 }
+                            [
+                            b'8
+                            ^ \markup { 8 }
+                            b'8
+                            ^ \markup { 9 }
+                            b'8
+                            ^ \markup { 10 }
+                            ]
+                            b'8
+                            ^ \markup { 11 }
+                            [
+                            b'8
+                            ^ \markup { 12 }
+                            b'8
+                            ^ \markup { 13 }
+                            ]
                         }
                     >>
-                    \context MusicContext = "Music_Context"
-                    {
-                        \context Staff = "Music_Staff"
-                        {
-                            \context Voice = "Music_Voice"
-                            {
-                                b'8
-                                ^ \markup { 0 }
-                                [
-                                b'8
-                                ^ \markup { 1 }
-                                b'8
-                                ^ \markup { 2 }
-                                b'8
-                                ^ \markup { 3 }
-                                ]
-                                b'8
-                                ^ \markup { 4 }
-                                [
-                                b'8
-                                ^ \markup { 5 }
-                                b'8
-                                ^ \markup { 6 }
-                                ]
-                                b'8
-                                ^ \markup { 7 }
-                                [
-                                b'8
-                                ^ \markup { 8 }
-                                b'8
-                                ^ \markup { 9 }
-                                b'8
-                                ^ \markup { 10 }
-                                ]
-                                b'8
-                                ^ \markup { 11 }
-                                [
-                                b'8
-                                ^ \markup { 12 }
-                                b'8
-                                ^ \markup { 13 }
-                                ]
-                            }
-                        }
-                    }
-                >>
+                }
 
         ..  container:: example
 
             Commands may be grouped into lists:
 
             >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily"],
-            ...     preamble=[baca.global_context_string()],
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -1223,10 +1158,10 @@ class SegmentMaker:
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
-                <<
-                    \context GlobalContext = "Global_Context"
+                {
+                    \context Staff = "Music_Staff"
                     <<
-                        \context GlobalSkips = "Global_Skips"
+                        \context Voice = "Global_Skips"
                         {
                             \time 4/8
                             s1 * 1/2
@@ -1236,54 +1171,48 @@ class SegmentMaker:
                             s1 * 1/2
                             \time 3/8
                             s1 * 3/8
+                        }
+                        \context Voice = "Music_Voice"
+                        {
+                            b'8
+                            ^ \markup { 0 }
+                            [
+                            b'8
+                            ^ \markup { 1 }
+                            b'8
+                            ^ \markup { 2 }
+                            b'8
+                            ^ \markup { 3 }
+                            ]
+                            b'8
+                            ^ \markup { 4 }
+                            [
+                            b'8
+                            ^ \markup { 5 }
+                            b'8
+                            ^ \markup { 6 }
+                            ]
+                            b'8
+                            ^ \markup { 7 }
+                            [
+                            b'8
+                            ^ \markup { 8 }
+                            b'8
+                            ^ \markup { 9 }
+                            b'8
+                            ^ \markup { 10 }
+                            ]
+                            b'8
+                            ^ \markup { 11 }
+                            [
+                            b'8
+                            ^ \markup { 12 }
+                            b'8
+                            ^ \markup { 13 }
+                            ]
                         }
                     >>
-                    \context MusicContext = "Music_Context"
-                    {
-                        \context Staff = "Music_Staff"
-                        {
-                            \context Voice = "Music_Voice"
-                            {
-                                b'8
-                                ^ \markup { 0 }
-                                [
-                                b'8
-                                ^ \markup { 1 }
-                                b'8
-                                ^ \markup { 2 }
-                                b'8
-                                ^ \markup { 3 }
-                                ]
-                                b'8
-                                ^ \markup { 4 }
-                                [
-                                b'8
-                                ^ \markup { 5 }
-                                b'8
-                                ^ \markup { 6 }
-                                ]
-                                b'8
-                                ^ \markup { 7 }
-                                [
-                                b'8
-                                ^ \markup { 8 }
-                                b'8
-                                ^ \markup { 9 }
-                                b'8
-                                ^ \markup { 10 }
-                                ]
-                                b'8
-                                ^ \markup { 11 }
-                                [
-                                b'8
-                                ^ \markup { 12 }
-                                b'8
-                                ^ \markup { 13 }
-                                ]
-                            }
-                        }
-                    }
-                >>
+                }
 
         ..  container:: example exception
 
@@ -2609,7 +2538,6 @@ class SegmentMaker:
 
     def _get_lilypond_includes(self):
         if self.environment == "docs":
-            assert self.includes, repr(self.includes)
             return self.includes
         includes = ["../../stylesheet.ily"]
         if self.clock_time_extra_offset is not None:
@@ -3348,6 +3276,27 @@ class SegmentMaker:
             except Exception:
                 raise Exception(abjad.storage(memento))
         return indicator
+
+    def _move_global_context(self):
+        if self.environment != "docs":
+            return
+        score = self.score
+        assert "Global_Rests" not in score
+        global_skips = score["Global_Skips"]
+        global_skips.lilypond_type = "Voice"
+        music_context = score["Music_Context"]
+        for component in abjad.iterate(music_context).components():
+            if isinstance(component, abjad.Staff):
+                first_music_staff = component
+                break
+        first_music_staff.simultaneous = True
+        first_music_staff.insert(0, global_skips)
+        score["Global_Context"][:] = []
+        del score["Global_Context"]
+        assert len(score) == 1, repr(score)
+        score[:] = music_context[:]
+        if len(score) == 1:
+            score.simultaneous = False
 
     def _move_global_rests(self):
         topmost = "_global_rests_in_topmost_staff"
@@ -4248,8 +4197,6 @@ class SegmentMaker:
             ...     )
             ... ]
             >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily"],
-            ...     preamble=[baca.global_context_string()],
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -4269,10 +4216,10 @@ class SegmentMaker:
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
-                <<
-                    \context GlobalContext = "Global_Context"
+                {
+                    \context Staff = "Music_Staff"
                     <<
-                        \context GlobalSkips = "Global_Skips"
+                        \context Voice = "Global_Skips"
                         {
                             \time 4/8
                             \bar ""
@@ -4284,25 +4231,19 @@ class SegmentMaker:
                             \time 3/8
                             s1 * 3/8
                         }
-                    >>
-                    \context MusicContext = "Music_Context"
-                    {
-                        \context Staff = "Music_Staff"
+                        \context Voice = "Music_Voice"
                         {
-                            \context Voice = "Music_Voice"
-                            {
-                                R1 * 4/8
-                                %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                                R1 * 3/8
-                                %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                                R1 * 4/8
-                                %@% ^ \baca-duration-multiplier-markup #"4" #"8"
-                                R1 * 3/8
-                                %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            }
+                            R1 * 4/8
+                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
+                            R1 * 3/8
+                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                            R1 * 4/8
+                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
+                            R1 * 3/8
+                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                         }
-                    }
-                >>
+                    >>
+                }
 
             >>> string = abjad.storage(maker.metadata)
             >>> print(string)
@@ -4325,10 +4266,8 @@ class SegmentMaker:
                         'alive_during_segment',
                         [
                             'Score',
-                            'Global_Context',
-                            'Global_Skips',
-                            'Music_Context',
                             'Music_Staff',
+                            'Global_Skips',
                             'Music_Voice',
                             ],
                         ),
@@ -4619,6 +4558,7 @@ class SegmentMaker:
                 self._check_duplicate_part_assignments()
                 self._move_global_rests()
             # mutates offsets:
+            self._move_global_context()
             self._clean_up_on_beat_grace_containers()
             self._check_wellformedness()
         count = int(timer.elapsed_time)

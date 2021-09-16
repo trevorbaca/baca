@@ -228,7 +228,6 @@ def beam(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -252,10 +251,10 @@ def beam(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -270,33 +269,27 @@ def beam(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            c'8
-                            _ [
-                            c'8
-                            c'8
-                            c'8
-                            c'8
-                            c'8
-                            c'8
-                            c'8
-                            c'8
-                            c'8
-                            c'8
-                            c'8
-                            c'8
-                            c'8
-                            ]
-                        }
+                        c'8
+                        _ [
+                        c'8
+                        c'8
+                        c'8
+                        c'8
+                        c'8
+                        c'8
+                        c'8
+                        c'8
+                        c'8
+                        c'8
+                        c'8
+                        c'8
+                        c'8
+                        ]
                     }
-                }
-            >>
+                >>
+            }
 
     """
     start_beam = start_beam or abjad.StartBeam(direction=direction)

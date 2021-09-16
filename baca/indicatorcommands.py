@@ -1252,7 +1252,6 @@ def hide_black_note_heads(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1272,10 +1271,10 @@ def hide_black_note_heads(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1285,24 +1284,18 @@ def hide_black_note_heads(
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        b'2
+                        \once \override NoteHead.transparent = ##t
+                        b'4.
+                        b'2
+                        \once \override NoteHead.transparent = ##t
+                        b'4.
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'2
-                            \once \override NoteHead.transparent = ##t
-                            b'4.
-                            b'2
-                            \once \override NoteHead.transparent = ##t
-                            b'4.
-                        }
-                    }
-                }
-            >>
+            }
 
     """
     string = r"\once \override NoteHead.transparent = ##t"
@@ -1601,7 +1594,6 @@ def margin_markup(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1622,10 +1614,10 @@ def margin_markup(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1635,24 +1627,18 @@ def margin_markup(
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        \set Staff.shortInstrumentName =
+                        \markup { Fl. }
+                        e'2
+                        f'4.
+                        e'2
+                        f'4.
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            \set Staff.shortInstrumentName =
-                            \markup { Fl. }
-                            e'2
-                            f'4.
-                            e'2
-                            f'4.
-                        }
-                    }
-                }
-            >>
+            }
 
     """
     if isinstance(argument, (str, abjad.Markup)):
@@ -2188,7 +2174,6 @@ def staff_lines(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
@@ -2211,10 +2196,10 @@ def staff_lines(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 3/8
@@ -2228,34 +2213,27 @@ def staff_lines(
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override Staff.BarLine.bar-extent = #'(0 . 0)
-                            \stopStaff
-                            \once \override Staff.StaffSymbol.line-count = 1
-                            \startStaff
-                            \clef "percussion"
-                            a4.
-                            b4.
-                            c'4.
-                            d'4.
-                            e'4.
-                        }
+                        \override Staff.BarLine.bar-extent = #'(0 . 0)
+                        \stopStaff
+                        \once \override Staff.StaffSymbol.line-count = 1
+                        \startStaff
+                        \clef "percussion"
+                        a4.
+                        b4.
+                        c'4.
+                        d'4.
+                        e'4.
                     }
-                }
-            >>
+                >>
+            }
 
 
         Single-line staff with bass clef:
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
@@ -2278,10 +2256,10 @@ def staff_lines(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 3/8
@@ -2295,27 +2273,21 @@ def staff_lines(
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override Staff.BarLine.bar-extent = #'(0 . 0)
-                            \stopStaff
-                            \once \override Staff.StaffSymbol.line-count = 1
-                            \startStaff
-                            \clef "bass"
-                            b,4.
-                            c4.
-                            d4.
-                            e4.
-                            f4.
-                        }
+                        \override Staff.BarLine.bar-extent = #'(0 . 0)
+                        \stopStaff
+                        \once \override Staff.StaffSymbol.line-count = 1
+                        \startStaff
+                        \clef "bass"
+                        b,4.
+                        c4.
+                        d4.
+                        e4.
+                        f4.
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -2323,7 +2295,6 @@ def staff_lines(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
@@ -2346,10 +2317,10 @@ def staff_lines(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 3/8
@@ -2363,33 +2334,26 @@ def staff_lines(
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override Staff.BarLine.bar-extent = #'(-0.5 . 0.5)
-                            \stopStaff
-                            \once \override Staff.StaffSymbol.line-count = 2
-                            \startStaff
-                            \clef "percussion"
-                            a4.
-                            b4.
-                            c'4.
-                            d'4.
-                            e'4.
-                        }
+                        \override Staff.BarLine.bar-extent = #'(-0.5 . 0.5)
+                        \stopStaff
+                        \once \override Staff.StaffSymbol.line-count = 2
+                        \startStaff
+                        \clef "percussion"
+                        a4.
+                        b4.
+                        c'4.
+                        d'4.
+                        e'4.
                     }
-                }
-            >>
+                >>
+            }
 
         Two-line staff with bass clef; clef set before staff positions:
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
@@ -2412,10 +2376,10 @@ def staff_lines(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 3/8
@@ -2429,33 +2393,26 @@ def staff_lines(
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override Staff.BarLine.bar-extent = #'(-0.5 . 0.5)
-                            \stopStaff
-                            \once \override Staff.StaffSymbol.line-count = 2
-                            \startStaff
-                            \clef "bass"
-                            b,4.
-                            c4.
-                            d4.
-                            e4.
-                            f4.
-                        }
+                        \override Staff.BarLine.bar-extent = #'(-0.5 . 0.5)
+                        \stopStaff
+                        \once \override Staff.StaffSymbol.line-count = 2
+                        \startStaff
+                        \clef "bass"
+                        b,4.
+                        c4.
+                        d4.
+                        e4.
+                        f4.
                     }
-                }
-            >>
+                >>
+            }
 
         Two-line staff with bass clef; staff positions set before clef:
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
@@ -2478,10 +2435,10 @@ def staff_lines(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 3/8
@@ -2495,27 +2452,21 @@ def staff_lines(
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override Staff.BarLine.bar-extent = #'(-0.5 . 0.5)
-                            \stopStaff
-                            \once \override Staff.StaffSymbol.line-count = 2
-                            \startStaff
-                            \clef "bass"
-                            g'4.
-                            a'4.
-                            b'4.
-                            c''4.
-                            d''4.
-                        }
+                        \override Staff.BarLine.bar-extent = #'(-0.5 . 0.5)
+                        \stopStaff
+                        \once \override Staff.StaffSymbol.line-count = 2
+                        \startStaff
+                        \clef "bass"
+                        g'4.
+                        a'4.
+                        b'4.
+                        c''4.
+                        d''4.
                     }
-                }
-            >>
+                >>
+            }
 
     """
     command_1 = _commandclasses.IndicatorCommand(

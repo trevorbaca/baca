@@ -28,7 +28,6 @@ class AccidentalAdjustmentCommand(_scoping.Command):
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -49,10 +48,10 @@ class AccidentalAdjustmentCommand(_scoping.Command):
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -62,22 +61,16 @@ class AccidentalAdjustmentCommand(_scoping.Command):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        e'!2
+                        f'!4.
+                        e'2
+                        f'4.
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            e'!2
-                            f'!4.
-                            e'2
-                            f'4.
-                        }
-                    }
-                }
-            >>
+            }
 
     """
 
@@ -483,7 +476,6 @@ class ClusterCommand(_scoping.Command):
 
             >>> maker = baca.SegmentMaker(
             ...     includes=["baca.ily"],
-            ...     preamble=[baca.global_context_string()],
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -503,10 +495,10 @@ class ClusterCommand(_scoping.Command):
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
-                <<
-                    \context GlobalContext = "Global_Context"
+                {
+                    \context Staff = "Music_Staff"
                     <<
-                        \context GlobalSkips = "Global_Skips"
+                        \context Voice = "Global_Skips"
                         {
                             \time 4/8
                             s1 * 1/2
@@ -516,66 +508,60 @@ class ClusterCommand(_scoping.Command):
                             s1 * 1/2
                             \time 3/8
                             s1 * 3/8
+                        }
+                        \context Voice = "Music_Voice"
+                        {
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <e' g' b'>2
+                            ^ \markup {
+                                \center-align
+                                    \natural
+                                }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <e' g' b'>4.
+                            ^ \markup {
+                                \center-align
+                                    \natural
+                                }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <e' g' b'>2
+                            ^ \markup {
+                                \center-align
+                                    \natural
+                                }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <e' g' b'>4.
+                            ^ \markup {
+                                \center-align
+                                    \natural
+                                }
                         }
                     >>
-                    \context MusicContext = "Music_Context"
-                    {
-                        \context Staff = "Music_Staff"
-                        {
-                            \context Voice = "Music_Voice"
-                            {
-                                \once \override Accidental.stencil = ##f
-                                \once \override AccidentalCautionary.stencil = ##f
-                                \once \override Arpeggio.X-offset = #-2
-                                \once \override NoteHead.stencil = #ly:text-interface::print
-                                \once \override NoteHead.text = \markup {
-                                        \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                                }
-                                <e' g' b'>2
-                                ^ \markup {
-                                    \center-align
-                                        \natural
-                                    }
-                                \once \override Accidental.stencil = ##f
-                                \once \override AccidentalCautionary.stencil = ##f
-                                \once \override Arpeggio.X-offset = #-2
-                                \once \override NoteHead.stencil = #ly:text-interface::print
-                                \once \override NoteHead.text = \markup {
-                                        \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                                }
-                                <e' g' b'>4.
-                                ^ \markup {
-                                    \center-align
-                                        \natural
-                                    }
-                                \once \override Accidental.stencil = ##f
-                                \once \override AccidentalCautionary.stencil = ##f
-                                \once \override Arpeggio.X-offset = #-2
-                                \once \override NoteHead.stencil = #ly:text-interface::print
-                                \once \override NoteHead.text = \markup {
-                                        \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                                }
-                                <e' g' b'>2
-                                ^ \markup {
-                                    \center-align
-                                        \natural
-                                    }
-                                \once \override Accidental.stencil = ##f
-                                \once \override AccidentalCautionary.stencil = ##f
-                                \once \override Arpeggio.X-offset = #-2
-                                \once \override NoteHead.stencil = #ly:text-interface::print
-                                \once \override NoteHead.text = \markup {
-                                        \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                                }
-                                <e' g' b'>4.
-                                ^ \markup {
-                                    \center-align
-                                        \natural
-                                    }
-                            }
-                        }
-                    }
-                >>
+                }
 
         """
         return self._hide_flat_markup
@@ -598,7 +584,6 @@ class ClusterCommand(_scoping.Command):
 
             >>> maker = baca.SegmentMaker(
             ...     includes=["baca.ily"],
-            ...     preamble=[baca.global_context_string()],
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -618,10 +603,10 @@ class ClusterCommand(_scoping.Command):
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
-                <<
-                    \context GlobalContext = "Global_Context"
+                {
+                    \context Staff = "Music_Staff"
                     <<
-                        \context GlobalSkips = "Global_Skips"
+                        \context Voice = "Global_Skips"
                         {
                             \time 4/8
                             s1 * 1/2
@@ -631,82 +616,76 @@ class ClusterCommand(_scoping.Command):
                             s1 * 1/2
                             \time 3/8
                             s1 * 3/8
+                        }
+                        \context Voice = "Music_Voice"
+                        {
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <c' e' g'>2
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <d' f' a'>4.
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <e' g' b'>2
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <f' a' c''>4.
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
                         }
                     >>
-                    \context MusicContext = "Music_Context"
-                    {
-                        \context Staff = "Music_Staff"
-                        {
-                            \context Voice = "Music_Voice"
-                            {
-                                \once \override Accidental.stencil = ##f
-                                \once \override AccidentalCautionary.stencil = ##f
-                                \once \override Arpeggio.X-offset = #-2
-                                \once \override NoteHead.stencil = #ly:text-interface::print
-                                \once \override NoteHead.text = \markup {
-                                        \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                                }
-                                <c' e' g'>2
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
-                                \once \override Accidental.stencil = ##f
-                                \once \override AccidentalCautionary.stencil = ##f
-                                \once \override Arpeggio.X-offset = #-2
-                                \once \override NoteHead.stencil = #ly:text-interface::print
-                                \once \override NoteHead.text = \markup {
-                                        \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                                }
-                                <d' f' a'>4.
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
-                                \once \override Accidental.stencil = ##f
-                                \once \override AccidentalCautionary.stencil = ##f
-                                \once \override Arpeggio.X-offset = #-2
-                                \once \override NoteHead.stencil = #ly:text-interface::print
-                                \once \override NoteHead.text = \markup {
-                                        \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                                }
-                                <e' g' b'>2
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
-                                \once \override Accidental.stencil = ##f
-                                \once \override AccidentalCautionary.stencil = ##f
-                                \once \override Arpeggio.X-offset = #-2
-                                \once \override NoteHead.stencil = #ly:text-interface::print
-                                \once \override NoteHead.text = \markup {
-                                        \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                                }
-                                <f' a' c''>4.
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
-                            }
-                        }
-                    }
-                >>
+                }
 
         ..  container:: example
 
@@ -714,7 +693,6 @@ class ClusterCommand(_scoping.Command):
 
             >>> maker = baca.SegmentMaker(
             ...     includes=["baca.ily"],
-            ...     preamble=[baca.global_context_string()],
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -733,10 +711,10 @@ class ClusterCommand(_scoping.Command):
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
-                <<
-                    \context GlobalContext = "Global_Context"
+                {
+                    \context Staff = "Music_Staff"
                     <<
-                        \context GlobalSkips = "Global_Skips"
+                        \context Voice = "Global_Skips"
                         {
                             \time 4/8
                             s1 * 1/2
@@ -746,82 +724,76 @@ class ClusterCommand(_scoping.Command):
                             s1 * 1/2
                             \time 3/8
                             s1 * 3/8
+                        }
+                        \context Voice = "Music_Voice"
+                        {
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <g' b' d''>2
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <g' b' d''>4.
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <g' b' d''>2
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <g' b' d''>4.
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
                         }
                     >>
-                    \context MusicContext = "Music_Context"
-                    {
-                        \context Staff = "Music_Staff"
-                        {
-                            \context Voice = "Music_Voice"
-                            {
-                                \once \override Accidental.stencil = ##f
-                                \once \override AccidentalCautionary.stencil = ##f
-                                \once \override Arpeggio.X-offset = #-2
-                                \once \override NoteHead.stencil = #ly:text-interface::print
-                                \once \override NoteHead.text = \markup {
-                                        \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                                }
-                                <g' b' d''>2
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
-                                \once \override Accidental.stencil = ##f
-                                \once \override AccidentalCautionary.stencil = ##f
-                                \once \override Arpeggio.X-offset = #-2
-                                \once \override NoteHead.stencil = #ly:text-interface::print
-                                \once \override NoteHead.text = \markup {
-                                        \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                                }
-                                <g' b' d''>4.
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
-                                \once \override Accidental.stencil = ##f
-                                \once \override AccidentalCautionary.stencil = ##f
-                                \once \override Arpeggio.X-offset = #-2
-                                \once \override NoteHead.stencil = #ly:text-interface::print
-                                \once \override NoteHead.text = \markup {
-                                        \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                                }
-                                <g' b' d''>2
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
-                                \once \override Accidental.stencil = ##f
-                                \once \override AccidentalCautionary.stencil = ##f
-                                \once \override Arpeggio.X-offset = #-2
-                                \once \override NoteHead.stencil = #ly:text-interface::print
-                                \once \override NoteHead.text = \markup {
-                                        \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                                }
-                                <g' b' d''>4.
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
-                            }
-                        }
-                    }
-                >>
+                }
 
         """
         return self._start_pitch
@@ -837,7 +809,6 @@ class ClusterCommand(_scoping.Command):
 
             >>> maker = baca.SegmentMaker(
             ...     includes=["baca.ily"],
-            ...     preamble=[baca.global_context_string()],
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -856,10 +827,10 @@ class ClusterCommand(_scoping.Command):
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
-                <<
-                    \context GlobalContext = "Global_Context"
+                {
+                    \context Staff = "Music_Staff"
                     <<
-                        \context GlobalSkips = "Global_Skips"
+                        \context Voice = "Global_Skips"
                         {
                             \time 4/8
                             s1 * 1/2
@@ -869,82 +840,76 @@ class ClusterCommand(_scoping.Command):
                             s1 * 1/2
                             \time 3/8
                             s1 * 3/8
+                        }
+                        \context Voice = "Music_Voice"
+                        {
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <e'>2
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <e' g'>4.
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <e' g' b'>2
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <e' g' b' d''>4.
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
                         }
                     >>
-                    \context MusicContext = "Music_Context"
-                    {
-                        \context Staff = "Music_Staff"
-                        {
-                            \context Voice = "Music_Voice"
-                            {
-                                \once \override Accidental.stencil = ##f
-                                \once \override AccidentalCautionary.stencil = ##f
-                                \once \override Arpeggio.X-offset = #-2
-                                \once \override NoteHead.stencil = #ly:text-interface::print
-                                \once \override NoteHead.text = \markup {
-                                        \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                                }
-                                <e'>2
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
-                                \once \override Accidental.stencil = ##f
-                                \once \override AccidentalCautionary.stencil = ##f
-                                \once \override Arpeggio.X-offset = #-2
-                                \once \override NoteHead.stencil = #ly:text-interface::print
-                                \once \override NoteHead.text = \markup {
-                                        \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                                }
-                                <e' g'>4.
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
-                                \once \override Accidental.stencil = ##f
-                                \once \override AccidentalCautionary.stencil = ##f
-                                \once \override Arpeggio.X-offset = #-2
-                                \once \override NoteHead.stencil = #ly:text-interface::print
-                                \once \override NoteHead.text = \markup {
-                                        \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                                }
-                                <e' g' b'>2
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
-                                \once \override Accidental.stencil = ##f
-                                \once \override AccidentalCautionary.stencil = ##f
-                                \once \override Arpeggio.X-offset = #-2
-                                \once \override NoteHead.stencil = #ly:text-interface::print
-                                \once \override NoteHead.text = \markup {
-                                        \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                                }
-                                <e' g' b' d''>4.
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
-                            }
-                        }
-                    }
-                >>
+                }
 
         ..  container:: example
 
@@ -952,7 +917,6 @@ class ClusterCommand(_scoping.Command):
 
             >>> maker = baca.SegmentMaker(
             ...     includes=["baca.ily"],
-            ...     preamble=[baca.global_context_string()],
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -971,10 +935,10 @@ class ClusterCommand(_scoping.Command):
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
-                <<
-                    \context GlobalContext = "Global_Context"
+                {
+                    \context Staff = "Music_Staff"
                     <<
-                        \context GlobalSkips = "Global_Skips"
+                        \context Voice = "Global_Skips"
                         {
                             \time 4/8
                             s1 * 1/2
@@ -984,82 +948,76 @@ class ClusterCommand(_scoping.Command):
                             s1 * 1/2
                             \time 3/8
                             s1 * 3/8
+                        }
+                        \context Voice = "Music_Voice"
+                        {
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <e'>2
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <e' g' b'>4.
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <e'>2
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text = \markup {
+                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            }
+                            <e' g' b'>4.
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
                         }
                     >>
-                    \context MusicContext = "Music_Context"
-                    {
-                        \context Staff = "Music_Staff"
-                        {
-                            \context Voice = "Music_Voice"
-                            {
-                                \once \override Accidental.stencil = ##f
-                                \once \override AccidentalCautionary.stencil = ##f
-                                \once \override Arpeggio.X-offset = #-2
-                                \once \override NoteHead.stencil = #ly:text-interface::print
-                                \once \override NoteHead.text = \markup {
-                                        \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                                }
-                                <e'>2
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
-                                \once \override Accidental.stencil = ##f
-                                \once \override AccidentalCautionary.stencil = ##f
-                                \once \override Arpeggio.X-offset = #-2
-                                \once \override NoteHead.stencil = #ly:text-interface::print
-                                \once \override NoteHead.text = \markup {
-                                        \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                                }
-                                <e' g' b'>4.
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
-                                \once \override Accidental.stencil = ##f
-                                \once \override AccidentalCautionary.stencil = ##f
-                                \once \override Arpeggio.X-offset = #-2
-                                \once \override NoteHead.stencil = #ly:text-interface::print
-                                \once \override NoteHead.text = \markup {
-                                        \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                                }
-                                <e'>2
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
-                                \once \override Accidental.stencil = ##f
-                                \once \override AccidentalCautionary.stencil = ##f
-                                \once \override Arpeggio.X-offset = #-2
-                                \once \override NoteHead.stencil = #ly:text-interface::print
-                                \once \override NoteHead.text = \markup {
-                                        \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                                }
-                                <e' g' b'>4.
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
-                            }
-                        }
-                    }
-                >>
+                }
 
         ..  container:: example
 
@@ -1067,7 +1025,6 @@ class ClusterCommand(_scoping.Command):
 
             >>> maker = baca.SegmentMaker(
             ...     includes=["baca.ily"],
-            ...     preamble=[baca.global_context_string()],
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -1088,10 +1045,10 @@ class ClusterCommand(_scoping.Command):
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
-                <<
-                    \context GlobalContext = "Global_Context"
+                {
+                    \context Staff = "Music_Staff"
                     <<
-                        \context GlobalSkips = "Global_Skips"
+                        \context Voice = "Global_Skips"
                         {
                             \time 4/8
                             s1 * 1/2
@@ -1101,22 +1058,16 @@ class ClusterCommand(_scoping.Command):
                             s1 * 1/2
                             \time 3/8
                             s1 * 3/8
+                        }
+                        \context Voice = "Music_Voice"
+                        {
+                            e'2
+                            e'4.
+                            e'2
+                            e'4.
                         }
                     >>
-                    \context MusicContext = "Music_Context"
-                    {
-                        \context Staff = "Music_Staff"
-                        {
-                            \context Voice = "Music_Voice"
-                            {
-                                e'2
-                                e'4.
-                                e'2
-                                e'4.
-                            }
-                        }
-                    }
-                >>
+                }
 
         Inteprets positive integers as widths in thirds.
 
@@ -1135,7 +1086,6 @@ class ColorFingeringCommand(_scoping.Command):
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1156,10 +1106,10 @@ class ColorFingeringCommand(_scoping.Command):
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1169,25 +1119,19 @@ class ColorFingeringCommand(_scoping.Command):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        e'2
+                        e'4.
+                        ^ \markup { \override #'(circle-padding . 0.25) \circle \finger 1 }
+                        e'2
+                        ^ \markup { \override #'(circle-padding . 0.25) \circle \finger 2 }
+                        e'4.
+                        ^ \markup { \override #'(circle-padding . 0.25) \circle \finger 1 }
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            e'2
-                            e'4.
-                            ^ \markup { \override #'(circle-padding . 0.25) \circle \finger 1 }
-                            e'2
-                            ^ \markup { \override #'(circle-padding . 0.25) \circle \finger 2 }
-                            e'4.
-                            ^ \markup { \override #'(circle-padding . 0.25) \circle \finger 1 }
-                        }
-                    }
-                }
-            >>
+            }
 
     """
 
@@ -1506,7 +1450,6 @@ class MicrotoneDeviationCommand(_scoping.Command):
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1527,10 +1470,10 @@ class MicrotoneDeviationCommand(_scoping.Command):
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1540,40 +1483,34 @@ class MicrotoneDeviationCommand(_scoping.Command):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        e'8
+                        [
+                        eqs'!8
+                        e'8
+                        eqf'!8
+                        ]
+                        e'8
+                        [
+                        eqs'!8
+                        e'8
+                        ]
+                        eqf'!8
+                        [
+                        e'8
+                        eqs'!8
+                        e'8
+                        ]
+                        eqf'!8
+                        [
+                        e'8
+                        eqs'!8
+                        ]
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            e'8
-                            [
-                            eqs'!8
-                            e'8
-                            eqf'!8
-                            ]
-                            e'8
-                            [
-                            eqs'!8
-                            e'8
-                            ]
-                            eqf'!8
-                            [
-                            e'8
-                            eqs'!8
-                            e'8
-                            ]
-                            eqf'!8
-                            [
-                            e'8
-                            eqs'!8
-                            ]
-                        }
-                    }
-                }
-            >>
+            }
 
     """
 
@@ -1664,7 +1601,6 @@ class OctaveDisplacementCommand(_scoping.Command):
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1687,10 +1623,10 @@ class OctaveDisplacementCommand(_scoping.Command):
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1700,40 +1636,34 @@ class OctaveDisplacementCommand(_scoping.Command):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        g'8
+                        [
+                        g'8
+                        g''8
+                        g''8
+                        ]
+                        g'8
+                        [
+                        g'8
+                        g8
+                        ]
+                        g8
+                        [
+                        g'''8
+                        g'''8
+                        g'8
+                        ]
+                        g'8
+                        [
+                        g''8
+                        g''8
+                        ]
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            g'8
-                            [
-                            g'8
-                            g''8
-                            g''8
-                            ]
-                            g'8
-                            [
-                            g'8
-                            g8
-                            ]
-                            g8
-                            [
-                            g'''8
-                            g'''8
-                            g'8
-                            ]
-                            g'8
-                            [
-                            g''8
-                            g''8
-                            ]
-                        }
-                    }
-                }
-            >>
+            }
 
     """
 
@@ -1940,7 +1870,6 @@ class PitchCommand(_scoping.Command):
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1960,10 +1889,10 @@ class PitchCommand(_scoping.Command):
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1973,40 +1902,34 @@ class PitchCommand(_scoping.Command):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        g''8
+                        [
+                        cs''!8
+                        ef''!8
+                        e''8
+                        ]
+                        f''8
+                        [
+                        b''8
+                        g''8
+                        ]
+                        cs''!8
+                        [
+                        ef''!8
+                        e''8
+                        f''8
+                        ]
+                        b''8
+                        [
+                        g''8
+                        cs''!8
+                        ]
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            g''8
-                            [
-                            cs''!8
-                            ef''!8
-                            e''8
-                            ]
-                            f''8
-                            [
-                            b''8
-                            g''8
-                            ]
-                            cs''!8
-                            [
-                            ef''!8
-                            e''8
-                            f''8
-                            ]
-                            b''8
-                            [
-                            g''8
-                            cs''!8
-                            ]
-                        }
-                    }
-                }
-            >>
+            }
 
     ..  container:: example
 
@@ -2014,7 +1937,6 @@ class PitchCommand(_scoping.Command):
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -2034,10 +1956,10 @@ class PitchCommand(_scoping.Command):
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -2047,40 +1969,34 @@ class PitchCommand(_scoping.Command):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        c'8
+                        [
+                        f'8
+                        fs'!8
+                        <b' cs''!>8
+                        ]
+                        d''8
+                        [
+                        c'8
+                        f'8
+                        ]
+                        fs'!8
+                        [
+                        <b' cs''!>8
+                        d''8
+                        c'8
+                        ]
+                        f'8
+                        [
+                        fs'!8
+                        <b' cs''!>8
+                        ]
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            c'8
-                            [
-                            f'8
-                            fs'!8
-                            <b' cs''!>8
-                            ]
-                            d''8
-                            [
-                            c'8
-                            f'8
-                            ]
-                            fs'!8
-                            [
-                            <b' cs''!>8
-                            d''8
-                            c'8
-                            ]
-                            f'8
-                            [
-                            fs'!8
-                            <b' cs''!>8
-                            ]
-                        }
-                    }
-                }
-            >>
+            }
 
     ..  container:: example
 
@@ -2088,7 +2004,6 @@ class PitchCommand(_scoping.Command):
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -2108,10 +2023,10 @@ class PitchCommand(_scoping.Command):
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -2121,40 +2036,34 @@ class PitchCommand(_scoping.Command):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        <c' d' e' f' g' a' b'>8
+                        [
+                        <c' d' e' f' g' a' b'>8
+                        <c' d' e' f' g' a' b'>8
+                        <c' d' e' f' g' a' b'>8
+                        ]
+                        <c' d' e' f' g' a' b'>8
+                        [
+                        <c' d' e' f' g' a' b'>8
+                        <c' d' e' f' g' a' b'>8
+                        ]
+                        <c' d' e' f' g' a' b'>8
+                        [
+                        <c' d' e' f' g' a' b'>8
+                        <c' d' e' f' g' a' b'>8
+                        <c' d' e' f' g' a' b'>8
+                        ]
+                        <c' d' e' f' g' a' b'>8
+                        [
+                        <c' d' e' f' g' a' b'>8
+                        <c' d' e' f' g' a' b'>8
+                        ]
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            <c' d' e' f' g' a' b'>8
-                            [
-                            <c' d' e' f' g' a' b'>8
-                            <c' d' e' f' g' a' b'>8
-                            <c' d' e' f' g' a' b'>8
-                            ]
-                            <c' d' e' f' g' a' b'>8
-                            [
-                            <c' d' e' f' g' a' b'>8
-                            <c' d' e' f' g' a' b'>8
-                            ]
-                            <c' d' e' f' g' a' b'>8
-                            [
-                            <c' d' e' f' g' a' b'>8
-                            <c' d' e' f' g' a' b'>8
-                            <c' d' e' f' g' a' b'>8
-                            ]
-                            <c' d' e' f' g' a' b'>8
-                            [
-                            <c' d' e' f' g' a' b'>8
-                            <c' d' e' f' g' a' b'>8
-                            ]
-                        }
-                    }
-                }
-            >>
+            }
 
     ..  container:: example
 
@@ -2535,7 +2444,6 @@ class RegisterCommand(_scoping.Command):
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -2557,10 +2465,10 @@ class RegisterCommand(_scoping.Command):
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -2570,40 +2478,34 @@ class RegisterCommand(_scoping.Command):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        g''8
+                        [
+                        gqs''!8
+                        gs''!8
+                        gtqs''!8
+                        ]
+                        aqf''!8
+                        [
+                        af''!8
+                        atqf''!8
+                        ]
+                        g''8
+                        [
+                        gqs''!8
+                        gs''!8
+                        gtqs''!8
+                        ]
+                        aqf''!8
+                        [
+                        af''!8
+                        atqf''!8
+                        ]
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            g''8
-                            [
-                            gqs''!8
-                            gs''!8
-                            gtqs''!8
-                            ]
-                            aqf''!8
-                            [
-                            af''!8
-                            atqf''!8
-                            ]
-                            g''8
-                            [
-                            gqs''!8
-                            gs''!8
-                            gtqs''!8
-                            ]
-                            aqf''!8
-                            [
-                            af''!8
-                            atqf''!8
-                            ]
-                        }
-                    }
-                }
-            >>
+            }
 
     ..  container:: example
 
@@ -2861,7 +2763,6 @@ class RegisterInterpolationCommand(_scoping.Command):
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
         ... )
@@ -2882,10 +2783,10 @@ class RegisterInterpolationCommand(_scoping.Command):
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -2903,62 +2804,56 @@ class RegisterInterpolationCommand(_scoping.Command):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        fs''!8
+                        [
+                        e''8
+                        ef''!8
+                        f''8
+                        ]
+                        a''8
+                        [
+                        bf''!8
+                        c''8
+                        ]
+                        b''8
+                        [
+                        af''!8
+                        g''8
+                        cs''!8
+                        ]
+                        d''8
+                        [
+                        fs''!8
+                        e''8
+                        ]
+                        ef''!8
+                        [
+                        f''8
+                        a''8
+                        bf''!8
+                        ]
+                        c''8
+                        [
+                        b''8
+                        af''!8
+                        ]
+                        g''8
+                        [
+                        cs''!8
+                        d''8
+                        fs''!8
+                        ]
+                        e''8
+                        [
+                        ef''!8
+                        f''8
+                        ]
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            fs''!8
-                            [
-                            e''8
-                            ef''!8
-                            f''8
-                            ]
-                            a''8
-                            [
-                            bf''!8
-                            c''8
-                            ]
-                            b''8
-                            [
-                            af''!8
-                            g''8
-                            cs''!8
-                            ]
-                            d''8
-                            [
-                            fs''!8
-                            e''8
-                            ]
-                            ef''!8
-                            [
-                            f''8
-                            a''8
-                            bf''!8
-                            ]
-                            c''8
-                            [
-                            b''8
-                            af''!8
-                            ]
-                            g''8
-                            [
-                            cs''!8
-                            d''8
-                            fs''!8
-                            ]
-                            e''8
-                            [
-                            ef''!8
-                            f''8
-                            ]
-                        }
-                    }
-                }
-            >>
+            }
 
     ..  container:: example
 
@@ -2967,7 +2862,6 @@ class RegisterInterpolationCommand(_scoping.Command):
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
         ... )
@@ -2988,10 +2882,10 @@ class RegisterInterpolationCommand(_scoping.Command):
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -3009,62 +2903,56 @@ class RegisterInterpolationCommand(_scoping.Command):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        fs''!8
+                        [
+                        e''8
+                        ef''!8
+                        f''8
+                        ]
+                        a''8
+                        [
+                        bf'!8
+                        c''8
+                        ]
+                        b'8
+                        [
+                        af'!8
+                        g''8
+                        cs''!8
+                        ]
+                        d''8
+                        [
+                        fs'!8
+                        e''8
+                        ]
+                        ef''!8
+                        [
+                        f'8
+                        a'8
+                        bf'!8
+                        ]
+                        c''8
+                        [
+                        b'8
+                        af'!8
+                        ]
+                        g'8
+                        [
+                        cs''!8
+                        d'8
+                        fs'!8
+                        ]
+                        e'8
+                        [
+                        ef'!8
+                        f'8
+                        ]
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            fs''!8
-                            [
-                            e''8
-                            ef''!8
-                            f''8
-                            ]
-                            a''8
-                            [
-                            bf'!8
-                            c''8
-                            ]
-                            b'8
-                            [
-                            af'!8
-                            g''8
-                            cs''!8
-                            ]
-                            d''8
-                            [
-                            fs'!8
-                            e''8
-                            ]
-                            ef''!8
-                            [
-                            f'8
-                            a'8
-                            bf'!8
-                            ]
-                            c''8
-                            [
-                            b'8
-                            af'!8
-                            ]
-                            g'8
-                            [
-                            cs''!8
-                            d'8
-                            fs'!8
-                            ]
-                            e'8
-                            [
-                            ef'!8
-                            f'8
-                            ]
-                        }
-                    }
-                }
-            >>
+            }
 
     ..  container:: example
 
@@ -3073,7 +2961,6 @@ class RegisterInterpolationCommand(_scoping.Command):
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
         ... )
@@ -3094,10 +2981,10 @@ class RegisterInterpolationCommand(_scoping.Command):
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -3115,62 +3002,56 @@ class RegisterInterpolationCommand(_scoping.Command):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        fs'!8
+                        [
+                        e'8
+                        ef'!8
+                        f'8
+                        ]
+                        a'8
+                        [
+                        bf'!8
+                        c''8
+                        ]
+                        b'8
+                        [
+                        af'!8
+                        g'8
+                        cs''!8
+                        ]
+                        d''8
+                        [
+                        fs'!8
+                        e''8
+                        ]
+                        ef''!8
+                        [
+                        f''8
+                        a'8
+                        bf'!8
+                        ]
+                        c''8
+                        [
+                        b'8
+                        af'!8
+                        ]
+                        g''8
+                        [
+                        cs''!8
+                        d''8
+                        fs''!8
+                        ]
+                        e''8
+                        [
+                        ef''!8
+                        f''8
+                        ]
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            fs'!8
-                            [
-                            e'8
-                            ef'!8
-                            f'8
-                            ]
-                            a'8
-                            [
-                            bf'!8
-                            c''8
-                            ]
-                            b'8
-                            [
-                            af'!8
-                            g'8
-                            cs''!8
-                            ]
-                            d''8
-                            [
-                            fs'!8
-                            e''8
-                            ]
-                            ef''!8
-                            [
-                            f''8
-                            a'8
-                            bf'!8
-                            ]
-                            c''8
-                            [
-                            b'8
-                            af'!8
-                            ]
-                            g''8
-                            [
-                            cs''!8
-                            d''8
-                            fs''!8
-                            ]
-                            e''8
-                            [
-                            ef''!8
-                            f''8
-                            ]
-                        }
-                    }
-                }
-            >>
+            }
 
     ..  container:: example
 
@@ -3179,7 +3060,6 @@ class RegisterInterpolationCommand(_scoping.Command):
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
         ... )
@@ -3200,10 +3080,10 @@ class RegisterInterpolationCommand(_scoping.Command):
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -3221,62 +3101,56 @@ class RegisterInterpolationCommand(_scoping.Command):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        fs''!8
+                        [
+                        e''8
+                        ef''!8
+                        f''8
+                        ]
+                        a'8
+                        [
+                        bf'!8
+                        c''8
+                        ]
+                        b'8
+                        [
+                        af'!8
+                        g'8
+                        cs''!8
+                        ]
+                        d'8
+                        [
+                        fs'!8
+                        e'8
+                        ]
+                        ef'!8
+                        [
+                        f'8
+                        a'8
+                        bf!8
+                        ]
+                        c'8
+                        [
+                        b8
+                        af!8
+                        ]
+                        g8
+                        [
+                        cs'!8
+                        d'8
+                        fs!8
+                        ]
+                        e8
+                        [
+                        ef!8
+                        f8
+                        ]
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            fs''!8
-                            [
-                            e''8
-                            ef''!8
-                            f''8
-                            ]
-                            a'8
-                            [
-                            bf'!8
-                            c''8
-                            ]
-                            b'8
-                            [
-                            af'!8
-                            g'8
-                            cs''!8
-                            ]
-                            d'8
-                            [
-                            fs'!8
-                            e'8
-                            ]
-                            ef'!8
-                            [
-                            f'8
-                            a'8
-                            bf!8
-                            ]
-                            c'8
-                            [
-                            b8
-                            af!8
-                            ]
-                            g8
-                            [
-                            cs'!8
-                            d'8
-                            fs!8
-                            ]
-                            e8
-                            [
-                            ef!8
-                            f8
-                            ]
-                        }
-                    }
-                }
-            >>
+            }
 
     ..  container:: example
 
@@ -3285,7 +3159,6 @@ class RegisterInterpolationCommand(_scoping.Command):
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
         ... )
@@ -3306,10 +3179,10 @@ class RegisterInterpolationCommand(_scoping.Command):
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -3327,62 +3200,56 @@ class RegisterInterpolationCommand(_scoping.Command):
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        fs!8
+                        [
+                        e8
+                        ef!8
+                        f8
+                        ]
+                        a8
+                        [
+                        bf!8
+                        c'8
+                        ]
+                        b8
+                        [
+                        af!8
+                        g'8
+                        cs'!8
+                        ]
+                        d'8
+                        [
+                        fs'!8
+                        e'8
+                        ]
+                        ef'!8
+                        [
+                        f'8
+                        a'8
+                        bf'!8
+                        ]
+                        c''8
+                        [
+                        b'8
+                        af'!8
+                        ]
+                        g'8
+                        [
+                        cs''!8
+                        d''8
+                        fs''!8
+                        ]
+                        e''8
+                        [
+                        ef''!8
+                        f''8
+                        ]
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            fs!8
-                            [
-                            e8
-                            ef!8
-                            f8
-                            ]
-                            a8
-                            [
-                            bf!8
-                            c'8
-                            ]
-                            b8
-                            [
-                            af!8
-                            g'8
-                            cs'!8
-                            ]
-                            d'8
-                            [
-                            fs'!8
-                            e'8
-                            ]
-                            ef'!8
-                            [
-                            f'8
-                            a'8
-                            bf'!8
-                            ]
-                            c''8
-                            [
-                            b'8
-                            af'!8
-                            ]
-                            g'8
-                            [
-                            cs''!8
-                            d''8
-                            fs''!8
-                            ]
-                            e''8
-                            [
-                            ef''!8
-                            f''8
-                            ]
-                        }
-                    }
-                }
-            >>
+            }
 
     """
 
@@ -5259,7 +5126,6 @@ def force_accidental(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -5284,10 +5150,10 @@ def force_accidental(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -5297,24 +5163,18 @@ def force_accidental(
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        e'2
+                        %@% e'!2
+                        f'4.
+                        %@% f'!4.
+                        e'2
+                        f'4.
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            e'2
-                            %@% e'!2
-                            f'4.
-                            %@% f'!4.
-                            e'2
-                            f'4.
-                        }
-                    }
-                }
-            >>
+            }
 
     """
     return AccidentalAdjustmentCommand(forced=True, selector=selector)
@@ -5559,7 +5419,6 @@ def pitch(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -5582,10 +5441,10 @@ def pitch(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -5595,26 +5454,20 @@ def pitch(
                         s1 * 1/2
                         \time 3/8
                         s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        <c' d' e'>1 * 1/2
+                        %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                        <c' d' e'>1 * 3/8
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                        <c' d' e'>1 * 1/2
+                        %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                        <c' d' e'>1 * 3/8
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    {
-                        \context Voice = "Music_Voice"
-                        {
-                            <c' d' e'>1 * 1/2
-                            %@% ^ \baca-duration-multiplier-markup #"1" #"2"
-                            <c' d' e'>1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            <c' d' e'>1 * 1/2
-                            %@% ^ \baca-duration-multiplier-markup #"1" #"2"
-                            <c' d' e'>1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                        }
-                    }
-                }
-            >>
+            }
 
     """
     if isinstance(pitch, (list, tuple)) and len(pitch) == 1:

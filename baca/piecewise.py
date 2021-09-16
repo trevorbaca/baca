@@ -887,7 +887,6 @@ def dynamic(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 13)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -915,10 +914,10 @@ def dynamic(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #13
                         \time 4/8
@@ -933,45 +932,39 @@ def dynamic(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override DynamicLineSpanner.staff-padding = 5
-                            e'8
-                            - \tweak color #(x11-color 'blue)
-                            \p
-                            \<
-                            [
-                            d''8
-                            f'8
-                            c''8
-                            ]
-                            g'8
-                            [
-                            f''8
-                            e'8
-                            ]
-                            d''8
-                            [
-                            f'8
-                            c''8
-                            g'8
-                            ]
-                            f''8
-                            [
-                            e'8
-                            d''8
-                            \!
-                            ]
-                            \revert DynamicLineSpanner.staff-padding
-                        }
+                        \override DynamicLineSpanner.staff-padding = 5
+                        e'8
+                        - \tweak color #(x11-color 'blue)
+                        \p
+                        \<
+                        [
+                        d''8
+                        f'8
+                        c''8
+                        ]
+                        g'8
+                        [
+                        f''8
+                        e'8
+                        ]
+                        d''8
+                        [
+                        f'8
+                        c''8
+                        g'8
+                        ]
+                        f''8
+                        [
+                        e'8
+                        d''8
+                        \!
+                        ]
+                        \revert DynamicLineSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -979,7 +972,6 @@ def dynamic(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -1002,10 +994,10 @@ def dynamic(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -1020,43 +1012,37 @@ def dynamic(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override DynamicLineSpanner.staff-padding = 5
-                            e'8
-                            - \tweak extra-offset #'(-4 . 0)
-                            \p
-                            [
-                            d''8
-                            f'8
-                            c''8
-                            ]
-                            g'8
-                            [
-                            f''8
-                            e'8
-                            ]
-                            d''8
-                            [
-                            f'8
-                            c''8
-                            g'8
-                            ]
-                            f''8
-                            [
-                            e'8
-                            d''8
-                            ]
-                            \revert DynamicLineSpanner.staff-padding
-                        }
+                        \override DynamicLineSpanner.staff-padding = 5
+                        e'8
+                        - \tweak extra-offset #'(-4 . 0)
+                        \p
+                        [
+                        d''8
+                        f'8
+                        c''8
+                        ]
+                        g'8
+                        [
+                        f''8
+                        e'8
+                        ]
+                        d''8
+                        [
+                        f'8
+                        c''8
+                        g'8
+                        ]
+                        f''8
+                        [
+                        e'8
+                        d''8
+                        ]
+                        \revert DynamicLineSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
     """
     if isinstance(dynamic, str):
@@ -1102,7 +1088,6 @@ def hairpin(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -1125,10 +1110,10 @@ def hairpin(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -1143,45 +1128,39 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override DynamicLineSpanner.staff-padding = 5
-                            e'8
-                            - \tweak color #(x11-color 'blue)
-                            \p
-                            \<
-                            [
-                            d''8
-                            f'8
-                            e''8
-                            ]
-                            g'8
-                            [
-                            f''8
-                            e'8
-                            ]
-                            d''8
-                            [
-                            f'8
-                            e''8
-                            g'8
-                            ]
-                            f''8
-                            [
-                            e'8
-                            d''8
-                            \f
-                            ]
-                            \revert DynamicLineSpanner.staff-padding
-                        }
+                        \override DynamicLineSpanner.staff-padding = 5
+                        e'8
+                        - \tweak color #(x11-color 'blue)
+                        \p
+                        \<
+                        [
+                        d''8
+                        f'8
+                        e''8
+                        ]
+                        g'8
+                        [
+                        f''8
+                        e'8
+                        ]
+                        d''8
+                        [
+                        f'8
+                        e''8
+                        g'8
+                        ]
+                        f''8
+                        [
+                        e'8
+                        d''8
+                        \f
+                        ]
+                        \revert DynamicLineSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -1189,7 +1168,6 @@ def hairpin(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -1212,10 +1190,10 @@ def hairpin(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -1230,47 +1208,41 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override DynamicLineSpanner.staff-padding = 5
-                            e'8
-                            - \tweak color #(x11-color 'blue)
-                            \baca-effort-ff
-                            - \tweak to-barline ##t
-                            - \tweak circled-tip ##t
-                            \>
-                            [
-                            d''8
-                            f'8
-                            c''8
-                            ]
-                            g'8
-                            [
-                            f''8
-                            e'8
-                            ]
-                            d''8
-                            [
-                            f'8
-                            c''8
-                            g'8
-                            ]
-                            f''8
-                            [
-                            e'8
-                            d''8
-                            \!
-                            ]
-                            \revert DynamicLineSpanner.staff-padding
-                        }
+                        \override DynamicLineSpanner.staff-padding = 5
+                        e'8
+                        - \tweak color #(x11-color 'blue)
+                        \baca-effort-ff
+                        - \tweak to-barline ##t
+                        - \tweak circled-tip ##t
+                        \>
+                        [
+                        d''8
+                        f'8
+                        c''8
+                        ]
+                        g'8
+                        [
+                        f''8
+                        e'8
+                        ]
+                        d''8
+                        [
+                        f'8
+                        c''8
+                        g'8
+                        ]
+                        f''8
+                        [
+                        e'8
+                        d''8
+                        \!
+                        ]
+                        \revert DynamicLineSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -1278,7 +1250,6 @@ def hairpin(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -1301,10 +1272,10 @@ def hairpin(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -1319,46 +1290,40 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override DynamicLineSpanner.staff-padding = 5
-                            e'8
-                            - \tweak color #(x11-color 'blue)
-                            \!
-                            - \tweak circled-tip ##t
-                            \<
-                            [
-                            d''8
-                            f'8
-                            c''8
-                            ]
-                            g'8
-                            [
-                            f''8
-                            e'8
-                            ]
-                            d''8
-                            [
-                            f'8
-                            c''8
-                            g'8
-                            ]
-                            f''8
-                            [
-                            e'8
-                            d''8
-                            \baca-effort-ff
-                            ]
-                            \revert DynamicLineSpanner.staff-padding
-                        }
+                        \override DynamicLineSpanner.staff-padding = 5
+                        e'8
+                        - \tweak color #(x11-color 'blue)
+                        \!
+                        - \tweak circled-tip ##t
+                        \<
+                        [
+                        d''8
+                        f'8
+                        c''8
+                        ]
+                        g'8
+                        [
+                        f''8
+                        e'8
+                        ]
+                        d''8
+                        [
+                        f'8
+                        c''8
+                        g'8
+                        ]
+                        f''8
+                        [
+                        e'8
+                        d''8
+                        \baca-effort-ff
+                        ]
+                        \revert DynamicLineSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -1366,7 +1331,6 @@ def hairpin(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -1389,10 +1353,10 @@ def hairpin(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -1407,46 +1371,40 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override DynamicLineSpanner.staff-padding = 5
-                            e'8
-                            - \tweak color #(x11-color 'blue)
-                            \baca-effort-p
-                            - \tweak stencil #constante-hairpin
-                            \<
-                            [
-                            d''8
-                            f'8
-                            c''8
-                            ]
-                            g'8
-                            [
-                            f''8
-                            e'8
-                            ]
-                            d''8
-                            [
-                            f'8
-                            c''8
-                            g'8
-                            ]
-                            f''8
-                            [
-                            e'8
-                            d''8
-                            \f
-                            ]
-                            \revert DynamicLineSpanner.staff-padding
-                        }
+                        \override DynamicLineSpanner.staff-padding = 5
+                        e'8
+                        - \tweak color #(x11-color 'blue)
+                        \baca-effort-p
+                        - \tweak stencil #constante-hairpin
+                        \<
+                        [
+                        d''8
+                        f'8
+                        c''8
+                        ]
+                        g'8
+                        [
+                        f''8
+                        e'8
+                        ]
+                        d''8
+                        [
+                        f'8
+                        c''8
+                        g'8
+                        ]
+                        f''8
+                        [
+                        e'8
+                        d''8
+                        \f
+                        ]
+                        \revert DynamicLineSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -1454,7 +1412,6 @@ def hairpin(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -1484,10 +1441,10 @@ def hairpin(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -1502,51 +1459,45 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override DynamicLineSpanner.staff-padding = 5
-                            e'8
-                            - \tweak color #(x11-color 'blue)
-                            \baca-effort-mp
-                            - \tweak stencil #abjad-flared-hairpin
-                            \<
-                            [
-                            d''8
-                            f'8
-                            c''8
-                            ]
-                            g'8
-                            [
-                            f''8
-                            e'8
-                            \baca-effort-f
-                            ]
-                            d''8
-                            - \tweak color #(x11-color 'blue)
-                            \baca-effort-mf
-                            - \tweak stencil #abjad-flared-hairpin
-                            \>
-                            [
-                            f'8
-                            c''8
-                            g'8
-                            ]
-                            f''8
-                            [
-                            e'8
-                            d''8
-                            \baca-effort-p
-                            ]
-                            \revert DynamicLineSpanner.staff-padding
-                        }
+                        \override DynamicLineSpanner.staff-padding = 5
+                        e'8
+                        - \tweak color #(x11-color 'blue)
+                        \baca-effort-mp
+                        - \tweak stencil #abjad-flared-hairpin
+                        \<
+                        [
+                        d''8
+                        f'8
+                        c''8
+                        ]
+                        g'8
+                        [
+                        f''8
+                        e'8
+                        \baca-effort-f
+                        ]
+                        d''8
+                        - \tweak color #(x11-color 'blue)
+                        \baca-effort-mf
+                        - \tweak stencil #abjad-flared-hairpin
+                        \>
+                        [
+                        f'8
+                        c''8
+                        g'8
+                        ]
+                        f''8
+                        [
+                        e'8
+                        d''8
+                        \baca-effort-p
+                        ]
+                        \revert DynamicLineSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -1554,7 +1505,6 @@ def hairpin(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -1580,10 +1530,10 @@ def hairpin(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -1598,52 +1548,45 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override DynamicLineSpanner.staff-padding = 5
-                            e'8
-                            \p
-                            [
-                            d''8
-                            f'8
-                            e''8
-                            ]
-                            g'8
-                            \f
-                            [
-                            f''8
-                            e'8
-                            ]
-                            d''8
-                            \p
-                            [
-                            f'8
-                            e''8
-                            g'8
-                            ]
-                            f''8
-                            \f
-                            [
-                            e'8
-                            d''8
-                            \p
-                            ]
-                            \revert DynamicLineSpanner.staff-padding
-                        }
+                        \override DynamicLineSpanner.staff-padding = 5
+                        e'8
+                        \p
+                        [
+                        d''8
+                        f'8
+                        e''8
+                        ]
+                        g'8
+                        \f
+                        [
+                        f''8
+                        e'8
+                        ]
+                        d''8
+                        \p
+                        [
+                        f'8
+                        e''8
+                        g'8
+                        ]
+                        f''8
+                        \f
+                        [
+                        e'8
+                        d''8
+                        \p
+                        ]
+                        \revert DynamicLineSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
         With hairpins:
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -1669,10 +1612,10 @@ def hairpin(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -1687,60 +1630,53 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override DynamicLineSpanner.staff-padding = 5
-                            e'8
-                            - \tweak color #(x11-color 'blue)
-                            \p
-                            \<
-                            [
-                            d''8
-                            f'8
-                            e''8
-                            ]
-                            g'8
-                            - \tweak color #(x11-color 'blue)
-                            \f
-                            \>
-                            [
-                            f''8
-                            e'8
-                            ]
-                            d''8
-                            - \tweak color #(x11-color 'blue)
-                            \p
-                            \<
-                            [
-                            f'8
-                            e''8
-                            g'8
-                            ]
-                            f''8
-                            - \tweak color #(x11-color 'blue)
-                            \f
-                            \>
-                            [
-                            e'8
-                            d''8
-                            \p
-                            ]
-                            \revert DynamicLineSpanner.staff-padding
-                        }
+                        \override DynamicLineSpanner.staff-padding = 5
+                        e'8
+                        - \tweak color #(x11-color 'blue)
+                        \p
+                        \<
+                        [
+                        d''8
+                        f'8
+                        e''8
+                        ]
+                        g'8
+                        - \tweak color #(x11-color 'blue)
+                        \f
+                        \>
+                        [
+                        f''8
+                        e'8
+                        ]
+                        d''8
+                        - \tweak color #(x11-color 'blue)
+                        \p
+                        \<
+                        [
+                        f'8
+                        e''8
+                        g'8
+                        ]
+                        f''8
+                        - \tweak color #(x11-color 'blue)
+                        \f
+                        \>
+                        [
+                        e'8
+                        d''8
+                        \p
+                        ]
+                        \revert DynamicLineSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
         Bookends each piece:
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -1767,10 +1703,10 @@ def hairpin(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -1785,55 +1721,48 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override DynamicLineSpanner.staff-padding = 5
-                            e'8
-                            \p
-                            [
-                            d''8
-                            f'8
-                            e''8
-                            \f
-                            ]
-                            g'8
-                            \f
-                            [
-                            f''8
-                            e'8
-                            \p
-                            ]
-                            d''8
-                            \p
-                            [
-                            f'8
-                            e''8
-                            g'8
-                            \f
-                            ]
-                            f''8
-                            \f
-                            [
-                            e'8
-                            d''8
-                            \p
-                            ]
-                            \revert DynamicLineSpanner.staff-padding
-                        }
+                        \override DynamicLineSpanner.staff-padding = 5
+                        e'8
+                        \p
+                        [
+                        d''8
+                        f'8
+                        e''8
+                        \f
+                        ]
+                        g'8
+                        \f
+                        [
+                        f''8
+                        e'8
+                        \p
+                        ]
+                        d''8
+                        \p
+                        [
+                        f'8
+                        e''8
+                        g'8
+                        \f
+                        ]
+                        f''8
+                        \f
+                        [
+                        e'8
+                        d''8
+                        \p
+                        ]
+                        \revert DynamicLineSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
         With hairpins:
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -1860,10 +1789,10 @@ def hairpin(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -1878,59 +1807,53 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override DynamicLineSpanner.staff-padding = 5
-                            e'8
-                            - \tweak color #(x11-color 'blue)
-                            \p
-                            - \tweak stencil #constante-hairpin
-                            \<
-                            [
-                            d''8
-                            f'8
-                            e''8
-                            \f
-                            ]
-                            g'8
-                            - \tweak color #(x11-color 'blue)
-                            \f
-                            \>
-                            [
-                            f''8
-                            e'8
-                            \p
-                            ]
-                            d''8
-                            - \tweak color #(x11-color 'blue)
-                            \p
-                            - \tweak stencil #constante-hairpin
-                            \<
-                            [
-                            f'8
-                            e''8
-                            g'8
-                            \f
-                            ]
-                            f''8
-                            - \tweak color #(x11-color 'blue)
-                            \f
-                            \>
-                            [
-                            e'8
-                            d''8
-                            \p
-                            ]
-                            \revert DynamicLineSpanner.staff-padding
-                        }
+                        \override DynamicLineSpanner.staff-padding = 5
+                        e'8
+                        - \tweak color #(x11-color 'blue)
+                        \p
+                        - \tweak stencil #constante-hairpin
+                        \<
+                        [
+                        d''8
+                        f'8
+                        e''8
+                        \f
+                        ]
+                        g'8
+                        - \tweak color #(x11-color 'blue)
+                        \f
+                        \>
+                        [
+                        f''8
+                        e'8
+                        \p
+                        ]
+                        d''8
+                        - \tweak color #(x11-color 'blue)
+                        \p
+                        - \tweak stencil #constante-hairpin
+                        \<
+                        [
+                        f'8
+                        e''8
+                        g'8
+                        \f
+                        ]
+                        f''8
+                        - \tweak color #(x11-color 'blue)
+                        \f
+                        \>
+                        [
+                        e'8
+                        d''8
+                        \p
+                        ]
+                        \revert DynamicLineSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -1938,7 +1861,6 @@ def hairpin(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -1961,10 +1883,10 @@ def hairpin(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -1979,42 +1901,36 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override DynamicLineSpanner.staff-padding = 5
-                            e'8
-                            \f
-                            [
-                            d''8
-                            f'8
-                            c''8
-                            ]
-                            g'8
-                            [
-                            f''8
-                            e'8
-                            ]
-                            d''8
-                            [
-                            f'8
-                            c''8
-                            g'8
-                            ]
-                            f''8
-                            [
-                            e'8
-                            d''8
-                            ]
-                            \revert DynamicLineSpanner.staff-padding
-                        }
+                        \override DynamicLineSpanner.staff-padding = 5
+                        e'8
+                        \f
+                        [
+                        d''8
+                        f'8
+                        c''8
+                        ]
+                        g'8
+                        [
+                        f''8
+                        e'8
+                        ]
+                        d''8
+                        [
+                        f'8
+                        c''8
+                        g'8
+                        ]
+                        f''8
+                        [
+                        e'8
+                        d''8
+                        ]
+                        \revert DynamicLineSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -2022,7 +1938,6 @@ def hairpin(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -2045,10 +1960,10 @@ def hairpin(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -2063,43 +1978,37 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override DynamicLineSpanner.staff-padding = 5
-                            e'8
-                            \<
-                            [
-                            d''8
-                            f'8
-                            c''8
-                            ]
-                            g'8
-                            [
-                            f''8
-                            e'8
-                            ]
-                            d''8
-                            [
-                            f'8
-                            c''8
-                            g'8
-                            ]
-                            f''8
-                            [
-                            e'8
-                            d''8
-                            \!
-                            ]
-                            \revert DynamicLineSpanner.staff-padding
-                        }
+                        \override DynamicLineSpanner.staff-padding = 5
+                        e'8
+                        \<
+                        [
+                        d''8
+                        f'8
+                        c''8
+                        ]
+                        g'8
+                        [
+                        f''8
+                        e'8
+                        ]
+                        d''8
+                        [
+                        f'8
+                        c''8
+                        g'8
+                        ]
+                        f''8
+                        [
+                        e'8
+                        d''8
+                        \!
+                        ]
+                        \revert DynamicLineSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -2107,7 +2016,6 @@ def hairpin(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -2139,10 +2047,10 @@ def hairpin(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -2157,41 +2065,35 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
                         {
-                            {
-                                \override DynamicLineSpanner.staff-padding = 4
-                                c'2
-                                - \tweak color #(x11-color 'blue)
-                                - \tweak to-barline ##t
-                                \p
-                                - \tweak to-barline ##t
-                                - \tweak stencil #constante-hairpin
-                                \<
-                                r4.
-                                - \tweak to-barline ##t
-                                \!
-                                d'2
-                                - \tweak color #(x11-color 'blue)
-                                - \tweak to-barline ##t
-                                \f
-                                - \tweak to-barline ##t
-                                - \tweak stencil #constante-hairpin
-                                \<
-                                r4.
-                                - \tweak to-barline ##t
-                                \!
-                                \revert DynamicLineSpanner.staff-padding
-                            }
+                            \override DynamicLineSpanner.staff-padding = 4
+                            c'2
+                            - \tweak color #(x11-color 'blue)
+                            - \tweak to-barline ##t
+                            \p
+                            - \tweak to-barline ##t
+                            - \tweak stencil #constante-hairpin
+                            \<
+                            r4.
+                            - \tweak to-barline ##t
+                            \!
+                            d'2
+                            - \tweak color #(x11-color 'blue)
+                            - \tweak to-barline ##t
+                            \f
+                            - \tweak to-barline ##t
+                            - \tweak stencil #constante-hairpin
+                            \<
+                            r4.
+                            - \tweak to-barline ##t
+                            \!
+                            \revert DynamicLineSpanner.staff-padding
                         }
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -2199,7 +2101,6 @@ def hairpin(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -2226,10 +2127,10 @@ def hairpin(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -2244,47 +2145,41 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override DynamicLineSpanner.staff-padding = 4
-                            e'8
-                            \mf
-                            [
-                            d''8
-                            f'8
-                            e''8
-                            ]
-                            g'8
-                            - \tweak color #(x11-color 'blue)
-                            \!
-                            - \tweak circled-tip ##t
-                            \<
-                            [
-                            f''8
-                            e'8
-                            ]
-                            d''8
-                            [
-                            f'8
-                            e''8
-                            g'8
-                            ]
-                            f''8
-                            \p
-                            [
-                            e'8
-                            d''8
-                            ]
-                            \revert DynamicLineSpanner.staff-padding
-                        }
+                        \override DynamicLineSpanner.staff-padding = 4
+                        e'8
+                        \mf
+                        [
+                        d''8
+                        f'8
+                        e''8
+                        ]
+                        g'8
+                        - \tweak color #(x11-color 'blue)
+                        \!
+                        - \tweak circled-tip ##t
+                        \<
+                        [
+                        f''8
+                        e'8
+                        ]
+                        d''8
+                        [
+                        f'8
+                        e''8
+                        g'8
+                        ]
+                        f''8
+                        \p
+                        [
+                        e'8
+                        d''8
+                        ]
+                        \revert DynamicLineSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -2292,7 +2187,6 @@ def hairpin(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -2315,10 +2209,10 @@ def hairpin(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -2333,45 +2227,39 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override DynamicLineSpanner.staff-padding = 4
-                            e'8
-                            - \tweak color #(x11-color 'blue)
-                            \baca-mp-parenthesized
-                            \<
-                            [
-                            d''8
-                            f'8
-                            e''8
-                            ]
-                            g'8
-                            [
-                            f''8
-                            e'8
-                            ]
-                            d''8
-                            [
-                            f'8
-                            e''8
-                            g'8
-                            ]
-                            f''8
-                            [
-                            e'8
-                            d''8
-                            \mf
-                            ]
-                            \revert DynamicLineSpanner.staff-padding
-                        }
+                        \override DynamicLineSpanner.staff-padding = 4
+                        e'8
+                        - \tweak color #(x11-color 'blue)
+                        \baca-mp-parenthesized
+                        \<
+                        [
+                        d''8
+                        f'8
+                        e''8
+                        ]
+                        g'8
+                        [
+                        f''8
+                        e'8
+                        ]
+                        d''8
+                        [
+                        f'8
+                        e''8
+                        g'8
+                        ]
+                        f''8
+                        [
+                        e'8
+                        d''8
+                        \mf
+                        ]
+                        \revert DynamicLineSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
     """
     if isinstance(dynamics, str):
@@ -3276,7 +3164,6 @@ def text_spanner(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -3299,10 +3186,10 @@ def text_spanner(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -3317,54 +3204,47 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override TextSpanner.staff-padding = 4.5
-                            e'8
-                            [
-                            - \abjad-dashed-line-with-arrow
-                            - \baca-text-spanner-left-text "pont."
-                            - \baca-text-spanner-right-text "ord."
-                            - \tweak bound-details.right.padding 0.5
-                            - \tweak bound-details.right.stencil-align-dir-y #center
-                            \startTextSpan
-                            d''8
-                            f'8
-                            e''8
-                            ]
-                            g'8
-                            [
-                            f''8
-                            e'8
-                            ]
-                            d''8
-                            [
-                            f'8
-                            e''8
-                            g'8
-                            ]
-                            f''8
-                            [
-                            e'8
-                            d''8
-                            \stopTextSpan
-                            ]
-                            \revert TextSpanner.staff-padding
-                        }
+                        \override TextSpanner.staff-padding = 4.5
+                        e'8
+                        [
+                        - \abjad-dashed-line-with-arrow
+                        - \baca-text-spanner-left-text "pont."
+                        - \baca-text-spanner-right-text "ord."
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
+                        \startTextSpan
+                        d''8
+                        f'8
+                        e''8
+                        ]
+                        g'8
+                        [
+                        f''8
+                        e'8
+                        ]
+                        d''8
+                        [
+                        f'8
+                        e''8
+                        g'8
+                        ]
+                        f''8
+                        [
+                        e'8
+                        d''8
+                        \stopTextSpan
+                        ]
+                        \revert TextSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
         Dashed line with hook:
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -3387,10 +3267,10 @@ def text_spanner(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -3405,54 +3285,47 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override TextSpanner.staff-padding = 4.5
-                            e'8
-                            [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-text "pont."
-                            - \tweak bound-details.right.text \markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75 \general-align #Y #1 \upright ord. }
-                            - \tweak bound-details.right.padding 1.25
-                            - \tweak bound-details.right.stencil-align-dir-y #center
-                            \startTextSpan
-                            d''8
-                            f'8
-                            e''8
-                            ]
-                            g'8
-                            [
-                            f''8
-                            e'8
-                            ]
-                            d''8
-                            [
-                            f'8
-                            e''8
-                            g'8
-                            ]
-                            f''8
-                            [
-                            e'8
-                            d''8
-                            \stopTextSpan
-                            ]
-                            \revert TextSpanner.staff-padding
-                        }
+                        \override TextSpanner.staff-padding = 4.5
+                        e'8
+                        [
+                        - \abjad-dashed-line-with-hook
+                        - \baca-text-spanner-left-text "pont."
+                        - \tweak bound-details.right.text \markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75 \general-align #Y #1 \upright ord. }
+                        - \tweak bound-details.right.padding 1.25
+                        - \tweak bound-details.right.stencil-align-dir-y #center
+                        \startTextSpan
+                        d''8
+                        f'8
+                        e''8
+                        ]
+                        g'8
+                        [
+                        f''8
+                        e'8
+                        ]
+                        d''8
+                        [
+                        f'8
+                        e''8
+                        g'8
+                        ]
+                        f''8
+                        [
+                        e'8
+                        d''8
+                        \stopTextSpan
+                        ]
+                        \revert TextSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
         Solid line with arrow:
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -3475,10 +3348,10 @@ def text_spanner(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -3493,54 +3366,47 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override TextSpanner.staff-padding = 4.5
-                            e'8
-                            [
-                            - \abjad-solid-line-with-arrow
-                            - \baca-text-spanner-left-text "pont."
-                            - \baca-text-spanner-right-text "ord."
-                            - \tweak bound-details.right.padding 0.5
-                            - \tweak bound-details.right.stencil-align-dir-y #center
-                            \startTextSpan
-                            d''8
-                            f'8
-                            e''8
-                            ]
-                            g'8
-                            [
-                            f''8
-                            e'8
-                            ]
-                            d''8
-                            [
-                            f'8
-                            e''8
-                            g'8
-                            ]
-                            f''8
-                            [
-                            e'8
-                            d''8
-                            \stopTextSpan
-                            ]
-                            \revert TextSpanner.staff-padding
-                        }
+                        \override TextSpanner.staff-padding = 4.5
+                        e'8
+                        [
+                        - \abjad-solid-line-with-arrow
+                        - \baca-text-spanner-left-text "pont."
+                        - \baca-text-spanner-right-text "ord."
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
+                        \startTextSpan
+                        d''8
+                        f'8
+                        e''8
+                        ]
+                        g'8
+                        [
+                        f''8
+                        e'8
+                        ]
+                        d''8
+                        [
+                        f'8
+                        e''8
+                        g'8
+                        ]
+                        f''8
+                        [
+                        e'8
+                        d''8
+                        \stopTextSpan
+                        ]
+                        \revert TextSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
         Solid line with hook:
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -3563,10 +3429,10 @@ def text_spanner(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -3581,54 +3447,47 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override TextSpanner.staff-padding = 4.5
-                            e'8
-                            [
-                            - \abjad-solid-line-with-hook
-                            - \baca-text-spanner-left-text "pont."
-                            - \tweak bound-details.right.text \markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75 \general-align #Y #1 \upright ord. }
-                            - \tweak bound-details.right.padding 1.25
-                            - \tweak bound-details.right.stencil-align-dir-y #center
-                            \startTextSpan
-                            d''8
-                            f'8
-                            e''8
-                            ]
-                            g'8
-                            [
-                            f''8
-                            e'8
-                            ]
-                            d''8
-                            [
-                            f'8
-                            e''8
-                            g'8
-                            ]
-                            f''8
-                            [
-                            e'8
-                            d''8
-                            \stopTextSpan
-                            ]
-                            \revert TextSpanner.staff-padding
-                        }
+                        \override TextSpanner.staff-padding = 4.5
+                        e'8
+                        [
+                        - \abjad-solid-line-with-hook
+                        - \baca-text-spanner-left-text "pont."
+                        - \tweak bound-details.right.text \markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75 \general-align #Y #1 \upright ord. }
+                        - \tweak bound-details.right.padding 1.25
+                        - \tweak bound-details.right.stencil-align-dir-y #center
+                        \startTextSpan
+                        d''8
+                        f'8
+                        e''8
+                        ]
+                        g'8
+                        [
+                        f''8
+                        e'8
+                        ]
+                        d''8
+                        [
+                        f'8
+                        e''8
+                        g'8
+                        ]
+                        f''8
+                        [
+                        e'8
+                        d''8
+                        \stopTextSpan
+                        ]
+                        \revert TextSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
         Invisible lines:
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -3651,10 +3510,10 @@ def text_spanner(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -3669,48 +3528,42 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override TextSpanner.staff-padding = 4.5
-                            e'8
-                            [
-                            - \abjad-invisible-line
-                            - \baca-text-spanner-left-text "pont."
-                            - \baca-text-spanner-right-text "ord."
-                            - \tweak bound-details.right.padding 0.5
-                            - \tweak bound-details.right.stencil-align-dir-y #center
-                            \startTextSpan
-                            d''8
-                            f'8
-                            e''8
-                            ]
-                            g'8
-                            [
-                            f''8
-                            e'8
-                            ]
-                            d''8
-                            [
-                            f'8
-                            e''8
-                            g'8
-                            ]
-                            f''8
-                            [
-                            e'8
-                            d''8
-                            \stopTextSpan
-                            ]
-                            \revert TextSpanner.staff-padding
-                        }
+                        \override TextSpanner.staff-padding = 4.5
+                        e'8
+                        [
+                        - \abjad-invisible-line
+                        - \baca-text-spanner-left-text "pont."
+                        - \baca-text-spanner-right-text "ord."
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
+                        \startTextSpan
+                        d''8
+                        f'8
+                        e''8
+                        ]
+                        g'8
+                        [
+                        f''8
+                        e'8
+                        ]
+                        d''8
+                        [
+                        f'8
+                        e''8
+                        g'8
+                        ]
+                        f''8
+                        [
+                        e'8
+                        d''8
+                        \stopTextSpan
+                        ]
+                        \revert TextSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -3718,7 +3571,6 @@ def text_spanner(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -3745,10 +3597,10 @@ def text_spanner(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -3763,68 +3615,61 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override DynamicLineSpanner.staff-padding = 5
-                            \override TextSpanner.staff-padding = 4.5
-                            e'8
-                            [
-                            - \abjad-invisible-line
-                            - \baca-text-spanner-left-text "A"
-                            \startTextSpan
-                            d''8
-                            f'8
-                            e''8
-                            ]
-                            g'8
-                            \stopTextSpan
-                            [
-                            - \abjad-invisible-line
-                            - \baca-text-spanner-left-text "B"
-                            \startTextSpan
-                            f''8
-                            e'8
-                            ]
-                            d''8
-                            \stopTextSpan
-                            [
-                            - \abjad-invisible-line
-                            - \baca-text-spanner-left-text "A"
-                            \startTextSpan
-                            f'8
-                            e''8
-                            g'8
-                            ]
-                            f''8
-                            \stopTextSpan
-                            [
-                            - \abjad-invisible-line
-                            - \baca-text-spanner-left-text "B"
-                            - \baca-text-spanner-right-text "A"
-                            - \tweak bound-details.right.padding 0.5
-                            - \tweak bound-details.right.stencil-align-dir-y #center
-                            \startTextSpan
-                            e'8
-                            d''8
-                            \stopTextSpan
-                            ]
-                            \revert DynamicLineSpanner.staff-padding
-                            \revert TextSpanner.staff-padding
-                        }
+                        \override DynamicLineSpanner.staff-padding = 5
+                        \override TextSpanner.staff-padding = 4.5
+                        e'8
+                        [
+                        - \abjad-invisible-line
+                        - \baca-text-spanner-left-text "A"
+                        \startTextSpan
+                        d''8
+                        f'8
+                        e''8
+                        ]
+                        g'8
+                        \stopTextSpan
+                        [
+                        - \abjad-invisible-line
+                        - \baca-text-spanner-left-text "B"
+                        \startTextSpan
+                        f''8
+                        e'8
+                        ]
+                        d''8
+                        \stopTextSpan
+                        [
+                        - \abjad-invisible-line
+                        - \baca-text-spanner-left-text "A"
+                        \startTextSpan
+                        f'8
+                        e''8
+                        g'8
+                        ]
+                        f''8
+                        \stopTextSpan
+                        [
+                        - \abjad-invisible-line
+                        - \baca-text-spanner-left-text "B"
+                        - \baca-text-spanner-right-text "A"
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
+                        \startTextSpan
+                        e'8
+                        d''8
+                        \stopTextSpan
+                        ]
+                        \revert DynamicLineSpanner.staff-padding
+                        \revert TextSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
         With spanners:
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -3851,10 +3696,10 @@ def text_spanner(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -3869,68 +3714,61 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override DynamicLineSpanner.staff-padding = 5
-                            \override TextSpanner.staff-padding = 4.5
-                            e'8
-                            [
-                            - \abjad-solid-line-with-arrow
-                            - \baca-text-spanner-left-text "A"
-                            \startTextSpan
-                            d''8
-                            f'8
-                            e''8
-                            ]
-                            g'8
-                            \stopTextSpan
-                            [
-                            - \abjad-solid-line-with-arrow
-                            - \baca-text-spanner-left-text "B"
-                            \startTextSpan
-                            f''8
-                            e'8
-                            ]
-                            d''8
-                            \stopTextSpan
-                            [
-                            - \abjad-solid-line-with-arrow
-                            - \baca-text-spanner-left-text "A"
-                            \startTextSpan
-                            f'8
-                            e''8
-                            g'8
-                            ]
-                            f''8
-                            \stopTextSpan
-                            [
-                            - \abjad-solid-line-with-arrow
-                            - \baca-text-spanner-left-text "B"
-                            - \baca-text-spanner-right-text "A"
-                            - \tweak bound-details.right.padding 0.5
-                            - \tweak bound-details.right.stencil-align-dir-y #center
-                            \startTextSpan
-                            e'8
-                            d''8
-                            \stopTextSpan
-                            ]
-                            \revert DynamicLineSpanner.staff-padding
-                            \revert TextSpanner.staff-padding
-                        }
+                        \override DynamicLineSpanner.staff-padding = 5
+                        \override TextSpanner.staff-padding = 4.5
+                        e'8
+                        [
+                        - \abjad-solid-line-with-arrow
+                        - \baca-text-spanner-left-text "A"
+                        \startTextSpan
+                        d''8
+                        f'8
+                        e''8
+                        ]
+                        g'8
+                        \stopTextSpan
+                        [
+                        - \abjad-solid-line-with-arrow
+                        - \baca-text-spanner-left-text "B"
+                        \startTextSpan
+                        f''8
+                        e'8
+                        ]
+                        d''8
+                        \stopTextSpan
+                        [
+                        - \abjad-solid-line-with-arrow
+                        - \baca-text-spanner-left-text "A"
+                        \startTextSpan
+                        f'8
+                        e''8
+                        g'8
+                        ]
+                        f''8
+                        \stopTextSpan
+                        [
+                        - \abjad-solid-line-with-arrow
+                        - \baca-text-spanner-left-text "B"
+                        - \baca-text-spanner-right-text "A"
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
+                        \startTextSpan
+                        e'8
+                        d''8
+                        \stopTextSpan
+                        ]
+                        \revert DynamicLineSpanner.staff-padding
+                        \revert TextSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
         Bookends each piece:
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -3958,10 +3796,10 @@ def text_spanner(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -3976,77 +3814,70 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override DynamicLineSpanner.staff-padding = 5
-                            \override TextSpanner.staff-padding = 4.5
-                            e'8
-                            [
-                            - \abjad-invisible-line
-                            - \baca-text-spanner-left-text "A"
-                            - \baca-text-spanner-right-text "B"
-                            - \tweak bound-details.right.padding 0.5
-                            - \tweak bound-details.right.stencil-align-dir-y #center
-                            \startTextSpan
-                            d''8
-                            f'8
-                            e''8
-                            \stopTextSpan
-                            ]
-                            g'8
-                            [
-                            - \abjad-invisible-line
-                            - \baca-text-spanner-left-text "B"
-                            - \baca-text-spanner-right-text "A"
-                            - \tweak bound-details.right.padding 0.5
-                            - \tweak bound-details.right.stencil-align-dir-y #center
-                            \startTextSpan
-                            f''8
-                            e'8
-                            \stopTextSpan
-                            ]
-                            d''8
-                            [
-                            - \abjad-invisible-line
-                            - \baca-text-spanner-left-text "A"
-                            - \baca-text-spanner-right-text "B"
-                            - \tweak bound-details.right.padding 0.5
-                            - \tweak bound-details.right.stencil-align-dir-y #center
-                            \startTextSpan
-                            f'8
-                            e''8
-                            g'8
-                            \stopTextSpan
-                            ]
-                            f''8
-                            [
-                            - \abjad-invisible-line
-                            - \baca-text-spanner-left-text "B"
-                            - \baca-text-spanner-right-text "A"
-                            - \tweak bound-details.right.padding 0.5
-                            - \tweak bound-details.right.stencil-align-dir-y #center
-                            \startTextSpan
-                            e'8
-                            d''8
-                            \stopTextSpan
-                            ]
-                            \revert DynamicLineSpanner.staff-padding
-                            \revert TextSpanner.staff-padding
-                        }
+                        \override DynamicLineSpanner.staff-padding = 5
+                        \override TextSpanner.staff-padding = 4.5
+                        e'8
+                        [
+                        - \abjad-invisible-line
+                        - \baca-text-spanner-left-text "A"
+                        - \baca-text-spanner-right-text "B"
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
+                        \startTextSpan
+                        d''8
+                        f'8
+                        e''8
+                        \stopTextSpan
+                        ]
+                        g'8
+                        [
+                        - \abjad-invisible-line
+                        - \baca-text-spanner-left-text "B"
+                        - \baca-text-spanner-right-text "A"
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
+                        \startTextSpan
+                        f''8
+                        e'8
+                        \stopTextSpan
+                        ]
+                        d''8
+                        [
+                        - \abjad-invisible-line
+                        - \baca-text-spanner-left-text "A"
+                        - \baca-text-spanner-right-text "B"
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
+                        \startTextSpan
+                        f'8
+                        e''8
+                        g'8
+                        \stopTextSpan
+                        ]
+                        f''8
+                        [
+                        - \abjad-invisible-line
+                        - \baca-text-spanner-left-text "B"
+                        - \baca-text-spanner-right-text "A"
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
+                        \startTextSpan
+                        e'8
+                        d''8
+                        \stopTextSpan
+                        ]
+                        \revert DynamicLineSpanner.staff-padding
+                        \revert TextSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
         With spanners:
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -4074,10 +3905,10 @@ def text_spanner(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -4092,71 +3923,65 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override DynamicLineSpanner.staff-padding = 5
-                            \override TextSpanner.staff-padding = 4.5
-                            e'8
-                            [
-                            - \abjad-solid-line-with-arrow
-                            - \baca-text-spanner-left-text "A"
-                            - \baca-text-spanner-right-text "B"
-                            - \tweak bound-details.right.padding 0.5
-                            - \tweak bound-details.right.stencil-align-dir-y #center
-                            \startTextSpan
-                            d''8
-                            f'8
-                            e''8
-                            \stopTextSpan
-                            ]
-                            g'8
-                            [
-                            - \abjad-solid-line-with-arrow
-                            - \baca-text-spanner-left-text "B"
-                            - \baca-text-spanner-right-text "A"
-                            - \tweak bound-details.right.padding 0.5
-                            - \tweak bound-details.right.stencil-align-dir-y #center
-                            \startTextSpan
-                            f''8
-                            e'8
-                            \stopTextSpan
-                            ]
-                            d''8
-                            [
-                            - \abjad-solid-line-with-arrow
-                            - \baca-text-spanner-left-text "A"
-                            - \baca-text-spanner-right-text "B"
-                            - \tweak bound-details.right.padding 0.5
-                            - \tweak bound-details.right.stencil-align-dir-y #center
-                            \startTextSpan
-                            f'8
-                            e''8
-                            g'8
-                            \stopTextSpan
-                            ]
-                            f''8
-                            [
-                            - \abjad-solid-line-with-arrow
-                            - \baca-text-spanner-left-text "B"
-                            - \baca-text-spanner-right-text "A"
-                            - \tweak bound-details.right.padding 0.5
-                            - \tweak bound-details.right.stencil-align-dir-y #center
-                            \startTextSpan
-                            e'8
-                            d''8
-                            \stopTextSpan
-                            ]
-                            \revert DynamicLineSpanner.staff-padding
-                            \revert TextSpanner.staff-padding
-                        }
+                        \override DynamicLineSpanner.staff-padding = 5
+                        \override TextSpanner.staff-padding = 4.5
+                        e'8
+                        [
+                        - \abjad-solid-line-with-arrow
+                        - \baca-text-spanner-left-text "A"
+                        - \baca-text-spanner-right-text "B"
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
+                        \startTextSpan
+                        d''8
+                        f'8
+                        e''8
+                        \stopTextSpan
+                        ]
+                        g'8
+                        [
+                        - \abjad-solid-line-with-arrow
+                        - \baca-text-spanner-left-text "B"
+                        - \baca-text-spanner-right-text "A"
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
+                        \startTextSpan
+                        f''8
+                        e'8
+                        \stopTextSpan
+                        ]
+                        d''8
+                        [
+                        - \abjad-solid-line-with-arrow
+                        - \baca-text-spanner-left-text "A"
+                        - \baca-text-spanner-right-text "B"
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
+                        \startTextSpan
+                        f'8
+                        e''8
+                        g'8
+                        \stopTextSpan
+                        ]
+                        f''8
+                        [
+                        - \abjad-solid-line-with-arrow
+                        - \baca-text-spanner-left-text "B"
+                        - \baca-text-spanner-right-text "A"
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
+                        \startTextSpan
+                        e'8
+                        d''8
+                        \stopTextSpan
+                        ]
+                        \revert DynamicLineSpanner.staff-padding
+                        \revert TextSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -4165,7 +3990,6 @@ def text_spanner(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -4196,10 +4020,10 @@ def text_spanner(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -4214,43 +4038,37 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
                         {
-                            {
-                                \override TextSpanner.staff-padding = 4.5
-                                c'2
-                                - \abjad-solid-line-with-arrow
-                                - \baca-text-spanner-left-text "P"
-                                - \tweak color #red
-                                \startTextSpan
-                                d'4.
-                                \stopTextSpan
-                                - \abjad-solid-line-with-arrow
-                                - \baca-text-spanner-left-text "T"
-                                - \tweak color #blue
-                                \startTextSpan
-                                e'2
-                                \stopTextSpan
-                                - \abjad-solid-line-with-arrow
-                                - \baca-text-spanner-left-text "P"
-                                - \baca-text-spanner-right-text "T"
-                                - \tweak bound-details.right.padding 0.5
-                                - \tweak bound-details.right.stencil-align-dir-y #center
-                                - \tweak color #green
-                                \startTextSpan
-                                f'4.
-                                \stopTextSpan
-                                \revert TextSpanner.staff-padding
-                            }
+                            \override TextSpanner.staff-padding = 4.5
+                            c'2
+                            - \abjad-solid-line-with-arrow
+                            - \baca-text-spanner-left-text "P"
+                            - \tweak color #red
+                            \startTextSpan
+                            d'4.
+                            \stopTextSpan
+                            - \abjad-solid-line-with-arrow
+                            - \baca-text-spanner-left-text "T"
+                            - \tweak color #blue
+                            \startTextSpan
+                            e'2
+                            \stopTextSpan
+                            - \abjad-solid-line-with-arrow
+                            - \baca-text-spanner-left-text "P"
+                            - \baca-text-spanner-right-text "T"
+                            - \tweak bound-details.right.padding 0.5
+                            - \tweak bound-details.right.stencil-align-dir-y #center
+                            - \tweak color #green
+                            \startTextSpan
+                            f'4.
+                            \stopTextSpan
+                            \revert TextSpanner.staff-padding
                         }
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -4258,7 +4076,6 @@ def text_spanner(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -4286,10 +4103,10 @@ def text_spanner(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -4304,47 +4121,41 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override DynamicLineSpanner.staff-padding = 5
-                            \override TextSpanner.staff-padding = 4.5
-                            e'8
-                            [
-                            - \abjad-dashed-line-with-hook
-                            - \baca-text-spanner-left-markup \baca-damp-markup
-                            \startTextSpan
-                            d''8
-                            f'8
-                            e''8
-                            ]
-                            g'8
-                            [
-                            f''8
-                            e'8
-                            ]
-                            d''8
-                            \stopTextSpan
-                            [
-                            f'8
-                            e''8
-                            g'8
-                            ]
-                            f''8
-                            [
-                            e'8
-                            d''8
-                            ]
-                            \revert DynamicLineSpanner.staff-padding
-                            \revert TextSpanner.staff-padding
-                        }
+                        \override DynamicLineSpanner.staff-padding = 5
+                        \override TextSpanner.staff-padding = 4.5
+                        e'8
+                        [
+                        - \abjad-dashed-line-with-hook
+                        - \baca-text-spanner-left-markup \baca-damp-markup
+                        \startTextSpan
+                        d''8
+                        f'8
+                        e''8
+                        ]
+                        g'8
+                        [
+                        f''8
+                        e'8
+                        ]
+                        d''8
+                        \stopTextSpan
+                        [
+                        f'8
+                        e''8
+                        g'8
+                        ]
+                        f''8
+                        [
+                        e'8
+                        d''8
+                        ]
+                        \revert DynamicLineSpanner.staff-padding
+                        \revert TextSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -4352,7 +4163,6 @@ def text_spanner(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -4379,10 +4189,10 @@ def text_spanner(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -4397,62 +4207,56 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override DynamicLineSpanner.staff-padding = 5
-                            \override TextSpanner.staff-padding = 4.5
-                            e'8
-                            [
-                            - \abjad-solid-line-with-hook
-                            - \baca-text-spanner-left-text "A"
-                            \startTextSpan
-                            d''8
-                            f'8
-                            e''8
-                            ]
-                            g'8
-                            \stopTextSpan
-                            [
-                            - \abjad-solid-line-with-hook
-                            - \baca-text-spanner-left-text "B"
-                            \startTextSpan
-                            f''8
-                            e'8
-                            ]
-                            d''8
-                            \stopTextSpan
-                            [
-                            - \abjad-solid-line-with-hook
-                            - \baca-text-spanner-left-text "A"
-                            \startTextSpan
-                            f'8
-                            e''8
-                            g'8
-                            ]
-                            f''8
-                            \stopTextSpan
-                            [
-                            - \abjad-solid-line-with-hook
-                            - \baca-text-spanner-left-text "B"
-                            - \tweak bound-details.right.text \markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75 \general-align #Y #1 \upright A }
-                            - \tweak bound-details.right.padding 1.25
-                            - \tweak bound-details.right.stencil-align-dir-y #center
-                            \startTextSpan
-                            e'8
-                            d''8
-                            \stopTextSpan
-                            ]
-                            \revert DynamicLineSpanner.staff-padding
-                            \revert TextSpanner.staff-padding
-                        }
+                        \override DynamicLineSpanner.staff-padding = 5
+                        \override TextSpanner.staff-padding = 4.5
+                        e'8
+                        [
+                        - \abjad-solid-line-with-hook
+                        - \baca-text-spanner-left-text "A"
+                        \startTextSpan
+                        d''8
+                        f'8
+                        e''8
+                        ]
+                        g'8
+                        \stopTextSpan
+                        [
+                        - \abjad-solid-line-with-hook
+                        - \baca-text-spanner-left-text "B"
+                        \startTextSpan
+                        f''8
+                        e'8
+                        ]
+                        d''8
+                        \stopTextSpan
+                        [
+                        - \abjad-solid-line-with-hook
+                        - \baca-text-spanner-left-text "A"
+                        \startTextSpan
+                        f'8
+                        e''8
+                        g'8
+                        ]
+                        f''8
+                        \stopTextSpan
+                        [
+                        - \abjad-solid-line-with-hook
+                        - \baca-text-spanner-left-text "B"
+                        - \tweak bound-details.right.text \markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75 \general-align #Y #1 \upright A }
+                        - \tweak bound-details.right.padding 1.25
+                        - \tweak bound-details.right.stencil-align-dir-y #center
+                        \startTextSpan
+                        e'8
+                        d''8
+                        \stopTextSpan
+                        ]
+                        \revert DynamicLineSpanner.staff-padding
+                        \revert TextSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -4460,7 +4264,6 @@ def text_spanner(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8), (4, 8), (3, 8)],
@@ -4486,10 +4289,10 @@ def text_spanner(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -4510,48 +4313,42 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override TextSpanner.staff-padding = 4.5
-                            c'2
-                            - \abjad-solid-line-with-arrow
-                            - \baca-text-spanner-left-text "P"
-                            \startTextSpan
-                            d'4.
-                            \stopTextSpan
-                            - \abjad-solid-line-with-arrow
-                            - \baca-text-spanner-left-text "T"
-                            \startTextSpan
-                            e'2
-                            \stopTextSpan
-                            - \abjad-invisible-line
-                            - \baca-text-spanner-left-text "P"
-                            \startTextSpan
-                            f'4.
-                            \stopTextSpan
-                            - \abjad-solid-line-with-arrow
-                            - \baca-text-spanner-left-text "P"
-                            \startTextSpan
-                            g'2
-                            \stopTextSpan
-                            - \abjad-solid-line-with-arrow
-                            - \baca-text-spanner-left-text "T"
-                            - \baca-text-spanner-right-text "P"
-                            - \tweak bound-details.right.padding 0.5
-                            - \tweak bound-details.right.stencil-align-dir-y #center
-                            \startTextSpan
-                            a'4.
-                            \stopTextSpan
-                            \revert TextSpanner.staff-padding
-                        }
+                        \override TextSpanner.staff-padding = 4.5
+                        c'2
+                        - \abjad-solid-line-with-arrow
+                        - \baca-text-spanner-left-text "P"
+                        \startTextSpan
+                        d'4.
+                        \stopTextSpan
+                        - \abjad-solid-line-with-arrow
+                        - \baca-text-spanner-left-text "T"
+                        \startTextSpan
+                        e'2
+                        \stopTextSpan
+                        - \abjad-invisible-line
+                        - \baca-text-spanner-left-text "P"
+                        \startTextSpan
+                        f'4.
+                        \stopTextSpan
+                        - \abjad-solid-line-with-arrow
+                        - \baca-text-spanner-left-text "P"
+                        \startTextSpan
+                        g'2
+                        \stopTextSpan
+                        - \abjad-solid-line-with-arrow
+                        - \baca-text-spanner-left-text "T"
+                        - \baca-text-spanner-right-text "P"
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
+                        \startTextSpan
+                        a'4.
+                        \stopTextSpan
+                        \revert TextSpanner.staff-padding
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -4559,7 +4356,6 @@ def text_spanner(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -4586,10 +4382,10 @@ def text_spanner(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -4604,42 +4400,36 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
                         {
-                            {
-                                \override TextSpanner.staff-padding = 4.5
-                                c'2
-                                - \abjad-solid-line-with-arrow
-                                - \baca-text-spanner-left-text "P"
-                                \startTextSpan
-                                d'4.
-                                \stopTextSpan
-                                - \abjad-solid-line-with-arrow
-                                - \baca-text-spanner-left-text "T"
-                                \startTextSpan
-                                e'2
-                                \stopTextSpan
-                                - \abjad-solid-line-with-arrow
-                                - \baca-text-spanner-left-text "P"
-                                - \baca-text-spanner-right-text "T"
-                                - \tweak bound-details.right.padding 0.5
-                                - \tweak bound-details.right.stencil-align-dir-y #center
-                                \startTextSpan
-                                f'4
-                                \stopTextSpan
-                                ~
-                                f'8
-                                \revert TextSpanner.staff-padding
-                            }
+                            \override TextSpanner.staff-padding = 4.5
+                            c'2
+                            - \abjad-solid-line-with-arrow
+                            - \baca-text-spanner-left-text "P"
+                            \startTextSpan
+                            d'4.
+                            \stopTextSpan
+                            - \abjad-solid-line-with-arrow
+                            - \baca-text-spanner-left-text "T"
+                            \startTextSpan
+                            e'2
+                            \stopTextSpan
+                            - \abjad-solid-line-with-arrow
+                            - \baca-text-spanner-left-text "P"
+                            - \baca-text-spanner-right-text "T"
+                            - \tweak bound-details.right.padding 0.5
+                            - \tweak bound-details.right.stencil-align-dir-y #center
+                            \startTextSpan
+                            f'4
+                            \stopTextSpan
+                            ~
+                            f'8
+                            \revert TextSpanner.staff-padding
                         }
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example exception
 

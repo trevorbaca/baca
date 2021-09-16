@@ -20,7 +20,6 @@ r"""
         ...         ("Music_Staff", "default_clef", abjad.Clef("treble"))
         ...     ],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -42,10 +41,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -61,26 +60,20 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \clef "treble"
-                            \once \override Staff.Clef.color = #(x11-color 'DarkViolet)
-                            %@% \override Staff.Clef.color = ##f
-                            \set Staff.forceClef = ##t
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            \override Staff.Clef.color = #(x11-color 'violet)
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                        }
+                        \clef "treble"
+                        \once \override Staff.Clef.color = #(x11-color 'DarkViolet)
+                        %@% \override Staff.Clef.color = ##f
+                        \set Staff.forceClef = ##t
+                        R1 * 3/8
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                        \override Staff.Clef.color = #(x11-color 'violet)
+                        R1 * 3/8
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -96,7 +89,6 @@ r"""
         >>> maker = baca.SegmentMaker(
         ...     #append_phantom_measure_in_docs=True,
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -122,10 +114,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -141,26 +133,20 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \clef "treble"
-                            \once \override Staff.Clef.color = #(x11-color 'blue)
-                            %@% \override Staff.Clef.color = ##f
-                            \set Staff.forceClef = ##t
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                        }
+                        \clef "treble"
+                        \once \override Staff.Clef.color = #(x11-color 'blue)
+                        %@% \override Staff.Clef.color = ##f
+                        \set Staff.forceClef = ##t
+                        R1 * 3/8
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                        \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
+                        R1 * 3/8
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     }
-                }
-            >>
+                >>
+            }
 
         Even after a previous clef:
 
@@ -174,7 +160,6 @@ r"""
         >>> maker = baca.SegmentMaker(
         ...     #append_phantom_measure_in_docs=True,
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -214,10 +199,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -234,26 +219,20 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \clef "alto"
-                            \once \override Staff.Clef.color = #(x11-color 'blue)
-                            %@% \override Staff.Clef.color = ##f
-                            \set Staff.forceClef = ##t
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                        }
+                        \clef "alto"
+                        \once \override Staff.Clef.color = #(x11-color 'blue)
+                        %@% \override Staff.Clef.color = ##f
+                        \set Staff.forceClef = ##t
+                        R1 * 3/8
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                        \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
+                        R1 * 3/8
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -269,7 +248,6 @@ r"""
         >>> maker = baca.SegmentMaker(
         ...     #append_phantom_measure_in_docs=True,
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -306,10 +284,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -326,26 +304,20 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \clef "treble"
-                            \once \override Staff.Clef.color = #(x11-color 'green4)
-                            %@% \override Staff.Clef.color = ##f
-                            \set Staff.forceClef = ##t
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            \override Staff.Clef.color = #(x11-color 'OliveDrab)
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                        }
+                        \clef "treble"
+                        \once \override Staff.Clef.color = #(x11-color 'green4)
+                        %@% \override Staff.Clef.color = ##f
+                        \set Staff.forceClef = ##t
+                        R1 * 3/8
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                        \override Staff.Clef.color = #(x11-color 'OliveDrab)
+                        R1 * 3/8
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -361,7 +333,6 @@ r"""
         >>> maker = baca.SegmentMaker(
         ...     #append_phantom_measure_in_docs=True,
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -388,10 +359,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -410,33 +381,27 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \clef "treble"
-                            \once \override Staff.Clef.color = #(x11-color 'blue)
-                            %@% \override Staff.Clef.color = ##f
-                            \set Staff.forceClef = ##t
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
-                            \clef "treble"
-                            \once \override Staff.Clef.color = #(x11-color 'DeepPink1)
-                            %@% \override Staff.Clef.color = ##f
-                            \set Staff.forceClef = ##t
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            \override Staff.Clef.color = #(x11-color 'DeepPink4)
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                        }
+                        \clef "treble"
+                        \once \override Staff.Clef.color = #(x11-color 'blue)
+                        %@% \override Staff.Clef.color = ##f
+                        \set Staff.forceClef = ##t
+                        R1 * 3/8
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                        \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
+                        \clef "treble"
+                        \once \override Staff.Clef.color = #(x11-color 'DeepPink1)
+                        %@% \override Staff.Clef.color = ##f
+                        \set Staff.forceClef = ##t
+                        R1 * 3/8
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                        \override Staff.Clef.color = #(x11-color 'DeepPink4)
+                        R1 * 3/8
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     }
-                }
-            >>
+                >>
+            }
 
         Even at the beginning of a segment:
 
@@ -450,7 +415,6 @@ r"""
         >>> maker = baca.SegmentMaker(
         ...     #append_phantom_measure_in_docs=True,
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -491,10 +455,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -511,26 +475,20 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \clef "treble"
-                            \once \override Staff.Clef.color = #(x11-color 'DeepPink1)
-                            %@% \override Staff.Clef.color = ##f
-                            \set Staff.forceClef = ##t
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                            \override Staff.Clef.color = #(x11-color 'DeepPink4)
-                            R1 * 3/8
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                        }
+                        \clef "treble"
+                        \once \override Staff.Clef.color = #(x11-color 'DeepPink1)
+                        %@% \override Staff.Clef.color = ##f
+                        \set Staff.forceClef = ##t
+                        R1 * 3/8
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                        \override Staff.Clef.color = #(x11-color 'DeepPink4)
+                        R1 * 3/8
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     }
-                }
-            >>
+                >>
+            }
 
 ..  container:: example
 
@@ -544,7 +502,6 @@ r"""
         ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -568,10 +525,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \time 3/8
@@ -580,21 +537,15 @@ r"""
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            - \tweak color #(x11-color 'blue)
-                            \f
-                            b'4.
-                        }
+                        b'4.
+                        - \tweak color #(x11-color 'blue)
+                        \f
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         Even after a previous dynamic:
 
@@ -602,7 +553,6 @@ r"""
         ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -640,10 +590,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \time 3/8
@@ -653,21 +603,15 @@ r"""
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            - \tweak color #(x11-color 'blue)
-                            \p
-                            b'4.
-                        }
+                        b'4.
+                        - \tweak color #(x11-color 'blue)
+                        \p
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -677,7 +621,6 @@ r"""
         ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -714,10 +657,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \time 3/8
@@ -727,21 +670,15 @@ r"""
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            - \tweak color #(x11-color 'green4)
-                            \f
-                            b'4.
-                        }
+                        b'4.
+                        - \tweak color #(x11-color 'green4)
+                        \f
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -751,7 +688,6 @@ r"""
         ...     #SAFEappend_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -776,10 +712,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \time 3/8
@@ -788,23 +724,17 @@ r"""
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            - \tweak color #(x11-color 'blue)
-                            \f
-                            b'4.
-                            - \tweak color #(x11-color 'DeepPink1)
-                            \f
-                        }
+                        b'4.
+                        - \tweak color #(x11-color 'blue)
+                        \f
+                        b'4.
+                        - \tweak color #(x11-color 'DeepPink1)
+                        \f
                     }
-                }
-            >>
+                >>
+            }
 
         Even at the beginning of a segment:
 
@@ -812,7 +742,6 @@ r"""
         ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -850,10 +779,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \time 3/8
@@ -863,21 +792,15 @@ r"""
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            - \tweak color #(x11-color 'DeepPink1)
-                            \f
-                            b'4.
-                        }
+                        b'4.
+                        - \tweak color #(x11-color 'DeepPink1)
+                        \f
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         Sforzando dynamics do not count as redundant:
 
@@ -885,7 +808,6 @@ r"""
         ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -910,10 +832,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \time 3/8
@@ -922,23 +844,17 @@ r"""
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            - \tweak color #(x11-color 'blue)
-                            \sfz
-                            b'4.
-                            - \tweak color #(x11-color 'blue)
-                            \sfz
-                        }
+                        b'4.
+                        - \tweak color #(x11-color 'blue)
+                        \sfz
+                        b'4.
+                        - \tweak color #(x11-color 'blue)
+                        \sfz
                     }
-                }
-            >>
+                >>
+            }
 
         Even at the beginning of a segment:
 
@@ -946,7 +862,6 @@ r"""
         ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -984,10 +899,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \time 3/8
@@ -997,21 +912,15 @@ r"""
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            - \tweak color #(x11-color 'blue)
-                            \sfz
-                            b'4.
-                        }
+                        b'4.
+                        - \tweak color #(x11-color 'blue)
+                        \sfz
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -1022,7 +931,6 @@ r"""
         ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -1047,10 +955,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \time 3/8
@@ -1059,23 +967,17 @@ r"""
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            - \tweak color #(x11-color 'blue)
-                            \mf
-                            b'4.
-                            - \tweak color #(x11-color 'blue)
-                            \baca-effort-mf
-                        }
+                        b'4.
+                        - \tweak color #(x11-color 'blue)
+                        \mf
+                        b'4.
+                        - \tweak color #(x11-color 'blue)
+                        \baca-effort-mf
                     }
-                }
-            >>
+                >>
+            }
 
 ..  container:: example
 
@@ -1107,7 +1009,6 @@ r"""
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     indicator_defaults=[triple],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     instruments=instruments,
         ...     score_template=score_template,
         ...     spacing=baca.SpacingSpecifier(
@@ -1134,10 +1035,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -1153,20 +1054,14 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            ^ \baca-default-indicator-markup "(“Flute”)"
-                            b'4.
-                        }
+                        b'4.
+                        ^ \baca-default-indicator-markup "(“Flute”)"
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
@@ -1183,10 +1078,10 @@ r"""
 
             >>> print(text)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -1202,20 +1097,14 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            ^ \baca-default-indicator-markup "(“Flute”)"
-                            b'4.
-                        }
+                        b'4.
+                        ^ \baca-default-indicator-markup "(“Flute”)"
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -1228,10 +1117,10 @@ r"""
 
             >>> print(text)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -1247,20 +1136,14 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            ^ \baca-default-indicator-markup "(“Flute”)"
-                            b'4.
-                        }
+                        b'4.
+                        ^ \baca-default-indicator-markup "(“Flute”)"
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -1270,7 +1153,6 @@ r"""
         ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
@@ -1298,10 +1180,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -1317,20 +1199,14 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            b'4.
-                        }
+                        b'4.
+                        ^ \baca-explicit-indicator-markup "(“Flute”)"
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
@@ -1347,10 +1223,10 @@ r"""
 
             >>> print(text)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -1366,20 +1242,14 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            b'4.
-                        }
+                        b'4.
+                        ^ \baca-explicit-indicator-markup "(“Flute”)"
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -1393,10 +1263,10 @@ r"""
 
             >>> print(text)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -1412,20 +1282,14 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            b'4.
-                        }
+                        b'4.
+                        ^ \baca-explicit-indicator-markup "(“Flute”)"
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         Even after a previous instrument:
 
@@ -1433,7 +1297,6 @@ r"""
         ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
@@ -1475,10 +1338,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -1495,20 +1358,14 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            b'4.
-                        }
+                        b'4.
+                        ^ \baca-explicit-indicator-markup "(“Flute”)"
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
@@ -1525,10 +1382,10 @@ r"""
 
             >>> print(text)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -1545,20 +1402,14 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            b'4.
-                        }
+                        b'4.
+                        ^ \baca-explicit-indicator-markup "(“Flute”)"
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -1571,10 +1422,10 @@ r"""
 
             >>> print(text)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -1591,20 +1442,14 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            b'4.
-                        }
+                        b'4.
+                        ^ \baca-explicit-indicator-markup "(“Flute”)"
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -1614,7 +1459,6 @@ r"""
         ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
@@ -1655,10 +1499,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -1675,20 +1519,14 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            ^ \baca-reapplied-indicator-markup "(“Flute”)"
-                            b'4.
-                        }
+                        b'4.
+                        ^ \baca-reapplied-indicator-markup "(“Flute”)"
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
@@ -1705,10 +1543,10 @@ r"""
 
             >>> print(text)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -1725,20 +1563,14 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            ^ \baca-reapplied-indicator-markup "(“Flute”)"
-                            b'4.
-                        }
+                        b'4.
+                        ^ \baca-reapplied-indicator-markup "(“Flute”)"
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -1752,10 +1584,10 @@ r"""
 
             >>> print(text)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -1772,20 +1604,14 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            ^ \baca-reapplied-indicator-markup "(“Flute”)"
-                            b'4.
-                        }
+                        b'4.
+                        ^ \baca-reapplied-indicator-markup "(“Flute”)"
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -1802,7 +1628,6 @@ r"""
         ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
@@ -1834,10 +1659,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -1856,22 +1681,16 @@ r"""
                         \break
                         s1 * 1/2
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'2
-                            ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            b'2
-                            ^ \baca-redundant-indicator-markup "(“Flute”)"
-                            b'2
-                        }
+                        b'2
+                        ^ \baca-explicit-indicator-markup "(“Flute”)"
+                        b'2
+                        ^ \baca-redundant-indicator-markup "(“Flute”)"
+                        b'2
                     }
-                }
-            >>
+                >>
+            }
 
         >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
@@ -1888,10 +1707,10 @@ r"""
 
             >>> print(text)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -1910,22 +1729,16 @@ r"""
                         \break
                         s1 * 1/2
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'2
-                            ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            b'2
-                            ^ \baca-redundant-indicator-markup "(“Flute”)"
-                            b'2
-                        }
+                        b'2
+                        ^ \baca-explicit-indicator-markup "(“Flute”)"
+                        b'2
+                        ^ \baca-redundant-indicator-markup "(“Flute”)"
+                        b'2
                     }
-                }
-            >>
+                >>
+            }
 
         >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -1938,10 +1751,10 @@ r"""
 
             >>> print(text)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -1960,22 +1773,16 @@ r"""
                         \break
                         s1 * 1/2
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'2
-                            ^ \baca-explicit-indicator-markup "(“Flute”)"
-                            b'2
-                            ^ \baca-redundant-indicator-markup "(“Flute”)"
-                            b'2
-                        }
+                        b'2
+                        ^ \baca-explicit-indicator-markup "(“Flute”)"
+                        b'2
+                        ^ \baca-redundant-indicator-markup "(“Flute”)"
+                        b'2
                     }
-                }
-            >>
+                >>
+            }
 
         Even at the beginning of a segment:
 
@@ -1990,7 +1797,6 @@ r"""
         ...     #SAFE2append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
@@ -2032,10 +1838,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -2052,20 +1858,14 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            ^ \baca-redundant-indicator-markup "(“Flute”)"
-                            b'4.
-                        }
+                        b'4.
+                        ^ \baca-redundant-indicator-markup "(“Flute”)"
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
@@ -2082,10 +1882,10 @@ r"""
 
             >>> print(text)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -2102,20 +1902,14 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            ^ \baca-redundant-indicator-markup "(“Flute”)"
-                            b'4.
-                        }
+                        b'4.
+                        ^ \baca-redundant-indicator-markup "(“Flute”)"
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -2128,10 +1922,10 @@ r"""
 
             >>> print(text)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -2148,20 +1942,14 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            ^ \baca-redundant-indicator-markup "(“Flute”)"
-                            b'4.
-                        }
+                        b'4.
+                        ^ \baca-redundant-indicator-markup "(“Flute”)"
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
 ..  container:: example
 
@@ -2201,7 +1989,6 @@ r"""
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     indicator_defaults=[triple],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     margin_markups=margin_markups,
         ...     score_template=score_template,
         ...     spacing=baca.SpacingSpecifier(
@@ -2228,10 +2015,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -2247,26 +2034,20 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)
-                            b'4.
-                            ^ \baca-default-indicator-markup "[“I+II”]"
-                            \override Staff.InstrumentName.color = #(x11-color 'violet)
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            b'4.
-                        }
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)
+                        b'4.
+                        ^ \baca-default-indicator-markup "[“I+II”]"
+                        \override Staff.InstrumentName.color = #(x11-color 'violet)
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
@@ -2283,10 +2064,10 @@ r"""
 
             >>> print(text)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -2302,26 +2083,20 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)
-                            b'4.
-                            ^ \baca-default-indicator-markup "[“I+II”]"
-                            \override Staff.InstrumentName.color = #(x11-color 'violet)
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            b'4.
-                        }
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)
+                        b'4.
+                        ^ \baca-default-indicator-markup "[“I+II”]"
+                        \override Staff.InstrumentName.color = #(x11-color 'violet)
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         >>> tags_ = baca.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -2334,10 +2109,10 @@ r"""
 
             >>> print(text)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -2353,26 +2128,20 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)
-                            b'4.
-                            ^ \baca-default-indicator-markup "[“I+II”]"
-                            \override Staff.InstrumentName.color = #(x11-color 'violet)
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            b'4.
-                        }
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)
+                        b'4.
+                        ^ \baca-default-indicator-markup "[“I+II”]"
+                        \override Staff.InstrumentName.color = #(x11-color 'violet)
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -2382,7 +2151,6 @@ r"""
         ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
@@ -2410,10 +2178,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -2429,26 +2197,20 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            \once \override Staff.InstrumentName.color = #(x11-color 'blue)
-                            b'4.
-                            ^ \baca-explicit-indicator-markup "[“I+II”]"
-                            \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            b'4.
-                        }
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        b'4.
+                        ^ \baca-explicit-indicator-markup "[“I+II”]"
+                        \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
@@ -2465,10 +2227,10 @@ r"""
 
             >>> print(text)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -2484,26 +2246,20 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            \once \override Staff.InstrumentName.color = #(x11-color 'blue)
-                            b'4.
-                            ^ \baca-explicit-indicator-markup "[“I+II”]"
-                            \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            b'4.
-                        }
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        b'4.
+                        ^ \baca-explicit-indicator-markup "[“I+II”]"
+                        \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         >>> tags_ = baca.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -2516,10 +2272,10 @@ r"""
 
             >>> print(text)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -2535,26 +2291,20 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            \once \override Staff.InstrumentName.color = #(x11-color 'blue)
-                            b'4.
-                            ^ \baca-explicit-indicator-markup "[“I+II”]"
-                            \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            b'4.
-                        }
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        b'4.
+                        ^ \baca-explicit-indicator-markup "[“I+II”]"
+                        \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         Even after previous margin markup:
 
@@ -2562,7 +2312,6 @@ r"""
         ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
@@ -2604,10 +2353,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -2624,28 +2373,22 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \set Staff.shortInstrumentName =
-                            \markup { III+IV }
-                            \set Staff.instrumentName =
-                            \markup { III+IV }
-                            \once \override Staff.InstrumentName.color = #(x11-color 'blue)
-                            b'4.
-                            ^ \baca-explicit-indicator-markup "[“III+IV”]"
-                            \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
-                            \set Staff.shortInstrumentName =
-                            \markup { III+IV }
-                            b'4.
-                        }
+                        \set Staff.shortInstrumentName =
+                        \markup { III+IV }
+                        \set Staff.instrumentName =
+                        \markup { III+IV }
+                        \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        b'4.
+                        ^ \baca-explicit-indicator-markup "[“III+IV”]"
+                        \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
+                        \set Staff.shortInstrumentName =
+                        \markup { III+IV }
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
@@ -2662,10 +2405,10 @@ r"""
 
             >>> print(text)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -2682,28 +2425,22 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \set Staff.shortInstrumentName =
-                            \markup { III+IV }
-                            \set Staff.instrumentName =
-                            \markup { III+IV }
-                            \once \override Staff.InstrumentName.color = #(x11-color 'blue)
-                            b'4.
-                            ^ \baca-explicit-indicator-markup "[“III+IV”]"
-                            \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
-                            \set Staff.shortInstrumentName =
-                            \markup { III+IV }
-                            b'4.
-                        }
+                        \set Staff.shortInstrumentName =
+                        \markup { III+IV }
+                        \set Staff.instrumentName =
+                        \markup { III+IV }
+                        \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        b'4.
+                        ^ \baca-explicit-indicator-markup "[“III+IV”]"
+                        \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
+                        \set Staff.shortInstrumentName =
+                        \markup { III+IV }
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         >>> tags_ = baca.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -2716,10 +2453,10 @@ r"""
 
             >>> print(text)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -2736,28 +2473,22 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \set Staff.shortInstrumentName =
-                            \markup { III+IV }
-                            \set Staff.instrumentName =
-                            \markup { III+IV }
-                            \once \override Staff.InstrumentName.color = #(x11-color 'blue)
-                            b'4.
-                            ^ \baca-explicit-indicator-markup "[“III+IV”]"
-                            \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
-                            \set Staff.shortInstrumentName =
-                            \markup { III+IV }
-                            b'4.
-                        }
+                        \set Staff.shortInstrumentName =
+                        \markup { III+IV }
+                        \set Staff.instrumentName =
+                        \markup { III+IV }
+                        \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        b'4.
+                        ^ \baca-explicit-indicator-markup "[“III+IV”]"
+                        \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
+                        \set Staff.shortInstrumentName =
+                        \markup { III+IV }
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -2767,7 +2498,6 @@ r"""
         ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
@@ -2808,10 +2538,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -2828,28 +2558,22 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            \set Staff.instrumentName =
-                            \markup { I+II }
-                            \once \override Staff.InstrumentName.color = #(x11-color 'green4)
-                            b'4.
-                            ^ \baca-reapplied-indicator-markup "[“I+II”]"
-                            \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            b'4.
-                        }
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        \set Staff.instrumentName =
+                        \markup { I+II }
+                        \once \override Staff.InstrumentName.color = #(x11-color 'green4)
+                        b'4.
+                        ^ \baca-reapplied-indicator-markup "[“I+II”]"
+                        \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
@@ -2866,10 +2590,10 @@ r"""
 
             >>> print(text)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -2886,28 +2610,22 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            \set Staff.instrumentName =
-                            \markup { I+II }
-                            \once \override Staff.InstrumentName.color = #(x11-color 'green4)
-                            b'4.
-                            ^ \baca-reapplied-indicator-markup "[“I+II”]"
-                            \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            b'4.
-                        }
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        \set Staff.instrumentName =
+                        \markup { I+II }
+                        \once \override Staff.InstrumentName.color = #(x11-color 'green4)
+                        b'4.
+                        ^ \baca-reapplied-indicator-markup "[“I+II”]"
+                        \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         >>> tags_ = baca.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -2920,10 +2638,10 @@ r"""
 
             >>> print(text)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -2940,28 +2658,22 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            \set Staff.instrumentName =
-                            \markup { I+II }
-                            \once \override Staff.InstrumentName.color = #(x11-color 'green4)
-                            b'4.
-                            ^ \baca-reapplied-indicator-markup "[“I+II”]"
-                            \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            b'4.
-                        }
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        \set Staff.instrumentName =
+                        \markup { I+II }
+                        \once \override Staff.InstrumentName.color = #(x11-color 'green4)
+                        b'4.
+                        ^ \baca-reapplied-indicator-markup "[“I+II”]"
+                        \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -2978,7 +2690,6 @@ r"""
         ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
@@ -3010,10 +2721,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -3032,34 +2743,28 @@ r"""
                         \break
                         s1 * 1/2
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            \once \override Staff.InstrumentName.color = #(x11-color 'blue)
-                            b'2
-                            ^ \baca-explicit-indicator-markup "[“I+II”]"
-                            \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
-                            b'2
-                            ^ \baca-redundant-indicator-markup "[“I+II”]"
-                            \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            b'2
-                        }
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        b'2
+                        ^ \baca-explicit-indicator-markup "[“I+II”]"
+                        \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
+                        b'2
+                        ^ \baca-redundant-indicator-markup "[“I+II”]"
+                        \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        b'2
                     }
-                }
-            >>
+                >>
+            }
 
         >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
@@ -3076,10 +2781,10 @@ r"""
 
             >>> print(text)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -3098,34 +2803,28 @@ r"""
                         \break
                         s1 * 1/2
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            \once \override Staff.InstrumentName.color = #(x11-color 'blue)
-                            b'2
-                            ^ \baca-explicit-indicator-markup "[“I+II”]"
-                            \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
-                            b'2
-                            ^ \baca-redundant-indicator-markup "[“I+II”]"
-                            \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            b'2
-                        }
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        b'2
+                        ^ \baca-explicit-indicator-markup "[“I+II”]"
+                        \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
+                        b'2
+                        ^ \baca-redundant-indicator-markup "[“I+II”]"
+                        \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        b'2
                     }
-                }
-            >>
+                >>
+            }
 
         >>> tags_ = baca.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -3138,10 +2837,10 @@ r"""
 
             >>> print(text)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -3160,34 +2859,28 @@ r"""
                         \break
                         s1 * 1/2
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            \once \override Staff.InstrumentName.color = #(x11-color 'blue)
-                            b'2
-                            ^ \baca-explicit-indicator-markup "[“I+II”]"
-                            \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
-                            b'2
-                            ^ \baca-redundant-indicator-markup "[“I+II”]"
-                            \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            b'2
-                        }
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        b'2
+                        ^ \baca-explicit-indicator-markup "[“I+II”]"
+                        \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
+                        b'2
+                        ^ \baca-redundant-indicator-markup "[“I+II”]"
+                        \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        b'2
                     }
-                }
-            >>
+                >>
+            }
 
         Even at the beginning of a segment:
 
@@ -3202,7 +2895,6 @@ r"""
         ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
@@ -3244,10 +2936,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -3264,28 +2956,22 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            \set Staff.instrumentName =
-                            \markup { I+II }
-                            \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
-                            b'4.
-                            ^ \baca-redundant-indicator-markup "[“I+II”]"
-                            \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            b'4.
-                        }
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        \set Staff.instrumentName =
+                        \markup { I+II }
+                        \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
+                        b'4.
+                        ^ \baca-redundant-indicator-markup "[“I+II”]"
+                        \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
@@ -3302,10 +2988,10 @@ r"""
 
             >>> print(text)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -3322,28 +3008,22 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            \set Staff.instrumentName =
-                            \markup { I+II }
-                            \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
-                            b'4.
-                            ^ \baca-redundant-indicator-markup "[“I+II”]"
-                            \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            b'4.
-                        }
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        \set Staff.instrumentName =
+                        \markup { I+II }
+                        \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
+                        b'4.
+                        ^ \baca-redundant-indicator-markup "[“I+II”]"
+                        \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         >>> tags_ = baca.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -3356,10 +3036,10 @@ r"""
 
             >>> print(text)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -3376,28 +3056,22 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            \set Staff.instrumentName =
-                            \markup { I+II }
-                            \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
-                            b'4.
-                            ^ \baca-redundant-indicator-markup "[“I+II”]"
-                            \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            b'4.
-                        }
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        \set Staff.instrumentName =
+                        \markup { I+II }
+                        \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
+                        b'4.
+                        ^ \baca-redundant-indicator-markup "[“I+II”]"
+                        \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -3414,7 +3088,6 @@ r"""
         ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
@@ -3455,10 +3128,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -3477,34 +3150,28 @@ r"""
                         \noBreak
                         s1 * 1/2
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            %@% \set Staff.shortInstrumentName =
-                            %@% \markup { III+IV }
-                            \once \override Staff.InstrumentName.color = #(x11-color 'blue)
-                            %@% \once \override Staff.InstrumentName.color = #(x11-color 'blue)
-                            b'2
-                            ^ \baca-explicit-indicator-markup "[“I+II”]"
-                            %@% ^ \baca-explicit-indicator-markup "[“III+IV”]"
-                            \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
-                            \set Staff.shortInstrumentName =
-                            \markup { I+II }
-                            %@% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
-                            \set Staff.shortInstrumentName =
-                            \markup { III+IV }
-                            b'2
-                            b'2
-                        }
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        %@% \set Staff.shortInstrumentName =
+                        %@% \markup { III+IV }
+                        \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        %@% \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        b'2
+                        ^ \baca-explicit-indicator-markup "[“I+II”]"
+                        %@% ^ \baca-explicit-indicator-markup "[“III+IV”]"
+                        \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
+                        \set Staff.shortInstrumentName =
+                        \markup { I+II }
+                        %@% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
+                        \set Staff.shortInstrumentName =
+                        \markup { III+IV }
+                        b'2
+                        b'2
                     }
-                }
-            >>
+                >>
+            }
 
 ..  container:: example
 
@@ -3530,7 +3197,6 @@ r"""
         ...     append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
@@ -3561,10 +3227,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #25
                         \autoPageBreaksOff
@@ -3592,38 +3258,32 @@ r"""
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
-                        }
+                        b'4.
+                        b'4.
+                        <<
+                            \context Voice = "Music_Voice"
+                            {
+                                \abjad-invisible-music-coloring
+                                %@% \abjad-invisible-music
+                                b'1 * 1/4
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
+                            }
+                            \context Voice = "Rest_Voice"
+                            {
+                                \once \override Score.TimeSignature.X-extent = ##f
+                                \once \override MultiMeasureRest.transparent = ##t
+                                \stopStaff
+                                \once \override Staff.StaffSymbol.transparent = ##t
+                                \startStaff
+                                R1 * 1/4
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
+                            }
+                        >>
                     }
-                }
-            >>
+                >>
+            }
 
         Even after a previous metronome mark:
 
@@ -3631,7 +3291,6 @@ r"""
         ...     append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
@@ -3677,10 +3336,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \override TextSpanner.staff-padding = 4
@@ -3711,38 +3370,32 @@ r"""
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
-                        }
+                        b'4.
+                        b'4.
+                        <<
+                            \context Voice = "Music_Voice"
+                            {
+                                \abjad-invisible-music-coloring
+                                %@% \abjad-invisible-music
+                                b'1 * 1/4
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
+                            }
+                            \context Voice = "Rest_Voice"
+                            {
+                                \once \override Score.TimeSignature.X-extent = ##f
+                                \once \override MultiMeasureRest.transparent = ##t
+                                \stopStaff
+                                \once \override Staff.StaffSymbol.transparent = ##t
+                                \startStaff
+                                R1 * 1/4
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
+                            }
+                        >>
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -3752,7 +3405,6 @@ r"""
         ...     #SAFE3append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
@@ -3797,10 +3449,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \override TextSpanner.staff-padding = 4
@@ -3824,19 +3476,13 @@ r"""
                         \bacaStopTextSpanMM
                         \revert TextSpanner.staff-padding
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            b'4.
-                        }
+                        b'4.
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -3846,7 +3492,6 @@ r"""
         ...     append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
@@ -3878,10 +3523,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -3916,38 +3561,32 @@ r"""
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
-                        }
+                        b'4.
+                        b'4.
+                        <<
+                            \context Voice = "Music_Voice"
+                            {
+                                \abjad-invisible-music-coloring
+                                %@% \abjad-invisible-music
+                                b'1 * 1/4
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
+                            }
+                            \context Voice = "Rest_Voice"
+                            {
+                                \once \override Score.TimeSignature.X-extent = ##f
+                                \once \override MultiMeasureRest.transparent = ##t
+                                \stopStaff
+                                \once \override Staff.StaffSymbol.transparent = ##t
+                                \startStaff
+                                R1 * 1/4
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
+                            }
+                        >>
                     }
-                }
-            >>
+                >>
+            }
 
         Even at the beginning of a segment:
 
@@ -3955,7 +3594,6 @@ r"""
         ...     append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
@@ -4001,10 +3639,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \override TextSpanner.staff-padding = 4
@@ -4035,38 +3673,32 @@ r"""
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
-                        }
+                        b'4.
+                        b'4.
+                        <<
+                            \context Voice = "Music_Voice"
+                            {
+                                \abjad-invisible-music-coloring
+                                %@% \abjad-invisible-music
+                                b'1 * 1/4
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
+                            }
+                            \context Voice = "Rest_Voice"
+                            {
+                                \once \override Score.TimeSignature.X-extent = ##f
+                                \once \override MultiMeasureRest.transparent = ##t
+                                \stopStaff
+                                \once \override Staff.StaffSymbol.transparent = ##t
+                                \startStaff
+                                R1 * 1/4
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
+                            }
+                        >>
                     }
-                }
-            >>
+                >>
+            }
 
 ..  container:: example
 
@@ -4079,7 +3711,6 @@ r"""
         >>> maker = baca.SegmentMaker(
         ...     #append_phantom_measure_in_docs=True,
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -4116,10 +3747,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \time 3/8
@@ -4128,25 +3759,19 @@ r"""
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override Staff.BarLine.bar-extent = #'(0 . 0)
-                            \override Staff.BarLine.bar-extent = #'(0 . 0)
-                            \stopStaff
-                            \once \override Staff.StaffSymbol.line-count = 1
-                            \startStaff
-                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
-                            b'4.
-                            b'4.
-                        }
+                        \override Staff.BarLine.bar-extent = #'(0 . 0)
+                        \override Staff.BarLine.bar-extent = #'(0 . 0)
+                        \stopStaff
+                        \once \override Staff.StaffSymbol.line-count = 1
+                        \startStaff
+                        \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
+                        b'4.
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         Persistent overrides also appear in segment metadata:
 
@@ -4200,7 +3825,6 @@ r"""
         >>> maker = baca.SegmentMaker(
         ...     #append_phantom_measure_in_docs=True,
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -4243,10 +3867,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \time 3/8
@@ -4256,27 +3880,20 @@ r"""
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            \override Staff.BarLine.bar-extent = #'(0 . 0)
-                            b'4.
-                        }
+                        b'4.
+                        \override Staff.BarLine.bar-extent = #'(0 . 0)
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         Even at the beginning of a segment:
 
         >>> maker = baca.SegmentMaker(
         ...     #append_phantom_measure_in_docs=True,
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -4330,10 +3947,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \time 3/8
@@ -4343,20 +3960,14 @@ r"""
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override Staff.BarLine.bar-extent = #'(0 . 0)
-                            b'4.
-                            b'4.
-                        }
+                        \override Staff.BarLine.bar-extent = #'(0 . 0)
+                        b'4.
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
 ..  container:: example
 
@@ -4370,7 +3981,6 @@ r"""
         ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -4394,10 +4004,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \time 3/8
@@ -4406,24 +4016,18 @@ r"""
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override Staff.BarLine.bar-extent = #'(-2 . 2)
-                            \stopStaff
-                            \once \override Staff.StaffSymbol.line-count = 5
-                            \startStaff
-                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
-                            b'4.
-                            b'4.
-                        }
+                        \override Staff.BarLine.bar-extent = #'(-2 . 2)
+                        \stopStaff
+                        \once \override Staff.StaffSymbol.line-count = 5
+                        \startStaff
+                        \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
+                        b'4.
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         Even after previous staff lines:
 
@@ -4431,7 +4035,6 @@ r"""
         ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -4469,10 +4072,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \time 3/8
@@ -4482,24 +4085,18 @@ r"""
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override Staff.BarLine.bar-extent = #'(0 . 0)
-                            \stopStaff
-                            \once \override Staff.StaffSymbol.line-count = 1
-                            \startStaff
-                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
-                            b'4.
-                            b'4.
-                        }
+                        \override Staff.BarLine.bar-extent = #'(0 . 0)
+                        \stopStaff
+                        \once \override Staff.StaffSymbol.line-count = 1
+                        \startStaff
+                        \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
+                        b'4.
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -4509,7 +4106,6 @@ r"""
         ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -4546,10 +4142,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \time 3/8
@@ -4559,23 +4155,17 @@ r"""
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \stopStaff
-                            \once \override Staff.StaffSymbol.line-count = 5
-                            \startStaff
-                            \once \override Staff.StaffSymbol.color = #(x11-color 'green4)
-                            b'4.
-                            b'4.
-                        }
+                        \stopStaff
+                        \once \override Staff.StaffSymbol.line-count = 5
+                        \startStaff
+                        \once \override Staff.StaffSymbol.color = #(x11-color 'green4)
+                        b'4.
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -4585,7 +4175,6 @@ r"""
         ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -4610,10 +4199,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \time 3/8
@@ -4622,29 +4211,23 @@ r"""
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override Staff.BarLine.bar-extent = #'(-2 . 2)
-                            \stopStaff
-                            \once \override Staff.StaffSymbol.line-count = 5
-                            \startStaff
-                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
-                            b'4.
-                            \override Staff.BarLine.bar-extent = #'(-2 . 2)
-                            \stopStaff
-                            \once \override Staff.StaffSymbol.line-count = 5
-                            \startStaff
-                            \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)
-                            b'4.
-                        }
+                        \override Staff.BarLine.bar-extent = #'(-2 . 2)
+                        \stopStaff
+                        \once \override Staff.StaffSymbol.line-count = 5
+                        \startStaff
+                        \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
+                        b'4.
+                        \override Staff.BarLine.bar-extent = #'(-2 . 2)
+                        \stopStaff
+                        \once \override Staff.StaffSymbol.line-count = 5
+                        \startStaff
+                        \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         Even at the beginning of a segment:
 
@@ -4652,7 +4235,6 @@ r"""
         ...     #SAFE5append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -4690,10 +4272,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \time 3/8
@@ -4703,24 +4285,18 @@ r"""
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            \override Staff.BarLine.bar-extent = #'(-2 . 2)
-                            \stopStaff
-                            \once \override Staff.StaffSymbol.line-count = 5
-                            \startStaff
-                            \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)
-                            b'4.
-                            b'4.
-                        }
+                        \override Staff.BarLine.bar-extent = #'(-2 . 2)
+                        \stopStaff
+                        \once \override Staff.StaffSymbol.line-count = 5
+                        \startStaff
+                        \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)
+                        b'4.
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
 ..  container:: example
 
@@ -4746,7 +4322,6 @@ r"""
         ...     append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
@@ -4777,10 +4352,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #25
                         \autoPageBreaksOff
@@ -4812,38 +4387,32 @@ r"""
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            b'4.
-                            <<
-                                \context Voice = "Music_Voice"
-                                {
-                                    \abjad-invisible-music-coloring
-                                    %@% \abjad-invisible-music
-                                    b'1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                                \context Voice = "Rest_Voice"
-                                {
-                                    \once \override Score.TimeSignature.X-extent = ##f
-                                    \once \override MultiMeasureRest.transparent = ##t
-                                    \stopStaff
-                                    \once \override Staff.StaffSymbol.transparent = ##t
-                                    \startStaff
-                                    R1 * 1/4
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                                }
-                            >>
-                        }
+                        b'4.
+                        b'4.
+                        <<
+                            \context Voice = "Music_Voice"
+                            {
+                                \abjad-invisible-music-coloring
+                                %@% \abjad-invisible-music
+                                b'1 * 1/4
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
+                            }
+                            \context Voice = "Rest_Voice"
+                            {
+                                \once \override Score.TimeSignature.X-extent = ##f
+                                \once \override MultiMeasureRest.transparent = ##t
+                                \stopStaff
+                                \once \override Staff.StaffSymbol.transparent = ##t
+                                \startStaff
+                                R1 * 1/4
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
+                            }
+                        >>
                     }
-                }
-            >>
+                >>
+            }
 
         Even after a previous tempo trend:
 
@@ -4851,7 +4420,6 @@ r"""
         ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
@@ -4896,10 +4464,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \override TextSpanner.staff-padding = 4
@@ -4927,19 +4495,13 @@ r"""
                         \bacaStopTextSpanMM
                         \revert TextSpanner.staff-padding
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            b'4.
-                        }
+                        b'4.
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -4949,7 +4511,6 @@ r"""
         ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
@@ -4993,10 +4554,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \override TextSpanner.staff-padding = 4
@@ -5024,19 +4585,13 @@ r"""
                         \bacaStopTextSpanMM
                         \revert TextSpanner.staff-padding
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            b'4.
-                        }
+                        b'4.
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
     ..  container:: example
 
@@ -5046,7 +4601,6 @@ r"""
         ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
@@ -5081,10 +4635,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \autoPageBreaksOff
@@ -5123,20 +4677,14 @@ r"""
                         s1 * 3/8
                         \bacaStopTextSpanMM
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            b'4.
-                            b'4.
-                        }
+                        b'4.
+                        b'4.
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
         Even at the beginning of a segment:
 
@@ -5144,7 +4692,6 @@ r"""
         ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
@@ -5189,10 +4736,10 @@ r"""
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
                         \override TextSpanner.staff-padding = 4
@@ -5220,19 +4767,13 @@ r"""
                         \bacaStopTextSpanMM
                         \revert TextSpanner.staff-padding
                     }
-                >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
+                    \context Voice = "Music_Voice"
                     {
-                        \context Voice = "Music_Voice"
-                        {
-                            b'4.
-                            b'4.
-                        }
+                        b'4.
+                        b'4.
                     }
-                }
-            >>
+                >>
+            }
 
 """
 

@@ -2129,7 +2129,6 @@ class Imbrication:
             >>> maker = baca.SegmentMaker(
             ...     ignore_repeat_pitch_classes=True,
             ...     includes=["baca.ily"],
-            ...     preamble=[baca.global_context_string()],
             ...     score_template=closure,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ...     time_signatures=accumulator.time_signatures,
@@ -2155,114 +2154,108 @@ class Imbrication:
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
-                <<
-                    \context GlobalContext = "Global_Context"
+                {
+                    \context Staff = "Music_Staff"
                     <<
-                        \context GlobalSkips = "Global_Skips"
+                        \context Voice = "Global_Skips"
                         {
                             \baca-new-spacing-section #1 #4
                             \time 5/8
                             s1 * 5/8
                         }
+                        \context Voice = "Music_Voice_1"
+                        {
+                            {
+                                \override TupletBracket.stencil = ##f
+                                \override TupletNumber.stencil = ##f
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \voiceOne
+                                    s16
+                                    [
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    d'16
+                                    - \accent
+                                    s16
+                                    s16
+                                    s16
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    s16
+                                    s16
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    g''16
+                                    - \accent
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    a'16
+                                    - \accent
+                                    s16
+                                    ]
+                                }
+                                \revert TupletBracket.stencil
+                                \revert TupletNumber.stencil
+                            }
+                        }
+                        \context Voice = "Music_Voice_2"
+                        {
+                            {
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \set stemLeftBeamCount = 0
+                                    \set stemRightBeamCount = 2
+                                    \voiceTwo
+                                    c'16
+                                    - \staccato
+                                    [
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    d'16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    bf'!16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    fs''!16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
+                                    e''16
+                                    - \staccato
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
+                                    ef''!16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    af''!16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    g''16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    a'16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 0
+                                    c'16
+                                    - \staccato
+                                    ]
+                                }
+                            }
+                        }
                     >>
-                    \context MusicContext = "Music_Context"
-                    {
-                        \context Staff = "Music_Staff"
-                        <<
-                            \context Voice = "Music_Voice_1"
-                            {
-                                {
-                                    \override TupletBracket.stencil = ##f
-                                    \override TupletNumber.stencil = ##f
-                                    \scaleDurations #'(1 . 1)
-                                    {
-                                        \voiceOne
-                                        s16
-                                        [
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        d'16
-                                        - \accent
-                                        s16
-                                        s16
-                                        s16
-                                    }
-                                    \scaleDurations #'(1 . 1)
-                                    {
-                                        s16
-                                        s16
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        g''16
-                                        - \accent
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        a'16
-                                        - \accent
-                                        s16
-                                        ]
-                                    }
-                                    \revert TupletBracket.stencil
-                                    \revert TupletNumber.stencil
-                                }
-                            }
-                            \context Voice = "Music_Voice_2"
-                            {
-                                {
-                                    \scaleDurations #'(1 . 1)
-                                    {
-                                        \set stemLeftBeamCount = 0
-                                        \set stemRightBeamCount = 2
-                                        \voiceTwo
-                                        c'16
-                                        - \staccato
-                                        [
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        d'16
-                                        - \staccato
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        bf'!16
-                                        - \staccato
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        fs''!16
-                                        - \staccato
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 1
-                                        e''16
-                                        - \staccato
-                                    }
-                                    \scaleDurations #'(1 . 1)
-                                    {
-                                        \set stemLeftBeamCount = 1
-                                        \set stemRightBeamCount = 2
-                                        ef''!16
-                                        - \staccato
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        af''!16
-                                        - \staccato
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        g''16
-                                        - \staccato
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        a'16
-                                        - \staccato
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 0
-                                        c'16
-                                        - \staccato
-                                        ]
-                                    }
-                                }
-                            }
-                        >>
-                    }
-                >>
+                }
 
         ..  container:: example exception
 
@@ -2353,7 +2346,6 @@ class Imbrication:
             >>> maker = baca.SegmentMaker(
             ...     ignore_repeat_pitch_classes=True,
             ...     includes=["baca.ily"],
-            ...     preamble=[baca.global_context_string()],
             ...     score_template=closure,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ...     time_signatures=accumulator.time_signatures,
@@ -2379,136 +2371,130 @@ class Imbrication:
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
-                <<
-                    \context GlobalContext = "Global_Context"
+                {
+                    \context Staff = "Music_Staff"
                     <<
-                        \context GlobalSkips = "Global_Skips"
+                        \context Voice = "Global_Skips"
                         {
                             \baca-new-spacing-section #1 #4
                             \time 15/16
                             s1 * 15/16
                         }
+                        \context Voice = "Music_Voice_1"
+                        {
+                            {
+                                \override TupletBracket.stencil = ##f
+                                \override TupletNumber.stencil = ##f
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \voiceOne
+                                    s16
+                                    [
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    d'16
+                                    - \accent
+                                    s16
+                                    s16
+                                    s16
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    s16
+                                    s16
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    g''16
+                                    - \accent
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    a'16
+                                    - \accent
+                                    s16
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    s16
+                                    s16
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    fs''!16
+                                    - \accent
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    e''16
+                                    - \accent
+                                    s16
+                                    ]
+                                }
+                                \revert TupletBracket.stencil
+                                \revert TupletNumber.stencil
+                            }
+                        }
+                        \context Voice = "Music_Voice_2"
+                        {
+                            {
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \set stemLeftBeamCount = 0
+                                    \set stemRightBeamCount = 2
+                                    \voiceTwo
+                                    c'16
+                                    - \staccato
+                                    [
+                                    s16
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    bf'!16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    fs''!16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
+                                    e''16
+                                    - \staccato
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
+                                    ef''!16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    af''!16
+                                    - \staccato
+                                    s16
+                                    s16
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
+                                    c'16
+                                    - \staccato
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
+                                    d'16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    bf'!16
+                                    - \staccato
+                                    s16
+                                    s16
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 0
+                                    ef''!16
+                                    - \staccato
+                                    ]
+                                }
+                            }
+                        }
                     >>
-                    \context MusicContext = "Music_Context"
-                    {
-                        \context Staff = "Music_Staff"
-                        <<
-                            \context Voice = "Music_Voice_1"
-                            {
-                                {
-                                    \override TupletBracket.stencil = ##f
-                                    \override TupletNumber.stencil = ##f
-                                    \scaleDurations #'(1 . 1)
-                                    {
-                                        \voiceOne
-                                        s16
-                                        [
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        d'16
-                                        - \accent
-                                        s16
-                                        s16
-                                        s16
-                                    }
-                                    \scaleDurations #'(1 . 1)
-                                    {
-                                        s16
-                                        s16
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        g''16
-                                        - \accent
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        a'16
-                                        - \accent
-                                        s16
-                                    }
-                                    \scaleDurations #'(1 . 1)
-                                    {
-                                        s16
-                                        s16
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        fs''!16
-                                        - \accent
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        e''16
-                                        - \accent
-                                        s16
-                                        ]
-                                    }
-                                    \revert TupletBracket.stencil
-                                    \revert TupletNumber.stencil
-                                }
-                            }
-                            \context Voice = "Music_Voice_2"
-                            {
-                                {
-                                    \scaleDurations #'(1 . 1)
-                                    {
-                                        \set stemLeftBeamCount = 0
-                                        \set stemRightBeamCount = 2
-                                        \voiceTwo
-                                        c'16
-                                        - \staccato
-                                        [
-                                        s16
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        bf'!16
-                                        - \staccato
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        fs''!16
-                                        - \staccato
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 1
-                                        e''16
-                                        - \staccato
-                                    }
-                                    \scaleDurations #'(1 . 1)
-                                    {
-                                        \set stemLeftBeamCount = 1
-                                        \set stemRightBeamCount = 2
-                                        ef''!16
-                                        - \staccato
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        af''!16
-                                        - \staccato
-                                        s16
-                                        s16
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 1
-                                        c'16
-                                        - \staccato
-                                    }
-                                    \scaleDurations #'(1 . 1)
-                                    {
-                                        \set stemLeftBeamCount = 1
-                                        \set stemRightBeamCount = 2
-                                        d'16
-                                        - \staccato
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        bf'!16
-                                        - \staccato
-                                        s16
-                                        s16
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 0
-                                        ef''!16
-                                        - \staccato
-                                        ]
-                                    }
-                                }
-                            }
-                        >>
-                    }
-                >>
+                }
 
         """
         return self._hocket
@@ -2556,7 +2542,6 @@ class Imbrication:
 
             >>> maker = baca.SegmentMaker(
             ...     includes=["baca.ily"],
-            ...     preamble=[baca.global_context_string()],
             ...     score_template=closure,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ...     time_signatures=accumulator.time_signatures,
@@ -2582,169 +2567,163 @@ class Imbrication:
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
-                <<
-                    \context GlobalContext = "Global_Context"
+                {
+                    \context Staff = "Music_Staff"
                     <<
-                        \context GlobalSkips = "Global_Skips"
+                        \context Voice = "Global_Skips"
                         {
                             \baca-new-spacing-section #1 #4
                             \time 9/8
                             s1 * 9/8
                         }
+                        \context Voice = "Music_Voice_1"
+                        {
+                            {
+                                \override TupletBracket.stencil = ##f
+                                \override TupletNumber.stencil = ##f
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \voiceOne
+                                    s16
+                                    [
+                                    s16
+                                    s16
+                                    s16
+                                    s16
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    s16
+                                    s16
+                                    s16
+                                    s16
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    s16
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    d'16
+                                    - \accent
+                                    s16
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    fs''!16
+                                    - \accent
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
+                                    e''16
+                                    - \accent
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
+                                    ef''!16
+                                    - \accent
+                                    s16
+                                    s16
+                                    s16
+                                    ]
+                                }
+                                \revert TupletBracket.stencil
+                                \revert TupletNumber.stencil
+                            }
+                        }
+                        \context Voice = "Music_Voice_2"
+                        {
+                            {
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \set stemLeftBeamCount = 0
+                                    \set stemRightBeamCount = 2
+                                    \voiceTwo
+                                    c'16
+                                    - \staccato
+                                    [
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    d'16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    bf'!16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    fs''!16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
+                                    e''16
+                                    - \staccato
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
+                                    ef''!16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    af''!16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    g''16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
+                                    a'16
+                                    - \staccato
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
+                                    c'16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    d'16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    bf'!16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    fs''!16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
+                                    e''16
+                                    - \staccato
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
+                                    ef''!16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    af''!16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    g''16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 0
+                                    a'16
+                                    - \staccato
+                                    ]
+                                }
+                            }
+                        }
                     >>
-                    \context MusicContext = "Music_Context"
-                    {
-                        \context Staff = "Music_Staff"
-                        <<
-                            \context Voice = "Music_Voice_1"
-                            {
-                                {
-                                    \override TupletBracket.stencil = ##f
-                                    \override TupletNumber.stencil = ##f
-                                    \scaleDurations #'(1 . 1)
-                                    {
-                                        \voiceOne
-                                        s16
-                                        [
-                                        s16
-                                        s16
-                                        s16
-                                        s16
-                                    }
-                                    \scaleDurations #'(1 . 1)
-                                    {
-                                        s16
-                                        s16
-                                        s16
-                                        s16
-                                    }
-                                    \scaleDurations #'(1 . 1)
-                                    {
-                                        s16
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        d'16
-                                        - \accent
-                                        s16
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        fs''!16
-                                        - \accent
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 1
-                                        e''16
-                                        - \accent
-                                    }
-                                    \scaleDurations #'(1 . 1)
-                                    {
-                                        \set stemLeftBeamCount = 1
-                                        \set stemRightBeamCount = 2
-                                        ef''!16
-                                        - \accent
-                                        s16
-                                        s16
-                                        s16
-                                        ]
-                                    }
-                                    \revert TupletBracket.stencil
-                                    \revert TupletNumber.stencil
-                                }
-                            }
-                            \context Voice = "Music_Voice_2"
-                            {
-                                {
-                                    \scaleDurations #'(1 . 1)
-                                    {
-                                        \set stemLeftBeamCount = 0
-                                        \set stemRightBeamCount = 2
-                                        \voiceTwo
-                                        c'16
-                                        - \staccato
-                                        [
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        d'16
-                                        - \staccato
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        bf'!16
-                                        - \staccato
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        fs''!16
-                                        - \staccato
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 1
-                                        e''16
-                                        - \staccato
-                                    }
-                                    \scaleDurations #'(1 . 1)
-                                    {
-                                        \set stemLeftBeamCount = 1
-                                        \set stemRightBeamCount = 2
-                                        ef''!16
-                                        - \staccato
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        af''!16
-                                        - \staccato
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        g''16
-                                        - \staccato
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 1
-                                        a'16
-                                        - \staccato
-                                    }
-                                    \scaleDurations #'(1 . 1)
-                                    {
-                                        \set stemLeftBeamCount = 1
-                                        \set stemRightBeamCount = 2
-                                        c'16
-                                        - \staccato
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        d'16
-                                        - \staccato
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        bf'!16
-                                        - \staccato
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        fs''!16
-                                        - \staccato
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 1
-                                        e''16
-                                        - \staccato
-                                    }
-                                    \scaleDurations #'(1 . 1)
-                                    {
-                                        \set stemLeftBeamCount = 1
-                                        \set stemRightBeamCount = 2
-                                        ef''!16
-                                        - \staccato
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        af''!16
-                                        - \staccato
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        g''16
-                                        - \staccato
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 0
-                                        a'16
-                                        - \staccato
-                                        ]
-                                    }
-                                }
-                            }
-                        >>
-                    }
-                >>
+                }
 
         """
         return self._selector
@@ -2780,7 +2759,6 @@ class Imbrication:
 
             >>> maker = baca.SegmentMaker(
             ...     includes=["baca.ily"],
-            ...     preamble=[baca.global_context_string()],
             ...     score_template=closure,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ...     time_signatures=accumulator.time_signatures,
@@ -2806,120 +2784,114 @@ class Imbrication:
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
-                <<
-                    \context GlobalContext = "Global_Context"
+                {
+                    \context Staff = "Music_Staff"
                     <<
-                        \context GlobalSkips = "Global_Skips"
+                        \context Voice = "Global_Skips"
                         {
                             \baca-new-spacing-section #1 #4
                             \time 45/32
                             s1 * 45/32
                         }
+                        \context Voice = "Music_Voice_1"
+                        {
+                            {
+                                \override TupletBracket.stencil = ##f
+                                \override TupletNumber.stencil = ##f
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \voiceOne
+                                    s8
+                                    [
+                                    s32
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 1
+                                    d'8
+                                    s32
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 1
+                                    bf'!8
+                                    s32
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 1
+                                    fs''!8
+                                    s32
+                                    s8
+                                    s32
+                                    s8
+                                    s32
+                                    s8
+                                    s32
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 1
+                                    g''8
+                                    s32
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 1
+                                    a'8
+                                    s32
+                                    ]
+                                }
+                                \revert TupletBracket.stencil
+                                \revert TupletNumber.stencil
+                            }
+                        }
+                        \context Voice = "Music_Voice_2"
+                        {
+                            {
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \voiceTwo
+                                    c'8
+                                    ~
+                                    [
+                                    c'32
+                                    d'8
+                                    ~
+                                    d'32
+                                    bf'!8
+                                    ~
+                                    bf'32
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    fs''!8
+                                    ~
+                                    [
+                                    fs''32
+                                    e''8
+                                    ~
+                                    e''32
+                                    ef''!8
+                                    ~
+                                    ef''32
+                                    af''!8
+                                    ~
+                                    af''32
+                                    g''8
+                                    ~
+                                    g''32
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    a'8
+                                    ~
+                                    [
+                                    a'32
+                                    ]
+                                }
+                            }
+                        }
                     >>
-                    \context MusicContext = "Music_Context"
-                    {
-                        \context Staff = "Music_Staff"
-                        <<
-                            \context Voice = "Music_Voice_1"
-                            {
-                                {
-                                    \override TupletBracket.stencil = ##f
-                                    \override TupletNumber.stencil = ##f
-                                    \scaleDurations #'(1 . 1)
-                                    {
-                                        \voiceOne
-                                        s8
-                                        [
-                                        s32
-                                        \set stemLeftBeamCount = 1
-                                        \set stemRightBeamCount = 1
-                                        d'8
-                                        s32
-                                        \set stemLeftBeamCount = 1
-                                        \set stemRightBeamCount = 1
-                                        bf'!8
-                                        s32
-                                    }
-                                    \scaleDurations #'(1 . 1)
-                                    {
-                                        \set stemLeftBeamCount = 1
-                                        \set stemRightBeamCount = 1
-                                        fs''!8
-                                        s32
-                                        s8
-                                        s32
-                                        s8
-                                        s32
-                                        s8
-                                        s32
-                                        \set stemLeftBeamCount = 1
-                                        \set stemRightBeamCount = 1
-                                        g''8
-                                        s32
-                                    }
-                                    \scaleDurations #'(1 . 1)
-                                    {
-                                        \set stemLeftBeamCount = 1
-                                        \set stemRightBeamCount = 1
-                                        a'8
-                                        s32
-                                        ]
-                                    }
-                                    \revert TupletBracket.stencil
-                                    \revert TupletNumber.stencil
-                                }
-                            }
-                            \context Voice = "Music_Voice_2"
-                            {
-                                {
-                                    \scaleDurations #'(1 . 1)
-                                    {
-                                        \voiceTwo
-                                        c'8
-                                        ~
-                                        [
-                                        c'32
-                                        d'8
-                                        ~
-                                        d'32
-                                        bf'!8
-                                        ~
-                                        bf'32
-                                        ]
-                                    }
-                                    \scaleDurations #'(1 . 1)
-                                    {
-                                        fs''!8
-                                        ~
-                                        [
-                                        fs''32
-                                        e''8
-                                        ~
-                                        e''32
-                                        ef''!8
-                                        ~
-                                        ef''32
-                                        af''!8
-                                        ~
-                                        af''32
-                                        g''8
-                                        ~
-                                        g''32
-                                        ]
-                                    }
-                                    \scaleDurations #'(1 . 1)
-                                    {
-                                        a'8
-                                        ~
-                                        [
-                                        a'32
-                                        ]
-                                    }
-                                }
-                            }
-                        >>
-                    }
-                >>
+                }
 
         """
         return self._truncate_ties
@@ -7088,7 +7060,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=closure,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
@@ -7114,95 +7085,89 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #4
                         \time 3/4
                         s1 * 3/4
                     }
+                    \context Voice = "Music_Voice_1"
+                    {
+                        {
+                            \override TupletBracket.stencil = ##f
+                            \override TupletNumber.stencil = ##f
+                            \times 4/5
+                            {
+                                \voiceOne
+                                s8
+                                s16
+                                s16
+                                \set stemLeftBeamCount = 0
+                                \set stemRightBeamCount = 2
+                                bf'!16
+                                [
+                            }
+                            \times 2/3
+                            {
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 2
+                                c'16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 0
+                                d'16
+                                ]
+                                s16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 6/7
+                            {
+                                s16
+                                s16
+                                s16
+                                s4
+                            }
+                            \revert TupletBracket.stencil
+                            \revert TupletNumber.stencil
+                        }
+                    }
+                    \context Voice = "Music_Voice_2"
+                    {
+                        {
+                            \times 4/5
+                            {
+                                \voiceTwo
+                                r8
+                                c'16
+                                [
+                                d'16
+                                bf'!16
+                                ]
+                            }
+                            \times 2/3
+                            {
+                                c'16
+                                [
+                                d'16
+                                bf'!16
+                                ]
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 6/7
+                            {
+                                c'16
+                                [
+                                d'16
+                                bf'!16
+                                ]
+                                r4
+                            }
+                        }
+                    }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    <<
-                        \context Voice = "Music_Voice_1"
-                        {
-                            {
-                                \override TupletBracket.stencil = ##f
-                                \override TupletNumber.stencil = ##f
-                                \times 4/5
-                                {
-                                    \voiceOne
-                                    s8
-                                    s16
-                                    s16
-                                    \set stemLeftBeamCount = 0
-                                    \set stemRightBeamCount = 2
-                                    bf'!16
-                                    [
-                                }
-                                \times 2/3
-                                {
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 2
-                                    c'16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 0
-                                    d'16
-                                    ]
-                                    s16
-                                }
-                                \tweak text #tuplet-number::calc-fraction-text
-                                \times 6/7
-                                {
-                                    s16
-                                    s16
-                                    s16
-                                    s4
-                                }
-                                \revert TupletBracket.stencil
-                                \revert TupletNumber.stencil
-                            }
-                        }
-                        \context Voice = "Music_Voice_2"
-                        {
-                            {
-                                \times 4/5
-                                {
-                                    \voiceTwo
-                                    r8
-                                    c'16
-                                    [
-                                    d'16
-                                    bf'!16
-                                    ]
-                                }
-                                \times 2/3
-                                {
-                                    c'16
-                                    [
-                                    d'16
-                                    bf'!16
-                                    ]
-                                }
-                                \tweak text #tuplet-number::calc-fraction-text
-                                \times 6/7
-                                {
-                                    c'16
-                                    [
-                                    d'16
-                                    bf'!16
-                                    ]
-                                    r4
-                                }
-                            }
-                        }
-                    >>
-                }
-            >>
+            }
 
     ..  container:: example
 
@@ -7239,7 +7204,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=closure,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
@@ -7265,118 +7229,112 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #4
                         \time 9/8
                         s1 * 9/8
                     }
+                    \context Voice = "Music_Voice_1"
+                    {
+                        {
+                            \override TupletBracket.stencil = ##f
+                            \override TupletNumber.stencil = ##f
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \set stemLeftBeamCount = 0
+                                \set stemRightBeamCount = 2
+                                \voiceOne
+                                c'16
+                                - \accent
+                                [
+                                s16
+                                s16
+                                s16
+                                s16
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                s16
+                                s16
+                                s16
+                                s16
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                s16
+                                s16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                bf'!16
+                                - \accent
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                fs''!16
+                                - \accent
+                                s16
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                s16
+                                s16
+                                s16
+                                s16
+                                ]
+                            }
+                            \revert TupletBracket.stencil
+                            \revert TupletNumber.stencil
+                        }
+                    }
+                    \context Voice = "Music_Voice_2"
+                    {
+                        {
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \voiceTwo
+                                c'16
+                                [
+                                d'16
+                                bf'!16
+                                fs''!16
+                                e''16
+                                ]
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                ef''!16
+                                [
+                                af''!16
+                                g''16
+                                a'16
+                                ]
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                c'16
+                                [
+                                d'16
+                                bf'!16
+                                fs''!16
+                                e''16
+                                ]
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                ef''!16
+                                [
+                                af''!16
+                                g''16
+                                a'16
+                                ]
+                            }
+                        }
+                    }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    <<
-                        \context Voice = "Music_Voice_1"
-                        {
-                            {
-                                \override TupletBracket.stencil = ##f
-                                \override TupletNumber.stencil = ##f
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 0
-                                    \set stemRightBeamCount = 2
-                                    \voiceOne
-                                    c'16
-                                    - \accent
-                                    [
-                                    s16
-                                    s16
-                                    s16
-                                    s16
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    s16
-                                    s16
-                                    s16
-                                    s16
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    s16
-                                    s16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    bf'!16
-                                    - \accent
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    fs''!16
-                                    - \accent
-                                    s16
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    s16
-                                    s16
-                                    s16
-                                    s16
-                                    ]
-                                }
-                                \revert TupletBracket.stencil
-                                \revert TupletNumber.stencil
-                            }
-                        }
-                        \context Voice = "Music_Voice_2"
-                        {
-                            {
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \voiceTwo
-                                    c'16
-                                    [
-                                    d'16
-                                    bf'!16
-                                    fs''!16
-                                    e''16
-                                    ]
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    ef''!16
-                                    [
-                                    af''!16
-                                    g''16
-                                    a'16
-                                    ]
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    c'16
-                                    [
-                                    d'16
-                                    bf'!16
-                                    fs''!16
-                                    e''16
-                                    ]
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    ef''!16
-                                    [
-                                    af''!16
-                                    g''16
-                                    a'16
-                                    ]
-                                }
-                            }
-                        }
-                    >>
-                }
-            >>
+            }
 
     """
     return Coat(pitch)
@@ -7428,7 +7386,6 @@ def extend_beam(
         >>> maker = baca.SegmentMaker(
         ...     ignore_repeat_pitch_classes=True,
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=closure,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
@@ -7454,10 +7411,10 @@ def extend_beam(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #32
                         \time 7/16
@@ -7466,122 +7423,116 @@ def extend_beam(
                         \time 1/4
                         s1 * 1/4
                     }
+                    \context Voice = "Music_Voice_1"
+                    {
+                        {
+                            \override TupletBracket.stencil = ##f
+                            \override TupletNumber.stencil = ##f
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \voiceOne
+                                s16
+                                [
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                d'16
+                                - \staccato
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                bf'!16
+                                - \staccato
+                                s16
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                s16
+                                s16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 1
+                                s16
+                            }
+                            \revert TupletBracket.stencil
+                            \revert TupletNumber.stencil
+                        }
+                        {
+                            \override TupletBracket.stencil = ##f
+                            \override TupletNumber.stencil = ##f
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 2
+                                s16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                cs''!16
+                                - \staccato
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                a'16
+                                - \staccato
+                                s16
+                                ]
+                            }
+                            \revert TupletBracket.stencil
+                            \revert TupletNumber.stencil
+                        }
+                    }
+                    \context Voice = "Music_Voice_2"
+                    {
+                        {
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \set stemLeftBeamCount = 0
+                                \set stemRightBeamCount = 2
+                                \voiceTwo
+                                c'16
+                                [
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                d'16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                bf'!16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 1
+                                fs''!16
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 2
+                                e''16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                ef''!16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 0
+                                b''16
+                                ]
+                            }
+                        }
+                        {
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \set stemLeftBeamCount = 0
+                                \set stemRightBeamCount = 2
+                                g''16
+                                [
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                cs''!16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                a'16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 0
+                                af'!16
+                                ]
+                            }
+                        }
+                    }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    <<
-                        \context Voice = "Music_Voice_1"
-                        {
-                            {
-                                \override TupletBracket.stencil = ##f
-                                \override TupletNumber.stencil = ##f
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \voiceOne
-                                    s16
-                                    [
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    d'16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    bf'!16
-                                    - \staccato
-                                    s16
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    s16
-                                    s16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 1
-                                    s16
-                                }
-                                \revert TupletBracket.stencil
-                                \revert TupletNumber.stencil
-                            }
-                            {
-                                \override TupletBracket.stencil = ##f
-                                \override TupletNumber.stencil = ##f
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 2
-                                    s16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    cs''!16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    a'16
-                                    - \staccato
-                                    s16
-                                    ]
-                                }
-                                \revert TupletBracket.stencil
-                                \revert TupletNumber.stencil
-                            }
-                        }
-                        \context Voice = "Music_Voice_2"
-                        {
-                            {
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 0
-                                    \set stemRightBeamCount = 2
-                                    \voiceTwo
-                                    c'16
-                                    [
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    d'16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    bf'!16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 1
-                                    fs''!16
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 2
-                                    e''16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    ef''!16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 0
-                                    b''16
-                                    ]
-                                }
-                            }
-                            {
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 0
-                                    \set stemRightBeamCount = 2
-                                    g''16
-                                    [
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    cs''!16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    a'16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 0
-                                    af'!16
-                                    ]
-                                }
-                            }
-                        }
-                    >>
-                }
-            >>
+            }
 
     """
     return _commandclasses.IndicatorCommand(
@@ -7629,7 +7580,6 @@ def imbricate(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=closure,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
@@ -7655,133 +7605,127 @@ def imbricate(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #4
                         \time 15/16
                         s1 * 15/16
                     }
+                    \context Voice = "Music_Voice_1"
+                    {
+                        {
+                            \override TupletBracket.stencil = ##f
+                            \override TupletNumber.stencil = ##f
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \voiceOne
+                                s16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                d'16
+                                s16
+                                s16
+                                s16
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                s16
+                                s16
+                                \set stemLeftBeamCount = 0
+                                \set stemRightBeamCount = 2
+                                g''16
+                                [
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 0
+                                a'16
+                                ]
+                                s16
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                s16
+                                s16
+                                \set stemLeftBeamCount = 0
+                                \set stemRightBeamCount = 2
+                                fs''!16
+                                [
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 0
+                                e''16
+                                ]
+                                s16
+                            }
+                            \revert TupletBracket.stencil
+                            \revert TupletNumber.stencil
+                        }
+                    }
+                    \context Voice = "Music_Voice_2"
+                    {
+                        {
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \set stemLeftBeamCount = 0
+                                \set stemRightBeamCount = 2
+                                \voiceTwo
+                                c'16
+                                [
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                d'16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                bf'!16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                fs''!16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 1
+                                e''16
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 2
+                                ef''!16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                af''!16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                g''16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                a'16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 1
+                                c'16
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 2
+                                d'16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                bf'!16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                fs''!16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                e''16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 0
+                                ef''!16
+                                ]
+                            }
+                        }
+                    }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    <<
-                        \context Voice = "Music_Voice_1"
-                        {
-                            {
-                                \override TupletBracket.stencil = ##f
-                                \override TupletNumber.stencil = ##f
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \voiceOne
-                                    s16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    d'16
-                                    s16
-                                    s16
-                                    s16
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    s16
-                                    s16
-                                    \set stemLeftBeamCount = 0
-                                    \set stemRightBeamCount = 2
-                                    g''16
-                                    [
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 0
-                                    a'16
-                                    ]
-                                    s16
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    s16
-                                    s16
-                                    \set stemLeftBeamCount = 0
-                                    \set stemRightBeamCount = 2
-                                    fs''!16
-                                    [
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 0
-                                    e''16
-                                    ]
-                                    s16
-                                }
-                                \revert TupletBracket.stencil
-                                \revert TupletNumber.stencil
-                            }
-                        }
-                        \context Voice = "Music_Voice_2"
-                        {
-                            {
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 0
-                                    \set stemRightBeamCount = 2
-                                    \voiceTwo
-                                    c'16
-                                    [
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    d'16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    bf'!16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    fs''!16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 1
-                                    e''16
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 2
-                                    ef''!16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    af''!16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    g''16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    a'16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 1
-                                    c'16
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 2
-                                    d'16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    bf'!16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    fs''!16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    e''16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 0
-                                    ef''!16
-                                    ]
-                                }
-                            }
-                        }
-                    >>
-                }
-            >>
+            }
 
     ..  container:: example
 
@@ -7821,7 +7765,6 @@ def imbricate(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=closure,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
@@ -7836,176 +7779,170 @@ def imbricate(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #4
                         \time 15/16
                         s1 * 15/16
                     }
+                    \context Voice = "Music_Voice_1"
+                    {
+                        {
+                            \override TupletBracket.stencil = ##f
+                            \override TupletNumber.stencil = ##f
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \override Beam.positions = #'(6 . 6)
+                                s16
+                                [
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                d'16
+                                - \staccato
+                                s16
+                                s16
+                                s16
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                s16
+                                s16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                g''16
+                                - \staccato
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                a'16
+                                - \staccato
+                                s16
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                s16
+                                s16
+                                s16
+                                s16
+                                s16
+                                ]
+                                \revert Beam.positions
+                            }
+                            \revert TupletBracket.stencil
+                            \revert TupletNumber.stencil
+                        }
+                    }
+                    \context Voice = "Music_Voice_2"
+                    {
+                        {
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \set stemLeftBeamCount = 0
+                                \set stemRightBeamCount = 2
+                                c'16
+                                [
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                d'16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                bf'!16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                fs''!16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 1
+                                e''16
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 2
+                                ef''!16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                af''!16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                g''16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                a'16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 1
+                                c'16
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 2
+                                d'16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                bf'!16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                fs''!16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                e''16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 0
+                                ef''!16
+                                ]
+                            }
+                        }
+                    }
+                    \context Voice = "Music_Voice_3"
+                    {
+                        {
+                            \override TupletBracket.stencil = ##f
+                            \override TupletNumber.stencil = ##f
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \override Beam.positions = #'(8 . 8)
+                                s16
+                                [
+                                s16
+                                s16
+                                s16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 1
+                                e''16
+                                - \accent
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                s16
+                                s16
+                                s16
+                                s16
+                                s16
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                s16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                bf'!16
+                                - \accent
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                fs''!16
+                                - \accent
+                                s16
+                                s16
+                                ]
+                                \revert Beam.positions
+                            }
+                            \revert TupletBracket.stencil
+                            \revert TupletNumber.stencil
+                        }
+                    }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    <<
-                        \context Voice = "Music_Voice_1"
-                        {
-                            {
-                                \override TupletBracket.stencil = ##f
-                                \override TupletNumber.stencil = ##f
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \override Beam.positions = #'(6 . 6)
-                                    s16
-                                    [
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    d'16
-                                    - \staccato
-                                    s16
-                                    s16
-                                    s16
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    s16
-                                    s16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    g''16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    a'16
-                                    - \staccato
-                                    s16
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    s16
-                                    s16
-                                    s16
-                                    s16
-                                    s16
-                                    ]
-                                    \revert Beam.positions
-                                }
-                                \revert TupletBracket.stencil
-                                \revert TupletNumber.stencil
-                            }
-                        }
-                        \context Voice = "Music_Voice_2"
-                        {
-                            {
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 0
-                                    \set stemRightBeamCount = 2
-                                    c'16
-                                    [
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    d'16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    bf'!16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    fs''!16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 1
-                                    e''16
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 2
-                                    ef''!16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    af''!16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    g''16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    a'16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 1
-                                    c'16
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 2
-                                    d'16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    bf'!16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    fs''!16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    e''16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 0
-                                    ef''!16
-                                    ]
-                                }
-                            }
-                        }
-                        \context Voice = "Music_Voice_3"
-                        {
-                            {
-                                \override TupletBracket.stencil = ##f
-                                \override TupletNumber.stencil = ##f
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \override Beam.positions = #'(8 . 8)
-                                    s16
-                                    [
-                                    s16
-                                    s16
-                                    s16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 1
-                                    e''16
-                                    - \accent
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    s16
-                                    s16
-                                    s16
-                                    s16
-                                    s16
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    s16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    bf'!16
-                                    - \accent
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    fs''!16
-                                    - \accent
-                                    s16
-                                    s16
-                                    ]
-                                    \revert Beam.positions
-                                }
-                                \revert TupletBracket.stencil
-                                \revert TupletNumber.stencil
-                            }
-                        }
-                    >>
-                }
-            >>
+            }
 
     ..  container:: example
 
@@ -8038,7 +7975,6 @@ def imbricate(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=closure,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
@@ -8064,157 +8000,151 @@ def imbricate(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #4
                         \time 9/8
                         s1 * 9/8
                     }
+                    \context Voice = "Music_Voice_1"
+                    {
+                        {
+                            \override TupletBracket.stencil = ##f
+                            \override TupletNumber.stencil = ##f
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 6/5
+                            {
+                                \voiceOne
+                                s16
+                                [
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                d'16
+                                - \accent
+                                s16
+                                s16
+                                s16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 6/5
+                            {
+                                s16
+                                s16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                g''16
+                                - \accent
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                a'16
+                                - \accent
+                                s16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 6/5
+                            {
+                                s16
+                                s16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                fs''!16
+                                - \accent
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                e''16
+                                - \accent
+                                s16
+                                ]
+                            }
+                            \revert TupletBracket.stencil
+                            \revert TupletNumber.stencil
+                        }
+                    }
+                    \context Voice = "Music_Voice_2"
+                    {
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 6/5
+                            {
+                                \set stemLeftBeamCount = 0
+                                \set stemRightBeamCount = 2
+                                \voiceTwo
+                                c'16
+                                - \staccato
+                                [
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                d'16
+                                - \staccato
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                bf'!16
+                                - \staccato
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                fs''!16
+                                - \staccato
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 1
+                                e''16
+                                - \staccato
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 6/5
+                            {
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 2
+                                ef''!16
+                                - \staccato
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                af''!16
+                                - \staccato
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                g''16
+                                - \staccato
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                a'16
+                                - \staccato
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 1
+                                c'16
+                                - \staccato
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 6/5
+                            {
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 2
+                                d'16
+                                - \staccato
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                bf'!16
+                                - \staccato
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                fs''!16
+                                - \staccato
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                e''16
+                                - \staccato
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 0
+                                ef''!16
+                                - \staccato
+                                ]
+                            }
+                        }
+                    }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    <<
-                        \context Voice = "Music_Voice_1"
-                        {
-                            {
-                                \override TupletBracket.stencil = ##f
-                                \override TupletNumber.stencil = ##f
-                                \tweak text #tuplet-number::calc-fraction-text
-                                \times 6/5
-                                {
-                                    \voiceOne
-                                    s16
-                                    [
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    d'16
-                                    - \accent
-                                    s16
-                                    s16
-                                    s16
-                                }
-                                \tweak text #tuplet-number::calc-fraction-text
-                                \times 6/5
-                                {
-                                    s16
-                                    s16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    g''16
-                                    - \accent
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    a'16
-                                    - \accent
-                                    s16
-                                }
-                                \tweak text #tuplet-number::calc-fraction-text
-                                \times 6/5
-                                {
-                                    s16
-                                    s16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    fs''!16
-                                    - \accent
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    e''16
-                                    - \accent
-                                    s16
-                                    ]
-                                }
-                                \revert TupletBracket.stencil
-                                \revert TupletNumber.stencil
-                            }
-                        }
-                        \context Voice = "Music_Voice_2"
-                        {
-                            {
-                                \tweak text #tuplet-number::calc-fraction-text
-                                \times 6/5
-                                {
-                                    \set stemLeftBeamCount = 0
-                                    \set stemRightBeamCount = 2
-                                    \voiceTwo
-                                    c'16
-                                    - \staccato
-                                    [
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    d'16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    bf'!16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    fs''!16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 1
-                                    e''16
-                                    - \staccato
-                                }
-                                \tweak text #tuplet-number::calc-fraction-text
-                                \times 6/5
-                                {
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 2
-                                    ef''!16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    af''!16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    g''16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    a'16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 1
-                                    c'16
-                                    - \staccato
-                                }
-                                \tweak text #tuplet-number::calc-fraction-text
-                                \times 6/5
-                                {
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 2
-                                    d'16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    bf'!16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    fs''!16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    e''16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 0
-                                    ef''!16
-                                    - \staccato
-                                    ]
-                                }
-                            }
-                        }
-                    >>
-                }
-            >>
+            }
 
     ..  container:: example
 
@@ -8248,7 +8178,6 @@ def imbricate(
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=closure,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=accumulator.time_signatures,
@@ -8274,93 +8203,87 @@ def imbricate(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #4
                         \time 27/16
                         s1 * 27/16
                     }
+                    \context Voice = "Music_Voice_1"
+                    {
+                        {
+                            \override TupletBracket.stencil = ##f
+                            \override TupletNumber.stencil = ##f
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \voiceOne
+                                s8.
+                                [
+                                s8.
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 1
+                                bf'!8.
+                                - \accent
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 1
+                                fs''!8.
+                                - \accent
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 1
+                                e''8.
+                                - \accent
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 1
+                                ef''!8.
+                                - \accent
+                                s8.
+                                s8.
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                s8.
+                                ]
+                            }
+                            \revert TupletBracket.stencil
+                            \revert TupletNumber.stencil
+                        }
+                    }
+                    \context Voice = "Music_Voice_2"
+                    {
+                        {
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \voiceTwo
+                                c'8.
+                                [
+                                d'8.
+                                bf'!8.
+                                ]
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                fs''!8.
+                                [
+                                e''8.
+                                ef''!8.
+                                af''!8.
+                                g''8.
+                                ]
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                a'8.
+                            }
+                        }
+                    }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    <<
-                        \context Voice = "Music_Voice_1"
-                        {
-                            {
-                                \override TupletBracket.stencil = ##f
-                                \override TupletNumber.stencil = ##f
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \voiceOne
-                                    s8.
-                                    [
-                                    s8.
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 1
-                                    bf'!8.
-                                    - \accent
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 1
-                                    fs''!8.
-                                    - \accent
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 1
-                                    e''8.
-                                    - \accent
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 1
-                                    ef''!8.
-                                    - \accent
-                                    s8.
-                                    s8.
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    s8.
-                                    ]
-                                }
-                                \revert TupletBracket.stencil
-                                \revert TupletNumber.stencil
-                            }
-                        }
-                        \context Voice = "Music_Voice_2"
-                        {
-                            {
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \voiceTwo
-                                    c'8.
-                                    [
-                                    d'8.
-                                    bf'!8.
-                                    ]
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    fs''!8.
-                                    [
-                                    e''8.
-                                    ef''!8.
-                                    af''!8.
-                                    g''8.
-                                    ]
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    a'8.
-                                }
-                            }
-                        }
-                    >>
-                }
-            >>
+            }
 
     ..  container:: example
 
@@ -8392,7 +8315,6 @@ def imbricate(
         >>> maker = baca.SegmentMaker(
         ...     ignore_repeat_pitch_classes=True,
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=closure,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
@@ -8418,117 +8340,111 @@ def imbricate(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #4
                         \time 11/16
                         s1 * 11/16
                     }
+                    \context Voice = "Music_Voice_1"
+                    {
+                        {
+                            \override TupletBracket.stencil = ##f
+                            \override TupletNumber.stencil = ##f
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                \voiceOne
+                                d'16
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                s16
+                                s16
+                                \set stemLeftBeamCount = 0
+                                \set stemRightBeamCount = 2
+                                g''16
+                                [
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 0
+                                a'16
+                                ]
+                                s16
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                s16
+                                s16
+                                \set stemLeftBeamCount = 0
+                                \set stemRightBeamCount = 2
+                                fs''!16
+                                [
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 0
+                                e''16
+                                ]
+                                s16
+                            }
+                            \revert TupletBracket.stencil
+                            \revert TupletNumber.stencil
+                        }
+                    }
+                    \context Voice = "Music_Voice_2"
+                    {
+                        {
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                \voiceTwo
+                                <c' d' bf'! e'' fs''!>16
+                                [
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 2
+                                ef''!16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                af''!16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                g''16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                a'16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 1
+                                c'16
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 2
+                                d'16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                bf'!16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                fs''!16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                e''16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 0
+                                ef''!16
+                                ]
+                            }
+                        }
+                    }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    <<
-                        \context Voice = "Music_Voice_1"
-                        {
-                            {
-                                \override TupletBracket.stencil = ##f
-                                \override TupletNumber.stencil = ##f
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    \voiceOne
-                                    d'16
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    s16
-                                    s16
-                                    \set stemLeftBeamCount = 0
-                                    \set stemRightBeamCount = 2
-                                    g''16
-                                    [
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 0
-                                    a'16
-                                    ]
-                                    s16
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    s16
-                                    s16
-                                    \set stemLeftBeamCount = 0
-                                    \set stemRightBeamCount = 2
-                                    fs''!16
-                                    [
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 0
-                                    e''16
-                                    ]
-                                    s16
-                                }
-                                \revert TupletBracket.stencil
-                                \revert TupletNumber.stencil
-                            }
-                        }
-                        \context Voice = "Music_Voice_2"
-                        {
-                            {
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    \voiceTwo
-                                    <c' d' bf'! e'' fs''!>16
-                                    [
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 2
-                                    ef''!16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    af''!16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    g''16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    a'16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 1
-                                    c'16
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 2
-                                    d'16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    bf'!16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    fs''!16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    e''16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 0
-                                    ef''!16
-                                    ]
-                                }
-                            }
-                        }
-                    >>
-                }
-            >>
+            }
 
     ..  container:: example
 
@@ -8560,7 +8476,6 @@ def imbricate(
         >>> maker = baca.SegmentMaker(
         ...     ignore_repeat_pitch_classes=True,
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=closure,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
@@ -8586,137 +8501,131 @@ def imbricate(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
-                \context GlobalContext = "Global_Context"
+            {
+                \context Staff = "Music_Staff"
                 <<
-                    \context GlobalSkips = "Global_Skips"
+                    \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #4
                         \time 19/16
                         s1 * 19/16
                     }
+                    \context Voice = "Music_Voice_1"
+                    {
+                        {
+                            \override TupletBracket.stencil = ##f
+                            \override TupletNumber.stencil = ##f
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \voiceOne
+                                s8
+                                s16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                d'16
+                                s16
+                                s16
+                                s16
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                s16
+                                s16
+                                \set stemLeftBeamCount = 0
+                                \set stemRightBeamCount = 2
+                                g''16
+                                [
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 0
+                                a'16
+                                ]
+                                s16
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                s16
+                                s16
+                                \set stemLeftBeamCount = 0
+                                \set stemRightBeamCount = 2
+                                fs''!16
+                                [
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 0
+                                e''16
+                                ]
+                                s16
+                                s8
+                            }
+                            \revert TupletBracket.stencil
+                            \revert TupletNumber.stencil
+                        }
+                    }
+                    \context Voice = "Music_Voice_2"
+                    {
+                        {
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \voiceTwo
+                                r8
+                                \set stemLeftBeamCount = 0
+                                \set stemRightBeamCount = 2
+                                c'16
+                                [
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                d'16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                bf'!16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                fs''!16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 1
+                                e''16
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 2
+                                ef''!16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                af''!16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                g''16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                a'16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 1
+                                c'16
+                            }
+                            \scaleDurations #'(1 . 1)
+                            {
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 2
+                                d'16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                bf'!16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                fs''!16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
+                                e''16
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 0
+                                ef''!16
+                                ]
+                                r8
+                            }
+                        }
+                    }
                 >>
-                \context MusicContext = "Music_Context"
-                {
-                    \context Staff = "Music_Staff"
-                    <<
-                        \context Voice = "Music_Voice_1"
-                        {
-                            {
-                                \override TupletBracket.stencil = ##f
-                                \override TupletNumber.stencil = ##f
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \voiceOne
-                                    s8
-                                    s16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    d'16
-                                    s16
-                                    s16
-                                    s16
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    s16
-                                    s16
-                                    \set stemLeftBeamCount = 0
-                                    \set stemRightBeamCount = 2
-                                    g''16
-                                    [
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 0
-                                    a'16
-                                    ]
-                                    s16
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    s16
-                                    s16
-                                    \set stemLeftBeamCount = 0
-                                    \set stemRightBeamCount = 2
-                                    fs''!16
-                                    [
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 0
-                                    e''16
-                                    ]
-                                    s16
-                                    s8
-                                }
-                                \revert TupletBracket.stencil
-                                \revert TupletNumber.stencil
-                            }
-                        }
-                        \context Voice = "Music_Voice_2"
-                        {
-                            {
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \voiceTwo
-                                    r8
-                                    \set stemLeftBeamCount = 0
-                                    \set stemRightBeamCount = 2
-                                    c'16
-                                    [
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    d'16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    bf'!16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    fs''!16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 1
-                                    e''16
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 2
-                                    ef''!16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    af''!16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    g''16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    a'16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 1
-                                    c'16
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 2
-                                    d'16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    bf'!16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    fs''!16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    e''16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 0
-                                    ef''!16
-                                    ]
-                                    r8
-                                }
-                            }
-                        }
-                    >>
-                }
-            >>
+            }
 
     """
     return Imbrication(

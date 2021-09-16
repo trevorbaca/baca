@@ -253,7 +253,6 @@ class BCPCommand(_scoping.Command):
 
             >>> maker = baca.SegmentMaker(
             ...     includes=["baca.ily"],
-            ...     preamble=[baca.global_context_string()],
             ...     score_template=baca.make_empty_score_maker(1),
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -284,10 +283,10 @@ class BCPCommand(_scoping.Command):
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
-                <<
-                    \context GlobalContext = "Global_Context"
+                {
+                    \context Staff = "Music_Staff"
                     <<
-                        \context GlobalSkips = "Global_Skips"
+                        \context Voice = "Global_Skips"
                         {
                             \baca-new-spacing-section #1 #16
                             \time 4/8
@@ -302,105 +301,99 @@ class BCPCommand(_scoping.Command):
                             \time 3/8
                             s1 * 3/8
                         }
-                    >>
-                    \context MusicContext = "Music_Context"
-                    {
-                        \context Staff = "Music_Staff"
+                        \context Voice = "Music_Voice"
                         {
-                            \context Voice = "Music_Voice"
-                            {
-                                \override Script.staff-padding = 5.5
-                                \override TextSpanner.staff-padding = 2.5
-                                e'8
-                                - \downbow
-                                [
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #1 #5
-                                \bacaStartTextSpanBCP
-                                f'8
-                                - \upbow
-                                \bacaStopTextSpanBCP
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #2 #5
-                                \bacaStartTextSpanBCP
-                                e'8
-                                - \downbow
-                                \bacaStopTextSpanBCP
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #1 #5
-                                \bacaStartTextSpanBCP
-                                f'8
-                                - \upbow
-                                \bacaStopTextSpanBCP
-                                ]
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #2 #5
-                                \bacaStartTextSpanBCP
-                                e'8
-                                - \downbow
-                                \bacaStopTextSpanBCP
-                                [
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #1 #5
-                                \bacaStartTextSpanBCP
-                                f'8
-                                - \upbow
-                                \bacaStopTextSpanBCP
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #2 #5
-                                - \baca-bcp-spanner-right-text #1 #5
-                                \bacaStartTextSpanBCP
-                                e'8
-                                \bacaStopTextSpanBCP
-                                ]
-                                f'8
-                                - \downbow
-                                [
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #3 #5
-                                \bacaStartTextSpanBCP
-                                e'8
-                                - \upbow
-                                \bacaStopTextSpanBCP
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #4 #5
-                                \bacaStartTextSpanBCP
-                                f'8
-                                - \downbow
-                                \bacaStopTextSpanBCP
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #3 #5
-                                \bacaStartTextSpanBCP
-                                e'8
-                                - \upbow
-                                \bacaStopTextSpanBCP
-                                ]
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #4 #5
-                                \bacaStartTextSpanBCP
-                                f'8
-                                - \downbow
-                                \bacaStopTextSpanBCP
-                                [
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #3 #5
-                                \bacaStartTextSpanBCP
-                                e'8
-                                - \upbow
-                                \bacaStopTextSpanBCP
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #4 #5
-                                - \baca-bcp-spanner-right-text #3 #5
-                                \bacaStartTextSpanBCP
-                                f'8
-                                \bacaStopTextSpanBCP
-                                ]
-                                \revert Script.staff-padding
-                                \revert TextSpanner.staff-padding
-                            }
+                            \override Script.staff-padding = 5.5
+                            \override TextSpanner.staff-padding = 2.5
+                            e'8
+                            - \downbow
+                            [
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #1 #5
+                            \bacaStartTextSpanBCP
+                            f'8
+                            - \upbow
+                            \bacaStopTextSpanBCP
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #2 #5
+                            \bacaStartTextSpanBCP
+                            e'8
+                            - \downbow
+                            \bacaStopTextSpanBCP
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #1 #5
+                            \bacaStartTextSpanBCP
+                            f'8
+                            - \upbow
+                            \bacaStopTextSpanBCP
+                            ]
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #2 #5
+                            \bacaStartTextSpanBCP
+                            e'8
+                            - \downbow
+                            \bacaStopTextSpanBCP
+                            [
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #1 #5
+                            \bacaStartTextSpanBCP
+                            f'8
+                            - \upbow
+                            \bacaStopTextSpanBCP
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #2 #5
+                            - \baca-bcp-spanner-right-text #1 #5
+                            \bacaStartTextSpanBCP
+                            e'8
+                            \bacaStopTextSpanBCP
+                            ]
+                            f'8
+                            - \downbow
+                            [
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #3 #5
+                            \bacaStartTextSpanBCP
+                            e'8
+                            - \upbow
+                            \bacaStopTextSpanBCP
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #4 #5
+                            \bacaStartTextSpanBCP
+                            f'8
+                            - \downbow
+                            \bacaStopTextSpanBCP
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #3 #5
+                            \bacaStartTextSpanBCP
+                            e'8
+                            - \upbow
+                            \bacaStopTextSpanBCP
+                            ]
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #4 #5
+                            \bacaStartTextSpanBCP
+                            f'8
+                            - \downbow
+                            \bacaStopTextSpanBCP
+                            [
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #3 #5
+                            \bacaStartTextSpanBCP
+                            e'8
+                            - \upbow
+                            \bacaStopTextSpanBCP
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #4 #5
+                            - \baca-bcp-spanner-right-text #3 #5
+                            \bacaStartTextSpanBCP
+                            f'8
+                            \bacaStopTextSpanBCP
+                            ]
+                            \revert Script.staff-padding
+                            \revert TextSpanner.staff-padding
                         }
-                    }
-                >>
+                    >>
+                }
 
         """
         return self._bow_contact_points
@@ -464,7 +457,6 @@ class BCPCommand(_scoping.Command):
 
             >>> maker = baca.SegmentMaker(
             ...     includes=["baca.ily"],
-            ...     preamble=[baca.global_context_string()],
             ...     score_template=baca.make_empty_score_maker(1),
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -493,10 +485,10 @@ class BCPCommand(_scoping.Command):
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
-                <<
-                    \context GlobalContext = "Global_Context"
+                {
+                    \context Staff = "Music_Staff"
                     <<
-                        \context GlobalSkips = "Global_Skips"
+                        \context Voice = "Global_Skips"
                         {
                             \baca-new-spacing-section #1 #16
                             \time 4/8
@@ -511,133 +503,127 @@ class BCPCommand(_scoping.Command):
                             \time 3/8
                             s1 * 3/8
                         }
-                    >>
-                    \context MusicContext = "Music_Context"
-                    {
-                        \context Staff = "Music_Staff"
+                        \context Voice = "Music_Voice"
                         {
-                            \context Voice = "Music_Voice"
-                            {
-                                \override Script.staff-padding = 5
-                                e'8
-                                - \downbow
-                                [
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #1 #5
-                                - \tweak color #red
-                                - \tweak staff-padding 2.5
-                                \bacaStartTextSpanBCP
-                                f'8
-                                - \upbow
-                                \bacaStopTextSpanBCP
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #2 #5
-                                - \tweak color #red
-                                - \tweak staff-padding 2.5
-                                \bacaStartTextSpanBCP
-                                e'8
-                                - \downbow
-                                \bacaStopTextSpanBCP
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #1 #5
-                                - \tweak color #red
-                                - \tweak staff-padding 2.5
-                                \bacaStartTextSpanBCP
-                                f'8
-                                - \upbow
-                                \bacaStopTextSpanBCP
-                                ]
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #2 #5
-                                - \tweak color #red
-                                - \tweak staff-padding 2.5
-                                \bacaStartTextSpanBCP
-                                e'8
-                                - \downbow
-                                \bacaStopTextSpanBCP
-                                [
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #1 #5
-                                - \tweak color #red
-                                - \tweak staff-padding 2.5
-                                \bacaStartTextSpanBCP
-                                f'8
-                                - \upbow
-                                \bacaStopTextSpanBCP
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #2 #5
-                                - \tweak color #red
-                                - \tweak staff-padding 2.5
-                                \bacaStartTextSpanBCP
-                                e'8
-                                - \downbow
-                                \bacaStopTextSpanBCP
-                                ]
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #1 #5
-                                - \tweak color #red
-                                - \tweak staff-padding 2.5
-                                \bacaStartTextSpanBCP
-                                f'8
-                                - \upbow
-                                \bacaStopTextSpanBCP
-                                [
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #2 #5
-                                - \tweak color #red
-                                - \tweak staff-padding 2.5
-                                \bacaStartTextSpanBCP
-                                e'8
-                                - \downbow
-                                \bacaStopTextSpanBCP
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #1 #5
-                                - \tweak color #red
-                                - \tweak staff-padding 2.5
-                                \bacaStartTextSpanBCP
-                                f'8
-                                - \upbow
-                                \bacaStopTextSpanBCP
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #2 #5
-                                - \tweak color #red
-                                - \tweak staff-padding 2.5
-                                \bacaStartTextSpanBCP
-                                e'8
-                                - \downbow
-                                \bacaStopTextSpanBCP
-                                ]
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #1 #5
-                                - \tweak color #red
-                                - \tweak staff-padding 2.5
-                                \bacaStartTextSpanBCP
-                                f'8
-                                - \upbow
-                                \bacaStopTextSpanBCP
-                                [
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #2 #5
-                                - \tweak color #red
-                                - \tweak staff-padding 2.5
-                                \bacaStartTextSpanBCP
-                                e'8
-                                - \downbow
-                                \bacaStopTextSpanBCP
-                                - \abjad-solid-line-with-arrow
-                                - \baca-bcp-spanner-left-text #1 #5
-                                - \baca-bcp-spanner-right-text #2 #5
-                                - \tweak color #red
-                                - \tweak staff-padding 2.5
-                                \bacaStartTextSpanBCP
-                                f'8
-                                \bacaStopTextSpanBCP
-                                ]
-                                \revert Script.staff-padding
-                            }
+                            \override Script.staff-padding = 5
+                            e'8
+                            - \downbow
+                            [
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #1 #5
+                            - \tweak color #red
+                            - \tweak staff-padding 2.5
+                            \bacaStartTextSpanBCP
+                            f'8
+                            - \upbow
+                            \bacaStopTextSpanBCP
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #2 #5
+                            - \tweak color #red
+                            - \tweak staff-padding 2.5
+                            \bacaStartTextSpanBCP
+                            e'8
+                            - \downbow
+                            \bacaStopTextSpanBCP
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #1 #5
+                            - \tweak color #red
+                            - \tweak staff-padding 2.5
+                            \bacaStartTextSpanBCP
+                            f'8
+                            - \upbow
+                            \bacaStopTextSpanBCP
+                            ]
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #2 #5
+                            - \tweak color #red
+                            - \tweak staff-padding 2.5
+                            \bacaStartTextSpanBCP
+                            e'8
+                            - \downbow
+                            \bacaStopTextSpanBCP
+                            [
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #1 #5
+                            - \tweak color #red
+                            - \tweak staff-padding 2.5
+                            \bacaStartTextSpanBCP
+                            f'8
+                            - \upbow
+                            \bacaStopTextSpanBCP
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #2 #5
+                            - \tweak color #red
+                            - \tweak staff-padding 2.5
+                            \bacaStartTextSpanBCP
+                            e'8
+                            - \downbow
+                            \bacaStopTextSpanBCP
+                            ]
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #1 #5
+                            - \tweak color #red
+                            - \tweak staff-padding 2.5
+                            \bacaStartTextSpanBCP
+                            f'8
+                            - \upbow
+                            \bacaStopTextSpanBCP
+                            [
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #2 #5
+                            - \tweak color #red
+                            - \tweak staff-padding 2.5
+                            \bacaStartTextSpanBCP
+                            e'8
+                            - \downbow
+                            \bacaStopTextSpanBCP
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #1 #5
+                            - \tweak color #red
+                            - \tweak staff-padding 2.5
+                            \bacaStartTextSpanBCP
+                            f'8
+                            - \upbow
+                            \bacaStopTextSpanBCP
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #2 #5
+                            - \tweak color #red
+                            - \tweak staff-padding 2.5
+                            \bacaStartTextSpanBCP
+                            e'8
+                            - \downbow
+                            \bacaStopTextSpanBCP
+                            ]
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #1 #5
+                            - \tweak color #red
+                            - \tweak staff-padding 2.5
+                            \bacaStartTextSpanBCP
+                            f'8
+                            - \upbow
+                            \bacaStopTextSpanBCP
+                            [
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #2 #5
+                            - \tweak color #red
+                            - \tweak staff-padding 2.5
+                            \bacaStartTextSpanBCP
+                            e'8
+                            - \downbow
+                            \bacaStopTextSpanBCP
+                            - \abjad-solid-line-with-arrow
+                            - \baca-bcp-spanner-left-text #1 #5
+                            - \baca-bcp-spanner-right-text #2 #5
+                            - \tweak color #red
+                            - \tweak staff-padding 2.5
+                            \bacaStartTextSpanBCP
+                            f'8
+                            \bacaStopTextSpanBCP
+                            ]
+                            \revert Script.staff-padding
                         }
-                    }
-                >>
+                    >>
+                }
 
         ..  container:: example
 
@@ -737,7 +723,6 @@ class ContainerCommand(_scoping.Command):
 
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
-        ...     preamble=[baca.global_context_string()],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -756,10 +741,10 @@ class ContainerCommand(_scoping.Command):
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
-            \context GlobalContext = "Global_Context"
+        {
+            \context Staff = "Music_Staff"
             <<
-                \context GlobalSkips = "Global_Skips"
+                \context Voice = "Global_Skips"
                 {
                     \time 4/8
                     s1 * 1/2
@@ -769,26 +754,20 @@ class ContainerCommand(_scoping.Command):
                     s1 * 1/2
                     \time 3/8
                     s1 * 3/8
+                }
+                \context Voice = "Music_Voice"
+                {
+                    {   %*% ViolinI
+                        e'2
+                        f'4.
+                    }   %*% ViolinI
+                    {   %*% ViolinII
+                        e'2
+                        f'4.
+                    }   %*% ViolinII
                 }
             >>
-            \context MusicContext = "Music_Context"
-            {
-                \context Staff = "Music_Staff"
-                {
-                    \context Voice = "Music_Voice"
-                    {
-                        {   %*% ViolinI
-                            e'2
-                            f'4.
-                        }   %*% ViolinI
-                        {   %*% ViolinII
-                            e'2
-                            f'4.
-                        }   %*% ViolinII
-                    }
-                }
-            }
-        >>
+        }
 
     """
 
