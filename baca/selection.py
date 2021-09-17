@@ -1,5 +1,5 @@
-import inspect
 import typing
+from inspect import currentframe as _frame
 
 import abjad
 
@@ -98,7 +98,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe(), lone=True)
+            return self._update_expression(_frame(), lone=True)
         return self.cheads(exclude=exclude)[n]
 
     def cheads(
@@ -196,7 +196,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         return super().leaves(abjad.Chord, exclude=exclude, head=True)
 
     def clparts(
@@ -306,7 +306,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         return (
             super()
             .leaves(exclude=exclude)
@@ -374,7 +374,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         result = self.leaves(exclude=exclude)
         result = result.group_by_measure()
         result = result.partition_by_counts(counts, cyclic=True)
@@ -506,7 +506,7 @@ class Selection(abjad.Selection):
         Returns new selection (or expression).
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         return self.partition_by_counts(
             counts=counts, cyclic=True, enchain=True, overhang=True
         )
@@ -564,7 +564,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe(), lone=True)
+            return self._update_expression(_frame(), lone=True)
         return self.graces(exclude=exclude)[n]
 
     def graces(
@@ -628,7 +628,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         return self.leaves(exclude=exclude, grace=True)
 
     def hleaf(
@@ -684,7 +684,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe(), lone=True)
+            return self._update_expression(_frame(), lone=True)
         return self.hleaves(exclude=exclude)[n]
 
     def hleaves(
@@ -748,7 +748,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         return self.leaves(exclude=exclude, grace=False)
 
     def lleaf(
@@ -834,7 +834,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe(), lone=True)
+            return self._update_expression(_frame(), lone=True)
         return self.lleaves(exclude=exclude)[n]
 
     def lleak(self) -> typing.Union[abjad.Selection, abjad.Expression]:
@@ -892,7 +892,7 @@ class Selection(abjad.Selection):
         Returns new selection (or expression).
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         return self.with_previous_leaf()
 
     def lleaves(
@@ -992,7 +992,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         return self.leaves(exclude=exclude).with_previous_leaf()
 
     def lparts(
@@ -1090,7 +1090,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         return super().leaves(exclude=exclude).partition_by_counts(counts=counts)
 
     def lt(
@@ -1177,7 +1177,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe(), lone=True)
+            return self._update_expression(_frame(), lone=True)
         return self.lts(exclude=exclude)[n]
 
     def ltleaf(
@@ -1262,7 +1262,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe(), lone=True)
+            return self._update_expression(_frame(), lone=True)
         return self.ltleaves(exclude=exclude)[n]
 
     def ltleaves(
@@ -1381,7 +1381,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         return super().leaves(exclude=exclude, trim=abjad.Left)
 
     def ltqrun(
@@ -1468,7 +1468,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe(), lone=True)
+            return self._update_expression(_frame(), lone=True)
         return self.ltqruns(exclude=exclude)[n]
 
     def ltqruns(
@@ -1575,7 +1575,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         result = self.plts(exclude=exclude)
         result = result.group_by_pitch()
         assert isinstance(result, Selection)
@@ -1673,7 +1673,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe(), lone=True)
+            return self._update_expression(_frame(), lone=True)
         return self.ltruns(exclude=exclude)[n]
 
     def ltruns(
@@ -1777,7 +1777,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         result = self.logical_ties(exclude=exclude, pitched=True)
         result = result.group_by_contiguity()
         assert isinstance(result, Selection)
@@ -1900,7 +1900,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         return self.logical_ties(exclude=exclude, nontrivial=nontrivial)
 
     def mgroups(
@@ -1962,7 +1962,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         result = self.leaves(exclude=exclude)
         result = result.group_by_measure()
         result = result.partition_by_counts(counts)
@@ -2090,7 +2090,7 @@ class Selection(abjad.Selection):
         """
         assert isinstance(count, int), repr(count)
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         result = self.leaves(exclude=exclude).group_by_measure()
         if 0 < count:
             result = result[:count].flatten()
@@ -2139,7 +2139,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe(), lone=True)
+            return self._update_expression(_frame(), lone=True)
         return self.mmrests(exclude=exclude)[n]
 
     def mmrests(
@@ -2189,7 +2189,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         return super().leaves(abjad.MultimeasureRest, exclude=exclude)
 
     def ntrun(
@@ -2279,7 +2279,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe(), lone=True)
+            return self._update_expression(_frame(), lone=True)
         return self.ntruns(exclude=exclude)[n]
 
     def ntruns(
@@ -2383,7 +2383,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         return self.runs(exclude=exclude).nontrivial()
 
     def omgroups(
@@ -2452,7 +2452,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         result = self.leaves(exclude=exclude)
         result = result.group_by_measure()
         result = result.partition_by_counts(counts, overhang=True)
@@ -2471,7 +2471,7 @@ class Selection(abjad.Selection):
         Partitions measure-grouped plts (with overhang).
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         result = self.plts(exclude=exclude)
         result = result.group_by_measure()
         result = result.partition_by_counts(counts, overhang=True)
@@ -2563,7 +2563,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe(), lone=True)
+            return self._update_expression(_frame(), lone=True)
         return self.pheads(exclude=exclude)[n]
 
     def pheads(
@@ -2673,7 +2673,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         result = self.plts(exclude=exclude, grace=grace)
         assert isinstance(result, Selection)
         result = Selection(Selection(_)[0] for _ in result)
@@ -2762,7 +2762,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe(), lone=True)
+            return self._update_expression(_frame(), lone=True)
         return self.pleaves(exclude=exclude, grace=grace)[n]
 
     def pleaves(
@@ -2878,7 +2878,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         return super().leaves(exclude=exclude, grace=grace, pitched=True)
 
     def plt(
@@ -2965,7 +2965,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe(), lone=True)
+            return self._update_expression(_frame(), lone=True)
         return self.plts(exclude=exclude, grace=grace)[n]
 
     def plts(
@@ -3078,7 +3078,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         return self.logical_ties(exclude=exclude, grace=grace, pitched=True)
 
     def ptail(
@@ -3164,7 +3164,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe(), lone=True)
+            return self._update_expression(_frame(), lone=True)
         return self.ptails(exclude=exclude)[n]
 
     def ptails(
@@ -3274,7 +3274,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         result = self.plts(exclude=exclude)
         assert isinstance(result, Selection)
         result = Selection(Selection(_)[-1] for _ in result)
@@ -3363,7 +3363,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe(), lone=True)
+            return self._update_expression(_frame(), lone=True)
         return self.ptlts(exclude=exclude)[n]
 
     def ptlts(
@@ -3467,7 +3467,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         return self.logical_ties(exclude=exclude, nontrivial=False, pitched=True)
 
     def qrun(
@@ -3554,7 +3554,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe(), lone=True)
+            return self._update_expression(_frame(), lone=True)
         return self.qruns(exclude=exclude)[n]
 
     def qruns(
@@ -3661,7 +3661,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         result = self.pleaves(exclude=exclude)
         result = result.group_by_pitch()
         assert isinstance(result, Selection)
@@ -3754,7 +3754,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe(), lone=True)
+            return self._update_expression(_frame(), lone=True)
         return self.rleaves(exclude=exclude)[n]
 
     def rleak(
@@ -3814,7 +3814,7 @@ class Selection(abjad.Selection):
         Returns new selection (or expression).
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         return self.with_next_leaf(grace=grace)
 
     def rleaves(
@@ -3914,7 +3914,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         return self.leaves(exclude=exclude).with_next_leaf()
 
     def rmleaves(
@@ -3978,7 +3978,7 @@ class Selection(abjad.Selection):
         """
         assert isinstance(count, int), repr(count)
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         return self.mleaves(count, exclude=exclude).rleak()
 
     def rrun(
@@ -4069,7 +4069,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe(), lone=True)
+            return self._update_expression(_frame(), lone=True)
         return self.rruns(exclude=exclude)[n]
 
     def rruns(
@@ -4175,7 +4175,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         result = self.runs(exclude=exclude)
         assert isinstance(result, Selection)
         result = Selection(Selection(_).rleak() for _ in result)
@@ -4231,7 +4231,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe(), lone=True)
+            return self._update_expression(_frame(), lone=True)
         return self.skips(exclude=exclude)[n]
 
     def skips(
@@ -4289,7 +4289,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         return self.components(abjad.Skip, exclude=exclude)
 
     def tleaf(
@@ -4375,7 +4375,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe(), lone=True)
+            return self._update_expression(_frame(), lone=True)
         return self.tleaves(exclude=exclude, grace=grace)[n]
 
     def tleaves(
@@ -4495,7 +4495,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         return super().leaves(exclude=exclude, grace=grace, trim=True)
 
     def wleaf(
@@ -4656,7 +4656,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe(), lone=True)
+            return self._update_expression(_frame(), lone=True)
         return self.wleaves(exclude=exclude)[n]
 
     def wleaves(
@@ -4758,7 +4758,7 @@ class Selection(abjad.Selection):
 
         """
         if self._expression:
-            return self._update_expression(inspect.currentframe())
+            return self._update_expression(_frame())
         return self.leaves(exclude=exclude).with_previous_leaf().with_next_leaf()
 
 

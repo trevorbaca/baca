@@ -1,8 +1,8 @@
 """
 Spanner commands.
 """
-import inspect
 import typing
+from inspect import currentframe as _frame
 
 import abjad
 
@@ -10,12 +10,6 @@ from . import scoping as _scoping
 from . import selection as _selection
 from . import tags as _tags
 from . import typings
-
-
-def _site(frame):
-    prefix = "baca"
-    return _scoping.site(frame, prefix)
-
 
 ### CLASSES ###
 
@@ -299,7 +293,7 @@ def beam(
         selector=selector,
         start_indicator=start_beam,
         stop_indicator=stop_beam,
-        tags=[_site(inspect.currentframe())],
+        tags=[_scoping.site_new(_frame())],
         tweaks=tweaks,
     )
 
@@ -392,7 +386,7 @@ def ottava(
         selector=selector,
         start_indicator=start_ottava,
         stop_indicator=stop_ottava,
-        tags=[_site(inspect.currentframe())],
+        tags=[_scoping.site_new(_frame())],
     )
 
 
@@ -482,7 +476,7 @@ def ottava_bassa(
         selector=selector,
         start_indicator=start_ottava,
         stop_indicator=stop_ottava,
-        tags=[_site(inspect.currentframe())],
+        tags=[_scoping.site_new(_frame())],
     )
 
 
@@ -584,7 +578,7 @@ def slur(
         selector=selector,
         start_indicator=start_slur,
         stop_indicator=stop_slur,
-        tags=[_site(inspect.currentframe())],
+        tags=[_scoping.site_new(_frame())],
         tweaks=tweaks,
     )
 
@@ -680,7 +674,7 @@ def sustain_pedal(
         selector=selector,
         start_indicator=start_piano_pedal,
         stop_indicator=stop_piano_pedal,
-        tags=[_site(inspect.currentframe())],
+        tags=[_scoping.site_new(_frame())],
     )
 
 
@@ -962,6 +956,6 @@ def trill_spanner(
         selector=selector,
         start_indicator=start_trill_span,
         stop_indicator=stop_trill_span,
-        tags=[_site(inspect.currentframe())],
+        tags=[_scoping.site_new(_frame())],
         tweaks=tweaks,
     )

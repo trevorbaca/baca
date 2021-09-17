@@ -1,9 +1,10 @@
 """
 Scoping.
 """
-import inspect
 import os
 import typing
+from inspect import currentframe as _frame
+from inspect import getframeinfo
 
 import abjad
 
@@ -88,7 +89,7 @@ def _attach_latent_indicator_alert(
     markup_function = _status_to_markup_function[status]
     string = fr'\{markup_function} "{string}"'
     markup = abjad.Markup(string, direction=abjad.Up, literal=True)
-    tag = tag.append(_site(inspect.currentframe()))
+    tag = tag.append(site(_frame()))
     abjad.attach(markup, leaf, deactivate=existing_deactivate, tag=tag)
 
 
@@ -161,15 +162,10 @@ def _set_status_tag(wrapper, status, redraw=None, stem=None):
     prefix = None
     if redraw is True:
         prefix = "redrawn"
-    tag = wrapper.tag.append(_site(inspect.currentframe()))
+    tag = wrapper.tag.append(site(_frame()))
     status_tag = _get_tag(status, stem, prefix=prefix)
     tag = tag.append(status_tag)
     wrapper.tag = tag
-
-
-def _site(frame, n=None):
-    prefix = "baca.SegmentMaker"
-    return site(frame, prefix, n=n)
 
 
 _status_to_color = {
@@ -255,11 +251,11 @@ def attach_color_literal(
         string = rf"\baca-time-signature-color #'{color}"
         literal = abjad.LilyPondLiteral(string)
     if cancelation is True:
-        tag = _site(inspect.currentframe(), 1)
+        tag = site(_frame(), n=1)
         tag = tag.append(status_tag)
         abjad.attach(literal, wrapper.component, deactivate=True, tag=tag)
     else:
-        tag = _site(inspect.currentframe(), 2)
+        tag = site(_frame(), n=2)
         tag = tag.append(status_tag)
         abjad.attach(
             literal,
@@ -338,7 +334,7 @@ def treat_persistent_wrapper(manifests, wrapper, status):
         wrapper_ = abjad.attach(
             literal,
             wrapper.component,
-            tag=wrapper.tag.append(_site(inspect.currentframe(), 2)),
+            tag=wrapper.tag.append(site(_frame(), n=2)),
             wrapper=True,
         )
         _set_status_tag(wrapper_, status, stem="CLEF")
@@ -358,7 +354,7 @@ def treat_persistent_wrapper(manifests, wrapper, status):
         wrapper_ = abjad.attach(
             literal,
             leaf,
-            tag=existing_tag.append(_site(inspect.currentframe(), 3)),
+            tag=existing_tag.append(site(_frame(), n=3)),
             wrapper=True,
         )
         _set_status_tag(wrapper_, status, redraw=True, stem=stem)
@@ -1468,14 +1464,15 @@ def only_segment(command: _command_typing) -> _command_typing:
     return tag(_tags.ONLY_SEGMENT, command)
 
 
-def site(frame, prefix, *, n=None) -> abjad.Tag:
+def site(frame, *, n=None) -> abjad.Tag:
     """
     Makes site from ``frame``.
 
     ..  todo:: Determine prefix dynamically.
 
     """
-    frame_info = inspect.getframeinfo(frame)
+    prefix = "baca.SegmentMaker"
+    frame_info = getframeinfo(frame)
     if n is None:
         string = f"{prefix}.{frame_info.function}()"
     else:
@@ -1489,13 +1486,19 @@ def site_new(frame, self=None, *, n=None):
     """
     parts = []
     path = frame.f_code.co_filename.removesuffix(".py")
+    found_library = False
     for part in reversed(path.split(os.sep)):
         parts.append(part)
         if part == "baca":
             break
+        if found_library:
+            break
+        if part == "library":
+            found_library = True
     parts.reverse()
-    if self is not None:
+    if parts[0] == "baca":
         parts.pop()
+    if self is not None:
         parts.append(type(self).__name__)
     parts.append(frame.f_code.co_name)
     string = ".".join(parts) + ("()" if n is None else f"({n})")

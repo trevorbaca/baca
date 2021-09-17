@@ -1,9 +1,9 @@
 """
 Commands.
 """
-import inspect
 import pathlib
 import typing
+from inspect import currentframe as _frame
 
 import abjad
 
@@ -14,16 +14,11 @@ from . import indicators as _indicators
 from . import overrides as _overrides
 from . import parts as _parts
 from . import path as _path
-from . import pitchcommands, scoping
+from . import pitchcommands as _pitchcommands
+from . import scoping as _scoping
 from . import selection as _selection
 from . import tags as _tags
 from . import typings
-
-
-def _site(frame, n=None):
-    prefix = "baca"
-    return scoping.site(frame, prefix, n=n)
-
 
 ### FACTORY FUNCTIONS ###
 
@@ -296,7 +291,7 @@ def bcps(
         final_spanner=final_spanner,
         helper=helper,
         selector=selector,
-        tags=[_site(inspect.currentframe())],
+        tags=[_scoping.site_new(_frame())],
         tweaks=tweaks,
     )
 
@@ -305,16 +300,18 @@ def close_volta(
     selector=lambda _: _selection.Selection(_).leaf(0),
     *,
     format_slot: str = "before",
-) -> scoping.Suite:
+) -> _scoping.Suite:
     """
     Attaches bar line and overrides bar line X-extent.
     """
     assert format_slot in ("after", "before"), repr(format_slot)
     after = format_slot == "after"
     # does not require not_mol() tagging, just only_mol() tagging:
-    return scoping.suite(
+    return _scoping.suite(
         _indicatorcommands.bar_line(":|.", selector, format_slot=format_slot),
-        scoping.only_mol(_overrides.bar_line_x_extent((0, 1.5), selector, after=after)),
+        _scoping.only_mol(
+            _overrides.bar_line_x_extent((0, 1.5), selector, after=after)
+        ),
     )
 
 
@@ -629,20 +626,20 @@ def cross_staff(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r"\crossStaff")],
         selector=selector,
-        tags=[_site(inspect.currentframe())],
+        tags=[_scoping.site_new(_frame())],
     )
 
 
 def double_volta(
     selector=lambda _: _selection.Selection(_).leaf(0),
-) -> scoping.Suite:
+) -> _scoping.Suite:
     """
     Attaches bar line and overrides bar line X-extent.
     """
-    return scoping.suite(
+    return _scoping.suite(
         _indicatorcommands.bar_line(":.|.:", selector, format_slot="before"),
-        scoping.not_mol(_overrides.bar_line_x_extent((0, 3), selector)),
-        scoping.only_mol(_overrides.bar_line_x_extent((0, 4), selector)),
+        _scoping.not_mol(_overrides.bar_line_x_extent((0, 3), selector)),
+        _scoping.only_mol(_overrides.bar_line_x_extent((0, 4), selector)),
     )
 
 
@@ -731,7 +728,7 @@ def dynamic_down(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r"\dynamicDown")],
         selector=selector,
-        tags=[_site(inspect.currentframe())],
+        tags=[_scoping.site_new(_frame())],
     )
 
 
@@ -820,26 +817,26 @@ def dynamic_up(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r"\dynamicUp")],
         selector=selector,
-        tags=[_site(inspect.currentframe())],
+        tags=[_scoping.site_new(_frame())],
     )
 
 
 def edition(
     not_parts: typing.Union[str, abjad.Markup, _commandclasses.IndicatorCommand],
     only_parts: typing.Union[str, abjad.Markup, _commandclasses.IndicatorCommand],
-) -> scoping.Suite:
+) -> _scoping.Suite:
     """
     Makes not-parts / only-parts markup suite.
     """
     if isinstance(not_parts, (str, abjad.Markup)):
         not_parts = markup(not_parts)
     assert isinstance(not_parts, _commandclasses.IndicatorCommand)
-    not_parts_ = scoping.not_parts(not_parts)
+    not_parts_ = _scoping.not_parts(not_parts)
     if isinstance(only_parts, (str, abjad.Markup)):
         only_parts = markup(only_parts)
     assert isinstance(only_parts, _commandclasses.IndicatorCommand)
-    only_parts_ = scoping.only_parts(only_parts)
-    return scoping.suite(not_parts_, only_parts_)
+    only_parts_ = _scoping.only_parts(only_parts)
+    return _scoping.suite(not_parts_, only_parts_)
 
 
 def finger_pressure_transition(
@@ -923,7 +920,7 @@ def finger_pressure_transition(
         allow_repeats=True,
         right_broken=right_broken,
         selector=selector,
-        tags=[_site(inspect.currentframe())],
+        tags=[_scoping.site_new(_frame())],
         tweaks=(
             abjad.tweak(2).arrow_length,
             abjad.tweak(0.5).arrow_width,
@@ -952,7 +949,7 @@ def flat_glissando(
     rleak: bool = None,
     selector=lambda _: _selection.Selection(_).pleaves(),
     stop_pitch: typing.Union[str, abjad.NamedPitch, abjad.StaffPosition] = None,
-) -> scoping.Suite:
+) -> _scoping.Suite:
     """
     Makes flat glissando.
     """
@@ -969,7 +966,7 @@ def flat_glissando(
         new_selector = _selector_rleak
     else:
         new_selector = selector
-    commands: typing.List[scoping.Command] = []
+    commands: typing.List[_scoping.Command] = []
     command = glissando(
         *tweaks,
         allow_repeats=True,
@@ -993,7 +990,7 @@ def flat_glissando(
         if isinstance(pitch, abjad.StaffPosition) or (
             isinstance(pitch, list) and isinstance(pitch[0], abjad.StaffPosition)
         ):
-            staff_position_command = pitchcommands.staff_position(
+            staff_position_command = _pitchcommands.staff_position(
                 pitch,
                 allow_repitch=allow_repitch,
                 mock=mock,
@@ -1001,7 +998,7 @@ def flat_glissando(
             )
             commands.append(staff_position_command)
         else:
-            pitch_command = pitchcommands.pitch(
+            pitch_command = _pitchcommands.pitch(
                 pitch,
                 allow_repitch=allow_repitch,
                 mock=mock,
@@ -1011,17 +1008,17 @@ def flat_glissando(
     elif pitch is not None and stop_pitch is not None:
         if isinstance(pitch, abjad.StaffPosition):
             assert isinstance(stop_pitch, abjad.StaffPosition)
-            interpolation_command = pitchcommands.interpolate_staff_positions(
+            interpolation_command = _pitchcommands.interpolate_staff_positions(
                 pitch, stop_pitch, mock=mock, selector=new_selector
             )
         else:
             assert isinstance(pitch, (str, abjad.NamedPitch))
             assert isinstance(stop_pitch, (str, abjad.NamedPitch))
-            interpolation_command = pitchcommands.interpolate_pitches(
+            interpolation_command = _pitchcommands.interpolate_pitches(
                 pitch, stop_pitch, mock=mock, selector=new_selector
             )
         commands.append(interpolation_command)
-    return scoping.suite(*commands)
+    return _scoping.suite(*commands)
 
 
 def fractions(items):
@@ -1395,7 +1392,7 @@ def glissando(
         right_broken=right_broken,
         right_broken_show_next=right_broken_show_next,
         selector=selector,
-        tags=[_site(inspect.currentframe())],
+        tags=[_scoping.site_new(_frame())],
         tweaks=tweaks,
         zero_padding=zero_padding,
     )
@@ -1416,7 +1413,7 @@ def global_fermata(
     return _commandclasses.GlobalFermataCommand(
         description=description,
         selector=selector,
-        tags=[_site(inspect.currentframe())],
+        tags=[_scoping.site_new(_frame())],
     )
 
 
@@ -1433,7 +1430,7 @@ def instrument(
     return _commandclasses.InstrumentChangeCommand(
         indicators=[instrument],
         selector=selector,
-        tags=[_site(inspect.currentframe())],
+        tags=[_scoping.site_new(_frame())],
     )
 
 
@@ -1441,7 +1438,7 @@ def invisible_music(
     selector=lambda _: _selection.Selection(_).leaf(0),
     *,
     map: abjad.Expression = None,
-) -> scoping.Suite:
+) -> _scoping.Suite:
     r"""
     Attaches ``\baca-invisible-music`` literal.
 
@@ -1507,7 +1504,7 @@ def invisible_music(
             }
 
     """
-    tag = _site(inspect.currentframe(), 1)
+    tag = _scoping.site_new(_frame(), n=1)
     tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
     command_1 = _commandclasses.IndicatorCommand(
         [abjad.LilyPondLiteral(r"\abjad-invisible-music")],
@@ -1516,7 +1513,7 @@ def invisible_music(
         selector=selector,
         tags=[tag],
     )
-    tag = _site(inspect.currentframe(), 2)
+    tag = _scoping.site_new(_frame(), n=2)
     tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
     command_2 = _commandclasses.IndicatorCommand(
         [abjad.LilyPondLiteral(r"\abjad-invisible-music-coloring")],
@@ -1524,7 +1521,7 @@ def invisible_music(
         selector=selector,
         tags=[tag],
     )
-    return scoping.suite(command_1, command_2)
+    return _scoping.suite(command_1, command_2)
 
 
 def label(
@@ -1831,7 +1828,7 @@ def markup(
         match=match,
         measures=measures,
         selector=selector,
-        tags=[_site(inspect.currentframe())],
+        tags=[_scoping.site_new(_frame())],
         tweaks=tweaks,
     )
 
@@ -1862,20 +1859,20 @@ def one_voice(
     return _commandclasses.IndicatorCommand(
         indicators=[literal],
         selector=selector,
-        tags=[_site(inspect.currentframe())],
+        tags=[_scoping.site_new(_frame())],
     )
 
 
 def open_volta(
     selector=lambda _: _selection.Selection(_).leaf(0),
-) -> scoping.Suite:
+) -> _scoping.Suite:
     """
     Attaches bar line and overrides bar line X-extent.
     """
-    return scoping.suite(
+    return _scoping.suite(
         _indicatorcommands.bar_line(".|:", selector, format_slot="before"),
-        scoping.not_mol(_overrides.bar_line_x_extent((0, 2), selector)),
-        scoping.only_mol(_overrides.bar_line_x_extent((0, 3), selector)),
+        _scoping.not_mol(_overrides.bar_line_x_extent((0, 2), selector)),
+        _scoping.only_mol(_overrides.bar_line_x_extent((0, 3), selector)),
     )
 
 
@@ -1921,7 +1918,7 @@ def voice_four(
     return _commandclasses.IndicatorCommand(
         indicators=[literal],
         selector=selector,
-        tags=[_site(inspect.currentframe())],
+        tags=[_scoping.site_new(_frame())],
     )
 
 
@@ -1935,7 +1932,7 @@ def voice_one(
     return _commandclasses.IndicatorCommand(
         indicators=[literal],
         selector=selector,
-        tags=[_site(inspect.currentframe())],
+        tags=[_scoping.site_new(_frame())],
     )
 
 
@@ -1949,7 +1946,7 @@ def voice_three(
     return _commandclasses.IndicatorCommand(
         indicators=[literal],
         selector=selector,
-        tags=[_site(inspect.currentframe())],
+        tags=[_scoping.site_new(_frame())],
     )
 
 
@@ -1963,5 +1960,5 @@ def voice_two(
     return _commandclasses.IndicatorCommand(
         indicators=[literal],
         selector=selector,
-        tags=[_site(inspect.currentframe())],
+        tags=[_scoping.site_new(_frame())],
     )

@@ -1,8 +1,8 @@
 """
 Piecewise.
 """
-import inspect
 import typing
+from inspect import currentframe as _frame
 
 import abjad
 
@@ -14,11 +14,6 @@ from . import selection as _selection
 from . import sequence as _sequence
 from . import tags as _tags
 from . import typings
-
-
-def _site(frame):
-    prefix = "baca"
-    return _scoping.site(frame, prefix)
 
 
 class Bundle:
@@ -529,7 +524,7 @@ def bow_speed_spanner(
     """
     Makes bow speed spanner.
     """
-    tag = _site(inspect.currentframe())
+    tag = _scoping.site_new(_frame())
     tag = tag.append(_tags.BOW_SPEED_SPANNER)
     command = text_spanner(
         items,
@@ -568,7 +563,7 @@ def circle_bow_spanner(
     """
     Makes circle bow spanner.
     """
-    tag = _site(inspect.currentframe())
+    tag = _scoping.site_new(_frame())
     tag = tag.append(_tags.CIRCLE_BOW_SPANNER)
     if qualifier is None:
         string = r"\baca-circle-markup =|"
@@ -613,7 +608,7 @@ def clb_spanner(
     """
     Makes clb spanner.
     """
-    tag = _site(inspect.currentframe())
+    tag = _scoping.site_new(_frame())
     tag = tag.append(_tags.CLB_SPANNER)
     assert string_number in (1, 2, 3, 4), repr(string_number)
     if string_number == 1:
@@ -664,7 +659,7 @@ def covered_spanner(
     """
     Makes covered spanner.
     """
-    tag = _site(inspect.currentframe())
+    tag = _scoping.site_new(_frame())
     tag = tag.append(_tags.COVERED_SPANNER)
     command = text_spanner(
         argument,
@@ -703,7 +698,7 @@ def damp_spanner(
     """
     Makes damp spanner.
     """
-    tag = _site(inspect.currentframe())
+    tag = _scoping.site_new(_frame())
     tag = tag.append(_tags.DAMP_SPANNER)
     command = text_spanner(
         r"\baca-damp-markup =|",
@@ -1059,7 +1054,7 @@ def dynamic(
         measures=measures,
         redundant=redundant,
         selector=selector,
-        tags=[_site(inspect.currentframe())],
+        tags=[_scoping.site_new(_frame())],
         tweaks=tweaks,
     )
 
@@ -2296,7 +2291,7 @@ def hairpin(
         remove_length_1_spanner_start=remove_length_1_spanner_start,
         right_broken=right_broken_,
         selector=selector,
-        tags=[_site(inspect.currentframe())],
+        tags=[_scoping.site_new(_frame())],
     )
 
 
@@ -2315,7 +2310,7 @@ def half_clt_spanner(
     """
     Makes 1/2 clt spanner.
     """
-    tag = _site(inspect.currentframe())
+    tag = _scoping.site_new(_frame())
     tag = tag.append(_tags.HALF_CLT_SPANNER)
     command = text_spanner(
         "½ clt =|",
@@ -2640,7 +2635,7 @@ def material_annotation_spanner(
     """
     Makes material annotation spanner.
     """
-    tag = _site(inspect.currentframe())
+    tag = _scoping.site_new(_frame())
     tag = tag.append(_tags.MATERIAL_ANNOTATION_SPANNER)
     command = text_spanner(
         items,
@@ -2680,7 +2675,7 @@ def metric_modulation_spanner(
     # TODO: tag red tweak with METRIC_MODULATION_SPANNER_COLOR
     # red_tweak = abjad.tweak("#red").color
     # tweaks = tweaks + (red_tweak,)
-    tag = _site(inspect.currentframe())
+    tag = _scoping.site_new(_frame())
     tag = tag.append(_tags.METRIC_MODULATION_SPANNER)
     command = text_spanner(
         argument,
@@ -2871,7 +2866,7 @@ def pitch_annotation_spanner(
     """
     Makes pitch annotation spanner.
     """
-    tag = _site(inspect.currentframe())
+    tag = _scoping.site_new(_frame())
     tag = tag.append(_tags.PITCH_ANNOTATION_SPANNER)
     command = text_spanner(
         items,
@@ -2909,7 +2904,7 @@ def pizzicato_spanner(
     """
     Makes pizzicato spanner.
     """
-    tag = _site(inspect.currentframe())
+    tag = _scoping.site_new(_frame())
     tag = tag.append(_tags.PIZZICATO_SPANNER)
     command = text_spanner(
         r"\baca-pizz-markup =|",
@@ -2947,7 +2942,7 @@ def rhythm_annotation_spanner(
     """
     Makes rhythm command spanner.
     """
-    tag = _site(inspect.currentframe())
+    tag = _scoping.site_new(_frame())
     tag = tag.append(_tags.RHYTHM_ANNOTATION_SPANNER)
     command = text_spanner(
         items,
@@ -2988,7 +2983,7 @@ def scp_spanner(
     """
     Makes SCP spanner.
     """
-    tag = _site(inspect.currentframe())
+    tag = _scoping.site_new(_frame())
     tag = tag.append(_tags.SCP_SPANNER)
     command = text_spanner(
         items,
@@ -3029,7 +3024,7 @@ def spazzolato_spanner(
     """
     Makes spazzolato spanner.
     """
-    tag = _site(inspect.currentframe())
+    tag = _scoping.site_new(_frame())
     tag = tag.append(_tags.SPAZZOLATO_SPANNER)
     command = text_spanner(
         items,
@@ -3070,7 +3065,7 @@ def string_number_spanner(
     """
     Makes string number spanner.
     """
-    tag = _site(inspect.currentframe())
+    tag = _scoping.site_new(_frame())
     tag = tag.append(_tags.STRING_NUMBER_SPANNER)
     command = text_spanner(
         items,
@@ -3111,7 +3106,7 @@ def tasto_spanner(
     """
     Makes tasto spanner.
     """
-    tag = _site(inspect.currentframe())
+    tag = _scoping.site_new(_frame())
     tag = tag.append(_tags.TASTO_SPANNER)
     command = text_spanner(
         "T =|",
@@ -4609,7 +4604,7 @@ def text_spanner(
         pieces=pieces,
         right_broken=right_broken,
         selector=selector,
-        tags=[_site(inspect.currentframe())],
+        tags=[_scoping.site_new(_frame())],
         tweaks=tweaks,
     )
 
@@ -4633,7 +4628,7 @@ def vibrato_spanner(
     """
     Makes vibrato spanner.
     """
-    tag = _site(inspect.currentframe())
+    tag = _scoping.site_new(_frame())
     tag = tag.append(_tags.VIBRATO_SPANNER)
     command = text_spanner(
         items,
@@ -4674,7 +4669,7 @@ def xfb_spanner(
     """
     Makes XFB spanner.
     """
-    tag = _site(inspect.currentframe())
+    tag = _scoping.site_new(_frame())
     tag = tag.append(_tags.BOW_SPEED_SPANNER)
     command = text_spanner(
         "XFB =|",
