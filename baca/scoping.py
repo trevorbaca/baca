@@ -2,6 +2,7 @@
 Scoping.
 """
 import inspect
+import os
 import typing
 
 import abjad
@@ -1479,6 +1480,25 @@ def site(frame, prefix, *, n=None) -> abjad.Tag:
         string = f"{prefix}.{frame_info.function}()"
     else:
         string = f"{prefix}.{frame_info.function}({n})"
+    return abjad.Tag(string)
+
+
+def site_new(frame, self=None, *, n=None):
+    """
+    Makes site from ``frame``.
+    """
+    parts = []
+    path = frame.f_code.co_filename.removesuffix(".py")
+    for part in reversed(path.split(os.sep)):
+        parts.append(part)
+        if part == "baca":
+            break
+    parts.reverse()
+    if self is not None:
+        parts.pop()
+        parts.append(type(self).__name__)
+    parts.append(frame.f_code.co_name)
+    string = ".".join(parts) + ("()" if n is None else f"({n})")
     return abjad.Tag(string)
 
 

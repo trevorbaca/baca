@@ -207,11 +207,6 @@ def _prototype_string(class_):
     return f"{parts[0]}.{parts[-1]}"
 
 
-def _site(frame, n=None):
-    prefix = "baca.SegmentMaker"
-    return _scoping.site(frame, prefix, n=n)
-
-
 def _sort_by_timeline(leaves):
     assert leaves.are_leaves(), repr(leaves)
 
@@ -334,7 +329,7 @@ def color_octaves(score):
     vertical_moments = abjad.iterate_vertical_moments(score)
     markup = abjad.Markup("OCTAVE", direction=abjad.Up)
     abjad.tweak(markup).color = "#red"
-    tag = _site(inspect.currentframe())
+    tag = _scoping.site_new(inspect.currentframe())
     tag = tag.append(_tags.OCTAVE_COLORING)
     for vertical_moment in vertical_moments:
         pleaves, pitches = [], []
@@ -370,8 +365,7 @@ def color_repeat_pitch_classes(score):
     """
     Colors repeat pitch-classes in ``score``.
     """
-    # tag = _site(inspect.currentframe())
-    tag = abjad.Tag("baca.SegmentMaker._color_repeat_pitch_classes_()")
+    tag = _scoping.site_new(inspect.currentframe())
     tag = tag.append(_tags.REPEAT_PITCH_CLASS_COLORING)
     lts = _find_repeat_pitch_classes(score)
     for lt in lts:
@@ -1655,7 +1649,11 @@ class SegmentMaker:
                 style = "invisible-line"
             if 0 < i:
                 stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanMM")
-                abjad.attach(stop_text_span, skip, tag=_site(inspect.currentframe(), 1))
+                abjad.attach(
+                    stop_text_span,
+                    skip,
+                    tag=_scoping.site_new(inspect.currentframe(), self, n=1),
+                )
             if add_right_text_to_me is skip:
                 right_text = final_leaf_metronome_mark._get_markup()
             else:
@@ -1686,7 +1684,9 @@ class SegmentMaker:
                 abjad.attach(
                     indicator,
                     skip,
-                    tag=new_tag.append(_site(inspect.currentframe(), 5)),
+                    tag=new_tag.append(
+                        _scoping.site_new(inspect.currentframe(), self, n=5)
+                    ),
                 )
                 tag = new_tag
             if not (
@@ -1698,14 +1698,18 @@ class SegmentMaker:
                     start_text_span,
                     skip,
                     deactivate=True,
-                    tag=tag.append(_site(inspect.currentframe(), 2)),
+                    tag=tag.append(
+                        _scoping.site_new(inspect.currentframe(), self, n=2)
+                    ),
                 )
             else:
                 abjad.attach(
                     start_text_span,
                     skip,
                     deactivate=True,
-                    tag=tag.append(_site(inspect.currentframe(), 2.1)).append(
+                    tag=tag.append(
+                        _scoping.site_new(inspect.currentframe(), self, n=2.1)
+                    ).append(
                         _tags.METRIC_MODULATION_IS_NOT_SCALED,
                     ),
                 )
@@ -1718,7 +1722,9 @@ class SegmentMaker:
                     start_text_span_,
                     skip,
                     deactivate=True,
-                    tag=tag.append(_site(inspect.currentframe(), 2.2)).append(
+                    tag=tag.append(
+                        _scoping.site_new(inspect.currentframe(), self, n=2.2)
+                    ).append(
                         _tags.METRIC_MODULATION_IS_SCALED,
                     ),
                 )
@@ -1730,7 +1736,9 @@ class SegmentMaker:
                     start_text_span_,
                     skip,
                     deactivate=True,
-                    tag=tag.append(_site(inspect.currentframe(), 2.2)).append(
+                    tag=tag.append(
+                        _scoping.site_new(inspect.currentframe(), self, n=2.2)
+                    ).append(
                         _tags.METRIC_MODULATION_IS_STRIPPED,
                     ),
                 )
@@ -1808,13 +1816,13 @@ class SegmentMaker:
                 start_text_span,
                 skip,
                 deactivate=False,
-                tag=tag.append(_site(inspect.currentframe(), 3)),
+                tag=tag.append(_scoping.site_new(inspect.currentframe(), self, n=3)),
             )
         if indicator_count:
             final_skip = skip
             stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanMM")
             tag_ = _tags.EOS_STOP_MM_SPANNER
-            tag_ = tag_.append(_site(inspect.currentframe(), 4))
+            tag_ = tag_.append(_scoping.site_new(inspect.currentframe(), self, n=4))
             abjad.attach(stop_text_span, final_skip, tag=tag_)
 
     # this exists because of an incompletely implemented behavior in LilyPond;
@@ -1823,7 +1831,7 @@ class SegmentMaker:
     # repeat-tied notes;
     # this method works around LilyPond's behavior
     def _attach_shadow_tie_indicators(self):
-        tag = _site(inspect.currentframe())
+        tag = _scoping.site_new(inspect.currentframe(), self)
         for plt in _selection.Selection(self.score).plts():
             if len(plt) == 1:
                 continue
@@ -1994,7 +2002,7 @@ class SegmentMaker:
     def _call_rhythm_commands(self):
         self._attach_fermatas()
         command_count = 0
-        tag = _site(inspect.currentframe())
+        tag = _scoping.site_new(inspect.currentframe(), self)
         if self.skips_instead_of_rests:
             prototype = abjad.Skip
         else:
@@ -2248,7 +2256,11 @@ class SegmentMaker:
                 format_slot=margin_markup.format_slot,
                 markup=markup,
             )
-            abjad.attach(start_markup, first_leaf, tag=_site(inspect.currentframe()))
+            abjad.attach(
+                start_markup,
+                first_leaf,
+                tag=_scoping.site_new(inspect.currentframe(), self),
+            )
 
     def _collect_alive_during_segment(self):
         result = []
@@ -2405,7 +2417,7 @@ class SegmentMaker:
 
     def _color_mock_pitch(self):
         indicator = _const.MOCK
-        tag = _site(inspect.currentframe())
+        tag = _scoping.site_new(inspect.currentframe(), self)
         tag = tag.append(_tags.MOCK_COLORING)
         leaves = []
         for pleaf in abjad.iterate(self.score).leaves(pitched=True):
@@ -2420,7 +2432,7 @@ class SegmentMaker:
         if self.environment == "docs":
             return
         indicator = _const.NOT_YET_PITCHED
-        tag = _site(inspect.currentframe())
+        tag = _scoping.site_new(inspect.currentframe(), self)
         tag = tag.append(_tags.NOT_YET_PITCHED_COLORING)
         leaves = []
         for pleaf in abjad.iterate(self.score).leaves(pitched=True):
@@ -2438,7 +2450,7 @@ class SegmentMaker:
 
     def _color_not_yet_registered(self):
         indicator = _const.NOT_YET_REGISTERED
-        tag = _site(inspect.currentframe())
+        tag = _scoping.site_new(inspect.currentframe(), self)
         tag = tag.append(_tags.NOT_YET_REGISTERED_COLORING)
         for pleaf in abjad.iterate(self.score).leaves(pitched=True):
             if not abjad.get.has_indicator(pleaf, indicator):
@@ -2453,7 +2465,7 @@ class SegmentMaker:
 
     def _color_out_of_range(self):
         indicator = _const.ALLOW_OUT_OF_RANGE
-        tag = _site(inspect.currentframe())
+        tag = _scoping.site_new(inspect.currentframe(), self)
         tag = tag.append(_tags.OUT_OF_RANGE_COLORING)
         for voice in abjad.iterate(self.score).components(abjad.Voice):
             for pleaf in abjad.iterate(voice).leaves(pitched=True):
@@ -2485,7 +2497,9 @@ class SegmentMaker:
             context = abjad.get.parentage(leaf).get(abjad.Context)
             string = f"% [{context.name} measure {local_measure_number}]"
             literal = abjad.LilyPondLiteral(string, format_slot="absolute_before")
-            abjad.attach(literal, leaf, tag=_site(inspect.currentframe()))
+            abjad.attach(
+                literal, leaf, tag=_scoping.site_new(inspect.currentframe(), self)
+            )
 
     def _deactivate_tags(self):
         tags = self.deactivate
@@ -2806,7 +2820,7 @@ class SegmentMaker:
                     skip,
                     context="GlobalSkips",
                     deactivate=True,
-                    tag=tag.append(_site(inspect.currentframe())),
+                    tag=tag.append(_scoping.site_new(inspect.currentframe(), self)),
                 )
             if 0 < measure_index:
                 tag = _tags.CLOCK_TIME
@@ -2816,11 +2830,11 @@ class SegmentMaker:
                     skip,
                     context="GlobalSkips",
                     deactivate=True,
-                    tag=tag.append(_site(inspect.currentframe())),
+                    tag=tag.append(_scoping.site_new(inspect.currentframe(), self)),
                 )
 
     def _label_duration_multipliers(self):
-        tag = _site(inspect.currentframe())
+        tag = _scoping.site_new(inspect.currentframe(), self)
         tag = tag.append(_tags.DURATION_MULTIPLIER)
         already_labeled = set()
         for voice in abjad.iterate(self.score).components(abjad.Voice):
@@ -2858,7 +2872,7 @@ class SegmentMaker:
             measure_number = first_measure_number + measure_index
             if measure_index < total - 1:
                 tag = _tags.LOCAL_MEASURE_NUMBER
-                tag = tag.append(_site(inspect.currentframe()))
+                tag = tag.append(_scoping.site_new(inspect.currentframe(), self))
                 string = r"- \baca-start-lmn-left-only"
                 string += f' "{local_measure_number}"'
                 start_text_span = abjad.StartTextSpan(
@@ -2872,7 +2886,7 @@ class SegmentMaker:
                     tag=tag,
                 )
                 tag = _tags.MEASURE_NUMBER
-                tag = tag.append(_site(inspect.currentframe()))
+                tag = tag.append(_scoping.site_new(inspect.currentframe(), self))
                 string = r"- \baca-start-mn-left-only"
                 string += f' "{measure_number}"'
                 start_text_span = abjad.StartTextSpan(
@@ -2887,7 +2901,7 @@ class SegmentMaker:
                 )
             if 0 < measure_index:
                 tag = _tags.LOCAL_MEASURE_NUMBER
-                tag = tag.append(_site(inspect.currentframe()))
+                tag = tag.append(_scoping.site_new(inspect.currentframe(), self))
                 stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanLMN")
                 abjad.attach(
                     stop_text_span,
@@ -2897,7 +2911,7 @@ class SegmentMaker:
                     tag=tag,
                 )
                 tag = _tags.MEASURE_NUMBER
-                tag = tag.append(_site(inspect.currentframe()))
+                tag = tag.append(_scoping.site_new(inspect.currentframe(), self))
                 stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanMN")
                 abjad.attach(
                     stop_text_span,
@@ -2922,7 +2936,7 @@ class SegmentMaker:
             measure_index = lmn - 1
             skip = skips[measure_index]
             tag = _tags.MOMENT_NUMBER
-            tag = tag.append(_site(inspect.currentframe()))
+            tag = tag.append(_scoping.site_new(inspect.currentframe(), self))
             if color is not None:
                 string = r"- \baca-start-xnm-colored-left-only"
                 string += f' "{value}" {color}'
@@ -2941,7 +2955,7 @@ class SegmentMaker:
             )
             if 0 < i:
                 tag = _tags.MOMENT_NUMBER
-                tag = tag.append(_site(inspect.currentframe()))
+                tag = tag.append(_scoping.site_new(inspect.currentframe(), self))
                 stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanXNM")
                 abjad.attach(
                     stop_text_span,
@@ -2952,7 +2966,7 @@ class SegmentMaker:
                 )
         skip = skips[-1]
         tag = _tags.MOMENT_NUMBER
-        tag = tag.append(_site(inspect.currentframe()))
+        tag = tag.append(_scoping.site_new(inspect.currentframe(), self))
         stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanXNM")
         abjad.attach(
             stop_text_span,
@@ -2977,7 +2991,7 @@ class SegmentMaker:
             measure_index = lmn - 1
             skip = skips[measure_index]
             tag = _tags.STAGE_NUMBER
-            tag = tag.append(_site(inspect.currentframe()))
+            tag = tag.append(_scoping.site_new(inspect.currentframe(), self))
             if color is not None:
                 string = r"- \baca-start-snm-colored-left-only"
                 string += f' "{value}" {color}'
@@ -2996,7 +3010,7 @@ class SegmentMaker:
             )
             if 0 < i:
                 tag = _tags.STAGE_NUMBER
-                tag = tag.append(_site(inspect.currentframe()))
+                tag = tag.append(_scoping.site_new(inspect.currentframe(), self))
                 stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanSNM")
                 abjad.attach(
                     stop_text_span,
@@ -3007,7 +3021,7 @@ class SegmentMaker:
                 )
         skip = skips[-1]
         tag = _tags.STAGE_NUMBER
-        tag = tag.append(_site(inspect.currentframe()))
+        tag = tag.append(_scoping.site_new(inspect.currentframe(), self))
         stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanSNM")
         abjad.attach(
             stop_text_span,
@@ -3028,7 +3042,7 @@ class SegmentMaker:
         numerator, denominator = multiplier.pair
         string = rf"\magnifyStaff #{numerator}/{denominator}"
         tag = abjad.Tag(tag)
-        tag = tag.append(_site(inspect.currentframe()))
+        tag = tag.append(_scoping.site_new(inspect.currentframe(), self))
         for staff in abjad.iterate(self.score).components(abjad.Staff):
             first_leaf = abjad.get.leaf(staff, 0)
             assert first_leaf is not None
@@ -3052,11 +3066,13 @@ class SegmentMaker:
             rest = abjad.MultimeasureRest(
                 abjad.Duration(1),
                 multiplier=time_signature.duration,
-                tag=_site(inspect.currentframe(), 1),
+                tag=_scoping.site_new(inspect.currentframe(), self, n=1),
             )
             rests.append(rest)
         if not self.do_not_append_phantom_measure:
-            tag = _site(inspect.currentframe(), 2).append(_tags.PHANTOM)
+            tag = _scoping.site_new(inspect.currentframe(), self, n=2).append(
+                _tags.PHANTOM
+            )
             rest = abjad.MultimeasureRest(abjad.Duration(1), multiplier=(1, 4), tag=tag)
             abjad.attach(_const.PHANTOM, rest)
             rests.append(rest)
@@ -3068,17 +3084,17 @@ class SegmentMaker:
             skip = abjad.Skip(
                 1,
                 multiplier=time_signature.duration,
-                tag=_site(inspect.currentframe(), 1),
+                tag=_scoping.site_new(inspect.currentframe(), self, n=1),
             )
             abjad.attach(
                 time_signature,
                 skip,
                 context="Score",
-                tag=_site(inspect.currentframe(), 2),
+                tag=_scoping.site_new(inspect.currentframe(), self, n=2),
             )
             context.append(skip)
         if not self.do_not_append_phantom_measure:
-            tag = _site(inspect.currentframe(), 3)
+            tag = _scoping.site_new(inspect.currentframe(), self, n=3)
             tag = tag.append(_tags.PHANTOM)
             skip = abjad.Skip(1, multiplier=(1, 4), tag=tag)
             abjad.attach(_const.PHANTOM, skip)
@@ -3097,11 +3113,11 @@ class SegmentMaker:
         abjad.attach(
             literal,
             first_skip,
-            tag=tag.append(_site(inspect.currentframe(), 4)),
+            tag=tag.append(_scoping.site_new(inspect.currentframe(), self, n=4)),
         )
 
     def _make_lilypond_file(self):
-        tag = _site(inspect.currentframe())
+        tag = _scoping.site_new(inspect.currentframe(), self)
         items = []
         includes = self._get_lilypond_includes()
         if not self.first_segment:
@@ -3144,7 +3160,7 @@ class SegmentMaker:
         self._lilypond_file = lilypond_file
 
     def _make_measure_silences(self, start, stop, measure_start_offsets, voice_name):
-        tag = _site(inspect.currentframe())
+        tag = _scoping.site_new(inspect.currentframe(), self)
         offsets = [start]
         for measure_start_offset in measure_start_offsets:
             if start < measure_start_offset < stop:
@@ -3174,7 +3190,7 @@ class SegmentMaker:
             phantom_tag = _tags.PHANTOM
         else:
             phantom_tag = abjad.Tag()
-        tag = _site(inspect.currentframe(), 1)
+        tag = _scoping.site_new(inspect.currentframe(), self, n=1)
         tag = tag.append(phantom_tag)
         tag = tag.append(_tags.HIDDEN)
         if suppress_note is not True:
@@ -3189,7 +3205,7 @@ class SegmentMaker:
             note = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
             abjad.attach(_const.MULTIMEASURE_REST, note)
         abjad.attach(_const.HIDDEN, note)
-        tag = _site(inspect.currentframe(), 2)
+        tag = _scoping.site_new(inspect.currentframe(), self, n=2)
         tag = tag.append(phantom_tag)
         tag = tag.append(note_or_rest)
         tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
@@ -3197,18 +3213,18 @@ class SegmentMaker:
             r"\abjad-invisible-music-coloring", format_slot="before"
         )
         abjad.attach(literal, note, tag=tag)
-        tag = _site(inspect.currentframe(), 3)
+        tag = _scoping.site_new(inspect.currentframe(), self, n=3)
         tag = tag.append(phantom_tag)
         tag = tag.append(note_or_rest)
         tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
         literal = abjad.LilyPondLiteral(r"\abjad-invisible-music", format_slot="before")
         abjad.attach(literal, note, deactivate=True, tag=tag)
         abjad.attach(_const.HIDDEN, note)
-        tag = _site(inspect.currentframe(), 4)
+        tag = _scoping.site_new(inspect.currentframe(), self, n=4)
         tag = tag.append(phantom_tag)
         hidden_note_voice = abjad.Voice([note], name=voice_name, tag=tag)
         abjad.attach(_const.INTERMITTENT, hidden_note_voice)
-        tag = _site(inspect.currentframe(), 5)
+        tag = _scoping.site_new(inspect.currentframe(), self, n=5)
         tag = tag.append(phantom_tag)
         tag = tag.append(_tags.REST_VOICE)
         if self.skips_instead_of_rests:
@@ -3224,11 +3240,11 @@ class SegmentMaker:
             name = voice_name.replace("Music_Voice", "Rest_Voice")
         else:
             name = voice_name.replace("Voice", "Rest_Voice")
-        tag = _site(inspect.currentframe(), 6)
+        tag = _scoping.site_new(inspect.currentframe(), self, n=6)
         tag = tag.append(phantom_tag)
         multimeasure_rest_voice = abjad.Voice([rest], name=name, tag=tag)
         abjad.attach(_const.INTERMITTENT, multimeasure_rest_voice)
-        tag = _site(inspect.currentframe(), 7)
+        tag = _scoping.site_new(inspect.currentframe(), self, n=7)
         tag = tag.append(phantom_tag)
         container = abjad.Container(
             [hidden_note_voice, multimeasure_rest_voice],
@@ -3344,7 +3360,7 @@ class SegmentMaker:
                     print(leaf)
 
     def _reanalyze_reapplied_synthetic_wrappers(self):
-        site = _site(inspect.currentframe())
+        site = _scoping.site_new(inspect.currentframe(), self)
         for leaf in abjad.iterate(self.score).leaves():
             for wrapper in abjad.get.wrappers(leaf):
                 if wrapper.synthetic_offset is None:
@@ -3394,7 +3410,7 @@ class SegmentMaker:
                         continue
                     assert status == "reapplied", repr(status)
                     wrapper = abjad.get.wrapper(leaf, abjad.TimeSignature)
-                    site = _site(inspect.currentframe(), 1)
+                    site = _scoping.site_new(inspect.currentframe(), self, n=1)
                     edition = edition.append(site)
                     wrapper.tag = wrapper.tag.append(edition)
                     _scoping.treat_persistent_wrapper(self.manifests, wrapper, status)
@@ -3406,7 +3422,7 @@ class SegmentMaker:
                     _indicators.Ritardando,
                 )
                 if isinstance(previous_indicator, prototype):
-                    site = _site(inspect.currentframe(), 2)
+                    site = _scoping.site_new(inspect.currentframe(), self, n=2)
                     if status == "reapplied":
                         wrapper = abjad.attach(
                             previous_indicator,
@@ -3437,7 +3453,7 @@ class SegmentMaker:
                         )
                     continue
                 attached = False
-                site = _site(inspect.currentframe(), 3)
+                site = _scoping.site_new(inspect.currentframe(), self, n=3)
                 tag = edition.append(site)
                 if isinstance(previous_indicator, abjad.MarginMarkup):
                     tag = tag.append(_tags.NOT_PARTS)
@@ -3622,15 +3638,15 @@ class SegmentMaker:
                     abjad.attach(
                         empty_staff_lines,
                         leaf,
-                        tag=_site(inspect.currentframe(), 1),
+                        tag=_scoping.site_new(inspect.currentframe(), self, n=1),
                     )
                     if not self.final_segment:
                         abjad.attach(
                             empty_bar_extent,
                             leaf,
-                            tag=_site(inspect.currentframe(), 2).append(
-                                abjad.Tag("FERMATA_MEASURE_EMPTY_BAR_EXTENT")
-                            ),
+                            tag=_scoping.site_new(
+                                inspect.currentframe(), self, n=2
+                            ).append(abjad.Tag("FERMATA_MEASURE_EMPTY_BAR_EXTENT")),
                         )
                 if next_leaf is not None and empty_staff_lines != next_staff_lines:
                     if next_staff_lines is None:
@@ -3651,14 +3667,14 @@ class SegmentMaker:
                         abjad.attach(
                             next_staff_lines_,
                             next_leaf,
-                            tag=_site(inspect.currentframe(), 3),
+                            tag=_scoping.site_new(inspect.currentframe(), self, n=3),
                         )
                         abjad.attach(
                             next_bar_extent_,
                             next_leaf,
-                            tag=_site(inspect.currentframe(), 4).append(
-                                abjad.Tag("FERMATA_MEASURE_NEXT_BAR_EXTENT")
-                            ),
+                            tag=_scoping.site_new(
+                                inspect.currentframe(), self, n=4
+                            ).append(abjad.Tag("FERMATA_MEASURE_NEXT_BAR_EXTENT")),
                         )
                 if next_leaf is None and previous_staff_lines != empty_staff_lines:
                     previous_line_count = 5
@@ -3671,7 +3687,7 @@ class SegmentMaker:
                         resume_staff_lines,
                         leaf,
                         synthetic_offset=99,
-                        tag=_site(inspect.currentframe(), 5),
+                        tag=_scoping.site_new(inspect.currentframe(), self, n=5),
                     )
                     previous_line_count = 5
                     if previous_bar_extent is not None:
@@ -3683,7 +3699,7 @@ class SegmentMaker:
                         resume_bar_extent,
                         leaf,
                         synthetic_offset=99,
-                        tag=_site(inspect.currentframe(), 6).append(
+                        tag=_scoping.site_new(inspect.currentframe(), self, n=6).append(
                             abjad.Tag("FERMATA_MEASURE_RESUME_BAR_EXTENT")
                         ),
                     )
@@ -3708,7 +3724,9 @@ class SegmentMaker:
                     abjad.attach(
                         literal,
                         next_leaf_,
-                        tag=tag.append(_site(inspect.currentframe(), 7)),
+                        tag=tag.append(
+                            _scoping.site_new(inspect.currentframe(), self, n=7)
+                        ),
                     )
                 bar_lines_already_styled.append(start_offset)
         rests = _selection.Selection(self.score["Global_Rests"]).leaves(
@@ -3728,14 +3746,17 @@ class SegmentMaker:
             if r"\baca-time-signature-color" in literal.argument:
                 abjad.detach(literal, skip)
         _append_tag_to_wrappers(
-            skip, _site(inspect.currentframe(), 1).append(_tags.PHANTOM)
+            skip,
+            _scoping.site_new(inspect.currentframe(), self, n=1).append(_tags.PHANTOM),
         )
         string = r"\baca-time-signature-transparent"
         literal = abjad.LilyPondLiteral(string)
         abjad.attach(
             literal,
             skip,
-            tag=_site(inspect.currentframe(), 2).append(_tags.PHANTOM),
+            tag=_scoping.site_new(inspect.currentframe(), self, n=2).append(
+                _tags.PHANTOM
+            ),
         )
         strings = [
             r"\once \override Score.BarLine.transparent = ##t",
@@ -3745,7 +3766,9 @@ class SegmentMaker:
         abjad.attach(
             literal,
             skip,
-            tag=_site(inspect.currentframe(), 3).append(_tags.PHANTOM),
+            tag=_scoping.site_new(inspect.currentframe(), self, n=3).append(
+                _tags.PHANTOM
+            ),
         )
         if "Global_Rests" in self.score:
             for context in abjad.iterate(self.score).components(abjad.Context):
@@ -3754,7 +3777,9 @@ class SegmentMaker:
                     break
             _append_tag_to_wrappers(
                 rest,
-                _site(inspect.currentframe(), 4).append(_tags.PHANTOM),
+                _scoping.site_new(inspect.currentframe(), self, n=4).append(
+                    _tags.PHANTOM
+                ),
             )
         start_offset = abjad.get.timespan(skip).start_offset
         enumeration = _const.MULTIMEASURE_REST_CONTAINER
@@ -3777,7 +3802,9 @@ class SegmentMaker:
             for leaf in abjad.select(container).leaves():
                 _append_tag_to_wrappers(
                     leaf,
-                    _site(inspect.currentframe(), 5).append(_tags.PHANTOM),
+                    _scoping.site_new(inspect.currentframe(), self, n=5).append(
+                        _tags.PHANTOM
+                    ),
                 )
                 if not isinstance(leaf, abjad.MultimeasureRest):
                     continue
@@ -3787,19 +3814,25 @@ class SegmentMaker:
                 abjad.attach(
                     literal,
                     leaf,
-                    tag=_site(inspect.currentframe(), 6).append(_tags.PHANTOM),
+                    tag=_scoping.site_new(inspect.currentframe(), self, n=6).append(
+                        _tags.PHANTOM
+                    ),
                 )
                 literal = abjad.LilyPondLiteral(string_2)
                 abjad.attach(
                     literal,
                     leaf,
-                    tag=_site(inspect.currentframe(), 7).append(_tags.PHANTOM),
+                    tag=_scoping.site_new(inspect.currentframe(), self, n=7).append(
+                        _tags.PHANTOM
+                    ),
                 )
                 literal = abjad.LilyPondLiteral(strings)
                 abjad.attach(
                     literal,
                     leaf,
-                    tag=_site(inspect.currentframe(), 8).append(_tags.PHANTOM),
+                    tag=_scoping.site_new(inspect.currentframe(), self, n=8).append(
+                        _tags.PHANTOM
+                    ),
                 )
 
     def _transpose_score(self):
