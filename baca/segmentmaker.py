@@ -361,9 +361,228 @@ def color_octaves(score):
                 abjad.attach(literal, pleaf, tag=tag)
 
 
-def color_repeat_pitch_classes(score):
+def color_out_of_range_pitches(score):
+    r"""
+    Colors out-of-range pitches in ``score``.
+
+    ..  container:: example
+
+        >>> figure = baca.figure([1], 16)
+        >>> collection_lists = [
+        ...     [[4]],
+        ...     [[-12, 2, 3, 5, 8, 9, 0]],
+        ...     [[11]],
+        ...     [[10, 7, 9, 10, 0, 5]],
+        ...     ]
+        >>> figures, time_signatures = [], []
+        >>> for i, collections in enumerate(collection_lists):
+        ...     selection = figure(collections)
+        ...     figures.append(selection)
+        ...     time_signature = abjad.get.duration(selection)
+        ...     time_signatures.append(time_signature)
+        ...
+        >>> figures_ = []
+        >>> for figure in figures:
+        ...     figures_.extend(figure)
+        ...
+        >>> figures = abjad.select(figures_)
+
+        >>> maker = baca.SegmentMaker(
+        ...     do_not_check_out_of_range_pitches=True,
+        ...     includes=["baca.ily"],
+        ...     score_template=baca.make_empty_score_maker(1),
+        ...     time_signatures=time_signatures,
+        ... )
+        >>> maker(
+        ...     ("Music_Voice", 1),
+        ...     baca.instrument(abjad.Violin()),
+        ...     baca.music(figures, do_not_check_total_duration=True),
+        ... )
+
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> abjad.setting(lilypond_file["Score"]).autoBeaming = False
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            \with
+            {
+                autoBeaming = ##f
+            }
+            {
+                \context Staff = "Music_Staff"
+                <<
+                    \context Voice = "Global_Skips"
+                    {
+                        \time 1/16
+                        s1 * 1/16
+                        \time 7/16
+                        s1 * 7/16
+                        \time 1/16
+                        s1 * 1/16
+                        \time 3/8
+                        s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            e'16
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \baca-out-of-range-coloring
+                            c16
+                            d'16
+                            ef'!16
+                            f'16
+                            af'!16
+                            a'16
+                            c'16
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            b'16
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            bf'!16
+                            g'16
+                            a'16
+                            bf'!16
+                            c'16
+                            f'16
+                        }
+                    }
+                >>
+            }
+
     """
+    indicator = _const.ALLOW_OUT_OF_RANGE
+    tag = _scoping.site(_frame())
+    tag = tag.append(_tags.OUT_OF_RANGE_COLORING)
+    for voice in abjad.iterate(score).components(abjad.Voice):
+        for pleaf in abjad.iterate(voice).leaves(pitched=True):
+            if abjad.get.has_indicator(pleaf, _const.HIDDEN):
+                continue
+            if abjad.get.has_indicator(pleaf, indicator):
+                continue
+            instrument = abjad.get.effective(pleaf, abjad.Instrument)
+            if instrument is None:
+                continue
+            if not abjad.iterpitches.sounding_pitches_are_in_range(
+                pleaf, instrument.pitch_range
+            ):
+                string = r"\baca-out-of-range-coloring"
+                literal = abjad.LilyPondLiteral(string, format_slot="before")
+                abjad.attach(literal, pleaf, tag=tag)
+
+
+def color_repeat_pitch_classes(score):
+    r"""
     Colors repeat pitch-classes in ``score``.
+
+    ..  container:: example
+
+        >>> figure = baca.figure([1], 16)
+        >>> collection_lists = [
+        ...     [[4]],
+        ...     [[6, 2, 3, 5, 9, 9, 0]],
+        ...     [[11]],
+        ...     [[10, 7, 9, 12, 0, 5]],
+        ...     ]
+        >>> figures, time_signatures = [], []
+        >>> for i, collections in enumerate(collection_lists):
+        ...     selection = figure(collections)
+        ...     figures.append(selection)
+        ...     time_signature = abjad.get.duration(selection)
+        ...     time_signatures.append(time_signature)
+        ...
+        >>> figures_ = []
+        >>> for figure in figures:
+        ...     figures_.extend(figure)
+        ...
+        >>> figures = abjad.select(figures_)
+
+        >>> maker = baca.SegmentMaker(
+        ...     includes=["baca.ily"],
+        ...     score_template=baca.make_empty_score_maker(1),
+        ...     time_signatures=time_signatures,
+        ... )
+        >>> maker(
+        ...     ("Music_Voice", 1),
+        ...     baca.music(figures, do_not_check_total_duration=True),
+        ... )
+
+        >>> lilypond_file = maker.run(environment="docs")
+        >>> score = lilypond_file["Score"]
+        >>> abjad.setting(score).autoBeaming = False
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            \with
+            {
+                autoBeaming = ##f
+            }
+            {
+                \context Staff = "Music_Staff"
+                <<
+                    \context Voice = "Global_Skips"
+                    {
+                        \time 1/16
+                        s1 * 1/16
+                        \time 7/16
+                        s1 * 7/16
+                        \time 1/16
+                        s1 * 1/16
+                        \time 3/8
+                        s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            e'16
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            fs'!16
+                            d'16
+                            ef'!16
+                            f'16
+                            \baca-repeat-pitch-class-coloring
+                            a'16
+                            \baca-repeat-pitch-class-coloring
+                            a'16
+                            c'16
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            b'16
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            bf'!16
+                            g'16
+                            a'16
+                            \baca-repeat-pitch-class-coloring
+                            c''16
+                            \baca-repeat-pitch-class-coloring
+                            c'16
+                            f'16
+                        }
+                    }
+                >>
+            }
+
     """
     tag = _scoping.site(_frame())
     tag = tag.append(_tags.REPEAT_PITCH_CLASS_COLORING)
@@ -613,210 +832,12 @@ class SegmentMaker:
                 >>
             }
 
-    ..  container:: example
-
-        Segment-maker colors repeat pitch-classes:
-
-        >>> figure = baca.figure([1], 16)
-        >>> collection_lists = [
-        ...     [[4]],
-        ...     [[6, 2, 3, 5, 9, 9, 0]],
-        ...     [[11]],
-        ...     [[10, 7, 9, 12, 0, 5]],
-        ...     ]
-        >>> figures, time_signatures = [], []
-        >>> for i, collections in enumerate(collection_lists):
-        ...     selection = figure(collections)
-        ...     figures.append(selection)
-        ...     time_signature = abjad.get.duration(selection)
-        ...     time_signatures.append(time_signature)
-        ...
-        >>> figures_ = []
-        >>> for figure in figures:
-        ...     figures_.extend(figure)
-        ...
-        >>> figures = abjad.select(figures_)
-
-        >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
-        ...     score_template=baca.make_empty_score_maker(1),
-        ...     time_signatures=time_signatures,
-        ... )
-        >>> maker(
-        ...     ("Music_Voice", 1),
-        ...     baca.music(figures, do_not_check_total_duration=True),
-        ... )
-
-        >>> lilypond_file = maker.run(environment="docs")
-        >>> score = lilypond_file["Score"]
-        >>> abjad.setting(score).autoBeaming = False
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            \with
-            {
-                autoBeaming = ##f
-            }
-            {
-                \context Staff = "Music_Staff"
-                <<
-                    \context Voice = "Global_Skips"
-                    {
-                        \time 1/16
-                        s1 * 1/16
-                        \time 7/16
-                        s1 * 7/16
-                        \time 1/16
-                        s1 * 1/16
-                        \time 3/8
-                        s1 * 3/8
-                    }
-                    \context Voice = "Music_Voice"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            e'16
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            fs'!16
-                            d'16
-                            ef'!16
-                            f'16
-                            \baca-repeat-pitch-class-coloring
-                            a'16
-                            \baca-repeat-pitch-class-coloring
-                            a'16
-                            c'16
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            b'16
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            bf'!16
-                            g'16
-                            a'16
-                            \baca-repeat-pitch-class-coloring
-                            c''16
-                            \baca-repeat-pitch-class-coloring
-                            c'16
-                            f'16
-                        }
-                    }
-                >>
-            }
-
-    ..  container:: example
-
-        Segment-maker colors out-of-range pitches:
-
-        >>> figure = baca.figure([1], 16)
-        >>> collection_lists = [
-        ...     [[4]],
-        ...     [[-12, 2, 3, 5, 8, 9, 0]],
-        ...     [[11]],
-        ...     [[10, 7, 9, 10, 0, 5]],
-        ...     ]
-        >>> figures, time_signatures = [], []
-        >>> for i, collections in enumerate(collection_lists):
-        ...     selection = figure(collections)
-        ...     figures.append(selection)
-        ...     time_signature = abjad.get.duration(selection)
-        ...     time_signatures.append(time_signature)
-        ...
-        >>> figures_ = []
-        >>> for figure in figures:
-        ...     figures_.extend(figure)
-        ...
-        >>> figures = abjad.select(figures_)
-
-        >>> maker = baca.SegmentMaker(
-        ...     do_not_check_out_of_range_pitches=True,
-        ...     includes=["baca.ily"],
-        ...     score_template=baca.make_empty_score_maker(1),
-        ...     time_signatures=time_signatures,
-        ... )
-        >>> maker(
-        ...     ("Music_Voice", 1),
-        ...     baca.instrument(abjad.Violin()),
-        ...     baca.music(figures, do_not_check_total_duration=True),
-        ... )
-
-        >>> lilypond_file = maker.run(environment="docs")
-        >>> abjad.setting(lilypond_file["Score"]).autoBeaming = False
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            \with
-            {
-                autoBeaming = ##f
-            }
-            {
-                \context Staff = "Music_Staff"
-                <<
-                    \context Voice = "Global_Skips"
-                    {
-                        \time 1/16
-                        s1 * 1/16
-                        \time 7/16
-                        s1 * 7/16
-                        \time 1/16
-                        s1 * 1/16
-                        \time 3/8
-                        s1 * 3/8
-                    }
-                    \context Voice = "Music_Voice"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            e'16
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \baca-out-of-range-coloring
-                            c16
-                            d'16
-                            ef'!16
-                            f'16
-                            af'!16
-                            a'16
-                            c'16
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            b'16
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            bf'!16
-                            g'16
-                            a'16
-                            bf'!16
-                            c'16
-                            f'16
-                        }
-                    }
-                >>
-            }
-
     """
 
     ### CLASS ATTRIBUTES ###
 
     __slots__ = (
         "_activate",
-        "_allow_empty_selections",
         "_cache",
         "_cached_time_signatures",
         "_clock_time_extra_offset",
@@ -825,12 +846,6 @@ class SegmentMaker:
         "_container_to_part_assignment",
         "_deactivate",
         "_do_not_append_phantom_measure",
-        "_do_not_check_beamed_long_notes",
-        "_do_not_check_out_of_range_pitches",
-        "_do_not_check_persistence",
-        "_do_not_check_wellformedness",
-        "_do_not_include_layout_ly",
-        "_do_not_force_nonnatural_accidentals",
         "_duration",
         "_environment",
         "_fermata_extra_offset_y",
@@ -840,8 +855,6 @@ class SegmentMaker:
         "_fermata_stop_offsets",
         "_final_measure_is_fermata",
         "_first_measure_number",
-        "_final_segment",
-        "_first_segment",
         "_ignore_repeat_pitch_classes",
         "_includes",
         "_indicator_defaults",
@@ -878,9 +891,18 @@ class SegmentMaker:
         "_time_signatures",
         "_voice_metadata",
         "_voice_names",
+        "allow_empty_selections",
         "append_phantom_measure_in_docs",
-        "check_all_are_pitched",
         "color_octaves",
+        "do_not_check_beamed_long_notes",
+        "do_not_check_out_of_range_pitches",
+        "do_not_check_persistence",
+        "do_not_check_wellformedness",
+        "do_not_force_nonnatural_accidentals",
+        "do_not_include_layout_ly",
+        "error_on_not_yet_pitched",
+        "final_segment",
+        "first_segment",
         "functions",
         "magnify_staves",
         "treat_untreated_persistent_wrappers",
@@ -901,7 +923,7 @@ class SegmentMaker:
         activate=None,
         allow_empty_selections=False,
         append_phantom_measure_in_docs=False,
-        check_all_are_pitched=False,
+        error_on_not_yet_pitched=False,
         clock_time_extra_offset=None,
         clock_time_override=None,
         color_octaves=False,
@@ -946,11 +968,12 @@ class SegmentMaker:
         if activate is not None:
             assert all(isinstance(_, abjad.Tag) for _ in activate)
         self._activate = activate
-        self._allow_empty_selections = allow_empty_selections
+        assert allow_empty_selections in (True, False)
+        self.allow_empty_selections = allow_empty_selections
         assert append_phantom_measure_in_docs in (True, False)
         self.append_phantom_measure_in_docs = append_phantom_measure_in_docs
-        assert check_all_are_pitched in (True, False)
-        self.check_all_are_pitched = check_all_are_pitched
+        assert error_on_not_yet_pitched in (True, False)
+        self.error_on_not_yet_pitched = error_on_not_yet_pitched
         if clock_time_extra_offset not in (False, None):
             assert isinstance(clock_time_extra_offset, tuple)
             assert len(clock_time_extra_offset) == 2
@@ -969,14 +992,18 @@ class SegmentMaker:
         if do_not_append_phantom_measure is not None:
             do_not_append_phantom_measure = bool(do_not_append_phantom_measure)
         self._do_not_append_phantom_measure = do_not_append_phantom_measure
-        if do_not_check_out_of_range_pitches is not None:
-            do_not_check_out_of_range_pitches = bool(do_not_check_out_of_range_pitches)
-        self._do_not_check_beamed_long_notes = do_not_check_beamed_long_notes
-        self._do_not_check_out_of_range_pitches = do_not_check_out_of_range_pitches
-        self._do_not_check_persistence = do_not_check_persistence
-        self._do_not_check_wellformedness = do_not_check_wellformedness
-        self._do_not_force_nonnatural_accidentals = do_not_force_nonnatural_accidentals
-        self._do_not_include_layout_ly = do_not_include_layout_ly
+        assert do_not_check_out_of_range_pitches in (True, False)
+        self.do_not_check_out_of_range_pitches = do_not_check_out_of_range_pitches
+        assert do_not_check_beamed_long_notes in (True, False)
+        self.do_not_check_beamed_long_notes = do_not_check_beamed_long_notes
+        assert do_not_check_persistence in (True, False)
+        self.do_not_check_persistence = do_not_check_persistence
+        assert do_not_check_wellformedness in (True, False)
+        self.do_not_check_wellformedness = do_not_check_wellformedness
+        assert do_not_force_nonnatural_accidentals in (True, False)
+        self.do_not_force_nonnatural_accidentals = do_not_force_nonnatural_accidentals
+        assert do_not_include_layout_ly in (True, False)
+        self.do_not_include_layout_ly = do_not_include_layout_ly
         self._duration = None
         self._environment = None
         self._fermata_extra_offset_y = fermata_extra_offset_y
@@ -989,7 +1016,8 @@ class SegmentMaker:
         self._ignore_repeat_pitch_classes = ignore_repeat_pitch_classes
         self._instruments = instruments
         self._final_measure_is_fermata = False
-        self._final_segment = final_segment
+        assert final_segment in (True, False)
+        self.final_segment = final_segment
         self._includes = includes
         self._lilypond_file = None
         self._local_measure_number_extra_offset = local_measure_number_extra_offset
@@ -2059,8 +2087,8 @@ class SegmentMaker:
             voice.extend(selections)
         return command_count
 
-    def _check_all_are_pitched(self):
-        if self.check_all_are_pitched:
+    def _error_on_not_yet_pitched(self):
+        if self.error_on_not_yet_pitched:
             error_on_not_yet_pitched(self.score)
 
     def _check_all_music_in_part_containers(self):
@@ -2452,26 +2480,6 @@ class SegmentMaker:
     def _color_octaves(self):
         if self.color_octaves:
             color_octaves(self.score)
-
-    def _color_out_of_range(self):
-        indicator = _const.ALLOW_OUT_OF_RANGE
-        tag = _scoping.site(_frame(), self)
-        tag = tag.append(_tags.OUT_OF_RANGE_COLORING)
-        for voice in abjad.iterate(self.score).components(abjad.Voice):
-            for pleaf in abjad.iterate(voice).leaves(pitched=True):
-                if abjad.get.has_indicator(pleaf, _const.HIDDEN):
-                    continue
-                if abjad.get.has_indicator(pleaf, indicator):
-                    continue
-                instrument = abjad.get.effective(pleaf, abjad.Instrument)
-                if instrument is None:
-                    continue
-                if not abjad.iterpitches.sounding_pitches_are_in_range(
-                    pleaf, instrument.pitch_range
-                ):
-                    string = r"\baca-out-of-range-coloring"
-                    literal = abjad.LilyPondLiteral(string, format_slot="before")
-                    abjad.attach(literal, pleaf, tag=tag)
 
     def _comment_measure_numbers(self):
         if self.environment == "docs":
@@ -3977,15 +3985,6 @@ class SegmentMaker:
         return self._activate
 
     @property
-    def allow_empty_selections(self):
-        """
-        Is true when segment allows empty selectors.
-
-        Otherwise segment raises exception on empty selectors.
-        """
-        return self._allow_empty_selections
-
-    @property
     def clock_time_extra_offset(self):
         """
         Gets clock time extra offset.
@@ -4023,48 +4022,6 @@ class SegmentMaker:
         return self._do_not_append_phantom_measure
 
     @property
-    def do_not_check_beamed_long_notes(self):
-        """
-        Is true when segment does not check beamed long notes.
-        """
-        return self._do_not_check_beamed_long_notes
-
-    @property
-    def do_not_check_out_of_range_pitches(self):
-        """
-        Is true when segment does not check out-of-range pitches.
-        """
-        return self._do_not_check_out_of_range_pitches
-
-    @property
-    def do_not_check_persistence(self):
-        """
-        Is true when segment-maker does not check persistent indicators.
-        """
-        return self._do_not_check_persistence
-
-    @property
-    def do_not_check_wellformedness(self):
-        """
-        Is true when segment does not check wellformedness.
-        """
-        return self._do_not_check_wellformedness
-
-    @property
-    def do_not_force_nonnatural_accidentals(self):
-        """
-        Is true when segment-maker does not force nonnatural accidentals.
-        """
-        return self._do_not_force_nonnatural_accidentals
-
-    @property
-    def do_not_include_layout_ly(self):
-        """
-        Is true when segment-maker does not include layout.ly.
-        """
-        return self._do_not_include_layout_ly
-
-    @property
     def environment(self):
         """
         Gets environment.
@@ -4086,25 +4043,11 @@ class SegmentMaker:
         return self._fermata_measure_empty_overrides
 
     @property
-    def final_segment(self):
-        """
-        Is true when composer declares segment to be last in score.
-        """
-        return self._final_segment
-
-    @property
     def first_measure_number(self):
         """
         Gets user-defined first measure number.
         """
         return self._first_measure_number
-
-    @property
-    def first_segment(self):
-        """
-        Is true when segment is first in score.
-        """
-        return self._first_segment
 
     @property
     def indicator_defaults(self):
@@ -4453,7 +4396,7 @@ class SegmentMaker:
     def run(
         self,
         do_not_print_timing=False,
-        environment=None,
+        environment=None,  # TODO: default to false
         first_segment=True,
         metadata=None,
         midi=False,
@@ -4468,8 +4411,8 @@ class SegmentMaker:
         """
         assert environment in (None, "docs", "layout"), repr(environment)
         self._environment = environment
-        assert isinstance(first_segment, bool), repr(first_segment)
-        self._first_segment = first_segment
+        assert first_segment in (True, False)
+        self.first_segment = first_segment
         self._metadata = abjad.OrderedDict(metadata)
         self._midi = midi
         self._page_layout_profile = page_layout_profile
@@ -4539,9 +4482,9 @@ class SegmentMaker:
                 self._set_not_yet_pitched_to_staff_position_zero()
                 self._clean_up_repeat_tie_direction()
                 self._clean_up_laissez_vibrer_tie_direction()
-                self._check_all_are_pitched()
+                self._error_on_not_yet_pitched()
                 self._check_doubled_dynamics()
-                self._color_out_of_range()
+                color_out_of_range_pitches(self.score)
                 self._check_persistent_indicators()
                 color_repeat_pitch_classes(self.score)
                 self._color_octaves()

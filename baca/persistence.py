@@ -15,7 +15,6 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     indicator_defaults=[
         ...         ("Music_Staff", "default_clef", abjad.Clef("treble"))
         ...     ],
@@ -87,7 +86,6 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
@@ -158,7 +156,6 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
@@ -246,7 +243,6 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
@@ -331,7 +327,6 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
@@ -413,7 +408,6 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(
@@ -499,7 +493,6 @@ r"""
         Explicit dynamics color blue:
 
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
@@ -550,7 +543,6 @@ r"""
         Even after a previous dynamic:
 
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
@@ -618,7 +610,6 @@ r"""
         Reapplied dynamics color green:
 
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
@@ -739,7 +730,6 @@ r"""
         Even at the beginning of a segment:
 
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
@@ -805,7 +795,6 @@ r"""
         Sforzando dynamics do not count as redundant:
 
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
@@ -859,7 +848,6 @@ r"""
         Even at the beginning of a segment:
 
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
@@ -928,7 +916,6 @@ r"""
         nonredundantly:
 
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
@@ -1005,7 +992,6 @@ r"""
         >>> score_template = baca.make_empty_score_maker(1)
         >>> triple = ("Music_Staff", 'default_instrument', abjad.Flute())
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     indicator_defaults=[triple],
         ...     includes=["baca.ily"],
@@ -1150,7 +1136,6 @@ r"""
         Explicit instruments color blue and redraw dull blue:
 
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     instruments=instruments,
@@ -1294,7 +1279,6 @@ r"""
         Even after a previous instrument:
 
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     instruments=instruments,
@@ -1456,7 +1440,6 @@ r"""
         Reapplied instruments color green and redraw dull green:
 
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     instruments=instruments,
@@ -1625,7 +1608,6 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     instruments=instruments,
@@ -1985,7 +1967,6 @@ r"""
         ...     margin_markups['I+II'],
         ...     )
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     indicator_defaults=[triple],
         ...     includes=["baca.ily"],
@@ -2148,7 +2129,6 @@ r"""
         Explicit margin markup color blue and redraw dull blue:
 
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     margin_markups=margin_markups,
@@ -2309,7 +2289,6 @@ r"""
         Even after previous margin markup:
 
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     margin_markups=margin_markups,
@@ -2495,7 +2474,6 @@ r"""
         Reapplied margin markup color green and redraw dull green:
 
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     margin_markups=margin_markups,
@@ -2687,7 +2665,6 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     margin_markups=margin_markups,
@@ -2892,7 +2869,6 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     margin_markups=margin_markups,
@@ -3085,7 +3061,6 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     margin_markups=margin_markups,
@@ -3709,7 +3684,6 @@ r"""
         Explicit persistent overrides work but do not color:
 
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
@@ -3823,7 +3797,6 @@ r"""
         Reapplied persistent overrides work but do not color:
 
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
@@ -3892,7 +3865,6 @@ r"""
         Even at the beginning of a segment:
 
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
@@ -3978,7 +3950,6 @@ r"""
         Explicit staff lines color blue:
 
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
@@ -4032,7 +4003,6 @@ r"""
         Even after previous staff lines:
 
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
@@ -4103,7 +4073,6 @@ r"""
         Reapplied staff lines color green:
 
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
@@ -4172,7 +4141,6 @@ r"""
         Redundant staff lines color pink:
 
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
@@ -4417,7 +4385,6 @@ r"""
         Even after a previous tempo trend:
 
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     metronome_marks=metronome_marks,
@@ -4508,7 +4475,6 @@ r"""
         Reapplied tempo trends color green:
 
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     metronome_marks=metronome_marks,
@@ -4598,7 +4564,6 @@ r"""
         Redundant tempo trends color pink:
 
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     metronome_marks=metronome_marks,
@@ -4689,7 +4654,6 @@ r"""
         Even at the beginning of a segment:
 
         >>> maker = baca.SegmentMaker(
-        ...     #append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     metronome_marks=metronome_marks,
