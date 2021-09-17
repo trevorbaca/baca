@@ -291,7 +291,7 @@ def bcps(
         final_spanner=final_spanner,
         helper=helper,
         selector=selector,
-        tags=[_scoping.site_new(_frame())],
+        tags=[_scoping.site(_frame())],
         tweaks=tweaks,
     )
 
@@ -626,7 +626,7 @@ def cross_staff(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r"\crossStaff")],
         selector=selector,
-        tags=[_scoping.site_new(_frame())],
+        tags=[_scoping.site(_frame())],
     )
 
 
@@ -728,7 +728,7 @@ def dynamic_down(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r"\dynamicDown")],
         selector=selector,
-        tags=[_scoping.site_new(_frame())],
+        tags=[_scoping.site(_frame())],
     )
 
 
@@ -817,7 +817,7 @@ def dynamic_up(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r"\dynamicUp")],
         selector=selector,
-        tags=[_scoping.site_new(_frame())],
+        tags=[_scoping.site(_frame())],
     )
 
 
@@ -920,7 +920,7 @@ def finger_pressure_transition(
         allow_repeats=True,
         right_broken=right_broken,
         selector=selector,
-        tags=[_scoping.site_new(_frame())],
+        tags=[_scoping.site(_frame())],
         tweaks=(
             abjad.tweak(2).arrow_length,
             abjad.tweak(0.5).arrow_width,
@@ -1392,7 +1392,7 @@ def glissando(
         right_broken=right_broken,
         right_broken_show_next=right_broken_show_next,
         selector=selector,
-        tags=[_scoping.site_new(_frame())],
+        tags=[_scoping.site(_frame())],
         tweaks=tweaks,
         zero_padding=zero_padding,
     )
@@ -1413,7 +1413,7 @@ def global_fermata(
     return _commandclasses.GlobalFermataCommand(
         description=description,
         selector=selector,
-        tags=[_scoping.site_new(_frame())],
+        tags=[_scoping.site(_frame())],
     )
 
 
@@ -1430,7 +1430,7 @@ def instrument(
     return _commandclasses.InstrumentChangeCommand(
         indicators=[instrument],
         selector=selector,
-        tags=[_scoping.site_new(_frame())],
+        tags=[_scoping.site(_frame())],
     )
 
 
@@ -1504,7 +1504,7 @@ def invisible_music(
             }
 
     """
-    tag = _scoping.site_new(_frame(), n=1)
+    tag = _scoping.site(_frame(), n=1)
     tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
     command_1 = _commandclasses.IndicatorCommand(
         [abjad.LilyPondLiteral(r"\abjad-invisible-music")],
@@ -1513,7 +1513,7 @@ def invisible_music(
         selector=selector,
         tags=[tag],
     )
-    tag = _scoping.site_new(_frame(), n=2)
+    tag = _scoping.site(_frame(), n=2)
     tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
     command_2 = _commandclasses.IndicatorCommand(
         [abjad.LilyPondLiteral(r"\abjad-invisible-music-coloring")],
@@ -1828,7 +1828,7 @@ def markup(
         match=match,
         measures=measures,
         selector=selector,
-        tags=[_scoping.site_new(_frame())],
+        tags=[_scoping.site(_frame())],
         tweaks=tweaks,
     )
 
@@ -1859,7 +1859,7 @@ def one_voice(
     return _commandclasses.IndicatorCommand(
         indicators=[literal],
         selector=selector,
-        tags=[_scoping.site_new(_frame())],
+        tags=[_scoping.site(_frame())],
     )
 
 
@@ -1918,7 +1918,7 @@ def voice_four(
     return _commandclasses.IndicatorCommand(
         indicators=[literal],
         selector=selector,
-        tags=[_scoping.site_new(_frame())],
+        tags=[_scoping.site(_frame())],
     )
 
 
@@ -1932,7 +1932,7 @@ def voice_one(
     return _commandclasses.IndicatorCommand(
         indicators=[literal],
         selector=selector,
-        tags=[_scoping.site_new(_frame())],
+        tags=[_scoping.site(_frame())],
     )
 
 
@@ -1946,7 +1946,7 @@ def voice_three(
     return _commandclasses.IndicatorCommand(
         indicators=[literal],
         selector=selector,
-        tags=[_scoping.site_new(_frame())],
+        tags=[_scoping.site(_frame())],
     )
 
 
@@ -1960,5 +1960,5 @@ def voice_two(
     return _commandclasses.IndicatorCommand(
         indicators=[literal],
         selector=selector,
-        tags=[_scoping.site_new(_frame())],
+        tags=[_scoping.site(_frame())],
     )

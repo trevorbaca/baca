@@ -611,7 +611,7 @@ def make_even_divisions(*, measures=None):
             rmakers.even_division([8]),
             rmakers.beam(),
             rmakers.extract_trivial(),
-            tag=_scoping.site_new(_frame()),
+            tag=_scoping.site(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
@@ -641,7 +641,7 @@ def make_fused_tuplet_monads(
             rmakers.extract_trivial(),
             rmakers.force_repeat_tie(),
             preprocessor=lambda _: _sequence.Sequence([_sequence.Sequence(_).sum()]),
-            tag=_scoping.site_new(_frame()),
+            tag=_scoping.site(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
@@ -742,7 +742,7 @@ def make_notes(
             *specifiers,
             rmakers.rewrite_meter(),
             *repeat_tie_specifier,
-            tag=_scoping.site_new(_frame()),
+            tag=_scoping.site(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
@@ -824,7 +824,7 @@ def make_repeat_tied_notes(
     specifier = rmakers.force_repeat_tie()
     specifiers_.append(specifier)
     return RhythmCommand(
-        rmakers.stack(rmakers.note(), *specifiers_, tag=_scoping.site_new(_frame())),
+        rmakers.stack(rmakers.note(), *specifiers_, tag=_scoping.site(_frame())),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
     )
@@ -861,7 +861,7 @@ def make_repeated_duration_notes(
             *rewrite_specifiers,
             rmakers.force_repeat_tie(),
             preprocessor=preprocessor,
-            tag=_scoping.site_new(_frame()),
+            tag=_scoping.site(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
@@ -877,7 +877,7 @@ def make_rests(*, measures=None):
         rmakers.stack(
             rmakers.note(),
             rmakers.force_rest(lambda _: _selection.Selection(_).lts()),
-            tag=_scoping.site_new(_frame()),
+            tag=_scoping.site(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
@@ -902,7 +902,7 @@ def make_single_attack(duration, *, measures=None):
             ),
             rmakers.beam(),
             rmakers.extract_trivial(),
-            tag=_scoping.site_new(_frame()),
+            tag=_scoping.site(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
@@ -920,7 +920,7 @@ def make_tied_notes(*, measures=None):
             rmakers.beam(lambda _: _selection.Selection(_).plts()),
             rmakers.tie(lambda _: _selection.Selection(_).ptails()[:-1]),
             rmakers.rewrite_meter(),
-            tag=_scoping.site_new(_frame()),
+            tag=_scoping.site(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
@@ -954,7 +954,7 @@ def make_tied_repeated_durations(durations, *, measures=None):
             rmakers.note(),
             *specifiers,
             preprocessor=preprocessor,
-            tag=_scoping.site_new(_frame()),
+            tag=_scoping.site(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
@@ -1056,7 +1056,7 @@ def tacet(
     """
     command = _overrides.mmrest_color(color, selector=selector)
     _scoping.tag(_tags.TACET_COLORING, command)
-    _scoping.tag(_scoping.site_new(_frame()), command)
+    _scoping.tag(_scoping.site(_frame()), command)
     command_ = _scoping.new(command, measures=measures)
     assert isinstance(command_, _overrides.OverrideCommand)
     return command_

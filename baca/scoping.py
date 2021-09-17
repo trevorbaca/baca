@@ -4,7 +4,6 @@ Scoping.
 import os
 import typing
 from inspect import currentframe as _frame
-from inspect import getframeinfo
 
 import abjad
 
@@ -1464,23 +1463,7 @@ def only_segment(command: _command_typing) -> _command_typing:
     return tag(_tags.ONLY_SEGMENT, command)
 
 
-def site(frame, *, n=None) -> abjad.Tag:
-    """
-    Makes site from ``frame``.
-
-    ..  todo:: Determine prefix dynamically.
-
-    """
-    prefix = "baca.SegmentMaker"
-    frame_info = getframeinfo(frame)
-    if n is None:
-        string = f"{prefix}.{frame_info.function}()"
-    else:
-        string = f"{prefix}.{frame_info.function}({n})"
-    return abjad.Tag(string)
-
-
-def site_new(frame, self=None, *, n=None):
+def site(frame, self=None, *, n=None):
     """
     Makes site from ``frame``.
     """

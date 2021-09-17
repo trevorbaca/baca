@@ -293,7 +293,7 @@ def beam(
         selector=selector,
         start_indicator=start_beam,
         stop_indicator=stop_beam,
-        tags=[_scoping.site_new(_frame())],
+        tags=[_scoping.site(_frame())],
         tweaks=tweaks,
     )
 
@@ -386,7 +386,7 @@ def ottava(
         selector=selector,
         start_indicator=start_ottava,
         stop_indicator=stop_ottava,
-        tags=[_scoping.site_new(_frame())],
+        tags=[_scoping.site(_frame())],
     )
 
 
@@ -476,7 +476,7 @@ def ottava_bassa(
         selector=selector,
         start_indicator=start_ottava,
         stop_indicator=stop_ottava,
-        tags=[_scoping.site_new(_frame())],
+        tags=[_scoping.site(_frame())],
     )
 
 
@@ -578,7 +578,7 @@ def slur(
         selector=selector,
         start_indicator=start_slur,
         stop_indicator=stop_slur,
-        tags=[_scoping.site_new(_frame())],
+        tags=[_scoping.site(_frame())],
         tweaks=tweaks,
     )
 
@@ -674,7 +674,7 @@ def sustain_pedal(
         selector=selector,
         start_indicator=start_piano_pedal,
         stop_indicator=stop_piano_pedal,
-        tags=[_scoping.site_new(_frame())],
+        tags=[_scoping.site(_frame())],
     )
 
 
@@ -956,6 +956,6 @@ def trill_spanner(
         selector=selector,
         start_indicator=start_trill_span,
         stop_indicator=stop_trill_span,
-        tags=[_scoping.site_new(_frame())],
+        tags=[_scoping.site(_frame())],
         tweaks=tweaks,
     )
