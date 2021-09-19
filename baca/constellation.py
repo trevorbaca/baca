@@ -2064,7 +2064,7 @@ class Constellation:
         """
         colors = ["#red", "#blue", "#green"]
         color_map = abjad.ColorMap(colors=colors, pitch_iterables=self.generator)
-        abjad.Label(chord).color_note_heads(color_map)
+        abjad.label.color_note_heads(chord, color_map)
 
     def label_chord(self, chord):
         """

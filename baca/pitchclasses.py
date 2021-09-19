@@ -6288,8 +6288,8 @@ class PitchTree(_classes.Tree):
         for left, right in pairs:
             if not left.written_pitch == right.written_pitch:
                 continue
-            abjad.Label(left).color_leaves(current_color)
-            abjad.Label(right).color_leaves(current_color)
+            abjad.label.color_leaves(left, current_color)
+            abjad.label.color_leaves(right, current_color)
             if current_color == "#red":
                 current_color = "#blue"
             else:

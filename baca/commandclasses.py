@@ -712,7 +712,7 @@ class ColorCommand(_scoping.Command):
             return
         assert self.selector is not None
         argument = self.selector(argument)
-        abjad.Label(argument).by_selector(self.selector, lone=self.lone)
+        abjad.label.by_selector(argument, self.selector, lone=self.lone)
 
 
 class ContainerCommand(_scoping.Command):
