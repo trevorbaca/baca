@@ -1323,7 +1323,7 @@ class SegmentMaker:
         """
         Is true if ``expr`` is a segment-maker with equivalent properties.
         """
-        return abjad.StorageFormatManager.compare_objects(self, expr)
+        return abjad.format.compare_objects(self, expr)
 
     def __hash__(self):
         """

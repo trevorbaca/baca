@@ -106,7 +106,7 @@ class ArpeggiationSpacingSpecifier:
         """
         Delegates to format manager.
         """
-        return abjad.StorageFormatManager.compare_objects(self, argument)
+        return abjad.format.compare_objects(self, argument)
 
     def __hash__(self) -> int:
         """
@@ -402,7 +402,7 @@ class ChordalSpacingSpecifier:
         """
         Delegates to format manager.
         """
-        return abjad.StorageFormatManager.compare_objects(self, argument)
+        return abjad.format.compare_objects(self, argument)
 
     def __hash__(self) -> int:
         """
@@ -7746,7 +7746,7 @@ class Registration:
         """
         Delegates to format manager.
         """
-        return abjad.StorageFormatManager.compare_objects(self, argument)
+        return abjad.format.compare_objects(self, argument)
 
     def __hash__(self) -> int:
         """
@@ -7832,7 +7832,7 @@ class RegistrationComponent:
         """
         Delegates to format manager.
         """
-        return abjad.StorageFormatManager.compare_objects(self, argument)
+        return abjad.format.compare_objects(self, argument)
 
     def __hash__(self):
         """

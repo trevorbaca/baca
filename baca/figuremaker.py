@@ -66,7 +66,7 @@ class Stack:
         """
         Delegates to format manager.
         """
-        return abjad.StorageFormatManager.compare_objects(self, argument)
+        return abjad.format.compare_objects(self, argument)
 
     def __hash__(self) -> int:
         """
@@ -235,7 +235,7 @@ class LMR:
         """
         Delegates to format manager.
         """
-        return abjad.StorageFormatManager.compare_objects(self, argument)
+        return abjad.format.compare_objects(self, argument)
 
     def __hash__(self) -> int:
         """
@@ -1003,7 +1003,7 @@ class Acciaccatura:
         """
         Delegates to format manager.
         """
-        return abjad.StorageFormatManager.compare_objects(self, argument)
+        return abjad.format.compare_objects(self, argument)
 
     def __hash__(self) -> int:
         """
@@ -1792,7 +1792,7 @@ class Anchor:
         """
         Delegates to format manager.
         """
-        return abjad.StorageFormatManager.compare_objects(self, argument)
+        return abjad.format.compare_objects(self, argument)
 
     def __hash__(self) -> int:
         """
@@ -3668,7 +3668,7 @@ class Nest:
         """
         Delegates to format manager.
         """
-        return abjad.StorageFormatManager.compare_objects(self, argument)
+        return abjad.format.compare_objects(self, argument)
 
     def __hash__(self) -> int:
         """
@@ -3774,7 +3774,7 @@ class RestAffix:
         """
         Delegates to format manager.
         """
-        return abjad.StorageFormatManager.compare_objects(self, argument)
+        return abjad.format.compare_objects(self, argument)
 
     def __hash__(self) -> int:
         """
@@ -4457,7 +4457,7 @@ class FigureMaker:
         """
         Delegates to format manager.
         """
-        return abjad.StorageFormatManager.compare_objects(self, argument)
+        return abjad.format.compare_objects(self, argument)
 
     def __hash__(self) -> int:
         """
@@ -6848,7 +6848,7 @@ class Assignment:
         """
         Delegates to format manager.
         """
-        return abjad.StorageFormatManager.compare_objects(self, argument)
+        return abjad.format.compare_objects(self, argument)
 
     def __hash__(self) -> int:
         """
@@ -6942,7 +6942,7 @@ class Bind:
         """
         Delegates to format manager.
         """
-        return abjad.StorageFormatManager.compare_objects(self, argument)
+        return abjad.format.compare_objects(self, argument)
 
     def __hash__(self) -> int:
         """
