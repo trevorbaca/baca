@@ -65,7 +65,7 @@ class Memento:
     ### PRIVATE METHODS###
 
     def _get_format_specification(self):
-        return abjad.FormatSpecification(client=self)
+        return abjad.FormatSpecification()
 
     ### PUBLIC PROPERTIES ###
 
@@ -252,7 +252,7 @@ class PersistentOverride:
     ### PRIVATE METHODS ###
 
     def _get_format_specification(self):
-        return abjad.FormatSpecification(client=self)
+        return abjad.FormatSpecification()
 
     def _get_lilypond_format(self, context=None):
         if isinstance(context, abjad.Context):

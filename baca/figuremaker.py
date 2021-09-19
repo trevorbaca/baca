@@ -88,7 +88,7 @@ class Stack:
     ### PRIVATE METHODS ###
 
     def _get_format_specification(self):
-        return abjad.FormatSpecification(self, storage_format_args_values=self.commands)
+        return abjad.FormatSpecification(storage_format_args_values=self.commands)
 
     ### PUBLIC PROPERTIES ###
 

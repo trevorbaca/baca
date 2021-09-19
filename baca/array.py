@@ -282,7 +282,7 @@ class PitchArray:
         return result
 
     def _get_format_specification(self):
-        return abjad.FormatSpecification(client=self)
+        return abjad.FormatSpecification()
 
     ### PUBLIC PROPERTIES ###
 
@@ -1169,7 +1169,7 @@ class PitchArrayCell:
     ### PRIVATE METHODS ###
 
     def _get_format_specification(self):
-        return abjad.FormatSpecification(client=self)
+        return abjad.FormatSpecification()
 
     def _parse_cell_token(self, cell_token):
         if cell_token is None:
@@ -2549,7 +2549,7 @@ class PitchArrayRow:
     ### PRIVATE METHODS ###
 
     def _get_format_specification(self):
-        return abjad.FormatSpecification(client=self)
+        return abjad.FormatSpecification()
 
     ### PUBLIC PROPERTIES ###
 

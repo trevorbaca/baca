@@ -1246,7 +1246,7 @@ class CollectionList(collections_module.abc.Sequence):
         return collections_
 
     def _get_format_specification(self):
-        return abjad.FormatSpecification(client=self)
+        return abjad.FormatSpecification()
 
     def _get_pitch_class_class(self):
         item_class = self.item_class or abjad.NumberedPitch
@@ -7849,7 +7849,7 @@ class RegistrationComponent:
     ### PRIVATE METHODS ###
 
     def _get_format_specification(self):
-        return abjad.FormatSpecification(client=self)
+        return abjad.FormatSpecification()
 
     ### PUBLIC PROPERTIES ###
 

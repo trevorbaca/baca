@@ -416,7 +416,7 @@ class Scope:
     ### PRIVATE METHODS ###
 
     def _get_format_specification(self):
-        return abjad.FormatSpecification(client=self)
+        return abjad.FormatSpecification()
 
     ### PUBLIC PROPERTIES ###
 
@@ -789,7 +789,7 @@ class Command:
         pass
 
     def _get_format_specification(self):
-        return abjad.FormatSpecification(client=self)
+        return abjad.FormatSpecification()
 
     def _initialize_tags(self, tags):
         tags_ = []
@@ -1101,7 +1101,6 @@ class Suite:
         manager = abjad.StorageFormatManager(self)
         names = list(manager.signature_keyword_names)
         return abjad.FormatSpecification(
-            self,
             storage_format_args_values=self.commands,
             storage_format_keyword_names=names,
         )

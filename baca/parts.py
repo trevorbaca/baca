@@ -559,7 +559,6 @@ class PartAssignment:
         repr_is_indented = False
         repr_keyword_names = []
         return abjad.FormatSpecification(
-            self,
             repr_args_values=repr_args_values,
             repr_is_indented=repr_is_indented,
             repr_keyword_names=repr_keyword_names,

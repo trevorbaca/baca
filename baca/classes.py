@@ -1041,7 +1041,6 @@ class PaddedTuple:
 
     def _get_format_specification(self):
         return abjad.FormatSpecification(
-            client=self,
             repr_is_indented=False,
             storage_format_args_values=[list(self._items)],
         )
@@ -1819,7 +1818,7 @@ class Tree:
         return max(levels) - self._get_level() + 1
 
     def _get_format_specification(self):
-        return abjad.FormatSpecification(client=self)
+        return abjad.FormatSpecification()
 
     def _get_index_in_parent(self):
         if self._parent is not None:
