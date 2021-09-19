@@ -1134,7 +1134,7 @@ def make_segment_pdf(maker, first_segment=False):
                     if "%@%" not in line:
                         lines.append(line)
             string = "".join(lines)
-            string = abjad.format.remove_tags(string)
+            string = abjad.lilypondformat.remove_tags(string)
             parts = []
             for part in tagged.parts:
                 if part == os.path.sep:
