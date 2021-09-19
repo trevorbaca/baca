@@ -12,7 +12,7 @@ from . import sequence as _sequence
 
 def _get_leaf_offsets(argment):
     offsets = []
-    for leaf in abjad.iterate(argment).leaves():
+    for leaf in abjad.iterate.leaves(argment):
         start_offset = abjad.get.timespan(leaf).start_offset
         if start_offset not in offsets:
             offsets.append(start_offset)
@@ -715,7 +715,7 @@ class PitchArray:
         items = _make_multiplied_quarter_notes(offsets)
         for leaf_iterable, pitch_array_row in zip(score, pitch_array.rows):
             durations = []
-            leaves = abjad.iterate(leaf_iterable).leaves()
+            leaves = abjad.iterate.leaves(leaf_iterable)
             for leaf in leaves:
                 durations.append(abjad.get.duration(leaf))
             parts = abjad.mutate.split(items, durations, cyclic=False)
@@ -726,10 +726,10 @@ class PitchArray:
             )
             for group in grouped_cells:
                 pitch_array_row.merge(group)
-            leaves = abjad.iterate(leaf_iterable).leaves()
+            leaves = abjad.iterate.leaves(leaf_iterable)
             if populate:
                 for cell, leaf in zip(pitch_array_row.cells, leaves):
-                    cell.pitches.extend(abjad.iterate(leaf).pitches())
+                    cell.pitches.extend(abjad.iterate.pitches(leaf))
         return pitch_array
 
     def has_spanning_cell_over_index(self, index):

@@ -221,7 +221,7 @@ class RhythmCommand(_scoping.Command):
         ):
             container = abjad.Container(selection, name="Dummy")
             rest_prototype = (abjad.MultimeasureRest, abjad.Rest, abjad.Skip)
-            for leaf in abjad.iterate(container).leaves():
+            for leaf in abjad.iterate.leaves(container):
                 if isinstance(leaf, (abjad.Note, abjad.Chord)):
                     abjad.attach(_const.NOT_YET_PITCHED, leaf, tag=None)
                 elif isinstance(leaf, rest_prototype):
@@ -1069,5 +1069,5 @@ def tag_selection(selection, tag):
     """
     assert isinstance(tag, abjad.Tag), repr(tag)
     # TODO: tag attachments
-    for component in abjad.iterate(selection).components():
+    for component in abjad.iterate.components(selection):
         component._tag = tag

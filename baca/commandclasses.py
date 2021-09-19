@@ -1144,7 +1144,7 @@ class GlobalFermataCommand(_scoping.Command):
             fermata_duration = 8
         else:
             raise Exception(self.description)
-        for leaf in abjad.iterate(argument).leaves():
+        for leaf in abjad.iterate.leaves(argument):
             assert isinstance(leaf, abjad.MultimeasureRest)
             string = rf"\baca-{command}-markup"
             markup = abjad.Markup(string, literal=True)

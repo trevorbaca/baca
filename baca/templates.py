@@ -10,13 +10,13 @@ from . import tags as _tags
 
 
 def assert_lilypond_identifiers(score):
-    for context in abjad.iterate(score).components(abjad.Context):
+    for context in abjad.iterate.components(score, abjad.Context):
         if not abjad.String(context.name).is_lilypond_identifier():
             raise Exception(f"invalid LilyPond identifier: {context.name!r}")
 
 
 def assert_matching_custom_context_names(score):
-    for context in abjad.iterate(score).components(abjad.Context):
+    for context in abjad.iterate.components(score, abjad.Context):
         if context.lilypond_type in abjad.Context.lilypond_types:
             continue
         if context.name == context.lilypond_type:
@@ -30,7 +30,7 @@ def assert_matching_custom_context_names(score):
 
 def assert_unique_context_names(score):
     names = []
-    for context in abjad.iterate(score).components(abjad.Context):
+    for context in abjad.iterate.components(score, abjad.Context):
         if context.name in names:
             raise Exception(f"duplicate context name: {context.name!r}.")
 
@@ -98,7 +98,7 @@ class ScoreTemplate:
 
     def _validate_voice_names(self, score):
         voice_names = []
-        for voice in abjad.iterate(score).components(abjad.Voice):
+        for voice in abjad.iterate.components(score, abjad.Voice):
             voice_names.append(voice.name)
         for voice_name in sorted(self.voice_colors):
             if voice_name not in voice_names:
@@ -277,7 +277,7 @@ def attach_defaults(argument):
         # find leaf 0 in first nonempty voice
         for voice in voices:
             leaves = []
-            for leaf_ in abjad.Iteration(voice).leaves():
+            for leaf_ in abjad.iterate.leaves(voice):
                 if abjad.get.has_indicator(leaf_, _const.HIDDEN):
                     leaves.append(leaf_)
             if not all(isinstance(_, empty_prototype) for _ in leaves):

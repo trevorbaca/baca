@@ -3978,7 +3978,7 @@ class RegisterToOctaveCommand(_scoping.Command):
 
     def _get_anchor_octave_number(self, argument):
         pitches = []
-        for leaf in abjad.iterate(argument).leaves(pitched=True):
+        for leaf in abjad.iterate.leaves(argument, pitched=True):
             if isinstance(leaf, abjad.Note):
                 pitches.append(leaf.written_pitch)
             elif isinstance(leaf, abjad.Chord):

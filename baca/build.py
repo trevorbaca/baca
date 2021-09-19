@@ -942,7 +942,7 @@ def make_layout_ly(spacing):
     message += f" {baca.path.trim(layout_ly)} ..."
     print(message)
     bol_measure_numbers = []
-    skips = abjad.iterate(score["Page_Layout"]).leaves(abjad.Skip)
+    skips = abjad.iterate.leaves(score["Page_Layout"], abjad.Skip)
     for i, skip in enumerate(skips):
         for literal in abjad.get.indicators(skip, abjad.LilyPondLiteral):
             if literal.argument in (r"\break", r"\pageBreak"):

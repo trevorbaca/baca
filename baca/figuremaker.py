@@ -1993,8 +1993,7 @@ class Imbrication:
         selected_logical_ties = None
         if self.selector is not None:
             selection = self.selector(container)
-            agent = abjad.iterate(selection)
-            selected_logical_ties = agent.logical_ties(pitched=True)
+            selected_logical_ties = abjad.iterate.logical_ties(selection, pitched=True)
             selected_logical_ties = list(selected_logical_ties)
         selector = abjad.select(original_container)
         original_logical_ties = selector.logical_ties()
@@ -2967,7 +2966,7 @@ class Accumulator:
             assert isinstance(voice_abbreviations, prototype), repr(voice_abbreviations)
         self._voice_abbreviations = voice_abbreviations or {}
         voice_names = []
-        for voice in abjad.iterate(score).components(abjad.Voice):
+        for voice in abjad.iterate.components(score, abjad.Voice):
             voice_names.append(voice.name)
         self._voice_names = voice_names
         self._current_offset = abjad.Offset(0)
@@ -3116,7 +3115,7 @@ class Accumulator:
         for voice_name in sorted(self._floating_selections.keys()):
             for floating_selection in self._floating_selections[voice_name]:
                 leaf_start_offset = floating_selection.start_offset
-                leaves = abjad.iterate(floating_selection.annotation).leaves()
+                leaves = abjad.iterate.leaves(floating_selection.annotation)
                 for leaf in leaves:
                     markup = abjad.get.indicators(leaf, abjad.Markup)
                     for markup_ in markup:
@@ -3135,7 +3134,7 @@ class Accumulator:
         found_leaf = False
         for floating_selection in floating_selections:
             leaf_start_offset = abjad.Offset(0)
-            for leaf_ in abjad.iterate(floating_selection.annotation).leaves():
+            for leaf_ in abjad.iterate.leaves(floating_selection.annotation):
                 leaf_duration = abjad.get.duration(leaf_)
                 if leaf_ is leaf:
                     found_leaf = True
@@ -3180,7 +3179,7 @@ class Accumulator:
         floating_selections = self._floating_selections[remote_voice_name]
         selections = [_.annotation for _ in floating_selections]
         result = remote_selector(selections)
-        selected_leaves = list(abjad.iterate(result).leaves())
+        selected_leaves = list(abjad.iterate.leaves(result))
         first_selected_leaf = selected_leaves[0]
         timespan = self._get_leaf_timespan(first_selected_leaf, floating_selections)
         if use_remote_stop_offset:
@@ -3194,7 +3193,7 @@ class Accumulator:
             local_selector = None
         if local_selector is not None:
             result = local_selector(selection)
-            selected_leaves = list(abjad.iterate(result).leaves())
+            selected_leaves = list(abjad.iterate.leaves(result))
             first_selected_leaf = selected_leaves[0]
             dummy_container = abjad.Container(selection)
             timespan = abjad.get.timespan(first_selected_leaf)
@@ -4776,7 +4775,7 @@ class FigureMaker:
         assert isinstance(tuplet, abjad.Tuplet)
         tag = abjad.Tag("baca.FigureMaker._make_tuplet()")
         if before_grace_containers is not None:
-            logical_ties = abjad.iterate(tuplet).logical_ties()
+            logical_ties = abjad.iterate.logical_ties(tuplet)
             pairs = zip(before_grace_containers, logical_ties)
             for before_grace_container, logical_tie in pairs:
                 if before_grace_container is None:

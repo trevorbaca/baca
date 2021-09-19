@@ -414,7 +414,7 @@ class BarExtent:
         for sibling in siblings:
             if not abjad.get.annotation(sibling, tag):
                 return True
-            for leaf in abjad.iterate(sibling).leaves():
+            for leaf in abjad.iterate.leaves(sibling):
                 if not isinstance(leaf, empty_prototype):
                     return True
         staff_grandparent = abjad.get.parentage(staff_parent).parent
@@ -440,7 +440,7 @@ class BarExtent:
         for sibling in siblings:
             if not abjad.get.annotation(sibling, tag):
                 return True
-            for leaf in abjad.iterate(sibling).leaves():
+            for leaf in abjad.iterate.leaves(sibling):
                 if not isinstance(leaf, empty_prototype):
                     return True
         staff_grandparent = abjad.get.parentage(staff_parent).parent

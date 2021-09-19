@@ -89,7 +89,7 @@ class SpannerIndicatorCommand(_scoping.Command):
         if self.start_indicator is not None:
             start_indicator = self.start_indicator
             if self.detach_first:
-                for leaf in abjad.iterate(argument).leaves(grace=False):
+                for leaf in abjad.iterate.leaves(argument, grace=False):
                     abjad.detach(type(start_indicator), leaf)
             _scoping.apply_tweaks(start_indicator, self.tweaks)
             first_leaf = abjad.select(argument).leaf(0)
@@ -114,7 +114,7 @@ class SpannerIndicatorCommand(_scoping.Command):
         if self.stop_indicator is not None:
             stop_indicator = self.stop_indicator
             if self.detach_first:
-                for leaf in abjad.iterate(argument).leaves(grace=False):
+                for leaf in abjad.iterate.leaves(argument, grace=False):
                     abjad.detach(type(stop_indicator), leaf)
             final_leaf = abjad.select(argument).leaf(-1)
             if self.right_broken:
