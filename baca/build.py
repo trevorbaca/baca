@@ -905,7 +905,7 @@ def make_layout_ly(spacing):
     text = abjad.lilypond(score, tags=True)
     text = text.replace("Global_Skips", "Page_Layout")
     text = text.replace("Global.Skips", "Page.Layout")
-    text = abjad.LilyPondFormatManager.left_shift_tags(text)
+    text = abjad.lilypondformat.left_shift_tags(text)
     layout_ly = layout_directory / "layout.ly"
     lines = []
     # TODO: remove first_page_number embedding
@@ -1039,7 +1039,7 @@ def make_segment_pdf(maker, first_segment=False):
         measure_count = None
         time_signatures = None
     text = music_ly.read_text()
-    text = abjad.LilyPondFormatManager.left_shift_tags(text)
+    text = abjad.lilypondformat.left_shift_tags(text)
     music_ly.write_text(text)
     for job in [
         baca.jobs.handle_edition_tags(music_ly),
