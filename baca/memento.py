@@ -60,7 +60,7 @@ class Memento:
         """
         Gets interpreter representation.
         """
-        return abjad.StorageFormatManager(self).get_repr_format()
+        return abjad.format.make_repr(self)
 
     ### PRIVATE METHODS###
 
@@ -247,7 +247,7 @@ class PersistentOverride:
         """
         Gets interpreter representation.
         """
-        return abjad.StorageFormatManager(self).get_repr_format()
+        return abjad.format.make_repr(self)
 
     ### PRIVATE METHODS ###
 

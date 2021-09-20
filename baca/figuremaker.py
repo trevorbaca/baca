@@ -83,7 +83,7 @@ class Stack:
         """
         Delegates to format manager.
         """
-        return abjad.StorageFormatManager(self).get_repr_format()
+        return abjad.format.make_repr(self)
 
     ### PRIVATE METHODS ###
 
@@ -247,7 +247,7 @@ class LMR:
         """
         Delegates to format manager.
         """
-        return abjad.StorageFormatManager(self).get_repr_format()
+        return abjad.format.make_repr(self)
 
     ### PRIVATE METHODS ###
 
@@ -1015,7 +1015,7 @@ class Acciaccatura:
         """
         Delegates to format manager.
         """
-        return abjad.StorageFormatManager(self).get_repr_format()
+        return abjad.format.make_repr(self)
 
     ### PUBLIC PROPERTIES ###
 
@@ -1809,7 +1809,7 @@ class Anchor:
         """
         Delegates to format manager.
         """
-        return abjad.StorageFormatManager(self).get_repr_format()
+        return abjad.format.make_repr(self)
 
     ### PUBLIC PROPERTIES ###
 
@@ -3370,7 +3370,7 @@ class Contribution:
         """
         Delegates to format manager.
         """
-        return abjad.StorageFormatManager(self).get_repr_format()
+        return abjad.format.make_repr(self)
 
     ### PUBLIC PROPERTIES ###
 
@@ -3685,7 +3685,7 @@ class Nest:
         """
         Delegates to format manager.
         """
-        return abjad.StorageFormatManager(self).get_repr_format()
+        return abjad.format.make_repr(self)
 
     ### PRIVATE METHODS ###
 
@@ -3786,7 +3786,7 @@ class RestAffix:
         """
         Delegates to format manager.
         """
-        return abjad.StorageFormatManager(self).get_repr_format()
+        return abjad.format.make_repr(self)
 
     ### PUBLIC PROPERTIES ###
 
@@ -4474,7 +4474,7 @@ class FigureMaker:
         """
         Delegates to format manager.
         """
-        return abjad.StorageFormatManager(self).get_repr_format()
+        return abjad.format.make_repr(self)
 
     ### PRIVATE METHODS ###
 
@@ -6865,7 +6865,7 @@ class Assignment:
         """
         Delegates to format manager.
         """
-        return abjad.StorageFormatManager(self).get_repr_format()
+        return abjad.format.make_repr(self)
 
     ### PUBLIC PROPERTIES ###
 
@@ -6959,7 +6959,7 @@ class Bind:
         """
         Delegates to format manager.
         """
-        return abjad.StorageFormatManager(self).get_repr_format()
+        return abjad.format.make_repr(self)
 
     ### PUBLIC PROPERTIES ###
 
