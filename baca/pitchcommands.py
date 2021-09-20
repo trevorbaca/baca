@@ -1417,7 +1417,6 @@ class Loop(abjad.CyclicTuple):
 
     def _get_format_specification(self):
         return abjad.FormatSpecification(
-            repr_is_indented=False,
             storage_format_args_values=[list(self.items)],
             storage_format_keyword_names=["intervals"],
         )

@@ -563,7 +563,7 @@ class PartAssignment:
             repr_is_indented=repr_is_indented,
             repr_keyword_names=repr_keyword_names,
             storage_format_args_values=repr_args_values,
-            storage_format_is_indented=repr_is_indented,
+            storage_format_is_not_indented=not repr_is_indented,
             storage_format_keyword_names=repr_keyword_names,
         )
 
