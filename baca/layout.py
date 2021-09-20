@@ -20,21 +20,9 @@ Layout.
         ...
     Exception: page number (9) is not 2.
 
-..  container:: example exception
-
-    Exception 2. Page function raises exception when Y-offsets overlap:
-
-    >>> baca.page(
-    ...     1,
-    ...     baca.system(measure=1, y_offset=60, distances=(20, 20)),
-    ...     baca.system(measure=4, y_offset=60, distances=(20, 20)),
-    ... )
-    Traceback (most recent call last):
-        ...
-    Exception: systems overlap at Y-offset 60.
-
 """
 import collections
+import dataclasses
 
 import abjad
 
@@ -165,25 +153,14 @@ class SpacingSpecifier:
                 )
 
 
+@dataclasses.dataclass
 class LBSD:
     """
     Line-break system details.
     """
 
-    ### CLASS VARIABLES ###
-
-    _override = r"\overrideProperty"
-    _override += " Score.NonMusicalPaperColumn.line-break-system-details"
-
-    ### INITIALIZER ###
-
-    def __init__(self, *, y_offset=None, alignment_distances=None):
-        self.y_offset = y_offset
-        if alignment_distances is not None:
-            alignment_distances = tuple(alignment_distances)
-        self.alignment_distances = alignment_distances
-
-    ### PRIVATE METHODS ###
+    y_offset: int = None
+    alignment_distances: tuple = None
 
     def _get_lilypond_format_bundle(self, component=None):
         bundle = abjad.LilyPondFormatBundle()
@@ -193,25 +170,14 @@ class LBSD:
         return bundle
 
 
+@dataclasses.dataclass
 class PageSpecifier:
     """
     Page specifier.
     """
 
-    ### INITIALIZER ###
-
-    def __init__(self, *, number, systems):
-        assert isinstance(number, int), repr(number)
-        assert 1 <= number, repr(number)
-        self.number = number
-        y_offsets = []
-        for system in systems:
-            y_offset = system.y_offset
-            if y_offset in y_offsets:
-                raise Exception(f"systems overlap at Y-offset {y_offset}.")
-            else:
-                y_offsets.append(y_offset)
-        self.systems = systems
+    number: int
+    systems: list
 
 
 def breaks(*page_specifiers):
