@@ -1329,7 +1329,7 @@ class SegmentMaker:
         """
         Hashes segment-maker.
         """
-        hash_values = abjad.StorageFormatManager(self).get_hash_values()
+        hash_values = abjad.format.get_hash_values(self)
         return hash(hash_values)
 
     def __repr__(self):

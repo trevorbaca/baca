@@ -72,7 +72,7 @@ class Stack:
         """
         Hashes stack.
         """
-        hash_values = abjad.StorageFormatManager(self).get_hash_values()
+        hash_values = abjad.format.get_hash_values(self)
         try:
             result = hash(hash_values)
         except TypeError:
@@ -1798,7 +1798,7 @@ class Anchor:
         """
         Hashes anchor.
         """
-        hash_values = abjad.StorageFormatManager(self).get_hash_values()
+        hash_values = abjad.format.get_hash_values(self)
         try:
             result = hash(hash_values)
         except TypeError:
@@ -3674,7 +3674,7 @@ class Nest:
         """
         Hashes nest.
         """
-        hash_values = abjad.StorageFormatManager(self).get_hash_values()
+        hash_values = abjad.format.get_hash_values(self)
         try:
             result = hash(hash_values)
         except TypeError:
@@ -4463,7 +4463,7 @@ class FigureMaker:
         """
         Hashes figure-maker.
         """
-        hash_values = abjad.StorageFormatManager(self).get_hash_values()
+        hash_values = abjad.format.get_hash_values(self)
         try:
             result = hash(hash_values)
         except TypeError:
@@ -6854,7 +6854,7 @@ class Assignment:
         """
         Hashes assignment.
         """
-        hash_values = abjad.StorageFormatManager(self).get_hash_values()
+        hash_values = abjad.format.get_hash_values(self)
         try:
             result = hash(hash_values)
         except TypeError:
@@ -6948,7 +6948,7 @@ class Bind:
         """
         Hashes bind.
         """
-        hash_values = abjad.StorageFormatManager(self).get_hash_values()
+        hash_values = abjad.format.get_hash_values(self)
         try:
             result = hash(hash_values)
         except TypeError:
