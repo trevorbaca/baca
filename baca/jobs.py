@@ -154,7 +154,7 @@ class Job:
         """
         Gets interpreter representation.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     ### PUBLIC PROPERTIES ###
 

@@ -236,7 +236,7 @@ class PitchArray:
         """
         Gets interpreter representation.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     def __setitem__(self, i, argument):
         """
@@ -1095,7 +1095,7 @@ class PitchArrayCell:
         """
         Delegates to format manager.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     def __str__(self):
         """
@@ -2507,7 +2507,7 @@ class PitchArrayRow:
         """
         Gets interpreter representation.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     def __str__(self):
         """

@@ -411,7 +411,7 @@ class Scope:
         """
         Gets interpreter representation.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     ### PRIVATE METHODS ###
 
@@ -502,7 +502,7 @@ class TimelineScope:
         """
         Gets interpreter representation.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     ### PUBLIC PROPERTIES ###
 
@@ -781,7 +781,7 @@ class Command:
         """
         Gets interpreter representation.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     ### PRIVATE METHODS ###
 
@@ -1093,7 +1093,7 @@ class Suite:
         """
         Gets interpreter representation.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     ### PRIVATE METHODS ###
 

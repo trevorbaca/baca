@@ -93,7 +93,7 @@ class Counter:
         """
         Gets interpreter representation.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     ### PUBLIC PROPERTIES ###
 
@@ -301,7 +301,7 @@ class Cursor:
         """
         Gets interpreter representation.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     ### PUBLIC PROPERTIES ###
 
@@ -1035,7 +1035,7 @@ class PaddedTuple:
         """
         Gets interpreter representation.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     ### PRIVATE METHODS ###
 
@@ -1763,7 +1763,7 @@ class Tree:
 
         Returns string.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     ### PRIVATE PROPERTIES ###
 

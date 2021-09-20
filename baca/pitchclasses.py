@@ -118,7 +118,7 @@ class ArpeggiationSpacingSpecifier:
         """
         Delegates to format manager.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     ### PUBLIC PROPERTIES ###
 
@@ -414,7 +414,7 @@ class ChordalSpacingSpecifier:
         """
         Delegates to format manager.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     ### PRIVATE METHODS ###
 
@@ -2986,7 +2986,7 @@ class Partial:
         """
         Gets interpreter representation.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     ### PUBLIC PROPERTIES ###
 
@@ -7598,7 +7598,7 @@ class DesignMaker:
         """
         Gets interpreter representation.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     ### PUBLIC METHODS ###
 
@@ -7758,7 +7758,7 @@ class Registration:
         """
         Delegates to format manager.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     ### PRIVATE METHODS ###
 
@@ -7844,7 +7844,7 @@ class RegistrationComponent:
         """
         Delegates to format manager.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     ### PRIVATE METHODS ###
 

@@ -92,7 +92,7 @@ class Accelerando:
         """
         Delegates to format manager.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     def __str__(self) -> str:
         r"""
@@ -353,7 +353,7 @@ class BarExtent:
         """
         Delegates to format manager.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     ### PRIVATE METHODS ###
 
@@ -625,7 +625,7 @@ class Ritardando:
         """
         Delegates to format manager.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     def __str__(self) -> str:
         r"""
@@ -912,7 +912,7 @@ class StaffLines:
         """
         Delegates to format manager.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     ### PRIVATE METHODS ###
 
@@ -1094,7 +1094,7 @@ class SpacingSection:
         """
         Delegates to format manager.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     def __str__(self):
         """

@@ -156,7 +156,7 @@ class Part:
         """
         Gets interpreter representation.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     ### PUBLIC PROPERTIES ###
 
@@ -538,7 +538,7 @@ class PartAssignment:
         """
         Gets interpreter representation.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     ### PRIVATE METHODS ###
 
@@ -833,7 +833,7 @@ class Section:
         """
         Gets interpreter representation.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     ### PUBLIC PROPERTIES ###
 
@@ -1177,7 +1177,7 @@ class PartManifest:
         """
         Gets interpreter representation.
         """
-        return abjad.format.make_repr(self)
+        return abjad.format.get_repr(self)
 
     ### PUBLIC PROPERTIES ###
 
