@@ -8008,7 +8008,7 @@ class ZaggedPitchClassMaker:
         """
         Delegates to format manager.
         """
-        return abjad.StorageFormatManager(self).compare_objects(self, argument)
+        return abjad.format.compare_objects(self, argument)
 
     def __hash__(self):
         """

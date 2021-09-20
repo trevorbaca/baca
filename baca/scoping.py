@@ -1098,11 +1098,11 @@ class Suite:
     ### PRIVATE METHODS ###
 
     def _get_format_specification(self):
-        manager = abjad.StorageFormatManager(self)
-        names = list(manager.signature_keyword_names)
+        result = abjad.format._inspect_signature(self)
+        signature_keyword_names = result[1]
         return abjad.FormatSpecification(
             storage_format_args_values=self.commands,
-            storage_format_keyword_names=names,
+            storage_format_keyword_names=list(signature_keyword_names),
         )
 
     ### PUBLIC PROPERTIES ###
