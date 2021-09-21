@@ -1480,7 +1480,9 @@ def site(frame, self=None, *, n=None):
     parts.reverse()
     if parts[0] == "baca":
         parts.pop()
-    if self is not None:
+    if isinstance(self, str):
+        parts.append(self)
+    elif self is not None:
         parts.append(type(self).__name__)
     parts.append(frame.f_code.co_name)
     string = ".".join(parts) + ("()" if n is None else f"({n})")

@@ -292,6 +292,67 @@ def _add_container_identifiers(
     return container_to_part_assignment
 
 
+def _activate_tags(score, tags):
+    if not tags:
+        return
+    assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
+    for leaf in abjad.iterate.leaves(score):
+        if not isinstance(leaf, abjad.Skip):
+            continue
+        wrappers = abjad.get.wrappers(leaf)
+        for wrapper in wrappers:
+            if wrapper.tag is None:
+                continue
+            for tag in tags:
+                if tag in wrapper.tag:
+                    wrapper.deactivate = False
+                    break
+
+
+def _alive_during_previous_segment(previous_persist, context):
+    assert isinstance(context, abjad.Context), repr(context)
+    names = previous_persist.get("alive_during_segment", [])
+    return context.name in names
+
+
+def _analyze_memento(score, dictionary, context, memento):
+    previous_indicator = _memento_to_indicator(dictionary, memento)
+    if previous_indicator is None:
+        return
+    if isinstance(previous_indicator, _indicators.SpacingSection):
+        return
+    if memento.context in score:
+        for context in abjad.iterate.components(score, abjad.Context):
+            if context.name == memento.context:
+                memento_context = context
+                break
+    else:
+        # context alive in previous segment doesn't exist in this segment
+        return
+    leaf = abjad.get.leaf(memento_context, 0)
+    if isinstance(previous_indicator, abjad.Instrument):
+        prototype = abjad.Instrument
+    else:
+        prototype = type(previous_indicator)
+    indicator = abjad.get.indicator(leaf, prototype)
+    status = None
+    if indicator is None:
+        status = "reapplied"
+    elif not _scoping.compare_persistent_indicators(previous_indicator, indicator):
+        status = "explicit"
+    elif isinstance(previous_indicator, abjad.TimeSignature):
+        status = "reapplied"
+    else:
+        status = "redundant"
+    edition = memento.edition or abjad.Tag()
+    if memento.synthetic_offset is None:
+        synthetic_offset = None
+    else:
+        assert 0 < memento.synthetic_offset, repr(memento)
+        synthetic_offset = -memento.synthetic_offset
+    return leaf, previous_indicator, status, edition, synthetic_offset
+
+
 def _append_tag_to_wrappers(leaf, tag):
     assert isinstance(tag, abjad.Tag), repr(tag)
     for wrapper in abjad.get.wrappers(leaf):
@@ -300,6 +361,381 @@ def _append_tag_to_wrappers(leaf, tag):
                 continue
         tag_ = wrapper.tag.append(tag)
         wrapper.tag = tag_
+
+
+def _apply_breaks(score, spacing):
+    if spacing is None:
+        return
+    if spacing.breaks is None:
+        return
+    global_skips = score["Global_Skips"]
+    skips = _selection.Selection(global_skips).skips()
+    measure_count = len(skips)
+    literal = abjad.LilyPondLiteral(r"\autoPageBreaksOff", "before")
+    abjad.attach(
+        literal,
+        skips[0],
+        tag=_tags.BREAK.append(abjad.Tag("baca.BreakMeasureMap.__call__(1)")),
+    )
+    for skip in skips[:measure_count]:
+        if not abjad.get.has_indicator(skip, _layout.LBSD):
+            literal = abjad.LilyPondLiteral(r"\noBreak", "before")
+            abjad.attach(
+                literal,
+                skip,
+                tag=_tags.BREAK.append(abjad.Tag("baca.BreakMeasureMap.__call__(2)")),
+            )
+    assert spacing.breaks.commands is not None
+    for measure_number, commands in spacing.breaks.commands.items():
+        if measure_count < measure_number:
+            message = f"score ends at measure {measure_count}"
+            message += f" (not {measure_number})."
+            raise Exception(message)
+        for command in commands:
+            command(global_skips)
+
+
+def _apply_spacing(score, page_layout_profile, spacing):
+    if spacing is None:
+        return
+    with abjad.Timer() as timer:
+        spacing(score, page_layout_profile)
+    count = int(timer.elapsed_time)
+    if False:
+        seconds = abjad.String("second").pluralize(count)
+        raise Exception(f"spacing application {count} {seconds}!")
+    return count
+
+
+def _assert_nonoverlapping_rhythms(rhythms, voice):
+    previous_stop_offset = 0
+    for rhythm in rhythms:
+        start_offset = rhythm.start_offset
+        if start_offset < previous_stop_offset:
+            raise Exception(f"{voice} has overlapping rhythms.")
+        duration = abjad.get.duration(rhythm.annotation)
+        stop_offset = start_offset + duration
+        previous_stop_offset = stop_offset
+
+
+def _attach_fermatas(
+    do_not_append_phantom_measure,
+    score,
+    score_template,
+    time_signatures,
+):
+    always_make_global_rests = getattr(
+        score_template, "always_make_global_rests", False
+    )
+    if not always_make_global_rests:
+        del score["Global_Rests"]
+        return
+    has_fermata = False
+    if not has_fermata and not always_make_global_rests:
+        del score["Global_Rests"]
+        return
+    context = score["Global_Rests"]
+    rests = _make_global_rests(
+        do_not_append_phantom_measure,
+        time_signatures,
+    )
+    context.extend(rests)
+
+
+def _attach_first_appearance_score_template_defaults(
+    score, first_segment, manifests, previous_persist
+):
+    if first_segment:
+        return
+    staff__group = (abjad.Staff, abjad.StaffGroup)
+    dictionary = previous_persist["persistent_indicators"]
+    for staff__group in abjad.iterate.components(score, staff__group):
+        if staff__group.name in dictionary:
+            continue
+        for wrapper in _templates.attach_defaults(staff__group):
+            _scoping.treat_persistent_wrapper(manifests, wrapper, "default")
+
+
+def _attach_first_segment_score_template_defaults(score, first_segment, manifests):
+    if not first_segment:
+        return
+    for wrapper in _templates.attach_defaults(score):
+        _scoping.treat_persistent_wrapper(manifests, wrapper, "default")
+
+
+def _attach_metronome_marks(parts_metric_modulation_multiplier, score):
+    indicator_count = 0
+    skips = _selection.Selection(score["Global_Skips"]).skips()
+    final_leaf_metronome_mark = abjad.get.indicator(skips[-1], abjad.MetronomeMark)
+    add_right_text_to_me = None
+    if final_leaf_metronome_mark:
+        tempo_prototype = (
+            abjad.MetronomeMark,
+            _indicators.Accelerando,
+            _indicators.Ritardando,
+        )
+        for skip in reversed(skips[:-1]):
+            if abjad.get.has_indicator(skip, tempo_prototype):
+                add_right_text_to_me = skip
+                break
+    for i, skip in enumerate(skips):
+        metronome_mark = abjad.get.indicator(skip, abjad.MetronomeMark)
+        metric_modulation = abjad.get.indicator(skip, abjad.MetricModulation)
+        accelerando = abjad.get.indicator(skip, _indicators.Accelerando)
+        ritardando = abjad.get.indicator(skip, _indicators.Ritardando)
+        if (
+            metronome_mark is None
+            and metric_modulation is None
+            and accelerando is None
+            and ritardando is None
+        ):
+            continue
+        if metronome_mark is not None:
+            metronome_mark._hide = True
+            wrapper = abjad.get.wrapper(skip, abjad.MetronomeMark)
+        if metric_modulation is not None:
+            metric_modulation._hide = True
+        if accelerando is not None:
+            accelerando._hide = True
+        if ritardando is not None:
+            ritardando._hide = True
+        if skip is skips[-1]:
+            break
+        if metronome_mark is None and metric_modulation is not None:
+            wrapper = abjad.get.wrapper(skip, abjad.MetricModulation)
+        if metronome_mark is None and accelerando is not None:
+            wrapper = abjad.get.wrapper(skip, _indicators.Accelerando)
+        if metronome_mark is None and ritardando is not None:
+            wrapper = abjad.get.wrapper(skip, _indicators.Ritardando)
+        has_trend = accelerando is not None or ritardando is not None
+        indicator_count += 1
+        tag = wrapper.tag
+        stripped_left_text = None
+        if metronome_mark is not None:
+            if metric_modulation is not None:
+                if metronome_mark.custom_markup is not None:
+                    left_text = str(metronome_mark._get_markup())
+                    if left_text.startswith(r"\markup"):
+                        left_text = left_text[8:]
+                    modulation = str(metric_modulation._get_markup())
+                    if modulation.startswith(r"\markup"):
+                        modulation = modulation[8:]
+                    string = rf"\concat {{ {left_text} \hspace #2 \upright ["
+                    string += rf" \line {{ {modulation} }} \hspace #0.5"
+                    string += r" \upright ] }"
+                    left_text = abjad.Markup(string, literal=True)
+                else:
+                    left_text = _bracket_metric_modulation(
+                        metronome_mark, metric_modulation
+                    )
+                if metronome_mark.custom_markup is not None:
+                    stripped_left_text = r"- \baca-metronome-mark-spanner-left-markup"
+                    string = abjad.lilypond(metronome_mark.custom_markup)
+                    assert string.startswith("\\")
+                    stripped_left_text += f" {string}"
+                # mixed number
+                elif metronome_mark.decimal is True:
+                    arguments = metronome_mark._get_markup_arguments()
+                    log, dots, stem, base, n, d = arguments
+                    stripped_left_text = (
+                        r"- \baca-metronome-mark-spanner-left-text-mixed-number"
+                    )
+                    stripped_left_text += f' {log} {dots} {stem} "{base}" "{n}" "{d}"'
+                else:
+                    arguments = metronome_mark._get_markup_arguments()
+                    log, dots, stem, value = arguments
+                    stripped_left_text = r"- \baca-metronome-mark-spanner-left-text"
+                    stripped_left_text += f' {log} {dots} {stem} "{value}"'
+            elif metronome_mark.custom_markup is not None:
+                assert metronome_mark.custom_markup.literal
+                left_text = r"- \baca-metronome-mark-spanner-left-markup"
+                string = abjad.lilypond(metronome_mark.custom_markup)
+                assert string.startswith("\\")
+                left_text += f" {string}"
+            # mixed number
+            elif metronome_mark.decimal is True:
+                arguments = metronome_mark._get_markup_arguments()
+                log, dots, stem, base, n, d = arguments
+                left_text = r"- \baca-metronome-mark-spanner-left-text-mixed-number"
+                left_text += f' {log} {dots} {stem} "{base}" "{n}" "{d}"'
+            else:
+                arguments = metronome_mark._get_markup_arguments()
+                log, dots, stem, value = arguments
+                left_text = r"- \baca-metronome-mark-spanner-left-text"
+                left_text += f' {log} {dots} {stem} "{value}"'
+        elif accelerando is not None:
+            left_text = accelerando._get_markup()
+        elif ritardando is not None:
+            left_text = ritardando._get_markup()
+        if has_trend:
+            style = "dashed-line-with-arrow"
+        else:
+            style = "invisible-line"
+        if 0 < i:
+            stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanMM")
+            abjad.attach(
+                stop_text_span,
+                skip,
+                tag=_scoping.site(_frame(), "SegmentMaker", n=1),
+            )
+        if add_right_text_to_me is skip:
+            right_text = final_leaf_metronome_mark._get_markup()
+        else:
+            right_text = None
+        start_text_span = abjad.StartTextSpan(
+            command=r"\bacaStartTextSpanMM",
+            left_text=left_text,
+            right_text=right_text,
+            style=style,
+        )
+        assert "METRONOME_MARK" in str(tag), repr(tag)
+        if (
+            isinstance(wrapper.indicator, abjad.MetronomeMark)
+            and has_trend
+            and "EXPLICIT" not in str(tag)
+        ):
+            words = []
+            for word in str(tag).split(":"):
+                if "METRONOME_MARK" in word:
+                    word = word.replace("DEFAULT", "EXPLICIT")
+                    word = word.replace("REAPPLIED", "EXPLICIT")
+                    word = word.replace("REDUNDANT", "EXPLICIT")
+                words.append(word)
+            string = ":".join(words)
+            new_tag = abjad.Tag(string)
+            indicator = wrapper.indicator
+            abjad.detach(wrapper, skip)
+            abjad.attach(
+                indicator,
+                skip,
+                tag=new_tag.append(_scoping.site(_frame(), "SegmentMaker", n=5)),
+            )
+            tag = new_tag
+        if not (
+            isinstance(start_text_span.left_text, str)
+            and start_text_span.left_text.endswith("(1 . 1)")
+            and parts_metric_modulation_multiplier is not None
+        ):
+            abjad.attach(
+                start_text_span,
+                skip,
+                deactivate=True,
+                tag=tag.append(_scoping.site(_frame(), "SegmentMaker", n=2)),
+            )
+        else:
+            abjad.attach(
+                start_text_span,
+                skip,
+                deactivate=True,
+                tag=tag.append(_scoping.site(_frame(), "SegmentMaker", n=2.1)).append(
+                    _tags.METRIC_MODULATION_IS_NOT_SCALED,
+                ),
+            )
+            left_text_ = start_text_span.left_text
+            assert left_text_.endswith("(1 . 1)")
+            n, d = parts_metric_modulation_multiplier
+            left_text_ = left_text_[:-7] + f"({n} . {d})"
+            start_text_span_ = abjad.new(start_text_span, left_text=left_text_)
+            abjad.attach(
+                start_text_span_,
+                skip,
+                deactivate=True,
+                tag=tag.append(_scoping.site(_frame(), "SegmentMaker", n=2.2)).append(
+                    _tags.METRIC_MODULATION_IS_SCALED,
+                ),
+            )
+        if stripped_left_text is not None:
+            start_text_span_ = abjad.new(start_text_span, left_text=stripped_left_text)
+            abjad.attach(
+                start_text_span_,
+                skip,
+                deactivate=True,
+                tag=tag.append(_scoping.site(_frame(), "SegmentMaker", n=2.2)).append(
+                    _tags.METRIC_MODULATION_IS_STRIPPED,
+                ),
+            )
+        string = str(tag)
+        if "DEFAULT" in string:
+            status = "default"
+        elif "EXPLICIT" in string:
+            status = "explicit"
+        elif "REAPPLIED" in string:
+            status = "reapplied"
+        elif "REDUNDANT" in string:
+            status = "redundant"
+        else:
+            status = None
+        assert status is not None
+        color = _scoping._status_to_color[status]
+        string = f"{status.upper()}_METRONOME_MARK_WITH_COLOR"
+        tag = abjad.Tag(string)
+        if isinstance(left_text, str):
+            string = left_text.replace(
+                "baca-metronome-mark-spanner-left-markup",
+                "baca-metronome-mark-spanner-colored-left-markup",
+            )
+            string = string.replace(
+                "baca-metronome-mark-spanner-left-text",
+                "baca-metronome-mark-spanner-colored-left-text",
+            )
+            string = string.replace(
+                "baca-bracketed-metric-modulation",
+                "baca-colored-bracketed-metric-modulation",
+            )
+            string = string.replace(
+                "baca-bracketed-mixed-number-metric-modulation",
+                "baca-colored-bracketed-mixed-number-metric-modulation",
+            )
+            left_text_with_color = f"{string} #'{color}"
+        else:
+            color = f"(x11-color '{color})"
+            assert len(left_text.contents) == 1, repr(left_text)
+            left_text_with_color = abjad.Markup(
+                rf"\with-color #{color} {left_text.contents[0]}",
+                literal=True,
+            )
+        if right_text:
+            wrapper = abjad.get.wrapper(skips[-1], abjad.MetronomeMark)
+            tag = wrapper.tag
+            string = str(tag)
+            if "DEFAULT" in string:
+                status = "default"
+            elif "EXPLICIT" in string:
+                status = "explicit"
+            elif "REAPPLIED" in str(tag):
+                status = "reapplied"
+            elif "REDUNDANT" in str(tag):
+                status = "redundant"
+            else:
+                status = None
+            assert status is not None
+            color = _scoping._status_to_color[status]
+            color = f"(x11-color '{color})"
+            assert len(right_text.contents) == 1, repr(right_text)
+            right_text_with_color = abjad.Markup(
+                rf"\with-color #{color} {right_text.contents[0]}",
+                literal=True,
+            )
+        else:
+            right_text_with_color = None
+        start_text_span = abjad.StartTextSpan(
+            command=r"\bacaStartTextSpanMM",
+            left_text=left_text_with_color,
+            right_text=right_text_with_color,
+            style=style,
+        )
+        abjad.attach(
+            start_text_span,
+            skip,
+            deactivate=False,
+            tag=tag.append(_scoping.site(_frame(), "SegmentMaker", n=3)),
+        )
+    if indicator_count:
+        final_skip = skip
+        stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanMM")
+        tag_ = _tags.EOS_STOP_MM_SPANNER
+        tag_ = tag_.append(_scoping.site(_frame(), "SegmentMaker", n=4))
+        abjad.attach(stop_text_span, final_skip, tag=tag_)
 
 
 def _attach_rhythm_annotation_spanner(command, selection):
@@ -330,6 +766,35 @@ def _attach_rhythm_annotation_spanner(command, selection):
         selector=lambda _: _selection.Selection(_).leaves(),
     )
     command_(leaves)
+
+
+# this exists because of an incompletely implemented behavior in LilyPond;
+# LilyPond doesn't understand repeat-tied notes to be tied;
+# because of this LilyPond incorrectly prints accidentals in front of some
+# repeat-tied notes;
+# this method works around LilyPond's behavior
+def _attach_shadow_tie_indicators(score):
+    tag = _scoping.site(_frame(), "SegmentMaker")
+    for plt in _selection.Selection(score).plts():
+        if len(plt) == 1:
+            continue
+        for pleaf in plt[:-1]:
+            if abjad.get.has_indicator(pleaf, abjad.Tie):
+                continue
+            tie = abjad.Tie()
+            abjad.tweak(tie).stencil = False
+            abjad.attach(tie, pleaf, tag=tag)
+
+
+def _attach_sounds_during(score):
+    for voice in abjad.iterate.components(score, abjad.Voice):
+        pleaves = []
+        for pleaf in _selection.Selection(voice).pleaves():
+            if abjad.get.has_indicator(pleaf, _const.PHANTOM):
+                continue
+            pleaves.append(pleaf)
+        if bool(pleaves):
+            abjad.attach(_const.SOUNDS_DURING_SEGMENT, voice)
 
 
 def _bracket_metric_modulation(metronome_mark, metric_modulation):
@@ -397,205 +862,6 @@ def _bracket_metric_modulation(metronome_mark, metric_modulation):
     scale = metric_modulation.scale
     command += f" #'({scale[0]} . {scale[1]})"
     return command
-
-
-def _extend_beam(leaf):
-    if not abjad.get.has_indicator(leaf, abjad.StopBeam):
-        parentage = abjad.get.parentage(leaf)
-        voice = parentage.get(abjad.Voice)
-        message = f"{leaf!s} in {voice.name} has no StopBeam."
-        raise Exception(message)
-    abjad.detach(abjad.StopBeam, leaf)
-    if not abjad.get.has_indicator(leaf, abjad.StartBeam):
-        abjad.detach(abjad.BeamCount, leaf)
-        left = leaf.written_duration.flag_count
-        beam_count = abjad.BeamCount(left, 1)
-        abjad.attach(beam_count, leaf, "_extend_beam")
-    current_leaf = leaf
-    while True:
-        next_leaf = abjad.get.leaf(current_leaf, 1)
-        if next_leaf is None:
-            parentage = abjad.get.parentage(current_leaf)
-            voice = parentage.get(abjad.Voice)
-            message = f"no leaf follows {current_leaf!s} in {voice.name};"
-            message += "\n\tDo not set extend_beam=True on last figure."
-            raise Exception(message)
-            return
-        if abjad.get.has_indicator(next_leaf, abjad.StartBeam):
-            abjad.detach(abjad.StartBeam, next_leaf)
-            if not abjad.get.has_indicator(next_leaf, abjad.StopBeam):
-                abjad.detach(abjad.BeamCount, next_leaf)
-                right = next_leaf.written_duration.flag_count
-                beam_count = abjad.BeamCount(1, right)
-                abjad.attach(beam_count, next_leaf, "_extend_beam")
-            return
-        current_leaf = next_leaf
-
-
-def _find_repeat_pitch_classes(argument):
-    violators = []
-    for voice in abjad.iterate.components(argument, abjad.Voice):
-        if abjad.get.has_indicator(voice, _const.INTERMITTENT):
-            continue
-        previous_lt, previous_pcs = None, []
-        for lt in abjad.iterate.logical_ties(voice):
-            if abjad.get.has_indicator(lt.head, _const.HIDDEN):
-                written_pitches = []
-            elif isinstance(lt.head, abjad.Note):
-                written_pitches = [lt.head.written_pitch]
-            elif isinstance(lt.head, abjad.Chord):
-                written_pitches = lt.head.written_pitches
-            else:
-                written_pitches = []
-            pcs = _pitchclasses.PitchClassSet(written_pitches)
-            if abjad.get.has_indicator(
-                lt.head, _const.NOT_YET_PITCHED
-            ) or abjad.get.has_indicator(lt.head, _const.ALLOW_REPEAT_PITCH):
-                pass
-            elif pcs & previous_pcs:
-                if previous_lt not in violators:
-                    violators.append(previous_lt)
-                if lt not in violators:
-                    violators.append(lt)
-            previous_lt = lt
-            previous_pcs = pcs
-    return violators
-
-
-def _activate_tags(score, tags):
-    if not tags:
-        return
-    assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
-    for leaf in abjad.iterate.leaves(score):
-        if not isinstance(leaf, abjad.Skip):
-            continue
-        wrappers = abjad.get.wrappers(leaf)
-        for wrapper in wrappers:
-            if wrapper.tag is None:
-                continue
-            for tag in tags:
-                if tag in wrapper.tag:
-                    wrapper.deactivate = False
-                    break
-
-
-def _alive_during_previous_segment(previous_persist, context):
-    assert isinstance(context, abjad.Context), repr(context)
-    names = previous_persist.get("alive_during_segment", [])
-    return context.name in names
-
-
-def _analyze_memento(score, dictionary, context, memento):
-    previous_indicator = _memento_to_indicator(dictionary, memento)
-    if previous_indicator is None:
-        return
-    if isinstance(previous_indicator, _indicators.SpacingSection):
-        return
-    if memento.context in score:
-        for context in abjad.iterate.components(score, abjad.Context):
-            if context.name == memento.context:
-                memento_context = context
-                break
-    else:
-        # context alive in previous segment doesn't exist in this segment
-        return
-    leaf = abjad.get.leaf(memento_context, 0)
-    if isinstance(previous_indicator, abjad.Instrument):
-        prototype = abjad.Instrument
-    else:
-        prototype = type(previous_indicator)
-    indicator = abjad.get.indicator(leaf, prototype)
-    status = None
-    if indicator is None:
-        status = "reapplied"
-    elif not _scoping.compare_persistent_indicators(previous_indicator, indicator):
-        status = "explicit"
-    elif isinstance(previous_indicator, abjad.TimeSignature):
-        status = "reapplied"
-    else:
-        status = "redundant"
-    edition = memento.edition or abjad.Tag()
-    if memento.synthetic_offset is None:
-        synthetic_offset = None
-    else:
-        assert 0 < memento.synthetic_offset, repr(memento)
-        synthetic_offset = -memento.synthetic_offset
-    return leaf, previous_indicator, status, edition, synthetic_offset
-
-
-def _apply_breaks(score, spacing):
-    if spacing is None:
-        return
-    if spacing.breaks is None:
-        return
-    global_skips = score["Global_Skips"]
-    skips = _selection.Selection(global_skips).skips()
-    measure_count = len(skips)
-    literal = abjad.LilyPondLiteral(r"\autoPageBreaksOff", "before")
-    abjad.attach(
-        literal,
-        skips[0],
-        tag=_tags.BREAK.append(abjad.Tag("baca.BreakMeasureMap.__call__(1)")),
-    )
-    for skip in skips[:measure_count]:
-        if not abjad.get.has_indicator(skip, _layout.LBSD):
-            literal = abjad.LilyPondLiteral(r"\noBreak", "before")
-            abjad.attach(
-                literal,
-                skip,
-                tag=_tags.BREAK.append(abjad.Tag("baca.BreakMeasureMap.__call__(2)")),
-            )
-    assert spacing.breaks.commands is not None
-    for measure_number, commands in spacing.breaks.commands.items():
-        if measure_count < measure_number:
-            message = f"score ends at measure {measure_count}"
-            message += f" (not {measure_number})."
-            raise Exception(message)
-        for command in commands:
-            command(global_skips)
-
-
-def _assert_nonoverlapping_rhythms(rhythms, voice):
-    previous_stop_offset = 0
-    for rhythm in rhythms:
-        start_offset = rhythm.start_offset
-        if start_offset < previous_stop_offset:
-            raise Exception(f"{voice} has overlapping rhythms.")
-        duration = abjad.get.duration(rhythm.annotation)
-        stop_offset = start_offset + duration
-        previous_stop_offset = stop_offset
-
-
-def _attach_first_appearance_score_template_defaults(
-    score, first_segment, manifests, previous_persist
-):
-    if first_segment:
-        return
-    staff__group = (abjad.Staff, abjad.StaffGroup)
-    dictionary = previous_persist["persistent_indicators"]
-    for staff__group in abjad.iterate.components(score, staff__group):
-        if staff__group.name in dictionary:
-            continue
-        for wrapper in _templates.attach_defaults(staff__group):
-            _scoping.treat_persistent_wrapper(manifests, wrapper, "default")
-
-
-def _attach_first_segment_score_template_defaults(score, first_segment, manifests):
-    if not first_segment:
-        return
-    for wrapper in _templates.attach_defaults(score):
-        _scoping.treat_persistent_wrapper(manifests, wrapper, "default")
-
-
-def _attach_sounds_during(score):
-    for voice in abjad.iterate.components(score, abjad.Voice):
-        pleaves = []
-        for pleaf in _selection.Selection(voice).pleaves():
-            if abjad.get.has_indicator(pleaf, _const.PHANTOM):
-                continue
-            pleaves.append(pleaf)
-        if bool(pleaves):
-            abjad.attach(_const.SOUNDS_DURING_SEGMENT, voice)
 
 
 def _bundle_manifests(
@@ -778,6 +1044,180 @@ def _call_commands(
     return cache, command_count
 
 
+def _call_rhythm_commands(
+    commands,
+    do_not_append_phantom_measure,
+    environment,
+    manifests,
+    measure_count,
+    offset_to_measure_number,
+    previous_persist,
+    score,
+    score_template,
+    skips_instead_of_rests,
+    time_signatures,
+    voice_metadata,
+):
+    _attach_fermatas(
+        do_not_append_phantom_measure,
+        score,
+        score_template,
+        time_signatures,
+    )
+    command_count = 0
+    tag = _scoping.site(_frame(), "SegmentMaker")
+    if skips_instead_of_rests:
+        prototype = abjad.Skip
+    else:
+        prototype = abjad.MultimeasureRest
+    silence_maker = rmakers.multiplied_duration(prototype, tag=tag)
+    segment_duration = None
+    for voice in abjad.select(score).components(abjad.Voice):
+        assert not len(voice), repr(voice)
+        voice_metadata_ = voice_metadata.get(voice.name, abjad.OrderedDict())
+        commands_ = _voice_to_rhythm_commands(commands, voice)
+        if not commands_:
+            selection = silence_maker(time_signatures)
+            assert isinstance(selection, abjad.Selection), repr(selection)
+            voice.extend(selection)
+            if not do_not_append_phantom_measure:
+                container = _make_multimeasure_rest_container(
+                    voice.name,
+                    (1, 4),
+                    skips_instead_of_rests,
+                    phantom=True,
+                    suppress_note=True,
+                )
+                voice.append(container)
+            continue
+        timespans = []
+        for command in commands_:
+            if command.scope.measures is None:
+                raise Exception(abjad.storage(command))
+            measures = command.scope.measures
+            result = _get_measure_time_signatures(
+                measure_count,
+                score,
+                time_signatures,
+                *measures,
+            )
+            start_offset, time_signatures_ = result
+            runtime = _bundle_manifests(
+                manifests=manifests,
+                offset_to_measure_number=offset_to_measure_number,
+                previous_persist=previous_persist,
+                score_template=score_template,
+                voice_name=voice.name,
+            )
+            selection = None
+            try:
+                selection = command._make_selection(time_signatures_, runtime)
+            except Exception:
+                print(f"Interpreting ...\n\n{abjad.storage(command)}\n")
+                raise
+            if selection is not None and environment != "docs":
+                _attach_rhythm_annotation_spanner(command, selection)
+            timespan = abjad.AnnotatedTimespan(
+                start_offset=start_offset, annotation=selection
+            )
+            timespans.append(timespan)
+            if command.persist and command.state:
+                state = command.state
+                assert "name" not in state
+                state["name"] = command.persist
+                voice_metadata_[command.parameter] = command.state
+            command_count += 1
+        if bool(voice_metadata_):
+            voice_metadata[voice.name] = voice_metadata_
+        timespans.sort()
+        _assert_nonoverlapping_rhythms(timespans, voice.name)
+        selections, segment_duration = _intercalate_silences(
+            skips_instead_of_rests,
+            time_signatures,
+            timespans,
+            voice.name,
+        )
+        if not do_not_append_phantom_measure:
+            suppress_note = False
+            final_leaf = abjad.get.leaf(selections, -1)
+            if isinstance(final_leaf, abjad.MultimeasureRest):
+                suppress_note = True
+            container = _make_multimeasure_rest_container(
+                voice.name,
+                (1, 4),
+                skips_instead_of_rests,
+                phantom=True,
+                suppress_note=suppress_note,
+            )
+            selection = abjad.select(container)
+            selections.append(selection)
+        voice.extend(selections)
+    return command_count, segment_duration
+
+
+def _extend_beam(leaf):
+    if not abjad.get.has_indicator(leaf, abjad.StopBeam):
+        parentage = abjad.get.parentage(leaf)
+        voice = parentage.get(abjad.Voice)
+        message = f"{leaf!s} in {voice.name} has no StopBeam."
+        raise Exception(message)
+    abjad.detach(abjad.StopBeam, leaf)
+    if not abjad.get.has_indicator(leaf, abjad.StartBeam):
+        abjad.detach(abjad.BeamCount, leaf)
+        left = leaf.written_duration.flag_count
+        beam_count = abjad.BeamCount(left, 1)
+        abjad.attach(beam_count, leaf, "_extend_beam")
+    current_leaf = leaf
+    while True:
+        next_leaf = abjad.get.leaf(current_leaf, 1)
+        if next_leaf is None:
+            parentage = abjad.get.parentage(current_leaf)
+            voice = parentage.get(abjad.Voice)
+            message = f"no leaf follows {current_leaf!s} in {voice.name};"
+            message += "\n\tDo not set extend_beam=True on last figure."
+            raise Exception(message)
+            return
+        if abjad.get.has_indicator(next_leaf, abjad.StartBeam):
+            abjad.detach(abjad.StartBeam, next_leaf)
+            if not abjad.get.has_indicator(next_leaf, abjad.StopBeam):
+                abjad.detach(abjad.BeamCount, next_leaf)
+                right = next_leaf.written_duration.flag_count
+                beam_count = abjad.BeamCount(1, right)
+                abjad.attach(beam_count, next_leaf, "_extend_beam")
+            return
+        current_leaf = next_leaf
+
+
+def _find_repeat_pitch_classes(argument):
+    violators = []
+    for voice in abjad.iterate.components(argument, abjad.Voice):
+        if abjad.get.has_indicator(voice, _const.INTERMITTENT):
+            continue
+        previous_lt, previous_pcs = None, []
+        for lt in abjad.iterate.logical_ties(voice):
+            if abjad.get.has_indicator(lt.head, _const.HIDDEN):
+                written_pitches = []
+            elif isinstance(lt.head, abjad.Note):
+                written_pitches = [lt.head.written_pitch]
+            elif isinstance(lt.head, abjad.Chord):
+                written_pitches = lt.head.written_pitches
+            else:
+                written_pitches = []
+            pcs = _pitchclasses.PitchClassSet(written_pitches)
+            if abjad.get.has_indicator(
+                lt.head, _const.NOT_YET_PITCHED
+            ) or abjad.get.has_indicator(lt.head, _const.ALLOW_REPEAT_PITCH):
+                pass
+            elif pcs & previous_pcs:
+                if previous_lt not in violators:
+                    violators.append(previous_lt)
+                if lt not in violators:
+                    violators.append(lt)
+            previous_lt = lt
+            previous_pcs = pcs
+    return violators
+
+
 def _get_measure_offsets(score, start_measure, stop_measure):
     skips = _selection.Selection(score["Global_Skips"]).skips()
     start_skip = skips[start_measure - 1]
@@ -787,6 +1227,26 @@ def _get_measure_offsets(score, start_measure, stop_measure):
     assert isinstance(stop_skip, abjad.Skip), stop_skip
     stop_offset = abjad.get.timespan(stop_skip).stop_offset
     return start_offset, stop_offset
+
+
+def _get_measure_time_signatures(
+    measure_count,
+    score,
+    time_signatures,
+    start_measure=None,
+    stop_measure=None,
+):
+    assert stop_measure is not None
+    start_index = start_measure - 1
+    if stop_measure is None:
+        time_signatures = [time_signatures[start_index]]
+    else:
+        if stop_measure == -1:
+            stop_measure = measure_count
+        stop_index = stop_measure
+        time_signatures = time_signatures[start_index:stop_index]
+    measure_timespan = _get_measure_timespan(score, start_measure)
+    return measure_timespan.start_offset, time_signatures
 
 
 def _get_measure_timespan(score, measure_number):
@@ -812,6 +1272,178 @@ def _handle_mutator(score, cache, command):
         cache = None
         _update_score_one_time(score)
     return cache
+
+
+def _intercalate_silences(
+    skips_instead_of_rests,
+    time_signatures,
+    timespans,
+    voice_name,
+):
+    selections = []
+    durations = [_.duration for _ in time_signatures]
+    measure_start_offsets = abjad.math.cumulative_sums(durations)
+    segment_duration = measure_start_offsets[-1]
+    previous_stop_offset = abjad.Offset(0)
+    for timespan in timespans:
+        start_offset = timespan.start_offset
+        if start_offset < previous_stop_offset:
+            raise Exception("overlapping offsets: {timespan!r}.")
+        if previous_stop_offset < start_offset:
+            selection = _make_measure_silences(
+                measure_start_offsets,
+                skips_instead_of_rests,
+                previous_stop_offset,
+                start_offset,
+                voice_name,
+            )
+            selections.append(selection)
+        selection = timespan.annotation
+        assert isinstance(selection, abjad.Selection), repr(selection)
+        selections.append(selection)
+        duration = abjad.get.duration(selection)
+        previous_stop_offset = start_offset + duration
+    if previous_stop_offset < segment_duration:
+        selection = _make_measure_silences(
+            measure_start_offsets,
+            skips_instead_of_rests,
+            previous_stop_offset,
+            segment_duration,
+            voice_name,
+        )
+        assert isinstance(selection, abjad.Selection)
+        selections.append(selection)
+    assert all(isinstance(_, abjad.Selection) for _ in selections)
+    return selections, segment_duration
+
+
+def _make_global_rests(do_not_append_phantom_measure, time_signatures):
+    rests = []
+    for time_signature in time_signatures:
+        rest = abjad.MultimeasureRest(
+            abjad.Duration(1),
+            multiplier=time_signature.duration,
+            tag=_scoping.site(_frame(), "SegmentMaker", n=1),
+        )
+        rests.append(rest)
+    if not do_not_append_phantom_measure:
+        tag = _scoping.site(_frame(), "SegmentMaker", n=2).append(_tags.PHANTOM)
+        rest = abjad.MultimeasureRest(abjad.Duration(1), multiplier=(1, 4), tag=tag)
+        abjad.attach(_const.PHANTOM, rest)
+        rests.append(rest)
+    return rests
+
+
+def _make_measure_silences(
+    measure_start_offsets,
+    skips_instead_of_rests,
+    start,
+    stop,
+    voice_name,
+):
+    tag = _scoping.site(_frame(), "SegmentMaker")
+    offsets = [start]
+    for measure_start_offset in measure_start_offsets:
+        if start < measure_start_offset < stop:
+            offsets.append(measure_start_offset)
+    offsets.append(stop)
+    silences = []
+    durations = abjad.math.difference_series(offsets)
+    for i, duration in enumerate(durations):
+        if i == 0:
+            silence = _make_multimeasure_rest_container(
+                voice_name, duration, skips_instead_of_rests
+            )
+        else:
+            if skips_instead_of_rests:
+                silence = abjad.Skip(1, multiplier=duration, tag=tag)
+            else:
+                silence = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
+        silences.append(silence)
+    assert all(isinstance(_, abjad.Component) for _ in silences)
+    selection = abjad.select(silences)
+    return selection
+
+
+def _make_multimeasure_rest_container(
+    voice_name,
+    duration,
+    skips_instead_of_rests,
+    phantom=False,
+    suppress_note=False,
+):
+    if suppress_note is True:
+        assert phantom is True
+    if phantom is True:
+        phantom_tag = _tags.PHANTOM
+    else:
+        phantom_tag = abjad.Tag()
+    tag = _scoping.site(_frame(), "SegmentMaker", n=1)
+    tag = tag.append(phantom_tag)
+    tag = tag.append(_tags.HIDDEN)
+    if suppress_note is not True:
+        note_or_rest = _tags.NOTE
+        tag = tag.append(_tags.NOTE)
+        note = abjad.Note("c'1", multiplier=duration, tag=tag)
+        abjad.attach(_const.NOTE, note)
+        abjad.attach(_const.NOT_YET_PITCHED, note)
+    else:
+        note_or_rest = _tags.MULTIMEASURE_REST
+        tag = tag.append(_tags.MULTIMEASURE_REST)
+        note = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
+        abjad.attach(_const.MULTIMEASURE_REST, note)
+    abjad.attach(_const.HIDDEN, note)
+    tag = _scoping.site(_frame(), "SegmentMaker", n=2)
+    tag = tag.append(phantom_tag)
+    tag = tag.append(note_or_rest)
+    tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
+    literal = abjad.LilyPondLiteral(
+        r"\abjad-invisible-music-coloring", format_slot="before"
+    )
+    abjad.attach(literal, note, tag=tag)
+    tag = _scoping.site(_frame(), "SegmentMaker", n=3)
+    tag = tag.append(phantom_tag)
+    tag = tag.append(note_or_rest)
+    tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
+    literal = abjad.LilyPondLiteral(r"\abjad-invisible-music", format_slot="before")
+    abjad.attach(literal, note, deactivate=True, tag=tag)
+    abjad.attach(_const.HIDDEN, note)
+    tag = _scoping.site(_frame(), "SegmentMaker", n=4)
+    tag = tag.append(phantom_tag)
+    hidden_note_voice = abjad.Voice([note], name=voice_name, tag=tag)
+    abjad.attach(_const.INTERMITTENT, hidden_note_voice)
+    tag = _scoping.site(_frame(), "SegmentMaker", n=5)
+    tag = tag.append(phantom_tag)
+    tag = tag.append(_tags.REST_VOICE)
+    if skips_instead_of_rests:
+        tag = tag.append(_tags.SKIP)
+        rest = abjad.Skip(1, multiplier=duration, tag=tag)
+        abjad.attach(_const.SKIP, rest)
+    else:
+        tag = tag.append(_tags.MULTIMEASURE_REST)
+        rest = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
+        abjad.attach(_const.MULTIMEASURE_REST, rest)
+    abjad.attach(_const.REST_VOICE, rest)
+    if "Music_Voice" in voice_name:
+        name = voice_name.replace("Music_Voice", "Rest_Voice")
+    else:
+        name = voice_name.replace("Voice", "Rest_Voice")
+    tag = _scoping.site(_frame(), "SegmentMaker", n=6)
+    tag = tag.append(phantom_tag)
+    multimeasure_rest_voice = abjad.Voice([rest], name=name, tag=tag)
+    abjad.attach(_const.INTERMITTENT, multimeasure_rest_voice)
+    tag = _scoping.site(_frame(), "SegmentMaker", n=7)
+    tag = tag.append(phantom_tag)
+    container = abjad.Container(
+        [hidden_note_voice, multimeasure_rest_voice],
+        simultaneous=True,
+        tag=tag,
+    )
+    abjad.attach(_const.MULTIMEASURE_REST_CONTAINER, container)
+    if phantom is True:
+        for component in abjad.iterate.components(container):
+            abjad.attach(_const.PHANTOM, component)
+    return container
 
 
 def _memento_to_indicator(dictionary, memento):
@@ -954,6 +1586,16 @@ def _update_score_one_time(score):
     score._is_forbidden_to_update = False
     score._update_now(offsets=True)
     score._is_forbidden_to_update = is_forbidden_to_update
+
+
+def _voice_to_rhythm_commands(commands, voice):
+    commands_ = []
+    for command in commands:
+        if not isinstance(command, _rhythmcommands.RhythmCommand):
+            continue
+        if command.scope.voice_name == voice.name:
+            commands_.append(command)
+    return commands_
 
 
 def color_octaves(score):
@@ -1514,7 +2156,7 @@ class SegmentMaker:
         "_midi",
         "_moment_markup",
         "_offset_to_measure_number",
-        "_page_layout_profile",
+        # "_page_layout_profile",
         "_persist",
         "_preamble",
         "_previous_metadata",
@@ -1770,413 +2412,7 @@ class SegmentMaker:
                     command_ = abjad.new(command_, scope=scope_)
                     self.commands.append(command_)
 
-    def __repr__(self):
-        """
-        Gets interpreter representation.
-        """
-        return abjad.format.get_repr(self)
-
     ### PRIVATE METHODS ###
-
-    def _apply_spacing(self):
-        if self.spacing is None:
-            return
-        with abjad.Timer() as timer:
-            self.spacing(self)
-        count = int(timer.elapsed_time)
-        if False:
-            seconds = abjad.String("second").pluralize(count)
-            raise Exception(f"spacing application {count} {seconds}!")
-        return count
-
-    def _attach_fermatas(self):
-        always_make_global_rests = getattr(
-            self.score_template, "always_make_global_rests", False
-        )
-        if not always_make_global_rests:
-            del self.score["Global_Rests"]
-            return
-        has_fermata = False
-        if not has_fermata and not always_make_global_rests:
-            del self.score["Global_Rests"]
-            return
-        context = self.score["Global_Rests"]
-        rests = self._make_global_rests()
-        context.extend(rests)
-
-    def _attach_metronome_marks(self):
-        indicator_count = 0
-        skips = _selection.Selection(self.score["Global_Skips"]).skips()
-        final_leaf_metronome_mark = abjad.get.indicator(skips[-1], abjad.MetronomeMark)
-        add_right_text_to_me = None
-        if final_leaf_metronome_mark:
-            tempo_prototype = (
-                abjad.MetronomeMark,
-                _indicators.Accelerando,
-                _indicators.Ritardando,
-            )
-            for skip in reversed(skips[:-1]):
-                if abjad.get.has_indicator(skip, tempo_prototype):
-                    add_right_text_to_me = skip
-                    break
-        for i, skip in enumerate(skips):
-            metronome_mark = abjad.get.indicator(skip, abjad.MetronomeMark)
-            metric_modulation = abjad.get.indicator(skip, abjad.MetricModulation)
-            accelerando = abjad.get.indicator(skip, _indicators.Accelerando)
-            ritardando = abjad.get.indicator(skip, _indicators.Ritardando)
-            if (
-                metronome_mark is None
-                and metric_modulation is None
-                and accelerando is None
-                and ritardando is None
-            ):
-                continue
-            if metronome_mark is not None:
-                metronome_mark._hide = True
-                wrapper = abjad.get.wrapper(skip, abjad.MetronomeMark)
-            if metric_modulation is not None:
-                metric_modulation._hide = True
-            if accelerando is not None:
-                accelerando._hide = True
-            if ritardando is not None:
-                ritardando._hide = True
-            if skip is skips[-1]:
-                break
-            if metronome_mark is None and metric_modulation is not None:
-                wrapper = abjad.get.wrapper(skip, abjad.MetricModulation)
-            if metronome_mark is None and accelerando is not None:
-                wrapper = abjad.get.wrapper(skip, _indicators.Accelerando)
-            if metronome_mark is None and ritardando is not None:
-                wrapper = abjad.get.wrapper(skip, _indicators.Ritardando)
-            has_trend = accelerando is not None or ritardando is not None
-            indicator_count += 1
-            tag = wrapper.tag
-            stripped_left_text = None
-            if metronome_mark is not None:
-                if metric_modulation is not None:
-                    if metronome_mark.custom_markup is not None:
-                        left_text = str(metronome_mark._get_markup())
-                        if left_text.startswith(r"\markup"):
-                            left_text = left_text[8:]
-                        modulation = str(metric_modulation._get_markup())
-                        if modulation.startswith(r"\markup"):
-                            modulation = modulation[8:]
-                        string = rf"\concat {{ {left_text} \hspace #2 \upright ["
-                        string += rf" \line {{ {modulation} }} \hspace #0.5"
-                        string += r" \upright ] }"
-                        left_text = abjad.Markup(string, literal=True)
-                    else:
-                        left_text = _bracket_metric_modulation(
-                            metronome_mark, metric_modulation
-                        )
-
-                    if metronome_mark.custom_markup is not None:
-                        stripped_left_text = (
-                            r"- \baca-metronome-mark-spanner-left-markup"
-                        )
-                        string = abjad.lilypond(metronome_mark.custom_markup)
-                        assert string.startswith("\\")
-                        stripped_left_text += f" {string}"
-                    # mixed number
-                    elif metronome_mark.decimal is True:
-                        arguments = metronome_mark._get_markup_arguments()
-                        log, dots, stem, base, n, d = arguments
-                        stripped_left_text = (
-                            r"- \baca-metronome-mark-spanner-left-text-mixed-number"
-                        )
-                        stripped_left_text += (
-                            f' {log} {dots} {stem} "{base}" "{n}" "{d}"'
-                        )
-                    else:
-                        arguments = metronome_mark._get_markup_arguments()
-                        log, dots, stem, value = arguments
-                        stripped_left_text = r"- \baca-metronome-mark-spanner-left-text"
-                        stripped_left_text += f' {log} {dots} {stem} "{value}"'
-                elif metronome_mark.custom_markup is not None:
-                    assert metronome_mark.custom_markup.literal
-                    left_text = r"- \baca-metronome-mark-spanner-left-markup"
-                    string = abjad.lilypond(metronome_mark.custom_markup)
-                    assert string.startswith("\\")
-                    left_text += f" {string}"
-                # mixed number
-                elif metronome_mark.decimal is True:
-                    arguments = metronome_mark._get_markup_arguments()
-                    log, dots, stem, base, n, d = arguments
-                    left_text = r"- \baca-metronome-mark-spanner-left-text-mixed-number"
-                    left_text += f' {log} {dots} {stem} "{base}" "{n}" "{d}"'
-                else:
-                    arguments = metronome_mark._get_markup_arguments()
-                    log, dots, stem, value = arguments
-                    left_text = r"- \baca-metronome-mark-spanner-left-text"
-                    left_text += f' {log} {dots} {stem} "{value}"'
-            elif accelerando is not None:
-                left_text = accelerando._get_markup()
-            elif ritardando is not None:
-                left_text = ritardando._get_markup()
-            if has_trend:
-                style = "dashed-line-with-arrow"
-            else:
-                style = "invisible-line"
-            if 0 < i:
-                stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanMM")
-                abjad.attach(
-                    stop_text_span,
-                    skip,
-                    tag=_scoping.site(_frame(), self, n=1),
-                )
-            if add_right_text_to_me is skip:
-                right_text = final_leaf_metronome_mark._get_markup()
-            else:
-                right_text = None
-            start_text_span = abjad.StartTextSpan(
-                command=r"\bacaStartTextSpanMM",
-                left_text=left_text,
-                right_text=right_text,
-                style=style,
-            )
-            assert "METRONOME_MARK" in str(tag), repr(tag)
-            if (
-                isinstance(wrapper.indicator, abjad.MetronomeMark)
-                and has_trend
-                and "EXPLICIT" not in str(tag)
-            ):
-                words = []
-                for word in str(tag).split(":"):
-                    if "METRONOME_MARK" in word:
-                        word = word.replace("DEFAULT", "EXPLICIT")
-                        word = word.replace("REAPPLIED", "EXPLICIT")
-                        word = word.replace("REDUNDANT", "EXPLICIT")
-                    words.append(word)
-                string = ":".join(words)
-                new_tag = abjad.Tag(string)
-                indicator = wrapper.indicator
-                abjad.detach(wrapper, skip)
-                abjad.attach(
-                    indicator,
-                    skip,
-                    tag=new_tag.append(_scoping.site(_frame(), self, n=5)),
-                )
-                tag = new_tag
-            if not (
-                isinstance(start_text_span.left_text, str)
-                and start_text_span.left_text.endswith("(1 . 1)")
-                and self.parts_metric_modulation_multiplier is not None
-            ):
-                abjad.attach(
-                    start_text_span,
-                    skip,
-                    deactivate=True,
-                    tag=tag.append(_scoping.site(_frame(), self, n=2)),
-                )
-            else:
-                abjad.attach(
-                    start_text_span,
-                    skip,
-                    deactivate=True,
-                    tag=tag.append(_scoping.site(_frame(), self, n=2.1)).append(
-                        _tags.METRIC_MODULATION_IS_NOT_SCALED,
-                    ),
-                )
-                left_text_ = start_text_span.left_text
-                assert left_text_.endswith("(1 . 1)")
-                n, d = self.parts_metric_modulation_multiplier
-                left_text_ = left_text_[:-7] + f"({n} . {d})"
-                start_text_span_ = abjad.new(start_text_span, left_text=left_text_)
-                abjad.attach(
-                    start_text_span_,
-                    skip,
-                    deactivate=True,
-                    tag=tag.append(_scoping.site(_frame(), self, n=2.2)).append(
-                        _tags.METRIC_MODULATION_IS_SCALED,
-                    ),
-                )
-            if stripped_left_text is not None:
-                start_text_span_ = abjad.new(
-                    start_text_span, left_text=stripped_left_text
-                )
-                abjad.attach(
-                    start_text_span_,
-                    skip,
-                    deactivate=True,
-                    tag=tag.append(_scoping.site(_frame(), self, n=2.2)).append(
-                        _tags.METRIC_MODULATION_IS_STRIPPED,
-                    ),
-                )
-            string = str(tag)
-            if "DEFAULT" in string:
-                status = "default"
-            elif "EXPLICIT" in string:
-                status = "explicit"
-            elif "REAPPLIED" in string:
-                status = "reapplied"
-            elif "REDUNDANT" in string:
-                status = "redundant"
-            else:
-                status = None
-            assert status is not None
-            color = _scoping._status_to_color[status]
-            string = f"{status.upper()}_METRONOME_MARK_WITH_COLOR"
-            tag = abjad.Tag(string)
-            if isinstance(left_text, str):
-                string = left_text.replace(
-                    "baca-metronome-mark-spanner-left-markup",
-                    "baca-metronome-mark-spanner-colored-left-markup",
-                )
-                string = string.replace(
-                    "baca-metronome-mark-spanner-left-text",
-                    "baca-metronome-mark-spanner-colored-left-text",
-                )
-                string = string.replace(
-                    "baca-bracketed-metric-modulation",
-                    "baca-colored-bracketed-metric-modulation",
-                )
-                string = string.replace(
-                    "baca-bracketed-mixed-number-metric-modulation",
-                    "baca-colored-bracketed-mixed-number-metric-modulation",
-                )
-                left_text_with_color = f"{string} #'{color}"
-            else:
-                color = f"(x11-color '{color})"
-                assert len(left_text.contents) == 1, repr(left_text)
-                left_text_with_color = abjad.Markup(
-                    rf"\with-color #{color} {left_text.contents[0]}",
-                    literal=True,
-                )
-            if right_text:
-                wrapper = abjad.get.wrapper(skips[-1], abjad.MetronomeMark)
-                tag = wrapper.tag
-                string = str(tag)
-                if "DEFAULT" in string:
-                    status = "default"
-                elif "EXPLICIT" in string:
-                    status = "explicit"
-                elif "REAPPLIED" in str(tag):
-                    status = "reapplied"
-                elif "REDUNDANT" in str(tag):
-                    status = "redundant"
-                else:
-                    status = None
-                assert status is not None
-                color = _scoping._status_to_color[status]
-                color = f"(x11-color '{color})"
-                assert len(right_text.contents) == 1, repr(right_text)
-                right_text_with_color = abjad.Markup(
-                    rf"\with-color #{color} {right_text.contents[0]}",
-                    literal=True,
-                )
-            else:
-                right_text_with_color = None
-            start_text_span = abjad.StartTextSpan(
-                command=r"\bacaStartTextSpanMM",
-                left_text=left_text_with_color,
-                right_text=right_text_with_color,
-                style=style,
-            )
-            abjad.attach(
-                start_text_span,
-                skip,
-                deactivate=False,
-                tag=tag.append(_scoping.site(_frame(), self, n=3)),
-            )
-        if indicator_count:
-            final_skip = skip
-            stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanMM")
-            tag_ = _tags.EOS_STOP_MM_SPANNER
-            tag_ = tag_.append(_scoping.site(_frame(), self, n=4))
-            abjad.attach(stop_text_span, final_skip, tag=tag_)
-
-    # this exists because of an incompletely implemented behavior in LilyPond;
-    # LilyPond doesn't understand repeat-tied notes to be tied;
-    # because of this LilyPond incorrectly prints accidentals in front of some
-    # repeat-tied notes;
-    # this method works around LilyPond's behavior
-    def _attach_shadow_tie_indicators(self):
-        tag = _scoping.site(_frame(), self)
-        for plt in _selection.Selection(self.score).plts():
-            if len(plt) == 1:
-                continue
-            for pleaf in plt[:-1]:
-                if abjad.get.has_indicator(pleaf, abjad.Tie):
-                    continue
-                tie = abjad.Tie()
-                abjad.tweak(tie).stencil = False
-                abjad.attach(tie, pleaf, tag=tag)
-
-    def _call_rhythm_commands(self):
-        self._attach_fermatas()
-        command_count = 0
-        tag = _scoping.site(_frame(), self)
-        if self.skips_instead_of_rests:
-            prototype = abjad.Skip
-        else:
-            prototype = abjad.MultimeasureRest
-        silence_maker = rmakers.multiplied_duration(prototype, tag=tag)
-        for voice in abjad.select(self.score).components(abjad.Voice):
-            assert not len(voice), repr(voice)
-            voice_metadata = self._voice_metadata.get(voice.name, abjad.OrderedDict())
-            commands = self._voice_to_rhythm_commands(voice)
-            if not commands:
-                selection = silence_maker(self.time_signatures)
-                assert isinstance(selection, abjad.Selection), repr(selection)
-                voice.extend(selection)
-                if not self.do_not_append_phantom_measure:
-                    container = self._make_multimeasure_rest_container(
-                        voice.name, (1, 4), phantom=True, suppress_note=True
-                    )
-                    voice.append(container)
-                continue
-            timespans = []
-            for command in commands:
-                if command.scope.measures is None:
-                    raise Exception(abjad.storage(command))
-                measures = command.scope.measures
-                result = self._get_measure_time_signatures(*measures)
-                start_offset, time_signatures = result
-                runtime = _bundle_manifests(
-                    manifests=self.manifests,
-                    offset_to_measure_number=self._offset_to_measure_number,
-                    previous_persist=self.previous_persist,
-                    score_template=self.score_template,
-                    voice_name=voice.name,
-                )
-                selection = None
-                try:
-                    selection = command._make_selection(time_signatures, runtime)
-                except Exception:
-                    print(f"Interpreting ...\n\n{abjad.storage(command)}\n")
-                    raise
-                if selection is not None and self.environment != "docs":
-                    _attach_rhythm_annotation_spanner(command, selection)
-                timespan = abjad.AnnotatedTimespan(
-                    start_offset=start_offset, annotation=selection
-                )
-                timespans.append(timespan)
-                if command.persist and command.state:
-                    state = command.state
-                    assert "name" not in state
-                    state["name"] = command.persist
-                    voice_metadata[command.parameter] = command.state
-                command_count += 1
-            if bool(voice_metadata):
-                self._voice_metadata[voice.name] = voice_metadata
-            timespans.sort()
-            _assert_nonoverlapping_rhythms(timespans, voice.name)
-            selections = self._intercalate_silences(timespans, voice.name)
-            if not self.do_not_append_phantom_measure:
-                suppress_note = False
-                final_leaf = abjad.get.leaf(selections, -1)
-                if isinstance(final_leaf, abjad.MultimeasureRest):
-                    suppress_note = True
-                container = self._make_multimeasure_rest_container(
-                    voice.name,
-                    (1, 4),
-                    phantom=True,
-                    suppress_note=suppress_note,
-                )
-                selection = abjad.select(container)
-                selections.append(selection)
-            voice.extend(selections)
-        return command_count
 
     def _check_all_music_in_part_containers(self):
         name = "all_music_in_part_containers"
@@ -2582,7 +2818,7 @@ class SegmentMaker:
             context = abjad.get.parentage(leaf).get(abjad.Context)
             string = f"% [{context.name} measure {local_measure_number}]"
             literal = abjad.LilyPondLiteral(string, format_slot="absolute_before")
-            abjad.attach(literal, leaf, tag=_scoping.site(_frame(), self))
+            abjad.attach(literal, leaf, tag=_scoping.site(_frame(), "SegmentMaker"))
 
     def _deactivate_tags(self):
         tags = self.deactivate
@@ -2681,19 +2917,6 @@ class SegmentMaker:
         if measure_number is not None:
             return abjad.Tag(f"MEASURE_{measure_number}")
 
-    def _get_measure_time_signatures(self, start_measure=None, stop_measure=None):
-        assert stop_measure is not None
-        start_index = start_measure - 1
-        if stop_measure is None:
-            time_signatures = [self.time_signatures[start_index]]
-        else:
-            if stop_measure == -1:
-                stop_measure = self.measure_count
-            stop_index = stop_measure
-            time_signatures = self.time_signatures[start_index:stop_index]
-        measure_timespan = _get_measure_timespan(self.score, start_measure)
-        return measure_timespan.start_offset, time_signatures
-
     def _get_measure_timespans(self, measure_numbers):
         timespans = []
         first_measure_number = self._get_first_measure_number()
@@ -2758,42 +2981,6 @@ class SegmentMaker:
         if not time_signatures_:
             time_signatures_ = None
         self._time_signatures = time_signatures_
-
-    def _intercalate_silences(self, timespans, voice_name):
-        selections = []
-        durations = [_.duration for _ in self.time_signatures]
-        measure_start_offsets = abjad.math.cumulative_sums(durations)
-        segment_duration = measure_start_offsets[-1]
-        self._segment_duration = segment_duration
-        previous_stop_offset = abjad.Offset(0)
-        for timespan in timespans:
-            start_offset = timespan.start_offset
-            if start_offset < previous_stop_offset:
-                raise Exception("overlapping offsets: {timespan!r}.")
-            if previous_stop_offset < start_offset:
-                selection = self._make_measure_silences(
-                    previous_stop_offset,
-                    start_offset,
-                    measure_start_offsets,
-                    voice_name,
-                )
-                selections.append(selection)
-            selection = timespan.annotation
-            assert isinstance(selection, abjad.Selection), repr(selection)
-            selections.append(selection)
-            duration = abjad.get.duration(selection)
-            previous_stop_offset = start_offset + duration
-        if previous_stop_offset < segment_duration:
-            selection = self._make_measure_silences(
-                previous_stop_offset,
-                segment_duration,
-                measure_start_offsets,
-                voice_name,
-            )
-            assert isinstance(selection, abjad.Selection)
-            selections.append(selection)
-        assert all(isinstance(_, abjad.Selection) for _ in selections)
-        return selections
 
     def _key_to_indicator(self, key, prototype):
         assert isinstance(key, (int, str)), repr(key)
@@ -2888,7 +3075,7 @@ class SegmentMaker:
                     skip,
                     context="GlobalSkips",
                     deactivate=True,
-                    tag=tag.append(_scoping.site(_frame(), self)),
+                    tag=tag.append(_scoping.site(_frame(), "SegmentMaker")),
                 )
             if 0 < measure_index:
                 tag = _tags.CLOCK_TIME
@@ -2898,7 +3085,7 @@ class SegmentMaker:
                     skip,
                     context="GlobalSkips",
                     deactivate=True,
-                    tag=tag.append(_scoping.site(_frame(), self)),
+                    tag=tag.append(_scoping.site(_frame(), "SegmentMaker")),
                 )
 
     def _label_duration_multipliers(self):
@@ -2940,7 +3127,7 @@ class SegmentMaker:
             measure_number = first_measure_number + measure_index
             if measure_index < total - 1:
                 tag = _tags.LOCAL_MEASURE_NUMBER
-                tag = tag.append(_scoping.site(_frame(), self))
+                tag = tag.append(_scoping.site(_frame(), "SegmentMaker"))
                 string = r"- \baca-start-lmn-left-only"
                 string += f' "{local_measure_number}"'
                 start_text_span = abjad.StartTextSpan(
@@ -2954,7 +3141,7 @@ class SegmentMaker:
                     tag=tag,
                 )
                 tag = _tags.MEASURE_NUMBER
-                tag = tag.append(_scoping.site(_frame(), self))
+                tag = tag.append(_scoping.site(_frame(), "SegmentMaker"))
                 string = r"- \baca-start-mn-left-only"
                 string += f' "{measure_number}"'
                 start_text_span = abjad.StartTextSpan(
@@ -2969,7 +3156,7 @@ class SegmentMaker:
                 )
             if 0 < measure_index:
                 tag = _tags.LOCAL_MEASURE_NUMBER
-                tag = tag.append(_scoping.site(_frame(), self))
+                tag = tag.append(_scoping.site(_frame(), "SegmentMaker"))
                 stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanLMN")
                 abjad.attach(
                     stop_text_span,
@@ -2979,7 +3166,7 @@ class SegmentMaker:
                     tag=tag,
                 )
                 tag = _tags.MEASURE_NUMBER
-                tag = tag.append(_scoping.site(_frame(), self))
+                tag = tag.append(_scoping.site(_frame(), "SegmentMaker"))
                 stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanMN")
                 abjad.attach(
                     stop_text_span,
@@ -3004,7 +3191,7 @@ class SegmentMaker:
             measure_index = lmn - 1
             skip = skips[measure_index]
             tag = _tags.MOMENT_NUMBER
-            tag = tag.append(_scoping.site(_frame(), self))
+            tag = tag.append(_scoping.site(_frame(), "SegmentMaker"))
             if color is not None:
                 string = r"- \baca-start-xnm-colored-left-only"
                 string += f' "{value}" {color}'
@@ -3023,7 +3210,7 @@ class SegmentMaker:
             )
             if 0 < i:
                 tag = _tags.MOMENT_NUMBER
-                tag = tag.append(_scoping.site(_frame(), self))
+                tag = tag.append(_scoping.site(_frame(), "SegmentMaker"))
                 stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanXNM")
                 abjad.attach(
                     stop_text_span,
@@ -3034,7 +3221,7 @@ class SegmentMaker:
                 )
         skip = skips[-1]
         tag = _tags.MOMENT_NUMBER
-        tag = tag.append(_scoping.site(_frame(), self))
+        tag = tag.append(_scoping.site(_frame(), "SegmentMaker"))
         stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanXNM")
         abjad.attach(
             stop_text_span,
@@ -3059,7 +3246,7 @@ class SegmentMaker:
             measure_index = lmn - 1
             skip = skips[measure_index]
             tag = _tags.STAGE_NUMBER
-            tag = tag.append(_scoping.site(_frame(), self))
+            tag = tag.append(_scoping.site(_frame(), "SegmentMaker"))
             if color is not None:
                 string = r"- \baca-start-snm-colored-left-only"
                 string += f' "{value}" {color}'
@@ -3078,7 +3265,7 @@ class SegmentMaker:
             )
             if 0 < i:
                 tag = _tags.STAGE_NUMBER
-                tag = tag.append(_scoping.site(_frame(), self))
+                tag = tag.append(_scoping.site(_frame(), "SegmentMaker"))
                 stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanSNM")
                 abjad.attach(
                     stop_text_span,
@@ -3089,7 +3276,7 @@ class SegmentMaker:
                 )
         skip = skips[-1]
         tag = _tags.STAGE_NUMBER
-        tag = tag.append(_scoping.site(_frame(), self))
+        tag = tag.append(_scoping.site(_frame(), "SegmentMaker"))
         stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanSNM")
         abjad.attach(
             stop_text_span,
@@ -3110,7 +3297,7 @@ class SegmentMaker:
         numerator, denominator = multiplier.pair
         string = rf"\magnifyStaff #{numerator}/{denominator}"
         tag = abjad.Tag(tag)
-        tag = tag.append(_scoping.site(_frame(), self))
+        tag = tag.append(_scoping.site(_frame(), "SegmentMaker"))
         for staff in abjad.iterate.components(self.score, abjad.Staff):
             first_leaf = abjad.get.leaf(staff, 0)
             assert first_leaf is not None
@@ -3128,39 +3315,23 @@ class SegmentMaker:
         )
         return global_context
 
-    def _make_global_rests(self):
-        rests = []
-        for time_signature in self.time_signatures:
-            rest = abjad.MultimeasureRest(
-                abjad.Duration(1),
-                multiplier=time_signature.duration,
-                tag=_scoping.site(_frame(), self, n=1),
-            )
-            rests.append(rest)
-        if not self.do_not_append_phantom_measure:
-            tag = _scoping.site(_frame(), self, n=2).append(_tags.PHANTOM)
-            rest = abjad.MultimeasureRest(abjad.Duration(1), multiplier=(1, 4), tag=tag)
-            abjad.attach(_const.PHANTOM, rest)
-            rests.append(rest)
-        return rests
-
     def _make_global_skips(self):
         context = self.score["Global_Skips"]
         for time_signature in self.time_signatures:
             skip = abjad.Skip(
                 1,
                 multiplier=time_signature.duration,
-                tag=_scoping.site(_frame(), self, n=1),
+                tag=_scoping.site(_frame(), "SegmentMaker", n=1),
             )
             abjad.attach(
                 time_signature,
                 skip,
                 context="Score",
-                tag=_scoping.site(_frame(), self, n=2),
+                tag=_scoping.site(_frame(), "SegmentMaker", n=2),
             )
             context.append(skip)
         if not self.do_not_append_phantom_measure:
-            tag = _scoping.site(_frame(), self, n=3)
+            tag = _scoping.site(_frame(), "SegmentMaker", n=3)
             tag = tag.append(_tags.PHANTOM)
             skip = abjad.Skip(1, multiplier=(1, 4), tag=tag)
             abjad.attach(_const.PHANTOM, skip)
@@ -3179,7 +3350,7 @@ class SegmentMaker:
         abjad.attach(
             literal,
             first_skip,
-            tag=tag.append(_scoping.site(_frame(), self, n=4)),
+            tag=tag.append(_scoping.site(_frame(), "SegmentMaker", n=4)),
         )
 
     def _make_lilypond_file(self):
@@ -3224,104 +3395,6 @@ class SegmentMaker:
             block = abjad.Block(name="midi")
             lilypond_file.score_block.items.append(block)
         self._lilypond_file = lilypond_file
-
-    def _make_measure_silences(self, start, stop, measure_start_offsets, voice_name):
-        tag = _scoping.site(_frame(), self)
-        offsets = [start]
-        for measure_start_offset in measure_start_offsets:
-            if start < measure_start_offset < stop:
-                offsets.append(measure_start_offset)
-        offsets.append(stop)
-        silences = []
-        durations = abjad.math.difference_series(offsets)
-        for i, duration in enumerate(durations):
-            if i == 0:
-                silence = self._make_multimeasure_rest_container(voice_name, duration)
-            else:
-                if self.skips_instead_of_rests:
-                    silence = abjad.Skip(1, multiplier=duration, tag=tag)
-                else:
-                    silence = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
-            silences.append(silence)
-        assert all(isinstance(_, abjad.Component) for _ in silences)
-        selection = abjad.select(silences)
-        return selection
-
-    def _make_multimeasure_rest_container(
-        self, voice_name, duration, phantom=False, suppress_note=False
-    ):
-        if suppress_note is True:
-            assert phantom is True
-        if phantom is True:
-            phantom_tag = _tags.PHANTOM
-        else:
-            phantom_tag = abjad.Tag()
-        tag = _scoping.site(_frame(), self, n=1)
-        tag = tag.append(phantom_tag)
-        tag = tag.append(_tags.HIDDEN)
-        if suppress_note is not True:
-            note_or_rest = _tags.NOTE
-            tag = tag.append(_tags.NOTE)
-            note = abjad.Note("c'1", multiplier=duration, tag=tag)
-            abjad.attach(_const.NOTE, note)
-            abjad.attach(_const.NOT_YET_PITCHED, note)
-        else:
-            note_or_rest = _tags.MULTIMEASURE_REST
-            tag = tag.append(_tags.MULTIMEASURE_REST)
-            note = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
-            abjad.attach(_const.MULTIMEASURE_REST, note)
-        abjad.attach(_const.HIDDEN, note)
-        tag = _scoping.site(_frame(), self, n=2)
-        tag = tag.append(phantom_tag)
-        tag = tag.append(note_or_rest)
-        tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
-        literal = abjad.LilyPondLiteral(
-            r"\abjad-invisible-music-coloring", format_slot="before"
-        )
-        abjad.attach(literal, note, tag=tag)
-        tag = _scoping.site(_frame(), self, n=3)
-        tag = tag.append(phantom_tag)
-        tag = tag.append(note_or_rest)
-        tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
-        literal = abjad.LilyPondLiteral(r"\abjad-invisible-music", format_slot="before")
-        abjad.attach(literal, note, deactivate=True, tag=tag)
-        abjad.attach(_const.HIDDEN, note)
-        tag = _scoping.site(_frame(), self, n=4)
-        tag = tag.append(phantom_tag)
-        hidden_note_voice = abjad.Voice([note], name=voice_name, tag=tag)
-        abjad.attach(_const.INTERMITTENT, hidden_note_voice)
-        tag = _scoping.site(_frame(), self, n=5)
-        tag = tag.append(phantom_tag)
-        tag = tag.append(_tags.REST_VOICE)
-        if self.skips_instead_of_rests:
-            tag = tag.append(_tags.SKIP)
-            rest = abjad.Skip(1, multiplier=duration, tag=tag)
-            abjad.attach(_const.SKIP, rest)
-        else:
-            tag = tag.append(_tags.MULTIMEASURE_REST)
-            rest = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
-            abjad.attach(_const.MULTIMEASURE_REST, rest)
-        abjad.attach(_const.REST_VOICE, rest)
-        if "Music_Voice" in voice_name:
-            name = voice_name.replace("Music_Voice", "Rest_Voice")
-        else:
-            name = voice_name.replace("Voice", "Rest_Voice")
-        tag = _scoping.site(_frame(), self, n=6)
-        tag = tag.append(phantom_tag)
-        multimeasure_rest_voice = abjad.Voice([rest], name=name, tag=tag)
-        abjad.attach(_const.INTERMITTENT, multimeasure_rest_voice)
-        tag = _scoping.site(_frame(), self, n=7)
-        tag = tag.append(phantom_tag)
-        container = abjad.Container(
-            [hidden_note_voice, multimeasure_rest_voice],
-            simultaneous=True,
-            tag=tag,
-        )
-        abjad.attach(_const.MULTIMEASURE_REST_CONTAINER, container)
-        if phantom is True:
-            for component in abjad.iterate.components(container):
-                abjad.attach(_const.PHANTOM, component)
-        return container
 
     def _make_score(self):
         score = self.score_template()
@@ -3451,7 +3524,7 @@ class SegmentMaker:
                         continue
                     assert status == "reapplied", repr(status)
                     wrapper = abjad.get.wrapper(leaf, abjad.TimeSignature)
-                    site = _scoping.site(_frame(), self, n=1)
+                    site = _scoping.site(_frame(), "SegmentMaker", n=1)
                     edition = edition.append(site)
                     wrapper.tag = wrapper.tag.append(edition)
                     _scoping.treat_persistent_wrapper(self.manifests, wrapper, status)
@@ -3463,7 +3536,7 @@ class SegmentMaker:
                     _indicators.Ritardando,
                 )
                 if isinstance(previous_indicator, prototype):
-                    site = _scoping.site(_frame(), self, n=2)
+                    site = _scoping.site(_frame(), "SegmentMaker", n=2)
                     if status == "reapplied":
                         wrapper = abjad.attach(
                             previous_indicator,
@@ -3494,7 +3567,7 @@ class SegmentMaker:
                         )
                     continue
                 attached = False
-                site = _scoping.site(_frame(), self, n=3)
+                site = _scoping.site(_frame(), "SegmentMaker", n=3)
                 tag = edition.append(site)
                 if isinstance(previous_indicator, abjad.MarginMarkup):
                     tag = tag.append(_tags.NOT_PARTS)
@@ -3636,13 +3709,13 @@ class SegmentMaker:
                     abjad.attach(
                         empty_staff_lines,
                         leaf,
-                        tag=_scoping.site(_frame(), self, n=1),
+                        tag=_scoping.site(_frame(), "SegmentMaker", n=1),
                     )
                     if not self.final_segment:
                         abjad.attach(
                             empty_bar_extent,
                             leaf,
-                            tag=_scoping.site(_frame(), self, n=2).append(
+                            tag=_scoping.site(_frame(), "SegmentMaker", n=2).append(
                                 abjad.Tag("FERMATA_MEASURE_EMPTY_BAR_EXTENT")
                             ),
                         )
@@ -3665,12 +3738,12 @@ class SegmentMaker:
                         abjad.attach(
                             next_staff_lines_,
                             next_leaf,
-                            tag=_scoping.site(_frame(), self, n=3),
+                            tag=_scoping.site(_frame(), "SegmentMaker", n=3),
                         )
                         abjad.attach(
                             next_bar_extent_,
                             next_leaf,
-                            tag=_scoping.site(_frame(), self, n=4).append(
+                            tag=_scoping.site(_frame(), "SegmentMaker", n=4).append(
                                 abjad.Tag("FERMATA_MEASURE_NEXT_BAR_EXTENT")
                             ),
                         )
@@ -3685,7 +3758,7 @@ class SegmentMaker:
                         resume_staff_lines,
                         leaf,
                         synthetic_offset=99,
-                        tag=_scoping.site(_frame(), self, n=5),
+                        tag=_scoping.site(_frame(), "SegmentMaker", n=5),
                     )
                     previous_line_count = 5
                     if previous_bar_extent is not None:
@@ -3697,7 +3770,7 @@ class SegmentMaker:
                         resume_bar_extent,
                         leaf,
                         synthetic_offset=99,
-                        tag=_scoping.site(_frame(), self, n=6).append(
+                        tag=_scoping.site(_frame(), "SegmentMaker", n=6).append(
                             abjad.Tag("FERMATA_MEASURE_RESUME_BAR_EXTENT")
                         ),
                     )
@@ -3722,7 +3795,7 @@ class SegmentMaker:
                     abjad.attach(
                         literal,
                         next_leaf_,
-                        tag=tag.append(_scoping.site(_frame(), self, n=7)),
+                        tag=tag.append(_scoping.site(_frame(), "SegmentMaker", n=7)),
                     )
                 bar_lines_already_styled.append(start_offset)
         rests = _selection.Selection(self.score["Global_Rests"]).leaves(
@@ -3743,14 +3816,14 @@ class SegmentMaker:
                 abjad.detach(literal, skip)
         _append_tag_to_wrappers(
             skip,
-            _scoping.site(_frame(), self, n=1).append(_tags.PHANTOM),
+            _scoping.site(_frame(), "SegmentMaker", n=1).append(_tags.PHANTOM),
         )
         string = r"\baca-time-signature-transparent"
         literal = abjad.LilyPondLiteral(string)
         abjad.attach(
             literal,
             skip,
-            tag=_scoping.site(_frame(), self, n=2).append(_tags.PHANTOM),
+            tag=_scoping.site(_frame(), "SegmentMaker", n=2).append(_tags.PHANTOM),
         )
         strings = [
             r"\once \override Score.BarLine.transparent = ##t",
@@ -3760,7 +3833,7 @@ class SegmentMaker:
         abjad.attach(
             literal,
             skip,
-            tag=_scoping.site(_frame(), self, n=3).append(_tags.PHANTOM),
+            tag=_scoping.site(_frame(), "SegmentMaker", n=3).append(_tags.PHANTOM),
         )
         if "Global_Rests" in self.score:
             for context in abjad.iterate.components(self.score, abjad.Context):
@@ -3769,7 +3842,7 @@ class SegmentMaker:
                     break
             _append_tag_to_wrappers(
                 rest,
-                _scoping.site(_frame(), self, n=4).append(_tags.PHANTOM),
+                _scoping.site(_frame(), "SegmentMaker", n=4).append(_tags.PHANTOM),
             )
         start_offset = abjad.get.timespan(skip).start_offset
         enumeration = _const.MULTIMEASURE_REST_CONTAINER
@@ -3792,7 +3865,7 @@ class SegmentMaker:
             for leaf in abjad.select(container).leaves():
                 _append_tag_to_wrappers(
                     leaf,
-                    _scoping.site(_frame(), self, n=5).append(_tags.PHANTOM),
+                    _scoping.site(_frame(), "SegmentMaker", n=5).append(_tags.PHANTOM),
                 )
                 if not isinstance(leaf, abjad.MultimeasureRest):
                     continue
@@ -3802,19 +3875,25 @@ class SegmentMaker:
                 abjad.attach(
                     literal,
                     leaf,
-                    tag=_scoping.site(_frame(), self, n=6).append(_tags.PHANTOM),
+                    tag=_scoping.site(_frame(), "SegmentMaker", n=6).append(
+                        _tags.PHANTOM
+                    ),
                 )
                 literal = abjad.LilyPondLiteral(string_2)
                 abjad.attach(
                     literal,
                     leaf,
-                    tag=_scoping.site(_frame(), self, n=7).append(_tags.PHANTOM),
+                    tag=_scoping.site(_frame(), "SegmentMaker", n=7).append(
+                        _tags.PHANTOM
+                    ),
                 )
                 literal = abjad.LilyPondLiteral(strings)
                 abjad.attach(
                     literal,
                     leaf,
-                    tag=_scoping.site(_frame(), self, n=8).append(_tags.PHANTOM),
+                    tag=_scoping.site(_frame(), "SegmentMaker", n=8).append(
+                        _tags.PHANTOM
+                    ),
                 )
 
     def _transpose_score(self):
@@ -3947,15 +4026,6 @@ class SegmentMaker:
                 scope_ = scope
                 scopes_.append(scope_)
         return scopes_
-
-    def _voice_to_rhythm_commands(self, voice):
-        commands = []
-        for command in self.commands:
-            if not isinstance(command, _rhythmcommands.RhythmCommand):
-                continue
-            if command.scope.voice_name == voice.name:
-                commands.append(command)
-        return commands
 
     def _whitespace_leaves(self):
         if self.environment == "docs":
@@ -4294,7 +4364,6 @@ class SegmentMaker:
         self.first_segment = first_segment
         self._metadata = abjad.OrderedDict(metadata)
         self._midi = midi
-        self._page_layout_profile = page_layout_profile
         self._persist = abjad.OrderedDict(persist)
         self._previous_metadata = abjad.OrderedDict(previous_metadata)
         self._previous_persist = abjad.OrderedDict(previous_persist)
@@ -4312,7 +4381,21 @@ class SegmentMaker:
             print(f"Score initialization {count} {seconds} ...")
         with abjad.Timer() as timer:
             with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
-                command_count = self._call_rhythm_commands()
+                command_count, segment_duration = _call_rhythm_commands(
+                    self.commands,
+                    self.do_not_append_phantom_measure,
+                    self.environment,
+                    self.manifests,
+                    self.measure_count,
+                    self._offset_to_measure_number,
+                    self.previous_persist,
+                    self.score,
+                    self.score_template,
+                    self.skips_instead_of_rests,
+                    self.time_signatures,
+                    self.voice_metadata,
+                )
+                self._segment_duration = segment_duration
                 self._clean_up_rhythm_maker_voice_names()
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
@@ -4337,7 +4420,7 @@ class SegmentMaker:
                 manifests=self.manifests,
                 previous_persist=self.previous_persist,
             )
-            self._apply_spacing()
+            _apply_spacing(self.score, page_layout_profile, self.spacing)
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
         if not do_not_print_timing and self.environment != "docs":
@@ -4378,7 +4461,10 @@ class SegmentMaker:
                 self._fermata_measure_numbers = result[2]
                 self._final_measure_is_fermata = result[3]
                 self._treat_untreated_persistent_wrappers()
-                self._attach_metronome_marks()
+                _attach_metronome_marks(
+                    self.parts_metric_modulation_multiplier,
+                    self.score,
+                )
                 self._reanalyze_trending_dynamics()
                 self._reanalyze_reapplied_synthetic_wrappers()
                 self._transpose_score()
@@ -4396,7 +4482,7 @@ class SegmentMaker:
                 self._check_persistent_indicators()
                 color_repeat_pitch_classes(self.score)
                 self._color_octaves()
-                self._attach_shadow_tie_indicators()
+                _attach_shadow_tie_indicators(self.score)
                 self._force_nonnatural_accidentals()
                 self._label_duration_multipliers()
                 self._magnify_staves()
