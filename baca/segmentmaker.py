@@ -95,7 +95,6 @@ def _add_container_identifiers(
             context_identifier = staff.name
         context_identifier = context_identifier.replace("_", ".")
         staff.identifier = f"%*% {context_identifier}"
-    # self._container_to_part_assignment = container_to_part_assignment
     return container_to_part_assignment
 
 
@@ -960,6 +959,382 @@ def _call_rhythm_commands(
             selections.append(selection)
         voice.extend(selections)
     return command_count, segment_duration
+
+
+def _check_all_music_in_part_containers(score, score_template):
+    name = "all_music_in_part_containers"
+    if getattr(score_template, name, None) is not True:
+        return
+    indicator = _const.MULTIMEASURE_REST_CONTAINER
+    for voice in abjad.iterate.components(score, abjad.Voice):
+        for component in voice:
+            if isinstance(component, (abjad.MultimeasureRest, abjad.Skip)):
+                continue
+            if abjad.get.has_indicator(component, _const.HIDDEN):
+                continue
+            if abjad.get.has_indicator(component, indicator):
+                continue
+            if (
+                type(component) is abjad.Container
+                and component.identifier
+                and component.identifier.startswith("%*% ")
+            ):
+                continue
+            message = f"{voice.name} contains {component!r} outside part container."
+            raise Exception(message)
+
+
+def _check_doubled_dynamics(score):
+    for leaf in abjad.iterate.leaves(score):
+        dynamics = abjad.get.indicators(leaf, abjad.Dynamic)
+        if 1 < len(dynamics):
+            voice = abjad.get.parentage(leaf).get(abjad.Voice)
+            message = f"leaf {str(leaf)} in {voice.name} has"
+            message += f" {len(dynamics)} dynamics attached:"
+            for dynamic in dynamics:
+                message += f"\n   {dynamic!s}"
+            raise Exception(message)
+
+
+def _check_duplicate_part_assignments(dictionary, score_template):
+    if not dictionary:
+        return
+    if not score_template:
+        return
+    part_manifest = score_template.part_manifest
+    if not part_manifest:
+        return
+    part_to_timespans = abjad.OrderedDict()
+    for identifier, (part_assignment, timespan) in dictionary.items():
+        for part in part_manifest.expand(part_assignment):
+            if part.name not in part_to_timespans:
+                part_to_timespans[part.name] = []
+            part_to_timespans[part.name].append(timespan)
+    messages = []
+    for part_name, timespans in part_to_timespans.items():
+        if len(timespans) <= 1:
+            continue
+        timespan_list = abjad.TimespanList(timespans)
+        if timespan_list.compute_logical_and():
+            message = f"  Part {part_name!r} is assigned to overlapping containers ..."
+            messages.append(message)
+    if messages:
+        message = "\n" + "\n".join(messages)
+        raise Exception(message)
+
+
+def _check_persistent_indicators(
+    do_not_check_persistence,
+    environment,
+    score,
+    score_template,
+):
+    if do_not_check_persistence:
+        return
+    if environment == "docs":
+        return
+    indicator = _const.SOUNDS_DURING_SEGMENT
+    for voice in abjad.iterate.components(score, abjad.Voice):
+        if not abjad.get.has_indicator(voice, indicator):
+            continue
+        for i, leaf in enumerate(abjad.iterate.leaves(voice)):
+            _check_persistent_indicators_for_leaf(score_template, voice.name, leaf, i)
+
+
+def _check_persistent_indicators_for_leaf(score_template, voice, leaf, i):
+    prototype = (
+        _indicators.Accelerando,
+        abjad.MetronomeMark,
+        _indicators.Ritardando,
+    )
+    mark = abjad.get.effective(leaf, prototype)
+    if mark is None:
+        message = f"{voice} leaf {i} ({leaf!s}) missing metronome mark."
+        raise Exception(message)
+    instrument = abjad.get.effective(leaf, abjad.Instrument)
+    if instrument is None:
+        message = f"{voice} leaf {i} ({leaf!s}) missing instrument."
+        raise Exception(message)
+    if not score_template.do_not_require_margin_markup:
+        markup = abjad.get.effective(leaf, abjad.MarginMarkup)
+        if markup is None:
+            message = f"{voice} leaf {i} ({leaf!s}) missing margin markup."
+            raise Exception(message)
+    clef = abjad.get.effective(leaf, abjad.Clef)
+    if clef is None:
+        raise Exception(f"{voice} leaf {i} ({leaf!s}) missing clef.")
+
+
+def _check_wellformedness(
+    do_not_check_beamed_long_notes,
+    do_not_check_out_of_range_pitches,
+    do_not_check_wellformedness,
+    score,
+):
+    if do_not_check_wellformedness:
+        return
+    check_beamed_long_notes = not do_not_check_beamed_long_notes
+    check_out_of_range_pitches = not do_not_check_out_of_range_pitches
+    if not abjad.wf.wellformed(
+        score,
+        check_beamed_long_notes=check_beamed_long_notes,
+        check_out_of_range_pitches=check_out_of_range_pitches,
+    ):
+        message = abjad.wf.tabulate_wellformedness(
+            score,
+            check_beamed_long_notes=check_beamed_long_notes,
+            check_out_of_range_pitches=check_out_of_range_pitches,
+        )
+        raise Exception("\n" + message)
+
+
+def _clean_up_laissez_vibrer_tie_direction(score):
+    default = abjad.Clef("treble")
+    for note in abjad.iterate.leaves(score, abjad.Note):
+        if note.written_duration < 1:
+            continue
+        if not abjad.get.has_indicator(note, abjad.LaissezVibrer):
+            continue
+        clef = abjad.get.effective(note, abjad.Clef, default=default)
+        staff_position = abjad.StaffPosition.from_pitch_and_clef(
+            note.written_pitch,
+            clef,
+        )
+        if staff_position == abjad.StaffPosition(0):
+            abjad.override(note).laissez_vibrer_tie.direction = abjad.Up
+
+
+def _clean_up_repeat_tie_direction(score):
+    default = abjad.Clef("treble")
+    for leaf in abjad.iterate.leaves(score, pitched=True):
+        if leaf.written_duration < 1:
+            continue
+        if not abjad.get.has_indicator(leaf, abjad.RepeatTie):
+            continue
+        clef = abjad.get.effective(leaf, abjad.Clef, default=default)
+        if hasattr(leaf, "written_pitch"):
+            note_heads = [leaf.note_head]
+        else:
+            note_heads = leaf.note_heads
+        for note_head in note_heads:
+            staff_position = abjad.StaffPosition.from_pitch_and_clef(
+                note_head.written_pitch, clef
+            )
+            if staff_position.number == 0:
+                repeat_tie = abjad.get.indicator(leaf, abjad.RepeatTie)
+                abjad.tweak(repeat_tie).direction = abjad.Up
+                break
+
+
+def _clean_up_on_beat_grace_containers(score):
+    prototype = abjad.OnBeatGraceContainer
+    for container in abjad.select(score).components(prototype):
+        container._match_anchor_leaf()
+        container._set_leaf_durations()
+        container._attach_lilypond_one_voice()
+
+
+def _clean_up_rhythm_maker_voice_names(score):
+    for voice in abjad.iterate.components(score, abjad.Voice):
+        if voice.name == "Rhythm_Maker_Music_Voice":
+            outer = abjad.get.parentage(voice).get(abjad.Voice, 1)
+            voice.name = outer.name
+
+
+def _clone_segment_initial_short_instrument_name(first_segment, score):
+    if first_segment:
+        return
+    prototype = abjad.MarginMarkup
+    for context in abjad.iterate.components(score, abjad.Context):
+        first_leaf = abjad.get.leaf(context, 0)
+        if abjad.get.has_indicator(first_leaf, abjad.StartMarkup):
+            continue
+        margin_markup = abjad.get.indicator(first_leaf, prototype)
+        if margin_markup is None:
+            continue
+        if isinstance(margin_markup.markup, str):
+            markup = margin_markup.markup
+        else:
+            markup = abjad.new(margin_markup.markup)
+        start_markup = abjad.StartMarkup(
+            context=margin_markup.context,
+            format_slot=margin_markup.format_slot,
+            markup=markup,
+        )
+        abjad.attach(
+            start_markup,
+            first_leaf,
+            tag=_scoping.site(_frame(), "SegmentMaker"),
+        )
+
+
+def _collect_alive_during_segment(score):
+    result = []
+    for context in abjad.iterate.components(score, abjad.Context):
+        if context.name not in result:
+            result.append(context.name)
+    return result
+
+
+def _collect_metadata(
+    container_to_part_assignment,
+    duration,
+    fermata_measure_numbers,
+    final_measure_is_fermata,
+    final_measure_number,
+    first_measure_number,
+    metadata,
+    persist,
+    persistent_indicators,
+    score,
+    start_clock_time,
+    stop_clock_time,
+    time_signatures,
+    voice_metadata,
+):
+    metadata_, persist_ = abjad.OrderedDict(), abjad.OrderedDict()
+    persist_["alive_during_segment"] = _collect_alive_during_segment(score)
+    # make-layout-ly scripts adds bol measure numbers to metadata
+    bol_measure_numbers = metadata.get("bol_measure_numbers")
+    if bol_measure_numbers:
+        metadata_["bol_measure_numbers"] = bol_measure_numbers
+    if container_to_part_assignment:
+        persist_["container_to_part_assignment"] = container_to_part_assignment
+    if duration is not None:
+        metadata_["duration"] = duration
+    if fermata_measure_numbers:
+        metadata_["fermata_measure_numbers"] = fermata_measure_numbers
+    dictionary = metadata.get("first_appearance_margin_markup")
+    if dictionary:
+        metadata_["first_appearance_margin_markup"] = dictionary
+    metadata_["first_measure_number"] = first_measure_number
+    metadata_["final_measure_number"] = final_measure_number
+    if final_measure_is_fermata is True:
+        metadata_["final_measure_is_fermata"] = True
+    if persistent_indicators:
+        persist_["persistent_indicators"] = persistent_indicators
+    if start_clock_time is not None:
+        metadata_["start_clock_time"] = start_clock_time
+    if stop_clock_time is not None:
+        metadata_["stop_clock_time"] = stop_clock_time
+    metadata_["time_signatures"] = time_signatures
+    if voice_metadata:
+        persist_["voice_metadata"] = voice_metadata
+    metadata.clear()
+    metadata.update(metadata_)
+    metadata.sort(recurse=True)
+    for key, value in metadata.items():
+        if not bool(value):
+            raise Exception(f"{key} metadata should be nonempty (not {value!r}).")
+    persist.clear()
+    persist.update(persist_)
+    persist.sort(recurse=True)
+    for key, value in persist.items():
+        if not bool(value):
+            raise Exception(f"{key} persist should be nonempty (not {value!r}).")
+
+
+def _collect_persistent_indicators(
+    environment,
+    manifests,
+    previous_persist,
+    score,
+):
+    result = abjad.OrderedDict()
+    contexts = abjad.iterate.components(score, abjad.Context)
+    contexts = list(contexts)
+    contexts.sort(key=lambda _: _.name)
+    name_to_wrappers = abjad.OrderedDict()
+    for context in contexts:
+        if context.name not in name_to_wrappers:
+            name_to_wrappers[context.name] = []
+        wrappers = context._dependent_wrappers[:]
+        name_to_wrappers[context.name].extend(wrappers)
+    do_not_persist_on_phantom_measure = (
+        abjad.Instrument,
+        abjad.MetronomeMark,
+        abjad.MarginMarkup,
+        abjad.TimeSignature,
+    )
+    for name, dependent_wrappers in name_to_wrappers.items():
+        mementos = []
+        wrappers = []
+        dictionary = abjad._inspect._get_persistent_wrappers(
+            dependent_wrappers=dependent_wrappers,
+            omit_with_indicator=_const.PHANTOM,
+        )
+        for wrapper in dictionary.values():
+            if isinstance(wrapper.indicator, do_not_persist_on_phantom_measure):
+                wrappers.append(wrapper)
+        dictionary = abjad._inspect._get_persistent_wrappers(
+            dependent_wrappers=dependent_wrappers
+        )
+        for wrapper in dictionary.values():
+            if not isinstance(wrapper.indicator, do_not_persist_on_phantom_measure):
+                wrappers.append(wrapper)
+        for wrapper in wrappers:
+            leaf = wrapper.component
+            parentage = abjad.get.parentage(leaf)
+            first_context = parentage.get(abjad.Context)
+            indicator = wrapper.indicator
+            if isinstance(indicator, abjad.Glissando):
+                continue
+            if isinstance(indicator, abjad.RepeatTie):
+                continue
+            if isinstance(indicator, abjad.StopBeam):
+                continue
+            if isinstance(indicator, abjad.StopPhrasingSlur):
+                continue
+            if isinstance(indicator, abjad.StopPianoPedal):
+                continue
+            if isinstance(indicator, abjad.StopSlur):
+                continue
+            if isinstance(indicator, abjad.StopTextSpan):
+                continue
+            if isinstance(indicator, abjad.StopTrillSpan):
+                continue
+            if isinstance(indicator, abjad.Tie):
+                continue
+            prototype, manifest = None, None
+            if isinstance(indicator, abjad.Instrument):
+                manifest = "instruments"
+            elif isinstance(indicator, abjad.MetronomeMark):
+                manifest = "metronome_marks"
+            elif isinstance(indicator, abjad.MarginMarkup):
+                manifest = "margin_markups"
+            else:
+                prototype = type(indicator)
+                prototype = _prototype_string(prototype)
+            value = _scoping._indicator_to_key(indicator, manifests)
+            if value is None and environment != "docs":
+                raise Exception(
+                    "can not find persistent indicator in manifest:\n\n  {indicator}"
+                )
+            editions = wrapper.tag.editions()
+            if editions:
+                words = [str(_) for _ in editions]
+                string = ":".join(words)
+                editions = abjad.Tag(string)
+            else:
+                editions = None
+            memento = _memento.Memento(
+                context=first_context.name,
+                edition=editions,
+                manifest=manifest,
+                prototype=prototype,
+                synthetic_offset=wrapper.synthetic_offset,
+                value=value,
+            )
+            mementos.append(memento)
+        if mementos:
+            mementos.sort(key=lambda _: abjad.storage(_))
+            result[name] = mementos
+    dictionary = previous_persist.get("persistent_indicators")
+    if dictionary:
+        for context_name, mementos in dictionary.items():
+            if context_name not in result:
+                result[context_name] = mementos
+    return result
 
 
 def _extend_beam(leaf):
@@ -1963,7 +2338,6 @@ class SegmentMaker:
         "_midi",
         "_moment_markup",
         "_offset_to_measure_number",
-        # "_page_layout_profile",
         "_persist",
         "_preamble",
         "_previous_metadata",
@@ -2220,348 +2594,6 @@ class SegmentMaker:
                     self.commands.append(command_)
 
     ### PRIVATE METHODS ###
-
-    def _check_all_music_in_part_containers(self):
-        name = "all_music_in_part_containers"
-        if getattr(self.score_template, name, None) is not True:
-            return
-        indicator = _const.MULTIMEASURE_REST_CONTAINER
-        for voice in abjad.iterate.components(self.score, abjad.Voice):
-            for component in voice:
-                if isinstance(component, (abjad.MultimeasureRest, abjad.Skip)):
-                    continue
-                if abjad.get.has_indicator(component, _const.HIDDEN):
-                    continue
-                if abjad.get.has_indicator(component, indicator):
-                    continue
-                if (
-                    type(component) is abjad.Container
-                    and component.identifier
-                    and component.identifier.startswith("%*% ")
-                ):
-                    continue
-                message = f"{voice.name} contains {component!r}"
-                message += " outside part container."
-                raise Exception(message)
-
-    def _check_doubled_dynamics(self):
-        for leaf in abjad.iterate.leaves(self.score):
-            dynamics = abjad.get.indicators(leaf, abjad.Dynamic)
-            if 1 < len(dynamics):
-                voice = abjad.get.parentage(leaf).get(abjad.Voice)
-                message = f"leaf {str(leaf)} in {voice.name} has"
-                message += f" {len(dynamics)} dynamics attached:"
-                for dynamic in dynamics:
-                    message += f"\n   {dynamic!s}"
-                raise Exception(message)
-
-    def _check_duplicate_part_assignments(self):
-        dictionary = self._container_to_part_assignment
-        if not dictionary:
-            return
-        if not self.score_template:
-            return
-        part_manifest = self.score_template.part_manifest
-        if not part_manifest:
-            return
-        part_to_timespans = abjad.OrderedDict()
-        for identifier, (part_assignment, timespan) in dictionary.items():
-            for part in part_manifest.expand(part_assignment):
-                if part.name not in part_to_timespans:
-                    part_to_timespans[part.name] = []
-                part_to_timespans[part.name].append(timespan)
-        messages = []
-        for part_name, timespans in part_to_timespans.items():
-            if len(timespans) <= 1:
-                continue
-            timespan_list = abjad.TimespanList(timespans)
-            if timespan_list.compute_logical_and():
-                message = f"  Part {part_name!r} is assigned"
-                message += " to overlapping containers ..."
-                messages.append(message)
-        if messages:
-            message = "\n" + "\n".join(messages)
-            raise Exception(message)
-
-    def _check_persistent_indicators(self):
-        if self.do_not_check_persistence:
-            return
-        if self.environment == "docs":
-            return
-        indicator = _const.SOUNDS_DURING_SEGMENT
-        for voice in abjad.iterate.components(self.score, abjad.Voice):
-            if not abjad.get.has_indicator(voice, indicator):
-                continue
-            for i, leaf in enumerate(abjad.iterate.leaves(voice)):
-                self._check_persistent_indicators_for_leaf(voice.name, leaf, i)
-
-    def _check_persistent_indicators_for_leaf(self, voice, leaf, i):
-        prototype = (
-            _indicators.Accelerando,
-            abjad.MetronomeMark,
-            _indicators.Ritardando,
-        )
-        mark = abjad.get.effective(leaf, prototype)
-        if mark is None:
-            message = f"{voice} leaf {i} ({leaf!s}) missing metronome mark."
-            raise Exception(message)
-        instrument = abjad.get.effective(leaf, abjad.Instrument)
-        if instrument is None:
-            message = f"{voice} leaf {i} ({leaf!s}) missing instrument."
-            raise Exception(message)
-        if not self.score_template.do_not_require_margin_markup:
-            markup = abjad.get.effective(leaf, abjad.MarginMarkup)
-            if markup is None:
-                message = f"{voice} leaf {i} ({leaf!s}) missing margin markup."
-                raise Exception(message)
-        clef = abjad.get.effective(leaf, abjad.Clef)
-        if clef is None:
-            raise Exception(f"{voice} leaf {i} ({leaf!s}) missing clef.")
-
-    def _check_wellformedness(self):
-        if self.do_not_check_wellformedness:
-            return
-        check_beamed_long_notes = not self.do_not_check_beamed_long_notes
-        check_out_of_range_pitches = not self.do_not_check_out_of_range_pitches
-        if not abjad.wf.wellformed(
-            self.score,
-            check_beamed_long_notes=check_beamed_long_notes,
-            check_out_of_range_pitches=check_out_of_range_pitches,
-        ):
-            message = abjad.wf.tabulate_wellformedness(
-                self.score,
-                check_beamed_long_notes=check_beamed_long_notes,
-                check_out_of_range_pitches=check_out_of_range_pitches,
-            )
-            raise Exception("\n" + message)
-
-    def _clean_up_laissez_vibrer_tie_direction(self):
-        default = abjad.Clef("treble")
-        for note in abjad.iterate.leaves(self.score, abjad.Note):
-            if note.written_duration < 1:
-                continue
-            if not abjad.get.has_indicator(note, abjad.LaissezVibrer):
-                continue
-            clef = abjad.get.effective(note, abjad.Clef, default=default)
-            staff_position = abjad.StaffPosition.from_pitch_and_clef(
-                note.written_pitch,
-                clef,
-            )
-            if staff_position == abjad.StaffPosition(0):
-                abjad.override(note).laissez_vibrer_tie.direction = abjad.Up
-
-    def _clean_up_repeat_tie_direction(self):
-        default = abjad.Clef("treble")
-        for leaf in abjad.iterate.leaves(self.score, pitched=True):
-            if leaf.written_duration < 1:
-                continue
-            if not abjad.get.has_indicator(leaf, abjad.RepeatTie):
-                continue
-            clef = abjad.get.effective(leaf, abjad.Clef, default=default)
-            if hasattr(leaf, "written_pitch"):
-                note_heads = [leaf.note_head]
-            else:
-                note_heads = leaf.note_heads
-            for note_head in note_heads:
-                staff_position = abjad.StaffPosition.from_pitch_and_clef(
-                    note_head.written_pitch, clef
-                )
-                if staff_position.number == 0:
-                    repeat_tie = abjad.get.indicator(leaf, abjad.RepeatTie)
-                    abjad.tweak(repeat_tie).direction = abjad.Up
-                    break
-
-    def _clean_up_on_beat_grace_containers(self):
-        prototype = abjad.OnBeatGraceContainer
-        for container in abjad.select(self.score).components(prototype):
-            container._match_anchor_leaf()
-            container._set_leaf_durations()
-            container._attach_lilypond_one_voice()
-
-    def _clean_up_rhythm_maker_voice_names(self):
-        for voice in abjad.iterate.components(self.score, abjad.Voice):
-            if voice.name == "Rhythm_Maker_Music_Voice":
-                outer = abjad.get.parentage(voice).get(abjad.Voice, 1)
-                voice.name = outer.name
-
-    def _clone_segment_initial_short_instrument_name(self):
-        if self.first_segment:
-            return
-        prototype = abjad.MarginMarkup
-        for context in abjad.iterate.components(self.score, abjad.Context):
-            first_leaf = abjad.get.leaf(context, 0)
-            if abjad.get.has_indicator(first_leaf, abjad.StartMarkup):
-                continue
-            margin_markup = abjad.get.indicator(first_leaf, prototype)
-            if margin_markup is None:
-                continue
-            if isinstance(margin_markup.markup, str):
-                markup = margin_markup.markup
-            else:
-                markup = abjad.new(margin_markup.markup)
-            start_markup = abjad.StartMarkup(
-                context=margin_markup.context,
-                format_slot=margin_markup.format_slot,
-                markup=markup,
-            )
-            abjad.attach(
-                start_markup,
-                first_leaf,
-                tag=_scoping.site(_frame(), self),
-            )
-
-    def _collect_alive_during_segment(self):
-        result = []
-        for context in abjad.iterate.components(self.score, abjad.Context):
-            if context.name not in result:
-                result.append(context.name)
-        return result
-
-    def _collect_metadata(self):
-        metadata, persist = abjad.OrderedDict(), abjad.OrderedDict()
-        persist["alive_during_segment"] = self._collect_alive_during_segment()
-        # make-layout-ly scripts adds bol measure numbers to metadata
-        bol_measure_numbers = self.metadata.get("bol_measure_numbers")
-        if bol_measure_numbers:
-            metadata["bol_measure_numbers"] = bol_measure_numbers
-        if self._container_to_part_assignment:
-            value = self._container_to_part_assignment
-            persist["container_to_part_assignment"] = value
-        if self._duration is not None:
-            metadata["duration"] = self._duration
-        if self._fermata_measure_numbers:
-            metadata["fermata_measure_numbers"] = self._fermata_measure_numbers
-        dictionary = self.metadata.get("first_appearance_margin_markup")
-        if dictionary:
-            metadata["first_appearance_margin_markup"] = dictionary
-        metadata["first_measure_number"] = self._get_first_measure_number()
-        metadata["final_measure_number"] = self._get_final_measure_number()
-        if self._final_measure_is_fermata is True:
-            metadata["final_measure_is_fermata"] = True
-        dictionary = self._collect_persistent_indicators()
-        if dictionary:
-            persist["persistent_indicators"] = dictionary
-        if self._start_clock_time is not None:
-            metadata["start_clock_time"] = self._start_clock_time
-        if self._stop_clock_time is not None:
-            metadata["stop_clock_time"] = self._stop_clock_time
-        metadata["time_signatures"] = self._cached_time_signatures
-        if self.voice_metadata:
-            persist["voice_metadata"] = self.voice_metadata
-        self.metadata.clear()
-        self.metadata.update(metadata)
-        self.metadata.sort(recurse=True)
-        for key, value in self.metadata.items():
-            if not bool(value):
-                message = f"{key} metadata should be nonempty"
-                message += f" (not {value!r})."
-                raise Exception(message)
-        self.persist.clear()
-        self.persist.update(persist)
-        self.persist.sort(recurse=True)
-        for key, value in self.persist.items():
-            if not bool(value):
-                message = f"{key} persist should be nonempty"
-                message += f" (not {value!r})."
-                raise Exception(message)
-
-    def _collect_persistent_indicators(self):
-        result = abjad.OrderedDict()
-        contexts = abjad.iterate.components(self.score, abjad.Context)
-        contexts = list(contexts)
-        contexts.sort(key=lambda _: _.name)
-        name_to_wrappers = abjad.OrderedDict()
-        for context in contexts:
-            if context.name not in name_to_wrappers:
-                name_to_wrappers[context.name] = []
-            wrappers = context._dependent_wrappers[:]
-            name_to_wrappers[context.name].extend(wrappers)
-        do_not_persist_on_phantom_measure = (
-            abjad.Instrument,
-            abjad.MetronomeMark,
-            abjad.MarginMarkup,
-            abjad.TimeSignature,
-        )
-        for name, dependent_wrappers in name_to_wrappers.items():
-            mementos = []
-            wrappers = []
-            dictionary = abjad._inspect._get_persistent_wrappers(
-                dependent_wrappers=dependent_wrappers,
-                omit_with_indicator=_const.PHANTOM,
-            )
-            for wrapper in dictionary.values():
-                if isinstance(wrapper.indicator, do_not_persist_on_phantom_measure):
-                    wrappers.append(wrapper)
-            dictionary = abjad._inspect._get_persistent_wrappers(
-                dependent_wrappers=dependent_wrappers
-            )
-            for wrapper in dictionary.values():
-                if not isinstance(wrapper.indicator, do_not_persist_on_phantom_measure):
-                    wrappers.append(wrapper)
-            for wrapper in wrappers:
-                leaf = wrapper.component
-                parentage = abjad.get.parentage(leaf)
-                first_context = parentage.get(abjad.Context)
-                indicator = wrapper.indicator
-                if isinstance(indicator, abjad.Glissando):
-                    continue
-                if isinstance(indicator, abjad.RepeatTie):
-                    continue
-                if isinstance(indicator, abjad.StopBeam):
-                    continue
-                if isinstance(indicator, abjad.StopPhrasingSlur):
-                    continue
-                if isinstance(indicator, abjad.StopPianoPedal):
-                    continue
-                if isinstance(indicator, abjad.StopSlur):
-                    continue
-                if isinstance(indicator, abjad.StopTextSpan):
-                    continue
-                if isinstance(indicator, abjad.StopTrillSpan):
-                    continue
-                if isinstance(indicator, abjad.Tie):
-                    continue
-                prototype, manifest = None, None
-                if isinstance(indicator, abjad.Instrument):
-                    manifest = "instruments"
-                elif isinstance(indicator, abjad.MetronomeMark):
-                    manifest = "metronome_marks"
-                elif isinstance(indicator, abjad.MarginMarkup):
-                    manifest = "margin_markups"
-                else:
-                    prototype = type(indicator)
-                    prototype = _prototype_string(prototype)
-                value = _scoping._indicator_to_key(indicator, self.manifests)
-                if value is None and self.environment != "docs":
-                    raise Exception(
-                        "can not find persistent indicator in manifest:\n\n"
-                        f"  {indicator}"
-                    )
-                editions = wrapper.tag.editions()
-                if editions:
-                    words = [str(_) for _ in editions]
-                    string = ":".join(words)
-                    editions = abjad.Tag(string)
-                else:
-                    editions = None
-                memento = _memento.Memento(
-                    context=first_context.name,
-                    edition=editions,
-                    manifest=manifest,
-                    prototype=prototype,
-                    synthetic_offset=wrapper.synthetic_offset,
-                    value=value,
-                )
-                mementos.append(memento)
-            if mementos:
-                mementos.sort(key=lambda _: abjad.storage(_))
-                result[name] = mementos
-        dictionary = self.previous_persist.get("persistent_indicators")
-        if dictionary:
-            for context_name, mementos in dictionary.items():
-                if context_name not in result:
-                    result[context_name] = mementos
-        return result
 
     def _color_mock_pitch(self):
         indicator = _const.MOCK
@@ -4203,7 +4235,7 @@ class SegmentMaker:
                     self.voice_metadata,
                 )
                 self._segment_duration = segment_duration
-                self._clean_up_rhythm_maker_voice_names()
+                _clean_up_rhythm_maker_voice_names(self.score)
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
         commands = abjad.String("command").pluralize(command_count)
@@ -4257,7 +4289,10 @@ class SegmentMaker:
         # TODO: optimize by consolidating score iteration:
         with abjad.Timer() as timer:
             with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
-                self._clone_segment_initial_short_instrument_name()
+                _clone_segment_initial_short_instrument_name(
+                    self.first_segment,
+                    self.score,
+                )
                 self._remove_redundant_time_signatures()
                 result = _cache_fermata_measure_numbers(
                     self.score,
@@ -4280,13 +4315,18 @@ class SegmentMaker:
                 self._set_intermittent_to_staff_position_zero()
                 self._color_not_yet_pitched()
                 self._set_not_yet_pitched_to_staff_position_zero()
-                self._clean_up_repeat_tie_direction()
-                self._clean_up_laissez_vibrer_tie_direction()
+                _clean_up_repeat_tie_direction(self.score)
+                _clean_up_laissez_vibrer_tie_direction(self.score)
                 if self.error_on_not_yet_pitched:
                     error_on_not_yet_pitched(self.score)
-                self._check_doubled_dynamics()
+                _check_doubled_dynamics(self.score)
                 color_out_of_range_pitches(self.score)
-                self._check_persistent_indicators()
+                _check_persistent_indicators(
+                    self.do_not_check_persistence,
+                    self.environment,
+                    self.score,
+                    self.score_template,
+                )
                 color_repeat_pitch_classes(self.score)
                 self._color_octaves()
                 _attach_shadow_tie_indicators(self.score)
@@ -4307,13 +4347,21 @@ class SegmentMaker:
                     test_container_identifiers=self.test_container_identifiers,
                 )
                 self._container_to_part_assignment = container_to_part_assignment
-                self._check_all_music_in_part_containers()
-                self._check_duplicate_part_assignments()
+                _check_all_music_in_part_containers(self.score, self.score_template)
+                _check_duplicate_part_assignments(
+                    self._container_to_part_assignment,
+                    self.score_template,
+                )
                 self._move_global_rests()
             # mutates offsets:
             self._move_global_context()
-            self._clean_up_on_beat_grace_containers()
-            self._check_wellformedness()
+            _clean_up_on_beat_grace_containers(self.score)
+            _check_wellformedness(
+                self.do_not_check_beamed_long_notes,
+                self.do_not_check_out_of_range_pitches,
+                self.do_not_check_wellformedness,
+                self.score,
+            )
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
         if not do_not_print_timing and self.environment != "docs":
@@ -4328,7 +4376,27 @@ class SegmentMaker:
         with abjad.Timer() as timer:
             self._label_clock_time()
             _activate_tags(self.score, self.activate)
-            self._collect_metadata()
+            _collect_metadata(
+                self._container_to_part_assignment,
+                self._duration,
+                self._fermata_measure_numbers,
+                self._final_measure_is_fermata,
+                self._get_final_measure_number(),
+                self._get_first_measure_number(),
+                self.metadata,
+                self.persist,
+                _collect_persistent_indicators(
+                    self.environment,
+                    self.manifests,
+                    self.previous_persist,
+                    self.score,
+                ),
+                self.score,
+                self._start_clock_time,
+                self._stop_clock_time,
+                self._cached_time_signatures,
+                self.voice_metadata,
+            )
             self._style_phantom_measures()
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
