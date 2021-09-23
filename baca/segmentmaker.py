@@ -394,6 +394,8 @@ def _attach_metronome_marks(parts_metric_modulation_multiplier, score):
             right_text=right_text,
             style=style,
         )
+        if not tag:
+            continue
         assert "METRONOME_MARK" in str(tag), repr(tag)
         if (
             isinstance(wrapper.indicator, abjad.MetronomeMark)
@@ -2890,12 +2892,7 @@ def _treat_untreated_persistent_wrappers(
     environment,
     manifests,
     score,
-    treat_untreated_persistent_wrappers,
 ):
-    if environment == "docs" and not treat_untreated_persistent_wrappers:
-        return
-    if environment == "layout":
-        return
     dynamic_prototype = (abjad.Dynamic, abjad.StartHairpin)
     tempo_prototype = (
         _indicators.Accelerando,
@@ -3433,6 +3430,12 @@ def error_on_not_yet_pitched(score):
         raise Exception(message)
 
 
+def segments():
+    return {
+        "treat_untreated_persistent_wrappers": True,
+    }
+
+
 def transpose_score(score):
     r"""
     Transposes ``score``.
@@ -3930,7 +3933,7 @@ class SegmentMaker:
         """
         Runs segment-maker.
         """
-        assert environment in (None, "docs", "layout"), repr(environment)
+        assert environment in (None, "docs"), repr(environment)
         self.environment = environment
         assert first_segment in (True, False)
         self.first_segment = first_segment
@@ -4073,12 +4076,12 @@ class SegmentMaker:
                 self._fermata_stop_offsets = result[1]
                 self._fermata_measure_numbers = result[2]
                 self._final_measure_is_fermata = result[3]
-                _treat_untreated_persistent_wrappers(
-                    self.environment,
-                    self.manifests,
-                    self.score,
-                    self.treat_untreated_persistent_wrappers,
-                )
+                if self.treat_untreated_persistent_wrappers:
+                    _treat_untreated_persistent_wrappers(
+                        self.environment,
+                        self.manifests,
+                        self.score,
+                    )
                 _attach_metronome_marks(
                     self.parts_metric_modulation_multiplier,
                     self.score,

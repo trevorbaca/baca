@@ -889,7 +889,6 @@ def make_layout_ly(spacing):
     )
     lilypond_file = maker.run(
         do_not_print_timing=True,
-        environment="layout",
         first_segment=True,
         page_layout_profile=page_layout_profile,
     )
