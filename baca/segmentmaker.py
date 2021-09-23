@@ -1687,6 +1687,108 @@ def _intercalate_silences(
     return selections, segment_duration
 
 
+def _label_clock_time(
+    clock_time_override,
+    fermata_measure_numbers,
+    first_measure_number,
+    previous_metadata,
+    score,
+):
+    skips = _selection.Selection(score["Global_Skips"]).skips()
+    previous_stop_clock_time = previous_metadata.get("stop_clock_time")
+    result = _calculate_clock_times(
+        score,
+        clock_time_override,
+        fermata_measure_numbers,
+        _get_first_measure_number(
+            first_measure_number,
+            previous_metadata,
+        ),
+        previous_stop_clock_time,
+    )
+    duration = result[0]
+    clock_times = result[1]
+    start_clock_time = result[2]
+    stop_clock_time = result[3]
+    #    if start_clock_time is not None:
+    #        self._start_clock_time = start_clock_time
+    #    if clock_times is None:
+    #        return
+    # returns duration, start_clock_time, stop_clock_time
+    if clock_times is None:
+        return None, start_clock_time, None
+    #    self._duration = duration
+    #    self._stop_clock_time = stop_clock_time
+    total = len(skips)
+    clock_times = clock_times[:total]
+    first_measure_number = _get_first_measure_number(
+        first_measure_number,
+        previous_metadata,
+    )
+    final_clock_time = clock_times[-1]
+    final_clock_string = final_clock_time.to_clock_string()
+    final_seconds = int(final_clock_time)
+    final_fermata_string = f"{final_seconds}''"
+    final_measure_number = first_measure_number + total - 1
+    final_is_fermata = False
+    if final_measure_number in fermata_measure_numbers:
+        final_is_fermata = True
+    for measure_index in range(len(skips)):
+        measure_number = first_measure_number + measure_index
+        is_fermata = False
+        if measure_number in fermata_measure_numbers:
+            is_fermata = True
+        skip = skips[measure_index]
+        clock_time = clock_times[measure_index]
+        clock_string = clock_time.to_clock_string()
+        seconds = int(clock_time)
+        fermata_string = f"{seconds}''"
+        if measure_index < total - 1:
+            tag = _tags.CLOCK_TIME
+            if measure_index == total - 2:
+                if is_fermata and final_is_fermata:
+                    string = r"- \baca-start-ct-both-fermata"
+                    string += f' "{fermata_string}" "{final_fermata_string}"'
+                elif is_fermata and not final_is_fermata:
+                    string = r"- \baca-start-ct-both-left-fermata"
+                    string += f' "{fermata_string}" "[{final_clock_string}]"'
+                elif not is_fermata and final_is_fermata:
+                    string = r"- \baca-start-ct-both-right-fermata"
+                    string += f' "[{clock_string}]" "{final_fermata_string}"'
+                else:
+                    string = r"- \baca-start-ct-both"
+                    string += f' "[{clock_string}]" "[{final_clock_string}]"'
+            else:
+                if not is_fermata:
+                    string = r"- \baca-start-ct-left-only"
+                    string += f' "[{clock_string}]"'
+                else:
+                    seconds = int(clock_time)
+                    string = r"- \baca-start-ct-left-only-fermata"
+                    string += f' "{fermata_string}"'
+            start_text_span = abjad.StartTextSpan(
+                command=r"\bacaStartTextSpanCT", left_text=string
+            )
+            abjad.attach(
+                start_text_span,
+                skip,
+                context="GlobalSkips",
+                deactivate=True,
+                tag=tag.append(_scoping.site(_frame(), "SegmentMaker")),
+            )
+        if 0 < measure_index:
+            tag = _tags.CLOCK_TIME
+            stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanCT")
+            abjad.attach(
+                stop_text_span,
+                skip,
+                context="GlobalSkips",
+                deactivate=True,
+                tag=tag.append(_scoping.site(_frame(), "SegmentMaker")),
+            )
+    return duration, start_clock_time, stop_clock_time
+
+
 def _label_duration_multipliers(score):
     tag = _scoping.site(_frame(), "SegmentMaker")
     tag = tag.append(_tags.DURATION_MULTIPLIER)
@@ -1984,6 +2086,71 @@ def _make_global_skips(
     )
 
 
+def _make_lilypond_file(
+    clock_time_extra_offset,
+    do_not_include_layout_ly,
+    environment,
+    first_segment,
+    includes,
+    local_measure_number_extra_offset,
+    measure_number_extra_offset,
+    midi,
+    preamble,
+    score,
+    spacing_extra_offset,
+    stage_number_extra_offset,
+):
+    tag = _scoping.site(_frame(), "SegmentMaker")
+    items = []
+    includes_ = _get_lilypond_includes(
+        clock_time_extra_offset,
+        environment,
+        includes,
+        local_measure_number_extra_offset,
+        measure_number_extra_offset,
+        spacing_extra_offset,
+        stage_number_extra_offset,
+    )
+    if not first_segment:
+        lines = abjad.tag.double_tag(nonfirst_preamble.split("\n"), tag)
+        line = "\n".join(lines)
+        items.append(line)
+    if preamble:
+        string = "\n".join(preamble)
+        items.append(string)
+    block = abjad.Block(name="score")
+    block.items.append(score)
+    items.append(block)
+    lilypond_file = abjad.LilyPondFile(
+        items=items,
+        date_time_token=False,
+        includes=includes_,
+        tag=tag,
+        use_relative_includes=False,
+    )
+    if environment != "docs" and not do_not_include_layout_ly:
+        assert len(lilypond_file.score_block.items) == 1
+        score = lilypond_file.score_block.items[0]
+        assert isinstance(score, abjad.Score)
+        include = abjad.Container(tag=tag)
+        literal = abjad.LilyPondLiteral("", format_slot="absolute_before")
+        abjad.attach(literal, include, tag=None)
+        string = r'\include "layout.ly"'
+        literal = abjad.LilyPondLiteral(string, format_slot="opening")
+        abjad.attach(literal, include, tag=tag)
+        container = abjad.Container([include, score], simultaneous=True, tag=tag)
+        literal = abjad.LilyPondLiteral("", format_slot="absolute_before")
+        abjad.attach(literal, container, tag=None)
+        literal = abjad.LilyPondLiteral("", format_slot="closing")
+        abjad.attach(literal, container, tag=None)
+        lilypond_file.score_block.items[:] = [container]
+        lilypond_file.score_block.items.append("")
+    if midi:
+        block = abjad.Block(name="midi")
+        lilypond_file.score_block.items.append(block)
+    return lilypond_file
+
+
 def _make_measure_silences(
     measure_start_offsets,
     skips_instead_of_rests,
@@ -2201,6 +2368,94 @@ def _prototype_string(class_):
     if parts[-1] != class_.__name__:
         parts.append(class_.__name__)
     return f"{parts[0]}.{parts[-1]}"
+
+
+def _reapply_persistent_indicators(
+    manifests,
+    persistent_indicators,
+    score,
+):
+    for context in abjad.iterate.components(score, abjad.Context):
+        mementos = persistent_indicators.get(context.name)
+        if not mementos:
+            continue
+        for memento in mementos:
+            if memento.manifest is not None:
+                if memento.manifest == "instruments":
+                    dictionary = manifests["abjad.Instrument"]
+                elif memento.manifest == "margin_markups":
+                    dictionary = manifests["abjad.MarginMarkup"]
+                elif memento.manifest == "metronome_marks":
+                    dictionary = manifests["abjad.MetronomeMark"]
+                else:
+                    raise Exception(memento.manifest)
+            else:
+                dictionary = None
+            result = _analyze_memento(score, dictionary, context, memento)
+            if result is None:
+                continue
+            leaf, previous_indicator, status, edition, synthetic_offset = result
+            if isinstance(previous_indicator, abjad.TimeSignature):
+                if status in (None, "explicit"):
+                    continue
+                assert status == "reapplied", repr(status)
+                wrapper = abjad.get.wrapper(leaf, abjad.TimeSignature)
+                site = _scoping.site(_frame(), "SegmentMaker", n=1)
+                edition = edition.append(site)
+                wrapper.tag = wrapper.tag.append(edition)
+                _scoping.treat_persistent_wrapper(manifests, wrapper, status)
+                continue
+            # TODO: change to parameter comparison
+            prototype = (
+                _indicators.Accelerando,
+                abjad.MetronomeMark,
+                _indicators.Ritardando,
+            )
+            if isinstance(previous_indicator, prototype):
+                site = _scoping.site(_frame(), "SegmentMaker", n=2)
+                if status == "reapplied":
+                    wrapper = abjad.attach(
+                        previous_indicator,
+                        leaf,
+                        synthetic_offset=synthetic_offset,
+                        tag=edition.append(site),
+                        wrapper=True,
+                    )
+                    _scoping.treat_persistent_wrapper(manifests, wrapper, status)
+                else:
+                    assert status in ("redundant", None), repr(status)
+                    if status is None:
+                        status = "explicit"
+                    wrappers = abjad.get.wrappers(leaf, prototype)
+                    # lone metronome mark or lone tempo trend:
+                    if len(wrappers) == 1:
+                        wrapper = wrappers[0]
+                    # metronome mark + tempo trend:
+                    else:
+                        assert 1 < len(wrappers), repr(wrappers)
+                        prototype = abjad.MetronomeMark
+                        wrapper = abjad.get.wrapper(leaf, prototype)
+                    wrapper.tag = wrapper.tag.append(edition)
+                    _scoping.treat_persistent_wrapper(manifests, wrapper, status)
+                continue
+            attached = False
+            site = _scoping.site(_frame(), "SegmentMaker", n=3)
+            tag = edition.append(site)
+            if isinstance(previous_indicator, abjad.MarginMarkup):
+                tag = tag.append(_tags.NOT_PARTS)
+            try:
+                wrapper = abjad.attach(
+                    previous_indicator,
+                    leaf,
+                    synthetic_offset=synthetic_offset,
+                    tag=tag,
+                    wrapper=True,
+                )
+                attached = True
+            except abjad.PersistentIndicatorError:
+                pass
+            if attached:
+                _scoping.treat_persistent_wrapper(manifests, wrapper, status)
 
 
 def _reanalyze_reapplied_synthetic_wrappers(score):
@@ -3629,243 +3884,6 @@ class SegmentMaker:
                     command_ = abjad.new(command_, scope=scope_)
                     self.commands.append(command_)
 
-    ### PRIVATE METHODS ###
-
-    def _label_clock_time(self):
-        if self.environment == "docs":
-            return
-        skips = _selection.Selection(self.score["Global_Skips"]).skips()
-        previous_stop_clock_time = self.previous_metadata.get("stop_clock_time")
-        result = _calculate_clock_times(
-            self.score,
-            self.clock_time_override,
-            self._fermata_measure_numbers,
-            _get_first_measure_number(
-                self.first_measure_number,
-                self.previous_metadata,
-            ),
-            previous_stop_clock_time,
-        )
-        duration = result[0]
-        clock_times = result[1]
-        start_clock_time = result[2]
-        stop_clock_time = result[3]
-        if start_clock_time is not None:
-            self._start_clock_time = start_clock_time
-        if clock_times is None:
-            return
-        self._duration = duration
-        self._stop_clock_time = stop_clock_time
-        total = len(skips)
-        clock_times = clock_times[:total]
-        first_measure_number = _get_first_measure_number(
-            self.first_measure_number,
-            self.previous_metadata,
-        )
-        final_clock_time = clock_times[-1]
-        final_clock_string = final_clock_time.to_clock_string()
-        final_seconds = int(final_clock_time)
-        final_fermata_string = f"{final_seconds}''"
-        final_measure_number = first_measure_number + total - 1
-        final_is_fermata = False
-        if final_measure_number in self._fermata_measure_numbers:
-            final_is_fermata = True
-        for measure_index in range(len(skips)):
-            measure_number = first_measure_number + measure_index
-            is_fermata = False
-            if measure_number in self._fermata_measure_numbers:
-                is_fermata = True
-            skip = skips[measure_index]
-            clock_time = clock_times[measure_index]
-            clock_string = clock_time.to_clock_string()
-            seconds = int(clock_time)
-            fermata_string = f"{seconds}''"
-            if measure_index < total - 1:
-                tag = _tags.CLOCK_TIME
-                if measure_index == total - 2:
-                    if is_fermata and final_is_fermata:
-                        string = r"- \baca-start-ct-both-fermata"
-                        string += f' "{fermata_string}" "{final_fermata_string}"'
-                    elif is_fermata and not final_is_fermata:
-                        string = r"- \baca-start-ct-both-left-fermata"
-                        string += f' "{fermata_string}" "[{final_clock_string}]"'
-                    elif not is_fermata and final_is_fermata:
-                        string = r"- \baca-start-ct-both-right-fermata"
-                        string += f' "[{clock_string}]" "{final_fermata_string}"'
-                    else:
-                        string = r"- \baca-start-ct-both"
-                        string += f' "[{clock_string}]" "[{final_clock_string}]"'
-                else:
-                    if not is_fermata:
-                        string = r"- \baca-start-ct-left-only"
-                        string += f' "[{clock_string}]"'
-                    else:
-                        seconds = int(clock_time)
-                        string = r"- \baca-start-ct-left-only-fermata"
-                        string += f' "{fermata_string}"'
-                start_text_span = abjad.StartTextSpan(
-                    command=r"\bacaStartTextSpanCT", left_text=string
-                )
-                abjad.attach(
-                    start_text_span,
-                    skip,
-                    context="GlobalSkips",
-                    deactivate=True,
-                    tag=tag.append(_scoping.site(_frame(), "SegmentMaker")),
-                )
-            if 0 < measure_index:
-                tag = _tags.CLOCK_TIME
-                stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanCT")
-                abjad.attach(
-                    stop_text_span,
-                    skip,
-                    context="GlobalSkips",
-                    deactivate=True,
-                    tag=tag.append(_scoping.site(_frame(), "SegmentMaker")),
-                )
-
-    def _make_lilypond_file(self):
-        tag = _scoping.site(_frame(), "SegmentMaker")
-        items = []
-        includes = _get_lilypond_includes(
-            self.clock_time_extra_offset,
-            self.environment,
-            self.includes,
-            self.local_measure_number_extra_offset,
-            self.measure_number_extra_offset,
-            self.spacing_extra_offset,
-            self.stage_number_extra_offset,
-        )
-        if not self.first_segment:
-            lines = abjad.tag.double_tag(nonfirst_preamble.split("\n"), tag)
-            line = "\n".join(lines)
-            items.append(line)
-        if self.preamble:
-            string = "\n".join(self.preamble)
-            items.append(string)
-        block = abjad.Block(name="score")
-        block.items.append(self.score)
-        items.append(block)
-        lilypond_file = abjad.LilyPondFile(
-            items=items,
-            date_time_token=False,
-            includes=includes,
-            tag=tag,
-            use_relative_includes=False,
-        )
-        if self.environment != "docs" and not self.do_not_include_layout_ly:
-            assert len(lilypond_file.score_block.items) == 1
-            score = lilypond_file.score_block.items[0]
-            assert isinstance(score, abjad.Score)
-            include = abjad.Container(tag=tag)
-            literal = abjad.LilyPondLiteral("", format_slot="absolute_before")
-            abjad.attach(literal, include, tag=None)
-            string = r'\include "layout.ly"'
-            literal = abjad.LilyPondLiteral(string, format_slot="opening")
-            abjad.attach(literal, include, tag=tag)
-            container = abjad.Container([include, score], simultaneous=True, tag=tag)
-            literal = abjad.LilyPondLiteral("", format_slot="absolute_before")
-            abjad.attach(literal, container, tag=None)
-            literal = abjad.LilyPondLiteral("", format_slot="closing")
-            abjad.attach(literal, container, tag=None)
-            lilypond_file.score_block.items[:] = [container]
-            lilypond_file.score_block.items.append("")
-        if self.midi:
-            block = abjad.Block(name="midi")
-            lilypond_file.score_block.items.append(block)
-        self._lilypond_file = lilypond_file
-
-    def _reapply_persistent_indicators(self):
-        if self.first_segment:
-            return
-        dictionary = self.previous_persist.get("persistent_indicators")
-        if not dictionary:
-            return
-        for context in abjad.iterate.components(self.score, abjad.Context):
-            mementos = dictionary.get(context.name)
-            if not mementos:
-                continue
-            for memento in mementos:
-                if memento.manifest is not None:
-                    dictionary_ = getattr(self, memento.manifest)
-                else:
-                    dictionary_ = None
-                result = _analyze_memento(self.score, dictionary_, context, memento)
-                if result is None:
-                    continue
-                (
-                    leaf,
-                    previous_indicator,
-                    status,
-                    edition,
-                    synthetic_offset,
-                ) = result
-                if isinstance(previous_indicator, abjad.TimeSignature):
-                    if status in (None, "explicit"):
-                        continue
-                    assert status == "reapplied", repr(status)
-                    wrapper = abjad.get.wrapper(leaf, abjad.TimeSignature)
-                    site = _scoping.site(_frame(), "SegmentMaker", n=1)
-                    edition = edition.append(site)
-                    wrapper.tag = wrapper.tag.append(edition)
-                    _scoping.treat_persistent_wrapper(self.manifests, wrapper, status)
-                    continue
-                # TODO: change to parameter comparison
-                prototype = (
-                    _indicators.Accelerando,
-                    abjad.MetronomeMark,
-                    _indicators.Ritardando,
-                )
-                if isinstance(previous_indicator, prototype):
-                    site = _scoping.site(_frame(), "SegmentMaker", n=2)
-                    if status == "reapplied":
-                        wrapper = abjad.attach(
-                            previous_indicator,
-                            leaf,
-                            synthetic_offset=synthetic_offset,
-                            tag=edition.append(site),
-                            wrapper=True,
-                        )
-                        _scoping.treat_persistent_wrapper(
-                            self.manifests, wrapper, status
-                        )
-                    else:
-                        assert status in ("redundant", None), repr(status)
-                        if status is None:
-                            status = "explicit"
-                        wrappers = abjad.get.wrappers(leaf, prototype)
-                        # lone metronome mark or lone tempo trend:
-                        if len(wrappers) == 1:
-                            wrapper = wrappers[0]
-                        # metronome mark + tempo trend:
-                        else:
-                            assert 1 < len(wrappers), repr(wrappers)
-                            prototype = abjad.MetronomeMark
-                            wrapper = abjad.get.wrapper(leaf, prototype)
-                        wrapper.tag = wrapper.tag.append(edition)
-                        _scoping.treat_persistent_wrapper(
-                            self.manifests, wrapper, status
-                        )
-                    continue
-                attached = False
-                site = _scoping.site(_frame(), "SegmentMaker", n=3)
-                tag = edition.append(site)
-                if isinstance(previous_indicator, abjad.MarginMarkup):
-                    tag = tag.append(_tags.NOT_PARTS)
-                try:
-                    wrapper = abjad.attach(
-                        previous_indicator,
-                        leaf,
-                        synthetic_offset=synthetic_offset,
-                        tag=tag,
-                        wrapper=True,
-                    )
-                    attached = True
-                except abjad.PersistentIndicatorError:
-                    pass
-                if attached:
-                    _scoping.treat_persistent_wrapper(self.manifests, wrapper, status)
-
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -4193,7 +4211,20 @@ class SegmentMaker:
         self._segment_number = segment_number
         with abjad.Timer() as timer:
             self._score = _make_score(self.indicator_defaults, self.score_template)
-            self._make_lilypond_file()
+            self._lilypond_file = _make_lilypond_file(
+                self.clock_time_extra_offset,
+                self.do_not_include_layout_ly,
+                self.environment,
+                self.first_segment,
+                self.includes,
+                self.local_measure_number_extra_offset,
+                self.measure_number_extra_offset,
+                self.midi,
+                self.preamble,
+                self.score,
+                self.spacing_extra_offset,
+                self.stage_number_extra_offset,
+            )
             _make_global_skips(
                 self.do_not_append_phantom_measure,
                 self.first_segment,
@@ -4249,7 +4280,13 @@ class SegmentMaker:
                 first_segment=self.first_segment,
                 manifests=self.manifests,
             )
-            self._reapply_persistent_indicators()
+            persistent_indicators = self.previous_persist.get("persistent_indicators")
+            if persistent_indicators and not self.first_segment:
+                _reapply_persistent_indicators(
+                    self.manifests,
+                    persistent_indicators,
+                    self.score,
+                )
             _attach_first_appearance_score_template_defaults(
                 self.score,
                 first_segment=self.first_segment,
@@ -4409,7 +4446,17 @@ class SegmentMaker:
         if not do_not_print_timing and self.environment != "docs":
             print(f"Offsets-in-seconds update {count} {seconds} ...")
         with abjad.Timer() as timer:
-            self._label_clock_time()
+            if self.environment != "docs":
+                result = _label_clock_time(
+                    self.clock_time_override,
+                    self._fermata_measure_numbers,
+                    self.first_measure_number,
+                    self.previous_metadata,
+                    self.score,
+                )
+                self._duration = result[0]
+                self._start_clock_time = result[1]
+                self._stop_clock_time = result[2]
             _activate_tags(self.score, self.activate)
             first_measure_number = _get_first_measure_number(
                 self.first_measure_number,
@@ -4444,6 +4491,6 @@ class SegmentMaker:
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
         if not do_not_print_timing and self.environment != "docs":
-            print(f"Clocktime markup {count} {seconds} ...")
+            print(f"Clock time markup {count} {seconds} ...")
         assert isinstance(self.lilypond_file, abjad.LilyPondFile)
         return self.lilypond_file
