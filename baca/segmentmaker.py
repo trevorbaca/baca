@@ -44,11 +44,7 @@ def _activate_tags(score, tags):
                     break
 
 
-def _add_container_identifiers(
-    score, segment_number, environment=None, test_container_identifiers=False
-):
-    if environment == "docs" and not test_container_identifiers:
-        return
+def _add_container_identifiers(score, segment_number):
     if segment_number is not None:
         assert segment_number, repr(segment_number)
         segment_number = f"segment.{segment_number}"
@@ -3430,10 +3426,16 @@ def error_on_not_yet_pitched(score):
         raise Exception(message)
 
 
-def segments():
-    return {
-        "treat_untreated_persistent_wrappers": True,
-    }
+def segments(runtime=False):
+    if runtime:
+        dictionary = {
+            "add_container_identifiers": True,
+        }
+    else:
+        dictionary = {
+            "treat_untreated_persistent_wrappers": True,
+        }
+    return dictionary
 
 
 def transpose_score(score):
@@ -3599,7 +3601,6 @@ class SegmentMaker:
     __slots__ = (
         "_cache",
         "_cached_time_signatures",
-        "_container_to_part_assignment",
         "_do_not_append_phantom_measure",
         "_duration",
         "_fermata_measure_numbers",
@@ -3661,7 +3662,6 @@ class SegmentMaker:
         "spacing_extra_offset",
         "stage_markup",
         "stage_number_extra_offset",
-        "test_container_identifiers",
         "time_signatures",
         "transpose_score",
         "treat_untreated_persistent_wrappers",
@@ -3712,7 +3712,6 @@ class SegmentMaker:
         spacing_extra_offset=None,
         stage_markup=None,
         stage_number_extra_offset=None,
-        test_container_identifiers=False,
         time_signatures=None,
         transpose_score=False,
         treat_untreated_persistent_wrappers=False,
@@ -3740,7 +3739,6 @@ class SegmentMaker:
         self._cached_time_signatures = []
         if deactivate is not None:
             assert all(isinstance(_, abjad.Tag) for _ in deactivate)
-        self._container_to_part_assignment = None
         self.deactivate = deactivate
         if do_not_append_phantom_measure is not None:
             do_not_append_phantom_measure = bool(do_not_append_phantom_measure)
@@ -3810,9 +3808,6 @@ class SegmentMaker:
         self.stage_number_extra_offset = stage_number_extra_offset
         self._start_clock_time = None
         self._stop_clock_time = None
-        if test_container_identifiers is not None:
-            test_container_identifiers = bool(test_container_identifiers)
-        self.test_container_identifiers = test_container_identifiers
         assert transpose_score in (True, False)
         self.transpose_score = transpose_score
         assert treat_untreated_persistent_wrappers in (True, False)
@@ -3919,6 +3914,7 @@ class SegmentMaker:
 
     def run(
         self,
+        add_container_identifiers=False,
         do_not_print_timing=False,
         environment=None,
         first_segment=True,  # TODO: default to false
@@ -4145,18 +4141,17 @@ class SegmentMaker:
                 )
                 _deactivate_tags(self.deactivate, self.score)
                 _remove_docs_tags(self.environment, self.remove, self.score)
-                container_to_part_assignment = _add_container_identifiers(
-                    self.score,
-                    self.segment_number,
-                    environment=self.environment,
-                    test_container_identifiers=self.test_container_identifiers,
-                )
-                self._container_to_part_assignment = container_to_part_assignment
-                _check_all_music_in_part_containers(self.score, self.score_template)
-                _check_duplicate_part_assignments(
-                    self._container_to_part_assignment,
-                    self.score_template,
-                )
+                container_to_part_assignment = None
+                if add_container_identifiers:
+                    container_to_part_assignment = _add_container_identifiers(
+                        self.score,
+                        self.segment_number,
+                    )
+                    _check_all_music_in_part_containers(self.score, self.score_template)
+                    _check_duplicate_part_assignments(
+                        container_to_part_assignment,
+                        self.score_template,
+                    )
                 _move_global_rests(self.score, self.score_template)
             # mutates offsets:
             if self.environment == "docs":
@@ -4198,7 +4193,7 @@ class SegmentMaker:
             )
             final_measure_number = first_measure_number + self.measure_count - 1
             _collect_metadata(
-                self._container_to_part_assignment,
+                container_to_part_assignment,
                 self._duration,
                 self._fermata_measure_numbers,
                 self._final_measure_is_fermata,

@@ -99,9 +99,8 @@ def assign_parts(
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
         ...     score_template=closure,
-        ...     test_container_identifiers=True,
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> part_assignment = baca.parts.PartAssignment('Flute')
 
