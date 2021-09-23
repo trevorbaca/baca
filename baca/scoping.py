@@ -1164,7 +1164,10 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         ...     baca.make_even_divisions(),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1257,7 +1260,10 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         ...     baca.make_even_divisions(),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1401,7 +1407,10 @@ def only_parts(command: _command_typing) -> _command_typing:
         ...     ),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::

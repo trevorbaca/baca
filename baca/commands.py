@@ -59,7 +59,10 @@ def assign_parts(
         ...     baca.pitch("E4"),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         >>> score = lilypond_file["Score"]
@@ -111,7 +114,10 @@ def assign_parts(
         ...     baca.pitches("E4 F4"),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         Traceback (most recent call last):
             ...
         Exception: Music_Voice does not allow Flute_Voice part assignment:
@@ -158,7 +164,10 @@ def bcps(
             ...     baca.text_spanner_staff_padding(2.5),
             ...     )
 
-            >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -506,7 +515,10 @@ def container(
         ...     baca.pitches('E4 F4'),
         ...     )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
 
         >>> score = lilypond_file["Score"]
         >>> string = abjad.lilypond(score)
@@ -580,7 +592,10 @@ def cross_staff(
         ...     ),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
 
         ..  docs::
 
@@ -865,7 +880,10 @@ def finger_pressure_transition(
         ...     baca.pitch('C5'),
         ...     )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1065,7 +1083,10 @@ def glissando(
         ...     baca.glissando()
         ...     )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1146,7 +1167,10 @@ def glissando(
         ...     baca.glissando(selector=baca.selectors.plts((-2, None))),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1217,7 +1241,10 @@ def glissando(
         ...         ),
         ...     )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1313,7 +1340,10 @@ def glissando(
         ...         ),
         ...     )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1461,7 +1491,10 @@ def invisible_music(
         ...     baca.pitch('C5'),
         ...     )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::

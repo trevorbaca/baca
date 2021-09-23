@@ -16,7 +16,10 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     baca.label(lambda _: abjad.label.with_indices(_)),
     ... )
 
-    >>> lilypond_file = maker.run(environment="docs")
+    >>> lilypond_file = maker.run(
+    ...     environment="docs",
+    ...     remove_tags=baca.tags.documentation_removal_tags(),
+    ... )
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -99,7 +102,10 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     commands,
     ... )
 
-    >>> lilypond_file = maker.run(environment="docs")
+    >>> lilypond_file = maker.run(
+    ...     environment="docs",
+    ...     remove_tags=baca.tags.documentation_removal_tags(),
+    ... )
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::

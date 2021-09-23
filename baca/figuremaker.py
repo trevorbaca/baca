@@ -2144,7 +2144,10 @@ class Imbrication:
             ...     baca.voice_two(),
             ... )
 
-            >>> lilypond_file = maker.run(environment="docs")
+            >>> lilypond_file = maker.run(
+            ...     environment="docs",
+            ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -2361,7 +2364,10 @@ class Imbrication:
             ...     baca.voice_two(),
             ... )
 
-            >>> lilypond_file = maker.run(environment="docs")
+            >>> lilypond_file = maker.run(
+            ...     environment="docs",
+            ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -2557,7 +2563,10 @@ class Imbrication:
             ...     baca.voice_two(),
             ... )
 
-            >>> lilypond_file = maker.run(environment="docs")
+            >>> lilypond_file = maker.run(
+            ...     environment="docs",
+            ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -2774,7 +2783,10 @@ class Imbrication:
             ...     baca.voice_two(),
             ... )
 
-            >>> lilypond_file = maker.run(environment="docs")
+            >>> lilypond_file = maker.run(
+            ...     environment="docs",
+            ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -7074,7 +7086,10 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...     baca.voice_two(),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -7218,7 +7233,10 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...     baca.voice_two(),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -7400,7 +7418,10 @@ def extend_beam(
         ...     baca.voice_two(),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -7594,7 +7615,10 @@ def imbricate(
         ...     baca.voice_two(),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -7768,7 +7792,10 @@ def imbricate(
         ...     time_signatures=accumulator.time_signatures,
         ... )
         >>> accumulator.populate_segment_maker(maker)
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -7989,7 +8016,10 @@ def imbricate(
         ...     baca.voice_two(),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -8192,7 +8222,10 @@ def imbricate(
         ...     baca.voice_two(),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -8329,7 +8362,10 @@ def imbricate(
         ...     baca.voice_two(),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -8490,7 +8526,10 @@ def imbricate(
         ...     baca.voice_two(),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::

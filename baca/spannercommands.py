@@ -236,7 +236,10 @@ def beam(
         ...     baca.pitch('C4'),
         ...     )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::

@@ -39,7 +39,10 @@ class AccidentalAdjustmentCommand(_scoping.Command):
         ...     baca.pitches("E4 F4"),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -487,7 +490,10 @@ class ClusterCommand(_scoping.Command):
             ...     baca.natural_clusters(widths=[3]),
             ... )
 
-            >>> lilypond_file = maker.run(environment="docs")
+            >>> lilypond_file = maker.run(
+            ...     environment="docs",
+            ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ... )
 
             ..  docs::
 
@@ -595,7 +601,10 @@ class ClusterCommand(_scoping.Command):
             ...     baca.clusters([3]),
             ... )
 
-            >>> lilypond_file = maker.run(environment="docs")
+            >>> lilypond_file = maker.run(
+            ...     environment="docs",
+            ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ... )
 
             ..  docs::
 
@@ -703,7 +712,10 @@ class ClusterCommand(_scoping.Command):
             ...     baca.clusters([3], start_pitch="G4"),
             ... )
 
-            >>> lilypond_file = maker.run(environment="docs")
+            >>> lilypond_file = maker.run(
+            ...     environment="docs",
+            ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ... )
 
             ..  docs::
 
@@ -819,7 +831,10 @@ class ClusterCommand(_scoping.Command):
             ...     baca.make_notes(repeat_ties=True),
             ... )
 
-            >>> lilypond_file = maker.run(environment="docs")
+            >>> lilypond_file = maker.run(
+            ...     environment="docs",
+            ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ... )
 
             ..  docs::
 
@@ -927,7 +942,10 @@ class ClusterCommand(_scoping.Command):
             ...     baca.make_notes(repeat_ties=True),
             ... )
 
-            >>> lilypond_file = maker.run(environment="docs")
+            >>> lilypond_file = maker.run(
+            ...     environment="docs",
+            ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ... )
 
             ..  docs::
 
@@ -1036,7 +1054,10 @@ class ClusterCommand(_scoping.Command):
             ...     baca.clusters([]),
             ... )
 
-            >>> lilypond_file = maker.run(environment="docs")
+            >>> lilypond_file = maker.run(
+            ...     environment="docs",
+            ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -1097,7 +1118,10 @@ class ColorFingeringCommand(_scoping.Command):
         ...     baca.ColorFingeringCommand(numbers=[0, 1, 2, 1]),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1459,7 +1483,10 @@ class MicrotoneDeviationCommand(_scoping.Command):
         ...     baca.deviation([0, 0.5, 0, -0.5]),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1612,7 +1639,10 @@ class OctaveDisplacementCommand(_scoping.Command):
         ...     ),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1878,7 +1908,10 @@ class PitchCommand(_scoping.Command):
         ...     baca.pitches([19, 13, 15, 16, 17, 23]),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1945,7 +1978,10 @@ class PitchCommand(_scoping.Command):
         ...     baca.pitches("C4 F4 F#4 <B4 C#5> D5"),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2012,7 +2048,10 @@ class PitchCommand(_scoping.Command):
         ...     baca.pitches("<C4 D4 E4 F4 G4 A4 B4 C4>", allow_repeats=True)
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2455,7 +2494,10 @@ class RegisterCommand(_scoping.Command):
         ...     ),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
 
         ..  docs::
 
@@ -2773,7 +2815,10 @@ class RegisterInterpolationCommand(_scoping.Command):
         ...     baca.register(12, 12),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
 
         ..  docs::
 
@@ -2872,7 +2917,10 @@ class RegisterInterpolationCommand(_scoping.Command):
         ...     baca.register(12, 0),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
 
         ..  docs::
 
@@ -2971,7 +3019,10 @@ class RegisterInterpolationCommand(_scoping.Command):
         ...     baca.register(0, 12),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
 
         ..  docs::
 
@@ -3070,7 +3121,10 @@ class RegisterInterpolationCommand(_scoping.Command):
         ...     baca.register(12, -12),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
 
         ..  docs::
 
@@ -3169,7 +3223,10 @@ class RegisterInterpolationCommand(_scoping.Command):
         ...     baca.register(-12, 12),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
 
         ..  docs::
 
@@ -5139,7 +5196,10 @@ def force_accidental(
         ...     baca.pitches("E4 F4"),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5430,7 +5490,10 @@ def pitch(
         ...     baca.pitch("<C4 D4 E4>"),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::

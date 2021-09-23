@@ -28,7 +28,10 @@ r"""
         ...     treat_untreated_persistent_wrappers=True,
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -100,7 +103,10 @@ r"""
         ...     baca.clef("treble"),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -184,6 +190,7 @@ r"""
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -267,6 +274,7 @@ r"""
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -341,7 +349,10 @@ r"""
         ...     baca.clef("treble", selector=baca.selectors.leaf(0)),
         ...     baca.clef("treble", selector=baca.selectors.leaf(1)),
         ... )
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -436,6 +447,7 @@ r"""
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -506,7 +518,10 @@ r"""
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -570,6 +585,7 @@ r"""
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -636,6 +652,7 @@ r"""
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -676,7 +693,6 @@ r"""
         Redundant dynamics color pink:
 
         >>> maker = baca.SegmentMaker(
-        ...     #SAFEappend_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
@@ -691,7 +707,10 @@ r"""
         ...     baca.dynamic('f', selector=baca.selectors.leaf(1)),
         ...     )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -757,6 +776,7 @@ r"""
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -809,7 +829,10 @@ r"""
         ...     baca.dynamic('sfz', selector=baca.selectors.leaf(1)),
         ...     )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -875,6 +898,7 @@ r"""
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -930,7 +954,10 @@ r"""
         ...     baca.dynamic('"mf"', selector=baca.selectors.leaf(1)),
         ...     )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -1009,7 +1036,10 @@ r"""
         ...     baca.make_notes(),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -1153,7 +1183,10 @@ r"""
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -1310,6 +1343,7 @@ r"""
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -1470,6 +1504,7 @@ r"""
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -1629,7 +1664,10 @@ r"""
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -1776,7 +1814,6 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     #SAFE2append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     instruments=instruments,
@@ -1808,6 +1845,7 @@ r"""
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -1984,7 +2022,10 @@ r"""
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -2146,7 +2187,10 @@ r"""
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -2320,6 +2364,7 @@ r"""
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -2504,6 +2549,7 @@ r"""
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -2686,7 +2732,10 @@ r"""
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -2900,6 +2949,7 @@ r"""
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -3091,7 +3141,10 @@ r"""
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -3190,7 +3243,10 @@ r"""
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -3299,6 +3355,7 @@ r"""
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -3377,7 +3434,6 @@ r"""
         Reapplied metronome marks color green:
 
         >>> maker = baca.SegmentMaker(
-        ...     #SAFE3append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     metronome_marks=metronome_marks,
@@ -3412,6 +3468,7 @@ r"""
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -3486,7 +3543,10 @@ r"""
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -3602,6 +3662,7 @@ r"""
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -3711,6 +3772,7 @@ r"""
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -3825,6 +3887,7 @@ r"""
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -3904,6 +3967,7 @@ r"""
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -3960,7 +4024,10 @@ r"""
         ...     baca.staff_lines(5),
         ...     )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -4027,6 +4094,7 @@ r"""
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -4096,6 +4164,7 @@ r"""
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -4152,7 +4221,10 @@ r"""
         ...     baca.staff_lines(5, selector=baca.selectors.leaf(1)),
         ...     )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -4197,7 +4269,6 @@ r"""
         Even at the beginning of a segment:
 
         >>> maker = baca.SegmentMaker(
-        ...     #SAFE5append_phantom_measure_in_docs=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
@@ -4225,6 +4296,7 @@ r"""
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -4305,7 +4377,10 @@ r"""
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -4416,6 +4491,7 @@ r"""
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -4505,6 +4581,7 @@ r"""
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -4585,7 +4662,10 @@ r"""
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -4685,6 +4765,7 @@ r"""
         ...     first_segment=False,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0

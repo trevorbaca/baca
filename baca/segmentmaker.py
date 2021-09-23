@@ -1304,11 +1304,8 @@ def _collect_persistent_indicators(
                 prototype = type(indicator)
                 prototype = _prototype_string(prototype)
             value = _scoping._indicator_to_key(indicator, manifests)
-            # if value is None and environment != "docs":
             if value is None:
-                raise Exception(
-                    f"can not find persistent indicator in manifest:\n\n  {indicator}"
-                )
+                raise Exception(f"can not find in manifest:\n\n  {indicator}")
             editions = wrapper.tag.editions()
             if editions:
                 words = [str(_) for _ in editions]
@@ -1351,8 +1348,6 @@ def _color_mock_pitch(score):
 
 
 def _color_not_yet_pitched(environment, score):
-    if environment == "docs":
-        return
     indicator = _const.NOT_YET_PITCHED
     tag = _scoping.site(_frame())
     tag = tag.append(_tags.NOT_YET_PITCHED_COLORING)
@@ -1517,8 +1512,6 @@ def _get_lilypond_includes(
     spacing_extra_offset,
     stage_number_extra_offset,
 ):
-    if environment == "docs":
-        return includes
     includes_ = ["../../stylesheet.ily"]
     if clock_time_extra_offset is not None:
         value = clock_time_extra_offset
@@ -2081,30 +2074,15 @@ def _make_global_skips(
 
 
 def _make_lilypond_file(
-    clock_time_extra_offset,
-    do_not_include_layout_ly,
-    environment,
     first_segment,
+    include_layout_ly,
     includes,
-    local_measure_number_extra_offset,
-    measure_number_extra_offset,
     midi,
     preamble,
     score,
-    spacing_extra_offset,
-    stage_number_extra_offset,
 ):
     tag = _scoping.site(_frame())
     items = []
-    includes_ = _get_lilypond_includes(
-        clock_time_extra_offset,
-        environment,
-        includes,
-        local_measure_number_extra_offset,
-        measure_number_extra_offset,
-        spacing_extra_offset,
-        stage_number_extra_offset,
-    )
     if not first_segment:
         lines = abjad.tag.double_tag(nonfirst_preamble.split("\n"), tag)
         line = "\n".join(lines)
@@ -2118,11 +2096,11 @@ def _make_lilypond_file(
     lilypond_file = abjad.LilyPondFile(
         items=items,
         date_time_token=False,
-        includes=includes_,
+        includes=includes,
         tag=tag,
         use_relative_includes=False,
     )
-    if environment != "docs" and not do_not_include_layout_ly:
+    if include_layout_ly:
         assert len(lilypond_file.score_block.items) == 1
         score = lilypond_file.score_block.items[0]
         assert isinstance(score, abjad.Score)
@@ -2493,17 +2471,14 @@ def _remove_redundant_time_signatures(do_not_append_phantom_measure, score):
     return cached_time_signatures
 
 
-def _remove_docs_tags(environment, remove, score):
-    tags = remove or []
-    if environment == "docs":
-        tags += _tags.documentation_removal_tags()
-    assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
+def _remove_docs_tags(environment, remove_tags, score):
+    assert all(isinstance(_, abjad.Tag) for _ in remove_tags), repr(remove_tags)
     for leaf in abjad.iterate.leaves(score):
         for wrapper in abjad.get.wrappers(leaf):
             if wrapper.tag is None:
                 continue
             for word in wrapper.tag:
-                if abjad.Tag(word) in tags:
+                if abjad.Tag(word) in remove_tags:
                     abjad.detach(wrapper, leaf)
                     break
 
@@ -2599,15 +2574,12 @@ def _set_not_yet_pitched_to_staff_position_zero(score):
 
 
 def _shift_measure_initial_clefs(
-    environment,
     manifests,
     offset_to_measure_number,
     previous_persist,
     score,
     score_template,
 ):
-    if environment == "docs":
-        return
     for staff in abjad.iterate.components(score, abjad.Staff):
         for leaf in abjad.iterate.leaves(staff):
             start_offset = abjad.get.timespan(leaf).start_offset
@@ -3089,7 +3061,10 @@ def color_octaves(score):
         ...     baca.clef("bass"),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3218,7 +3193,10 @@ def color_out_of_range_pitches(score):
         ...     baca.music(figures, do_not_check_total_duration=True),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.setting(lilypond_file["Score"]).autoBeaming = False
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3337,7 +3315,10 @@ def color_repeat_pitch_classes(score):
         ...     baca.music(figures, do_not_check_total_duration=True),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> score = lilypond_file["Score"]
         >>> abjad.setting(score).autoBeaming = False
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -3439,6 +3420,7 @@ def segments(runtime=False):
             "add_container_identifiers": True,
             "attach_rhythm_annotation_spanners": True,
             "check_persistent_indicators": True,
+            "include_layout_ly": True,
         }
     return dictionary
 
@@ -3467,7 +3449,10 @@ def transpose_score(score):
         ...     baca.pitches("E4 F4"),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3538,7 +3523,10 @@ def transpose_score(score):
         ...     baca.pitches("E4 F4"),
         ... )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3630,8 +3618,6 @@ class SegmentMaker:
         "do_not_check_out_of_range_pitches",
         "do_not_check_wellformedness",
         "do_not_force_nonnatural_accidentals",
-        "do_not_include_layout_ly",
-        "environment",
         "error_on_not_yet_pitched",
         "fermata_extra_offset_y",
         "fermata_measure_empty_overrides",
@@ -3688,7 +3674,6 @@ class SegmentMaker:
         do_not_check_out_of_range_pitches=False,
         do_not_check_wellformedness=False,
         do_not_force_nonnatural_accidentals=False,
-        do_not_include_layout_ly=False,
         fermata_extra_offset_y=2.5,
         fermata_measure_empty_overrides=None,
         final_segment=False,
@@ -3752,10 +3737,7 @@ class SegmentMaker:
         self.do_not_check_wellformedness = do_not_check_wellformedness
         assert do_not_force_nonnatural_accidentals in (True, False)
         self.do_not_force_nonnatural_accidentals = do_not_force_nonnatural_accidentals
-        assert do_not_include_layout_ly in (True, False)
-        self.do_not_include_layout_ly = do_not_include_layout_ly
         self._duration = None
-        self.environment = None
         self.fermata_extra_offset_y = fermata_extra_offset_y
         self.fermata_measure_empty_overrides = fermata_measure_empty_overrides
         self._fermata_measure_numbers = []
@@ -3876,12 +3858,11 @@ class SegmentMaker:
                     command_ = abjad.new(command_, scope=scope_)
                     self.commands.append(command_)
 
-    @property
-    def do_not_append_phantom_measure(self):
+    def do_not_append_phantom_measure(self, environment):
         """
         Is true when segment-maker does not append phantom measure.
         """
-        if self.environment == "docs":
+        if environment == "docs":
             return not self.append_phantom_measure_in_docs
         return self._do_not_append_phantom_measure
 
@@ -3913,19 +3894,20 @@ class SegmentMaker:
         do_not_print_timing=False,
         environment=None,
         first_segment=True,  # TODO: default to false
+        include_layout_ly=False,
         metadata=None,
         midi=False,
         page_layout_profile=None,
         persist=None,
         previous_metadata=None,
         previous_persist=None,
+        remove_tags=None,
         segment_number=None,
     ):
         """
         Runs segment-maker.
         """
         assert environment in (None, "docs"), repr(environment)
-        self.environment = environment
         assert first_segment in (True, False)
         self.first_segment = first_segment
         self.metadata = dict(metadata or {})
@@ -3936,22 +3918,28 @@ class SegmentMaker:
         self.segment_number = segment_number
         with abjad.Timer() as timer:
             self.score = _make_score(self.indicator_defaults, self.score_template)
+            if environment == "docs":
+                includes = self.includes
+            else:
+                includes = _get_lilypond_includes(
+                    self.clock_time_extra_offset,
+                    environment,
+                    self.includes,
+                    self.local_measure_number_extra_offset,
+                    self.measure_number_extra_offset,
+                    self.spacing_extra_offset,
+                    self.stage_number_extra_offset,
+                )
             self.lilypond_file = _make_lilypond_file(
-                self.clock_time_extra_offset,
-                self.do_not_include_layout_ly,
-                self.environment,
                 self.first_segment,
-                self.includes,
-                self.local_measure_number_extra_offset,
-                self.measure_number_extra_offset,
+                include_layout_ly,
+                includes,
                 self.midi,
                 self.preamble,
                 self.score,
-                self.spacing_extra_offset,
-                self.stage_number_extra_offset,
             )
             _make_global_skips(
-                self.do_not_append_phantom_measure,
+                self.do_not_append_phantom_measure(environment),
                 self.first_segment,
                 self.score,
                 self.time_signatures,
@@ -3965,15 +3953,15 @@ class SegmentMaker:
             _label_moment_numbers(self.moment_markup, self.score)
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
-        if not do_not_print_timing and self.environment != "docs":
+        if not do_not_print_timing and environment != "docs":
             print(f"Score initialization {count} {seconds} ...")
         with abjad.Timer() as timer:
             with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
                 command_count, segment_duration = _call_rhythm_commands(
                     attach_rhythm_annotation_spanners,
                     self.commands,
-                    self.do_not_append_phantom_measure,
-                    self.environment,
+                    self.do_not_append_phantom_measure(environment),
+                    environment,
                     self.manifests,
                     self.measure_count,
                     self._offset_to_measure_number,
@@ -3989,7 +3977,7 @@ class SegmentMaker:
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
         commands = abjad.String("command").pluralize(command_count)
-        if not do_not_print_timing and self.environment != "docs":
+        if not do_not_print_timing and environment != "docs":
             message = f"Rhythm commands {count} {seconds}"
             message += f" [for {command_count} {commands}] ..."
             print(message)
@@ -4022,7 +4010,7 @@ class SegmentMaker:
             _apply_spacing(self.score, page_layout_profile, self.spacing)
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
-        if not do_not_print_timing and self.environment != "docs":
+        if not do_not_print_timing and environment != "docs":
             print(f"After-rhythm methods {count} {seconds} ...")
         with abjad.Timer() as timer:
             with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
@@ -4042,7 +4030,7 @@ class SegmentMaker:
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
         commands = abjad.String("command").pluralize(command_count)
-        if not do_not_print_timing and self.environment != "docs":
+        if not do_not_print_timing and environment != "docs":
             message = f"Nonrhythm commands {count} {seconds}"
             message += f" [for {command_count} {commands}] ..."
             print(message)
@@ -4054,7 +4042,7 @@ class SegmentMaker:
                     self.score,
                 )
                 self._cached_time_signatures = _remove_redundant_time_signatures(
-                    self.do_not_append_phantom_measure,
+                    self.do_not_append_phantom_measure(environment),
                     self.score,
                 )
                 result = _cache_fermata_measure_numbers(
@@ -4070,7 +4058,7 @@ class SegmentMaker:
                 self._final_measure_is_fermata = result[3]
                 if self.treat_untreated_persistent_wrappers:
                     _treat_untreated_persistent_wrappers(
-                        self.environment,
+                        environment,
                         self.manifests,
                         self.score,
                     )
@@ -4085,7 +4073,8 @@ class SegmentMaker:
                 _color_not_yet_registered(self.score)
                 _color_mock_pitch(self.score)
                 _set_intermittent_to_staff_position_zero(self.score)
-                _color_not_yet_pitched(self.environment, self.score)
+                if environment != "docs":
+                    _color_not_yet_pitched(environment, self.score)
                 _set_not_yet_pitched_to_staff_position_zero(self.score)
                 _clean_up_repeat_tie_direction(self.score)
                 _clean_up_laissez_vibrer_tie_direction(self.score)
@@ -4095,7 +4084,7 @@ class SegmentMaker:
                 color_out_of_range_pitches(self.score)
                 if check_persistent_indicators:
                     _check_persistent_indicators(
-                        self.environment,
+                        environment,
                         self.score,
                         self.score_template,
                     )
@@ -4107,9 +4096,9 @@ class SegmentMaker:
                     _force_nonnatural_accidentals(self.score)
                 _label_duration_multipliers(self.score)
                 _magnify_staves(self.magnify_staves, self.score)
-                if self.environment != "docs":
+                if environment != "docs":
                     _whitespace_leaves(self.score)
-                if self.environment != "docs":
+                if environment != "docs":
                     _comment_measure_numbers(
                         _get_first_measure_number(
                             self.first_measure_number,
@@ -4127,16 +4116,18 @@ class SegmentMaker:
                     self._offset_to_measure_number,
                     self.score,
                 )
-                _shift_measure_initial_clefs(
-                    self.environment,
-                    self.manifests,
-                    self._offset_to_measure_number,
-                    self.previous_persist,
-                    self.score,
-                    self.score_template,
-                )
+                if environment != "docs":
+                    _shift_measure_initial_clefs(
+                        self.manifests,
+                        self._offset_to_measure_number,
+                        self.previous_persist,
+                        self.score,
+                        self.score_template,
+                    )
                 _deactivate_tags(self.deactivate, self.score)
-                _remove_docs_tags(self.environment, self.remove, self.score)
+                remove_tags = (remove_tags or []) + (self.remove or [])
+                # _remove_docs_tags(environment, self.remove, self.score)
+                _remove_docs_tags(environment, remove_tags, self.score)
                 container_to_part_assignment = None
                 if add_container_identifiers:
                     container_to_part_assignment = _add_container_identifiers(
@@ -4150,7 +4141,7 @@ class SegmentMaker:
                     )
                 _move_global_rests(self.score, self.score_template)
             # mutates offsets:
-            if self.environment == "docs":
+            if environment == "docs":
                 _move_global_context(self.score)
             _clean_up_on_beat_grace_containers(self.score)
             _check_wellformedness(
@@ -4161,17 +4152,17 @@ class SegmentMaker:
             )
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
-        if not do_not_print_timing and self.environment != "docs":
+        if not do_not_print_timing and environment != "docs":
             print(f"Postprocessing {count} {seconds} ...")
         with abjad.Timer() as timer:
             method = getattr(self.score, "_update_now")
             method(offsets_in_seconds=True)
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
-        if not do_not_print_timing and self.environment != "docs":
+        if not do_not_print_timing and environment != "docs":
             print(f"Offsets-in-seconds update {count} {seconds} ...")
         with abjad.Timer() as timer:
-            if self.environment != "docs":
+            if environment != "docs":
                 result = _label_clock_time(
                     self.clock_time_override,
                     self._fermata_measure_numbers,
@@ -4189,7 +4180,7 @@ class SegmentMaker:
             )
             final_measure_number = first_measure_number + self.measure_count - 1
             persistent_indicators = _collect_persistent_indicators(
-                self.environment,
+                environment,
                 self.manifests,
                 self.previous_persist,
                 self.score,
@@ -4213,10 +4204,12 @@ class SegmentMaker:
                 self._cached_time_signatures,
                 self.voice_metadata,
             )
-            _style_phantom_measures(self.do_not_append_phantom_measure, self.score)
+            _style_phantom_measures(
+                self.do_not_append_phantom_measure(environment), self.score
+            )
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
-        if not do_not_print_timing and self.environment != "docs":
+        if not do_not_print_timing and environment != "docs":
             print(f"Clock time markup {count} {seconds} ...")
         assert isinstance(self.lilypond_file, abjad.LilyPondFile)
         return self.lilypond_file

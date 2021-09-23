@@ -881,7 +881,6 @@ def make_layout_ly(spacing):
         sys.exit(1)
     assert abjad.String(document_name).is_shout_case()
     maker = baca.SegmentMaker(
-        do_not_include_layout_ly=True,
         first_measure_number=first_measure_number,
         remove=baca.tags.layout_removal_tags(),
         score_template=baca.make_empty_score_maker(1),
