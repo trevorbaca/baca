@@ -574,12 +574,14 @@ def _attach_rhythm_annotation_spanner(command, selection):
     command_(leaves)
 
 
-# this exists because of an incompletely implemented behavior in LilyPond;
-# LilyPond doesn't understand repeat-tied notes to be tied;
-# because of this LilyPond incorrectly prints accidentals in front of some
-# repeat-tied notes;
-# this method works around LilyPond's behavior
 def _attach_shadow_tie_indicators(score):
+    """
+    This exists because of an incompletely implemented behavior in LilyPond;
+    LilyPond doesn't understand repeat-tied notes to be tied;
+    because of this LilyPond incorrectly prints accidentals in front of some
+    repeat-tied notes;
+    this method works around LilyPond's behavior
+    """
     tag = _scoping.site(_frame())
     for plt in _selection.Selection(score).plts():
         if len(plt) == 1:
@@ -1496,17 +1498,12 @@ def _force_nonnatural_accidentals(score):
 
 
 def _get_first_measure_number(first_measure_number, previous_metadata):
-    #    if self.first_measure_number is not None:
-    #        return self.first_measure_number
     if first_measure_number is not None:
         return first_measure_number
-    # if not self.previous_metadata:
     if not previous_metadata:
         return 1
     string = "first_measure_number"
-    # first_measure_number = self.previous_metadata.get(string)
     first_measure_number = previous_metadata.get(string)
-    # time_signatures = self.previous_metadata.get("time_signatures")
     time_signatures = previous_metadata.get("time_signatures")
     if first_measure_number is None or time_signatures is None:
         return 1
@@ -3597,75 +3594,75 @@ class SegmentMaker:
     """
 
     __slots__ = (
-        "_activate",
         "_cache",
         "_cached_time_signatures",
-        "_clock_time_extra_offset",
-        "_clock_time_override",
-        "_commands",
         "_container_to_part_assignment",
-        "_deactivate",
         "_do_not_append_phantom_measure",
         "_duration",
-        "_environment",
-        "_fermata_extra_offset_y",
-        "_fermata_measure_empty_overrides",
         "_fermata_measure_numbers",
         "_fermata_start_offsets",
         "_fermata_stop_offsets",
         "_final_measure_is_fermata",
-        "_first_measure_number",
-        "_ignore_repeat_pitch_classes",
-        "_includes",
-        "_indicator_defaults",
-        "_instruments",
-        "_lilypond_file",
-        "_local_measure_number_extra_offset",
-        "_margin_markups",
-        "_measure_number_extra_offset",
-        "_metadata",
-        "_parts_metric_modulation_multiplier",
-        "_metronome_marks",
-        "_midi",
-        "_moment_markup",
         "_offset_to_measure_number",
-        "_persist",
-        "_preamble",
-        "_previous_metadata",
-        "_previous_persist",
-        "_remove",
-        "_score",
-        "_score_template",
         "_segment_bol_measure_numbers",
         "_segment_duration",
-        "_segment_number",
-        "_skips_instead_of_rests",
-        "_spacing",
-        "_spacing_extra_offset",
-        "_stage_markup",
-        "_stage_number_extra_offset",
         "_start_clock_time",
         "_stop_clock_time",
-        "_test_container_identifiers",
-        "_time_signatures",
-        "_voice_metadata",
         "_voice_names",
+        "activate",
         "allow_empty_selections",
         "append_phantom_measure_in_docs",
+        "clock_time_extra_offset",
+        "clock_time_override",
         "color_octaves",
+        "commands",
+        "deactivate",
         "do_not_check_beamed_long_notes",
         "do_not_check_out_of_range_pitches",
         "do_not_check_persistence",
         "do_not_check_wellformedness",
         "do_not_force_nonnatural_accidentals",
         "do_not_include_layout_ly",
+        "environment",
         "error_on_not_yet_pitched",
+        "fermata_extra_offset_y",
+        "fermata_measure_empty_overrides",
         "final_segment",
+        "first_measure_number",
         "first_segment",
         "functions",
+        "ignore_repeat_pitch_classes",
+        "includes",
+        "indicator_defaults",
+        "instruments",
+        "lilypond_file",
+        "local_measure_number_extra_offset",
         "magnify_staves",
-        "treat_untreated_persistent_wrappers",
+        "margin_markups",
+        "measure_number_extra_offset",
+        "metadata",
+        "metronome_marks",
+        "midi",
+        "moment_markup",
+        "parts_metric_modulation_multiplier",
+        "persist",
+        "preamble",
+        "previous_metadata",
+        "previous_persist",
+        "remove",
+        "score",
+        "score_template",
+        "segment_number",
+        "skips_instead_of_rests",
+        "spacing",
+        "spacing_extra_offset",
+        "stage_markup",
+        "stage_number_extra_offset",
+        "test_container_identifiers",
+        "time_signatures",
         "transpose_score",
+        "treat_untreated_persistent_wrappers",
+        "voice_metadata",
     )
 
     ### INITIALIZER ###
@@ -3720,7 +3717,7 @@ class SegmentMaker:
         self.functions = functions or ()
         if activate is not None:
             assert all(isinstance(_, abjad.Tag) for _ in activate)
-        self._activate = activate
+        self.activate = activate
         assert allow_empty_selections in (True, False)
         self.allow_empty_selections = allow_empty_selections
         assert append_phantom_measure_in_docs in (True, False)
@@ -3730,10 +3727,10 @@ class SegmentMaker:
         if clock_time_extra_offset not in (False, None):
             assert isinstance(clock_time_extra_offset, tuple)
             assert len(clock_time_extra_offset) == 2
-        self._clock_time_extra_offset = clock_time_extra_offset
+        self.clock_time_extra_offset = clock_time_extra_offset
         if clock_time_override is not None:
             assert isinstance(clock_time_override, abjad.MetronomeMark)
-        self._clock_time_override = clock_time_override
+        self.clock_time_override = clock_time_override
         assert color_octaves in (True, False)
         self.color_octaves = color_octaves
         self._cache = None
@@ -3741,7 +3738,7 @@ class SegmentMaker:
         if deactivate is not None:
             assert all(isinstance(_, abjad.Tag) for _ in deactivate)
         self._container_to_part_assignment = None
-        self._deactivate = deactivate
+        self.deactivate = deactivate
         if do_not_append_phantom_measure is not None:
             do_not_append_phantom_measure = bool(do_not_append_phantom_measure)
         self._do_not_append_phantom_measure = do_not_append_phantom_measure
@@ -3758,69 +3755,69 @@ class SegmentMaker:
         assert do_not_include_layout_ly in (True, False)
         self.do_not_include_layout_ly = do_not_include_layout_ly
         self._duration = None
-        self._environment = None
-        self._fermata_extra_offset_y = fermata_extra_offset_y
-        self._fermata_measure_empty_overrides = fermata_measure_empty_overrides
+        self.environment = None
+        self.fermata_extra_offset_y = fermata_extra_offset_y
+        self.fermata_measure_empty_overrides = fermata_measure_empty_overrides
         self._fermata_measure_numbers = []
         self._fermata_start_offsets = []
         self._fermata_stop_offsets = []
-        self._first_measure_number = first_measure_number
-        self._indicator_defaults = indicator_defaults
-        self._ignore_repeat_pitch_classes = ignore_repeat_pitch_classes
-        self._instruments = instruments
+        self.first_measure_number = first_measure_number
+        self.indicator_defaults = indicator_defaults
+        self.ignore_repeat_pitch_classes = ignore_repeat_pitch_classes
+        self.instruments = instruments
         self._final_measure_is_fermata = False
         assert final_segment in (True, False)
         self.final_segment = final_segment
-        self._includes = includes
-        self._lilypond_file = None
-        self._local_measure_number_extra_offset = local_measure_number_extra_offset
+        self.includes = includes
+        self.lilypond_file = None
+        self.local_measure_number_extra_offset = local_measure_number_extra_offset
         self.magnify_staves = magnify_staves
-        self._margin_markups = margin_markups
-        self._measure_number_extra_offset = measure_number_extra_offset
-        self._metadata = abjad.OrderedDict()
-        self._metronome_marks = metronome_marks
-        self._midi = False
-        self._moment_markup = moment_markup
+        self.margin_markups = margin_markups
+        self.measure_number_extra_offset = measure_number_extra_offset
+        self.metadata = abjad.OrderedDict()
+        self.metronome_marks = metronome_marks
+        self.midi = False
+        self.moment_markup = moment_markup
         self._offset_to_measure_number = {}
         if parts_metric_modulation_multiplier is not None:
             assert isinstance(parts_metric_modulation_multiplier, tuple)
             assert len(parts_metric_modulation_multiplier) == 2
-        self._parts_metric_modulation_multiplier = parts_metric_modulation_multiplier
-        self._persist = abjad.OrderedDict()
+        self.parts_metric_modulation_multiplier = parts_metric_modulation_multiplier
+        self.persist = abjad.OrderedDict()
         preamble = preamble or ()
         if preamble:
             assert all(isinstance(_, str) for _ in preamble), repr(preamble)
-        self._preamble = tuple(preamble)
-        self._previous_metadata = None
-        self._previous_persist = None
+        self.preamble = tuple(preamble)
+        self.previous_metadata = None
+        self.previous_persist = None
         if remove is not None:
             assert all(isinstance(_, abjad.Tag) for _ in remove)
-        self._remove = remove
-        self._score = None
+        self.remove = remove
+        self.score = None
         assert score_template is not None, repr(score_template)
-        self._score_template = score_template
+        self.score_template = score_template
         self._segment_bol_measure_numbers = []
         # TODO: harmonize _duration, _segment_duration
         self._segment_duration = None
-        self._segment_number = None
-        self._skips_instead_of_rests = skips_instead_of_rests
-        self._spacing = spacing
-        self._spacing_extra_offset = spacing_extra_offset
-        self._stage_markup = stage_markup
-        self._stage_number_extra_offset = stage_number_extra_offset
+        self.segment_number = None
+        self.skips_instead_of_rests = skips_instead_of_rests
+        self.spacing = spacing
+        self.spacing_extra_offset = spacing_extra_offset
+        self.stage_markup = stage_markup
+        self.stage_number_extra_offset = stage_number_extra_offset
         self._start_clock_time = None
         self._stop_clock_time = None
         if test_container_identifiers is not None:
             test_container_identifiers = bool(test_container_identifiers)
-        self._test_container_identifiers = test_container_identifiers
+        self.test_container_identifiers = test_container_identifiers
         assert transpose_score in (True, False)
         self.transpose_score = transpose_score
         assert treat_untreated_persistent_wrappers in (True, False)
         self.treat_untreated_persistent_wrappers = treat_untreated_persistent_wrappers
-        self._voice_metadata = abjad.OrderedDict()
+        self.voice_metadata = abjad.OrderedDict()
         self._voice_names = None
-        self._commands = []
-        self._time_signatures = _initialize_time_signatures(time_signatures)
+        self.commands = []
+        self.time_signatures = _initialize_time_signatures(time_signatures)
 
     ### SPECIAL METHODS ###
 
@@ -3887,41 +3884,6 @@ class SegmentMaker:
     ### PUBLIC PROPERTIES ###
 
     @property
-    def activate(self):
-        """
-        Gets tags to activate in LilyPond output.
-        """
-        return self._activate
-
-    @property
-    def clock_time_extra_offset(self):
-        """
-        Gets clock time extra offset.
-        """
-        return self._clock_time_extra_offset
-
-    @property
-    def clock_time_override(self):
-        """
-        Gets clock time override.
-        """
-        return self._clock_time_override
-
-    @property
-    def commands(self):
-        """
-        Gets commands.
-        """
-        return self._commands
-
-    @property
-    def deactivate(self):
-        """
-        Gets tags to deactivate in LilyPond output.
-        """
-        return self._deactivate
-
-    @property
     def do_not_append_phantom_measure(self):
         """
         Is true when segment-maker does not append phantom measure.
@@ -3929,76 +3891,6 @@ class SegmentMaker:
         if self.environment == "docs":
             return not self.append_phantom_measure_in_docs
         return self._do_not_append_phantom_measure
-
-    @property
-    def environment(self):
-        """
-        Gets environment.
-        """
-        return self._environment
-
-    @property
-    def fermata_extra_offset_y(self):
-        """
-        Gets fermata extra offset y.
-        """
-        return self._fermata_extra_offset_y
-
-    @property
-    def fermata_measure_empty_overrides(self):
-        """
-        Gets fermata measure empty overrides.
-        """
-        return self._fermata_measure_empty_overrides
-
-    @property
-    def first_measure_number(self):
-        """
-        Gets user-defined first measure number.
-        """
-        return self._first_measure_number
-
-    @property
-    def indicator_defaults(self):
-        """
-        Gets indicator defaults for persistence tests.
-        """
-        return self._indicator_defaults
-
-    @property
-    def ignore_repeat_pitch_classes(self):
-        """
-        Is true when segment ignores repeat pitch-classes.
-        """
-        return self._ignore_repeat_pitch_classes
-
-    @property
-    def includes(self):
-        """
-        Gets includes.
-        """
-        return self._includes
-
-    @property
-    def instruments(self):
-        """
-        Gets instruments.
-        """
-        return self._instruments
-
-    @property
-    def lilypond_file(self):
-        """
-        Gets LilyPond file.
-        """
-        return self._lilypond_file
-
-    @property
-    def local_measure_number_extra_offset(self):
-        """
-        Gets local measure number extra offset.
-        """
-        return self._local_measure_number_extra_offset
 
     @property
     def manifests(self):
@@ -4012,13 +3904,6 @@ class SegmentMaker:
         return manifests
 
     @property
-    def margin_markups(self):
-        """
-        Gets margin markups.
-        """
-        return self._margin_markups
-
-    @property
     def measure_count(self):
         """
         Gets measure count.
@@ -4026,160 +3911,6 @@ class SegmentMaker:
         if self.time_signatures:
             return len(self.time_signatures)
         return 0
-
-    @property
-    def measure_number_extra_offset(self):
-        """
-        Gets measure number extra offset.
-        """
-        return self._measure_number_extra_offset
-
-    @property
-    def metadata(self):
-        """
-        Gets metadata.
-        """
-        return self._metadata
-
-    @property
-    def metronome_marks(self):
-        """
-        Gets metronome marks.
-        """
-        return self._metronome_marks
-
-    @property
-    def midi(self):
-        """
-        Is true when segment-maker outputs MIDI.
-        """
-        return self._midi
-
-    @property
-    def moment_markup(self):
-        """
-        Gets moment markup.
-        """
-        return self._moment_markup
-
-    @property
-    def parts_metric_modulation_multiplier(self):
-        """
-        Gets parts metric modulation multiplier.
-        """
-        return self._parts_metric_modulation_multiplier
-
-    @property
-    def persist(self):
-        """
-        Gets persist metadata.
-        """
-        return self._persist
-
-    @property
-    def preamble(self):
-        """
-        Gets preamble strings.
-        """
-        return self._preamble
-
-    @property
-    def previous_metadata(self):
-        """
-        Gets previous segment metadata.
-        """
-        return self._previous_metadata
-
-    @property
-    def previous_persist(self):
-        """
-        Gets previous segment persist.
-        """
-        return self._previous_persist
-
-    @property
-    def remove(self):
-        """
-        Gets tags to remove
-        """
-        return self._remove
-
-    @property
-    def score(self):
-        """
-        Gets score.
-        """
-        return self._score
-
-    @property
-    def score_template(self):
-        """
-        Gets score template.
-        """
-        return self._score_template
-
-    @property
-    def segment_number(self):
-        """
-        Gets segment number.
-        """
-        return self._segment_number
-
-    @property
-    def skips_instead_of_rests(self):
-        """
-        Is true when segment fills empty measures with skips instead of rests.
-        """
-        return self._skips_instead_of_rests
-
-    @property
-    def spacing(self):
-        """
-        Gets spacing.
-        """
-        return self._spacing
-
-    @property
-    def spacing_extra_offset(self):
-        """
-        Gets spacing extra offset.
-        """
-        return self._spacing_extra_offset
-
-    @property
-    def stage_markup(self):
-        """
-        Gets stage markup.
-        """
-        return self._stage_markup
-
-    @property
-    def stage_number_extra_offset(self):
-        """
-        Gets stage number extra offset.
-        """
-        return self._stage_number_extra_offset
-
-    @property
-    def test_container_identifiers(self):
-        """
-        Is true when segment-maker adds container identifiers in docs environment.
-        """
-        return self._test_container_identifiers
-
-    @property
-    def time_signatures(self):
-        """
-        Gets time signatures.
-        """
-        return self._time_signatures
-
-    @property
-    def voice_metadata(self):
-        """
-        Gets voice metadata.
-        """
-        return self._voice_metadata
 
     ### PUBLIC METHODS ###
 
@@ -4200,18 +3931,18 @@ class SegmentMaker:
         Runs segment-maker.
         """
         assert environment in (None, "docs", "layout"), repr(environment)
-        self._environment = environment
+        self.environment = environment
         assert first_segment in (True, False)
         self.first_segment = first_segment
-        self._metadata = abjad.OrderedDict(metadata)
-        self._midi = midi
-        self._persist = abjad.OrderedDict(persist)
-        self._previous_metadata = abjad.OrderedDict(previous_metadata)
-        self._previous_persist = abjad.OrderedDict(previous_persist)
-        self._segment_number = segment_number
+        self.metadata = abjad.OrderedDict(metadata)
+        self.midi = midi
+        self.persist = abjad.OrderedDict(persist)
+        self.previous_metadata = abjad.OrderedDict(previous_metadata)
+        self.previous_persist = abjad.OrderedDict(previous_persist)
+        self.segment_number = segment_number
         with abjad.Timer() as timer:
-            self._score = _make_score(self.indicator_defaults, self.score_template)
-            self._lilypond_file = _make_lilypond_file(
+            self.score = _make_score(self.indicator_defaults, self.score_template)
+            self.lilypond_file = _make_lilypond_file(
                 self.clock_time_extra_offset,
                 self.do_not_include_layout_ly,
                 self.environment,
