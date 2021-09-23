@@ -1586,11 +1586,14 @@ def margin_markup(
 
     ..  container:: example
 
+        >>> margin_markups = {}
+        >>> margin_markups["Fl."] = abjad.MarginMarkup(markup=abjad.Markup("Fl."))
         >>> maker = baca.SegmentMaker(
         ...     includes=["baca.ily"],
+        ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> maker(
         ...     'Music_Voice',

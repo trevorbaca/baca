@@ -881,7 +881,6 @@ def make_layout_ly(spacing):
         sys.exit(1)
     assert abjad.String(document_name).is_shout_case()
     maker = baca.SegmentMaker(
-        do_not_check_persistence=True,
         do_not_include_layout_ly=True,
         first_measure_number=first_measure_number,
         remove=baca.tags.layout_removal_tags(),
@@ -961,10 +960,10 @@ def make_layout_ly(spacing):
             part_dictionary = baca.path.get_metadatum(
                 layout_directory,
                 document_name,
-                abjad.OrderedDict(),
+                {},
             )
         else:
-            part_dictionary = abjad.OrderedDict()
+            part_dictionary = {}
         part_dictionary["bol_measure_numbers"] = bol_measure_numbers
         assert abjad.String(document_name).is_shout_case()
         baca.path.add_metadatum(layout_directory, document_name, part_dictionary)

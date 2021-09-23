@@ -65,7 +65,7 @@ def _add_container_identifiers(score, segment_number):
         if voice._has_indicator(_const.INTERMITTENT):
             continue
         contexts.append(voice)
-    container_to_part_assignment = abjad.OrderedDict()
+    container_to_part_assignment = {}
     context_name_counts = {}
     for context in contexts:
         assert context.name is not None, repr(context)
@@ -543,6 +543,8 @@ def _attach_metronome_marks(parts_metric_modulation_multiplier, score):
 
 
 def _attach_rhythm_annotation_spanner(command, selection):
+    if selection is None:
+        return
     if not command.annotation_spanner_text and not command.frame:
         return
     leaves = []
@@ -720,11 +722,11 @@ def _cache_leaves(score, measure_count):
         measure_number = measure_index + 1
         measure_timespan = _get_measure_timespan(score, measure_number)
         measure_timespans.append(measure_timespan)
-    cache = abjad.OrderedDict()
+    cache = {}
     for leaf in abjad.select(score).leaves():
         parentage = abjad.get.parentage(leaf)
         context = parentage.get(abjad.Context)
-        leaves_by_measure_number = cache.setdefault(context.name, abjad.OrderedDict())
+        leaves_by_measure_number = cache.setdefault(context.name, {})
         leaf_timespan = abjad.get.timespan(leaf)
         # TODO: replace loop with bisection:
         for i, measure_timespan in enumerate(measure_timespans):
@@ -845,12 +847,13 @@ def _call_commands(
             assert "name" not in state
             state["name"] = command.persist
             if voice_name not in voice_metadata:
-                voice_metadata[voice_name] = abjad.OrderedDict()
+                voice_metadata[voice_name] = {}
             voice_metadata[voice_name][parameter] = state
     return cache, command_count
 
 
 def _call_rhythm_commands(
+    attach_rhythm_annotation_spanners,
     commands,
     do_not_append_phantom_measure,
     environment,
@@ -880,7 +883,7 @@ def _call_rhythm_commands(
     segment_duration = None
     for voice in abjad.select(score).components(abjad.Voice):
         assert not len(voice), repr(voice)
-        voice_metadata_ = voice_metadata.get(voice.name, abjad.OrderedDict())
+        voice_metadata_ = voice_metadata.get(voice.name, {})
         commands_ = _voice_to_rhythm_commands(commands, voice)
         if not commands_:
             selection = silence_maker(time_signatures)
@@ -921,7 +924,7 @@ def _call_rhythm_commands(
             except Exception:
                 print(f"Interpreting ...\n\n{abjad.storage(command)}\n")
                 raise
-            if selection is not None and environment != "docs":
+            if attach_rhythm_annotation_spanners:
                 _attach_rhythm_annotation_spanner(command, selection)
             timespan = abjad.AnnotatedTimespan(
                 start_offset=start_offset, annotation=selection
@@ -1004,7 +1007,7 @@ def _check_duplicate_part_assignments(dictionary, score_template):
     part_manifest = score_template.part_manifest
     if not part_manifest:
         return
-    part_to_timespans = abjad.OrderedDict()
+    part_to_timespans = {}
     for identifier, (part_assignment, timespan) in dictionary.items():
         for part in part_manifest.expand(part_assignment):
             if part.name not in part_to_timespans:
@@ -1023,16 +1026,7 @@ def _check_duplicate_part_assignments(dictionary, score_template):
         raise Exception(message)
 
 
-def _check_persistent_indicators(
-    do_not_check_persistence,
-    environment,
-    score,
-    score_template,
-):
-    if do_not_check_persistence:
-        return
-    if environment == "docs":
-        return
+def _check_persistent_indicators(environment, score, score_template):
     indicator = _const.SOUNDS_DURING_SEGMENT
     for voice in abjad.iterate.components(score, abjad.Voice):
         if not abjad.get.has_indicator(voice, indicator):
@@ -1240,11 +1234,11 @@ def _collect_persistent_indicators(
     previous_persist,
     score,
 ):
-    result = abjad.OrderedDict()
+    result = {}
     contexts = abjad.iterate.components(score, abjad.Context)
     contexts = list(contexts)
     contexts.sort(key=lambda _: _.name)
-    name_to_wrappers = abjad.OrderedDict()
+    name_to_wrappers = {}
     for context in contexts:
         if context.name not in name_to_wrappers:
             name_to_wrappers[context.name] = []
@@ -1306,9 +1300,10 @@ def _collect_persistent_indicators(
                 prototype = type(indicator)
                 prototype = _prototype_string(prototype)
             value = _scoping._indicator_to_key(indicator, manifests)
-            if value is None and environment != "docs":
+            # if value is None and environment != "docs":
+            if value is None:
                 raise Exception(
-                    "can not find persistent indicator in manifest:\n\n  {indicator}"
+                    f"can not find persistent indicator in manifest:\n\n  {indicator}"
                 )
             editions = wrapper.tag.editions()
             if editions:
@@ -3203,9 +3198,13 @@ def color_out_of_range_pitches(score):
         ...
         >>> figures = abjad.select(figures_)
 
+        >>> instruments = {}
+        >>> instruments["Violin"] = abjad.Violin()
+
         >>> maker = baca.SegmentMaker(
         ...     do_not_check_out_of_range_pitches=True,
         ...     includes=["baca.ily"],
+        ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
         ... )
@@ -3427,13 +3426,15 @@ def error_on_not_yet_pitched(score):
 
 
 def segments(runtime=False):
-    if runtime:
+    if not runtime:
         dictionary = {
-            "add_container_identifiers": True,
+            "treat_untreated_persistent_wrappers": True,
         }
     else:
         dictionary = {
-            "treat_untreated_persistent_wrappers": True,
+            "add_container_identifiers": True,
+            "attach_rhythm_annotation_spanners": True,
+            "check_persistent_indicators": True,
         }
     return dictionary
 
@@ -3623,7 +3624,6 @@ class SegmentMaker:
         "deactivate",
         "do_not_check_beamed_long_notes",
         "do_not_check_out_of_range_pitches",
-        "do_not_check_persistence",
         "do_not_check_wellformedness",
         "do_not_force_nonnatural_accidentals",
         "do_not_include_layout_ly",
@@ -3668,8 +3668,6 @@ class SegmentMaker:
         "voice_metadata",
     )
 
-    ### INITIALIZER ###
-
     def __init__(
         self,
         *functions,
@@ -3684,7 +3682,6 @@ class SegmentMaker:
         do_not_append_phantom_measure=False,
         do_not_check_beamed_long_notes=False,
         do_not_check_out_of_range_pitches=False,
-        do_not_check_persistence=False,
         do_not_check_wellformedness=False,
         do_not_force_nonnatural_accidentals=False,
         do_not_include_layout_ly=False,
@@ -3747,8 +3744,6 @@ class SegmentMaker:
         self.do_not_check_out_of_range_pitches = do_not_check_out_of_range_pitches
         assert do_not_check_beamed_long_notes in (True, False)
         self.do_not_check_beamed_long_notes = do_not_check_beamed_long_notes
-        assert do_not_check_persistence in (True, False)
-        self.do_not_check_persistence = do_not_check_persistence
         assert do_not_check_wellformedness in (True, False)
         self.do_not_check_wellformedness = do_not_check_wellformedness
         assert do_not_force_nonnatural_accidentals in (True, False)
@@ -3817,8 +3812,6 @@ class SegmentMaker:
         self.commands = []
         self.time_signatures = _initialize_time_signatures(time_signatures)
 
-    ### SPECIAL METHODS ###
-
     def __call__(self, scopes, *commands):
         """
         Calls segment-maker on ``scopes`` and ``commands``.
@@ -3879,8 +3872,6 @@ class SegmentMaker:
                     command_ = abjad.new(command_, scope=scope_)
                     self.commands.append(command_)
 
-    ### PUBLIC PROPERTIES ###
-
     @property
     def do_not_append_phantom_measure(self):
         """
@@ -3910,11 +3901,11 @@ class SegmentMaker:
             return len(self.time_signatures)
         return 0
 
-    ### PUBLIC METHODS ###
-
     def run(
         self,
         add_container_identifiers=False,
+        attach_rhythm_annotation_spanners=False,
+        check_persistent_indicators=False,
         do_not_print_timing=False,
         environment=None,
         first_segment=True,  # TODO: default to false
@@ -3975,6 +3966,7 @@ class SegmentMaker:
         with abjad.Timer() as timer:
             with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
                 command_count, segment_duration = _call_rhythm_commands(
+                    attach_rhythm_annotation_spanners,
                     self.commands,
                     self.do_not_append_phantom_measure,
                     self.environment,
@@ -4097,12 +4089,12 @@ class SegmentMaker:
                     error_on_not_yet_pitched(self.score)
                 _check_doubled_dynamics(self.score)
                 color_out_of_range_pitches(self.score)
-                _check_persistent_indicators(
-                    self.do_not_check_persistence,
-                    self.environment,
-                    self.score,
-                    self.score_template,
-                )
+                if check_persistent_indicators:
+                    _check_persistent_indicators(
+                        self.environment,
+                        self.score,
+                        self.score_template,
+                    )
                 color_repeat_pitch_classes(self.score)
                 if self.color_octaves:
                     color_octaves(self.score)
@@ -4192,6 +4184,12 @@ class SegmentMaker:
                 self.previous_metadata,
             )
             final_measure_number = first_measure_number + self.measure_count - 1
+            persistent_indicators = _collect_persistent_indicators(
+                self.environment,
+                self.manifests,
+                self.previous_persist,
+                self.score,
+            )
             _collect_metadata(
                 container_to_part_assignment,
                 self._duration,
@@ -4204,12 +4202,7 @@ class SegmentMaker:
                 ),
                 self.metadata,
                 self.persist,
-                _collect_persistent_indicators(
-                    self.environment,
-                    self.manifests,
-                    self.previous_persist,
-                    self.score,
-                ),
+                persistent_indicators,
                 self.score,
                 self._start_clock_time,
                 self._stop_clock_time,

@@ -1003,11 +1003,11 @@ r"""
         ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     treat_untreated_persistent_wrappers=True,
-        ...     )
+        ... )
         >>> maker(
         ...     "Music_Voice",
         ...     baca.make_notes(),
-        ...     )
+        ... )
 
         >>> lilypond_file = maker.run(environment="docs")
         >>> block = abjad.Block(name="layout")
@@ -3709,7 +3709,9 @@ r"""
         ...     baca.staff_position(0),
         ...     )
 
-        >>> lilypond_file = maker.run(environment="docs")
+        >>> lilypond_file = maker.run(
+        ...     environment="docs",
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -3749,47 +3751,42 @@ r"""
 
         Persistent overrides also appear in segment metadata:
 
-        >>> string = abjad.storage(maker.persist["persistent_indicators"])
+        >>> dictionary = maker.persist["persistent_indicators"]
+        >>> string = abjad.storage(dictionary)
         >>> print(string)
-        abjad.OrderedDict(
-            [
-                (
-                    'Music_Staff',
-                    [
-                        baca.Memento(
-                            context='Music_Voice',
-                            edition=abjad.Tag('-PARTS'),
-                            prototype='baca.BarExtent',
-                            value=1,
+        dict(
+            {
+                'Music_Staff': [
+                    baca.Memento(
+                        context='Music_Voice',
+                        edition=abjad.Tag('-PARTS'),
+                        prototype='baca.BarExtent',
+                        value=1,
+                        ),
+                    baca.Memento(
+                        context='Music_Voice',
+                        prototype='baca.PersistentOverride',
+                        value=baca.PersistentOverride(
+                            attribute='bar_extent',
+                            context='Staff',
+                            grob='BarLine',
+                            value="#'(0 . 0)",
                             ),
-                        baca.Memento(
-                            context='Music_Voice',
-                            prototype='baca.PersistentOverride',
-                            value=baca.PersistentOverride(
-                                attribute='bar_extent',
-                                context='Staff',
-                                grob='BarLine',
-                                value="#'(0 . 0)",
-                                ),
-                            ),
-                        baca.Memento(
-                            context='Music_Voice',
-                            prototype='baca.StaffLines',
-                            value=1,
-                            ),
-                        ],
-                    ),
-                (
-                    'Score',
-                    [
-                        baca.Memento(
-                            context='Global_Skips',
-                            prototype='abjad.TimeSignature',
-                            value='3/8',
-                            ),
-                        ],
-                    ),
-                ]
+                        ),
+                    baca.Memento(
+                        context='Music_Voice',
+                        prototype='baca.StaffLines',
+                        value=1,
+                        ),
+                    ],
+                'Score': [
+                    baca.Memento(
+                        context='Global_Skips',
+                        prototype='abjad.TimeSignature',
+                        value='3/8',
+                        ),
+                    ],
+                }
             )
 
     ..  container:: example
