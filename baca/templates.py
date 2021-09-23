@@ -78,7 +78,7 @@ class ScoreTemplate:
     ### INITIALIZER ###
 
     def __init__(self):
-        self._voice_abbreviations = abjad.OrderedDict()
+        self._voice_abbreviations = {}
 
     ### PRIVATE METHODS ###
 

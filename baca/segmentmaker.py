@@ -1186,7 +1186,7 @@ def _collect_metadata(
     time_signatures,
     voice_metadata,
 ):
-    metadata_, persist_ = abjad.OrderedDict(), abjad.OrderedDict()
+    metadata_, persist_ = {}, {}
     persist_["alive_during_segment"] = _collect_alive_during_segment(score)
     # make-layout-ly scripts adds bol measure numbers to metadata
     bol_measure_numbers = metadata.get("bol_measure_numbers")
@@ -1216,13 +1216,17 @@ def _collect_metadata(
         persist_["voice_metadata"] = voice_metadata
     metadata.clear()
     metadata.update(metadata_)
+    metadata = abjad.OrderedDict(metadata)
     metadata.sort(recurse=True)
+    metadata = dict(metadata)
     for key, value in metadata.items():
         if not bool(value):
             raise Exception(f"{key} metadata should be nonempty (not {value!r}).")
     persist.clear()
     persist.update(persist_)
+    persist = abjad.OrderedDict(persist)
     persist.sort(recurse=True)
+    persist = dict(persist)
     for key, value in persist.items():
         if not bool(value):
             raise Exception(f"{key} persist should be nonempty (not {value!r}).")
@@ -1608,7 +1612,7 @@ def _get_previous_segment_voice_metadata(previous_persist, voice_name):
     voice_metadata = previous_persist.get("voice_metadata")
     if not voice_metadata:
         return
-    return voice_metadata.get(voice_name, abjad.OrderedDict())
+    return voice_metadata.get(voice_name, {})
 
 
 def _handle_mutator(score, cache, command):
@@ -3447,7 +3451,7 @@ def transpose_score(score):
 
         Transposes score:
 
-        >>> instruments = abjad.OrderedDict()
+        >>> instruments = {}
         >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
         >>> maker = baca.SegmentMaker(
         ...     instruments=instruments,
@@ -3518,7 +3522,7 @@ def transpose_score(score):
 
         Does not transpose score:
 
-        >>> instruments = abjad.OrderedDict()
+        >>> instruments = {}
         >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
         >>> maker = baca.SegmentMaker(
         ...     instruments=instruments,
@@ -3770,7 +3774,7 @@ class SegmentMaker:
         self.magnify_staves = magnify_staves
         self.margin_markups = margin_markups
         self.measure_number_extra_offset = measure_number_extra_offset
-        self.metadata = abjad.OrderedDict()
+        self.metadata = {}
         self.metronome_marks = metronome_marks
         self.midi = False
         self.moment_markup = moment_markup
@@ -3779,7 +3783,7 @@ class SegmentMaker:
             assert isinstance(parts_metric_modulation_multiplier, tuple)
             assert len(parts_metric_modulation_multiplier) == 2
         self.parts_metric_modulation_multiplier = parts_metric_modulation_multiplier
-        self.persist = abjad.OrderedDict()
+        self.persist = {}
         preamble = preamble or ()
         if preamble:
             assert all(isinstance(_, str) for _ in preamble), repr(preamble)
@@ -3807,7 +3811,7 @@ class SegmentMaker:
         self.transpose_score = transpose_score
         assert treat_untreated_persistent_wrappers in (True, False)
         self.treat_untreated_persistent_wrappers = treat_untreated_persistent_wrappers
-        self.voice_metadata = abjad.OrderedDict()
+        self.voice_metadata = {}
         self._voice_names = None
         self.commands = []
         self.time_signatures = _initialize_time_signatures(time_signatures)
@@ -3826,8 +3830,8 @@ class SegmentMaker:
         ):
             abbreviations = self.score_template.voice_abbreviations
         else:
-            abbreviations = abjad.OrderedDict()
-        abbreviations = abbreviations or abjad.OrderedDict()
+            abbreviations = {}
+        abbreviations = abbreviations or {}
         scopes_ = _unpack_scopes(scopes, abbreviations)
         scope_type = (_scoping.Scope, _scoping.TimelineScope)
         assert all(isinstance(_, scope_type) for _ in scopes_), repr(scopes_)
@@ -3886,7 +3890,7 @@ class SegmentMaker:
         """
         Gets manifests.
         """
-        manifests = abjad.OrderedDict()
+        manifests = {}
         manifests["abjad.Instrument"] = self.instruments
         manifests["abjad.MarginMarkup"] = self.margin_markups
         manifests["abjad.MetronomeMark"] = self.metronome_marks
@@ -3924,11 +3928,11 @@ class SegmentMaker:
         self.environment = environment
         assert first_segment in (True, False)
         self.first_segment = first_segment
-        self.metadata = abjad.OrderedDict(metadata)
+        self.metadata = dict(metadata or {})
         self.midi = midi
-        self.persist = abjad.OrderedDict(persist)
-        self.previous_metadata = abjad.OrderedDict(previous_metadata)
-        self.previous_persist = abjad.OrderedDict(previous_persist)
+        self.persist = dict(persist or {})
+        self.previous_metadata = dict(previous_metadata or {})
+        self.previous_persist = dict(previous_persist or {})
         self.segment_number = segment_number
         with abjad.Timer() as timer:
             self.score = _make_score(self.indicator_defaults, self.score_template)

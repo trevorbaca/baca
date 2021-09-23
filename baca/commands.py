@@ -1875,7 +1875,7 @@ def open_volta(
     )
 
 
-def previous_metadata(path: str) -> abjad.OrderedDict:
+def previous_metadata(path: str):
     """
     Gets previous segment metadata before ``path``.
     """
@@ -1891,7 +1891,7 @@ def previous_metadata(path: str) -> abjad.OrderedDict:
     assert all(_.is_dir() for _ in paths), repr(paths)
     index = paths.index(segment)
     if index == 0:
-        return abjad.OrderedDict()
+        return {}
     previous_index = index - 1
     previous_segment = paths[previous_index]
     previous_metadata = _path.get_metadata(previous_segment)

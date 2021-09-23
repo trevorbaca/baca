@@ -2962,8 +2962,7 @@ class Accumulator:
         assert isinstance(score, abjad.Score), repr(score)
         self._score = score
         if voice_abbreviations is not None:
-            prototype = (dict, abjad.OrderedDict)
-            assert isinstance(voice_abbreviations, prototype), repr(voice_abbreviations)
+            assert isinstance(voice_abbreviations, dict), repr(voice_abbreviations)
         self._voice_abbreviations = voice_abbreviations or {}
         voice_names = []
         for voice in abjad.iterate.components(score, abjad.Voice):
@@ -4306,7 +4305,7 @@ class FigureMaker:
         if spelling is not None:
             assert isinstance(spelling, rmakers.Spelling)
         self._spelling = spelling
-        self._state = abjad.OrderedDict()
+        self._state = {}
         if not isinstance(talea, rmakers.Talea):
             raise TypeError(f"must be talea: {talea!r}.")
         self._talea = talea
@@ -4320,7 +4319,7 @@ class FigureMaker:
         self,
         collections: typing.Sequence,
         collection_index: int = None,
-        state: abjad.OrderedDict = None,
+        state: dict = None,
         total_collections: int = None,
     ) -> abjad.Selection:
         r"""
@@ -4429,7 +4428,7 @@ class FigureMaker:
 
         """
         collections = _coerce_collections(collections)
-        self._state = state or abjad.OrderedDict()
+        self._state = state or {}
         self._apply_state(state=state)
         tuplets: typing.List[abjad.Tuplet] = []
         if not self.restart_talea:

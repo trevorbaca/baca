@@ -743,7 +743,7 @@ class Command:
         self._map = map
         self._match = match
         self._measures: typing.Optional[typings.SliceTyping] = measures
-        self._runtime = abjad.OrderedDict()
+        self._runtime = {}
         self._scope = scope
         selector_ = selector
         if selector_ is not None and not callable(selector_):
@@ -756,13 +756,11 @@ class Command:
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None, runtime: abjad.OrderedDict = None) -> None:
+    def __call__(self, argument=None, runtime: dict = None) -> None:
         """
         Calls command on ``argument``.
         """
-        if runtime is not None:
-            assert isinstance(runtime, abjad.OrderedDict)
-        self._runtime = runtime or abjad.OrderedDict()
+        self._runtime = runtime or {}
         if self.map is not None:
             assert callable(self.map)
             argument = self.map(argument)
@@ -855,7 +853,7 @@ class Command:
         return self._measures
 
     @property
-    def runtime(self) -> abjad.OrderedDict:
+    def runtime(self) -> dict:
         """
         Gets segment-maker runtime dictionary.
         """

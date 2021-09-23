@@ -2172,7 +2172,7 @@ class PitchCommand(_scoping.Command):
         if pitches is not None:
             pitches = _coerce_pitches(pitches)
         self._pitches = pitches
-        self._state: abjad.OrderedDict = abjad.OrderedDict()
+        self._state = {}
 
     ### SPECIAL METHODS ###
 
@@ -2222,7 +2222,7 @@ class PitchCommand(_scoping.Command):
                 for pleaf in plt:
                     abjad.attach(_const.DO_NOT_TRANSPOSE, pleaf)
             pitches_consumed += 1
-        self._state = abjad.OrderedDict()
+        self._state = {}
         pitches_consumed += previous_pitches_consumed
         self.state["pitches_consumed"] = pitches_consumed
 
@@ -2370,7 +2370,7 @@ class PitchCommand(_scoping.Command):
         return self._pitches
 
     @property
-    def state(self) -> abjad.OrderedDict:
+    def state(self):
         """
         Gets state dictionary.
         """

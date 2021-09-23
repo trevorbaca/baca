@@ -974,7 +974,7 @@ r"""
 
         Example instruments:
 
-        >>> instruments = abjad.OrderedDict()
+        >>> instruments = {}
         >>> instruments['Flute'] = abjad.Flute()
         >>> instruments['Piccolo'] = abjad.Piccolo()
         >>> breaks = baca.breaks(
@@ -1941,7 +1941,7 @@ r"""
 
         Margin markup for examples:
 
-        >>> margin_markups = abjad.OrderedDict()
+        >>> margin_markups = {}
         >>> margin_markups['I+II'] = abjad.MarginMarkup(
         ...     markup=abjad.Markup('I+II'),
         ...     )
@@ -3160,7 +3160,7 @@ r"""
         ...         baca.system(measure=1, y_offset=4, distances=(8,)),
         ...     ),
         ... )
-        >>> metronome_marks = abjad.OrderedDict()
+        >>> metronome_marks = {}
         >>> metronome_marks['90'] = abjad.MetronomeMark((1, 4), 90)
         >>> metronome_marks['112'] = abjad.MetronomeMark((1, 4), 112)
 
@@ -4275,7 +4275,7 @@ r"""
         ...         baca.system(measure=1, y_offset=4, distances=(8,)),
         ...     ),
         ... )
-        >>> metronome_marks = abjad.OrderedDict()
+        >>> metronome_marks = {}
         >>> metronome_marks['90'] = abjad.MetronomeMark((1, 4), 90)
         >>> metronome_marks['112'] = abjad.MetronomeMark((1, 4), 112)
 

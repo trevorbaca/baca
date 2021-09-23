@@ -200,7 +200,7 @@ def extern(
     tag = abjad.Tag("baca.path.extern()")
     assert isinstance(include_path, type(path)), repr(include_path)
     preamble_lines, score_lines = [], []
-    stack, finished_variables = abjad.OrderedDict(), abjad.OrderedDict()
+    stack, finished_variables = {}, {}
     found_score = False
     with open(path) as pointer:
         for line in pointer.readlines():
@@ -406,7 +406,7 @@ def get_metadata(path, file_name="__metadata__"):
         baca = importlib.import_module("baca")
         namespace = {"abjad": abjad, "baca": baca}
         metadata = eval(file_contents_string, namespace)
-    return abjad.OrderedDict(metadata)
+    return dict(metadata)
 
 
 def get_metadatum(
@@ -465,15 +465,15 @@ def write_metadata_py(
     """
     metadata_py_path = path / file_name
     lines = []
-    dictionary = abjad.OrderedDict(metadata)
+    dictionary = dict(metadata)
     items = list(dictionary.items())
     items.sort()
-    dictionary = abjad.OrderedDict(items)
+    dictionary = dict(items)
     if dictionary:
         line = abjad.storage(dictionary)
         lines.append(line)
     else:
-        lines.append("abjad.OrderedDict()")
+        lines.append("{}")
     lines.append("")
     text = "\n".join(lines)
     metadata_py_path.write_text(text)
