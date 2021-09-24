@@ -423,6 +423,223 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
             >>
         }
 
+..  container:: example
+
+    Colors out-of-range pitches.
+
+    >>> figure = baca.figure([1], 16)
+    >>> collection_lists = [
+    ...     [[4]],
+    ...     [[-12, 2, 3, 5, 8, 9, 0]],
+    ...     [[11]],
+    ...     [[10, 7, 9, 10, 0, 5]],
+    ...     ]
+    >>> figures, time_signatures = [], []
+    >>> for i, collections in enumerate(collection_lists):
+    ...     selection = figure(collections)
+    ...     figures.append(selection)
+    ...     time_signature = abjad.get.duration(selection)
+    ...     time_signatures.append(time_signature)
+    ...
+    >>> figures_ = []
+    >>> for figure in figures:
+    ...     figures_.extend(figure)
+    ...
+    >>> figures = abjad.select(figures_)
+
+    >>> instruments = {}
+    >>> instruments["Violin"] = abjad.Violin()
+
+    >>> score_template = baca.make_empty_score_maker(1)
+    >>> maker = baca.SegmentMaker(
+    ...     instruments=instruments,
+    ...     score_template=score_template,
+    ...     time_signatures=time_signatures,
+    ... )
+    >>> maker(
+    ...     ("Music_Voice", 1),
+    ...     baca.instrument(abjad.Violin()),
+    ...     baca.music(figures, do_not_check_total_duration=True),
+    ... )
+
+    >>> lilypond_file = baca.interpret_commands(
+    ...     maker.commands,
+    ...     maker.score_template,
+    ...     maker.time_signatures,
+    ...     maker.voice_metadata,
+    ...     do_not_check_out_of_range_pitches=True,
+    ...     environment="docs",
+    ...     includes=["baca.ily"],
+    ...     instruments=instruments,
+    ...     remove_tags=baca.tags.documentation_removal_tags(),
+    ... )
+    >>> abjad.setting(lilypond_file["Score"]).autoBeaming = False
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        \with
+        {
+            autoBeaming = ##f
+        }
+        {
+            \context Staff = "Music_Staff"
+            <<
+                \context Voice = "Global_Skips"
+                {
+                    \time 1/16
+                    s1 * 1/16
+                    \time 7/16
+                    s1 * 7/16
+                    \time 1/16
+                    s1 * 1/16
+                    \time 3/8
+                    s1 * 3/8
+                }
+                \context Voice = "Music_Voice"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        e'16
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \baca-out-of-range-coloring
+                        c16
+                        d'16
+                        ef'!16
+                        f'16
+                        af'!16
+                        a'16
+                        c'16
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        b'16
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        bf'!16
+                        g'16
+                        a'16
+                        bf'!16
+                        c'16
+                        f'16
+                    }
+                }
+            >>
+        }
+
+..  container:: example
+
+    Colors repeat pitch-classes.
+
+    >>> figure = baca.figure([1], 16)
+    >>> collection_lists = [
+    ...     [[4]],
+    ...     [[6, 2, 3, 5, 9, 9, 0]],
+    ...     [[11]],
+    ...     [[10, 7, 9, 12, 0, 5]],
+    ...     ]
+    >>> figures, time_signatures = [], []
+    >>> for i, collections in enumerate(collection_lists):
+    ...     selection = figure(collections)
+    ...     figures.append(selection)
+    ...     time_signature = abjad.get.duration(selection)
+    ...     time_signatures.append(time_signature)
+    ...
+    >>> figures_ = []
+    >>> for figure in figures:
+    ...     figures_.extend(figure)
+    ...
+    >>> figures = abjad.select(figures_)
+
+    >>> maker = baca.SegmentMaker(
+    ...     score_template=baca.make_empty_score_maker(1),
+    ...     time_signatures=time_signatures,
+    ... )
+    >>> maker(
+    ...     ("Music_Voice", 1),
+    ...     baca.music(figures, do_not_check_total_duration=True),
+    ... )
+
+    >>> lilypond_file = baca.interpret_commands(
+    ...     maker.commands,
+    ...     maker.score_template,
+    ...     maker.time_signatures,
+    ...     maker.voice_metadata,
+    ...     environment="docs",
+    ...     includes=["baca.ily"],
+    ...     remove_tags=baca.tags.documentation_removal_tags(),
+    ... )
+    >>> score = lilypond_file["Score"]
+    >>> abjad.setting(score).autoBeaming = False
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        \with
+        {
+            autoBeaming = ##f
+        }
+        {
+            \context Staff = "Music_Staff"
+            <<
+                \context Voice = "Global_Skips"
+                {
+                    \time 1/16
+                    s1 * 1/16
+                    \time 7/16
+                    s1 * 7/16
+                    \time 1/16
+                    s1 * 1/16
+                    \time 3/8
+                    s1 * 3/8
+                }
+                \context Voice = "Music_Voice"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        e'16
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        fs'!16
+                        d'16
+                        ef'!16
+                        f'16
+                        \baca-repeat-pitch-class-coloring
+                        a'16
+                        \baca-repeat-pitch-class-coloring
+                        a'16
+                        c'16
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        b'16
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        bf'!16
+                        g'16
+                        a'16
+                        \baca-repeat-pitch-class-coloring
+                        c''16
+                        \baca-repeat-pitch-class-coloring
+                        c'16
+                        f'16
+                    }
+                }
+            >>
+        }
+
 """
 
 

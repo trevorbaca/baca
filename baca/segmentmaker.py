@@ -3075,113 +3075,6 @@ def _whitespace_leaves(score):
 
 
 def color_out_of_range_pitches(score):
-    r"""
-    Colors out-of-range pitches in ``score``.
-
-    ..  container:: example
-
-        >>> figure = baca.figure([1], 16)
-        >>> collection_lists = [
-        ...     [[4]],
-        ...     [[-12, 2, 3, 5, 8, 9, 0]],
-        ...     [[11]],
-        ...     [[10, 7, 9, 10, 0, 5]],
-        ...     ]
-        >>> figures, time_signatures = [], []
-        >>> for i, collections in enumerate(collection_lists):
-        ...     selection = figure(collections)
-        ...     figures.append(selection)
-        ...     time_signature = abjad.get.duration(selection)
-        ...     time_signatures.append(time_signature)
-        ...
-        >>> figures_ = []
-        >>> for figure in figures:
-        ...     figures_.extend(figure)
-        ...
-        >>> figures = abjad.select(figures_)
-
-        >>> instruments = {}
-        >>> instruments["Violin"] = abjad.Violin()
-
-        >>> maker = baca.SegmentMaker(
-        ...     instruments=instruments,
-        ...     score_template=baca.make_empty_score_maker(1),
-        ...     time_signatures=time_signatures,
-        ... )
-        >>> maker(
-        ...     ("Music_Voice", 1),
-        ...     baca.instrument(abjad.Violin()),
-        ...     baca.music(figures, do_not_check_total_duration=True),
-        ... )
-
-        >>> lilypond_file = maker.run(
-        ...     do_not_check_out_of_range_pitches=True,
-        ...     environment="docs",
-        ...     includes=["baca.ily"],
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ... )
-        >>> abjad.setting(lilypond_file["Score"]).autoBeaming = False
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            \with
-            {
-                autoBeaming = ##f
-            }
-            {
-                \context Staff = "Music_Staff"
-                <<
-                    \context Voice = "Global_Skips"
-                    {
-                        \time 1/16
-                        s1 * 1/16
-                        \time 7/16
-                        s1 * 7/16
-                        \time 1/16
-                        s1 * 1/16
-                        \time 3/8
-                        s1 * 3/8
-                    }
-                    \context Voice = "Music_Voice"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            e'16
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \baca-out-of-range-coloring
-                            c16
-                            d'16
-                            ef'!16
-                            f'16
-                            af'!16
-                            a'16
-                            c'16
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            b'16
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            bf'!16
-                            g'16
-                            a'16
-                            bf'!16
-                            c'16
-                            f'16
-                        }
-                    }
-                >>
-            }
-
-    """
     indicator = _const.ALLOW_OUT_OF_RANGE
     tag = _scoping.site(_frame())
     tag = tag.append(_tags.OUT_OF_RANGE_COLORING)
@@ -3203,110 +3096,6 @@ def color_out_of_range_pitches(score):
 
 
 def color_repeat_pitch_classes(score):
-    r"""
-    Colors repeat pitch-classes in ``score``.
-
-    ..  container:: example
-
-        >>> figure = baca.figure([1], 16)
-        >>> collection_lists = [
-        ...     [[4]],
-        ...     [[6, 2, 3, 5, 9, 9, 0]],
-        ...     [[11]],
-        ...     [[10, 7, 9, 12, 0, 5]],
-        ...     ]
-        >>> figures, time_signatures = [], []
-        >>> for i, collections in enumerate(collection_lists):
-        ...     selection = figure(collections)
-        ...     figures.append(selection)
-        ...     time_signature = abjad.get.duration(selection)
-        ...     time_signatures.append(time_signature)
-        ...
-        >>> figures_ = []
-        >>> for figure in figures:
-        ...     figures_.extend(figure)
-        ...
-        >>> figures = abjad.select(figures_)
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.make_empty_score_maker(1),
-        ...     time_signatures=time_signatures,
-        ... )
-        >>> maker(
-        ...     ("Music_Voice", 1),
-        ...     baca.music(figures, do_not_check_total_duration=True),
-        ... )
-
-        >>> lilypond_file = maker.run(
-        ...     environment="docs",
-        ...     includes=["baca.ily"],
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ... )
-        >>> score = lilypond_file["Score"]
-        >>> abjad.setting(score).autoBeaming = False
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            \with
-            {
-                autoBeaming = ##f
-            }
-            {
-                \context Staff = "Music_Staff"
-                <<
-                    \context Voice = "Global_Skips"
-                    {
-                        \time 1/16
-                        s1 * 1/16
-                        \time 7/16
-                        s1 * 7/16
-                        \time 1/16
-                        s1 * 1/16
-                        \time 3/8
-                        s1 * 3/8
-                    }
-                    \context Voice = "Music_Voice"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            e'16
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            fs'!16
-                            d'16
-                            ef'!16
-                            f'16
-                            \baca-repeat-pitch-class-coloring
-                            a'16
-                            \baca-repeat-pitch-class-coloring
-                            a'16
-                            c'16
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            b'16
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            bf'!16
-                            g'16
-                            a'16
-                            \baca-repeat-pitch-class-coloring
-                            c''16
-                            \baca-repeat-pitch-class-coloring
-                            c'16
-                            f'16
-                        }
-                    }
-                >>
-            }
-
-    """
     tag = _scoping.site(_frame())
     tag = tag.append(_tags.REPEAT_PITCH_CLASS_COLORING)
     lts = _find_repeat_pitch_classes(score)
@@ -3822,3 +3611,399 @@ class SegmentMaker:
             return lilypond_file, metadata, persist
         else:
             return lilypond_file
+
+
+def interpret_commands(
+    commands,
+    score_template,
+    time_signatures,
+    voice_metadata,
+    activate=None,
+    add_container_identifiers=False,
+    allow_empty_selections=False,
+    append_phantom_measure=False,
+    attach_rhythm_annotation_spanners=False,
+    check_persistent_indicators=False,
+    clock_time_extra_offset=None,
+    clock_time_override=None,
+    color_octaves=False,
+    deactivate=None,
+    do_not_check_beamed_long_notes=False,
+    do_not_check_out_of_range_pitches=False,
+    do_not_check_wellformedness=False,
+    do_not_force_nonnatural_accidentals=False,
+    do_not_print_timing=False,
+    environment=None,
+    error_on_not_yet_pitched=False,
+    fermata_extra_offset_y=2.5,
+    fermata_measure_empty_overrides=None,
+    final_segment=False,
+    first_measure_number=None,
+    first_segment=True,  # TODO: default to false
+    include_layout_ly=False,
+    includes=None,
+    indicator_defaults=None,
+    instruments=None,
+    local_measure_number_extra_offset=None,
+    magnify_staves=None,
+    margin_markups=None,
+    measure_number_extra_offset=None,
+    metadata=None,
+    metronome_marks=None,
+    midi=False,
+    moment_markup=None,
+    page_layout_profile=None,
+    parts_metric_modulation_multiplier=None,
+    persist=None,
+    preamble=None,
+    previous_metadata=None,
+    previous_persist=None,
+    remove_tags=None,
+    return_metadata=False,
+    segment_number=None,
+    skips_instead_of_rests=False,
+    spacing=None,
+    spacing_extra_offset=None,
+    stage_markup=None,
+    stage_number_extra_offset=None,
+    transpose_score=False,
+    treat_untreated_persistent_wrappers=False,
+):
+    """
+    Interprets commands.
+    """
+    if activate is not None:
+        assert all(isinstance(_, abjad.Tag) for _ in activate)
+    assert allow_empty_selections in (True, False)
+    if clock_time_extra_offset not in (False, None):
+        assert isinstance(clock_time_extra_offset, tuple)
+        assert len(clock_time_extra_offset) == 2
+    if clock_time_override is not None:
+        assert isinstance(clock_time_override, abjad.MetronomeMark)
+    assert color_octaves in (True, False)
+    if deactivate is not None:
+        assert all(isinstance(_, abjad.Tag) for _ in deactivate)
+    assert do_not_check_out_of_range_pitches in (True, False)
+    assert do_not_check_beamed_long_notes in (True, False)
+    assert do_not_check_wellformedness in (True, False)
+    assert do_not_force_nonnatural_accidentals in (True, False)
+    assert environment in (None, "docs"), repr(environment)
+    assert final_segment in (True, False)
+    assert first_segment in (True, False)
+    manifests = {
+        "abjad.Instrument": instruments,
+        "abjad.MarginMarkup": margin_markups,
+        "abjad.MetronomeMark": metronome_marks,
+    }
+    metadata = dict(metadata or {})
+    if parts_metric_modulation_multiplier is not None:
+        assert isinstance(parts_metric_modulation_multiplier, tuple)
+        assert len(parts_metric_modulation_multiplier) == 2
+    persist = dict(persist or {})
+    preamble = preamble or ()
+    if preamble:
+        assert all(isinstance(_, str) for _ in preamble), repr(preamble)
+    previous_metadata = dict(previous_metadata or {})
+    previous_persist = dict(previous_persist or {})
+    assert transpose_score in (True, False)
+    assert treat_untreated_persistent_wrappers in (True, False)
+    with abjad.Timer() as timer:
+        measure_count = len(time_signatures)
+        score = _make_score(indicator_defaults, score_template)
+        if environment == "docs":
+            includes_ = includes
+        else:
+            includes_ = _get_lilypond_includes(
+                clock_time_extra_offset,
+                includes,
+                local_measure_number_extra_offset,
+                measure_number_extra_offset,
+                spacing_extra_offset,
+                stage_number_extra_offset,
+            )
+        lilypond_file = _make_lilypond_file(
+            first_segment,
+            include_layout_ly,
+            includes_,
+            midi,
+            preamble,
+            score,
+        )
+        _make_global_skips(
+            not append_phantom_measure,
+            first_segment,
+            score,
+            time_signatures,
+        )
+        _label_measure_numbers(
+            first_measure_number,
+            previous_metadata,
+            score,
+        )
+        _label_stage_numbers(score, stage_markup)
+        _label_moment_numbers(moment_markup, score)
+    count = int(timer.elapsed_time)
+    seconds = abjad.String("second").pluralize(count)
+    if not do_not_print_timing and environment != "docs":
+        print(f"Score initialization {count} {seconds} ...")
+    with abjad.Timer() as timer:
+        with abjad.ForbidUpdate(component=score, update_on_exit=True):
+            command_count, segment_duration = _call_rhythm_commands(
+                attach_rhythm_annotation_spanners,
+                commands,
+                not append_phantom_measure,
+                environment,
+                manifests,
+                measure_count,
+                previous_persist,
+                score,
+                score_template,
+                skips_instead_of_rests,
+                time_signatures,
+                voice_metadata,
+            )
+            _clean_up_rhythm_maker_voice_names(score)
+    count = int(timer.elapsed_time)
+    seconds = abjad.String("second").pluralize(count)
+    commands_ = abjad.String("command").pluralize(command_count)
+    if not do_not_print_timing and environment != "docs":
+        message = f"Rhythm commands {count} {seconds}"
+        message += f" [for {command_count} {commands_}] ..."
+        print(message)
+    with abjad.Timer() as timer:
+        offset_to_measure_number = _populate_offset_to_measure_number(
+            first_measure_number,
+            previous_metadata,
+            score,
+        )
+        _extend_beams(score)
+        _attach_sounds_during(score)
+        _attach_first_segment_score_template_defaults(
+            score,
+            first_segment=first_segment,
+            manifests=manifests,
+        )
+        persistent_indicators = previous_persist.get("persistent_indicators")
+        if persistent_indicators and not first_segment:
+            _reapply_persistent_indicators(
+                manifests,
+                persistent_indicators,
+                score,
+            )
+        _attach_first_appearance_score_template_defaults(
+            score,
+            first_segment=first_segment,
+            manifests=manifests,
+            previous_persist=previous_persist,
+        )
+        _apply_spacing(score, page_layout_profile, spacing)
+    count = int(timer.elapsed_time)
+    seconds = abjad.String("second").pluralize(count)
+    if not do_not_print_timing and environment != "docs":
+        print(f"After-rhythm methods {count} {seconds} ...")
+    with abjad.Timer() as timer:
+        with abjad.ForbidUpdate(component=score, update_on_exit=True):
+            cache = None
+            cache, command_count = _call_commands(
+                allow_empty_selections,
+                cache,
+                commands,
+                measure_count,
+                offset_to_measure_number,
+                manifests,
+                previous_persist,
+                score,
+                score_template,
+                voice_metadata,
+            )
+    count = int(timer.elapsed_time)
+    seconds = abjad.String("second").pluralize(count)
+    commands_ = abjad.String("command").pluralize(command_count)
+    if not do_not_print_timing and environment != "docs":
+        message = f"Nonrhythm commands {count} {seconds}"
+        message += f" [for {command_count} {commands_}] ..."
+        print(message)
+    # TODO: optimize by consolidating score iteration:
+    with abjad.Timer() as timer:
+        with abjad.ForbidUpdate(component=score, update_on_exit=True):
+            _clone_segment_initial_short_instrument_name(
+                first_segment,
+                score,
+            )
+            cached_time_signatures = _remove_redundant_time_signatures(
+                not append_phantom_measure,
+                score,
+            )
+            result = _get_fermata_measure_numbers(
+                score,
+                _get_first_measure_number(
+                    first_measure_number,
+                    previous_metadata,
+                ),
+            )
+            fermata_start_offsets = result[0]
+            fermata_measure_numbers = result[1]
+            final_measure_is_fermata = result[2]
+            if treat_untreated_persistent_wrappers:
+                _treat_untreated_persistent_wrappers(
+                    environment,
+                    manifests,
+                    score,
+                )
+            _attach_metronome_marks(
+                parts_metric_modulation_multiplier,
+                score,
+            )
+            _reanalyze_trending_dynamics(manifests, score)
+            _reanalyze_reapplied_synthetic_wrappers(score)
+            if transpose_score:
+                _transpose_score(score)
+            _color_not_yet_registered(score)
+            _color_mock_pitch(score)
+            _set_intermittent_to_staff_position_zero(score)
+            if environment != "docs":
+                _color_not_yet_pitched(environment, score)
+            _set_not_yet_pitched_to_staff_position_zero(score)
+            _clean_up_repeat_tie_direction(score)
+            _clean_up_laissez_vibrer_tie_direction(score)
+            if error_on_not_yet_pitched:
+                _error_on_not_yet_pitched(score)
+            _check_doubled_dynamics(score)
+            color_out_of_range_pitches(score)
+            if check_persistent_indicators:
+                _check_persistent_indicators(
+                    environment,
+                    score,
+                    score_template,
+                )
+            color_repeat_pitch_classes(score)
+            if color_octaves:
+                _color_octaves(score)
+            _attach_shadow_tie_indicators(score)
+            if not do_not_force_nonnatural_accidentals:
+                _force_nonnatural_accidentals(score)
+            _label_duration_multipliers(score)
+            _magnify_staves(magnify_staves, score)
+            if environment != "docs":
+                _whitespace_leaves(score)
+            if environment != "docs":
+                _comment_measure_numbers(
+                    _get_first_measure_number(
+                        first_measure_number,
+                        previous_metadata,
+                    ),
+                    offset_to_measure_number,
+                    score,
+                )
+            _apply_breaks(score, spacing)
+            _style_fermata_measures(
+                fermata_extra_offset_y,
+                fermata_measure_empty_overrides,
+                fermata_start_offsets,
+                final_segment,
+                offset_to_measure_number,
+                score,
+            )
+            if environment != "docs":
+                _shift_measure_initial_clefs(
+                    manifests,
+                    offset_to_measure_number,
+                    previous_persist,
+                    score,
+                    score_template,
+                )
+            _deactivate_tags(deactivate, score)
+            remove_tags = remove_tags or []
+            _remove_docs_tags(environment, remove_tags, score)
+            container_to_part_assignment = None
+            if add_container_identifiers:
+                container_to_part_assignment = _add_container_identifiers(
+                    score,
+                    segment_number,
+                )
+                _check_all_music_in_part_containers(score, score_template)
+                _check_duplicate_part_assignments(
+                    container_to_part_assignment,
+                    score_template,
+                )
+            _move_global_rests(score, score_template)
+        # mutates offsets:
+        if environment == "docs":
+            _move_global_context(score)
+        _clean_up_on_beat_grace_containers(score)
+        _check_wellformedness(
+            do_not_check_beamed_long_notes,
+            do_not_check_out_of_range_pitches,
+            do_not_check_wellformedness,
+            score,
+        )
+    count = int(timer.elapsed_time)
+    seconds = abjad.String("second").pluralize(count)
+    if not do_not_print_timing and environment != "docs":
+        print(f"Postprocessing {count} {seconds} ...")
+    with abjad.Timer() as timer:
+        method = getattr(score, "_update_now")
+        method(offsets_in_seconds=True)
+    count = int(timer.elapsed_time)
+    seconds = abjad.String("second").pluralize(count)
+    if not do_not_print_timing and environment != "docs":
+        print(f"Offsets-in-seconds update {count} {seconds} ...")
+    with abjad.Timer() as timer:
+        clock_time_duration = None
+        start_clock_time = None
+        stop_clock_time = None
+        if environment != "docs":
+            result = _label_clock_time(
+                clock_time_override,
+                fermata_measure_numbers,
+                first_measure_number,
+                previous_metadata,
+                score,
+            )
+            clock_time_duration = result[0]
+            start_clock_time = result[1]
+            stop_clock_time = result[2]
+        _activate_tags(score, activate)
+        first_measure_number_ = _get_first_measure_number(
+            first_measure_number,
+            previous_metadata,
+        )
+        final_measure_number = first_measure_number_ + measure_count - 1
+        persistent_indicators = _collect_persistent_indicators(
+            environment,
+            manifests,
+            previous_persist,
+            score,
+        )
+        _collect_metadata(
+            container_to_part_assignment,
+            clock_time_duration,
+            fermata_measure_numbers,
+            final_measure_is_fermata,
+            final_measure_number,
+            _get_first_measure_number(
+                first_measure_number,
+                previous_metadata,
+            ),
+            metadata,
+            persist,
+            persistent_indicators,
+            score,
+            start_clock_time,
+            stop_clock_time,
+            cached_time_signatures,
+            voice_metadata,
+        )
+        _style_phantom_measures(
+            not append_phantom_measure,
+            score,
+        )
+    count = int(timer.elapsed_time)
+    seconds = abjad.String("second").pluralize(count)
+    if not do_not_print_timing and environment != "docs":
+        print(f"Clock time markup {count} {seconds} ...")
+    assert isinstance(lilypond_file, abjad.LilyPondFile)
+    if return_metadata:
+        return lilypond_file, metadata, persist
+    else:
+        return lilypond_file
