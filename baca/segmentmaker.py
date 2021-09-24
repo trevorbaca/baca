@@ -672,13 +672,14 @@ def _bracket_metric_modulation(metronome_mark, metric_modulation):
     return command
 
 
-def _bundle_manifests(
+def _bundle_runtime(
     manifests,
-    offset_to_measure_number,
     previous_persist,
     score_template,
+    offset_to_measure_number=None,
     voice_name=None,
 ):
+    offset_to_measure_number = offset_to_measure_number or {}
     previous_segment_voice_metadata = _get_previous_segment_voice_metadata(
         previous_persist, voice_name
     )
@@ -782,7 +783,7 @@ def _call_commands(
             measure_count,
         )
         voice_name = command.scope.voice_name
-        runtime = _bundle_manifests(
+        runtime = _bundle_runtime(
             manifests=manifests,
             offset_to_measure_number=offset_to_measure_number,
             previous_persist=previous_persist,
@@ -864,10 +865,8 @@ def _call_rhythm_commands(
                 *measures,
             )
             start_offset, time_signatures_ = result
-            runtime = _bundle_manifests(
+            runtime = _bundle_runtime(
                 manifests=manifests,
-                # offset_to_measure_number=offset_to_measure_number,
-                offset_to_measure_number={},
                 previous_persist=previous_persist,
                 score_template=score_template,
                 voice_name=voice.name,
@@ -2629,7 +2628,7 @@ def _shift_measure_initial_clefs(
             suite = _overrides.clef_shift(
                 clef, selector=lambda _: _selection.Selection(_).leaf(0)
             )
-            runtime = _bundle_manifests(
+            runtime = _bundle_runtime(
                 manifests=manifests,
                 offset_to_measure_number=offset_to_measure_number,
                 previous_persist=previous_persist,
@@ -3346,7 +3345,6 @@ class SegmentMaker:
         "instruments",
         "margin_markups",
         "metronome_marks",
-        "remove",
         "score_template",
         "skips_instead_of_rests",
         "time_signatures",
@@ -3361,10 +3359,6 @@ class SegmentMaker:
         instruments=None,
         margin_markups=None,
         metronome_marks=None,
-        # TODO: phantom is unused?
-        phantom=False,
-        # TODO: replace remove with remove_tags?
-        remove=None,
         score_template=None,
         skips_instead_of_rests=False,
         time_signatures=None,
@@ -3376,9 +3370,6 @@ class SegmentMaker:
         self.instruments = instruments
         self.margin_markups = margin_markups
         self.metronome_marks = metronome_marks
-        if remove is not None:
-            assert all(isinstance(_, abjad.Tag) for _ in remove)
-        self.remove = remove
         assert score_template is not None, repr(score_template)
         self.score_template = score_template
         self.skips_instead_of_rests = skips_instead_of_rests
@@ -3443,17 +3434,6 @@ class SegmentMaker:
                     command_ = abjad.new(command_, scope=scope_)
                     self.commands.append(command_)
 
-    @property
-    def manifests(self):
-        """
-        Gets manifests.
-        """
-        manifests = {}
-        manifests["abjad.Instrument"] = self.instruments
-        manifests["abjad.MarginMarkup"] = self.margin_markups
-        manifests["abjad.MetronomeMark"] = self.metronome_marks
-        return manifests
-
     def run(
         self,
         activate=None,
@@ -3508,12 +3488,14 @@ class SegmentMaker:
         if activate is not None:
             assert all(isinstance(_, abjad.Tag) for _ in activate)
         assert allow_empty_selections in (True, False)
+        append_phantom_measure = self.append_phantom_measure
         if clock_time_extra_offset not in (False, None):
             assert isinstance(clock_time_extra_offset, tuple)
             assert len(clock_time_extra_offset) == 2
         if clock_time_override is not None:
             assert isinstance(clock_time_override, abjad.MetronomeMark)
         assert color_octaves in (True, False)
+        commands = self.commands
         if deactivate is not None:
             assert all(isinstance(_, abjad.Tag) for _ in deactivate)
         assert do_not_check_out_of_range_pitches in (True, False)
@@ -3523,6 +3505,11 @@ class SegmentMaker:
         assert environment in (None, "docs"), repr(environment)
         assert final_segment in (True, False)
         assert first_segment in (True, False)
+        manifests = {
+            "abjad.Instrument": self.instruments,
+            "abjad.MarginMarkup": self.margin_markups,
+            "abjad.MetronomeMark": self.metronome_marks,
+        }
         metadata = dict(metadata or {})
         if parts_metric_modulation_multiplier is not None:
             assert isinstance(parts_metric_modulation_multiplier, tuple)
@@ -3558,7 +3545,7 @@ class SegmentMaker:
                 score,
             )
             _make_global_skips(
-                not self.append_phantom_measure,
+                not append_phantom_measure,
                 first_segment,
                 score,
                 self.time_signatures,
@@ -3578,10 +3565,10 @@ class SegmentMaker:
             with abjad.ForbidUpdate(component=score, update_on_exit=True):
                 command_count, segment_duration = _call_rhythm_commands(
                     attach_rhythm_annotation_spanners,
-                    self.commands,
-                    not self.append_phantom_measure,
+                    commands,
+                    not append_phantom_measure,
                     environment,
-                    self.manifests,
+                    manifests,
                     measure_count,
                     previous_persist,
                     score,
@@ -3593,10 +3580,10 @@ class SegmentMaker:
                 _clean_up_rhythm_maker_voice_names(score)
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
-        commands = abjad.String("command").pluralize(command_count)
+        commands_ = abjad.String("command").pluralize(command_count)
         if not do_not_print_timing and environment != "docs":
             message = f"Rhythm commands {count} {seconds}"
-            message += f" [for {command_count} {commands}] ..."
+            message += f" [for {command_count} {commands_}] ..."
             print(message)
         with abjad.Timer() as timer:
             offset_to_measure_number = _populate_offset_to_measure_number(
@@ -3609,19 +3596,19 @@ class SegmentMaker:
             _attach_first_segment_score_template_defaults(
                 score,
                 first_segment=first_segment,
-                manifests=self.manifests,
+                manifests=manifests,
             )
             persistent_indicators = previous_persist.get("persistent_indicators")
             if persistent_indicators and not first_segment:
                 _reapply_persistent_indicators(
-                    self.manifests,
+                    manifests,
                     persistent_indicators,
                     score,
                 )
             _attach_first_appearance_score_template_defaults(
                 score,
                 first_segment=first_segment,
-                manifests=self.manifests,
+                manifests=manifests,
                 previous_persist=previous_persist,
             )
             _apply_spacing(score, page_layout_profile, spacing)
@@ -3635,10 +3622,10 @@ class SegmentMaker:
                 cache, command_count = _call_commands(
                     allow_empty_selections,
                     cache,
-                    self.commands,
+                    commands,
                     measure_count,
                     offset_to_measure_number,
-                    self.manifests,
+                    manifests,
                     previous_persist,
                     score,
                     self.score_template,
@@ -3646,10 +3633,10 @@ class SegmentMaker:
                 )
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
-        commands = abjad.String("command").pluralize(command_count)
+        commands_ = abjad.String("command").pluralize(command_count)
         if not do_not_print_timing and environment != "docs":
             message = f"Nonrhythm commands {count} {seconds}"
-            message += f" [for {command_count} {commands}] ..."
+            message += f" [for {command_count} {commands_}] ..."
             print(message)
         # TODO: optimize by consolidating score iteration:
         with abjad.Timer() as timer:
@@ -3659,7 +3646,7 @@ class SegmentMaker:
                     score,
                 )
                 cached_time_signatures = _remove_redundant_time_signatures(
-                    not self.append_phantom_measure,
+                    not append_phantom_measure,
                     score,
                 )
                 result = _get_fermata_measure_numbers(
@@ -3675,14 +3662,14 @@ class SegmentMaker:
                 if treat_untreated_persistent_wrappers:
                     _treat_untreated_persistent_wrappers(
                         environment,
-                        self.manifests,
+                        manifests,
                         score,
                     )
                 _attach_metronome_marks(
                     parts_metric_modulation_multiplier,
                     score,
                 )
-                _reanalyze_trending_dynamics(self.manifests, score)
+                _reanalyze_trending_dynamics(manifests, score)
                 _reanalyze_reapplied_synthetic_wrappers(score)
                 if transpose_score:
                     _transpose_score(score)
@@ -3734,14 +3721,14 @@ class SegmentMaker:
                 )
                 if environment != "docs":
                     _shift_measure_initial_clefs(
-                        self.manifests,
+                        manifests,
                         offset_to_measure_number,
                         previous_persist,
                         score,
                         self.score_template,
                     )
                 _deactivate_tags(deactivate, score)
-                remove_tags = (remove_tags or []) + (self.remove or [])
+                remove_tags = remove_tags or []
                 _remove_docs_tags(environment, remove_tags, score)
                 container_to_part_assignment = None
                 if add_container_identifiers:
@@ -3799,7 +3786,7 @@ class SegmentMaker:
             final_measure_number = first_measure_number_ + measure_count - 1
             persistent_indicators = _collect_persistent_indicators(
                 environment,
-                self.manifests,
+                manifests,
                 previous_persist,
                 score,
             )
@@ -3823,7 +3810,7 @@ class SegmentMaker:
                 self.voice_metadata,
             )
             _style_phantom_measures(
-                not self.append_phantom_measure,
+                not append_phantom_measure,
                 score,
             )
         count = int(timer.elapsed_time)
