@@ -385,7 +385,11 @@ def bar_line_transparent(
         ...     ),
         ... )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1374,7 +1378,11 @@ def mmrest_color(
         ...     baca.mmrest_color("#(x11-color 'DarkOrchid)"),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1468,7 +1476,11 @@ def mmrest_text_color(
         ...     baca.mmrest_text_color("#red"),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1534,7 +1546,11 @@ def mmrest_text_color(
         ...     baca.pitches([2, 4]),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1578,7 +1594,11 @@ def mmrest_text_extra_offset(
         ...     baca.mmrest_text_extra_offset((0, 2)),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1657,7 +1677,11 @@ def mmrest_text_padding(
         ...     baca.mmrest_text_padding(2),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1735,7 +1759,11 @@ def mmrest_text_parent_center(
         ...     baca.mmrest_text_parent_center(),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1814,7 +1842,11 @@ def mmrest_text_staff_padding(
         ...     baca.mmrest_text_staff_padding(2),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4284,7 +4316,11 @@ def text_script_color(
         ...     baca.text_script_color("#red"),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4414,7 +4450,11 @@ def text_script_down(
         ...     baca.text_script_down()
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4466,7 +4506,11 @@ def text_script_extra_offset(
         ...     baca.text_script_extra_offset((0, 2)),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4620,7 +4664,11 @@ def text_script_padding(
         ...     baca.text_script_padding(2),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4797,7 +4845,11 @@ def text_script_staff_padding(
         ...     baca.text_script_staff_padding(2)
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4927,7 +4979,11 @@ def text_script_up(
         ...     baca.text_script_up()
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),

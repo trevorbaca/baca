@@ -2141,7 +2141,11 @@ class Imbrication:
             ...     baca.voice_two(),
             ... )
 
-            >>> lilypond_file = maker.run(
+            >>> lilypond_file = baca.interpret_commands(
+            ...     maker.commands,
+            ...     maker.score_template,
+            ...     maker.time_signatures,
+            ...     maker.voice_metadata,
             ...     environment="docs",
             ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2360,7 +2364,11 @@ class Imbrication:
             ...     baca.voice_two(),
             ... )
 
-            >>> lilypond_file = maker.run(
+            >>> lilypond_file = baca.interpret_commands(
+            ...     maker.commands,
+            ...     maker.score_template,
+            ...     maker.time_signatures,
+            ...     maker.voice_metadata,
             ...     environment="docs",
             ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2559,7 +2567,11 @@ class Imbrication:
             ...     baca.voice_two(),
             ... )
 
-            >>> lilypond_file = maker.run(
+            >>> lilypond_file = baca.interpret_commands(
+            ...     maker.commands,
+            ...     maker.score_template,
+            ...     maker.time_signatures,
+            ...     maker.voice_metadata,
             ...     environment="docs",
             ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2779,7 +2791,11 @@ class Imbrication:
             ...     baca.voice_two(),
             ... )
 
-            >>> lilypond_file = maker.run(
+            >>> lilypond_file = baca.interpret_commands(
+            ...     maker.commands,
+            ...     maker.score_template,
+            ...     maker.time_signatures,
+            ...     maker.voice_metadata,
             ...     environment="docs",
             ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -7082,7 +7098,11 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...     baca.voice_two(),
         ... )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -7229,7 +7249,11 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...     baca.voice_two(),
         ... )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -7413,7 +7437,11 @@ def extend_beam(
         ...     baca.voice_two(),
         ... )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -7610,7 +7638,11 @@ def imbricate(
         ...     baca.voice_two(),
         ... )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -7787,7 +7819,11 @@ def imbricate(
         ...     time_signatures=accumulator.time_signatures,
         ... )
         >>> accumulator.populate_segment_maker(maker)
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -8011,7 +8047,11 @@ def imbricate(
         ...     baca.voice_two(),
         ... )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -8217,7 +8257,11 @@ def imbricate(
         ...     baca.voice_two(),
         ... )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -8356,7 +8400,11 @@ def imbricate(
         ...     baca.voice_two(),
         ... )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -8519,7 +8567,11 @@ def imbricate(
         ...     baca.voice_two(),
         ... )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),

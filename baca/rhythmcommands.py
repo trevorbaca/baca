@@ -37,7 +37,11 @@ class RhythmCommand(_scoping.Command):
         ...     command,
         ... )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -354,7 +358,11 @@ class RhythmCommand(_scoping.Command):
             ...     command,
             ... )
 
-            >>> lilypond_file = maker.run(
+            >>> lilypond_file = baca.interpret_commands(
+            ...     maker.commands,
+            ...     maker.score_template,
+            ...     maker.time_signatures,
+            ...     maker.voice_metadata,
             ...     environment="docs",
             ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -672,7 +680,11 @@ def make_monads(fractions):
         ...     baca.make_monads("2/5 2/5 1/5"),
         ... )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -783,7 +795,11 @@ def make_repeat_tied_notes(
         ...     baca.make_repeat_tied_notes(),
         ... )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),

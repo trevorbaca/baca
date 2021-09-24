@@ -272,7 +272,11 @@ class BCPCommand(_scoping.Command):
             ...     baca.text_spanner_staff_padding(2.5),
             ...     )
 
-            >>> lilypond_file = maker.run(
+            >>> lilypond_file = baca.interpret_commands(
+            ...     maker.commands,
+            ...     maker.score_template,
+            ...     maker.time_signatures,
+            ...     maker.voice_metadata,
             ...     environment="docs",
             ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -475,7 +479,11 @@ class BCPCommand(_scoping.Command):
             ...     baca.script_staff_padding(5),
             ...     )
 
-            >>> lilypond_file = maker.run(
+            >>> lilypond_file = baca.interpret_commands(
+            ...     maker.commands,
+            ...     maker.score_template,
+            ...     maker.time_signatures,
+            ...     maker.voice_metadata,
             ...     environment="docs",
             ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -740,7 +748,11 @@ class ContainerCommand(_scoping.Command):
         ...     baca.pitches('E4 F4'),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),

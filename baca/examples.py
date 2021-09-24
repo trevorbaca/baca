@@ -16,7 +16,11 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     baca.label(lambda _: abjad.label.with_indices(_)),
     ... )
 
-    >>> lilypond_file = maker.run(
+    >>> lilypond_file = baca.interpret_commands(
+    ...     maker.commands,
+    ...     maker.score_template,
+    ...     maker.time_signatures,
+    ...     maker.voice_metadata,
     ...     environment="docs",
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -102,7 +106,11 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     commands,
     ... )
 
-    >>> lilypond_file = maker.run(
+    >>> lilypond_file = baca.interpret_commands(
+    ...     maker.commands,
+    ...     maker.score_template,
+    ...     maker.time_signatures,
+    ...     maker.voice_metadata,
     ...     environment="docs",
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -219,7 +227,11 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     baca.clef("bass"),
     ... )
 
-    >>> lilypond_file = maker.run(
+    >>> lilypond_file = baca.interpret_commands(
+    ...     maker.commands,
+    ...     maker.score_template,
+    ...     maker.time_signatures,
+    ...     maker.voice_metadata,
     ...     color_octaves=True,
     ...     environment="docs",
     ...     includes=["baca.ily"],
@@ -294,7 +306,12 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     baca.pitches("E4 F4"),
     ... )
 
-    >>> lilypond_file = maker.run(
+    >>> lilypond_file = baca.interpret_commands(
+    ...     maker.commands,
+    ...     maker.score_template,
+    ...     maker.time_signatures,
+    ...     maker.voice_metadata,
+    ...     instruments=maker.instruments,
     ...     environment="docs",
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ...     transpose_score=True,
@@ -368,7 +385,12 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     baca.pitches("E4 F4"),
     ... )
 
-    >>> lilypond_file = maker.run(
+    >>> lilypond_file = baca.interpret_commands(
+    ...     maker.commands,
+    ...     maker.score_template,
+    ...     maker.time_signatures,
+    ...     maker.voice_metadata,
+    ...     instruments=maker.instruments,
     ...     environment="docs",
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ...     transpose_score=False,

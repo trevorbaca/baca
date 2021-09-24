@@ -59,7 +59,11 @@ def assign_parts(
         ...     baca.pitch("E4"),
         ... )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -113,7 +117,11 @@ def assign_parts(
         ...     baca.pitches("E4 F4"),
         ... )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -162,7 +170,11 @@ def bcps(
             ...     baca.text_spanner_staff_padding(2.5),
             ...     )
 
-            >>> lilypond_file = maker.run(
+            >>> lilypond_file = baca.interpret_commands(
+            ...     maker.commands,
+            ...     maker.score_template,
+            ...     maker.time_signatures,
+            ...     maker.voice_metadata,
             ...     environment="docs",
             ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -514,7 +526,11 @@ def container(
         ...     baca.pitches('E4 F4'),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -591,7 +607,11 @@ def cross_staff(
         ...     ),
         ... )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -878,7 +898,11 @@ def finger_pressure_transition(
         ...     baca.pitch('C5'),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1083,7 +1107,11 @@ def glissando(
         ...     baca.glissando()
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -1167,7 +1195,11 @@ def glissando(
         ...     baca.glissando(selector=baca.selectors.plts((-2, None))),
         ... )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -1241,7 +1273,11 @@ def glissando(
         ...         ),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -1340,7 +1376,11 @@ def glissando(
         ...         ),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -1489,7 +1529,11 @@ def invisible_music(
         ...     baca.pitch('C5'),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),

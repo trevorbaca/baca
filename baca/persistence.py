@@ -19,7 +19,11 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     indicator_defaults=[
@@ -97,7 +101,11 @@ r"""
         ...     baca.clef("treble"),
         ... )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -179,7 +187,11 @@ r"""
         ...         value="treble",
         ...     )
         ... ]
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -263,7 +275,11 @@ r"""
         ...         value="treble",
         ...     )
         ... ]
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -343,7 +359,11 @@ r"""
         ...     baca.clef("treble", selector=baca.selectors.leaf(0)),
         ...     baca.clef("treble", selector=baca.selectors.leaf(1)),
         ... )
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -436,7 +456,11 @@ r"""
         ...         value="treble",
         ...     )
         ... ]
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -514,7 +538,11 @@ r"""
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -575,7 +603,11 @@ r"""
         ...         value='f',
         ...         )
         ...     ]
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -641,7 +673,11 @@ r"""
         ...         value='f',
         ...         )
         ...     ]
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -700,7 +736,11 @@ r"""
         ...     baca.dynamic('f', selector=baca.selectors.leaf(1)),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -763,7 +803,11 @@ r"""
         ...         value='f',
         ...         )
         ...     ]
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -820,7 +864,11 @@ r"""
         ...     baca.dynamic('sfz', selector=baca.selectors.leaf(1)),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -883,7 +931,11 @@ r"""
         ...         value='sfz',
         ...         )
         ...     ]
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -942,7 +994,11 @@ r"""
         ...     baca.dynamic('"mf"', selector=baca.selectors.leaf(1)),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1019,7 +1075,12 @@ r"""
         ...     baca.make_notes(),
         ... )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
+        ...     instruments=maker.instruments,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     indicator_defaults=[triple],
@@ -1166,7 +1227,12 @@ r"""
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
+        ...     instruments=maker.instruments,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1320,7 +1386,12 @@ r"""
         ...         value='Piccolo',
         ...         )
         ...     ]
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
+        ...     instruments=maker.instruments,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -1480,7 +1551,12 @@ r"""
         ...         value='Flute',
         ...         )
         ...     ]
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
+        ...     instruments=maker.instruments,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -1644,7 +1720,12 @@ r"""
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
+        ...     instruments=maker.instruments,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1819,7 +1900,12 @@ r"""
         ...         value='Flute',
         ...         )
         ...     ]
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
+        ...     instruments=maker.instruments,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -1999,7 +2085,12 @@ r"""
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
+        ...     margin_markups=maker.margin_markups,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     indicator_defaults=[triple],
@@ -2164,7 +2255,12 @@ r"""
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
+        ...     margin_markups=maker.margin_markups,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2335,7 +2431,12 @@ r"""
         ...         value='I+II',
         ...         )
         ...     ]
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
+        ...     margin_markups=maker.margin_markups,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -2519,7 +2620,12 @@ r"""
         ...         value='I+II',
         ...         )
         ...     ]
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
+        ...     margin_markups=maker.margin_markups,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -2706,7 +2812,12 @@ r"""
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
+        ...     margin_markups=maker.margin_markups,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2917,7 +3028,12 @@ r"""
         ...         value='I+II',
         ...         )
         ...     ]
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
+        ...     margin_markups=maker.margin_markups,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -3113,7 +3229,12 @@ r"""
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
+        ...     margin_markups=maker.margin_markups,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3214,7 +3335,13 @@ r"""
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
+        ...     append_phantom_measure=maker.append_phantom_measure,
+        ...     metronome_marks=maker.metronome_marks,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3320,7 +3447,13 @@ r"""
         ...         value='90',
         ...         )
         ...     ]
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
+        ...     append_phantom_measure=maker.append_phantom_measure,
+        ...     metronome_marks=maker.metronome_marks,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -3432,7 +3565,12 @@ r"""
         ...         value='90',
         ...         )
         ...     ]
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
+        ...     metronome_marks=maker.metronome_marks,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -3511,7 +3649,13 @@ r"""
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
+        ...     append_phantom_measure=maker.append_phantom_measure,
+        ...     metronome_marks=maker.metronome_marks,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3624,7 +3768,13 @@ r"""
         ...         value='112',
         ...         )
         ...     ]
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
+        ...     append_phantom_measure=maker.append_phantom_measure,
+        ...     metronome_marks=maker.metronome_marks,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -3740,7 +3890,11 @@ r"""
         ...     baca.staff_position(0),
         ...     )
 
-        >>> lilypond_file, metadata, persist = maker.run(
+        >>> lilypond_file, metadata, persist = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3853,7 +4007,11 @@ r"""
         ...             ),
         ...         )
         ...     ]
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -3933,7 +4091,11 @@ r"""
         ...             ),
         ...         )
         ...     ]
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -3994,7 +4156,11 @@ r"""
         ...     baca.staff_lines(5),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4058,7 +4224,11 @@ r"""
         ...         value=5,
         ...         )
         ...     ]
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -4127,7 +4297,11 @@ r"""
         ...         value=5,
         ...         )
         ...     ]
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -4188,7 +4362,11 @@ r"""
         ...     baca.staff_lines(5, selector=baca.selectors.leaf(1)),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4257,7 +4435,11 @@ r"""
         ...         value=5,
         ...         )
         ...     ]
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -4339,7 +4521,13 @@ r"""
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
+        ...     append_phantom_measure=maker.append_phantom_measure,
+        ...     metronome_marks=maker.metronome_marks,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4447,7 +4635,11 @@ r"""
         ...         prototype='baca.Ritardando',
         ...         )
         ...     ]
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -4536,7 +4728,11 @@ r"""
         ...         prototype='baca.Accelerando',
         ...         )
         ...     ]
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -4621,7 +4817,11 @@ r"""
         ...     baca.make_notes(),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4718,7 +4918,11 @@ r"""
         ...         prototype='baca.Accelerando',
         ...         )
         ...     ]
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file = baca.interpret_commands(
+        ...     maker.commands,
+        ...     maker.score_template,
+        ...     maker.time_signatures,
+        ...     maker.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],

@@ -322,7 +322,16 @@ def _run_segment_maker(maker, first_segment=False, midi=False, **keywords):
     else:
         first_segment = segment_directory.name == "01"
     with abjad.Timer() as timer:
-        lilypond_file, metadata, persist = maker.run(
+        lilypond_file, metadata, persist = baca.interpret_commands(
+            maker.commands,
+            maker.score_template,
+            maker.time_signatures,
+            maker.voice_metadata,
+            append_phantom_measure=maker.append_phantom_measure,
+            instruments=maker.instruments,
+            margin_markups=maker.margin_markups,
+            metronome_marks=maker.metronome_marks,
+            skips_instead_of_rests=maker.skips_instead_of_rests,
             **keywords,
             first_segment=first_segment,
             metadata=metadata,
@@ -885,7 +894,12 @@ def make_layout_ly(spacing):
         score_template=baca.make_empty_score_maker(1),
         time_signatures=time_signatures,
     )
-    lilypond_file = maker.run(
+    lilypond_file = baca.interpret_commands(
+        maker.commands,
+        maker.score_template,
+        maker.time_signatures,
+        maker.voice_metadata,
+        append_phantom_measure=maker.append_phantom_measure,
         add_container_identifiers=True,
         do_not_print_timing=True,
         first_measure_number=first_measure_number,
