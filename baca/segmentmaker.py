@@ -3578,14 +3578,12 @@ class SegmentMaker:
     """
 
     __slots__ = (
-        "activate",
         "allow_empty_selections",
         "append_phantom_measure",
         "clock_time_extra_offset",
         "clock_time_override",
         "color_octaves",
         "commands",
-        "deactivate",
         "do_not_check_beamed_long_notes",
         "do_not_check_out_of_range_pitches",
         "do_not_check_wellformedness",
@@ -3625,14 +3623,12 @@ class SegmentMaker:
     def __init__(
         self,
         *functions,
-        activate=None,
         allow_empty_selections=False,
         append_phantom_measure=False,
         error_on_not_yet_pitched=False,
         clock_time_extra_offset=None,
         clock_time_override=None,
         color_octaves=False,
-        deactivate=None,
         do_not_check_beamed_long_notes=False,
         do_not_check_out_of_range_pitches=False,
         do_not_check_wellformedness=False,
@@ -3666,9 +3662,6 @@ class SegmentMaker:
         treat_untreated_persistent_wrappers=False,
     ):
         self.functions = functions or ()
-        if activate is not None:
-            assert all(isinstance(_, abjad.Tag) for _ in activate)
-        self.activate = activate
         assert allow_empty_selections in (True, False)
         self.allow_empty_selections = allow_empty_selections
         assert append_phantom_measure in (True, False)
@@ -3683,9 +3676,6 @@ class SegmentMaker:
         assert color_octaves in (True, False)
         self.color_octaves = color_octaves
         self.commands = []
-        if deactivate is not None:
-            assert all(isinstance(_, abjad.Tag) for _ in deactivate)
-        self.deactivate = deactivate
         assert do_not_check_out_of_range_pitches in (True, False)
         self.do_not_check_out_of_range_pitches = do_not_check_out_of_range_pitches
         assert do_not_check_beamed_long_notes in (True, False)
@@ -3807,9 +3797,11 @@ class SegmentMaker:
 
     def run(
         self,
+        activate=None,
         add_container_identifiers=False,
         attach_rhythm_annotation_spanners=False,
         check_persistent_indicators=False,
+        deactivate=None,
         do_not_print_timing=False,
         environment=None,
         first_segment=True,  # TODO: default to false
@@ -3827,6 +3819,10 @@ class SegmentMaker:
         """
         Runs segment-maker.
         """
+        if activate is not None:
+            assert all(isinstance(_, abjad.Tag) for _ in activate)
+        if deactivate is not None:
+            assert all(isinstance(_, abjad.Tag) for _ in deactivate)
         assert environment in (None, "docs"), repr(environment)
         assert first_segment in (True, False)
         metadata = dict(metadata or {})
@@ -4038,7 +4034,7 @@ class SegmentMaker:
                         score,
                         self.score_template,
                     )
-                _deactivate_tags(self.deactivate, score)
+                _deactivate_tags(deactivate, score)
                 remove_tags = (remove_tags or []) + (self.remove or [])
                 _remove_docs_tags(environment, remove_tags, score)
                 container_to_part_assignment = None
@@ -4089,7 +4085,7 @@ class SegmentMaker:
                 clock_time_duration = result[0]
                 start_clock_time = result[1]
                 stop_clock_time = result[2]
-            _activate_tags(score, self.activate)
+            _activate_tags(score, activate)
             first_measure_number = _get_first_measure_number(
                 self.first_measure_number,
                 previous_metadata,

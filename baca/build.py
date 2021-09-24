@@ -284,7 +284,7 @@ def _remove_lilypond_warnings(
     path.write_text(text)
 
 
-def _run_segment_maker(maker, first_segment=False, midi=False, runtime=None):
+def _run_segment_maker(maker, first_segment=False, midi=False, **keywords):
     segment_directory = pathlib.Path(os.getcwd())
     metadata = baca.path.get_metadata(segment_directory)
     persist = baca.path.get_metadata(segment_directory, file_name="__persist__")
@@ -322,9 +322,8 @@ def _run_segment_maker(maker, first_segment=False, midi=False, runtime=None):
     else:
         first_segment = segment_directory.name == "01"
     with abjad.Timer() as timer:
-        runtime = runtime or {}
         lilypond_file, metadata, persist = maker.run(
-            **runtime,
+            **keywords,
             first_segment=first_segment,
             metadata=metadata,
             midi=midi,
@@ -976,7 +975,7 @@ def make_layout_ly(spacing):
         )
 
 
-def make_segment_pdf(maker, first_segment=False, runtime=None):
+def make_segment_pdf(maker, first_segment=False, **keywords):
     if "--clicktrack" in sys.argv:
         _make_segment_clicktrack(maker)
         return
@@ -988,7 +987,7 @@ def make_segment_pdf(maker, first_segment=False, runtime=None):
     layout_py = segment_directory / "layout.py"
     if "--no-layout" not in sys.argv[1:] and layout_py.is_file():
         os.system(f"python {layout_py}")
-    result = _run_segment_maker(maker, first_segment=first_segment, runtime=runtime)
+    result = _run_segment_maker(maker, first_segment=first_segment, **keywords)
     metadata, persist, lilypond_file, runtime = result
     metadata_file = segment_directory / "__metadata__"
     print(f"Writing {baca.path.trim(metadata_file)} ...")
