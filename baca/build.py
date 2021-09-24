@@ -323,7 +323,7 @@ def _run_segment_maker(maker, first_segment=False, midi=False, runtime=None):
         first_segment = segment_directory.name == "01"
     with abjad.Timer() as timer:
         runtime = runtime or {}
-        lilypond_file = maker.run(
+        lilypond_file, metadata, persist = maker.run(
             **runtime,
             first_segment=first_segment,
             metadata=metadata,
@@ -331,6 +331,7 @@ def _run_segment_maker(maker, first_segment=False, midi=False, runtime=None):
             persist=persist,
             previous_metadata=previous_metadata,
             previous_persist=previous_persist,
+            return_metadata=True,
             segment_number=segment_directory.name,
         )
     segment_maker_runtime = int(timer.elapsed_time)
@@ -881,6 +882,7 @@ def make_layout_ly(spacing):
         sys.exit(1)
     assert abjad.String(document_name).is_shout_case()
     maker = baca.SegmentMaker(
+        append_phantom_measure=True,
         first_measure_number=first_measure_number,
         remove=baca.tags.layout_removal_tags(),
         score_template=baca.make_empty_score_maker(1),
@@ -990,13 +992,13 @@ def make_segment_pdf(maker, first_segment=False, runtime=None):
     metadata, persist, lilypond_file, runtime = result
     metadata_file = segment_directory / "__metadata__"
     print(f"Writing {baca.path.trim(metadata_file)} ...")
-    baca.path.write_metadata_py(segment_directory, maker.metadata)
+    baca.path.write_metadata_py(segment_directory, metadata)
     os.system("black --target-version=py38 __metadata__ 1>/dev/null 2>&1")
     persist_file = segment_directory / "__persist__"
     print(f"Writing {baca.path.trim(persist_file)} ...")
     baca.path.write_metadata_py(
         segment_directory,
-        maker.persist,
+        persist,
         file_name="__persist__",
         variable_name="persist",
     )

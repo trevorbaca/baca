@@ -689,33 +689,6 @@ def _bundle_manifests(
     return manifests
 
 
-def _cache_fermata_measure_numbers(score, first_measure_number):
-    fermata_start_offsets, fermata_stop_offsets, fermata_measure_numbers = [], [], []
-    final_measure_is_fermata = False
-    if "Global_Rests" in score:
-        context = score["Global_Rests"]
-        rests = abjad.select(context).leaves(abjad.MultimeasureRest)
-        final_measure_index = len(rests) - 1
-        final_measure_index -= 1
-        indicator = _const.FERMATA_MEASURE
-        for measure_index, rest in enumerate(rests):
-            if not abjad.get.has_indicator(rest, indicator):
-                continue
-            if measure_index == final_measure_index:
-                final_measure_is_fermata = True
-            measure_number = first_measure_number + measure_index
-            timespan = abjad.get.timespan(rest)
-            fermata_start_offsets.append(timespan.start_offset)
-            fermata_stop_offsets.append(timespan.stop_offset)
-            fermata_measure_numbers.append(measure_number)
-    return (
-        fermata_start_offsets,
-        fermata_stop_offsets,
-        fermata_measure_numbers,
-        final_measure_is_fermata,
-    )
-
-
 def _cache_leaves(score, measure_count):
     measure_timespans = []
     for measure_index in range(measure_count):
@@ -735,25 +708,6 @@ def _cache_leaves(score, measure_count):
                 cached_leaves = leaves_by_measure_number.setdefault(measure_number, [])
                 cached_leaves.append(leaf)
     return cache
-
-
-def _cache_voice_names(voice_names, score_template):
-    if voice_names is not None:
-        return voice_names
-    if score_template is None:
-        return
-    voice_names = ["Global_Skips", "Global_Rests", "Timeline_Scope"]
-    score = score_template()
-    for voice in abjad.iterate.components(score, abjad.Voice):
-        if voice.name is not None:
-            voice_names.append(voice.name)
-            if "Music_Voice" in voice.name:
-                name = voice.name.replace("Music_Voice", "Rest_Voice")
-            else:
-                name = voice.name.replace("Voice", "Rest_Voice")
-            voice_names.append(name)
-    voice_names_ = tuple(voice_names)
-    return voice_names_
 
 
 def _calculate_clock_times(
@@ -859,7 +813,6 @@ def _call_rhythm_commands(
     environment,
     manifests,
     measure_count,
-    offset_to_measure_number,
     previous_persist,
     score,
     score_template,
@@ -913,7 +866,8 @@ def _call_rhythm_commands(
             start_offset, time_signatures_ = result
             runtime = _bundle_manifests(
                 manifests=manifests,
-                offset_to_measure_number=offset_to_measure_number,
+                # offset_to_measure_number=offset_to_measure_number,
+                offset_to_measure_number={},
                 previous_persist=previous_persist,
                 score_template=score_template,
                 voice_name=voice.name,
@@ -1489,6 +1443,31 @@ def _force_nonnatural_accidentals(score):
                 note_head.is_forced = True
 
 
+def _get_fermata_measure_numbers(score, first_measure_number):
+    fermata_start_offsets, fermata_measure_numbers = [], []
+    final_measure_is_fermata = False
+    if "Global_Rests" in score:
+        context = score["Global_Rests"]
+        rests = abjad.select(context).leaves(abjad.MultimeasureRest)
+        final_measure_index = len(rests) - 1
+        final_measure_index -= 1
+        indicator = _const.FERMATA_MEASURE
+        for measure_index, rest in enumerate(rests):
+            if not abjad.get.has_indicator(rest, indicator):
+                continue
+            if measure_index == final_measure_index:
+                final_measure_is_fermata = True
+            measure_number = first_measure_number + measure_index
+            timespan = abjad.get.timespan(rest)
+            fermata_start_offsets.append(timespan.start_offset)
+            fermata_measure_numbers.append(measure_number)
+    return (
+        fermata_start_offsets,
+        fermata_measure_numbers,
+        final_measure_is_fermata,
+    )
+
+
 def _get_first_measure_number(first_measure_number, previous_metadata):
     if first_measure_number is not None:
         return first_measure_number
@@ -1505,7 +1484,6 @@ def _get_first_measure_number(first_measure_number, previous_metadata):
 
 def _get_lilypond_includes(
     clock_time_extra_offset,
-    environment,
     includes,
     local_measure_number_extra_offset,
     measure_number_extra_offset,
@@ -1608,6 +1586,20 @@ def _get_previous_segment_voice_metadata(previous_persist, voice_name):
     return voice_metadata.get(voice_name, {})
 
 
+def _get_voice_names(score_template):
+    voice_names = ["Global_Skips", "Global_Rests", "Timeline_Scope"]
+    score = score_template()
+    for voice in abjad.iterate.components(score, abjad.Voice):
+        if voice.name is not None:
+            voice_names.append(voice.name)
+            if "Music_Voice" in voice.name:
+                name = voice.name.replace("Music_Voice", "Rest_Voice")
+            else:
+                name = voice.name.replace("Voice", "Rest_Voice")
+            voice_names.append(name)
+    return tuple(voice_names)
+
+
 def _handle_mutator(score, cache, command):
     if hasattr(command, "_mutates_score") and command._mutates_score():
         cache = None
@@ -1697,15 +1689,8 @@ def _label_clock_time(
     clock_times = result[1]
     start_clock_time = result[2]
     stop_clock_time = result[3]
-    #    if start_clock_time is not None:
-    #        self._start_clock_time = start_clock_time
-    #    if clock_times is None:
-    #        return
-    # returns duration, start_clock_time, stop_clock_time
     if clock_times is None:
         return None, start_clock_time, None
-    #    self._duration = duration
-    #    self._stop_clock_time = stop_clock_time
     total = len(skips)
     clock_times = clock_times[:total]
     first_measure_number = _get_first_measure_number(
@@ -3413,6 +3398,7 @@ def error_on_not_yet_pitched(score):
 def segments(runtime=False):
     if not runtime:
         dictionary = {
+            "append_phantom_measure": True,
             "treat_untreated_persistent_wrappers": True,
         }
     else:
@@ -3592,23 +3578,9 @@ class SegmentMaker:
     """
 
     __slots__ = (
-        "_cache",
-        "_cached_time_signatures",
-        "_do_not_append_phantom_measure",
-        "_duration",
-        "_fermata_measure_numbers",
-        "_fermata_start_offsets",
-        "_fermata_stop_offsets",
-        "_final_measure_is_fermata",
-        "_offset_to_measure_number",
-        "_segment_bol_measure_numbers",
-        "_segment_duration",
-        "_start_clock_time",
-        "_stop_clock_time",
-        "_voice_names",
         "activate",
         "allow_empty_selections",
-        "append_phantom_measure_in_docs",
+        "append_phantom_measure",
         "clock_time_extra_offset",
         "clock_time_override",
         "color_octaves",
@@ -3623,30 +3595,21 @@ class SegmentMaker:
         "fermata_measure_empty_overrides",
         "final_segment",
         "first_measure_number",
-        "first_segment",
         "functions",
         "ignore_repeat_pitch_classes",
         "includes",
         "indicator_defaults",
         "instruments",
-        "lilypond_file",
         "local_measure_number_extra_offset",
         "magnify_staves",
         "margin_markups",
         "measure_number_extra_offset",
-        "metadata",
         "metronome_marks",
-        "midi",
         "moment_markup",
         "parts_metric_modulation_multiplier",
-        "persist",
         "preamble",
-        "previous_metadata",
-        "previous_persist",
         "remove",
-        "score",
         "score_template",
-        "segment_number",
         "skips_instead_of_rests",
         "spacing",
         "spacing_extra_offset",
@@ -3656,6 +3619,7 @@ class SegmentMaker:
         "transpose_score",
         "treat_untreated_persistent_wrappers",
         "voice_metadata",
+        "voice_names",
     )
 
     def __init__(
@@ -3663,13 +3627,12 @@ class SegmentMaker:
         *functions,
         activate=None,
         allow_empty_selections=False,
-        append_phantom_measure_in_docs=False,
+        append_phantom_measure=False,
         error_on_not_yet_pitched=False,
         clock_time_extra_offset=None,
         clock_time_override=None,
         color_octaves=False,
         deactivate=None,
-        do_not_append_phantom_measure=False,
         do_not_check_beamed_long_notes=False,
         do_not_check_out_of_range_pitches=False,
         do_not_check_wellformedness=False,
@@ -3708,10 +3671,8 @@ class SegmentMaker:
         self.activate = activate
         assert allow_empty_selections in (True, False)
         self.allow_empty_selections = allow_empty_selections
-        assert append_phantom_measure_in_docs in (True, False)
-        self.append_phantom_measure_in_docs = append_phantom_measure_in_docs
-        assert error_on_not_yet_pitched in (True, False)
-        self.error_on_not_yet_pitched = error_on_not_yet_pitched
+        assert append_phantom_measure in (True, False)
+        self.append_phantom_measure = append_phantom_measure
         if clock_time_extra_offset not in (False, None):
             assert isinstance(clock_time_extra_offset, tuple)
             assert len(clock_time_extra_offset) == 2
@@ -3721,14 +3682,10 @@ class SegmentMaker:
         self.clock_time_override = clock_time_override
         assert color_octaves in (True, False)
         self.color_octaves = color_octaves
-        self._cache = None
-        self._cached_time_signatures = []
+        self.commands = []
         if deactivate is not None:
             assert all(isinstance(_, abjad.Tag) for _ in deactivate)
         self.deactivate = deactivate
-        if do_not_append_phantom_measure is not None:
-            do_not_append_phantom_measure = bool(do_not_append_phantom_measure)
-        self._do_not_append_phantom_measure = do_not_append_phantom_measure
         assert do_not_check_out_of_range_pitches in (True, False)
         self.do_not_check_out_of_range_pitches = do_not_check_out_of_range_pitches
         assert do_not_check_beamed_long_notes in (True, False)
@@ -3737,76 +3694,56 @@ class SegmentMaker:
         self.do_not_check_wellformedness = do_not_check_wellformedness
         assert do_not_force_nonnatural_accidentals in (True, False)
         self.do_not_force_nonnatural_accidentals = do_not_force_nonnatural_accidentals
-        self._duration = None
+        assert error_on_not_yet_pitched in (True, False)
+        self.error_on_not_yet_pitched = error_on_not_yet_pitched
         self.fermata_extra_offset_y = fermata_extra_offset_y
         self.fermata_measure_empty_overrides = fermata_measure_empty_overrides
-        self._fermata_measure_numbers = []
-        self._fermata_start_offsets = []
-        self._fermata_stop_offsets = []
         self.first_measure_number = first_measure_number
         self.indicator_defaults = indicator_defaults
         self.ignore_repeat_pitch_classes = ignore_repeat_pitch_classes
         self.instruments = instruments
-        self._final_measure_is_fermata = False
         assert final_segment in (True, False)
         self.final_segment = final_segment
         self.includes = includes
-        self.lilypond_file = None
         self.local_measure_number_extra_offset = local_measure_number_extra_offset
         self.magnify_staves = magnify_staves
         self.margin_markups = margin_markups
         self.measure_number_extra_offset = measure_number_extra_offset
-        self.metadata = {}
         self.metronome_marks = metronome_marks
-        self.midi = False
         self.moment_markup = moment_markup
-        self._offset_to_measure_number = {}
         if parts_metric_modulation_multiplier is not None:
             assert isinstance(parts_metric_modulation_multiplier, tuple)
             assert len(parts_metric_modulation_multiplier) == 2
         self.parts_metric_modulation_multiplier = parts_metric_modulation_multiplier
-        self.persist = {}
         preamble = preamble or ()
         if preamble:
             assert all(isinstance(_, str) for _ in preamble), repr(preamble)
         self.preamble = tuple(preamble)
-        self.previous_metadata = None
-        self.previous_persist = None
         if remove is not None:
             assert all(isinstance(_, abjad.Tag) for _ in remove)
         self.remove = remove
-        self.score = None
         assert score_template is not None, repr(score_template)
         self.score_template = score_template
-        self._segment_bol_measure_numbers = []
-        # TODO: harmonize _duration, _segment_duration
-        self._segment_duration = None
-        self.segment_number = None
         self.skips_instead_of_rests = skips_instead_of_rests
         self.spacing = spacing
         self.spacing_extra_offset = spacing_extra_offset
         self.stage_markup = stage_markup
         self.stage_number_extra_offset = stage_number_extra_offset
-        self._start_clock_time = None
-        self._stop_clock_time = None
+        self.time_signatures = _initialize_time_signatures(time_signatures)
         assert transpose_score in (True, False)
         self.transpose_score = transpose_score
         assert treat_untreated_persistent_wrappers in (True, False)
         self.treat_untreated_persistent_wrappers = treat_untreated_persistent_wrappers
         self.voice_metadata = {}
-        self._voice_names = None
-        self.commands = []
-        self.time_signatures = _initialize_time_signatures(time_signatures)
+        self.voice_names = _get_voice_names(score_template)
 
     def __call__(self, scopes, *commands):
         """
         Calls segment-maker on ``scopes`` and ``commands``.
         """
-        commands_ = _sequence.Sequence(commands).flatten(
-            classes=(list, _scoping.Suite), depth=-1
-        )
+        classes = (list, _scoping.Suite)
+        commands_ = _sequence.Sequence(commands).flatten(classes=classes, depth=-1)
         commands = tuple(commands_)
-        self._voice_names = _cache_voice_names(self._voice_names, self.score_template)
         if self.score_template is not None and hasattr(
             self.score_template, "voice_abbreviations"
         ):
@@ -3828,9 +3765,8 @@ class SegmentMaker:
                 raise Exception(message)
         scope_count = len(scopes_)
         for i, current_scope in enumerate(scopes_):
-            if self._voice_names and current_scope.voice_name not in self._voice_names:
-                message = f"unknown voice name {current_scope.voice_name!r}."
-                raise Exception(message)
+            if current_scope.voice_name not in self.voice_names:
+                raise Exception(f"unknown voice name {current_scope.voice_name!r}.")
             if isinstance(current_scope, _scoping.TimelineScope):
                 for scope_ in current_scope.scopes:
                     if scope_.voice_name in abbreviations:
@@ -3858,14 +3794,6 @@ class SegmentMaker:
                     command_ = abjad.new(command_, scope=scope_)
                     self.commands.append(command_)
 
-    def do_not_append_phantom_measure(self, environment):
-        """
-        Is true when segment-maker does not append phantom measure.
-        """
-        if environment == "docs":
-            return not self.append_phantom_measure_in_docs
-        return self._do_not_append_phantom_measure
-
     @property
     def manifests(self):
         """
@@ -3876,15 +3804,6 @@ class SegmentMaker:
         manifests["abjad.MarginMarkup"] = self.margin_markups
         manifests["abjad.MetronomeMark"] = self.metronome_marks
         return manifests
-
-    @property
-    def measure_count(self):
-        """
-        Gets measure count.
-        """
-        if self.time_signatures:
-            return len(self.time_signatures)
-        return 0
 
     def run(
         self,
@@ -3902,6 +3821,7 @@ class SegmentMaker:
         previous_metadata=None,
         previous_persist=None,
         remove_tags=None,
+        return_metadata=False,
         segment_number=None,
     ):
         """
@@ -3909,71 +3829,66 @@ class SegmentMaker:
         """
         assert environment in (None, "docs"), repr(environment)
         assert first_segment in (True, False)
-        self.first_segment = first_segment
-        self.metadata = dict(metadata or {})
-        self.midi = midi
-        self.persist = dict(persist or {})
-        self.previous_metadata = dict(previous_metadata or {})
-        self.previous_persist = dict(previous_persist or {})
-        self.segment_number = segment_number
+        metadata = dict(metadata or {})
+        persist = dict(persist or {})
+        previous_metadata = dict(previous_metadata or {})
+        previous_persist = dict(previous_persist or {})
         with abjad.Timer() as timer:
-            self.score = _make_score(self.indicator_defaults, self.score_template)
+            measure_count = len(self.time_signatures)
+            score = _make_score(self.indicator_defaults, self.score_template)
             if environment == "docs":
                 includes = self.includes
             else:
                 includes = _get_lilypond_includes(
                     self.clock_time_extra_offset,
-                    environment,
                     self.includes,
                     self.local_measure_number_extra_offset,
                     self.measure_number_extra_offset,
                     self.spacing_extra_offset,
                     self.stage_number_extra_offset,
                 )
-            self.lilypond_file = _make_lilypond_file(
-                self.first_segment,
+            lilypond_file = _make_lilypond_file(
+                first_segment,
                 include_layout_ly,
                 includes,
-                self.midi,
+                midi,
                 self.preamble,
-                self.score,
+                score,
             )
             _make_global_skips(
-                self.do_not_append_phantom_measure(environment),
-                self.first_segment,
-                self.score,
+                not self.append_phantom_measure,
+                first_segment,
+                score,
                 self.time_signatures,
             )
             _label_measure_numbers(
                 self.first_measure_number,
-                self.previous_metadata,
-                self.score,
+                previous_metadata,
+                score,
             )
-            _label_stage_numbers(self.score, self.stage_markup)
-            _label_moment_numbers(self.moment_markup, self.score)
+            _label_stage_numbers(score, self.stage_markup)
+            _label_moment_numbers(self.moment_markup, score)
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
         if not do_not_print_timing and environment != "docs":
             print(f"Score initialization {count} {seconds} ...")
         with abjad.Timer() as timer:
-            with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
+            with abjad.ForbidUpdate(component=score, update_on_exit=True):
                 command_count, segment_duration = _call_rhythm_commands(
                     attach_rhythm_annotation_spanners,
                     self.commands,
-                    self.do_not_append_phantom_measure(environment),
+                    not self.append_phantom_measure,
                     environment,
                     self.manifests,
-                    self.measure_count,
-                    self._offset_to_measure_number,
-                    self.previous_persist,
-                    self.score,
+                    measure_count,
+                    previous_persist,
+                    score,
                     self.score_template,
                     self.skips_instead_of_rests,
                     self.time_signatures,
                     self.voice_metadata,
                 )
-                self._segment_duration = segment_duration
-                _clean_up_rhythm_maker_voice_names(self.score)
+                _clean_up_rhythm_maker_voice_names(score)
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
         commands = abjad.String("command").pluralize(command_count)
@@ -3982,51 +3897,51 @@ class SegmentMaker:
             message += f" [for {command_count} {commands}] ..."
             print(message)
         with abjad.Timer() as timer:
-            self._offset_to_measure_number = _populate_offset_to_measure_number(
+            offset_to_measure_number = _populate_offset_to_measure_number(
                 self.first_measure_number,
-                self.previous_metadata,
-                self.score,
+                previous_metadata,
+                score,
             )
-            _extend_beams(self.score)
-            _attach_sounds_during(self.score)
+            _extend_beams(score)
+            _attach_sounds_during(score)
             _attach_first_segment_score_template_defaults(
-                self.score,
-                first_segment=self.first_segment,
+                score,
+                first_segment=first_segment,
                 manifests=self.manifests,
             )
-            persistent_indicators = self.previous_persist.get("persistent_indicators")
-            if persistent_indicators and not self.first_segment:
+            persistent_indicators = previous_persist.get("persistent_indicators")
+            if persistent_indicators and not first_segment:
                 _reapply_persistent_indicators(
                     self.manifests,
                     persistent_indicators,
-                    self.score,
+                    score,
                 )
             _attach_first_appearance_score_template_defaults(
-                self.score,
-                first_segment=self.first_segment,
+                score,
+                first_segment=first_segment,
                 manifests=self.manifests,
-                previous_persist=self.previous_persist,
+                previous_persist=previous_persist,
             )
-            _apply_spacing(self.score, page_layout_profile, self.spacing)
+            _apply_spacing(score, page_layout_profile, self.spacing)
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
         if not do_not_print_timing and environment != "docs":
             print(f"After-rhythm methods {count} {seconds} ...")
         with abjad.Timer() as timer:
-            with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
+            with abjad.ForbidUpdate(component=score, update_on_exit=True):
+                cache = None
                 cache, command_count = _call_commands(
                     self.allow_empty_selections,
-                    self._cache,
+                    cache,
                     self.commands,
-                    self.measure_count,
-                    self._offset_to_measure_number,
+                    measure_count,
+                    offset_to_measure_number,
                     self.manifests,
-                    self.previous_persist,
-                    self.score,
+                    previous_persist,
+                    score,
                     self.score_template,
                     self.voice_metadata,
                 )
-                self._cache = cache
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
         commands = abjad.String("command").pluralize(command_count)
@@ -4036,180 +3951,185 @@ class SegmentMaker:
             print(message)
         # TODO: optimize by consolidating score iteration:
         with abjad.Timer() as timer:
-            with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
+            with abjad.ForbidUpdate(component=score, update_on_exit=True):
                 _clone_segment_initial_short_instrument_name(
-                    self.first_segment,
-                    self.score,
+                    first_segment,
+                    score,
                 )
-                self._cached_time_signatures = _remove_redundant_time_signatures(
-                    self.do_not_append_phantom_measure(environment),
-                    self.score,
+                cached_time_signatures = _remove_redundant_time_signatures(
+                    not self.append_phantom_measure,
+                    score,
                 )
-                result = _cache_fermata_measure_numbers(
-                    self.score,
+                result = _get_fermata_measure_numbers(
+                    score,
                     _get_first_measure_number(
                         self.first_measure_number,
-                        self.previous_metadata,
+                        previous_metadata,
                     ),
                 )
-                self._fermata_start_offsets = result[0]
-                self._fermata_stop_offsets = result[1]
-                self._fermata_measure_numbers = result[2]
-                self._final_measure_is_fermata = result[3]
+                fermata_start_offsets = result[0]
+                fermata_measure_numbers = result[1]
+                final_measure_is_fermata = result[2]
                 if self.treat_untreated_persistent_wrappers:
                     _treat_untreated_persistent_wrappers(
                         environment,
                         self.manifests,
-                        self.score,
+                        score,
                     )
                 _attach_metronome_marks(
                     self.parts_metric_modulation_multiplier,
-                    self.score,
+                    score,
                 )
-                _reanalyze_trending_dynamics(self.manifests, self.score)
-                _reanalyze_reapplied_synthetic_wrappers(self.score)
+                _reanalyze_trending_dynamics(self.manifests, score)
+                _reanalyze_reapplied_synthetic_wrappers(score)
                 if self.transpose_score:
-                    transpose_score(self.score)
-                _color_not_yet_registered(self.score)
-                _color_mock_pitch(self.score)
-                _set_intermittent_to_staff_position_zero(self.score)
+                    transpose_score(score)
+                _color_not_yet_registered(score)
+                _color_mock_pitch(score)
+                _set_intermittent_to_staff_position_zero(score)
                 if environment != "docs":
-                    _color_not_yet_pitched(environment, self.score)
-                _set_not_yet_pitched_to_staff_position_zero(self.score)
-                _clean_up_repeat_tie_direction(self.score)
-                _clean_up_laissez_vibrer_tie_direction(self.score)
+                    _color_not_yet_pitched(environment, score)
+                _set_not_yet_pitched_to_staff_position_zero(score)
+                _clean_up_repeat_tie_direction(score)
+                _clean_up_laissez_vibrer_tie_direction(score)
                 if self.error_on_not_yet_pitched:
-                    error_on_not_yet_pitched(self.score)
-                _check_doubled_dynamics(self.score)
-                color_out_of_range_pitches(self.score)
+                    error_on_not_yet_pitched(score)
+                _check_doubled_dynamics(score)
+                color_out_of_range_pitches(score)
                 if check_persistent_indicators:
                     _check_persistent_indicators(
                         environment,
-                        self.score,
+                        score,
                         self.score_template,
                     )
-                color_repeat_pitch_classes(self.score)
+                color_repeat_pitch_classes(score)
                 if self.color_octaves:
-                    color_octaves(self.score)
-                _attach_shadow_tie_indicators(self.score)
+                    color_octaves(score)
+                _attach_shadow_tie_indicators(score)
                 if not self.do_not_force_nonnatural_accidentals:
-                    _force_nonnatural_accidentals(self.score)
-                _label_duration_multipliers(self.score)
-                _magnify_staves(self.magnify_staves, self.score)
+                    _force_nonnatural_accidentals(score)
+                _label_duration_multipliers(score)
+                _magnify_staves(self.magnify_staves, score)
                 if environment != "docs":
-                    _whitespace_leaves(self.score)
+                    _whitespace_leaves(score)
                 if environment != "docs":
                     _comment_measure_numbers(
                         _get_first_measure_number(
                             self.first_measure_number,
-                            self.previous_metadata,
+                            previous_metadata,
                         ),
-                        self._offset_to_measure_number,
-                        self.score,
+                        offset_to_measure_number,
+                        score,
                     )
-                _apply_breaks(self.score, self.spacing)
+                _apply_breaks(score, self.spacing)
                 _style_fermata_measures(
                     self.fermata_extra_offset_y,
                     self.fermata_measure_empty_overrides,
-                    self._fermata_start_offsets,
+                    fermata_start_offsets,
                     self.final_segment,
-                    self._offset_to_measure_number,
-                    self.score,
+                    offset_to_measure_number,
+                    score,
                 )
                 if environment != "docs":
                     _shift_measure_initial_clefs(
                         self.manifests,
-                        self._offset_to_measure_number,
-                        self.previous_persist,
-                        self.score,
+                        offset_to_measure_number,
+                        previous_persist,
+                        score,
                         self.score_template,
                     )
-                _deactivate_tags(self.deactivate, self.score)
+                _deactivate_tags(self.deactivate, score)
                 remove_tags = (remove_tags or []) + (self.remove or [])
-                # _remove_docs_tags(environment, self.remove, self.score)
-                _remove_docs_tags(environment, remove_tags, self.score)
+                _remove_docs_tags(environment, remove_tags, score)
                 container_to_part_assignment = None
                 if add_container_identifiers:
                     container_to_part_assignment = _add_container_identifiers(
-                        self.score,
-                        self.segment_number,
+                        score,
+                        segment_number,
                     )
-                    _check_all_music_in_part_containers(self.score, self.score_template)
+                    _check_all_music_in_part_containers(score, self.score_template)
                     _check_duplicate_part_assignments(
                         container_to_part_assignment,
                         self.score_template,
                     )
-                _move_global_rests(self.score, self.score_template)
+                _move_global_rests(score, self.score_template)
             # mutates offsets:
             if environment == "docs":
-                _move_global_context(self.score)
-            _clean_up_on_beat_grace_containers(self.score)
+                _move_global_context(score)
+            _clean_up_on_beat_grace_containers(score)
             _check_wellformedness(
                 self.do_not_check_beamed_long_notes,
                 self.do_not_check_out_of_range_pitches,
                 self.do_not_check_wellformedness,
-                self.score,
+                score,
             )
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
         if not do_not_print_timing and environment != "docs":
             print(f"Postprocessing {count} {seconds} ...")
         with abjad.Timer() as timer:
-            method = getattr(self.score, "_update_now")
+            method = getattr(score, "_update_now")
             method(offsets_in_seconds=True)
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
         if not do_not_print_timing and environment != "docs":
             print(f"Offsets-in-seconds update {count} {seconds} ...")
         with abjad.Timer() as timer:
+            clock_time_duration = None
+            start_clock_time = None
+            stop_clock_time = None
             if environment != "docs":
                 result = _label_clock_time(
                     self.clock_time_override,
-                    self._fermata_measure_numbers,
+                    fermata_measure_numbers,
                     self.first_measure_number,
-                    self.previous_metadata,
-                    self.score,
+                    previous_metadata,
+                    score,
                 )
-                self._duration = result[0]
-                self._start_clock_time = result[1]
-                self._stop_clock_time = result[2]
-            _activate_tags(self.score, self.activate)
+                clock_time_duration = result[0]
+                start_clock_time = result[1]
+                stop_clock_time = result[2]
+            _activate_tags(score, self.activate)
             first_measure_number = _get_first_measure_number(
                 self.first_measure_number,
-                self.previous_metadata,
+                previous_metadata,
             )
-            final_measure_number = first_measure_number + self.measure_count - 1
+            final_measure_number = first_measure_number + measure_count - 1
             persistent_indicators = _collect_persistent_indicators(
                 environment,
                 self.manifests,
-                self.previous_persist,
-                self.score,
+                previous_persist,
+                score,
             )
             _collect_metadata(
                 container_to_part_assignment,
-                self._duration,
-                self._fermata_measure_numbers,
-                self._final_measure_is_fermata,
+                clock_time_duration,
+                fermata_measure_numbers,
+                final_measure_is_fermata,
                 final_measure_number,
                 _get_first_measure_number(
                     self.first_measure_number,
-                    self.previous_metadata,
+                    previous_metadata,
                 ),
-                self.metadata,
-                self.persist,
+                metadata,
+                persist,
                 persistent_indicators,
-                self.score,
-                self._start_clock_time,
-                self._stop_clock_time,
-                self._cached_time_signatures,
+                score,
+                start_clock_time,
+                stop_clock_time,
+                cached_time_signatures,
                 self.voice_metadata,
             )
             _style_phantom_measures(
-                self.do_not_append_phantom_measure(environment), self.score
+                not self.append_phantom_measure,
+                score,
             )
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
         if not do_not_print_timing and environment != "docs":
             print(f"Clock time markup {count} {seconds} ...")
-        assert isinstance(self.lilypond_file, abjad.LilyPondFile)
-        return self.lilypond_file
+        assert isinstance(lilypond_file, abjad.LilyPondFile)
+        if return_metadata:
+            return lilypond_file, metadata, persist
+        else:
+            return lilypond_file

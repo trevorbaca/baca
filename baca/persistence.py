@@ -3222,7 +3222,7 @@ r"""
         Explicit metronome marks color blue:
 
         >>> maker = baca.SegmentMaker(
-        ...     append_phantom_measure_in_docs=True,
+        ...     append_phantom_measure=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     metronome_marks=metronome_marks,
@@ -3319,7 +3319,7 @@ r"""
         Even after a previous metronome mark:
 
         >>> maker = baca.SegmentMaker(
-        ...     append_phantom_measure_in_docs=True,
+        ...     append_phantom_measure=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     metronome_marks=metronome_marks,
@@ -3521,7 +3521,7 @@ r"""
         Redundant metronome marks color pink:
 
         >>> maker = baca.SegmentMaker(
-        ...     append_phantom_measure_in_docs=True,
+        ...     append_phantom_measure=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     metronome_marks=metronome_marks,
@@ -3626,7 +3626,7 @@ r"""
         Even at the beginning of a segment:
 
         >>> maker = baca.SegmentMaker(
-        ...     append_phantom_measure_in_docs=True,
+        ...     append_phantom_measure=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     metronome_marks=metronome_marks,
@@ -3770,9 +3770,10 @@ r"""
         ...     baca.staff_position(0),
         ...     )
 
-        >>> lilypond_file = maker.run(
+        >>> lilypond_file, metadata, persist = maker.run(
         ...     environment="docs",
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     return_metadata=True,
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -3813,7 +3814,7 @@ r"""
 
         Persistent overrides also appear in segment metadata:
 
-        >>> dictionary = maker.persist["persistent_indicators"]
+        >>> dictionary = persist["persistent_indicators"]
         >>> string = abjad.storage(dictionary)
         >>> print(string)
         dict(
@@ -4356,7 +4357,7 @@ r"""
         Explicit tempo trends color blue:
 
         >>> maker = baca.SegmentMaker(
-        ...     append_phantom_measure_in_docs=True,
+        ...     append_phantom_measure=True,
         ...     deactivate=[baca.tags.NOT_YET_PITCHED_COLORING],
         ...     includes=["baca.ily"],
         ...     metronome_marks=metronome_marks,
