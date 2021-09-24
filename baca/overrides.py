@@ -368,7 +368,6 @@ def bar_line_transparent(
         Makes bar line before measure 1 transparent:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -388,6 +387,7 @@ def bar_line_transparent(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1365,7 +1365,6 @@ def mmrest_color(
         REGRESSION. Coerces X11 color names:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1377,6 +1376,7 @@ def mmrest_color(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1454,7 +1454,6 @@ def mmrest_text_color(
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1471,6 +1470,7 @@ def mmrest_text_color(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1518,7 +1518,6 @@ def mmrest_text_color(
         rests:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1537,6 +1536,7 @@ def mmrest_text_color(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         Traceback (most recent call last):
@@ -1564,7 +1564,6 @@ def mmrest_text_extra_offset(
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1581,6 +1580,7 @@ def mmrest_text_extra_offset(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1643,7 +1643,6 @@ def mmrest_text_padding(
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1660,6 +1659,7 @@ def mmrest_text_padding(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1721,7 +1721,6 @@ def mmrest_text_parent_center(
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1738,6 +1737,7 @@ def mmrest_text_parent_center(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1800,7 +1800,6 @@ def mmrest_text_staff_padding(
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1817,6 +1816,7 @@ def mmrest_text_staff_padding(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -4270,7 +4270,6 @@ def text_script_color(
         Raises exception when called on multimeasure rests:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -4287,6 +4286,7 @@ def text_script_color(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         Traceback (most recent call last):
@@ -4400,7 +4400,6 @@ def text_script_down(
         Raises exception when called on multimeasure rests:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -4417,6 +4416,7 @@ def text_script_down(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         Traceback (most recent call last):
@@ -4452,7 +4452,6 @@ def text_script_extra_offset(
         Raises exception when called on multimeasure rests:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -4469,6 +4468,7 @@ def text_script_extra_offset(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         Traceback (most recent call last):
@@ -4606,7 +4606,6 @@ def text_script_padding(
         Raises exception when called on multimeasure rests:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -4623,6 +4622,7 @@ def text_script_padding(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         Traceback (most recent call last):
@@ -4783,7 +4783,6 @@ def text_script_staff_padding(
         Raises exception when called on multimeasure rests:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -4800,6 +4799,7 @@ def text_script_staff_padding(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         Traceback (most recent call last):
@@ -4913,7 +4913,6 @@ def text_script_up(
         Raises exception when called on multimeasure rests:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -4930,6 +4929,7 @@ def text_script_up(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         Traceback (most recent call last):

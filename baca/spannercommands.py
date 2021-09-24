@@ -221,9 +221,7 @@ def beam(
         Beams everything and sets beam direction down:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
@@ -238,7 +236,9 @@ def beam(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 

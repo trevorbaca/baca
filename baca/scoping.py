@@ -1147,9 +1147,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         Applies leaf selector to commands:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
 
@@ -1166,7 +1164,9 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1243,9 +1243,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         Applies measure selector to commands:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
 
@@ -1262,7 +1260,9 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1393,9 +1393,7 @@ def only_parts(command: _command_typing) -> _command_typing:
         REGRESSION. Dynamic status color tweaks copy dynamic edition tags:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
 
@@ -1409,7 +1407,9 @@ def only_parts(command: _command_typing) -> _command_typing:
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 

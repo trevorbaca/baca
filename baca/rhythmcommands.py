@@ -22,9 +22,7 @@ class RhythmCommand(_scoping.Command):
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(3, 8), (4, 8), (3,8), (4, 8)],
         ... )
 
@@ -41,7 +39,9 @@ class RhythmCommand(_scoping.Command):
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -313,9 +313,7 @@ class RhythmCommand(_scoping.Command):
             Talea rhythm-maker remembers previous state across gaps:
 
             >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily"],
             ...     score_template=baca.make_empty_score_maker(1),
-            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ...     time_signatures=5 * [(4, 8)],
             ... )
 
@@ -358,7 +356,9 @@ class RhythmCommand(_scoping.Command):
 
             >>> lilypond_file = maker.run(
             ...     environment="docs",
+            ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -663,9 +663,7 @@ def make_monads(fractions):
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 4)],
         ... )
 
@@ -676,7 +674,9 @@ def make_monads(fractions):
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -774,9 +774,7 @@ def make_repeat_tied_notes(
         gold), even tied notes resulting from meter rewriting:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(10, 8)],
         ... )
 
@@ -787,7 +785,9 @@ def make_repeat_tied_notes(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 

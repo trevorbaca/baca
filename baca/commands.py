@@ -100,7 +100,6 @@ def assign_parts(
         Raises exception when voice does not allow part assignment:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=closure,
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -116,6 +115,7 @@ def assign_parts(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         Traceback (most recent call last):
@@ -147,9 +147,7 @@ def bcps(
         ..  container:: example
 
             >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily"],
             ...     score_template=baca.make_empty_score_maker(1),
-            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -164,10 +162,12 @@ def bcps(
             ...     baca.text_spanner_staff_padding(2.5),
             ...     )
 
-        >>> lilypond_file = maker.run(
-        ...     environment="docs",
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ... )
+            >>> lilypond_file = maker.run(
+            ...     environment="docs",
+            ...     includes=["baca.ily"],
+            ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
+            ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -502,7 +502,6 @@ def container(
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -517,6 +516,7 @@ def container(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
 
@@ -574,7 +574,6 @@ def cross_staff(
         ...     return baca.make_empty_score(1, 1)
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=closure,
         ...     time_signatures=[(4, 4)],
         ... )
@@ -594,6 +593,7 @@ def cross_staff(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
 
@@ -864,9 +864,7 @@ def finger_pressure_transition(
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
@@ -882,7 +880,9 @@ def finger_pressure_transition(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1476,9 +1476,7 @@ def invisible_music(
         Attaches ``\baca-invisible-music`` literal to middle leaves:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
@@ -1493,7 +1491,9 @@ def invisible_music(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 

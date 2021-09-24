@@ -882,17 +882,17 @@ def make_layout_ly(spacing):
     assert abjad.String(document_name).is_shout_case()
     maker = baca.SegmentMaker(
         append_phantom_measure=True,
-        first_measure_number=first_measure_number,
         remove=baca.tags.layout_removal_tags(),
         score_template=baca.make_empty_score_maker(1),
-        spacing=spacing,
         time_signatures=time_signatures,
     )
     lilypond_file = maker.run(
         add_container_identifiers=True,
         do_not_print_timing=True,
+        first_measure_number=first_measure_number,
         first_segment=True,
         page_layout_profile=page_layout_profile,
+        spacing=spacing,
     )
     context = lilypond_file["Global_Skips"]
     context.lilypond_type = "PageLayout"

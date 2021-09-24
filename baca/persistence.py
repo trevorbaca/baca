@@ -15,22 +15,22 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     indicator_defaults=[
-        ...         ("Music_Staff", "default_clef", abjad.Clef("treble"))
-        ...     ],
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ... )
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
+        ...     indicator_defaults=[
+        ...         ("Music_Staff", "default_clef", abjad.Clef("treble"))
+        ...     ],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -89,14 +89,8 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> maker(
         ...     "Music_Voice",
@@ -105,7 +99,13 @@ r"""
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -162,14 +162,8 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> maker(
         ...     "Music_Voice",
@@ -188,9 +182,15 @@ r"""
         >>> lilypond_file = maker.run(
         ...     environment="docs",
         ...     first_segment=False,
+        ...     includes=["baca.ily"],
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -250,14 +250,8 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ... )
 
         >>> metadata, persist = {}, {}
@@ -272,9 +266,15 @@ r"""
         >>> lilypond_file = maker.run(
         ...     environment="docs",
         ...     first_segment=False,
+        ...     includes=["baca.ily"],
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -335,14 +335,8 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> maker(
         ...     "Music_Voice",
@@ -351,7 +345,13 @@ r"""
         ... )
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -419,14 +419,8 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> maker(
         ...     "Music_Voice",
@@ -445,9 +439,15 @@ r"""
         >>> lilypond_file = maker.run(
         ...     environment="docs",
         ...     first_segment=False,
+        ...     includes=["baca.ily"],
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -505,11 +505,8 @@ r"""
         Explicit dynamics color blue:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -519,7 +516,10 @@ r"""
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -557,11 +557,8 @@ r"""
         Even after a previous dynamic:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -581,9 +578,12 @@ r"""
         >>> lilypond_file = maker.run(
         ...     environment="docs",
         ...     first_segment=False,
+        ...     includes=["baca.ily"],
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -624,11 +624,8 @@ r"""
         Reapplied dynamics color green:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -647,9 +644,12 @@ r"""
         >>> lilypond_file = maker.run(
         ...     environment="docs",
         ...     first_segment=False,
+        ...     includes=["baca.ily"],
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -690,11 +690,8 @@ r"""
         Redundant dynamics color pink:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -705,7 +702,10 @@ r"""
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -745,11 +745,8 @@ r"""
         Even at the beginning of a segment:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -769,9 +766,12 @@ r"""
         >>> lilypond_file = maker.run(
         ...     environment="docs",
         ...     first_segment=False,
+        ...     includes=["baca.ily"],
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -810,11 +810,8 @@ r"""
         Sforzando dynamics do not count as redundant:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -825,7 +822,10 @@ r"""
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -865,11 +865,8 @@ r"""
         Even at the beginning of a segment:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -889,9 +886,12 @@ r"""
         >>> lilypond_file = maker.run(
         ...     environment="docs",
         ...     first_segment=False,
+        ...     includes=["baca.ily"],
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -932,11 +932,8 @@ r"""
         REGRESSION. Conventional and effort dynamics analyze nonredundantly:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -947,7 +944,10 @@ r"""
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -1010,16 +1010,9 @@ r"""
         >>> score_template = baca.make_empty_score_maker(1)
         >>> triple = ("Music_Staff", 'default_instrument', abjad.Flute())
         >>> maker = baca.SegmentMaker(
-        ...     indicator_defaults=[triple],
-        ...     includes=["baca.ily"],
         ...     instruments=instruments,
         ...     score_template=score_template,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> maker(
         ...     "Music_Voice",
@@ -1028,7 +1021,14 @@ r"""
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
+        ...     indicator_defaults=[triple],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -1156,15 +1156,9 @@ r"""
         Explicit instruments color blue and redraw dull blue:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -1174,7 +1168,13 @@ r"""
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -1301,15 +1301,9 @@ r"""
         Even after a previous instrument:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -1329,9 +1323,15 @@ r"""
         >>> lilypond_file = maker.run(
         ...     environment="docs",
         ...     first_segment=False,
+        ...     includes=["baca.ily"],
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -1462,15 +1462,9 @@ r"""
         Reapplied instruments color green and redraw dull green:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -1489,9 +1483,15 @@ r"""
         >>> lilypond_file = maker.run(
         ...     environment="docs",
         ...     first_segment=False,
+        ...     includes=["baca.ily"],
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -1630,15 +1630,9 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -1652,7 +1646,13 @@ r"""
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -1800,15 +1800,9 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -1828,9 +1822,15 @@ r"""
         >>> lilypond_file = maker.run(
         ...     environment="docs",
         ...     first_segment=False,
+        ...     includes=["baca.ily"],
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -1990,16 +1990,9 @@ r"""
         ...     margin_markups['I+II'],
         ...     )
         >>> maker = baca.SegmentMaker(
-        ...     indicator_defaults=[triple],
-        ...     includes=["baca.ily"],
         ...     margin_markups=margin_markups,
         ...     score_template=score_template,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -2008,7 +2001,14 @@ r"""
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
+        ...     indicator_defaults=[triple],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -2154,15 +2154,9 @@ r"""
         Explicit margin markup color blue and redraw dull blue:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -2172,7 +2166,13 @@ r"""
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -2316,15 +2316,9 @@ r"""
         Even after previous margin markup:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -2344,9 +2338,15 @@ r"""
         >>> lilypond_file = maker.run(
         ...     environment="docs",
         ...     first_segment=False,
+        ...     includes=["baca.ily"],
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -2501,15 +2501,9 @@ r"""
         Reapplied margin markup color green and redraw dull green:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -2528,9 +2522,15 @@ r"""
         >>> lilypond_file = maker.run(
         ...     environment="docs",
         ...     first_segment=False,
+        ...     includes=["baca.ily"],
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -2692,15 +2692,9 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -2714,7 +2708,13 @@ r"""
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -2898,15 +2898,9 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -2926,9 +2920,15 @@ r"""
         >>> lilypond_file = maker.run(
         ...     environment="docs",
         ...     first_segment=False,
+        ...     includes=["baca.ily"],
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -3090,15 +3090,9 @@ r"""
         ...     ),
         ... )
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -3121,7 +3115,13 @@ r"""
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -3201,15 +3201,9 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     append_phantom_measure=True,
-        ...     includes=["baca.ily"],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 25),
-        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Global_Skips",
@@ -3222,7 +3216,13 @@ r"""
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 25),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -3297,15 +3297,9 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     append_phantom_measure=True,
-        ...     includes=["baca.ily"],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Global_Skips",
@@ -3329,9 +3323,15 @@ r"""
         >>> lilypond_file = maker.run(
         ...     environment="docs",
         ...     first_segment=False,
+        ...     includes=["baca.ily"],
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -3410,15 +3410,9 @@ r"""
         Reapplied metronome marks color green:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -3441,9 +3435,15 @@ r"""
         >>> lilypond_file = maker.run(
         ...     environment="docs",
         ...     first_segment=False,
+        ...     includes=["baca.ily"],
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -3497,15 +3497,9 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     append_phantom_measure=True,
-        ...     includes=["baca.ily"],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Global_Skips",
@@ -3519,7 +3513,13 @@ r"""
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -3601,15 +3601,9 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     append_phantom_measure=True,
-        ...     includes=["baca.ily"],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Global_Skips",
@@ -3633,9 +3627,15 @@ r"""
         >>> lilypond_file = maker.run(
         ...     environment="docs",
         ...     first_segment=False,
+        ...     includes=["baca.ily"],
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -3718,11 +3718,8 @@ r"""
         Explicit persistent overrides work but do not color:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> override = baca.PersistentOverride(
         ...     attribute="bar_extent",
@@ -3745,8 +3742,11 @@ r"""
 
         >>> lilypond_file, metadata, persist = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     return_metadata=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -3830,11 +3830,8 @@ r"""
         Reapplied persistent overrides work but do not color:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -3859,9 +3856,12 @@ r"""
         >>> lilypond_file = maker.run(
         ...     environment="docs",
         ...     first_segment=False,
+        ...     includes=["baca.ily"],
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -3899,11 +3899,8 @@ r"""
         Even at the beginning of a segment:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> override = baca.PersistentOverride(
         ...     attribute="bar_extent",
@@ -3939,9 +3936,12 @@ r"""
         >>> lilypond_file = maker.run(
         ...     environment="docs",
         ...     first_segment=False,
+        ...     includes=["baca.ily"],
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -3985,11 +3985,8 @@ r"""
         Explicit staff lines color blue:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -3999,7 +3996,10 @@ r"""
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -4040,11 +4040,8 @@ r"""
         Even after previous staff lines:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -4064,9 +4061,12 @@ r"""
         >>> lilypond_file = maker.run(
         ...     environment="docs",
         ...     first_segment=False,
+        ...     includes=["baca.ily"],
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -4110,11 +4110,8 @@ r"""
         Reapplied staff lines color green:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -4133,9 +4130,12 @@ r"""
         >>> lilypond_file = maker.run(
         ...     environment="docs",
         ...     first_segment=False,
+        ...     includes=["baca.ily"],
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -4178,11 +4178,8 @@ r"""
         Redundant staff lines color pink:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -4193,7 +4190,10 @@ r"""
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -4239,11 +4239,8 @@ r"""
         Even at the beginning of a segment:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -4263,9 +4260,12 @@ r"""
         >>> lilypond_file = maker.run(
         ...     environment="docs",
         ...     first_segment=False,
+        ...     includes=["baca.ily"],
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -4326,15 +4326,9 @@ r"""
 
         >>> maker = baca.SegmentMaker(
         ...     append_phantom_measure=True,
-        ...     includes=["baca.ily"],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 25),
-        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Global_Skips",
@@ -4347,7 +4341,13 @@ r"""
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 25),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -4425,15 +4425,9 @@ r"""
         Even after a previous tempo trend:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Global_Skips",
@@ -4456,9 +4450,15 @@ r"""
         >>> lilypond_file = maker.run(
         ...     environment="docs",
         ...     first_segment=False,
+        ...     includes=["baca.ily"],
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -4515,15 +4515,9 @@ r"""
         Reapplied tempo trends color green:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Music_Voice",
@@ -4545,9 +4539,15 @@ r"""
         >>> lilypond_file = maker.run(
         ...     environment="docs",
         ...     first_segment=False,
+        ...     includes=["baca.ily"],
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -4604,15 +4604,9 @@ r"""
         Redundant tempo trends color pink:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Global_Skips",
@@ -4629,7 +4623,13 @@ r"""
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -4696,15 +4696,9 @@ r"""
         Even at the beginning of a segment:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> maker(
         ...     "Global_Skips",
@@ -4727,9 +4721,15 @@ r"""
         >>> lilypond_file = maker.run(
         ...     environment="docs",
         ...     first_segment=False,
+        ...     includes=["baca.ily"],
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ...     treat_untreated_persistent_wrappers=True,
         ...     )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0

@@ -1245,7 +1245,6 @@ def hide_black_note_heads(
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1258,6 +1257,7 @@ def hide_black_note_heads(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1592,7 +1592,6 @@ def margin_markup(
         >>> margin_markups = {}
         >>> margin_markups["Fl."] = abjad.MarginMarkup(markup=abjad.Markup("Fl."))
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -1607,6 +1606,7 @@ def margin_markup(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2176,9 +2176,7 @@ def staff_lines(
         Single-line staff with percussion clef:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
         ...     )
 
@@ -2192,7 +2190,9 @@ def staff_lines(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2239,9 +2239,7 @@ def staff_lines(
         Single-line staff with bass clef:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
         ...     )
 
@@ -2255,7 +2253,9 @@ def staff_lines(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2303,9 +2303,7 @@ def staff_lines(
         Two-line staff with percussion clef:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
         ...     )
 
@@ -2319,7 +2317,9 @@ def staff_lines(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2365,9 +2365,7 @@ def staff_lines(
         Two-line staff with bass clef; clef set before staff positions:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
         ...     )
 
@@ -2381,7 +2379,9 @@ def staff_lines(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2427,9 +2427,7 @@ def staff_lines(
         Two-line staff with bass clef; staff positions set before clef:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
         ...     )
 
@@ -2443,7 +2441,9 @@ def staff_lines(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 

@@ -27,7 +27,6 @@ class AccidentalAdjustmentCommand(_scoping.Command):
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -41,6 +40,7 @@ class AccidentalAdjustmentCommand(_scoping.Command):
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -478,7 +478,6 @@ class ClusterCommand(_scoping.Command):
             Hides flat markup:
 
             >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily"],
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -492,6 +491,7 @@ class ClusterCommand(_scoping.Command):
 
             >>> lilypond_file = maker.run(
             ...     environment="docs",
+            ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ... )
 
@@ -589,7 +589,6 @@ class ClusterCommand(_scoping.Command):
             Takes start pitch from input notes:
 
             >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily"],
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -603,6 +602,7 @@ class ClusterCommand(_scoping.Command):
 
             >>> lilypond_file = maker.run(
             ...     environment="docs",
+            ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ... )
 
@@ -701,7 +701,6 @@ class ClusterCommand(_scoping.Command):
             Sets start pitch explicitly:
 
             >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily"],
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -714,6 +713,7 @@ class ClusterCommand(_scoping.Command):
 
             >>> lilypond_file = maker.run(
             ...     environment="docs",
+            ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ... )
 
@@ -820,7 +820,6 @@ class ClusterCommand(_scoping.Command):
             Increasing widths:
 
             >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily"],
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -833,6 +832,7 @@ class ClusterCommand(_scoping.Command):
 
             >>> lilypond_file = maker.run(
             ...     environment="docs",
+            ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ... )
 
@@ -931,7 +931,6 @@ class ClusterCommand(_scoping.Command):
             Patterned widths:
 
             >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily"],
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -944,6 +943,7 @@ class ClusterCommand(_scoping.Command):
 
             >>> lilypond_file = maker.run(
             ...     environment="docs",
+            ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ... )
 
@@ -1042,7 +1042,6 @@ class ClusterCommand(_scoping.Command):
             Leaves notes and chords unchanged:
 
             >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily"],
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -1056,6 +1055,7 @@ class ClusterCommand(_scoping.Command):
 
             >>> lilypond_file = maker.run(
             ...     environment="docs",
+            ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1106,7 +1106,6 @@ class ColorFingeringCommand(_scoping.Command):
         With segment-maker:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1120,6 +1119,7 @@ class ColorFingeringCommand(_scoping.Command):
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1471,7 +1471,6 @@ class MicrotoneDeviationCommand(_scoping.Command):
         With alternating up- and down-quatertones:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1485,6 +1484,7 @@ class MicrotoneDeviationCommand(_scoping.Command):
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1625,7 +1625,6 @@ class OctaveDisplacementCommand(_scoping.Command):
         Displaces octaves:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1641,6 +1640,7 @@ class OctaveDisplacementCommand(_scoping.Command):
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1897,7 +1897,6 @@ class PitchCommand(_scoping.Command):
         With pitch numbers:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1910,6 +1909,7 @@ class PitchCommand(_scoping.Command):
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1967,7 +1967,6 @@ class PitchCommand(_scoping.Command):
         With pitch numbers:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1980,6 +1979,7 @@ class PitchCommand(_scoping.Command):
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2037,7 +2037,6 @@ class PitchCommand(_scoping.Command):
         Large chord:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -2050,6 +2049,7 @@ class PitchCommand(_scoping.Command):
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2480,7 +2480,6 @@ class RegisterCommand(_scoping.Command):
         With segment-maker:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -2496,6 +2495,7 @@ class RegisterCommand(_scoping.Command):
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
 
@@ -2802,7 +2802,6 @@ class RegisterInterpolationCommand(_scoping.Command):
 
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
         ... )
@@ -2817,6 +2816,7 @@ class RegisterInterpolationCommand(_scoping.Command):
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
 
@@ -2904,7 +2904,6 @@ class RegisterInterpolationCommand(_scoping.Command):
 
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
         ... )
@@ -2919,6 +2918,7 @@ class RegisterInterpolationCommand(_scoping.Command):
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
 
@@ -3006,7 +3006,6 @@ class RegisterInterpolationCommand(_scoping.Command):
 
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
         ... )
@@ -3021,6 +3020,7 @@ class RegisterInterpolationCommand(_scoping.Command):
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
 
@@ -3108,7 +3108,6 @@ class RegisterInterpolationCommand(_scoping.Command):
 
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
         ... )
@@ -3123,6 +3122,7 @@ class RegisterInterpolationCommand(_scoping.Command):
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
 
@@ -3210,7 +3210,6 @@ class RegisterInterpolationCommand(_scoping.Command):
 
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
         ... )
@@ -3225,6 +3224,7 @@ class RegisterInterpolationCommand(_scoping.Command):
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
 
@@ -5180,7 +5180,6 @@ def force_accidental(
         Inverts edition-specific tags:
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -5198,6 +5197,7 @@ def force_accidental(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -5476,7 +5476,6 @@ def pitch(
         another (note to chord in this example):
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -5492,6 +5491,7 @@ def pitch(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP

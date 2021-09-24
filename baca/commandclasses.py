@@ -252,9 +252,7 @@ class BCPCommand(_scoping.Command):
             PATTERN. Define chunkwise spanners like this:
 
             >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily"],
             ...     score_template=baca.make_empty_score_maker(1),
-            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -276,7 +274,9 @@ class BCPCommand(_scoping.Command):
 
             >>> lilypond_file = maker.run(
             ...     environment="docs",
+            ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -459,9 +459,7 @@ class BCPCommand(_scoping.Command):
             Tweaks LilyPond ``TextSpanner`` grob:
 
             >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily"],
             ...     score_template=baca.make_empty_score_maker(1),
-            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -479,7 +477,9 @@ class BCPCommand(_scoping.Command):
 
             >>> lilypond_file = maker.run(
             ...     environment="docs",
+            ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -728,7 +728,6 @@ class ContainerCommand(_scoping.Command):
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -743,6 +742,7 @@ class ContainerCommand(_scoping.Command):
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
 

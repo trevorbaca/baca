@@ -2126,10 +2126,7 @@ class Imbrication:
             ... )
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_repeat_pitch_classes=True,
-            ...     includes=["baca.ily"],
             ...     score_template=closure,
-            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ...     time_signatures=accumulator.time_signatures,
             ... )
             >>> accumulator.populate_segment_maker(maker)
@@ -2146,7 +2143,9 @@ class Imbrication:
 
             >>> lilypond_file = maker.run(
             ...     environment="docs",
+            ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2346,10 +2345,7 @@ class Imbrication:
             ... )
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_repeat_pitch_classes=True,
-            ...     includes=["baca.ily"],
             ...     score_template=closure,
-            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ...     time_signatures=accumulator.time_signatures,
             ... )
             >>> accumulator.populate_segment_maker(maker)
@@ -2366,7 +2362,9 @@ class Imbrication:
 
             >>> lilypond_file = maker.run(
             ...     environment="docs",
+            ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2546,9 +2544,7 @@ class Imbrication:
             ... )
 
             >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily"],
             ...     score_template=closure,
-            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ...     time_signatures=accumulator.time_signatures,
             ... )
             >>> accumulator.populate_segment_maker(maker)
@@ -2565,7 +2561,9 @@ class Imbrication:
 
             >>> lilypond_file = maker.run(
             ...     environment="docs",
+            ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2766,9 +2764,7 @@ class Imbrication:
             ... )
 
             >>> maker = baca.SegmentMaker(
-            ...     includes=["baca.ily"],
             ...     score_template=closure,
-            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ...     time_signatures=accumulator.time_signatures,
             ... )
             >>> accumulator.populate_segment_maker(maker)
@@ -2785,7 +2781,9 @@ class Imbrication:
 
             >>> lilypond_file = maker.run(
             ...     environment="docs",
+            ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -7069,9 +7067,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ... )
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=closure,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
         >>> accumulator.populate_segment_maker(maker)
@@ -7088,7 +7084,9 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -7216,9 +7214,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ... )
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=closure,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
         >>> accumulator.populate_segment_maker(maker)
@@ -7235,7 +7231,9 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -7400,10 +7398,7 @@ def extend_beam(
         ... )
 
         >>> maker = baca.SegmentMaker(
-        ...     ignore_repeat_pitch_classes=True,
-        ...     includes=["baca.ily"],
         ...     score_template=closure,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
         >>> accumulator.populate_segment_maker(maker)
@@ -7420,7 +7415,9 @@ def extend_beam(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -7598,9 +7595,7 @@ def imbricate(
         ... )
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=closure,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
         >>> accumulator.populate_segment_maker(maker)
@@ -7617,7 +7612,9 @@ def imbricate(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -7786,15 +7783,15 @@ def imbricate(
         ... )
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=closure,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
         >>> accumulator.populate_segment_maker(maker)
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -7999,9 +7996,7 @@ def imbricate(
         ... )
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=closure,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
         >>> accumulator.populate_segment_maker(maker)
@@ -8018,7 +8013,9 @@ def imbricate(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -8205,9 +8202,7 @@ def imbricate(
         ... )
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=closure,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
         >>> accumulator.populate_segment_maker(maker)
@@ -8224,7 +8219,9 @@ def imbricate(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -8344,10 +8341,7 @@ def imbricate(
         ... )
 
         >>> maker = baca.SegmentMaker(
-        ...     ignore_repeat_pitch_classes=True,
-        ...     includes=["baca.ily"],
         ...     score_template=closure,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
         >>> accumulator.populate_segment_maker(maker)
@@ -8364,7 +8358,9 @@ def imbricate(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -8508,10 +8504,7 @@ def imbricate(
         ... )
 
         >>> maker = baca.SegmentMaker(
-        ...     ignore_repeat_pitch_classes=True,
-        ...     includes=["baca.ily"],
         ...     score_template=closure,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ...     time_signatures=accumulator.time_signatures,
         ... )
         >>> accumulator.populate_segment_maker(maker)
@@ -8528,7 +8521,9 @@ def imbricate(
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 

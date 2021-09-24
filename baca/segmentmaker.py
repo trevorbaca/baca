@@ -1332,6 +1332,42 @@ def _color_not_yet_registered(score):
         abjad.attach(literal, pleaf, tag=tag)
 
 
+def _color_octaves(score):
+    vertical_moments = abjad.iterate_vertical_moments(score)
+    markup = abjad.Markup("OCTAVE", direction=abjad.Up)
+    abjad.tweak(markup).color = "#red"
+    tag = _scoping.site(_frame())
+    tag = tag.append(_tags.OCTAVE_COLORING)
+    for vertical_moment in vertical_moments:
+        pleaves, pitches = [], []
+        for leaf in vertical_moment.leaves:
+            if abjad.get.has_indicator(leaf, _const.HIDDEN):
+                continue
+            if abjad.get.has_indicator(leaf, _const.STAFF_POSITION):
+                continue
+            if isinstance(leaf, abjad.Note):
+                pleaves.append(leaf)
+                pitches.append(leaf.written_pitch)
+            elif isinstance(leaf, abjad.Chord):
+                pleaves.append(leaf)
+                pitches.extend(leaf.written_pitches)
+        if not pitches:
+            continue
+        pitch_classes = [_.pitch_class for _ in pitches]
+        if _pitchclasses.PitchClassSegment(pitch_classes).has_duplicates():
+            color = True
+            for pleaf in pleaves:
+                if abjad.get.has_indicator(pleaf, _const.ALLOW_OCTAVE):
+                    color = False
+            if not color:
+                continue
+            for pleaf in pleaves:
+                abjad.attach(markup, pleaf, tag=tag)
+                string = r"\baca-octave-coloring"
+                literal = abjad.LilyPondLiteral(string, format_slot="before")
+                abjad.attach(literal, pleaf, tag=tag)
+
+
 def _comment_measure_numbers(first_measure_number, offset_to_measure_number, score):
     for leaf in abjad.iterate.leaves(score):
         offset = abjad.get.timespan(leaf).start_offset
@@ -1360,6 +1396,19 @@ def _deactivate_tags(deactivate, score):
                 if tag in wrapper.tag:
                     wrapper.deactivate = True
                     break
+
+
+def _error_on_not_yet_pitched(score):
+    violators = []
+    for voice in abjad.iterate.components(score, abjad.Voice):
+        for leaf in abjad.iterate.leaves(voice):
+            if abjad.get.has_indicator(leaf, _const.NOT_YET_PITCHED):
+                violators.append((voice.name, leaf))
+    if violators:
+        strings = [f"{len(violators)} leaves not yet pitched ..."]
+        strings.extend([f"    {_[0]} {repr(_[1])}" for _ in violators])
+        message = "\n".join(strings)
+        raise Exception(message)
 
 
 def _extend_beam(leaf):
@@ -2840,6 +2889,15 @@ def _style_phantom_measures(do_not_append_phantom_measure, score):
             )
 
 
+def _transpose_score(score):
+    for pleaf in _selection.Selection(score).pleaves():
+        if abjad.get.has_indicator(pleaf, _const.DO_NOT_TRANSPOSE):
+            continue
+        if abjad.get.has_indicator(pleaf, _const.STAFF_POSITION):
+            continue
+        abjad.iterpitches.transpose_from_sounding_pitch(pleaf)
+
+
 def _treat_untreated_persistent_wrappers(
     environment,
     manifests,
@@ -3017,125 +3075,6 @@ def _whitespace_leaves(score):
         abjad.attach(literal, container, tag=None)
 
 
-def color_octaves(score):
-    r"""
-    Colors octaves in ``score``.
-
-    ..  container:: example
-
-        Colors octaves:
-
-        >>> def closure():
-        ...     return baca.make_empty_score(1, 1)
-
-        >>> maker = baca.SegmentMaker(
-        ...     color_octaves=True,
-        ...     includes=["baca.ily"],
-        ...     score_template=closure,
-        ...     time_signatures=[(6, 4)],
-        ... )
-
-        >>> maker(
-        ...     ("Music_Voice_1", 1),
-        ...     baca.music(abjad.Container("d'4 e' f' g' a' b'")[:]),
-        ... )
-
-        >>> maker(
-        ...     ("Music_Voice_2", 1),
-        ...     baca.music(abjad.Container("a4 g f e d c")[:]),
-        ...     baca.clef("bass"),
-        ... )
-
-        >>> lilypond_file = maker.run(
-        ...     environment="docs",
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ... )
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            {
-                \context StaffGroup = "Music_Staff_Group"
-                <<
-                    \context Staff = "Music_Staff_1"
-                    <<
-                        \context Voice = "Global_Skips"
-                        {
-                            \time 6/4
-                            s1 * 3/2
-                        }
-                        \context Voice = "Music_Voice_1"
-                        {
-                            d'4
-                            e'4
-                            \baca-octave-coloring
-                            f'4
-                            - \tweak color #red
-                            ^ \markup { OCTAVE }
-                            g'4
-                            a'4
-                            b'4
-                        }
-                    >>
-                    \context Staff = "Music_Staff_2"
-                    {
-                        \context Voice = "Music_Voice_2"
-                        {
-                            \clef "bass"
-                            a4
-                            g4
-                            \baca-octave-coloring
-                            f4
-                            - \tweak color #red
-                            ^ \markup { OCTAVE }
-                            e4
-                            d4
-                            c4
-                        }
-                    }
-                >>
-            }
-
-    """
-    vertical_moments = abjad.iterate_vertical_moments(score)
-    markup = abjad.Markup("OCTAVE", direction=abjad.Up)
-    abjad.tweak(markup).color = "#red"
-    tag = _scoping.site(_frame())
-    tag = tag.append(_tags.OCTAVE_COLORING)
-    for vertical_moment in vertical_moments:
-        pleaves, pitches = [], []
-        for leaf in vertical_moment.leaves:
-            if abjad.get.has_indicator(leaf, _const.HIDDEN):
-                continue
-            if abjad.get.has_indicator(leaf, _const.STAFF_POSITION):
-                continue
-            if isinstance(leaf, abjad.Note):
-                pleaves.append(leaf)
-                pitches.append(leaf.written_pitch)
-            elif isinstance(leaf, abjad.Chord):
-                pleaves.append(leaf)
-                pitches.extend(leaf.written_pitches)
-        if not pitches:
-            continue
-        pitch_classes = [_.pitch_class for _ in pitches]
-        if _pitchclasses.PitchClassSegment(pitch_classes).has_duplicates():
-            color = True
-            for pleaf in pleaves:
-                if abjad.get.has_indicator(pleaf, _const.ALLOW_OCTAVE):
-                    color = False
-            if not color:
-                continue
-            for pleaf in pleaves:
-                abjad.attach(markup, pleaf, tag=tag)
-                string = r"\baca-octave-coloring"
-                literal = abjad.LilyPondLiteral(string, format_slot="before")
-                abjad.attach(literal, pleaf, tag=tag)
-
-
 def color_out_of_range_pitches(score):
     r"""
     Colors out-of-range pitches in ``score``.
@@ -3166,8 +3105,6 @@ def color_out_of_range_pitches(score):
         >>> instruments["Violin"] = abjad.Violin()
 
         >>> maker = baca.SegmentMaker(
-        ...     do_not_check_out_of_range_pitches=True,
-        ...     includes=["baca.ily"],
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
@@ -3179,7 +3116,9 @@ def color_out_of_range_pitches(score):
         ... )
 
         >>> lilypond_file = maker.run(
+        ...     do_not_check_out_of_range_pitches=True,
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.setting(lilypond_file["Score"]).autoBeaming = False
@@ -3291,7 +3230,6 @@ def color_repeat_pitch_classes(score):
         >>> figures = abjad.select(figures_)
 
         >>> maker = baca.SegmentMaker(
-        ...     includes=["baca.ily"],
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
         ... )
@@ -3302,6 +3240,7 @@ def color_repeat_pitch_classes(score):
 
         >>> lilypond_file = maker.run(
         ...     environment="docs",
+        ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> score = lilypond_file["Score"]
@@ -3379,27 +3318,10 @@ def color_repeat_pitch_classes(score):
             abjad.attach(literal, leaf, tag=tag)
 
 
-def error_on_not_yet_pitched(score):
-    """
-    Errors on ``NOT_YET_PITCHED``.
-    """
-    violators = []
-    for voice in abjad.iterate.components(score, abjad.Voice):
-        for leaf in abjad.iterate.leaves(voice):
-            if abjad.get.has_indicator(leaf, _const.NOT_YET_PITCHED):
-                violators.append((voice.name, leaf))
-    if violators:
-        strings = [f"{len(violators)} leaves not yet pitched ..."]
-        strings.extend([f"    {_[0]} {repr(_[1])}" for _ in violators])
-        message = "\n".join(strings)
-        raise Exception(message)
-
-
 def segments(runtime=False):
     if not runtime:
         dictionary = {
             "append_phantom_measure": True,
-            "treat_untreated_persistent_wrappers": True,
         }
     else:
         dictionary = {
@@ -3407,169 +3329,9 @@ def segments(runtime=False):
             "attach_rhythm_annotation_spanners": True,
             "check_persistent_indicators": True,
             "include_layout_ly": True,
+            "treat_untreated_persistent_wrappers": True,
         }
     return dictionary
-
-
-def transpose_score(score):
-    r"""
-    Transposes ``score``.
-
-    ..  container:: example
-
-        Transposes score:
-
-        >>> instruments = {}
-        >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
-        >>> maker = baca.SegmentMaker(
-        ...     instruments=instruments,
-        ...     score_template=baca.make_empty_score_maker(1),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     transpose_score=True,
-        ... )
-
-        >>> maker(
-        ...     "Music_Voice",
-        ...     baca.instrument(instruments["clarinet"]),
-        ...     baca.make_even_divisions(),
-        ...     baca.pitches("E4 F4"),
-        ... )
-
-        >>> lilypond_file = maker.run(
-        ...     environment="docs",
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ... )
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            {
-                \context Staff = "Music_Staff"
-                <<
-                    \context Voice = "Global_Skips"
-                    {
-                        \time 4/8
-                        s1 * 1/2
-                        \time 3/8
-                        s1 * 3/8
-                        \time 4/8
-                        s1 * 1/2
-                        \time 3/8
-                        s1 * 3/8
-                    }
-                    \context Voice = "Music_Voice"
-                    {
-                        fs'!8
-                        [
-                        g'8
-                        fs'!8
-                        g'8
-                        ]
-                        fs'!8
-                        [
-                        g'8
-                        fs'!8
-                        ]
-                        g'8
-                        [
-                        fs'!8
-                        g'8
-                        fs'!8
-                        ]
-                        g'8
-                        [
-                        fs'!8
-                        g'8
-                        ]
-                    }
-                >>
-            }
-
-    ..  container:: example
-
-        Does not transpose score:
-
-        >>> instruments = {}
-        >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
-        >>> maker = baca.SegmentMaker(
-        ...     instruments=instruments,
-        ...     score_template=baca.make_empty_score_maker(1),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     transpose_score=False,
-        ... )
-
-        >>> maker(
-        ...     "Music_Voice",
-        ...     baca.instrument(instruments["clarinet"]),
-        ...     baca.make_even_divisions(),
-        ...     baca.pitches("E4 F4"),
-        ... )
-
-        >>> lilypond_file = maker.run(
-        ...     environment="docs",
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ... )
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            {
-                \context Staff = "Music_Staff"
-                <<
-                    \context Voice = "Global_Skips"
-                    {
-                        \time 4/8
-                        s1 * 1/2
-                        \time 3/8
-                        s1 * 3/8
-                        \time 4/8
-                        s1 * 1/2
-                        \time 3/8
-                        s1 * 3/8
-                    }
-                    \context Voice = "Music_Voice"
-                    {
-                        e'8
-                        [
-                        f'8
-                        e'8
-                        f'8
-                        ]
-                        e'8
-                        [
-                        f'8
-                        e'8
-                        ]
-                        f'8
-                        [
-                        e'8
-                        f'8
-                        e'8
-                        ]
-                        f'8
-                        [
-                        e'8
-                        f'8
-                        ]
-                    }
-                >>
-            }
-
-    """
-    for pleaf in _selection.Selection(score).pleaves():
-        if abjad.get.has_indicator(pleaf, _const.DO_NOT_TRANSPOSE):
-            continue
-        if abjad.get.has_indicator(pleaf, _const.STAFF_POSITION):
-            continue
-        abjad.iterpitches.transpose_from_sounding_pitch(pleaf)
 
 
 class SegmentMaker:
@@ -3578,44 +3340,16 @@ class SegmentMaker:
     """
 
     __slots__ = (
-        "allow_empty_selections",
         "append_phantom_measure",
-        "clock_time_extra_offset",
-        "clock_time_override",
-        "color_octaves",
         "commands",
-        "do_not_check_beamed_long_notes",
-        "do_not_check_out_of_range_pitches",
-        "do_not_check_wellformedness",
-        "do_not_force_nonnatural_accidentals",
-        "error_on_not_yet_pitched",
-        "fermata_extra_offset_y",
-        "fermata_measure_empty_overrides",
-        "final_segment",
-        "first_measure_number",
         "functions",
-        "ignore_repeat_pitch_classes",
-        "includes",
-        "indicator_defaults",
         "instruments",
-        "local_measure_number_extra_offset",
-        "magnify_staves",
         "margin_markups",
-        "measure_number_extra_offset",
         "metronome_marks",
-        "moment_markup",
-        "parts_metric_modulation_multiplier",
-        "preamble",
         "remove",
         "score_template",
         "skips_instead_of_rests",
-        "spacing",
-        "spacing_extra_offset",
-        "stage_markup",
-        "stage_number_extra_offset",
         "time_signatures",
-        "transpose_score",
-        "treat_untreated_persistent_wrappers",
         "voice_metadata",
         "voice_names",
     )
@@ -3623,107 +3357,32 @@ class SegmentMaker:
     def __init__(
         self,
         *functions,
-        allow_empty_selections=False,
         append_phantom_measure=False,
-        error_on_not_yet_pitched=False,
-        clock_time_extra_offset=None,
-        clock_time_override=None,
-        color_octaves=False,
-        do_not_check_beamed_long_notes=False,
-        do_not_check_out_of_range_pitches=False,
-        do_not_check_wellformedness=False,
-        do_not_force_nonnatural_accidentals=False,
-        fermata_extra_offset_y=2.5,
-        fermata_measure_empty_overrides=None,
-        final_segment=False,
-        first_measure_number=None,
-        ignore_repeat_pitch_classes=False,
-        indicator_defaults=None,
-        includes=None,
         instruments=None,
-        local_measure_number_extra_offset=None,
-        magnify_staves=None,
         margin_markups=None,
-        measure_number_extra_offset=None,
         metronome_marks=None,
-        moment_markup=None,
-        parts_metric_modulation_multiplier=None,
+        # TODO: phantom is unused?
         phantom=False,
-        preamble=None,
+        # TODO: replace remove with remove_tags?
         remove=None,
         score_template=None,
         skips_instead_of_rests=False,
-        spacing=None,
-        spacing_extra_offset=None,
-        stage_markup=None,
-        stage_number_extra_offset=None,
         time_signatures=None,
-        transpose_score=False,
-        treat_untreated_persistent_wrappers=False,
     ):
         self.functions = functions or ()
-        assert allow_empty_selections in (True, False)
-        self.allow_empty_selections = allow_empty_selections
         assert append_phantom_measure in (True, False)
         self.append_phantom_measure = append_phantom_measure
-        if clock_time_extra_offset not in (False, None):
-            assert isinstance(clock_time_extra_offset, tuple)
-            assert len(clock_time_extra_offset) == 2
-        self.clock_time_extra_offset = clock_time_extra_offset
-        if clock_time_override is not None:
-            assert isinstance(clock_time_override, abjad.MetronomeMark)
-        self.clock_time_override = clock_time_override
-        assert color_octaves in (True, False)
-        self.color_octaves = color_octaves
         self.commands = []
-        assert do_not_check_out_of_range_pitches in (True, False)
-        self.do_not_check_out_of_range_pitches = do_not_check_out_of_range_pitches
-        assert do_not_check_beamed_long_notes in (True, False)
-        self.do_not_check_beamed_long_notes = do_not_check_beamed_long_notes
-        assert do_not_check_wellformedness in (True, False)
-        self.do_not_check_wellformedness = do_not_check_wellformedness
-        assert do_not_force_nonnatural_accidentals in (True, False)
-        self.do_not_force_nonnatural_accidentals = do_not_force_nonnatural_accidentals
-        assert error_on_not_yet_pitched in (True, False)
-        self.error_on_not_yet_pitched = error_on_not_yet_pitched
-        self.fermata_extra_offset_y = fermata_extra_offset_y
-        self.fermata_measure_empty_overrides = fermata_measure_empty_overrides
-        self.first_measure_number = first_measure_number
-        self.indicator_defaults = indicator_defaults
-        self.ignore_repeat_pitch_classes = ignore_repeat_pitch_classes
         self.instruments = instruments
-        assert final_segment in (True, False)
-        self.final_segment = final_segment
-        self.includes = includes
-        self.local_measure_number_extra_offset = local_measure_number_extra_offset
-        self.magnify_staves = magnify_staves
         self.margin_markups = margin_markups
-        self.measure_number_extra_offset = measure_number_extra_offset
         self.metronome_marks = metronome_marks
-        self.moment_markup = moment_markup
-        if parts_metric_modulation_multiplier is not None:
-            assert isinstance(parts_metric_modulation_multiplier, tuple)
-            assert len(parts_metric_modulation_multiplier) == 2
-        self.parts_metric_modulation_multiplier = parts_metric_modulation_multiplier
-        preamble = preamble or ()
-        if preamble:
-            assert all(isinstance(_, str) for _ in preamble), repr(preamble)
-        self.preamble = tuple(preamble)
         if remove is not None:
             assert all(isinstance(_, abjad.Tag) for _ in remove)
         self.remove = remove
         assert score_template is not None, repr(score_template)
         self.score_template = score_template
         self.skips_instead_of_rests = skips_instead_of_rests
-        self.spacing = spacing
-        self.spacing_extra_offset = spacing_extra_offset
-        self.stage_markup = stage_markup
-        self.stage_number_extra_offset = stage_number_extra_offset
         self.time_signatures = _initialize_time_signatures(time_signatures)
-        assert transpose_score in (True, False)
-        self.transpose_score = transpose_score
-        assert treat_untreated_persistent_wrappers in (True, False)
-        self.treat_untreated_persistent_wrappers = treat_untreated_persistent_wrappers
         self.voice_metadata = {}
         self.voice_names = _get_voice_names(score_template)
 
@@ -3799,56 +3458,103 @@ class SegmentMaker:
         self,
         activate=None,
         add_container_identifiers=False,
+        allow_empty_selections=False,
         attach_rhythm_annotation_spanners=False,
         check_persistent_indicators=False,
+        clock_time_extra_offset=None,
+        clock_time_override=None,
+        color_octaves=False,
         deactivate=None,
+        do_not_check_beamed_long_notes=False,
+        do_not_check_out_of_range_pitches=False,
+        do_not_check_wellformedness=False,
+        do_not_force_nonnatural_accidentals=False,
         do_not_print_timing=False,
         environment=None,
+        error_on_not_yet_pitched=False,
+        fermata_extra_offset_y=2.5,
+        fermata_measure_empty_overrides=None,
+        final_segment=False,
+        first_measure_number=None,
         first_segment=True,  # TODO: default to false
         include_layout_ly=False,
+        includes=None,
+        indicator_defaults=None,
+        local_measure_number_extra_offset=None,
+        magnify_staves=None,
+        measure_number_extra_offset=None,
         metadata=None,
         midi=False,
+        moment_markup=None,
         page_layout_profile=None,
+        parts_metric_modulation_multiplier=None,
         persist=None,
+        preamble=None,
         previous_metadata=None,
         previous_persist=None,
         remove_tags=None,
         return_metadata=False,
         segment_number=None,
+        spacing=None,
+        spacing_extra_offset=None,
+        stage_markup=None,
+        stage_number_extra_offset=None,
+        transpose_score=False,
+        treat_untreated_persistent_wrappers=False,
     ):
         """
         Runs segment-maker.
         """
         if activate is not None:
             assert all(isinstance(_, abjad.Tag) for _ in activate)
+        assert allow_empty_selections in (True, False)
+        if clock_time_extra_offset not in (False, None):
+            assert isinstance(clock_time_extra_offset, tuple)
+            assert len(clock_time_extra_offset) == 2
+        if clock_time_override is not None:
+            assert isinstance(clock_time_override, abjad.MetronomeMark)
+        assert color_octaves in (True, False)
         if deactivate is not None:
             assert all(isinstance(_, abjad.Tag) for _ in deactivate)
+        assert do_not_check_out_of_range_pitches in (True, False)
+        assert do_not_check_beamed_long_notes in (True, False)
+        assert do_not_check_wellformedness in (True, False)
+        assert do_not_force_nonnatural_accidentals in (True, False)
         assert environment in (None, "docs"), repr(environment)
+        assert final_segment in (True, False)
         assert first_segment in (True, False)
         metadata = dict(metadata or {})
+        if parts_metric_modulation_multiplier is not None:
+            assert isinstance(parts_metric_modulation_multiplier, tuple)
+            assert len(parts_metric_modulation_multiplier) == 2
         persist = dict(persist or {})
+        preamble = preamble or ()
+        if preamble:
+            assert all(isinstance(_, str) for _ in preamble), repr(preamble)
         previous_metadata = dict(previous_metadata or {})
         previous_persist = dict(previous_persist or {})
+        assert transpose_score in (True, False)
+        assert treat_untreated_persistent_wrappers in (True, False)
         with abjad.Timer() as timer:
             measure_count = len(self.time_signatures)
-            score = _make_score(self.indicator_defaults, self.score_template)
+            score = _make_score(indicator_defaults, self.score_template)
             if environment == "docs":
-                includes = self.includes
+                includes_ = includes
             else:
-                includes = _get_lilypond_includes(
-                    self.clock_time_extra_offset,
-                    self.includes,
-                    self.local_measure_number_extra_offset,
-                    self.measure_number_extra_offset,
-                    self.spacing_extra_offset,
-                    self.stage_number_extra_offset,
+                includes_ = _get_lilypond_includes(
+                    clock_time_extra_offset,
+                    includes,
+                    local_measure_number_extra_offset,
+                    measure_number_extra_offset,
+                    spacing_extra_offset,
+                    stage_number_extra_offset,
                 )
             lilypond_file = _make_lilypond_file(
                 first_segment,
                 include_layout_ly,
-                includes,
+                includes_,
                 midi,
-                self.preamble,
+                preamble,
                 score,
             )
             _make_global_skips(
@@ -3858,12 +3564,12 @@ class SegmentMaker:
                 self.time_signatures,
             )
             _label_measure_numbers(
-                self.first_measure_number,
+                first_measure_number,
                 previous_metadata,
                 score,
             )
-            _label_stage_numbers(score, self.stage_markup)
-            _label_moment_numbers(self.moment_markup, score)
+            _label_stage_numbers(score, stage_markup)
+            _label_moment_numbers(moment_markup, score)
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
         if not do_not_print_timing and environment != "docs":
@@ -3894,7 +3600,7 @@ class SegmentMaker:
             print(message)
         with abjad.Timer() as timer:
             offset_to_measure_number = _populate_offset_to_measure_number(
-                self.first_measure_number,
+                first_measure_number,
                 previous_metadata,
                 score,
             )
@@ -3918,7 +3624,7 @@ class SegmentMaker:
                 manifests=self.manifests,
                 previous_persist=previous_persist,
             )
-            _apply_spacing(score, page_layout_profile, self.spacing)
+            _apply_spacing(score, page_layout_profile, spacing)
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
         if not do_not_print_timing and environment != "docs":
@@ -3927,7 +3633,7 @@ class SegmentMaker:
             with abjad.ForbidUpdate(component=score, update_on_exit=True):
                 cache = None
                 cache, command_count = _call_commands(
-                    self.allow_empty_selections,
+                    allow_empty_selections,
                     cache,
                     self.commands,
                     measure_count,
@@ -3959,27 +3665,27 @@ class SegmentMaker:
                 result = _get_fermata_measure_numbers(
                     score,
                     _get_first_measure_number(
-                        self.first_measure_number,
+                        first_measure_number,
                         previous_metadata,
                     ),
                 )
                 fermata_start_offsets = result[0]
                 fermata_measure_numbers = result[1]
                 final_measure_is_fermata = result[2]
-                if self.treat_untreated_persistent_wrappers:
+                if treat_untreated_persistent_wrappers:
                     _treat_untreated_persistent_wrappers(
                         environment,
                         self.manifests,
                         score,
                     )
                 _attach_metronome_marks(
-                    self.parts_metric_modulation_multiplier,
+                    parts_metric_modulation_multiplier,
                     score,
                 )
                 _reanalyze_trending_dynamics(self.manifests, score)
                 _reanalyze_reapplied_synthetic_wrappers(score)
-                if self.transpose_score:
-                    transpose_score(score)
+                if transpose_score:
+                    _transpose_score(score)
                 _color_not_yet_registered(score)
                 _color_mock_pitch(score)
                 _set_intermittent_to_staff_position_zero(score)
@@ -3988,8 +3694,8 @@ class SegmentMaker:
                 _set_not_yet_pitched_to_staff_position_zero(score)
                 _clean_up_repeat_tie_direction(score)
                 _clean_up_laissez_vibrer_tie_direction(score)
-                if self.error_on_not_yet_pitched:
-                    error_on_not_yet_pitched(score)
+                if error_on_not_yet_pitched:
+                    _error_on_not_yet_pitched(score)
                 _check_doubled_dynamics(score)
                 color_out_of_range_pitches(score)
                 if check_persistent_indicators:
@@ -3999,30 +3705,30 @@ class SegmentMaker:
                         self.score_template,
                     )
                 color_repeat_pitch_classes(score)
-                if self.color_octaves:
-                    color_octaves(score)
+                if color_octaves:
+                    _color_octaves(score)
                 _attach_shadow_tie_indicators(score)
-                if not self.do_not_force_nonnatural_accidentals:
+                if not do_not_force_nonnatural_accidentals:
                     _force_nonnatural_accidentals(score)
                 _label_duration_multipliers(score)
-                _magnify_staves(self.magnify_staves, score)
+                _magnify_staves(magnify_staves, score)
                 if environment != "docs":
                     _whitespace_leaves(score)
                 if environment != "docs":
                     _comment_measure_numbers(
                         _get_first_measure_number(
-                            self.first_measure_number,
+                            first_measure_number,
                             previous_metadata,
                         ),
                         offset_to_measure_number,
                         score,
                     )
-                _apply_breaks(score, self.spacing)
+                _apply_breaks(score, spacing)
                 _style_fermata_measures(
-                    self.fermata_extra_offset_y,
-                    self.fermata_measure_empty_overrides,
+                    fermata_extra_offset_y,
+                    fermata_measure_empty_overrides,
                     fermata_start_offsets,
-                    self.final_segment,
+                    final_segment,
                     offset_to_measure_number,
                     score,
                 )
@@ -4054,9 +3760,9 @@ class SegmentMaker:
                 _move_global_context(score)
             _clean_up_on_beat_grace_containers(score)
             _check_wellformedness(
-                self.do_not_check_beamed_long_notes,
-                self.do_not_check_out_of_range_pitches,
-                self.do_not_check_wellformedness,
+                do_not_check_beamed_long_notes,
+                do_not_check_out_of_range_pitches,
+                do_not_check_wellformedness,
                 score,
             )
         count = int(timer.elapsed_time)
@@ -4076,9 +3782,9 @@ class SegmentMaker:
             stop_clock_time = None
             if environment != "docs":
                 result = _label_clock_time(
-                    self.clock_time_override,
+                    clock_time_override,
                     fermata_measure_numbers,
-                    self.first_measure_number,
+                    first_measure_number,
                     previous_metadata,
                     score,
                 )
@@ -4086,11 +3792,11 @@ class SegmentMaker:
                 start_clock_time = result[1]
                 stop_clock_time = result[2]
             _activate_tags(score, activate)
-            first_measure_number = _get_first_measure_number(
-                self.first_measure_number,
+            first_measure_number_ = _get_first_measure_number(
+                first_measure_number,
                 previous_metadata,
             )
-            final_measure_number = first_measure_number + measure_count - 1
+            final_measure_number = first_measure_number_ + measure_count - 1
             persistent_indicators = _collect_persistent_indicators(
                 environment,
                 self.manifests,
@@ -4104,7 +3810,7 @@ class SegmentMaker:
                 final_measure_is_fermata,
                 final_measure_number,
                 _get_first_measure_number(
-                    self.first_measure_number,
+                    first_measure_number,
                     previous_metadata,
                 ),
                 metadata,
