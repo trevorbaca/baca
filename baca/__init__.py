@@ -15,6 +15,7 @@ from .docs import global_context_string
 from .figuremaker import *
 from .indicatorcommands import *
 from .indicators import *
+from .interpret import interpret_commands
 from .layout import *
 from .math import *
 from .memento import *
