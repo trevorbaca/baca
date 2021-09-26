@@ -2104,13 +2104,13 @@ class Imbrication:
             ...     return baca.make_empty_score(2)
 
             >>> score = closure()
-            >>> accumulator = baca.FigureAccumulator(score)
+            >>> figures = baca.FigureAccumulator(score)
 
             >>> collections = [
             ...     [0, 2, 10, 18, 16],
             ...     [15, 20, 19, 9, 0],
             ... ]
-            >>> accumulator(
+            >>> figures(
             ...     "Music_Voice_2",
             ...     collections,
             ...     baca.figure([1], 16),
@@ -2127,9 +2127,9 @@ class Imbrication:
 
             >>> maker = baca.CommandAccumulator(
             ...     score_template=closure,
-            ...     time_signatures=accumulator.time_signatures,
+            ...     time_signatures=figures.time_signatures,
             ... )
-            >>> accumulator.populate_segment_maker(maker)
+            >>> figures.populate_segment_maker(maker)
 
             >>> maker(
             ...     "Music_Voice_1",
@@ -2270,13 +2270,13 @@ class Imbrication:
             ...     return baca.make_empty_score(2)
 
             >>> score = closure()
-            >>> accumulator = baca.FigureAccumulator(score)
+            >>> figures = baca.FigureAccumulator(score)
 
             >>> collections = [
             ...     [0, 2, 10, 18, 16],
             ...     [15, 20, 19, 9, 0],
             ... ]
-            >>> accumulator(
+            >>> figures(
             ...     "Music_Voice_2",
             ...     collections,
             ...     baca.figure([1], 16),
@@ -2326,14 +2326,14 @@ class Imbrication:
             ...     return baca.make_empty_score(2)
 
             >>> score = closure()
-            >>> accumulator = baca.FigureAccumulator(score)
+            >>> figures = baca.FigureAccumulator(score)
 
             >>> collections = [
             ...     [0, 2, 10, 18, 16],
             ...     [15, 20, 19, 9, 0],
             ...     [2, 10, 18, 16, 15],
             ... ]
-            >>> accumulator(
+            >>> figures(
             ...     "Music_Voice_2",
             ...     collections,
             ...     baca.figure([1], 16),
@@ -2350,9 +2350,9 @@ class Imbrication:
 
             >>> maker = baca.CommandAccumulator(
             ...     score_template=closure,
-            ...     time_signatures=accumulator.time_signatures,
+            ...     time_signatures=figures.time_signatures,
             ... )
-            >>> accumulator.populate_segment_maker(maker)
+            >>> figures.populate_segment_maker(maker)
 
             >>> maker(
             ...     "Music_Voice_1",
@@ -2530,13 +2530,13 @@ class Imbrication:
             ...     return baca.make_empty_score(2)
 
             >>> score = closure()
-            >>> accumulator = baca.FigureAccumulator(score)
+            >>> figures = baca.FigureAccumulator(score)
 
             >>> collections = [
             ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
             ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
             ... ]
-            >>> accumulator(
+            >>> figures(
             ...     "Music_Voice_2",
             ...     collections,
             ...     baca.figure([1], 16),
@@ -2553,9 +2553,9 @@ class Imbrication:
 
             >>> maker = baca.CommandAccumulator(
             ...     score_template=closure,
-            ...     time_signatures=accumulator.time_signatures,
+            ...     time_signatures=figures.time_signatures,
             ... )
-            >>> accumulator.populate_segment_maker(maker)
+            >>> figures.populate_segment_maker(maker)
 
             >>> maker(
             ...     "Music_Voice_1",
@@ -2759,10 +2759,10 @@ class Imbrication:
             ...     return baca.make_empty_score(2)
 
             >>> score = closure()
-            >>> accumulator = baca.FigureAccumulator(score)
+            >>> figures = baca.FigureAccumulator(score)
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> accumulator(
+            >>> figures(
             ...     "Music_Voice_2",
             ...     collections,
             ...     baca.figure([5], 32),
@@ -2777,9 +2777,9 @@ class Imbrication:
 
             >>> maker = baca.CommandAccumulator(
             ...     score_template=closure,
-            ...     time_signatures=accumulator.time_signatures,
+            ...     time_signatures=figures.time_signatures,
             ... )
-            >>> accumulator.populate_segment_maker(maker)
+            >>> figures.populate_segment_maker(maker)
 
             >>> maker(
             ...     "Music_Voice_1",
@@ -2941,21 +2941,21 @@ class FigureAccumulator:
         ...     return baca.make_empty_score(2)
 
         >>> score = closure()
-        >>> accumulator = baca.FigureAccumulator(score)
+        >>> figures = baca.FigureAccumulator(score)
 
         >>> commands = [
         ...     baca.figure([1], 16, signature=16),
         ...     rmakers.beam(),
         ... ]
 
-        >>> accumulator(
+        >>> figures(
         ...     "Music_Voice_1",
         ...     [[0, 1, 2, 3]],
         ...     *commands,
         ...     figure_name='D',
         ... )
 
-        >>> accumulator(
+        >>> figures(
         ...     "Music_Voice_1",
         ...     [[4, 5, 6, 7]],
         ...     *commands,
@@ -3014,7 +3014,7 @@ class FigureAccumulator:
         signature: int = None,
     ) -> None:
         """
-        Calls music-accumulator.
+        Calls figure-accumulator.
         """
         voice_name = self._abbreviation(voice_name)
         prototype = (
@@ -7063,9 +7063,9 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...     return baca.make_empty_score(2)
 
         >>> score = closure()
-        >>> accumulator = baca.FigureAccumulator(score)
+        >>> figures = baca.FigureAccumulator(score)
 
-        >>> accumulator(
+        >>> figures(
         ...     "Music_Voice_2",
         ...     3 * [[0, 2, 10]],
         ...     baca.figure(
@@ -7084,9 +7084,9 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
         >>> maker = baca.CommandAccumulator(
         ...     score_template=closure,
-        ...     time_signatures=accumulator.time_signatures,
+        ...     time_signatures=figures.time_signatures,
         ... )
-        >>> accumulator.populate_segment_maker(maker)
+        >>> figures.populate_segment_maker(maker)
 
         >>> maker(
         ...     "Music_Voice_1",
@@ -7208,7 +7208,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...     return baca.make_empty_score(2)
 
         >>> score = closure()
-        >>> accumulator = baca.FigureAccumulator(score)
+        >>> figures = baca.FigureAccumulator(score)
 
         >>> collections = [
         ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
@@ -7220,7 +7220,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...     baca.coat(18),
         ...     10, 18,
         ... ]
-        >>> accumulator(
+        >>> figures(
         ...     "Music_Voice_2",
         ...     collections,
         ...     baca.figure([1], 16),
@@ -7235,9 +7235,9 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
         >>> maker = baca.CommandAccumulator(
         ...     score_template=closure,
-        ...     time_signatures=accumulator.time_signatures,
+        ...     time_signatures=figures.time_signatures,
         ... )
-        >>> accumulator.populate_segment_maker(maker)
+        >>> figures.populate_segment_maker(maker)
 
         >>> maker(
         ...     "Music_Voice_1",
@@ -7392,9 +7392,9 @@ def extend_beam(
         ...     return baca.make_empty_score(2)
 
         >>> score = closure()
-        >>> accumulator = baca.FigureAccumulator(score)
+        >>> figures = baca.FigureAccumulator(score)
 
-        >>> accumulator(
+        >>> figures(
         ...     "Music_Voice_2",
         ...     [[0, 2, 10, 18], [16, 15, 23]],
         ...     baca.figure([1], 16),
@@ -7408,7 +7408,7 @@ def extend_beam(
         ...     ),
         ... )
 
-        >>> accumulator(
+        >>> figures(
         ...     "Music_Voice_2",
         ...     [[19, 13, 9, 8]],
         ...     baca.figure([1], 16),
@@ -7423,9 +7423,9 @@ def extend_beam(
 
         >>> maker = baca.CommandAccumulator(
         ...     score_template=closure,
-        ...     time_signatures=accumulator.time_signatures,
+        ...     time_signatures=figures.time_signatures,
         ... )
-        >>> accumulator.populate_segment_maker(maker)
+        >>> figures.populate_segment_maker(maker)
 
         >>> maker(
         ...     "Music_Voice_1",
@@ -7603,14 +7603,14 @@ def imbricate(
         ...     return baca.make_empty_score(2)
 
         >>> score = closure()
-        >>> accumulator = baca.FigureAccumulator(score)
+        >>> figures = baca.FigureAccumulator(score)
 
         >>> collections = [
         ...     [0, 2, 10, 18, 16],
         ...     [15, 20, 19, 9, 0],
         ...     [2, 10, 18, 16, 15],
         ... ]
-        >>> accumulator(
+        >>> figures(
         ...     "Music_Voice_2",
         ...     collections,
         ...     baca.figure([1], 16),
@@ -7624,9 +7624,9 @@ def imbricate(
 
         >>> maker = baca.CommandAccumulator(
         ...     score_template=closure,
-        ...     time_signatures=accumulator.time_signatures,
+        ...     time_signatures=figures.time_signatures,
         ... )
-        >>> accumulator.populate_segment_maker(maker)
+        >>> figures.populate_segment_maker(maker)
 
         >>> maker(
         ...     "Music_Voice_1",
@@ -7786,14 +7786,14 @@ def imbricate(
         ...     return baca.make_empty_score(3)
 
         >>> score = closure()
-        >>> accumulator = baca.FigureAccumulator(score)
+        >>> figures = baca.FigureAccumulator(score)
 
         >>> collections = [
         ...     [0, 2, 10, 18, 16],
         ...     [15, 20, 19, 9, 0],
         ...     [2, 10, 18, 16, 15],
         ... ]
-        >>> accumulator(
+        >>> figures(
         ...     "Music_Voice_2",
         ...     collections,
         ...     baca.figure([1], 16),
@@ -7816,9 +7816,9 @@ def imbricate(
 
         >>> maker = baca.CommandAccumulator(
         ...     score_template=closure,
-        ...     time_signatures=accumulator.time_signatures,
+        ...     time_signatures=figures.time_signatures,
         ... )
-        >>> accumulator.populate_segment_maker(maker)
+        >>> figures.populate_segment_maker(maker)
         >>> lilypond_file = baca.interpret_commands(
         ...     maker.commands,
         ...     maker.score_template,
@@ -8010,14 +8010,14 @@ def imbricate(
         ...     return baca.make_empty_score(2)
 
         >>> score = closure()
-        >>> accumulator = baca.FigureAccumulator(score)
+        >>> figures = baca.FigureAccumulator(score)
 
         >>> collections = [
         ...     [0, 2, 10, 18, 16],
         ...     [15, 20, 19, 9, 0],
         ...     [2, 10, 18, 16, 15],
         ... ]
-        >>> accumulator(
+        >>> figures(
         ...     "Music_Voice_2",
         ...     collections,
         ...     baca.figure([1], 16, treatments=[1]),
@@ -8033,9 +8033,9 @@ def imbricate(
 
         >>> maker = baca.CommandAccumulator(
         ...     score_template=closure,
-        ...     time_signatures=accumulator.time_signatures,
+        ...     time_signatures=figures.time_signatures,
         ... )
-        >>> accumulator.populate_segment_maker(maker)
+        >>> figures.populate_segment_maker(maker)
 
         >>> maker(
         ...     "Music_Voice_1",
@@ -8219,7 +8219,7 @@ def imbricate(
         ...     return baca.make_empty_score(2)
 
         >>> score = closure()
-        >>> accumulator = baca.FigureAccumulator(score)
+        >>> figures = baca.FigureAccumulator(score)
 
         >>> segment = [
         ...     abjad.NumberedPitchClass(10),
@@ -8228,7 +8228,7 @@ def imbricate(
         ...     abjad.NumberedPitchClass(3),
         ... ]
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> accumulator(
+        >>> figures(
         ...     "Music_Voice_2",
         ...     collections,
         ...     baca.figure([3], 16),
@@ -8243,9 +8243,9 @@ def imbricate(
 
         >>> maker = baca.CommandAccumulator(
         ...     score_template=closure,
-        ...     time_signatures=accumulator.time_signatures,
+        ...     time_signatures=figures.time_signatures,
         ... )
-        >>> accumulator.populate_segment_maker(maker)
+        >>> figures.populate_segment_maker(maker)
 
         >>> maker(
         ...     "Music_Voice_1",
@@ -8365,14 +8365,14 @@ def imbricate(
         ...     return baca.make_empty_score(2)
 
         >>> score = closure()
-        >>> accumulator = baca.FigureAccumulator(score)
+        >>> figures = baca.FigureAccumulator(score)
 
         >>> collections = [
         ...     {0, 2, 10, 18, 16},
         ...     [15, 20, 19, 9, 0],
         ...     [2, 10, 18, 16, 15],
         ... ]
-        >>> accumulator(
+        >>> figures(
         ...     "Music_Voice_2",
         ...     collections,
         ...     baca.figure([1], 16),
@@ -8386,9 +8386,9 @@ def imbricate(
 
         >>> maker = baca.CommandAccumulator(
         ...     score_template=closure,
-        ...     time_signatures=accumulator.time_signatures,
+        ...     time_signatures=figures.time_signatures,
         ... )
-        >>> accumulator.populate_segment_maker(maker)
+        >>> figures.populate_segment_maker(maker)
 
         >>> maker(
         ...     "Music_Voice_1",
@@ -8532,14 +8532,14 @@ def imbricate(
         ...     return baca.make_empty_score(2)
 
         >>> score = closure()
-        >>> accumulator = baca.FigureAccumulator(score)
+        >>> figures = baca.FigureAccumulator(score)
 
         >>> collections = [
         ...     [0, 2, 10, 18, 16],
         ...     [15, 20, 19, 9, 0],
         ...     [2, 10, 18, 16, 15],
         ... ]
-        >>> accumulator(
+        >>> figures(
         ...     "Music_Voice_2",
         ...     collections,
         ...     baca.figure([1], 16, affix=baca.rests_around([2], [2])),
@@ -8553,9 +8553,9 @@ def imbricate(
 
         >>> maker = baca.CommandAccumulator(
         ...     score_template=closure,
-        ...     time_signatures=accumulator.time_signatures,
+        ...     time_signatures=figures.time_signatures,
         ... )
-        >>> accumulator.populate_segment_maker(maker)
+        >>> figures.populate_segment_maker(maker)
 
         >>> maker(
         ...     "Music_Voice_1",

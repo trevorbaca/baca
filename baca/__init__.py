@@ -13,7 +13,7 @@ from .commandclasses import *
 from .commands import *
 from .constellation import *
 from .docs import global_context_string
-from .figuremaker import *
+from .figures import *
 from .indicatorcommands import *
 from .indicators import *
 from .interpret import interpret_commands
