@@ -14,7 +14,7 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -92,7 +92,7 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -169,7 +169,7 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -261,7 +261,7 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -350,7 +350,7 @@ r"""
         ...         baca.system(measure=3, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
         ... )
@@ -438,7 +438,7 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -528,7 +528,7 @@ r"""
 
         Explicit dynamics color blue:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
@@ -584,7 +584,7 @@ r"""
 
         Even after a previous dynamic:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
@@ -655,7 +655,7 @@ r"""
 
         Reapplied dynamics color green:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
@@ -725,7 +725,7 @@ r"""
 
         Redundant dynamics color pink:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
@@ -784,7 +784,7 @@ r"""
 
         Even at the beginning of a segment:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
@@ -853,7 +853,7 @@ r"""
 
         Sforzando dynamics do not count as redundant:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
@@ -912,7 +912,7 @@ r"""
 
         Even at the beginning of a segment:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
@@ -983,7 +983,7 @@ r"""
 
         REGRESSION. Conventional and effort dynamics analyze nonredundantly:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
@@ -1065,7 +1065,7 @@ r"""
 
         >>> score_template = baca.make_empty_score_maker(1)
         >>> triple = ("Music_Staff", 'default_instrument', abjad.Flute())
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     instruments=instruments,
         ...     score_template=score_template,
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -1216,7 +1216,7 @@ r"""
 
         Explicit instruments color blue and redraw dull blue:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -1366,7 +1366,7 @@ r"""
 
         Even after a previous instrument:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -1532,7 +1532,7 @@ r"""
 
         Reapplied instruments color green and redraw dull green:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -1705,7 +1705,7 @@ r"""
         ...         baca.system(measure=3, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
@@ -1880,7 +1880,7 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -2075,7 +2075,7 @@ r"""
         ...     'default_margin_markup',
         ...     margin_markups['I+II'],
         ...     )
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
         ...     score_template=score_template,
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -2244,7 +2244,7 @@ r"""
 
         Explicit margin markup color blue and redraw dull blue:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -2411,7 +2411,7 @@ r"""
 
         Even after previous margin markup:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -2601,7 +2601,7 @@ r"""
 
         Reapplied margin markup color green and redraw dull green:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -2797,7 +2797,7 @@ r"""
         ...         baca.system(measure=3, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
@@ -3008,7 +3008,7 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -3205,7 +3205,7 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
@@ -3320,7 +3320,7 @@ r"""
 
         Explicit metronome marks color blue:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     append_phantom_measure=True,
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
@@ -3422,7 +3422,7 @@ r"""
 
         Even after a previous metronome mark:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     append_phantom_measure=True,
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
@@ -3542,7 +3542,7 @@ r"""
 
         Reapplied metronome marks color green:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -3633,7 +3633,7 @@ r"""
 
         Redundant metronome marks color pink:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     append_phantom_measure=True,
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
@@ -3743,7 +3743,7 @@ r"""
 
         Even at the beginning of a segment:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     append_phantom_measure=True,
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
@@ -3867,7 +3867,7 @@ r"""
 
         Explicit persistent overrides work but do not color:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
@@ -3983,7 +3983,7 @@ r"""
 
         Reapplied persistent overrides work but do not color:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
@@ -4056,7 +4056,7 @@ r"""
 
         Even at the beginning of a segment:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
@@ -4146,7 +4146,7 @@ r"""
 
         Explicit staff lines color blue:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
@@ -4205,7 +4205,7 @@ r"""
 
         Even after previous staff lines:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
@@ -4279,7 +4279,7 @@ r"""
 
         Reapplied staff lines color green:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
@@ -4351,7 +4351,7 @@ r"""
 
         Redundant staff lines color pink:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
@@ -4416,7 +4416,7 @@ r"""
 
         Even at the beginning of a segment:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
@@ -4506,7 +4506,7 @@ r"""
 
         Explicit tempo trends color blue:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     append_phantom_measure=True,
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
@@ -4612,7 +4612,7 @@ r"""
 
         Even after a previous tempo trend:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -4706,7 +4706,7 @@ r"""
 
         Reapplied tempo trends color green:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -4799,7 +4799,7 @@ r"""
 
         Redundant tempo trends color pink:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
@@ -4895,7 +4895,7 @@ r"""
 
         Even at the beginning of a segment:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],

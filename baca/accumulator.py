@@ -159,7 +159,7 @@ def _unpack_scopes(scopes, abbreviations):
     return scopes_
 
 
-class SegmentMaker:
+class CommandAccumulator:
     """
     Segment-maker.
     """

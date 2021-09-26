@@ -251,7 +251,7 @@ class BCPCommand(_scoping.Command):
 
             PATTERN. Define chunkwise spanners like this:
 
-            >>> maker = baca.SegmentMaker(
+            >>> maker = baca.CommandAccumulator(
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
@@ -462,7 +462,7 @@ class BCPCommand(_scoping.Command):
 
             Tweaks LilyPond ``TextSpanner`` grob:
 
-            >>> maker = baca.SegmentMaker(
+            >>> maker = baca.CommandAccumulator(
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
@@ -735,7 +735,7 @@ class ContainerCommand(_scoping.Command):
 
     ..  container:: example
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )

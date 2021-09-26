@@ -889,7 +889,7 @@ def make_layout_ly(spacing):
         print(f"Skipping {baca.path.trim(layout_py)} ...")
         sys.exit(1)
     assert abjad.String(document_name).is_shout_case()
-    maker = baca.SegmentMaker(
+    maker = baca.CommandAccumulator(
         append_phantom_measure=True,
         score_template=baca.make_empty_score_maker(1),
         time_signatures=time_signatures,

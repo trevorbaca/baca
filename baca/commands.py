@@ -47,7 +47,7 @@ def assign_parts(
         >>> def closure():
         ...     return baca.make_empty_score(1)
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=closure,
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -103,7 +103,7 @@ def assign_parts(
 
         Raises exception when voice does not allow part assignment:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=closure,
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -154,7 +154,7 @@ def bcps(
 
         ..  container:: example
 
-            >>> maker = baca.SegmentMaker(
+            >>> maker = baca.CommandAccumulator(
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
@@ -513,7 +513,7 @@ def container(
 
     ..  container:: example
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -589,7 +589,7 @@ def cross_staff(
         >>> def closure():
         ...     return baca.make_empty_score(1, 1)
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=closure,
         ...     time_signatures=[(4, 4)],
         ... )
@@ -883,7 +883,7 @@ def finger_pressure_transition(
 
     ..  container:: example
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1095,7 +1095,7 @@ def glissando(
 
         With segment-maker:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1182,7 +1182,7 @@ def glissando(
 
         First and last PLTs:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1259,7 +1259,7 @@ def glissando(
 
         Works with tweaks:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1361,7 +1361,7 @@ def glissando(
 
         Works with indexed tweaks:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1515,7 +1515,7 @@ def invisible_music(
 
         Attaches ``\baca-invisible-music`` literal to middle leaves:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )

@@ -2125,7 +2125,7 @@ class Imbrication:
             ...     baca.staccato(selector=baca.selectors.pheads()),
             ... )
 
-            >>> maker = baca.SegmentMaker(
+            >>> maker = baca.CommandAccumulator(
             ...     score_template=closure,
             ...     time_signatures=accumulator.time_signatures,
             ... )
@@ -2348,7 +2348,7 @@ class Imbrication:
             ...     baca.staccato(selector=baca.selectors.pheads()),
             ... )
 
-            >>> maker = baca.SegmentMaker(
+            >>> maker = baca.CommandAccumulator(
             ...     score_template=closure,
             ...     time_signatures=accumulator.time_signatures,
             ... )
@@ -2551,7 +2551,7 @@ class Imbrication:
             ...     baca.staccato(selector=baca.selectors.pheads()),
             ... )
 
-            >>> maker = baca.SegmentMaker(
+            >>> maker = baca.CommandAccumulator(
             ...     score_template=closure,
             ...     time_signatures=accumulator.time_signatures,
             ... )
@@ -2775,7 +2775,7 @@ class Imbrication:
             ...     ),
             ... )
 
-            >>> maker = baca.SegmentMaker(
+            >>> maker = baca.CommandAccumulator(
             ...     score_template=closure,
             ...     time_signatures=accumulator.time_signatures,
             ... )
@@ -7082,7 +7082,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...     ),
         ... )
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=closure,
         ...     time_signatures=accumulator.time_signatures,
         ... )
@@ -7233,7 +7233,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...     ),
         ... )
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=closure,
         ...     time_signatures=accumulator.time_signatures,
         ... )
@@ -7421,7 +7421,7 @@ def extend_beam(
         ...     ),
         ... )
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=closure,
         ...     time_signatures=accumulator.time_signatures,
         ... )
@@ -7622,7 +7622,7 @@ def imbricate(
         ...     ),
         ... )
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=closure,
         ...     time_signatures=accumulator.time_signatures,
         ... )
@@ -7814,7 +7814,7 @@ def imbricate(
         ...     rmakers.beam_groups(),
         ... )
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=closure,
         ...     time_signatures=accumulator.time_signatures,
         ... )
@@ -8031,7 +8031,7 @@ def imbricate(
         ...     baca.staccato(selector=baca.selectors.pheads()),
         ... )
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=closure,
         ...     time_signatures=accumulator.time_signatures,
         ... )
@@ -8241,7 +8241,7 @@ def imbricate(
         ...     ),
         ... )
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=closure,
         ...     time_signatures=accumulator.time_signatures,
         ... )
@@ -8384,7 +8384,7 @@ def imbricate(
         ...     ),
         ... )
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=closure,
         ...     time_signatures=accumulator.time_signatures,
         ... )
@@ -8551,7 +8551,7 @@ def imbricate(
         ...     ),
         ... )
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=closure,
         ...     time_signatures=accumulator.time_signatures,
         ... )

@@ -1244,7 +1244,7 @@ def hide_black_note_heads(
 
     ..  container:: example
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -1595,7 +1595,7 @@ def margin_markup(
 
         >>> margin_markups = {}
         >>> margin_markups["Fl."] = abjad.MarginMarkup(markup=abjad.Markup("Fl."))
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -2184,7 +2184,7 @@ def staff_lines(
 
         Single-line staff with percussion clef:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
         ...     )
@@ -2251,7 +2251,7 @@ def staff_lines(
 
         Single-line staff with bass clef:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
         ...     )
@@ -2319,7 +2319,7 @@ def staff_lines(
 
         Two-line staff with percussion clef:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
         ...     )
@@ -2385,7 +2385,7 @@ def staff_lines(
 
         Two-line staff with bass clef; clef set before staff positions:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
         ...     )
@@ -2451,7 +2451,7 @@ def staff_lines(
 
         Two-line staff with bass clef; staff positions set before clef:
 
-        >>> maker = baca.SegmentMaker(
+        >>> maker = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
         ...     )

@@ -5,7 +5,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
 ..  container:: example
 
-    >>> maker = baca.SegmentMaker(
+    >>> maker = baca.CommandAccumulator(
     ...     score_template=baca.make_empty_score_maker(1),
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
@@ -92,7 +92,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
     Commands may be grouped into lists:
 
-    >>> maker = baca.SegmentMaker(
+    >>> maker = baca.CommandAccumulator(
     ...     score_template=baca.make_empty_score_maker(1),
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
@@ -211,7 +211,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     >>> def closure():
     ...     return baca.make_empty_score(1, 1)
 
-    >>> maker = baca.SegmentMaker(
+    >>> maker = baca.CommandAccumulator(
     ...     score_template=closure,
     ...     time_signatures=[(6, 4)],
     ... )
@@ -293,7 +293,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
     >>> instruments = {}
     >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
-    >>> maker = baca.SegmentMaker(
+    >>> maker = baca.CommandAccumulator(
     ...     instruments=instruments,
     ...     score_template=baca.make_empty_score_maker(1),
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -372,7 +372,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
     >>> instruments = {}
     >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
-    >>> maker = baca.SegmentMaker(
+    >>> maker = baca.CommandAccumulator(
     ...     instruments=instruments,
     ...     score_template=baca.make_empty_score_maker(1),
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -473,7 +473,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     >>> instruments["Violin"] = abjad.Violin()
 
     >>> score_template = baca.make_empty_score_maker(1)
-    >>> maker = baca.SegmentMaker(
+    >>> maker = baca.CommandAccumulator(
     ...     instruments=instruments,
     ...     score_template=score_template,
     ...     time_signatures=time_signatures,
@@ -580,7 +580,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...
     >>> figures = abjad.select(figures_)
 
-    >>> maker = baca.SegmentMaker(
+    >>> maker = baca.CommandAccumulator(
     ...     score_template=baca.make_empty_score_maker(1),
     ...     time_signatures=time_signatures,
     ... )
