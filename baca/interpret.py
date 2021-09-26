@@ -2971,6 +2971,7 @@ def interpret_commands(
     score_template,
     time_signatures,
     voice_metadata,
+    *,
     activate=None,
     add_container_identifiers=False,
     allow_empty_selections=False,
