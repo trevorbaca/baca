@@ -6,7 +6,7 @@ from . import build
 from . import const
 from . import jobs
 from . import selectors
-from .accumulator import CommandAccumulator
+from .accumulator import CommandAccumulator, segments
 from .array import *
 from .classes import *
 from .commandclasses import *

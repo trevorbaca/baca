@@ -2104,7 +2104,7 @@ class Imbrication:
             ...     return baca.make_empty_score(2)
 
             >>> score = closure()
-            >>> accumulator = baca.Accumulator(score)
+            >>> accumulator = baca.FigureAccumulator(score)
 
             >>> collections = [
             ...     [0, 2, 10, 18, 16],
@@ -2270,7 +2270,7 @@ class Imbrication:
             ...     return baca.make_empty_score(2)
 
             >>> score = closure()
-            >>> accumulator = baca.Accumulator(score)
+            >>> accumulator = baca.FigureAccumulator(score)
 
             >>> collections = [
             ...     [0, 2, 10, 18, 16],
@@ -2326,7 +2326,7 @@ class Imbrication:
             ...     return baca.make_empty_score(2)
 
             >>> score = closure()
-            >>> accumulator = baca.Accumulator(score)
+            >>> accumulator = baca.FigureAccumulator(score)
 
             >>> collections = [
             ...     [0, 2, 10, 18, 16],
@@ -2530,7 +2530,7 @@ class Imbrication:
             ...     return baca.make_empty_score(2)
 
             >>> score = closure()
-            >>> accumulator = baca.Accumulator(score)
+            >>> accumulator = baca.FigureAccumulator(score)
 
             >>> collections = [
             ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
@@ -2759,7 +2759,7 @@ class Imbrication:
             ...     return baca.make_empty_score(2)
 
             >>> score = closure()
-            >>> accumulator = baca.Accumulator(score)
+            >>> accumulator = baca.FigureAccumulator(score)
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> accumulator(
@@ -2929,9 +2929,9 @@ class Imbrication:
         return self._voice_name
 
 
-class Accumulator:
+class FigureAccumulator:
     """
-    Accumulator.
+    Figure-accumulator.
 
     ..  container:: example exception
 
@@ -2941,7 +2941,7 @@ class Accumulator:
         ...     return baca.make_empty_score(2)
 
         >>> score = closure()
-        >>> accumulator = baca.Accumulator(score)
+        >>> accumulator = baca.FigureAccumulator(score)
 
         >>> commands = [
         ...     baca.figure([1], 16, signature=16),
@@ -7063,7 +7063,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...     return baca.make_empty_score(2)
 
         >>> score = closure()
-        >>> accumulator = baca.Accumulator(score)
+        >>> accumulator = baca.FigureAccumulator(score)
 
         >>> accumulator(
         ...     "Music_Voice_2",
@@ -7208,7 +7208,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...     return baca.make_empty_score(2)
 
         >>> score = closure()
-        >>> accumulator = baca.Accumulator(score)
+        >>> accumulator = baca.FigureAccumulator(score)
 
         >>> collections = [
         ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
@@ -7392,7 +7392,7 @@ def extend_beam(
         ...     return baca.make_empty_score(2)
 
         >>> score = closure()
-        >>> accumulator = baca.Accumulator(score)
+        >>> accumulator = baca.FigureAccumulator(score)
 
         >>> accumulator(
         ...     "Music_Voice_2",
@@ -7603,7 +7603,7 @@ def imbricate(
         ...     return baca.make_empty_score(2)
 
         >>> score = closure()
-        >>> accumulator = baca.Accumulator(score)
+        >>> accumulator = baca.FigureAccumulator(score)
 
         >>> collections = [
         ...     [0, 2, 10, 18, 16],
@@ -7786,7 +7786,7 @@ def imbricate(
         ...     return baca.make_empty_score(3)
 
         >>> score = closure()
-        >>> accumulator = baca.Accumulator(score)
+        >>> accumulator = baca.FigureAccumulator(score)
 
         >>> collections = [
         ...     [0, 2, 10, 18, 16],
@@ -8010,7 +8010,7 @@ def imbricate(
         ...     return baca.make_empty_score(2)
 
         >>> score = closure()
-        >>> accumulator = baca.Accumulator(score)
+        >>> accumulator = baca.FigureAccumulator(score)
 
         >>> collections = [
         ...     [0, 2, 10, 18, 16],
@@ -8219,7 +8219,7 @@ def imbricate(
         ...     return baca.make_empty_score(2)
 
         >>> score = closure()
-        >>> accumulator = baca.Accumulator(score)
+        >>> accumulator = baca.FigureAccumulator(score)
 
         >>> segment = [
         ...     abjad.NumberedPitchClass(10),
@@ -8365,7 +8365,7 @@ def imbricate(
         ...     return baca.make_empty_score(2)
 
         >>> score = closure()
-        >>> accumulator = baca.Accumulator(score)
+        >>> accumulator = baca.FigureAccumulator(score)
 
         >>> collections = [
         ...     {0, 2, 10, 18, 16},
@@ -8532,7 +8532,7 @@ def imbricate(
         ...     return baca.make_empty_score(2)
 
         >>> score = closure()
-        >>> accumulator = baca.Accumulator(score)
+        >>> accumulator = baca.FigureAccumulator(score)
 
         >>> collections = [
         ...     [0, 2, 10, 18, 16],
