@@ -1011,29 +1011,6 @@ def _check_persistent_indicators_for_leaf(score_template, voice, leaf, i):
         raise Exception(f"{voice} leaf {i} ({leaf!s}) missing clef.")
 
 
-def _check_wellformedness(
-    do_not_check_beamed_long_notes,
-    do_not_check_out_of_range_pitches,
-    do_not_check_wellformedness,
-    score,
-):
-    if do_not_check_wellformedness:
-        return
-    check_beamed_long_notes = not do_not_check_beamed_long_notes
-    check_out_of_range_pitches = not do_not_check_out_of_range_pitches
-    if not abjad.wf.wellformed(
-        score,
-        check_beamed_long_notes=check_beamed_long_notes,
-        check_out_of_range_pitches=check_out_of_range_pitches,
-    ):
-        message = abjad.wf.tabulate_wellformedness(
-            score,
-            check_beamed_long_notes=check_beamed_long_notes,
-            check_out_of_range_pitches=check_out_of_range_pitches,
-        )
-        raise Exception("\n" + message)
-
-
 def _clean_up_laissez_vibrer_tie_direction(score):
     default = abjad.Clef("treble")
     for note in abjad.iterate.leaves(score, abjad.Note):
@@ -2971,13 +2948,11 @@ def interpret_commands(
     append_phantom_measure=False,
     attach_rhythm_annotation_spanners=False,
     check_persistent_indicators=False,
+    check_wellformedness=False,
     clock_time_extra_offset=None,
     clock_time_override=None,
     color_octaves=False,
     deactivate=None,
-    do_not_check_beamed_long_notes=False,
-    do_not_check_out_of_range_pitches=False,
-    do_not_check_wellformedness=False,
     environment=None,
     error_on_not_yet_pitched=False,
     fermata_extra_offset_y=2.5,
@@ -3030,9 +3005,7 @@ def interpret_commands(
     assert color_octaves in (True, False)
     if deactivate is not None:
         assert all(isinstance(_, abjad.Tag) for _ in deactivate)
-    assert do_not_check_out_of_range_pitches in (True, False)
-    assert do_not_check_beamed_long_notes in (True, False)
-    assert do_not_check_wellformedness in (True, False)
+    assert check_wellformedness in (True, False)
     assert environment in (None, "docs"), repr(environment)
     assert final_segment in (True, False)
     assert first_segment in (True, False)
@@ -3277,12 +3250,10 @@ def interpret_commands(
         if environment == "docs":
             _move_global_context(score)
         _clean_up_on_beat_grace_containers(score)
-        _check_wellformedness(
-            do_not_check_beamed_long_notes,
-            do_not_check_out_of_range_pitches,
-            do_not_check_wellformedness,
-            score,
-        )
+        if check_wellformedness:
+            if not abjad.wf.wellformed(score):
+                message = abjad.wf.tabulate_wellformedness(score)
+                raise Exception("\n" + message)
     count = int(timer.elapsed_time)
     seconds = abjad.String("second").pluralize(count)
     if print_timing:
@@ -3360,6 +3331,7 @@ def segment_interpretation_defaults():
         "add_container_identifiers": True,
         "attach_rhythm_annotation_spanners": True,
         "check_persistent_indicators": True,
+        "check_wellformedness": True,
         "force_nonnatural_accidentals": True,
         "include_layout_ly": True,
         "includes": ["../../stylesheet.ily"],

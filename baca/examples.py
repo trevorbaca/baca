@@ -489,7 +489,6 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     commands.score_template,
     ...     commands.time_signatures,
     ...     commands.voice_metadata,
-    ...     do_not_check_out_of_range_pitches=True,
     ...     environment="docs",
     ...     includes=["baca.ily"],
     ...     instruments=instruments,
