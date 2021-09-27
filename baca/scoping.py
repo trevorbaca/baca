@@ -1167,8 +1167,8 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
@@ -1267,8 +1267,8 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
@@ -1418,8 +1418,8 @@ def only_parts(command: _command_typing) -> _command_typing:
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )

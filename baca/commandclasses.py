@@ -277,8 +277,8 @@ class BCPCommand(_scoping.Command):
             ...     commands.score_template,
             ...     commands.time_signatures,
             ...     commands.voice_metadata,
-            ...     environment="docs",
             ...     includes=["baca.ily"],
+            ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ... )
@@ -484,8 +484,8 @@ class BCPCommand(_scoping.Command):
             ...     commands.score_template,
             ...     commands.time_signatures,
             ...     commands.voice_metadata,
-            ...     environment="docs",
             ...     includes=["baca.ily"],
+            ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ... )
@@ -753,8 +753,8 @@ class ContainerCommand(_scoping.Command):
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
 

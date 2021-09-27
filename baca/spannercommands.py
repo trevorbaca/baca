@@ -239,8 +239,8 @@ def beam(
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )

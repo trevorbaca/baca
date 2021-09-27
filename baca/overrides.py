@@ -390,8 +390,8 @@ def bar_line_transparent(
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1383,8 +1383,8 @@ def mmrest_color(
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1481,8 +1481,8 @@ def mmrest_text_color(
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1551,8 +1551,8 @@ def mmrest_text_color(
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         Traceback (most recent call last):
@@ -1599,8 +1599,8 @@ def mmrest_text_extra_offset(
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1682,8 +1682,8 @@ def mmrest_text_padding(
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1764,8 +1764,8 @@ def mmrest_text_parent_center(
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1847,8 +1847,8 @@ def mmrest_text_staff_padding(
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -4321,8 +4321,8 @@ def text_script_color(
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         Traceback (most recent call last):
@@ -4455,8 +4455,8 @@ def text_script_down(
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         Traceback (most recent call last):
@@ -4511,8 +4511,8 @@ def text_script_extra_offset(
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         Traceback (most recent call last):
@@ -4669,8 +4669,8 @@ def text_script_padding(
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         Traceback (most recent call last):
@@ -4850,8 +4850,8 @@ def text_script_staff_padding(
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         Traceback (most recent call last):
@@ -4984,8 +4984,8 @@ def text_script_up(
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         Traceback (most recent call last):

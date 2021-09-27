@@ -2129,7 +2129,7 @@ class Imbrication:
             ...     score_template=closure,
             ...     time_signatures=figures.time_signatures,
             ... )
-            >>> figures.populate_segment_maker(commands)
+            >>> figures.populate_commands(commands)
 
             >>> commands(
             ...     "Music_Voice_1",
@@ -2146,8 +2146,8 @@ class Imbrication:
             ...     commands.score_template,
             ...     commands.time_signatures,
             ...     commands.voice_metadata,
-            ...     environment="docs",
             ...     includes=["baca.ily"],
+            ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
@@ -2352,7 +2352,7 @@ class Imbrication:
             ...     score_template=closure,
             ...     time_signatures=figures.time_signatures,
             ... )
-            >>> figures.populate_segment_maker(commands)
+            >>> figures.populate_commands(commands)
 
             >>> commands(
             ...     "Music_Voice_1",
@@ -2369,8 +2369,8 @@ class Imbrication:
             ...     commands.score_template,
             ...     commands.time_signatures,
             ...     commands.voice_metadata,
-            ...     environment="docs",
             ...     includes=["baca.ily"],
+            ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
@@ -2555,7 +2555,7 @@ class Imbrication:
             ...     score_template=closure,
             ...     time_signatures=figures.time_signatures,
             ... )
-            >>> figures.populate_segment_maker(commands)
+            >>> figures.populate_commands(commands)
 
             >>> commands(
             ...     "Music_Voice_1",
@@ -2572,8 +2572,8 @@ class Imbrication:
             ...     commands.score_template,
             ...     commands.time_signatures,
             ...     commands.voice_metadata,
-            ...     environment="docs",
             ...     includes=["baca.ily"],
+            ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
@@ -2779,7 +2779,7 @@ class Imbrication:
             ...     score_template=closure,
             ...     time_signatures=figures.time_signatures,
             ... )
-            >>> figures.populate_segment_maker(commands)
+            >>> figures.populate_commands(commands)
 
             >>> commands(
             ...     "Music_Voice_1",
@@ -2796,8 +2796,8 @@ class Imbrication:
             ...     commands.score_template,
             ...     commands.time_signatures,
             ...     commands.voice_metadata,
-            ...     environment="docs",
             ...     includes=["baca.ily"],
+            ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
@@ -3318,7 +3318,7 @@ class FigureAccumulator:
         assert isinstance(selection, abjad.Selection), repr(selection)
         return selection
 
-    def populate_segment_maker(self, segment_maker) -> None:
+    def populate_commands(self, segment_maker) -> None:
         """
         Populates ``segment_maker``.
         """
@@ -7086,7 +7086,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...     score_template=closure,
         ...     time_signatures=figures.time_signatures,
         ... )
-        >>> figures.populate_segment_maker(commands)
+        >>> figures.populate_commands(commands)
 
         >>> commands(
         ...     "Music_Voice_1",
@@ -7103,8 +7103,8 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
@@ -7237,7 +7237,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...     score_template=closure,
         ...     time_signatures=figures.time_signatures,
         ... )
-        >>> figures.populate_segment_maker(commands)
+        >>> figures.populate_commands(commands)
 
         >>> commands(
         ...     "Music_Voice_1",
@@ -7254,8 +7254,8 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
@@ -7425,7 +7425,7 @@ def extend_beam(
         ...     score_template=closure,
         ...     time_signatures=figures.time_signatures,
         ... )
-        >>> figures.populate_segment_maker(commands)
+        >>> figures.populate_commands(commands)
 
         >>> commands(
         ...     "Music_Voice_1",
@@ -7442,8 +7442,8 @@ def extend_beam(
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
@@ -7626,7 +7626,7 @@ def imbricate(
         ...     score_template=closure,
         ...     time_signatures=figures.time_signatures,
         ... )
-        >>> figures.populate_segment_maker(commands)
+        >>> figures.populate_commands(commands)
 
         >>> commands(
         ...     "Music_Voice_1",
@@ -7643,8 +7643,8 @@ def imbricate(
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
@@ -7818,14 +7818,14 @@ def imbricate(
         ...     score_template=closure,
         ...     time_signatures=figures.time_signatures,
         ... )
-        >>> figures.populate_segment_maker(commands)
+        >>> figures.populate_commands(commands)
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
@@ -8035,7 +8035,7 @@ def imbricate(
         ...     score_template=closure,
         ...     time_signatures=figures.time_signatures,
         ... )
-        >>> figures.populate_segment_maker(commands)
+        >>> figures.populate_commands(commands)
 
         >>> commands(
         ...     "Music_Voice_1",
@@ -8052,8 +8052,8 @@ def imbricate(
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
@@ -8245,7 +8245,7 @@ def imbricate(
         ...     score_template=closure,
         ...     time_signatures=figures.time_signatures,
         ... )
-        >>> figures.populate_segment_maker(commands)
+        >>> figures.populate_commands(commands)
 
         >>> commands(
         ...     "Music_Voice_1",
@@ -8262,8 +8262,8 @@ def imbricate(
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
@@ -8388,7 +8388,7 @@ def imbricate(
         ...     score_template=closure,
         ...     time_signatures=figures.time_signatures,
         ... )
-        >>> figures.populate_segment_maker(commands)
+        >>> figures.populate_commands(commands)
 
         >>> commands(
         ...     "Music_Voice_1",
@@ -8405,8 +8405,8 @@ def imbricate(
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
@@ -8555,7 +8555,7 @@ def imbricate(
         ...     score_template=closure,
         ...     time_signatures=figures.time_signatures,
         ... )
-        >>> figures.populate_segment_maker(commands)
+        >>> figures.populate_commands(commands)
 
         >>> commands(
         ...     "Music_Voice_1",
@@ -8572,8 +8572,8 @@ def imbricate(
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )

@@ -43,8 +43,8 @@ class AccidentalAdjustmentCommand(_scoping.Command):
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -498,8 +498,8 @@ class ClusterCommand(_scoping.Command):
             ...     commands.score_template,
             ...     commands.time_signatures,
             ...     commands.voice_metadata,
-            ...     environment="docs",
             ...     includes=["baca.ily"],
+            ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ... )
 
@@ -613,8 +613,8 @@ class ClusterCommand(_scoping.Command):
             ...     commands.score_template,
             ...     commands.time_signatures,
             ...     commands.voice_metadata,
-            ...     environment="docs",
             ...     includes=["baca.ily"],
+            ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ... )
 
@@ -728,8 +728,8 @@ class ClusterCommand(_scoping.Command):
             ...     commands.score_template,
             ...     commands.time_signatures,
             ...     commands.voice_metadata,
-            ...     environment="docs",
             ...     includes=["baca.ily"],
+            ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ... )
 
@@ -851,8 +851,8 @@ class ClusterCommand(_scoping.Command):
             ...     commands.score_template,
             ...     commands.time_signatures,
             ...     commands.voice_metadata,
-            ...     environment="docs",
             ...     includes=["baca.ily"],
+            ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ... )
 
@@ -966,8 +966,8 @@ class ClusterCommand(_scoping.Command):
             ...     commands.score_template,
             ...     commands.time_signatures,
             ...     commands.voice_metadata,
-            ...     environment="docs",
             ...     includes=["baca.ily"],
+            ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ... )
 
@@ -1082,8 +1082,8 @@ class ClusterCommand(_scoping.Command):
             ...     commands.score_template,
             ...     commands.time_signatures,
             ...     commands.voice_metadata,
-            ...     environment="docs",
             ...     includes=["baca.ily"],
+            ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1150,8 +1150,8 @@ class ColorFingeringCommand(_scoping.Command):
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1519,8 +1519,8 @@ class MicrotoneDeviationCommand(_scoping.Command):
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1679,8 +1679,8 @@ class OctaveDisplacementCommand(_scoping.Command):
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1952,8 +1952,8 @@ class PitchCommand(_scoping.Command):
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2026,8 +2026,8 @@ class PitchCommand(_scoping.Command):
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2100,8 +2100,8 @@ class PitchCommand(_scoping.Command):
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2550,8 +2550,8 @@ class RegisterCommand(_scoping.Command):
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
 
@@ -2875,8 +2875,8 @@ class RegisterInterpolationCommand(_scoping.Command):
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
 
@@ -2981,8 +2981,8 @@ class RegisterInterpolationCommand(_scoping.Command):
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
 
@@ -3087,8 +3087,8 @@ class RegisterInterpolationCommand(_scoping.Command):
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
 
@@ -3193,8 +3193,8 @@ class RegisterInterpolationCommand(_scoping.Command):
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
 
@@ -3299,8 +3299,8 @@ class RegisterInterpolationCommand(_scoping.Command):
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
 
@@ -5276,8 +5276,8 @@ def force_accidental(
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -5574,8 +5574,8 @@ def pitch(
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     environment="docs",
         ...     includes=["baca.ily"],
+        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP

@@ -21,7 +21,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     commands.score_template,
     ...     commands.time_signatures,
     ...     commands.voice_metadata,
-    ...     environment="docs",
+    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -111,7 +111,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     commands.score_template,
     ...     commands.time_signatures,
     ...     commands.voice_metadata,
-    ...     environment="docs",
+    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -233,8 +233,8 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     commands.time_signatures,
     ...     commands.voice_metadata,
     ...     color_octaves=True,
-    ...     environment="docs",
     ...     includes=["baca.ily"],
+    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -312,7 +312,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     commands.time_signatures,
     ...     commands.voice_metadata,
     ...     instruments=commands.instruments,
-    ...     environment="docs",
+    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ...     transpose_score=True,
     ... )
@@ -391,7 +391,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     commands.time_signatures,
     ...     commands.voice_metadata,
     ...     instruments=commands.instruments,
-    ...     environment="docs",
+    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ...     transpose_score=False,
     ... )
@@ -489,9 +489,9 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     commands.score_template,
     ...     commands.time_signatures,
     ...     commands.voice_metadata,
-    ...     environment="docs",
     ...     includes=["baca.ily"],
     ...     instruments=instruments,
+    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> abjad.setting(lilypond_file["Score"]).autoBeaming = False
@@ -593,8 +593,8 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     commands.score_template,
     ...     commands.time_signatures,
     ...     commands.voice_metadata,
-    ...     environment="docs",
     ...     includes=["baca.ily"],
+    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> score = lilypond_file["Score"]

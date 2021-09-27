@@ -810,7 +810,6 @@ def _call_rhythm_commands(
     attach_rhythm_annotation_spanners,
     commands,
     append_phantom_measure,
-    environment,
     manifests,
     measure_count,
     previous_persist,
@@ -978,7 +977,7 @@ def _check_duplicate_part_assignments(dictionary, score_template):
         raise Exception(message)
 
 
-def _check_persistent_indicators(environment, score, score_template):
+def _check_persistent_indicators(score, score_template):
     indicator = _const.SOUNDS_DURING_SEGMENT
     for voice in abjad.iterate.components(score, abjad.Voice):
         if not abjad.get.has_indicator(voice, indicator):
@@ -1162,7 +1161,6 @@ def _collect_metadata(
 
 
 def _collect_persistent_indicators(
-    environment,
     manifests,
     previous_persist,
     score,
@@ -1276,7 +1274,7 @@ def _color_mock_pitch(score):
         leaves.append(pleaf)
 
 
-def _color_not_yet_pitched(environment, score):
+def _color_not_yet_pitched(score):
     indicator = _const.NOT_YET_PITCHED
     tag = _scoping.site(_frame())
     tag = tag.append(_tags.NOT_YET_PITCHED_COLORING)
@@ -2443,7 +2441,7 @@ def _remove_redundant_time_signatures(append_phantom_measure, score):
     return cached_time_signatures
 
 
-def _remove_docs_tags(environment, remove_tags, score):
+def _remove_docs_tags(remove_tags, score):
     assert all(isinstance(_, abjad.Tag) for _ in remove_tags), repr(remove_tags)
     for leaf in abjad.iterate.leaves(score):
         for wrapper in abjad.get.wrappers(leaf):
@@ -2837,7 +2835,6 @@ def _transpose_score(score):
 
 
 def _treat_untreated_persistent_wrappers(
-    environment,
     manifests,
     score,
 ):
@@ -2951,9 +2948,10 @@ def interpret_commands(
     check_wellformedness=False,
     clock_time_extra_offset=None,
     clock_time_override=None,
+    color_not_yet_pitched=False,
     color_octaves=False,
+    comment_measure_numbers=False,
     deactivate=None,
-    environment=None,
     error_on_not_yet_pitched=False,
     fermata_extra_offset_y=2.5,
     fermata_measure_empty_overrides=None,
@@ -2965,6 +2963,7 @@ def interpret_commands(
     includes=None,
     indicator_defaults=None,
     instruments=None,
+    label_clock_time=False,
     local_measure_number_extra_offset=None,
     magnify_staves=None,
     margin_markups=None,
@@ -2973,6 +2972,7 @@ def interpret_commands(
     metronome_marks=None,
     midi=False,
     moment_markup=None,
+    move_global_context=False,
     page_layout_profile=None,
     parts_metric_modulation_multiplier=None,
     persist=None,
@@ -2983,6 +2983,7 @@ def interpret_commands(
     remove_tags=None,
     return_metadata=False,
     segment_number=None,
+    shift_measure_initial_clefs=False,
     skips_instead_of_rests=False,
     spacing=None,
     spacing_extra_offset=None,
@@ -2990,6 +2991,7 @@ def interpret_commands(
     stage_number_extra_offset=None,
     transpose_score=False,
     treat_untreated_persistent_wrappers=False,
+    whitespace_leaves=False,
 ):
     """
     Interprets commands.
@@ -3006,7 +3008,6 @@ def interpret_commands(
     if deactivate is not None:
         assert all(isinstance(_, abjad.Tag) for _ in deactivate)
     assert check_wellformedness in (True, False)
-    assert environment in (None, "docs"), repr(environment)
     assert final_segment in (True, False)
     assert first_segment in (True, False)
     assert force_nonnatural_accidentals in (True, False)
@@ -3069,9 +3070,7 @@ def interpret_commands(
             command_count, segment_duration = _call_rhythm_commands(
                 attach_rhythm_annotation_spanners,
                 commands,
-                # not append_phantom_measure,
                 append_phantom_measure,
-                environment,
                 manifests,
                 measure_count,
                 previous_persist,
@@ -3165,7 +3164,6 @@ def interpret_commands(
             final_measure_is_fermata = result[2]
             if treat_untreated_persistent_wrappers:
                 _treat_untreated_persistent_wrappers(
-                    environment,
                     manifests,
                     score,
                 )
@@ -3180,8 +3178,8 @@ def interpret_commands(
             _color_not_yet_registered(score)
             _color_mock_pitch(score)
             _set_intermittent_to_staff_position_zero(score)
-            if environment != "docs":
-                _color_not_yet_pitched(environment, score)
+            if color_not_yet_pitched:
+                _color_not_yet_pitched(score)
             _set_not_yet_pitched_to_staff_position_zero(score)
             _clean_up_repeat_tie_direction(score)
             _clean_up_laissez_vibrer_tie_direction(score)
@@ -3191,7 +3189,6 @@ def interpret_commands(
             color_out_of_range_pitches(score)
             if check_persistent_indicators:
                 _check_persistent_indicators(
-                    environment,
                     score,
                     score_template,
                 )
@@ -3203,9 +3200,9 @@ def interpret_commands(
                 _force_nonnatural_accidentals(score)
             _label_duration_multipliers(score)
             _magnify_staves(magnify_staves, score)
-            if environment != "docs":
+            if whitespace_leaves:
                 _whitespace_leaves(score)
-            if environment != "docs":
+            if comment_measure_numbers:
                 _comment_measure_numbers(
                     _get_first_measure_number(
                         first_measure_number,
@@ -3223,7 +3220,7 @@ def interpret_commands(
                 offset_to_measure_number,
                 score,
             )
-            if environment != "docs":
+            if shift_measure_initial_clefs:
                 _shift_measure_initial_clefs(
                     manifests,
                     offset_to_measure_number,
@@ -3233,7 +3230,7 @@ def interpret_commands(
                 )
             _deactivate_tags(deactivate, score)
             remove_tags = remove_tags or []
-            _remove_docs_tags(environment, remove_tags, score)
+            _remove_docs_tags(remove_tags, score)
             container_to_part_assignment = None
             if add_container_identifiers:
                 container_to_part_assignment = _add_container_identifiers(
@@ -3247,7 +3244,7 @@ def interpret_commands(
                 )
             _move_global_rests(score, score_template)
         # mutates offsets:
-        if environment == "docs":
+        if move_global_context:
             _move_global_context(score)
         _clean_up_on_beat_grace_containers(score)
         if check_wellformedness:
@@ -3269,7 +3266,7 @@ def interpret_commands(
         clock_time_duration = None
         start_clock_time = None
         stop_clock_time = None
-        if environment != "docs":
+        if label_clock_time:
             result = _label_clock_time(
                 clock_time_override,
                 fermata_measure_numbers,
@@ -3287,7 +3284,6 @@ def interpret_commands(
         )
         final_measure_number = first_measure_number_ + measure_count - 1
         persistent_indicators = _collect_persistent_indicators(
-            environment,
             manifests,
             previous_persist,
             score,
@@ -3332,9 +3328,14 @@ def segment_interpretation_defaults():
         "attach_rhythm_annotation_spanners": True,
         "check_persistent_indicators": True,
         "check_wellformedness": True,
+        "color_not_yet_pitched": True,
+        "comment_measure_numbers": True,
         "force_nonnatural_accidentals": True,
         "include_layout_ly": True,
         "includes": ["../../stylesheet.ily"],
+        "label_clock_time": True,
         "print_timing": True,
+        "shift_measure_initial_clefs": True,
         "treat_untreated_persistent_wrappers": True,
+        "whitespace_leaves": True,
     }

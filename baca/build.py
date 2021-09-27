@@ -908,11 +908,13 @@ def make_layout_ly(spacing):
         commands.voice_metadata,
         append_phantom_measure=commands.append_phantom_measure,
         add_container_identifiers=True,
+        comment_measure_numbers=True,
         first_measure_number=first_measure_number,
         first_segment=True,
         page_layout_profile=page_layout_profile,
         remove_tags=baca.tags.layout_removal_tags(),
         spacing=spacing,
+        whitespace_leaves=True,
     )
     context = lilypond_file["Global_Skips"]
     context.lilypond_type = "PageLayout"
