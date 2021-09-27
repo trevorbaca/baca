@@ -1613,6 +1613,7 @@ def margin_markup(
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
+        ...     first_segment=True,
         ...     margin_markups=commands.margin_markups,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,

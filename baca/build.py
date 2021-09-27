@@ -328,6 +328,10 @@ def _run_segment_maker(
         pass
     else:
         first_segment = segment_directory.name == "01"
+    if first_segment:
+        preamble = None
+    else:
+        preamble = baca.interpret.nonfirst_preamble.split("\n")
     with abjad.Timer() as timer:
         lilypond_file, metadata, persist = interpreter_function(
             commands.commands,
@@ -345,6 +349,7 @@ def _run_segment_maker(
             midi=midi,
             persist=persist,
             previous_metadata=previous_metadata,
+            preamble=preamble,
             previous_persist=previous_persist,
             return_metadata=True,
             segment_number=segment_directory.name,

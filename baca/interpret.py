@@ -249,7 +249,9 @@ def _attach_first_appearance_score_template_defaults(
     if first_segment:
         return
     staff__group = (abjad.Staff, abjad.StaffGroup)
-    dictionary = previous_persist["persistent_indicators"]
+    dictionary = previous_persist.get("persistent_indicators")
+    if not dictionary:
+        return
     for staff__group in abjad.iterate.components(score, staff__group):
         if staff__group.name in dictionary:
             continue
@@ -262,6 +264,20 @@ def _attach_first_segment_score_template_defaults(score, first_segment, manifest
         return
     for wrapper in _templates.attach_defaults(score):
         _scoping.treat_persistent_wrapper(manifests, wrapper, "default")
+
+
+def _attach_nonfirst_empty_start_bar(score):
+    # empty start bar allows LilyPond to print bar numbers at start of nonfirst segments
+    context = score["Global_Skips"]
+    first_skip = _selection.Selection(context).skip(0)
+    literal = abjad.LilyPondLiteral(r'\bar ""')
+    tag = _tags.EMPTY_START_BAR
+    tag = tag.append(_tags.ONLY_SEGMENT)
+    abjad.attach(
+        literal,
+        first_skip,
+        tag=tag.append(_scoping.site(_frame())),
+    )
 
 
 def _attach_metronome_marks(parts_metric_modulation_multiplier, score):
@@ -2028,23 +2044,9 @@ def _make_global_skips(
         if time_signature != abjad.TimeSignature((1, 4)):
             time_signature = abjad.TimeSignature((1, 4))
             abjad.attach(time_signature, skip, context="Score", tag=tag)
-    if first_segment:
-        return
-    # empty start bar allows LilyPond to print bar numbers
-    # at start of nonfirst segments
-    first_skip = _selection.Selection(context).skip(0)
-    literal = abjad.LilyPondLiteral(r'\bar ""')
-    tag = _tags.EMPTY_START_BAR
-    tag = tag.append(_tags.ONLY_SEGMENT)
-    abjad.attach(
-        literal,
-        first_skip,
-        tag=tag.append(_scoping.site(_frame(), n=4)),
-    )
 
 
 def _make_lilypond_file(
-    first_segment,
     include_layout_ly,
     includes,
     midi,
@@ -2053,10 +2055,6 @@ def _make_lilypond_file(
 ):
     tag = _scoping.site(_frame())
     items = []
-    if not first_segment:
-        lines = abjad.tag.double_tag(nonfirst_preamble.split("\n"), tag)
-        line = "\n".join(lines)
-        items.append(line)
     if preamble:
         string = "\n".join(preamble)
         items.append(string)
@@ -2943,6 +2941,7 @@ def interpret_commands(
     add_container_identifiers=False,
     allow_empty_selections=False,
     append_phantom_measure=False,
+    attach_nonfirst_empty_start_bar=False,
     attach_rhythm_annotation_spanners=False,
     check_persistent_indicators=False,
     check_wellformedness=False,
@@ -2957,7 +2956,7 @@ def interpret_commands(
     fermata_measure_empty_overrides=None,
     final_segment=False,
     first_measure_number=None,
-    first_segment=True,  # TODO: default to false
+    first_segment=False,
     force_nonnatural_accidentals=False,
     include_layout_ly=False,
     includes=None,
@@ -3041,7 +3040,6 @@ def interpret_commands(
         )
         preamble.extend(strings)
         lilypond_file = _make_lilypond_file(
-            first_segment,
             include_layout_ly,
             includes,
             midi,
@@ -3054,6 +3052,10 @@ def interpret_commands(
             score,
             time_signatures,
         )
+        if attach_nonfirst_empty_start_bar and not first_segment:
+            _attach_nonfirst_empty_start_bar(
+                score,
+            )
         _label_measure_numbers(
             first_measure_number,
             previous_metadata,
@@ -3325,6 +3327,7 @@ def interpret_commands(
 def segment_interpretation_defaults():
     return {
         "add_container_identifiers": True,
+        "attach_nonfirst_empty_start_bar": True,
         "attach_rhythm_annotation_spanners": True,
         "check_persistent_indicators": True,
         "check_wellformedness": True,

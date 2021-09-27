@@ -24,6 +24,7 @@ r"""
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
+        ...     first_segment=True,
         ...     includes=["baca.ily"],
         ...     indicator_defaults=[
         ...         ("Music_Staff", "default_clef", abjad.Clef("treble"))
@@ -192,7 +193,6 @@ r"""
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     first_segment=False,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -225,7 +225,6 @@ r"""
                         \noBreak
                         \baca-lbsd #0 #'(11)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
@@ -280,7 +279,6 @@ r"""
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     first_segment=False,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -314,7 +312,6 @@ r"""
                         \noBreak
                         \baca-lbsd #0 #'(11)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
@@ -461,7 +458,6 @@ r"""
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     first_segment=False,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -495,7 +491,6 @@ r"""
                         \noBreak
                         \baca-lbsd #0 #'(11)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
@@ -608,7 +603,6 @@ r"""
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     first_segment=False,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -635,7 +629,6 @@ r"""
                     {
                         \baca-new-spacing-section #1 #24
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
@@ -678,7 +671,6 @@ r"""
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     first_segment=False,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -705,7 +697,6 @@ r"""
                     {
                         \baca-new-spacing-section #1 #24
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
@@ -808,7 +799,6 @@ r"""
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     first_segment=False,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -835,7 +825,6 @@ r"""
                     {
                         \baca-new-spacing-section #1 #24
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
@@ -936,7 +925,6 @@ r"""
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     first_segment=False,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -963,7 +951,6 @@ r"""
                     {
                         \baca-new-spacing-section #1 #24
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
@@ -1080,6 +1067,7 @@ r"""
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
+        ...     first_segment=True,
         ...     instruments=commands.instruments,
         ...     includes=["baca.ily"],
         ...     indicator_defaults=[triple],
@@ -1392,7 +1380,6 @@ r"""
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     instruments=commands.instruments,
-        ...     first_segment=False,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -1425,7 +1412,6 @@ r"""
                         \noBreak
                         \baca-lbsd #0 #'(11)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
@@ -1469,7 +1455,6 @@ r"""
                         \noBreak
                         \baca-lbsd #0 #'(11)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
@@ -1509,7 +1494,6 @@ r"""
                         \noBreak
                         \baca-lbsd #0 #'(11)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
@@ -1557,7 +1541,6 @@ r"""
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     instruments=commands.instruments,
-        ...     first_segment=False,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -1590,7 +1573,6 @@ r"""
                         \noBreak
                         \baca-lbsd #0 #'(11)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
@@ -1634,7 +1616,6 @@ r"""
                         \noBreak
                         \baca-lbsd #0 #'(11)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
@@ -1675,7 +1656,6 @@ r"""
                         \noBreak
                         \baca-lbsd #0 #'(11)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
@@ -1906,7 +1886,6 @@ r"""
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     instruments=commands.instruments,
-        ...     first_segment=False,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -1939,7 +1918,6 @@ r"""
                         \noBreak
                         \baca-lbsd #0 #'(11)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
@@ -1983,7 +1961,6 @@ r"""
                         \noBreak
                         \baca-lbsd #0 #'(11)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
@@ -2023,7 +2000,6 @@ r"""
                         \noBreak
                         \baca-lbsd #0 #'(11)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
@@ -2090,9 +2066,10 @@ r"""
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     margin_markups=commands.margin_markups,
+        ...     first_segment=True,
         ...     includes=["baca.ily"],
         ...     indicator_defaults=[triple],
+        ...     margin_markups=commands.margin_markups,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(
@@ -2260,8 +2237,9 @@ r"""
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     margin_markups=commands.margin_markups,
+        ...     first_segment=True,
         ...     includes=["baca.ily"],
+        ...     margin_markups=commands.margin_markups,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(
@@ -2437,7 +2415,6 @@ r"""
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     margin_markups=commands.margin_markups,
-        ...     first_segment=False,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -2470,7 +2447,6 @@ r"""
                         \noBreak
                         \baca-lbsd #0 #'(11)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
@@ -2522,7 +2498,6 @@ r"""
                         \noBreak
                         \baca-lbsd #0 #'(11)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
@@ -2570,7 +2545,6 @@ r"""
                         \noBreak
                         \baca-lbsd #0 #'(11)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
@@ -2626,7 +2600,6 @@ r"""
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     margin_markups=commands.margin_markups,
-        ...     first_segment=False,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -2659,7 +2632,6 @@ r"""
                         \noBreak
                         \baca-lbsd #0 #'(11)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
@@ -2711,7 +2683,6 @@ r"""
                         \noBreak
                         \baca-lbsd #0 #'(11)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
@@ -2759,7 +2730,6 @@ r"""
                         \noBreak
                         \baca-lbsd #0 #'(11)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
@@ -2817,8 +2787,9 @@ r"""
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     margin_markups=commands.margin_markups,
+        ...     first_segment=True,
         ...     includes=["baca.ily"],
+        ...     margin_markups=commands.margin_markups,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(
@@ -3034,7 +3005,6 @@ r"""
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     margin_markups=commands.margin_markups,
-        ...     first_segment=False,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -3067,7 +3037,6 @@ r"""
                         \noBreak
                         \baca-lbsd #0 #'(11)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
@@ -3119,7 +3088,6 @@ r"""
                         \noBreak
                         \baca-lbsd #0 #'(11)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
@@ -3167,7 +3135,6 @@ r"""
                         \noBreak
                         \baca-lbsd #0 #'(11)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
@@ -3234,8 +3201,9 @@ r"""
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     margin_markups=commands.margin_markups,
+        ...     first_segment=True,
         ...     includes=["baca.ily"],
+        ...     margin_markups=commands.margin_markups,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(
@@ -3454,7 +3422,6 @@ r"""
         ...     commands.voice_metadata,
         ...     append_phantom_measure=commands.append_phantom_measure,
         ...     metronome_marks=commands.metronome_marks,
-        ...     first_segment=False,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -3488,7 +3455,6 @@ r"""
                         \noBreak
                         \baca-lbsd #4 #'(8)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
@@ -3571,7 +3537,6 @@ r"""
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     metronome_marks=commands.metronome_marks,
-        ...     first_segment=False,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -3605,7 +3570,6 @@ r"""
                         \noBreak
                         \baca-lbsd #4 #'(8)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
@@ -3775,7 +3739,6 @@ r"""
         ...     commands.voice_metadata,
         ...     append_phantom_measure=commands.append_phantom_measure,
         ...     metronome_marks=commands.metronome_marks,
-        ...     first_segment=False,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -3809,7 +3772,6 @@ r"""
                         \noBreak
                         \baca-lbsd #4 #'(8)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
@@ -4012,7 +3974,6 @@ r"""
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     first_segment=False,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -4039,7 +4000,6 @@ r"""
                     {
                         \baca-new-spacing-section #1 #24
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
@@ -4096,7 +4056,6 @@ r"""
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     first_segment=False,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -4123,7 +4082,6 @@ r"""
                     {
                         \baca-new-spacing-section #1 #24
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
@@ -4229,7 +4187,6 @@ r"""
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     first_segment=False,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -4256,7 +4213,6 @@ r"""
                     {
                         \baca-new-spacing-section #1 #24
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
@@ -4302,7 +4258,6 @@ r"""
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     first_segment=False,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -4329,7 +4284,6 @@ r"""
                     {
                         \baca-new-spacing-section #1 #24
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
@@ -4440,7 +4394,6 @@ r"""
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     first_segment=False,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -4467,7 +4420,6 @@ r"""
                     {
                         \baca-new-spacing-section #1 #24
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
@@ -4640,7 +4592,6 @@ r"""
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     first_segment=False,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -4674,7 +4625,6 @@ r"""
                         \noBreak
                         \baca-lbsd #4 #'(8)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
@@ -4733,7 +4683,6 @@ r"""
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     first_segment=False,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -4767,7 +4716,6 @@ r"""
                         \noBreak
                         \baca-lbsd #4 #'(8)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
@@ -4923,7 +4871,6 @@ r"""
         ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
-        ...     first_segment=False,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -4957,7 +4904,6 @@ r"""
                         \noBreak
                         \baca-lbsd #4 #'(8)
                         \time 3/8
-                        \bar ""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         s1 * 3/8
