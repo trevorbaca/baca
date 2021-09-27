@@ -21,7 +21,7 @@ class RhythmCommand(_scoping.Command):
 
     ..  container:: example
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (4, 8), (3,8), (4, 8)],
         ... )
@@ -32,16 +32,16 @@ class RhythmCommand(_scoping.Command):
         ...     rmakers.extract_trivial(),
         ... )
 
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     command,
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -316,7 +316,7 @@ class RhythmCommand(_scoping.Command):
 
             Talea rhythm-maker remembers previous state across gaps:
 
-            >>> maker = baca.CommandAccumulator(
+            >>> commands = baca.CommandAccumulator(
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=5 * [(4, 8)],
             ... )
@@ -350,7 +350,7 @@ class RhythmCommand(_scoping.Command):
             ...         direction=abjad.Down,
             ...         denominator=16,
             ...     )
-            >>> maker(
+            >>> commands(
             ...     "Music_Voice",
             ...     baca.label(label_with_durations),
             ...     baca.text_script_font_size(-2),
@@ -359,10 +359,10 @@ class RhythmCommand(_scoping.Command):
             ... )
 
             >>> lilypond_file = baca.interpret_commands(
-            ...     maker.commands,
-            ...     maker.score_template,
-            ...     maker.time_signatures,
-            ...     maker.voice_metadata,
+            ...     commands.commands,
+            ...     commands.score_template,
+            ...     commands.time_signatures,
+            ...     commands.voice_metadata,
             ...     environment="docs",
             ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -670,21 +670,21 @@ def make_monads(fractions):
 
     ..  container:: example
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 4)],
         ... )
 
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_monads("2/5 2/5 1/5"),
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -785,21 +785,21 @@ def make_repeat_tied_notes(
         REGRESSION. All notes below are tagged NOT_YET_PITCHED_COLORING (and colored
         gold), even tied notes resulting from meter rewriting:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(10, 8)],
         ... )
 
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_repeat_tied_notes(),
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),

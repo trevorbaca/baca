@@ -251,12 +251,12 @@ class BCPCommand(_scoping.Command):
 
             PATTERN. Define chunkwise spanners like this:
 
-            >>> maker = baca.CommandAccumulator(
+            >>> commands = baca.CommandAccumulator(
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> maker(
+            >>> commands(
             ...     'Music_Voice',
             ...     baca.make_even_divisions(),
             ...     baca.new(
@@ -273,10 +273,10 @@ class BCPCommand(_scoping.Command):
             ...     )
 
             >>> lilypond_file = baca.interpret_commands(
-            ...     maker.commands,
-            ...     maker.score_template,
-            ...     maker.time_signatures,
-            ...     maker.voice_metadata,
+            ...     commands.commands,
+            ...     commands.score_template,
+            ...     commands.time_signatures,
+            ...     commands.voice_metadata,
             ...     environment="docs",
             ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -462,12 +462,12 @@ class BCPCommand(_scoping.Command):
 
             Tweaks LilyPond ``TextSpanner`` grob:
 
-            >>> maker = baca.CommandAccumulator(
+            >>> commands = baca.CommandAccumulator(
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> maker(
+            >>> commands(
             ...     'Music_Voice',
             ...     baca.make_even_divisions(),
             ...     baca.bcps(
@@ -480,10 +480,10 @@ class BCPCommand(_scoping.Command):
             ...     )
 
             >>> lilypond_file = baca.interpret_commands(
-            ...     maker.commands,
-            ...     maker.score_template,
-            ...     maker.time_signatures,
-            ...     maker.voice_metadata,
+            ...     commands.commands,
+            ...     commands.score_template,
+            ...     commands.time_signatures,
+            ...     commands.voice_metadata,
             ...     environment="docs",
             ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -735,12 +735,12 @@ class ContainerCommand(_scoping.Command):
 
     ..  container:: example
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     'Music_Voice',
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.container('ViolinI', selector=baca.selectors.leaves((None, 2))),
@@ -749,10 +749,10 @@ class ContainerCommand(_scoping.Command):
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),

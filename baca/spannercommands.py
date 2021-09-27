@@ -220,12 +220,12 @@ def beam(
 
         Beams everything and sets beam direction down:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     'Music_Voice',
         ...     baca.beam(
         ...         direction=abjad.Down,
@@ -235,10 +235,10 @@ def beam(
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),

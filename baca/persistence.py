@@ -14,16 +14,16 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     indicator_defaults=[
@@ -92,20 +92,20 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.clef("treble"),
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -169,11 +169,11 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.clef("alto"),
         ... )
@@ -188,10 +188,10 @@ r"""
         ...     )
         ... ]
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -261,7 +261,7 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -276,10 +276,10 @@ r"""
         ...     )
         ... ]
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -350,20 +350,20 @@ r"""
         ...         baca.system(measure=3, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
         ... )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.clef("treble", selector=baca.selectors.leaf(0)),
         ...     baca.clef("treble", selector=baca.selectors.leaf(1)),
         ... )
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -438,11 +438,11 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.clef("treble"),
         ... )
@@ -457,10 +457,10 @@ r"""
         ...     )
         ... ]
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -528,21 +528,21 @@ r"""
 
         Explicit dynamics color blue:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.dynamic('f'),
         ...     baca.make_notes(),
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -584,11 +584,11 @@ r"""
 
         Even after a previous dynamic:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.dynamic('p'),
@@ -604,10 +604,10 @@ r"""
         ...         )
         ...     ]
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -655,11 +655,11 @@ r"""
 
         Reapplied dynamics color green:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
@@ -674,10 +674,10 @@ r"""
         ...         )
         ...     ]
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -725,11 +725,11 @@ r"""
 
         Redundant dynamics color pink:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.dynamic('f'),
@@ -737,10 +737,10 @@ r"""
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -784,11 +784,11 @@ r"""
 
         Even at the beginning of a segment:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.dynamic('f'),
@@ -804,10 +804,10 @@ r"""
         ...         )
         ...     ]
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -853,11 +853,11 @@ r"""
 
         Sforzando dynamics do not count as redundant:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.dynamic('sfz'),
@@ -865,10 +865,10 @@ r"""
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -912,11 +912,11 @@ r"""
 
         Even at the beginning of a segment:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.dynamic('sfz'),
@@ -932,10 +932,10 @@ r"""
         ...         )
         ...     ]
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -983,11 +983,11 @@ r"""
 
         REGRESSION. Conventional and effort dynamics analyze nonredundantly:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.dynamic('mf'),
@@ -995,10 +995,10 @@ r"""
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1065,22 +1065,22 @@ r"""
 
         >>> score_template = baca.make_empty_score_maker(1)
         >>> triple = ("Music_Staff", 'default_instrument', abjad.Flute())
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     instruments=instruments,
         ...     score_template=score_template,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
-        ...     instruments=maker.instruments,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
+        ...     instruments=commands.instruments,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     indicator_defaults=[triple],
@@ -1216,23 +1216,23 @@ r"""
 
         Explicit instruments color blue and redraw dull blue:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.instrument(instruments['Flute']),
         ...     baca.make_notes(),
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
-        ...     instruments=maker.instruments,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
+        ...     instruments=commands.instruments,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1366,12 +1366,12 @@ r"""
 
         Even after a previous instrument:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.instrument(instruments['Flute']),
         ...     baca.make_notes(),
@@ -1387,11 +1387,11 @@ r"""
         ...         )
         ...     ]
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
-        ...     instruments=maker.instruments,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
+        ...     instruments=commands.instruments,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -1532,12 +1532,12 @@ r"""
 
         Reapplied instruments color green and redraw dull green:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
@@ -1552,11 +1552,11 @@ r"""
         ...         )
         ...     ]
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
-        ...     instruments=maker.instruments,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
+        ...     instruments=commands.instruments,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -1705,12 +1705,12 @@ r"""
         ...         baca.system(measure=3, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.instrument(instruments['Flute']),
         ...     baca.new(
@@ -1721,11 +1721,11 @@ r"""
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
-        ...     instruments=maker.instruments,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
+        ...     instruments=commands.instruments,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1880,12 +1880,12 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.instrument(instruments['Flute']),
         ...     baca.make_notes(),
@@ -1901,11 +1901,11 @@ r"""
         ...         )
         ...     ]
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
-        ...     instruments=maker.instruments,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
+        ...     instruments=commands.instruments,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -2075,22 +2075,22 @@ r"""
         ...     'default_margin_markup',
         ...     margin_markups['I+II'],
         ...     )
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
         ...     score_template=score_template,
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
-        ...     margin_markups=maker.margin_markups,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
+        ...     margin_markups=commands.margin_markups,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     indicator_defaults=[triple],
@@ -2244,23 +2244,23 @@ r"""
 
         Explicit margin markup color blue and redraw dull blue:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.margin_markup(margin_markups['I+II']),
         ...     baca.make_notes(),
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
-        ...     margin_markups=maker.margin_markups,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
+        ...     margin_markups=commands.margin_markups,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2411,12 +2411,12 @@ r"""
 
         Even after previous margin markup:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.margin_markup(margin_markups['III+IV']),
         ...     baca.make_notes(),
@@ -2432,11 +2432,11 @@ r"""
         ...         )
         ...     ]
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
-        ...     margin_markups=maker.margin_markups,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
+        ...     margin_markups=commands.margin_markups,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -2601,12 +2601,12 @@ r"""
 
         Reapplied margin markup color green and redraw dull green:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
@@ -2621,11 +2621,11 @@ r"""
         ...         )
         ...     ]
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
-        ...     margin_markups=maker.margin_markups,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
+        ...     margin_markups=commands.margin_markups,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -2797,12 +2797,12 @@ r"""
         ...         baca.system(measure=3, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.margin_markup(margin_markups['I+II']),
         ...     baca.new(
@@ -2813,11 +2813,11 @@ r"""
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
-        ...     margin_markups=maker.margin_markups,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
+        ...     margin_markups=commands.margin_markups,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3008,12 +3008,12 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.margin_markup(margin_markups['I+II']),
         ...     baca.make_notes(),
@@ -3029,11 +3029,11 @@ r"""
         ...         )
         ...     ]
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
-        ...     margin_markups=maker.margin_markups,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
+        ...     margin_markups=commands.margin_markups,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -3205,12 +3205,12 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.tag(
         ...         baca.tags.NOT_PARTS,
@@ -3230,11 +3230,11 @@ r"""
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
-        ...     margin_markups=maker.margin_markups,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
+        ...     margin_markups=commands.margin_markups,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3320,28 +3320,28 @@ r"""
 
         Explicit metronome marks color blue:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     append_phantom_measure=True,
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Global_Skips",
         ...     baca.metronome_mark('112'),
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
-        ...     append_phantom_measure=maker.append_phantom_measure,
-        ...     metronome_marks=maker.metronome_marks,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
+        ...     append_phantom_measure=commands.append_phantom_measure,
+        ...     metronome_marks=commands.metronome_marks,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3422,18 +3422,18 @@ r"""
 
         Even after a previous metronome mark:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     append_phantom_measure=True,
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Global_Skips",
         ...     baca.metronome_mark('112'),
         ...     baca.text_spanner_staff_padding(4),
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
@@ -3448,12 +3448,12 @@ r"""
         ...         )
         ...     ]
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
-        ...     append_phantom_measure=maker.append_phantom_measure,
-        ...     metronome_marks=maker.metronome_marks,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
+        ...     append_phantom_measure=commands.append_phantom_measure,
+        ...     metronome_marks=commands.metronome_marks,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -3542,16 +3542,16 @@ r"""
 
         Reapplied metronome marks color green:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Global_Skips",
         ...     baca.text_spanner_staff_padding(4),
         ...     )
@@ -3566,11 +3566,11 @@ r"""
         ...         )
         ...     ]
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
-        ...     metronome_marks=maker.metronome_marks,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
+        ...     metronome_marks=commands.metronome_marks,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -3633,29 +3633,29 @@ r"""
 
         Redundant metronome marks color pink:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     append_phantom_measure=True,
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Global_Skips",
         ...     baca.metronome_mark('112'),
         ...     baca.metronome_mark('112', selector=baca.selectors.leaf(1)),
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
-        ...     append_phantom_measure=maker.append_phantom_measure,
-        ...     metronome_marks=maker.metronome_marks,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
+        ...     append_phantom_measure=commands.append_phantom_measure,
+        ...     metronome_marks=commands.metronome_marks,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3743,18 +3743,18 @@ r"""
 
         Even at the beginning of a segment:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     append_phantom_measure=True,
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Global_Skips",
         ...     baca.metronome_mark('112'),
         ...     baca.text_spanner_staff_padding(4),
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
@@ -3769,12 +3769,12 @@ r"""
         ...         )
         ...     ]
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
-        ...     append_phantom_measure=maker.append_phantom_measure,
-        ...     metronome_marks=maker.metronome_marks,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
+        ...     append_phantom_measure=commands.append_phantom_measure,
+        ...     metronome_marks=commands.metronome_marks,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -3867,7 +3867,7 @@ r"""
 
         Explicit persistent overrides work but do not color:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
@@ -3882,7 +3882,7 @@ r"""
         ...     indicators=[override], selector=baca.selectors.leaf(0), tags=[tag]
         ... )
 
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     command,
         ...     baca.make_notes(),
@@ -3891,10 +3891,10 @@ r"""
         ...     )
 
         >>> lilypond_file, metadata, persist = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3983,11 +3983,11 @@ r"""
 
         Reapplied persistent overrides work but do not color:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
@@ -4008,10 +4008,10 @@ r"""
         ...         )
         ...     ]
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -4056,7 +4056,7 @@ r"""
 
         Even at the beginning of a segment:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
@@ -4070,7 +4070,7 @@ r"""
         >>> command = baca.IndicatorCommand(
         ...     indicators=[override], selector=baca.selectors.leaf(0), tags=[tag]
         ... )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     command,
         ...     baca.make_notes(),
@@ -4092,10 +4092,10 @@ r"""
         ...         )
         ...     ]
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -4146,21 +4146,21 @@ r"""
 
         Explicit staff lines color blue:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.staff_lines(5),
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4205,11 +4205,11 @@ r"""
 
         Even after previous staff lines:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.staff_lines(1),
@@ -4225,10 +4225,10 @@ r"""
         ...         )
         ...     ]
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -4279,11 +4279,11 @@ r"""
 
         Reapplied staff lines color green:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
@@ -4298,10 +4298,10 @@ r"""
         ...         )
         ...     ]
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -4351,11 +4351,11 @@ r"""
 
         Redundant staff lines color pink:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.staff_lines(5),
@@ -4363,10 +4363,10 @@ r"""
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4416,11 +4416,11 @@ r"""
 
         Even at the beginning of a segment:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.staff_lines(5),
@@ -4436,10 +4436,10 @@ r"""
         ...         )
         ...     ]
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -4506,28 +4506,28 @@ r"""
 
         Explicit tempo trends color blue:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     append_phantom_measure=True,
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Global_Skips",
         ...     baca.metronome_mark(baca.Accelerando()),
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
-        ...     append_phantom_measure=maker.append_phantom_measure,
-        ...     metronome_marks=maker.metronome_marks,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
+        ...     append_phantom_measure=commands.append_phantom_measure,
+        ...     metronome_marks=commands.metronome_marks,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4612,17 +4612,17 @@ r"""
 
         Even after a previous tempo trend:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Global_Skips",
         ...     baca.metronome_mark(baca.Accelerando()),
         ...     baca.text_spanner_staff_padding(4),
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
@@ -4636,10 +4636,10 @@ r"""
         ...         )
         ...     ]
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -4706,16 +4706,16 @@ r"""
 
         Reapplied tempo trends color green:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Global_Skips",
         ...     baca.text_spanner_staff_padding(4),
         ...     )
@@ -4729,10 +4729,10 @@ r"""
         ...         )
         ...     ]
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],
@@ -4799,12 +4799,12 @@ r"""
 
         Redundant tempo trends color pink:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Global_Skips",
         ...     baca.metronome_mark(baca.Accelerando()),
         ...     baca.metronome_mark(
@@ -4812,16 +4812,16 @@ r"""
         ...         selector=baca.selectors.leaf(1),
         ...         ),
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4895,17 +4895,17 @@ r"""
 
         Even at the beginning of a segment:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Global_Skips",
         ...     baca.metronome_mark(baca.Accelerando()),
         ...     baca.text_spanner_staff_padding(4),
         ...     )
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     )
@@ -4919,10 +4919,10 @@ r"""
         ...         )
         ...     ]
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     first_segment=False,
         ...     includes=["baca.ily"],

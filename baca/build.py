@@ -166,13 +166,13 @@ def _make_annotation_jobs(directory, undo=False):
     return jobs
 
 
-def _make_segment_clicktrack(maker):
+def _make_segment_clicktrack(commands):
     segment_directory = pathlib.Path(os.getcwd())
     print(f"Making clicktrack for segment {segment_directory.name} ...")
-    result = _run_segment_maker(maker, midi=True)
+    result = _run_segment_maker(commands, midi=True)
     metadata, persist, lilypond_file, runtime = result
     print("Configuring LilyPond file ...")
-    time_signatures = maker.time_signatures
+    time_signatures = commands.time_signatures
     global_skips = lilypond_file["Global_Skips"]
     skips = abjad.select(global_skips).leaves()[:-1]
     metronome_marks = []
@@ -182,7 +182,7 @@ def _make_segment_clicktrack(maker):
     staff = abjad.Staff()
     abjad.setting(staff).midiInstrument = '#"drums"'
     score = abjad.Score([staff], name="Score", simultaneous=False)
-    fermata_measure_numbers = maker.fermata_measure_empty_overrides or []
+    fermata_measure_numbers = commands.fermata_measure_empty_overrides or []
     for i, time_signature in enumerate(time_signatures):
         measure_number = i + 1
         if measure_number in fermata_measure_numbers:
@@ -227,14 +227,14 @@ def _make_segment_clicktrack(maker):
         print(f"Could not make {baca.path.trim(clicktrack_path)} ...")
 
 
-def _make_segment_midi(maker):
+def _make_segment_midi(commands):
     segment_directory = pathlib.Path(os.getcwd())
     print(f"Making MIDI for segment {segment_directory.name} ...")
     music_midi = segment_directory / "music.midi"
     if music_midi.exists():
         print(f"Removing {baca.path.trim(music_midi)} ...")
         music_midi.unlink()
-    result = _run_segment_maker(maker, midi=True)
+    result = _run_segment_maker(commands, midi=True)
     metadata, persist, lilypond_file, runtime = result
     with abjad.Timer() as timer:
         tmp_midi = segment_directory / "tmp.midi"
@@ -285,7 +285,7 @@ def _remove_lilypond_warnings(
 
 
 def _run_segment_maker(
-    maker,
+    commands,
     first_segment=False,
     interpreter_function=None,
     midi=False,
@@ -330,15 +330,15 @@ def _run_segment_maker(
         first_segment = segment_directory.name == "01"
     with abjad.Timer() as timer:
         lilypond_file, metadata, persist = interpreter_function(
-            maker.commands,
-            maker.score_template,
-            maker.time_signatures,
-            maker.voice_metadata,
-            append_phantom_measure=maker.append_phantom_measure,
-            instruments=maker.instruments,
-            margin_markups=maker.margin_markups,
-            metronome_marks=maker.metronome_marks,
-            skips_instead_of_rests=maker.skips_instead_of_rests,
+            commands.commands,
+            commands.score_template,
+            commands.time_signatures,
+            commands.voice_metadata,
+            append_phantom_measure=commands.append_phantom_measure,
+            instruments=commands.instruments,
+            margin_markups=commands.margin_markups,
+            metronome_marks=commands.metronome_marks,
+            skips_instead_of_rests=commands.skips_instead_of_rests,
             **keywords,
             first_segment=first_segment,
             metadata=metadata,
@@ -352,7 +352,7 @@ def _run_segment_maker(
     segment_maker_runtime = int(timer.elapsed_time)
     count = segment_maker_runtime
     counter = abjad.String("second").pluralize(count)
-    print(f"Segment-maker runtime {count} {counter} ...")
+    print(f"Command interpretation time {count} {counter} ...")
     runtime = (count, counter)
     return metadata, persist, lilypond_file, runtime
 
@@ -896,17 +896,17 @@ def make_layout_ly(spacing):
         print(f"Skipping {baca.path.trim(layout_py)} ...")
         sys.exit(1)
     assert abjad.String(document_name).is_shout_case()
-    maker = baca.CommandAccumulator(
+    commands = baca.CommandAccumulator(
         append_phantom_measure=True,
         score_template=baca.make_empty_score_maker(1),
         time_signatures=time_signatures,
     )
     lilypond_file = baca.interpret_commands(
-        maker.commands,
-        maker.score_template,
-        maker.time_signatures,
-        maker.voice_metadata,
-        append_phantom_measure=maker.append_phantom_measure,
+        commands.commands,
+        commands.score_template,
+        commands.time_signatures,
+        commands.voice_metadata,
+        append_phantom_measure=commands.append_phantom_measure,
         add_container_identifiers=True,
         do_not_print_timing=True,
         first_measure_number=first_measure_number,
@@ -996,12 +996,14 @@ def make_layout_ly(spacing):
         )
 
 
-def make_segment_pdf(maker, first_segment=False, interpreter_function=None, **keywords):
+def make_segment_pdf(
+    commands, first_segment=False, interpreter_function=None, **keywords
+):
     if "--clicktrack" in sys.argv:
-        _make_segment_clicktrack(maker)
+        _make_segment_clicktrack(commands)
         return
     if "--midi" in sys.argv:
-        _make_segment_midi(maker)
+        _make_segment_midi(commands)
         return
     segment_directory = pathlib.Path(os.getcwd())
     timing = "--timing" in sys.argv[1:]
@@ -1009,7 +1011,7 @@ def make_segment_pdf(maker, first_segment=False, interpreter_function=None, **ke
     if "--no-layout" not in sys.argv[1:] and layout_py.is_file():
         os.system(f"python {layout_py}")
     result = _run_segment_maker(
-        maker,
+        commands,
         first_segment=first_segment,
         interpreter_function=interpreter_function,
         **keywords,
@@ -1109,7 +1111,7 @@ def make_segment_pdf(maker, first_segment=False, interpreter_function=None, **ke
                     message = "Music time signatures still do not match"
                     message += " layout time signatures ..."
                     print(message)
-    if getattr(maker, "do_not_externalize", False) is not True:
+    if getattr(commands, "do_not_externalize", False) is not True:
         music_ily = segment_directory / "music.ily"
         baca.path.extern(music_ly, music_ily)
         assert music_ily.is_file()
@@ -1184,7 +1186,7 @@ def make_segment_pdf(maker, first_segment=False, interpreter_function=None, **ke
             line = time.strftime("%Y-%m-%d %H:%M:%S") + "\n"
             pointer.write(line)
             count, counter = runtime
-            line = f"Segment-maker runtime: {count} {counter}\n"
+            line = f"Command interpretation time: {count} {counter}\n"
             pointer.write(line)
             count, counter = abjad_format_time
             line = f"Abjad format time: {count} {counter}\n"

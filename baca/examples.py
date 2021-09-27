@@ -1,26 +1,26 @@
 r"""
-Segment-maker scope examples.
+Segment-commands scope examples.
 
 Wraps each command in ``commands`` with each scope in ``scopes``.
 
 ..  container:: example
 
-    >>> maker = baca.CommandAccumulator(
+    >>> commands = baca.CommandAccumulator(
     ...     score_template=baca.make_empty_score_maker(1),
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
 
-    >>> maker(
+    >>> commands(
     ...     "Music_Voice",
     ...     baca.make_even_divisions(),
     ...     baca.label(lambda _: abjad.label.with_indices(_)),
     ... )
 
     >>> lilypond_file = baca.interpret_commands(
-    ...     maker.commands,
-    ...     maker.score_template,
-    ...     maker.time_signatures,
-    ...     maker.voice_metadata,
+    ...     commands.commands,
+    ...     commands.score_template,
+    ...     commands.time_signatures,
+    ...     commands.voice_metadata,
     ...     environment="docs",
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -92,25 +92,25 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
     Commands may be grouped into lists:
 
-    >>> maker = baca.CommandAccumulator(
+    >>> commands = baca.CommandAccumulator(
     ...     score_template=baca.make_empty_score_maker(1),
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
 
-    >>> commands = []
-    >>> commands.append(baca.make_even_divisions())
-    >>> commands.append(baca.label(lambda _: abjad.label.with_indices(_)))
+    >>> list_ = []
+    >>> list_.append(baca.make_even_divisions())
+    >>> list_.append(baca.label(lambda _: abjad.label.with_indices(_)))
 
-    >>> maker(
+    >>> commands(
     ...     "Music_Voice",
-    ...     commands,
+    ...     list_,
     ... )
 
     >>> lilypond_file = baca.interpret_commands(
-    ...     maker.commands,
-    ...     maker.score_template,
-    ...     maker.time_signatures,
-    ...     maker.voice_metadata,
+    ...     commands.commands,
+    ...     commands.score_template,
+    ...     commands.time_signatures,
+    ...     commands.voice_metadata,
     ...     environment="docs",
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -182,7 +182,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
     Raises exception on noncommand input:
 
-    >>> maker(
+    >>> commands(
     ...     "Music_Voice",
     ...     "text",
     ... )
@@ -196,7 +196,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
     Raises exception on unknown voice name:
 
-    >>> maker(
+    >>> commands(
     ...     "Percussion_Voice",
     ...     baca.make_repeated_duration_notes([(1, 4)]),
     ... )
@@ -211,27 +211,27 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     >>> def closure():
     ...     return baca.make_empty_score(1, 1)
 
-    >>> maker = baca.CommandAccumulator(
+    >>> commands = baca.CommandAccumulator(
     ...     score_template=closure,
     ...     time_signatures=[(6, 4)],
     ... )
 
-    >>> maker(
+    >>> commands(
     ...     ("Music_Voice_1", 1),
     ...     baca.music(abjad.Container("d'4 e' f' g' a' b'")[:]),
     ... )
 
-    >>> maker(
+    >>> commands(
     ...     ("Music_Voice_2", 1),
     ...     baca.music(abjad.Container("a4 g f e d c")[:]),
     ...     baca.clef("bass"),
     ... )
 
     >>> lilypond_file = baca.interpret_commands(
-    ...     maker.commands,
-    ...     maker.score_template,
-    ...     maker.time_signatures,
-    ...     maker.voice_metadata,
+    ...     commands.commands,
+    ...     commands.score_template,
+    ...     commands.time_signatures,
+    ...     commands.voice_metadata,
     ...     color_octaves=True,
     ...     environment="docs",
     ...     includes=["baca.ily"],
@@ -293,13 +293,13 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
     >>> instruments = {}
     >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
-    >>> maker = baca.CommandAccumulator(
+    >>> commands = baca.CommandAccumulator(
     ...     instruments=instruments,
     ...     score_template=baca.make_empty_score_maker(1),
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
 
-    >>> maker(
+    >>> commands(
     ...     "Music_Voice",
     ...     baca.instrument(instruments["clarinet"]),
     ...     baca.make_even_divisions(),
@@ -307,11 +307,11 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ... )
 
     >>> lilypond_file = baca.interpret_commands(
-    ...     maker.commands,
-    ...     maker.score_template,
-    ...     maker.time_signatures,
-    ...     maker.voice_metadata,
-    ...     instruments=maker.instruments,
+    ...     commands.commands,
+    ...     commands.score_template,
+    ...     commands.time_signatures,
+    ...     commands.voice_metadata,
+    ...     instruments=commands.instruments,
     ...     environment="docs",
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ...     transpose_score=True,
@@ -372,13 +372,13 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
     >>> instruments = {}
     >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
-    >>> maker = baca.CommandAccumulator(
+    >>> commands = baca.CommandAccumulator(
     ...     instruments=instruments,
     ...     score_template=baca.make_empty_score_maker(1),
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
 
-    >>> maker(
+    >>> commands(
     ...     "Music_Voice",
     ...     baca.instrument(instruments["clarinet"]),
     ...     baca.make_even_divisions(),
@@ -386,11 +386,11 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ... )
 
     >>> lilypond_file = baca.interpret_commands(
-    ...     maker.commands,
-    ...     maker.score_template,
-    ...     maker.time_signatures,
-    ...     maker.voice_metadata,
-    ...     instruments=maker.instruments,
+    ...     commands.commands,
+    ...     commands.score_template,
+    ...     commands.time_signatures,
+    ...     commands.voice_metadata,
+    ...     instruments=commands.instruments,
     ...     environment="docs",
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ...     transpose_score=False,
@@ -473,22 +473,22 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     >>> instruments["Violin"] = abjad.Violin()
 
     >>> score_template = baca.make_empty_score_maker(1)
-    >>> maker = baca.CommandAccumulator(
+    >>> commands = baca.CommandAccumulator(
     ...     instruments=instruments,
     ...     score_template=score_template,
     ...     time_signatures=time_signatures,
     ... )
-    >>> maker(
+    >>> commands(
     ...     ("Music_Voice", 1),
     ...     baca.instrument(abjad.Violin()),
     ...     baca.music(figures, do_not_check_total_duration=True),
     ... )
 
     >>> lilypond_file = baca.interpret_commands(
-    ...     maker.commands,
-    ...     maker.score_template,
-    ...     maker.time_signatures,
-    ...     maker.voice_metadata,
+    ...     commands.commands,
+    ...     commands.score_template,
+    ...     commands.time_signatures,
+    ...     commands.voice_metadata,
     ...     do_not_check_out_of_range_pitches=True,
     ...     environment="docs",
     ...     includes=["baca.ily"],
@@ -580,20 +580,20 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...
     >>> figures = abjad.select(figures_)
 
-    >>> maker = baca.CommandAccumulator(
+    >>> commands = baca.CommandAccumulator(
     ...     score_template=baca.make_empty_score_maker(1),
     ...     time_signatures=time_signatures,
     ... )
-    >>> maker(
+    >>> commands(
     ...     ("Music_Voice", 1),
     ...     baca.music(figures, do_not_check_total_duration=True),
     ... )
 
     >>> lilypond_file = baca.interpret_commands(
-    ...     maker.commands,
-    ...     maker.score_template,
-    ...     maker.time_signatures,
-    ...     maker.voice_metadata,
+    ...     commands.commands,
+    ...     commands.score_template,
+    ...     commands.time_signatures,
+    ...     commands.voice_metadata,
     ...     environment="docs",
     ...     includes=["baca.ily"],
     ...     remove_tags=baca.tags.documentation_removal_tags(),

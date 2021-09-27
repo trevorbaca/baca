@@ -855,7 +855,7 @@ class Command:
     @property
     def runtime(self) -> dict:
         """
-        Gets segment-maker runtime dictionary.
+        Gets segment-commands runtime dictionary.
         """
         return self._runtime
 
@@ -1146,12 +1146,12 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
 
         Applies leaf selector to commands:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
 
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.new(
         ...         baca.marcato(),
@@ -1163,10 +1163,10 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1246,12 +1246,12 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
 
         Applies measure selector to commands:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
 
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.new(
         ...         baca.marcato(),
@@ -1263,10 +1263,10 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1400,12 +1400,12 @@ def only_parts(command: _command_typing) -> _command_typing:
 
         REGRESSION. Dynamic status color tweaks copy dynamic edition tags:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
 
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.only_parts(
@@ -1414,10 +1414,10 @@ def only_parts(command: _command_typing) -> _command_typing:
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),

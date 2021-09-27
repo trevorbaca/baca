@@ -367,12 +367,12 @@ def bar_line_transparent(
 
         Makes bar line before measure 1 transparent:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     'Music_Voice',
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.rhythm(
@@ -386,10 +386,10 @@ def bar_line_transparent(
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1368,21 +1368,21 @@ def mmrest_color(
 
         REGRESSION. Coerces X11 color names:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     'Music_Voice',
         ...     baca.mmrest_color("#(x11-color 'DarkOrchid)"),
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1461,12 +1461,12 @@ def mmrest_text_color(
 
     ..  container:: example
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     'Music_Voice',
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
@@ -1477,10 +1477,10 @@ def mmrest_text_color(
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1529,12 +1529,12 @@ def mmrest_text_color(
         Raises exception when called on leaves other than multimeasure
         rests:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     'Music_Voice',
         ...     baca.make_notes(),
         ...     baca.markup(
@@ -1547,10 +1547,10 @@ def mmrest_text_color(
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1579,12 +1579,12 @@ def mmrest_text_extra_offset(
 
     ..  container:: example
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     'Music_Voice',
         ...     baca.markup(
         ...         r'\baca-boxed-markup still',
@@ -1595,10 +1595,10 @@ def mmrest_text_extra_offset(
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1662,12 +1662,12 @@ def mmrest_text_padding(
 
     ..  container:: example
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     'Music_Voice',
         ...     baca.markup(
         ...         r'\baca-boxed-markup still',
@@ -1678,10 +1678,10 @@ def mmrest_text_padding(
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1744,12 +1744,12 @@ def mmrest_text_parent_center(
 
     ..  container:: example
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     'Music_Voice',
         ...     baca.markup(
         ...         r'\baca-boxed-markup still',
@@ -1760,10 +1760,10 @@ def mmrest_text_parent_center(
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1827,12 +1827,12 @@ def mmrest_text_staff_padding(
 
     ..  container:: example
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     'Music_Voice',
         ...     baca.markup(
         ...         r'\baca-boxed-markup still',
@@ -1843,10 +1843,10 @@ def mmrest_text_staff_padding(
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4301,12 +4301,12 @@ def text_script_color(
 
         Raises exception when called on multimeasure rests:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     'Music_Voice',
         ...     baca.markup(
         ...         r'\baca-boxed-markup still',
@@ -4317,10 +4317,10 @@ def text_script_color(
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4435,12 +4435,12 @@ def text_script_down(
 
         Raises exception when called on multimeasure rests:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     'Music_Voice',
         ...     baca.markup(
         ...         r'\baca-boxed-markup still',
@@ -4451,10 +4451,10 @@ def text_script_down(
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4491,12 +4491,12 @@ def text_script_extra_offset(
 
         Raises exception when called on multimeasure rests:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     'Music_Voice',
         ...     baca.markup(
         ...         r'\baca-boxed-markup still',
@@ -4507,10 +4507,10 @@ def text_script_extra_offset(
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4649,12 +4649,12 @@ def text_script_padding(
 
         Raises exception when called on multimeasure rests:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     'Music_Voice',
         ...     baca.markup(
         ...         r'\baca-boxed-markup still',
@@ -4665,10 +4665,10 @@ def text_script_padding(
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4830,12 +4830,12 @@ def text_script_staff_padding(
 
         Raises exception when called on multimeasure rests:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     'Music_Voice',
         ...     baca.markup(
         ...         r'\baca-boxed-markkup still',
@@ -4846,10 +4846,10 @@ def text_script_staff_padding(
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4964,12 +4964,12 @@ def text_script_up(
 
         Raises exception when called on multimeasure rests:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     'Music_Voice',
         ...     baca.markup(
         ...         r'\baca-boxed-markup still',
@@ -4980,10 +4980,10 @@ def text_script_up(
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),

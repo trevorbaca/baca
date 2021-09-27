@@ -47,12 +47,12 @@ def assign_parts(
         >>> def closure():
         ...     return baca.make_empty_score(1)
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=closure,
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.assign_parts(baca.parts.PartAssignment("Music_Voice")),
@@ -60,10 +60,10 @@ def assign_parts(
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -103,14 +103,14 @@ def assign_parts(
 
         Raises exception when voice does not allow part assignment:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=closure,
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
 
         >>> part_assignment = baca.parts.PartAssignment('Flute')
 
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.assign_parts(baca.parts.PartAssignment("Flute_Voice")),
@@ -118,10 +118,10 @@ def assign_parts(
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -154,12 +154,12 @@ def bcps(
 
         ..  container:: example
 
-            >>> maker = baca.CommandAccumulator(
+            >>> commands = baca.CommandAccumulator(
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> maker(
+            >>> commands(
             ...     "Music_Voice",
             ...     baca.make_even_divisions(),
             ...     baca.bcps(
@@ -171,10 +171,10 @@ def bcps(
             ...     )
 
             >>> lilypond_file = baca.interpret_commands(
-            ...     maker.commands,
-            ...     maker.score_template,
-            ...     maker.time_signatures,
-            ...     maker.voice_metadata,
+            ...     commands.commands,
+            ...     commands.score_template,
+            ...     commands.time_signatures,
+            ...     commands.voice_metadata,
             ...     environment="docs",
             ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -513,12 +513,12 @@ def container(
 
     ..  container:: example
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.container('ViolinI', selector=baca.selectors.leaves((None, 2))),
         ...     baca.container('ViolinII', selector=baca.selectors.leaves((2, None))),
@@ -527,10 +527,10 @@ def container(
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -589,17 +589,17 @@ def cross_staff(
         >>> def closure():
         ...     return baca.make_empty_score(1, 1)
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=closure,
         ...     time_signatures=[(4, 4)],
         ... )
 
-        >>> maker(
+        >>> commands(
         ...     ("Music_Voice_1", 1),
         ...     baca.music(abjad.Container("e'4 f' g' a'")[:]),
         ... )
 
-        >>> maker(
+        >>> commands(
         ...     ("Music_Voice_2", 1),
         ...     baca.music(abjad.Container("c'4 d' e' f'")[:]),
         ...     baca.cross_staff(
@@ -608,10 +608,10 @@ def cross_staff(
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -883,12 +883,12 @@ def finger_pressure_transition(
 
     ..  container:: example
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.finger_pressure_transition(selector=baca.selectors.notes((None, 2))),
         ...     baca.finger_pressure_transition(selector=baca.selectors.notes((2, None))),
@@ -899,10 +899,10 @@ def finger_pressure_transition(
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1093,14 +1093,14 @@ def glissando(
 
     ..  container:: example
 
-        With segment-maker:
+        With segment-commands:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -1108,10 +1108,10 @@ def glissando(
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -1182,12 +1182,12 @@ def glissando(
 
         First and last PLTs:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.make_even_divisions(),
@@ -1196,10 +1196,10 @@ def glissando(
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -1259,12 +1259,12 @@ def glissando(
 
         Works with tweaks:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -1274,10 +1274,10 @@ def glissando(
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -1361,12 +1361,12 @@ def glissando(
 
         Works with indexed tweaks:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -1377,10 +1377,10 @@ def glissando(
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -1515,12 +1515,12 @@ def invisible_music(
 
         Attaches ``\baca-invisible-music`` literal to middle leaves:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.invisible_music(
         ...         selector=baca.selectors.leaves((1, -1)),
@@ -1530,10 +1530,10 @@ def invisible_music(
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),

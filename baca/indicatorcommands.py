@@ -1244,22 +1244,22 @@ def hide_black_note_heads(
 
     ..  container:: example
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     'Music_Voice',
         ...     baca.hide_black_note_heads(),
         ...     baca.make_notes()
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1595,13 +1595,13 @@ def margin_markup(
 
         >>> margin_markups = {}
         >>> margin_markups["Fl."] = abjad.MarginMarkup(markup=abjad.Markup("Fl."))
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
 
-        >>> maker(
+        >>> commands(
         ...     'Music_Voice',
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.margin_markup('Fl.'),
@@ -1609,11 +1609,11 @@ def margin_markup(
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
-        ...     margin_markups=maker.margin_markups,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
+        ...     margin_markups=commands.margin_markups,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2184,12 +2184,12 @@ def staff_lines(
 
         Single-line staff with percussion clef:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     'Music_Voice',
         ...     baca.clef('percussion'),
         ...     baca.make_notes(),
@@ -2198,10 +2198,10 @@ def staff_lines(
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2251,12 +2251,12 @@ def staff_lines(
 
         Single-line staff with bass clef:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     'Music_Voice',
         ...     baca.clef('bass'),
         ...     baca.make_notes(),
@@ -2265,10 +2265,10 @@ def staff_lines(
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2319,12 +2319,12 @@ def staff_lines(
 
         Two-line staff with percussion clef:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     'Music_Voice',
         ...     baca.clef('percussion'),
         ...     baca.make_notes(),
@@ -2333,10 +2333,10 @@ def staff_lines(
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2385,12 +2385,12 @@ def staff_lines(
 
         Two-line staff with bass clef; clef set before staff positions:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     'Music_Voice',
         ...     baca.clef('bass'),
         ...     baca.make_notes(),
@@ -2399,10 +2399,10 @@ def staff_lines(
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2451,12 +2451,12 @@ def staff_lines(
 
         Two-line staff with bass clef; staff positions set before clef:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
         ...     )
 
-        >>> maker(
+        >>> commands(
         ...     'Music_Voice',
         ...     baca.make_notes(),
         ...     baca.staff_lines(2),
@@ -2465,10 +2465,10 @@ def staff_lines(
         ...     )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),

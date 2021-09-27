@@ -26,12 +26,12 @@ class AccidentalAdjustmentCommand(_scoping.Command):
 
     ..  container:: example
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
 
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.force_accidental(selector=baca.selectors.pleaves((None, 2))),
         ...     baca.make_notes(repeat_ties=True),
@@ -39,10 +39,10 @@ class AccidentalAdjustmentCommand(_scoping.Command):
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -481,12 +481,12 @@ class ClusterCommand(_scoping.Command):
 
             Hides flat markup:
 
-            >>> maker = baca.CommandAccumulator(
+            >>> commands = baca.CommandAccumulator(
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
 
-            >>> maker(
+            >>> commands(
             ...     "Music_Voice",
             ...     baca.pitch("E4"),
             ...     baca.make_notes(repeat_ties=True),
@@ -494,10 +494,10 @@ class ClusterCommand(_scoping.Command):
             ... )
 
             >>> lilypond_file = baca.interpret_commands(
-            ...     maker.commands,
-            ...     maker.score_template,
-            ...     maker.time_signatures,
-            ...     maker.voice_metadata,
+            ...     commands.commands,
+            ...     commands.score_template,
+            ...     commands.time_signatures,
+            ...     commands.voice_metadata,
             ...     environment="docs",
             ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -596,12 +596,12 @@ class ClusterCommand(_scoping.Command):
 
             Takes start pitch from input notes:
 
-            >>> maker = baca.CommandAccumulator(
+            >>> commands = baca.CommandAccumulator(
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
 
-            >>> maker(
+            >>> commands(
             ...     "Music_Voice",
             ...     baca.make_notes(repeat_ties=True),
             ...     baca.pitches("C4 D4 E4 F4"),
@@ -609,10 +609,10 @@ class ClusterCommand(_scoping.Command):
             ... )
 
             >>> lilypond_file = baca.interpret_commands(
-            ...     maker.commands,
-            ...     maker.score_template,
-            ...     maker.time_signatures,
-            ...     maker.voice_metadata,
+            ...     commands.commands,
+            ...     commands.score_template,
+            ...     commands.time_signatures,
+            ...     commands.voice_metadata,
             ...     environment="docs",
             ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -712,22 +712,22 @@ class ClusterCommand(_scoping.Command):
 
             Sets start pitch explicitly:
 
-            >>> maker = baca.CommandAccumulator(
+            >>> commands = baca.CommandAccumulator(
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
 
-            >>> maker(
+            >>> commands(
             ...     "Music_Voice",
             ...     baca.make_notes(repeat_ties=True),
             ...     baca.clusters([3], start_pitch="G4"),
             ... )
 
             >>> lilypond_file = baca.interpret_commands(
-            ...     maker.commands,
-            ...     maker.score_template,
-            ...     maker.time_signatures,
-            ...     maker.voice_metadata,
+            ...     commands.commands,
+            ...     commands.score_template,
+            ...     commands.time_signatures,
+            ...     commands.voice_metadata,
             ...     environment="docs",
             ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -835,22 +835,22 @@ class ClusterCommand(_scoping.Command):
 
             Increasing widths:
 
-            >>> maker = baca.CommandAccumulator(
+            >>> commands = baca.CommandAccumulator(
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
 
-            >>> maker(
+            >>> commands(
             ...     "Music_Voice",
             ...     baca.clusters([1, 2, 3, 4], start_pitch="E4"),
             ...     baca.make_notes(repeat_ties=True),
             ... )
 
             >>> lilypond_file = baca.interpret_commands(
-            ...     maker.commands,
-            ...     maker.score_template,
-            ...     maker.time_signatures,
-            ...     maker.voice_metadata,
+            ...     commands.commands,
+            ...     commands.score_template,
+            ...     commands.time_signatures,
+            ...     commands.voice_metadata,
             ...     environment="docs",
             ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -950,22 +950,22 @@ class ClusterCommand(_scoping.Command):
 
             Patterned widths:
 
-            >>> maker = baca.CommandAccumulator(
+            >>> commands = baca.CommandAccumulator(
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
 
-            >>> maker(
+            >>> commands(
             ...     "Music_Voice",
             ...     baca.clusters([1, 3], start_pitch="E4"),
             ...     baca.make_notes(repeat_ties=True),
             ... )
 
             >>> lilypond_file = baca.interpret_commands(
-            ...     maker.commands,
-            ...     maker.score_template,
-            ...     maker.time_signatures,
-            ...     maker.voice_metadata,
+            ...     commands.commands,
+            ...     commands.score_template,
+            ...     commands.time_signatures,
+            ...     commands.voice_metadata,
             ...     environment="docs",
             ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1065,12 +1065,12 @@ class ClusterCommand(_scoping.Command):
 
             Leaves notes and chords unchanged:
 
-            >>> maker = baca.CommandAccumulator(
+            >>> commands = baca.CommandAccumulator(
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
 
-            >>> maker(
+            >>> commands(
             ...     "Music_Voice",
             ...     baca.make_notes(repeat_ties=True),
             ...     baca.pitch("E4"),
@@ -1078,10 +1078,10 @@ class ClusterCommand(_scoping.Command):
             ... )
 
             >>> lilypond_file = baca.interpret_commands(
-            ...     maker.commands,
-            ...     maker.score_template,
-            ...     maker.time_signatures,
-            ...     maker.voice_metadata,
+            ...     commands.commands,
+            ...     commands.score_template,
+            ...     commands.time_signatures,
+            ...     commands.voice_metadata,
             ...     environment="docs",
             ...     includes=["baca.ily"],
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1131,14 +1131,14 @@ class ColorFingeringCommand(_scoping.Command):
 
     ..  container:: example
 
-        With segment-maker:
+        With segment-commands:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
 
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.pitch("E4"),
         ...     baca.make_notes(repeat_ties=True),
@@ -1146,10 +1146,10 @@ class ColorFingeringCommand(_scoping.Command):
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1502,12 +1502,12 @@ class MicrotoneDeviationCommand(_scoping.Command):
 
         With alternating up- and down-quatertones:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
 
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.pitches("E4"),
         ...     baca.make_even_divisions(),
@@ -1515,10 +1515,10 @@ class MicrotoneDeviationCommand(_scoping.Command):
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1660,12 +1660,12 @@ class OctaveDisplacementCommand(_scoping.Command):
 
         Displaces octaves:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
 
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_even_divisions(),
         ...     baca.suite(
@@ -1675,10 +1675,10 @@ class OctaveDisplacementCommand(_scoping.Command):
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1936,22 +1936,22 @@ class PitchCommand(_scoping.Command):
 
         With pitch numbers:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
 
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_even_divisions(),
         ...     baca.pitches([19, 13, 15, 16, 17, 23]),
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2010,22 +2010,22 @@ class PitchCommand(_scoping.Command):
 
         With pitch numbers:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
 
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("C4 F4 F#4 <B4 C#5> D5"),
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2084,22 +2084,22 @@ class PitchCommand(_scoping.Command):
 
         Large chord:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
 
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("<C4 D4 E4 F4 G4 A4 B4 C4>", allow_repeats=True)
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2474,7 +2474,7 @@ class RegisterCommand(_scoping.Command):
 
     ..  container:: example
 
-        With music-maker:
+        With music-commands:
 
         >>> stack = baca.stack(
         ...     baca.figure([1], 16),
@@ -2529,14 +2529,14 @@ class RegisterCommand(_scoping.Command):
 
     ..  container:: example
 
-        With segment-maker:
+        With segment-commands:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
 
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.pitches("G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4"),
         ...     baca.make_even_divisions(),
@@ -2546,10 +2546,10 @@ class RegisterCommand(_scoping.Command):
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2735,7 +2735,7 @@ class RegisterInterpolationCommand(_scoping.Command):
 
     ..  container:: example
 
-        With music-maker:
+        With music-commands:
 
         >>> stack = baca.stack(
         ...     baca.figure([1], 16),
@@ -2857,13 +2857,13 @@ class RegisterInterpolationCommand(_scoping.Command):
         Holds register constant:
 
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
         ... )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.pitches(pitches),
         ...     baca.make_even_divisions(),
@@ -2871,10 +2871,10 @@ class RegisterInterpolationCommand(_scoping.Command):
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2963,13 +2963,13 @@ class RegisterInterpolationCommand(_scoping.Command):
         Octave-transposes to a target interpolated from 12 down to 0:
 
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
         ... )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.pitches(pitches),
         ...     baca.make_even_divisions(),
@@ -2977,10 +2977,10 @@ class RegisterInterpolationCommand(_scoping.Command):
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3069,13 +3069,13 @@ class RegisterInterpolationCommand(_scoping.Command):
         Octave-transposes to a target interpolated from 0 up to 12:
 
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
         ... )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.pitches(pitches),
         ...     baca.make_even_divisions(),
@@ -3083,10 +3083,10 @@ class RegisterInterpolationCommand(_scoping.Command):
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3175,13 +3175,13 @@ class RegisterInterpolationCommand(_scoping.Command):
         Octave-transposes to a target interpolated from 12 down to -12:
 
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
         ... )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.pitches(pitches),
         ...     baca.make_even_divisions(),
@@ -3189,10 +3189,10 @@ class RegisterInterpolationCommand(_scoping.Command):
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3281,13 +3281,13 @@ class RegisterInterpolationCommand(_scoping.Command):
         Octave-transposes to a target interpolated from -12 up to 12:
 
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=time_signatures,
         ... )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.pitches(pitches),
         ...     baca.make_even_divisions(),
@@ -3295,10 +3295,10 @@ class RegisterInterpolationCommand(_scoping.Command):
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -5255,12 +5255,12 @@ def force_accidental(
 
         Inverts edition-specific tags:
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
 
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.not_parts(
         ...         baca.force_accidental(
@@ -5272,10 +5272,10 @@ def force_accidental(
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -5555,12 +5555,12 @@ def pitch(
         REGRESSION. Preserves duration multipliers when leaves cast from one type to
         another (note to chord in this example):
 
-        >>> maker = baca.CommandAccumulator(
+        >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
 
-        >>> maker(
+        >>> commands(
         ...     "Music_Voice",
         ...     baca.rhythm(
         ...         rmakers.note(),
@@ -5570,10 +5570,10 @@ def pitch(
         ... )
 
         >>> lilypond_file = baca.interpret_commands(
-        ...     maker.commands,
-        ...     maker.score_template,
-        ...     maker.time_signatures,
-        ...     maker.voice_metadata,
+        ...     commands.commands,
+        ...     commands.score_template,
+        ...     commands.time_signatures,
+        ...     commands.voice_metadata,
         ...     environment="docs",
         ...     includes=["baca.ily"],
         ...     remove_tags=baca.tags.documentation_removal_tags(),
