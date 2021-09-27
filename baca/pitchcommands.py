@@ -1549,25 +1549,25 @@ class MicrotoneDeviationCommand(_scoping.Command):
                     {
                         e'8
                         [
-                        eqs'!8
+                        eqs'8
                         e'8
-                        eqf'!8
+                        eqf'8
                         ]
                         e'8
                         [
-                        eqs'!8
+                        eqs'8
                         e'8
                         ]
-                        eqf'!8
+                        eqf'8
                         [
                         e'8
-                        eqs'!8
+                        eqs'8
                         e'8
                         ]
-                        eqf'!8
+                        eqf'8
                         [
                         e'8
-                        eqs'!8
+                        eqs'8
                         ]
                     }
                 >>
@@ -1982,8 +1982,8 @@ class PitchCommand(_scoping.Command):
                     {
                         g''8
                         [
-                        cs''!8
-                        ef''!8
+                        cs''8
+                        ef''8
                         e''8
                         ]
                         f''8
@@ -1991,16 +1991,16 @@ class PitchCommand(_scoping.Command):
                         b''8
                         g''8
                         ]
-                        cs''!8
+                        cs''8
                         [
-                        ef''!8
+                        ef''8
                         e''8
                         f''8
                         ]
                         b''8
                         [
                         g''8
-                        cs''!8
+                        cs''8
                         ]
                     }
                 >>
@@ -2057,24 +2057,24 @@ class PitchCommand(_scoping.Command):
                         c'8
                         [
                         f'8
-                        fs'!8
-                        <b' cs''!>8
+                        fs'8
+                        <b' cs''>8
                         ]
                         d''8
                         [
                         c'8
                         f'8
                         ]
-                        fs'!8
+                        fs'8
                         [
-                        <b' cs''!>8
+                        <b' cs''>8
                         d''8
                         c'8
                         ]
                         f'8
                         [
-                        fs'!8
-                        <b' cs''!>8
+                        fs'8
+                        <b' cs''>8
                         ]
                     }
                 >>
@@ -2579,25 +2579,25 @@ class RegisterCommand(_scoping.Command):
                     {
                         g''8
                         [
-                        gqs''!8
-                        gs''!8
-                        gtqs''!8
+                        gqs''8
+                        gs''8
+                        gtqs''8
                         ]
-                        aqf''!8
+                        aqf''8
                         [
-                        af''!8
-                        atqf''!8
+                        af''8
+                        atqf''8
                         ]
                         g''8
                         [
-                        gqs''!8
-                        gs''!8
-                        gtqs''!8
+                        gqs''8
+                        gs''8
+                        gtqs''8
                         ]
-                        aqf''!8
+                        aqf''8
                         [
-                        af''!8
-                        atqf''!8
+                        af''8
+                        atqf''8
                         ]
                     }
                 >>
@@ -2910,48 +2910,48 @@ class RegisterInterpolationCommand(_scoping.Command):
                     }
                     \context Voice = "Music_Voice"
                     {
-                        fs''!8
+                        fs''8
                         [
                         e''8
-                        ef''!8
+                        ef''8
                         f''8
                         ]
                         a''8
                         [
-                        bf''!8
+                        bf''8
                         c''8
                         ]
                         b''8
                         [
-                        af''!8
+                        af''8
                         g''8
-                        cs''!8
+                        cs''8
                         ]
                         d''8
                         [
-                        fs''!8
+                        fs''8
                         e''8
                         ]
-                        ef''!8
+                        ef''8
                         [
                         f''8
                         a''8
-                        bf''!8
+                        bf''8
                         ]
                         c''8
                         [
                         b''8
-                        af''!8
+                        af''8
                         ]
                         g''8
                         [
-                        cs''!8
+                        cs''8
                         d''8
-                        fs''!8
+                        fs''8
                         ]
                         e''8
                         [
-                        ef''!8
+                        ef''8
                         f''8
                         ]
                     }
@@ -3016,48 +3016,48 @@ class RegisterInterpolationCommand(_scoping.Command):
                     }
                     \context Voice = "Music_Voice"
                     {
-                        fs''!8
+                        fs''8
                         [
                         e''8
-                        ef''!8
+                        ef''8
                         f''8
                         ]
                         a''8
                         [
-                        bf'!8
+                        bf'8
                         c''8
                         ]
                         b'8
                         [
-                        af'!8
+                        af'8
                         g''8
-                        cs''!8
+                        cs''8
                         ]
                         d''8
                         [
-                        fs'!8
+                        fs'8
                         e''8
                         ]
-                        ef''!8
+                        ef''8
                         [
                         f'8
                         a'8
-                        bf'!8
+                        bf'8
                         ]
                         c''8
                         [
                         b'8
-                        af'!8
+                        af'8
                         ]
                         g'8
                         [
-                        cs''!8
+                        cs''8
                         d'8
-                        fs'!8
+                        fs'8
                         ]
                         e'8
                         [
-                        ef'!8
+                        ef'8
                         f'8
                         ]
                     }
@@ -3122,48 +3122,48 @@ class RegisterInterpolationCommand(_scoping.Command):
                     }
                     \context Voice = "Music_Voice"
                     {
-                        fs'!8
+                        fs'8
                         [
                         e'8
-                        ef'!8
+                        ef'8
                         f'8
                         ]
                         a'8
                         [
-                        bf'!8
+                        bf'8
                         c''8
                         ]
                         b'8
                         [
-                        af'!8
+                        af'8
                         g'8
-                        cs''!8
+                        cs''8
                         ]
                         d''8
                         [
-                        fs'!8
+                        fs'8
                         e''8
                         ]
-                        ef''!8
+                        ef''8
                         [
                         f''8
                         a'8
-                        bf'!8
+                        bf'8
                         ]
                         c''8
                         [
                         b'8
-                        af'!8
+                        af'8
                         ]
                         g''8
                         [
-                        cs''!8
+                        cs''8
                         d''8
-                        fs''!8
+                        fs''8
                         ]
                         e''8
                         [
-                        ef''!8
+                        ef''8
                         f''8
                         ]
                     }
@@ -3228,48 +3228,48 @@ class RegisterInterpolationCommand(_scoping.Command):
                     }
                     \context Voice = "Music_Voice"
                     {
-                        fs''!8
+                        fs''8
                         [
                         e''8
-                        ef''!8
+                        ef''8
                         f''8
                         ]
                         a'8
                         [
-                        bf'!8
+                        bf'8
                         c''8
                         ]
                         b'8
                         [
-                        af'!8
+                        af'8
                         g'8
-                        cs''!8
+                        cs''8
                         ]
                         d'8
                         [
-                        fs'!8
+                        fs'8
                         e'8
                         ]
-                        ef'!8
+                        ef'8
                         [
                         f'8
                         a'8
-                        bf!8
+                        bf8
                         ]
                         c'8
                         [
                         b8
-                        af!8
+                        af8
                         ]
                         g8
                         [
-                        cs'!8
+                        cs'8
                         d'8
-                        fs!8
+                        fs8
                         ]
                         e8
                         [
-                        ef!8
+                        ef8
                         f8
                         ]
                     }
@@ -3334,48 +3334,48 @@ class RegisterInterpolationCommand(_scoping.Command):
                     }
                     \context Voice = "Music_Voice"
                     {
-                        fs!8
+                        fs8
                         [
                         e8
-                        ef!8
+                        ef8
                         f8
                         ]
                         a8
                         [
-                        bf!8
+                        bf8
                         c'8
                         ]
                         b8
                         [
-                        af!8
+                        af8
                         g'8
-                        cs'!8
+                        cs'8
                         ]
                         d'8
                         [
-                        fs'!8
+                        fs'8
                         e'8
                         ]
-                        ef'!8
+                        ef'8
                         [
                         f'8
                         a'8
-                        bf'!8
+                        bf'8
                         ]
                         c''8
                         [
                         b'8
-                        af'!8
+                        af'8
                         ]
                         g'8
                         [
-                        cs''!8
+                        cs''8
                         d''8
-                        fs''!8
+                        fs''8
                         ]
                         e''8
                         [
-                        ef''!8
+                        ef''8
                         f''8
                         ]
                     }

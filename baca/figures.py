@@ -2222,11 +2222,11 @@ class Imbrication:
                                     - \staccato
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
-                                    bf'!16
+                                    bf'16
                                     - \staccato
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
-                                    fs''!16
+                                    fs''16
                                     - \staccato
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
@@ -2237,11 +2237,11 @@ class Imbrication:
                                 {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
-                                    ef''!16
+                                    ef''16
                                     - \staccato
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
-                                    af''!16
+                                    af''16
                                     - \staccato
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
@@ -2429,7 +2429,7 @@ class Imbrication:
                                     s16
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
-                                    fs''!16
+                                    fs''16
                                     - \accent
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
@@ -2456,11 +2456,11 @@ class Imbrication:
                                     s16
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
-                                    bf'!16
+                                    bf'16
                                     - \staccato
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
-                                    fs''!16
+                                    fs''16
                                     - \staccato
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
@@ -2471,11 +2471,11 @@ class Imbrication:
                                 {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
-                                    ef''!16
+                                    ef''16
                                     - \staccato
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
-                                    af''!16
+                                    af''16
                                     - \staccato
                                     s16
                                     s16
@@ -2492,13 +2492,13 @@ class Imbrication:
                                     - \staccato
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
-                                    bf'!16
+                                    bf'16
                                     - \staccato
                                     s16
                                     s16
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 0
-                                    ef''!16
+                                    ef''16
                                     - \staccato
                                     ]
                                 }
@@ -2626,7 +2626,7 @@ class Imbrication:
                                     s16
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
-                                    fs''!16
+                                    fs''16
                                     - \accent
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
@@ -2637,7 +2637,7 @@ class Imbrication:
                                 {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
-                                    ef''!16
+                                    ef''16
                                     - \accent
                                     s16
                                     s16
@@ -2665,11 +2665,11 @@ class Imbrication:
                                     - \staccato
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
-                                    bf'!16
+                                    bf'16
                                     - \staccato
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
-                                    fs''!16
+                                    fs''16
                                     - \staccato
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
@@ -2680,11 +2680,11 @@ class Imbrication:
                                 {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
-                                    ef''!16
+                                    ef''16
                                     - \staccato
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
-                                    af''!16
+                                    af''16
                                     - \staccato
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
@@ -2707,11 +2707,11 @@ class Imbrication:
                                     - \staccato
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
-                                    bf'!16
+                                    bf'16
                                     - \staccato
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
-                                    fs''!16
+                                    fs''16
                                     - \staccato
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
@@ -2722,11 +2722,11 @@ class Imbrication:
                                 {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
-                                    ef''!16
+                                    ef''16
                                     - \staccato
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
-                                    af''!16
+                                    af''16
                                     - \staccato
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
@@ -2835,14 +2835,14 @@ class Imbrication:
                                     s32
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
-                                    bf'!8
+                                    bf'8
                                     s32
                                 }
                                 \scaleDurations #'(1 . 1)
                                 {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
-                                    fs''!8
+                                    fs''8
                                     s32
                                     s8
                                     s32
@@ -2880,24 +2880,24 @@ class Imbrication:
                                     d'8
                                     ~
                                     d'32
-                                    bf'!8
+                                    bf'8
                                     ~
                                     bf'32
                                     ]
                                 }
                                 \scaleDurations #'(1 . 1)
                                 {
-                                    fs''!8
+                                    fs''8
                                     ~
                                     [
                                     fs''32
                                     e''8
                                     ~
                                     e''32
-                                    ef''!8
+                                    ef''8
                                     ~
                                     ef''32
-                                    af''!8
+                                    af''8
                                     ~
                                     af''32
                                     g''8
@@ -7138,7 +7138,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                 s16
                                 \set stemLeftBeamCount = 0
                                 \set stemRightBeamCount = 2
-                                bf'!16
+                                bf'16
                                 [
                             }
                             \times 2/3
@@ -7174,7 +7174,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                 c'16
                                 [
                                 d'16
-                                bf'!16
+                                bf'16
                                 ]
                             }
                             \times 2/3
@@ -7182,7 +7182,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                 c'16
                                 [
                                 d'16
-                                bf'!16
+                                bf'16
                                 ]
                             }
                             \tweak text #tuplet-number::calc-fraction-text
@@ -7191,7 +7191,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                 c'16
                                 [
                                 d'16
-                                bf'!16
+                                bf'16
                                 ]
                                 r4
                             }
@@ -7307,11 +7307,11 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                 s16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                bf'!16
+                                bf'16
                                 - \accent
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                fs''!16
+                                fs''16
                                 - \accent
                                 s16
                             }
@@ -7336,16 +7336,16 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                 c'16
                                 [
                                 d'16
-                                bf'!16
-                                fs''!16
+                                bf'16
+                                fs''16
                                 e''16
                                 ]
                             }
                             \scaleDurations #'(1 . 1)
                             {
-                                ef''!16
+                                ef''16
                                 [
-                                af''!16
+                                af''16
                                 g''16
                                 a'16
                                 ]
@@ -7355,16 +7355,16 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                 c'16
                                 [
                                 d'16
-                                bf'!16
-                                fs''!16
+                                bf'16
+                                fs''16
                                 e''16
                                 ]
                             }
                             \scaleDurations #'(1 . 1)
                             {
-                                ef''!16
+                                ef''16
                                 [
-                                af''!16
+                                af''16
                                 g''16
                                 a'16
                                 ]
@@ -7483,7 +7483,7 @@ def extend_beam(
                                 - \staccato
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                bf'!16
+                                bf'16
                                 - \staccato
                                 s16
                             }
@@ -7508,7 +7508,7 @@ def extend_beam(
                                 s16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                cs''!16
+                                cs''16
                                 - \staccato
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
@@ -7536,10 +7536,10 @@ def extend_beam(
                                 d'16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                bf'!16
+                                bf'16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 1
-                                fs''!16
+                                fs''16
                             }
                             \scaleDurations #'(1 . 1)
                             {
@@ -7548,7 +7548,7 @@ def extend_beam(
                                 e''16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                ef''!16
+                                ef''16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 0
                                 b''16
@@ -7564,13 +7564,13 @@ def extend_beam(
                                 [
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                cs''!16
+                                cs''16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 a'16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 0
-                                af'!16
+                                af'16
                                 ]
                             }
                         }
@@ -7701,7 +7701,7 @@ def imbricate(
                                 s16
                                 \set stemLeftBeamCount = 0
                                 \set stemRightBeamCount = 2
-                                fs''!16
+                                fs''16
                                 [
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 0
@@ -7728,10 +7728,10 @@ def imbricate(
                                 d'16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                bf'!16
+                                bf'16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                fs''!16
+                                fs''16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 1
                                 e''16
@@ -7740,10 +7740,10 @@ def imbricate(
                             {
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 2
-                                ef''!16
+                                ef''16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                af''!16
+                                af''16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 g''16
@@ -7761,16 +7761,16 @@ def imbricate(
                                 d'16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                bf'!16
+                                bf'16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                fs''!16
+                                fs''16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 e''16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 0
-                                ef''!16
+                                ef''16
                                 ]
                             }
                         }
@@ -7906,10 +7906,10 @@ def imbricate(
                                 d'16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                bf'!16
+                                bf'16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                fs''!16
+                                fs''16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 1
                                 e''16
@@ -7918,10 +7918,10 @@ def imbricate(
                             {
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 2
-                                ef''!16
+                                ef''16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                af''!16
+                                af''16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 g''16
@@ -7939,16 +7939,16 @@ def imbricate(
                                 d'16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                bf'!16
+                                bf'16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                fs''!16
+                                fs''16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 e''16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 0
-                                ef''!16
+                                ef''16
                                 ]
                             }
                         }
@@ -7984,11 +7984,11 @@ def imbricate(
                                 s16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                bf'!16
+                                bf'16
                                 - \accent
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                fs''!16
+                                fs''16
                                 - \accent
                                 s16
                                 s16
@@ -8115,7 +8115,7 @@ def imbricate(
                                 s16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                fs''!16
+                                fs''16
                                 - \accent
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
@@ -8146,11 +8146,11 @@ def imbricate(
                                 - \staccato
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                bf'!16
+                                bf'16
                                 - \staccato
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                fs''!16
+                                fs''16
                                 - \staccato
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 1
@@ -8162,11 +8162,11 @@ def imbricate(
                             {
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 2
-                                ef''!16
+                                ef''16
                                 - \staccato
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                af''!16
+                                af''16
                                 - \staccato
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
@@ -8190,11 +8190,11 @@ def imbricate(
                                 - \staccato
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                bf'!16
+                                bf'16
                                 - \staccato
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                fs''!16
+                                fs''16
                                 - \staccato
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
@@ -8202,7 +8202,7 @@ def imbricate(
                                 - \staccato
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 0
-                                ef''!16
+                                ef''16
                                 - \staccato
                                 ]
                             }
@@ -8297,14 +8297,14 @@ def imbricate(
                                 s8.
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 1
-                                bf'!8.
+                                bf'8.
                                 - \accent
                             }
                             \scaleDurations #'(1 . 1)
                             {
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 1
-                                fs''!8.
+                                fs''8.
                                 - \accent
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 1
@@ -8312,7 +8312,7 @@ def imbricate(
                                 - \accent
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 1
-                                ef''!8.
+                                ef''8.
                                 - \accent
                                 s8.
                                 s8.
@@ -8335,16 +8335,16 @@ def imbricate(
                                 c'8.
                                 [
                                 d'8.
-                                bf'!8.
+                                bf'8.
                                 ]
                             }
                             \scaleDurations #'(1 . 1)
                             {
-                                fs''!8.
+                                fs''8.
                                 [
                                 e''8.
-                                ef''!8.
-                                af''!8.
+                                ef''8.
+                                af''8.
                                 g''8.
                                 ]
                             }
@@ -8459,7 +8459,7 @@ def imbricate(
                                 s16
                                 \set stemLeftBeamCount = 0
                                 \set stemRightBeamCount = 2
-                                fs''!16
+                                fs''16
                                 [
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 0
@@ -8479,17 +8479,17 @@ def imbricate(
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 \voiceTwo
-                                <c' d' bf'! e'' fs''!>16
+                                <c' d' bf' e'' fs''>16
                                 [
                             }
                             \scaleDurations #'(1 . 1)
                             {
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 2
-                                ef''!16
+                                ef''16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                af''!16
+                                af''16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 g''16
@@ -8507,16 +8507,16 @@ def imbricate(
                                 d'16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                bf'!16
+                                bf'16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                fs''!16
+                                fs''16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 e''16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 0
-                                ef''!16
+                                ef''16
                                 ]
                             }
                         }
@@ -8631,7 +8631,7 @@ def imbricate(
                                 s16
                                 \set stemLeftBeamCount = 0
                                 \set stemRightBeamCount = 2
-                                fs''!16
+                                fs''16
                                 [
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 0
@@ -8660,10 +8660,10 @@ def imbricate(
                                 d'16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                bf'!16
+                                bf'16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                fs''!16
+                                fs''16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 1
                                 e''16
@@ -8672,10 +8672,10 @@ def imbricate(
                             {
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 2
-                                ef''!16
+                                ef''16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                af''!16
+                                af''16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 g''16
@@ -8693,16 +8693,16 @@ def imbricate(
                                 d'16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                bf'!16
+                                bf'16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
-                                fs''!16
+                                fs''16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 e''16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 0
-                                ef''!16
+                                ef''16
                                 ]
                                 r8
                             }

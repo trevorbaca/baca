@@ -2978,7 +2978,6 @@ def interpret_commands(
     do_not_check_beamed_long_notes=False,
     do_not_check_out_of_range_pitches=False,
     do_not_check_wellformedness=False,
-    do_not_force_nonnatural_accidentals=False,
     environment=None,
     error_on_not_yet_pitched=False,
     fermata_extra_offset_y=2.5,
@@ -2986,6 +2985,7 @@ def interpret_commands(
     final_segment=False,
     first_measure_number=None,
     first_segment=True,  # TODO: default to false
+    force_nonnatural_accidentals=False,
     include_layout_ly=False,
     includes=None,
     indicator_defaults=None,
@@ -3033,10 +3033,10 @@ def interpret_commands(
     assert do_not_check_out_of_range_pitches in (True, False)
     assert do_not_check_beamed_long_notes in (True, False)
     assert do_not_check_wellformedness in (True, False)
-    assert do_not_force_nonnatural_accidentals in (True, False)
     assert environment in (None, "docs"), repr(environment)
     assert final_segment in (True, False)
     assert first_segment in (True, False)
+    assert force_nonnatural_accidentals in (True, False)
     includes = list(includes or [])
     manifests = {
         "abjad.Instrument": instruments,
@@ -3226,7 +3226,7 @@ def interpret_commands(
             if color_octaves:
                 _color_octaves(score)
             _attach_shadow_tie_indicators(score)
-            if not do_not_force_nonnatural_accidentals:
+            if force_nonnatural_accidentals:
                 _force_nonnatural_accidentals(score)
             _label_duration_multipliers(score)
             _magnify_staves(magnify_staves, score)
@@ -3360,6 +3360,7 @@ def segment_interpretation_defaults():
         "add_container_identifiers": True,
         "attach_rhythm_annotation_spanners": True,
         "check_persistent_indicators": True,
+        "force_nonnatural_accidentals": True,
         "include_layout_ly": True,
         "includes": ["../../stylesheet.ily"],
         "print_timing": True,

@@ -340,26 +340,26 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                 }
                 \context Voice = "Music_Voice"
                 {
-                    fs'!8
+                    fs'8
                     [
                     g'8
-                    fs'!8
+                    fs'8
                     g'8
                     ]
-                    fs'!8
+                    fs'8
                     [
                     g'8
-                    fs'!8
-                    ]
-                    g'8
-                    [
-                    fs'!8
-                    g'8
-                    fs'!8
+                    fs'8
                     ]
                     g'8
                     [
-                    fs'!8
+                    fs'8
+                    g'8
+                    fs'8
+                    ]
+                    g'8
+                    [
+                    fs'8
                     g'8
                     ]
                 }
@@ -533,9 +533,9 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                         \baca-out-of-range-coloring
                         c16
                         d'16
-                        ef'!16
+                        ef'16
                         f'16
-                        af'!16
+                        af'16
                         a'16
                         c'16
                     }
@@ -545,10 +545,10 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                     }
                     \scaleDurations #'(1 . 1)
                     {
-                        bf'!16
+                        bf'16
                         g'16
                         a'16
-                        bf'!16
+                        bf'16
                         c'16
                         f'16
                     }
@@ -633,9 +633,9 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                     }
                     \scaleDurations #'(1 . 1)
                     {
-                        fs'!16
+                        fs'16
                         d'16
-                        ef'!16
+                        ef'16
                         f'16
                         \baca-repeat-pitch-class-coloring
                         a'16
@@ -649,7 +649,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                     }
                     \scaleDurations #'(1 . 1)
                     {
-                        bf'!16
+                        bf'16
                         g'16
                         a'16
                         \baca-repeat-pitch-class-coloring
