@@ -3251,8 +3251,8 @@ def interpret_commands(
             _move_global_context(score)
         _clean_up_on_beat_grace_containers(score)
         if check_wellformedness:
-            if not abjad.wf.wellformed(score):
-                message = abjad.wf.tabulate_wellformedness(score)
+            count, message = abjad.wf.tabulate_wellformedness(score)
+            if count:
                 raise Exception("\n" + message)
     count = int(timer.elapsed_time)
     seconds = abjad.String("second").pluralize(count)
