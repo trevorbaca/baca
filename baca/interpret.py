@@ -220,7 +220,7 @@ def _assert_nonoverlapping_rhythms(rhythms, voice):
 
 
 def _attach_fermatas(
-    do_not_append_phantom_measure,
+    append_phantom_measure,
     score,
     score_template,
     time_signatures,
@@ -237,7 +237,7 @@ def _attach_fermatas(
         return
     context = score["Global_Rests"]
     rests = _make_global_rests(
-        do_not_append_phantom_measure,
+        append_phantom_measure,
         time_signatures,
     )
     context.extend(rests)
@@ -809,7 +809,7 @@ def _call_commands(
 def _call_rhythm_commands(
     attach_rhythm_annotation_spanners,
     commands,
-    do_not_append_phantom_measure,
+    append_phantom_measure,
     environment,
     manifests,
     measure_count,
@@ -821,7 +821,7 @@ def _call_rhythm_commands(
     voice_metadata,
 ):
     _attach_fermatas(
-        do_not_append_phantom_measure,
+        append_phantom_measure,
         score,
         score_template,
         time_signatures,
@@ -842,7 +842,7 @@ def _call_rhythm_commands(
             selection = silence_maker(time_signatures)
             assert isinstance(selection, abjad.Selection), repr(selection)
             voice.extend(selection)
-            if not do_not_append_phantom_measure:
+            if append_phantom_measure:
                 container = _make_multimeasure_rest_container(
                     voice.name,
                     (1, 4),
@@ -898,7 +898,7 @@ def _call_rhythm_commands(
             timespans,
             voice.name,
         )
-        if not do_not_append_phantom_measure:
+        if append_phantom_measure:
             suppress_note = False
             final_leaf = abjad.get.leaf(selections, -1)
             if isinstance(final_leaf, abjad.MultimeasureRest):
@@ -1529,52 +1529,45 @@ def _get_first_measure_number(first_measure_number, previous_metadata):
     return first_measure_number
 
 
-def _get_lilypond_includes(
+def _get_global_spanner_extra_offsets(
     clock_time_extra_offset,
-    includes,
     local_measure_number_extra_offset,
     measure_number_extra_offset,
     spacing_extra_offset,
     stage_number_extra_offset,
 ):
-    includes_ = ["../../stylesheet.ily"]
+    strings = []
     if clock_time_extra_offset is not None:
         value = clock_time_extra_offset
         assert isinstance(value, tuple)
         string = f"#'({value[0]} . {value[1]})"
         string = f"clock-time-extra-offset = {string}"
-        literal = abjad.LilyPondLiteral(string)
-        includes_.append(literal)
+        strings.append(string)
     if local_measure_number_extra_offset is not None:
         value = local_measure_number_extra_offset
         assert isinstance(value, tuple)
         string = f"#'({value[0]} . {value[1]})"
         string = f"local-measure-number-extra-offset = {string}"
-        literal = abjad.LilyPondLiteral(string)
-        includes_.append(literal)
+        strings.append(string)
     if measure_number_extra_offset is not None:
         value = measure_number_extra_offset
         assert isinstance(value, tuple)
         string = f"#'({value[0]} . {value[1]})"
         string = f"measure-number-extra-offset = {string}"
-        literal = abjad.LilyPondLiteral(string)
-        includes_.append(literal)
+        strings.append(string)
     if spacing_extra_offset is not None:
         value = spacing_extra_offset
         assert isinstance(value, tuple)
         string = f"#'({value[0]} . {value[1]})"
         string = f"spacing-extra-offset = {string}"
-        literal = abjad.LilyPondLiteral(string)
-        includes_.append(literal)
+        strings.append(string)
     if stage_number_extra_offset is not None:
         value = stage_number_extra_offset
         assert isinstance(value, tuple)
         string = f"#'({value[0]} . {value[1]})"
         string = f"stage-number-extra-offset = {string}"
-        literal = abjad.LilyPondLiteral(string)
-        includes_.append(literal)
-    includes_.extend(includes or [])
-    return includes_
+        strings.append(string)
+    return strings
 
 
 def _get_measure_number_tag(leaf, offset_to_measure_number):
@@ -2014,7 +2007,7 @@ def _make_global_context():
     return global_context
 
 
-def _make_global_rests(do_not_append_phantom_measure, time_signatures):
+def _make_global_rests(append_phantom_measure, time_signatures):
     rests = []
     for time_signature in time_signatures:
         rest = abjad.MultimeasureRest(
@@ -2023,7 +2016,7 @@ def _make_global_rests(do_not_append_phantom_measure, time_signatures):
             tag=_scoping.site(_frame(), n=1),
         )
         rests.append(rest)
-    if not do_not_append_phantom_measure:
+    if append_phantom_measure:
         tag = _scoping.site(_frame(), n=2).append(_tags.PHANTOM)
         rest = abjad.MultimeasureRest(abjad.Duration(1), multiplier=(1, 4), tag=tag)
         abjad.attach(_const.PHANTOM, rest)
@@ -2032,7 +2025,7 @@ def _make_global_rests(do_not_append_phantom_measure, time_signatures):
 
 
 def _make_global_skips(
-    do_not_append_phantom_measure,
+    append_phantom_measure,
     first_segment,
     score,
     time_signatures,
@@ -2051,7 +2044,7 @@ def _make_global_skips(
             tag=_scoping.site(_frame(), n=2),
         )
         context.append(skip)
-    if not do_not_append_phantom_measure:
+    if append_phantom_measure:
         tag = _scoping.site(_frame(), n=3)
         tag = tag.append(_tags.PHANTOM)
         skip = abjad.Skip(1, multiplier=(1, 4), tag=tag)
@@ -2457,11 +2450,11 @@ def _reanalyze_trending_dynamics(manifests, score):
                 _scoping.treat_persistent_wrapper(manifests, wrapper, "explicit")
 
 
-def _remove_redundant_time_signatures(do_not_append_phantom_measure, score):
+def _remove_redundant_time_signatures(append_phantom_measure, score):
     previous_time_signature = None
     cached_time_signatures = []
     skips = _selection.Selection(score["Global_Skips"]).skips()
-    if not do_not_append_phantom_measure:
+    if append_phantom_measure:
         skips = skips[:-1]
     for skip in skips:
         time_signature = abjad.get.indicator(skip, abjad.TimeSignature)
@@ -2773,8 +2766,8 @@ def _style_fermata_measures(
         grob.extra_offset = (0, fermata_extra_offset_y)
 
 
-def _style_phantom_measures(do_not_append_phantom_measure, score):
-    if do_not_append_phantom_measure:
+def _style_phantom_measures(append_phantom_measure, score):
+    if not append_phantom_measure:
         return
     skip = abjad.get.leaf(score["Global_Skips"], -1)
     for literal in abjad.get.indicators(skip, abjad.LilyPondLiteral):
@@ -2986,7 +2979,6 @@ def interpret_commands(
     do_not_check_out_of_range_pitches=False,
     do_not_check_wellformedness=False,
     do_not_force_nonnatural_accidentals=False,
-    do_not_print_timing=False,
     environment=None,
     error_on_not_yet_pitched=False,
     fermata_extra_offset_y=2.5,
@@ -3012,6 +3004,7 @@ def interpret_commands(
     preamble=None,
     previous_metadata=None,
     previous_persist=None,
+    print_timing=False,
     remove_tags=None,
     return_metadata=False,
     segment_number=None,
@@ -3044,6 +3037,7 @@ def interpret_commands(
     assert environment in (None, "docs"), repr(environment)
     assert final_segment in (True, False)
     assert first_segment in (True, False)
+    includes = list(includes or [])
     manifests = {
         "abjad.Instrument": instruments,
         "abjad.MarginMarkup": margin_markups,
@@ -3054,7 +3048,7 @@ def interpret_commands(
         assert isinstance(parts_metric_modulation_multiplier, tuple)
         assert len(parts_metric_modulation_multiplier) == 2
     persist = dict(persist or {})
-    preamble = preamble or ()
+    preamble = list(preamble or [])
     if preamble:
         assert all(isinstance(_, str) for _ in preamble), repr(preamble)
     previous_metadata = dict(previous_metadata or {})
@@ -3064,27 +3058,24 @@ def interpret_commands(
     with abjad.Timer() as timer:
         measure_count = len(time_signatures)
         score = _make_score(indicator_defaults, score_template)
-        if environment == "docs":
-            includes_ = includes
-        else:
-            includes_ = _get_lilypond_includes(
-                clock_time_extra_offset,
-                includes,
-                local_measure_number_extra_offset,
-                measure_number_extra_offset,
-                spacing_extra_offset,
-                stage_number_extra_offset,
-            )
+        strings = _get_global_spanner_extra_offsets(
+            clock_time_extra_offset,
+            local_measure_number_extra_offset,
+            measure_number_extra_offset,
+            spacing_extra_offset,
+            stage_number_extra_offset,
+        )
+        preamble.extend(strings)
         lilypond_file = _make_lilypond_file(
             first_segment,
             include_layout_ly,
-            includes_,
+            includes,
             midi,
             preamble,
             score,
         )
         _make_global_skips(
-            not append_phantom_measure,
+            append_phantom_measure,
             first_segment,
             score,
             time_signatures,
@@ -3098,14 +3089,15 @@ def interpret_commands(
         _label_moment_numbers(moment_markup, score)
     count = int(timer.elapsed_time)
     seconds = abjad.String("second").pluralize(count)
-    if not do_not_print_timing and environment != "docs":
+    if print_timing:
         print(f"Score initialization {count} {seconds} ...")
     with abjad.Timer() as timer:
         with abjad.ForbidUpdate(component=score, update_on_exit=True):
             command_count, segment_duration = _call_rhythm_commands(
                 attach_rhythm_annotation_spanners,
                 commands,
-                not append_phantom_measure,
+                # not append_phantom_measure,
+                append_phantom_measure,
                 environment,
                 manifests,
                 measure_count,
@@ -3120,7 +3112,7 @@ def interpret_commands(
     count = int(timer.elapsed_time)
     seconds = abjad.String("second").pluralize(count)
     commands_ = abjad.String("command").pluralize(command_count)
-    if not do_not_print_timing and environment != "docs":
+    if print_timing:
         message = f"Rhythm commands {count} {seconds}"
         message += f" [for {command_count} {commands_}] ..."
         print(message)
@@ -3153,7 +3145,7 @@ def interpret_commands(
         _apply_spacing(score, page_layout_profile, spacing)
     count = int(timer.elapsed_time)
     seconds = abjad.String("second").pluralize(count)
-    if not do_not_print_timing and environment != "docs":
+    if print_timing:
         print(f"After-rhythm methods {count} {seconds} ...")
     with abjad.Timer() as timer:
         with abjad.ForbidUpdate(component=score, update_on_exit=True):
@@ -3173,7 +3165,7 @@ def interpret_commands(
     count = int(timer.elapsed_time)
     seconds = abjad.String("second").pluralize(count)
     commands_ = abjad.String("command").pluralize(command_count)
-    if not do_not_print_timing and environment != "docs":
+    if print_timing:
         message = f"Nonrhythm commands {count} {seconds}"
         message += f" [for {command_count} {commands_}] ..."
         print(message)
@@ -3185,7 +3177,7 @@ def interpret_commands(
                 score,
             )
             cached_time_signatures = _remove_redundant_time_signatures(
-                not append_phantom_measure,
+                append_phantom_measure,
                 score,
             )
             result = _get_fermata_measure_numbers(
@@ -3293,14 +3285,14 @@ def interpret_commands(
         )
     count = int(timer.elapsed_time)
     seconds = abjad.String("second").pluralize(count)
-    if not do_not_print_timing and environment != "docs":
+    if print_timing:
         print(f"Postprocessing {count} {seconds} ...")
     with abjad.Timer() as timer:
         method = getattr(score, "_update_now")
         method(offsets_in_seconds=True)
     count = int(timer.elapsed_time)
     seconds = abjad.String("second").pluralize(count)
-    if not do_not_print_timing and environment != "docs":
+    if print_timing:
         print(f"Offsets-in-seconds update {count} {seconds} ...")
     with abjad.Timer() as timer:
         clock_time_duration = None
@@ -3349,15 +3341,27 @@ def interpret_commands(
             voice_metadata,
         )
         _style_phantom_measures(
-            not append_phantom_measure,
+            append_phantom_measure,
             score,
         )
     count = int(timer.elapsed_time)
     seconds = abjad.String("second").pluralize(count)
-    if not do_not_print_timing and environment != "docs":
+    if print_timing:
         print(f"Clock time markup {count} {seconds} ...")
     assert isinstance(lilypond_file, abjad.LilyPondFile)
     if return_metadata:
         return lilypond_file, metadata, persist
     else:
         return lilypond_file
+
+
+def segment_interpretation_defaults():
+    return {
+        "add_container_identifiers": True,
+        "attach_rhythm_annotation_spanners": True,
+        "check_persistent_indicators": True,
+        "include_layout_ly": True,
+        "includes": ["../../stylesheet.ily"],
+        "print_timing": True,
+        "treat_untreated_persistent_wrappers": True,
+    }

@@ -4,20 +4,10 @@ from . import scoping as _scoping
 from . import sequence as _sequence
 
 
-def segments(runtime=False):
-    if not runtime:
-        dictionary = {
-            "append_phantom_measure": True,
-        }
-    else:
-        dictionary = {
-            "add_container_identifiers": True,
-            "attach_rhythm_annotation_spanners": True,
-            "check_persistent_indicators": True,
-            "include_layout_ly": True,
-            "treat_untreated_persistent_wrappers": True,
-        }
-    return dictionary
+def segment_accumulation_defaults():
+    return {
+        "append_phantom_measure": True,
+    }
 
 
 def _get_voice_names(score_template):

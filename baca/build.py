@@ -908,7 +908,6 @@ def make_layout_ly(spacing):
         commands.voice_metadata,
         append_phantom_measure=commands.append_phantom_measure,
         add_container_identifiers=True,
-        do_not_print_timing=True,
         first_measure_number=first_measure_number,
         first_segment=True,
         page_layout_profile=page_layout_profile,

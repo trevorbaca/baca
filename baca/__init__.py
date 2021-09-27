@@ -6,7 +6,10 @@ from . import build
 from . import const
 from . import jobs
 from . import selectors
-from .accumulator import CommandAccumulator, segments
+from .accumulator import (
+    CommandAccumulator,
+    segment_accumulation_defaults,
+)
 from .array import *
 from .classes import *
 from .commandclasses import *
@@ -16,7 +19,7 @@ from .docs import global_context_string
 from .figures import *
 from .indicatorcommands import *
 from .indicators import *
-from .interpret import interpret_commands
+from .interpret import interpret_commands, segment_interpretation_defaults
 from .layout import *
 from .math import *
 from .memento import *
