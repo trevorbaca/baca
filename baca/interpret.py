@@ -966,12 +966,9 @@ def _check_doubled_dynamics(score):
             raise Exception(message)
 
 
-def _check_duplicate_part_assignments(dictionary, score_template):
+def _check_duplicate_part_assignments(dictionary, part_manifest):
     if not dictionary:
         return
-    if not score_template:
-        return
-    part_manifest = score_template.part_manifest
     if not part_manifest:
         return
     part_to_timespans = {}
@@ -2985,6 +2982,7 @@ def interpret_commands(
     moment_markup=None,
     move_global_context=False,
     page_layout_profile=None,
+    part_manifest=None,
     parts_metric_modulation_multiplier=None,
     persist=None,
     preamble=None,
@@ -3035,6 +3033,8 @@ def interpret_commands(
         "abjad.MetronomeMark": metronome_marks,
     }
     metadata = dict(metadata or {})
+    if hasattr(score_template, "part_manifest"):
+        part_manifest = score_template.part_manifest
     if parts_metric_modulation_multiplier is not None:
         assert isinstance(parts_metric_modulation_multiplier, tuple)
         assert len(parts_metric_modulation_multiplier) == 2
@@ -3261,7 +3261,7 @@ def interpret_commands(
                 _check_all_music_in_part_containers(score, score_template)
                 _check_duplicate_part_assignments(
                     container_to_part_assignment,
-                    score_template,
+                    part_manifest,
                 )
             _move_global_rests(
                 global_rests_in_every_staff,
