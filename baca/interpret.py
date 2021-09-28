@@ -223,7 +223,6 @@ def _attach_fermatas(
     always_make_global_rests,
     append_phantom_measure,
     score,
-    score_template,
     time_signatures,
 ):
     if not always_make_global_rests:
@@ -688,7 +687,6 @@ def _bracket_metric_modulation(metronome_mark, metric_modulation):
 def _bundle_runtime(
     manifests,
     previous_persist,
-    score_template,
     allows_instrument=None,
     offset_to_measure_number=None,
     voice_name=None,
@@ -702,7 +700,6 @@ def _bundle_runtime(
     offset_to_measure_number = offset_to_measure_number or {}
     runtime["offset_to_measure_number"] = offset_to_measure_number
     runtime["previous_segment_voice_metadata"] = previous_segment_voice_metadata
-    runtime["score_template"] = score_template
     return runtime
 
 
@@ -783,7 +780,6 @@ def _call_commands(
     manifests,
     previous_persist,
     score,
-    score_template,
     voice_metadata,
 ):
     command_count = 0
@@ -805,7 +801,6 @@ def _call_commands(
             manifests=manifests,
             offset_to_measure_number=offset_to_measure_number,
             previous_persist=previous_persist,
-            score_template=score_template,
             voice_name=voice_name,
         )
         try:
@@ -834,7 +829,6 @@ def _call_rhythm_commands(
     measure_count,
     previous_persist,
     score,
-    score_template,
     skips_instead_of_rests,
     time_signatures,
     voice_metadata,
@@ -843,7 +837,6 @@ def _call_rhythm_commands(
         always_make_global_rests,
         append_phantom_measure,
         score,
-        score_template,
         time_signatures,
     )
     command_count = 0
@@ -888,7 +881,6 @@ def _call_rhythm_commands(
                 allows_instrument=None,
                 manifests=manifests,
                 previous_persist=previous_persist,
-                score_template=score_template,
                 voice_name=voice.name,
             )
             selection = None
@@ -2207,14 +2199,6 @@ def _make_multimeasure_rest_container(
     return container
 
 
-def _make_score(indicator_defaults, score_template):
-    score = score_template()
-    for lilypond_type, annotation, indicator in indicator_defaults or ():
-        context = score[lilypond_type]
-        abjad.annotate(context, annotation, indicator)
-    return score
-
-
 def _memento_to_indicator(dictionary, memento):
     if memento.manifest is not None:
         if dictionary is None:
@@ -2550,7 +2534,6 @@ def _shift_measure_initial_clefs(
     offset_to_measure_number,
     previous_persist,
     score,
-    score_template,
 ):
     for staff in abjad.iterate.components(score, abjad.Staff):
         for leaf in abjad.iterate.leaves(staff):
@@ -2572,7 +2555,6 @@ def _shift_measure_initial_clefs(
                 manifests=manifests,
                 offset_to_measure_number=offset_to_measure_number,
                 previous_persist=previous_persist,
-                score_template=score_template,
             )
             suite(leaf, runtime=runtime)
 
@@ -2993,6 +2975,7 @@ def interpret_commands(
     print_timing=False,
     remove_tags=None,
     return_metadata=False,
+    score=None,
     segment_number=None,
     shift_measure_initial_clefs=False,
     skips_instead_of_rests=False,
@@ -3040,11 +3023,17 @@ def interpret_commands(
         assert all(isinstance(_, str) for _ in preamble), repr(preamble)
     previous_metadata = dict(previous_metadata or {})
     previous_persist = dict(previous_persist or {})
+    if score is not None:
+        assert isinstance(score, abjad.Score)
+        assert score_template is None
     assert transpose_score in (True, False)
     assert treat_untreated_persistent_wrappers in (True, False)
     with abjad.Timer() as timer:
         measure_count = len(time_signatures)
-        score = _make_score(indicator_defaults, score_template)
+        score = score or score_template()
+        for lilypond_type, annotation, indicator in indicator_defaults or ():
+            context = score[lilypond_type]
+            abjad.annotate(context, annotation, indicator)
         strings = _get_global_spanner_extra_offsets(
             clock_time_extra_offset,
             local_measure_number_extra_offset,
@@ -3092,7 +3081,6 @@ def interpret_commands(
                 measure_count,
                 previous_persist,
                 score,
-                score_template,
                 skips_instead_of_rests,
                 time_signatures,
                 voice_metadata,
@@ -3149,7 +3137,6 @@ def interpret_commands(
                 manifests,
                 previous_persist,
                 score,
-                score_template,
                 voice_metadata,
             )
     count = int(timer.elapsed_time)
@@ -3244,7 +3231,6 @@ def interpret_commands(
                     offset_to_measure_number,
                     previous_persist,
                     score,
-                    score_template,
                 )
             _deactivate_tags(deactivate, score)
             remove_tags = remove_tags or []

@@ -4,26 +4,6 @@ from . import scoping as _scoping
 from . import sequence as _sequence
 
 
-def segment_accumulation_defaults():
-    return {
-        "append_phantom_measure": True,
-    }
-
-
-def _get_voice_names(score_template):
-    voice_names = ["Global_Skips", "Global_Rests", "Timeline_Scope"]
-    score = score_template()
-    for voice in abjad.iterate.components(score, abjad.Voice):
-        if voice.name is not None:
-            voice_names.append(voice.name)
-            if "Music_Voice" in voice.name:
-                name = voice.name.replace("Music_Voice", "Rest_Voice")
-            else:
-                name = voice.name.replace("Voice", "Rest_Voice")
-            voice_names.append(name)
-    return tuple(voice_names)
-
-
 def _initialize_time_signatures(time_signatures):
     time_signatures = time_signatures or ()
     time_signatures_ = list(time_signatures)
@@ -149,6 +129,29 @@ def _unpack_scopes(scopes, abbreviations):
     return scopes_
 
 
+def get_voice_names(score_template):
+    if isinstance(score_template, abjad.Score):
+        score = score_template
+    else:
+        score = score_template()
+    voice_names = ["Global_Skips", "Global_Rests", "Timeline_Scope"]
+    for voice in abjad.iterate.components(score, abjad.Voice):
+        if voice.name is not None:
+            voice_names.append(voice.name)
+            if "Music_Voice" in voice.name:
+                name = voice.name.replace("Music_Voice", "Rest_Voice")
+            else:
+                name = voice.name.replace("Voice", "Rest_Voice")
+            voice_names.append(name)
+    return tuple(voice_names)
+
+
+def segment_accumulation_defaults():
+    return {
+        "append_phantom_measure": True,
+    }
+
+
 class CommandAccumulator:
     """
     Command accumulator.
@@ -180,6 +183,7 @@ class CommandAccumulator:
         skips_instead_of_rests=False,
         time_signatures=None,
         voice_abbreviations=None,
+        voice_names=None,
     ):
         self.functions = functions or ()
         assert append_phantom_measure in (True, False)
@@ -188,13 +192,12 @@ class CommandAccumulator:
         self.instruments = instruments
         self.margin_markups = margin_markups
         self.metronome_marks = metronome_marks
-        assert score_template is not None, repr(score_template)
         self.score_template = score_template
         self.skips_instead_of_rests = skips_instead_of_rests
         self.time_signatures = _initialize_time_signatures(time_signatures)
         self.voice_abbreviations = voice_abbreviations or {}
         self.voice_metadata = {}
-        self.voice_names = _get_voice_names(score_template)
+        self.voice_names = voice_names or get_voice_names(score_template)
 
     def __call__(self, scopes, *commands):
         """
