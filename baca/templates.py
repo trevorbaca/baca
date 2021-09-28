@@ -1,8 +1,6 @@
 """
 Templates.
 """
-import typing
-
 import abjad
 
 from . import const as _const
@@ -33,205 +31,6 @@ def assert_unique_context_names(score):
     for context in abjad.iterate.components(score, abjad.Context):
         if context.name in names:
             raise Exception(f"duplicate context name: {context.name!r}.")
-
-
-def make_global_context():
-    site = "abjad.ScoreTemplate._make_global_context()"
-    tag = abjad.Tag(site)
-    global_rests = abjad.Context(
-        lilypond_type="GlobalRests",
-        name="Global_Rests",
-        tag=tag,
-    )
-    global_skips = abjad.Context(
-        lilypond_type="GlobalSkips",
-        name="Global_Skips",
-        tag=tag,
-    )
-    global_context = abjad.Context(
-        [global_rests, global_skips],
-        lilypond_type="GlobalContext",
-        simultaneous=True,
-        name="Global_Context",
-        tag=tag,
-    )
-    return global_context
-
-
-class ScoreTemplate:
-    """
-    Score template.
-    """
-
-    ### CLASS VARIABLES ###
-
-    __slots__ = ("_voice_abbreviations",)
-
-    _always_make_global_rests = False
-
-    _do_not_require_margin_markup = False
-
-    _part_manifest = None
-
-    ### INITIALIZER ###
-
-    def __init__(self):
-        self._voice_abbreviations = {}
-
-    ### PRIVATE METHODS ###
-
-    def _attach_lilypond_tag(self, tag, context):
-        for tag_ in tag.split("."):
-            if not abjad.String(tag_).is_lilypond_identifier():
-                raise Exception(f"invalid LilyPond identifier: {tag_!r}.")
-            part_names = []
-            if self.part_manifest is not None:
-                part_names = [_.name for _ in self.part_manifest.parts]
-            if part_names and tag_ not in part_names:
-                raise Exception(f"not listed in parts manifest: {tag_!r}.")
-        literal = abjad.LilyPondLiteral(fr"\tag {tag}", "before")
-        site = "baca.ScoreTemplate._attach_liypond_tag()"
-        tag = abjad.Tag(site)
-        abjad.attach(literal, context, tag=tag)
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def always_make_global_rests(self):
-        """
-        Is true when score template always makes global rests.
-        """
-        return self._always_make_global_rests
-
-    @property
-    def do_not_require_margin_markup(self):
-        """
-        Is true when score template does not require margin markup.
-
-        Conventionally, solos do not require margin markup.
-        """
-        return self._do_not_require_margin_markup
-
-    @property
-    def part_manifest(self):
-        """
-        Gets part manifest.
-        """
-        return self._part_manifest
-
-    @property
-    def voice_abbreviations(self):
-        """
-        Gets voice abbreviations.
-        """
-        return self._voice_abbreviations
-
-    ### PUBLIC METHODS ###
-
-    # TODO: implement only on classes that need it
-    def allows_instrument(self, staff_name, instrument):
-        """
-        Is true when ``staff_name`` allows ``instrument``.
-
-        To be implemented by concrete score template classes.
-        """
-        return True
-
-    def group_families(self, *families) -> typing.List[abjad.Context]:
-        """
-        Groups ``families`` only when more than one family is passed in.
-        """
-        families_ = []
-        for family in families:
-            if family is not None:
-                assert isinstance(family, tuple), repr(family)
-                if any(_ for _ in family[1:] if _ is not None):
-                    families_.append(family)
-        families = tuple(families_)
-        contexts = []
-        if len(families) == 0:
-            pass
-        elif len(families) == 1:
-            family = families[0]
-            contexts.extend([_ for _ in family[1:] if _ is not None])
-        else:
-            for family in families:
-                if not isinstance(family, tuple):
-                    assert isinstance(family, abjad.Context)
-                    contexts.append(family)
-                    continue
-                square_staff_group = self.make_square_staff_group(*family)
-                assert square_staff_group is not None
-                contexts.append(square_staff_group)
-        return contexts
-
-    def make_music_context(self, *contexts) -> abjad.Context:
-        """
-        Makes music context.
-        """
-        contexts = tuple(_ for _ in contexts if _ is not None)
-        site = "baca.ScoreTemplate.make_music_context()"
-        tag = abjad.Tag(site)
-        return abjad.Context(
-            contexts,
-            lilypond_type="MusicContext",
-            simultaneous=True,
-            name="Music_Context",
-            tag=tag,
-        )
-
-    def make_piano_staff(
-        self, stem: str, *contexts
-    ) -> typing.Optional[abjad.StaffGroup]:
-        """
-        Makes piano staff.
-        """
-        if not isinstance(stem, str):
-            raise Exception(f"stem must be string: {stem!r}.")
-        contexts = tuple(_ for _ in contexts if _ is not None)
-        if contexts:
-            return abjad.StaffGroup(contexts, name=f"{stem}_Piano_Staff")
-        else:
-            return None
-
-    def make_square_staff_group(
-        self, stem: str, *contexts
-    ) -> typing.Optional[typing.Union[abjad.Staff, abjad.StaffGroup]]:
-        """
-        Makes square staff group.
-        """
-        if not isinstance(stem, str):
-            raise Exception(f"stem must be string: {stem!r}.")
-        site = "baca.ScoreTemplate.make_square_staff_group()"
-        tag = abjad.Tag(site)
-        contexts = tuple(_ for _ in contexts if _ is not None)
-        result = None
-        if len(contexts) == 1:
-            prototype = (abjad.Staff, abjad.StaffGroup)
-            assert isinstance(contexts[0], prototype), repr(contexts[0])
-            result = contexts[0]
-        elif 1 < len(contexts):
-            name = f"{stem}_Square_Staff_Group"
-            staff_group = abjad.StaffGroup(contexts, name=name, tag=tag)
-            abjad.setting(staff_group).system_start_delimiter = "#'SystemStartSquare"
-            result = staff_group
-        return result
-
-    def make_staff_group(
-        self, stem: str, *contexts
-    ) -> typing.Optional[abjad.StaffGroup]:
-        """
-        Makes staff group.
-        """
-        if not isinstance(stem, str):
-            raise Exception(f"stem must be string: {stem!r}.")
-        site = "baca.ScoreTemplate.make_staff_group()"
-        tag = abjad.Tag(site)
-        contexts = tuple(_ for _ in contexts if _ is not None)
-        if contexts:
-            return abjad.StaffGroup(contexts, name=f"{stem}_Staff_Group", tag=tag)
-        else:
-            return None
 
 
 def attach_defaults(argument):
@@ -351,7 +150,7 @@ def attach_lilypond_tag(tag, context, *, part_manifest=None):
     abjad.attach(literal, context, tag=tag)
 
 
-def group_families(*families) -> typing.List[abjad.Context]:
+def group_families(*families):
     """
     Groups ``families`` only when more than one family is passed in.
     """
@@ -598,7 +397,30 @@ def make_empty_score_maker(*counts):
     return closure
 
 
-def make_music_context(*contexts) -> abjad.Context:
+def make_global_context():
+    site = "abjad.ScoreTemplate._make_global_context()"
+    tag = abjad.Tag(site)
+    global_rests = abjad.Context(
+        lilypond_type="GlobalRests",
+        name="Global_Rests",
+        tag=tag,
+    )
+    global_skips = abjad.Context(
+        lilypond_type="GlobalSkips",
+        name="Global_Skips",
+        tag=tag,
+    )
+    global_context = abjad.Context(
+        [global_rests, global_skips],
+        lilypond_type="GlobalContext",
+        simultaneous=True,
+        name="Global_Context",
+        tag=tag,
+    )
+    return global_context
+
+
+def make_music_context(*contexts):
     """
     Makes music context.
     """
@@ -614,7 +436,7 @@ def make_music_context(*contexts) -> abjad.Context:
     )
 
 
-def make_piano_staff(stem: str, *contexts) -> typing.Optional[abjad.StaffGroup]:
+def make_piano_staff(stem, *contexts):
     """
     Makes piano staff.
     """
@@ -627,9 +449,7 @@ def make_piano_staff(stem: str, *contexts) -> typing.Optional[abjad.StaffGroup]:
         return None
 
 
-def make_square_staff_group(
-    stem: str, *contexts
-) -> typing.Optional[typing.Union[abjad.Staff, abjad.StaffGroup]]:
+def make_square_staff_group(stem, *contexts):
     """
     Makes square staff group.
     """
@@ -651,7 +471,7 @@ def make_square_staff_group(
     return result
 
 
-def make_staff_group(stem: str, *contexts) -> typing.Optional[abjad.StaffGroup]:
+def make_staff_group(stem, *contexts):
     """
     Makes staff group.
     """

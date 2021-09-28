@@ -3318,15 +3318,15 @@ class FigureAccumulator:
         assert isinstance(selection, abjad.Selection), repr(selection)
         return selection
 
-    def populate_commands(self, segment_maker) -> None:
+    def populate_commands(self, command_accumulator):
         """
-        Populates ``segment_maker``.
+        Populates ``command_accumulator``.
         """
         for voice_name in sorted(self._floating_selections):
             selection = self.assemble(voice_name)
             if not selection:
                 continue
-            segment_maker(
+            command_accumulator(
                 (voice_name, 1),
                 _rhythmcommands.music(
                     selection, do_not_check_total_duration=True, tag=None

@@ -122,169 +122,7 @@ def _get_preamble_time_signatures(path):
     return None
 
 
-def _make_annotation_jobs(directory, undo=False):
-    def _annotation_spanners(tags):
-        tags_ = (
-            baca.tags.MATERIAL_ANNOTATION_SPANNER,
-            baca.tags.PITCH_ANNOTATION_SPANNER,
-            baca.tags.RHYTHM_ANNOTATION_SPANNER,
-        )
-        return bool(set(tags) & set(tags_))
-
-    annotation_spanners = baca.jobs.show_tag(
-        directory,
-        "annotation spanners",
-        match=_annotation_spanners,
-        undo=undo,
-    )
-
-    def _spacing(tags):
-        tags_ = (
-            baca.tags.SPACING,
-            baca.tags.SPACING_OVERRIDE,
-        )
-        return bool(set(tags) & set(tags_))
-
-    spacing = baca.jobs.show_tag(directory, "spacing", match=_spacing, undo=undo)
-
-    jobs = [
-        annotation_spanners,
-        baca.jobs.show_tag(directory, baca.tags.CLOCK_TIME, undo=undo),
-        baca.jobs.show_tag(directory, baca.tags.FIGURE_NAME, undo=undo),
-        baca.jobs.show_tag(directory, baca.tags.INVISIBLE_MUSIC_COMMAND, undo=not undo),
-        baca.jobs.show_tag(directory, baca.tags.INVISIBLE_MUSIC_COLORING, undo=undo),
-        baca.jobs.show_tag(directory, baca.tags.LOCAL_MEASURE_NUMBER, undo=undo),
-        baca.jobs.show_tag(directory, baca.tags.MEASURE_NUMBER, undo=undo),
-        baca.jobs.show_tag(directory, baca.tags.MOCK_COLORING, undo=undo),
-        baca.jobs.show_music_annotations(directory, undo=undo),
-        baca.jobs.show_tag(directory, baca.tags.NOT_YET_PITCHED_COLORING, undo=undo),
-        baca.jobs.show_tag(directory, baca.tags.RHYTHM_ANNOTATION_SPANNER, undo=undo),
-        spacing,
-        baca.jobs.show_tag(directory, baca.tags.STAGE_NUMBER, undo=undo),
-    ]
-
-    return jobs
-
-
-def _make_segment_clicktrack(commands):
-    segment_directory = pathlib.Path(os.getcwd())
-    print(f"Making clicktrack for segment {segment_directory.name} ...")
-    result = _run_segment_maker(commands, midi=True)
-    metadata, persist, lilypond_file, runtime = result
-    print("Configuring LilyPond file ...")
-    time_signatures = commands.time_signatures
-    global_skips = lilypond_file["Global_Skips"]
-    skips = abjad.select(global_skips).leaves()[:-1]
-    metronome_marks = []
-    for skip in skips:
-        metronome_mark = abjad.get.effective(skip, abjad.MetronomeMark)
-        metronome_marks.append(metronome_mark)
-    staff = abjad.Staff()
-    abjad.setting(staff).midiInstrument = '#"drums"'
-    score = abjad.Score([staff], name="Score", simultaneous=False)
-    fermata_measure_numbers = commands.fermata_measure_empty_overrides or []
-    for i, time_signature in enumerate(time_signatures):
-        measure_number = i + 1
-        if measure_number in fermata_measure_numbers:
-            metronome_mark = abjad.MetronomeMark((1, 4), 60)
-            time_signature = abjad.TimeSignature((3, 4))
-            notes = [abjad.Rest("r2.")]
-        else:
-            metronome_mark = metronome_marks[i]
-            units_per_minute = round(metronome_mark.units_per_minute)
-            metronome_mark = abjad.new(
-                metronome_mark,
-                hide=False,
-                units_per_minute=units_per_minute,
-            )
-            time_signature = abjad.new(time_signature)
-            numerator, denominator = time_signature.pair
-            notes = []
-            for _ in range(numerator):
-                note = abjad.Note.from_pitch_and_duration(-18, (1, denominator))
-                notes.append(note)
-            notes[0].written_pitch = -23
-        abjad.attach(time_signature, notes[0])
-        abjad.attach(metronome_mark, notes[0])
-        measure = abjad.Container(notes)
-        staff.append(measure)
-    score_block = abjad.Block(name="score")
-    score_block.items.append(score)
-    midi_block = abjad.Block(name="midi")
-    score_block.items.append(midi_block)
-    lilypond_file = abjad.LilyPondFile([score_block])
-    clicktrack_file_name = "clicktrack.midi"
-    print("Persisting LilyPond file ...")
-    with abjad.Timer() as timer:
-        abjad.persist.as_midi(lilypond_file, clicktrack_file_name, remove_ly=True)
-    count = int(timer.elapsed_time)
-    counter = abjad.String("second").pluralize(count)
-    print(f"LilyPond runtime {count} {counter} ...")
-    clicktrack_path = segment_directory / clicktrack_file_name
-    if clicktrack_path.is_file():
-        print(f"Found {baca.path.trim(clicktrack_path)} ...")
-    else:
-        print(f"Could not make {baca.path.trim(clicktrack_path)} ...")
-
-
-def _make_segment_midi(commands):
-    segment_directory = pathlib.Path(os.getcwd())
-    print(f"Making MIDI for segment {segment_directory.name} ...")
-    music_midi = segment_directory / "music.midi"
-    if music_midi.exists():
-        print(f"Removing {baca.path.trim(music_midi)} ...")
-        music_midi.unlink()
-    result = _run_segment_maker(commands, midi=True)
-    metadata, persist, lilypond_file, runtime = result
-    with abjad.Timer() as timer:
-        tmp_midi = segment_directory / "tmp.midi"
-        abjad.persist.as_midi(lilypond_file, tmp_midi)
-        if tmp_midi.is_file():
-            shutil.move(tmp_midi, music_midi)
-        tmp_ly = tmp_midi.with_suffix(".ly")
-        if tmp_ly.exists():
-            tmp_ly.unlink()
-    count = int(timer.elapsed_time)
-    counter = abjad.String("second").pluralize(count)
-    print(f"LilyPond runtime {count} {counter} ...")
-    if music_midi.is_file():
-        print(f"Found {baca.path.trim(music_midi)} ...")
-    else:
-        print(f"Could not produce {baca.path.trim(music_midi)} ...")
-
-
-def _remove_lilypond_warnings(
-    path,
-    crescendo_too_small=None,
-    decrescendo_too_small=None,
-    overwriting_glissando=None,
-):
-    """
-    Removes LilyPond warnings from ``.log``.
-    """
-    assert path.name.endswith(".log"), repr(path)
-    lines = []
-    skip = 0
-    with open(path) as pointer:
-        for line in pointer.readlines():
-            if 0 < skip:
-                skip -= 1
-                continue
-            if crescendo_too_small and "crescendo too small" in line:
-                skip = 2
-                continue
-            if decrescendo_too_small and "decrescendo too small" in line:
-                skip = 2
-                continue
-            if overwriting_glissando and "overwriting glissando" in line:
-                skip = 1
-                continue
-            lines.append(line)
-    text = "".join(lines)
-    path.write_text(text)
-
-
-def _run_segment_maker(
+def _interpret_commands(
     commands,
     first_segment=False,
     interpreter_function=None,
@@ -354,12 +192,174 @@ def _run_segment_maker(
             return_metadata=True,
             segment_number=segment_directory.name,
         )
-    segment_maker_runtime = int(timer.elapsed_time)
-    count = segment_maker_runtime
+    command_interpretation_time = int(timer.elapsed_time)
+    count = command_interpretation_time
     counter = abjad.String("second").pluralize(count)
     print(f"Command interpretation time {count} {counter} ...")
     runtime = (count, counter)
     return metadata, persist, lilypond_file, runtime
+
+
+def _make_annotation_jobs(directory, undo=False):
+    def _annotation_spanners(tags):
+        tags_ = (
+            baca.tags.MATERIAL_ANNOTATION_SPANNER,
+            baca.tags.PITCH_ANNOTATION_SPANNER,
+            baca.tags.RHYTHM_ANNOTATION_SPANNER,
+        )
+        return bool(set(tags) & set(tags_))
+
+    annotation_spanners = baca.jobs.show_tag(
+        directory,
+        "annotation spanners",
+        match=_annotation_spanners,
+        undo=undo,
+    )
+
+    def _spacing(tags):
+        tags_ = (
+            baca.tags.SPACING,
+            baca.tags.SPACING_OVERRIDE,
+        )
+        return bool(set(tags) & set(tags_))
+
+    spacing = baca.jobs.show_tag(directory, "spacing", match=_spacing, undo=undo)
+
+    jobs = [
+        annotation_spanners,
+        baca.jobs.show_tag(directory, baca.tags.CLOCK_TIME, undo=undo),
+        baca.jobs.show_tag(directory, baca.tags.FIGURE_NAME, undo=undo),
+        baca.jobs.show_tag(directory, baca.tags.INVISIBLE_MUSIC_COMMAND, undo=not undo),
+        baca.jobs.show_tag(directory, baca.tags.INVISIBLE_MUSIC_COLORING, undo=undo),
+        baca.jobs.show_tag(directory, baca.tags.LOCAL_MEASURE_NUMBER, undo=undo),
+        baca.jobs.show_tag(directory, baca.tags.MEASURE_NUMBER, undo=undo),
+        baca.jobs.show_tag(directory, baca.tags.MOCK_COLORING, undo=undo),
+        baca.jobs.show_music_annotations(directory, undo=undo),
+        baca.jobs.show_tag(directory, baca.tags.NOT_YET_PITCHED_COLORING, undo=undo),
+        baca.jobs.show_tag(directory, baca.tags.RHYTHM_ANNOTATION_SPANNER, undo=undo),
+        spacing,
+        baca.jobs.show_tag(directory, baca.tags.STAGE_NUMBER, undo=undo),
+    ]
+
+    return jobs
+
+
+def _make_segment_clicktrack(commands):
+    segment_directory = pathlib.Path(os.getcwd())
+    print(f"Making clicktrack for segment {segment_directory.name} ...")
+    result = _interpret_commands(commands, midi=True)
+    metadata, persist, lilypond_file, runtime = result
+    print("Configuring LilyPond file ...")
+    time_signatures = commands.time_signatures
+    global_skips = lilypond_file["Global_Skips"]
+    skips = abjad.select(global_skips).leaves()[:-1]
+    metronome_marks = []
+    for skip in skips:
+        metronome_mark = abjad.get.effective(skip, abjad.MetronomeMark)
+        metronome_marks.append(metronome_mark)
+    staff = abjad.Staff()
+    abjad.setting(staff).midiInstrument = '#"drums"'
+    score = abjad.Score([staff], name="Score", simultaneous=False)
+    fermata_measure_numbers = commands.fermata_measure_empty_overrides or []
+    for i, time_signature in enumerate(time_signatures):
+        measure_number = i + 1
+        if measure_number in fermata_measure_numbers:
+            metronome_mark = abjad.MetronomeMark((1, 4), 60)
+            time_signature = abjad.TimeSignature((3, 4))
+            notes = [abjad.Rest("r2.")]
+        else:
+            metronome_mark = metronome_marks[i]
+            units_per_minute = round(metronome_mark.units_per_minute)
+            metronome_mark = abjad.new(
+                metronome_mark,
+                hide=False,
+                units_per_minute=units_per_minute,
+            )
+            time_signature = abjad.new(time_signature)
+            numerator, denominator = time_signature.pair
+            notes = []
+            for _ in range(numerator):
+                note = abjad.Note.from_pitch_and_duration(-18, (1, denominator))
+                notes.append(note)
+            notes[0].written_pitch = -23
+        abjad.attach(time_signature, notes[0])
+        abjad.attach(metronome_mark, notes[0])
+        measure = abjad.Container(notes)
+        staff.append(measure)
+    score_block = abjad.Block(name="score")
+    score_block.items.append(score)
+    midi_block = abjad.Block(name="midi")
+    score_block.items.append(midi_block)
+    lilypond_file = abjad.LilyPondFile([score_block])
+    clicktrack_file_name = "clicktrack.midi"
+    print("Persisting LilyPond file ...")
+    with abjad.Timer() as timer:
+        abjad.persist.as_midi(lilypond_file, clicktrack_file_name, remove_ly=True)
+    count = int(timer.elapsed_time)
+    counter = abjad.String("second").pluralize(count)
+    print(f"LilyPond runtime {count} {counter} ...")
+    clicktrack_path = segment_directory / clicktrack_file_name
+    if clicktrack_path.is_file():
+        print(f"Found {baca.path.trim(clicktrack_path)} ...")
+    else:
+        print(f"Could not make {baca.path.trim(clicktrack_path)} ...")
+
+
+def _make_segment_midi(commands):
+    segment_directory = pathlib.Path(os.getcwd())
+    print(f"Making MIDI for segment {segment_directory.name} ...")
+    music_midi = segment_directory / "music.midi"
+    if music_midi.exists():
+        print(f"Removing {baca.path.trim(music_midi)} ...")
+        music_midi.unlink()
+    result = _interpret_commands(commands, midi=True)
+    metadata, persist, lilypond_file, runtime = result
+    with abjad.Timer() as timer:
+        tmp_midi = segment_directory / "tmp.midi"
+        abjad.persist.as_midi(lilypond_file, tmp_midi)
+        if tmp_midi.is_file():
+            shutil.move(tmp_midi, music_midi)
+        tmp_ly = tmp_midi.with_suffix(".ly")
+        if tmp_ly.exists():
+            tmp_ly.unlink()
+    count = int(timer.elapsed_time)
+    counter = abjad.String("second").pluralize(count)
+    print(f"LilyPond runtime {count} {counter} ...")
+    if music_midi.is_file():
+        print(f"Found {baca.path.trim(music_midi)} ...")
+    else:
+        print(f"Could not produce {baca.path.trim(music_midi)} ...")
+
+
+def _remove_lilypond_warnings(
+    path,
+    crescendo_too_small=None,
+    decrescendo_too_small=None,
+    overwriting_glissando=None,
+):
+    """
+    Removes LilyPond warnings from ``.log``.
+    """
+    assert path.name.endswith(".log"), repr(path)
+    lines = []
+    skip = 0
+    with open(path) as pointer:
+        for line in pointer.readlines():
+            if 0 < skip:
+                skip -= 1
+                continue
+            if crescendo_too_small and "crescendo too small" in line:
+                skip = 2
+                continue
+            if decrescendo_too_small and "decrescendo too small" in line:
+                skip = 2
+                continue
+            if overwriting_glissando and "overwriting glissando" in line:
+                skip = 1
+                continue
+            lines.append(line)
+    text = "".join(lines)
+    path.write_text(text)
 
 
 def _trim_music_ly(ly):
@@ -1016,7 +1016,7 @@ def make_segment_pdf(
     layout_py = segment_directory / "layout.py"
     if "--no-layout" not in sys.argv[1:] and layout_py.is_file():
         os.system(f"python {layout_py}")
-    result = _run_segment_maker(
+    result = _interpret_commands(
         commands,
         first_segment=first_segment,
         interpreter_function=interpreter_function,
