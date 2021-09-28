@@ -1531,36 +1531,6 @@ def get_part_identifier(path):
     return None
 
 
-def get_part_manifest(contents_directory):
-    """
-    Gets part manifest from ``contents_directory``.
-    """
-    assert contents_directory.name == contents_directory.parent.name
-    score_template = _import_score_template(contents_directory)
-    score_template = score_template()
-    part_manifest = score_template.part_manifest
-    return part_manifest
-
-
-def part_directory_to_part(part_directory):
-    """
-    Changes part build directory to part.
-    """
-    assert part_directory.parent.name.endswith("-parts"), repr(part_directory)
-    words = part_directory.name.split("-")
-    contents_directory = _path.get_contents_directory(part_directory)
-    part_manifest = get_part_manifest(contents_directory)
-    if not part_manifest:
-        raise Exception(f"no part manifest: {part_directory}.")
-    assert isinstance(part_manifest, PartManifest), repr(part_manifest)
-    words = [abjad.String(_).capitalize_start() for _ in words]
-    part_name = "".join(words)
-    for part in part_manifest:
-        if abjad.String(part.name).to_upper_camel_case() == part_name:
-            return part
-    raise Exception(f"can not find {part_name!r} in part manifest.")
-
-
 def part_to_identifiers(path, part, container_to_part_assignment):
     """
     Changes ``part`` to (part container) identifiers (using

@@ -203,14 +203,7 @@ class CommandAccumulator:
         classes = (list, _scoping.Suite)
         commands_ = _sequence.Sequence(commands).flatten(classes=classes, depth=-1)
         commands = tuple(commands_)
-        if self.voice_abbreviations:
-            abbreviations = self.voice_abbreviations
-        elif self.score_template is not None and hasattr(
-            self.score_template, "voice_abbreviations"
-        ):
-            abbreviations = self.score_template.voice_abbreviations
-        else:
-            abbreviations = {}
+        abbreviations = self.voice_abbreviations
         assert isinstance(abbreviations, dict), repr(abbreviations)
         scopes_ = _unpack_scopes(scopes, abbreviations)
         scope_type = (_scoping.Scope, _scoping.TimelineScope)

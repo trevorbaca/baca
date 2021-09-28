@@ -3011,10 +3011,6 @@ def interpret_commands(
         assert all(isinstance(_, abjad.Tag) for _ in activate)
     assert all_music_in_part_containers in (True, False)
     assert allow_empty_selections in (True, False)
-    if hasattr(score_template, "allows_instrument"):
-        allows_instrument = score_template.allows_instrument
-    if hasattr(score_template, "always_make_global_rests"):
-        always_make_global_rests = score_template.always_make_global_rests
     if clock_time_extra_offset not in (False, None):
         assert isinstance(clock_time_extra_offset, tuple)
         assert len(clock_time_extra_offset) == 2
@@ -3024,16 +3020,10 @@ def interpret_commands(
     assert check_wellformedness in (True, False)
     if deactivate is not None:
         assert all(isinstance(_, abjad.Tag) for _ in deactivate)
-    if hasattr(score_template, "do_not_require_margin_markup"):
-        do_not_require_margin_markup = score_template.do_not_require_margin_markup
     assert do_not_require_margin_markup in (True, False)
     assert final_segment in (True, False)
     assert first_segment in (True, False)
     assert force_nonnatural_accidentals in (True, False)
-    if hasattr(score_template, "_global_rests_in_every_staff"):
-        global_rests_in_every_staff = score_template._global_rests_in_every_staff
-    if hasattr(score_template, "_global_rests_in_topmost_staff"):
-        global_rests_in_topmost_staff = score_template._global_rests_in_topmost_staff
     includes = list(includes or [])
     manifests = {
         "abjad.Instrument": instruments,
@@ -3041,8 +3031,6 @@ def interpret_commands(
         "abjad.MetronomeMark": metronome_marks,
     }
     metadata = dict(metadata or {})
-    if hasattr(score_template, "part_manifest"):
-        part_manifest = score_template.part_manifest
     if parts_metric_modulation_multiplier is not None:
         assert isinstance(parts_metric_modulation_multiplier, tuple)
         assert len(parts_metric_modulation_multiplier) == 2
