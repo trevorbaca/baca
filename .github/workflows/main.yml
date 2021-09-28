@@ -2,9 +2,9 @@ name: baca
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 env:
   MYPYPATH: /tmp/abjad:/tmp/abjad-ext-rmakers

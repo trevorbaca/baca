@@ -220,14 +220,12 @@ def _assert_nonoverlapping_rhythms(rhythms, voice):
 
 
 def _attach_fermatas(
+    always_make_global_rests,
     append_phantom_measure,
     score,
     score_template,
     time_signatures,
 ):
-    always_make_global_rests = getattr(
-        score_template, "always_make_global_rests", False
-    )
     if not always_make_global_rests:
         del score["Global_Rests"]
         return
@@ -823,6 +821,7 @@ def _call_commands(
 
 
 def _call_rhythm_commands(
+    always_make_global_rests,
     attach_rhythm_annotation_spanners,
     commands,
     append_phantom_measure,
@@ -836,6 +835,7 @@ def _call_rhythm_commands(
     voice_metadata,
 ):
     _attach_fermatas(
+        always_make_global_rests,
         append_phantom_measure,
         score,
         score_template,
@@ -994,15 +994,24 @@ def _check_duplicate_part_assignments(dictionary, score_template):
 
 
 def _check_persistent_indicators(score, score_template):
+    do_not_require_margin_markup = getattr(
+        score_template,
+        "do_not_require_margin_markup",
+        False,
+    )
     indicator = _const.SOUNDS_DURING_SEGMENT
     for voice in abjad.iterate.components(score, abjad.Voice):
         if not abjad.get.has_indicator(voice, indicator):
             continue
         for i, leaf in enumerate(abjad.iterate.leaves(voice)):
-            _check_persistent_indicators_for_leaf(score_template, voice.name, leaf, i)
+            _check_persistent_indicators_for_leaf(
+                do_not_require_margin_markup, leaf, i, score_template, voice.name
+            )
 
 
-def _check_persistent_indicators_for_leaf(score_template, voice, leaf, i):
+def _check_persistent_indicators_for_leaf(
+    do_not_require_margin_markup, leaf, i, score_template, voice_name
+):
     prototype = (
         _indicators.Accelerando,
         abjad.MetronomeMark,
@@ -1010,20 +1019,20 @@ def _check_persistent_indicators_for_leaf(score_template, voice, leaf, i):
     )
     mark = abjad.get.effective(leaf, prototype)
     if mark is None:
-        message = f"{voice} leaf {i} ({leaf!s}) missing metronome mark."
+        message = f"{voice_name} leaf {i} ({leaf!s}) missing metronome mark."
         raise Exception(message)
     instrument = abjad.get.effective(leaf, abjad.Instrument)
     if instrument is None:
-        message = f"{voice} leaf {i} ({leaf!s}) missing instrument."
+        message = f"{voice_name} leaf {i} ({leaf!s}) missing instrument."
         raise Exception(message)
-    if not score_template.do_not_require_margin_markup:
+    if not do_not_require_margin_markup:
         markup = abjad.get.effective(leaf, abjad.MarginMarkup)
         if markup is None:
-            message = f"{voice} leaf {i} ({leaf!s}) missing margin markup."
+            message = f"{voice_name} leaf {i} ({leaf!s}) missing margin markup."
             raise Exception(message)
     clef = abjad.get.effective(leaf, abjad.Clef)
     if clef is None:
-        raise Exception(f"{voice} leaf {i} ({leaf!s}) missing clef.")
+        raise Exception(f"{voice_name} leaf {i} ({leaf!s}) missing clef.")
 
 
 def _clean_up_laissez_vibrer_tie_direction(score):
@@ -2259,25 +2268,25 @@ def _move_global_context(score):
         score.simultaneous = False
 
 
-def _move_global_rests(score, score_template):
-    topmost = "_global_rests_in_topmost_staff"
-    every = "_global_rests_in_every_staff"
-    if not getattr(score_template, topmost, None) and not getattr(
-        score_template, every, None
-    ):
+def _move_global_rests(
+    global_rests_in_every_staff,
+    global_rests_in_topmost_staff,
+    score,
+):
+    if not global_rests_in_topmost_staff and not global_rests_in_every_staff:
         return
     if "Global_Rests" not in score:
         return
     global_rests = score["Global_Rests"]
     score["Global_Context"].remove(global_rests)
     music_context = score["Music_Context"]
-    if getattr(score_template, topmost, None) is True:
+    if global_rests_in_topmost_staff is True:
         for staff in abjad.iterate.components(music_context, abjad.Staff):
             break
         staff.simultaneous = True
         staff.insert(0, global_rests)
         return
-    if getattr(score_template, every, None) is True:
+    if global_rests_in_every_staff is True:
         topmost_staff = True
         tag = global_rests.tag or abjad.Tag()
         for staff in abjad.iterate.components(music_context, abjad.Staff):
@@ -2940,6 +2949,7 @@ def interpret_commands(
     activate=None,
     add_container_identifiers=False,
     allow_empty_selections=False,
+    always_make_global_rests=False,
     append_phantom_measure=False,
     attach_nonfirst_empty_start_bar=False,
     attach_rhythm_annotation_spanners=False,
@@ -2958,6 +2968,8 @@ def interpret_commands(
     first_measure_number=None,
     first_segment=False,
     force_nonnatural_accidentals=False,
+    global_rests_in_every_staff=False,
+    global_rests_in_topmost_staff=False,
     include_layout_ly=False,
     includes=None,
     indicator_defaults=None,
@@ -2998,6 +3010,8 @@ def interpret_commands(
     if activate is not None:
         assert all(isinstance(_, abjad.Tag) for _ in activate)
     assert allow_empty_selections in (True, False)
+    if hasattr(score_template, "always_make_global_rests"):
+        always_make_global_rests = score_template.always_make_global_rests
     if clock_time_extra_offset not in (False, None):
         assert isinstance(clock_time_extra_offset, tuple)
         assert len(clock_time_extra_offset) == 2
@@ -3010,6 +3024,10 @@ def interpret_commands(
     assert final_segment in (True, False)
     assert first_segment in (True, False)
     assert force_nonnatural_accidentals in (True, False)
+    if hasattr(score_template, "_global_rests_in_every_staff"):
+        global_rests_in_every_staff = score_template._global_rests_in_every_staff
+    if hasattr(score_template, "_global_rests_in_topmost_staff"):
+        global_rests_in_topmost_staff = score_template._global_rests_in_topmost_staff
     includes = list(includes or [])
     manifests = {
         "abjad.Instrument": instruments,
@@ -3070,6 +3088,7 @@ def interpret_commands(
     with abjad.Timer() as timer:
         with abjad.ForbidUpdate(component=score, update_on_exit=True):
             command_count, segment_duration = _call_rhythm_commands(
+                always_make_global_rests,
                 attach_rhythm_annotation_spanners,
                 commands,
                 append_phantom_measure,
@@ -3244,7 +3263,11 @@ def interpret_commands(
                     container_to_part_assignment,
                     score_template,
                 )
-            _move_global_rests(score, score_template)
+            _move_global_rests(
+                global_rests_in_every_staff,
+                global_rests_in_topmost_staff,
+                score,
+            )
         # mutates offsets:
         if move_global_context:
             _move_global_context(score)

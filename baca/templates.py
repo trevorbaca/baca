@@ -343,6 +343,24 @@ def attach_defaults(argument):
     return wrappers
 
 
+def attach_lilypond_tag(tag, context, *, part_manifest=None):
+    """
+    Attaches LilyPond tag.
+    """
+    for tag_ in tag.split("."):
+        if not abjad.String(tag_).is_lilypond_identifier():
+            raise Exception(f"invalid LilyPond identifier: {tag_!r}.")
+        part_names = []
+        if part_manifest is not None:
+            part_names = [_.name for _ in part_manifest.parts]
+        if part_names and tag_ not in part_names:
+            raise Exception(f"not listed in parts manifest: {tag_!r}.")
+    literal = abjad.LilyPondLiteral(fr"\tag {tag}", "before")
+    site = "baca.ScoreTemplate._attach_liypond_tag()"
+    tag = abjad.Tag(site)
+    abjad.attach(literal, context, tag=tag)
+
+
 def make_empty_score(*counts):
     r"""
     Makes empty score for doc examples.

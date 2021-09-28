@@ -151,7 +151,7 @@ def _unpack_scopes(scopes, abbreviations):
 
 class CommandAccumulator:
     """
-    Segment-maker.
+    Command accumulator.
     """
 
     __slots__ = (
@@ -164,6 +164,7 @@ class CommandAccumulator:
         "score_template",
         "skips_instead_of_rests",
         "time_signatures",
+        "voice_abbreviations",
         "voice_metadata",
         "voice_names",
     )
@@ -178,6 +179,7 @@ class CommandAccumulator:
         score_template=None,
         skips_instead_of_rests=False,
         time_signatures=None,
+        voice_abbreviations=None,
     ):
         self.functions = functions or ()
         assert append_phantom_measure in (True, False)
@@ -190,23 +192,26 @@ class CommandAccumulator:
         self.score_template = score_template
         self.skips_instead_of_rests = skips_instead_of_rests
         self.time_signatures = _initialize_time_signatures(time_signatures)
+        self.voice_abbreviations = voice_abbreviations or {}
         self.voice_metadata = {}
         self.voice_names = _get_voice_names(score_template)
 
     def __call__(self, scopes, *commands):
         """
-        Calls segment-maker on ``scopes`` and ``commands``.
+        Calls command accumulator on ``scopes`` and ``commands``.
         """
         classes = (list, _scoping.Suite)
         commands_ = _sequence.Sequence(commands).flatten(classes=classes, depth=-1)
         commands = tuple(commands_)
-        if self.score_template is not None and hasattr(
+        if self.voice_abbreviations:
+            abbreviations = self.voice_abbreviations
+        elif self.score_template is not None and hasattr(
             self.score_template, "voice_abbreviations"
         ):
             abbreviations = self.score_template.voice_abbreviations
         else:
             abbreviations = {}
-        abbreviations = abbreviations or {}
+        assert isinstance(abbreviations, dict), repr(abbreviations)
         scopes_ = _unpack_scopes(scopes, abbreviations)
         scope_type = (_scoping.Scope, _scoping.TimelineScope)
         assert all(isinstance(_, scope_type) for _ in scopes_), repr(scopes_)
