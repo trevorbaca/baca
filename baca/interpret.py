@@ -993,24 +993,19 @@ def _check_duplicate_part_assignments(dictionary, part_manifest):
         raise Exception(message)
 
 
-def _check_persistent_indicators(score, score_template):
-    do_not_require_margin_markup = getattr(
-        score_template,
-        "do_not_require_margin_markup",
-        False,
-    )
+def _check_persistent_indicators(do_not_require_margin_markup, score):
     indicator = _const.SOUNDS_DURING_SEGMENT
     for voice in abjad.iterate.components(score, abjad.Voice):
         if not abjad.get.has_indicator(voice, indicator):
             continue
         for i, leaf in enumerate(abjad.iterate.leaves(voice)):
             _check_persistent_indicators_for_leaf(
-                do_not_require_margin_markup, leaf, i, score_template, voice.name
+                do_not_require_margin_markup, leaf, i, voice.name
             )
 
 
 def _check_persistent_indicators_for_leaf(
-    do_not_require_margin_markup, leaf, i, score_template, voice_name
+    do_not_require_margin_markup, leaf, i, voice_name
 ):
     prototype = (
         _indicators.Accelerando,
@@ -2964,6 +2959,7 @@ def interpret_commands(
     color_octaves=False,
     comment_measure_numbers=False,
     deactivate=None,
+    do_not_require_margin_markup=False,
     error_on_not_yet_pitched=False,
     fermata_extra_offset_y=2.5,
     fermata_measure_empty_overrides=None,
@@ -3025,9 +3021,12 @@ def interpret_commands(
     if clock_time_override is not None:
         assert isinstance(clock_time_override, abjad.MetronomeMark)
     assert color_octaves in (True, False)
+    assert check_wellformedness in (True, False)
     if deactivate is not None:
         assert all(isinstance(_, abjad.Tag) for _ in deactivate)
-    assert check_wellformedness in (True, False)
+    if hasattr(score_template, "do_not_require_margin_markup"):
+        do_not_require_margin_markup = score_template.do_not_require_margin_markup
+    assert do_not_require_margin_markup in (True, False)
     assert final_segment in (True, False)
     assert first_segment in (True, False)
     assert force_nonnatural_accidentals in (True, False)
@@ -3220,8 +3219,8 @@ def interpret_commands(
             color_out_of_range_pitches(score)
             if check_persistent_indicators:
                 _check_persistent_indicators(
+                    do_not_require_margin_markup,
                     score,
-                    score_template,
                 )
             color_repeat_pitch_classes(score)
             if color_octaves:
