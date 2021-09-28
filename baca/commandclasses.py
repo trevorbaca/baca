@@ -1386,10 +1386,8 @@ class InstrumentChangeCommand(IndicatorCommand):
             assert isinstance(staff, abjad.Staff)
             instrument = self.indicators[0]
             assert isinstance(instrument, abjad.Instrument), repr(instrument)
-            if hasattr(self.runtime["score_template"], "allows_instrument"):
-                if not self.runtime["score_template"].allows_instrument(
-                    staff.name, instrument
-                ):
+            if self.runtime["allows_instrument"]:
+                if not self.runtime["allows_instrument"](staff.name, instrument):
                     message = f"{staff.name} does not allow instrument:\n"
                     message += f"  {instrument}"
                     raise Exception(message)

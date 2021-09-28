@@ -361,6 +361,35 @@ def attach_lilypond_tag(tag, context, *, part_manifest=None):
     abjad.attach(literal, context, tag=tag)
 
 
+def group_families(*families) -> typing.List[abjad.Context]:
+    """
+    Groups ``families`` only when more than one family is passed in.
+    """
+    families_ = []
+    for family in families:
+        if family is not None:
+            assert isinstance(family, tuple), repr(family)
+            if any(_ for _ in family[1:] if _ is not None):
+                families_.append(family)
+    families = tuple(families_)
+    contexts = []
+    if len(families) == 0:
+        pass
+    elif len(families) == 1:
+        family = families[0]
+        contexts.extend([_ for _ in family[1:] if _ is not None])
+    else:
+        for family in families:
+            if not isinstance(family, tuple):
+                assert isinstance(family, abjad.Context)
+                contexts.append(family)
+                continue
+            square_staff_group = make_square_staff_group(*family)
+            assert square_staff_group is not None
+            contexts.append(square_staff_group)
+    return contexts
+
+
 def make_empty_score(*counts):
     r"""
     Makes empty score for doc examples.
@@ -577,3 +606,71 @@ def make_empty_score_maker(*counts):
         return make_empty_score(*counts)
 
     return closure
+
+
+def make_music_context(*contexts) -> abjad.Context:
+    """
+    Makes music context.
+    """
+    contexts = tuple(_ for _ in contexts if _ is not None)
+    site = "baca.ScoreTemplate.make_music_context()"
+    tag = abjad.Tag(site)
+    return abjad.Context(
+        contexts,
+        lilypond_type="MusicContext",
+        simultaneous=True,
+        name="Music_Context",
+        tag=tag,
+    )
+
+
+def make_piano_staff(stem: str, *contexts) -> typing.Optional[abjad.StaffGroup]:
+    """
+    Makes piano staff.
+    """
+    if not isinstance(stem, str):
+        raise Exception(f"stem must be string: {stem!r}.")
+    contexts = tuple(_ for _ in contexts if _ is not None)
+    if contexts:
+        return abjad.StaffGroup(contexts, name=f"{stem}_Piano_Staff")
+    else:
+        return None
+
+
+def make_square_staff_group(
+    stem: str, *contexts
+) -> typing.Optional[typing.Union[abjad.Staff, abjad.StaffGroup]]:
+    """
+    Makes square staff group.
+    """
+    if not isinstance(stem, str):
+        raise Exception(f"stem must be string: {stem!r}.")
+    site = "baca.ScoreTemplate.make_square_staff_group()"
+    tag = abjad.Tag(site)
+    contexts = tuple(_ for _ in contexts if _ is not None)
+    result = None
+    if len(contexts) == 1:
+        prototype = (abjad.Staff, abjad.StaffGroup)
+        assert isinstance(contexts[0], prototype), repr(contexts[0])
+        result = contexts[0]
+    elif 1 < len(contexts):
+        name = f"{stem}_Square_Staff_Group"
+        staff_group = abjad.StaffGroup(contexts, name=name, tag=tag)
+        abjad.setting(staff_group).system_start_delimiter = "#'SystemStartSquare"
+        result = staff_group
+    return result
+
+
+def make_staff_group(stem: str, *contexts) -> typing.Optional[abjad.StaffGroup]:
+    """
+    Makes staff group.
+    """
+    if not isinstance(stem, str):
+        raise Exception(f"stem must be string: {stem!r}.")
+    site = "baca.ScoreTemplate.make_staff_group()"
+    tag = abjad.Tag(site)
+    contexts = tuple(_ for _ in contexts if _ is not None)
+    if contexts:
+        return abjad.StaffGroup(contexts, name=f"{stem}_Staff_Group", tag=tag)
+    else:
+        return None

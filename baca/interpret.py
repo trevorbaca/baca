@@ -689,18 +689,21 @@ def _bundle_runtime(
     manifests,
     previous_persist,
     score_template,
+    allows_instrument=None,
     offset_to_measure_number=None,
     voice_name=None,
 ):
-    offset_to_measure_number = offset_to_measure_number or {}
+    runtime = {}
+    runtime["allows_instrument"] = allows_instrument
+    runtime["manifests"] = manifests
     previous_segment_voice_metadata = _get_previous_segment_voice_metadata(
         previous_persist, voice_name
     )
-    manifests["manifests"] = manifests
-    manifests["offset_to_measure_number"] = offset_to_measure_number
-    manifests["previous_segment_voice_metadata"] = previous_segment_voice_metadata
-    manifests["score_template"] = score_template
-    return manifests
+    offset_to_measure_number = offset_to_measure_number or {}
+    runtime["offset_to_measure_number"] = offset_to_measure_number
+    runtime["previous_segment_voice_metadata"] = previous_segment_voice_metadata
+    runtime["score_template"] = score_template
+    return runtime
 
 
 def _cache_leaves(score, measure_count):
@@ -772,6 +775,7 @@ def _calculate_clock_times(
 
 def _call_commands(
     allow_empty_selections,
+    allows_instrument,
     cache,
     commands,
     measure_count,
@@ -797,6 +801,7 @@ def _call_commands(
         )
         voice_name = command.scope.voice_name
         runtime = _bundle_runtime(
+            allows_instrument=allows_instrument,
             manifests=manifests,
             offset_to_measure_number=offset_to_measure_number,
             previous_persist=previous_persist,
@@ -880,6 +885,7 @@ def _call_rhythm_commands(
             )
             start_offset, time_signatures_ = result
             runtime = _bundle_runtime(
+                allows_instrument=None,
                 manifests=manifests,
                 previous_persist=previous_persist,
                 score_template=score_template,
@@ -931,10 +937,7 @@ def _call_rhythm_commands(
     return command_count, segment_duration
 
 
-def _check_all_music_in_part_containers(score, score_template):
-    name = "all_music_in_part_containers"
-    if getattr(score_template, name, None) is not True:
-        return
+def _check_all_music_in_part_containers(score):
     indicator = _const.MULTIMEASURE_REST_CONTAINER
     for voice in abjad.iterate.components(score, abjad.Voice):
         for component in voice:
@@ -2570,6 +2573,7 @@ def _shift_measure_initial_clefs(
                 clef, selector=lambda _: _selection.Selection(_).leaf(0)
             )
             runtime = _bundle_runtime(
+                allows_instrument=None,
                 manifests=manifests,
                 offset_to_measure_number=offset_to_measure_number,
                 previous_persist=previous_persist,
@@ -2945,7 +2949,9 @@ def interpret_commands(
     *,
     activate=None,
     add_container_identifiers=False,
+    all_music_in_part_containers=False,
     allow_empty_selections=False,
+    allows_instrument=None,
     always_make_global_rests=False,
     append_phantom_measure=False,
     attach_nonfirst_empty_start_bar=False,
@@ -3007,7 +3013,10 @@ def interpret_commands(
     """
     if activate is not None:
         assert all(isinstance(_, abjad.Tag) for _ in activate)
+    assert all_music_in_part_containers in (True, False)
     assert allow_empty_selections in (True, False)
+    if hasattr(score_template, "allows_instrument"):
+        allows_instrument = score_template.allows_instrument
     if hasattr(score_template, "always_make_global_rests"):
         always_make_global_rests = score_template.always_make_global_rests
     if clock_time_extra_offset not in (False, None):
@@ -3145,6 +3154,7 @@ def interpret_commands(
             cache = None
             cache, command_count = _call_commands(
                 allow_empty_selections,
+                allows_instrument,
                 cache,
                 commands,
                 measure_count,
@@ -3258,7 +3268,8 @@ def interpret_commands(
                     score,
                     segment_number,
                 )
-                _check_all_music_in_part_containers(score, score_template)
+                if all_music_in_part_containers:
+                    _check_all_music_in_part_containers(score)
                 _check_duplicate_part_assignments(
                     container_to_part_assignment,
                     part_manifest,
