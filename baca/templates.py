@@ -73,8 +73,6 @@ class ScoreTemplate:
 
     _part_manifest = None
 
-    voice_colors: dict = {}
-
     ### INITIALIZER ###
 
     def __init__(self):
@@ -95,14 +93,6 @@ class ScoreTemplate:
         site = "baca.ScoreTemplate._attach_liypond_tag()"
         tag = abjad.Tag(site)
         abjad.attach(literal, context, tag=tag)
-
-    def _validate_voice_names(self, score):
-        voice_names = []
-        for voice in abjad.iterate.components(score, abjad.Voice):
-            voice_names.append(voice.name)
-        for voice_name in sorted(self.voice_colors):
-            if voice_name not in voice_names:
-                raise Exception(f"voice not in score: {voice_name!r}.")
 
     ### PUBLIC PROPERTIES ###
 
