@@ -106,7 +106,7 @@ def assign_parts(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
 
-        >>> part_assignment = baca.parts.PartAssignment('Flute')
+        >>> part_assignment = baca.parts.PartAssignment("Flute")
 
         >>> commands(
         ...     "Music_Voice",
@@ -156,18 +156,18 @@ def bcps(
             >>> commands = baca.CommandAccumulator(
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+            ... )
 
             >>> commands(
             ...     "Music_Voice",
             ...     baca.make_even_divisions(),
             ...     baca.bcps(
             ...         [(1, 5), (3, 5), (2, 5), (4, 5), (5, 5)],
-            ...         ),
-            ...     baca.pitches('E4 F4'),
+            ...     ),
+            ...     baca.pitches("E4 F4"),
             ...     baca.script_staff_padding(5.5),
             ...     baca.text_spanner_staff_padding(2.5),
-            ...     )
+            ... )
 
             >>> lilypond_file = baca.interpret_commands(
             ...     commands.commands,
@@ -507,23 +507,22 @@ def container(
     selector=lambda _: _selection.Selection(_).leaves(),
 ) -> _commandclasses.ContainerCommand:
     r"""
-    Makes container with ``identifier`` and extends container with
-    ``selector`` output.
+    Makes container with ``identifier`` and extends container with ``selector`` output.
 
     ..  container:: example
 
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.container('ViolinI', selector=baca.selectors.leaves((None, 2))),
-        ...     baca.container('ViolinII', selector=baca.selectors.leaves((2, None))),
+        ...     baca.container("ViolinI", selector=baca.selectors.leaves((None, 2))),
+        ...     baca.container("ViolinII", selector=baca.selectors.leaves((2, None))),
         ...     baca.make_notes(repeat_ties=True),
-        ...     baca.pitches('E4 F4'),
-        ...     )
+        ...     baca.pitches("E4 F4"),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -570,8 +569,7 @@ def container(
     """
     if identifier is not None:
         if not isinstance(identifier, str):
-            message = f"identifier must be string (not {identifier!r})."
-            raise Exception(message)
+            raise Exception(f"identifier must be string (not {identifier!r}).")
     return _commandclasses.ContainerCommand(identifier=identifier, selector=selector)
 
 
@@ -695,8 +693,11 @@ def dynamic_down(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.dynamic('p'),
-        ...     baca.dynamic('f', selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0)),
+        ...     baca.dynamic("p"),
+        ...     baca.dynamic(
+        ...         "f",
+        ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
+        ...     ),
         ...     baca.dynamic_down(),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -784,8 +785,11 @@ def dynamic_up(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.dynamic('p'),
-        ...     baca.dynamic('f', selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0)),
+        ...     baca.dynamic("p"),
+        ...     baca.dynamic(
+        ...         "f",
+        ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
+        ...     ),
         ...     baca.dynamic_up(),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -885,17 +889,21 @@ def finger_pressure_transition(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.finger_pressure_transition(selector=baca.selectors.notes((None, 2))),
-        ...     baca.finger_pressure_transition(selector=baca.selectors.notes((2, None))),
+        ...     baca.finger_pressure_transition(
+        ...         selector=baca.selectors.notes((None, 2)),
+        ...     ),
+        ...     baca.finger_pressure_transition(
+        ...         selector=baca.selectors.notes((2, None)),
+        ...     ),
         ...     baca.make_notes(),
         ...     baca.note_head_style_harmonic(selector=baca.selectors.note(0)),
         ...     baca.note_head_style_harmonic(selector=baca.selectors.note(2)),
-        ...     baca.pitch('C5'),
-        ...     )
+        ...     baca.pitch("C5"),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -1097,14 +1105,14 @@ def glissando(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.glissando()
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -1184,11 +1192,11 @@ def glissando(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.make_even_divisions(),
         ...     baca.glissando(selector=baca.selectors.plts((None, 2))),
         ...     baca.glissando(selector=baca.selectors.plts((-2, None))),
@@ -1261,16 +1269,16 @@ def glissando(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.glissando(
         ...         abjad.tweak("#red").color,
-        ...         ),
-        ...     )
+        ...     ),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -1363,17 +1371,17 @@ def glissando(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.glissando(
         ...         (abjad.tweak("#red").color, 0),
         ...         (abjad.tweak("#red").color, -1),
-        ...         ),
-        ...     )
+        ...     ),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -1493,8 +1501,7 @@ def instrument(
     Makes instrument change command.
     """
     if not isinstance(instrument, abjad.Instrument):
-        message = f"instrument must be instrument (not {instrument!r})."
-        raise Exception(message)
+        raise Exception(f"instrument must be instrument (not {instrument!r}).")
     return _commandclasses.InstrumentChangeCommand(
         indicators=[instrument],
         selector=selector,
@@ -1517,16 +1524,16 @@ def invisible_music(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
         ...     "Music_Voice",
         ...     baca.invisible_music(
         ...         selector=baca.selectors.leaves((1, -1)),
-        ...         ),
+        ...     ),
         ...     baca.make_notes(),
-        ...     baca.pitch('C5'),
-        ...     )
+        ...     baca.pitch("C5"),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -1716,7 +1723,7 @@ def markup(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.markup('più mosso'),
+        ...     baca.markup("più mosso"),
         ...     baca.tuplet_bracket_outside_staff_priority(1000),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -1793,7 +1800,7 @@ def markup(
         ...     baca.markup(
         ...         r'\markup { \baca-triple-diamond-markup }',
         ...         literal=True,
-        ...         ),
+        ...     ),
         ...     baca.tuplet_bracket_outside_staff_priority(1000),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )

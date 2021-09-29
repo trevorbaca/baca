@@ -1523,8 +1523,8 @@ class Acciaccatura:
 
         ..  container:: example
 
-            At most two acciaccaturas at the beginning of every collection and
-            then at most two acciaccaturas at the end of every collection:
+            At most two acciaccaturas at the beginning of every collection and then at
+            most two acciaccaturas at the end of every collection:
 
             >>> stack = baca.stack(
             ...     baca.figure(
@@ -1637,8 +1637,7 @@ class Acciaccatura:
 
         ..  container:: example
 
-            As many acciaccaturas as possible in the middle of every
-            collection:
+            As many acciaccaturas as possible in the middle of every collection:
 
             >>> stack = baca.stack(
             ...     baca.figure([1], 8, acciaccatura=baca.lmr(left_length=1)),
@@ -2048,8 +2047,7 @@ class Imbrication:
                     abjad.mutate.replace(leaf, [skip])
         if not self.allow_unused_pitches and not cursor.is_exhausted:
             current, total = cursor.position - 1, len(cursor)
-            message = f"{cursor!r} used only {current} of {total} pitches."
-            raise Exception(message)
+            raise Exception(f"{cursor!r} used only {current} of {total} pitches.")
         self._call_commands(container)
         selection = abjad.select(container)
         if not self.hocket:
@@ -4411,7 +4409,7 @@ class FigureMaker:
             ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> state = {'_next_attack': 2}
+            >>> state = {"_next_attack": 2}
             >>> selections = stack(collections, state=state)
 
             >>> lilypond_file = abjad.illustrators.selection(selections)
@@ -4607,7 +4605,7 @@ class FigureMaker:
             >>> result = class_._make_accelerando_multipliers(
             ...     durations,
             ...     0.5,
-            ...     )
+            ... )
             >>> for multiplier in result: multiplier
             ...
             NonreducedFraction(2048, 1024)
@@ -5033,8 +5031,8 @@ class FigureMaker:
 
         ..  container:: example
 
-            Spells nonassignable durations with monontonically decreasing
-            durations by default:
+            Spells nonassignable durations with monontonically decreasing durations by
+            default:
 
             >>> stack = baca.stack(
             ...     baca.figure([4, 4, 5], 32),
@@ -5092,8 +5090,7 @@ class FigureMaker:
 
         ..  container:: example
 
-            Spells nonassignable durations with monontonically increasing
-            durations:
+            Spells nonassignable durations with monontonically increasing durations:
 
             >>> stack = baca.stack(
             ...     baca.figure(
@@ -6738,8 +6735,7 @@ class FigureMaker:
 
         ..  container:: example
 
-            Collection durations alternating between a quarter and a dotted
-            quarter:
+            Collection durations alternating between a quarter and a dotted quarter:
 
             >>> stack = baca.stack(
             ...     baca.figure([1, 1, 2], 8, treatments=[(1, 4), (3, 8)]),
@@ -6843,8 +6839,8 @@ class FigureMaker:
                     }
                 >>
 
-        Time treatments defined equal to integers; positive multipliers;
-        positive durations; and the strings ``'accel'`` and ``'rit'``.
+        Time treatments defined equal to integers; positive multipliers; positive
+        durations; and the strings ``'accel'`` and ``'rit'``.
         """
         return self._treatments
 
@@ -9598,7 +9594,7 @@ def stack(*commands) -> Stack:
         ...     [20, 19, 9, 0, 2],
         ...     [10, 18, 16, 15, 20],
         ...     [19, 9, 0, 2, 10],
-        ...     ]
+        ... ]
         >>> selections = stack(collections)
 
         >>> lilypond_file = abjad.illustrators.selection(selections)

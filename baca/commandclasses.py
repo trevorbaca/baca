@@ -254,23 +254,23 @@ class BCPCommand(_scoping.Command):
             >>> commands = baca.CommandAccumulator(
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+            ... )
 
             >>> commands(
-            ...     'Music_Voice',
+            ...     "Music_Voice",
             ...     baca.make_even_divisions(),
             ...     baca.new(
             ...         baca.bcps(bcps=[(1, 5), (2, 5)]),
             ...         measures=(1, 2),
-            ...         ),
+            ...     ),
             ...     baca.new(
             ...         baca.bcps(bcps=[(3, 5), (4, 5)]),
             ...         measures=(3, 4),
-            ...         ),
-            ...     baca.pitches('E4 F4'),
+            ...     ),
+            ...     baca.pitches("E4 F4"),
             ...     baca.script_staff_padding(5.5),
             ...     baca.text_spanner_staff_padding(2.5),
-            ...     )
+            ... )
 
             >>> lilypond_file = baca.interpret_commands(
             ...     commands.commands,
@@ -429,14 +429,14 @@ class BCPCommand(_scoping.Command):
     @property
     def start_command(self) -> str:
         r"""
-        Gets ``'\bacaStartTextSpanBCP'``.
+        Gets ``"\bacaStartTextSpanBCP"``.
         """
         return r"\bacaStartTextSpanBCP"
 
     @property
     def stop_command(self) -> str:
         r"""
-        Gets ``'\bacaStopTextSpanBCP'``.
+        Gets ``"\bacaStopTextSpanBCP"``.
         """
         return r"\bacaStopTextSpanBCP"
 
@@ -465,19 +465,19 @@ class BCPCommand(_scoping.Command):
             >>> commands = baca.CommandAccumulator(
             ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
+            ... )
 
             >>> commands(
-            ...     'Music_Voice',
+            ...     "Music_Voice",
             ...     baca.make_even_divisions(),
             ...     baca.bcps(
             ...         [(1, 5), (2, 5)],
             ...         abjad.tweak("#red").color,
             ...         abjad.tweak(2.5).staff_padding,
-            ...         ),
-            ...     baca.pitches('E4 F4'),
+            ...     ),
+            ...     baca.pitches("E4 F4"),
             ...     baca.script_staff_padding(5),
-            ...     )
+            ... )
 
             >>> lilypond_file = baca.interpret_commands(
             ...     commands.commands,
@@ -646,7 +646,7 @@ class BCPCommand(_scoping.Command):
             >>> command = baca.bcps(
             ...     [(1, 2), (1, 4)],
             ...     abjad.tweak("#red").color,
-            ...     )
+            ... )
             >>> string = abjad.storage(command)
             >>> print(string)
             baca.BCPCommand(
@@ -738,15 +738,15 @@ class ContainerCommand(_scoping.Command):
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(repeat_ties=True),
-        ...     baca.container('ViolinI', selector=baca.selectors.leaves((None, 2))),
-        ...     baca.container('ViolinII', selector=baca.selectors.leaves((2, None))),
-        ...     baca.pitches('E4 F4'),
-        ...     )
+        ...     baca.container("ViolinI", selector=baca.selectors.leaves((None, 2))),
+        ...     baca.container("ViolinII", selector=baca.selectors.leaves((2, None))),
+        ...     baca.pitches("E4 F4"),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -818,8 +818,7 @@ class ContainerCommand(_scoping.Command):
         )
         if identifier is not None:
             if not isinstance(identifier, str):
-                message = f"identifier must be string (not {identifier!r})."
-                raise Exception(message)
+                raise Exception(f"identifier must be string (not {identifier!r}).")
         self._identifier = identifier
         self._tags: typing.List[abjad.Tag] = []
 
@@ -1395,7 +1394,7 @@ class InstrumentChangeCommand(IndicatorCommand):
 
 
 class LabelCommand(_scoping.Command):
-    r"""
+    """
     Label command.
     """
 

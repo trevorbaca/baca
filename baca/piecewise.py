@@ -429,15 +429,15 @@ class PiecewiseCommand(_scoping.Command):
         """
         Gets bookend token.
 
-        Command attaches indicator to first leaf in each group of
-        selector output when ``bookend`` is false.
+        Command attaches indicator to first leaf in each group of selector output when
+        ``bookend`` is false.
 
-        Command attaches indicator to both first leaf and last
-        leaf in each group of selector output when ``bookend`` is true.
+        Command attaches indicator to both first leaf and last leaf in each group of
+        selector output when ``bookend`` is true.
 
-        When ``bookend`` equals integer ``n``, command attaches indicator to
-        first leaf and last leaf in group ``n`` of selector output and attaches
-        indicator to only first leaf in other groups of selector output.
+        When ``bookend`` equals integer ``n``, command attaches indicator to first leaf
+        and last leaf in group ``n`` of selector output and attaches indicator to only
+        first leaf in other groups of selector output.
         """
         return self._bookend
 
@@ -745,7 +745,7 @@ def dynamic(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.dynamic('f'),
+        ...     baca.dynamic("f"),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
@@ -883,20 +883,20 @@ def dynamic(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
-        ...     baca.dynamic('p'),
-        ...     baca.dynamic('<'),
+        ...     baca.dynamic("p"),
+        ...     baca.dynamic("<"),
         ...     baca.dynamic(
-        ...         '!',
+        ...         "!",
         ...         selector=baca.selectors.pleaf(-1),
         ...     ),
-        ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
-        ...     )
+        ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -975,15 +975,15 @@ def dynamic(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
-        ...     baca.dynamic('p', abjad.tweak("#'(-4 . 0)").extra_offset),
-        ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
-        ...     )
+        ...     baca.dynamic("p", abjad.tweak("#'(-4 . 0)").extra_offset),
+        ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -1098,15 +1098,15 @@ def hairpin(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.dls_staff_padding(5),
-        ...     baca.hairpin('p < f', bookend=-1),
+        ...     baca.hairpin("p < f", bookend=-1),
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-        ...     )
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -1185,15 +1185,15 @@ def hairpin(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
         ...     baca.hairpin('"ff" >o niente'),
-        ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
-        ...     )
+        ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -1274,15 +1274,15 @@ def hairpin(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
         ...     baca.hairpin('niente o< "ff"'),
-        ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
-        ...     )
+        ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -1362,15 +1362,15 @@ def hairpin(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
         ...     baca.hairpin('"p" -- f'),
-        ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
-        ...     )
+        ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -1450,10 +1450,10 @@ def hairpin(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
         ...     baca.hairpin(
@@ -1464,8 +1464,8 @@ def hairpin(
         ...         '"mf" |> "p"',
         ...         selector=baca.selectors.leaves((7, None)),
         ...         ),
-        ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
-        ...     )
+        ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -1550,18 +1550,18 @@ def hairpin(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin(
-        ...         'p f',
+        ...         "p f",
         ...         pieces=baca.selectors.cmgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-        ...     )
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -1639,18 +1639,18 @@ def hairpin(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin(
-        ...         'p < f >',
+        ...         "p < f >",
         ...         pieces=baca.selectors.cmgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-        ...     )
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -1736,19 +1736,19 @@ def hairpin(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin(
-        ...         'p f',
+        ...         "p f",
         ...         bookend=True,
         ...         pieces=baca.selectors.cmgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-        ...     )
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -1829,19 +1829,19 @@ def hairpin(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.dls_staff_padding(5),
         ...     baca.hairpin(
-        ...         'p -- f >',
+        ...         "p -- f >",
         ...         bookend=True,
         ...         pieces=baca.selectors.cmgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-        ...     )
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -1934,15 +1934,15 @@ def hairpin(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
-        ...     baca.hairpin('f', bookend=False),
-        ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
-        ...     )
+        ...     baca.hairpin("f", bookend=False),
+        ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -2018,15 +2018,15 @@ def hairpin(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.dls_staff_padding(5),
-        ...     baca.hairpin('< !'),
+        ...     baca.hairpin("< !"),
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
-        ...     )
+        ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -2106,21 +2106,21 @@ def hairpin(
         ...     )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.dls_staff_padding(4),
         ...     baca.hairpin(
-        ...         'p -- niente',
+        ...         "p -- niente",
         ...         abjad.tweak(True).to_barline,
         ...         selector=baca.selectors.leaves((None, 2)),
         ...         ),
         ...     baca.hairpin(
-        ...         'f -- niente',
+        ...         "f -- niente",
         ...         abjad.tweak(True).to_barline,
         ...         selector=baca.selectors.leaves((2, None)),
-        ...         ),
-        ...     baca.pitches('C4 D4'),
-        ...     baca.skeleton('{ c2 r4. c2 r4. }'),
-        ...     )
+        ...     ),
+        ...     baca.pitches("C4 D4"),
+        ...     baca.skeleton("{ c2 r4. c2 r4. }"),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -2195,19 +2195,19 @@ def hairpin(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.dls_staff_padding(4),
         ...     baca.hairpin(
-        ...         'mf niente o< p',
+        ...         "mf niente o< p",
         ...         bookend=False,
         ...         pieces=lambda _: baca.Selection(_).mgroups([1, 2, 1]),
-        ...         ),
+        ...     ),
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-        ...     )
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -2288,15 +2288,15 @@ def hairpin(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.dls_staff_padding(4),
-        ...     baca.hairpin('(mp) < mf'),
+        ...     baca.hairpin("(mp) < mf"),
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-        ...     )
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -2452,49 +2452,49 @@ def make_dynamic(
 
     ..  container:: example
 
-        >>> baca.make_dynamic('p')
+        >>> baca.make_dynamic("p")
         Dynamic('p')
 
-        >>> baca.make_dynamic('sffz')
+        >>> baca.make_dynamic("sffz")
         Dynamic('ff', command='\\baca-sffz', name_is_textual=False, sforzando=True)
 
-        >>> baca.make_dynamic('niente')
+        >>> baca.make_dynamic("niente")
         Dynamic('niente', command='\\!', direction=Down, name_is_textual=True)
 
-        >>> baca.make_dynamic('<')
+        >>> baca.make_dynamic("<")
         StartHairpin(shape='<')
 
-        >>> baca.make_dynamic('o<|')
+        >>> baca.make_dynamic("o<|")
         StartHairpin(shape='o<|')
 
-        >>> baca.make_dynamic('appena-udibile')
+        >>> baca.make_dynamic("appena-udibile")
         Dynamic('appena udibile', command='\\baca-appena-udibile', name_is_textual=True, sforzando=False)
 
     ..  container:: example
 
         Stop hairpin:
 
-        >>> baca.make_dynamic('!')
+        >>> baca.make_dynamic("!")
         StopHairpin()
 
     ..  container:: example
 
         Ancora dynamics:
 
-        >>> baca.make_dynamic('p-ancora')
+        >>> baca.make_dynamic("p-ancora")
         Dynamic('p', command='\\baca-p-ancora')
 
-        >>> baca.make_dynamic('f-ancora')
+        >>> baca.make_dynamic("f-ancora")
         Dynamic('f', command='\\baca-f-ancora')
 
     ..  container:: example
 
         Composite dynamics:
 
-        >>> baca.make_dynamic('pf')
+        >>> baca.make_dynamic("pf")
         Dynamic('f', command='\\baca-pf', name_is_textual=True, sforzando=False)
 
-        >>> baca.make_dynamic('pff')
+        >>> baca.make_dynamic("pff")
         Dynamic('ff', command='\\baca-pff', name_is_textual=True, sforzando=False)
 
     ..  container:: example
@@ -2541,97 +2541,97 @@ def make_dynamic(
 
         Sub. effort dynamics:
 
-        >>> baca.make_dynamic('p-effort-sub')
+        >>> baca.make_dynamic("p-effort-sub")
         Dynamic('p', command='\\baca-p-effort-sub')
 
-        >>> baca.make_dynamic('f-effort-sub')
+        >>> baca.make_dynamic("f-effort-sub")
         Dynamic('f', command='\\baca-f-effort-sub')
 
     ..  container:: example
 
         Parenthesized dynamics:
 
-        >>> baca.make_dynamic('(p)')
+        >>> baca.make_dynamic("(p)")
         Dynamic('p', command='\\baca-p-parenthesized')
 
-        >>> baca.make_dynamic('(f)')
+        >>> baca.make_dynamic("(f)")
         Dynamic('f', command='\\baca-f-parenthesized')
 
     ..  container:: example
 
         Poco scratch dynamics:
 
-        >>> baca.make_dynamic('p-poco-scratch')
+        >>> baca.make_dynamic("p-poco-scratch")
         Dynamic('p', command='\\baca-p-poco-scratch')
 
-        >>> baca.make_dynamic('f-poco-scratch')
+        >>> baca.make_dynamic("f-poco-scratch")
         Dynamic('f', command='\\baca-f-poco-scratch')
 
     ..  container:: example
 
         Possibile dynamics:
 
-        >>> baca.make_dynamic('p-poss')
+        >>> baca.make_dynamic("p-poss")
         Dynamic('p', command='\\baca-p-poss')
 
-        >>> baca.make_dynamic('f-poss')
+        >>> baca.make_dynamic("f-poss")
         Dynamic('f', command='\\baca-f-poss')
 
     ..  container:: example
 
         Scratch dynamics:
 
-        >>> baca.make_dynamic('p-scratch')
+        >>> baca.make_dynamic("p-scratch")
         Dynamic('p', command='\\baca-p-scratch')
 
-        >>> baca.make_dynamic('f-scratch')
+        >>> baca.make_dynamic("f-scratch")
         Dynamic('f', command='\\baca-f-scratch')
 
     ..  container:: example
 
         Sempre dynamics:
 
-        >>> baca.make_dynamic('p-sempre')
+        >>> baca.make_dynamic("p-sempre")
         Dynamic('p', command='\\baca-p-sempre')
 
-        >>> baca.make_dynamic('f-sempre')
+        >>> baca.make_dynamic("f-sempre")
         Dynamic('f', command='\\baca-f-sempre')
 
     ..  container:: example
 
         Subito dynamics:
 
-        >>> baca.make_dynamic('p-sub')
+        >>> baca.make_dynamic("p-sub")
         Dynamic('p', command='\\baca-p-sub')
 
-        >>> baca.make_dynamic('f-sub')
+        >>> baca.make_dynamic("f-sub")
         Dynamic('f', command='\\baca-f-sub')
 
     ..  container:: example
 
         Whiteout dynamics:
 
-        >>> baca.make_dynamic('p-whiteout')
+        >>> baca.make_dynamic("p-whiteout")
         Dynamic('p', command='\\baca-p-whiteout')
 
-        >>> baca.make_dynamic('f-whiteout')
+        >>> baca.make_dynamic("f-whiteout")
         Dynamic('f', command='\\baca-f-whiteout')
 
     ..  container:: example
 
         Al niente hairpins are special-cased to carry to-barline tweaks:
 
-        >>> baca.make_dynamic('>o')
+        >>> baca.make_dynamic(">o")
         StartHairpin(shape='>o', tweaks=TweakInterface(('_literal', None), ('to_barline', True)))
 
-        >>> baca.make_dynamic('|>o')
+        >>> baca.make_dynamic("|>o")
         StartHairpin(shape='|>o', tweaks=TweakInterface(('_literal', None), ('to_barline', True)))
 
     ..  container:: example exception
 
         Errors on nondynamic input:
 
-        >>> baca.make_dynamic('text')
+        >>> baca.make_dynamic("text")
         Traceback (most recent call last):
             ...
         Exception: the string 'text' initializes no known dynamic.
@@ -2727,8 +2727,7 @@ def make_dynamic(
         except Exception:
             failed = True
         if failed:
-            message = f"the string {string!r} initializes no known dynamic."
-            raise Exception(message)
+            raise Exception(f"the string {string!r} initializes no known dynamic.")
     return indicator
 
 
@@ -2818,7 +2817,7 @@ def parse_hairpin_descriptor(
 
     ..  container:: example
 
-        >>> for item in baca.parse_hairpin_descriptor('f'):
+        >>> for item in baca.parse_hairpin_descriptor("f"):
         ...     item
         Bundle(indicator=Dynamic('f'))
 
@@ -2826,85 +2825,85 @@ def parse_hairpin_descriptor(
         ...     item
         Bundle(indicator=Dynamic('"f"', command='\\baca-effort-f', direction=Down))
 
-        >>> for item in baca.parse_hairpin_descriptor('niente'):
+        >>> for item in baca.parse_hairpin_descriptor("niente"):
         ...     item
         Bundle(indicator=Dynamic('niente', command='\\!', direction=Down, name_is_textual=True))
 
-        >>> for item in baca.parse_hairpin_descriptor('<'):
+        >>> for item in baca.parse_hairpin_descriptor("<"):
         ...     item
         Bundle(spanner_start=StartHairpin(shape='<'))
 
-        >>> for item in baca.parse_hairpin_descriptor('< !'):
+        >>> for item in baca.parse_hairpin_descriptor("< !"):
         ...     item
         Bundle(spanner_start=StartHairpin(shape='<'))
         Bundle(indicator=StopHairpin())
 
-        >>> for item in baca.parse_hairpin_descriptor('o<|'):
+        >>> for item in baca.parse_hairpin_descriptor("o<|"):
         ...     item
         Bundle(spanner_start=StartHairpin(shape='o<|'))
 
-        >>> for item in baca.parse_hairpin_descriptor('--'):
+        >>> for item in baca.parse_hairpin_descriptor("--"):
         ...     item
         Bundle(spanner_start=StartHairpin(shape='--'))
 
-        >>> for item in baca.parse_hairpin_descriptor('p < f'):
+        >>> for item in baca.parse_hairpin_descriptor("p < f"):
         ...     item
         Bundle(indicator=Dynamic('p'), spanner_start=StartHairpin(shape='<'))
         Bundle(indicator=Dynamic('f'))
 
-        >>> for item in baca.parse_hairpin_descriptor('p <'):
+        >>> for item in baca.parse_hairpin_descriptor("p <"):
         ...     item
         Bundle(indicator=Dynamic('p'), spanner_start=StartHairpin(shape='<'))
 
-        >>> for item in baca.parse_hairpin_descriptor('p < !'):
+        >>> for item in baca.parse_hairpin_descriptor("p < !"):
         ...     item
         Bundle(indicator=Dynamic('p'), spanner_start=StartHairpin(shape='<'))
         Bundle(indicator=StopHairpin())
 
-        >>> for item in baca.parse_hairpin_descriptor('< f'):
+        >>> for item in baca.parse_hairpin_descriptor("< f"):
         ...     item
         Bundle(spanner_start=StartHairpin(shape='<'))
         Bundle(indicator=Dynamic('f'))
 
-        >>> for item in baca.parse_hairpin_descriptor('o< f'):
+        >>> for item in baca.parse_hairpin_descriptor("o< f"):
         ...     item
         Bundle(spanner_start=StartHairpin(shape='o<'))
         Bundle(indicator=Dynamic('f'))
 
-        >>> for item in baca.parse_hairpin_descriptor('niente o<| f'):
+        >>> for item in baca.parse_hairpin_descriptor("niente o<| f"):
         ...     item
         Bundle(indicator=Dynamic('niente', command='\\!', direction=Down, name_is_textual=True), spanner_start=StartHairpin(shape='o<|'))
         Bundle(indicator=Dynamic('f'))
 
-        >>> for item in baca.parse_hairpin_descriptor('f >'):
+        >>> for item in baca.parse_hairpin_descriptor("f >"):
         ...     item
         Bundle(indicator=Dynamic('f'), spanner_start=StartHairpin(shape='>'))
 
-        >>> for item in baca.parse_hairpin_descriptor('f >o'):
+        >>> for item in baca.parse_hairpin_descriptor("f >o"):
         ...     item
         Bundle(indicator=Dynamic('f'), spanner_start=StartHairpin(shape='>o', tweaks=TweakInterface(('_literal', None), ('to_barline', True))))
 
-        >>> for item in baca.parse_hairpin_descriptor('p mp mf f'):
+        >>> for item in baca.parse_hairpin_descriptor("p mp mf f"):
         ...     item
         Bundle(indicator=Dynamic('p'))
         Bundle(indicator=Dynamic('mp'))
         Bundle(indicator=Dynamic('mf'))
         Bundle(indicator=Dynamic('f'))
 
-        >>> for item in baca.parse_hairpin_descriptor('p < f f > p'):
+        >>> for item in baca.parse_hairpin_descriptor("p < f f > p"):
         ...     item
         Bundle(indicator=Dynamic('p'), spanner_start=StartHairpin(shape='<'))
         Bundle(indicator=Dynamic('f'))
         Bundle(indicator=Dynamic('f'), spanner_start=StartHairpin(shape='>'))
         Bundle(indicator=Dynamic('p'))
 
-        >>> for item in baca.parse_hairpin_descriptor('f -- ! > p'):
+        >>> for item in baca.parse_hairpin_descriptor("f -- ! > p"):
         ...     item
         Bundle(indicator=Dynamic('f'), spanner_start=StartHairpin(shape='--'))
         Bundle(indicator=StopHairpin(), spanner_start=StartHairpin(shape='>'))
         Bundle(indicator=Dynamic('p'))
 
-        >>> for item in baca.parse_hairpin_descriptor('mf niente o< p'):
+        >>> for item in baca.parse_hairpin_descriptor("mf niente o< p"):
         ...     item
         Bundle(indicator=Dynamic('mf'))
         Bundle(indicator=Dynamic('niente', command='\\!', direction=Down, name_is_textual=True), spanner_start=StartHairpin(shape='o<'))
@@ -3272,15 +3271,15 @@ def text_spanner(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
-        ...     baca.text_spanner('pont. => ord.'),
+        ...     "Music_Voice",
+        ...     baca.text_spanner("pont. => ord."),
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner_staff_padding(4.5),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -3360,15 +3359,15 @@ def text_spanner(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
-        ...     baca.text_spanner('pont. =| ord.'),
+        ...     "Music_Voice",
+        ...     baca.text_spanner("pont. =| ord."),
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner_staff_padding(4.5),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -3448,15 +3447,15 @@ def text_spanner(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
-        ...     baca.text_spanner('pont. -> ord.'),
+        ...     "Music_Voice",
+        ...     baca.text_spanner("pont. -> ord."),
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner_staff_padding(4.5),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -3536,15 +3535,15 @@ def text_spanner(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
-        ...     baca.text_spanner('pont. -| ord.'),
+        ...     "Music_Voice",
+        ...     baca.text_spanner("pont. -| ord."),
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner_staff_padding(4.5),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -3624,15 +3623,15 @@ def text_spanner(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
-        ...     baca.text_spanner('pont. || ord.'),
+        ...     "Music_Voice",
+        ...     baca.text_spanner("pont. || ord."),
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner_staff_padding(4.5),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -3714,19 +3713,19 @@ def text_spanner(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.dls_staff_padding(5),
         ...     baca.text_spanner(
-        ...         'A || B',
+        ...         "A || B",
         ...         pieces=baca.selectors.cmgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner_staff_padding(4.5),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -3820,19 +3819,19 @@ def text_spanner(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.dls_staff_padding(5),
         ...     baca.text_spanner(
-        ...         'A -> B ->',
+        ...         "A -> B ->",
         ...         pieces=baca.selectors.cmgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner_staff_padding(4.5),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -3926,20 +3925,20 @@ def text_spanner(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.dls_staff_padding(5),
         ...     baca.text_spanner(
-        ...         'A || B',
+        ...         "A || B",
         ...         bookend=True,
         ...         pieces=baca.selectors.cmgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner_staff_padding(4.5),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -4042,20 +4041,20 @@ def text_spanner(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.dls_staff_padding(5),
         ...     baca.text_spanner(
-        ...         'A -> B ->',
+        ...         "A -> B ->",
         ...         bookend=True,
         ...         pieces=baca.selectors.cmgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner_staff_padding(4.5),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -4155,18 +4154,18 @@ def text_spanner(
 
     ..  container:: example
 
-        Indexes tweaks. No purple appears because tweakable indicators appear
-        on pieces 0, 1, 2 but piece 3 carries only a stop text span:
+        Indexes tweaks. No purple appears because tweakable indicators appear on pieces
+        0, 1, 2 but piece 3 carries only a stop text span:
 
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.text_spanner(
-        ...         'P -> T ->',
+        ...         "P -> T ->",
         ...         (abjad.tweak("#red").color, 0),
         ...         (abjad.tweak("#blue").color, 1),
         ...         (abjad.tweak("#green").color, 2),
@@ -4174,10 +4173,10 @@ def text_spanner(
         ...         final_piece_spanner=False,
         ...         pieces=baca.selectors.plts(),
         ...     ),
-        ...     baca.skeleton('{ c2 c4. c2 c4. }'),
-        ...     baca.pitches('C4 D4 E4 F4'),
+        ...     baca.skeleton("{ c2 c4. c2 c4. }"),
+        ...     baca.pitches("C4 D4 E4 F4"),
         ...     baca.text_spanner_staff_padding(4.5),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -4254,20 +4253,20 @@ def text_spanner(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.dls_staff_padding(5),
         ...     baca.text_spanner(
-        ...         r'\baca-damp-markup =|',
+        ...         r"\baca-damp-markup =|",
         ...         bookend=False,
         ...         selector=lambda _: baca.Selection(_).rmleaves(2),
         ...         ),
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner_staff_padding(4.5),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -4348,19 +4347,19 @@ def text_spanner(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.dls_staff_padding(5),
         ...     baca.text_spanner(
-        ...         'A -| B -|',
+        ...         "A -| B -|",
         ...         pieces=baca.selectors.cmgroups([1]),
         ...     ),
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner_staff_padding(4.5),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -4456,18 +4455,18 @@ def text_spanner(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.text_spanner(
-        ...         'P -> T -> P',
+        ...         "P -> T -> P",
         ...         pieces=baca.selectors.plts(),
         ...     ),
         ...     baca.make_notes(),
-        ...     baca.pitches('C4 D4 E4 F4 G4 A4'),
+        ...     baca.pitches("C4 D4 E4 F4 G4 A4"),
         ...     baca.text_spanner_staff_padding(4.5),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -4555,19 +4554,19 @@ def text_spanner(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.text_spanner(
-        ...         'P -> T ->',
+        ...         "P -> T ->",
         ...         final_piece_spanner=False,
         ...         pieces=baca.selectors.plts(),
         ...     ),
-        ...     baca.skeleton('{ c2 c4. c2 c4 ~ c8 }'),
-        ...     baca.pitches('C4 D4 E4 F4'),
+        ...     baca.skeleton("{ c2 c4. c2 c4 ~ c8 }"),
+        ...     baca.pitches("C4 D4 E4 F4"),
         ...     baca.text_spanner_staff_padding(4.5),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -4641,9 +4640,9 @@ def text_spanner(
         Errors on unknown LilyPond ID:
 
         >>> baca.text_spanner(
-        ...     'T -> P',
+        ...     "T -> P",
         ...     lilypond_id=4,
-        ...     )
+        ... )
         Traceback (most recent call last):
             ...
         ValueError: lilypond_id must be 1, 2, 3, str or none (not 4).

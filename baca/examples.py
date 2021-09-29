@@ -458,7 +458,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     [[-12, 2, 3, 5, 8, 9, 0]],
     ...     [[11]],
     ...     [[10, 7, 9, 10, 0, 5]],
-    ...     ]
+    ... ]
     >>> figures, time_signatures = [], []
     >>> for i, collections in enumerate(collection_lists):
     ...     selection = figure(collections)
@@ -568,7 +568,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     [[6, 2, 3, 5, 9, 9, 0]],
     ...     [[11]],
     ...     [[10, 7, 9, 12, 0, 5]],
-    ...     ]
+    ... ]
     >>> figures, time_signatures = [], []
     >>> for i, collections in enumerate(collection_lists):
     ...     selection = figure(collections)

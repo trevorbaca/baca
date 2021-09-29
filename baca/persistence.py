@@ -526,12 +526,12 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.dynamic('f'),
+        ...     baca.dynamic("f"),
         ...     baca.make_notes(),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -582,22 +582,22 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
-        ...     baca.dynamic('p'),
-        ...     )
+        ...     baca.dynamic("p"),
+        ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]["Music_Voice"] = [
         ...     baca.Memento(
         ...         context="Music_Voice",
-        ...         prototype='abjad.Dynamic',
-        ...         value='f',
-        ...         )
-        ...     ]
+        ...         prototype="abjad.Dynamic",
+        ...         value="f",
+        ...     )
+        ... ]
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.score_template,
@@ -610,7 +610,7 @@ r"""
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
-        ...     )
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -651,21 +651,21 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
-        ...     )
+        ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]["Music_Voice"] = [
         ...     baca.Memento(
         ...         context="Music_Voice",
-        ...         prototype='abjad.Dynamic',
-        ...         value='f',
-        ...         )
-        ...     ]
+        ...         prototype="abjad.Dynamic",
+        ...         value="f",
+        ...     )
+        ... ]
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.score_template,
@@ -678,7 +678,7 @@ r"""
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
-        ...     )
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -719,13 +719,13 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
-        ...     baca.dynamic('f'),
-        ...     baca.dynamic('f', selector=baca.selectors.leaf(1)),
-        ...     )
+        ...     baca.dynamic("f"),
+        ...     baca.dynamic("f", selector=baca.selectors.leaf(1)),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -778,22 +778,22 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
-        ...     baca.dynamic('f'),
-        ...     )
+        ...     baca.dynamic("f"),
+        ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]["Music_Voice"] = [
         ...     baca.Memento(
         ...         context="Music_Voice",
-        ...         prototype='abjad.Dynamic',
-        ...         value='f',
-        ...         )
-        ...     ]
+        ...         prototype="abjad.Dynamic",
+        ...         value="f",
+        ...     )
+        ... ]
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.score_template,
@@ -806,7 +806,7 @@ r"""
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
-        ...     )
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -845,13 +845,13 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
-        ...     baca.dynamic('sfz'),
-        ...     baca.dynamic('sfz', selector=baca.selectors.leaf(1)),
-        ...     )
+        ...     baca.dynamic("sfz"),
+        ...     baca.dynamic("sfz", selector=baca.selectors.leaf(1)),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -904,22 +904,22 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
-        ...     baca.dynamic('sfz'),
-        ...     )
+        ...     baca.dynamic("sfz"),
+        ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]["Music_Voice"] = [
         ...     baca.Memento(
         ...         context="Music_Voice",
-        ...         prototype='abjad.Dynamic',
-        ...         value='sfz',
-        ...         )
-        ...     ]
+        ...         prototype="abjad.Dynamic",
+        ...         value="sfz",
+        ...     )
+        ... ]
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.score_template,
@@ -932,7 +932,7 @@ r"""
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
-        ...     )
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -973,13 +973,13 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
-        ...     baca.dynamic('mf'),
+        ...     baca.dynamic("mf"),
         ...     baca.dynamic('"mf"', selector=baca.selectors.leaf(1)),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -1036,8 +1036,8 @@ r"""
         Example instruments:
 
         >>> instruments = {}
-        >>> instruments['Flute'] = abjad.Flute()
-        >>> instruments['Piccolo'] = abjad.Piccolo()
+        >>> instruments["Flute"] = abjad.Flute()
+        >>> instruments["Piccolo"] = abjad.Piccolo()
         >>> breaks = baca.breaks(
         ...     baca.page(
         ...         1,
@@ -1051,7 +1051,7 @@ r"""
         Default instruments color purple and redraw dull purple:
 
         >>> score_template = baca.make_empty_score_maker(1)
-        >>> triple = ("Music_Staff", 'default_instrument', abjad.Flute())
+        >>> triple = ("Music_Staff", "default_instrument", abjad.Flute())
         >>> commands = baca.CommandAccumulator(
         ...     instruments=instruments,
         ...     score_template=score_template,
@@ -1208,12 +1208,12 @@ r"""
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.instrument(instruments['Flute']),
+        ...     baca.instrument(instruments["Flute"]),
         ...     baca.make_notes(),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -1358,22 +1358,22 @@ r"""
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.instrument(instruments['Flute']),
+        ...     baca.instrument(instruments["Flute"]),
         ...     baca.make_notes(),
-        ...     )
+        ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]["Music_Staff"] = [
         ...     baca.Memento(
         ...         context="Music_Voice",
-        ...         manifest='instruments',
-        ...         value='Piccolo',
-        ...         )
-        ...     ]
+        ...         manifest="instruments",
+        ...         value="Piccolo",
+        ...     )
+        ... ]
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.score_template,
@@ -1390,7 +1390,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
-        ...     )
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -1520,21 +1520,21 @@ r"""
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
-        ...     )
+        ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]["Music_Staff"] = [
         ...     baca.Memento(
         ...         context="Music_Voice",
-        ...         manifest='instruments',
-        ...         value='Flute',
-        ...         )
-        ...     ]
+        ...         manifest="instruments",
+        ...         value="Flute",
+        ...     )
+        ... ]
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.score_template,
@@ -1551,7 +1551,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
-        ...     )
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -1689,16 +1689,16 @@ r"""
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.instrument(instruments['Flute']),
+        ...     baca.instrument(instruments["Flute"]),
         ...     baca.new(
-        ...         baca.instrument(instruments['Flute']),
+        ...         baca.instrument(instruments["Flute"]),
         ...         map=baca.selectors.leaves((1, 2)),
-        ...         ),
+        ...     ),
         ...     baca.make_notes(),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -1864,22 +1864,22 @@ r"""
         ...     instruments=instruments,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.instrument(instruments['Flute']),
+        ...     baca.instrument(instruments["Flute"]),
         ...     baca.make_notes(),
-        ...     )
+        ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]["Music_Staff"] = [
         ...     baca.Memento(
         ...         context="Music_Voice",
-        ...         manifest='instruments',
-        ...         value='Flute',
-        ...         )
-        ...     ]
+        ...         manifest="instruments",
+        ...         value="Flute",
+        ...     )
+        ... ]
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.score_template,
@@ -1896,7 +1896,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
-        ...     )
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -2027,12 +2027,12 @@ r"""
         Margin markup for examples:
 
         >>> margin_markups = {}
-        >>> margin_markups['I+II'] = abjad.MarginMarkup(
-        ...     markup=abjad.Markup('I+II'),
-        ...     )
-        >>> margin_markups['III+IV'] = abjad.MarginMarkup(
-        ...     markup=abjad.Markup('III+IV'),
-        ...     )
+        >>> margin_markups["I+II"] = abjad.MarginMarkup(
+        ...     markup=abjad.Markup("I+II"),
+        ... )
+        >>> margin_markups["III+IV"] = abjad.MarginMarkup(
+        ...     markup=abjad.Markup("III+IV"),
+        ... )
         >>> breaks = baca.breaks(
         ...     baca.page(
         ...         1,
@@ -2048,18 +2048,18 @@ r"""
         >>> score_template = baca.make_empty_score_maker(1)
         >>> triple = (
         ...     "Music_Staff",
-        ...     'default_margin_markup',
-        ...     margin_markups['I+II'],
-        ...     )
+        ...     "default_margin_markup",
+        ...     margin_markups["I+II"],
+        ... )
         >>> commands = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
         ...     score_template=score_template,
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -2225,12 +2225,12 @@ r"""
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.margin_markup(margin_markups['I+II']),
+        ...     baca.margin_markup(margin_markups["I+II"]),
         ...     baca.make_notes(),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -2393,22 +2393,22 @@ r"""
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.margin_markup(margin_markups['III+IV']),
+        ...     baca.margin_markup(margin_markups["III+IV"]),
         ...     baca.make_notes(),
-        ...     )
+        ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]["Music_Staff"] = [
         ...     baca.Memento(
         ...         context="Music_Voice",
-        ...         manifest='margin_markups',
-        ...         value='I+II',
-        ...         )
-        ...     ]
+        ...         manifest="margin_markups",
+        ...         value="I+II",
+        ...     )
+        ... ]
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.score_template,
@@ -2425,7 +2425,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
-        ...     )
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -2579,21 +2579,21 @@ r"""
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
-        ...     )
+        ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]["Music_Staff"] = [
         ...     baca.Memento(
         ...         context="Music_Voice",
-        ...         manifest='margin_markups',
-        ...         value='I+II',
-        ...         )
-        ...     ]
+        ...         manifest="margin_markups",
+        ...         value="I+II",
+        ...     )
+        ... ]
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.score_template,
@@ -2771,16 +2771,16 @@ r"""
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.margin_markup(margin_markups['I+II']),
+        ...     baca.margin_markup(margin_markups["I+II"]),
         ...     baca.new(
-        ...         baca.margin_markup(margin_markups['I+II']),
+        ...         baca.margin_markup(margin_markups["I+II"]),
         ...         map=baca.selectors.leaves((1, 2)),
-        ...         ),
+        ...     ),
         ...     baca.make_notes(),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -2983,22 +2983,22 @@ r"""
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.margin_markup(margin_markups['I+II']),
+        ...     baca.margin_markup(margin_markups["I+II"]),
         ...     baca.make_notes(),
-        ...     )
+        ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]["Music_Staff"] = [
         ...     baca.Memento(
         ...         context="Music_Voice",
-        ...         manifest='margin_markups',
-        ...         value='I+II',
-        ...         )
-        ...     ]
+        ...         manifest="margin_markups",
+        ...         value="I+II",
+        ...     )
+        ... ]
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.score_template,
@@ -3015,7 +3015,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
-        ...     )
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -3176,25 +3176,25 @@ r"""
         ...     margin_markups=margin_markups,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.tag(
         ...         baca.tags.NOT_PARTS,
-        ...         baca.margin_markup(margin_markups['I+II']),
-        ...         ),
+        ...         baca.margin_markup(margin_markups["I+II"]),
+        ...     ),
         ...     baca.tag(
         ...         baca.tags.NOT_PARTS,
-        ...         baca.margin_markup(margin_markups['III+IV']),
+        ...         baca.margin_markup(margin_markups["III+IV"]),
         ...         deactivate=True,
-        ...         ),
+        ...     ),
         ...     baca.tag(
         ...         baca.tags.NOT_PARTS,
-        ...         baca.margin_markup(margin_markups['III+IV']),
+        ...         baca.margin_markup(margin_markups["III+IV"]),
         ...         deactivate=True,
-        ...         ),
+        ...     ),
         ...     baca.make_notes(),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -3281,8 +3281,8 @@ r"""
         ...     ),
         ... )
         >>> metronome_marks = {}
-        >>> metronome_marks['90'] = abjad.MetronomeMark((1, 4), 90)
-        >>> metronome_marks['112'] = abjad.MetronomeMark((1, 4), 112)
+        >>> metronome_marks["90"] = abjad.MetronomeMark((1, 4), 90)
+        >>> metronome_marks["112"] = abjad.MetronomeMark((1, 4), 112)
 
     ..  container:: example
 
@@ -3293,15 +3293,15 @@ r"""
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Global_Skips",
-        ...     baca.metronome_mark('112'),
-        ...     )
+        ...     baca.metronome_mark("112"),
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -3395,26 +3395,26 @@ r"""
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Global_Skips",
-        ...     baca.metronome_mark('112'),
+        ...     baca.metronome_mark("112"),
         ...     baca.text_spanner_staff_padding(4),
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
-        ...     )
+        ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]['Score'] = [
         ...     baca.Memento(
         ...         context="Global_Skips",
-        ...         manifest='metronome_marks',
-        ...         value='90',
-        ...         )
-        ...     ]
+        ...         manifest="metronome_marks",
+        ...         value="90",
+        ...     )
+        ... ]
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.score_template,
@@ -3432,7 +3432,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
-        ...     )
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -3512,25 +3512,25 @@ r"""
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
-        ...     )
+        ... )
         >>> commands(
         ...     "Global_Skips",
         ...     baca.text_spanner_staff_padding(4),
-        ...     )
+        ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]['Score'] = [
         ...     baca.Memento(
         ...         context="Global_Skips",
-        ...         manifest='metronome_marks',
-        ...         value='90',
-        ...         )
-        ...     ]
+        ...         manifest="metronome_marks",
+        ...         value="90",
+        ...     )
+        ... ]
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.score_template,
@@ -3547,7 +3547,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
-        ...     )
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -3602,16 +3602,16 @@ r"""
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Global_Skips",
-        ...     baca.metronome_mark('112'),
-        ...     baca.metronome_mark('112', selector=baca.selectors.leaf(1)),
-        ...     )
+        ...     baca.metronome_mark("112"),
+        ...     baca.metronome_mark("112", selector=baca.selectors.leaf(1)),
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -3712,26 +3712,26 @@ r"""
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Global_Skips",
-        ...     baca.metronome_mark('112'),
+        ...     baca.metronome_mark("112"),
         ...     baca.text_spanner_staff_padding(4),
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
-        ...     )
+        ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]['Score'] = [
+        >>> persist["persistent_indicators"]["Score"] = [
         ...     baca.Memento(
         ...         context="Global_Skips",
-        ...         manifest='metronome_marks',
-        ...         value='112',
-        ...         )
-        ...     ]
+        ...         manifest="metronome_marks",
+        ...         value="112",
+        ...     )
+        ... ]
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.score_template,
@@ -3749,7 +3749,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
-        ...     )
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -3832,7 +3832,7 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> override = baca.PersistentOverride(
         ...     attribute="bar_extent",
         ...     context="Staff",
@@ -3850,7 +3850,7 @@ r"""
         ...     baca.make_notes(),
         ...     baca.staff_lines(1),
         ...     baca.staff_position(0),
-        ...     )
+        ... )
 
         >>> lilypond_file, metadata, persist = baca.interpret_commands(
         ...     commands.commands,
@@ -3948,11 +3948,11 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
-        ...     )
+        ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
@@ -3962,13 +3962,13 @@ r"""
         ...         prototype='baca.PersistentOverride',
         ...         value=baca.PersistentOverride(
         ...             after=True,
-        ...             attribute='bar_extent',
-        ...             context='Staff',
-        ...             grob='BarLine',
+        ...             attribute="bar_extent",
+        ...             context="Staff",
+        ...             grob="BarLine",
         ...             value="#'(0 . 0)",
-        ...             ),
-        ...         )
-        ...     ]
+        ...         ),
+        ...     )
+        ... ]
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.score_template,
@@ -3981,7 +3981,7 @@ r"""
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
-        ...     )
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -4019,7 +4019,7 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> override = baca.PersistentOverride(
         ...     attribute="bar_extent",
         ...     context="Staff",
@@ -4034,23 +4034,23 @@ r"""
         ...     "Music_Voice",
         ...     command,
         ...     baca.make_notes(),
-        ...     )
+        ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]["Music_Voice"] = [
         ...     baca.Memento(
         ...         context="Music_Voice",
-        ...         prototype='baca.PersistentOverride',
+        ...         prototype="baca.PersistentOverride",
         ...         value=baca.PersistentOverride(
         ...             after=True,
-        ...             attribute='bar_extent',
-        ...             context='Staff',
+        ...             attribute="bar_extent",
+        ...             context="Staff",
         ...             grob='BarLine',
         ...             value="#'(0 . 0)",
-        ...             ),
-        ...         )
-        ...     ]
+        ...         ),
+        ...     )
+        ... ]
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.score_template,
@@ -4063,7 +4063,7 @@ r"""
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
-        ...     )
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -4107,12 +4107,12 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.staff_lines(5),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -4166,12 +4166,12 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.staff_lines(1),
-        ...     )
+        ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
@@ -4180,8 +4180,8 @@ r"""
         ...         context="Music_Voice",
         ...         prototype='baca.StaffLines',
         ...         value=5,
-        ...         )
-        ...     ]
+        ...     )
+        ... ]
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.score_template,
@@ -4194,7 +4194,7 @@ r"""
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
-        ...     )
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -4238,21 +4238,21 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
-        ...     )
+        ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]["Music_Staff"] = [
         ...     baca.Memento(
         ...         context="Music_Voice",
-        ...         prototype='baca.StaffLines',
+        ...         prototype="baca.StaffLines",
         ...         value=5,
-        ...         )
-        ...     ]
+        ...     )
+        ... ]
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.score_template,
@@ -4265,7 +4265,7 @@ r"""
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
-        ...     )
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -4308,13 +4308,13 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.staff_lines(5),
         ...     baca.staff_lines(5, selector=baca.selectors.leaf(1)),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -4373,22 +4373,22 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.staff_lines(5),
-        ...     )
+        ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]["Music_Staff"] = [
         ...     baca.Memento(
         ...         context="Music_Voice",
-        ...         prototype='baca.StaffLines',
+        ...         prototype="baca.StaffLines",
         ...         value=5,
-        ...         )
-        ...     ]
+        ...     )
+        ... ]
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.score_template,
@@ -4451,8 +4451,8 @@ r"""
         ...     ),
         ... )
         >>> metronome_marks = {}
-        >>> metronome_marks['90'] = abjad.MetronomeMark((1, 4), 90)
-        >>> metronome_marks['112'] = abjad.MetronomeMark((1, 4), 112)
+        >>> metronome_marks["90"] = abjad.MetronomeMark((1, 4), 90)
+        >>> metronome_marks["112"] = abjad.MetronomeMark((1, 4), 112)
 
     ..  container:: example
 
@@ -4463,15 +4463,15 @@ r"""
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Global_Skips",
         ...     baca.metronome_mark(baca.Accelerando()),
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -4573,20 +4573,20 @@ r"""
         ...     "Global_Skips",
         ...     baca.metronome_mark(baca.Accelerando()),
         ...     baca.text_spanner_staff_padding(4),
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
-        ...     )
+        ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]['Score'] = [
+        >>> persist["persistent_indicators"]["Score"] = [
         ...     baca.Memento(
         ...         context="Global_Skips",
-        ...         prototype='baca.Ritardando',
-        ...         )
-        ...     ]
+        ...         prototype="baca.Ritardando",
+        ...     )
+        ... ]
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.score_template,
@@ -4602,7 +4602,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
-        ...     )
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -4660,24 +4660,24 @@ r"""
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
-        ...     )
+        ... )
         >>> commands(
         ...     "Global_Skips",
         ...     baca.text_spanner_staff_padding(4),
-        ...     )
+        ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]['Score'] = [
+        >>> persist["persistent_indicators"]["Score"] = [
         ...     baca.Memento(
         ...         context="Global_Skips",
-        ...         prototype='baca.Accelerando',
-        ...         )
-        ...     ]
+        ...         prototype="baca.Accelerando",
+        ...     )
+        ... ]
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.score_template,
@@ -4693,7 +4693,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
-        ...     )
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -4751,19 +4751,19 @@ r"""
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Global_Skips",
         ...     baca.metronome_mark(baca.Accelerando()),
         ...     baca.metronome_mark(
         ...         baca.Accelerando(),
         ...         selector=baca.selectors.leaf(1),
-        ...         ),
-        ...     )
+        ...     ),
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -4847,25 +4847,25 @@ r"""
         ...     metronome_marks=metronome_marks,
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        ... )
         >>> commands(
         ...     "Global_Skips",
         ...     baca.metronome_mark(baca.Accelerando()),
         ...     baca.text_spanner_staff_padding(4),
-        ...     )
+        ... )
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
-        ...     )
+        ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]['Score'] = [
+        >>> persist["persistent_indicators"]["Score"] = [
         ...     baca.Memento(
         ...         context="Global_Skips",
-        ...         prototype='baca.Accelerando',
-        ...         )
-        ...     ]
+        ...         prototype="baca.Accelerando",
+        ...     )
+        ... ]
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.score_template,
@@ -4881,7 +4881,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
-        ...     )
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)

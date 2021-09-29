@@ -119,11 +119,11 @@ class PersistentOverride:
     ..  container:: example
 
         >>> override = baca.PersistentOverride(
-        ...     attribute='bar_extent',
-        ...     context='Staff',
-        ...     grob='bar_line',
+        ...     attribute="bar_extent",
+        ...     context="Staff",
+        ...     grob="bar_line",
         ...     value=(-2, 0),
-        ...     )
+        ... )
 
         >>> print(abjad.storage(override))
         baca.PersistentOverride(
@@ -180,29 +180,29 @@ class PersistentOverride:
 
     def __eq__(self, argument):
         """
-        Is true when ``argument`` is persistent override with attribute,
-        context, grob, value equal to those of this persistent override.
+        Is true when ``argument`` is persistent override with attribute, context, grob,
+        value equal to those of this persistent override.
 
         ..  container:: example
 
             >>> override_1 = baca.PersistentOverride(
-            ...     attribute='bar_extent',
-            ...     context='Staff',
-            ...     grob='bar_line',
+            ...     attribute="bar_extent",
+            ...     context="Staff",
+            ...     grob="bar_line",
             ...     value=(-2, 0),
-            ...     )
+            ... )
             >>> override_2 = baca.PersistentOverride(
-            ...     attribute='bar_extent',
-            ...     context='Staff',
-            ...     grob='bar_line',
+            ...     attribute="bar_extent",
+            ...     context="Staff",
+            ...     grob="bar_line",
             ...     value=(-2, 0),
-            ...     )
+            ... )
             >>> override_3 = baca.PersistentOverride(
-            ...     attribute='bar_extent',
-            ...     context='Score',
-            ...     grob='bar_line',
+            ...     attribute="bar_extent",
+            ...     context="Score",
+            ...     grob="bar_line",
             ...     value=(-2, 0),
-            ...     )
+            ... )
 
             >>> override_1 == override_1
             True
@@ -292,10 +292,10 @@ class PersistentOverride:
             Formats override before leaf:
 
             >>> override = baca.PersistentOverride(
-            ...     attribute='color',
-            ...     grob='note_head',
-            ...     value='red',
-            ...     )
+            ...     attribute="color",
+            ...     grob="note_head",
+            ...     value="red",
+            ... )
 
             >>> staff = abjad.Staff("c'4 d' e' f'")
             >>> abjad.attach(override, staff[0])
@@ -320,10 +320,10 @@ class PersistentOverride:
 
             >>> override = baca.PersistentOverride(
             ...     after=True,
-            ...     attribute='color',
-            ...     grob='note_head',
-            ...     value='red',
-            ...     )
+            ...     attribute="color",
+            ...     grob="note_head",
+            ...     value="red",
+            ... )
 
             >>> staff = abjad.Staff("c'4 d' e' f'")
             >>> abjad.attach(override, staff[0])
@@ -353,11 +353,11 @@ class PersistentOverride:
         ..  container:: example
 
             >>> override = baca.PersistentOverride(
-            ...     attribute='bar_extent',
-            ...     context='Staff',
-            ...     grob='bar_line',
+            ...     attribute="bar_extent",
+            ...     context="Staff",
+            ...     grob="bar_line",
             ...     value=(-2, 0),
-            ...     )
+            ... )
 
             >>> override.attribute
             'bar_extent'
@@ -373,11 +373,11 @@ class PersistentOverride:
         ..  container:: example
 
             >>> override = baca.PersistentOverride(
-            ...     attribute='bar_extent',
-            ...     context='Staff',
-            ...     grob='bar_line',
+            ...     attribute="bar_extent",
+            ...     context="Staff",
+            ...     grob="bar_line",
             ...     value=(-2, 0),
-            ...     )
+            ... )
 
             >>> override.context
             'Staff'
@@ -393,11 +393,11 @@ class PersistentOverride:
         ..  container:: example
 
             >>> override = baca.PersistentOverride(
-            ...     attribute='bar_extent',
-            ...     context='Staff',
-            ...     grob='bar_line',
+            ...     attribute="bar_extent",
+            ...     context="Staff",
+            ...     grob="bar_line",
             ...     value=(-2, 0),
-            ...     )
+            ... )
 
             >>> override.grob
             'bar_line'
@@ -413,11 +413,11 @@ class PersistentOverride:
         ..  container:: example
 
             >>> override = baca.PersistentOverride(
-            ...     attribute='bar_extent',
-            ...     context='Staff',
-            ...     grob='bar_line',
+            ...     attribute="bar_extent",
+            ...     context="Staff",
+            ...     grob="bar_line",
             ...     value=(-2, 0),
-            ...     )
+            ... )
 
             >>> override.hide is None
             True
@@ -433,11 +433,11 @@ class PersistentOverride:
         ..  container:: example
 
             >>> override = baca.PersistentOverride(
-            ...     attribute='bar_extent',
-            ...     context='Staff',
-            ...     grob='bar_line',
+            ...     attribute="bar_extent",
+            ...     context="Staff",
+            ...     grob="bar_line",
             ...     value=(-2, 0),
-            ...     )
+            ... )
 
             >>> override.persistent
             True
@@ -454,11 +454,11 @@ class PersistentOverride:
         ..  container:: example
 
             >>> override = baca.PersistentOverride(
-            ...     attribute='bar_extent',
-            ...     context='Staff',
-            ...     grob='bar_line',
+            ...     attribute="bar_extent",
+            ...     context="Staff",
+            ...     grob="bar_line",
             ...     value=(-2, 0),
-            ...     )
+            ... )
 
             >>> override.value
             (-2, 0)

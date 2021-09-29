@@ -16,9 +16,9 @@ class Part:
 
         >>> part = baca.Part(
         ...     member=18,
-        ...     section='FirstViolin',
-        ...     section_abbreviation='VN-1',
-        ...     )
+        ...     section="FirstViolin",
+        ...     section_abbreviation="VN-1",
+        ... )
 
         >>> string = abjad.storage(part)
         >>> print(string)
@@ -57,15 +57,11 @@ class Part:
         instrument = instrument or section
         if instrument is not None:
             if not isinstance(instrument, str):
-                message = "instrument must be string"
-                message += f" (not {instrument!r})."
-                raise Exception(message)
+                raise Exception("instrument must be string (not {instrument!r}).")
         self._instrument = instrument
         if member is not None:
             if not isinstance(member, int):
-                message = "member must be integer"
-                message += f" (not {member!r})."
-                raise Exception(message)
+                raise Exception("member must be integer (not {member!r}).")
         self._member = member
         if number is not None:
             assert isinstance(number, int), repr(number)
@@ -98,26 +94,26 @@ class Part:
 
     def __eq__(self, argument):
         """
-        Is true when ``argument`` is a part with the same section and
-        member as this part.
+        Is true when ``argument`` is a part with the same section and member as this
+        part.
 
         ..  container:: example
 
             >>> part_1 = baca.Part(
             ...     member=18,
-            ...     section='FirstViolin',
-            ...     section_abbreviation='VN-1',
-            ...     )
+            ...     section="FirstViolin",
+            ...     section_abbreviation="VN-1",
+            ... )
             >>> part_2 = baca.Part(
             ...     member=18,
-            ...     section='FirstViolin',
-            ...     section_abbreviation='VN-1',
-            ...     )
+            ...     section="FirstViolin",
+            ...     section_abbreviation="VN-1",
+            ... )
             >>> part_3 = baca.Part(
             ...     member=18,
-            ...     section='SecondViolin',
-            ...     section_abbreviation='VN-2',
-            ...     )
+            ...     section="SecondViolin",
+            ...     section_abbreviation="VN-2",
+            ... )
 
             >>> part_1 == part_1
             True
@@ -168,11 +164,11 @@ class Part:
         ..  container:: example
 
             >>> part = baca.Part(
-            ...     instrument='Violin',
+            ...     instrument="Violin",
             ...     member=18,
-            ...     section='FirstViolin',
-            ...     section_abbreviation='VN-1',
-            ...     )
+            ...     section="FirstViolin",
+            ...     section_abbreviation="VN-1",
+            ... )
 
             >>> part.identifier
             'VN-1-18'
@@ -193,11 +189,11 @@ class Part:
         ..  container:: example
 
             >>> part = baca.Part(
-            ...     instrument='Violin',
+            ...     instrument="Violin",
             ...     member=18,
-            ...     section='FirstViolin',
-            ...     section_abbreviation='VN-1',
-            ...     )
+            ...     section="FirstViolin",
+            ...     section_abbreviation="VN-1",
+            ... )
 
             >>> part.instrument
             'Violin'
@@ -213,11 +209,11 @@ class Part:
         ..  container:: example
 
             >>> part = baca.Part(
-            ...     instrument='Violin',
+            ...     instrument="Violin",
             ...     member=18,
-            ...     section='FirstViolin',
-            ...     section_abbreviation='VN-1',
-            ...     )
+            ...     section="FirstViolin",
+            ...     section_abbreviation="VN-1",
+            ... )
 
             >>> part.member
             18
@@ -233,22 +229,22 @@ class Part:
         ..  container:: example
 
             >>> part = baca.Part(
-            ...     instrument='Violin',
+            ...     instrument="Violin",
             ...     member=1,
-            ...     section='FirstViolin',
-            ...     section_abbreviation='VN-1',
-            ...     )
+            ...     section="FirstViolin",
+            ...     section_abbreviation="VN-1",
+            ... )
 
             >>> part.name
             'FirstViolin1'
 
             >>> part = baca.Part(
-            ...     instrument='Violin',
+            ...     instrument="Violin",
             ...     member=1,
             ...     zfill=2,
-            ...     section='FirstViolin',
-            ...     section_abbreviation='VN-1',
-            ...     )
+            ...     section="FirstViolin",
+            ...     section_abbreviation="VN-1",
+            ... )
 
             >>> part.name
             'FirstViolin01'
@@ -264,12 +260,12 @@ class Part:
         ..  container:: example
 
             >>> part = baca.Part(
-            ...     instrument='Violin',
+            ...     instrument="Violin",
             ...     member=18,
             ...     number=107,
-            ...     section='FirstViolin',
-            ...     section_abbreviation='VN-1',
-            ...     )
+            ...     section="FirstViolin",
+            ...     section_abbreviation="VN-1",
+            ... )
 
             >>> part.number
             107
@@ -285,11 +281,11 @@ class Part:
         ..  container:: example
 
             >>> part = baca.Part(
-            ...     instrument='Violin',
+            ...     instrument="Violin",
             ...     member=18,
-            ...     section='FirstViolin',
-            ...     section_abbreviation='VN-1',
-            ...     )
+            ...     section="FirstViolin",
+            ...     section_abbreviation="VN-1",
+            ... )
 
             >>> part.section
             'FirstViolin'
@@ -305,11 +301,11 @@ class Part:
         ..  container:: example
 
             >>> part = baca.Part(
-            ...     instrument='Violin',
+            ...     instrument="Violin",
             ...     member=18,
-            ...     section='FirstViolin',
-            ...     section_abbreviation='VN-1',
-            ...     )
+            ...     section="FirstViolin",
+            ...     section_abbreviation="VN-1",
+            ... )
 
             >>> part.section_abbreviation
             'VN-1'
@@ -325,13 +321,13 @@ class Part:
         ..  container:: example
 
             >>> part = baca.Part(
-            ...     instrument='Violin',
+            ...     instrument="Violin",
             ...     member=9,
             ...     number=99,
-            ...     section='FirstViolin',
-            ...     section_abbreviation='VN-1',
+            ...     section="FirstViolin",
+            ...     section_abbreviation="VN-1",
             ...     zfill=2,
-            ...     )
+            ... )
 
             >>> part.zfill
             2
@@ -349,24 +345,24 @@ class PartAssignment:
 
     ..  container:: example
 
-        >>> baca.PartAssignment('Horn')
+        >>> baca.PartAssignment("Horn")
         PartAssignment('Horn')
 
-        >>> baca.PartAssignment('Horn', 1)
+        >>> baca.PartAssignment("Horn", 1)
         PartAssignment('Horn', 1)
 
-        >>> baca.PartAssignment('Horn', 2)
+        >>> baca.PartAssignment("Horn", 2)
         PartAssignment('Horn', 2)
 
-        >>> baca.PartAssignment('Horn', (3, 4))
+        >>> baca.PartAssignment("Horn", (3, 4))
         PartAssignment('Horn', (3, 4))
 
-        >>> baca.PartAssignment('Horn', [1, 3])
+        >>> baca.PartAssignment("Horn", [1, 3])
         PartAssignment('Horn', [1, 3])
 
     ..  container:: example
 
-        >>> part_assignment = baca.PartAssignment('Horn', [1, 3])
+        >>> part_assignment = baca.PartAssignment("Horn", [1, 3])
 
         >>> print(abjad.storage(part_assignment))
         baca.PartAssignment('Horn', [1, 3])
@@ -399,13 +395,13 @@ class PartAssignment:
         ..  container:: example
 
             >>> parts = [
-            ...     baca.Part(section='Horn', member= 1),
-            ...     baca.Part(section='Horn', member= 2),
-            ...     baca.Part(section='Horn', member= 3),
-            ...     baca.Part(section='Horn', member= 4),
+            ...     baca.Part(section="Horn", member= 1),
+            ...     baca.Part(section="Horn", member= 2),
+            ...     baca.Part(section="Horn", member= 3),
+            ...     baca.Part(section="Horn", member= 4),
             ...     ]
 
-            >>> part_assignment = baca.PartAssignment('Horn')
+            >>> part_assignment = baca.PartAssignment("Horn")
             >>> for part in parts:
             ...     part, part in part_assignment
             ...
@@ -414,7 +410,7 @@ class PartAssignment:
             (Part(instrument='Horn', member=3, section='Horn'), True)
             (Part(instrument='Horn', member=4, section='Horn'), True)
 
-            >>> part_assignment = baca.PartAssignment('Horn', 1)
+            >>> part_assignment = baca.PartAssignment("Horn", 1)
             >>> for part in parts:
             ...     part, part in part_assignment
             ...
@@ -423,7 +419,7 @@ class PartAssignment:
             (Part(instrument='Horn', member=3, section='Horn'), False)
             (Part(instrument='Horn', member=4, section='Horn'), False)
 
-            >>> part_assignment = baca.PartAssignment('Horn', 2)
+            >>> part_assignment = baca.PartAssignment("Horn", 2)
             >>> for part in parts:
             ...     part, part in part_assignment
             ...
@@ -432,7 +428,7 @@ class PartAssignment:
             (Part(instrument='Horn', member=3, section='Horn'), False)
             (Part(instrument='Horn', member=4, section='Horn'), False)
 
-            >>> part_assignment = baca.PartAssignment('Horn', (3, 4))
+            >>> part_assignment = baca.PartAssignment("Horn", (3, 4))
             >>> for part in parts:
             ...     part, part in part_assignment
             ...
@@ -441,7 +437,7 @@ class PartAssignment:
             (Part(instrument='Horn', member=3, section='Horn'), True)
             (Part(instrument='Horn', member=4, section='Horn'), True)
 
-            >>> part_assignment = baca.PartAssignment('Horn', [1, 3])
+            >>> part_assignment = baca.PartAssignment("Horn", [1, 3])
             >>> for part in parts:
             ...     part, part in part_assignment
             ...
@@ -454,8 +450,8 @@ class PartAssignment:
 
             Raises exception when input is not part:
 
-            >>> part_assignment = baca.PartAssignment('Horn')
-            >>> 'Horn' in part_assignment
+            >>> part_assignment = baca.PartAssignment("Horn")
+            >>> "Horn" in part_assignment
             Traceback (most recent call last):
                 ...
             TypeError: must be part (not 'Horn').
@@ -481,9 +477,9 @@ class PartAssignment:
 
         ..  container:: example
 
-            >>> part_assignment_1 = baca.PartAssignment('Horn', (1, 2))
-            >>> part_assignment_2 = baca.PartAssignment('Horn', [1, 2])
-            >>> part_assignment_3 = baca.PartAssignment('Horn')
+            >>> part_assignment_1 = baca.PartAssignment("Horn", (1, 2))
+            >>> part_assignment_2 = baca.PartAssignment("Horn", [1, 2])
+            >>> part_assignment_3 = baca.PartAssignment("Horn")
 
             >>> part_assignment_1 == part_assignment_1
             True
@@ -524,7 +520,7 @@ class PartAssignment:
 
         ..  container:: example
 
-            >>> part_assignment = baca.PartAssignment('Horn', [1, 3])
+            >>> part_assignment = baca.PartAssignment("Horn", [1, 3])
             >>> for part in part_assignment:
             ...     part
             ...
@@ -576,19 +572,19 @@ class PartAssignment:
 
         ..  container:: example
 
-            >>> baca.PartAssignment('Horn').members is None
+            >>> baca.PartAssignment("Horn").members is None
             True
 
-            >>> baca.PartAssignment('Horn', 1).members
+            >>> baca.PartAssignment("Horn", 1).members
             [1]
 
-            >>> baca.PartAssignment('Horn', 2).members
+            >>> baca.PartAssignment("Horn", 2).members
             [2]
 
-            >>> baca.PartAssignment('Horn', (3, 4)).members
+            >>> baca.PartAssignment("Horn", (3, 4)).members
             [3, 4]
 
-            >>> baca.PartAssignment('Horn', [1, 3]).members
+            >>> baca.PartAssignment("Horn", [1, 3]).members
             [1, 3]
 
         """
@@ -601,19 +597,19 @@ class PartAssignment:
 
         ..  container:: example
 
-            >>> baca.PartAssignment('Horn').parts
+            >>> baca.PartAssignment("Horn").parts
             [Part(instrument='Horn', section='Horn')]
 
-            >>> baca.PartAssignment('Horn', 1).parts
+            >>> baca.PartAssignment("Horn", 1).parts
             [Part(instrument='Horn', member=1, section='Horn')]
 
-            >>> baca.PartAssignment('Horn', 2).parts
+            >>> baca.PartAssignment("Horn", 2).parts
             [Part(instrument='Horn', member=2, section='Horn')]
 
-            >>> baca.PartAssignment('Horn', (3, 4)).parts
+            >>> baca.PartAssignment("Horn", (3, 4)).parts
             [Part(instrument='Horn', member=3, section='Horn'), Part(instrument='Horn', member=4, section='Horn')]
 
-            >>> baca.PartAssignment('Horn', [1, 3]).parts
+            >>> baca.PartAssignment("Horn", [1, 3]).parts
             [Part(instrument='Horn', member=1, section='Horn'), Part(instrument='Horn', member=3, section='Horn')]
 
         """
@@ -626,19 +622,19 @@ class PartAssignment:
 
         ..  container:: example
 
-            >>> baca.PartAssignment('Horn').section
+            >>> baca.PartAssignment("Horn").section
             'Horn'
 
-            >>> baca.PartAssignment('Horn', 1).section
+            >>> baca.PartAssignment("Horn", 1).section
             'Horn'
 
-            >>> baca.PartAssignment('Horn', 2).section
+            >>> baca.PartAssignment("Horn", 2).section
             'Horn'
 
-            >>> baca.PartAssignment('Horn', (3, 4)).section
+            >>> baca.PartAssignment("Horn", (3, 4)).section
             'Horn'
 
-            >>> baca.PartAssignment('Horn', [1, 3]).section
+            >>> baca.PartAssignment("Horn", [1, 3]).section
             'Horn'
 
         """
@@ -651,19 +647,19 @@ class PartAssignment:
 
         ..  container:: example
 
-            >>> baca.PartAssignment('Horn').token is None
+            >>> baca.PartAssignment("Horn").token is None
             True
 
-            >>> baca.PartAssignment('Horn', 1).token
+            >>> baca.PartAssignment("Horn", 1).token
             1
 
-            >>> baca.PartAssignment('Horn', 2).token
+            >>> baca.PartAssignment("Horn", 2).token
             2
 
-            >>> baca.PartAssignment('Horn', (3, 4)).token
+            >>> baca.PartAssignment("Horn", (3, 4)).token
             (3, 4)
 
-            >>> baca.PartAssignment('Horn', [1, 3]).token
+            >>> baca.PartAssignment("Horn", [1, 3]).token
             [1, 3]
 
         """
@@ -677,40 +673,40 @@ class Section:
     ..  container:: example
 
         >>> baca.Section(
-        ...     abbreviation='VN-1',
+        ...     abbreviation="VN-1",
         ...     count=18,
-        ...     instrument='Violin',
-        ...     name='FirstViolin',
-        ...     )
+        ...     instrument="Violin",
+        ...     name="FirstViolin",
+        ... )
         Section(abbreviation='VN-1', count=18, instrument='Violin', name='FirstViolin')
 
         >>> baca.Section(
-        ...     abbreviation='VN-2',
+        ...     abbreviation="VN-2",
         ...     count=18,
-        ...     instrument='Violin',
-        ...     name='SecondViolin',
-        ...     )
+        ...     instrument="Violin",
+        ...     name="SecondViolin",
+        ... )
         Section(abbreviation='VN-2', count=18, instrument='Violin', name='SecondViolin')
 
         >>> baca.Section(
-        ...     abbreviation='VA',
+        ...     abbreviation="VA",
         ...     count=18,
-        ...     name='Viola',
-        ...     )
+        ...     name="Viola",
+        ... )
         Section(abbreviation='VA', count=18, instrument='Viola', name='Viola')
 
         >>> baca.Section(
-        ...     abbreviation='VC',
+        ...     abbreviation="VC",
         ...     count=14,
-        ...     name='Cello',
-        ...     )
+        ...     name="Cello",
+        ... )
         Section(abbreviation='VC', count=14, instrument='Cello', name='Cello')
 
         >>> baca.Section(
-        ...     abbreviation='CB',
+        ...     abbreviation="CB",
         ...     count=6,
-        ...     name='Contrabass',
-        ...     )
+        ...     name="Contrabass",
+        ... )
         Section(abbreviation='CB', count=6, instrument='Contrabass', name='Contrabass')
 
     """
@@ -768,29 +764,29 @@ class Section:
 
     def __eq__(self, argument):
         """
-        Is true when ``argument`` is a section with the same name,
-        abbreviation and count as this section.
+        Is true when ``argument`` is a section with the same name, abbreviation and count
+        as this section.
 
         ..  container:: example
 
             >>> section_1 = baca.Section(
-            ...     abbreviation='VN-1',
+            ...     abbreviation="VN-1",
             ...     count=18,
-            ...     instrument='Violin',
-            ...     name='FirstViolin',
-            ...     )
+            ...     instrument="Violin",
+            ...     name="FirstViolin",
+            ... )
             >>> section_2 = baca.Section(
-            ...     abbreviation='VN-1',
+            ...     abbreviation="VN-1",
             ...     count=18,
-            ...     instrument='Violin',
-            ...     name='FirstViolin',
-            ...     )
+            ...     instrument="Violin",
+            ...     name="FirstViolin",
+            ... )
             >>> section_3 = baca.Section(
-            ...     abbreviation='VN-2',
+            ...     abbreviation="VN-2",
             ...     count=18,
-            ...     instrument='Violin',
-            ...     name='SecondViolin',
-            ...     )
+            ...     instrument="Violin",
+            ...     name="SecondViolin",
+            ... )
 
             >>> section_1 == section_1
             True
@@ -845,11 +841,11 @@ class Section:
         ..  container:: example
 
             >>> section = baca.Section(
-            ...     abbreviation='VN-1',
+            ...     abbreviation="VN-1",
             ...     count=18,
-            ...     instrument='Violin',
-            ...     name='FirstViolin',
-            ...     )
+            ...     instrument="Violin",
+            ...     name="FirstViolin",
+            ... )
 
             >>> section.abbreviation
             'VN-1'
@@ -865,11 +861,11 @@ class Section:
         ..  container:: example
 
             >>> section = baca.Section(
-            ...     abbreviation='VN-1',
+            ...     abbreviation="VN-1",
             ...     count=18,
-            ...     instrument='Violin',
-            ...     name='FirstViolin',
-            ...     )
+            ...     instrument="Violin",
+            ...     name="FirstViolin",
+            ... )
 
             >>> section.count
             18
@@ -885,11 +881,11 @@ class Section:
         ..  container:: example
 
             >>> section = baca.Section(
-            ...     abbreviation='VN-1',
+            ...     abbreviation="VN-1",
             ...     count=18,
-            ...     instrument='Violin',
-            ...     name='FirstViolin',
-            ...     )
+            ...     instrument="Violin",
+            ...     name="FirstViolin",
+            ... )
 
             >>> section.instrument
             'Violin'
@@ -905,11 +901,11 @@ class Section:
         ..  container:: example
 
             >>> section = baca.Section(
-            ...     abbreviation='VN-1',
+            ...     abbreviation="VN-1",
             ...     count=18,
-            ...     instrument='Violin',
-            ...     name='FirstViolin',
-            ...     )
+            ...     instrument="Violin",
+            ...     name="FirstViolin",
+            ... )
 
             >>> section.name
             'FirstViolin'
@@ -925,11 +921,11 @@ class Section:
         ..  container:: example
 
             >>> section = baca.Section(
-            ...     abbreviation='VN-1',
+            ...     abbreviation="VN-1",
             ...     count=18,
-            ...     instrument='Violin',
-            ...     name='FirstViolin',
-            ...     )
+            ...     instrument="Violin",
+            ...     name="FirstViolin",
+            ... )
 
             >>> for part in section.parts:
             ...     part
@@ -966,11 +962,11 @@ class PartManifest:
         Initializes from parts:
 
         >>> part_manifest = baca.PartManifest(
-        ...    baca.Part(section='BassClarinet', section_abbreviation='BCL'),
-        ...    baca.Part(section='Violin', section_abbreviation='VN'),
-        ...    baca.Part(section='Viola', section_abbreviation='VA'),
-        ...    baca.Part(section='Cello', section_abbreviation='VC'),
-        ...    )
+        ...     baca.Part(section="BassClarinet", section_abbreviation="BCL"),
+        ...     baca.Part(section="Violin", section_abbreviation="VN"),
+        ...     baca.Part(section="Viola", section_abbreviation="VA"),
+        ...     baca.Part(section="Cello", section_abbreviation="VC"),
+        ... )
         >>> len(part_manifest)
         4
 
@@ -979,33 +975,33 @@ class PartManifest:
         Initializes from orchestra sections:
 
         >>> part_manifest = baca.PartManifest(
-        ...    baca.Section(
-        ...         abbreviation='FL',
+        ...     baca.Section(
+        ...         abbreviation="FL",
         ...         count=4,
-        ...         name='Flute',
-        ...         ),
-        ...    baca.Section(
-        ...         abbreviation='OB',
+        ...         name="Flute",
+        ...     ),
+        ...     baca.Section(
+        ...         abbreviation="OB",
         ...         count=3,
-        ...         name='Oboe',
-        ...         ),
-        ...    baca.Part(
-        ...         section_abbreviation='EH',
-        ...         section='EnglishHorn',
-        ...         ),
-        ...    baca.Section(
-        ...         abbreviation='VN-1',
+        ...         name="Oboe",
+        ...     ),
+        ...     baca.Part(
+        ...         section_abbreviation="EH",
+        ...         section="EnglishHorn",
+        ...     ),
+        ...     baca.Section(
+        ...         abbreviation="VN-1",
         ...         count=18,
-        ...         instrument='Violin',
-        ...         name='FirstViolin',
-        ...         ),
-        ...    baca.Section(
-        ...         abbreviation='VN-2',
+        ...         instrument="Violin",
+        ...         name="FirstViolin",
+        ...     ),
+        ...     baca.Section(
+        ...         abbreviation="VN-2",
         ...         count=18,
-        ...         instrument='Violin',
-        ...         name='SecondViolin',
+        ...         instrument="Violin",
+        ...         name="SecondViolin",
         ...         ),
-        ...    )
+        ... )
         >>> len(part_manifest)
         44
 
@@ -1042,33 +1038,33 @@ class PartManifest:
         ..  container:: example
 
             >>> part_manifest = baca.PartManifest(
-            ...    baca.Section(
-            ...         abbreviation='FL',
+            ...     baca.Section(
+            ...         abbreviation="FL",
             ...         count=4,
-            ...         name='Flute',
-            ...         ),
-            ...    baca.Section(
-            ...         abbreviation='OB',
+            ...         name="Flute",
+            ...     ),
+            ...     baca.Section(
+            ...         abbreviation="OB",
             ...         count=3,
-            ...         name='Oboe',
-            ...         ),
-            ...    baca.Part(
-            ...         section_abbreviation='EH',
-            ...         section='EnglishHorn',
-            ...         ),
-            ...    baca.Section(
-            ...         abbreviation='VN-1',
+            ...         name="Oboe",
+            ...     ),
+            ...     baca.Part(
+            ...         section_abbreviation="EH",
+            ...         section="EnglishHorn",
+            ...     ),
+            ...     baca.Section(
+            ...         abbreviation="VN-1",
             ...         count=18,
-            ...         instrument='Violin',
-            ...         name='FirstViolin',
-            ...         ),
-            ...    baca.Section(
-            ...         abbreviation='VN-2',
+            ...         instrument="Violin",
+            ...         name="FirstViolin",
+            ...     ),
+            ...     baca.Section(
+            ...         abbreviation="VN-2",
             ...         count=18,
-            ...         instrument='Violin',
-            ...         name='SecondViolin',
-            ...         ),
-            ...    )
+            ...         instrument="Violin",
+            ...         name="SecondViolin",
+            ...     ),
+            ... )
 
             >>> for part in part_manifest:
             ...     part
@@ -1128,44 +1124,44 @@ class PartManifest:
         ..  container:: example
 
             >>> part_manifest = baca.PartManifest(
-            ...    baca.Part(section='BassClarinet', section_abbreviation='BCL'),
-            ...    baca.Part(section='Violin', section_abbreviation='VN'),
-            ...    baca.Part(section='Viola', section_abbreviation='VA'),
-            ...    baca.Part(section='Cello', section_abbreviation='VC'),
-            ...    )
+            ...     baca.Part(section="BassClarinet", section_abbreviation="BCL"),
+            ...     baca.Part(section="Violin", section_abbreviation="VN"),
+            ...     baca.Part(section="Viola", section_abbreviation="VA"),
+            ...     baca.Part(section="Cello", section_abbreviation="VC"),
+            ... )
             >>> len(part_manifest)
             4
 
         ..  container:: example
 
             >>> part_manifest = baca.PartManifest(
-            ...    baca.Section(
-            ...         abbreviation='FL',
+            ...     baca.Section(
+            ...         abbreviation="FL",
             ...         count=4,
-            ...         name='Flute',
-            ...         ),
-            ...    baca.Section(
-            ...         abbreviation='OB',
+            ...         name="Flute",
+            ...     ),
+            ...     baca.Section(
+            ...         abbreviation="OB",
             ...         count=3,
-            ...         name='Oboe',
-            ...         ),
-            ...    baca.Part(
-            ...         section_abbreviation='EH',
-            ...         section='EnglishHorn',
-            ...         ),
-            ...    baca.Section(
-            ...         abbreviation='VN-1',
+            ...         name="Oboe",
+            ...     ),
+            ...     baca.Part(
+            ...         section_abbreviation="EH",
+            ...         section="EnglishHorn",
+            ...     ),
+            ...     baca.Section(
+            ...         abbreviation="VN-1",
             ...         count=18,
-            ...         instrument='Violin',
-            ...         name='FirstViolin',
-            ...         ),
-            ...    baca.Section(
-            ...         abbreviation='VN-2',
+            ...         instrument="Violin",
+            ...         name="FirstViolin",
+            ...     ),
+            ...     baca.Section(
+            ...         abbreviation="VN-2",
             ...         count=18,
-            ...         instrument='Violin',
-            ...         name='SecondViolin',
-            ...         ),
-            ...    )
+            ...         instrument="Violin",
+            ...         name="SecondViolin",
+            ...     ),
+            ... )
 
             >>> len(part_manifest)
             44
@@ -1189,11 +1185,11 @@ class PartManifest:
         ..  container:: example
 
             >>> part_manifest = baca.PartManifest(
-            ...    baca.Part(section='BassClarinet', section_abbreviation='BCL'),
-            ...    baca.Part(section='Violin', section_abbreviation='VN'),
-            ...    baca.Part(section='Viola', section_abbreviation='VA'),
-            ...    baca.Part(section='Cello', section_abbreviation='VC'),
-            ...    )
+            ...     baca.Part(section="BassClarinet", section_abbreviation="BCL"),
+            ...     baca.Part(section="Violin", section_abbreviation="VN"),
+            ...     baca.Part(section="Viola", section_abbreviation="VA"),
+            ...     baca.Part(section="Cello", section_abbreviation="VC"),
+            ... )
             >>> for part in part_manifest:
             ...     part
             ...
@@ -1205,33 +1201,33 @@ class PartManifest:
         ..  container:: example
 
             >>> part_manifest = baca.PartManifest(
-            ...    baca.Section(
-            ...         abbreviation='FL',
+            ...     baca.Section(
+            ...         abbreviation="FL",
             ...         count=4,
-            ...         name='Flute',
-            ...         ),
-            ...    baca.Section(
-            ...         abbreviation='OB',
+            ...         name="Flute",
+            ...     ),
+            ...     baca.Section(
+            ...         abbreviation="OB",
             ...         count=3,
-            ...         name='Oboe',
-            ...         ),
-            ...    baca.Part(
-            ...         section_abbreviation='EH',
-            ...         section='EnglishHorn',
-            ...         ),
-            ...    baca.Section(
-            ...         abbreviation='VN-1',
+            ...         name="Oboe",
+            ...     ),
+            ...     baca.Part(
+            ...         section_abbreviation="EH",
+            ...         section="EnglishHorn",
+            ...     ),
+            ...     baca.Section(
+            ...         abbreviation="VN-1",
             ...         count=18,
-            ...         instrument='Violin',
-            ...         name='FirstViolin',
-            ...         ),
-            ...    baca.Section(
-            ...         abbreviation='VN-2',
+            ...         instrument="Violin",
+            ...         name="FirstViolin",
+            ...     ),
+            ...     baca.Section(
+            ...         abbreviation="VN-2",
             ...         count=18,
-            ...         instrument='Violin',
-            ...         name='SecondViolin',
-            ...         ),
-            ...    )
+            ...         instrument="Violin",
+            ...         name="SecondViolin",
+            ...     ),
+            ... )
 
             >>> for part in part_manifest.parts:
             ...     part
@@ -1300,44 +1296,44 @@ class PartManifest:
         ..  container:: example
 
             >>> part_manifest = baca.PartManifest(
-            ...    baca.Part(section='BassClarinet', section_abbreviation='BCL'),
-            ...    baca.Part(section='Violin', section_abbreviation='VN'),
-            ...    baca.Part(section='Viola', section_abbreviation='VA'),
-            ...    baca.Part(section='Cello', section_abbreviation='VC'),
-            ...    )
+            ...     baca.Part(section="BassClarinet", section_abbreviation="BCL"),
+            ...     baca.Part(section="Violin", section_abbreviation="VN"),
+            ...     baca.Part(section="Viola", section_abbreviation="VA"),
+            ...     baca.Part(section="Cello", section_abbreviation="VC"),
+            ... )
             >>> part_manifest.sections
             []
 
         ..  container:: example
 
             >>> part_manifest = baca.PartManifest(
-            ...    baca.Section(
-            ...         abbreviation='FL',
+            ...     baca.Section(
+            ...         abbreviation="FL",
             ...         count=4,
-            ...         name='Flute',
-            ...         ),
-            ...    baca.Section(
-            ...         abbreviation='OB',
+            ...         name="Flute",
+            ...     ),
+            ...     baca.Section(
+            ...         abbreviation="OB",
             ...         count=3,
-            ...         name='Oboe',
-            ...         ),
-            ...    baca.Part(
-            ...         section_abbreviation='EH',
-            ...         section='EnglishHorn',
-            ...         ),
-            ...    baca.Section(
-            ...         abbreviation='VN-1',
+            ...         name="Oboe",
+            ...     ),
+            ...     baca.Part(
+            ...         section_abbreviation="EH",
+            ...         section="EnglishHorn",
+            ...     ),
+            ...     baca.Section(
+            ...         abbreviation="VN-1",
             ...         count=18,
-            ...         instrument='Violin',
-            ...         name='FirstViolin',
-            ...         ),
-            ...    baca.Section(
-            ...         abbreviation='VN-2',
+            ...         instrument="Violin",
+            ...         name="FirstViolin",
+            ...     ),
+            ...     baca.Section(
+            ...         abbreviation="VN-2",
             ...         count=18,
-            ...         instrument='Violin',
-            ...         name='SecondViolin',
-            ...         ),
-            ...    )
+            ...         instrument="Violin",
+            ...         name="SecondViolin",
+            ...     ),
+            ... )
 
             >>> for section in part_manifest.sections:
             ...     section
@@ -1350,20 +1346,20 @@ class PartManifest:
         ..  container:: example
 
             >>> section = baca.Section(
-            ...     abbreviation='VN-1',
+            ...     abbreviation="VN-1",
             ...     count=18,
-            ...     instrument='Violin',
-            ...     name='FirstViolin',
-            ...     )
+            ...     instrument="Violin",
+            ...     name="FirstViolin",
+            ... )
             >>> section in part_manifest.sections
             True
 
             >>> section = baca.Section(
-            ...     abbreviation='VN-1',
+            ...     abbreviation="VN-1",
             ...     count=36,
-            ...     instrument='Violin',
-            ...     name='FirstViolin',
-            ...     )
+            ...     instrument="Violin",
+            ...     name="FirstViolin",
+            ... )
             >>> section in part_manifest.sections
             False
 
@@ -1379,35 +1375,35 @@ class PartManifest:
         ..  container:: example
 
             >>> part_manifest = baca.PartManifest(
-            ...    baca.Section(
-            ...         abbreviation='FL',
+            ...     baca.Section(
+            ...         abbreviation="FL",
             ...         count=4,
-            ...         name='Flute',
-            ...         ),
-            ...    baca.Section(
-            ...         abbreviation='OB',
+            ...         name="Flute",
+            ...     ),
+            ...     baca.Section(
+            ...         abbreviation="OB",
             ...         count=3,
-            ...         name='Oboe',
-            ...         ),
-            ...    baca.Part(
-            ...         section_abbreviation='EH',
-            ...         section='EnglishHorn',
-            ...         ),
-            ...    baca.Section(
-            ...         abbreviation='VN-1',
+            ...         name="Oboe",
+            ...     ),
+            ...     baca.Part(
+            ...         section_abbreviation="EH",
+            ...         section="EnglishHorn",
+            ...     ),
+            ...     baca.Section(
+            ...         abbreviation="VN-1",
             ...         count=18,
-            ...         instrument='Violin',
-            ...         name='FirstViolin',
-            ...         ),
-            ...    baca.Section(
-            ...         abbreviation='VN-2',
+            ...         instrument="Violin",
+            ...         name="FirstViolin",
+            ...     ),
+            ...     baca.Section(
+            ...         abbreviation="VN-2",
             ...         count=18,
-            ...         instrument='Violin',
-            ...         name='SecondViolin',
-            ...         ),
-            ...    )
+            ...         instrument="Violin",
+            ...         name="SecondViolin",
+            ...     ),
+            ... )
 
-            >>> part_assignment = baca.PartAssignment('Oboe')
+            >>> part_assignment = baca.PartAssignment("Oboe")
             >>> for part in part_manifest.expand(part_assignment):
             ...     part
             ...
@@ -1546,8 +1542,7 @@ def part_to_identifiers(path, part, container_to_part_assignment):
     identifiers.append(clef_string)
     dictionary = container_to_part_assignment
     if not dictionary:
-        message = "empty container-to-part-assignment dictionary"
-        return message
+        return "empty container-to-part-assignment dictionary"
     for i, (segment_number, dictionary_) in enumerate(dictionary.items()):
         pairs = []
         for identifier, (part_assignment, timespan) in dictionary_.items():

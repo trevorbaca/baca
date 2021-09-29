@@ -79,8 +79,7 @@ def increase_elements(sequence, addenda, indices=None):
 
 def insert_and_transpose(notes, subrun_tokens):
     """
-    Inserts and transposes nested subruns in ``notes`` according to
-    ``subrun_tokens``.
+    Inserts and transposes nested subruns in ``notes`` according to ``subrun_tokens``.
 
     >>> notes = [abjad.Note(_, (1, 4)) for _ in [0, 2, 7, 9, 5, 11, 4]]
     >>> subrun_tokens = [(0, [2, 4]), (4, [3, 1])]
@@ -96,20 +95,17 @@ def insert_and_transpose(notes, subrun_tokens):
     >>> result
     [0, [5, 7], 2, [4, 0, 6, 11], 7, 9, 5, [10, 6, 8], 11, [7], 4]
 
-    Set ``subrun_tokens`` to a list of zero or more ``(index, length_list)``
-    pairs.
+    Set ``subrun_tokens`` to a list of zero or more ``(index, length_list)`` pairs.
 
-    For each ``(index, length_list)`` pair in *subrun_tokens* the function will
-    read *index* mod ``len(notes)`` and insert a subrun of length
-    ``length_list[0]`` immediately after ``notes[index]``, a subrun of length
-    ``length_list[1]`` immediately after ``notes[index+1]``, and, in general, a
-    subrun of ``length_list[i]`` immediately after ``notes[index+i]``, for ``i
-    < length(length_list)``.
+    For each ``(index, length_list)`` pair in *subrun_tokens* the function will read
+    *index* mod ``len(notes)`` and insert a subrun of length ``length_list[0]``
+    immediately after ``notes[index]``, a subrun of length ``length_list[1]`` immediately
+    after ``notes[index+1]``, and, in general, a subrun of ``length_list[i]`` immediately
+    after ``notes[index+i]``, for ``i < length(length_list)``.
 
-    New subruns are wrapped with lists. These wrapper lists are designed to
-    allow inspection of the structural changes to ``notes`` immediately after
-    the function returns. For this reason most calls to this function will be
-    followed by flattening.
+    New subruns are wrapped with lists. These wrapper lists are designed to allow
+    inspection of the structural changes to ``notes`` immediately after the function
+    returns. For this reason most calls to this function will be followed by flattening.
 
     >>> for note in notes:
     ...     note
@@ -126,10 +122,10 @@ def insert_and_transpose(notes, subrun_tokens):
     [Note("g'4")]
     Note("e'4")
 
-    This function is designed to work on a built-in Python list of notes. This
-    function is **not** designed to work on Abjad voices, staves or other
-    containers because the function currently implements no spanner-handling.
-    That is, this function is designed to be used during precomposition.
+    This function is designed to work on a built-in Python list of notes. This function
+    is **not** designed to work on Abjad voices, staves or other containers because the
+    function currently implements no spanner-handling. That is, this function is designed
+    to be used during precomposition.
 
     Returns list of integers and / or floats.
     """
@@ -225,7 +221,7 @@ def negate_elements(sequence, absolute=False, indices=None, period=None):
         ...     sequence,
         ...     indices=[0, 1, 2],
         ...     period=5,
-        ...     )
+        ... )
         [-1, -2, -3, 4, 5, 6, 7, 8, -9, -10]
 
     ..  container:: example
@@ -245,7 +241,7 @@ def negate_elements(sequence, absolute=False, indices=None, period=None):
         ...     sequence,
         ...     absolute=True,
         ...     indices=[0, 1, 2],
-        ...     )
+        ... )
         [-1, -2, -3, 4, 5, -6, -7, -8, -9, -10]
 
     ..  container:: example
@@ -259,7 +255,7 @@ def negate_elements(sequence, absolute=False, indices=None, period=None):
         ...     absolute=True,
         ...     indices=[0, 1, 2],
         ...     period=5,
-        ...     )
+        ... )
         [-1, -2, -3, 4, 5, -6, -7, -8, -9, -10]
 
     Returns newly constructed list.
@@ -347,13 +343,12 @@ def partition_integer_into_halves(n, bigger=abjad.Left, even="allowed"):
     """
     Partitions ``n`` into halves.
 
-    Writes positive integer ``n`` as the pair ``(left, right)`` such that
-    ``n == left + right``.
+    Writes positive integer ``n`` as the pair ``(left, right)`` such that ``n == left +
+    right``.
 
     ..   container:: example
 
-        When ``n`` is odd the greater part of pair corresponds to the value of
-        ``bigger``
+        When ``n`` is odd the greater part of pair corresponds to the value of ``bigger``
 
         >>> baca.partition_integer_into_halves(7, bigger=abjad.Left)
         (4, 3)
@@ -368,21 +363,21 @@ def partition_integer_into_halves(n, bigger=abjad.Left, even="allowed"):
         >>> baca.partition_integer_into_halves(
         ...     8,
         ...     bigger=abjad.Left,
-        ...     even='disallowed',
-        ...     )
+        ...     even="disallowed",
+        ... )
         (5, 3)
 
         >>> baca.partition_integer_into_halves(
         ...     8,
         ...     bigger=abjad.Right,
-        ...     even='disallowed',
-        ...     )
+        ...     even="disallowed",
+        ... )
         (3, 5)
 
     ..  container:: example
 
-        But when ``n`` is even and ``even = 'allowed'`` then ``left == right``
-        and ``bigger`` is ignored:
+        But when ``n`` is even and ``even = 'allowed'`` then ``left == right`` and
+        ``bigger`` is ignored:
 
         >>> baca.partition_integer_into_halves(8)
         (4, 4)
@@ -436,13 +431,11 @@ def partition_nested_into_inward_pointing_parts(list_, target="negative"):
         [[1, 1, 1, -4]]
 
         >>> list_ = [[1], [5], [5, 1], [1, 5], [5, 5], [1, 5, 1]]
-        >>> baca.partition_nested_into_inward_pointing_parts(
-        ...    list_, target='positive')
+        >>> baca.partition_nested_into_inward_pointing_parts(list_, target="positive")
         [[1], [4, 1], [4, 1, 1], [1, 1, 4], [4, 1, 1, 4], [1, 4, 1, 1]]
 
         >>> list_ = [[1, 1, -5]]
-        >>> baca.partition_nested_into_inward_pointing_parts(
-        ...    list_, target='positive')
+        >>> baca.partition_nested_into_inward_pointing_parts(list_, target="positive")
         [[1, 1, -5]]
 
     """

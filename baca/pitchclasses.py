@@ -288,7 +288,7 @@ class ChordalSpacingSpecifier:
         >>> specifier = baca.ChordalSpacingSpecifier(
         ...     bass=6,
         ...     soprano=7,
-        ...     )
+        ... )
         >>> specifier([[-6, -3, -5, -1, -7]])
         CollectionList([<6, 9, 11, 17, 19>])
 
@@ -298,7 +298,7 @@ class ChordalSpacingSpecifier:
         ...     bass=6,
         ...     direction=abjad.Down,
         ...     soprano=7,
-        ...     )
+        ... )
         >>> specifier([[-6, -3, -5, -1, -7]])
         CollectionList([<19, 17, 11, 9, 6>])
 
@@ -308,7 +308,7 @@ class ChordalSpacingSpecifier:
         ...     bass=11,
         ...     direction=abjad.Down,
         ...     soprano=7,
-        ...     )
+        ... )
         >>> specifier([[-6, -3, -5, -1, -7]])
         CollectionList([<31, 30, 29, 21, 11>])
 
@@ -433,8 +433,7 @@ class ChordalSpacingSpecifier:
             else:
                 candidate += 1
             if 999 <= iterations:
-                message = "stuck in while-loop."
-                raise Exception(message)
+                raise Exception("stuck in while-loop.")
             iterations += 1
         assert not pitch_classes, repr(pitch_classes)
         return pitch_classes_
@@ -529,39 +528,27 @@ class ChordalSpacingSpecifier:
 
             Up-directed bass specification:
 
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     bass=None,
-            ...     )
+            >>> specifier = baca.ChordalSpacingSpecifier(bass=None)
             >>> specifier([[-6, -3, -5, -1, -7]])
             CollectionList([<6, 7, 9, 11, 17>])
 
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     bass=6,
-            ...     )
+            >>> specifier = baca.ChordalSpacingSpecifier(bass=6)
             >>> specifier([[-6, -3, -5, -1, -7]])
             CollectionList([<6, 7, 9, 11, 17>])
 
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     bass=7,
-            ...     )
+            >>> specifier = baca.ChordalSpacingSpecifier(bass=7)
             >>> specifier([[-6, -3, -5, -1, -7]])
             CollectionList([<7, 9, 11, 17, 18>])
 
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     bass=9,
-            ...     )
+            >>> specifier = baca.ChordalSpacingSpecifier(bass=9)
             >>> specifier([[-6, -3, -5, -1, -7]])
             CollectionList([<9, 11, 17, 18, 19>])
 
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     bass=11,
-            ...     )
+            >>> specifier = baca.ChordalSpacingSpecifier(bass=11)
             >>> specifier([[-6, -3, -5, -1, -7]])
             CollectionList([<11, 17, 18, 19, 21>])
 
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     bass=5,
-            ...     )
+            >>> specifier = baca.ChordalSpacingSpecifier(bass=5)
             >>> specifier([[-6, -3, -5, -1, -7]])
             CollectionList([<5, 6, 7, 9, 11>])
 
@@ -580,28 +567,28 @@ class ChordalSpacingSpecifier:
             >>> specifier = baca.ChordalSpacingSpecifier(
             ...     bass=6,
             ...     soprano=7,
-            ...     )
+            ... )
             >>> specifier([[-6, -3, -5, -1, -7]])
             CollectionList([<6, 9, 11, 17, 19>])
 
             >>> specifier = baca.ChordalSpacingSpecifier(
             ...     bass=6,
             ...     soprano=9,
-            ...     )
+            ... )
             >>> specifier([[-6, -3, -5, -1, -7]])
             CollectionList([<6, 7, 11, 17, 21>])
 
             >>> specifier = baca.ChordalSpacingSpecifier(
             ...     bass=6,
             ...     soprano=11,
-            ...     )
+            ... )
             >>> specifier([[-6, -3, -5, -1, -7]])
             CollectionList([<6, 7, 9, 17, 23>])
 
             >>> specifier = baca.ChordalSpacingSpecifier(
             ...     bass=6,
             ...     soprano=5
-            ...     )
+            ... )
             >>> specifier([[-6, -3, -5, -1, -7]])
             CollectionList([<6, 7, 9, 11, 17>])
 
@@ -622,7 +609,7 @@ class ChordalSpacingSpecifier:
             >>> specifier = baca.ChordalSpacingSpecifier(
             ...     bass=6,
             ...     soprano=7,
-            ...     )
+            ... )
             >>> specifier([[5, 6, 7, 9, 11]])
             CollectionList([<6, 9, 11, 17, 19>])
 
@@ -630,7 +617,7 @@ class ChordalSpacingSpecifier:
             ...     bass=6,
             ...     minimum_semitones=1,
             ...     soprano=7,
-            ...     )
+            ... )
             >>> specifier([[5, 6, 7, 9, 11]])
             CollectionList([<6, 9, 11, 17, 19>])
 
@@ -638,7 +625,7 @@ class ChordalSpacingSpecifier:
             ...     bass=6,
             ...     minimum_semitones=2,
             ...     soprano=7,
-            ...     )
+            ... )
             >>> specifier([[5, 6, 7, 9, 11]])
             CollectionList([<6, 9, 11, 17, 19>])
 
@@ -646,7 +633,7 @@ class ChordalSpacingSpecifier:
             ...     bass=6,
             ...     minimum_semitones=3,
             ...     soprano=7,
-            ...     )
+            ... )
             >>> specifier([[5, 6, 7, 9, 11]])
             CollectionList([<6, 9, 17, 23, 31>])
 
@@ -660,7 +647,7 @@ class ChordalSpacingSpecifier:
             ...     bass=6,
             ...     direction=abjad.Down,
             ...     soprano=7,
-            ...     )
+            ... )
             >>> specifier([[5, 6, 7, 9, 11]])
             CollectionList([<19, 17, 11, 9, 6>])
 
@@ -669,7 +656,7 @@ class ChordalSpacingSpecifier:
             ...     direction=abjad.Down,
             ...     minimum_semitones=1,
             ...     soprano=7,
-            ...     )
+            ... )
             >>> specifier([[5, 6, 7, 9, 11]])
             CollectionList([<19, 17, 11, 9, 6>])
 
@@ -678,7 +665,7 @@ class ChordalSpacingSpecifier:
             ...     direction=abjad.Down,
             ...     minimum_semitones=2,
             ...     soprano=7,
-            ...     )
+            ... )
             >>> specifier([[5, 6, 7, 9, 11]])
             CollectionList([<19, 17, 11, 9, 6>])
 
@@ -687,7 +674,7 @@ class ChordalSpacingSpecifier:
             ...     direction=abjad.Down,
             ...     minimum_semitones=3,
             ...     soprano=7,
-            ...     )
+            ... )
             >>> specifier([[5, 6, 7, 9, 11]])
             CollectionList([<31, 23, 17, 9, 6>])
 
@@ -713,42 +700,42 @@ class ChordalSpacingSpecifier:
             >>> specifier = baca.ChordalSpacingSpecifier(
             ...     direction=abjad.Down,
             ...     soprano=None,
-            ...     )
+            ... )
             >>> specifier([[-6, -3, -5, -1, -7]])
             CollectionList([<18, 17, 11, 9, 7>])
 
             >>> specifier = baca.ChordalSpacingSpecifier(
             ...     direction=abjad.Down,
             ...     soprano=6,
-            ...     )
+            ... )
             >>> specifier([[-6, -3, -5, -1, -7]])
             CollectionList([<18, 17, 11, 9, 7>])
 
             >>> specifier = baca.ChordalSpacingSpecifier(
             ...     direction=abjad.Down,
             ...     soprano=5,
-            ...     )
+            ... )
             >>> specifier([[-6, -3, -5, -1, -7]])
             CollectionList([<17, 11, 9, 7, 6>])
 
             >>> specifier = baca.ChordalSpacingSpecifier(
             ...     direction=abjad.Down,
             ...     soprano=11,
-            ...     )
+            ... )
             >>> specifier([[-6, -3, -5, -1, -7]])
             CollectionList([<11, 9, 7, 6, 5>])
 
             >>> specifier = baca.ChordalSpacingSpecifier(
             ...     direction=abjad.Down,
             ...     soprano=9,
-            ...     )
+            ... )
             >>> specifier([[-6, -3, -5, -1, -7]])
             CollectionList([<21, 19, 18, 17, 11>])
 
             >>> specifier = baca.ChordalSpacingSpecifier(
             ...     direction=abjad.Down,
             ...     soprano=7,
-            ...     )
+            ... )
             >>> specifier([[-6, -3, -5, -1, -7]])
             CollectionList([<19, 18, 17, 11, 9>])
 
@@ -811,9 +798,10 @@ class CollectionList(collections_module.abc.Sequence):
 
         Initializes named pitch segments:
 
-        >>> for collection in baca.CollectionList([
-        ...     [12, 14, 18, 17],
-        ...     [16, 20, 19],
+        >>> for collection in baca.CollectionList(
+        ...     [
+        ...         [12, 14, 18, 17],
+        ...         [16, 20, 19],
         ...     ],
         ...     item_class=abjad.NamedPitch,
         ...     ):
@@ -826,9 +814,10 @@ class CollectionList(collections_module.abc.Sequence):
 
         Initializes numbered pitch-class segments:
 
-        >>> for collection in baca.CollectionList([
-        ...     [12, 14, 18, 17],
-        ...     [16, 20, 19],
+        >>> for collection in baca.CollectionList(
+        ...     [
+        ...         [12, 14, 18, 17],
+        ...         [16, 20, 19],
         ...     ],
         ...     item_class=abjad.NumberedPitchClass,
         ...     ):
@@ -841,9 +830,10 @@ class CollectionList(collections_module.abc.Sequence):
 
         Initializes named pitch-class segments:
 
-        >>> for collection in baca.CollectionList([
-        ...     [12, 14, 18, 17],
-        ...     [16, 20, 19],
+        >>> for collection in baca.CollectionList(
+        ...     [
+        ...         [12, 14, 18, 17],
+        ...         [16, 20, 19],
         ...     ],
         ...     item_class=abjad.NamedPitchClass,
         ...     ):
@@ -1005,10 +995,10 @@ class CollectionList(collections_module.abc.Sequence):
 
         ..  container:: example
 
-                >>> collections_1 = baca.CollectionList([[12, 14, 18, 17]])
-                >>> collections_2 = baca.CollectionList([[16, 20, 19]])
-                >>> collections_1 + collections_2
-                CollectionList([<12, 14, 18, 17>, <16, 20, 19>])
+            >>> collections_1 = baca.CollectionList([[12, 14, 18, 17]])
+            >>> collections_2 = baca.CollectionList([[16, 20, 19]])
+            >>> collections_1 + collections_2
+            CollectionList([<12, 14, 18, 17>, <16, 20, 19>])
 
         """
         if not isinstance(argument, collections_module.abc.Iterable):
@@ -1020,8 +1010,8 @@ class CollectionList(collections_module.abc.Sequence):
 
     def __eq__(self, argument) -> bool:
         """
-        Is true when ``argument`` is a collection list with collections
-        equal to those of this collection list.
+        Is true when ``argument`` is a collection list with collections equal to those of
+        this collection list.
 
         ..  container:: example
 
@@ -1057,11 +1047,11 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections_1 = baca.CollectionList(
             ...     collections=[[12, 13, 14], [15, 16, 17]],
             ...     item_class=None,
-            ...     )
+            ... )
             >>> collections_2 = baca.CollectionList(
             ...     collections=[[12, 13, 14], [15, 16, 17]],
             ...     item_class=abjad.NumberedPitch,
-            ...     )
+            ... )
 
             >>> collections_1.item_class == collections_2.item_class
             False
@@ -1086,7 +1076,7 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections = baca.CollectionList([
             ...     [12, 14, 18, 17],
             ...     [16, 20, 19],
-            ...     ])
+            ... ])
 
             >>> collections[0]
             PitchSegment([12, 14, 18, 17])
@@ -1101,7 +1091,7 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections = baca.CollectionList([
             ...     [12, 14, 18, 17],
             ...     [16, 20, 19],
-            ...     ])
+            ... ])
 
             >>> collections[:1]
             CollectionList([<12, 14, 18, 17>])
@@ -1128,7 +1118,7 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections = baca.CollectionList([
             ...     [12, 14, 18, 17],
             ...     [16, 20, 19],
-            ...     ])
+            ... ])
 
             >>> abjad.show(collections) # doctest: +SKIP
 
@@ -1199,7 +1189,7 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections = baca.CollectionList([
             ...     [12, 14, 18, 17],
             ...     [16, 20, 19],
-            ...     ])
+            ... ])
 
             >>> len(collections)
             2
@@ -1219,7 +1209,7 @@ class CollectionList(collections_module.abc.Sequence):
             >>> baca.CollectionList([
             ...     [12, 14, 18, 17],
             ...     [16, 20, 19],
-            ...     ])
+            ... ])
             CollectionList([<12, 14, 18, 17>, <16, 20, 19>])
 
         """
@@ -1308,7 +1298,7 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections = baca.CollectionList([
             ...     [12, 14, 18, 17],
             ...     [16, 20, 19],
-            ...     ])
+            ... ])
 
             >>> collections.collections
             [PitchSegment([12, 14, 18, 17]), PitchSegment([16, 20, 19])]
@@ -1338,7 +1328,7 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections = baca.CollectionList(
             ...     [[0, 2, 6, 5], [4, 8, 7]],
             ...     item_class=abjad.NumberedPitchClass,
-            ...     )
+            ... )
 
             >>> for collection in collections.accumulate([lambda _: _.transpose(n=3)]):
             ...     collection
@@ -1359,7 +1349,7 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections = baca.CollectionList(
             ...     [[0, 2, 6, 5], [4, 8, 7]],
             ...     item_class=abjad.NumberedPitchClass,
-            ...     )
+            ... )
 
             >>> operands = [lambda _: _.transpose(n=3), lambda _: _.alpha()]
             >>> for collection in collections.accumulate(operands):
@@ -1407,7 +1397,7 @@ class CollectionList(collections_module.abc.Sequence):
 
             >>> collections = baca.CollectionList(
             ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-            ...     )
+            ... )
 
             >>> collections.arpeggiate_down()
             CollectionList([<29, 24, 14, 6, 5>, <28, 17, 7>, <3, 2, 1, 0>])
@@ -1418,7 +1408,7 @@ class CollectionList(collections_module.abc.Sequence):
 
             >>> collections = baca.CollectionList(
             ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-            ...     )
+            ... )
 
             >>> collections.arpeggiate_down(pattern=[-1])
             CollectionList([<5, 12, 14, 18, 17>, <16, 17, 19>, <3, 2, 1, 0>])
@@ -1450,7 +1440,7 @@ class CollectionList(collections_module.abc.Sequence):
 
             >>> collections = baca.CollectionList(
             ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-            ...     )
+            ... )
 
             >>> collections.arpeggiate_up()
             CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
@@ -1461,7 +1451,7 @@ class CollectionList(collections_module.abc.Sequence):
 
             >>> collections = baca.CollectionList(
             ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-            ...     )
+            ... )
 
             >>> collections.arpeggiate_up(pattern=[-1])
             CollectionList([<5, 12, 14, 18, 17>, <16, 17, 19>, <3, 14, 25, 36>])
@@ -1493,7 +1483,7 @@ class CollectionList(collections_module.abc.Sequence):
 
             >>> collections = baca.CollectionList(
             ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-            ...     )
+            ... )
             >>> collections = collections.arpeggiate_up()
 
             >>> collections
@@ -1508,7 +1498,7 @@ class CollectionList(collections_module.abc.Sequence):
 
             >>> collections = baca.CollectionList(
             ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-            ...     )
+            ... )
             >>> collections = collections.arpeggiate_up()
 
             >>> collections
@@ -1539,7 +1529,7 @@ class CollectionList(collections_module.abc.Sequence):
 
             >>> collections = baca.CollectionList(
             ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-            ...     )
+            ... )
             >>> collections = collections.arpeggiate_up()
 
             >>> collections
@@ -1554,7 +1544,7 @@ class CollectionList(collections_module.abc.Sequence):
 
             >>> collections = baca.CollectionList(
             ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-            ...     )
+            ... )
             >>> collections = collections.arpeggiate_up()
 
             >>> collections
@@ -1588,7 +1578,7 @@ class CollectionList(collections_module.abc.Sequence):
             ...     [16, 20, 19],
             ...     [12, 14, 18, 17],
             ...     [16, 20, 19],
-            ...     ])
+            ... ])
 
             >>> for collection in collections:
             ...     collection
@@ -1615,7 +1605,7 @@ class CollectionList(collections_module.abc.Sequence):
             ...     [16, 20, 19],
             ...     [12, 14, 18, 17],
             ...     [16, 20, 19],
-            ...     ])
+            ... ])
 
             >>> pattern = abjad.index([1], 2)
             >>> for collection in collections.chords(pattern=pattern):
@@ -1688,7 +1678,7 @@ class CollectionList(collections_module.abc.Sequence):
 
             >>> collections = baca.CollectionList(
             ...     [[5, 12, 14, 18, 17], [16, 17, 19]],
-            ...     )
+            ... )
 
             >>> str(collections.flatten())
             '<5, 12, 14, 18, 17, 16, 17, 19>'
@@ -1698,7 +1688,7 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections = baca.CollectionList(
             ...     [[5, 12, 14, 18, 17], [16, 17, 19]],
             ...     item_class=abjad.NamedPitch,
-            ...     )
+            ... )
 
             >>> str(collections.flatten())
             "<f' c'' d'' fs'' f'' e'' f'' g''>"
@@ -1715,7 +1705,7 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections = baca.CollectionList([
             ...     [4, 5, 7],
             ...     [15, 16, 17, 19]
-            ...     ])
+            ... ])
 
             >>> collections.has_duplicate_pitch_classes(level=1)
             False
@@ -1754,7 +1744,7 @@ class CollectionList(collections_module.abc.Sequence):
 
             >>> collections = baca.CollectionList([
             ...     [16, 17], [13], [16, 17],
-            ...     ])
+            ... ])
 
             >>> collections.has_duplicates(level=0)
             True
@@ -1782,7 +1772,7 @@ class CollectionList(collections_module.abc.Sequence):
 
             >>> collections = baca.CollectionList([
             ...     [16, 17], [14, 20], [14],
-            ...     ])
+            ... ])
 
             >>> collections.has_duplicates(level=0)
             False
@@ -1877,7 +1867,7 @@ class CollectionList(collections_module.abc.Sequence):
 
             >>> collections = baca.CollectionList([
             ...     [4, 5], [18, 18], [4, 5],
-            ...     ])
+            ... ])
 
             >>> collections.has_repeats(level=0)
             False
@@ -1892,7 +1882,7 @@ class CollectionList(collections_module.abc.Sequence):
 
             >>> collections = baca.CollectionList([
             ...     [4, 5], [5, 18], [4, 5],
-            ...     ])
+            ... ])
 
             >>> collections.has_repeats(level=0)
             False
@@ -1972,7 +1962,7 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections = baca.CollectionList([
             ...     [5, 12, 14, 18, 17],
             ...     [16, 17, 19],
-            ...     ])
+            ... ])
 
             >>> collections.join()
             CollectionList([<5, 12, 14, 18, 17, 16, 17, 19>])
@@ -2000,7 +1990,7 @@ class CollectionList(collections_module.abc.Sequence):
             ...     [5, 12, 14, 18, 17],
             ...     [16, 17, 19],
             ...     [16, 17, 19],
-            ...     ])
+            ... ])
 
             >>> sequence = collections.partition([1, 2], overhang=abjad.Exact)
             >>> for collection_list in sequence:
@@ -2020,7 +2010,7 @@ class CollectionList(collections_module.abc.Sequence):
             ...     [5, 12, 14, 18, 17],
             ...     [16, 17, 19],
             ...     [16, 17, 19],
-            ...     ])
+            ... ])
 
             >>> collections
             CollectionList([<5, 12, 14, 18, 17>, <16, 17, 19>, <16, 17, 19>])
@@ -2036,7 +2026,7 @@ class CollectionList(collections_module.abc.Sequence):
             ...     [5, 12, 14, 18, 17],
             ...     [16, 17, 19],
             ...     [16, 17, 19],
-            ...     ])
+            ... ])
 
             >>> collections = collections.repeat(2)
             >>> for collection in collections.partition(
@@ -2052,8 +2042,7 @@ class CollectionList(collections_module.abc.Sequence):
 
         """
         if isinstance(argument, abjad.Ratio):
-            message = "implement ratio-partition at some point."
-            raise NotImplementedError(message)
+            raise NotImplementedError("implement ratio-partition at some point.")
         sequence = _sequence.Sequence(self)
         parts = sequence.partition_by_counts(argument, cyclic=cyclic, overhang=overhang)
         collection_lists = [abjad.new(self, collections=_) for _ in parts]
@@ -2073,7 +2062,7 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections = baca.CollectionList([
             ...     [5, 12, 14, 18, 17],
             ...     [16, 17, 19],
-            ...     ])
+            ... ])
 
             >>> for collection in collections.read([3, 3, 3, 5, 5, 5]):
             ...     collection
@@ -2092,7 +2081,7 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections = baca.CollectionList([
             ...     [5, 12, 14, 18, 17],
             ...     [16, 17, 19],
-            ...     ])
+            ... ])
 
             >>> len(collections.flatten())
             8
@@ -2201,7 +2190,7 @@ class CollectionList(collections_module.abc.Sequence):
 
             >>> collections = baca.CollectionList(
             ...     [[16, 17, 16], [13, 14, 16], [16, 17, 16]],
-            ...     )
+            ... )
 
             >>> collections.remove_duplicates(level=0)
             CollectionList([<16, 17, 16>, <13, 14, 16>])
@@ -2391,7 +2380,7 @@ class CollectionList(collections_module.abc.Sequence):
 
             >>> collections = baca.CollectionList(
             ...     [[0, 1], [2, 3], [4], [5, 6], [7], [8]],
-            ...     )
+            ... )
             >>> collections.retain([0], period=2)
             CollectionList([<0, 1>, <4>, <7>])
 
@@ -2410,7 +2399,7 @@ class CollectionList(collections_module.abc.Sequence):
 
             >>> collections = baca.CollectionList(
             ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-            ...     )
+            ... )
             >>> collections = collections.arpeggiate_up()
 
             >>> collections
@@ -2425,7 +2414,7 @@ class CollectionList(collections_module.abc.Sequence):
 
             >>> collections = baca.CollectionList(
             ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-            ...     )
+            ... )
             >>> collections = collections.arpeggiate_up()
 
             >>> collections
@@ -2456,7 +2445,7 @@ class CollectionList(collections_module.abc.Sequence):
 
             >>> collections = baca.CollectionList(
             ...     [[5, 12, 14, 18, 17], [16, 17, 19]],
-            ...     )
+            ... )
 
             >>> collections.space_down(bass=5)
             CollectionList([<24, 18, 14, 5>, <16, 7, 5>])
@@ -2483,7 +2472,7 @@ class CollectionList(collections_module.abc.Sequence):
 
             >>> collections = baca.CollectionList(
             ...     [[5, 12, 14, 18, 17], [16, 17, 19]],
-            ...     )
+            ... )
 
             >>> collections.space_up(bass=5)
             CollectionList([<5, 6, 12, 14>, <5, 7, 16>])
@@ -2515,7 +2504,7 @@ class CollectionList(collections_module.abc.Sequence):
                 >>> collections = baca.CollectionList(
                 ...     [[12, 14, 18, 17], [16, 20, 19]],
                 ...     item_class=abjad.NumberedPitch,
-                ...     )
+                ... )
 
                 >>> collections.to_pitch_classes()
                 CollectionList([PC<0, 2, 6, 5>, PC<4, 8, 7>])
@@ -2525,7 +2514,7 @@ class CollectionList(collections_module.abc.Sequence):
                 >>> collections = baca.CollectionList(
                 ...     [[0, 2, 6, 5], [4, 8, 7]],
                 ...     item_class=abjad.NumberedPitchClass,
-                ...     )
+                ... )
 
                 >>> collections.to_pitch_classes()
                 CollectionList([PC<0, 2, 6, 5>, PC<4, 8, 7>])
@@ -2539,7 +2528,7 @@ class CollectionList(collections_module.abc.Sequence):
                 >>> collections = baca.CollectionList(
                 ...     [[12, 14, 18, 17], [16, 20, 19]],
                 ...     item_class=abjad.NamedPitch,
-                ...     )
+                ... )
 
                 >>> collections.to_pitch_classes()
                 CollectionList([PC<c d fs f>, PC<e af g>])
@@ -2549,7 +2538,7 @@ class CollectionList(collections_module.abc.Sequence):
                 >>> collections = baca.CollectionList(
                 ...     [[0, 2, 6, 5], [4, 8, 7]],
                 ...     item_class=abjad.NamedPitchClass,
-                ...     )
+                ... )
 
                 >>> collections.to_pitch_classes()
                 CollectionList([PC<c d fs f>, PC<e af g>])
@@ -2583,7 +2572,7 @@ class CollectionList(collections_module.abc.Sequence):
                 >>> collections = baca.CollectionList(
                 ...     [[12, 14, 18, 17], [16, 20, 19]],
                 ...     item_class=abjad.NumberedPitch,
-                ...     )
+                ... )
 
                 >>> collections.to_pitches()
                 CollectionList([<12, 14, 18, 17>, <16, 20, 19>])
@@ -2593,7 +2582,7 @@ class CollectionList(collections_module.abc.Sequence):
                 >>> collections = baca.CollectionList(
                 ...     [[0, 2, 6, 5], [4, 8, 7]],
                 ...     item_class=abjad.NumberedPitchClass,
-                ...     )
+                ... )
 
                 >>> collections.to_pitches()
                 CollectionList([<0, 2, 6, 5>, <4, 8, 7>])
@@ -2607,7 +2596,7 @@ class CollectionList(collections_module.abc.Sequence):
                 >>> collections = baca.CollectionList(
                 ...     [[12, 14, 18, 17], [16, 20, 19]],
                 ...     item_class=abjad.NamedPitch,
-                ...     )
+                ... )
 
                 >>> collections.to_pitches()
                 CollectionList([<c'' d'' fs'' f''>, <e'' af'' g''>])
@@ -2617,7 +2606,7 @@ class CollectionList(collections_module.abc.Sequence):
                 >>> collections = baca.CollectionList(
                 ...     [[0, 2, 6, 5], [4, 8, 7]],
                 ...     item_class=abjad.NamedPitchClass,
-                ...     )
+                ... )
 
                 >>> collections.to_pitches()
                 CollectionList([<c' d' fs' f'>, <e' af' g'>])
@@ -2651,7 +2640,7 @@ class CollectionList(collections_module.abc.Sequence):
                 >>> collections = baca.CollectionList(
                 ...     [[12, 14, 18, 17], [16, 20, 19]],
                 ...     item_class=abjad.NumberedPitch,
-                ...     )
+                ... )
 
                 >>> collections.transpose(28)
                 CollectionList([<40, 42, 46, 45>, <44, 48, 47>])
@@ -2661,7 +2650,7 @@ class CollectionList(collections_module.abc.Sequence):
                 >>> collections = baca.CollectionList(
                 ...     [[0, 2, 6, 5], [4, 8, 7]],
                 ...     item_class=abjad.NumberedPitchClass,
-                ...     )
+                ... )
 
                 >>> collections.transpose(28)
                 CollectionList([PC<4, 6, 10, 9>, PC<8, 0, 11>])
@@ -2675,7 +2664,7 @@ class CollectionList(collections_module.abc.Sequence):
                 >>> collections = baca.CollectionList(
                 ...     [[12, 14, 18, 17], [16, 20, 19]],
                 ...     item_class=abjad.NamedPitch,
-                ...     )
+                ... )
 
                 >>> collections.transpose(-28)
                 CollectionList([<af, bf, d df>, <c ff ef>])
@@ -2685,7 +2674,7 @@ class CollectionList(collections_module.abc.Sequence):
                 >>> collections = baca.CollectionList(
                 ...     [[0, 2, 6, 5], [4, 8, 7]],
                 ...     item_class=abjad.NamedPitchClass,
-                ...     )
+                ... )
 
                 >>> collections.transpose(-28)
                 CollectionList([PC<af bf d df>, PC<c ff ef>])
@@ -2922,7 +2911,7 @@ class HarmonicSeries:
 
         ..  container:: example
 
-            >>> baca.HarmonicSeries('C2').fundamental
+            >>> baca.HarmonicSeries("C2").fundamental
             NamedPitch('c,')
 
         """
@@ -2936,7 +2925,7 @@ class HarmonicSeries:
 
         ..  container:: example
 
-            >>> baca.HarmonicSeries('C2').partial(7)
+            >>> baca.HarmonicSeries("C2").partial(7)
             Partial(fundamental=NamedPitch('c,'), number=7)
 
         """
@@ -2949,7 +2938,7 @@ class Partial:
 
     ..  container:: example
 
-        >>> baca.Partial('C1', 7)
+        >>> baca.Partial("C1", 7)
         Partial(fundamental=NamedPitch('c,,'), number=7)
 
     """
@@ -2997,7 +2986,7 @@ class Partial:
 
         ..  container:: example
 
-            >>> baca.Partial('C1', 7).approximation
+            >>> baca.Partial("C1", 7).approximation
             NamedPitch('bf')
 
         """
@@ -3010,7 +2999,7 @@ class Partial:
 
         ..  container:: example
 
-            >>> baca.Partial('C1', 7).deviation
+            >>> baca.Partial("C1", 7).deviation
             -31
 
         """
@@ -3023,7 +3012,7 @@ class Partial:
 
         ..  container:: example
 
-            >>> baca.Partial('C1', 7).fundamental
+            >>> baca.Partial("C1", 7).fundamental
             NamedPitch('c,,')
 
         """
@@ -3036,7 +3025,7 @@ class Partial:
 
         ..  container:: example
 
-            >>> baca.Partial('C1', 7).number
+            >>> baca.Partial("C1", 7).number
             7
 
         """
@@ -3401,8 +3390,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            No matching transforms. Segments of differing lengths never
-            transform into each other:
+            No matching transforms. Segments of differing lengths never transform into
+            each other:
 
             >>> segment_2 = baca.PitchClassSegment(items=[0, 1, 2])
             >>> segment_2.get_matching_transforms(
@@ -3412,7 +3401,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
             ...     retrograde=True,
             ...     rotation=False,
             ...     transposition=True,
-            ...     )
+            ... )
             []
 
         ..  container:: example
@@ -3479,7 +3468,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
             ...     rank = i + 1
             ...     operator, transform = pair
             ...     transform = transform._get_padded_string()
-            ...     string = '{:3}:{!s:>4} J:  {!s}'
+            ...     string = "{:3}:{!s:>4} J:  {!s}"
             ...     string = string.format(rank, operator, transform)
             ...     print(string)
             1:     J:  PC<10, 11,  6,  7, 11,  7>
@@ -3504,13 +3493,13 @@ class PitchClassSegment(abjad.PitchClassSegment):
             ...     multiplication=True,
             ...     retrograde=True,
             ...     transposition=True,
-            ...     )
+            ... )
 
             >>> for i, pair in enumerate(transforms):
             ...     rank = i + 1
             ...     operator, transform = pair
             ...     transform = transform._get_padded_string()
-            ...     string = '{:3}:{!s:>10} J:  {!s}'
+            ...     string = "{:3}:{!s:>10} J:  {!s}"
             ...     string = string.format(rank, operator, transform)
             ...     print(string)
             1:           J:  PC<10, 11,  6,  7, 11,  7>
@@ -4293,8 +4282,6 @@ class PitchSegment(abjad.PitchSegment):
                 >>
 
     """
-
-    ### CLASS VARIABLES ###
 
     ### PRIVATE METHODS ###
 
@@ -5469,14 +5456,14 @@ class PitchTree(_classes.Tree):
         Initializes named pitch tree:
 
         >>> items = [
-        ...     ['E5', 'F#5', 'Bb4'],
-        ...     ['A4', 'G4', 'Ab4', 'B4', 'A4', 'C#4'],
-        ...     ['C4', 'D4', 'Eb4', 'F4'],
-        ...     ]
+        ...     ["E5", "F#5", "Bb4"],
+        ...     ["A4", "G4", "Ab4", "B4", "A4", "C#4"],
+        ...     ["C4", "D4", "Eb4", "F4"],
+        ... ]
         >>> tree = baca.PitchTree(
         ...     items=items,
         ...     item_class=abjad.NamedPitch,
-        ...     )
+        ... )
         >>> abjad.show(tree) # doctest: +SKIP
 
         ..  docs::
@@ -5623,14 +5610,14 @@ class PitchTree(_classes.Tree):
         Initializes named pitch-class tree:
 
         >>> items = [
-        ...     ['E5', 'F#5', 'Bb4'],
-        ...     ['A4', 'G4', 'Ab4', 'B4', 'A4', 'C#4'],
-        ...     ['C4', 'D4', 'Eb4', 'F4'],
-        ...     ]
+        ...     ["E5", "F#5", "Bb4"],
+        ...     ["A4", "G4", "Ab4", "B4", "A4", "C#4"],
+        ...     ["C4", "D4", "Eb4", "F4"],
+        ... ]
         >>> tree = baca.PitchTree(
         ...     items=items,
         ...     item_class=abjad.NamedPitchClass,
-        ...     )
+        ... )
         >>> abjad.show(tree) # doctest: +SKIP
 
         ..  docs::
@@ -5705,11 +5692,11 @@ class PitchTree(_classes.Tree):
         ...     baca.PitchTree([4, 6, 10]),
         ...     baca.PitchTree([9, 7, 8, 11, 9, 1]),
         ...     baca.PitchTree([0, 2, 3, 5]),
-        ...     ]
+        ... ]
         >>> tree = baca.PitchTree(items=items)
         >>> lilypond_file = tree.__illustrate__(
         ...     cell_indices=False,
-        ...     )
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5780,7 +5767,7 @@ class PitchTree(_classes.Tree):
         ...     abjad.PitchClassSegment([4, 6, 10]),
         ...     abjad.PitchClassSegment([9, 7, 8, 11, 9, 1]),
         ...     abjad.PitchClassSegment([0, 2, 3, 5]),
-        ...     ]
+        ... ]
         >>> items = [segment.rotate(n=1) for segment in items]
         >>> tree = baca.PitchTree(items=items)
         >>> abjad.show(tree, cell_indices=False) # doctest: +SKIP
@@ -6033,7 +6020,7 @@ class PitchTree(_classes.Tree):
             >>> lilypond_file = tree.__illustrate__(
             ...     cell_indices=abjad.Down,
             ...     set_classes=True,
-            ...     )
+            ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6137,7 +6124,7 @@ class PitchTree(_classes.Tree):
             >>> tree = baca.PitchTree(items=items)
             >>> lilypond_file = tree.__illustrate__(
             ...     cell_indices=abjad.Down,
-            ...     )
+            ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -7651,7 +7638,7 @@ class Registration:
 
         Registration in two parts:
 
-        >>> components = [('[A0, C4)', 15), ('[C4, C8)', 27)]
+        >>> components = [("[A0, C4)", 15), ("[C4, C8)", 27)]
         >>> registration = baca.Registration(components)
 
         >>> string = abjad.storage(registration)
@@ -7697,7 +7684,7 @@ class Registration:
 
             Transposes four pitches:
 
-            >>> components = [('[A0, C4)', 15), ('[C4, C8)', 27)]
+            >>> components = [("[A0, C4)", 15), ("[C4, C8)", 27)]
             >>> registration = baca.Registration(components)
             >>> pitches = registration([-24, -22, -23, -21])
             >>> for pitch in pitches:
@@ -7712,7 +7699,7 @@ class Registration:
 
             Transposes four other pitches:
 
-            >>> components = [('[A0, C4)', 15), ('[C4, C8)', 27)]
+            >>> components = [("[A0, C4)", 15), ("[C4, C8)", 27)]
             >>> registration = baca.Registration(components)
             >>> pitches = registration([0, 2, 1, 3])
             >>> for pitch in pitches:
@@ -7727,7 +7714,7 @@ class Registration:
 
             Transposes four quartertones:
 
-            >>> components = [('[A0, C4)', 15), ('[C4, C8)', 27)]
+            >>> components = [("[A0, C4)", 15), ("[C4, C8)", 27)]
             >>> registration = baca.Registration(components)
             >>> pitches = registration([0.5, 2.5, 1.5, 3.5])
             >>> for pitch in pitches:
@@ -7805,7 +7792,7 @@ class RegistrationComponent:
         to and including C8 should be transposed to the octave starting at Eb5 (numbered
         pitch 15):
 
-        >>> component = baca.RegistrationComponent('[A0, C8]', 15)
+        >>> component = baca.RegistrationComponent("[A0, C8]", 15)
         >>> component
         RegistrationComponent(source_pitch_range=PitchRange('[A0, C8]'), target_octave_start_pitch=NumberedPitch(15))
 
@@ -7862,7 +7849,7 @@ class RegistrationComponent:
 
             Gets source pitch range of example component:
 
-            >>> component = baca.RegistrationComponent('[A0, C8]', 15)
+            >>> component = baca.RegistrationComponent("[A0, C8]", 15)
             >>> component.source_pitch_range
             PitchRange('[A0, C8]')
 
@@ -7879,7 +7866,7 @@ class RegistrationComponent:
 
             Gets target octave start pitch of example component:
 
-            >>> component = baca.RegistrationComponent('[A0, C8]', 15)
+            >>> component = baca.RegistrationComponent("[A0, C8]", 15)
             >>> component.target_octave_start_pitch
             NumberedPitch(15)
 
@@ -7899,13 +7886,13 @@ class ZaggedPitchClassMaker:
         ...         [7, 1, 3, 4, 5, 11],
         ...         [3, 5, 6, 7],
         ...         [9, 10, 0, 8],
-        ...         ],
+        ...     ],
         ...     division_ratios=[
         ...         [[1], [1], [1], [1, 1]],
         ...         [[1], [1], [1], [1, 1, 1], [1, 1, 1]],
-        ...         ],
+        ...     ],
         ...         grouping_counts=[1, 1, 1, 2, 3],
-        ...     )
+        ... )
         >>> pitch_class_tree = maker()
         >>> abjad.show(pitch_class_tree) # doctest: +SKIP
 
@@ -8033,7 +8020,7 @@ class ZaggedPitchClassMaker:
             ...     pc_cells=[[0, 1, 2], [3, 4]],
             ...     division_ratios=None,
             ...     grouping_counts=None,
-            ...     )
+            ... )
             >>> pitch_class_tree = maker()
             >>> abjad.show(pitch_class_tree) # doctest: +SKIP
 
@@ -8060,7 +8047,7 @@ class ZaggedPitchClassMaker:
             ...     pc_cells=[[0, 1, 2, 3], [4, 5, 6, 7]],
             ...     division_ratios=[[(1, 1)]],
             ...     grouping_counts=None,
-            ...     )
+            ... )
             >>> pitch_class_tree = maker()
             >>> abjad.show(pitch_class_tree) # doctest: +SKIP
 
@@ -8100,7 +8087,7 @@ class ZaggedPitchClassMaker:
             ...     pc_cells=[[0, 1, 2], [3, 4]],
             ...     division_ratios=None,
             ...     grouping_counts=[1, 2],
-            ...     )
+            ... )
             >>> pitch_class_tree = maker()
             >>> abjad.show(pitch_class_tree) # doctest: +SKIP
 

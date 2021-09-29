@@ -113,7 +113,7 @@ class Accelerando:
 
             String representation of accelerando with custom markup:
 
-            >>> markup = abjad.Markup(r'\bold { \italic { accelerando } }')
+            >>> markup = abjad.Markup(r"\bold { \italic { accelerando } }")
             >>> accelerando = baca.Accelerando(markup=markup)
             >>> print(str(accelerando))
             \markup {
@@ -191,7 +191,7 @@ class Accelerando:
 
         ..  container:: example
 
-            >>> markup = abjad.Markup(r'\bold { \italic { accel. } }')
+            >>> markup = abjad.Markup(r"\bold { \italic { accel. } }")
             >>> accelerando = baca.Accelerando(markup=markup)
             >>> print(str(accelerando.markup))
             \markup {
@@ -280,8 +280,8 @@ class Accelerando:
             >>> copy.copy(accelerando)
             Accelerando(tweaks=TweakInterface(('_literal', None), ('color', '#blue')))
 
-        Tweak extra-offset to align accelerando markup with other metronome
-        mark spanner segments.
+        Tweak extra-offset to align accelerando markup with other metronome mark spanner
+        segments.
         """
         return self._tweaks
 
@@ -303,8 +303,7 @@ class BarExtent:
 
     def __init__(self, line_count, *, hide=None):
         if not isinstance(line_count, int):
-            message = f"line count must be integer (not {line_count!r})."
-            raise Exception(message)
+            raise Exception(f"line count must be integer (not {line_count!r}).")
         assert 0 <= line_count, repr(line_count)
         self._line_count = line_count
         if hide is not None:
@@ -542,7 +541,7 @@ class Ritardando:
 
         Custom ritardando:
 
-        >>> markup = abjad.Markup(r'\bold { \italic { ritardando } }')
+        >>> markup = abjad.Markup(r"\bold { \italic { ritardando } }")
         >>> ritardando = baca.Ritardando(markup=markup)
         >>> staff = abjad.Staff("c'4 d' e' f'", name="Staff")
         >>> score = abjad.Score([staff], name="Score")
@@ -646,7 +645,7 @@ class Ritardando:
 
             Custom ritardando:
 
-            >>> markup = abjad.Markup(r'\bold { \italic { ritardando } }')
+            >>> markup = abjad.Markup(r"\bold { \italic { ritardando } }")
             >>> ritardando = baca.Ritardando(markup=markup)
             >>> print(str(ritardando))
             \markup {
@@ -713,7 +712,7 @@ class Ritardando:
 
             Custom ritardando:
 
-            >>> markup = abjad.Markup(r'\bold { \italic { ritardando } }')
+            >>> markup = abjad.Markup(r"\bold { \italic { ritardando } }")
             >>> ritardando = baca.Ritardando(markup=markup)
             >>> ritardando.context
             'Score'
@@ -746,7 +745,7 @@ class Ritardando:
 
             Custom ritardando:
 
-            >>> markup = abjad.Markup(r'\bold { \italic { ritardando } }')
+            >>> markup = abjad.Markup(r"\bold { \italic { ritardando } }")
             >>> ritardando = baca.Ritardando(markup=markup)
             >>> abjad.show(ritardando.markup) # doctest: +SKIP
 
@@ -839,8 +838,8 @@ class Ritardando:
             >>> copy.copy(ritardando)
             Ritardando(tweaks=TweakInterface(('_literal', None), ('color', '#blue')))
 
-        Tweak extra-offset to align ritardando markup with other metronome
-        mark spanner segments.
+        Tweak extra-offset to align ritardando markup with other metronome mark spanner
+        segments.
         """
         return self._tweaks
 
@@ -862,8 +861,7 @@ class StaffLines:
 
     def __init__(self, line_count, *, hide=None):
         if not isinstance(line_count, int):
-            message = f"line count must be integer (not {line_count!r})."
-            raise Exception(message)
+            raise Exception(f"line count must be integer (not {line_count!r}).")
         assert 0 <= line_count, repr(line_count)
         self._line_count = line_count
         if hide is not None:
@@ -1011,7 +1009,7 @@ class SpacingSection:
         >>> lilypond_file = abjad.LilyPondFile(
         ...     [staff],
         ...     includes=["baca.ily"],
-        ...  )
+        ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1048,8 +1046,8 @@ class SpacingSection:
 
     def __eq__(self, argument):
         """
-        Is true when ``argument`` is a spacing section with same duration as
-        this spacing section.
+        Is true when ``argument`` is a spacing section with same duration as this spacing
+        section.
 
         ..  container:: example
 
@@ -1143,7 +1141,7 @@ class SpacingSection:
 
         ..  container:: example
 
-            >>> baca.SpacingSection.from_string('2/24')
+            >>> baca.SpacingSection.from_string("2/24")
             SpacingSection(duration=NonreducedFraction(2, 24))
 
         Returns new spacing section.

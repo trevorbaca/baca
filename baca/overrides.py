@@ -27,13 +27,13 @@ class OverrideCommand(_scoping.Command):
 
     __slots__ = (
         "_after",
+        "_allowlist",
         "_attribute",
         "_blocklist",
         "_context",
         "_grob",
         "_tags",
         "_value",
-        "_whitelist",
     )
 
     ### INITIALIZER ###
@@ -42,6 +42,7 @@ class OverrideCommand(_scoping.Command):
         self,
         *,
         after: bool = None,
+        allowlist: typing.Tuple[type] = None,
         attribute: str = None,
         blocklist: typing.Tuple[type] = None,
         context: str = None,
@@ -55,7 +56,6 @@ class OverrideCommand(_scoping.Command):
         tag_measure_number: bool = None,
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
         value: typing.Any = None,
-        whitelist: typing.Tuple[type] = None,
     ) -> None:
         _scoping.Command.__init__(
             self,
@@ -71,6 +71,10 @@ class OverrideCommand(_scoping.Command):
         if after is not None:
             after = bool(after)
         self._after = after
+        if allowlist is not None:
+            assert isinstance(allowlist, tuple), repr(allowlist)
+            assert all(issubclass(_, abjad.Leaf) for _ in allowlist)
+        self._allowlist = allowlist
         if attribute is not None:
             assert isinstance(attribute, str), repr(attribute)
         self._attribute = attribute
@@ -85,10 +89,6 @@ class OverrideCommand(_scoping.Command):
             assert isinstance(grob, str), repr(grob)
         self._grob = grob
         self._value = value
-        if whitelist is not None:
-            assert isinstance(whitelist, tuple), repr(whitelist)
-            assert all(issubclass(_, abjad.Leaf) for _ in whitelist)
-        self._whitelist = whitelist
 
     ### SPECIAL METHODS ###
 
@@ -106,15 +106,13 @@ class OverrideCommand(_scoping.Command):
         if self.blocklist:
             for leaf in leaves:
                 if isinstance(leaf, self.blocklist):
-                    message = f"{type(leaf).__name__} is forbidden."
-                    raise Exception(message)
-        if self.whitelist:
+                    raise Exception(f"{type(leaf).__name__} is forbidden.")
+        if self.allowlist:
             for leaf in leaves:
-                if not isinstance(leaf, self.whitelist):
-                    names = ",".join(_.__name__ for _ in self.whitelist)
+                if not isinstance(leaf, self.allowlist):
+                    names = ",".join(_.__name__ for _ in self.allowlist)
                     violator = type(leaf).__name__
-                    message = f"only {names} (not {violator}) allowed."
-                    raise Exception(message)
+                    raise Exception(f"only {names} (not {violator}) allowed.")
         lilypond_type = self.context
         if lilypond_type is not None:
             assert isinstance(lilypond_type, (str)), repr(lilypond_type)
@@ -164,6 +162,13 @@ class OverrideCommand(_scoping.Command):
         return self._after
 
     @property
+    def allowlist(self) -> typing.Optional[typing.Tuple[type]]:
+        """
+        Gets allowlist leaves.
+        """
+        return self._allowlist
+
+    @property
     def attribute(self) -> typing.Optional[str]:
         """
         Gets attribute name.
@@ -197,13 +202,6 @@ class OverrideCommand(_scoping.Command):
         Gets attribute value.
         """
         return self._value
-
-    @property
-    def whitelist(self) -> typing.Optional[typing.Tuple[type]]:
-        """
-        Gets whitelist leaves.
-        """
-        return self._whitelist
 
 
 def accidental_extra_offset(
@@ -370,11 +368,11 @@ def bar_line_transparent(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
+        ...     "Music_Voice",
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.rhythm(
         ...         rmakers.talea([1, 1, 1, -1], 8),
         ...         rmakers.beam(),
@@ -708,7 +706,7 @@ def dls_staff_padding(
         ...     baca.dls_staff_padding(4),
         ...     baca.new(
         ...         baca.hairpin(
-        ...             'p < f',
+        ...             "p < f",
         ...             remove_length_1_spanner_start=True,
         ...             selector=baca.selectors.tleaves(),
         ...             ),
@@ -811,7 +809,7 @@ def dls_up(
         ...     baca.dls_up(),
         ...     baca.new(
         ...         baca.hairpin(
-        ...             'p < f',
+        ...             "p < f",
         ...             remove_length_1_spanner_start=True,
         ...             selector=baca.selectors.tleaves(),
         ...             ),
@@ -989,8 +987,11 @@ def dynamic_text_extra_offset(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.dynamic('p'),
-        ...     baca.dynamic('f', selector=lambda _: baca.Selection(_).tuplets()[1:2].pleaf(0)),
+        ...     baca.dynamic("p"),
+        ...     baca.dynamic(
+        ...         "f",
+        ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].pleaf(0),
+        ...     ),
         ...     baca.dynamic_text_extra_offset((-3, 0)),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -1371,12 +1372,12 @@ def mmrest_color(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.mmrest_color("#(x11-color 'DarkOrchid)"),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -1432,7 +1433,7 @@ def mmrest_color(
         grob="MultiMeasureRest",
         selector=selector,
         tags=[_scoping.site(_frame())],
-        whitelist=(abjad.MultimeasureRest,),
+        allowlist=(abjad.MultimeasureRest,),
     )
 
 
@@ -1448,7 +1449,7 @@ def mmrest_transparent(
         grob="MultiMeasureRest",
         selector=selector,
         tags=[_scoping.site(_frame())],
-        whitelist=(abjad.MultimeasureRest,),
+        allowlist=(abjad.MultimeasureRest,),
     )
 
 
@@ -1467,14 +1468,14 @@ def mmrest_text_color(
         ...     )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         literal=True,
         ...         selector=baca.selectors.mmrest(1),
-        ...         ),
+        ...     ),
         ...     baca.mmrest_text_color("#red"),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -1532,19 +1533,19 @@ def mmrest_text_color(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.markup(
-        ...         r'\baca-boxed-markup still',
+        ...         r"\baca-boxed-markup still",
         ...         literal=True,
         ...         selector=baca.selectors.leaf(1),
-        ...         ),
+        ...     ),
         ...     baca.mmrest_text_color("#red", selector=baca.selectors.leaves()),
         ...     baca.pitches([2, 4]),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -1566,7 +1567,7 @@ def mmrest_text_color(
         grob="MultiMeasureRestText",
         selector=selector,
         tags=[_scoping.site(_frame())],
-        whitelist=(abjad.MultimeasureRest,),
+        allowlist=(abjad.MultimeasureRest,),
     )
 
 
@@ -1582,17 +1583,17 @@ def mmrest_text_extra_offset(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.markup(
-        ...         r'\baca-boxed-markup still',
+        ...         r"\baca-boxed-markup still",
         ...         literal=True,
         ...         selector=baca.selectors.mmrest(1),
-        ...         ),
+        ...     ),
         ...     baca.mmrest_text_extra_offset((0, 2)),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -1649,7 +1650,7 @@ def mmrest_text_extra_offset(
         grob="MultiMeasureRestText",
         selector=selector,
         tags=[_scoping.site(_frame())],
-        whitelist=(abjad.MultimeasureRest,),
+        allowlist=(abjad.MultimeasureRest,),
     )
 
 
@@ -1665,17 +1666,17 @@ def mmrest_text_padding(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.markup(
-        ...         r'\baca-boxed-markup still',
+        ...         r"\baca-boxed-markup still",
         ...         literal=True,
         ...         selector=baca.selectors.mmrest(1),
-        ...         ),
+        ...     ),
         ...     baca.mmrest_text_padding(2),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -1732,7 +1733,7 @@ def mmrest_text_padding(
         grob="MultiMeasureRestText",
         selector=selector,
         tags=[_scoping.site(_frame())],
-        whitelist=(abjad.MultimeasureRest,),
+        allowlist=(abjad.MultimeasureRest,),
     )
 
 
@@ -1747,17 +1748,17 @@ def mmrest_text_parent_center(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.markup(
-        ...         r'\baca-boxed-markup still',
+        ...         r"\baca-boxed-markup still",
         ...         literal=True,
         ...         selector=baca.selectors.mmrest(1),
-        ...         ),
+        ...     ),
         ...     baca.mmrest_text_parent_center(),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -1814,7 +1815,7 @@ def mmrest_text_parent_center(
         grob="MultiMeasureRestText",
         selector=selector,
         tags=[_scoping.site(_frame())],
-        whitelist=(abjad.MultimeasureRest,),
+        allowlist=(abjad.MultimeasureRest,),
     )
 
 
@@ -1830,17 +1831,17 @@ def mmrest_text_staff_padding(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.markup(
-        ...         r'\baca-boxed-markup still',
+        ...         r"\baca-boxed-markup still",
         ...         literal=True,
         ...         selector=baca.selectors.mmrest(1),
-        ...         ),
+        ...     ),
         ...     baca.mmrest_text_staff_padding(2),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -1897,7 +1898,7 @@ def mmrest_text_staff_padding(
         grob="MultiMeasureRestText",
         selector=selector,
         tags=[_scoping.site(_frame())],
-        whitelist=(abjad.MultimeasureRest,),
+        allowlist=(abjad.MultimeasureRest,),
     )
 
 
@@ -1913,7 +1914,7 @@ def mmrest_text_transparent(
         grob="MultiMeasureRestText",
         selector=selector,
         tags=[_scoping.site(_frame())],
-        whitelist=(abjad.MultimeasureRest,),
+        allowlist=(abjad.MultimeasureRest,),
     )
 
 
@@ -2433,7 +2434,7 @@ def repeat_tie_down(
         ...     baca.new(
         ...         baca.repeat_tie(selector=baca.selectors.pleaves((1, None))),
         ...         map=baca.selectors.qruns(),
-        ...         ),
+        ...     ),
         ...     baca.repeat_tie_down(),
         ...     baca.stem_up(),
         ...     baca.tuplet_bracket_staff_padding(2),
@@ -2577,7 +2578,7 @@ def repeat_tie_up(
         ...             selector=baca.selectors.pleaves((1, None)),
         ...         ),
         ...         map=baca.selectors.qruns(),
-        ...         ),
+        ...     ),
         ...     baca.repeat_tie_up(),
         ...     baca.stem_down(),
         ...     baca.tuplet_bracket_staff_padding(2),
@@ -4132,7 +4133,7 @@ def sustain_pedal_staff_padding(
         ...     baca.new(
         ...         baca.sustain_pedal(selector=baca.selectors.rleaves()),
         ...         map=baca.selectors.tuplets(),
-        ...         ),
+        ...     ),
         ...     baca.sustain_pedal_staff_padding(4),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -4231,11 +4232,11 @@ def text_script_color(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.markup('più mosso'),
+        ...     baca.markup("più mosso"),
         ...     baca.markup(
-        ...         'lo stesso tempo',
+        ...         "lo stesso tempo",
         ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
-        ...         ),
+        ...     ),
         ...     baca.text_script_color("#red"),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -4304,17 +4305,17 @@ def text_script_color(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.markup(
-        ...         r'\baca-boxed-markup still',
+        ...         r"\baca-boxed-markup still",
         ...         literal=True,
         ...         selector=baca.selectors.leaf(1),
-        ...         ),
+        ...     ),
         ...     baca.text_script_color("#red"),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -4365,11 +4366,11 @@ def text_script_down(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.markup('più mosso'),
+        ...     baca.markup("più mosso"),
         ...     baca.markup(
-        ...         'lo stesso tempo',
+        ...         "lo stesso tempo",
         ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
-        ...         ),
+        ...     ),
         ...     baca.text_script_down(),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -4438,17 +4439,17 @@ def text_script_down(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.markup(
-        ...         r'\baca-boxed-markup still',
+        ...         r"\baca-boxed-markup still",
         ...         literal=True,
         ...         selector=baca.selectors.leaf(1),
-        ...         ),
+        ...     ),
         ...     baca.text_script_down()
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -4494,17 +4495,17 @@ def text_script_extra_offset(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.markup(
-        ...         r'\baca-boxed-markup still',
+        ...         r"\baca-boxed-markup still",
         ...         literal=True,
         ...         selector=baca.selectors.leaf(1),
-        ...         ),
+        ...     ),
         ...     baca.text_script_extra_offset((0, 2)),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -4579,11 +4580,11 @@ def text_script_padding(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.markup('più mosso'),
+        ...     baca.markup("più mosso"),
         ...     baca.markup(
-        ...         'lo stesso tempo',
+        ...         "lo stesso tempo",
         ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
-        ...         ),
+        ...     ),
         ...     baca.text_script_padding(4),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -4652,17 +4653,17 @@ def text_script_padding(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.markup(
-        ...         r'\baca-boxed-markup still',
+        ...         r"\baca-boxed-markup still",
         ...         literal=True,
         ...         selector=baca.selectors.leaf(1),
-        ...         ),
+        ...     ),
         ...     baca.text_script_padding(2),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -4760,11 +4761,11 @@ def text_script_staff_padding(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.markup('più mosso'),
+        ...     baca.markup("più mosso"),
         ...     baca.markup(
-        ...         'lo stesso tempo',
+        ...         "lo stesso tempo",
         ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
-        ...         ),
+        ...     ),
         ...     baca.text_script_staff_padding(n=4),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -4833,17 +4834,17 @@ def text_script_staff_padding(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.markup(
-        ...         r'\baca-boxed-markkup still',
+        ...         r"\baca-boxed-markkup still",
         ...         literal=True,
         ...         selector=baca.selectors.leaf(1),
-        ...         ),
+        ...     ),
         ...     baca.text_script_staff_padding(2)
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -4894,11 +4895,11 @@ def text_script_up(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.markup('più mosso'),
+        ...     baca.markup("più mosso"),
         ...     baca.markup(
-        ...         'lo stesso tempo',
+        ...         "lo stesso tempo",
         ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
-        ...         ),
+        ...     ),
         ...     baca.text_script_up(),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -4967,17 +4968,17 @@ def text_script_up(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.markup(
-        ...         r'\baca-boxed-markup still',
+        ...         r"\baca-boxed-markup still",
         ...         literal=True,
         ...         selector=baca.selectors.leaf(1),
-        ...         ),
+        ...     ),
         ...     baca.text_script_up()
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -5108,9 +5109,9 @@ def text_spanner_staff_padding(
         ...     baca.text_spanner_staff_padding(6),
         ...     baca.text_script_staff_padding(6),
         ...     baca.text_spanner(
-        ...         'pont. => ord.',
+        ...         "pont. => ord.",
         ...         selector=baca.selectors.tleaves(),
-        ...         ),
+        ...     ),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])

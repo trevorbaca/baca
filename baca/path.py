@@ -360,8 +360,8 @@ def get_measure_profile_metadata(path) -> typing.Tuple[int, int, list]:
 
     Reads score metadata when path is not segment.
 
-    Returns tuple of three metadata: first measure number; measure count;
-    list of fermata measure numbers.
+    Returns tuple of three metadata: first measure number; measure count; list of fermata
+    measure numbers.
     """
     if path.parent.parent.name == "segments":
         string = "first_measure_number"

@@ -541,7 +541,7 @@ def clef(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.clef('alto'),
+        ...     baca.clef("alto"),
         ...     baca.tuplet_bracket_staff_padding(7),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
@@ -1247,13 +1247,13 @@ def hide_black_note_heads(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.hide_black_note_heads(),
         ...     baca.make_notes()
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -1602,11 +1602,11 @@ def margin_markup(
         ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(repeat_ties=True),
-        ...     baca.margin_markup('Fl.'),
-        ...     baca.pitches('E4 F4'),
-        ...     )
+        ...     baca.margin_markup("Fl."),
+        ...     baca.pitches("E4 F4"),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -2188,15 +2188,15 @@ def staff_lines(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
-        ...     baca.clef('percussion'),
+        ...     "Music_Voice",
+        ...     baca.clef("percussion"),
         ...     baca.make_notes(),
         ...     baca.staff_lines(1),
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -2258,12 +2258,12 @@ def staff_lines(
         ...     )
 
         >>> commands(
-        ...     'Music_Voice',
-        ...     baca.clef('bass'),
+        ...     "Music_Voice",
+        ...     baca.clef("bass"),
         ...     baca.make_notes(),
         ...     baca.staff_lines(1),
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -2323,15 +2323,15 @@ def staff_lines(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
-        ...     baca.clef('percussion'),
+        ...     "Music_Voice",
+        ...     baca.clef("percussion"),
         ...     baca.make_notes(),
         ...     baca.staff_lines(2),
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -2389,15 +2389,15 @@ def staff_lines(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
-        ...     baca.clef('bass'),
+        ...     "Music_Voice",
+        ...     baca.clef("bass"),
         ...     baca.make_notes(),
         ...     baca.staff_lines(2),
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
-        ...     )
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -2455,15 +2455,15 @@ def staff_lines(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.staff_lines(2),
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
-        ...     baca.clef('bass'),
-        ...     )
+        ...     baca.clef("bass"),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -2765,16 +2765,15 @@ def stop_trill(
     r"""
     Attaches stop trill to closing-slot.
 
-    The closing format slot is important because LilyPond fails to compile
-    when ``\stopTrillSpan`` appears after ``\set instrumentName`` commands
-    (and probably other ``\set`` commands). Setting format slot to closing
-    here positions ``\stopTrillSpan`` after the leaf in question (which is
-    required) and also draws ``\stopTrillSpan`` closer to the leaf in
-    question, prior to ``\set instrumetName`` and other commands positioned
-    in the after slot.
+    The closing format slot is important because LilyPond fails to compile when
+    ``\stopTrillSpan`` appears after ``\set instrumentName`` commands (and probably other
+    ``\set`` commands). Setting format slot to closing here positions ``\stopTrillSpan``
+    after the leaf in question (which is required) and also draws ``\stopTrillSpan``
+    closer to the leaf in question, prior to ``\set instrumetName`` and other commands
+    positioned in the after slot.
 
-    Eventually it will probably be necessary to model ``\stopTrillSpan``
-    with a dedicated format slot.
+    Eventually it will probably be necessary to model ``\stopTrillSpan`` with a dedicated
+    format slot.
     """
     return literal(r"\stopTrillSpan", format_slot="closing", selector=selector)
 

@@ -425,17 +425,16 @@ def handle_edition_tags(path):
 
         * activations run afterwards:
 
-            TAG_SET such that there exists at least one build-forbid
-                -TAG (equal to neither my directory nor my buildtype) in
-                TAG_SET and such that there exists no -TAG (equal to either
-                my directory or my buildtype) in TAG_SET
+            TAG_SET such that there exists at least one build-forbid -TAG (equal to
+            neither my directory nor my buildtype) in TAG_SET and such that there exists
+            no -TAG (equal to either my directory or my buildtype) in TAG_SET
 
             +TAG (where TAG is either my directory or my buildtype)
 
-        Notionally: first we deactivate anything that is tagged EITHER
-        specifically against me OR specifically for another build; then we
-        activate anything that is deactivated for editions other than me;
-        then we activate anything is tagged specifically for me.
+        Notionally: first we deactivate anything that is tagged EITHER specifically
+        against me OR specifically for another build; then we activate anything that is
+        deactivated for editions other than me; then we activate anything is tagged
+        specifically for me.
 
     ..  todo: Tests.
 
