@@ -2481,7 +2481,7 @@ class RegisterCommand(_scoping.Command):
         ...     rmakers.beam(),
         ...     baca.RegisterCommand(
         ...         registration=baca.Registration(
-        ...             [('[A0, C8]', 15)],
+        ...             [("[A0, C8]", 15)],
         ...         ),
         ...     ),
         ... )
@@ -3770,7 +3770,7 @@ class RegisterToOctaveCommand(_scoping.Command):
         ...     baca.RegisterToOctaveCommand(
         ...         anchor=abjad.Center,
         ...         octave_number=4,
-        ...         ),
+        ...     ),
         ... )
 
         >>> selection = stack([{0, 14, 28}])
@@ -3871,7 +3871,7 @@ class RegisterToOctaveCommand(_scoping.Command):
         ...     baca.RegisterToOctaveCommand(
         ...         anchor=abjad.Center,
         ...         octave_number=4,
-        ...         ),
+        ...     ),
         ... )
 
         >>> selection = stack([[0, 14, 28]])
@@ -4211,7 +4211,7 @@ class RegisterToOctaveCommand(_scoping.Command):
 
             >>> chord = abjad.Chord("<c, d e'>1")
             >>> staff = abjad.Staff([chord])
-            >>> abjad.attach(abjad.Clef('bass'), staff[0])
+            >>> abjad.attach(abjad.Clef("bass"), staff[0])
             >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
@@ -4292,7 +4292,7 @@ class StaffPositionCommand(_scoping.Command):
     ..  container:: example
 
         >>> staff = abjad.Staff("c' d' e' f'")
-        >>> abjad.attach(abjad.Clef('treble'), staff[0])
+        >>> abjad.attach(abjad.Clef("treble"), staff[0])
         >>> command = baca.staff_positions([0, 2])
         >>> command(staff)
         >>> abjad.show(staff) # doctest: +SKIP
@@ -4313,7 +4313,7 @@ class StaffPositionCommand(_scoping.Command):
     ..  container:: example
 
         >>> staff = abjad.Staff("c' d' e' f'")
-        >>> abjad.attach(abjad.Clef('percussion'), staff[0])
+        >>> abjad.attach(abjad.Clef("percussion"), staff[0])
         >>> command = baca.staff_positions([0, 2])
         >>> command(staff)
         >>> abjad.show(staff) # doctest: +SKIP
@@ -4665,8 +4665,8 @@ class StaffPositionInterpolationCommand(_scoping.Command):
     @property
     def pitches_instead_of_staff_positions(self) -> typing.Optional[bool]:
         """
-        Is true command interprets ``start`` and ``stop`` as pitches instead of
-        staff positions.
+        Is true command interprets ``start`` and ``stop`` as pitches instead of staff
+        positions.
         """
         return self._pitches_instead_of_staff_positions
 
@@ -6102,7 +6102,7 @@ def soprano_to_octave(
         ...     baca.new(
         ...         baca.soprano_to_octave(3),
         ...         map=baca.selectors.plts(),
-        ...         ),
+        ...     ),
         ...     baca.color(baca.selectors.plts()),
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])

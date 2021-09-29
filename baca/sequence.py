@@ -154,7 +154,8 @@ class Sequence(abjad.Sequence):
             Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
             >>> sequence = baca.Sequence([collection_1, collection_2])
-            >>> for item in sequence.accumulate([lambda _: _.alpha(), lambda _: _.transpose(n=3)]):
+            >>> for item in sequence.accumulate(
+            ...     [lambda _: _.alpha(), lambda _: _.transpose(n=3)]):
             ...     item
             ...
             Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
@@ -300,7 +301,7 @@ class Sequence(abjad.Sequence):
             >>> collections = [
             ...     baca.PitchClassSegment([1, 2, 3]),
             ...     baca.PitchClassSegment([4, 5, 6]),
-            ...     ]
+            ... ]
             >>> sequence = baca.Sequence(collections)
 
             >>> sequence.boustrophedon(count=0)

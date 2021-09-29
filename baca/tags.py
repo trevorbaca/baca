@@ -268,7 +268,7 @@ def clef_color_tags(path=None):
         Segment:
 
         >>> import pathlib
-        >>> path = pathlib.Path('etude', 'segments', '_')
+        >>> path = pathlib.Path("etude", "segments", "_")
         >>> for tag in baca.tags.clef_color_tags(path=path):
         ...     tag
         ...
@@ -285,7 +285,7 @@ def clef_color_tags(path=None):
 
         Segments:
 
-        >>> path = pathlib.Path('etude', 'segments')
+        >>> path = pathlib.Path("etude", "segments")
         >>> for tag in baca.tags.clef_color_tags(path=path):
         ...     tag
         ...
@@ -302,7 +302,7 @@ def clef_color_tags(path=None):
 
         Build:
 
-        >>> path = pathlib.Path('etude', 'builds', 'letter-score')
+        >>> path = pathlib.Path("etude", "builds", "letter-score")
         >>> for tag in baca.tags.clef_color_tags(path=path):
         ...     tag
         ...
@@ -634,7 +634,7 @@ def persistent_indicator_color_expression_tags(path=None):
 
         Segment:
 
-        >>> path = pathlib.Path('etude', 'segments', '_')
+        >>> path = pathlib.Path("etude", "segments", "_")
         >>> tags = baca.tags.persistent_indicator_color_expression_tags(path)
         >>> for tag in tags:
         ...     tag
@@ -689,7 +689,7 @@ def persistent_indicator_color_expression_tags(path=None):
 
         Segments:
 
-        >>> path = pathlib.Path('etude', 'segments')
+        >>> path = pathlib.Path("etude", "segments")
         >>> tags = baca.tags.persistent_indicator_color_expression_tags(path)
         >>> for tag in tags:
         ...     tag
@@ -746,7 +746,7 @@ def persistent_indicator_color_expression_tags(path=None):
 
         Build:
 
-        >>> path = pathlib.Path('etude', 'builds', 'letter-score')
+        >>> path = pathlib.Path("etude", "builds", "letter-score")
         >>> tags = baca.tags.persistent_indicator_color_expression_tags(path)
         >>> for tag in tags:
         ...     tag
@@ -830,7 +830,7 @@ def persistent_indicator_color_suppression_tags(path=None):
         Segment:
 
         >>> import pathlib
-        >>> path = pathlib.Path('etude', 'segments', '_')
+        >>> path = pathlib.Path("etude", "segments", "_")
         >>> tags = baca.tags.persistent_indicator_color_suppression_tags(path)
         >>> for tag in tags:
         ...     tag
@@ -842,7 +842,7 @@ def persistent_indicator_color_suppression_tags(path=None):
 
         Build:
 
-        >>> path = pathlib.Path('etude', 'builds', 'letter-score')
+        >>> path = pathlib.Path("etude", "builds", "letter-score")
         >>> tags = baca.tags.persistent_indicator_color_suppression_tags(path)
         >>> for tag in tags:
         ...     tag
@@ -990,7 +990,7 @@ def staff_lines_color_tags(path=None):
         Segment:
 
         >>> import pathlib
-        >>> path = pathlib.Path('etude', 'segments', '_')
+        >>> path = pathlib.Path("etude", "segments", "_")
         >>> for tag in baca.tags.staff_lines_color_tags(path):
         ...     tag
         ...
@@ -1002,7 +1002,7 @@ def staff_lines_color_tags(path=None):
 
         Build:
 
-        >>> path = pathlib.Path('etude', 'builds', 'letter-score')
+        >>> path = pathlib.Path("etude", "builds", "letter-score")
         >>> for tag in baca.tags.staff_lines_color_tags(path):
         ...     tag
         ...
@@ -1040,7 +1040,7 @@ def time_signature_color_tags(path=None):
         Segment:
 
         >>> import pathlib
-        >>> path = pathlib.Path('etude', 'segments', '_')
+        >>> path = pathlib.Path("etude", "segments", "_")
         >>> for tag in baca.tags.time_signature_color_tags():
         ...     tag
         ...
@@ -1052,7 +1052,7 @@ def time_signature_color_tags(path=None):
 
         Build:
 
-        >>> path = pathlib.Path('etude', 'builds', 'letter-score')
+        >>> path = pathlib.Path("etude", "builds", "letter-score")
         >>> for tag in baca.tags.time_signature_color_tags():
         ...     tag
         ...
@@ -1077,13 +1077,13 @@ def has_persistence_tag(tag):
 
     ..  container:: example
 
-        >>> baca.tags.has_persistence_tag(abjad.Tag('FOO'))
+        >>> baca.tags.has_persistence_tag(abjad.Tag("FOO"))
         False
 
-        >>> baca.tags.has_persistence_tag(abjad.Tag('FOO:DEFAULT_CLEF'))
+        >>> baca.tags.has_persistence_tag(abjad.Tag("FOO:DEFAULT_CLEF"))
         True
 
-        >>> baca.tags.has_persistence_tag(abjad.Tag('DEFAULT_CLEF'))
+        >>> baca.tags.has_persistence_tag(abjad.Tag("DEFAULT_CLEF"))
         True
 
     """

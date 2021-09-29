@@ -29,7 +29,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -115,7 +115,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -213,7 +213,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -398,7 +398,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -765,7 +765,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -909,7 +909,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -1009,7 +1009,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -1107,7 +1107,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -1194,7 +1194,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 r4 r16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -1279,7 +1279,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 r4 r16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -1398,7 +1398,7 @@ class Selection(abjad.Selection):
             ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -1485,7 +1485,7 @@ class Selection(abjad.Selection):
             ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -1600,7 +1600,7 @@ class Selection(abjad.Selection):
             ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -1690,7 +1690,7 @@ class Selection(abjad.Selection):
             ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -1798,7 +1798,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -2206,7 +2206,7 @@ class Selection(abjad.Selection):
             ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -2296,7 +2296,7 @@ class Selection(abjad.Selection):
             ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -2494,7 +2494,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -2580,7 +2580,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -2693,7 +2693,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -2779,7 +2779,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -2895,7 +2895,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -2982,7 +2982,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -3095,7 +3095,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -3181,7 +3181,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -3294,7 +3294,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -3380,7 +3380,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -3484,7 +3484,7 @@ class Selection(abjad.Selection):
             ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -3571,7 +3571,7 @@ class Selection(abjad.Selection):
             ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -3685,7 +3685,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -3831,7 +3831,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -3995,7 +3995,7 @@ class Selection(abjad.Selection):
             ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -4086,7 +4086,7 @@ class Selection(abjad.Selection):
             ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -4306,7 +4306,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -4392,7 +4392,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -4512,7 +4512,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -4587,7 +4587,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]
@@ -4673,7 +4673,7 @@ class Selection(abjad.Selection):
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
             ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-            ...     ]
+            ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
             >>> tuplets = [abjad.select(tuplets)]

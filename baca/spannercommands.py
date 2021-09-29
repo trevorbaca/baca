@@ -223,16 +223,16 @@ def beam(
         >>> commands = baca.CommandAccumulator(
         ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
-        ...     'Music_Voice',
+        ...     "Music_Voice",
         ...     baca.beam(
         ...         direction=abjad.Down,
-        ...         ),
+        ...     ),
         ...     baca.make_even_divisions(),
-        ...     baca.pitch('C4'),
-        ...     )
+        ...     baca.pitch("C4"),
+        ... )
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
@@ -326,7 +326,7 @@ def ottava(
         ...         affix=baca.rests_around([2], [4]),
         ...         restart_talea=True,
         ...         treatments=[-1],
-        ...         ),
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.ottava(),
         ...     baca.tuplet_bracket_staff_padding(2),
@@ -417,7 +417,7 @@ def ottava_bassa(
         ...         affix=baca.rests_around([2], [4]),
         ...         restart_talea=True,
         ...         treatments=[-1],
-        ...         ),
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.ottava_bassa(),
         ...     baca.tuplet_bracket_staff_padding(2),
@@ -509,7 +509,7 @@ def slur(
         ...         affix=baca.rests_around([2], [4]),
         ...         restart_talea=True,
         ...         treatments=[-1],
-        ...         ),
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.slur(),
         ...     baca.slur_down(),
@@ -610,7 +610,7 @@ def sustain_pedal(
         ...         affix=baca.rests_around([2], [4]),
         ...         restart_talea=True,
         ...         treatments=[-1],
-        ...         ),
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.sustain_pedal(),
         ...     baca.sustain_pedal_staff_padding(4),
@@ -788,7 +788,7 @@ def trill_spanner(
         ...     baca.new(
         ...         baca.trill_spanner(),
         ...         map=baca.selectors.runs(),
-        ...         ),
+        ...     ),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
@@ -870,8 +870,8 @@ def trill_spanner(
         ...         baca.trill_spanner(
         ...             abjad.tweak("#red").color,
         ...             alteration='M2',
-        ...             ),
         ...         ),
+        ...     ),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
