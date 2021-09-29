@@ -901,9 +901,9 @@ def make_layout_ly(spacing):
         print(f"Skipping {baca.path.trim(layout_py)} ...")
         sys.exit(1)
     assert abjad.String(document_name).is_shout_case()
+    score = baca.make_empty_score(1)
     commands = baca.CommandAccumulator(
         append_phantom_measure=True,
-        score_template=baca.make_empty_score_maker(1),
         time_signatures=time_signatures,
     )
     lilypond_file = baca.interpret_commands(
@@ -918,6 +918,7 @@ def make_layout_ly(spacing):
         first_segment=True,
         page_layout_profile=page_layout_profile,
         remove_tags=baca.tags.layout_removal_tags(),
+        score=score,
         spacing=spacing,
         whitespace_leaves=True,
     )

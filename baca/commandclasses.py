@@ -251,8 +251,8 @@ class BCPCommand(_scoping.Command):
 
             PATTERN. Define chunkwise spanners like this:
 
+            >>> score = baca.make_empty_score(1)
             >>> commands = baca.CommandAccumulator(
-            ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
 
@@ -280,6 +280,7 @@ class BCPCommand(_scoping.Command):
             ...     includes=["baca.ily"],
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ...     score=score,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -462,8 +463,8 @@ class BCPCommand(_scoping.Command):
 
             Tweaks LilyPond ``TextSpanner`` grob:
 
+            >>> score = baca.make_empty_score(1)
             >>> commands = baca.CommandAccumulator(
-            ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
 
@@ -487,6 +488,7 @@ class BCPCommand(_scoping.Command):
             ...     includes=["baca.ily"],
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ...     score=score,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -735,8 +737,8 @@ class ContainerCommand(_scoping.Command):
 
     ..  container:: example
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
 
@@ -756,6 +758,7 @@ class ContainerCommand(_scoping.Command):
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ... )
 
         >>> score = lilypond_file["Score"]

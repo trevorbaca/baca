@@ -21,8 +21,8 @@ class RhythmCommand(_scoping.Command):
 
     ..  container:: example
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (4, 8), (3,8), (4, 8)],
         ... )
 
@@ -45,6 +45,7 @@ class RhythmCommand(_scoping.Command):
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -316,8 +317,8 @@ class RhythmCommand(_scoping.Command):
 
             Talea rhythm-maker remembers previous state across gaps:
 
+            >>> score = baca.make_empty_score(1)
             >>> commands = baca.CommandAccumulator(
-            ...     score_template=baca.make_empty_score_maker(1),
             ...     time_signatures=5 * [(4, 8)],
             ... )
 
@@ -366,6 +367,7 @@ class RhythmCommand(_scoping.Command):
             ...     includes=["baca.ily"],
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ...     score=score,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -670,8 +672,8 @@ def make_monads(fractions):
 
     ..  container:: example
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 4)],
         ... )
 
@@ -688,6 +690,7 @@ def make_monads(fractions):
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -785,8 +788,8 @@ def make_repeat_tied_notes(
         REGRESSION. All notes below are tagged NOT_YET_PITCHED_COLORING (and colored
         gold), even tied notes resulting from meter rewriting:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(10, 8)],
         ... )
 
@@ -803,6 +806,7 @@ def make_repeat_tied_notes(
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP

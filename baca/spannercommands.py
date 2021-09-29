@@ -220,8 +220,8 @@ def beam(
 
         Beams everything and sets beam direction down:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
 
@@ -242,6 +242,7 @@ def beam(
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP

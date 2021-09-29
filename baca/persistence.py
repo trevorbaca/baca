@@ -7,6 +7,7 @@ r"""
 
         Default clefs color purple and redraw dull purple:
 
+        >>> score = baca.make_empty_score(1)
         >>> breaks = baca.breaks(
         ...     baca.page(
         ...         1,
@@ -15,7 +16,6 @@ r"""
         ...     ),
         ... )
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
 
@@ -31,6 +31,7 @@ r"""
         ...     ],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -86,6 +87,7 @@ r"""
 
         Explicit clefs color blue and redraw dull blue:
 
+        >>> score = baca.make_empty_score(1)
         >>> breaks = baca.breaks(
         ...     baca.page(
         ...         1,
@@ -94,7 +96,6 @@ r"""
         ...     ),
         ... )
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -110,6 +111,7 @@ r"""
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -163,6 +165,7 @@ r"""
 
         Even after a previous clef:
 
+        >>> score = baca.make_empty_score(1)
         >>> breaks = baca.breaks(
         ...     baca.page(
         ...         1,
@@ -171,7 +174,6 @@ r"""
         ...     ),
         ... )
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -198,6 +200,7 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -253,6 +256,7 @@ r"""
 
         Reapplied clefs color green and redraw dull green:
 
+        >>> score = baca.make_empty_score(1)
         >>> breaks = baca.breaks(
         ...     baca.page(
         ...         1,
@@ -261,7 +265,6 @@ r"""
         ...     ),
         ... )
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
 
@@ -284,6 +287,7 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -340,6 +344,7 @@ r"""
 
         Redundant clefs color pink and redraw dull pink:
 
+        >>> score = baca.make_empty_score(1)
         >>> breaks = baca.breaks(
         ...     baca.page(
         ...         1,
@@ -348,7 +353,6 @@ r"""
         ...     ),
         ... )
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -364,6 +368,7 @@ r"""
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -428,6 +433,7 @@ r"""
 
         Even at the beginning of a segment:
 
+        >>> score = baca.make_empty_score(1)
         >>> breaks = baca.breaks(
         ...     baca.page(
         ...         1,
@@ -436,7 +442,6 @@ r"""
         ...     ),
         ... )
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -463,6 +468,7 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -523,8 +529,8 @@ r"""
 
         Explicit dynamics color blue:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -541,6 +547,7 @@ r"""
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -579,8 +586,8 @@ r"""
 
         Even after a previous dynamic:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -608,6 +615,7 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -648,8 +656,8 @@ r"""
 
         Reapplied dynamics color green:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -676,6 +684,7 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -716,8 +725,8 @@ r"""
 
         Redundant dynamics color pink:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -735,6 +744,7 @@ r"""
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -775,8 +785,8 @@ r"""
 
         Even at the beginning of a segment:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -804,6 +814,7 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -842,8 +853,8 @@ r"""
 
         Sforzando dynamics do not count as redundant:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -861,6 +872,7 @@ r"""
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -901,8 +913,8 @@ r"""
 
         Even at the beginning of a segment:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -930,6 +942,7 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -970,8 +983,8 @@ r"""
 
         REGRESSION. Conventional and effort dynamics analyze nonredundantly:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -989,6 +1002,7 @@ r"""
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -1050,11 +1064,11 @@ r"""
 
         Default instruments color purple and redraw dull purple:
 
+        >>> score = baca.make_empty_score(1)
         >>> score_template = baca.make_empty_score_maker(1)
         >>> triple = ("Music_Staff", "default_instrument", abjad.Flute())
         >>> commands = baca.CommandAccumulator(
         ...     instruments=instruments,
-        ...     score_template=score_template,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -1073,6 +1087,7 @@ r"""
         ...     indicator_defaults=[triple],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -1204,9 +1219,9 @@ r"""
 
         Explicit instruments color blue and redraw dull blue:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     instruments=instruments,
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -1224,6 +1239,7 @@ r"""
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -1354,9 +1370,9 @@ r"""
 
         Even after a previous instrument:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     instruments=instruments,
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -1385,6 +1401,7 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -1516,9 +1533,9 @@ r"""
 
         Reapplied instruments color green and redraw dull green:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     instruments=instruments,
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -1546,6 +1563,7 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -1678,6 +1696,7 @@ r"""
 
         Redundant instruments color pink and redraw dull pink:
 
+        >>> score = baca.make_empty_score(1)
         >>> breaks = baca.breaks(
         ...     baca.page(
         ...         1,
@@ -1687,7 +1706,6 @@ r"""
         ... )
         >>> commands = baca.CommandAccumulator(
         ...     instruments=instruments,
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
         ... )
         >>> commands(
@@ -1709,6 +1727,7 @@ r"""
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -1853,6 +1872,7 @@ r"""
 
         Even at the beginning of a segment:
 
+        >>> score = baca.make_empty_score(1)
         >>> breaks = baca.breaks(
         ...     baca.page(
         ...         1,
@@ -1862,7 +1882,6 @@ r"""
         ... )
         >>> commands = baca.CommandAccumulator(
         ...     instruments=instruments,
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -1891,6 +1910,7 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -2045,6 +2065,7 @@ r"""
 
         Default margin markup color purple and redraw dull purple:
 
+        >>> score = baca.make_empty_score(1)
         >>> score_template = baca.make_empty_score_maker(1)
         >>> triple = (
         ...     "Music_Staff",
@@ -2053,7 +2074,6 @@ r"""
         ... )
         >>> commands = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
-        ...     score_template=score_template,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -2072,6 +2092,7 @@ r"""
         ...     margin_markups=commands.margin_markups,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -2221,9 +2242,9 @@ r"""
 
         Explicit margin markup color blue and redraw dull blue:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -2242,6 +2263,7 @@ r"""
         ...     margin_markups=commands.margin_markups,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -2389,9 +2411,9 @@ r"""
 
         Even after previous margin markup:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -2420,6 +2442,7 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -2575,9 +2598,9 @@ r"""
 
         Reapplied margin markup color green and redraw dull green:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -2605,6 +2628,7 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -2760,6 +2784,7 @@ r"""
 
         Redundant margin markup color pink and redraw dull pink:
 
+        >>> score = baca.make_empty_score(1)
         >>> breaks = baca.breaks(
         ...     baca.page(
         ...         1,
@@ -2769,7 +2794,6 @@ r"""
         ... )
         >>> commands = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
         ... )
         >>> commands(
@@ -2792,6 +2816,7 @@ r"""
         ...     margin_markups=commands.margin_markups,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -2972,6 +2997,7 @@ r"""
 
         Even at the beginning of a segment:
 
+        >>> score = baca.make_empty_score(1)
         >>> breaks = baca.breaks(
         ...     baca.page(
         ...         1,
@@ -2981,7 +3007,6 @@ r"""
         ... )
         >>> commands = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -3010,6 +3035,7 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -3165,6 +3191,7 @@ r"""
 
         Multiple margin markup are allowed so long as only one is active:
 
+        >>> score = baca.make_empty_score(1)
         >>> breaks = baca.breaks(
         ...     baca.page(
         ...         1,
@@ -3174,7 +3201,6 @@ r"""
         ... )
         >>> commands = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
         ... )
         >>> commands(
@@ -3206,6 +3232,7 @@ r"""
         ...     margin_markups=commands.margin_markups,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -3288,10 +3315,10 @@ r"""
 
         Explicit metronome marks color blue:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     append_phantom_measure=True,
         ...     metronome_marks=metronome_marks,
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -3313,6 +3340,7 @@ r"""
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 25),
@@ -3390,10 +3418,10 @@ r"""
 
         Even after a previous metronome mark:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     append_phantom_measure=True,
         ...     metronome_marks=metronome_marks,
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -3427,6 +3455,7 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -3508,9 +3537,9 @@ r"""
 
         Reapplied metronome marks color green:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -3542,6 +3571,7 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -3597,10 +3627,10 @@ r"""
 
         Redundant metronome marks color pink:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     append_phantom_measure=True,
         ...     metronome_marks=metronome_marks,
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -3623,6 +3653,7 @@ r"""
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -3707,10 +3738,10 @@ r"""
 
         Even at the beginning of a segment:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     append_phantom_measure=True,
         ...     metronome_marks=metronome_marks,
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -3744,6 +3775,7 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -3829,8 +3861,8 @@ r"""
 
         Explicit persistent overrides work but do not color:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> override = baca.PersistentOverride(
@@ -3861,6 +3893,7 @@ r"""
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     return_metadata=True,
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -3945,8 +3978,8 @@ r"""
 
         Reapplied persistent overrides work but do not color:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -3979,6 +4012,7 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -4016,8 +4050,8 @@ r"""
 
         Even at the beginning of a segment:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> override = baca.PersistentOverride(
@@ -4061,6 +4095,7 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -4104,8 +4139,8 @@ r"""
 
         Explicit staff lines color blue:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -4122,6 +4157,7 @@ r"""
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -4163,8 +4199,8 @@ r"""
 
         Even after previous staff lines:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -4192,6 +4228,7 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -4235,8 +4272,8 @@ r"""
 
         Reapplied staff lines color green:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -4263,6 +4300,7 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -4305,8 +4343,8 @@ r"""
 
         Redundant staff lines color pink:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -4324,6 +4362,7 @@ r"""
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -4370,8 +4409,8 @@ r"""
 
         Even at the beginning of a segment:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -4399,6 +4438,7 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ...     )
@@ -4458,10 +4498,10 @@ r"""
 
         Explicit tempo trends color blue:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     append_phantom_measure=True,
         ...     metronome_marks=metronome_marks,
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -4483,6 +4523,7 @@ r"""
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 25),
@@ -4564,9 +4605,9 @@ r"""
 
         Even after a previous tempo trend:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> commands(
@@ -4597,6 +4638,7 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -4656,9 +4698,9 @@ r"""
 
         Reapplied tempo trends color green:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -4688,6 +4730,7 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -4747,9 +4790,9 @@ r"""
 
         Redundant tempo trends color pink:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -4773,6 +4816,7 @@ r"""
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -4843,9 +4887,9 @@ r"""
 
         Even at the beginning of a segment:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
-        ...     score_template=baca.make_empty_score_maker(1),
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -4876,6 +4920,7 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),

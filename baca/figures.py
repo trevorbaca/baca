@@ -2098,10 +2098,7 @@ class Imbrication:
 
             Allows unused pitches:
 
-            >>> def closure():
-            ...     return baca.make_empty_score(2)
-
-            >>> score = closure()
+            >>> score = baca.make_empty_score(2)
             >>> figures = baca.FigureAccumulator(score)
 
             >>> collections = [
@@ -2124,7 +2121,6 @@ class Imbrication:
             ... )
 
             >>> commands = baca.CommandAccumulator(
-            ...     score_template=closure,
             ...     time_signatures=figures.time_signatures,
             ... )
             >>> figures.populate_commands(commands)
@@ -2147,6 +2143,7 @@ class Imbrication:
             ...     includes=["baca.ily"],
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ...     score=score,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2264,10 +2261,7 @@ class Imbrication:
 
             Raises exception on unused pitches:
 
-            >>> def closure():
-            ...     return baca.make_empty_score(2)
-
-            >>> score = closure()
+            >>> score = baca.make_empty_score(2)
             >>> figures = baca.FigureAccumulator(score)
 
             >>> collections = [
@@ -2320,10 +2314,7 @@ class Imbrication:
 
             Hockets voices:
 
-            >>> def closure():
-            ...     return baca.make_empty_score(2)
-
-            >>> score = closure()
+            >>> score = baca.make_empty_score(2)
             >>> figures = baca.FigureAccumulator(score)
 
             >>> collections = [
@@ -2347,7 +2338,6 @@ class Imbrication:
             ... )
 
             >>> commands = baca.CommandAccumulator(
-            ...     score_template=closure,
             ...     time_signatures=figures.time_signatures,
             ... )
             >>> figures.populate_commands(commands)
@@ -2370,6 +2360,7 @@ class Imbrication:
             ...     includes=["baca.ily"],
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ...     score=score,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2524,10 +2515,7 @@ class Imbrication:
 
             Selects last nine notes:
 
-            >>> def closure():
-            ...     return baca.make_empty_score(2)
-
-            >>> score = closure()
+            >>> score = baca.make_empty_score(2)
             >>> figures = baca.FigureAccumulator(score)
 
             >>> collections = [
@@ -2550,7 +2538,6 @@ class Imbrication:
             ... )
 
             >>> commands = baca.CommandAccumulator(
-            ...     score_template=closure,
             ...     time_signatures=figures.time_signatures,
             ... )
             >>> figures.populate_commands(commands)
@@ -2573,6 +2560,7 @@ class Imbrication:
             ...     includes=["baca.ily"],
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ...     score=score,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2753,10 +2741,7 @@ class Imbrication:
 
             Truncates ties:
 
-            >>> def closure():
-            ...     return baca.make_empty_score(2)
-
-            >>> score = closure()
+            >>> score = baca.make_empty_score(2)
             >>> figures = baca.FigureAccumulator(score)
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -2774,7 +2759,6 @@ class Imbrication:
             ... )
 
             >>> commands = baca.CommandAccumulator(
-            ...     score_template=closure,
             ...     time_signatures=figures.time_signatures,
             ... )
             >>> figures.populate_commands(commands)
@@ -2797,6 +2781,7 @@ class Imbrication:
             ...     includes=["baca.ily"],
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ...     score=score,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2935,10 +2920,7 @@ class FigureAccumulator:
 
         Raises exception on duplicate figure name.
 
-        >>> def closure():
-        ...     return baca.make_empty_score(2)
-
-        >>> score = closure()
+        >>> score = baca.make_empty_score(2)
         >>> figures = baca.FigureAccumulator(score)
 
         >>> commands = [
@@ -7055,10 +7037,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
         Coats pitches:
 
-        >>> def closure():
-        ...     return baca.make_empty_score(2)
-
-        >>> score = closure()
+        >>> score = baca.make_empty_score(2)
         >>> figures = baca.FigureAccumulator(score)
 
         >>> figures(
@@ -7079,7 +7058,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ... )
 
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=closure,
         ...     time_signatures=figures.time_signatures,
         ... )
         >>> figures.populate_commands(commands)
@@ -7102,6 +7080,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -7200,10 +7179,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
         Skips wrapped pitches:
 
-        >>> def closure():
-        ...     return baca.make_empty_score(2)
-
-        >>> score = closure()
+        >>> score = baca.make_empty_score(2)
         >>> figures = baca.FigureAccumulator(score)
 
         >>> collections = [
@@ -7230,7 +7206,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ... )
 
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=closure,
         ...     time_signatures=figures.time_signatures,
         ... )
         >>> figures.populate_commands(commands)
@@ -7253,6 +7228,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -7384,10 +7360,7 @@ def extend_beam(
 
         Extends beam:
 
-        >>> def closure():
-        ...     return baca.make_empty_score(2)
-
-        >>> score = closure()
+        >>> score = baca.make_empty_score(2)
         >>> figures = baca.FigureAccumulator(score)
 
         >>> figures(
@@ -7418,7 +7391,6 @@ def extend_beam(
         ... )
 
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=closure,
         ...     time_signatures=figures.time_signatures,
         ... )
         >>> figures.populate_commands(commands)
@@ -7441,6 +7413,7 @@ def extend_beam(
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -7595,10 +7568,7 @@ def imbricate(
 
     ..  container:: example
 
-        >>> def closure():
-        ...     return baca.make_empty_score(2)
-
-        >>> score = closure()
+        >>> score = baca.make_empty_score(2)
         >>> figures = baca.FigureAccumulator(score)
 
         >>> collections = [
@@ -7619,7 +7589,6 @@ def imbricate(
         ... )
 
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=closure,
         ...     time_signatures=figures.time_signatures,
         ... )
         >>> figures.populate_commands(commands)
@@ -7642,6 +7611,7 @@ def imbricate(
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -7778,10 +7748,7 @@ def imbricate(
 
         Multiple imbricated voices:
 
-        >>> def closure():
-        ...     return baca.make_empty_score(3)
-
-        >>> score = closure()
+        >>> score = baca.make_empty_score(3)
         >>> figures = baca.FigureAccumulator(score)
 
         >>> collections = [
@@ -7811,7 +7778,6 @@ def imbricate(
         ... )
 
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=closure,
         ...     time_signatures=figures.time_signatures,
         ... )
         >>> figures.populate_commands(commands)
@@ -7823,6 +7789,7 @@ def imbricate(
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -8002,10 +7969,7 @@ def imbricate(
 
         Hides tuplet brackets above imbricated voice:
 
-        >>> def closure():
-        ...     return baca.make_empty_score(2)
-
-        >>> score = closure()
+        >>> score = baca.make_empty_score(2)
         >>> figures = baca.FigureAccumulator(score)
 
         >>> collections = [
@@ -8028,7 +7992,6 @@ def imbricate(
         ... )
 
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=closure,
         ...     time_signatures=figures.time_signatures,
         ... )
         >>> figures.populate_commands(commands)
@@ -8051,6 +8014,7 @@ def imbricate(
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -8211,10 +8175,7 @@ def imbricate(
 
         Works with pitch-classes:
 
-        >>> def closure():
-        ...     return baca.make_empty_score(2)
-
-        >>> score = closure()
+        >>> score = baca.make_empty_score(2)
         >>> figures = baca.FigureAccumulator(score)
 
         >>> segment = [
@@ -8238,7 +8199,6 @@ def imbricate(
         ... )
 
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=closure,
         ...     time_signatures=figures.time_signatures,
         ... )
         >>> figures.populate_commands(commands)
@@ -8261,6 +8221,7 @@ def imbricate(
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -8357,10 +8318,7 @@ def imbricate(
 
         Works with chords:
 
-        >>> def closure():
-        ...     return baca.make_empty_score(2)
-
-        >>> score = closure()
+        >>> score = baca.make_empty_score(2)
         >>> figures = baca.FigureAccumulator(score)
 
         >>> collections = [
@@ -8381,7 +8339,6 @@ def imbricate(
         ... )
 
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=closure,
         ...     time_signatures=figures.time_signatures,
         ... )
         >>> figures.populate_commands(commands)
@@ -8404,6 +8361,7 @@ def imbricate(
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -8524,10 +8482,7 @@ def imbricate(
 
         Works with rests:
 
-        >>> def closure():
-        ...     return baca.make_empty_score(2)
-
-        >>> score = closure()
+        >>> score = baca.make_empty_score(2)
         >>> figures = baca.FigureAccumulator(score)
 
         >>> collections = [
@@ -8548,7 +8503,6 @@ def imbricate(
         ... )
 
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=closure,
         ...     time_signatures=figures.time_signatures,
         ... )
         >>> figures.populate_commands(commands)
@@ -8571,6 +8525,7 @@ def imbricate(
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP

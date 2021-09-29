@@ -5,8 +5,8 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
 ..  container:: example
 
+    >>> score = baca.make_empty_score(1)
     >>> commands = baca.CommandAccumulator(
-    ...     score_template=baca.make_empty_score_maker(1),
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
 
@@ -23,6 +23,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     commands.voice_metadata,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
+    ...     score=score,
     ... )
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -211,11 +212,8 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
     Colors octaves:
 
-    >>> def closure():
-    ...     return baca.make_empty_score(1, 1)
-
+    >>> score = baca.make_empty_score(1, 1)
     >>> commands = baca.CommandAccumulator(
-    ...     score_template=closure,
     ...     time_signatures=[(6, 4)],
     ... )
 
@@ -239,6 +237,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     includes=["baca.ily"],
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
+    ...     score=score,
     ... )
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -296,9 +295,9 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
     >>> instruments = {}
     >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
+    >>> score = baca.make_empty_score(1)
     >>> commands = baca.CommandAccumulator(
     ...     instruments=instruments,
-    ...     score_template=baca.make_empty_score_maker(1),
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
 
@@ -317,6 +316,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     instruments=commands.instruments,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
+    ...     score=score,
     ...     transpose_score=True,
     ... )
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -375,9 +375,9 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
     >>> instruments = {}
     >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
+    >>> score = baca.make_empty_score(1)
     >>> commands = baca.CommandAccumulator(
     ...     instruments=instruments,
-    ...     score_template=baca.make_empty_score_maker(1),
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
 
@@ -396,6 +396,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     instruments=commands.instruments,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
+    ...     score=score,
     ...     transpose_score=False,
     ... )
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -475,10 +476,9 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     >>> instruments = {}
     >>> instruments["Violin"] = abjad.Violin()
 
-    >>> score_template = baca.make_empty_score_maker(1)
+    >>> score = baca.make_empty_score(1)
     >>> commands = baca.CommandAccumulator(
     ...     instruments=instruments,
-    ...     score_template=score_template,
     ...     time_signatures=time_signatures,
     ... )
     >>> commands(
@@ -496,6 +496,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     instruments=instruments,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
+    ...     score=score,
     ... )
     >>> abjad.setting(lilypond_file["Score"]).autoBeaming = False
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -582,8 +583,8 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...
     >>> figures = abjad.select(figures_)
 
+    >>> score = baca.make_empty_score(1)
     >>> commands = baca.CommandAccumulator(
-    ...     score_template=baca.make_empty_score_maker(1),
     ...     time_signatures=time_signatures,
     ... )
     >>> commands(
@@ -599,6 +600,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     includes=["baca.ily"],
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
+    ...     score=score,
     ... )
     >>> score = lilypond_file["Score"]
     >>> abjad.setting(score).autoBeaming = False
