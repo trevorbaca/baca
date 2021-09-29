@@ -92,9 +92,11 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
     Commands may be grouped into lists:
 
+    >>> score = baca.make_empty_score(1)
+    >>> voice_names = baca.accumulator.get_voice_names(score)
     >>> commands = baca.CommandAccumulator(
-    ...     score_template=baca.make_empty_score_maker(1),
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+    ...     voice_names=voice_names,
     ... )
 
     >>> list_ = []
@@ -113,6 +115,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     commands.voice_metadata,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
+    ...     score=score,
     ... )
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 

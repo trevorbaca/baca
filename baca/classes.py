@@ -126,7 +126,7 @@ class Cursor:
 
         Gets elements one at a time:
 
-        >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+        >>> source = [13, "da capo", abjad.Note("cs'8."), "rit."]
         >>> cursor = baca.Cursor(source=source, cyclic=True)
 
         >>> cursor.next()
@@ -146,7 +146,7 @@ class Cursor:
 
         Gets different numbers of elements at a time:
 
-        >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+        >>> source = [13, "da capo", abjad.Note("cs'8."), "rit."]
         >>> cursor = baca.Cursor(source=source, cyclic=True)
 
         >>> cursor.next(count=2)
@@ -207,8 +207,8 @@ class Cursor:
 
     def __eq__(self, argument):
         """
-        Is true when ``argument`` is a cursor with keyword
-        arguments equal to this cursor.
+        Is true when ``argument`` is a cursor with keyword arguments equal to this
+        cursor.
 
         Returns true or false.
         """
@@ -220,7 +220,7 @@ class Cursor:
 
         ..  container:: example
 
-            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> source = [13, "da capo", abjad.Note("cs'8."), "rit."]
             >>> cursor = baca.Cursor(source=source, cyclic=True)
 
             >>> cursor[0]
@@ -252,7 +252,7 @@ class Cursor:
 
             Iterates acyclic cursor:
 
-            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> source = [13, "da capo", abjad.Note("cs'8."), "rit."]
             >>> cursor = baca.Cursor(source=source)
             >>> for item in cursor:
             ...     item
@@ -266,7 +266,7 @@ class Cursor:
 
             Iterates cyclic cursor:
 
-            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> source = [13, "da capo", abjad.Note("cs'8."), "rit."]
             >>> cursor = baca.Cursor(source=source, cyclic=True)
             >>> for item in cursor:
             ...     item
@@ -286,7 +286,7 @@ class Cursor:
 
         ..  container:: example
 
-            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> source = [13, "da capo", abjad.Note("cs'8."), "rit."]
             >>> cursor = baca.Cursor(source=source)
             >>> len(cursor)
             4
@@ -310,10 +310,6 @@ class Cursor:
         """
         Is true when cursor is cyclic.
 
-        Set to true, false or none.
-
-        Defaults to none.
-
         Returns true, false or none.
         """
         return self._cyclic
@@ -325,7 +321,7 @@ class Cursor:
 
         ..  container:: example
 
-            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> source = [13, "da capo", abjad.Note("cs'8."), "rit."]
             >>> cursor = baca.Cursor(source=source)
             >>> cursor.is_exhausted
             False
@@ -361,7 +357,7 @@ class Cursor:
 
             Position starts at none by default:
 
-            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> source = [13, "da capo", abjad.Note("cs'8."), "rit."]
             >>> cursor = baca.Cursor(source=source, cyclic=True)
 
             >>> cursor.position is None
@@ -376,12 +372,12 @@ class Cursor:
             >>> cursor.next()
             ['rit.']
 
-            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> source = [13, "da capo", abjad.Note("cs'8."), "rit."]
             >>> cursor = baca.Cursor(
             ...     source=source,
             ...     cyclic=True,
             ...     position=None,
-            ...     )
+            ... )
 
             >>> cursor.position is None
             True
@@ -399,12 +395,12 @@ class Cursor:
 
             Position starting at 0:
 
-            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> source = [13, "da capo", abjad.Note("cs'8."), "rit."]
             >>> cursor = baca.Cursor(
             ...     source=source,
             ...     cyclic=True,
             ...     position=0,
-            ...     )
+            ... )
 
             >>> cursor.position
             0
@@ -418,12 +414,12 @@ class Cursor:
             >>> cursor.next()
             ['rit.']
 
-            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> source = [13, "da capo", abjad.Note("cs'8."), "rit."]
             >>> cursor = baca.Cursor(
             ...     source=source,
             ...     cyclic=True,
             ...     position=0,
-            ...     )
+            ... )
 
             >>> cursor.position
             0
@@ -441,12 +437,12 @@ class Cursor:
 
             Position starting at -1:
 
-            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> source = [13, "da capo", abjad.Note("cs'8."), "rit."]
             >>> cursor = baca.Cursor(
             ...     source=source,
             ...     cyclic=True,
             ...     position=-1,
-            ...     )
+            ... )
 
             >>> cursor.position
             -1
@@ -460,12 +456,12 @@ class Cursor:
             >>> cursor.next()
             [Note("cs'8.")]
 
-            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> source = [13, "da capo", abjad.Note("cs'8."), "rit."]
             >>> cursor = baca.Cursor(
             ...     source=source,
             ...     cyclic=True,
             ...     position=-1,
-            ...     )
+            ... )
 
             >>> cursor.position
             -1
@@ -486,18 +482,18 @@ class Cursor:
     @property
     def singletons(self):
         """
-        Is true when cursor returns singletons not enclosed within a list.
-        If false when cursor returns singletons enclosed within a list.
+        Is true when cursor returns singletons not enclosed within a list. If false when
+        cursor returns singletons enclosed within a list.
 
         ..  container:: example
 
             Returns singletons enclosed within a list:
 
-            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> source = [13, "da capo", abjad.Note("cs'8."), "rit."]
             >>> cursor = baca.Cursor(
             ...     source=source,
             ...     suppress_exception=True,
-            ...     )
+            ... )
 
             >>> cursor.next()
             [13]
@@ -521,12 +517,12 @@ class Cursor:
 
             Returns singletons free of enclosing list:
 
-            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> source = [13, "da capo", abjad.Note("cs'8."), "rit."]
             >>> cursor = baca.Cursor(
             ...     source=source,
             ...     singletons=True,
             ...     suppress_exception=True,
-            ...     )
+            ... )
 
             >>> cursor.next()
             13
@@ -558,7 +554,7 @@ class Cursor:
 
             List source:
 
-            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> source = [13, "da capo", abjad.Note("cs'8."), "rit."]
             >>> cursor = baca.Cursor(source=source)
 
             >>> cursor.source
@@ -568,7 +564,7 @@ class Cursor:
 
             Cyclic tuple source:
 
-            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> source = [13, "da capo", abjad.Note("cs'8."), "rit."]
             >>> cursor = baca.Cursor(source=source, cyclic=True)
 
             >>> cursor.source
@@ -581,14 +577,14 @@ class Cursor:
     @property
     def suppress_exception(self):
         """
-        Is true when cursor returns none on exhaustion.
-        Is false when cursor raises exception on exhaustion.
+        Is true when cursor returns none on exhaustion. Is false when cursor raises
+        exception on exhaustion.
 
         ..  container:: example
 
             Exhausted cursor raises exception:
 
-            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> source = [13, "da capo", abjad.Note("cs'8."), "rit."]
             >>> cursor = baca.Cursor(source=source)
             >>> cursor.is_exhausted
             False
@@ -619,11 +615,11 @@ class Cursor:
 
             Exhausted cursor returns none:
 
-            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> source = [13, "da capo", abjad.Note("cs'8."), "rit."]
             >>> cursor = baca.Cursor(
             ...     source=source,
             ...     suppress_exception=True,
-            ...     )
+            ... )
             >>> cursor.is_exhausted
             False
 
@@ -660,9 +656,7 @@ class Cursor:
             Makes cursor from pitch-class segments:
 
             >>> number_lists = [[13, 13.5, 11], [-2, 2, 1.5]]
-            >>> cursor = baca.Cursor.from_pitch_class_segments(
-            ...     number_lists,
-            ...     )
+            >>> cursor = baca.Cursor.from_pitch_class_segments(number_lists)
 
             >>> string = abjad.storage(cursor)
             >>> print(string)
@@ -709,7 +703,7 @@ class Cursor:
 
             Gets elements one at a time:
 
-            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> source = [13, "da capo", abjad.Note("cs'8."), "rit."]
             >>> cursor = baca.Cursor(source=source, cyclic=True)
 
             >>> cursor.next()
@@ -729,7 +723,7 @@ class Cursor:
 
             Gets elements one at a time in reverse:
 
-            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> source = [13, "da capo", abjad.Note("cs'8."), "rit."]
             >>> cursor = baca.Cursor(source=source, cyclic=True)
 
             >>> cursor.next(count=-1)
@@ -745,7 +739,7 @@ class Cursor:
 
             Gets same two elements forward and back:
 
-            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> source = [13, "da capo", abjad.Note("cs'8."), "rit."]
             >>> cursor = baca.Cursor(source=source, cyclic=True)
 
             >>> cursor.next(count=2)
@@ -761,7 +755,7 @@ class Cursor:
 
             Gets different numbers of elements at a time:
 
-            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> source = [13, "da capo", abjad.Note("cs'8."), "rit."]
             >>> cursor = baca.Cursor(source=source, cyclic=True)
 
             >>> cursor.next(count=2)
@@ -781,7 +775,7 @@ class Cursor:
 
             Gets different numbers of elements at a time:
 
-            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> source = [13, "da capo", abjad.Note("cs'8."), "rit."]
             >>> cursor = baca.Cursor(source=source, cyclic=True)
 
             >>> cursor.next(count=2)
@@ -801,7 +795,7 @@ class Cursor:
 
             Raises exception when cursor is exhausted:
 
-            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> source = [13, "da capo", abjad.Note("cs'8."), "rit."]
             >>> cursor = baca.Cursor(source=source)
 
             >>> cursor.next(count=99)
@@ -847,7 +841,7 @@ class Cursor:
 
         ..  container:: example
 
-            >>> source = [13, 'da capo', abjad.Note("cs'8."), 'rit.']
+            >>> source = [13, "da capo", abjad.Note("cs'8."), "rit."]
             >>> cursor = baca.Cursor(source=source)
 
             >>> cursor.next()
@@ -873,7 +867,7 @@ class PaddedTuple:
 
     ..  container:: example
 
-        >>> tuple_ = baca.PaddedTuple('abcd', pad=2)
+        >>> tuple_ = baca.PaddedTuple("abcd", pad=2)
 
         >>> tuple_
         PaddedTuple(['a', 'b', 'c', 'd'], pad=2)
@@ -919,8 +913,8 @@ class PaddedTuple:
 
     def __eq__(self, argument) -> bool:
         """
-        Is true when ``argument`` is a tuple with ``items`` and ``pad`` equal
-        to those of this padded tuple.
+        Is true when ``argument`` is a tuple with ``items`` and ``pad`` equal to those of
+        this padded tuple.
         """
         if isinstance(argument, tuple):
             return self._items == argument
@@ -936,12 +930,12 @@ class PaddedTuple:
 
             Gets slice open at right:
 
-            >>> baca.PaddedTuple('abcd', pad=3)[2:]
+            >>> baca.PaddedTuple("abcd", pad=3)[2:]
             ('c', 'd')
 
             Gets slice closed at right:
 
-            >>> slice_ = baca.PaddedTuple('abcd', pad=3)[:15]
+            >>> slice_ = baca.PaddedTuple("abcd", pad=3)[:15]
             >>> slice_
             ('a', 'b', 'c', 'd', 'b', 'c', 'd', 'b', 'c', 'd', 'b', 'c', 'd', 'b', 'c')
 
@@ -1024,7 +1018,7 @@ class PaddedTuple:
 
         ..  container:: example
 
-            >>> len(baca.PaddedTuple('abcd', pad=3))
+            >>> len(baca.PaddedTuple("abcd", pad=3))
             4
 
         """
@@ -1071,7 +1065,7 @@ class PaddedTuple:
 
         ..  container:: example
 
-            >>> baca.PaddedTuple('abcd', pad=1).items
+            >>> baca.PaddedTuple("abcd", pad=1).items
             ('a', 'b', 'c', 'd')
 
             >>> baca.PaddedTuple([1, 2, 3, 4], pad=1).items
@@ -1089,7 +1083,7 @@ class PaddedTuple:
 
             With nonnegative indices:
 
-            >>> tuple_ = baca.PaddedTuple('abcd', pad=1)
+            >>> tuple_ = baca.PaddedTuple("abcd", pad=1)
             >>> for i in range(8):
             ...     print(i, tuple_[i])
             ...
@@ -1102,7 +1096,7 @@ class PaddedTuple:
             6 d
             7 d
 
-            >>> tuple_ = baca.PaddedTuple('abcd', pad=2)
+            >>> tuple_ = baca.PaddedTuple("abcd", pad=2)
             >>> for i in range(8):
             ...     print(i, tuple_[i])
             ...
@@ -1115,7 +1109,7 @@ class PaddedTuple:
             6 c
             7 d
 
-            >>> tuple_ = baca.PaddedTuple('abcd', pad=3)
+            >>> tuple_ = baca.PaddedTuple("abcd", pad=3)
             >>> for i in range(8):
             ...     print(i, tuple_[i])
             ...
@@ -1128,7 +1122,7 @@ class PaddedTuple:
             6 d
             7 b
 
-            >>> tuple_ = baca.PaddedTuple('abcd', pad=4)
+            >>> tuple_ = baca.PaddedTuple("abcd", pad=4)
             >>> for i in range(8):
             ...     print(i, tuple_[i])
             ...
@@ -1145,7 +1139,7 @@ class PaddedTuple:
 
             With nonpositive indices:
 
-            >>> tuple_ = baca.PaddedTuple('abcd', pad=1)
+            >>> tuple_ = baca.PaddedTuple("abcd", pad=1)
             >>> for i in range(-1, -9, -1):
             ...     print(i, tuple_[i])
             ...
@@ -1158,7 +1152,7 @@ class PaddedTuple:
             -7 a
             -8 a
 
-            >>> tuple_ = baca.PaddedTuple('abcd', pad=2)
+            >>> tuple_ = baca.PaddedTuple("abcd", pad=2)
             >>> for i in range(-1, -9, -1):
             ...     print(i, tuple_[i])
             ...
@@ -1171,7 +1165,7 @@ class PaddedTuple:
             -7 b
             -8 a
 
-            >>> tuple_ = baca.PaddedTuple('abcd', pad=3)
+            >>> tuple_ = baca.PaddedTuple("abcd", pad=3)
             >>> for i in range(-1, -9, -1):
             ...     print(i, tuple_[i])
             ...
@@ -1184,7 +1178,7 @@ class PaddedTuple:
             -7 a
             -8 c
 
-            >>> tuple_ = baca.PaddedTuple('abcd', pad=4)
+            >>> tuple_ = baca.PaddedTuple("abcd", pad=4)
             >>> for i in range(-1, -9, -1):
             ...     print(i, tuple_[i])
             ...
@@ -1431,7 +1425,7 @@ class SchemeManifest:
         ..  container:: example
 
             >>> scheme_manifest = baca.SchemeManifest()
-            >>> scheme_manifest.dynamic_to_steady_state('sfz-p')
+            >>> scheme_manifest.dynamic_to_steady_state("sfz-p")
             'p'
 
         Returns string.
@@ -1468,7 +1462,7 @@ class Tree:
         Here's an internal node:
 
         >>> tree[1]
-        Tree(items=[Tree(items=4), Tree(items=5)])
+        Tree(<2>)
 
         >>> string = abjad.storage(tree[1])
         >>> print(string)
@@ -1494,7 +1488,7 @@ class Tree:
         Here's a leaf:
 
         >>> tree[1][0]
-        Tree(items=4)
+        Tree(<1>)
 
         >>> string = abjad.storage(tree[1][0])
         >>> print(string)
@@ -1558,11 +1552,6 @@ class Tree:
             >>> items = [[[0, 1], [2, 3]], [4, 5]]
             >>> tree = baca.Tree(items=items)
 
-            >>> for node in tree:
-            ...     node
-            Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])])
-            Tree(items=[Tree(items=4), Tree(items=5)])
-
             >>> tree[-1] in tree
             True
 
@@ -1579,8 +1568,8 @@ class Tree:
 
     def __eq__(self, argument):
         """
-        Is true when ``argument`` is the same type as tree and when the payload
-        of all subtrees are equal.
+        Is true when ``argument`` is the same type as tree and when the payload of all
+        subtrees are equal.
 
         ..  container:: example
 
@@ -1631,20 +1620,14 @@ class Tree:
 
         ..  container:: example
 
-            Gets node:
-
             >>> items = [[[0, 1], [2, 3]], [4, 5]]
             >>> tree = baca.Tree(items=items)
 
             >>> tree[-1]
-            Tree(items=[Tree(items=4), Tree(items=5)])
-
-        ..  container:: example
-
-            Gets slice:
+            Tree(<2>)
 
             >>> tree[-1:]
-            [Tree(items=[Tree(items=4), Tree(items=5)])]
+            [Tree(<2>)]
 
         Returns node or slice of nodes.
         """
@@ -1655,8 +1638,6 @@ class Tree:
         Graphs tree.
 
         ..  container:: example
-
-            Graphs tree:
 
             >>> items = [[[0, 1], [2, 3]], [4, 5]]
             >>> tree = baca.Tree(items=items)
@@ -1721,8 +1702,6 @@ class Tree:
 
         ..  container:: example
 
-            Gets length of tree:
-
             >>> items = [[[0, 1], [2, 3]], [4, 5]]
             >>> tree = baca.Tree(items=items)
 
@@ -1745,25 +1724,32 @@ class Tree:
 
             >>> items = [[[0, 1], [2, 3]], [4, 5]]
             >>> baca.Tree(items=items)
-            Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
+            Tree(<2>)
 
         ..  container:: example
 
             Gets interpreter representation of leaf:
 
             >>> baca.Tree(0)
-            Tree(items=0)
+            Tree(<1>)
 
         ..  container:: example
 
             Gets interpreter representation of empty tree:
 
             >>> baca.Tree()
-            Tree()
+            Tree(<0>)
 
         Returns string.
         """
-        return abjad.format.get_repr(self)
+        if isinstance(self.items, list):
+            length = len(self.items)
+        elif self.items is None:
+            length = 0
+        else:
+            assert isinstance(self.items, int), repr(self.items)
+            length = 1
+        return f"Tree(<{length}>)"
 
     ### PRIVATE PROPERTIES ###
 
@@ -1889,62 +1875,62 @@ class Tree:
             Gets all nodes at level 2:
 
             >>> tree[0][0]._get_next_n_nodes_at_level(None, 2)
-            [Tree(items=1), Tree(items=2), Tree(items=3), Tree(items=4), Tree(items=5), Tree(items=6), Tree(items=7)]
+            [Tree(<1>), Tree(<1>), Tree(<1>), Tree(<1>), Tree(<1>), Tree(<1>), Tree(<1>)]
 
             Gets all nodes at level -1:
 
             >>> tree[0][0]._get_next_n_nodes_at_level(None, -1)
-            [Tree(items=1), Tree(items=2), Tree(items=3), Tree(items=4), Tree(items=5), Tree(items=6), Tree(items=7)]
+            [Tree(<1>), Tree(<1>), Tree(<1>), Tree(<1>), Tree(<1>), Tree(<1>), Tree(<1>)]
 
             Gets next 4 nodes at level 2:
 
             >>> tree[0][0]._get_next_n_nodes_at_level(4, 2)
-            [Tree(items=1), Tree(items=2), Tree(items=3), Tree(items=4)]
+            [Tree(<1>), Tree(<1>), Tree(<1>), Tree(<1>)]
 
             Gets next 3 nodes at level 1:
 
             >>> tree[0][0]._get_next_n_nodes_at_level(3, 1)
-            [Tree(items=[Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)]), Tree(items=[Tree(items=4), Tree(items=5)])]
+            [Tree(<1>), Tree(<2>), Tree(<2>)]
 
             Gets next node at level 0:
 
             >>> tree[0][0]._get_next_n_nodes_at_level(1, 0)
-            [Tree(items=[Tree(items=[Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)]), Tree(items=[Tree(items=4), Tree(items=5)]), Tree(items=[Tree(items=6), Tree(items=7)])])]
+            [Tree(<4>)]
 
             Gets next 4 nodes at level -1:
 
             >>> tree[0][0]._get_next_n_nodes_at_level(4, -1)
-            [Tree(items=1), Tree(items=2), Tree(items=3), Tree(items=4)]
+            [Tree(<1>), Tree(<1>), Tree(<1>), Tree(<1>)]
 
             Gets next 3 nodes at level -2:
 
             >>> tree[0][0]._get_next_n_nodes_at_level(3, -2)
-            [Tree(items=[Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)]), Tree(items=[Tree(items=4), Tree(items=5)])]
+            [Tree(<1>), Tree(<2>), Tree(<2>)]
 
             Gets previous 4 nodes at level 2:
 
             >>> tree[-1][-1]._get_next_n_nodes_at_level(-4, 2)
-            [Tree(items=6), Tree(items=5), Tree(items=4), Tree(items=3)]
+            [Tree(<1>), Tree(<1>), Tree(<1>), Tree(<1>)]
 
             Gets previous 3 nodes at level 1:
 
             >>> tree[-1][-1]._get_next_n_nodes_at_level(-3, 1)
-            [Tree(items=[Tree(items=6)]), Tree(items=[Tree(items=4), Tree(items=5)]), Tree(items=[Tree(items=2), Tree(items=3)])]
+            [Tree(<1>), Tree(<2>), Tree(<2>)]
 
             Gets previous node at level 0:
 
             >>> tree[-1][-1]._get_next_n_nodes_at_level(-1, 0)
-            [Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)]), Tree(items=[Tree(items=4), Tree(items=5)]), Tree(items=[Tree(items=6)])])]
+            [Tree(<4>)]
 
             Gets previous 4 nodes at level -1:
 
             >>> tree[-1][-1]._get_next_n_nodes_at_level(-4, -1)
-            [Tree(items=6), Tree(items=5), Tree(items=4), Tree(items=3)]
+            [Tree(<1>), Tree(<1>), Tree(<1>), Tree(<1>)]
 
             Gets previous 3 nodes at level -2:
 
             >>> tree[-1][-1]._get_next_n_nodes_at_level(-3, -2)
-            [Tree(items=[Tree(items=6)]), Tree(items=[Tree(items=4), Tree(items=5)]), Tree(items=[Tree(items=2), Tree(items=3)])]
+            [Tree(<1>), Tree(<2>), Tree(<2>)]
 
         ..  container:: example
 
@@ -1956,48 +1942,44 @@ class Tree:
             Gets next 4 nodes at level 2:
 
             >>> for node in tree[0][0]._get_next_n_nodes_at_level(
-            ...     4, 2,
-            ...     nodes_must_be_complete=True,
+            ...     4, 2, nodes_must_be_complete=True,
             ...     ):
             ...     node
-            ...
-            Tree(items=1)
-            Tree(items=2)
-            Tree(items=3)
-            Tree(items=4)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<1>)
 
             Gets next 3 nodes at level 1:
 
             >>> for node in tree[0][0]._get_next_n_nodes_at_level(
-            ...     3, 1,
-            ...     nodes_must_be_complete=True,
+            ...     3, 1, nodes_must_be_complete=True
             ...     ):
             ...     node
-            Tree(items=[Tree(items=1)])
-            Tree(items=[Tree(items=2), Tree(items=3)])
-            Tree(items=[Tree(items=4), Tree(items=5)])
-            Tree(items=[Tree(items=6), Tree(items=7)])
+            Tree(<1>)
+            Tree(<2>)
+            Tree(<2>)
+            Tree(<2>)
 
             Gets next 4 nodes at level -1:
 
             >>> for node in tree[0][0]._get_next_n_nodes_at_level(4, -1):
             ...     node
-            Tree(items=1)
-            Tree(items=2)
-            Tree(items=3)
-            Tree(items=4)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<1>)
 
             Gets next 3 nodes at level -2:
 
             >>> for node in tree[0][0]._get_next_n_nodes_at_level(
-            ...     3, -2,
-            ...     nodes_must_be_complete=True,
+            ...     3, -2, nodes_must_be_complete=True
             ...     ):
             ...     node
-            Tree(items=[Tree(items=1)])
-            Tree(items=[Tree(items=2), Tree(items=3)])
-            Tree(items=[Tree(items=4), Tree(items=5)])
-            Tree(items=[Tree(items=6), Tree(items=7)])
+            Tree(<1>)
+            Tree(<2>)
+            Tree(<2>)
+            Tree(<2>)
 
         ..  container:: example
 
@@ -2009,50 +1991,46 @@ class Tree:
             Gets previous 4 nodes at level 2:
 
             >>> for node in tree[-1][-1]._get_next_n_nodes_at_level(
-            ...     -4, 2,
-            ...     nodes_must_be_complete=True,
+            ...     -4, 2, nodes_must_be_complete=True
             ...     ):
             ...     node
-            Tree(items=6)
-            Tree(items=5)
-            Tree(items=4)
-            Tree(items=3)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<1>)
 
             Gets previous 3 nodes at level 1:
 
             >>> for node in tree[-1][-1]._get_next_n_nodes_at_level(
-            ...     -3, 1,
-            ...     nodes_must_be_complete=True,
+            ...     -3, 1, nodes_must_be_complete=True
             ...     ):
             ...     node
-            Tree(items=[Tree(items=6)])
-            Tree(items=[Tree(items=4), Tree(items=5)])
-            Tree(items=[Tree(items=2), Tree(items=3)])
-            Tree(items=[Tree(items=0), Tree(items=1)])
+            Tree(<1>)
+            Tree(<2>)
+            Tree(<2>)
+            Tree(<2>)
 
             Gets previous 4 nodes at level -1:
 
             >>> for node in tree[-1][-1]._get_next_n_nodes_at_level(
-            ...     -4, -1,
-            ...     nodes_must_be_complete=True,
+            ...     -4, -1, nodes_must_be_complete=True
             ...     ):
             ...     node
-            Tree(items=6)
-            Tree(items=5)
-            Tree(items=4)
-            Tree(items=3)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<1>)
 
             Gets previous 3 nodes at level -2:
 
             >>> for node in tree[-1][-1]._get_next_n_nodes_at_level(
-            ...     -3, -2,
-            ...     nodes_must_be_complete=True,
+            ...     -3, -2, nodes_must_be_complete=True
             ...     ):
             ...     node
-            Tree(items=[Tree(items=6)])
-            Tree(items=[Tree(items=4), Tree(items=5)])
-            Tree(items=[Tree(items=2), Tree(items=3)])
-            Tree(items=[Tree(items=0), Tree(items=1)])
+            Tree(<1>)
+            Tree(<2>)
+            Tree(<2>)
+            Tree(<2>)
 
         """
         if not self._is_valid_level(level):
@@ -2136,8 +2114,8 @@ class Tree:
             >>> parentage = tree[1]._get_parentage()
             >>> for tree in parentage:
             ...     tree
-            Tree(items=[Tree(items=4), Tree(items=5)])
-            Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
+            Tree(<2>)
+            Tree(<2>)
 
             Gets parentage without self:
 
@@ -2145,7 +2123,7 @@ class Tree:
             >>> tree = baca.Tree(items=items)
             >>> for tree in tree[1]._get_parentage()[1:]:
             ...     tree
-            Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
+            Tree(<2>)
 
         Returns tuple.
         """
@@ -2184,8 +2162,7 @@ class Tree:
 
     def _get_position_of_descendant(self, descendant):
         """
-        Gets position of ``descendent`` relative to node rather than relative
-        to root.
+        Gets position of ``descendent`` relative to node rather than relative to root.
 
         ..  container:: example
 
@@ -2272,40 +2249,38 @@ class Tree:
             >>> tree = baca.Tree(items=items)
 
             >>> for node in tree._iterate_depth_first(): node
-            ...
-            Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)]), Tree(items=[Tree(items=4), Tree(items=5)]), Tree(items=[Tree(items=6), Tree(items=7)])])
-            Tree(items=[Tree(items=0), Tree(items=1)])
-            Tree(items=0)
-            Tree(items=1)
-            Tree(items=[Tree(items=2), Tree(items=3)])
-            Tree(items=2)
-            Tree(items=3)
-            Tree(items=[Tree(items=4), Tree(items=5)])
-            Tree(items=4)
-            Tree(items=5)
-            Tree(items=[Tree(items=6), Tree(items=7)])
-            Tree(items=6)
-            Tree(items=7)
+            Tree(<4>)
+            Tree(<2>)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<2>)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<2>)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<2>)
+            Tree(<1>)
+            Tree(<1>)
 
         ..  container::
 
             Iterates tree depth-first from right to left:
 
             >>> for node in tree._iterate_depth_first(reverse=True): node
-            ...
-            Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)]), Tree(items=[Tree(items=4), Tree(items=5)]), Tree(items=[Tree(items=6), Tree(items=7)])])
-            Tree(items=[Tree(items=6), Tree(items=7)])
-            Tree(items=7)
-            Tree(items=6)
-            Tree(items=[Tree(items=4), Tree(items=5)])
-            Tree(items=5)
-            Tree(items=4)
-            Tree(items=[Tree(items=2), Tree(items=3)])
-            Tree(items=3)
-            Tree(items=2)
-            Tree(items=[Tree(items=0), Tree(items=1)])
-            Tree(items=1)
-            Tree(items=0)
+            Tree(<4>)
+            Tree(<2>)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<2>)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<2>)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<2>)
+            Tree(<1>)
+            Tree(<1>)
 
         Returns generator.
         """
@@ -2399,10 +2374,10 @@ class Tree:
 
             >>> for node in tree.iterate(level=-1):
             ...     node
-            Tree(items=1, item_class=int)
-            Tree(items=2, item_class=int)
-            Tree(items=8, item_class=int)
-            Tree(items=9, item_class=int)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<1>)
 
             >>> tree.get_payload(nested=True)
             [[1, 2], [8, 9]]
@@ -2429,8 +2404,8 @@ class Tree:
 
             >>> for item in tree.items:
             ...     item
-            Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])])
-            Tree(items=[Tree(items=4), Tree(items=5)])
+            Tree(<2>)
+            Tree(<2>)
 
         ..  container:: example
 
@@ -2509,129 +2484,129 @@ class Tree:
 
             >>> for node in tree.iterate():
             ...     node
-            Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
-            Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])])
-            Tree(items=[Tree(items=0), Tree(items=1)])
-            Tree(items=0)
-            Tree(items=1)
-            Tree(items=[Tree(items=2), Tree(items=3)])
-            Tree(items=2)
-            Tree(items=3)
-            Tree(items=[Tree(items=4), Tree(items=5)])
-            Tree(items=4)
-            Tree(items=5)
+            Tree(<2>)
+            Tree(<2>)
+            Tree(<2>)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<2>)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<2>)
+            Tree(<1>)
+            Tree(<1>)
 
             Iterates all levels in reverse:
 
             >>> for node in tree.iterate(reverse=True):
             ...     node
-            Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
-            Tree(items=[Tree(items=4), Tree(items=5)])
-            Tree(items=5)
-            Tree(items=4)
-            Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])])
-            Tree(items=[Tree(items=2), Tree(items=3)])
-            Tree(items=3)
-            Tree(items=2)
-            Tree(items=[Tree(items=0), Tree(items=1)])
-            Tree(items=1)
-            Tree(items=0)
+            Tree(<2>)
+            Tree(<2>)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<2>)
+            Tree(<2>)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<2>)
+            Tree(<1>)
+            Tree(<1>)
 
             Iterates select levels:
 
             >>> for node in tree.iterate(level=0):
             ...     node
-            Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
+            Tree(<2>)
 
             >>> for node in tree.iterate(level=1):
             ...     node
-            Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])])
-            Tree(items=[Tree(items=4), Tree(items=5)])
+            Tree(<2>)
+            Tree(<2>)
 
             >>> for node in tree.iterate(level=2):
             ...     node
-            Tree(items=[Tree(items=0), Tree(items=1)])
-            Tree(items=[Tree(items=2), Tree(items=3)])
-            Tree(items=4)
-            Tree(items=5)
+            Tree(<2>)
+            Tree(<2>)
+            Tree(<1>)
+            Tree(<1>)
 
             >>> for node in tree.iterate(level=3):
             ...     node
-            Tree(items=0)
-            Tree(items=1)
-            Tree(items=2)
-            Tree(items=3)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<1>)
 
             >>> for node in tree.iterate(level=-4):
             ...     node
-            Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
+            Tree(<2>)
 
             >>> for node in tree.iterate(level=-3):
             ...     node
-            Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])])
+            Tree(<2>)
 
             >>> for node in tree.iterate(level=-2):
             ...     node
-            Tree(items=[Tree(items=0), Tree(items=1)])
-            Tree(items=[Tree(items=2), Tree(items=3)])
-            Tree(items=[Tree(items=4), Tree(items=5)])
+            Tree(<2>)
+            Tree(<2>)
+            Tree(<2>)
 
             >>> for node in tree.iterate(level=-1):
             ...     node
-            Tree(items=0)
-            Tree(items=1)
-            Tree(items=2)
-            Tree(items=3)
-            Tree(items=4)
-            Tree(items=5)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<1>)
 
             Iterates select levels in reverse:
 
             >>> for node in tree.iterate(level=0, reverse=True):
             ...     node
-            Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
+            Tree(<2>)
 
             >>> for node in tree.iterate(level=1, reverse=True):
             ...     node
-            Tree(items=[Tree(items=4), Tree(items=5)])
-            Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])])
+            Tree(<2>)
+            Tree(<2>)
 
             >>> for node in tree.iterate(level=2, reverse=True):
             ...     node
-            Tree(items=5)
-            Tree(items=4)
-            Tree(items=[Tree(items=2), Tree(items=3)])
-            Tree(items=[Tree(items=0), Tree(items=1)])
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<2>)
+            Tree(<2>)
 
             >>> for node in tree.iterate(level=3, reverse=True):
             ...     node
-            Tree(items=3)
-            Tree(items=2)
-            Tree(items=1)
-            Tree(items=0)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<1>)
 
             >>> for node in tree.iterate(level=-4, reverse=True):
             ...     node
-            Tree(items=[Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])]), Tree(items=[Tree(items=4), Tree(items=5)])])
+            Tree(<2>)
 
             >>> for node in tree.iterate(level=-3, reverse=True):
             ...     node
-            Tree(items=[Tree(items=[Tree(items=0), Tree(items=1)]), Tree(items=[Tree(items=2), Tree(items=3)])])
+            Tree(<2>)
 
             >>> for node in tree.iterate(level=-2, reverse=True):
             ...     node
-            Tree(items=[Tree(items=4), Tree(items=5)])
-            Tree(items=[Tree(items=2), Tree(items=3)])
-            Tree(items=[Tree(items=0), Tree(items=1)])
+            Tree(<2>)
+            Tree(<2>)
+            Tree(<2>)
 
             >>> for node in tree.iterate(level=-1, reverse=True):
             ...     node
-            Tree(items=5)
-            Tree(items=4)
-            Tree(items=3)
-            Tree(items=2)
-            Tree(items=1)
-            Tree(items=0)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<1>)
+            Tree(<1>)
 
         Returns generator.
         """

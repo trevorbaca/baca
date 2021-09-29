@@ -362,7 +362,7 @@ class PitchArray:
             >>> array = baca.PitchArray([
             ...     [1, (2, 1), (-1.5, 2)],
             ...     [(7, 2), (6, 1), 1],
-            ...     ])
+            ... ])
 
             >>> print(array)
             [  ] [d'] [bqf    ]
@@ -506,7 +506,7 @@ class PitchArray:
             >>> array = baca.PitchArray([
             ...     [1, (0, 1), (0, 2)],
             ...     [(0, 2), (0, 1), 1],
-            ...     ])
+            ... ])
 
             >>> print(array)
             [  ] [c'] [c'    ]
@@ -593,9 +593,10 @@ class PitchArray:
             >>> score.append(abjad.Staff("c'8 d'8 e'8 f'8", name="Staff_1"))
             >>> score.append(abjad.Staff("c'4 d'4", name="Staff_2"))
             >>> tuplet = abjad.Tuplet((2, 3), "c'8 d'8 e'8")
-            >>> staff = abjad.Staff([
-            ...     abjad.Tuplet((2, 3), "c'8 d'8 e'8"),
-            ...     abjad.Tuplet((2, 3), "c'8 d'8 e'8"),
+            >>> staff = abjad.Staff(
+            ...     [
+            ...         abjad.Tuplet((2, 3), "c'8 d'8 e'8"),
+            ...         abjad.Tuplet((2, 3), "c'8 d'8 e'8"),
             ...     ],
             ...     name="Staff_3",
             ... )
@@ -638,8 +639,7 @@ class PitchArray:
 
             >>> abjad.show(score) # doctest: +SKIP
 
-            >>> array = baca.PitchArray.from_score(
-            ...     score, populate=False)
+            >>> array = baca.PitchArray.from_score(score, populate=False)
 
             >>> print(array)
             [     ] [     ] [     ] [     ]
@@ -653,9 +653,10 @@ class PitchArray:
             >>> score = abjad.Score(name="Score")
             >>> score.append(abjad.Staff("c'8 d'8 e'8 f'8", name="Staff_1"))
             >>> score.append(abjad.Staff("c'4 d'4", name="Staff_2"))
-            >>> staff = abjad.Staff([
-            ...     abjad.Tuplet((2, 3), "c'8 d'8 e'8"),
-            ...     abjad.Tuplet((2, 3), "c'8 d'8 e'8"),
+            >>> staff = abjad.Staff(
+            ...     [
+            ...         abjad.Tuplet((2, 3), "c'8 d'8 e'8"),
+            ...         abjad.Tuplet((2, 3), "c'8 d'8 e'8"),
             ...     ],
             ...     name="Staff_3",
             ... )
@@ -698,8 +699,7 @@ class PitchArray:
 
             >>> abjad.show(score) # doctest: +SKIP
 
-            >>> array = baca.PitchArray.from_score(
-            ...     score, populate=True)
+            >>> array = baca.PitchArray.from_score(score, populate=True)
 
             >>> print(array)
             [c'     ] [d'     ] [e'     ] [f'     ]
@@ -732,12 +732,9 @@ class PitchArray:
                     cell.pitches.extend(abjad.iterate.pitches(leaf))
         return pitch_array
 
-    def has_spanning_cell_over_index(self, index):
+    def has_spanning_cell_over_index(self, index) -> bool:
         """
-        Is true when pitch array has one or more spanning cells over
-        ``index``.
-
-        Returns true or false.
+        Is true when pitch array has one or more spanning cells over ``index``.
         """
         rows = self.rows
         return any(row.has_spanning_cell_over_index(index) for row in rows)
@@ -753,7 +750,8 @@ class PitchArray:
             >>> array = baca.PitchArray([
             ...     [2, 2, 3, 1],
             ...     [1, 2, 1, 1, 2, 1],
-            ...     [1, 1, 1, 1, 1, 1, 1, 1]])
+            ...     [1, 1, 1, 1, 1, 1, 1, 1],
+            ... ])
 
             >>> print(array)
             [     ] [     ] [         ] [ ]
@@ -803,8 +801,7 @@ class PitchArray:
         """
         self_depth = self.depth
         if depth < self_depth:
-            message = "pad depth must be not less than array depth."
-            raise ValueError(message)
+            raise ValueError("pad depth must be not less than array depth.")
         self_width = self.width
         missing_rows = depth - self_depth
         for i in range(missing_rows):
@@ -820,8 +817,7 @@ class PitchArray:
         """
         self_width = self.width
         if width < self_width:
-            message = "pad width must not be less than array width."
-            raise ValueError(message)
+            raise ValueError("pad width must not be less than array width.")
         for row in self.rows:
             row.pad_to_width(width)
 
@@ -863,9 +859,8 @@ class PitchArray:
         r"""
         Changes pitch array  to measures.
 
-        Makes time signatures with numerators equal to row width and
-        denominators equal to ``cell_duration_denominator`` for each row in
-        pitch array.
+        Makes time signatures with numerators equal to row width and denominators equal
+        to ``cell_duration_denominator`` for each row in pitch array.
 
         ..  container:: example
 
@@ -874,7 +869,7 @@ class PitchArray:
             >>> array = baca.PitchArray([
             ...     [1, (2, 1), ([-2, -1.5], 2)],
             ...     [(7, 2), (6, 1), 1],
-            ...     ])
+            ... ])
 
             >>> print(array)
             [  ] [d'] [bf bqf    ]
@@ -1037,34 +1032,33 @@ class PitchArrayCell:
         Initializes with pitch:
 
         >>> baca.PitchArrayCell(pitches=[abjad.NamedPitch(0)])
-        PitchArrayCell(pitches=[NamedPitch("c'")], width=1)
+        PitchArrayCell(width=1)
 
         Initializes with pitch numbers:
 
         >>> baca.PitchArrayCell(pitches=[0, 2, 4])
-        PitchArrayCell(pitches=[NamedPitch("c'"), NamedPitch("d'"), NamedPitch("e'")], width=1)
+        PitchArrayCell(width=1)
 
         Initializes with pitches:
 
         >>> pitches = [abjad.NamedPitch(_) for _ in [0, 2, 4]]
         >>> baca.PitchArrayCell(pitches)
-        PitchArrayCell(pitches=[NamedPitch("c'"), NamedPitch("d'"), NamedPitch("e'")], width=1)
+        PitchArrayCell(width=1)
 
         Initializes with pitch number and width:
 
         >>> baca.PitchArrayCell(pitches=0, width=2)
-        PitchArrayCell(pitches=[NamedPitch("c'")], width=2)
+        PitchArrayCell(width=2)
 
         Initializes with pitch and width:
 
-        >>> baca.PitchArrayCell(
-        ...     pitches=[abjad.NamedPitch(0)], width=2)
-        PitchArrayCell(pitches=[NamedPitch("c'")], width=2)
+        >>> baca.PitchArrayCell(pitches=[abjad.NamedPitch(0)], width=2)
+        PitchArrayCell(width=2)
 
         Initializes with pitch numbers and width:
 
         >>> baca.PitchArrayCell(pitches=[0, 2, 4], width=2)
-        PitchArrayCell(pitches=[NamedPitch("c'"), NamedPitch("d'"), NamedPitch("e'")], width=2)
+        PitchArrayCell(width=2)
 
     """
 
@@ -1095,7 +1089,7 @@ class PitchArrayCell:
         """
         Delegates to format manager.
         """
-        return abjad.format.get_repr(self)
+        return f"PitchArrayCell(width={self.width})"
 
     def __str__(self):
         """
@@ -1178,8 +1172,7 @@ class PitchArrayCell:
             if 0 < cell_token:
                 pitches, width = [], cell_token
             else:
-                message = "integer width item must be positive."
-                raise ValueError(message)
+                raise ValueError("integer width item must be positive.")
         elif isinstance(cell_token, abjad.NamedPitch):
             pitches, width = [cell_token], 1
         elif isinstance(cell_token, list):
@@ -1187,8 +1180,7 @@ class PitchArrayCell:
             pitches = self._parse_pitch_token(pitch_token)
         elif isinstance(cell_token, tuple):
             if not len(cell_token) == 2:
-                message = "tuple item must be of length two."
-                raise ValueError(message)
+                raise ValueError("tuple item must be of length two.")
             if isinstance(cell_token[0], str):
                 pitches = self._parse_pitch_token(cell_token)
                 width = 1
@@ -1198,8 +1190,7 @@ class PitchArrayCell:
         elif isinstance(cell_token, type(self)):
             pitches, width = cell_token.pitches, cell_token.width
         else:
-            message = "cell item must be integer width, pitch or pair."
-            raise TypeError(message)
+            raise TypeError("cell item must be integer width, pitch or pair.")
         return pitches, width
 
     def _parse_pitch_token(self, pitch_token):
@@ -1214,8 +1205,7 @@ class PitchArrayCell:
                 pitch = abjad.NamedPitch(element)
                 pitches.append(pitch)
         else:
-            message = "pitch item must be number, pitch or list."
-            raise TypeError(message)
+            raise TypeError("pitch item must be number, pitch or list.")
         return pitches
 
     def _withdraw(self):
@@ -1469,8 +1459,7 @@ class PitchArrayCell:
                 message = "cell is last in row."
                 raise IndexError(message)
             return self.parent_row[self.column_indices[-1] + 1]
-        message = "cell has no parent row."
-        raise IndexError(message)
+        raise IndexError("cell has no parent row.")
 
     @property
     def parent_array(self):
@@ -1552,11 +1541,9 @@ class PitchArrayCell:
         """
         if self.parent_row is not None:
             if self.is_first_in_row:
-                message = "cell is first in row."
-                raise IndexError(message)
+                raise IndexError("cell is first in row.")
             return self.parent_row[self.column_indices[0] - 1]
-        message = "cell has no parent row."
-        raise IndexError(message)
+        raise IndexError("cell has no parent row.")
 
     @property
     def row_index(self):
@@ -1636,18 +1623,17 @@ class PitchArrayCell:
 
 
 class PitchArrayColumn:
-    """Pitch array column.
+    """
+    Pitch array column.
 
     ..  container:: example
 
         A pitch array column:
 
-        >>> array = baca.PitchArray(
-        ...     [
-        ...         [1, (2, 1), (-1.5, 2)],
-        ...         [(7, 2), (6, 1), 1],
-        ...         ]
-        ...     )
+        >>> array = baca.PitchArray([
+        ...     [1, (2, 1), (-1.5, 2)],
+        ...     [(7, 2), (6, 1), 1],
+        ... ])
 
         >>> print(array)
         [  ] [d'] [bqf    ]
@@ -1692,8 +1678,8 @@ class PitchArrayColumn:
 
     def __eq__(self, argument):
         """
-        Is true when ``argument`` is a pitch array column with pitch array
-        cells equal to those of this pitch array column.
+        Is true when ``argument`` is a pitch array column with pitch array cells equal to
+        those of this pitch array column.
 
         Returns true or false.
         """
@@ -1854,7 +1840,7 @@ class PitchArrayColumn:
 
     @property
     def cell_tokens(self):
-        r"""
+        """
         Gets cells items of pitch array column.
 
         Returns tuple.
@@ -1863,7 +1849,7 @@ class PitchArrayColumn:
 
     @property
     def cell_widths(self):
-        r"""
+        """
         Gets cell widths of pitch array column.
 
         Returns tuple.
@@ -1872,7 +1858,7 @@ class PitchArrayColumn:
 
     @property
     def cells(self):
-        r"""
+        """
         Gets cells of pitch array column.
 
         Returns tuple.
@@ -1918,7 +1904,7 @@ class PitchArrayColumn:
             >>> array = baca.PitchArray([
             ...     [1, (2, 1), (-1.5, 2)],
             ...     [(7, 2), (6, 1), 1],
-            ...     ])
+            ... ])
 
             >>> print(array)
             [  ] [d'] [bqf    ]
@@ -1946,9 +1932,7 @@ class PitchArrayColumn:
     @property
     def is_defective(self):
         """
-        Is true when pitch array column depth does not equal depth of
-        parent
-        array.
+        Is true when pitch array column depth does not equal depth of parent array.
 
         Returns true or false.
         """
@@ -1986,7 +1970,7 @@ class PitchArrayColumn:
             >>> array = baca.PitchArray([
             ...     [1, (2, 1), ([-2, -1.5], 2)],
             ...     [(7, 2), (6, 1), 1],
-            ...     ])
+            ... ])
 
             >>> print(array)
             [  ] [d'] [bf bqf    ]
@@ -1995,9 +1979,9 @@ class PitchArrayColumn:
             >>> for column in array.columns:
             ...     column.start_cells
             ...
-            [PitchArrayCell(width=1), PitchArrayCell(pitches=[NamedPitch("g'")], width=2)]
-            [PitchArrayCell(pitches=[NamedPitch("d'")], width=1)]
-            [PitchArrayCell(pitches=[NamedPitch('bf'), NamedPitch('bqf')], width=2), PitchArrayCell(pitches=[NamedPitch("fs'")], width=1)]
+            [PitchArrayCell(width=1), PitchArrayCell(width=2)]
+            [PitchArrayCell(width=1)]
+            [PitchArrayCell(width=2), PitchArrayCell(width=1)]
             [PitchArrayCell(width=1)]
 
         Returns list.
@@ -2019,7 +2003,7 @@ class PitchArrayColumn:
             >>> array = baca.PitchArray([
             ...     [1, (2, 1), ([-2, -1.5], 2)],
             ...     [(7, 2), (6, 1), 1],
-            ...     ])
+            ... ])
 
             >>> for column in array.columns:
             ...     column.start_pitches
@@ -2068,8 +2052,8 @@ class PitchArrayColumn:
         """
         Gets weight of pitch array column.
 
-        Defined equal to the sum of the weight of pitch array cells in pitch
-        array column.
+        Defined equal to the sum of the weight of pitch array cells in pitch array
+        column.
 
         Returns nonnegative integer.
         """
@@ -2102,11 +2086,13 @@ class PitchArrayList(abjad.TypedList):
 
         >>> array_1 = baca.PitchArray([
         ...   [1, (2, 1), ([-2, -1.5], 2)],
-        ...   [(7, 2), (6, 1), 1]])
+        ...   [(7, 2), (6, 1), 1],
+        ... ])
 
         >>> array_2 = baca.PitchArray([
         ...   [1, 1, 1],
-        ...   [1, 1, 1]])
+        ...   [1, 1, 1],
+        ... ])
 
         >>> arrays = [array_1, array_2]
         >>> arrays = baca.PitchArrayList(arrays)
@@ -2207,11 +2193,13 @@ class PitchArrayList(abjad.TypedList):
 
             >>> array_1 = baca.PitchArray([
             ...   [1, (2, 1), ([-2, -1.5], 2)],
-            ...   [(7, 2), (6, 1), 1]])
+            ...   [(7, 2), (6, 1), 1],
+            ... ])
 
             >>> array_2 = baca.PitchArray([
             ...   [1, 1, 1],
-            ...   [1, 1, 1]])
+            ...   [1, 1, 1],
+            ... ])
 
             >>> arrays = [array_1, array_2]
             >>> arrays = baca.PitchArrayList(arrays)
@@ -2386,8 +2374,8 @@ class PitchArrayRow:
 
     def __eq__(self, argument):
         """
-        Is true when ``argument`` is a pitch array row with contents equal to
-        that of this pitch array row.
+        Is true when ``argument`` is a pitch array row with contents equal to that of
+        this pitch array row.
 
         Returns true or false.
         """
@@ -2421,8 +2409,7 @@ class PitchArrayRow:
                         return cell
                     accumulated_width = total_width
             else:
-                message = "no such cell in row."
-                raise IndexError(message)
+                raise IndexError("no such cell in row.")
         elif isinstance(argument, slice):
             cells = []
             start, stop, step = argument.indices(self.width)
@@ -2436,8 +2423,7 @@ class PitchArrayRow:
             cells = tuple(cells)
             return cells
         else:
-            message = "must be int or slice."
-            raise ValueError(message)
+            raise ValueError("must be int or slice.")
 
     def __hash__(self):
         """
@@ -2471,8 +2457,7 @@ class PitchArrayRow:
         Returns pitch array row.
         """
         if not isinstance(argument, PitchArrayRow):
-            message = "must be pitch array row."
-            raise TypeError(message)
+            raise TypeError("must be pitch array row.")
         copy_arg = copy.copy(argument)
         self.extend(copy_arg.cells)
         return self
@@ -2603,8 +2588,7 @@ class PitchArrayRow:
     @property
     def is_defective(self):
         """
-        Is true when width of pitch array row does not equal width of
-        parent pitch array.
+        Is true when width of pitch array row does not equal width of parent pitch array.
 
         Returns true or false.
         """
@@ -2615,8 +2599,8 @@ class PitchArrayRow:
     @property
     def is_in_range(self):
         """
-        Is true when all pitches in pitch array row are in pitch range of
-        pitch array row.
+        Is true when all pitches in pitch array row are in pitch range of pitch array
+        row.
 
         Returns true or false.
         """
@@ -2643,8 +2627,7 @@ class PitchArrayRow:
     @pitch_range.setter
     def pitch_range(self, argument):
         if not isinstance(argument, abjad.PitchRange):
-            message = "must be pitch range."
-            raise TypeError(message)
+            raise TypeError("must be pitch range.")
         self._pitch_range = argument
 
     @property
@@ -2670,16 +2653,14 @@ class PitchArrayRow:
         parent_array = self.parent_array
         if parent_array is not None:
             return parent_array._rows.index(self)
-        message = "row has no parent array."
-        raise IndexError(message)
+        raise IndexError("row has no parent array.")
 
     @property
     def weight(self):
         """
         Gets weight of pitch array row.
 
-        Defined equal to sum of weights of pitch array cells in pitch array
-        row.
+        Defined equal to sum of weights of pitch array cells in pitch array row.
 
         Returns nonnegative integer.
         """
@@ -2737,7 +2718,7 @@ class PitchArrayRow:
             >>> array = baca.PitchArray([
             ...     [1, (0, 1), (0, 2)],
             ...     [(0, 2), (0, 1), 1],
-            ...     ])
+            ... ])
 
             >>> print(array)
             [  ] [c'] [c'    ]
@@ -2784,8 +2765,7 @@ class PitchArrayRow:
         argument = slice(start, stop)
         start, stop, step = argument.indices(self.width)
         if not step == 1:
-            message = "step no implemented."
-            raise NotImplementedError(message)
+            raise NotImplementedError("step no implemented.")
         column_indices = set(range(start, stop, step))
         row = PitchArrayRow([])
         cells = self[argument]
@@ -2857,8 +2837,7 @@ class PitchArrayRow:
 
     def has_spanning_cell_over_index(self, i):
         """
-        Is true when pitch array row has one or more cells spanning over
-        index ``i``.
+        Is true when pitch array row has one or more cells spanning over index ``i``.
 
         ..  container:: example
 
@@ -2912,8 +2891,7 @@ class PitchArrayRow:
         for cell in cells:
             assert isinstance(cell, PitchArrayCell), repr(cell)
             if cell.parent_row is not self:
-                message = "cells must belong to row."
-                raise ValueError(message)
+                raise ValueError("cells must belong to row.")
             column_indices.extend(cell.column_indices)
             if cell.pitches is not None:
                 pitches.extend(cell.pitches)
@@ -2922,8 +2900,7 @@ class PitchArrayRow:
         stop = start + len(column_indices)
         strict_series = list(range(start, stop))
         if not column_indices == strict_series:
-            message = "cells must be contiguous."
-            raise ValueError(message)
+            raise ValueError("cells must be contiguous.")
         first_cell = cells[0]
         for cell in cells[1:]:
             self.remove(cell)
@@ -2939,8 +2916,7 @@ class PitchArrayRow:
         """
         self_width = self.width
         if width < self_width:
-            message = "pad width must not be less than row width."
-            raise ValueError(message)
+            raise ValueError("pad width must not be less than row width.")
         missing_width = width - self_width
         for i in range(missing_width):
             cell = PitchArrayCell()
@@ -2972,8 +2948,8 @@ class PitchArrayRow:
         r"""
         Changes pitch array row to measures.
 
-        Sets time signature numerators equal to pitch array row widths and time
-        signature denominators equal to ``cell_duration_denominator``.
+        Sets time signature numerators equal to pitch array row widths and time signature
+        denominators equal to ``cell_duration_denominator``.
 
         ..  container:: example
 
@@ -2981,7 +2957,8 @@ class PitchArrayRow:
 
             >>> array = baca.PitchArray([
             ...     [1, (2, 1), ([-2, -1.5], 2)],
-            ...     [(7, 2), (6, 1), 1]])
+            ...     [(7, 2), (6, 1), 1],
+            ... ])
 
             >>> print(array)
             [  ] [d'] [bf bqf    ]
@@ -3028,7 +3005,8 @@ class PitchArrayRow:
         return container
 
     def withdraw(self):
-        r"""Withdraws pitch array row from parent pitch array.
+        """
+        Withdraws pitch array row from parent pitch array.
 
         Returns pitch array row.
         """

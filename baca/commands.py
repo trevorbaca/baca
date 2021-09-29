@@ -44,13 +44,10 @@ def assign_parts(
 
     ..  container:: example
 
-        >>> def closure():
-        ...     return baca.make_empty_score(1)
-
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=closure,
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
 
         >>> commands(
         ...     "Music_Voice",
@@ -66,6 +63,7 @@ def assign_parts(
         ...     commands.voice_metadata,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -103,8 +101,8 @@ def assign_parts(
 
         Raises exception when voice does not allow part assignment:
 
+        >>> score = baca.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     score_template=closure,
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
 
@@ -125,6 +123,7 @@ def assign_parts(
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     score=score,
         ... )
         Traceback (most recent call last):
             ...

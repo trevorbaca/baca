@@ -197,7 +197,7 @@ class CommandAccumulator:
         self.time_signatures = _initialize_time_signatures(time_signatures)
         self.voice_abbreviations = voice_abbreviations or {}
         self.voice_metadata = {}
-        self.voice_names = voice_names or get_voice_names(score_template)
+        self.voice_names = voice_names
 
     def __call__(self, scopes, *commands):
         """
@@ -222,7 +222,7 @@ class CommandAccumulator:
                 raise Exception(message)
         scope_count = len(scopes_)
         for i, current_scope in enumerate(scopes_):
-            if current_scope.voice_name not in self.voice_names:
+            if self.voice_names and current_scope.voice_name not in self.voice_names:
                 raise Exception(f"unknown voice name {current_scope.voice_name!r}.")
             if isinstance(current_scope, _scoping.TimelineScope):
                 for scope_ in current_scope.scopes:
