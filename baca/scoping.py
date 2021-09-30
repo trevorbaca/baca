@@ -1491,6 +1491,7 @@ def site(frame, self=None, *, n=None):
             break
         if part == "library":
             found_library = True
+    parts = [_ for _ in parts if _ != "library"]
     parts.reverse()
     if parts[0] == "baca":
         parts.pop()
