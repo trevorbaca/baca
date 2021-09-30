@@ -880,7 +880,7 @@ def dynamic(
 
         Works with hairpins:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -972,7 +972,7 @@ def dynamic(
 
         Works with tweaks:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1095,7 +1095,7 @@ def hairpin(
 
         Conventional dynamics:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1182,7 +1182,7 @@ def hairpin(
 
         Effort dynamic al niente:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1271,7 +1271,7 @@ def hairpin(
 
         Effort dynamic dal niente:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1359,7 +1359,7 @@ def hairpin(
 
         Effort dynamic constante:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1447,7 +1447,7 @@ def hairpin(
 
         Effort dynamics crescendo subito, decrescendo subito:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1547,7 +1547,7 @@ def hairpin(
 
         Piece selector groups leaves by measures:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1636,7 +1636,7 @@ def hairpin(
 
         With hairpins:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1733,7 +1733,7 @@ def hairpin(
 
         Bookends each piece:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1826,7 +1826,7 @@ def hairpin(
 
         With hairpins:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1931,7 +1931,7 @@ def hairpin(
 
         REGRESSION. Works with lone dynamic:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -2015,7 +2015,7 @@ def hairpin(
 
         REGRESSION. Works with lone hairpin:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -2100,7 +2100,7 @@ def hairpin(
 
         REGRESSION. Works with to-barline tweak:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -2192,7 +2192,7 @@ def hairpin(
 
         Works with interposed niente dynamics:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -2285,7 +2285,7 @@ def hairpin(
 
         Works with parenthesized dynamics:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -3268,7 +3268,7 @@ def text_spanner(
 
         Dashed line with arrow:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -3356,7 +3356,7 @@ def text_spanner(
 
         Dashed line with hook:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -3444,7 +3444,7 @@ def text_spanner(
 
         Solid line with arrow:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -3532,7 +3532,7 @@ def text_spanner(
 
         Solid line with hook:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -3620,7 +3620,7 @@ def text_spanner(
 
         Invisible lines:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -3710,7 +3710,7 @@ def text_spanner(
 
         Piece selector groups leaves by measures:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -3816,7 +3816,7 @@ def text_spanner(
 
         With spanners:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -3922,7 +3922,7 @@ def text_spanner(
 
         Bookends each piece:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -4038,7 +4038,7 @@ def text_spanner(
 
         With spanners:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -4157,7 +4157,7 @@ def text_spanner(
         Indexes tweaks. No purple appears because tweakable indicators appear on pieces
         0, 1, 2 but piece 3 carries only a stop text span:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -4250,7 +4250,7 @@ def text_spanner(
 
         REGRESSION. Handles backslashed markup correctly:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -4344,7 +4344,7 @@ def text_spanner(
 
         REGRESSION. Kerns bookended hooks:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -4452,7 +4452,7 @@ def text_spanner(
 
         REGRESSION. Backsteals left text from length-1 final piece:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -4551,7 +4551,7 @@ def text_spanner(
 
         REGRESSION. Backsteals left text from spannerless final piece:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )

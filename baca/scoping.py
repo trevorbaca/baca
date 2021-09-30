@@ -1144,7 +1144,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
 
         Applies leaf selector to commands:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1244,7 +1244,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
 
         Applies measure selector to commands:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1398,7 +1398,7 @@ def only_parts(command: _command_typing) -> _command_typing:
 
         REGRESSION. Dynamic status color tweaks copy dynamic edition tags:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )

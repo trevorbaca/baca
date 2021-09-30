@@ -26,7 +26,7 @@ class AccidentalAdjustmentCommand(_scoping.Command):
 
     ..  container:: example
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -481,7 +481,7 @@ class ClusterCommand(_scoping.Command):
 
             Hides flat markup:
 
-            >>> score = baca.make_empty_score(1)
+            >>> score = baca.docs.make_empty_score(1)
             >>> commands = baca.CommandAccumulator(
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -596,7 +596,7 @@ class ClusterCommand(_scoping.Command):
 
             Takes start pitch from input notes:
 
-            >>> score = baca.make_empty_score(1)
+            >>> score = baca.docs.make_empty_score(1)
             >>> commands = baca.CommandAccumulator(
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -712,7 +712,7 @@ class ClusterCommand(_scoping.Command):
 
             Sets start pitch explicitly:
 
-            >>> score = baca.make_empty_score(1)
+            >>> score = baca.docs.make_empty_score(1)
             >>> commands = baca.CommandAccumulator(
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -835,7 +835,7 @@ class ClusterCommand(_scoping.Command):
 
             Increasing widths:
 
-            >>> score = baca.make_empty_score(1)
+            >>> score = baca.docs.make_empty_score(1)
             >>> commands = baca.CommandAccumulator(
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -950,7 +950,7 @@ class ClusterCommand(_scoping.Command):
 
             Patterned widths:
 
-            >>> score = baca.make_empty_score(1)
+            >>> score = baca.docs.make_empty_score(1)
             >>> commands = baca.CommandAccumulator(
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -1065,7 +1065,7 @@ class ClusterCommand(_scoping.Command):
 
             Leaves notes and chords unchanged:
 
-            >>> score = baca.make_empty_score(1)
+            >>> score = baca.docs.make_empty_score(1)
             >>> commands = baca.CommandAccumulator(
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -1133,7 +1133,7 @@ class ColorFingeringCommand(_scoping.Command):
 
         With segment-commands:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1502,7 +1502,7 @@ class MicrotoneDeviationCommand(_scoping.Command):
 
         With alternating up- and down-quatertones:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1660,7 +1660,7 @@ class OctaveDisplacementCommand(_scoping.Command):
 
         Displaces octaves:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1936,7 +1936,7 @@ class PitchCommand(_scoping.Command):
 
         With pitch numbers:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -2010,7 +2010,7 @@ class PitchCommand(_scoping.Command):
 
         With pitch numbers:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -2084,7 +2084,7 @@ class PitchCommand(_scoping.Command):
 
         Large chord:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -2531,7 +2531,7 @@ class RegisterCommand(_scoping.Command):
 
         With segment-commands:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -2856,7 +2856,7 @@ class RegisterInterpolationCommand(_scoping.Command):
 
         Holds register constant:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=time_signatures,
@@ -2962,7 +2962,7 @@ class RegisterInterpolationCommand(_scoping.Command):
 
         Octave-transposes to a target interpolated from 12 down to 0:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=time_signatures,
@@ -3068,7 +3068,7 @@ class RegisterInterpolationCommand(_scoping.Command):
 
         Octave-transposes to a target interpolated from 0 up to 12:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=time_signatures,
@@ -3174,7 +3174,7 @@ class RegisterInterpolationCommand(_scoping.Command):
 
         Octave-transposes to a target interpolated from 12 down to -12:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=time_signatures,
@@ -3280,7 +3280,7 @@ class RegisterInterpolationCommand(_scoping.Command):
 
         Octave-transposes to a target interpolated from -12 up to 12:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=time_signatures,
@@ -5255,7 +5255,7 @@ def force_accidental(
 
         Inverts edition-specific tags:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -5555,7 +5555,7 @@ def pitch(
         REGRESSION. Preserves duration multipliers when leaves cast from one type to
         another (note to chord in this example):
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )

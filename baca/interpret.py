@@ -19,7 +19,6 @@ from . import rhythmcommands as _rhythmcommands
 from . import scoping as _scoping
 from . import selection as _selection
 from . import tags as _tags
-from . import templates as _templates
 
 nonfirst_preamble = r"""\header { composer = ##f poet = ##f title = ##f }
 \layout { indent = 0 }
@@ -219,6 +218,105 @@ def _assert_nonoverlapping_rhythms(rhythms, voice):
         previous_stop_offset = stop_offset
 
 
+def _attach_default_indicators(argument):
+    """
+    Attaches defaults to all staff and staff group contexts in ``argument`` when
+    ``argument`` is a score.
+
+    Attaches defaults to ``argument`` (without iterating ``argument``) when ``argument``
+    is a staff or staff group.
+
+    Returns list of one wrapper for every indicator attached.
+    """
+    prototype = (abjad.Score, abjad.Staff, abjad.StaffGroup)
+    assert isinstance(argument, prototype), repr(argument)
+    wrappers = []
+    tag = _const.REMOVE_ALL_EMPTY_STAVES
+    empty_prototype = (abjad.MultimeasureRest, abjad.Skip)
+    prototype = (abjad.Staff, abjad.StaffGroup)
+    if isinstance(argument, abjad.Score):
+        staff__groups = list(abjad.Selection(argument).components(prototype))
+        staves = list(abjad.Selection(argument).components(abjad.Staff))
+    elif isinstance(argument, abjad.Staff):
+        staff__groups = [argument]
+        staves = [argument]
+    else:
+        assert isinstance(argument, abjad.StaffGroup), repr(argument)
+        staff__groups = [argument]
+        staves = []
+    for staff__group in staff__groups:
+        leaf = None
+        voices = abjad.Selection(staff__group).components(abjad.Voice)
+        assert isinstance(voices, abjad.Selection), repr(voices)
+        # find leaf 0 in first nonempty voice
+        for voice in voices:
+            leaves = []
+            for leaf_ in abjad.iterate.leaves(voice):
+                if abjad.get.has_indicator(leaf_, _const.HIDDEN):
+                    leaves.append(leaf_)
+            if not all(isinstance(_, empty_prototype) for _ in leaves):
+                leaf = abjad.get.leaf(voice, 0)
+                break
+        # otherwise, find first leaf in voice in non-removable staff
+        if leaf is None:
+            for voice in voices:
+                voice_might_vanish = False
+                for component in abjad.get.parentage(voice):
+                    if abjad.get.annotation(component, tag) is True:
+                        voice_might_vanish = True
+                if not voice_might_vanish:
+                    leaf = abjad.get.leaf(voice, 0)
+                    if leaf is not None:
+                        break
+        # otherwise, as last resort find first leaf in first voice
+        if leaf is None:
+            leaf = abjad.get.leaf(voices[0], 0)
+        if leaf is None:
+            continue
+        instrument = abjad.get.indicator(leaf, abjad.Instrument)
+        if instrument is None:
+            string = "default_instrument"
+            instrument = abjad.get.annotation(staff__group, string)
+            if instrument is not None:
+                wrapper = abjad.attach(
+                    instrument,
+                    leaf,
+                    context=staff__group.lilypond_type,
+                    tag=abjad.Tag("abjad.ScoreTemplate.attach_defaults(1)"),
+                    wrapper=True,
+                )
+                wrappers.append(wrapper)
+        margin_markup = abjad.get.indicator(leaf, abjad.MarginMarkup)
+        if margin_markup is None:
+            string = "default_margin_markup"
+            margin_markup = abjad.get.annotation(staff__group, string)
+            if margin_markup is not None:
+                wrapper = abjad.attach(
+                    margin_markup,
+                    leaf,
+                    tag=_tags.NOT_PARTS.append(
+                        abjad.Tag("abjad.ScoreTemplate.attach_defaults(2)")
+                    ),
+                    wrapper=True,
+                )
+                wrappers.append(wrapper)
+    for staff in staves:
+        leaf = abjad.get.leaf(staff, 0)
+        clef = abjad.get.indicator(leaf, abjad.Clef)
+        if clef is not None:
+            continue
+        clef = abjad.get.annotation(staff, "default_clef")
+        if clef is not None:
+            wrapper = abjad.attach(
+                clef,
+                leaf,
+                tag=abjad.Tag("abjad.ScoreTemplate.attach_defaults(3)"),
+                wrapper=True,
+            )
+            wrappers.append(wrapper)
+    return wrappers
+
+
 def _attach_fermatas(
     always_make_global_rests,
     append_phantom_measure,
@@ -249,12 +347,12 @@ def _attach_first_appearance_default_indicators(
     for staff_or_staff_group in abjad.iterate.components(score, staff_or_staff_group):
         if staff_or_staff_group.name in previous_persistent_indicators:
             continue
-        for wrapper in _templates.attach_default_indicators(staff_or_staff_group):
+        for wrapper in _attach_default_indicators(staff_or_staff_group):
             _scoping.treat_persistent_wrapper(manifests, wrapper, "default")
 
 
 def _attach_first_segment_default_indicators(score, manifests):
-    for wrapper in _templates.attach_default_indicators(score):
+    for wrapper in _attach_default_indicators(score):
         _scoping.treat_persistent_wrapper(manifests, wrapper, "default")
 
 

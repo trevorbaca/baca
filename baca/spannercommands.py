@@ -220,7 +220,7 @@ def beam(
 
         Beams everything and sets beam direction down:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )

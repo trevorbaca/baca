@@ -7,7 +7,7 @@ r"""
 
         Default clefs color purple and redraw dull purple:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> breaks = baca.breaks(
         ...     baca.page(
         ...         1,
@@ -86,7 +86,7 @@ r"""
 
         Explicit clefs color blue and redraw dull blue:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> breaks = baca.breaks(
         ...     baca.page(
         ...         1,
@@ -163,7 +163,7 @@ r"""
 
         Even after a previous clef:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> breaks = baca.breaks(
         ...     baca.page(
         ...         1,
@@ -253,7 +253,7 @@ r"""
 
         Reapplied clefs color green and redraw dull green:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> breaks = baca.breaks(
         ...     baca.page(
         ...         1,
@@ -340,7 +340,7 @@ r"""
 
         Redundant clefs color pink and redraw dull pink:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> breaks = baca.breaks(
         ...     baca.page(
         ...         1,
@@ -428,7 +428,7 @@ r"""
 
         Even at the beginning of a segment:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> breaks = baca.breaks(
         ...     baca.page(
         ...         1,
@@ -523,7 +523,7 @@ r"""
 
         Explicit dynamics color blue:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -579,7 +579,7 @@ r"""
 
         Even after a previous dynamic:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -648,7 +648,7 @@ r"""
 
         Reapplied dynamics color green:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -716,7 +716,7 @@ r"""
 
         Redundant dynamics color pink:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -775,7 +775,7 @@ r"""
 
         Even at the beginning of a segment:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -842,7 +842,7 @@ r"""
 
         Sforzando dynamics do not count as redundant:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -901,7 +901,7 @@ r"""
 
         Even at the beginning of a segment:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -970,7 +970,7 @@ r"""
 
         REGRESSION. Conventional and effort dynamics analyze nonredundantly:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -1050,7 +1050,7 @@ r"""
 
         Default instruments color purple and redraw dull purple:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> triple = ("Music_Staff", "default_instrument", abjad.Flute())
         >>> commands = baca.CommandAccumulator(
         ...     instruments=instruments,
@@ -1203,7 +1203,7 @@ r"""
 
         Explicit instruments color blue and redraw dull blue:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     instruments=instruments,
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -1353,7 +1353,7 @@ r"""
 
         Even after a previous instrument:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     instruments=instruments,
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -1515,7 +1515,7 @@ r"""
 
         Reapplied instruments color green and redraw dull green:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     instruments=instruments,
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -1677,7 +1677,7 @@ r"""
 
         Redundant instruments color pink and redraw dull pink:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> breaks = baca.breaks(
         ...     baca.page(
         ...         1,
@@ -1852,7 +1852,7 @@ r"""
 
         Even at the beginning of a segment:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> breaks = baca.breaks(
         ...     baca.page(
         ...         1,
@@ -2044,7 +2044,7 @@ r"""
 
         Default margin markup color purple and redraw dull purple:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> triple = (
         ...     "Music_Staff",
         ...     "default_margin_markup",
@@ -2219,7 +2219,7 @@ r"""
 
         Explicit margin markup color blue and redraw dull blue:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -2387,7 +2387,7 @@ r"""
 
         Even after previous margin markup:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -2573,7 +2573,7 @@ r"""
 
         Reapplied margin markup color green and redraw dull green:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -2758,7 +2758,7 @@ r"""
 
         Redundant margin markup color pink and redraw dull pink:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> breaks = baca.breaks(
         ...     baca.page(
         ...         1,
@@ -2970,7 +2970,7 @@ r"""
 
         Even at the beginning of a segment:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> breaks = baca.breaks(
         ...     baca.page(
         ...         1,
@@ -3163,7 +3163,7 @@ r"""
 
         Multiple margin markup are allowed so long as only one is active:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> breaks = baca.breaks(
         ...     baca.page(
         ...         1,
@@ -3286,7 +3286,7 @@ r"""
 
         Explicit metronome marks color blue:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     append_phantom_measure=True,
         ...     metronome_marks=metronome_marks,
@@ -3388,7 +3388,7 @@ r"""
 
         Even after a previous metronome mark:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     append_phantom_measure=True,
         ...     metronome_marks=metronome_marks,
@@ -3506,7 +3506,7 @@ r"""
 
         Reapplied metronome marks color green:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -3595,7 +3595,7 @@ r"""
 
         Redundant metronome marks color pink:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     append_phantom_measure=True,
         ...     metronome_marks=metronome_marks,
@@ -3705,7 +3705,7 @@ r"""
 
         Even at the beginning of a segment:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     append_phantom_measure=True,
         ...     metronome_marks=metronome_marks,
@@ -3827,7 +3827,7 @@ r"""
 
         Explicit persistent overrides work but do not color:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -3943,7 +3943,7 @@ r"""
 
         Reapplied persistent overrides work but do not color:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -4014,7 +4014,7 @@ r"""
 
         Even at the beginning of a segment:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -4102,7 +4102,7 @@ r"""
 
         Explicit staff lines color blue:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -4161,7 +4161,7 @@ r"""
 
         Even after previous staff lines:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -4233,7 +4233,7 @@ r"""
 
         Reapplied staff lines color green:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -4303,7 +4303,7 @@ r"""
 
         Redundant staff lines color pink:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -4368,7 +4368,7 @@ r"""
 
         Even at the beginning of a segment:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -4456,7 +4456,7 @@ r"""
 
         Explicit tempo trends color blue:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     append_phantom_measure=True,
         ...     metronome_marks=metronome_marks,
@@ -4562,7 +4562,7 @@ r"""
 
         Even after a previous tempo trend:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -4654,7 +4654,7 @@ r"""
 
         Reapplied tempo trends color green:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -4745,7 +4745,7 @@ r"""
 
         Redundant tempo trends color pink:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
@@ -4841,7 +4841,7 @@ r"""
 
         Even at the beginning of a segment:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],

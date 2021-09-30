@@ -5,7 +5,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
 ..  container:: example
 
-    >>> score = baca.make_empty_score(1)
+    >>> score = baca.docs.make_empty_score(1)
     >>> commands = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
@@ -92,7 +92,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
     Commands may be grouped into lists:
 
-    >>> score = baca.make_empty_score(1)
+    >>> score = baca.docs.make_empty_score(1)
     >>> voice_names = baca.accumulator.get_voice_names(score)
     >>> commands = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -210,7 +210,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
     Colors octaves:
 
-    >>> score = baca.make_empty_score(1, 1)
+    >>> score = baca.docs.make_empty_score(1, 1)
     >>> commands = baca.CommandAccumulator(
     ...     time_signatures=[(6, 4)],
     ... )
@@ -292,7 +292,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
     >>> instruments = {}
     >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
-    >>> score = baca.make_empty_score(1)
+    >>> score = baca.docs.make_empty_score(1)
     >>> commands = baca.CommandAccumulator(
     ...     instruments=instruments,
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -371,7 +371,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
     >>> instruments = {}
     >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
-    >>> score = baca.make_empty_score(1)
+    >>> score = baca.docs.make_empty_score(1)
     >>> commands = baca.CommandAccumulator(
     ...     instruments=instruments,
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -471,7 +471,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     >>> instruments = {}
     >>> instruments["Violin"] = abjad.Violin()
 
-    >>> score = baca.make_empty_score(1)
+    >>> score = baca.docs.make_empty_score(1)
     >>> commands = baca.CommandAccumulator(
     ...     instruments=instruments,
     ...     time_signatures=time_signatures,
@@ -577,7 +577,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...
     >>> figures = abjad.select(figures_)
 
-    >>> score = baca.make_empty_score(1)
+    >>> score = baca.docs.make_empty_score(1)
     >>> commands = baca.CommandAccumulator(
     ...     time_signatures=time_signatures,
     ... )

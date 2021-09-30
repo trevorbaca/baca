@@ -2098,7 +2098,7 @@ class Imbrication:
 
             Allows unused pitches:
 
-            >>> score = baca.make_empty_score(2)
+            >>> score = baca.docs.make_empty_score(2)
             >>> figures = baca.FigureAccumulator(score)
 
             >>> collections = [
@@ -2260,7 +2260,7 @@ class Imbrication:
 
             Raises exception on unused pitches:
 
-            >>> score = baca.make_empty_score(2)
+            >>> score = baca.docs.make_empty_score(2)
             >>> figures = baca.FigureAccumulator(score)
 
             >>> collections = [
@@ -2313,7 +2313,7 @@ class Imbrication:
 
             Hockets voices:
 
-            >>> score = baca.make_empty_score(2)
+            >>> score = baca.docs.make_empty_score(2)
             >>> figures = baca.FigureAccumulator(score)
 
             >>> collections = [
@@ -2513,7 +2513,7 @@ class Imbrication:
 
             Selects last nine notes:
 
-            >>> score = baca.make_empty_score(2)
+            >>> score = baca.docs.make_empty_score(2)
             >>> figures = baca.FigureAccumulator(score)
 
             >>> collections = [
@@ -2738,7 +2738,7 @@ class Imbrication:
 
             Truncates ties:
 
-            >>> score = baca.make_empty_score(2)
+            >>> score = baca.docs.make_empty_score(2)
             >>> figures = baca.FigureAccumulator(score)
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -2916,7 +2916,7 @@ class FigureAccumulator:
 
         Raises exception on duplicate figure name.
 
-        >>> score = baca.make_empty_score(2)
+        >>> score = baca.docs.make_empty_score(2)
         >>> figures = baca.FigureAccumulator(score)
 
         >>> commands = [
@@ -7033,7 +7033,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
         Coats pitches:
 
-        >>> score = baca.make_empty_score(2)
+        >>> score = baca.docs.make_empty_score(2)
         >>> figures = baca.FigureAccumulator(score)
 
         >>> figures(
@@ -7174,7 +7174,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
         Skips wrapped pitches:
 
-        >>> score = baca.make_empty_score(2)
+        >>> score = baca.docs.make_empty_score(2)
         >>> figures = baca.FigureAccumulator(score)
 
         >>> collections = [
@@ -7354,7 +7354,7 @@ def extend_beam(
 
         Extends beam:
 
-        >>> score = baca.make_empty_score(2)
+        >>> score = baca.docs.make_empty_score(2)
         >>> figures = baca.FigureAccumulator(score)
 
         >>> figures(
@@ -7561,7 +7561,7 @@ def imbricate(
 
     ..  container:: example
 
-        >>> score = baca.make_empty_score(2)
+        >>> score = baca.docs.make_empty_score(2)
         >>> figures = baca.FigureAccumulator(score)
 
         >>> collections = [
@@ -7740,7 +7740,7 @@ def imbricate(
 
         Multiple imbricated voices:
 
-        >>> score = baca.make_empty_score(3)
+        >>> score = baca.docs.make_empty_score(3)
         >>> figures = baca.FigureAccumulator(score)
 
         >>> collections = [
@@ -7960,7 +7960,7 @@ def imbricate(
 
         Hides tuplet brackets above imbricated voice:
 
-        >>> score = baca.make_empty_score(2)
+        >>> score = baca.docs.make_empty_score(2)
         >>> figures = baca.FigureAccumulator(score)
 
         >>> collections = [
@@ -8165,7 +8165,7 @@ def imbricate(
 
         Works with pitch-classes:
 
-        >>> score = baca.make_empty_score(2)
+        >>> score = baca.docs.make_empty_score(2)
         >>> figures = baca.FigureAccumulator(score)
 
         >>> segment = [
@@ -8307,7 +8307,7 @@ def imbricate(
 
         Works with chords:
 
-        >>> score = baca.make_empty_score(2)
+        >>> score = baca.docs.make_empty_score(2)
         >>> figures = baca.FigureAccumulator(score)
 
         >>> collections = [
@@ -8470,7 +8470,7 @@ def imbricate(
 
         Works with rests:
 
-        >>> score = baca.make_empty_score(2)
+        >>> score = baca.docs.make_empty_score(2)
         >>> figures = baca.FigureAccumulator(score)
 
         >>> collections = [

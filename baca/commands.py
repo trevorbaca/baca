@@ -44,7 +44,7 @@ def assign_parts(
 
     ..  container:: example
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -100,7 +100,7 @@ def assign_parts(
 
         Raises exception when voice does not allow part assignment:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -151,7 +151,7 @@ def bcps(
 
         ..  container:: example
 
-            >>> score = baca.make_empty_score(1)
+            >>> score = baca.docs.make_empty_score(1)
             >>> commands = baca.CommandAccumulator(
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ... )
@@ -509,7 +509,7 @@ def container(
 
     ..  container:: example
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -581,7 +581,7 @@ def cross_staff(
 
         Attaches cross-staff command to last two pitched leaves:
 
-        >>> score = baca.make_empty_score(1, 1)
+        >>> score = baca.docs.make_empty_score(1, 1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 4)],
         ... )
@@ -881,7 +881,7 @@ def finger_pressure_transition(
 
     ..  container:: example
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1097,7 +1097,7 @@ def glissando(
 
         With segment-commands:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1184,7 +1184,7 @@ def glissando(
 
         First and last PLTs:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1261,7 +1261,7 @@ def glissando(
 
         Works with tweaks:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1363,7 +1363,7 @@ def glissando(
 
         Works with indexed tweaks:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
@@ -1516,7 +1516,7 @@ def invisible_music(
 
         Attaches ``\baca-invisible-music`` literal to middle leaves:
 
-        >>> score = baca.make_empty_score(1)
+        >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )

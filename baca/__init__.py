@@ -5,6 +5,7 @@ import abjad
 from . import build
 from . import const
 from . import jobs
+from . import score
 from . import selectors
 from .accumulator import (
     CommandAccumulator,
@@ -35,7 +36,6 @@ from .scoping import *
 from .selection import *
 from .sequence import *
 from .spannercommands import *
-from .templates import *
 from .typings import *
 
 
