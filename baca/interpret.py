@@ -3013,7 +3013,6 @@ def interpret_commands(
     global_rests_in_topmost_staff=False,
     include_layout_ly=False,
     includes=None,
-    indicator_defaults=None,
     instruments=None,
     label_clock_time=False,
     local_measure_number_extra_offset=None,
@@ -3093,9 +3092,6 @@ def interpret_commands(
     voice_metadata = {}
     global_skips = score["Global_Skips"]
     with abjad.Timer() as timer:
-        for lilypond_type, annotation, indicator in indicator_defaults or ():
-            context = score[lilypond_type]
-            abjad.annotate(context, annotation, indicator)
         strings = _get_global_spanner_extra_offsets(
             clock_time_extra_offset,
             local_measure_number_extra_offset,

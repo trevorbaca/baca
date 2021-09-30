@@ -8,6 +8,7 @@ r"""
         Default clefs color purple and redraw dull purple:
 
         >>> score = baca.docs.make_empty_score(1)
+        >>> abjad.annotate(score["Music_Staff"], "default_clef", abjad.Clef("treble"))
         >>> breaks = baca.breaks(
         ...     baca.page(
         ...         1,
@@ -24,9 +25,6 @@ r"""
         ...     commands.time_signatures,
         ...     first_segment=True,
         ...     includes=["baca.ily"],
-        ...     indicator_defaults=[
-        ...         ("Music_Staff", "default_clef", abjad.Clef("treble"))
-        ...     ],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
@@ -1037,7 +1035,7 @@ r"""
         Default instruments color purple and redraw dull purple:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> triple = ("Music_Staff", "default_instrument", abjad.Flute())
+        >>> abjad.annotate(score["Music_Staff"], "default_instrument", abjad.Flute())
         >>> commands = baca.CommandAccumulator(
         ...     instruments=instruments,
         ...     time_signatures=[(3, 8), (3, 8)],
@@ -1053,7 +1051,6 @@ r"""
         ...     first_segment=True,
         ...     instruments=commands.instruments,
         ...     includes=["baca.ily"],
-        ...     indicator_defaults=[triple],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
@@ -2025,8 +2022,8 @@ r"""
         Default margin markup color purple and redraw dull purple:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> triple = (
-        ...     "Music_Staff",
+        >>> abjad.annotate(
+        ...     score["Music_Staff"],
         ...     "default_margin_markup",
         ...     margin_markups["I+II"],
         ... )
@@ -2044,7 +2041,6 @@ r"""
         ...     commands.time_signatures,
         ...     first_segment=True,
         ...     includes=["baca.ily"],
-        ...     indicator_defaults=[triple],
         ...     margin_markups=commands.margin_markups,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
