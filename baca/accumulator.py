@@ -129,11 +129,7 @@ def _unpack_scopes(scopes, abbreviations):
     return scopes_
 
 
-def get_voice_names(score_template):
-    if isinstance(score_template, abjad.Score):
-        score = score_template
-    else:
-        score = score_template()
+def get_voice_names(score):
     voice_names = ["Global_Skips", "Global_Rests", "Timeline_Scope"]
     for voice in abjad.iterate.components(score, abjad.Voice):
         if voice.name is not None:
@@ -164,7 +160,6 @@ class CommandAccumulator:
         "instruments",
         "margin_markups",
         "metronome_marks",
-        "score_template",
         "skips_instead_of_rests",
         "time_signatures",
         "voice_abbreviations",
@@ -179,7 +174,6 @@ class CommandAccumulator:
         instruments=None,
         margin_markups=None,
         metronome_marks=None,
-        score_template=None,
         skips_instead_of_rests=False,
         time_signatures=None,
         voice_abbreviations=None,
@@ -192,7 +186,6 @@ class CommandAccumulator:
         self.instruments = instruments
         self.margin_markups = margin_markups
         self.metronome_marks = metronome_marks
-        self.score_template = score_template
         self.skips_instead_of_rests = skips_instead_of_rests
         self.time_signatures = _initialize_time_signatures(time_signatures)
         self.voice_abbreviations = voice_abbreviations or {}

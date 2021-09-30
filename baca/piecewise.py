@@ -900,7 +900,6 @@ def dynamic(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -988,7 +987,6 @@ def dynamic(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -1112,7 +1110,6 @@ def hairpin(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -1200,7 +1197,6 @@ def hairpin(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -1290,7 +1286,6 @@ def hairpin(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -1379,7 +1374,6 @@ def hairpin(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -1475,7 +1469,6 @@ def hairpin(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -1572,7 +1565,6 @@ def hairpin(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -1662,7 +1654,6 @@ def hairpin(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -1761,7 +1752,6 @@ def hairpin(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -1855,7 +1845,6 @@ def hairpin(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -1957,7 +1946,6 @@ def hairpin(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -2042,7 +2030,6 @@ def hairpin(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -2137,7 +2124,6 @@ def hairpin(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -2225,7 +2211,6 @@ def hairpin(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -2315,7 +2300,6 @@ def hairpin(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -3299,7 +3283,6 @@ def text_spanner(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -3388,7 +3371,6 @@ def text_spanner(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -3477,7 +3459,6 @@ def text_spanner(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -3566,7 +3547,6 @@ def text_spanner(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -3655,7 +3635,6 @@ def text_spanner(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -3750,7 +3729,6 @@ def text_spanner(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -3857,7 +3835,6 @@ def text_spanner(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -3965,7 +3942,6 @@ def text_spanner(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -4082,7 +4058,6 @@ def text_spanner(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -4205,7 +4180,6 @@ def text_spanner(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -4296,7 +4270,6 @@ def text_spanner(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -4390,7 +4363,6 @@ def text_spanner(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -4498,7 +4470,6 @@ def text_spanner(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -4599,7 +4570,6 @@ def text_spanner(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],

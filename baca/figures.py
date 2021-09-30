@@ -2137,7 +2137,6 @@ class Imbrication:
 
             >>> lilypond_file = baca.interpret_commands(
             ...     commands.commands,
-            ...     commands.score_template,
             ...     commands.time_signatures,
             ...     commands.voice_metadata,
             ...     includes=["baca.ily"],
@@ -2354,7 +2353,6 @@ class Imbrication:
 
             >>> lilypond_file = baca.interpret_commands(
             ...     commands.commands,
-            ...     commands.score_template,
             ...     commands.time_signatures,
             ...     commands.voice_metadata,
             ...     includes=["baca.ily"],
@@ -2554,7 +2552,6 @@ class Imbrication:
 
             >>> lilypond_file = baca.interpret_commands(
             ...     commands.commands,
-            ...     commands.score_template,
             ...     commands.time_signatures,
             ...     commands.voice_metadata,
             ...     includes=["baca.ily"],
@@ -2775,7 +2772,6 @@ class Imbrication:
 
             >>> lilypond_file = baca.interpret_commands(
             ...     commands.commands,
-            ...     commands.score_template,
             ...     commands.time_signatures,
             ...     commands.voice_metadata,
             ...     includes=["baca.ily"],
@@ -7074,7 +7070,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -7222,7 +7217,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -7407,7 +7401,6 @@ def extend_beam(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -7605,7 +7598,6 @@ def imbricate(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -7783,7 +7775,6 @@ def imbricate(
         >>> figures.populate_commands(commands)
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -8008,7 +7999,6 @@ def imbricate(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -8215,7 +8205,6 @@ def imbricate(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -8355,7 +8344,6 @@ def imbricate(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -8519,7 +8507,6 @@ def imbricate(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],

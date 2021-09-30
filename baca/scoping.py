@@ -719,7 +719,6 @@ class Command:
         "_previous_segment_voice_metadata",
         "_runtime",
         "_scope",
-        "_score_template",
         "_selector",
         "_tag_measure_number",
         "_tags",
@@ -1049,7 +1048,6 @@ class Suite:
         "_commands",
         "_offset_to_measure_number",
         "_previous_segment_voice_metadata",
-        "_score_template",
     )
 
     ### INITIALIZER ###
@@ -1164,7 +1162,6 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -1265,7 +1262,6 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -1417,7 +1413,6 @@ def only_parts(command: _command_typing) -> _command_typing:
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],

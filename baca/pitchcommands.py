@@ -40,7 +40,6 @@ class AccidentalAdjustmentCommand(_scoping.Command):
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -496,7 +495,6 @@ class ClusterCommand(_scoping.Command):
 
             >>> lilypond_file = baca.interpret_commands(
             ...     commands.commands,
-            ...     commands.score_template,
             ...     commands.time_signatures,
             ...     commands.voice_metadata,
             ...     includes=["baca.ily"],
@@ -612,7 +610,6 @@ class ClusterCommand(_scoping.Command):
 
             >>> lilypond_file = baca.interpret_commands(
             ...     commands.commands,
-            ...     commands.score_template,
             ...     commands.time_signatures,
             ...     commands.voice_metadata,
             ...     includes=["baca.ily"],
@@ -728,7 +725,6 @@ class ClusterCommand(_scoping.Command):
 
             >>> lilypond_file = baca.interpret_commands(
             ...     commands.commands,
-            ...     commands.score_template,
             ...     commands.time_signatures,
             ...     commands.voice_metadata,
             ...     includes=["baca.ily"],
@@ -852,7 +848,6 @@ class ClusterCommand(_scoping.Command):
 
             >>> lilypond_file = baca.interpret_commands(
             ...     commands.commands,
-            ...     commands.score_template,
             ...     commands.time_signatures,
             ...     commands.voice_metadata,
             ...     includes=["baca.ily"],
@@ -968,7 +963,6 @@ class ClusterCommand(_scoping.Command):
 
             >>> lilypond_file = baca.interpret_commands(
             ...     commands.commands,
-            ...     commands.score_template,
             ...     commands.time_signatures,
             ...     commands.voice_metadata,
             ...     includes=["baca.ily"],
@@ -1085,7 +1079,6 @@ class ClusterCommand(_scoping.Command):
 
             >>> lilypond_file = baca.interpret_commands(
             ...     commands.commands,
-            ...     commands.score_template,
             ...     commands.time_signatures,
             ...     commands.voice_metadata,
             ...     includes=["baca.ily"],
@@ -1154,7 +1147,6 @@ class ColorFingeringCommand(_scoping.Command):
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -1524,7 +1516,6 @@ class MicrotoneDeviationCommand(_scoping.Command):
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -1685,7 +1676,6 @@ class OctaveDisplacementCommand(_scoping.Command):
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -1959,7 +1949,6 @@ class PitchCommand(_scoping.Command):
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -2034,7 +2023,6 @@ class PitchCommand(_scoping.Command):
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -2109,7 +2097,6 @@ class PitchCommand(_scoping.Command):
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -2560,7 +2547,6 @@ class RegisterCommand(_scoping.Command):
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -2886,7 +2872,6 @@ class RegisterInterpolationCommand(_scoping.Command):
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -2993,7 +2978,6 @@ class RegisterInterpolationCommand(_scoping.Command):
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -3100,7 +3084,6 @@ class RegisterInterpolationCommand(_scoping.Command):
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -3207,7 +3190,6 @@ class RegisterInterpolationCommand(_scoping.Command):
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -3314,7 +3296,6 @@ class RegisterInterpolationCommand(_scoping.Command):
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -5292,7 +5273,6 @@ def force_accidental(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -5591,7 +5571,6 @@ def pitch(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],

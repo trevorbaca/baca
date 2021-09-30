@@ -18,7 +18,6 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
     >>> lilypond_file = baca.interpret_commands(
     ...     commands.commands,
-    ...     commands.score_template,
     ...     commands.time_signatures,
     ...     commands.voice_metadata,
     ...     move_global_context=True,
@@ -111,7 +110,6 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
     >>> lilypond_file = baca.interpret_commands(
     ...     commands.commands,
-    ...     commands.score_template,
     ...     commands.time_signatures,
     ...     commands.voice_metadata,
     ...     move_global_context=True,
@@ -230,7 +228,6 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
     >>> lilypond_file = baca.interpret_commands(
     ...     commands.commands,
-    ...     commands.score_template,
     ...     commands.time_signatures,
     ...     commands.voice_metadata,
     ...     color_octaves=True,
@@ -310,7 +307,6 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
     >>> lilypond_file = baca.interpret_commands(
     ...     commands.commands,
-    ...     commands.score_template,
     ...     commands.time_signatures,
     ...     commands.voice_metadata,
     ...     instruments=commands.instruments,
@@ -390,7 +386,6 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
     >>> lilypond_file = baca.interpret_commands(
     ...     commands.commands,
-    ...     commands.score_template,
     ...     commands.time_signatures,
     ...     commands.voice_metadata,
     ...     instruments=commands.instruments,
@@ -489,7 +484,6 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
     >>> lilypond_file = baca.interpret_commands(
     ...     commands.commands,
-    ...     commands.score_template,
     ...     commands.time_signatures,
     ...     commands.voice_metadata,
     ...     includes=["baca.ily"],
@@ -594,7 +588,6 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
     >>> lilypond_file = baca.interpret_commands(
     ...     commands.commands,
-    ...     commands.score_template,
     ...     commands.time_signatures,
     ...     commands.voice_metadata,
     ...     includes=["baca.ily"],

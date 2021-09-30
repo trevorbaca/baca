@@ -1466,14 +1466,6 @@ def _import_score_package(contents_directory):
     return module
 
 
-def _import_score_template(contents_directory):
-    assert contents_directory.name == contents_directory.parent.name
-    module = _import_score_package(contents_directory)
-    library = getattr(module, "library")
-    score_template = library.ScoreTemplate
-    return score_template
-
-
 def _is_part_assignment_token(argument):
     if isinstance(argument, int) and 1 <= argument:
         return True

@@ -39,7 +39,6 @@ class RhythmCommand(_scoping.Command):
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -361,7 +360,6 @@ class RhythmCommand(_scoping.Command):
 
             >>> lilypond_file = baca.interpret_commands(
             ...     commands.commands,
-            ...     commands.score_template,
             ...     commands.time_signatures,
             ...     commands.voice_metadata,
             ...     includes=["baca.ily"],
@@ -684,7 +682,6 @@ def make_monads(fractions):
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
@@ -800,7 +797,6 @@ def make_repeat_tied_notes(
 
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
-        ...     commands.score_template,
         ...     commands.time_signatures,
         ...     commands.voice_metadata,
         ...     includes=["baca.ily"],

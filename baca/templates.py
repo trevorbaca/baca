@@ -33,7 +33,7 @@ def assert_unique_context_names(score):
             raise Exception(f"duplicate context name: {context.name!r}.")
 
 
-def attach_defaults(argument):
+def attach_default_indicators(argument):
     """
     Attaches defaults to all staff and staff group contexts in ``argument`` when
     ``argument`` is a score.

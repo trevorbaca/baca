@@ -240,26 +240,21 @@ def _attach_fermatas(
     context.extend(rests)
 
 
-def _attach_first_appearance_score_template_defaults(
-    score, first_segment, manifests, previous_persist
+def _attach_first_appearance_default_indicators(
+    score,
+    manifests,
+    previous_persistent_indicators,
 ):
-    if first_segment:
-        return
-    staff__group = (abjad.Staff, abjad.StaffGroup)
-    dictionary = previous_persist.get("persistent_indicators")
-    if not dictionary:
-        return
-    for staff__group in abjad.iterate.components(score, staff__group):
-        if staff__group.name in dictionary:
+    staff_or_staff_group = (abjad.Staff, abjad.StaffGroup)
+    for staff_or_staff_group in abjad.iterate.components(score, staff_or_staff_group):
+        if staff_or_staff_group.name in previous_persistent_indicators:
             continue
-        for wrapper in _templates.attach_defaults(staff__group):
+        for wrapper in _templates.attach_default_indicators(staff_or_staff_group):
             _scoping.treat_persistent_wrapper(manifests, wrapper, "default")
 
 
-def _attach_first_segment_score_template_defaults(score, first_segment, manifests):
-    if not first_segment:
-        return
-    for wrapper in _templates.attach_defaults(score):
+def _attach_first_segment_default_indicators(score, manifests):
+    for wrapper in _templates.attach_default_indicators(score):
         _scoping.treat_persistent_wrapper(manifests, wrapper, "default")
 
 
@@ -2300,11 +2295,11 @@ def _prototype_string(class_):
 
 def _reapply_persistent_indicators(
     manifests,
-    persistent_indicators,
+    previous_persistent_indicators,
     score,
 ):
     for context in abjad.iterate.components(score, abjad.Context):
-        mementos = persistent_indicators.get(context.name)
+        mementos = previous_persistent_indicators.get(context.name)
         if not mementos:
             continue
         for memento in mementos:
@@ -2920,7 +2915,6 @@ def color_repeat_pitch_classes(score):
 
 def interpret_commands(
     commands,
-    score_template,
     time_signatures,
     voice_metadata,
     *,
@@ -3023,14 +3017,11 @@ def interpret_commands(
         assert all(isinstance(_, str) for _ in preamble), repr(preamble)
     previous_metadata = dict(previous_metadata or {})
     previous_persist = dict(previous_persist or {})
-    if score is not None:
-        assert isinstance(score, abjad.Score)
-        assert score_template is None
+    assert isinstance(score, abjad.Score), repr(score)
     assert transpose_score in (True, False)
     assert treat_untreated_persistent_wrappers in (True, False)
     with abjad.Timer() as timer:
         measure_count = len(time_signatures)
-        score = score or score_template()
         for lilypond_type, annotation, indicator in indicator_defaults or ():
             context = score[lilypond_type]
             abjad.annotate(context, annotation, indicator)
@@ -3101,24 +3092,23 @@ def interpret_commands(
         )
         _extend_beams(score)
         _attach_sounds_during(score)
-        _attach_first_segment_score_template_defaults(
-            score,
-            first_segment=first_segment,
-            manifests=manifests,
-        )
-        persistent_indicators = previous_persist.get("persistent_indicators")
-        if persistent_indicators and not first_segment:
+        if first_segment:
+            _attach_first_segment_default_indicators(
+                score,
+                manifests=manifests,
+            )
+        previous_persistent_indicators = previous_persist.get("persistent_indicators")
+        if previous_persistent_indicators and not first_segment:
             _reapply_persistent_indicators(
                 manifests,
-                persistent_indicators,
+                previous_persistent_indicators,
                 score,
             )
-        _attach_first_appearance_score_template_defaults(
-            score,
-            first_segment=first_segment,
-            manifests=manifests,
-            previous_persist=previous_persist,
-        )
+            _attach_first_appearance_default_indicators(
+                score,
+                manifests=manifests,
+                previous_persistent_indicators=previous_persistent_indicators,
+            )
         _apply_spacing(score, page_layout_profile, spacing)
     count = int(timer.elapsed_time)
     seconds = abjad.String("second").pluralize(count)

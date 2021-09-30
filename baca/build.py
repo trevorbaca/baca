@@ -173,7 +173,6 @@ def _interpret_commands(
     with abjad.Timer() as timer:
         lilypond_file, metadata, persist = interpreter_function(
             commands.commands,
-            commands.score_template,
             commands.time_signatures,
             commands.voice_metadata,
             append_phantom_measure=commands.append_phantom_measure,
@@ -908,7 +907,6 @@ def make_layout_ly(spacing):
     )
     lilypond_file = baca.interpret_commands(
         commands.commands,
-        commands.score_template,
         commands.time_signatures,
         commands.voice_metadata,
         append_phantom_measure=commands.append_phantom_measure,
