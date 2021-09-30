@@ -23,11 +23,13 @@ Layout.
 """
 import collections
 import dataclasses
+from inspect import currentframe as _frame
 
 import abjad
 
 from . import commandclasses as _commandclasses
 from . import indicators as _indicators
+from . import scoping as _scoping
 from . import selection as _selection
 from . import selectors as _selectors
 from . import sequence as _sequence
@@ -120,7 +122,7 @@ class SpacingSpecifier:
             abjad.attach(
                 spacing_section,
                 skip,
-                tag=tag.append(abjad.Tag("baca.SpacingSpecifier.__call__(1)")),
+                tag=tag.append(_scoping.site(_frame(), self, n=1)),
             )
             if eol_adjusted:
                 multiplier = magic_lilypond_eol_adjustment
@@ -139,7 +141,7 @@ class SpacingSpecifier:
                     skip,
                     context="GlobalSkips",
                     deactivate=True,
-                    tag=tag.append(abjad.Tag("baca.SpacingSpecifier.__call__(2)")),
+                    tag=tag.append(_scoping.site(_frame(), self, n=2)),
                 )
             if 0 < measure_index:
                 tag = _tags.SPACING
@@ -149,7 +151,7 @@ class SpacingSpecifier:
                     skip,
                     context="GlobalSkips",
                     deactivate=True,
-                    tag=tag.append(abjad.Tag("baca.SpacingSpecifier.__call__(3)")),
+                    tag=tag.append(_scoping.site(_frame(), self, n=3)),
                 )
 
 

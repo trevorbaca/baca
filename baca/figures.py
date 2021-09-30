@@ -4,6 +4,7 @@ Figure-maker.
 import copy
 import math
 import typing
+from inspect import currentframe as _frame
 
 import abjad
 from abjadext import rmakers
@@ -13,6 +14,7 @@ from . import commandclasses as _commandclasses
 from . import const as _const
 from . import pitchclasses as _pitchclasses
 from . import rhythmcommands as _rhythmcommands
+from . import scoping as _scoping
 from . import selection as _selection
 from . import sequence as _sequence
 from . import tags as _tags
@@ -992,7 +994,7 @@ class Acciaccatura:
             if 1 < len(acciaccatura_container):
                 abjad.beam(
                     acciaccatura_container[:],
-                    tag=abjad.Tag("baca.Acciaccatura.__call__()"),
+                    tag=_scoping.site(_frame(), self),
                 )
             acciaccatura_containers.append(acciaccatura_container)
         assert len(acciaccatura_containers) == len(collection)

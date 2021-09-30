@@ -189,7 +189,7 @@ def _apply_breaks(score, spacing):
     abjad.attach(
         literal,
         skips[0],
-        tag=_tags.BREAK.append(abjad.Tag("baca.BreakMeasureMap.__call__(1)")),
+        tag=_tags.BREAK.append(_scoping.site(_frame(), n=1)),
     )
     for skip in skips[:measure_count]:
         if not abjad.get.has_indicator(skip, _layout.LBSD):
@@ -197,7 +197,7 @@ def _apply_breaks(score, spacing):
             abjad.attach(
                 literal,
                 skip,
-                tag=_tags.BREAK.append(abjad.Tag("baca.BreakMeasureMap.__call__(2)")),
+                tag=_tags.BREAK.append(_scoping.site(_frame(), n=2)),
             )
     assert spacing.breaks.commands is not None
     for measure_number, commands in spacing.breaks.commands.items():
@@ -291,7 +291,7 @@ def _attach_default_indicators(argument):
                     instrument,
                     leaf,
                     context=staff__group.lilypond_type,
-                    tag=abjad.Tag("abjad.ScoreTemplate.attach_defaults(1)"),
+                    tag=_scoping.site(_frame(), n=1),
                     wrapper=True,
                 )
                 wrappers.append(wrapper)
@@ -303,9 +303,7 @@ def _attach_default_indicators(argument):
                 wrapper = abjad.attach(
                     margin_markup,
                     leaf,
-                    tag=_tags.NOT_PARTS.append(
-                        abjad.Tag("abjad.ScoreTemplate.attach_defaults(2)")
-                    ),
+                    tag=_tags.NOT_PARTS.append(_scoping.site(_frame(), n=2)),
                     wrapper=True,
                 )
                 wrappers.append(wrapper)
@@ -319,7 +317,7 @@ def _attach_default_indicators(argument):
             wrapper = abjad.attach(
                 clef,
                 leaf,
-                tag=abjad.Tag("abjad.ScoreTemplate.attach_defaults(3)"),
+                tag=_scoping.site(_frame(), n=3),
                 wrapper=True,
             )
             wrappers.append(wrapper)

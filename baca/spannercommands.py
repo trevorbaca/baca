@@ -98,7 +98,7 @@ class SpannerIndicatorCommand(_scoping.Command):
                     start_indicator,
                     first_leaf,
                     deactivate=self.deactivate,
-                    tag=abjad.Tag("baca.SpannerIndicatorCommand._call(1)")
+                    tag=_scoping.site(_frame(), self, n=1)
                     .append(_tags.SPANNER_START)
                     .append(_tags.LEFT_BROKEN),
                 )
@@ -107,9 +107,7 @@ class SpannerIndicatorCommand(_scoping.Command):
                     start_indicator,
                     first_leaf,
                     deactivate=self.deactivate,
-                    tag=abjad.Tag("baca.SpannerIndicatorCommand._call(2)").append(
-                        _tags.SPANNER_START
-                    ),
+                    tag=_scoping.site(_frame(), self, n=2).append(_tags.SPANNER_START),
                 )
         if self.stop_indicator is not None:
             stop_indicator = self.stop_indicator
@@ -122,7 +120,7 @@ class SpannerIndicatorCommand(_scoping.Command):
                     stop_indicator,
                     final_leaf,
                     deactivate=self.deactivate,
-                    tag=abjad.Tag("baca.SpannerIndicatorCommand._call(3)")
+                    tag=_scoping.site(_frame(), self, n=3)
                     .append(_tags.SPANNER_STOP)
                     .append(_tags.RIGHT_BROKEN),
                 )
@@ -131,9 +129,7 @@ class SpannerIndicatorCommand(_scoping.Command):
                     stop_indicator,
                     final_leaf,
                     deactivate=self.deactivate,
-                    tag=abjad.Tag("baca.SpannerIndicatorCommand._call(4)").append(
-                        _tags.SPANNER_STOP
-                    ),
+                    tag=_scoping.site(_frame(), self, n=4).append(_tags.SPANNER_STOP),
                 )
 
     ### PRIVATE METHODS ###

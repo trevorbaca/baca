@@ -991,11 +991,12 @@ def music(
     argument,
     *,
     do_not_check_total_duration=None,
-    tag=abjad.Tag("baca.music()"),
+    tag=None,
 ):
     """
     Makes rhythm command from string or selection ``argument``.
     """
+    tag = tag or _scoping.site(_frame())
     if isinstance(argument, str):
         string = f"{{ {argument} }}"
         container = abjad.parse(string)
@@ -1043,12 +1044,13 @@ def skeleton(
     argument,
     *,
     do_not_check_total_duration=None,
-    tag=abjad.Tag("baca.skeleton()"),
+    tag=None,
 ):
     """
     Makes rhythm command from ``string`` and attaches NOT_YET_PITCHED indicators to
     music.
     """
+    tag = tag or _scoping.site(_frame())
     if isinstance(argument, str):
         string = f"{{ {argument} }}"
         container = abjad.parse(string)
