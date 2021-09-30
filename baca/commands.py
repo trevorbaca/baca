@@ -59,7 +59,6 @@ def assign_parts(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
@@ -117,7 +116,6 @@ def assign_parts(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -170,7 +168,6 @@ def bcps(
             >>> lilypond_file = baca.interpret_commands(
             ...     commands.commands,
             ...     commands.time_signatures,
-            ...     commands.voice_metadata,
             ...     includes=["baca.ily"],
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -525,7 +522,6 @@ def container(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     score=score,
@@ -602,7 +598,6 @@ def cross_staff(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     score=score,
@@ -903,7 +898,6 @@ def finger_pressure_transition(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1112,7 +1106,6 @@ def glissando(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     move_global_context=True,
         ...     score=score,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1200,7 +1193,6 @@ def glissando(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     move_global_context=True,
         ...     score=score,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1278,7 +1270,6 @@ def glissando(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     move_global_context=True,
         ...     score=score,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1381,7 +1372,6 @@ def glissando(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     move_global_context=True,
         ...     score=score,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1533,7 +1523,6 @@ def invisible_music(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),

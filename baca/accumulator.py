@@ -163,7 +163,6 @@ class CommandAccumulator:
         "skips_instead_of_rests",
         "time_signatures",
         "voice_abbreviations",
-        "voice_metadata",
         "voice_names",
     )
 
@@ -189,7 +188,6 @@ class CommandAccumulator:
         self.skips_instead_of_rests = skips_instead_of_rests
         self.time_signatures = _initialize_time_signatures(time_signatures)
         self.voice_abbreviations = voice_abbreviations or {}
-        self.voice_metadata = {}
         self.voice_names = voice_names
 
     def __call__(self, scopes, *commands):

@@ -19,7 +19,6 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     >>> lilypond_file = baca.interpret_commands(
     ...     commands.commands,
     ...     commands.time_signatures,
-    ...     commands.voice_metadata,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ...     score=score,
@@ -111,7 +110,6 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     >>> lilypond_file = baca.interpret_commands(
     ...     commands.commands,
     ...     commands.time_signatures,
-    ...     commands.voice_metadata,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ...     score=score,
@@ -229,7 +227,6 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     >>> lilypond_file = baca.interpret_commands(
     ...     commands.commands,
     ...     commands.time_signatures,
-    ...     commands.voice_metadata,
     ...     color_octaves=True,
     ...     includes=["baca.ily"],
     ...     move_global_context=True,
@@ -308,7 +305,6 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     >>> lilypond_file = baca.interpret_commands(
     ...     commands.commands,
     ...     commands.time_signatures,
-    ...     commands.voice_metadata,
     ...     instruments=commands.instruments,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -387,7 +383,6 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     >>> lilypond_file = baca.interpret_commands(
     ...     commands.commands,
     ...     commands.time_signatures,
-    ...     commands.voice_metadata,
     ...     instruments=commands.instruments,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -485,7 +480,6 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     >>> lilypond_file = baca.interpret_commands(
     ...     commands.commands,
     ...     commands.time_signatures,
-    ...     commands.voice_metadata,
     ...     includes=["baca.ily"],
     ...     instruments=instruments,
     ...     move_global_context=True,
@@ -589,7 +583,6 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     >>> lilypond_file = baca.interpret_commands(
     ...     commands.commands,
     ...     commands.time_signatures,
-    ...     commands.voice_metadata,
     ...     includes=["baca.ily"],
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),

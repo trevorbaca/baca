@@ -275,7 +275,6 @@ class BCPCommand(_scoping.Command):
             >>> lilypond_file = baca.interpret_commands(
             ...     commands.commands,
             ...     commands.time_signatures,
-            ...     commands.voice_metadata,
             ...     includes=["baca.ily"],
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -482,7 +481,6 @@ class BCPCommand(_scoping.Command):
             >>> lilypond_file = baca.interpret_commands(
             ...     commands.commands,
             ...     commands.time_signatures,
-            ...     commands.voice_metadata,
             ...     includes=["baca.ily"],
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -751,7 +749,6 @@ class ContainerCommand(_scoping.Command):
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),

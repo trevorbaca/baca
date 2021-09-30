@@ -901,7 +901,6 @@ def dynamic(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -988,7 +987,6 @@ def dynamic(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1111,7 +1109,6 @@ def hairpin(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1198,7 +1195,6 @@ def hairpin(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1287,7 +1283,6 @@ def hairpin(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1375,7 +1370,6 @@ def hairpin(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1470,7 +1464,6 @@ def hairpin(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1566,7 +1559,6 @@ def hairpin(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1655,7 +1647,6 @@ def hairpin(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1753,7 +1744,6 @@ def hairpin(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1846,7 +1836,6 @@ def hairpin(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1947,7 +1936,6 @@ def hairpin(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2031,7 +2019,6 @@ def hairpin(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2125,7 +2112,6 @@ def hairpin(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2212,7 +2198,6 @@ def hairpin(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2301,7 +2286,6 @@ def hairpin(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3284,7 +3268,6 @@ def text_spanner(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3372,7 +3355,6 @@ def text_spanner(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3460,7 +3442,6 @@ def text_spanner(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3548,7 +3529,6 @@ def text_spanner(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3636,7 +3616,6 @@ def text_spanner(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3730,7 +3709,6 @@ def text_spanner(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3836,7 +3814,6 @@ def text_spanner(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3943,7 +3920,6 @@ def text_spanner(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4059,7 +4035,6 @@ def text_spanner(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4181,7 +4156,6 @@ def text_spanner(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4271,7 +4245,6 @@ def text_spanner(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4364,7 +4337,6 @@ def text_spanner(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4471,7 +4443,6 @@ def text_spanner(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4571,7 +4542,6 @@ def text_spanner(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),

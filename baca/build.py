@@ -174,7 +174,6 @@ def _interpret_commands(
         lilypond_file, metadata, persist = interpreter_function(
             commands.commands,
             commands.time_signatures,
-            commands.voice_metadata,
             append_phantom_measure=commands.append_phantom_measure,
             instruments=commands.instruments,
             margin_markups=commands.margin_markups,
@@ -908,7 +907,6 @@ def make_layout_ly(spacing):
     lilypond_file = baca.interpret_commands(
         commands.commands,
         commands.time_signatures,
-        commands.voice_metadata,
         append_phantom_measure=commands.append_phantom_measure,
         add_container_identifiers=True,
         comment_measure_numbers=True,

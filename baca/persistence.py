@@ -22,7 +22,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     first_segment=True,
         ...     includes=["baca.ily"],
         ...     indicator_defaults=[
@@ -105,7 +104,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -191,7 +189,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -277,7 +274,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -359,7 +355,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -456,7 +451,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -536,7 +530,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -601,7 +594,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -669,7 +661,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -730,7 +721,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -797,7 +787,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -856,7 +845,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -923,7 +911,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -984,7 +971,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1064,7 +1050,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     first_segment=True,
         ...     instruments=commands.instruments,
         ...     includes=["baca.ily"],
@@ -1217,7 +1202,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     instruments=commands.instruments,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
@@ -1376,7 +1360,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     instruments=commands.instruments,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
@@ -1537,7 +1520,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     instruments=commands.instruments,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
@@ -1702,7 +1684,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     instruments=commands.instruments,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
@@ -1882,7 +1863,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     instruments=commands.instruments,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
@@ -2062,7 +2042,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     first_segment=True,
         ...     includes=["baca.ily"],
         ...     indicator_defaults=[triple],
@@ -2233,7 +2212,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     first_segment=True,
         ...     includes=["baca.ily"],
         ...     margin_markups=commands.margin_markups,
@@ -2410,7 +2388,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     margin_markups=commands.margin_markups,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
@@ -2595,7 +2572,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     margin_markups=commands.margin_markups,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
@@ -2783,7 +2759,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     first_segment=True,
         ...     includes=["baca.ily"],
         ...     margin_markups=commands.margin_markups,
@@ -3000,7 +2975,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     margin_markups=commands.margin_markups,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
@@ -3197,7 +3171,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     first_segment=True,
         ...     includes=["baca.ily"],
         ...     margin_markups=commands.margin_markups,
@@ -3304,7 +3277,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     append_phantom_measure=commands.append_phantom_measure,
         ...     metronome_marks=commands.metronome_marks,
         ...     includes=["baca.ily"],
@@ -3416,7 +3388,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     append_phantom_measure=commands.append_phantom_measure,
         ...     metronome_marks=commands.metronome_marks,
         ...     includes=["baca.ily"],
@@ -3532,7 +3503,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     metronome_marks=commands.metronome_marks,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
@@ -3614,7 +3584,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     append_phantom_measure=commands.append_phantom_measure,
         ...     metronome_marks=commands.metronome_marks,
         ...     includes=["baca.ily"],
@@ -3733,7 +3702,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     append_phantom_measure=commands.append_phantom_measure,
         ...     metronome_marks=commands.metronome_marks,
         ...     includes=["baca.ily"],
@@ -3853,7 +3821,6 @@ r"""
         >>> lilypond_file, metadata, persist = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3970,7 +3937,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -4052,7 +4018,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -4115,7 +4080,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4183,7 +4147,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -4254,7 +4217,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -4317,7 +4279,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4390,7 +4351,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -4474,7 +4434,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     append_phantom_measure=commands.append_phantom_measure,
         ...     metronome_marks=commands.metronome_marks,
         ...     includes=["baca.ily"],
@@ -4588,7 +4547,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -4679,7 +4637,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -4766,7 +4723,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -4867,7 +4823,6 @@ r"""
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,

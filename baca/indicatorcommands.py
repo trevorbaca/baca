@@ -1258,7 +1258,6 @@ def hide_black_note_heads(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1611,7 +1610,6 @@ def margin_markup(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     first_segment=True,
         ...     margin_markups=commands.margin_markups,
         ...     includes=["baca.ily"],
@@ -2201,7 +2199,6 @@ def staff_lines(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2268,7 +2265,6 @@ def staff_lines(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2336,7 +2332,6 @@ def staff_lines(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2402,7 +2397,6 @@ def staff_lines(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2468,7 +2462,6 @@ def staff_lines(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),

@@ -41,7 +41,6 @@ class AccidentalAdjustmentCommand(_scoping.Command):
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -496,7 +495,6 @@ class ClusterCommand(_scoping.Command):
             >>> lilypond_file = baca.interpret_commands(
             ...     commands.commands,
             ...     commands.time_signatures,
-            ...     commands.voice_metadata,
             ...     includes=["baca.ily"],
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -611,7 +609,6 @@ class ClusterCommand(_scoping.Command):
             >>> lilypond_file = baca.interpret_commands(
             ...     commands.commands,
             ...     commands.time_signatures,
-            ...     commands.voice_metadata,
             ...     includes=["baca.ily"],
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -726,7 +723,6 @@ class ClusterCommand(_scoping.Command):
             >>> lilypond_file = baca.interpret_commands(
             ...     commands.commands,
             ...     commands.time_signatures,
-            ...     commands.voice_metadata,
             ...     includes=["baca.ily"],
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -849,7 +845,6 @@ class ClusterCommand(_scoping.Command):
             >>> lilypond_file = baca.interpret_commands(
             ...     commands.commands,
             ...     commands.time_signatures,
-            ...     commands.voice_metadata,
             ...     includes=["baca.ily"],
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -964,7 +959,6 @@ class ClusterCommand(_scoping.Command):
             >>> lilypond_file = baca.interpret_commands(
             ...     commands.commands,
             ...     commands.time_signatures,
-            ...     commands.voice_metadata,
             ...     includes=["baca.ily"],
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1080,7 +1074,6 @@ class ClusterCommand(_scoping.Command):
             >>> lilypond_file = baca.interpret_commands(
             ...     commands.commands,
             ...     commands.time_signatures,
-            ...     commands.voice_metadata,
             ...     includes=["baca.ily"],
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1148,7 +1141,6 @@ class ColorFingeringCommand(_scoping.Command):
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1517,7 +1509,6 @@ class MicrotoneDeviationCommand(_scoping.Command):
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1677,7 +1668,6 @@ class OctaveDisplacementCommand(_scoping.Command):
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1950,7 +1940,6 @@ class PitchCommand(_scoping.Command):
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2024,7 +2013,6 @@ class PitchCommand(_scoping.Command):
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2098,7 +2086,6 @@ class PitchCommand(_scoping.Command):
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2548,7 +2535,6 @@ class RegisterCommand(_scoping.Command):
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2873,7 +2859,6 @@ class RegisterInterpolationCommand(_scoping.Command):
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2979,7 +2964,6 @@ class RegisterInterpolationCommand(_scoping.Command):
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3085,7 +3069,6 @@ class RegisterInterpolationCommand(_scoping.Command):
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3191,7 +3174,6 @@ class RegisterInterpolationCommand(_scoping.Command):
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3297,7 +3279,6 @@ class RegisterInterpolationCommand(_scoping.Command):
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -5274,7 +5255,6 @@ def force_accidental(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -5572,7 +5552,6 @@ def pitch(
         >>> lilypond_file = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     commands.voice_metadata,
         ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),

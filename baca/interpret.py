@@ -109,6 +109,20 @@ def _add_container_identifiers(score, segment_number):
     return container_to_part_assignment
 
 
+def _adjust_first_measure_number(first_measure_number, previous_metadata):
+    if first_measure_number is not None:
+        return first_measure_number
+    if not previous_metadata:
+        return 1
+    string = "first_measure_number"
+    first_measure_number = previous_metadata.get(string)
+    time_signatures = previous_metadata.get("time_signatures")
+    if first_measure_number is None or time_signatures is None:
+        return 1
+    first_measure_number += len(time_signatures)
+    return first_measure_number
+
+
 def _alive_during_previous_segment(previous_persist, context):
     assert isinstance(context, abjad.Context), repr(context)
     names = previous_persist.get("alive_during_segment", [])
@@ -195,15 +209,10 @@ def _apply_breaks(score, spacing):
             command(global_skips)
 
 
-def _apply_spacing(score, page_layout_profile, spacing):
-    if spacing is None:
-        return
+def _apply_spacing(page_layout_profile, score, spacing):
     with abjad.Timer() as timer:
         spacing(score, page_layout_profile)
     count = int(timer.elapsed_time)
-    if False:
-        seconds = abjad.String("second").pluralize(count)
-        raise Exception(f"spacing application {count} {seconds}!")
     return count
 
 
@@ -339,9 +348,9 @@ def _attach_fermatas(
 
 
 def _attach_first_appearance_default_indicators(
-    score,
     manifests,
     previous_persistent_indicators,
+    score,
 ):
     staff_or_staff_group = (abjad.Staff, abjad.StaffGroup)
     for staff_or_staff_group in abjad.iterate.components(score, staff_or_staff_group):
@@ -356,10 +365,9 @@ def _attach_first_segment_default_indicators(score, manifests):
         _scoping.treat_persistent_wrapper(manifests, wrapper, "default")
 
 
-def _attach_nonfirst_empty_start_bar(score):
+def _attach_nonfirst_empty_start_bar(global_skips):
     # empty start bar allows LilyPond to print bar numbers at start of nonfirst segments
-    context = score["Global_Skips"]
-    first_skip = _selection.Selection(context).skip(0)
+    first_skip = _selection.Selection(global_skips).skip(0)
     literal = abjad.LilyPondLiteral(r'\bar ""')
     tag = _tags.EMPTY_START_BAR
     tag = tag.append(_tags.ONLY_SEGMENT)
@@ -370,9 +378,9 @@ def _attach_nonfirst_empty_start_bar(score):
     )
 
 
-def _attach_metronome_marks(parts_metric_modulation_multiplier, score):
+def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
     indicator_count = 0
-    skips = _selection.Selection(score["Global_Skips"]).skips()
+    skips = _selection.Selection(global_skips).skips()
     final_leaf_metronome_mark = abjad.get.indicator(skips[-1], abjad.MetronomeMark)
     add_right_text_to_me = None
     if final_leaf_metronome_mark:
@@ -679,14 +687,11 @@ def _attach_rhythm_annotation_spanner(command, selection):
     command_(leaves)
 
 
+# This exists because of an incompletely implemented behavior in LilyPond;
+# LilyPond doesn't understand repeat-tied notes to be tied;
+# because of this LilyPond incorrectly prints accidentals in front of some
+# repeat-tied notes; this function works around LilyPond's behavior
 def _attach_shadow_tie_indicators(score):
-    """
-    This exists because of an incompletely implemented behavior in LilyPond;
-    LilyPond doesn't understand repeat-tied notes to be tied;
-    because of this LilyPond incorrectly prints accidentals in front of some
-    repeat-tied notes;
-    this method works around LilyPond's behavior
-    """
     tag = _scoping.site(_frame())
     for plt in _selection.Selection(score).plts():
         if len(plt) == 1:
@@ -1132,8 +1137,7 @@ def _clean_up_laissez_vibrer_tie_direction(score):
 
 
 def _clean_up_on_beat_grace_containers(score):
-    prototype = abjad.OnBeatGraceContainer
-    for container in abjad.select(score).components(prototype):
+    for container in abjad.select(score).components(abjad.OnBeatGraceContainer):
         container._match_anchor_leaf()
         container._set_leaf_durations()
         container._attach_lilypond_one_voice()
@@ -1168,9 +1172,7 @@ def _clean_up_rhythm_maker_voice_names(score):
             voice.name = outer.name
 
 
-def _clone_segment_initial_short_instrument_name(first_segment, score):
-    if first_segment:
-        return
+def _clone_segment_initial_short_instrument_name(score):
     prototype = abjad.MarginMarkup
     for context in abjad.iterate.components(score, abjad.Context):
         first_leaf = abjad.get.leaf(context, 0)
@@ -1267,7 +1269,7 @@ def _collect_metadata(
 
 def _collect_persistent_indicators(
     manifests,
-    previous_persist,
+    previous_persistent_indicators,
     score,
 ):
     result = {}
@@ -1357,9 +1359,8 @@ def _collect_persistent_indicators(
         if mementos:
             mementos.sort(key=lambda _: abjad.storage(_))
             result[name] = mementos
-    dictionary = previous_persist.get("persistent_indicators")
-    if dictionary:
-        for context_name, mementos in dictionary.items():
+    if previous_persistent_indicators:
+        for context_name, mementos in previous_persistent_indicators.items():
             if context_name not in result:
                 result[context_name] = mementos
     return result
@@ -1570,7 +1571,7 @@ def _force_nonnatural_accidentals(score):
                 note_head.is_forced = True
 
 
-def _get_fermata_measure_numbers(score, first_measure_number):
+def _get_fermata_measure_numbers(first_measure_number, score):
     fermata_start_offsets, fermata_measure_numbers = [], []
     final_measure_is_fermata = False
     if "Global_Rests" in score:
@@ -1593,20 +1594,6 @@ def _get_fermata_measure_numbers(score, first_measure_number):
         fermata_measure_numbers,
         final_measure_is_fermata,
     )
-
-
-def _get_first_measure_number(first_measure_number, previous_metadata):
-    if first_measure_number is not None:
-        return first_measure_number
-    if not previous_metadata:
-        return 1
-    string = "first_measure_number"
-    first_measure_number = previous_metadata.get(string)
-    time_signatures = previous_metadata.get("time_signatures")
-    if first_measure_number is None or time_signatures is None:
-        return 1
-    first_measure_number += len(time_signatures)
-    return first_measure_number
 
 
 def _get_global_spanner_extra_offsets(
@@ -1769,10 +1756,7 @@ def _label_clock_time(
         score,
         clock_time_override,
         fermata_measure_numbers,
-        _get_first_measure_number(
-            first_measure_number,
-            previous_metadata,
-        ),
+        first_measure_number,
         previous_stop_clock_time,
     )
     duration = result[0]
@@ -1783,10 +1767,6 @@ def _label_clock_time(
         return None, start_clock_time, None
     total = len(skips)
     clock_times = clock_times[:total]
-    first_measure_number = _get_first_measure_number(
-        first_measure_number,
-        previous_metadata,
-    )
     final_clock_time = clock_times[-1]
     final_clock_string = final_clock_time.to_clock_string()
     final_seconds = int(final_clock_time)
@@ -1882,13 +1862,9 @@ def _label_duration_multipliers(score):
             already_labeled.add(leaf)
 
 
-def _label_measure_numbers(first_measure_number, previous_metadata, score):
-    skips = _selection.Selection(score["Global_Skips"]).skips()
+def _label_measure_numbers(first_measure_number, global_skips):
+    skips = _selection.Selection(global_skips).skips()
     total = len(skips)
-    first_measure_number = _get_first_measure_number(
-        first_measure_number,
-        previous_metadata,
-    )
     for measure_index, skip in enumerate(skips):
         local_measure_number = measure_index + 1
         measure_number = first_measure_number + measure_index
@@ -1944,10 +1920,10 @@ def _label_measure_numbers(first_measure_number, previous_metadata, score):
             )
 
 
-def _label_moment_numbers(moment_markup, score):
+def _label_moment_numbers(global_skips, moment_markup):
     if not moment_markup:
         return
-    skips = _selection.Selection(score["Global_Skips"]).skips()
+    skips = _selection.Selection(global_skips).skips()
     for i, item in enumerate(moment_markup):
         if len(item) == 2:
             value, lmn = item
@@ -2000,10 +1976,10 @@ def _label_moment_numbers(moment_markup, score):
     )
 
 
-def _label_stage_numbers(score, stage_markup):
+def _label_stage_numbers(global_skips, stage_markup):
     if not stage_markup:
         return
-    skips = _selection.Selection(score["Global_Skips"]).skips()
+    skips = _selection.Selection(global_skips).skips()
     for i, item in enumerate(stage_markup):
         if len(item) == 2:
             value, lmn = item
@@ -2106,11 +2082,9 @@ def _make_global_rests(append_phantom_measure, time_signatures):
 
 def _make_global_skips(
     append_phantom_measure,
-    first_segment,
-    score,
+    global_skips,
     time_signatures,
 ):
-    context = score["Global_Skips"]
     for time_signature in time_signatures:
         skip = abjad.Skip(
             1,
@@ -2123,13 +2097,13 @@ def _make_global_skips(
             context="Score",
             tag=_scoping.site(_frame(), n=2),
         )
-        context.append(skip)
+        global_skips.append(skip)
     if append_phantom_measure:
         tag = _scoping.site(_frame(), n=3)
         tag = tag.append(_tags.PHANTOM)
         skip = abjad.Skip(1, multiplier=(1, 4), tag=tag)
         abjad.attach(_const.PHANTOM, skip)
-        context.append(skip)
+        global_skips.append(skip)
         if time_signature != abjad.TimeSignature((1, 4)):
             time_signature = abjad.TimeSignature((1, 4))
             abjad.attach(time_signature, skip, context="Score", tag=tag)
@@ -2372,12 +2346,11 @@ def _move_global_rests(
 
 def _populate_offset_to_measure_number(
     first_measure_number,
-    previous_metadata,
-    score,
+    global_skips,
 ):
-    measure_number = _get_first_measure_number(first_measure_number, previous_metadata)
+    measure_number = first_measure_number
     offset_to_measure_number = {}
-    for skip in _selection.Selection(score["Global_Skips"]).skips():
+    for skip in _selection.Selection(global_skips).skips():
         offset = abjad.get.timespan(skip).start_offset
         offset_to_measure_number[offset] = measure_number
         measure_number += 1
@@ -2504,10 +2477,10 @@ def _reanalyze_trending_dynamics(manifests, score):
                 _scoping.treat_persistent_wrapper(manifests, wrapper, "explicit")
 
 
-def _remove_redundant_time_signatures(append_phantom_measure, score):
+def _remove_redundant_time_signatures(append_phantom_measure, global_skips):
     previous_time_signature = None
     cached_time_signatures = []
-    skips = _selection.Selection(score["Global_Skips"]).skips()
+    skips = _selection.Selection(global_skips).skips()
     if append_phantom_measure:
         skips = skips[:-1]
     for skip in skips:
@@ -2520,7 +2493,7 @@ def _remove_redundant_time_signatures(append_phantom_measure, score):
     return cached_time_signatures
 
 
-def _remove_docs_tags(remove_tags, score):
+def _remove_tags(remove_tags, score):
     assert all(isinstance(_, abjad.Tag) for _ in remove_tags), repr(remove_tags)
     for leaf in abjad.iterate.leaves(score):
         for wrapper in abjad.get.wrappers(leaf):
@@ -2819,9 +2792,7 @@ def _style_fermata_measures(
         grob.extra_offset = (0, fermata_extra_offset_y)
 
 
-def _style_phantom_measures(append_phantom_measure, score):
-    if not append_phantom_measure:
-        return
+def _style_phantom_measures(score):
     skip = abjad.get.leaf(score["Global_Skips"], -1)
     for literal in abjad.get.indicators(skip, abjad.LilyPondLiteral):
         if r"\baca-time-signature-color" in literal.argument:
@@ -3014,7 +2985,6 @@ def color_repeat_pitch_classes(score):
 def interpret_commands(
     commands,
     time_signatures,
-    voice_metadata,
     *,
     activate=None,
     add_container_identifiers=False,
@@ -3097,6 +3067,10 @@ def interpret_commands(
         assert all(isinstance(_, abjad.Tag) for _ in deactivate)
     assert do_not_require_margin_markup in (True, False)
     assert final_segment in (True, False)
+    first_measure_number = _adjust_first_measure_number(
+        first_measure_number,
+        previous_metadata,
+    )
     assert first_segment in (True, False)
     assert force_nonnatural_accidentals in (True, False)
     includes = list(includes or [])
@@ -3118,8 +3092,9 @@ def interpret_commands(
     assert isinstance(score, abjad.Score), repr(score)
     assert transpose_score in (True, False)
     assert treat_untreated_persistent_wrappers in (True, False)
+    voice_metadata = {}
+    global_skips = score["Global_Skips"]
     with abjad.Timer() as timer:
-        measure_count = len(time_signatures)
         for lilypond_type, annotation, indicator in indicator_defaults or ():
             context = score[lilypond_type]
             abjad.annotate(context, annotation, indicator)
@@ -3138,28 +3113,18 @@ def interpret_commands(
             preamble,
             score,
         )
-        _make_global_skips(
-            append_phantom_measure,
-            first_segment,
-            score,
-            time_signatures,
-        )
+        _make_global_skips(append_phantom_measure, global_skips, time_signatures)
         if attach_nonfirst_empty_start_bar and not first_segment:
-            _attach_nonfirst_empty_start_bar(
-                score,
-            )
-        _label_measure_numbers(
-            first_measure_number,
-            previous_metadata,
-            score,
-        )
-        _label_stage_numbers(score, stage_markup)
-        _label_moment_numbers(moment_markup, score)
+            _attach_nonfirst_empty_start_bar(global_skips)
+        _label_measure_numbers(first_measure_number, global_skips)
+        _label_stage_numbers(global_skips, stage_markup)
+        _label_moment_numbers(global_skips, moment_markup)
     count = int(timer.elapsed_time)
     seconds = abjad.String("second").pluralize(count)
     if print_timing:
         print(f"Score initialization {count} {seconds} ...")
     with abjad.Timer() as timer:
+        measure_count = len(time_signatures)
         with abjad.ForbidUpdate(component=score, update_on_exit=True):
             command_count, segment_duration = _call_rhythm_commands(
                 always_make_global_rests,
@@ -3185,8 +3150,7 @@ def interpret_commands(
     with abjad.Timer() as timer:
         offset_to_measure_number = _populate_offset_to_measure_number(
             first_measure_number,
-            previous_metadata,
-            score,
+            global_skips,
         )
         _extend_beams(score)
         _attach_sounds_during(score)
@@ -3203,11 +3167,12 @@ def interpret_commands(
                 score,
             )
             _attach_first_appearance_default_indicators(
+                manifests,
+                previous_persistent_indicators,
                 score,
-                manifests=manifests,
-                previous_persistent_indicators=previous_persistent_indicators,
             )
-        _apply_spacing(score, page_layout_profile, spacing)
+        if spacing is not None:
+            _apply_spacing(page_layout_profile, score, spacing)
     count = int(timer.elapsed_time)
     seconds = abjad.String("second").pluralize(count)
     if print_timing:
@@ -3237,33 +3202,19 @@ def interpret_commands(
     # TODO: optimize by consolidating score iteration:
     with abjad.Timer() as timer:
         with abjad.ForbidUpdate(component=score, update_on_exit=True):
-            _clone_segment_initial_short_instrument_name(
-                first_segment,
-                score,
-            )
+            if not first_segment:
+                _clone_segment_initial_short_instrument_name(score)
             cached_time_signatures = _remove_redundant_time_signatures(
                 append_phantom_measure,
-                score,
+                global_skips,
             )
-            result = _get_fermata_measure_numbers(
-                score,
-                _get_first_measure_number(
-                    first_measure_number,
-                    previous_metadata,
-                ),
-            )
+            result = _get_fermata_measure_numbers(first_measure_number, score)
             fermata_start_offsets = result[0]
             fermata_measure_numbers = result[1]
             final_measure_is_fermata = result[2]
             if treat_untreated_persistent_wrappers:
-                _treat_untreated_persistent_wrappers(
-                    manifests,
-                    score,
-                )
-            _attach_metronome_marks(
-                parts_metric_modulation_multiplier,
-                score,
-            )
+                _treat_untreated_persistent_wrappers(manifests, score)
+            _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier)
             _reanalyze_trending_dynamics(manifests, score)
             _reanalyze_reapplied_synthetic_wrappers(score)
             if transpose_score:
@@ -3297,10 +3248,7 @@ def interpret_commands(
                 _whitespace_leaves(score)
             if comment_measure_numbers:
                 _comment_measure_numbers(
-                    _get_first_measure_number(
-                        first_measure_number,
-                        previous_metadata,
-                    ),
+                    first_measure_number,
                     offset_to_measure_number,
                     score,
                 )
@@ -3321,8 +3269,7 @@ def interpret_commands(
                     score,
                 )
             _deactivate_tags(deactivate, score)
-            remove_tags = remove_tags or []
-            _remove_docs_tags(remove_tags, score)
+            _remove_tags(remove_tags or [], score)
             container_to_part_assignment = None
             if add_container_identifiers:
                 container_to_part_assignment = _add_container_identifiers(
@@ -3335,12 +3282,12 @@ def interpret_commands(
                     container_to_part_assignment,
                     part_manifest,
                 )
-            _move_global_rests(
-                global_rests_in_every_staff,
-                global_rests_in_topmost_staff,
-                score,
-            )
         # mutates offsets:
+        _move_global_rests(
+            global_rests_in_every_staff,
+            global_rests_in_topmost_staff,
+            score,
+        )
         if move_global_context:
             _move_global_context(score)
         _clean_up_on_beat_grace_containers(score)
@@ -3353,8 +3300,9 @@ def interpret_commands(
     if print_timing:
         print(f"Postprocessing {count} {seconds} ...")
     with abjad.Timer() as timer:
-        method = getattr(score, "_update_now")
-        method(offsets_in_seconds=True)
+        # method = getattr(score, "_update_now")
+        # method(offsets_in_seconds=True)
+        score._update_now(offsets_in_seconds=True)
     count = int(timer.elapsed_time)
     seconds = abjad.String("second").pluralize(count)
     if print_timing:
@@ -3375,14 +3323,10 @@ def interpret_commands(
             start_clock_time = result[1]
             stop_clock_time = result[2]
         _activate_tags(score, activate)
-        first_measure_number_ = _get_first_measure_number(
-            first_measure_number,
-            previous_metadata,
-        )
-        final_measure_number = first_measure_number_ + measure_count - 1
+        final_measure_number = first_measure_number + measure_count - 1
         persistent_indicators = _collect_persistent_indicators(
             manifests,
-            previous_persist,
+            previous_persistent_indicators,
             score,
         )
         _collect_metadata(
@@ -3391,10 +3335,7 @@ def interpret_commands(
             fermata_measure_numbers,
             final_measure_is_fermata,
             final_measure_number,
-            _get_first_measure_number(
-                first_measure_number,
-                previous_metadata,
-            ),
+            first_measure_number,
             metadata,
             persist,
             persistent_indicators,
@@ -3404,10 +3345,8 @@ def interpret_commands(
             cached_time_signatures,
             voice_metadata,
         )
-        _style_phantom_measures(
-            append_phantom_measure,
-            score,
-        )
+        if append_phantom_measure:
+            _style_phantom_measures(score)
     count = int(timer.elapsed_time)
     seconds = abjad.String("second").pluralize(count)
     if print_timing:
