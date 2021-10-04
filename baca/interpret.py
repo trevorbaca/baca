@@ -364,7 +364,7 @@ def _attach_first_appearance_default_indicators(
             _scoping.treat_persistent_wrapper(manifests, wrapper, "default")
 
 
-def _attach_first_segment_default_indicators(score, manifests):
+def _attach_first_segment_default_indicators(manifests, score):
     for wrapper in _attach_default_indicators(score):
         _scoping.treat_persistent_wrapper(manifests, wrapper, "default")
 
@@ -787,20 +787,21 @@ def _bracket_metric_modulation(metronome_mark, metric_modulation):
 
 
 def _bundle_runtime(
-    manifests,
-    previous_persist,
     allows_instrument=None,
+    instruments=None,
+    manifests=None,
+    margin_markups=None,
+    metronome_marks=None,
     offset_to_measure_number=None,
-    voice_name=None,
+    previous_segment_voice_metadata=None,
 ):
     runtime = {}
     runtime["allows_instrument"] = allows_instrument
+    runtime["instruments"] = instruments
     runtime["manifests"] = manifests
-    previous_segment_voice_metadata = _get_previous_segment_voice_metadata(
-        previous_persist, voice_name
-    )
-    offset_to_measure_number = offset_to_measure_number or {}
-    runtime["offset_to_measure_number"] = offset_to_measure_number
+    runtime["margin_markups"] = margin_markups
+    runtime["metronome_marks"] = metronome_marks
+    runtime["offset_to_measure_number"] = offset_to_measure_number or {}
     runtime["previous_segment_voice_metadata"] = previous_segment_voice_metadata
     return runtime
 
@@ -898,12 +899,14 @@ def _call_commands(
             measure_count,
         )
         voice_name = command.scope.voice_name
+        previous_segment_voice_metadata = _get_previous_segment_voice_metadata(
+            previous_persist, voice_name
+        )
         runtime = _bundle_runtime(
             allows_instrument=allows_instrument,
             manifests=manifests,
             offset_to_measure_number=offset_to_measure_number,
-            previous_persist=previous_persist,
-            voice_name=voice_name,
+            previous_segment_voice_metadata=previous_segment_voice_metadata,
         )
         try:
             command(selection, runtime)
@@ -979,11 +982,12 @@ def _call_rhythm_commands(
                 *measures,
             )
             start_offset, time_signatures_ = result
+            previous_segment_voice_metadata = _get_previous_segment_voice_metadata(
+                previous_persist, voice.name
+            )
             runtime = _bundle_runtime(
-                allows_instrument=None,
                 manifests=manifests,
-                previous_persist=previous_persist,
-                voice_name=voice.name,
+                previous_segment_voice_metadata=previous_segment_voice_metadata,
             )
             selection = None
             try:
@@ -2613,7 +2617,6 @@ def _set_not_yet_pitched_to_staff_position_zero(score):
 
 
 def _shift_measure_initial_clefs(
-    manifests,
     offset_to_measure_number,
     previous_persist,
     score,
@@ -2634,10 +2637,7 @@ def _shift_measure_initial_clefs(
                 clef, selector=lambda _: _selection.Selection(_).leaf(0)
             )
             runtime = _bundle_runtime(
-                allows_instrument=None,
-                manifests=manifests,
                 offset_to_measure_number=offset_to_measure_number,
-                previous_persist=previous_persist,
             )
             suite(leaf, runtime=runtime)
 
@@ -3147,8 +3147,8 @@ def interpret_commands(
         _attach_sounds_during(score)
         if first_segment:
             _attach_first_segment_default_indicators(
+                manifests,
                 score,
-                manifests=manifests,
             )
         previous_persistent_indicators = previous_persist.get("persistent_indicators")
         if previous_persistent_indicators and not first_segment:
@@ -3244,7 +3244,6 @@ def interpret_commands(
             )
             if shift_measure_initial_clefs:
                 _shift_measure_initial_clefs(
-                    manifests,
                     offset_to_measure_number,
                     previous_persist,
                     score,
