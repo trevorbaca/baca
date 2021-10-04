@@ -4772,7 +4772,7 @@ class FigureMaker:
         else:
             raise Exception(f"bad time treatment: {treatment!r}.")
         assert isinstance(tuplet, abjad.Tuplet)
-        tag = abjad.Tag("baca.FigureMaker._make_tuplet()")
+        tag = _scoping.site(_frame(), self)
         if before_grace_containers is not None:
             logical_ties = abjad.iterate.logical_ties(tuplet)
             pairs = zip(before_grace_containers, logical_ties)

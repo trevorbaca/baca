@@ -4,6 +4,7 @@ Pitch commands.
 import collections
 import numbers
 import typing
+from inspect import currentframe as _frame
 
 import abjad
 
@@ -131,7 +132,7 @@ class AccidentalAdjustmentCommand(_scoping.Command):
         if self.tag:
             if not self.tag.only_edition() and not self.tag.not_editions():
                 raise Exception(f"tag must have edition: {self.tag!r}.")
-            tag = abjad.Tag("baca.AccidentalAdjustmentCommand._call()")
+            tag = _scoping.site(_frame(), self)
             alternative_tag = self.tag.append(tag)
             primary_tag = alternative_tag.invert_edition_tags()
         pleaves = _selection.Selection(argument).pleaves()

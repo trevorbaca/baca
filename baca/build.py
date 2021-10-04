@@ -764,22 +764,22 @@ def handle_part_tags(directory):
     )
     _activate(
         parts_directory,
-        "NOT_TOPMOST",
+        str(baca.tags.NOT_TOPMOST),
         message_zero=True,
     )
     _deactivate(
         parts_directory,
-        "FERMATA_MEASURE_EMPTY_BAR_EXTENT",
+        str(baca.tags.FERMATA_MEASURE_EMPTY_BAR_EXTENT),
         message_zero=True,
     )
     _deactivate(
         parts_directory,
-        "FERMATA_MEASURE_NEXT_BAR_EXTENT",
+        str(baca.tags.FERMATA_MEASURE_NEXT_BAR_EXTENT),
         message_zero=True,
     )
     _deactivate(
         parts_directory,
-        "FERMATA_MEASURE_RESUME_BAR_EXTENT",
+        str(baca.tags.FERMATA_MEASURE_RESUME_BAR_EXTENT),
         message_zero=True,
     )
     _deactivate(
@@ -1178,9 +1178,9 @@ def make_segment_pdf(
         baca.path.extern(music_ly, music_ily)
         assert music_ily.is_file()
         not_topmost = baca.jobs.Job(
-            deactivate=(abjad.Tag("NOT_TOPMOST"), "not topmost"),
+            deactivate=(baca.tags.NOT_TOPMOST, "not topmost"),
             path=segment_directory,
-            title="deactivating NOT_TOPMOST ...",
+            title=f"deactivating {str(baca.tags.NOT_TOPMOST)} ...",
         )
         for message in not_topmost():
             _print_tags(message)
@@ -1239,7 +1239,6 @@ def make_segment_pdf(
     if __timing and not __no_pdf:
         timing = segment_directory / ".timing"
         with timing.open(mode="a") as pointer:
-            _print_file_handling(f"Writing timing to {baca.path.trim(timing)} ...")
             pointer.write("\n")
             line = time.strftime("%Y-%m-%d %H:%M:%S") + "\n"
             pointer.write(line)

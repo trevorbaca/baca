@@ -261,7 +261,7 @@ class PiecewiseCommand(_scoping.Command):
             is_final_piece = i == piece_count - 1
             if is_final_piece and self.right_broken:
                 bundle = Bundle(spanner_start=self.right_broken)
-                tag = abjad.Tag("baca.PiecewiseCommand._call(1)")
+                tag = _scoping.site(_frame(), self, n=1)
                 tag = tag.append(_tags.RIGHT_BROKEN)
                 self._attach_indicators(bundle, stop_leaf, i, total_pieces, tag=tag)
             if bookend_pattern.matches_index(i, piece_count) and 1 < len(piece):
@@ -306,7 +306,7 @@ class PiecewiseCommand(_scoping.Command):
                 elif isinstance(bundle.spanner_start, abjad.StartTextSpan):
                     if self.final_piece_spanner is False:
                         bundle = abjad.new(bundle, spanner_start=None)
-            tag = abjad.Tag("baca.PiecewiseCommand._call(2)")
+            tag = _scoping.site(_frame(), self, n=2)
             if is_first_piece or previous_had_bookend:
                 bundle = abjad.new(bundle, spanner_stop=None)
                 if self.left_broken:
@@ -343,7 +343,7 @@ class PiecewiseCommand(_scoping.Command):
                 tag=tag,
             )
             if should_bookend:
-                tag = abjad.Tag("baca.PiecewiseCommand._call(3)")
+                tag = _scoping.site(_frame(), self, n=3)
                 if is_final_piece and self.right_broken:
                     tag = tag.append(_tags.RIGHT_BROKEN)
                 if bundle.bookended_spanner_start is not None:
@@ -364,7 +364,7 @@ class PiecewiseCommand(_scoping.Command):
                 if self.leak_spanner_stop:
                     spanner_stop = abjad.new(spanner_stop, leak=True)
                 bundle = Bundle(spanner_stop=spanner_stop)
-                tag = abjad.Tag("baca.PiecewiseCommand._call(4)")
+                tag = _scoping.site(_frame(), self, n=4)
                 if self.right_broken:
                     tag = tag.append(_tags.RIGHT_BROKEN)
                 self._attach_indicators(bundle, stop_leaf, i, total_pieces, tag=tag)

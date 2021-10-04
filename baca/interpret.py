@@ -2343,7 +2343,7 @@ def _move_global_rests(
             staff.simultaneous = True
             global_rests_ = copy.deepcopy(global_rests)
             if not topmost_staff:
-                global_rests_._tag = tag.append(abjad.Tag("NOT_TOPMOST"))
+                global_rests_._tag = tag.append(_tags.NOT_TOPMOST)
             staff.insert(0, global_rests_)
             topmost_staff = False
 
@@ -2720,7 +2720,7 @@ def _style_fermata_measures(
                         empty_bar_extent,
                         leaf,
                         tag=_scoping.site(_frame(), n=2).append(
-                            abjad.Tag("FERMATA_MEASURE_EMPTY_BAR_EXTENT")
+                            _tags.FERMATA_MEASURE_EMPTY_BAR_EXTENT
                         ),
                     )
             if next_leaf is not None and empty_staff_lines != next_staff_lines:
@@ -2744,7 +2744,7 @@ def _style_fermata_measures(
                         next_bar_extent_,
                         next_leaf,
                         tag=_scoping.site(_frame(), n=4).append(
-                            abjad.Tag("FERMATA_MEASURE_NEXT_BAR_EXTENT")
+                            _tags.FERMATA_MEASURE_NEXT_BAR_EXTENT
                         ),
                     )
             if next_leaf is None and previous_staff_lines != empty_staff_lines:
@@ -2771,7 +2771,7 @@ def _style_fermata_measures(
                     leaf,
                     synthetic_offset=99,
                     tag=_scoping.site(_frame(), n=6).append(
-                        abjad.Tag("FERMATA_MEASURE_RESUME_BAR_EXTENT")
+                        _tags.FERMATA_MEASURE_RESUME_BAR_EXTENT
                     ),
                 )
             if start_offset in bar_lines_already_styled:

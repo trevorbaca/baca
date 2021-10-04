@@ -8,6 +8,8 @@ import typing
 
 import abjad
 
+from . import tags as _tags
+
 
 def activate(
     path,
@@ -230,8 +232,8 @@ def extern(
                     dereference = indent + fr"{{ \{name} }}"
                     first_line = finished_variables[name][0]
                     # these 4 lines can be removed after right-side tags:
-                    if "NOT_TOPMOST" in first_line:
-                        tag_ = tag.append(abjad.Tag("NOT_TOPMOST"))
+                    if str(_tags.NOT_TOPMOST) in first_line:
+                        tag_ = tag.append(_tags.NOT_TOPMOST)
                     else:
                         tag_ = tag
                     result = abjad.tag.double_tag([dereference], tag_)
@@ -296,7 +298,7 @@ def extern(
             lines.append(variable_line)
         not_topmost_index = None
         for j, line in enumerate(reversed(lines)):
-            if line == "%! NOT_TOPMOST\n":
+            if line == f"%! {str(_tags.NOT_TOPMOST)}\n":
                 not_topmost_index = j
                 break
             if line.isspace():
