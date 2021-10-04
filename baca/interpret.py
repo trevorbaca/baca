@@ -1,6 +1,7 @@
 import copy
 import functools
 import importlib
+import sys
 from inspect import currentframe as _frame
 
 import abjad
@@ -19,6 +20,11 @@ from . import rhythmcommands as _rhythmcommands
 from . import scoping as _scoping
 from . import selection as _selection
 from . import tags as _tags
+
+__print_timing = "--print-timing" in sys.argv or "--verbose" in sys.argv
+
+_RED = "\033[91m"
+_END = "\033[0m"
 
 nonfirst_preamble = r"""\header { composer = ##f poet = ##f title = ##f }
 \layout { indent = 0 }
@@ -2355,6 +2361,19 @@ def _populate_offset_to_measure_number(
     return offset_to_measure_number
 
 
+def _print_timing(title, timer, suffix=None):
+    if not __print_timing:
+        return
+    count = int(timer.elapsed_time)
+    counter = abjad.String("second").pluralize(count)
+    count = str(count)
+    string = f"{_RED}{title} {count} {counter}"
+    if suffix is not None:
+        string += f" [{suffix}]"
+    string += f" ...{_END}"
+    print(string)
+
+
 def _prototype_string(class_):
     parts = class_.__module__.split(".")
     if parts[-1] != class_.__name__:
@@ -3092,31 +3111,15 @@ def interpret_commands(
     voice_metadata = {}
     global_skips = score["Global_Skips"]
     with abjad.Timer() as timer:
-        strings = _get_global_spanner_extra_offsets(
-            clock_time_extra_offset,
-            local_measure_number_extra_offset,
-            measure_number_extra_offset,
-            spacing_extra_offset,
-            stage_number_extra_offset,
-        )
-        preamble.extend(strings)
-        lilypond_file = _make_lilypond_file(
-            include_layout_ly,
-            includes,
-            midi,
-            preamble,
-            score,
-        )
+        # temporary hack to make baca.selectors.mleaves() work
+        dummy_container = abjad.Container([score], name="Dummy_Container")
         _make_global_skips(append_phantom_measure, global_skips, time_signatures)
         if attach_nonfirst_empty_start_bar and not first_segment:
             _attach_nonfirst_empty_start_bar(global_skips)
         _label_measure_numbers(first_measure_number, global_skips)
         _label_stage_numbers(global_skips, stage_markup)
         _label_moment_numbers(global_skips, moment_markup)
-    count = int(timer.elapsed_time)
-    seconds = abjad.String("second").pluralize(count)
-    if print_timing:
-        print(f"Score initialization {count} {seconds} ...")
+    _print_timing("Initialization", timer)
     with abjad.Timer() as timer:
         measure_count = len(time_signatures)
         with abjad.ForbidUpdate(component=score, update_on_exit=True):
@@ -3134,13 +3137,7 @@ def interpret_commands(
                 voice_metadata,
             )
             _clean_up_rhythm_maker_voice_names(score)
-    count = int(timer.elapsed_time)
-    seconds = abjad.String("second").pluralize(count)
-    commands_ = abjad.String("command").pluralize(command_count)
-    if print_timing:
-        message = f"Rhythm commands {count} {seconds}"
-        message += f" [for {command_count} {commands_}] ..."
-        print(message)
+    _print_timing("Rhythm commands", timer, command_count)
     with abjad.Timer() as timer:
         offset_to_measure_number = _populate_offset_to_measure_number(
             first_measure_number,
@@ -3167,10 +3164,7 @@ def interpret_commands(
             )
         if spacing is not None:
             _apply_spacing(page_layout_profile, score, spacing)
-    count = int(timer.elapsed_time)
-    seconds = abjad.String("second").pluralize(count)
-    if print_timing:
-        print(f"After-rhythm methods {count} {seconds} ...")
+    _print_timing("Cleanup", timer)
     with abjad.Timer() as timer:
         with abjad.ForbidUpdate(component=score, update_on_exit=True):
             cache = None
@@ -3186,14 +3180,7 @@ def interpret_commands(
                 score,
                 voice_metadata,
             )
-    count = int(timer.elapsed_time)
-    seconds = abjad.String("second").pluralize(count)
-    commands_ = abjad.String("command").pluralize(command_count)
-    if print_timing:
-        message = f"Nonrhythm commands {count} {seconds}"
-        message += f" [for {command_count} {commands_}] ..."
-        print(message)
-    # TODO: optimize by consolidating score iteration:
+    _print_timing("Other commands", timer, command_count)
     with abjad.Timer() as timer:
         with abjad.ForbidUpdate(component=score, update_on_exit=True):
             if not first_segment:
@@ -3276,7 +3263,8 @@ def interpret_commands(
                     container_to_part_assignment,
                     part_manifest,
                 )
-        # mutates offsets:
+    _print_timing("Postprocessing", timer)
+    with abjad.Timer() as timer:
         _move_global_rests(
             global_rests_in_every_staff,
             global_rests_in_topmost_staff,
@@ -3289,19 +3277,6 @@ def interpret_commands(
             count, message = abjad.wf.tabulate_wellformedness(score)
             if count:
                 raise Exception("\n" + message)
-    count = int(timer.elapsed_time)
-    seconds = abjad.String("second").pluralize(count)
-    if print_timing:
-        print(f"Postprocessing {count} {seconds} ...")
-    with abjad.Timer() as timer:
-        # method = getattr(score, "_update_now")
-        # method(offsets_in_seconds=True)
-        score._update_now(offsets_in_seconds=True)
-    count = int(timer.elapsed_time)
-    seconds = abjad.String("second").pluralize(count)
-    if print_timing:
-        print(f"Offsets-in-seconds update {count} {seconds} ...")
-    with abjad.Timer() as timer:
         clock_time_duration = None
         start_clock_time = None
         stop_clock_time = None
@@ -3341,10 +3316,23 @@ def interpret_commands(
         )
         if append_phantom_measure:
             _style_phantom_measures(score)
-    count = int(timer.elapsed_time)
-    seconds = abjad.String("second").pluralize(count)
-    if print_timing:
-        print(f"Clock time markup {count} {seconds} ...")
+    _print_timing("Cleanup", timer)
+    dummy_container[:] = []
+    strings = _get_global_spanner_extra_offsets(
+        clock_time_extra_offset,
+        local_measure_number_extra_offset,
+        measure_number_extra_offset,
+        spacing_extra_offset,
+        stage_number_extra_offset,
+    )
+    preamble.extend(strings)
+    lilypond_file = _make_lilypond_file(
+        include_layout_ly,
+        includes,
+        midi,
+        preamble,
+        score,
+    )
     assert isinstance(lilypond_file, abjad.LilyPondFile)
     if return_metadata:
         return lilypond_file, metadata, persist

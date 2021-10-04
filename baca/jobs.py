@@ -58,7 +58,7 @@ class Job:
         """
         messages = []
         if self.title is not None:
-            messages.append(abjad.String(self.title).capitalize_start())
+            messages.append(self.title)
         total_count = 0
         if isinstance(self.path, str):
             text = self.path
@@ -226,10 +226,10 @@ def color_clefs(path, undo=False):
         return Job(
             deactivate=(match, name),
             path=path,
-            title="uncoloring clefs ...",
+            title="Uncoloring clefs ...",
         )
     else:
-        return Job(activate=(match, name), path=path, title="coloring clefs ...")
+        return Job(activate=(match, name), path=path, title="Coloring clefs ...")
 
 
 def color_dynamics(path, undo=False):
@@ -243,13 +243,13 @@ def color_dynamics(path, undo=False):
         return Job(
             deactivate=(match, name),
             path=path,
-            title="uncoloring dynamics ...",
+            title="Uncoloring dynamics ...",
         )
     else:
         return Job(
             activate=(match, name),
             path=path,
-            title="coloring dynamics ...",
+            title="Coloring dynamics ...",
         )
 
 
@@ -267,13 +267,13 @@ def color_instruments(path, undo=False):
         return Job(
             deactivate=(match, name),
             path=path,
-            title="uncoloring instruments ...",
+            title="Uncoloring instruments ...",
         )
     else:
         return Job(
             activate=(match, name),
             path=path,
-            title="coloring instruments ...",
+            title="Coloring instruments ...",
         )
 
 
@@ -291,13 +291,13 @@ def color_margin_markup(path, undo=False):
         return Job(
             deactivate=(match, name),
             path=path,
-            title="uncoloring margin markup ...",
+            title="Uncoloring margin markup ...",
         )
     else:
         return Job(
             activate=(match, name),
             path=path,
-            title="coloring margin markup ...",
+            title="Coloring margin markup ...",
         )
 
 
@@ -319,14 +319,14 @@ def color_metronome_marks(path, undo=False):
             activate=(deactivate, "metronome mark color suppression"),
             deactivate=(activate, "metronome mark color expression"),
             path=path,
-            title="uncoloring metronome marks ...",
+            title="Uncoloring metronome marks ...",
         )
     else:
         return Job(
             activate=(activate, "metronome mark color expression"),
             deactivate=(deactivate, "metronome mark color suppression"),
             path=path,
-            title="coloring metronome marks ...",
+            title="Coloring metronome marks ...",
         )
 
 
@@ -352,14 +352,14 @@ def color_persistent_indicators(path, undo=False):
             activate=(deactivate, deactivate_name),
             deactivate=(activate, activate_name),
             path=path,
-            title=f"uncoloring {name}s ...",
+            title=f"Uncoloring {name}s ...",
         )
     else:
         return Job(
             activate=(activate, activate_name),
             deactivate=(deactivate, deactivate_name),
             path=path,
-            title=f"coloring {name}s ...",
+            title=f"Coloring {name}s ...",
         )
 
 
@@ -377,13 +377,13 @@ def color_staff_lines(path, undo=False):
         return Job(
             deactivate=(match, name),
             path=path,
-            title="uncoloring staff lines ...",
+            title="Uncoloring staff lines ...",
         )
     else:
         return Job(
             activate=(match, name),
             path=path,
-            title="coloring staff lines ...",
+            title="Coloring staff lines ...",
         )
 
 
@@ -401,13 +401,13 @@ def color_time_signatures(path, undo=False):
         return Job(
             deactivate=(match, name),
             path=path,
-            title="uncoloring time signatures ...",
+            title="Uncoloring time signatures ...",
         )
     else:
         return Job(
             activate=(match, name),
             path=path,
-            title="coloring time signatures ...",
+            title="Coloring time signatures ...",
         )
 
 
@@ -482,7 +482,7 @@ def handle_edition_tags(path):
         deactivate=(deactivate, "other-edition"),
         deactivate_first=True,
         path=path,
-        title="handling edition tags ...",
+        title="Handling edition tags ...",
     )
 
 
@@ -517,7 +517,7 @@ def handle_fermata_bar_lines(path):
         activate=(activate, "bar line adjustment"),
         deactivate=(deactivate, "EOL fermata bar line"),
         path=path,
-        title="handling fermata bar lines ...",
+        title="Handling fermata bar lines ...",
     )
 
 
@@ -559,7 +559,7 @@ def handle_mol_tags(path):
         activate=(activate, "MOL"),
         deactivate=(deactivate, "conflicting MOL"),
         path=path,
-        title="handling MOL tags ...",
+        title="Handling MOL tags ...",
     )
 
 
@@ -594,7 +594,7 @@ def handle_shifted_clefs(path):
         activate=(activate, "shifted clef"),
         deactivate=(deactivate, "BOL clef"),
         path=path,
-        title="handling shifted clefs ...",
+        title="Handling shifted clefs ...",
     )
 
 
@@ -612,13 +612,13 @@ def hide_default_clefs(path, undo=False):
         return Job(
             activate=(match, name),
             path=path,
-            title="showing default clefs ...",
+            title="Showing default clefs ...",
         )
     else:
         return Job(
             deactivate=(match, name),
             path=path,
-            title="hiding default clefs ...",
+            title="Hiding default clefs ...",
         )
 
 
@@ -639,7 +639,7 @@ def join_broken_spanners(path):
         activate=(activate, "broken spanner expression"),
         deactivate=(deactivate, "broken spanner suppression"),
         path=path,
-        title="joining broken spanners ...",
+        title="Joining broken spanners ...",
     )
 
 
@@ -662,14 +662,14 @@ def show_music_annotations(path, undo=False):
             activate=(match_2, name),
             deactivate=(match, name),
             path=path,
-            title=f"hiding {name}s ...",
+            title=f"Hiding {name}s ...",
         )
     else:
         return Job(
             activate=(match, name),
             deactivate=(match_2, name),
             path=path,
-            title=f"showing {name}s ...",
+            title=f"Showing {name}s ...",
         )
 
 
@@ -703,12 +703,12 @@ def show_tag(
             path=path,
             prepend_empty_chord=prepend_empty_chord,
             skip_file_name=skip_file_name,
-            title=f"hiding {name} tags ...",
+            title=f"Hiding {name} tags ...",
         )
     else:
         return Job(
             activate=(match, name),
             path=path,
             skip_file_name=skip_file_name,
-            title=f"showing {name} tags ...",
+            title=f"Showing {name} tags ...",
         )
