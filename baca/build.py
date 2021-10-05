@@ -145,15 +145,16 @@ def _get_preamble_time_signatures(path):
 
 def _interpret_segment(
     commands,
+    *,
     first_segment=False,
-    interpreter_function=None,
+    interpreter=None,
     lilypond_file_keywords=None,
     midi=False,
     **keywords,
 ):
     _print_file_handling("Interpreting segment ...")
     lilypond_file_keywords = lilypond_file_keywords or {}
-    interpreter_function = interpreter_function or baca.interpret.interpret_commands
+    interpreter = interpreter or baca.interpret.interpret_commands
     segment_directory = pathlib.Path(os.getcwd())
     metadata = baca.path.get_metadata(segment_directory)
     persist = baca.path.get_metadata(segment_directory, file_name="__persist__")
@@ -195,7 +196,7 @@ def _interpret_segment(
     else:
         preamble = baca.interpret.nonfirst_preamble.split("\n")
     with abjad.Timer() as timer:
-        metadata, persist = interpreter_function(
+        metadata, persist = interpreter(
             commands.commands,
             commands.time_signatures,
             append_phantom_measure=commands.append_phantom_measure,
@@ -221,7 +222,7 @@ def _interpret_segment(
     return metadata, persist, lilypond_file, int(timer.elapsed_time)
 
 
-def _make_annotation_jobs(directory, undo=False):
+def _make_annotation_jobs(directory, *, undo=False):
     def _annotation_spanners(tags):
         tags_ = (
             baca.tags.MATERIAL_ANNOTATION_SPANNER,
@@ -386,6 +387,7 @@ def _print_timing(title, timer):
 
 def _remove_lilypond_warnings(
     path,
+    *,
     crescendo_too_small=None,
     decrescendo_too_small=None,
     overwriting_glissando=None,
@@ -517,7 +519,7 @@ def collect_segment_lys_CLEAN(directory):
     return paths
 
 
-def color_persistent_indicators(directory, undo=False):
+def color_persistent_indicators(directory, *, undo=False):
     directory = pathlib.Path(directory)
     if directory.parent.name != "segments":
         _print_always("Must call in segment directory ...")
@@ -651,6 +653,7 @@ def handle_part_tags(directory):
     def _activate(
         path,
         tag,
+        *,
         deactivate=False,
         message_zero=False,
         name=None,
@@ -679,6 +682,7 @@ def handle_part_tags(directory):
     def _deactivate(
         path,
         tag,
+        *,
         message_zero=False,
         name=None,
     ):
@@ -794,7 +798,10 @@ def handle_part_tags(directory):
 
 
 def interpret_build_music(
-    build_directory, *, print_tags=False, skip_segment_collection=False
+    build_directory,
+    *,
+    print_tags=False,
+    skip_segment_collection=False,
 ):
     """
     Interprets music.ly file in build directory.
@@ -1060,7 +1067,7 @@ def make_segment_pdf(
     commands,
     *,
     first_segment=False,
-    interpreter_function=None,
+    interpreter=None,
     lilypond_file_keywords=None,
     print_tags=False,
     **keywords,
@@ -1081,7 +1088,7 @@ def make_segment_pdf(
     result = _interpret_segment(
         commands,
         first_segment=first_segment,
-        interpreter_function=interpreter_function,
+        interpreter=interpreter,
         lilypond_file_keywords=lilypond_file_keywords,
         **keywords,
     )
@@ -1308,7 +1315,7 @@ def run_lilypond(ly_file_path):
         assert lilypond_log_file_path.exists()
 
 
-def show_annotations(directory, undo=False):
+def show_annotations(directory, *, undo=False):
     directory = pathlib.Path(directory)
     if directory.parent.name != "segments":
         _print_always("Must call in segment directory ...")
@@ -1319,7 +1326,7 @@ def show_annotations(directory, undo=False):
             _print_tags(message)
 
 
-def show_tag(directory, tag, undo=False):
+def show_tag(directory, tag, *, undo=False):
     directory = pathlib.Path(directory)
     tag = abjad.Tag(tag)
     job = baca.jobs.show_tag(directory, tag, undo=undo)
