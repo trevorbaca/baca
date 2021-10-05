@@ -1255,7 +1255,7 @@ def hide_black_note_heads(
         ...     baca.make_notes()
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1610,7 +1610,7 @@ def margin_markup(
         ...     baca.pitches("E4 F4"),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     first_segment=True,
@@ -2202,7 +2202,7 @@ def staff_lines(
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -2271,7 +2271,7 @@ def staff_lines(
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -2341,7 +2341,7 @@ def staff_lines(
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -2409,7 +2409,7 @@ def staff_lines(
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -2477,7 +2477,7 @@ def staff_lines(
         ...     baca.clef("bass"),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,

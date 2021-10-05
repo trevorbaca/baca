@@ -2137,7 +2137,7 @@ class Imbrication:
             ...     baca.voice_two(),
             ... )
 
-            >>> _, _ = baca.interpret_commands_for_score(
+            >>> _, _ = baca.interpret_commands(
             ...     commands.commands,
             ...     commands.time_signatures,
             ...     move_global_context=True,
@@ -2355,7 +2355,7 @@ class Imbrication:
             ...     baca.voice_two(),
             ... )
 
-            >>> _, _ = baca.interpret_commands_for_score(
+            >>> _, _ = baca.interpret_commands(
             ...     commands.commands,
             ...     commands.time_signatures,
             ...     move_global_context=True,
@@ -2556,7 +2556,7 @@ class Imbrication:
             ...     baca.voice_two(),
             ... )
 
-            >>> _, _ = baca.interpret_commands_for_score(
+            >>> _, _ = baca.interpret_commands(
             ...     commands.commands,
             ...     commands.time_signatures,
             ...     move_global_context=True,
@@ -2778,7 +2778,7 @@ class Imbrication:
             ...     baca.voice_two(),
             ... )
 
-            >>> _, _ = baca.interpret_commands_for_score(
+            >>> _, _ = baca.interpret_commands(
             ...     commands.commands,
             ...     commands.time_signatures,
             ...     move_global_context=True,
@@ -7078,7 +7078,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -7227,7 +7227,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -7413,7 +7413,7 @@ def extend_beam(
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -7612,7 +7612,7 @@ def imbricate(
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -7791,7 +7791,7 @@ def imbricate(
         ...     time_signatures=figures.time_signatures,
         ... )
         >>> figures.populate_commands(commands)
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -8017,7 +8017,7 @@ def imbricate(
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -8225,7 +8225,7 @@ def imbricate(
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -8366,7 +8366,7 @@ def imbricate(
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -8531,7 +8531,7 @@ def imbricate(
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,

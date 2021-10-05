@@ -385,7 +385,7 @@ def bar_line_transparent(
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1383,7 +1383,7 @@ def mmrest_color(
         ...     baca.mmrest_color("#(x11-color 'DarkOrchid)"),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1483,7 +1483,7 @@ def mmrest_text_color(
         ...     baca.mmrest_text_color("#red"),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1555,7 +1555,7 @@ def mmrest_text_color(
         ...     baca.pitches([2, 4]),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1601,7 +1601,7 @@ def mmrest_text_extra_offset(
         ...     baca.mmrest_text_extra_offset((0, 2)),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1686,7 +1686,7 @@ def mmrest_text_padding(
         ...     baca.mmrest_text_padding(2),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1770,7 +1770,7 @@ def mmrest_text_parent_center(
         ...     baca.mmrest_text_parent_center(),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1855,7 +1855,7 @@ def mmrest_text_staff_padding(
         ...     baca.mmrest_text_staff_padding(2),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -4331,7 +4331,7 @@ def text_script_color(
         ...     baca.text_script_color("#red"),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -4463,7 +4463,7 @@ def text_script_down(
         ...     baca.text_script_down()
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -4517,7 +4517,7 @@ def text_script_extra_offset(
         ...     baca.text_script_extra_offset((0, 2)),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -4673,7 +4673,7 @@ def text_script_padding(
         ...     baca.text_script_padding(2),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -4852,7 +4852,7 @@ def text_script_staff_padding(
         ...     baca.text_script_staff_padding(2)
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -4984,7 +4984,7 @@ def text_script_up(
         ...     baca.text_script_up()
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,

@@ -22,7 +22,6 @@ from .indicatorcommands import *
 from .indicators import *
 from .interpret import (
     interpret_commands,
-    interpret_commands_for_score,
     make_lilypond_file,
     make_lilypond_file_dictionary,
     segment_interpretation_defaults,

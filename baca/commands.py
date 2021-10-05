@@ -56,7 +56,7 @@ def assign_parts(
         ...     baca.pitch("E4"),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -113,7 +113,7 @@ def assign_parts(
         ...     baca.pitches("E4 F4"),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -164,7 +164,7 @@ def bcps(
             ...     baca.text_spanner_staff_padding(2.5),
             ... )
 
-            >>> _, _ = baca.interpret_commands_for_score(
+            >>> _, _ = baca.interpret_commands(
             ...     commands.commands,
             ...     commands.time_signatures,
             ...     move_global_context=True,
@@ -520,7 +520,7 @@ def container(
         ...     baca.pitches("E4 F4"),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -598,7 +598,7 @@ def cross_staff(
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -901,7 +901,7 @@ def finger_pressure_transition(
         ...     baca.pitch("C5"),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1111,7 +1111,7 @@ def glissando(
         ...     baca.glissando()
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1198,7 +1198,7 @@ def glissando(
         ...     baca.glissando(selector=baca.selectors.plts((-2, None))),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1275,7 +1275,7 @@ def glissando(
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1377,7 +1377,7 @@ def glissando(
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1528,7 +1528,7 @@ def invisible_music(
         ...     baca.pitch("C5"),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,

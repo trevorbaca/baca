@@ -153,9 +153,7 @@ def _interpret_segment(
 ):
     _print_file_handling("Interpreting segment ...")
     lilypond_file_keywords = lilypond_file_keywords or {}
-    interpreter_function = (
-        interpreter_function or baca.interpret.interpret_commands_for_score
-    )
+    interpreter_function = interpreter_function or baca.interpret.interpret_commands
     segment_directory = pathlib.Path(os.getcwd())
     metadata = baca.path.get_metadata(segment_directory)
     persist = baca.path.get_metadata(segment_directory, file_name="__persist__")
@@ -961,7 +959,7 @@ def make_layout_ly(spacing):
         append_phantom_measure=True,
         time_signatures=time_signatures,
     )
-    _, _ = baca.interpret_commands_for_score(
+    _, _ = baca.interpret_commands(
         commands.commands,
         commands.time_signatures,
         append_phantom_measure=commands.append_phantom_measure,

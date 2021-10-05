@@ -1160,7 +1160,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         ...     baca.make_even_divisions(),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1262,7 +1262,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         ...     baca.make_even_divisions(),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1415,7 +1415,7 @@ def only_parts(command: _command_typing) -> _command_typing:
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret_commands_for_score(
+        >>> _, _ = baca.interpret_commands(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,

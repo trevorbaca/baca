@@ -16,7 +16,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     baca.label(lambda _: abjad.label.with_indices(_)),
     ... )
 
-    >>> _, _ = baca.interpret_commands_for_score(
+    >>> _, _ = baca.interpret_commands(
     ...     commands.commands,
     ...     commands.time_signatures,
     ...     move_global_context=True,
@@ -108,7 +108,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     list_,
     ... )
 
-    >>> _, _ = baca.interpret_commands_for_score(
+    >>> _, _ = baca.interpret_commands(
     ...     commands.commands,
     ...     commands.time_signatures,
     ...     move_global_context=True,
@@ -226,7 +226,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     baca.clef("bass"),
     ... )
 
-    >>> _, _ = baca.interpret_commands_for_score(
+    >>> _, _ = baca.interpret_commands(
     ...     commands.commands,
     ...     commands.time_signatures,
     ...     color_octaves=True,
@@ -307,7 +307,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     baca.pitches("E4 F4"),
     ... )
 
-    >>> _, _ = baca.interpret_commands_for_score(
+    >>> _, _ = baca.interpret_commands(
     ...     commands.commands,
     ...     commands.time_signatures,
     ...     instruments=commands.instruments,
@@ -386,7 +386,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     baca.pitches("E4 F4"),
     ... )
 
-    >>> _, _ = baca.interpret_commands_for_score(
+    >>> _, _ = baca.interpret_commands(
     ...     commands.commands,
     ...     commands.time_signatures,
     ...     instruments=commands.instruments,
@@ -484,7 +484,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     baca.music(figures, do_not_check_total_duration=True),
     ... )
 
-    >>> _, _ = baca.interpret_commands_for_score(
+    >>> _, _ = baca.interpret_commands(
     ...     commands.commands,
     ...     commands.time_signatures,
     ...     instruments=instruments,
@@ -590,7 +590,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     baca.music(figures, do_not_check_total_duration=True),
     ... )
 
-    >>> _, _ = baca.interpret_commands_for_score(
+    >>> _, _ = baca.interpret_commands(
     ...     commands.commands,
     ...     commands.time_signatures,
     ...     move_global_context=True,
