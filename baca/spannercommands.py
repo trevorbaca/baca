@@ -230,7 +230,7 @@ def beam(
         ...     baca.pitch("C4"),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,

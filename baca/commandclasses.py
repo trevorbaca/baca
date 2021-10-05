@@ -273,7 +273,7 @@ class BCPCommand(_scoping.Command):
             ...     baca.text_spanner_staff_padding(2.5),
             ... )
 
-            >>> _, _ = baca.interpret_commands(
+            >>> _, _ = baca.interpreter(
             ...     commands.commands,
             ...     commands.time_signatures,
             ...     move_global_context=True,
@@ -481,7 +481,7 @@ class BCPCommand(_scoping.Command):
             ...     baca.script_staff_padding(5),
             ... )
 
-            >>> _, _ = baca.interpret_commands(
+            >>> _, _ = baca.interpreter(
             ...     commands.commands,
             ...     commands.time_signatures,
             ...     move_global_context=True,
@@ -751,7 +751,7 @@ class ContainerCommand(_scoping.Command):
         ...     baca.pitches("E4 F4"),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,

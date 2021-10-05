@@ -21,7 +21,8 @@ from .figures import *
 from .indicatorcommands import *
 from .indicators import *
 from .interpret import (
-    interpret_commands,
+    interpreter,
+    make_keyword_dictionary,
     make_lilypond_file,
     make_lilypond_file_dictionary,
     segment_interpretation_defaults,

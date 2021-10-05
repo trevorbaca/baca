@@ -244,9 +244,6 @@ def _get_nonphantom_time_signatures(lilypond_file):
 
 
 def _get_preamble_page_count_overview(path):
-    """
-    Gets preamble page count overview.
-    """
     assert path.is_file(), repr(path)
     first_page_number, page_count = 1, None
     with open(path) as pointer:
@@ -263,10 +260,31 @@ def _get_preamble_page_count_overview(path):
     return None
 
 
+def _get_previous_metadata(segment_directory):
+    if segment_directory.name == "01":
+        previous_metadata = None
+        previous_persist = None
+    else:
+        previous_segment = str(int(segment_directory.name) - 1).zfill(2)
+        previous_segment = segment_directory.parent / previous_segment
+        path = previous_segment / "__metadata__"
+        file = pathlib.Path(path)
+        if file.is_file():
+            string = file.read_text()
+            previous_metadata = eval(string)
+        else:
+            previous_metadata = None
+        path = previous_segment / "__persist__"
+        file = pathlib.Path(path)
+        if file.is_file():
+            lines = file.read_text()
+            previous_persist = eval(lines)
+        else:
+            previous_persist = None
+    return previous_metadata, previous_persist
+
+
 def _get_preamble_time_signatures(path):
-    """
-    Gets preamble time signatures.
-    """
     assert path.is_file(), repr(path)
     start_line = "% time_signatures = ["
     stop_line = "%  ]"
@@ -314,46 +332,14 @@ def _interpret_segment(
 ):
     _print_file_handling("Interpreting segment ...")
     lilypond_file_keywords = lilypond_file_keywords or {}
-    interpreter = interpreter or baca.interpret.interpret_commands
+    interpreter = interpreter or baca.interpret.interpreter
     segment_directory = pathlib.Path(os.getcwd())
     metadata = baca.path.get_metadata(segment_directory)
     persist = baca.path.get_metadata(segment_directory, file_name="__persist__")
-    if not midi:
-        ly = segment_directory / "music.ly"
-        if ly.exists():
-            _print_file_handling(f"Removing {baca.path.trim(ly)} ...")
-            ly.unlink()
-        pdf = segment_directory / "music.pdf"
-        if pdf.exists():
-            _print_file_handling(f"Removing {baca.path.trim(pdf)} ...")
-            pdf.unlink()
-    if segment_directory.name == "01":
-        previous_metadata = None
-        previous_persist = None
-    else:
-        previous_segment = str(int(segment_directory.name) - 1).zfill(2)
-        previous_segment = segment_directory.parent / previous_segment
-        path = previous_segment / "__metadata__"
-        file = pathlib.Path(path)
-        if file.is_file():
-            string = file.read_text()
-            previous_metadata = eval(string)
-        else:
-            previous_metadata = None
-        path = previous_segment / "__persist__"
-        file = pathlib.Path(path)
-        if file.is_file():
-            lines = file.read_text()
-            previous_persist = eval(lines)
-        else:
-            previous_persist = None
-    if first_segment is True:
-        pass
-    else:
-        first_segment = segment_directory.name == "01"
-    if first_segment:
-        preamble = None
-    else:
+    previous_metadata, previous_persist = _get_previous_metadata(segment_directory)
+    first_segment = first_segment or segment_directory.name == "01"
+    preamble = None
+    if not first_segment:
         preamble = baca.interpret.nonfirst_preamble.split("\n")
     with abjad.Timer() as timer:
         metadata, persist = interpreter(
@@ -380,6 +366,59 @@ def _interpret_segment(
         )
     _print_timing("Segment interpretation time", timer)
     return metadata, persist, lilypond_file, int(timer.elapsed_time)
+
+
+def interpret_segment_revised(
+    commands,
+    *,
+    first_segment=False,
+    interpreter=None,
+    midi=False,
+    **keywords,
+):
+    _print_file_handling("Interpreting segment ...")
+    interpreter = interpreter or baca.interpret.interpreter
+    segment_directory = pathlib.Path(os.getcwd())
+    metadata = baca.path.get_metadata(segment_directory)
+    persist = baca.path.get_metadata(segment_directory, file_name="__persist__")
+    previous_metadata, previous_persist = _get_previous_metadata(segment_directory)
+    first_segment = first_segment or segment_directory.name == "01"
+    with abjad.Timer() as timer:
+        metadata, persist = interpreter(
+            commands.commands,
+            commands.time_signatures,
+            append_phantom_measure=commands.append_phantom_measure,
+            instruments=commands.instruments,
+            margin_markups=commands.margin_markups,
+            metronome_marks=commands.metronome_marks,
+            skips_instead_of_rests=commands.skips_instead_of_rests,
+            **keywords,
+            first_segment=first_segment,
+            metadata=metadata,
+            midi=midi,
+            persist=persist,
+            previous_metadata=previous_metadata,
+            previous_persist=previous_persist,
+            segment_number=segment_directory.name,
+        )
+    _print_timing("Segment interpretation time", timer)
+    timing = {"runtime": int(timer.elapsed_time)}
+    return metadata, persist, keywords["score"], timing
+
+
+def make_segment_lilypond_file(
+    score,
+    *,
+    lilypond_file_keywords=None,
+    preamble=None,
+):
+    lilypond_file_keywords = lilypond_file_keywords or {}
+    lilypond_file = baca.make_lilypond_file(
+        score,
+        preamble=preamble,
+        **lilypond_file_keywords,
+    )
+    return lilypond_file
 
 
 def _log_timing(segment_directory, timing):
@@ -558,27 +597,12 @@ def _make_segment_midi(
         _print_file_handling(f"Could not produce {baca.path.trim(music_midi)} ...")
 
 
-def _make_segment_pdf(
-    commands,
-    *,
-    first_segment=False,
-    interpreter=None,
-    lilypond_file_keywords=None,
-    **keywords,
-):
-    timing = {}
+def make_segment_pdf_revised(lilypond_file, metadata, persist, timing):
     segment_directory = pathlib.Path(os.getcwd())
     music_pdf = segment_directory / "music.pdf"
     music_ly = segment_directory / "music.ly"
     music_pdf_mtime = os.path.getmtime(music_pdf) if music_pdf.is_file() else 0
     music_ly_mtime = os.path.getmtime(music_ly) if music_ly.is_file() else 0
-    metadata, persist, lilypond_file, timing["runtime"] = _interpret_segment(
-        commands,
-        first_segment=first_segment,
-        interpreter=interpreter,
-        lilypond_file_keywords=lilypond_file_keywords,
-        **keywords,
-    )
     nonphantom_time_signatures = _get_nonphantom_time_signatures(lilypond_file)
     _write_metadata(metadata, persist, segment_directory)
     _add_nonfirst_segment_preamble(lilypond_file, segment_directory)
@@ -648,9 +672,6 @@ def _remove_lilypond_warnings(
     decrescendo_too_small=None,
     overwriting_glissando=None,
 ):
-    """
-    Removes LilyPond warnings from ``.log``.
-    """
     assert path.name.endswith(".log"), repr(path)
     lines = []
     skip = 0
@@ -671,6 +692,18 @@ def _remove_lilypond_warnings(
             lines.append(line)
     text = "".join(lines)
     path.write_text(text)
+
+
+def remove_music_ly():
+    segment_directory = pathlib.Path(os.getcwd())
+    music_ly = segment_directory / "music.ly"
+    if music_ly.exists():
+        _print_file_handling(f"Removing {baca.path.trim(music_ly)} ...")
+        music_ly.unlink()
+    music_pdf = segment_directory / "music.pdf"
+    if music_pdf.exists():
+        _print_file_handling(f"Removing {baca.path.trim(music_pdf)} ...")
+        music_pdf.unlink()
 
 
 def _trim_music_ly(ly):
@@ -1242,7 +1275,7 @@ def make_layout_ly(spacing):
         append_phantom_measure=True,
         time_signatures=time_signatures,
     )
-    _, _ = baca.interpret_commands(
+    _, _ = baca.interpreter(
         commands.commands,
         commands.time_signatures,
         append_phantom_measure=commands.append_phantom_measure,
@@ -1364,24 +1397,25 @@ def make_segment_pdf(
             **keywords,
         )
     else:
-        #        score = _make_segment_pdf_score(
-        #            commands,
-        #            first_segment=first_segment,
-        #            interpreter=interpreter,
-        #            **keywords,
-        #        )
-        #        lilypond_file = _make_segment_pdf_lilypond_file(
-        #            score,
-        #            lilypond_file_keywords=lilypond_file_keywords,
-        #        )
-        #        _make_pdf_from_lilypond_file(lilypond_file)
-        _make_segment_pdf(
+        remove_music_ly()
+        timing = {}
+        metadata, persist, score, timing["runtime"] = interpret_segment_revised(
             commands,
             first_segment=first_segment,
             interpreter=interpreter,
-            lilypond_file_keywords=lilypond_file_keywords,
             **keywords,
         )
+        segment_directory = pathlib.Path(os.getcwd())
+        first_segment = first_segment or segment_directory.name == "01"
+        preamble = None
+        if not first_segment:
+            preamble = baca.interpret.nonfirst_preamble.split("\n")
+        lilypond_file = make_segment_lilypond_file(
+            score,
+            lilypond_file_keywords=lilypond_file_keywords,
+            preamble=preamble,
+        )
+        make_segment_pdf_revised(lilypond_file, metadata, persist, timing)
 
 
 def run_lilypond(ly_file_path):

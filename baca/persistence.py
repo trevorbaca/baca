@@ -20,7 +20,7 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     first_segment=True,
@@ -102,7 +102,7 @@ r"""
         ...     baca.clef("treble"),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -190,7 +190,7 @@ r"""
         ...         value="treble",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -278,7 +278,7 @@ r"""
         ...         value="treble",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -362,7 +362,7 @@ r"""
         ...     baca.clef("treble", selector=baca.selectors.leaf(0)),
         ...     baca.clef("treble", selector=baca.selectors.leaf(1)),
         ... )
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -461,7 +461,7 @@ r"""
         ...         value="treble",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -543,7 +543,7 @@ r"""
         ...     baca.make_notes(),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -610,7 +610,7 @@ r"""
         ...         value="f",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -680,7 +680,7 @@ r"""
         ...         value="f",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -743,7 +743,7 @@ r"""
         ...     baca.dynamic("f", selector=baca.selectors.leaf(1)),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -812,7 +812,7 @@ r"""
         ...         value="f",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -873,7 +873,7 @@ r"""
         ...     baca.dynamic("sfz", selector=baca.selectors.leaf(1)),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -942,7 +942,7 @@ r"""
         ...         value="sfz",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1005,7 +1005,7 @@ r"""
         ...     baca.dynamic('"mf"', selector=baca.selectors.leaf(1)),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1087,7 +1087,7 @@ r"""
         ...     baca.make_notes(),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     first_segment=True,
@@ -1241,7 +1241,7 @@ r"""
         ...     baca.make_notes(),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     instruments=commands.instruments,
@@ -1402,7 +1402,7 @@ r"""
         ...         value="Piccolo",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     instruments=commands.instruments,
@@ -1565,7 +1565,7 @@ r"""
         ...         value="Flute",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     instruments=commands.instruments,
@@ -1732,7 +1732,7 @@ r"""
         ...     baca.make_notes(),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     instruments=commands.instruments,
@@ -1914,7 +1914,7 @@ r"""
         ...         value="Flute",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     instruments=commands.instruments,
@@ -2096,7 +2096,7 @@ r"""
         ...     baca.make_notes(),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     first_segment=True,
@@ -2268,7 +2268,7 @@ r"""
         ...     baca.make_notes(),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     first_segment=True,
@@ -2447,7 +2447,7 @@ r"""
         ...         value="I+II",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     margin_markups=commands.margin_markups,
@@ -2634,7 +2634,7 @@ r"""
         ...         value="I+II",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     margin_markups=commands.margin_markups,
@@ -2824,7 +2824,7 @@ r"""
         ...     baca.make_notes(),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     first_segment=True,
@@ -3043,7 +3043,7 @@ r"""
         ...         value="I+II",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     margin_markups=commands.margin_markups,
@@ -3242,7 +3242,7 @@ r"""
         ...     baca.make_notes(),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     first_segment=True,
@@ -3351,7 +3351,7 @@ r"""
         ...     baca.make_notes(),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     append_phantom_measure=commands.append_phantom_measure,
@@ -3465,7 +3465,7 @@ r"""
         ...         value="90",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     append_phantom_measure=commands.append_phantom_measure,
@@ -3583,7 +3583,7 @@ r"""
         ...         value="90",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     metronome_marks=commands.metronome_marks,
@@ -3667,7 +3667,7 @@ r"""
         ...     baca.make_notes(),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     append_phantom_measure=commands.append_phantom_measure,
@@ -3788,7 +3788,7 @@ r"""
         ...         value="112",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     append_phantom_measure=commands.append_phantom_measure,
@@ -3910,7 +3910,7 @@ r"""
         ...     baca.staff_position(0),
         ... )
 
-        >>> metadata, persist = baca.interpret_commands(
+        >>> metadata, persist = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -4028,7 +4028,7 @@ r"""
         ...         ),
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -4112,7 +4112,7 @@ r"""
         ...         ),
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -4177,7 +4177,7 @@ r"""
         ...     baca.staff_lines(5),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -4247,7 +4247,7 @@ r"""
         ...         value=5,
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -4320,7 +4320,7 @@ r"""
         ...         value=5,
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -4385,7 +4385,7 @@ r"""
         ...     baca.staff_lines(5, selector=baca.selectors.leaf(1)),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -4460,7 +4460,7 @@ r"""
         ...         value=5,
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -4546,7 +4546,7 @@ r"""
         ...     baca.make_notes(),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     append_phantom_measure=commands.append_phantom_measure,
@@ -4662,7 +4662,7 @@ r"""
         ...         prototype="baca.Ritardando",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -4755,7 +4755,7 @@ r"""
         ...         prototype="baca.Accelerando",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -4844,7 +4844,7 @@ r"""
         ...     baca.make_notes(),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -4947,7 +4947,7 @@ r"""
         ...         prototype="baca.Accelerando",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,

@@ -2999,7 +2999,7 @@ def color_repeat_pitch_classes(score):
             abjad.attach(literal, leaf, tag=tag)
 
 
-def interpret_commands(
+def interpreter(
     commands,
     time_signatures,
     *,
@@ -3358,12 +3358,9 @@ def segment_interpretation_defaults():
     }
 
 
-# def segment_lilypond_file_defaults():
-#    return {
-#        "include_layout_ly": True,
-#        "includes": ["../../stylesheet.ily"],
-#    }
-
-
 def make_lilypond_file_dictionary(**keywords):
+    return keywords
+
+
+def make_keyword_dictionary(**keywords):
     return keywords

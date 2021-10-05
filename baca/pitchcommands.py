@@ -39,7 +39,7 @@ class AccidentalAdjustmentCommand(_scoping.Command):
         ...     baca.pitches("E4 F4"),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -495,7 +495,7 @@ class ClusterCommand(_scoping.Command):
             ...     baca.natural_clusters(widths=[3]),
             ... )
 
-            >>> _, _ = baca.interpret_commands(
+            >>> _, _ = baca.interpreter(
             ...     commands.commands,
             ...     commands.time_signatures,
             ...     move_global_context=True,
@@ -611,7 +611,7 @@ class ClusterCommand(_scoping.Command):
             ...     baca.clusters([3]),
             ... )
 
-            >>> _, _ = baca.interpret_commands(
+            >>> _, _ = baca.interpreter(
             ...     commands.commands,
             ...     commands.time_signatures,
             ...     move_global_context=True,
@@ -727,7 +727,7 @@ class ClusterCommand(_scoping.Command):
             ...     baca.clusters([3], start_pitch="G4"),
             ... )
 
-            >>> _, _ = baca.interpret_commands(
+            >>> _, _ = baca.interpreter(
             ...     commands.commands,
             ...     commands.time_signatures,
             ...     move_global_context=True,
@@ -851,7 +851,7 @@ class ClusterCommand(_scoping.Command):
             ...     baca.make_notes(repeat_ties=True),
             ... )
 
-            >>> _, _ = baca.interpret_commands(
+            >>> _, _ = baca.interpreter(
             ...     commands.commands,
             ...     commands.time_signatures,
             ...     move_global_context=True,
@@ -967,7 +967,7 @@ class ClusterCommand(_scoping.Command):
             ...     baca.make_notes(repeat_ties=True),
             ... )
 
-            >>> _, _ = baca.interpret_commands(
+            >>> _, _ = baca.interpreter(
             ...     commands.commands,
             ...     commands.time_signatures,
             ...     move_global_context=True,
@@ -1084,7 +1084,7 @@ class ClusterCommand(_scoping.Command):
             ...     baca.clusters([]),
             ... )
 
-            >>> _, _ = baca.interpret_commands(
+            >>> _, _ = baca.interpreter(
             ...     commands.commands,
             ...     commands.time_signatures,
             ...     move_global_context=True,
@@ -1153,7 +1153,7 @@ class ColorFingeringCommand(_scoping.Command):
         ...     baca.ColorFingeringCommand(numbers=[0, 1, 2, 1]),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1523,7 +1523,7 @@ class MicrotoneDeviationCommand(_scoping.Command):
         ...     baca.deviation([0, 0.5, 0, -0.5]),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1684,7 +1684,7 @@ class OctaveDisplacementCommand(_scoping.Command):
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1958,7 +1958,7 @@ class PitchCommand(_scoping.Command):
         ...     baca.pitches([19, 13, 15, 16, 17, 23]),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -2033,7 +2033,7 @@ class PitchCommand(_scoping.Command):
         ...     baca.pitches("C4 F4 F#4 <B4 C#5> D5"),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -2108,7 +2108,7 @@ class PitchCommand(_scoping.Command):
         ...     baca.pitches("<C4 D4 E4 F4 G4 A4 B4 C4>", allow_repeats=True)
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -2559,7 +2559,7 @@ class RegisterCommand(_scoping.Command):
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -2885,7 +2885,7 @@ class RegisterInterpolationCommand(_scoping.Command):
         ...     baca.register(12, 12),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -2992,7 +2992,7 @@ class RegisterInterpolationCommand(_scoping.Command):
         ...     baca.register(12, 0),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -3099,7 +3099,7 @@ class RegisterInterpolationCommand(_scoping.Command):
         ...     baca.register(0, 12),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -3206,7 +3206,7 @@ class RegisterInterpolationCommand(_scoping.Command):
         ...     baca.register(12, -12),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -3313,7 +3313,7 @@ class RegisterInterpolationCommand(_scoping.Command):
         ...     baca.register(-12, 12),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -5291,7 +5291,7 @@ def force_accidental(
         ...     baca.pitches("E4 F4"),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -5591,7 +5591,7 @@ def pitch(
         ...     baca.pitch("<C4 D4 E4>"),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,

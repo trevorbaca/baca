@@ -898,7 +898,7 @@ def dynamic(
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -987,7 +987,7 @@ def dynamic(
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1112,7 +1112,7 @@ def hairpin(
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1201,7 +1201,7 @@ def hairpin(
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1292,7 +1292,7 @@ def hairpin(
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1382,7 +1382,7 @@ def hairpin(
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1479,7 +1479,7 @@ def hairpin(
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1577,7 +1577,7 @@ def hairpin(
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1668,7 +1668,7 @@ def hairpin(
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1768,7 +1768,7 @@ def hairpin(
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1863,7 +1863,7 @@ def hairpin(
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -1966,7 +1966,7 @@ def hairpin(
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -2052,7 +2052,7 @@ def hairpin(
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -2148,7 +2148,7 @@ def hairpin(
         ...     baca.skeleton("{ c2 r4. c2 r4. }"),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -2237,7 +2237,7 @@ def hairpin(
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -2328,7 +2328,7 @@ def hairpin(
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -3313,7 +3313,7 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -3403,7 +3403,7 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -3493,7 +3493,7 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -3583,7 +3583,7 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -3673,7 +3673,7 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -3769,7 +3769,7 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -3877,7 +3877,7 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -3986,7 +3986,7 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -4104,7 +4104,7 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -4228,7 +4228,7 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -4320,7 +4320,7 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -4415,7 +4415,7 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -4524,7 +4524,7 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
@@ -4626,7 +4626,7 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret_commands(
+        >>> _, _ = baca.interpreter(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
