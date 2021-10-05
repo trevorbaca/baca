@@ -898,14 +898,17 @@ def dynamic(
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 13)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -984,14 +987,17 @@ def dynamic(
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1106,14 +1112,17 @@ def hairpin(
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1192,14 +1201,17 @@ def hairpin(
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1280,14 +1292,17 @@ def hairpin(
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1367,14 +1382,17 @@ def hairpin(
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1461,14 +1479,17 @@ def hairpin(
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1556,14 +1577,17 @@ def hairpin(
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1644,14 +1668,17 @@ def hairpin(
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1741,14 +1768,17 @@ def hairpin(
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1833,14 +1863,17 @@ def hairpin(
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1933,14 +1966,17 @@ def hairpin(
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2016,14 +2052,17 @@ def hairpin(
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2109,14 +2148,17 @@ def hairpin(
         ...     baca.skeleton("{ c2 r4. c2 r4. }"),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2195,14 +2237,17 @@ def hairpin(
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2283,14 +2328,17 @@ def hairpin(
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3265,14 +3313,17 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3352,14 +3403,17 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3439,14 +3493,17 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3526,14 +3583,17 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3613,14 +3673,17 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3706,14 +3769,17 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3811,14 +3877,17 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3917,14 +3986,17 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4032,14 +4104,17 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4153,14 +4228,17 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4242,14 +4320,17 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4334,14 +4415,17 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4440,14 +4524,17 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4539,14 +4626,17 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 

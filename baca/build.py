@@ -16,7 +16,6 @@ _CYAN = "\033[36m"
 _END = "\033[0m"
 _GREEN = "\033[32m"
 _MAGENTA = "\033[35m"
-_RED = "\033[91m"
 _YELLOW = "\033[33m"
 
 __also_untagged = "--also-untagged" in sys.argv
@@ -148,11 +147,15 @@ def _interpret_segment(
     commands,
     first_segment=False,
     interpreter_function=None,
+    lilypond_file_keywords=None,
     midi=False,
     **keywords,
 ):
     _print_file_handling("Interpreting segment ...")
-    interpreter_function = interpreter_function or baca.interpret.interpret_commands
+    lilypond_file_keywords = lilypond_file_keywords or {}
+    interpreter_function = (
+        interpreter_function or baca.interpret.interpret_commands_for_score
+    )
     segment_directory = pathlib.Path(os.getcwd())
     metadata = baca.path.get_metadata(segment_directory)
     persist = baca.path.get_metadata(segment_directory, file_name="__persist__")
@@ -194,7 +197,7 @@ def _interpret_segment(
     else:
         preamble = baca.interpret.nonfirst_preamble.split("\n")
     with abjad.Timer() as timer:
-        lilypond_file, metadata, persist = interpreter_function(
+        metadata, persist = interpreter_function(
             commands.commands,
             commands.time_signatures,
             append_phantom_measure=commands.append_phantom_measure,
@@ -208,10 +211,13 @@ def _interpret_segment(
             midi=midi,
             persist=persist,
             previous_metadata=previous_metadata,
-            preamble=preamble,
             previous_persist=previous_persist,
-            return_metadata=True,
             segment_number=segment_directory.name,
+        )
+        lilypond_file = baca.make_lilypond_file(
+            keywords["score"],
+            preamble=preamble,
+            **lilypond_file_keywords,
         )
     _print_timing("Segment interpretation time", timer)
     return metadata, persist, lilypond_file, int(timer.elapsed_time)
@@ -955,7 +961,7 @@ def make_layout_ly(spacing):
         append_phantom_measure=True,
         time_signatures=time_signatures,
     )
-    lilypond_file = baca.interpret_commands(
+    _, _ = baca.interpret_commands_for_score(
         commands.commands,
         commands.time_signatures,
         append_phantom_measure=commands.append_phantom_measure,
@@ -969,6 +975,7 @@ def make_layout_ly(spacing):
         spacing=spacing,
         whitespace_leaves=True,
     )
+    lilypond_file = baca.make_lilypond_file(score)
     context = lilypond_file["Global_Skips"]
     context.lilypond_type = "PageLayout"
     context.name = "Page_Layout"
@@ -1056,6 +1063,7 @@ def make_segment_pdf(
     *,
     first_segment=False,
     interpreter_function=None,
+    lilypond_file_keywords=None,
     print_tags=False,
     **keywords,
 ):
@@ -1065,6 +1073,8 @@ def make_segment_pdf(
     if __midi:
         _make_segment_midi(commands)
         return
+    if lilypond_file_keywords is not None:
+        assert isinstance(lilypond_file_keywords, dict)
     segment_directory = pathlib.Path(os.getcwd())
     layout_py = segment_directory / "layout.py"
     # TODO: consider removing
@@ -1074,6 +1084,7 @@ def make_segment_pdf(
         commands,
         first_segment=first_segment,
         interpreter_function=interpreter_function,
+        lilypond_file_keywords=lilypond_file_keywords,
         **keywords,
     )
     metadata, persist, lilypond_file, runtime = result

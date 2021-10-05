@@ -273,20 +273,22 @@ class BCPCommand(_scoping.Command):
             ...     baca.text_spanner_staff_padding(2.5),
             ... )
 
-            >>> lilypond_file = baca.interpret_commands(
+            >>> _, _ = baca.interpret_commands_for_score(
             ...     commands.commands,
             ...     commands.time_signatures,
-            ...     includes=["baca.ily"],
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ...     score=score,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ... )
+            >>> lilypond_file = baca.make_lilypond_file(
+            ...     score,
+            ...     includes=["baca.ily"],
+            ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
@@ -479,14 +481,17 @@ class BCPCommand(_scoping.Command):
             ...     baca.script_staff_padding(5),
             ... )
 
-            >>> lilypond_file = baca.interpret_commands(
+            >>> _, _ = baca.interpret_commands_for_score(
             ...     commands.commands,
             ...     commands.time_signatures,
-            ...     includes=["baca.ily"],
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ...     score=score,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
+            ... )
+            >>> lilypond_file = baca.make_lilypond_file(
+            ...     score,
+            ...     includes=["baca.ily"],
             ... )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -494,7 +499,6 @@ class BCPCommand(_scoping.Command):
 
             ..  docs::
 
-                >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
                 \context Score = "Score"
@@ -747,16 +751,18 @@ class ContainerCommand(_scoping.Command):
         ...     baca.pitches("E4 F4"),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
+        ... )
 
-        >>> score = lilypond_file["Score"]
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"

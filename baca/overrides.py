@@ -385,13 +385,16 @@ def bar_line_transparent(
         ...     ),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1380,13 +1383,16 @@ def mmrest_color(
         ...     baca.mmrest_color("#(x11-color 'DarkOrchid)"),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1477,13 +1483,16 @@ def mmrest_text_color(
         ...     baca.mmrest_text_color("#red"),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1546,10 +1555,9 @@ def mmrest_text_color(
         ...     baca.pitches([2, 4]),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
@@ -1593,13 +1601,16 @@ def mmrest_text_extra_offset(
         ...     baca.mmrest_text_extra_offset((0, 2)),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1675,13 +1686,16 @@ def mmrest_text_padding(
         ...     baca.mmrest_text_padding(2),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1756,13 +1770,16 @@ def mmrest_text_parent_center(
         ...     baca.mmrest_text_parent_center(),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1838,13 +1855,16 @@ def mmrest_text_staff_padding(
         ...     baca.mmrest_text_staff_padding(2),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4311,10 +4331,9 @@ def text_script_color(
         ...     baca.text_script_color("#red"),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
@@ -4444,10 +4463,9 @@ def text_script_down(
         ...     baca.text_script_down()
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
@@ -4499,10 +4517,9 @@ def text_script_extra_offset(
         ...     baca.text_script_extra_offset((0, 2)),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
@@ -4656,10 +4673,9 @@ def text_script_padding(
         ...     baca.text_script_padding(2),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
@@ -4836,10 +4852,9 @@ def text_script_staff_padding(
         ...     baca.text_script_staff_padding(2)
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
@@ -4969,10 +4984,9 @@ def text_script_up(
         ...     baca.text_script_up()
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,

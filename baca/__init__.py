@@ -20,7 +20,13 @@ from .docs import global_context_string
 from .figures import *
 from .indicatorcommands import *
 from .indicators import *
-from .interpret import interpret_commands, segment_interpretation_defaults
+from .interpret import (
+    interpret_commands,
+    interpret_commands_for_score,
+    make_lilypond_file,
+    make_lilypond_file_dictionary,
+    segment_interpretation_defaults,
+)
 from .layout import *
 from .math import *
 from .memento import *

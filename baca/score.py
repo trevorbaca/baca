@@ -1,7 +1,11 @@
 """
 Templates.
 """
+from inspect import currentframe as _frame
+
 import abjad
+
+from . import scoping as _scoping
 
 
 def assert_lilypond_identifiers(score):
@@ -29,9 +33,6 @@ def assert_unique_context_names(score):
 
 
 def attach_lilypond_tag(tag, context, *, part_manifest=None):
-    """
-    Attaches LilyPond tag.
-    """
     for tag_ in tag.split("."):
         if not abjad.String(tag_).is_lilypond_identifier():
             raise Exception(f"invalid LilyPond identifier: {tag_!r}.")
@@ -70,9 +71,6 @@ def make_global_context():
 
 
 def make_music_context(*contexts):
-    """
-    Makes music context.
-    """
     contexts = tuple(_ for _ in contexts if _ is not None)
     site = "baca.ScoreTemplate.make_music_context()"
     tag = abjad.Tag(site)
@@ -83,3 +81,14 @@ def make_music_context(*contexts):
         name="Music_Context",
         tag=tag,
     )
+
+
+def make_staff_group(stem, *contexts):
+    if not isinstance(stem, str):
+        raise Exception(f"stem must be string: {stem!r}.")
+    tag = _scoping.site(_frame())
+    contexts = tuple(_ for _ in contexts if _ is not None)
+    if contexts:
+        return abjad.StaffGroup(contexts, name=f"{stem}_Staff_Group", tag=tag)
+    else:
+        return None

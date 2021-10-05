@@ -20,11 +20,10 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     first_segment=True,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
@@ -33,6 +32,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -99,10 +102,9 @@ r"""
         ...     baca.clef("treble"),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
@@ -111,6 +113,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -184,10 +190,9 @@ r"""
         ...         value="treble",
         ...     )
         ... ]
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -198,6 +203,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -269,10 +278,9 @@ r"""
         ...         value="treble",
         ...     )
         ... ]
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -283,6 +291,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -350,10 +362,9 @@ r"""
         ...     baca.clef("treble", selector=baca.selectors.leaf(0)),
         ...     baca.clef("treble", selector=baca.selectors.leaf(1)),
         ... )
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
@@ -362,6 +373,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -446,10 +461,9 @@ r"""
         ...         value="treble",
         ...     )
         ... ]
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -460,6 +474,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -525,15 +543,18 @@ r"""
         ...     baca.make_notes(),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -589,10 +610,9 @@ r"""
         ...         value="f",
         ...     )
         ... ]
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -600,6 +620,10 @@ r"""
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -656,10 +680,9 @@ r"""
         ...         value="f",
         ...     )
         ... ]
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -667,6 +690,10 @@ r"""
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -716,15 +743,18 @@ r"""
         ...     baca.dynamic("f", selector=baca.selectors.leaf(1)),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -782,10 +812,9 @@ r"""
         ...         value="f",
         ...     )
         ... ]
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -793,6 +822,10 @@ r"""
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -840,15 +873,18 @@ r"""
         ...     baca.dynamic("sfz", selector=baca.selectors.leaf(1)),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -906,10 +942,9 @@ r"""
         ...         value="sfz",
         ...     )
         ... ]
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -917,6 +952,10 @@ r"""
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -966,15 +1005,18 @@ r"""
         ...     baca.dynamic('"mf"', selector=baca.selectors.leaf(1)),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -1045,12 +1087,11 @@ r"""
         ...     baca.make_notes(),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     first_segment=True,
         ...     instruments=commands.instruments,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
@@ -1059,6 +1100,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -1196,11 +1241,10 @@ r"""
         ...     baca.make_notes(),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     instruments=commands.instruments,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
@@ -1209,6 +1253,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -1354,11 +1402,10 @@ r"""
         ...         value="Piccolo",
         ...     )
         ... ]
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     instruments=commands.instruments,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -1369,6 +1416,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -1514,11 +1565,10 @@ r"""
         ...         value="Flute",
         ...     )
         ... ]
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     instruments=commands.instruments,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -1529,6 +1579,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -1678,11 +1732,10 @@ r"""
         ...     baca.make_notes(),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     instruments=commands.instruments,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
@@ -1691,6 +1744,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -1857,11 +1914,10 @@ r"""
         ...         value="Flute",
         ...     )
         ... ]
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     instruments=commands.instruments,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -1872,6 +1928,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -2036,11 +2096,10 @@ r"""
         ...     baca.make_notes(),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     first_segment=True,
-        ...     includes=["baca.ily"],
         ...     margin_markups=commands.margin_markups,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2050,6 +2109,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -2205,11 +2268,10 @@ r"""
         ...     baca.make_notes(),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     first_segment=True,
-        ...     includes=["baca.ily"],
         ...     margin_markups=commands.margin_markups,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2219,6 +2281,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -2381,11 +2447,10 @@ r"""
         ...         value="I+II",
         ...     )
         ... ]
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     margin_markups=commands.margin_markups,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -2396,6 +2461,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -2565,11 +2634,10 @@ r"""
         ...         value="I+II",
         ...     )
         ... ]
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     margin_markups=commands.margin_markups,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -2580,7 +2648,11 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
-        ...     )
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -2752,11 +2824,10 @@ r"""
         ...     baca.make_notes(),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     first_segment=True,
-        ...     includes=["baca.ily"],
         ...     margin_markups=commands.margin_markups,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2766,6 +2837,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -2968,11 +3043,10 @@ r"""
         ...         value="I+II",
         ...     )
         ... ]
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     margin_markups=commands.margin_markups,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -2983,6 +3057,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -3164,11 +3242,10 @@ r"""
         ...     baca.make_notes(),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     first_segment=True,
-        ...     includes=["baca.ily"],
         ...     margin_markups=commands.margin_markups,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3178,6 +3255,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -3270,12 +3351,11 @@ r"""
         ...     baca.make_notes(),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     append_phantom_measure=commands.append_phantom_measure,
         ...     metronome_marks=commands.metronome_marks,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
@@ -3284,6 +3364,10 @@ r"""
         ...         fallback_duration=(1, 25),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -3381,12 +3465,11 @@ r"""
         ...         value="90",
         ...     )
         ... ]
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     append_phantom_measure=commands.append_phantom_measure,
         ...     metronome_marks=commands.metronome_marks,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -3397,6 +3480,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -3496,11 +3583,10 @@ r"""
         ...         value="90",
         ...     )
         ... ]
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     metronome_marks=commands.metronome_marks,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -3511,6 +3597,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -3577,12 +3667,11 @@ r"""
         ...     baca.make_notes(),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     append_phantom_measure=commands.append_phantom_measure,
         ...     metronome_marks=commands.metronome_marks,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
@@ -3591,6 +3680,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -3695,12 +3788,11 @@ r"""
         ...         value="112",
         ...     )
         ... ]
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     append_phantom_measure=commands.append_phantom_measure,
         ...     metronome_marks=commands.metronome_marks,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -3711,6 +3803,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -3814,16 +3910,18 @@ r"""
         ...     baca.staff_position(0),
         ... )
 
-        >>> lilypond_file, metadata, persist = baca.interpret_commands(
+        >>> metadata, persist = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     return_metadata=True,
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -3930,10 +4028,9 @@ r"""
         ...         ),
         ...     )
         ... ]
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -3941,6 +4038,10 @@ r"""
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -4011,10 +4112,9 @@ r"""
         ...         ),
         ...     )
         ... ]
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -4022,6 +4122,10 @@ r"""
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -4073,15 +4177,18 @@ r"""
         ...     baca.staff_lines(5),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -4140,10 +4247,9 @@ r"""
         ...         value=5,
         ...     )
         ... ]
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -4151,6 +4257,10 @@ r"""
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -4210,10 +4320,9 @@ r"""
         ...         value=5,
         ...     )
         ... ]
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -4221,6 +4330,10 @@ r"""
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -4272,15 +4385,18 @@ r"""
         ...     baca.staff_lines(5, selector=baca.selectors.leaf(1)),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -4344,10 +4460,9 @@ r"""
         ...         value=5,
         ...     )
         ... ]
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -4355,7 +4470,11 @@ r"""
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
-        ...     )
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
+        ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -4427,12 +4546,11 @@ r"""
         ...     baca.make_notes(),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     append_phantom_measure=commands.append_phantom_measure,
         ...     metronome_marks=commands.metronome_marks,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
@@ -4441,6 +4559,10 @@ r"""
         ...         fallback_duration=(1, 25),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -4540,10 +4662,9 @@ r"""
         ...         prototype="baca.Ritardando",
         ...     )
         ... ]
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -4554,6 +4675,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -4630,10 +4755,9 @@ r"""
         ...         prototype="baca.Accelerando",
         ...     )
         ... ]
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -4644,6 +4768,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -4716,10 +4844,9 @@ r"""
         ...     baca.make_notes(),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
@@ -4728,6 +4855,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
@@ -4816,10 +4947,9 @@ r"""
         ...         prototype="baca.Accelerando",
         ...     )
         ... ]
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -4830,6 +4960,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ...     treat_untreated_persistent_wrappers=True,
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0

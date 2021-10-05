@@ -1160,14 +1160,17 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         ...     baca.make_even_divisions(),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1259,14 +1262,17 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         ...     baca.make_even_divisions(),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1409,14 +1415,17 @@ def only_parts(command: _command_typing) -> _command_typing:
         ...     ),
         ... )
 
-        >>> lilypond_file = baca.interpret_commands(
+        >>> _, _ = baca.interpret_commands_for_score(
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     includes=["baca.ily"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
