@@ -266,10 +266,23 @@ def _make_annotation_jobs(directory, *, undo=False):
     return jobs
 
 
-def _make_segment_clicktrack(commands):
+def _make_segment_clicktrack(
+    commands,
+    first_segment=False,
+    interpreter=None,
+    lilypond_file_keywords=None,
+    **keywords,
+):
     segment_directory = pathlib.Path(os.getcwd())
     _print_always(f"Making clicktrack for segment {segment_directory.name} ...")
-    result = _interpret_segment(commands, midi=True)
+    result = _interpret_segment(
+        commands,
+        first_segment=first_segment,
+        interpreter=interpreter,
+        lilypond_file_keywords=lilypond_file_keywords,
+        midi=True,
+        **keywords,
+    )
     metadata, persist, lilypond_file, runtime = result
     time_signatures = commands.time_signatures
     global_skips = lilypond_file["Global_Skips"]
@@ -281,7 +294,7 @@ def _make_segment_clicktrack(commands):
     staff = abjad.Staff()
     abjad.setting(staff).midiInstrument = '#"drums"'
     score = abjad.Score([staff], name="Score", simultaneous=False)
-    fermata_measure_numbers = commands.fermata_measure_empty_overrides or []
+    fermata_measure_numbers = keywords.get("fermata_measure_empty_overrides", [])
     for i, time_signature in enumerate(time_signatures):
         measure_number = i + 1
         if measure_number in fermata_measure_numbers:
@@ -314,7 +327,7 @@ def _make_segment_clicktrack(commands):
     lilypond_file = abjad.LilyPondFile([score_block])
     clicktrack_file_name = "clicktrack.midi"
     with abjad.Timer() as timer:
-        _print_file_handling(f"Calling LilyPond on {baca.path.trim(lilypond_file)} ...")
+        _print_file_handling("Persisting LilyPond file as MIDI ...")
         abjad.persist.as_midi(lilypond_file, clicktrack_file_name, remove_ly=True)
     _print_timing("LilyPond runtime", timer)
     clicktrack_path = segment_directory / clicktrack_file_name
@@ -324,15 +337,33 @@ def _make_segment_clicktrack(commands):
         _print_file_handling(f"Could not make {baca.path.trim(clicktrack_path)} ...")
 
 
-def _make_segment_midi(commands):
+def _make_segment_midi(
+    commands,
+    first_segment=False,
+    interpreter=None,
+    lilypond_file_keywords=None,
+    **keywords,
+):
     segment_directory = pathlib.Path(os.getcwd())
-    _print_always(f"Making MIDI for segment {segment_directory.name} ...")
+    _print_file_handling(f"Making MIDI for segment {segment_directory.name} ...")
     music_midi = segment_directory / "music.midi"
     if music_midi.exists():
         _print_file_handling(f"Removing {baca.path.trim(music_midi)} ...")
         music_midi.unlink()
-    result = _interpret_segment(commands, midi=True)
+    if "include_layout_ly" in lilypond_file_keywords:
+        del lilypond_file_keywords["include_layout_ly"]
+    result = _interpret_segment(
+        commands,
+        first_segment=first_segment,
+        interpreter=interpreter,
+        lilypond_file_keywords=lilypond_file_keywords,
+        midi=True,
+        **keywords,
+    )
     metadata, persist, lilypond_file, runtime = result
+    score_block = lilypond_file.items[0]
+    midi_block = abjad.Block(name="midi")
+    score_block.items.append(midi_block)
     with abjad.Timer() as timer:
         tmp_midi = segment_directory / "tmp.midi"
         abjad.persist.as_midi(lilypond_file, tmp_midi)
@@ -1073,10 +1104,22 @@ def make_segment_pdf(
     **keywords,
 ):
     if __clicktrack:
-        _make_segment_clicktrack(commands)
+        _make_segment_clicktrack(
+            commands,
+            first_segment=first_segment,
+            interpreter=interpreter,
+            lilypond_file_keywords=lilypond_file_keywords,
+            **keywords,
+        )
         return
     if __midi:
-        _make_segment_midi(commands)
+        _make_segment_midi(
+            commands,
+            first_segment=first_segment,
+            interpreter=interpreter,
+            lilypond_file_keywords=lilypond_file_keywords,
+            **keywords,
+        )
         return
     if lilypond_file_keywords is not None:
         assert isinstance(lilypond_file_keywords, dict)
