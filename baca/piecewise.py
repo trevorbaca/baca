@@ -899,11 +899,11 @@ def dynamic(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 13)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -988,11 +988,11 @@ def dynamic(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -1113,11 +1113,11 @@ def hairpin(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -1202,11 +1202,11 @@ def hairpin(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -1293,11 +1293,11 @@ def hairpin(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -1383,11 +1383,11 @@ def hairpin(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -1480,11 +1480,11 @@ def hairpin(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -1578,11 +1578,11 @@ def hairpin(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -1669,11 +1669,11 @@ def hairpin(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -1769,11 +1769,11 @@ def hairpin(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -1864,11 +1864,11 @@ def hairpin(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -1967,11 +1967,11 @@ def hairpin(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -2053,11 +2053,11 @@ def hairpin(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -2149,11 +2149,11 @@ def hairpin(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -2238,11 +2238,11 @@ def hairpin(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -2329,11 +2329,11 @@ def hairpin(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -3314,11 +3314,11 @@ def text_spanner(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -3404,11 +3404,11 @@ def text_spanner(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -3494,11 +3494,11 @@ def text_spanner(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -3584,11 +3584,11 @@ def text_spanner(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -3674,11 +3674,11 @@ def text_spanner(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -3770,11 +3770,11 @@ def text_spanner(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -3878,11 +3878,11 @@ def text_spanner(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -3987,11 +3987,11 @@ def text_spanner(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -4105,11 +4105,11 @@ def text_spanner(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -4229,11 +4229,11 @@ def text_spanner(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -4321,11 +4321,11 @@ def text_spanner(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -4416,11 +4416,11 @@ def text_spanner(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -4525,11 +4525,11 @@ def text_spanner(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -4627,11 +4627,11 @@ def text_spanner(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(

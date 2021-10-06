@@ -3000,6 +3000,7 @@ def color_repeat_pitch_classes(score):
 
 
 def interpreter(
+    score,
     commands,
     time_signatures,
     *,
@@ -3047,7 +3048,6 @@ def interpreter(
     previous_persist=None,
     print_timing=False,
     remove_tags=None,
-    score=None,
     segment_number=None,
     shift_measure_initial_clefs=False,
     skips_instead_of_rests=False,
@@ -3057,6 +3057,7 @@ def interpreter(
     treat_untreated_persistent_wrappers=False,
     whitespace_leaves=False,
 ):
+    assert isinstance(score, abjad.Score), repr(score)
     if activate is not None:
         assert all(isinstance(_, abjad.Tag) for _ in activate)
     assert all_music_in_part_containers in (True, False)
@@ -3087,7 +3088,6 @@ def interpreter(
     persist = dict(persist or {})
     previous_metadata = dict(previous_metadata or {})
     previous_persist = dict(previous_persist or {})
-    assert isinstance(score, abjad.Score), repr(score)
     assert transpose_score in (True, False)
     assert treat_untreated_persistent_wrappers in (True, False)
     voice_metadata = {}

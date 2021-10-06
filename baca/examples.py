@@ -17,11 +17,11 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ... )
 
     >>> _, _ = baca.interpreter(
+    ...     score,
     ...     commands.commands,
     ...     commands.time_signatures,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ...     score=score,
     ... )
     >>> lilypond_file = baca.make_lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -109,11 +109,11 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ... )
 
     >>> _, _ = baca.interpreter(
+    ...     score,
     ...     commands.commands,
     ...     commands.time_signatures,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ...     score=score,
     ... )
     >>> lilypond_file = baca.make_lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -227,12 +227,12 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ... )
 
     >>> _, _ = baca.interpreter(
+    ...     score,
     ...     commands.commands,
     ...     commands.time_signatures,
     ...     color_octaves=True,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ...     score=score,
     ... )
     >>> lilypond_file = baca.make_lilypond_file(
     ...     score,
@@ -308,12 +308,12 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ... )
 
     >>> _, _ = baca.interpreter(
+    ...     score,
     ...     commands.commands,
     ...     commands.time_signatures,
     ...     instruments=commands.instruments,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ...     score=score,
     ...     transpose_score=True,
     ... )
     >>> lilypond_file = baca.make_lilypond_file(score)
@@ -387,12 +387,12 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ... )
 
     >>> _, _ = baca.interpreter(
+    ...     score,
     ...     commands.commands,
     ...     commands.time_signatures,
     ...     instruments=commands.instruments,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ...     score=score,
     ...     transpose_score=False,
     ... )
     >>> lilypond_file = baca.make_lilypond_file(score)
@@ -485,12 +485,12 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ... )
 
     >>> _, _ = baca.interpreter(
+    ...     score,
     ...     commands.commands,
     ...     commands.time_signatures,
     ...     instruments=instruments,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ...     score=score,
     ... )
     >>> abjad.setting(score).autoBeaming = False
     >>> lilypond_file = baca.make_lilypond_file(
@@ -591,11 +591,11 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ... )
 
     >>> _, _ = baca.interpreter(
+    ...     score,
     ...     commands.commands,
     ...     commands.time_signatures,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ...     score=score,
     ... )
     >>> abjad.setting(score).autoBeaming = False
     >>> lilypond_file = baca.make_lilypond_file(

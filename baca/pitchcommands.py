@@ -40,11 +40,11 @@ class AccidentalAdjustmentCommand(_scoping.Command):
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -496,11 +496,11 @@ class ClusterCommand(_scoping.Command):
             ... )
 
             >>> _, _ = baca.interpreter(
+            ...     score,
             ...     commands.commands,
             ...     commands.time_signatures,
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ...     score=score,
             ... )
             >>> lilypond_file = baca.make_lilypond_file(
             ...     score,
@@ -612,11 +612,11 @@ class ClusterCommand(_scoping.Command):
             ... )
 
             >>> _, _ = baca.interpreter(
+            ...     score,
             ...     commands.commands,
             ...     commands.time_signatures,
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ...     score=score,
             ... )
             >>> lilypond_file = baca.make_lilypond_file(
             ...     score,
@@ -728,11 +728,11 @@ class ClusterCommand(_scoping.Command):
             ... )
 
             >>> _, _ = baca.interpreter(
+            ...     score,
             ...     commands.commands,
             ...     commands.time_signatures,
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ...     score=score,
             ... )
             >>> lilypond_file = baca.make_lilypond_file(
             ...     score,
@@ -852,11 +852,11 @@ class ClusterCommand(_scoping.Command):
             ... )
 
             >>> _, _ = baca.interpreter(
+            ...     score,
             ...     commands.commands,
             ...     commands.time_signatures,
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ...     score=score,
             ... )
             >>> lilypond_file = baca.make_lilypond_file(
             ...     score,
@@ -968,11 +968,11 @@ class ClusterCommand(_scoping.Command):
             ... )
 
             >>> _, _ = baca.interpreter(
+            ...     score,
             ...     commands.commands,
             ...     commands.time_signatures,
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ...     score=score,
             ... )
             >>> lilypond_file = baca.make_lilypond_file(
             ...     score,
@@ -1085,11 +1085,11 @@ class ClusterCommand(_scoping.Command):
             ... )
 
             >>> _, _ = baca.interpreter(
+            ...     score,
             ...     commands.commands,
             ...     commands.time_signatures,
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ...     score=score,
             ... )
             >>> lilypond_file = baca.make_lilypond_file(
             ...     score,
@@ -1154,11 +1154,11 @@ class ColorFingeringCommand(_scoping.Command):
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -1524,11 +1524,11 @@ class MicrotoneDeviationCommand(_scoping.Command):
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -1685,11 +1685,11 @@ class OctaveDisplacementCommand(_scoping.Command):
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -1959,11 +1959,11 @@ class PitchCommand(_scoping.Command):
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -2034,11 +2034,11 @@ class PitchCommand(_scoping.Command):
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -2109,11 +2109,11 @@ class PitchCommand(_scoping.Command):
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -2560,11 +2560,11 @@ class RegisterCommand(_scoping.Command):
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -2886,11 +2886,11 @@ class RegisterInterpolationCommand(_scoping.Command):
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -2993,11 +2993,11 @@ class RegisterInterpolationCommand(_scoping.Command):
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -3100,11 +3100,11 @@ class RegisterInterpolationCommand(_scoping.Command):
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -3207,11 +3207,11 @@ class RegisterInterpolationCommand(_scoping.Command):
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -3314,11 +3314,11 @@ class RegisterInterpolationCommand(_scoping.Command):
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -5292,11 +5292,11 @@ def force_accidental(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -5592,11 +5592,11 @@ def pitch(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,

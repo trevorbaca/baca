@@ -386,11 +386,11 @@ def bar_line_transparent(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -1384,11 +1384,11 @@ def mmrest_color(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -1484,11 +1484,11 @@ def mmrest_text_color(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -1556,11 +1556,11 @@ def mmrest_text_color(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         Traceback (most recent call last):
             ...
@@ -1602,11 +1602,11 @@ def mmrest_text_extra_offset(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -1687,11 +1687,11 @@ def mmrest_text_padding(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -1771,11 +1771,11 @@ def mmrest_text_parent_center(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -1856,11 +1856,11 @@ def mmrest_text_staff_padding(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -4332,11 +4332,11 @@ def text_script_color(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         Traceback (most recent call last):
             ...
@@ -4464,11 +4464,11 @@ def text_script_down(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         Traceback (most recent call last):
             ...
@@ -4518,11 +4518,11 @@ def text_script_extra_offset(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         Traceback (most recent call last):
             ...
@@ -4674,11 +4674,11 @@ def text_script_padding(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         Traceback (most recent call last):
             ...
@@ -4853,11 +4853,11 @@ def text_script_staff_padding(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         Traceback (most recent call last):
             ...
@@ -4985,11 +4985,11 @@ def text_script_up(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         Traceback (most recent call last):
             ...

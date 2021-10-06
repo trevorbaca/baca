@@ -2138,11 +2138,11 @@ class Imbrication:
             ... )
 
             >>> _, _ = baca.interpreter(
+            ...     score,
             ...     commands.commands,
             ...     commands.time_signatures,
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ...     score=score,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
             >>> lilypond_file = baca.make_lilypond_file(
@@ -2356,11 +2356,11 @@ class Imbrication:
             ... )
 
             >>> _, _ = baca.interpreter(
+            ...     score,
             ...     commands.commands,
             ...     commands.time_signatures,
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ...     score=score,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
             >>> lilypond_file = baca.make_lilypond_file(
@@ -2557,11 +2557,11 @@ class Imbrication:
             ... )
 
             >>> _, _ = baca.interpreter(
+            ...     score,
             ...     commands.commands,
             ...     commands.time_signatures,
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ...     score=score,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
             >>> lilypond_file = baca.make_lilypond_file(
@@ -2779,11 +2779,11 @@ class Imbrication:
             ... )
 
             >>> _, _ = baca.interpreter(
+            ...     score,
             ...     commands.commands,
             ...     commands.time_signatures,
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ...     score=score,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
             >>> lilypond_file = baca.make_lilypond_file(
@@ -7079,11 +7079,11 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -7228,11 +7228,11 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -7414,11 +7414,11 @@ def extend_beam(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -7613,11 +7613,11 @@ def imbricate(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -7792,11 +7792,11 @@ def imbricate(
         ... )
         >>> figures.populate_commands(commands)
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -8018,11 +8018,11 @@ def imbricate(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -8226,11 +8226,11 @@ def imbricate(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -8367,11 +8367,11 @@ def imbricate(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -8532,11 +8532,11 @@ def imbricate(
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(

@@ -21,12 +21,12 @@ r"""
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     first_segment=True,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -103,11 +103,11 @@ r"""
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -191,13 +191,13 @@ r"""
         ...     )
         ... ]
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -279,13 +279,13 @@ r"""
         ...     )
         ... ]
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -363,11 +363,11 @@ r"""
         ...     baca.clef("treble", selector=baca.selectors.leaf(1)),
         ... )
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -462,13 +462,13 @@ r"""
         ...     )
         ... ]
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -544,11 +544,11 @@ r"""
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -611,13 +611,13 @@ r"""
         ...     )
         ... ]
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -681,13 +681,13 @@ r"""
         ...     )
         ... ]
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -744,11 +744,11 @@ r"""
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -813,13 +813,13 @@ r"""
         ...     )
         ... ]
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -874,11 +874,11 @@ r"""
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -943,13 +943,13 @@ r"""
         ...     )
         ... ]
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -1006,11 +1006,11 @@ r"""
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -1088,13 +1088,13 @@ r"""
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     first_segment=True,
         ...     instruments=commands.instruments,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -1242,12 +1242,12 @@ r"""
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     instruments=commands.instruments,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -1403,6 +1403,7 @@ r"""
         ...     )
         ... ]
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     instruments=commands.instruments,
@@ -1410,7 +1411,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -1566,6 +1566,7 @@ r"""
         ...     )
         ... ]
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     instruments=commands.instruments,
@@ -1573,7 +1574,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -1733,12 +1733,12 @@ r"""
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     instruments=commands.instruments,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -1915,6 +1915,7 @@ r"""
         ...     )
         ... ]
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     instruments=commands.instruments,
@@ -1922,7 +1923,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -2097,13 +2097,13 @@ r"""
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     first_segment=True,
         ...     margin_markups=commands.margin_markups,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -2269,13 +2269,13 @@ r"""
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     first_segment=True,
         ...     margin_markups=commands.margin_markups,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -2448,6 +2448,7 @@ r"""
         ...     )
         ... ]
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     margin_markups=commands.margin_markups,
@@ -2455,7 +2456,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -2635,6 +2635,7 @@ r"""
         ...     )
         ... ]
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     margin_markups=commands.margin_markups,
@@ -2642,7 +2643,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -2825,13 +2825,13 @@ r"""
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     first_segment=True,
         ...     margin_markups=commands.margin_markups,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -3044,6 +3044,7 @@ r"""
         ...     )
         ... ]
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     margin_markups=commands.margin_markups,
@@ -3051,7 +3052,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -3243,13 +3243,13 @@ r"""
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     first_segment=True,
         ...     margin_markups=commands.margin_markups,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -3352,13 +3352,13 @@ r"""
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     append_phantom_measure=commands.append_phantom_measure,
         ...     metronome_marks=commands.metronome_marks,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 25),
@@ -3466,6 +3466,7 @@ r"""
         ...     )
         ... ]
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     append_phantom_measure=commands.append_phantom_measure,
@@ -3474,7 +3475,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -3584,6 +3584,7 @@ r"""
         ...     )
         ... ]
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     metronome_marks=commands.metronome_marks,
@@ -3591,7 +3592,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -3668,13 +3668,13 @@ r"""
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     append_phantom_measure=commands.append_phantom_measure,
         ...     metronome_marks=commands.metronome_marks,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -3789,6 +3789,7 @@ r"""
         ...     )
         ... ]
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     append_phantom_measure=commands.append_phantom_measure,
@@ -3797,7 +3798,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -3911,11 +3911,11 @@ r"""
         ... )
 
         >>> metadata, persist = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -4029,13 +4029,13 @@ r"""
         ...     )
         ... ]
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -4113,13 +4113,13 @@ r"""
         ...     )
         ... ]
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -4178,11 +4178,11 @@ r"""
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -4248,13 +4248,13 @@ r"""
         ...     )
         ... ]
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -4321,13 +4321,13 @@ r"""
         ...     )
         ... ]
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -4386,11 +4386,11 @@ r"""
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -4461,13 +4461,13 @@ r"""
         ...     )
         ... ]
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -4547,13 +4547,13 @@ r"""
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     append_phantom_measure=commands.append_phantom_measure,
         ...     metronome_marks=commands.metronome_marks,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 25),
@@ -4663,13 +4663,13 @@ r"""
         ...     )
         ... ]
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -4756,13 +4756,13 @@ r"""
         ...     )
         ... ]
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -4845,11 +4845,11 @@ r"""
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
@@ -4948,13 +4948,13 @@ r"""
         ...     )
         ... ]
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),

@@ -388,6 +388,7 @@ def interpret_segment(
     first_segment = first_segment or segment_directory.name == "01"
     with abjad.Timer() as timer:
         metadata, persist = interpreter(
+            score,
             commands.commands,
             commands.time_signatures,
             append_phantom_measure=commands.append_phantom_measure,
@@ -402,7 +403,6 @@ def interpret_segment(
             persist=persist,
             previous_metadata=previous_metadata,
             previous_persist=previous_persist,
-            score=score,
             segment_number=segment_directory.name,
         )
     _print_timing("Segment interpretation time", timer)
@@ -1253,6 +1253,7 @@ def make_layout_ly(spacing):
         time_signatures=time_signatures,
     )
     _, _ = baca.interpreter(
+        score,
         commands.commands,
         commands.time_signatures,
         append_phantom_measure=commands.append_phantom_measure,
@@ -1262,7 +1263,6 @@ def make_layout_ly(spacing):
         first_segment=True,
         page_layout_profile=page_layout_profile,
         remove_tags=baca.tags.layout_removal_tags(),
-        score=score,
         spacing=spacing,
         whitespace_leaves=True,
     )

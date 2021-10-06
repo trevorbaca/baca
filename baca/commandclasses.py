@@ -274,11 +274,11 @@ class BCPCommand(_scoping.Command):
             ... )
 
             >>> _, _ = baca.interpreter(
+            ...     score,
             ...     commands.commands,
             ...     commands.time_signatures,
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ...     score=score,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ... )
             >>> lilypond_file = baca.make_lilypond_file(
@@ -482,11 +482,11 @@ class BCPCommand(_scoping.Command):
             ... )
 
             >>> _, _ = baca.interpreter(
+            ...     score,
             ...     commands.commands,
             ...     commands.time_signatures,
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ...     score=score,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
             ... )
             >>> lilypond_file = baca.make_lilypond_file(
@@ -752,11 +752,11 @@ class ContainerCommand(_scoping.Command):
         ... )
 
         >>> _, _ = baca.interpreter(
+        ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     score=score,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
