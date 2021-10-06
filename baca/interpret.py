@@ -19,6 +19,7 @@ from . import pitchcommands as _pitchcommands
 from . import rhythmcommands as _rhythmcommands
 from . import scoping as _scoping
 from . import selection as _selection
+from . import selectors as _selectors
 from . import tags as _tags
 
 __print_timing = "--print-timing" in sys.argv or "--verbose" in sys.argv
@@ -686,7 +687,7 @@ def _attach_rhythm_annotation_spanner(command, selection):
         abjad.tweak(color).color,
         abjad.tweak(8).staff_padding,
         leak_spanner_stop=True,
-        selector=lambda _: _selection.Selection(_).leaves(),
+        selector=_selectors.leaves(),
     )
     command_(leaves)
 
@@ -2596,7 +2597,7 @@ def _set_intermittent_to_staff_position_zero(score):
                     pleaves.append(pleaf)
     command = _pitchcommands.staff_position(
         0,
-        lambda _: _selection.Selection(_).plts(),
+        _selectors.plts(),
         set_chord_pitches_equal=True,
     )
     command(pleaves)
@@ -2610,7 +2611,7 @@ def _set_not_yet_pitched_to_staff_position_zero(score):
         pleaves.append(pleaf)
     command = _pitchcommands.staff_position(
         0,
-        lambda _: _selection.Selection(_).plts(),
+        _selectors.plts(),
         set_chord_pitches_equal=True,
     )
     command(pleaves)
@@ -2633,9 +2634,7 @@ def _shift_measure_initial_clefs(
             if measure_number is None:
                 continue
             clef = wrapper.indicator
-            suite = _overrides.clef_shift(
-                clef, selector=lambda _: _selection.Selection(_).leaf(0)
-            )
+            suite = _overrides.clef_shift(clef, selector=_selectors.leaf(0))
             runtime = _bundle_runtime(
                 offset_to_measure_number=offset_to_measure_number,
             )

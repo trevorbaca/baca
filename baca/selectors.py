@@ -40,6 +40,13 @@ def _handle_pair(selection, pair):
     return selection
 
 
+def chead(n, exclude=None):
+    def selector(argument):
+        return _selection.Selection(argument).chead(n, exclude=exclude)
+
+    return selector
+
+
 def clparts(*arguments, **keywords):
     def selector(argument):
         return _selection.Selection(argument).clparts(*arguments, **keywords)
@@ -50,6 +57,13 @@ def clparts(*arguments, **keywords):
 def cmgroups(*arguments, **keywords):
     def selector(argument):
         return _selection.Selection(argument).cmgroups(*arguments, **keywords)
+
+    return selector
+
+
+def group():
+    def selector(argument):
+        return _selection.Selection(argument).group()
 
     return selector
 
@@ -414,9 +428,9 @@ def plts_filter_length(inequality, preprolated=None):
     return selector
 
 
-def ptail(n):
+def ptail(n, *, exclude=None):
     def selector(argument):
-        return _selection.Selection(argument).ptail(n)
+        return _selection.Selection(argument).ptail(n, exclude=exclude)
 
     return selector
 
@@ -495,6 +509,13 @@ def rleaves(pair=None):
         result = _selection.Selection(argument).rleaves()
         result = _handle_pair(result, pair)
         return result
+
+    return selector
+
+
+def rmleaves(count, exclude=None):
+    def selector(argument):
+        return _selection.Selection(argument).rmleaves(count, exclude=exclude)
 
     return selector
 

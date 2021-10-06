@@ -11,6 +11,7 @@ from . import commandclasses as _commandclasses
 from . import const as _const
 from . import scoping as _scoping
 from . import selection as _selection
+from . import selectors as _selectors
 from . import sequence as _sequence
 from . import tags as _tags
 from . import typings
@@ -175,11 +176,11 @@ class PiecewiseCommand(_scoping.Command):
         map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
-        pieces=lambda _: _selection.Selection(_).leaves(),
+        pieces=_selectors.leaves(),
         remove_length_1_spanner_start: bool = None,
         right_broken: typing.Any = None,
         scope: _scoping.ScopeTyping = None,
-        selector=lambda _: _selection.Selection(_).leaves(),
+        selector=_selectors.leaves(),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
     ) -> None:
@@ -516,10 +517,10 @@ def bow_speed_spanner(
     map: abjad.Expression = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces=lambda _: _selection.Selection(_).group(),
+    pieces=_selectors.group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector=lambda _: _selection.Selection(_).ltleaves().rleak(),
+    selector=_selectors.ltleaves_rleak(),
 ) -> PiecewiseCommand:
     """
     Makes bow speed spanner.
@@ -554,11 +555,11 @@ def circle_bow_spanner(
     map: abjad.Expression = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces=lambda _: _selection.Selection(_).group(),
+    pieces=_selectors.group(),
     qualifier: str = None,
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector=lambda _: _selection.Selection(_).ltleaves().rleak(),
+    selector=_selectors.ltleaves_rleak(),
 ) -> PiecewiseCommand:
     """
     Makes circle bow spanner.
@@ -600,10 +601,10 @@ def clb_spanner(
     map: abjad.Expression = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces=lambda _: _selection.Selection(_).group(),
+    pieces=_selectors.group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector=lambda _: _selection.Selection(_).ltleaves().rleak(),
+    selector=_selectors.ltleaves_rleak(),
 ) -> PiecewiseCommand:
     """
     Makes clb spanner.
@@ -651,10 +652,10 @@ def covered_spanner(
     map: abjad.Expression = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces=lambda _: _selection.Selection(_).group(),
+    pieces=_selectors.group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector=lambda _: _selection.Selection(_).ltleaves().rleak(),
+    selector=_selectors.ltleaves_rleak(),
 ) -> PiecewiseCommand:
     """
     Makes covered spanner.
@@ -690,10 +691,10 @@ def damp_spanner(
     map: abjad.Expression = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces=lambda _: _selection.Selection(_).group(),
+    pieces=_selectors.group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector=lambda _: _selection.Selection(_).ltleaves().rleak(),
+    selector=_selectors.ltleaves_rleak(),
 ) -> PiecewiseCommand:
     """
     Makes damp spanner.
@@ -726,7 +727,7 @@ def dynamic(
     map: abjad.Expression = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    selector=lambda _: _selection.Selection(_).phead(0),
+    selector=_selectors.phead(0),
     redundant: bool = None,
 ) -> _commandclasses.IndicatorCommand:
     r"""
@@ -1087,10 +1088,10 @@ def hairpin(
     map: abjad.Expression = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces=lambda _: _selection.Selection(_).group(),
+    pieces=_selectors.group(),
     remove_length_1_spanner_start: bool = None,
     right_broken: bool = None,
-    selector=lambda _: _selection.Selection(_).leaves(),
+    selector=_selectors.leaves(),
 ) -> PiecewiseCommand:
     r"""
     Attaches hairpin.
@@ -2231,7 +2232,7 @@ def hairpin(
         ...     baca.hairpin(
         ...         "mf niente o< p",
         ...         bookend=False,
-        ...         pieces=lambda _: baca.Selection(_).mgroups([1, 2, 1]),
+        ...         pieces=baca.selectors.mgroups([1, 2, 1]),
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
@@ -2446,10 +2447,10 @@ def half_clt_spanner(
     map: abjad.Expression = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces=lambda _: _selection.Selection(_).group(),
+    pieces=_selectors.group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector=lambda _: _selection.Selection(_).ltleaves().rleak(),
+    selector=_selectors.ltleaves_rleak(),
 ) -> PiecewiseCommand:
     """
     Makes 1/2 clt spanner.
@@ -2770,10 +2771,10 @@ def material_annotation_spanner(
     map: abjad.Expression = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces=lambda _: _selection.Selection(_).group(),
+    pieces=_selectors.group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner()
-    selector=lambda _: _selection.Selection(_).leaves().rleak(),
+    selector=_selectors.rleaves(),
 ) -> PiecewiseCommand:
     """
     Makes material annotation spanner.
@@ -2807,10 +2808,10 @@ def metric_modulation_spanner(
     map: abjad.Expression = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces=lambda _: _selection.Selection(_).group(),
+    pieces=_selectors.group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner()
-    selector=lambda _: _selection.Selection(_).leaves().rleak(),
+    selector=_selectors.rleaves(),
 ) -> PiecewiseCommand:
     """
     Makes metric modulation spanner.
@@ -3001,10 +3002,10 @@ def pitch_annotation_spanner(
     map: abjad.Expression = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces=lambda _: _selection.Selection(_).group(),
+    pieces=_selectors.group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner()
-    selector=lambda _: _selection.Selection(_).leaves().rleak(),
+    selector=_selectors.rleaves(),
 ) -> PiecewiseCommand:
     """
     Makes pitch annotation spanner.
@@ -3039,10 +3040,10 @@ def pizzicato_spanner(
     map: abjad.Expression = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces=lambda _: _selection.Selection(_).group(),
+    pieces=_selectors.group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector=lambda _: _selection.Selection(_).ltleaves().rleak(),
+    selector=_selectors.ltleaves_rleak(),
 ) -> PiecewiseCommand:
     """
     Makes pizzicato spanner.
@@ -3077,10 +3078,10 @@ def rhythm_annotation_spanner(
     map: abjad.Expression = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces=lambda _: _selection.Selection(_).group(),
+    pieces=_selectors.group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner()
-    selector=lambda _: _selection.Selection(_).leaves().rleak(),
+    selector=_selectors.rleaves(),
 ) -> PiecewiseCommand:
     """
     Makes rhythm command spanner.
@@ -3118,10 +3119,10 @@ def scp_spanner(
     map: abjad.Expression = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces=lambda _: _selection.Selection(_).group(),
+    pieces=_selectors.group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector=lambda _: _selection.Selection(_).ltleaves().rleak(),
+    selector=_selectors.ltleaves_rleak(),
 ) -> PiecewiseCommand:
     """
     Makes SCP spanner.
@@ -3159,10 +3160,10 @@ def spazzolato_spanner(
     map: abjad.Expression = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces=lambda _: _selection.Selection(_).group(),
+    pieces=_selectors.group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector=lambda _: _selection.Selection(_).ltleaves().rleak(),
+    selector=_selectors.ltleaves_rleak(),
 ) -> PiecewiseCommand:
     """
     Makes spazzolato spanner.
@@ -3200,10 +3201,10 @@ def string_number_spanner(
     map: abjad.Expression = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces=lambda _: _selection.Selection(_).group(),
+    pieces=_selectors.group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector=lambda _: _selection.Selection(_).ltleaves().rleak(),
+    selector=_selectors.ltleaves_rleak(),
 ) -> PiecewiseCommand:
     """
     Makes string number spanner.
@@ -3241,10 +3242,10 @@ def tasto_spanner(
     map: abjad.Expression = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces=lambda _: _selection.Selection(_).group(),
+    pieces=_selectors.group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector=lambda _: _selection.Selection(_).ltleaves().rleak(),
+    selector=_selectors.ltleaves_rleak(),
 ) -> PiecewiseCommand:
     """
     Makes tasto spanner.
@@ -3287,9 +3288,9 @@ def text_spanner(
     map: abjad.Expression = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces=lambda _: _selection.Selection(_).group(),
+    pieces=_selectors.group(),
     right_broken: bool = None,
-    selector=lambda _: _selection.Selection(_).leaves(),
+    selector=_selectors.leaves(),
 ) -> PiecewiseCommand:
     r"""
     Attaches text span indicators.
@@ -4313,7 +4314,7 @@ def text_spanner(
         ...     baca.text_spanner(
         ...         r"\baca-damp-markup =|",
         ...         bookend=False,
-        ...         selector=lambda _: baca.Selection(_).rmleaves(2),
+        ...         selector=baca.selectors.rmleaves(2),
         ...         ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
@@ -4889,10 +4890,10 @@ def vibrato_spanner(
     map: abjad.Expression = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces=lambda _: _selection.Selection(_).group(),
+    pieces=_selectors.group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector=lambda _: _selection.Selection(_).ltleaves().rleak(),
+    selector=_selectors.ltleaves_rleak(),
 ) -> PiecewiseCommand:
     """
     Makes vibrato spanner.
@@ -4930,10 +4931,10 @@ def xfb_spanner(
     map: abjad.Expression = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces=lambda _: _selection.Selection(_).group(),
+    pieces=_selectors.group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector=lambda _: _selection.Selection(_).ltleaves().rleak(),
+    selector=_selectors.ltleaves_rleak(),
 ) -> PiecewiseCommand:
     """
     Makes XFB spanner.

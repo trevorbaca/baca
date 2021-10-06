@@ -99,7 +99,7 @@ class AccidentalAdjustmentCommand(_scoping.Command):
         measures: typings.SliceTyping = None,
         parenthesized: bool = None,
         scope: _scoping.ScopeTyping = None,
-        selector=lambda _: _selection.Selection(_).pleaf(0),
+        selector=_selectors.pleaf(0),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
     ) -> None:
         _scoping.Command.__init__(
@@ -396,7 +396,7 @@ class ClusterCommand(_scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: _scoping.ScopeTyping = None,
-        selector=lambda _: _selection.Selection(_).plts(),
+        selector=_selectors.plts(),
         start_pitch=None,
         widths=None,
     ) -> None:
@@ -1214,7 +1214,7 @@ class ColorFingeringCommand(_scoping.Command):
         measures: typings.SliceTyping = None,
         numbers=None,
         scope: _scoping.ScopeTyping = None,
-        selector=lambda _: _selection.Selection(_).pheads(),
+        selector=_selectors.pheads(),
         tweaks: abjad.IndexedTweakManagers = None,
     ) -> None:
         _scoping.Command.__init__(
@@ -1319,7 +1319,7 @@ class DiatonicClusterCommand(_scoping.Command):
         measures: typings.SliceTyping = None,
         scope: _scoping.ScopeTyping = None,
         widths,
-        selector=lambda _: _selection.Selection(_).plts(),
+        selector=_selectors.plts(),
     ) -> None:
         _scoping.Command.__init__(
             self,
@@ -1599,7 +1599,7 @@ class MicrotoneDeviationCommand(_scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: _scoping.ScopeTyping = None,
-        selector=lambda _: _selection.Selection(_).plts(),
+        selector=_selectors.plts(),
     ) -> None:
         _scoping.Command.__init__(
             self,
@@ -1760,7 +1760,7 @@ class OctaveDisplacementCommand(_scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: _scoping.ScopeTyping = None,
-        selector=lambda _: _selection.Selection(_).plts(),
+        selector=_selectors.plts(),
     ) -> None:
         _scoping.Command.__init__(
             self,
@@ -2667,7 +2667,7 @@ class RegisterCommand(_scoping.Command):
         measures: typings.SliceTyping = None,
         registration=None,
         scope: _scoping.ScopeTyping = None,
-        selector=lambda _: _selection.Selection(_).plts(),
+        selector=_selectors.plts(),
     ) -> None:
         _scoping.Command.__init__(
             self,
@@ -3417,7 +3417,7 @@ class RegisterInterpolationCommand(_scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: _scoping.ScopeTyping = None,
-        selector=lambda _: _selection.Selection(_).plts(),
+        selector=_selectors.plts(),
         start_pitch: typing.Union[abjad.Number, abjad.NumberedPitch] = 0,
         stop_pitch: typing.Union[abjad.Number, abjad.NumberedPitch] = 0,
     ) -> None:
@@ -4086,7 +4086,7 @@ class RegisterToOctaveCommand(_scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: _scoping.ScopeTyping = None,
-        selector=lambda _: _selection.Selection(_).plts(),
+        selector=_selectors.plts(),
     ) -> None:
         _scoping.Command.__init__(
             self,
@@ -4381,7 +4381,7 @@ class StaffPositionCommand(_scoping.Command):
         measures: typings.SliceTyping = None,
         mock: bool = None,
         scope: _scoping.ScopeTyping = None,
-        selector=lambda _: _selection.Selection(_).plts(),
+        selector=_selectors.plts(),
         set_chord_pitches_equal: bool = None,
     ) -> None:
         _scoping.Command.__init__(
@@ -4563,7 +4563,7 @@ class StaffPositionInterpolationCommand(_scoping.Command):
         measures: typings.SliceTyping = None,
         pitches_instead_of_staff_positions: bool = None,
         scope: _scoping.ScopeTyping = None,
-        selector=lambda _: _selection.Selection(_).plts(),
+        selector=_selectors.plts(),
     ) -> None:
         _scoping.Command.__init__(
             self,
@@ -5561,7 +5561,7 @@ def natural_clusters(
 
 def pitch(
     pitch,
-    selector=lambda _: _selection.Selection(_).plts(exclude=_const.HIDDEN),
+    selector=_selectors.plts(exclude=_const.HIDDEN),
     *,
     allow_out_of_range: bool = None,
     allow_repitch: bool = None,
@@ -5664,7 +5664,7 @@ def pitch(
 
 def pitches(
     pitches,
-    selector=lambda _: _selection.Selection(_).plts(exclude=_const.HIDDEN),
+    selector=_selectors.plts(exclude=_const.HIDDEN),
     *,
     allow_octaves: bool = None,
     allow_repeats: bool = None,
@@ -5710,7 +5710,7 @@ def register(
     start: int,
     stop: int = None,
     *,
-    selector=lambda _: _selection.Selection(_).plts(exclude=_const.HIDDEN),
+    selector=_selectors.plts(exclude=_const.HIDDEN),
 ) -> typing.Union[RegisterCommand, RegisterInterpolationCommand]:
     r"""
     Octave-transposes ``selector`` output.
@@ -6024,7 +6024,7 @@ def register(
 
 def soprano_to_octave(
     n: int,
-    selector=lambda _: _selection.Selection(_).plts(exclude=_const.HIDDEN),
+    selector=_selectors.plts(exclude=_const.HIDDEN),
 ) -> RegisterToOctaveCommand:
     r"""
     Octave-transposes music.
@@ -6210,7 +6210,7 @@ def soprano_to_octave(
 
 def staff_position(
     argument: typing.Union[int, list, abjad.StaffPosition],
-    selector=lambda _: _selection.Selection(_).plts(exclude=_const.HIDDEN),
+    selector=_selectors.plts(exclude=_const.HIDDEN),
     *,
     allow_out_of_range: bool = None,
     allow_repitch: bool = None,
@@ -6236,7 +6236,7 @@ def staff_position(
 
 def staff_positions(
     numbers,
-    selector=lambda _: _selection.Selection(_).plts(exclude=_const.HIDDEN),
+    selector=_selectors.plts(exclude=_const.HIDDEN),
     *,
     allow_out_of_range: bool = None,
     allow_repeats: bool = None,
