@@ -307,6 +307,13 @@ def mmrest(*arguments, **keywords):
     return selector
 
 
+def mmrests(exclude=None):
+    def selector(argument):
+        return _selection.Selection(argument).mmrests(exclude=exclude)
+
+    return selector
+
+
 def note(n):
     def selector(argument):
         return _selection.Selection(argument).note(n)
