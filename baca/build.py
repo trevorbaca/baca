@@ -7,9 +7,12 @@ import pprint
 import shutil
 import sys
 import time
+from inspect import currentframe as _frame
 
 import abjad
 import baca
+
+from . import scoping as _scoping
 
 _BLUE = "\033[94m"
 _CYAN = "\033[36m"
@@ -45,8 +48,7 @@ def _add_nonfirst_segment_preamble(lilypond_file, segment_directory):
     line = r"\paper { first-page-number = #"
     line += str(first_page_number)
     line += " }"
-    # TODO: tag with _scoping.site()
-    lines = abjad.tag.double_tag([line], "__make_segment_pdf__")
+    lines = abjad.tag.double_tag([line], _scoping.site(_frame()))
     lines.append("")
     lilypond_file.items[-1:-1] = lines
 
@@ -369,6 +371,7 @@ def _interpret_segment(
 
 
 def interpret_segment(
+    score,
     commands,
     *,
     first_segment=False,
@@ -399,11 +402,12 @@ def interpret_segment(
             persist=persist,
             previous_metadata=previous_metadata,
             previous_persist=previous_persist,
+            score=score,
             segment_number=segment_directory.name,
         )
     _print_timing("Segment interpretation time", timer)
     timing = {"runtime": int(timer.elapsed_time)}
-    return metadata, persist, keywords["score"], timing
+    return metadata, persist, score, timing
 
 
 def _log_timing(segment_directory, timing):
