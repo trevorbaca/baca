@@ -3302,6 +3302,10 @@ def interpreter(
     return metadata, persist
 
 
+def make_keyword_dictionary(**keywords):
+    return keywords
+
+
 def make_lilypond_file(
     score,
     clock_time_extra_offset=None,
@@ -3340,7 +3344,7 @@ def make_lilypond_file(
     return lilypond_file
 
 
-def segment_interpretation_defaults():
+def score_interpretation_defaults():
     return {
         "add_container_identifiers": True,
         "attach_nonfirst_empty_start_bar": True,
@@ -3356,11 +3360,3 @@ def segment_interpretation_defaults():
         "treat_untreated_persistent_wrappers": True,
         "whitespace_leaves": True,
     }
-
-
-def make_lilypond_file_dictionary(**keywords):
-    return keywords
-
-
-def make_keyword_dictionary(**keywords):
-    return keywords

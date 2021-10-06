@@ -24,8 +24,7 @@ from .interpret import (
     interpreter,
     make_keyword_dictionary,
     make_lilypond_file,
-    make_lilypond_file_dictionary,
-    segment_interpretation_defaults,
+    score_interpretation_defaults,
 )
 from .layout import *
 from .math import *
