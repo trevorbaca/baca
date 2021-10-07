@@ -44,12 +44,6 @@ from .spannercommands import *
 from .typings import *
 
 
-def pleaves(*arguments, **keywords):
-    return select().pleaves(*arguments, **keywords)
-
-
-pleaves.__doc__ = Selection.pleaves.__doc__
-
 if sys.version_info[:2] < (3, 9):
     raise ImportError("Requires Python 3.9 or later")
 del sys

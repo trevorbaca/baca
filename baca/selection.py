@@ -4690,14 +4690,3 @@ class Selection(abjad.Selection):
         if self._expression:
             return self._update_expression(_frame())
         return self.leaves(exclude=exclude).with_previous_leaf().with_next_leaf()
-
-
-def select(items=None):
-    if items is not None:
-        return Selection(items=items)
-    expression = abjad.Expression(proxy_class=Selection)
-    callback = abjad.Expression._make_initializer_callback(
-        Selection, callback_class=abjad.Expression, module_names=["baca"]
-    )
-    expression = expression.append_callback(callback)
-    return abjad.new(expression, template="baca")
