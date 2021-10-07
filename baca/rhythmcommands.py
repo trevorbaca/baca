@@ -183,7 +183,7 @@ class RhythmCommand(_scoping.Command):
             return
         frame_info = inspect.getframeinfo(self.frame)
         function_name = frame_info.function
-        wrapped_arguments = abjad.Expression._wrap_arguments(self.frame)
+        wrapped_arguments = abjad.format._wrap_arguments(self.frame)
         string = f"{function_name}({wrapped_arguments}) =|"
         return string
 
