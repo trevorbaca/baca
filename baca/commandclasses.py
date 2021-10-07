@@ -12,6 +12,7 @@ from . import indicators as _indicators
 from . import parts as _parts
 from . import scoping as _scoping
 from . import selection as _selection
+from . import selectors as _selectors
 from . import sequence as _sequence
 from . import tags as _tags
 from . import typings
@@ -706,7 +707,7 @@ class ColorCommand(_scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: _scoping.ScopeTyping = None,
-        selector=lambda _: _selection.Selection(_).leaves(),
+        selector=_selectors.leaves(),
     ) -> None:
         assert selector is not None
         _scoping.Command.__init__(
@@ -810,7 +811,7 @@ class ContainerCommand(_scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: _scoping.ScopeTyping = None,
-        selector=lambda _: _selection.Selection(_).leaves(),
+        selector=_selectors.leaves(),
     ) -> None:
         _scoping.Command.__init__(
             self,
@@ -962,7 +963,7 @@ class GlissandoCommand(_scoping.Command):
         right_broken: bool = None,
         right_broken_show_next: bool = None,
         scope: _scoping.ScopeTyping = None,
-        selector=lambda _: _selection.Selection(_).tleaves(),
+        selector=_selectors.tleaves(),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
         zero_padding: bool = None,
@@ -1127,7 +1128,7 @@ class GlobalFermataCommand(_scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: _scoping.ScopeTyping = None,
-        selector=lambda _: _selection.Selection(_).leaf(0),
+        selector=_selectors.leaf(0),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
     ) -> None:
         _scoping.Command.__init__(
@@ -1247,7 +1248,7 @@ class IndicatorCommand(_scoping.Command):
         predicate: typing.Callable = None,
         redundant: bool = None,
         scope: _scoping.ScopeTyping = None,
-        selector=lambda _: _selection.Selection(_).pheads(),
+        selector=_selectors.pheads(),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
     ) -> None:
@@ -1416,7 +1417,7 @@ class LabelCommand(_scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: _scoping.ScopeTyping = None,
-        selector=lambda _: _selection.Selection(_).leaves(),
+        selector=_selectors.leaves(),
     ) -> None:
         _scoping.Command.__init__(
             self,
@@ -1475,7 +1476,7 @@ class MetronomeMarkCommand(_scoping.Command):
         measures: typings.SliceTyping = None,
         redundant: bool = None,
         scope: _scoping.ScopeTyping = None,
-        selector=lambda _: _selection.Selection(_).leaf(0),
+        selector=_selectors.leaf(0),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
     ) -> None:
         _scoping.Command.__init__(
@@ -1573,7 +1574,7 @@ class PartAssignmentCommand(_scoping.Command):
         measures: typings.SliceTyping = None,
         part_assignment: _parts.PartAssignment = None,
         scope: _scoping.ScopeTyping = None,
-        selector=lambda _: _selection.Selection(_).leaves(),
+        selector=_selectors.leaves(),
     ) -> None:
         _scoping.Command.__init__(
             self,

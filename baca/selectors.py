@@ -47,6 +47,7 @@ def chead(n, exclude=None):
     return selector
 
 
+# TODO: remove *argument, **keywords to allow pair=None interface
 def clparts(*arguments, **keywords):
     def selector(argument):
         return _selection.Selection(argument).clparts(*arguments, **keywords)
@@ -54,6 +55,7 @@ def clparts(*arguments, **keywords):
     return selector
 
 
+# TODO: remove *argument, **keywords to allow pair=None interface
 def cmgroups(*arguments, **keywords):
     def selector(argument):
         return _selection.Selection(argument).cmgroups(*arguments, **keywords)
@@ -64,6 +66,22 @@ def cmgroups(*arguments, **keywords):
 def group():
     def selector(argument):
         return _selection.Selection(argument).group()
+
+    return selector
+
+
+def hleaf(n, exclude=None):
+    def selector(argument):
+        return _selection.Selection(argument).hleaf(n, exclude=exclude)
+
+    return selector
+
+
+def hleaves(pair=None, exclude=None):
+    def selector(argument):
+        result = _selection.Selection(argument).hleaves(exclude=exclude)
+        result = _handle_pair(result, pair)
+        return result
 
     return selector
 
