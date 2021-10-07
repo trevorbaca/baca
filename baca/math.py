@@ -486,9 +486,7 @@ def repeat_subruns_to_length(notes, pairs, history=False):
 
         >>> list_ = [abjad.Note(_, (1, 4)) for _ in [0, 2, 4, 5, 7, 9, 11]]
         >>> baca.repeat_subruns_to_length(list_, [(0, 4, 1), (2, 4, 1)])
-        [Note("c'4"), Note("d'4"), Note("e'4"), Note("f'4"), Note("c'4"),
-        Note("d'4"), Note("e'4"), Note("f'4"), Note("g'4"), Note("a'4"),
-        Note("e'4"), Note("f'4"), Note("g'4"), Note("a'4"), Note("b'4")]
+        [Note("c'4"), Note("d'4"), Note("e'4"), Note("f'4"), Note("c'4"), Note("d'4"), Note("e'4"), Note("f'4"), Note("g'4"), Note("a'4"), Note("e'4"), Note("f'4"), Note("g'4"), Note("a'4"), Note("b'4")]
 
     Returns list of components.
     """

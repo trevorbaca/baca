@@ -30,12 +30,12 @@ def _get_globs():
 def _doctest_files(files, globs, report_only_first_failure=False):
     if report_only_first_failure:
         optionflags = (
-            doctest.NORMALIZE_WHITESPACE
-            | doctest.ELLIPSIS
+            doctest.ELLIPSIS
+            | doctest.NORMALIZE_WHITESPACE
             | doctest.REPORT_ONLY_FIRST_FAILURE
         )
     else:
-        optionflags = doctest.NORMALIZE_WHITESPACE | doctest.ELLIPSIS
+        optionflags = doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE
     failed_file_paths, error_messages = [], []
     failure_count, test_count = 0, 0
     for file_ in files:

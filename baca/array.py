@@ -197,8 +197,8 @@ class PitchArray:
 
             >>> array_2 = baca.PitchArray([[3, 4], [4, 3]])
             >>> print(array_2)
-            [     ] [           ]
-            [           ] [     ]
+            [   ] [   ]
+            [     ] [   ]
 
             >>> array_3 = baca.PitchArray([[1, 1], [1, 1]])
             >>> print(array_3)
@@ -207,13 +207,13 @@ class PitchArray:
 
             >>> array_1 += array_2
             >>> print(array_1)
-            [ ] [     ] [ ] [     ] [         ]
-            [     ] [ ] [ ] [         ] [     ]
+            [ ] [     ] [ ] [   ] [   ]
+            [     ] [ ] [ ] [     ] [   ]
 
             >>> array_1 += array_3
             >>> print(array_1)
-            [ ] [     ] [ ] [     ] [         ] [ ] [ ]
-            [     ] [ ] [ ] [         ] [     ] [ ] [ ]
+            [ ] [     ] [ ] [   ] [   ] [ ] [ ]
+            [     ] [ ] [ ] [     ] [   ] [ ] [ ]
 
         Returns pitch array.
         """
@@ -643,7 +643,7 @@ class PitchArray:
 
             >>> print(array)
             [     ] [     ] [     ] [     ]
-            [                 ] [                 ]
+            [     ] [     ]
             [ ] [     ] [ ] [ ] [     ] [ ]
 
         ..  container:: example
@@ -703,7 +703,7 @@ class PitchArray:
 
             >>> print(array)
             [c'     ] [d'     ] [e'     ] [f'     ]
-            [c'                   ] [d'                   ]
+            [c'     ] [d'     ]
             [c'] [d'     ] [e'] [c'] [d'     ] [e']
 
         Returns pitch array.
@@ -754,7 +754,7 @@ class PitchArray:
             ... ])
 
             >>> print(array)
-            [     ] [     ] [         ] [ ]
+            [     ] [     ] [     ] [ ]
             [ ] [     ] [ ] [ ] [     ] [ ]
             [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]
 
@@ -768,7 +768,7 @@ class PitchArray:
             [ ] [ ] [ ] [ ]
 
             >>> print(subarrays[1])
-            [         ]
+            [     ]
             [ ] [     ]
             [ ] [ ] [ ]
 
