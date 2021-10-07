@@ -1767,8 +1767,8 @@ class Anchor:
         self,
         *,
         figure_name: str = None,
-        local_selector: abjad.Expression = None,
-        remote_selector: abjad.Expression = None,
+        local_selector=None,
+        remote_selector=None,
         remote_voice_name: str = None,
         use_remote_stop_offset: bool = None,
     ) -> None:
@@ -1823,14 +1823,14 @@ class Anchor:
         return self._figure_name
 
     @property
-    def local_selector(self) -> typing.Optional[abjad.Expression]:
+    def local_selector(self):
         """
         Gets local selector.
         """
         return self._local_selector
 
     @property
-    def remote_selector(self) -> typing.Optional[abjad.Expression]:
+    def remote_selector(self):
         """
         Gets remote selector.
         """
@@ -1945,7 +1945,7 @@ class Imbrication:
         allow_unused_pitches: bool = None,
         by_pitch_class: bool = None,
         hocket: bool = None,
-        selector: abjad.Expression = None,
+        selector=None,
         truncate_ties: bool = None,
     ) -> None:
         assert isinstance(voice_name, str), repr(voice_name)
@@ -2512,7 +2512,7 @@ class Imbrication:
         return self._segment
 
     @property
-    def selector(self) -> typing.Optional[abjad.Expression]:
+    def selector(self):
         r"""
         Gets selector.
 
@@ -6983,8 +6983,8 @@ class Bind:
 
 def anchor(
     remote_voice_name: str,
-    remote_selector: abjad.Expression = None,
-    local_selector: abjad.Expression = None,
+    remote_selector=None,
+    local_selector=None,
 ) -> Anchor:
     """
     Anchors music in this figure (filtered by ``local_selector``) to start offset of
@@ -6999,8 +6999,8 @@ def anchor(
 
 def anchor_after(
     remote_voice_name: str,
-    remote_selector: abjad.Expression = None,
-    local_selector: abjad.Expression = None,
+    remote_selector=None,
+    local_selector=None,
 ) -> Anchor:
     """
     Anchors music in this figure (filtered by ``local_selector``) to stop offset of
@@ -7570,7 +7570,7 @@ def imbricate(
     allow_unused_pitches: bool = None,
     by_pitch_class: bool = None,
     hocket: bool = None,
-    selector: abjad.Expression = None,
+    selector=None,
     truncate_ties: bool = None,
 ):
     r"""

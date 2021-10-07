@@ -1078,7 +1078,7 @@ def glissando(
     hide_middle_stems: bool = None,
     hide_stem_selector: typing.Callable = None,
     left_broken: bool = None,
-    map: abjad.Expression = None,
+    map=None,
     right_broken: bool = None,
     right_broken_show_next: bool = None,
     selector=_selectors.tleaves(),
@@ -1498,7 +1498,7 @@ def instrument(
 def invisible_music(
     selector=_selectors.leaf(0),
     *,
-    map: abjad.Expression = None,
+    map=None,
 ) -> _scoping.Suite:
     r"""
     Attaches ``\baca-invisible-music`` literal.
@@ -1686,10 +1686,9 @@ def label(
 def markup(
     argument: typing.Union[str, abjad.Markup],
     *tweaks: abjad.TweakInterface,
-    # typehinting is weird for some reason
     direction=abjad.Up,
     literal: bool = False,
-    map: abjad.Expression = None,
+    map=None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
     selector=_selectors.pleaf(0),
@@ -1968,7 +1967,7 @@ def previous_metadata(path: str):
     return previous_metadata
 
 
-def untie(selector: abjad.Expression) -> _commandclasses.DetachCommand:
+def untie(selector) -> _commandclasses.DetachCommand:
     """
     Makes (repeat-)tie detach command.
     """

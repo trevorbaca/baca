@@ -94,7 +94,7 @@ class AccidentalAdjustmentCommand(_scoping.Command):
         *,
         cautionary: bool = None,
         forced: bool = None,
-        map: abjad.Expression = None,
+        map=None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         parenthesized: bool = None,
@@ -392,7 +392,7 @@ class ClusterCommand(_scoping.Command):
         self,
         *,
         hide_flat_markup=None,
-        map: abjad.Expression = None,
+        map=None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: _scoping.ScopeTyping = None,
@@ -584,7 +584,7 @@ class ClusterCommand(_scoping.Command):
         return self._hide_flat_markup
 
     @property
-    def selector(self) -> typing.Optional[abjad.Expression]:
+    def selector(self):
         """
         Selects PLTs.
         """
@@ -1209,7 +1209,7 @@ class ColorFingeringCommand(_scoping.Command):
     def __init__(
         self,
         *,
-        map: abjad.Expression = None,
+        map=None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         numbers=None,
@@ -1314,7 +1314,7 @@ class DiatonicClusterCommand(_scoping.Command):
     def __init__(
         self,
         *,
-        map: abjad.Expression = None,
+        map=None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: _scoping.ScopeTyping = None,
@@ -1595,7 +1595,7 @@ class MicrotoneDeviationCommand(_scoping.Command):
         self,
         *,
         deviations=None,
-        map: abjad.Expression = None,
+        map=None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: _scoping.ScopeTyping = None,
@@ -1756,7 +1756,7 @@ class OctaveDisplacementCommand(_scoping.Command):
         self,
         *,
         displacements=None,
-        map: abjad.Expression = None,
+        map=None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: _scoping.ScopeTyping = None,
@@ -2230,13 +2230,13 @@ class PitchCommand(_scoping.Command):
         cyclic: bool = None,
         do_not_transpose: bool = None,
         ignore_incomplete: bool = None,
-        map: abjad.Expression = None,
+        map=None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         persist: str = None,
         pitches: typing.Union[typing.Sequence, Loop] = None,
         scope: _scoping.ScopeTyping = None,
-        selector: abjad.Expression = None,
+        selector=None,
     ) -> None:
         _scoping.Command.__init__(
             self,
@@ -2662,7 +2662,7 @@ class RegisterCommand(_scoping.Command):
     def __init__(
         self,
         *,
-        map: abjad.Expression = None,
+        map=None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         registration=None,
@@ -3413,7 +3413,7 @@ class RegisterInterpolationCommand(_scoping.Command):
     def __init__(
         self,
         *,
-        map: abjad.Expression = None,
+        map=None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: _scoping.ScopeTyping = None,
@@ -3474,7 +3474,7 @@ class RegisterInterpolationCommand(_scoping.Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def selector(self) -> typing.Optional[abjad.Expression]:
+    def selector(self):
         r"""
         Gets selector.
 
@@ -4082,7 +4082,7 @@ class RegisterToOctaveCommand(_scoping.Command):
         *,
         anchor=None,
         octave_number=None,
-        map: abjad.Expression = None,
+        map=None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: _scoping.ScopeTyping = None,
@@ -4376,7 +4376,7 @@ class StaffPositionCommand(_scoping.Command):
         allow_repeats: bool = None,
         allow_repitch: bool = None,
         exact: bool = None,
-        map: abjad.Expression = None,
+        map=None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         mock: bool = None,
@@ -4558,7 +4558,7 @@ class StaffPositionInterpolationCommand(_scoping.Command):
         stop: typing.Union[int, str, abjad.NamedPitch, abjad.StaffPosition],
         *,
         mock: bool = None,
-        map: abjad.Expression = None,
+        map=None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         pitches_instead_of_staff_positions: bool = None,

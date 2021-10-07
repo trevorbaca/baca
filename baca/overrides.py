@@ -48,7 +48,7 @@ class OverrideCommand(_scoping.Command):
         context: str = None,
         deactivate: bool = None,
         grob: str = None,
-        map: abjad.Expression = None,
+        map=None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: _scoping.ScopeTyping = None,

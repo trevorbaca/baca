@@ -730,11 +730,11 @@ class Command:
         self,
         *,
         deactivate: bool = None,
-        map: abjad.Expression = None,
+        map=None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: ScopeTyping = None,
-        selector: abjad.Expression = None,
+        selector=None,
         tag_measure_number: bool = None,
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
     ) -> None:
@@ -831,7 +831,7 @@ class Command:
         return self._deactivate
 
     @property
-    def map(self) -> typing.Union[str, abjad.Expression, None]:
+    def map(self):
         """
         Gets precondition map.
         """
@@ -866,7 +866,7 @@ class Command:
         return self._scope
 
     @property
-    def selector(self) -> typing.Optional[abjad.Expression]:
+    def selector(self):
         """
         Gets selector.
         """

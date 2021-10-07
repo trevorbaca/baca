@@ -1814,7 +1814,7 @@ def rehearsal_mark(
 
 
 def repeat_tie(
-    selector: abjad.Expression, *, allow_rest: bool = None
+    selector, *, allow_rest: bool = None
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches repeat-tie.
@@ -2679,7 +2679,7 @@ def stem_tremolo(
 def stop_on_string(
     selector=_selectors.phead(0, exclude=_const.HIDDEN),
     *,
-    map: abjad.Expression = None,
+    map=None,
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches stop-on-string.
@@ -2873,7 +2873,7 @@ def stopped(
     )
 
 
-def tie(selector: abjad.Expression) -> _commandclasses.IndicatorCommand:
+def tie(selector) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches tie.
 

@@ -39,7 +39,7 @@ class SpannerIndicatorCommand(_scoping.Command):
         deactivate: bool = None,
         detach_first: bool = None,
         left_broken: bool = None,
-        map: abjad.Expression = None,
+        map=None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         right_broken: bool = None,
@@ -171,7 +171,7 @@ class SpannerIndicatorCommand(_scoping.Command):
         return self._right_broken
 
     @property
-    def selector(self) -> typing.Optional[abjad.Expression]:
+    def selector(self):
         r"""
         Gets selector.
         """
@@ -487,7 +487,7 @@ def ottava_bassa(
 
 def slur(
     *tweaks: abjad.TweakInterface,
-    map: abjad.Expression = None,
+    map=None,
     phrasing_slur=False,
     selector=_selectors.tleaves(),
     start_slur: abjad.StartSlur = None,
@@ -688,7 +688,7 @@ def trill_spanner(
     alteration: str = None,
     harmonic: bool = None,
     left_broken: bool = None,
-    map: abjad.Expression = None,
+    map=None,
     right_broken: bool = None,
     selector=_selectors.tleaves(rleak=True),
     start_trill_span: abjad.StartTrillSpan = None,
