@@ -1270,7 +1270,7 @@ def make_layout_ly(spacing):
     context = lilypond_file["Global_Skips"]
     context.lilypond_type = "PageLayout"
     context.name = "Page_Layout"
-    skips = baca.select(context).skips()
+    skips = baca.Selection(context).skips()
     for skip in skips:
         abjad.detach(abjad.TimeSignature, skip)
     score = lilypond_file["Score"]

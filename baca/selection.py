@@ -39,7 +39,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).chead(-1)
+            >>> result = baca.Selection(staff).chead(-1)
             >>> result
             Chord("<fs' gs'>4")
 
@@ -123,7 +123,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).cheads()
+            >>> result = baca.Selection(staff).cheads()
             >>> for item in result:
             ...     item
             ...
@@ -221,7 +221,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).clparts([2, 3, 4])
+            >>> result = baca.Selection(staff).clparts([2, 3, 4])
             >>> for item in result:
             ...     item
             ...
@@ -325,7 +325,7 @@ class Selection(abjad.Selection):
             >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
             >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
 
-            >>> result = baca.select(staff).cmgroups([2])
+            >>> result = baca.Selection(staff).cmgroups([2])
             >>> for item in result:
             ...     item
             ...
@@ -404,7 +404,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).leaves().enchain([5])
+            >>> result = baca.Selection(staff).leaves().enchain([5])
             >>> for item in result:
             ...     item
             Selection([Rest('r16'), Note("bf'16"), Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")])
@@ -520,7 +520,7 @@ class Selection(abjad.Selection):
             >>> abjad.attach(container, staff[1])
             >>> abjad.setting(staff).autoBeaming = False
 
-            >>> result = baca.select(staff).grace(-1)
+            >>> result = baca.Selection(staff).grace(-1)
             >>> result
             Note("gf'16")
 
@@ -574,7 +574,7 @@ class Selection(abjad.Selection):
             >>> abjad.attach(container, staff[1])
             >>> abjad.setting(staff).autoBeaming = False
 
-            >>> result = baca.select(staff).graces()
+            >>> result = baca.Selection(staff).graces()
             >>> for item in result:
             ...     item
             ...
@@ -636,7 +636,7 @@ class Selection(abjad.Selection):
             >>> abjad.attach(container, staff[1])
             >>> abjad.setting(staff).autoBeaming = False
 
-            >>> result = baca.select(staff).hleaf(1)
+            >>> result = baca.Selection(staff).hleaf(1)
             >>> result
             Note("d'8")
 
@@ -690,7 +690,7 @@ class Selection(abjad.Selection):
             >>> abjad.attach(container, staff[1])
             >>> abjad.setting(staff).autoBeaming = False
 
-            >>> result = baca.select(staff).hleaves()
+            >>> result = baca.Selection(staff).hleaves()
             >>> for item in result:
             ...     item
             ...
@@ -761,7 +761,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).tuplets()[1:2].lleaf(0)
+            >>> result = baca.Selection(staff).tuplets()[1:2].lleaf(0)
             >>> result
             Chord("<d' e'>16")
 
@@ -903,7 +903,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).tuplets()[1:2].lleaves()
+            >>> result = baca.Selection(staff).tuplets()[1:2].lleaves()
             >>> for item in result:
             ...     item
             ...
@@ -1003,7 +1003,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).lparts([2, 3, 4])
+            >>> result = baca.Selection(staff).lparts([2, 3, 4])
             >>> for item in result:
             ...     item
             ...
@@ -1099,7 +1099,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).lt(-1)
+            >>> result = baca.Selection(staff).lt(-1)
             >>> result
             LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
@@ -1184,7 +1184,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).ltleaf(0)
+            >>> result = baca.Selection(staff).ltleaf(0)
             >>> result
             Note("bf'16")
 
@@ -1267,7 +1267,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).ltleaves()
+            >>> result = baca.Selection(staff).ltleaves()
             >>> for item in result:
             ...     item
             ...
@@ -1384,7 +1384,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).ltqrun(-1)
+            >>> result = baca.Selection(staff).ltqrun(-1)
             >>> result
             Selection([LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
@@ -1469,7 +1469,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).ltqruns()
+            >>> result = baca.Selection(staff).ltqruns()
             >>> for item in result:
             ...     item
             ...
@@ -1582,7 +1582,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).ltrun(-1)
+            >>> result = baca.Selection(staff).ltrun(-1)
             >>> result
             Selection([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
@@ -1670,7 +1670,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).ltruns()
+            >>> result = baca.Selection(staff).ltruns()
             >>> for item in result:
             ...     item
             ...
@@ -1778,7 +1778,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).lts()
+            >>> result = baca.Selection(staff).lts()
             >>> for item in result:
             ...     item
             ...
@@ -1890,7 +1890,7 @@ class Selection(abjad.Selection):
             >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
             >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
 
-            >>> result = baca.select(staff).mgroups([2])
+            >>> result = baca.Selection(staff).mgroups([2])
             >>> for item in result:
             ...     item
             ...
@@ -1953,7 +1953,7 @@ class Selection(abjad.Selection):
             >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
             >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
 
-            >>> result = baca.select(staff).mleaves(3)
+            >>> result = baca.Selection(staff).mleaves(3)
             >>> for item in result:
             ...     item
             ...
@@ -2009,7 +2009,7 @@ class Selection(abjad.Selection):
             >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
             >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
 
-            >>> result = baca.select(staff).mleaves(-3)
+            >>> result = baca.Selection(staff).mleaves(-3)
             >>> for item in result:
             ...     item
             ...
@@ -2079,7 +2079,7 @@ class Selection(abjad.Selection):
             >>> staff = abjad.Staff("R1 R1 R1")
             >>> abjad.setting(staff).autoBeaming = False
 
-            >>> result = baca.select(staff).mmrest(-1)
+            >>> result = baca.Selection(staff).mmrest(-1)
             >>> result
             MultimeasureRest('R1')
 
@@ -2121,7 +2121,7 @@ class Selection(abjad.Selection):
             >>> lilypond_file = abjad.LilyPondFile([staff], includes=["abjad.ily"])
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).mmrests()
+            >>> result = baca.Selection(staff).mmrests()
             >>> for item in result:
             ...     item
             ...
@@ -2180,7 +2180,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).ntrun(-1)
+            >>> result = baca.Selection(staff).ntrun(-1)
             >>> result
             Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
@@ -2268,7 +2268,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).ntruns()
+            >>> result = baca.Selection(staff).ntruns()
             >>> for item in result:
             ...     item
             ...
@@ -2366,7 +2366,7 @@ class Selection(abjad.Selection):
             >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
             >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
 
-            >>> result = baca.select(staff).omgroups([2])
+            >>> result = baca.Selection(staff).omgroups([2])
             >>> for item in result:
             ...     item
             ...
@@ -2466,7 +2466,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).phead(-1)
+            >>> result = baca.Selection(staff).phead(-1)
             >>> result
             Chord("<fs' gs'>4")
 
@@ -2552,7 +2552,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).pheads()
+            >>> result = baca.Selection(staff).pheads()
             >>> for item in result:
             ...     item
             ...
@@ -2665,7 +2665,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).pleaf(-1)
+            >>> result = baca.Selection(staff).pleaf(-1)
             >>> result
             Chord("<fs' gs'>16")
 
@@ -2751,7 +2751,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).pleaves()
+            >>> result = baca.Selection(staff).pleaves()
             >>> for item in result:
             ...     item
             ...
@@ -2867,7 +2867,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).plt(-1)
+            >>> result = baca.Selection(staff).plt(-1)
             >>> result
             LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
@@ -2954,7 +2954,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).plts()
+            >>> result = baca.Selection(staff).plts()
             >>> for item in result:
             ...     item
             ...
@@ -3067,7 +3067,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).ptail(-1)
+            >>> result = baca.Selection(staff).ptail(-1)
             >>> result
             Chord("<fs' gs'>16")
 
@@ -3151,7 +3151,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).ptails()
+            >>> result = baca.Selection(staff).ptails()
             >>> for item in result:
             ...     item
             ...
@@ -3262,7 +3262,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).ptlt(-1)
+            >>> result = baca.Selection(staff).ptlt(-1)
             >>> result
             LogicalTie([Note("e'16")])
 
@@ -3346,7 +3346,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).ptlts()
+            >>> result = baca.Selection(staff).ptlts()
             >>> for item in result:
             ...     item
             ...
@@ -3448,7 +3448,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).qrun(-1)
+            >>> result = baca.Selection(staff).qrun(-1)
             >>> result
             Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
@@ -3533,7 +3533,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).qruns()
+            >>> result = baca.Selection(staff).qruns()
             >>> for item in result:
             ...     item
             ...
@@ -3645,7 +3645,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).tuplets()[1:2].rleaf(-1)
+            >>> result = baca.Selection(staff).tuplets()[1:2].rleaf(-1)
             >>> result
             Rest('r16')
 
@@ -3787,7 +3787,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).tuplets()[1:2].rleaves()
+            >>> result = baca.Selection(staff).tuplets()[1:2].rleaves()
             >>> for item in result:
             ...     item
             ...
@@ -3875,7 +3875,7 @@ class Selection(abjad.Selection):
             >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
             >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
 
-            >>> result = baca.select(staff).rmleaves(2)
+            >>> result = baca.Selection(staff).rmleaves(2)
             >>> for item in result:
             ...     item
             ...
@@ -3947,7 +3947,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).rrun(1)
+            >>> result = baca.Selection(staff).rrun(1)
             >>> result
             Selection([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
 
@@ -4036,7 +4036,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).rruns()
+            >>> result = baca.Selection(staff).rruns()
             >>> for item in result:
             ...     item
             ...
@@ -4133,7 +4133,7 @@ class Selection(abjad.Selection):
             >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
             >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
 
-            >>> result = baca.select(staff).skip(-1)
+            >>> result = baca.Selection(staff).skip(-1)
             >>> result
             Skip('s8')
 
@@ -4184,7 +4184,7 @@ class Selection(abjad.Selection):
             >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
             >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
 
-            >>> result = baca.select(staff).skips()
+            >>> result = baca.Selection(staff).skips()
             >>> for item in result:
             ...     item
             Skip('s8')
@@ -4252,7 +4252,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).tleaf(0)
+            >>> result = baca.Selection(staff).tleaf(0)
             >>> result
             Note("bf'16")
 
@@ -4338,7 +4338,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).tleaves()
+            >>> result = baca.Selection(staff).tleaves()
             >>> for item in result:
             ...     item
             ...
@@ -4456,7 +4456,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).tuplets()[1:2].wleaf(0)
+            >>> result = baca.Selection(staff).tuplets()[1:2].wleaf(0)
             >>> result
             Chord("<d' e'>16")
 
@@ -4531,7 +4531,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).tuplets()[1:2].wleaf(-1)
+            >>> result = baca.Selection(staff).tuplets()[1:2].wleaf(-1)
             >>> result
             Rest('r16')
 
@@ -4615,7 +4615,7 @@ class Selection(abjad.Selection):
             >>> abjad.override(staff).TupletBracket.staff_padding = 3
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> result = baca.select(staff).tuplets()[1:2].wleaves()
+            >>> result = baca.Selection(staff).tuplets()[1:2].wleaves()
             >>> for item in result:
             ...     item
             ...
