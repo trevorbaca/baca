@@ -225,52 +225,28 @@ class ClusterCommand(_scoping.Command):
                         \once \override AccidentalCautionary.stencil = ##f
                         \once \override Arpeggio.X-offset = #-2
                         \once \override NoteHead.stencil = #ly:text-interface::print
-                        \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                        }
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         \time 9/16
                         <c' e' g'>16
-                        ^ \markup {
-                            \center-align
-                                \concat
-                                    {
-                                        \natural
-                                        \flat
-                                    }
-                            }
+                        ^ \markup \center-align \concat { \natural \flat }
                         [
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
                         \once \override Arpeggio.X-offset = #-2
                         \once \override NoteHead.stencil = #ly:text-interface::print
-                        \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                        }
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <d' f' a' c''>16
-                        ^ \markup {
-                            \center-align
-                                \concat
-                                    {
-                                        \natural
-                                        \flat
-                                    }
-                            }
+                        ^ \markup \center-align \concat { \natural \flat }
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
                         \once \override Arpeggio.X-offset = #-2
                         \once \override NoteHead.stencil = #ly:text-interface::print
-                        \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                        }
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <bf' d'' f''>16
-                        ^ \markup {
-                            \center-align
-                                \concat
-                                    {
-                                        \natural
-                                        \flat
-                                    }
-                            }
+                        ^ \markup \center-align \concat { \natural \flat }
                         ]
                     }
                     \scaleDurations #'(1 . 1)
@@ -279,83 +255,43 @@ class ClusterCommand(_scoping.Command):
                         \once \override AccidentalCautionary.stencil = ##f
                         \once \override Arpeggio.X-offset = #-2
                         \once \override NoteHead.stencil = #ly:text-interface::print
-                        \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                        }
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <fs'' a'' c''' e'''>16
-                        ^ \markup {
-                            \center-align
-                                \concat
-                                    {
-                                        \natural
-                                        \flat
-                                    }
-                            }
+                        ^ \markup \center-align \concat { \natural \flat }
                         [
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
                         \once \override Arpeggio.X-offset = #-2
                         \once \override NoteHead.stencil = #ly:text-interface::print
-                        \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                        }
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <e'' g'' b''>16
-                        ^ \markup {
-                            \center-align
-                                \concat
-                                    {
-                                        \natural
-                                        \flat
-                                    }
-                            }
+                        ^ \markup \center-align \concat { \natural \flat }
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
                         \once \override Arpeggio.X-offset = #-2
                         \once \override NoteHead.stencil = #ly:text-interface::print
-                        \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                        }
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <ef'' g'' b'' d'''>16
-                        ^ \markup {
-                            \center-align
-                                \concat
-                                    {
-                                        \natural
-                                        \flat
-                                    }
-                            }
+                        ^ \markup \center-align \concat { \natural \flat }
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
                         \once \override Arpeggio.X-offset = #-2
                         \once \override NoteHead.stencil = #ly:text-interface::print
-                        \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                        }
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <af'' c''' e'''>16
-                        ^ \markup {
-                            \center-align
-                                \concat
-                                    {
-                                        \natural
-                                        \flat
-                                    }
-                            }
+                        ^ \markup \center-align \concat { \natural \flat }
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
                         \once \override Arpeggio.X-offset = #-2
                         \once \override NoteHead.stencil = #ly:text-interface::print
-                        \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                        }
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <g'' b'' d''' f'''>16
-                        ^ \markup {
-                            \center-align
-                                \concat
-                                    {
-                                        \natural
-                                        \flat
-                                    }
-                            }
+                        ^ \markup \center-align \concat { \natural \flat }
                         ]
                     }
                     \scaleDurations #'(1 . 1)
@@ -364,18 +300,10 @@ class ClusterCommand(_scoping.Command):
                         \once \override AccidentalCautionary.stencil = ##f
                         \once \override Arpeggio.X-offset = #-2
                         \once \override NoteHead.stencil = #ly:text-interface::print
-                        \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                        }
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <a' c'' e''>16
-                        ^ \markup {
-                            \center-align
-                                \concat
-                                    {
-                                        \natural
-                                        \flat
-                                    }
-                            }
+                        ^ \markup \center-align \concat { \natural \flat }
                     }
                 }
             >>
@@ -532,50 +460,34 @@ class ClusterCommand(_scoping.Command):
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <e' g' b'>2
-                            ^ \markup {
-                                \center-align
-                                    \natural
-                                }
+                            ^ \markup \center-align \natural
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <e' g' b'>4.
-                            ^ \markup {
-                                \center-align
-                                    \natural
-                                }
+                            ^ \markup \center-align \natural
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <e' g' b'>2
-                            ^ \markup {
-                                \center-align
-                                    \natural
-                                }
+                            ^ \markup \center-align \natural
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <e' g' b'>4.
-                            ^ \markup {
-                                \center-align
-                                    \natural
-                                }
+                            ^ \markup \center-align \natural
                         }
                     >>
                 }
@@ -648,66 +560,34 @@ class ClusterCommand(_scoping.Command):
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <c' e' g'>2
-                            ^ \markup {
-                                \center-align
-                                    \concat
-                                        {
-                                            \natural
-                                            \flat
-                                        }
-                                }
+                            ^ \markup \center-align \concat { \natural \flat }
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <d' f' a'>4.
-                            ^ \markup {
-                                \center-align
-                                    \concat
-                                        {
-                                            \natural
-                                            \flat
-                                        }
-                                }
+                            ^ \markup \center-align \concat { \natural \flat }
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <e' g' b'>2
-                            ^ \markup {
-                                \center-align
-                                    \concat
-                                        {
-                                            \natural
-                                            \flat
-                                        }
-                                }
+                            ^ \markup \center-align \concat { \natural \flat }
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <f' a' c''>4.
-                            ^ \markup {
-                                \center-align
-                                    \concat
-                                        {
-                                            \natural
-                                            \flat
-                                        }
-                                }
+                            ^ \markup \center-align \concat { \natural \flat }
                         }
                     >>
                 }
@@ -764,66 +644,34 @@ class ClusterCommand(_scoping.Command):
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <g' b' d''>2
-                            ^ \markup {
-                                \center-align
-                                    \concat
-                                        {
-                                            \natural
-                                            \flat
-                                        }
-                                }
+                            ^ \markup \center-align \concat { \natural \flat }
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <g' b' d''>4.
-                            ^ \markup {
-                                \center-align
-                                    \concat
-                                        {
-                                            \natural
-                                            \flat
-                                        }
-                                }
+                            ^ \markup \center-align \concat { \natural \flat }
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <g' b' d''>2
-                            ^ \markup {
-                                \center-align
-                                    \concat
-                                        {
-                                            \natural
-                                            \flat
-                                        }
-                                }
+                            ^ \markup \center-align \concat { \natural \flat }
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <g' b' d''>4.
-                            ^ \markup {
-                                \center-align
-                                    \concat
-                                        {
-                                            \natural
-                                            \flat
-                                        }
-                                }
+                            ^ \markup \center-align \concat { \natural \flat }
                         }
                     >>
                 }
@@ -888,66 +736,34 @@ class ClusterCommand(_scoping.Command):
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <e'>2
-                            ^ \markup {
-                                \center-align
-                                    \concat
-                                        {
-                                            \natural
-                                            \flat
-                                        }
-                                }
+                            ^ \markup \center-align \concat { \natural \flat }
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <e' g'>4.
-                            ^ \markup {
-                                \center-align
-                                    \concat
-                                        {
-                                            \natural
-                                            \flat
-                                        }
-                                }
+                            ^ \markup \center-align \concat { \natural \flat }
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <e' g' b'>2
-                            ^ \markup {
-                                \center-align
-                                    \concat
-                                        {
-                                            \natural
-                                            \flat
-                                        }
-                                }
+                            ^ \markup \center-align \concat { \natural \flat }
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <e' g' b' d''>4.
-                            ^ \markup {
-                                \center-align
-                                    \concat
-                                        {
-                                            \natural
-                                            \flat
-                                        }
-                                }
+                            ^ \markup \center-align \concat { \natural \flat }
                         }
                     >>
                 }
@@ -1004,66 +820,34 @@ class ClusterCommand(_scoping.Command):
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <e'>2
-                            ^ \markup {
-                                \center-align
-                                    \concat
-                                        {
-                                            \natural
-                                            \flat
-                                        }
-                                }
+                            ^ \markup \center-align \concat { \natural \flat }
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <e' g' b'>4.
-                            ^ \markup {
-                                \center-align
-                                    \concat
-                                        {
-                                            \natural
-                                            \flat
-                                        }
-                                }
+                            ^ \markup \center-align \concat { \natural \flat }
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <e'>2
-                            ^ \markup {
-                                \center-align
-                                    \concat
-                                        {
-                                            \natural
-                                            \flat
-                                        }
-                                }
+                            ^ \markup \center-align \concat { \natural \flat }
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <e' g' b'>4.
-                            ^ \markup {
-                                \center-align
-                                    \concat
-                                        {
-                                            \natural
-                                            \flat
-                                        }
-                                }
+                            ^ \markup \center-align \concat { \natural \flat }
                         }
                     >>
                 }
