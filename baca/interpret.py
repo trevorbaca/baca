@@ -1260,16 +1260,16 @@ def _collect_metadata(
         persist_["voice_metadata"] = voice_metadata
     metadata.clear()
     metadata.update(metadata_)
-    metadata = abjad.OrderedDict(metadata)
-    metadata.sort(recurse=True)
+    metadata = dict(metadata)
+    _sort_dictionary(metadata)
     metadata = dict(metadata)
     for key, value in metadata.items():
         if not bool(value):
             raise Exception(f"{key} metadata should be nonempty (not {value!r}).")
     persist.clear()
     persist.update(persist_)
-    persist = abjad.OrderedDict(persist)
-    persist.sort(recurse=True)
+    persist = dict(persist)
+    _sort_dictionary(persist)
     persist = dict(persist)
     for key, value in persist.items():
         if not bool(value):
@@ -2639,6 +2639,16 @@ def _shift_measure_initial_clefs(
                 offset_to_measure_number=offset_to_measure_number,
             )
             suite(leaf, runtime=runtime)
+
+
+def _sort_dictionary(dictionary):
+    items = list(dictionary.items())
+    items.sort()
+    dictionary.clear()
+    for key, value in items:
+        if isinstance(value, dict):
+            _sort_dictionary(value)
+        dictionary[key] = value
 
 
 def _sort_by_timeline(leaves):
