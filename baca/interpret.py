@@ -436,10 +436,10 @@ def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
                 if metronome_mark.custom_markup is not None:
                     left_text = str(metronome_mark._get_markup())
                     if left_text.startswith(r"\markup"):
-                        left_text = left_text[8:]
+                        left_text = left_text.removeprefix(r"\markup").strip()
                     modulation = str(metric_modulation._get_markup())
                     if modulation.startswith(r"\markup"):
-                        modulation = modulation[8:]
+                        modulation = modulation.removeprefix(r"\markup").strip()
                     string = rf"\concat {{ {left_text} \hspace #2 \upright ["
                     string += rf" \line {{ {modulation} }} \hspace #0.5"
                     string += r" \upright ] }"
