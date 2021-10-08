@@ -402,80 +402,32 @@ class RhythmCommand(_scoping.Command):
                             \override TextScript.font-size = -2
                             \override TextScript.staff-padding = 5
                             b'8.
-                            _ \markup {
-                                \fraction
-                                    3
-                                    16
-                                }
+                            _ \markup \fraction 3 16
                             b'4
-                            _ \markup {
-                                \fraction
-                                    4
-                                    16
-                                }
+                            _ \markup \fraction 4 16
                             b'16
-                            _ \markup {
-                                \fraction
-                                    3
-                                    16
-                                }
+                            _ \markup \fraction 3 16
                             ~
                             b'8
                             b'4
-                            _ \markup {
-                                \fraction
-                                    4
-                                    16
-                                }
+                            _ \markup \fraction 4 16
                             b'8
-                            _ \markup {
-                                \fraction
-                                    2
-                                    16
-                                }
+                            _ \markup \fraction 2 16
                             r2
-                            _ \markup {
-                                \fraction
-                                    8
-                                    16
-                                }
+                            _ \markup \fraction 8 16
                             b'16
-                            _ \markup {
-                                \fraction
-                                    1
-                                    16
-                                }
+                            _ \markup \fraction 1 16
                             b'4
-                            _ \markup {
-                                \fraction
-                                    4
-                                    16
-                                }
+                            _ \markup \fraction 4 16
                             b'8.
-                            _ \markup {
-                                \fraction
-                                    3
-                                    16
-                                }
+                            _ \markup \fraction 3 16
                             b'4
-                            _ \markup {
-                                \fraction
-                                    4
-                                    16
-                                }
+                            _ \markup \fraction 4 16
                             b'8.
-                            _ \markup {
-                                \fraction
-                                    3
-                                    16
-                                }
+                            _ \markup \fraction 3 16
                             [
                             b'16
-                            _ \markup {
-                                \fraction
-                                    1
-                                    16
-                                }
+                            _ \markup \fraction 1 16
                             ]
                             \revert TextScript.font-size
                             \revert TextScript.staff-padding

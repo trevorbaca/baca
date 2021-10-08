@@ -49,40 +49,40 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                 \context Voice = "Music_Voice"
                 {
                     b'8
-                    ^ \markup { 0 }
+                    ^ \markup 0
                     [
                     b'8
-                    ^ \markup { 1 }
+                    ^ \markup 1
                     b'8
-                    ^ \markup { 2 }
+                    ^ \markup 2
                     b'8
-                    ^ \markup { 3 }
+                    ^ \markup 3
                     ]
                     b'8
-                    ^ \markup { 4 }
+                    ^ \markup 4
                     [
                     b'8
-                    ^ \markup { 5 }
+                    ^ \markup 5
                     b'8
-                    ^ \markup { 6 }
+                    ^ \markup 6
                     ]
                     b'8
-                    ^ \markup { 7 }
+                    ^ \markup 7
                     [
                     b'8
-                    ^ \markup { 8 }
+                    ^ \markup 8
                     b'8
-                    ^ \markup { 9 }
+                    ^ \markup 9
                     b'8
-                    ^ \markup { 10 }
+                    ^ \markup 10
                     ]
                     b'8
-                    ^ \markup { 11 }
+                    ^ \markup 11
                     [
                     b'8
-                    ^ \markup { 12 }
+                    ^ \markup 12
                     b'8
-                    ^ \markup { 13 }
+                    ^ \markup 13
                     ]
                 }
             >>
@@ -141,40 +141,40 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                 \context Voice = "Music_Voice"
                 {
                     b'8
-                    ^ \markup { 0 }
+                    ^ \markup 0
                     [
                     b'8
-                    ^ \markup { 1 }
+                    ^ \markup 1
                     b'8
-                    ^ \markup { 2 }
+                    ^ \markup 2
                     b'8
-                    ^ \markup { 3 }
+                    ^ \markup 3
                     ]
                     b'8
-                    ^ \markup { 4 }
+                    ^ \markup 4
                     [
                     b'8
-                    ^ \markup { 5 }
+                    ^ \markup 5
                     b'8
-                    ^ \markup { 6 }
+                    ^ \markup 6
                     ]
                     b'8
-                    ^ \markup { 7 }
+                    ^ \markup 7
                     [
                     b'8
-                    ^ \markup { 8 }
+                    ^ \markup 8
                     b'8
-                    ^ \markup { 9 }
+                    ^ \markup 9
                     b'8
-                    ^ \markup { 10 }
+                    ^ \markup 10
                     ]
                     b'8
-                    ^ \markup { 11 }
+                    ^ \markup 11
                     [
                     b'8
-                    ^ \markup { 12 }
+                    ^ \markup 12
                     b'8
-                    ^ \markup { 13 }
+                    ^ \markup 13
                     ]
                 }
             >>

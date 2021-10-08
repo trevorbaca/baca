@@ -3130,6 +3130,7 @@ class FigureAccumulator:
                 leaves = abjad.iterate.leaves(floating_selection.annotation)
                 for leaf in leaves:
                     markup = abjad.get.indicators(leaf, abjad.Markup)
+                    # TODO: remove abjad.Markup._annotation
                     for markup_ in markup:
                         if isinstance(
                             markup_._annotation, str
