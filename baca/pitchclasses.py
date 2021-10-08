@@ -1156,7 +1156,7 @@ class CollectionList(collections_module.abc.Sequence):
                         {
                             \time 1/8
                             c''8
-                            ^ \markup { 0 }
+                            ^ \markup 0
                             \startGroup
                             d''8
                             fs''8
@@ -1164,7 +1164,7 @@ class CollectionList(collections_module.abc.Sequence):
                             \stopGroup
                             s8
                             e''8
-                            ^ \markup { 1 }
+                            ^ \markup 1
                             \startGroup
                             af''8
                             g''8
@@ -2714,61 +2714,61 @@ class HarmonicSeries:
             {
                 \clef "bass"
                 c,4
-                _ \markup { 1 }
+                _ \markup 1
                 c4
-                _ \markup { 2 }
+                _ \markup 2
                 g4
-                ^ \markup { +2 }
-                _ \markup { 3 }
+                ^ \markup +2
+                _ \markup 3
                 \clef "treble"
                 c'4
-                _ \markup { 4 }
+                _ \markup 4
                 e'4
-                ^ \markup { -14 }
-                _ \markup { 5 }
+                ^ \markup -14
+                _ \markup 5
                 g'4
-                ^ \markup { +2 }
-                _ \markup { 6 }
+                ^ \markup +2
+                _ \markup 6
                 bf'4
-                ^ \markup { -31 }
-                _ \markup { 7 }
+                ^ \markup -31
+                _ \markup 7
                 c''4
-                _ \markup { 8 }
+                _ \markup 8
                 d''4
-                ^ \markup { +4 }
-                _ \markup { 9 }
+                ^ \markup +4
+                _ \markup 9
                 e''4
-                ^ \markup { -14 }
-                _ \markup { 10 }
+                ^ \markup -14
+                _ \markup 10
                 fqs''4
-                ^ \markup { +1 }
-                _ \markup { 11 }
+                ^ \markup +1
+                _ \markup 11
                 g''4
-                ^ \markup { +2 }
-                _ \markup { 12 }
+                ^ \markup +2
+                _ \markup 12
                 aqf''4
-                ^ \markup { -9 }
-                _ \markup { 13 }
+                ^ \markup -9
+                _ \markup 13
                 bf''4
-                ^ \markup { -31 }
-                _ \markup { 14 }
+                ^ \markup -31
+                _ \markup 14
                 b''4
-                ^ \markup { -12 }
-                _ \markup { 15 }
+                ^ \markup -12
+                _ \markup 15
                 c'''4
-                _ \markup { 16 }
+                _ \markup 16
                 cs'''4
-                ^ \markup { +5 }
-                _ \markup { 17 }
+                ^ \markup +5
+                _ \markup 17
                 d'''4
-                ^ \markup { +4 }
-                _ \markup { 18 }
+                ^ \markup +4
+                _ \markup 18
                 ef'''4
-                ^ \markup { -2 }
-                _ \markup { 19 }
+                ^ \markup -2
+                _ \markup 19
                 e'''4
-                ^ \markup { -14 }
-                _ \markup { 20 }
+                ^ \markup -14
+                _ \markup 20
             }
 
     """
@@ -2812,61 +2812,61 @@ class HarmonicSeries:
                 {
                     \clef "bass"
                     a,,4
-                    _ \markup { 1 }
+                    _ \markup 1
                     a,4
-                    _ \markup { 2 }
+                    _ \markup 2
                     e4
-                    ^ \markup { +2 }
-                    _ \markup { 3 }
+                    ^ \markup +2
+                    _ \markup 3
                     a4
-                    _ \markup { 4 }
+                    _ \markup 4
                     \clef "treble"
                     cs'4
-                    ^ \markup { -14 }
-                    _ \markup { 5 }
+                    ^ \markup -14
+                    _ \markup 5
                     e'4
-                    ^ \markup { +2 }
-                    _ \markup { 6 }
+                    ^ \markup +2
+                    _ \markup 6
                     g'4
-                    ^ \markup { -31 }
-                    _ \markup { 7 }
+                    ^ \markup -31
+                    _ \markup 7
                     a'4
-                    _ \markup { 8 }
+                    _ \markup 8
                     b'4
-                    ^ \markup { +4 }
-                    _ \markup { 9 }
+                    ^ \markup +4
+                    _ \markup 9
                     cs''4
-                    ^ \markup { -14 }
-                    _ \markup { 10 }
+                    ^ \markup -14
+                    _ \markup 10
                     dqs''4
-                    ^ \markup { +1 }
-                    _ \markup { 11 }
+                    ^ \markup +1
+                    _ \markup 11
                     e''4
-                    ^ \markup { +2 }
-                    _ \markup { 12 }
+                    ^ \markup +2
+                    _ \markup 12
                     fqs''4
-                    ^ \markup { -9 }
-                    _ \markup { 13 }
+                    ^ \markup -9
+                    _ \markup 13
                     g''4
-                    ^ \markup { -31 }
-                    _ \markup { 14 }
+                    ^ \markup -31
+                    _ \markup 14
                     af''4
-                    ^ \markup { -12 }
-                    _ \markup { 15 }
+                    ^ \markup -12
+                    _ \markup 15
                     a''4
-                    _ \markup { 16 }
+                    _ \markup 16
                     bf''4
-                    ^ \markup { +5 }
-                    _ \markup { 17 }
+                    ^ \markup +5
+                    _ \markup 17
                     b''4
-                    ^ \markup { +4 }
-                    _ \markup { 18 }
+                    ^ \markup +4
+                    _ \markup 18
                     c'''4
-                    ^ \markup { -2 }
-                    _ \markup { 19 }
+                    ^ \markup -2
+                    _ \markup 19
                     cs'''4
-                    ^ \markup { -14 }
-                    _ \markup { 20 }
+                    ^ \markup -14
+                    _ \markup 20
                 }
 
         """
@@ -2878,12 +2878,20 @@ class HarmonicSeries:
             staff.append(note)
             deviation = partial.deviation
             if 0 < deviation:
-                markup = abjad.Markup(f"+{deviation}", direction=abjad.Up)
+                markup = abjad.Markup(
+                    rf"\markup +{deviation}",
+                    direction=abjad.Up,
+                    literal=True,
+                )
                 abjad.attach(markup, note)
             elif deviation < 0:
-                markup = abjad.Markup(deviation, direction=abjad.Up)
+                markup = abjad.Markup(
+                    rf"\markup {deviation}",
+                    direction=abjad.Up,
+                    literal=True,
+                )
                 abjad.attach(markup, note)
-            markup = abjad.Markup(n, direction=abjad.Down)
+            markup = abjad.Markup(rf"\markup {n}", direction=abjad.Down, literal=True)
             abjad.attach(markup, note)
         notes = abjad.select(staff).notes()
         if notes[0].written_pitch < abjad.NamedPitch("C4"):
@@ -5421,14 +5429,14 @@ class PitchTree(_classes.Tree):
                     {
                         \time 1/8
                         e''8
-                        ^ \markup { 0 }
+                        ^ \markup 0
                         \startGroup
                         fs''8
                         bf'8
                         \stopGroup
                         s8
                         a'8
-                        ^ \markup { 1 }
+                        ^ \markup 1
                         \startGroup
                         g'8
                         af'8
@@ -5438,7 +5446,7 @@ class PitchTree(_classes.Tree):
                         \stopGroup
                         s8
                         c'8
-                        ^ \markup { 2 }
+                        ^ \markup 2
                         \startGroup
                         d'8
                         ef'8
@@ -5500,14 +5508,14 @@ class PitchTree(_classes.Tree):
                     {
                         \time 1/8
                         e''8
-                        ^ \markup { 0 }
+                        ^ \markup 0
                         \startGroup
                         fs''8
                         bf'8
                         \stopGroup
                         s8
                         a'8
-                        ^ \markup { 1 }
+                        ^ \markup 1
                         \startGroup
                         g'8
                         af'8
@@ -5517,7 +5525,7 @@ class PitchTree(_classes.Tree):
                         \stopGroup
                         s8
                         c'8
-                        ^ \markup { 2 }
+                        ^ \markup 2
                         \startGroup
                         d'8
                         ef'8
@@ -5575,14 +5583,14 @@ class PitchTree(_classes.Tree):
                     {
                         \time 1/8
                         e'8
-                        ^ \markup { 0 }
+                        ^ \markup 0
                         \startGroup
                         fs'8
                         bf'8
                         \stopGroup
                         s8
                         a'8
-                        ^ \markup { 1 }
+                        ^ \markup 1
                         \startGroup
                         g'8
                         af'8
@@ -5592,7 +5600,7 @@ class PitchTree(_classes.Tree):
                         \stopGroup
                         s8
                         c'8
-                        ^ \markup { 2 }
+                        ^ \markup 2
                         \startGroup
                         d'8
                         ef'8
@@ -5654,14 +5662,14 @@ class PitchTree(_classes.Tree):
                     {
                         \time 1/8
                         e'8
-                        ^ \markup { 0 }
+                        ^ \markup 0
                         \startGroup
                         fs'8
                         bf'8
                         \stopGroup
                         s8
                         a'8
-                        ^ \markup { 1 }
+                        ^ \markup 1
                         \startGroup
                         g'8
                         af'8
@@ -5671,7 +5679,7 @@ class PitchTree(_classes.Tree):
                         \stopGroup
                         s8
                         c'8
-                        ^ \markup { 2 }
+                        ^ \markup 2
                         \startGroup
                         d'8
                         ef'8
@@ -5981,14 +5989,14 @@ class PitchTree(_classes.Tree):
                         {
                             \time 1/8
                             e'8
-                            ^ \markup { 0 }
+                            ^ \markup 0
                             \startGroup
                             fs'8
                             bf'8
                             \stopGroup
                             s8
                             a'8
-                            ^ \markup { 1 }
+                            ^ \markup 1
                             \startGroup
                             g'8
                             af'8
@@ -5998,7 +6006,7 @@ class PitchTree(_classes.Tree):
                             \stopGroup
                             s8
                             c'8
-                            ^ \markup { 2 }
+                            ^ \markup 2
                             \startGroup
                             d'8
                             ef'8
@@ -6056,30 +6064,18 @@ class PitchTree(_classes.Tree):
                         {
                             \time 1/8
                             e'8
-                            ^ \markup {
-                                \small
-                                    \line
-                                        {
-                                            "SC(3-9){0, 2, 6}"
-                                        }
-                                }
+                            ^ \markup \small \line { "SC(3-9){0, 2, 6}" }
                             - \tweak staff-padding 7
-                            _ \markup { 0 }
+                            _ \markup 0
                             \startGroup
                             fs'8
                             bf'8
                             \stopGroup
                             s8
                             a'8
-                            ^ \markup {
-                                \small
-                                    \line
-                                        {
-                                            "SC(5-6){0, 1, 2, 4, 6}"
-                                        }
-                                }
+                            ^ \markup \small \line { "SC(5-6){0, 1, 2, 4, 6}" }
                             - \tweak staff-padding 7
-                            _ \markup { 1 }
+                            _ \markup 1
                             \startGroup
                             g'8
                             af'8
@@ -6089,15 +6085,9 @@ class PitchTree(_classes.Tree):
                             \stopGroup
                             s8
                             c'8
-                            ^ \markup {
-                                \small
-                                    \line
-                                        {
-                                            "SC(4-19){0, 2, 3, 5}"
-                                        }
-                                }
+                            ^ \markup \small \line { "SC(4-19){0, 2, 3, 5}" }
                             - \tweak staff-padding 7
-                            _ \markup { 2 }
+                            _ \markup 2
                             \startGroup
                             d'8
                             ef'8
@@ -6161,7 +6151,7 @@ class PitchTree(_classes.Tree):
                             \time 1/8
                             f'8
                             - \tweak staff-padding 7
-                            _ \markup { 0 }
+                            _ \markup 0
                             \startGroup
                             \startGroup
                             g'8
@@ -6170,7 +6160,7 @@ class PitchTree(_classes.Tree):
                             s8
                             bf'8
                             - \tweak staff-padding 7
-                            _ \markup { 1 }
+                            _ \markup 1
                             \startGroup
                             af'8
                             a'8
@@ -6182,7 +6172,7 @@ class PitchTree(_classes.Tree):
                             s8
                             cs'8
                             - \tweak staff-padding 7
-                            _ \markup { 2 }
+                            _ \markup 2
                             \startGroup
                             ef'8
                             e'8
@@ -6259,7 +6249,11 @@ class PitchTree(_classes.Tree):
             negative_level = leaf_group[0]
             if negative_level != -2:
                 continue
-            markup = abjad.Markup(cell_index, direction=direction)
+            markup = abjad.Markup(
+                rf"\markup {cell_index}",
+                direction=direction,
+                literal=True,
+            )
             if direction == abjad.Down:
                 abjad.tweak(markup).staff_padding = 7
             first_leaf = leaf_group[1][0]
@@ -6293,8 +6287,8 @@ class PitchTree(_classes.Tree):
             set_class = abjad.SetClass.from_pitch_class_set(
                 pitch_class_set, lex_rank=True, transposition_only=True
             )
-            string = rf'\small \line {{ "{set_class}" }}'
-            label = abjad.Markup(string, direction=abjad.Up)
+            string = rf'\markup \small \line {{ "{set_class}" }}'
+            label = abjad.Markup(string, direction=abjad.Up, literal=True)
             if label is not None:
                 first_leaf = leaves[0]
                 abjad.attach(label, first_leaf)
@@ -6419,14 +6413,14 @@ class PitchTree(_classes.Tree):
                         {
                             \time 1/8
                             e'8
-                            ^ \markup { 0 }
+                            ^ \markup 0
                             \startGroup
                             fs'8
                             bf'8
                             \stopGroup
                             s8
                             a'8
-                            ^ \markup { 1 }
+                            ^ \markup 1
                             \startGroup
                             g'8
                             af'8
@@ -6436,7 +6430,7 @@ class PitchTree(_classes.Tree):
                             \stopGroup
                             s8
                             c'8
-                            ^ \markup { 2 }
+                            ^ \markup 2
                             \startGroup
                             d'8
                             ef'8
@@ -6503,14 +6497,14 @@ class PitchTree(_classes.Tree):
                         {
                             \time 1/8
                             e''8
-                            ^ \markup { 0 }
+                            ^ \markup 0
                             \startGroup
                             fs''8
                             bf'8
                             \stopGroup
                             s8
                             a'8
-                            ^ \markup { 1 }
+                            ^ \markup 1
                             \startGroup
                             g'8
                             af'8
@@ -6520,7 +6514,7 @@ class PitchTree(_classes.Tree):
                             \stopGroup
                             s8
                             c'8
-                            ^ \markup { 2 }
+                            ^ \markup 2
                             \startGroup
                             d'8
                             ef'8
@@ -6574,14 +6568,14 @@ class PitchTree(_classes.Tree):
                         {
                             \time 1/8
                             e''8
-                            ^ \markup { 0 }
+                            ^ \markup 0
                             \startGroup
                             d''8
                             bf''8
                             \stopGroup
                             s8
                             b''8
-                            ^ \markup { 1 }
+                            ^ \markup 1
                             \startGroup
                             cs'''8
                             c'''8
@@ -6591,7 +6585,7 @@ class PitchTree(_classes.Tree):
                             \stopGroup
                             s8
                             af'''8
-                            ^ \markup { 2 }
+                            ^ \markup 2
                             \startGroup
                             fs'''8
                             f'''8
@@ -6645,14 +6639,14 @@ class PitchTree(_classes.Tree):
                         {
                             \time 1/8
                             af,8
-                            ^ \markup { 0 }
+                            ^ \markup 0
                             \startGroup
                             fs,8
                             d8
                             \stopGroup
                             s8
                             ef8
-                            ^ \markup { 1 }
+                            ^ \markup 1
                             \startGroup
                             f8
                             e8
@@ -6662,7 +6656,7 @@ class PitchTree(_classes.Tree):
                             \stopGroup
                             s8
                             c'8
-                            ^ \markup { 2 }
+                            ^ \markup 2
                             \startGroup
                             bf8
                             a8
@@ -6716,14 +6710,14 @@ class PitchTree(_classes.Tree):
                         {
                             \time 1/8
                             bf'8
-                            ^ \markup { 0 }
+                            ^ \markup 0
                             \startGroup
                             af'8
                             e''8
                             \stopGroup
                             s8
                             f''8
-                            ^ \markup { 1 }
+                            ^ \markup 1
                             \startGroup
                             g''8
                             fs''8
@@ -6733,7 +6727,7 @@ class PitchTree(_classes.Tree):
                             \stopGroup
                             s8
                             d'''8
-                            ^ \markup { 2 }
+                            ^ \markup 2
                             \startGroup
                             c'''8
                             b''8
@@ -6806,14 +6800,14 @@ class PitchTree(_classes.Tree):
                         {
                             \time 1/8
                             e''8
-                            ^ \markup { 0 }
+                            ^ \markup 0
                             \startGroup
                             fs''8
                             bf'8
                             \stopGroup
                             s8
                             a'8
-                            ^ \markup { 1 }
+                            ^ \markup 1
                             \startGroup
                             g'8
                             af'8
@@ -6823,7 +6817,7 @@ class PitchTree(_classes.Tree):
                             \stopGroup
                             s8
                             c'8
-                            ^ \markup { 2 }
+                            ^ \markup 2
                             \startGroup
                             d'8
                             ef'8
@@ -6877,7 +6871,7 @@ class PitchTree(_classes.Tree):
                         {
                             \time 1/8
                             c'8
-                            ^ \markup { 0 }
+                            ^ \markup 0
                             \startGroup
                             d'8
                             ef'8
@@ -6885,7 +6879,7 @@ class PitchTree(_classes.Tree):
                             \stopGroup
                             s8
                             a'8
-                            ^ \markup { 1 }
+                            ^ \markup 1
                             \startGroup
                             g'8
                             af'8
@@ -6895,7 +6889,7 @@ class PitchTree(_classes.Tree):
                             \stopGroup
                             s8
                             e''8
-                            ^ \markup { 2 }
+                            ^ \markup 2
                             \startGroup
                             fs''8
                             bf'8
@@ -6966,14 +6960,14 @@ class PitchTree(_classes.Tree):
                         {
                             \time 1/8
                             e''8
-                            ^ \markup { 0 }
+                            ^ \markup 0
                             \startGroup
                             fs''8
                             bf'8
                             \stopGroup
                             s8
                             a'8
-                            ^ \markup { 1 }
+                            ^ \markup 1
                             \startGroup
                             g'8
                             af'8
@@ -6983,7 +6977,7 @@ class PitchTree(_classes.Tree):
                             \stopGroup
                             s8
                             c'8
-                            ^ \markup { 2 }
+                            ^ \markup 2
                             \startGroup
                             d'8
                             ef'8
@@ -7037,7 +7031,7 @@ class PitchTree(_classes.Tree):
                         {
                             \time 1/8
                             c'8
-                            ^ \markup { 0 }
+                            ^ \markup 0
                             \startGroup
                             d'8
                             ef'8
@@ -7045,14 +7039,14 @@ class PitchTree(_classes.Tree):
                             \stopGroup
                             s8
                             e''8
-                            ^ \markup { 1 }
+                            ^ \markup 1
                             \startGroup
                             fs''8
                             bf'8
                             \stopGroup
                             s8
                             a'8
-                            ^ \markup { 2 }
+                            ^ \markup 2
                             \startGroup
                             g'8
                             af'8
@@ -7108,7 +7102,7 @@ class PitchTree(_classes.Tree):
                         {
                             \time 1/8
                             a'8
-                            ^ \markup { 0 }
+                            ^ \markup 0
                             \startGroup
                             g'8
                             af'8
@@ -7118,7 +7112,7 @@ class PitchTree(_classes.Tree):
                             \stopGroup
                             s8
                             c'8
-                            ^ \markup { 1 }
+                            ^ \markup 1
                             \startGroup
                             d'8
                             ef'8
@@ -7126,7 +7120,7 @@ class PitchTree(_classes.Tree):
                             \stopGroup
                             s8
                             e''8
-                            ^ \markup { 2 }
+                            ^ \markup 2
                             \startGroup
                             fs''8
                             bf'8
@@ -7179,14 +7173,14 @@ class PitchTree(_classes.Tree):
                         {
                             \time 1/8
                             e''8
-                            ^ \markup { 0 }
+                            ^ \markup 0
                             \startGroup
                             fs''8
                             bf'8
                             \stopGroup
                             s8
                             a'8
-                            ^ \markup { 1 }
+                            ^ \markup 1
                             \startGroup
                             g'8
                             af'8
@@ -7196,7 +7190,7 @@ class PitchTree(_classes.Tree):
                             \stopGroup
                             s8
                             c'8
-                            ^ \markup { 2 }
+                            ^ \markup 2
                             \startGroup
                             d'8
                             ef'8
@@ -7269,14 +7263,14 @@ class PitchTree(_classes.Tree):
                         {
                             \time 1/8
                             e''8
-                            ^ \markup { 0 }
+                            ^ \markup 0
                             \startGroup
                             fs''8
                             bf'8
                             \stopGroup
                             s8
                             a'8
-                            ^ \markup { 1 }
+                            ^ \markup 1
                             \startGroup
                             g'8
                             af'8
@@ -7286,7 +7280,7 @@ class PitchTree(_classes.Tree):
                             \stopGroup
                             s8
                             c'8
-                            ^ \markup { 2 }
+                            ^ \markup 2
                             \startGroup
                             d'8
                             ef'8
@@ -7340,14 +7334,14 @@ class PitchTree(_classes.Tree):
                         {
                             \time 1/8
                             f'''8
-                            ^ \markup { 0 }
+                            ^ \markup 0
                             \startGroup
                             g'''8
                             b''8
                             \stopGroup
                             s8
                             bf''8
-                            ^ \markup { 1 }
+                            ^ \markup 1
                             \startGroup
                             af''8
                             a''8
@@ -7357,7 +7351,7 @@ class PitchTree(_classes.Tree):
                             \stopGroup
                             s8
                             cs''8
-                            ^ \markup { 2 }
+                            ^ \markup 2
                             \startGroup
                             ef''8
                             e''8
@@ -7411,14 +7405,14 @@ class PitchTree(_classes.Tree):
                         {
                             \time 1/8
                             ef'8
-                            ^ \markup { 0 }
+                            ^ \markup 0
                             \startGroup
                             f'8
                             a8
                             \stopGroup
                             s8
                             af8
-                            ^ \markup { 1 }
+                            ^ \markup 1
                             \startGroup
                             fs8
                             g8
@@ -7428,7 +7422,7 @@ class PitchTree(_classes.Tree):
                             \stopGroup
                             s8
                             b,8
-                            ^ \markup { 2 }
+                            ^ \markup 2
                             \startGroup
                             cs8
                             d8
@@ -7482,14 +7476,14 @@ class PitchTree(_classes.Tree):
                         {
                             \time 1/8
                             e''8
-                            ^ \markup { 0 }
+                            ^ \markup 0
                             \startGroup
                             fs''8
                             bf'8
                             \stopGroup
                             s8
                             a'8
-                            ^ \markup { 1 }
+                            ^ \markup 1
                             \startGroup
                             g'8
                             af'8
@@ -7499,7 +7493,7 @@ class PitchTree(_classes.Tree):
                             \stopGroup
                             s8
                             c'8
-                            ^ \markup { 2 }
+                            ^ \markup 2
                             \startGroup
                             d'8
                             ef'8
