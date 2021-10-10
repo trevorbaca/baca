@@ -4589,14 +4589,10 @@ r"""
                         \pageBreak
                         s1 * 3/8
                         %@% - \abjad-dashed-line-with-arrow
-                        %@% - \tweak bound-details.left.text \markup \concat { \large
-                        %@%     \upright
-                        %@%         accel. \hspace #0.5 }
+                        %@% - \tweak bound-details.left.text \markup \concat { \large \upright accel. \hspace #0.5 }
                         %@% \bacaStartTextSpanMM
                         - \abjad-dashed-line-with-arrow
-                        - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'blue) \large
-                            \upright
-                                accel. \hspace #0.5 }
+                        - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'blue) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
                         \baca-new-spacing-section #1 #25
                         \noBreak
@@ -4706,14 +4702,10 @@ r"""
                         \pageBreak
                         s1 * 3/8
                         %@% - \abjad-dashed-line-with-arrow
-                        %@% - \tweak bound-details.left.text \markup \concat { \large
-                        %@%     \upright
-                        %@%         accel. \hspace #0.5 }
+                        %@% - \tweak bound-details.left.text \markup \concat { \large \upright accel. \hspace #0.5 }
                         %@% \bacaStartTextSpanMM
                         - \abjad-dashed-line-with-arrow
-                        - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'blue) \large
-                            \upright
-                                accel. \hspace #0.5 }
+                        - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'blue) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
                         \baca-new-spacing-section #1 #4
                         \noBreak
@@ -4799,14 +4791,10 @@ r"""
                         \pageBreak
                         s1 * 3/8
                         %@% - \abjad-dashed-line-with-arrow
-                        %@% - \tweak bound-details.left.text \markup \concat { \large
-                        %@%     \upright
-                        %@%         accel. \hspace #0.5 }
+                        %@% - \tweak bound-details.left.text \markup \concat { \large \upright accel. \hspace #0.5 }
                         %@% \bacaStartTextSpanMM
                         - \abjad-dashed-line-with-arrow
-                        - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'green4) \large
-                            \upright
-                                accel. \hspace #0.5 }
+                        - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'green4) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
                         \baca-new-spacing-section #1 #4
                         \noBreak
@@ -4885,28 +4873,20 @@ r"""
                         \pageBreak
                         s1 * 3/8
                         %@% - \abjad-dashed-line-with-arrow
-                        %@% - \tweak bound-details.left.text \markup \concat { \large
-                        %@%     \upright
-                        %@%         accel. \hspace #0.5 }
+                        %@% - \tweak bound-details.left.text \markup \concat { \large \upright accel. \hspace #0.5 }
                         %@% \bacaStartTextSpanMM
                         - \abjad-dashed-line-with-arrow
-                        - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'blue) \large
-                            \upright
-                                accel. \hspace #0.5 }
+                        - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'blue) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8
                         \bacaStopTextSpanMM
                         %@% - \abjad-dashed-line-with-arrow
-                        %@% - \tweak bound-details.left.text \markup \concat { \large
-                        %@%     \upright
-                        %@%         accel. \hspace #0.5 }
+                        %@% - \tweak bound-details.left.text \markup \concat { \large \upright accel. \hspace #0.5 }
                         %@% \bacaStartTextSpanMM
                         - \abjad-dashed-line-with-arrow
-                        - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'DeepPink1) \large
-                            \upright
-                                accel. \hspace #0.5 }
+                        - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'DeepPink1) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
                         \baca-new-spacing-section #1 #4
                         \noBreak
@@ -4991,14 +4971,10 @@ r"""
                         \pageBreak
                         s1 * 3/8
                         %@% - \abjad-dashed-line-with-arrow
-                        %@% - \tweak bound-details.left.text \markup \concat { \large
-                        %@%     \upright
-                        %@%         accel. \hspace #0.5 }
+                        %@% - \tweak bound-details.left.text \markup \concat { \large \upright accel. \hspace #0.5 }
                         %@% \bacaStartTextSpanMM
                         - \abjad-dashed-line-with-arrow
-                        - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'DeepPink1) \large
-                            \upright
-                                accel. \hspace #0.5 }
+                        - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'DeepPink1) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
                         \baca-new-spacing-section #1 #4
                         \noBreak
