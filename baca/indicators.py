@@ -29,11 +29,7 @@ class Accelerando:
                 \context Staff = "Staff"
                 {
                     c'4
-                    ^ \markup {
-                        \large
-                            \upright
-                                accel.
-                        }
+                    ^ \markup \large \upright accel.
                     d'4
                     e'4
                     f'4
@@ -103,28 +99,16 @@ class Accelerando:
             String representation of accelerando with default markup:
 
             >>> print(str(baca.Accelerando()))
-            \markup {
-                \large
-                    \upright
-                        accel.
-                }
+            \markup \large \upright accel.
 
         ..  container:: example
 
             String representation of accelerando with custom markup:
 
-            >>> markup = abjad.Markup(r"\bold { \italic { accelerando } }")
+            >>> markup = abjad.Markup(r"\markup \bold \italic accelerando", literal=True)
             >>> accelerando = baca.Accelerando(markup=markup)
             >>> print(str(accelerando))
-            \markup {
-                \bold
-                    {
-                        \italic
-                            {
-                                accelerando
-                            }
-                    }
-                }
+            \markup \bold \italic accelerando
 
         """
         return str(self._get_markup())
@@ -139,7 +123,7 @@ class Accelerando:
 
     def _default_markup(self):
         contents = r"\large \upright accel."
-        return abjad.Markup(contents=contents)
+        return abjad.Markup(rf"\markup {contents}", literal=True)
 
     def _get_lilypond_format(self):
         return str(self)
@@ -191,18 +175,10 @@ class Accelerando:
 
         ..  container:: example
 
-            >>> markup = abjad.Markup(r"\bold { \italic { accel. } }")
+            >>> markup = abjad.Markup(r"\markup \bold \italic accel.", literal=True)
             >>> accelerando = baca.Accelerando(markup=markup)
             >>> print(str(accelerando.markup))
-            \markup {
-                \bold
-                    {
-                        \italic
-                            {
-                                accel.
-                            }
-                    }
-                }
+            \markup \bold \italic accel.
 
         """
         return self._markup
@@ -254,11 +230,7 @@ class Accelerando:
                 c'4
                 - \tweak color #blue
                 - \tweak extra-offset #'(0 . 2)
-                ^ \markup {
-                    \large
-                        \upright
-                            accel.
-                    }
+                ^ \markup \large \upright accel.
 
         ..  container:: example
 
@@ -526,11 +498,7 @@ class Ritardando:
                 \context Staff = "Staff"
                 {
                     c'4
-                    ^ \markup {
-                        \large
-                            \upright
-                                rit.
-                        }
+                    ^ \markup \large \upright rit.
                     d'4
                     e'4
                     f'4
@@ -541,7 +509,7 @@ class Ritardando:
 
         Custom ritardando:
 
-        >>> markup = abjad.Markup(r"\bold { \italic { ritardando } }")
+        >>> markup = abjad.Markup(r"\markup \bold \italic ritardando", literal=True)
         >>> ritardando = baca.Ritardando(markup=markup)
         >>> staff = abjad.Staff("c'4 d' e' f'", name="Staff")
         >>> score = abjad.Score([staff], name="Score")
@@ -557,15 +525,7 @@ class Ritardando:
                 \context Staff = "Staff"
                 {
                     c'4
-                    ^ \markup {
-                        \bold
-                            {
-                                \italic
-                                    {
-                                        ritardando
-                                    }
-                            }
-                        }
+                    ^ \markup \bold \italic ritardando
                     d'4
                     e'4
                     f'4
@@ -635,28 +595,16 @@ class Ritardando:
             Default ritardando:
 
             >>> print(str(baca.Ritardando()))
-            \markup {
-                \large
-                    \upright
-                        rit.
-                }
+            \markup \large \upright rit.
 
         ..  container:: example
 
             Custom ritardando:
 
-            >>> markup = abjad.Markup(r"\bold { \italic { ritardando } }")
+            >>> markup = abjad.Markup(r"\markup \bold \italic ritardando", literal=True)
             >>> ritardando = baca.Ritardando(markup=markup)
             >>> print(str(ritardando))
-            \markup {
-                \bold
-                    {
-                        \italic
-                            {
-                                ritardando
-                            }
-                    }
-                }
+            \markup \bold \italic ritardando
 
         """
         return str(self._get_markup())
@@ -671,7 +619,7 @@ class Ritardando:
 
     def _default_markup(self):
         contents = r"\large \upright rit."
-        return abjad.Markup(contents=contents)
+        return abjad.Markup(rf"\markup {contents}", literal=True)
 
     def _get_lilypond_format(self):
         return str(self)
@@ -712,7 +660,7 @@ class Ritardando:
 
             Custom ritardando:
 
-            >>> markup = abjad.Markup(r"\bold { \italic { ritardando } }")
+            >>> markup = abjad.Markup(r"\markup \bold \italic ritardando", literal=True)
             >>> ritardando = baca.Ritardando(markup=markup)
             >>> ritardando.context
             'Score'
@@ -745,22 +693,14 @@ class Ritardando:
 
             Custom ritardando:
 
-            >>> markup = abjad.Markup(r"\bold { \italic { ritardando } }")
+            >>> markup = abjad.Markup(r"\markup \bold \italic ritardando", literal=True)
             >>> ritardando = baca.Ritardando(markup=markup)
             >>> abjad.show(ritardando.markup) # doctest: +SKIP
 
             ..  docs::
 
                 >>> print(ritardando.markup)
-                \markup {
-                    \bold
-                        {
-                            \italic
-                                {
-                                    ritardando
-                                }
-                        }
-                    }
+                \markup \bold \italic ritardando
 
         """
         return self._markup
@@ -812,11 +752,7 @@ class Ritardando:
                 c'4
                 - \tweak color #blue
                 - \tweak extra-offset #'(0 . 2)
-                ^ \markup {
-                    \large
-                        \upright
-                            rit.
-                    }
+                ^ \markup \large \upright rit.
 
         ..  container:: example
 

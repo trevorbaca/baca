@@ -1594,7 +1594,8 @@ def margin_markup(
     ..  container:: example
 
         >>> margin_markups = {}
-        >>> margin_markups["Fl."] = abjad.MarginMarkup(markup=abjad.Markup("Fl."))
+        >>> markup = abjad.Markup(r"\markup Fl.", literal=True)
+        >>> margin_markups["Fl."] = abjad.MarginMarkup(markup=markup)
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     margin_markups=margin_markups,
@@ -1604,7 +1605,7 @@ def margin_markup(
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(repeat_ties=True),
-        ...     baca.margin_markup("Fl."),
+        ...     baca.margin_markup(r"\markup Fl."),
         ...     baca.pitches("E4 F4"),
         ... )
 
@@ -1646,7 +1647,7 @@ def margin_markup(
                     \context Voice = "Music_Voice"
                     {
                         \set Staff.shortInstrumentName =
-                        \markup { Fl. }
+                        \markup Fl.
                         e'2
                         f'4.
                         e'2
@@ -1656,7 +1657,10 @@ def margin_markup(
             }
 
     """
-    if isinstance(argument, (str, abjad.Markup)):
+    if isinstance(argument, str):
+        markup = abjad.Markup(argument, literal=True)
+        margin_markup = abjad.MarginMarkup(context=context, markup=markup)
+    elif isinstance(argument, abjad.Markup):
         markup = abjad.Markup(argument)
         margin_markup = abjad.MarginMarkup(context=context, markup=markup)
     elif isinstance(argument, abjad.MarginMarkup):
