@@ -4246,9 +4246,10 @@ def text_script_color(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.markup("più mosso"),
+        ...     baca.markup(r'\markup "più mosso"', literal=True),
         ...     baca.markup(
-        ...         "lo stesso tempo",
+        ...         r'\markup "lo stesso tempo"',
+        ...         literal=True,
         ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
         ...     ),
         ...     baca.text_script_color("#red"),
@@ -4276,7 +4277,7 @@ def text_script_color(
                         \time 11/8
                         r8
                         c'16
-                        ^ \markup { più mosso }
+                        ^ \markup "più mosso"
                         [
                         d'16
                         ]
@@ -4289,7 +4290,7 @@ def text_script_color(
                     \times 9/10
                     {
                         fs''16
-                        ^ \markup { lo stesso tempo }
+                        ^ \markup "lo stesso tempo"
                         [
                         e''16
                         ]
@@ -4378,9 +4379,10 @@ def text_script_down(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.markup("più mosso"),
+        ...     baca.markup(r'\markup "più mosso"', literal=True),
         ...     baca.markup(
-        ...         "lo stesso tempo",
+        ...         r'\markup "lo stesso tempo"',
+        ...         literal=True,
         ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
         ...     ),
         ...     baca.text_script_down(),
@@ -4408,7 +4410,7 @@ def text_script_down(
                         \time 11/8
                         r8
                         c'16
-                        ^ \markup { più mosso }
+                        ^ \markup "più mosso"
                         [
                         d'16
                         ]
@@ -4421,7 +4423,7 @@ def text_script_down(
                     \times 9/10
                     {
                         fs''16
-                        ^ \markup { lo stesso tempo }
+                        ^ \markup "lo stesso tempo"
                         [
                         e''16
                         ]
@@ -4588,9 +4590,10 @@ def text_script_padding(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.markup("più mosso"),
+        ...     baca.markup(r'\markup "più mosso"', literal=True),
         ...     baca.markup(
-        ...         "lo stesso tempo",
+        ...         r'\markup "lo stesso tempo"',
+        ...         literal=True,
         ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
         ...     ),
         ...     baca.text_script_padding(4),
@@ -4618,7 +4621,7 @@ def text_script_padding(
                         \time 11/8
                         r8
                         c'16
-                        ^ \markup { più mosso }
+                        ^ \markup "più mosso"
                         [
                         d'16
                         ]
@@ -4631,7 +4634,7 @@ def text_script_padding(
                     \times 9/10
                     {
                         fs''16
-                        ^ \markup { lo stesso tempo }
+                        ^ \markup "lo stesso tempo"
                         [
                         e''16
                         ]
@@ -4767,9 +4770,10 @@ def text_script_staff_padding(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.markup("più mosso"),
+        ...     baca.markup(r'\markup "più mosso"', literal=True),
         ...     baca.markup(
-        ...         "lo stesso tempo",
+        ...         r'\markup "lo stesso tempo"',
+        ...         literal=True,
         ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
         ...     ),
         ...     baca.text_script_staff_padding(n=4),
@@ -4797,7 +4801,7 @@ def text_script_staff_padding(
                         \time 11/8
                         r8
                         c'16
-                        ^ \markup { più mosso }
+                        ^ \markup "più mosso"
                         [
                         d'16
                         ]
@@ -4810,7 +4814,7 @@ def text_script_staff_padding(
                     \times 9/10
                     {
                         fs''16
-                        ^ \markup { lo stesso tempo }
+                        ^ \markup "lo stesso tempo"
                         [
                         e''16
                         ]
@@ -4899,9 +4903,10 @@ def text_script_up(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.markup("più mosso"),
+        ...     baca.markup(r'\markup "più mosso"', literal=True),
         ...     baca.markup(
-        ...         "lo stesso tempo",
+        ...         r'\markup "lo stesso tempo"',
+        ...         literal=True,
         ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
         ...     ),
         ...     baca.text_script_up(),
@@ -4929,7 +4934,7 @@ def text_script_up(
                         \time 11/8
                         r8
                         c'16
-                        ^ \markup { più mosso }
+                        ^ \markup "più mosso"
                         [
                         d'16
                         ]
@@ -4942,7 +4947,7 @@ def text_script_up(
                     \times 9/10
                     {
                         fs''16
-                        ^ \markup { lo stesso tempo }
+                        ^ \markup "lo stesso tempo"
                         [
                         e''16
                         ]

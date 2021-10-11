@@ -854,11 +854,15 @@ def edition(
     """
     Makes not-parts / only-parts markup suite.
     """
-    if isinstance(not_parts, (str, abjad.Markup)):
+    if isinstance(not_parts, str):
+        not_parts = markup(rf"\markup {{ {not_parts} }}", literal=True)
+    elif isinstance(not_parts, abjad.Markup):
         not_parts = markup(not_parts)
     assert isinstance(not_parts, _commandclasses.IndicatorCommand)
     not_parts_ = _scoping.not_parts(not_parts)
-    if isinstance(only_parts, (str, abjad.Markup)):
+    if isinstance(only_parts, str):
+        only_parts = markup(rf"\markup {{ {only_parts} }}", literal=True)
+    elif isinstance(only_parts, abjad.Markup):
         only_parts = markup(only_parts)
     assert isinstance(only_parts, _commandclasses.IndicatorCommand)
     only_parts_ = _scoping.only_parts(only_parts)
@@ -1709,7 +1713,7 @@ def markup(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.markup("più mosso"),
+        ...     baca.markup(r'\markup "più mosso"', literal=True),
         ...     baca.tuplet_bracket_outside_staff_priority(1000),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -1735,7 +1739,7 @@ def markup(
                         \time 11/8
                         r8
                         c'16
-                        ^ \markup { più mosso }
+                        ^ \markup "più mosso"
                         [
                         d'16
                         ]
@@ -1866,6 +1870,7 @@ def markup(
         message = f"direction must be up or down (not {direction!r})."
         raise Exception(message)
     if isinstance(argument, str):
+        assert literal is True, repr(literal)
         if literal:
             markup = abjad.Markup(argument, direction=direction, literal=True)
         else:
