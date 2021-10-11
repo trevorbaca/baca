@@ -263,7 +263,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                         \baca-octave-coloring
                         f'4
                         - \tweak color #red
-                        ^ \markup { OCTAVE }
+                        ^ \markup OCTAVE
                         g'4
                         a'4
                         b'4
@@ -279,7 +279,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                         \baca-octave-coloring
                         f4
                         - \tweak color #red
-                        ^ \markup { OCTAVE }
+                        ^ \markup OCTAVE
                         e4
                         d4
                         c4

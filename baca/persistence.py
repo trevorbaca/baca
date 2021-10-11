@@ -2064,10 +2064,10 @@ r"""
 
         >>> margin_markups = {}
         >>> margin_markups["I+II"] = abjad.MarginMarkup(
-        ...     markup=abjad.Markup("I+II"),
+        ...     markup=abjad.Markup(r"\markup I+II", literal=True),
         ... )
         >>> margin_markups["III+IV"] = abjad.MarginMarkup(
-        ...     markup=abjad.Markup("III+IV"),
+        ...     markup=abjad.Markup(r"\markup III+IV", literal=True),
         ... )
         >>> breaks = baca.breaks(
         ...     baca.page(
@@ -2147,13 +2147,13 @@ r"""
                     \context Voice = "Music_Voice"
                     {
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)
                         b'4.
                         ^ \baca-default-indicator-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'violet)
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         b'4.
                     }
                 >>
@@ -2196,13 +2196,13 @@ r"""
                     \context Voice = "Music_Voice"
                     {
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)
                         b'4.
                         ^ \baca-default-indicator-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'violet)
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         b'4.
                     }
                 >>
@@ -2241,13 +2241,13 @@ r"""
                     \context Voice = "Music_Voice"
                     {
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)
                         b'4.
                         ^ \baca-default-indicator-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'violet)
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         b'4.
                     }
                 >>
@@ -2319,13 +2319,13 @@ r"""
                     \context Voice = "Music_Voice"
                     {
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'4.
                         ^ \baca-explicit-indicator-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         b'4.
                     }
                 >>
@@ -2368,13 +2368,13 @@ r"""
                     \context Voice = "Music_Voice"
                     {
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'4.
                         ^ \baca-explicit-indicator-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         b'4.
                     }
                 >>
@@ -2413,13 +2413,13 @@ r"""
                     \context Voice = "Music_Voice"
                     {
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'4.
                         ^ \baca-explicit-indicator-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         b'4.
                     }
                 >>
@@ -2499,15 +2499,15 @@ r"""
                     \context Voice = "Music_Voice"
                     {
                         \set Staff.shortInstrumentName =
-                        \markup { III+IV }
+                        \markup III+IV
                         \set Staff.instrumentName =
-                        \markup { III+IV }
+                        \markup III+IV
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'4.
                         ^ \baca-explicit-indicator-markup "[“III+IV”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName =
-                        \markup { III+IV }
+                        \markup III+IV
                         b'4.
                     }
                 >>
@@ -2550,15 +2550,15 @@ r"""
                     \context Voice = "Music_Voice"
                     {
                         \set Staff.shortInstrumentName =
-                        \markup { III+IV }
+                        \markup III+IV
                         \set Staff.instrumentName =
-                        \markup { III+IV }
+                        \markup III+IV
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'4.
                         ^ \baca-explicit-indicator-markup "[“III+IV”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName =
-                        \markup { III+IV }
+                        \markup III+IV
                         b'4.
                     }
                 >>
@@ -2597,15 +2597,15 @@ r"""
                     \context Voice = "Music_Voice"
                     {
                         \set Staff.shortInstrumentName =
-                        \markup { III+IV }
+                        \markup III+IV
                         \set Staff.instrumentName =
-                        \markup { III+IV }
+                        \markup III+IV
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'4.
                         ^ \baca-explicit-indicator-markup "[“III+IV”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName =
-                        \markup { III+IV }
+                        \markup III+IV
                         b'4.
                     }
                 >>
@@ -2686,15 +2686,15 @@ r"""
                     \context Voice = "Music_Voice"
                     {
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \set Staff.instrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'green4)
                         b'4.
                         ^ \baca-reapplied-indicator-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         b'4.
                     }
                 >>
@@ -2737,15 +2737,15 @@ r"""
                     \context Voice = "Music_Voice"
                     {
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \set Staff.instrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'green4)
                         b'4.
                         ^ \baca-reapplied-indicator-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         b'4.
                     }
                 >>
@@ -2784,15 +2784,15 @@ r"""
                     \context Voice = "Music_Voice"
                     {
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \set Staff.instrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'green4)
                         b'4.
                         ^ \baca-reapplied-indicator-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         b'4.
                     }
                 >>
@@ -2878,21 +2878,21 @@ r"""
                     \context Voice = "Music_Voice"
                     {
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'2
                         ^ \baca-explicit-indicator-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                         b'2
                         ^ \baca-redundant-indicator-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         b'2
                     }
                 >>
@@ -2938,21 +2938,21 @@ r"""
                     \context Voice = "Music_Voice"
                     {
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'2
                         ^ \baca-explicit-indicator-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                         b'2
                         ^ \baca-redundant-indicator-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         b'2
                     }
                 >>
@@ -2994,21 +2994,21 @@ r"""
                     \context Voice = "Music_Voice"
                     {
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'2
                         ^ \baca-explicit-indicator-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                         b'2
                         ^ \baca-redundant-indicator-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         b'2
                     }
                 >>
@@ -3095,15 +3095,15 @@ r"""
                     \context Voice = "Music_Voice"
                     {
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \set Staff.instrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                         b'4.
                         ^ \baca-redundant-indicator-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         b'4.
                     }
                 >>
@@ -3146,15 +3146,15 @@ r"""
                     \context Voice = "Music_Voice"
                     {
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \set Staff.instrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                         b'4.
                         ^ \baca-redundant-indicator-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         b'4.
                     }
                 >>
@@ -3193,15 +3193,15 @@ r"""
                     \context Voice = "Music_Voice"
                     {
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \set Staff.instrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                         b'4.
                         ^ \baca-redundant-indicator-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         b'4.
                     }
                 >>
@@ -3296,9 +3296,9 @@ r"""
                     \context Voice = "Music_Voice"
                     {
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         %@% \set Staff.shortInstrumentName =
-                        %@% \markup { III+IV }
+                        %@% \markup III+IV
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         %@% \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'2
@@ -3306,10 +3306,10 @@ r"""
                         %@% ^ \baca-explicit-indicator-markup "[“III+IV”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName =
-                        \markup { I+II }
+                        \markup I+II
                         %@% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName =
-                        \markup { III+IV }
+                        \markup III+IV
                         b'2
                         b'2
                     }

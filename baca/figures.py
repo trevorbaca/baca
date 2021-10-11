@@ -3221,16 +3221,14 @@ class FigureAccumulator:
         parts = figure_name.split("_")
         if len(parts) == 1:
             body = parts[0]
-            figure_name = abjad.Markup(body)
+            figure_name_string = body
         elif len(parts) == 2:
             body, subscript = parts
-            string = rf"\markup \concat {{ {body} \sub {subscript} }}"
-            figure_name = abjad.Markup(string, literal=True)
+            figure_name_string = rf"\concat {{ {body} \sub {subscript} }}"
         else:
             raise Exception(f"unrecognized figure name: {figure_name!r}.")
         figure_index = f"({figure_index})"
-        figure_name = figure_name.contents[0]
-        string = rf"\markup \fontsize #2 \concat {{ [ {figure_name} \hspace #1"
+        string = rf"\markup \fontsize #2 \concat {{ [ {figure_name_string} \hspace #1"
         string += rf" \raise #0.25 \fontsize #-2 {figure_index} ] }}"
         figure_name_markup = abjad.Markup(string, direction=abjad.Up, literal=True)
         annotation = f"figure name: {original_figure_name}"

@@ -1422,7 +1422,7 @@ def _color_not_yet_registered(score):
 
 def _color_octaves(score):
     vertical_moments = abjad.iterate_vertical_moments(score)
-    markup = abjad.Markup("OCTAVE", direction=abjad.Up)
+    markup = abjad.Markup(r"\markup OCTAVE", direction=abjad.Up, literal=True)
     abjad.tweak(markup).color = "#red"
     tag = _scoping.site(_frame())
     tag = tag.append(_tags.OCTAVE_COLORING)
