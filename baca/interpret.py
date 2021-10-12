@@ -612,9 +612,8 @@ def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
             left_text_with_color = f"{string} #'{color}"
         else:
             color = f"(x11-color '{color})"
-            assert len(left_text.contents) == 1, repr(left_text)
             left_text_with_color = abjad.Markup(
-                rf"\with-color #{color} {left_text.contents[0]}"
+                rf"\with-color #{color} {left_text.contents}"
             )
         if right_text:
             wrapper = abjad.get.wrapper(skips[-1], abjad.MetronomeMark)
@@ -635,7 +634,7 @@ def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
             color = f"(x11-color '{color})"
             assert len(right_text.contents) == 1, repr(right_text)
             right_text_with_color = abjad.Markup(
-                rf"\with-color #{color} {right_text.contents[0]}"
+                rf"\with-color #{color} {right_text.contents}"
             )
         else:
             right_text_with_color = None
