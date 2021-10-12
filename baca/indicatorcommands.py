@@ -1594,7 +1594,7 @@ def margin_markup(
     ..  container:: example
 
         >>> margin_markups = {}
-        >>> markup = abjad.Markup(r"\markup Fl.", literal=True)
+        >>> markup = abjad.Markup(r"\markup Fl.")
         >>> margin_markups["Fl."] = abjad.MarginMarkup(markup=markup)
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
@@ -1658,7 +1658,7 @@ def margin_markup(
 
     """
     if isinstance(argument, str):
-        markup = abjad.Markup(argument, literal=True)
+        markup = abjad.Markup(argument)
         margin_markup = abjad.MarginMarkup(context=context, markup=markup)
     elif isinstance(argument, abjad.Markup):
         markup = abjad.Markup(argument)
@@ -1808,7 +1808,7 @@ def rehearsal_mark(
     assert isinstance(argument, str), repr(argument)
     assert isinstance(font_size, (int, float)), repr(font_size)
     string = rf'\baca-rehearsal-mark-markup "{argument}" #{font_size}'
-    markup = abjad.Markup(string, direction=abjad.Center, literal=True)
+    markup = abjad.Markup(string, direction=abjad.Center)
     return _commandclasses.IndicatorCommand(
         indicators=[markup],
         selector=selector,

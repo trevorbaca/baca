@@ -1477,7 +1477,6 @@ def mmrest_text_color(
         ...     "Music_Voice",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
-        ...         literal=True,
         ...         selector=baca.selectors.mmrest(1),
         ...     ),
         ...     baca.mmrest_text_color("#red"),
@@ -1548,7 +1547,6 @@ def mmrest_text_color(
         ...     baca.make_notes(),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
-        ...         literal=True,
         ...         selector=baca.selectors.leaf(1),
         ...     ),
         ...     baca.mmrest_text_color("#red", selector=baca.selectors.leaves()),
@@ -1595,7 +1593,6 @@ def mmrest_text_extra_offset(
         ...     "Music_Voice",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
-        ...         literal=True,
         ...         selector=baca.selectors.mmrest(1),
         ...     ),
         ...     baca.mmrest_text_extra_offset((0, 2)),
@@ -1680,7 +1677,6 @@ def mmrest_text_padding(
         ...     "Music_Voice",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
-        ...         literal=True,
         ...         selector=baca.selectors.mmrest(1),
         ...     ),
         ...     baca.mmrest_text_padding(2),
@@ -1764,7 +1760,6 @@ def mmrest_text_parent_center(
         ...     "Music_Voice",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
-        ...         literal=True,
         ...         selector=baca.selectors.mmrest(1),
         ...     ),
         ...     baca.mmrest_text_parent_center(),
@@ -1849,7 +1844,6 @@ def mmrest_text_staff_padding(
         ...     "Music_Voice",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
-        ...         literal=True,
         ...         selector=baca.selectors.mmrest(1),
         ...     ),
         ...     baca.mmrest_text_staff_padding(2),
@@ -4246,10 +4240,9 @@ def text_script_color(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.markup(r'\markup "più mosso"', literal=True),
+        ...     baca.markup(r'\markup "più mosso"'),
         ...     baca.markup(
         ...         r'\markup "lo stesso tempo"',
-        ...         literal=True,
         ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
         ...     ),
         ...     baca.text_script_color("#red"),
@@ -4326,7 +4319,6 @@ def text_script_color(
         ...     "Music_Voice",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
-        ...         literal=True,
         ...         selector=baca.selectors.leaf(1),
         ...     ),
         ...     baca.text_script_color("#red"),
@@ -4379,10 +4371,9 @@ def text_script_down(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.markup(r'\markup "più mosso"', literal=True),
+        ...     baca.markup(r'\markup "più mosso"'),
         ...     baca.markup(
         ...         r'\markup "lo stesso tempo"',
-        ...         literal=True,
         ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
         ...     ),
         ...     baca.text_script_down(),
@@ -4459,7 +4450,6 @@ def text_script_down(
         ...     "Music_Voice",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
-        ...         literal=True,
         ...         selector=baca.selectors.leaf(1),
         ...     ),
         ...     baca.text_script_down()
@@ -4513,7 +4503,6 @@ def text_script_extra_offset(
         ...     "Music_Voice",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
-        ...         literal=True,
         ...         selector=baca.selectors.leaf(1),
         ...     ),
         ...     baca.text_script_extra_offset((0, 2)),
@@ -4590,7 +4579,7 @@ def text_script_padding(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.markup(r'\markup "più mosso"', literal=True),
+        ...     baca.markup(r'\markup "più mosso"'),
         ...     baca.markup(
         ...         r'\markup "lo stesso tempo"',
         ...         literal=True,
@@ -4670,7 +4659,6 @@ def text_script_padding(
         ...     "Music_Voice",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
-        ...         literal=True,
         ...         selector=baca.selectors.leaf(1),
         ...     ),
         ...     baca.text_script_padding(2),
@@ -4770,10 +4758,9 @@ def text_script_staff_padding(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.markup(r'\markup "più mosso"', literal=True),
+        ...     baca.markup(r'\markup "più mosso"'),
         ...     baca.markup(
         ...         r'\markup "lo stesso tempo"',
-        ...         literal=True,
         ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
         ...     ),
         ...     baca.text_script_staff_padding(n=4),
@@ -4850,7 +4837,6 @@ def text_script_staff_padding(
         ...     "Music_Voice",
         ...     baca.markup(
         ...         r"\baca-boxed-markkup still",
-        ...         literal=True,
         ...         selector=baca.selectors.leaf(1),
         ...     ),
         ...     baca.text_script_staff_padding(2)
@@ -4903,10 +4889,9 @@ def text_script_up(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.markup(r'\markup "più mosso"', literal=True),
+        ...     baca.markup(r'\markup "più mosso"'),
         ...     baca.markup(
         ...         r'\markup "lo stesso tempo"',
-        ...         literal=True,
         ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
         ...     ),
         ...     baca.text_script_up(),
@@ -4983,7 +4968,6 @@ def text_script_up(
         ...     "Music_Voice",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
-        ...         literal=True,
         ...         selector=baca.selectors.leaf(1),
         ...     ),
         ...     baca.text_script_up()

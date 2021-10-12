@@ -441,7 +441,7 @@ def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
                     string = rf"\concat {{ {left_text} \hspace #2 \upright ["
                     string += rf" \line {{ {modulation} }} \hspace #0.5"
                     string += r" \upright ] }"
-                    left_text = abjad.Markup(string, literal=True)
+                    left_text = abjad.Markup(string)
                 else:
                     left_text = _bracket_metric_modulation(
                         metronome_mark, metric_modulation
@@ -484,11 +484,11 @@ def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
         elif accelerando is not None:
             left_text = accelerando._get_markup()
             string = str(left_text).removeprefix(r"\markup").strip()
-            left_text = abjad.Markup(string, literal=True)
+            left_text = abjad.Markup(string)
         elif ritardando is not None:
             left_text = ritardando._get_markup()
             string = str(left_text).removeprefix(r"\markup").strip()
-            left_text = abjad.Markup(string, literal=True)
+            left_text = abjad.Markup(string)
         if has_trend:
             style = "dashed-line-with-arrow"
         else:
@@ -615,8 +615,7 @@ def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
             color = f"(x11-color '{color})"
             assert len(left_text.contents) == 1, repr(left_text)
             left_text_with_color = abjad.Markup(
-                rf"\with-color #{color} {left_text.contents[0]}",
-                literal=True,
+                rf"\with-color #{color} {left_text.contents[0]}"
             )
         if right_text:
             wrapper = abjad.get.wrapper(skips[-1], abjad.MetronomeMark)
@@ -637,8 +636,7 @@ def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
             color = f"(x11-color '{color})"
             assert len(right_text.contents) == 1, repr(right_text)
             right_text_with_color = abjad.Markup(
-                rf"\with-color #{color} {right_text.contents[0]}",
-                literal=True,
+                rf"\with-color #{color} {right_text.contents[0]}"
             )
         else:
             right_text_with_color = None
@@ -1424,7 +1422,7 @@ def _color_not_yet_registered(score):
 
 def _color_octaves(score):
     vertical_moments = abjad.iterate_vertical_moments(score)
-    markup = abjad.Markup(r"\markup OCTAVE", direction=abjad.Up, literal=True)
+    markup = abjad.Markup(r"\markup OCTAVE", direction=abjad.Up)
     abjad.tweak(markup).color = "#red"
     tag = _scoping.site(_frame())
     tag = tag.append(_tags.OCTAVE_COLORING)
@@ -1857,7 +1855,7 @@ def _label_duration_multipliers(score):
             n, d = leaf.multiplier.pair
             string = r"\baca-duration-multiplier-markup"
             string += f' #"{n}" #"{d}"'
-            markup = abjad.Markup(string, direction=abjad.Up, literal=True)
+            markup = abjad.Markup(string, direction=abjad.Up)
             tag_ = tag
             if abjad.get.has_indicator(leaf, _const.HIDDEN):
                 tag_ = tag_.append(_tags.HIDDEN)

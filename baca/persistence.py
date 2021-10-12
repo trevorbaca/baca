@@ -2064,10 +2064,10 @@ r"""
 
         >>> margin_markups = {}
         >>> margin_markups["I+II"] = abjad.MarginMarkup(
-        ...     markup=abjad.Markup(r"\markup I+II", literal=True),
+        ...     markup=abjad.Markup(r"\markup I+II"),
         ... )
         >>> margin_markups["III+IV"] = abjad.MarginMarkup(
-        ...     markup=abjad.Markup(r"\markup III+IV", literal=True),
+        ...     markup=abjad.Markup(r"\markup III+IV"),
         ... )
         >>> breaks = baca.breaks(
         ...     baca.page(

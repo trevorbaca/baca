@@ -5311,7 +5311,7 @@ def levine_multiphonic(n: int) -> abjad.Markup:
     Makes Levine multiphonic markup.
     """
     assert isinstance(n, int), repr(n)
-    return abjad.Markup(rf'\baca-boxed-markup "L.{n}"', literal=True)
+    return abjad.Markup(rf'\baca-boxed-markup "L.{n}"')
 
 
 def loop(

@@ -1172,7 +1172,7 @@ class GlobalFermataCommand(_scoping.Command):
         for leaf in abjad.iterate.leaves(argument):
             assert isinstance(leaf, abjad.MultimeasureRest)
             string = rf"\baca-{command}-markup"
-            markup = abjad.Markup(string, literal=True)
+            markup = abjad.Markup(string)
             markup = abjad.new(markup, direction=abjad.Up)
             abjad.attach(
                 markup,

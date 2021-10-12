@@ -105,7 +105,7 @@ class Accelerando:
 
             String representation of accelerando with custom markup:
 
-            >>> markup = abjad.Markup(r"\markup \bold \italic accelerando", literal=True)
+            >>> markup = abjad.Markup(r"\markup \bold \italic accelerando")
             >>> accelerando = baca.Accelerando(markup=markup)
             >>> print(str(accelerando))
             \markup \bold \italic accelerando
@@ -123,7 +123,7 @@ class Accelerando:
 
     def _default_markup(self):
         contents = r"\large \upright accel."
-        return abjad.Markup(rf"\markup {contents}", literal=True)
+        return abjad.Markup(rf"\markup {contents}")
 
     def _get_lilypond_format(self):
         return str(self)
@@ -175,7 +175,7 @@ class Accelerando:
 
         ..  container:: example
 
-            >>> markup = abjad.Markup(r"\markup \bold \italic accel.", literal=True)
+            >>> markup = abjad.Markup(r"\markup \bold \italic accel.")
             >>> accelerando = baca.Accelerando(markup=markup)
             >>> print(str(accelerando.markup))
             \markup \bold \italic accel.
@@ -509,7 +509,7 @@ class Ritardando:
 
         Custom ritardando:
 
-        >>> markup = abjad.Markup(r"\markup \bold \italic ritardando", literal=True)
+        >>> markup = abjad.Markup(r"\markup \bold \italic ritardando")
         >>> ritardando = baca.Ritardando(markup=markup)
         >>> staff = abjad.Staff("c'4 d' e' f'", name="Staff")
         >>> score = abjad.Score([staff], name="Score")
@@ -601,7 +601,7 @@ class Ritardando:
 
             Custom ritardando:
 
-            >>> markup = abjad.Markup(r"\markup \bold \italic ritardando", literal=True)
+            >>> markup = abjad.Markup(r"\markup \bold \italic ritardando")
             >>> ritardando = baca.Ritardando(markup=markup)
             >>> print(str(ritardando))
             \markup \bold \italic ritardando
@@ -619,7 +619,7 @@ class Ritardando:
 
     def _default_markup(self):
         contents = r"\large \upright rit."
-        return abjad.Markup(rf"\markup {contents}", literal=True)
+        return abjad.Markup(rf"\markup {contents}")
 
     def _get_lilypond_format(self):
         return str(self)
@@ -660,7 +660,7 @@ class Ritardando:
 
             Custom ritardando:
 
-            >>> markup = abjad.Markup(r"\markup \bold \italic ritardando", literal=True)
+            >>> markup = abjad.Markup(r"\markup \bold \italic ritardando")
             >>> ritardando = baca.Ritardando(markup=markup)
             >>> ritardando.context
             'Score'
@@ -693,7 +693,7 @@ class Ritardando:
 
             Custom ritardando:
 
-            >>> markup = abjad.Markup(r"\markup \bold \italic ritardando", literal=True)
+            >>> markup = abjad.Markup(r"\markup \bold \italic ritardando")
             >>> ritardando = baca.Ritardando(markup=markup)
             >>> abjad.show(ritardando.markup) # doctest: +SKIP
 

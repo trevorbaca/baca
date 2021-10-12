@@ -2878,20 +2878,12 @@ class HarmonicSeries:
             staff.append(note)
             deviation = partial.deviation
             if 0 < deviation:
-                markup = abjad.Markup(
-                    rf"\markup +{deviation}",
-                    direction=abjad.Up,
-                    literal=True,
-                )
+                markup = abjad.Markup(rf"\markup +{deviation}", direction=abjad.Up)
                 abjad.attach(markup, note)
             elif deviation < 0:
-                markup = abjad.Markup(
-                    rf"\markup {deviation}",
-                    direction=abjad.Up,
-                    literal=True,
-                )
+                markup = abjad.Markup(rf"\markup {deviation}", direction=abjad.Up)
                 abjad.attach(markup, note)
-            markup = abjad.Markup(rf"\markup {n}", direction=abjad.Down, literal=True)
+            markup = abjad.Markup(rf"\markup {n}", direction=abjad.Down)
             abjad.attach(markup, note)
         notes = abjad.select(staff).notes()
         if notes[0].written_pitch < abjad.NamedPitch("C4"):
@@ -6249,11 +6241,7 @@ class PitchTree(_classes.Tree):
             negative_level = leaf_group[0]
             if negative_level != -2:
                 continue
-            markup = abjad.Markup(
-                rf"\markup {cell_index}",
-                direction=direction,
-                literal=True,
-            )
+            markup = abjad.Markup(rf"\markup {cell_index}", direction=direction)
             if direction == abjad.Down:
                 abjad.tweak(markup).staff_padding = 7
             first_leaf = leaf_group[1][0]
@@ -6288,7 +6276,7 @@ class PitchTree(_classes.Tree):
                 pitch_class_set, lex_rank=True, transposition_only=True
             )
             string = rf'\markup \small \line {{ "{set_class}" }}'
-            label = abjad.Markup(string, direction=abjad.Up, literal=True)
+            label = abjad.Markup(string, direction=abjad.Up)
             if label is not None:
                 first_leaf = leaves[0]
                 abjad.attach(label, first_leaf)

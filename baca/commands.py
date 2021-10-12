@@ -855,13 +855,13 @@ def edition(
     Makes not-parts / only-parts markup suite.
     """
     if isinstance(not_parts, str):
-        not_parts = markup(rf"\markup {{ {not_parts} }}", literal=True)
+        not_parts = markup(rf"\markup {{ {not_parts} }}")
     elif isinstance(not_parts, abjad.Markup):
         not_parts = markup(not_parts)
     assert isinstance(not_parts, _commandclasses.IndicatorCommand)
     not_parts_ = _scoping.not_parts(not_parts)
     if isinstance(only_parts, str):
-        only_parts = markup(rf"\markup {{ {only_parts} }}", literal=True)
+        only_parts = markup(rf"\markup {{ {only_parts} }}")
     elif isinstance(only_parts, abjad.Markup):
         only_parts = markup(only_parts)
     assert isinstance(only_parts, _commandclasses.IndicatorCommand)
@@ -1691,7 +1691,7 @@ def markup(
     argument: typing.Union[str, abjad.Markup],
     *tweaks: abjad.TweakInterface,
     direction=abjad.Up,
-    literal: bool = False,
+    literal: bool = True,
     map=None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
@@ -1713,7 +1713,7 @@ def markup(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.markup(r'\markup "più mosso"', literal=True),
+        ...     baca.markup(r'\markup "più mosso"'),
         ...     baca.tuplet_bracket_outside_staff_priority(1000),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -1776,7 +1776,7 @@ def markup(
 
     ..  container:: example
 
-        Set ``literal=True`` to pass predefined markup commands:
+        Pass predefined markup commands like this:
 
         >>> stack = baca.stack(
         ...     baca.figure(
@@ -1787,10 +1787,7 @@ def markup(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.markup(
-        ...         r"\markup { \baca-triple-diamond-markup }",
-        ...         literal=True,
-        ...     ),
+        ...     baca.markup(r"\markup { \baca-triple-diamond-markup }"),
         ...     baca.tuplet_bracket_outside_staff_priority(1000),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -1872,7 +1869,7 @@ def markup(
     if isinstance(argument, str):
         assert literal is True, repr(literal)
         if literal:
-            markup = abjad.Markup(argument, direction=direction, literal=True)
+            markup = abjad.Markup(argument, direction=direction)
         else:
             markup = abjad.Markup(argument, direction=direction)
     elif isinstance(argument, abjad.Markup):

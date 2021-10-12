@@ -3230,7 +3230,7 @@ class FigureAccumulator:
         figure_index = f"({figure_index})"
         string = rf"\markup \fontsize #2 \concat {{ [ {figure_name_string} \hspace #1"
         string += rf" \raise #0.25 \fontsize #-2 {figure_index} ] }}"
-        figure_name_markup = abjad.Markup(string, direction=abjad.Up, literal=True)
+        figure_name_markup = abjad.Markup(string, direction=abjad.Up)
         annotation = f"figure name: {original_figure_name}"
         figure_name_markup._annotation = annotation
         leaf = abjad.select(container).leaf(0)
@@ -4547,7 +4547,7 @@ class FigureMaker:
         duration = abjad.get.duration(tuplet)
         notes = abjad.LeafMaker()([0], [duration])
         string = abjad.illustrators.selection_to_score_markup_string(notes)
-        markup = abjad.Markup(rf"\markup \scale #'(0.75 . 0.75) {string}", literal=True)
+        markup = abjad.Markup(rf"\markup \scale #'(0.75 . 0.75) {string}")
         abjad.override(tuplet).TupletNumber.text = markup
         return tuplet
 

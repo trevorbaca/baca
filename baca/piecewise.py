@@ -4737,7 +4737,7 @@ def text_spanner(
                     item_ = " ".join(current_item)
                     if boxed:
                         string = rf'\baca-boxed-markup "{item_}"'
-                        markup = abjad.Markup(string, literal=True)
+                        markup = abjad.Markup(string)
                         items_.append(markup)
                     else:
                         items_.append(item_)
@@ -4749,7 +4749,7 @@ def text_spanner(
             item_ = " ".join(current_item)
             if boxed:
                 string = rf'\baca-boxed-markup "{item_}"'
-                markup = abjad.Markup(string, literal=True)
+                markup = abjad.Markup(string)
                 items_.append(markup)
             else:
                 items_.append(item_)
@@ -4788,7 +4788,7 @@ def text_spanner(
             assert len(item_markup.contents) == 1, repr(item_markup)
             assert isinstance(item_markup.contents[0], str), repr(item_markup)
             string = item_markup.contents[0]
-            item_markup = abjad.Markup(r"\upright {string}", literal=True)
+            item_markup = abjad.Markup(r"\upright {string}")
             assert isinstance(item_markup, abjad.Markup)
         prototype = (str, abjad.Markup)
         assert isinstance(item_markup, prototype)
@@ -4808,13 +4808,13 @@ def text_spanner(
                     right_markup = r"- \baca-text-spanner-right-text"
                     right_markup += rf' "{right_text}"'
             else:
-                right_markup = abjad.Markup(rf"\upright {right_text}", literal=True)
+                right_markup = abjad.Markup(rf"\upright {right_text}")
         else:
             assert isinstance(right_text, abjad.Markup)
             assert len(right_text.contents) == 1, repr(right_text)
             assert isinstance(right_text.contents[0], str), repr(right_text)
             string = right_text.contents[0]
-            right_markup = abjad.Markup(r"\upright {string}", literal=True)
+            right_markup = abjad.Markup(r"\upright {string}")
         if lilypond_id is None:
             command = r"\startTextSpan"
         elif lilypond_id == 1:
@@ -4829,7 +4829,7 @@ def text_spanner(
             raise ValueError(lilypond_id)
         left_broken_markup = None
         if isinstance(left_broken_text, str):
-            left_broken_markup = abjad.Markup(left_broken_text, literal=True)
+            left_broken_markup = abjad.Markup(left_broken_text)
         elif isinstance(left_broken_text, abjad.Markup):
             left_broken_markup = left_broken_text
         start_text_span = abjad.StartTextSpan(
@@ -4846,7 +4846,7 @@ def text_spanner(
             content_string = right_markup.contents[0]
             string = r"\markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75"
             string += rf" \general-align #Y #1 {content_string} }}"
-            right_markup = abjad.Markup(string, literal=True)
+            right_markup = abjad.Markup(string)
         bookended_spanner_start = abjad.new(start_text_span, right_text=right_markup)
         # TODO: find some way to make these tweaks explicit to composer
         manager = abjad.tweak(bookended_spanner_start)

@@ -411,7 +411,7 @@ class Selection(abjad.Selection):
             ...         color, direction = "#blue", abjad.Down
             ...     string = rf'\markup {{ \bold \with-color {color} * }}'
             ...     for leaf in selection:
-            ...         markup = abjad.Markup(string, literal=True)
+            ...         markup = abjad.Markup(string)
             ...         markup = abjad.new(markup, direction=direction)
             ...         abjad.attach(markup, leaf)
 
