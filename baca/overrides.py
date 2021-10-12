@@ -4582,7 +4582,6 @@ def text_script_padding(
         ...     baca.markup(r'\markup "più mosso"'),
         ...     baca.markup(
         ...         r'\markup "lo stesso tempo"',
-        ...         literal=True,
         ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
         ...     ),
         ...     baca.text_script_padding(4),

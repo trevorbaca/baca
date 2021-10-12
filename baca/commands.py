@@ -1691,7 +1691,6 @@ def markup(
     argument: typing.Union[str, abjad.Markup],
     *tweaks: abjad.TweakInterface,
     direction=abjad.Up,
-    literal: bool = True,
     map=None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
@@ -1867,11 +1866,7 @@ def markup(
         message = f"direction must be up or down (not {direction!r})."
         raise Exception(message)
     if isinstance(argument, str):
-        assert literal is True, repr(literal)
-        if literal:
-            markup = abjad.Markup(argument, direction=direction)
-        else:
-            markup = abjad.Markup(argument, direction=direction)
+        markup = abjad.Markup(argument, direction=direction)
     elif isinstance(argument, abjad.Markup):
         markup = abjad.new(argument, direction=direction)
     else:
