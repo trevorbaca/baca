@@ -4785,7 +4785,7 @@ def text_spanner(
         else:
             item_markup = item
             assert isinstance(item_markup, abjad.Markup)
-            string = item_markup.contents
+            string = item_markup.string
             item_markup = abjad.Markup(r"\upright {string}")
             assert isinstance(item_markup, abjad.Markup)
         prototype = (str, abjad.Markup)
@@ -4809,7 +4809,7 @@ def text_spanner(
                 right_markup = abjad.Markup(rf"\upright {right_text}")
         else:
             assert isinstance(right_text, abjad.Markup)
-            string = right_text.contents
+            string = right_text.string
             right_markup = abjad.Markup(r"\upright {string}")
         if lilypond_id is None:
             command = r"\startTextSpan"
@@ -4837,7 +4837,7 @@ def text_spanner(
         # kerns bookended hook
         if "hook" in style:
             assert isinstance(right_markup, abjad.Markup)
-            content_string = right_markup.contents
+            content_string = right_markup.string
             string = r"\markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75"
             string += rf" \general-align #Y #1 {content_string} }}"
             right_markup = abjad.Markup(string)
