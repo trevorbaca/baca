@@ -465,7 +465,6 @@ def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
                     stripped_left_text = r"- \baca-metronome-mark-spanner-left-text"
                     stripped_left_text += f' {log} {dots} {stem} "{value}"'
             elif metronome_mark.custom_markup is not None:
-                assert metronome_mark.custom_markup.literal
                 left_text = r"- \baca-metronome-mark-spanner-left-markup"
                 string = abjad.lilypond(metronome_mark.custom_markup)
                 assert string.startswith("\\")
