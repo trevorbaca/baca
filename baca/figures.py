@@ -3293,7 +3293,10 @@ class FigureAccumulator:
         selections.sort()
         fused_selection = []
         for selection in selections:
-            if isinstance(selection, abjad.Timespan):
+            if (
+                isinstance(selection, abjad.Timespan)
+                and selection.annotation is not None
+            ):
                 fused_selection.extend(selection.annotation)
             else:
                 assert isinstance(selection, abjad.Timespan)
