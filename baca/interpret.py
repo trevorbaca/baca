@@ -995,9 +995,7 @@ def _call_rhythm_commands(
                 raise
             if attach_rhythm_annotation_spanners:
                 _attach_rhythm_annotation_spanner(command, selection)
-            timespan = abjad.AnnotatedTimespan(
-                start_offset=start_offset, annotation=selection
-            )
+            timespan = abjad.Timespan(start_offset=start_offset, annotation=selection)
             timespans.append(timespan)
             if command.persist and command.state:
                 state = command.state

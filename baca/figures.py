@@ -3104,7 +3104,7 @@ class FigureAccumulator:
             start_offset = self._get_start_offset(selection, contribution)
             stop_offset = start_offset + abjad.get.duration(selection)
             timespan = abjad.Timespan(start_offset, stop_offset)
-            floating_selection = abjad.AnnotatedTimespan(
+            floating_selection = abjad.Timespan(
                 timespan.start_offset,
                 timespan.stop_offset,
                 annotation=selection,
@@ -3277,7 +3277,7 @@ class FigureAccumulator:
         if not floating_selections:
             return None
         for floating_selection in floating_selections:
-            assert isinstance(floating_selection, abjad.AnnotatedTimespan)
+            assert isinstance(floating_selection, abjad.Timespan)
         floating_selections = list(floating_selections)
         floating_selections.sort()
         try:
@@ -3293,7 +3293,7 @@ class FigureAccumulator:
         selections.sort()
         fused_selection = []
         for selection in selections:
-            if isinstance(selection, abjad.AnnotatedTimespan):
+            if isinstance(selection, abjad.Timespan):
                 fused_selection.extend(selection.annotation)
             else:
                 assert isinstance(selection, abjad.Timespan)
