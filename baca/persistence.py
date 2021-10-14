@@ -1152,7 +1152,7 @@ r"""
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.lilypondformat.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> # lilypond_file.score_block.items[:] = lines
+        >>> # lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1191,7 +1191,7 @@ r"""
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file.score_block.items[:] = lines
+        >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1305,7 +1305,7 @@ r"""
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.lilypondformat.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file.score_block.items[:] = lines
+        >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1345,7 +1345,7 @@ r"""
         >>> text, count = abjad.activate(text, match)
         >>> text = abjad.lilypondformat.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file.score_block.items[:] = lines
+        >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1468,7 +1468,7 @@ r"""
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.lilypondformat.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file.score_block.items[:] = lines
+        >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1507,7 +1507,7 @@ r"""
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file.score_block.items[:] = lines
+        >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1631,7 +1631,7 @@ r"""
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.lilypondformat.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file.score_block.items[:] = lines
+        >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1671,7 +1671,7 @@ r"""
         >>> text, count = abjad.activate(text, match)
         >>> text = abjad.lilypondformat.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file.score_block.items[:] = lines
+        >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1801,7 +1801,7 @@ r"""
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.lilypondformat.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file.score_block.items[:] = lines
+        >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1845,7 +1845,7 @@ r"""
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file.score_block.items[:] = lines
+        >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1980,7 +1980,7 @@ r"""
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.lilypondformat.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file.score_block.items[:] = lines
+        >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2019,7 +2019,7 @@ r"""
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file.score_block.items[:] = lines
+        >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2167,7 +2167,7 @@ r"""
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.lilypondformat.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file.score_block.items[:] = lines
+        >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2212,7 +2212,7 @@ r"""
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file.score_block.items[:] = lines
+        >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2339,7 +2339,7 @@ r"""
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.lilypondformat.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file.score_block.items[:] = lines
+        >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2384,7 +2384,7 @@ r"""
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file.score_block.items[:] = lines
+        >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2521,7 +2521,7 @@ r"""
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.lilypondformat.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file.score_block.items[:] = lines
+        >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2568,7 +2568,7 @@ r"""
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file.score_block.items[:] = lines
+        >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2708,7 +2708,7 @@ r"""
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.lilypondformat.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file.score_block.items[:] = lines
+        >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2755,7 +2755,7 @@ r"""
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file.score_block.items[:] = lines
+        >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2906,7 +2906,7 @@ r"""
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.lilypondformat.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file.score_block.items[:] = lines
+        >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2962,7 +2962,7 @@ r"""
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file.score_block.items[:] = lines
+        >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3117,7 +3117,7 @@ r"""
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.lilypondformat.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file.score_block.items[:] = lines
+        >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3164,7 +3164,7 @@ r"""
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file.score_block.items[:] = lines
+        >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
