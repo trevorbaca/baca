@@ -6216,7 +6216,6 @@ class PitchTree(_classes.Tree):
         preamble = "#(set-global-staff-size 16)\n"
         lilypond_file = abjad.LilyPondFile(
             [preamble, score],
-            date_time_token=False,
             global_staff_size=global_staff_size,
             includes=["abjad.ily"],
         )

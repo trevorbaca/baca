@@ -2130,7 +2130,6 @@ def _make_lilypond_file(
     items.append(block)
     lilypond_file = abjad.LilyPondFile(
         items=items,
-        date_time_token=False,
         includes=includes,
         tag=tag,
         use_relative_includes=False,
