@@ -2122,6 +2122,7 @@ def _make_lilypond_file(
 ):
     tag = _scoping.site(_frame())
     items = []
+    items.append("")
     if preamble:
         string = "\n".join(preamble)
         items.append(string)
@@ -2131,6 +2132,8 @@ def _make_lilypond_file(
     lilypond_file = abjad.LilyPondFile(
         items=items,
         includes=includes,
+        lilypond_language_token=True,
+        lilypond_version_token=True,
         tag=tag,
     )
     if include_layout_ly:
