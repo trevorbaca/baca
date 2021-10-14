@@ -2137,8 +2137,8 @@ def _make_lilypond_file(
         tag=tag,
     )
     if include_layout_ly:
-        assert len(lilypond_file.score_block.items) == 1
-        score = lilypond_file.score_block.items[0]
+        assert len(lilypond_file["score"].items) == 1
+        score = lilypond_file["Score"]
         assert isinstance(score, abjad.Score)
         include = abjad.Container(tag=tag)
         literal = abjad.LilyPondLiteral("", format_slot="absolute_before")
@@ -2151,11 +2151,11 @@ def _make_lilypond_file(
         abjad.attach(literal, container, tag=None)
         literal = abjad.LilyPondLiteral("", format_slot="closing")
         abjad.attach(literal, container, tag=None)
-        lilypond_file.score_block.items[:] = [container]
-        lilypond_file.score_block.items.append("")
+        lilypond_file["score"].items[:] = [container]
+        lilypond_file["score"].items.append("")
     if midi:
-        block = abjad.Block(name="midi")
-        lilypond_file.score_block.items.append(block)
+        block = abjad.Block("midi")
+        lilypond_file["score"].items.append(block)
     return lilypond_file
 
 

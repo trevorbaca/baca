@@ -527,9 +527,9 @@ def _make_segment_clicktrack(
         abjad.attach(metronome_mark, notes[0])
         measure = abjad.Container(notes)
         staff.append(measure)
-    score_block = abjad.Block(name="score")
+    score_block = abjad.Block("score")
     score_block.items.append(score)
-    midi_block = abjad.Block(name="midi")
+    midi_block = abjad.Block("midi")
     score_block.items.append(midi_block)
     lilypond_file = abjad.LilyPondFile([score_block])
     clicktrack_file_name = "clicktrack.midi"
@@ -569,7 +569,7 @@ def _make_segment_midi(
     )
     metadata, persist, lilypond_file, runtime = result
     score_block = lilypond_file.items[0]
-    midi_block = abjad.Block(name="midi")
+    midi_block = abjad.Block("midi")
     score_block.items.append(midi_block)
     with abjad.Timer() as timer:
         tmp_midi = segment_directory / "tmp.midi"
