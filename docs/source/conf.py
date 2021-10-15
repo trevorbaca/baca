@@ -90,7 +90,7 @@ graphviz_output_format = "svg"
 intersphinx_mapping = {
     "http://josiahwolfoberholtzer.com/uqbar/": None,
     "http://www.sphinx-doc.org/en/master/": None,
-    "https://docs.python.org/3.7/": None,
+    "https://docs.python.org/3.9/": None,
 }
 todo_include_todos = True
 
