@@ -5931,7 +5931,6 @@ class PitchTree(_classes.Tree):
         brackets=True,
         cell_indices=True,
         color_repeats=True,
-        global_staff_size=16,
         markup_direction=abjad.Up,
         set_classes=False,
         **keywords,
@@ -6216,7 +6215,6 @@ class PitchTree(_classes.Tree):
         preamble = "#(set-global-staff-size 16)\n"
         lilypond_file = abjad.LilyPondFile(
             [preamble, score],
-            global_staff_size=global_staff_size,
             includes=["abjad.ily"],
         )
         abjad.override(score).SpacingSpanner.strict_grace_spacing = True
