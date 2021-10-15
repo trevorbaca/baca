@@ -2122,6 +2122,7 @@ def _make_lilypond_file(
 ):
     tag = _scoping.site(_frame())
     items = []
+    items.extend(includes)
     items.append("")
     if preamble:
         string = "\n".join(preamble)
@@ -2129,13 +2130,7 @@ def _make_lilypond_file(
     block = abjad.Block("score")
     block.items.append(score)
     items.append(block)
-    lilypond_file = abjad.LilyPondFile(
-        items=items,
-        includes=includes,
-        lilypond_language_token=True,
-        lilypond_version_token=True,
-        tag=tag,
-    )
+    lilypond_file = abjad.LilyPondFile(items=items, tag=tag)
     if include_layout_ly:
         assert len(lilypond_file["score"].items) == 1
         score = lilypond_file["Score"]
@@ -3328,6 +3323,7 @@ def make_lilypond_file(
         assert isinstance(clock_time_extra_offset, tuple)
         assert len(clock_time_extra_offset) == 2
     includes = list(includes or [])
+    includes = [rf'\include "{_}"' for _ in includes]
     preamble = list(preamble or [])
     if preamble:
         assert all(isinstance(_, str) for _ in preamble), repr(preamble)
