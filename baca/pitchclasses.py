@@ -1108,78 +1108,6 @@ class CollectionList(collections_module.abc.Sequence):
         except TypeError:
             return result
 
-    # TODO: reimplement to show all four types of collection
-    def __illustrate__(self) -> abjad.LilyPondFile:
-        r"""
-        Illustrates collections.
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList([
-            ...     [12, 14, 18, 17],
-            ...     [16, 20, 19],
-            ... ])
-
-            >>> abjad.show(collections) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> lilypond_file = collections.__illustrate__()
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                \with
-                {
-                    \override BarLine.transparent = ##t
-                    \override BarNumber.stencil = ##f
-                    \override Beam.stencil = ##f
-                    \override Flag.stencil = ##f
-                    \override HorizontalBracket.staff-padding = 4
-                    \override SpacingSpanner.strict-grace-spacing = ##t
-                    \override SpacingSpanner.strict-note-spacing = ##t
-                    \override SpacingSpanner.uniform-stretching = ##t
-                    \override Stem.stencil = ##f
-                    \override TextScript.X-extent = ##f
-                    \override TextScript.staff-padding = 2
-                    \override TimeSignature.stencil = ##f
-                    proportionalNotationDuration = #(ly:make-moment 1 16)
-                }
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \context Voice = "Voice"
-                        \with
-                        {
-                            \consists Horizontal_bracket_engraver
-                        }
-                        {
-                            \time 1/8
-                            c''8
-                            ^ \markup 0
-                            \startGroup
-                            d''8
-                            fs''8
-                            f''8
-                            \stopGroup
-                            s8
-                            e''8
-                            ^ \markup 1
-                            \startGroup
-                            af''8
-                            g''8
-                            \stopGroup
-                            s8
-                            \bar "|."
-                            \override Score.BarLine.transparent = ##f
-                        }
-                    }
-                >>
-
-        """
-        tree = PitchTree(list(self))
-        return tree.__illustrate__()
-
     def __len__(self) -> int:
         """
         Gets length of collections.
@@ -2687,6 +2615,79 @@ class CollectionList(collections_module.abc.Sequence):
         return abjad.new(self, collections=collections_)
 
 
+# TODO: reimplement to show all four types of collection
+def illustrate_collection_list(collection_list) -> abjad.LilyPondFile:
+    r"""
+    Illustrates collections.
+
+    ..  container:: example
+
+        >>> collections = baca.CollectionList([
+        ...     [12, 14, 18, 17],
+        ...     [16, 20, 19],
+        ... ])
+
+        >>> lilypond_file = baca.pitchclasses.illustrate_collection_list(collections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            \with
+            {
+                \override BarLine.transparent = ##t
+                \override BarNumber.stencil = ##f
+                \override Beam.stencil = ##f
+                \override Flag.stencil = ##f
+                \override HorizontalBracket.staff-padding = 4
+                \override SpacingSpanner.strict-grace-spacing = ##t
+                \override SpacingSpanner.strict-note-spacing = ##t
+                \override SpacingSpanner.uniform-stretching = ##t
+                \override Stem.stencil = ##f
+                \override TextScript.X-extent = ##f
+                \override TextScript.staff-padding = 2
+                \override TimeSignature.stencil = ##f
+                proportionalNotationDuration = #(ly:make-moment 1 16)
+            }
+            <<
+                \context Staff = "Staff"
+                {
+                    \context Voice = "Voice"
+                    \with
+                    {
+                        \consists Horizontal_bracket_engraver
+                    }
+                    {
+                        \time 1/8
+                        c''8
+                        ^ \markup 0
+                        \startGroup
+                        d''8
+                        fs''8
+                        f''8
+                        \stopGroup
+                        s8
+                        e''8
+                        ^ \markup 1
+                        \startGroup
+                        af''8
+                        g''8
+                        \stopGroup
+                        s8
+                        \bar "|."
+                        \override Score.BarLine.transparent = ##f
+                    }
+                }
+            >>
+
+    """
+    tree = PitchTree(list(collection_list))
+    return illustrate_pitch_tree(tree)
+
+
 class HarmonicSeries:
     r"""
     Harmonic series.
@@ -2694,11 +2695,11 @@ class HarmonicSeries:
     ..  container:: example
 
         >>> harmonic_series = baca.HarmonicSeries('C2')
-        >>> abjad.show(harmonic_series) # doctest: +SKIP
+        >>> lilypond_file = baca.pitchclasses.illustrate_harmonic_series(harmonic_series)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> lilypond_file = harmonic_series.__illustrate__()
             >>> staff = lilypond_file["Staff"]
             >>> string = abjad.lilypond(staff)
             >>> print(string)
@@ -2783,125 +2784,6 @@ class HarmonicSeries:
         fundamental = abjad.NamedPitch(fundamental)
         self._fundamental = fundamental
 
-    ### SPECIAL METHODS ###
-
-    def __illustrate__(self) -> abjad.LilyPondFile:
-        r"""
-        Illustrates harmonic series.
-
-        ..  container:: example
-
-            >>> harmonic_series = baca.HarmonicSeries('A1')
-            >>> abjad.show(harmonic_series) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> lilypond_file = harmonic_series.__illustrate__()
-                >>> staff = lilypond_file["Staff"]
-                >>> string = abjad.lilypond(staff)
-                >>> print(string)
-                \context Staff = "Staff"
-                \with
-                {
-                    \override BarLine.stencil = ##f
-                    \override Stem.transparent = ##t
-                    \override TextScript.font-size = -1
-                    \override TextScript.staff-padding = 6
-                    \override TimeSignature.stencil = ##f
-                }
-                {
-                    \clef "bass"
-                    a,,4
-                    _ \markup 1
-                    a,4
-                    _ \markup 2
-                    e4
-                    ^ \markup +2
-                    _ \markup 3
-                    a4
-                    _ \markup 4
-                    \clef "treble"
-                    cs'4
-                    ^ \markup -14
-                    _ \markup 5
-                    e'4
-                    ^ \markup +2
-                    _ \markup 6
-                    g'4
-                    ^ \markup -31
-                    _ \markup 7
-                    a'4
-                    _ \markup 8
-                    b'4
-                    ^ \markup +4
-                    _ \markup 9
-                    cs''4
-                    ^ \markup -14
-                    _ \markup 10
-                    dqs''4
-                    ^ \markup +1
-                    _ \markup 11
-                    e''4
-                    ^ \markup +2
-                    _ \markup 12
-                    fqs''4
-                    ^ \markup -9
-                    _ \markup 13
-                    g''4
-                    ^ \markup -31
-                    _ \markup 14
-                    af''4
-                    ^ \markup -12
-                    _ \markup 15
-                    a''4
-                    _ \markup 16
-                    bf''4
-                    ^ \markup +5
-                    _ \markup 17
-                    b''4
-                    ^ \markup +4
-                    _ \markup 18
-                    c'''4
-                    ^ \markup -2
-                    _ \markup 19
-                    cs'''4
-                    ^ \markup -14
-                    _ \markup 20
-                }
-
-        """
-        staff = abjad.Staff(name="Staff")
-        for n in range(1, 20 + 1):
-            partial = self.partial(n)
-            pitch = partial.approximation
-            note = abjad.Note.from_pitch_and_duration(pitch, (1, 4))
-            staff.append(note)
-            deviation = partial.deviation
-            if 0 < deviation:
-                markup = abjad.Markup(rf"\markup +{deviation}", direction=abjad.Up)
-                abjad.attach(markup, note)
-            elif deviation < 0:
-                markup = abjad.Markup(rf"\markup {deviation}", direction=abjad.Up)
-                abjad.attach(markup, note)
-            markup = abjad.Markup(rf"\markup {n}", direction=abjad.Down)
-            abjad.attach(markup, note)
-        notes = abjad.select(staff).notes()
-        if notes[0].written_pitch < abjad.NamedPitch("C4"):
-            abjad.attach(abjad.Clef("bass"), staff[0])
-            for note in notes[1:]:
-                if abjad.NamedPitch("C4") <= note.written_pitch:
-                    abjad.attach(abjad.Clef("treble"), note)
-                    break
-        abjad.override(staff).BarLine.stencil = False
-        abjad.override(staff).Stem.transparent = True
-        abjad.override(staff).TextScript.font_size = -1
-        abjad.override(staff).TextScript.staff_padding = 6
-        abjad.override(staff).TimeSignature.stencil = False
-        score = abjad.Score([staff], name="Score")
-        abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 8)"
-        lilypond_file = abjad.LilyPondFile([score])
-        return lilypond_file
-
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -2930,6 +2812,124 @@ class HarmonicSeries:
 
         """
         return Partial(fundamental=self.fundamental, number=n)
+
+
+def illustrate_harmonic_series(harmonic_series) -> abjad.LilyPondFile:
+    r"""
+    Illustrates harmonic series.
+
+    ..  container:: example
+
+        >>> harmonic_series = baca.HarmonicSeries('A1')
+        >>> lilypond_file = baca.pitchclasses.illustrate_harmonic_series(harmonic_series)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff = lilypond_file["Staff"]
+            >>> string = abjad.lilypond(staff)
+            >>> print(string)
+            \context Staff = "Staff"
+            \with
+            {
+                \override BarLine.stencil = ##f
+                \override Stem.transparent = ##t
+                \override TextScript.font-size = -1
+                \override TextScript.staff-padding = 6
+                \override TimeSignature.stencil = ##f
+            }
+            {
+                \clef "bass"
+                a,,4
+                _ \markup 1
+                a,4
+                _ \markup 2
+                e4
+                ^ \markup +2
+                _ \markup 3
+                a4
+                _ \markup 4
+                \clef "treble"
+                cs'4
+                ^ \markup -14
+                _ \markup 5
+                e'4
+                ^ \markup +2
+                _ \markup 6
+                g'4
+                ^ \markup -31
+                _ \markup 7
+                a'4
+                _ \markup 8
+                b'4
+                ^ \markup +4
+                _ \markup 9
+                cs''4
+                ^ \markup -14
+                _ \markup 10
+                dqs''4
+                ^ \markup +1
+                _ \markup 11
+                e''4
+                ^ \markup +2
+                _ \markup 12
+                fqs''4
+                ^ \markup -9
+                _ \markup 13
+                g''4
+                ^ \markup -31
+                _ \markup 14
+                af''4
+                ^ \markup -12
+                _ \markup 15
+                a''4
+                _ \markup 16
+                bf''4
+                ^ \markup +5
+                _ \markup 17
+                b''4
+                ^ \markup +4
+                _ \markup 18
+                c'''4
+                ^ \markup -2
+                _ \markup 19
+                cs'''4
+                ^ \markup -14
+                _ \markup 20
+            }
+
+    """
+    staff = abjad.Staff(name="Staff")
+    for n in range(1, 20 + 1):
+        partial = harmonic_series.partial(n)
+        pitch = partial.approximation
+        note = abjad.Note.from_pitch_and_duration(pitch, (1, 4))
+        staff.append(note)
+        deviation = partial.deviation
+        if 0 < deviation:
+            markup = abjad.Markup(rf"\markup +{deviation}", direction=abjad.Up)
+            abjad.attach(markup, note)
+        elif deviation < 0:
+            markup = abjad.Markup(rf"\markup {deviation}", direction=abjad.Up)
+            abjad.attach(markup, note)
+        markup = abjad.Markup(rf"\markup {n}", direction=abjad.Down)
+        abjad.attach(markup, note)
+    notes = abjad.select(staff).notes()
+    if notes[0].written_pitch < abjad.NamedPitch("C4"):
+        abjad.attach(abjad.Clef("bass"), staff[0])
+        for note in notes[1:]:
+            if abjad.NamedPitch("C4") <= note.written_pitch:
+                abjad.attach(abjad.Clef("treble"), note)
+                break
+    abjad.override(staff).BarLine.stencil = False
+    abjad.override(staff).Stem.transparent = True
+    abjad.override(staff).TextScript.font_size = -1
+    abjad.override(staff).TextScript.staff_padding = 6
+    abjad.override(staff).TimeSignature.stencil = False
+    score = abjad.Score([staff], name="Score")
+    abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 8)"
+    lilypond_file = abjad.LilyPondFile([score])
+    return lilypond_file
 
 
 class Partial:
@@ -5385,11 +5385,11 @@ class PitchTree(_classes.Tree):
 
         >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
         >>> tree = baca.PitchTree(items=items)
-        >>> abjad.show(tree) # doctest: +SKIP
+        >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(tree)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> lilypond_file = tree.__illustrate__()
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
@@ -5464,11 +5464,11 @@ class PitchTree(_classes.Tree):
         ...     items=items,
         ...     item_class=abjad.NamedPitch,
         ... )
-        >>> abjad.show(tree) # doctest: +SKIP
+        >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(tree)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> lilypond_file = tree.__illustrate__()
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
@@ -5539,11 +5539,11 @@ class PitchTree(_classes.Tree):
         ...     items=items,
         ...     item_class=abjad.NumberedPitchClass,
         ...     )
-        >>> abjad.show(tree) # doctest: +SKIP
+        >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(tree)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> lilypond_file = tree.__illustrate__()
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
@@ -5618,11 +5618,11 @@ class PitchTree(_classes.Tree):
         ...     items=items,
         ...     item_class=abjad.NamedPitchClass,
         ... )
-        >>> abjad.show(tree) # doctest: +SKIP
+        >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(tree)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> lilypond_file = tree.__illustrate__()
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
@@ -5694,7 +5694,8 @@ class PitchTree(_classes.Tree):
         ...     baca.PitchTree([0, 2, 3, 5]),
         ... ]
         >>> tree = baca.PitchTree(items=items)
-        >>> lilypond_file = tree.__illustrate__(
+        >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(
+        ...     tree,
         ...     cell_indices=False,
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -5770,11 +5771,13 @@ class PitchTree(_classes.Tree):
         ... ]
         >>> items = [segment.rotate(n=1) for segment in items]
         >>> tree = baca.PitchTree(items=items)
-        >>> abjad.show(tree, cell_indices=False) # doctest: +SKIP
+        >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(
+        ...     tree, cell_indices=False
+        ... )
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> lilypond_file = tree.__illustrate__(cell_indices=False)
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
@@ -5846,11 +5849,13 @@ class PitchTree(_classes.Tree):
         >>> items = [[segment_1, segment_2], segment_3]
         >>> tree = baca.PitchTree(items=items)
         >>> abjad.graph(tree) # doctest: +SKIP
-        >>> abjad.show(tree, cell_indices=False) # doctest: +SKIP
+        >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(
+        ...     tree, cell_indices=False
+        ... )
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> lilypond_file = tree.__illustrate__(cell_indices=False)
             >>> score = lilypond_file["Score"]
             >>> string = abjad.lilypond(score)
             >>> print(string)
@@ -5924,301 +5929,6 @@ class PitchTree(_classes.Tree):
         _classes.Tree.__init__(self, items=items, item_class=item_class)
 
     ### SPECIAL METHODS ###
-
-    def __illustrate__(
-        self,
-        after_cell_spacing=True,
-        brackets=True,
-        cell_indices=True,
-        color_repeats=True,
-        markup_direction=abjad.Up,
-        set_classes=False,
-        **keywords,
-    ):
-        r"""
-        Illustrates pitch tree.
-
-        ..  container:: example
-
-            Illustrate tree:
-
-            >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
-            >>> tree = baca.PitchTree(items=items)
-            >>> lilypond_file = tree.__illustrate__()
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                \with
-                {
-                    \override BarLine.transparent = ##t
-                    \override BarNumber.stencil = ##f
-                    \override Beam.stencil = ##f
-                    \override Flag.stencil = ##f
-                    \override HorizontalBracket.staff-padding = 4
-                    \override SpacingSpanner.strict-grace-spacing = ##t
-                    \override SpacingSpanner.strict-note-spacing = ##t
-                    \override SpacingSpanner.uniform-stretching = ##t
-                    \override Stem.stencil = ##f
-                    \override TextScript.X-extent = ##f
-                    \override TextScript.staff-padding = 2
-                    \override TimeSignature.stencil = ##f
-                    proportionalNotationDuration = #(ly:make-moment 1 16)
-                }
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \context Voice = "Voice"
-                        \with
-                        {
-                            \consists Horizontal_bracket_engraver
-                        }
-                        {
-                            \time 1/8
-                            e'8
-                            ^ \markup 0
-                            \startGroup
-                            fs'8
-                            bf'8
-                            \stopGroup
-                            s8
-                            a'8
-                            ^ \markup 1
-                            \startGroup
-                            g'8
-                            af'8
-                            b'8
-                            a'8
-                            cs'8
-                            \stopGroup
-                            s8
-                            c'8
-                            ^ \markup 2
-                            \startGroup
-                            d'8
-                            ef'8
-                            f'8
-                            \stopGroup
-                            s8
-                            \bar "|."
-                            \override Score.BarLine.transparent = ##f
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Illustrates tree with set-classes:
-
-            >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
-            >>> tree = baca.PitchTree(items=items)
-            >>> lilypond_file = tree.__illustrate__(
-            ...     cell_indices=abjad.Down,
-            ...     set_classes=True,
-            ... )
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                \with
-                {
-                    \override BarLine.transparent = ##t
-                    \override BarNumber.stencil = ##f
-                    \override Beam.stencil = ##f
-                    \override Flag.stencil = ##f
-                    \override HorizontalBracket.staff-padding = 4
-                    \override SpacingSpanner.strict-grace-spacing = ##t
-                    \override SpacingSpanner.strict-note-spacing = ##t
-                    \override SpacingSpanner.uniform-stretching = ##t
-                    \override Stem.stencil = ##f
-                    \override TextScript.X-extent = ##f
-                    \override TextScript.staff-padding = 2
-                    \override TimeSignature.stencil = ##f
-                    proportionalNotationDuration = #(ly:make-moment 1 16)
-                }
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \context Voice = "Voice"
-                        \with
-                        {
-                            \consists Horizontal_bracket_engraver
-                        }
-                        {
-                            \time 1/8
-                            e'8
-                            ^ \markup \small \line { "SC(3-9){0, 2, 6}" }
-                            - \tweak staff-padding 7
-                            _ \markup 0
-                            \startGroup
-                            fs'8
-                            bf'8
-                            \stopGroup
-                            s8
-                            a'8
-                            ^ \markup \small \line { "SC(5-6){0, 1, 2, 4, 6}" }
-                            - \tweak staff-padding 7
-                            _ \markup 1
-                            \startGroup
-                            g'8
-                            af'8
-                            b'8
-                            a'8
-                            cs'8
-                            \stopGroup
-                            s8
-                            c'8
-                            ^ \markup \small \line { "SC(4-19){0, 2, 3, 5}" }
-                            - \tweak staff-padding 7
-                            _ \markup 2
-                            \startGroup
-                            d'8
-                            ef'8
-                            f'8
-                            \stopGroup
-                            s8
-                            \bar "|."
-                            \override Score.BarLine.transparent = ##f
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Illustrates nested tree:
-
-            >>> segment_1 = abjad.PitchClassSegment([4, 6, 10])
-            >>> segment_2 = abjad.PitchClassSegment([9, 7, 8, 11, 9, 1])
-            >>> segment_3 = abjad.PitchClassSegment([0, 2, 3, 5])
-            >>> segment_1 = segment_1.transpose(n=1)
-            >>> segment_2 = segment_2.transpose(n=1)
-            >>> segment_3 = segment_3.transpose(n=1)
-            >>> items = [[segment_1, segment_2], segment_3]
-            >>> tree = baca.PitchTree(items=items)
-            >>> lilypond_file = tree.__illustrate__(
-            ...     cell_indices=abjad.Down,
-            ... )
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                \with
-                {
-                    \override BarLine.transparent = ##t
-                    \override BarNumber.stencil = ##f
-                    \override Beam.stencil = ##f
-                    \override Flag.stencil = ##f
-                    \override HorizontalBracket.staff-padding = 4
-                    \override SpacingSpanner.strict-grace-spacing = ##t
-                    \override SpacingSpanner.strict-note-spacing = ##t
-                    \override SpacingSpanner.uniform-stretching = ##t
-                    \override Stem.stencil = ##f
-                    \override TextScript.X-extent = ##f
-                    \override TextScript.staff-padding = 2
-                    \override TimeSignature.stencil = ##f
-                    proportionalNotationDuration = #(ly:make-moment 1 16)
-                }
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \context Voice = "Voice"
-                        \with
-                        {
-                            \consists Horizontal_bracket_engraver
-                        }
-                        {
-                            \time 1/8
-                            f'8
-                            - \tweak staff-padding 7
-                            _ \markup 0
-                            \startGroup
-                            \startGroup
-                            g'8
-                            b'8
-                            \stopGroup
-                            s8
-                            bf'8
-                            - \tweak staff-padding 7
-                            _ \markup 1
-                            \startGroup
-                            af'8
-                            a'8
-                            c'8
-                            bf'8
-                            d'8
-                            \stopGroup
-                            \stopGroup
-                            s8
-                            cs'8
-                            - \tweak staff-padding 7
-                            _ \markup 2
-                            \startGroup
-                            ef'8
-                            e'8
-                            fs'8
-                            \stopGroup
-                            s8
-                            \bar "|."
-                            \override Score.BarLine.transparent = ##f
-                        }
-                    }
-                >>
-
-        Returns LilyPond file.
-        """
-        assert cell_indices in (True, False, abjad.Up, abjad.Down), repr(cell_indices)
-        voice = abjad.Voice(name="Voice")
-        voice.consists_commands.append("Horizontal_bracket_engraver")
-        staff = abjad.Staff([voice], name="Staff")
-        score = abjad.Score([staff], name="Score")
-        leaf_list_stack = []
-        leaf_groups = self._populate_voice(
-            leaf_list_stack,
-            self,
-            voice,
-            after_cell_spacing=after_cell_spacing,
-            brackets=brackets,
-            markup_direction=markup_direction,
-        )
-        assert leaf_list_stack == [], repr(leaf_list_stack)
-        first_leaf = abjad.get.leaf(voice, n=0)
-        abjad.attach(abjad.TimeSignature((1, 8)), first_leaf)
-        self._color_repeats(color_repeats, voice)
-        self._attach_cell_indices(cell_indices, leaf_groups)
-        self._label_set_classes(set_classes, leaf_groups)
-        abjad.deprecated.add_final_bar_line(score)
-        abjad.override(score).BarLine.transparent = True
-        abjad.override(score).BarNumber.stencil = False
-        abjad.override(score).Beam.stencil = False
-        abjad.override(score).Flag.stencil = False
-        abjad.override(score).HorizontalBracket.staff_padding = 4
-        abjad.override(score).Stem.stencil = False
-        abjad.override(score).TextScript.staff_padding = 2
-        abjad.override(score).TimeSignature.stencil = False
-        final_leaf = abjad.get.leaf(score, -1)
-        string = r"\override Score.BarLine.transparent = ##f"
-        literal = abjad.LilyPondLiteral(string, "after")
-        abjad.attach(literal, final_leaf)
-        abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 16)"
-        preamble = "#(set-global-staff-size 16)\n"
-        lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', preamble, score])
-        abjad.override(score).SpacingSpanner.strict_grace_spacing = True
-        abjad.override(score).SpacingSpanner.strict_note_spacing = True
-        abjad.override(score).SpacingSpanner.uniform_stretching = True
-        abjad.override(score).TextScript.X_extent = False
-        return lilypond_file
 
     ### PRIVATE METHODS ###
 
@@ -6341,14 +6051,80 @@ class PitchTree(_classes.Tree):
 
                 >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [1, 2, 2, 4]]
                 >>> tree = baca.PitchTree(items=items)
-                >>> abjad.show(tree) # doctest: +SKIP
+                >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(tree)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
                 >>> tree.has_repeats()
                 True
 
             ..  docs::
 
-                >>> lilypond_file = tree.__illustrate__()
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
+                >>> print(string)
+                \context Score = "Score"
+                \with
+                {
+                    \override BarLine.transparent = ##t
+                    \override BarNumber.stencil = ##f
+                    \override Beam.stencil = ##f
+                    \override Flag.stencil = ##f
+                    \override HorizontalBracket.staff-padding = 4
+                    \override SpacingSpanner.strict-grace-spacing = ##t
+                    \override SpacingSpanner.strict-note-spacing = ##t
+                    \override SpacingSpanner.uniform-stretching = ##t
+                    \override Stem.stencil = ##f
+                    \override TextScript.X-extent = ##f
+                    \override TextScript.staff-padding = 2
+                    \override TimeSignature.stencil = ##f
+                    proportionalNotationDuration = #(ly:make-moment 1 16)
+                }
+                <<
+                    \context Staff = "Staff"
+                    {
+                        \context Voice = "Voice"
+                        \with
+                        {
+                            \consists Horizontal_bracket_engraver
+                        }
+                        {
+                            \time 1/8
+                            \abjad-color-music #'red
+                            e'8
+                            ^ \markup 0
+                            \startGroup
+                            fs'8
+                            bf'8
+                            \stopGroup
+                            s8
+                            a'8
+                            ^ \markup 1
+                            \startGroup
+                            g'8
+                            af'8
+                            b'8
+                            a'8
+                            \abjad-color-music #'red
+                            cs'8
+                            \stopGroup
+                            s8
+                            \abjad-color-music #'red
+                            cs'8
+                            ^ \markup 2
+                            \startGroup
+                            \abjad-color-music #'blue
+                            d'8
+                            \abjad-color-music #'blue
+                            d'8
+                            \abjad-color-music #'red
+                            e'8
+                            \stopGroup
+                            s8
+                            \bar "|."
+                            \override Score.BarLine.transparent = ##f
+                        }
+                    }
+                >>
 
         ..  container:: example
 
@@ -6356,14 +6132,14 @@ class PitchTree(_classes.Tree):
 
             >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
             >>> tree = baca.PitchTree(items=items)
-            >>> abjad.show(tree) # doctest: +SKIP
+            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(tree)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> tree.has_repeats()
             False
 
             ..  docs::
 
-                >>> lilypond_file = tree.__illustrate__()
                 >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
@@ -6443,11 +6219,11 @@ class PitchTree(_classes.Tree):
 
             >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
             >>> tree = baca.PitchTree(items=items)
-            >>> abjad.show(tree) # doctest: +SKIP
+            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(tree)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = tree.__illustrate__()
                 >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
@@ -6514,11 +6290,11 @@ class PitchTree(_classes.Tree):
             Inverts tree about first pitch when axis is none:
 
             >>> inversion = tree.invert()
-            >>> abjad.show(inversion) # doctest: +SKIP
+            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(inversion)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = inversion.__illustrate__()
                 >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
@@ -6585,11 +6361,11 @@ class PitchTree(_classes.Tree):
             Inverts tree about pitch 0:
 
             >>> inversion = tree.invert(axis=0)
-            >>> abjad.show(inversion) # doctest: +SKIP
+            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(inversion)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = inversion.__illustrate__()
                 >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
@@ -6656,11 +6432,11 @@ class PitchTree(_classes.Tree):
             Inverts tree about pitch 13:
 
             >>> inversion = tree.invert(axis=13)
-            >>> abjad.show(inversion) # doctest: +SKIP
+            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(inversion)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = inversion.__illustrate__()
                 >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
@@ -6746,11 +6522,11 @@ class PitchTree(_classes.Tree):
 
             >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
             >>> tree = baca.PitchTree(items=items)
-            >>> abjad.show(tree) # doctest: +SKIP
+            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(tree)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = tree.__illustrate__()
                 >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
@@ -6817,11 +6593,11 @@ class PitchTree(_classes.Tree):
             Gets retrograde of tree:
 
             >>> retrograde = tree.retrograde()
-            >>> abjad.show(retrograde) # doctest: +SKIP
+            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(retrograde)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = retrograde.__illustrate__()
                 >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
@@ -6906,11 +6682,11 @@ class PitchTree(_classes.Tree):
 
             >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
             >>> tree = baca.PitchTree(items=items)
-            >>> abjad.show(tree) # doctest: +SKIP
+            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(tree)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = tree.__illustrate__()
                 >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
@@ -6977,11 +6753,11 @@ class PitchTree(_classes.Tree):
             Rotates tree to the right:
 
             >>> rotation = tree.rotate(n=1)
-            >>> abjad.show(rotation) # doctest: +SKIP
+            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(rotation)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = rotation.__illustrate__()
                 >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
@@ -7048,11 +6824,11 @@ class PitchTree(_classes.Tree):
             Rotates tree to the left:
 
             >>> rotation = tree.rotate(n=-1)
-            >>> abjad.show(rotation) # doctest: +SKIP
+            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(rotation)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = rotation.__illustrate__()
                 >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
@@ -7119,11 +6895,11 @@ class PitchTree(_classes.Tree):
             Rotates by zero:
 
             >>> rotation = tree.rotate(n=0)
-            >>> abjad.show(rotation) # doctest: +SKIP
+            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(rotation)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = rotation.__illustrate__()
                 >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
@@ -7209,11 +6985,11 @@ class PitchTree(_classes.Tree):
 
             >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
             >>> tree = baca.PitchTree(items=items)
-            >>> abjad.show(tree) # doctest: +SKIP
+            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(tree)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = tree.__illustrate__()
                 >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
@@ -7280,11 +7056,11 @@ class PitchTree(_classes.Tree):
             Transposes tree by positive index:
 
             >>> transposition = tree.transpose(n=13)
-            >>> abjad.show(transposition) # doctest: +SKIP
+            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(transposition)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = transposition.__illustrate__()
                 >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
@@ -7351,11 +7127,11 @@ class PitchTree(_classes.Tree):
             Transposes tree by negative index:
 
             >>> transposition = tree.transpose(n=-13)
-            >>> abjad.show(transposition) # doctest: +SKIP
+            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(transposition)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = transposition.__illustrate__()
                 >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
@@ -7422,11 +7198,11 @@ class PitchTree(_classes.Tree):
             Transposes tree by zero index:
 
             >>> transposition = tree.transpose(n=0)
-            >>> abjad.show(transposition) # doctest: +SKIP
+            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(transposition)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = transposition.__illustrate__()
                 >>> score = lilypond_file["Score"]
                 >>> string = abjad.lilypond(score)
                 >>> print(string)
@@ -7498,6 +7274,304 @@ class PitchTree(_classes.Tree):
         """
         operator = abjad.Transposition(n=n)
         return self._apply_to_leaves_and_emit_new_tree(operator)
+
+
+def illustrate_pitch_tree(
+    pitch_tree,
+    after_cell_spacing=True,
+    brackets=True,
+    cell_indices=True,
+    color_repeats=True,
+    markup_direction=abjad.Up,
+    set_classes=False,
+    **keywords,
+):
+    r"""
+    Illustrates pitch tree.
+
+    ..  container:: example
+
+        Illustrate tree:
+
+        >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
+        >>> tree = baca.PitchTree(items=items)
+        >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(tree)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            \with
+            {
+                \override BarLine.transparent = ##t
+                \override BarNumber.stencil = ##f
+                \override Beam.stencil = ##f
+                \override Flag.stencil = ##f
+                \override HorizontalBracket.staff-padding = 4
+                \override SpacingSpanner.strict-grace-spacing = ##t
+                \override SpacingSpanner.strict-note-spacing = ##t
+                \override SpacingSpanner.uniform-stretching = ##t
+                \override Stem.stencil = ##f
+                \override TextScript.X-extent = ##f
+                \override TextScript.staff-padding = 2
+                \override TimeSignature.stencil = ##f
+                proportionalNotationDuration = #(ly:make-moment 1 16)
+            }
+            <<
+                \context Staff = "Staff"
+                {
+                    \context Voice = "Voice"
+                    \with
+                    {
+                        \consists Horizontal_bracket_engraver
+                    }
+                    {
+                        \time 1/8
+                        e'8
+                        ^ \markup 0
+                        \startGroup
+                        fs'8
+                        bf'8
+                        \stopGroup
+                        s8
+                        a'8
+                        ^ \markup 1
+                        \startGroup
+                        g'8
+                        af'8
+                        b'8
+                        a'8
+                        cs'8
+                        \stopGroup
+                        s8
+                        c'8
+                        ^ \markup 2
+                        \startGroup
+                        d'8
+                        ef'8
+                        f'8
+                        \stopGroup
+                        s8
+                        \bar "|."
+                        \override Score.BarLine.transparent = ##f
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Illustrates tree with set-classes:
+
+        >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
+        >>> tree = baca.PitchTree(items=items)
+        >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(
+        ...     tree,
+        ...     cell_indices=abjad.Down,
+        ...     set_classes=True,
+        ... )
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            \with
+            {
+                \override BarLine.transparent = ##t
+                \override BarNumber.stencil = ##f
+                \override Beam.stencil = ##f
+                \override Flag.stencil = ##f
+                \override HorizontalBracket.staff-padding = 4
+                \override SpacingSpanner.strict-grace-spacing = ##t
+                \override SpacingSpanner.strict-note-spacing = ##t
+                \override SpacingSpanner.uniform-stretching = ##t
+                \override Stem.stencil = ##f
+                \override TextScript.X-extent = ##f
+                \override TextScript.staff-padding = 2
+                \override TimeSignature.stencil = ##f
+                proportionalNotationDuration = #(ly:make-moment 1 16)
+            }
+            <<
+                \context Staff = "Staff"
+                {
+                    \context Voice = "Voice"
+                    \with
+                    {
+                        \consists Horizontal_bracket_engraver
+                    }
+                    {
+                        \time 1/8
+                        e'8
+                        ^ \markup \small \line { "SC(3-9){0, 2, 6}" }
+                        - \tweak staff-padding 7
+                        _ \markup 0
+                        \startGroup
+                        fs'8
+                        bf'8
+                        \stopGroup
+                        s8
+                        a'8
+                        ^ \markup \small \line { "SC(5-6){0, 1, 2, 4, 6}" }
+                        - \tweak staff-padding 7
+                        _ \markup 1
+                        \startGroup
+                        g'8
+                        af'8
+                        b'8
+                        a'8
+                        cs'8
+                        \stopGroup
+                        s8
+                        c'8
+                        ^ \markup \small \line { "SC(4-19){0, 2, 3, 5}" }
+                        - \tweak staff-padding 7
+                        _ \markup 2
+                        \startGroup
+                        d'8
+                        ef'8
+                        f'8
+                        \stopGroup
+                        s8
+                        \bar "|."
+                        \override Score.BarLine.transparent = ##f
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Illustrates nested tree:
+
+        >>> segment_1 = abjad.PitchClassSegment([4, 6, 10])
+        >>> segment_2 = abjad.PitchClassSegment([9, 7, 8, 11, 9, 1])
+        >>> segment_3 = abjad.PitchClassSegment([0, 2, 3, 5])
+        >>> segment_1 = segment_1.transpose(n=1)
+        >>> segment_2 = segment_2.transpose(n=1)
+        >>> segment_3 = segment_3.transpose(n=1)
+        >>> items = [[segment_1, segment_2], segment_3]
+        >>> tree = baca.PitchTree(items=items)
+        >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(
+        ...     tree,
+        ...     cell_indices=abjad.Down,
+        ... )
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            \with
+            {
+                \override BarLine.transparent = ##t
+                \override BarNumber.stencil = ##f
+                \override Beam.stencil = ##f
+                \override Flag.stencil = ##f
+                \override HorizontalBracket.staff-padding = 4
+                \override SpacingSpanner.strict-grace-spacing = ##t
+                \override SpacingSpanner.strict-note-spacing = ##t
+                \override SpacingSpanner.uniform-stretching = ##t
+                \override Stem.stencil = ##f
+                \override TextScript.X-extent = ##f
+                \override TextScript.staff-padding = 2
+                \override TimeSignature.stencil = ##f
+                proportionalNotationDuration = #(ly:make-moment 1 16)
+            }
+            <<
+                \context Staff = "Staff"
+                {
+                    \context Voice = "Voice"
+                    \with
+                    {
+                        \consists Horizontal_bracket_engraver
+                    }
+                    {
+                        \time 1/8
+                        f'8
+                        - \tweak staff-padding 7
+                        _ \markup 0
+                        \startGroup
+                        \startGroup
+                        g'8
+                        b'8
+                        \stopGroup
+                        s8
+                        bf'8
+                        - \tweak staff-padding 7
+                        _ \markup 1
+                        \startGroup
+                        af'8
+                        a'8
+                        c'8
+                        bf'8
+                        d'8
+                        \stopGroup
+                        \stopGroup
+                        s8
+                        cs'8
+                        - \tweak staff-padding 7
+                        _ \markup 2
+                        \startGroup
+                        ef'8
+                        e'8
+                        fs'8
+                        \stopGroup
+                        s8
+                        \bar "|."
+                        \override Score.BarLine.transparent = ##f
+                    }
+                }
+            >>
+
+    Returns LilyPond file.
+    """
+    assert cell_indices in (True, False, abjad.Up, abjad.Down), repr(cell_indices)
+    voice = abjad.Voice(name="Voice")
+    voice.consists_commands.append("Horizontal_bracket_engraver")
+    staff = abjad.Staff([voice], name="Staff")
+    score = abjad.Score([staff], name="Score")
+    leaf_list_stack = []
+    leaf_groups = pitch_tree._populate_voice(
+        leaf_list_stack,
+        pitch_tree,
+        voice,
+        after_cell_spacing=after_cell_spacing,
+        brackets=brackets,
+        markup_direction=markup_direction,
+    )
+    assert leaf_list_stack == [], repr(leaf_list_stack)
+    first_leaf = abjad.get.leaf(voice, n=0)
+    abjad.attach(abjad.TimeSignature((1, 8)), first_leaf)
+    pitch_tree._color_repeats(color_repeats, voice)
+    pitch_tree._attach_cell_indices(cell_indices, leaf_groups)
+    pitch_tree._label_set_classes(set_classes, leaf_groups)
+    abjad.deprecated.add_final_bar_line(score)
+    abjad.override(score).BarLine.transparent = True
+    abjad.override(score).BarNumber.stencil = False
+    abjad.override(score).Beam.stencil = False
+    abjad.override(score).Flag.stencil = False
+    abjad.override(score).HorizontalBracket.staff_padding = 4
+    abjad.override(score).Stem.stencil = False
+    abjad.override(score).TextScript.staff_padding = 2
+    abjad.override(score).TimeSignature.stencil = False
+    final_leaf = abjad.get.leaf(score, -1)
+    string = r"\override Score.BarLine.transparent = ##f"
+    literal = abjad.LilyPondLiteral(string, "after")
+    abjad.attach(literal, final_leaf)
+    abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 16)"
+    preamble = "#(set-global-staff-size 16)\n"
+    lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', preamble, score])
+    abjad.override(score).SpacingSpanner.strict_grace_spacing = True
+    abjad.override(score).SpacingSpanner.strict_note_spacing = True
+    abjad.override(score).SpacingSpanner.uniform_stretching = True
+    abjad.override(score).TextScript.X_extent = False
+    return lilypond_file
 
 
 def _apply_operator(segment, operator):
@@ -7870,7 +7944,8 @@ class ZaggedPitchClassMaker:
         ...         grouping_counts=[1, 1, 1, 2, 3],
         ... )
         >>> pitch_class_tree = maker()
-        >>> abjad.show(pitch_class_tree) # doctest: +SKIP
+        >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(pitch_class_tree)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         >>> for tree in pitch_class_tree:
         ...     tree.get_payload(nested=True)
@@ -7998,7 +8073,8 @@ class ZaggedPitchClassMaker:
             ...     grouping_counts=None,
             ... )
             >>> pitch_class_tree = maker()
-            >>> abjad.show(pitch_class_tree) # doctest: +SKIP
+            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(pitch_class_tree)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> for tree in pitch_class_tree:
             ...     tree.get_payload(nested=True)
@@ -8025,7 +8101,8 @@ class ZaggedPitchClassMaker:
             ...     grouping_counts=None,
             ... )
             >>> pitch_class_tree = maker()
-            >>> abjad.show(pitch_class_tree) # doctest: +SKIP
+            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(pitch_class_tree)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> for tree in pitch_class_tree:
             ...     tree.get_payload(nested=True)
@@ -8065,7 +8142,8 @@ class ZaggedPitchClassMaker:
             ...     grouping_counts=[1, 2],
             ... )
             >>> pitch_class_tree = maker()
-            >>> abjad.show(pitch_class_tree) # doctest: +SKIP
+            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(pitch_class_tree)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> for tree in pitch_class_tree:
             ...     tree.get_payload(nested=True)
