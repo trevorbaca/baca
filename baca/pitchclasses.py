@@ -1148,7 +1148,7 @@ class CollectionList(collections_module.abc.Sequence):
                 <<
                     \context Staff = "Staff"
                     {
-                        \new Voice
+                        \context Voice = "Voice"
                         \with
                         {
                             \consists Horizontal_bracket_engraver
@@ -5413,7 +5413,7 @@ class PitchTree(_classes.Tree):
             <<
                 \context Staff = "Staff"
                 {
-                    \new Voice
+                    \context Voice = "Voice"
                     \with
                     {
                         \consists Horizontal_bracket_engraver
@@ -5492,7 +5492,7 @@ class PitchTree(_classes.Tree):
             <<
                 \context Staff = "Staff"
                 {
-                    \new Voice
+                    \context Voice = "Voice"
                     \with
                     {
                         \consists Horizontal_bracket_engraver
@@ -5567,7 +5567,7 @@ class PitchTree(_classes.Tree):
             <<
                 \context Staff = "Staff"
                 {
-                    \new Voice
+                    \context Voice = "Voice"
                     \with
                     {
                         \consists Horizontal_bracket_engraver
@@ -5646,7 +5646,7 @@ class PitchTree(_classes.Tree):
             <<
                 \context Staff = "Staff"
                 {
-                    \new Voice
+                    \context Voice = "Voice"
                     \with
                     {
                         \consists Horizontal_bracket_engraver
@@ -5724,7 +5724,7 @@ class PitchTree(_classes.Tree):
             <<
                 \context Staff = "Staff"
                 {
-                    \new Voice
+                    \context Voice = "Voice"
                     \with
                     {
                         \consists Horizontal_bracket_engraver
@@ -5798,7 +5798,7 @@ class PitchTree(_classes.Tree):
             <<
                 \context Staff = "Staff"
                 {
-                    \new Voice
+                    \context Voice = "Voice"
                     \with
                     {
                         \consists Horizontal_bracket_engraver
@@ -5874,7 +5874,7 @@ class PitchTree(_classes.Tree):
             <<
                 \context Staff = "Staff"
                 {
-                    \new Voice
+                    \context Voice = "Voice"
                     \with
                     {
                         \consists Horizontal_bracket_engraver
@@ -5972,7 +5972,7 @@ class PitchTree(_classes.Tree):
                 <<
                     \context Staff = "Staff"
                     {
-                        \new Voice
+                        \context Voice = "Voice"
                         \with
                         {
                             \consists Horizontal_bracket_engraver
@@ -6047,7 +6047,7 @@ class PitchTree(_classes.Tree):
                 <<
                     \context Staff = "Staff"
                     {
-                        \new Voice
+                        \context Voice = "Voice"
                         \with
                         {
                             \consists Horizontal_bracket_engraver
@@ -6133,7 +6133,7 @@ class PitchTree(_classes.Tree):
                 <<
                     \context Staff = "Staff"
                     {
-                        \new Voice
+                        \context Voice = "Voice"
                         \with
                         {
                             \consists Horizontal_bracket_engraver
@@ -6179,7 +6179,7 @@ class PitchTree(_classes.Tree):
         Returns LilyPond file.
         """
         assert cell_indices in (True, False, abjad.Up, abjad.Down), repr(cell_indices)
-        voice = abjad.Voice()
+        voice = abjad.Voice(name="Voice")
         voice.consists_commands.append("Horizontal_bracket_engraver")
         staff = abjad.Staff([voice], name="Staff")
         score = abjad.Score([staff], name="Score")
@@ -6390,7 +6390,7 @@ class PitchTree(_classes.Tree):
                 <<
                     \context Staff = "Staff"
                     {
-                        \new Voice
+                        \context Voice = "Voice"
                         \with
                         {
                             \consists Horizontal_bracket_engraver
@@ -6474,7 +6474,7 @@ class PitchTree(_classes.Tree):
                 <<
                     \context Staff = "Staff"
                     {
-                        \new Voice
+                        \context Voice = "Voice"
                         \with
                         {
                             \consists Horizontal_bracket_engraver
@@ -6545,7 +6545,7 @@ class PitchTree(_classes.Tree):
                 <<
                     \context Staff = "Staff"
                     {
-                        \new Voice
+                        \context Voice = "Voice"
                         \with
                         {
                             \consists Horizontal_bracket_engraver
@@ -6616,7 +6616,7 @@ class PitchTree(_classes.Tree):
                 <<
                     \context Staff = "Staff"
                     {
-                        \new Voice
+                        \context Voice = "Voice"
                         \with
                         {
                             \consists Horizontal_bracket_engraver
@@ -6687,7 +6687,7 @@ class PitchTree(_classes.Tree):
                 <<
                     \context Staff = "Staff"
                     {
-                        \new Voice
+                        \context Voice = "Voice"
                         \with
                         {
                             \consists Horizontal_bracket_engraver
@@ -6777,7 +6777,7 @@ class PitchTree(_classes.Tree):
                 <<
                     \context Staff = "Staff"
                     {
-                        \new Voice
+                        \context Voice = "Voice"
                         \with
                         {
                             \consists Horizontal_bracket_engraver
@@ -6848,7 +6848,7 @@ class PitchTree(_classes.Tree):
                 <<
                     \context Staff = "Staff"
                     {
-                        \new Voice
+                        \context Voice = "Voice"
                         \with
                         {
                             \consists Horizontal_bracket_engraver
@@ -6937,7 +6937,7 @@ class PitchTree(_classes.Tree):
                 <<
                     \context Staff = "Staff"
                     {
-                        \new Voice
+                        \context Voice = "Voice"
                         \with
                         {
                             \consists Horizontal_bracket_engraver
@@ -7008,7 +7008,7 @@ class PitchTree(_classes.Tree):
                 <<
                     \context Staff = "Staff"
                     {
-                        \new Voice
+                        \context Voice = "Voice"
                         \with
                         {
                             \consists Horizontal_bracket_engraver
@@ -7079,7 +7079,7 @@ class PitchTree(_classes.Tree):
                 <<
                     \context Staff = "Staff"
                     {
-                        \new Voice
+                        \context Voice = "Voice"
                         \with
                         {
                             \consists Horizontal_bracket_engraver
@@ -7150,7 +7150,7 @@ class PitchTree(_classes.Tree):
                 <<
                     \context Staff = "Staff"
                     {
-                        \new Voice
+                        \context Voice = "Voice"
                         \with
                         {
                             \consists Horizontal_bracket_engraver
@@ -7240,7 +7240,7 @@ class PitchTree(_classes.Tree):
                 <<
                     \context Staff = "Staff"
                     {
-                        \new Voice
+                        \context Voice = "Voice"
                         \with
                         {
                             \consists Horizontal_bracket_engraver
@@ -7311,7 +7311,7 @@ class PitchTree(_classes.Tree):
                 <<
                     \context Staff = "Staff"
                     {
-                        \new Voice
+                        \context Voice = "Voice"
                         \with
                         {
                             \consists Horizontal_bracket_engraver
@@ -7382,7 +7382,7 @@ class PitchTree(_classes.Tree):
                 <<
                     \context Staff = "Staff"
                     {
-                        \new Voice
+                        \context Voice = "Voice"
                         \with
                         {
                             \consists Horizontal_bracket_engraver
@@ -7453,7 +7453,7 @@ class PitchTree(_classes.Tree):
                 <<
                     \context Staff = "Staff"
                     {
-                        \new Voice
+                        \context Voice = "Voice"
                         \with
                         {
                             \consists Horizontal_bracket_engraver
