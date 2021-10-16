@@ -355,9 +355,7 @@ def color(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
 
-        >>> lilypond_file = abjad.illustrators.selection(
-        ...     selection, includes=["abjad.ily"]
-        ... )
+        >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -437,9 +435,7 @@ def color(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
 
-        >>> lilypond_file = abjad.illustrators.selection(
-        ...     selection, includes=["abjad.ily"]
-        ... )
+        >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1793,8 +1789,7 @@ def markup(
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
 
         >>> lilypond_file = abjad.illustrators.selection(
-        ...     selection,
-        ...     includes=["baca.ily"],
+        ...     selection, includes=["baca.ily"]
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 

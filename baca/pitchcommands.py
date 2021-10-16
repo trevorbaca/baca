@@ -3276,9 +3276,7 @@ class RegisterInterpolationCommand(_scoping.Command):
             >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
             >>> selection = stack(collections)
 
-            >>> lilypond_file = abjad.illustrators.selection(
-            ...     selection, includes=["abjad.ily"]
-            ... )
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3354,9 +3352,7 @@ class RegisterInterpolationCommand(_scoping.Command):
             >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
             >>> selection = stack(collections)
 
-            >>> lilypond_file = abjad.illustrators.selection(
-            ...     selection, includes=["abjad.ily"]
-            ... )
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3435,9 +3431,7 @@ class RegisterInterpolationCommand(_scoping.Command):
             >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
             >>> selection = stack(collections)
 
-            >>> lilypond_file = abjad.illustrators.selection(
-            ...     selection, includes=["abjad.ily"]
-            ... )
+            >>> lilypond_file = abjad.illustrators.selection(selection)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -4509,9 +4503,7 @@ def bass_to_octave(
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
 
-        >>> lilypond_file = abjad.illustrators.selection(
-        ...     selection, includes=["abjad.ily"]
-        ... )
+        >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -4598,9 +4590,7 @@ def bass_to_octave(
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
 
-        >>> lilypond_file = abjad.illustrators.selection(
-        ...     selection, includes=["abjad.ily"]
-        ... )
+        >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -4696,9 +4686,7 @@ def center_to_octave(
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
 
-        >>> lilypond_file = abjad.illustrators.selection(
-        ...     selection, includes=["abjad.ily"]
-        ... )
+        >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -4785,9 +4773,7 @@ def center_to_octave(
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
 
-        >>> lilypond_file = abjad.illustrators.selection(
-        ...     selection, includes=["abjad.ily"]
-        ... )
+        >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5586,9 +5572,7 @@ def register(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
 
-        >>> lilypond_file = abjad.illustrators.selection(
-        ...     selection, includes=["abjad.ily"]
-        ... )
+        >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5734,9 +5718,7 @@ def register(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
 
-        >>> lilypond_file = abjad.illustrators.selection(
-        ...     selection, includes=["abjad.ily"]
-        ... )
+        >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5826,9 +5808,7 @@ def soprano_to_octave(
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
 
-        >>> lilypond_file = abjad.illustrators.selection(
-        ...     selection, includes=["abjad.ily"]
-        ... )
+        >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5915,9 +5895,7 @@ def soprano_to_octave(
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
 
-        >>> lilypond_file = abjad.illustrators.selection(
-        ...     selection, includes=["abjad.ily"]
-        ... )
+        >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::

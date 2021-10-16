@@ -6213,10 +6213,7 @@ class PitchTree(_classes.Tree):
         abjad.attach(literal, final_leaf)
         abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 16)"
         preamble = "#(set-global-staff-size 16)\n"
-        lilypond_file = abjad.LilyPondFile(
-            [preamble, score],
-            includes=["abjad.ily"],
-        )
+        lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', preamble, score])
         abjad.override(score).SpacingSpanner.strict_grace_spacing = True
         abjad.override(score).SpacingSpanner.strict_note_spacing = True
         abjad.override(score).SpacingSpanner.uniform_stretching = True
