@@ -949,11 +949,11 @@ class Suite:
             baca.IndicatorCommand(
                 abjad.CyclicTuple(
                     [
-                        abjad.Articulation('>'),
+                        Articulation(name='>', direction=None, tweaks=None),
                         ]
                     ),
                 measures=(1, 2),
-                selector=...,
+                selector=<function pleaves.<locals>.selector at ...>,
                 tags=[
                     abjad.Tag('baca.accent()'),
                     ],
@@ -961,11 +961,11 @@ class Suite:
             baca.IndicatorCommand(
                 abjad.CyclicTuple(
                     [
-                        abjad.Articulation('tenuto'),
+                        Articulation(name='tenuto', direction=None, tweaks=None),
                         ]
                     ),
                 measures=(1, 2),
-                selector=...,
+                selector=<function pleaves.<locals>.selector at ...>,
                 tags=[
                     abjad.Tag('baca.tenuto()'),
                     ],
@@ -987,11 +987,11 @@ class Suite:
             baca.IndicatorCommand(
                 abjad.CyclicTuple(
                     [
-                        abjad.Articulation('>'),
+                        Articulation(name='>', direction=None, tweaks=None),
                         ]
                     ),
                 measures=(1, 2),
-                selector=...,
+                selector=<function phead.<locals>.selector at ...>,
                 tags=[
                     abjad.Tag('baca.accent()'),
                     ],
@@ -999,11 +999,11 @@ class Suite:
             baca.IndicatorCommand(
                 abjad.CyclicTuple(
                     [
-                        abjad.Articulation('tenuto'),
+                        Articulation(name='tenuto', direction=None, tweaks=None),
                         ]
                     ),
                 measures=(1, 2),
-                selector=...,
+                selector=<function phead.<locals>.selector at ...>,
                 tags=[
                     abjad.Tag('baca.tenuto()'),
                     ],
@@ -1017,11 +1017,11 @@ class Suite:
             baca.IndicatorCommand(
                 abjad.CyclicTuple(
                     [
-                        abjad.Articulation('>'),
+                        Articulation(name='>', direction=None, tweaks=None),
                         ]
                     ),
                 measures=(3, 4),
-                selector=...,
+                selector=<function phead.<locals>.selector at ...>,
                 tags=[
                     abjad.Tag('baca.accent()'),
                     ],
@@ -1029,11 +1029,11 @@ class Suite:
             baca.IndicatorCommand(
                 abjad.CyclicTuple(
                     [
-                        abjad.Articulation('tenuto'),
+                        Articulation(name='tenuto', direction=None, tweaks=None),
                         ]
                     ),
                 measures=(3, 4),
-                selector=...,
+                selector=<function phead.<locals>.selector at ...>,
                 tags=[
                     abjad.Tag('baca.tenuto()'),
                     ],
