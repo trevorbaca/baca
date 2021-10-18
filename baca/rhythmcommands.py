@@ -464,7 +464,7 @@ class TimeSignatureMaker:
         ...     fermata_measures=[5],
         ... )
         >>> maker.run()
-        [(1, 16), (2, 16), (3, 16), (1, 8), TimeSignature((1, 4), hide=False)]
+        [(1, 16), (2, 16), (3, 16), (1, 8), TimeSignature(pair=(1, 4), hide=False, partial=None)]
 
     """
 
