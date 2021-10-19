@@ -377,7 +377,7 @@ class ClusterCommand(_scoping.Command):
         else:
             start_pitch = plt.head.written_pitch
         pitches = self._make_pitches(start_pitch, width)
-        key_cluster = abjad.KeyCluster(include_black_keys=not self.hide_flat_markup)
+        key_cluster = abjad.KeyCluster(include_flat_markup=not self.hide_flat_markup)
         for pleaf in plt:
             chord = abjad.Chord(pitches, pleaf.written_duration)
             indicators = abjad.detach(object, pleaf)
