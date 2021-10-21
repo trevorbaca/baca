@@ -10,7 +10,6 @@ if __name__ == "__main__":
             "abjad",
             "sphinx",
             "sphinx-rtd-theme",
-            "uqbar>=0.2.13",
         ],
         keywords="abjad, lilypond, music composition, music notation",
         license="MIT",
