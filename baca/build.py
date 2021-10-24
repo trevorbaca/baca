@@ -1105,6 +1105,8 @@ def interpret_build_music(build_directory, *, skip_segment_collection=False):
         _print_always("Must call script in score directory or part directory ...")
         sys.exit(1)
     music_ly = build_directory / "music.ly"
+    if not music_ly.is_file():
+        raise Exception(f"Missing {baca.path.trim(music_ly)} ...")
     if build_type == "score":
         _segments_directory = build_directory / "_segments"
     else:
@@ -1122,19 +1124,19 @@ def interpret_build_music(build_directory, *, skip_segment_collection=False):
             _print_file_handling(f"Removing {baca.path.trim(_segments_directory)} ...")
             shutil.rmtree(str(_segments_directory))
         _segments_directory.mkdir()
-        _print_file_handling(f"Writing {baca.path.trim(_segments_directory)}/", end="")
+        _print_file_handling(f"Writing {baca.path.trim(_segments_directory)}/")
         for source_ly in segment_lys:
             text = _trim_music_ly(source_ly)
             segment_number = source_ly.parent.name
             target_ly = _segments_directory / f"{segment_number}.ly"
-            _print_file_handling(f"{target_ly.name}", end=", ")
+            _print_file_handling(f"{target_ly.name}")
             target_ly.write_text(text)
             name = source_ly.name.removesuffix(".ly")
             name += ".ily"
             source_ily = source_ly.parent / name
             if source_ily.is_file():
                 target_ily = target_ly.with_suffix(".ily")
-                _print_file_handling(f"{target_ily.name}", end=", ")
+                _print_file_handling(f"{target_ily.name}")
                 shutil.copyfile(str(source_ily), str(target_ily))
         _print_file_handling("...")
         handle_build_tags(_segments_directory)
