@@ -2348,10 +2348,7 @@ def _move_global_rests(
             topmost_staff = False
 
 
-def _populate_offset_to_measure_number(
-    first_measure_number,
-    global_skips,
-):
+def _populate_offset_to_measure_number(first_measure_number, global_skips):
     measure_number = first_measure_number
     offset_to_measure_number = {}
     for skip in _selection.Selection(global_skips).skips():
