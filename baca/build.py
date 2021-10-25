@@ -726,7 +726,7 @@ def _write_metadata(metadata, persist, segment_directory):
 
 
 def _write_music_ly(lilypond_file, music_ly):
-    result = abjad.persist.as_ly(lilypond_file, music_ly)
+    result = abjad.persist.as_ly(lilypond_file, music_ly, tags=True)
     abjad_format_time = int(result[1])
     _print_timing("Abjad format time", abjad_format_time)
     return abjad_format_time
