@@ -1225,7 +1225,9 @@ def make_layout_ly(spacing):
     document_name = abjad.String(layout_directory.name).to_shout_case()
     if layout_directory.parent.name == "segments":
         string = "first_measure_number"
-        first_measure_number = baca.path.get_metadatum(layout_directory, string)
+        first_measure_number = baca.path.get_metadatum(
+            layout_directory, string, default=1
+        )
         if not bool(first_measure_number):
             _print_layout("Can not find first measure number ...")
             first_measure_number = False
