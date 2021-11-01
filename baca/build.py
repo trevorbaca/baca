@@ -401,6 +401,14 @@ def _make_segment_clicktrack(lilypond_file):
     for skip in skips:
         metronome_mark = abjad.get.effective(skip, abjad.MetronomeMark)
         metronome_marks.append(metronome_mark)
+    if metronome_marks[0] is None:
+        for metronome_mark in metronome_marks:
+            if metronome_mark is not None:
+                first_metronome_mark = metronome_mark
+                break
+        for i, metronome_mark in enumerate(metronome_marks[:]):
+            if metronome_mark is None:
+                metronome_marks[i] = first_metronome_mark
     staff = abjad.Staff(name="Clicktrack_Staff")
     abjad.setting(staff).midiInstrument = '#"drums"'
     score = abjad.Score([staff], name="Score", simultaneous=False)
