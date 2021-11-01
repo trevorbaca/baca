@@ -3038,6 +3038,7 @@ def interpreter(
     margin_markups=None,
     metadata=None,
     metronome_marks=None,
+    # TODO: remove midi keyword because unused?
     midi=False,
     moment_markup=None,
     move_global_context=False,
