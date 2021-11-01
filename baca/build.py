@@ -94,6 +94,7 @@ def _call_lilypond_on_music_ly_in_segment(music_ly):
         flags = f"--include={baca_repo_path}/lilypond"
         abjad_repo_path = pathlib.Path(abjad.__file__).parent.parent
         flags += f" --include={abjad_repo_path}/docs/source/_stylesheets"
+        _print_file_handling(f"Flags are {flags} ...")
         abjad.io.run_lilypond(
             music_ly,
             flags=flags,
