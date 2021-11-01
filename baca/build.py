@@ -24,6 +24,7 @@ _YELLOW = "\033[33m"
 
 __also_untagged = "--also-untagged" in sys.argv
 __clicktrack = "--clicktrack" in sys.argv
+__log_timing = "--log-timing" in sys.argv
 __midi = "--midi" in sys.argv
 __pdf = "--pdf" in sys.argv
 __print_file_handling = "--print-file-handling" in sys.argv or "--verbose" in sys.argv
@@ -32,7 +33,6 @@ __print_tags = "--print-tags" in sys.argv or "--verbose" in sys.argv
 __print_tex = "--print-tex" in sys.argv or "--verbose" in sys.argv
 __print_timing = "--print-timing" in sys.argv or "--verbose" in sys.argv
 __redo_layout = "--redo-layout" in sys.argv
-__timing = "--timing" in sys.argv
 __verbose = "--verbose" in sys.argv
 
 
@@ -326,7 +326,7 @@ def _handle_music_ly_tags_in_segment(music_ly):
 
 
 def _log_timing(segment_directory, timing):
-    if not __timing:
+    if not __log_timing:
         return
     _timing = segment_directory / ".timing"
     with _timing.open(mode="a") as pointer:
@@ -405,11 +405,12 @@ def _make_segment_clicktrack(lilypond_file):
     abjad.setting(staff).midiInstrument = '#"drums"'
     score = abjad.Score([staff], name="Score", simultaneous=False)
     fermata_measure_numbers = []
-    global_rests = lilypond_file["Global_Rests"]
-    for i, rest in enumerate(global_rests):
-        if abjad.get.has_indicator(rest, baca.const.FERMATA_MEASURE):
-            measure_number = i + 1
-            fermata_measure_numbers.append(measure_number)
+    if "Global_Rests" in lilypond_file:
+        global_rests = lilypond_file["Global_Rests"]
+        for i, rest in enumerate(global_rests):
+            if abjad.get.has_indicator(rest, baca.const.FERMATA_MEASURE):
+                measure_number = i + 1
+                fermata_measure_numbers.append(measure_number)
     for i, time_signature in enumerate(time_signatures):
         measure_number = i + 1
         if measure_number in fermata_measure_numbers:
@@ -428,7 +429,7 @@ def _make_segment_clicktrack(lilypond_file):
             numerator, denominator = time_signature.pair
             notes = []
             for _ in range(numerator):
-                note = abjad.Note.from_pitch_and_duration(-18, (1, denominator))
+                note = abjad.Note("fs,1", multiplier=(1, denominator))
                 notes.append(note)
             notes[0].written_pitch = -23
         abjad.attach(time_signature, notes[0])
