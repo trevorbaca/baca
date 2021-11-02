@@ -14,7 +14,7 @@ def _make_fail_string(string):
     return f"{_RED_BOLD}FAIL: {string} ...{_END}"
 
 
-def _make_fail_handling_string(string):
+def _make_file_handling_string(string):
     return f"{_YELLOW}{string} ...{_END}"
 
 
