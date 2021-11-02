@@ -1136,13 +1136,15 @@ def interpret_tex_file(tex):
 
 
 def make_layout_ly(spacing):
+    current_directory = pathlib.Path(os.getcwd())
+    if "segments" in str(current_directory):
+        _print_main_task(f"Making layout for segment {current_directory.name} ...")
+    else:
+        _print_main_task(f"Making layout for {current_directory.name} ...")
     assert isinstance(spacing, baca.SpacingSpecifier), repr(spacing)
     layout_directory = pathlib.Path(os.getcwd())
     layout_py = layout_directory / "layout.py"
     layout_ly = layout_directory / "layout.ly"
-    if layout_ly.is_file():
-        _print_layout(f"Removing {baca.path.trim(layout_ly)} ...")
-        layout_ly.unlink()
     if spacing.overrides is not None:
         assert spacing.fallback_duration is not None
     if spacing.fallback_duration is None:
@@ -1174,7 +1176,7 @@ def make_layout_ly(spacing):
             layout_directory, string, default=1
         )
         if not bool(first_measure_number):
-            _print_layout("Can not find first measure number ...")
+            _print_file_handling("Can not find first measure number ...")
             first_measure_number = False
         assert isinstance(first_measure_number, int)
         time_signatures = baca.path.get_metadatum(layout_directory, "time_signatures")
@@ -1193,7 +1195,7 @@ def make_layout_ly(spacing):
             time_signatures.extend(time_signatures_)
     if first_measure_number is False:
         raise Exception("first_measure_number should not be false")
-        _print_layout(f"Skipping {baca.path.trim(layout_py)} ...")
+        _print_file_handling(f"Skipping {baca.path.trim(layout_py)} ...")
         sys.exit(1)
     assert abjad.String(document_name).is_shout_case()
     score = baca.docs.make_empty_score(1)
@@ -1263,7 +1265,7 @@ def make_layout_ly(spacing):
     counter = abjad.String("measure").pluralize(measure_count)
     message = f"Writing {measure_count} + 1 {counter} to"
     message += f" {baca.path.trim(layout_ly)} ..."
-    _print_layout(message)
+    _print_file_handling(message)
     bol_measure_numbers = []
     skips = abjad.iterate.leaves(score["Page_Layout"], abjad.Skip)
     for i, skip in enumerate(skips):
@@ -1277,7 +1279,7 @@ def make_layout_ly(spacing):
     items = ", ".join([str(_) for _ in bol_measure_numbers])
     metadata = layout_directory / "__metadata__"
     message = f"Writing BOL measure {numbers} {items} to {baca.path.trim(metadata)} ..."
-    _print_layout(message)
+    _print_file_handling(message)
     if layout_directory.name.endswith("-parts"):
         if document_name is not None:
             part_dictionary = baca.path.get_metadatum(
