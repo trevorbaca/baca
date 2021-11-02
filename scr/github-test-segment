@@ -89,35 +89,60 @@ for segment_directory in $(ls -d "$segments_directory"/[0-9]*); do
             cat .music.ly.log
         fi
     fi
-    # print creation results
+    # print results
     if [ -f clicktrack.midi ]; then
         echo -e "${GREEN_BOLD}PASS: clicktrack.midi found ...${NC}"
+        if [ $clicktrack_midi_same -eq 1 ]; then
+            echo -e "${GREEN_BOLD}PASS: clicktrack.midi same ...${NC}"
+        else
+            echo -e "${RED_BOLD}FAIL: clicktrack.midi changed ...${NC}"
+        fi
     else
         echo -e "${RED_BOLD}FAIL: clicktrack.midi missing ...${NC}"
         result=99
     fi
     if [ -f layout.py ]; then
         if [ -f layout.ly ]; then
-        echo -e "${GREEN_BOLD}PASS: layout.ly found ...${NC}"
+            echo -e "${GREEN_BOLD}PASS: layout.ly found ...${NC}"
+            if [ $layout_ly_same  -eq 1 ]; then
+                echo -e "${GREEN_BOLD}PASS: layout.ly same ...${NC}"
+            else
+                echo -e "${RED_BOLD}FAIL: layout.ly changed ...${NC}"
+            fi
         else
-        echo -e "${RED_BOLD}FAIL: layout.ly missing ...${NC}"
-        result=99
+            echo -e "${RED_BOLD}FAIL: layout.ly missing ...${NC}"
+            result=99
         fi
     fi
     if [ -f music.ily ]; then
         echo -e "${GREEN_BOLD}PASS: music.ily found ...${NC}"
+        if [ $music_ily_same -eq 1 ]; then
+            echo -e "${GREEN_BOLD}PASS: music.ily same ...${NC}"
+        else
+            echo -e "${RED_BOLD}FAIL: music.ily changed ...${NC}"
+        fi
     else
         echo -e "${RED_BOLD}FAIL: music.ily missing ...${NC}"
         result=99
     fi
     if [ -f music.ly ]; then
         echo -e "${GREEN_BOLD}PASS: music.ly found ...${NC}"
+        if [ $music_ly_same -eq 1 ]; then
+            echo -e "${GREEN_BOLD}PASS: music.ly same ...${NC}"
+        else
+            echo -e "${RED_BOLD}FAIL: music.ly changed ...${NC}"
+        fi
     else
         echo -e "${RED_BOLD}FAIL: music.ly missing ...${NC}"
         result=99
     fi
     if [ -f music.midi ]; then
         echo -e "${GREEN_BOLD}PASS: music.midi found ...${NC}"
+        if [ $music_midi_same -eq 1 ]; then
+            echo -e "${GREEN_BOLD}PASS: music.midi same ...${NC}"
+        else
+            echo -e "${RED_BOLD}FAIL: music.midi changed ...${NC}"
+        fi
     else
         echo -e "${RED_BOLD}FAIL: music.midi missing ...${NC}"
         result=99
@@ -128,37 +153,9 @@ for segment_directory in $(ls -d "$segments_directory"/[0-9]*); do
         echo -e "${RED_BOLD}FAIL: music.pdf missing ...${NC}"
         result=99
     fi
-    # print contents results
-    if [ $clicktrack_midi_same -eq 1 ]; then
-        echo -e "${GREEN_BOLD}PASS: clicktrack.midi same ...${NC}"
-    else
-        echo -e "${RED_BOLD}FAIL: clicktrack.midi changed ...${NC}"
-    fi
-    if [ -f layout.py ]; then
-        if [ $layout_ly_same  -eq 1 ]; then
-            echo -e "${GREEN_BOLD}PASS: layout.ly same ...${NC}"
-        else
-        echo -e "${RED_BOLD}FAIL: layout.ly changed ...${NC}"
-        fi
-    fi
-    if [ $music_ily_same -eq 1 ]; then
-        echo -e "${GREEN_BOLD}PASS: music.ily same ...${NC}"
-    else
-        echo -e "${RED_BOLD}FAIL: music.ily changed ...${NC}"
-    fi
-    if [ $music_ly_same -eq 1 ]; then
-        echo -e "${GREEN_BOLD}PASS: music.ly same ...${NC}"
-    else
-        echo -e "${RED_BOLD}FAIL: music.ly changed ...${NC}"
-    fi
-    if [ $music_midi_same -eq 1 ]; then
-        echo -e "${GREEN_BOLD}PASS: music.midi same ...${NC}"
-    else
-        echo -e "${RED_BOLD}FAIL: music.midi changed ...${NC}"
-    fi
+    echo
     # check result
     if [ $result ]; then
         exit $result
     fi
-    echo
 done
