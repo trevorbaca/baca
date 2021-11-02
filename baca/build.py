@@ -1025,21 +1025,23 @@ def interpret_build_music(build_directory, *, skip_segment_collection=False):
             _print_file_handling(f"Removing {baca.path.trim(_segments_directory)} ...")
             shutil.rmtree(str(_segments_directory))
         _segments_directory.mkdir()
-        _print_file_handling(f"Writing {baca.path.trim(_segments_directory)}/")
+        targets = []
         for source_ly in segment_lys:
             text = _trim_music_ly(source_ly)
             segment_number = source_ly.parent.name
             target_ly = _segments_directory / f"{segment_number}.ly"
-            _print_file_handling(f"{target_ly.name}")
+            targets.append(f"{target_ly.name}")
             target_ly.write_text(text)
             name = source_ly.name.removesuffix(".ly")
             name += ".ily"
             source_ily = source_ly.parent / name
             if source_ily.is_file():
                 target_ily = target_ly.with_suffix(".ily")
-                _print_file_handling(f"{target_ily.name}")
+                targets.append(f"{target_ily.name}")
                 shutil.copyfile(str(source_ily), str(target_ily))
-        _print_file_handling("...")
+        targets = ", ".join(targets)
+        message = f"Writing {baca.path.trim(_segments_directory)}/{targets} ..."
+        _print_file_handling(message)
         handle_build_tags(_segments_directory)
     if build_directory.parent.name.endswith("-parts"):
         if skip_segment_collection:

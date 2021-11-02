@@ -1,0 +1,92 @@
+#! /usr/bin/env python
+import os
+import pathlib
+import sys
+
+_BLUE = "\033[94m"
+_GREEN_BOLD = "\033[1;32m"
+_RED_BOLD = "\033[1;31m"
+_END = "\033[0m"
+
+
+def _make_fail_string(string):
+    return f"{_RED_BOLD}FAIL: {string} ...{_END}"
+
+
+def _make_pass_string(string):
+    return f"{_GREEN_BOLD}PASS: {string} ...{_END}"
+
+
+def _print_main_task(string):
+    print(_BLUE + string + _END)
+
+
+def _get_builds():
+    github_workspace = os.environ.get("GITHUB_WORKSPACE")
+    wrapper_directory = pathlib.Path(github_workspace)
+    package_name = wrapper_directory.name
+    builds_directory = wrapper_directory / package_name / "builds"
+    builds = []
+    for path in sorted(builds_directory.iterdir()):
+        if path.is_dir() and path.name.endswith("-score"):
+            builds.append(path)
+    return builds
+
+
+def _test_build(build):
+    os.chdir(build)
+    _print_main_task(f"Building {build} ...")
+    messages, diffs, result = [], [], 0
+    layout_py = build / "layout.py"
+    os.system("interpret-build-music --print-file-handling")
+    if layout_py.exists():
+        layout_ly = build / "layout.ly"
+        if layout_ly.exists():
+            message = _make_pass_string(f"{layout_ly} found")
+        else:
+            message = _make_fail_string(f"{layout_ly} missing")
+            result = 99
+        messages.append(message)
+        if layout_ly.exists():
+            tmp = build / "tmp"
+            os.system(f"git diff --color=always {layout_ly} > {tmp} 2>&1")
+            with open(tmp) as pointer:
+                lines = pointer.readlines()
+            tmp.unlink()
+            if not lines:
+                message = _make_pass_string(f"{layout_ly} same")
+            else:
+                diffs.append(lines[:30])
+                message = _make_fail_string(f"{layout_ly} different")
+                result = 99
+            messages.append(message)
+    music_pdf = build / "music.pdf"
+    if music_pdf.exists():
+        message = _make_pass_string(f"{music_pdf} found")
+    else:
+        message = _make_fail_string(f"{music_pdf} missing")
+        result = 99
+    messages.append(message)
+    return messages, diffs, result
+
+
+if __name__ == "__main__":
+    builds = _get_builds()
+    count = len(builds)
+    messages, diffs, result = [], [], 0
+    count = len(builds)
+    for i, build in enumerate(builds):
+        messages_, diffs_, result_ = _test_build(build)
+        messages.extend(messages_)
+        if i < count - 1:
+            messages.append("")
+        diffs.extend(diffs_)
+        result = result or result_
+        print()
+    for diff in diffs:
+        string = "".join(diff)
+        print(string)
+    count = len(messages)
+    for i, message in enumerate(messages):
+        print(message)
+    sys.exit(result)

@@ -51,8 +51,8 @@ for segment_directory in $(ls -d "$segments_directory"/[0-9]*); do
     if [ -f layout.ly ]; then
         output=$(git diff --color=always layout.ly)
         if [ "$output" ]; then
-        echo "$output" | head -30
-        result=99
+            echo "$output" | head -30
+            result=99
         else
             layout_ly_same=1
         fi
