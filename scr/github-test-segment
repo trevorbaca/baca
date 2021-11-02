@@ -21,19 +21,28 @@ for segment_directory in $(ls -d "$segments_directory"/[0-9]*); do
   music_ly=$segment_directory/music.ly
   music_midi=$segment_directory/music.midi
   music_pdf=$segment_directory/music.pdf
+  # remove existing output
+  if [ -f clicktrack.midi ]; then rm clicktrack.midi; fi
+  if [ -f layout.ly ]; then rm layout.ly; fi
+  if [ -f music.ily ]; then rm music.ily; fi
+  if [ -f music.ly ]; then rm music.ly; fi
+  if [ -f music.midi ]; then rm music.midi; fi
+  if [ -f music.pdf ]; then rm music.pdf; fi
   # run scripts
   if [ -f layout.py ]; then
     python layout.py --print-file-handling
   fi
   python music.py --clicktrack --midi --pdf --print-file-handling
   # diff output
-  output=$(git diff --color=always -I"\version.*" clicktrack.midi)
-  if [ "$output" ]; then
-    echo "$output" | head -30
-    clicktrack_midi_changed=1
-    result=99
+  if [ -f clicktrack.midi ]; then
+    output=$(git diff --color=always -I"\version.*" clicktrack.midi)
+    if [ "$output" ]; then
+        echo "$output" | head -30
+        clicktrack_midi_changed=1
+        result=99
+    fi
   fi
-  if [ -f layout.py ]; then
+  if [ -f layout.ly ]; then
     output=$(git diff --color=always layout.ly)
     if [ "$output" ]; then
       echo "$output" | head -30
@@ -41,26 +50,34 @@ for segment_directory in $(ls -d "$segments_directory"/[0-9]*); do
       result=99
     fi
   fi
-  output=$(git diff --color=always -I"\version.*" music.ily)
-  if [ "$output" ]; then
-    echo "$output" | head -30
-    music_ily_changed=1
-    result=99
+  if [ -f music.ily ]; then
+    output=$(git diff --color=always -I"\version.*" music.ily)
+    if [ "$output" ]; then
+        echo "$output" | head -30
+        music_ily_changed=1
+        result=99
+    fi
   fi
-  output=$(git diff --color=always -I"\version.*" music.ly)
-  if [ "$output" ]; then
-    echo "$output" | head -30
-    music_ly_changed=1
-    result=99
+  if [ -f music.ly ]; then 
+    output=$(git diff --color=always -I"\version.*" music.ly)
+    if [ "$output" ]; then
+        echo "$output" | head -30
+        music_ly_changed=1
+        result=99
+    fi
   fi
-  output=$(git diff --color=always -I"\version.*" music.midi)
-  if [ "$output" ]; then
-    echo "$output" | head -30
-    music_midi_changed=1
-    result=99
+  if [ -f music.midi ]; then
+    output=$(git diff --color=always -I"\version.*" music.midi)
+    if [ "$output" ]; then
+        echo "$output" | head -30
+        music_midi_changed=1
+        result=99
+    fi
   fi
   if [ ! -f music.pdf ]; then
-    cat .music.ly.log
+    if [ -f .music.ly.log ]; then
+        cat .music.ly.log
+    fi
   fi
   # print file creation results
   if [ -f clicktrack.midi ]; then
