@@ -11,11 +11,9 @@ fi
 GREEN_BOLD='\033[1;32m'
 RED_BOLD='\033[1;31m'
 NC='\033[0m'
-# current_directory=$(pwd)
 for segment_directory in $(ls -d "$segments_directory"/[0-9]*); do
   result=0
   cd $segment_directory
-  echo Segment directory $segment_directory ...
   clicktrack_midi=$segment_directory/clicktrack.midi
   layout_ly=$segment_directory/layout.ly
   layout_py=$segment_directory/layout.py
