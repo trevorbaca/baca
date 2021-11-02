@@ -129,29 +129,29 @@ for segment_directory in $(ls -d "$segments_directory"/[0-9]*); do
         result=99
     fi
     # print contents results
-    if [ $clicktrack_midi_same ]; then
+    if [ $clicktrack_midi_same -eq 1 ]; then
         echo -e "${GREEN_BOLD}PASS: clicktrack.midi same ...${NC}"
     else
         echo -e "${RED_BOLD}FAIL: clicktrack.midi changed ...${NC}"
     fi
     if [ -f layout.py ]; then
-        if [ $layout_ly_same ]; then
+        if [ $layout_ly_same  -eq 1 ]; then
             echo -e "${GREEN_BOLD}PASS: layout.ly same ...${NC}"
         else
         echo -e "${RED_BOLD}FAIL: layout.ly changed ...${NC}"
         fi
     fi
-    if [ $music_ily_same ]; then
+    if [ $music_ily_same -eq 1 ]; then
         echo -e "${GREEN_BOLD}PASS: music.ily same ...${NC}"
     else
         echo -e "${RED_BOLD}FAIL: music.ily changed ...${NC}"
     fi
-    if [ $music_ly_same ]; then
+    if [ $music_ly_same -eq 1 ]; then
         echo -e "${GREEN_BOLD}PASS: music.ly same ...${NC}"
     else
         echo -e "${RED_BOLD}FAIL: music.ly changed ...${NC}"
     fi
-    if [ $music_midi_same ]; then
+    if [ $music_midi_same -eq 1 ]; then
         echo -e "${GREEN_BOLD}PASS: music.midi same ...${NC}"
     else
         echo -e "${RED_BOLD}FAIL: music.midi changed ...${NC}"
