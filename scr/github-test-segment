@@ -91,70 +91,70 @@ for segment_directory in $(ls -d "$segments_directory"/[0-9]*); do
     fi
     # print creation results
     if [ -f clicktrack.midi ]; then
-        echo -e "${GREEN_BOLD}PASS:${NC} $clicktrack_midi found ..."
+        echo -e "${GREEN_BOLD}PASS: clicktrack.midi found ...${NC}"
     else
-        echo -e "${RED_BOLD}FAIL:${NC} $clicktrack_midi missing ..."
+        echo -e "${RED_BOLD}FAIL: clicktrack.midi missing ...${NC}"
         result=99
     fi
     if [ -f layout.py ]; then
         if [ -f layout.ly ]; then
-        echo -e "${GREEN_BOLD}PASS:${NC} $layout_ly found ..."
+        echo -e "${GREEN_BOLD}PASS: layout.ly found ...${NC}"
         else
-        echo -e "${RED_BOLD}FAIL:${NC} $layout_ly missing ..."
+        echo -e "${RED_BOLD}FAIL: layout.ly missing ...${NC}"
         result=99
         fi
     fi
     if [ -f music.ily ]; then
-        echo -e "${GREEN_BOLD}PASS:${NC} $music_ily found ..."
+        echo -e "${GREEN_BOLD}PASS: music.ily found ...${NC}"
     else
-        echo -e "${RED_BOLD}FAIL:${NC} $music_ily missing ..."
+        echo -e "${RED_BOLD}FAIL: music.ily missing ...${NC}"
         result=99
     fi
     if [ -f music.ly ]; then
-        echo -e "${GREEN_BOLD}PASS:${NC} $music_ly found ..."
+        echo -e "${GREEN_BOLD}PASS: music.ly found ...${NC}"
     else
-        echo -e "${RED_BOLD}FAIL:${NC} $music_ly missing ..."
+        echo -e "${RED_BOLD}FAIL: music.ly missing ...${NC}"
         result=99
     fi
     if [ -f music.midi ]; then
-        echo -e "${GREEN_BOLD}PASS:${NC} $music_midi found ..."
+        echo -e "${GREEN_BOLD}PASS: music.midi found ...${NC}"
     else
-        echo -e "${RED_BOLD}FAIL:${NC} $music_midi missing ..."
+        echo -e "${RED_BOLD}FAIL: music.midi missing ...${NC}"
         result=99
     fi
     if [ -f music.pdf ]; then
-        echo -e "${GREEN_BOLD}PASS:${NC} $music_pdf found ..."
+        echo -e "${GREEN_BOLD}PASS: music.pdf found ...${NC}"
     else
-        echo -e "${RED_BOLD}FAIL:${NC} $music_pdf missing ..."
+        echo -e "${RED_BOLD}FAIL: music.pdf missing ...${NC}"
         result=99
     fi
     # print contents results
     if [ $clicktrack_midi_same ]; then
-        echo -e "${GREEN_BOLD}PASS:${NC} $clicktrack_midi same ..."
+        echo -e "${GREEN_BOLD}PASS: clicktrack.midi same ...${NC}"
     else
-        echo -e "${RED_BOLD}FAIL:${NC} $clicktrack_midi changed ..."
+        echo -e "${RED_BOLD}FAIL: clicktrack.midi changed ...${NC}"
     fi
     if [ -f layout.py ]; then
         if [ $layout_ly_same ]; then
-            echo -e "${GREEN_BOLD}PASS:${NC} $layout_ly same ..."
+            echo -e "${GREEN_BOLD}PASS: layout.ly same ...${NC}"
         else
-        echo -e "${RED_BOLD}FAIL:${NC} $layout_ly changed ..."
+        echo -e "${RED_BOLD}FAIL: layout.ly changed ...${NC}"
         fi
     fi
     if [ $music_ily_same ]; then
-        echo -e "${GREEN_BOLD}PASS:${NC} $music_ily same ..."
+        echo -e "${GREEN_BOLD}PASS: music.ily same ...${NC}"
     else
-        echo -e "${RED_BOLD}FAIL:${NC} $music_ily changed ..."
+        echo -e "${RED_BOLD}FAIL: music.ily changed ...${NC}"
     fi
     if [ $music_ly_same ]; then
-        echo -e "${GREEN_BOLD}PASS:${NC} $music_ly same ..."
+        echo -e "${GREEN_BOLD}PASS: music.ly same ...${NC}"
     else
-        echo -e "${RED_BOLD}FAIL:${NC} $music_ly changed ..."
+        echo -e "${RED_BOLD}FAIL: music.ly changed ...${NC}"
     fi
     if [ $music_midi_same ]; then
-        echo -e "${GREEN_BOLD}PASS:${NC} $music_midi same ..."
+        echo -e "${GREEN_BOLD}PASS: music.midi same ...${NC}"
     else
-        echo -e "${RED_BOLD}FAIL:${NC} $music_midi changed ..."
+        echo -e "${RED_BOLD}FAIL: music.midi changed ...${NC}"
     fi
     # check result
     if [ $result ]; then
