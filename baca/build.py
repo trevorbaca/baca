@@ -89,14 +89,14 @@ def _call_lilypond_on_music_ly_in_segment(music_ly):
     lilypond_log_file_name = "." + music_ly.name + ".log"
     lilypond_log_file_path = music_ly.parent / lilypond_log_file_name
     with abjad.Timer() as timer:
-        _print_file_handling(f"Calling LilyPond on {baca.path.trim(music_ly)} ...")
         abjad_repo_path = pathlib.Path(abjad.__file__).parent.parent
         abjad_ily_path = f"{abjad_repo_path}/docs/source/_stylesheets"
         baca_repo_path = pathlib.Path(baca.__file__).parent.parent
         baca_ily_path = f"{baca_repo_path}/lilypond"
-        flags = f"--include={abjad_ily_path} --include{baca_ily_path}"
+        flags = f"--include={abjad_ily_path} --include={baca_ily_path}"
         for string in flags.split():
-            _print_file_handling(f"Calling LilyPond {string} ...")
+            _print_file_handling(f"Set LilyPond {string} ...")
+        _print_file_handling(f"Calling LilyPond on {baca.path.trim(music_ly)} ...")
         abjad.io.run_lilypond(
             music_ly,
             flags=flags,
