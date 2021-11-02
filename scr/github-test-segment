@@ -1,28 +1,27 @@
 #! /usr/bin/env bash
 
 package_name=$(basename "$GITHUB_WORKSPACE")
-wrapper_directory="$GITHUB_WORKSPACE"
-contents_directory="$wrapper_directory"/"$package_name"
-segments_directory="$contents_directory"/segments
-if [ ! -d "$segments_directory"/01 ]; then
+wrapper_directory=$GITHUB_WORKSPACE
+contents_directory=$wrapper_directory/$package_name
+segments_directory=$contents_directory/segments
+if [ ! -d $segments_directory/01 ]; then
   echo Score contains no segments ...
   exit 0
 fi
-BLUE='\033[0;34m'
-RED='\033[0;31m'
+GREEN_BOLD='\033[1;32m'
 RED_BOLD='\033[1;31m'
 NC='\033[0m'
 # current_directory=$(pwd)
 for segment_directory in $(ls -d "$segments_directory"/[0-9]*); do
   result=0
-  cd "$segment_directory"
-  echo Segment directory "$segment_directory" ...
-  clicktrack_midi="$segment_directory/clicktrack.midi"
-  layout_ly="$segment_directory/layout.ly"
-  layout_py="$segment_directory/layout.py"
-  music_ily="$segment_directory"/music.ily
-  music_ly="$segment_directory/music.ly"
-  music_midi="$segment_directory/music.midi"
+  cd $segment_directory
+  echo Segment directory $segment_directory ...
+  clicktrack_midi=$segment_directory/clicktrack.midi
+  layout_ly=$segment_directory/layout.ly
+  layout_py=$segment_directory/layout.py
+  music_ily=$segment_directory/music.ily
+  music_ly=$segment_directory/music.ly
+  music_midi=$segment_directory/music.midi
   music_pdf=$segment_directory/music.pdf
   # run scripts
   if [ -f layout.py ]; then
@@ -30,37 +29,48 @@ for segment_directory in $(ls -d "$segments_directory"/[0-9]*); do
   fi
   python music.py --clicktrack --midi --pdf --print-file-handling
   # diff output
+  output=$(git diff --color=always -I"\version.*" clicktrack.midi)
+  if [ "$output" ]; then
+    echo "$output" | head -30
+    clicktrack_midi_changed=1
+    result=99
+  fi
   if [ -f layout.py ]; then
     output=$(git diff --color=always layout.ly)
     if [ "$output" ]; then
       echo "$output" | head -30
       layout_ly_changed=1
+      result=99
     fi
-  fi
-  output=$(git diff --color=always -I"\version.*" music.ly)
-  if [ "$output" ]; then
-    echo "$output" | head -30
-    music_ly_changed=1
   fi
   output=$(git diff --color=always -I"\version.*" music.ily)
   if [ "$output" ]; then
     echo "$output" | head -30
     music_ily_changed=1
+    result=99
   fi
-  output=$(git diff --color=always -I"\version.*" clicktrack.midi)
+  output=$(git diff --color=always -I"\version.*" music.ly)
   if [ "$output" ]; then
     echo "$output" | head -30
-    clicktrack_midi_changed=1
+    music_ly_changed=1
+    result=99
   fi
   output=$(git diff --color=always -I"\version.*" music.midi)
   if [ "$output" ]; then
     echo "$output" | head -30
-    music_midi_changed=True
+    music_midi_changed=1
+    result=99
   fi
   if [ ! -f music.pdf ]; then
     cat .music.ly.log
   fi
-  # print results
+  # print file creation results
+  if [ -f clicktrack.midi ]; then
+    echo -e "${GREEN_BOLD}PASS:${NC} $clicktrack_midi found ..."
+  else
+    echo -e "${RED_BOLD}FAIL:${NC} $clicktrack_midi missing ..."
+    result=99
+  fi
   if [ -f layout.py ]; then
     if [ -f layout.ly ]; then
       echo -e "${GREEN_BOLD}PASS:${NC} $layout_ly found ..."
@@ -68,22 +78,6 @@ for segment_directory in $(ls -d "$segments_directory"/[0-9]*); do
       echo -e "${RED_BOLD}FAIL:${NC} $layout_ly missing ..."
       result=99
     fi
-    if [ ! $layout_ly_changed ]; then
-        echo -e "${GREEN_BOLD}PASS:${NC} $layout_ly same ..."
-    else
-      echo -e "${RED_BOLD}FAIL:${NC} $layout_ly changed ..."
-    fi
-  fi
-  if [ -f music.ly ]; then
-    echo -e "${GREEN_BOLD}PASS:${NC} $music_ly found ..."
-  else
-    echo -e "${RED_BOLD}FAIL:${NC} $music_ly missing ..."
-    result=99
-  fi
-  if [ ! $music_ly_changed ]; then
-    echo -e "${GREEN_BOLD}PASS:${NC} $music_ly same ..."
-  else
-    echo -e "${RED_BOLD}FAIL:${NC} $music_ly changed ..."
   fi
   if [ -f music.ily ]; then
     echo -e "${GREEN_BOLD}PASS:${NC} $music_ily found ..."
@@ -91,10 +85,11 @@ for segment_directory in $(ls -d "$segments_directory"/[0-9]*); do
     echo -e "${RED_BOLD}FAIL:${NC} $music_ily missing ..."
     result=99
   fi
-  if [ ! $music_ily_changed ]; then
-    echo -e "${GREEN_BOLD}PASS:${NC} $music_ily same ..."
+  if [ -f music.ly ]; then
+    echo -e "${GREEN_BOLD}PASS:${NC} $music_ly found ..."
   else
-    echo -e "${RED_BOLD}FAIL:${NC} $music_ily changed ..."
+    echo -e "${RED_BOLD}FAIL:${NC} $music_ly missing ..."
+    result=99
   fi
   if [ -f music.midi ]; then
     echo -e "${GREEN_BOLD}PASS:${NC} $music_midi found ..."
@@ -102,27 +97,39 @@ for segment_directory in $(ls -d "$segments_directory"/[0-9]*); do
     echo -e "${RED_BOLD}FAIL:${NC} $music_midi missing ..."
     result=99
   fi
-  if [ ! $music_midi_changed ]; then
-    echo -e "${GREEN_BOLD}PASS:${NC} $music_midi same ..."
-  else
-    echo -e "${RED_BOLD}FAIL:${NC} $music_midi changed ..."
-  fi
-  if [ -f clicktrack.midi ]; then
-    echo -e "${GREEN_BOLD}PASS:${NC} $clicktrack_midi found ..."
-  else
-    echo -e "${RED_BOLD}FAIL:${NC} $clicktrack_midi missing ..."
-    result=99
-  fi
-  if [ ! $clicktrack_midi_changed ]; then
-    echo -e "${GREEN_BOLD}PASS:${NC} $clicktrack_midi same ..."
-  else
-    echo -e "${RED_BOLD}FAIL:${NC} $clicktrack_midi changed ..."
-  fi
   if [ -f music.pdf ]; then
     echo -e "${GREEN_BOLD}PASS:${NC} $music_pdf found ..."
   else
     echo -e "${RED_BOLD}FAIL:${NC} $music_pdf missing ..."
     result=99
+  fi
+  # print file contents results
+  if [ ! $clicktrack_midi_changed ]; then
+    echo -e "${GREEN_BOLD}PASS:${NC} $clicktrack_midi same ..."
+  else
+    echo -e "${RED_BOLD}FAIL:${NC} $clicktrack_midi changed ..."
+  fi
+  if [ -f layout.py ]; then
+    if [ ! $layout_ly_changed ]; then
+        echo -e "${GREEN_BOLD}PASS:${NC} $layout_ly same ..."
+    else
+      echo -e "${RED_BOLD}FAIL:${NC} $layout_ly changed ..."
+    fi
+  fi
+  if [ ! $music_ily_changed ]; then
+    echo -e "${GREEN_BOLD}PASS:${NC} $music_ily same ..."
+  else
+    echo -e "${RED_BOLD}FAIL:${NC} $music_ily changed ..."
+  fi
+  if [ ! $music_ly_changed ]; then
+    echo -e "${GREEN_BOLD}PASS:${NC} $music_ly same ..."
+  else
+    echo -e "${RED_BOLD}FAIL:${NC} $music_ly changed ..."
+  fi
+  if [ ! $music_midi_changed ]; then
+    echo -e "${GREEN_BOLD}PASS:${NC} $music_midi same ..."
+  else
+    echo -e "${RED_BOLD}FAIL:${NC} $music_midi changed ..."
   fi
   # check result
   if [ $result ]; then
