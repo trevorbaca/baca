@@ -2134,7 +2134,11 @@ def _make_lilypond_file(
     block = abjad.Block("score")
     block.items.append(score)
     items.append(block)
-    lilypond_file = abjad.LilyPondFile(items=items, tag=tag)
+    lilypond_file = abjad.LilyPondFile(
+        items=items,
+        lilypond_language_token=False,
+        tag=tag,
+    )
     if include_layout_ly:
         assert len(lilypond_file["score"].items) == 1
         score = lilypond_file["Score"]
