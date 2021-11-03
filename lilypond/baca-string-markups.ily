@@ -1,4 +1,3 @@
-#(ly:set-option 'relative-includes #t)
 \include "baca-markups.ily"
 
 %%% STRING MARKUPS %%%
