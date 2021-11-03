@@ -1,3 +1,4 @@
+\language "english"
 \include "abjad.ily"
 \include "baca-articulations.ily"
 \include "baca-circle-bow-markups.ily"
