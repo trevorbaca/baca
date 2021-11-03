@@ -205,53 +205,54 @@ def extern(
     stack, finished_variables = {}, {}
     found_score = False
     with open(path) as pointer:
-        for line in pointer.readlines():
-            if (
-                line.startswith(r"\score")
-                or line.startswith(r"\context Score")
-                or line.startswith("{")
-            ):
-                found_score = True
-            if not found_score:
-                preamble_lines.append(line)
-            elif " %*% " in line:
-                words = line.split()
-                site = words.index("%*%")
-                name = words[site + 1]
-                # first line in expression:
-                if name not in stack:
-                    stack[name] = []
-                    stack[name].append(line)
-                # last line in expression
-                else:
-                    stack[name].append(line)
-                    finished_variables[name] = stack[name]
-                    del stack[name]
-                    count = len(line) - len(line.lstrip())
-                    indent = count * " "
-                    dereference = indent + fr"{{ \{name} }}"
-                    first_line = finished_variables[name][0]
-                    # these 4 lines can be removed after right-side tags:
-                    if str(_tags.NOT_TOPMOST) in first_line:
-                        tag_ = tag.append(_tags.NOT_TOPMOST)
-                    else:
-                        tag_ = tag
-                    result = abjad.tag.double_tag([dereference], tag_)
-                    dereference = []
-                    for tag_line in result[:1]:
-                        dereference.append(indent + tag_line)
-                    dereference.append(result[-1])
-                    dereference = [_ + "\n" for _ in dereference]
-                    if bool(stack):
-                        items = list(stack.items())
-                        items[-1][-1].extend(dereference)
-                    else:
-                        score_lines.extend(dereference)
-            elif bool(stack):
-                items = list(stack.items())
-                items[-1][-1].append(line)
+        readlines = pointer.readlines()
+    for line in readlines:
+        if (
+            line.startswith(r"\score")
+            or line.startswith(r"\context Score")
+            or line.startswith("{")
+        ):
+            found_score = True
+        if not found_score:
+            preamble_lines.append(line)
+        elif " %*% " in line:
+            words = line.split()
+            site = words.index("%*%")
+            name = words[site + 1]
+            # first line in expression:
+            if name not in stack:
+                stack[name] = []
+                stack[name].append(line)
+            # last line in expression
             else:
-                score_lines.append(line)
+                stack[name].append(line)
+                finished_variables[name] = stack[name]
+                del stack[name]
+                count = len(line) - len(line.lstrip())
+                indent = count * " "
+                dereference = indent + fr"{{ \{name} }}"
+                first_line = finished_variables[name][0]
+                # these 4 lines can be removed after right-side tags:
+                if str(_tags.NOT_TOPMOST) in first_line:
+                    tag_ = tag.append(_tags.NOT_TOPMOST)
+                else:
+                    tag_ = tag
+                result = abjad.tag.double_tag([dereference], tag_)
+                dereference = []
+                for tag_line in result[:1]:
+                    dereference.append(indent + tag_line)
+                dereference.append(result[-1])
+                dereference = [_ + "\n" for _ in dereference]
+                if bool(stack):
+                    items = list(stack.items())
+                    items[-1][-1].extend(dereference)
+                else:
+                    score_lines.extend(dereference)
+        elif bool(stack):
+            items = list(stack.items())
+            items[-1][-1].append(line)
+        else:
+            score_lines.append(line)
     lines = []
     if include_path.parent == path.parent:
         include_name = include_path.name
