@@ -418,7 +418,7 @@ def partition_integer_into_halves(n, bigger=abjad.Left, even="allowed"):
 
 def partition_nested_into_inward_pointing_parts(list_, target="negative"):
     """
-    Partitions integers in ``list_`` into inward-pointing parts.
+    Partitions integers in subsequences of ``list_`` into inward-pointing parts.
 
     ..  container:: example
 
