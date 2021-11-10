@@ -687,28 +687,35 @@ def build_score(score_directory):
 
 
 def collect_segment_lys(_segments_directory):
-    assert _segments_directory.name == "_segments", repr(_segments_directory)
+    _print_file_handling("Collecting segment lys ...")
     contents_directory = baca.path.get_contents_directory(_segments_directory)
     segments_directory = contents_directory / "segments"
-    paths = sorted(segments_directory.glob("*"))
-    names = [_.name for _ in paths]
-    sources, targets = [], []
-    for name in names:
-        source = segments_directory / name / "music.ly"
-        if not source.is_file():
-            continue
-        target = name + ".ly"
-        target = _segments_directory / target
-        sources.append(source)
-        targets.append(target)
-    return zip(sources, targets)
-
-
-def collect_segment_lys_CLEAN(directory):
-    contents_directory = baca.path.get_contents_directory(directory)
-    segments_directory = contents_directory / "segments"
-    paths = sorted(segments_directory.glob("**/music.ly"))
-    return paths
+    segment_lys = sorted(segments_directory.glob("**/music.ly"))
+    if not segment_lys:
+        _print_file_handling("Missing segment lys ...")
+        sys.exit(1)
+    if _segments_directory.exists():
+        _print_file_handling(f"Removing {baca.path.trim(_segments_directory)} ...")
+        shutil.rmtree(str(_segments_directory))
+    _segments_directory.mkdir()
+    targets = []
+    for source_ly in segment_lys:
+        text = _trim_music_ly(source_ly)
+        segment_number = source_ly.parent.name
+        target_ly = _segments_directory / f"{segment_number}.ly"
+        targets.append(f"{target_ly.name}")
+        target_ly.write_text(text)
+        name = source_ly.name.removesuffix(".ly")
+        name += ".ily"
+        source_ily = source_ly.parent / name
+        if source_ily.is_file():
+            target_ily = target_ly.with_suffix(".ily")
+            targets.append(f"{target_ily.name}")
+            shutil.copyfile(str(source_ily), str(target_ily))
+    targets = ", ".join(targets)
+    message = f"Writing {baca.path.trim(_segments_directory)}/{targets} ..."
+    _print_file_handling(message)
+    handle_build_tags(_segments_directory)
 
 
 def color_persistent_indicators(directory, *, undo=False):
@@ -734,9 +741,11 @@ def color_persistent_indicators(directory, *, undo=False):
 
 def handle_build_tags(_segments_directory):
     _print_tags(f"Handling {baca.path.trim(_segments_directory)} build tags ...")
-    pairs = baca.build.collect_segment_lys(_segments_directory)
-    final_source, final_target = list(pairs)[-1]
-    final_file_name = final_target.with_suffix(".ily").name
+    contents_directory = baca.path.get_contents_directory(_segments_directory)
+    segments_directory = contents_directory / "segments"
+    segment_directories = sorted(segments_directory.glob("*"))
+    final_segment_directory_name = segment_directories[-1].name
+    final_ily_name = f"{final_segment_directory_name}.ily"
 
     def match_left_broken_should_deactivate(tags):
         if baca.tags.LEFT_BROKEN in tags and baca.tags.SPANNER_START in tags:
@@ -793,32 +802,32 @@ def handle_build_tags(_segments_directory):
             undo=True,
         ),
         baca.jobs.show_tag(
-            _segments_directory, baca.tags.PHANTOM, skip_file_name=final_file_name
+            _segments_directory, baca.tags.PHANTOM, skip_file_name=final_ily_name
         ),
         baca.jobs.show_tag(
             _segments_directory,
             baca.tags.PHANTOM,
             prepend_empty_chord=True,
-            skip_file_name=final_file_name,
+            skip_file_name=final_ily_name,
             undo=True,
         ),
         baca.jobs.show_tag(
             _segments_directory,
             "phantom-should-activate",
             match=match_phantom_should_activate,
-            skip_file_name=final_file_name,
+            skip_file_name=final_ily_name,
         ),
         baca.jobs.show_tag(
             _segments_directory,
             "phantom-should-deactivate",
             match=match_phantom_should_deactivate,
-            skip_file_name=final_file_name,
+            skip_file_name=final_ily_name,
             undo=True,
         ),
         baca.jobs.show_tag(
             _segments_directory,
             baca.tags.EOS_STOP_MM_SPANNER,
-            skip_file_name=final_file_name,
+            skip_file_name=final_ily_name,
         ),
         baca.jobs.show_tag(
             _segments_directory,
@@ -1016,33 +1025,7 @@ def interpret_build_music(build_directory, *, skip_segment_collection=False):
     if skip_segment_collection:
         _print_file_handling("Skipping segment collection ...")
     else:
-        _print_file_handling("Collecting segment lys ...")
-        segment_lys = collect_segment_lys_CLEAN(build_directory)
-        if not segment_lys:
-            _print_file_handling("Missing segment lys ...")
-            sys.exit(1)
-        if _segments_directory.exists():
-            _print_file_handling(f"Removing {baca.path.trim(_segments_directory)} ...")
-            shutil.rmtree(str(_segments_directory))
-        _segments_directory.mkdir()
-        targets = []
-        for source_ly in segment_lys:
-            text = _trim_music_ly(source_ly)
-            segment_number = source_ly.parent.name
-            target_ly = _segments_directory / f"{segment_number}.ly"
-            targets.append(f"{target_ly.name}")
-            target_ly.write_text(text)
-            name = source_ly.name.removesuffix(".ly")
-            name += ".ily"
-            source_ily = source_ly.parent / name
-            if source_ily.is_file():
-                target_ily = target_ly.with_suffix(".ily")
-                targets.append(f"{target_ily.name}")
-                shutil.copyfile(str(source_ily), str(target_ily))
-        targets = ", ".join(targets)
-        message = f"Writing {baca.path.trim(_segments_directory)}/{targets} ..."
-        _print_file_handling(message)
-        handle_build_tags(_segments_directory)
+        collect_segment_lys(_segments_directory)
     if build_directory.parent.name.endswith("-parts"):
         if skip_segment_collection:
             _print_tags("Skipping tag handling ...")
