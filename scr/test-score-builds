@@ -27,10 +27,9 @@ def _print_main_task(string):
 
 
 def _get_builds():
-    github_workspace = os.environ.get("GITHUB_WORKSPACE")
-    wrapper_directory = pathlib.Path(github_workspace)
-    package_name = wrapper_directory.name
-    builds_directory = wrapper_directory / package_name / "builds"
+    builds_directory = pathlib.Path(os.getcwd())
+    if not builds_directory.name == "builds":
+        raise Exception("Must run from builds directory.")
     builds = []
     if builds_directory.exists():
         for path in sorted(builds_directory.iterdir()):
