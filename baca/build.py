@@ -59,6 +59,8 @@ def _add_nonfirst_segment_preamble(lilypond_file, segment_directory):
 def _also_untagged(segment_directory):
     if not __also_untagged:
         return
+    if os.environ.get("GITHUB_WORKSPACE"):
+        return
     for name in ("music.ly", "music.ily", "layout.ly"):
         tagged = segment_directory / name
         if not tagged.exists():
