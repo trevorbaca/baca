@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
-package_name=$(basename "$GITHUB_WORKSPACE")
-wrapper_directory=$GITHUB_WORKSPACE
+package_name=$(basename $(pwd))
+wrapper_directory=$(pwd)
 contents_directory=$wrapper_directory/$package_name
 segments_directory=$contents_directory/segments
 if [ ! -d $segments_directory/01 ]; then
@@ -37,7 +37,7 @@ for segment_directory in $(ls -d "$segments_directory"/[0-9]*); do
     if [ -f layout.py ]; then
         python layout.py --print-file-handling
     fi
-    python music.py --clicktrack --midi --pdf --print-file-handling
+    python music.py --clicktrack --log-timing --midi --pdf --print-file-handling
     # capture diffs
     if [ -f clicktrack.midi ]; then
         output=$(git diff --color=always -I"\version.*" clicktrack.midi)
