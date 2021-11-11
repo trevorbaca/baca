@@ -744,7 +744,8 @@ def handle_build_tags(_segments_directory):
     _print_tags(f"Handling {baca.path.trim(_segments_directory)} build tags ...")
     contents_directory = baca.path.get_contents_directory(_segments_directory)
     segments_directory = contents_directory / "segments"
-    segment_directories = sorted(segments_directory.glob("*"))
+    paths = sorted(segments_directory.glob("*"))
+    segment_directories = [_ for _ in paths if _.is_dir()]
     final_segment_directory_name = segment_directories[-1].name
     final_ily_name = f"{final_segment_directory_name}.ily"
 
