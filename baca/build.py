@@ -1120,7 +1120,7 @@ def interpret_tex_file(tex):
         sys.exit(1)
 
 
-def make_layout_ly(spacing):
+def make_layout_ly(spacing, *, curtail_measure_count=None):
     current_directory = pathlib.Path(os.getcwd())
     if "segments" in str(current_directory):
         _print_main_task(f"Making layout for segment {current_directory.name} ...")
@@ -1204,6 +1204,8 @@ def make_layout_ly(spacing):
     )
     lilypond_file = baca.make_lilypond_file(score)
     context = lilypond_file["Global_Skips"]
+    if curtail_measure_count is not None:
+        del context[curtail_measure_count:]
     context.lilypond_type = "PageLayout"
     context.name = "Page_Layout"
     skips = baca.Selection(context).skips()
