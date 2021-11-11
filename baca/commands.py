@@ -21,8 +21,6 @@ from . import selectors as _selectors
 from . import tags as _tags
 from . import typings
 
-### FACTORY FUNCTIONS ###
-
 
 def allow_octaves(*, selector=_selectors.leaves()) -> _commandclasses.IndicatorCommand:
     """

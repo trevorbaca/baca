@@ -42,14 +42,12 @@ def attach_lilypond_tag(tag, context, *, part_manifest=None):
         if part_names and tag_ not in part_names:
             raise Exception(f"not listed in parts manifest: {tag_!r}.")
     literal = abjad.LilyPondLiteral(fr"\tag {tag}", "before")
-    site = "baca.ScoreTemplate._attach_liypond_tag()"
-    tag = abjad.Tag(site)
+    tag = _scoping.site(_frame())
     abjad.attach(literal, context, tag=tag)
 
 
 def make_global_context():
-    site = "abjad.ScoreTemplate._make_global_context()"
-    tag = abjad.Tag(site)
+    tag = _scoping.site(_frame())
     global_rests = abjad.Context(
         lilypond_type="GlobalRests",
         name="Global_Rests",
@@ -72,8 +70,7 @@ def make_global_context():
 
 def make_music_context(*contexts):
     contexts = tuple(_ for _ in contexts if _ is not None)
-    site = "baca.ScoreTemplate.make_music_context()"
-    tag = abjad.Tag(site)
+    tag = _scoping.site(_frame())
     return abjad.Context(
         contexts,
         lilypond_type="MusicContext",
