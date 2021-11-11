@@ -37,7 +37,14 @@ for segment_directory in $(ls -d "$segments_directory"/[0-9]*); do
     if [ -f layout.py ]; then
         python layout.py --print-file-handling
     fi
-    python music.py --clicktrack --log-timing --midi --pdf --print-file-handling
+    python music.py \
+        --also-untagged \
+        --clicktrack \
+        --log-timing \
+        --midi \
+        --pdf \
+        --print-file-handling \
+        --print-timing
     # capture diffs
     if [ -f clicktrack.midi ]; then
         output=$(git diff --color=always -I"\version.*" clicktrack.midi)
