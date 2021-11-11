@@ -1947,7 +1947,7 @@ def previous_metadata(path: str):
     assert segments.name == "segments", repr(segments)
     paths = list(sorted(segments.glob("*")))
     paths = [_ for _ in paths if not _.name.startswith(".")]
-    assert all(_.is_dir() for _ in paths), repr(paths)
+    paths = [_ for _ in paths if _.is_dir()]
     index = paths.index(segment)
     if index == 0:
         return {}
