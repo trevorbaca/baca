@@ -24,6 +24,7 @@ _YELLOW = "\033[33m"
 
 __also_untagged = "--also-untagged" in sys.argv
 __clicktrack = "--clicktrack" in sys.argv
+__debug_segments = "--debug-segments" in sys.argv
 __log_timing = "--log-timing" in sys.argv
 __midi = "--midi" in sys.argv
 __pdf = "--pdf" in sys.argv
@@ -1033,7 +1034,7 @@ def interpret_build_music(build_directory, *, skip_segment_collection=False):
             handle_part_tags(build_directory)
     _check_layout_time_signatures_in_build(music_ly)
     run_lilypond(music_ly)
-    if _segments_directory.is_dir():
+    if _segments_directory.is_dir() and not __debug_segments:
         _print_file_handling(f"Removing {baca.path.trim(_segments_directory)} ...")
         shutil.rmtree(str(_segments_directory))
 
