@@ -5,10 +5,11 @@ import sys
 
 import baca
 
-directory = os.getcwd()
-directory = pathlib.Path(directory)
-skip_segment_collection = "--skip-segment-collection" in sys.argv[1:]
-baca.build.interpret_build_music(
-    directory,
-    skip_segment_collection=skip_segment_collection,
-)
+if __name__ == "__main__":
+    directory = os.getcwd()
+    directory = pathlib.Path(directory)
+    skip_segment_collection = "--skip-segment-collection" in sys.argv[1:]
+    baca.build.interpret_build_music(
+        directory,
+        skip_segment_collection=skip_segment_collection,
+    )

@@ -4,10 +4,11 @@ import sys
 
 import baca
 
-directory = os.getcwd()
-if len(sys.argv) < 2:
-    print("Missing mandatory tag parameter ...")
-    sys.exit(-1)
-tag = sys.argv[1]
-undo = "--undo" in sys.argv[2:]
-baca.build.show_tag(directory, tag, undo=undo)
+if __name__ == "__main__":
+    directory = os.getcwd()
+    if len(sys.argv) < 2:
+        print("Missing mandatory tag parameter ...")
+        sys.exit(-1)
+    tag = sys.argv[1]
+    undo = "--undo" in sys.argv[2:]
+    baca.build.show_tag(directory, tag, undo=undo)

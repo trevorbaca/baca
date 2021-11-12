@@ -3,5 +3,6 @@ import os
 
 import baca
 
-directory = os.getcwd()
-baca.build.handle_part_tags(directory)
+if __name__ == "__main__":
+    directory = os.getcwd()
+    baca.build.handle_part_tags(directory)

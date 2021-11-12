@@ -4,8 +4,9 @@ import pathlib
 
 import baca
 
-directory = os.getcwd()
-directory = pathlib.Path(directory)
-assert directory.parent.name == "builds", repr(directory)
-_segments_directory = directory / "_segments"
-baca.build.collect_segment_lys(_segments_directory)
+if __name__ == "__main__":
+    directory = os.getcwd()
+    directory = pathlib.Path(directory)
+    assert directory.parent.name == "builds", repr(directory)
+    _segments_directory = directory / "_segments"
+    baca.build.collect_segment_lys(_segments_directory)

@@ -4,6 +4,7 @@ import pathlib
 
 import baca
 
-directory = os.getcwd()
-directory = pathlib.Path(directory)
-baca.build.build_part(directory)
+if __name__ == "__main__":
+    directory = os.getcwd()
+    directory = pathlib.Path(directory)
+    baca.build.build_part(directory)

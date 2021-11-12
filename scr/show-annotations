@@ -4,6 +4,7 @@ import sys
 
 import baca
 
-directory = os.getcwd()
-undo = "--undo" in sys.argv[1:]
-baca.build.show_annotations(directory, undo=undo)
+if __name__ == "__main__":
+    directory = os.getcwd()
+    undo = "--undo" in sys.argv[1:]
+    baca.build.show_annotations(directory, undo=undo)

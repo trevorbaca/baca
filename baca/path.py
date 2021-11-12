@@ -327,17 +327,9 @@ def get_contents_directory(path):
     """
     Gets contents directory.
     """
-    parts = str(path).split(os.sep)
-    previous_part = None
-    for i, part in enumerate(reversed(parts)):
-        if part == previous_part:
-            if i == 1:
-                return path
-            wrapper = os.sep.join(parts[: -(i - 1)])
-            wrapper = pathlib.Path(wrapper)
-            return wrapper
-        previous_part = part
-    return None
+    wrapper_directory = get_wrapper_directory(path)
+    contents_directory = wrapper_directory / wrapper_directory.name
+    return contents_directory
 
 
 def get_wrapper_directory(path):
@@ -345,14 +337,14 @@ def get_wrapper_directory(path):
     Gets wrapper directory.
     """
     parts = str(path).split(os.sep)
-    previous_part = None
-    for i, part in enumerate(reversed(parts)):
-        if part == previous_part:
-            wrapper = os.sep.join(parts[:-i])
-            wrapper = pathlib.Path(wrapper)
-            return wrapper
-        previous_part = part
-    return None
+    while parts:
+        string = os.sep.join(parts)
+        candidate = pathlib.Path(string)
+        _git = candidate / ".git"
+        if _git.is_dir():
+            return candidate
+        parts.pop()
+    raise Exception(path)
 
 
 def get_measure_profile_metadata(path) -> typing.Tuple[int, int, list]:
