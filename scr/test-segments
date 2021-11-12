@@ -1,14 +1,18 @@
-#! /usr/bin/env bash
+#! /usr/bin/env python
+import os
+import sys
 
-package_name=$(basename $(pwd))
-wrapper_directory=$(pwd)
-contents_directory=$wrapper_directory/$package_name
-segments_directory=$contents_directory/segments
-if [ ! -d $segments_directory/01 ]; then
-    echo Score contains no segments ...
-    exit 0
-fi
-for segment_directory in $(ls -d "$segments_directory"/[0-9]*); do
-    cd $segment_directory
-    test-segment
-done
+import baca
+
+if __name__ == "__main__":
+    contents_directory = baca.path.get_contents_directory(os.getcwd())
+    segments_directory = contents_directory / "segments"
+    first_segment_directory = segments_directory / "01"
+    if not first_segment_directory.is_dir():
+        print("Score contains no segments ...")
+        sys.exit(0)
+    for path in segments_directory.glob("[0-9]*"):
+        if not path.is_dir():
+            continue
+        os.chdir(path)
+        os.system("test-segment")
