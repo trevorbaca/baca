@@ -82,9 +82,11 @@ def _test_segment(segment_directory):
             results.same = _capture_diff(path)
     music_pdf = segment_directory / "music.pdf"
     if not music_pdf.exists():
-        with open(".music.ly.log") as pointer:
-            lines = pointer.readlines()
-            print("".join(lines))
+        _music_ly_log = segment_directory / "_music_ly_log"
+        if _music_ly_log.exists():
+            with open(".music.ly.log") as pointer:
+                lines = pointer.readlines()
+                print("".join(lines))
     for path, results in path_to_results.items():
         _print_results(path, results)
     result = 0
