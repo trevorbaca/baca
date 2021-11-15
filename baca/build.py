@@ -1124,7 +1124,9 @@ def interpret_tex_file(tex):
         sys.exit(1)
 
 
-def make_layout_ly(spacing, *, curtail_measure_count=None):
+def make_layout_ly(
+    spacing, *, curtail_measure_count=None, do_not_append_phantom_measure=False
+):
     current_directory = pathlib.Path(os.getcwd())
     if "segments" in str(current_directory):
         _print_main_task(f"Making layout for segment {current_directory.name} ...")
@@ -1189,7 +1191,7 @@ def make_layout_ly(spacing, *, curtail_measure_count=None):
     assert abjad.String(document_name).is_shout_case()
     score = baca.docs.make_empty_score(1)
     commands = baca.CommandAccumulator(
-        append_phantom_measure=True,
+        append_phantom_measure=not (do_not_append_phantom_measure),
         time_signatures=time_signatures,
     )
     _, _ = baca.interpreter(
