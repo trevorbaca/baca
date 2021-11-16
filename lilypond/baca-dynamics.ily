@@ -1017,6 +1017,10 @@ baca-fffff-parenthesized = #(
         )
     )
 
+%%% MEZZO %%%
+
+baca-m = #(make-dynamic-script "m")
+
 %%% POCO SCRATCH DYNAMICS %%%
 
 #(define-markup-command

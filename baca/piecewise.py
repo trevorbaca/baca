@@ -2578,6 +2578,13 @@ def make_dynamic(
 
     ..  container:: example
 
+        Mezzo:
+
+        >>> baca.make_dynamic("m")
+        Dynamic(name='m', command='\\baca-m', direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=None, tweaks=None)
+
+    ..  container:: example
+
         Parenthesized dynamics:
 
         >>> baca.make_dynamic("(p)")
@@ -2748,6 +2755,8 @@ def make_dynamic(
             abjad.tweak(indicator).to_barline = True
     elif string == "!":
         indicator = abjad.StopHairpin()
+    elif string == "m":
+        indicator = abjad.Dynamic("m", command=r"\baca-m")
     else:
         failed = False
         try:
