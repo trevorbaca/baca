@@ -3308,10 +3308,6 @@ def interpreter(
     return metadata, persist
 
 
-def make_keyword_dictionary(**keywords):
-    return keywords
-
-
 def make_lilypond_file(
     score,
     clock_time_extra_offset=None,
