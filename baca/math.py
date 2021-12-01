@@ -1,7 +1,6 @@
 """
 Math.
 """
-import collections
 import math
 
 import abjad
@@ -246,8 +245,7 @@ def negate_elements(sequence, absolute=False, indices=None, period=None):
 
     ..  container:: example
 
-        Negates the absolute value elements at indices congruent to 0, 1 or 2
-        mod 5:
+        Negates the absolute value elements at indices congruent to 0, 1 or 2 mod 5:
 
         >>> sequence = [1, 2, 3, 4, 5, -6, -7, -8, -9, -10]
         >>> baca.negate_elements(
@@ -258,21 +256,25 @@ def negate_elements(sequence, absolute=False, indices=None, period=None):
         ... )
         [-1, -2, -3, 4, 5, -6, -7, -8, -9, -10]
 
-    Returns newly constructed list.
     """
     indices = indices or range(len(sequence))
-    if not isinstance(sequence, collections.abc.Sequence):
-        raise Exception(f"must be sequence: {sequence!r}.")
-    period = period or len(sequence)
-    result = []
-    for i, element in enumerate(sequence):
-        if (i in indices) or (period and i % period in indices):
+    if isinstance(indices, abjad.Pattern):
+        assert period is None
+        pattern = indices
+    else:
+        period = period or len(sequence)
+        pattern = abjad.Pattern(indices=indices, period=period)
+    items = []
+    total_length = len(sequence)
+    for i, item in enumerate(sequence):
+        if pattern.matches_index(i, total_length=total_length):
             if absolute:
-                result.append(-abs(element))
+                items.append(-abs(item))
             else:
-                result.append(-element)
+                items.append(-item)
         else:
-            result.append(element)
+            items.append(item)
+    result = type(sequence)(items)
     return result
 
 
