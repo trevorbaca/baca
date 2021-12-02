@@ -1309,6 +1309,11 @@ def make_segment_pdf(lilypond_file, metadata, persist, timing):
         _make_segment_pdf(lilypond_file, metadata, persist, timing)
 
 
+def persist_as_ly(argument, ly_file_path):
+    _print_file_handling(f"Writing {baca.path.trim(ly_file_path)} ...")
+    abjad.persist.as_ly(argument, ly_file_path)
+
+
 def run_lilypond(ly_file_path):
     assert ly_file_path.exists(), repr(ly_file_path)
     string = f"Calling LilyPond (with includes) on {baca.path.trim(ly_file_path)} ..."
