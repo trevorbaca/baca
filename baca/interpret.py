@@ -24,8 +24,6 @@ from . import tags as _tags
 
 __print_timing = "--print-timing" in sys.argv or "--verbose" in sys.argv
 
-_CYAN = "\033[36m"
-_END = "\033[0m"
 
 nonfirst_preamble = r"""\header { composer = ##f poet = ##f title = ##f }
 \layout { indent = 0 }
@@ -2368,10 +2366,10 @@ def _print_timing(title, timer, suffix=None):
     count = int(timer.elapsed_time)
     counter = abjad.String("second").pluralize(count)
     count = str(count)
-    string = f"{_CYAN}{title} {count} {counter}"
+    string = f"{_const.colors.cyan}{title} {count} {counter}"
     if suffix is not None:
         string += f" [{suffix}]"
-    string += f" ...{_END}"
+    string += f" ...{_const.colors.end}"
     print(string)
 
 

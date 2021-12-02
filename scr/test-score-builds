@@ -3,27 +3,23 @@ import os
 import pathlib
 import sys
 
-_BLUE = "\033[94m"
-_GREEN_BOLD = "\033[1;32m"
-_RED_BOLD = "\033[1;31m"
-_YELLOW = "\033[33m"
-_END = "\033[0m"
+import baca
 
 
 def _make_fail_string(string):
-    return f"{_RED_BOLD}FAIL: {string} ...{_END}"
+    return f"{baca.const.colors.red}FAIL: {string} ...{baca.const.colors.end}"
 
 
 def _make_file_handling_string(string):
-    return f"{_YELLOW}{string} ...{_END}"
+    return f"{baca.const.colors.yellow}{string} ...{baca.const.colors.end}"
 
 
 def _make_pass_string(string):
-    return f"{_GREEN_BOLD}PASS: {string} ...{_END}"
+    return f"{baca.const.colors.green_bold}PASS: {string} ...{baca.const.colors.end}"
 
 
 def _print_main_task(string):
-    print(_BLUE + string + _END, flush=True)
+    print(baca.const.colors.blue + string + baca.const.colors.end)
 
 
 def _get_builds():
@@ -95,8 +91,8 @@ if __name__ == "__main__":
         print(flush=True)
     for diff in diffs:
         string = "".join(diff)
-        print(string, flush=True)
+        print(string)
     count = len(messages)
     for i, message in enumerate(messages):
-        print(message, flush=True)
+        print(message)
     sys.exit(result)

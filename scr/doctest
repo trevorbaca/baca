@@ -8,26 +8,19 @@ import sys
 import abjad
 import abjadext
 import baca
-
-_colors = {
-    "BLUE": "\033[94m",
-    "RED": "\033[91m",
-    "GREEN": "\033[92m",
-    "END": "\033[0m",
-}
+from abjadext import rmakers
 
 
-def _get_globs():
-    globs = {}
-    globs["abjad"] = abjad
-    globs["abjadext"] = abjadext
-    globs["baca"] = baca
-    # eventually remove:
-    globs.update(baca.__dict__)
-    return globs
+def _get_globals():
+    globals_ = {}
+    globals_["abjad"] = abjad
+    globals_["abjadext"] = abjadext
+    globals_["baca"] = baca
+    globals_["rmakers"] = rmakers
+    return globals_
 
 
-def _doctest_files(files, globs, report_only_first_failure=False):
+def _doctest_files(files, globals_, report_only_first_failure=False):
     if report_only_first_failure:
         optionflags = (
             doctest.ELLIPSIS
@@ -47,7 +40,7 @@ def _doctest_files(files, globs, report_only_first_failure=False):
                 failure_count_, test_count_ = doctest.testfile(
                     file_,
                     module_relative=False,
-                    globs=globs,
+                    globs=globals_,
                     optionflags=optionflags,
                 )
             except UnicodeDecodeError:
@@ -58,21 +51,11 @@ def _doctest_files(files, globs, report_only_first_failure=False):
         if failure_count_:
             failed_file_paths.append(os.path.relpath(file_))
             error_messages.append(doctest_output)
-            result_code = "".join(
-                (
-                    _colors["RED"],
-                    "FAILED",
-                    _colors["END"],
-                )
-            )
+            strings = (baca.const.colors.red, "FAILED", baca.const.colors.end)
+            result_code = "".join(strings)
         else:
-            result_code = "".join(
-                (
-                    _colors["BLUE"],
-                    "OK",
-                    _colors["END"],
-                )
-            )
+            strings = (baca.const.colors.blue, "OK", baca.const.colors.end)
+            result_code = "".join(strings)
         print(f"{relative_path} {result_code}")
     if failed_file_paths:
         print()
@@ -105,7 +88,7 @@ if __name__ == "__main__":
         names = names[1:]
     else:
         report_only_first_failure = False
-    globs = _get_globs()
+    globals_ = _get_globals()
     current_directory = pathlib.Path(".").absolute()
     files = []
     for name in names:
@@ -122,7 +105,7 @@ if __name__ == "__main__":
     files.sort()
     exit_code = _doctest_files(
         files,
-        globs,
+        globals_,
         report_only_first_failure=report_only_first_failure,
     )
     sys.exit(exit_code)

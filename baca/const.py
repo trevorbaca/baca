@@ -1,3 +1,5 @@
+import types
+
 ALREADY_PITCHED = "ALREADY_PITCHED"
 ALLOW_OCTAVE = "ALLOW_OCTAVE"
 ALLOW_OUT_OF_RANGE = "ALLOW_OUT_OF_RANGE"
@@ -53,3 +55,15 @@ TEMPORARY_CONTAINER = "TEMPORARY_CONTAINER"
 TASTO = "TASTO"
 
 VIBRATO = "VIBRATO"
+
+colors = types.SimpleNamespace(
+    blue="\033[94m",
+    cyan="\033[36m",
+    end="\033[0m",
+    green="\033[32m",
+    green_bold="\033[1;32m",
+    magenta="\033[35m",
+    red="\033[91m",
+    red_bold="\033[1;31m",
+    yellow="\033[33m",
+)

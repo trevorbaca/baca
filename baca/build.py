@@ -15,12 +15,8 @@ import baca
 
 from . import scoping as _scoping
 
-_BLUE = "\033[94m"
-_CYAN = "\033[36m"
-_END = "\033[0m"
-_GREEN = "\033[32m"
-_MAGENTA = "\033[35m"
-_YELLOW = "\033[33m"
+_colors = baca.const.colors
+
 
 __also_untagged = "--also-untagged" in sys.argv
 __clicktrack = "--clicktrack" in sys.argv
@@ -88,26 +84,14 @@ def _also_untagged(segment_directory):
         untagged.write_text(string)
 
 
-def _call_lilypond_on_music_ly_in_segment(music_ly):
+def _call_lilypond_on_music_ly_in_segment(music_ly, music_pdf_mtime):
     lilypond_log_file_name = "." + music_ly.name + ".log"
     lilypond_log_file_path = music_ly.parent / lilypond_log_file_name
+    music_pdf = music_ly.with_name("music.pdf")
     with abjad.Timer() as timer:
-        abjad_repo_path = pathlib.Path(abjad.__file__).parent.parent
-        abjad_ily_path = f"{abjad_repo_path}/docs/source/_stylesheets"
-        baca_repo_path = pathlib.Path(baca.__file__).parent.parent
-        baca_ily_path = f"{baca_repo_path}/lilypond"
-        flags = f"--include={abjad_ily_path} --include={baca_ily_path}"
-        for string in flags.split():
-            _print_file_handling(f"Set LilyPond {string} ...")
-        _print_file_handling(f"Calling LilyPond on {baca.path.trim(music_ly)} ...")
-        abjad.io.run_lilypond(
-            music_ly,
-            flags=flags,
-            lilypond_log_file_path=lilypond_log_file_path,
-        )
+        run_lilypond(music_ly)
         music_ly_pdf = music_ly.parent / "music.ly.pdf"
         if music_ly_pdf.is_file():
-            music_pdf = music_ly.with_music("music.pdf")
             shutil.move(str(music_ly_pdf), str(music_pdf))
     _remove_lilypond_warnings(
         lilypond_log_file_path,
@@ -115,6 +99,8 @@ def _call_lilypond_on_music_ly_in_segment(music_ly):
         decrescendo_too_small=True,
         overwriting_glissando=True,
     )
+    if music_pdf.is_file() and music_pdf_mtime < os.path.getmtime(music_pdf):
+        _print_file_handling(f"Modified {baca.path.trim(music_pdf)} ...")
     _print_timing("LilyPond runtime", int(timer.elapsed_time))
     return int(timer.elapsed_time)
 
@@ -238,6 +224,14 @@ def _externalize_music_ly(music_ly):
     )
     for message in not_topmost():
         _print_tags(message)
+
+
+def _get_lilypond_include_string():
+    abjad_repo = pathlib.Path(abjad.__file__).parent.parent
+    baca_repo = pathlib.Path(baca.__file__).parent.parent
+    string = f"--include={abjad_repo}/docs/source/_stylesheets"
+    string += f" --include={baca_repo}/lilypond"
+    return string
 
 
 def _get_nonphantom_time_signatures(lilypond_file):
@@ -459,7 +453,7 @@ def _make_segment_clicktrack(lilypond_file):
     if clicktrack_path.is_file():
         _print_file_handling(f"Found {baca.path.trim(clicktrack_path)} ...")
     else:
-        _print_file_handling(f"Could not make {baca.path.trim(clicktrack_path)} ...")
+        _print_error(f"Can not find {baca.path.trim(clicktrack_path)} ...")
 
 
 def _make_segment_midi(lilypond_file):
@@ -482,7 +476,7 @@ def _make_segment_midi(lilypond_file):
     if music_midi.is_file():
         _print_file_handling(f"Found {baca.path.trim(music_midi)} ...")
     else:
-        _print_file_handling(f"Could not produce {baca.path.trim(music_midi)} ...")
+        _print_error(f"Can not find {baca.path.trim(music_midi)} ...")
 
 
 def _make_segment_pdf(lilypond_file, metadata, persist, timing):
@@ -496,53 +490,63 @@ def _make_segment_pdf(lilypond_file, metadata, persist, timing):
     _write_metadata(metadata, persist, segment_directory)
     _add_nonfirst_segment_preamble(lilypond_file, segment_directory)
     timing.abjad_format_time = _write_music_ly(lilypond_file, music_ly)
-    _message_music_ly_timing(music_ly, music_ly_mtime, nonphantom_time_signatures)
+    _message_music_ly_timing(
+        timing.abjad_format_time, music_ly, music_ly_mtime, nonphantom_time_signatures
+    )
     _handle_music_ly_tags_in_segment(music_ly)
     _check_layout_time_signatures_in_segment(
         segment_directory,
         nonphantom_time_signatures,
     )
     _externalize_music_ly(music_ly)
-    timing.lilypond_runtime = _call_lilypond_on_music_ly_in_segment(music_ly)
+    timing.lilypond_runtime = _call_lilypond_on_music_ly_in_segment(
+        music_ly,
+        music_pdf_mtime,
+    )
     _also_untagged(segment_directory)
     _log_timing(segment_directory, timing)
-    if music_pdf.is_file() and music_pdf_mtime < os.path.getmtime(music_pdf):
-        _print_file_handling(f"Modified {baca.path.trim(music_pdf)} ...")
 
 
-def _message_music_ly_timing(music_ly, music_ly_mtime, nonphantom_time_signatures):
+def _message_music_ly_timing(
+    abjad_format_time, music_ly, music_ly_mtime, nonphantom_time_signatures
+):
     if music_ly.is_file() and music_ly_mtime < os.path.getmtime(music_ly):
         count = len(nonphantom_time_signatures)
         message = f"Wrote {baca.path.trim(music_ly)} with {count} + 1 measures ..."
         _print_file_handling(message)
+        _print_timing("Abjad format time", abjad_format_time)
 
 
 def _print_always(string):
     print(string)
 
 
+def _print_error(string):
+    print(_colors.red + string + _colors.end)
+
+
 def _print_file_handling(string):
     if __print_file_handling:
-        print(_YELLOW + string + _END)
+        print(_colors.yellow + string + _colors.end)
 
 
 def _print_layout(string):
     if __print_layout:
-        print(_CYAN + string + _END)
+        print(_colors.cyan + string + _colors.end)
 
 
 def _print_main_task(string):
-    print(_BLUE + string + _END)
+    print(_colors.blue + string + _colors.end)
 
 
 def _print_tags(string):
     if __print_tags:
-        print(_BLUE + string + _END)
+        print(_colors.blue + string + _colors.end)
 
 
 def _print_tex(string):
     if __print_tags:
-        print(_MAGENTA + string + _END)
+        print(_colors.magenta + string + _colors.end)
 
 
 def _print_timing(title, timer):
@@ -554,7 +558,7 @@ def _print_timing(title, timer):
         count = int(timer.elapsed_time)
     counter = abjad.String("second").pluralize(count)
     count = str(count)
-    string = f"{_GREEN}{title} {count} {counter} ...{_END}"
+    string = f"{_colors.green}{title} {count} {counter} ...{_colors.end}"
     print(string)
 
 
@@ -632,7 +636,6 @@ def _write_metadata(metadata, persist, segment_directory):
 def _write_music_ly(lilypond_file, music_ly):
     result = abjad.persist.as_ly(lilypond_file, music_ly, tags=True)
     abjad_format_time = int(result[1])
-    _print_timing("Abjad format time", abjad_format_time)
     return abjad_format_time
 
 
@@ -685,7 +688,7 @@ def build_score(score_directory):
     interpret_tex_file(score_tex)
     score_pdf = score_directory / "score.pdf"
     if not score_pdf.is_file():
-        _print_file_handling(f"Could not produce {baca.path.trim(score_pdf)} ...")
+        _print_error(f"Can not find {baca.path.trim(score_pdf)} ...")
         sys.exit(1)
 
 
@@ -1304,26 +1307,14 @@ def make_segment_pdf(lilypond_file, metadata, persist, timing):
 
 def run_lilypond(ly_file_path):
     assert ly_file_path.exists(), repr(ly_file_path)
-    if not abjad.io.find_executable("lilypond"):
-        raise ValueError("cannot find LilyPond executable.")
-    _print_file_handling(f"Calling LilyPond on {baca.path.trim(ly_file_path)} ...")
+    string = f"Calling LilyPond (with includes) on {baca.path.trim(ly_file_path)} ..."
+    _print_file_handling(string)
     directory = ly_file_path.parent
     pdf = ly_file_path.with_suffix(".pdf")
-    backup_pdf = ly_file_path.with_suffix("._backup.pdf")
     lilypond_log_file_name = "." + ly_file_path.name + ".log"
     lilypond_log_file_path = directory / lilypond_log_file_name
-    if backup_pdf.exists():
-        backup_pdf.unlink()
-    if pdf.exists():
-        _print_file_handling(f"Removing {baca.path.trim(pdf)} ...")
-        pdf.unlink()
-    assert not pdf.exists()
     with abjad.TemporaryDirectoryChange(directory=directory):
-        _print_file_handling(f"Interpreting {baca.path.trim(ly_file_path)} ...")
-        abjad_repo = pathlib.Path(abjad.__file__).parent.parent
-        baca_repo = pathlib.Path(baca.__file__).parent.parent
-        flags = f"--include={abjad_repo}/docs/source/_stylesheets"
-        flags += f" --include={baca_repo}/lilypond"
+        flags = _get_lilypond_include_string()
         abjad.io.run_lilypond(
             str(ly_file_path),
             flags=flags,
@@ -1339,7 +1330,7 @@ def run_lilypond(ly_file_path):
         if pdf.is_file():
             _print_file_handling(f"Found {baca.path.trim(pdf)} ...")
         else:
-            _print_file_handling(f"Can not produce {baca.path.trim(pdf)} ...")
+            _print_error(f"Can not find {baca.path.trim(pdf)} ...")
         assert lilypond_log_file_path.exists()
 
 
