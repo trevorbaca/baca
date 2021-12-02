@@ -451,7 +451,7 @@ def _make_segment_clicktrack(lilypond_file):
     abjad.persist.as_midi(lilypond_file, clicktrack_file_name, remove_ly=True)
     clicktrack_path = segment_directory / clicktrack_file_name
     if clicktrack_path.is_file():
-        _print_file_handling(f"Found {baca.path.trim(clicktrack_path)} ...")
+        _print_success(f"Found {baca.path.trim(clicktrack_path)} ...")
     else:
         _print_error(f"Can not find {baca.path.trim(clicktrack_path)} ...")
 
@@ -474,7 +474,7 @@ def _make_segment_midi(lilypond_file):
     if tmp_ly.exists():
         tmp_ly.unlink()
     if music_midi.is_file():
-        _print_file_handling(f"Found {baca.path.trim(music_midi)} ...")
+        _print_success(f"Found {baca.path.trim(music_midi)} ...")
     else:
         _print_error(f"Can not find {baca.path.trim(music_midi)} ...")
 
@@ -539,6 +539,10 @@ def _print_main_task(string):
     print(_colors.blue + string + _colors.end)
 
 
+def _print_success(string):
+    print(_colors.green_bold + string + _colors.end)
+
+
 def _print_tags(string):
     if __print_tags:
         print(_colors.blue + string + _colors.end)
@@ -558,7 +562,7 @@ def _print_timing(title, timer):
         count = int(timer.elapsed_time)
     counter = abjad.String("second").pluralize(count)
     count = str(count)
-    string = f"{_colors.green}{title} {count} {counter} ...{_colors.end}"
+    string = f"{_colors.cyan}{title} {count} {counter} ...{_colors.end}"
     print(string)
 
 
@@ -1057,7 +1061,7 @@ def interpret_segment(
     if not any([__clicktrack, __midi, __pdf]):
         _print_always("Missing --clicktrack, --midi, --pdf ...")
         sys.exit(1)
-    _print_main_task("Interpreting segment ...")
+    _print_main_task("Interpreting commands ...")
     interpreter = interpreter or baca.interpret.interpreter
     segment_directory = pathlib.Path(os.getcwd())
     metadata = baca.path.get_metadata(segment_directory)
@@ -1083,7 +1087,7 @@ def interpret_segment(
             previous_persist=previous_persist,
             segment_number=segment_directory.name,
         )
-    _print_timing("Segment interpretation time", timer)
+    _print_timing("Command interpretation time", timer)
     timing = types.SimpleNamespace()
     timing.runtime = int(timer.elapsed_time)
     return metadata, persist, score, timing
@@ -1121,9 +1125,9 @@ def interpret_tex_file(tex):
         for path in sorted(tex.parent.glob("*.aux")):
             path.unlink()
     if pdf.is_file():
-        _print_tex(f"Found {baca.path.trim(pdf)} ...")
+        _print_success(f"Found {baca.path.trim(pdf)} ...")
     else:
-        _print_tex(f"Can not produce {baca.path.trim(pdf)} ...")
+        _print_error(f"Can not produce {baca.path.trim(pdf)} ...")
         sys.exit(1)
 
 
@@ -1328,7 +1332,7 @@ def run_lilypond(ly_file_path):
         )
         _display_lilypond_log_errors(lilypond_log_file_path)
         if pdf.is_file():
-            _print_file_handling(f"Found {baca.path.trim(pdf)} ...")
+            _print_success(f"Found {baca.path.trim(pdf)} ...")
         else:
             _print_error(f"Can not find {baca.path.trim(pdf)} ...")
         assert lilypond_log_file_path.exists()
