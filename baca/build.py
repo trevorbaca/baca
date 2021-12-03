@@ -1136,8 +1136,10 @@ def make_layout_ly(
     *,
     curtail_measure_count=None,
     do_not_append_phantom_measure=False,
+    do_not_tag=False,
     do_not_write_metadata=False,
     file_name="layout.ly",
+    page_layout_context_only=False,
     time_signatures=None,
 ):
     current_directory = pathlib.Path(os.getcwd())
@@ -1235,7 +1237,12 @@ def make_layout_ly(
     score = lilypond_file["Score"]
     del score["Music_Context"]
     score = lilypond_file["Score"]
-    text = abjad.lilypond(score, tags=True)
+    tags = not do_not_tag
+    if page_layout_context_only:
+        page_layout_context = score["Page_Layout"]
+        text = abjad.lilypond(page_layout_context, tags=tags)
+    else:
+        text = abjad.lilypond(score, tags=tags)
     text = text.replace("Global_Skips", "Page_Layout")
     text = text.replace("Global.Skips", "Page.Layout")
     text = abjad.lilypondformat.left_shift_tags(text)
