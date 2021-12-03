@@ -1132,7 +1132,13 @@ def interpret_tex_file(tex):
 
 
 def make_layout_ly(
-    spacing, *, curtail_measure_count=None, do_not_append_phantom_measure=False
+    spacing,
+    *,
+    curtail_measure_count=None,
+    do_not_append_phantom_measure=False,
+    do_not_write_metadata=False,
+    file_name="layout.ly",
+    time_signatures=None,
 ):
     current_directory = pathlib.Path(os.getcwd())
     if "segments" in str(current_directory):
@@ -1142,7 +1148,7 @@ def make_layout_ly(
     assert isinstance(spacing, baca.SpacingSpecifier), repr(spacing)
     layout_directory = pathlib.Path(os.getcwd())
     layout_py = layout_directory / "layout.py"
-    layout_ly = layout_directory / "layout.ly"
+    layout_ly = layout_directory / file_name
     if spacing.overrides is not None:
         assert spacing.fallback_duration is not None
     if spacing.fallback_duration is None:
@@ -1168,7 +1174,9 @@ def make_layout_ly(
         "measure_count": measure_count,
     }
     document_name = abjad.String(layout_directory.name).to_shout_case()
-    if layout_directory.parent.name == "segments":
+    if time_signatures is not None:
+        first_measure_number = 1
+    elif layout_directory.parent.name == "segments":
         string = "first_measure_number"
         first_measure_number = baca.path.get_metadatum(
             layout_directory, string, default=1
@@ -1231,7 +1239,8 @@ def make_layout_ly(
     text = text.replace("Global_Skips", "Page_Layout")
     text = text.replace("Global.Skips", "Page.Layout")
     text = abjad.lilypondformat.left_shift_tags(text)
-    layout_ly = layout_directory / "layout.ly"
+    # layout_ly = layout_directory / "layout.ly"
+    layout_ly = layout_directory / file_name
     lines = []
     # TODO: remove first_page_number embedding
     if layout_directory.parent.name == "segments":
@@ -1277,27 +1286,29 @@ def make_layout_ly(
     count = len(bol_measure_numbers)
     numbers = abjad.String("number").pluralize(count)
     items = ", ".join([str(_) for _ in bol_measure_numbers])
-    metadata = layout_directory / "__metadata__"
-    message = f"Writing BOL measure {numbers} {items} to {baca.path.trim(metadata)} ..."
-    _print_file_handling(message)
-    if layout_directory.name.endswith("-parts"):
-        if document_name is not None:
-            part_dictionary = baca.path.get_metadatum(
-                layout_directory,
-                document_name,
-                {},
-            )
+    if not do_not_write_metadata:
+        metadata = layout_directory / "__metadata__"
+        string = baca.path.trim(metadata)
+        message = f"Writing BOL measure {numbers} {items} to {string} ..."
+        _print_file_handling(message)
+        if layout_directory.name.endswith("-parts"):
+            if document_name is not None:
+                part_dictionary = baca.path.get_metadatum(
+                    layout_directory,
+                    document_name,
+                    {},
+                )
+            else:
+                part_dictionary = {}
+            part_dictionary["bol_measure_numbers"] = bol_measure_numbers
+            assert abjad.String(document_name).is_shout_case()
+            baca.path.add_metadatum(layout_directory, document_name, part_dictionary)
         else:
-            part_dictionary = {}
-        part_dictionary["bol_measure_numbers"] = bol_measure_numbers
-        assert abjad.String(document_name).is_shout_case()
-        baca.path.add_metadatum(layout_directory, document_name, part_dictionary)
-    else:
-        baca.path.add_metadatum(
-            layout_directory,
-            "bol_measure_numbers",
-            bol_measure_numbers,
-        )
+            baca.path.add_metadatum(
+                layout_directory,
+                "bol_measure_numbers",
+                bol_measure_numbers,
+            )
 
 
 def make_segment_pdf(lilypond_file, metadata, persist, timing):
