@@ -8,8 +8,10 @@ import baca
 if __name__ == "__main__":
     directory = os.getcwd()
     directory = pathlib.Path(directory)
-    skip_segment_collection = "--skip-segment-collection" in sys.argv[1:]
+    debug_segments = "--debug-segments" in sys.argv
+    skip_segment_collection = "--skip-segment-collection" in sys.argv
     baca.build.interpret_build_music(
         directory,
+        debug_segments=debug_segments,
         skip_segment_collection=skip_segment_collection,
     )

@@ -5,6 +5,7 @@ import pathlib
 import baca
 
 if __name__ == "__main__":
+    debug_segments = "--debug-segments" in sys.argv 
     directory = os.getcwd()
     directory = pathlib.Path(directory)
-    baca.build.build_part(directory)
+    baca.build.build_part(directory, debug_segments=debug_segments)

@@ -20,7 +20,6 @@ _colors = baca.const.colors
 
 __also_untagged = "--also-untagged" in sys.argv
 __clicktrack = "--clicktrack" in sys.argv
-__debug_segments = "--debug-segments" in sys.argv
 __log_timing = "--log-timing" in sys.argv
 __midi = "--midi" in sys.argv
 __pdf = "--pdf" in sys.argv
@@ -643,7 +642,7 @@ def _write_music_ly(lilypond_file, music_ly):
     return abjad_format_time
 
 
-def build_part(part_directory):
+def build_part(part_directory, debug_segments=False):
     assert part_directory.parent.name.endswith("-parts"), repr(part_directory)
     part_pdf = part_directory / "part.pdf"
     _print_always(f"Building {baca.path.trim(part_pdf)} ...")
@@ -651,7 +650,7 @@ def build_part(part_directory):
     # TODO: consider removing or hoisting to make
     os.system(f"python {layout_py}")
     _print_always()
-    interpret_build_music(part_directory)
+    interpret_build_music(part_directory, debug_segments=debug_segments)
     _print_always()
     front_cover_tex = part_directory / "front-cover.tex"
     interpret_tex_file(front_cover_tex)
@@ -666,11 +665,11 @@ def build_part(part_directory):
     interpret_tex_file(part_tex)
 
 
-def build_score(score_directory):
+def build_score(score_directory, debug_segments=False):
     assert score_directory.name.endswith("-score"), repr(score_directory)
     assert score_directory.parent.name == "builds", repr(score_directory)
     _print_always("Building score ...")
-    interpret_build_music(score_directory)
+    interpret_build_music(score_directory, debug_segments=debug_segments)
     _print_always()
     for stem in (
         "front-cover",
@@ -1009,7 +1008,12 @@ def handle_part_tags(directory):
     )
 
 
-def interpret_build_music(build_directory, *, skip_segment_collection=False):
+def interpret_build_music(
+    build_directory,
+    *,
+    debug_segments=False,
+    skip_segment_collection=False,
+):
     """
     Interprets music.ly file in build directory.
 
@@ -1044,7 +1048,7 @@ def interpret_build_music(build_directory, *, skip_segment_collection=False):
             handle_part_tags(build_directory)
     _check_layout_time_signatures_in_build(music_ly)
     run_lilypond(music_ly)
-    if _segments_directory.is_dir() and not __debug_segments:
+    if _segments_directory.is_dir() and not debug_segments:
         _print_file_handling(f"Removing {baca.path.trim(_segments_directory)} ...")
         shutil.rmtree(str(_segments_directory))
 
