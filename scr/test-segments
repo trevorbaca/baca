@@ -67,6 +67,7 @@ def _test_segment(segment_directory):
     if metadata.get("first_metronome_mark") is not False:
         names.extend(["clicktrack.midi", "music.midi"])
     names.sort()
+    print(names)
     layout_py = segment_directory / "layout.py"
     if layout_py.exists():
         names.append("layout.ly")
