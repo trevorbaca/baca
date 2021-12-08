@@ -62,7 +62,11 @@ def _run_scripts(layout_py):
 
 def _test_segment(segment_directory):
     assert segment_directory.parent.name == "segments", repr(segment_directory)
-    names = ["clicktrack.midi", "music.ily", "music.ly", "music.midi", "music.pdf"]
+    metadata = baca.path.get_metadata(segment_directory)
+    names = ["music.ily", "music.ly", "music.pdf"]
+    if metadata.get("first_metronome_mark") is not False:
+        names.extend(["clicktrack.midi", "music.midi"])
+    names.sort()
     layout_py = segment_directory / "layout.py"
     if layout_py.exists():
         names.append("layout.ly")

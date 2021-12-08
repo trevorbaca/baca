@@ -1218,6 +1218,7 @@ def _collect_metadata(
     final_measure_is_fermata,
     final_measure_number,
     first_measure_number,
+    first_metronome_mark,
     metadata,
     persist,
     persistent_indicators,
@@ -1246,6 +1247,8 @@ def _collect_metadata(
     metadata_["final_measure_number"] = final_measure_number
     if final_measure_is_fermata is True:
         metadata_["final_measure_is_fermata"] = True
+    if first_metronome_mark is False:
+        metadata_["first_metronome_mark"] = first_metronome_mark
     if persistent_indicators:
         persist_["persistent_indicators"] = persistent_indicators
     if start_clock_time is not None:
@@ -1261,6 +1264,8 @@ def _collect_metadata(
     _sort_dictionary(metadata)
     metadata = dict(metadata)
     for key, value in metadata.items():
+        if value in (True, False):
+            continue
         if not bool(value):
             raise Exception(f"{key} metadata should be nonempty (not {value!r}).")
     persist.clear()
@@ -3283,6 +3288,11 @@ def interpreter(
             previous_persistent_indicators,
             score,
         )
+        first_metronome_mark = True
+        skip = abjad.select(score["Global_Skips"]).leaf(0)
+        metronome_mark = abjad.get.effective(skip, abjad.MetronomeMark)
+        if metronome_mark is None:
+            first_metronome_mark = False
         _collect_metadata(
             container_to_part_assignment,
             clock_time_duration,
@@ -3290,6 +3300,7 @@ def interpreter(
             final_measure_is_fermata,
             final_measure_number,
             first_measure_number,
+            first_metronome_mark,
             metadata,
             persist,
             persistent_indicators,

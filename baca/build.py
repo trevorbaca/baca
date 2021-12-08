@@ -389,6 +389,12 @@ def _make_annotation_jobs(directory, *, undo=False):
 
 def _make_segment_clicktrack(lilypond_file):
     segment_directory = pathlib.Path(os.getcwd())
+    metadata = baca.path.get_metadata(segment_directory)
+    if metadata.get("first_metronome_mark") is False:
+        _print_main_task(
+            f"Skipping clicktrack for segment {segment_directory.name} ..."
+        )
+        return
     _print_main_task(f"Making clicktrack for segment {segment_directory.name} ...")
     global_skips = lilypond_file["Global_Skips"]
     time_signatures = []
@@ -457,6 +463,10 @@ def _make_segment_clicktrack(lilypond_file):
 
 def _make_segment_midi(lilypond_file):
     segment_directory = pathlib.Path(os.getcwd())
+    metadata = baca.path.get_metadata(segment_directory)
+    if metadata.get("first_metronome_mark") is False:
+        _print_main_task(f"Skipping MIDI for segment {segment_directory.name} ...")
+        return
     _print_main_task(f"Making MIDI for segment {segment_directory.name} ...")
     music_midi = segment_directory / "music.midi"
     if music_midi.exists():
