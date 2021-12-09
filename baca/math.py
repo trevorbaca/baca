@@ -409,32 +409,32 @@ def partition_integer_into_halves(n, bigger=abjad.Left, allow_even=True):
         return (smaller_half, bigger_half)
 
 
-def partition_nested_into_inward_pointing_parts(list_, target="negative"):
+def partition_nested_into_inward_pointing_parts(sequence, target="negative"):
     """
-    Partitions integers in subsequences of ``list_`` into inward-pointing parts.
+    Partitions integers in subsequences of ``sequence`` into inward-pointing parts.
 
     ..  container:: example
 
-        >>> list_ = [[1, 1, 5]]
-        >>> baca.partition_nested_into_inward_pointing_parts(list_)
+        >>> sequence = [[1, 1, 5]]
+        >>> baca.partition_nested_into_inward_pointing_parts(sequence)
         [[1, 1, 5]]
 
-        >>> list_ = [[1, 1, -5]]
-        >>> baca.partition_nested_into_inward_pointing_parts(list_)
+        >>> sequence = [[1, 1, -5]]
+        >>> baca.partition_nested_into_inward_pointing_parts(sequence)
         [[1, 1, 1, -4]]
 
-        >>> list_ = [[1], [5], [5, 1], [1, 5], [5, 5], [1, 5, 1]]
-        >>> baca.partition_nested_into_inward_pointing_parts(list_, target="positive")
+        >>> sequence = [[1], [5], [5, 1], [1, 5], [5, 5], [1, 5, 1]]
+        >>> baca.partition_nested_into_inward_pointing_parts(sequence, target="positive")
         [[1], [4, 1], [4, 1, 1], [1, 1, 4], [4, 1, 1, 4], [1, 4, 1, 1]]
 
-        >>> list_ = [[1, 1, -5]]
-        >>> baca.partition_nested_into_inward_pointing_parts(list_, target="positive")
+        >>> sequence = [[1, 1, -5]]
+        >>> baca.partition_nested_into_inward_pointing_parts(sequence, target="positive")
         [[1, 1, -5]]
 
     """
     result = []
     if target == "negative":
-        for element in list_:
+        for element in sequence:
             # -5 at beginning
             if element[0] == -5:
                 result.append([-4, 1] + element[1:])
@@ -454,7 +454,7 @@ def partition_nested_into_inward_pointing_parts(list_, target="negative"):
             else:
                 result.append(element)
     if target == "positive":
-        for sublist in list_:
+        for sublist in sequence:
             new = sublist
             # 5 at beginning
             if new[0] == 5:
@@ -471,14 +471,103 @@ def partition_nested_into_inward_pointing_parts(list_, target="negative"):
     return result
 
 
+def partition_to_avoid_octave_adjacencies(sequence, bigger=abjad.Left):
+    """
+    Partitions ``sequence`` to avoid octave adjacencies.
+
+    ..  container:: example
+
+        No duplicate items:
+
+        >>> pitches = [0, 1, 2, 3]
+        >>> baca.partition_to_avoid_octave_adjacencies(pitches, abjad.Left)
+        [(0, 1, 2, 3)]
+
+        >>> baca.partition_to_avoid_octave_adjacencies(pitches, abjad.Right)
+        [(0, 1, 2, 3)]
+
+        All duplicate items:
+
+        >>> pitches = [0, 0, 0, 0]
+        >>> baca.partition_to_avoid_octave_adjacencies(pitches, abjad.Left)
+        [(0,), (0,), (0,), (0,)]
+
+        >>> pitches = [0, 0, 0, 0]
+        >>> baca.partition_to_avoid_octave_adjacencies(pitches, abjad.Right)
+        [(0,), (0,), (0,), (0,)]
+
+        Duplicates, with odd number of items:
+
+        >>> pitches = [0, 1, 0]
+        >>> baca.partition_to_avoid_octave_adjacencies(pitches, abjad.Left)
+        [(0, 1), (0,)]
+
+        >>> baca.partition_to_avoid_octave_adjacencies(pitches, abjad.Right)
+        [(0,), (1, 0)]
+
+        >>> pitches = [0, 1, 2, 3, 0]
+        >>> baca.partition_to_avoid_octave_adjacencies(pitches, abjad.Left)
+        [(0, 1, 2), (3, 0)]
+
+        >>> baca.partition_to_avoid_octave_adjacencies(pitches, abjad.Right)
+        [(0, 1), (2, 3, 0)]
+
+        Duplicates, with even number of items:
+
+        >>> pitches = [0, 1, 2, 0]
+        >>> baca.partition_to_avoid_octave_adjacencies(pitches, abjad.Left)
+        [(0, 1), (2, 0)]
+
+        >>> baca.partition_to_avoid_octave_adjacencies(pitches, abjad.Right)
+        [(0, 1), (2, 0)]
+
+        >>> pitches = [0, 1, 2, 3, 4, 0]
+        >>> baca.partition_to_avoid_octave_adjacencies(pitches, abjad.Left)
+        [(0, 1, 2), (3, 4, 0)]
+
+        >>> baca.partition_to_avoid_octave_adjacencies(pitches, abjad.Right)
+        [(0, 1, 2), (3, 4, 0)]
+
+    """
+    assert bigger in (abjad.Left, abjad.Right), repr(bigger)
+    result = [[]]
+    part = result[-1]
+    for number in sequence:
+        assert isinstance(number, (int, float))
+        pc = number % 12
+        part_pcs = [_ % 12 for _ in part]
+        if pc not in part_pcs:
+            part.append(number)
+            continue
+        first_value = [_ for _ in part if _ % 12 == pc][0]
+        first_index = part.index(first_value)
+        old_part = part[: first_index + 1]
+        disputed_part = abjad.Sequence(part[first_index + 1 :])
+        new_part = []
+        length = len(disputed_part)
+        left, right = partition_integer_into_halves(length, bigger=bigger)
+        disputed_parts = disputed_part.partition_by_counts([left, right])
+        left_disputed_part, right_disputed_part = disputed_parts
+        assert len(left_disputed_part) == left
+        assert len(right_disputed_part) == right
+        old_part.extend(left_disputed_part)
+        new_part.extend(right_disputed_part)
+        result[-1] = old_part
+        result.append(new_part)
+        part = result[-1]
+        part.append(number)
+    result = [tuple(_) for _ in result]
+    return result
+
+
 def repeat_subruns_to_length(notes, pairs, history=False):
     """
     Repeats ``notes`` according to ``pairs``.
 
     ..  container:: example
 
-        >>> list_ = [abjad.Note(_, (1, 4)) for _ in [0, 2, 4, 5, 7, 9, 11]]
-        >>> baca.repeat_subruns_to_length(list_, [(0, 4, 1), (2, 4, 1)])
+        >>> sequence = [abjad.Note(_, (1, 4)) for _ in [0, 2, 4, 5, 7, 9, 11]]
+        >>> baca.repeat_subruns_to_length(sequence, [(0, 4, 1), (2, 4, 1)])
         [Note("c'4"), Note("d'4"), Note("e'4"), Note("f'4"), Note("c'4"), Note("d'4"), Note("e'4"), Note("f'4"), Note("g'4"), Note("a'4"), Note("e'4"), Note("f'4"), Note("g'4"), Note("a'4"), Note("b'4")]
 
     Returns list of components.
