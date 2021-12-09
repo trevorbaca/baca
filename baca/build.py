@@ -23,11 +23,17 @@ __clicktrack = "--clicktrack" in sys.argv
 __log_timing = "--log-timing" in sys.argv
 __midi = "--midi" in sys.argv
 __pdf = "--pdf" in sys.argv
-__print_file_handling = "--print-file-handling" in sys.argv or "--verbose" in sys.argv
-__print_layout = "--print-layout" in sys.argv or "--verbose" in sys.argv
-__print_tags = "--print-tags" in sys.argv or "--verbose" in sys.argv
-__print_tex = "--print-tex" in sys.argv or "--verbose" in sys.argv
-__print_timing = "--print-timing" in sys.argv or "--verbose" in sys.argv
+
+# __print_file_handling = "--print-file-handling" in sys.argv or "--verbose" in sys.argv
+# __print_layout = "--print-layout" in sys.argv or "--verbose" in sys.argv
+# __print_tags = "--print-tags" in sys.argv or "--verbose" in sys.argv
+# __print_tex = "--print-tex" in sys.argv or "--verbose" in sys.argv
+# __print_timing = "--print-timing" in sys.argv or "--verbose" in sys.argv
+__print_file_handling = True
+__print_layout = True
+__print_tags = True
+__print_tex = True
+__print_timing = True
 __redo_layout = "--redo-layout" in sys.argv
 __verbose = "--verbose" in sys.argv
 
