@@ -108,13 +108,12 @@ if __name__ == "__main__":
     result = 0
     paths = list(sorted(segments_directory.glob("[0-9]*")))
     count = len(paths)
-    for i, path in enumerate(paths):
+    for path in paths:
         if not path.is_dir():
             continue
         os.chdir(path)
         result_ = _test_segment(path)
         if result_ != 0:
             result = result_
-        if i < count - 1:
-            print()
+        print()
     sys.exit(result)

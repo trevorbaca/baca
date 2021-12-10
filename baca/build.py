@@ -1212,7 +1212,7 @@ def make_layout_ly(
             )
 
 
-def make_segment_pdf(lilypond_file, metadata, persist, timing):
+def persist(lilypond_file, metadata, persist, timing):
     _arguments = arguments(
         "--also-untagged",
         "--clicktrack",
