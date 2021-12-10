@@ -7,9 +7,7 @@ import types
 import abjad
 import baca
 
-_GREEN_BOLD='\033[1;32m'
-_RED_BOLD='\033[1;31m'
-_NC='\033[0m'
+_colors = baca.const.colors
 
 
 def _capture_diff(path):
@@ -32,28 +30,26 @@ def _capture_diff(path):
 
 def _print_results(path, results):
     if results.exists is True:
-        print(f"{_GREEN_BOLD}PASS: {path.name} found ...{_NC}")
+        print(f"{_colors.green_bold}PASS: {path.name} found ...{_colors.end}")
         if results.same is True:
-            print(f"{_GREEN_BOLD}PASS: {path.name} same ...{_NC}")
+            print(f"{_colors.green_bold}PASS: {path.name} same ...{_colors.end}")
         elif results.same is False:
-            print(f"{_RED_BOLD}FAIL: {path.name} changed ...{_NC}")
+            print(f"{_colors.red_bold}FAIL: {path.name} changed ...{_colors.end}")
         else:
             assert results.same == "SKIP"
     else:
-        print(f"{_RED_BOLD}FAIL: {path.name} missing ...{_NC}")
+        print(f"{_colors.red_bold}FAIL: {path.name} missing ...{_colors.end}")
 
 
 def _run_scripts(layout_py):
     if layout_py.exists():
-        os.system("python layout.py --print-file-handling")
+        os.system("python layout.py")
     flags = [
         "--also-untagged",
         "--clicktrack",
         "--log-timing",
         "--midi",
         "--pdf",
-        "--print-file-handling",
-        "--print-timing",
     ]
     string = " ".join(flags)
     command = f"python music.py {string}"

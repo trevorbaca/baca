@@ -1,7 +1,6 @@
 import copy
 import functools
 import importlib
-import sys
 from inspect import currentframe as _frame
 
 import abjad
@@ -21,9 +20,6 @@ from . import scoping as _scoping
 from . import selection as _selection
 from . import selectors as _selectors
 from . import tags as _tags
-
-__print_timing = "--print-timing" in sys.argv or "--verbose" in sys.argv
-
 
 nonfirst_preamble = r"""\header { composer = ##f poet = ##f title = ##f }
 \layout { indent = 0 }
@@ -2365,15 +2361,17 @@ def _populate_offset_to_measure_number(first_measure_number, global_skips):
     return offset_to_measure_number
 
 
-def _print_timing(title, timer, suffix=None):
-    if not __print_timing:
+def _print_timing(title, timer, *, print_timing=False, suffix=None):
+    if not print_timing:
         return
     count = int(timer.elapsed_time)
     counter = abjad.String("second").pluralize(count)
     count = str(count)
-    string = f"{_const.colors.cyan}{title} {count} {counter}"
     if suffix is not None:
-        string += f" [{suffix}]"
+        suffix = f" [{suffix}]"
+    else:
+        suffix = ""
+    string = f"{_const.colors.cyan}{title}{suffix} in {count} {counter}"
     string += f" ...{_const.colors.end}"
     print(string)
 
@@ -3110,7 +3108,7 @@ def interpreter(
         _label_measure_numbers(first_measure_number, global_skips)
         _label_stage_numbers(global_skips, stage_markup)
         _label_moment_numbers(global_skips, moment_markup)
-    _print_timing("Initialization", timer)
+    # _print_timing("Initialization", timer, print_timing=print_timing)
     with abjad.Timer() as timer:
         measure_count = len(time_signatures)
         with abjad.ForbidUpdate(component=score, update_on_exit=True):
@@ -3128,7 +3126,9 @@ def interpreter(
                 voice_metadata,
             )
             _clean_up_rhythm_maker_voice_names(score)
-    _print_timing("Rhythm commands", timer, command_count)
+    _print_timing(
+        "Rhythm commands", timer, print_timing=print_timing, suffix=command_count
+    )
     with abjad.Timer() as timer:
         offset_to_measure_number = _populate_offset_to_measure_number(
             first_measure_number,
@@ -3155,7 +3155,7 @@ def interpreter(
             )
         if spacing is not None:
             _apply_spacing(page_layout_profile, score, spacing)
-    _print_timing("Cleanup", timer)
+    # _print_timing("Cleanup", timer, print_timing=print_timing)
     with abjad.Timer() as timer:
         with abjad.ForbidUpdate(component=score, update_on_exit=True):
             cache = None
@@ -3171,7 +3171,9 @@ def interpreter(
                 score,
                 voice_metadata,
             )
-    _print_timing("Other commands", timer, command_count)
+    _print_timing(
+        "Other commands", timer, print_timing=print_timing, suffix=command_count
+    )
     with abjad.Timer() as timer:
         with abjad.ForbidUpdate(component=score, update_on_exit=True):
             if not first_segment:
@@ -3253,7 +3255,7 @@ def interpreter(
                     container_to_part_assignment,
                     part_manifest,
                 )
-    _print_timing("Postprocessing", timer)
+    _print_timing("Postprocessing", timer, print_timing=print_timing)
     with abjad.Timer() as timer:
         _move_global_rests(
             global_rests_in_every_staff,
@@ -3312,7 +3314,7 @@ def interpreter(
         )
         if append_phantom_measure:
             _style_phantom_measures(score)
-    _print_timing("Cleanup", timer)
+    # _print_timing("Cleanup", timer, print_timing=print_timing)
     dummy_container[:] = []
     return metadata, persist
 

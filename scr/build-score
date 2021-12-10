@@ -1,12 +1,9 @@
 #! /usr/bin/env python
-import os
-import pathlib
-import sys
-
 import baca
 
 if __name__ == "__main__":
-    debug_segments = "--debug-segments" in sys.argv
-    directory = os.getcwd()
-    directory = pathlib.Path(directory)
-    baca.build.build_score(directory, debug_segments=debug_segments)
+    arguments = baca.build.arguments("--debug-segments")
+    baca.build.build_score(
+        baca.build.directory(),
+        debug_segments=arguments.debug_segments,
+    )

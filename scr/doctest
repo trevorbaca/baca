@@ -79,15 +79,13 @@ def _doctest_files(files, globals_, report_only_first_failure=False):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) <= 1:
-        print("Must specify one or more files ...")
-        sys.exit()
-    names = sys.argv[1:]
-    if names[0] == "--report-only-first-failure":
-        report_only_first_failure = True
-        names = names[1:]
-    else:
-        report_only_first_failure = False
+    names, report_only_first_failure = [], False
+    for input_ in sys.argv[1:]:
+        if input_ == "--report-only-first-failure":
+            report_only_first_failure = True
+        else:
+            names.append(input_)
+    assert names, repr(names)
     globals_ = _get_globals()
     current_directory = pathlib.Path(".").absolute()
     files = []

@@ -1,17 +1,15 @@
 #! /usr/bin/env python
 import os
 import pathlib
-import sys
 
 import baca
 
 if __name__ == "__main__":
     directory = os.getcwd()
     directory = pathlib.Path(directory)
-    debug_segments = "--debug-segments" in sys.argv
-    skip_segment_collection = "--skip-segment-collection" in sys.argv
+    arguments = baca.build.arguments("--debug-segments", "--skip-segment-collection")
     baca.build.interpret_build_music(
         directory,
-        debug_segments=debug_segments,
-        skip_segment_collection=skip_segment_collection,
+        debug_segments=arguments.debug_segments,
+        skip_segment_collection=arguments.skip_segment_collection,
     )

@@ -18,26 +18,6 @@ from . import scoping as _scoping
 _colors = baca.const.colors
 
 
-__also_untagged = "--also-untagged" in sys.argv
-__clicktrack = "--clicktrack" in sys.argv
-__log_timing = "--log-timing" in sys.argv
-__midi = "--midi" in sys.argv
-__pdf = "--pdf" in sys.argv
-
-# __print_file_handling = "--print-file-handling" in sys.argv or "--verbose" in sys.argv
-# __print_layout = "--print-layout" in sys.argv or "--verbose" in sys.argv
-# __print_tags = "--print-tags" in sys.argv or "--verbose" in sys.argv
-# __print_tex = "--print-tex" in sys.argv or "--verbose" in sys.argv
-# __print_timing = "--print-timing" in sys.argv or "--verbose" in sys.argv
-__print_file_handling = True
-__print_layout = True
-__print_tags = True
-__print_tex = True
-__print_timing = True
-__redo_layout = "--redo-layout" in sys.argv
-__verbose = "--verbose" in sys.argv
-
-
 # TODO: replace with segment-specific stylesheets
 def _add_nonfirst_segment_preamble(lilypond_file, segment_directory):
     if segment_directory.name == "01":
@@ -58,8 +38,6 @@ def _add_nonfirst_segment_preamble(lilypond_file, segment_directory):
 
 
 def _also_untagged(segment_directory):
-    if not __also_untagged:
-        return
     if os.environ.get("GITHUB_WORKSPACE"):
         return
     for name in ("music.ly", "music.ily", "layout.ly"):
@@ -94,7 +72,7 @@ def _call_lilypond_on_music_ly_in_segment(music_ly, music_pdf_mtime):
     lilypond_log_file_path = music_ly.parent / lilypond_log_file_name
     music_pdf = music_ly.with_name("music.pdf")
     with abjad.Timer() as timer:
-        run_lilypond(music_ly)
+        run_lilypond(music_ly, pdf_mtime=music_pdf_mtime)
         music_ly_pdf = music_ly.parent / "music.ly.pdf"
         if music_ly_pdf.is_file():
             shutil.move(str(music_ly_pdf), str(music_pdf))
@@ -104,99 +82,7 @@ def _call_lilypond_on_music_ly_in_segment(music_ly, music_pdf_mtime):
         decrescendo_too_small=True,
         overwriting_glissando=True,
     )
-    if music_pdf.is_file() and music_pdf_mtime < os.path.getmtime(music_pdf):
-        _print_file_handling(f"Modified {baca.path.trim(music_pdf)} ...")
-    _print_timing("LilyPond runtime", int(timer.elapsed_time))
     return int(timer.elapsed_time)
-
-
-def _check_layout_time_signatures_in_build(music_ly):
-    _print_layout("Checking layout time signatures ...")
-    build_directory = music_ly.parent
-    layout_ly_file_path = build_directory / "layout.ly"
-    if not layout_ly_file_path.is_file():
-        _print_layout(f"No {baca.path.trim(layout_ly_file_path)} found ...")
-        return
-    _print_file_handling(f"Found {baca.path.trim(layout_ly_file_path)} ...")
-    metadata_time_signatures = []
-    segments_directory = build_directory / "segments"
-    for segment_directory in sorted(segments_directory.glob("*")):
-        time_signatures = baca.path.get_metadatum(segment_directory, "time_signatures")
-        metadata_time_signatures.extend(time_signatures)
-    if metadata_time_signatures:
-        _print_file_handling("Found time signature metadata ...")
-    layout_time_signatures = _get_preamble_time_signatures(layout_ly_file_path)
-    if layout_time_signatures == metadata_time_signatures:
-        message = "Layout time signatures"
-        message += f" ({len(layout_time_signatures)})"
-        message += " match metadata time signatures"
-        message += f" ({len(metadata_time_signatures)}) ..."
-        _print_layout(message)
-        return
-    message = "Layout time signatures"
-    message += f" ({len(layout_time_signatures)})"
-    message += " do not match metadata time signatures"
-    message += f" ({len(metadata_time_signatures)}) ..."
-    _print_layout(message)
-    _print_layout(f"Remaking {baca.path.trim(layout_ly_file_path)} ...")
-    layout_py = layout_ly_file_path.with_suffix(".py")
-    # TODO: consider removing
-    os.system(f"python {layout_py}")
-    layout_time_signatures = _get_preamble_time_signatures(layout_ly_file_path)
-    if layout_time_signatures == metadata_time_signatures:
-        message = "Layout time signatures"
-        message += f" ({len(layout_time_signatures)})"
-        message += " match metadata time signatures"
-        message += f" ({len(metadata_time_signatures)}) ..."
-    else:
-        message = "Layout time signatures"
-        message += f" ({len(layout_time_signatures)})"
-        message += " still do not match metadata time signatures"
-        message += f" ({len(metadata_time_signatures)}) ..."
-    _print_layout(message)
-
-
-def _check_layout_time_signatures_in_segment(
-    segment_directory,
-    nonphantom_time_signatures,
-):
-    measure_count = len(nonphantom_time_signatures)
-    layout_py = segment_directory / "layout.py"
-    music_ly = segment_directory / "music.ly"
-    if not layout_py.exists():
-        _print_layout(f"No {baca.path.trim(layout_py)} found ...")
-        return
-    layout_ly = segment_directory / "layout.ly"
-    layout_time_signatures = _get_preamble_time_signatures(layout_ly)
-    if layout_time_signatures is not None:
-        assert isinstance(layout_time_signatures, list)
-        layout_measure_count = len(layout_time_signatures)
-        counter = abjad.String("measure").pluralize(layout_measure_count)
-        message = f"Found {layout_measure_count} {counter}"
-        message += f" in {baca.path.trim(layout_ly)} ..."
-        _print_layout(message)
-        if layout_time_signatures == nonphantom_time_signatures:
-            _print_layout("Music time signatures match layout time signatures ...")
-        # TODO: consider removing
-        else:
-            message = "Music time signatures do not match layout time signatures ..."
-            _print_layout(message)
-            _print_layout(f"Remaking {baca.path.trim(layout_ly)} ...")
-            os.system(f"python {layout_py}")
-            counter = abjad.String("measure").pluralize(measure_count)
-            message = f"Found {measure_count} {counter}"
-            message += f" in {baca.path.trim(music_ly)} ..."
-            _print_layout(message)
-            layout_time_signatures = _get_preamble_time_signatures(layout_ly)
-            layout_measure_count = len(layout_time_signatures)
-            counter = abjad.String("measure").pluralize(layout_measure_count)
-            message = f"Found {layout_measure_count} {counter}"
-            message += f" in {baca.path.trim(layout_ly)} ..."
-            _print_layout(message)
-            if layout_time_signatures != nonphantom_time_signatures:
-                message = "Music time signatures still do not match"
-                message += " layout time signatures ..."
-                _print_layout(message)
 
 
 def _display_lilypond_log_errors(lilypond_log_file_path):
@@ -237,19 +123,6 @@ def _get_lilypond_include_string():
     string = f"--include={abjad_repo}/docs/source/_stylesheets"
     string += f" --include={baca_repo}/lilypond"
     return string
-
-
-def _get_nonphantom_time_signatures(lilypond_file):
-    global_skips = lilypond_file["Global_Skips"]
-    time_signatures = []
-    for skip in global_skips:
-        time_signature = abjad.get.effective(skip, abjad.TimeSignature)
-        assert isinstance(time_signature, abjad.TimeSignature), repr(time_signature)
-        time_signatures.append(str(time_signature))
-    # for phantom measure at end
-    if 0 < len(time_signatures):
-        time_signatures.pop()
-    return time_signatures
 
 
 def _get_preamble_page_count_overview(path):
@@ -331,8 +204,6 @@ def _handle_music_ly_tags_in_segment(music_ly):
 
 
 def _log_timing(segment_directory, timing):
-    if not __log_timing:
-        return
     _timing = segment_directory / ".timing"
     with _timing.open(mode="a") as pointer:
         pointer.write("\n")
@@ -494,45 +365,48 @@ def _make_segment_midi(lilypond_file):
         _print_error(f"Can not find {baca.path.trim(music_midi)} ...")
 
 
-def _make_segment_pdf(lilypond_file, metadata, persist, timing):
+def _make_segment_pdf(
+    lilypond_file,
+    metadata,
+    persist,
+    timing,
+    *,
+    also_untagged=False,
+    log_timing=False,
+    print_timing=False,
+):
     segment_directory = pathlib.Path(os.getcwd())
     _print_main_task(f"Making PDF for segment {segment_directory.name} ...")
     music_pdf = segment_directory / "music.pdf"
     music_ly = segment_directory / "music.ly"
     music_pdf_mtime = os.path.getmtime(music_pdf) if music_pdf.is_file() else 0
     music_ly_mtime = os.path.getmtime(music_ly) if music_ly.is_file() else 0
-    nonphantom_time_signatures = _get_nonphantom_time_signatures(lilypond_file)
     _write_metadata(metadata, persist, segment_directory)
     _add_nonfirst_segment_preamble(lilypond_file, segment_directory)
     timing.abjad_format_time = _write_music_ly(lilypond_file, music_ly)
-    _message_music_ly_timing(
-        timing.abjad_format_time, music_ly, music_ly_mtime, nonphantom_time_signatures
-    )
+    _message_music_ly_timing(music_ly, music_ly_mtime)
     _handle_music_ly_tags_in_segment(music_ly)
-    _check_layout_time_signatures_in_segment(
-        segment_directory,
-        nonphantom_time_signatures,
-    )
     _externalize_music_ly(music_ly)
     timing.lilypond_runtime = _call_lilypond_on_music_ly_in_segment(
         music_ly,
         music_pdf_mtime,
     )
-    _also_untagged(segment_directory)
-    _log_timing(segment_directory, timing)
+    if also_untagged is True:
+        _also_untagged(segment_directory)
+    if log_timing:
+        _log_timing(segment_directory, timing)
+    if print_timing:
+        _print_timing("Command interpretation time", int(timing.runtime))
+        _print_timing("Abjad format time", int(timing.abjad_format_time))
+        _print_timing("LilyPond runtime", int(timing.lilypond_runtime))
 
 
-def _message_music_ly_timing(
-    abjad_format_time, music_ly, music_ly_mtime, nonphantom_time_signatures
-):
+def _message_music_ly_timing(music_ly, music_ly_mtime):
     if music_ly.is_file() and music_ly_mtime < os.path.getmtime(music_ly):
-        count = len(nonphantom_time_signatures)
-        message = f"Wrote {baca.path.trim(music_ly)} with {count} + 1 measures ..."
-        _print_file_handling(message)
-        _print_timing("Abjad format time", abjad_format_time)
+        _print_file_handling(f"Writing {baca.path.trim(music_ly)} ...")
 
 
-def _print_always(string):
+def _print_always(string=""):
     print(string)
 
 
@@ -541,13 +415,11 @@ def _print_error(string):
 
 
 def _print_file_handling(string):
-    if __print_file_handling:
-        print(_colors.yellow + string + _colors.end)
+    print(_colors.yellow + string + _colors.end)
 
 
 def _print_layout(string):
-    if __print_layout:
-        print(_colors.cyan + string + _colors.end)
+    print(_colors.magenta + string + _colors.end)
 
 
 def _print_main_task(string):
@@ -559,18 +431,10 @@ def _print_success(string):
 
 
 def _print_tags(string):
-    if __print_tags:
-        print(_colors.blue + string + _colors.end)
-
-
-def _print_tex(string):
-    if __print_tags:
-        print(_colors.magenta + string + _colors.end)
+    print(_colors.cyan + string + _colors.end)
 
 
 def _print_timing(title, timer):
-    if not __print_timing:
-        return
     if isinstance(timer, int):
         count = timer
     else:
@@ -658,6 +522,28 @@ def _write_music_ly(lilypond_file, music_ly):
     return abjad_format_time
 
 
+def arguments(*arguments):
+    result = types.SimpleNamespace()
+    for argument in arguments:
+        name = argument.removeprefix("--").replace("-", "_")
+        value = None
+        for string in sys.argv[1:]:
+            if string.startswith(argument) and "=" in string:
+                value = string.split("=")[-1]
+            elif string.startswith(argument) and "=" not in string:
+                value = True
+        setattr(result, name, value)
+    for string in sys.argv[1:]:
+        name = argument.removeprefix("--").replace("-", "_")
+        if not hasattr(result, name):
+            if string.startswith("--"):
+                role = "option"
+            else:
+                role = "argument"
+            raise Exception(f"Unrecognized {role} {string} ...")
+    return result
+
+
 def build_part(part_directory, debug_segments=False):
     assert part_directory.parent.name.endswith("-parts"), repr(part_directory)
     part_pdf = part_directory / "part.pdf"
@@ -665,18 +551,13 @@ def build_part(part_directory, debug_segments=False):
     layout_py = part_directory / "layout.py"
     # TODO: consider removing or hoisting to make
     os.system(f"python {layout_py}")
-    _print_always()
     interpret_build_music(part_directory, debug_segments=debug_segments)
-    _print_always()
     front_cover_tex = part_directory / "front-cover.tex"
     interpret_tex_file(front_cover_tex)
-    _print_always()
     preface_tex = part_directory / "preface.tex"
     interpret_tex_file(preface_tex)
-    _print_always()
     back_cover_tex = part_directory / "back-cover.tex"
     interpret_tex_file(back_cover_tex)
-    _print_always()
     part_tex = part_directory / "part.tex"
     interpret_tex_file(part_tex)
 
@@ -684,9 +565,8 @@ def build_part(part_directory, debug_segments=False):
 def build_score(score_directory, debug_segments=False):
     assert score_directory.name.endswith("-score"), repr(score_directory)
     assert score_directory.parent.name == "builds", repr(score_directory)
-    _print_always("Building score ...")
+    _print_main_task("Building score ...")
     interpret_build_music(score_directory, debug_segments=debug_segments)
-    _print_always()
     for stem in (
         "front-cover",
         "blank",
@@ -699,10 +579,8 @@ def build_score(score_directory, debug_segments=False):
         pdf = score_directory / f"{stem}.pdf"
         if tex.is_file():
             interpret_tex_file(tex)
-            _print_file_handling()
         elif pdf.is_file():
             _print_file_handling(f"Using existing {baca.path.trim(pdf)} ...")
-            _print_file_handling()
     score_tex = score_directory / "score.tex"
     interpret_tex_file(score_tex)
     score_pdf = score_directory / "score.pdf"
@@ -712,7 +590,6 @@ def build_score(score_directory, debug_segments=False):
 
 
 def collect_segment_lys(_segments_directory):
-    _print_file_handling("Collecting segment lys ...")
     contents_directory = baca.path.get_contents_directory(_segments_directory)
     segments_directory = contents_directory / "segments"
     segment_lys = sorted(segments_directory.glob("**/music.ly"))
@@ -738,7 +615,7 @@ def collect_segment_lys(_segments_directory):
             targets.append(f"{target_ily.name}")
             shutil.copyfile(str(source_ily), str(target_ily))
     targets = ", ".join(targets)
-    message = f"Writing {baca.path.trim(_segments_directory)}/{targets} ..."
+    message = f"Collecting {baca.path.trim(_segments_directory)}/{targets} ..."
     _print_file_handling(message)
     handle_build_tags(_segments_directory)
 
@@ -764,8 +641,11 @@ def color_persistent_indicators(directory, *, undo=False):
             _print_tags(message)
 
 
+def directory():
+    return pathlib.Path(os.getcwd())
+
+
 def handle_build_tags(_segments_directory):
-    _print_tags(f"Handling {baca.path.trim(_segments_directory)} build tags ...")
     contents_directory = baca.path.get_contents_directory(_segments_directory)
     segments_directory = contents_directory / "segments"
     paths = sorted(segments_directory.glob("*"))
@@ -875,7 +755,6 @@ def handle_part_tags(directory):
         _print_always("Must call script in part directory ...")
         sys.exit(1)
     parts_directory = directory.parent
-    _print_tags("Handling part tags ...")
 
     def _activate(
         path,
@@ -1037,6 +916,7 @@ def interpret_build_music(
 
     Skips segment collection when skip_segment_collection=True.
     """
+    _print_main_task("Interpreting build music ...")
     build_type = None
     if build_directory.name.endswith("-score"):
         build_type = "score"
@@ -1062,11 +942,10 @@ def interpret_build_music(
             _print_tags("Skipping tag handling ...")
         else:
             handle_part_tags(build_directory)
-    _check_layout_time_signatures_in_build(music_ly)
-    run_lilypond(music_ly)
+    remove = None
     if _segments_directory.is_dir() and not debug_segments:
-        _print_file_handling(f"Removing {baca.path.trim(_segments_directory)} ...")
-        shutil.rmtree(str(_segments_directory))
+        remove = _segments_directory
+    run_lilypond(music_ly, remove=remove)
 
 
 def interpret_segment(
@@ -1078,7 +957,8 @@ def interpret_segment(
     midi=False,
     **keywords,
 ):
-    if not any([__clicktrack, __midi, __pdf]):
+    _arguments = arguments("--clicktrack", "--midi", "--pdf")
+    if not any([_arguments.clicktrack, _arguments.midi, _arguments.pdf]):
         _print_always("Missing --clicktrack, --midi, --pdf ...")
         sys.exit(1)
     _print_main_task("Interpreting commands ...")
@@ -1107,7 +987,6 @@ def interpret_segment(
             previous_persist=previous_persist,
             segment_number=segment_directory.name,
         )
-    _print_timing("Command interpretation time", timer)
     timing = types.SimpleNamespace()
     timing.runtime = int(timer.elapsed_time)
     return metadata, persist, score, timing
@@ -1115,14 +994,7 @@ def interpret_segment(
 
 def interpret_tex_file(tex):
     if not tex.is_file():
-        _print_tex(f"Can not find {baca.path.trim(tex)} ...")
-        return
-    pdf = tex.with_suffix(".pdf")
-    if pdf.exists():
-        _print_tex(f"Removing {baca.path.trim(pdf)} ...")
-        pdf.unlink()
-    _print_tex(f"Interpreting {baca.path.trim(tex)} ...")
-    if not tex.is_file():
+        _print_error(f"Can not find {baca.path.trim(tex)} ...")
         return
     executables = abjad.io.find_executable("xelatex")
     executables = [pathlib.Path(_) for _ in executables]
@@ -1130,6 +1002,7 @@ def interpret_tex_file(tex):
         executable_name = "pdflatex"
     else:
         executable_name = "xelatex"
+    _print_file_handling(f"Calling {executable_name} on {baca.path.trim(tex)} ...")
     command = f" {executable_name} -halt-on-error"
     command += " -interaction=nonstopmode"
     command += f" --jobname={tex.stem}"
@@ -1144,6 +1017,7 @@ def interpret_tex_file(tex):
         shutil.move(str(source), str(target))
         for path in sorted(tex.parent.glob("*.aux")):
             path.unlink()
+    pdf = tex.with_suffix(".pdf")
     if pdf.is_file():
         _print_success(f"Found {baca.path.trim(pdf)} ...")
     else:
@@ -1339,12 +1213,28 @@ def make_layout_ly(
 
 
 def make_segment_pdf(lilypond_file, metadata, persist, timing):
-    if __clicktrack:
+    _arguments = arguments(
+        "--also-untagged",
+        "--clicktrack",
+        "--log-timing",
+        "--midi",
+        "--pdf",
+        "--print-timing",
+    )
+    if _arguments.clicktrack:
         _make_segment_clicktrack(lilypond_file)
-    if __midi:
+    if _arguments.midi:
         _make_segment_midi(lilypond_file)
-    if __pdf:
-        _make_segment_pdf(lilypond_file, metadata, persist, timing)
+    if _arguments.pdf:
+        _make_segment_pdf(
+            lilypond_file,
+            metadata,
+            persist,
+            timing,
+            also_untagged=_arguments.also_untagged,
+            log_timing=_arguments.log_timing,
+            print_timing=_arguments.print_timing,
+        )
 
 
 def persist_as_ly(argument, ly_file_path):
@@ -1352,7 +1242,7 @@ def persist_as_ly(argument, ly_file_path):
     abjad.persist.as_ly(argument, ly_file_path)
 
 
-def run_lilypond(ly_file_path):
+def run_lilypond(ly_file_path, *, pdf_mtime=None, remove=None):
     assert ly_file_path.exists(), repr(ly_file_path)
     string = f"Calling LilyPond (with includes) on {baca.path.trim(ly_file_path)} ..."
     _print_file_handling(string)
@@ -1374,8 +1264,14 @@ def run_lilypond(ly_file_path):
             overwriting_glissando=True,
         )
         _display_lilypond_log_errors(lilypond_log_file_path)
+        if remove is not None:
+            _print_file_handling(f"Removing {baca.path.trim(remove)} ...")
+            shutil.rmtree(str(remove))
         if pdf.is_file():
-            _print_success(f"Found {baca.path.trim(pdf)} ...")
+            if pdf_mtime is not None and pdf_mtime < os.path.getmtime(pdf):
+                _print_success(f"Modified {baca.path.trim(pdf)} ...")
+            else:
+                _print_success(f"Found {baca.path.trim(pdf)} ...")
         else:
             _print_error(f"Can not find {baca.path.trim(pdf)} ...")
         assert lilypond_log_file_path.exists()
