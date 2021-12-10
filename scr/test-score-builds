@@ -84,8 +84,7 @@ if __name__ == "__main__":
     for i, build in enumerate(builds):
         messages_, diffs_, result_ = _test_build(build)
         messages.extend(messages_)
-        if i < count - 1:
-            messages.append("")
+        messages.append("")
         diffs.extend(diffs_)
         result = result or result_
         print(flush=True)

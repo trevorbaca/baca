@@ -204,6 +204,8 @@ def _handle_music_ly_tags_in_segment(music_ly):
 
 
 def _log_timing(segment_directory, timing):
+    _print_main_task("Logging timing ...")
+    _print_all_timing(timing)
     _timing = segment_directory / ".timing"
     with _timing.open(mode="a") as pointer:
         pointer.write("\n")
@@ -264,15 +266,16 @@ def _make_annotation_jobs(directory, *, undo=False):
     return jobs
 
 
-def _make_segment_clicktrack(lilypond_file):
-    segment_directory = pathlib.Path(os.getcwd())
+def _make_segment_clicktrack(lilypond_file, mtime, segment_directory):
     metadata = baca.path.get_metadata(segment_directory)
     if metadata.get("first_metronome_mark") is False:
-        _print_main_task(
-            f"Skipping clicktrack for segment {segment_directory.name} ..."
-        )
+        _print_main_task("Skipping clicktrack ...")
         return
-    _print_main_task(f"Making clicktrack for segment {segment_directory.name} ...")
+    _print_main_task("Making clicktrack ...")
+    clicktrack_file_name = "clicktrack.midi"
+    clicktrack_path = segment_directory / clicktrack_file_name
+    if clicktrack_path.is_file():
+        _print_file_handling(f"Existing {baca.path.trim(clicktrack_path)} ...")
     global_skips = lilypond_file["Global_Skips"]
     time_signatures = []
     for skip in global_skips[:-1]:
@@ -328,31 +331,32 @@ def _make_segment_clicktrack(lilypond_file):
         staff.append(measure)
     score_block = abjad.Block("score", [score, abjad.Block("midi")])
     lilypond_file = abjad.LilyPondFile([score_block])
-    clicktrack_file_name = "clicktrack.midi"
-    _print_file_handling("Persisting LilyPond file as MIDI ...")
+    _print_file_handling(f"Writing {baca.path.trim(clicktrack_path)} ...")
     abjad.persist.as_midi(lilypond_file, clicktrack_file_name, remove_ly=True)
-    clicktrack_path = segment_directory / clicktrack_file_name
     if clicktrack_path.is_file():
-        _print_success(f"Found {baca.path.trim(clicktrack_path)} ...")
+        mtime_ = os.path.getmtime(clicktrack_path)
+        if mtime is not None and mtime < mtime_:
+            _print_success(f"Modified {baca.path.trim(clicktrack_path)} ...")
+        else:
+            _print_success(f"Found {baca.path.trim(clicktrack_path)} ...")
     else:
         _print_error(f"Can not find {baca.path.trim(clicktrack_path)} ...")
 
 
-def _make_segment_midi(lilypond_file):
-    segment_directory = pathlib.Path(os.getcwd())
+def _make_segment_midi(lilypond_file, mtime, segment_directory):
     metadata = baca.path.get_metadata(segment_directory)
     if metadata.get("first_metronome_mark") is False:
-        _print_main_task(f"Skipping MIDI for segment {segment_directory.name} ...")
+        _print_main_task("Skipping MIDI ...")
         return
-    _print_main_task(f"Making MIDI for segment {segment_directory.name} ...")
+    _print_main_task("Making MIDI ...")
     music_midi = segment_directory / "music.midi"
     if music_midi.exists():
-        _print_file_handling(f"Removing {baca.path.trim(music_midi)} ...")
-        music_midi.unlink()
+        _print_file_handling(f"Existing {baca.path.trim(music_midi)} ...")
     score = lilypond_file["Score"]
     score_block = abjad.Block("score", [score, abjad.Block("midi")])
     lilypond_file = abjad.LilyPondFile([score_block])
     tmp_midi = segment_directory / "tmp.midi"
+    _print_file_handling(f"Writing {baca.path.trim(music_midi)} ...")
     abjad.persist.as_midi(lilypond_file, tmp_midi)
     if tmp_midi.is_file():
         shutil.move(tmp_midi, music_midi)
@@ -360,28 +364,34 @@ def _make_segment_midi(lilypond_file):
     if tmp_ly.exists():
         tmp_ly.unlink()
     if music_midi.is_file():
-        _print_success(f"Found {baca.path.trim(music_midi)} ...")
+        mtime_ = os.path.getmtime(music_midi)
+        if mtime is not None and mtime < mtime_:
+            _print_success(f"Modified {baca.path.trim(music_midi)} ...")
+        else:
+            _print_success(f"Found {baca.path.trim(music_midi)} ...")
     else:
         _print_error(f"Can not find {baca.path.trim(music_midi)} ...")
 
 
 def _make_segment_pdf(
     lilypond_file,
-    metadata,
-    persist,
+    mtime,
+    segment_directory,
     timing,
     *,
     also_untagged=False,
     log_timing=False,
     print_timing=False,
 ):
-    segment_directory = pathlib.Path(os.getcwd())
-    _print_main_task(f"Making PDF for segment {segment_directory.name} ...")
-    music_pdf = segment_directory / "music.pdf"
+    _print_main_task("Making PDF ...")
     music_ly = segment_directory / "music.ly"
-    music_pdf_mtime = os.path.getmtime(music_pdf) if music_pdf.is_file() else 0
+    music_pdf = segment_directory / "music.pdf"
+    if music_pdf.is_file():
+        _print_file_handling(f"Existing {baca.path.trim(music_pdf)} ...")
+    if music_ly.is_file():
+        _print_file_handling(f"Existing {baca.path.trim(music_ly)} ...")
+    music_pdf_mtime = mtime
     music_ly_mtime = os.path.getmtime(music_ly) if music_ly.is_file() else 0
-    _write_metadata(metadata, persist, segment_directory)
     _add_nonfirst_segment_preamble(lilypond_file, segment_directory)
     timing.abjad_format_time = _write_music_ly(lilypond_file, music_ly)
     _message_music_ly_timing(music_ly, music_ly_mtime)
@@ -393,17 +403,22 @@ def _make_segment_pdf(
     )
     if also_untagged is True:
         _also_untagged(segment_directory)
+    if print_timing:
+        _print_main_task("Printing timing ...")
+        _print_all_timing(timing)
     if log_timing:
         _log_timing(segment_directory, timing)
-    if print_timing:
-        _print_timing("Command interpretation time", int(timing.runtime))
-        _print_timing("Abjad format time", int(timing.abjad_format_time))
-        _print_timing("LilyPond runtime", int(timing.lilypond_runtime))
 
 
 def _message_music_ly_timing(music_ly, music_ly_mtime):
     if music_ly.is_file() and music_ly_mtime < os.path.getmtime(music_ly):
         _print_file_handling(f"Writing {baca.path.trim(music_ly)} ...")
+
+
+def _print_all_timing(timing):
+    _print_timing("Command interpretation time", int(timing.runtime))
+    _print_timing("Abjad format time", int(timing.abjad_format_time))
+    _print_timing("LilyPond runtime", int(timing.lilypond_runtime))
 
 
 def _print_always(string=""):
@@ -916,7 +931,6 @@ def interpret_build_music(
 
     Skips segment collection when skip_segment_collection=True.
     """
-    _print_main_task("Interpreting build music ...")
     build_type = None
     if build_directory.name.endswith("-score"):
         build_type = "score"
@@ -957,13 +971,13 @@ def interpret_segment(
     midi=False,
     **keywords,
 ):
+    segment_directory = pathlib.Path(os.getcwd())
     _arguments = arguments("--clicktrack", "--midi", "--pdf")
     if not any([_arguments.clicktrack, _arguments.midi, _arguments.pdf]):
         _print_always("Missing --clicktrack, --midi, --pdf ...")
         sys.exit(1)
     _print_main_task("Interpreting commands ...")
     interpreter = interpreter or baca.interpret.interpreter
-    segment_directory = pathlib.Path(os.getcwd())
     metadata = baca.path.get_metadata(segment_directory)
     persist = baca.path.get_metadata(segment_directory, file_name="__persist__")
     previous_metadata, previous_persist = _get_previous_metadata(segment_directory)
@@ -1036,13 +1050,9 @@ def make_layout_ly(
     page_layout_context_only=False,
     time_signatures=None,
 ):
-    current_directory = pathlib.Path(os.getcwd())
-    if "segments" in str(current_directory):
-        _print_main_task(f"Making layout for segment {current_directory.name} ...")
-    else:
-        _print_main_task(f"Making layout for {current_directory.name} ...")
-    assert isinstance(spacing, baca.SpacingSpecifier), repr(spacing)
     layout_directory = pathlib.Path(os.getcwd())
+    _print_main_task("Making layout ...")
+    assert isinstance(spacing, baca.SpacingSpecifier), repr(spacing)
     layout_py = layout_directory / "layout.py"
     layout_ly = layout_directory / file_name
     if spacing.overrides is not None:
@@ -1140,7 +1150,6 @@ def make_layout_ly(
     text = text.replace("Global_Skips", "Page_Layout")
     text = text.replace("Global.Skips", "Page.Layout")
     text = abjad.lilypondformat.left_shift_tags(text)
-    # layout_ly = layout_directory / "layout.ly"
     layout_ly = layout_directory / file_name
     lines = []
     # TODO: remove first_page_number embedding
@@ -1221,15 +1230,23 @@ def persist(lilypond_file, metadata, persist, timing):
         "--pdf",
         "--print-timing",
     )
+    segment_directory = pathlib.Path(os.getcwd())
+    _write_metadata(metadata, persist, segment_directory)
     if _arguments.clicktrack:
-        _make_segment_clicktrack(lilypond_file)
+        path = segment_directory / "clicktrack.midi"
+        mtime = os.path.getmtime(path) if path.is_file() else None
+        _make_segment_clicktrack(lilypond_file, mtime, segment_directory)
     if _arguments.midi:
-        _make_segment_midi(lilypond_file)
+        path = segment_directory / "music.midi"
+        mtime = os.path.getmtime(path) if path.is_file() else None
+        _make_segment_midi(lilypond_file, mtime, segment_directory)
     if _arguments.pdf:
+        path = segment_directory / "music.pdf"
+        mtime = os.path.getmtime(path) if path.is_file() else None
         _make_segment_pdf(
             lilypond_file,
-            metadata,
-            persist,
+            mtime,
+            segment_directory,
             timing,
             also_untagged=_arguments.also_untagged,
             log_timing=_arguments.log_timing,
