@@ -5,21 +5,19 @@ import sys
 
 import baca
 
+_colors = baca.const.colors
+
 
 def _make_fail_string(string):
-    return f"{baca.const.colors.red}FAIL: {string} ...{baca.const.colors.end}"
+    return f"{_colors.red}FAIL: {string} ...{_colors.end}"
 
 
 def _make_file_handling_string(string):
-    return f"{baca.const.colors.yellow}{string} ...{baca.const.colors.end}"
+    return f"{_colors.yellow}{string} ...{_colors.end}"
 
 
 def _make_pass_string(string):
-    return f"{baca.const.colors.green_bold}PASS: {string} ...{baca.const.colors.end}"
-
-
-def _print_main_task(string):
-    print(baca.const.colors.blue + string + baca.const.colors.end)
+    return f"{_colors.green_bold}PASS: {string} ...{_colors.end}"
 
 
 def _get_builds():
@@ -36,7 +34,7 @@ def _get_builds():
 
 def _test_build(build):
     os.chdir(build)
-    _print_main_task(f"Building {build} ...")
+    baca.build._print_main_task(f"Building {build} ...")
     messages, diffs, result = [], [], 0
     music_ly = build / "music.ly"
     if music_ly.exists():
@@ -76,22 +74,24 @@ def _test_build(build):
     return messages, diffs, result
 
 
-if __name__ == "__main__":
+def main():
     builds = _get_builds()
     count = len(builds)
     messages, diffs, result = [], [], 0
-    count = len(builds)
     for i, build in enumerate(builds):
         messages_, diffs_, result_ = _test_build(build)
         messages.extend(messages_)
         messages.append("")
         diffs.extend(diffs_)
         result = result or result_
-        print(flush=True)
+        print()
     for diff in diffs:
         string = "".join(diff)
         print(string)
-    count = len(messages)
-    for i, message in enumerate(messages):
+    for message in messages:
         print(message)
+
+
+if __name__ == "__main__":
+    result = main()
     sys.exit(result)

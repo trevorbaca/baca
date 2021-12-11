@@ -7,11 +7,12 @@ import types
 import abjad
 import baca
 
-_colors = baca.const.colors
-
 
 def _capture_diff(path):
     if not path.is_file():
+        return
+    command = f"git ls-files --error-unmatch {path} 1>/dev/null 2>&1"
+    if os.system(command) != 0:
         return
     _out = path.with_name(".out")
     if _out.exists():
@@ -30,30 +31,13 @@ def _capture_diff(path):
 
 def _print_results(path, results):
     if results.exists is True:
-        print(f"{_colors.green_bold}PASS: {path.name} found ...{_colors.end}")
-        if results.same is True:
-            print(f"{_colors.green_bold}PASS: {path.name} same ...{_colors.end}")
-        elif results.same is False:
-            print(f"{_colors.red_bold}FAIL: {path.name} changed ...{_colors.end}")
-        else:
-            assert results.same == "SKIP"
+        baca.build._print_success(f"PASS: {path.name} found ...")
     else:
-        print(f"{_colors.red_bold}FAIL: {path.name} missing ...{_colors.end}")
-
-
-def _run_scripts(layout_py):
-    if layout_py.exists():
-        os.system("python layout.py")
-    flags = [
-        "--also-untagged",
-        "--clicktrack",
-        "--log-timing",
-        "--midi",
-        "--pdf",
-    ]
-    string = " ".join(flags)
-    command = f"python music.py {string}"
-    os.system(command)
+        baca.build._print_error(f"FAIL: {path.name} missing ...")
+    if results.same is True:
+        baca.build._print_success(f"PASS: {path.name} same ...")
+    elif results.same is False:
+        baca.build._print_error(f"FAIL: {path.name} changed ...")
 
 
 def _test_segment(segment_directory):
@@ -70,16 +54,15 @@ def _test_segment(segment_directory):
     path_to_results = {}
     for name in names:
         path = segment_directory / name
-        path_to_results[path] = types.SimpleNamespace()
-        if path.exists():
-            path.unlink()
-    _run_scripts(layout_py)
+        results = types.SimpleNamespace()
+        path_to_results[path] = results
+    if layout_py.exists():
+        os.system("python layout.py")
+    command = "python music.py --also-untagged --clicktrack --log-timing --midi --pdf"
+    os.system(command)
     for path, results in path_to_results.items():
         results.exists = path.is_file()
-        if path.name == "music.pdf":
-            results.same = "SKIP"
-        else:
-            results.same = _capture_diff(path)
+        results.same = _capture_diff(path)
     music_pdf = segment_directory / "music.pdf"
     if not music_pdf.exists():
         _music_ly_log = segment_directory / "_music_ly_log"
@@ -87,6 +70,7 @@ def _test_segment(segment_directory):
             with open(".music.ly.log") as pointer:
                 lines = pointer.readlines()
                 print("".join(lines))
+    baca.build._print_main_task("Printing results ...")
     for path, results in path_to_results.items():
         _print_results(path, results)
     result = 0
@@ -98,17 +82,15 @@ def _test_segment(segment_directory):
     return result
 
 
-if __name__ == "__main__":
-    contents_directory = baca.path.get_contents_directory(os.getcwd())
+def main(current_directory):
+    contents_directory = baca.path.get_contents_directory(current_directory)
     segments_directory = contents_directory / "segments"
     first_segment_directory = segments_directory / "01"
     if not first_segment_directory.is_dir():
-        print("Score contains no segments ...")
+        baca.build._print_error(f"Score contains no segments ...")
         sys.exit(0)
     result = 0
-    paths = list(sorted(segments_directory.glob("[0-9]*")))
-    count = len(paths)
-    for path in paths:
+    for path in sorted(segments_directory.glob("[0-9]*")):
         if not path.is_dir():
             continue
         os.chdir(path)
@@ -116,4 +98,10 @@ if __name__ == "__main__":
         if result_ != 0:
             result = result_
         print()
+    return result
+
+
+if __name__ == "__main__":
+    current_directory = os.getcwd()
+    result = main(current_directory)
     sys.exit(result)

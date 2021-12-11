@@ -40,6 +40,7 @@ def _add_nonfirst_segment_preamble(lilypond_file, segment_directory):
 def _also_untagged(segment_directory):
     if os.environ.get("GITHUB_WORKSPACE"):
         return
+    _print_main_task("Writing untagged ...")
     for name in ("music.ly", "music.ily", "layout.ly"):
         tagged = segment_directory / name
         if not tagged.exists():
@@ -68,16 +69,16 @@ def _also_untagged(segment_directory):
 
 
 def _call_lilypond_on_music_ly_in_segment(music_ly, music_pdf_mtime):
-    lilypond_log_file_name = "." + music_ly.name + ".log"
-    lilypond_log_file_path = music_ly.parent / lilypond_log_file_name
     music_pdf = music_ly.with_name("music.pdf")
     with abjad.Timer() as timer:
         run_lilypond(music_ly, pdf_mtime=music_pdf_mtime)
         music_ly_pdf = music_ly.parent / "music.ly.pdf"
         if music_ly_pdf.is_file():
             shutil.move(str(music_ly_pdf), str(music_pdf))
+    _music_ly_log = "." + music_ly.name + ".log"
+    _music_ly_log = music_ly.parent / _music_ly_log
     _remove_lilypond_warnings(
-        lilypond_log_file_path,
+        _music_ly_log,
         crescendo_too_small=True,
         decrescendo_too_small=True,
         overwriting_glissando=True,
@@ -106,6 +107,8 @@ def _display_lilypond_log_errors(lilypond_log_file_path):
 
 def _externalize_music_ly(music_ly):
     music_ily = music_ly.with_name("music.ily")
+    _print_file_handling(f"Externalizing {baca.path.trim(music_ly)} ...")
+    _print_file_handling(f"Externalizing {baca.path.trim(music_ily)} ...")
     baca.path.extern(music_ly, music_ily)
     assert music_ily.is_file()
     not_topmost = baca.jobs.Job(
@@ -113,7 +116,10 @@ def _externalize_music_ly(music_ly):
         path=music_ly.parent,
         title=f"Deactivating {str(baca.tags.NOT_TOPMOST)} ...",
     )
-    for message in not_topmost():
+    messages = not_topmost()
+    if messages:
+        _print_file_handling("Handling not-topmost ...")
+    for message in messages:
         _print_tags(message)
 
 
@@ -204,7 +210,7 @@ def _handle_music_ly_tags_in_segment(music_ly):
 
 
 def _log_timing(segment_directory, timing):
-    _print_main_task("Logging timing ...")
+    _print_main_task("Logging time ...")
     _print_all_timing(timing)
     _timing = segment_directory / ".timing"
     with _timing.open(mode="a") as pointer:
@@ -375,7 +381,7 @@ def _make_segment_midi(lilypond_file, mtime, segment_directory):
 
 def _make_segment_pdf(
     lilypond_file,
-    mtime,
+    music_pdf_mtime,
     segment_directory,
     timing,
     *,
@@ -385,18 +391,22 @@ def _make_segment_pdf(
 ):
     _print_main_task("Making PDF ...")
     music_ly = segment_directory / "music.ly"
+    # music_ily = segment_directory / "music.ily"
     music_pdf = segment_directory / "music.pdf"
-    if music_pdf.is_file():
-        _print_file_handling(f"Existing {baca.path.trim(music_pdf)} ...")
-    if music_ly.is_file():
-        _print_file_handling(f"Existing {baca.path.trim(music_ly)} ...")
-    music_pdf_mtime = mtime
     music_ly_mtime = os.path.getmtime(music_ly) if music_ly.is_file() else 0
     _add_nonfirst_segment_preamble(lilypond_file, segment_directory)
     timing.abjad_format_time = _write_music_ly(lilypond_file, music_ly)
-    _message_music_ly_timing(music_ly, music_ly_mtime)
+    if music_ly.is_file() and music_ly_mtime < os.path.getmtime(music_ly):
+        _print_file_handling(f"Writing {baca.path.trim(music_ly)} ...")
+    _print_file_handling(f"Handling {baca.path.trim(music_ly)} ...")
     _handle_music_ly_tags_in_segment(music_ly)
     _externalize_music_ly(music_ly)
+    # _print_file_handling(f"Handling {baca.path.trim(music_ly)} ...")
+    # _handle_music_ly_tags_in_segment(music_ly)
+    # _print_file_handling(f"Handling {baca.path.trim(music_ily)} ...")
+    # _handle_music_ly_tags_in_segment(music_ily)
+    if music_pdf.is_file():
+        _print_file_handling(f"Existing {baca.path.trim(music_pdf)} ...")
     timing.lilypond_runtime = _call_lilypond_on_music_ly_in_segment(
         music_ly,
         music_pdf_mtime,
@@ -404,15 +414,10 @@ def _make_segment_pdf(
     if also_untagged is True:
         _also_untagged(segment_directory)
     if print_timing:
-        _print_main_task("Printing timing ...")
+        _print_main_task("Printing time ...")
         _print_all_timing(timing)
     if log_timing:
         _log_timing(segment_directory, timing)
-
-
-def _message_music_ly_timing(music_ly, music_ly_mtime):
-    if music_ly.is_file() and music_ly_mtime < os.path.getmtime(music_ly):
-        _print_file_handling(f"Writing {baca.path.trim(music_ly)} ...")
 
 
 def _print_all_timing(timing):
@@ -455,9 +460,8 @@ def _print_timing(title, timer):
     else:
         count = int(timer.elapsed_time)
     counter = abjad.String("second").pluralize(count)
-    count = str(count)
-    string = f"{_colors.cyan}{title} {count} {counter} ...{_colors.end}"
-    print(string)
+    string = f"{title} {count} {counter} ..."
+    _print_success(string)
 
 
 def _remove_lilypond_warnings(
@@ -959,6 +963,9 @@ def interpret_build_music(
     remove = None
     if _segments_directory.is_dir() and not debug_segments:
         remove = _segments_directory
+    music_pdf = music_ly.with_name("music.pdf")
+    if music_pdf.is_file():
+        _print_file_handling(f"Existing {baca.path.trim(music_pdf)} ...")
     run_lilypond(music_ly, remove=remove)
 
 

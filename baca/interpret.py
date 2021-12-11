@@ -2371,7 +2371,7 @@ def _print_timing(title, timer, *, print_timing=False, suffix=None):
         suffix = f" [{suffix}]"
     else:
         suffix = ""
-    string = f"{_const.colors.cyan}{title}{suffix} in {count} {counter}"
+    string = f"{_const.colors.green_bold}{title}{suffix} {count} {counter}"
     string += f" ...{_const.colors.end}"
     print(string)
 
