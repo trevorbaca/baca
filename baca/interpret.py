@@ -21,10 +21,6 @@ from . import selection as _selection
 from . import selectors as _selectors
 from . import tags as _tags
 
-nonfirst_preamble = r"""\header { composer = ##f poet = ##f title = ##f }
-\layout { indent = 0 }
-\paper { print-first-page-number = ##t }"""
-
 
 def _activate_tags(score, tags):
     if not tags:

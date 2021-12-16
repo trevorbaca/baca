@@ -8,33 +8,10 @@ import shutil
 import sys
 import time
 import types
-from inspect import currentframe as _frame
 
 import abjad
 import baca
-
-from . import scoping as _scoping
-
-_colors = baca.const.colors
-
-
-# TODO: replace with segment-specific stylesheets
-def _add_nonfirst_segment_preamble(lilypond_file, segment_directory):
-    if segment_directory.name == "01":
-        return
-    layout_ly = segment_directory / "layout.ly"
-    if not layout_ly.is_file():
-        return
-    result = _get_preamble_page_count_overview(layout_ly)
-    if result is None:
-        return
-    first_page_number, _, _ = result
-    line = r"\paper { first-page-number = #"
-    line += str(first_page_number)
-    line += " }"
-    lines = abjad.tag.double_tag([line], _scoping.site(_frame()))
-    lines.append("")
-    lilypond_file.items[-1:-1] = lines
+from baca.const import colors as _colors
 
 
 def _also_untagged(segment_directory):
@@ -394,7 +371,6 @@ def _make_segment_pdf(
     # music_ily = segment_directory / "music.ily"
     music_pdf = segment_directory / "music.pdf"
     music_ly_mtime = os.path.getmtime(music_ly) if music_ly.is_file() else 0
-    _add_nonfirst_segment_preamble(lilypond_file, segment_directory)
     timing.abjad_format_time = _write_music_ly(lilypond_file, music_ly)
     if music_ly.is_file() and music_ly_mtime < os.path.getmtime(music_ly):
         _print_file_handling(f"Writing {baca.path.trim(music_ly)} ...")
