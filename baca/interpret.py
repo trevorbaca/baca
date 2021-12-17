@@ -206,9 +206,15 @@ def _apply_breaks(score, spacing):
             command(global_skips)
 
 
-def _apply_spacing(page_layout_profile, score, spacing):
+def _apply_spacing(
+    page_layout_profile, score, spacing, *, do_not_append_phantom_measure=False
+):
     with abjad.Timer() as timer:
-        spacing(score, page_layout_profile)
+        spacing(
+            score,
+            page_layout_profile,
+            do_not_append_phantom_measure=do_not_append_phantom_measure,
+        )
     count = int(timer.elapsed_time)
     return count
 
@@ -3023,6 +3029,7 @@ def interpreter(
     color_octaves=False,
     comment_measure_numbers=False,
     deactivate=None,
+    do_not_append_phantom_measure=False,
     do_not_require_margin_markup=False,
     error_on_not_yet_pitched=False,
     fermata_extra_offset_y=2.5,
@@ -3150,7 +3157,12 @@ def interpreter(
                 score,
             )
         if spacing is not None:
-            _apply_spacing(page_layout_profile, score, spacing)
+            _apply_spacing(
+                page_layout_profile,
+                score,
+                spacing,
+                do_not_append_phantom_measure=do_not_append_phantom_measure,
+            )
     # _print_timing("Cleanup", timer, print_timing=print_timing)
     with abjad.Timer() as timer:
         with abjad.ForbidUpdate(component=score, update_on_exit=True):
