@@ -11,16 +11,7 @@ import baca
 from abjadext import rmakers
 
 
-def _get_globals():
-    globals_ = {}
-    globals_["abjad"] = abjad
-    globals_["abjadext"] = abjadext
-    globals_["baca"] = baca
-    globals_["rmakers"] = rmakers
-    return globals_
-
-
-def _doctest_files(files, globals_, report_only_first_failure=False):
+def _doctest_files(current_directory, files, globals_, report_only_first_failure=False):
     if report_only_first_failure:
         optionflags = (
             doctest.ELLIPSIS
@@ -33,21 +24,21 @@ def _doctest_files(files, globals_, report_only_first_failure=False):
     failure_count, test_count = 0, 0
     for file_ in files:
         assert file_.is_file(), repr(file_)
-        relative_path = os.path.relpath(file_)
+        parent_directory = str(file_.parent)
+        sys.path.insert(0, parent_directory)
         string_buffer = io.StringIO()
         with abjad.RedirectedStreams(stdout=string_buffer):
-            try:
-                failure_count_, test_count_ = doctest.testfile(
-                    file_,
-                    module_relative=False,
-                    globs=globals_,
-                    optionflags=optionflags,
-                )
-            except UnicodeDecodeError:
-                continue
+            failure_count_, test_count_ = doctest.testfile(
+                file_,
+                module_relative=False,
+                globs=globals_,
+                optionflags=optionflags,
+            )
             failure_count += failure_count_
             test_count += test_count_
             doctest_output = string_buffer.getvalue()
+        assert sys.path[0] == parent_directory
+        del(sys.path[0])
         if failure_count_:
             failed_file_paths.append(os.path.relpath(file_))
             error_messages.append(doctest_output)
@@ -56,6 +47,7 @@ def _doctest_files(files, globals_, report_only_first_failure=False):
         else:
             strings = (baca.const.colors.blue, "OK", baca.const.colors.end)
             result_code = "".join(strings)
+        relative_path = os.path.relpath(file_)
         print(f"{relative_path} {result_code}")
     if failed_file_paths:
         print()
@@ -78,16 +70,16 @@ def _doctest_files(files, globals_, report_only_first_failure=False):
     return 0
 
 
-if __name__ == "__main__":
-    names, report_only_first_failure = [], False
-    for input_ in sys.argv[1:]:
-        if input_ == "--report-only-first-failure":
-            report_only_first_failure = True
-        else:
-            names.append(input_)
-    assert names, repr(names)
-    globals_ = _get_globals()
-    current_directory = pathlib.Path(".").absolute()
+def _get_globals():
+    globals_ = {}
+    globals_["abjad"] = abjad
+    globals_["abjadext"] = abjadext
+    globals_["baca"] = baca
+    globals_["rmakers"] = rmakers
+    return globals_
+
+
+def main(current_directory, globals_, names, report_only_first_failure):
     files = []
     for name in names:
         path = current_directory / name
@@ -102,8 +94,23 @@ if __name__ == "__main__":
             files.append(path)
     files.sort()
     exit_code = _doctest_files(
+        current_directory,
         files,
         globals_,
         report_only_first_failure=report_only_first_failure,
     )
+    return exit_code
+
+
+if __name__ == "__main__":
+    current_directory = pathlib.Path(os.getcwd())
+    names, report_only_first_failure = [], False
+    for input_ in sys.argv[1:]:
+        if input_ == "--report-only-first-failure":
+            report_only_first_failure = True
+        else:
+            names.append(input_)
+    assert names, repr(names)
+    globals_ = _get_globals()
+    exit_code = main(current_directory, globals_, names, report_only_first_failure)
     sys.exit(exit_code)
