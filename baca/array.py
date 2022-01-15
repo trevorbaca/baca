@@ -98,12 +98,21 @@ class PitchArray:
             for cell in row:
                 if isinstance(cell, int):
                     cell = PitchArrayCell(width=cell)
-                elif isinstance(cell, tuple):
+                elif isinstance(cell, tuple) and len(cell) == 2:
                     assert len(cell) == 2, repr(cell)
                     pitches, width = cell
                     if isinstance(pitches, int):
                         pitches = [pitches]
                     cell = PitchArrayCell(pitches=pitches, width=width)
+                elif isinstance(cell, tuple) and len(cell) == 3:
+                    assert len(cell) == 3, repr(cell)
+                    # pitches, width = cell
+                    pitch_class, octave_number, width = cell
+                    assert isinstance(pitch_class, str)
+                    pitch_pair = (pitch_class, octave_number)
+                    #                    if isinstance(pitches, int):
+                    #                        pitches = [pitches]
+                    cell = PitchArrayCell(pitches=[pitch_pair], width=width)
                 row_.append(cell)
             self.append_row(row_)
 
@@ -1407,24 +1416,24 @@ class PitchArrayCell:
             if self.width == 1:
                 return (
                     str(self.pitches[0].pitch_class),
-                    self.pitches[0].octave_number,
+                    self.pitches[0].octave.number,
                 )
             else:
                 return (
                     str(self.pitches[0].pitch_class),
-                    self.pitches[0].octave_number,
+                    self.pitches[0].octave.number,
                     self.width,
                 )
         else:
             if self.width == 1:
                 return [
-                    (str(pitch.pitch_class), pitch.octave_number)
+                    (str(pitch.pitch_class), pitch.octave.number)
                     for pitch in self.pitches
                 ]
             else:
                 return (
                     [
-                        (str(pitch.pitch_class), pitch.octave_number)
+                        (str(pitch.pitch_class), pitch.octave.number)
                         for pitch in self.pitches
                     ],
                     self.width,
@@ -1566,7 +1575,7 @@ class PitchArrayCell:
 
         Returns nonnegative integer.
         """
-        return len(self.pitches)
+        return len(self.pitches or [])
 
     @property
     def width(self):
@@ -1957,7 +1966,7 @@ class PitchArrayColumn:
         """
         pitches = []
         for cell in self.cells:
-            pitches.extend(cell.pitches)
+            pitches.extend(cell.pitches or [])
         return tuple(pitches)
 
     @property
@@ -2044,7 +2053,7 @@ class PitchArrayColumn:
         """
         stop_pitches = []
         for cell in self.stop_cells:
-            stop_pitches.extend(cell.pitches)
+            stop_pitches.extend(cell.pitches or [])
         return tuple(stop_pitches)
 
     @property
@@ -2315,7 +2324,7 @@ class PitchArrayRow:
 
     ### CLASS VARIABLES ###
 
-    __slots__ = ("_cells", "_parent_array", "_pitch_range")
+    __slots__ = ("_cells", "_parent_array", "_pitch_range", "name")
 
     ### INITIALIZER ###
 
@@ -2325,6 +2334,7 @@ class PitchArrayRow:
         self._cells = []
         cells = cells or []
         self.extend(cells)
+        self.name = None
 
     ### SPECIAL METHODS ###
 
@@ -2732,7 +2742,7 @@ class PitchArrayRow:
 
         Returns none.
         """
-        pitch_tokens = pitch_tokens[:]
+        pitch_tokens = list(pitch_tokens[:])
         if pitch_tokens:
             for cell in self.cells:
                 if cell.pitches:
