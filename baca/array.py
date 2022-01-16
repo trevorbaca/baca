@@ -98,21 +98,30 @@ class PitchArray:
             for cell in row:
                 if isinstance(cell, int):
                     cell = PitchArrayCell(width=cell)
-                elif isinstance(cell, tuple) and len(cell) == 2:
+                elif isinstance(cell, tuple):
                     assert len(cell) == 2, repr(cell)
-                    pitches, width = cell
-                    if isinstance(pitches, int):
-                        pitches = [pitches]
-                    cell = PitchArrayCell(pitches=pitches, width=width)
-                elif isinstance(cell, tuple) and len(cell) == 3:
-                    assert len(cell) == 3, repr(cell)
-                    # pitches, width = cell
-                    pitch_class, octave_number, width = cell
-                    assert isinstance(pitch_class, str)
-                    pitch_pair = (pitch_class, octave_number)
-                    #                    if isinstance(pitches, int):
-                    #                        pitches = [pitches]
-                    cell = PitchArrayCell(pitches=[pitch_pair], width=width)
+                    if isinstance(cell[0], tuple):
+                        assert len(cell[0]) == 2, repr(cell)
+                        pitch = abjad.NamedPitch(cell[0])
+                        width = cell[1]
+                        cell = PitchArrayCell(pitches=[pitch], width=width)
+                    elif isinstance(cell[0], str):
+                        pitch = abjad.NamedPitch(cell)
+                        pitches = [pitch]
+                        cell = PitchArrayCell(pitches=pitches)
+                    elif isinstance(cell[0], (int, float)):
+                        pitch_number, width = cell
+                        pitch = abjad.NamedPitch(pitch_number)
+                        cell = PitchArrayCell(pitches=[pitch], width=width)
+                    elif isinstance(cell[0], list):
+                        assert all(isinstance(_, (int, float)) for _ in cell[0])
+                        pitch_numbers, width = cell
+                        pitches = [abjad.NamedPitch(_) for _ in pitch_numbers]
+                        cell = PitchArrayCell(pitches=pitches, width=width)
+                    else:
+                        raise Exception(cell)
+                else:
+                    assert isinstance(cell, PitchArrayCell), repr(cell)
                 row_.append(cell)
             self.append_row(row_)
 
@@ -1041,33 +1050,33 @@ class PitchArrayCell:
         Initializes with pitch:
 
         >>> baca.PitchArrayCell(pitches=[abjad.NamedPitch(0)])
-        PitchArrayCell(width=1)
+        PitchArrayCell(pitches="c'", width=1)
 
         Initializes with pitch numbers:
 
         >>> baca.PitchArrayCell(pitches=[0, 2, 4])
-        PitchArrayCell(width=1)
+        PitchArrayCell(pitches="c' d' e'", width=1)
 
         Initializes with pitches:
 
         >>> pitches = [abjad.NamedPitch(_) for _ in [0, 2, 4]]
         >>> baca.PitchArrayCell(pitches)
-        PitchArrayCell(width=1)
+        PitchArrayCell(pitches="c' d' e'", width=1)
 
         Initializes with pitch number and width:
 
         >>> baca.PitchArrayCell(pitches=0, width=2)
-        PitchArrayCell(width=2)
+        PitchArrayCell(pitches="c'", width=2)
 
         Initializes with pitch and width:
 
         >>> baca.PitchArrayCell(pitches=[abjad.NamedPitch(0)], width=2)
-        PitchArrayCell(width=2)
+        PitchArrayCell(pitches="c'", width=2)
 
         Initializes with pitch numbers and width:
 
         >>> baca.PitchArrayCell(pitches=[0, 2, 4], width=2)
-        PitchArrayCell(width=2)
+        PitchArrayCell(pitches="c' d' e'", width=2)
 
     """
 
@@ -1082,9 +1091,27 @@ class PitchArrayCell:
         if pitches is not None:
             if isinstance(pitches, str):
                 pitches = pitches.split()
-            if isinstance(pitches, numbers.Number):
+            elif isinstance(pitches, numbers.Number):
                 pitches = [pitches]
-            assert isinstance(pitches, (tuple, list)), repr(pitches)
+            elif isinstance(pitches, tuple):
+                assert len(pitches) == 2
+                assert width == 1
+                if isinstance(pitches[0], str):
+                    assert isinstance(pitches[1], int)
+                    pitch = abjad.NamedPitch(pitches)
+                    pitches = [pitch]
+                elif isinstance(pitches[0], tuple):
+                    assert len(pitches[0]) == 2
+                    assert isinstance(pitches[0][0], str)
+                    assert isinstance(pitches[0][1], int)
+                    assert isinstance(pitches[1], int)
+                    width = pitches[1]
+                    pitch = abjad.NamedPitch(pitches[0])
+                    pitches = [pitch]
+                else:
+                    raise Exception
+            # assert isinstance(pitches, (tuple, list)), repr(pitches)
+            assert isinstance(pitches, list), repr(pitches)
             pitches = [abjad.NamedPitch(_) for _ in pitches]
             self._pitches = pitches
         assert isinstance(width, int), repr(width)
@@ -1098,7 +1125,11 @@ class PitchArrayCell:
         """
         Delegates to format manager.
         """
-        return f"PitchArrayCell(width={self.width})"
+        if self.pitches:
+            pitches = " ".join([str(_) for _ in self.pitches or []])
+            return f'PitchArrayCell(pitches="{pitches}", width={self.width})'
+        else:
+            return f"PitchArrayCell(width={self.width})"
 
     def __str__(self):
         """
@@ -1408,7 +1439,26 @@ class PitchArrayCell:
         """
         Gets item.
 
-        Complicated return type.
+        ..  container:: example
+
+            >>> baca.PitchArrayCell(width=1).item
+            1
+
+            >>> baca.PitchArrayCell(width=2).item
+            2
+
+            >>> baca.PitchArrayCell("c'").item
+            ('c', 4)
+
+            >>> baca.PitchArrayCell("c'", width=2).item
+            (('c', 4), 2)
+
+            >>> baca.PitchArrayCell("c' d'").item
+            [('c', 4), ('d', 4)]
+
+            >>> baca.PitchArrayCell("c' d'", width=2).item
+            ([('c', 4), ('d', 4)], 2)
+
         """
         if not self.pitches:
             return self.width
@@ -1420,8 +1470,7 @@ class PitchArrayCell:
                 )
             else:
                 return (
-                    str(self.pitches[0].pitch_class),
-                    self.pitches[0].octave.number,
+                    (str(self.pitches[0].pitch_class), self.pitches[0].octave.number),
                     self.width,
                 )
         else:
@@ -1988,9 +2037,9 @@ class PitchArrayColumn:
             >>> for column in array.columns:
             ...     column.start_cells
             ...
-            [PitchArrayCell(width=1), PitchArrayCell(width=2)]
-            [PitchArrayCell(width=1)]
-            [PitchArrayCell(width=2), PitchArrayCell(width=1)]
+            [PitchArrayCell(width=1), PitchArrayCell(pitches="g'", width=2)]
+            [PitchArrayCell(pitches="d'", width=1)]
+            [PitchArrayCell(pitches="bf bqf", width=2), PitchArrayCell(pitches="fs'", width=1)]
             [PitchArrayCell(width=1)]
 
         Returns list.
