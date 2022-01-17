@@ -133,12 +133,8 @@ class PitchArray:
 
         Returns new pitch array.
         """
-        if not isinstance(argument, PitchArray):
-            message = "must be pitch array."
-            raise TypeError(message)
-        if not self.depth == argument.depth:
-            message = "array depth must match."
-            raise ValueError(message)
+        assert isinstance(argument, PitchArray), repr(argument)
+        assert self.depth == argument.depth, repr((self.depth, argument.depth))
         new_array = PitchArray([])
         for self_row, arg_row in zip(self.rows, argument.rows):
             new_row = self_row + arg_row
@@ -163,8 +159,7 @@ class PitchArray:
                     return True
             return False
         else:
-            message = "must be row, column, pitch or pitch cell."
-            raise ValueError(message)
+            raise Exception("must be row, column, pitch or pitch cell.")
 
     def __copy__(self):
         """
@@ -176,8 +171,8 @@ class PitchArray:
 
     def __eq__(self, argument):
         """
-        Is true when ``argument`` is a pitch aarray with contents equal to that
-        of this pitch array.
+        Is true when ``argument`` is a pitch aarray with contents equal to that of this
+        pitch array.
 
         Returns true or false.
         """
@@ -235,9 +230,7 @@ class PitchArray:
 
         Returns pitch array.
         """
-        if not isinstance(argument, type(self)):
-            message = "must be pitch array."
-            raise TypeError(message)
+        assert isinstance(argument, PitchArray), repr(argument)
         for self_row, arg_row in zip(self.rows, argument.rows):
             self_row += arg_row
         return self
@@ -262,16 +255,11 @@ class PitchArray:
 
         Retunrs none.
         """
-        if isinstance(i, int):
-            if not isinstance(argument, PitchArrayRow):
-                message = "can assign only pitch array row to pitch array."
-                raise TypeError(message)
-            self._rows[i]._parent_array = None
-            argument._parent_array = self
-            self._rows[i] = argument
-        else:
-            message = "must be integer index."
-            raise ValueError(message)
+        assert isinstance(i, int), repr(i)
+        assert isinstance(argument, PitchArrayRow), repr(argument)
+        self._rows[i]._parent_array = None
+        argument._parent_array = self
+        self._rows[i] = argument
 
     def __str__(self):
         """
@@ -285,7 +273,7 @@ class PitchArray:
 
     @property
     def _two_by_two_format_string(self):
-        return "\n".join([str(x) for x in self.rows])
+        return "\n".join([str(_) for _ in self.rows])
 
     ### PRIVATE METHODS ###
 
@@ -492,9 +480,7 @@ class PitchArray:
 
         Returns none.
         """
-        if not isinstance(column, PitchArrayColumn):
-            message = "must be column."
-            raise TypeError(message)
+        assert isinstance(column, PitchArrayColumn), repr(column)
         column._parent_array = self
         column_depth = column.depth
         if self.depth < column_depth:
@@ -509,9 +495,7 @@ class PitchArray:
 
         Returns none.
         """
-        if not isinstance(row, PitchArrayRow):
-            message = "must be row."
-            raise TypeError(message)
+        assert isinstance(row, PitchArrayRow), repr(row)
         row._parent_array = self
         self._rows.append(row)
 
@@ -569,11 +553,9 @@ class PitchArray:
         start_i, start_j = upper_left_pair
         stop_i, stop_j = lower_right_pair
         if not start_i <= stop_i:
-            message = "start row must not be greater than stop row."
-            raise ValueError(message)
+            raise Exception("start row must not be greater than stop row.")
         if not start_j <= stop_j:
-            message = "start column must not be greater than stop column."
-            raise ValueError(message)
+            raise Exception("start column must not be greater than stop column.")
         new_array = type(self)([])
         rows = self.rows
         row_indices = range(start_i, stop_i)
@@ -819,7 +801,7 @@ class PitchArray:
         """
         self_depth = self.depth
         if depth < self_depth:
-            raise ValueError("pad depth must be not less than array depth.")
+            raise Exception("pad depth must be not less than array depth.")
         self_width = self.width
         missing_rows = depth - self_depth
         for i in range(missing_rows):
@@ -835,7 +817,7 @@ class PitchArray:
         """
         self_width = self.width
         if width < self_width:
-            raise ValueError("pad width must not be less than array width.")
+            raise Exception("pad width must not be less than array width.")
         for row in self.rows:
             row.pad_to_width(width)
 
@@ -868,8 +850,7 @@ class PitchArray:
         Returns none.
         """
         if row not in self.rows:
-            message = "row not in array."
-            raise ValueError(message)
+            raise Exception("row not in array.")
         self._rows.remove(row)
         row._parent_array = None
 
@@ -1123,7 +1104,7 @@ class PitchArrayCell:
 
     def __repr__(self) -> str:
         """
-        Delegates to format manager.
+        Gets interpreter representation of pitch array cell.
         """
         if self.pitches:
             pitches = " ".join([str(_) for _ in self.pitches or []])
@@ -1162,7 +1143,7 @@ class PitchArrayCell:
             if self.width == 1:
                 return self._pitch_string
             else:
-                return "%s %s" % (self._pitch_string, self._width_string)
+                return f"{self._pitch_string} {self._width_string}"
         else:
             return self._width_string
 
@@ -1177,9 +1158,9 @@ class PitchArrayCell:
                 cell_width = self._composite_column_width - 2
             else:
                 cell_width = self._composite_column_width - 3
-            return "[%s]" % self._conditional_pitch_string.ljust(cell_width)
+            return f"[{self._conditional_pitch_string.ljust(cell_width)}]"
         else:
-            return "[%s]" % self._conditional_pitch_string
+            return f"[{self._conditional_pitch_string}]"
 
     @property
     def _is_final_cell_in_row(self):
@@ -1198,7 +1179,7 @@ class PitchArrayCell:
 
     @property
     def _width_string(self):
-        return "x%s" % self.width
+        return f"x{self.width}"
 
     ### PRIVATE METHODS ###
 
@@ -1212,7 +1193,7 @@ class PitchArrayCell:
             if 0 < cell_token:
                 pitches, width = [], cell_token
             else:
-                raise ValueError("integer width item must be positive.")
+                raise Exception("integer width item must be positive.")
         elif isinstance(cell_token, abjad.NamedPitch):
             pitches, width = [cell_token], 1
         elif isinstance(cell_token, list):
@@ -1220,7 +1201,7 @@ class PitchArrayCell:
             pitches = self._parse_pitch_token(pitch_token)
         elif isinstance(cell_token, tuple):
             if not len(cell_token) == 2:
-                raise ValueError("tuple item must be of length two.")
+                raise Exception("tuple item must be of length two.")
             if isinstance(cell_token[0], str):
                 pitches = self._parse_pitch_token(cell_token)
                 width = 1
@@ -1230,7 +1211,7 @@ class PitchArrayCell:
         elif isinstance(cell_token, type(self)):
             pitches, width = cell_token.pitches, cell_token.width
         else:
-            raise TypeError("cell item must be integer width, pitch or pair.")
+            raise Exception("cell item must be integer width, pitch or pair.")
         return pitches, width
 
     def _parse_pitch_token(self, pitch_token):
@@ -1245,7 +1226,7 @@ class PitchArrayCell:
                 pitch = abjad.NamedPitch(element)
                 pitches.append(pitch)
         else:
-            raise TypeError("pitch item must be number, pitch or list.")
+            raise Exception("pitch item must be number, pitch or list.")
         return pitches
 
     def _withdraw(self):
@@ -1514,10 +1495,9 @@ class PitchArrayCell:
         """
         if self.parent_row is not None:
             if self.is_final_in_row:
-                message = "cell is last in row."
-                raise IndexError(message)
+                raise Exception("cell is last in row.")
             return self.parent_row[self.column_indices[-1] + 1]
-        raise IndexError("cell has no parent row.")
+        raise Exception("cell has no parent row.")
 
     @property
     def parent_array(self):
@@ -1599,9 +1579,9 @@ class PitchArrayCell:
         """
         if self.parent_row is not None:
             if self.is_first_in_row:
-                raise IndexError("cell is first in row.")
+                raise Exception("cell is first in row.")
             return self.parent_row[self.column_indices[0] - 1]
-        raise IndexError("cell has no parent row.")
+        raise Exception("cell has no parent row.")
 
     @property
     def row_index(self):
@@ -1801,8 +1781,7 @@ class PitchArrayColumn:
         Returns none.
         """
         if not isinstance(cell, PitchArrayCell):
-            message = "must be cell."
-            raise TypeError(message)
+            raise Exception("must be cell.")
         cell._row_parent = self
         self._cells.append(cell)
 
@@ -1813,8 +1792,7 @@ class PitchArrayColumn:
         Returns none.
         """
         if not all(isinstance(cell, PitchArrayCell) for cell in cells):
-            message = "must be cells."
-            raise TypeError(message)
+            raise Exception("must be cells.")
         for cell in cells:
             self.append(cell)
 
@@ -2411,7 +2389,7 @@ class PitchArrayRow:
         """
         if not isinstance(argument, PitchArrayRow):
             message = "must be pitch array row."
-            raise TypeError(message)
+            raise Exception(message)
         self_copy = copy.copy(self)
         arg_copy = copy.copy(argument)
         new_row = PitchArrayRow([])
@@ -2468,7 +2446,7 @@ class PitchArrayRow:
                         return cell
                     accumulated_width = total_width
             else:
-                raise IndexError("no such cell in row.")
+                raise Exception("no such cell in row.")
         elif isinstance(argument, slice):
             cells = []
             start, stop, step = argument.indices(self.width)
@@ -2482,7 +2460,7 @@ class PitchArrayRow:
             cells = tuple(cells)
             return cells
         else:
-            raise ValueError("must be int or slice.")
+            raise Exception("must be int or slice.")
 
     def __hash__(self):
         """
@@ -2516,7 +2494,7 @@ class PitchArrayRow:
         Returns pitch array row.
         """
         if not isinstance(argument, PitchArrayRow):
-            raise TypeError("must be pitch array row.")
+            raise Exception("must be pitch array row.")
         copy_arg = copy.copy(argument)
         self.extend(copy_arg.cells)
         return self
@@ -2574,9 +2552,9 @@ class PitchArrayRow:
             result = [cell._format_row_column_repr_string for cell in self.cells]
             return ", ".join(result)
         else:
-            left = ", ".join([x._format_row_column_repr_string for x in self.cells[:2]])
+            left = ", ".join([_._format_row_column_repr_string for _ in self.cells[:2]])
             right = ", ".join(
-                [x._format_row_column_repr_string for x in self.cells[-2:]]
+                [_._format_row_column_repr_string for _ in self.cells[-2:]]
             )
             number_in_middle = len_self - 4
             middle = f", ... [{number_in_middle}] ..., "
@@ -2686,7 +2664,7 @@ class PitchArrayRow:
     @pitch_range.setter
     def pitch_range(self, argument):
         if not isinstance(argument, abjad.PitchRange):
-            raise TypeError("must be pitch range.")
+            raise Exception("must be pitch range.")
         self._pitch_range = argument
 
     @property
@@ -2712,7 +2690,7 @@ class PitchArrayRow:
         parent_array = self.parent_array
         if parent_array is not None:
             return parent_array._rows.index(self)
-        raise IndexError("row has no parent array.")
+        raise Exception("row has no parent array.")
 
     @property
     def weight(self):
@@ -2824,14 +2802,14 @@ class PitchArrayRow:
         argument = slice(start, stop)
         start, stop, step = argument.indices(self.width)
         if not step == 1:
-            raise NotImplementedError("step no implemented.")
+            raise Exception("step no implemented.")
         column_indices = set(range(start, stop, step))
         row = PitchArrayRow([])
         cells = self[argument]
         new_cells = []
         for cell in cells:
             if cell not in new_cells:
-                trim = [x for x in cell.column_indices if x not in column_indices]
+                trim = [_ for _ in cell.column_indices if _ not in column_indices]
                 new_width = cell.width - len(trim)
                 new_cell = copy.copy(cell)
                 new_cell._width = new_width
@@ -2926,9 +2904,9 @@ class PitchArrayRow:
         """
         try:
             cell = self[i]
-            return cell.column_indices[0] < i
-        except IndexError:
+        except Exception:
             return False
+        return cell.column_indices[0] < i
 
     def index(self, cell):
         """
@@ -2950,7 +2928,7 @@ class PitchArrayRow:
         for cell in cells:
             assert isinstance(cell, PitchArrayCell), repr(cell)
             if cell.parent_row is not self:
-                raise ValueError("cells must belong to row.")
+                raise Exception("cells must belong to row.")
             column_indices.extend(cell.column_indices)
             if cell.pitches is not None:
                 pitches.extend(cell.pitches)
@@ -2959,7 +2937,7 @@ class PitchArrayRow:
         stop = start + len(column_indices)
         strict_series = list(range(start, stop))
         if not column_indices == strict_series:
-            raise ValueError("cells must be contiguous.")
+            raise Exception("cells must be contiguous.")
         first_cell = cells[0]
         for cell in cells[1:]:
             self.remove(cell)
@@ -2975,7 +2953,7 @@ class PitchArrayRow:
         """
         self_width = self.width
         if width < self_width:
-            raise ValueError("pad width must not be less than row width.")
+            raise Exception("pad width must not be less than row width.")
         missing_width = width - self_width
         for i in range(missing_width):
             cell = PitchArrayCell()
