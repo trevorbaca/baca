@@ -2462,6 +2462,7 @@ def _reapply_persistent_indicators(
                 wrapper = abjad.attach(
                     previous_indicator,
                     leaf,
+                    check_duplicate_indicator=True,
                     synthetic_offset=synthetic_offset,
                     tag=tag,
                     wrapper=True,
