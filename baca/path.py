@@ -230,7 +230,7 @@ def extern(
                 del stack[name]
                 count = len(line) - len(line.lstrip())
                 indent = count * " "
-                dereference = indent + fr"{{ \{name} }}"
+                dereference = indent + rf"{{ \{name} }}"
                 first_line = finished_variables[name][0]
                 # these 4 lines can be removed after right-side tags:
                 if str(_tags.NOT_TOPMOST) in first_line:

@@ -4622,14 +4622,14 @@ class FigureMaker:
             start_offsets_.append(start_offset_)
         start_offsets_.append(float(total_duration))
         durations_ = abjad.math.difference_series(start_offsets_)
-        durations_ = rhythm_maker_class._round_durations(durations_, 2 ** 10)
+        durations_ = rhythm_maker_class._round_durations(durations_, 2**10)
         durations_ = _fix_rounding_error(durations_, total_duration)
         multipliers = []
         assert len(durations) == len(durations_)
         for duration_, duration in zip(durations_, durations):
             multiplier = duration_ / duration
             multiplier = abjad.Multiplier(multiplier)
-            multiplier = multiplier.with_denominator(2 ** 10)
+            multiplier = multiplier.with_denominator(2**10)
             multipliers.append(multiplier)
         return multipliers
 

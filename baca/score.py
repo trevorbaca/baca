@@ -41,7 +41,7 @@ def attach_lilypond_tag(tag, context, *, part_manifest=None):
             part_names = [_.name for _ in part_manifest.parts]
         if part_names and tag_ not in part_names:
             raise Exception(f"not listed in parts manifest: {tag_!r}.")
-    literal = abjad.LilyPondLiteral(fr"\tag {tag}", "before")
+    literal = abjad.LilyPondLiteral(rf"\tag {tag}", "before")
     tag = _scoping.site(_frame())
     abjad.attach(literal, context, tag=tag)
 
