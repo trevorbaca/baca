@@ -403,6 +403,12 @@ class PiecewiseCommand(_scoping.Command):
                 ).bound_details__right__padding = number
             if self.tweaks and hasattr(indicator, "_tweaks"):
                 _scoping.apply_tweaks(indicator, self.tweaks, i=i, total=total_pieces)
+            elif (
+                self.tweaks
+                and hasattr(indicator, "tweaks")
+                and getattr(indicator, "_is_dataclass", False) is True
+            ):
+                _scoping.apply_tweaks(indicator, self.tweaks, i=i, total=total_pieces)
             reapplied = _scoping.remove_reapplied_wrappers(leaf, indicator)
             tag_ = self.tag.append(tag)
             if getattr(indicator, "spanner_start", None) is True:
@@ -2956,8 +2962,15 @@ def parse_hairpin_descriptor(
         indicator = make_dynamic(
             string, forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line
         )
-        if tweaks and hasattr(indicator, "_tweaks"):
-            _scoping.apply_tweaks(indicator, tweaks)
+        if not isinstance(indicator, abjad.Dynamic):
+            if tweaks and hasattr(indicator, "_tweaks"):
+                _scoping.apply_tweaks(indicator, tweaks)
+            elif (
+                tweaks
+                and hasattr(indicator, "tweaks")
+                and getattr(indicator, "_is_dataclass", False) is True
+            ):
+                _scoping.apply_tweaks(indicator, tweaks)
         indicators.append(indicator)
     if len(indicators) == 1:
         if isinstance(indicators[0], abjad.StartHairpin):
