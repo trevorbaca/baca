@@ -2510,7 +2510,7 @@ def make_dynamic(
         Stop hairpin:
 
         >>> baca.make_dynamic("!")
-        StopHairpin()
+        StopHairpin(leak=None)
 
     ..  container:: example
 
@@ -2879,7 +2879,7 @@ def parse_hairpin_descriptor(
         >>> for item in baca.parse_hairpin_descriptor("< !"):
         ...     item
         Bundle(spanner_start=StartHairpin(shape='<', direction=None, tweaks=None))
-        Bundle(indicator=StopHairpin())
+        Bundle(indicator=StopHairpin(leak=None))
 
         >>> for item in baca.parse_hairpin_descriptor("o<|"):
         ...     item
@@ -2901,7 +2901,7 @@ def parse_hairpin_descriptor(
         >>> for item in baca.parse_hairpin_descriptor("p < !"):
         ...     item
         Bundle(indicator=Dynamic(name='p', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=StartHairpin(shape='<', direction=None, tweaks=None))
-        Bundle(indicator=StopHairpin())
+        Bundle(indicator=StopHairpin(leak=None))
 
         >>> for item in baca.parse_hairpin_descriptor("< f"):
         ...     item
@@ -2943,7 +2943,7 @@ def parse_hairpin_descriptor(
         >>> for item in baca.parse_hairpin_descriptor("f -- ! > p"):
         ...     item
         Bundle(indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=StartHairpin(shape='--', direction=None, tweaks=None))
-        Bundle(indicator=StopHairpin(), spanner_start=StartHairpin(shape='>', direction=None, tweaks=None))
+        Bundle(indicator=StopHairpin(leak=None), spanner_start=StartHairpin(shape='>', direction=None, tweaks=None))
         Bundle(indicator=Dynamic(name='p', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None))
 
         >>> for item in baca.parse_hairpin_descriptor("mf niente o< p"):
