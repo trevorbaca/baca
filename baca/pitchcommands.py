@@ -1135,8 +1135,7 @@ class DiatonicClusterCommand(_scoping.Command):
             width = self.widths[i]
             start = self._get_lowest_diatonic_pitch_number(plt)
             numbers = range(start, start + width)
-            module = abjad.pitch._lib
-            change = module._diatonic_pc_number_to_pitch_class_number
+            change = abjad.pitch._diatonic_pc_number_to_pitch_class_number
             numbers_ = [(12 * (x // 7)) + change[x % 7] for x in numbers]
             pitches = [abjad.NamedPitch(_) for _ in numbers_]
             for pleaf in plt:
