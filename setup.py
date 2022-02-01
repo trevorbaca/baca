@@ -17,7 +17,7 @@ if __name__ == "__main__":
         name="baca",
         packages=["baca"],
         platforms="Any",
-        python_requires=">=3.9",
+        python_requires=">=3.10",
         url="https://github.com/trevorbaca/baca",
-        version="3.2",
+        version="3.5",
     )
