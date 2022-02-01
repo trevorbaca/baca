@@ -316,7 +316,10 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ...     transpose_score=True,
     ... )
-    >>> lilypond_file = baca.make_lilypond_file(score)
+    >>> lilypond_file = baca.make_lilypond_file(
+    ...     score,
+    ...     includes=["baca.ily"],
+    ... )
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
