@@ -1,8 +1,8 @@
 black-check:
-	black --check --diff --target-version=py39 .
+	black --check --diff .
 
 black-reformat:
-	black --target-version=py39 .
+	black .
 
 flake_exclude = --exclude=baca/__init__.py
 flake_ignore = --ignore=E203,E266,E501,W503
