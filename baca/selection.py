@@ -220,12 +220,12 @@ class Selection(abjad.Selection):
             >>> for item in result:
             ...     item
             ...
-            Selection([Rest('r16'), Note("bf'16")])
-            Selection([Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")])
-            Selection([Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")])
-            Selection([Note("d'16"), Chord("<e' fs'>4")])
-            Selection([Chord("<e' fs'>16"), Rest('r16'), Note("bf'16")])
-            Selection([Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+            Selection(items=[Rest('r16'), Note("bf'16")])
+            Selection(items=[Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")])
+            Selection(items=[Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")])
+            Selection(items=[Note("d'16"), Chord("<e' fs'>4")])
+            Selection(items=[Chord("<e' fs'>16"), Rest('r16'), Note("bf'16")])
+            Selection(items=[Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
             >>> abjad.label.by_selector(result)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -322,8 +322,8 @@ class Selection(abjad.Selection):
             >>> for item in result:
             ...     item
             ...
-            Selection([Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
-            Selection([Note("g'8"), Note("a'8"), Note("b'8"), Rest('r8')])
+            Selection(items=[Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
+            Selection(items=[Note("g'8"), Note("a'8"), Note("b'8"), Rest('r8')])
 
             >>> abjad.label.by_selector(result)
             >>> lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', staff])
@@ -398,11 +398,11 @@ class Selection(abjad.Selection):
             >>> result = baca.Selection(staff).leaves().enchain([5])
             >>> for item in result:
             ...     item
-            Selection([Rest('r16'), Note("bf'16"), Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")])
-            Selection([Chord("<d' e'>4"), Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")])
-            Selection([Chord("<a'' b''>16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
-            Selection([Rest('r16'), Note("bf'16"), Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4")])
-            Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+            Selection(items=[Rest('r16'), Note("bf'16"), Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")])
+            Selection(items=[Chord("<d' e'>4"), Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")])
+            Selection(items=[Chord("<a'' b''>16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
+            Selection(items=[Rest('r16'), Note("bf'16"), Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4")])
+            Selection(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
             >>> for i, selection in enumerate(result):
             ...     if i % 2 == 0:
@@ -816,9 +816,9 @@ class Selection(abjad.Selection):
             >>> for item in result:
             ...     item
             ...
-            Selection([Note("c'8")])
-            Selection([Rest('r8'), Note("d'8"), Note("e'8")])
-            Selection([Rest('r8'), Note("f'8"), Note("g'8"), Note("a'8")])
+            Selection(items=[Note("c'8")])
+            Selection(items=[Rest('r8'), Note("d'8"), Note("e'8")])
+            Selection(items=[Rest('r8'), Note("f'8"), Note("g'8"), Note("a'8")])
 
             >>> abjad.label.by_selector(result)
             >>> lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', staff])
@@ -982,9 +982,9 @@ class Selection(abjad.Selection):
             >>> for item in result:
             ...     item
             ...
-            Selection([Rest('r16'), Note("bf'16")])
-            Selection([Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")])
-            Selection([Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")])
+            Selection(items=[Rest('r16'), Note("bf'16")])
+            Selection(items=[Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")])
+            Selection(items=[Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")])
 
             >>> abjad.label.by_selector(result)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1074,7 +1074,7 @@ class Selection(abjad.Selection):
 
             >>> result = baca.Selection(staff).lt(-1)
             >>> result
-            LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+            LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
             >>> abjad.label.by_selector(result, lone=True)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1353,7 +1353,7 @@ class Selection(abjad.Selection):
 
             >>> result = baca.Selection(staff).ltqrun(-1)
             >>> result
-            Selection([LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
+            Selection(items=[LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
             >>> abjad.label.by_selector(result, lone=True)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1438,12 +1438,12 @@ class Selection(abjad.Selection):
             >>> for item in result:
             ...     item
             ...
-            Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])])
-            Selection([LogicalTie([Chord("<d' e'>4"), Chord("<d' e'>16")])])
-            Selection([LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")])])
-            Selection([LogicalTie([Chord("<e' fs'>4"), Chord("<e' fs'>16")])])
-            Selection([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")])])
-            Selection([LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
+            Selection(items=[LogicalTie(items=[Note("c'16")]), LogicalTie(items=[Note("c'16")]), LogicalTie(items=[Note("c'16")])])
+            Selection(items=[LogicalTie(items=[Chord("<d' e'>4"), Chord("<d' e'>16")])])
+            Selection(items=[LogicalTie(items=[Note("d'16")]), LogicalTie(items=[Note("d'16")]), LogicalTie(items=[Note("d'16")])])
+            Selection(items=[LogicalTie(items=[Chord("<e' fs'>4"), Chord("<e' fs'>16")])])
+            Selection(items=[LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")])])
+            Selection(items=[LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
             >>> abjad.label.by_selector(result)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1547,7 +1547,8 @@ class Selection(abjad.Selection):
 
             >>> result = baca.Selection(staff).ltrun(-1)
             >>> result
-            Selection([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
+            Selection(items=[LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")]),
+            LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
             >>> abjad.label.by_selector(result, lone=True)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1635,9 +1636,9 @@ class Selection(abjad.Selection):
             >>> for item in result:
             ...     item
             ...
-            Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Chord("<d' e'>4"), Chord("<d' e'>16")])])
-            Selection([LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Chord("<e' fs'>4"), Chord("<e' fs'>16")])])
-            Selection([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
+            Selection(items=[LogicalTie(items=[Note("c'16")]), LogicalTie(items=[Note("c'16")]), LogicalTie(items=[Note("c'16")]), LogicalTie(items=[Chord("<d' e'>4"), Chord("<d' e'>16")])])
+            Selection(items=[LogicalTie(items=[Note("d'16")]), LogicalTie(items=[Note("d'16")]), LogicalTie(items=[Note("d'16")]), LogicalTie(items=[Chord("<e' fs'>4"), Chord("<e' fs'>16")])])
+            Selection(items=[LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
             >>> abjad.label.by_selector(result)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1741,21 +1742,21 @@ class Selection(abjad.Selection):
             >>> for item in result:
             ...     item
             ...
-            LogicalTie([Rest('r16')])
-            LogicalTie([Note("bf'16")])
-            LogicalTie([Chord("<a'' b''>16")])
-            LogicalTie([Note("c'16")])
-            LogicalTie([Chord("<d' e'>4"), Chord("<d' e'>16")])
-            LogicalTie([Rest('r16')])
-            LogicalTie([Note("bf'16")])
-            LogicalTie([Chord("<a'' b''>16")])
-            LogicalTie([Note("d'16")])
-            LogicalTie([Chord("<e' fs'>4"), Chord("<e' fs'>16")])
-            LogicalTie([Rest('r16')])
-            LogicalTie([Note("bf'16")])
-            LogicalTie([Chord("<a'' b''>16")])
-            LogicalTie([Note("e'16")])
-            LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+            LogicalTie(items=[Rest('r16')])
+            LogicalTie(items=[Note("bf'16")])
+            LogicalTie(items=[Chord("<a'' b''>16")])
+            LogicalTie(items=[Note("c'16")])
+            LogicalTie(items=[Chord("<d' e'>4"), Chord("<d' e'>16")])
+            LogicalTie(items=[Rest('r16')])
+            LogicalTie(items=[Note("bf'16")])
+            LogicalTie(items=[Chord("<a'' b''>16")])
+            LogicalTie(items=[Note("d'16")])
+            LogicalTie(items=[Chord("<e' fs'>4"), Chord("<e' fs'>16")])
+            LogicalTie(items=[Rest('r16')])
+            LogicalTie(items=[Note("bf'16")])
+            LogicalTie(items=[Chord("<a'' b''>16")])
+            LogicalTie(items=[Note("e'16")])
+            LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
             >>> abjad.label.by_selector(result)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1851,7 +1852,7 @@ class Selection(abjad.Selection):
             >>> for item in result:
             ...     item
             ...
-            Selection([Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
+            Selection(items=[Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
 
             >>> abjad.label.by_selector(result)
             >>> lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', staff])
@@ -2131,7 +2132,7 @@ class Selection(abjad.Selection):
 
             >>> result = baca.Selection(staff).ntrun(-1)
             >>> result
-            Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+            Selection(items=[Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
             >>> abjad.label.by_selector(result, lone=True)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2219,9 +2220,9 @@ class Selection(abjad.Selection):
             >>> for item in result:
             ...     item
             ...
-            Selection([Note("c'16"), Note("c'16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16")])
-            Selection([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16")])
-            Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+            Selection(items=[Note("c'16"), Note("c'16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16")])
+            Selection(items=[Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16")])
+            Selection(items=[Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
             >>> abjad.label.by_selector(result)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2315,8 +2316,8 @@ class Selection(abjad.Selection):
             >>> for item in result:
             ...     item
             ...
-            Selection([Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
-            Selection([Note("g'8"), Note("a'8"), Note("b'8"), Rest('r8'), Note("d''8")])
+            Selection(items=[Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
+            Selection(items=[Note("g'8"), Note("a'8"), Note("b'8"), Rest('r8'), Note("d''8")])
 
             >>> abjad.label.by_selector(result)
             >>> lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', staff])
@@ -2802,7 +2803,7 @@ class Selection(abjad.Selection):
 
             >>> result = baca.Selection(staff).plt(-1)
             >>> result
-            LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+            LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
             >>> abjad.label.by_selector(result, lone=True)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2889,18 +2890,18 @@ class Selection(abjad.Selection):
             >>> for item in result:
             ...     item
             ...
-            LogicalTie([Note("bf'16")])
-            LogicalTie([Chord("<a'' b''>16")])
-            LogicalTie([Note("c'16")])
-            LogicalTie([Chord("<d' e'>4"), Chord("<d' e'>16")])
-            LogicalTie([Note("bf'16")])
-            LogicalTie([Chord("<a'' b''>16")])
-            LogicalTie([Note("d'16")])
-            LogicalTie([Chord("<e' fs'>4"), Chord("<e' fs'>16")])
-            LogicalTie([Note("bf'16")])
-            LogicalTie([Chord("<a'' b''>16")])
-            LogicalTie([Note("e'16")])
-            LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+            LogicalTie(items=[Note("bf'16")])
+            LogicalTie(items=[Chord("<a'' b''>16")])
+            LogicalTie(items=[Note("c'16")])
+            LogicalTie(items=[Chord("<d' e'>4"), Chord("<d' e'>16")])
+            LogicalTie(items=[Note("bf'16")])
+            LogicalTie(items=[Chord("<a'' b''>16")])
+            LogicalTie(items=[Note("d'16")])
+            LogicalTie(items=[Chord("<e' fs'>4"), Chord("<e' fs'>16")])
+            LogicalTie(items=[Note("bf'16")])
+            LogicalTie(items=[Chord("<a'' b''>16")])
+            LogicalTie(items=[Note("e'16")])
+            LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
             >>> abjad.label.by_selector(result)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -3189,7 +3190,7 @@ class Selection(abjad.Selection):
 
             >>> result = baca.Selection(staff).ptlt(-1)
             >>> result
-            LogicalTie([Note("e'16")])
+            LogicalTie(items=[Note("e'16")])
 
             >>> abjad.label.by_selector(result, lone=True)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -3273,15 +3274,15 @@ class Selection(abjad.Selection):
             >>> for item in result:
             ...     item
             ...
-            LogicalTie([Note("bf'16")])
-            LogicalTie([Chord("<a'' b''>16")])
-            LogicalTie([Note("c'16")])
-            LogicalTie([Note("bf'16")])
-            LogicalTie([Chord("<a'' b''>16")])
-            LogicalTie([Note("d'16")])
-            LogicalTie([Note("bf'16")])
-            LogicalTie([Chord("<a'' b''>16")])
-            LogicalTie([Note("e'16")])
+            LogicalTie(items=[Note("bf'16")])
+            LogicalTie(items=[Chord("<a'' b''>16")])
+            LogicalTie(items=[Note("c'16")])
+            LogicalTie(items=[Note("bf'16")])
+            LogicalTie(items=[Chord("<a'' b''>16")])
+            LogicalTie(items=[Note("d'16")])
+            LogicalTie(items=[Note("bf'16")])
+            LogicalTie(items=[Chord("<a'' b''>16")])
+            LogicalTie(items=[Note("e'16")])
 
             >>> abjad.label.by_selector(result)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -3371,7 +3372,7 @@ class Selection(abjad.Selection):
 
             >>> result = baca.Selection(staff).qrun(-1)
             >>> result
-            Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+            Selection(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
             >>> abjad.label.by_selector(result, lone=True)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -3456,12 +3457,12 @@ class Selection(abjad.Selection):
             >>> for item in result:
             ...     item
             ...
-            Selection([Note("c'16"), Note("c'16"), Note("c'16")])
-            Selection([Chord("<d' e'>4"), Chord("<d' e'>16")])
-            Selection([Note("d'16"), Note("d'16"), Note("d'16")])
-            Selection([Chord("<e' fs'>4"), Chord("<e' fs'>16")])
-            Selection([Note("e'16"), Note("e'16"), Note("e'16")])
-            Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+            Selection(items=[Note("c'16"), Note("c'16"), Note("c'16")])
+            Selection(items=[Chord("<d' e'>4"), Chord("<d' e'>16")])
+            Selection(items=[Note("d'16"), Note("d'16"), Note("d'16")])
+            Selection(items=[Chord("<e' fs'>4"), Chord("<e' fs'>16")])
+            Selection(items=[Note("e'16"), Note("e'16"), Note("e'16")])
+            Selection(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
             >>> abjad.label.by_selector(result)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -3636,9 +3637,9 @@ class Selection(abjad.Selection):
             >>> for item in result:
             ...     item
             ...
-            Selection([Note("c'8"), Rest('r8')])
-            Selection([Note("d'8"), Note("e'8"), Rest('r8')])
-            Selection([Note("f'8"), Note("g'8"), Note("a'8")])
+            Selection(items=[Note("c'8"), Rest('r8')])
+            Selection(items=[Note("d'8"), Note("e'8"), Rest('r8')])
+            Selection(items=[Note("f'8"), Note("g'8"), Note("a'8")])
 
             >>> abjad.label.by_selector(result)
             >>> lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', staff])
@@ -3858,7 +3859,7 @@ class Selection(abjad.Selection):
 
             >>> result = baca.Selection(staff).rrun(1)
             >>> result
-            Selection([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
+            Selection(items=[Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
 
             >>> abjad.label.by_selector(result, lone=True)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -3947,9 +3948,9 @@ class Selection(abjad.Selection):
             >>> for item in result:
             ...     item
             ...
-            Selection([Note("c'16"), Note("c'16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16"), Rest('r16')])
-            Selection([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
-            Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+            Selection(items=[Note("c'16"), Note("c'16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16"), Rest('r16')])
+            Selection(items=[Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
+            Selection(items=[Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
             >>> abjad.label.by_selector(result)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
