@@ -7696,11 +7696,11 @@ class Registration:
         baca.Registration(
             components=[
                 baca.RegistrationComponent(
-                    source_pitch_range=abjad.PitchRange('[A0, C4)'),
+                    source_pitch_range=PitchRange(range_string='[A0, C4)'),
                     target_octave_start_pitch=abjad.NumberedPitch(15),
                     ),
                 baca.RegistrationComponent(
-                    source_pitch_range=abjad.PitchRange('[C4, C8)'),
+                    source_pitch_range=PitchRange(range_string='[C4, C8)'),
                     target_octave_start_pitch=abjad.NumberedPitch(27),
                     ),
                 ],
@@ -7844,7 +7844,7 @@ class RegistrationComponent:
 
         >>> component = baca.RegistrationComponent("[A0, C8]", 15)
         >>> component
-        RegistrationComponent(source_pitch_range=PitchRange('[A0, C8]'), target_octave_start_pitch=NumberedPitch(15))
+        RegistrationComponent(source_pitch_range=PitchRange(range_string='[A0, C8]'), target_octave_start_pitch=NumberedPitch(15))
 
     """
 
@@ -7901,7 +7901,7 @@ class RegistrationComponent:
 
             >>> component = baca.RegistrationComponent("[A0, C8]", 15)
             >>> component.source_pitch_range
-            PitchRange('[A0, C8]')
+            PitchRange(range_string='[A0, C8]')
 
         Returns pitch range or none.
         """

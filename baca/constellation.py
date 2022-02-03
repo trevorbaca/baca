@@ -2170,7 +2170,7 @@ class Circuit:
         ..  container:: example
 
             >>> baca.CC1().range_
-            PitchRange('[A0, C8]')
+            PitchRange(range_string='[A0, C8]')
 
         """
         return self._range
