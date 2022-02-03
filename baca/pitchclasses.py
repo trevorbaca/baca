@@ -104,9 +104,14 @@ class ArpeggiationSpacingSpecifier:
 
     def __eq__(self, argument) -> bool:
         """
-        Delegates to format manager.
+        Compares ``direction``, ``pattern``.
         """
-        return abjad.format.compare_objects(self, argument)
+        if isinstance(argument, type(self)):
+            return (
+                self.direction == argument.direction
+                and self.pattern == argument.pattern
+            )
+        return False
 
     def __hash__(self) -> int:
         """
@@ -400,9 +405,18 @@ class ChordalSpacingSpecifier:
 
     def __eq__(self, argument) -> bool:
         """
-        Delegates to format manager.
+        Compares ``bass``, ``direction``, ``minimum_semitones``, ``pattern``,
+        ``soprano``.
         """
-        return abjad.format.compare_objects(self, argument)
+        if isinstance(argument, type(self)):
+            return (
+                self.bass == argument.bass
+                and self.direction == argument.direction
+                and self.minimum_semitones == argument.minimum_semitones
+                and self.pattern == argument.pattern
+                and self.soprano == argument.soprano
+            )
+        return False
 
     def __hash__(self) -> int:
         """
@@ -7781,9 +7795,11 @@ class Registration:
 
     def __eq__(self, argument) -> bool:
         """
-        Delegates to format manager.
+        Compares ``components``.
         """
-        return abjad.format.compare_objects(self, argument)
+        if isinstance(argument, type(self)):
+            return self.components == argument.components
+        return False
 
     def __hash__(self) -> int:
         """
@@ -7867,9 +7883,14 @@ class RegistrationComponent:
 
     def __eq__(self, argument):
         """
-        Delegates to format manager.
+        Compares ``source_pitch_range``, ``target_octave_start_pitch``.
         """
-        return abjad.format.compare_objects(self, argument)
+        if isinstance(argument, type(self)):
+            return (
+                self.source_pitch_range == argument.source_pitch_range
+                and self.target_octave_start_pitch == argument.target_octave_start_pitch
+            )
+        return False
 
     def __hash__(self):
         """
@@ -8044,9 +8065,15 @@ class ZaggedPitchClassMaker:
 
     def __eq__(self, argument):
         """
-        Delegates to format manager.
+        Compares ``pc_cells``, ``division_ratios``, ``grouping_counts``.
         """
-        return abjad.format.compare_objects(self, argument)
+        if isinstance(argument, type(self)):
+            return (
+                self.pc_cells == argument.pc_cells
+                and self.division_ratios == argument.division_ratios
+                and self.grouping_counts == argument.grouping_counts
+            )
+        return False
 
     def __hash__(self):
         """

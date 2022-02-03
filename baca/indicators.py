@@ -74,9 +74,11 @@ class Accelerando:
 
     def __eq__(self, argument) -> bool:
         """
-        Delegates to format manager.
+        Compares ``markup``.
         """
-        return abjad.format.compare_objects(self, argument)
+        if isinstance(argument, type(self)):
+            return self.markup == argument.markup
+        return False
 
     def __hash__(self) -> int:
         """
@@ -570,9 +572,11 @@ class Ritardando:
 
     def __eq__(self, argument) -> bool:
         """
-        Delegates to format manager.
+        Compares ``markup``.
         """
-        return abjad.format.compare_objects(self, argument)
+        if isinstance(argument, type(self)):
+            return self.markup == argument.markup
+        return False
 
     def __hash__(self) -> int:
         """

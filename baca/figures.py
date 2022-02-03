@@ -67,9 +67,11 @@ class Stack:
 
     def __eq__(self, argument) -> bool:
         """
-        Delegates to format manager.
+        Compares ``commands``.
         """
-        return abjad.format.compare_objects(self, argument)
+        if isinstance(argument, type(self)):
+            return self.commands == argument.commands
+        return False
 
     def __hash__(self) -> int:
         """
@@ -236,9 +238,20 @@ class LMR:
 
     def __eq__(self, argument) -> bool:
         """
-        Delegates to format manager.
+        Compares all input parameters.
         """
-        return abjad.format.compare_objects(self, argument)
+        if isinstance(argument, type(self)):
+            return (
+                self.left_counts == argument.left_counts
+                and self.left_cyclic == argument.left_cyclic
+                and self.left_reversed == argument.left_reversed
+                and self.middle_cyclic == argument.middle_cyclic
+                and self.priority == argument.priority
+                and self.right_counts == argument.right_counts
+                and self.right_cyclic == argument.right_cyclic
+                and self.right_reversed == argument.right_reversed
+            )
+        return False
 
     def __hash__(self) -> int:
         """
@@ -1004,9 +1017,11 @@ class Acciaccatura:
 
     def __eq__(self, argument) -> bool:
         """
-        Delegates to format manager.
+        Compares ``durations``, ``lmr``.
         """
-        return abjad.format.compare_objects(self, argument)
+        if isinstance(argument, type(self)):
+            return self.durations == argument.durations and self.lmr == argument.lmr
+        return False
 
     def __hash__(self) -> int:
         """
@@ -1792,9 +1807,17 @@ class Anchor:
 
     def __eq__(self, argument) -> bool:
         """
-        Delegates to format manager.
+        Compares all 5 input arguments.
         """
-        return abjad.format.compare_objects(self, argument)
+        if isinstance(argument, type(self)):
+            return (
+                self.figure_name == argument.figure_name
+                and self.local_selector == argument.local_selector
+                and self.remote_selector == argument.remote_selector
+                and self.remote_voice_name == argument.remote_voice_name
+                and self.use_remote_stop_offset == argument.use_remote_stop_offset
+            )
+        return False
 
     def __hash__(self) -> int:
         """
@@ -3680,9 +3703,11 @@ class Nest:
 
     def __eq__(self, argument) -> bool:
         """
-        Delegates to format manager.
+        Compares ``treatments``, ``lmr``.
         """
-        return abjad.format.compare_objects(self, argument)
+        if isinstance(argument, type(self)):
+            return self.treatments == argument.treatments and self.lmr == argument.lmr
+        return False
 
     def __hash__(self) -> int:
         """
@@ -3786,9 +3811,16 @@ class RestAffix:
 
     def __eq__(self, argument) -> bool:
         """
-        Delegates to format manager.
+        Compares all 4 input parameters.
         """
-        return abjad.format.compare_objects(self, argument)
+        if isinstance(argument, type(self)):
+            return (
+                self.pattern == argument.pattern
+                and self.prefix == argument.prefix
+                and self.skips_instead_of_rests == argument.skips_instead_of_rests
+                and self.suffix == argument.suffix
+            )
+        return False
 
     def __hash__(self) -> int:
         """
@@ -4469,9 +4501,19 @@ class FigureMaker:
 
     def __eq__(self, argument) -> bool:
         """
-        Delegates to format manager.
+        Compares all input parameters.
         """
-        return abjad.format.compare_objects(self, argument)
+        if isinstance(argument, type(self)):
+            return (
+                self.talea == argument.talea
+                and self.acciaccatura == argument.acciaccatura
+                and self.affix == argument.affix
+                and self.restart_talea == argument.restart_talea
+                and self.signature == argument.signature
+                and self.spelling == argument.spelling
+                and self.treatments == argument.treatments
+            )
+        return False
 
     def __hash__(self) -> int:
         """
@@ -6858,9 +6900,11 @@ class Assignment:
 
     def __eq__(self, argument) -> bool:
         """
-        Delegates to format manager.
+        Compares ``maker``, ``pattern``.
         """
-        return abjad.format.compare_objects(self, argument)
+        if isinstance(argument, type(self)):
+            return self.make == argument.maker and self.pattern == argument.pattern
+        return False
 
     def __hash__(self) -> int:
         """
@@ -6952,9 +6996,11 @@ class Bind:
 
     def __eq__(self, argument) -> bool:
         """
-        Delegates to format manager.
+        Compares ``assignments``.
         """
-        return abjad.format.compare_objects(self, argument)
+        if isinstance(argument, type(self)):
+            return self.assignments == argument.assignments
+        return False
 
     def __hash__(self) -> int:
         """
