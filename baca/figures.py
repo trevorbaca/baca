@@ -75,14 +75,9 @@ class Stack:
 
     def __hash__(self) -> int:
         """
-        Hashes stack.
+        Hashes object.
         """
-        hash_values = abjad.format.get_hash_values(self)
-        try:
-            result = hash(hash_values)
-        except TypeError:
-            raise TypeError(f"unhashable type: {self}")
-        return result
+        return hash(str(self))
 
     def __repr__(self) -> str:
         """
@@ -1821,14 +1816,9 @@ class Anchor:
 
     def __hash__(self) -> int:
         """
-        Hashes anchor.
+        Hashes object.
         """
-        hash_values = abjad.format.get_hash_values(self)
-        try:
-            result = hash(hash_values)
-        except TypeError:
-            raise TypeError(f"unhashable type: {self}")
-        return result
+        return hash(str(self))
 
     def __repr__(self) -> str:
         """
@@ -3711,14 +3701,9 @@ class Nest:
 
     def __hash__(self) -> int:
         """
-        Hashes nest.
+        Hashes object.
         """
-        hash_values = abjad.format.get_hash_values(self)
-        try:
-            result = hash(hash_values)
-        except TypeError:
-            raise TypeError(f"unhashable type: {self}")
-        return result
+        return hash(str(self))
 
     def __repr__(self) -> str:
         """
@@ -4517,14 +4502,9 @@ class FigureMaker:
 
     def __hash__(self) -> int:
         """
-        Hashes figure-maker.
+        Hashes object.
         """
-        hash_values = abjad.format.get_hash_values(self)
-        try:
-            result = hash(hash_values)
-        except TypeError:
-            raise TypeError(f"unhashable type: {self}")
-        return result
+        return hash(str(self))
 
     def __repr__(self) -> str:
         """
@@ -6908,14 +6888,9 @@ class Assignment:
 
     def __hash__(self) -> int:
         """
-        Hashes assignment.
+        Hashes object.
         """
-        hash_values = abjad.format.get_hash_values(self)
-        try:
-            result = hash(hash_values)
-        except TypeError:
-            raise TypeError(f"unhashable type: {self}")
-        return result
+        return hash(str(self))
 
     def __repr__(self) -> str:
         """
@@ -7004,14 +6979,9 @@ class Bind:
 
     def __hash__(self) -> int:
         """
-        Hashes bind.
+        Hashes object.
         """
-        hash_values = abjad.format.get_hash_values(self)
-        try:
-            result = hash(hash_values)
-        except TypeError:
-            raise TypeError(f"unhashable type: {self}")
-        return result
+        return hash(str(self))
 
     def __repr__(self) -> str:
         """
