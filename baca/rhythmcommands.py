@@ -175,7 +175,7 @@ class RhythmCommand(_scoping.Command):
         message += "\n    sequence of division assignment objects"
         message += "\n    none"
         message += '\n  Input parameter "rhythm_maker" received:'
-        message += f"\n    {abjad.storage(rhythm_maker)}"
+        message += f"\n    {rhythm_maker!r}"
         raise Exception(message)
 
     def _make_rhythm_annotation_string(self):

@@ -651,38 +651,12 @@ class BCPCommand(_scoping.Command):
             ...     [(1, 2), (1, 4)],
             ...     abjad.tweak("#red").color,
             ... )
-            >>> string = abjad.storage(command)
-            >>> print(string)
-            baca.BCPCommand(
-                bcps=[
-                    (1, 2),
-                    (1, 4),
-                    ],
-                selector=...,
-                tags=[
-                    abjad.Tag('baca.bcps()'),
-                    ],
-                tweaks=(
-                    TweakInterface(('_literal', None), ('color', '#red')),
-                    ),
-                )
+            >>> command
+            BCPCommand(bcps=[(1, 2), (1, 4)], selector=<function leaves.<locals>.selector at 0x...>, tags=[Tag('baca.bcps()')], tweaks=(TweakInterface(('_literal', None), ('color', '#red')),))
 
             >>> new_command = abjad.new(command)
-            >>> string = abjad.storage(new_command)
-            >>> print(string)
-            baca.BCPCommand(
-                bcps=[
-                    (1, 2),
-                    (1, 4),
-                    ],
-                selector=...,
-                tags=[
-                    abjad.Tag('baca.bcps()'),
-                    ],
-                tweaks=(
-                    TweakInterface(('_literal', None), ('color', '#red')),
-                    ),
-                )
+            >>> new_command
+            BCPCommand(bcps=[(1, 2), (1, 4)], selector=<function leaves.<locals>.selector at 0x...>, tags=[Tag('baca.bcps()')], tweaks=(TweakInterface(('_literal', None), ('color', '#red')),))
 
         """
         return self._tweaks

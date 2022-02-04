@@ -20,14 +20,8 @@ class Part:
         ...     section_abbreviation="VN-1",
         ... )
 
-        >>> string = abjad.storage(part)
-        >>> print(string)
-        baca.Part(
-            instrument='FirstViolin',
-            member=18,
-            section='FirstViolin',
-            section_abbreviation='VN-1',
-            )
+        >>> part
+        Part(instrument='FirstViolin', member=18, section='FirstViolin', section_abbreviation='VN-1')
 
     """
 
@@ -363,9 +357,8 @@ class PartAssignment:
     ..  container:: example
 
         >>> part_assignment = baca.PartAssignment("Horn", [1, 3])
-
-        >>> print(abjad.storage(part_assignment))
-        baca.PartAssignment('Horn', [1, 3])
+        >>> part_assignment
+        PartAssignment('Horn', [1, 3])
 
     """
 

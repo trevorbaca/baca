@@ -1578,30 +1578,8 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections = baca.CollectionList([[5, 12, 14, 18], [16, 17]])
             >>> cursor = collections.cursor()
 
-            >>> string = abjad.storage(cursor)
-            >>> print(string)
-            baca.Cursor(
-                source=baca.CollectionList(
-                    collections=[
-                        baca.PitchSegment(
-                            (
-                                abjad.NumberedPitch(5),
-                                abjad.NumberedPitch(12),
-                                abjad.NumberedPitch(14),
-                                abjad.NumberedPitch(18),
-                                ),
-                            item_class=abjad.NumberedPitch,
-                            ),
-                        baca.PitchSegment(
-                            (
-                                abjad.NumberedPitch(16),
-                                abjad.NumberedPitch(17),
-                                ),
-                            item_class=abjad.NumberedPitch,
-                            ),
-                        ],
-                    ),
-                )
+            >>> cursor
+            Cursor(source=CollectionList(collections=[PitchSegment([5, 12, 14, 18]), PitchSegment([16, 17])]))
 
             >>> cursor.next()
             [PitchSegment([5, 12, 14, 18])]
@@ -7705,20 +7683,8 @@ class Registration:
         >>> components = [("[A0, C4)", 15), ("[C4, C8)", 27)]
         >>> registration = baca.Registration(components)
 
-        >>> string = abjad.storage(registration)
-        >>> print(string)
-        baca.Registration(
-            components=[
-                baca.RegistrationComponent(
-                    source_pitch_range=PitchRange(range_string='[A0, C4)'),
-                    target_octave_start_pitch=abjad.NumberedPitch(15),
-                    ),
-                baca.RegistrationComponent(
-                    source_pitch_range=PitchRange(range_string='[C4, C8)'),
-                    target_octave_start_pitch=abjad.NumberedPitch(27),
-                    ),
-                ],
-            )
+        >>> registration
+        Registration(components=[RegistrationComponent(source_pitch_range=PitchRange(range_string='[A0, C4)'), target_octave_start_pitch=NumberedPitch(15)), RegistrationComponent(source_pitch_range=PitchRange(range_string='[C4, C8)'), target_octave_start_pitch=NumberedPitch(27))])
 
     """
 

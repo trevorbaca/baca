@@ -369,13 +369,8 @@ class Scope:
         ...     measures=(1, 9),
         ...     voice_name="ViolinMusicVoice",
         ... )
-
-        >>> string = abjad.storage(scope)
-        >>> print(string)
-        baca.Scope(
-            measures=(1, 9),
-            voice_name='ViolinMusicVoice',
-            )
+        >>> scope
+        Scope(measures=(1, 9), voice_name='ViolinMusicVoice')
 
     """
 
@@ -448,28 +443,8 @@ class TimelineScope:
         ...     ("OboeMusicVoice", (9, 12)),
         ... ])
 
-        >>> string = abjad.storage(scope)
-        >>> print(string)
-        baca.TimelineScope(
-            scopes=(
-                baca.Scope(
-                    measures=(5, 9),
-                    voice_name='PianoMusicVoice',
-                    ),
-                baca.Scope(
-                    measures=(7, 12),
-                    voice_name='ClarinetMusicVoice',
-                    ),
-                baca.Scope(
-                    measures=(8, 12),
-                    voice_name='ViolinMusicVoice',
-                    ),
-                baca.Scope(
-                    measures=(9, 12),
-                    voice_name='OboeMusicVoice',
-                    ),
-                ),
-            )
+        >>> scope
+        TimelineScope(scopes=(Scope(measures=(5, 9), voice_name='PianoMusicVoice'), Scope(measures=(7, 12), voice_name='ClarinetMusicVoice'), Scope(measures=(8, 12), voice_name='ViolinMusicVoice'), Scope(measures=(9, 12), voice_name='OboeMusicVoice')))
 
         ..  container:: example
 
@@ -943,34 +918,8 @@ class Suite:
         ...     selector=baca.selectors.pleaves(),
         ... )
 
-        >>> string = abjad.storage(suite)
-        >>> print(string)
-        baca.Suite(
-            baca.IndicatorCommand(
-                abjad.CyclicTuple(
-                    [
-                        Articulation(name='>', direction=None, tweaks=None),
-                        ]
-                    ),
-                measures=(1, 2),
-                selector=<function pleaves.<locals>.selector at ...>,
-                tags=[
-                    abjad.Tag('baca.accent()'),
-                    ],
-                ),
-            baca.IndicatorCommand(
-                abjad.CyclicTuple(
-                    [
-                        Articulation(name='tenuto', direction=None, tweaks=None),
-                        ]
-                    ),
-                measures=(1, 2),
-                selector=<function pleaves.<locals>.selector at ...>,
-                tags=[
-                    abjad.Tag('baca.tenuto()'),
-                    ],
-                )
-            )
+        >>> suite
+        Suite(IndicatorCommand(CyclicTuple([Articulation(name='>', direction=None, tweaks=None)]), measures=(1, 2), selector=<function pleaves.<locals>.selector at 0x...>, tags=[Tag('baca.accent()')]), IndicatorCommand(CyclicTuple([Articulation(name='tenuto', direction=None, tweaks=None)]), measures=(1, 2), selector=<function pleaves.<locals>.selector at 0x...>, tags=[Tag('baca.tenuto()')]))
 
     ..  container:: example
 
@@ -981,64 +930,12 @@ class Suite:
         ...     baca.tenuto(),
         ...     measures=(1, 2),
         ... )
-        >>> string = abjad.storage(suite)
-        >>> print(string)
-        baca.Suite(
-            baca.IndicatorCommand(
-                abjad.CyclicTuple(
-                    [
-                        Articulation(name='>', direction=None, tweaks=None),
-                        ]
-                    ),
-                measures=(1, 2),
-                selector=<function phead.<locals>.selector at ...>,
-                tags=[
-                    abjad.Tag('baca.accent()'),
-                    ],
-                ),
-            baca.IndicatorCommand(
-                abjad.CyclicTuple(
-                    [
-                        Articulation(name='tenuto', direction=None, tweaks=None),
-                        ]
-                    ),
-                measures=(1, 2),
-                selector=<function phead.<locals>.selector at ...>,
-                tags=[
-                    abjad.Tag('baca.tenuto()'),
-                    ],
-                )
-            )
+        >>> suite
+        Suite(IndicatorCommand(CyclicTuple([Articulation(name='>', direction=None, tweaks=None)]), measures=(1, 2), selector=<function phead.<locals>.selector at 0x...>, tags=[Tag('baca.accent()')]), IndicatorCommand(CyclicTuple([Articulation(name='tenuto', direction=None, tweaks=None)]), measures=(1, 2), selector=<function phead.<locals>.selector at 0x...>, tags=[Tag('baca.tenuto()')]))
 
         >>> new_suite = abjad.new(suite, measures=(3, 4))
-        >>> string = abjad.storage(new_suite)
-        >>> print(string)
-        baca.Suite(
-            baca.IndicatorCommand(
-                abjad.CyclicTuple(
-                    [
-                        Articulation(name='>', direction=None, tweaks=None),
-                        ]
-                    ),
-                measures=(3, 4),
-                selector=<function phead.<locals>.selector at ...>,
-                tags=[
-                    abjad.Tag('baca.accent()'),
-                    ],
-                ),
-            baca.IndicatorCommand(
-                abjad.CyclicTuple(
-                    [
-                        Articulation(name='tenuto', direction=None, tweaks=None),
-                        ]
-                    ),
-                measures=(3, 4),
-                selector=<function phead.<locals>.selector at ...>,
-                tags=[
-                    abjad.Tag('baca.tenuto()'),
-                    ],
-                )
-            )
+        >>> new_suite
+        Suite(IndicatorCommand(CyclicTuple([Articulation(name='>', direction=None, tweaks=None)]), measures=(3, 4), selector=<function phead.<locals>.selector at 0x...>, tags=[Tag('baca.accent()')]), IndicatorCommand(CyclicTuple([Articulation(name='tenuto', direction=None, tweaks=None)]), measures=(3, 4), selector=<function phead.<locals>.selector at 0x...>, tags=[Tag('baca.tenuto()')]))
 
     """
 

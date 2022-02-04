@@ -909,7 +909,7 @@ def _call_commands(
         try:
             command(selection, runtime)
         except Exception:
-            print(f"Interpreting ...\n\n{abjad.storage(command)}\n")
+            print(f"Interpreting ...\n\n{command}\n")
             raise
         cache = _handle_mutator(score, cache, command)
         if getattr(command, "persist", None):
@@ -971,7 +971,7 @@ def _call_rhythm_commands(
         timespans = []
         for command in commands_:
             if command.scope.measures is None:
-                raise Exception(abjad.storage(command))
+                raise Exception(command)
             measures = command.scope.measures
             result = _get_measure_time_signatures(
                 measure_count,
@@ -991,7 +991,7 @@ def _call_rhythm_commands(
             try:
                 selection = command._make_selection(time_signatures_, runtime)
             except Exception:
-                print(f"Interpreting ...\n\n{abjad.storage(command)}\n")
+                print(f"Interpreting ...\n\n{command}\n")
                 raise
             if attach_rhythm_annotation_spanners:
                 _attach_rhythm_annotation_spanner(command, selection)
@@ -2545,7 +2545,7 @@ def _scope_to_leaf_selection(
         leaves.extend(selection)
     selection = abjad.select(leaves)
     if not selection:
-        message = f"EMPTY SELECTION:\n\n{abjad.storage(command)}"
+        message = f"EMPTY SELECTION:\n\n{command}"
         if allow_empty_selections:
             print(message)
         else:

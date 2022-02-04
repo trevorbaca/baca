@@ -1174,18 +1174,8 @@ class Loop(abjad.CyclicTuple):
     ..  container:: example
 
         >>> loop = baca.Loop([0, 2, 4], intervals=[1])
-        >>> string = abjad.storage(loop)
-        >>> print(string)
-        baca.Loop(
-            [
-                abjad.NamedPitch("c'"),
-                abjad.NamedPitch("d'"),
-                abjad.NamedPitch("e'"),
-                ],
-            intervals=abjad.CyclicTuple(
-                [1]
-                ),
-            )
+        >>> loop
+        Loop([NamedPitch("c'"), NamedPitch("d'"), NamedPitch("e'")], intervals=CyclicTuple([1]))
 
         >>> for i in range(12):
         ...     loop[i]
@@ -1208,22 +1198,8 @@ class Loop(abjad.CyclicTuple):
     ..  container:: example
 
         >>> command = baca.loop([0, 2, 4], [1])
-        >>> string = abjad.storage(command)
-        >>> print(string)
-        baca.PitchCommand(
-            cyclic=True,
-            pitches=baca.Loop(
-                [
-                    abjad.NamedPitch("c'"),
-                    abjad.NamedPitch("d'"),
-                    abjad.NamedPitch("e'"),
-                    ],
-                intervals=abjad.CyclicTuple(
-                    [1]
-                    ),
-                ),
-            selector=...,
-            )
+        >>> command
+        PitchCommand(cyclic=True, pitches=Loop([NamedPitch("c'"), NamedPitch("d'"), NamedPitch("e'")], intervals=CyclicTuple([1])), selector=<function plts.<locals>.selector at 0x...>)
 
     """
 
@@ -2508,20 +2484,8 @@ class RegisterCommand(_scoping.Command):
             ...     ),
             ... )
 
-            >>> string = abjad.storage(command.registration)
-            >>> print(string)
-            baca.Registration(
-                components=[
-                    baca.RegistrationComponent(
-                        source_pitch_range=PitchRange(range_string='[A0, C4)'),
-                        target_octave_start_pitch=abjad.NumberedPitch(15),
-                        ),
-                    baca.RegistrationComponent(
-                        source_pitch_range=PitchRange(range_string='[C4, C8)'),
-                        target_octave_start_pitch=abjad.NumberedPitch(27),
-                        ),
-                    ],
-                )
+            >>> command.registration
+            Registration(components=[RegistrationComponent(source_pitch_range=PitchRange(range_string='[A0, C4)'), target_octave_start_pitch=NumberedPitch(15)), RegistrationComponent(source_pitch_range=PitchRange(range_string='[C4, C8)'), target_octave_start_pitch=NumberedPitch(27))])
 
         """
         return self._registration

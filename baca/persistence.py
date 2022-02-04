@@ -1,4 +1,7 @@
 r"""
+
+>>> import pprint
+
 ..  container:: example
 
     Clefs.
@@ -3963,42 +3966,8 @@ r"""
         Persistent overrides also appear in segment metadata:
 
         >>> dictionary = persist["persistent_indicators"]
-        >>> string = abjad.storage(dictionary)
-        >>> print(string)
-        dict(
-            {
-                'Music_Staff': [
-                    baca.Memento(
-                        context='Music_Voice',
-                        edition=abjad.Tag('-PARTS'),
-                        prototype='baca.BarExtent',
-                        value=1,
-                        ),
-                    baca.Memento(
-                        context='Music_Voice',
-                        prototype='baca.PersistentOverride',
-                        value=baca.PersistentOverride(
-                            attribute='bar_extent',
-                            context='Staff',
-                            grob='BarLine',
-                            value="#'(0 . 0)",
-                            ),
-                        ),
-                    baca.Memento(
-                        context='Music_Voice',
-                        prototype='baca.StaffLines',
-                        value=1,
-                        ),
-                    ],
-                'Score': [
-                    baca.Memento(
-                        context='Global_Skips',
-                        prototype='abjad.TimeSignature',
-                        value='3/8',
-                        ),
-                    ],
-                }
-            )
+        >>> dictionary
+        {'Music_Staff': [Memento(context='Music_Voice', edition=Tag('-PARTS'), prototype='baca.BarExtent', value=1), Memento(context='Music_Voice', prototype='baca.PersistentOverride', value=PersistentOverride(attribute='bar_extent', context='Staff', grob='BarLine', value="#'(0 . 0)")), Memento(context='Music_Voice', prototype='baca.StaffLines', value=1)], 'Score': [Memento(context='Global_Skips', prototype='abjad.TimeSignature', value='3/8')]}
 
     ..  container:: example
 

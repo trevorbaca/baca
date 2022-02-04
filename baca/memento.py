@@ -125,13 +125,8 @@ class PersistentOverride:
         ...     value=(-2, 0),
         ... )
 
-        >>> print(abjad.storage(override))
-        baca.PersistentOverride(
-            attribute='bar_extent',
-            context='Staff',
-            grob='bar_line',
-            value=(-2, 0),
-            )
+        >>> override
+        PersistentOverride(attribute='bar_extent', context='Staff', grob='bar_line', value=(-2, 0))
 
     """
 

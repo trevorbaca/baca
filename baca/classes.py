@@ -658,31 +658,8 @@ class Cursor:
             >>> number_lists = [[13, 13.5, 11], [-2, 2, 1.5]]
             >>> cursor = baca.Cursor.from_pitch_class_segments(number_lists)
 
-            >>> string = abjad.storage(cursor)
-            >>> print(string)
-            baca.Cursor(
-                source=abjad.CyclicTuple(
-                    [
-                        abjad.PitchClassSegment(
-                            (
-                                abjad.NumberedPitchClass(1),
-                                abjad.NumberedPitchClass(1.5),
-                                abjad.NumberedPitchClass(11),
-                                ),
-                            item_class=abjad.NumberedPitchClass,
-                            ),
-                        abjad.PitchClassSegment(
-                            (
-                                abjad.NumberedPitchClass(10),
-                                abjad.NumberedPitchClass(2),
-                                abjad.NumberedPitchClass(1.5),
-                                ),
-                            item_class=abjad.NumberedPitchClass,
-                            ),
-                        ]
-                    ),
-                cyclic=True,
-                )
+            >>> cursor
+            Cursor(source=CyclicTuple([PitchClassSegment([1, 1.5, 11]), PitchClassSegment([10, 2, 1.5])]), cyclic=True)
 
         Coerces numeric ``pitch_class_segments``
 
@@ -1464,18 +1441,8 @@ class Tree:
         >>> tree[1]
         Tree(<2>)
 
-        >>> string = abjad.storage(tree[1])
-        >>> print(string)
-        baca.Tree(
-            items=[
-                baca.Tree(
-                    items=4,
-                    ),
-                baca.Tree(
-                    items=5,
-                    ),
-                ],
-            )
+        >>> tree[1]
+        Tree(<2>)
 
         >>> tree[1].get_payload(nested=True)
         [4, 5]
@@ -1490,11 +1457,8 @@ class Tree:
         >>> tree[1][0]
         Tree(<1>)
 
-        >>> string = abjad.storage(tree[1][0])
-        >>> print(string)
-        baca.Tree(
-            items=4,
-            )
+        >>> tree[1][0]
+        Tree(<1>)
 
         >>> tree[1][0].get_payload(nested=True)
         4

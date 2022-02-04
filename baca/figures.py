@@ -52,14 +52,14 @@ class Stack:
             result: typing.Any = self.commands[0](argument, **keywords)
         except Exception:
             message = "exception while calling:\n"
-            message += f"   {abjad.storage(self.commands[0])}"
+            message += f"   {self.commands[0]}"
             raise Exception(message)
         for command in self.commands[1:]:
             try:
                 result_ = command(result)
             except Exception:
                 message = "exception while calling:\n"
-                message += f"   {abjad.storage(command)}"
+                message += f"   {command}"
                 raise Exception(message)
             if result_ is not None:
                 result = result_
@@ -3027,7 +3027,7 @@ class FigureAccumulator:
         )
         if not isinstance(collections, prototype):
             message = "collections must be coerceable:\n"
-            message += f"   {abjad.storage(collections)}"
+            message += f"   {collections!r}"
             raise Exception(collections)
         commands_ = list(commands)
         for command in commands_:
@@ -6930,7 +6930,7 @@ class Bind:
         for assignment in assignments:
             if not isinstance(assignment, Assignment):
                 message = "must be assignment:\n"
-                message += f"   {abjad.storage(assignment)}"
+                message += f"   {assignment!r}"
                 raise Exception(message)
         self._assignments = list(assignments)
 

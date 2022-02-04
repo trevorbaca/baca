@@ -47,38 +47,8 @@ class PitchArray:
         [ ] [     ] [ ]
         [     ] [ ] [ ]
 
-        >>> string = abjad.storage(pitch_array)
-        >>> print(string)
-        baca.PitchArray(
-            rows=(
-                baca.PitchArrayRow(
-                    cells=(
-                        baca.PitchArrayCell(
-                            width=1,
-                            ),
-                        baca.PitchArrayCell(
-                            width=2,
-                            ),
-                        baca.PitchArrayCell(
-                            width=1,
-                            ),
-                        ),
-                    ),
-                baca.PitchArrayRow(
-                    cells=(
-                        baca.PitchArrayCell(
-                            width=2,
-                            ),
-                        baca.PitchArrayCell(
-                            width=1,
-                            ),
-                        baca.PitchArrayCell(
-                            width=1,
-                            ),
-                        ),
-                    ),
-                ),
-            )
+        >>> pitch_array
+        PitchArray(rows=(PitchArrayRow(cells=(PitchArrayCell(width=1), PitchArrayCell(width=2), PitchArrayCell(width=1))), PitchArrayRow(cells=(PitchArrayCell(width=2), PitchArrayCell(width=1), PitchArrayCell(width=1)))))
 
     """
 
@@ -939,67 +909,14 @@ class PitchArrayCell:
         >>> cell.next
         PitchArrayCell(width=1)
 
-        >>> string = abjad.storage(cell.parent_array)
-        >>> print(string)
-        baca.PitchArray(
-            rows=(
-                baca.PitchArrayRow(
-                    cells=(
-                        baca.PitchArrayCell(
-                            width=1,
-                            ),
-                        baca.PitchArrayCell(
-                            width=2,
-                            ),
-                        baca.PitchArrayCell(
-                            width=1,
-                            ),
-                        ),
-                    ),
-                baca.PitchArrayRow(
-                    cells=(
-                        baca.PitchArrayCell(
-                            width=2,
-                            ),
-                        baca.PitchArrayCell(
-                            width=1,
-                            ),
-                        baca.PitchArrayCell(
-                            width=1,
-                            ),
-                        ),
-                    ),
-                ),
-            )
+        >>> cell.parent_array
+        PitchArray(rows=(PitchArrayRow(cells=(PitchArrayCell(width=1), PitchArrayCell(width=2), PitchArrayCell(width=1))), PitchArrayRow(cells=(PitchArrayCell(width=2), PitchArrayCell(width=1), PitchArrayCell(width=1)))))
 
-        >>> string = abjad.storage(cell.parent_column)
-        >>> print(string)
-        baca.PitchArrayColumn(
-            cells=(
-                baca.PitchArrayCell(
-                    width=2,
-                    ),
-                baca.PitchArrayCell(
-                    width=2,
-                    ),
-                ),
-            )
+        >>> cell.parent_column
+        PitchArrayColumn(cells=(PitchArrayCell(width=2), PitchArrayCell(width=2)))
 
-        >>> string = abjad.storage(cell.parent_row)
-        >>> print(string)
-        baca.PitchArrayRow(
-            cells=(
-                baca.PitchArrayCell(
-                    width=1,
-                    ),
-                baca.PitchArrayCell(
-                    width=2,
-                    ),
-                baca.PitchArrayCell(
-                    width=1,
-                    ),
-                ),
-            )
+        >>> cell.parent_row
+        PitchArrayRow(cells=(PitchArrayCell(width=1), PitchArrayCell(width=2), PitchArrayCell(width=1)))
 
         >>> cell.pitches is None
         True
@@ -1677,21 +1594,8 @@ class PitchArrayColumn:
         [  ] [d'] [bqf    ]
         [g'     ] [fs'] [ ]
 
-        >>> string = abjad.storage(array.columns[0])
-        >>> print(string)
-        baca.PitchArrayColumn(
-            cells=(
-                baca.PitchArrayCell(
-                    width=1,
-                    ),
-                baca.PitchArrayCell(
-                    pitches=[
-                        abjad.NamedPitch("g'"),
-                        ],
-                    width=2,
-                    ),
-                ),
-            )
+        >>> array.columns[0]
+        PitchArrayColumn(cells=(PitchArrayCell(width=1), PitchArrayCell(pitches="g'", width=2)))
 
         >>> print(array.columns[0])
         [  ]
@@ -1751,6 +1655,12 @@ class PitchArrayColumn:
         Returns true or false.
         """
         return not self == argument
+
+    def __repr__(self):
+        """
+        Gets repr.
+        """
+        return f"{type(self).__name__}(cells={self.cells})"
 
     def __str__(self):
         """
@@ -2133,85 +2043,8 @@ class PitchArrayList(abjad.TypedList):
         >>> arrays = [array_1, array_2]
         >>> arrays = baca.PitchArrayList(arrays)
 
-        >>> string = abjad.storage(arrays)
-        >>> print(string)
-        baca.PitchArrayList(
-            [
-                baca.PitchArray(
-                    rows=(
-                        baca.PitchArrayRow(
-                            cells=(
-                                baca.PitchArrayCell(
-                                    width=1,
-                                    ),
-                                baca.PitchArrayCell(
-                                    pitches=[
-                                        abjad.NamedPitch("d'"),
-                                        ],
-                                    width=1,
-                                    ),
-                                baca.PitchArrayCell(
-                                    pitches=[
-                                        abjad.NamedPitch('bf'),
-                                        abjad.NamedPitch('bqf'),
-                                        ],
-                                    width=2,
-                                    ),
-                                ),
-                            ),
-                        baca.PitchArrayRow(
-                            cells=(
-                                baca.PitchArrayCell(
-                                    pitches=[
-                                        abjad.NamedPitch("g'"),
-                                        ],
-                                    width=2,
-                                    ),
-                                baca.PitchArrayCell(
-                                    pitches=[
-                                        abjad.NamedPitch("fs'"),
-                                        ],
-                                    width=1,
-                                    ),
-                                baca.PitchArrayCell(
-                                    width=1,
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                baca.PitchArray(
-                    rows=(
-                        baca.PitchArrayRow(
-                            cells=(
-                                baca.PitchArrayCell(
-                                    width=1,
-                                    ),
-                                baca.PitchArrayCell(
-                                    width=1,
-                                    ),
-                                baca.PitchArrayCell(
-                                    width=1,
-                                    ),
-                                ),
-                            ),
-                        baca.PitchArrayRow(
-                            cells=(
-                                baca.PitchArrayCell(
-                                    width=1,
-                                    ),
-                                baca.PitchArrayCell(
-                                    width=1,
-                                    ),
-                                baca.PitchArrayCell(
-                                    width=1,
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                ]
-            )
+        >>> arrays
+        PitchArrayList([PitchArray(rows=(PitchArrayRow(cells=(PitchArrayCell(width=1), PitchArrayCell(pitches=[NamedPitch("d'")], width=1), PitchArrayCell(pitches=[NamedPitch('bf'), NamedPitch('bqf')], width=2))), PitchArrayRow(cells=(PitchArrayCell(pitches=[NamedPitch("g'")], width=2), PitchArrayCell(pitches=[NamedPitch("fs'")], width=1), PitchArrayCell(width=1))))), PitchArray(rows=(PitchArrayRow(cells=(PitchArrayCell(width=1), PitchArrayCell(width=1), PitchArrayCell(width=1))), PitchArrayRow(cells=(PitchArrayCell(width=1), PitchArrayCell(width=1), PitchArrayCell(width=1)))))])
 
     """
 
@@ -2316,27 +2149,8 @@ class PitchArrayRow:
         [c'] [d'    ] [  ]
         [       ] [ ] [e']
 
-        >>> string = abjad.storage(array[0])
-        >>> print(string)
-        baca.PitchArrayRow(
-            cells=(
-                baca.PitchArrayCell(
-                    pitches=[
-                        abjad.NamedPitch("c'"),
-                        ],
-                    width=1,
-                    ),
-                baca.PitchArrayCell(
-                    pitches=[
-                        abjad.NamedPitch("d'"),
-                        ],
-                    width=2,
-                    ),
-                baca.PitchArrayCell(
-                    width=1,
-                    ),
-                ),
-            )
+        >>> array[0]
+        PitchArrayRow(cells=(PitchArrayCell(pitches=[NamedPitch("c'")], width=1), PitchArrayCell(pitches=[NamedPitch("d'")], width=2), PitchArrayCell(width=1)))
 
         >>> array[0].cell_widths
         (1, 2, 1)
