@@ -1579,7 +1579,7 @@ class CollectionList(collections_module.abc.Sequence):
             >>> cursor = collections.cursor()
 
             >>> cursor
-            Cursor(source=CollectionList(collections=[PitchSegment([5, 12, 14, 18]), PitchSegment([16, 17])]))
+            Cursor(source=CollectionList([<5, 12, 14, 18>, <16, 17>]), cyclic=None, position=None, singletons=None, suppress_exception=None)
 
             >>> cursor.next()
             [PitchSegment([5, 12, 14, 18])]

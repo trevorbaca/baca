@@ -1,6 +1,7 @@
 """
 Piecewise.
 """
+import dataclasses
 import typing
 from inspect import currentframe as _frame
 
@@ -17,36 +18,16 @@ from . import tags as _tags
 from . import typings
 
 
+@dataclasses.dataclass(slots=True)
 class Bundle:
     """
     Bundle.
     """
 
-    ### CLASS VARIABLES ###
-
-    __slots__ = (
-        "_bookended_spanner_start",
-        "_indicator",
-        "_spanner_start",
-        "_spanner_stop",
-    )
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        bookended_spanner_start: typing.Any = None,
-        indicator: typing.Any = None,
-        spanner_start: typing.Any = None,
-        spanner_stop: typing.Any = None,
-    ) -> None:
-        self._bookended_spanner_start = bookended_spanner_start
-        self._indicator = indicator
-        self._spanner_start = spanner_start
-        self._spanner_stop = spanner_stop
-
-    ### SPECIAL METHODS ###
+    bookended_spanner_start: typing.Any = None
+    indicator: typing.Any = None
+    spanner_start: typing.Any = None
+    spanner_stop: typing.Any = None
 
     def __iter__(self) -> typing.Iterator:
         """
@@ -59,28 +40,6 @@ class Bundle:
         Gets length.
         """
         return len(self.indicators)
-
-    def __repr__(self) -> str:
-        """
-        Gets interpreter representation.
-        """
-        return abjad.format.get_repr(self)
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def bookended_spanner_start(self) -> typing.Optional[typing.Any]:
-        """
-        Gets bookended start text span indicator.
-        """
-        return self._bookended_spanner_start
-
-    @property
-    def indicator(self) -> typing.Optional[typing.Any]:
-        """
-        Gets indicator.
-        """
-        return self._indicator
 
     @property
     def indicators(self) -> typing.List:
@@ -95,22 +54,6 @@ class Bundle:
         if self.spanner_start:
             result.append(self.spanner_start)
         return result
-
-    @property
-    def spanner_start(self) -> typing.Optional[typing.Any]:
-        """
-        Gets spanner start.
-        """
-        return self._spanner_start
-
-    @property
-    def spanner_stop(self) -> typing.Optional[typing.Any]:
-        """
-        Gets spanner stop.
-        """
-        return self._spanner_stop
-
-    ### PUBLIC METHODS ###
 
     def compound(self) -> bool:
         """
@@ -2862,95 +2805,95 @@ def parse_hairpin_descriptor(
 
         >>> for item in baca.parse_hairpin_descriptor("f"):
         ...     item
-        Bundle(indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None))
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor('"f"'):
         ...     item
-        Bundle(indicator=Dynamic(name='"f"', command='\\baca-effort-f', direction=Down, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None))
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='"f"', command='\\baca-effort-f', direction=Down, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("niente"):
         ...     item
-        Bundle(indicator=Dynamic(name='niente', command='\\!', direction=Down, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity, tweaks=None))
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='niente', command='\\!', direction=Down, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity, tweaks=None), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("<"):
         ...     item
-        Bundle(spanner_start=StartHairpin(shape='<', direction=None, tweaks=None))
+        Bundle(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='<', direction=None, tweaks=None), spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("< !"):
         ...     item
-        Bundle(spanner_start=StartHairpin(shape='<', direction=None, tweaks=None))
-        Bundle(indicator=StopHairpin(leak=None))
+        Bundle(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='<', direction=None, tweaks=None), spanner_stop=None)
+        Bundle(bookended_spanner_start=None, indicator=StopHairpin(leak=None), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("o<|"):
         ...     item
-        Bundle(spanner_start=StartHairpin(shape='o<|', direction=None, tweaks=None))
+        Bundle(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='o<|', direction=None, tweaks=None), spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("--"):
         ...     item
-        Bundle(spanner_start=StartHairpin(shape='--', direction=None, tweaks=None))
+        Bundle(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='--', direction=None, tweaks=None), spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("p < f"):
         ...     item
-        Bundle(indicator=Dynamic(name='p', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=StartHairpin(shape='<', direction=None, tweaks=None))
-        Bundle(indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None))
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=StartHairpin(shape='<', direction=None, tweaks=None), spanner_stop=None)
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("p <"):
         ...     item
-        Bundle(indicator=Dynamic(name='p', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=StartHairpin(shape='<', direction=None, tweaks=None))
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=StartHairpin(shape='<', direction=None, tweaks=None), spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("p < !"):
         ...     item
-        Bundle(indicator=Dynamic(name='p', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=StartHairpin(shape='<', direction=None, tweaks=None))
-        Bundle(indicator=StopHairpin(leak=None))
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=StartHairpin(shape='<', direction=None, tweaks=None), spanner_stop=None)
+        Bundle(bookended_spanner_start=None, indicator=StopHairpin(leak=None), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("< f"):
         ...     item
-        Bundle(spanner_start=StartHairpin(shape='<', direction=None, tweaks=None))
-        Bundle(indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None))
+        Bundle(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='<', direction=None, tweaks=None), spanner_stop=None)
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("o< f"):
         ...     item
-        Bundle(spanner_start=StartHairpin(shape='o<', direction=None, tweaks=None))
-        Bundle(indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None))
+        Bundle(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='o<', direction=None, tweaks=None), spanner_stop=None)
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("niente o<| f"):
         ...     item
-        Bundle(indicator=Dynamic(name='niente', command='\\!', direction=Down, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity, tweaks=None), spanner_start=StartHairpin(shape='o<|', direction=None, tweaks=None))
-        Bundle(indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None))
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='niente', command='\\!', direction=Down, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity, tweaks=None), spanner_start=StartHairpin(shape='o<|', direction=None, tweaks=None), spanner_stop=None)
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("f >"):
         ...     item
-        Bundle(indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=StartHairpin(shape='>', direction=None, tweaks=None))
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=StartHairpin(shape='>', direction=None, tweaks=None), spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("f >o"):
         ...     item
-        Bundle(indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=StartHairpin(shape='>o', direction=None, tweaks=TweakInterface(('_literal', None), ('to_barline', True))))
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=StartHairpin(shape='>o', direction=None, tweaks=TweakInterface(('_literal', None), ('to_barline', True))), spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("p mp mf f"):
         ...     item
-        Bundle(indicator=Dynamic(name='p', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None))
-        Bundle(indicator=Dynamic(name='mp', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-1, tweaks=None))
-        Bundle(indicator=Dynamic(name='mf', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=1, tweaks=None))
-        Bundle(indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None))
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=None, spanner_stop=None)
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='mp', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-1, tweaks=None), spanner_start=None, spanner_stop=None)
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='mf', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=1, tweaks=None), spanner_start=None, spanner_stop=None)
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("p < f f > p"):
         ...     item
-        Bundle(indicator=Dynamic(name='p', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=StartHairpin(shape='<', direction=None, tweaks=None))
-        Bundle(indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None))
-        Bundle(indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=StartHairpin(shape='>', direction=None, tweaks=None))
-        Bundle(indicator=Dynamic(name='p', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None))
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=StartHairpin(shape='<', direction=None, tweaks=None), spanner_stop=None)
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=None, spanner_stop=None)
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=StartHairpin(shape='>', direction=None, tweaks=None), spanner_stop=None)
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("f -- ! > p"):
         ...     item
-        Bundle(indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=StartHairpin(shape='--', direction=None, tweaks=None))
-        Bundle(indicator=StopHairpin(leak=None), spanner_start=StartHairpin(shape='>', direction=None, tweaks=None))
-        Bundle(indicator=Dynamic(name='p', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None))
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=StartHairpin(shape='--', direction=None, tweaks=None), spanner_stop=None)
+        Bundle(bookended_spanner_start=None, indicator=StopHairpin(leak=None), spanner_start=StartHairpin(shape='>', direction=None, tweaks=None), spanner_stop=None)
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("mf niente o< p"):
         ...     item
-        Bundle(indicator=Dynamic(name='mf', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=1, tweaks=None))
-        Bundle(indicator=Dynamic(name='niente', command='\\!', direction=Down, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity, tweaks=None), spanner_start=StartHairpin(shape='o<', direction=None, tweaks=None))
-        Bundle(indicator=Dynamic(name='p', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None))
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='mf', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=1, tweaks=None), spanner_start=None, spanner_stop=None)
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='niente', command='\\!', direction=Down, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity, tweaks=None), spanner_start=StartHairpin(shape='o<', direction=None, tweaks=None), spanner_stop=None)
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=None, spanner_stop=None)
 
     """
     assert isinstance(descriptor, str), repr(descriptor)

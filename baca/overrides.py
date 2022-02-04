@@ -19,7 +19,7 @@ class OverrideCommand(_scoping.Command):
     ..  container:: example
 
         >>> baca.OverrideCommand()
-        OverrideCommand(selector=..., tags=[])
+        OverrideCommand()
 
     """
 

@@ -215,9 +215,9 @@ class PitchArray:
 
     def __repr__(self) -> str:
         """
-        Gets interpreter representation.
+        Gets repr.
         """
-        return abjad.format.get_repr(self)
+        return f"{type(self).__name__}(rows={self.rows})"
 
     def __setitem__(self, i, argument):
         """
@@ -2150,7 +2150,7 @@ class PitchArrayRow:
         [       ] [ ] [e']
 
         >>> array[0]
-        PitchArrayRow(cells=(PitchArrayCell(pitches=[NamedPitch("c'")], width=1), PitchArrayCell(pitches=[NamedPitch("d'")], width=2), PitchArrayCell(width=1)))
+        PitchArrayRow(cells=(PitchArrayCell(pitches="c'", width=1), PitchArrayCell(pitches="d'", width=2), PitchArrayCell(width=1)))
 
         >>> array[0].cell_widths
         (1, 2, 1)
@@ -2341,9 +2341,9 @@ class PitchArrayRow:
 
     def __repr__(self) -> str:
         """
-        Gets interpreter representation.
+        Gets repr.
         """
-        return abjad.format.get_repr(self)
+        return f"{type(self).__name__}(cells={self.cells})"
 
     def __str__(self):
         """

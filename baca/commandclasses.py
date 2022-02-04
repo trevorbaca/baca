@@ -652,11 +652,11 @@ class BCPCommand(_scoping.Command):
             ...     abjad.tweak("#red").color,
             ... )
             >>> command
-            BCPCommand(bcps=[(1, 2), (1, 4)], selector=<function leaves.<locals>.selector at 0x...>, tags=[Tag('baca.bcps()')], tweaks=(TweakInterface(('_literal', None), ('color', '#red')),))
+            BCPCommand()
 
             >>> new_command = abjad.new(command)
             >>> new_command
-            BCPCommand(bcps=[(1, 2), (1, 4)], selector=<function leaves.<locals>.selector at 0x...>, tags=[Tag('baca.bcps()')], tweaks=(TweakInterface(('_literal', None), ('color', '#red')),))
+            BCPCommand()
 
         """
         return self._tweaks
@@ -844,7 +844,7 @@ class DetachCommand(_scoping.Command):
 
         >>> arguments = [abjad.RepeatTie, abjad.Tie]
         >>> baca.DetachCommand(arguments, baca.selectors.leaves())
-        DetachCommand([RepeatTie, Tie], ...)
+        DetachCommand()
 
     """
 

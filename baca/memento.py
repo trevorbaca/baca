@@ -1,6 +1,8 @@
 """
 Memento.
 """
+import dataclasses
+
 import abjad
 
 
@@ -58,9 +60,9 @@ class Memento:
 
     def __repr__(self):
         """
-        Gets interpreter representation.
+        Gets repr.
         """
-        return abjad.format.get_repr(self)
+        return f"{type(self).__name__}(context={self.context}, edition={self.edition}, manifest={self.manifest}, prototype={self.prototype}, synthetic_offset={self.synthetic_offset}, value={self.value})"
 
     ### PRIVATE METHODS###
 
@@ -112,8 +114,9 @@ class Memento:
         return self._value
 
 
+@dataclasses.dataclass(slots=True)
 class PersistentOverride:
-    """
+    r"""
     Persistent override.
 
     ..  container:: example
@@ -126,125 +129,127 @@ class PersistentOverride:
         ... )
 
         >>> override
-        PersistentOverride(attribute='bar_extent', context='Staff', grob='bar_line', value=(-2, 0))
+        PersistentOverride(after=None, attribute='bar_extent', context='Staff', grob='bar_line', hide=None, value=(-2, 0))
+
+    ..  container:: example
+
+        >>> override_1 = baca.PersistentOverride(
+        ...     attribute="bar_extent",
+        ...     context="Staff",
+        ...     grob="bar_line",
+        ...     value=(-2, 0),
+        ... )
+        >>> override_2 = baca.PersistentOverride(
+        ...     attribute="bar_extent",
+        ...     context="Staff",
+        ...     grob="bar_line",
+        ...     value=(-2, 0),
+        ... )
+        >>> override_3 = baca.PersistentOverride(
+        ...     attribute="bar_extent",
+        ...     context="Score",
+        ...     grob="bar_line",
+        ...     value=(-2, 0),
+        ... )
+
+        >>> override_1 == override_1
+        True
+        >>> override_1 == override_2
+        True
+        >>> override_1 == override_3
+        False
+
+        >>> override_2 == override_1
+        True
+        >>> override_2 == override_2
+        True
+        >>> override_2 == override_3
+        False
+
+        >>> override_3 == override_1
+        False
+        >>> override_3 == override_2
+        False
+        >>> override_3 == override_3
+        True
+
+    ..  container:: example
+
+        Formats override before leaf:
+
+        >>> override = baca.PersistentOverride(
+        ...     attribute="color",
+        ...     grob="note_head",
+        ...     value="red",
+        ... )
+
+        >>> staff = abjad.Staff("c'4 d' e' f'")
+        >>> abjad.attach(override, staff[0])
+        >>> abjad.show(staff) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> string = abjad.lilypond(staff)
+            >>> print(string)
+            \new Staff
+            {
+                \override NoteHead.color = #red
+                c'4
+                d'4
+                e'4
+                f'4
+            }
+
+    ..  container:: example
+
+        Formats override after leaf:
+
+        >>> override = baca.PersistentOverride(
+        ...     after=True,
+        ...     attribute="color",
+        ...     grob="note_head",
+        ...     value="red",
+        ... )
+
+        >>> staff = abjad.Staff("c'4 d' e' f'")
+        >>> abjad.attach(override, staff[0])
+        >>> abjad.show(staff) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> string = abjad.lilypond(staff)
+            >>> print(string)
+            \new Staff
+            {
+                c'4
+                \override NoteHead.color = #red
+                d'4
+                e'4
+                f'4
+            }
 
     """
 
-    ### CLASS VARIABLES ###
+    after: bool | None = None
+    attribute: str | None = None
+    context: str | None = None
+    grob: str | None = None
+    hide: bool | None = None
+    value: str | None = None
 
-    __slots__ = (
-        "_after",
-        "_attribute",
-        "_context",
-        "_grob",
-        "_hide",
-        "_value",
-    )
+    persistent = True
 
-    _persistent = True
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        after=None,
-        attribute=None,
-        context=None,
-        grob=None,
-        hide=None,
-        value=None,
-    ):
-        if after is not None:
-            after = bool(after)
-        self._after = after
-        if attribute is not None:
-            assert isinstance(attribute, str), repr(attribute)
-        self._attribute = attribute
-        if context is not None:
-            assert isinstance(context, str), repr(context)
-        self._context = context
-        if grob is not None:
-            assert isinstance(grob, str), repr(grob)
-        self._grob = grob
-        if hide is not None:
-            hide = bool(hide)
-        self._hide = hide
-        self._value = value
-
-    ### SPECIAL METHODS ###
-
-    def __eq__(self, argument):
-        """
-        Is true when ``argument`` is persistent override with attribute, context, grob,
-        value equal to those of this persistent override.
-
-        ..  container:: example
-
-            >>> override_1 = baca.PersistentOverride(
-            ...     attribute="bar_extent",
-            ...     context="Staff",
-            ...     grob="bar_line",
-            ...     value=(-2, 0),
-            ... )
-            >>> override_2 = baca.PersistentOverride(
-            ...     attribute="bar_extent",
-            ...     context="Staff",
-            ...     grob="bar_line",
-            ...     value=(-2, 0),
-            ... )
-            >>> override_3 = baca.PersistentOverride(
-            ...     attribute="bar_extent",
-            ...     context="Score",
-            ...     grob="bar_line",
-            ...     value=(-2, 0),
-            ... )
-
-            >>> override_1 == override_1
-            True
-            >>> override_1 == override_2
-            True
-            >>> override_1 == override_3
-            False
-
-            >>> override_2 == override_1
-            True
-            >>> override_2 == override_2
-            True
-            >>> override_2 == override_3
-            False
-
-            >>> override_3 == override_1
-            False
-            >>> override_3 == override_2
-            False
-            >>> override_3 == override_3
-            True
-
-        """
-        if not isinstance(argument, type(self)):
-            return False
-        if (
-            self.attribute == argument.attribute
-            and self.context == argument.context
-            and self.grob == argument.grob
-            and self.value == argument.value
-        ):
-            return True
-        return False
-
-    def __hash__(self):
-        """
-        Hashes persistent override.
-        """
-        return super().__hash__()
-
-    def __repr__(self):
-        """
-        Gets interpreter representation.
-        """
-        return abjad.format.get_repr(self)
-
-    ### PRIVATE METHODS ###
+    def __post_init__(self):
+        if self.after is not None:
+            self.after = bool(self.after)
+        if self.attribute is not None:
+            assert isinstance(self.attribute, str), repr(self.attribute)
+        if self.context is not None:
+            assert isinstance(self.context, str), repr(self.context)
+        if self.grob is not None:
+            assert isinstance(self.grob, str), repr(self.grob)
+        if self.hide is not None:
+            self.hide = bool(self.hide)
 
     def _get_format_specification(self):
         return abjad.FormatSpecification()
@@ -274,189 +279,3 @@ class PersistentOverride:
         else:
             bundle.before.commands.extend(strings)
         return bundle
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def after(self):
-        r"""
-        Is true when override formats after leaf.
-
-        ..  container:: example
-
-            Formats override before leaf:
-
-            >>> override = baca.PersistentOverride(
-            ...     attribute="color",
-            ...     grob="note_head",
-            ...     value="red",
-            ... )
-
-            >>> staff = abjad.Staff("c'4 d' e' f'")
-            >>> abjad.attach(override, staff[0])
-            >>> abjad.show(staff) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> string = abjad.lilypond(staff)
-                >>> print(string)
-                \new Staff
-                {
-                    \override NoteHead.color = #red
-                    c'4
-                    d'4
-                    e'4
-                    f'4
-                }
-
-        ..  container:: example
-
-            Formats override after leaf:
-
-            >>> override = baca.PersistentOverride(
-            ...     after=True,
-            ...     attribute="color",
-            ...     grob="note_head",
-            ...     value="red",
-            ... )
-
-            >>> staff = abjad.Staff("c'4 d' e' f'")
-            >>> abjad.attach(override, staff[0])
-            >>> abjad.show(staff) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> string = abjad.lilypond(staff)
-                >>> print(string)
-                \new Staff
-                {
-                    c'4
-                    \override NoteHead.color = #red
-                    d'4
-                    e'4
-                    f'4
-                }
-
-        """
-        return self._after
-
-    @property
-    def attribute(self):
-        """
-        Gets attribute.
-
-        ..  container:: example
-
-            >>> override = baca.PersistentOverride(
-            ...     attribute="bar_extent",
-            ...     context="Staff",
-            ...     grob="bar_line",
-            ...     value=(-2, 0),
-            ... )
-
-            >>> override.attribute
-            'bar_extent'
-
-        """
-        return self._attribute
-
-    @property
-    def context(self):
-        """
-        Gets context.
-
-        ..  container:: example
-
-            >>> override = baca.PersistentOverride(
-            ...     attribute="bar_extent",
-            ...     context="Staff",
-            ...     grob="bar_line",
-            ...     value=(-2, 0),
-            ... )
-
-            >>> override.context
-            'Staff'
-
-        """
-        return self._context
-
-    @property
-    def grob(self):
-        """
-        Gets grob.
-
-        ..  container:: example
-
-            >>> override = baca.PersistentOverride(
-            ...     attribute="bar_extent",
-            ...     context="Staff",
-            ...     grob="bar_line",
-            ...     value=(-2, 0),
-            ... )
-
-            >>> override.grob
-            'bar_line'
-
-        """
-        return self._grob
-
-    @property
-    def hide(self):
-        """
-        Is true when staff lines should not appear in output.
-
-        ..  container:: example
-
-            >>> override = baca.PersistentOverride(
-            ...     attribute="bar_extent",
-            ...     context="Staff",
-            ...     grob="bar_line",
-            ...     value=(-2, 0),
-            ... )
-
-            >>> override.hide is None
-            True
-
-        """
-        return self._hide
-
-    @property
-    def persistent(self):
-        """
-        Is true.
-
-        ..  container:: example
-
-            >>> override = baca.PersistentOverride(
-            ...     attribute="bar_extent",
-            ...     context="Staff",
-            ...     grob="bar_line",
-            ...     value=(-2, 0),
-            ... )
-
-            >>> override.persistent
-            True
-
-        Class constant.
-        """
-        return self._persistent
-
-    @property
-    def value(self):
-        """
-        Gets value.
-
-        ..  container:: example
-
-            >>> override = baca.PersistentOverride(
-            ...     attribute="bar_extent",
-            ...     context="Staff",
-            ...     grob="bar_line",
-            ...     value=(-2, 0),
-            ... )
-
-            >>> override.value
-            (-2, 0)
-
-        """
-        return self._value

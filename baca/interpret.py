@@ -414,11 +414,9 @@ def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
             # TODO: public hide
             metric_modulation._hide = True
         if accelerando is not None:
-            # TODO: public hide
-            accelerando._hide = True
+            accelerando.hide = True
         if ritardando is not None:
-            # TODO: public hide
-            ritardando._hide = True
+            ritardando.hide = True
         if skip is skips[-1]:
             break
         if metronome_mark is None and metric_modulation is not None:

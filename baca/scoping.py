@@ -1,6 +1,7 @@
 """
 Scoping.
 """
+import dataclasses
 import os
 import typing
 from inspect import currentframe as _frame
@@ -359,6 +360,7 @@ def treat_persistent_wrapper(manifests, wrapper, status):
         _set_status_tag(wrapper_, status, redraw=True, stem=stem)
 
 
+@dataclasses.dataclass(slots=True)
 class Scope:
     """
     Scope.
@@ -374,62 +376,24 @@ class Scope:
 
     """
 
-    ### CLASS VARIABLES ###
+    measures: typings.SliceTyping = (1, -1)
+    voice_name: str = None
 
-    __slots__ = ("_measures", "_voice_name")
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        measures: typings.SliceTyping = (1, -1),
-        voice_name: str = None,
-    ) -> None:
-        if isinstance(measures, int):
-            measures = (measures, measures)
-        assert isinstance(measures, (list, tuple)), repr(measures)
-        assert len(measures) == 2, repr(measures)
-        start, stop = measures
+    def __post_init__(self):
+        if isinstance(self.measures, int):
+            self.measures = (self.measures, self.measures)
+        assert isinstance(self.measures, (list, tuple)), repr(self.measures)
+        assert len(self.measures) == 2, repr(self.measures)
+        start, stop = self.measures
         assert isinstance(start, int), repr(start)
         assert start != 0, repr(start)
         assert isinstance(stop, int), repr(stop)
         assert stop != 0, repr(stop)
-        self._measures = measures
-        if voice_name is not None:
-            assert isinstance(voice_name, str), repr(voice_name)
-        self._voice_name = voice_name
-
-    ### SPECIAL METHODS ###
-
-    def __repr__(self):
-        """
-        Gets interpreter representation.
-        """
-        return abjad.format.get_repr(self)
-
-    ### PRIVATE METHODS ###
-
-    def _get_format_specification(self):
-        return abjad.FormatSpecification()
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def measures(self) -> abjad.IntegerPair:
-        """
-        Gets measures.
-        """
-        return self._measures
-
-    @property
-    def voice_name(self) -> typing.Optional[str]:
-        """
-        Gets voice name.
-        """
-        return self._voice_name
+        if self.voice_name is not None:
+            assert isinstance(self.voice_name, str), repr(self.voice_name)
 
 
+@dataclasses.dataclass(slots=True)
 class TimelineScope:
     """
     Timeline scope.
@@ -449,51 +413,25 @@ class TimelineScope:
         ..  container:: example
 
             >>> baca.TimelineScope()
-            TimelineScope()
+            TimelineScope(scopes=None)
 
     """
 
-    ### CLASS VARIABLES ###
+    scopes: typing.Any = None
 
-    __slots__ = ("_scopes",)
+    voice_name = "Timeline_Scope"
 
-    ### INITIALIZER ###
-
-    def __init__(self, *, scopes=None):
-        if scopes is not None:
-            assert isinstance(scopes, (tuple, list))
+    def __post_init__(self):
+        if self.scopes is not None:
+            assert isinstance(self.scopes, (tuple, list))
             scopes_ = []
-            for scope in scopes:
+            for scope in self.scopes:
                 if not isinstance(scope, Scope):
                     scope = Scope(*scope)
                 scopes_.append(scope)
             scopes = scopes_
             scopes = tuple(scopes)
-        self._scopes = scopes
-
-    ### SPECIAL METHODS ###
-
-    def __repr__(self):
-        """
-        Gets interpreter representation.
-        """
-        return abjad.format.get_repr(self)
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def scopes(self) -> typing.Tuple[Scope]:
-        """
-        Gets scopes.
-        """
-        return self._scopes
-
-    @property
-    def voice_name(self) -> str:
-        """
-        String constant set to  ``'Timeline_Scope'``.
-        """
-        return "Timeline_Scope"
+            self.scopes = scopes
 
 
 ScopeTyping = typing.Union[Scope, TimelineScope]
@@ -751,9 +689,9 @@ class Command:
 
     def __repr__(self):
         """
-        Gets interpreter representation.
+        Gets repr.
         """
-        return abjad.format.get_repr(self)
+        return f"{type(self).__name__}()"
 
     ### PRIVATE METHODS ###
 
@@ -919,7 +857,7 @@ class Suite:
         ... )
 
         >>> suite
-        Suite(commands=(IndicatorCommand(CyclicTuple([Articulation(name='>', direction=None, tweaks=None)]), measures=(1, 2), selector=<function pleaves.<locals>.selector at 0x...0>, tags=[Tag('baca.accent()')]), IndicatorCommand(CyclicTuple([Articulation(name='tenuto', direction=None, tweaks=None)]), measures=(1, 2), selector=<function pleaves.<locals>.selector at 0x...>, tags=[Tag('baca.tenuto()')])))
+        Suite(commands=(IndicatorCommand(), IndicatorCommand()))
 
     ..  container:: example
 
@@ -931,11 +869,11 @@ class Suite:
         ...     measures=(1, 2),
         ... )
         >>> suite
-        Suite(commands=(IndicatorCommand(CyclicTuple([Articulation(name='>', direction=None, tweaks=None)]), measures=(1, 2), selector=<function phead.<locals>.selector at 0x...>, tags=[Tag('baca.accent()')]), IndicatorCommand(CyclicTuple([Articulation(name='tenuto', direction=None, tweaks=None)]), measures=(1, 2), selector=<function phead.<locals>.selector at 0x...>, tags=[Tag('baca.tenuto()')])))
+        Suite(commands=(IndicatorCommand(), IndicatorCommand()))
 
         >>> new_suite = abjad.new(suite, measures=(3, 4))
         >>> new_suite
-        Suite(commands=(IndicatorCommand(CyclicTuple([Articulation(name='>', direction=None, tweaks=None)]), measures=(3, 4), selector=<function phead.<locals>.selector at 0x...>, tags=[Tag('baca.accent()')]), IndicatorCommand(CyclicTuple([Articulation(name='tenuto', direction=None, tweaks=None)]), measures=(3, 4), selector=<function phead.<locals>.selector at 0x...>, tags=[Tag('baca.tenuto()')])))
+        Suite(commands=(IndicatorCommand(), IndicatorCommand()))
 
     """
 
@@ -984,9 +922,9 @@ class Suite:
 
     def __repr__(self):
         """
-        Gets interpreter representation.
+        Gets repr.
         """
-        return abjad.format.get_repr(self)
+        return f"{type(self).__name__}(commands={self.commands})"
 
     ### PUBLIC PROPERTIES ###
 

@@ -219,7 +219,7 @@ class CommandAccumulator:
                 for scope_ in current_scope.scopes:
                     if scope_.voice_name in abbreviations:
                         voice_name = abbreviations[scope_.voice_name]
-                        scope_._voice_name = voice_name
+                        scope_.voice_name = voice_name
             for command in commands:
                 if command is None:
                     continue

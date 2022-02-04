@@ -23,7 +23,7 @@ class AccidentalAdjustmentCommand(_scoping.Command):
     ..  container:: example
 
         >>> baca.AccidentalAdjustmentCommand()
-        AccidentalAdjustmentCommand(selector=..., tags=[])
+        AccidentalAdjustmentCommand()
 
     ..  container:: example
 
@@ -1199,7 +1199,7 @@ class Loop(abjad.CyclicTuple):
 
         >>> command = baca.loop([0, 2, 4], [1])
         >>> command
-        PitchCommand(cyclic=True, pitches=Loop([NamedPitch("c'"), NamedPitch("d'"), NamedPitch("e'")], intervals=CyclicTuple([1])), selector=<function plts.<locals>.selector at 0x...>)
+        PitchCommand()
 
     """
 
@@ -3800,7 +3800,7 @@ class RegisterToOctaveCommand(_scoping.Command):
     ..  container:: example
 
         >>> baca.RegisterToOctaveCommand()
-        RegisterToOctaveCommand(selector=...)
+        RegisterToOctaveCommand()
 
     """
 
