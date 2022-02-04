@@ -919,7 +919,7 @@ class Suite:
         ... )
 
         >>> suite
-        Suite(IndicatorCommand(CyclicTuple([Articulation(name='>', direction=None, tweaks=None)]), measures=(1, 2), selector=<function pleaves.<locals>.selector at 0x...>, tags=[Tag('baca.accent()')]), IndicatorCommand(CyclicTuple([Articulation(name='tenuto', direction=None, tweaks=None)]), measures=(1, 2), selector=<function pleaves.<locals>.selector at 0x...>, tags=[Tag('baca.tenuto()')]))
+        Suite(commands=(IndicatorCommand(CyclicTuple([Articulation(name='>', direction=None, tweaks=None)]), measures=(1, 2), selector=<function pleaves.<locals>.selector at 0x...0>, tags=[Tag('baca.accent()')]), IndicatorCommand(CyclicTuple([Articulation(name='tenuto', direction=None, tweaks=None)]), measures=(1, 2), selector=<function pleaves.<locals>.selector at 0x...>, tags=[Tag('baca.tenuto()')])))
 
     ..  container:: example
 
@@ -931,11 +931,11 @@ class Suite:
         ...     measures=(1, 2),
         ... )
         >>> suite
-        Suite(IndicatorCommand(CyclicTuple([Articulation(name='>', direction=None, tweaks=None)]), measures=(1, 2), selector=<function phead.<locals>.selector at 0x...>, tags=[Tag('baca.accent()')]), IndicatorCommand(CyclicTuple([Articulation(name='tenuto', direction=None, tweaks=None)]), measures=(1, 2), selector=<function phead.<locals>.selector at 0x...>, tags=[Tag('baca.tenuto()')]))
+        Suite(commands=(IndicatorCommand(CyclicTuple([Articulation(name='>', direction=None, tweaks=None)]), measures=(1, 2), selector=<function phead.<locals>.selector at 0x...>, tags=[Tag('baca.accent()')]), IndicatorCommand(CyclicTuple([Articulation(name='tenuto', direction=None, tweaks=None)]), measures=(1, 2), selector=<function phead.<locals>.selector at 0x...>, tags=[Tag('baca.tenuto()')])))
 
         >>> new_suite = abjad.new(suite, measures=(3, 4))
         >>> new_suite
-        Suite(IndicatorCommand(CyclicTuple([Articulation(name='>', direction=None, tweaks=None)]), measures=(3, 4), selector=<function phead.<locals>.selector at 0x...>, tags=[Tag('baca.accent()')]), IndicatorCommand(CyclicTuple([Articulation(name='tenuto', direction=None, tweaks=None)]), measures=(3, 4), selector=<function phead.<locals>.selector at 0x...>, tags=[Tag('baca.tenuto()')]))
+        Suite(commands=(IndicatorCommand(CyclicTuple([Articulation(name='>', direction=None, tweaks=None)]), measures=(3, 4), selector=<function phead.<locals>.selector at 0x...>, tags=[Tag('baca.accent()')]), IndicatorCommand(CyclicTuple([Articulation(name='tenuto', direction=None, tweaks=None)]), measures=(3, 4), selector=<function phead.<locals>.selector at 0x...>, tags=[Tag('baca.tenuto()')])))
 
     """
 
@@ -987,16 +987,6 @@ class Suite:
         Gets interpreter representation.
         """
         return abjad.format.get_repr(self)
-
-    ### PRIVATE METHODS ###
-
-    def _get_format_specification(self):
-        result = abjad.format._inspect_signature(self)
-        signature_keyword_names = result[1]
-        return abjad.FormatSpecification(
-            storage_format_args_values=self.commands,
-            storage_format_keyword_names=list(signature_keyword_names),
-        )
 
     ### PUBLIC PROPERTIES ###
 

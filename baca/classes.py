@@ -847,7 +847,7 @@ class PaddedTuple:
         >>> tuple_ = baca.PaddedTuple("abcd", pad=2)
 
         >>> tuple_
-        PaddedTuple(['a', 'b', 'c', 'd'], pad=2)
+        PaddedTuple(items=('a', 'b', 'c', 'd'), pad=2)
 
         >>> for i in range(8):
         ...     print(i, tuple_[i])
@@ -1009,11 +1009,6 @@ class PaddedTuple:
         return abjad.format.get_repr(self)
 
     ### PRIVATE METHODS ###
-
-    def _get_format_specification(self):
-        return abjad.FormatSpecification(
-            storage_format_args_values=[list(self._items)],
-        )
 
     def _get_slice(self, start_index, stop_index):
         if 0 < stop_index and start_index is None:

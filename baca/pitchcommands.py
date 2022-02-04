@@ -1237,14 +1237,6 @@ class Loop(abjad.CyclicTuple):
         pitch = type(pitch_)(pitch_.number + transposition)
         return pitch
 
-    ### PRIVATE METHODS ###
-
-    def _get_format_specification(self):
-        return abjad.FormatSpecification(
-            storage_format_args_values=[list(self.items)],
-            storage_format_keyword_names=["intervals"],
-        )
-
     ### PUBLIC PROPERTIES ###
 
     @property
