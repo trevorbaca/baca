@@ -1495,9 +1495,6 @@ class Tree:
             levels.add(node._get_level())
         return max(levels) - self._get_level() + 1
 
-    def _get_format_specification(self):
-        return abjad.FormatSpecification()
-
     def _get_index_in_parent(self):
         if self._parent is not None:
             return self._parent._index(self)

@@ -698,9 +698,6 @@ class Command:
     def _call(self, argument=None):
         pass
 
-    def _get_format_specification(self):
-        return abjad.FormatSpecification()
-
     def _initialize_tags(self, tags):
         tags_ = []
         for tag in tags or []:

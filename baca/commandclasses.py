@@ -1587,7 +1587,11 @@ class PartAssignmentCommand(_scoping.Command):
                 message += f" {self.part_assignment.section} part assignment:"
                 message += f"\n  {self.part_assignment}"
                 raise Exception(message)
-        identifier = f"%*% {self.part_assignment!s}"
+        section, token = self.part_assignment.section, self.part_assignment.token
+        if token is None:
+            identifier = f"%*% PartAssignment({section!r})"
+        else:
+            identifier = f"%*% PartAssignment({section!r}, {token!r})"
         container = abjad.Container(identifier=identifier)
         components = _selection.Selection(argument).leaves().top()
         abjad.mutate.wrap(components, container)

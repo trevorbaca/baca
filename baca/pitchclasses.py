@@ -3,6 +3,7 @@ Pitch classes.
 """
 import collections as collections_module
 import copy
+import dataclasses
 import math
 import typing
 
@@ -12,8 +13,9 @@ from . import classes as _classes
 from . import sequence as _sequence
 
 
+@dataclasses.dataclass(slots=True)
 class ArpeggiationSpacingSpecifier:
-    """
+    r"""
     Arpeggiation spacing specifier.
 
     ..  container:: example
@@ -31,45 +33,128 @@ class ArpeggiationSpacingSpecifier:
     ..  container:: example
 
         >>> baca.ArpeggiationSpacingSpecifier()
-        ArpeggiationSpacingSpecifier()
+        ArpeggiationSpacingSpecifier(direction=None, pattern=None)
+
+    ..  container:: example
+
+        Arpeggiate up:
+
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 16),
+        ...     rmakers.beam(),
+        ...     baca.bass_to_octave(2),
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> collections = baca.CollectionList(collections)
+        >>> collections = collections.arpeggiate_up()
+        >>> selection = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 9/16
+                        c,16
+                        [
+                        d,16
+                        bf,16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        fs,16
+                        [
+                        e16
+                        ef'16
+                        af'16
+                        g''16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        a,16
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Arpeggiate down:
+
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 16),
+        ...     rmakers.beam(),
+        ...     baca.bass_to_octave(2),
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> collections = baca.CollectionList(collections)
+        >>> collections = collections.arpeggiate_down()
+        >>> selection = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 9/16
+                        c'16
+                        [
+                        d16
+                        bf,16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        fs16
+                        [
+                        e16
+                        ef16
+                        af,16
+                        g,16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        a,16
+                    }
+                }
+            >>
 
     """
 
-    ### CLASS VARIABLES ###
+    direction: abjad.enums.VerticalAlignment | None = None
+    pattern: abjad.Pattern | None = None
 
-    __slots__ = ("_direction", "_pattern")
-
-    ### INITIALIZER ###
-
-    def __init__(self, *, direction=None, pattern=None):
-        if direction is not None:
-            assert direction in (abjad.Up, abjad.Down), repr(direction)
-        self._direction = direction
-        if pattern is not None:
-            assert isinstance(pattern, abjad.Pattern), repr(pattern)
-        self._pattern = pattern
-
-    ### SPECIAL METHODS ###
+    def __post_init__(self):
+        if self.direction is not None:
+            assert self.direction in (abjad.Up, abjad.Down), repr(self.direction)
+        if self.pattern is not None:
+            assert isinstance(self.pattern, abjad.Pattern), repr(self.pattern)
 
     def __call__(
         self, collections=None
     ) -> typing.Union["PitchSegment", "CollectionList", None]:
-        """
-        Calls specifier on ``collections``.
-
-        ..  container:: example
-
-            >>> specifier = baca.ArpeggiationSpacingSpecifier()
-            >>> specifier([])
-            PitchSegment([])
-
-        ..  container:: example
-
-            >>> specifier = baca.ArpeggiationSpacingSpecifier()
-            >>> specifier() is None
-            True
-
-        """
         if collections is None:
             return None
         if collections == []:
@@ -101,148 +186,6 @@ class ArpeggiationSpacingSpecifier:
             else:
                 collections_.append(collections[i])
         return CollectionList(collections_)
-
-    def __eq__(self, argument) -> bool:
-        """
-        Compares ``direction``, ``pattern``.
-        """
-        if isinstance(argument, type(self)):
-            return (
-                self.direction == argument.direction
-                and self.pattern == argument.pattern
-            )
-        return False
-
-    def __hash__(self) -> int:
-        """
-        Hashes arpeggiation spacing specifier.
-        """
-        return hash(self.__class__.__name__ + str(self))
-
-    def __repr__(self) -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.format.get_repr(self)
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def direction(self) -> typing.Optional[abjad.VerticalAlignment]:
-        r"""
-        Gets direction.
-
-        ..  container:: example
-
-            >>> stack = baca.stack(
-            ...     baca.figure([1], 16),
-            ...     rmakers.beam(),
-            ...     baca.bass_to_octave(2),
-            ... )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> collections = baca.CollectionList(collections)
-            >>> collections = collections.arpeggiate_up()
-            >>> selection = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 9/16
-                            c,16
-                            [
-                            d,16
-                            bf,16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            fs,16
-                            [
-                            e16
-                            ef'16
-                            af'16
-                            g''16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            a,16
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            >>> stack = baca.stack(
-            ...     baca.figure([1], 16),
-            ...     rmakers.beam(),
-            ...     baca.bass_to_octave(2),
-            ... )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> collections = baca.CollectionList(collections)
-            >>> collections = collections.arpeggiate_down()
-            >>> selection = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 9/16
-                            c'16
-                            [
-                            d16
-                            bf,16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            fs16
-                            [
-                            e16
-                            ef16
-                            af,16
-                            g,16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            a,16
-                        }
-                    }
-                >>
-
-        """
-        return self._direction
-
-    @property
-    def pattern(self) -> typing.Optional[abjad.Pattern]:
-        """
-        Gets pattern.
-        """
-        return self._pattern
 
 
 def _to_tightly_spaced_pitches_ascending(pitch_classes):
@@ -284,6 +227,7 @@ def _to_tightly_spaced_pitches_descending(pitch_classes):
     return collection
 
 
+@dataclasses.dataclass(slots=True)
 class ChordalSpacingSpecifier:
     """
     Chordal spacing specifier.
@@ -338,55 +282,208 @@ class ChordalSpacingSpecifier:
         >>> specifier([[2, 1, 0]])
         CollectionList([<2, 12, 13>])
 
+    ..  container:: example
+
+        Up-directed bass specification:
+
+        >>> specifier = baca.ChordalSpacingSpecifier(bass=None)
+        >>> specifier([[-6, -3, -5, -1, -7]])
+        CollectionList([<6, 7, 9, 11, 17>])
+
+        >>> specifier = baca.ChordalSpacingSpecifier(bass=6)
+        >>> specifier([[-6, -3, -5, -1, -7]])
+        CollectionList([<6, 7, 9, 11, 17>])
+
+        >>> specifier = baca.ChordalSpacingSpecifier(bass=7)
+        >>> specifier([[-6, -3, -5, -1, -7]])
+        CollectionList([<7, 9, 11, 17, 18>])
+
+        >>> specifier = baca.ChordalSpacingSpecifier(bass=9)
+        >>> specifier([[-6, -3, -5, -1, -7]])
+        CollectionList([<9, 11, 17, 18, 19>])
+
+        >>> specifier = baca.ChordalSpacingSpecifier(bass=11)
+        >>> specifier([[-6, -3, -5, -1, -7]])
+        CollectionList([<11, 17, 18, 19, 21>])
+
+        >>> specifier = baca.ChordalSpacingSpecifier(bass=5)
+        >>> specifier([[-6, -3, -5, -1, -7]])
+        CollectionList([<5, 6, 7, 9, 11>])
+
+    ..  container:: example
+
+        Up-directed joint control:
+
+        >>> specifier = baca.ChordalSpacingSpecifier(
+        ...     bass=6,
+        ...     soprano=7,
+        ... )
+        >>> specifier([[-6, -3, -5, -1, -7]])
+        CollectionList([<6, 9, 11, 17, 19>])
+
+        >>> specifier = baca.ChordalSpacingSpecifier(
+        ...     bass=6,
+        ...     soprano=9,
+        ... )
+        >>> specifier([[-6, -3, -5, -1, -7]])
+        CollectionList([<6, 7, 11, 17, 21>])
+
+        >>> specifier = baca.ChordalSpacingSpecifier(
+        ...     bass=6,
+        ...     soprano=11,
+        ... )
+        >>> specifier([[-6, -3, -5, -1, -7]])
+        CollectionList([<6, 7, 9, 17, 23>])
+
+        >>> specifier = baca.ChordalSpacingSpecifier(
+        ...     bass=6,
+        ...     soprano=5
+        ... )
+        >>> specifier([[-6, -3, -5, -1, -7]])
+        CollectionList([<6, 7, 9, 11, 17>])
+
+    ..  container:: example
+
+        Up-directed spacing with semitone constraints.
+
+        First three examples give the same spacing:
+
+        >>> specifier = baca.ChordalSpacingSpecifier(
+        ...     bass=6,
+        ...     soprano=7,
+        ... )
+        >>> specifier([[5, 6, 7, 9, 11]])
+        CollectionList([<6, 9, 11, 17, 19>])
+
+        >>> specifier = baca.ChordalSpacingSpecifier(
+        ...     bass=6,
+        ...     minimum_semitones=1,
+        ...     soprano=7,
+        ... )
+        >>> specifier([[5, 6, 7, 9, 11]])
+        CollectionList([<6, 9, 11, 17, 19>])
+
+        >>> specifier = baca.ChordalSpacingSpecifier(
+        ...     bass=6,
+        ...     minimum_semitones=2,
+        ...     soprano=7,
+        ... )
+        >>> specifier([[5, 6, 7, 9, 11]])
+        CollectionList([<6, 9, 11, 17, 19>])
+
+        >>> specifier = baca.ChordalSpacingSpecifier(
+        ...     bass=6,
+        ...     minimum_semitones=3,
+        ...     soprano=7,
+        ... )
+        >>> specifier([[5, 6, 7, 9, 11]])
+        CollectionList([<6, 9, 17, 23, 31>])
+
+    ..  container:: example
+
+        Down-directed spacing with semitone constraints.
+
+        First three examples give the same spacing:
+
+        >>> specifier = baca.ChordalSpacingSpecifier(
+        ...     bass=6,
+        ...     direction=abjad.Down,
+        ...     soprano=7,
+        ... )
+        >>> specifier([[5, 6, 7, 9, 11]])
+        CollectionList([<19, 17, 11, 9, 6>])
+
+        >>> specifier = baca.ChordalSpacingSpecifier(
+        ...     bass=6,
+        ...     direction=abjad.Down,
+        ...     minimum_semitones=1,
+        ...     soprano=7,
+        ... )
+        >>> specifier([[5, 6, 7, 9, 11]])
+        CollectionList([<19, 17, 11, 9, 6>])
+
+        >>> specifier = baca.ChordalSpacingSpecifier(
+        ...     bass=6,
+        ...     direction=abjad.Down,
+        ...     minimum_semitones=2,
+        ...     soprano=7,
+        ... )
+        >>> specifier([[5, 6, 7, 9, 11]])
+        CollectionList([<19, 17, 11, 9, 6>])
+
+        >>> specifier = baca.ChordalSpacingSpecifier(
+        ...     bass=6,
+        ...     direction=abjad.Down,
+        ...     minimum_semitones=3,
+        ...     soprano=7,
+        ... )
+        >>> specifier([[5, 6, 7, 9, 11]])
+        CollectionList([<31, 23, 17, 9, 6>])
+
+    ..  container:: example
+
+        Down-directed soprano control:
+
+        >>> specifier = baca.ChordalSpacingSpecifier(
+        ...     direction=abjad.Down,
+        ...     soprano=None,
+        ... )
+        >>> specifier([[-6, -3, -5, -1, -7]])
+        CollectionList([<18, 17, 11, 9, 7>])
+
+        >>> specifier = baca.ChordalSpacingSpecifier(
+        ...     direction=abjad.Down,
+        ...     soprano=6,
+        ... )
+        >>> specifier([[-6, -3, -5, -1, -7]])
+        CollectionList([<18, 17, 11, 9, 7>])
+
+        >>> specifier = baca.ChordalSpacingSpecifier(
+        ...     direction=abjad.Down,
+        ...     soprano=5,
+        ... )
+        >>> specifier([[-6, -3, -5, -1, -7]])
+        CollectionList([<17, 11, 9, 7, 6>])
+
+        >>> specifier = baca.ChordalSpacingSpecifier(
+        ...     direction=abjad.Down,
+        ...     soprano=11,
+        ... )
+        >>> specifier([[-6, -3, -5, -1, -7]])
+        CollectionList([<11, 9, 7, 6, 5>])
+
+        >>> specifier = baca.ChordalSpacingSpecifier(
+        ...     direction=abjad.Down,
+        ...     soprano=9,
+        ... )
+        >>> specifier([[-6, -3, -5, -1, -7]])
+        CollectionList([<21, 19, 18, 17, 11>])
+
+        >>> specifier = baca.ChordalSpacingSpecifier(
+        ...     direction=abjad.Down,
+        ...     soprano=7,
+        ... )
+        >>> specifier([[-6, -3, -5, -1, -7]])
+        CollectionList([<19, 18, 17, 11, 9>])
+
     """
 
-    ### CLASS VARIABLES ###
+    bass: typing.Any = None
+    direction: typing.Any = None
+    minimum_semitones: typing.Any = None
+    pattern: typing.Any = None
+    soprano: typing.Any = None
 
-    __slots__ = (
-        "_bass",
-        "_direction",
-        "_minimum_semitones",
-        "_pattern",
-        "_soprano",
-    )
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        bass=None,
-        direction=None,
-        minimum_semitones=None,
-        pattern=None,
-        soprano=None,
-    ):
-        self._bass = bass
-        if direction is not None:
-            assert direction in (abjad.Up, abjad.Down)
-        self._direction = direction
-        if minimum_semitones is not None:
-            assert isinstance(minimum_semitones, int)
-            assert 1 <= minimum_semitones
-        self._minimum_semitones = minimum_semitones
-        if pattern is not None:
-            assert isinstance(pattern, abjad.Pattern)
-        self._pattern = pattern
-        self._soprano = soprano
-
-    ### SPECIAL METHODS ###
+    def __post_init__(self):
+        if self.direction is not None:
+            assert self.direction in (abjad.Up, abjad.Down)
+        if self.minimum_semitones is not None:
+            assert isinstance(self.minimum_semitones, int)
+            assert 1 <= self.minimum_semitones
+        if self.pattern is not None:
+            assert isinstance(self.pattern, abjad.Pattern)
 
     def __call__(self, collections=None) -> typing.Union["CollectionList", None]:
-        """
-        Calls specifier on ``collections``.
-
-        ..  container:: example
-
-            >>> specifier = baca.ChordalSpacingSpecifier()
-            >>> specifier() is None
-            True
-
-        """
         if collections is None:
             return None
         if not isinstance(collections, CollectionList):
@@ -402,35 +499,6 @@ class ChordalSpacingSpecifier:
                 collection_ = self._space_collection(collection)
                 collections_.append(collection_)
         return CollectionList(collections_)
-
-    def __eq__(self, argument) -> bool:
-        """
-        Compares ``bass``, ``direction``, ``minimum_semitones``, ``pattern``,
-        ``soprano``.
-        """
-        if isinstance(argument, type(self)):
-            return (
-                self.bass == argument.bass
-                and self.direction == argument.direction
-                and self.minimum_semitones == argument.minimum_semitones
-                and self.pattern == argument.pattern
-                and self.soprano == argument.soprano
-            )
-        return False
-
-    def __hash__(self) -> int:
-        """
-        Hashes chordal spacing specifier.
-        """
-        return hash(self.__class__.__name__ + str(self))
-
-    def __repr__(self) -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.format.get_repr(self)
-
-    ### PRIVATE METHODS ###
 
     def _sort_pitch_classes_ascending(self, start, pitch_classes):
         pitch_classes, pitch_classes_, iterations = pitch_classes[:], [], 0
@@ -530,231 +598,6 @@ class ChordalSpacingSpecifier:
             return PitchSet(pitches)
         else:
             return PitchSegment(pitches)
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def bass(self) -> typing.Optional[abjad.PitchClass]:
-        """
-        Gets bass.
-
-        ..  container:: example
-
-            Up-directed bass specification:
-
-            >>> specifier = baca.ChordalSpacingSpecifier(bass=None)
-            >>> specifier([[-6, -3, -5, -1, -7]])
-            CollectionList([<6, 7, 9, 11, 17>])
-
-            >>> specifier = baca.ChordalSpacingSpecifier(bass=6)
-            >>> specifier([[-6, -3, -5, -1, -7]])
-            CollectionList([<6, 7, 9, 11, 17>])
-
-            >>> specifier = baca.ChordalSpacingSpecifier(bass=7)
-            >>> specifier([[-6, -3, -5, -1, -7]])
-            CollectionList([<7, 9, 11, 17, 18>])
-
-            >>> specifier = baca.ChordalSpacingSpecifier(bass=9)
-            >>> specifier([[-6, -3, -5, -1, -7]])
-            CollectionList([<9, 11, 17, 18, 19>])
-
-            >>> specifier = baca.ChordalSpacingSpecifier(bass=11)
-            >>> specifier([[-6, -3, -5, -1, -7]])
-            CollectionList([<11, 17, 18, 19, 21>])
-
-            >>> specifier = baca.ChordalSpacingSpecifier(bass=5)
-            >>> specifier([[-6, -3, -5, -1, -7]])
-            CollectionList([<5, 6, 7, 9, 11>])
-
-        """
-        return self._bass
-
-    @property
-    def direction(self) -> typing.Optional[abjad.VerticalAlignment]:
-        """
-        Gets direction.
-
-        ..  container:: example
-
-            Up-directed joint control:
-
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     bass=6,
-            ...     soprano=7,
-            ... )
-            >>> specifier([[-6, -3, -5, -1, -7]])
-            CollectionList([<6, 9, 11, 17, 19>])
-
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     bass=6,
-            ...     soprano=9,
-            ... )
-            >>> specifier([[-6, -3, -5, -1, -7]])
-            CollectionList([<6, 7, 11, 17, 21>])
-
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     bass=6,
-            ...     soprano=11,
-            ... )
-            >>> specifier([[-6, -3, -5, -1, -7]])
-            CollectionList([<6, 7, 9, 17, 23>])
-
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     bass=6,
-            ...     soprano=5
-            ... )
-            >>> specifier([[-6, -3, -5, -1, -7]])
-            CollectionList([<6, 7, 9, 11, 17>])
-
-        """
-        return self._direction
-
-    @property
-    def minimum_semitones(self) -> typing.Optional[int]:
-        """
-        Gets minimum semitones.
-
-        ..  container:: example
-
-            Up-directed spacing with semitone constraints.
-
-            First three examples give the same spacing:
-
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     bass=6,
-            ...     soprano=7,
-            ... )
-            >>> specifier([[5, 6, 7, 9, 11]])
-            CollectionList([<6, 9, 11, 17, 19>])
-
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     bass=6,
-            ...     minimum_semitones=1,
-            ...     soprano=7,
-            ... )
-            >>> specifier([[5, 6, 7, 9, 11]])
-            CollectionList([<6, 9, 11, 17, 19>])
-
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     bass=6,
-            ...     minimum_semitones=2,
-            ...     soprano=7,
-            ... )
-            >>> specifier([[5, 6, 7, 9, 11]])
-            CollectionList([<6, 9, 11, 17, 19>])
-
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     bass=6,
-            ...     minimum_semitones=3,
-            ...     soprano=7,
-            ... )
-            >>> specifier([[5, 6, 7, 9, 11]])
-            CollectionList([<6, 9, 17, 23, 31>])
-
-        ..  container:: example
-
-            Down-directed spacing with semitone constraints.
-
-            First three examples give the same spacing:
-
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     bass=6,
-            ...     direction=abjad.Down,
-            ...     soprano=7,
-            ... )
-            >>> specifier([[5, 6, 7, 9, 11]])
-            CollectionList([<19, 17, 11, 9, 6>])
-
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     bass=6,
-            ...     direction=abjad.Down,
-            ...     minimum_semitones=1,
-            ...     soprano=7,
-            ... )
-            >>> specifier([[5, 6, 7, 9, 11]])
-            CollectionList([<19, 17, 11, 9, 6>])
-
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     bass=6,
-            ...     direction=abjad.Down,
-            ...     minimum_semitones=2,
-            ...     soprano=7,
-            ... )
-            >>> specifier([[5, 6, 7, 9, 11]])
-            CollectionList([<19, 17, 11, 9, 6>])
-
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     bass=6,
-            ...     direction=abjad.Down,
-            ...     minimum_semitones=3,
-            ...     soprano=7,
-            ... )
-            >>> specifier([[5, 6, 7, 9, 11]])
-            CollectionList([<31, 23, 17, 9, 6>])
-
-        """
-        return self._minimum_semitones
-
-    @property
-    def pattern(self) -> typing.Optional[abjad.Pattern]:
-        """
-        Gets pattern.
-        """
-        return self._pattern
-
-    @property
-    def soprano(self) -> typing.Optional[abjad.PitchClass]:
-        """
-        Gets soprano.
-
-        ..  container:: example
-
-            Down-directed soprano control:
-
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     direction=abjad.Down,
-            ...     soprano=None,
-            ... )
-            >>> specifier([[-6, -3, -5, -1, -7]])
-            CollectionList([<18, 17, 11, 9, 7>])
-
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     direction=abjad.Down,
-            ...     soprano=6,
-            ... )
-            >>> specifier([[-6, -3, -5, -1, -7]])
-            CollectionList([<18, 17, 11, 9, 7>])
-
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     direction=abjad.Down,
-            ...     soprano=5,
-            ... )
-            >>> specifier([[-6, -3, -5, -1, -7]])
-            CollectionList([<17, 11, 9, 7, 6>])
-
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     direction=abjad.Down,
-            ...     soprano=11,
-            ... )
-            >>> specifier([[-6, -3, -5, -1, -7]])
-            CollectionList([<11, 9, 7, 6, 5>])
-
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     direction=abjad.Down,
-            ...     soprano=9,
-            ... )
-            >>> specifier([[-6, -3, -5, -1, -7]])
-            CollectionList([<21, 19, 18, 17, 11>])
-
-            >>> specifier = baca.ChordalSpacingSpecifier(
-            ...     direction=abjad.Down,
-            ...     soprano=7,
-            ... )
-            >>> specifier([[-6, -3, -5, -1, -7]])
-            CollectionList([<19, 18, 17, 11, 9>])
-
-        """
-        return self._soprano
 
 
 def _to_baca_collection(collection):
@@ -979,8 +822,6 @@ class CollectionList(collections_module.abc.Sequence):
 
     """
 
-    ### CLASS VARIABLES ###
-
     __slots__ = ("_collections", "_item_class")
 
     _item_class_prototype = (
@@ -990,8 +831,6 @@ class CollectionList(collections_module.abc.Sequence):
         abjad.NamedPitchClass,
     )
 
-    ### INITIALIZER ###
-
     def __init__(self, collections=None, *, item_class=None):
         if item_class is not None:
             if item_class not in self._item_class_prototype:
@@ -1000,8 +839,6 @@ class CollectionList(collections_module.abc.Sequence):
         collections = self._coerce(collections)
         collections = collections or []
         self._collections = tuple(collections)
-
-    ### SPECIAL METHODS ###
 
     def __add__(self, argument) -> "CollectionList":
         """
@@ -1078,7 +915,6 @@ class CollectionList(collections_module.abc.Sequence):
             return False
         return self.collections == argument.collections
 
-    # QUESTION: how to hint return type?
     def __getitem__(self, argument):
         """
         Gets collection or collection slice identified by ``argument``.
@@ -1160,8 +996,6 @@ class CollectionList(collections_module.abc.Sequence):
         string = f"{type(self).__name__}([{collections_}])"
         return string
 
-    ### PRIVATE METHODS ###
-
     def _coerce(self, collections):
         prototype = (PitchSegment, PitchSet, PitchClassSegment, PitchClassSet)
         collections_ = []
@@ -1176,9 +1010,6 @@ class CollectionList(collections_module.abc.Sequence):
         collections_ = [_to_baca_collection(_) for _ in collections_]
         assert all(isinstance(_, prototype) for _ in collections_)
         return collections_
-
-    def _get_format_specification(self):
-        return abjad.FormatSpecification()
 
     def _get_pitch_class_class(self):
         item_class = self.item_class or abjad.NumberedPitch
@@ -1228,8 +1059,6 @@ class CollectionList(collections_module.abc.Sequence):
             else:
                 raise TypeError(f"only string or iterable: {argument!r}.")
 
-    ### PUBLIC PROPERTIES ###
-
     @property
     def collections(self) -> typing.Optional[list]:
         """
@@ -1256,8 +1085,6 @@ class CollectionList(collections_module.abc.Sequence):
         Gets item class of collections in list.
         """
         return self._item_class
-
-    ### PUBLIC METHODS ###
 
     def accumulate(self, operands=None) -> "CollectionList":
         """
@@ -2894,10 +2721,10 @@ def illustrate_harmonic_series(harmonic_series) -> abjad.LilyPondFile:
     staff = abjad.Staff(name="Staff")
     for n in range(1, 20 + 1):
         partial = harmonic_series.partial(n)
-        pitch = partial.approximation
+        pitch = partial.approximation()
         note = abjad.Note.from_pitch_and_duration(pitch, (1, 4))
         staff.append(note)
-        deviation = partial.deviation
+        deviation = partial.deviation()
         if 0 < deviation:
             markup = abjad.Markup(rf"\markup +{deviation}", direction=abjad.Up)
             abjad.attach(markup, note)
@@ -2924,6 +2751,7 @@ def illustrate_harmonic_series(harmonic_series) -> abjad.LilyPondFile:
     return lilypond_file
 
 
+@dataclasses.dataclass(slots=True)
 class Partial:
     """
     Partial.
@@ -2935,93 +2763,45 @@ class Partial:
 
     """
 
-    ### CLASS VARIABLES ###
+    fundamental: typing.Union[str, abjad.NamedPitch] = "C1"
+    number: int = 1
 
-    __slots__ = ("_approximation", "_deviation", "_fundamental", "_number")
+    def __post_init__(self):
+        self.fundamental = abjad.NamedPitch(self.fundamental)
+        assert isinstance(self.number, int), repr(self.number)
+        assert 1 <= self.number, repr(self.number)
 
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        fundamental: typing.Union[str, abjad.NamedPitch] = "C1",
-        number: int = 1,
-    ) -> None:
-        fundamental = abjad.NamedPitch(fundamental)
-        self._fundamental = fundamental
-        assert isinstance(number, int), repr(number)
-        assert 1 <= number, repr(number)
-        self._number = number
-        hertz = number * fundamental.hertz
-        approximation = abjad.NamedPitch.from_hertz(hertz)
-        self._approximation = approximation
-        deviation_multiplier = hertz / approximation.hertz
-        semitone_base = 2 ** abjad.Fraction(1, 12)
-        deviation_semitones = math.log(deviation_multiplier, semitone_base)
-        deviation_cents = 100 * deviation_semitones
-        deviation = round(deviation_cents)
-        self._deviation = deviation
-
-    ### SPECIAL METHODS ###
-
-    def __repr__(self):
-        """
-        Gets interpreter representation.
-        """
-        return abjad.format.get_repr(self)
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
     def approximation(self) -> abjad.NamedPitch:
         """
         Gets approximation.
 
         ..  container:: example
 
-            >>> baca.Partial("C1", 7).approximation
+            >>> baca.Partial("C1", 7).approximation()
             NamedPitch('bf')
 
         """
-        return self._approximation
+        hertz = self.number * self.fundamental.hertz
+        return abjad.NamedPitch.from_hertz(hertz)
 
-    @property
     def deviation(self) -> int:
         """
         Gets deviation in cents.
 
         ..  container:: example
 
-            >>> baca.Partial("C1", 7).deviation
+            >>> baca.Partial("C1", 7).deviation()
             -31
 
         """
-        return self._deviation
-
-    @property
-    def fundamental(self) -> abjad.NamedPitch:
-        """
-        Gets fundamental.
-
-        ..  container:: example
-
-            >>> baca.Partial("C1", 7).fundamental
-            NamedPitch('c,,')
-
-        """
-        return self._fundamental
-
-    @property
-    def number(self) -> int:
-        """
-        Gets number.
-
-        ..  container:: example
-
-            >>> baca.Partial("C1", 7).number
-            7
-
-        """
-        return self._number
+        deviation_multiplier = (
+            self.number * self.fundamental.hertz / self.approximation().hertz
+        )
+        semitone_base = 2 ** abjad.Fraction(1, 12)
+        deviation_semitones = math.log(deviation_multiplier, semitone_base)
+        deviation_cents = 100 * deviation_semitones
+        deviation = round(deviation_cents)
+        return deviation
 
 
 class PitchClassSegment(abjad.PitchClassSegment):
@@ -7604,16 +7384,10 @@ class DesignMaker:
 
     """
 
-    ### CLASS VARIABLES ###
-
     __slots__ = ("_result",)
-
-    ### INITIALIZER ###
 
     def __init__(self):
         self._result = []
-
-    ### SPECIAL METHODS ###
 
     def __call__(self) -> PitchTree:
         """
@@ -7625,11 +7399,9 @@ class DesignMaker:
 
     def __repr__(self):
         """
-        Gets interpreter representation.
+        Gets repr.
         """
-        return abjad.format.get_repr(self)
-
-    ### PUBLIC METHODS ###
+        return f"{type(self).__name__}()"
 
     def partition(self, cursor, number, counts, operators=None) -> None:
         """
@@ -7672,6 +7444,7 @@ class DesignMaker:
         self._result.extend(parts)
 
 
+@dataclasses.dataclass(slots=True)
 class Registration:
     """
     Registration.
@@ -7688,23 +7461,17 @@ class Registration:
 
     """
 
-    ### CLASS VARIABLES ###
+    components: typing.Any = None
 
-    __slots__ = ("_components",)
-
-    ### INITIALIZER ###
-
-    def __init__(self, components=None):
+    def __post_init__(self):
         components_ = []
-        for component in components or []:
+        for component in self.components or []:
             if isinstance(component, RegistrationComponent):
                 components_.append(component)
             else:
                 component_ = RegistrationComponent(*component)
                 components_.append(component_)
-        self._components = components_ or None
-
-    ### SPECIAL METHODS ###
+        self.components = components_ or None
 
     def __call__(self, pitches):
         r"""
@@ -7759,28 +7526,6 @@ class Registration:
         """
         return [self._transpose_pitch(_) for _ in pitches]
 
-    def __eq__(self, argument) -> bool:
-        """
-        Compares ``components``.
-        """
-        if isinstance(argument, type(self)):
-            return self.components == argument.components
-        return False
-
-    def __hash__(self) -> int:
-        """
-        Hashes registration.
-        """
-        return hash(self.__class__.__name__ + str(self))
-
-    def __repr__(self) -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.format.get_repr(self)
-
-    ### PRIVATE METHODS ###
-
     def _transpose_pitch(self, pitch):
         pitch = abjad.NamedPitch(pitch)
         for component in self.components:
@@ -7802,18 +7547,8 @@ class Registration:
         else:
             raise ValueError(f"{pitch!r} not in {self!r}.")
 
-    ### PUBLIC PROPERTIES ###
 
-    @property
-    def components(self):
-        """
-        Gets components.
-
-        Returns list or none.
-        """
-        return self._components
-
-
+@dataclasses.dataclass(slots=True)
 class RegistrationComponent:
     """
     Registration component.
@@ -7830,86 +7565,17 @@ class RegistrationComponent:
 
     """
 
-    ### CLASS VARIABLES ###
+    source_pitch_range: typing.Any = "[A0, C8]"
+    target_octave_start_pitch: typing.Any = 0
 
-    __slots__ = ("_source_pitch_range", "_target_octave_start_pitch")
-
-    ### INITIALIZER ###
-
-    def __init__(self, source_pitch_range="[A0, C8]", target_octave_start_pitch=0):
-        if isinstance(source_pitch_range, abjad.PitchRange):
-            source_pitch_range = copy.copy(source_pitch_range)
+    def __post_init__(self):
+        if isinstance(self.source_pitch_range, abjad.PitchRange):
+            self.source_pitch_range = copy.copy(self.source_pitch_range)
         else:
-            source_pitch_range = abjad.PitchRange(source_pitch_range)
-        target_octave_start_pitch = abjad.NumberedPitch(target_octave_start_pitch)
-        self._source_pitch_range = source_pitch_range
-        self._target_octave_start_pitch = target_octave_start_pitch
-
-    ### SPECIAL METHODS ###
-
-    def __eq__(self, argument):
-        """
-        Compares ``source_pitch_range``, ``target_octave_start_pitch``.
-        """
-        if isinstance(argument, type(self)):
-            return (
-                self.source_pitch_range == argument.source_pitch_range
-                and self.target_octave_start_pitch == argument.target_octave_start_pitch
-            )
-        return False
-
-    def __hash__(self):
-        """
-        Hashes registration component.
-        """
-        return hash(self.__class__.__name__ + str(self))
-
-    def __repr__(self) -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.format.get_repr(self)
-
-    ### PRIVATE METHODS ###
-
-    def _get_format_specification(self):
-        return abjad.FormatSpecification()
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def source_pitch_range(self):
-        """
-        Gets source pitch range of registration component.
-
-        ..  container:: example
-
-            Gets source pitch range of example component:
-
-            >>> component = baca.RegistrationComponent("[A0, C8]", 15)
-            >>> component.source_pitch_range
-            PitchRange(range_string='[A0, C8]')
-
-        Returns pitch range or none.
-        """
-        return self._source_pitch_range
-
-    @property
-    def target_octave_start_pitch(self):
-        """
-        Gets target octave start pitch of registration component.
-
-        ..  container:: example
-
-            Gets target octave start pitch of example component:
-
-            >>> component = baca.RegistrationComponent("[A0, C8]", 15)
-            >>> component.target_octave_start_pitch
-            NumberedPitch(15)
-
-        Returns numbered pitch or none.
-        """
-        return self._target_octave_start_pitch
+            self.source_pitch_range = abjad.PitchRange(self.source_pitch_range)
+        self.target_octave_start_pitch = abjad.NumberedPitch(
+            self.target_octave_start_pitch
+        )
 
 
 class ZaggedPitchClassMaker:

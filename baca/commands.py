@@ -120,7 +120,7 @@ def assign_parts(
         Traceback (most recent call last):
             ...
         Exception: Music_Voice does not allow Flute_Voice part assignment:
-          PartAssignment('Flute_Voice')
+          baca.PartAssignment('Flute_Voice')
 
     """
     if not isinstance(part_assignment, _parts.PartAssignment):

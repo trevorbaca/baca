@@ -1,7 +1,9 @@
 """
 Jobs.
 """
+import dataclasses
 import pathlib
+import typing
 
 import abjad
 
@@ -9,48 +11,20 @@ from . import path as _path
 from . import tags as _tags
 
 
+@dataclasses.dataclass(slots=True)
 class Job:
     """
     Job.
     """
 
-    ### CLASS VARIABLES ###
-
-    __slots__ = (
-        "_activate",
-        "_deactivate",
-        "_deactivate_first",
-        "_message_zero",
-        "_path",
-        "_prepend_empty_chord",
-        "_skip_file_name",
-        "_title",
-    )
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        activate=None,
-        deactivate=None,
-        deactivate_first=None,
-        message_zero=None,
-        path=None,
-        prepend_empty_chord=None,
-        skip_file_name=None,
-        title=None,
-    ):
-        self._activate = activate
-        self._deactivate = deactivate
-        self._deactivate_first = deactivate_first
-        self._message_zero = message_zero
-        self._path = path
-        self._prepend_empty_chord = prepend_empty_chord
-        self._skip_file_name = skip_file_name
-        self._title = title
-
-    ### SPECIAL METHODS ###
+    activate: typing.Any = None
+    deactivate: typing.Any = None
+    deactivate_first: typing.Any = None
+    message_zero: typing.Any = None
+    path: typing.Any = None
+    prepend_empty_chord: typing.Any = None
+    skip_file_name: typing.Any = None
+    title: typing.Any = None
 
     def __call__(self):
         """
@@ -149,70 +123,6 @@ class Job:
         else:
             assert isinstance(self.path, str)
             return text
-
-    def __repr__(self):
-        """
-        Gets interpreter representation.
-        """
-        return abjad.format.get_repr(self)
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def activate(self):
-        """
-        Gets activate match / message pair.
-        """
-        return self._activate
-
-    @property
-    def deactivate(self):
-        """
-        Gets deactivate match / message pair.
-        """
-        return self._deactivate
-
-    @property
-    def deactivate_first(self):
-        """
-        Is true when deactivate runs first.
-        """
-        return self._deactivate_first
-
-    @property
-    def message_zero(self):
-        """
-        Is true when job returns messages even when no matches are found.
-        """
-        return self._message_zero
-
-    @property
-    def path(self):
-        """
-        Gets path.
-        """
-        return self._path
-
-    @property
-    def prepend_empty_chord(self):
-        """
-        Is true when deactivate prepends LilyPond empty chord ``<>`` command.
-        """
-        return self._prepend_empty_chord
-
-    @property
-    def skip_file_name(self):
-        """
-        Gets skip file name.
-        """
-        return self._skip_file_name
-
-    @property
-    def title(self):
-        """
-        Gets title.
-        """
-        return self._title
 
 
 def color_clefs(path, undo=False):

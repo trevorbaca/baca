@@ -257,9 +257,6 @@ class PitchArray:
         result = " ".join(result)
         return result
 
-    def _get_format_specification(self):
-        return abjad.FormatSpecification()
-
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -1099,9 +1096,6 @@ class PitchArrayCell:
         return f"x{self.width}"
 
     ### PRIVATE METHODS ###
-
-    def _get_format_specification(self):
-        return abjad.FormatSpecification()
 
     def _parse_cell_token(self, cell_token):
         if cell_token is None:
@@ -2044,7 +2038,7 @@ class PitchArrayList(abjad.TypedList):
         >>> arrays = baca.PitchArrayList(arrays)
 
         >>> arrays
-        PitchArrayList([PitchArray(rows=(PitchArrayRow(cells=(PitchArrayCell(width=1), PitchArrayCell(pitches=[NamedPitch("d'")], width=1), PitchArrayCell(pitches=[NamedPitch('bf'), NamedPitch('bqf')], width=2))), PitchArrayRow(cells=(PitchArrayCell(pitches=[NamedPitch("g'")], width=2), PitchArrayCell(pitches=[NamedPitch("fs'")], width=1), PitchArrayCell(width=1))))), PitchArray(rows=(PitchArrayRow(cells=(PitchArrayCell(width=1), PitchArrayCell(width=1), PitchArrayCell(width=1))), PitchArrayRow(cells=(PitchArrayCell(width=1), PitchArrayCell(width=1), PitchArrayCell(width=1)))))])
+        PitchArrayList([PitchArray(rows=(PitchArrayRow(cells=(PitchArrayCell(width=1), PitchArrayCell(pitches="d'", width=1), PitchArrayCell(pitches="bf bqf", width=2))), PitchArrayRow(cells=(PitchArrayCell(pitches="g'", width=2), PitchArrayCell(pitches="fs'", width=1), PitchArrayCell(width=1))))), PitchArray(rows=(PitchArrayRow(cells=(PitchArrayCell(width=1), PitchArrayCell(width=1), PitchArrayCell(width=1))), PitchArrayRow(cells=(PitchArrayCell(width=1), PitchArrayCell(width=1), PitchArrayCell(width=1)))))])
 
     """
 
@@ -2381,11 +2375,6 @@ class PitchArrayRow:
             result.append(cell._format_row_column_repr_string)
         result = ", ".join(result)
         return result
-
-    ### PRIVATE METHODS ###
-
-    def _get_format_specification(self):
-        return abjad.FormatSpecification()
 
     ### PUBLIC PROPERTIES ###
 

@@ -2,6 +2,7 @@
 Figure-maker.
 """
 import copy
+import dataclasses
 import math
 import typing
 from inspect import currentframe as _frame
@@ -26,26 +27,17 @@ class Stack:
     Stack.
     """
 
-    ### CLASS ATTRIBUTES ###
-
     __slots__ = ("_commands",)
 
     # to make sure abjad.new() copies commands
     _positional_arguments_name = "commands"
-
-    ### INITIALIZER ###
 
     def __init__(self, *commands) -> None:
         commands = commands or ()
         commands_ = tuple(commands)
         self._commands = commands_
 
-    ### SPECIAL METHODS ###
-
     def __call__(self, argument: typing.Any, **keywords) -> typing.Any:
-        """
-        Calls stack on ``argument``.
-        """
         if not self.commands:
             return argument
         try:
@@ -81,11 +73,9 @@ class Stack:
 
     def __repr__(self) -> str:
         """
-        Delegates to format manager.
+        Gets repr.
         """
-        return abjad.format.get_repr(self)
-
-    ### PUBLIC PROPERTIES ###
+        return f"{type(self).__name__}(commands={self.commands})"
 
     @property
     def commands(self):
@@ -95,93 +85,600 @@ class Stack:
         return list(self._commands)
 
 
+@dataclasses.dataclass(slots=True)
 class LMR:
     """
     Left-middle-right.
+
+    ..  container:: example
+
+        Left counts equal to a single 1:
+
+        >>> lmr = baca.lmr(
+        ...     left_counts=[1],
+        ...     left_cyclic=False,
+        ...     left_length=3,
+        ...     right_length=2,
+        ... )
+
+        >>> parts = lmr([1])
+        >>> for part in parts: part
+        Sequence([1])
+
+        >>> parts = lmr([1, 2])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2])
+
+        >>> parts = lmr([1, 2, 3])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2, 3])
+
+        >>> parts = lmr([1, 2, 3, 4])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2, 3])
+        Sequence([4])
+
+        >>> parts = lmr([1, 2, 3, 4, 5])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2, 3])
+        Sequence([4, 5])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2, 3])
+        Sequence([4])
+        Sequence([5, 6])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2, 3])
+        Sequence([4, 5])
+        Sequence([6, 7])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2, 3])
+        Sequence([4, 5, 6])
+        Sequence([7, 8])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2, 3])
+        Sequence([4, 5, 6, 7])
+        Sequence([8, 9])
+
+    ..  container:: example
+
+        Left counts all equal to 1:
+
+        >>> lmr = baca.lmr(
+        ...     left_counts=[1],
+        ...     left_cyclic=True,
+        ...     left_length=3,
+        ...     right_length=2,
+        ... )
+
+        >>> parts = lmr([1])
+        >>> for part in parts: part
+        Sequence([1])
+
+        >>> parts = lmr([1, 2])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2])
+
+        >>> parts = lmr([1, 2, 3])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2])
+        Sequence([3])
+
+        >>> parts = lmr([1, 2, 3, 4])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2])
+        Sequence([3])
+        Sequence([4])
+
+        >>> parts = lmr([1, 2, 3, 4, 5])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2])
+        Sequence([3])
+        Sequence([4, 5])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2])
+        Sequence([3])
+        Sequence([4])
+        Sequence([5, 6])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2])
+        Sequence([3])
+        Sequence([4, 5])
+        Sequence([6, 7])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2])
+        Sequence([3])
+        Sequence([4, 5, 6])
+        Sequence([7, 8])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2])
+        Sequence([3])
+        Sequence([4, 5, 6, 7])
+        Sequence([8, 9])
+
+    ..  container:: example
+
+        Left length equal to 2:
+
+        >>> lmr = baca.lmr(
+        ...     left_length=2,
+        ... )
+
+        >>> parts = lmr([1])
+        >>> for part in parts: part
+        Sequence([1])
+
+        >>> parts = lmr([1, 2])
+        >>> for part in parts: part
+        Sequence([1, 2])
+
+        >>> parts = lmr([1, 2, 3])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3])
+
+        >>> parts = lmr([1, 2, 3, 4])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3, 4])
+
+        >>> parts = lmr([1, 2, 3, 4, 5])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3, 4, 5])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3, 4, 5, 6])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3, 4, 5, 6, 7])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3, 4, 5, 6, 7, 8])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3, 4, 5, 6, 7, 8, 9])
+
+    ..  container:: example
+
+        Cyclic middle counts equal to [2]:
+
+        >>> lmr = baca.lmr(
+        ...     middle_counts=[2],
+        ...     middle_cyclic=True,
+        ... )
+
+        >>> parts = lmr([1])
+        >>> for part in parts: part
+        Sequence([1])
+
+        >>> parts = lmr([1, 2])
+        >>> for part in parts: part
+        Sequence([1, 2])
+
+        >>> parts = lmr([1, 2, 3])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3])
+
+        >>> parts = lmr([1, 2, 3, 4])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3, 4])
+
+        >>> parts = lmr([1, 2, 3, 4, 5])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3, 4])
+        Sequence([5])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3, 4])
+        Sequence([5, 6])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3, 4])
+        Sequence([5, 6])
+        Sequence([7])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3, 4])
+        Sequence([5, 6])
+        Sequence([7, 8])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3, 4])
+        Sequence([5, 6])
+        Sequence([7, 8])
+        Sequence([9])
+
+        Odd parity produces length-1 part at right.
+
+    ..  container:: example
+
+        Reversed cyclic middle counts equal to [2]:
+
+        >>> lmr = baca.lmr(
+        ...     middle_counts=[2],
+        ...     middle_cyclic=True,
+        ...     middle_reversed=True,
+        ... )
+
+        >>> parts = lmr([1])
+        >>> for part in parts: part
+        Sequence([1])
+
+        >>> parts = lmr([1, 2])
+        >>> for part in parts: part
+        Sequence([1, 2])
+
+        >>> parts = lmr([1, 2, 3])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2, 3])
+
+        >>> parts = lmr([1, 2, 3, 4])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3, 4])
+
+        >>> parts = lmr([1, 2, 3, 4, 5])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2, 3])
+        Sequence([4, 5])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3, 4])
+        Sequence([5, 6])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2, 3])
+        Sequence([4, 5])
+        Sequence([6, 7])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3, 4])
+        Sequence([5, 6])
+        Sequence([7, 8])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2, 3])
+        Sequence([4, 5])
+        Sequence([6, 7])
+        Sequence([8, 9])
+
+        Odd parity produces length-1 part at left.
+
+    ..  container:: example
+
+        Priority to the left:
+
+        >>> lmr = baca.lmr(
+        ...     left_length=2,
+        ...     right_length=1,
+        ... )
+
+        >>> parts = lmr([1])
+        >>> for part in parts: part
+        Sequence([1])
+
+        >>> parts = lmr([1, 2])
+        >>> for part in parts: part
+        Sequence([1, 2])
+
+        >>> parts = lmr([1, 2, 3])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3])
+
+        >>> parts = lmr([1, 2, 3, 4])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3])
+        Sequence([4])
+
+        >>> parts = lmr([1, 2, 3, 4, 5])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3, 4])
+        Sequence([5])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3, 4, 5])
+        Sequence([6])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3, 4, 5, 6])
+        Sequence([7])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3, 4, 5, 6, 7])
+        Sequence([8])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3, 4, 5, 6, 7, 8])
+        Sequence([9])
+
+    ..  container:: example
+
+        Priority to the right:
+
+        >>> lmr = baca.lmr(
+        ...     left_length=2,
+        ...     priority=abjad.Right,
+        ...     right_length=1,
+        ... )
+
+        >>> parts = lmr([1])
+        >>> for part in parts: part
+        Sequence([1])
+
+        >>> parts = lmr([1, 2])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2])
+
+        >>> parts = lmr([1, 2, 3])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3])
+
+        >>> parts = lmr([1, 2, 3, 4])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3])
+        Sequence([4])
+
+        >>> parts = lmr([1, 2, 3, 4, 5])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3, 4])
+        Sequence([5])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3, 4, 5])
+        Sequence([6])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3, 4, 5, 6])
+        Sequence([7])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3, 4, 5, 6, 7])
+        Sequence([8])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3, 4, 5, 6, 7, 8])
+        Sequence([9])
+
+    ..  container:: example
+
+        Right length equal to 2:
+
+        >>> lmr = baca.lmr(
+        ...     right_length=2,
+        ... )
+
+        >>> parts = lmr([1])
+        >>> for part in parts: part
+        Sequence([1])
+
+        >>> parts = lmr([1, 2])
+        >>> for part in parts: part
+        Sequence([1, 2])
+
+        >>> parts = lmr([1, 2, 3])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2, 3])
+
+        >>> parts = lmr([1, 2, 3, 4])
+        >>> for part in parts: part
+        Sequence([1, 2])
+        Sequence([3, 4])
+
+        >>> parts = lmr([1, 2, 3, 4, 5])
+        >>> for part in parts: part
+        Sequence([1, 2, 3])
+        Sequence([4, 5])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6])
+        >>> for part in parts: part
+        Sequence([1, 2, 3, 4])
+        Sequence([5, 6])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
+        >>> for part in parts: part
+        Sequence([1, 2, 3, 4, 5])
+        Sequence([6, 7])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
+        >>> for part in parts: part
+        Sequence([1, 2, 3, 4, 5, 6])
+        Sequence([7, 8])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        >>> for part in parts: part
+        Sequence([1, 2, 3, 4, 5, 6, 7])
+        Sequence([8, 9])
+
+    ..  container:: example
+
+        Right length equal to 2 and left counts equal to [1]:
+
+        >>> lmr = baca.lmr(
+        ...     left_counts=[1],
+        ...     left_cyclic=False,
+        ...     right_length=2,
+        ... )
+
+        >>> parts = lmr([1])
+        >>> for part in parts: part
+        Sequence([1])
+
+        >>> parts = lmr([1, 2])
+        >>> for part in parts: part
+        Sequence([1, 2])
+
+        >>> parts = lmr([1, 2, 3])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2, 3])
+
+        >>> parts = lmr([1, 2, 3, 4])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2])
+        Sequence([3, 4])
+
+        >>> parts = lmr([1, 2, 3, 4, 5])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2, 3])
+        Sequence([4, 5])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2, 3, 4])
+        Sequence([5, 6])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2, 3, 4, 5])
+        Sequence([6, 7])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2, 3, 4, 5, 6])
+        Sequence([7, 8])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        >>> for part in parts: part
+        Sequence([1])
+        Sequence([2, 3, 4, 5, 6, 7])
+        Sequence([8, 9])
+
     """
 
-    ### CLASS VARIABLES ###
+    left_counts: typing.Sequence[int] = None
+    left_cyclic: bool = None
+    left_length: int = None
+    left_reversed: bool = None
+    middle_counts: typing.Sequence[int] = None
+    middle_cyclic: bool = None
+    middle_reversed: bool = None
+    priority: abjad.HorizontalAlignment = None
+    right_counts: typing.Sequence[int] = None
+    right_cyclic: bool = None
+    right_length: int = None
+    right_reversed: bool = None
 
-    __slots__ = (
-        "_left_counts",
-        "_left_cyclic",
-        "_left_length",
-        "_left_reversed",
-        "_middle_counts",
-        "_middle_cyclic",
-        "_middle_reversed",
-        "_priority",
-        "_right_counts",
-        "_right_cyclic",
-        "_right_length",
-        "_right_reversed",
-    )
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        left_counts: typing.Sequence[int] = None,
-        left_cyclic: bool = None,
-        left_length: int = None,
-        left_reversed: bool = None,
-        middle_counts: typing.Sequence[int] = None,
-        middle_cyclic: bool = None,
-        middle_reversed: bool = None,
-        priority: abjad.HorizontalAlignment = None,
-        right_counts: typing.Sequence[int] = None,
-        right_cyclic: bool = None,
-        right_length: int = None,
-        right_reversed: bool = None,
-    ) -> None:
-        if left_counts is not None:
-            assert abjad.math.all_are_positive_integers(left_counts)
-        self._left_counts = left_counts
-        if left_cyclic is not None:
-            left_cyclic = bool(left_cyclic)
-        self._left_cyclic = left_cyclic
-        if left_length is not None:
-            left_length = int(left_length)
-            assert 0 <= left_length, repr(left_length)
-        self._left_length = left_length
-        if left_reversed is not None:
-            left_reversed = bool(left_reversed)
-        self._left_reversed = left_reversed
-        if middle_counts is not None:
-            assert abjad.math.all_are_positive_integers(middle_counts)
-        self._middle_counts = middle_counts
-        if middle_cyclic is not None:
-            middle_cyclic = bool(middle_cyclic)
-        self._middle_cyclic = middle_cyclic
-        if middle_reversed is not None:
-            middle_reversed = bool(middle_reversed)
-        self._middle_reversed = middle_reversed
-        if priority is not None:
-            assert priority in (abjad.Left, abjad.Right)
-        self._priority = priority
-        if right_counts is not None:
-            assert abjad.math.all_are_positive_integers(right_counts)
-        self._right_counts = right_counts
-        if right_cyclic is not None:
-            right_cyclic = bool(right_cyclic)
-        self._right_cyclic = right_cyclic
-        if right_length is not None:
-            right_length = int(right_length)
-            assert 0 <= right_length, repr(right_length)
-        self._right_length = right_length
-        if right_reversed is not None:
-            right_reversed = bool(right_reversed)
-        self._right_reversed = right_reversed
-
-    ### SPECIAL METHODS ###
+    def __post_init__(self):
+        if self.left_counts is not None:
+            assert abjad.math.all_are_positive_integers(self.left_counts)
+        if self.left_cyclic is not None:
+            self.left_cyclic = bool(self.left_cyclic)
+        if self.left_length is not None:
+            self.left_length = int(self.left_length)
+            assert 0 <= self.left_length, repr(self.left_length)
+        if self.left_reversed is not None:
+            self.left_reversed = bool(self.left_reversed)
+        if self.middle_counts is not None:
+            assert abjad.math.all_are_positive_integers(self.middle_counts)
+        if self.middle_cyclic is not None:
+            self.middle_cyclic = bool(self.middle_cyclic)
+        if self.middle_reversed is not None:
+            self.middle_reversed = bool(self.middle_reversed)
+        if self.priority is not None:
+            assert self.priority in (abjad.Left, abjad.Right)
+        if self.right_counts is not None:
+            assert abjad.math.all_are_positive_integers(self.right_counts)
+        if self.right_cyclic is not None:
+            self.right_cyclic = bool(self.right_cyclic)
+        if self.right_length is not None:
+            self.right_length = int(self.right_length)
+            assert 0 <= self.right_length, repr(self.right_length)
+        if self.right_reversed is not None:
+            self.right_reversed = bool(self.right_reversed)
 
     def __call__(
         self, sequence: typing.Union[list, abjad.Segment] = None
     ) -> typing.List[abjad.Sequence]:
-        """
-        Calls LMR on ``sequence``.
-        """
         assert isinstance(sequence, (list, abjad.Segment)), repr(sequence)
         top_lengths = self._get_top_lengths(len(sequence))
         top_parts = abjad.Sequence(sequence).partition_by_counts(
@@ -225,37 +722,6 @@ class LMR:
         assert isinstance(parts, list), repr(parts)
         assert all(isinstance(_, abjad.Sequence) for _ in parts)
         return parts
-
-    def __eq__(self, argument) -> bool:
-        """
-        Compares all input parameters.
-        """
-        if isinstance(argument, type(self)):
-            return (
-                self.left_counts == argument.left_counts
-                and self.left_cyclic == argument.left_cyclic
-                and self.left_reversed == argument.left_reversed
-                and self.middle_cyclic == argument.middle_cyclic
-                and self.priority == argument.priority
-                and self.right_counts == argument.right_counts
-                and self.right_cyclic == argument.right_cyclic
-                and self.right_reversed == argument.right_reversed
-            )
-        return False
-
-    def __hash__(self) -> int:
-        """
-        Hashes LMR.
-        """
-        return hash(self.__class__.__name__ + str(self))
-
-    def __repr__(self) -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.format.get_repr(self)
-
-    ### PRIVATE METHODS ###
 
     def _get_priority(self):
         if self.priority is None:
@@ -304,678 +770,731 @@ class LMR:
             middle_length = total_length
         return left_length, middle_length, right_length
 
-    ### PUBLIC PROPERTIES ###
 
-    @property
-    def left_counts(self) -> typing.Optional[abjad.IntegerSequence]:
-        """
-        Gets left counts.
-
-        ..  container:: example
-
-            Left counts equal to a single 1:
-
-            >>> lmr = baca.lmr(
-            ...     left_counts=[1],
-            ...     left_cyclic=False,
-            ...     left_length=3,
-            ...     right_length=2,
-            ... )
-
-            >>> parts = lmr([1])
-            >>> for part in parts: part
-            Sequence([1])
-
-            >>> parts = lmr([1, 2])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2])
-
-            >>> parts = lmr([1, 2, 3])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-
-            >>> parts = lmr([1, 2, 3, 4])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-            Sequence([4])
-
-            >>> parts = lmr([1, 2, 3, 4, 5])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-            Sequence([4, 5])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-            Sequence([4])
-            Sequence([5, 6])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-            Sequence([4, 5])
-            Sequence([6, 7])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-            Sequence([4, 5, 6])
-            Sequence([7, 8])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-            Sequence([4, 5, 6, 7])
-            Sequence([8, 9])
-
-        ..  container:: example
-
-            Left counts all equal to 1:
-
-            >>> lmr = baca.lmr(
-            ...     left_counts=[1],
-            ...     left_cyclic=True,
-            ...     left_length=3,
-            ...     right_length=2,
-            ... )
-
-            >>> parts = lmr([1])
-            >>> for part in parts: part
-            Sequence([1])
-
-            >>> parts = lmr([1, 2])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2])
-
-            >>> parts = lmr([1, 2, 3])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2])
-            Sequence([3])
-
-            >>> parts = lmr([1, 2, 3, 4])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2])
-            Sequence([3])
-            Sequence([4])
-
-            >>> parts = lmr([1, 2, 3, 4, 5])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2])
-            Sequence([3])
-            Sequence([4, 5])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2])
-            Sequence([3])
-            Sequence([4])
-            Sequence([5, 6])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2])
-            Sequence([3])
-            Sequence([4, 5])
-            Sequence([6, 7])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2])
-            Sequence([3])
-            Sequence([4, 5, 6])
-            Sequence([7, 8])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2])
-            Sequence([3])
-            Sequence([4, 5, 6, 7])
-            Sequence([8, 9])
-
-        """
-        return self._left_counts
-
-    @property
-    def left_cyclic(self) -> typing.Optional[bool]:
-        """
-        Is true when specifier reads left counts cyclically.
-        """
-        return self._left_cyclic
-
-    @property
-    def left_length(self) -> typing.Optional[int]:
-        """
-        Gets left length.
-
-        ..  container:: example
-
-            Left length equal to 2:
-
-            >>> lmr = baca.lmr(
-            ...     left_length=2,
-            ... )
-
-            >>> parts = lmr([1])
-            >>> for part in parts: part
-            Sequence([1])
-
-            >>> parts = lmr([1, 2])
-            >>> for part in parts: part
-            Sequence([1, 2])
-
-            >>> parts = lmr([1, 2, 3])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3])
-
-            >>> parts = lmr([1, 2, 3, 4])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4])
-
-            >>> parts = lmr([1, 2, 3, 4, 5])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4, 5])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4, 5, 6])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4, 5, 6, 7])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4, 5, 6, 7, 8])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4, 5, 6, 7, 8, 9])
-
-        """
-        return self._left_length
-
-    @property
-    def left_reversed(self) -> typing.Optional[bool]:
-        """
-        Is true when specifier reverses left partition.
-        """
-        return self._left_reversed
-
-    @property
-    def middle_counts(self) -> typing.Optional[abjad.IntegerSequence]:
-        """
-        Gets middle counts.
-        """
-        return self._middle_counts
-
-    @property
-    def middle_cyclic(self) -> typing.Optional[bool]:
-        """
-        Is true when specifier reads middle counts cyclically.
-
-        ..  container:: example
-
-            Cyclic middle counts equal to [2]:
-
-            >>> lmr = baca.lmr(
-            ...     middle_counts=[2],
-            ...     middle_cyclic=True,
-            ... )
-
-            >>> parts = lmr([1])
-            >>> for part in parts: part
-            Sequence([1])
-
-            >>> parts = lmr([1, 2])
-            >>> for part in parts: part
-            Sequence([1, 2])
-
-            >>> parts = lmr([1, 2, 3])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3])
-
-            >>> parts = lmr([1, 2, 3, 4])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4])
-
-            >>> parts = lmr([1, 2, 3, 4, 5])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4])
-            Sequence([5])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4])
-            Sequence([5, 6])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4])
-            Sequence([5, 6])
-            Sequence([7])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4])
-            Sequence([5, 6])
-            Sequence([7, 8])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4])
-            Sequence([5, 6])
-            Sequence([7, 8])
-            Sequence([9])
-
-            Odd parity produces length-1 part at right.
-
-        """
-        return self._middle_cyclic
-
-    @property
-    def middle_reversed(self) -> typing.Optional[bool]:
-        """
-        Is true when specifier reverses middle partition.
-
-        ..  container:: example
-
-            Reversed cyclic middle counts equal to [2]:
-
-            >>> lmr = baca.lmr(
-            ...     middle_counts=[2],
-            ...     middle_cyclic=True,
-            ...     middle_reversed=True,
-            ... )
-
-            >>> parts = lmr([1])
-            >>> for part in parts: part
-            Sequence([1])
-
-            >>> parts = lmr([1, 2])
-            >>> for part in parts: part
-            Sequence([1, 2])
-
-            >>> parts = lmr([1, 2, 3])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-
-            >>> parts = lmr([1, 2, 3, 4])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4])
-
-            >>> parts = lmr([1, 2, 3, 4, 5])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-            Sequence([4, 5])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4])
-            Sequence([5, 6])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-            Sequence([4, 5])
-            Sequence([6, 7])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4])
-            Sequence([5, 6])
-            Sequence([7, 8])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-            Sequence([4, 5])
-            Sequence([6, 7])
-            Sequence([8, 9])
-
-            Odd parity produces length-1 part at left.
-
-        """
-        return self._middle_reversed
-
-    @property
-    def priority(self) -> typing.Optional[abjad.HorizontalAlignment]:
-        """
-        Gets priority.
-
-        ..  container:: example
-
-            Priority to the left:
-
-            >>> lmr = baca.lmr(
-            ...     left_length=2,
-            ...     right_length=1,
-            ... )
-
-            >>> parts = lmr([1])
-            >>> for part in parts: part
-            Sequence([1])
-
-            >>> parts = lmr([1, 2])
-            >>> for part in parts: part
-            Sequence([1, 2])
-
-            >>> parts = lmr([1, 2, 3])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3])
-
-            >>> parts = lmr([1, 2, 3, 4])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3])
-            Sequence([4])
-
-            >>> parts = lmr([1, 2, 3, 4, 5])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4])
-            Sequence([5])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4, 5])
-            Sequence([6])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4, 5, 6])
-            Sequence([7])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4, 5, 6, 7])
-            Sequence([8])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4, 5, 6, 7, 8])
-            Sequence([9])
-
-        ..  container:: example
-
-            Priority to the right:
-
-            >>> lmr = baca.lmr(
-            ...     left_length=2,
-            ...     priority=abjad.Right,
-            ...     right_length=1,
-            ... )
-
-            >>> parts = lmr([1])
-            >>> for part in parts: part
-            Sequence([1])
-
-            >>> parts = lmr([1, 2])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2])
-
-            >>> parts = lmr([1, 2, 3])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3])
-
-            >>> parts = lmr([1, 2, 3, 4])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3])
-            Sequence([4])
-
-            >>> parts = lmr([1, 2, 3, 4, 5])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4])
-            Sequence([5])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4, 5])
-            Sequence([6])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4, 5, 6])
-            Sequence([7])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4, 5, 6, 7])
-            Sequence([8])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4, 5, 6, 7, 8])
-            Sequence([9])
-
-        """
-        return self._priority
-
-    @property
-    def right_counts(self) -> typing.Optional[abjad.IntegerSequence]:
-        """
-        Gets right counts.
-        """
-        return self._right_counts
-
-    @property
-    def right_cyclic(self) -> typing.Optional[bool]:
-        """
-        Is true when specifier reads right counts cyclically.
-        """
-        return self._right_cyclic
-
-    @property
-    def right_length(self) -> typing.Optional[int]:
-        """
-        Gets right length.
-
-        ..  container:: example
-
-            Right length equal to 2:
-
-            >>> lmr = baca.lmr(
-            ...     right_length=2,
-            ... )
-
-            >>> parts = lmr([1])
-            >>> for part in parts: part
-            Sequence([1])
-
-            >>> parts = lmr([1, 2])
-            >>> for part in parts: part
-            Sequence([1, 2])
-
-            >>> parts = lmr([1, 2, 3])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-
-            >>> parts = lmr([1, 2, 3, 4])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4])
-
-            >>> parts = lmr([1, 2, 3, 4, 5])
-            >>> for part in parts: part
-            Sequence([1, 2, 3])
-            Sequence([4, 5])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6])
-            >>> for part in parts: part
-            Sequence([1, 2, 3, 4])
-            Sequence([5, 6])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
-            >>> for part in parts: part
-            Sequence([1, 2, 3, 4, 5])
-            Sequence([6, 7])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
-            >>> for part in parts: part
-            Sequence([1, 2, 3, 4, 5, 6])
-            Sequence([7, 8])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
-            >>> for part in parts: part
-            Sequence([1, 2, 3, 4, 5, 6, 7])
-            Sequence([8, 9])
-
-        ..  container:: example
-
-            Right length equal to 2 and left counts equal to [1]:
-
-            >>> lmr = baca.lmr(
-            ...     left_counts=[1],
-            ...     left_cyclic=False,
-            ...     right_length=2,
-            ... )
-
-            >>> parts = lmr([1])
-            >>> for part in parts: part
-            Sequence([1])
-
-            >>> parts = lmr([1, 2])
-            >>> for part in parts: part
-            Sequence([1, 2])
-
-            >>> parts = lmr([1, 2, 3])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-
-            >>> parts = lmr([1, 2, 3, 4])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2])
-            Sequence([3, 4])
-
-            >>> parts = lmr([1, 2, 3, 4, 5])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-            Sequence([4, 5])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3, 4])
-            Sequence([5, 6])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3, 4, 5])
-            Sequence([6, 7])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3, 4, 5, 6])
-            Sequence([7, 8])
-
-            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3, 4, 5, 6, 7])
-            Sequence([8, 9])
-
-        """
-        return self._right_length
-
-    @property
-    def right_reversed(self) -> typing.Optional[bool]:
-        """
-        Is true when specifier reverses right partition.
-        """
-        return self._right_reversed
-
-
+@dataclasses.dataclass(slots=True)
 class Acciaccatura:
-    """
+    r"""
     Acciaccatura.
 
     ..  container:: example
 
         >>> baca.Acciaccatura()
-        Acciaccatura(durations=[Duration(1, 16)], lmr=LMR())
+        Acciaccatura(durations=[Duration(1, 16)], lmr=LMR(left_counts=None, left_cyclic=None, left_length=None, left_reversed=None, middle_counts=None, middle_cyclic=None, middle_reversed=None, priority=None, right_counts=None, right_cyclic=None, right_length=None, right_reversed=None))
+
+    ..  container:: example
+
+        Sixteenth-note acciaccaturas by default:
+
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 8, acciaccatura=True),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [
+        ...     [0],
+        ...     [2, 10],
+        ...     [18, 16, 15],
+        ...     [20, 19, 9, 0],
+        ...     [2, 10, 18, 16, 15],
+        ...     [20, 19, 9, 0, 2, 10],
+        ... ]
+        >>> selection = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 3/4
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            d'16
+                        }
+                        bf'8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            fs''16
+                            [
+                            e''16
+                            ]
+                        }
+                        ef''8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            af''16
+                            [
+                            g''16
+                            a'16
+                            ]
+                        }
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            d'16
+                            [
+                            bf'16
+                            fs''16
+                            e''16
+                            ]
+                        }
+                        ef''8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            af''16
+                            [
+                            g''16
+                            a'16
+                            c'16
+                            d'16
+                            ]
+                        }
+                        bf'8
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Eighth-note acciaccaturas:
+
+        >>> specifier = baca.Acciaccatura(durations=[(1, 8)])
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 8, acciaccatura=specifier),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [
+        ...     [0],
+        ...     [2, 10],
+        ...     [18, 16, 15],
+        ...     [20, 19, 9, 0],
+        ...     [2, 10, 18, 16, 15],
+        ...     [20, 19, 9, 0, 2, 10],
+        ... ]
+        >>> selections = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 3/4
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            d'8
+                        }
+                        bf'8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            fs''8
+                            [
+                            e''8
+                            ]
+                        }
+                        ef''8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            af''8
+                            [
+                            g''8
+                            a'8
+                            ]
+                        }
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            d'8
+                            [
+                            bf'8
+                            fs''8
+                            e''8
+                            ]
+                        }
+                        ef''8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            af''8
+                            [
+                            g''8
+                            a'8
+                            c'8
+                            d'8
+                            ]
+                        }
+                        bf'8
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        As many acciaccaturas as possible per collection:
+
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 8, acciaccatura=True),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [
+        ...     [0],
+        ...     [2, 10],
+        ...     [18, 16, 15],
+        ...     [20, 19, 9, 0],
+        ...     [2, 10, 18, 16, 15],
+        ...     [20, 19, 9, 0, 2, 10],
+        ... ]
+        >>> selections = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 3/4
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            d'16
+                        }
+                        bf'8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            fs''16
+                            [
+                            e''16
+                            ]
+                        }
+                        ef''8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            af''16
+                            [
+                            g''16
+                            a'16
+                            ]
+                        }
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            d'16
+                            [
+                            bf'16
+                            fs''16
+                            e''16
+                            ]
+                        }
+                        ef''8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            af''16
+                            [
+                            g''16
+                            a'16
+                            c'16
+                            d'16
+                            ]
+                        }
+                        bf'8
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        At most two acciaccaturas at the beginning of every collection:
+
+        >>> stack = baca.stack(
+        ...     baca.figure(
+        ...         [1],
+        ...         8,
+        ...         acciaccatura=baca.lmr(
+        ...             left_length=3,
+        ...             right_counts=[1],
+        ...             right_cyclic=True,
+        ...         ),
+        ...     ),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [
+        ...     [0],
+        ...     [2, 10],
+        ...     [18, 16, 15],
+        ...     [20, 19, 9, 0],
+        ...     [2, 10, 18, 16, 15],
+        ...     [20, 19, 9, 0, 2, 10],
+        ... ]
+        >>> selections = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 3/2
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            d'16
+                        }
+                        bf'8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            fs''16
+                            [
+                            e''16
+                            ]
+                        }
+                        ef''8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            af''16
+                            [
+                            g''16
+                            ]
+                        }
+                        a'8
+                        [
+                        c'8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            d'16
+                            [
+                            bf'16
+                            ]
+                        }
+                        fs''8
+                        [
+                        e''8
+                        ef''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            af''16
+                            [
+                            g''16
+                            ]
+                        }
+                        a'8
+                        [
+                        c'8
+                        d'8
+                        bf'8
+                        ]
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        At most two acciaccaturas at the end of every collection:
+
+        >>> stack = baca.stack(
+        ...     baca.figure(
+        ...         [1],
+        ...         8,
+        ...         acciaccatura=baca.lmr(
+        ...             right_length=3,
+        ...             left_counts=[1],
+        ...             left_cyclic=True,
+        ...         ),
+        ...     ),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [
+        ...     [0],
+        ...     [2, 10],
+        ...     [18, 16, 15],
+        ...     [20, 19, 9, 0],
+        ...     [2, 10, 18, 16, 15],
+        ...     [20, 19, 9, 0, 2, 10],
+        ... ]
+        >>> selections = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 3/2
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            d'16
+                        }
+                        bf'8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            fs''16
+                            [
+                            e''16
+                            ]
+                        }
+                        ef''8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        af''8
+                        [
+                        \acciaccatura {
+                            g''16
+                            [
+                            a'16
+                            ]
+                        }
+                        c'8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        d'8
+                        [
+                        bf'8
+                        \acciaccatura {
+                            fs''16
+                            [
+                            e''16
+                            ]
+                        }
+                        ef''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        af''8
+                        [
+                        g''8
+                        a'8
+                        \acciaccatura {
+                            c'16
+                            [
+                            d'16
+                            ]
+                        }
+                        bf'8
+                        ]
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        At most two acciaccaturas at the beginning of every collection and then at
+        most two acciaccaturas at the end of every collection:
+
+        >>> stack = baca.stack(
+        ...     baca.figure(
+        ...         [1],
+        ...         8,
+        ...         acciaccatura=baca.lmr(
+        ...             left_length=3,
+        ...             middle_counts=[1],
+        ...             middle_cyclic=True,
+        ...             right_length=3,
+        ...         ),
+        ...     ),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [
+        ...     [0],
+        ...     [2, 10],
+        ...     [18, 16, 15],
+        ...     [20, 19, 9, 0],
+        ...     [2, 10, 18, 16, 15],
+        ...     [20, 19, 9, 0, 2, 10],
+        ... ]
+        >>> selections = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 9/8
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            d'16
+                        }
+                        bf'8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            fs''16
+                            [
+                            e''16
+                            ]
+                        }
+                        ef''8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            af''16
+                            [
+                            g''16
+                            ]
+                        }
+                        a'8
+                        [
+                        c'8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            d'16
+                            [
+                            bf'16
+                            ]
+                        }
+                        fs''8
+                        [
+                        \acciaccatura {
+                            e''16
+                        }
+                        ef''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            af''16
+                            [
+                            g''16
+                            ]
+                        }
+                        a'8
+                        [
+                        \acciaccatura {
+                            c'16
+                            [
+                            d'16
+                            ]
+                        }
+                        bf'8
+                        ]
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        As many acciaccaturas as possible in the middle of every collection:
+
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 8, acciaccatura=baca.lmr(left_length=1)),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [
+        ...     [0],
+        ...     [2, 10],
+        ...     [18, 16, 15],
+        ...     [20, 19, 9, 0],
+        ...     [2, 10, 18, 16, 15],
+        ...     [20, 19, 9, 0, 2, 10],
+        ... ]
+        >>> selections = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 11/8
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        d'8
+                        [
+                        bf'8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        fs''8
+                        [
+                        \acciaccatura {
+                            e''16
+                        }
+                        ef''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        af''8
+                        [
+                        \acciaccatura {
+                            g''16
+                            [
+                            a'16
+                            ]
+                        }
+                        c'8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        d'8
+                        [
+                        \acciaccatura {
+                            bf'16
+                            [
+                            fs''16
+                            e''16
+                            ]
+                        }
+                        ef''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        af''8
+                        [
+                        \acciaccatura {
+                            g''16
+                            [
+                            a'16
+                            c'16
+                            d'16
+                            ]
+                        }
+                        bf'8
+                        ]
+                    }
+                }
+            >>
 
     """
 
-    ### CLASS VARIABLES ###
+    durations: typing.Sequence[abjad.DurationTyping] = ((1, 16),)
+    lmr: LMR = LMR()
 
-    __slots__ = ("_durations", "_lmr")
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        durations: typing.Sequence[abjad.DurationTyping] = [(1, 16)],
-        lmr: LMR = LMR(),
-    ) -> None:
-        durations_ = [abjad.Duration(_) for _ in durations]
-        self._durations = durations_
-        assert isinstance(lmr, LMR), repr(lmr)
-        self._lmr = lmr
-
-    ### SPECIAL METHODS ###
+    def __post_init__(self):
+        durations_ = [abjad.Duration(_) for _ in self.durations]
+        self.durations = durations_
+        assert isinstance(self.lmr, LMR), repr(self.lmr)
 
     def __call__(
         self, collection: typing.Union[list, abjad.Segment] = None
     ) -> typing.Tuple[typing.List[typing.Optional[abjad.BeforeGraceContainer]], list]:
-        """
-        Calls acciaccatura on ``collection``.
-        """
         prototype = (list, abjad.Segment)
         assert isinstance(collection, prototype), repr(collection)
         segment_parts = self.lmr(collection)
@@ -1005,746 +1524,8 @@ class Acciaccatura:
         assert isinstance(collection, list), repr(collection)
         return acciaccatura_containers, collection
 
-    def __eq__(self, argument) -> bool:
-        """
-        Compares ``durations``, ``lmr``.
-        """
-        if isinstance(argument, type(self)):
-            return self.durations == argument.durations and self.lmr == argument.lmr
-        return False
 
-    def __hash__(self) -> int:
-        """
-        Hashes acciaccatura.
-        """
-        return hash(self.__class__.__name__ + str(self))
-
-    def __repr__(self) -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.format.get_repr(self)
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def durations(self) -> typing.List[abjad.Duration]:
-        r"""
-        Gets durations.
-
-        ..  container:: example
-
-            Sixteenth-note acciaccaturas by default:
-
-            >>> stack = baca.stack(
-            ...     baca.figure([1], 8, acciaccatura=True),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [
-            ...     [0],
-            ...     [2, 10],
-            ...     [18, 16, 15],
-            ...     [20, 19, 9, 0],
-            ...     [2, 10, 18, 16, 15],
-            ...     [20, 19, 9, 0, 2, 10],
-            ... ]
-            >>> selection = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 3/4
-                            c'8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                d'16
-                            }
-                            bf'8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                fs''16
-                                [
-                                e''16
-                                ]
-                            }
-                            ef''8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                af''16
-                                [
-                                g''16
-                                a'16
-                                ]
-                            }
-                            c'8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                d'16
-                                [
-                                bf'16
-                                fs''16
-                                e''16
-                                ]
-                            }
-                            ef''8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                af''16
-                                [
-                                g''16
-                                a'16
-                                c'16
-                                d'16
-                                ]
-                            }
-                            bf'8
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Eighth-note acciaccaturas:
-
-            >>> specifier = baca.Acciaccatura(durations=[(1, 8)])
-            >>> stack = baca.stack(
-            ...     baca.figure([1], 8, acciaccatura=specifier),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [
-            ...     [0],
-            ...     [2, 10],
-            ...     [18, 16, 15],
-            ...     [20, 19, 9, 0],
-            ...     [2, 10, 18, 16, 15],
-            ...     [20, 19, 9, 0, 2, 10],
-            ... ]
-            >>> selections = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 3/4
-                            c'8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                d'8
-                            }
-                            bf'8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                fs''8
-                                [
-                                e''8
-                                ]
-                            }
-                            ef''8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                af''8
-                                [
-                                g''8
-                                a'8
-                                ]
-                            }
-                            c'8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                d'8
-                                [
-                                bf'8
-                                fs''8
-                                e''8
-                                ]
-                            }
-                            ef''8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                af''8
-                                [
-                                g''8
-                                a'8
-                                c'8
-                                d'8
-                                ]
-                            }
-                            bf'8
-                        }
-                    }
-                >>
-
-        """
-        return self._durations
-
-    @property
-    def lmr(self) -> LMR:
-        r"""
-        Gets LMR.
-
-        ..  container:: example
-
-            As many acciaccaturas as possible per collection:
-
-            >>> stack = baca.stack(
-            ...     baca.figure([1], 8, acciaccatura=True),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [
-            ...     [0],
-            ...     [2, 10],
-            ...     [18, 16, 15],
-            ...     [20, 19, 9, 0],
-            ...     [2, 10, 18, 16, 15],
-            ...     [20, 19, 9, 0, 2, 10],
-            ... ]
-            >>> selections = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 3/4
-                            c'8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                d'16
-                            }
-                            bf'8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                fs''16
-                                [
-                                e''16
-                                ]
-                            }
-                            ef''8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                af''16
-                                [
-                                g''16
-                                a'16
-                                ]
-                            }
-                            c'8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                d'16
-                                [
-                                bf'16
-                                fs''16
-                                e''16
-                                ]
-                            }
-                            ef''8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                af''16
-                                [
-                                g''16
-                                a'16
-                                c'16
-                                d'16
-                                ]
-                            }
-                            bf'8
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            At most two acciaccaturas at the beginning of every collection:
-
-            >>> stack = baca.stack(
-            ...     baca.figure(
-            ...         [1],
-            ...         8,
-            ...         acciaccatura=baca.lmr(
-            ...             left_length=3,
-            ...             right_counts=[1],
-            ...             right_cyclic=True,
-            ...         ),
-            ...     ),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [
-            ...     [0],
-            ...     [2, 10],
-            ...     [18, 16, 15],
-            ...     [20, 19, 9, 0],
-            ...     [2, 10, 18, 16, 15],
-            ...     [20, 19, 9, 0, 2, 10],
-            ... ]
-            >>> selections = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 3/2
-                            c'8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                d'16
-                            }
-                            bf'8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                fs''16
-                                [
-                                e''16
-                                ]
-                            }
-                            ef''8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                af''16
-                                [
-                                g''16
-                                ]
-                            }
-                            a'8
-                            [
-                            c'8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                d'16
-                                [
-                                bf'16
-                                ]
-                            }
-                            fs''8
-                            [
-                            e''8
-                            ef''8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                af''16
-                                [
-                                g''16
-                                ]
-                            }
-                            a'8
-                            [
-                            c'8
-                            d'8
-                            bf'8
-                            ]
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            At most two acciaccaturas at the end of every collection:
-
-            >>> stack = baca.stack(
-            ...     baca.figure(
-            ...         [1],
-            ...         8,
-            ...         acciaccatura=baca.lmr(
-            ...             right_length=3,
-            ...             left_counts=[1],
-            ...             left_cyclic=True,
-            ...         ),
-            ...     ),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [
-            ...     [0],
-            ...     [2, 10],
-            ...     [18, 16, 15],
-            ...     [20, 19, 9, 0],
-            ...     [2, 10, 18, 16, 15],
-            ...     [20, 19, 9, 0, 2, 10],
-            ... ]
-            >>> selections = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 3/2
-                            c'8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                d'16
-                            }
-                            bf'8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                fs''16
-                                [
-                                e''16
-                                ]
-                            }
-                            ef''8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            af''8
-                            [
-                            \acciaccatura {
-                                g''16
-                                [
-                                a'16
-                                ]
-                            }
-                            c'8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            d'8
-                            [
-                            bf'8
-                            \acciaccatura {
-                                fs''16
-                                [
-                                e''16
-                                ]
-                            }
-                            ef''8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            af''8
-                            [
-                            g''8
-                            a'8
-                            \acciaccatura {
-                                c'16
-                                [
-                                d'16
-                                ]
-                            }
-                            bf'8
-                            ]
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            At most two acciaccaturas at the beginning of every collection and then at
-            most two acciaccaturas at the end of every collection:
-
-            >>> stack = baca.stack(
-            ...     baca.figure(
-            ...         [1],
-            ...         8,
-            ...         acciaccatura=baca.lmr(
-            ...             left_length=3,
-            ...             middle_counts=[1],
-            ...             middle_cyclic=True,
-            ...             right_length=3,
-            ...         ),
-            ...     ),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [
-            ...     [0],
-            ...     [2, 10],
-            ...     [18, 16, 15],
-            ...     [20, 19, 9, 0],
-            ...     [2, 10, 18, 16, 15],
-            ...     [20, 19, 9, 0, 2, 10],
-            ... ]
-            >>> selections = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 9/8
-                            c'8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                d'16
-                            }
-                            bf'8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                fs''16
-                                [
-                                e''16
-                                ]
-                            }
-                            ef''8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                af''16
-                                [
-                                g''16
-                                ]
-                            }
-                            a'8
-                            [
-                            c'8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                d'16
-                                [
-                                bf'16
-                                ]
-                            }
-                            fs''8
-                            [
-                            \acciaccatura {
-                                e''16
-                            }
-                            ef''8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                af''16
-                                [
-                                g''16
-                                ]
-                            }
-                            a'8
-                            [
-                            \acciaccatura {
-                                c'16
-                                [
-                                d'16
-                                ]
-                            }
-                            bf'8
-                            ]
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            As many acciaccaturas as possible in the middle of every collection:
-
-            >>> stack = baca.stack(
-            ...     baca.figure([1], 8, acciaccatura=baca.lmr(left_length=1)),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [
-            ...     [0],
-            ...     [2, 10],
-            ...     [18, 16, 15],
-            ...     [20, 19, 9, 0],
-            ...     [2, 10, 18, 16, 15],
-            ...     [20, 19, 9, 0, 2, 10],
-            ... ]
-            >>> selections = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 11/8
-                            c'8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            d'8
-                            [
-                            bf'8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            fs''8
-                            [
-                            \acciaccatura {
-                                e''16
-                            }
-                            ef''8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            af''8
-                            [
-                            \acciaccatura {
-                                g''16
-                                [
-                                a'16
-                                ]
-                            }
-                            c'8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            d'8
-                            [
-                            \acciaccatura {
-                                bf'16
-                                [
-                                fs''16
-                                e''16
-                                ]
-                            }
-                            ef''8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            af''8
-                            [
-                            \acciaccatura {
-                                g''16
-                                [
-                                a'16
-                                c'16
-                                d'16
-                                ]
-                            }
-                            bf'8
-                            ]
-                        }
-                    }
-                >>
-
-        """
-        return self._lmr
-
-
+@dataclasses.dataclass(slots=True)
 class Anchor:
     """
     Anchor.
@@ -1752,113 +1533,31 @@ class Anchor:
     ..  container:: example
 
         >>> baca.Anchor()
-        Anchor()
+        Anchor(figure_name=None, local_selector=None, remote_selector=None, remote_voice_name=None, use_remote_stop_offset=None)
 
+    ``use_remote_stop_offset`` is true when contribution anchors to remote selection stop
+    offset; otherwise anchors to remote selection start offset.
     """
 
-    ### CLASS VARIABLES ###
+    figure_name: str = None
+    local_selector: typing.Any = None
+    remote_selector: typing.Any = None
+    remote_voice_name: str = None
+    use_remote_stop_offset: bool = None
 
-    __slots__ = (
-        "_figure_name",
-        "_local_selector",
-        "_remote_selector",
-        "_remote_voice_name",
-        "_use_remote_stop_offset",
-    )
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        figure_name: str = None,
-        local_selector=None,
-        remote_selector=None,
-        remote_voice_name: str = None,
-        use_remote_stop_offset: bool = None,
-    ) -> None:
-        if figure_name is not None:
-            assert isinstance(figure_name, str), repr(figure_name)
-        self._figure_name = figure_name
-        if local_selector is not None and not callable(local_selector):
-            raise TypeError(f"must be callable: {local_selector!r}.")
-        self._local_selector = local_selector
-        if remote_selector is not None and not callable(remote_selector):
-            raise TypeError(f"must be callable: {remote_selector!r}.")
-        self._remote_selector = remote_selector
-        if remote_voice_name is not None and not isinstance(remote_voice_name, str):
-            raise TypeError(f"must be string: {remote_voice_name!r}.")
-        self._remote_voice_name = remote_voice_name
-        if use_remote_stop_offset is not None:
-            use_remote_stop_offset = bool(use_remote_stop_offset)
-        self._use_remote_stop_offset = use_remote_stop_offset
-
-    ### SPECIAL METHODS ###
-
-    def __eq__(self, argument) -> bool:
-        """
-        Compares all 5 input arguments.
-        """
-        if isinstance(argument, type(self)):
-            return (
-                self.figure_name == argument.figure_name
-                and self.local_selector == argument.local_selector
-                and self.remote_selector == argument.remote_selector
-                and self.remote_voice_name == argument.remote_voice_name
-                and self.use_remote_stop_offset == argument.use_remote_stop_offset
-            )
-        return False
-
-    def __hash__(self) -> int:
-        """
-        Hashes object.
-        """
-        return hash(str(self))
-
-    def __repr__(self) -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.format.get_repr(self)
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def figure_name(self) -> typing.Optional[str]:
-        """
-        Gets figure name.
-        """
-        return self._figure_name
-
-    @property
-    def local_selector(self):
-        """
-        Gets local selector.
-        """
-        return self._local_selector
-
-    @property
-    def remote_selector(self):
-        """
-        Gets remote selector.
-        """
-        return self._remote_selector
-
-    @property
-    def remote_voice_name(self) -> typing.Optional[str]:
-        """
-        Gets remote voice name.
-        """
-        return self._remote_voice_name
-
-    @property
-    def use_remote_stop_offset(self) -> typing.Optional[bool]:
-        """
-        Is true when contribution anchors to remote selection stop offset.
-
-        Otherwise anchors to remote selection start offset.
-        """
-        return self._use_remote_stop_offset
+    def __post_init__(self):
+        if self.figure_name is not None:
+            assert isinstance(self.figure_name, str), repr(self.figure_name)
+        if self.local_selector is not None and not callable(self.local_selector):
+            raise TypeError(f"must be callable: {self.local_selector!r}.")
+        if self.remote_selector is not None and not callable(self.remote_selector):
+            raise TypeError(f"must be callable: {self.remote_selector!r}.")
+        if self.remote_voice_name is not None and not isinstance(
+            self.remote_voice_name, str
+        ):
+            raise TypeError(f"must be string: {self.remote_voice_name!r}.")
+        if self.use_remote_stop_offset is not None:
+            self.use_remote_stop_offset = bool(self.use_remote_stop_offset)
 
 
 class Coat:
@@ -3033,7 +2732,7 @@ class FigureAccumulator:
         selections: typing.Union[list, abjad.Selection]
         if anchor is not None:
             voice_name_ = self._abbreviation(anchor.remote_voice_name)
-            anchor._remote_voice_name = voice_name_
+            anchor.remote_voice_name = voice_name_
         if isinstance(collections, str):
             tuplet = abjad.Tuplet((1, 1), collections, hide=True)
             selections = [abjad.select(tuplet)]
@@ -3329,49 +3028,34 @@ class FigureAccumulator:
             )
 
 
+@dataclasses.dataclass(slots=True)
 class Contribution:
     """
     Contribution.
     """
 
-    ### CLASS VARIABLES ###
+    voice_to_selection: typing.Dict[str, abjad.Selection]
+    anchor: Anchor = None
+    figure_name: str = None
+    hide_time_signature: bool = None
+    time_signature: abjad.TimeSignature = None
 
-    __slots__ = (
-        "_anchor",
-        "_figure_name",
-        "_hide_time_signature",
-        "_tag",
-        "_time_signature",
-        "_voice_to_selection",
-    )
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        voice_to_selection: typing.Dict[str, abjad.Selection],
-        *,
-        anchor: Anchor = None,
-        figure_name: str = None,
-        hide_time_signature: bool = None,
-        time_signature: abjad.TimeSignature = None,
-    ):
-        assert isinstance(voice_to_selection, dict), repr(voice_to_selection)
-        self._voice_to_selection = voice_to_selection
-        if anchor is not None and not isinstance(anchor, Anchor):
-            raise TypeError(f"anchor only: {anchor!r}.")
-        self._anchor = anchor
-        if figure_name is not None:
-            figure_name = str(figure_name)
-        self._figure_name = figure_name
-        if hide_time_signature is not None:
-            hide_time_signature = bool(hide_time_signature)
-        self._hide_time_signature = hide_time_signature
-        if time_signature is not None:
-            assert isinstance(time_signature, abjad.TimeSignature)
-        self._time_signature = time_signature
-
-    ### SPECIAL METHODS ###
+    def __post_init__(self):
+        assert isinstance(self.voice_to_selection, dict), repr(self.voice_to_selection)
+        if self.anchor is not None and not isinstance(self.anchor, Anchor):
+            raise TypeError(f"anchor only: {self.anchor!r}.")
+        if self.figure_name is not None:
+            self.figure_name = str(self.figure_name)
+        if self.hide_time_signature is not None:
+            self.hide_time_signature = bool(self.hide_time_signature)
+        if self.time_signature is not None:
+            assert isinstance(self.time_signature, abjad.TimeSignature)
+        if self.voice_to_selection is not None:
+            assert isinstance(self.voice_to_selection, dict), repr(
+                self.voice_to_selection
+            )
+            for value in self.voice_to_selection.values():
+                assert isinstance(value, abjad.Selection), repr(value)
 
     def __getitem__(self, voice_name) -> abjad.Selection:
         """
@@ -3386,56 +3070,8 @@ class Contribution:
         for voice_name in self.voice_to_selection:
             yield voice_name
 
-    def __repr__(self) -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.format.get_repr(self)
 
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def anchor(self) -> typing.Optional[Anchor]:
-        """
-        Gets anchor.
-        """
-        return self._anchor
-
-    @property
-    def figure_name(self) -> typing.Optional[str]:
-        """
-        Gets figure name.
-        """
-        return self._figure_name
-
-    @property
-    def hide_time_signature(self) -> typing.Optional[bool]:
-        """
-        Is true when contribution hides time signature.
-        """
-        return self._hide_time_signature
-
-    @property
-    def time_signature(self) -> typing.Optional[abjad.TimeSignature]:
-        """
-        Gets time signature.
-        """
-        return self._time_signature
-
-    @property
-    def voice_to_selection(self) -> typing.Dict[str, abjad.Selection]:
-        """
-        Gets voice-to-selection dictionary.
-        """
-        if self._voice_to_selection is not None:
-            assert isinstance(self._voice_to_selection, dict), repr(
-                self.voice_to_selection
-            )
-            for value in self._voice_to_selection.values():
-                assert isinstance(value, abjad.Selection), repr(value)
-        return self._voice_to_selection
-
-
+@dataclasses.dataclass(slots=True)
 class Nest:
     r"""
     Nest.
@@ -3521,119 +3157,103 @@ class Nest:
                 }
             >>
 
-    """
+    ..  container:: example
 
-    ### CLASS VARIABLES ###
+        With rest affixes:
 
-    __slots__ = ("_lmr", "_treatments")
+        >>> affix = baca.rests_around([2], [3])
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 16, affix=affix),
+        ...     rmakers.beam_groups(),
+        ...     baca.nest("+1/16"),
+        ... )
 
-    ### INITIALIZER ###
+        >>> collections = [
+        ...     [0, 2, 10, 18],
+        ...     [16, 15, 23],
+        ...     [19, 13, 9, 8],
+        ... ]
+        >>> selection = stack(collections)
 
-    def __init__(
-        self,
-        treatments: typing.Sequence[typing.Union[int, str]],
-        *,
-        lmr: LMR = None,
-    ) -> None:
-        assert isinstance(treatments, (list, tuple))
-        for treatment in treatments:
-            assert _is_treatment(treatment), repr(treatment)
-        self._treatments = treatments
-        if lmr is not None:
-            assert isinstance(lmr, LMR), repr(lmr)
-        self._lmr = lmr
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-    ### SPECIAL METHODS ###
+        ..  docs::
 
-    def __call__(self, selection: abjad.Selection) -> abjad.Selection:
-        r"""
-        Calls nesting command on ``selection``.
-
-        ..  container:: example
-
-            With rest affixes:
-
-            >>> affix = baca.rests_around([2], [3])
-            >>> stack = baca.stack(
-            ...     baca.figure([1], 16, affix=affix),
-            ...     rmakers.beam_groups(),
-            ...     baca.nest("+1/16"),
-            ... )
-
-            >>> collections = [
-            ...     [0, 2, 10, 18],
-            ...     [16, 15, 23],
-            ...     [19, 13, 9, 8],
-            ... ]
-            >>> selection = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 17/16
                     {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 17/16
+                        \scaleDurations #'(1 . 1)
                         {
-                            \scaleDurations #'(1 . 1)
-                            {
-                                \time 17/16
-                                r8
-                                \set stemLeftBeamCount = 0
-                                \set stemRightBeamCount = 2
-                                c'16
-                                [
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                d'16
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                bf'16
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 1
-                                fs''16
-                            }
-                            \scaleDurations #'(1 . 1)
-                            {
-                                \set stemLeftBeamCount = 1
-                                \set stemRightBeamCount = 2
-                                e''16
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                ef''16
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 1
-                                b''16
-                            }
-                            \scaleDurations #'(1 . 1)
-                            {
-                                \set stemLeftBeamCount = 1
-                                \set stemRightBeamCount = 2
-                                g''16
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                cs''16
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                a'16
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 0
-                                af'16
-                                ]
-                                r8.
-                            }
+                            \time 17/16
+                            r8
+                            \set stemLeftBeamCount = 0
+                            \set stemRightBeamCount = 2
+                            c'16
+                            [
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            d'16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            bf'16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
+                            fs''16
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
+                            e''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            ef''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
+                            b''16
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
+                            g''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            cs''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            a'16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 0
+                            af'16
+                            ]
+                            r8.
                         }
                     }
-                >>
+                }
+            >>
 
-        """
+    """
+
+    treatments: typing.Sequence[typing.Union[int, str]]
+    lmr: LMR = None
+
+    def __post_init__(self):
+        assert isinstance(self.treatments, (list, tuple))
+        for treatment in self.treatments:
+            assert _is_treatment(treatment), repr(treatment)
+        if self.lmr is not None:
+            assert isinstance(self.lmr, LMR), repr(self.lmr)
+
+    def __call__(self, selection: abjad.Selection) -> abjad.Selection:
         treatments = self._get_treatments()
         assert treatments is not None
         tuplets = []
@@ -3684,49 +3304,12 @@ class Nest:
         selection = abjad.select(tuplets)
         return selection
 
-    def __eq__(self, argument) -> bool:
-        """
-        Compares ``treatments``, ``lmr``.
-        """
-        if isinstance(argument, type(self)):
-            return self.treatments == argument.treatments and self.lmr == argument.lmr
-        return False
-
-    def __hash__(self) -> int:
-        """
-        Hashes object.
-        """
-        return hash(str(self))
-
-    def __repr__(self) -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.format.get_repr(self)
-
-    ### PRIVATE METHODS ###
-
     def _get_treatments(self):
         if self.treatments:
             return abjad.CyclicTuple(self.treatments)
 
-    ### PUBLIC PROPERTIES ###
 
-    @property
-    def lmr(self) -> typing.Optional[LMR]:
-        """
-        Gets LMR.
-        """
-        return self._lmr
-
-    @property
-    def treatments(self) -> typing.Optional[typing.Sequence]:
-        """
-        Gets treatments.
-        """
-        return self._treatments
-
-
+@dataclasses.dataclass(slots=True)
 class RestAffix:
     r"""
     Rest affix.
@@ -3734,38 +3317,354 @@ class RestAffix:
     ..  container:: example
 
         >>> baca.RestAffix()
-        RestAffix()
+        RestAffix(pattern=None, prefix=None, skips_instead_of_rests=None, suffix=None)
+
+    ..  container:: example
+
+        Affixes rests to complete output when pattern is none:
+
+        >>> affix = baca.RestAffix(
+        ...     prefix=[1],
+        ...     suffix=[2],
+        ... )
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 16, affix=affix, treatments=[1]),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> selection = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 5/4
+                    {
+                        \time 15/16
+                        r16
+                        c'16
+                        [
+                        d'16
+                        bf'16
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 6/5
+                    {
+                        fs''16
+                        [
+                        e''16
+                        ef''16
+                        af''16
+                        g''16
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 4/3
+                    {
+                        a'16
+                        r8
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Affixes rest to complete output when pattern is none:
+
+        >>> affix = baca.RestAffix(
+        ...     prefix=[1],
+        ...     suffix=[2],
+        ... )
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 16, affix=affix, treatments=[1]),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [[18, 16, 15, 20, 19]]
+        >>> selection = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/8
+                    {
+                        \time 9/16
+                        r16
+                        fs''16
+                        [
+                        e''16
+                        ef''16
+                        af''16
+                        g''16
+                        ]
+                        r8
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Affixes rests to first and last collections only:
+
+        >>> affix = baca.RestAffix(
+        ...     pattern=abjad.Pattern(indices=[0, -1]),
+        ...     prefix=[1],
+        ...     suffix=[2],
+        ... )
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 16, affix=affix, treatments=[1]),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> selection = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 7/6
+                    {
+                        \time 9/8
+                        r16
+                        c'16
+                        [
+                        d'16
+                        bf'16
+                        ]
+                        r8
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 6/5
+                    {
+                        fs''16
+                        [
+                        e''16
+                        ef''16
+                        af''16
+                        g''16
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 5/4
+                    {
+                        r16
+                        a'16
+                        r8
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Affixes rests to every collection:
+
+        >>> affix = baca.RestAffix(
+        ...     pattern=abjad.index_all(),
+        ...     prefix=[1],
+        ...     suffix=[2],
+        ... )
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 16, affix=affix, treatments=[1]),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> selection = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 7/6
+                    {
+                        \time 21/16
+                        r16
+                        c'16
+                        [
+                        d'16
+                        bf'16
+                        ]
+                        r8
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/8
+                    {
+                        r16
+                        fs''16
+                        [
+                        e''16
+                        ef''16
+                        af''16
+                        g''16
+                        ]
+                        r8
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 5/4
+                    {
+                        r16
+                        a'16
+                        r8
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        >>> affix = baca.RestAffix(prefix=[3])
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 16, affix=affix),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> selection = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 3/4
+                        r8.
+                        c'16
+                        [
+                        d'16
+                        bf'16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        fs''16
+                        [
+                        e''16
+                        ef''16
+                        af''16
+                        g''16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        a'16
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        >>> affix = baca.RestAffix(suffix=[3])
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 16, affix=affix),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> selection = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 3/4
+                        c'16
+                        [
+                        d'16
+                        bf'16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        fs''16
+                        [
+                        e''16
+                        ef''16
+                        af''16
+                        g''16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        a'16
+                        r8.
+                    }
+                }
+            >>
 
     """
 
-    ### CLASS VARIABLES ###
+    pattern: abjad.Pattern = None
+    prefix: typing.Sequence[int] = None
+    skips_instead_of_rests: bool = None
+    suffix: typing.Sequence[int] = None
 
-    __slots__ = ("_pattern", "_prefix", "_skips_instead_of_rests", "_suffix")
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        pattern: abjad.Pattern = None,
-        prefix: typing.Sequence[int] = None,
-        skips_instead_of_rests: bool = None,
-        suffix: typing.Sequence[int] = None,
-    ):
-        if pattern is not None and not isinstance(pattern, abjad.Pattern):
-            raise TypeError(f"pattern or none: {pattern!r}.")
-        self._pattern = pattern
-        if prefix is not None:
-            assert all(isinstance(_, int) for _ in prefix)
-        self._prefix = prefix
-        if skips_instead_of_rests is not None:
-            skips_instead_of_rests = bool(skips_instead_of_rests)
-        self._skips_instead_of_rests = skips_instead_of_rests
-        if suffix is not None:
-            assert all(isinstance(_, int) for _ in suffix)
-        self._suffix = suffix
-
-    ### SPECIAL METHODS ###
+    def __post_init__(self):
+        if self.pattern is not None and not isinstance(self.pattern, abjad.Pattern):
+            raise TypeError(f"pattern or none: {self.pattern!r}.")
+        if self.prefix is not None:
+            assert all(isinstance(_, int) for _ in self.prefix)
+        if self.skips_instead_of_rests is not None:
+            self.skips_instead_of_rests = bool(self.skips_instead_of_rests)
+        if self.suffix is not None:
+            assert all(isinstance(_, int) for _ in self.suffix)
 
     def __call__(
         self, collection_index: int, total_collections: int
@@ -3773,9 +3672,6 @@ class RestAffix:
         typing.Optional[abjad.IntegerSequence],
         typing.Optional[abjad.IntegerSequence],
     ]:
-        """
-        Calls rest affix.
-        """
         if self.pattern is None:
             if collection_index == 0 and collection_index == total_collections - 1:
                 return self.prefix, self.suffix
@@ -3786,394 +3682,6 @@ class RestAffix:
         elif self.pattern.matches_index(collection_index, total_collections):
             return self.prefix, self.suffix
         return None, None
-
-    def __eq__(self, argument) -> bool:
-        """
-        Compares all 4 input parameters.
-        """
-        if isinstance(argument, type(self)):
-            return (
-                self.pattern == argument.pattern
-                and self.prefix == argument.prefix
-                and self.skips_instead_of_rests == argument.skips_instead_of_rests
-                and self.suffix == argument.suffix
-            )
-        return False
-
-    def __hash__(self) -> int:
-        """
-        Hashes rest affix.
-        """
-        return hash(self.__class__.__name__ + str(self))
-
-    def __repr__(self) -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.format.get_repr(self)
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def pattern(self) -> typing.Optional[abjad.Pattern]:
-        r"""
-        Gets pattern.
-
-        ..  container:: example
-
-            Affixes rests to complete output when pattern is none:
-
-            >>> affix = baca.RestAffix(
-            ...     prefix=[1],
-            ...     suffix=[2],
-            ... )
-            >>> stack = baca.stack(
-            ...     baca.figure([1], 16, affix=affix, treatments=[1]),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selection = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/4
-                        {
-                            \time 15/16
-                            r16
-                            c'16
-                            [
-                            d'16
-                            bf'16
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 6/5
-                        {
-                            fs''16
-                            [
-                            e''16
-                            ef''16
-                            af''16
-                            g''16
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 4/3
-                        {
-                            a'16
-                            r8
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Affixes rest to complete output when pattern is none:
-
-            >>> affix = baca.RestAffix(
-            ...     prefix=[1],
-            ...     suffix=[2],
-            ... )
-            >>> stack = baca.stack(
-            ...     baca.figure([1], 16, affix=affix, treatments=[1]),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [[18, 16, 15, 20, 19]]
-            >>> selection = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/8
-                        {
-                            \time 9/16
-                            r16
-                            fs''16
-                            [
-                            e''16
-                            ef''16
-                            af''16
-                            g''16
-                            ]
-                            r8
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Affixes rests to first and last collections only:
-
-            >>> affix = baca.RestAffix(
-            ...     pattern=abjad.Pattern(indices=[0, -1]),
-            ...     prefix=[1],
-            ...     suffix=[2],
-            ... )
-            >>> stack = baca.stack(
-            ...     baca.figure([1], 16, affix=affix, treatments=[1]),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selection = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/6
-                        {
-                            \time 9/8
-                            r16
-                            c'16
-                            [
-                            d'16
-                            bf'16
-                            ]
-                            r8
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 6/5
-                        {
-                            fs''16
-                            [
-                            e''16
-                            ef''16
-                            af''16
-                            g''16
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/4
-                        {
-                            r16
-                            a'16
-                            r8
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Affixes rests to every collection:
-
-            >>> affix = baca.RestAffix(
-            ...     pattern=abjad.index_all(),
-            ...     prefix=[1],
-            ...     suffix=[2],
-            ... )
-            >>> stack = baca.stack(
-            ...     baca.figure([1], 16, affix=affix, treatments=[1]),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selection = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/6
-                        {
-                            \time 21/16
-                            r16
-                            c'16
-                            [
-                            d'16
-                            bf'16
-                            ]
-                            r8
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/8
-                        {
-                            r16
-                            fs''16
-                            [
-                            e''16
-                            ef''16
-                            af''16
-                            g''16
-                            ]
-                            r8
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/4
-                        {
-                            r16
-                            a'16
-                            r8
-                        }
-                    }
-                >>
-
-        """
-        return self._pattern
-
-    @property
-    def prefix(self) -> typing.Optional[abjad.IntegerSequence]:
-        r"""
-        Gets prefix.
-
-        ..  container:: example
-
-            >>> affix = baca.RestAffix(prefix=[3])
-            >>> stack = baca.stack(
-            ...     baca.figure([1], 16, affix=affix),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selection = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 3/4
-                            r8.
-                            c'16
-                            [
-                            d'16
-                            bf'16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            fs''16
-                            [
-                            e''16
-                            ef''16
-                            af''16
-                            g''16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            a'16
-                        }
-                    }
-                >>
-
-        """
-        return self._prefix
-
-    @property
-    def skips_instead_of_rests(self) -> typing.Optional[bool]:
-        """
-        Is true when command affixes skips instead of rests.
-        """
-        return self._skips_instead_of_rests
-
-    @property
-    def suffix(self) -> typing.Optional[abjad.IntegerSequence]:
-        r"""
-        Gets suffix.
-
-        ..  container:: example
-
-            >>> affix = baca.RestAffix(suffix=[3])
-            >>> stack = baca.stack(
-            ...     baca.figure([1], 16, affix=affix),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selection = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 3/4
-                            c'16
-                            [
-                            d'16
-                            bf'16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            fs''16
-                            [
-                            e''16
-                            ef''16
-                            af''16
-                            g''16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            a'16
-                            r8.
-                        }
-                    }
-                >>
-
-        """
-        return self._suffix
 
 
 def _add_rest_affixes(
@@ -4276,69 +3784,2126 @@ def _make_tuplet_with_extra_count(leaf_selection, extra_count, denominator):
     return tuplet
 
 
+@dataclasses.dataclass(slots=True)
 class FigureMaker:
-    """
-    figure-maker.
+    r"""
+    Figure-maker.
+
+    ..  container:: example
+
+        Without state manifest:
+
+        >>> stack = baca.stack(
+        ...     baca.figure([1, 1, 2], 16),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> selections = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 3/4
+                        c'16
+                        [
+                        d'16
+                        bf'8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        fs''16
+                        [
+                        e''16
+                        ef''8
+                        af''16
+                        g''16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        a'8
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        With state manifest:
+
+        >>> stack = baca.stack(
+        ...     baca.figure([1, 1, 2], 16),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> state = {"_next_attack": 2}
+        >>> selections = stack(collections, state=state)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 3/4
+                        c'8
+                        [
+                        d'16
+                        bf'16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        fs''8
+                        [
+                        e''16
+                        ef''16
+                        af''8
+                        g''16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        a'16
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        As many acciaccaturas as possible per collection:
+
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 8, acciaccatura=True),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [
+        ...     [0],
+        ...     [2, 10],
+        ...     [18, 16, 15],
+        ...     [20, 19, 9, 0],
+        ...     [2, 10, 18, 16, 15],
+        ...     [20, 19, 9, 0, 2, 10],
+        ... ]
+        >>> selections = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 3/4
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            d'16
+                        }
+                        bf'8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            fs''16
+                            [
+                            e''16
+                            ]
+                        }
+                        ef''8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            af''16
+                            [
+                            g''16
+                            a'16
+                            ]
+                        }
+                        c'8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            d'16
+                            [
+                            bf'16
+                            fs''16
+                            e''16
+                            ]
+                        }
+                        ef''8
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            af''16
+                            [
+                            g''16
+                            a'16
+                            c'16
+                            d'16
+                            ]
+                        }
+                        bf'8
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Graced quarters:
+
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 4, acciaccatura=True),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [
+        ...     [0],
+        ...     [2, 10],
+        ...     [18, 16, 15],
+        ...     [20, 19, 9, 0],
+        ...     [2, 10, 18, 16, 15],
+        ...     [20, 19, 9, 0, 2, 10],
+        ... ]
+        >>> selections = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 3/2
+                        c'4
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            d'16
+                        }
+                        bf'4
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            fs''16
+                            [
+                            e''16
+                            ]
+                        }
+                        ef''4
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            af''16
+                            [
+                            g''16
+                            a'16
+                            ]
+                        }
+                        c'4
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            d'16
+                            [
+                            bf'16
+                            fs''16
+                            e''16
+                            ]
+                        }
+                        ef''4
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \acciaccatura {
+                            af''16
+                            [
+                            g''16
+                            a'16
+                            c'16
+                            d'16
+                            ]
+                        }
+                        bf'4
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Spells nonassignable durations with monontonically decreasing durations by
+        default:
+
+        >>> stack = baca.stack(
+        ...     baca.figure([4, 4, 5], 32),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> selections = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 39/32
+                        c'8
+                        [
+                        d'8
+                        bf'8
+                        ~
+                        bf'32
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        fs''8
+                        [
+                        e''8
+                        ef''8
+                        ~
+                        ef''32
+                        af''8
+                        g''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        a'8
+                        ~
+                        [
+                        a'32
+                        ]
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Spells nonassignable durations with monontonically increasing durations:
+
+        >>> stack = baca.stack(
+        ...     baca.figure(
+        ...         [4, 4, 5],
+        ...         32,
+        ...         spelling=rmakers.Spelling(increase_monotonic=True),
+        ...     ),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> selections = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 39/32
+                        c'8
+                        [
+                        d'8
+                        bf'32
+                        ~
+                        bf'8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        fs''8
+                        [
+                        e''8
+                        ef''32
+                        ~
+                        ef''8
+                        af''8
+                        g''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        a'32
+                        ~
+                        [
+                        a'8
+                        ]
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Sixteenths and eighths:
+
+        >>> stack = baca.stack(
+        ...     baca.figure([1, 1, 2], 16),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [[0, 2, 10, 8]]
+        >>> selections = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 5/16
+                        c'16
+                        [
+                        d'16
+                        bf'8
+                        af'16
+                        ]
+                    }
+                }
+            >>
+
+        >>> collections = [[18, 16, 15, 20, 19]]
+        >>> selections = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 3/8
+                        fs''16
+                        [
+                        e''16
+                        ef''8
+                        af''16
+                        g''16
+                        ]
+                    }
+                }
+            >>
+
+        >>> collections = [[9]]
+        >>> selections = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 1/16
+                        a'16
+                    }
+                }
+            >>
+
+        >>> collections = [[0, 2, 10, 8], [18, 16, 15, 20, 19], [9]]
+        >>> selections = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 13/16
+                        c'16
+                        [
+                        d'16
+                        bf'8
+                        af'16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        fs''16
+                        [
+                        e''8
+                        ef''16
+                        af''16
+                        g''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        a'16
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Works with rests:
+
+        >>> stack = baca.stack(
+        ...     baca.figure([3, -1, 2, 2], 16),
+        ...     rmakers.beam(
+        ...         beam_rests=True,
+        ...         stemlet_length=1.5,
+        ...     ),
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> selections = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 3/2
+                        \override Staff.Stem.stemlet-length = 1.5
+                        c'8.
+                        [
+                        r16
+                        d'8
+                        \revert Staff.Stem.stemlet-length
+                        bf'8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \override Staff.Stem.stemlet-length = 1.5
+                        fs''8.
+                        [
+                        r16
+                        e''8
+                        ef''8
+                        af''8.
+                        r16
+                        \revert Staff.Stem.stemlet-length
+                        g''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        a'8
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Works with large counts:
+
+        >>> stack = baca.stack(
+        ...     baca.figure([29], 64),
+        ...     rmakers.beam(),
+        ...     rmakers.force_repeat_tie(),
+        ... )
+
+        >>> collections = [[0, 2]]
+        >>> selections = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 29/32
+                        c'4..
+                        c'64
+                        \repeatTie
+                        d'4..
+                        d'64
+                        \repeatTie
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        One extra count per division:
+
+        >>> stack = baca.stack(
+        ...     baca.figure([1, 1, 2], 16, treatments=[1]),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> selections = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 5/4
+                    {
+                        \time 15/16
+                        c'16
+                        [
+                        d'16
+                        bf'8
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 7/6
+                    {
+                        fs''16
+                        [
+                        e''16
+                        ef''8
+                        af''16
+                        g''16
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 3/2
+                    {
+                        a'8
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        One missing count per division:
+
+        >>> stack = baca.stack(
+        ...     baca.figure([1, 1, 2], 16, treatments=[-1]),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> selections = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 3/4
+                    {
+                        \time 5/8
+                        c'16
+                        [
+                        d'16
+                        bf'8
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 5/6
+                    {
+                        fs''16
+                        [
+                        e''16
+                        ef''8
+                        af''16
+                        g''16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        a'8
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Accelerandi:
+
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 16, treatments=["accel"]),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [
+        ...     [0],
+        ...     [2, 10],
+        ...     [18, 16, 15],
+        ...     [20, 19, 9, 0],
+        ...     [2, 10, 18, 16, 15],
+        ...     [20, 19, 9, 0, 2, 10],
+        ... ]
+        >>> selections = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 21/16
+                        c'16
+                    }
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
+                        {
+                            \context Score = "Score"
+                            \with
+                            {
+                                \override SpacingSpanner.spacing-increment = 0.5
+                                proportionalNotationDuration = ##f
+                            }
+                            <<
+                                \context RhythmicStaff = "Rhythmic_Staff"
+                                \with
+                                {
+                                    \remove Time_signature_engraver
+                                    \remove Staff_symbol_engraver
+                                    \override Stem.direction = #up
+                                    \override Stem.length = 5
+                                    \override TupletBracket.bracket-visibility = ##t
+                                    \override TupletBracket.direction = #up
+                                    \override TupletBracket.minimum-length = 4
+                                    \override TupletBracket.padding = 1.25
+                                    \override TupletBracket.shorten-pair = #'(-1 . -1.5)
+                                    \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
+                                    \override TupletNumber.font-size = 0
+                                    \override TupletNumber.text = #tuplet-number::calc-fraction-text
+                                    tupletFullLength = ##t
+                                }
+                                {
+                                    c'8
+                                }
+                            >>
+                            \layout
+                            {
+                                indent = 0
+                                ragged-right = ##t
+                            }
+                        }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \once \override Beam.grow-direction = #right
+                        d'16 * 1328/1024
+                        [
+                        bf'16 * 720/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
+                        {
+                            \context Score = "Score"
+                            \with
+                            {
+                                \override SpacingSpanner.spacing-increment = 0.5
+                                proportionalNotationDuration = ##f
+                            }
+                            <<
+                                \context RhythmicStaff = "Rhythmic_Staff"
+                                \with
+                                {
+                                    \remove Time_signature_engraver
+                                    \remove Staff_symbol_engraver
+                                    \override Stem.direction = #up
+                                    \override Stem.length = 5
+                                    \override TupletBracket.bracket-visibility = ##t
+                                    \override TupletBracket.direction = #up
+                                    \override TupletBracket.minimum-length = 4
+                                    \override TupletBracket.padding = 1.25
+                                    \override TupletBracket.shorten-pair = #'(-1 . -1.5)
+                                    \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
+                                    \override TupletNumber.font-size = 0
+                                    \override TupletNumber.text = #tuplet-number::calc-fraction-text
+                                    tupletFullLength = ##t
+                                }
+                                {
+                                    c'8.
+                                }
+                            >>
+                            \layout
+                            {
+                                indent = 0
+                                ragged-right = ##t
+                            }
+                        }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \once \override Beam.grow-direction = #right
+                        fs''16 * 1552/1024
+                        [
+                        e''16 * 832/1024
+                        ef''16 * 688/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
+                        {
+                            \context Score = "Score"
+                            \with
+                            {
+                                \override SpacingSpanner.spacing-increment = 0.5
+                                proportionalNotationDuration = ##f
+                            }
+                            <<
+                                \context RhythmicStaff = "Rhythmic_Staff"
+                                \with
+                                {
+                                    \remove Time_signature_engraver
+                                    \remove Staff_symbol_engraver
+                                    \override Stem.direction = #up
+                                    \override Stem.length = 5
+                                    \override TupletBracket.bracket-visibility = ##t
+                                    \override TupletBracket.direction = #up
+                                    \override TupletBracket.minimum-length = 4
+                                    \override TupletBracket.padding = 1.25
+                                    \override TupletBracket.shorten-pair = #'(-1 . -1.5)
+                                    \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
+                                    \override TupletNumber.font-size = 0
+                                    \override TupletNumber.text = #tuplet-number::calc-fraction-text
+                                    tupletFullLength = ##t
+                                }
+                                {
+                                    c'4
+                                }
+                            >>
+                            \layout
+                            {
+                                indent = 0
+                                ragged-right = ##t
+                            }
+                        }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \once \override Beam.grow-direction = #right
+                        af''16 * 1728/1024
+                        [
+                        g''16 * 928/1024
+                        a'16 * 768/1024
+                        c'16 * 672/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
+                        {
+                            \context Score = "Score"
+                            \with
+                            {
+                                \override SpacingSpanner.spacing-increment = 0.5
+                                proportionalNotationDuration = ##f
+                            }
+                            <<
+                                \context RhythmicStaff = "Rhythmic_Staff"
+                                \with
+                                {
+                                    \remove Time_signature_engraver
+                                    \remove Staff_symbol_engraver
+                                    \override Stem.direction = #up
+                                    \override Stem.length = 5
+                                    \override TupletBracket.bracket-visibility = ##t
+                                    \override TupletBracket.direction = #up
+                                    \override TupletBracket.minimum-length = 4
+                                    \override TupletBracket.padding = 1.25
+                                    \override TupletBracket.shorten-pair = #'(-1 . -1.5)
+                                    \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
+                                    \override TupletNumber.font-size = 0
+                                    \override TupletNumber.text = #tuplet-number::calc-fraction-text
+                                    tupletFullLength = ##t
+                                }
+                                {
+                                    c'4
+                                    ~
+                                    c'16
+                                }
+                            >>
+                            \layout
+                            {
+                                indent = 0
+                                ragged-right = ##t
+                            }
+                        }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \once \override Beam.grow-direction = #right
+                        d'16 * 1872/1024
+                        [
+                        bf'16 * 1008/1024
+                        fs''16 * 832/1024
+                        e''16 * 736/1024
+                        ef''16 * 672/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
+                        {
+                            \context Score = "Score"
+                            \with
+                            {
+                                \override SpacingSpanner.spacing-increment = 0.5
+                                proportionalNotationDuration = ##f
+                            }
+                            <<
+                                \context RhythmicStaff = "Rhythmic_Staff"
+                                \with
+                                {
+                                    \remove Time_signature_engraver
+                                    \remove Staff_symbol_engraver
+                                    \override Stem.direction = #up
+                                    \override Stem.length = 5
+                                    \override TupletBracket.bracket-visibility = ##t
+                                    \override TupletBracket.direction = #up
+                                    \override TupletBracket.minimum-length = 4
+                                    \override TupletBracket.padding = 1.25
+                                    \override TupletBracket.shorten-pair = #'(-1 . -1.5)
+                                    \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
+                                    \override TupletNumber.font-size = 0
+                                    \override TupletNumber.text = #tuplet-number::calc-fraction-text
+                                    tupletFullLength = ##t
+                                }
+                                {
+                                    c'4.
+                                }
+                            >>
+                            \layout
+                            {
+                                indent = 0
+                                ragged-right = ##t
+                            }
+                        }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \once \override Beam.grow-direction = #right
+                        af''16 * 2000/1024
+                        [
+                        g''16 * 1088/1024
+                        a'16 * 896/1024
+                        c'16 * 784/1024
+                        d'16 * 720/1024
+                        bf'16 * 656/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                }
+            >>
+
+    ..  container:: example
+
+        Ritardandi:
+
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 16, treatments=["rit"]),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [
+        ...     [0],
+        ...     [2, 10],
+        ...     [18, 16, 15],
+        ...     [20, 19, 9, 0],
+        ...     [2, 10, 18, 16, 15],
+        ...     [20, 19, 9, 0, 2, 10],
+        ... ]
+        >>> selections = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 21/16
+                        c'16
+                    }
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
+                        {
+                            \context Score = "Score"
+                            \with
+                            {
+                                \override SpacingSpanner.spacing-increment = 0.5
+                                proportionalNotationDuration = ##f
+                            }
+                            <<
+                                \context RhythmicStaff = "Rhythmic_Staff"
+                                \with
+                                {
+                                    \remove Time_signature_engraver
+                                    \remove Staff_symbol_engraver
+                                    \override Stem.direction = #up
+                                    \override Stem.length = 5
+                                    \override TupletBracket.bracket-visibility = ##t
+                                    \override TupletBracket.direction = #up
+                                    \override TupletBracket.minimum-length = 4
+                                    \override TupletBracket.padding = 1.25
+                                    \override TupletBracket.shorten-pair = #'(-1 . -1.5)
+                                    \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
+                                    \override TupletNumber.font-size = 0
+                                    \override TupletNumber.text = #tuplet-number::calc-fraction-text
+                                    tupletFullLength = ##t
+                                }
+                                {
+                                    c'8
+                                }
+                            >>
+                            \layout
+                            {
+                                indent = 0
+                                ragged-right = ##t
+                            }
+                        }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \once \override Beam.grow-direction = #left
+                        d'16 * 656/1024
+                        [
+                        bf'16 * 1392/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
+                        {
+                            \context Score = "Score"
+                            \with
+                            {
+                                \override SpacingSpanner.spacing-increment = 0.5
+                                proportionalNotationDuration = ##f
+                            }
+                            <<
+                                \context RhythmicStaff = "Rhythmic_Staff"
+                                \with
+                                {
+                                    \remove Time_signature_engraver
+                                    \remove Staff_symbol_engraver
+                                    \override Stem.direction = #up
+                                    \override Stem.length = 5
+                                    \override TupletBracket.bracket-visibility = ##t
+                                    \override TupletBracket.direction = #up
+                                    \override TupletBracket.minimum-length = 4
+                                    \override TupletBracket.padding = 1.25
+                                    \override TupletBracket.shorten-pair = #'(-1 . -1.5)
+                                    \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
+                                    \override TupletNumber.font-size = 0
+                                    \override TupletNumber.text = #tuplet-number::calc-fraction-text
+                                    tupletFullLength = ##t
+                                }
+                                {
+                                    c'8.
+                                }
+                            >>
+                            \layout
+                            {
+                                indent = 0
+                                ragged-right = ##t
+                            }
+                        }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \once \override Beam.grow-direction = #left
+                        fs''16 * 512/1024
+                        [
+                        e''16 * 1072/1024
+                        ef''16 * 1488/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
+                        {
+                            \context Score = "Score"
+                            \with
+                            {
+                                \override SpacingSpanner.spacing-increment = 0.5
+                                proportionalNotationDuration = ##f
+                            }
+                            <<
+                                \context RhythmicStaff = "Rhythmic_Staff"
+                                \with
+                                {
+                                    \remove Time_signature_engraver
+                                    \remove Staff_symbol_engraver
+                                    \override Stem.direction = #up
+                                    \override Stem.length = 5
+                                    \override TupletBracket.bracket-visibility = ##t
+                                    \override TupletBracket.direction = #up
+                                    \override TupletBracket.minimum-length = 4
+                                    \override TupletBracket.padding = 1.25
+                                    \override TupletBracket.shorten-pair = #'(-1 . -1.5)
+                                    \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
+                                    \override TupletNumber.font-size = 0
+                                    \override TupletNumber.text = #tuplet-number::calc-fraction-text
+                                    tupletFullLength = ##t
+                                }
+                                {
+                                    c'4
+                                }
+                            >>
+                            \layout
+                            {
+                                indent = 0
+                                ragged-right = ##t
+                            }
+                        }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \once \override Beam.grow-direction = #left
+                        af''16 * 432/1024
+                        [
+                        g''16 * 896/1024
+                        a'16 * 1232/1024
+                        c'16 * 1536/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
+                        {
+                            \context Score = "Score"
+                            \with
+                            {
+                                \override SpacingSpanner.spacing-increment = 0.5
+                                proportionalNotationDuration = ##f
+                            }
+                            <<
+                                \context RhythmicStaff = "Rhythmic_Staff"
+                                \with
+                                {
+                                    \remove Time_signature_engraver
+                                    \remove Staff_symbol_engraver
+                                    \override Stem.direction = #up
+                                    \override Stem.length = 5
+                                    \override TupletBracket.bracket-visibility = ##t
+                                    \override TupletBracket.direction = #up
+                                    \override TupletBracket.minimum-length = 4
+                                    \override TupletBracket.padding = 1.25
+                                    \override TupletBracket.shorten-pair = #'(-1 . -1.5)
+                                    \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
+                                    \override TupletNumber.font-size = 0
+                                    \override TupletNumber.text = #tuplet-number::calc-fraction-text
+                                    tupletFullLength = ##t
+                                }
+                                {
+                                    c'4
+                                    ~
+                                    c'16
+                                }
+                            >>
+                            \layout
+                            {
+                                indent = 0
+                                ragged-right = ##t
+                            }
+                        }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \once \override Beam.grow-direction = #left
+                        d'16 * 368/1024
+                        [
+                        bf'16 * 784/1024
+                        fs''16 * 1072/1024
+                        e''16 * 1328/1024
+                        ef''16 * 1568/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
+                        {
+                            \context Score = "Score"
+                            \with
+                            {
+                                \override SpacingSpanner.spacing-increment = 0.5
+                                proportionalNotationDuration = ##f
+                            }
+                            <<
+                                \context RhythmicStaff = "Rhythmic_Staff"
+                                \with
+                                {
+                                    \remove Time_signature_engraver
+                                    \remove Staff_symbol_engraver
+                                    \override Stem.direction = #up
+                                    \override Stem.length = 5
+                                    \override TupletBracket.bracket-visibility = ##t
+                                    \override TupletBracket.direction = #up
+                                    \override TupletBracket.minimum-length = 4
+                                    \override TupletBracket.padding = 1.25
+                                    \override TupletBracket.shorten-pair = #'(-1 . -1.5)
+                                    \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
+                                    \override TupletNumber.font-size = 0
+                                    \override TupletNumber.text = #tuplet-number::calc-fraction-text
+                                    tupletFullLength = ##t
+                                }
+                                {
+                                    c'4.
+                                }
+                            >>
+                            \layout
+                            {
+                                indent = 0
+                                ragged-right = ##t
+                            }
+                        }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \once \override Beam.grow-direction = #left
+                        af''16 * 336/1024
+                        [
+                        g''16 * 704/1024
+                        a'16 * 960/1024
+                        c'16 * 1184/1024
+                        d'16 * 1392/1024
+                        bf'16 * 1568/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                }
+            >>
+
+    ..  container:: example
+
+        Accelerandi followed by ritardandi:
+
+        >>> stack = baca.stack(
+        ...     baca.figure(
+        ...         [1], 16, treatments=["accel", "rit"]
+        ...     ),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [
+        ...     [0, 2, 10, 18, 16],
+        ...     [15, 20, 19, 9, 0, 2],
+        ...     [10, 18, 16, 15, 20],
+        ...     [19, 9, 0, 2, 10, 18],
+        ... ]
+        >>> selections = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
+                        {
+                            \context Score = "Score"
+                            \with
+                            {
+                                \override SpacingSpanner.spacing-increment = 0.5
+                                proportionalNotationDuration = ##f
+                            }
+                            <<
+                                \context RhythmicStaff = "Rhythmic_Staff"
+                                \with
+                                {
+                                    \remove Time_signature_engraver
+                                    \remove Staff_symbol_engraver
+                                    \override Stem.direction = #up
+                                    \override Stem.length = 5
+                                    \override TupletBracket.bracket-visibility = ##t
+                                    \override TupletBracket.direction = #up
+                                    \override TupletBracket.minimum-length = 4
+                                    \override TupletBracket.padding = 1.25
+                                    \override TupletBracket.shorten-pair = #'(-1 . -1.5)
+                                    \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
+                                    \override TupletNumber.font-size = 0
+                                    \override TupletNumber.text = #tuplet-number::calc-fraction-text
+                                    tupletFullLength = ##t
+                                }
+                                {
+                                    c'4
+                                    ~
+                                    c'16
+                                }
+                            >>
+                            \layout
+                            {
+                                indent = 0
+                                ragged-right = ##t
+                            }
+                        }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \once \override Beam.grow-direction = #right
+                        \time 11/8
+                        c'16 * 1872/1024
+                        [
+                        d'16 * 1008/1024
+                        bf'16 * 832/1024
+                        fs''16 * 736/1024
+                        e''16 * 672/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
+                        {
+                            \context Score = "Score"
+                            \with
+                            {
+                                \override SpacingSpanner.spacing-increment = 0.5
+                                proportionalNotationDuration = ##f
+                            }
+                            <<
+                                \context RhythmicStaff = "Rhythmic_Staff"
+                                \with
+                                {
+                                    \remove Time_signature_engraver
+                                    \remove Staff_symbol_engraver
+                                    \override Stem.direction = #up
+                                    \override Stem.length = 5
+                                    \override TupletBracket.bracket-visibility = ##t
+                                    \override TupletBracket.direction = #up
+                                    \override TupletBracket.minimum-length = 4
+                                    \override TupletBracket.padding = 1.25
+                                    \override TupletBracket.shorten-pair = #'(-1 . -1.5)
+                                    \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
+                                    \override TupletNumber.font-size = 0
+                                    \override TupletNumber.text = #tuplet-number::calc-fraction-text
+                                    tupletFullLength = ##t
+                                }
+                                {
+                                    c'4.
+                                }
+                            >>
+                            \layout
+                            {
+                                indent = 0
+                                ragged-right = ##t
+                            }
+                        }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \once \override Beam.grow-direction = #left
+                        ef''16 * 336/1024
+                        [
+                        af''16 * 704/1024
+                        g''16 * 960/1024
+                        a'16 * 1184/1024
+                        c'16 * 1392/1024
+                        d'16 * 1568/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
+                        {
+                            \context Score = "Score"
+                            \with
+                            {
+                                \override SpacingSpanner.spacing-increment = 0.5
+                                proportionalNotationDuration = ##f
+                            }
+                            <<
+                                \context RhythmicStaff = "Rhythmic_Staff"
+                                \with
+                                {
+                                    \remove Time_signature_engraver
+                                    \remove Staff_symbol_engraver
+                                    \override Stem.direction = #up
+                                    \override Stem.length = 5
+                                    \override TupletBracket.bracket-visibility = ##t
+                                    \override TupletBracket.direction = #up
+                                    \override TupletBracket.minimum-length = 4
+                                    \override TupletBracket.padding = 1.25
+                                    \override TupletBracket.shorten-pair = #'(-1 . -1.5)
+                                    \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
+                                    \override TupletNumber.font-size = 0
+                                    \override TupletNumber.text = #tuplet-number::calc-fraction-text
+                                    tupletFullLength = ##t
+                                }
+                                {
+                                    c'4
+                                    ~
+                                    c'16
+                                }
+                            >>
+                            \layout
+                            {
+                                indent = 0
+                                ragged-right = ##t
+                            }
+                        }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \once \override Beam.grow-direction = #right
+                        bf'16 * 1872/1024
+                        [
+                        fs''16 * 1008/1024
+                        e''16 * 832/1024
+                        ef''16 * 736/1024
+                        af''16 * 672/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
+                        {
+                            \context Score = "Score"
+                            \with
+                            {
+                                \override SpacingSpanner.spacing-increment = 0.5
+                                proportionalNotationDuration = ##f
+                            }
+                            <<
+                                \context RhythmicStaff = "Rhythmic_Staff"
+                                \with
+                                {
+                                    \remove Time_signature_engraver
+                                    \remove Staff_symbol_engraver
+                                    \override Stem.direction = #up
+                                    \override Stem.length = 5
+                                    \override TupletBracket.bracket-visibility = ##t
+                                    \override TupletBracket.direction = #up
+                                    \override TupletBracket.minimum-length = 4
+                                    \override TupletBracket.padding = 1.25
+                                    \override TupletBracket.shorten-pair = #'(-1 . -1.5)
+                                    \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
+                                    \override TupletNumber.font-size = 0
+                                    \override TupletNumber.text = #tuplet-number::calc-fraction-text
+                                    tupletFullLength = ##t
+                                }
+                                {
+                                    c'4.
+                                }
+                            >>
+                            \layout
+                            {
+                                indent = 0
+                                ragged-right = ##t
+                            }
+                        }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \once \override Beam.grow-direction = #left
+                        g''16 * 336/1024
+                        [
+                        a'16 * 704/1024
+                        c'16 * 960/1024
+                        d'16 * 1184/1024
+                        bf'16 * 1392/1024
+                        fs''16 * 1568/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                }
+            >>
+
+    ..  container:: example
+
+        Mixed accelerandi, ritardandi and prolation:
+
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 16, treatments=["accel", -2, "rit"]),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [
+        ...     [0, 2, 10, 18, 16],
+        ...     [15, 20, 19, 9, 0],
+        ...     [2, 10, 18, 16, 15],
+        ...     [20, 19, 9, 0, 2],
+        ...     [10, 18, 16, 15, 20],
+        ...     [19, 9, 0, 2, 10],
+        ... ]
+        >>> selections = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
+                        {
+                            \context Score = "Score"
+                            \with
+                            {
+                                \override SpacingSpanner.spacing-increment = 0.5
+                                proportionalNotationDuration = ##f
+                            }
+                            <<
+                                \context RhythmicStaff = "Rhythmic_Staff"
+                                \with
+                                {
+                                    \remove Time_signature_engraver
+                                    \remove Staff_symbol_engraver
+                                    \override Stem.direction = #up
+                                    \override Stem.length = 5
+                                    \override TupletBracket.bracket-visibility = ##t
+                                    \override TupletBracket.direction = #up
+                                    \override TupletBracket.minimum-length = 4
+                                    \override TupletBracket.padding = 1.25
+                                    \override TupletBracket.shorten-pair = #'(-1 . -1.5)
+                                    \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
+                                    \override TupletNumber.font-size = 0
+                                    \override TupletNumber.text = #tuplet-number::calc-fraction-text
+                                    tupletFullLength = ##t
+                                }
+                                {
+                                    c'4
+                                    ~
+                                    c'16
+                                }
+                            >>
+                            \layout
+                            {
+                                indent = 0
+                                ragged-right = ##t
+                            }
+                        }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \once \override Beam.grow-direction = #right
+                        \time 13/8
+                        c'16 * 1872/1024
+                        [
+                        d'16 * 1008/1024
+                        bf'16 * 832/1024
+                        fs''16 * 736/1024
+                        e''16 * 672/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 3/5
+                    {
+                        ef''16
+                        [
+                        af''16
+                        g''16
+                        a'16
+                        c'16
+                        ]
+                    }
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
+                        {
+                            \context Score = "Score"
+                            \with
+                            {
+                                \override SpacingSpanner.spacing-increment = 0.5
+                                proportionalNotationDuration = ##f
+                            }
+                            <<
+                                \context RhythmicStaff = "Rhythmic_Staff"
+                                \with
+                                {
+                                    \remove Time_signature_engraver
+                                    \remove Staff_symbol_engraver
+                                    \override Stem.direction = #up
+                                    \override Stem.length = 5
+                                    \override TupletBracket.bracket-visibility = ##t
+                                    \override TupletBracket.direction = #up
+                                    \override TupletBracket.minimum-length = 4
+                                    \override TupletBracket.padding = 1.25
+                                    \override TupletBracket.shorten-pair = #'(-1 . -1.5)
+                                    \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
+                                    \override TupletNumber.font-size = 0
+                                    \override TupletNumber.text = #tuplet-number::calc-fraction-text
+                                    tupletFullLength = ##t
+                                }
+                                {
+                                    c'4
+                                    ~
+                                    c'16
+                                }
+                            >>
+                            \layout
+                            {
+                                indent = 0
+                                ragged-right = ##t
+                            }
+                        }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \once \override Beam.grow-direction = #left
+                        d'16 * 368/1024
+                        [
+                        bf'16 * 784/1024
+                        fs''16 * 1072/1024
+                        e''16 * 1328/1024
+                        ef''16 * 1568/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
+                        {
+                            \context Score = "Score"
+                            \with
+                            {
+                                \override SpacingSpanner.spacing-increment = 0.5
+                                proportionalNotationDuration = ##f
+                            }
+                            <<
+                                \context RhythmicStaff = "Rhythmic_Staff"
+                                \with
+                                {
+                                    \remove Time_signature_engraver
+                                    \remove Staff_symbol_engraver
+                                    \override Stem.direction = #up
+                                    \override Stem.length = 5
+                                    \override TupletBracket.bracket-visibility = ##t
+                                    \override TupletBracket.direction = #up
+                                    \override TupletBracket.minimum-length = 4
+                                    \override TupletBracket.padding = 1.25
+                                    \override TupletBracket.shorten-pair = #'(-1 . -1.5)
+                                    \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
+                                    \override TupletNumber.font-size = 0
+                                    \override TupletNumber.text = #tuplet-number::calc-fraction-text
+                                    tupletFullLength = ##t
+                                }
+                                {
+                                    c'4
+                                    ~
+                                    c'16
+                                }
+                            >>
+                            \layout
+                            {
+                                indent = 0
+                                ragged-right = ##t
+                            }
+                        }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \once \override Beam.grow-direction = #right
+                        af''16 * 1872/1024
+                        [
+                        g''16 * 1008/1024
+                        a'16 * 832/1024
+                        c'16 * 736/1024
+                        d'16 * 672/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 3/5
+                    {
+                        bf'16
+                        [
+                        fs''16
+                        e''16
+                        ef''16
+                        af''16
+                        ]
+                    }
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
+                        {
+                            \context Score = "Score"
+                            \with
+                            {
+                                \override SpacingSpanner.spacing-increment = 0.5
+                                proportionalNotationDuration = ##f
+                            }
+                            <<
+                                \context RhythmicStaff = "Rhythmic_Staff"
+                                \with
+                                {
+                                    \remove Time_signature_engraver
+                                    \remove Staff_symbol_engraver
+                                    \override Stem.direction = #up
+                                    \override Stem.length = 5
+                                    \override TupletBracket.bracket-visibility = ##t
+                                    \override TupletBracket.direction = #up
+                                    \override TupletBracket.minimum-length = 4
+                                    \override TupletBracket.padding = 1.25
+                                    \override TupletBracket.shorten-pair = #'(-1 . -1.5)
+                                    \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
+                                    \override TupletNumber.font-size = 0
+                                    \override TupletNumber.text = #tuplet-number::calc-fraction-text
+                                    tupletFullLength = ##t
+                                }
+                                {
+                                    c'4
+                                    ~
+                                    c'16
+                                }
+                            >>
+                            \layout
+                            {
+                                indent = 0
+                                ragged-right = ##t
+                            }
+                        }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \once \override Beam.grow-direction = #left
+                        g''16 * 368/1024
+                        [
+                        a'16 * 784/1024
+                        c'16 * 1072/1024
+                        d'16 * 1328/1024
+                        bf'16 * 1568/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                }
+            >>
+
+    ..  container:: example
+
+        Specified by tuplet multiplier:
+
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 8, treatments=["3:2"]),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [
+        ...     [0],
+        ...     [2, 10],
+        ...     [18, 16, 15],
+        ...     [20, 19, 9, 0],
+        ...     [2, 10, 18, 16, 15],
+        ...     [20, 19, 9, 0, 2, 10],
+        ... ]
+        >>> selections = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> staff = lilypond_file["Staff"]
+        >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
+        >>> abjad.override(staff).Stem.direction = abjad.Down
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                \with
+                {
+                    \override Beam.positions = #'(-6 . -6)
+                    \override Stem.direction = #down
+                }
+                {
+                    \tweak edge-height #'(0.7 . 0)
+                    \times 2/3
+                    {
+                        \time 7/4
+                        c'8
+                    }
+                    \tweak edge-height #'(0.7 . 0)
+                    \times 2/3
+                    {
+                        d'8
+                        [
+                        bf'8
+                        ]
+                    }
+                    \times 2/3
+                    {
+                        fs''8
+                        [
+                        e''8
+                        ef''8
+                        ]
+                    }
+                    \tweak edge-height #'(0.7 . 0)
+                    \times 2/3
+                    {
+                        af''8
+                        [
+                        g''8
+                        a'8
+                        c'8
+                        ]
+                    }
+                    \tweak edge-height #'(0.7 . 0)
+                    \times 2/3
+                    {
+                        d'8
+                        [
+                        bf'8
+                        fs''8
+                        e''8
+                        ef''8
+                        ]
+                    }
+                    \times 2/3
+                    {
+                        af''8
+                        [
+                        g''8
+                        a'8
+                        c'8
+                        d'8
+                        bf'8
+                        ]
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Segment durations equal to a quarter:
+
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 8, treatments=[(1, 4)]),
+        ...     rmakers.denominator((1, 16)),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [
+        ...     [0],
+        ...     [2, 10],
+        ...     [18, 16, 15],
+        ...     [20, 19, 9, 0],
+        ...     [2, 10, 18, 16, 15],
+        ...     [20, 19, 9, 0, 2, 10],
+        ... ]
+        >>> selections = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> staff = lilypond_file["Staff"]
+        >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
+        >>> abjad.override(staff).Stem.direction = abjad.Down
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                \with
+                {
+                    \override Beam.positions = #'(-6 . -6)
+                    \override Stem.direction = #down
+                }
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 3/2
+                        c'4
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        d'8
+                        [
+                        bf'8
+                        ]
+                    }
+                    \times 4/6
+                    {
+                        fs''8
+                        [
+                        e''8
+                        ef''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        af''16
+                        [
+                        g''16
+                        a'16
+                        c'16
+                        ]
+                    }
+                    \times 4/5
+                    {
+                        d'16
+                        [
+                        bf'16
+                        fs''16
+                        e''16
+                        ef''16
+                        ]
+                    }
+                    \times 4/6
+                    {
+                        af''16
+                        [
+                        g''16
+                        a'16
+                        c'16
+                        d'16
+                        bf'16
+                        ]
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Collection durations alternating between a quarter and a dotted quarter:
+
+        >>> stack = baca.stack(
+        ...     baca.figure([1, 1, 2], 8, treatments=[(1, 4), (3, 8)]),
+        ...     rmakers.denominator((1, 16)),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [
+        ...     [0, 2, 10, 18, 16],
+        ...     [15, 20, 19, 9, 0],
+        ...     [2, 10, 18, 16, 15],
+        ...     [20, 19, 9, 0, 2],
+        ...     [10, 18, 16, 15, 20],
+        ...     [19, 9, 0, 2, 10],
+        ... ]
+        >>> selections = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selections)
+        >>> staff = lilypond_file["Staff"]
+        >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
+        >>> abjad.override(staff).Stem.direction = abjad.Down
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                \with
+                {
+                    \override Beam.positions = #'(-6 . -6)
+                    \override Stem.direction = #down
+                }
+                {
+                    \times 4/6
+                    {
+                        \time 15/8
+                        c'16
+                        [
+                        d'16
+                        bf'8
+                        fs''16
+                        e''16
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 6/7
+                    {
+                        ef''8
+                        [
+                        af''16
+                        g''16
+                        a'8
+                        c'16
+                        ]
+                    }
+                    \times 4/7
+                    {
+                        d'16
+                        [
+                        bf'8
+                        fs''16
+                        e''16
+                        ef''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        af''16
+                        [
+                        g''16
+                        a'8
+                        c'16
+                        d'16
+                        ]
+                    }
+                    \times 4/7
+                    {
+                        bf'8
+                        [
+                        fs''16
+                        e''16
+                        ef''8
+                        af''16
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 6/7
+                    {
+                        g''16
+                        [
+                        a'8
+                        c'16
+                        d'16
+                        bf'8
+                        ]
+                    }
+                }
+            >>
+
+        Time treatments defined equal to integers; positive multipliers; positive
+        durations; and the strings ``'accel'`` and ``'rit'``.
+
     """
 
-    ### CLASS VARIABLES ###
-
-    __slots__ = (
-        "_acciaccatura",
-        "_affix",
-        "_next_attack",
-        "_next_segment",
-        "_restart_talea",
-        "_signature",
-        "_spelling",
-        "_state",
-        "_talea",
-        "_treatments",
-    )
+    talea: rmakers.Talea
+    acciaccatura: Acciaccatura = None
+    affix: RestAffix = None
+    restart_talea: bool = None
+    signature: int = None
+    spelling: rmakers.Spelling = None
+    treatments: typing.Sequence = None
+    _next_attack: int | None = dataclasses.field(init=False, repr=False)
+    _next_segment: int | None = dataclasses.field(init=False, repr=False)
+    _state: dict = dataclasses.field(init=False, repr=False)
 
     _state_variables = ("_next_attack", "_next_segment")
 
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        talea: rmakers.Talea,
-        acciaccatura: Acciaccatura = None,
-        affix: RestAffix = None,
-        restart_talea: bool = None,
-        signature: int = None,
-        spelling: rmakers.Spelling = None,
-        treatments: typing.Sequence = None,
-    ):
-        if acciaccatura is not None:
-            assert isinstance(acciaccatura, Acciaccatura), repr(acciaccatura)
-        self._acciaccatura = acciaccatura
-        if affix is not None:
-            if not isinstance(affix, RestAffix):
-                message = "must be rest affix:\n"
-                message += f"   {repr(affix)}"
+    def __post_init__(self):
+        if self.acciaccatura is not None:
+            assert isinstance(self.acciaccatura, Acciaccatura), repr(self.acciaccatura)
+        if self.affix is not None:
+            if not isinstance(self.affix, RestAffix):
+                message = "must be rest affix:\n   {repr(self.affix)}"
                 raise Exception(message)
-        self._affix = affix
         self._next_attack = 0
         self._next_segment = 0
-        if restart_talea is not None:
-            restart_talea = bool(restart_talea)
-        self._restart_talea = restart_talea
-        if signature is not None:
-            assert isinstance(signature, int), repr(signature)
-        self._signature = signature
-        if spelling is not None:
-            assert isinstance(spelling, rmakers.Spelling)
-        self._spelling = spelling
+        if self.restart_talea is not None:
+            self.restart_talea = bool(self.restart_talea)
+        if self.signature is not None:
+            assert isinstance(self.signature, int), repr(self.signature)
+        if self.spelling is not None:
+            assert isinstance(self.spelling, rmakers.Spelling)
         self._state = {}
-        if not isinstance(talea, rmakers.Talea):
-            raise TypeError(f"must be talea: {talea!r}.")
-        self._talea = talea
-        if treatments is not None:
-            self._check_treatments(treatments)
-        self._treatments = treatments
-
-    ### SPECIAL METHODS ###
+        if not isinstance(self.talea, rmakers.Talea):
+            raise TypeError(f"must be talea: {self.talea!r}.")
+        if self.treatments is not None:
+            self._check_treatments(self.treatments)
 
     def __call__(
         self,
@@ -4347,111 +5912,6 @@ class FigureMaker:
         state: dict = None,
         total_collections: int = None,
     ) -> abjad.Selection:
-        r"""
-        Calls figure-maker.
-
-        ..  container:: example
-
-            Without state manifest:
-
-            >>> stack = baca.stack(
-            ...     baca.figure([1, 1, 2], 16),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 3/4
-                            c'16
-                            [
-                            d'16
-                            bf'8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            fs''16
-                            [
-                            e''16
-                            ef''8
-                            af''16
-                            g''16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            a'8
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            With state manifest:
-
-            >>> stack = baca.stack(
-            ...     baca.figure([1, 1, 2], 16),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> state = {"_next_attack": 2}
-            >>> selections = stack(collections, state=state)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 3/4
-                            c'8
-                            [
-                            d'16
-                            bf'16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            fs''8
-                            [
-                            e''16
-                            ef''16
-                            af''8
-                            g''16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            a'16
-                        }
-                    }
-                >>
-
-        """
         collections = _coerce_collections(collections)
         self._state = state or {}
         self._apply_state(state=state)
@@ -4476,36 +5936,6 @@ class FigureMaker:
         assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
         selection = abjad.select(tuplets)
         return selection
-
-    def __eq__(self, argument) -> bool:
-        """
-        Compares all input parameters.
-        """
-        if isinstance(argument, type(self)):
-            return (
-                self.talea == argument.talea
-                and self.acciaccatura == argument.acciaccatura
-                and self.affix == argument.affix
-                and self.restart_talea == argument.restart_talea
-                and self.signature == argument.signature
-                and self.spelling == argument.spelling
-                and self.treatments == argument.treatments
-            )
-        return False
-
-    def __hash__(self) -> int:
-        """
-        Hashes object.
-        """
-        return hash(str(self))
-
-    def __repr__(self) -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.format.get_repr(self)
-
-    ### PRIVATE METHODS ###
 
     def _apply_state(self, state=None):
         for name in self._state_variables:
@@ -4815,2124 +6245,38 @@ class FigureMaker:
         assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
         return tuplet
 
-    ### PUBLIC PROPERTIES ###
 
-    @property
-    def acciaccatura(self) -> typing.Optional[Acciaccatura]:
-        r"""
-        Gets acciaccatura.
-
-        ..  container:: example
-
-            As many acciaccaturas as possible per collection:
-
-            >>> stack = baca.stack(
-            ...     baca.figure([1], 8, acciaccatura=True),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [
-            ...     [0],
-            ...     [2, 10],
-            ...     [18, 16, 15],
-            ...     [20, 19, 9, 0],
-            ...     [2, 10, 18, 16, 15],
-            ...     [20, 19, 9, 0, 2, 10],
-            ... ]
-            >>> selections = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 3/4
-                            c'8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                d'16
-                            }
-                            bf'8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                fs''16
-                                [
-                                e''16
-                                ]
-                            }
-                            ef''8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                af''16
-                                [
-                                g''16
-                                a'16
-                                ]
-                            }
-                            c'8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                d'16
-                                [
-                                bf'16
-                                fs''16
-                                e''16
-                                ]
-                            }
-                            ef''8
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                af''16
-                                [
-                                g''16
-                                a'16
-                                c'16
-                                d'16
-                                ]
-                            }
-                            bf'8
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Graced quarters:
-
-            >>> stack = baca.stack(
-            ...     baca.figure([1], 4, acciaccatura=True),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [
-            ...     [0],
-            ...     [2, 10],
-            ...     [18, 16, 15],
-            ...     [20, 19, 9, 0],
-            ...     [2, 10, 18, 16, 15],
-            ...     [20, 19, 9, 0, 2, 10],
-            ... ]
-            >>> selections = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 3/2
-                            c'4
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                d'16
-                            }
-                            bf'4
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                fs''16
-                                [
-                                e''16
-                                ]
-                            }
-                            ef''4
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                af''16
-                                [
-                                g''16
-                                a'16
-                                ]
-                            }
-                            c'4
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                d'16
-                                [
-                                bf'16
-                                fs''16
-                                e''16
-                                ]
-                            }
-                            ef''4
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \acciaccatura {
-                                af''16
-                                [
-                                g''16
-                                a'16
-                                c'16
-                                d'16
-                                ]
-                            }
-                            bf'4
-                        }
-                    }
-                >>
-
-        """
-        return self._acciaccatura
-
-    @property
-    def affix(self) -> typing.Optional["RestAffix"]:
-        """
-        Gets affix.
-        """
-        return self._affix
-
-    @property
-    def restart_talea(self) -> typing.Optional[bool]:
-        r"""
-        Is true when maker restarts talea for each collection.
-        """
-        return self._restart_talea
-
-    @property
-    def signature(self) -> typing.Optional[int]:
-        r"""
-        Gets (time) signature (denominator).
-        """
-        return self._signature
-
-    @property
-    def spelling(self) -> typing.Optional[rmakers.Spelling]:
-        r"""
-        Gets spelling.
-
-        ..  container:: example
-
-            Spells nonassignable durations with monontonically decreasing durations by
-            default:
-
-            >>> stack = baca.stack(
-            ...     baca.figure([4, 4, 5], 32),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 39/32
-                            c'8
-                            [
-                            d'8
-                            bf'8
-                            ~
-                            bf'32
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            fs''8
-                            [
-                            e''8
-                            ef''8
-                            ~
-                            ef''32
-                            af''8
-                            g''8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            a'8
-                            ~
-                            [
-                            a'32
-                            ]
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Spells nonassignable durations with monontonically increasing durations:
-
-            >>> stack = baca.stack(
-            ...     baca.figure(
-            ...         [4, 4, 5],
-            ...         32,
-            ...         spelling=rmakers.Spelling(increase_monotonic=True),
-            ...     ),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 39/32
-                            c'8
-                            [
-                            d'8
-                            bf'32
-                            ~
-                            bf'8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            fs''8
-                            [
-                            e''8
-                            ef''32
-                            ~
-                            ef''8
-                            af''8
-                            g''8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            a'32
-                            ~
-                            [
-                            a'8
-                            ]
-                        }
-                    }
-                >>
-
-        """
-        return self._spelling
-
-    @property
-    def talea(self) -> rmakers.Talea:
-        r"""
-        Gets talea.
-
-        ..  container:: example
-
-            Sixteenths and eighths:
-
-            >>> stack = baca.stack(
-            ...     baca.figure([1, 1, 2], 16),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [[0, 2, 10, 8]]
-            >>> selections = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 5/16
-                            c'16
-                            [
-                            d'16
-                            bf'8
-                            af'16
-                            ]
-                        }
-                    }
-                >>
-
-            >>> collections = [[18, 16, 15, 20, 19]]
-            >>> selections = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 3/8
-                            fs''16
-                            [
-                            e''16
-                            ef''8
-                            af''16
-                            g''16
-                            ]
-                        }
-                    }
-                >>
-
-            >>> collections = [[9]]
-            >>> selections = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 1/16
-                            a'16
-                        }
-                    }
-                >>
-
-            >>> collections = [[0, 2, 10, 8], [18, 16, 15, 20, 19], [9]]
-            >>> selections = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 13/16
-                            c'16
-                            [
-                            d'16
-                            bf'8
-                            af'16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            fs''16
-                            [
-                            e''8
-                            ef''16
-                            af''16
-                            g''8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            a'16
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Works with rests:
-
-            >>> stack = baca.stack(
-            ...     baca.figure([3, -1, 2, 2], 16),
-            ...     rmakers.beam(
-            ...         beam_rests=True,
-            ...         stemlet_length=1.5,
-            ...     ),
-            ... )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 3/2
-                            \override Staff.Stem.stemlet-length = 1.5
-                            c'8.
-                            [
-                            r16
-                            d'8
-                            \revert Staff.Stem.stemlet-length
-                            bf'8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \override Staff.Stem.stemlet-length = 1.5
-                            fs''8.
-                            [
-                            r16
-                            e''8
-                            ef''8
-                            af''8.
-                            r16
-                            \revert Staff.Stem.stemlet-length
-                            g''8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            a'8
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Works with large counts:
-
-            >>> stack = baca.stack(
-            ...     baca.figure([29], 64),
-            ...     rmakers.beam(),
-            ...     rmakers.force_repeat_tie(),
-            ... )
-
-            >>> collections = [[0, 2]]
-            >>> selections = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 29/32
-                            c'4..
-                            c'64
-                            \repeatTie
-                            d'4..
-                            d'64
-                            \repeatTie
-                        }
-                    }
-                >>
-
-        """
-        return self._talea
-
-    @property
-    def treatments(
-        self,
-    ) -> typing.Optional[typing.Sequence[typing.Union[int, str, abjad.Duration]]]:
-        r"""
-        Gets treatments.
-
-        ..  container:: example
-
-            One extra count per division:
-
-            >>> stack = baca.stack(
-            ...     baca.figure([1, 1, 2], 16, treatments=[1]),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/4
-                        {
-                            \time 15/16
-                            c'16
-                            [
-                            d'16
-                            bf'8
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/6
-                        {
-                            fs''16
-                            [
-                            e''16
-                            ef''8
-                            af''16
-                            g''16
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/2
-                        {
-                            a'8
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            One missing count per division:
-
-            >>> stack = baca.stack(
-            ...     baca.figure([1, 1, 2], 16, treatments=[-1]),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/4
-                        {
-                            \time 5/8
-                            c'16
-                            [
-                            d'16
-                            bf'8
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/6
-                        {
-                            fs''16
-                            [
-                            e''16
-                            ef''8
-                            af''16
-                            g''16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            a'8
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Accelerandi:
-
-            >>> stack = baca.stack(
-            ...     baca.figure([1], 16, treatments=["accel"]),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [
-            ...     [0],
-            ...     [2, 10],
-            ...     [18, 16, 15],
-            ...     [20, 19, 9, 0],
-            ...     [2, 10, 18, 16, 15],
-            ...     [20, 19, 9, 0, 2, 10],
-            ... ]
-            >>> selections = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 21/16
-                            c'16
-                        }
-                        \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
-                            {
-                                \context Score = "Score"
-                                \with
-                                {
-                                    \override SpacingSpanner.spacing-increment = 0.5
-                                    proportionalNotationDuration = ##f
-                                }
-                                <<
-                                    \context RhythmicStaff = "Rhythmic_Staff"
-                                    \with
-                                    {
-                                        \remove Time_signature_engraver
-                                        \remove Staff_symbol_engraver
-                                        \override Stem.direction = #up
-                                        \override Stem.length = 5
-                                        \override TupletBracket.bracket-visibility = ##t
-                                        \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = 4
-                                        \override TupletBracket.padding = 1.25
-                                        \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                        \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = 0
-                                        \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                        tupletFullLength = ##t
-                                    }
-                                    {
-                                        c'8
-                                    }
-                                >>
-                                \layout
-                                {
-                                    indent = 0
-                                    ragged-right = ##t
-                                }
-                            }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \once \override Beam.grow-direction = #right
-                            d'16 * 1328/1024
-                            [
-                            bf'16 * 720/1024
-                            ]
-                        }
-                        \revert TupletNumber.text
-                        \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
-                            {
-                                \context Score = "Score"
-                                \with
-                                {
-                                    \override SpacingSpanner.spacing-increment = 0.5
-                                    proportionalNotationDuration = ##f
-                                }
-                                <<
-                                    \context RhythmicStaff = "Rhythmic_Staff"
-                                    \with
-                                    {
-                                        \remove Time_signature_engraver
-                                        \remove Staff_symbol_engraver
-                                        \override Stem.direction = #up
-                                        \override Stem.length = 5
-                                        \override TupletBracket.bracket-visibility = ##t
-                                        \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = 4
-                                        \override TupletBracket.padding = 1.25
-                                        \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                        \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = 0
-                                        \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                        tupletFullLength = ##t
-                                    }
-                                    {
-                                        c'8.
-                                    }
-                                >>
-                                \layout
-                                {
-                                    indent = 0
-                                    ragged-right = ##t
-                                }
-                            }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \once \override Beam.grow-direction = #right
-                            fs''16 * 1552/1024
-                            [
-                            e''16 * 832/1024
-                            ef''16 * 688/1024
-                            ]
-                        }
-                        \revert TupletNumber.text
-                        \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
-                            {
-                                \context Score = "Score"
-                                \with
-                                {
-                                    \override SpacingSpanner.spacing-increment = 0.5
-                                    proportionalNotationDuration = ##f
-                                }
-                                <<
-                                    \context RhythmicStaff = "Rhythmic_Staff"
-                                    \with
-                                    {
-                                        \remove Time_signature_engraver
-                                        \remove Staff_symbol_engraver
-                                        \override Stem.direction = #up
-                                        \override Stem.length = 5
-                                        \override TupletBracket.bracket-visibility = ##t
-                                        \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = 4
-                                        \override TupletBracket.padding = 1.25
-                                        \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                        \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = 0
-                                        \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                        tupletFullLength = ##t
-                                    }
-                                    {
-                                        c'4
-                                    }
-                                >>
-                                \layout
-                                {
-                                    indent = 0
-                                    ragged-right = ##t
-                                }
-                            }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \once \override Beam.grow-direction = #right
-                            af''16 * 1728/1024
-                            [
-                            g''16 * 928/1024
-                            a'16 * 768/1024
-                            c'16 * 672/1024
-                            ]
-                        }
-                        \revert TupletNumber.text
-                        \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
-                            {
-                                \context Score = "Score"
-                                \with
-                                {
-                                    \override SpacingSpanner.spacing-increment = 0.5
-                                    proportionalNotationDuration = ##f
-                                }
-                                <<
-                                    \context RhythmicStaff = "Rhythmic_Staff"
-                                    \with
-                                    {
-                                        \remove Time_signature_engraver
-                                        \remove Staff_symbol_engraver
-                                        \override Stem.direction = #up
-                                        \override Stem.length = 5
-                                        \override TupletBracket.bracket-visibility = ##t
-                                        \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = 4
-                                        \override TupletBracket.padding = 1.25
-                                        \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                        \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = 0
-                                        \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                        tupletFullLength = ##t
-                                    }
-                                    {
-                                        c'4
-                                        ~
-                                        c'16
-                                    }
-                                >>
-                                \layout
-                                {
-                                    indent = 0
-                                    ragged-right = ##t
-                                }
-                            }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \once \override Beam.grow-direction = #right
-                            d'16 * 1872/1024
-                            [
-                            bf'16 * 1008/1024
-                            fs''16 * 832/1024
-                            e''16 * 736/1024
-                            ef''16 * 672/1024
-                            ]
-                        }
-                        \revert TupletNumber.text
-                        \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
-                            {
-                                \context Score = "Score"
-                                \with
-                                {
-                                    \override SpacingSpanner.spacing-increment = 0.5
-                                    proportionalNotationDuration = ##f
-                                }
-                                <<
-                                    \context RhythmicStaff = "Rhythmic_Staff"
-                                    \with
-                                    {
-                                        \remove Time_signature_engraver
-                                        \remove Staff_symbol_engraver
-                                        \override Stem.direction = #up
-                                        \override Stem.length = 5
-                                        \override TupletBracket.bracket-visibility = ##t
-                                        \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = 4
-                                        \override TupletBracket.padding = 1.25
-                                        \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                        \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = 0
-                                        \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                        tupletFullLength = ##t
-                                    }
-                                    {
-                                        c'4.
-                                    }
-                                >>
-                                \layout
-                                {
-                                    indent = 0
-                                    ragged-right = ##t
-                                }
-                            }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \once \override Beam.grow-direction = #right
-                            af''16 * 2000/1024
-                            [
-                            g''16 * 1088/1024
-                            a'16 * 896/1024
-                            c'16 * 784/1024
-                            d'16 * 720/1024
-                            bf'16 * 656/1024
-                            ]
-                        }
-                        \revert TupletNumber.text
-                    }
-                >>
-
-        ..  container:: example
-
-            Ritardandi:
-
-            >>> stack = baca.stack(
-            ...     baca.figure([1], 16, treatments=["rit"]),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [
-            ...     [0],
-            ...     [2, 10],
-            ...     [18, 16, 15],
-            ...     [20, 19, 9, 0],
-            ...     [2, 10, 18, 16, 15],
-            ...     [20, 19, 9, 0, 2, 10],
-            ... ]
-            >>> selections = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 21/16
-                            c'16
-                        }
-                        \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
-                            {
-                                \context Score = "Score"
-                                \with
-                                {
-                                    \override SpacingSpanner.spacing-increment = 0.5
-                                    proportionalNotationDuration = ##f
-                                }
-                                <<
-                                    \context RhythmicStaff = "Rhythmic_Staff"
-                                    \with
-                                    {
-                                        \remove Time_signature_engraver
-                                        \remove Staff_symbol_engraver
-                                        \override Stem.direction = #up
-                                        \override Stem.length = 5
-                                        \override TupletBracket.bracket-visibility = ##t
-                                        \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = 4
-                                        \override TupletBracket.padding = 1.25
-                                        \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                        \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = 0
-                                        \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                        tupletFullLength = ##t
-                                    }
-                                    {
-                                        c'8
-                                    }
-                                >>
-                                \layout
-                                {
-                                    indent = 0
-                                    ragged-right = ##t
-                                }
-                            }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \once \override Beam.grow-direction = #left
-                            d'16 * 656/1024
-                            [
-                            bf'16 * 1392/1024
-                            ]
-                        }
-                        \revert TupletNumber.text
-                        \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
-                            {
-                                \context Score = "Score"
-                                \with
-                                {
-                                    \override SpacingSpanner.spacing-increment = 0.5
-                                    proportionalNotationDuration = ##f
-                                }
-                                <<
-                                    \context RhythmicStaff = "Rhythmic_Staff"
-                                    \with
-                                    {
-                                        \remove Time_signature_engraver
-                                        \remove Staff_symbol_engraver
-                                        \override Stem.direction = #up
-                                        \override Stem.length = 5
-                                        \override TupletBracket.bracket-visibility = ##t
-                                        \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = 4
-                                        \override TupletBracket.padding = 1.25
-                                        \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                        \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = 0
-                                        \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                        tupletFullLength = ##t
-                                    }
-                                    {
-                                        c'8.
-                                    }
-                                >>
-                                \layout
-                                {
-                                    indent = 0
-                                    ragged-right = ##t
-                                }
-                            }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \once \override Beam.grow-direction = #left
-                            fs''16 * 512/1024
-                            [
-                            e''16 * 1072/1024
-                            ef''16 * 1488/1024
-                            ]
-                        }
-                        \revert TupletNumber.text
-                        \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
-                            {
-                                \context Score = "Score"
-                                \with
-                                {
-                                    \override SpacingSpanner.spacing-increment = 0.5
-                                    proportionalNotationDuration = ##f
-                                }
-                                <<
-                                    \context RhythmicStaff = "Rhythmic_Staff"
-                                    \with
-                                    {
-                                        \remove Time_signature_engraver
-                                        \remove Staff_symbol_engraver
-                                        \override Stem.direction = #up
-                                        \override Stem.length = 5
-                                        \override TupletBracket.bracket-visibility = ##t
-                                        \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = 4
-                                        \override TupletBracket.padding = 1.25
-                                        \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                        \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = 0
-                                        \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                        tupletFullLength = ##t
-                                    }
-                                    {
-                                        c'4
-                                    }
-                                >>
-                                \layout
-                                {
-                                    indent = 0
-                                    ragged-right = ##t
-                                }
-                            }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \once \override Beam.grow-direction = #left
-                            af''16 * 432/1024
-                            [
-                            g''16 * 896/1024
-                            a'16 * 1232/1024
-                            c'16 * 1536/1024
-                            ]
-                        }
-                        \revert TupletNumber.text
-                        \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
-                            {
-                                \context Score = "Score"
-                                \with
-                                {
-                                    \override SpacingSpanner.spacing-increment = 0.5
-                                    proportionalNotationDuration = ##f
-                                }
-                                <<
-                                    \context RhythmicStaff = "Rhythmic_Staff"
-                                    \with
-                                    {
-                                        \remove Time_signature_engraver
-                                        \remove Staff_symbol_engraver
-                                        \override Stem.direction = #up
-                                        \override Stem.length = 5
-                                        \override TupletBracket.bracket-visibility = ##t
-                                        \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = 4
-                                        \override TupletBracket.padding = 1.25
-                                        \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                        \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = 0
-                                        \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                        tupletFullLength = ##t
-                                    }
-                                    {
-                                        c'4
-                                        ~
-                                        c'16
-                                    }
-                                >>
-                                \layout
-                                {
-                                    indent = 0
-                                    ragged-right = ##t
-                                }
-                            }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \once \override Beam.grow-direction = #left
-                            d'16 * 368/1024
-                            [
-                            bf'16 * 784/1024
-                            fs''16 * 1072/1024
-                            e''16 * 1328/1024
-                            ef''16 * 1568/1024
-                            ]
-                        }
-                        \revert TupletNumber.text
-                        \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
-                            {
-                                \context Score = "Score"
-                                \with
-                                {
-                                    \override SpacingSpanner.spacing-increment = 0.5
-                                    proportionalNotationDuration = ##f
-                                }
-                                <<
-                                    \context RhythmicStaff = "Rhythmic_Staff"
-                                    \with
-                                    {
-                                        \remove Time_signature_engraver
-                                        \remove Staff_symbol_engraver
-                                        \override Stem.direction = #up
-                                        \override Stem.length = 5
-                                        \override TupletBracket.bracket-visibility = ##t
-                                        \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = 4
-                                        \override TupletBracket.padding = 1.25
-                                        \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                        \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = 0
-                                        \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                        tupletFullLength = ##t
-                                    }
-                                    {
-                                        c'4.
-                                    }
-                                >>
-                                \layout
-                                {
-                                    indent = 0
-                                    ragged-right = ##t
-                                }
-                            }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \once \override Beam.grow-direction = #left
-                            af''16 * 336/1024
-                            [
-                            g''16 * 704/1024
-                            a'16 * 960/1024
-                            c'16 * 1184/1024
-                            d'16 * 1392/1024
-                            bf'16 * 1568/1024
-                            ]
-                        }
-                        \revert TupletNumber.text
-                    }
-                >>
-
-        ..  container:: example
-
-            Accelerandi followed by ritardandi:
-
-            >>> stack = baca.stack(
-            ...     baca.figure(
-            ...         [1], 16, treatments=["accel", "rit"]
-            ...     ),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [
-            ...     [0, 2, 10, 18, 16],
-            ...     [15, 20, 19, 9, 0, 2],
-            ...     [10, 18, 16, 15, 20],
-            ...     [19, 9, 0, 2, 10, 18],
-            ... ]
-            >>> selections = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
-                            {
-                                \context Score = "Score"
-                                \with
-                                {
-                                    \override SpacingSpanner.spacing-increment = 0.5
-                                    proportionalNotationDuration = ##f
-                                }
-                                <<
-                                    \context RhythmicStaff = "Rhythmic_Staff"
-                                    \with
-                                    {
-                                        \remove Time_signature_engraver
-                                        \remove Staff_symbol_engraver
-                                        \override Stem.direction = #up
-                                        \override Stem.length = 5
-                                        \override TupletBracket.bracket-visibility = ##t
-                                        \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = 4
-                                        \override TupletBracket.padding = 1.25
-                                        \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                        \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = 0
-                                        \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                        tupletFullLength = ##t
-                                    }
-                                    {
-                                        c'4
-                                        ~
-                                        c'16
-                                    }
-                                >>
-                                \layout
-                                {
-                                    indent = 0
-                                    ragged-right = ##t
-                                }
-                            }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \once \override Beam.grow-direction = #right
-                            \time 11/8
-                            c'16 * 1872/1024
-                            [
-                            d'16 * 1008/1024
-                            bf'16 * 832/1024
-                            fs''16 * 736/1024
-                            e''16 * 672/1024
-                            ]
-                        }
-                        \revert TupletNumber.text
-                        \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
-                            {
-                                \context Score = "Score"
-                                \with
-                                {
-                                    \override SpacingSpanner.spacing-increment = 0.5
-                                    proportionalNotationDuration = ##f
-                                }
-                                <<
-                                    \context RhythmicStaff = "Rhythmic_Staff"
-                                    \with
-                                    {
-                                        \remove Time_signature_engraver
-                                        \remove Staff_symbol_engraver
-                                        \override Stem.direction = #up
-                                        \override Stem.length = 5
-                                        \override TupletBracket.bracket-visibility = ##t
-                                        \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = 4
-                                        \override TupletBracket.padding = 1.25
-                                        \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                        \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = 0
-                                        \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                        tupletFullLength = ##t
-                                    }
-                                    {
-                                        c'4.
-                                    }
-                                >>
-                                \layout
-                                {
-                                    indent = 0
-                                    ragged-right = ##t
-                                }
-                            }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \once \override Beam.grow-direction = #left
-                            ef''16 * 336/1024
-                            [
-                            af''16 * 704/1024
-                            g''16 * 960/1024
-                            a'16 * 1184/1024
-                            c'16 * 1392/1024
-                            d'16 * 1568/1024
-                            ]
-                        }
-                        \revert TupletNumber.text
-                        \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
-                            {
-                                \context Score = "Score"
-                                \with
-                                {
-                                    \override SpacingSpanner.spacing-increment = 0.5
-                                    proportionalNotationDuration = ##f
-                                }
-                                <<
-                                    \context RhythmicStaff = "Rhythmic_Staff"
-                                    \with
-                                    {
-                                        \remove Time_signature_engraver
-                                        \remove Staff_symbol_engraver
-                                        \override Stem.direction = #up
-                                        \override Stem.length = 5
-                                        \override TupletBracket.bracket-visibility = ##t
-                                        \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = 4
-                                        \override TupletBracket.padding = 1.25
-                                        \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                        \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = 0
-                                        \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                        tupletFullLength = ##t
-                                    }
-                                    {
-                                        c'4
-                                        ~
-                                        c'16
-                                    }
-                                >>
-                                \layout
-                                {
-                                    indent = 0
-                                    ragged-right = ##t
-                                }
-                            }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \once \override Beam.grow-direction = #right
-                            bf'16 * 1872/1024
-                            [
-                            fs''16 * 1008/1024
-                            e''16 * 832/1024
-                            ef''16 * 736/1024
-                            af''16 * 672/1024
-                            ]
-                        }
-                        \revert TupletNumber.text
-                        \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
-                            {
-                                \context Score = "Score"
-                                \with
-                                {
-                                    \override SpacingSpanner.spacing-increment = 0.5
-                                    proportionalNotationDuration = ##f
-                                }
-                                <<
-                                    \context RhythmicStaff = "Rhythmic_Staff"
-                                    \with
-                                    {
-                                        \remove Time_signature_engraver
-                                        \remove Staff_symbol_engraver
-                                        \override Stem.direction = #up
-                                        \override Stem.length = 5
-                                        \override TupletBracket.bracket-visibility = ##t
-                                        \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = 4
-                                        \override TupletBracket.padding = 1.25
-                                        \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                        \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = 0
-                                        \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                        tupletFullLength = ##t
-                                    }
-                                    {
-                                        c'4.
-                                    }
-                                >>
-                                \layout
-                                {
-                                    indent = 0
-                                    ragged-right = ##t
-                                }
-                            }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \once \override Beam.grow-direction = #left
-                            g''16 * 336/1024
-                            [
-                            a'16 * 704/1024
-                            c'16 * 960/1024
-                            d'16 * 1184/1024
-                            bf'16 * 1392/1024
-                            fs''16 * 1568/1024
-                            ]
-                        }
-                        \revert TupletNumber.text
-                    }
-                >>
-
-        ..  container:: example
-
-            Mixed accelerandi, ritardandi and prolation:
-
-            >>> stack = baca.stack(
-            ...     baca.figure([1], 16, treatments=["accel", -2, "rit"]),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [
-            ...     [0, 2, 10, 18, 16],
-            ...     [15, 20, 19, 9, 0],
-            ...     [2, 10, 18, 16, 15],
-            ...     [20, 19, 9, 0, 2],
-            ...     [10, 18, 16, 15, 20],
-            ...     [19, 9, 0, 2, 10],
-            ... ]
-            >>> selections = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
-                            {
-                                \context Score = "Score"
-                                \with
-                                {
-                                    \override SpacingSpanner.spacing-increment = 0.5
-                                    proportionalNotationDuration = ##f
-                                }
-                                <<
-                                    \context RhythmicStaff = "Rhythmic_Staff"
-                                    \with
-                                    {
-                                        \remove Time_signature_engraver
-                                        \remove Staff_symbol_engraver
-                                        \override Stem.direction = #up
-                                        \override Stem.length = 5
-                                        \override TupletBracket.bracket-visibility = ##t
-                                        \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = 4
-                                        \override TupletBracket.padding = 1.25
-                                        \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                        \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = 0
-                                        \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                        tupletFullLength = ##t
-                                    }
-                                    {
-                                        c'4
-                                        ~
-                                        c'16
-                                    }
-                                >>
-                                \layout
-                                {
-                                    indent = 0
-                                    ragged-right = ##t
-                                }
-                            }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \once \override Beam.grow-direction = #right
-                            \time 13/8
-                            c'16 * 1872/1024
-                            [
-                            d'16 * 1008/1024
-                            bf'16 * 832/1024
-                            fs''16 * 736/1024
-                            e''16 * 672/1024
-                            ]
-                        }
-                        \revert TupletNumber.text
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/5
-                        {
-                            ef''16
-                            [
-                            af''16
-                            g''16
-                            a'16
-                            c'16
-                            ]
-                        }
-                        \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
-                            {
-                                \context Score = "Score"
-                                \with
-                                {
-                                    \override SpacingSpanner.spacing-increment = 0.5
-                                    proportionalNotationDuration = ##f
-                                }
-                                <<
-                                    \context RhythmicStaff = "Rhythmic_Staff"
-                                    \with
-                                    {
-                                        \remove Time_signature_engraver
-                                        \remove Staff_symbol_engraver
-                                        \override Stem.direction = #up
-                                        \override Stem.length = 5
-                                        \override TupletBracket.bracket-visibility = ##t
-                                        \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = 4
-                                        \override TupletBracket.padding = 1.25
-                                        \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                        \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = 0
-                                        \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                        tupletFullLength = ##t
-                                    }
-                                    {
-                                        c'4
-                                        ~
-                                        c'16
-                                    }
-                                >>
-                                \layout
-                                {
-                                    indent = 0
-                                    ragged-right = ##t
-                                }
-                            }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \once \override Beam.grow-direction = #left
-                            d'16 * 368/1024
-                            [
-                            bf'16 * 784/1024
-                            fs''16 * 1072/1024
-                            e''16 * 1328/1024
-                            ef''16 * 1568/1024
-                            ]
-                        }
-                        \revert TupletNumber.text
-                        \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
-                            {
-                                \context Score = "Score"
-                                \with
-                                {
-                                    \override SpacingSpanner.spacing-increment = 0.5
-                                    proportionalNotationDuration = ##f
-                                }
-                                <<
-                                    \context RhythmicStaff = "Rhythmic_Staff"
-                                    \with
-                                    {
-                                        \remove Time_signature_engraver
-                                        \remove Staff_symbol_engraver
-                                        \override Stem.direction = #up
-                                        \override Stem.length = 5
-                                        \override TupletBracket.bracket-visibility = ##t
-                                        \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = 4
-                                        \override TupletBracket.padding = 1.25
-                                        \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                        \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = 0
-                                        \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                        tupletFullLength = ##t
-                                    }
-                                    {
-                                        c'4
-                                        ~
-                                        c'16
-                                    }
-                                >>
-                                \layout
-                                {
-                                    indent = 0
-                                    ragged-right = ##t
-                                }
-                            }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \once \override Beam.grow-direction = #right
-                            af''16 * 1872/1024
-                            [
-                            g''16 * 1008/1024
-                            a'16 * 832/1024
-                            c'16 * 736/1024
-                            d'16 * 672/1024
-                            ]
-                        }
-                        \revert TupletNumber.text
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/5
-                        {
-                            bf'16
-                            [
-                            fs''16
-                            e''16
-                            ef''16
-                            af''16
-                            ]
-                        }
-                        \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \score
-                            {
-                                \context Score = "Score"
-                                \with
-                                {
-                                    \override SpacingSpanner.spacing-increment = 0.5
-                                    proportionalNotationDuration = ##f
-                                }
-                                <<
-                                    \context RhythmicStaff = "Rhythmic_Staff"
-                                    \with
-                                    {
-                                        \remove Time_signature_engraver
-                                        \remove Staff_symbol_engraver
-                                        \override Stem.direction = #up
-                                        \override Stem.length = 5
-                                        \override TupletBracket.bracket-visibility = ##t
-                                        \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = 4
-                                        \override TupletBracket.padding = 1.25
-                                        \override TupletBracket.shorten-pair = #'(-1 . -1.5)
-                                        \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = 0
-                                        \override TupletNumber.text = #tuplet-number::calc-fraction-text
-                                        tupletFullLength = ##t
-                                    }
-                                    {
-                                        c'4
-                                        ~
-                                        c'16
-                                    }
-                                >>
-                                \layout
-                                {
-                                    indent = 0
-                                    ragged-right = ##t
-                                }
-                            }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \once \override Beam.grow-direction = #left
-                            g''16 * 368/1024
-                            [
-                            a'16 * 784/1024
-                            c'16 * 1072/1024
-                            d'16 * 1328/1024
-                            bf'16 * 1568/1024
-                            ]
-                        }
-                        \revert TupletNumber.text
-                    }
-                >>
-
-        ..  container:: example
-
-            Specified by tuplet multiplier:
-
-            >>> stack = baca.stack(
-            ...     baca.figure([1], 8, treatments=["3:2"]),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [
-            ...     [0],
-            ...     [2, 10],
-            ...     [18, 16, 15],
-            ...     [20, 19, 9, 0],
-            ...     [2, 10, 18, 16, 15],
-            ...     [20, 19, 9, 0, 2, 10],
-            ... ]
-            >>> selections = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> staff = lilypond_file["Staff"]
-            >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
-            >>> abjad.override(staff).Stem.direction = abjad.Down
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    \with
-                    {
-                        \override Beam.positions = #'(-6 . -6)
-                        \override Stem.direction = #down
-                    }
-                    {
-                        \tweak edge-height #'(0.7 . 0)
-                        \times 2/3
-                        {
-                            \time 7/4
-                            c'8
-                        }
-                        \tweak edge-height #'(0.7 . 0)
-                        \times 2/3
-                        {
-                            d'8
-                            [
-                            bf'8
-                            ]
-                        }
-                        \times 2/3
-                        {
-                            fs''8
-                            [
-                            e''8
-                            ef''8
-                            ]
-                        }
-                        \tweak edge-height #'(0.7 . 0)
-                        \times 2/3
-                        {
-                            af''8
-                            [
-                            g''8
-                            a'8
-                            c'8
-                            ]
-                        }
-                        \tweak edge-height #'(0.7 . 0)
-                        \times 2/3
-                        {
-                            d'8
-                            [
-                            bf'8
-                            fs''8
-                            e''8
-                            ef''8
-                            ]
-                        }
-                        \times 2/3
-                        {
-                            af''8
-                            [
-                            g''8
-                            a'8
-                            c'8
-                            d'8
-                            bf'8
-                            ]
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Segment durations equal to a quarter:
-
-            >>> stack = baca.stack(
-            ...     baca.figure([1], 8, treatments=[(1, 4)]),
-            ...     rmakers.denominator((1, 16)),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [
-            ...     [0],
-            ...     [2, 10],
-            ...     [18, 16, 15],
-            ...     [20, 19, 9, 0],
-            ...     [2, 10, 18, 16, 15],
-            ...     [20, 19, 9, 0, 2, 10],
-            ... ]
-            >>> selections = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> staff = lilypond_file["Staff"]
-            >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
-            >>> abjad.override(staff).Stem.direction = abjad.Down
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    \with
-                    {
-                        \override Beam.positions = #'(-6 . -6)
-                        \override Stem.direction = #down
-                    }
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 3/2
-                            c'4
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            d'8
-                            [
-                            bf'8
-                            ]
-                        }
-                        \times 4/6
-                        {
-                            fs''8
-                            [
-                            e''8
-                            ef''8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            af''16
-                            [
-                            g''16
-                            a'16
-                            c'16
-                            ]
-                        }
-                        \times 4/5
-                        {
-                            d'16
-                            [
-                            bf'16
-                            fs''16
-                            e''16
-                            ef''16
-                            ]
-                        }
-                        \times 4/6
-                        {
-                            af''16
-                            [
-                            g''16
-                            a'16
-                            c'16
-                            d'16
-                            bf'16
-                            ]
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Collection durations alternating between a quarter and a dotted quarter:
-
-            >>> stack = baca.stack(
-            ...     baca.figure([1, 1, 2], 8, treatments=[(1, 4), (3, 8)]),
-            ...     rmakers.denominator((1, 16)),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [
-            ...     [0, 2, 10, 18, 16],
-            ...     [15, 20, 19, 9, 0],
-            ...     [2, 10, 18, 16, 15],
-            ...     [20, 19, 9, 0, 2],
-            ...     [10, 18, 16, 15, 20],
-            ...     [19, 9, 0, 2, 10],
-            ... ]
-            >>> selections = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selections)
-            >>> staff = lilypond_file["Staff"]
-            >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
-            >>> abjad.override(staff).Stem.direction = abjad.Down
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    \with
-                    {
-                        \override Beam.positions = #'(-6 . -6)
-                        \override Stem.direction = #down
-                    }
-                    {
-                        \times 4/6
-                        {
-                            \time 15/8
-                            c'16
-                            [
-                            d'16
-                            bf'8
-                            fs''16
-                            e''16
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 6/7
-                        {
-                            ef''8
-                            [
-                            af''16
-                            g''16
-                            a'8
-                            c'16
-                            ]
-                        }
-                        \times 4/7
-                        {
-                            d'16
-                            [
-                            bf'8
-                            fs''16
-                            e''16
-                            ef''8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            af''16
-                            [
-                            g''16
-                            a'8
-                            c'16
-                            d'16
-                            ]
-                        }
-                        \times 4/7
-                        {
-                            bf'8
-                            [
-                            fs''16
-                            e''16
-                            ef''8
-                            af''16
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 6/7
-                        {
-                            g''16
-                            [
-                            a'8
-                            c'16
-                            d'16
-                            bf'8
-                            ]
-                        }
-                    }
-                >>
-
-        Time treatments defined equal to integers; positive multipliers; positive
-        durations; and the strings ``'accel'`` and ``'rit'``.
-        """
-        return self._treatments
-
-
+@dataclasses.dataclass(slots=True)
 class Assignment:
     """
     Assignment.
     """
 
-    ### CLASS ATTRIBUTES ###
+    maker: FigureMaker
+    pattern: abjad.Pattern = None
 
-    __slots__ = ("_maker", "_pattern")
-
-    ### INITIALIZER ###
-
-    def __init__(self, maker: FigureMaker, *, pattern: abjad.Pattern = None) -> None:
-        assert isinstance(maker, FigureMaker)
-        self._maker = maker
-        if pattern is not None:
-            assert isinstance(pattern, abjad.Pattern)
-        self._pattern = pattern
-
-    ### SPECIAL METHODS ###
-
-    def __eq__(self, argument) -> bool:
-        """
-        Compares ``maker``, ``pattern``.
-        """
-        if isinstance(argument, type(self)):
-            return self.make == argument.maker and self.pattern == argument.pattern
-        return False
-
-    def __hash__(self) -> int:
-        """
-        Hashes object.
-        """
-        return hash(str(self))
-
-    def __repr__(self) -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.format.get_repr(self)
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def maker(self) -> FigureMaker:
-        """
-        Gets maker.
-        """
-        return self._maker
-
-    @property
-    def pattern(self) -> typing.Optional[abjad.Pattern]:
-        """
-        Gets pattern.
-        """
-        return self._pattern
+    def __post_init__(self):
+        assert isinstance(self.maker, FigureMaker)
+        if self.pattern is not None:
+            assert isinstance(self.pattern, abjad.Pattern)
 
 
+@dataclasses.dataclass(slots=True)
 class Bind:
     """
     Bind.
     """
 
-    ### CLASS ATTRIBUTES ###
+    assignments: typing.Any = None
 
-    __slots__ = ("_assignments",)
-
-    ### INITIALIZER ###
-
-    def __init__(self, *assignments: Assignment) -> None:
-        for assignment in assignments:
+    def __post_init__(self):
+        self.assignments = self.assignments or []
+        for assignment in self.assignments:
             if not isinstance(assignment, Assignment):
-                message = "must be assignment:\n"
-                message += f"   {assignment!r}"
-                raise Exception(message)
-        self._assignments = list(assignments)
-
-    ### SPECIAL METHODS ###
+                raise Exception("must be assignment:\n   {assignment!r}")
+        self.assignments = list(self.assignments)
 
     def __call__(self, collections: typing.Sequence) -> abjad.Selection:
-        """
-        Calls bind.
-        """
         collection_count = len(collections)
         matches = []
         for i, collection in enumerate(collections):
@@ -6961,35 +6305,6 @@ class Bind:
         assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
         selection = abjad.select(tuplets)
         return selection
-
-    def __eq__(self, argument) -> bool:
-        """
-        Compares ``assignments``.
-        """
-        if isinstance(argument, type(self)):
-            return self.assignments == argument.assignments
-        return False
-
-    def __hash__(self) -> int:
-        """
-        Hashes object.
-        """
-        return hash(str(self))
-
-    def __repr__(self) -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.format.get_repr(self)
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def assignments(self) -> typing.List[Assignment]:
-        """
-        Gets assignments.
-        """
-        return self._assignments
 
 
 def anchor(
@@ -7040,11 +6355,12 @@ def assign(maker: FigureMaker, pattern: abjad.Pattern = None) -> Assignment:
     return Assignment(maker, pattern=pattern)
 
 
-def bind(*assignments: Assignment) -> Bind:
+def bind(assignments):
     """
     Makes bind.
     """
-    return Bind(*assignments)
+    assert isinstance(assignments, (tuple, list))
+    return Bind(assignments)
 
 
 def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
