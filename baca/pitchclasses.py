@@ -648,8 +648,8 @@ class CollectionList(collections_module.abc.Sequence):
         ...     ]):
         ...     collection
         ...
-        PitchSegment([12, 14, 18, 17])
-        PitchSegment([16, 20, 19])
+        PitchSegment(items=[12, 14, 18, 17], item_class=NumberedPitch)
+        PitchSegment(items=[16, 20, 19], item_class=NumberedPitch)
 
     ..  container:: example
 
@@ -664,8 +664,8 @@ class CollectionList(collections_module.abc.Sequence):
         ...     ):
         ...     collection
         ...
-        PitchSegment("c'' d'' fs'' f''")
-        PitchSegment("e'' af'' g''")
+        PitchSegment(items="c'' d'' fs'' f''", item_class=NamedPitch)
+        PitchSegment(items="e'' af'' g''", item_class=NamedPitch)
 
     ..  container:: example
 
@@ -680,8 +680,8 @@ class CollectionList(collections_module.abc.Sequence):
         ...     ):
         ...     collection
         ...
-        PitchClassSegment([0, 2, 6, 5])
-        PitchClassSegment([4, 8, 7])
+        PitchClassSegment(items=[0, 2, 6, 5], item_class=NumberedPitchClass)
+        PitchClassSegment(items=[4, 8, 7], item_class=NumberedPitchClass)
 
     ..  container:: example
 
@@ -696,8 +696,8 @@ class CollectionList(collections_module.abc.Sequence):
         ...     ):
         ...     collection
         ...
-        PitchClassSegment("c d fs f")
-        PitchClassSegment("e af g")
+        PitchClassSegment(items="c d fs f", item_class=NamedPitchClass)
+        PitchClassSegment(items="e af g", item_class=NamedPitchClass)
 
     ..  container:: example
 
@@ -709,8 +709,8 @@ class CollectionList(collections_module.abc.Sequence):
         ...     ]):
         ...     collection
         ...
-        PitchSegment([12, 14, 18, 17])
-        PitchSegment("ff'' gs'' g''")
+        PitchSegment(items=[12, 14, 18, 17], item_class=NumberedPitch)
+        PitchSegment(items="ff'' gs'' g''", item_class=NamedPitch)
 
     ..  container:: example
 
@@ -722,8 +722,8 @@ class CollectionList(collections_module.abc.Sequence):
         ...     ]):
         ...     collection
         ...
-        PitchSet([12, 14, 17, 18])
-        PitchSet([16, 19, 20])
+        PitchSet(items=[12, 14, 17, 18], item_class=abjad.NumberedPitch)
+        PitchSet(items=[16, 19, 20], item_class=abjad.NumberedPitch)
 
     ..  container:: example
 
@@ -737,8 +737,8 @@ class CollectionList(collections_module.abc.Sequence):
         ...     ):
         ...     collection
         ...
-        PitchSet(["c''", "d''", "f''", "fs''"])
-        PitchSet(["e''", "g''", "af''"])
+        PitchSet(items=["c''", "d''", "f''", "fs''"], item_class=abjad.NamedPitch)
+        PitchSet(items=["e''", "g''", "af''"], item_class=abjad.NamedPitch)
 
     ..  container:: example
 
@@ -752,8 +752,8 @@ class CollectionList(collections_module.abc.Sequence):
         ...     ):
         ...     collection
         ...
-        PitchClassSet([0, 2, 5, 6])
-        PitchClassSet([4, 7, 8])
+        PitchClassSet(items=[0, 2, 5, 6], item_class=abjad.NumberedPitchClass)
+        PitchClassSet(items=[4, 7, 8], item_class=abjad.NumberedPitchClass)
 
     ..  container:: example
 
@@ -767,8 +767,8 @@ class CollectionList(collections_module.abc.Sequence):
         ...     ):
         ...     collection
         ...
-        PitchClassSet(['c', 'd', 'f', 'fs'])
-        PitchClassSet(['e', 'g', 'af'])
+        PitchClassSet(items=['c', 'd', 'f', 'fs'], item_class=abjad.NamedPitchClass)
+        PitchClassSet(items=['e', 'g', 'af'], item_class=abjad.NamedPitchClass)
 
     ..  container:: example
 
@@ -780,8 +780,8 @@ class CollectionList(collections_module.abc.Sequence):
         ...     ]):
         ...     collection
         ...
-        PitchSegment([12, 14, 18, 17])
-        PitchSegment("ff'' gs'' g''")
+        PitchSegment(items=[12, 14, 18, 17], item_class=NumberedPitch)
+        PitchSegment(items="ff'' gs'' g''", item_class=NamedPitch)
 
     ..  container:: example
 
@@ -793,8 +793,8 @@ class CollectionList(collections_module.abc.Sequence):
         ...     ]):
         ...     collection
         ...
-        PitchSet([12, 14, 17, 18])
-        PitchSegment([16, 20, 19])
+        PitchSet(items=[12, 14, 17, 18], item_class=abjad.NumberedPitch)
+        PitchSegment(items=[16, 20, 19], item_class=NumberedPitch)
 
     ..  container:: example
 
@@ -929,10 +929,10 @@ class CollectionList(collections_module.abc.Sequence):
             ... ])
 
             >>> collections[0]
-            PitchSegment([12, 14, 18, 17])
+            PitchSegment(items=[12, 14, 18, 17], item_class=NumberedPitch)
 
             >>> collections[-1]
-            PitchSegment([16, 20, 19])
+            PitchSegment(items=[16, 20, 19], item_class=NumberedPitch)
 
         ..  container:: example
 
@@ -1072,7 +1072,7 @@ class CollectionList(collections_module.abc.Sequence):
             ... ])
 
             >>> collections.collections
-            [PitchSegment([12, 14, 18, 17]), PitchSegment([16, 20, 19])]
+            [PitchSegment(items=[12, 14, 18, 17], item_class=NumberedPitch), PitchSegment(items=[16, 20, 19], item_class=NumberedPitch)]
 
         """
         if self._collections:
@@ -1102,14 +1102,14 @@ class CollectionList(collections_module.abc.Sequence):
             >>> for collection in collections.accumulate([lambda _: _.transpose(n=3)]):
             ...     collection
             ...
-            PitchClassSegment([0, 2, 6, 5])
-            PitchClassSegment([4, 8, 7])
-            PitchClassSegment([3, 5, 9, 8])
-            PitchClassSegment([7, 11, 10])
-            PitchClassSegment([6, 8, 0, 11])
-            PitchClassSegment([10, 2, 1])
-            PitchClassSegment([9, 11, 3, 2])
-            PitchClassSegment([1, 5, 4])
+            PitchClassSegment(items=[0, 2, 6, 5], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[4, 8, 7], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[3, 5, 9, 8], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[7, 11, 10], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[6, 8, 0, 11], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[10, 2, 1], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[9, 11, 3, 2], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[1, 5, 4], item_class=NumberedPitchClass)
 
         ..  container:: example
 
@@ -1124,30 +1124,30 @@ class CollectionList(collections_module.abc.Sequence):
             >>> for collection in collections.accumulate(operands):
             ...     collection
             ...
-            PitchClassSegment([0, 2, 6, 5])
-            PitchClassSegment([4, 8, 7])
-            PitchClassSegment([3, 5, 9, 8])
-            PitchClassSegment([7, 11, 10])
-            PitchClassSegment([2, 4, 8, 9])
-            PitchClassSegment([6, 10, 11])
-            PitchClassSegment([5, 7, 11, 0])
-            PitchClassSegment([9, 1, 2])
-            PitchClassSegment([4, 6, 10, 1])
-            PitchClassSegment([8, 0, 3])
-            PitchClassSegment([7, 9, 1, 4])
-            PitchClassSegment([11, 3, 6])
-            PitchClassSegment([6, 8, 0, 5])
-            PitchClassSegment([10, 2, 7])
-            PitchClassSegment([9, 11, 3, 8])
-            PitchClassSegment([1, 5, 10])
-            PitchClassSegment([8, 10, 2, 9])
-            PitchClassSegment([0, 4, 11])
-            PitchClassSegment([11, 1, 5, 0])
-            PitchClassSegment([3, 7, 2])
-            PitchClassSegment([10, 0, 4, 1])
-            PitchClassSegment([2, 6, 3])
-            PitchClassSegment([1, 3, 7, 4])
-            PitchClassSegment([5, 9, 6])
+            PitchClassSegment(items=[0, 2, 6, 5], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[4, 8, 7], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[3, 5, 9, 8], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[7, 11, 10], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[2, 4, 8, 9], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[6, 10, 11], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[5, 7, 11, 0], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[9, 1, 2], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[4, 6, 10, 1], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[8, 0, 3], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[7, 9, 1, 4], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[11, 3, 6], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[6, 8, 0, 5], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[10, 2, 7], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[9, 11, 3, 8], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[1, 5, 10], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[8, 10, 2, 9], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[0, 4, 11], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[11, 1, 5, 0], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[3, 7, 2], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[10, 0, 4, 1], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[2, 6, 3], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[1, 3, 7, 4], item_class=NumberedPitchClass)
+            PitchClassSegment(items=[5, 9, 6], item_class=NumberedPitchClass)
 
         """
         sequence = _sequence.Sequence(items=self)
@@ -1352,18 +1352,18 @@ class CollectionList(collections_module.abc.Sequence):
             >>> for collection in collections:
             ...     collection
             ...
-            PitchSegment([12, 14, 18, 17])
-            PitchSegment([16, 20, 19])
-            PitchSegment([12, 14, 18, 17])
-            PitchSegment([16, 20, 19])
+            PitchSegment(items=[12, 14, 18, 17], item_class=NumberedPitch)
+            PitchSegment(items=[16, 20, 19], item_class=NumberedPitch)
+            PitchSegment(items=[12, 14, 18, 17], item_class=NumberedPitch)
+            PitchSegment(items=[16, 20, 19], item_class=NumberedPitch)
 
             >>> for collection in collections.chords():
             ...     collection
             ...
-            PitchSet([12, 14, 17, 18])
-            PitchSet([16, 19, 20])
-            PitchSet([12, 14, 17, 18])
-            PitchSet([16, 19, 20])
+            PitchSet(items=[12, 14, 17, 18], item_class=abjad.NumberedPitch)
+            PitchSet(items=[16, 19, 20], item_class=abjad.NumberedPitch)
+            PitchSet(items=[12, 14, 17, 18], item_class=abjad.NumberedPitch)
+            PitchSet(items=[16, 19, 20], item_class=abjad.NumberedPitch)
 
         ..  container:: example
 
@@ -1380,10 +1380,10 @@ class CollectionList(collections_module.abc.Sequence):
             >>> for collection in collections.chords(pattern=pattern):
             ...     collection
             ...
-            PitchSegment([12, 14, 18, 17])
-            PitchSet([16, 19, 20])
-            PitchSegment([12, 14, 18, 17])
-            PitchSet([16, 19, 20])
+            PitchSegment(items=[12, 14, 18, 17], item_class=NumberedPitch)
+            PitchSet(items=[16, 19, 20], item_class=abjad.NumberedPitch)
+            PitchSegment(items=[12, 14, 18, 17], item_class=NumberedPitch)
+            PitchSet(items=[16, 19, 20], item_class=abjad.NumberedPitch)
 
         """
         collections = []
@@ -1409,10 +1409,10 @@ class CollectionList(collections_module.abc.Sequence):
             Cursor(source=CollectionList([<5, 12, 14, 18>, <16, 17>]), cyclic=None, position=None, singletons=None, suppress_exception=None)
 
             >>> cursor.next()
-            [PitchSegment([5, 12, 14, 18])]
+            [PitchSegment(items=[5, 12, 14, 18], item_class=NumberedPitch)]
 
             >>> cursor.next()
-            [PitchSegment([16, 17])]
+            [PitchSegment(items=[16, 17], item_class=NumberedPitch)]
 
         """
         return _classes.Cursor(cyclic=cyclic, singletons=singletons, source=self)
@@ -1676,24 +1676,24 @@ class CollectionList(collections_module.abc.Sequence):
             >>> for collection in collections.helianthate(n=-1, m=1):
             ...     collection
             ...
-            PitchSegment([1, 2, 3])
-            PitchSegment([4, 5])
-            PitchSegment([6, 7, 8])
-            PitchSegment([5, 4])
-            PitchSegment([8, 6, 7])
-            PitchSegment([3, 1, 2])
-            PitchSegment([7, 8, 6])
-            PitchSegment([2, 3, 1])
-            PitchSegment([4, 5])
-            PitchSegment([1, 2, 3])
-            PitchSegment([5, 4])
-            PitchSegment([6, 7, 8])
-            PitchSegment([4, 5])
-            PitchSegment([8, 6, 7])
-            PitchSegment([3, 1, 2])
-            PitchSegment([7, 8, 6])
-            PitchSegment([2, 3, 1])
-            PitchSegment([5, 4])
+            PitchSegment(items=[1, 2, 3], item_class=NumberedPitch)
+            PitchSegment(items=[4, 5], item_class=NumberedPitch)
+            PitchSegment(items=[6, 7, 8], item_class=NumberedPitch)
+            PitchSegment(items=[5, 4], item_class=NumberedPitch)
+            PitchSegment(items=[8, 6, 7], item_class=NumberedPitch)
+            PitchSegment(items=[3, 1, 2], item_class=NumberedPitch)
+            PitchSegment(items=[7, 8, 6], item_class=NumberedPitch)
+            PitchSegment(items=[2, 3, 1], item_class=NumberedPitch)
+            PitchSegment(items=[4, 5], item_class=NumberedPitch)
+            PitchSegment(items=[1, 2, 3], item_class=NumberedPitch)
+            PitchSegment(items=[5, 4], item_class=NumberedPitch)
+            PitchSegment(items=[6, 7, 8], item_class=NumberedPitch)
+            PitchSegment(items=[4, 5], item_class=NumberedPitch)
+            PitchSegment(items=[8, 6, 7], item_class=NumberedPitch)
+            PitchSegment(items=[3, 1, 2], item_class=NumberedPitch)
+            PitchSegment(items=[7, 8, 6], item_class=NumberedPitch)
+            PitchSegment(items=[2, 3, 1], item_class=NumberedPitch)
+            PitchSegment(items=[5, 4], item_class=NumberedPitch)
 
         """
         collections = _sequence.Sequence(items=self)
@@ -1783,9 +1783,9 @@ class CollectionList(collections_module.abc.Sequence):
             ...     ):
             ...     collection
             ...
-            PitchSegment([5, 12, 14, 18, 17, 16, 17, 19])
-            PitchSegment([16, 17, 19, 5, 12, 14, 18, 17])
-            PitchSegment([16, 17, 19, 16, 17, 19])
+            PitchSegment(items=[5, 12, 14, 18, 17, 16, 17, 19], item_class=NumberedPitch)
+            PitchSegment(items=[16, 17, 19, 5, 12, 14, 18, 17], item_class=NumberedPitch)
+            PitchSegment(items=[16, 17, 19, 16, 17, 19], item_class=NumberedPitch)
 
         """
         if isinstance(argument, abjad.Ratio):
@@ -1814,12 +1814,12 @@ class CollectionList(collections_module.abc.Sequence):
             >>> for collection in collections.read([3, 3, 3, 5, 5, 5]):
             ...     collection
             ...
-            PitchSegment([5, 12, 14])
-            PitchSegment([18, 17, 16])
-            PitchSegment([17, 19, 5])
-            PitchSegment([12, 14, 18, 17, 16])
-            PitchSegment([17, 19, 5, 12, 14])
-            PitchSegment([18, 17, 16, 17, 19])
+            PitchSegment(items=[5, 12, 14], item_class=NumberedPitch)
+            PitchSegment(items=[18, 17, 16], item_class=NumberedPitch)
+            PitchSegment(items=[17, 19, 5], item_class=NumberedPitch)
+            PitchSegment(items=[12, 14, 18, 17, 16], item_class=NumberedPitch)
+            PitchSegment(items=[17, 19, 5, 12, 14], item_class=NumberedPitch)
+            PitchSegment(items=[18, 17, 16, 17, 19], item_class=NumberedPitch)
 
         ..  container:: example exception
 
@@ -2098,12 +2098,12 @@ class CollectionList(collections_module.abc.Sequence):
             >>> for collection in collections.repeat(n=3):
             ...     collection
             ...
-            PitchSegment([12, 14, 18, 17])
-            PitchSegment([16, 19])
-            PitchSegment([12, 14, 18, 17])
-            PitchSegment([16, 19])
-            PitchSegment([12, 14, 18, 17])
-            PitchSegment([16, 19])
+            PitchSegment(items=[12, 14, 18, 17], item_class=NumberedPitch)
+            PitchSegment(items=[16, 19], item_class=NumberedPitch)
+            PitchSegment(items=[12, 14, 18, 17], item_class=NumberedPitch)
+            PitchSegment(items=[16, 19], item_class=NumberedPitch)
+            PitchSegment(items=[12, 14, 18, 17], item_class=NumberedPitch)
+            PitchSegment(items=[16, 19], item_class=NumberedPitch)
 
         """
         collections = abjad.Sequence(items=self)
@@ -2891,7 +2891,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
             ..  container:: example
 
                 >>> J.alpha()
-                PitchClassSegment([11, 11.5, 7, 6, 11.5, 6])
+                PitchClassSegment(items=[11, 11.5, 7, 6, 11.5, 6], item_class=NumberedPitchClass)
 
                 >>> segment = J.alpha()
                 >>> lilypond_file = abjad.illustrate(segment)
@@ -2921,7 +2921,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
             ..  container:: example
 
                 >>> J.alpha().alpha()
-                PitchClassSegment([10, 10.5, 6, 7, 10.5, 7])
+                PitchClassSegment(items=[10, 10.5, 6, 7, 10.5, 7], item_class=NumberedPitchClass)
 
                 >>> segment = J.alpha().alpha()
                 >>> lilypond_file = abjad.illustrate(segment)
@@ -2983,7 +2983,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
             >>> segment = baca.PitchClassSegment([6, 0, 4, 5, 8])
 
             >>> segment.arpeggiate_down()
-            PitchSegment([42, 36, 28, 17, 8])
+            PitchSegment(items=[42, 36, 28, 17, 8], item_class=NumberedPitch)
 
             >>> lilypond_file = abjad.illustrate(segment.arpeggiate_down())
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -3033,7 +3033,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
             >>> segment = baca.PitchClassSegment([6, 0, 4, 5, 8])
 
             >>> segment.arpeggiate_up()
-            PitchSegment([6, 12, 16, 17, 20])
+            PitchSegment(items=[6, 12, 16, 17, 20], item_class=NumberedPitch)
 
             >>> lilypond_file = abjad.illustrate(segment.arpeggiate_up())
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -3083,7 +3083,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
             >>> segment = baca.PitchClassSegment([-2, -1.5, 6, 7])
 
             >>> segment.chord()
-            PitchClassSet([6, 7, 10, 10.5])
+            PitchClassSet(items=[6, 7, 10, 10.5], item_class=abjad.NumberedPitchClass)
 
             >>> lilypond_file = abjad.illustrate(segment.chord())
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -3538,9 +3538,9 @@ class PitchClassSegment(abjad.PitchClassSegment):
             for operator in operators:
                 operator_ = abjad.CompoundOperator()
                 operator_ = operator_.invert()
-                foo = list(operator_._operators)
+                foo = list(operator_.operators)
                 foo.extend(operator.operators)
-                operator_._operators = tuple(foo)
+                operator_.operators = tuple(foo)
                 operators_.append(operator_)
             operators = operators_
         if multiplication:
@@ -3766,7 +3766,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 }
 
             >>> segment.space_down(bass=6, soprano=7)
-            PitchSegment([19, 17, 11, 10, 6])
+            PitchSegment(items=[19, 17, 11, 10, 6], item_class=NumberedPitch)
 
             >>> segment = segment.space_down(bass=6, soprano=7)
             >>> lilypond_file = abjad.illustrate(segment)
@@ -3851,7 +3851,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 }
 
             >>> segment.space_up(bass=6, soprano=7)
-            PitchSegment([6, 10, 11, 17, 19])
+            PitchSegment(items=[6, 10, 11, 17, 19], item_class=NumberedPitch)
 
             >>> segment = segment.space_up(bass=6, soprano=7)
             >>> lilypond_file = abjad.illustrate(segment)
@@ -3976,10 +3976,10 @@ class PitchClassSet(abjad.PitchClassSet):
 
             >>> setting = baca.PitchClassSet([-2, -1.5, 6, 7, -1.5, 7])
             >>> setting
-            PitchClassSet([6, 7, 10, 10.5])
+            PitchClassSet(items=[6, 7, 10, 10.5], item_class=abjad.NumberedPitchClass)
 
             >>> setting.to_pitch_classes()
-            PitchClassSet([6, 7, 10, 10.5])
+            PitchClassSet(items=[6, 7, 10, 10.5], item_class=abjad.NumberedPitchClass)
 
         Returns new pitch-class set.
         """
@@ -3993,10 +3993,10 @@ class PitchClassSet(abjad.PitchClassSet):
 
             >>> setting = baca.PitchClassSet([-2, -1.5, 6, 7, -1.5, 7])
             >>> setting
-            PitchClassSet([6, 7, 10, 10.5])
+            PitchClassSet(items=[6, 7, 10, 10.5], item_class=abjad.NumberedPitchClass)
 
             >>> setting.to_pitches()
-            PitchSet([6, 7, 10, 10.5])
+            PitchSet(items=[6, 7, 10, 10.5], item_class=abjad.NumberedPitch)
 
         Returns pitch set.
         """
@@ -4103,7 +4103,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>
 
             >>> segment.bass_to_octave(n=4)
-            PitchSegment([10, 10.5, 18, 19, 10.5, 19])
+            PitchSegment(items=[10, 10.5, 18, 19, 10.5, 19], item_class=NumberedPitch)
 
             >>> segment = segment.bass_to_octave(n=4)
             >>> lilypond_file = abjad.illustrate(segment)
@@ -4190,7 +4190,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>
 
             >>> segment.center_to_octave(n=3)
-            PitchSegment([-14, -13.5, -6, -5, -13.5, -5])
+            PitchSegment(items=[-14, -13.5, -6, -5, -13.5, -5], item_class=NumberedPitch)
 
             >>> segment = segment.center_to_octave(n=3)
             >>> lilypond_file = abjad.illustrate(segment)
@@ -4246,7 +4246,7 @@ class PitchSegment(abjad.PitchSegment):
             >>> segment = baca.PitchSegment([-2, -1.5, 6, 7])
 
             >>> segment.chord()
-            PitchSet([-2, -1.5, 6, 7])
+            PitchSet(items=[-2, -1.5, 6, 7], item_class=abjad.NumberedPitch)
 
             >>> lilypond_file = abjad.illustrate(segment.chord())
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -4318,7 +4318,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>
 
             >>> segment.soprano_to_octave(n=3)
-            PitchSegment([-14, -13.5, -6, -5, -13.5, -5])
+            PitchSegment(items=[-14, -13.5, -6, -5, -13.5, -5], item_class=NumberedPitch)
 
             >>> segment = segment.soprano_to_octave(n=3)
             >>> lilypond_file = abjad.illustrate(segment)
@@ -4401,7 +4401,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>
 
             >>> segment.space_down(bass=0)
-            PitchSegment([14, 10, 9, 0])
+            PitchSegment(items=[14, 10, 9, 0], item_class=NumberedPitch)
 
             >>> segment = segment.space_down(bass=0)
             >>> lilypond_file = abjad.illustrate(segment)
@@ -4466,7 +4466,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>
 
             >>> segment.space_down(bass=2)
-            PitchSegment([12, 10, 9, 2])
+            PitchSegment(items=[12, 10, 9, 2], item_class=NumberedPitch)
 
             >>> segment = segment.space_down(bass=2)
             >>> lilypond_file = abjad.illustrate(segment)
@@ -4547,7 +4547,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>
 
             >>> segment.space_up(bass=0)
-            PitchSegment([0, 2, 9, 10])
+            PitchSegment(items=[0, 2, 9, 10], item_class=NumberedPitch)
 
             >>> segment = segment.space_up(bass=0)
             >>> lilypond_file = abjad.illustrate(segment)
@@ -4612,7 +4612,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>
 
             >>> segment.space_up(bass=2)
-            PitchSegment([2, 9, 10, 12])
+            PitchSegment(items=[2, 9, 10, 12], item_class=NumberedPitch)
 
             >>> segment = segment.space_up(bass=2)
             >>> lilypond_file = abjad.illustrate(segment)
@@ -4700,7 +4700,7 @@ class PitchSegment(abjad.PitchSegment):
             >>> upper, lower = segment.split(pitch=0)
 
             >>> upper
-            PitchSegment([6, 7, 7])
+            PitchSegment(items=[6, 7, 7], item_class=NumberedPitch)
 
             >>> lilypond_file = abjad.illustrate(upper)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -4729,7 +4729,7 @@ class PitchSegment(abjad.PitchSegment):
                 >>
 
             >>> lower
-            PitchSegment([-2, -1.5, -1.5])
+            PitchSegment(items=[-2, -1.5, -1.5], item_class=NumberedPitch)
 
             >>> lilypond_file = abjad.illustrate(lower)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -4878,7 +4878,7 @@ class PitchSet(abjad.PitchSet):
                 >>
 
             >>> setting.space_down(bass=0)
-            PitchSet([0, 9, 10, 14])
+            PitchSet(items=[0, 9, 10, 14], item_class=abjad.NumberedPitch)
 
             >>> setting = setting.space_down(bass=0)
             >>> lilypond_file = abjad.illustrate(setting)
@@ -4939,7 +4939,7 @@ class PitchSet(abjad.PitchSet):
                 >>
 
             >>> setting.space_down(bass=2)
-            PitchSet([2, 9, 10, 12])
+            PitchSet(items=[2, 9, 10, 12], item_class=abjad.NumberedPitch)
 
             >>> setting = setting.space_down(bass=2)
             >>> lilypond_file = abjad.illustrate(setting)
@@ -5016,7 +5016,7 @@ class PitchSet(abjad.PitchSet):
                 >>
 
             >>> setting.space_up(bass=0)
-            PitchSet([0, 2, 9, 10])
+            PitchSet(items=[0, 2, 9, 10], item_class=abjad.NumberedPitch)
 
             >>> setting = setting.space_up(bass=0)
             >>> lilypond_file = abjad.illustrate(setting)
@@ -5077,7 +5077,7 @@ class PitchSet(abjad.PitchSet):
                 >>
 
             >>> setting.space_up(bass=2)
-            PitchSet([2, 9, 10, 12])
+            PitchSet(items=[2, 9, 10, 12], item_class=abjad.NumberedPitch)
 
             >>> setting = setting.space_up(bass=2)
             >>> lilypond_file = abjad.illustrate(setting)
@@ -5128,10 +5128,10 @@ class PitchSet(abjad.PitchSet):
 
             >>> setting = baca.PitchSet([-2, -1.5, 6, 19, -1.5, 21])
             >>> setting
-            PitchSet([-2, -1.5, 6, 19, 21])
+            PitchSet(items=[-2, -1.5, 6, 19, 21], item_class=abjad.NumberedPitch)
 
             >>> setting.to_pitch_classes()
-            PitchClassSet([6, 7, 9, 10, 10.5])
+            PitchClassSet(items=[6, 7, 9, 10, 10.5], item_class=abjad.NumberedPitchClass)
 
         Returns new pitch-class set.
         """

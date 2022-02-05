@@ -1856,15 +1856,15 @@ def constellate(generator, range_):
         >>> sets = baca.constellation.constellate(generator, "[C4, C#7]")
         >>> for set_ in sets:
         ...     set_
-        PitchSet([0, 2, 4, 7, 8, 10])
-        PitchSet([0, 2, 10, 16, 19, 20])
-        PitchSet([0, 2, 10, 28, 31, 32])
-        PitchSet([4, 7, 8, 12, 14, 22])
-        PitchSet([12, 14, 16, 19, 20, 22])
-        PitchSet([12, 14, 22, 28, 31, 32])
-        PitchSet([4, 7, 8, 24, 26, 34])
-        PitchSet([16, 19, 20, 24, 26, 34])
-        PitchSet([24, 26, 28, 31, 32, 34])
+        PitchSet(items=[0, 2, 4, 7, 8, 10], item_class=abjad.NumberedPitch)
+        PitchSet(items=[0, 2, 10, 16, 19, 20], item_class=abjad.NumberedPitch)
+        PitchSet(items=[0, 2, 10, 28, 31, 32], item_class=abjad.NumberedPitch)
+        PitchSet(items=[4, 7, 8, 12, 14, 22], item_class=abjad.NumberedPitch)
+        PitchSet(items=[12, 14, 16, 19, 20, 22], item_class=abjad.NumberedPitch)
+        PitchSet(items=[12, 14, 22, 28, 31, 32], item_class=abjad.NumberedPitch)
+        PitchSet(items=[4, 7, 8, 24, 26, 34], item_class=abjad.NumberedPitch)
+        PitchSet(items=[16, 19, 20, 24, 26, 34], item_class=abjad.NumberedPitch)
+        PitchSet(items=[24, 26, 28, 31, 32, 34], item_class=abjad.NumberedPitch)
 
     ..  container:: example
 
@@ -1872,12 +1872,12 @@ def constellate(generator, range_):
         >>> sets = baca.constellation.constellate(generator, "[C4, C#7]")
         >>> for set_ in sets:
         ...     set_
-        PitchSet([4, 7, 8, 11, 15, 17])
-        PitchSet([4, 8, 11, 19, 27, 29])
-        PitchSet([7, 15, 16, 17, 20, 23])
-        PitchSet([16, 19, 20, 23, 27, 29])
-        PitchSet([7, 15, 17, 28, 32, 35])
-        PitchSet([19, 27, 28, 29, 32, 35])
+        PitchSet(items=[4, 7, 8, 11, 15, 17], item_class=abjad.NumberedPitch)
+        PitchSet(items=[4, 8, 11, 19, 27, 29], item_class=abjad.NumberedPitch)
+        PitchSet(items=[7, 15, 16, 17, 20, 23], item_class=abjad.NumberedPitch)
+        PitchSet(items=[16, 19, 20, 23, 27, 29], item_class=abjad.NumberedPitch)
+        PitchSet(items=[7, 15, 17, 28, 32, 35], item_class=abjad.NumberedPitch)
+        PitchSet(items=[19, 27, 28, 29, 32, 35], item_class=abjad.NumberedPitch)
 
     """
     assert isinstance(generator, list), repr(generator)
@@ -1988,7 +1988,7 @@ class Constellation:
             >>> generator = [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]]
             >>> constellation = baca.constellation.constellate(generator, "[A0, C8]")
             >>> constellation[0]
-            PitchSet([-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11])
+            PitchSet(items=[-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11], item_class=abjad.NumberedPitch)
 
         """
         return self._sets.__getitem__(argument)
