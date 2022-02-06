@@ -2,6 +2,7 @@
 Array.
 """
 import copy
+import dataclasses
 import numbers
 import typing
 
@@ -2016,6 +2017,7 @@ class PitchArrayColumn:
             return 0
 
 
+@dataclasses.dataclass(slots=True)
 class PitchArrayList(abjad.TypedList):
     """
     Pitch array list.
@@ -2038,15 +2040,9 @@ class PitchArrayList(abjad.TypedList):
         >>> arrays = baca.PitchArrayList(arrays)
 
         >>> arrays
-        PitchArrayList([PitchArray(rows=(PitchArrayRow(cells=(PitchArrayCell(width=1), PitchArrayCell(pitches="d'", width=1), PitchArrayCell(pitches="bf bqf", width=2))), PitchArrayRow(cells=(PitchArrayCell(pitches="g'", width=2), PitchArrayCell(pitches="fs'", width=1), PitchArrayCell(width=1))))), PitchArray(rows=(PitchArrayRow(cells=(PitchArrayCell(width=1), PitchArrayCell(width=1), PitchArrayCell(width=1))), PitchArrayRow(cells=(PitchArrayCell(width=1), PitchArrayCell(width=1), PitchArrayCell(width=1)))))])
+        PitchArrayList(items=[PitchArray(rows=(PitchArrayRow(cells=(PitchArrayCell(width=1), PitchArrayCell(pitches="d'", width=1), PitchArrayCell(pitches="bf bqf", width=2))), PitchArrayRow(cells=(PitchArrayCell(pitches="g'", width=2), PitchArrayCell(pitches="fs'", width=1), PitchArrayCell(width=1))))), PitchArray(rows=(PitchArrayRow(cells=(PitchArrayCell(width=1), PitchArrayCell(width=1), PitchArrayCell(width=1))), PitchArrayRow(cells=(PitchArrayCell(width=1), PitchArrayCell(width=1), PitchArrayCell(width=1)))))], item_class=None, keep_sorted=False)
 
     """
-
-    ### CLASS VARIABLES ###
-
-    __slots__ = ()
-
-    ### PUBLIC METHODS ###
 
     def to_score(self) -> abjad.Score:
         r"""

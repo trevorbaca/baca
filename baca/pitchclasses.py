@@ -2866,7 +2866,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
             type(self), type(argument)
         ):
             return False
-        return self._collection == argument._collection
+        return self.items == argument.items
 
     ### PUBLIC METHODS ###
 
@@ -3964,7 +3964,7 @@ class PitchClassSet(abjad.PitchClassSet):
             type(self), type(argument)
         ):
             return False
-        return self._collection == argument._collection
+        return self.items == argument.items
 
     ### PUBLIC METHODS ###
 
@@ -4840,7 +4840,7 @@ class PitchSet(abjad.PitchSet):
             type(self), type(argument)
         ):
             return False
-        return self._collection == argument._collection
+        return self.items == argument.items
 
     ### PUBLIC METHODS ###
 
