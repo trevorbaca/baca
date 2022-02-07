@@ -2298,7 +2298,7 @@ def _memento_to_indicator(dictionary, memento):
         try:
             indicator = class_(memento.value)
         except Exception:
-            raise Exception(abjad.storage(memento))
+            raise Exception(repr(memento))
     return indicator
 
 

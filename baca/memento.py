@@ -11,8 +11,6 @@ class Memento:
     Memento.
     """
 
-    ### CLASS VARIABLES ###
-
     __slots__ = (
         "_context",
         "_edition",
@@ -21,8 +19,6 @@ class Memento:
         "_synthetic_offset",
         "_value",
     )
-
-    ### INITIALIZER ###
 
     def __init__(
         self,
@@ -56,13 +52,11 @@ class Memento:
                 assert type(value).__name__ == "PersistentOverride", repr(value)
         self._value = value
 
-    ### SPECIAL METHODS ###
-
     def __repr__(self):
         """
         Gets repr.
         """
-        return f"{type(self).__name__}(context={self.context}, edition={self.edition}, manifest={self.manifest}, prototype={self.prototype}, synthetic_offset={self.synthetic_offset}, value={self.value})"
+        return f"baca.{type(self).__name__}(context={self.context!r}, edition={self.edition!r}, manifest={self.manifest!r}, prototype={self.prototype!r}, synthetic_offset={self.synthetic_offset!r}, value={self.value!r})"
 
     ### PRIVATE METHODS###
 

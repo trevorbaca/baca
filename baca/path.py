@@ -6,6 +6,8 @@ import os
 import pathlib
 import typing
 
+import black
+
 import abjad
 
 from . import tags as _tags
@@ -400,6 +402,7 @@ def get_metadata(path, file_name="__metadata__"):
         file_contents_string = metadata_py_path.read_text()
         baca = importlib.import_module("baca")
         namespace = {"abjad": abjad, "baca": baca}
+        namespace.update(abjad.__dict__)
         metadata = eval(file_contents_string, namespace)
     return dict(metadata)
 
@@ -448,28 +451,10 @@ def trim(path):
     return str(path)
 
 
-def write_metadata_py(
-    path,
-    metadata,
-    *,
-    file_name="__metadata__",
-    variable_name="metadata",
-):
-    """
-    Writes ``metadata`` to metadata file in current directory.
-    """
+def write_metadata_py(path, metadata, *, file_name="__metadata__"):
+    assert isinstance(metadata, dict), repr(metadata)
+    metadata = dict(sorted(metadata.items()))
+    string = str(metadata)
+    string = black.format_str(string, mode=black.mode.Mode())
     metadata_py_path = path / file_name
-    lines = []
-    dictionary = dict(metadata)
-    items = list(dictionary.items())
-    items.sort()
-    dictionary = dict(items)
-    if dictionary:
-        line = abjad.storage(dictionary)
-        lines.append(line)
-    else:
-        lines.append("{}")
-    lines.append("")
-    text = "\n".join(lines)
-    metadata_py_path.write_text(text)
-    os.system(f"black --target-version=py38 {metadata_py_path} > /dev/null 2>&1")
+    metadata_py_path.write_text(string)

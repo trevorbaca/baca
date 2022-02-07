@@ -157,16 +157,18 @@ def _get_previous_metadata(segment_directory):
         previous_segment = segment_directory.parent / previous_segment
         path = previous_segment / "__metadata__"
         file = pathlib.Path(path)
+        namespace = {"abjad": abjad, "baca": baca}
+        namespace.update(abjad.__dict__)
         if file.is_file():
             string = file.read_text()
-            previous_metadata = eval(string)
+            previous_metadata = eval(string, namespace)
         else:
             previous_metadata = None
         path = previous_segment / "__persist__"
         file = pathlib.Path(path)
         if file.is_file():
             lines = file.read_text()
-            previous_persist = eval(lines)
+            previous_persist = eval(lines, namespace)
         else:
             previous_persist = None
     return previous_metadata, previous_persist
@@ -505,7 +507,6 @@ def _write_metadata(metadata, persist, segment_directory):
         segment_directory,
         persist,
         file_name="__persist__",
-        variable_name="persist",
     )
     # TODO: import black here instead
     os.system("black --target-version=py38 __persist__ 1>/dev/null 2>&1")
