@@ -450,7 +450,7 @@ class Cursor:
             >>> cursor = baca.Cursor.from_pitch_class_segments(number_lists)
 
             >>> cursor
-            Cursor(source=CyclicTuple([PitchClassSegment(items=[1, 1.5, 11], item_class=NumberedPitchClass), PitchClassSegment(items=[10, 2, 1.5], item_class=NumberedPitchClass)]), cyclic=True, position=None, singletons=None, suppress_exception=None)
+            Cursor(source=CyclicTuple(items=(PitchClassSegment(items=[1, 1.5, 11], item_class=NumberedPitchClass), PitchClassSegment(items=[10, 2, 1.5], item_class=NumberedPitchClass))), cyclic=True, position=None, singletons=None, suppress_exception=None)
 
         Coerces numeric ``pitch_class_segments``
 

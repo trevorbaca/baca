@@ -2437,7 +2437,7 @@ def make_dynamic(
         Dynamic(name='ff', command='\\baca-sffz', direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=3, tweaks=None)
 
         >>> baca.make_dynamic("niente")
-        Dynamic(name='niente', command='\\!', direction=Down, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity, tweaks=None)
+        Dynamic(name='niente', command='\\!', direction=Down, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity(), tweaks=None)
 
         >>> baca.make_dynamic("<")
         StartHairpin(shape='<', direction=None, tweaks=None)
@@ -2813,7 +2813,7 @@ def parse_hairpin_descriptor(
 
         >>> for item in baca.parse_hairpin_descriptor("niente"):
         ...     item
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='niente', command='\\!', direction=Down, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity, tweaks=None), spanner_start=None, spanner_stop=None)
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='niente', command='\\!', direction=Down, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity(), tweaks=None), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("<"):
         ...     item
@@ -2858,7 +2858,7 @@ def parse_hairpin_descriptor(
 
         >>> for item in baca.parse_hairpin_descriptor("niente o<| f"):
         ...     item
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='niente', command='\\!', direction=Down, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity, tweaks=None), spanner_start=StartHairpin(shape='o<|', direction=None, tweaks=None), spanner_stop=None)
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='niente', command='\\!', direction=Down, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity(), tweaks=None), spanner_start=StartHairpin(shape='o<|', direction=None, tweaks=None), spanner_stop=None)
         Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("f >"):
@@ -2892,7 +2892,7 @@ def parse_hairpin_descriptor(
         >>> for item in baca.parse_hairpin_descriptor("mf niente o< p"):
         ...     item
         Bundle(bookended_spanner_start=None, indicator=Dynamic(name='mf', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=1, tweaks=None), spanner_start=None, spanner_stop=None)
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='niente', command='\\!', direction=Down, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity, tweaks=None), spanner_start=StartHairpin(shape='o<', direction=None, tweaks=None), spanner_stop=None)
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='niente', command='\\!', direction=Down, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity(), tweaks=None), spanner_start=StartHairpin(shape='o<', direction=None, tweaks=None), spanner_stop=None)
         Bundle(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=None, spanner_stop=None)
 
     """

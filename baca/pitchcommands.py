@@ -2,6 +2,7 @@
 Pitch commands.
 """
 import collections
+import dataclasses
 import numbers
 import typing
 from inspect import currentframe as _frame
@@ -1050,7 +1051,7 @@ class ColorFingeringCommand(_scoping.Command):
 
             >>> command = baca.ColorFingeringCommand(numbers=[0, 1, 2, 1])
             >>> command.numbers
-            CyclicTuple([0, 1, 2, 1])
+            CyclicTuple(items=(0, 1, 2, 1))
 
         Set to nonnegative integers.
         """
@@ -1167,6 +1168,7 @@ class DiatonicClusterCommand(_scoping.Command):
         return self._widths
 
 
+@dataclasses.dataclass(slots=True)
 class Loop(abjad.CyclicTuple):
     """
     Loop.
@@ -1175,7 +1177,7 @@ class Loop(abjad.CyclicTuple):
 
         >>> loop = baca.Loop([0, 2, 4], intervals=[1])
         >>> loop
-        Loop([NamedPitch("c'"), NamedPitch("d'"), NamedPitch("e'")], intervals=CyclicTuple([1]))
+        Loop(items=CyclicTuple(items=(NamedPitch("c'"), NamedPitch("d'"), NamedPitch("e'"))), intervals=CyclicTuple(items=(1,)))
 
         >>> for i in range(12):
         ...     loop[i]
@@ -1203,24 +1205,16 @@ class Loop(abjad.CyclicTuple):
 
     """
 
-    ### CLASS VARIABLES ###
+    intervals: typing.Any = None
 
-    __slots__ = ("_intervals", "_items")
-
-    ### INITIALIZER ###
-
-    def __init__(self, items=None, *, intervals=None):
-        if items is not None:
-            assert isinstance(items, collections.abc.Iterable), repr(items)
-            items = [abjad.NamedPitch(_) for _ in items]
-            items = abjad.CyclicTuple(items)
-        abjad.CyclicTuple.__init__(self, items=items)
-        if intervals is not None:
-            assert isinstance(items, collections.abc.Iterable), repr(items)
-            intervals = abjad.CyclicTuple(intervals)
-        self._intervals = intervals
-
-    ### SPECIAL METHODS ###
+    def __post_init__(self):
+        if self.items is not None:
+            assert isinstance(self.items, collections.abc.Iterable), repr(self.items)
+            self.items = [abjad.NamedPitch(_) for _ in self.items]
+            self.items = abjad.CyclicTuple(self.items)
+        if self.intervals is not None:
+            assert isinstance(self.items, collections.abc.Iterable), repr(self.items)
+            self.intervals = abjad.CyclicTuple(self.intervals)
 
     def __getitem__(self, i) -> abjad.Pitch:
         """
@@ -1236,22 +1230,6 @@ class Loop(abjad.CyclicTuple):
         pitch_ = abjad.CyclicTuple(list(self))[i]
         pitch = type(pitch_)(pitch_.number + transposition)
         return pitch
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def intervals(self):
-        """
-        Gets intervals.
-        """
-        return self._intervals
-
-    @property
-    def items(self):
-        """
-        Gets items.
-        """
-        return self._items
 
 
 class MicrotoneDeviationCommand(_scoping.Command):
@@ -1406,7 +1384,7 @@ class MicrotoneDeviationCommand(_scoping.Command):
 
             >>> command = baca.deviation([0, -0.5, 0, 0.5])
             >>> command.deviations
-            CyclicTuple([0, -0.5, 0, 0.5])
+            CyclicTuple(items=(0, -0.5, 0, 0.5))
 
         Set to iterable of items (each -0.5, 0 or 0.5).
         """
@@ -1574,7 +1552,7 @@ class OctaveDisplacementCommand(_scoping.Command):
 
             >>> command = baca.displacement([0, 0, 0, 1, 1, 0, 0, 0, -1, 1, 1, 2, 2])
             >>> command.displacements
-            CyclicTuple([0, 0, 0, 1, 1, 0, 0, 0, -1, 1, 1, 2, 2])
+            CyclicTuple(items=(0, 0, 0, 1, 1, 0, 0, 0, -1, 1, 1, 2, 2))
 
         """
         return self._displacements

@@ -658,7 +658,7 @@ def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
 def _attach_rhythm_annotation_spanner(command, selection):
     if selection is None:
         return
-    if not command.annotation_spanner_text and not command.frame:
+    if not command.annotation_spanner_text:
         return
     leaves = []
     for leaf in abjad.iterate.leaves(selection):

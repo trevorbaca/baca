@@ -1,7 +1,6 @@
 """
 Rhythm commands.
 """
-import inspect
 from inspect import currentframe as _frame
 
 import abjad
@@ -177,15 +176,6 @@ class RhythmCommand(_scoping.Command):
         message += '\n  Input parameter "rhythm_maker" received:'
         message += f"\n    {rhythm_maker!r}"
         raise Exception(message)
-
-    def _make_rhythm_annotation_string(self):
-        if not self.frame:
-            return
-        frame_info = inspect.getframeinfo(self.frame)
-        function_name = frame_info.function
-        wrapped_arguments = abjad.format._wrap_arguments(self.frame)
-        string = f"{function_name}({wrapped_arguments}) =|"
-        return string
 
     def _make_selection(
         self,
