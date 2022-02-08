@@ -1364,7 +1364,7 @@ def _collect_persistent_indicators(
             )
             mementos.append(memento)
         if mementos:
-            mementos.sort(key=lambda _: abjad.storage(_))
+            mementos.sort(key=lambda _: repr(_))
             result[name] = mementos
     if previous_persistent_indicators:
         for context_name, mementos in previous_persistent_indicators.items():
