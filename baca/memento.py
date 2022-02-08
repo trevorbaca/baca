@@ -58,11 +58,6 @@ class Memento:
         """
         return f"baca.{type(self).__name__}(context={self.context!r}, edition={self.edition!r}, manifest={self.manifest!r}, prototype={self.prototype!r}, synthetic_offset={self.synthetic_offset!r}, value={self.value!r})"
 
-    ### PRIVATE METHODS###
-
-    def _get_format_specification(self):
-        return abjad.FormatSpecification()
-
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -244,9 +239,6 @@ class PersistentOverride:
             assert isinstance(self.grob, str), repr(self.grob)
         if self.hide is not None:
             self.hide = bool(self.hide)
-
-    def _get_format_specification(self):
-        return abjad.FormatSpecification()
 
     def _get_lilypond_format(self, context=None):
         if isinstance(context, abjad.Context):
