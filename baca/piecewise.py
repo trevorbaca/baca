@@ -222,37 +222,41 @@ class PiecewiseCommand(_scoping.Command):
             ):
                 should_bookend = False
             if is_final_piece and just_backstole_right_text:
-                bundle = abjad.new(bundle, spanner_start=None)
+                bundle = dataclasses.replace(bundle, spanner_start=None)
             next_bundle = self.bundles[i + 1]
             if should_bookend and bundle.bookended_spanner_start:
-                bundle = abjad.new(bundle, spanner_start=bundle.bookended_spanner_start)
+                bundle = dataclasses.replace(
+                    bundle, spanner_start=bundle.bookended_spanner_start
+                )
             if (
                 is_penultimate_piece
                 and (len(pieces[-1]) == 1 or self.final_piece_spanner is False)
                 and isinstance(next_bundle.spanner_start, abjad.StartTextSpan)
             ):
-                bundle = abjad.new(bundle, spanner_start=bundle.bookended_spanner_start)
+                bundle = dataclasses.replace(
+                    bundle, spanner_start=bundle.bookended_spanner_start
+                )
                 just_backstole_right_text = True
             if (
                 len(piece) == 1
                 and bundle.compound()
                 and self.remove_length_1_spanner_start
             ):
-                bundle = abjad.new(bundle, spanner_start=None)
+                bundle = dataclasses.replace(bundle, spanner_start=None)
             if is_final_piece and bundle.spanner_start:
                 if isinstance(bundle.spanner_start, abjad.StartHairpin):
                     if self.final_piece_spanner:
-                        bundle = abjad.new(
+                        bundle = dataclasses.replace(
                             bundle, spanner_start=self.final_piece_spanner
                         )
                     elif self.final_piece_spanner is False:
-                        bundle = abjad.new(bundle, spanner_start=None)
+                        bundle = dataclasses.replace(bundle, spanner_start=None)
                 elif isinstance(bundle.spanner_start, abjad.StartTextSpan):
                     if self.final_piece_spanner is False:
-                        bundle = abjad.new(bundle, spanner_start=None)
+                        bundle = dataclasses.replace(bundle, spanner_start=None)
             tag = _scoping.site(_frame(), self, n=2)
             if is_first_piece or previous_had_bookend:
-                bundle = abjad.new(bundle, spanner_stop=None)
+                bundle = dataclasses.replace(bundle, spanner_stop=None)
                 if self.left_broken:
                     tag = tag.append(_tags.LEFT_BROKEN)
             if is_final_piece and self.right_broken:
@@ -291,9 +295,9 @@ class PiecewiseCommand(_scoping.Command):
                 if is_final_piece and self.right_broken:
                     tag = tag.append(_tags.RIGHT_BROKEN)
                 if bundle.bookended_spanner_start is not None:
-                    next_bundle = abjad.new(next_bundle, spanner_start=None)
+                    next_bundle = dataclasses.replace(next_bundle, spanner_start=None)
                 if next_bundle.compound():
-                    next_bundle = abjad.new(next_bundle, spanner_start=None)
+                    next_bundle = dataclasses.replace(next_bundle, spanner_start=None)
                 self._attach_indicators(
                     next_bundle, stop_leaf, i, total_pieces, tag=tag
                 )
@@ -304,9 +308,9 @@ class PiecewiseCommand(_scoping.Command):
                 and next_bundle.spanner_stop
                 and ((start_leaf is not stop_leaf) or self.leak_spanner_stop)
             ):
-                spanner_stop = abjad.new(next_bundle.spanner_stop)
+                spanner_stop = dataclasses.replace(next_bundle.spanner_stop)
                 if self.leak_spanner_stop:
-                    spanner_stop = abjad.new(spanner_stop, leak=True)
+                    spanner_stop = dataclasses.replace(spanner_stop, leak=True)
                 bundle = Bundle(spanner_stop=spanner_stop)
                 tag = _scoping.site(_frame(), self, n=4)
                 if self.right_broken:
@@ -331,7 +335,7 @@ class PiecewiseCommand(_scoping.Command):
             if indicator in (True, False):
                 pass
             else:
-                indicator = abjad.new(indicator)
+                indicator = dataclasses.replace(indicator)
             if not getattr(indicator, "trend", False) and leaf is just_bookended_leaf:
                 continue
             if autodetected_right_padding is not None and isinstance(
@@ -4801,7 +4805,9 @@ def text_spanner(
             string = r"\markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75"
             string += rf" \general-align #Y #1 {content_string} }}"
             right_markup = abjad.Markup(string)
-        bookended_spanner_start = abjad.new(start_text_span, right_text=right_markup)
+        bookended_spanner_start = dataclasses.replace(
+            start_text_span, right_text=right_markup
+        )
         # TODO: find some way to make these tweaks explicit to composer
         manager = abjad.tweak(bookended_spanner_start)
         manager.bound_details__right__stencil_align_dir_y = abjad.Center

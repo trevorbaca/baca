@@ -29,7 +29,7 @@ class Stack:
 
     __slots__ = ("_commands",)
 
-    # to make sure abjad.new() copies commands
+    # remove after removal of new()
     _positional_arguments_name = "commands"
 
     def __init__(self, *commands) -> None:

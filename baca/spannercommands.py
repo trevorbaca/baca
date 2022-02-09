@@ -1,6 +1,7 @@
 """
 Spanner commands.
 """
+import dataclasses
 import typing
 from inspect import currentframe as _frame
 
@@ -948,7 +949,9 @@ def trill_spanner(
                 pass
     start_trill_span = start_trill_span or abjad.StartTrillSpan()
     if pitch is not None or interval is not None:
-        start_trill_span = abjad.new(start_trill_span, interval=interval, pitch=pitch)
+        start_trill_span = dataclasses.replace(
+            start_trill_span, interval=interval, pitch=pitch
+        )
     if harmonic is True:
         string = "#(lambda (grob) (grob-interpret-markup grob"
         string += r' #{ \markup \musicglyph #"noteheads.s0harmonic" #}))'

@@ -1,6 +1,7 @@
 """
 Commands.
 """
+import dataclasses
 import pathlib
 import typing
 from inspect import currentframe as _frame
@@ -1861,7 +1862,7 @@ def markup(
     if isinstance(argument, str):
         markup = abjad.Markup(argument, direction=direction)
     elif isinstance(argument, abjad.Markup):
-        markup = abjad.new(argument, direction=direction)
+        markup = dataclasses.replace(argument, direction=direction)
     else:
         message = "MarkupLibary.__call__():\n"
         message += "  Value of 'argument' must be str or markup.\n"

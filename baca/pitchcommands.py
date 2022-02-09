@@ -2,6 +2,7 @@
 Pitch commands.
 """
 import collections
+import copy
 import dataclasses
 import numbers
 import typing
@@ -156,7 +157,7 @@ class AccidentalAdjustmentCommand(_scoping.Command):
                     if self.parenthesized:
                         note_head.is_parenthesized = True
                 else:
-                    alternative = abjad.new(note_head)
+                    alternative = copy.copy(note_head)
                     if self.cautionary:
                         alternative.is_cautionary = True
                     if self.forced:

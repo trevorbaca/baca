@@ -140,7 +140,7 @@ class Accelerando:
                 tweaks = self.tweaks._list_format_contributions()
                 bundle.after.markup.extend(tweaks)
             markup = self._get_markup()
-            markup = abjad.new(markup, direction=abjad.Up)
+            markup = dataclasses.replace(markup, direction=abjad.Up)
             markup_format_pieces = markup._get_format_pieces()
             bundle.after.markup.extend(markup_format_pieces)
         return bundle
@@ -455,7 +455,7 @@ class Ritardando:
                 tweaks = self.tweaks._list_format_contributions()
                 bundle.after.markup.extend(tweaks)
             markup = self._get_markup()
-            markup = abjad.new(markup, direction=abjad.Up)
+            markup = dataclasses.replace(markup, direction=abjad.Up)
             markup_format_pieces = markup._get_format_pieces()
             bundle.after.markup.extend(markup_format_pieces)
         return bundle

@@ -858,19 +858,19 @@ class Suite:
 
     ..  container:: example
 
-        REGRESSION. Works with ``abjad.new()``:
+        REGRESSION. Templating works like this:
 
         >>> suite = baca.suite(
         ...     baca.accent(),
         ...     baca.tenuto(),
         ...     measures=(1, 2),
         ... )
-        >>> suite
-        Suite(commands=(IndicatorCommand(), IndicatorCommand()))
+        >>> suite.commands[0].measures
+        (1, 2)
 
-        >>> new_suite = abjad.new(suite, measures=(3, 4))
-        >>> new_suite
-        Suite(commands=(IndicatorCommand(), IndicatorCommand()))
+        >>> new_suite = baca.suite(suite.commands, measures=(3, 4))
+        >>> new_suite.commands[0].measures
+        (3, 4)
 
     """
 
@@ -1408,7 +1408,6 @@ def tag(
         except TypeError:
             pass
         tags_ = [abjad.Tag(_) for _ in tags]
-        # TODO: maybe use abjad.new() here?
         command._tags.extend(tags_)
         command._deactivate = deactivate
         command._tag_measure_number = tag_measure_number

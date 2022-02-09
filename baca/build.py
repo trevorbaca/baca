@@ -1,6 +1,7 @@
 """
 Build.
 """
+import dataclasses
 import os
 import pathlib
 import pprint
@@ -298,12 +299,12 @@ def _make_segment_clicktrack(lilypond_file, mtime, segment_directory):
         else:
             metronome_mark = metronome_marks[i]
             units_per_minute = round(metronome_mark.units_per_minute)
-            metronome_mark = abjad.new(
+            metronome_mark = dataclasses.replace(
                 metronome_mark,
                 hide=False,
                 units_per_minute=units_per_minute,
             )
-            time_signature = abjad.new(time_signature)
+            time_signature = dataclasses.replace(time_signature)
             numerator, denominator = time_signature.pair
             notes = []
             for _ in range(numerator):
@@ -632,7 +633,7 @@ def color_persistent_indicators(directory, *, undo=False):
         baca.jobs.color_time_signatures,
     ):
         job = job(directory, undo=undo)
-        job = abjad.new(job, message_zero=True)
+        job = dataclasses.replace(job, message_zero=True)
         for message in job():
             _print_tags(message)
 
@@ -684,7 +685,7 @@ def handle_build_tags(_segments_directory):
 
     def _run(job, *, quiet=False):
         message_zero = not bool(quiet)
-        job = abjad.new(job, message_zero=message_zero)
+        job = dataclasses.replace(job, message_zero=message_zero)
         messages = job()
         for message in messages:
             _print_tags(message)
@@ -1285,7 +1286,7 @@ def show_annotations(directory, *, undo=False):
         _print_always("Must call in segment directory ...")
         sys.exit(1)
     for job in _make_annotation_jobs(directory, undo=undo):
-        job = abjad.new(job, message_zero=True)
+        job = dataclasses.replace(job, message_zero=True)
         for message in job():
             _print_tags(message)
 
@@ -1294,6 +1295,6 @@ def show_tag(directory, tag, *, undo=False):
     directory = pathlib.Path(directory)
     tag = abjad.Tag(tag)
     job = baca.jobs.show_tag(directory, tag, undo=undo)
-    job = abjad.new(job, message_zero=True)
+    job = dataclasses.replace(job, message_zero=True)
     for message in job():
         _print_tags(message)

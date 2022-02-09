@@ -1,4 +1,5 @@
 import copy
+import dataclasses
 import functools
 import importlib
 from inspect import currentframe as _frame
@@ -556,7 +557,9 @@ def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
             assert left_text_.endswith("(1 . 1)")
             n, d = parts_metric_modulation_multiplier
             left_text_ = left_text_[:-7] + f"({n} . {d})"
-            start_text_span_ = abjad.new(start_text_span, left_text=left_text_)
+            start_text_span_ = dataclasses.replace(
+                start_text_span, left_text=left_text_
+            )
             abjad.attach(
                 start_text_span_,
                 skip,
@@ -566,7 +569,9 @@ def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
                 ),
             )
         if stripped_left_text is not None:
-            start_text_span_ = abjad.new(start_text_span, left_text=stripped_left_text)
+            start_text_span_ = dataclasses.replace(
+                start_text_span, left_text=stripped_left_text
+            )
             abjad.attach(
                 start_text_span_,
                 skip,
@@ -1186,7 +1191,7 @@ def _clone_segment_initial_short_instrument_name(score):
         if isinstance(margin_markup.markup, str):
             markup = margin_markup.markup
         else:
-            markup = abjad.new(margin_markup.markup)
+            markup = dataclasses.replace(margin_markup.markup)
         start_markup = abjad.StartMarkup(
             context=margin_markup.context,
             format_slot=margin_markup.format_slot,

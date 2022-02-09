@@ -2,6 +2,7 @@
 Command classes.
 """
 import collections
+import dataclasses
 import typing
 from inspect import currentframe as _frame
 
@@ -654,7 +655,8 @@ class BCPCommand(_scoping.Command):
             >>> command
             BCPCommand()
 
-            >>> new_command = abjad.new(command)
+            >>> import copy
+            >>> new_command = copy.copy(command)
             >>> new_command
             BCPCommand()
 
@@ -1147,7 +1149,7 @@ class GlobalFermataCommand(_scoping.Command):
             assert isinstance(leaf, abjad.MultimeasureRest)
             string = rf"\baca-{command}-markup"
             markup = abjad.Markup(string)
-            markup = abjad.new(markup, direction=abjad.Up)
+            markup = dataclasses.replace(markup, direction=abjad.Up)
             abjad.attach(
                 markup,
                 leaf,

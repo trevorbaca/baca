@@ -1,3 +1,5 @@
+import dataclasses
+
 import abjad
 
 from . import scoping as _scoping
@@ -236,8 +238,8 @@ class CommandAccumulator:
                     if isinstance(measures, int):
                         measures = (measures, measures)
                     if measures is not None:
-                        scope_ = abjad.new(current_scope, measures=measures)
+                        scope_ = dataclasses.replace(current_scope, measures=measures)
                     else:
-                        scope_ = abjad.new(current_scope)
+                        scope_ = dataclasses.replace(current_scope)
                     command_ = abjad.new(command_, scope=scope_)
                     self.commands.append(command_)

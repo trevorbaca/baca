@@ -1,6 +1,7 @@
 """
 Indicator commands.
 """
+import dataclasses
 import typing
 from inspect import currentframe as _frame
 
@@ -1664,7 +1665,7 @@ def margin_markup(
         markup = abjad.Markup(argument)
         margin_markup = abjad.MarginMarkup(context=context, markup=markup)
     elif isinstance(argument, abjad.MarginMarkup):
-        margin_markup = abjad.new(argument, context=context)
+        margin_markup = dataclasses.replace(argument, context=context)
     else:
         raise TypeError(argument)
     assert isinstance(margin_markup, abjad.MarginMarkup)
@@ -2584,7 +2585,7 @@ def start_markup(
     else:
         raise TypeError(argument)
     assert isinstance(start_markup, abjad.StartMarkup)
-    start_markup = abjad.new(start_markup, context=context)
+    start_markup = dataclasses.replace(start_markup, context=context)
     command = _commandclasses.IndicatorCommand(
         indicators=[start_markup],
         selector=selector,
