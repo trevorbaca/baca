@@ -8,7 +8,7 @@ import sys
 import abjad
 import abjadext
 import baca
-from abjadext import rmakers
+from abjadext import nauert, rmakers
 
 
 def _doctest_files(current_directory, files, globals_, report_only_first_failure=False):
@@ -75,6 +75,7 @@ def _get_globals():
     globals_["abjad"] = abjad
     globals_["abjadext"] = abjadext
     globals_["baca"] = baca
+    globals_["nauert"] = nauert
     globals_["rmakers"] = rmakers
     return globals_
 
