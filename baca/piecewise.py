@@ -1,6 +1,7 @@
 """
 Piecewise.
 """
+import copy
 import dataclasses
 import typing
 from inspect import currentframe as _frame
@@ -496,7 +497,8 @@ def bow_speed_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = abjad.new(command, tags=[tag])
+    result = copy.copy(command)
+    result._initialize_tags([tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -539,7 +541,8 @@ def circle_bow_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = abjad.new(command, tags=[tag])
+    result = copy.copy(command)
+    result._initialize_tags([tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -590,7 +593,8 @@ def clb_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = abjad.new(command, tags=[tag])
+    result = copy.copy(command)
+    result._initialize_tags([tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -630,7 +634,8 @@ def covered_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = abjad.new(command, tags=[tag])
+    result = copy.copy(command)
+    result._initialize_tags([tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -669,7 +674,8 @@ def damp_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = abjad.new(command, tags=[tag])
+    result = copy.copy(command)
+    result._initialize_tags([tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -2421,7 +2427,8 @@ def half_clt_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = abjad.new(command, tags=[tag])
+    result = copy.copy(command)
+    result._initialize_tags([tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -2752,7 +2759,8 @@ def material_annotation_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = abjad.new(command, tags=[tag])
+    result = copy.copy(command)
+    result._initialize_tags([tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -2792,7 +2800,8 @@ def metric_modulation_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = abjad.new(command, tags=[tag])
+    result = copy.copy(command)
+    result._initialize_tags([tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -2990,7 +2999,8 @@ def pitch_annotation_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = abjad.new(command, tags=[tag])
+    result = copy.copy(command)
+    result._initialize_tags([tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -3029,7 +3039,8 @@ def pizzicato_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = abjad.new(command, tags=[tag])
+    result = copy.copy(command)
+    result._initialize_tags([tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -3067,7 +3078,8 @@ def rhythm_annotation_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = abjad.new(command, tags=[tag])
+    result = copy.copy(command)
+    result._initialize_tags([tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -3109,7 +3121,8 @@ def scp_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = abjad.new(command, tags=[tag])
+    result = copy.copy(command)
+    result._initialize_tags([tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -3149,7 +3162,8 @@ def spazzolato_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = abjad.new(command, tags=[tag])
+    result = copy.copy(command)
+    result._initialize_tags([tag])
     assert isinstance(command, PiecewiseCommand)
     return result
 
@@ -3191,7 +3205,8 @@ def string_number_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = abjad.new(command, tags=[tag])
+    result = copy.copy(command)
+    result._initialize_tags([tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -3232,7 +3247,8 @@ def tasto_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = abjad.new(command, tags=[tag])
+    result = copy.copy(command)
+    result._initialize_tags([tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -4876,7 +4892,8 @@ def vibrato_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = abjad.new(command, tags=[tag])
+    result = copy.copy(command)
+    result._initialize_tags([tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -4917,6 +4934,7 @@ def xfb_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = abjad.new(command, tags=[tag])
+    result = copy.copy(command)
+    result._initialize_tags([tag])
     assert isinstance(result, PiecewiseCommand)
     return result

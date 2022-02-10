@@ -634,6 +634,7 @@ def _to_baca_collection(collection):
     return collection
 
 
+@dataclasses.dataclass
 class CollectionList(collections_module.abc.Sequence):
     """
     Collection list.
@@ -822,7 +823,8 @@ class CollectionList(collections_module.abc.Sequence):
 
     """
 
-    __slots__ = ("_collections", "_item_class")
+    collections: typing.Any = None
+    item_class: typing.Any = None
 
     _item_class_prototype = (
         abjad.NumberedPitch,
@@ -831,14 +833,13 @@ class CollectionList(collections_module.abc.Sequence):
         abjad.NamedPitchClass,
     )
 
-    def __init__(self, collections=None, *, item_class=None):
-        if item_class is not None:
-            if item_class not in self._item_class_prototype:
-                raise TypeError(f"only pitch or pitch-class: {item_class!r}.")
-        self._item_class = item_class
-        collections = self._coerce(collections)
-        collections = collections or []
-        self._collections = tuple(collections)
+    def __post_init__(self):
+        if self.item_class is not None:
+            if self.item_class not in self._item_class_prototype:
+                raise TypeError(f"only pitch or pitch-class: {self.item_class!r}.")
+        self.collections = self._coerce(self.collections)
+        self.collections = self.collections or []
+        self.collections = tuple(self.collections)
 
     def __add__(self, argument) -> "CollectionList":
         """
@@ -855,9 +856,8 @@ class CollectionList(collections_module.abc.Sequence):
         if not isinstance(argument, collections_module.abc.Iterable):
             raise TypeError(f"must be collection list: {argument!r}.")
         argument_collections = [self._initialize_collection(_) for _ in argument]
-        assert isinstance(self.collections, list)
-        collections = self.collections + argument_collections
-        return abjad.new(self, collections=collections)
+        collections = list(self.collections) + argument_collections
+        return dataclasses.replace(self, collections=collections)
 
     def __eq__(self, argument) -> bool:
         """
@@ -954,7 +954,7 @@ class CollectionList(collections_module.abc.Sequence):
         collections = self.collections or []
         result = collections.__getitem__(argument)
         try:
-            return abjad.new(self, collections=result)
+            return dataclasses.replace(self, collections=result)
         except TypeError:
             return result
 
@@ -1026,7 +1026,7 @@ class CollectionList(collections_module.abc.Sequence):
         items = argument
         item_class = self.item_class or abjad.NumberedPitch
         if prototype is not None:
-            return abjad.new(prototype, items=items)
+            return dataclasses.replace(prototype, items=items)
         elif isinstance(argument, abjad.Segment):
             return argument
         elif isinstance(argument, abjad.Set):
@@ -1058,33 +1058,6 @@ class CollectionList(collections_module.abc.Sequence):
                 return PitchSegment(items=items, item_class=abjad.NumberedPitch)
             else:
                 raise TypeError(f"only string or iterable: {argument!r}.")
-
-    @property
-    def collections(self) -> typing.Optional[list]:
-        """
-        Gets collections in list.
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList([
-            ...     [12, 14, 18, 17],
-            ...     [16, 20, 19],
-            ... ])
-
-            >>> collections.collections
-            [PitchSegment(items=[12, 14, 18, 17], item_class=NumberedPitch), PitchSegment(items=[16, 20, 19], item_class=NumberedPitch)]
-
-        """
-        if self._collections:
-            return list(self._collections)
-        return None
-
-    @property
-    def item_class(self) -> typing.Union[abjad.Pitch, abjad.PitchClass, None]:
-        """
-        Gets item class of collections in list.
-        """
-        return self._item_class
 
     def accumulate(self, operands=None) -> "CollectionList":
         """
@@ -1154,7 +1127,7 @@ class CollectionList(collections_module.abc.Sequence):
         collections: typing.List[CollectionTyping] = []
         for sequence_ in sequence.accumulate(operands=operands):
             collections.extend(sequence_)
-        return abjad.new(self, collections=collections)
+        return dataclasses.replace(self, collections=collections)
 
     def arpeggiate_down(self, pattern=None) -> "CollectionList":
         """
@@ -1197,7 +1170,7 @@ class CollectionList(collections_module.abc.Sequence):
                     )
                 collection = collection.arpeggiate_down()
             collections.append(collection)
-        return abjad.new(self, collections=collections)
+        return dataclasses.replace(self, collections=collections)
 
     def arpeggiate_up(self, pattern=None) -> "CollectionList":
         """
@@ -1240,7 +1213,7 @@ class CollectionList(collections_module.abc.Sequence):
                     )
                 collection = collection.arpeggiate_up()
             collections.append(collection)
-        return abjad.new(self, collections=collections)
+        return dataclasses.replace(self, collections=collections)
 
     def bass_to_octave(self, n=4, pattern=None) -> "CollectionList":
         """
@@ -1286,7 +1259,7 @@ class CollectionList(collections_module.abc.Sequence):
             if pattern.matches_index(i, length):
                 collection = collection.bass_to_octave(n=n)
             collections.append(collection)
-        return abjad.new(self, collections=collections)
+        return dataclasses.replace(self, collections=collections)
 
     def center_to_octave(self, n=4, pattern=None) -> "CollectionList":
         """
@@ -1332,7 +1305,7 @@ class CollectionList(collections_module.abc.Sequence):
             if pattern.matches_index(i, length):
                 collection = collection.center_to_octave(n=n)
             collections.append(collection)
-        return abjad.new(self, collections=collections)
+        return dataclasses.replace(self, collections=collections)
 
     def chords(self, pattern=None) -> "CollectionList":
         """
@@ -1394,7 +1367,7 @@ class CollectionList(collections_module.abc.Sequence):
                 collections.append(collection.chord())
             else:
                 collections.append(collection)
-        return abjad.new(self, collections=collections)
+        return dataclasses.replace(self, collections=collections)
 
     def cursor(self, cyclic=None, singletons=None) -> _classes.Cursor:
         """
@@ -1698,7 +1671,7 @@ class CollectionList(collections_module.abc.Sequence):
         """
         collections = _sequence.Sequence(items=self)
         collections = collections.helianthate(n=n, m=m)
-        return abjad.new(self, collections=collections)
+        return dataclasses.replace(self, collections=collections)
 
     def join(self) -> "CollectionList":
         """
@@ -1721,7 +1694,7 @@ class CollectionList(collections_module.abc.Sequence):
             for collection_ in self[1:]:
                 collection = collection + collection_
             collections.append(collection)
-        return abjad.new(self, collections=collections)
+        return dataclasses.replace(self, collections=collections)
 
     def partition(
         self, argument, cyclic=False, join=False, overhang=False
@@ -1792,10 +1765,10 @@ class CollectionList(collections_module.abc.Sequence):
             raise NotImplementedError("implement ratio-partition at some point.")
         sequence = _sequence.Sequence(self)
         parts = sequence.partition_by_counts(argument, cyclic=cyclic, overhang=overhang)
-        collection_lists = [abjad.new(self, collections=_) for _ in parts]
+        collection_lists = [dataclasses.replace(self, collections=_) for _ in parts]
         if join:
             collections = [_.join()[0] for _ in collection_lists]
-            result = abjad.new(self, collections=collections)
+            result = dataclasses.replace(self, collections=collections)
         else:
             result = _sequence.Sequence(collection_lists)
         return result
@@ -1840,7 +1813,7 @@ class CollectionList(collections_module.abc.Sequence):
 
         """
         if counts in (None, []):
-            return abjad.new(self)
+            return dataclasses.replace(self)
         counts = list(counts)
         assert all(isinstance(_, int) for _ in counts), repr(counts)
         collection = self.join()[0]
@@ -1853,7 +1826,7 @@ class CollectionList(collections_module.abc.Sequence):
             collection = self._initialize_collection(items)
             collections.append(collection)
             i += count
-        result = abjad.new(self, collections=collections)
+        result = dataclasses.replace(self, collections=collections)
         if check == abjad.Exact:
             self_item_count = len(self.flatten())
             result_item_count = len(result.flatten())
@@ -1879,7 +1852,7 @@ class CollectionList(collections_module.abc.Sequence):
         """
         sequence = _sequence.Sequence(items=self)
         collections = sequence.remove(indices=indices, period=period)
-        return abjad.new(self, collections=collections)
+        return dataclasses.replace(self, collections=collections)
 
     def remove_duplicate_pitch_classes(self, level=-1) -> "CollectionList":
         """
@@ -1927,7 +1900,7 @@ class CollectionList(collections_module.abc.Sequence):
                     collections_.append(collection_)
         else:
             raise ValueError(f"level must be 1 or -1: {level!r}.")
-        return abjad.new(self, collections=collections_)
+        return dataclasses.replace(self, collections=collections_)
 
     def remove_duplicates(self, level=-1) -> "CollectionList":
         """
@@ -1985,7 +1958,7 @@ class CollectionList(collections_module.abc.Sequence):
                     collections_.append(collection_)
         else:
             raise ValueError(f"level must be 0, 1 or -1: {level!r}.")
-        return abjad.new(self, collections=collections_)
+        return dataclasses.replace(self, collections=collections_)
 
     def remove_repeat_pitch_classes(self, level=-1) -> "CollectionList":
         """
@@ -2032,7 +2005,7 @@ class CollectionList(collections_module.abc.Sequence):
                     collections_.append(collection_)
         else:
             raise ValueError(f"level must be 1 or -1: {level!r}.")
-        return abjad.new(self, collections=collections_)
+        return dataclasses.replace(self, collections=collections_)
 
     def remove_repeats(self, level=-1) -> "CollectionList":
         """
@@ -2086,7 +2059,7 @@ class CollectionList(collections_module.abc.Sequence):
                     collections_.append(collection_)
         else:
             raise ValueError(f"level must be 0, 1 or -1: {level!r}.")
-        return abjad.new(self, collections=collections_)
+        return dataclasses.replace(self, collections=collections_)
 
     def repeat(self, n=1) -> "CollectionList":
         """
@@ -2109,7 +2082,7 @@ class CollectionList(collections_module.abc.Sequence):
         collections = abjad.Sequence(items=self)
         collections = collections.repeat(n=n)
         collections = collections.flatten(depth=1)
-        return abjad.new(self, collections=collections)
+        return dataclasses.replace(self, collections=collections)
 
     # TODO: change indices to pattern
     # TODO: add level=-1 keyword
@@ -2134,7 +2107,7 @@ class CollectionList(collections_module.abc.Sequence):
         """
         sequence = _sequence.Sequence(items=self)
         collections = sequence.retain(indices=indices, period=period)
-        return abjad.new(self, collections=collections)
+        return dataclasses.replace(self, collections=collections)
 
     def soprano_to_octave(self, n=4, pattern=None) -> "CollectionList":
         """
@@ -2180,7 +2153,7 @@ class CollectionList(collections_module.abc.Sequence):
             if pattern.matches_index(i, length):
                 collection = collection.soprano_to_octave(n=n)
             collections.append(collection)
-        return abjad.new(self, collections=collections)
+        return dataclasses.replace(self, collections=collections)
 
     def space_down(
         self, bass=None, pattern=None, semitones=None, soprano=None
@@ -2209,7 +2182,7 @@ class CollectionList(collections_module.abc.Sequence):
                     bass=bass, semitones=semitones, soprano=soprano
                 )
             collections.append(collection)
-        return abjad.new(self, collections=collections)
+        return dataclasses.replace(self, collections=collections)
 
     def space_up(self, bass=None, pattern=None, semitones=None, soprano=None):
         """
@@ -2236,7 +2209,7 @@ class CollectionList(collections_module.abc.Sequence):
                     bass=bass, semitones=semitones, soprano=soprano
                 )
             collections.append(collection)
-        return abjad.new(self, collections=collections)
+        return dataclasses.replace(self, collections=collections)
 
     def to_pitch_classes(self) -> "CollectionList":
         """
@@ -2304,7 +2277,9 @@ class CollectionList(collections_module.abc.Sequence):
         for collection in self:
             collection_ = collection.to_pitch_classes()
             collections_.append(collection_)
-        return abjad.new(self, collections=collections_, item_class=item_class)
+        return dataclasses.replace(
+            self, collections=collections_, item_class=item_class
+        )
 
     def to_pitches(self) -> "CollectionList":
         """
@@ -2372,7 +2347,9 @@ class CollectionList(collections_module.abc.Sequence):
         for collection in self:
             collection_ = collection.to_pitches()
             collections_.append(collection_)
-        return abjad.new(self, collections=collections_, item_class=item_class)
+        return dataclasses.replace(
+            self, collections=collections_, item_class=item_class
+        )
 
     def transpose(self, n=0) -> "CollectionList":
         """
@@ -2431,7 +2408,7 @@ class CollectionList(collections_module.abc.Sequence):
         for collection in self:
             collection_ = collection.transpose(n)
             collections_.append(collection_)
-        return abjad.new(self, collections=collections_)
+        return dataclasses.replace(self, collections=collections_)
 
 
 # TODO: reimplement to show all four types of collection
@@ -3909,6 +3886,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
         return segment
 
 
+@dataclasses.dataclass
 class PitchClassSet(abjad.PitchClassSet):
     r"""
     Pitch-class set.
@@ -3934,13 +3912,8 @@ class PitchClassSet(abjad.PitchClassSet):
                     <fs' g' bf' bqf'>1
                 }
 
+
     """
-
-    ### CLASS VARIABLES ###
-
-    __slots__ = ()
-
-    ### SPECIAL METHODS ###
 
     def __eq__(self, argument):
         """
@@ -3966,6 +3939,12 @@ class PitchClassSet(abjad.PitchClassSet):
             return False
         return self.items == argument.items
 
+    def __repr__(self):
+        """
+        Gets repr.
+        """
+        return f"{type(self).__name__}(items={self._get_sorted_repr_items()}, item_class=abjad.{self.item_class.__name__})"
+
     ### PUBLIC METHODS ###
 
     def to_pitch_classes(self):
@@ -3983,7 +3962,7 @@ class PitchClassSet(abjad.PitchClassSet):
 
         Returns new pitch-class set.
         """
-        return abjad.new(self)
+        return dataclasses.replace(self)
 
     def to_pitches(self):
         """
@@ -4009,6 +3988,7 @@ class PitchClassSet(abjad.PitchClassSet):
         return PitchSet(items=self, item_class=item_class)
 
 
+@dataclasses.dataclass
 class PitchSegment(abjad.PitchSegment):
     r"""
     Pitch segment.
@@ -4055,7 +4035,17 @@ class PitchSegment(abjad.PitchSegment):
 
     """
 
-    ### PRIVATE METHODS ###
+    def __repr__(self) -> str:
+        """
+        Gets repr.
+        """
+        if self.item_class is abjad.NamedPitch:
+            contents = " ".join([str(_) for _ in self])
+            contents = '"' + contents + '"'
+        else:
+            contents = ", ".join([str(_) for _ in self])
+            contents = "[" + contents + "]"
+        return f"{type(self).__name__}(items={contents}, item_class={self.item_class.__name__})"
 
     def _to_selection(self):
         maker = abjad.NoteMaker()
@@ -4148,7 +4138,7 @@ class PitchSegment(abjad.PitchSegment):
         selection = self._to_selection()
         command([selection])
         segment = PitchSegment.from_selection(selection)
-        return abjad.new(self, items=segment)
+        return dataclasses.replace(self, items=segment)
 
     def center_to_octave(self, n=4):
         r"""
@@ -4235,7 +4225,7 @@ class PitchSegment(abjad.PitchSegment):
         selection = self._to_selection()
         command([selection])
         segment = PitchSegment.from_selection(selection)
-        return abjad.new(self, items=segment)
+        return dataclasses.replace(self, items=segment)
 
     def chord(self):
         r"""
@@ -4363,7 +4353,7 @@ class PitchSegment(abjad.PitchSegment):
         selection = self._to_selection()
         command([selection])
         segment = PitchSegment.from_selection(selection)
-        return abjad.new(self, items=segment)
+        return dataclasses.replace(self, items=segment)
 
     def space_down(self, bass=None, semitones=None, soprano=None):
         r"""
@@ -4765,8 +4755,8 @@ class PitchSegment(abjad.PitchSegment):
                 lower.append(pitch_)
             else:
                 upper.append(pitch_)
-        upper = abjad.new(self, items=upper)
-        lower = abjad.new(self, items=lower)
+        upper = dataclasses.replace(self, items=upper)
+        lower = dataclasses.replace(self, items=lower)
         return upper, lower
 
 
@@ -6441,7 +6431,7 @@ class PitchTree(_classes.Tree):
         """
         items = list(self.items)
         items.reverse()
-        result = abjad.new(self, items=items)
+        result = type(self)(items=items, item_class=self.item_class)
         return result
 
     def rotate(self, n=0):
@@ -6744,7 +6734,7 @@ class PitchTree(_classes.Tree):
         items = list(self.items)
         items = abjad.Sequence(items)
         items = items.rotate(n=n)
-        result = abjad.new(self, items=items)
+        result = type(self)(items=items, item_class=self.item_class)
         return result
 
     def transpose(self, n=0):

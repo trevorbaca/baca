@@ -22,6 +22,7 @@ Layout.
 
 """
 import collections
+import copy
 import dataclasses
 from inspect import currentframe as _frame
 
@@ -227,7 +228,8 @@ def breaks(*page_specifiers):
     for measure_number, list_ in commands.items():
         commands_[measure_number] = []
         for command in list_:
-            command_ = abjad.new(command, tags=[_tags.BREAK])
+            command_ = copy.copy(command)
+            command_._initialize_tags([_tags.BREAK])
             commands_[measure_number].append(command_)
     commands = commands_
     breaks = BreakMeasureMap(

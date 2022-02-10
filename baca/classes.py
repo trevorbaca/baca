@@ -1457,7 +1457,7 @@ class Tree:
     ### PRIVATE METHODS ###
 
     def _apply_to_leaves_and_emit_new_tree(self, operator):
-        result = abjad.new(self)
+        result = copy.deepcopy(self)
         for leaf in result.iterate(level=-1):
             assert not len(leaf), repr(leaf)
             pitch = leaf._items
