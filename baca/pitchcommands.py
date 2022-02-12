@@ -15,9 +15,9 @@ from . import pitchclasses as _pitchclasses
 from . import scoping as _scoping
 from . import selection as _selection
 from . import selectors as _selectors
-from . import typings
 
 
+@dataclasses.dataclass
 class AccidentalAdjustmentCommand(_scoping.Command):
     r"""
     Accidental adjustment command.
@@ -85,50 +85,22 @@ class AccidentalAdjustmentCommand(_scoping.Command):
 
     """
 
-    ### CLASS VARIABLES ###
+    cautionary: bool = None
+    forced: bool = None
+    parenthesized: bool = None
 
-    __slots__ = ("_cautionary", "_forced", "_parenthesized")
+    def __post_init__(self):
+        _scoping.Command.__post_init__(self)
+        if self.cautionary is not None:
+            self.cautionary = bool(self.cautionary)
+        if self.forced is not None:
+            self.forced = bool(self.forced)
+        if self.parenthesized is not None:
+            self.parenthesized = bool(self.parenthesized)
 
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        cautionary: bool = None,
-        forced: bool = None,
-        map=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        parenthesized: bool = None,
-        scope: _scoping.ScopeTyping = None,
-        selector=_selectors.pleaf(0),
-        tags: typing.List[typing.Optional[abjad.Tag]] = None,
-    ) -> None:
-        _scoping.Command.__init__(
-            self,
-            map=map,
-            match=match,
-            measures=measures,
-            scope=scope,
-            selector=selector,
-            tags=tags,
-        )
-        if cautionary is not None:
-            cautionary = bool(cautionary)
-        self._cautionary = cautionary
-        if forced is not None:
-            forced = bool(forced)
-        self._forced = forced
-        if parenthesized is not None:
-            parenthesized = bool(parenthesized)
-        self._parenthesized = parenthesized
-
-    ### SPECIAL METHODS ###
+    __repr__ = _scoping.Command.__repr__
 
     def _call(self, argument=None) -> None:
-        """
-        Inserts ``selector`` output in container.
-        """
         if argument is None:
             return
         if self.selector is not None:
@@ -170,30 +142,8 @@ class AccidentalAdjustmentCommand(_scoping.Command):
                         str(primary_tag),
                     )
 
-    ### PUBLIC PROPERTIES ###
 
-    @property
-    def cautionary(self) -> typing.Optional[bool]:
-        """
-        Is true when command makes accidentals cautionary.
-        """
-        return self._cautionary
-
-    @property
-    def forced(self) -> typing.Optional[bool]:
-        """
-        Is true when command forces accidentals.
-        """
-        return self._forced
-
-    @property
-    def parenthesized(self) -> typing.Optional[bool]:
-        """
-        Is true when command parenthesizes accidentals.
-        """
-        return self._parenthesized
-
-
+@dataclasses.dataclass
 class ClusterCommand(_scoping.Command):
     r"""
     Cluster command.
@@ -310,49 +260,506 @@ class ClusterCommand(_scoping.Command):
                 }
             >>
 
+    ..  container:: example
+
+        Hides flat markup:
+
+        >>> score = baca.docs.make_empty_score(1)
+        >>> commands = baca.CommandAccumulator(
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+
+        >>> commands(
+        ...     "Music_Voice",
+        ...     baca.pitch("E4"),
+        ...     baca.make_notes(repeat_ties=True),
+        ...     baca.natural_clusters(widths=[3]),
+        ... )
+
+        >>> _, _ = baca.interpreter(
+        ...     score,
+        ...     commands.commands,
+        ...     commands.time_signatures,
+        ...     move_global_context=True,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
+        ... )
+
+        ..  docs::
+
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            {
+                \context Staff = "Music_Staff"
+                <<
+                    \context Voice = "Global_Skips"
+                    {
+                        \time 4/8
+                        s1 * 1/2
+                        \time 3/8
+                        s1 * 3/8
+                        \time 4/8
+                        s1 * 1/2
+                        \time 3/8
+                        s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        \once \override Accidental.stencil = ##f
+                        \once \override AccidentalCautionary.stencil = ##f
+                        \once \override Arpeggio.X-offset = #-2
+                        \once \override NoteHead.stencil = #ly:text-interface::print
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                        <e' g' b'>2
+                        ^ \markup \center-align \natural
+                        \once \override Accidental.stencil = ##f
+                        \once \override AccidentalCautionary.stencil = ##f
+                        \once \override Arpeggio.X-offset = #-2
+                        \once \override NoteHead.stencil = #ly:text-interface::print
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                        <e' g' b'>4.
+                        ^ \markup \center-align \natural
+                        \once \override Accidental.stencil = ##f
+                        \once \override AccidentalCautionary.stencil = ##f
+                        \once \override Arpeggio.X-offset = #-2
+                        \once \override NoteHead.stencil = #ly:text-interface::print
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                        <e' g' b'>2
+                        ^ \markup \center-align \natural
+                        \once \override Accidental.stencil = ##f
+                        \once \override AccidentalCautionary.stencil = ##f
+                        \once \override Arpeggio.X-offset = #-2
+                        \once \override NoteHead.stencil = #ly:text-interface::print
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                        <e' g' b'>4.
+                        ^ \markup \center-align \natural
+                    }
+                >>
+            }
+
+    ..  container:: example
+
+        Takes start pitch from input notes:
+
+        >>> score = baca.docs.make_empty_score(1)
+        >>> commands = baca.CommandAccumulator(
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+
+        >>> commands(
+        ...     "Music_Voice",
+        ...     baca.make_notes(repeat_ties=True),
+        ...     baca.pitches("C4 D4 E4 F4"),
+        ...     baca.clusters([3]),
+        ... )
+
+        >>> _, _ = baca.interpreter(
+        ...     score,
+        ...     commands.commands,
+        ...     commands.time_signatures,
+        ...     move_global_context=True,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
+        ... )
+
+        ..  docs::
+
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            {
+                \context Staff = "Music_Staff"
+                <<
+                    \context Voice = "Global_Skips"
+                    {
+                        \time 4/8
+                        s1 * 1/2
+                        \time 3/8
+                        s1 * 3/8
+                        \time 4/8
+                        s1 * 1/2
+                        \time 3/8
+                        s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        \once \override Accidental.stencil = ##f
+                        \once \override AccidentalCautionary.stencil = ##f
+                        \once \override Arpeggio.X-offset = #-2
+                        \once \override NoteHead.stencil = #ly:text-interface::print
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                        <c' e' g'>2
+                        ^ \markup \center-align \concat { \natural \flat }
+                        \once \override Accidental.stencil = ##f
+                        \once \override AccidentalCautionary.stencil = ##f
+                        \once \override Arpeggio.X-offset = #-2
+                        \once \override NoteHead.stencil = #ly:text-interface::print
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                        <d' f' a'>4.
+                        ^ \markup \center-align \concat { \natural \flat }
+                        \once \override Accidental.stencil = ##f
+                        \once \override AccidentalCautionary.stencil = ##f
+                        \once \override Arpeggio.X-offset = #-2
+                        \once \override NoteHead.stencil = #ly:text-interface::print
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                        <e' g' b'>2
+                        ^ \markup \center-align \concat { \natural \flat }
+                        \once \override Accidental.stencil = ##f
+                        \once \override AccidentalCautionary.stencil = ##f
+                        \once \override Arpeggio.X-offset = #-2
+                        \once \override NoteHead.stencil = #ly:text-interface::print
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                        <f' a' c''>4.
+                        ^ \markup \center-align \concat { \natural \flat }
+                    }
+                >>
+            }
+
+    ..  container:: example
+
+        Sets start pitch explicitly:
+
+        >>> score = baca.docs.make_empty_score(1)
+        >>> commands = baca.CommandAccumulator(
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+
+        >>> commands(
+        ...     "Music_Voice",
+        ...     baca.make_notes(repeat_ties=True),
+        ...     baca.clusters([3], start_pitch="G4"),
+        ... )
+
+        >>> _, _ = baca.interpreter(
+        ...     score,
+        ...     commands.commands,
+        ...     commands.time_signatures,
+        ...     move_global_context=True,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
+        ... )
+
+        ..  docs::
+
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            {
+                \context Staff = "Music_Staff"
+                <<
+                    \context Voice = "Global_Skips"
+                    {
+                        \time 4/8
+                        s1 * 1/2
+                        \time 3/8
+                        s1 * 3/8
+                        \time 4/8
+                        s1 * 1/2
+                        \time 3/8
+                        s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        \once \override Accidental.stencil = ##f
+                        \once \override AccidentalCautionary.stencil = ##f
+                        \once \override Arpeggio.X-offset = #-2
+                        \once \override NoteHead.stencil = #ly:text-interface::print
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                        <g' b' d''>2
+                        ^ \markup \center-align \concat { \natural \flat }
+                        \once \override Accidental.stencil = ##f
+                        \once \override AccidentalCautionary.stencil = ##f
+                        \once \override Arpeggio.X-offset = #-2
+                        \once \override NoteHead.stencil = #ly:text-interface::print
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                        <g' b' d''>4.
+                        ^ \markup \center-align \concat { \natural \flat }
+                        \once \override Accidental.stencil = ##f
+                        \once \override AccidentalCautionary.stencil = ##f
+                        \once \override Arpeggio.X-offset = #-2
+                        \once \override NoteHead.stencil = #ly:text-interface::print
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                        <g' b' d''>2
+                        ^ \markup \center-align \concat { \natural \flat }
+                        \once \override Accidental.stencil = ##f
+                        \once \override AccidentalCautionary.stencil = ##f
+                        \once \override Arpeggio.X-offset = #-2
+                        \once \override NoteHead.stencil = #ly:text-interface::print
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                        <g' b' d''>4.
+                        ^ \markup \center-align \concat { \natural \flat }
+                    }
+                >>
+            }
+
+    ..  container:: example
+
+        Increasing widths:
+
+        >>> score = baca.docs.make_empty_score(1)
+        >>> commands = baca.CommandAccumulator(
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+
+        >>> commands(
+        ...     "Music_Voice",
+        ...     baca.clusters([1, 2, 3, 4], start_pitch="E4"),
+        ...     baca.make_notes(repeat_ties=True),
+        ... )
+
+        >>> _, _ = baca.interpreter(
+        ...     score,
+        ...     commands.commands,
+        ...     commands.time_signatures,
+        ...     move_global_context=True,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
+        ... )
+
+        ..  docs::
+
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            {
+                \context Staff = "Music_Staff"
+                <<
+                    \context Voice = "Global_Skips"
+                    {
+                        \time 4/8
+                        s1 * 1/2
+                        \time 3/8
+                        s1 * 3/8
+                        \time 4/8
+                        s1 * 1/2
+                        \time 3/8
+                        s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        \once \override Accidental.stencil = ##f
+                        \once \override AccidentalCautionary.stencil = ##f
+                        \once \override Arpeggio.X-offset = #-2
+                        \once \override NoteHead.stencil = #ly:text-interface::print
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                        <e'>2
+                        ^ \markup \center-align \concat { \natural \flat }
+                        \once \override Accidental.stencil = ##f
+                        \once \override AccidentalCautionary.stencil = ##f
+                        \once \override Arpeggio.X-offset = #-2
+                        \once \override NoteHead.stencil = #ly:text-interface::print
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                        <e' g'>4.
+                        ^ \markup \center-align \concat { \natural \flat }
+                        \once \override Accidental.stencil = ##f
+                        \once \override AccidentalCautionary.stencil = ##f
+                        \once \override Arpeggio.X-offset = #-2
+                        \once \override NoteHead.stencil = #ly:text-interface::print
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                        <e' g' b'>2
+                        ^ \markup \center-align \concat { \natural \flat }
+                        \once \override Accidental.stencil = ##f
+                        \once \override AccidentalCautionary.stencil = ##f
+                        \once \override Arpeggio.X-offset = #-2
+                        \once \override NoteHead.stencil = #ly:text-interface::print
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                        <e' g' b' d''>4.
+                        ^ \markup \center-align \concat { \natural \flat }
+                    }
+                >>
+            }
+
+    ..  container:: example
+
+        Patterned widths:
+
+        >>> score = baca.docs.make_empty_score(1)
+        >>> commands = baca.CommandAccumulator(
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+
+        >>> commands(
+        ...     "Music_Voice",
+        ...     baca.clusters([1, 3], start_pitch="E4"),
+        ...     baca.make_notes(repeat_ties=True),
+        ... )
+
+        >>> _, _ = baca.interpreter(
+        ...     score,
+        ...     commands.commands,
+        ...     commands.time_signatures,
+        ...     move_global_context=True,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
+        ... )
+
+        ..  docs::
+
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            {
+                \context Staff = "Music_Staff"
+                <<
+                    \context Voice = "Global_Skips"
+                    {
+                        \time 4/8
+                        s1 * 1/2
+                        \time 3/8
+                        s1 * 3/8
+                        \time 4/8
+                        s1 * 1/2
+                        \time 3/8
+                        s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        \once \override Accidental.stencil = ##f
+                        \once \override AccidentalCautionary.stencil = ##f
+                        \once \override Arpeggio.X-offset = #-2
+                        \once \override NoteHead.stencil = #ly:text-interface::print
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                        <e'>2
+                        ^ \markup \center-align \concat { \natural \flat }
+                        \once \override Accidental.stencil = ##f
+                        \once \override AccidentalCautionary.stencil = ##f
+                        \once \override Arpeggio.X-offset = #-2
+                        \once \override NoteHead.stencil = #ly:text-interface::print
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                        <e' g' b'>4.
+                        ^ \markup \center-align \concat { \natural \flat }
+                        \once \override Accidental.stencil = ##f
+                        \once \override AccidentalCautionary.stencil = ##f
+                        \once \override Arpeggio.X-offset = #-2
+                        \once \override NoteHead.stencil = #ly:text-interface::print
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                        <e'>2
+                        ^ \markup \center-align \concat { \natural \flat }
+                        \once \override Accidental.stencil = ##f
+                        \once \override AccidentalCautionary.stencil = ##f
+                        \once \override Arpeggio.X-offset = #-2
+                        \once \override NoteHead.stencil = #ly:text-interface::print
+                        \once \override NoteHead.text =
+                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                        <e' g' b'>4.
+                        ^ \markup \center-align \concat { \natural \flat }
+                    }
+                >>
+            }
+
+    ..  container:: example
+
+        Leaves notes and chords unchanged:
+
+        >>> score = baca.docs.make_empty_score(1)
+        >>> commands = baca.CommandAccumulator(
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+
+        >>> commands(
+        ...     "Music_Voice",
+        ...     baca.make_notes(repeat_ties=True),
+        ...     baca.pitch("E4"),
+        ...     baca.clusters([]),
+        ... )
+
+        >>> _, _ = baca.interpreter(
+        ...     score,
+        ...     commands.commands,
+        ...     commands.time_signatures,
+        ...     move_global_context=True,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
+        ... )
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            {
+                \context Staff = "Music_Staff"
+                <<
+                    \context Voice = "Global_Skips"
+                    {
+                        \time 4/8
+                        s1 * 1/2
+                        \time 3/8
+                        s1 * 3/8
+                        \time 4/8
+                        s1 * 1/2
+                        \time 3/8
+                        s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        e'2
+                        e'4.
+                        e'2
+                        e'4.
+                    }
+                >>
+            }
+
+        Inteprets positive integers as widths in thirds.
+
+        Interprets zero to mean input note or chord is left unchanged.
+
     """
 
-    ### CLASS VARIABLES ##
+    hide_flat_markup: bool = None
+    selector: typing.Any = _selectors.plts()
+    start_pitch: typing.Any = None
+    widths: typing.Any = None
 
-    __slots__ = ("_hide_flat_markup", "_start_pitch", "_widths")
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        hide_flat_markup=None,
-        map=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        scope: _scoping.ScopeTyping = None,
-        selector=_selectors.plts(),
-        start_pitch=None,
-        widths=None,
-    ) -> None:
-        _scoping.Command.__init__(
-            self,
-            map=map,
-            match=match,
-            measures=measures,
-            scope=scope,
-            selector=selector,
-        )
-        assert isinstance(hide_flat_markup, (bool, type(None)))
-        self._hide_flat_markup = hide_flat_markup
-        if start_pitch is not None:
-            start_pitch = abjad.NamedPitch(start_pitch)
-        self._start_pitch = start_pitch
-        assert abjad.math.all_are_nonnegative_integers(widths)
-        widths = abjad.CyclicTuple(widths)
-        self._widths = widths
-
-    ### SPECIAL METHODS ###
+    def __post_init__(self):
+        _scoping.Command.__post_init__(self)
+        assert isinstance(self.hide_flat_markup, (bool, type(None)))
+        if self.start_pitch is not None:
+            self.start_pitch = abjad.NamedPitch(self.start_pitch)
+        assert abjad.math.all_are_nonnegative_integers(self.widths)
+        self.widths = abjad.CyclicTuple(self.widths)
 
     def _call(self, argument=None) -> None:
-        """
-        Calls command on ``argument``.
-        """
         if argument is None:
             return
         if not self.widths:
@@ -367,8 +774,6 @@ class ClusterCommand(_scoping.Command):
             for i, plt in enumerate(_selection.Selection(argument).plts()):
                 width = self.widths[i]
                 self._make_cluster(plt, width)
-
-    ### PRIVATE METHODS ###
 
     def _make_cluster(self, plt, width):
         assert plt.is_pitched, repr(plt)
@@ -402,523 +807,8 @@ class ClusterCommand(_scoping.Command):
     def _mutates_score(self):
         return True
 
-    ### PUBLIC PROPERTIES ###
 
-    @property
-    def hide_flat_markup(self) -> typing.Optional[bool]:
-        r"""
-        Is true when cluster hides flat markup.
-
-        ..  container:: example
-
-            Hides flat markup:
-
-            >>> score = baca.docs.make_empty_score(1)
-            >>> commands = baca.CommandAccumulator(
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ... )
-
-            >>> commands(
-            ...     "Music_Voice",
-            ...     baca.pitch("E4"),
-            ...     baca.make_notes(repeat_ties=True),
-            ...     baca.natural_clusters(widths=[3]),
-            ... )
-
-            >>> _, _ = baca.interpreter(
-            ...     score,
-            ...     commands.commands,
-            ...     commands.time_signatures,
-            ...     move_global_context=True,
-            ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ... )
-            >>> lilypond_file = baca.make_lilypond_file(
-            ...     score,
-            ...     includes=["baca.ily"],
-            ... )
-
-            ..  docs::
-
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                {
-                    \context Staff = "Music_Staff"
-                    <<
-                        \context Voice = "Global_Skips"
-                        {
-                            \time 4/8
-                            s1 * 1/2
-                            \time 3/8
-                            s1 * 3/8
-                            \time 4/8
-                            s1 * 1/2
-                            \time 3/8
-                            s1 * 3/8
-                        }
-                        \context Voice = "Music_Voice"
-                        {
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text =
-                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            <e' g' b'>2
-                            ^ \markup \center-align \natural
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text =
-                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            <e' g' b'>4.
-                            ^ \markup \center-align \natural
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text =
-                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            <e' g' b'>2
-                            ^ \markup \center-align \natural
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text =
-                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            <e' g' b'>4.
-                            ^ \markup \center-align \natural
-                        }
-                    >>
-                }
-
-        """
-        return self._hide_flat_markup
-
-    @property
-    def selector(self):
-        """
-        Selects PLTs.
-        """
-        return self._selector
-
-    @property
-    def start_pitch(self) -> typing.Optional[abjad.NamedPitch]:
-        r"""
-        Gets start pitch.
-
-        ..  container:: example
-
-            Takes start pitch from input notes:
-
-            >>> score = baca.docs.make_empty_score(1)
-            >>> commands = baca.CommandAccumulator(
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ... )
-
-            >>> commands(
-            ...     "Music_Voice",
-            ...     baca.make_notes(repeat_ties=True),
-            ...     baca.pitches("C4 D4 E4 F4"),
-            ...     baca.clusters([3]),
-            ... )
-
-            >>> _, _ = baca.interpreter(
-            ...     score,
-            ...     commands.commands,
-            ...     commands.time_signatures,
-            ...     move_global_context=True,
-            ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ... )
-            >>> lilypond_file = baca.make_lilypond_file(
-            ...     score,
-            ...     includes=["baca.ily"],
-            ... )
-
-            ..  docs::
-
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                {
-                    \context Staff = "Music_Staff"
-                    <<
-                        \context Voice = "Global_Skips"
-                        {
-                            \time 4/8
-                            s1 * 1/2
-                            \time 3/8
-                            s1 * 3/8
-                            \time 4/8
-                            s1 * 1/2
-                            \time 3/8
-                            s1 * 3/8
-                        }
-                        \context Voice = "Music_Voice"
-                        {
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text =
-                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            <c' e' g'>2
-                            ^ \markup \center-align \concat { \natural \flat }
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text =
-                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            <d' f' a'>4.
-                            ^ \markup \center-align \concat { \natural \flat }
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text =
-                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            <e' g' b'>2
-                            ^ \markup \center-align \concat { \natural \flat }
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text =
-                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            <f' a' c''>4.
-                            ^ \markup \center-align \concat { \natural \flat }
-                        }
-                    >>
-                }
-
-        ..  container:: example
-
-            Sets start pitch explicitly:
-
-            >>> score = baca.docs.make_empty_score(1)
-            >>> commands = baca.CommandAccumulator(
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ... )
-
-            >>> commands(
-            ...     "Music_Voice",
-            ...     baca.make_notes(repeat_ties=True),
-            ...     baca.clusters([3], start_pitch="G4"),
-            ... )
-
-            >>> _, _ = baca.interpreter(
-            ...     score,
-            ...     commands.commands,
-            ...     commands.time_signatures,
-            ...     move_global_context=True,
-            ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ... )
-            >>> lilypond_file = baca.make_lilypond_file(
-            ...     score,
-            ...     includes=["baca.ily"],
-            ... )
-
-            ..  docs::
-
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                {
-                    \context Staff = "Music_Staff"
-                    <<
-                        \context Voice = "Global_Skips"
-                        {
-                            \time 4/8
-                            s1 * 1/2
-                            \time 3/8
-                            s1 * 3/8
-                            \time 4/8
-                            s1 * 1/2
-                            \time 3/8
-                            s1 * 3/8
-                        }
-                        \context Voice = "Music_Voice"
-                        {
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text =
-                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            <g' b' d''>2
-                            ^ \markup \center-align \concat { \natural \flat }
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text =
-                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            <g' b' d''>4.
-                            ^ \markup \center-align \concat { \natural \flat }
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text =
-                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            <g' b' d''>2
-                            ^ \markup \center-align \concat { \natural \flat }
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text =
-                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            <g' b' d''>4.
-                            ^ \markup \center-align \concat { \natural \flat }
-                        }
-                    >>
-                }
-
-        """
-        return self._start_pitch
-
-    @property
-    def widths(self) -> typing.Optional[typing.Sequence[int]]:
-        r"""
-        Gets widths.
-
-        ..  container:: example
-
-            Increasing widths:
-
-            >>> score = baca.docs.make_empty_score(1)
-            >>> commands = baca.CommandAccumulator(
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ... )
-
-            >>> commands(
-            ...     "Music_Voice",
-            ...     baca.clusters([1, 2, 3, 4], start_pitch="E4"),
-            ...     baca.make_notes(repeat_ties=True),
-            ... )
-
-            >>> _, _ = baca.interpreter(
-            ...     score,
-            ...     commands.commands,
-            ...     commands.time_signatures,
-            ...     move_global_context=True,
-            ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ... )
-            >>> lilypond_file = baca.make_lilypond_file(
-            ...     score,
-            ...     includes=["baca.ily"],
-            ... )
-
-            ..  docs::
-
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                {
-                    \context Staff = "Music_Staff"
-                    <<
-                        \context Voice = "Global_Skips"
-                        {
-                            \time 4/8
-                            s1 * 1/2
-                            \time 3/8
-                            s1 * 3/8
-                            \time 4/8
-                            s1 * 1/2
-                            \time 3/8
-                            s1 * 3/8
-                        }
-                        \context Voice = "Music_Voice"
-                        {
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text =
-                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            <e'>2
-                            ^ \markup \center-align \concat { \natural \flat }
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text =
-                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            <e' g'>4.
-                            ^ \markup \center-align \concat { \natural \flat }
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text =
-                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            <e' g' b'>2
-                            ^ \markup \center-align \concat { \natural \flat }
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text =
-                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            <e' g' b' d''>4.
-                            ^ \markup \center-align \concat { \natural \flat }
-                        }
-                    >>
-                }
-
-        ..  container:: example
-
-            Patterned widths:
-
-            >>> score = baca.docs.make_empty_score(1)
-            >>> commands = baca.CommandAccumulator(
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ... )
-
-            >>> commands(
-            ...     "Music_Voice",
-            ...     baca.clusters([1, 3], start_pitch="E4"),
-            ...     baca.make_notes(repeat_ties=True),
-            ... )
-
-            >>> _, _ = baca.interpreter(
-            ...     score,
-            ...     commands.commands,
-            ...     commands.time_signatures,
-            ...     move_global_context=True,
-            ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ... )
-            >>> lilypond_file = baca.make_lilypond_file(
-            ...     score,
-            ...     includes=["baca.ily"],
-            ... )
-
-            ..  docs::
-
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                {
-                    \context Staff = "Music_Staff"
-                    <<
-                        \context Voice = "Global_Skips"
-                        {
-                            \time 4/8
-                            s1 * 1/2
-                            \time 3/8
-                            s1 * 3/8
-                            \time 4/8
-                            s1 * 1/2
-                            \time 3/8
-                            s1 * 3/8
-                        }
-                        \context Voice = "Music_Voice"
-                        {
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text =
-                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            <e'>2
-                            ^ \markup \center-align \concat { \natural \flat }
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text =
-                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            <e' g' b'>4.
-                            ^ \markup \center-align \concat { \natural \flat }
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text =
-                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            <e'>2
-                            ^ \markup \center-align \concat { \natural \flat }
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text =
-                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            <e' g' b'>4.
-                            ^ \markup \center-align \concat { \natural \flat }
-                        }
-                    >>
-                }
-
-        ..  container:: example
-
-            Leaves notes and chords unchanged:
-
-            >>> score = baca.docs.make_empty_score(1)
-            >>> commands = baca.CommandAccumulator(
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ... )
-
-            >>> commands(
-            ...     "Music_Voice",
-            ...     baca.make_notes(repeat_ties=True),
-            ...     baca.pitch("E4"),
-            ...     baca.clusters([]),
-            ... )
-
-            >>> _, _ = baca.interpreter(
-            ...     score,
-            ...     commands.commands,
-            ...     commands.time_signatures,
-            ...     move_global_context=True,
-            ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ... )
-            >>> lilypond_file = baca.make_lilypond_file(
-            ...     score,
-            ...     includes=["baca.ily"],
-            ... )
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                {
-                    \context Staff = "Music_Staff"
-                    <<
-                        \context Voice = "Global_Skips"
-                        {
-                            \time 4/8
-                            s1 * 1/2
-                            \time 3/8
-                            s1 * 3/8
-                            \time 4/8
-                            s1 * 1/2
-                            \time 3/8
-                            s1 * 3/8
-                        }
-                        \context Voice = "Music_Voice"
-                        {
-                            e'2
-                            e'4.
-                            e'2
-                            e'4.
-                        }
-                    >>
-                }
-
-        Inteprets positive integers as widths in thirds.
-
-        Interprets zero to mean input note or chord is left unchanged.
-        """
-        return self._widths
-
-
+@dataclasses.dataclass
 class ColorFingeringCommand(_scoping.Command):
     r"""
     Color fingering command.
@@ -986,44 +876,17 @@ class ColorFingeringCommand(_scoping.Command):
 
     """
 
-    ### CLASS VARIABLES ##
+    numbers: typing.Any = None
+    tweaks: abjad.IndexedTweakManagers = None
 
-    __slots__ = ("_numbers", "_tweaks")
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        map=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        numbers=None,
-        scope: _scoping.ScopeTyping = None,
-        selector=_selectors.pheads(),
-        tweaks: abjad.IndexedTweakManagers = None,
-    ) -> None:
-        _scoping.Command.__init__(
-            self,
-            map=map,
-            match=match,
-            measures=measures,
-            scope=scope,
-            selector=selector,
-        )
-        if numbers is not None:
-            assert abjad.math.all_are_nonnegative_integers(numbers)
-            numbers = abjad.CyclicTuple(numbers)
-        self._numbers = numbers
-        _scoping.validate_indexed_tweaks(tweaks)
-        self._tweaks = tweaks
-
-    ### SPECIAL METHODS ###
+    def __post_init__(self):
+        _scoping.Command.__post_init__(self)
+        if self.numbers is not None:
+            assert abjad.math.all_are_nonnegative_integers(self.numbers)
+            self.numbers = abjad.CyclicTuple(self.numbers)
+        _scoping.validate_indexed_tweaks(self.tweaks)
 
     def _call(self, argument=None) -> None:
-        """
-        Calls command on ``argument``.
-        """
         if argument is None:
             return
         if not self.numbers:
@@ -1041,31 +904,8 @@ class ColorFingeringCommand(_scoping.Command):
                 _scoping.apply_tweaks(fingering, self.tweaks, i=i, total=total)
                 abjad.attach(fingering, phead)
 
-    ### PUBLIC PROPERTIES ###
 
-    @property
-    def numbers(self):
-        """
-        Gets numbers.
-
-        ..  container:: example
-
-            >>> command = baca.ColorFingeringCommand(numbers=[0, 1, 2, 1])
-            >>> command.numbers
-            CyclicTuple(items=(0, 1, 2, 1))
-
-        Set to nonnegative integers.
-        """
-        return self._numbers
-
-    @property
-    def tweaks(self) -> typing.Optional[abjad.IndexedTweakManagers]:
-        r"""
-        Gets tweaks.
-        """
-        return self._tweaks
-
-
+@dataclasses.dataclass
 class DiatonicClusterCommand(_scoping.Command):
     r"""
     Diatonic cluster command.
@@ -1091,40 +931,15 @@ class DiatonicClusterCommand(_scoping.Command):
 
     """
 
-    ### CLASS ATTRIBUTES ###
+    widths: typing.Any = None
+    selector: typing.Any = _selectors.plts()
 
-    __slots__ = ("_widths",)
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        map=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        scope: _scoping.ScopeTyping = None,
-        widths,
-        selector=_selectors.plts(),
-    ) -> None:
-        _scoping.Command.__init__(
-            self,
-            map=map,
-            match=match,
-            measures=measures,
-            scope=scope,
-            selector=selector,
-        )
-        assert abjad.math.all_are_nonnegative_integers(widths)
-        widths = abjad.CyclicTuple(widths)
-        self._widths = widths
-
-    ### SPECIAL METHODS ###
+    def __post_init__(self):
+        _scoping.Command.__post_init__(self)
+        assert abjad.math.all_are_nonnegative_integers(self.widths)
+        self.widths = abjad.CyclicTuple(self.widths)
 
     def _call(self, argument=None) -> None:
-        """
-        Calls command on ``argument``.
-        """
         if argument is None:
             return
         if not self.widths:
@@ -1145,8 +960,6 @@ class DiatonicClusterCommand(_scoping.Command):
                 chord.note_heads[:] = pitches
                 abjad.mutate.replace(pleaf, chord)
 
-    ### PRIVATE METHODS ###
-
     def _get_lowest_diatonic_pitch_number(self, plt):
         if isinstance(plt.head, abjad.Note):
             pitch = plt.head.written_pitch
@@ -1158,15 +971,6 @@ class DiatonicClusterCommand(_scoping.Command):
 
     def _mutates_score(self):
         return True
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def widths(self) -> typing.Optional[typing.Sequence[int]]:
-        """
-        Gets widths.
-        """
-        return self._widths
 
 
 @dataclasses.dataclass(slots=True)
@@ -1233,6 +1037,7 @@ class Loop(abjad.CyclicTuple):
         return pitch
 
 
+@dataclasses.dataclass
 class MicrotoneDeviationCommand(_scoping.Command):
     r"""
     Microtone deviation command.
@@ -1315,41 +1120,16 @@ class MicrotoneDeviationCommand(_scoping.Command):
 
     """
 
-    ### CLASS VARIABLES ##
+    deviations: typing.Any = None
 
-    __slots__ = ("_deviations",)
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        deviations=None,
-        map=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        scope: _scoping.ScopeTyping = None,
-        selector=_selectors.plts(),
-    ) -> None:
-        _scoping.Command.__init__(
-            self,
-            map=map,
-            match=match,
-            measures=measures,
-            scope=scope,
-            selector=selector,
-        )
-        if deviations is not None:
-            assert isinstance(deviations, collections.abc.Iterable)
-            assert all(isinstance(_, numbers.Number) for _ in deviations)
-        self._deviations = abjad.CyclicTuple(deviations)
-
-    ### SPECIAL METHODS ###
+    def __post_init__(self):
+        _scoping.Command.__post_init__(self)
+        if self.deviations is not None:
+            assert isinstance(self.deviations, collections.abc.Iterable)
+            assert all(isinstance(_, numbers.Number) for _ in self.deviations)
+        self.deviations = abjad.CyclicTuple(self.deviations)
 
     def _call(self, argument=None) -> None:
-        """
-        Cyclically applies deviations to plts in ``argument``.
-        """
         if argument is None:
             return
         if not self.deviations:
@@ -1359,8 +1139,6 @@ class MicrotoneDeviationCommand(_scoping.Command):
         for i, plt in enumerate(_selection.Selection(argument).plts()):
             deviation = self.deviations[i]
             self._adjust_pitch(plt, deviation)
-
-    ### PRIVATE METHODS ###
 
     def _adjust_pitch(self, plt, deviation):
         assert deviation in (0.5, 0, -0.5)
@@ -1374,24 +1152,8 @@ class MicrotoneDeviationCommand(_scoping.Command):
             annotation = {"color microtone": True}
             abjad.attach(annotation, pleaf)
 
-    ### PUBLIC PROPERTIES ###
 
-    @property
-    def deviations(self) -> typing.Optional[abjad.CyclicTuple]:
-        """
-        Gets deviations.
-
-        ..  container:: example
-
-            >>> command = baca.deviation([0, -0.5, 0, 0.5])
-            >>> command.deviations
-            CyclicTuple(items=(0, -0.5, 0, 0.5))
-
-        Set to iterable of items (each -0.5, 0 or 0.5).
-        """
-        return self._deviations
-
-
+@dataclasses.dataclass
 class OctaveDisplacementCommand(_scoping.Command):
     r"""
     Octave displacement command.
@@ -1476,42 +1238,16 @@ class OctaveDisplacementCommand(_scoping.Command):
 
     """
 
-    ### CLASS VARIABLES ##
+    displacements: typing.Any = None
 
-    __slots__ = ("_displacements",)
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        displacements=None,
-        map=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        scope: _scoping.ScopeTyping = None,
-        selector=_selectors.plts(),
-    ) -> None:
-        _scoping.Command.__init__(
-            self,
-            map=map,
-            match=match,
-            measures=measures,
-            scope=scope,
-            selector=selector,
-        )
-        if displacements is not None:
-            displacements = tuple(displacements)
-            assert self._is_octave_displacement_vector(displacements)
-            displacements = abjad.CyclicTuple(displacements)
-        self._displacements = displacements
-
-    ### SPECIAL METHODS ###
+    def __post_init__(self):
+        _scoping.Command.__post_init__(self)
+        if self.displacements is not None:
+            self.displacements = tuple(self.displacements)
+            assert self._is_octave_displacement_vector(self.displacements)
+            self.displacements = abjad.CyclicTuple(self.displacements)
 
     def _call(self, argument=None) -> None:
-        """
-        Calls command on ``argument``.
-        """
         if argument is None:
             return
         if self.displacements is None:
@@ -1534,29 +1270,11 @@ class OctaveDisplacementCommand(_scoping.Command):
                 else:
                     raise TypeError(pleaf)
 
-    ### PRIVATE METHODS ###
-
     def _is_octave_displacement_vector(self, argument):
         if isinstance(argument, (tuple, list)):
             if all(isinstance(_, int) for _ in argument):
                 return True
         return False
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def displacements(self) -> typing.Optional[abjad.CyclicTuple]:
-        """
-        Gets displacements.
-
-        ..  container:: example
-
-            >>> command = baca.displacement([0, 0, 0, 1, 1, 0, 0, 0, -1, 1, 1, 2, 2])
-            >>> command.displacements
-            CyclicTuple(items=(0, 0, 0, 1, 1, 0, 0, 0, -1, 1, 1, 2, 2))
-
-        """
-        return self._displacements
 
 
 def _parse_string(string):
@@ -1669,6 +1387,7 @@ def _set_lt_pitch(
     return new_lt
 
 
+@dataclasses.dataclass
 class PitchCommand(_scoping.Command):
     r"""
     Pitch command.
@@ -1930,91 +1649,45 @@ class PitchCommand(_scoping.Command):
 
     """
 
-    ### CLASS VARIABLES ###
+    allow_octaves: bool = None
+    allow_out_of_range: bool = None
+    allow_repeats: bool = None
+    allow_repitch: bool = None
+    mock: bool = None
+    cyclic: bool = None
+    do_not_transpose: bool = None
+    ignore_incomplete: bool = None
+    persist: str = None
+    pitches: typing.Union[typing.Sequence, Loop] = None
 
-    __slots__ = (
-        "_allow_octaves",
-        "_allow_out_of_range",
-        "_allow_repeats",
-        "_allow_repitch",
-        "_mock",
-        "_cyclic",
-        "_do_not_transpose",
-        "_ignore_incomplete",
-        "_mutated_score",
-        "_persist",
-        "_pitches",
-        "_state",
-    )
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        allow_octaves: bool = None,
-        allow_out_of_range: bool = None,
-        allow_repeats: bool = None,
-        allow_repitch: bool = None,
-        mock: bool = None,
-        cyclic: bool = None,
-        do_not_transpose: bool = None,
-        ignore_incomplete: bool = None,
-        map=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        persist: str = None,
-        pitches: typing.Union[typing.Sequence, Loop] = None,
-        scope: _scoping.ScopeTyping = None,
-        selector=None,
-    ) -> None:
-        _scoping.Command.__init__(
-            self,
-            map=map,
-            match=match,
-            measures=measures,
-            scope=scope,
-            selector=selector,
-        )
-        if allow_octaves is not None:
-            allow_octaves = bool(allow_octaves)
-        self._allow_octaves = allow_octaves
-        if allow_out_of_range is not None:
-            allow_out_of_range = bool(allow_out_of_range)
-        self._allow_out_of_range = allow_out_of_range
-        if allow_repeats is not None:
-            allow_repeats = bool(allow_repeats)
-        self._allow_repeats = allow_repeats
-        if allow_repitch is not None:
-            allow_repitch = bool(allow_repitch)
-        self._allow_repitch = allow_repitch
-        if mock is not None:
-            mock = bool(mock)
-        self._mock = mock
-        if cyclic is not None:
-            cyclic = bool(cyclic)
-        self._cyclic = cyclic
-        if do_not_transpose is not None:
-            do_not_transpose = bool(do_not_transpose)
-        self._do_not_transpose = do_not_transpose
-        if ignore_incomplete is not None:
-            ignore_incomplete = bool(ignore_incomplete)
-        self._ignore_incomplete = ignore_incomplete
+    def __post_init__(self):
+        _scoping.Command.__post_init__(self)
+        if self.allow_octaves is not None:
+            self.allow_octaves = bool(self.allow_octaves)
+        if self.allow_out_of_range is not None:
+            self.allow_out_of_range = bool(self.allow_out_of_range)
+        if self.allow_repeats is not None:
+            self.allow_repeats = bool(self.allow_repeats)
+        if self.allow_repitch is not None:
+            self.allow_repitch = bool(self.allow_repitch)
+        if self.mock is not None:
+            self.mock = bool(self.mock)
+        if self.cyclic is not None:
+            self.cyclic = bool(self.cyclic)
+        if self.do_not_transpose is not None:
+            self.do_not_transpose = bool(self.do_not_transpose)
+        if self.ignore_incomplete is not None:
+            self.ignore_incomplete = bool(self.ignore_incomplete)
         self._mutated_score = False
-        if persist is not None:
-            assert isinstance(persist, str), repr(persist)
-        self._persist = persist
-        if pitches is not None:
-            pitches = _coerce_pitches(pitches)
-        self._pitches = pitches
+        if self.persist is not None:
+            assert isinstance(self.persist, str), repr(self.persist)
+        if self.pitches is not None:
+            self.pitches = _coerce_pitches(self.pitches)
         self._state = {}
 
-    ### SPECIAL METHODS ###
+    __repr__ = _scoping.Command.__repr__
 
     def _call(self, argument=None):
-        """
-        Calls command on ``argument``.
-        """
         if argument is None:
             return
         if not self.pitches:
@@ -2061,8 +1734,6 @@ class PitchCommand(_scoping.Command):
         pitches_consumed += previous_pitches_consumed
         self.state["pitches_consumed"] = pitches_consumed
 
-    ### PRIVATE METHODS ###
-
     def _check_length(self, plts):
         if self.cyclic:
             return
@@ -2100,65 +1771,6 @@ class PitchCommand(_scoping.Command):
                 pitches_consumed -= 1
         return pitches_consumed
 
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def allow_octaves(self) -> typing.Optional[bool]:
-        """
-        Is true when command allows octaves.
-        """
-        return self._allow_octaves
-
-    @property
-    def allow_out_of_range(self) -> typing.Optional[bool]:
-        """
-        Is true when command allows out-of-range pitches.
-        """
-        return self._allow_out_of_range
-
-    @property
-    def allow_repeats(self) -> typing.Optional[bool]:
-        """
-        Is true when command allows repeat pitches.
-        """
-        return self._allow_repeats
-
-    @property
-    def allow_repitch(self) -> typing.Optional[bool]:
-        """
-        Is true when command allows repitch.
-        """
-        return self._allow_repitch
-
-    @property
-    def cyclic(self) -> typing.Optional[bool]:
-        """
-        Is true when command reads pitches cyclically.
-        """
-        return self._cyclic
-
-    @property
-    def do_not_transpose(self) -> typing.Optional[bool]:
-        """
-        Is true when pitch escapes transposition.
-        """
-        return self._do_not_transpose
-
-    @property
-    def ignore_incomplete(self) -> typing.Optional[bool]:
-        """
-        Is true when persistent pitch command ignores previous segment
-        incomplete last note.
-        """
-        return self._ignore_incomplete
-
-    @property
-    def mock(self) -> typing.Optional[bool]:
-        """
-        Is true when command tags leaves as mock.
-        """
-        return self._mock
-
     @property
     def parameter(self) -> str:
         """
@@ -2173,38 +1785,6 @@ class PitchCommand(_scoping.Command):
         return _const.PITCH
 
     @property
-    def persist(self) -> typing.Optional[str]:
-        """
-        Gets persist name.
-        """
-        return self._persist
-
-    @property
-    def pitches(self):
-        """
-        Gets pitches.
-
-        ..  container:: example
-
-            Gets pitches:
-
-            >>> command = baca.PitchCommand(
-            ...     pitches=[19, 13, 15, 16, 17, 23],
-            ... )
-
-            >>> for pitch in command.pitches:
-            ...     pitch
-            NamedPitch("g''")
-            NamedPitch("cs''")
-            NamedPitch("ef''")
-            NamedPitch("e''")
-            NamedPitch("f''")
-            NamedPitch("b''")
-
-        """
-        return self._pitches
-
-    @property
     def state(self):
         """
         Gets state dictionary.
@@ -2212,6 +1792,7 @@ class PitchCommand(_scoping.Command):
         return self._state
 
 
+@dataclasses.dataclass
 class RegisterCommand(_scoping.Command):
     r"""
     Register command.
@@ -2383,41 +1964,15 @@ class RegisterCommand(_scoping.Command):
 
     """
 
-    ### CLASS VARIABLES ###
+    registration: typing.Any = None
 
-    __slots__ = ("_registration",)
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        map=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        registration=None,
-        scope: _scoping.ScopeTyping = None,
-        selector=_selectors.plts(),
-    ) -> None:
-        _scoping.Command.__init__(
-            self,
-            map=map,
-            match=match,
-            measures=measures,
-            scope=scope,
-            selector=selector,
-        )
-        if registration is not None:
+    def __post_init__(self):
+        _scoping.Command.__post_init__(self)
+        if self.registration is not None:
             prototype = _pitchclasses.Registration
-            assert isinstance(registration, prototype), repr(registration)
-        self._registration = registration
-
-    ### SPECIAL METHODS ###
+            assert isinstance(self.registration, prototype), repr(self.registration)
 
     def _call(self, argument=None) -> None:
-        """
-        Calls command on ``argument``.
-        """
         if argument is None:
             return
         if self.registration is None:
@@ -2440,28 +1995,8 @@ class RegisterCommand(_scoping.Command):
                     raise TypeError(pleaf)
                 abjad.detach(_const.NOT_YET_REGISTERED, pleaf)
 
-    ### PUBLIC PROPERTIES ###
 
-    @property
-    def registration(self) -> typing.Optional[_pitchclasses.Registration]:
-        """
-        Gets registration.
-
-        ..  container:: example
-
-            >>> command = baca.RegisterCommand(
-            ...     registration=baca.Registration(
-            ...         [("[A0, C4)", 15), ("[C4, C8)", 27)],
-            ...     ),
-            ... )
-
-            >>> command.registration
-            Registration(components=[RegistrationComponent(source_pitch_range=PitchRange(range_string='[A0, C4)'), target_octave_start_pitch=NumberedPitch(15)), RegistrationComponent(source_pitch_range=PitchRange(range_string='[C4, C8)'), target_octave_start_pitch=NumberedPitch(27))])
-
-        """
-        return self._registration
-
-
+@dataclasses.dataclass
 class RegisterInterpolationCommand(_scoping.Command):
     r"""
     Register interpolation command.
@@ -3120,44 +2655,260 @@ class RegisterInterpolationCommand(_scoping.Command):
                 >>
             }
 
+    ..  container:: example
+
+        Selects tuplet 0:
+
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 16),
+        ...     rmakers.beam(),
+        ...     baca.color(baca.selectors.tuplet(0), lone=True),
+        ...     baca.register(0, 24, selector=baca.selectors.tuplet(0)),
+        ... )
+
+        >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
+        >>> selection = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 3/2
+                        \abjad-color-music #'green
+                        fs'16
+                        [
+                        \abjad-color-music #'green
+                        e'16
+                        \abjad-color-music #'green
+                        ef''16
+                        \abjad-color-music #'green
+                        f''16
+                        \abjad-color-music #'green
+                        a'16
+                        \abjad-color-music #'green
+                        bf'16
+                        \abjad-color-music #'green
+                        c''16
+                        \abjad-color-music #'green
+                        b''16
+                        \abjad-color-music #'green
+                        af''16
+                        \abjad-color-music #'green
+                        g''16
+                        \abjad-color-music #'green
+                        cs'''16
+                        \abjad-color-music #'green
+                        d'''16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        fs'16
+                        [
+                        e'16
+                        ef'16
+                        f'16
+                        a'16
+                        bf'16
+                        c'16
+                        b'16
+                        af'16
+                        g'16
+                        cs'16
+                        d'16
+                        ]
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Selects tuplet -1:
+
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 16),
+        ...     rmakers.beam(),
+        ...     baca.color(baca.selectors.tuplet(-1), lone=True),
+        ...     baca.register(0, 24, selector=baca.selectors.tuplet(-1)),
+        ... )
+
+        >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
+        >>> selection = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 3/2
+                        fs'16
+                        [
+                        e'16
+                        ef'16
+                        f'16
+                        a'16
+                        bf'16
+                        c'16
+                        b'16
+                        af'16
+                        g'16
+                        cs'16
+                        d'16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \abjad-color-music #'green
+                        fs'16
+                        [
+                        \abjad-color-music #'green
+                        e'16
+                        \abjad-color-music #'green
+                        ef''16
+                        \abjad-color-music #'green
+                        f''16
+                        \abjad-color-music #'green
+                        a'16
+                        \abjad-color-music #'green
+                        bf'16
+                        \abjad-color-music #'green
+                        c''16
+                        \abjad-color-music #'green
+                        b''16
+                        \abjad-color-music #'green
+                        af''16
+                        \abjad-color-music #'green
+                        g''16
+                        \abjad-color-music #'green
+                        cs'''16
+                        \abjad-color-music #'green
+                        d'''16
+                        ]
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Maps to tuplets:
+
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 16),
+        ...     rmakers.beam(),
+        ...     baca.color(baca.selectors.tuplets()),
+        ...     baca.new(
+        ...         baca.register(0, 24),
+        ...         map=baca.selectors.tuplets(),
+        ...     ),
+        ... )
+
+        >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
+        >>> selection = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 3/2
+                        \abjad-color-music #'red
+                        fs'16
+                        [
+                        \abjad-color-music #'red
+                        e'16
+                        \abjad-color-music #'red
+                        ef''16
+                        \abjad-color-music #'red
+                        f''16
+                        \abjad-color-music #'red
+                        a'16
+                        \abjad-color-music #'red
+                        bf'16
+                        \abjad-color-music #'red
+                        c''16
+                        \abjad-color-music #'red
+                        b''16
+                        \abjad-color-music #'red
+                        af''16
+                        \abjad-color-music #'red
+                        g''16
+                        \abjad-color-music #'red
+                        cs'''16
+                        \abjad-color-music #'red
+                        d'''16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \abjad-color-music #'blue
+                        fs'16
+                        [
+                        \abjad-color-music #'blue
+                        e'16
+                        \abjad-color-music #'blue
+                        ef''16
+                        \abjad-color-music #'blue
+                        f''16
+                        \abjad-color-music #'blue
+                        a'16
+                        \abjad-color-music #'blue
+                        bf'16
+                        \abjad-color-music #'blue
+                        c''16
+                        \abjad-color-music #'blue
+                        b''16
+                        \abjad-color-music #'blue
+                        af''16
+                        \abjad-color-music #'blue
+                        g''16
+                        \abjad-color-music #'blue
+                        cs'''16
+                        \abjad-color-music #'blue
+                        d'''16
+                        ]
+                    }
+                }
+            >>
+
     """
 
-    ### CLASS VARIABLES ###
+    start_pitch: typing.Union[abjad.Number, abjad.NumberedPitch] = 0
+    stop_pitch: typing.Union[abjad.Number, abjad.NumberedPitch] = 0
 
-    __slots__ = ("_start_pitch", "_stop_pitch")
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        map=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        scope: _scoping.ScopeTyping = None,
-        selector=_selectors.plts(),
-        start_pitch: typing.Union[abjad.Number, abjad.NumberedPitch] = 0,
-        stop_pitch: typing.Union[abjad.Number, abjad.NumberedPitch] = 0,
-    ) -> None:
-        _scoping.Command.__init__(
-            self,
-            map=map,
-            match=match,
-            measures=measures,
-            scope=scope,
-            selector=selector,
-        )
-        start_pitch = abjad.NumberedPitch(start_pitch)
-        self._start_pitch: abjad.NumberedPitch = start_pitch
-        stop_pitch = abjad.NumberedPitch(stop_pitch)
-        self._stop_pitch: abjad.NumberedPitch = stop_pitch
-
-    ### SPECIAL METHODS ###
+    def __post_init__(self):
+        _scoping.Command.__post_init__(self)
+        self.start_pitch = abjad.NumberedPitch(self.start_pitch)
+        self.stop_pitch = abjad.NumberedPitch(self.stop_pitch)
 
     def _call(self, argument=None) -> None:
-        """
-        Calls command on ``argument``.
-        """
         if argument is None:
             return
         if self.selector:
@@ -3177,8 +2928,6 @@ class RegisterInterpolationCommand(_scoping.Command):
                     raise TypeError(pleaf)
                 abjad.detach(_const.NOT_YET_REGISTERED, pleaf)
 
-    ### PRIVATE METHODS ###
-
     def _get_registration(self, i, length):
         start_pitch = self.start_pitch.number
         stop_pitch = self.stop_pitch.number
@@ -3189,274 +2938,8 @@ class RegisterInterpolationCommand(_scoping.Command):
         current_pitch = int(current_pitch)
         return _pitchclasses.Registration([("[A0, C8]", current_pitch)])
 
-    ### PUBLIC PROPERTIES ###
 
-    @property
-    def selector(self):
-        r"""
-        Gets selector.
-
-        ..  container:: example
-
-            Selects tuplet 0:
-
-            >>> stack = baca.stack(
-            ...     baca.figure([1], 16),
-            ...     rmakers.beam(),
-            ...     baca.color(baca.selectors.tuplet(0), lone=True),
-            ...     baca.register(0, 24, selector=baca.selectors.tuplet(0)),
-            ... )
-
-            >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-            >>> selection = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 3/2
-                            \abjad-color-music #'green
-                            fs'16
-                            [
-                            \abjad-color-music #'green
-                            e'16
-                            \abjad-color-music #'green
-                            ef''16
-                            \abjad-color-music #'green
-                            f''16
-                            \abjad-color-music #'green
-                            a'16
-                            \abjad-color-music #'green
-                            bf'16
-                            \abjad-color-music #'green
-                            c''16
-                            \abjad-color-music #'green
-                            b''16
-                            \abjad-color-music #'green
-                            af''16
-                            \abjad-color-music #'green
-                            g''16
-                            \abjad-color-music #'green
-                            cs'''16
-                            \abjad-color-music #'green
-                            d'''16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            fs'16
-                            [
-                            e'16
-                            ef'16
-                            f'16
-                            a'16
-                            bf'16
-                            c'16
-                            b'16
-                            af'16
-                            g'16
-                            cs'16
-                            d'16
-                            ]
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Selects tuplet -1:
-
-            >>> stack = baca.stack(
-            ...     baca.figure([1], 16),
-            ...     rmakers.beam(),
-            ...     baca.color(baca.selectors.tuplet(-1), lone=True),
-            ...     baca.register(0, 24, selector=baca.selectors.tuplet(-1)),
-            ... )
-
-            >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-            >>> selection = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 3/2
-                            fs'16
-                            [
-                            e'16
-                            ef'16
-                            f'16
-                            a'16
-                            bf'16
-                            c'16
-                            b'16
-                            af'16
-                            g'16
-                            cs'16
-                            d'16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \abjad-color-music #'green
-                            fs'16
-                            [
-                            \abjad-color-music #'green
-                            e'16
-                            \abjad-color-music #'green
-                            ef''16
-                            \abjad-color-music #'green
-                            f''16
-                            \abjad-color-music #'green
-                            a'16
-                            \abjad-color-music #'green
-                            bf'16
-                            \abjad-color-music #'green
-                            c''16
-                            \abjad-color-music #'green
-                            b''16
-                            \abjad-color-music #'green
-                            af''16
-                            \abjad-color-music #'green
-                            g''16
-                            \abjad-color-music #'green
-                            cs'''16
-                            \abjad-color-music #'green
-                            d'''16
-                            ]
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Maps to tuplets:
-
-            >>> stack = baca.stack(
-            ...     baca.figure([1], 16),
-            ...     rmakers.beam(),
-            ...     baca.color(baca.selectors.tuplets()),
-            ...     baca.new(
-            ...         baca.register(0, 24),
-            ...         map=baca.selectors.tuplets(),
-            ...     ),
-            ... )
-
-            >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-            >>> selection = stack(collections)
-
-            >>> lilypond_file = abjad.illustrators.selection(selection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context Staff = "Staff"
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 3/2
-                            \abjad-color-music #'red
-                            fs'16
-                            [
-                            \abjad-color-music #'red
-                            e'16
-                            \abjad-color-music #'red
-                            ef''16
-                            \abjad-color-music #'red
-                            f''16
-                            \abjad-color-music #'red
-                            a'16
-                            \abjad-color-music #'red
-                            bf'16
-                            \abjad-color-music #'red
-                            c''16
-                            \abjad-color-music #'red
-                            b''16
-                            \abjad-color-music #'red
-                            af''16
-                            \abjad-color-music #'red
-                            g''16
-                            \abjad-color-music #'red
-                            cs'''16
-                            \abjad-color-music #'red
-                            d'''16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \abjad-color-music #'blue
-                            fs'16
-                            [
-                            \abjad-color-music #'blue
-                            e'16
-                            \abjad-color-music #'blue
-                            ef''16
-                            \abjad-color-music #'blue
-                            f''16
-                            \abjad-color-music #'blue
-                            a'16
-                            \abjad-color-music #'blue
-                            bf'16
-                            \abjad-color-music #'blue
-                            c''16
-                            \abjad-color-music #'blue
-                            b''16
-                            \abjad-color-music #'blue
-                            af''16
-                            \abjad-color-music #'blue
-                            g''16
-                            \abjad-color-music #'blue
-                            cs'''16
-                            \abjad-color-music #'blue
-                            d'''16
-                            ]
-                        }
-                    }
-                >>
-
-        """
-        return self._selector
-
-    @property
-    def start_pitch(self) -> abjad.NumberedPitch:
-        """
-        Gets start pitch.
-        """
-        return self._start_pitch
-
-    @property
-    def stop_pitch(self) -> abjad.NumberedPitch:
-        """
-        Gets stop pitch.
-        """
-        return self._stop_pitch
-
-
+@dataclasses.dataclass
 class RegisterToOctaveCommand(_scoping.Command):
     r"""
     Register-to-octave command.
@@ -3781,47 +3264,147 @@ class RegisterToOctaveCommand(_scoping.Command):
         >>> baca.RegisterToOctaveCommand()
         RegisterToOctaveCommand()
 
+    ..  container:: example
+
+        Bass anchored at octave 5:
+
+        >>> chord = abjad.Chord("<c, d e'>1")
+        >>> command = baca.RegisterToOctaveCommand(
+        ...     anchor=abjad.Down,
+        ...     octave_number=5,
+        ... )
+        >>> command(chord)
+
+        ..  docs::
+
+            >>> string = abjad.lilypond(chord)
+            >>> print(string)
+            <c'' d''' e''''>1
+
+    ..  container:: example
+
+        Center anchored at octave 5:
+
+        >>> chord = abjad.Chord("<c, d e'>1")
+        >>> command = baca.RegisterToOctaveCommand(
+        ...     anchor=abjad.Center,
+        ...     octave_number=5,
+        ... )
+        >>> command(chord)
+
+        ..  docs::
+
+            >>> string = abjad.lilypond(chord)
+            >>> print(string)
+            <c' d'' e'''>1
+
+    ..  container:: example
+
+        Soprano anchored at octave 5:
+
+        >>> chord = abjad.Chord("<c, d e'>1")
+        >>> command = baca.RegisterToOctaveCommand(
+        ...     anchor=abjad.Up,
+        ...     octave_number=5,
+        ... )
+        >>> command(chord)
+
+        ..  docs::
+
+            >>> string = abjad.lilypond(chord)
+            >>> print(string)
+            <c d' e''>1
+
+    ..  container:: example
+
+        >>> chord = abjad.Chord("<c, d e'>1")
+        >>> staff = abjad.Staff([chord])
+        >>> abjad.attach(abjad.Clef("bass"), staff[0])
+        >>> abjad.show(staff) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> string = abjad.lilypond(chord)
+            >>> print(string)
+            \clef "bass"
+            <c, d e'>1
+
+    ..  container:: example
+
+        >>> chord = abjad.Chord("<c, d e'>1")
+        >>> command = baca.RegisterToOctaveCommand(octave_number=1)
+        >>> command(chord)
+
+        ..  docs::
+
+            >>> string = abjad.lilypond(chord)
+            >>> print(string)
+            <c,, d, e>1
+
+    ..  container:: example
+
+        >>> chord = abjad.Chord("<c, d e'>1")
+        >>> command = baca.RegisterToOctaveCommand(octave_number=2)
+        >>> command(chord)
+
+        ..  docs::
+
+            >>> string = abjad.lilypond(chord)
+            >>> print(string)
+            <c, d e'>1
+
+    ..  container:: example
+
+        >>> chord = abjad.Chord("<c, d e'>1")
+        >>> command = baca.RegisterToOctaveCommand(octave_number=3)
+        >>> command(chord)
+
+        ..  docs::
+
+            >>> string = abjad.lilypond(chord)
+            >>> print(string)
+            <c d' e''>1
+
+    ..  container:: example
+
+        >>> chord = abjad.Chord("<c, d e'>1")
+        >>> command = baca.RegisterToOctaveCommand(octave_number=4)
+        >>> command(chord)
+
+        ..  docs::
+
+            >>> string = abjad.lilypond(chord)
+            >>> print(string)
+            <c' d'' e'''>1
+
+    ..  container:: example
+
+        >>> chord = abjad.Chord("<c, d e'>1")
+        >>> command = baca.RegisterToOctaveCommand(octave_number=5)
+        >>> command(chord)
+
+        ..  docs::
+
+            >>> string = abjad.lilypond(chord)
+            >>> print(string)
+            <c'' d''' e''''>1
+
     """
 
-    ### CLASS VARIABLES ###
+    anchor: typing.Any = None
+    octave_number: typing.Any = None
 
-    __slots__ = ("_anchor", "_octave_number")
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        anchor=None,
-        octave_number=None,
-        map=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        scope: _scoping.ScopeTyping = None,
-        selector=_selectors.plts(),
-    ) -> None:
-        _scoping.Command.__init__(
-            self,
-            map=map,
-            match=match,
-            measures=measures,
-            scope=scope,
-            selector=selector,
-        )
-        if anchor is not None:
+    def __post_init__(self):
+        _scoping.Command.__post_init__(self)
+        if self.anchor is not None:
             prototype = (abjad.Center, abjad.Down, abjad.Up)
-            assert anchor in prototype, repr(anchor)
-        self._anchor = anchor
-        if octave_number is not None:
-            assert isinstance(octave_number, int), repr(octave_number)
-        self._octave_number = octave_number
+            assert self.anchor in prototype, repr(self.anchor)
+        if self.octave_number is not None:
+            assert isinstance(self.octave_number, int), repr(self.octave_number)
 
-    ### SPECIAL METHODS ###
+    __repr__ = _scoping.Command.__repr__
 
     def _call(self, argument=None) -> None:
-        """
-        Calls command on ``argument``.
-        """
         if argument is None:
             return
         if self.octave_number is None:
@@ -3836,8 +3419,6 @@ class RegisterToOctaveCommand(_scoping.Command):
         assert isinstance(pleaves, _selection.Selection)
         for pleaf in pleaves:
             self._set_pitch(pleaf, transposition)
-
-    ### PRIVATE METHODS ###
 
     def _get_anchor_octave_number(self, argument):
         pitches = []
@@ -3873,150 +3454,8 @@ class RegisterToOctaveCommand(_scoping.Command):
             leaf.written_pitches = pitches
         abjad.detach(_const.NOT_YET_REGISTERED, leaf)
 
-    ### PUBLIC PROPERTIES ###
 
-    @property
-    def anchor(self) -> typing.Optional[abjad.enums.VerticalAlignment]:
-        """
-        Gets anchor.
-
-        ..  container:: example
-
-            Bass anchored at octave 5:
-
-            >>> chord = abjad.Chord("<c, d e'>1")
-            >>> command = baca.RegisterToOctaveCommand(
-            ...     anchor=abjad.Down,
-            ...     octave_number=5,
-            ... )
-            >>> command(chord)
-
-            ..  docs::
-
-                >>> string = abjad.lilypond(chord)
-                >>> print(string)
-                <c'' d''' e''''>1
-
-        ..  container:: example
-
-            Center anchored at octave 5:
-
-            >>> chord = abjad.Chord("<c, d e'>1")
-            >>> command = baca.RegisterToOctaveCommand(
-            ...     anchor=abjad.Center,
-            ...     octave_number=5,
-            ... )
-            >>> command(chord)
-
-            ..  docs::
-
-                >>> string = abjad.lilypond(chord)
-                >>> print(string)
-                <c' d'' e'''>1
-
-        ..  container:: example
-
-            Soprano anchored at octave 5:
-
-            >>> chord = abjad.Chord("<c, d e'>1")
-            >>> command = baca.RegisterToOctaveCommand(
-            ...     anchor=abjad.Up,
-            ...     octave_number=5,
-            ... )
-            >>> command(chord)
-
-            ..  docs::
-
-                >>> string = abjad.lilypond(chord)
-                >>> print(string)
-                <c d' e''>1
-
-        """
-        return self._anchor
-
-    @property
-    def octave_number(self) -> int:
-        r"""
-        Gets octave number.
-
-        ..  container:: example
-
-            >>> chord = abjad.Chord("<c, d e'>1")
-            >>> staff = abjad.Staff([chord])
-            >>> abjad.attach(abjad.Clef("bass"), staff[0])
-            >>> abjad.show(staff) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> string = abjad.lilypond(chord)
-                >>> print(string)
-                \clef "bass"
-                <c, d e'>1
-
-        ..  container:: example
-
-            >>> chord = abjad.Chord("<c, d e'>1")
-            >>> command = baca.RegisterToOctaveCommand(octave_number=1)
-            >>> command(chord)
-
-            ..  docs::
-
-                >>> string = abjad.lilypond(chord)
-                >>> print(string)
-                <c,, d, e>1
-
-        ..  container:: example
-
-            >>> chord = abjad.Chord("<c, d e'>1")
-            >>> command = baca.RegisterToOctaveCommand(octave_number=2)
-            >>> command(chord)
-
-            ..  docs::
-
-                >>> string = abjad.lilypond(chord)
-                >>> print(string)
-                <c, d e'>1
-
-        ..  container:: example
-
-            >>> chord = abjad.Chord("<c, d e'>1")
-            >>> command = baca.RegisterToOctaveCommand(octave_number=3)
-            >>> command(chord)
-
-            ..  docs::
-
-                >>> string = abjad.lilypond(chord)
-                >>> print(string)
-                <c d' e''>1
-
-        ..  container:: example
-
-            >>> chord = abjad.Chord("<c, d e'>1")
-            >>> command = baca.RegisterToOctaveCommand(octave_number=4)
-            >>> command(chord)
-
-            ..  docs::
-
-                >>> string = abjad.lilypond(chord)
-                >>> print(string)
-                <c' d'' e'''>1
-
-        ..  container:: example
-
-            >>> chord = abjad.Chord("<c, d e'>1")
-            >>> command = baca.RegisterToOctaveCommand(octave_number=5)
-            >>> command(chord)
-
-            ..  docs::
-
-                >>> string = abjad.lilypond(chord)
-                >>> print(string)
-                <c'' d''' e''''>1
-
-        """
-        return self._octave_number
-
-
+@dataclasses.dataclass
 class StaffPositionCommand(_scoping.Command):
     r"""
     Staff position command.
@@ -4065,75 +3504,35 @@ class StaffPositionCommand(_scoping.Command):
 
     """
 
-    ### CLASS ATTRIBUTES ###
+    numbers: typing.Any = ()
+    allow_out_of_range: bool = None
+    allow_repeats: bool = None
+    allow_repitch: bool = None
+    exact: bool = None
+    mock: bool = None
+    selector: typing.Any = _selectors.plts()
+    set_chord_pitches_equal: bool = None
 
-    __slots__ = (
-        "_allow_out_of_range",
-        "_allow_repeats",
-        "_allow_repitch",
-        "_mock",
-        "_exact",
-        "_mutated_score",
-        "_numbers",
-        "_set_chord_pitches_equal",
-    )
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        numbers,
-        *,
-        allow_out_of_range: bool = None,
-        allow_repeats: bool = None,
-        allow_repitch: bool = None,
-        exact: bool = None,
-        map=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        mock: bool = None,
-        scope: _scoping.ScopeTyping = None,
-        selector=_selectors.plts(),
-        set_chord_pitches_equal: bool = None,
-    ) -> None:
-        _scoping.Command.__init__(
-            self,
-            map=map,
-            match=match,
-            measures=measures,
-            scope=scope,
-            selector=selector,
-        )
+    def __post_init__(self):
+        _scoping.Command.__post_init__(self)
         prototype = (int, list, abjad.StaffPosition)
-        assert all(isinstance(_, prototype) for _ in numbers), repr(numbers)
-        numbers = abjad.CyclicTuple(numbers)
-        self._numbers = numbers
-        if allow_out_of_range is not None:
-            allow_out_of_range = bool(allow_out_of_range)
-        self._allow_out_of_range = allow_out_of_range
-        if allow_repeats is not None:
-            allow_repeats = bool(allow_repeats)
-        self._allow_repeats = allow_repeats
-        if allow_repitch is not None:
-            allow_repitch = bool(allow_repitch)
-        self._allow_repitch = allow_repitch
-        if mock is not None:
-            mock = bool(mock)
-        self._mock = mock
-        if exact is not None:
-            exact = bool(exact)
-        self._exact = exact
+        assert all(isinstance(_, prototype) for _ in self.numbers), repr(self.numbers)
+        self.numbers = abjad.CyclicTuple(self.numbers)
+        if self.allow_out_of_range is not None:
+            self.allow_out_of_range = bool(self.allow_out_of_range)
+        if self.allow_repeats is not None:
+            self.allow_repeats = bool(self.allow_repeats)
+        if self.allow_repitch is not None:
+            self.allow_repitch = bool(self.allow_repitch)
+        if self.mock is not None:
+            self.mock = bool(self.mock)
+        if self.exact is not None:
+            self.exact = bool(self.exact)
         self._mutated_score = False
-        if set_chord_pitches_equal is not None:
-            set_chord_pitches_equal = bool(set_chord_pitches_equal)
-        self._set_chord_pitches_equal = set_chord_pitches_equal
-
-    ### SPECIAL METHODS ###
+        if self.set_chord_pitches_equal is not None:
+            self.set_chord_pitches_equal = bool(self.set_chord_pitches_equal)
 
     def _call(self, argument=None) -> None:
-        """
-        Calls command on ``argument``.
-        """
         if argument is None:
             return
         if not self.numbers:
@@ -4187,132 +3586,46 @@ class StaffPositionCommand(_scoping.Command):
             message += f" staff position count ({len(self.numbers)})."
             raise Exception(message)
 
-    ### PRIVATE METHODS ###
-
     def _mutates_score(self):
         numbers = self.numbers or []
         if any(isinstance(_, collections.abc.Iterable) for _ in numbers):
             return True
         return self._mutated_score
 
-    ### PUBLIC PROPERTIES ###
 
-    @property
-    def allow_out_of_range(self) -> typing.Optional[bool]:
-        """
-        Is true when out-of-range staff positions are allowed.
-        """
-        return self._allow_out_of_range
-
-    @property
-    def allow_repeats(self) -> typing.Optional[bool]:
-        """
-        Is true when repeat staff positions are allowed.
-        """
-        return self._allow_repeats
-
-    @property
-    def allow_repitch(self) -> typing.Optional[bool]:
-        """
-        Is true when command allows repitch.
-        """
-        return self._allow_repitch
-
-    @property
-    def exact(self) -> typing.Optional[bool]:
-        """
-        Is true when number of staff positions must match number of leaves
-        exactly.
-        """
-        return self._exact
-
-    @property
-    def mock(self) -> typing.Optional[bool]:
-        """
-        Is true when command tags leaves as mock.
-        """
-        return self._mock
-
-    @property
-    def numbers(self) -> typing.Optional[abjad.CyclicTuple]:
-        """
-        Gets numbers.
-        """
-        return self._numbers
-
-    @property
-    def set_chord_pitches_equal(self) -> typing.Optional[bool]:
-        """
-        Is true when command sets chord pitches equal.
-        """
-        return self._set_chord_pitches_equal
-
-
+@dataclasses.dataclass
 class StaffPositionInterpolationCommand(_scoping.Command):
     """
     Staff position interpolation command.
     """
 
-    ### CLASS VARIABLES ###
+    start: typing.Union[int, str, abjad.NamedPitch, abjad.StaffPosition] = None
+    stop: typing.Union[int, str, abjad.NamedPitch, abjad.StaffPosition] = None
+    mock: bool = None
+    pitches_instead_of_staff_positions: bool = None
+    selector: typing.Any = _selectors.plts()
 
-    __slots__ = (
-        "_mock",
-        "_pitches_instead_of_staff_positions",
-        "_start",
-        "_stop",
-    )
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        start: typing.Union[int, str, abjad.NamedPitch, abjad.StaffPosition],
-        stop: typing.Union[int, str, abjad.NamedPitch, abjad.StaffPosition],
-        *,
-        mock: bool = None,
-        map=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        pitches_instead_of_staff_positions: bool = None,
-        scope: _scoping.ScopeTyping = None,
-        selector=_selectors.plts(),
-    ) -> None:
-        _scoping.Command.__init__(
-            self,
-            map=map,
-            match=match,
-            measures=measures,
-            scope=scope,
-            selector=selector,
-        )
+    def __post_init__(self):
+        _scoping.Command.__post_init__(self)
         prototype = (abjad.NamedPitch, abjad.StaffPosition)
-        if isinstance(start, str):
-            start = abjad.NamedPitch(start)
-        elif isinstance(start, int):
-            start = abjad.StaffPosition(start)
-        assert isinstance(start, prototype), repr(start)
-        self._start = start
-        if isinstance(stop, str):
-            stop = abjad.NamedPitch(stop)
-        elif isinstance(stop, int):
-            stop = abjad.StaffPosition(stop)
-        assert isinstance(stop, prototype), repr(stop)
-        self._stop = stop
-        if mock is not None:
-            mock = bool(mock)
-        self._mock = mock
-        if pitches_instead_of_staff_positions is not None:
-            pitches_instead_of_staff_positions = bool(
-                pitches_instead_of_staff_positions
+        if isinstance(self.start, str):
+            self.start = abjad.NamedPitch(self.start)
+        elif isinstance(self.start, int):
+            self.start = abjad.StaffPosition(self.start)
+        assert isinstance(self.start, prototype), repr(self.start)
+        if isinstance(self.stop, str):
+            self.stop = abjad.NamedPitch(self.stop)
+        elif isinstance(self.stop, int):
+            self.stop = abjad.StaffPosition(self.stop)
+        assert isinstance(self.stop, prototype), repr(self.stop)
+        if self.mock is not None:
+            self.mock = bool(self.mock)
+        if self.pitches_instead_of_staff_positions is not None:
+            self.pitches_instead_of_staff_positions = bool(
+                self.pitches_instead_of_staff_positions
             )
-        self._pitches_instead_of_staff_positions = pitches_instead_of_staff_positions
-
-    ### SPECIAL METHODS ###
 
     def _call(self, argument=None) -> None:
-        """
-        Calls command on ``argument``.
-        """
         if argument is None:
             return
         if self.selector:
@@ -4384,37 +3697,6 @@ class StaffPositionInterpolationCommand(_scoping.Command):
             stop_pitch = self.stop.to_pitch(clef=clef)
         new_lt = _set_lt_pitch(plts[-1], stop_pitch, allow_repitch=True, mock=self.mock)
         assert new_lt is None, repr(new_lt)
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def mock(self) -> typing.Optional[bool]:
-        """
-        Is true command tags leaves as mock.
-        """
-        return self._mock
-
-    @property
-    def pitches_instead_of_staff_positions(self) -> typing.Optional[bool]:
-        """
-        Is true command interprets ``start`` and ``stop`` as pitches instead of staff
-        positions.
-        """
-        return self._pitches_instead_of_staff_positions
-
-    @property
-    def start(self) -> typing.Union[abjad.NamedPitch, abjad.StaffPosition]:
-        """
-        Gets start.
-        """
-        return self._start
-
-    @property
-    def stop(self) -> typing.Union[abjad.NamedPitch, abjad.StaffPosition]:
-        """
-        Gets stop.
-        """
-        return self._stop
 
 
 def bass_to_octave(
@@ -5201,8 +4483,8 @@ def interpolate_pitches(
     start_ = abjad.NamedPitch(start)
     stop_ = abjad.NamedPitch(stop)
     return StaffPositionInterpolationCommand(
-        start_,
-        stop_,
+        start=start_,
+        stop=stop_,
         mock=mock,
         pitches_instead_of_staff_positions=True,
         selector=selector,
@@ -5222,7 +4504,7 @@ def interpolate_staff_positions(
     start_ = abjad.StaffPosition(start)
     stop_ = abjad.StaffPosition(stop)
     return StaffPositionInterpolationCommand(
-        start_, stop_, mock=mock, selector=selector
+        start=start_, stop=stop_, mock=mock, selector=selector
     )
 
 
@@ -5920,7 +5202,7 @@ def staff_position(
     if isinstance(argument, list):
         assert all(isinstance(_, (int, abjad.StaffPosition)) for _ in argument)
     return StaffPositionCommand(
-        [argument],
+        numbers=[argument],
         allow_out_of_range=allow_out_of_range,
         allow_repeats=True,
         allow_repitch=allow_repitch,
@@ -5945,7 +5227,7 @@ def staff_positions(
     if allow_repeats is None and len(numbers) == 1:
         allow_repeats = True
     return StaffPositionCommand(
-        numbers,
+        numbers=numbers,
         allow_out_of_range=allow_out_of_range,
         allow_repeats=allow_repeats,
         exact=exact,

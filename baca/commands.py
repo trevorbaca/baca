@@ -1575,7 +1575,7 @@ def invisible_music(
     tag = _scoping.site(_frame(), n=1)
     tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
     command_1 = _commandclasses.IndicatorCommand(
-        [abjad.LilyPondLiteral(r"\abjad-invisible-music")],
+        indicators=[abjad.LilyPondLiteral(r"\abjad-invisible-music")],
         deactivate=True,
         map=map,
         selector=selector,
@@ -1584,7 +1584,7 @@ def invisible_music(
     tag = _scoping.site(_frame(), n=2)
     tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
     command_2 = _commandclasses.IndicatorCommand(
-        [abjad.LilyPondLiteral(r"\abjad-invisible-music-coloring")],
+        indicators=[abjad.LilyPondLiteral(r"\abjad-invisible-music-coloring")],
         map=map,
         selector=selector,
         tags=[tag],
@@ -1963,7 +1963,7 @@ def untie(selector) -> _commandclasses.DetachCommand:
     Makes (repeat-)tie detach command.
     """
     return _commandclasses.DetachCommand(
-        [abjad.Tie, abjad.RepeatTie], selector=selector
+        arguments=[abjad.Tie, abjad.RepeatTie], selector=selector
     )
 
 

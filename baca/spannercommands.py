@@ -10,77 +10,32 @@ import abjad
 from . import scoping as _scoping
 from . import selectors as _selectors
 from . import tags as _tags
-from . import typings
-
-### CLASSES ###
 
 
+@dataclasses.dataclass
 class SpannerIndicatorCommand(_scoping.Command):
     """
     Spanner indicator command.
     """
 
-    ### CLASS VARIABLES ###
+    detach_first: bool = None
+    left_broken: bool = None
+    right_broken: bool = None
+    start_indicator: typing.Any = None
+    stop_indicator: typing.Any = None
+    tweaks: abjad.IndexedTweakManagers = None
 
-    __slots__ = (
-        "_detach_first",
-        "_left_broken",
-        "_right_broken",
-        "_start_indicator",
-        "_stop_indicator",
-        "_tags",
-        "_tweaks",
-    )
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        deactivate: bool = None,
-        detach_first: bool = None,
-        left_broken: bool = None,
-        map=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        right_broken: bool = None,
-        scope: _scoping.ScopeTyping = None,
-        selector=_selectors.leaves(),
-        start_indicator: typing.Any = None,
-        stop_indicator: typing.Any = None,
-        tags: typing.List[typing.Optional[abjad.Tag]] = None,
-        tweaks: abjad.IndexedTweakManagers = None,
-    ) -> None:
-        _scoping.Command.__init__(
-            self,
-            deactivate=deactivate,
-            map=map,
-            match=match,
-            measures=measures,
-            scope=scope,
-            selector=selector,
-            tags=tags,
-        )
-        if detach_first is not None:
-            detach_first = bool(detach_first)
-        self._detach_first = detach_first
-        if left_broken is not None:
-            left_broken = bool(left_broken)
-        self._left_broken = left_broken
-        if right_broken is not None:
-            right_broken = bool(right_broken)
-        self._right_broken = right_broken
-        self._start_indicator = start_indicator
-        self._stop_indicator = stop_indicator
-        _scoping.validate_indexed_tweaks(tweaks)
-        self._tweaks = tweaks
-
-    ### SPECIAL METHODS ###
+    def __post_init__(self):
+        _scoping.Command.__post_init__(self)
+        if self.detach_first is not None:
+            self.detach_first = bool(self.detach_first)
+        if self.left_broken is not None:
+            self.left_broken = bool(self.left_broken)
+        if self.right_broken is not None:
+            self.right_broken = bool(self.right_broken)
+        _scoping.validate_indexed_tweaks(self.tweaks)
 
     def _call(self, argument=None):
-        """
-        Calls command on ``argument``.
-        """
         if argument is None:
             return
         if self.start_indicator is None and self.stop_indicator is None:
@@ -133,8 +88,6 @@ class SpannerIndicatorCommand(_scoping.Command):
                     tag=_scoping.site(_frame(), self, n=4).append(_tags.SPANNER_STOP),
                 )
 
-    ### PRIVATE METHODS ###
-
     def _attach_indicator(self, indicator, leaf, deactivate=None, tag=None):
         assert isinstance(tag, abjad.Tag), repr(tag)
         reapplied = _scoping.remove_reapplied_wrappers(leaf, indicator)
@@ -147,57 +100,6 @@ class SpannerIndicatorCommand(_scoping.Command):
             _scoping.treat_persistent_wrapper(
                 self.runtime["manifests"], wrapper, status
             )
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def detach_first(self) -> typing.Optional[bool]:
-        """
-        Is true when command detaches existing indicator first.
-        """
-        return self._detach_first
-
-    @property
-    def left_broken(self) -> typing.Optional[bool]:
-        """
-        Is true when spanner is left-broken.
-        """
-        return self._left_broken
-
-    @property
-    def right_broken(self) -> typing.Optional[bool]:
-        """
-        Is true when spanner is right-broken.
-        """
-        return self._right_broken
-
-    @property
-    def selector(self):
-        r"""
-        Gets selector.
-        """
-        return self._selector
-
-    @property
-    def start_indicator(self) -> typing.Optional[typing.Any]:
-        """
-        Gets start indicator.
-        """
-        return self._start_indicator
-
-    @property
-    def stop_indicator(self) -> typing.Optional[typing.Any]:
-        """
-        Gets stop indicator.
-        """
-        return self._stop_indicator
-
-    @property
-    def tweaks(self) -> typing.Optional[abjad.IndexedTweakManagers]:
-        """
-        Gets tweaks.
-        """
-        return self._tweaks
 
 
 ### FACTORY FUNCTIONS ###

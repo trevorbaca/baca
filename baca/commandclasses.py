@@ -16,7 +16,6 @@ from . import selection as _selection
 from . import selectors as _selectors
 from . import sequence as _sequence
 from . import tags as _tags
-from . import typings
 
 
 def _is_rest(argument):
@@ -37,62 +36,385 @@ def _validate_bcps(bcps):
         assert len(bcp) == 2, repr(bcp)
 
 
+@dataclasses.dataclass
 class BCPCommand(_scoping.Command):
-    """
+    r"""
     Bow contact point command.
+
+    ..  container:: example
+
+        Tweaks LilyPond ``TextSpanner`` grob:
+
+        >>> score = baca.docs.make_empty_score(1)
+        >>> commands = baca.CommandAccumulator(
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+
+        >>> commands(
+        ...     "Music_Voice",
+        ...     baca.make_even_divisions(),
+        ...     baca.bcps(
+        ...         [(1, 5), (2, 5)],
+        ...         abjad.tweak("#red").color,
+        ...         abjad.tweak(2.5).staff_padding,
+        ...     ),
+        ...     baca.pitches("E4 F4"),
+        ...     baca.script_staff_padding(5),
+        ... )
+
+        >>> _, _ = baca.interpreter(
+        ...     score,
+        ...     commands.commands,
+        ...     commands.time_signatures,
+        ...     move_global_context=True,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
+        ... )
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        Style LilyPond ``Script`` grob with overrides (instead of tweaks).
+
+        ..  docs::
+
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            {
+                \context Staff = "Music_Staff"
+                <<
+                    \context Voice = "Global_Skips"
+                    {
+                        \baca-new-spacing-section #1 #16
+                        \time 4/8
+                        s1 * 1/2
+                        \baca-new-spacing-section #1 #16
+                        \time 3/8
+                        s1 * 3/8
+                        \baca-new-spacing-section #1 #16
+                        \time 4/8
+                        s1 * 1/2
+                        \baca-new-spacing-section #1 #4
+                        \time 3/8
+                        s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        \override Script.staff-padding = 5
+                        e'8
+                        - \downbow
+                        [
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #1 #5
+                        - \tweak color #red
+                        - \tweak staff-padding 2.5
+                        \bacaStartTextSpanBCP
+                        f'8
+                        - \upbow
+                        \bacaStopTextSpanBCP
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #2 #5
+                        - \tweak color #red
+                        - \tweak staff-padding 2.5
+                        \bacaStartTextSpanBCP
+                        e'8
+                        - \downbow
+                        \bacaStopTextSpanBCP
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #1 #5
+                        - \tweak color #red
+                        - \tweak staff-padding 2.5
+                        \bacaStartTextSpanBCP
+                        f'8
+                        - \upbow
+                        \bacaStopTextSpanBCP
+                        ]
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #2 #5
+                        - \tweak color #red
+                        - \tweak staff-padding 2.5
+                        \bacaStartTextSpanBCP
+                        e'8
+                        - \downbow
+                        \bacaStopTextSpanBCP
+                        [
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #1 #5
+                        - \tweak color #red
+                        - \tweak staff-padding 2.5
+                        \bacaStartTextSpanBCP
+                        f'8
+                        - \upbow
+                        \bacaStopTextSpanBCP
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #2 #5
+                        - \tweak color #red
+                        - \tweak staff-padding 2.5
+                        \bacaStartTextSpanBCP
+                        e'8
+                        - \downbow
+                        \bacaStopTextSpanBCP
+                        ]
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #1 #5
+                        - \tweak color #red
+                        - \tweak staff-padding 2.5
+                        \bacaStartTextSpanBCP
+                        f'8
+                        - \upbow
+                        \bacaStopTextSpanBCP
+                        [
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #2 #5
+                        - \tweak color #red
+                        - \tweak staff-padding 2.5
+                        \bacaStartTextSpanBCP
+                        e'8
+                        - \downbow
+                        \bacaStopTextSpanBCP
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #1 #5
+                        - \tweak color #red
+                        - \tweak staff-padding 2.5
+                        \bacaStartTextSpanBCP
+                        f'8
+                        - \upbow
+                        \bacaStopTextSpanBCP
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #2 #5
+                        - \tweak color #red
+                        - \tweak staff-padding 2.5
+                        \bacaStartTextSpanBCP
+                        e'8
+                        - \downbow
+                        \bacaStopTextSpanBCP
+                        ]
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #1 #5
+                        - \tweak color #red
+                        - \tweak staff-padding 2.5
+                        \bacaStartTextSpanBCP
+                        f'8
+                        - \upbow
+                        \bacaStopTextSpanBCP
+                        [
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #2 #5
+                        - \tweak color #red
+                        - \tweak staff-padding 2.5
+                        \bacaStartTextSpanBCP
+                        e'8
+                        - \downbow
+                        \bacaStopTextSpanBCP
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #1 #5
+                        - \baca-bcp-spanner-right-text #2 #5
+                        - \tweak color #red
+                        - \tweak staff-padding 2.5
+                        \bacaStartTextSpanBCP
+                        f'8
+                        \bacaStopTextSpanBCP
+                        ]
+                        \revert Script.staff-padding
+                    }
+                >>
+            }
+
+    ..  container:: example
+
+        REGRESSION. Tweaks survive copy:
+
+        >>> command = baca.bcps(
+        ...     [(1, 2), (1, 4)],
+        ...     abjad.tweak("#red").color,
+        ... )
+        >>> command
+        BCPCommand()
+
+        >>> import copy
+        >>> new_command = copy.copy(command)
+        >>> new_command
+        BCPCommand()
+
+    ..  container:: example
+
+        PATTERN. Define chunkwise spanners like this:
+
+        >>> score = baca.docs.make_empty_score(1)
+        >>> commands = baca.CommandAccumulator(
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+
+        >>> commands(
+        ...     "Music_Voice",
+        ...     baca.make_even_divisions(),
+        ...     baca.new(
+        ...         baca.bcps(bcps=[(1, 5), (2, 5)]),
+        ...         measures=(1, 2),
+        ...     ),
+        ...     baca.new(
+        ...         baca.bcps(bcps=[(3, 5), (4, 5)]),
+        ...         measures=(3, 4),
+        ...     ),
+        ...     baca.pitches("E4 F4"),
+        ...     baca.script_staff_padding(5.5),
+        ...     baca.text_spanner_staff_padding(2.5),
+        ... )
+
+        >>> _, _ = baca.interpreter(
+        ...     score,
+        ...     commands.commands,
+        ...     commands.time_signatures,
+        ...     move_global_context=True,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
+        ... )
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            {
+                \context Staff = "Music_Staff"
+                <<
+                    \context Voice = "Global_Skips"
+                    {
+                        \baca-new-spacing-section #1 #16
+                        \time 4/8
+                        s1 * 1/2
+                        \baca-new-spacing-section #1 #16
+                        \time 3/8
+                        s1 * 3/8
+                        \baca-new-spacing-section #1 #16
+                        \time 4/8
+                        s1 * 1/2
+                        \baca-new-spacing-section #1 #4
+                        \time 3/8
+                        s1 * 3/8
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        \override Script.staff-padding = 5.5
+                        \override TextSpanner.staff-padding = 2.5
+                        e'8
+                        - \downbow
+                        [
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #1 #5
+                        \bacaStartTextSpanBCP
+                        f'8
+                        - \upbow
+                        \bacaStopTextSpanBCP
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #2 #5
+                        \bacaStartTextSpanBCP
+                        e'8
+                        - \downbow
+                        \bacaStopTextSpanBCP
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #1 #5
+                        \bacaStartTextSpanBCP
+                        f'8
+                        - \upbow
+                        \bacaStopTextSpanBCP
+                        ]
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #2 #5
+                        \bacaStartTextSpanBCP
+                        e'8
+                        - \downbow
+                        \bacaStopTextSpanBCP
+                        [
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #1 #5
+                        \bacaStartTextSpanBCP
+                        f'8
+                        - \upbow
+                        \bacaStopTextSpanBCP
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #2 #5
+                        - \baca-bcp-spanner-right-text #1 #5
+                        \bacaStartTextSpanBCP
+                        e'8
+                        \bacaStopTextSpanBCP
+                        ]
+                        f'8
+                        - \downbow
+                        [
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #3 #5
+                        \bacaStartTextSpanBCP
+                        e'8
+                        - \upbow
+                        \bacaStopTextSpanBCP
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #4 #5
+                        \bacaStartTextSpanBCP
+                        f'8
+                        - \downbow
+                        \bacaStopTextSpanBCP
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #3 #5
+                        \bacaStartTextSpanBCP
+                        e'8
+                        - \upbow
+                        \bacaStopTextSpanBCP
+                        ]
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #4 #5
+                        \bacaStartTextSpanBCP
+                        f'8
+                        - \downbow
+                        \bacaStopTextSpanBCP
+                        [
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #3 #5
+                        \bacaStartTextSpanBCP
+                        e'8
+                        - \upbow
+                        \bacaStopTextSpanBCP
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #4 #5
+                        - \baca-bcp-spanner-right-text #3 #5
+                        \bacaStartTextSpanBCP
+                        f'8
+                        \bacaStopTextSpanBCP
+                        ]
+                        \revert Script.staff-padding
+                        \revert TextSpanner.staff-padding
+                    }
+                >>
+            }
+
     """
 
-    ### CLASS VARIABLES ###
+    bcps: typing.Sequence[abjad.IntegerPair] = None
+    bow_change_tweaks: abjad.IndexedTweakManagers = None
+    final_spanner: bool = None
+    helper: typing.Callable = None
+    tweaks: abjad.IndexedTweakManagers = None
 
-    __slots__ = (
-        "_bow_change_tweaks",
-        "_bow_contact_points",
-        "_final_spanner",
-        "_helper",
-        "_tweaks",
-    )
+    def __post_init__(self):
+        _scoping.Command.__post_init__(self)
+        if self.bcps is None:
+            _validate_bcps(self.bcps)
+        _scoping.validate_indexed_tweaks(self.bow_change_tweaks)
+        if self.final_spanner is not None:
+            self.final_spanner = bool(self.final_spanner)
+        if self.helper is not None:
+            assert callable(self.helper), repr(self.helper)
+        _scoping.validate_indexed_tweaks(self.tweaks)
 
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        bcps: typing.Sequence[abjad.IntegerPair] = None,
-        bow_change_tweaks: abjad.IndexedTweakManagers = None,
-        final_spanner: bool = None,
-        helper: typing.Callable = None,
-        map=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        scope: _scoping.ScopeTyping = None,
-        selector=None,
-        tags: typing.List[typing.Optional[abjad.Tag]] = None,
-        tweaks: abjad.IndexedTweakManagers = None,
-    ) -> None:
-        _scoping.Command.__init__(
-            self,
-            map=map,
-            match=match,
-            measures=measures,
-            scope=scope,
-            selector=selector,
-            tags=tags,
-        )
-        if bcps is None:
-            _validate_bcps(bcps)
-        self._bow_contact_points = bcps
-        self._bow_change_tweaks = None
-        _scoping.validate_indexed_tweaks(bow_change_tweaks)
-        self._bow_change_tweaks = bow_change_tweaks
-        if final_spanner is not None:
-            final_spanner = bool(final_spanner)
-        self._final_spanner = final_spanner
-        if helper is not None:
-            assert callable(helper), repr(helper)
-        self._helper = helper
-        _scoping.validate_indexed_tweaks(tweaks)
-        self._tweaks = tweaks
-
-    ### SPECIAL METHODS ###
+    __repr__ = _scoping.Command.__repr__
 
     def _call(self, argument=None) -> None:
         if argument is None:
@@ -243,193 +565,6 @@ class BCPCommand(_scoping.Command):
                     )
             previous_bcp = bcp
 
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def bcps(self) -> typing.Optional[typing.Sequence[abjad.IntegerPair]]:
-        r"""
-        Gets bow contact points.
-
-        ..  container:: example
-
-            PATTERN. Define chunkwise spanners like this:
-
-            >>> score = baca.docs.make_empty_score(1)
-            >>> commands = baca.CommandAccumulator(
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ... )
-
-            >>> commands(
-            ...     "Music_Voice",
-            ...     baca.make_even_divisions(),
-            ...     baca.new(
-            ...         baca.bcps(bcps=[(1, 5), (2, 5)]),
-            ...         measures=(1, 2),
-            ...     ),
-            ...     baca.new(
-            ...         baca.bcps(bcps=[(3, 5), (4, 5)]),
-            ...         measures=(3, 4),
-            ...     ),
-            ...     baca.pitches("E4 F4"),
-            ...     baca.script_staff_padding(5.5),
-            ...     baca.text_spanner_staff_padding(2.5),
-            ... )
-
-            >>> _, _ = baca.interpreter(
-            ...     score,
-            ...     commands.commands,
-            ...     commands.time_signatures,
-            ...     move_global_context=True,
-            ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
-            ... )
-            >>> lilypond_file = baca.make_lilypond_file(
-            ...     score,
-            ...     includes=["baca.ily"],
-            ... )
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                {
-                    \context Staff = "Music_Staff"
-                    <<
-                        \context Voice = "Global_Skips"
-                        {
-                            \baca-new-spacing-section #1 #16
-                            \time 4/8
-                            s1 * 1/2
-                            \baca-new-spacing-section #1 #16
-                            \time 3/8
-                            s1 * 3/8
-                            \baca-new-spacing-section #1 #16
-                            \time 4/8
-                            s1 * 1/2
-                            \baca-new-spacing-section #1 #4
-                            \time 3/8
-                            s1 * 3/8
-                        }
-                        \context Voice = "Music_Voice"
-                        {
-                            \override Script.staff-padding = 5.5
-                            \override TextSpanner.staff-padding = 2.5
-                            e'8
-                            - \downbow
-                            [
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #1 #5
-                            \bacaStartTextSpanBCP
-                            f'8
-                            - \upbow
-                            \bacaStopTextSpanBCP
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #2 #5
-                            \bacaStartTextSpanBCP
-                            e'8
-                            - \downbow
-                            \bacaStopTextSpanBCP
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #1 #5
-                            \bacaStartTextSpanBCP
-                            f'8
-                            - \upbow
-                            \bacaStopTextSpanBCP
-                            ]
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #2 #5
-                            \bacaStartTextSpanBCP
-                            e'8
-                            - \downbow
-                            \bacaStopTextSpanBCP
-                            [
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #1 #5
-                            \bacaStartTextSpanBCP
-                            f'8
-                            - \upbow
-                            \bacaStopTextSpanBCP
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #2 #5
-                            - \baca-bcp-spanner-right-text #1 #5
-                            \bacaStartTextSpanBCP
-                            e'8
-                            \bacaStopTextSpanBCP
-                            ]
-                            f'8
-                            - \downbow
-                            [
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #3 #5
-                            \bacaStartTextSpanBCP
-                            e'8
-                            - \upbow
-                            \bacaStopTextSpanBCP
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #4 #5
-                            \bacaStartTextSpanBCP
-                            f'8
-                            - \downbow
-                            \bacaStopTextSpanBCP
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #3 #5
-                            \bacaStartTextSpanBCP
-                            e'8
-                            - \upbow
-                            \bacaStopTextSpanBCP
-                            ]
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #4 #5
-                            \bacaStartTextSpanBCP
-                            f'8
-                            - \downbow
-                            \bacaStopTextSpanBCP
-                            [
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #3 #5
-                            \bacaStartTextSpanBCP
-                            e'8
-                            - \upbow
-                            \bacaStopTextSpanBCP
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #4 #5
-                            - \baca-bcp-spanner-right-text #3 #5
-                            \bacaStartTextSpanBCP
-                            f'8
-                            \bacaStopTextSpanBCP
-                            ]
-                            \revert Script.staff-padding
-                            \revert TextSpanner.staff-padding
-                        }
-                    >>
-                }
-
-        """
-        return self._bow_contact_points
-
-    @property
-    def bow_change_tweaks(self) -> typing.Optional[abjad.IndexedTweakManagers]:
-        """
-        Gets bow change tweaks.
-        """
-        return self._bow_change_tweaks
-
-    @property
-    def final_spanner(self) -> typing.Optional[bool]:
-        """
-        Is true when command outputs dangling final spanner.
-        """
-        return self._final_spanner
-
-    @property
-    def helper(self) -> typing.Optional[typing.Callable]:
-        """
-        Gets BCP helper.
-        """
-        return self._helper
-
     @property
     def start_command(self) -> str:
         r"""
@@ -444,264 +579,20 @@ class BCPCommand(_scoping.Command):
         """
         return r"\bacaStopTextSpanBCP"
 
-    @property
-    def tag(self) -> abjad.Tag:
-        """
-        Gets tag.
 
-        ..  container:: example
-
-            >>> baca.BCPCommand().tag
-            Tag()
-
-        """
-        return super().tag
-
-    @property
-    def tweaks(self) -> typing.Optional[abjad.IndexedTweakManagers]:
-        r"""
-        Gets tweaks.
-
-        ..  container:: example
-
-            Tweaks LilyPond ``TextSpanner`` grob:
-
-            >>> score = baca.docs.make_empty_score(1)
-            >>> commands = baca.CommandAccumulator(
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ... )
-
-            >>> commands(
-            ...     "Music_Voice",
-            ...     baca.make_even_divisions(),
-            ...     baca.bcps(
-            ...         [(1, 5), (2, 5)],
-            ...         abjad.tweak("#red").color,
-            ...         abjad.tweak(2.5).staff_padding,
-            ...     ),
-            ...     baca.pitches("E4 F4"),
-            ...     baca.script_staff_padding(5),
-            ... )
-
-            >>> _, _ = baca.interpreter(
-            ...     score,
-            ...     commands.commands,
-            ...     commands.time_signatures,
-            ...     move_global_context=True,
-            ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
-            ... )
-            >>> lilypond_file = baca.make_lilypond_file(
-            ...     score,
-            ...     includes=["baca.ily"],
-            ... )
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            Style LilyPond ``Script`` grob with overrides (instead of tweaks).
-
-            ..  docs::
-
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                {
-                    \context Staff = "Music_Staff"
-                    <<
-                        \context Voice = "Global_Skips"
-                        {
-                            \baca-new-spacing-section #1 #16
-                            \time 4/8
-                            s1 * 1/2
-                            \baca-new-spacing-section #1 #16
-                            \time 3/8
-                            s1 * 3/8
-                            \baca-new-spacing-section #1 #16
-                            \time 4/8
-                            s1 * 1/2
-                            \baca-new-spacing-section #1 #4
-                            \time 3/8
-                            s1 * 3/8
-                        }
-                        \context Voice = "Music_Voice"
-                        {
-                            \override Script.staff-padding = 5
-                            e'8
-                            - \downbow
-                            [
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #1 #5
-                            - \tweak color #red
-                            - \tweak staff-padding 2.5
-                            \bacaStartTextSpanBCP
-                            f'8
-                            - \upbow
-                            \bacaStopTextSpanBCP
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #2 #5
-                            - \tweak color #red
-                            - \tweak staff-padding 2.5
-                            \bacaStartTextSpanBCP
-                            e'8
-                            - \downbow
-                            \bacaStopTextSpanBCP
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #1 #5
-                            - \tweak color #red
-                            - \tweak staff-padding 2.5
-                            \bacaStartTextSpanBCP
-                            f'8
-                            - \upbow
-                            \bacaStopTextSpanBCP
-                            ]
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #2 #5
-                            - \tweak color #red
-                            - \tweak staff-padding 2.5
-                            \bacaStartTextSpanBCP
-                            e'8
-                            - \downbow
-                            \bacaStopTextSpanBCP
-                            [
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #1 #5
-                            - \tweak color #red
-                            - \tweak staff-padding 2.5
-                            \bacaStartTextSpanBCP
-                            f'8
-                            - \upbow
-                            \bacaStopTextSpanBCP
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #2 #5
-                            - \tweak color #red
-                            - \tweak staff-padding 2.5
-                            \bacaStartTextSpanBCP
-                            e'8
-                            - \downbow
-                            \bacaStopTextSpanBCP
-                            ]
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #1 #5
-                            - \tweak color #red
-                            - \tweak staff-padding 2.5
-                            \bacaStartTextSpanBCP
-                            f'8
-                            - \upbow
-                            \bacaStopTextSpanBCP
-                            [
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #2 #5
-                            - \tweak color #red
-                            - \tweak staff-padding 2.5
-                            \bacaStartTextSpanBCP
-                            e'8
-                            - \downbow
-                            \bacaStopTextSpanBCP
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #1 #5
-                            - \tweak color #red
-                            - \tweak staff-padding 2.5
-                            \bacaStartTextSpanBCP
-                            f'8
-                            - \upbow
-                            \bacaStopTextSpanBCP
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #2 #5
-                            - \tweak color #red
-                            - \tweak staff-padding 2.5
-                            \bacaStartTextSpanBCP
-                            e'8
-                            - \downbow
-                            \bacaStopTextSpanBCP
-                            ]
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #1 #5
-                            - \tweak color #red
-                            - \tweak staff-padding 2.5
-                            \bacaStartTextSpanBCP
-                            f'8
-                            - \upbow
-                            \bacaStopTextSpanBCP
-                            [
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #2 #5
-                            - \tweak color #red
-                            - \tweak staff-padding 2.5
-                            \bacaStartTextSpanBCP
-                            e'8
-                            - \downbow
-                            \bacaStopTextSpanBCP
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #1 #5
-                            - \baca-bcp-spanner-right-text #2 #5
-                            - \tweak color #red
-                            - \tweak staff-padding 2.5
-                            \bacaStartTextSpanBCP
-                            f'8
-                            \bacaStopTextSpanBCP
-                            ]
-                            \revert Script.staff-padding
-                        }
-                    >>
-                }
-
-        ..  container:: example
-
-            REGRESSION. Tweaks survive copy:
-
-            >>> command = baca.bcps(
-            ...     [(1, 2), (1, 4)],
-            ...     abjad.tweak("#red").color,
-            ... )
-            >>> command
-            BCPCommand()
-
-            >>> import copy
-            >>> new_command = copy.copy(command)
-            >>> new_command
-            BCPCommand()
-
-        """
-        return self._tweaks
-
-
+@dataclasses.dataclass
 class ColorCommand(_scoping.Command):
     """
     Color command.
     """
 
-    ### CLASS VARIABLES ###
+    lone: bool = None
 
-    __slots__ = ("lone",)
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        lone: bool = None,
-        map=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        scope: _scoping.ScopeTyping = None,
-        selector=_selectors.leaves(),
-    ) -> None:
-        assert selector is not None
-        _scoping.Command.__init__(
-            self,
-            map=map,
-            match=match,
-            measures=measures,
-            scope=scope,
-            selector=selector,
-        )
-        self.lone = lone
-
-    ### SPECIAL METHODS ###
+    def __post_init__(self):
+        assert self.selector is not None
+        _scoping.Command.__post_init__(self)
 
     def _call(self, argument=None) -> None:
-        """
-        Calls command on ``argument``.
-        """
         if argument is None:
             return
         assert self.selector is not None
@@ -709,6 +600,7 @@ class ColorCommand(_scoping.Command):
         abjad.label.by_selector(argument, self.selector, lone=self.lone)
 
 
+@dataclasses.dataclass
 class ContainerCommand(_scoping.Command):
     r"""
     Container command.
@@ -773,42 +665,15 @@ class ContainerCommand(_scoping.Command):
 
     """
 
-    ### CLASS VARIABLES ###
+    identifier: str = None
 
-    __slots__ = ("_identifier",)
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        identifier: str = None,
-        map=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        scope: _scoping.ScopeTyping = None,
-        selector=_selectors.leaves(),
-    ) -> None:
-        _scoping.Command.__init__(
-            self,
-            map=map,
-            match=match,
-            measures=measures,
-            scope=scope,
-            selector=selector,
-        )
-        if identifier is not None:
-            if not isinstance(identifier, str):
-                raise Exception(f"identifier must be string (not {identifier!r}).")
-        self._identifier = identifier
-        self._tags: typing.List[abjad.Tag] = []
-
-    ### SPECIAL METHODS ###
+    def __post_init__(self):
+        _scoping.Command.__post_init__(self)
+        if self.identifier is not None:
+            if not isinstance(self.identifier, str):
+                raise Exception(f"identifier must be string (not {self.identifier!r}).")
 
     def _call(self, argument=None) -> None:
-        """
-        Inserts ``selector`` output in container.
-        """
         if argument is None:
             return
         if self.selector is not None:
@@ -823,21 +688,11 @@ class ContainerCommand(_scoping.Command):
         components = _selection.Selection(argument).leaves().top()
         abjad.mutate.wrap(components, container)
 
-    ### PRIVATE METHODS ###
-
     def _mutates_score(self):
         return True
 
-    ### PUBLIC PROPERTIES ###
 
-    @property
-    def identifier(self) -> typing.Optional[str]:
-        """
-        Gets identifier.
-        """
-        return self._identifier
-
-
+@dataclasses.dataclass
 class DetachCommand(_scoping.Command):
     """
     Detach command.
@@ -850,37 +705,14 @@ class DetachCommand(_scoping.Command):
 
     """
 
-    ### CLASS VARIABLES ###
+    arguments: typing.Sequence[typing.Any] = None
 
-    __slots__ = ("_arguments",)
+    def __post_init__(self):
+        _scoping.Command.__post_init__(self)
 
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        arguments: typing.Sequence[typing.Any],
-        selector,
-        map=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        scope: _scoping.ScopeTyping = None,
-    ) -> None:
-        _scoping.Command.__init__(
-            self,
-            map=map,
-            match=match,
-            measures=measures,
-            scope=scope,
-            selector=selector,
-        )
-        self._arguments = arguments
-
-    ### SPECIAL METHODS ###
+    __repr__ = _scoping.Command.__repr__
 
     def _call(self, argument=None) -> None:
-        """
-        Applies command to result of selector called on ``argument``.
-        """
         if argument is None:
             return
         assert self.selector is not None
@@ -891,87 +723,31 @@ class DetachCommand(_scoping.Command):
             for argument in self.arguments:
                 abjad.detach(argument, leaf)
 
-    ### PUBLIC PROPERTIES ###
 
-    @property
-    def arguments(self) -> typing.Sequence[typing.Any]:
-        """
-        Gets arguments.
-        """
-        return self._arguments
-
-
+@dataclasses.dataclass
 class GlissandoCommand(_scoping.Command):
     """
     Glissando command.
     """
 
-    ### CLASS VARIABLES ###
+    allow_repeats: bool = None
+    allow_ties: bool = None
+    hide_middle_note_heads: bool = None
+    hide_middle_stems: bool = None
+    hide_stem_selector: typing.Callable = None
+    left_broken: bool = None
+    parenthesize_repeats: bool = None
+    right_broken: bool = None
+    right_broken_show_next: bool = None
+    selector: typing.Any = _selectors.tleaves()
+    tweaks: abjad.IndexedTweakManagers = None
+    zero_padding: bool = None
 
-    __slots__ = (
-        "_allow_repeats",
-        "_allow_ties",
-        "_hide_middle_note_heads",
-        "_hide_middle_stems",
-        "_hide_stem_selector",
-        "_left_broken",
-        "_parenthesize_repeats",
-        "_right_broken",
-        "_right_broken_show_next",
-        "_tweaks",
-        "_zero_padding",
-    )
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        allow_repeats: bool = None,
-        allow_ties: bool = None,
-        hide_middle_note_heads: bool = None,
-        hide_middle_stems: bool = None,
-        hide_stem_selector: typing.Callable = None,
-        left_broken: bool = None,
-        map=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        parenthesize_repeats: bool = None,
-        right_broken: bool = None,
-        right_broken_show_next: bool = None,
-        scope: _scoping.ScopeTyping = None,
-        selector=_selectors.tleaves(),
-        tags: typing.List[typing.Optional[abjad.Tag]] = None,
-        tweaks: abjad.IndexedTweakManagers = None,
-        zero_padding: bool = None,
-    ) -> None:
-        _scoping.Command.__init__(
-            self,
-            map=map,
-            match=match,
-            measures=measures,
-            scope=scope,
-            selector=selector,
-            tags=tags,
-        )
-        self._allow_repeats = allow_repeats
-        self._allow_ties = allow_ties
-        self._hide_middle_note_heads = hide_middle_note_heads
-        self._hide_middle_stems = hide_middle_stems
-        self._hide_stem_selector = hide_stem_selector
-        self._left_broken = left_broken
-        self._parenthesize_repeats = parenthesize_repeats
-        self._right_broken = right_broken
-        self._right_broken_show_next = right_broken_show_next
-        _scoping.validate_indexed_tweaks(tweaks)
-        self._tweaks = tweaks
-        self._zero_padding = zero_padding
-
-    ### SPECIAL METHODS ###
+    def __post_init__(self):
+        _scoping.Command.__post_init__(self)
+        _scoping.validate_indexed_tweaks(self.tweaks)
 
     def _call(self, argument=None) -> None:
-        """
-        Applies command to result of selector called on ``argument``.
-        """
         if argument is None:
             return
         if self.selector is not None:
@@ -998,94 +774,14 @@ class GlissandoCommand(_scoping.Command):
             zero_padding=self.zero_padding,
         )
 
-    ### PUBLIC PROPERTIES ###
 
-    @property
-    def allow_repeats(self) -> typing.Optional[bool]:
-        """
-        Is true when glissando allows repeats.
-        """
-        return self._allow_repeats
-
-    @property
-    def allow_ties(self) -> typing.Optional[bool]:
-        """
-        Is true when glissando allows ties.
-        """
-        return self._allow_ties
-
-    @property
-    def hide_middle_note_heads(self) -> typing.Optional[bool]:
-        """
-        Is true when glissando hides middle note heads.
-        """
-        return self._hide_middle_note_heads
-
-    @property
-    def hide_middle_stems(self) -> typing.Optional[bool]:
-        """
-        Is true when glissando hides middle stems.
-        """
-        return self._hide_middle_stems
-
-    @property
-    def hide_stem_selector(self) -> typing.Optional[typing.Callable]:
-        """
-        Gets hide-stem selector.
-        """
-        return self._hide_stem_selector
-
-    @property
-    def left_broken(self) -> typing.Optional[bool]:
-        """
-        Is true when glissando is left-broken.
-        """
-        return self._left_broken
-
-    @property
-    def parenthesize_repeats(self) -> typing.Optional[bool]:
-        """
-        Is true when glissando parenthesizes repeats.
-        """
-        return self._parenthesize_repeats
-
-    @property
-    def right_broken(self) -> typing.Optional[bool]:
-        """
-        Is true when glissando is right-broken.
-        """
-        return self._right_broken
-
-    @property
-    def right_broken_show_next(self) -> typing.Optional[bool]:
-        """
-        Is true when right-broken glissando shows next note.
-        """
-        return self._right_broken_show_next
-
-    @property
-    def tweaks(self) -> typing.Optional[abjad.IndexedTweakManagers]:
-        """
-        Gets tweaks.
-        """
-        return self._tweaks
-
-    @property
-    def zero_padding(self) -> typing.Optional[bool]:
-        """
-        Is true when glissando formats zero padding.
-        """
-        return self._zero_padding
-
-
+@dataclasses.dataclass
 class GlobalFermataCommand(_scoping.Command):
     """
     Global fermata command.
     """
 
-    ### CLASS VARIABLES ###
-
-    __slots__ = ("_description",)
+    description: str = None
 
     description_to_command = {
         "short": "shortfermata",
@@ -1094,38 +790,12 @@ class GlobalFermataCommand(_scoping.Command):
         "very_long": "verylongfermata",
     }
 
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        description: str = None,
-        map=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        scope: _scoping.ScopeTyping = None,
-        selector=_selectors.leaf(0),
-        tags: typing.List[typing.Optional[abjad.Tag]] = None,
-    ) -> None:
-        _scoping.Command.__init__(
-            self,
-            map=map,
-            match=match,
-            measures=measures,
-            scope=scope,
-            selector=selector,
-            tags=tags,
-        )
-        if description is not None:
-            assert description in GlobalFermataCommand.description_to_command
-        self._description = description
-
-    ### SPECIAL METHODS ###
+    def __post_init__(self):
+        _scoping.Command.__post_init__(self)
+        if self.description is not None:
+            assert self.description in self.description_to_command
 
     def _call(self, argument=None) -> None:
-        """
-        Applies command to ``argument`` selector output.
-        """
         if argument is None:
             return
         if self.selector is not None:
@@ -1171,15 +841,6 @@ class GlobalFermataCommand(_scoping.Command):
             )
             abjad.annotate(leaf, _const.FERMATA_DURATION, fermata_duration)
 
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def description(self) -> typing.Optional[str]:
-        """
-        Gets description.
-        """
-        return self._description
-
 
 def _token_to_indicators(token):
     result = []
@@ -1192,78 +853,39 @@ def _token_to_indicators(token):
     return result
 
 
+@dataclasses.dataclass
 class IndicatorCommand(_scoping.Command):
-    r"""
+    """
     Indicator command.
     """
 
-    ### CLASS VARIABLES ###
+    indicators: typing.List[typing.Any] = None
+    context: str = None
+    do_not_test: bool = None
+    predicate: typing.Callable = None
+    redundant: bool = None
+    tweaks: abjad.IndexedTweakManagers = None
 
-    __slots__ = (
-        "_context",
-        "_do_not_test",
-        "_indicators",
-        "_predicate",
-        "_redundant",
-        "_tags",
-        "_tweaks",
-    )
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        indicators: typing.List[typing.Any],
-        *,
-        context: str = None,
-        deactivate: bool = None,
-        do_not_test: bool = None,
-        map=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        predicate: typing.Callable = None,
-        redundant: bool = None,
-        scope: _scoping.ScopeTyping = None,
-        selector=_selectors.pheads(),
-        tags: typing.List[typing.Optional[abjad.Tag]] = None,
-        tweaks: abjad.IndexedTweakManagers = None,
-    ) -> None:
-        _scoping.Command.__init__(
-            self,
-            deactivate=deactivate,
-            map=map,
-            match=match,
-            measures=measures,
-            scope=scope,
-            selector=selector,
-            tags=tags,
-        )
-        if context is not None:
-            assert isinstance(context, str), repr(context)
-        self._context = context
-        if do_not_test is not None:
-            do_not_test = bool(do_not_test)
-        self._do_not_test = do_not_test
+    def __post_init__(self):
+        _scoping.Command.__post_init__(self)
+        if self.context is not None:
+            assert isinstance(self.context, str), repr(self.context)
+        if self.do_not_test is not None:
+            self.do_not_test = bool(self.do_not_test)
         indicators_ = None
-        if indicators is not None:
-            if isinstance(indicators, collections.abc.Iterable):
-                indicators_ = abjad.CyclicTuple(indicators)
+        if self.indicators is not None:
+            if isinstance(self.indicators, collections.abc.Iterable):
+                indicators_ = abjad.CyclicTuple(self.indicators)
             else:
-                indicators_ = abjad.CyclicTuple([indicators])
-        self._indicators = indicators_
-        self._predicate = predicate
-        if redundant is not None:
-            redundant = bool(redundant)
-        self._redundant = redundant
-        _scoping.validate_indexed_tweaks(tweaks)
-        self._tweaks = tweaks
+                indicators_ = abjad.CyclicTuple([self.indicators])
+        self.indicators = indicators_
+        if self.redundant is not None:
+            self.redundant = bool(self.redundant)
+        _scoping.validate_indexed_tweaks(self.tweaks)
 
-    ### SPECIAL METHODS ###
+    __repr__ = _scoping.Command.__repr__
 
     def _call(self, argument=None) -> None:
-        """
-        Calls command on ``argument``.
-        """
         if argument is None:
             return
         if self.indicators is None:
@@ -1298,62 +920,14 @@ class IndicatorCommand(_scoping.Command):
                         self.runtime["manifests"], wrapper, status
                     )
 
-    ### PUBLIC PROPERTIES ###
 
-    @property
-    def context(self) -> typing.Optional[str]:
-        """
-        Gets context name.
-        """
-        return self._context
-
-    @property
-    def do_not_test(self) -> typing.Optional[bool]:
-        """
-        Is true when attach does not test.
-        """
-        return self._do_not_test
-
-    @property
-    def indicators(self) -> typing.Optional[abjad.CyclicTuple]:
-        r"""
-        Gets indicators.
-        """
-        return self._indicators
-
-    @property
-    def predicate(self) -> typing.Optional[typing.Callable]:
-        """
-        Gets predicate.
-        """
-        return self._predicate
-
-    @property
-    def redundant(self) -> typing.Optional[bool]:
-        """
-        Is true when command is redundant.
-        """
-        return self._redundant
-
-    @property
-    def tweaks(self) -> typing.Optional[abjad.IndexedTweakManagers]:
-        """
-        Gets tweaks.
-        """
-        return self._tweaks
-
-
+@dataclasses.dataclass
 class InstrumentChangeCommand(IndicatorCommand):
     """
     Instrument change command.
     """
 
-    ### SPECIAL METHODS ###
-
     def _call(self, argument=None) -> None:
-        """
-        Inserts ``selector`` output in container and sets part assignment.
-        """
         if argument is None:
             return
         if self.selector is not None:
@@ -1374,45 +948,18 @@ class InstrumentChangeCommand(IndicatorCommand):
         super()._call(argument)
 
 
+@dataclasses.dataclass
 class LabelCommand(_scoping.Command):
     """
     Label command.
     """
 
-    ### CLASS VARIABLES ##
+    callable_: typing.Any = None
 
-    __slots__ = ("_callable",)
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        callable_=None,
-        map=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        scope: _scoping.ScopeTyping = None,
-        selector=_selectors.leaves(),
-    ) -> None:
-        _scoping.Command.__init__(
-            self,
-            map=map,
-            match=match,
-            measures=measures,
-            scope=scope,
-            selector=selector,
-        )
-        self._callable = callable_
-
-    ### SPECIAL METHODS ###
+    def __post_init__(self):
+        _scoping.Command.__post_init__(self)
 
     def _call(self, argument=None):
-        """
-        Calls command on ``argument``.
-
-        Returns none.
-        """
         if argument is None:
             return
         if self.callable_ is None:
@@ -1421,64 +968,26 @@ class LabelCommand(_scoping.Command):
             argument = self.selector(argument)
         self.callable_(argument)
 
-    ### PUBLIC PROPERTIES ###
 
-    @property
-    def callable_(self):
-        """
-        Gets callable.
-        """
-        return self._callable
-
-
+@dataclasses.dataclass
 class MetronomeMarkCommand(_scoping.Command):
     """
     Metronome mark command.
     """
 
-    ### CLASS VARIABLES ###
+    key: str | _indicators.Accelerando | _indicators.Ritardando = None
+    redundant: bool = None
+    selector: typing.Any = _selectors.leaf(0)
 
-    __slots__ = ("_key", "_redundant", "_tags")
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        deactivate: bool = None,
-        key: typing.Union[str, _indicators.Accelerando, _indicators.Ritardando] = None,
-        map=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        redundant: bool = None,
-        scope: _scoping.ScopeTyping = None,
-        selector=_selectors.leaf(0),
-        tags: typing.List[typing.Optional[abjad.Tag]] = None,
-    ) -> None:
-        _scoping.Command.__init__(
-            self,
-            deactivate=deactivate,
-            map=map,
-            match=match,
-            measures=measures,
-            scope=scope,
-            selector=selector,
-            tags=tags,
-        )
+    def __post_init__(self):
+        _scoping.Command.__post_init__(self)
         prototype = (str, _indicators.Accelerando, _indicators.Ritardando)
-        if key is not None:
-            assert isinstance(key, prototype), repr(key)
-        self._key = key
-        if redundant is not None:
-            redundant = bool(redundant)
-        self._redundant = redundant
-
-    ### SPECIAL METHODS ###
+        if self.key is not None:
+            assert isinstance(self.key, prototype), repr(self.key)
+        if self.redundant is not None:
+            self.redundant = bool(self.redundant)
 
     def _call(self, argument=None) -> None:
-        """
-        Applies command to result of selector called on ``argument``.
-        """
         if argument is None:
             return
         if self.key is None:
@@ -1510,69 +1019,24 @@ class MetronomeMarkCommand(_scoping.Command):
                 self.runtime["manifests"], wrapper, "redundant"
             )
 
-    ### PUBLIC PROPERTIES ###
 
-    @property
-    def key(
-        self,
-    ) -> typing.Optional[
-        typing.Union[str, _indicators.Accelerando, _indicators.Ritardando]
-    ]:
-        """
-        Gets metronome mark key.
-        """
-        return self._key
-
-    @property
-    def redundant(self) -> typing.Optional[bool]:
-        """
-        Is true when command is redundant.
-        """
-        return self._redundant
-
-
+@dataclasses.dataclass
 class PartAssignmentCommand(_scoping.Command):
     """
     Part assignment command.
     """
 
-    ### CLASS VARIABLES ###
+    part_assignment: _parts.PartAssignment = None
 
-    __slots__ = ("_part_assignment",)
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        map=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        part_assignment: _parts.PartAssignment = None,
-        scope: _scoping.ScopeTyping = None,
-        selector=_selectors.leaves(),
-    ) -> None:
-        _scoping.Command.__init__(
-            self,
-            map=map,
-            match=match,
-            measures=measures,
-            scope=scope,
-            selector=selector,
-        )
-        if part_assignment is not None:
-            if not isinstance(part_assignment, _parts.PartAssignment):
+    def __post_init__(self):
+        _scoping.Command.__post_init__(self)
+        if self.part_assignment is not None:
+            if not isinstance(self.part_assignment, _parts.PartAssignment):
                 message = "part_assignment must be part assignment"
-                message += f" (not {part_assignment!r})."
+                message += f" (not {self.part_assignment!r})."
                 raise Exception(message)
-        self._part_assignment = part_assignment
-
-    ### SPECIAL METHODS ###
 
     def _call(self, argument=None) -> None:
-        """
-        Inserts ``selector`` output in container and sets part assignment.
-        """
         if argument is None:
             return
         if self.selector is not None:
@@ -1598,17 +1062,6 @@ class PartAssignmentCommand(_scoping.Command):
         components = _selection.Selection(argument).leaves().top()
         abjad.mutate.wrap(components, container)
 
-    ### PRIVATE METHODS ###
-
     def _mutates_score(self):
         # return True
         return False
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def part_assignment(self) -> typing.Optional[_parts.PartAssignment]:
-        """
-        Gets part assignment.
-        """
-        return self._part_assignment

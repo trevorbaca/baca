@@ -1,7 +1,6 @@
 """
 Piecewise.
 """
-import copy
 import dataclasses
 import typing
 from inspect import currentframe as _frame
@@ -85,93 +84,59 @@ class Bundle:
         return False
 
 
+@dataclasses.dataclass
 class PiecewiseCommand(_scoping.Command):
     """
     Piecewise indicator command.
+
+    Command attaches indicator to first leaf in each group of selector output when
+    ``bookend`` is false.
+
+    Command attaches indicator to both first leaf and last leaf in each group of selector
+    output when ``bookend`` is true.
+
+    When ``bookend`` equals integer ``n``, command attaches indicator to first leaf and
+    last leaf in group ``n`` of selector output and attaches indicator to only first leaf
+    in other groups of selector output.
     """
 
-    ### CLASS VARIABLES ###
+    autodetect_right_padding: bool = None
+    bookend: typing.Union[bool, int] = None
+    bundles: typing.List[Bundle] = None
+    final_piece_spanner: typing.Any = None
+    leak_spanner_stop: bool = None
+    left_broken: bool = None
+    pieces: typing.Any = _selectors.leaves()
+    remove_length_1_spanner_start: bool = None
+    right_broken: typing.Any = None
+    selector: typing.Any = _selectors.leaves()
+    tweaks: abjad.IndexedTweakManagers = None
 
-    __slots__ = (
-        "_autodetect_right_padding",
-        "_bookend",
-        "_bundles",
-        "_final_piece_spanner",
-        "_leak_spanner_stop",
-        "_left_broken",
-        "_pieces",
-        "_remove_length_1_spanner_start",
-        "_right_broken",
-        "_selector",
-        "_tweaks",
-    )
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        autodetect_right_padding: bool = None,
-        bookend: typing.Union[bool, int] = None,
-        bundles: typing.List[Bundle] = None,
-        final_piece_spanner: typing.Any = None,
-        leak_spanner_stop: bool = None,
-        left_broken: bool = None,
-        map=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        pieces=_selectors.leaves(),
-        remove_length_1_spanner_start: bool = None,
-        right_broken: typing.Any = None,
-        scope: _scoping.ScopeTyping = None,
-        selector=_selectors.leaves(),
-        tags: typing.List[typing.Optional[abjad.Tag]] = None,
-        tweaks: abjad.IndexedTweakManagers = None,
-    ) -> None:
-        _scoping.Command.__init__(
-            self,
-            map=map,
-            match=match,
-            measures=measures,
-            scope=scope,
-            selector=selector,
-            tags=tags,
-        )
-        if autodetect_right_padding is not None:
-            autodetect_right_padding = bool(autodetect_right_padding)
-        self._autodetect_right_padding = autodetect_right_padding
-        if bookend is not None:
-            assert isinstance(bookend, (int, bool)), repr(bookend)
-        self._bookend = bookend
+    def __post_init__(self):
+        _scoping.Command.__post_init__(self)
+        if self.autodetect_right_padding is not None:
+            self.autodetect_right_padding = bool(self.autodetect_right_padding)
+        if self.bookend is not None:
+            assert isinstance(self.bookend, (int, bool)), repr(self.bookend)
         bundles_ = None
-        if bundles is not None:
-            bundles_ = abjad.CyclicTuple(bundles)
-        self._bundles = bundles_
-        if final_piece_spanner not in (None, False):
-            assert getattr(final_piece_spanner, "spanner_start", False)
-        self._final_piece_spanner = final_piece_spanner
-        if leak_spanner_stop is not None:
-            leak_spanner_stop = bool(leak_spanner_stop)
-        self._leak_spanner_stop = leak_spanner_stop
-        if left_broken is not None:
-            left_broken = bool(left_broken)
-        self._left_broken = left_broken
-        if pieces is not None:
-            assert callable(pieces), repr(pieces)
-        self._pieces = pieces
-        if remove_length_1_spanner_start is not None:
-            remove_length_1_spanner_start = bool(remove_length_1_spanner_start)
-        self._remove_length_1_spanner_start = remove_length_1_spanner_start
-        self._right_broken = right_broken
-        _scoping.validate_indexed_tweaks(tweaks)
-        self._tweaks = tweaks
-
-    ### SPECIAL METHODS ###
+        if self.bundles is not None:
+            bundles_ = abjad.CyclicTuple(self.bundles)
+        self.bundles = bundles_
+        if self.final_piece_spanner not in (None, False):
+            assert getattr(self.final_piece_spanner, "spanner_start", False)
+        if self.leak_spanner_stop is not None:
+            self.leak_spanner_stop = bool(self.leak_spanner_stop)
+        if self.left_broken is not None:
+            self.left_broken = bool(self.left_broken)
+        if self.pieces is not None:
+            assert callable(self.pieces), repr(self.pieces)
+        if self.remove_length_1_spanner_start is not None:
+            self.remove_length_1_spanner_start = bool(
+                self.remove_length_1_spanner_start
+            )
+        _scoping.validate_indexed_tweaks(self.tweaks)
 
     def _call(self, argument=None) -> None:
-        """
-        Calls command on ``argument``.
-        """
         if argument is None:
             return
         if not self.bundles:
@@ -319,8 +284,6 @@ class PiecewiseCommand(_scoping.Command):
                 self._attach_indicators(bundle, stop_leaf, i, total_pieces, tag=tag)
             previous_had_bookend = should_bookend
 
-    ### PRIVATE METHODS ###
-
     def _attach_indicators(
         self,
         bundle,
@@ -370,95 +333,6 @@ class PiecewiseCommand(_scoping.Command):
                     self.runtime["manifests"], wrapper, status
                 )
 
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def autodetect_right_padding(self) -> typing.Optional[bool]:
-        """
-        Is true when (text) spanner autodetects right padding.
-        """
-        return self._autodetect_right_padding
-
-    @property
-    def bookend(self) -> typing.Optional[typing.Union[bool, int]]:
-        """
-        Gets bookend token.
-
-        Command attaches indicator to first leaf in each group of selector output when
-        ``bookend`` is false.
-
-        Command attaches indicator to both first leaf and last leaf in each group of
-        selector output when ``bookend`` is true.
-
-        When ``bookend`` equals integer ``n``, command attaches indicator to first leaf
-        and last leaf in group ``n`` of selector output and attaches indicator to only
-        first leaf in other groups of selector output.
-        """
-        return self._bookend
-
-    @property
-    def bundles(self) -> typing.Optional[abjad.CyclicTuple]:
-        """
-        Gets bundles.
-        """
-        return self._bundles
-
-    @property
-    def final_piece_spanner(self) -> typing.Optional[typing.Any]:
-        """
-        Gets last piece spanner start.
-        """
-        return self._final_piece_spanner
-
-    @property
-    def leak_spanner_stop(self) -> typing.Optional[bool]:
-        """
-        Is true when piecewise command leaks stop indicator.
-        """
-        return self._leak_spanner_stop
-
-    @property
-    def left_broken(self) -> typing.Optional[bool]:
-        """
-        Is true when piecewise command is left-broken.
-        """
-        return self._left_broken
-
-    @property
-    def pieces(self):
-        """
-        Gets piece selector.
-        """
-        return self._pieces
-
-    @property
-    def remove_length_1_spanner_start(self) -> typing.Optional[bool]:
-        """
-        Is true when command removes spanner start from length-1 pieces.
-        """
-        return self._remove_length_1_spanner_start
-
-    @property
-    def right_broken(self) -> typing.Optional[typing.Any]:
-        """
-        Gets right-broken indicator.
-        """
-        return self._right_broken
-
-    @property
-    def selector(self):
-        """
-        Gets (first-order) selector.
-        """
-        return self._selector
-
-    @property
-    def tweaks(self) -> typing.Optional[abjad.IndexedTweakManagers]:
-        """
-        Gets tweaks.
-        """
-        return self._tweaks
-
 
 def bow_speed_spanner(
     items: typing.Union[str, typing.List],
@@ -497,8 +371,7 @@ def bow_speed_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = copy.copy(command)
-    result._initialize_tags([tag])
+    result = dataclasses.replace(command, tags=[tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -541,8 +414,7 @@ def circle_bow_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = copy.copy(command)
-    result._initialize_tags([tag])
+    result = dataclasses.replace(command, tags=[tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -593,8 +465,7 @@ def clb_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = copy.copy(command)
-    result._initialize_tags([tag])
+    result = dataclasses.replace(command, tags=[tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -634,8 +505,7 @@ def covered_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = copy.copy(command)
-    result._initialize_tags([tag])
+    result = dataclasses.replace(command, tags=[tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -674,8 +544,7 @@ def damp_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = copy.copy(command)
-    result._initialize_tags([tag])
+    result = dataclasses.replace(command, tags=[tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -2427,8 +2296,7 @@ def half_clt_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = copy.copy(command)
-    result._initialize_tags([tag])
+    result = dataclasses.replace(command, tags=[tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -2759,8 +2627,7 @@ def material_annotation_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = copy.copy(command)
-    result._initialize_tags([tag])
+    result = dataclasses.replace(command, tags=[tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -2800,8 +2667,7 @@ def metric_modulation_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = copy.copy(command)
-    result._initialize_tags([tag])
+    result = dataclasses.replace(command, tags=[tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -2999,8 +2865,7 @@ def pitch_annotation_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = copy.copy(command)
-    result._initialize_tags([tag])
+    result = dataclasses.replace(command, tags=[tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -3039,8 +2904,7 @@ def pizzicato_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = copy.copy(command)
-    result._initialize_tags([tag])
+    result = dataclasses.replace(command, tags=[tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -3078,8 +2942,7 @@ def rhythm_annotation_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = copy.copy(command)
-    result._initialize_tags([tag])
+    result = dataclasses.replace(command, tags=[tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -3121,8 +2984,7 @@ def scp_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = copy.copy(command)
-    result._initialize_tags([tag])
+    result = dataclasses.replace(command, tags=[tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -3162,8 +3024,7 @@ def spazzolato_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = copy.copy(command)
-    result._initialize_tags([tag])
+    result = dataclasses.replace(command, tags=[tag])
     assert isinstance(command, PiecewiseCommand)
     return result
 
@@ -3205,8 +3066,7 @@ def string_number_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = copy.copy(command)
-    result._initialize_tags([tag])
+    result = dataclasses.replace(command, tags=[tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -3247,8 +3107,7 @@ def tasto_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = copy.copy(command)
-    result._initialize_tags([tag])
+    result = dataclasses.replace(command, tags=[tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -4892,8 +4751,7 @@ def vibrato_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = copy.copy(command)
-    result._initialize_tags([tag])
+    result = dataclasses.replace(command, tags=[tag])
     assert isinstance(result, PiecewiseCommand)
     return result
 
@@ -4934,7 +4792,6 @@ def xfb_spanner(
         right_broken=right_broken,
         selector=selector,
     )
-    result = copy.copy(command)
-    result._initialize_tags([tag])
+    result = dataclasses.replace(command, tags=[tag])
     assert isinstance(result, PiecewiseCommand)
     return result

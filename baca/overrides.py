@@ -1,6 +1,7 @@
 """
 Overrides.
 """
+import dataclasses
 import typing
 from inspect import currentframe as _frame
 
@@ -12,6 +13,7 @@ from . import tags as _tags
 from . import typings
 
 
+@dataclasses.dataclass
 class OverrideCommand(_scoping.Command):
     r"""
     Override command.
@@ -23,79 +25,35 @@ class OverrideCommand(_scoping.Command):
 
     """
 
-    ### CLASS ATTRIBUTES ###
+    after: bool = None
+    allowlist: typing.Tuple[type] = None
+    attribute: str = None
+    blocklist: typing.Tuple[type] = None
+    context: str = None
+    grob: str = None
+    selector: typing.Any = _selectors.leaves()
+    value: typing.Any = None
 
-    __slots__ = (
-        "_after",
-        "_allowlist",
-        "_attribute",
-        "_blocklist",
-        "_context",
-        "_grob",
-        "_tags",
-        "_value",
-    )
+    def __post_init__(self):
+        _scoping.Command.__post_init__(self)
+        if self.after is not None:
+            self.after = bool(self.after)
+        if self.allowlist is not None:
+            assert isinstance(self.allowlist, tuple), repr(self.allowlist)
+            assert all(issubclass(_, abjad.Leaf) for _ in self.allowlist)
+        if self.attribute is not None:
+            assert isinstance(self.attribute, str), repr(self.attribute)
+        if self.blocklist is not None:
+            assert isinstance(self.blocklist, tuple), repr(self.blocklist)
+            assert all(issubclass(_, abjad.Leaf) for _ in self.blocklist)
+        if self.context is not None:
+            assert isinstance(self.context, str), repr(self.context)
+        if self.grob is not None:
+            assert isinstance(self.grob, str), repr(self.grob)
 
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        after: bool = None,
-        allowlist: typing.Tuple[type] = None,
-        attribute: str = None,
-        blocklist: typing.Tuple[type] = None,
-        context: str = None,
-        deactivate: bool = None,
-        grob: str = None,
-        map=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        scope: _scoping.ScopeTyping = None,
-        selector=_selectors.leaves(),
-        tag_measure_number: bool = None,
-        tags: typing.List[typing.Optional[abjad.Tag]] = None,
-        value: typing.Any = None,
-    ) -> None:
-        _scoping.Command.__init__(
-            self,
-            deactivate=deactivate,
-            map=map,
-            match=match,
-            measures=measures,
-            scope=scope,
-            selector=selector,
-            tag_measure_number=tag_measure_number,
-            tags=tags,
-        )
-        if after is not None:
-            after = bool(after)
-        self._after = after
-        if allowlist is not None:
-            assert isinstance(allowlist, tuple), repr(allowlist)
-            assert all(issubclass(_, abjad.Leaf) for _ in allowlist)
-        self._allowlist = allowlist
-        if attribute is not None:
-            assert isinstance(attribute, str), repr(attribute)
-        self._attribute = attribute
-        if blocklist is not None:
-            assert isinstance(blocklist, tuple), repr(blocklist)
-            assert all(issubclass(_, abjad.Leaf) for _ in blocklist)
-        self._blocklist = blocklist
-        if context is not None:
-            assert isinstance(context, str), repr(context)
-        self._context = context
-        if grob is not None:
-            assert isinstance(grob, str), repr(grob)
-        self._grob = grob
-        self._value = value
-
-    ### SPECIAL METHODS ###
+    __repr__ = _scoping.Command.__repr__
 
     def _call(self, argument=None) -> None:
-        """
-        Calls command on ``argument``.
-        """
         if argument is None:
             return
         if self.selector:
@@ -153,57 +111,6 @@ class OverrideCommand(_scoping.Command):
         else:
             tag = site
         abjad.attach(literal, leaves[-1], deactivate=self.deactivate, tag=tag)
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def after(self) -> typing.Optional[bool]:
-        """
-        Is true if command positions LilyPond command after selection.
-        """
-        return self._after
-
-    @property
-    def allowlist(self) -> typing.Optional[typing.Tuple[type]]:
-        """
-        Gets allowlist leaves.
-        """
-        return self._allowlist
-
-    @property
-    def attribute(self) -> typing.Optional[str]:
-        """
-        Gets attribute name.
-        """
-        return self._attribute
-
-    @property
-    def blocklist(self) -> typing.Optional[typing.Tuple[type]]:
-        """
-        Gets blocklist leaves.
-        """
-        return self._blocklist
-
-    @property
-    def context(self) -> typing.Optional[str]:
-        """
-        Gets context name.
-        """
-        return self._context
-
-    @property
-    def grob(self) -> typing.Optional[str]:
-        """
-        Gets grob name.
-        """
-        return self._grob
-
-    @property
-    def value(self) -> typing.Any:
-        """
-        Gets attribute value.
-        """
-        return self._value
 
 
 def accidental_extra_offset(

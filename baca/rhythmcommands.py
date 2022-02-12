@@ -1,6 +1,8 @@
 """
 Rhythm commands.
 """
+import dataclasses
+import typing
 from inspect import currentframe as _frame
 
 import abjad
@@ -14,6 +16,7 @@ from . import sequence as _sequence
 from . import tags as _tags
 
 
+@dataclasses.dataclass
 class RhythmCommand(_scoping.Command):
     r"""
     Rhythm command.
@@ -102,59 +105,154 @@ class RhythmCommand(_scoping.Command):
                 >>
             }
 
+    ..  container:: example
+
+        Talea rhythm-maker remembers previous state across gaps:
+
+        >>> score = baca.docs.make_empty_score(1)
+        >>> commands = baca.CommandAccumulator(
+        ...     time_signatures=5 * [(4, 8)],
+        ... )
+
+        >>> note_command = rmakers.stack(
+        ...     rmakers.note(),
+        ...     rmakers.force_rest(
+        ...         baca.selectors.lts(),
+        ...     ),
+        ...     rmakers.beam(baca.selectors.plts()),
+        ... )
+        >>> talea_command = rmakers.stack(
+        ...     rmakers.talea([3, 4], 16),
+        ...     rmakers.beam(),
+        ...     rmakers.extract_trivial(),
+        ... )
+        >>> command = baca.rhythm(
+        ...     rmakers.bind(
+        ...         rmakers.assign(note_command, abjad.index([2])),
+        ...         rmakers.assign(
+        ...             talea_command,
+        ...             abjad.index([0], 1),
+        ...             remember_state_across_gaps=True,
+        ...         ),
+        ...     ),
+        ... )
+
+        >>> def label_with_durations(music):
+        ...     return abjad.label.with_durations(
+        ...         music,
+        ...         direction=abjad.Down,
+        ...         denominator=16,
+        ...     )
+        >>> commands(
+        ...     "Music_Voice",
+        ...     baca.label(label_with_durations),
+        ...     baca.text_script_font_size(-2),
+        ...     baca.text_script_staff_padding(5),
+        ...     command,
+        ... )
+
+        >>> _, _ = baca.interpreter(
+        ...     score,
+        ...     commands.commands,
+        ...     commands.time_signatures,
+        ...     move_global_context=True,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
+        ... )
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            {
+                \context Staff = "Music_Staff"
+                <<
+                    \context Voice = "Global_Skips"
+                    {
+                        \baca-new-spacing-section #1 #16
+                        \time 4/8
+                        s1 * 1/2
+                        \baca-new-spacing-section #1 #16
+                        s1 * 1/2
+                        \baca-new-spacing-section #1 #16
+                        s1 * 1/2
+                        \baca-new-spacing-section #1 #16
+                        s1 * 1/2
+                        \baca-new-spacing-section #1 #4
+                        s1 * 1/2
+                    }
+                    \context Voice = "Music_Voice"
+                    {
+                        \override TextScript.font-size = -2
+                        \override TextScript.staff-padding = 5
+                        b'8.
+                        _ \markup \fraction 3 16
+                        b'4
+                        _ \markup \fraction 4 16
+                        b'16
+                        _ \markup \fraction 3 16
+                        ~
+                        b'8
+                        b'4
+                        _ \markup \fraction 4 16
+                        b'8
+                        _ \markup \fraction 2 16
+                        r2
+                        _ \markup \fraction 8 16
+                        b'16
+                        _ \markup \fraction 1 16
+                        b'4
+                        _ \markup \fraction 4 16
+                        b'8.
+                        _ \markup \fraction 3 16
+                        b'4
+                        _ \markup \fraction 4 16
+                        b'8.
+                        _ \markup \fraction 3 16
+                        [
+                        b'16
+                        _ \markup \fraction 1 16
+                        ]
+                        \revert TextScript.font-size
+                        \revert TextScript.staff-padding
+                    }
+                >>
+            }
+
     """
 
-    ### CLASS ATTRIBUTES ###
+    rhythm_maker: typing.Any = None
+    annotation_spanner_color: typing.Any = None
+    annotation_spanner_text: typing.Any = None
+    attach_not_yet_pitched: typing.Any = None
+    do_not_check_total_duration: typing.Any = None
+    frame: typing.Any = None
+    match: typing.Any = None
+    measures: typing.Any = None
+    persist: typing.Any = None
+    scope: typing.Any = None
 
-    __slots__ = (
-        "_annotation_spanner_color",
-        "_annotation_spanner_text",
-        "_attach_not_yet_pitched",
-        "_do_not_check_total_duration",
-        "_frame",
-        "_persist",
-        "_rhythm_maker",
-        "_state",
-    )
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        rhythm_maker,
-        *,
-        annotation_spanner_color=None,
-        annotation_spanner_text=None,
-        attach_not_yet_pitched=None,
-        do_not_check_total_duration=None,
-        frame=None,
-        match=None,
-        measures=None,
-        persist=None,
-        scope=None,
-    ):
-        _scoping.Command.__init__(self, match=match, measures=measures, scope=scope)
-        if annotation_spanner_color is not None:
-            assert isinstance(annotation_spanner_color, str)
-        self._annotation_spanner_color = annotation_spanner_color
-        if annotation_spanner_text is not None:
-            assert isinstance(annotation_spanner_text, str)
-        self._annotation_spanner_text = annotation_spanner_text
-        if attach_not_yet_pitched is not None:
-            attach_not_yet_pitched = bool(attach_not_yet_pitched)
-        self._attach_not_yet_pitched = attach_not_yet_pitched
-        if do_not_check_total_duration is not None:
-            do_not_check_total_duration = bool(do_not_check_total_duration)
-        self._do_not_check_total_duration = do_not_check_total_duration
-        if persist is not None:
-            assert isinstance(persist, str), repr(persist)
-        self._persist = persist
-        self._check_rhythm_maker_input(rhythm_maker)
-        self._frame = frame
-        self._rhythm_maker = rhythm_maker
+    def __post_init__(self):
+        _scoping.Command.__post_init__(self)
+        if self.annotation_spanner_color is not None:
+            assert isinstance(self.annotation_spanner_color, str)
+        if self.annotation_spanner_text is not None:
+            assert isinstance(self.annotation_spanner_text, str)
+        if self.attach_not_yet_pitched is not None:
+            self.attach_not_yet_pitched = bool(self.attach_not_yet_pitched)
+        if self.do_not_check_total_duration is not None:
+            self.do_not_check_total_duration = bool(self.do_not_check_total_duration)
+        if self.persist is not None:
+            assert isinstance(self.persist, str), repr(self.persist)
+        self._check_rhythm_maker_input(self.rhythm_maker)
         self._state = None
-
-    ### PRIVATE METHODS ###
 
     def _check_rhythm_maker_input(self, rhythm_maker):
         if rhythm_maker is None:
@@ -242,43 +340,6 @@ class RhythmCommand(_scoping.Command):
                 previous_segment_stop_state = None
         return previous_segment_stop_state
 
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def annotation_spanner_color(self):
-        """
-        Gets annotation spanner color.
-        """
-        return self._annotation_spanner_color
-
-    @property
-    def annotation_spanner_text(self):
-        """
-        Gets annotation spanner text.
-        """
-        return self._annotation_spanner_text
-
-    @property
-    def attach_not_yet_pitched(self):
-        """
-        Is true when command attaches NOT_YET_PITCHED indicator.
-        """
-        return self._attach_not_yet_pitched
-
-    @property
-    def do_not_check_total_duration(self):
-        """
-        Is true when command does not check total duration.
-        """
-        return self._do_not_check_total_duration
-
-    @property
-    def frame(self):
-        """
-        Gets frame in which rhythm command was called.
-        """
-        return self._frame
-
     @property
     def parameter(self):
         """
@@ -286,147 +347,11 @@ class RhythmCommand(_scoping.Command):
 
         ..  container:: example
 
-            >>> baca.RhythmCommand(rmakers.note()).parameter
+            >>> baca.RhythmCommand(rhythm_maker=rmakers.note()).parameter
             'RHYTHM'
 
         """
         return _const.RHYTHM
-
-    @property
-    def persist(self):
-        """
-        Gets persist name.
-        """
-        return self._persist
-
-    @property
-    def rhythm_maker(self):
-        r"""
-        Gets selection, rhythm-maker or division assignment.
-
-        ..  container:: example
-
-            Talea rhythm-maker remembers previous state across gaps:
-
-            >>> score = baca.docs.make_empty_score(1)
-            >>> commands = baca.CommandAccumulator(
-            ...     time_signatures=5 * [(4, 8)],
-            ... )
-
-            >>> note_command = rmakers.stack(
-            ...     rmakers.note(),
-            ...     rmakers.force_rest(
-            ...         baca.selectors.lts(),
-            ...     ),
-            ...     rmakers.beam(baca.selectors.plts()),
-            ... )
-            >>> talea_command = rmakers.stack(
-            ...     rmakers.talea([3, 4], 16),
-            ...     rmakers.beam(),
-            ...     rmakers.extract_trivial(),
-            ... )
-            >>> command = baca.rhythm(
-            ...     rmakers.bind(
-            ...         rmakers.assign(note_command, abjad.index([2])),
-            ...         rmakers.assign(
-            ...             talea_command,
-            ...             abjad.index([0], 1),
-            ...             remember_state_across_gaps=True,
-            ...         ),
-            ...     ),
-            ... )
-
-            >>> def label_with_durations(music):
-            ...     return abjad.label.with_durations(
-            ...         music,
-            ...         direction=abjad.Down,
-            ...         denominator=16,
-            ...     )
-            >>> commands(
-            ...     "Music_Voice",
-            ...     baca.label(label_with_durations),
-            ...     baca.text_script_font_size(-2),
-            ...     baca.text_script_staff_padding(5),
-            ...     command,
-            ... )
-
-            >>> _, _ = baca.interpreter(
-            ...     score,
-            ...     commands.commands,
-            ...     commands.time_signatures,
-            ...     move_global_context=True,
-            ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
-            ... )
-            >>> lilypond_file = baca.make_lilypond_file(
-            ...     score,
-            ...     includes=["baca.ily"],
-            ... )
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                {
-                    \context Staff = "Music_Staff"
-                    <<
-                        \context Voice = "Global_Skips"
-                        {
-                            \baca-new-spacing-section #1 #16
-                            \time 4/8
-                            s1 * 1/2
-                            \baca-new-spacing-section #1 #16
-                            s1 * 1/2
-                            \baca-new-spacing-section #1 #16
-                            s1 * 1/2
-                            \baca-new-spacing-section #1 #16
-                            s1 * 1/2
-                            \baca-new-spacing-section #1 #4
-                            s1 * 1/2
-                        }
-                        \context Voice = "Music_Voice"
-                        {
-                            \override TextScript.font-size = -2
-                            \override TextScript.staff-padding = 5
-                            b'8.
-                            _ \markup \fraction 3 16
-                            b'4
-                            _ \markup \fraction 4 16
-                            b'16
-                            _ \markup \fraction 3 16
-                            ~
-                            b'8
-                            b'4
-                            _ \markup \fraction 4 16
-                            b'8
-                            _ \markup \fraction 2 16
-                            r2
-                            _ \markup \fraction 8 16
-                            b'16
-                            _ \markup \fraction 1 16
-                            b'4
-                            _ \markup \fraction 4 16
-                            b'8.
-                            _ \markup \fraction 3 16
-                            b'4
-                            _ \markup \fraction 4 16
-                            b'8.
-                            _ \markup \fraction 3 16
-                            [
-                            b'16
-                            _ \markup \fraction 1 16
-                            ]
-                            \revert TextScript.font-size
-                            \revert TextScript.staff-padding
-                        }
-                    >>
-                }
-
-        """
-        return self._rhythm_maker
 
     @property
     def state(self):
@@ -568,7 +493,7 @@ def make_even_divisions(*, measures=None):
     Makes even divisions.
     """
     return RhythmCommand(
-        rmakers.stack(
+        rhythm_maker=rmakers.stack(
             rmakers.even_division([8]),
             rmakers.beam(),
             rmakers.extract_trivial(),
@@ -594,7 +519,7 @@ def make_fused_tuplet_monads(
     else:
         tuplet_ratios.append(tuplet_ratio)
     return RhythmCommand(
-        rmakers.stack(
+        rhythm_maker=rmakers.stack(
             rmakers.tuplet(tuplet_ratios),
             rmakers.beam(),
             rmakers.rewrite_rest_filled(),
@@ -687,7 +612,7 @@ def make_monads(fractions):
         tuplet.multiplier = abjad.Multiplier(tuplet.multiplier)
     rhythm_maker = abjad.select(components)
     return RhythmCommand(
-        rhythm_maker,
+        rhythm_maker=rhythm_maker,
         annotation_spanner_color="#darkcyan",
         attach_not_yet_pitched=True,
         frame=_frame(),
@@ -707,7 +632,7 @@ def make_notes(
     else:
         repeat_tie_specifier = []
     return RhythmCommand(
-        rmakers.stack(
+        rhythm_maker=rmakers.stack(
             rmakers.note(),
             *specifiers,
             rmakers.rewrite_meter(),
@@ -803,7 +728,9 @@ def make_repeat_tied_notes(
     specifier = rmakers.force_repeat_tie()
     specifiers_.append(specifier)
     return RhythmCommand(
-        rmakers.stack(rmakers.note(), *specifiers_, tag=_scoping.site(_frame())),
+        rhythm_maker=rmakers.stack(
+            rmakers.note(), *specifiers_, tag=_scoping.site(_frame())
+        ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
     )
@@ -834,7 +761,7 @@ def make_repeated_duration_notes(
     if not do_not_rewrite_meter:
         rewrite_specifiers.append(rmakers.rewrite_meter())
     return RhythmCommand(
-        rmakers.stack(
+        rhythm_maker=rmakers.stack(
             rmakers.note(),
             *specifiers,
             *rewrite_specifiers,
@@ -853,7 +780,7 @@ def make_rests(*, measures=None):
     Makes rests.
     """
     return RhythmCommand(
-        rmakers.stack(
+        rhythm_maker=rmakers.stack(
             rmakers.note(),
             rmakers.force_rest(_selectors.lts()),
             tag=_scoping.site(_frame()),
@@ -871,7 +798,7 @@ def make_single_attack(duration, *, measures=None):
     duration = abjad.Duration(duration)
     numerator, denominator = duration.pair
     return RhythmCommand(
-        rmakers.stack(
+        rhythm_maker=rmakers.stack(
             rmakers.incised(
                 fill_with_rests=True,
                 outer_divisions_only=True,
@@ -894,7 +821,7 @@ def make_tied_notes(*, measures=None):
     Makes tied notes; rewrites meter.
     """
     return RhythmCommand(
-        rmakers.stack(
+        rhythm_maker=rmakers.stack(
             rmakers.note(),
             rmakers.beam(_selectors.plts()),
             rmakers.tie(_selectors.ptails((None, -1))),
@@ -929,7 +856,7 @@ def make_tied_repeated_durations(durations, *, measures=None):
         return divisions
 
     return RhythmCommand(
-        rmakers.stack(
+        rhythm_maker=rmakers.stack(
             rmakers.note(),
             *specifiers,
             preprocessor=preprocessor,
@@ -964,7 +891,7 @@ def music(
     if tag is not None:
         tag_selection(selection, tag)
     return RhythmCommand(
-        selection,
+        rhythm_maker=selection,
         annotation_spanner_color="#darkcyan",
         annotation_spanner_text="baca.music() =|",
         do_not_check_total_duration=do_not_check_total_duration,
@@ -986,7 +913,7 @@ def rhythm(
         assert isinstance(tag, abjad.Tag), repr(tag)
     argument = rmakers.stack(*arguments, preprocessor=preprocessor, tag=tag)
     return RhythmCommand(
-        argument,
+        rhythm_maker=argument,
         attach_not_yet_pitched=True,
         frame=frame,
         measures=measures,
@@ -1018,7 +945,7 @@ def skeleton(
     if tag is not None:
         tag_selection(selection, tag)
     return RhythmCommand(
-        selection,
+        rhythm_maker=selection,
         annotation_spanner_color="#darkcyan",
         annotation_spanner_text="baca.skeleton() =|",
         attach_not_yet_pitched=True,

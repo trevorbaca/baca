@@ -616,57 +616,30 @@ def _validate_tags(tags):
     return True
 
 
+@dataclasses.dataclass(slots=True)
 class Command:
     """
     Command.
     """
 
-    ### CLASS VARIABLES ###
+    deactivate: bool = None
+    map: typing.Any = None
+    match: typings.Indices = None
+    measures: typings.SliceTyping = None
+    scope: ScopeTyping = None
+    selector: typing.Any = None
+    tag_measure_number: bool = None
+    tags: typing.List[typing.Optional[abjad.Tag]] = None
 
-    __slots__ = (
-        "_deactivate",
-        "_map",
-        "_match",
-        "_measures",
-        "_offset_to_measure_number",
-        "_previous_segment_voice_metadata",
-        "_runtime",
-        "_scope",
-        "_selector",
-        "_tag_measure_number",
-        "_tags",
-    )
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        deactivate: bool = None,
-        map=None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        scope: ScopeTyping = None,
-        selector=None,
-        tag_measure_number: bool = None,
-        tags: typing.List[typing.Optional[abjad.Tag]] = None,
-    ) -> None:
-        self._deactivate = deactivate
-        self._map = map
-        self._match = match
-        self._measures: typing.Optional[typings.SliceTyping] = measures
+    def __post_init__(self):
         self._runtime = {}
-        self._scope = scope
-        selector_ = selector
-        if selector_ is not None and not callable(selector_):
+        if self.selector is not None and not callable(self.selector):
             message = "selector must be callable:\n"
-            message += f"   {repr(selector_)}"
+            message += f"   {repr(self.selector)}"
             raise Exception(message)
-        self._selector = selector_
-        self._tag_measure_number = tag_measure_number
-        self._initialize_tags(tags)
-
-    ### SPECIAL METHODS ###
+        self.tags = list(self.tags or [])
+        assert _validate_tags(self.tags)
+        self._initialize_tags(self.tags)
 
     def __call__(self, argument=None, runtime: dict = None) -> None:
         """
@@ -692,8 +665,6 @@ class Command:
         Gets repr.
         """
         return f"{type(self).__name__}()"
-
-    ### PRIVATE METHODS ###
 
     def _call(self, argument=None):
         pass
@@ -731,56 +702,12 @@ class Command:
                 return False
         return True
 
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def deactivate(self) -> typing.Optional[bool]:
-        """
-        Is true when command deactivates tag.
-        """
-        return self._deactivate
-
-    @property
-    def map(self):
-        """
-        Gets precondition map.
-        """
-        return self._map
-
-    @property
-    def match(self) -> typing.Optional[typings.Indices]:
-        """
-        Gets match.
-        """
-        return self._match
-
-    @property
-    def measures(self) -> typing.Optional[typings.SliceTyping]:
-        """
-        Gets measures.
-        """
-        return self._measures
-
     @property
     def runtime(self) -> dict:
         """
         Gets segment-commands runtime dictionary.
         """
         return self._runtime
-
-    @property
-    def scope(self) -> typing.Optional[ScopeTyping]:
-        """
-        Gets scope.
-        """
-        return self._scope
-
-    @property
-    def selector(self):
-        """
-        Gets selector.
-        """
-        return self._selector
 
     # TODO: reimplement as method with leaf argument
     # TODO: supply with all self.get_tag(leaf) functionality
@@ -796,26 +723,6 @@ class Command:
         tag = abjad.Tag(string)
         assert isinstance(tag, abjad.Tag)
         return tag
-
-    @property
-    def tag_measure_number(self) -> typing.Optional[bool]:
-        """
-        Is true when command tags measure number.
-        """
-        return self._tag_measure_number
-
-    @property
-    def tags(self) -> typing.List[abjad.Tag]:
-        """
-        Gets tags.
-        """
-        assert _validate_tags(self._tags)
-        result: typing.List[abjad.Tag] = []
-        if self._tags:
-            result = self._tags[:]
-        return result
-
-    ### PUBLIC METHODS ###
 
     # TODO: replace in favor of self.tag(leaf)
     def get_tag(self, leaf: abjad.Leaf = None) -> typing.Optional[abjad.Tag]:
@@ -840,6 +747,7 @@ class Command:
         return None
 
 
+@dataclasses.dataclass
 class Suite:
     """
     Suite.
@@ -874,31 +782,21 @@ class Suite:
 
     """
 
-    ### CLASS VARIABLES ###
+    commands: typing.Sequence["CommandTyping"] = None
+    keywords: dict | None = None
 
-    __slots__ = (
-        "_commands",
-        "_offset_to_measure_number",
-        "_previous_segment_voice_metadata",
-    )
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self, commands: typing.Sequence["CommandTyping"] = None, **keywords
-    ) -> None:
-        commands_: typing.List[CommandTyping] = []
-        for command in commands or []:
-            if isinstance(command, (Command, Suite)):
-                command_ = abjad.new(command, **keywords)
-                commands_.append(command_)
-                continue
-            message = "\n  Must contain only commands, maps, suites."
-            message += f"\n  Not {type(command).__name__}: {command!r}."
-            raise Exception(message)
-        self._commands = tuple(commands_)
-
-    ### SPECIAL METHODS ###
+    def __post_init__(self):
+        self.commands = self.commands or []
+        assert all(isinstance(_, (Command, Suite)) for _ in self.commands)
+        keywords = self.keywords or {}
+        commands_ = []
+        for item in self.commands:
+            if isinstance(item, Command):
+                item_ = dataclasses.replace(item, **keywords)
+            else:
+                item_ = Suite([new(_, **keywords) for _ in item.commands])
+            commands_.append(item_)
+        self.commands = tuple(commands_)
 
     def __call__(self, argument=None, runtime=None) -> None:
         """
@@ -922,15 +820,6 @@ class Suite:
         Gets repr.
         """
         return f"{type(self).__name__}(commands={self.commands})"
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def commands(self) -> typing.Tuple["CommandTyping", ...]:
-        """
-        Gets commands.
-        """
-        return self._commands
 
 
 CommandTyping = typing.Union[Command, Suite]
@@ -1167,15 +1056,18 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
             }
 
     """
-    commands_: typing.List[CommandTyping] = []
-    for command in commands:
-        assert isinstance(command, (Command, Suite)), repr(command)
-        command_ = abjad.new(command, **keywords)
-        commands_.append(command_)
-    if len(commands_) == 1:
-        return commands_[0]
+    result = []
+    assert all(isinstance(_, (Command, Suite)) for _ in commands), repr(commands)
+    for item in commands:
+        if isinstance(item, Command):
+            item_ = dataclasses.replace(item, **keywords)
+        else:
+            item_ = Suite([new(_, **keywords) for _ in item.commands])
+        result.append(item_)
+    if len(result) == 1:
+        return result[0]
     else:
-        return suite(*commands_)
+        return suite(*result)
 
 
 _command_typing = typing.Union[Command, Suite]
@@ -1365,7 +1257,7 @@ def suite(*commands: CommandTyping, **keywords) -> Suite:
         message += f"\n  Not {type(command).__name__}:"
         message += f"\n  {repr(command)}"
         raise Exception(message)
-    return Suite(commands_, **keywords)
+    return Suite(commands_, keywords)
 
 
 def tag(
@@ -1408,9 +1300,9 @@ def tag(
         except TypeError:
             pass
         tags_ = [abjad.Tag(_) for _ in tags]
-        command._tags.extend(tags_)
-        command._deactivate = deactivate
-        command._tag_measure_number = tag_measure_number
+        command.tags.extend(tags_)
+        command.deactivate = deactivate
+        command.tag_measure_number = tag_measure_number
     return command
 
 
