@@ -1036,6 +1036,8 @@ class PartAssignmentCommand(_scoping.Command):
                 message += f" (not {self.part_assignment!r})."
                 raise Exception(message)
 
+    __repr__ = _scoping.Command.__repr__
+
     def _call(self, argument=None) -> None:
         if argument is None:
             return
