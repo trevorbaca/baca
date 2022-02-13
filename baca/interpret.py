@@ -2950,7 +2950,7 @@ def _treat_untreated_persistent_wrappers(
 def _update_score_one_time(score):
     is_forbidden_to_update = score._is_forbidden_to_update
     score._is_forbidden_to_update = False
-    score._update_now(offsets=True)
+    abjad._update._update_now(score, offsets=True)
     score._is_forbidden_to_update = is_forbidden_to_update
 
 
