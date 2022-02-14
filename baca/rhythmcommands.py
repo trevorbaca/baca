@@ -872,7 +872,7 @@ def music(
     argument,
     *,
     do_not_check_total_duration=None,
-    tag=None,
+    tag=abjad.Tag(),
 ):
     """
     Makes rhythm command from string or selection ``argument``.
@@ -904,13 +904,12 @@ def rhythm(
     preprocessor=None,
     measures=None,
     persist=None,
-    tag=None,
+    tag=abjad.Tag(),
 ):
     """
     Makes rhythm command from ``argument``.
     """
-    if tag is not None:
-        assert isinstance(tag, abjad.Tag), repr(tag)
+    assert isinstance(tag, abjad.Tag), repr(tag)
     argument = rmakers.stack(*arguments, preprocessor=preprocessor, tag=tag)
     return RhythmCommand(
         rhythm_maker=argument,
@@ -925,7 +924,7 @@ def skeleton(
     argument,
     *,
     do_not_check_total_duration=None,
-    tag=None,
+    tag=abjad.Tag(),
 ):
     """
     Makes rhythm command from ``string`` and attaches NOT_YET_PITCHED indicators to
