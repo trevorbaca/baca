@@ -56,8 +56,8 @@ def _doctest_files(current_directory, files, globals_, report_only_first_failure
     for file_ in failed_file_paths:
         print(f"FAILED: {file_}")
     print()
-    test_identifier = abjad.String("test").pluralize(test_count)
-    module_identifier = abjad.String("module").pluralize(len(names))
+    test_identifier = abjad.string.pluralize("test", test_count)
+    module_identifier = abjad.string.pluralize("module", len(names))
     success_count = test_count - failure_count
     string = (
         f"{success_count} passed, {failure_count} failed out of "

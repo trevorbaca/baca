@@ -359,14 +359,14 @@ def handle_edition_tags(path):
         my_name = "PARTS"
     else:
         raise Exception(path)
-    this_edition = abjad.Tag(f"+{abjad.String(my_name).to_shout_case()}")
-    not_this_edition = abjad.Tag(f"-{abjad.String(my_name).to_shout_case()}")
+    this_edition = abjad.Tag(f"+{abjad.string.to_shout_case(my_name)}")
+    not_this_edition = abjad.Tag(f"-{abjad.string.to_shout_case(my_name)}")
     if path.is_dir():
         directory_name = path.name
     else:
         directory_name = path.parent.name
-    this_directory = abjad.Tag(f"+{abjad.String(directory_name).to_shout_case()}")
-    not_this_directory = abjad.Tag(f"-{abjad.String(directory_name).to_shout_case()}")
+    this_directory = abjad.Tag(f"+{abjad.string.to_shout_case(directory_name)}")
+    not_this_directory = abjad.Tag(f"-{abjad.string.to_shout_case(directory_name)}")
 
     def deactivate(tags):
         if not_this_edition in tags:

@@ -197,13 +197,13 @@ def _log_timing(segment_directory, timing):
         pointer.write("\n")
         line = time.strftime("%Y-%m-%d %H:%M:%S") + "\n"
         pointer.write(line)
-        counter = abjad.String("second").pluralize(timing.runtime)
+        counter = abjad.string.pluralize("second", timing.runtime)
         line = f"Segment interpretation time: {timing.runtime} {counter}\n"
         pointer.write(line)
-        counter = abjad.String("second").pluralize(timing.abjad_format_time)
+        counter = abjad.string.pluralize("second", timing.abjad_format_time)
         line = f"Abjad format time: {timing.abjad_format_time} {counter}\n"
         pointer.write(line)
-        counter = abjad.String("second").pluralize(timing.lilypond_runtime)
+        counter = abjad.string.pluralize("second", timing.lilypond_runtime)
         line = f"LilyPond runtime: {timing.lilypond_runtime} {counter}\n"
         pointer.write(line)
 
@@ -438,7 +438,7 @@ def _print_timing(title, timer):
         count = timer
     else:
         count = int(timer.elapsed_time)
-    counter = abjad.String("second").pluralize(count)
+    counter = abjad.string.pluralize("second", count)
     string = f"{title} {count} {counter} ..."
     _print_success(string)
 
@@ -838,8 +838,7 @@ def handle_part_tags(directory):
         message = f"No part identifier found in {baca.path.trim(music_ly)} ..."
         _print_file_handling(message)
         sys.exit()
-    parts_directory_name = abjad.String(parts_directory.name)
-    parts_directory_name = parts_directory_name.to_shout_case()
+    parts_directory_name = abjad.string.to_shout_case(parts_directory.name)
     name = f"{parts_directory_name}_{part_identifier}"
     _activate(
         parts_directory,
@@ -1064,7 +1063,7 @@ def make_layout_ly(
         "fermata_measure_numbers": fermata_measure_numbers,
         "measure_count": measure_count,
     }
-    document_name = abjad.String(layout_directory.name).to_shout_case()
+    document_name = abjad.string.to_shout_case(layout_directory.name)
     if time_signatures is not None:
         first_measure_number = 1
     elif layout_directory.parent.name == "segments":
@@ -1094,7 +1093,7 @@ def make_layout_ly(
         raise Exception("first_measure_number should not be false")
         _print_file_handling(f"Skipping {baca.path.trim(layout_py)} ...")
         sys.exit(1)
-    assert abjad.String(document_name).is_shout_case()
+    assert abjad.string.is_shout_case(document_name)
     score = baca.docs.make_empty_score(1)
     commands = baca.CommandAccumulator(
         append_phantom_measure=not (do_not_append_phantom_measure),
@@ -1167,7 +1166,7 @@ def make_layout_ly(
     lines.extend(lines_)
     header = "\n".join(lines) + "\n\n"
     layout_ly.write_text(header + text + "\n")
-    counter = abjad.String("measure").pluralize(measure_count)
+    counter = abjad.string.pluralize("measure", measure_count)
     message = f"Writing {measure_count} + 1 {counter} to"
     message += f" {baca.path.trim(layout_ly)} ..."
     _print_file_handling(message)
@@ -1180,7 +1179,7 @@ def make_layout_ly(
                 bol_measure_numbers.append(measure_number)
                 continue
     count = len(bol_measure_numbers)
-    numbers = abjad.String("number").pluralize(count)
+    numbers = abjad.string.pluralize("number", count)
     items = ", ".join([str(_) for _ in bol_measure_numbers])
     if not do_not_write_metadata:
         metadata = layout_directory / "__metadata__"
@@ -1197,7 +1196,7 @@ def make_layout_ly(
             else:
                 part_dictionary = {}
             part_dictionary["bol_measure_numbers"] = bol_measure_numbers
-            assert abjad.String(document_name).is_shout_case()
+            assert abjad.string.is_shout_case(document_name)
             baca.path.add_metadatum(layout_directory, document_name, part_dictionary)
         else:
             baca.path.add_metadatum(

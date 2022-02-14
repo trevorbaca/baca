@@ -90,7 +90,6 @@ def _add_container_identifiers(score, segment_number):
                 container_identifier = (
                     f"{context_identifier}.part.{part_container_count}"
                 )
-                container_identifier = abjad.String(container_identifier)
                 assert "_" not in container_identifier, repr(container_identifier)
                 assert container_identifier not in container_to_part_assignment
                 timespan = container._get_timespan()
@@ -2370,7 +2369,7 @@ def _print_timing(title, timer, *, print_timing=False, suffix=None):
     if not print_timing:
         return
     count = int(timer.elapsed_time)
-    counter = abjad.String("second").pluralize(count)
+    counter = abjad.string.pluralize("second", count)
     count = str(count)
     if suffix is not None:
         suffix = f" [{suffix}]"

@@ -10,7 +10,7 @@ from . import scoping as _scoping
 
 def assert_lilypond_identifiers(score):
     for context in abjad.iterate.components(score, abjad.Context):
-        if not abjad.String(context.name).is_lilypond_identifier():
+        if not abjad.string.is_lilypond_identifier(context.name):
             raise Exception(f"invalid LilyPond identifier: {context.name!r}")
 
 
@@ -34,7 +34,7 @@ def assert_unique_context_names(score):
 
 def attach_lilypond_tag(tag, context, *, part_manifest=None):
     for tag_ in tag.split("."):
-        if not abjad.String(tag_).is_lilypond_identifier():
+        if not abjad.string.is_lilypond_identifier(tag_):
             raise Exception(f"invalid LilyPond identifier: {tag_!r}.")
         part_names = []
         if part_manifest is not None:

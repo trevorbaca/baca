@@ -992,7 +992,7 @@ def _global_rest_identifier(segment_number):
         'segment.02.Global.Rests'
 
     """
-    identifier = abjad.String(f"segment.{segment_number}.Global.Rests")
+    identifier = f"segment.{segment_number}.Global.Rests"
     assert "_" not in identifier, repr(identifier)
     return identifier
 
@@ -1031,7 +1031,7 @@ def _part_name_to_default_clef(path, part_name):
     module = _import_score_package(contents_directory)
     library = getattr(module, "library")
     instruments = library.instruments
-    words = abjad.String(part_name).delimit_words()
+    words = abjad.string.delimit_words(part_name)
     if words[-1].isdigit():
         words = words[:-1]
     if words[0] in ("First", "Second"):

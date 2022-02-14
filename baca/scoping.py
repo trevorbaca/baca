@@ -101,7 +101,7 @@ def _get_key(dictionary, value):
 
 
 def _get_tag(status, stem, prefix=None, suffix=None):
-    stem = abjad.String(stem).delimit_words()
+    stem = abjad.string.delimit_words(stem)
     stem = "_".join([_.upper() for _ in stem])
     if suffix is not None:
         name = f"{status.upper()}_{stem}_{suffix.upper()}"
@@ -537,14 +537,14 @@ def remove_reapplied_wrappers(leaf, indicator):
         if count != 1:
             for reapplied_wrapper in reapplied_wrappers:
                 print(reapplied_wrapper)
-            counter = abjad.String("indicator").pluralize(count)
+            counter = abjad.string.pluralize("indicator", count)
             message = f"found {count} reapplied {counter};"
             message += " expecting 1.\n\n"
             raise Exception(message)
         return reapplied_indicators[0]
 
 
-def to_indicator_stem(indicator) -> abjad.String:
+def to_indicator_stem(indicator) -> str:
     """
     Changes ``indicator`` to stem.
 
@@ -590,7 +590,7 @@ def to_indicator_stem(indicator) -> abjad.String:
         stem = indicator.parameter
     else:
         stem = type(indicator).__name__
-    return abjad.String(stem).to_shout_case()
+    return abjad.string.to_shout_case(stem)
 
 
 def validate_indexed_tweaks(tweaks):
