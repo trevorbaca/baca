@@ -56,6 +56,12 @@ def _test_segment(segment_directory):
         path = segment_directory / name
         results = types.SimpleNamespace()
         path_to_results[path] = results
+    music_ly = segment_directory / "music.ly"
+    if music_ly.exists():
+        music_ly.unlink()
+    music_ily = segment_directory / "music.ily"
+    if music_ily.exists():
+        music_ily.unlink()
     if layout_py.exists():
         os.system("python layout.py")
     command = "python music.py --also-untagged --clicktrack --log-timing --midi --pdf"
