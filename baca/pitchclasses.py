@@ -7313,7 +7313,9 @@ def illustrate_pitch_tree(
     pitch_tree._color_repeats(color_repeats, voice)
     pitch_tree._attach_cell_indices(cell_indices, leaf_groups)
     pitch_tree._label_set_classes(set_classes, leaf_groups)
-    abjad.deprecated.add_final_bar_line(score)
+    leaf = abjad.select(score).leaf(-1)
+    bar_line = abjad.BarLine("|.")
+    abjad.attach(bar_line, leaf)
     abjad.override(score).BarLine.transparent = True
     abjad.override(score).BarNumber.stencil = False
     abjad.override(score).Beam.stencil = False
