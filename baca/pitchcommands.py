@@ -3414,11 +3414,10 @@ class RegisterToOctaveCommand(_scoping.Command):
         target_octave_number = self.octave_number or 4
         current_octave_number = self._get_anchor_octave_number(argument)
         octave_adjustment = target_octave_number - current_octave_number
-        transposition = abjad.Transposition(n=12 * octave_adjustment)
         pleaves = _selection.Selection(argument).pleaves()
         assert isinstance(pleaves, _selection.Selection)
         for pleaf in pleaves:
-            self._set_pitch(pleaf, transposition)
+            self._set_pitch(pleaf, lambda _: _.transpose(n=12 * octave_adjustment))
 
     def _get_anchor_octave_number(self, argument):
         pitches = []
