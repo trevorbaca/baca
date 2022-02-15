@@ -433,26 +433,6 @@ def plts(pair=None, *, exclude=None, grace=None, lleak=None, omit=None, rleak=No
     return selector
 
 
-def plts_filter_duration(inequality, preprolated=None):
-    def selector(argument):
-        result = _selection.Selection(argument).plts()
-        comparator, duration = inequality
-        result = result.filter_duration(comparator, duration, preprolated=preprolated)
-        return result
-
-    return selector
-
-
-def plts_filter_length(inequality, preprolated=None):
-    def selector(argument):
-        result = _selection.Selection(argument).plts()
-        comparator, length = inequality
-        result = result.filter_length(comparator, length)
-        return result
-
-    return selector
-
-
 def ptail(n, *, exclude=None):
     def selector(argument):
         return _selection.Selection(argument).ptail(n, exclude=exclude)
