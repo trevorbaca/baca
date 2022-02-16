@@ -4020,7 +4020,8 @@ class PitchSegment(abjad.PitchSegment):
         command = RegisterToOctaveCommand(anchor=abjad.Down, octave_number=n)
         selection = self._to_selection()
         command([selection])
-        segment = PitchSegment.from_selection(selection)
+        pitches = abjad.iterate.pitches(selection)
+        segment = PitchSegment.from_pitches(pitches)
         return dataclasses.replace(self, items=segment)
 
     def center_to_octave(self, n=4):
@@ -4107,7 +4108,8 @@ class PitchSegment(abjad.PitchSegment):
         command = RegisterToOctaveCommand(anchor=abjad.Center, octave_number=n)
         selection = self._to_selection()
         command([selection])
-        segment = PitchSegment.from_selection(selection)
+        pitches = abjad.iterate.pitches(selection)
+        segment = PitchSegment.from_pitches(pitches)
         return dataclasses.replace(self, items=segment)
 
     def chord(self):
@@ -4235,7 +4237,8 @@ class PitchSegment(abjad.PitchSegment):
         command = RegisterToOctaveCommand(anchor=abjad.Up, octave_number=n)
         selection = self._to_selection()
         command([selection])
-        segment = PitchSegment.from_selection(selection)
+        pitches = abjad.iterate.pitches(selection)
+        segment = PitchSegment.from_pitches(pitches)
         return dataclasses.replace(self, items=segment)
 
     def space_down(self, bass=None, semitones=None, soprano=None):
@@ -5618,7 +5621,8 @@ class PitchTree(_classes.Tree):
             return
         for leaf_group in leaf_groups:
             leaves = leaf_group[1]
-            pitch_class_set = PitchClassSet.from_selection(leaves)
+            pitches = abjad.iterate.pitches(leaves)
+            pitch_class_set = PitchClassSet.from_pitches(pitches)
             if not pitch_class_set:
                 continue
             set_class = abjad.SetClass.from_pitch_class_set(
