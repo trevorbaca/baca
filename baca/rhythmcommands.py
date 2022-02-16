@@ -608,9 +608,9 @@ def make_monads(fractions):
     for fraction in fractions.split():
         leaves = maker([pitch], [fraction])
         components.extend(leaves)
-    for tuplet in abjad.select(components).tuplets():
+    for tuplet in abjad.Selection(components).tuplets():
         tuplet.multiplier = abjad.Multiplier(tuplet.multiplier)
-    rhythm_maker = abjad.select(components)
+    rhythm_maker = abjad.Selection(components)
     return RhythmCommand(
         rhythm_maker=rhythm_maker,
         annotation_spanner_color="#darkcyan",

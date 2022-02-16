@@ -29,7 +29,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -111,7 +111,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -207,7 +207,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -386,7 +386,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -732,7 +732,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -870,7 +870,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -968,7 +968,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -1062,7 +1062,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -1145,7 +1145,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -1226,7 +1226,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -1341,7 +1341,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -1424,7 +1424,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -1535,7 +1535,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -1622,7 +1622,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -1728,7 +1728,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -2120,7 +2120,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -2206,7 +2206,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -2398,7 +2398,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -2482,7 +2482,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -2593,7 +2593,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -2677,7 +2677,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -2791,7 +2791,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -2876,7 +2876,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -2987,7 +2987,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -3069,7 +3069,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -3178,7 +3178,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -3260,7 +3260,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -3360,7 +3360,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -3443,7 +3443,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -3553,7 +3553,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -3691,7 +3691,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -3847,7 +3847,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -3934,7 +3934,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -4144,7 +4144,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -4228,7 +4228,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -4344,7 +4344,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -4419,7 +4419,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]
@@ -4501,7 +4501,7 @@ class Selection(abjad.Selection):
             ... ]
             >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
             >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-            >>> tuplets = [abjad.select(tuplets)]
+            >>> tuplets = [abjad.Selection(tuplets)]
 
             >>> lilypond_file = abjad.illustrators.selection(tuplets)
             >>> staff = lilypond_file["Staff"]

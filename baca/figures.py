@@ -1704,9 +1704,9 @@ class Imbrication:
             selection = self.selector(container)
             selected_logical_ties = abjad.iterate.logical_ties(selection, pitched=True)
             selected_logical_ties = list(selected_logical_ties)
-        selector = abjad.select(original_container)
+        selector = abjad.Selection(original_container)
         original_logical_ties = selector.logical_ties()
-        logical_ties = abjad.select(container).logical_ties()
+        logical_ties = abjad.Selection(container).logical_ties()
         pairs = zip(logical_ties, original_logical_ties)
         for logical_tie, original_logical_tie in pairs:
             if (
@@ -1759,7 +1759,7 @@ class Imbrication:
             current, total = cursor.position - 1, len(cursor)
             raise Exception(f"{cursor!r} used only {current} of {total} pitches.")
         self._call_commands(container)
-        selection = abjad.select(container)
+        selection = abjad.Selection(container)
         if not self.hocket:
             pleaves = _selection.Selection(container).pleaves()
             assert isinstance(pleaves, abjad.Selection)
@@ -2735,20 +2735,20 @@ class FigureAccumulator:
             anchor.remote_voice_name = voice_name_
         if isinstance(collections, str):
             tuplet = abjad.Tuplet((1, 1), collections, hide=True)
-            selections = [abjad.select(tuplet)]
+            selections = [abjad.Selection(tuplet)]
         elif all(isinstance(_, abjad.Component) for _ in collections):
             tuplet = abjad.Tuplet((1, 1), collections, hide=True)
-            selections = [abjad.select(tuplet)]
+            selections = [abjad.Selection(tuplet)]
         elif isinstance(commands[0], FigureMaker):
             maker = commands[0]
             selections = maker(collections)
-            selections = abjad.select(selections).flatten()
+            selections = abjad.Selection(selections).flatten()
             commands_ = list(commands[1:])
         else:
             assert isinstance(commands[0], Bind)
             command = commands[0]
             selections = commands[0](collections)
-            selections = abjad.select(selections).flatten()
+            selections = abjad.Selection(selections).flatten()
             commands_ = list(commands[1:])
         container = abjad.Container(selections)
         imbricated_selections = {}
@@ -2760,7 +2760,7 @@ class FigureAccumulator:
         if figure_name is not None:
             figure_name = str(figure_name)
             self._label_figure_name_(container, figure_name)
-        selection = abjad.select([container])
+        selection = abjad.Selection([container])
         duration = abjad.get.duration(selection)
         if signature is None and maker:
             signature = maker.signature
@@ -2938,7 +2938,7 @@ class FigureAccumulator:
         figure_name_markup = abjad.Markup(string, direction=abjad.Up)
         annotation = f"figure name: {original_figure_name}"
         figure_name_markup._annotation = annotation
-        leaf = abjad.select(container).leaf(0)
+        leaf = abjad.Selection(container).leaf(0)
         abjad.attach(
             figure_name_markup,
             leaf,
@@ -3007,7 +3007,7 @@ class FigureAccumulator:
                 assert isinstance(selection, abjad.Timespan)
                 skip = abjad.Skip(1, multiplier=selection.duration)
                 fused_selection.append(skip)
-        fused_selection = abjad.select(fused_selection)
+        fused_selection = abjad.Selection(fused_selection)
         selection = fused_selection
         assert isinstance(selection, abjad.Selection), repr(selection)
         return selection
@@ -3267,10 +3267,10 @@ class Nest:
                 tuplet = item[0]
                 tuplets.append(tuplet)
         if self.lmr is None:
-            tuplet_selections = [abjad.select(tuplets)]
+            tuplet_selections = [abjad.Selection(tuplets)]
         else:
             tuplet_selections = self.lmr(tuplets)
-            tuplet_selections = [abjad.select(list(_)) for _ in tuplet_selections]
+            tuplet_selections = [abjad.Selection(list(_)) for _ in tuplet_selections]
         tuplets = []
         for i, tuplet_selection in enumerate(tuplet_selections):
             assert isinstance(tuplet_selection, abjad.Selection)
@@ -3301,7 +3301,7 @@ class Nest:
                     raise Exception(f"bad time treatment: {treatment!r}.")
                 nested_tuplet = tuplet
                 tuplets.append(nested_tuplet)
-        selection = abjad.select(tuplets)
+        selection = abjad.Selection(tuplets)
         return selection
 
     def _get_treatments(self):
@@ -5934,7 +5934,7 @@ class FigureMaker:
                 )
                 tuplets.extend(selection_)
         assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
-        selection = abjad.select(tuplets)
+        selection = abjad.Selection(tuplets)
         return selection
 
     def _apply_state(self, state=None):
@@ -6198,7 +6198,7 @@ class FigureMaker:
             affix_skips_instead_of_rests,
             spelling.increase_monotonic,
         )
-        leaf_selection = abjad.select(leaves)
+        leaf_selection = abjad.Selection(leaves)
         if isinstance(treatment, int):
             tuplet = _make_tuplet_with_extra_count(
                 leaf_selection, treatment, talea.denominator
@@ -6303,7 +6303,7 @@ class Bind:
             )
             tuplets.extend(selection)
         assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
-        selection = abjad.select(tuplets)
+        selection = abjad.Selection(tuplets)
         return selection
 
 

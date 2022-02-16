@@ -671,11 +671,11 @@ def _attach_rhythm_annotation_spanner(command, selection):
         leaves.append(leaf)
     container = abjad.get.before_grace_container(leaves[0])
     if container is not None:
-        leaves_ = abjad.select(container).leaves()
+        leaves_ = abjad.Selection(container).leaves()
         leaves[0:0] = leaves_
     container = abjad.get.after_grace_container(leaves[-1])
     if container is not None:
-        leaves_ = abjad.select(container).leaves()
+        leaves_ = abjad.Selection(container).leaves()
         leaves.extend(leaves_)
     string = command.annotation_spanner_text
     if string is None:
@@ -813,7 +813,7 @@ def _cache_leaves(score, measure_count):
         measure_timespan = _get_measure_timespan(score, measure_number)
         measure_timespans.append(measure_timespan)
     cache = {}
-    for leaf in abjad.select(score).leaves():
+    for leaf in abjad.Selection(score).leaves():
         parentage = abjad.get.parentage(leaf)
         context = parentage.get(abjad.Context)
         leaves_by_measure_number = cache.setdefault(context.name, {})
@@ -952,7 +952,7 @@ def _call_rhythm_commands(
         prototype = abjad.MultimeasureRest
     silence_maker = rmakers.multiplied_duration(prototype, tag=tag)
     segment_duration = None
-    for voice in abjad.select(score).components(abjad.Voice):
+    for voice in abjad.Selection(score).components(abjad.Voice):
         assert not len(voice), repr(voice)
         voice_metadata_ = voice_metadata.get(voice.name, {})
         commands_ = _voice_to_rhythm_commands(commands, voice)
@@ -1027,7 +1027,7 @@ def _call_rhythm_commands(
                 phantom=True,
                 suppress_note=suppress_note,
             )
-            selection = abjad.select(container)
+            selection = abjad.Selection(container)
             selections.append(selection)
         voice.extend(selections)
     return command_count, segment_duration
@@ -1143,7 +1143,7 @@ def _clean_up_laissez_vibrer_tie_direction(score):
 
 
 def _clean_up_on_beat_grace_containers(score):
-    for container in abjad.select(score).components(abjad.OnBeatGraceContainer):
+    for container in abjad.Selection(score).components(abjad.OnBeatGraceContainer):
         container._match_anchor_leaf()
         container._set_leaf_durations()
         container._attach_lilypond_one_voice()
@@ -1587,7 +1587,7 @@ def _get_fermata_measure_numbers(first_measure_number, score):
     final_measure_is_fermata = False
     if "Global_Rests" in score:
         context = score["Global_Rests"]
-        rests = abjad.select(context).leaves(abjad.MultimeasureRest)
+        rests = abjad.Selection(context).leaves(abjad.MultimeasureRest)
         final_measure_index = len(rests) - 1
         final_measure_index -= 1
         indicator = _const.FERMATA_MEASURE
@@ -2192,7 +2192,7 @@ def _make_measure_silences(
                 silence = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
         silences.append(silence)
     assert all(isinstance(_, abjad.Component) for _ in silences)
-    selection = abjad.select(silences)
+    selection = abjad.Selection(silences)
     return selection
 
 
@@ -2545,7 +2545,7 @@ def _scope_to_leaf_selection(
     )
     for selection in selections:
         leaves.extend(selection)
-    selection = abjad.select(leaves)
+    selection = abjad.Selection(leaves)
     if not selection:
         message = f"EMPTY SELECTION:\n\n{command}"
         if allow_empty_selections:
@@ -2586,7 +2586,7 @@ def _scope_to_leaf_selections(score, cache, measure_count, scope):
         for measure_number in range(start, stop):
             leaves_ = leaves_by_measure_number.get(measure_number, [])
             leaves.extend(leaves_)
-        leaf_selections.append(abjad.select(leaves))
+        leaf_selections.append(abjad.Selection(leaves))
     return leaf_selections, cache
 
 
@@ -2673,7 +2673,7 @@ def _sort_by_timeline(leaves):
 
     leaves = list(leaves)
     leaves.sort(key=functools.cmp_to_key(compare))
-    return abjad.select(leaves)
+    return abjad.Selection(leaves)
 
 
 def _style_fermata_measures(
@@ -2858,7 +2858,7 @@ def _style_phantom_measures(score):
     start_offset = abjad.get.timespan(skip).start_offset
     enumeration = _const.MULTIMEASURE_REST_CONTAINER
     containers = []
-    for container in abjad.select(score).components(abjad.Container):
+    for container in abjad.Selection(score).components(abjad.Container):
         if not abjad.get.has_indicator(container, enumeration):
             continue
         leaf = abjad.get.leaf(container, 0)
@@ -2873,7 +2873,7 @@ def _style_phantom_measures(score):
         r"\startStaff",
     ]
     for container in containers:
-        for leaf in abjad.select(container).leaves():
+        for leaf in abjad.Selection(container).leaves():
             _append_tag_to_wrappers(
                 leaf,
                 _scoping.site(_frame(), n=5).append(_tags.PHANTOM),
@@ -3302,7 +3302,7 @@ def interpreter(
             score,
         )
         first_metronome_mark = True
-        skip = abjad.select(score["Global_Skips"]).leaf(0)
+        skip = abjad.Selection(score["Global_Skips"]).leaf(0)
         metronome_mark = abjad.get.effective(skip, abjad.MetronomeMark)
         if metronome_mark is None:
             first_metronome_mark = False

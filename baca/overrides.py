@@ -60,7 +60,7 @@ class OverrideCommand(_scoping.Command):
             argument = self.selector(argument)
         if not argument:
             return
-        leaves = abjad.select(argument).leaves()
+        leaves = abjad.Selection(argument).leaves()
         if self.blocklist:
             for leaf in leaves:
                 if isinstance(leaf, self.blocklist):

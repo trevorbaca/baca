@@ -471,7 +471,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     >>> for figure in figures:
     ...     figures_.extend(figure)
     ...
-    >>> figures = abjad.select(figures_)
+    >>> figures = abjad.Selection(figures_)
 
     >>> instruments = {}
     >>> instruments["Violin"] = abjad.Violin()
@@ -582,7 +582,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     >>> for figure in figures:
     ...     figures_.extend(figure)
     ...
-    >>> figures = abjad.select(figures_)
+    >>> figures = abjad.Selection(figures_)
 
     >>> score = baca.docs.make_empty_score(1)
     >>> commands = baca.CommandAccumulator(

@@ -2710,7 +2710,7 @@ def illustrate_harmonic_series(harmonic_series) -> abjad.LilyPondFile:
             abjad.attach(markup, note)
         markup = abjad.Markup(rf"\markup {n}", direction=abjad.Down)
         abjad.attach(markup, note)
-    notes = abjad.select(staff).notes()
+    notes = abjad.Selection(staff).notes()
     if notes[0].written_pitch < abjad.NamedPitch("C4"):
         abjad.attach(abjad.Clef("bass"), staff[0])
         for note in notes[1:]:
@@ -5668,11 +5668,11 @@ class PitchTree(_classes.Tree):
                 leaves_with_skips.append(leaf)
                 negative_level = node._get_level(negative=True)
                 # spanner = PitchTreeSpanner(level=negative_level)
-                # leaves_with_skips = abjad.select(leaves_with_skips)
+                # leaves_with_skips = abjad.Selection(leaves_with_skips)
                 # abjad.attach(spanner, leaves_with_skips)
                 if brackets:
                     abjad.horizontal_bracket(leaves_with_skips)
-                selection = abjad.select(leaves_with_skips)
+                selection = abjad.Selection(leaves_with_skips)
                 leaf_group = (negative_level, selection)
                 leaf_groups.append(leaf_group)
                 leaf_list_stack.pop()
@@ -7184,7 +7184,7 @@ def illustrate_pitch_tree(
     pitch_tree._color_repeats(color_repeats, voice)
     pitch_tree._attach_cell_indices(cell_indices, leaf_groups)
     pitch_tree._label_set_classes(set_classes, leaf_groups)
-    leaf = abjad.select(score).leaf(-1)
+    leaf = abjad.Selection(score).leaf(-1)
     bar_line = abjad.BarLine("|.")
     abjad.attach(bar_line, leaf)
     abjad.override(score).BarLine.transparent = True

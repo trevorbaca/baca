@@ -152,7 +152,7 @@ def leaves(
     trim: typing.Union[bool, int] = None,
 ):
     def selector(argument):
-        selection = abjad.select(argument).leaves(
+        selection = abjad.Selection(argument).leaves(
             prototype=prototype,
             exclude=exclude,
             grace=grace,
