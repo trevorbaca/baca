@@ -2552,7 +2552,7 @@ def _scope_to_leaf_selection(
             print(message)
         else:
             raise Exception(message)
-    assert selection.are_leaves(), repr(selection)
+    assert all(isinstance(_, abjad.Leaf) for _ in selection), repr(selection)
     if isinstance(command.scope, _scoping.TimelineScope):
         selection = _sort_by_timeline(selection)
     return selection, cache
@@ -2654,7 +2654,7 @@ def _sort_dictionary(dictionary):
 
 
 def _sort_by_timeline(leaves):
-    assert leaves.are_leaves(), repr(leaves)
+    assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
 
     def compare(leaf_1, leaf_2):
         start_offset_1 = abjad.get.timespan(leaf_1).start_offset
