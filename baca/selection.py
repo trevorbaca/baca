@@ -8,11 +8,7 @@ class Selection(abjad.Selection):
     Selection.
     """
 
-    ### CLASS VARIABLES ###
-
     __slots__ = ()
-
-    ### PUBLIC METHODS ###
 
     def chead(self, n: int, *, exclude: abjad.Strings = None) -> abjad.Note:
         r"""
@@ -94,7 +90,7 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.cheads(exclude=exclude)[n]
+        return chead(self, n, exclude=exclude)
 
     def cheads(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
         r"""
@@ -188,7 +184,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return super().leaves(abjad.Chord, exclude=exclude, head=True)
+        items = cheads(self, exclude=exclude)
+        return type(self)(items)
 
     def clparts(
         self, counts: typing.Sequence[int], *, exclude: abjad.Strings = None
@@ -296,11 +293,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return (
-            super()
-            .leaves(exclude=exclude)
-            .partition_by_counts(counts=counts, cyclic=True, overhang=True)
-        )
+        items = clparts(self, counts, exclude=exclude)
+        return type(self)(items)
 
     def cmgroups(
         self, counts: typing.List[int] = [1], *, exclude: abjad.Strings = None
@@ -362,14 +356,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        result = self.leaves(exclude=exclude)
-        result = result.group_by_measure()
-        result = result.partition_by_counts(counts, cyclic=True)
-        assert isinstance(result, Selection)
-        items = [Selection(_).flatten() for _ in result]
-        result_ = Selection(items)
-        assert isinstance(result_, Selection), repr(result_)
-        return result_
+        items = cmgroups(self, counts, exclude=exclude)
+        return type(self)(items)
 
     def enchain(self, counts: typing.Sequence[int]) -> abjad.Selection:
         r"""
@@ -489,9 +477,8 @@ class Selection(abjad.Selection):
 
         Returns new selection.
         """
-        return self.partition_by_counts(
-            counts=counts, cyclic=True, enchain=True, overhang=True
-        )
+        items = enchain(self, counts)
+        return type(self)(items)
 
     def grace(self, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
         r"""
@@ -543,7 +530,7 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.graces(exclude=exclude)[n]
+        return grace(self, n, exclude=exclude)
 
     def graces(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
         r"""
@@ -603,7 +590,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.leaves(exclude=exclude, grace=True)
+        items = graces(self, exclude=exclude)
+        return type(self)(items)
 
     def hleaf(self, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
         r"""
@@ -655,7 +643,7 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.hleaves(exclude=exclude)[n]
+        return hleaf(self, n, exclude=exclude)
 
     def hleaves(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
         r"""
@@ -715,7 +703,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.leaves(exclude=exclude, grace=False)
+        items = hleaves(self, exclude=exclude)
+        return type(self)(items)
 
     def lleaf(self, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
         r"""
@@ -797,7 +786,7 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.lleaves(exclude=exclude)[n]
+        return lleaf(self, n, exclude=exclude)
 
     def lleak(self) -> abjad.Selection:
         r"""
@@ -853,7 +842,8 @@ class Selection(abjad.Selection):
 
         Returns new selection.
         """
-        return self.with_previous_leaf()
+        items = lleak(self)
+        return type(self)(items)
 
     def lleaves(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
         r"""
@@ -949,7 +939,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.leaves(exclude=exclude).with_previous_leaf()
+        items = lleaves(self, exclude=exclude)
+        return type(self)(items)
 
     def lparts(
         self, counts: typing.Sequence[int], *, exclude: abjad.Strings = None
@@ -1045,7 +1036,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return super().leaves(exclude=exclude).partition_by_counts(counts=counts)
+        items = lparts(self, counts, exclude=exclude)
+        return type(self)(items)
 
     def lt(self, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
         r"""
@@ -1128,7 +1120,7 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.lts(exclude=exclude)[n]
+        return lt(self, n, exclude=exclude)
 
     def ltleaf(self, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Selection:
         r"""
@@ -1209,7 +1201,7 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.ltleaves(exclude=exclude)[n]
+        return ltleaf(self, n, exclude=exclude)
 
     def ltleaves(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
         r"""
@@ -1324,7 +1316,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return super().leaves(exclude=exclude, trim=abjad.Left)
+        items = ltleaves(self, exclude=exclude)
+        return type(self)(items)
 
     def ltqrun(self, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
         r"""
@@ -1407,7 +1400,7 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.ltqruns(exclude=exclude)[n]
+        return ltqrun(self, n, exclude=exclude)
 
     def ltqruns(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
         r"""
@@ -1510,15 +1503,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        result = self.plts(exclude=exclude)
-        result = result.group_by_pitch()
-        assert isinstance(result, Selection)
-        items = [Selection(_).group_by_contiguity() for _ in result]
-        result = Selection(items)
-        result = result.flatten(depth=1)
-        assert isinstance(result, Selection)
-        result = Selection([Selection(_) for _ in result])
-        return result
+        items = ltqruns(self, exclude=exclude)
+        return type(self)(items)
 
     def ltrun(self, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
         r"""
@@ -1605,7 +1591,7 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.ltruns(exclude=exclude)[n]
+        return ltrun(self, n, exclude=exclude)
 
     def ltruns(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
         r"""
@@ -1705,11 +1691,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        result = self.logical_ties(exclude=exclude, pitched=True)
-        result = result.group_by_contiguity()
-        assert isinstance(result, Selection)
-        result = Selection([Selection(_) for _ in result])
-        return result
+        items = ltruns(self, exclude=exclude)
+        return type(self)(items)
 
     def lts(
         self, *, exclude: abjad.Strings = None, nontrivial: bool = None
@@ -1826,7 +1809,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.logical_ties(exclude=exclude, nontrivial=nontrivial)
+        items = lts(self, exclude=exclude, nontrivial=nontrivial)
+        return type(self)(items)
 
     def mgroups(
         self,
@@ -1886,13 +1870,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        result = self.leaves(exclude=exclude)
-        result = result.group_by_measure()
-        result = result.partition_by_counts(counts)
-        assert isinstance(result, Selection)
-        result_ = Selection(Selection(_).flatten() for _ in result)
-        assert isinstance(result_, Selection), repr(result_)
-        return result_
+        items = mgroups(self, counts, exclude=exclude)
+        return type(self)(items)
 
     def mleaves(self, count: int, *, exclude: abjad.Strings = None) -> "Selection":
         r"""
@@ -2009,15 +1988,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        assert isinstance(count, int), repr(count)
-        result = self.leaves(exclude=exclude).group_by_measure()
-        if 0 < count:
-            result = result[:count].flatten()
-        elif count < 0:
-            result = result[count:].flatten()
-        else:
-            raise Exception(count)
-        return result
+        items = mleaves(self, count, exclude=exclude)
+        return type(self)(items)
 
     def mmrest(
         self, n: int, *, exclude: abjad.Strings = None
@@ -2057,7 +2029,7 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.mmrests(exclude=exclude)[n]
+        return mmrest(self, n, exclude=exclude)
 
     def mmrests(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
         r"""
@@ -2103,7 +2075,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return super().leaves(abjad.MultimeasureRest, exclude=exclude)
+        items = mmrests(self, exclude=exclude)
+        return type(self)(items)
 
     def ntrun(self, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
         r"""
@@ -2189,7 +2162,7 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.ntruns(exclude=exclude)[n]
+        return ntrun(self, n, exclude=exclude)
 
     def ntruns(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
         r"""
@@ -2289,7 +2262,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.runs(exclude=exclude).nontrivial()
+        items = ntruns(self, exclude=exclude)
+        return type(self)(items)
 
     def omgroups(
         self,
@@ -2356,13 +2330,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        result = self.leaves(exclude=exclude)
-        result = result.group_by_measure()
-        result = result.partition_by_counts(counts, overhang=True)
-        assert isinstance(result, Selection)
-        result_ = Selection(Selection(_).flatten() for _ in result)
-        assert isinstance(result_, Selection), repr(result_)
-        return result_
+        items = omgroups(self, counts, exclude=exclude)
+        return type(self)(items)
 
     def ompltgroups(
         self,
@@ -2373,13 +2342,8 @@ class Selection(abjad.Selection):
         """
         Partitions measure-grouped plts (with overhang).
         """
-        result = self.plts(exclude=exclude)
-        result = result.group_by_measure()
-        result = result.partition_by_counts(counts, overhang=True)
-        assert isinstance(result, Selection)
-        result_ = Selection(Selection(_).flatten() for _ in result)
-        assert isinstance(result_, Selection), repr(result_)
-        return result_
+        items = ompltgroups(self, counts, exclude=exclude)
+        return type(self)(items)
 
     def phead(
         self, n: int, *, exclude: abjad.Strings = None
@@ -2463,7 +2427,7 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.pheads(exclude=exclude)[n]
+        return phead(self, n, exclude=exclude)
 
     def pheads(
         self, *, exclude: abjad.Strings = None, grace: bool = None
@@ -2571,10 +2535,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        result = self.plts(exclude=exclude, grace=grace)
-        assert isinstance(result, Selection)
-        result = Selection(Selection(_)[0] for _ in result)
-        return result
+        items = pheads(self, exclude=exclude, grace=grace)
+        return type(self)(items)
 
     def pleaf(
         self, n: int, *, exclude: abjad.Strings = None, grace: bool = None
@@ -2658,7 +2620,7 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.pleaves(exclude=exclude, grace=grace)[n]
+        return pleaf(self, n, exclude=exclude, grace=grace)
 
     def pleaves(
         self, *, exclude: abjad.Strings = None, grace: bool = None
@@ -2772,7 +2734,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return super().leaves(exclude=exclude, grace=grace, pitched=True)
+        items = pleaves(self, exclude=exclude, grace=grace)
+        return type(self)(items)
 
     def plt(
         self, n: int, *, exclude: abjad.Strings = None, grace: bool = None
@@ -2857,7 +2820,7 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.plts(exclude=exclude, grace=grace)[n]
+        return plt(self, n, exclude=exclude, grace=grace)
 
     def plts(
         self, *, exclude: abjad.Strings = None, grace: bool = None
@@ -2968,7 +2931,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.logical_ties(exclude=exclude, grace=grace, pitched=True)
+        items = plts(self, exclude=exclude, grace=grace)
+        return type(self)(items)
 
     def ptail(
         self, n: int, *, exclude: abjad.Strings = None
@@ -3052,7 +3016,7 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.ptails(exclude=exclude)[n]
+        return ptail(self, n, exclude=exclude)
 
     def ptails(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
         r"""
@@ -3158,10 +3122,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        result = self.plts(exclude=exclude)
-        assert isinstance(result, Selection)
-        result = Selection(Selection(_)[-1] for _ in result)
-        return result
+        items = ptails(self, exclude=exclude)
+        return type(self)(items)
 
     def ptlt(self, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
         r"""
@@ -3243,7 +3205,7 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.ptlts(exclude=exclude)[n]
+        return ptlt(self, n, exclude=exclude)
 
     def ptlts(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
         r"""
@@ -3343,7 +3305,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.logical_ties(exclude=exclude, nontrivial=False, pitched=True)
+        items = ptlts(self, exclude=exclude)
+        return type(self)(items)
 
     def qrun(self, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
         r"""
@@ -3426,7 +3389,7 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.qruns(exclude=exclude)[n]
+        return qrun(self, n, exclude=exclude)
 
     def qruns(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
         r"""
@@ -3529,14 +3492,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        result = self.pleaves(exclude=exclude)
-        result = result.group_by_pitch()
-        assert isinstance(result, Selection)
-        result = Selection(Selection(_).group_by_contiguity() for _ in result)
-        result = result.flatten(depth=1)
-        assert isinstance(result, Selection)
-        result = Selection(Selection(_) for _ in result)
-        return result
+        items = qruns(self, exclude=exclude)
+        return type(self)(items)
 
     def rleaf(self, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
         r"""
@@ -3618,7 +3575,7 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.rleaves(exclude=exclude)[n]
+        return rleaf(self, n, exclude=exclude)
 
     def rleak(self, *, grace: bool = None) -> abjad.Selection:
         r"""
@@ -3674,7 +3631,8 @@ class Selection(abjad.Selection):
 
         Returns new selection.
         """
-        return self.with_next_leaf(grace=grace)
+        items = rleak(self, grace=grace)
+        return type(self)(items)
 
     def rleaves(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
         r"""
@@ -3770,7 +3728,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.leaves(exclude=exclude).with_next_leaf()
+        items = rleaves(self, exclude=exclude)
+        return type(self)(items)
 
     def rmleaves(self, count: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
         r"""
@@ -3829,8 +3788,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        assert isinstance(count, int), repr(count)
-        return self.mleaves(count, exclude=exclude).rleak()
+        items = rmleaves(self, count, exclude=exclude)
+        return type(self)(items)
 
     def rrun(self, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
         r"""
@@ -3917,7 +3876,7 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.rruns(exclude=exclude)[n]
+        return rrun(self, n, exclude=exclude)
 
     def rruns(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
         r"""
@@ -4019,10 +3978,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        result = self.runs(exclude=exclude)
-        assert isinstance(result, Selection)
-        result = Selection(Selection(_).rleak() for _ in result)
-        return result
+        items = rruns(self, exclude=exclude)
+        return type(self)(items)
 
     def skip(self, n: int, *, exclude: abjad.Strings = None) -> abjad.Skip:
         r"""
@@ -4071,7 +4028,7 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.skips(exclude=exclude)[n]
+        return skip(self, n, exclude=exclude)
 
     def skips(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
         r"""
@@ -4125,7 +4082,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.components(abjad.Skip, exclude=exclude)
+        items = skips(self, exclude=exclude)
+        return type(self)(items)
 
     def tleaf(
         self, n: int = 0, *, exclude: abjad.Strings = None, grace: bool = None
@@ -4209,7 +4167,7 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.tleaves(exclude=exclude, grace=grace)[n]
+        return tleaf(self, n, exclude=exclude, grace=grace)
 
     def tleaves(
         self, *, exclude: abjad.Strings = None, grace: bool = None
@@ -4327,7 +4285,8 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return super().leaves(exclude=exclude, grace=grace, trim=True)
+        items = tleaves(self, exclude=exclude, grace=grace)
+        return type(self)(items)
 
     def wleaf(self, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
         r"""
@@ -4484,7 +4443,7 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.wleaves(exclude=exclude)[n]
+        return wleaf(self, n, exclude=exclude)
 
     def wleaves(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
         r"""
@@ -4582,4 +4541,352 @@ class Selection(abjad.Selection):
                 }
 
         """
-        return self.leaves(exclude=exclude).with_previous_leaf().with_next_leaf()
+        items = wleaves(self, exclude=exclude)
+        return type(self)(items)
+
+
+def chead(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Note:
+    """
+    Selects chord head ``n`` in ``argument``.
+    """
+    return cheads(argument, exclude=exclude)[n]
+
+
+def cheads(argument, *, exclude: abjad.Strings = None) -> abjad.Selection:
+    """
+    Selects chord heads in ``argument``.
+    """
+    items = []
+    prototype = abjad.Chord
+    for item in abjad.selection.leaves(argument, prototype, exclude=exclude, head=True):
+        assert isinstance(item, prototype)
+        items.append(item)
+    return items
+
+
+def clparts(
+    argument, counts: typing.Sequence[int], *, exclude: abjad.Strings = None
+) -> abjad.Selection:
+    items = abjad.selection.leaves(argument, exclude=exclude)
+    items = abjad.selection.partition_by_counts(
+        items, counts=counts, cyclic=True, overhang=True
+    )
+    return items
+
+
+def cmgroups(
+    argument, counts: typing.List[int] = [1], *, exclude: abjad.Strings = None
+) -> Selection:
+    result = abjad.selection.leaves(argument, exclude=exclude)
+    result = abjad.selection.group_by_measure(result)
+    result = abjad.selection.partition_by_counts(result, counts, cyclic=True)
+    items = [Selection(abjad.selection.flatten(_)) for _ in result]
+    result_ = Selection(items)
+    return result_
+
+
+def enchain(argument, counts: typing.Sequence[int]) -> abjad.Selection:
+    items = abjad.selection.partition_by_counts(
+        argument, counts=counts, cyclic=True, enchain=True, overhang=True
+    )
+    return items
+
+
+def grace(argument, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
+    return graces(argument, exclude=exclude)[n]
+
+
+def graces(argument, *, exclude: abjad.Strings = None) -> abjad.Selection:
+    items = abjad.selection.leaves(argument, exclude=exclude, grace=True)
+    return items
+
+
+def hleaf(argument, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
+    return hleaves(argument, exclude=exclude)[n]
+
+
+def hleaves(argument, *, exclude: abjad.Strings = None) -> abjad.Selection:
+    return abjad.selection.leaves(argument, exclude=exclude, grace=False)
+
+
+def lleaf(argument, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
+    return lleaves(argument, exclude=exclude)[n]
+
+
+def lleak(argument) -> abjad.Selection:
+    return abjad.selection.with_previous_leaf(argument)
+
+
+def lleaves(argument, *, exclude: abjad.Strings = None) -> abjad.Selection:
+    items = abjad.selection.leaves(argument, exclude=exclude)
+    items = abjad.selection.with_previous_leaf(items)
+    return items
+
+
+def lparts(
+    argument, counts: typing.Sequence[int], *, exclude: abjad.Strings = None
+) -> abjad.Selection:
+    items = abjad.selection.leaves(argument, exclude=exclude)
+    items = abjad.selection.partition_by_counts(items, counts=counts)
+    return items
+
+
+def lt(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
+    return lts(argument, exclude=exclude)[n]
+
+
+def ltleaf(argument, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Selection:
+    return ltleaves(argument, exclude=exclude)[n]
+
+
+def ltleaves(argument, *, exclude: abjad.Strings = None) -> abjad.Selection:
+    items = abjad.selection.leaves(argument, exclude=exclude, trim=abjad.Left)
+    return items
+
+
+def ltqrun(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
+    return ltqruns(argument, exclude=exclude)[n]
+
+
+def ltqruns(argument, *, exclude: abjad.Strings = None) -> abjad.Selection:
+    result = plts(argument, exclude=exclude)
+    result = abjad.selection.group_by_pitch(result)
+    items = [Selection(abjad.selection.group_by_contiguity(_)) for _ in result]
+    result = Selection(items)
+    result = abjad.selection.flatten(result, depth=1)
+    result = Selection([Selection(_) for _ in result])
+    return result
+
+
+def ltrun(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
+    return ltruns(argument, exclude=exclude)[n]
+
+
+def ltruns(argument, *, exclude: abjad.Strings = None) -> abjad.Selection:
+    result = abjad.selection.logical_ties(argument, exclude=exclude, pitched=True)
+    result = abjad.selection.group_by_contiguity(result)
+    result = Selection([Selection(_) for _ in result])
+    return result
+
+
+def lts(
+    argument, *, exclude: abjad.Strings = None, nontrivial: bool = None
+) -> abjad.Selection:
+    return abjad.selection.logical_ties(
+        argument, exclude=exclude, nontrivial=nontrivial
+    )
+
+
+def mgroups(
+    argument,
+    counts: typing.Sequence[int] = [1],
+    *,
+    exclude: abjad.Strings = None,
+) -> Selection:
+    result = abjad.selection.leaves(argument, exclude=exclude)
+    result = abjad.selection.group_by_measure(result)
+    result = abjad.selection.partition_by_counts(result, counts)
+    result_ = Selection(Selection(abjad.selection.flatten(_)) for _ in result)
+    return result_
+
+
+def mleaves(argument, count: int, *, exclude: abjad.Strings = None) -> Selection:
+    assert isinstance(count, int), repr(count)
+    result = argument.leaves(exclude=exclude).group_by_measure()
+    result = abjad.selection.leaves(argument, exclude=exclude)
+    result = abjad.selection.group_by_measure(result)
+    if 0 < count:
+        result = abjad.selection.flatten(result[:count])
+    elif count < 0:
+        result = abjad.selection.flatten(result[count:])
+    else:
+        raise Exception(count)
+    return result
+
+
+def mmrest(
+    argument, n: int, *, exclude: abjad.Strings = None
+) -> abjad.MultimeasureRest:
+    items = mmrests(argument, exclude=exclude)
+    return items[n]
+
+
+def mmrests(argument, *, exclude: abjad.Strings = None) -> abjad.Selection:
+    prototype = abjad.MultimeasureRest
+    items = abjad.selection.leaves(argument, prototype, exclude=exclude)
+    return items
+
+
+def ntrun(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
+    return ntruns(argument, exclude=exclude)[n]
+
+
+def ntruns(argument, *, exclude: abjad.Strings = None) -> abjad.Selection:
+    items = abjad.selection.runs(argument, exclude=exclude)
+    items = abjad.selection.nontrivial(items)
+    return items
+
+
+def omgroups(
+    argument,
+    counts: typing.Sequence[int] = [1],
+    *,
+    exclude: abjad.Strings = None,
+) -> Selection:
+    result = abjad.selection.leaves(argument, exclude=exclude)
+    result = abjad.selection.group_by_measure(result)
+    result = abjad.selection.partition_by_counts(result, counts, overhang=True)
+    result = [Selection(abjad.selection.flatten(_)) for _ in result]
+    return result
+
+
+def ompltgroups(
+    argument,
+    counts: typing.Sequence[int] = [1],
+    *,
+    exclude: abjad.Strings = None,
+) -> Selection:
+    result = plts(argument, exclude=exclude)
+    result = abjad.selection.group_by_measure(result)
+    result = abjad.selection.partition_by_counts(argument, counts, overhang=True)
+    result_ = Selection(Selection(abjad.selection.flatten(_)) for _ in result)
+    return result_
+
+
+def phead(
+    argument, n: int, *, exclude: abjad.Strings = None
+) -> typing.Union[abjad.Note, abjad.Chord]:
+    return pheads(argument, exclude=exclude)[n]
+
+
+def pheads(
+    argument, *, exclude: abjad.Strings = None, grace: bool = None
+) -> abjad.Selection:
+    result = plts(argument, exclude=exclude, grace=grace)
+    result = Selection(_[0] for _ in result)
+    return result
+
+
+def pleaf(
+    argument, n: int, *, exclude: abjad.Strings = None, grace: bool = None
+) -> typing.Union[abjad.Note, abjad.Chord]:
+    return pleaves(argument, exclude=exclude, grace=grace)[n]
+
+
+def pleaves(
+    argument, *, exclude: abjad.Strings = None, grace: bool = None
+) -> abjad.Selection:
+    items = abjad.selection.leaves(argument, exclude=exclude, grace=grace, pitched=True)
+    return items
+
+
+def plt(
+    argument, n: int, *, exclude: abjad.Strings = None, grace: bool = None
+) -> abjad.Selection:
+    return plts(argument, exclude=exclude, grace=grace)[n]
+
+
+def plts(
+    argument, *, exclude: abjad.Strings = None, grace: bool = None
+) -> abjad.Selection:
+    return abjad.selection.logical_ties(
+        argument, exclude=exclude, grace=grace, pitched=True
+    )
+
+
+def ptail(
+    argument, n: int, *, exclude: abjad.Strings = None
+) -> typing.Union[abjad.Note, abjad.Chord]:
+    return ptails(argument, exclude=exclude)[n]
+
+
+def ptails(argument, *, exclude: abjad.Strings = None) -> abjad.Selection:
+    result = plts(argument, exclude=exclude)
+    result = [Selection(_)[-1] for _ in result]
+    return result
+
+
+def ptlt(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
+    return ptlts(argument, exclude=exclude)[n]
+
+
+def ptlts(argument, *, exclude: abjad.Strings = None) -> abjad.Selection:
+    return abjad.selection.logical_ties(
+        argument, exclude=exclude, nontrivial=False, pitched=True
+    )
+
+
+def qrun(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
+    return qruns(argument, exclude=exclude)[n]
+
+
+def qruns(argument, *, exclude: abjad.Strings = None) -> abjad.Selection:
+    result = pleaves(argument, exclude=exclude)
+    result = abjad.selection.group_by_pitch(result)
+    result = [Selection(abjad.selection.group_by_contiguity(_)) for _ in result]
+    result = abjad.selection.flatten(result, depth=1)
+    return result
+
+
+def rleaf(argument, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
+    return rleaves(argument, exclude=exclude)[n]
+
+
+def rleak(argument, *, grace: bool = None) -> abjad.Selection:
+    return abjad.selection.with_next_leaf(argument, grace=grace)
+
+
+def rleaves(argument, *, exclude: abjad.Strings = None) -> abjad.Selection:
+    items = abjad.selection.leaves(argument, exclude=exclude)
+    items = abjad.selection.with_next_leaf(items)
+    return items
+
+
+def rmleaves(argument, count: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
+    assert isinstance(count, int), repr(count)
+    items = mleaves(argument, count, exclude=exclude)
+    items = rleak(items)
+    return items
+
+
+def rrun(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
+    return rruns(argument, exclude=exclude)[n]
+
+
+def rruns(argument, *, exclude: abjad.Strings = None) -> abjad.Selection:
+    result = abjad.selection.runs(argument, exclude=exclude)
+    result = [Selection(rleak(_)) for _ in result]
+    return result
+
+
+def skip(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Skip:
+    return skips(argument, exclude=exclude)[n]
+
+
+def skips(argument, *, exclude: abjad.Strings = None) -> abjad.Selection:
+    return abjad.selection.components(argument, abjad.Skip, exclude=exclude)
+
+
+def tleaf(
+    argument, n: int = 0, *, exclude: abjad.Strings = None, grace: bool = None
+) -> abjad.Leaf:
+    return tleaves(argument, exclude=exclude, grace=grace)[n]
+
+
+def tleaves(
+    argument, *, exclude: abjad.Strings = None, grace: bool = None
+) -> abjad.Selection:
+    items = abjad.selection.leaves(argument, exclude=exclude, grace=grace, trim=True)
+    return items
+
+
+def wleaf(argument, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
+    return wleaves(argument, exclude=exclude)[n]
+
+
+def wleaves(argument, *, exclude: abjad.Strings = None) -> abjad.Selection:
+    # return argument.leaves(exclude=exclude).with_previous_leaf().with_next_leaf()
+    items = abjad.selection.leaves(argument, exclude=exclude)
+    items = abjad.selection.with_previous_leaf(items)
+    items = abjad.selection.with_next_leaf(items)
+    return items
