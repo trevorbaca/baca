@@ -312,7 +312,7 @@ class RhythmCommand(_scoping.Command):
                     previous_segment_stop_state=previous_segment_stop_state,
                 )
                 self._state = rcommand.state
-        assert isinstance(selection, abjad.Selection), repr(selection)
+        assert isinstance(selection, (list, abjad.Selection)), repr(selection)
         if self.attach_not_yet_pitched or not isinstance(
             self.rhythm_maker, abjad.Selection
         ):

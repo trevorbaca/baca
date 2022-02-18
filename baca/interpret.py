@@ -958,7 +958,7 @@ def _call_rhythm_commands(
         commands_ = _voice_to_rhythm_commands(commands, voice)
         if not commands_:
             selection = silence_maker(time_signatures)
-            assert isinstance(selection, abjad.Selection), repr(selection)
+            assert isinstance(selection, (list, abjad.Selection)), repr(selection)
             voice.extend(selection)
             if append_phantom_measure:
                 container = _make_multimeasure_rest_container(
@@ -1029,7 +1029,8 @@ def _call_rhythm_commands(
             )
             selection = abjad.Selection(container)
             selections.append(selection)
-        voice.extend(selections)
+        components = list(abjad.Sequence(selections).flatten(depth=-1))
+        voice.extend(components)
     return command_count, segment_duration
 
 
@@ -1736,7 +1737,7 @@ def _intercalate_silences(
             )
             selections.append(selection)
         selection = timespan.annotation
-        assert isinstance(selection, abjad.Selection), repr(selection)
+        assert isinstance(selection, (list, abjad.Selection)), repr(selection)
         selections.append(selection)
         duration = abjad.get.duration(selection)
         previous_stop_offset = start_offset + duration
@@ -1750,7 +1751,7 @@ def _intercalate_silences(
         )
         assert isinstance(selection, abjad.Selection)
         selections.append(selection)
-    assert all(isinstance(_, abjad.Selection) for _ in selections)
+    assert all(isinstance(_, (list, abjad.Selection)) for _ in selections)
     return selections, segment_duration
 
 
