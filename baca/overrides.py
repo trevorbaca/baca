@@ -889,6 +889,10 @@ def dynamic_text_extra_offset(
 
         Overrides dynamic text extra offset on pitched leaf 0:
 
+        >>> def selector(argument):
+        ...     result = abjad.select.tuplet(argument, 1)
+        ...     result = baca.select.phead(result, 0)
+        ...     return result
         >>> stack = baca.stack(
         ...     baca.figure(
         ...         [1, 1, 5, -1],
@@ -899,10 +903,7 @@ def dynamic_text_extra_offset(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.dynamic("p"),
-        ...     baca.dynamic(
-        ...         "f",
-        ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].pleaf(0),
-        ...     ),
+        ...     baca.dynamic("f", selector=selector),
         ...     baca.dynamic_text_extra_offset((-3, 0)),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -3427,7 +3428,7 @@ def slur_down(
 
         >>> def selector(argument):
         ...     selection = abjad.select.tuplets(argument)
-        ...     items = [baca.Selection(_).tleaves() for _ in selection]
+        ...     items = [baca.tleaves(_) for _ in selection]
         ...     selection = abjad.select.nontrivial(items)
         ...     return selection
         ...
@@ -3526,7 +3527,7 @@ def slur_up(
 
         >>> def selector(argument):
         ...     selection = abjad.select.tuplets(argument)
-        ...     items = [baca.Selection(_).tleaves() for _ in selection]
+        ...     items = [baca.tleaves(_) for _ in selection]
         ...     selection = abjad.select.nontrivial(items)
         ...     return selection
         ...
@@ -4138,6 +4139,10 @@ def text_script_color(
 
         Overrides text script color on all leaves:
 
+        >>> def selector(argument):
+        ...     result = abjad.select.tuplet(argument, 1)
+        ...     result = baca.select.phead(result, 0)
+        ...     return result
         >>> stack = baca.stack(
         ...     baca.figure(
         ...         [1, 1, 5, -1],
@@ -4150,7 +4155,7 @@ def text_script_color(
         ...     baca.markup(r'\markup "più mosso"'),
         ...     baca.markup(
         ...         r'\markup "lo stesso tempo"',
-        ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
+        ...         selector=selector,
         ...     ),
         ...     baca.text_script_color("#red"),
         ...     baca.tuplet_bracket_staff_padding(2),
@@ -4269,6 +4274,10 @@ def text_script_down(
 
         Down-overrides text script direction on leaves:
 
+        >>> def selector(argument):
+        ...     result = abjad.select.tuplet(argument, 1)
+        ...     result = baca.select.phead(result, 0)
+        ...     return result
         >>> stack = baca.stack(
         ...     baca.figure(
         ...         [1, 1, 5, -1],
@@ -4281,7 +4290,7 @@ def text_script_down(
         ...     baca.markup(r'\markup "più mosso"'),
         ...     baca.markup(
         ...         r'\markup "lo stesso tempo"',
-        ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
+        ...         selector=selector,
         ...     ),
         ...     baca.text_script_down(),
         ...     baca.tuplet_bracket_staff_padding(2),
@@ -4477,6 +4486,10 @@ def text_script_padding(
 
         Overrides text script padding on leaves:
 
+        >>> def selector(argument):
+        ...     result = abjad.select.tuplet(argument, 1)
+        ...     result = baca.select.phead(result, 0)
+        ...     return result
         >>> stack = baca.stack(
         ...     baca.figure(
         ...         [1, 1, 5, -1],
@@ -4489,7 +4502,7 @@ def text_script_padding(
         ...     baca.markup(r'\markup "più mosso"'),
         ...     baca.markup(
         ...         r'\markup "lo stesso tempo"',
-        ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
+        ...         selector=selector,
         ...     ),
         ...     baca.text_script_padding(4),
         ...     baca.tuplet_bracket_staff_padding(2),
@@ -4655,6 +4668,10 @@ def text_script_staff_padding(
 
         Overrides text script staff padding on leaves:
 
+        >>> def selector(argument):
+        ...     result = abjad.select.tuplet(argument, 1)
+        ...     result = baca.select.phead(result, 0)
+        ...     return result
         >>> stack = baca.stack(
         ...     baca.figure(
         ...         [1, 1, 5, -1],
@@ -4667,7 +4684,7 @@ def text_script_staff_padding(
         ...     baca.markup(r'\markup "più mosso"'),
         ...     baca.markup(
         ...         r'\markup "lo stesso tempo"',
-        ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
+        ...         selector=selector,
         ...     ),
         ...     baca.text_script_staff_padding(n=4),
         ...     baca.tuplet_bracket_staff_padding(2),
@@ -4786,6 +4803,10 @@ def text_script_up(
 
         Up-overrides text script direction on leaves:
 
+        >>> def selector(argument):
+        ...     result = abjad.select.tuplet(argument, 1)
+        ...     result = baca.select.phead(result, 0)
+        ...     return result
         >>> stack = baca.stack(
         ...     baca.figure(
         ...         [1, 1, 5, -1],
@@ -4798,7 +4819,7 @@ def text_script_up(
         ...     baca.markup(r'\markup "più mosso"'),
         ...     baca.markup(
         ...         r'\markup "lo stesso tempo"',
-        ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
+        ...         selector=selector,
         ...     ),
         ...     baca.text_script_up(),
         ...     baca.tuplet_bracket_staff_padding(2),

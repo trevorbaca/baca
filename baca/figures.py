@@ -16,7 +16,7 @@ from . import const as _const
 from . import pitchclasses as _pitchclasses
 from . import rhythmcommands as _rhythmcommands
 from . import scoping as _scoping
-from . import selection as _selection
+from . import select as _select
 from . import selectors as _selectors
 from . import sequence as _sequence
 from . import tags as _tags
@@ -1704,9 +1704,8 @@ class Imbrication:
             selection = self.selector(container)
             selected_logical_ties = abjad.iterate.logical_ties(selection, pitched=True)
             selected_logical_ties = list(selected_logical_ties)
-        selector = abjad.Selection(original_container)
-        original_logical_ties = selector.logical_ties()
-        logical_ties = abjad.Selection(container).logical_ties()
+        original_logical_ties = abjad.select.logical_ties(original_container)
+        logical_ties = abjad.select.logical_ties(container)
         pairs = zip(logical_ties, original_logical_ties)
         for logical_tie, original_logical_tie in pairs:
             if (
@@ -1761,8 +1760,8 @@ class Imbrication:
         self._call_commands(container)
         selection = abjad.Selection(container)
         if not self.hocket:
-            pleaves = _selection.Selection(container).pleaves()
-            assert isinstance(pleaves, abjad.Selection)
+            pleaves = _select.pleaves(container)
+            assert isinstance(pleaves, (list, abjad.Selection))
             for pleaf in pleaves:
                 abjad.attach(_const.ALLOW_OCTAVE, pleaf)
         return {self.voice_name: selection}
@@ -2728,8 +2727,8 @@ class FigureAccumulator:
                 command._voice_name = voice_name_
         command = None
         maker = None
-        selection: typing.Union[list, abjad.Selection]
-        selections: typing.Union[list, abjad.Selection]
+        selection: list | abjad.Selection
+        selections: list | abjad.Selection
         if anchor is not None:
             voice_name_ = self._abbreviation(anchor.remote_voice_name)
             anchor.remote_voice_name = voice_name_
@@ -2742,13 +2741,13 @@ class FigureAccumulator:
         elif isinstance(commands[0], FigureMaker):
             maker = commands[0]
             selections = maker(collections)
-            selections = abjad.Selection(selections).flatten()
+            selections = abjad.select.flatten(selections)
             commands_ = list(commands[1:])
         else:
             assert isinstance(commands[0], Bind)
             command = commands[0]
             selections = commands[0](collections)
-            selections = abjad.Selection(selections).flatten()
+            selections = abjad.select.flatten(selections)
             commands_ = list(commands[1:])
         container = abjad.Container(selections)
         imbricated_selections = {}
@@ -2892,7 +2891,7 @@ class FigureAccumulator:
         if remote_selector is None:
 
             def remote_selector(argument):
-                return _selection.Selection(argument).leaf(0)
+                return abjad.select.leaf(argument, 0)
 
         floating_selections = self._floating_selections[remote_voice_name]
         selections = [_.annotation for _ in floating_selections]
@@ -2938,7 +2937,7 @@ class FigureAccumulator:
         figure_name_markup = abjad.Markup(string, direction=abjad.Up)
         annotation = f"figure name: {original_figure_name}"
         figure_name_markup._annotation = annotation
-        leaf = abjad.Selection(container).leaf(0)
+        leaf = abjad.select.leaf(container, 0)
         abjad.attach(
             figure_name_markup,
             leaf,
@@ -2974,7 +2973,7 @@ class FigureAccumulator:
 
     ### PUBLIC METHODS ###
 
-    def assemble(self, voice_name) -> typing.Optional[abjad.Selection]:
+    def assemble(self, voice_name) -> abjad.Selection | None:
         """
         Assembles complete selection for ``voice_name``.
         """

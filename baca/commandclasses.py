@@ -12,7 +12,7 @@ from . import const as _const
 from . import indicators as _indicators
 from . import parts as _parts
 from . import scoping as _scoping
-from . import selection as _selection
+from . import select as _select
 from . import selectors as _selectors
 from . import sequence as _sequence
 from . import tags as _tags
@@ -427,8 +427,8 @@ class BCPCommand(_scoping.Command):
         if self.helper:
             bcps_ = self.helper(bcps_, argument)
         bcps = abjad.CyclicTuple(bcps_)
-        lts = _selection.Selection(argument).lts()
-        assert isinstance(lts, _selection.Selection)
+        lts = _select.lts(argument)
+        assert isinstance(lts, list)
         add_right_text_to_me = None
         if not self.final_spanner:
             rest_count, nonrest_count = 0, 0
@@ -685,7 +685,8 @@ class ContainerCommand(_scoping.Command):
         else:
             identifier = f"%*% {self.identifier}"
         container = abjad.Container(identifier=identifier)
-        components = _selection.Selection(argument).leaves().top()
+        components = abjad.select.leaves(argument)
+        components = abjad.select.top(components)
         abjad.mutate.wrap(components, container)
 
     def _mutates_score(self):
@@ -717,8 +718,8 @@ class DetachCommand(_scoping.Command):
             return
         assert self.selector is not None
         argument = self.selector(argument)
-        leaves = _selection.Selection(argument).leaves()
-        assert isinstance(leaves, abjad.Selection)
+        leaves = abjad.select.leaves(argument)
+        assert isinstance(leaves, list)
         for leaf in leaves:
             for argument in self.arguments:
                 abjad.detach(argument, leaf)
@@ -752,7 +753,7 @@ class GlissandoCommand(_scoping.Command):
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        leaves = _selection.Selection(argument).leaves()
+        leaves = abjad.select.leaves(argument)
         tweaks_: typing.List[abjad.IndexedTweakManager] = []
         prototype = (abjad.TweakInterface, tuple)
         for tweak in self.tweaks or []:
@@ -896,7 +897,7 @@ class IndicatorCommand(_scoping.Command):
             argument = self.selector(argument)
         if not argument:
             return
-        leaves = _selection.Selection(argument).leaves()
+        leaves = abjad.select.leaves(argument)
         for i, leaf in enumerate(leaves):
             if self.predicate and not self.predicate(leaf):
                 continue
@@ -1005,7 +1006,7 @@ class MetronomeMarkCommand(_scoping.Command):
             argument = self.selector(argument)
         if not argument:
             return
-        leaf = _selection.Selection(argument).leaf(0)
+        leaf = abjad.select.leaf(argument, 0)
         reapplied = _scoping.remove_reapplied_wrappers(leaf, indicator)
         wrapper = abjad.attach(
             indicator,
@@ -1061,7 +1062,8 @@ class PartAssignmentCommand(_scoping.Command):
         else:
             identifier = f"%*% PartAssignment({section!r}, {token!r})"
         container = abjad.Container(identifier=identifier)
-        components = _selection.Selection(argument).leaves().top()
+        components = abjad.select.leaves(argument)
+        components = abjad.select.top(argument)
         abjad.mutate.wrap(components, container)
 
     def _mutates_score(self):

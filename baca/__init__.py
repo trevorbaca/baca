@@ -6,6 +6,7 @@ from . import build
 from . import const
 from . import jobs
 from . import score
+from . import select
 from . import selectors
 from .accumulator import (
     CommandAccumulator,
@@ -37,7 +38,7 @@ from .pitchclasses import *
 from .pitchcommands import *
 from .rhythmcommands import *
 from .scoping import *
-from .selection import *
+from .select import *
 from .sequence import *
 from .spannercommands import *
 from .typings import *

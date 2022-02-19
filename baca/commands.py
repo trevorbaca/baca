@@ -17,7 +17,7 @@ from . import parts as _parts
 from . import path as _path
 from . import pitchcommands as _pitchcommands
 from . import scoping as _scoping
-from . import selection as _selection
+from . import select as _select
 from . import selectors as _selectors
 from . import tags as _tags
 from . import typings
@@ -676,7 +676,7 @@ def dynamic_down(*, selector=_selectors.leaf(0)) -> _commandclasses.IndicatorCom
 
         >>> def forte_selector(argument):
         ...     result = abjad.select.tuplet(argument, 1)
-        ...     result = baca.selection.phead(result, 0)
+        ...     result = baca.select.phead(result, 0)
         ...     return result
         >>> stack = baca.stack(
         ...     baca.figure(
@@ -767,7 +767,7 @@ def dynamic_up(*, selector=_selectors.leaf(0)) -> _commandclasses.IndicatorComma
 
         >>> def forte_selector(argument):
         ...     result = abjad.select.tuplet(argument, 1)
-        ...     result = baca.selection.phead(result, 0)
+        ...     result = baca.select.phead(result, 0)
         ...     return result
         >>> stack = baca.stack(
         ...     baca.figure(
@@ -1004,7 +1004,9 @@ def flat_glissando(
     if rleak is True:
 
         def _selector_rleak(argument):
-            return selector(argument).rleak()
+            result = selector(argument)
+            result = _select.rleak(result)
+            return result
 
         new_selector = _selector_rleak
     else:
@@ -1884,7 +1886,7 @@ def markup(
         raise Exception(message)
 
     def select_phead_0(argument):
-        return _selection.phead(argument, 0)
+        return _select.phead(argument, 0)
 
     selector = selector or select_phead_0
     return _commandclasses.IndicatorCommand(

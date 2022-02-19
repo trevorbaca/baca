@@ -28,9 +28,9 @@ Constellation.
 
     >>> score = abjad.illustrators.make_piano_score(chords)
     >>> time_signature = abjad.TimeSignature((1, 4))
-    >>> first_leaf = abjad.Selection(score).leaf(0)
+    >>> first_leaf = abjad.select.leaf(score, 0)
     >>> abjad.attach(time_signature, first_leaf)
-    >>> last_leaf = abjad.Selection(score).leaf(-1)
+    >>> last_leaf = abjad.select.leaf(score, -1)
     >>> bar_line = abjad.BarLine("|.")
     >>> abjad.attach(bar_line, last_leaf)
     >>> for string in  (
@@ -40,7 +40,7 @@ Constellation.
     ...     literal = abjad.LilyPondLiteral(string, format_slot="after")
     ...     abjad.attach(literal, last_leaf)
 
-    >>> leaves = abjad.Selection(score["Treble_Staff"]).leaves()
+    >>> leaves = abjad.select.leaves(score["Treble_Staff"])
     >>> for i, leaf in enumerate(leaves):
     ...     if 0 < i and i % 12 == 0:
     ...         strut = abjad.Markup(r"\markup A", direction=abjad.Up)

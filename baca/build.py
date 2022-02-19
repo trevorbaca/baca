@@ -267,7 +267,7 @@ def _make_segment_clicktrack(lilypond_file, mtime, segment_directory):
     for skip in global_skips[:-1]:
         time_signature = abjad.get.effective(skip, abjad.TimeSignature)
         time_signatures.append(time_signature)
-    skips = abjad.Selection(global_skips).leaves()[:-1]
+    skips = abjad.select.leaves(global_skips)[:-1]
     metronome_marks = []
     for skip in skips:
         metronome_mark = abjad.get.effective(skip, abjad.MetronomeMark)
@@ -1120,7 +1120,7 @@ def make_layout_ly(
         del context[curtail_measure_count:]
     context.lilypond_type = "PageLayout"
     context.name = "Page_Layout"
-    skips = baca.Selection(context).skips()
+    skips = baca.skips(context)
     for skip in skips:
         abjad.detach(abjad.TimeSignature, skip)
     score = lilypond_file["Score"]

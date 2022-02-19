@@ -5,7 +5,7 @@ import typing
 
 import abjad
 
-from . import selection as _selection
+from . import select as _select
 
 
 def _handle_omit(selection, pair):
@@ -48,7 +48,7 @@ def _handle_pair(selection, pair):
 
 def chead(n, exclude=None):
     def selector(argument):
-        return _selection.Selection(argument).chead(n, exclude=exclude)
+        return _select.chead(argument, n, exclude=exclude)
 
     return selector
 
@@ -56,7 +56,7 @@ def chead(n, exclude=None):
 # TODO: remove *argument, **keywords to allow pair=None interface
 def clparts(*arguments, **keywords):
     def selector(argument):
-        return _selection.Selection(argument).clparts(*arguments, **keywords)
+        return _select.clparts(argument, *arguments, **keywords)
 
     return selector
 
@@ -64,7 +64,7 @@ def clparts(*arguments, **keywords):
 # TODO: remove *argument, **keywords to allow pair=None interface
 def cmgroups(*arguments, **keywords):
     def selector(argument):
-        return _selection.Selection(argument).cmgroups(*arguments, **keywords)
+        return _select.cmgroups(argument, *arguments, **keywords)
 
     return selector
 
@@ -78,14 +78,14 @@ def group():
 
 def hleaf(n, exclude=None):
     def selector(argument):
-        return _selection.Selection(argument).hleaf(n, exclude=exclude)
+        return _select.hleaf(argument, n, exclude=exclude)
 
     return selector
 
 
 def hleaves(pair=None, exclude=None):
     def selector(argument):
-        result = _selection.Selection(argument).hleaves(exclude=exclude)
+        result = _select.hleaves(argument, exclude=exclude)
         result = _handle_pair(result, pair)
         return result
 
@@ -101,11 +101,8 @@ def leaf(n, grace=None):
 
 def leaf_after_each_ptail():
     def selector(argument):
-        selection = _selection.Selection(argument)
-        selection = selection.ptails()
-        return _selection.Selection(
-            _selection.Selection(_).rleak()[-1] for _ in selection
-        )
+        selection = _select.ptails(argument)
+        return _select.Selection(_select.rleak(_)[-1] for _ in selection)
 
     return selector
 
@@ -113,8 +110,8 @@ def leaf_after_each_ptail():
 def leaf_in_each_rleak_run(n):
     def selector(argument):
         selection = abjad.select.runs(argument)
-        return _selection.Selection(
-            _selection.Selection(_).leaves().rleak()[n] for _ in selection
+        return _select.Selection(
+            _select.Selection(_).leaves().rleak()[n] for _ in selection
         )
 
     return selector
@@ -125,7 +122,7 @@ def leaf_in_each_run(n):
 
     def selector(argument):
         selection = abjad.select.runs(argument)
-        return _selection.Selection(abjad.select.leaf(_, n) for _ in selection)
+        return _select.Selection(abjad.select.leaf(_, n) for _ in selection)
 
     return selector
 
@@ -135,7 +132,7 @@ def leaf_in_each_tuplet(n):
 
     def selector(argument):
         selection = abjad.select.tuplets(argument)
-        return _selection.Selection(abjad.select.leaf(_, n) for _ in selection)
+        return _select.Selection(abjad.select.leaf(_, n) for _ in selection)
 
     return selector
 
@@ -181,10 +178,9 @@ def leaves_in_each_lt(start=0, stop=None):
     assert isinstance(stop, (int, type(None))), repr(stop)
 
     def selector(argument):
-        selection = _selection.Selection(argument)
-        selection = selection.lts()
-        return _selection.Selection(
-            _selection.Selection(abjad.select.leaves(_)[start:stop]) for _ in selection
+        selection = _select.lts(argument)
+        return _select.Selection(
+            _select.Selection(abjad.select.leaves(_)[start:stop]) for _ in selection
         )
 
     return selector
@@ -195,10 +191,9 @@ def leaves_in_each_plt(start=0, stop=None):
     assert isinstance(stop, (int, type(None))), repr(stop)
 
     def selector(argument):
-        selection = _selection.Selection(argument)
-        selection = selection.plts()
-        return _selection.Selection(
-            _selection.Selection(abjad.select.leaves(_)[start:stop]) for _ in selection
+        selection = _select.plts(argument)
+        return _select.Selection(
+            _select.Selection(abjad.select.leaves(_)[start:stop]) for _ in selection
         )
 
     return selector
@@ -210,8 +205,8 @@ def leaves_in_each_run(start=0, stop=None):
 
     def selector(argument):
         selection = abjad.select.runs(argument)
-        return _selection.Selection(
-            _selection.Selection(abjad.select.leaves(_)[start:stop]) for _ in selection
+        return _select.Selection(
+            _select.Selection(abjad.select.leaves(_)[start:stop]) for _ in selection
         )
 
     return selector
@@ -223,8 +218,8 @@ def leaves_in_each_tuplet(start=0, stop=None):
 
     def selector(argument):
         selection = abjad.select.tuplets(argument)
-        return _selection.Selection(
-            _selection.Selection(abjad.select.leaves(_)[start:stop]) for _ in selection
+        return _select.Selection(
+            _select.Selection(abjad.select.leaves(_)[start:stop]) for _ in selection
         )
 
     return selector
@@ -246,8 +241,8 @@ def _leaves_in_get_tuplets(pattern, pair, exclude=False):
         else:
             assert isinstance(pattern, list)
             selection = method(selection, pattern)
-        return _selection.Selection(
-            _selection.Selection(abjad.select.leaves(_)[start:stop]) for _ in selection
+        return _select.Selection(
+            _select.Selection(abjad.select.leaves(_)[start:stop]) for _ in selection
         )
 
     return selector
@@ -263,49 +258,51 @@ def leaves_in_exclude_tuplets(pattern, pair):
 
 def lleaf(*arguments, **keywords):
     def selector(argument):
-        return _selection.Selection(argument).lleaf(*arguments, **keywords)
+        return _select.lleaf(argument, *arguments, **keywords)
 
     return selector
 
 
 def lparts(*arguments, **keywords):
     def selector(argument):
-        return _selection.Selection(argument).lparts(*arguments, **keywords)
+        return _select.lparts(argument, *arguments, **keywords)
 
     return selector
 
 
 def lt(n):
     def selector(argument):
-        return _selection.Selection(argument).lt(n)
+        return _select.lt(argument, n)
 
     return selector
 
 
 def ltleaves(*arguments, **keywords):
     def selector(argument):
-        return _selection.Selection(argument).ltleaves(*arguments, **keywords)
+        return _select.ltleaves(argument, *arguments, **keywords)
 
     return selector
 
 
 def ltleaves_rleak():
     def selector(argument):
-        return _selection.Selection(argument).ltleaves().rleak()
+        result = _select.ltleaves(argument)
+        result = _select.rleak(result)
+        return result
 
     return selector
 
 
 def ltqruns(*arguments, **keywords):
     def selector(argument):
-        return _selection.Selection(argument).ltqrun(*arguments, **keywords)
+        return _select.ltqrun(argument, *arguments, **keywords)
 
     return selector
 
 
 def lts(pair=None, *, nontrivial=None, omit=False):
     def selector(argument):
-        result = _selection.Selection(argument).lts(nontrivial=nontrivial)
+        result = _select.lts(argument, nontrivial=nontrivial)
         result = _handle_pair(result, pair)
         result = _handle_omit(result, omit)
         return result
@@ -315,21 +312,21 @@ def lts(pair=None, *, nontrivial=None, omit=False):
 
 def mgroups(*arguments, **keywords):
     def selector(argument):
-        return _selection.Selection(argument).mgroups(*arguments, **keywords)
+        return _select.mgroups(argument, *arguments, **keywords)
 
     return selector
 
 
 def mmrest(*arguments, **keywords):
     def selector(argument):
-        return _selection.Selection(argument).mmrest(*arguments, **keywords)
+        return _select.mmrest(argument, *arguments, **keywords)
 
     return selector
 
 
 def mmrests(exclude=None):
     def selector(argument):
-        return _selection.Selection(argument).mmrests(exclude=exclude)
+        return _select.mmrests(argument, exclude=exclude)
 
     return selector
 
@@ -352,28 +349,28 @@ def notes(pair=None):
 
 def ntruns(*arguments, **keywords):
     def selector(argument):
-        return _selection.Selection(argument).ntruns(*arguments, **keywords)
+        return _select.ntruns(argument, *arguments, **keywords)
 
     return selector
 
 
 def omgroups(*arguments, **keywords):
     def selector(argument):
-        return _selection.Selection(argument).omgroups(*arguments, **keywords)
+        return _select.omgroups(argument, *arguments, **keywords)
 
     return selector
 
 
 def phead(n, exclude=None):
     def selector(argument):
-        return _selection.Selection(argument).phead(n, exclude=exclude)
+        return _select.phead(argument, n, exclude=exclude)
 
     return selector
 
 
 def pheads(pair=None, exclude=None, grace=None):
     def selector(argument):
-        result = _selection.Selection(argument).pheads(exclude=exclude, grace=grace)
+        result = _select.pheads(argument, exclude=exclude, grace=grace)
         result = _handle_pair(result, pair)
         return result
 
@@ -382,7 +379,7 @@ def pheads(pair=None, exclude=None, grace=None):
 
 def pleaf(n, exclude=None, grace=None):
     def selector(argument):
-        return _selection.Selection(argument).pleaf(n, exclude=exclude, grace=grace)
+        return _select.pleaf(argument, n, exclude=exclude, grace=grace)
 
     return selector
 
@@ -396,14 +393,14 @@ def pleaf_in_each_tuplet(n, pair=None):
 
     def selector(argument):
         selection = abjad.select.tuplets(argument)[start:stop]
-        return _selection.Selection(_selection.Selection(_).pleaf(n) for _ in selection)
+        return _select.Selection(_select.pleaf(_, n) for _ in selection)
 
     return selector
 
 
 def pleaves(pair=None, exclude=None, grace=None, lleak=False, rleak=False):
     def selector(argument):
-        result = _selection.Selection(argument).pleaves(exclude=exclude, grace=grace)
+        result = _select.pleaves(argument, exclude=exclude, grace=grace)
         result = _handle_pair(result, pair)
         if lleak is True:
             result = abjad.select.with_previous_leaf(result)
@@ -416,14 +413,14 @@ def pleaves(pair=None, exclude=None, grace=None, lleak=False, rleak=False):
 
 def plt(n):
     def selector(argument):
-        return _selection.Selection(argument).plt(n)
+        return _select.plt(argument, n)
 
     return selector
 
 
 def plts(pair=None, *, exclude=None, grace=None, lleak=None, omit=None, rleak=None):
     def selector(argument):
-        result = _selection.Selection(argument).plts(exclude=exclude, grace=grace)
+        result = _select.plts(argument, exclude=exclude, grace=grace)
         result = _handle_pair(result, pair)
         result = _handle_omit(result, omit)
         if lleak is True:
@@ -437,7 +434,7 @@ def plts(pair=None, *, exclude=None, grace=None, lleak=None, omit=None, rleak=No
 
 def ptail(n, *, exclude=None):
     def selector(argument):
-        return _selection.Selection(argument).ptail(n, exclude=exclude)
+        return _select.ptail(argument, n, exclude=exclude)
 
     return selector
 
@@ -451,14 +448,14 @@ def ptail_in_each_tuplet(n, pair=None):
 
     def selector(argument):
         selection = abjad.select.tuplets(argument)[start:stop]
-        return _selection.Selection(_selection.Selection(_).ptail(n) for _ in selection)
+        return _select.Selection(_select.ptail(_, n) for _ in selection)
 
     return selector
 
 
 def ptails(pair=None, exclude=None):
     def selector(argument):
-        result = _selection.Selection(argument).ptails(exclude=exclude)
+        result = _select.ptails(argument, exclude=exclude)
         result = _handle_pair(result, pair)
         return result
 
@@ -467,7 +464,7 @@ def ptails(pair=None, exclude=None):
 
 def qruns(*arguments, **keywords):
     def selector(argument):
-        return _selection.Selection(argument).qruns(*arguments, **keywords)
+        return _select.qruns(argument, *arguments, **keywords)
 
     return selector
 
@@ -492,7 +489,7 @@ def rleaf(n=0, *, exclude: abjad.Strings = None):
     assert isinstance(n, int), repr(n)
 
     def selector(argument):
-        selection = _selection.Selection(argument).rleaf(n=n, exclude=exclude)
+        selection = _select.rleaf(argument, n=n, exclude=exclude)
         return selection
 
     return selector
@@ -503,8 +500,8 @@ def rleak_runs(start=0, stop=None):
         selection = abjad.select.runs(argument)
         if start != 0 or stop is not None:
             selection = selection[start:stop]
-        return _selection.Selection(
-            _selection.Selection(_).leaves().rleak() for _ in selection
+        return _select.Selection(
+            _select.Selection(_).leaves().rleak() for _ in selection
         )
 
     return selector
@@ -512,7 +509,7 @@ def rleak_runs(start=0, stop=None):
 
 def rleaves(pair=None):
     def selector(argument):
-        result = _selection.Selection(argument).rleaves()
+        result = _select.rleaves(argument)
         result = _handle_pair(result, pair)
         return result
 
@@ -521,7 +518,7 @@ def rleaves(pair=None):
 
 def rmleaves(count, exclude=None):
     def selector(argument):
-        return _selection.Selection(argument).rmleaves(count, exclude=exclude)
+        return _select.rmleaves(argument, count, exclude=exclude)
 
     return selector
 
@@ -546,14 +543,14 @@ def runs(pair=None, exclude=None, rleak=False):
 
 def skip(n):
     def selector(argument):
-        return _selection.Selection(argument).skip(n)
+        return _select.skip(argument, n)
 
     return selector
 
 
 def tleaves(pair=None, exclude=None, grace=None, rleak=False):
     def selector(argument):
-        result = _selection.Selection(argument).tleaves(exclude=exclude, grace=grace)
+        result = _select.tleaves(argument, exclude=exclude, grace=grace)
         result = _handle_pair(result, pair)
         if rleak is True:
             result = abjad.select.with_next_leaf(result)
