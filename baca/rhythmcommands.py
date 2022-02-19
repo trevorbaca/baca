@@ -258,6 +258,7 @@ class RhythmCommand(_scoping.Command):
         if rhythm_maker is None:
             return
         prototype = (
+            list,
             abjad.Selection,
             rmakers.RhythmMaker,
             rmakers.Assignment,
@@ -284,7 +285,7 @@ class RhythmCommand(_scoping.Command):
         Calls ``RhythmCommand`` on ``time_signatures``.
         """
         rhythm_maker = self.rhythm_maker
-        if isinstance(rhythm_maker, abjad.Selection):
+        if isinstance(rhythm_maker, (list, abjad.Selection)):
             selection = rhythm_maker
             total_duration = sum([_.duration for _ in time_signatures])
             selection_duration = abjad.get.duration(selection)
@@ -314,7 +315,7 @@ class RhythmCommand(_scoping.Command):
                 self._state = rcommand.state
         assert isinstance(selection, (list, abjad.Selection)), repr(selection)
         if self.attach_not_yet_pitched or not isinstance(
-            self.rhythm_maker, abjad.Selection
+            self.rhythm_maker, (list, abjad.Selection)
         ):
             container = abjad.Container(selection, name="Dummy")
             rest_prototype = (abjad.MultimeasureRest, abjad.Rest, abjad.Skip)
@@ -608,11 +609,10 @@ def make_monads(fractions):
     for fraction in fractions.split():
         leaves = maker([pitch], [fraction])
         components.extend(leaves)
-    for tuplet in abjad.Selection(components).tuplets():
+    for tuplet in abjad.select.tuplets(components):
         tuplet.multiplier = abjad.Multiplier(tuplet.multiplier)
-    rhythm_maker = abjad.Selection(components)
     return RhythmCommand(
-        rhythm_maker=rhythm_maker,
+        rhythm_maker=components,
         annotation_spanner_color="#darkcyan",
         attach_not_yet_pitched=True,
         frame=_frame(),
@@ -882,7 +882,7 @@ def music(
         string = f"{{ {argument} }}"
         container = abjad.parse(string)
         selection = abjad.mutate.eject_contents(container)
-    elif isinstance(argument, abjad.Selection):
+    elif isinstance(argument, (list, abjad.Selection)):
         selection = argument
     else:
         message = "baca.music() accepts string or selection,"
@@ -935,7 +935,7 @@ def skeleton(
         string = f"{{ {argument} }}"
         container = abjad.parse(string)
         selection = abjad.mutate.eject_contents(container)
-    elif isinstance(argument, abjad.Selection):
+    elif isinstance(argument, (list, abjad.Selection)):
         selection = argument
     else:
         message = "baca.skeleton() accepts string or selection,"

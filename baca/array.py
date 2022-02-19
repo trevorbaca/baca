@@ -31,7 +31,6 @@ def _make_multiplied_quarter_notes(durations):
         multiplier = duration / written_duration
         note = abjad.Note(0, written_duration, multiplier=multiplier)
         notes.append(note)
-    notes = abjad.Selection(notes)
     return notes
 
 

@@ -419,6 +419,10 @@ def color(
 
         Colors leaves in tuplet 1:
 
+        >>> def color_selector(argument):
+        ...     result = abjad.select.tuplet(argument, 1)
+        ...     result = abjad.select.leaves(result)
+        ...     return result
         >>> stack = baca.stack(
         ...     baca.figure(
         ...         [1, 1, 5, -1],
@@ -428,7 +432,7 @@ def color(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.color(lambda _: baca.Selection(_).tuplets()[1:2].leaves()),
+        ...     baca.color(color_selector),
         ...     rmakers.unbeam(),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -670,6 +674,10 @@ def dynamic_down(*, selector=_selectors.leaf(0)) -> _commandclasses.IndicatorCom
 
         Attaches dynamic-down command to leaf 0:
 
+        >>> def forte_selector(argument):
+        ...     result = abjad.select.tuplet(argument, 1)
+        ...     result = baca.selection.phead(result, 0)
+        ...     return result
         >>> stack = baca.stack(
         ...     baca.figure(
         ...         [1, 1, 5, -1],
@@ -680,10 +688,7 @@ def dynamic_down(*, selector=_selectors.leaf(0)) -> _commandclasses.IndicatorCom
         ...     ),
         ...     rmakers.beam(),
         ...     baca.dynamic("p"),
-        ...     baca.dynamic(
-        ...         "f",
-        ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
-        ...     ),
+        ...     baca.dynamic("f", selector=forte_selector),
         ...     baca.dynamic_down(),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -760,6 +765,10 @@ def dynamic_up(*, selector=_selectors.leaf(0)) -> _commandclasses.IndicatorComma
 
         Attaches dynamic-up command to leaf 0:
 
+        >>> def forte_selector(argument):
+        ...     result = abjad.select.tuplet(argument, 1)
+        ...     result = baca.selection.phead(result, 0)
+        ...     return result
         >>> stack = baca.stack(
         ...     baca.figure(
         ...         [1, 1, 5, -1],
@@ -770,10 +779,7 @@ def dynamic_up(*, selector=_selectors.leaf(0)) -> _commandclasses.IndicatorComma
         ...     ),
         ...     rmakers.beam(),
         ...     baca.dynamic("p"),
-        ...     baca.dynamic(
-        ...         "f",
-        ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
-        ...     ),
+        ...     baca.dynamic("f", selector=forte_selector),
         ...     baca.dynamic_up(),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -1019,7 +1025,7 @@ def flat_glissando(
     commands.append(command)
 
     def _leaves_of_selector(argument):
-        return new_selector(argument).leaves()
+        return abjad.select.leaves(new_selector(argument))
 
     untie_command = untie(_leaves_of_selector)
     commands.append(untie_command)
@@ -1878,7 +1884,7 @@ def markup(
         raise Exception(message)
 
     def select_phead_0(argument):
-        return _selection.Selection(argument).phead(0)
+        return _selection.phead(argument, 0)
 
     selector = selector or select_phead_0
     return _commandclasses.IndicatorCommand(

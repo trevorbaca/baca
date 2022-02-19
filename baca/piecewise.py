@@ -11,7 +11,6 @@ from . import classes as _classes
 from . import commandclasses as _commandclasses
 from . import const as _const
 from . import scoping as _scoping
-from . import selection as _selection
 from . import selectors as _selectors
 from . import sequence as _sequence
 from . import tags as _tags
@@ -164,8 +163,8 @@ class PiecewiseCommand(_scoping.Command):
         previous_had_bookend = None
         total_pieces = len(pieces)
         for i, piece in enumerate(pieces):
-            start_leaf = _selection.Selection(piece).leaf(0)
-            stop_leaf = _selection.Selection(piece).leaf(-1)
+            start_leaf = abjad.select.leaf(piece, 0)
+            stop_leaf = abjad.select.leaf(piece, -1)
             is_first_piece = i == 0
             is_penultimate_piece = i == piece_count - 2
             is_final_piece = i == piece_count - 1

@@ -591,12 +591,9 @@ def repeat_subruns_to_length(notes, pairs, history=False):
         instruction = (pair[0] + pair[1], new_notes, reps)
         instructions.append(instruction)
     for index, new_notes, reps in reversed(sorted(instructions)):
-        new_notes = abjad.Selection(new_notes)
-        # new_notes = abjad.mutate.copy(new_notes, n=reps)
         total = []
         for _ in range(reps):
             abjad.mutate.copy(new_notes)
             total.extend(new_notes)
-        total = abjad.Selection(total)
         notes[index:index] = total
     return notes

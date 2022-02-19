@@ -60,7 +60,7 @@ class OverrideCommand(_scoping.Command):
             argument = self.selector(argument)
         if not argument:
             return
-        leaves = abjad.Selection(argument).leaves()
+        leaves = abjad.select.leaves(argument)
         if self.blocklist:
             for leaf in leaves:
                 if isinstance(leaf, self.blocklist):
@@ -288,7 +288,7 @@ def bar_line_transparent(
         ...         rmakers.extract_trivial(),
         ...     ),
         ...     baca.bar_line_transparent(
-        ...         selector=lambda _: baca.Selection(_).group_by_measure()[1]
+        ...         selector=lambda _: abjad.select.group_by_measure(_)[1]
         ...     ),
         ... )
 
@@ -3426,9 +3426,9 @@ def slur_down(
         Overrides slur direction on leaves:
 
         >>> def selector(argument):
-        ...     selection = baca.Selection(argument).tuplets()
+        ...     selection = abjad.select.tuplets(argument)
         ...     items = [baca.Selection(_).tleaves() for _ in selection]
-        ...     selection = baca.Selection(items).nontrivial()
+        ...     selection = abjad.select.nontrivial(items)
         ...     return selection
         ...
         >>> stack = baca.stack(
@@ -3525,9 +3525,9 @@ def slur_up(
         Up-overrides slur direction on leaves:
 
         >>> def selector(argument):
-        ...     selection = baca.Selection(argument).tuplets()
+        ...     selection = abjad.select.tuplets(argument)
         ...     items = [baca.Selection(_).tleaves() for _ in selection]
-        ...     selection = baca.Selection(items).nontrivial()
+        ...     selection = abjad.select.nontrivial(items)
         ...     return selection
         ...
         >>> stack = baca.stack(
