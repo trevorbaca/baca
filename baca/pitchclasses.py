@@ -1072,7 +1072,9 @@ class CollectionList(collections_module.abc.Sequence):
             ...     item_class=abjad.NumberedPitchClass,
             ... )
 
-            >>> for collection in collections.accumulate([lambda _: _.transpose(n=3)]):
+            >>> for collection in baca.sequence.accumulate(
+            ...     collections, [lambda _: _.transpose(n=3)]
+            ... ):
             ...     collection
             ...
             PitchClassSegment(items=[0, 2, 6, 5], item_class=NumberedPitchClass)
@@ -1094,7 +1096,7 @@ class CollectionList(collections_module.abc.Sequence):
             ... )
 
             >>> operands = [lambda _: _.transpose(n=3), lambda _: _.alpha()]
-            >>> for collection in collections.accumulate(operands):
+            >>> for collection in baca.sequence.accumulate(collections, operands):
             ...     collection
             ...
             PitchClassSegment(items=[0, 2, 6, 5], item_class=NumberedPitchClass)
@@ -1125,7 +1127,7 @@ class CollectionList(collections_module.abc.Sequence):
         """
         sequence = _sequence.Sequence(items=self)
         collections: typing.List[CollectionTyping] = []
-        for sequence_ in sequence.accumulate(operands=operands):
+        for sequence_ in _sequence.accumulate(sequence, operands=operands):
             collections.extend(sequence_)
         return dataclasses.replace(self, collections=collections)
 
@@ -1670,7 +1672,7 @@ class CollectionList(collections_module.abc.Sequence):
 
         """
         collections = _sequence.Sequence(items=self)
-        collections = collections.helianthate(n=n, m=m)
+        collections = _sequence.helianthate(collections, n=n, m=m)
         return dataclasses.replace(self, collections=collections)
 
     def join(self) -> "CollectionList":
@@ -1718,9 +1720,6 @@ class CollectionList(collections_module.abc.Sequence):
             ...
             CollectionList([<5, 12, 14, 18, 17>])
             CollectionList([<16, 17, 19>, <16, 17, 19>])
-
-            >>> isinstance(sequence, baca.Sequence)
-            True
 
         ..  container:: example
 
@@ -7523,7 +7522,7 @@ class ZaggedPitchClassMaker:
         Returns pitch-class tree.
         """
         pc_cells = _sequence.Sequence(self.pc_cells)
-        pc_cells = pc_cells.helianthate(-1, 1)
+        pc_cells = _sequence.helianthate(pc_cells, -1, 1)
         prototype = (tuple, abjad.Ratio)
         if self.division_ratios is None:
             division_ratios = [[1]]
@@ -7531,7 +7530,7 @@ class ZaggedPitchClassMaker:
             division_ratios = self.division_ratios
         elif all(isinstance(_, list) for _ in self.division_ratios):
             division_ratios = _sequence.Sequence(self.division_ratios)
-            division_ratios = division_ratios.helianthate(-1, 1)
+            division_ratios = _sequence.helianthate(division_ratios, -1, 1)
             division_ratios = division_ratios.flatten(depth=1)
         division_ratios = [abjad.Ratio(_) for _ in division_ratios]
         division_ratios = abjad.CyclicTuple(division_ratios)
