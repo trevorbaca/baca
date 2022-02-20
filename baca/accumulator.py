@@ -4,7 +4,6 @@ import dataclasses
 import abjad
 
 from . import scoping as _scoping
-from . import sequence as _sequence
 
 
 def _initialize_time_signatures(time_signatures):
@@ -198,7 +197,7 @@ class CommandAccumulator:
         Calls command accumulator on ``scopes`` and ``commands``.
         """
         classes = (list, _scoping.Suite)
-        commands_ = _sequence.Sequence(commands).flatten(classes=classes, depth=-1)
+        commands_ = abjad.Sequence(commands).flatten(classes=classes, depth=-1)
         commands = tuple(commands_)
         abbreviations = self.voice_abbreviations
         assert isinstance(abbreviations, dict), repr(abbreviations)
@@ -230,7 +229,7 @@ class CommandAccumulator:
                 if not command._matches_scope_index(scope_count, i):
                     continue
                 if isinstance(command, _scoping.Command):
-                    commands_ = _sequence.Sequence([command])
+                    commands_ = abjad.Sequence([command])
                 else:
                     commands_ = command
                 for command_ in commands_:

@@ -527,7 +527,7 @@ def make_fused_tuplet_monads(
             rmakers.trivialize(),
             rmakers.extract_trivial(),
             rmakers.force_repeat_tie(),
-            preprocessor=lambda _: _sequence.Sequence([_sequence.Sequence(_).sum()]),
+            preprocessor=lambda _: abjad.Sequence([abjad.Sequence(_).sum()]),
             tag=_scoping.site(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
@@ -752,9 +752,8 @@ def make_repeated_duration_notes(
         durations = [abjad.Duration(durations)]
 
     def preprocessor(divisions):
-        divisions = _sequence.Sequence(divisions)
-        divisions = divisions.fuse()
-        divisions = divisions.split_divisions(durations, cyclic=True)
+        divisions = _sequence.fuse(divisions)
+        divisions = _sequence.split_divisions(divisions, durations, cyclic=True)
         return divisions
 
     rewrite_specifiers = []
@@ -850,9 +849,8 @@ def make_tied_repeated_durations(durations, *, measures=None):
     specifiers.append(tie_specifier)
 
     def preprocessor(divisions):
-        divisions = _sequence.Sequence(divisions)
-        divisions = divisions.fuse()
-        divisions = divisions.split_divisions(durations, cyclic=True)
+        divisions = _sequence.fuse(divisions)
+        divisions = _sequence.split_divisions(divisions, durations, cyclic=True)
         return divisions
 
     return RhythmCommand(

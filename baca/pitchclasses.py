@@ -1125,7 +1125,7 @@ class CollectionList(collections_module.abc.Sequence):
             PitchClassSegment(items=[5, 9, 6], item_class=NumberedPitchClass)
 
         """
-        sequence = _sequence.Sequence(items=self)
+        sequence = abjad.Sequence(items=self)
         collections: typing.List[CollectionTyping] = []
         for sequence_ in _sequence.accumulate(sequence, operands=operands):
             collections.extend(sequence_)
@@ -1671,7 +1671,7 @@ class CollectionList(collections_module.abc.Sequence):
             PitchSegment(items=[5, 4], item_class=NumberedPitch)
 
         """
-        collections = _sequence.Sequence(items=self)
+        collections = abjad.Sequence(items=self)
         collections = _sequence.helianthate(collections, n=n, m=m)
         return dataclasses.replace(self, collections=collections)
 
@@ -1700,7 +1700,7 @@ class CollectionList(collections_module.abc.Sequence):
 
     def partition(
         self, argument, cyclic=False, join=False, overhang=False
-    ) -> typing.Union["CollectionList", "PitchSegment", _sequence.Sequence]:
+    ) -> typing.Union["CollectionList", "PitchSegment", list]:
         """
         Partitions collections according to ``argument``.
 
@@ -1762,14 +1762,14 @@ class CollectionList(collections_module.abc.Sequence):
         """
         if isinstance(argument, abjad.Ratio):
             raise NotImplementedError("implement ratio-partition at some point.")
-        sequence = _sequence.Sequence(self)
+        sequence = abjad.Sequence(self)
         parts = sequence.partition_by_counts(argument, cyclic=cyclic, overhang=overhang)
         collection_lists = [dataclasses.replace(self, collections=_) for _ in parts]
         if join:
             collections = [_.join()[0] for _ in collection_lists]
             result = dataclasses.replace(self, collections=collections)
         else:
-            result = _sequence.Sequence(collection_lists)
+            result = abjad.Sequence(collection_lists)
         return result
 
     def read(self, counts=None, check=None) -> "CollectionList":
@@ -1849,7 +1849,7 @@ class CollectionList(collections_module.abc.Sequence):
             CollectionList([<2, 3>, <4>])
 
         """
-        sequence = _sequence.Sequence(items=self)
+        sequence = abjad.Sequence(items=self)
         collections = sequence.remove(indices=indices, period=period)
         return dataclasses.replace(self, collections=collections)
 
@@ -2104,7 +2104,7 @@ class CollectionList(collections_module.abc.Sequence):
             CollectionList([<0, 1>, <4>, <7>])
 
         """
-        sequence = _sequence.Sequence(items=self)
+        sequence = abjad.Sequence(items=self)
         collections = sequence.retain(indices=indices, period=period)
         return dataclasses.replace(self, collections=collections)
 
@@ -3596,7 +3596,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
         Returns sequence.
         """
-        return _sequence.Sequence(self)
+        return abjad.Sequence(self)
 
     def space_down(self, bass=None, semitones=None, soprano=None):
         r"""
@@ -7521,7 +7521,7 @@ class ZaggedPitchClassMaker:
 
         Returns pitch-class tree.
         """
-        pc_cells = _sequence.Sequence(self.pc_cells)
+        pc_cells = abjad.Sequence(self.pc_cells)
         pc_cells = _sequence.helianthate(pc_cells, -1, 1)
         prototype = (tuple, abjad.Ratio)
         if self.division_ratios is None:
@@ -7529,7 +7529,7 @@ class ZaggedPitchClassMaker:
         elif all(isinstance(_, prototype) for _ in self.division_ratios):
             division_ratios = self.division_ratios
         elif all(isinstance(_, list) for _ in self.division_ratios):
-            division_ratios = _sequence.Sequence(self.division_ratios)
+            division_ratios = abjad.Sequence(self.division_ratios)
             division_ratios = _sequence.helianthate(division_ratios, -1, 1)
             division_ratios = division_ratios.flatten(depth=1)
         division_ratios = [abjad.Ratio(_) for _ in division_ratios]
@@ -7537,17 +7537,17 @@ class ZaggedPitchClassMaker:
         pc_cells_copy = pc_cells[:]
         pc_cells = []
         for i, pc_segment in enumerate(pc_cells_copy):
-            parts = _sequence.Sequence(pc_segment).partition_by_ratio_of_lengths(
+            parts = abjad.Sequence(pc_segment).partition_by_ratio_of_lengths(
                 division_ratios[i]
             )
             pc_cells.extend(parts)
         grouping_counts = self.grouping_counts or [1]
-        pc_cells = _sequence.Sequence(pc_cells).partition_by_counts(
+        pc_cells = abjad.Sequence(pc_cells).partition_by_counts(
             grouping_counts, cyclic=True, overhang=True
         )
         # this block was uncommented during krummzeit
         # pc_cells = [abjad.join_subsequences(x) for x in pc_cells]
-        # pc_cells = _sequence.Sequence(pc_cells).partition_by_counts(
+        # pc_cells = abjad.Sequence(pc_cells).partition_by_counts(
         #    grouping_counts,
         #    cyclic=True,
         #    overhang=True,

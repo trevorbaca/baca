@@ -14,7 +14,6 @@ from . import parts as _parts
 from . import scoping as _scoping
 from . import select as _select
 from . import selectors as _selectors
-from . import sequence as _sequence
 from . import tags as _tags
 
 
@@ -423,7 +422,7 @@ class BCPCommand(_scoping.Command):
             return
         if self.selector:
             argument = self.selector(argument)
-        bcps_ = _sequence.Sequence(self.bcps)
+        bcps_ = abjad.Sequence(self.bcps)
         if self.helper:
             bcps_ = self.helper(bcps_, argument)
         bcps = abjad.CyclicTuple(bcps_)

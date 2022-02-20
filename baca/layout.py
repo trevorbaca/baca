@@ -32,7 +32,6 @@ from . import indicators as _indicators
 from . import scoping as _scoping
 from . import select as _select
 from . import selectors as _selectors
-from . import sequence as _sequence
 from . import tags as _tags
 
 magic_lilypond_eol_adjustment = abjad.Multiplier(35, 24)
@@ -216,7 +215,7 @@ def breaks(*page_specifiers):
             command = _commandclasses.IndicatorCommand(
                 indicators=[literal], selector=selector
             )
-            alignment_distances = _sequence.Sequence(alignment_distances)
+            alignment_distances = abjad.Sequence(alignment_distances)
             alignment_distances = alignment_distances.flatten(depth=-1)
             lbsd = LBSD(alignment_distances=alignment_distances, y_offset=y_offset)
             lbsd_command = _commandclasses.IndicatorCommand(

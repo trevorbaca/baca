@@ -18,7 +18,6 @@ from . import rhythmcommands as _rhythmcommands
 from . import scoping as _scoping
 from . import select as _select
 from . import selectors as _selectors
-from . import sequence as _sequence
 from . import tags as _tags
 
 
@@ -1690,9 +1689,9 @@ class Imbrication:
         container = copy.deepcopy(container)
         abjad.override(container).TupletBracket.stencil = False
         abjad.override(container).TupletNumber.stencil = False
-        segment = _sequence.Sequence(self.segment).flatten(depth=-1)
+        segment = abjad.Sequence(self.segment).flatten(depth=-1)
         if self.by_pitch_class:
-            segment = _sequence.Sequence([abjad.NumberedPitchClass(_) for _ in segment])
+            segment = abjad.Sequence([abjad.NumberedPitchClass(_) for _ in segment])
         cursor = _classes.Cursor(
             singletons=True, source=segment, suppress_exception=True
         )

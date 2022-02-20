@@ -12,7 +12,6 @@ from . import commandclasses as _commandclasses
 from . import const as _const
 from . import scoping as _scoping
 from . import selectors as _selectors
-from . import sequence as _sequence
 from . import tags as _tags
 from . import typings
 
@@ -2813,7 +2812,7 @@ def parse_hairpin_descriptor(
             bundle = Bundle(indicator=indicators[0])
         bundles.append(bundle)
         return bundles
-    for left, right in _sequence.Sequence(indicators).nwise():
+    for left, right in abjad.Sequence(indicators).nwise():
         if isinstance(left, abjad.StartHairpin) and isinstance(
             right, abjad.StartHairpin
         ):

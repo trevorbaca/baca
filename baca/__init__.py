@@ -8,6 +8,7 @@ from . import jobs
 from . import score
 from . import select
 from . import selectors
+from . import sequence
 from .accumulator import (
     CommandAccumulator,
     segment_accumulation_defaults,
@@ -39,11 +40,10 @@ from .pitchcommands import *
 from .rhythmcommands import *
 from .scoping import *
 from .select import *
-from .sequence import *
 from .spannercommands import *
 from .typings import *
 
 
-if sys.version_info[:2] < (3, 9):
-    raise ImportError("Requires Python 3.9 or later")
+if sys.version_info[:2] < (3, 10):
+    raise ImportError("Requires Python 3.10 or later")
 del sys
