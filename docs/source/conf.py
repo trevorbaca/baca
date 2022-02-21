@@ -14,7 +14,7 @@ PygmentsBridge.latex_formatter = CustomLatexFormatter
 ### CORE ###
 
 add_function_parentheses = True
-copyright = "1997-2021, Trevor Bača"
+copyright = "1997-2022, Trevor Bača"
 exclude_patterns = []
 
 extensions = [
