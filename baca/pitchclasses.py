@@ -5495,7 +5495,6 @@ class PitchTree(_classes.Tree):
         >>> segment_3 = segment_3.transpose(n=1)
         >>> items = [[segment_1, segment_2], segment_3]
         >>> tree = baca.PitchTree(items=items)
-        >>> abjad.graph(tree) # doctest: +SKIP
         >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(
         ...     tree, cell_indices=False
         ... )

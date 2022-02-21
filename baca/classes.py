@@ -6,8 +6,6 @@ import copy
 import dataclasses
 import typing
 
-import uqbar
-
 import abjad
 
 
@@ -1155,8 +1153,6 @@ class Tree:
         >>> items = [[[0, 1], [2, 3]], [4, 5]]
         >>> tree = baca.Tree(items=items)
 
-        >>> abjad.graph(tree) # doctest: +SKIP
-
         >>> tree.get_payload(nested=True)
         [[[0, 1], [2, 3]], [4, 5]]
 
@@ -1203,7 +1199,6 @@ class Tree:
         >>> tree_2 = baca.Tree(items=[2, 3])
         >>> tree_3 = baca.Tree(items=[4, 5])
         >>> tree = baca.Tree(items=[[tree_1, tree_2], tree_3])
-        >>> abjad.graph(tree) # doctest: +SKIP
 
     """
 
@@ -1325,44 +1320,6 @@ class Tree:
         Returns node or slice of nodes.
         """
         return self._children.__getitem__(argument)
-
-    def __graph__(self, **keywords):
-        """
-        Graphs tree.
-
-        ..  container:: example
-
-            >>> items = [[[0, 1], [2, 3]], [4, 5]]
-            >>> tree = baca.Tree(items=items)
-
-            >>> abjad.graph(tree) # doctest: +SKIP
-
-            >>> tree.__graph__()
-            <uqbar.graphs.Graph.Graph object at 0x...>
-
-        Returns uqbar graph.
-        """
-        graph = uqbar.graphs.Graph(
-            attributes={"bgcolor": "transparent", "truecolor": True},
-            name="G",
-        )
-        node_mapping = {}
-        for node in self._iterate_depth_first():
-            graphviz_node = uqbar.graphs.Node()
-            if list(node):
-                graphviz_node.attributes["shape"] = "circle"
-                graphviz_node.attributes["label"] = ""
-            else:
-                graphviz_node.attributes["shape"] = "box"
-                graphviz_node.attributes["label"] = str(node._payload)
-            graph.append(graphviz_node)
-            node_mapping[node] = graphviz_node
-            if node._parent is not None:
-                uqbar.graphs.Edge().attach(
-                    node_mapping[node._parent],
-                    node_mapping[node],
-                )
-        return graph
 
     def __hash__(self):
         """
@@ -2168,7 +2125,6 @@ class Tree:
 
             >>> items = [[[0, 1], [2, 3]], [4, 5]]
             >>> tree = baca.Tree(items=items)
-            >>> abjad.graph(tree) # doctest: +SKIP
 
             Iterates all levels:
 
