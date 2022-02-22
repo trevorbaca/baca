@@ -694,7 +694,7 @@ Constellation.
 
     >>> circuit = baca.CC1()
     >>> constellation = circuit[1 - 1]
-    >>> generator = abjad.Sequence(constellation.generator).flatten()
+    >>> generator = abjad.sequence.flatten(constellation.generator)
     >>> generator = abjad.Chord(generator, (1, 4))
     >>> constellation.color_chord(generator)
     >>> constellation.label_chord(generator)
@@ -767,7 +767,7 @@ Constellation.
 
     >>> circuit = baca.CC1()
     >>> constellation = circuit[1 - 1]
-    >>> generator = abjad.Sequence(constellation.generator).flatten()
+    >>> generator = abjad.sequence.flatten(constellation.generator)
     >>> generator = abjad.Chord(generator, (1, 4))
     >>> constellation.color_chord(generator)
     >>> constellation.label_chord(generator)
@@ -847,7 +847,7 @@ Constellation.
 
     >>> circuit = baca.CC1()
     >>> constellation = circuit[1 - 1]
-    >>> generator = abjad.Sequence(constellation.generator).flatten()
+    >>> generator = abjad.sequence.flatten(constellation.generator)
     >>> generator = abjad.Chord(generator, (1, 4))
     >>> constellation.label_chord(generator)
     >>> leaves = [generator]
@@ -882,7 +882,7 @@ Constellation.
 
     >>> circuit = baca.CC1()
     >>> constellation = circuit[1 - 1]
-    >>> generator = abjad.Sequence(constellation.generator).flatten()
+    >>> generator = abjad.sequence.flatten(constellation.generator)
     >>> generator = abjad.Chord(generator, (1, 4))
     >>> constellation.label_chord(generator)
     >>> pivot = baca.constellation.find_pivot(constellation, circuit[1])
@@ -959,7 +959,7 @@ Constellation.
     >>> circuit = baca.CC1()
     >>> generators = []
     >>> for constellation in circuit:
-    ...     generator = abjad.Sequence(constellation.generator).flatten()
+    ...     generator = abjad.sequence.flatten(constellation.generator)
     ...     generator = abjad.Chord(generator, (1, 4))
     ...     constellation.color_chord(generator)
     ...     generators.append(generator)
@@ -1308,7 +1308,7 @@ Constellation.
     >>> generators, pivots = [], []
     >>> length = len(circuit)
     >>> for i, constellation in enumerate(circuit):
-    ...     generator = abjad.Sequence(constellation.generator).flatten()
+    ...     generator = abjad.sequence.flatten(constellation.generator)
     ...     generator = abjad.Chord(generator, (1, 4))
     ...     constellation.color_chord(generator)
     ...     generators.append(generator)
@@ -1318,7 +1318,7 @@ Constellation.
     ...     pivots.append(pivot)
 
     >>> chords = list(zip(generators, pivots))
-    >>> chords_ = abjad.Sequence(chords).flatten()
+    >>> chords_ = abjad.sequence.flatten(chords)
     >>> score = abjad.illustrators.make_piano_score(chords_)
     >>> abjad.show(score) # doctest: +SKIP
 
@@ -1678,7 +1678,7 @@ Constellation.
     >>> circuit = baca.CC1()
     >>> generators = []
     >>> for constellation in circuit:
-    ...     generator = abjad.Sequence(constellation.generator).flatten()
+    ...     generator = abjad.sequence.flatten(constellation.generator)
     ...     generator = abjad.Chord(generator, (1, 4))
     ...     generators.append(generator)
 
@@ -1728,7 +1728,7 @@ Constellation.
     >>> generators = []
     >>> length = len(circuit)
     >>> for i, constellation in enumerate(circuit):
-    ...     generator = abjad.Sequence(constellation.generator).flatten()
+    ...     generator = abjad.sequence.flatten(constellation.generator)
     ...     generator = abjad.Chord(generator, (1, 4))
     ...     generators.append(generator)
     ...     next_constellation = circuit[(i + 1) % length]
@@ -1737,7 +1737,7 @@ Constellation.
     ...     pivots.append(pivot)
 
     >>> chords = list(zip(generators, pivots))
-    >>> chords_ = abjad.Sequence(chords).flatten()
+    >>> chords_ = abjad.sequence.flatten(chords)
     >>> score = abjad.illustrators.make_piano_score(chords_)
     >>> abjad.show(score) # doctest: +SKIP
 
@@ -1909,7 +1909,7 @@ def constellate(generator, range_):
     sequences = abjad.enumerate.outer_product(transpositions)
     sets = []
     for sequence in sequences:
-        numbers = abjad.Sequence(sequence).flatten()
+        numbers = abjad.sequence.flatten(sequence)
         set_ = abjad.PitchSet(numbers)
         sets.append(set_)
     return sets
@@ -1919,7 +1919,7 @@ def find_pivot(constellation_a, constellation_b):
     """
     Finds pivot from ``constellation_a`` to ``constellation_b``.
     """
-    b_generator = abjad.Sequence(constellation_b.generator).flatten()
+    b_generator = abjad.sequence.flatten(constellation_b.generator)
     b_generator = abjad.PitchSet(b_generator)
     for set_ in constellation_a:
         if set_ == b_generator:

@@ -1029,7 +1029,7 @@ def _call_rhythm_commands(
             )
             selection = abjad.Selection(container)
             selections.append(selection)
-        components = list(abjad.Sequence(selections).flatten(depth=-1))
+        components = abjad.sequence.flatten(selections, depth=-1)
         voice.extend(components)
     return command_count, segment_duration
 

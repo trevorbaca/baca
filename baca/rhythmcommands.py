@@ -472,9 +472,8 @@ class TimeSignatureMaker:
         if not self.count:
             raise Exception("must specify count with run().")
         result = []
-        time_signatures = abjad.Sequence(self.time_signatures)
-        time_signatures = time_signatures.rotate(self.rotation)
-        time_signatures = time_signatures.flatten(depth=1)
+        time_signatures = abjad.sequence.rotate(self.time_signatures, self.rotation)
+        time_signatures = abjad.sequence.flatten(time_signatures, depth=1)
         time_signatures_ = abjad.CyclicTuple(time_signatures)
         i = 0
         fermata_measures = self._normalize_fermata_measures()

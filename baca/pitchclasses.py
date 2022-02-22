@@ -2080,7 +2080,7 @@ class CollectionList(collections_module.abc.Sequence):
         """
         collections = abjad.Sequence(items=self)
         collections = abjad.sequence.repeat(collections, n=n)
-        collections = collections.flatten(depth=1)
+        collections = abjad.sequence.flatten(collections, depth=1)
         return dataclasses.replace(self, collections=collections)
 
     # TODO: change indices to pattern
@@ -5601,8 +5601,8 @@ class PitchTree(_classes.Tree):
     def _color_repeats(self, color_repeats, voice):
         if not color_repeats:
             return
-        leaves = abjad.iterate.components(voice, prototype=abjad.Note)
-        pairs = abjad.Sequence(leaves).nwise(n=2, wrapped=True)
+        generator = abjad.iterate.components(voice, prototype=abjad.Note)
+        pairs = abjad.sequence.nwise(list(generator), n=2, wrapped=True)
         current_color = "#red"
         for left, right in pairs:
             if not left.written_pitch == right.written_pitch:
@@ -5848,8 +5848,8 @@ class PitchTree(_classes.Tree):
 
         Returns true or false.
         """
-        leaves = self.iterate(level=-1)
-        for left, right in abjad.Sequence(leaves).nwise(n=2, wrapped=True):
+        generator = self.iterate(level=-1)
+        for left, right in abjad.sequence.nwise(list(generator), n=2, wrapped=True):
             if left == right:
                 return True
         return False
@@ -6608,7 +6608,7 @@ class PitchTree(_classes.Tree):
         """
         items = list(self.items)
         items = abjad.Sequence(items)
-        items = items.rotate(n=n)
+        items = abjad.sequence.rotate(items, n=n)
         result = type(self)(items=items, item_class=self.item_class)
         return result
 
@@ -7225,7 +7225,7 @@ def _apply_operator(segment, operator):
 
 def _check_duplicate_pitch_classes(design):
     leaves = design.get_payload()
-    for leaf_1, leaf_2 in abjad.Sequence(leaves).nwise():
+    for leaf_1, leaf_2 in abjad.sequence.nwise(leaves):
         if leaf_1 == leaf_2:
             raise Exception(f"duplicate {leaf_1!r}.")
 
@@ -7530,7 +7530,7 @@ class ZaggedPitchClassMaker:
         elif all(isinstance(_, list) for _ in self.division_ratios):
             division_ratios = abjad.Sequence(self.division_ratios)
             division_ratios = _sequence.helianthate(division_ratios, -1, 1)
-            division_ratios = division_ratios.flatten(depth=1)
+            division_ratios = abjad.sequence.flatten(division_ratios, depth=1)
         division_ratios = [abjad.Ratio(_) for _ in division_ratios]
         division_ratios = abjad.CyclicTuple(division_ratios)
         pc_cells_copy = pc_cells[:]

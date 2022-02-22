@@ -66,7 +66,7 @@ def increase_elements(sequence, addenda, indices=None):
     else:
         # assert no overlaps
         tmp = [tuple(range(i, len(addenda))) for i in indices]
-        tmp = abjad.Sequence(tmp).flatten()
+        tmp = abjad.sequence.flatten(tmp)
         assert len(tmp) == len(set(tmp))
         result = sequence[:]
         for i in indices:
@@ -156,7 +156,7 @@ def insert_and_transpose(notes, subrun_tokens):
 def _get_intervals_in_subrun(subrun_source):
     subrun_source = list(subrun_source)
     result = [0]
-    for first, second in abjad.Sequence(subrun_source).nwise():
+    for first, second in abjad.sequence.nwise(subrun_source):
         first_pitch = abjad.NamedPitch(first)
         second_pitch = abjad.NamedPitch(second)
         interval = (
@@ -465,7 +465,7 @@ def partition_nested_into_inward_pointing_parts(sequence, target="negative"):
             # 5 in middle
             if 5 in new:
                 new = [(4, 1) if element == 5 else element for element in new]
-                new = abjad.Sequence(new).flatten()
+                new = abjad.sequence.flatten(new)
                 new = list(new)
             result.append(new)
     return result

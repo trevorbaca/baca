@@ -295,7 +295,7 @@ class PitchArray:
         Returns tuple.
         """
         columns = []
-        cells = abjad.Sequence(self.rows).zip(truncate=False)
+        cells = abjad.sequence.zip(self.rows, truncate=False)
         for i, cells in enumerate(cells):
             column = PitchArrayColumn(cells)
             column._parent_array = self
@@ -750,7 +750,7 @@ class PitchArray:
                 unspanned_indices.append(i)
         array_depth = self.depth
         subarrays = []
-        pairs = abjad.Sequence(unspanned_indices).nwise()
+        pairs = abjad.sequence.nwise(unspanned_indices)
         for start_column, stop_column in pairs:
             upper_left_pair = (0, start_column)
             lower_right_pair = (array_depth, stop_column)
@@ -1858,7 +1858,7 @@ class PitchArrayColumn:
 
         Returns true or false.
         """
-        for upper, lower in abjad.Sequence(self.cells).nwise():
+        for upper, lower in abjad.sequence.nwise(self.cells):
             lower_pitches = lower.pitches or ()
             for lower_pitch in lower_pitches:
                 upper_pitches = upper.pitches or ()

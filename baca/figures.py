@@ -1689,7 +1689,7 @@ class Imbrication:
         container = copy.deepcopy(container)
         abjad.override(container).TupletBracket.stencil = False
         abjad.override(container).TupletNumber.stencil = False
-        segment = abjad.Sequence(self.segment).flatten(depth=-1)
+        segment = abjad.sequence.flatten(self.segment, depth=-1)
         if self.by_pitch_class:
             segment = abjad.Sequence([abjad.NumberedPitchClass(_) for _ in segment])
         cursor = _classes.Cursor(
@@ -6052,7 +6052,8 @@ class FigureMaker:
         Set exponent less than 1 for accelerando.
         """
         sums = abjad.math.cumulative_sums(durations)
-        pairs = list(abjad.Sequence(sums).nwise(n=2))
+        generator = abjad.sequence.nwise(sums, n=2)
+        pairs = list(generator)
         total_duration = pairs[-1][-1]
         start_offsets = [_[0] for _ in pairs]
         start_offsets = [_ / total_duration for _ in start_offsets]

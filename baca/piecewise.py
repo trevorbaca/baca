@@ -2812,7 +2812,7 @@ def parse_hairpin_descriptor(
             bundle = Bundle(indicator=indicators[0])
         bundles.append(bundle)
         return bundles
-    for left, right in abjad.Sequence(indicators).nwise():
+    for left, right in abjad.sequence.nwise(indicators):
         if isinstance(left, abjad.StartHairpin) and isinstance(
             right, abjad.StartHairpin
         ):

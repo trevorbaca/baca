@@ -197,7 +197,7 @@ class CommandAccumulator:
         Calls command accumulator on ``scopes`` and ``commands``.
         """
         classes = (list, _scoping.Suite)
-        commands_ = abjad.Sequence(commands).flatten(classes=classes, depth=-1)
+        commands_ = abjad.sequence.flatten(list(commands), classes=classes, depth=-1)
         commands = tuple(commands_)
         abbreviations = self.voice_abbreviations
         assert isinstance(abbreviations, dict), repr(abbreviations)
