@@ -1850,7 +1850,7 @@ class CollectionList(collections_module.abc.Sequence):
 
         """
         sequence = abjad.Sequence(items=self)
-        collections = sequence.remove(indices=indices, period=period)
+        collections = abjad.sequence.remove(sequence, indices=indices, period=period)
         return dataclasses.replace(self, collections=collections)
 
     def remove_duplicate_pitch_classes(self, level=-1) -> "CollectionList":
@@ -2079,7 +2079,7 @@ class CollectionList(collections_module.abc.Sequence):
 
         """
         collections = abjad.Sequence(items=self)
-        collections = collections.repeat(n=n)
+        collections = abjad.sequence.repeat(collections, n=n)
         collections = collections.flatten(depth=1)
         return dataclasses.replace(self, collections=collections)
 
@@ -2105,7 +2105,7 @@ class CollectionList(collections_module.abc.Sequence):
 
         """
         sequence = abjad.Sequence(items=self)
-        collections = sequence.retain(indices=indices, period=period)
+        collections = abjad.sequence.retain(sequence, indices=indices, period=period)
         return dataclasses.replace(self, collections=collections)
 
     def soprano_to_octave(self, n=4, pattern=None) -> "CollectionList":

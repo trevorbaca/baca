@@ -6288,7 +6288,7 @@ class Bind:
             else:
                 raise Exception(f"no maker match for collection {i}.")
         assert len(collections) == len(matches)
-        groups = abjad.Sequence(matches).group_by(lambda match: match.assignment.maker)
+        groups = abjad.sequence.group_by(matches, lambda _: _.assignment.maker)
         tuplets: typing.List[abjad.Tuplet] = []
         for group in groups:
             maker = group[0].assignment.maker

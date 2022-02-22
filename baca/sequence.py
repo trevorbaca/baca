@@ -120,10 +120,11 @@ def fuse(
         groups:
 
         >>> divisions = baca.fractions([(7, 8), (3, 8), (5, 8)])
-        >>> divisions = abjad.Sequence(divisions).map(
-        ...     lambda _: baca.sequence.split_divisions(_, [(3, 8)], cyclic=True)
+        >>> divisions = abjad.sequence.map(
+        ...     divisions,
+        ...     lambda _: baca.sequence.split_divisions(_, [(3, 8)], cyclic=True),
         ... )
-        >>> divisions = divisions.flatten(depth=-1)
+        >>> divisions = abjad.Sequence(divisions).flatten(depth=-1)
         >>> divisions = baca.sequence.fuse(divisions, [2, 3, 1])
         >>> for division in divisions:
         ...     division
@@ -160,10 +161,11 @@ def fuse(
         >>> divisions = baca.fractions([(7, 8), (3, 8), (5, 8)])
         >>> divisions = abjad.Sequence(divisions)
         >>> divisions = baca.sequence.fuse(divisions)
-        >>> divisions = divisions.map(
+        >>> divisions = abjad.sequence.map(
+        ...     divisions,
         ...     lambda _: baca.sequence.split_divisions(_, [(1, 16)], cyclic=True)
         ... )
-        >>> divisions = divisions.flatten(depth=-1)
+        >>> divisions = abjad.Sequence(divisions).flatten(depth=-1)
         >>> divisions = divisions.partition_by_ratio_of_lengths((1, 1, 1, 1, 1, 1))
         >>> divisions = baca.sequence.fuse(divisions, indices=[1, 3, 5])
         >>> divisions = divisions.flatten(depth=-1)
@@ -248,7 +250,7 @@ def fuse(
         if indices and i not in indices:
             item_ = item
         else:
-            item_ = abjad.Sequence(item).sum()
+            item_ = sum(item)
         items_.append(item_)
     sequence_ = abjad.Sequence(items_)
     sequence_ = sequence_.flatten(depth=-1)
@@ -320,8 +322,8 @@ def quarters(
         Maps to each division: splits by ``1/4`` with remainder on right:
 
         >>> divisions = baca.fractions([(7, 8), (3, 8), (5, 8)])
-        >>> divisions = abjad.Sequence(divisions).map(
-        ...     lambda _: baca.sequence.quarters(_)
+        >>> divisions = abjad.sequence.map(
+        ...     divisions, lambda _: baca.sequence.quarters(_)
         ... )
         >>> for sequence in divisions:
         ...     print("sequence:")
@@ -341,7 +343,7 @@ def quarters(
             Sequence([NonreducedFraction(1, 8)])
 
         >>> rhythm_maker = rmakers.note()
-        >>> music = rhythm_maker(divisions.flatten(depth=-1))
+        >>> music = rhythm_maker(abjad.Sequence(divisions).flatten(depth=-1))
 
         >>> lilypond_file = abjad.illustrators.selection(music)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -481,8 +483,8 @@ def ratios(
         Splits each division by exact ``2:1`` ratio:
 
         >>> time_signatures = baca.fractions([(5, 8), (6, 8)])
-        >>> divisions = abjad.Sequence(time_signatures).map(
-        ...     lambda _: baca.sequence.ratios([_], [(2, 1)])
+        >>> divisions = abjad.sequence.map(
+        ...     time_signatures, lambda _: baca.sequence.ratios([_], [(2, 1)])
         ... )
         >>> for item in divisions:
         ...     print("sequence:")
@@ -496,7 +498,7 @@ def ratios(
             Sequence([NonreducedFraction(2, 8)])
 
         >>> rhythm_maker = rmakers.note()
-        >>> music = rhythm_maker(divisions.flatten(depth=-1))
+        >>> music = rhythm_maker(abjad.Sequence(divisions).flatten(depth=-1))
 
         >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -534,7 +536,8 @@ def ratios(
         Splits each division by rounded ``2:1`` ratio:
 
         >>> time_signatures = baca.fractions([(5, 8), (6, 8)])
-        >>> divisions = abjad.Sequence(time_signatures).map(
+        >>> divisions = abjad.sequence.map(
+        ...     time_signatures,
         ...     lambda _: baca.sequence.ratios([_], [(2, 1)], rounded=True)
         ... )
         >>> for item in divisions:
@@ -549,7 +552,8 @@ def ratios(
             Sequence([NonreducedFraction(2, 8)])
 
         >>> rhythm_maker = rmakers.note()
-        >>> music = rhythm_maker(divisions.flatten(depth=-1))
+        >>> divisions = abjad.Sequence(divisions).flatten(depth=-1)
+        >>> music = rhythm_maker(divisions)
 
         >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -957,7 +961,7 @@ def split_divisions(
 
         >>> time_signatures = baca.fractions([(7, 8), (7, 8), (7, 16)])
         >>> time_signatures = [abjad.NonreducedFraction(_) for _ in time_signatures]
-        >>> divisions = abjad.Sequence(time_signatures).map(quarters)
+        >>> divisions = abjad.sequence.map(time_signatures, quarters)
         >>> for item in divisions:
         ...     print("sequence:")
         ...     for division in item:
@@ -977,7 +981,8 @@ def split_divisions(
             NonreducedFraction(3, 16)
 
         >>> rhythm_maker = rmakers.note()
-        >>> music = rhythm_maker(divisions.flatten(depth=-1))
+        >>> divisions = abjad.Sequence(divisions).flatten(depth=-1)
+        >>> music = rhythm_maker(divisions)
 
         >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1019,7 +1024,7 @@ def split_divisions(
 
         >>> time_signatures = [(7, 8), (7, 8), (7, 16)]
         >>> time_signatures = [abjad.NonreducedFraction(_) for _ in time_signatures]
-        >>> divisions = abjad.Sequence(time_signatures).map(quarters)
+        >>> divisions = abjad.sequence.map(time_signatures, quarters)
         >>> for item in divisions:
         ...     print("sequence:")
         ...     for division in item:
@@ -1039,7 +1044,8 @@ def split_divisions(
             NonreducedFraction(4, 16)
 
         >>> rhythm_maker = rmakers.note()
-        >>> music = rhythm_maker(divisions.flatten(depth=-1))
+        >>> divisions = abjad.Sequence(divisions).flatten(depth=-1)
+        >>> music = rhythm_maker(divisions)
 
         >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1086,7 +1092,7 @@ def split_divisions(
         ...     return sequence
 
         >>> time_signatures = [abjad.NonreducedFraction(5, 8)]
-        >>> divisions = abjad.Sequence(time_signatures).map(quarters)
+        >>> divisions = abjad.sequence.map(time_signatures, quarters)
         >>> for item in divisions:
         ...     print("sequence:")
         ...     for division in item:
@@ -1096,7 +1102,8 @@ def split_divisions(
             NonreducedFraction(3, 8)
 
         >>> rhythm_maker = rmakers.note()
-        >>> music = rhythm_maker(divisions.flatten(depth=-1))
+        >>> divisions = abjad.Sequence(divisions).flatten(depth=-1)
+        >>> music = rhythm_maker(divisions)
 
         >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1134,7 +1141,7 @@ def split_divisions(
         ...     return sequence
 
         >>> time_signatures = [abjad.NonreducedFraction(5, 8)]
-        >>> divisions = abjad.Sequence(time_signatures).map(quarters)
+        >>> divisions = abjad.sequence.map(time_signatures, quarters)
         >>> for item in divisions:
         ...     print("sequence:")
         ...     for division in item:
@@ -1144,7 +1151,8 @@ def split_divisions(
             NonreducedFraction(2, 8)
 
         >>> rhythm_maker = rmakers.note()
-        >>> music = rhythm_maker(divisions.flatten(depth=-1))
+        >>> divisions = abjad.Sequence(divisions).flatten(depth=-1)
+        >>> music = rhythm_maker(divisions)
 
         >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1176,7 +1184,7 @@ def split_divisions(
 
         >>> time_signatures = baca.fractions([(3, 4), (6, 8)])
         >>> divisions = abjad.Sequence(time_signatures)
-        >>> divisions = divisions.map(quarters)
+        >>> divisions = abjad.sequence.map(divisions, quarters)
         >>> for item in divisions:
         ...     print("sequence:")
         ...     for division in item:
@@ -1190,7 +1198,8 @@ def split_divisions(
             NonreducedFraction(3, 8)
 
         >>> rhythm_maker = rmakers.note()
-        >>> music = rhythm_maker(divisions.flatten(depth=-1))
+        >>> divisions = abjad.Sequence(divisions).flatten(depth=-1)
+        >>> music = rhythm_maker(divisions)
 
         >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2107,9 +2116,9 @@ def reveal(sequence, count=None):
     if count == 0:
         return type(sequence)()
     if count < 0:
-        result = type(sequence)(abjad.Sequence(sequence).reverse(recurse=True))
+        result = type(sequence)(abjad.sequence.reverse(sequence, recurse=True))
         result = reveal(result, count=abs(count))
-        result = type(sequence)(abjad.Sequence(result).reverse(recurse=True))
+        result = type(sequence)(abjad.sequence.reverse(result, recurse=True))
         return result
     current = 0
     items_ = []
