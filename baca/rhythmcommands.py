@@ -526,7 +526,7 @@ def make_fused_tuplet_monads(
             rmakers.trivialize(),
             rmakers.extract_trivial(),
             rmakers.force_repeat_tie(),
-            preprocessor=lambda _: abjad.Sequence([abjad.Sequence(_).sum()]),
+            preprocessor=lambda _: [sum(_)],
             tag=_scoping.site(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
