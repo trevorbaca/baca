@@ -229,7 +229,7 @@ class CommandAccumulator:
                 if not command._matches_scope_index(scope_count, i):
                     continue
                 if isinstance(command, _scoping.Command):
-                    commands_ = abjad.Sequence([command])
+                    commands_ = [command]
                 else:
                     commands_ = command
                 for command_ in commands_:

@@ -102,57 +102,57 @@ class LMR:
 
         >>> parts = lmr([1])
         >>> for part in parts: part
-        Sequence([1])
+        [1]
 
         >>> parts = lmr([1, 2])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2])
+        [1]
+        [2]
 
         >>> parts = lmr([1, 2, 3])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2, 3])
+        [1]
+        [2, 3]
 
         >>> parts = lmr([1, 2, 3, 4])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2, 3])
-        Sequence([4])
+        [1]
+        [2, 3]
+        [4]
 
         >>> parts = lmr([1, 2, 3, 4, 5])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2, 3])
-        Sequence([4, 5])
+        [1]
+        [2, 3]
+        [4, 5]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2, 3])
-        Sequence([4])
-        Sequence([5, 6])
+        [1]
+        [2, 3]
+        [4]
+        [5, 6]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2, 3])
-        Sequence([4, 5])
-        Sequence([6, 7])
+        [1]
+        [2, 3]
+        [4, 5]
+        [6, 7]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2, 3])
-        Sequence([4, 5, 6])
-        Sequence([7, 8])
+        [1]
+        [2, 3]
+        [4, 5, 6]
+        [7, 8]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2, 3])
-        Sequence([4, 5, 6, 7])
-        Sequence([8, 9])
+        [1]
+        [2, 3]
+        [4, 5, 6, 7]
+        [8, 9]
 
     ..  container:: example
 
@@ -167,64 +167,64 @@ class LMR:
 
         >>> parts = lmr([1])
         >>> for part in parts: part
-        Sequence([1])
+        [1]
 
         >>> parts = lmr([1, 2])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2])
+        [1]
+        [2]
 
         >>> parts = lmr([1, 2, 3])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2])
-        Sequence([3])
+        [1]
+        [2]
+        [3]
 
         >>> parts = lmr([1, 2, 3, 4])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2])
-        Sequence([3])
-        Sequence([4])
+        [1]
+        [2]
+        [3]
+        [4]
 
         >>> parts = lmr([1, 2, 3, 4, 5])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2])
-        Sequence([3])
-        Sequence([4, 5])
+        [1]
+        [2]
+        [3]
+        [4, 5]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2])
-        Sequence([3])
-        Sequence([4])
-        Sequence([5, 6])
+        [1]
+        [2]
+        [3]
+        [4]
+        [5, 6]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2])
-        Sequence([3])
-        Sequence([4, 5])
-        Sequence([6, 7])
+        [1]
+        [2]
+        [3]
+        [4, 5]
+        [6, 7]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2])
-        Sequence([3])
-        Sequence([4, 5, 6])
-        Sequence([7, 8])
+        [1]
+        [2]
+        [3]
+        [4, 5, 6]
+        [7, 8]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2])
-        Sequence([3])
-        Sequence([4, 5, 6, 7])
-        Sequence([8, 9])
+        [1]
+        [2]
+        [3]
+        [4, 5, 6, 7]
+        [8, 9]
 
     ..  container:: example
 
@@ -236,46 +236,46 @@ class LMR:
 
         >>> parts = lmr([1])
         >>> for part in parts: part
-        Sequence([1])
+        [1]
 
         >>> parts = lmr([1, 2])
         >>> for part in parts: part
-        Sequence([1, 2])
+        [1, 2]
 
         >>> parts = lmr([1, 2, 3])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3])
+        [1, 2]
+        [3]
 
         >>> parts = lmr([1, 2, 3, 4])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3, 4])
+        [1, 2]
+        [3, 4]
 
         >>> parts = lmr([1, 2, 3, 4, 5])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3, 4, 5])
+        [1, 2]
+        [3, 4, 5]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3, 4, 5, 6])
+        [1, 2]
+        [3, 4, 5, 6]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3, 4, 5, 6, 7])
+        [1, 2]
+        [3, 4, 5, 6, 7]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3, 4, 5, 6, 7, 8])
+        [1, 2]
+        [3, 4, 5, 6, 7, 8]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3, 4, 5, 6, 7, 8, 9])
+        [1, 2]
+        [3, 4, 5, 6, 7, 8, 9]
 
     ..  container:: example
 
@@ -288,55 +288,55 @@ class LMR:
 
         >>> parts = lmr([1])
         >>> for part in parts: part
-        Sequence([1])
+        [1]
 
         >>> parts = lmr([1, 2])
         >>> for part in parts: part
-        Sequence([1, 2])
+        [1, 2]
 
         >>> parts = lmr([1, 2, 3])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3])
+        [1, 2]
+        [3]
 
         >>> parts = lmr([1, 2, 3, 4])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3, 4])
+        [1, 2]
+        [3, 4]
 
         >>> parts = lmr([1, 2, 3, 4, 5])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3, 4])
-        Sequence([5])
+        [1, 2]
+        [3, 4]
+        [5]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3, 4])
-        Sequence([5, 6])
+        [1, 2]
+        [3, 4]
+        [5, 6]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3, 4])
-        Sequence([5, 6])
-        Sequence([7])
+        [1, 2]
+        [3, 4]
+        [5, 6]
+        [7]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3, 4])
-        Sequence([5, 6])
-        Sequence([7, 8])
+        [1, 2]
+        [3, 4]
+        [5, 6]
+        [7, 8]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3, 4])
-        Sequence([5, 6])
-        Sequence([7, 8])
-        Sequence([9])
+        [1, 2]
+        [3, 4]
+        [5, 6]
+        [7, 8]
+        [9]
 
         Odd parity produces length-1 part at right.
 
@@ -352,55 +352,55 @@ class LMR:
 
         >>> parts = lmr([1])
         >>> for part in parts: part
-        Sequence([1])
+        [1]
 
         >>> parts = lmr([1, 2])
         >>> for part in parts: part
-        Sequence([1, 2])
+        [1, 2]
 
         >>> parts = lmr([1, 2, 3])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2, 3])
+        [1]
+        [2, 3]
 
         >>> parts = lmr([1, 2, 3, 4])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3, 4])
+        [1, 2]
+        [3, 4]
 
         >>> parts = lmr([1, 2, 3, 4, 5])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2, 3])
-        Sequence([4, 5])
+        [1]
+        [2, 3]
+        [4, 5]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3, 4])
-        Sequence([5, 6])
+        [1, 2]
+        [3, 4]
+        [5, 6]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2, 3])
-        Sequence([4, 5])
-        Sequence([6, 7])
+        [1]
+        [2, 3]
+        [4, 5]
+        [6, 7]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3, 4])
-        Sequence([5, 6])
-        Sequence([7, 8])
+        [1, 2]
+        [3, 4]
+        [5, 6]
+        [7, 8]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2, 3])
-        Sequence([4, 5])
-        Sequence([6, 7])
-        Sequence([8, 9])
+        [1]
+        [2, 3]
+        [4, 5]
+        [6, 7]
+        [8, 9]
 
         Odd parity produces length-1 part at left.
 
@@ -415,52 +415,52 @@ class LMR:
 
         >>> parts = lmr([1])
         >>> for part in parts: part
-        Sequence([1])
+        [1]
 
         >>> parts = lmr([1, 2])
         >>> for part in parts: part
-        Sequence([1, 2])
+        [1, 2]
 
         >>> parts = lmr([1, 2, 3])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3])
+        [1, 2]
+        [3]
 
         >>> parts = lmr([1, 2, 3, 4])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3])
-        Sequence([4])
+        [1, 2]
+        [3]
+        [4]
 
         >>> parts = lmr([1, 2, 3, 4, 5])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3, 4])
-        Sequence([5])
+        [1, 2]
+        [3, 4]
+        [5]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3, 4, 5])
-        Sequence([6])
+        [1, 2]
+        [3, 4, 5]
+        [6]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3, 4, 5, 6])
-        Sequence([7])
+        [1, 2]
+        [3, 4, 5, 6]
+        [7]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3, 4, 5, 6, 7])
-        Sequence([8])
+        [1, 2]
+        [3, 4, 5, 6, 7]
+        [8]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3, 4, 5, 6, 7, 8])
-        Sequence([9])
+        [1, 2]
+        [3, 4, 5, 6, 7, 8]
+        [9]
 
     ..  container:: example
 
@@ -474,53 +474,53 @@ class LMR:
 
         >>> parts = lmr([1])
         >>> for part in parts: part
-        Sequence([1])
+        [1]
 
         >>> parts = lmr([1, 2])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2])
+        [1]
+        [2]
 
         >>> parts = lmr([1, 2, 3])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3])
+        [1, 2]
+        [3]
 
         >>> parts = lmr([1, 2, 3, 4])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3])
-        Sequence([4])
+        [1, 2]
+        [3]
+        [4]
 
         >>> parts = lmr([1, 2, 3, 4, 5])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3, 4])
-        Sequence([5])
+        [1, 2]
+        [3, 4]
+        [5]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3, 4, 5])
-        Sequence([6])
+        [1, 2]
+        [3, 4, 5]
+        [6]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3, 4, 5, 6])
-        Sequence([7])
+        [1, 2]
+        [3, 4, 5, 6]
+        [7]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3, 4, 5, 6, 7])
-        Sequence([8])
+        [1, 2]
+        [3, 4, 5, 6, 7]
+        [8]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3, 4, 5, 6, 7, 8])
-        Sequence([9])
+        [1, 2]
+        [3, 4, 5, 6, 7, 8]
+        [9]
 
     ..  container:: example
 
@@ -532,46 +532,46 @@ class LMR:
 
         >>> parts = lmr([1])
         >>> for part in parts: part
-        Sequence([1])
+        [1]
 
         >>> parts = lmr([1, 2])
         >>> for part in parts: part
-        Sequence([1, 2])
+        [1, 2]
 
         >>> parts = lmr([1, 2, 3])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2, 3])
+        [1]
+        [2, 3]
 
         >>> parts = lmr([1, 2, 3, 4])
         >>> for part in parts: part
-        Sequence([1, 2])
-        Sequence([3, 4])
+        [1, 2]
+        [3, 4]
 
         >>> parts = lmr([1, 2, 3, 4, 5])
         >>> for part in parts: part
-        Sequence([1, 2, 3])
-        Sequence([4, 5])
+        [1, 2, 3]
+        [4, 5]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6])
         >>> for part in parts: part
-        Sequence([1, 2, 3, 4])
-        Sequence([5, 6])
+        [1, 2, 3, 4]
+        [5, 6]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
         >>> for part in parts: part
-        Sequence([1, 2, 3, 4, 5])
-        Sequence([6, 7])
+        [1, 2, 3, 4, 5]
+        [6, 7]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
         >>> for part in parts: part
-        Sequence([1, 2, 3, 4, 5, 6])
-        Sequence([7, 8])
+        [1, 2, 3, 4, 5, 6]
+        [7, 8]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
         >>> for part in parts: part
-        Sequence([1, 2, 3, 4, 5, 6, 7])
-        Sequence([8, 9])
+        [1, 2, 3, 4, 5, 6, 7]
+        [8, 9]
 
     ..  container:: example
 
@@ -585,52 +585,52 @@ class LMR:
 
         >>> parts = lmr([1])
         >>> for part in parts: part
-        Sequence([1])
+        [1]
 
         >>> parts = lmr([1, 2])
         >>> for part in parts: part
-        Sequence([1, 2])
+        [1, 2]
 
         >>> parts = lmr([1, 2, 3])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2, 3])
+        [1]
+        [2, 3]
 
         >>> parts = lmr([1, 2, 3, 4])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2])
-        Sequence([3, 4])
+        [1]
+        [2]
+        [3, 4]
 
         >>> parts = lmr([1, 2, 3, 4, 5])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2, 3])
-        Sequence([4, 5])
+        [1]
+        [2, 3]
+        [4, 5]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2, 3, 4])
-        Sequence([5, 6])
+        [1]
+        [2, 3, 4]
+        [5, 6]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2, 3, 4, 5])
-        Sequence([6, 7])
+        [1]
+        [2, 3, 4, 5]
+        [6, 7]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2, 3, 4, 5, 6])
-        Sequence([7, 8])
+        [1]
+        [2, 3, 4, 5, 6]
+        [7, 8]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
         >>> for part in parts: part
-        Sequence([1])
-        Sequence([2, 3, 4, 5, 6, 7])
-        Sequence([8, 9])
+        [1]
+        [2, 3, 4, 5, 6, 7]
+        [8, 9]
 
     """
 
@@ -675,19 +675,18 @@ class LMR:
         if self.right_reversed is not None:
             self.right_reversed = bool(self.right_reversed)
 
-    def __call__(
-        self, sequence: typing.Union[list, abjad.Segment] = None
-    ) -> typing.List[abjad.Sequence]:
+    def __call__(self, sequence: typing.Union[list, abjad.Segment] = None):
         assert isinstance(sequence, (list, abjad.Segment)), repr(sequence)
         top_lengths = self._get_top_lengths(len(sequence))
-        top_parts = abjad.Sequence(sequence).partition_by_counts(
-            top_lengths, cyclic=False, overhang=abjad.Exact
+        top_parts = abjad.sequence.partition_by_counts(
+            list(sequence), top_lengths, cyclic=False, overhang=abjad.Exact
         )
-        parts: typing.List[abjad.Sequence] = []
+        parts = []
         left_part, middle_part, right_part = top_parts
         if left_part:
             if self.left_counts:
-                parts_ = abjad.Sequence(left_part).partition_by_counts(
+                parts_ = abjad.sequence.partition_by_counts(
+                    left_part,
                     self.left_counts,
                     cyclic=self.left_cyclic,
                     overhang=True,
@@ -698,7 +697,8 @@ class LMR:
                 parts.append(left_part)
         if middle_part:
             if self.middle_counts:
-                parts_ = abjad.Sequence(middle_part).partition_by_counts(
+                parts_ = abjad.sequence.partition_by_counts(
+                    middle_part,
                     self.middle_counts,
                     cyclic=self.middle_cyclic,
                     overhang=True,
@@ -709,7 +709,8 @@ class LMR:
                 parts.append(middle_part)
         if right_part:
             if self.right_counts:
-                parts_ = abjad.Sequence(right_part).partition_by_counts(
+                parts_ = abjad.sequence.partition_by_counts(
+                    right_part,
                     self.right_counts,
                     cyclic=self.right_cyclic,
                     overhang=True,
@@ -719,7 +720,7 @@ class LMR:
             else:
                 parts.append(right_part)
         assert isinstance(parts, list), repr(parts)
-        assert all(isinstance(_, abjad.Sequence) for _ in parts)
+        assert all(isinstance(_, list) for _ in parts)
         return parts
 
     def _get_priority(self):
@@ -1691,7 +1692,7 @@ class Imbrication:
         abjad.override(container).TupletNumber.stencil = False
         segment = abjad.sequence.flatten(self.segment, depth=-1)
         if self.by_pitch_class:
-            segment = abjad.Sequence([abjad.NumberedPitchClass(_) for _ in segment])
+            segment = [abjad.NumberedPitchClass(_) for _ in segment]
         cursor = _classes.Cursor(
             singletons=True, source=segment, suppress_exception=True
         )
@@ -2711,7 +2712,6 @@ class FigureAccumulator:
             list,
             str,
             abjad.Segment,
-            abjad.Sequence,
             abjad.Set,
             _pitchclasses.CollectionList,
         )
@@ -8043,39 +8043,39 @@ def lmr(
 
         >>> parts = lmr([1])
         >>> for part in parts: part
-        Sequence([1])
+        [1]
 
         >>> parts =lmr([1, 2])
         >>> for part in parts: part
-        Sequence([1, 2])
+        [1, 2]
 
         >>> parts = lmr([1, 2, 3])
         >>> for part in parts: part
-        Sequence([1, 2, 3])
+        [1, 2, 3]
 
         >>> parts = lmr([1, 2, 3, 4])
         >>> for part in parts: part
-        Sequence([1, 2, 3, 4])
+        [1, 2, 3, 4]
 
         >>> parts = lmr([1, 2, 3, 4, 5])
         >>> for part in parts: part
-        Sequence([1, 2, 3, 4, 5])
+        [1, 2, 3, 4, 5]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6])
         >>> for part in parts: part
-        Sequence([1, 2, 3, 4, 5, 6])
+        [1, 2, 3, 4, 5, 6]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
         >>> for part in parts: part
-        Sequence([1, 2, 3, 4, 5, 6, 7])
+        [1, 2, 3, 4, 5, 6, 7]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
         >>> for part in parts: part
-        Sequence([1, 2, 3, 4, 5, 6, 7, 8])
+        [1, 2, 3, 4, 5, 6, 7, 8]
 
         >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
         >>> for part in parts: part
-        Sequence([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
     """
     return LMR(

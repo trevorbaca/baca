@@ -215,7 +215,6 @@ def breaks(*page_specifiers):
             command = _commandclasses.IndicatorCommand(
                 indicators=[literal], selector=selector
             )
-            alignment_distances = abjad.Sequence(alignment_distances)
             alignment_distances = abjad.sequence.flatten(alignment_distances, depth=-1)
             lbsd = LBSD(alignment_distances=alignment_distances, y_offset=y_offset)
             lbsd_command = _commandclasses.IndicatorCommand(

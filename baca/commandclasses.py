@@ -422,7 +422,7 @@ class BCPCommand(_scoping.Command):
             return
         if self.selector:
             argument = self.selector(argument)
-        bcps_ = abjad.Sequence(self.bcps)
+        bcps_ = list(self.bcps)
         if self.helper:
             bcps_ = self.helper(bcps_, argument)
         bcps = abjad.CyclicTuple(bcps_)

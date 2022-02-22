@@ -365,7 +365,7 @@ class PitchArray:
 
         Returns tuple.
         """
-        return abjad.Sequence(self.pitches_by_row).flatten(depth=-1)
+        return abjad.sequence.flatten(self.pitches_by_row, depth=-1)
 
     @property
     def pitches_by_row(self):
@@ -686,8 +686,8 @@ class PitchArray:
             parts = abjad.mutate.split(items, durations, cyclic=False)
             part_lengths = [len(part) for part in parts]
             cells = pitch_array_row.cells
-            grouped_cells = abjad.Sequence(cells).partition_by_counts(
-                part_lengths, cyclic=False, overhang=False
+            grouped_cells = abjad.sequence.partition_by_counts(
+                cells, part_lengths, cyclic=False, overhang=False
             )
             for group in grouped_cells:
                 pitch_array_row.merge(group)

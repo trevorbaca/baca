@@ -26,7 +26,7 @@ def fuse(
         >>> divisions = baca.sequence.fuse(divisions)
         >>> divisions = abjad.sequence.flatten(divisions, depth=-1)
         >>> divisions
-        Sequence([NonreducedFraction(15, 8)])
+        [NonreducedFraction(15, 8)]
 
         >>> rhythm_maker = rmakers.note()
         >>> music = rhythm_maker(divisions)
@@ -122,7 +122,7 @@ def fuse(
         >>> divisions = baca.fractions([(7, 8), (3, 8), (5, 8)])
         >>> divisions = abjad.sequence.map(
         ...     divisions,
-        ...     lambda _: baca.sequence.split_divisions(_, [(3, 8)], cyclic=True),
+        ...     lambda _: baca.sequence.split_divisions([_], [(3, 8)], cyclic=True),
         ... )
         >>> divisions = abjad.sequence.flatten(divisions, depth=-1)
         >>> divisions = baca.sequence.fuse(divisions, [2, 3, 1])
@@ -159,14 +159,13 @@ def fuse(
         Splits into sixteenths; partitions; then fuses every other part:
 
         >>> divisions = baca.fractions([(7, 8), (3, 8), (5, 8)])
-        >>> divisions = abjad.Sequence(divisions)
         >>> divisions = baca.sequence.fuse(divisions)
         >>> divisions = abjad.sequence.map(
         ...     divisions,
-        ...     lambda _: baca.sequence.split_divisions(_, [(1, 16)], cyclic=True)
+        ...     lambda _: baca.sequence.split_divisions([_], [(1, 16)], cyclic=True)
         ... )
         >>> divisions = abjad.sequence.flatten(divisions, depth=-1)
-        >>> divisions = divisions.partition_by_ratio_of_lengths((1, 1, 1, 1, 1, 1))
+        >>> divisions = abjad.sequence.partition_by_ratio_of_lengths(divisions, (1, 1, 1, 1, 1, 1))
         >>> divisions = baca.sequence.fuse(divisions, indices=[1, 3, 5])
         >>> divisions = abjad.sequence.flatten(divisions, depth=-1)
         >>> for division in divisions:
@@ -240,8 +239,8 @@ def fuse(
         raise Exception("do not set indices and counts together.")
     if not indices:
         counts = counts or []
-        sequence_ = abjad.Sequence(sequence).partition_by_counts(
-            counts, cyclic=cyclic, overhang=True
+        sequence_ = abjad.sequence.partition_by_counts(
+            sequence, counts, cyclic=cyclic, overhang=True
         )
     else:
         sequence_ = sequence
@@ -252,7 +251,7 @@ def fuse(
         else:
             item_ = sum(item)
         items_.append(item_)
-    sequence_ = abjad.Sequence(items_)
+    sequence_ = items_
     sequence_ = abjad.sequence.flatten(sequence_, depth=-1)
     return sequence_
 
@@ -263,22 +262,22 @@ def partition(sequence, counts=None):
 
     ..  container:: example
 
-        >>> sequence = abjad.Sequence(range(16))
+        >>> sequence = list(range(16))
         >>> parts = baca.sequence.partition(sequence, [3])
 
         >>> for part in parts:
         ...     part
-        Sequence([0, 1, 2])
-        Sequence([3, 4, 5])
-        Sequence([6, 7, 8])
-        Sequence([9, 10, 11])
-        Sequence([12, 13, 14])
-        Sequence([15])
+        [0, 1, 2]
+        [3, 4, 5]
+        [6, 7, 8]
+        [9, 10, 11]
+        [12, 13, 14]
+        [15]
 
     Returns new sequence.
     """
-    return abjad.Sequence(sequence).partition_by_counts(
-        counts=counts, cyclic=True, overhang=True
+    return abjad.sequence.partition_by_counts(
+        sequence, counts=counts, cyclic=True, overhang=True
     )
 
 
@@ -297,14 +296,14 @@ def quarters(
         >>> for item in baca.sequence.quarters(list_):
         ...     item
         ...
-        Sequence([NonreducedFraction(1, 4)])
-        Sequence([NonreducedFraction(1, 4)])
-        Sequence([NonreducedFraction(1, 4)])
-        Sequence([NonreducedFraction(1, 4)])
-        Sequence([NonreducedFraction(1, 4)])
-        Sequence([NonreducedFraction(1, 4)])
-        Sequence([NonreducedFraction(1, 4)])
-        Sequence([NonreducedFraction(1, 4)])
+        [NonreducedFraction(1, 4)]
+        [NonreducedFraction(1, 4)]
+        [NonreducedFraction(1, 4)]
+        [NonreducedFraction(1, 4)]
+        [NonreducedFraction(1, 4)]
+        [NonreducedFraction(1, 4)]
+        [NonreducedFraction(1, 4)]
+        [NonreducedFraction(1, 4)]
 
     ..  container:: example
 
@@ -312,10 +311,10 @@ def quarters(
         >>> for item in baca.sequence.quarters(list_, compound=(3, 2)):
         ...     item
         ...
-        Sequence([NonreducedFraction(3, 8)])
-        Sequence([NonreducedFraction(3, 8)])
-        Sequence([NonreducedFraction(3, 8)])
-        Sequence([NonreducedFraction(3, 8)])
+        [NonreducedFraction(3, 8)]
+        [NonreducedFraction(3, 8)]
+        [NonreducedFraction(3, 8)]
+        [NonreducedFraction(3, 8)]
 
     ..  container:: example
 
@@ -330,17 +329,17 @@ def quarters(
         ...     for division in sequence:
         ...         print(f"\t{repr(division)}")
         sequence:
-            Sequence([NonreducedFraction(2, 8)])
-            Sequence([NonreducedFraction(2, 8)])
-            Sequence([NonreducedFraction(2, 8)])
-            Sequence([NonreducedFraction(1, 8)])
+            [NonreducedFraction(2, 8)]
+            [NonreducedFraction(2, 8)]
+            [NonreducedFraction(2, 8)]
+            [NonreducedFraction(1, 8)]
         sequence:
-            Sequence([NonreducedFraction(2, 8)])
-            Sequence([NonreducedFraction(1, 8)])
+            [NonreducedFraction(2, 8)]
+            [NonreducedFraction(1, 8)]
         sequence:
-            Sequence([NonreducedFraction(2, 8)])
-            Sequence([NonreducedFraction(2, 8)])
-            Sequence([NonreducedFraction(1, 8)])
+            [NonreducedFraction(2, 8)]
+            [NonreducedFraction(2, 8)]
+            [NonreducedFraction(1, 8)]
 
         >>> rhythm_maker = rmakers.note()
         >>> music = rhythm_maker(abjad.sequence.flatten(divisions, depth=-1))
@@ -371,7 +370,7 @@ def quarters(
             >>
 
     """
-    assert isinstance(sequence, (list, abjad.Sequence)), repr(sequence)
+    assert isinstance(sequence, list), repr(sequence)
     sequence = split_divisions(
         sequence, [(1, 4)], cyclic=True, compound=compound, remainder=remainder
     )
@@ -492,11 +491,11 @@ def ratios(
         ...     for division in item:
         ...         print(f"\t{repr(division)}")
         sequence:
-            Sequence([NonreducedFraction(10, 24)])
-            Sequence([NonreducedFraction(5, 24)])
+            [NonreducedFraction(10, 24)]
+            [NonreducedFraction(5, 24)]
         sequence:
-            Sequence([NonreducedFraction(4, 8)])
-            Sequence([NonreducedFraction(2, 8)])
+            [NonreducedFraction(4, 8)]
+            [NonreducedFraction(2, 8)]
 
         >>> rhythm_maker = rmakers.note()
         >>> music = rhythm_maker(abjad.sequence.flatten(divisions, depth=-1))
@@ -546,11 +545,11 @@ def ratios(
         ...     for division in item:
         ...         print(f"\t{repr(division)}")
         sequence:
-            Sequence([NonreducedFraction(3, 8)])
-            Sequence([NonreducedFraction(2, 8)])
+            [NonreducedFraction(3, 8)]
+            [NonreducedFraction(2, 8)]
         sequence:
-            Sequence([NonreducedFraction(4, 8)])
-            Sequence([NonreducedFraction(2, 8)])
+            [NonreducedFraction(4, 8)]
+            [NonreducedFraction(2, 8)]
 
         >>> rhythm_maker = rmakers.note()
         >>> divisions = abjad.sequence.flatten(divisions, depth=-1)
@@ -586,22 +585,21 @@ def ratios(
         >>> divisions = []
         >>> for i, time_signature in enumerate(time_signatures):
         ...     ratio = ratios[i]
-        ...     sequence = abjad.Sequence(time_signature)
+        ...     sequence = [time_signature]
         ...     sequence = baca.sequence.ratios(sequence, [ratio])
         ...     divisions.append(sequence)
         ...
-        >>> divisions = abjad.Sequence(divisions)
         >>> for item in divisions:
         ...     print("sequence:")
         ...     for division in item:
         ...         print(f"\t{repr(division)}")
         sequence:
-            Sequence([NonreducedFraction(10, 24)])
-            Sequence([NonreducedFraction(5, 24)])
+            [NonreducedFraction(10, 24)]
+            [NonreducedFraction(5, 24)]
         sequence:
-            Sequence([NonreducedFraction(2, 8)])
-            Sequence([NonreducedFraction(2, 8)])
-            Sequence([NonreducedFraction(2, 8)])
+            [NonreducedFraction(2, 8)]
+            [NonreducedFraction(2, 8)]
+            [NonreducedFraction(2, 8)]
 
         >>> rhythm_maker = rmakers.note()
         >>> music = rhythm_maker(abjad.sequence.flatten(divisions, depth=-1))
@@ -647,22 +645,21 @@ def ratios(
         >>> divisions = []
         >>> for i, time_signature in enumerate(time_signatures):
         ...     ratio = ratios[i]
-        ...     sequence = abjad.Sequence(time_signature)
+        ...     sequence = [time_signature]
         ...     sequence = baca.sequence.ratios(sequence, [ratio], rounded=True)
         ...     divisions.append(sequence)
         ...
-        >>> divisions = abjad.Sequence(divisions)
         >>> for item in divisions:
         ...     print("sequence:")
         ...     for division in item:
         ...         print(f"\t{repr(division)}")
         sequence:
-            Sequence([NonreducedFraction(3, 8)])
-            Sequence([NonreducedFraction(2, 8)])
+            [NonreducedFraction(3, 8)]
+            [NonreducedFraction(2, 8)]
         sequence:
-            Sequence([NonreducedFraction(2, 8)])
-            Sequence([NonreducedFraction(2, 8)])
-            Sequence([NonreducedFraction(2, 8)])
+            [NonreducedFraction(2, 8)]
+            [NonreducedFraction(2, 8)]
+            [NonreducedFraction(2, 8)]
 
         >>> rhythm_maker = rmakers.note()
         >>> music = rhythm_maker(abjad.sequence.flatten(divisions, depth=-1))
@@ -710,7 +707,7 @@ def ratios(
             multiplier = abjad.Fraction(number, ratio_weight)
             division = multiplier * weight
             divisions.append(division)
-    sequence = abjad.Sequence(sequence).split(divisions)
+    sequence = abjad.sequence.split(sequence, divisions)
     return sequence
 
 
@@ -731,7 +728,6 @@ def split_divisions(
         Splits every five sixteenths:
 
         >>> divisions = baca.fractions(10 * [(1, 8)])
-        >>> divisions = abjad.Sequence(divisions)
         >>> divisions = baca.sequence.split_divisions(divisions, [(5, 16)], cyclic=True)
         >>> for i, sequence_ in enumerate(divisions):
         ...     print(f"sequence {i}")
@@ -760,19 +756,18 @@ def split_divisions(
 
         >>> divisions = [(7, 8), (3, 8), (5, 8)]
         >>> divisions = [abjad.NonreducedFraction(_) for _ in divisions]
-        >>> divisions = abjad.Sequence(divisions)
         >>> divisions = baca.sequence.fuse(divisions)
         >>> divisions = baca.sequence.split_divisions(divisions, [(1, 4)], cyclic=True)
         >>> for item in divisions:
         ...     item
-        Sequence([NonreducedFraction(2, 8)])
-        Sequence([NonreducedFraction(2, 8)])
-        Sequence([NonreducedFraction(2, 8)])
-        Sequence([NonreducedFraction(2, 8)])
-        Sequence([NonreducedFraction(2, 8)])
-        Sequence([NonreducedFraction(2, 8)])
-        Sequence([NonreducedFraction(2, 8)])
-        Sequence([NonreducedFraction(1, 8)])
+        [NonreducedFraction(2, 8)]
+        [NonreducedFraction(2, 8)]
+        [NonreducedFraction(2, 8)]
+        [NonreducedFraction(2, 8)]
+        [NonreducedFraction(2, 8)]
+        [NonreducedFraction(2, 8)]
+        [NonreducedFraction(2, 8)]
+        [NonreducedFraction(1, 8)]
 
         >>> rhythm_maker = rmakers.note()
         >>> music = rhythm_maker(abjad.sequence.flatten(divisions, depth=-1))
@@ -805,7 +800,6 @@ def split_divisions(
 
         >>> divisions = [(7, 8), (3, 8), (5, 8)]
         >>> divisions = [abjad.NonreducedFraction(_) for _ in divisions]
-        >>> divisions = abjad.Sequence(divisions)
         >>> divisions = baca.sequence.fuse(divisions)
         >>> divisions = baca.sequence.split_divisions(
         ...     divisions,
@@ -815,13 +809,13 @@ def split_divisions(
         ... )
         >>> for item in divisions:
         ...     item
-        Sequence([NonreducedFraction(2, 8)])
-        Sequence([NonreducedFraction(2, 8)])
-        Sequence([NonreducedFraction(2, 8)])
-        Sequence([NonreducedFraction(2, 8)])
-        Sequence([NonreducedFraction(2, 8)])
-        Sequence([NonreducedFraction(2, 8)])
-        Sequence([NonreducedFraction(3, 8)])
+        [NonreducedFraction(2, 8)]
+        [NonreducedFraction(2, 8)]
+        [NonreducedFraction(2, 8)]
+        [NonreducedFraction(2, 8)]
+        [NonreducedFraction(2, 8)]
+        [NonreducedFraction(2, 8)]
+        [NonreducedFraction(3, 8)]
 
         >>> rhythm_maker = rmakers.note()
         >>> music = rhythm_maker(abjad.sequence.flatten(divisions, depth=-1))
@@ -855,7 +849,6 @@ def split_divisions(
 
         >>> divisions = [(7, 8), (3, 8), (5, 8)]
         >>> divisions = [abjad.NonreducedFraction(_) for _ in divisions]
-        >>> divisions = abjad.Sequence(divisions)
         >>> divisions = baca.sequence.fuse(divisions)
         >>> divisions = baca.sequence.split_divisions(
         ...     divisions,
@@ -865,14 +858,14 @@ def split_divisions(
         ... )
         >>> for item in divisions:
         ...     item
-        Sequence([NonreducedFraction(1, 8)])
-        Sequence([NonreducedFraction(2, 8)])
-        Sequence([NonreducedFraction(2, 8)])
-        Sequence([NonreducedFraction(2, 8)])
-        Sequence([NonreducedFraction(2, 8)])
-        Sequence([NonreducedFraction(2, 8)])
-        Sequence([NonreducedFraction(2, 8)])
-        Sequence([NonreducedFraction(2, 8)])
+        [NonreducedFraction(1, 8)]
+        [NonreducedFraction(2, 8)]
+        [NonreducedFraction(2, 8)]
+        [NonreducedFraction(2, 8)]
+        [NonreducedFraction(2, 8)]
+        [NonreducedFraction(2, 8)]
+        [NonreducedFraction(2, 8)]
+        [NonreducedFraction(2, 8)]
 
         >>> rhythm_maker = rmakers.note()
         >>> music = rhythm_maker(abjad.sequence.flatten(divisions, depth=-1))
@@ -905,7 +898,6 @@ def split_divisions(
 
         >>> divisions = [(7, 8), (3, 8), (5, 8)]
         >>> divisions = [abjad.NonreducedFraction(_) for _ in divisions]
-        >>> divisions = abjad.Sequence(divisions)
         >>> divisions = baca.sequence.fuse(divisions)
         >>> divisions = baca.sequence.split_divisions(
         ...     divisions,
@@ -916,13 +908,13 @@ def split_divisions(
         ... )
         >>> for item in divisions:
         ...     item
-        Sequence([NonreducedFraction(3, 8)])
-        Sequence([NonreducedFraction(2, 8)])
-        Sequence([NonreducedFraction(2, 8)])
-        Sequence([NonreducedFraction(2, 8)])
-        Sequence([NonreducedFraction(2, 8)])
-        Sequence([NonreducedFraction(2, 8)])
-        Sequence([NonreducedFraction(2, 8)])
+        [NonreducedFraction(3, 8)]
+        [NonreducedFraction(2, 8)]
+        [NonreducedFraction(2, 8)]
+        [NonreducedFraction(2, 8)]
+        [NonreducedFraction(2, 8)]
+        [NonreducedFraction(2, 8)]
+        [NonreducedFraction(2, 8)]
 
         >>> rhythm_maker = rmakers.note()
         >>> music = rhythm_maker(abjad.sequence.flatten(divisions, depth=-1))
@@ -955,7 +947,7 @@ def split_divisions(
         Splits each division into quarters and positions remainder at right:
 
         >>> def quarters(sequence):
-        ...     sequence = abjad.Sequence(sequence)
+        ...     sequence = [sequence]
         ...     sequence = baca.sequence.quarters(sequence)
         ...     sequence = abjad.sequence.flatten(sequence, depth=-1)
         ...     return sequence
@@ -1018,7 +1010,7 @@ def split_divisions(
         Splits each division into quarters and positions remainder at left:
 
         >>> def quarters(sequence):
-        ...     sequence = abjad.Sequence(sequence)
+        ...     sequence = [sequence]
         ...     sequence = baca.sequence.quarters(sequence, remainder=abjad.Left)
         ...     sequence = abjad.sequence.flatten(sequence, depth=-1)
         ...     return sequence
@@ -1082,7 +1074,7 @@ def split_divisions(
         ``1/8`` to the right:
 
         >>> def quarters(sequence):
-        ...     sequence = abjad.Sequence(sequence)
+        ...     sequence = [sequence]
         ...     sequence = baca.sequence.split_divisions(
         ...         sequence,
         ...         [(1, 4)],
@@ -1130,7 +1122,7 @@ def split_divisions(
         ``1/8`` to the left:
 
         >>> def quarters(sequence):
-        ...     sequence = abjad.Sequence(sequence)
+        ...     sequence = [sequence]
         ...     sequence = baca.sequence.split_divisions(
         ...         sequence,
         ...         [(1, 4)],
@@ -1178,13 +1170,13 @@ def split_divisions(
         Splits each division into compound quarters:
 
         >>> def quarters(sequence):
-        ...     sequence = abjad.Sequence(sequence)
+        ...     sequence = [sequence]
         ...     sequence = baca.sequence.quarters(sequence, compound=(3, 2))
         ...     sequence = abjad.sequence.flatten(sequence, depth=-1)
         ...     return sequence
 
         >>> time_signatures = baca.fractions([(3, 4), (6, 8)])
-        >>> divisions = abjad.Sequence(time_signatures)
+        >>> divisions = list(time_signatures)
         >>> divisions = abjad.sequence.map(divisions, quarters)
         >>> for item in divisions:
         ...     print("sequence:")
@@ -1229,17 +1221,16 @@ def split_divisions(
         Splits each division by durations and rotates durations one to the left at
         each new division:
 
-        >>> durations = abjad.Sequence([(1, 16), (1, 8), (1, 4)])
+        >>> durations = [(1, 16), (1, 8), (1, 4)]
         >>> time_signatures = baca.fractions([(7, 16), (7, 16), (7, 16)])
         >>> divisions = []
         >>> for i, time_signature in enumerate(time_signatures):
         ...     durations_ = abjad.sequence.rotate(durations, n=-i)
-        ...     sequence = abjad.Sequence(time_signature)
+        ...     sequence = [time_signature]
         ...     sequence = baca.sequence.split_divisions(sequence, durations_)
         ...     sequence = abjad.sequence.flatten(sequence, depth=-1)
         ...     divisions.append(sequence)
         ...
-        >>> divisions = abjad.Sequence(divisions)
         >>> for item in divisions:
         ...     print("sequence:")
         ...     for division in item:
@@ -1303,9 +1294,9 @@ def split_divisions(
         assert remainder in (abjad.Left, abjad.Right), repr(remainder)
     if remainder_fuse_threshold is not None:
         remainder_fuse_threshold = abjad.Duration(remainder_fuse_threshold)
-    sequence_ = abjad.Sequence(sequence).split(durations, cyclic=cyclic, overhang=True)
-    without_overhang = abjad.Sequence(sequence).split(
-        durations, cyclic=cyclic, overhang=False
+    sequence_ = abjad.sequence.split(sequence, durations, cyclic=cyclic, overhang=True)
+    without_overhang = abjad.sequence.split(
+        sequence, durations, cyclic=cyclic, overhang=False
     )
     if sequence_ != without_overhang:
         items = list(sequence_)
@@ -1314,7 +1305,7 @@ def split_divisions(
             if remainder_fuse_threshold is None:
                 items.insert(0, remaining_item)
             elif sum(remaining_item) <= remainder_fuse_threshold:
-                fused_value = abjad.Sequence([remaining_item, items[0]])
+                fused_value = [remaining_item, items[0]]
                 fused_value_ = abjad.sequence.flatten(fused_value, depth=-1)
                 fused_value = fuse(fused_value_)
                 items[0] = fused_value
@@ -1324,13 +1315,13 @@ def split_divisions(
             if remainder_fuse_threshold is None:
                 items.append(remaining_item)
             elif sum(remaining_item) <= remainder_fuse_threshold:
-                fused_value = abjad.Sequence([items[-1], remaining_item])
+                fused_value = [items[-1], remaining_item]
                 fused_value_ = abjad.sequence.flatten(fused_value, depth=-1)
                 fused_value = fuse(fused_value_)
                 items[-1] = fused_value
             else:
                 items.append(remaining_item)
-        sequence_ = abjad.Sequence(items)
+        sequence_ = items[:]
     return sequence_
 
 
@@ -1369,17 +1360,15 @@ def accumulate(sequence, operands=None, count=None):
 
         >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
         >>> collection_2 = baca.PitchClassSegment([4, 5])
-        >>> abjad.Sequence([collection_1, collection_2])
-        Sequence([PitchClassSegment(items=[0, 1, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 5], item_class=NumberedPitchClass)])
 
-        >>> sequence = abjad.Sequence([collection_1, collection_2])
+        >>> sequence = [collection_1, collection_2]
         >>> for item in baca.sequence.accumulate(sequence, [lambda _: _.transpose(n=3)]):
         ...     item
         ...
-        Sequence([PitchClassSegment(items=[0, 1, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 5], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[3, 4, 5, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[7, 8], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[6, 7, 8, 9], item_class=NumberedPitchClass), PitchClassSegment(items=[10, 11], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[9, 10, 11, 0], item_class=NumberedPitchClass), PitchClassSegment(items=[1, 2], item_class=NumberedPitchClass)])
+        [PitchClassSegment(items=[0, 1, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 5], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[3, 4, 5, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[7, 8], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[6, 7, 8, 9], item_class=NumberedPitchClass), PitchClassSegment(items=[10, 11], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[9, 10, 11, 0], item_class=NumberedPitchClass), PitchClassSegment(items=[1, 2], item_class=NumberedPitchClass)]
 
     ..  container:: example
 
@@ -1387,27 +1376,25 @@ def accumulate(sequence, operands=None, count=None):
 
         >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
         >>> collection_2 = baca.PitchClassSegment([4, 5])
-        >>> abjad.Sequence([collection_1, collection_2])
-        Sequence([PitchClassSegment(items=[0, 1, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 5], item_class=NumberedPitchClass)])
 
-        >>> sequence = abjad.Sequence([collection_1, collection_2])
+        >>> sequence = [collection_1, collection_2]
         >>> for item in baca.sequence.accumulate(
         ...     sequence, [lambda _: _.alpha(), lambda _: _.transpose(n=3)]
         ... ):
         ...     item
         ...
-        Sequence([PitchClassSegment(items=[0, 1, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 5], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[1, 0, 3, 2], item_class=NumberedPitchClass), PitchClassSegment(items=[5, 4], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[4, 3, 6, 5], item_class=NumberedPitchClass), PitchClassSegment(items=[8, 7], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[5, 2, 7, 4], item_class=NumberedPitchClass), PitchClassSegment(items=[9, 6], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[8, 5, 10, 7], item_class=NumberedPitchClass), PitchClassSegment(items=[0, 9], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[9, 4, 11, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[1, 8], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[0, 7, 2, 9], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 11], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[1, 6, 3, 8], item_class=NumberedPitchClass), PitchClassSegment(items=[5, 10], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[4, 9, 6, 11], item_class=NumberedPitchClass), PitchClassSegment(items=[8, 1], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[5, 8, 7, 10], item_class=NumberedPitchClass), PitchClassSegment(items=[9, 0], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[8, 11, 10, 1], item_class=NumberedPitchClass), PitchClassSegment(items=[0, 3], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[9, 10, 11, 0], item_class=NumberedPitchClass), PitchClassSegment(items=[1, 2], item_class=NumberedPitchClass)])
+        [PitchClassSegment(items=[0, 1, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 5], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[1, 0, 3, 2], item_class=NumberedPitchClass), PitchClassSegment(items=[5, 4], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[4, 3, 6, 5], item_class=NumberedPitchClass), PitchClassSegment(items=[8, 7], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[5, 2, 7, 4], item_class=NumberedPitchClass), PitchClassSegment(items=[9, 6], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[8, 5, 10, 7], item_class=NumberedPitchClass), PitchClassSegment(items=[0, 9], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[9, 4, 11, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[1, 8], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[0, 7, 2, 9], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 11], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[1, 6, 3, 8], item_class=NumberedPitchClass), PitchClassSegment(items=[5, 10], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[4, 9, 6, 11], item_class=NumberedPitchClass), PitchClassSegment(items=[8, 1], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[5, 8, 7, 10], item_class=NumberedPitchClass), PitchClassSegment(items=[9, 0], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[8, 11, 10, 1], item_class=NumberedPitchClass), PitchClassSegment(items=[0, 3], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[9, 10, 11, 0], item_class=NumberedPitchClass), PitchClassSegment(items=[1, 2], item_class=NumberedPitchClass)]
 
     ..  container:: example
 
@@ -1415,34 +1402,32 @@ def accumulate(sequence, operands=None, count=None):
 
         >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
         >>> collection_2 = baca.PitchClassSegment([4, 5])
-        >>> abjad.Sequence([collection_1, collection_2])
-        Sequence([PitchClassSegment(items=[0, 1, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 5], item_class=NumberedPitchClass)])
 
         >>> row = [10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11]
-        >>> sequence = abjad.Sequence([collection_1, collection_2])
+        >>> sequence = [collection_1, collection_2]
         >>> for item in baca.sequence.accumulate(sequence, [lambda _: _.permute(row)]):
         ...     item
         ...
-        Sequence([PitchClassSegment(items=[0, 1, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 5], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[10, 0, 2, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[8, 7], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[4, 10, 2, 5], item_class=NumberedPitchClass), PitchClassSegment(items=[1, 3], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[8, 4, 2, 7], item_class=NumberedPitchClass), PitchClassSegment(items=[0, 6], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[1, 8, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[10, 5], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[0, 1, 2, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 7], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[10, 0, 2, 5], item_class=NumberedPitchClass), PitchClassSegment(items=[8, 3], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[4, 10, 2, 7], item_class=NumberedPitchClass), PitchClassSegment(items=[1, 6], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[8, 4, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[0, 5], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[1, 8, 2, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[10, 7], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[0, 1, 2, 5], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 3], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[10, 0, 2, 7], item_class=NumberedPitchClass), PitchClassSegment(items=[8, 6], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[4, 10, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[1, 5], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[8, 4, 2, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[0, 7], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[1, 8, 2, 5], item_class=NumberedPitchClass), PitchClassSegment(items=[10, 3], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[0, 1, 2, 7], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 6], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[10, 0, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[8, 5], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[4, 10, 2, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[1, 7], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[8, 4, 2, 5], item_class=NumberedPitchClass), PitchClassSegment(items=[0, 3], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[1, 8, 2, 7], item_class=NumberedPitchClass), PitchClassSegment(items=[10, 6], item_class=NumberedPitchClass)])
+        [PitchClassSegment(items=[0, 1, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 5], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[10, 0, 2, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[8, 7], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[4, 10, 2, 5], item_class=NumberedPitchClass), PitchClassSegment(items=[1, 3], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[8, 4, 2, 7], item_class=NumberedPitchClass), PitchClassSegment(items=[0, 6], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[1, 8, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[10, 5], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[0, 1, 2, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 7], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[10, 0, 2, 5], item_class=NumberedPitchClass), PitchClassSegment(items=[8, 3], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[4, 10, 2, 7], item_class=NumberedPitchClass), PitchClassSegment(items=[1, 6], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[8, 4, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[0, 5], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[1, 8, 2, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[10, 7], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[0, 1, 2, 5], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 3], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[10, 0, 2, 7], item_class=NumberedPitchClass), PitchClassSegment(items=[8, 6], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[4, 10, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[1, 5], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[8, 4, 2, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[0, 7], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[1, 8, 2, 5], item_class=NumberedPitchClass), PitchClassSegment(items=[10, 3], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[0, 1, 2, 7], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 6], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[10, 0, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[8, 5], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[4, 10, 2, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[1, 7], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[8, 4, 2, 5], item_class=NumberedPitchClass), PitchClassSegment(items=[0, 3], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[1, 8, 2, 7], item_class=NumberedPitchClass), PitchClassSegment(items=[10, 6], item_class=NumberedPitchClass)]
 
     ..  container:: example
 
@@ -1450,32 +1435,30 @@ def accumulate(sequence, operands=None, count=None):
 
         >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
         >>> collection_2 = baca.PitchClassSegment([4, 5])
-        >>> abjad.Sequence([collection_1, collection_2])
-        Sequence([PitchClassSegment(items=[0, 1, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 5], item_class=NumberedPitchClass)])
 
         >>> row = [10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11]
-        >>> sequence = abjad.Sequence([collection_1, collection_2])
+        >>> sequence = [collection_1, collection_2]
         >>> for item in baca.sequence.accumulate(
         ...     sequence, [lambda _: _.permute(row), lambda _: _.transpose(n=3)],
         ... ):
         ...     item
         ...
-        Sequence([PitchClassSegment(items=[0, 1, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 5], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[10, 0, 2, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[8, 7], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[1, 3, 5, 9], item_class=NumberedPitchClass), PitchClassSegment(items=[11, 10], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[0, 6, 7, 9], item_class=NumberedPitchClass), PitchClassSegment(items=[11, 4], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[3, 9, 10, 0], item_class=NumberedPitchClass), PitchClassSegment(items=[2, 7], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[6, 9, 4, 10], item_class=NumberedPitchClass), PitchClassSegment(items=[2, 3], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[9, 0, 7, 1], item_class=NumberedPitchClass), PitchClassSegment(items=[5, 6], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[9, 10, 3, 0], item_class=NumberedPitchClass), PitchClassSegment(items=[7, 5], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[0, 1, 6, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[10, 8], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[10, 0, 5, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 1], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[1, 3, 8, 9], item_class=NumberedPitchClass), PitchClassSegment(items=[7, 4], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[0, 6, 1, 9], item_class=NumberedPitchClass), PitchClassSegment(items=[3, 8], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[3, 9, 4, 0], item_class=NumberedPitchClass), PitchClassSegment(items=[6, 11], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[6, 9, 8, 10], item_class=NumberedPitchClass), PitchClassSegment(items=[5, 11], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[9, 0, 11, 1], item_class=NumberedPitchClass), PitchClassSegment(items=[8, 2], item_class=NumberedPitchClass)])
-        Sequence([PitchClassSegment(items=[9, 10, 11, 0], item_class=NumberedPitchClass), PitchClassSegment(items=[1, 2], item_class=NumberedPitchClass)])
+        [PitchClassSegment(items=[0, 1, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 5], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[10, 0, 2, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[8, 7], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[1, 3, 5, 9], item_class=NumberedPitchClass), PitchClassSegment(items=[11, 10], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[0, 6, 7, 9], item_class=NumberedPitchClass), PitchClassSegment(items=[11, 4], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[3, 9, 10, 0], item_class=NumberedPitchClass), PitchClassSegment(items=[2, 7], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[6, 9, 4, 10], item_class=NumberedPitchClass), PitchClassSegment(items=[2, 3], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[9, 0, 7, 1], item_class=NumberedPitchClass), PitchClassSegment(items=[5, 6], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[9, 10, 3, 0], item_class=NumberedPitchClass), PitchClassSegment(items=[7, 5], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[0, 1, 6, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[10, 8], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[10, 0, 5, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 1], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[1, 3, 8, 9], item_class=NumberedPitchClass), PitchClassSegment(items=[7, 4], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[0, 6, 1, 9], item_class=NumberedPitchClass), PitchClassSegment(items=[3, 8], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[3, 9, 4, 0], item_class=NumberedPitchClass), PitchClassSegment(items=[6, 11], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[6, 9, 8, 10], item_class=NumberedPitchClass), PitchClassSegment(items=[5, 11], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[9, 0, 11, 1], item_class=NumberedPitchClass), PitchClassSegment(items=[8, 2], item_class=NumberedPitchClass)]
+        [PitchClassSegment(items=[9, 10, 11, 0], item_class=NumberedPitchClass), PitchClassSegment(items=[1, 2], item_class=NumberedPitchClass)]
 
     Returns sequence of accumulated sequences.
 
@@ -1541,10 +1524,10 @@ def boustrophedon(sequence, count=2):
         ...     baca.PitchClassSegment([1, 2, 3]),
         ...     baca.PitchClassSegment([4, 5, 6]),
         ... ]
-        >>> sequence = abjad.Sequence(collections)
+        >>> sequence = collections
 
         >>> baca.sequence.boustrophedon(sequence, count=0)
-        Sequence([])
+        []
 
         >>> for collection in baca.sequence.boustrophedon(sequence, count=1):
         ...     collection
@@ -1575,7 +1558,7 @@ def boustrophedon(sequence, count=2):
         Iterates mixed items boustrophedon:
 
         >>> collection = baca.PitchClassSegment([1, 2, 3])
-        >>> sequence = abjad.Sequence([collection, 4, 5])
+        >>> sequence = [collection, 4, 5]
         >>> for item in baca.sequence.boustrophedon(sequence, count=3):
         ...     item
         ...
@@ -1796,7 +1779,7 @@ def helianthate(sequence, n=0, m=0):
 
         Helianthates list of lists:
 
-        >>> sequence = abjad.Sequence([[1, 2, 3], [4, 5], [6, 7, 8]])
+        >>> sequence = [[1, 2, 3], [4, 5], [6, 7, 8]]
         >>> sequence = baca.sequence.helianthate(sequence, n=-1, m=1)
         >>> for item in sequence:
         ...     item
@@ -1827,7 +1810,7 @@ def helianthate(sequence, n=0, m=0):
         >>> J = baca.PitchClassSegment(items=[0, 2, 4])
         >>> K = baca.PitchClassSegment(items=[5, 6])
         >>> L = baca.PitchClassSegment(items=[7, 9, 11])
-        >>> sequence = abjad.Sequence([J, K, L])
+        >>> sequence = [J, K, L]
         >>> sequence = baca.sequence.helianthate(sequence, n=-1, m=1)
         >>> for collection in sequence:
         ...     collection
@@ -1856,9 +1839,9 @@ def helianthate(sequence, n=0, m=0):
         Trivial helianthation:
 
         >>> items = [[1, 2, 3], [4, 5], [6, 7, 8]]
-        >>> sequence = abjad.Sequence(items)
+        >>> sequence = items
         >>> baca.sequence.helianthate(sequence)
-        Sequence([[1, 2, 3], [4, 5], [6, 7, 8]])
+        [[1, 2, 3], [4, 5], [6, 7, 8]]
 
     """
     start = list(sequence[:])

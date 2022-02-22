@@ -542,11 +542,13 @@ def partition_to_avoid_octave_adjacencies(sequence, bigger=abjad.Left):
         first_value = [_ for _ in part if _ % 12 == pc][0]
         first_index = part.index(first_value)
         old_part = part[: first_index + 1]
-        disputed_part = abjad.Sequence(part[first_index + 1 :])
+        disputed_part = part[first_index + 1 :]
         new_part = []
         length = len(disputed_part)
         left, right = partition_integer_into_halves(length, bigger=bigger)
-        disputed_parts = disputed_part.partition_by_counts([left, right])
+        disputed_parts = abjad.sequence.partition_by_counts(
+            disputed_part, [left, right]
+        )
         left_disputed_part, right_disputed_part = disputed_parts
         assert len(left_disputed_part) == left
         assert len(right_disputed_part) == right
