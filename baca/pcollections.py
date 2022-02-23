@@ -7361,106 +7361,6 @@ def illustrate_pitch_tree(
     return lilypond_file
 
 
-def _apply_operator(segment, operator):
-    assert isinstance(segment, PitchClassSegment)
-    assert isinstance(operator, str), repr(operator)
-    if operator.startswith("T"):
-        index = int(operator[1:])
-        segment = segment.transpose(index)
-    elif operator == "I":
-        segment = segment.invert()
-    elif operator.startswith("M"):
-        index = int(operator[1:])
-        segment = segment.multiply(index)
-    elif operator == "alpha":
-        segment = segment.alpha()
-    else:
-        raise Exception(f"unrecognized operator: {operator!r}.")
-    return segment
-
-
-def _check_duplicate_pitch_classes(design):
-    leaves = design.get_payload()
-    for leaf_1, leaf_2 in abjad.sequence.nwise(leaves):
-        if leaf_1 == leaf_2:
-            raise Exception(f"duplicate {leaf_1!r}.")
-
-
-class DesignMaker:
-    """
-    Design-maker.
-
-    ..  container:: example
-
-        Initializes design-maker:
-
-        >>> baca.DesignMaker()
-        DesignMaker()
-
-    """
-
-    __slots__ = ("_result",)
-
-    def __init__(self):
-        self._result = []
-
-    def __call__(self) -> PitchTree:
-        """
-        Calls design-maker.
-        """
-        design = PitchTree(items=self._result)
-        _check_duplicate_pitch_classes(design)
-        return design
-
-    def __repr__(self):
-        """
-        Gets repr.
-        """
-        return f"{type(self).__name__}()"
-
-    def partition(self, cursor, number, counts, operators=None) -> None:
-        """
-        Partitions next ``number`` cells in ``cursor`` by ``counts``.
-
-        Appies optional ``operators`` to resulting parts of partition.
-        """
-        cells = cursor.next(number)
-        list_: typing.List[abjad.PitchClass] = []
-        for cell in cells:
-            list_.extend(cell)
-        segment = PitchClassSegment(items=list_)
-        operators = operators or []
-        for operator in operators:
-            segment = _apply_operator(segment, operator)
-        sequence = list(segment)
-        parts = abjad.sequence.partition_by_counts(sequence, counts, overhang=True)
-        parts_ = [PitchClassSegment(_) for _ in parts]
-        self._result.extend(parts_)
-
-    def partition_cyclic(self, cursor, number, counts, operators=None):
-        """
-        Partitions next ``number`` cells in ``cursor`` cyclically by ``counts``
-
-        Applies optional ``operators`` to parts in resulting partition.
-
-        Returns none.
-        """
-        cells = cursor.next(number)
-        list_ = []
-        for cell in cells:
-            list_.extend(cell)
-        segment = PitchClassSegment(items=list_)
-        operators = operators or []
-        for operator in operators:
-            segment = _apply_operator(segment, operator)
-        sequence = list(segment)
-        parts = abjad.sequence.partition_by_counts(
-            sequence, counts, cyclic=True, overhang=True
-        )
-        parts = [PitchClassSegment(_) for _ in parts]
-        self._result.extend(parts)
-
-
 @dataclasses.dataclass(slots=True)
 class Registration:
     """
@@ -7595,7 +7495,7 @@ class RegistrationComponent:
         )
 
 
-def accumulate_and_repartition(segments, ratios, counts):
+def accumulate_and_repartition(segments, ratios, counts, tree=True):
     segments = _sequence.helianthate(segments, -1, 1)
     sequences = [segments, ratios]
     subsegments = []
@@ -7605,5 +7505,7 @@ def accumulate_and_repartition(segments, ratios, counts):
     groups = abjad.sequence.partition_by_counts(
         subsegments, counts, cyclic=True, overhang=True
     )
-    tree = PitchTree(groups, item_class=abjad.NumberedPitchClass)
-    return tree
+    if tree is True:
+        return PitchTree(groups, item_class=abjad.NumberedPitchClass)
+    else:
+        return groups
