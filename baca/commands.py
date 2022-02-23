@@ -15,7 +15,6 @@ from . import indicators as _indicators
 from . import overrides as _overrides
 from . import parts as _parts
 from . import path as _path
-from . import pitchcommands as _pitchcommands
 from . import scoping as _scoping
 from . import select as _select
 from . import selectors as _selectors
@@ -1035,7 +1034,7 @@ def flat_glissando(
         if isinstance(pitch, abjad.StaffPosition) or (
             isinstance(pitch, list) and isinstance(pitch[0], abjad.StaffPosition)
         ):
-            staff_position_command = _pitchcommands.staff_position(
+            staff_position_command = _commandclasses.staff_position(
                 pitch,
                 allow_repitch=allow_repitch,
                 mock=mock,
@@ -1043,7 +1042,7 @@ def flat_glissando(
             )
             commands.append(staff_position_command)
         else:
-            pitch_command = _pitchcommands.pitch(
+            pitch_command = _commandclasses.pitch(
                 pitch,
                 allow_repitch=allow_repitch,
                 mock=mock,
@@ -1053,13 +1052,13 @@ def flat_glissando(
     elif pitch is not None and stop_pitch is not None:
         if isinstance(pitch, abjad.StaffPosition):
             assert isinstance(stop_pitch, abjad.StaffPosition)
-            interpolation_command = _pitchcommands.interpolate_staff_positions(
+            interpolation_command = _commandclasses.interpolate_staff_positions(
                 pitch, stop_pitch, mock=mock, selector=new_selector
             )
         else:
             assert isinstance(pitch, (str, abjad.NamedPitch))
             assert isinstance(stop_pitch, (str, abjad.NamedPitch))
-            interpolation_command = _pitchcommands.interpolate_pitches(
+            interpolation_command = _commandclasses.interpolate_pitches(
                 pitch, stop_pitch, mock=mock, selector=new_selector
             )
         commands.append(interpolation_command)

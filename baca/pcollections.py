@@ -2423,7 +2423,7 @@ def illustrate_collection_list(collection_list) -> abjad.LilyPondFile:
         ...     [16, 20, 19],
         ... ])
 
-        >>> lilypond_file = baca.pitchclasses.illustrate_collection_list(collections)
+        >>> lilypond_file = baca.pcollections.illustrate_collection_list(collections)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2491,7 +2491,7 @@ class HarmonicSeries:
     ..  container:: example
 
         >>> harmonic_series = baca.HarmonicSeries('C2')
-        >>> lilypond_file = baca.pitchclasses.illustrate_harmonic_series(harmonic_series)
+        >>> lilypond_file = baca.pcollections.illustrate_harmonic_series(harmonic_series)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2617,7 +2617,7 @@ def illustrate_harmonic_series(harmonic_series) -> abjad.LilyPondFile:
     ..  container:: example
 
         >>> harmonic_series = baca.HarmonicSeries('A1')
-        >>> lilypond_file = baca.pitchclasses.illustrate_harmonic_series(harmonic_series)
+        >>> lilypond_file = baca.pcollections.illustrate_harmonic_series(harmonic_series)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -4013,7 +4013,7 @@ class PitchSegment(abjad.PitchSegment):
 
         Returns new segment.
         """
-        from .pitchcommands import RegisterToOctaveCommand
+        from .commandclasses import RegisterToOctaveCommand
 
         # TODO: remove reference to RegisterToOctaveCommand;
         #       implement as segment-only operation
@@ -4101,7 +4101,7 @@ class PitchSegment(abjad.PitchSegment):
 
         Returns new segment.
         """
-        from .pitchcommands import RegisterToOctaveCommand
+        from .commandclasses import RegisterToOctaveCommand
 
         # TODO: remove reference to RegisterToOctaveCommand;
         #       implement as segment-only operation
@@ -4230,7 +4230,7 @@ class PitchSegment(abjad.PitchSegment):
 
         Returns new segment.
         """
-        from .pitchcommands import RegisterToOctaveCommand
+        from .commandclasses import RegisterToOctaveCommand
 
         # TODO: remove reference to RegisterToOctaveCommand;
         #       implement as segment-only operation
@@ -5033,7 +5033,7 @@ class PitchTree:
 
         >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
         >>> tree = baca.PitchTree(items=items)
-        >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(tree)
+        >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(tree)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5108,7 +5108,7 @@ class PitchTree:
         ...     items=items,
         ...     item_class=abjad.NumberedPitchClass,
         ...     )
-        >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(tree)
+        >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(tree)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5184,7 +5184,7 @@ class PitchTree:
         ...     baca.PitchTree([0, 2, 3, 5]),
         ... ]
         >>> tree = baca.PitchTree(items=items)
-        >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(
+        >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(
         ...     tree,
         ...     cell_indices=False,
         ... )
@@ -5261,7 +5261,7 @@ class PitchTree:
         ... ]
         >>> items = [segment.rotate(n=1) for segment in items]
         >>> tree = baca.PitchTree(items=items)
-        >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(
+        >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(
         ...     tree, cell_indices=False
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -5338,7 +5338,7 @@ class PitchTree:
         >>> segment_3 = segment_3.transpose(n=1)
         >>> items = [[segment_1, segment_2], segment_3]
         >>> tree = baca.PitchTree(items=items)
-        >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(
+        >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(
         ...     tree, cell_indices=False
         ... )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -5858,7 +5858,7 @@ class PitchTree:
 
                 >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [1, 2, 2, 4]]
                 >>> tree = baca.PitchTree(items=items)
-                >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(tree)
+                >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(tree)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
                 >>> tree.has_repeats()
@@ -5939,7 +5939,7 @@ class PitchTree:
 
             >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
             >>> tree = baca.PitchTree(items=items)
-            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(tree)
+            >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(tree)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> tree.has_repeats()
@@ -6026,7 +6026,7 @@ class PitchTree:
 
             >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
             >>> tree = baca.PitchTree(items=items)
-            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(tree)
+            >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(tree)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6097,7 +6097,7 @@ class PitchTree:
             Inverts tree about first pitch when axis is none:
 
             >>> inversion = tree.invert()
-            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(inversion)
+            >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(inversion)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6168,7 +6168,7 @@ class PitchTree:
             Inverts tree about pitch 0:
 
             >>> inversion = tree.invert(axis=0)
-            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(inversion)
+            >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(inversion)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6239,7 +6239,7 @@ class PitchTree:
             Inverts tree about pitch 13:
 
             >>> inversion = tree.invert(axis=13)
-            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(inversion)
+            >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(inversion)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6321,7 +6321,7 @@ class PitchTree:
 
             >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
             >>> tree = baca.PitchTree(items=items)
-            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(tree)
+            >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(tree)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6392,7 +6392,7 @@ class PitchTree:
             Gets retrograde of tree:
 
             >>> retrograde = tree.retrograde()
-            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(retrograde)
+            >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(retrograde)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6481,7 +6481,7 @@ class PitchTree:
 
             >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
             >>> tree = baca.PitchTree(items=items)
-            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(tree)
+            >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(tree)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6552,7 +6552,7 @@ class PitchTree:
             Rotates tree to the right:
 
             >>> rotation = tree.rotate(n=1)
-            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(rotation)
+            >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(rotation)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6623,7 +6623,7 @@ class PitchTree:
             Rotates tree to the left:
 
             >>> rotation = tree.rotate(n=-1)
-            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(rotation)
+            >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(rotation)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6694,7 +6694,7 @@ class PitchTree:
             Rotates by zero:
 
             >>> rotation = tree.rotate(n=0)
-            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(rotation)
+            >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(rotation)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6784,7 +6784,7 @@ class PitchTree:
 
             >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
             >>> tree = baca.PitchTree(items=items)
-            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(tree)
+            >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(tree)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6855,7 +6855,7 @@ class PitchTree:
             Transposes tree by positive index:
 
             >>> transposition = tree.transpose(n=13)
-            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(transposition)
+            >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(transposition)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6926,7 +6926,7 @@ class PitchTree:
             Transposes tree by negative index:
 
             >>> transposition = tree.transpose(n=-13)
-            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(transposition)
+            >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(transposition)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6997,7 +6997,7 @@ class PitchTree:
             Transposes tree by zero index:
 
             >>> transposition = tree.transpose(n=0)
-            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(transposition)
+            >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(transposition)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -7086,7 +7086,7 @@ def illustrate_pitch_tree(
 
         >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
         >>> tree = baca.PitchTree(items=items)
-        >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(tree)
+        >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(tree)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -7158,7 +7158,7 @@ def illustrate_pitch_tree(
 
         >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
         >>> tree = baca.PitchTree(items=items)
-        >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(
+        >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(
         ...     tree,
         ...     cell_indices=abjad.Down,
         ...     set_classes=True,
@@ -7246,7 +7246,7 @@ def illustrate_pitch_tree(
         >>> segment_3 = segment_3.transpose(n=1)
         >>> items = [[segment_1, segment_2], segment_3]
         >>> tree = baca.PitchTree(items=items)
-        >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(
+        >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(
         ...     tree,
         ...     cell_indices=abjad.Down,
         ... )
@@ -7620,7 +7620,7 @@ class ZaggedPitchClassMaker:
         ...         grouping_counts=[1, 1, 1, 2, 3],
         ... )
         >>> pitch_class_tree = maker()
-        >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(pitch_class_tree)
+        >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(pitch_class_tree)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         >>> for tree in pitch_class_tree:
@@ -7756,7 +7756,7 @@ class ZaggedPitchClassMaker:
             ...     grouping_counts=None,
             ... )
             >>> pitch_class_tree = maker()
-            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(pitch_class_tree)
+            >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(pitch_class_tree)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> for tree in pitch_class_tree:
@@ -7784,7 +7784,7 @@ class ZaggedPitchClassMaker:
             ...     grouping_counts=None,
             ... )
             >>> pitch_class_tree = maker()
-            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(pitch_class_tree)
+            >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(pitch_class_tree)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> for tree in pitch_class_tree:
@@ -7825,7 +7825,7 @@ class ZaggedPitchClassMaker:
             ...     grouping_counts=[1, 2],
             ... )
             >>> pitch_class_tree = maker()
-            >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(pitch_class_tree)
+            >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(pitch_class_tree)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             >>> for tree in pitch_class_tree:

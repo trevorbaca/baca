@@ -33,10 +33,9 @@ from .memento import *
 from .overrides import *
 from .parts import *
 from .path import *
+from .pcollections import *
 from .persistence import *
 from .piecewise import *
-from .pitchclasses import *
-from .pitchcommands import *
 from .rhythmcommands import *
 from .scoping import *
 from .select import *

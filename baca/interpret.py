@@ -7,15 +7,15 @@ from inspect import currentframe as _frame
 import abjad
 from abjadext import rmakers
 
+from . import commandclasses as _commandclasses
 from . import const as _const
 from . import indicators as _indicators
 from . import layout as _layout
 from . import memento as _memento
 from . import overrides as _overrides
 from . import parts as _parts
+from . import pcollections as _pcollections
 from . import piecewise as _piecewise
-from . import pitchclasses as _pitchclasses
-from . import pitchcommands as _pitchcommands
 from . import rhythmcommands as _rhythmcommands
 from . import scoping as _scoping
 from . import select as _select
@@ -1445,7 +1445,7 @@ def _color_octaves(score):
         if not pitches:
             continue
         pitch_classes = [_.pitch_class for _ in pitches]
-        if _pitchclasses.PitchClassSegment(pitch_classes).has_duplicates():
+        if _pcollections.PitchClassSegment(pitch_classes).has_duplicates():
             color = True
             for pleaf in pleaves:
                 if abjad.get.has_indicator(pleaf, _const.ALLOW_OCTAVE):
@@ -1556,7 +1556,7 @@ def _find_repeat_pitch_classes(argument):
                 written_pitches = lt.head.written_pitches
             else:
                 written_pitches = []
-            pcs = _pitchclasses.PitchClassSet(written_pitches)
+            pcs = _pcollections.PitchClassSet(written_pitches)
             if abjad.get.has_indicator(
                 lt.head, _const.NOT_YET_PITCHED
             ) or abjad.get.has_indicator(lt.head, _const.ALLOW_REPEAT_PITCH):
@@ -2598,7 +2598,7 @@ def _set_intermittent_to_staff_position_zero(score):
             for pleaf in abjad.iterate.leaves(voice, pitched=True):
                 if abjad.get.has_indicator(pleaf, _const.NOT_YET_PITCHED):
                     pleaves.append(pleaf)
-    command = _pitchcommands.staff_position(
+    command = _commandclasses.staff_position(
         0,
         _selectors.plts(),
         set_chord_pitches_equal=True,
@@ -2612,7 +2612,7 @@ def _set_not_yet_pitched_to_staff_position_zero(score):
         if not abjad.get.has_indicator(pleaf, _const.NOT_YET_PITCHED):
             continue
         pleaves.append(pleaf)
-    command = _pitchcommands.staff_position(
+    command = _commandclasses.staff_position(
         0,
         _selectors.plts(),
         set_chord_pitches_equal=True,
