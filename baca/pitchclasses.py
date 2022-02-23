@@ -5101,85 +5101,6 @@ class PitchTree(_classes.Tree):
 
     ..  container:: example
 
-        Initializes named pitch tree:
-
-        >>> items = [
-        ...     ["E5", "F#5", "Bb4"],
-        ...     ["A4", "G4", "Ab4", "B4", "A4", "C#4"],
-        ...     ["C4", "D4", "Eb4", "F4"],
-        ... ]
-        >>> tree = baca.PitchTree(
-        ...     items=items,
-        ...     item_class=abjad.NamedPitch,
-        ... )
-        >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(tree)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            \with
-            {
-                \override BarLine.transparent = ##t
-                \override BarNumber.stencil = ##f
-                \override Beam.stencil = ##f
-                \override Flag.stencil = ##f
-                \override HorizontalBracket.staff-padding = 4
-                \override SpacingSpanner.strict-grace-spacing = ##t
-                \override SpacingSpanner.strict-note-spacing = ##t
-                \override SpacingSpanner.uniform-stretching = ##t
-                \override Stem.stencil = ##f
-                \override TextScript.X-extent = ##f
-                \override TextScript.staff-padding = 2
-                \override TimeSignature.stencil = ##f
-                proportionalNotationDuration = #(ly:make-moment 1 16)
-            }
-            <<
-                \context Staff = "Staff"
-                {
-                    \context Voice = "Voice"
-                    \with
-                    {
-                        \consists Horizontal_bracket_engraver
-                    }
-                    {
-                        \time 1/8
-                        e''8
-                        ^ \markup 0
-                        \startGroup
-                        fs''8
-                        bf'8
-                        \stopGroup
-                        s8
-                        a'8
-                        ^ \markup 1
-                        \startGroup
-                        g'8
-                        af'8
-                        b'8
-                        a'8
-                        cs'8
-                        \stopGroup
-                        s8
-                        c'8
-                        ^ \markup 2
-                        \startGroup
-                        d'8
-                        ef'8
-                        f'8
-                        \stopGroup
-                        s8
-                        \bar "|."
-                        \override Score.BarLine.transparent = ##f
-                    }
-                }
-            >>
-
-    ..  container:: example
-
         Initializes numbered pitch-class tree:
 
         >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
@@ -5187,85 +5108,6 @@ class PitchTree(_classes.Tree):
         ...     items=items,
         ...     item_class=abjad.NumberedPitchClass,
         ...     )
-        >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(tree)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            \with
-            {
-                \override BarLine.transparent = ##t
-                \override BarNumber.stencil = ##f
-                \override Beam.stencil = ##f
-                \override Flag.stencil = ##f
-                \override HorizontalBracket.staff-padding = 4
-                \override SpacingSpanner.strict-grace-spacing = ##t
-                \override SpacingSpanner.strict-note-spacing = ##t
-                \override SpacingSpanner.uniform-stretching = ##t
-                \override Stem.stencil = ##f
-                \override TextScript.X-extent = ##f
-                \override TextScript.staff-padding = 2
-                \override TimeSignature.stencil = ##f
-                proportionalNotationDuration = #(ly:make-moment 1 16)
-            }
-            <<
-                \context Staff = "Staff"
-                {
-                    \context Voice = "Voice"
-                    \with
-                    {
-                        \consists Horizontal_bracket_engraver
-                    }
-                    {
-                        \time 1/8
-                        e'8
-                        ^ \markup 0
-                        \startGroup
-                        fs'8
-                        bf'8
-                        \stopGroup
-                        s8
-                        a'8
-                        ^ \markup 1
-                        \startGroup
-                        g'8
-                        af'8
-                        b'8
-                        a'8
-                        cs'8
-                        \stopGroup
-                        s8
-                        c'8
-                        ^ \markup 2
-                        \startGroup
-                        d'8
-                        ef'8
-                        f'8
-                        \stopGroup
-                        s8
-                        \bar "|."
-                        \override Score.BarLine.transparent = ##f
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Initializes named pitch-class tree:
-
-        >>> items = [
-        ...     ["E5", "F#5", "Bb4"],
-        ...     ["A4", "G4", "Ab4", "B4", "A4", "C#4"],
-        ...     ["C4", "D4", "Eb4", "F4"],
-        ... ]
-        >>> tree = baca.PitchTree(
-        ...     items=items,
-        ...     item_class=abjad.NamedPitchClass,
-        ... )
         >>> lilypond_file = baca.pitchclasses.illustrate_pitch_tree(tree)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5574,6 +5416,8 @@ class PitchTree(_classes.Tree):
     def __init__(self, items=None, *, item_class=None):
         item_class = item_class or abjad.NumberedPitch
         _classes.Tree.__init__(self, items=items, item_class=item_class)
+        prototype = (abjad.NumberedPitch, abjad.NumberedPitchClass)
+        assert item_class in prototype, repr(item_class)
 
     ### SPECIAL METHODS ###
 
