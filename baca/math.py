@@ -14,22 +14,21 @@ def increase_elements(sequence, addenda, indices=None):
 
         Increases range elements by ``10`` and ``-10`` in alternation:
 
-        >>> baca.increase_elements(range(10), [10, -10])
+        >>> baca.math.increase_elements(range(10), [10, -10])
         [10, -9, 12, -7, 14, -5, 16, -3, 18, -1]
-
 
     ..  container:: example
 
         Increases list elements by 10 and -10 in alternation:
 
-        >>> baca.increase_elements(list(range(10)), [10, -10])
+        >>> baca.math.increase_elements(list(range(10)), [10, -10])
         [10, -9, 12, -7, 14, -5, 16, -3, 18, -1]
 
     ..  container:: example
 
         Increases tuple elements by 10 and -10 in alternation:
 
-        >>> baca.increase_elements(tuple(range(10)), [10, -10])
+        >>> baca.math.increase_elements(tuple(range(10)), [10, -10])
         [10, -9, 12, -7, 14, -5, 16, -3, 18, -1]
 
     ..  container:: example
@@ -39,20 +38,18 @@ def increase_elements(sequence, addenda, indices=None):
         >>> sequence = [1, 1, 2, 3, 5, 5, 1, 2, 5, 5, 6]
         >>> addenda = [0.5, 0.5]
         >>> indices = [0, 4, 8]
-        >>> baca.increase_elements(sequence, addenda, indices)
+        >>> baca.math.increase_elements(sequence, addenda, indices)
         [1.5, 1.5, 2, 3, 5.5, 5.5, 1, 2, 5.5, 5.5, 6]
 
     ..  container:: example
 
-        >>> baca.increase_elements(range(10), [2, 0])
+        >>> baca.math.increase_elements(range(10), [2, 0])
         [2, 1, 4, 3, 6, 5, 8, 7, 10, 9]
 
     ..  container:: example
 
         >>> sequence_1 = [1, 1, 2, 3, 5, 5, 1, 2, 5, 5, 6]
-        >>> baca.increase_elements(
-        ...     sequence_1, [0.5, 0.5], indices=[0, 4, 8]
-        ...     )
+        >>> baca.math.increase_elements(sequence_1, [0.5, 0.5], indices=[0, 4, 8])
         [1.5, 1.5, 2, 3, 5.5, 5.5, 1, 2, 5.5, 5.5, 6]
 
     Returns list.
@@ -82,7 +79,7 @@ def insert_and_transpose(notes, subrun_tokens):
 
     >>> notes = [abjad.Note(_, (1, 4)) for _ in [0, 2, 7, 9, 5, 11, 4]]
     >>> subrun_tokens = [(0, [2, 4]), (4, [3, 1])]
-    >>> baca.insert_and_transpose(notes, subrun_tokens)
+    >>> baca.math.insert_and_transpose(notes, subrun_tokens)
 
     >>> result = []
     >>> for note in notes:
@@ -200,7 +197,7 @@ def negate_elements(sequence, absolute=False, indices=None, period=None):
         Negates all elements:
 
         >>> sequence = [1, 2, 3, 4, 5, -6, -7, -8, -9, -10]
-        >>> baca.negate_elements(sequence)
+        >>> baca.math.negate_elements(sequence)
         [-1, -2, -3, -4, -5, 6, 7, 8, 9, 10]
 
     ..  container:: example
@@ -208,7 +205,7 @@ def negate_elements(sequence, absolute=False, indices=None, period=None):
         Negates elements at indices 0, 1 and 2:
 
         >>> sequence = [1, 2, 3, 4, 5, -6, -7, -8, -9, -10]
-        >>> baca.negate_elements(sequence, indices=[0, 1, 2])
+        >>> baca.math.negate_elements(sequence, indices=[0, 1, 2])
         [-1, -2, -3, 4, 5, -6, -7, -8, -9, -10]
 
     ..  container:: example
@@ -216,7 +213,7 @@ def negate_elements(sequence, absolute=False, indices=None, period=None):
         Negates elements at indices congruent to 0, 1 or 2 mod 5:
 
         >>> sequence = [1, 2, 3, 4, 5, -6, -7, -8, -9, -10]
-        >>> baca.negate_elements(
+        >>> baca.math.negate_elements(
         ...     sequence,
         ...     indices=[0, 1, 2],
         ...     period=5,
@@ -228,7 +225,7 @@ def negate_elements(sequence, absolute=False, indices=None, period=None):
         Negates the absolute value of all elements:
 
         >>> sequence = [1, 2, 3, 4, 5, -6, -7, -8, -9, -10]
-        >>> baca.negate_elements(sequence, absolute=True)
+        >>> baca.math.negate_elements(sequence, absolute=True)
         [-1, -2, -3, -4, -5, -6, -7, -8, -9, -10]
 
     ..  container:: example
@@ -236,7 +233,7 @@ def negate_elements(sequence, absolute=False, indices=None, period=None):
         Negates the absolute value elements at indices 0, 1 and 2:
 
         >>> sequence = [1, 2, 3, 4, 5, -6, -7, -8, -9, -10]
-        >>> baca.negate_elements(
+        >>> baca.math.negate_elements(
         ...     sequence,
         ...     absolute=True,
         ...     indices=[0, 1, 2],
@@ -248,7 +245,7 @@ def negate_elements(sequence, absolute=False, indices=None, period=None):
         Negates the absolute value elements at indices congruent to 0, 1 or 2 mod 5:
 
         >>> sequence = [1, 2, 3, 4, 5, -6, -7, -8, -9, -10]
-        >>> baca.negate_elements(
+        >>> baca.math.negate_elements(
         ...     sequence,
         ...     absolute=True,
         ...     indices=[0, 1, 2],
@@ -287,36 +284,24 @@ def overwrite_elements(sequence, pairs):
         Overwrites range elements:
 
         >>> pairs = [(0, 3), (5, 3)]
-        >>> baca.overwrite_elements(range(10), pairs)
+        >>> baca.math.overwrite_elements(range(10), pairs)
         [0, 0, 0, 3, 4, 5, 5, 5, 8, 9]
-
-        Returns list.
-
-    ..  container:: example
 
         Overwrites list elements:
 
         >>> pairs = [(0, 3), (5, 3)]
-        >>> baca.overwrite_elements(list(range(10)), pairs)
+        >>> baca.math.overwrite_elements(list(range(10)), pairs)
         [0, 0, 0, 3, 4, 5, 5, 5, 8, 9]
-
-        Returns new list.
-
-    ..  container:: example
 
         Overwrites tuple elements:
 
         >>> pairs = [(0, 3), (5, 3)]
-        >>> baca.overwrite_elements(tuple(range(10)), pairs)
+        >>> baca.math.overwrite_elements(tuple(range(10)), pairs)
         [0, 0, 0, 3, 4, 5, 5, 5, 8, 9]
-
-        Returns list.
-
-    ..  container:: example
 
         Overwrites all items:
 
-        >>> baca.overwrite_elements(range(10), [(0, 99)])
+        >>> baca.math.overwrite_elements(range(10), [(0, 99)])
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
     Set ``pairs`` to a list of ``(anchor_index, length)`` pairs.
@@ -351,20 +336,20 @@ def partition_integer_into_halves(n, bigger=abjad.Left, allow_even=True):
 
         When ``n`` is odd the greater part of pair corresponds to the value of ``bigger``
 
-        >>> baca.partition_integer_into_halves(7, bigger=abjad.Left)
+        >>> baca.math.partition_integer_into_halves(7, bigger=abjad.Left)
         (4, 3)
 
-        >>> baca.partition_integer_into_halves(7, bigger=abjad.Right)
+        >>> baca.math.partition_integer_into_halves(7, bigger=abjad.Right)
         (3, 4)
 
     ..  container:: example
 
         Likewise when ``n`` is even and ``allow_even`` is false:
 
-        >>> baca.partition_integer_into_halves(8, bigger=abjad.Left, allow_even=False)
+        >>> baca.math.partition_integer_into_halves(8, bigger=abjad.Left, allow_even=False)
         (5, 3)
 
-        >>> baca.partition_integer_into_halves(8, bigger=abjad.Right, allow_even=False)
+        >>> baca.math.partition_integer_into_halves(8, bigger=abjad.Right, allow_even=False)
         (3, 5)
 
     ..  container:: example
@@ -372,20 +357,20 @@ def partition_integer_into_halves(n, bigger=abjad.Left, allow_even=True):
         But when ``n`` is even and ``allow_even`` is true then ``left == right`` and
         ``bigger`` is ignored:
 
-        >>> baca.partition_integer_into_halves(8)
+        >>> baca.math.partition_integer_into_halves(8)
         (4, 4)
 
-        >>> baca.partition_integer_into_halves(8, bigger=abjad.Left)
+        >>> baca.math.partition_integer_into_halves(8, bigger=abjad.Left)
         (4, 4)
 
-        >>> baca.partition_integer_into_halves(8, bigger=abjad.Right)
+        >>> baca.math.partition_integer_into_halves(8, bigger=abjad.Right)
         (4, 4)
 
     ..  container:: example
 
         When ``n`` is ``0`` returns ``(0, 0)``:
 
-        >>> baca.partition_integer_into_halves(0)
+        >>> baca.math.partition_integer_into_halves(0)
         (0, 0)
 
     Raises excepton when ``n`` is ``0`` and ``allow_even`` is false.
@@ -416,19 +401,21 @@ def partition_nested_into_inward_pointing_parts(sequence, target="negative"):
     ..  container:: example
 
         >>> sequence = [[1, 1, 5]]
-        >>> baca.partition_nested_into_inward_pointing_parts(sequence)
+        >>> baca.math.partition_nested_into_inward_pointing_parts(sequence)
         [[1, 1, 5]]
 
         >>> sequence = [[1, 1, -5]]
-        >>> baca.partition_nested_into_inward_pointing_parts(sequence)
+        >>> baca.math.partition_nested_into_inward_pointing_parts(sequence)
         [[1, 1, 1, -4]]
 
         >>> sequence = [[1], [5], [5, 1], [1, 5], [5, 5], [1, 5, 1]]
-        >>> baca.partition_nested_into_inward_pointing_parts(sequence, target="positive")
+        >>> baca.math.partition_nested_into_inward_pointing_parts(
+        ...     sequence, target="positive")
         [[1], [4, 1], [4, 1, 1], [1, 1, 4], [4, 1, 1, 4], [1, 4, 1, 1]]
 
         >>> sequence = [[1, 1, -5]]
-        >>> baca.partition_nested_into_inward_pointing_parts(sequence, target="positive")
+        >>> baca.math.partition_nested_into_inward_pointing_parts(
+        ...     sequence, target="positive")
         [[1, 1, -5]]
 
     """
@@ -480,52 +467,52 @@ def partition_to_avoid_octave_adjacencies(sequence, bigger=abjad.Left):
         No duplicate items:
 
         >>> pitches = [0, 1, 2, 3]
-        >>> baca.partition_to_avoid_octave_adjacencies(pitches, abjad.Left)
+        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.Left)
         [(0, 1, 2, 3)]
 
-        >>> baca.partition_to_avoid_octave_adjacencies(pitches, abjad.Right)
+        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.Right)
         [(0, 1, 2, 3)]
 
         All duplicate items:
 
         >>> pitches = [0, 0, 0, 0]
-        >>> baca.partition_to_avoid_octave_adjacencies(pitches, abjad.Left)
+        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.Left)
         [(0,), (0,), (0,), (0,)]
 
         >>> pitches = [0, 0, 0, 0]
-        >>> baca.partition_to_avoid_octave_adjacencies(pitches, abjad.Right)
+        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.Right)
         [(0,), (0,), (0,), (0,)]
 
         Duplicates, with odd number of items:
 
         >>> pitches = [0, 1, 0]
-        >>> baca.partition_to_avoid_octave_adjacencies(pitches, abjad.Left)
+        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.Left)
         [(0, 1), (0,)]
 
-        >>> baca.partition_to_avoid_octave_adjacencies(pitches, abjad.Right)
+        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.Right)
         [(0,), (1, 0)]
 
         >>> pitches = [0, 1, 2, 3, 0]
-        >>> baca.partition_to_avoid_octave_adjacencies(pitches, abjad.Left)
+        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.Left)
         [(0, 1, 2), (3, 0)]
 
-        >>> baca.partition_to_avoid_octave_adjacencies(pitches, abjad.Right)
+        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.Right)
         [(0, 1), (2, 3, 0)]
 
         Duplicates, with even number of items:
 
         >>> pitches = [0, 1, 2, 0]
-        >>> baca.partition_to_avoid_octave_adjacencies(pitches, abjad.Left)
+        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.Left)
         [(0, 1), (2, 0)]
 
-        >>> baca.partition_to_avoid_octave_adjacencies(pitches, abjad.Right)
+        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.Right)
         [(0, 1), (2, 0)]
 
         >>> pitches = [0, 1, 2, 3, 4, 0]
-        >>> baca.partition_to_avoid_octave_adjacencies(pitches, abjad.Left)
+        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.Left)
         [(0, 1, 2), (3, 4, 0)]
 
-        >>> baca.partition_to_avoid_octave_adjacencies(pitches, abjad.Right)
+        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.Right)
         [(0, 1, 2), (3, 4, 0)]
 
     """
@@ -569,8 +556,23 @@ def repeat_subruns_to_length(notes, pairs, history=False):
     ..  container:: example
 
         >>> sequence = [abjad.Note(_, (1, 4)) for _ in [0, 2, 4, 5, 7, 9, 11]]
-        >>> baca.repeat_subruns_to_length(sequence, [(0, 4, 1), (2, 4, 1)])
-        [Note("c'4"), Note("d'4"), Note("e'4"), Note("f'4"), Note("c'4"), Note("d'4"), Note("e'4"), Note("f'4"), Note("g'4"), Note("a'4"), Note("e'4"), Note("f'4"), Note("g'4"), Note("a'4"), Note("b'4")]
+        >>> result = baca.math.repeat_subruns_to_length(sequence, [(0, 4, 1), (2, 4, 1)])
+        >>> for item in result: item
+        Note("c'4")
+        Note("d'4")
+        Note("e'4")
+        Note("f'4")
+        Note("c'4")
+        Note("d'4")
+        Note("e'4")
+        Note("f'4")
+        Note("g'4")
+        Note("a'4")
+        Note("e'4")
+        Note("f'4")
+        Note("g'4")
+        Note("a'4")
+        Note("b'4")
 
     Returns list of components.
     """

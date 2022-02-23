@@ -2,18 +2,21 @@ import sys
 
 import abjad
 
+from . import array
 from . import build
 from . import const
+
+# from . import math
 from . import jobs
 from . import score
 from . import select
 from . import selectors
 from . import sequence
+from . import typings
 from .accumulator import (
     CommandAccumulator,
     segment_accumulation_defaults,
 )
-from .array import *
 from .classes import *
 from .commandclasses import *
 from .commands import *
@@ -28,19 +31,19 @@ from .interpret import (
     score_interpretation_defaults,
 )
 from .layout import *
-from .math import *
 from .memento import *
 from .overrides import *
 from .parts import *
 from .path import *
 from .pcollections import *
-from .persistence import *
 from .piecewise import *
 from .rhythmcommands import *
 from .scoping import *
 from .select import *
-from .spannercommands import *
-from .typings import *
+from .spanners import *
+
+del math
+from . import math
 
 
 if sys.version_info[:2] < (3, 10):

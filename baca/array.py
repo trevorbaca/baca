@@ -40,7 +40,7 @@ class PitchArray:
 
         A two-by-three pitch array:
 
-        >>> pitch_array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+        >>> pitch_array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
         >>> print(pitch_array)
         [ ] [     ] [ ]
         [     ] [ ] [ ]
@@ -171,17 +171,17 @@ class PitchArray:
 
         ..  container:: example
 
-            >>> array_1 = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array_1 = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
             >>> print(array_1)
             [ ] [     ] [ ]
             [     ] [ ] [ ]
 
-            >>> array_2 = baca.PitchArray([[3, 4], [4, 3]])
+            >>> array_2 = baca.array.PitchArray([[3, 4], [4, 3]])
             >>> print(array_2)
             [   ] [   ]
             [     ] [   ]
 
-            >>> array_3 = baca.PitchArray([[1, 1], [1, 1]])
+            >>> array_3 = baca.array.PitchArray([[1, 1], [1, 1]])
             >>> print(array_3)
             [ ] [ ]
             [ ] [ ]
@@ -330,7 +330,7 @@ class PitchArray:
 
         ..  container:: example
 
-            >>> array = baca.PitchArray([
+            >>> array = baca.array.PitchArray([
             ...     [1, (2, 1), (-1.5, 2)],
             ...     [(7, 2), (6, 1), 1],
             ... ])
@@ -470,7 +470,7 @@ class PitchArray:
 
         ..  container:: example
 
-            >>> array = baca.PitchArray([
+            >>> array = baca.array.PitchArray([
             ...     [1, (0, 1), (0, 2)],
             ...     [(0, 2), (0, 1), 1],
             ... ])
@@ -496,7 +496,7 @@ class PitchArray:
 
         ..  container:: example
 
-            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
             >>> array[0].cells[0].append_pitch(0)
             >>> array[0].cells[1].append_pitch(2)
             >>> array[1].cells[2].append_pitch(4)
@@ -604,7 +604,7 @@ class PitchArray:
 
             >>> abjad.show(score) # doctest: +SKIP
 
-            >>> array = baca.PitchArray.from_score(score, populate=False)
+            >>> array = baca.array.PitchArray.from_score(score, populate=False)
 
             >>> print(array)
             [     ] [     ] [     ] [     ]
@@ -664,7 +664,7 @@ class PitchArray:
 
             >>> abjad.show(score) # doctest: +SKIP
 
-            >>> array = baca.PitchArray.from_score(score, populate=True)
+            >>> array = baca.array.PitchArray.from_score(score, populate=True)
 
             >>> print(array)
             [c'     ] [d'     ] [e'     ] [f'     ]
@@ -712,7 +712,7 @@ class PitchArray:
 
             Lists three nonspanning subarrays:
 
-            >>> array = baca.PitchArray([
+            >>> array = baca.array.PitchArray([
             ...     [2, 2, 3, 1],
             ...     [1, 2, 1, 1, 2, 1],
             ...     [1, 1, 1, 1, 1, 1, 1, 1],
@@ -830,7 +830,7 @@ class PitchArray:
 
             Changes two-by-three pitch array to measures:
 
-            >>> array = baca.PitchArray([
+            >>> array = baca.array.PitchArray([
             ...     [1, (2, 1), ([-2, -1.5], 2)],
             ...     [(7, 2), (6, 1), 1],
             ... ])
@@ -879,7 +879,7 @@ class PitchArrayCell:
 
         A pitch array cell:
 
-        >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+        >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
         >>> print(array)
         [ ] [     ] [ ]
         [     ] [ ] [ ]
@@ -932,43 +932,43 @@ class PitchArrayCell:
 
         Initializes empty:
 
-        >>> baca.PitchArrayCell()
+        >>> baca.array.PitchArrayCell()
         PitchArrayCell(width=1)
 
         Initializes with width:
 
-        >>> baca.PitchArrayCell(width=2)
+        >>> baca.array.PitchArrayCell(width=2)
         PitchArrayCell(width=2)
 
         Initializes with pitch:
 
-        >>> baca.PitchArrayCell(pitches=[abjad.NamedPitch(0)])
+        >>> baca.array.PitchArrayCell(pitches=[abjad.NamedPitch(0)])
         PitchArrayCell(pitches="c'", width=1)
 
         Initializes with pitch numbers:
 
-        >>> baca.PitchArrayCell(pitches=[0, 2, 4])
+        >>> baca.array.PitchArrayCell(pitches=[0, 2, 4])
         PitchArrayCell(pitches="c' d' e'", width=1)
 
         Initializes with pitches:
 
         >>> pitches = [abjad.NamedPitch(_) for _ in [0, 2, 4]]
-        >>> baca.PitchArrayCell(pitches)
+        >>> baca.array.PitchArrayCell(pitches)
         PitchArrayCell(pitches="c' d' e'", width=1)
 
         Initializes with pitch number and width:
 
-        >>> baca.PitchArrayCell(pitches=0, width=2)
+        >>> baca.array.PitchArrayCell(pitches=0, width=2)
         PitchArrayCell(pitches="c'", width=2)
 
         Initializes with pitch and width:
 
-        >>> baca.PitchArrayCell(pitches=[abjad.NamedPitch(0)], width=2)
+        >>> baca.array.PitchArrayCell(pitches=[abjad.NamedPitch(0)], width=2)
         PitchArrayCell(pitches="c'", width=2)
 
         Initializes with pitch numbers and width:
 
-        >>> baca.PitchArrayCell(pitches=[0, 2, 4], width=2)
+        >>> baca.array.PitchArrayCell(pitches=[0, 2, 4], width=2)
         PitchArrayCell(pitches="c' d' e'", width=2)
 
     """
@@ -1154,7 +1154,7 @@ class PitchArrayCell:
 
             Gets column start and stop indices of cell in array:
 
-            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
             >>> cell = array[0][1]
             >>> cell.column_indices
             (1, 2)
@@ -1163,7 +1163,7 @@ class PitchArrayCell:
 
             Gets column start and stop indices of cell outside array:
 
-            >>> cell = baca.PitchArrayCell()
+            >>> cell = baca.array.PitchArrayCell()
             >>> cell.column_indices is None
             True
 
@@ -1184,7 +1184,7 @@ class PitchArrayCell:
 
             Gets column start index of cell in array:
 
-            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
             >>> cell = array[0][1]
             >>> cell.column_start_index
             1
@@ -1193,7 +1193,7 @@ class PitchArrayCell:
 
             Gets column start index of cell outside array:
 
-            >>> cell = baca.PitchArrayCell()
+            >>> cell = baca.array.PitchArrayCell()
             >>> cell.column_start_index is None
             True
 
@@ -1216,7 +1216,7 @@ class PitchArrayCell:
 
             Gets column stop index of cell in array:
 
-            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
             >>> cell = array[0][1]
             >>> cell.column_stop_index
             2
@@ -1225,7 +1225,7 @@ class PitchArrayCell:
 
             Gets column stop index of cell outside array:
 
-            >>> cell = baca.PitchArrayCell()
+            >>> cell = baca.array.PitchArrayCell()
             >>> cell.column_stop_index is None
             True
 
@@ -1241,7 +1241,7 @@ class PitchArrayCell:
 
         ..  container:: example
 
-            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
 
             >>> print(array)
             [ ] [     ] [ ]
@@ -1269,7 +1269,7 @@ class PitchArrayCell:
 
         ..  container:: example
 
-            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
 
             >>> print(array)
             [ ] [     ] [ ]
@@ -1300,7 +1300,7 @@ class PitchArrayCell:
 
         ..  container:: example
 
-            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
 
             >>> print(array)
             [ ] [     ] [ ]
@@ -1331,22 +1331,22 @@ class PitchArrayCell:
 
         ..  container:: example
 
-            >>> baca.PitchArrayCell(width=1).item
+            >>> baca.array.PitchArrayCell(width=1).item
             1
 
-            >>> baca.PitchArrayCell(width=2).item
+            >>> baca.array.PitchArrayCell(width=2).item
             2
 
-            >>> baca.PitchArrayCell("c'").item
+            >>> baca.array.PitchArrayCell("c'").item
             ('c', 4)
 
-            >>> baca.PitchArrayCell("c'", width=2).item
+            >>> baca.array.PitchArrayCell("c'", width=2).item
             (('c', 4), 2)
 
-            >>> baca.PitchArrayCell("c' d'").item
+            >>> baca.array.PitchArrayCell("c' d'").item
             [('c', 4), ('d', 4)]
 
-            >>> baca.PitchArrayCell("c' d'", width=2).item
+            >>> baca.array.PitchArrayCell("c' d'", width=2).item
             ([('c', 4), ('d', 4)], 2)
 
         """
@@ -1385,7 +1385,7 @@ class PitchArrayCell:
 
         ..  container:: example
 
-            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
 
             >>> print(array)
             [ ] [     ] [ ]
@@ -1469,7 +1469,7 @@ class PitchArrayCell:
 
         ..  container:: example
 
-            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
 
             >>> print(array)
             [ ] [     ] [ ]
@@ -1545,7 +1545,7 @@ class PitchArrayCell:
 
         ..  container:: example
 
-            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
             >>> array[0].cells[0].append_pitch(0)
             >>> array[0].cells[1].append_pitch(2)
             >>> array[0].cells[1].append_pitch(4)
@@ -1577,7 +1577,7 @@ class PitchArrayColumn:
 
         A pitch array column:
 
-        >>> array = baca.PitchArray([
+        >>> array = baca.array.PitchArray([
         ...     [1, (2, 1), (-1.5, 2)],
         ...     [(7, 2), (6, 1), 1],
         ... ])
@@ -1839,7 +1839,7 @@ class PitchArrayColumn:
 
         ..  container:: example
 
-            >>> array = baca.PitchArray([
+            >>> array = baca.array.PitchArray([
             ...     [1, (2, 1), (-1.5, 2)],
             ...     [(7, 2), (6, 1), 1],
             ... ])
@@ -1905,7 +1905,7 @@ class PitchArrayColumn:
 
         ..  container:: example
 
-            >>> array = baca.PitchArray([
+            >>> array = baca.array.PitchArray([
             ...     [1, (2, 1), ([-2, -1.5], 2)],
             ...     [(7, 2), (6, 1), 1],
             ... ])
@@ -1938,7 +1938,7 @@ class PitchArrayColumn:
 
         ..  container:: example
 
-            >>> array = baca.PitchArray([
+            >>> array = baca.array.PitchArray([
             ...     [1, (2, 1), ([-2, -1.5], 2)],
             ...     [(7, 2), (6, 1), 1],
             ... ])
@@ -2023,18 +2023,18 @@ class PitchArrayList(abjad.TypedList):
 
         A pitch array list:
 
-        >>> array_1 = baca.PitchArray([
+        >>> array_1 = baca.array.PitchArray([
         ...   [1, (2, 1), ([-2, -1.5], 2)],
         ...   [(7, 2), (6, 1), 1],
         ... ])
 
-        >>> array_2 = baca.PitchArray([
+        >>> array_2 = baca.array.PitchArray([
         ...   [1, 1, 1],
         ...   [1, 1, 1],
         ... ])
 
         >>> arrays = [array_1, array_2]
-        >>> arrays = baca.PitchArrayList(arrays)
+        >>> arrays = baca.array.PitchArrayList(arrays)
 
         >>> arrays
         PitchArrayList(items=[PitchArray(rows=(PitchArrayRow(cells=(PitchArrayCell(width=1), PitchArrayCell(pitches="d'", width=1), PitchArrayCell(pitches="bf bqf", width=2))), PitchArrayRow(cells=(PitchArrayCell(pitches="g'", width=2), PitchArrayCell(pitches="fs'", width=1), PitchArrayCell(width=1))))), PitchArray(rows=(PitchArrayRow(cells=(PitchArrayCell(width=1), PitchArrayCell(width=1), PitchArrayCell(width=1))), PitchArrayRow(cells=(PitchArrayCell(width=1), PitchArrayCell(width=1), PitchArrayCell(width=1)))))], item_class=None, keep_sorted=False)
@@ -2047,18 +2047,18 @@ class PitchArrayList(abjad.TypedList):
 
         ..  container:: example
 
-            >>> array_1 = baca.PitchArray([
+            >>> array_1 = baca.array.PitchArray([
             ...   [1, (2, 1), ([-2, -1.5], 2)],
             ...   [(7, 2), (6, 1), 1],
             ... ])
 
-            >>> array_2 = baca.PitchArray([
+            >>> array_2 = baca.array.PitchArray([
             ...   [1, 1, 1],
             ...   [1, 1, 1],
             ... ])
 
             >>> arrays = [array_1, array_2]
-            >>> arrays = baca.PitchArrayList(arrays)
+            >>> arrays = baca.array.PitchArrayList(arrays)
 
             >>> score = arrays.to_score()
             >>> abjad.show(score) # doctest: +SKIP
@@ -2128,7 +2128,7 @@ class PitchArrayRow:
 
         A pitch array row:
 
-        >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+        >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
         >>> array[0].cells[0].append_pitch(0)
         >>> array[0].cells[1].append_pitch(2)
         >>> array[1].cells[2].append_pitch(4)
@@ -2172,7 +2172,7 @@ class PitchArrayRow:
 
         ..  container:: example
 
-            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
             >>> array[0].cells[0].append_pitch(0)
             >>> array[0].cells[1].append_pitch(2)
             >>> array[1].cells[2].append_pitch(4)
@@ -2277,7 +2277,7 @@ class PitchArrayRow:
 
         ..  container:: example
 
-            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
             >>> array[0].cells[0].append_pitch(0)
             >>> array[0].cells[1].append_pitch(2)
             >>> array[1].cells[2].append_pitch(4)
@@ -2518,7 +2518,7 @@ class PitchArrayRow:
 
         ..  container:: example
 
-            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
             >>> array[0].cells[0].append_pitch(abjad.NamedPitch(0))
             >>> array[0].cells[1].append_pitch(abjad.NamedPitch(2))
             >>> array[0].cells[1].append_pitch(abjad.NamedPitch(4))
@@ -2527,9 +2527,9 @@ class PitchArrayRow:
             [c'] [d' e'    ] [ ]
             [          ] [ ] [ ]
 
-            >>> cell = baca.PitchArrayCell(width=1)
+            >>> cell = baca.array.PitchArrayCell(width=1)
             >>> array[0].append(cell)
-            >>> cell = baca.PitchArrayCell(width=1)
+            >>> cell = baca.array.PitchArrayCell(width=1)
             >>> array[1].append(cell)
 
             >>> print(array)
@@ -2548,7 +2548,7 @@ class PitchArrayRow:
 
         ..  container:: example
 
-            >>> array = baca.PitchArray([
+            >>> array = baca.array.PitchArray([
             ...     [1, (0, 1), (0, 2)],
             ...     [(0, 2), (0, 1), 1],
             ... ])
@@ -2579,7 +2579,7 @@ class PitchArrayRow:
 
         ..  container:: example
 
-            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
             >>> array[0].cells[0].append_pitch(0)
             >>> array[0].cells[1].append_pitch(2)
             >>> array[1].cells[2].append_pitch(4)
@@ -2619,7 +2619,7 @@ class PitchArrayRow:
 
         ..  container:: example
 
-            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
             >>> array[0].cells[0].append_pitch(0)
             >>> array[0].cells[1].append_pitch(2)
             >>> array[1].cells[2].append_pitch(4)
@@ -2645,7 +2645,7 @@ class PitchArrayRow:
 
         ..  container:: example
 
-            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
             >>> array[0].cells[0].append_pitch(0)
             >>> array[0].cells[1].append_pitch(2)
             >>> array[1].cells[2].append_pitch(4)
@@ -2654,9 +2654,9 @@ class PitchArrayRow:
             [c'] [d'    ] [  ]
             [       ] [ ] [e']
 
-            >>> cells = [baca.PitchArrayCell(width=_) for _ in [1, 1, 1]]
+            >>> cells = [baca.array.PitchArrayCell(width=_) for _ in [1, 1, 1]]
             >>> array[0].extend(cells)
-            >>> cell = baca.PitchArrayCell(width=3)
+            >>> cell = baca.array.PitchArrayCell(width=3)
             >>> array[1].append(cell)
 
             >>> print(array)
@@ -2674,7 +2674,7 @@ class PitchArrayRow:
 
         ..  container:: example
 
-            >>> array = baca.PitchArray([[1, 2, 1], [2, 1, 1]])
+            >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
             >>> array[0].cells[0].append_pitch(0)
             >>> array[0].cells[1].append_pitch(2)
             >>> array[1].cells[2].append_pitch(4)
@@ -2788,7 +2788,7 @@ class PitchArrayRow:
 
             Changes row to measure:
 
-            >>> array = baca.PitchArray([
+            >>> array = baca.array.PitchArray([
             ...     [1, (2, 1), ([-2, -1.5], 2)],
             ...     [(7, 2), (6, 1), 1],
             ... ])

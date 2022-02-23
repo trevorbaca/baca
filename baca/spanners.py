@@ -1,5 +1,5 @@
 """
-Spanner commands.
+Spanners.
 """
 import dataclasses
 import typing
@@ -100,9 +100,6 @@ class SpannerIndicatorCommand(_scoping.Command):
             _scoping.treat_persistent_wrapper(
                 self.runtime["manifests"], wrapper, status
             )
-
-
-### FACTORY FUNCTIONS ###
 
 
 def beam(

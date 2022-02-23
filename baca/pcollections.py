@@ -2411,7 +2411,6 @@ class CollectionList(collections_module.abc.Sequence):
         return dataclasses.replace(self, collections=collections_)
 
 
-# TODO: reimplement to show all four types of collection
 def illustrate_collection_list(collection_list) -> abjad.LilyPondFile:
     r"""
     Illustrates collections.
@@ -5411,7 +5410,6 @@ class PitchTree:
         "_children",
         "_item_class",
         "_items",
-        "_expression",
         "_parent",
         "_payload",
     )
@@ -5419,7 +5417,6 @@ class PitchTree:
     def __init__(self, items=None, *, item_class=None):
         item_class = item_class or abjad.NumberedPitch
         self._children = []
-        self._expression = None
         self._item_class = item_class
         self._parent = None
         self._payload = None
@@ -5663,9 +5660,7 @@ class PitchTree:
     def _initialize_internal_nodes(self, items):
         children = []
         for item in items:
-            expression = getattr(item, "_expression", None)
             child = type(self)(items=item, item_class=self.item_class)
-            child._expression = expression
             child._parent = self
             children.append(child)
         self._children = children
@@ -7075,7 +7070,6 @@ def illustrate_pitch_tree(
     color_repeats=True,
     markup_direction=abjad.Up,
     set_classes=False,
-    **keywords,
 ):
     r"""
     Illustrates pitch tree.
@@ -7601,253 +7595,15 @@ class RegistrationComponent:
         )
 
 
-class ZaggedPitchClassMaker:
-    r"""
-    Zagged-pitch-class-maker.
-
-    ..  container:: example
-
-        >>> maker = baca.ZaggedPitchClassMaker(
-        ...     pc_cells=[
-        ...         [7, 1, 3, 4, 5, 11],
-        ...         [3, 5, 6, 7],
-        ...         [9, 10, 0, 8],
-        ...     ],
-        ...     division_ratios=[
-        ...         [[1], [1], [1], [1, 1]],
-        ...         [[1], [1], [1], [1, 1, 1], [1, 1, 1]],
-        ...     ],
-        ...         grouping_counts=[1, 1, 1, 2, 3],
-        ... )
-        >>> pitch_class_tree = maker()
-        >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(pitch_class_tree)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        >>> for tree in pitch_class_tree:
-        ...     tree.get_payload(nested=True)
-        [[NumberedPitchClass(7), NumberedPitchClass(1), NumberedPitchClass(3), NumberedPitchClass(4), NumberedPitchClass(5), NumberedPitchClass(11)]]
-        [[NumberedPitchClass(3), NumberedPitchClass(5), NumberedPitchClass(6), NumberedPitchClass(7)]]
-        [[NumberedPitchClass(9), NumberedPitchClass(10), NumberedPitchClass(0), NumberedPitchClass(8)]]
-        [[NumberedPitchClass(7), NumberedPitchClass(3)], [NumberedPitchClass(5), NumberedPitchClass(6)]]
-        [[NumberedPitchClass(8), NumberedPitchClass(9), NumberedPitchClass(10), NumberedPitchClass(0)], [NumberedPitchClass(11), NumberedPitchClass(7), NumberedPitchClass(1), NumberedPitchClass(3), NumberedPitchClass(4), NumberedPitchClass(5)], [NumberedPitchClass(0), NumberedPitchClass(8), NumberedPitchClass(9), NumberedPitchClass(10)]]
-        [[NumberedPitchClass(5), NumberedPitchClass(11)]]
-        [[NumberedPitchClass(7), NumberedPitchClass(1)]]
-        [[NumberedPitchClass(3), NumberedPitchClass(4)]]
-        [[NumberedPitchClass(6)], [NumberedPitchClass(7), NumberedPitchClass(3)]]
-        [[NumberedPitchClass(5)], [NumberedPitchClass(4), NumberedPitchClass(5)], [NumberedPitchClass(11), NumberedPitchClass(7)]]
-        [[NumberedPitchClass(1), NumberedPitchClass(3)]]
-        [[NumberedPitchClass(5), NumberedPitchClass(6), NumberedPitchClass(7), NumberedPitchClass(3)]]
-        [[NumberedPitchClass(10), NumberedPitchClass(0), NumberedPitchClass(8), NumberedPitchClass(9)]]
-        [[NumberedPitchClass(3), NumberedPitchClass(5), NumberedPitchClass(6), NumberedPitchClass(7)], [NumberedPitchClass(9)]]
-        [[NumberedPitchClass(10), NumberedPitchClass(0)], [NumberedPitchClass(8)], [NumberedPitchClass(3), NumberedPitchClass(4), NumberedPitchClass(5)]]
-        [[NumberedPitchClass(11), NumberedPitchClass(7), NumberedPitchClass(1)]]
-        [[NumberedPitchClass(8), NumberedPitchClass(9), NumberedPitchClass(10), NumberedPitchClass(0)]]
-        [[NumberedPitchClass(1), NumberedPitchClass(3), NumberedPitchClass(4), NumberedPitchClass(5), NumberedPitchClass(11), NumberedPitchClass(7)]]
-        [[NumberedPitchClass(7), NumberedPitchClass(3), NumberedPitchClass(5), NumberedPitchClass(6)], [NumberedPitchClass(7), NumberedPitchClass(1), NumberedPitchClass(3), NumberedPitchClass(4), NumberedPitchClass(5), NumberedPitchClass(11)]]
-        [[NumberedPitchClass(6), NumberedPitchClass(7)], [NumberedPitchClass(3), NumberedPitchClass(5)], [NumberedPitchClass(0), NumberedPitchClass(8), NumberedPitchClass(9), NumberedPitchClass(10)]]
-        [[NumberedPitchClass(5), NumberedPitchClass(6), NumberedPitchClass(7), NumberedPitchClass(3)]]
-        [[NumberedPitchClass(10)]]
-        [[NumberedPitchClass(0), NumberedPitchClass(8)]]
-        [[NumberedPitchClass(9)], [NumberedPitchClass(11), NumberedPitchClass(7)]]
-        [[NumberedPitchClass(1), NumberedPitchClass(3)], [NumberedPitchClass(4), NumberedPitchClass(5)], [NumberedPitchClass(9), NumberedPitchClass(10), NumberedPitchClass(0), NumberedPitchClass(8)]]
-        [[NumberedPitchClass(5), NumberedPitchClass(11), NumberedPitchClass(7), NumberedPitchClass(1), NumberedPitchClass(3), NumberedPitchClass(4)]]
-        [[NumberedPitchClass(3), NumberedPitchClass(5), NumberedPitchClass(6), NumberedPitchClass(7)]]
-        [[NumberedPitchClass(4), NumberedPitchClass(5), NumberedPitchClass(11), NumberedPitchClass(7), NumberedPitchClass(1), NumberedPitchClass(3)]]
-        [[NumberedPitchClass(7)], [NumberedPitchClass(3), NumberedPitchClass(5)]]
-        [[NumberedPitchClass(6)], [NumberedPitchClass(8)], [NumberedPitchClass(9), NumberedPitchClass(10)]]
-        [[NumberedPitchClass(0)]]
-        [[NumberedPitchClass(6), NumberedPitchClass(7), NumberedPitchClass(3), NumberedPitchClass(5)]]
-        [[NumberedPitchClass(0), NumberedPitchClass(8), NumberedPitchClass(9), NumberedPitchClass(10)]]
-        [[NumberedPitchClass(3), NumberedPitchClass(4), NumberedPitchClass(5), NumberedPitchClass(11), NumberedPitchClass(7), NumberedPitchClass(1)], [NumberedPitchClass(10), NumberedPitchClass(0), NumberedPitchClass(8), NumberedPitchClass(9)]]
-        [[NumberedPitchClass(1), NumberedPitchClass(3), NumberedPitchClass(4)], [NumberedPitchClass(5), NumberedPitchClass(11), NumberedPitchClass(7)], [NumberedPitchClass(5), NumberedPitchClass(6), NumberedPitchClass(7), NumberedPitchClass(3)]]
-
-    """
-
-    ### CLASS ATTRIBUTES ###
-
-    __slots__ = ("_division_ratios", "_grouping_counts", "_pc_cells")
-
-    _call_before_persisting_to_disk = True
-
-    ### INITIALIZER ###
-
-    def __init__(self, *, pc_cells=None, division_ratios=None, grouping_counts=None):
-        self._pc_cells = pc_cells
-        self._division_ratios = division_ratios
-        self._grouping_counts = grouping_counts
-
-    ### SPECIAL METHODS ###
-
-    def __call__(self):
-        """
-        Calls zagged pitch-class maker.
-
-        Returns pitch-class tree.
-        """
-        pc_cells = list(self.pc_cells)
-        pc_cells = _sequence.helianthate(pc_cells, -1, 1)
-        prototype = (tuple, abjad.Ratio)
-        if self.division_ratios is None:
-            division_ratios = [[1]]
-        elif all(isinstance(_, prototype) for _ in self.division_ratios):
-            division_ratios = self.division_ratios
-        elif all(isinstance(_, list) for _ in self.division_ratios):
-            division_ratios = list(self.division_ratios)
-            division_ratios = _sequence.helianthate(division_ratios, -1, 1)
-            division_ratios = abjad.sequence.flatten(division_ratios, depth=1)
-        division_ratios = [abjad.Ratio(_) for _ in division_ratios]
-        division_ratios = abjad.CyclicTuple(division_ratios)
-        pc_cells_copy = pc_cells[:]
-        pc_cells = []
-        for i, pc_segment in enumerate(pc_cells_copy):
-            parts = abjad.sequence.partition_by_ratio_of_lengths(
-                pc_segment, division_ratios[i]
-            )
-            pc_cells.extend(parts)
-        grouping_counts = self.grouping_counts or [1]
-        pc_cells = abjad.sequence.partition_by_counts(
-            pc_cells, grouping_counts, cyclic=True, overhang=True
-        )
-        # this block was uncommented during krummzeit
-        # pc_cells = [abjad.join_subsequences(x) for x in pc_cells]
-        # pc_cells = abjad.sequence.partition_by_counts(
-        #    pc_cells,
-        #    grouping_counts,
-        #    cyclic=True,
-        #    overhang=True,
-        #    )
-        material = PitchTree(items=pc_cells, item_class=abjad.NumberedPitchClass)
-        return material
-
-    def __eq__(self, argument):
-        """
-        Compares ``pc_cells``, ``division_ratios``, ``grouping_counts``.
-        """
-        if isinstance(argument, type(self)):
-            return (
-                self.pc_cells == argument.pc_cells
-                and self.division_ratios == argument.division_ratios
-                and self.grouping_counts == argument.grouping_counts
-            )
-        return False
-
-    def __hash__(self):
-        """
-        Hashes zagged pitch-class maker.
-        """
-        return hash(self.__class__.__name__ + str(self))
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def division_ratios(self):
-        """
-        Gets division cells of maker.
-
-        ..  container:: example
-
-            Same as helianthation when division ratios and grouping counts are
-            both none:
-
-
-            >>> maker = baca.ZaggedPitchClassMaker(
-            ...     pc_cells=[[0, 1, 2], [3, 4]],
-            ...     division_ratios=None,
-            ...     grouping_counts=None,
-            ... )
-            >>> pitch_class_tree = maker()
-            >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(pitch_class_tree)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            >>> for tree in pitch_class_tree:
-            ...     tree.get_payload(nested=True)
-            [[NumberedPitchClass(0), NumberedPitchClass(1), NumberedPitchClass(2)]]
-            [[NumberedPitchClass(3), NumberedPitchClass(4)]]
-            [[NumberedPitchClass(4), NumberedPitchClass(3)]]
-            [[NumberedPitchClass(2), NumberedPitchClass(0), NumberedPitchClass(1)]]
-            [[NumberedPitchClass(1), NumberedPitchClass(2), NumberedPitchClass(0)]]
-            [[NumberedPitchClass(3), NumberedPitchClass(4)]]
-            [[NumberedPitchClass(4), NumberedPitchClass(3)]]
-            [[NumberedPitchClass(0), NumberedPitchClass(1), NumberedPitchClass(2)]]
-            [[NumberedPitchClass(2), NumberedPitchClass(0), NumberedPitchClass(1)]]
-            [[NumberedPitchClass(3), NumberedPitchClass(4)]]
-            [[NumberedPitchClass(4), NumberedPitchClass(3)]]
-            [[NumberedPitchClass(1), NumberedPitchClass(2), NumberedPitchClass(0)]]
-
-        ..  container:: example
-
-            Divides every cell in half:
-
-            >>> maker = baca.ZaggedPitchClassMaker(
-            ...     pc_cells=[[0, 1, 2, 3], [4, 5, 6, 7]],
-            ...     division_ratios=[[(1, 1)]],
-            ...     grouping_counts=None,
-            ... )
-            >>> pitch_class_tree = maker()
-            >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(pitch_class_tree)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            >>> for tree in pitch_class_tree:
-            ...     tree.get_payload(nested=True)
-            [[NumberedPitchClass(0), NumberedPitchClass(1)]]
-            [[NumberedPitchClass(2), NumberedPitchClass(3)]]
-            [[NumberedPitchClass(4), NumberedPitchClass(5)]]
-            [[NumberedPitchClass(6), NumberedPitchClass(7)]]
-            [[NumberedPitchClass(7), NumberedPitchClass(4)]]
-            [[NumberedPitchClass(5), NumberedPitchClass(6)]]
-            [[NumberedPitchClass(3), NumberedPitchClass(0)]]
-            [[NumberedPitchClass(1), NumberedPitchClass(2)]]
-            [[NumberedPitchClass(2), NumberedPitchClass(3)]]
-            [[NumberedPitchClass(0), NumberedPitchClass(1)]]
-            [[NumberedPitchClass(6), NumberedPitchClass(7)]]
-            [[NumberedPitchClass(4), NumberedPitchClass(5)]]
-            [[NumberedPitchClass(5), NumberedPitchClass(6)]]
-            [[NumberedPitchClass(7), NumberedPitchClass(4)]]
-            [[NumberedPitchClass(1), NumberedPitchClass(2)]]
-            [[NumberedPitchClass(3), NumberedPitchClass(0)]]
-
-        Returns list of lists.
-        """
-        return self._division_ratios
-
-    @property
-    def grouping_counts(self):
-        """
-        Gets grouping counts of maker.
-
-        ..  container:: example
-
-            Groups helianthated cells:
-
-            >>> maker = baca.ZaggedPitchClassMaker(
-            ...     pc_cells=[[0, 1, 2], [3, 4]],
-            ...     division_ratios=None,
-            ...     grouping_counts=[1, 2],
-            ... )
-            >>> pitch_class_tree = maker()
-            >>> lilypond_file = baca.pcollections.illustrate_pitch_tree(pitch_class_tree)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            >>> for tree in pitch_class_tree:
-            ...     tree.get_payload(nested=True)
-            [[NumberedPitchClass(0), NumberedPitchClass(1), NumberedPitchClass(2)]]
-            [[NumberedPitchClass(3), NumberedPitchClass(4)], [NumberedPitchClass(4), NumberedPitchClass(3)]]
-            [[NumberedPitchClass(2), NumberedPitchClass(0), NumberedPitchClass(1)]]
-            [[NumberedPitchClass(1), NumberedPitchClass(2), NumberedPitchClass(0)], [NumberedPitchClass(3), NumberedPitchClass(4)]]
-            [[NumberedPitchClass(4), NumberedPitchClass(3)]]
-            [[NumberedPitchClass(0), NumberedPitchClass(1), NumberedPitchClass(2)], [NumberedPitchClass(2), NumberedPitchClass(0), NumberedPitchClass(1)]]
-            [[NumberedPitchClass(3), NumberedPitchClass(4)]]
-            [[NumberedPitchClass(4), NumberedPitchClass(3)], [NumberedPitchClass(1), NumberedPitchClass(2), NumberedPitchClass(0)]]
-
-        Returns nonempty list of positive integers.
-        """
-        return self._grouping_counts
-
-    @property
-    def pc_cells(self):
-        """
-        Gets pitch-class cells of maker.
-
-        Returns list of number lists.
-        """
-        return self._pc_cells
+def accumulate_and_repartition(segments, ratios, counts):
+    segments = _sequence.helianthate(segments, -1, 1)
+    sequences = [segments, ratios]
+    subsegments = []
+    for segment, ratio in abjad.sequence.zip(sequences, cyclic=True, truncate=False):
+        subsegments_ = abjad.sequence.partition_by_ratio_of_lengths(segment, ratio)
+        subsegments.extend(subsegments_)
+    groups = abjad.sequence.partition_by_counts(
+        subsegments, counts, cyclic=True, overhang=True
+    )
+    tree = PitchTree(groups, item_class=abjad.NumberedPitchClass)
+    return tree
