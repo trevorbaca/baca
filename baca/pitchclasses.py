@@ -5023,7 +5023,7 @@ class PitchSet(abjad.PitchSet):
 CollectionTyping = typing.Union[PitchSet, PitchSegment]
 
 
-class PitchTree(_classes.Tree):
+class PitchTree:
     r"""
     Pitch tree.
 
@@ -5407,21 +5407,89 @@ class PitchTree(_classes.Tree):
 
     """
 
-    ### CLASS VARIABLES ###
-
-    __slots__ = ()
-
-    ### INITIALIZER ###
+    __slots__ = (
+        "_children",
+        "_item_class",
+        "_items",
+        "_expression",
+        "_parent",
+        "_payload",
+    )
 
     def __init__(self, items=None, *, item_class=None):
         item_class = item_class or abjad.NumberedPitch
-        _classes.Tree.__init__(self, items=items, item_class=item_class)
+        self._children = []
+        self._expression = None
+        self._item_class = item_class
+        self._parent = None
+        self._payload = None
+        if self._are_internal_nodes(items):
+            items = self._initialize_internal_nodes(items)
+        else:
+            items = self._initialize_payload(items)
+        self._items = items
         prototype = (abjad.NumberedPitch, abjad.NumberedPitchClass)
         assert item_class in prototype, repr(item_class)
 
-    ### SPECIAL METHODS ###
+    def __contains__(self, argument):
+        return argument in self._children
 
-    ### PRIVATE METHODS ###
+    def __eq__(self, argument):
+        if isinstance(argument, type(self)):
+            if self._payload is not None or argument._payload is not None:
+                return self._payload == argument._payload
+            if len(self) == len(argument):
+                for x, y in zip(self._noncyclic_children, argument._noncyclic_children):
+                    if not x == y:
+                        return False
+                else:
+                    return True
+        return False
+
+    def __getitem__(self, argument):
+        return self._children.__getitem__(argument)
+
+    def __hash__(self):
+        return super().__hash__()
+
+    def __len__(self):
+        return len(self._children)
+
+    def __repr__(self):
+        if isinstance(self.items, list):
+            length = len(self.items)
+        elif self.items is None:
+            length = 0
+        else:
+            assert isinstance(self.items, int), repr(self.items)
+            length = 1
+        return f"Tree(<{length}>)"
+
+    @property
+    def _noncyclic_children(self):
+        return list(self._children)
+
+    @property
+    def _root(self):
+        return self._get_parentage()[-1]
+
+    def _apply_to_leaves_and_emit_new_tree(self, operator):
+        result = copy.deepcopy(self)
+        for leaf in result.iterate(level=-1):
+            assert not len(leaf), repr(leaf)
+            pitch = leaf._items
+            pitch = operator(pitch)
+            leaf._set_leaf_item(pitch)
+        return result
+
+    def _are_internal_nodes(self, argument):
+        if isinstance(argument, collections_module.abc.Iterable) and not isinstance(
+            argument, str
+        ):
+            return True
+        if isinstance(argument, type(self)) and len(argument):
+            return True
+        return False
 
     def _attach_cell_indices(self, cell_indices, leaf_groups):
         if not cell_indices:
@@ -5477,6 +5545,180 @@ class PitchTree(_classes.Tree):
                 first_leaf = leaves[0]
                 abjad.attach(label, first_leaf)
 
+    def _get_depth(self):
+        levels = set([])
+        for node in self._iterate_depth_first():
+            levels.add(node._get_level())
+        return max(levels) - self._get_level() + 1
+
+    def _get_index_in_parent(self):
+        if self._parent is not None:
+            return self._parent._index(self)
+        else:
+            return None
+
+    def _get_level(self, negative=False):
+        if negative:
+            return -self._get_depth()
+        return len(self._get_parentage()[1:])
+
+    def _get_next_n_nodes_at_level(self, n, level, nodes_must_be_complete=False):
+        if not self._is_valid_level(level):
+            raise Exception(f"invalid level: {level!r}.")
+        result = []
+        self_is_found = False
+        first_node_returned_is_trimmed = False
+        all_nodes_at_level = False
+        reverse = False
+        if n is None:
+            all_nodes_at_level = True
+        elif n < 0:
+            reverse = True
+            n = abs(n)
+        generator = self._root._iterate_depth_first(reverse=reverse)
+        previous_node = None
+        for node in generator:
+            if not all_nodes_at_level and len(result) == n:
+                if not first_node_returned_is_trimmed or not nodes_must_be_complete:
+                    return result
+            if not all_nodes_at_level and len(result) == n + 1:
+                return result
+            if node is self:
+                self_is_found = True
+                # test whether node to return is higher in tree than self;
+                # or-clause allows for test of either nonnegative
+                # or negative level
+                if ((0 <= level) and level < self._get_level()) or (
+                    (level < 0) and level < self._get_level(negative=True)
+                ):
+                    first_node_returned_is_trimmed = True
+                    subtree_to_trim = node._parent
+                    # find subtree to trim where level is nonnegative
+                    if 0 <= level:
+                        while level < subtree_to_trim._get_level():
+                            subtree_to_trim = subtree_to_trim._parent
+                    # find subtree to trim where level is negative
+                    else:
+                        while subtree_to_trim._get_level(negative=True) < level:
+                            subtree_to_trim = subtree_to_trim._parent
+                    position_of_descendant = (
+                        subtree_to_trim._get_position_of_descendant(node)
+                    )
+                    first_subtree = copy.deepcopy(subtree_to_trim)
+                    reference_node = first_subtree._get_node_at_position(
+                        position_of_descendant
+                    )
+                    reference_node._remove_to_root(reverse=reverse)
+                    result.append(first_subtree)
+            if self_is_found:
+                if node is not self:
+                    if node._is_at_level(level):
+                        result.append(node)
+                    # special case to handle a cyclic tree of length 1
+                    elif node._is_at_level(0) and len(node) == 1:
+                        if previous_node._is_at_level(level):
+                            result.append(node)
+            previous_node = node
+        else:
+            if all_nodes_at_level:
+                return result
+            else:
+                raise ValueError(f"not enough nodes at level {level!r}.")
+
+    def _get_node_at_position(self, position):
+        result = self
+        for index in position:
+            result = result[index]
+        return result
+
+    def _get_parentage(self):
+        result = []
+        result.append(self)
+        current = self._parent
+        while current is not None:
+            result.append(current)
+            current = current._parent
+        return tuple(result)
+
+    def _get_position(self):
+        result = []
+        for node in self._get_parentage():
+            if node._parent is not None:
+                result.append(node._get_index_in_parent())
+        result.reverse()
+        return tuple(result)
+
+    def _get_position_of_descendant(self, descendant):
+        if descendant is self:
+            return ()
+        else:
+            return descendant._get_position()[len(self._get_position()) :]
+
+    def _index(self, node):
+        for i, current_node in enumerate(self):
+            if current_node is node:
+                return i
+        raise ValueError(f"not in tree: {node!r}.")
+
+    def _initialize_internal_nodes(self, items):
+        children = []
+        for item in items:
+            expression = getattr(item, "_expression", None)
+            child = type(self)(items=item, item_class=self.item_class)
+            child._expression = expression
+            child._parent = self
+            children.append(child)
+        self._children = children
+        return children
+
+    def _initialize_payload(self, payload):
+        if isinstance(payload, type(self)):
+            assert not len(payload)
+            payload = payload._payload
+        if self.item_class is not None:
+            payload = self.item_class(payload)
+        self._payload = payload
+        return payload
+
+    def _is_at_level(self, level):
+        if (0 <= level and self._get_level() == level) or self._get_level(
+            negative=True
+        ) == level:
+            return True
+        else:
+            return False
+
+    def _is_leaf(self):
+        return self._get_level(negative=True) == -1
+
+    def _is_leftmost_leaf(self):
+        if not self._is_leaf():
+            return False
+        return self._get_index_in_parent() == 0
+
+    def _is_rightmost_leaf(self):
+        if not self._is_leaf():
+            return False
+        index_in_parent = self._get_index_in_parent()
+        parentage = self._get_parentage()
+        parent = parentage[1]
+        return index_in_parent == len(parent) - 1
+
+    def _is_valid_level(self, level):
+        maximum_absolute_level = self._get_depth() + 1
+        if maximum_absolute_level < abs(level):
+            return False
+        return True
+
+    def _iterate_depth_first(self, reverse=False):
+        yield self
+        iterable_self = self
+        if reverse:
+            iterable_self = reversed(self)
+        for x in iterable_self:
+            for y in x._iterate_depth_first(reverse=reverse):
+                yield y
+
     def _populate_voice(
         self,
         leaf_list_stack,
@@ -5529,7 +5771,82 @@ class PitchTree(_classes.Tree):
                 leaf_list.append(note)
         return leaf_groups
 
+    def _remove_node(self, node):
+        node._parent._children.remove(node)
+        node._parent = None
+
+    def _remove_to_root(self, reverse=False):
+        # trim left-siblings of self and self
+        parent = self._parent
+        if reverse:
+            iterable_parent = reversed(parent)
+        else:
+            iterable_parent = parent[:]
+        for sibling in iterable_parent:
+            sibling._parent._remove_node(sibling)
+            # break and do not remove siblings to right of self
+            if sibling is self:
+                break
+        # trim parentage
+        for node in parent._get_parentage():
+            if node._parent is not None:
+                iterable_parent = node._parent[:]
+                if reverse:
+                    iterable_parent = reversed(node._parent)
+                else:
+                    iterable_parent = node._parent[:]
+                for sibling in iterable_parent:
+                    if sibling is node:
+                        # remove node now if it was emptied earlier
+                        if not len(sibling):
+                            sibling._parent._remove_node(sibling)
+                        break
+                    else:
+                        sibling._parent._remove_node(sibling)
+
+    def _set_leaf_item(self, item):
+        assert self._is_leaf(), repr(self)
+        self._items = item
+        self._payload = item
+
+    @property
+    def item_class(self):
+        return self._item_class
+
+    @property
+    def items(self):
+        return self._items
+
     ### PUBLIC METHODS ###
+
+    def get_payload(self, nested=False, reverse=False):
+        result = []
+        if nested:
+            if reverse:
+                raise NotImplementedError
+            if self._payload is not None:
+                return self._payload
+            else:
+                for child in self._noncyclic_children:
+                    if child._payload is not None:
+                        result.append(child._payload)
+                    else:
+                        result.append(child.get_payload(nested=True))
+        else:
+            for leaf_node in self.iterate(-1, reverse=reverse):
+                result.append(leaf_node._payload)
+        return result
+
+    def iterate(self, level=None, reverse=False):
+        for node in self._iterate_depth_first(reverse=reverse):
+            if level is None:
+                yield node
+            elif 0 <= level:
+                if node._get_level() == level:
+                    yield node
+            else:
+                if node._get_level(negative=True) == level:
+                    yield node
 
     def has_repeats(self):
         r"""
