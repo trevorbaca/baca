@@ -126,7 +126,7 @@ def insert_and_transpose(notes, subrun_tokens):
     Returns list of integers and / or floats.
     """
     assert isinstance(notes, list)
-    assert all(isinstance(x, abjad.Note) for x in notes)
+    assert all(isinstance(_, abjad.Note) for _ in notes)
     assert isinstance(subrun_tokens, list)
     len_notes = len(notes)
     instructions = []
@@ -421,25 +421,25 @@ def partition_nested_into_inward_pointing_parts(sequence, target="negative"):
     """
     result = []
     if target == "negative":
-        for element in sequence:
+        for item in sequence:
             # -5 at beginning
-            if element[0] == -5:
-                result.append([-4, 1] + element[1:])
+            if item[0] == -5:
+                result.append([-4, 1] + item[1:])
             # -5 at end
-            elif element[-1] == -5:
-                result.append(element[:-1] + [1, -4])
+            elif item[-1] == -5:
+                result.append(item[:-1] + [1, -4])
             # -5 in middle
-            elif -5 in element:
+            elif -5 in item:
                 new = []
-                for x in element:
-                    if x != -5:
-                        new.append(x)
+                for number in item:
+                    if number != -5:
+                        new.append(number)
                     else:
                         new.append(-4)
                         new.append(1)
             # no -5
             else:
-                result.append(element)
+                result.append(item)
     if target == "positive":
         for sublist in sequence:
             new = sublist
@@ -451,7 +451,7 @@ def partition_nested_into_inward_pointing_parts(sequence, target="negative"):
                 new = new[:-1] + [1, 4]
             # 5 in middle
             if 5 in new:
-                new = [(4, 1) if element == 5 else element for element in new]
+                new = [(4, 1) if item == 5 else item for item in new]
                 new = abjad.sequence.flatten(new)
                 new = list(new)
             result.append(new)

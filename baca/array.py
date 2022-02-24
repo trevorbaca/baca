@@ -2771,8 +2771,8 @@ class PitchArrayRow:
 
         Returns none.
         """
-        for i, x in enumerate(self.cells):
-            if x is cell:
+        for i, item in enumerate(self.cells):
+            if item is cell:
                 self._cells.pop(i)
                 break
         cell._parent_row = None
