@@ -868,12 +868,16 @@ def make_tied_repeated_durations(durations, *, measures=None):
 def music(
     argument,
     *,
+    annotation_spanner=False,
     do_not_check_total_duration=None,
     tag=abjad.Tag(),
 ):
     """
     Makes rhythm command from string or selection ``argument``.
     """
+    annotation_spanner_text = None
+    if annotation_spanner is True:
+        annotation_spanner_text = "baca.music() =|"
     tag = tag or _scoping.site(_frame())
     if isinstance(argument, str):
         string = f"{{ {argument} }}"
@@ -890,7 +894,7 @@ def music(
     return RhythmCommand(
         rhythm_maker=selection,
         annotation_spanner_color="#darkcyan",
-        annotation_spanner_text="baca.music() =|",
+        annotation_spanner_text=annotation_spanner_text,
         do_not_check_total_duration=do_not_check_total_duration,
     )
 
