@@ -2924,10 +2924,10 @@ class FigureAccumulator:
         parts = figure_name.split("_")
         if len(parts) == 1:
             body = parts[0]
-            figure_name_string = body
+            figure_name_string = f'"{body}"'
         elif len(parts) == 2:
             body, subscript = parts
-            figure_name_string = rf"\concat {{ {body} \sub {subscript} }}"
+            figure_name_string = rf'\concat {{ "{body}" \sub {subscript} }}'
         else:
             raise Exception(f"unrecognized figure name: {figure_name!r}.")
         figure_number = f"({figure_number})"
