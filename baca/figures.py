@@ -2662,7 +2662,7 @@ class FigureAccumulator:
 
     __slots__ = (
         "_current_offset",
-        "_figure_index",
+        "_figure_number",
         "_figure_names",
         "_floating_selections",
         "_music_maker",
@@ -2686,7 +2686,7 @@ class FigureAccumulator:
             voice_names.append(voice.name)
         self._voice_names = voice_names
         self._current_offset = abjad.Offset(0)
-        self._figure_index = 0
+        self._figure_number = 1
         self._figure_names: typing.List[str] = []
         self._floating_selections = self._make_voice_dictionary()
         self._score_stop_offset = abjad.Offset(0)
@@ -2783,7 +2783,7 @@ class FigureAccumulator:
         self._cache_figure_name(contribution)
         self._cache_floating_selection(contribution)
         self._cache_time_signature(contribution)
-        self._figure_index += 1
+        self._figure_number += 1
 
     ### PRIVATE METHODS ###
 
@@ -2919,7 +2919,7 @@ class FigureAccumulator:
         return start_offset
 
     def _label_figure_name_(self, container, figure_name):
-        figure_index = self._figure_index
+        figure_number = self._figure_number
         original_figure_name = figure_name
         parts = figure_name.split("_")
         if len(parts) == 1:
@@ -2930,9 +2930,9 @@ class FigureAccumulator:
             figure_name_string = rf"\concat {{ {body} \sub {subscript} }}"
         else:
             raise Exception(f"unrecognized figure name: {figure_name!r}.")
-        figure_index = f"({figure_index})"
+        figure_number = f"({figure_number})"
         string = rf"\markup \fontsize #2 \concat {{ [ {figure_name_string} \hspace #1"
-        string += rf" \raise #0.25 \fontsize #-2 {figure_index} ] }}"
+        string += rf" \raise #0.25 \fontsize #-2 {figure_number} ] }}"
         figure_name_markup = abjad.Markup(string, direction=abjad.Up)
         annotation = f"figure name: {original_figure_name}"
         figure_name_markup._annotation = annotation
