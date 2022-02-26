@@ -2925,7 +2925,7 @@ class FigureAccumulator:
         if figure_name:
             string += rf" \hspace #1 {figure_name_string} ] }}"
         else:
-            string += r" ] }}"
+            string += r" ] }"
         figure_name_markup = abjad.Markup(string, direction=figure_name_direction)
         abjad.tweak(figure_name_markup).color = "#blue"
         annotation = f"figure name: {original_figure_name}"
