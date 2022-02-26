@@ -2658,8 +2658,6 @@ class FigureAccumulator:
 
     """
 
-    ### CLASS VARIABLES ###
-
     __slots__ = (
         "_current_offset",
         "_figure_number",
@@ -2667,20 +2665,16 @@ class FigureAccumulator:
         "_floating_selections",
         "_music_maker",
         "_score_stop_offset",
-        "_score",
-        "_time_signatures",
-        "_voice_abbreviations",
         "_voice_names",
+        "score",
+        "time_signatures",
+        "voice_abbreviations",
     )
 
-    ### INITIALIZER ###
-
-    def __init__(self, score, *, voice_abbreviations=None):
+    def __init__(self, score, voice_abbreviations=None):
         assert isinstance(score, abjad.Score), repr(score)
-        self._score = score
-        if voice_abbreviations is not None:
-            assert isinstance(voice_abbreviations, dict), repr(voice_abbreviations)
-        self._voice_abbreviations = voice_abbreviations or {}
+        self.score = score
+        self.voice_abbreviations = dict(voice_abbreviations or {})
         voice_names = []
         for voice in abjad.iterate.components(score, abjad.Voice):
             voice_names.append(voice.name)
@@ -2690,9 +2684,7 @@ class FigureAccumulator:
         self._figure_names: typing.List[str] = []
         self._floating_selections = self._make_voice_dictionary()
         self._score_stop_offset = abjad.Offset(0)
-        self._time_signatures: typing.List[abjad.TimeSignature] = []
-
-    ### SPECIAL METHODS ###
+        self.time_signatures: typing.List[abjad.TimeSignature] = []
 
     def __call__(
         self,
@@ -2784,8 +2776,6 @@ class FigureAccumulator:
         self._cache_floating_selection(contribution)
         self._cache_time_signature(contribution)
         self._figure_number += 1
-
-    ### PRIVATE METHODS ###
 
     def _abbreviation(self, voice_name):
         return self.voice_abbreviations.get(voice_name, voice_name)
@@ -2951,35 +2941,7 @@ class FigureAccumulator:
     def _make_voice_dictionary(self):
         return dict([(_, []) for _ in self._voice_names])
 
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def score(self):
-        """
-        Gets score.
-        """
-        return self._score
-
-    @property
-    def time_signatures(self) -> typing.List[abjad.TimeSignature]:
-        """
-        Gets time signatures.
-        """
-        return self._time_signatures
-
-    @property
-    def voice_abbreviations(self):
-        """
-        Gets voice abbreviations.
-        """
-        return self._voice_abbreviations
-
-    ### PUBLIC METHODS ###
-
     def assemble(self, voice_name) -> abjad.Selection | None:
-        """
-        Assembles complete selection for ``voice_name``.
-        """
         floating_selections = self._floating_selections[voice_name]
         if not floating_selections:
             return None
@@ -3015,9 +2977,6 @@ class FigureAccumulator:
         return selection
 
     def populate_commands(self, command_accumulator):
-        """
-        Populates ``command_accumulator``.
-        """
         for voice_name in sorted(self._floating_selections):
             selection = self.assemble(voice_name)
             if not selection:
