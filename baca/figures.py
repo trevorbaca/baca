@@ -2700,13 +2700,15 @@ class FigureAccumulator:
         collections: typing.Sequence,
         *commands,
         anchor: Anchor = None,
-        figure_name: str = None,
+        figure_name: str = "",
+        figure_name_direction=None,
         hide_time_signature: bool = None,
         signature: int = None,
     ) -> None:
         """
         Calls figure-accumulator.
         """
+        assert isinstance(figure_name, str), repr(figure_name)
         voice_name = self._abbreviation(voice_name)
         prototype = (
             list,
@@ -2755,9 +2757,7 @@ class FigureAccumulator:
                 imbricated_selections.update(command_(container))
             else:
                 command_(selections)
-        if figure_name is not None:
-            figure_name = str(figure_name)
-            self._label_figure_name_(container, figure_name)
+        self._label_figure_name_(container, figure_name, figure_name_direction)
         selection = abjad.Selection([container])
         duration = abjad.get.duration(selection)
         if signature is None and maker:
@@ -2791,7 +2791,7 @@ class FigureAccumulator:
         return self.voice_abbreviations.get(voice_name, voice_name)
 
     def _cache_figure_name(self, contribution):
-        if contribution.figure_name is None:
+        if not contribution.figure_name:
             return
         if contribution.figure_name in self._figure_names:
             name = contribution.figure_name
@@ -2918,7 +2918,7 @@ class FigureAccumulator:
         start_offset = remote_anchor_offset - local_anchor_offset
         return start_offset
 
-    def _label_figure_name_(self, container, figure_name):
+    def _label_figure_name_(self, container, figure_name, figure_name_direction):
         figure_number = self._figure_number
         original_figure_name = figure_name
         parts = figure_name.split("_")
@@ -2930,10 +2930,14 @@ class FigureAccumulator:
             figure_name_string = rf'\concat {{ "{body}" \sub {subscript} }}'
         else:
             raise Exception(f"unrecognized figure name: {figure_name!r}.")
-        figure_number = f"({figure_number})"
-        string = rf"\markup \fontsize #2 \concat {{ [ {figure_name_string} \hspace #1"
-        string += rf" \raise #0.25 \fontsize #-2 {figure_number} ] }}"
-        figure_name_markup = abjad.Markup(string, direction=abjad.Up)
+        string = r"\markup \fontsize #2"
+        string += rf" \concat {{ [ \raise #0.25 \fontsize #-2 ({figure_number})"
+        if figure_name:
+            string += rf" \hspace #1 {figure_name_string} ] }}"
+        else:
+            string += r" ] }}"
+        figure_name_markup = abjad.Markup(string, direction=figure_name_direction)
+        abjad.tweak(figure_name_markup).color = "#blue"
         annotation = f"figure name: {original_figure_name}"
         figure_name_markup._annotation = annotation
         leaf = abjad.select.leaf(container, 0)
