@@ -1238,39 +1238,6 @@ class CollectionList(collections_module.abc.Sequence):
             collections.append(collection)
         return dataclasses.replace(self, collections=collections)
 
-    def helianthate(self, n=0, m=0) -> "CollectionList":
-        """
-        Helianthates collections.
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList([[1, 2, 3], [4, 5], [6, 7, 8]])
-            >>> for collection in collections.helianthate(n=-1, m=1):
-            ...     collection
-            ...
-            PitchSegment(items=[1, 2, 3], item_class=NumberedPitch)
-            PitchSegment(items=[4, 5], item_class=NumberedPitch)
-            PitchSegment(items=[6, 7, 8], item_class=NumberedPitch)
-            PitchSegment(items=[5, 4], item_class=NumberedPitch)
-            PitchSegment(items=[8, 6, 7], item_class=NumberedPitch)
-            PitchSegment(items=[3, 1, 2], item_class=NumberedPitch)
-            PitchSegment(items=[7, 8, 6], item_class=NumberedPitch)
-            PitchSegment(items=[2, 3, 1], item_class=NumberedPitch)
-            PitchSegment(items=[4, 5], item_class=NumberedPitch)
-            PitchSegment(items=[1, 2, 3], item_class=NumberedPitch)
-            PitchSegment(items=[5, 4], item_class=NumberedPitch)
-            PitchSegment(items=[6, 7, 8], item_class=NumberedPitch)
-            PitchSegment(items=[4, 5], item_class=NumberedPitch)
-            PitchSegment(items=[8, 6, 7], item_class=NumberedPitch)
-            PitchSegment(items=[3, 1, 2], item_class=NumberedPitch)
-            PitchSegment(items=[7, 8, 6], item_class=NumberedPitch)
-            PitchSegment(items=[2, 3, 1], item_class=NumberedPitch)
-            PitchSegment(items=[5, 4], item_class=NumberedPitch)
-
-        """
-        collections = _sequence.helianthate(self, n=n, m=m)
-        return dataclasses.replace(self, collections=collections)
-
     def partition(
         self, argument, cyclic=False, join=False, overhang=False
     ) -> typing.Union["CollectionList", "PitchSegment", list]:
@@ -1341,7 +1308,6 @@ class CollectionList(collections_module.abc.Sequence):
         )
         collection_lists = [dataclasses.replace(self, collections=_) for _ in parts]
         if join:
-            # collections = [_.join()[0] for _ in collection_lists]
             collections = [abjad.sequence.join(_)[0] for _ in collection_lists]
             result = dataclasses.replace(self, collections=collections)
         else:
