@@ -9,7 +9,6 @@ import typing
 
 import abjad
 
-from . import classes as _classes
 from . import sequence as _sequence
 
 
@@ -1301,32 +1300,6 @@ class CollectionList(collections_module.abc.Sequence):
                 collections.append(collection)
         return dataclasses.replace(self, collections=collections)
 
-    def flatten(self) -> "CollectionTyping":
-        """
-        Flattens collections.
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList(
-            ...     [[5, 12, 14, 18, 17], [16, 17, 19]],
-            ... )
-
-            >>> str(collections.flatten())
-            '<5, 12, 14, 18, 17, 16, 17, 19>'
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList(
-            ...     [[5, 12, 14, 18, 17], [16, 17, 19]],
-            ...     item_class=abjad.NamedPitch,
-            ... )
-
-            >>> str(collections.flatten())
-            "<f' c'' d'' fs'' f'' e'' f'' g''>"
-
-        """
-        return self.join()[0]
-
     def has_duplicate_pitch_classes(self, level=-1) -> bool:
         """
         Is true when collections have duplicate pitch-classes at ``level``.
@@ -1583,29 +1556,6 @@ class CollectionList(collections_module.abc.Sequence):
         collections = _sequence.helianthate(self, n=n, m=m)
         return dataclasses.replace(self, collections=collections)
 
-    def join(self) -> "CollectionList":
-        """
-        Joins collections.
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList([
-            ...     [5, 12, 14, 18, 17],
-            ...     [16, 17, 19],
-            ... ])
-
-            >>> collections.join()
-            CollectionList([<5, 12, 14, 18, 17, 16, 17, 19>])
-
-        """
-        collections = []
-        if self:
-            collection = self[0]
-            for collection_ in self[1:]:
-                collection = collection + collection_
-            collections.append(collection)
-        return dataclasses.replace(self, collections=collections)
-
     def partition(
         self, argument, cyclic=False, join=False, overhang=False
     ) -> typing.Union["CollectionList", "PitchSegment", list]:
@@ -1676,7 +1626,8 @@ class CollectionList(collections_module.abc.Sequence):
         )
         collection_lists = [dataclasses.replace(self, collections=_) for _ in parts]
         if join:
-            collections = [_.join()[0] for _ in collection_lists]
+            # collections = [_.join()[0] for _ in collection_lists]
+            collections = [abjad.sequence.join(_)[0] for _ in collection_lists]
             result = dataclasses.replace(self, collections=collections)
         else:
             result = collection_lists[:]
@@ -1712,7 +1663,7 @@ class CollectionList(collections_module.abc.Sequence):
             ...     [16, 17, 19],
             ... ])
 
-            >>> len(collections.flatten())
+            >>> len(abjad.sequence.join(collections)[0])
             8
 
             >>> collections.read([10, 10, 10], check=abjad.Exact)
@@ -1725,7 +1676,7 @@ class CollectionList(collections_module.abc.Sequence):
             return dataclasses.replace(self)
         counts = list(counts)
         assert all(isinstance(_, int) for _ in counts), repr(counts)
-        collection = self.join()[0]
+        collection = abjad.sequence.join(self)[0]
         source = abjad.CyclicTuple(collection)
         i = 0
         collections = []
@@ -1737,8 +1688,8 @@ class CollectionList(collections_module.abc.Sequence):
             i += count
         result = dataclasses.replace(self, collections=collections)
         if check == abjad.Exact:
-            self_item_count = len(self.flatten())
-            result_item_count = len(result.flatten())
+            self_item_count = len(abjad.sequence.join(self)[0])
+            result_item_count = len(abjad.sequence.join(result)[0])
             quotient = result_item_count / self_item_count
             if quotient != int(quotient):
                 message = f"call reads {result_item_count} items;"
