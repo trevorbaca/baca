@@ -161,7 +161,6 @@ class ArpeggiationSpacingSpecifier:
             return PitchSegment(item_class=abjad.NumberedPitch)
         if not isinstance(collections, CollectionList):
             collections = CollectionList(collections)
-        # pitch_class_collections = collections.to_pitch_classes()
         if collections.item_class is abjad.NamedPitch:
             pitch_class_collections = collections.to_named_pitch_classes()
         else:
@@ -552,9 +551,10 @@ class ChordalSpacingSpecifier:
     def _space_collection(self, collection):
         original_collection = collection
         if isinstance(collection, abjad.Set):
-            pitch_classes = list(sorted(collection.to_pitch_classes()))
+            pitch_classes = [abjad.NumberedPitchClass(_) for _ in collection]
+            pitch_classes.sort()
         else:
-            pitch_classes = list(collection.to_pitch_classes())
+            pitch_classes = list(collection.to_numbered_pitch_classes())
         bass, soprano, outer = None, None, []
         if self.bass is not None:
             bass = abjad.NumberedPitchClass(self.bass)
@@ -1175,7 +1175,7 @@ class CollectionList(collections_module.abc.Sequence):
         for i, collection in enumerate(self):
             if pattern.matches_index(i, length):
                 if isinstance(collection, abjad.PitchSegment):
-                    collection = collection.to_pitch_classes()
+                    collection = collection.to_numbered_pitch_classes()
                     collection = PitchClassSegment(
                         items=collection, item_class=collection.item_class
                     )
@@ -1218,7 +1218,7 @@ class CollectionList(collections_module.abc.Sequence):
         for i, collection in enumerate(self):
             if pattern.matches_index(i, length):
                 if isinstance(collection, abjad.PitchSegment):
-                    collection = collection.to_pitch_classes()
+                    collection = collection.to_numbered_pitch_classes()
                     collection = PitchClassSegment(
                         items=collection, item_class=collection.item_class
                     )
@@ -5206,29 +5206,6 @@ class PitchSet(abjad.PitchSet):
         assert len(result) == 1, repr(result)
         segment = result[0]
         return segment
-
-    def to_pitch_classes(self):
-        r"""
-        Makes pitch-class set.
-
-        ..  container:: example
-
-            >>> setting = baca.PitchSet([-2, -1.5, 6, 19, -1.5, 21])
-            >>> setting
-            PitchSet(items=[-2, -1.5, 6, 19, 21], item_class=abjad.NumberedPitch)
-
-            >>> setting.to_pitch_classes()
-            PitchClassSet(items=[6, 7, 9, 10, 10.5], item_class=abjad.NumberedPitchClass)
-
-        Returns new pitch-class set.
-        """
-        if self.item_class is abjad.NumberedPitch:
-            item_class = abjad.NumberedPitchClass
-        elif self.item_class is abjad.NamedPitch:
-            item_class = abjad.NamedPitchClass
-        else:
-            raise TypeError(self.item_class)
-        return abjad.PitchClassSet(items=self, item_class=item_class)
 
 
 CollectionTyping = typing.Union[PitchSet, PitchSegment]
