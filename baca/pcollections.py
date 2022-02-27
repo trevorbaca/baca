@@ -1238,229 +1238,6 @@ class CollectionList(collections_module.abc.Sequence):
             collections.append(collection)
         return dataclasses.replace(self, collections=collections)
 
-    def has_duplicate_pitch_classes(self, level=-1) -> bool:
-        """
-        Is true when collections have duplicate pitch-classes at ``level``.
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList([
-            ...     [4, 5, 7],
-            ...     [15, 16, 17, 19]
-            ... ])
-
-            >>> collections.has_duplicate_pitch_classes(level=1)
-            False
-
-            >>> collections.has_duplicate_pitch_classes(level=-1)
-            True
-
-        Set ``level`` to 1 or -1.
-        """
-        pitch_class_class = self._get_pitch_class_class()
-        if level == 1:
-            for collection in self:
-                known_pitch_classes: typing.List[abjad.PitchClass] = []
-                for item in collection:
-                    pitch_class = pitch_class_class(item)
-                    if pitch_class in known_pitch_classes:
-                        return True
-                    known_pitch_classes.append(pitch_class)
-        elif level == -1:
-            known_pitch_classes_: typing.List[abjad.PitchClass] = []
-            for collection in self:
-                for item in collection:
-                    pitch_class = pitch_class_class(item)
-                    if pitch_class in known_pitch_classes_:
-                        return True
-                    known_pitch_classes_.append(pitch_class)
-        else:
-            raise ValueError(f"level must be 1 or -1: {level!r}.")
-        return False
-
-    def has_duplicates(self, level=-1) -> bool:
-        """
-        Is true when collections have duplicates at ``level``.
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList([
-            ...     [16, 17], [13], [16, 17],
-            ... ])
-
-            >>> collections.has_duplicates(level=0)
-            True
-
-            >>> collections.has_duplicates(level=1)
-            False
-
-            >>> collections.has_duplicates(level=-1)
-            True
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList([[16, 17], [14, 20, 14]])
-
-            >>> collections.has_duplicates(level=0)
-            False
-
-            >>> collections.has_duplicates(level=1)
-            True
-
-            >>> collections.has_duplicates(level=-1)
-            True
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList([
-            ...     [16, 17], [14, 20], [14],
-            ... ])
-
-            >>> collections.has_duplicates(level=0)
-            False
-
-            >>> collections.has_duplicates(level=1)
-            False
-
-            >>> collections.has_duplicates(level=-1)
-            True
-
-        Set ``level`` to 0, 1 or -1.
-        """
-        if level == 0:
-            known_items: list = []
-            for collection in self:
-                if collection in known_items:
-                    return True
-                known_items.append(collection)
-        elif level == 1:
-            for collection in self:
-                known_items = []
-                for item in collection:
-                    if item in known_items:
-                        return True
-                    known_items.append(item)
-        elif level == -1:
-            known_items = []
-            for collection in self:
-                for item in collection:
-                    if item in known_items:
-                        return True
-                    known_items.append(item)
-        else:
-            raise ValueError(f"level must be 0, 1 or -1: {level!r}.")
-        return False
-
-    def has_repeat_pitch_classes(self, level=-1) -> bool:
-        """
-        Is true when collections have repeat pitch-classes as ``level``.
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList([[4, 5, 4, 5], [17, 18]])
-
-            >>> collections.has_repeat_pitch_classes(level=1)
-            False
-
-            >>> collections.has_repeat_pitch_classes(level=-1)
-            True
-
-        Set ``level`` to 0 or -1.
-        """
-        pitch_class_class = self._get_pitch_class_class()
-        if level == 1:
-            for collection in self:
-                previous_pitch_class = None
-                for item in collection:
-                    pitch_class = pitch_class_class(item)
-                    if pitch_class == previous_pitch_class:
-                        return True
-                    previous_pitch_class = pitch_class
-        elif level == -1:
-            previous_pitch_class = None
-            for collection in self:
-                for item in collection:
-                    pitch_class = pitch_class_class(item)
-                    if pitch_class == previous_pitch_class:
-                        return True
-                    previous_pitch_class = pitch_class
-        else:
-            raise ValueError(f"level must be 0 or -1: {level!r}.")
-        return False
-
-    def has_repeats(self, level=-1) -> bool:
-        """
-        Is true when collections have repeats at ``level``.
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList([[4, 5], [4, 5]])
-
-            >>> collections.has_repeats(level=0)
-            True
-
-            >>> collections.has_repeats(level=1)
-            False
-
-            >>> collections.has_repeats(level=-1)
-            False
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList([
-            ...     [4, 5], [18, 18], [4, 5],
-            ... ])
-
-            >>> collections.has_repeats(level=0)
-            False
-
-            >>> collections.has_repeats(level=1)
-            True
-
-            >>> collections.has_repeats(level=-1)
-            True
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList([
-            ...     [4, 5], [5, 18], [4, 5],
-            ... ])
-
-            >>> collections.has_repeats(level=0)
-            False
-
-            >>> collections.has_repeats(level=1)
-            False
-
-            >>> collections.has_repeats(level=-1)
-            True
-
-        Set ``level`` to 0, 1 or -1.
-        """
-        if level == 0:
-            previous_collection = None
-            for collection in self:
-                if collection == previous_collection:
-                    return True
-                previous_collection = collection
-        elif level == 1:
-            for collection in self:
-                previous_item = None
-                for item in collection:
-                    if item == previous_item:
-                        return True
-                    previous_item = item
-        elif level == -1:
-            previous_item = None
-            for collection in self:
-                for item in collection:
-                    if item == previous_item:
-                        return True
-                    previous_item = item
-        else:
-            raise ValueError(f"level must be 0, 1 or -1: {level!r}.")
-        return False
-
     def helianthate(self, n=0, m=0) -> "CollectionList":
         """
         Helianthates collections.
@@ -5016,3 +4793,230 @@ def accumulate_and_repartition(segments, ratios, counts):
         subsegments, counts, cyclic=True, overhang=True
     )
     return groups
+
+
+def has_duplicate_pitch_classes(collections, level=-1) -> bool:
+    """
+    Is true when collections have duplicate pitch-classes at ``level``.
+
+    ..  container:: example
+
+        >>> collections = baca.CollectionList([
+        ...     [4, 5, 7],
+        ...     [15, 16, 17, 19]
+        ... ])
+
+        >>> baca.pcollections.has_duplicate_pitch_classes(collections, level=1)
+        False
+
+        >>> baca.pcollections.has_duplicate_pitch_classes(collections, level=-1)
+        True
+
+    Set ``level`` to 1 or -1.
+    """
+    pitch_class_class = collections._get_pitch_class_class()
+    if level == 1:
+        for collection in collections:
+            known_pitch_classes: typing.List[abjad.PitchClass] = []
+            for item in collection:
+                pitch_class = pitch_class_class(item)
+                if pitch_class in known_pitch_classes:
+                    return True
+                known_pitch_classes.append(pitch_class)
+    elif level == -1:
+        known_pitch_classes_: typing.List[abjad.PitchClass] = []
+        for collection in collections:
+            for item in collection:
+                pitch_class = pitch_class_class(item)
+                if pitch_class in known_pitch_classes_:
+                    return True
+                known_pitch_classes_.append(pitch_class)
+    else:
+        raise ValueError(f"level must be 1 or -1: {level!r}.")
+    return False
+
+
+def has_duplicates(collections, level=-1) -> bool:
+    """
+    Is true when collections have duplicates at ``level``.
+
+    ..  container:: example
+
+        >>> collections = baca.CollectionList([
+        ...     [16, 17], [13], [16, 17],
+        ... ])
+
+        >>> baca.pcollections.has_duplicates(collections, level=0)
+        True
+
+        >>> baca.pcollections.has_duplicates(collections, level=1)
+        False
+
+        >>> baca.pcollections.has_duplicates(collections, level=-1)
+        True
+
+    ..  container:: example
+
+        >>> collections = baca.CollectionList([[16, 17], [14, 20, 14]])
+
+        >>> baca.pcollections.has_duplicates(collections, level=0)
+        False
+
+        >>> baca.pcollections.has_duplicates(collections, level=1)
+        True
+
+        >>> baca.pcollections.has_duplicates(collections, level=-1)
+        True
+
+    ..  container:: example
+
+        >>> collections = baca.CollectionList([
+        ...     [16, 17], [14, 20], [14],
+        ... ])
+
+        >>> baca.pcollections.has_duplicates(collections, level=0)
+        False
+
+        >>> baca.pcollections.has_duplicates(collections, level=1)
+        False
+
+        >>> baca.pcollections.has_duplicates(collections, level=-1)
+        True
+
+    Set ``level`` to 0, 1 or -1.
+    """
+    if level == 0:
+        known_items: list = []
+        for collection in collections:
+            if collection in known_items:
+                return True
+            known_items.append(collection)
+    elif level == 1:
+        for collection in collections:
+            known_items = []
+            for item in collection:
+                if item in known_items:
+                    return True
+                known_items.append(item)
+    elif level == -1:
+        known_items = []
+        for collection in collections:
+            for item in collection:
+                if item in known_items:
+                    return True
+                known_items.append(item)
+    else:
+        raise ValueError(f"level must be 0, 1 or -1: {level!r}.")
+    return False
+
+
+def has_repeat_pitch_classes(collections, level=-1) -> bool:
+    """
+    Is true when collections have repeat pitch-classes as ``level``.
+
+    ..  container:: example
+
+        >>> collections = baca.CollectionList([[4, 5, 4, 5], [17, 18]])
+
+        >>> baca.pcollections.has_repeat_pitch_classes(collections, level=1)
+        False
+
+        >>> baca.pcollections.has_repeat_pitch_classes(collections, level=-1)
+        True
+
+    Set ``level`` to 0 or -1.
+    """
+    pitch_class_class = collections._get_pitch_class_class()
+    if level == 1:
+        for collection in collections:
+            previous_pitch_class = None
+            for item in collection:
+                pitch_class = pitch_class_class(item)
+                if pitch_class == previous_pitch_class:
+                    return True
+                previous_pitch_class = pitch_class
+    elif level == -1:
+        previous_pitch_class = None
+        for collection in collections:
+            for item in collection:
+                pitch_class = pitch_class_class(item)
+                if pitch_class == previous_pitch_class:
+                    return True
+                previous_pitch_class = pitch_class
+    else:
+        raise ValueError(f"level must be 0 or -1: {level!r}.")
+    return False
+
+
+def has_repeats(collections, level=-1) -> bool:
+    """
+    Is true when collections have repeats at ``level``.
+
+    ..  container:: example
+
+        >>> collections = baca.CollectionList([[4, 5], [4, 5]])
+
+        >>> baca.pcollections.has_repeats(collections, level=0)
+        True
+
+        >>> baca.pcollections.has_repeats(collections, level=1)
+        False
+
+        >>> baca.pcollections.has_repeats(collections, level=-1)
+        False
+
+    ..  container:: example
+
+        >>> collections = baca.CollectionList([
+        ...     [4, 5], [18, 18], [4, 5],
+        ... ])
+
+        >>> baca.pcollections.has_repeats(collections, level=0)
+        False
+
+        >>> baca.pcollections.has_repeats(collections, level=1)
+        True
+
+        >>> baca.pcollections.has_repeats(collections, level=-1)
+        True
+
+    ..  container:: example
+
+        >>> collections = baca.CollectionList([
+        ...     [4, 5], [5, 18], [4, 5],
+        ... ])
+
+        >>> baca.pcollections.has_repeats(collections, level=0)
+        False
+
+        >>> baca.pcollections.has_repeats(collections, level=1)
+        False
+
+        >>> baca.pcollections.has_repeats(collections, level=-1)
+        True
+
+    Set ``level`` to 0, 1 or -1.
+    """
+    if level == 0:
+        previous_collection = None
+        for collection in collections:
+            if collection == previous_collection:
+                return True
+            previous_collection = collection
+    elif level == 1:
+        for collection in collections:
+            previous_item = None
+            for item in collection:
+                if item == previous_item:
+                    return True
+                previous_item = item
+    elif level == -1:
+        previous_item = None
+        for collection in collections:
+            for item in collection:
+                if item == previous_item:
+                    return True
+                previous_item = item
+    else:
+        raise ValueError(f"level must be 0, 1 or -1: {level!r}.")
+    return False
