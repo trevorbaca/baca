@@ -1301,27 +1301,6 @@ class CollectionList(collections_module.abc.Sequence):
                 collections.append(collection)
         return dataclasses.replace(self, collections=collections)
 
-    def cursor(self, cyclic=None, singletons=None) -> _classes.Cursor:
-        """
-        Wraps collections in cursor.
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList([[5, 12, 14, 18], [16, 17]])
-            >>> cursor = collections.cursor()
-
-            >>> cursor
-            Cursor(source=CollectionList([<5, 12, 14, 18>, <16, 17>]), cyclic=None, position=None, singletons=None, suppress_exception=None)
-
-            >>> cursor.next()
-            [PitchSegment(items=[5, 12, 14, 18], item_class=NumberedPitch)]
-
-            >>> cursor.next()
-            [PitchSegment(items=[16, 17], item_class=NumberedPitch)]
-
-        """
-        return _classes.Cursor(cyclic=cyclic, singletons=singletons, source=self)
-
     def flatten(self) -> "CollectionTyping":
         """
         Flattens collections.
