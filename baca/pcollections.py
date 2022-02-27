@@ -1238,68 +1238,6 @@ class CollectionList(collections_module.abc.Sequence):
             collections.append(collection)
         return dataclasses.replace(self, collections=collections)
 
-    def chords(self, pattern=None) -> "CollectionList":
-        """
-        Turns collections into chords according to ``pattern``.
-
-        ..  container:: example
-
-            Without pattern:
-
-            >>> collections = baca.CollectionList([
-            ...     [12, 14, 18, 17],
-            ...     [16, 20, 19],
-            ...     [12, 14, 18, 17],
-            ...     [16, 20, 19],
-            ... ])
-
-            >>> for collection in collections:
-            ...     collection
-            ...
-            PitchSegment(items=[12, 14, 18, 17], item_class=NumberedPitch)
-            PitchSegment(items=[16, 20, 19], item_class=NumberedPitch)
-            PitchSegment(items=[12, 14, 18, 17], item_class=NumberedPitch)
-            PitchSegment(items=[16, 20, 19], item_class=NumberedPitch)
-
-            >>> for collection in collections.chords():
-            ...     collection
-            ...
-            PitchSet(items=[12, 14, 17, 18], item_class=abjad.NumberedPitch)
-            PitchSet(items=[16, 19, 20], item_class=abjad.NumberedPitch)
-            PitchSet(items=[12, 14, 17, 18], item_class=abjad.NumberedPitch)
-            PitchSet(items=[16, 19, 20], item_class=abjad.NumberedPitch)
-
-        ..  container:: example
-
-            With pattern:
-
-            >>> collections = baca.CollectionList([
-            ...     [12, 14, 18, 17],
-            ...     [16, 20, 19],
-            ...     [12, 14, 18, 17],
-            ...     [16, 20, 19],
-            ... ])
-
-            >>> pattern = abjad.index([1], 2)
-            >>> for collection in collections.chords(pattern=pattern):
-            ...     collection
-            ...
-            PitchSegment(items=[12, 14, 18, 17], item_class=NumberedPitch)
-            PitchSet(items=[16, 19, 20], item_class=abjad.NumberedPitch)
-            PitchSegment(items=[12, 14, 18, 17], item_class=NumberedPitch)
-            PitchSet(items=[16, 19, 20], item_class=abjad.NumberedPitch)
-
-        """
-        collections = []
-        length = len(self)
-        pattern = pattern or abjad.index_all()
-        for i, collection in enumerate(self):
-            if pattern.matches_index(i, length):
-                collections.append(collection.chord())
-            else:
-                collections.append(collection)
-        return dataclasses.replace(self, collections=collections)
-
     def has_duplicate_pitch_classes(self, level=-1) -> bool:
         """
         Is true when collections have duplicate pitch-classes at ``level``.
