@@ -2288,65 +2288,6 @@ class CollectionList(collections_module.abc.Sequence):
         collections = [_.to_numbered_pitches() for _ in self]
         return CollectionList(collections=collections, item_class=abjad.NumberedPitch)
 
-    def transpose(self, n=0) -> "CollectionList":
-        """
-        Transposes collections.
-
-        ..  container:: example
-
-            To numbered pitch collections:
-
-            ..  container:: example
-
-                >>> collections = baca.CollectionList(
-                ...     [[12, 14, 18, 17], [16, 20, 19]],
-                ...     item_class=abjad.NumberedPitch,
-                ... )
-
-                >>> collections.transpose(28)
-                CollectionList([<40, 42, 46, 45>, <44, 48, 47>])
-
-            ..  container:: example
-
-                >>> collections = baca.CollectionList(
-                ...     [[0, 2, 6, 5], [4, 8, 7]],
-                ...     item_class=abjad.NumberedPitchClass,
-                ... )
-
-                >>> collections.transpose(28)
-                CollectionList([PC<4, 6, 10, 9>, PC<8, 0, 11>])
-
-        ..  container:: example
-
-            To named pitch collections:
-
-            ..  container:: example
-
-                >>> collections = baca.CollectionList(
-                ...     [[12, 14, 18, 17], [16, 20, 19]],
-                ...     item_class=abjad.NamedPitch,
-                ... )
-
-                >>> collections.transpose(-28)
-                CollectionList([<af, bf, d df>, <c ff ef>])
-
-            ..  container:: example
-
-                >>> collections = baca.CollectionList(
-                ...     [[0, 2, 6, 5], [4, 8, 7]],
-                ...     item_class=abjad.NamedPitchClass,
-                ... )
-
-                >>> collections.transpose(-28)
-                CollectionList([PC<af bf d df>, PC<c ff ef>])
-
-        """
-        collections_ = []
-        for collection in self:
-            collection_ = collection.transpose(n)
-            collections_.append(collection_)
-        return dataclasses.replace(self, collections=collections_)
-
 
 def illustrate_collection_list(
     collection_list,
