@@ -46,7 +46,7 @@ class ArpeggiationSpacingSpecifier:
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> collections = baca.CollectionList(collections)
-        >>> collections = collections.arpeggiate_up()
+        >>> collections = [baca.PitchClassSegment(_).arpeggiate_up() for _ in collections]
         >>> selection = stack(collections)
 
         >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -98,8 +98,8 @@ class ArpeggiationSpacingSpecifier:
         ... )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> collections = baca.CollectionList(collections)
-        >>> collections = collections.arpeggiate_down()
+        >>> collections = baca.CollectionList(collections, abjad.NumberedPitchClass)
+        >>> collections = [_.arpeggiate_down() for _ in collections]
         >>> selection = stack(collections)
 
         >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1057,92 +1057,6 @@ class CollectionList(collections_module.abc.Sequence):
             else:
                 raise TypeError(f"only string or iterable: {argument!r}.")
 
-    def arpeggiate_down(self, pattern=None) -> "CollectionList":
-        """
-        Apreggiates collections down according to ``pattern``.
-
-        ..  container:: example
-
-            Down-arpeggiates all collections:
-
-            >>> collections = baca.CollectionList(
-            ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-            ... )
-
-            >>> collections.arpeggiate_down()
-            CollectionList([<29, 24, 14, 6, 5>, <28, 17, 7>, <3, 2, 1, 0>])
-
-        ..  container:: example
-
-            Down-arpeggiates collection -1:
-
-            >>> collections = baca.CollectionList(
-            ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-            ... )
-
-            >>> collections.arpeggiate_down(pattern=[-1])
-            CollectionList([<5, 12, 14, 18, 17>, <16, 17, 19>, <3, 2, 1, 0>])
-
-        """
-        if isinstance(pattern, list):
-            pattern = abjad.Pattern(indices=pattern)
-        pattern = pattern or abjad.index_all()
-        length = len(self)
-        collections = []
-        for i, collection in enumerate(self):
-            if pattern.matches_index(i, length):
-                if isinstance(collection, abjad.PitchSegment):
-                    collection = collection.to_numbered_pitch_classes()
-                    collection = PitchClassSegment(
-                        items=collection, item_class=collection.item_class
-                    )
-                collection = collection.arpeggiate_down()
-            collections.append(collection)
-        return dataclasses.replace(self, collections=collections)
-
-    def arpeggiate_up(self, pattern=None) -> "CollectionList":
-        """
-        Apreggiates collections up according to ``pattern``.
-
-        ..  container:: example
-
-            Up-arpeggiates all collections:
-
-            >>> collections = baca.CollectionList(
-            ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-            ... )
-
-            >>> collections.arpeggiate_up()
-            CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
-
-        ..  container:: example
-
-            Up-arpeggiates collection -1:
-
-            >>> collections = baca.CollectionList(
-            ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-            ... )
-
-            >>> collections.arpeggiate_up(pattern=[-1])
-            CollectionList([<5, 12, 14, 18, 17>, <16, 17, 19>, <3, 14, 25, 36>])
-
-        """
-        if isinstance(pattern, list):
-            pattern = abjad.Pattern(indices=pattern)
-        pattern = pattern or abjad.index_all()
-        length = len(self)
-        collections = []
-        for i, collection in enumerate(self):
-            if pattern.matches_index(i, length):
-                if isinstance(collection, abjad.PitchSegment):
-                    collection = collection.to_numbered_pitch_classes()
-                    collection = PitchClassSegment(
-                        items=collection, item_class=collection.item_class
-                    )
-                collection = collection.arpeggiate_up()
-            collections.append(collection)
-        return dataclasses.replace(self, collections=collections)
-
     def bass_to_octave(self, n=4, pattern=None) -> "CollectionList":
         """
         Octave-transposes collections to bass in octave ``n``.
@@ -1154,7 +1068,8 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections = baca.CollectionList(
             ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
             ... )
-            >>> collections = collections.arpeggiate_up()
+            >>> collections = [baca.PitchClassSegment(_).arpeggiate_up() for _ in collections]
+            >>> collections = baca.CollectionList(collections)
 
             >>> collections
             CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
@@ -1169,7 +1084,8 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections = baca.CollectionList(
             ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
             ... )
-            >>> collections = collections.arpeggiate_up()
+            >>> collections = [baca.PitchClassSegment(_).arpeggiate_up() for _ in collections]
+            >>> collections = baca.CollectionList(collections)
 
             >>> collections
             CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
@@ -1200,7 +1116,9 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections = baca.CollectionList(
             ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
             ... )
-            >>> collections = collections.arpeggiate_up()
+            >>> collections = [baca.PitchClassSegment(_) for _ in collections]
+            >>> collections = [_.arpeggiate_up() for _ in collections]
+            >>> collections = baca.CollectionList(collections)
 
             >>> collections
             CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
@@ -1215,7 +1133,9 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections = baca.CollectionList(
             ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
             ... )
-            >>> collections = collections.arpeggiate_up()
+            >>> collections = [baca.PitchClassSegment(_) for _ in collections]
+            >>> collections = [_.arpeggiate_up() for _ in collections]
+            >>> collections = baca.CollectionList(collections)
 
             >>> collections
             CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
@@ -1516,7 +1436,9 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections = baca.CollectionList(
             ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
             ... )
-            >>> collections = collections.arpeggiate_up()
+            >>> collections = [baca.PitchClassSegment(_) for _ in collections]
+            >>> collections = [_.arpeggiate_up() for _ in collections]
+            >>> collections = baca.CollectionList(collections)
 
             >>> collections
             CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
@@ -1531,7 +1453,9 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections = baca.CollectionList(
             ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
             ... )
-            >>> collections = collections.arpeggiate_up()
+            >>> collections = [baca.PitchClassSegment(_) for _ in collections]
+            >>> collections = [_.arpeggiate_up() for _ in collections]
+            >>> collections = baca.CollectionList(collections)
 
             >>> collections
             CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
