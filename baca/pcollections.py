@@ -823,13 +823,6 @@ class CollectionList(collections_module.abc.Sequence):
         >>> baca.CollectionList([collection_list_1, collection_list_2])
         CollectionList([<12, 13, 14>, <15, 16, 17>])
 
-    ..  container:: example
-
-        Initializes empty:
-
-        >>> baca.CollectionList()
-        CollectionList([])
-
     """
 
     collections: typing.Any = None
@@ -1067,78 +1060,6 @@ class CollectionList(collections_module.abc.Sequence):
                 return PitchSegment(items=items, item_class=abjad.NumberedPitch)
             else:
                 raise TypeError(f"only string or iterable: {argument!r}.")
-
-    def accumulate(self, operands=None) -> "CollectionList":
-        """
-        Accumulates ``operands`` against collections to identity.
-
-        ..  container:: example
-
-            Accumulates transposition:
-
-            >>> collections = baca.CollectionList(
-            ...     [[0, 2, 6, 5], [4, 8, 7]],
-            ...     item_class=abjad.NumberedPitchClass,
-            ... )
-
-            >>> for collection in baca.sequence.accumulate(
-            ...     collections, [lambda _: _.transpose(n=3)]
-            ... ):
-            ...     collection
-            ...
-            PitchClassSegment(items=[0, 2, 6, 5], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[4, 8, 7], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[3, 5, 9, 8], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[7, 11, 10], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[6, 8, 0, 11], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[10, 2, 1], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[9, 11, 3, 2], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[1, 5, 4], item_class=NumberedPitchClass)
-
-        ..  container:: example
-
-            Accumulates transposition followed by alpha:
-
-            >>> collections = baca.CollectionList(
-            ...     [[0, 2, 6, 5], [4, 8, 7]],
-            ...     item_class=abjad.NumberedPitchClass,
-            ... )
-
-            >>> operands = [lambda _: _.transpose(n=3), lambda _: _.alpha()]
-            >>> for collection in baca.sequence.accumulate(collections, operands):
-            ...     collection
-            ...
-            PitchClassSegment(items=[0, 2, 6, 5], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[4, 8, 7], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[3, 5, 9, 8], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[7, 11, 10], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[2, 4, 8, 9], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[6, 10, 11], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[5, 7, 11, 0], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[9, 1, 2], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[4, 6, 10, 1], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[8, 0, 3], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[7, 9, 1, 4], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[11, 3, 6], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[6, 8, 0, 5], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[10, 2, 7], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[9, 11, 3, 8], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[1, 5, 10], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[8, 10, 2, 9], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[0, 4, 11], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[11, 1, 5, 0], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[3, 7, 2], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[10, 0, 4, 1], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[2, 6, 3], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[1, 3, 7, 4], item_class=NumberedPitchClass)
-            PitchClassSegment(items=[5, 9, 6], item_class=NumberedPitchClass)
-
-        """
-        sequence = list(self)
-        collections: typing.List[CollectionTyping] = []
-        for sequence_ in _sequence.accumulate(sequence, operands=operands):
-            collections.extend(sequence_)
-        return dataclasses.replace(self, collections=collections)
 
     def arpeggiate_down(self, pattern=None) -> "CollectionList":
         """
