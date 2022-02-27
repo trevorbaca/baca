@@ -1299,23 +1299,6 @@ class CollectionList(collections_module.abc.Sequence):
                 raise ValueError(message)
         return result
 
-    # TODO: change indices to pattern
-    # TODO: add level=-1 keyword
-    def remove(self, indices=None, period=None) -> "CollectionList":
-        """
-        Removes collections at ``indices``.
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList([[0, 1], [2, 3], [4], [5, 6]])
-            >>> collections.remove([0, -1])
-            CollectionList([<2, 3>, <4>])
-
-        """
-        sequence = list(self)
-        collections = abjad.sequence.remove(sequence, indices=indices, period=period)
-        return dataclasses.replace(self, collections=collections)
-
     def remove_duplicate_pitch_classes(self, level=-1) -> "CollectionList":
         """
         Removes duplicate pitch-classes at ``level``.
@@ -1389,7 +1372,6 @@ class CollectionList(collections_module.abc.Sequence):
         if level == 0:
             collections_ = []
             known_items: typing.List[CollectionTyping] = []
-            # collections_, known_items = [], []
             for collection in self:
                 if collection in known_items:
                     continue
@@ -1522,54 +1504,6 @@ class CollectionList(collections_module.abc.Sequence):
         else:
             raise ValueError(f"level must be 0, 1 or -1: {level!r}.")
         return dataclasses.replace(self, collections=collections_)
-
-    def repeat(self, n=1) -> "CollectionList":
-        """
-        Repeats collections.
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList([[12, 14, 18, 17], [16, 19]])
-            >>> for collection in collections.repeat(n=3):
-            ...     collection
-            ...
-            PitchSegment(items=[12, 14, 18, 17], item_class=NumberedPitch)
-            PitchSegment(items=[16, 19], item_class=NumberedPitch)
-            PitchSegment(items=[12, 14, 18, 17], item_class=NumberedPitch)
-            PitchSegment(items=[16, 19], item_class=NumberedPitch)
-            PitchSegment(items=[12, 14, 18, 17], item_class=NumberedPitch)
-            PitchSegment(items=[16, 19], item_class=NumberedPitch)
-
-        """
-        collections = list(self)
-        collections = abjad.sequence.repeat(collections, n=n)
-        collections = abjad.sequence.flatten(collections, depth=1)
-        return dataclasses.replace(self, collections=collections)
-
-    # TODO: change indices to pattern
-    # TODO: add level=-1 keyword
-    def retain(self, indices=None, period=None) -> "CollectionList":
-        """
-        Retains collections at ``indices``.
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList([[0, 1], [2, 3], [4], [5, 6]])
-            >>> collections.retain([0, -1])
-            CollectionList([<0, 1>, <5, 6>])
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList(
-            ...     [[0, 1], [2, 3], [4], [5, 6], [7], [8]],
-            ... )
-            >>> collections.retain([0], period=2)
-            CollectionList([<0, 1>, <4>, <7>])
-
-        """
-        sequence = list(self)
-        collections = abjad.sequence.retain(sequence, indices=indices, period=period)
-        return dataclasses.replace(self, collections=collections)
 
     def soprano_to_octave(self, n=4, pattern=None) -> "CollectionList":
         """
