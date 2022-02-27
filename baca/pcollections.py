@@ -2281,75 +2281,90 @@ class CollectionList(collections_module.abc.Sequence):
             self, collections=collections_, item_class=item_class
         )
 
-    def to_pitches(self) -> "CollectionList":
+    def to_named_pitches(self) -> "CollectionList":
         """
-        Changes to pitch collections.
+        Changes to named pitch collections.
 
         ..  container:: example
 
-            To numbered pitch collections:
+            >>> collections = baca.CollectionList(
+            ...     [[12, 14, 18, 17], [16, 20, 19]],
+            ...     item_class=abjad.NumberedPitch,
+            ... )
 
-            ..  container:: example
+            >>> collections.to_named_pitches()
+            CollectionList([<c'' d'' fs'' f''>, <e'' af'' g''>])
 
-                >>> collections = baca.CollectionList(
-                ...     [[12, 14, 18, 17], [16, 20, 19]],
-                ...     item_class=abjad.NumberedPitch,
-                ... )
+            >>> collections = baca.CollectionList(
+            ...     [[0, 2, 6, 5], [4, 8, 7]],
+            ...     item_class=abjad.NumberedPitchClass,
+            ... )
 
-                >>> collections.to_pitches()
-                CollectionList([<12, 14, 18, 17>, <16, 20, 19>])
+            >>> collections.to_named_pitches()
+            CollectionList([<c' d' fs' f'>, <e' af' g'>])
 
-            ..  container:: example
+            >>> collections = baca.CollectionList(
+            ...     [[12, 14, 18, 17], [16, 20, 19]],
+            ...     item_class=abjad.NamedPitch,
+            ... )
 
-                >>> collections = baca.CollectionList(
-                ...     [[0, 2, 6, 5], [4, 8, 7]],
-                ...     item_class=abjad.NumberedPitchClass,
-                ... )
+            >>> collections.to_named_pitches()
+            CollectionList([<c'' d'' fs'' f''>, <e'' af'' g''>])
 
-                >>> collections.to_pitches()
-                CollectionList([<0, 2, 6, 5>, <4, 8, 7>])
+            >>> collections = baca.CollectionList(
+            ...     [[0, 2, 6, 5], [4, 8, 7]],
+            ...     item_class=abjad.NamedPitchClass,
+            ... )
+
+            >>> collections.to_named_pitches()
+            CollectionList([<c' d' fs' f'>, <e' af' g'>])
+
+        """
+        collections = [_.to_named_pitches() for _ in self]
+        return CollectionList(collections=collections, item_class=abjad.NamedPitch)
+
+    def to_numbered_pitches(self) -> "CollectionList":
+        """
+        Changes to numbered pitch collections.
 
         ..  container:: example
 
-            To named pitch collections:
+            >>> collections = baca.CollectionList(
+            ...     [[12, 14, 18, 17], [16, 20, 19]],
+            ...     item_class=abjad.NumberedPitch,
+            ... )
 
-            ..  container:: example
+            >>> collections.to_numbered_pitches()
+            CollectionList([<12, 14, 18, 17>, <16, 20, 19>])
 
-                >>> collections = baca.CollectionList(
-                ...     [[12, 14, 18, 17], [16, 20, 19]],
-                ...     item_class=abjad.NamedPitch,
-                ... )
+            >>> collections = baca.CollectionList(
+            ...     [[0, 2, 6, 5], [4, 8, 7]],
+            ...     item_class=abjad.NumberedPitchClass,
+            ... )
 
-                >>> collections.to_pitches()
-                CollectionList([<c'' d'' fs'' f''>, <e'' af'' g''>])
+            >>> collections.to_numbered_pitches()
+            CollectionList([<0, 2, 6, 5>, <4, 8, 7>])
 
-            ..  container:: example
+            >>> collections = baca.CollectionList(
+            ...     [[12, 14, 18, 17], [16, 20, 19]],
+            ...     item_class=abjad.NamedPitch,
+            ... )
 
-                >>> collections = baca.CollectionList(
-                ...     [[0, 2, 6, 5], [4, 8, 7]],
-                ...     item_class=abjad.NamedPitchClass,
-                ... )
+            >>> collections.to_numbered_pitches()
+            CollectionList([<12, 14, 18, 17>, <16, 20, 19>])
 
-                >>> collections.to_pitches()
-                CollectionList([<c' d' fs' f'>, <e' af' g'>])
+            >>> collections = baca.CollectionList(
+            ...     [[0, 2, 6, 5], [4, 8, 7]],
+            ...     item_class=abjad.NamedPitchClass,
+            ... )
+
+            >>> collections.to_numbered_pitches()
+            CollectionList([<0, 2, 6, 5>, <4, 8, 7>])
 
         """
-        item_class = self.item_class or abjad.NumberedPitch
-        if item_class in (abjad.NamedPitch, abjad.NumberedPitch):
-            pass
-        elif item_class is abjad.NamedPitchClass:
-            item_class = abjad.NamedPitch
-        elif item_class is abjad.NumberedPitchClass:
-            item_class = abjad.NumberedPitch
-        else:
-            raise TypeError(item_class)
-        collections_ = []
-        for collection in self:
-            collection_ = collection.to_pitches()
-            collections_.append(collection_)
-        return dataclasses.replace(
-            self, collections=collections_, item_class=item_class
-        )
+        collections = [_.to_numbered_pitches() for _ in self]
+        return CollectionList(collections=collections, item_class=abjad.NumberedPitch)
+
 
     def transpose(self, n=0) -> "CollectionList":
         """
