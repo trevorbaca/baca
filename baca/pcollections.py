@@ -610,7 +610,7 @@ def _to_baca_collection(collection):
     assert isinstance(collection, abjad_prototype), repr(collection)
     baca_prototype = (
         PitchClassSegment,
-        PitchClassSet,
+        abjad.PitchClassSet,
         PitchSegment,
         PitchSet,
     )
@@ -621,7 +621,9 @@ def _to_baca_collection(collection):
             items=collection, item_class=collection.item_class
         )
     elif isinstance(collection, abjad.PitchClassSet):
-        collection = PitchClassSet(items=collection, item_class=collection.item_class)
+        collection = abjad.PitchClassSet(
+            items=collection, item_class=collection.item_class
+        )
     elif isinstance(collection, abjad.PitchSegment):
         collection = PitchSegment(items=collection, item_class=collection.item_class)
     elif isinstance(collection, abjad.PitchSet):
@@ -997,7 +999,7 @@ class CollectionList(collections_module.abc.Sequence):
         return string
 
     def _coerce(self, collections):
-        prototype = (PitchSegment, PitchSet, PitchClassSegment, PitchClassSet)
+        prototype = (PitchSegment, PitchSet, PitchClassSegment, abjad.PitchClassSet)
         collections_ = []
         for item in collections or []:
             if isinstance(item, type(self)):
@@ -1038,7 +1040,7 @@ class CollectionList(collections_module.abc.Sequence):
                 abjad.NumberedPitchClass,
                 abjad.NamedPitchClass,
             ):
-                return PitchClassSet(items=items, item_class=item_class)
+                return abjad.PitchClassSet(items=items, item_class=item_class)
             else:
                 raise TypeError(item_class)
         elif self.item_class is not None:
@@ -2365,7 +2367,6 @@ class CollectionList(collections_module.abc.Sequence):
         collections = [_.to_numbered_pitches() for _ in self]
         return CollectionList(collections=collections, item_class=abjad.NumberedPitch)
 
-
     def transpose(self, n=0) -> "CollectionList":
         """
         Transposes collections.
@@ -2666,7 +2667,7 @@ def illustrate_collection_list(
             abjad.attach(markup, notes[0])
         if set_classes:
             pitches = abjad.iterate.pitches(notes)
-            pitch_class_set = PitchClassSet.from_pitches(pitches)
+            pitch_class_set = abjad.PitchClassSet.from_pitches(pitches)
             if pitch_class_set:
                 set_class = abjad.SetClass.from_pitch_class_set(
                     pitch_class_set, lex_rank=True, transposition_only=True
@@ -3298,7 +3299,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
         Returns pitch-class set.
         """
-        return PitchClassSet(items=self, item_class=self.item_class)
+        return abjad.PitchClassSet(items=self, item_class=self.item_class)
 
     def get_matching_transforms(
         self,
@@ -3988,108 +3989,6 @@ class PitchClassSegment(abjad.PitchClassSegment):
         segment = segments[0]
         assert isinstance(segment, PitchSegment)
         return segment
-
-
-@dataclasses.dataclass
-class PitchClassSet(abjad.PitchClassSet):
-    r"""
-    Pitch-class set.
-
-    ..  container:: example
-
-        Initializes set:
-
-        ..  container:: example
-
-            >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-            >>> setting = baca.PitchClassSet(items=items)
-            >>> lilypond_file = abjad.illustrate(setting)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> voice = lilypond_file["Voice"]
-                >>> string = abjad.lilypond(voice)
-                >>> print(string)
-                \context Voice = "Voice"
-                {
-                    <fs' g' bf' bqf'>1
-                }
-
-
-    """
-
-    def __eq__(self, argument):
-        """
-        Is true when segment equals ``argument``.
-
-        ..  container:: example
-
-            Works with Abjad pitch-class sets:
-
-            >>> set_1 = abjad.PitchClassSet([0, 1, 2, 3])
-            >>> set_2 = baca.PitchClassSet([0, 1, 2, 3])
-
-            >>> set_1 == set_2
-            True
-
-            >>> set_2 == set_1
-            True
-
-        """
-        if not issubclass(type(argument), type(self)) and not issubclass(
-            type(self), type(argument)
-        ):
-            return False
-        return self.items == argument.items
-
-    def __repr__(self):
-        """
-        Gets repr.
-        """
-        return f"{type(self).__name__}(items={self._get_sorted_repr_items()}, item_class=abjad.{self.item_class.__name__})"
-
-    ### PUBLIC METHODS ###
-
-    def to_pitch_classes(self):
-        """
-        Makes new pitch-class set.
-
-        ..  container:: example
-
-            >>> setting = baca.PitchClassSet([-2, -1.5, 6, 7, -1.5, 7])
-            >>> setting
-            PitchClassSet(items=[6, 7, 10, 10.5], item_class=abjad.NumberedPitchClass)
-
-            >>> setting.to_pitch_classes()
-            PitchClassSet(items=[6, 7, 10, 10.5], item_class=abjad.NumberedPitchClass)
-
-        Returns new pitch-class set.
-        """
-        return dataclasses.replace(self)
-
-    def to_pitches(self):
-        """
-        Makes pitch set.
-
-        ..  container:: example
-
-            >>> setting = baca.PitchClassSet([-2, -1.5, 6, 7, -1.5, 7])
-            >>> setting
-            PitchClassSet(items=[6, 7, 10, 10.5], item_class=abjad.NumberedPitchClass)
-
-            >>> setting.to_pitches()
-            PitchSet(items=[6, 7, 10, 10.5], item_class=abjad.NumberedPitch)
-
-        Returns pitch set.
-        """
-        if self.item_class is abjad.NamedPitchClass:
-            item_class = abjad.NamedPitch
-        elif self.item_class is abjad.NumberedPitchClass:
-            item_class = abjad.NumberedPitch
-        else:
-            raise TypeError(self.item_class)
-        return PitchSet(items=self, item_class=item_class)
 
 
 @dataclasses.dataclass
@@ -5238,7 +5137,7 @@ class PitchSet(abjad.PitchSet):
             item_class = abjad.NamedPitchClass
         else:
             raise TypeError(self.item_class)
-        return PitchClassSet(items=self, item_class=item_class)
+        return abjad.PitchClassSet(items=self, item_class=item_class)
 
 
 CollectionTyping = typing.Union[PitchSet, PitchSegment]

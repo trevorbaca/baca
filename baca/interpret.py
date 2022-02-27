@@ -1556,7 +1556,7 @@ def _find_repeat_pitch_classes(argument):
                 written_pitches = lt.head.written_pitches
             else:
                 written_pitches = []
-            pcs = _pcollections.PitchClassSet(written_pitches)
+            pcs = abjad.PitchClassSet(written_pitches)
             if abjad.get.has_indicator(
                 lt.head, _const.NOT_YET_PITCHED
             ) or abjad.get.has_indicator(lt.head, _const.ALLOW_REPEAT_PITCH):
