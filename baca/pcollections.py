@@ -4195,7 +4195,10 @@ def remove_duplicate_pitch_classes(collections, level=-1):
 
     Set ``level`` to 1 or -1.
     """
-    pitch_class_class = collections._get_pitch_class_class()
+    if isinstance(collections, CollectionList):
+        pitch_class_class = collections._get_pitch_class_class()
+    else:
+        pitch_class_class = abjad.NamedPitchClass
     collections_ = []
     if level == 1:
         for collection in collections:
@@ -4208,7 +4211,10 @@ def remove_duplicate_pitch_classes(collections, level=-1):
                 known_pitch_classes.append(pitch_class)
                 items.append(item)
             if items:
-                collection_ = collections._initialize_collection(items)
+                if isinstance(collections, CollectionList):
+                    collection_ = collections._initialize_collection(items)
+                else:
+                    collection_ = items
                 collections_.append(collection_)
     elif level == -1:
         known_pitch_classes = []
@@ -4225,7 +4231,11 @@ def remove_duplicate_pitch_classes(collections, level=-1):
                 collections_.append(collection_)
     else:
         raise ValueError(f"level must be 1 or -1: {level!r}.")
-    return dataclasses.replace(collections, collections=collections_)
+    if isinstance(collections, CollectionList):
+        result = dataclasses.replace(collections, collections=collections_)
+    else:
+        result = collections_
+    return result
 
 
 def remove_duplicates(collections, level=-1) -> "CollectionList":
@@ -4392,8 +4402,15 @@ def remove_repeats(collections, level=-1) -> "CollectionList":
                 items.append(item)
                 previous_item = item
             if items:
-                collection_ = collections._initialize_collection(items)
+                if isinstance(collections, CollectionList):
+                    collection_ = collections._initialize_collection(items)
+                else:
+                    collection_ = items
                 collections_.append(collection_)
     else:
         raise ValueError(f"level must be 0, 1 or -1: {level!r}.")
-    return dataclasses.replace(collections, collections=collections_)
+    if isinstance(collections, CollectionList):
+        result = dataclasses.replace(collections, collections=collections_)
+    else:
+        result = collections_
+    return result
