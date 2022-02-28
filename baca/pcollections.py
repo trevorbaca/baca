@@ -163,7 +163,8 @@ class ArpeggiationSpacingSpecifier:
         assert collections.item_class in (abjad.NumberedPitch, None), repr(
             collections.item_class
         )
-        pitch_class_collections = collections.to_numbered_pitch_classes()
+        # pitch_class_collections = collections.to_numbered_pitch_classes()
+        pitch_class_collections = [_.to_numbered_pitch_classes() for _ in collections]
         pattern = self.pattern or abjad.index_all()
         collections_ = []
         total_length = len(collections)
@@ -839,24 +840,6 @@ class CollectionList(collections_module.abc.Sequence):
         self.collections = self.collections or []
         self.collections = tuple(self.collections)
 
-    def __add__(self, argument) -> "CollectionList":
-        """
-        Adds ``argument`` to collections.
-
-        ..  container:: example
-
-            >>> collections_1 = baca.CollectionList([[12, 14, 18, 17]])
-            >>> collections_2 = baca.CollectionList([[16, 20, 19]])
-            >>> collections_1 + collections_2
-            CollectionList([<12, 14, 18, 17>, <16, 20, 19>])
-
-        """
-        if not isinstance(argument, collections_module.abc.Iterable):
-            raise TypeError(f"must be collection list: {argument!r}.")
-        argument_collections = [self._initialize_collection(_) for _ in argument]
-        collections = list(self.collections) + argument_collections
-        return dataclasses.replace(self, collections=collections)
-
     def __eq__(self, argument) -> bool:
         """
         Is true when ``argument`` is a collection list with collections equal to those of
@@ -1056,48 +1039,6 @@ class CollectionList(collections_module.abc.Sequence):
                 return PitchSegment(items=items, item_class=abjad.NumberedPitch)
             else:
                 raise TypeError(f"only string or iterable: {argument!r}.")
-
-    def to_numbered_pitch_classes(self) -> "CollectionList":
-        """
-        Changes to numbered pitch-class collections.
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList(
-            ...     [[12, 14, 18, 17], [16, 20, 19]],
-            ...     item_class=abjad.NumberedPitch,
-            ... )
-
-            >>> collections.to_numbered_pitch_classes()
-            CollectionList([PC<0, 2, 6, 5>, PC<4, 8, 7>])
-
-            >>> collections = baca.CollectionList(
-            ...     [[0, 2, 6, 5], [4, 8, 7]],
-            ...     item_class=abjad.NumberedPitchClass,
-            ... )
-
-            >>> collections.to_numbered_pitch_classes()
-            CollectionList([PC<0, 2, 6, 5>, PC<4, 8, 7>])
-
-            >>> collections = baca.CollectionList(
-            ...     [[12, 14, 18, 17], [16, 20, 19]],
-            ...     item_class=abjad.NamedPitch,
-            ... )
-
-            >>> collections.to_numbered_pitch_classes()
-            CollectionList([PC<0, 2, 6, 5>, PC<4, 8, 7>])
-
-            >>> collections = baca.CollectionList(
-            ...     [[0, 2, 6, 5], [4, 8, 7]],
-            ...     item_class=abjad.NamedPitchClass,
-            ... )
-
-            >>> collections.to_numbered_pitch_classes()
-            CollectionList([PC<0, 2, 6, 5>, PC<4, 8, 7>])
-
-        """
-        collections = [_.to_numbered_pitch_classes() for _ in self]
-        return CollectionList(collections, item_class=abjad.NumberedPitchClass)
 
 
 def illustrate_collection_list(
@@ -4217,10 +4158,16 @@ def read(collections, counts=None, check=None):
     for count in counts:
         stop = i + count
         items = source[i:stop]
-        collection = collections._initialize_collection(items)
+        if hasattr(collections, "_initialize_collection"):
+            collection = collections._initialize_collection(items)
+        else:
+            collection = items
         collections_.append(collection)
         i += count
-    result = dataclasses.replace(collections, collections=collections_)
+    if isinstance(collections, CollectionList):
+        result = dataclasses.replace(collections, collections=collections_)
+    else:
+        result = collections_
     if check == abjad.Exact:
         self_item_count = len(abjad.sequence.join(collections)[0])
         result_item_count = len(abjad.sequence.join(result)[0])
@@ -4320,7 +4267,10 @@ def remove_duplicates(collections, level=-1) -> "CollectionList":
                 known_items.append(item)
                 items.append(item)
             if items:
-                collection_ = collections._initialize_collection(items)
+                if isinstance(collections, CollectionList):
+                    collection_ = collections._initialize_collection(items)
+                else:
+                    collection_ = items
                 collections_.append(collection_)
     elif level == -1:
         known_items = []
@@ -4332,11 +4282,18 @@ def remove_duplicates(collections, level=-1) -> "CollectionList":
                 known_items.append(item)
                 items.append(item)
             if items:
-                collection_ = collections._initialize_collection(items)
+                if isinstance(collections, CollectionList):
+                    collection_ = collections._initialize_collection(items)
+                else:
+                    collection_ = items
                 collections_.append(collection_)
     else:
         raise ValueError(f"level must be 0, 1 or -1: {level!r}.")
-    return dataclasses.replace(collections, collections=collections_)
+    if isinstance(collections, CollectionList):
+        result = dataclasses.replace(collections, collections=collections_)
+    else:
+        result = collections_
+    return result
 
 
 def remove_repeat_pitch_classes(collections, level=-1) -> "CollectionList":
