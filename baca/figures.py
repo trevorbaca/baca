@@ -13,7 +13,6 @@ from abjadext import rmakers
 from . import classes as _classes
 from . import commandclasses as _commandclasses
 from . import const as _const
-from . import pcollections as _pcollections
 from . import rhythmcommands as _rhythmcommands
 from . import scoping as _scoping
 from . import select as _select
@@ -2707,7 +2706,6 @@ class FigureAccumulator:
             str,
             abjad.Segment,
             abjad.Set,
-            _pcollections.CollectionList,
         )
         if not isinstance(collections, prototype):
             message = "collections must be coerceable:\n"
@@ -3675,14 +3673,8 @@ def _add_rest_affixes(
 def _coerce_collections(collections):
     prototype = (abjad.Segment, abjad.Set)
     if isinstance(collections, prototype):
-        return _pcollections.CollectionList(collections=[collections])
-    item_class: typing.Type = abjad.NumberedPitch
-    for collection in collections:
-        for item in collection:
-            if isinstance(item, str):
-                item_class = abjad.NamedPitch
-                break
-    return _pcollections.CollectionList(collections=collections, item_class=item_class)
+        return [collections]
+    return collections
 
 
 def _fix_rounding_error(durations, total_duration):

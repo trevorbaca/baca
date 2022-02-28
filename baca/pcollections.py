@@ -1,7 +1,6 @@
 """
 Pitch collections.
 """
-import collections as collections_module
 import copy
 import dataclasses
 import math
@@ -21,13 +20,13 @@ class ArpeggiationSpacingSpecifier:
 
         >>> specifier = baca.ArpeggiationSpacingSpecifier()
         >>> specifier([[6, 0, 4, 5, 8]])
-        CollectionList([<6, 12, 16, 17, 20>])
+        [PitchSegment(items=[6, 12, 16, 17, 20], item_class=NumberedPitch)]
 
     ..  container:: example
 
         >>> specifier = baca.ArpeggiationSpacingSpecifier()
         >>> specifier([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-        CollectionList([<0, 2, 10>, <6, 16, 27, 32, 43>, <9>])
+        [PitchSegment(items=[0, 2, 10], item_class=NumberedPitch), PitchSegment(items=[6, 16, 27, 32, 43], item_class=NumberedPitch), PitchSegment(items=[9], item_class=NumberedPitch)]
 
     ..  container:: example
 
@@ -45,8 +44,9 @@ class ArpeggiationSpacingSpecifier:
         ... )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> collections = baca.CollectionList(collections)
-        >>> collections = [baca.PitchClassSegment(_).arpeggiate_up() for _ in collections]
+        >>> collections = [baca.PitchSegment(_) for _ in collections]
+        >>> collections = [baca.PitchClassSegment(_) for _ in collections]
+        >>> collections = [_.arpeggiate_up() for _ in collections]
         >>> selection = stack(collections)
 
         >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -98,7 +98,7 @@ class ArpeggiationSpacingSpecifier:
         ... )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> collections = baca.CollectionList(collections, abjad.NumberedPitchClass)
+        >>> collections = [baca.PitchClassSegment(_) for _ in collections]
         >>> collections = [_.arpeggiate_down() for _ in collections]
         >>> selection = stack(collections)
 
@@ -151,20 +151,17 @@ class ArpeggiationSpacingSpecifier:
         if self.pattern is not None:
             assert isinstance(self.pattern, abjad.Pattern), repr(self.pattern)
 
-    def __call__(
-        self, collections=None
-    ) -> typing.Union["PitchSegment", "CollectionList", None]:
+    def __call__(self, collections=None) -> typing.Union["PitchSegment", None]:
         if collections is None:
             return None
         if collections == []:
             return PitchSegment(item_class=abjad.NumberedPitch)
-        if not isinstance(collections, CollectionList):
-            collections = CollectionList(collections)
-        assert collections.item_class in (abjad.NumberedPitch, None), repr(
-            collections.item_class
-        )
-        # pitch_class_collections = collections.to_numbered_pitch_classes()
-        pitch_class_collections = [_.to_numbered_pitch_classes() for _ in collections]
+        if not isinstance(collections, list):
+            collections = list(collections)
+        pitch_class_collections = [
+            type(item)([abjad.NumberedPitchClass(_) for _ in item])
+            for item in collections
+        ]
         pattern = self.pattern or abjad.index_all()
         collections_ = []
         total_length = len(collections)
@@ -188,7 +185,8 @@ class ArpeggiationSpacingSpecifier:
                 collections_.append(collection_)
             else:
                 collections_.append(collections[i])
-        return CollectionList(collections_)
+        assert isinstance(collections_, list)
+        return collections_
 
 
 def _to_tightly_spaced_pitches_ascending(pitch_classes):
@@ -242,7 +240,7 @@ class ChordalSpacingSpecifier:
         ...     soprano=7,
         ... )
         >>> specifier([[-6, -3, -5, -1, -7]])
-        CollectionList([<6, 9, 11, 17, 19>])
+        [PitchSegment(items=[6, 9, 11, 17, 19], item_class=NumberedPitch)]
 
     ..  container:: example
 
@@ -252,7 +250,7 @@ class ChordalSpacingSpecifier:
         ...     soprano=7,
         ... )
         >>> specifier([[-6, -3, -5, -1, -7]])
-        CollectionList([<19, 17, 11, 9, 6>])
+        [PitchSegment(items=[19, 17, 11, 9, 6], item_class=NumberedPitch)]
 
     ..  container:: example
 
@@ -262,28 +260,28 @@ class ChordalSpacingSpecifier:
         ...     soprano=7,
         ... )
         >>> specifier([[-6, -3, -5, -1, -7]])
-        CollectionList([<31, 30, 29, 21, 11>])
+        [PitchSegment(items=[31, 30, 29, 21, 11], item_class=NumberedPitch)]
 
     ..  container:: example
 
         >>> specifier = baca.ChordalSpacingSpecifier()
         >>> specifier([[0, 1, 2]])
-        CollectionList([<0, 1, 2>])
+        [PitchSegment(items=[0, 1, 2], item_class=NumberedPitch)]
 
         >>> specifier([[0, 2, 1]])
-        CollectionList([<0, 1, 2>])
+        [PitchSegment(items=[0, 1, 2], item_class=NumberedPitch)]
 
         >>> specifier([[1, 0, 2]])
-        CollectionList([<1, 2, 12>])
+        [PitchSegment(items=[1, 2, 12], item_class=NumberedPitch)]
 
         >>> specifier([[1, 2, 0]])
-        CollectionList([<1, 2, 12>])
+        [PitchSegment(items=[1, 2, 12], item_class=NumberedPitch)]
 
         >>> specifier([[2, 0, 1]])
-        CollectionList([<2, 12, 13>])
+        [PitchSegment(items=[2, 12, 13], item_class=NumberedPitch)]
 
         >>> specifier([[2, 1, 0]])
-        CollectionList([<2, 12, 13>])
+        [PitchSegment(items=[2, 12, 13], item_class=NumberedPitch)]
 
     ..  container:: example
 
@@ -291,27 +289,27 @@ class ChordalSpacingSpecifier:
 
         >>> specifier = baca.ChordalSpacingSpecifier(bass=None)
         >>> specifier([[-6, -3, -5, -1, -7]])
-        CollectionList([<6, 7, 9, 11, 17>])
+        [PitchSegment(items=[6, 7, 9, 11, 17], item_class=NumberedPitch)]
 
         >>> specifier = baca.ChordalSpacingSpecifier(bass=6)
         >>> specifier([[-6, -3, -5, -1, -7]])
-        CollectionList([<6, 7, 9, 11, 17>])
+        [PitchSegment(items=[6, 7, 9, 11, 17], item_class=NumberedPitch)]
 
         >>> specifier = baca.ChordalSpacingSpecifier(bass=7)
         >>> specifier([[-6, -3, -5, -1, -7]])
-        CollectionList([<7, 9, 11, 17, 18>])
+        [PitchSegment(items=[7, 9, 11, 17, 18], item_class=NumberedPitch)]
 
         >>> specifier = baca.ChordalSpacingSpecifier(bass=9)
         >>> specifier([[-6, -3, -5, -1, -7]])
-        CollectionList([<9, 11, 17, 18, 19>])
+        [PitchSegment(items=[9, 11, 17, 18, 19], item_class=NumberedPitch)]
 
         >>> specifier = baca.ChordalSpacingSpecifier(bass=11)
         >>> specifier([[-6, -3, -5, -1, -7]])
-        CollectionList([<11, 17, 18, 19, 21>])
+        [PitchSegment(items=[11, 17, 18, 19, 21], item_class=NumberedPitch)]
 
         >>> specifier = baca.ChordalSpacingSpecifier(bass=5)
         >>> specifier([[-6, -3, -5, -1, -7]])
-        CollectionList([<5, 6, 7, 9, 11>])
+        [PitchSegment(items=[5, 6, 7, 9, 11], item_class=NumberedPitch)]
 
     ..  container:: example
 
@@ -322,28 +320,28 @@ class ChordalSpacingSpecifier:
         ...     soprano=7,
         ... )
         >>> specifier([[-6, -3, -5, -1, -7]])
-        CollectionList([<6, 9, 11, 17, 19>])
+        [PitchSegment(items=[6, 9, 11, 17, 19], item_class=NumberedPitch)]
 
         >>> specifier = baca.ChordalSpacingSpecifier(
         ...     bass=6,
         ...     soprano=9,
         ... )
         >>> specifier([[-6, -3, -5, -1, -7]])
-        CollectionList([<6, 7, 11, 17, 21>])
+        [PitchSegment(items=[6, 7, 11, 17, 21], item_class=NumberedPitch)]
 
         >>> specifier = baca.ChordalSpacingSpecifier(
         ...     bass=6,
         ...     soprano=11,
         ... )
         >>> specifier([[-6, -3, -5, -1, -7]])
-        CollectionList([<6, 7, 9, 17, 23>])
+        [PitchSegment(items=[6, 7, 9, 17, 23], item_class=NumberedPitch)]
 
         >>> specifier = baca.ChordalSpacingSpecifier(
         ...     bass=6,
         ...     soprano=5
         ... )
         >>> specifier([[-6, -3, -5, -1, -7]])
-        CollectionList([<6, 7, 9, 11, 17>])
+        [PitchSegment(items=[6, 7, 9, 11, 17], item_class=NumberedPitch)]
 
     ..  container:: example
 
@@ -356,7 +354,7 @@ class ChordalSpacingSpecifier:
         ...     soprano=7,
         ... )
         >>> specifier([[5, 6, 7, 9, 11]])
-        CollectionList([<6, 9, 11, 17, 19>])
+        [PitchSegment(items=[6, 9, 11, 17, 19], item_class=NumberedPitch)]
 
         >>> specifier = baca.ChordalSpacingSpecifier(
         ...     bass=6,
@@ -364,7 +362,7 @@ class ChordalSpacingSpecifier:
         ...     soprano=7,
         ... )
         >>> specifier([[5, 6, 7, 9, 11]])
-        CollectionList([<6, 9, 11, 17, 19>])
+        [PitchSegment(items=[6, 9, 11, 17, 19], item_class=NumberedPitch)]
 
         >>> specifier = baca.ChordalSpacingSpecifier(
         ...     bass=6,
@@ -372,7 +370,7 @@ class ChordalSpacingSpecifier:
         ...     soprano=7,
         ... )
         >>> specifier([[5, 6, 7, 9, 11]])
-        CollectionList([<6, 9, 11, 17, 19>])
+        [PitchSegment(items=[6, 9, 11, 17, 19], item_class=NumberedPitch)]
 
         >>> specifier = baca.ChordalSpacingSpecifier(
         ...     bass=6,
@@ -380,7 +378,7 @@ class ChordalSpacingSpecifier:
         ...     soprano=7,
         ... )
         >>> specifier([[5, 6, 7, 9, 11]])
-        CollectionList([<6, 9, 17, 23, 31>])
+        [PitchSegment(items=[6, 9, 17, 23, 31], item_class=NumberedPitch)]
 
     ..  container:: example
 
@@ -394,7 +392,7 @@ class ChordalSpacingSpecifier:
         ...     soprano=7,
         ... )
         >>> specifier([[5, 6, 7, 9, 11]])
-        CollectionList([<19, 17, 11, 9, 6>])
+        [PitchSegment(items=[19, 17, 11, 9, 6], item_class=NumberedPitch)]
 
         >>> specifier = baca.ChordalSpacingSpecifier(
         ...     bass=6,
@@ -403,7 +401,7 @@ class ChordalSpacingSpecifier:
         ...     soprano=7,
         ... )
         >>> specifier([[5, 6, 7, 9, 11]])
-        CollectionList([<19, 17, 11, 9, 6>])
+        [PitchSegment(items=[19, 17, 11, 9, 6], item_class=NumberedPitch)]
 
         >>> specifier = baca.ChordalSpacingSpecifier(
         ...     bass=6,
@@ -412,7 +410,7 @@ class ChordalSpacingSpecifier:
         ...     soprano=7,
         ... )
         >>> specifier([[5, 6, 7, 9, 11]])
-        CollectionList([<19, 17, 11, 9, 6>])
+        [PitchSegment(items=[19, 17, 11, 9, 6], item_class=NumberedPitch)]
 
         >>> specifier = baca.ChordalSpacingSpecifier(
         ...     bass=6,
@@ -421,7 +419,7 @@ class ChordalSpacingSpecifier:
         ...     soprano=7,
         ... )
         >>> specifier([[5, 6, 7, 9, 11]])
-        CollectionList([<31, 23, 17, 9, 6>])
+        [PitchSegment(items=[31, 23, 17, 9, 6], item_class=NumberedPitch)]
 
     ..  container:: example
 
@@ -432,42 +430,42 @@ class ChordalSpacingSpecifier:
         ...     soprano=None,
         ... )
         >>> specifier([[-6, -3, -5, -1, -7]])
-        CollectionList([<18, 17, 11, 9, 7>])
+        [PitchSegment(items=[18, 17, 11, 9, 7], item_class=NumberedPitch)]
 
         >>> specifier = baca.ChordalSpacingSpecifier(
         ...     direction=abjad.Down,
         ...     soprano=6,
         ... )
         >>> specifier([[-6, -3, -5, -1, -7]])
-        CollectionList([<18, 17, 11, 9, 7>])
+        [PitchSegment(items=[18, 17, 11, 9, 7], item_class=NumberedPitch)]
 
         >>> specifier = baca.ChordalSpacingSpecifier(
         ...     direction=abjad.Down,
         ...     soprano=5,
         ... )
         >>> specifier([[-6, -3, -5, -1, -7]])
-        CollectionList([<17, 11, 9, 7, 6>])
+        [PitchSegment(items=[17, 11, 9, 7, 6], item_class=NumberedPitch)]
 
         >>> specifier = baca.ChordalSpacingSpecifier(
         ...     direction=abjad.Down,
         ...     soprano=11,
         ... )
         >>> specifier([[-6, -3, -5, -1, -7]])
-        CollectionList([<11, 9, 7, 6, 5>])
+        [PitchSegment(items=[11, 9, 7, 6, 5], item_class=NumberedPitch)]
 
         >>> specifier = baca.ChordalSpacingSpecifier(
         ...     direction=abjad.Down,
         ...     soprano=9,
         ... )
         >>> specifier([[-6, -3, -5, -1, -7]])
-        CollectionList([<21, 19, 18, 17, 11>])
+        [PitchSegment(items=[21, 19, 18, 17, 11], item_class=NumberedPitch)]
 
         >>> specifier = baca.ChordalSpacingSpecifier(
         ...     direction=abjad.Down,
         ...     soprano=7,
         ... )
         >>> specifier([[-6, -3, -5, -1, -7]])
-        CollectionList([<19, 18, 17, 11, 9>])
+        [PitchSegment(items=[19, 18, 17, 11, 9], item_class=NumberedPitch)]
 
     """
 
@@ -486,11 +484,11 @@ class ChordalSpacingSpecifier:
         if self.pattern is not None:
             assert isinstance(self.pattern, abjad.Pattern)
 
-    def __call__(self, collections=None) -> typing.Union["CollectionList", None]:
+    def __call__(self, collections=None):
         if collections is None:
             return None
-        if not isinstance(collections, CollectionList):
-            collections = CollectionList(collections)
+        if not isinstance(collections, list):
+            collections = list(collections)
         pattern = self.pattern or abjad.index_all()
         collections_ = []
         total_length = len(collections)
@@ -501,7 +499,7 @@ class ChordalSpacingSpecifier:
                 collection = collections[i]
                 collection_ = self._space_collection(collection)
                 collections_.append(collection_)
-        return CollectionList(collections_)
+        return collections_
 
     def _sort_pitch_classes_ascending(self, start, pitch_classes):
         pitch_classes, pitch_classes_, iterations = pitch_classes[:], [], 0
@@ -551,7 +549,8 @@ class ChordalSpacingSpecifier:
             pitch_classes = [abjad.NumberedPitchClass(_) for _ in collection]
             pitch_classes.sort()
         else:
-            pitch_classes = list(collection.to_numbered_pitch_classes())
+            # pitch_classes = list(collection.to_numbered_pitch_classes())
+            pitch_classes = [abjad.NumberedPitchClass(_) for _ in collection]
         bass, soprano, outer = None, None, []
         if self.bass is not None:
             bass = abjad.NumberedPitchClass(self.bass)
@@ -638,686 +637,6 @@ def _to_baca_collection(collection):
         raise TypeError(collection)
     assert isinstance(collection, baca_prototype)
     return collection
-
-
-@dataclasses.dataclass
-class CollectionList(collections_module.abc.Sequence):
-    """
-    Collection list.
-
-    ..  container:: example
-
-        Initializes numbered pitch segments:
-
-        >>> for collection in baca.CollectionList([
-        ...     [12, 14, 18, 17],
-        ...     [16, 20, 19],
-        ...     ]):
-        ...     collection
-        ...
-        PitchSegment(items=[12, 14, 18, 17], item_class=NumberedPitch)
-        PitchSegment(items=[16, 20, 19], item_class=NumberedPitch)
-
-    ..  container:: example
-
-        Initializes named pitch segments:
-
-        >>> for collection in baca.CollectionList(
-        ...     [
-        ...         [12, 14, 18, 17],
-        ...         [16, 20, 19],
-        ...     ],
-        ...     item_class=abjad.NamedPitch,
-        ...     ):
-        ...     collection
-        ...
-        PitchSegment(items="c'' d'' fs'' f''", item_class=NamedPitch)
-        PitchSegment(items="e'' af'' g''", item_class=NamedPitch)
-
-    ..  container:: example
-
-        Initializes numbered pitch-class segments:
-
-        >>> for collection in baca.CollectionList(
-        ...     [
-        ...         [12, 14, 18, 17],
-        ...         [16, 20, 19],
-        ...     ],
-        ...     item_class=abjad.NumberedPitchClass,
-        ...     ):
-        ...     collection
-        ...
-        PitchClassSegment(items=[0, 2, 6, 5], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[4, 8, 7], item_class=NumberedPitchClass)
-
-    ..  container:: example
-
-        Initializes named pitch-class segments:
-
-        >>> for collection in baca.CollectionList(
-        ...     [
-        ...         [12, 14, 18, 17],
-        ...         [16, 20, 19],
-        ...     ],
-        ...     item_class=abjad.NamedPitchClass,
-        ...     ):
-        ...     collection
-        ...
-        PitchClassSegment(items="c d fs f", item_class=NamedPitchClass)
-        PitchClassSegment(items="e af g", item_class=NamedPitchClass)
-
-    ..  container:: example
-
-        Initializes mixed numbered and named pitch segments:
-
-        >>> for collection in baca.CollectionList([
-        ...     [12, 14, 18, 17],
-        ...     "ff'' gs'' g''",
-        ...     ]):
-        ...     collection
-        ...
-        PitchSegment(items=[12, 14, 18, 17], item_class=NumberedPitch)
-        PitchSegment(items="ff'' gs'' g''", item_class=NamedPitch)
-
-    ..  container:: example
-
-        Initializes numbered pitch sets:
-
-        >>> for collection in baca.CollectionList([
-        ...     {12, 14, 18, 17},
-        ...     {16, 20, 19},
-        ...     ]):
-        ...     collection
-        ...
-        PitchSet(items=[12, 14, 17, 18], item_class=abjad.NumberedPitch)
-        PitchSet(items=[16, 19, 20], item_class=abjad.NumberedPitch)
-
-    ..  container:: example
-
-        Initializes named pitch sets:
-
-        >>> for collection in baca.CollectionList([
-        ...     {12, 14, 18, 17},
-        ...     {16, 20, 19},
-        ...     ],
-        ...     item_class=abjad.NamedPitch,
-        ...     ):
-        ...     collection
-        ...
-        PitchSet(items=["c''", "d''", "f''", "fs''"], item_class=abjad.NamedPitch)
-        PitchSet(items=["e''", "g''", "af''"], item_class=abjad.NamedPitch)
-
-    ..  container:: example
-
-        Initializes numbered pitch-class sets:
-
-        >>> for collection in baca.CollectionList([
-        ...     {12, 14, 18, 17},
-        ...     {16, 20, 19},
-        ...     ],
-        ...     item_class=abjad.NumberedPitchClass,
-        ...     ):
-        ...     collection
-        ...
-        PitchClassSet(items=[0, 2, 5, 6], item_class=abjad.NumberedPitchClass)
-        PitchClassSet(items=[4, 7, 8], item_class=abjad.NumberedPitchClass)
-
-    ..  container:: example
-
-        Initializes named pitch-class sets:
-
-        >>> for collection in baca.CollectionList([
-        ...     {12, 14, 18, 17},
-        ...     {16, 20, 19},
-        ...     ],
-        ...     item_class=abjad.NamedPitchClass,
-        ...     ):
-        ...     collection
-        ...
-        PitchClassSet(items=['c', 'd', 'f', 'fs'], item_class=abjad.NamedPitchClass)
-        PitchClassSet(items=['e', 'g', 'af'], item_class=abjad.NamedPitchClass)
-
-    ..  container:: example
-
-        Initializes mixed numbered and named pitch segments:
-
-        >>> for collection in baca.CollectionList([
-        ...     [12, 14, 18, 17],
-        ...     "ff'' gs'' g''",
-        ...     ]):
-        ...     collection
-        ...
-        PitchSegment(items=[12, 14, 18, 17], item_class=NumberedPitch)
-        PitchSegment(items="ff'' gs'' g''", item_class=NamedPitch)
-
-    ..  container:: example
-
-        Initializes mixed segments and sets:
-
-        >>> for collection in baca.CollectionList([
-        ...     {12, 14, 18, 17},
-        ...     [16, 20, 19],
-        ...     ]):
-        ...     collection
-        ...
-        PitchSet(items=[12, 14, 17, 18], item_class=abjad.NumberedPitch)
-        PitchSegment(items=[16, 20, 19], item_class=NumberedPitch)
-
-    ..  container:: example
-
-        Initializes from collection list:
-
-        >>> collections = baca.CollectionList([[12, 13, 14], [15, 16, 17]])
-        >>> baca.CollectionList(collections)
-        CollectionList([<12, 13, 14>, <15, 16, 17>])
-
-    ..  container:: example
-
-        Initializes from list of collection lists:
-
-        >>> collection_list_1 = baca.CollectionList([[12, 13, 14]])
-        >>> collection_list_2 = baca.CollectionList([[15, 16, 17]])
-        >>> baca.CollectionList([collection_list_1, collection_list_2])
-        CollectionList([<12, 13, 14>, <15, 16, 17>])
-
-    """
-
-    collections: typing.Any = None
-    item_class: typing.Any = None
-
-    _item_class_prototype = (
-        abjad.NumberedPitch,
-        abjad.NumberedPitchClass,
-        abjad.NamedPitch,
-        abjad.NamedPitchClass,
-    )
-
-    def __post_init__(self):
-        if self.item_class is not None:
-            if self.item_class not in self._item_class_prototype:
-                raise TypeError(f"only pitch or pitch-class: {self.item_class!r}.")
-        self.collections = self._coerce(self.collections)
-        self.collections = self.collections or []
-        self.collections = tuple(self.collections)
-
-    def __eq__(self, argument) -> bool:
-        """
-        Is true when ``argument`` is a collection list with collections equal to those of
-        this collection list.
-
-        ..  container:: example
-
-            >>> collections_1 = baca.CollectionList([[12, 13, 14], [15, 16, 17]])
-            >>> collections_2 = baca.CollectionList([[12, 13, 14], [15, 16, 17]])
-            >>> collections_3 = baca.CollectionList([[12, 13, 14]])
-
-            >>> collections_1 == collections_1
-            True
-            >>> collections_1 == collections_2
-            True
-            >>> collections_1 == collections_3
-            False
-
-            >>> collections_2 == collections_1
-            True
-            >>> collections_2 == collections_2
-            True
-            >>> collections_2 == collections_3
-            False
-
-            >>> collections_3 == collections_1
-            False
-            >>> collections_3 == collections_2
-            False
-            >>> collections_3 == collections_3
-            True
-
-        ..  container:: example
-
-            Ignores item class:
-
-            >>> collections_1 = baca.CollectionList(
-            ...     collections=[[12, 13, 14], [15, 16, 17]],
-            ...     item_class=None,
-            ... )
-            >>> collections_2 = baca.CollectionList(
-            ...     collections=[[12, 13, 14], [15, 16, 17]],
-            ...     item_class=abjad.NumberedPitch,
-            ... )
-
-            >>> collections_1.item_class == collections_2.item_class
-            False
-
-            >>> collections_1 == collections_2
-            True
-
-        """
-        if not isinstance(argument, type(self)):
-            return False
-        return self.collections == argument.collections
-
-    def __getitem__(self, argument):
-        """
-        Gets collection or collection slice identified by ``argument``.
-
-        ..  container:: example
-
-            Gets collections:
-
-            >>> collections = baca.CollectionList([
-            ...     [12, 14, 18, 17],
-            ...     [16, 20, 19],
-            ... ])
-
-            >>> collections[0]
-            PitchSegment(items=[12, 14, 18, 17], item_class=NumberedPitch)
-
-            >>> collections[-1]
-            PitchSegment(items=[16, 20, 19], item_class=NumberedPitch)
-
-        ..  container:: example
-
-            Gets collections lists:
-
-            >>> collections = baca.CollectionList([
-            ...     [12, 14, 18, 17],
-            ...     [16, 20, 19],
-            ... ])
-
-            >>> collections[:1]
-            CollectionList([<12, 14, 18, 17>])
-
-            >>> collections[-1:]
-            CollectionList([<16, 20, 19>])
-
-        Returns collection.
-        """
-        collections = self.collections or []
-        result = collections.__getitem__(argument)
-        try:
-            return dataclasses.replace(self, collections=result)
-        except TypeError:
-            return result
-
-    def __len__(self) -> int:
-        """
-        Gets length of collections.
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList([
-            ...     [12, 14, 18, 17],
-            ...     [16, 20, 19],
-            ... ])
-
-            >>> len(collections)
-            2
-
-        """
-        if self.collections:
-            return len(self.collections)
-        else:
-            return 0
-
-    def __repr__(self) -> str:
-        """
-        Gets interpreter representation of collections.
-
-        ..  container:: example
-
-            >>> baca.CollectionList([
-            ...     [12, 14, 18, 17],
-            ...     [16, 20, 19],
-            ... ])
-            CollectionList([<12, 14, 18, 17>, <16, 20, 19>])
-
-        """
-        collections = self.collections or []
-        collections_ = ", ".join([str(_) for _ in collections])
-        string = f"{type(self).__name__}([{collections_}])"
-        return string
-
-    def _coerce(self, collections):
-        prototype = (PitchSegment, PitchSet, PitchClassSegment, abjad.PitchClassSet)
-        collections_ = []
-        for item in collections or []:
-            if isinstance(item, type(self)):
-                for collection in item:
-                    collection_ = self._initialize_collection(collection)
-                    collections_.append(collection_)
-            else:
-                collection_ = self._initialize_collection(item)
-                collections_.append(collection_)
-        collections_ = [_to_baca_collection(_) for _ in collections_]
-        assert all(isinstance(_, prototype) for _ in collections_)
-        return collections_
-
-    def _get_pitch_class_class(self):
-        item_class = self.item_class or abjad.NumberedPitch
-        if item_class in (abjad.NumberedPitchClass, abjad.NamedPitchClass):
-            return item_class
-        elif item_class is abjad.NumberedPitch:
-            return abjad.NumberedPitchClass
-        elif item_class is abjad.NamedPitch:
-            return abjad.NamedPitchClass
-        else:
-            raise TypeError(f"only pitch or pc class: {item_class!r}.")
-
-    def _initialize_collection(self, argument, prototype=None):
-        items = argument
-        item_class = self.item_class or abjad.NumberedPitch
-        if prototype is not None:
-            return dataclasses.replace(prototype, items=items)
-        elif isinstance(argument, abjad.Segment):
-            return argument
-        elif isinstance(argument, abjad.Set):
-            return argument
-        elif isinstance(argument, set):
-            if item_class in (abjad.NumberedPitch, abjad.NamedPitch):
-                return abjad.PitchSet(items=items, item_class=item_class)
-            elif item_class in (
-                abjad.NumberedPitchClass,
-                abjad.NamedPitchClass,
-            ):
-                return abjad.PitchClassSet(items=items, item_class=item_class)
-            else:
-                raise TypeError(item_class)
-        elif self.item_class is not None:
-            if item_class in (abjad.NumberedPitch, abjad.NamedPitch):
-                return PitchSegment(items=items, item_class=item_class)
-            elif item_class in (
-                abjad.NumberedPitchClass,
-                abjad.NamedPitchClass,
-            ):
-                return PitchClassSegment(items=items, item_class=item_class)
-            else:
-                raise TypeError(item_class)
-        else:
-            if isinstance(argument, str):
-                return PitchSegment(items=items, item_class=abjad.NamedPitch)
-            elif isinstance(argument, collections_module.abc.Iterable):
-                return PitchSegment(items=items, item_class=abjad.NumberedPitch)
-            else:
-                raise TypeError(f"only string or iterable: {argument!r}.")
-
-
-def illustrate_collection_list(
-    collection_list,
-    *,
-    cell_indices=False,
-    set_classes=False,
-) -> abjad.LilyPondFile:
-    r"""
-    Illustrates collection list.
-
-    ..  container:: example
-
-        >>> collections = baca.CollectionList([
-        ...     [12, 14, 18, 17],
-        ...     [16, 20, 19],
-        ... ])
-
-        >>> lilypond_file = baca.pcollections.illustrate_collection_list(collections)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            \with
-            {
-                \override BarLine.transparent = ##t
-                \override BarNumber.stencil = ##f
-                \override Beam.stencil = ##f
-                \override Flag.stencil = ##f
-                \override HorizontalBracket.staff-padding = 4
-                \override SpacingSpanner.strict-grace-spacing = ##t
-                \override SpacingSpanner.strict-note-spacing = ##t
-                \override SpacingSpanner.uniform-stretching = ##t
-                \override Stem.stencil = ##f
-                \override TextScript.X-extent = ##f
-                \override TextScript.staff-padding = 2
-                \override TimeSignature.stencil = ##f
-                proportionalNotationDuration = #(ly:make-moment 1 16)
-            }
-            <<
-                \context Staff = "Staff"
-                {
-                    \context Voice = "Voice"
-                    \with
-                    {
-                        \consists Horizontal_bracket_engraver
-                    }
-                    {
-                        \time 1/8
-                        c''8
-                        \startGroup
-                        d''8
-                        fs''8
-                        f''8
-                        \stopGroup
-                        s8
-                        e''8
-                        \startGroup
-                        af''8
-                        g''8
-                        \stopGroup
-                        s8
-                        \bar "|."
-                        \override Score.BarLine.transparent = ##f
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
-        >>> collections = baca.CollectionList(items)
-        >>> lilypond_file = baca.pcollections.illustrate_collection_list(collections)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            \with
-            {
-                \override BarLine.transparent = ##t
-                \override BarNumber.stencil = ##f
-                \override Beam.stencil = ##f
-                \override Flag.stencil = ##f
-                \override HorizontalBracket.staff-padding = 4
-                \override SpacingSpanner.strict-grace-spacing = ##t
-                \override SpacingSpanner.strict-note-spacing = ##t
-                \override SpacingSpanner.uniform-stretching = ##t
-                \override Stem.stencil = ##f
-                \override TextScript.X-extent = ##f
-                \override TextScript.staff-padding = 2
-                \override TimeSignature.stencil = ##f
-                proportionalNotationDuration = #(ly:make-moment 1 16)
-            }
-            <<
-                \context Staff = "Staff"
-                {
-                    \context Voice = "Voice"
-                    \with
-                    {
-                        \consists Horizontal_bracket_engraver
-                    }
-                    {
-                        \time 1/8
-                        e'8
-                        \startGroup
-                        fs'8
-                        bf'8
-                        \stopGroup
-                        s8
-                        a'8
-                        \startGroup
-                        g'8
-                        af'8
-                        b'8
-                        a'8
-                        cs'8
-                        \stopGroup
-                        s8
-                        c'8
-                        \startGroup
-                        d'8
-                        ef'8
-                        f'8
-                        \stopGroup
-                        s8
-                        \bar "|."
-                        \override Score.BarLine.transparent = ##f
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        With segment indices and set-classes:
-
-        >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
-        >>> collections = baca.CollectionList(items)
-        >>> lilypond_file = baca.pcollections.illustrate_collection_list(
-        ...     collections,
-        ...     cell_indices=abjad.Down,
-        ...     set_classes=True,
-        ... )
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            \with
-            {
-                \override BarLine.transparent = ##t
-                \override BarNumber.stencil = ##f
-                \override Beam.stencil = ##f
-                \override Flag.stencil = ##f
-                \override HorizontalBracket.staff-padding = 4
-                \override SpacingSpanner.strict-grace-spacing = ##t
-                \override SpacingSpanner.strict-note-spacing = ##t
-                \override SpacingSpanner.uniform-stretching = ##t
-                \override Stem.stencil = ##f
-                \override TextScript.X-extent = ##f
-                \override TextScript.staff-padding = 2
-                \override TimeSignature.stencil = ##f
-                proportionalNotationDuration = #(ly:make-moment 1 16)
-            }
-            <<
-                \context Staff = "Staff"
-                {
-                    \context Voice = "Voice"
-                    \with
-                    {
-                        \consists Horizontal_bracket_engraver
-                    }
-                    {
-                        \time 1/8
-                        e'8
-                        ^ \markup \small \line { "SC(3-9){0, 2, 6}" }
-                        - \tweak staff-padding 7
-                        _ \markup 0
-                        \startGroup
-                        fs'8
-                        bf'8
-                        \stopGroup
-                        s8
-                        a'8
-                        ^ \markup \small \line { "SC(5-6){0, 1, 2, 4, 6}" }
-                        - \tweak staff-padding 7
-                        _ \markup 1
-                        \startGroup
-                        g'8
-                        af'8
-                        b'8
-                        a'8
-                        cs'8
-                        \stopGroup
-                        s8
-                        c'8
-                        ^ \markup \small \line { "SC(4-19){0, 2, 3, 5}" }
-                        - \tweak staff-padding 7
-                        _ \markup 2
-                        \startGroup
-                        d'8
-                        ef'8
-                        f'8
-                        \stopGroup
-                        s8
-                        \bar "|."
-                        \override Score.BarLine.transparent = ##f
-                    }
-                }
-            >>
-
-    """
-    assert cell_indices in (True, False, abjad.Up, abjad.Down), repr(cell_indices)
-    voice = abjad.Voice(name="Voice")
-    voice.consists_commands.append("Horizontal_bracket_engraver")
-    staff = abjad.Staff([voice], name="Staff")
-    score = abjad.Score([staff], name="Score")
-    for i, segment in enumerate(collection_list):
-        notes = [abjad.Note(_.number, (1, 8)) for _ in segment]
-        abjad.horizontal_bracket(notes)
-        if cell_indices:
-            if cell_indices is True:
-                direction = abjad.Up
-            else:
-                direction = cell_indices
-            cell_index = i
-            markup = abjad.Markup(rf"\markup {cell_index}", direction=direction)
-            if direction == abjad.Down:
-                abjad.tweak(markup).staff_padding = 7
-            abjad.attach(markup, notes[0])
-        if set_classes:
-            pitches = abjad.iterate.pitches(notes)
-            pitch_class_set = abjad.PitchClassSet.from_pitches(pitches)
-            if pitch_class_set:
-                set_class = abjad.SetClass.from_pitch_class_set(
-                    pitch_class_set, lex_rank=True, transposition_only=True
-                )
-                string = rf'\markup \small \line {{ "{set_class}" }}'
-                label = abjad.Markup(string, direction=abjad.Up)
-                if label is not None:
-                    abjad.attach(label, notes[0])
-        voice.extend(notes)
-        voice.append("s8")
-    leaf = abjad.get.leaf(voice, 0)
-    time_signature = abjad.TimeSignature((1, 8))
-    abjad.attach(time_signature, leaf)
-    leaf = abjad.select.leaf(score, -1)
-    bar_line = abjad.BarLine("|.")
-    abjad.attach(bar_line, leaf)
-    abjad.override(score).BarLine.transparent = True
-    abjad.override(score).BarNumber.stencil = False
-    abjad.override(score).Beam.stencil = False
-    abjad.override(score).Flag.stencil = False
-    abjad.override(score).HorizontalBracket.staff_padding = 4
-    abjad.override(score).Stem.stencil = False
-    abjad.override(score).TextScript.staff_padding = 2
-    abjad.override(score).TimeSignature.stencil = False
-    final_leaf = abjad.get.leaf(score, -1)
-    string = r"\override Score.BarLine.transparent = ##f"
-    literal = abjad.LilyPondLiteral(string, "after")
-    abjad.attach(literal, final_leaf)
-    abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 16)"
-    preamble = "#(set-global-staff-size 16)\n"
-    lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', preamble, score])
-    abjad.override(score).SpacingSpanner.strict_grace_spacing = True
-    abjad.override(score).SpacingSpanner.strict_note_spacing = True
-    abjad.override(score).SpacingSpanner.uniform_stretching = True
-    abjad.override(score).TextScript.X_extent = False
-    return lilypond_file
 
 
 class HarmonicSeries:
@@ -3116,7 +2435,7 @@ class PitchSegment(abjad.PitchSegment):
             soprano=soprano,
         )
         result = specifier([self])
-        assert isinstance(result, CollectionList), repr(result)
+        assert isinstance(result, list), repr(result)
         assert len(result) == 1, repr(result)
         segment = result[0]
         return segment
@@ -3262,7 +2581,7 @@ class PitchSegment(abjad.PitchSegment):
             soprano=soprano,
         )
         result = specifier([self])
-        assert isinstance(result, CollectionList), repr(result)
+        assert isinstance(result, list), repr(result)
         assert len(result) == 1, repr(result)
         segment = result[0]
         return segment
@@ -3587,7 +2906,7 @@ class PitchSet(abjad.PitchSet):
             soprano=soprano,
         )
         result = specifier([self])
-        assert isinstance(result, CollectionList), repr(result)
+        assert isinstance(result, list), repr(result)
         assert len(result) == 1, repr(result)
         segment = result[0]
         return segment
@@ -3725,7 +3044,7 @@ class PitchSet(abjad.PitchSet):
             soprano=soprano,
         )
         result = specifier([self])
-        assert isinstance(result, CollectionList), repr(result)
+        assert isinstance(result, list), repr(result)
         assert len(result) == 1, repr(result)
         segment = result[0]
         return segment
@@ -3887,10 +3206,8 @@ def has_duplicate_pitch_classes(collections, level=-1) -> bool:
 
     ..  container:: example
 
-        >>> collections = baca.CollectionList([
-        ...     [4, 5, 7],
-        ...     [15, 16, 17, 19]
-        ... ])
+        >>> collections = [[4, 5, 7], [15, 16, 17, 19]]
+        >>> collections = [baca.PitchSegment(_) for _ in collections]
 
         >>> baca.pcollections.has_duplicate_pitch_classes(collections, level=1)
         False
@@ -3900,7 +3217,8 @@ def has_duplicate_pitch_classes(collections, level=-1) -> bool:
 
     Set ``level`` to 1 or -1.
     """
-    pitch_class_class = collections._get_pitch_class_class()
+    # pitch_class_class = collections._get_pitch_class_class()
+    pitch_class_class = abjad.NumberedPitchClass
     if level == 1:
         for collection in collections:
             known_pitch_classes: typing.List[abjad.PitchClass] = []
@@ -3928,9 +3246,8 @@ def has_duplicates(collections, level=-1) -> bool:
 
     ..  container:: example
 
-        >>> collections = baca.CollectionList([
-        ...     [16, 17], [13], [16, 17],
-        ... ])
+        >>> collections = [[16, 17], [13], [16, 17]]
+        >>> collections = [baca.PitchSegment(_) for _ in collections]
 
         >>> baca.pcollections.has_duplicates(collections, level=0)
         True
@@ -3943,7 +3260,8 @@ def has_duplicates(collections, level=-1) -> bool:
 
     ..  container:: example
 
-        >>> collections = baca.CollectionList([[16, 17], [14, 20, 14]])
+        >>> collections = [[16, 17], [14, 20, 14]]
+        >>> collections = [baca.PitchSegment(_) for _ in collections]
 
         >>> baca.pcollections.has_duplicates(collections, level=0)
         False
@@ -3956,9 +3274,8 @@ def has_duplicates(collections, level=-1) -> bool:
 
     ..  container:: example
 
-        >>> collections = baca.CollectionList([
-        ...     [16, 17], [14, 20], [14],
-        ... ])
+        >>> collections = [[16, 17], [14, 20], [14]]
+        >>> collections = [baca.PitchSegment(_) for _ in collections]
 
         >>> baca.pcollections.has_duplicates(collections, level=0)
         False
@@ -4002,7 +3319,8 @@ def has_repeat_pitch_classes(collections, level=-1) -> bool:
 
     ..  container:: example
 
-        >>> collections = baca.CollectionList([[4, 5, 4, 5], [17, 18]])
+        >>> collections = [[4, 5, 4, 5], [17, 18]]
+        >>> collections = [baca.PitchSegment(_) for _ in collections]
 
         >>> baca.pcollections.has_repeat_pitch_classes(collections, level=1)
         False
@@ -4012,7 +3330,8 @@ def has_repeat_pitch_classes(collections, level=-1) -> bool:
 
     Set ``level`` to 0 or -1.
     """
-    pitch_class_class = collections._get_pitch_class_class()
+    # pitch_class_class = collections._get_pitch_class_class()
+    pitch_class_class = abjad.NumberedPitchClass
     if level == 1:
         for collection in collections:
             previous_pitch_class = None
@@ -4040,7 +3359,8 @@ def has_repeats(collections, level=-1) -> bool:
 
     ..  container:: example
 
-        >>> collections = baca.CollectionList([[4, 5], [4, 5]])
+        >>> collections = [[4, 5], [4, 5]]
+        >>> collections = [baca.PitchSegment(_) for _ in collections]
 
         >>> baca.pcollections.has_repeats(collections, level=0)
         True
@@ -4053,9 +3373,8 @@ def has_repeats(collections, level=-1) -> bool:
 
     ..  container:: example
 
-        >>> collections = baca.CollectionList([
-        ...     [4, 5], [18, 18], [4, 5],
-        ... ])
+        >>> collections = [[4, 5], [18, 18], [4, 5]]
+        >>> collections = [baca.PitchSegment(_) for _ in collections]
 
         >>> baca.pcollections.has_repeats(collections, level=0)
         False
@@ -4068,9 +3387,8 @@ def has_repeats(collections, level=-1) -> bool:
 
     ..  container:: example
 
-        >>> collections = baca.CollectionList([
-        ...     [4, 5], [5, 18], [4, 5],
-        ... ])
+        >>> collections = [[4, 5], [5, 18], [4, 5]]
+        >>> collections = [baca.PitchSegment(_) for _ in collections]
 
         >>> baca.pcollections.has_repeats(collections, level=0)
         False
@@ -4114,10 +3432,8 @@ def read(collections, counts=None, check=None):
 
     ..  container:: example
 
-        >>> collections = baca.CollectionList([
-        ...     [5, 12, 14, 18, 17],
-        ...     [16, 17, 19],
-        ... ])
+        >>> collections = [[5, 12, 14, 18, 17], [16, 17, 19]]
+        >>> collections = [baca.PitchSegment(_) for _ in collections]
 
         >>> for collection in baca.pcollections.read(collections, [3, 3, 3, 5, 5, 5]):
         ...     collection
@@ -4133,10 +3449,8 @@ def read(collections, counts=None, check=None):
 
         Raises exception on inexact read:
 
-        >>> collections = baca.CollectionList([
-        ...     [5, 12, 14, 18, 17],
-        ...     [16, 17, 19],
-        ... ])
+        >>> collections = [[5, 12, 14, 18, 17], [16, 17, 19]]
+        >>> collections = [baca.PitchSegment(_) for _ in collections]
 
         >>> len(abjad.sequence.join(collections)[0])
         8
@@ -4148,26 +3462,25 @@ def read(collections, counts=None, check=None):
 
     """
     if counts in (None, []):
-        return dataclasses.replace(collections)
+        type(collections)(collections)
     counts = list(counts)
     assert all(isinstance(_, int) for _ in counts), repr(counts)
     collection = abjad.sequence.join(collections)[0]
+    source_collection_type = type(collection)
     source = abjad.CyclicTuple(collection)
     i = 0
     collections_ = []
     for count in counts:
         stop = i + count
         items = source[i:stop]
+        items = source_collection_type(items)
         if hasattr(collections, "_initialize_collection"):
             collection = collections._initialize_collection(items)
         else:
             collection = items
         collections_.append(collection)
         i += count
-    if isinstance(collections, CollectionList):
-        result = dataclasses.replace(collections, collections=collections_)
-    else:
-        result = collections_
+    result = collections_
     if check == abjad.Exact:
         self_item_count = len(abjad.sequence.join(collections)[0])
         result_item_count = len(abjad.sequence.join(result)[0])
@@ -4185,20 +3498,18 @@ def remove_duplicate_pitch_classes(collections, level=-1):
 
     ..  container:: example
 
-        >>> collections = baca.CollectionList([[4, 5, 7], [16, 17, 16, 18]])
+        >>> collections = [[4, 5, 7], [16, 17, 16, 18]]
+        >>> collections = [baca.PitchSegment(_) for _ in collections]
 
         >>> baca.pcollections.remove_duplicate_pitch_classes(collections, level=1)
-        CollectionList([<4, 5, 7>, <16, 17, 18>])
+        [PitchSegment(items=[4, 5, 7], item_class=NumberedPitch), PitchSegment(items=[16, 17, 18], item_class=NumberedPitch)]
 
         >>> baca.pcollections.remove_duplicate_pitch_classes(collections, level=-1)
-        CollectionList([<4, 5, 7>, <18>])
+        [PitchSegment(items=[4, 5, 7], item_class=NumberedPitch), PitchSegment(items=[18], item_class=NumberedPitch)]
 
     Set ``level`` to 1 or -1.
     """
-    if isinstance(collections, CollectionList):
-        pitch_class_class = collections._get_pitch_class_class()
-    else:
-        pitch_class_class = abjad.NamedPitchClass
+    pitch_class_class = abjad.NamedPitchClass
     collections_ = []
     if level == 1:
         for collection in collections:
@@ -4211,10 +3522,7 @@ def remove_duplicate_pitch_classes(collections, level=-1):
                 known_pitch_classes.append(pitch_class)
                 items.append(item)
             if items:
-                if isinstance(collections, CollectionList):
-                    collection_ = collections._initialize_collection(items)
-                else:
-                    collection_ = items
+                collection_ = type(collection)(items)
                 collections_.append(collection_)
     elif level == -1:
         known_pitch_classes = []
@@ -4227,35 +3535,30 @@ def remove_duplicate_pitch_classes(collections, level=-1):
                 known_pitch_classes.append(pitch_class)
                 items.append(item)
             if items:
-                collection_ = collections._initialize_collection(items, collection)
+                collection_ = type(collection)(items)
                 collections_.append(collection_)
     else:
         raise ValueError(f"level must be 1 or -1: {level!r}.")
-    if isinstance(collections, CollectionList):
-        result = dataclasses.replace(collections, collections=collections_)
-    else:
-        result = collections_
-    return result
+    return collections_
 
 
-def remove_duplicates(collections, level=-1) -> "CollectionList":
+def remove_duplicates(collections, level=-1):
     """
     Removes duplicates at ``level``.
 
     ..  container:: example
 
-        >>> collections = baca.CollectionList(
-        ...     [[16, 17, 16], [13, 14, 16], [16, 17, 16]],
-        ... )
+        >>> collections = [[16, 17, 16], [13, 14, 16], [16, 17, 16]]
+        >>> collections = [baca.PitchSegment(_) for _ in collections]
 
         >>> baca.pcollections.remove_duplicates(collections, level=0)
-        CollectionList([<16, 17, 16>, <13, 14, 16>])
+        [PitchSegment(items=[16, 17, 16], item_class=NumberedPitch), PitchSegment(items=[13, 14, 16], item_class=NumberedPitch)]
 
         >>> baca.pcollections.remove_duplicates(collections, level=1)
-        CollectionList([<16, 17>, <13, 14, 16>, <16, 17>])
+        [PitchSegment(items=[16, 17], item_class=NumberedPitch), PitchSegment(items=[13, 14, 16], item_class=NumberedPitch), PitchSegment(items=[16, 17], item_class=NumberedPitch)]
 
         >>> baca.pcollections.remove_duplicates(collections, level=-1)
-        CollectionList([<16, 17>, <13, 14>])
+        [PitchSegment(items=[16, 17], item_class=NumberedPitch), PitchSegment(items=[13, 14], item_class=NumberedPitch)]
 
     Set ``level`` to 0, 1 or -1.
     """
@@ -4277,10 +3580,7 @@ def remove_duplicates(collections, level=-1) -> "CollectionList":
                 known_items.append(item)
                 items.append(item)
             if items:
-                if isinstance(collections, CollectionList):
-                    collection_ = collections._initialize_collection(items)
-                else:
-                    collection_ = items
+                collection_ = type(collection)(items)
                 collections_.append(collection_)
     elif level == -1:
         known_items = []
@@ -4292,37 +3592,32 @@ def remove_duplicates(collections, level=-1) -> "CollectionList":
                 known_items.append(item)
                 items.append(item)
             if items:
-                if isinstance(collections, CollectionList):
-                    collection_ = collections._initialize_collection(items)
-                else:
-                    collection_ = items
+                collection_ = type(collection)(items)
                 collections_.append(collection_)
     else:
         raise ValueError(f"level must be 0, 1 or -1: {level!r}.")
-    if isinstance(collections, CollectionList):
-        result = dataclasses.replace(collections, collections=collections_)
-    else:
-        result = collections_
-    return result
+    return collections_
 
 
-def remove_repeat_pitch_classes(collections, level=-1) -> "CollectionList":
+def remove_repeat_pitch_classes(collections, level=-1):
     """
     Removes repeat pitch-classes at ``level``.
 
     ..  container:: example
 
-        >>> collections = baca.CollectionList([[4, 4, 4, 5], [17, 18]])
+        >>> collections = [[4, 4, 4, 5], [17, 18]]
+        >>> collections = [baca.PitchSegment(_) for _ in collections]
 
         >>> baca.pcollections.remove_repeat_pitch_classes(collections, level=1)
-        CollectionList([<4, 5>, <17, 18>])
+        [PitchSegment(items=[4, 5], item_class=NumberedPitch), PitchSegment(items=[17, 18], item_class=NumberedPitch)]
 
         >>> baca.pcollections.remove_repeat_pitch_classes(collections, level=-1)
-        CollectionList([<4, 5>, <18>])
+        [PitchSegment(items=[4, 5], item_class=NumberedPitch), PitchSegment(items=[18], item_class=NumberedPitch)]
 
     Set ``level`` to 1 or -1.
     """
-    pitch_class_class = collections._get_pitch_class_class()
+    # pitch_class_class = collections._get_pitch_class_class()
+    pitch_class_class = abjad.NamedPitchClass
     collections_ = []
     if level == 1:
         for collection in collections:
@@ -4334,7 +3629,8 @@ def remove_repeat_pitch_classes(collections, level=-1) -> "CollectionList":
                 items.append(item)
                 previous_pitch_class = pitch_class
             if items:
-                collection_ = collections._initialize_collection(items)
+                # collection_ = collections._initialize_collection(items)
+                collection_ = type(collection)(items)
                 collections_.append(collection_)
     elif level == -1:
         previous_pitch_class = None
@@ -4347,29 +3643,32 @@ def remove_repeat_pitch_classes(collections, level=-1) -> "CollectionList":
                 items.append(item)
                 previous_pitch_class = pitch_class
             if items:
-                collection_ = collections._initialize_collection(items)
+                # collection_ = collections._initialize_collection(items)
+                collection_ = type(collection)(items)
                 collections_.append(collection_)
     else:
         raise ValueError(f"level must be 1 or -1: {level!r}.")
-    return dataclasses.replace(collections, collections=collections_)
+    # return dataclasses.replace(collections, collections=collections_)
+    return collections_
 
 
-def remove_repeats(collections, level=-1) -> "CollectionList":
+def remove_repeats(collections, level=-1):
     """
     Removes repeats at ``level``.
 
     ..  container:: example
 
-        >>> collections = baca.CollectionList([[4, 5], [4, 5], [5, 7, 7]])
+        >>> collections = [[4, 5], [4, 5], [5, 7, 7]]
+        >>> collections = [baca.PitchSegment(_) for _ in collections]
 
         >>> baca.pcollections.remove_repeats(collections, level=0)
-        CollectionList([<4, 5>, <5, 7, 7>])
+        [PitchSegment(items=[4, 5], item_class=NumberedPitch), PitchSegment(items=[5, 7, 7], item_class=NumberedPitch)]
 
         >>> baca.pcollections.remove_repeats(collections, level=1)
-        CollectionList([<4, 5>, <4, 5>, <5, 7>])
+        [PitchSegment(items=[4, 5], item_class=NumberedPitch), PitchSegment(items=[4, 5], item_class=NumberedPitch), PitchSegment(items=[5, 7], item_class=NumberedPitch)]
 
         >>> baca.pcollections.remove_repeats(collections, level=-1)
-        CollectionList([<4, 5>, <4, 5>, <7>])
+        [PitchSegment(items=[4, 5], item_class=NumberedPitch), PitchSegment(items=[4, 5], item_class=NumberedPitch), PitchSegment(items=[7], item_class=NumberedPitch)]
 
     Set ``level`` to 0, 1 or -1.
     """
@@ -4390,7 +3689,7 @@ def remove_repeats(collections, level=-1) -> "CollectionList":
                 items.append(item)
                 previous_item = item
             if items:
-                collection_ = collections._initialize_collection(items)
+                collection_ = type(collection)(items)
                 collections_.append(collection_)
     elif level == -1:
         previous_item = None
@@ -4402,15 +3701,8 @@ def remove_repeats(collections, level=-1) -> "CollectionList":
                 items.append(item)
                 previous_item = item
             if items:
-                if isinstance(collections, CollectionList):
-                    collection_ = collections._initialize_collection(items)
-                else:
-                    collection_ = items
+                collection_ = type(collection)(items)
                 collections_.append(collection_)
     else:
         raise ValueError(f"level must be 0, 1 or -1: {level!r}.")
-    if isinstance(collections, CollectionList):
-        result = dataclasses.replace(collections, collections=collections_)
-    else:
-        result = collections_
-    return result
+    return collections_
