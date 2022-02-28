@@ -1057,480 +1057,6 @@ class CollectionList(collections_module.abc.Sequence):
             else:
                 raise TypeError(f"only string or iterable: {argument!r}.")
 
-    def bass_to_octave(self, n=4, pattern=None) -> "CollectionList":
-        """
-        Octave-transposes collections to bass in octave ``n``.
-
-        ..  container:: example
-
-            Octave-transposes all collections:
-
-            >>> collections = baca.CollectionList(
-            ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-            ... )
-            >>> collections = [baca.PitchClassSegment(_).arpeggiate_up() for _ in collections]
-            >>> collections = baca.CollectionList(collections)
-
-            >>> collections
-            CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
-
-            >>> collections.bass_to_octave(n=3)
-            CollectionList([<-7, 0, 2, 6, 17>, <-8, -7, -5>, <-9, 2, 13, 24>])
-
-        ..  container:: example
-
-            Octave-transposes collection -1:
-
-            >>> collections = baca.CollectionList(
-            ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-            ... )
-            >>> collections = [baca.PitchClassSegment(_).arpeggiate_up() for _ in collections]
-            >>> collections = baca.CollectionList(collections)
-
-            >>> collections
-            CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
-
-            >>> collections.bass_to_octave(n=3, pattern=[-1])
-            CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <-9, 2, 13, 24>])
-
-        """
-        if isinstance(pattern, list):
-            pattern = abjad.Pattern(indices=pattern)
-        pattern = pattern or abjad.index_all()
-        length = len(self)
-        collections = []
-        for i, collection in enumerate(self):
-            if pattern.matches_index(i, length):
-                collection = collection.bass_to_octave(n=n)
-            collections.append(collection)
-        return dataclasses.replace(self, collections=collections)
-
-    def center_to_octave(self, n=4, pattern=None) -> "CollectionList":
-        """
-        Octave-transposes collections to center in octave ``n``.
-
-        ..  container:: example
-
-            Octave-transposes all collections:
-
-            >>> collections = baca.CollectionList(
-            ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-            ... )
-            >>> collections = [baca.PitchClassSegment(_) for _ in collections]
-            >>> collections = [_.arpeggiate_up() for _ in collections]
-            >>> collections = baca.CollectionList(collections)
-
-            >>> collections
-            CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
-
-            >>> collections.center_to_octave(n=3)
-            CollectionList([<-19, -12, -10, -6, 5>, <-8, -7, -5>, <-21, -10, 1, 12>])
-
-        ..  container:: example
-
-            Octave-transposes collection -1:
-
-            >>> collections = baca.CollectionList(
-            ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-            ... )
-            >>> collections = [baca.PitchClassSegment(_) for _ in collections]
-            >>> collections = [_.arpeggiate_up() for _ in collections]
-            >>> collections = baca.CollectionList(collections)
-
-            >>> collections
-            CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
-
-            >>> collections.center_to_octave(n=3, pattern=[-1])
-            CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <-21, -10, 1, 12>])
-
-        """
-        if isinstance(pattern, list):
-            pattern = abjad.Pattern(indices=pattern)
-        pattern = pattern or abjad.index_all()
-        length = len(self)
-        collections = []
-        for i, collection in enumerate(self):
-            if pattern.matches_index(i, length):
-                collection = collection.center_to_octave(n=n)
-            collections.append(collection)
-        return dataclasses.replace(self, collections=collections)
-
-    def read(self, counts=None, check=None) -> "CollectionList":
-        """
-        Reads collections by ``counts``.
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList([
-            ...     [5, 12, 14, 18, 17],
-            ...     [16, 17, 19],
-            ... ])
-
-            >>> for collection in collections.read([3, 3, 3, 5, 5, 5]):
-            ...     collection
-            ...
-            PitchSegment(items=[5, 12, 14], item_class=NumberedPitch)
-            PitchSegment(items=[18, 17, 16], item_class=NumberedPitch)
-            PitchSegment(items=[17, 19, 5], item_class=NumberedPitch)
-            PitchSegment(items=[12, 14, 18, 17, 16], item_class=NumberedPitch)
-            PitchSegment(items=[17, 19, 5, 12, 14], item_class=NumberedPitch)
-            PitchSegment(items=[18, 17, 16, 17, 19], item_class=NumberedPitch)
-
-        ..  container:: example exception
-
-            Raises exception on inexact read:
-
-            >>> collections = baca.CollectionList([
-            ...     [5, 12, 14, 18, 17],
-            ...     [16, 17, 19],
-            ... ])
-
-            >>> len(abjad.sequence.join(collections)[0])
-            8
-
-            >>> collections.read([10, 10, 10], check=abjad.Exact)
-            Traceback (most recent call last):
-                ...
-            ValueError: call reads 30 items; not a multiple of 8 items.
-
-        """
-        if counts in (None, []):
-            return dataclasses.replace(self)
-        counts = list(counts)
-        assert all(isinstance(_, int) for _ in counts), repr(counts)
-        collection = abjad.sequence.join(self)[0]
-        source = abjad.CyclicTuple(collection)
-        i = 0
-        collections = []
-        for count in counts:
-            stop = i + count
-            items = source[i:stop]
-            collection = self._initialize_collection(items)
-            collections.append(collection)
-            i += count
-        result = dataclasses.replace(self, collections=collections)
-        if check == abjad.Exact:
-            self_item_count = len(abjad.sequence.join(self)[0])
-            result_item_count = len(abjad.sequence.join(result)[0])
-            quotient = result_item_count / self_item_count
-            if quotient != int(quotient):
-                message = f"call reads {result_item_count} items;"
-                message += f" not a multiple of {self_item_count} items."
-                raise ValueError(message)
-        return result
-
-    def remove_duplicate_pitch_classes(self, level=-1) -> "CollectionList":
-        """
-        Removes duplicate pitch-classes at ``level``.
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList([[4, 5, 7], [16, 17, 16, 18]])
-
-            >>> collections.remove_duplicate_pitch_classes(level=1)
-            CollectionList([<4, 5, 7>, <16, 17, 18>])
-
-            >>> collections.remove_duplicate_pitch_classes(level=-1)
-            CollectionList([<4, 5, 7>, <18>])
-
-        Set ``level`` to 1 or -1.
-        """
-        pitch_class_class = self._get_pitch_class_class()
-        collections_ = []
-        if level == 1:
-            for collection in self:
-                items: typing.List[CollectionTyping] = []
-                known_pitch_classes: typing.List[CollectionTyping] = []
-                for item in collection:
-                    pitch_class = pitch_class_class(item)
-                    if pitch_class in known_pitch_classes:
-                        continue
-                    known_pitch_classes.append(pitch_class)
-                    items.append(item)
-                if items:
-                    collection_ = self._initialize_collection(items)
-                    collections_.append(collection_)
-        elif level == -1:
-            known_pitch_classes = []
-            for collection in self:
-                items = []
-                for item in collection:
-                    pitch_class = pitch_class_class(item)
-                    if pitch_class in known_pitch_classes:
-                        continue
-                    known_pitch_classes.append(pitch_class)
-                    items.append(item)
-                if items:
-                    collection_ = self._initialize_collection(items, collection)
-                    collections_.append(collection_)
-        else:
-            raise ValueError(f"level must be 1 or -1: {level!r}.")
-        return dataclasses.replace(self, collections=collections_)
-
-    def remove_duplicates(self, level=-1) -> "CollectionList":
-        """
-        Removes duplicates at ``level``.
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList(
-            ...     [[16, 17, 16], [13, 14, 16], [16, 17, 16]],
-            ... )
-
-            >>> collections.remove_duplicates(level=0)
-            CollectionList([<16, 17, 16>, <13, 14, 16>])
-
-            >>> collections.remove_duplicates(level=1)
-            CollectionList([<16, 17>, <13, 14, 16>, <16, 17>])
-
-            >>> collections.remove_duplicates(level=-1)
-            CollectionList([<16, 17>, <13, 14>])
-
-        Set ``level`` to 0, 1 or -1.
-        """
-        collections_: typing.List[CollectionTyping] = []
-        if level == 0:
-            collections_ = []
-            known_items: typing.List[CollectionTyping] = []
-            for collection in self:
-                if collection in known_items:
-                    continue
-                known_items.append(collection)
-                collections_.append(collection)
-        elif level == 1:
-            for collection in self:
-                items, known_items = [], []
-                for item in collection:
-                    if item in known_items:
-                        continue
-                    known_items.append(item)
-                    items.append(item)
-                if items:
-                    collection_ = self._initialize_collection(items)
-                    collections_.append(collection_)
-        elif level == -1:
-            known_items = []
-            for collection in self:
-                items = []
-                for item in collection:
-                    if item in known_items:
-                        continue
-                    known_items.append(item)
-                    items.append(item)
-                if items:
-                    collection_ = self._initialize_collection(items)
-                    collections_.append(collection_)
-        else:
-            raise ValueError(f"level must be 0, 1 or -1: {level!r}.")
-        return dataclasses.replace(self, collections=collections_)
-
-    def remove_repeat_pitch_classes(self, level=-1) -> "CollectionList":
-        """
-        Removes repeat pitch-classes at ``level``.
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList([[4, 4, 4, 5], [17, 18]])
-
-            >>> collections.remove_repeat_pitch_classes(level=1)
-            CollectionList([<4, 5>, <17, 18>])
-
-            >>> collections.remove_repeat_pitch_classes(level=-1)
-            CollectionList([<4, 5>, <18>])
-
-        Set ``level`` to 1 or -1.
-        """
-        pitch_class_class = self._get_pitch_class_class()
-        collections_ = []
-        if level == 1:
-            for collection in self:
-                items, previous_pitch_class = [], None
-                for item in collection:
-                    pitch_class = pitch_class_class(item)
-                    if pitch_class == previous_pitch_class:
-                        continue
-                    items.append(item)
-                    previous_pitch_class = pitch_class
-                if items:
-                    collection_ = self._initialize_collection(items)
-                    collections_.append(collection_)
-        elif level == -1:
-            previous_pitch_class = None
-            for collection in self:
-                items = []
-                for item in collection:
-                    pitch_class = pitch_class_class(item)
-                    if pitch_class == previous_pitch_class:
-                        continue
-                    items.append(item)
-                    previous_pitch_class = pitch_class
-                if items:
-                    collection_ = self._initialize_collection(items)
-                    collections_.append(collection_)
-        else:
-            raise ValueError(f"level must be 1 or -1: {level!r}.")
-        return dataclasses.replace(self, collections=collections_)
-
-    def remove_repeats(self, level=-1) -> "CollectionList":
-        """
-        Removes repeats at ``level``.
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList([[4, 5], [4, 5], [5, 7, 7]])
-
-            >>> collections.remove_repeats(level=0)
-            CollectionList([<4, 5>, <5, 7, 7>])
-
-            >>> collections.remove_repeats(level=1)
-            CollectionList([<4, 5>, <4, 5>, <5, 7>])
-
-            >>> collections.remove_repeats(level=-1)
-            CollectionList([<4, 5>, <4, 5>, <7>])
-
-        Set ``level`` to 0, 1 or -1.
-        """
-        collections_ = []
-        if level == 0:
-            previous_collection = None
-            for collection in self:
-                if collection == previous_collection:
-                    continue
-                collections_.append(collection)
-                previous_collection = collection
-        elif level == 1:
-            for collection in self:
-                items, previous_item = [], None
-                for item in collection:
-                    if item == previous_item:
-                        continue
-                    items.append(item)
-                    previous_item = item
-                if items:
-                    collection_ = self._initialize_collection(items)
-                    collections_.append(collection_)
-        elif level == -1:
-            previous_item = None
-            for collection in self:
-                items = []
-                for item in collection:
-                    if item == previous_item:
-                        continue
-                    items.append(item)
-                    previous_item = item
-                if items:
-                    collection_ = self._initialize_collection(items)
-                    collections_.append(collection_)
-        else:
-            raise ValueError(f"level must be 0, 1 or -1: {level!r}.")
-        return dataclasses.replace(self, collections=collections_)
-
-    def soprano_to_octave(self, n=4, pattern=None) -> "CollectionList":
-        """
-        Octave-transposes collections to soprano in octave ``n``.
-
-        ..  container:: example
-
-            Octave-transposes all collections:
-
-            >>> collections = baca.CollectionList(
-            ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-            ... )
-            >>> collections = [baca.PitchClassSegment(_) for _ in collections]
-            >>> collections = [_.arpeggiate_up() for _ in collections]
-            >>> collections = baca.CollectionList(collections)
-
-            >>> collections
-            CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
-
-            >>> collections.soprano_to_octave(n=4)
-            CollectionList([<-19, -12, -10, -6, 5>, <4, 5, 7>, <-33, -22, -11, 0>])
-
-        ..  container:: example
-
-            Octave-transposes collection -1:
-
-            >>> collections = baca.CollectionList(
-            ...     [[5, 12, 14, 18, 17], [16, 17, 19], [3, 2, 1, 0]],
-            ... )
-            >>> collections = [baca.PitchClassSegment(_) for _ in collections]
-            >>> collections = [_.arpeggiate_up() for _ in collections]
-            >>> collections = baca.CollectionList(collections)
-
-            >>> collections
-            CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <3, 14, 25, 36>])
-
-            >>> collections.soprano_to_octave(n=4, pattern=[-1])
-            CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <-33, -22, -11, 0>])
-
-        """
-        if isinstance(pattern, list):
-            pattern = abjad.Pattern(indices=pattern)
-        pattern = pattern or abjad.index_all()
-        length = len(self)
-        collections = []
-        for i, collection in enumerate(self):
-            if pattern.matches_index(i, length):
-                collection = collection.soprano_to_octave(n=n)
-            collections.append(collection)
-        return dataclasses.replace(self, collections=collections)
-
-    def space_down(
-        self, bass=None, pattern=None, semitones=None, soprano=None
-    ) -> "CollectionList":
-        """
-        Spaces collections down.
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList(
-            ...     [[5, 12, 14, 18, 17], [16, 17, 19]],
-            ... )
-
-            >>> collections.space_down(bass=5)
-            CollectionList([<24, 18, 14, 5>, <16, 7, 5>])
-
-        """
-        if isinstance(pattern, list):
-            pattern = abjad.Pattern(indices=pattern)
-        pattern = pattern or abjad.index_all()
-        length = len(self)
-        collections = []
-        for i, collection in enumerate(self):
-            if pattern.matches_index(i, length):
-                collection = collection.space_down(
-                    bass=bass, semitones=semitones, soprano=soprano
-                )
-            collections.append(collection)
-        return dataclasses.replace(self, collections=collections)
-
-    def space_up(self, bass=None, pattern=None, semitones=None, soprano=None):
-        """
-        Spaces collections up.
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList(
-            ...     [[5, 12, 14, 18, 17], [16, 17, 19]],
-            ... )
-
-            >>> collections.space_up(bass=5)
-            CollectionList([<5, 6, 12, 14>, <5, 7, 16>])
-
-        """
-        if isinstance(pattern, list):
-            pattern = abjad.Pattern(indices=pattern)
-        pattern = pattern or abjad.index_all()
-        length = len(self)
-        collections = []
-        for i, collection in enumerate(self):
-            if pattern.matches_index(i, length):
-                collection = collection.space_up(
-                    bass=bass, semitones=semitones, soprano=soprano
-                )
-            collections.append(collection)
-        return dataclasses.replace(self, collections=collections)
-
     def to_numbered_pitch_classes(self) -> "CollectionList":
         """
         Changes to numbered pitch-class collections.
@@ -4639,3 +4165,278 @@ def has_repeats(collections, level=-1) -> bool:
     else:
         raise ValueError(f"level must be 0, 1 or -1: {level!r}.")
     return False
+
+
+def read(collections, counts=None, check=None):
+    """
+    Reads collections by ``counts``.
+
+    ..  container:: example
+
+        >>> collections = baca.CollectionList([
+        ...     [5, 12, 14, 18, 17],
+        ...     [16, 17, 19],
+        ... ])
+
+        >>> for collection in baca.pcollections.read(collections, [3, 3, 3, 5, 5, 5]):
+        ...     collection
+        ...
+        PitchSegment(items=[5, 12, 14], item_class=NumberedPitch)
+        PitchSegment(items=[18, 17, 16], item_class=NumberedPitch)
+        PitchSegment(items=[17, 19, 5], item_class=NumberedPitch)
+        PitchSegment(items=[12, 14, 18, 17, 16], item_class=NumberedPitch)
+        PitchSegment(items=[17, 19, 5, 12, 14], item_class=NumberedPitch)
+        PitchSegment(items=[18, 17, 16, 17, 19], item_class=NumberedPitch)
+
+    ..  container:: example exception
+
+        Raises exception on inexact read:
+
+        >>> collections = baca.CollectionList([
+        ...     [5, 12, 14, 18, 17],
+        ...     [16, 17, 19],
+        ... ])
+
+        >>> len(abjad.sequence.join(collections)[0])
+        8
+
+        >>> baca.pcollections.read(collections, [10, 10, 10], check=abjad.Exact)
+        Traceback (most recent call last):
+            ...
+        ValueError: call reads 30 items; not a multiple of 8 items.
+
+    """
+    if counts in (None, []):
+        return dataclasses.replace(collections)
+    counts = list(counts)
+    assert all(isinstance(_, int) for _ in counts), repr(counts)
+    collection = abjad.sequence.join(collections)[0]
+    source = abjad.CyclicTuple(collection)
+    i = 0
+    collections_ = []
+    for count in counts:
+        stop = i + count
+        items = source[i:stop]
+        collection = collections._initialize_collection(items)
+        collections_.append(collection)
+        i += count
+    result = dataclasses.replace(collections, collections=collections_)
+    if check == abjad.Exact:
+        self_item_count = len(abjad.sequence.join(collections)[0])
+        result_item_count = len(abjad.sequence.join(result)[0])
+        quotient = result_item_count / self_item_count
+        if quotient != int(quotient):
+            message = f"call reads {result_item_count} items;"
+            message += f" not a multiple of {self_item_count} items."
+            raise ValueError(message)
+    return result
+
+
+def remove_duplicate_pitch_classes(collections, level=-1):
+    """
+    Removes duplicate pitch-classes at ``level``.
+
+    ..  container:: example
+
+        >>> collections = baca.CollectionList([[4, 5, 7], [16, 17, 16, 18]])
+
+        >>> baca.pcollections.remove_duplicate_pitch_classes(collections, level=1)
+        CollectionList([<4, 5, 7>, <16, 17, 18>])
+
+        >>> baca.pcollections.remove_duplicate_pitch_classes(collections, level=-1)
+        CollectionList([<4, 5, 7>, <18>])
+
+    Set ``level`` to 1 or -1.
+    """
+    pitch_class_class = collections._get_pitch_class_class()
+    collections_ = []
+    if level == 1:
+        for collection in collections:
+            items: typing.List[CollectionTyping] = []
+            known_pitch_classes: typing.List[CollectionTyping] = []
+            for item in collection:
+                pitch_class = pitch_class_class(item)
+                if pitch_class in known_pitch_classes:
+                    continue
+                known_pitch_classes.append(pitch_class)
+                items.append(item)
+            if items:
+                collection_ = collections._initialize_collection(items)
+                collections_.append(collection_)
+    elif level == -1:
+        known_pitch_classes = []
+        for collection in collections:
+            items = []
+            for item in collection:
+                pitch_class = pitch_class_class(item)
+                if pitch_class in known_pitch_classes:
+                    continue
+                known_pitch_classes.append(pitch_class)
+                items.append(item)
+            if items:
+                collection_ = collections._initialize_collection(items, collection)
+                collections_.append(collection_)
+    else:
+        raise ValueError(f"level must be 1 or -1: {level!r}.")
+    return dataclasses.replace(collections, collections=collections_)
+
+
+def remove_duplicates(collections, level=-1) -> "CollectionList":
+    """
+    Removes duplicates at ``level``.
+
+    ..  container:: example
+
+        >>> collections = baca.CollectionList(
+        ...     [[16, 17, 16], [13, 14, 16], [16, 17, 16]],
+        ... )
+
+        >>> baca.pcollections.remove_duplicates(collections, level=0)
+        CollectionList([<16, 17, 16>, <13, 14, 16>])
+
+        >>> baca.pcollections.remove_duplicates(collections, level=1)
+        CollectionList([<16, 17>, <13, 14, 16>, <16, 17>])
+
+        >>> baca.pcollections.remove_duplicates(collections, level=-1)
+        CollectionList([<16, 17>, <13, 14>])
+
+    Set ``level`` to 0, 1 or -1.
+    """
+    collections_: typing.List[CollectionTyping] = []
+    if level == 0:
+        collections_ = []
+        known_items: typing.List[CollectionTyping] = []
+        for collection in collections:
+            if collection in known_items:
+                continue
+            known_items.append(collection)
+            collections_.append(collection)
+    elif level == 1:
+        for collection in collections:
+            items, known_items = [], []
+            for item in collection:
+                if item in known_items:
+                    continue
+                known_items.append(item)
+                items.append(item)
+            if items:
+                collection_ = collections._initialize_collection(items)
+                collections_.append(collection_)
+    elif level == -1:
+        known_items = []
+        for collection in collections:
+            items = []
+            for item in collection:
+                if item in known_items:
+                    continue
+                known_items.append(item)
+                items.append(item)
+            if items:
+                collection_ = collections._initialize_collection(items)
+                collections_.append(collection_)
+    else:
+        raise ValueError(f"level must be 0, 1 or -1: {level!r}.")
+    return dataclasses.replace(collections, collections=collections_)
+
+
+def remove_repeat_pitch_classes(collections, level=-1) -> "CollectionList":
+    """
+    Removes repeat pitch-classes at ``level``.
+
+    ..  container:: example
+
+        >>> collections = baca.CollectionList([[4, 4, 4, 5], [17, 18]])
+
+        >>> baca.pcollections.remove_repeat_pitch_classes(collections, level=1)
+        CollectionList([<4, 5>, <17, 18>])
+
+        >>> baca.pcollections.remove_repeat_pitch_classes(collections, level=-1)
+        CollectionList([<4, 5>, <18>])
+
+    Set ``level`` to 1 or -1.
+    """
+    pitch_class_class = collections._get_pitch_class_class()
+    collections_ = []
+    if level == 1:
+        for collection in collections:
+            items, previous_pitch_class = [], None
+            for item in collection:
+                pitch_class = pitch_class_class(item)
+                if pitch_class == previous_pitch_class:
+                    continue
+                items.append(item)
+                previous_pitch_class = pitch_class
+            if items:
+                collection_ = collections._initialize_collection(items)
+                collections_.append(collection_)
+    elif level == -1:
+        previous_pitch_class = None
+        for collection in collections:
+            items = []
+            for item in collection:
+                pitch_class = pitch_class_class(item)
+                if pitch_class == previous_pitch_class:
+                    continue
+                items.append(item)
+                previous_pitch_class = pitch_class
+            if items:
+                collection_ = collections._initialize_collection(items)
+                collections_.append(collection_)
+    else:
+        raise ValueError(f"level must be 1 or -1: {level!r}.")
+    return dataclasses.replace(collections, collections=collections_)
+
+
+def remove_repeats(collections, level=-1) -> "CollectionList":
+    """
+    Removes repeats at ``level``.
+
+    ..  container:: example
+
+        >>> collections = baca.CollectionList([[4, 5], [4, 5], [5, 7, 7]])
+
+        >>> baca.pcollections.remove_repeats(collections, level=0)
+        CollectionList([<4, 5>, <5, 7, 7>])
+
+        >>> baca.pcollections.remove_repeats(collections, level=1)
+        CollectionList([<4, 5>, <4, 5>, <5, 7>])
+
+        >>> baca.pcollections.remove_repeats(collections, level=-1)
+        CollectionList([<4, 5>, <4, 5>, <7>])
+
+    Set ``level`` to 0, 1 or -1.
+    """
+    collections_ = []
+    if level == 0:
+        previous_collection = None
+        for collection in collections:
+            if collection == previous_collection:
+                continue
+            collections_.append(collection)
+            previous_collection = collection
+    elif level == 1:
+        for collection in collections:
+            items, previous_item = [], None
+            for item in collection:
+                if item == previous_item:
+                    continue
+                items.append(item)
+                previous_item = item
+            if items:
+                collection_ = collections._initialize_collection(items)
+                collections_.append(collection_)
+    elif level == -1:
+        previous_item = None
+        for collection in collections:
+            items = []
+            for item in collection:
+                if item == previous_item:
+                    continue
+                items.append(item)
+                previous_item = item
+            if items:
+                collection_ = collections._initialize_collection(items)
+                collections_.append(collection_)
+    else:
+        raise ValueError(f"level must be 0, 1 or -1: {level!r}.")
+    return dataclasses.replace(collections, collections=collections_)
