@@ -1890,7 +1890,7 @@ def constellate(generator, range_):
         interval = -12
         while True:
             candidate = part.transpose(interval)
-            if all(pitch in range_ for pitch in candidate):
+            if all(abjad.NamedPitch(pitch) in range_ for pitch in candidate):
                 transpositions_.append(candidate)
                 interval -= 12
             else:
@@ -1899,7 +1899,7 @@ def constellate(generator, range_):
         interval = 0
         while True:
             candidate = part.transpose(interval)
-            if all(pitch in range_ for pitch in candidate):
+            if all(abjad.NamedPitch(pitch) in range_ for pitch in candidate):
                 transpositions_.append(candidate)
                 interval += 12
             else:
