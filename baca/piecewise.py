@@ -98,14 +98,14 @@ class PiecewiseCommand(_scoping.Command):
     in other groups of selector output.
     """
 
-    autodetect_right_padding: bool = None
-    bookend: typing.Union[bool, int] = None
+    autodetect_right_padding: bool = False
+    bookend: typing.Union[bool, int] = False
     bundles: typing.List[Bundle] = None
     final_piece_spanner: typing.Any = None
-    leak_spanner_stop: bool = None
-    left_broken: bool = None
+    leak_spanner_stop: bool = False
+    left_broken: bool = False
     pieces: typing.Any = _selectors.leaves()
-    remove_length_1_spanner_start: bool = None
+    remove_length_1_spanner_start: bool = False
     right_broken: typing.Any = None
     selector: typing.Any = _selectors.leaves()
     tweaks: abjad.IndexedTweakManagers = None
@@ -337,14 +337,14 @@ def bow_speed_spanner(
     *tweaks: abjad.IndexedTweakManager,
     autodetect_right_padding: bool = True,
     bookend: typing.Union[bool, int] = False,
-    final_piece_spanner: bool = None,
-    left_broken: bool = None,
+    final_piece_spanner: bool | None = None,
+    left_broken: bool = False,
     left_broken_text: str = None,
     map=None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
     pieces=_selectors.group(),
-    right_broken: bool = None,
+    right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector=_selectors.ltleaves_rleak(),
 ) -> PiecewiseCommand:
@@ -376,14 +376,14 @@ def bow_speed_spanner(
 
 def circle_bow_spanner(
     *tweaks: abjad.IndexedTweakManager,
-    left_broken: bool = None,
+    left_broken: bool = False,
     left_broken_text: typing.Optional[str] = r"\baca-left-broken-circle-bowing-markup",
     map=None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
     pieces=_selectors.group(),
     qualifier: str = None,
-    right_broken: bool = None,
+    right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector=_selectors.ltleaves_rleak(),
 ) -> PiecewiseCommand:
@@ -422,13 +422,13 @@ def clb_spanner(
     *tweaks: abjad.IndexedTweakManager,
     # NOTE: autodetect default differs from text_spanner():
     autodetect_right_padding: bool = True,
-    left_broken: bool = None,
+    left_broken: bool = False,
     left_broken_text: typing.Optional[str] = r"\baca-left-broken-clb-markup",
     map=None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
     pieces=_selectors.group(),
-    right_broken: bool = None,
+    right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector=_selectors.ltleaves_rleak(),
 ) -> PiecewiseCommand:
@@ -473,13 +473,13 @@ def covered_spanner(
     # NOTE: autodetect default differs from text_spanner():
     autodetect_right_padding: bool = True,
     argument: str = r"\baca-covered-markup =|",
-    left_broken: bool = None,
+    left_broken: bool = False,
     left_broken_text: typing.Optional[str] = r"\baca-left-broken-covered-markup",
     map=None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
     pieces=_selectors.group(),
-    right_broken: bool = None,
+    right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector=_selectors.ltleaves_rleak(),
 ) -> PiecewiseCommand:
@@ -512,13 +512,13 @@ def damp_spanner(
     *tweaks: abjad.IndexedTweakManager,
     # NOTE: autodetect default differs from text_spanner():
     autodetect_right_padding: bool = True,
-    left_broken: bool = None,
+    left_broken: bool = False,
     left_broken_text: typing.Optional[str] = r"\baca-left-broken-damp-markup",
     map=None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
     pieces=_selectors.group(),
-    right_broken: bool = None,
+    right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector=_selectors.ltleaves_rleak(),
 ) -> PiecewiseCommand:
@@ -554,7 +554,7 @@ def dynamic(
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
     selector=_selectors.phead(0),
-    redundant: bool = None,
+    redundant: bool = False,
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches dynamic.
@@ -908,15 +908,15 @@ def hairpin(
     dynamics: typing.Union[str, typing.List],
     *tweaks: abjad.TweakInterface,
     bookend: typing.Union[bool, int] = -1,
-    final_hairpin: typing.Union[bool, str, abjad.StartHairpin] = None,
-    forbid_al_niente_to_bar_line: bool = None,
-    left_broken: bool = None,
+    final_hairpin: typing.Union[bool, str, abjad.StartHairpin, None] = None,
+    forbid_al_niente_to_bar_line: bool = False,
+    left_broken: bool = False,
     map=None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
     pieces=_selectors.group(),
-    remove_length_1_spanner_start: bool = None,
-    right_broken: bool = None,
+    remove_length_1_spanner_start: bool = False,
+    right_broken: bool = False,
     selector=_selectors.leaves(),
 ) -> PiecewiseCommand:
     r"""
@@ -2264,13 +2264,13 @@ def hairpin(
 
 def half_clt_spanner(
     *tweaks: abjad.IndexedTweakManager,
-    left_broken: bool = None,
+    left_broken: bool = False,
     left_broken_text: typing.Optional[str] = r"\baca-left-broken-half-clt-markup",
     map=None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
     pieces=_selectors.group(),
-    right_broken: bool = None,
+    right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector=_selectors.ltleaves_rleak(),
 ) -> PiecewiseCommand:
@@ -2300,7 +2300,7 @@ def half_clt_spanner(
 
 
 def make_dynamic(
-    string: str, *, forbid_al_niente_to_bar_line: bool = None
+    string: str, *, forbid_al_niente_to_bar_line: bool = False
 ) -> typing.Union[abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin]:
     r"""
     Makes dynamic.
@@ -2330,7 +2330,7 @@ def make_dynamic(
         Stop hairpin:
 
         >>> baca.make_dynamic("!")
-        StopHairpin(leak=None)
+        StopHairpin(leak=False)
 
     ..  container:: example
 
@@ -2484,10 +2484,10 @@ def make_dynamic(
         Al niente hairpins are special-cased to carry to-barline tweaks:
 
         >>> baca.make_dynamic(">o")
-        StartHairpin(shape='>o', direction=None, tweaks=TweakInterface(('_literal', None), ('to_barline', True)))
+        StartHairpin(shape='>o', direction=None, tweaks=TweakInterface(('_literal', False), ('to_barline', True)))
 
         >>> baca.make_dynamic("|>o")
-        StartHairpin(shape='|>o', direction=None, tweaks=TweakInterface(('_literal', None), ('to_barline', True)))
+        StartHairpin(shape='|>o', direction=None, tweaks=TweakInterface(('_literal', False), ('to_barline', True)))
 
     ..  container:: example exception
 
@@ -2597,12 +2597,12 @@ def make_dynamic(
 def material_annotation_spanner(
     items: typing.Union[str, typing.List],
     *tweaks: abjad.IndexedTweakManager,
-    left_broken: bool = None,
+    left_broken: bool = False,
     map=None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
     pieces=_selectors.group(),
-    right_broken: bool = None,
+    right_broken: bool = False,
     # NOTE: selector differs from text_spanner()
     selector=_selectors.rleaves(),
 ) -> PiecewiseCommand:
@@ -2634,12 +2634,12 @@ def metric_modulation_spanner(
     *tweaks: abjad.IndexedTweakManager,
     argument: str = r"MM =|",
     autodetect_right_padding: bool = True,
-    left_broken: bool = None,
+    left_broken: bool = False,
     map=None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
     pieces=_selectors.group(),
-    right_broken: bool = None,
+    right_broken: bool = False,
     # NOTE: selector differs from text_spanner()
     selector=_selectors.rleaves(),
 ) -> PiecewiseCommand:
@@ -2673,7 +2673,7 @@ def metric_modulation_spanner(
 def parse_hairpin_descriptor(
     descriptor: str,
     *tweaks: abjad.TweakInterface,
-    forbid_al_niente_to_bar_line: bool = None,
+    forbid_al_niente_to_bar_line: bool = False,
 ) -> typing.List[Bundle]:
     r"""
     Parses hairpin descriptor.
@@ -2699,7 +2699,7 @@ def parse_hairpin_descriptor(
         >>> for item in baca.parse_hairpin_descriptor("< !"):
         ...     item
         Bundle(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='<', direction=None, tweaks=None), spanner_stop=None)
-        Bundle(bookended_spanner_start=None, indicator=StopHairpin(leak=None), spanner_start=None, spanner_stop=None)
+        Bundle(bookended_spanner_start=None, indicator=StopHairpin(leak=False), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("o<|"):
         ...     item
@@ -2721,7 +2721,7 @@ def parse_hairpin_descriptor(
         >>> for item in baca.parse_hairpin_descriptor("p < !"):
         ...     item
         Bundle(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=StartHairpin(shape='<', direction=None, tweaks=None), spanner_stop=None)
-        Bundle(bookended_spanner_start=None, indicator=StopHairpin(leak=None), spanner_start=None, spanner_stop=None)
+        Bundle(bookended_spanner_start=None, indicator=StopHairpin(leak=False), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("< f"):
         ...     item
@@ -2744,7 +2744,7 @@ def parse_hairpin_descriptor(
 
         >>> for item in baca.parse_hairpin_descriptor("f >o"):
         ...     item
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=StartHairpin(shape='>o', direction=None, tweaks=TweakInterface(('_literal', None), ('to_barline', True))), spanner_stop=None)
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=StartHairpin(shape='>o', direction=None, tweaks=TweakInterface(('_literal', False), ('to_barline', True))), spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("p mp mf f"):
         ...     item
@@ -2763,7 +2763,7 @@ def parse_hairpin_descriptor(
         >>> for item in baca.parse_hairpin_descriptor("f -- ! > p"):
         ...     item
         Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=StartHairpin(shape='--', direction=None, tweaks=None), spanner_stop=None)
-        Bundle(bookended_spanner_start=None, indicator=StopHairpin(leak=None), spanner_start=StartHairpin(shape='>', direction=None, tweaks=None), spanner_stop=None)
+        Bundle(bookended_spanner_start=None, indicator=StopHairpin(leak=False), spanner_start=StartHairpin(shape='>', direction=None, tweaks=None), spanner_stop=None)
         Bundle(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, direction=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("mf niente o< p"):
@@ -2835,12 +2835,12 @@ def parse_hairpin_descriptor(
 def pitch_annotation_spanner(
     items: typing.Union[str, typing.List],
     *tweaks: abjad.IndexedTweakManager,
-    left_broken: bool = None,
+    left_broken: bool = False,
     map=None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
     pieces=_selectors.group(),
-    right_broken: bool = None,
+    right_broken: bool = False,
     # NOTE: selector differs from text_spanner()
     selector=_selectors.rleaves(),
 ) -> PiecewiseCommand:
@@ -2872,13 +2872,13 @@ def pizzicato_spanner(
     *tweaks: abjad.IndexedTweakManager,
     # NOTE: autodetect default differs from text_spanner():
     autodetect_right_padding: bool = True,
-    left_broken: bool = None,
+    left_broken: bool = False,
     left_broken_text: typing.Optional[str] = r"\baca-pizz-markup",
     map=None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
     pieces=_selectors.group(),
-    right_broken: bool = None,
+    right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector=_selectors.ltleaves_rleak(),
 ) -> PiecewiseCommand:
@@ -2910,13 +2910,13 @@ def pizzicato_spanner(
 def rhythm_annotation_spanner(
     items: typing.Union[str, typing.List],
     *tweaks: abjad.IndexedTweakManager,
-    left_broken: bool = None,
-    leak_spanner_stop: bool = None,
+    left_broken: bool = False,
+    leak_spanner_stop: bool = False,
     map=None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
     pieces=_selectors.group(),
-    right_broken: bool = None,
+    right_broken: bool = False,
     # NOTE: selector differs from text_spanner()
     selector=_selectors.rleaves(),
 ) -> PiecewiseCommand:
@@ -2950,14 +2950,14 @@ def scp_spanner(
     *tweaks: abjad.IndexedTweakManager,
     autodetect_right_padding: bool = True,
     bookend: typing.Union[bool, int] = False,
-    final_piece_spanner: bool = None,
-    left_broken: bool = None,
+    final_piece_spanner: bool | None = None,
+    left_broken: bool = False,
     left_broken_text: str = None,
     map=None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
     pieces=_selectors.group(),
-    right_broken: bool = None,
+    right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector=_selectors.ltleaves_rleak(),
 ) -> PiecewiseCommand:
@@ -2992,13 +2992,13 @@ def spazzolato_spanner(
     # NOTE: autodetect default differs from text_spanner():
     autodetect_right_padding: bool = True,
     items: typing.Union[str, typing.List] = r"\baca-spazzolato-markup =|",
-    left_broken: bool = None,
+    left_broken: bool = False,
     left_broken_text: typing.Optional[str] = r"\baca-left-broken-spazz-markup",
     map=None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
     pieces=_selectors.group(),
-    right_broken: bool = None,
+    right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector=_selectors.ltleaves_rleak(),
 ) -> PiecewiseCommand:
@@ -3032,14 +3032,14 @@ def string_number_spanner(
     *tweaks: abjad.IndexedTweakManager,
     autodetect_right_padding: bool = True,
     bookend: typing.Union[bool, int] = False,
-    final_piece_spanner: bool = None,
-    left_broken: bool = None,
+    final_piece_spanner: bool | None = None,
+    left_broken: bool = False,
     left_broken_text: str = None,
     map=None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
     pieces=_selectors.group(),
-    right_broken: bool = None,
+    right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector=_selectors.ltleaves_rleak(),
 ) -> PiecewiseCommand:
@@ -3073,14 +3073,14 @@ def tasto_spanner(
     *tweaks: abjad.IndexedTweakManager,
     autodetect_right_padding: bool = True,
     bookend: typing.Union[bool, int] = False,
-    final_piece_spanner: bool = None,
-    left_broken: bool = None,
+    final_piece_spanner: bool | None = None,
+    left_broken: bool = False,
     left_broken_text: str = r"\baca-left-broken-t-markup",
     map=None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
     pieces=_selectors.group(),
-    right_broken: bool = None,
+    right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector=_selectors.ltleaves_rleak(),
 ) -> PiecewiseCommand:
@@ -3113,20 +3113,20 @@ def tasto_spanner(
 def text_spanner(
     items: typing.Union[str, typing.List],
     *tweaks: abjad.IndexedTweakManager,
-    autodetect_right_padding: bool = None,
+    autodetect_right_padding: bool = False,
     bookend: typing.Union[bool, int] = -1,
-    boxed: bool = None,
+    boxed: bool = False,
     direction: typing.Union[int, str, abjad.enums.VerticalAlignment] = None,
-    final_piece_spanner: bool = None,
-    leak_spanner_stop: bool = None,
-    left_broken: bool = None,
+    final_piece_spanner: bool | None = None,
+    leak_spanner_stop: bool = False,
+    left_broken: bool = False,
     left_broken_text: str = None,
     lilypond_id: typing.Union[int, str] = None,
     map=None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
     pieces=_selectors.group(),
-    right_broken: bool = None,
+    right_broken: bool = False,
     selector=_selectors.leaves(),
 ) -> PiecewiseCommand:
     r"""
@@ -4717,14 +4717,14 @@ def vibrato_spanner(
     *tweaks: abjad.IndexedTweakManager,
     autodetect_right_padding: bool = True,
     bookend: typing.Union[bool, int] = False,
-    final_piece_spanner: bool = None,
-    left_broken: bool = None,
+    final_piece_spanner: bool | None = None,
+    left_broken: bool = False,
     left_broken_text: str = None,
     map=None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
     pieces=_selectors.group(),
-    right_broken: bool = None,
+    right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector=_selectors.ltleaves_rleak(),
 ) -> PiecewiseCommand:
@@ -4758,14 +4758,14 @@ def xfb_spanner(
     *tweaks: abjad.IndexedTweakManager,
     autodetect_right_padding: bool = True,
     bookend: typing.Union[bool, int] = False,
-    final_piece_spanner: bool = None,
-    left_broken: bool = None,
+    final_piece_spanner: bool | None = None,
+    left_broken: bool = False,
     left_broken_text: str = r"\baca-left-broken-xfb-markup",
     map=None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
     pieces=_selectors.group(),
-    right_broken: bool = None,
+    right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector=_selectors.ltleaves_rleak(),
 ) -> PiecewiseCommand:

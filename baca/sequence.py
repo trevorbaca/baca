@@ -12,7 +12,7 @@ def fuse(
     sequence,
     counts: typing.List[int] = None,
     *,
-    cyclic: bool = None,
+    cyclic: bool = False,
     indices: typing.Sequence[int] = None,
 ):
     r"""
@@ -381,7 +381,7 @@ def ratios(
     sequence,
     ratios: typing.Sequence[abjad.RatioTyping],
     *,
-    rounded: bool = None,
+    rounded: bool = False,
 ):
     r"""
     Splits sequence by ``ratios``.
@@ -716,7 +716,7 @@ def split_divisions(
     durations: typing.List[abjad.DurationTyping],
     *,
     compound: abjad.DurationTyping = None,
-    cyclic: bool = None,
+    cyclic: bool = False,
     remainder: abjad.HorizontalAlignment = None,
     remainder_fuse_threshold: abjad.DurationTyping = None,
 ):

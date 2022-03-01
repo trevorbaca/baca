@@ -136,7 +136,7 @@ def bcps(
     bcps,
     *tweaks: abjad.IndexedTweakManager,
     bow_change_tweaks: abjad.IndexedTweakManagers = None,
-    final_spanner: bool = None,
+    final_spanner: bool = False,
     helper: typing.Callable = None,
     selector=_selectors.leaves(),
 ) -> _commandclasses.BCPCommand:
@@ -872,7 +872,7 @@ def edition(
 def finger_pressure_transition(
     *,
     selector=_selectors.tleaves(),
-    right_broken: bool = None,
+    right_broken: bool = False,
 ) -> _commandclasses.GlissandoCommand:
     r"""
     Makes finger pressure transition glissando.
@@ -980,15 +980,15 @@ def flat_glissando(
         typing.List[abjad.StaffPosition],
     ] = None,
     *tweaks,
-    allow_repitch: bool = None,
-    do_not_hide_middle_note_heads: bool = None,
-    mock: bool = None,
-    hide_middle_stems: bool = None,
+    allow_repitch: bool = False,
+    do_not_hide_middle_note_heads: bool = False,
+    mock: bool = False,
+    hide_middle_stems: bool = False,
     hide_stem_selector: typing.Callable = None,
-    left_broken: bool = None,
-    right_broken: bool = None,
-    right_broken_show_next: bool = None,
-    rleak: bool = None,
+    left_broken: bool = False,
+    right_broken: bool = False,
+    right_broken_show_next: bool = False,
+    rleak: bool = False,
     selector=_selectors.pleaves(),
     stop_pitch: typing.Union[str, abjad.NamedPitch, abjad.StaffPosition] = None,
 ) -> _scoping.Suite:
@@ -1078,18 +1078,18 @@ def fractions(items):
 
 def glissando(
     *tweaks: abjad.IndexedTweakManager,
-    allow_repeats: bool = None,
-    allow_ties: bool = None,
-    hide_middle_note_heads: bool = None,
-    hide_middle_stems: bool = None,
+    allow_repeats: bool = False,
+    allow_ties: bool = False,
+    hide_middle_note_heads: bool = False,
+    hide_middle_stems: bool = False,
     hide_stem_selector: typing.Callable = None,
-    left_broken: bool = None,
+    left_broken: bool = False,
     map=None,
-    right_broken: bool = None,
-    right_broken_show_next: bool = None,
+    right_broken: bool = False,
+    right_broken_show_next: bool = False,
     selector=_selectors.tleaves(),
     style: str = None,
-    zero_padding: bool = None,
+    zero_padding: bool = False,
 ) -> _commandclasses.GlissandoCommand:
     r"""
     Attaches glissando.
@@ -1903,7 +1903,7 @@ def metronome_mark(
     key: typing.Union[str, _indicators.Accelerando, _indicators.Ritardando],
     selector=_selectors.leaf(0),
     *,
-    redundant: bool = None,
+    redundant: bool = False,
 ) -> typing.Optional[_commandclasses.MetronomeMarkCommand]:
     """
     Attaches metronome mark matching ``key`` metronome mark manifest.

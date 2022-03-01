@@ -622,13 +622,13 @@ class Command:
     Command.
     """
 
-    deactivate: bool = None
+    deactivate: bool = False
     map: typing.Any = None
     match: typings.Indices = None
     measures: typings.SliceTyping = None
     scope: ScopeTyping = None
     selector: typing.Any = None
-    tag_measure_number: bool = None
+    tag_measure_number: bool = False
     tags: typing.List[typing.Optional[abjad.Tag]] = None
 
     def __post_init__(self):
@@ -1264,8 +1264,8 @@ def tag(
     tags: typing.Union[abjad.Tag, typing.List[abjad.Tag]],
     command: CommandTyping,
     *,
-    deactivate: bool = None,
-    tag_measure_number: bool = None,
+    deactivate: bool = False,
+    tag_measure_number: bool = False,
 ) -> CommandTyping:
     """
     Appends each tag in ``tags`` to ``command``.

@@ -634,45 +634,39 @@ class LMR:
     """
 
     left_counts: typing.Sequence[int] = None
-    left_cyclic: bool = None
+    left_cyclic: bool = False
     left_length: int = None
-    left_reversed: bool = None
+    left_reversed: bool = False
     middle_counts: typing.Sequence[int] = None
-    middle_cyclic: bool = None
-    middle_reversed: bool = None
+    middle_cyclic: bool = False
+    middle_reversed: bool = False
     priority: abjad.HorizontalAlignment = None
     right_counts: typing.Sequence[int] = None
-    right_cyclic: bool = None
+    right_cyclic: bool = False
     right_length: int = None
-    right_reversed: bool = None
+    right_reversed: bool = False
 
     def __post_init__(self):
         if self.left_counts is not None:
             assert abjad.math.all_are_positive_integers(self.left_counts)
-        if self.left_cyclic is not None:
-            self.left_cyclic = bool(self.left_cyclic)
+        self.left_cyclic = bool(self.left_cyclic)
         if self.left_length is not None:
             self.left_length = int(self.left_length)
             assert 0 <= self.left_length, repr(self.left_length)
-        if self.left_reversed is not None:
-            self.left_reversed = bool(self.left_reversed)
+        self.left_reversed = bool(self.left_reversed)
         if self.middle_counts is not None:
             assert abjad.math.all_are_positive_integers(self.middle_counts)
-        if self.middle_cyclic is not None:
-            self.middle_cyclic = bool(self.middle_cyclic)
-        if self.middle_reversed is not None:
-            self.middle_reversed = bool(self.middle_reversed)
+        self.middle_cyclic = bool(self.middle_cyclic)
+        self.middle_reversed = bool(self.middle_reversed)
         if self.priority is not None:
             assert self.priority in (abjad.Left, abjad.Right)
         if self.right_counts is not None:
             assert abjad.math.all_are_positive_integers(self.right_counts)
-        if self.right_cyclic is not None:
-            self.right_cyclic = bool(self.right_cyclic)
+        self.right_cyclic = bool(self.right_cyclic)
         if self.right_length is not None:
             self.right_length = int(self.right_length)
             assert 0 <= self.right_length, repr(self.right_length)
-        if self.right_reversed is not None:
-            self.right_reversed = bool(self.right_reversed)
+        self.right_reversed = bool(self.right_reversed)
 
     def __call__(self, sequence: typing.Union[list, abjad.Segment] = None):
         assert isinstance(sequence, (list, abjad.Segment)), repr(sequence)
@@ -778,7 +772,7 @@ class Acciaccatura:
     ..  container:: example
 
         >>> baca.Acciaccatura()
-        Acciaccatura(durations=[Duration(1, 16)], lmr=LMR(left_counts=None, left_cyclic=None, left_length=None, left_reversed=None, middle_counts=None, middle_cyclic=None, middle_reversed=None, priority=None, right_counts=None, right_cyclic=None, right_length=None, right_reversed=None))
+        Acciaccatura(durations=[Duration(1, 16)], lmr=LMR(left_counts=None, left_cyclic=False, left_length=None, left_reversed=False, middle_counts=None, middle_cyclic=False, middle_reversed=False, priority=None, right_counts=None, right_cyclic=False, right_length=None, right_reversed=False))
 
     ..  container:: example
 
@@ -1532,7 +1526,7 @@ class Anchor:
     ..  container:: example
 
         >>> baca.Anchor()
-        Anchor(figure_name=None, local_selector=None, remote_selector=None, remote_voice_name=None, use_remote_stop_offset=None)
+        Anchor(figure_name=None, local_selector=None, remote_selector=None, remote_voice_name=None, use_remote_stop_offset=False)
 
     ``use_remote_stop_offset`` is true when contribution anchors to remote selection stop
     offset; otherwise anchors to remote selection start offset.
@@ -1542,7 +1536,7 @@ class Anchor:
     local_selector: typing.Any = None
     remote_selector: typing.Any = None
     remote_voice_name: str = None
-    use_remote_stop_offset: bool = None
+    use_remote_stop_offset: bool = False
 
     def __post_init__(self):
         if self.figure_name is not None:
@@ -1555,8 +1549,7 @@ class Anchor:
             self.remote_voice_name, str
         ):
             raise TypeError(f"must be string: {self.remote_voice_name!r}.")
-        if self.use_remote_stop_offset is not None:
-            self.use_remote_stop_offset = bool(self.use_remote_stop_offset)
+        self.use_remote_stop_offset = bool(self.use_remote_stop_offset)
 
 
 class Coat:
@@ -1648,11 +1641,11 @@ class Imbrication:
         voice_name: str,
         segment: typing.List[int] = None,
         *commands,
-        allow_unused_pitches: bool = None,
-        by_pitch_class: bool = None,
-        hocket: bool = None,
+        allow_unused_pitches: bool = False,
+        by_pitch_class: bool = False,
+        hocket: bool = False,
         selector=None,
-        truncate_ties: bool = None,
+        truncate_ties: bool = False,
     ) -> None:
         assert isinstance(voice_name, str), repr(voice_name)
         self._voice_name = voice_name
@@ -1660,22 +1653,14 @@ class Imbrication:
             assert isinstance(segment, list), repr(segment)
         self._segment = segment
         self._commands = commands
-        if allow_unused_pitches is not None:
-            allow_unused_pitches = bool(allow_unused_pitches)
-        self._allow_unused_pitches = allow_unused_pitches
-        if by_pitch_class is not None:
-            by_pitch_class = bool(by_pitch_class)
-        self._by_pitch_class = by_pitch_class
-        if hocket is not None:
-            hocket = bool(hocket)
-        self._hocket = hocket
+        self._allow_unused_pitches = bool(allow_unused_pitches)
+        self._by_pitch_class = bool(by_pitch_class)
+        self._hocket = bool(hocket)
         if selector is not None:
             if not callable(selector):
                 raise TypeError(f"callable or none only: {selector!r}.")
         self._selector = selector
-        if truncate_ties is not None:
-            truncate_ties = bool(truncate_ties)
-        self._truncate_ties = truncate_ties
+        self._truncate_ties = bool(truncate_ties)
 
     ### SPECIAL METHODS ###
 
@@ -2693,7 +2678,7 @@ class FigureAccumulator:
         anchor: Anchor = None,
         figure_name: str = "",
         figure_name_direction=None,
-        hide_time_signature: bool = None,
+        hide_time_signature: bool | None = None,
         signature: int = None,
     ) -> None:
         """
@@ -2996,7 +2981,7 @@ class Contribution:
     voice_to_selection: typing.Dict[str, abjad.Selection]
     anchor: Anchor = None
     figure_name: str = None
-    hide_time_signature: bool = None
+    hide_time_signature: bool | None = None
     time_signature: abjad.TimeSignature = None
 
     def __post_init__(self):
@@ -3276,7 +3261,7 @@ class RestAffix:
     ..  container:: example
 
         >>> baca.RestAffix()
-        RestAffix(pattern=None, prefix=None, skips_instead_of_rests=None, suffix=None)
+        RestAffix(pattern=None, prefix=None, skips_instead_of_rests=False, suffix=None)
 
     ..  container:: example
 
@@ -3612,7 +3597,7 @@ class RestAffix:
 
     pattern: abjad.Pattern = None
     prefix: typing.Sequence[int] = None
-    skips_instead_of_rests: bool = None
+    skips_instead_of_rests: bool = False
     suffix: typing.Sequence[int] = None
 
     def __post_init__(self):
@@ -3620,8 +3605,7 @@ class RestAffix:
             raise TypeError(f"pattern or none: {self.pattern!r}.")
         if self.prefix is not None:
             assert all(isinstance(_, int) for _ in self.prefix)
-        if self.skips_instead_of_rests is not None:
-            self.skips_instead_of_rests = bool(self.skips_instead_of_rests)
+        self.skips_instead_of_rests = bool(self.skips_instead_of_rests)
         if self.suffix is not None:
             assert all(isinstance(_, int) for _ in self.suffix)
 
@@ -5827,7 +5811,7 @@ class FigureMaker:
     talea: rmakers.Talea
     acciaccatura: Acciaccatura = None
     affix: RestAffix = None
-    restart_talea: bool = None
+    restart_talea: bool = False
     signature: int = None
     spelling: rmakers.Spelling = None
     treatments: typing.Sequence = None
@@ -5846,8 +5830,7 @@ class FigureMaker:
                 raise Exception(message)
         self._next_attack = 0
         self._next_segment = 0
-        if self.restart_talea is not None:
-            self.restart_talea = bool(self.restart_talea)
+        self.restart_talea = bool(self.restart_talea)
         if self.signature is not None:
             assert isinstance(self.signature, int), repr(self.signature)
         if self.spelling is not None:
@@ -6848,11 +6831,11 @@ def imbricate(
     voice_name: str,
     segment: typing.List,
     *specifiers: typing.Any,
-    allow_unused_pitches: bool = None,
-    by_pitch_class: bool = None,
-    hocket: bool = None,
+    allow_unused_pitches: bool = False,
+    by_pitch_class: bool = False,
+    hocket: bool = False,
     selector=None,
-    truncate_ties: bool = None,
+    truncate_ties: bool = False,
 ):
     r"""
     Imbricates ``segment`` in voice with ``voice_name``.
@@ -7975,17 +7958,17 @@ def imbricate(
 def lmr(
     *,
     left_counts: typing.Sequence[int] = None,
-    left_cyclic: bool = None,
+    left_cyclic: bool = False,
     left_length: int = None,
-    left_reversed: bool = None,
+    left_reversed: bool = False,
     middle_counts: typing.Sequence[int] = None,
-    middle_cyclic: bool = None,
-    middle_reversed: bool = None,
+    middle_cyclic: bool = False,
+    middle_reversed: bool = False,
     priority: abjad.HorizontalAlignment = None,
     right_counts: typing.Sequence[int] = None,
-    right_cyclic: bool = None,
+    right_cyclic: bool = False,
     right_length: int = None,
-    right_reversed: bool = None,
+    right_reversed: bool = False,
 ) -> LMR:
     """
     Makes left-middle-right.
@@ -8139,7 +8122,7 @@ def figure(
     *,
     acciaccatura: typing.Union[bool, Acciaccatura, LMR] = None,
     affix: RestAffix = None,
-    restart_talea: bool = None,
+    restart_talea: bool = False,
     signature: int = None,
     spelling: rmakers.Spelling = None,
     treatments: typing.Sequence = None,

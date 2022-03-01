@@ -401,7 +401,7 @@ class BCPCommand(_scoping.Command):
 
     bcps: typing.Sequence[abjad.IntegerPair] = None
     bow_change_tweaks: abjad.IndexedTweakManagers = None
-    final_spanner: bool = None
+    final_spanner: bool = False
     helper: typing.Callable = None
     tweaks: abjad.IndexedTweakManagers = None
 
@@ -410,8 +410,7 @@ class BCPCommand(_scoping.Command):
         if self.bcps is None:
             _validate_bcps(self.bcps)
         _scoping.validate_indexed_tweaks(self.bow_change_tweaks)
-        if self.final_spanner is not None:
-            self.final_spanner = bool(self.final_spanner)
+        self.final_spanner = bool(self.final_spanner)
         if self.helper is not None:
             assert callable(self.helper), repr(self.helper)
         _scoping.validate_indexed_tweaks(self.tweaks)
@@ -588,7 +587,7 @@ class ColorCommand(_scoping.Command):
     Color command.
     """
 
-    lone: bool = None
+    lone: bool = False
 
     def __post_init__(self):
         assert self.selector is not None
@@ -733,18 +732,18 @@ class GlissandoCommand(_scoping.Command):
     Glissando command.
     """
 
-    allow_repeats: bool = None
-    allow_ties: bool = None
-    hide_middle_note_heads: bool = None
-    hide_middle_stems: bool = None
+    allow_repeats: bool = False
+    allow_ties: bool = False
+    hide_middle_note_heads: bool = False
+    hide_middle_stems: bool = False
     hide_stem_selector: typing.Callable = None
-    left_broken: bool = None
-    parenthesize_repeats: bool = None
-    right_broken: bool = None
-    right_broken_show_next: bool = None
+    left_broken: bool = False
+    parenthesize_repeats: bool = False
+    right_broken: bool = False
+    right_broken_show_next: bool = False
     selector: typing.Any = _selectors.tleaves()
     tweaks: abjad.IndexedTweakManagers = None
-    zero_padding: bool = None
+    zero_padding: bool = False
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
@@ -864,17 +863,16 @@ class IndicatorCommand(_scoping.Command):
 
     indicators: typing.List[typing.Any] = None
     context: str = None
-    do_not_test: bool = None
+    do_not_test: bool = False
     predicate: typing.Callable = None
-    redundant: bool = None
+    redundant: bool = False
     tweaks: abjad.IndexedTweakManagers = None
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
         if self.context is not None:
             assert isinstance(self.context, str), repr(self.context)
-        if self.do_not_test is not None:
-            self.do_not_test = bool(self.do_not_test)
+        self.do_not_test = bool(self.do_not_test)
         indicators_ = None
         if self.indicators is not None:
             if isinstance(self.indicators, collections.abc.Iterable):
@@ -882,8 +880,7 @@ class IndicatorCommand(_scoping.Command):
             else:
                 indicators_ = abjad.CyclicTuple([self.indicators])
         self.indicators = indicators_
-        if self.redundant is not None:
-            self.redundant = bool(self.redundant)
+        self.redundant = bool(self.redundant)
         _scoping.validate_indexed_tweaks(self.tweaks)
 
     __repr__ = _scoping.Command.__repr__
@@ -979,7 +976,7 @@ class MetronomeMarkCommand(_scoping.Command):
     """
 
     key: str | _indicators.Accelerando | _indicators.Ritardando = None
-    redundant: bool = None
+    redundant: bool = False
     selector: typing.Any = _selectors.leaf(0)
 
     def __post_init__(self):
@@ -987,8 +984,7 @@ class MetronomeMarkCommand(_scoping.Command):
         prototype = (str, _indicators.Accelerando, _indicators.Ritardando)
         if self.key is not None:
             assert isinstance(self.key, prototype), repr(self.key)
-        if self.redundant is not None:
-            self.redundant = bool(self.redundant)
+        self.redundant = bool(self.redundant)
 
     def _call(self, argument=None) -> None:
         if argument is None:
@@ -1141,18 +1137,15 @@ class AccidentalAdjustmentCommand(_scoping.Command):
 
     """
 
-    cautionary: bool = None
-    forced: bool = None
-    parenthesized: bool = None
+    cautionary: bool = False
+    forced: bool = False
+    parenthesized: bool = False
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
-        if self.cautionary is not None:
-            self.cautionary = bool(self.cautionary)
-        if self.forced is not None:
-            self.forced = bool(self.forced)
-        if self.parenthesized is not None:
-            self.parenthesized = bool(self.parenthesized)
+        self.cautionary = bool(self.cautionary)
+        self.forced = bool(self.forced)
+        self.parenthesized = bool(self.parenthesized)
 
     __repr__ = _scoping.Command.__repr__
 
@@ -1802,14 +1795,14 @@ class ClusterCommand(_scoping.Command):
 
     """
 
-    hide_flat_markup: bool = None
+    hide_flat_markup: bool = False
     selector: typing.Any = _selectors.plts()
     start_pitch: typing.Any = None
     widths: typing.Any = None
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
-        assert isinstance(self.hide_flat_markup, (bool, type(None)))
+        self.hide_flat_markup = bool(self.hide_flat_markup)
         if self.start_pitch is not None:
             self.start_pitch = abjad.NamedPitch(self.start_pitch)
         assert abjad.math.all_are_nonnegative_integers(self.widths)
@@ -2705,35 +2698,27 @@ class PitchCommand(_scoping.Command):
 
     """
 
-    allow_octaves: bool = None
-    allow_out_of_range: bool = None
-    allow_repeats: bool = None
-    allow_repitch: bool = None
-    mock: bool = None
-    cyclic: bool = None
-    do_not_transpose: bool = None
-    ignore_incomplete: bool = None
+    allow_octaves: bool = False
+    allow_out_of_range: bool = False
+    allow_repeats: bool = False
+    allow_repitch: bool = False
+    mock: bool = False
+    cyclic: bool = False
+    do_not_transpose: bool = False
+    ignore_incomplete: bool = False
     persist: str = None
     pitches: typing.Union[typing.Sequence, Loop] = None
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
-        if self.allow_octaves is not None:
-            self.allow_octaves = bool(self.allow_octaves)
-        if self.allow_out_of_range is not None:
-            self.allow_out_of_range = bool(self.allow_out_of_range)
-        if self.allow_repeats is not None:
-            self.allow_repeats = bool(self.allow_repeats)
-        if self.allow_repitch is not None:
-            self.allow_repitch = bool(self.allow_repitch)
-        if self.mock is not None:
-            self.mock = bool(self.mock)
-        if self.cyclic is not None:
-            self.cyclic = bool(self.cyclic)
-        if self.do_not_transpose is not None:
-            self.do_not_transpose = bool(self.do_not_transpose)
-        if self.ignore_incomplete is not None:
-            self.ignore_incomplete = bool(self.ignore_incomplete)
+        self.allow_octaves = bool(self.allow_octaves)
+        self.allow_out_of_range = bool(self.allow_out_of_range)
+        self.allow_repeats = bool(self.allow_repeats)
+        self.allow_repitch = bool(self.allow_repitch)
+        self.mock = bool(self.mock)
+        self.cyclic = bool(self.cyclic)
+        self.do_not_transpose = bool(self.do_not_transpose)
+        self.ignore_incomplete = bool(self.ignore_incomplete)
         self._mutated_score = False
         if self.persist is not None:
             assert isinstance(self.persist, str), repr(self.persist)
@@ -4559,32 +4544,26 @@ class StaffPositionCommand(_scoping.Command):
     """
 
     numbers: typing.Any = ()
-    allow_out_of_range: bool = None
-    allow_repeats: bool = None
-    allow_repitch: bool = None
-    exact: bool = None
-    mock: bool = None
+    allow_out_of_range: bool = False
+    allow_repeats: bool = False
+    allow_repitch: bool = False
+    exact: bool = False
+    mock: bool = False
     selector: typing.Any = _selectors.plts()
-    set_chord_pitches_equal: bool = None
+    set_chord_pitches_equal: bool = False
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
         prototype = (int, list, abjad.StaffPosition)
         assert all(isinstance(_, prototype) for _ in self.numbers), repr(self.numbers)
         self.numbers = abjad.CyclicTuple(self.numbers)
-        if self.allow_out_of_range is not None:
-            self.allow_out_of_range = bool(self.allow_out_of_range)
-        if self.allow_repeats is not None:
-            self.allow_repeats = bool(self.allow_repeats)
-        if self.allow_repitch is not None:
-            self.allow_repitch = bool(self.allow_repitch)
-        if self.mock is not None:
-            self.mock = bool(self.mock)
-        if self.exact is not None:
-            self.exact = bool(self.exact)
+        self.allow_out_of_range = bool(self.allow_out_of_range)
+        self.allow_repeats = bool(self.allow_repeats)
+        self.allow_repitch = bool(self.allow_repitch)
+        self.mock = bool(self.mock)
+        self.exact = bool(self.exact)
         self._mutated_score = False
-        if self.set_chord_pitches_equal is not None:
-            self.set_chord_pitches_equal = bool(self.set_chord_pitches_equal)
+        self.set_chord_pitches_equal = bool(self.set_chord_pitches_equal)
 
     def _call(self, argument=None) -> None:
         if argument is None:
@@ -4655,8 +4634,8 @@ class StaffPositionInterpolationCommand(_scoping.Command):
 
     start: typing.Union[int, str, abjad.NamedPitch, abjad.StaffPosition] = None
     stop: typing.Union[int, str, abjad.NamedPitch, abjad.StaffPosition] = None
-    mock: bool = None
-    pitches_instead_of_staff_positions: bool = None
+    mock: bool = False
+    pitches_instead_of_staff_positions: bool = False
     selector: typing.Any = _selectors.plts()
 
     def __post_init__(self):
@@ -4672,8 +4651,7 @@ class StaffPositionInterpolationCommand(_scoping.Command):
         elif isinstance(self.stop, int):
             self.stop = abjad.StaffPosition(self.stop)
         assert isinstance(self.stop, prototype), repr(self.stop)
-        if self.mock is not None:
-            self.mock = bool(self.mock)
+        self.mock = bool(self.mock)
         if self.pitches_instead_of_staff_positions is not None:
             self.pitches_instead_of_staff_positions = bool(
                 self.pitches_instead_of_staff_positions
@@ -5385,7 +5363,7 @@ def interpolate_pitches(
     stop: typing.Union[int, str, abjad.NamedPitch],
     selector=_selectors.plts(exclude=_const.HIDDEN),
     *,
-    mock: bool = None,
+    mock: bool = False,
 ) -> StaffPositionInterpolationCommand:
     r"""
     Interpolates from staff position of ``start`` pitch to staff position of ``stop``
@@ -5550,7 +5528,7 @@ def interpolate_staff_positions(
     stop: typing.Union[int, abjad.StaffPosition],
     selector=_selectors.plts(exclude=_const.HIDDEN),
     *,
-    mock: bool = None,
+    mock: bool = False,
 ) -> StaffPositionInterpolationCommand:
     r"""
     Interpolates from ``start`` staff position to ``stop`` staff position.
@@ -5603,10 +5581,10 @@ def pitch(
     pitch,
     selector=_selectors.plts(exclude=_const.HIDDEN),
     *,
-    allow_out_of_range: bool = None,
-    allow_repitch: bool = None,
-    mock: bool = None,
-    do_not_transpose: bool = None,
+    allow_out_of_range: bool = False,
+    allow_repitch: bool = False,
+    mock: bool = False,
+    do_not_transpose: bool = False,
     persist: str = None,
 ) -> PitchCommand:
     r"""
@@ -5706,13 +5684,13 @@ def pitches(
     pitches,
     selector=_selectors.plts(exclude=_const.HIDDEN),
     *,
-    allow_octaves: bool = None,
-    allow_repeats: bool = None,
-    allow_repitch: bool = None,
-    mock: bool = None,
-    do_not_transpose: bool = None,
-    exact: bool = None,
-    ignore_incomplete: bool = None,
+    allow_octaves: bool = False,
+    allow_repeats: bool = False,
+    allow_repitch: bool = False,
+    mock: bool = False,
+    do_not_transpose: bool = False,
+    exact: bool = False,
+    ignore_incomplete: bool = False,
     persist: str = None,
 ) -> PitchCommand:
     """
@@ -6244,10 +6222,10 @@ def staff_position(
     argument: typing.Union[int, list, abjad.StaffPosition],
     selector=_selectors.plts(exclude=_const.HIDDEN),
     *,
-    allow_out_of_range: bool = None,
-    allow_repitch: bool = None,
-    mock: bool = None,
-    set_chord_pitches_equal: bool = None,
+    allow_out_of_range: bool = False,
+    allow_repitch: bool = False,
+    mock: bool = False,
+    set_chord_pitches_equal: bool = False,
 ) -> StaffPositionCommand:
     """
     Makes staff position command; allows repeats.
@@ -6270,10 +6248,10 @@ def staff_positions(
     numbers,
     selector=_selectors.plts(exclude=_const.HIDDEN),
     *,
-    allow_out_of_range: bool = None,
-    allow_repeats: bool = None,
-    mock: bool = None,
-    exact: bool = None,
+    allow_out_of_range: bool = False,
+    allow_repeats: bool = False,
+    mock: bool = False,
+    exact: bool = False,
 ) -> StaffPositionCommand:
     """
     Makes staff position command; does not allow repeats.

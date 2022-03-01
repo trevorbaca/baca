@@ -25,7 +25,7 @@ class OverrideCommand(_scoping.Command):
 
     """
 
-    after: bool = None
+    after: bool = False
     allowlist: typing.Tuple[type] = None
     attribute: str = None
     blocklist: typing.Tuple[type] = None
@@ -36,8 +36,7 @@ class OverrideCommand(_scoping.Command):
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
-        if self.after is not None:
-            self.after = bool(self.after)
+        self.after = bool(self.after)
         if self.allowlist is not None:
             assert isinstance(self.allowlist, tuple), repr(self.allowlist)
             assert all(issubclass(_, abjad.Leaf) for _ in self.allowlist)
@@ -226,7 +225,7 @@ def bar_line_color(
     color: str,
     selector=_selectors.leaf(0),
     *,
-    after: bool = None,
+    after: bool = False,
     context: str = "Score",
 ) -> OverrideCommand:
     """
@@ -247,7 +246,7 @@ def bar_line_extra_offset(
     pair: abjad.NumberPair,
     selector=_selectors.leaf(0),
     *,
-    after: bool = None,
+    after: bool = False,
     context: str = "Score",
 ) -> OverrideCommand:
     """
@@ -370,7 +369,7 @@ def bar_line_x_extent(
     pair: abjad.NumberPair,
     selector=_selectors.leaf(0),
     *,
-    after: bool = None,
+    after: bool = False,
     context: str = "Score",
     measures: typings.SliceTyping = None,
 ) -> OverrideCommand:
@@ -3624,7 +3623,7 @@ def span_bar_color(
     color: str,
     selector=_selectors.leaf(0),
     *,
-    after: bool = None,
+    after: bool = False,
     context: str = "Score",
 ) -> OverrideCommand:
     """
@@ -3645,7 +3644,7 @@ def span_bar_extra_offset(
     pair: abjad.NumberPair,
     selector=_selectors.leaf(0),
     *,
-    after: bool = None,
+    after: bool = False,
     context: str = "Score",
 ) -> OverrideCommand:
     """

@@ -118,7 +118,7 @@ class PersistentOverride:
         ... )
 
         >>> override
-        PersistentOverride(after=None, attribute='bar_extent', context='Staff', grob='bar_line', hide=None, value=(-2, 0))
+        PersistentOverride(after=False, attribute='bar_extent', context='Staff', grob='bar_line', hide=False, value=(-2, 0))
 
     ..  container:: example
 
@@ -219,26 +219,24 @@ class PersistentOverride:
 
     """
 
-    after: bool | None = None
+    after: bool = False
     attribute: str | None = None
     context: str | None = None
     grob: str | None = None
-    hide: bool | None = None
+    hide: bool = False
     value: str | None = None
 
     persistent = True
 
     def __post_init__(self):
-        if self.after is not None:
-            self.after = bool(self.after)
+        self.after = bool(self.after)
         if self.attribute is not None:
             assert isinstance(self.attribute, str), repr(self.attribute)
         if self.context is not None:
             assert isinstance(self.context, str), repr(self.context)
         if self.grob is not None:
             assert isinstance(self.grob, str), repr(self.grob)
-        if self.hide is not None:
-            self.hide = bool(self.hide)
+        self.hide = bool(self.hide)
 
     def _get_lilypond_format(self, context=None):
         if isinstance(context, abjad.Context):

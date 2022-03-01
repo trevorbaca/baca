@@ -307,23 +307,20 @@ class Cursor:
     """
 
     source: typing.Any
-    cyclic: bool | None = None
+    cyclic: bool = False
     position: int | None = None
-    singletons: bool | None = None
-    suppress_exception: bool | None = None
+    singletons: bool = False
+    suppress_exception: bool = False
 
     def __post_init__(self):
-        if self.cyclic is not None:
-            self.cyclic = bool(self.cyclic)
+        self.cyclic = bool(self.cyclic)
         self.source = self.source or ()
         assert isinstance(self.source, collections.abc.Iterable), repr(self.source)
         if self.cyclic:
             self.source = abjad.CyclicTuple(self.source)
         assert isinstance(self.position, (int, type(None))), repr(self.position)
-        if self.singletons is not None:
-            self.singletons = bool(self.singletons)
-        if self.suppress_exception is not None:
-            self.suppress_exception = bool(self.suppress_exception)
+        self.singletons = bool(self.singletons)
+        self.suppress_exception = bool(self.suppress_exception)
 
     def __getitem__(self, argument):
         """
@@ -447,7 +444,7 @@ class Cursor:
             >>> cursor = baca.Cursor.from_pitch_class_segments(number_lists)
 
             >>> cursor
-            Cursor(source=CyclicTuple(items=(PitchClassSegment(items=[1, 1.5, 11], item_class=NumberedPitchClass), PitchClassSegment(items=[10, 2, 1.5], item_class=NumberedPitchClass))), cyclic=True, position=None, singletons=None, suppress_exception=None)
+            Cursor(source=CyclicTuple(items=(PitchClassSegment(items=[1, 1.5, 11], item_class=NumberedPitchClass), PitchClassSegment(items=[10, 2, 1.5], item_class=NumberedPitchClass))), cyclic=True, position=None, singletons=False, suppress_exception=False)
 
         Coerces numeric ``pitch_class_segments``
 

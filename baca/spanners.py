@@ -18,21 +18,18 @@ class SpannerIndicatorCommand(_scoping.Command):
     Spanner indicator command.
     """
 
-    detach_first: bool = None
-    left_broken: bool = None
-    right_broken: bool = None
+    detach_first: bool = False
+    left_broken: bool = False
+    right_broken: bool = False
     start_indicator: typing.Any = None
     stop_indicator: typing.Any = None
     tweaks: abjad.IndexedTweakManagers = None
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
-        if self.detach_first is not None:
-            self.detach_first = bool(self.detach_first)
-        if self.left_broken is not None:
-            self.left_broken = bool(self.left_broken)
-        if self.right_broken is not None:
-            self.right_broken = bool(self.right_broken)
+        self.detach_first = bool(self.detach_first)
+        self.left_broken = bool(self.left_broken)
+        self.right_broken = bool(self.right_broken)
         _scoping.validate_indexed_tweaks(self.tweaks)
 
     def _call(self, argument=None):
@@ -207,7 +204,7 @@ def ottava(
     start_ottava: abjad.Ottava = abjad.Ottava(n=1),
     stop_ottava: abjad.Ottava = abjad.Ottava(n=0, format_slot="after"),
     *,
-    right_broken: bool = None,
+    right_broken: bool = False,
     selector=_selectors.tleaves(),
 ) -> SpannerIndicatorCommand:
     r"""
@@ -586,10 +583,10 @@ def sustain_pedal(
 def trill_spanner(
     *tweaks: abjad.TweakInterface,
     alteration: str = None,
-    harmonic: bool = None,
-    left_broken: bool = None,
+    harmonic: bool = False,
+    left_broken: bool = False,
     map=None,
-    right_broken: bool = None,
+    right_broken: bool = False,
     selector=_selectors.tleaves(rleak=True),
     start_trill_span: abjad.StartTrillSpan = None,
     stop_trill_span: abjad.StopTrillSpan = None,

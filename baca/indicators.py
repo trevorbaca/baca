@@ -60,7 +60,7 @@ class Accelerando:
         Tweaks can set at initialization:
 
         >>> baca.Accelerando(tweaks=abjad.tweak("#blue").color)
-        Accelerando(hide=None, markup=None, tweaks=TweakInterface(('_literal', None), ('color', '#blue')))
+        Accelerando(hide=False, markup=None, tweaks=TweakInterface(('_literal', False), ('color', '#blue')))
 
     ..  container:: example
 
@@ -69,11 +69,11 @@ class Accelerando:
         >>> accelerando = baca.Accelerando()
         >>> abjad.tweak(accelerando).color = "#blue"
         >>> accelerando
-        Accelerando(hide=None, markup=None, tweaks=TweakInterface(('_literal', None), ('color', '#blue')))
+        Accelerando(hide=False, markup=None, tweaks=TweakInterface(('_literal', False), ('color', '#blue')))
 
         >>> import copy
         >>> copy.copy(accelerando)
-        Accelerando(hide=None, markup=None, tweaks=TweakInterface(('_literal', None), ('color', '#blue')))
+        Accelerando(hide=False, markup=None, tweaks=TweakInterface(('_literal', False), ('color', '#blue')))
 
     Tweak extra-offset to align accelerando markup with other metronome mark spanner
     segments.
@@ -83,7 +83,7 @@ class Accelerando:
     Accelerandi are not followed by any type of dashed line.
     """
 
-    hide: bool = None
+    hide: bool = False
     markup: abjad.Markup = None
     tweaks: abjad.TweakInterface = None
 
@@ -93,8 +93,7 @@ class Accelerando:
     persistent = True
 
     def __post_init__(self):
-        if self.hide is not None:
-            self.hide = bool(self.hide)
+        self.hide = bool(self.hide)
         if self.markup is not None:
             assert isinstance(self.markup, abjad.Markup), repr(self.markup)
         self.tweaks = abjad.TweakInterface.set_dataclass_tweaks(self, self.tweaks)
@@ -186,7 +185,7 @@ class BarExtent:
     """
 
     line_count: int
-    hide: bool | None = None
+    hide: bool = False
 
     context = "Staff"
     persistent = True
@@ -195,8 +194,7 @@ class BarExtent:
         if not isinstance(self.line_count, int):
             raise Exception(f"line count must be integer (not {self.line_count!r}).")
         assert 0 <= self.line_count, repr(self.line_count)
-        if self.hide is not None:
-            self.hide = bool(self.hide)
+        self.hide = bool(self.hide)
 
     def _get_bar_extent(self, component):
         if not isinstance(component, abjad.Leaf):
@@ -375,7 +373,7 @@ class Ritardando:
         Tweaks can set at initialization:
 
         >>> baca.Ritardando(tweaks=abjad.tweak("#blue").color)
-        Ritardando(hide=None, markup=None, tweaks=TweakInterface(('_literal', None), ('color', '#blue')))
+        Ritardando(hide=False, markup=None, tweaks=TweakInterface(('_literal', False), ('color', '#blue')))
 
     ..  container:: example
 
@@ -384,11 +382,11 @@ class Ritardando:
         >>> ritardando = baca.Ritardando()
         >>> abjad.tweak(ritardando).color = "#blue"
         >>> ritardando
-        Ritardando(hide=None, markup=None, tweaks=TweakInterface(('_literal', None), ('color', '#blue')))
+        Ritardando(hide=False, markup=None, tweaks=TweakInterface(('_literal', False), ('color', '#blue')))
 
         >>> import copy
         >>> copy.copy(ritardando)
-        Ritardando(hide=None, markup=None, tweaks=TweakInterface(('_literal', None), ('color', '#blue')))
+        Ritardando(hide=False, markup=None, tweaks=TweakInterface(('_literal', False), ('color', '#blue')))
 
         Tweak extra-offset to align ritardando markup with other metronome mark spanner
         segments.
@@ -398,13 +396,12 @@ class Ritardando:
     Ritardandi are not followed by any type of dashed line or other spanner.
     """
 
-    hide: bool = None
+    hide: bool = False
     markup: abjad.Markup = None
     tweaks: abjad.TweakInterface = None
 
     def __post_init__(self):
-        if self.hide is not None:
-            self.hide = bool(self.hide)
+        self.hide = bool(self.hide)
         if self.markup is not None:
             assert isinstance(self.markup, abjad.Markup), repr(self.markup)
         self.tweaks = abjad.TweakInterface.set_dataclass_tweaks(self, self.tweaks)
@@ -501,7 +498,7 @@ class StaffLines:
     """
 
     line_count: int
-    hide: bool | None = None
+    hide: bool = False
 
     context = "Staff"
     persistent = True

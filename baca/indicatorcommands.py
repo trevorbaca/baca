@@ -104,7 +104,7 @@ def alternate_bow_strokes(
     selector=_selectors.pheads(exclude=_const.HIDDEN),
     *tweaks: abjad.TweakInterface,
     downbow_first: bool = True,
-    full: bool = None,
+    full: bool = False,
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches alternate bow strokes.
@@ -522,7 +522,7 @@ def clef(
     clef: str = "treble",
     selector=_selectors.leaf(0),
     *,
-    redundant: bool = None,
+    redundant: bool = False,
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches clef.
@@ -814,7 +814,7 @@ def down_arpeggio(
 def down_bow(
     selector=_selectors.phead(0, exclude=_const.HIDDEN),
     *tweaks: abjad.TweakInterface,
-    full: bool = None,
+    full: bool = False,
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches down-bow.
@@ -1819,7 +1819,7 @@ def rehearsal_mark(
 
 
 def repeat_tie(
-    selector, *, allow_rest: bool = None
+    selector, *, allow_rest: bool = False
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches repeat-tie.
@@ -2551,7 +2551,7 @@ def start_markup(
     *,
     context: str = "Staff",
     hcenter_in: abjad.Number = None,
-    literal: bool = None,
+    literal: bool = False,
 ) -> _commandclasses.IndicatorCommand:
     """
     Attaches start markup.
@@ -3156,7 +3156,7 @@ def up_arpeggio(
 def up_bow(
     selector=_selectors.phead(0, exclude=_const.HIDDEN),
     *tweaks: abjad.TweakInterface,
-    full: bool = None,
+    full: bool = False,
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches up-bow.
