@@ -10,6 +10,11 @@ import abjadext
 import baca
 from abjadext import rmakers
 
+try:
+    from abjadext import nauert
+except ImportError:
+    nauert = None
+
 
 def _doctest_files(current_directory, files, globals_, report_only_first_failure=False):
     if report_only_first_failure:
@@ -75,6 +80,8 @@ def _get_globals():
     globals_["abjad"] = abjad
     globals_["abjadext"] = abjadext
     globals_["baca"] = baca
+    if nauert is not None:
+        globals_["nauert"] = nauert
     globals_["rmakers"] = rmakers
     return globals_
 
