@@ -40,26 +40,26 @@ def _print_results(path, results):
         baca.build._print_error(f"FAIL: {path.name} changed ...")
 
 
-def _test_segment(segment_directory):
-    assert segment_directory.parent.name == "segments", repr(segment_directory)
-    metadata = baca.path.get_metadata(segment_directory)
+def _test_section(section_directory):
+    assert section_directory.parent.name == "sections", repr(section_directory)
+    metadata = baca.path.get_metadata(section_directory)
     names = ["music.ily", "music.ly", "music.pdf"]
     if metadata.get("first_metronome_mark") is not False:
         names.extend(["clicktrack.midi", "music.midi"])
     names.sort()
-    layout_py = segment_directory / "layout.py"
+    layout_py = section_directory / "layout.py"
     if layout_py.exists():
         names.append("layout.ly")
     names.sort()
     path_to_results = {}
     for name in names:
-        path = segment_directory / name
+        path = section_directory / name
         results = types.SimpleNamespace()
         path_to_results[path] = results
-    music_ly = segment_directory / "music.ly"
+    music_ly = section_directory / "music.ly"
     if music_ly.exists():
         music_ly.unlink()
-    music_ily = segment_directory / "music.ily"
+    music_ily = section_directory / "music.ily"
     if music_ily.exists():
         music_ily.unlink()
     if layout_py.exists():
@@ -69,9 +69,9 @@ def _test_segment(segment_directory):
     for path, results in path_to_results.items():
         results.exists = path.is_file()
         results.same = _capture_diff(path)
-    music_pdf = segment_directory / "music.pdf"
+    music_pdf = section_directory / "music.pdf"
     if not music_pdf.exists():
-        _music_ly_log = segment_directory / "_music_ly_log"
+        _music_ly_log = section_directory / "_music_ly_log"
         if _music_ly_log.exists():
             with open(".music.ly.log") as pointer:
                 lines = pointer.readlines()
@@ -90,17 +90,17 @@ def _test_segment(segment_directory):
 
 def main(current_directory):
     contents_directory = baca.path.get_contents_directory(current_directory)
-    segments_directory = contents_directory / "segments"
-    first_segment_directory = segments_directory / "01"
-    if not first_segment_directory.is_dir():
-        baca.build._print_error(f"Score contains no segments ...")
+    sections_directory = contents_directory / "sections"
+    first_section_directory = sections_directory / "01"
+    if not first_section_directory.is_dir():
+        baca.build._print_error(f"Score contains no sections ...")
         sys.exit(0)
     result = 0
-    for path in sorted(segments_directory.glob("[0-9]*")):
+    for path in sorted(sections_directory.glob("[0-9]*")):
         if not path.is_dir():
             continue
         os.chdir(path)
-        result_ = _test_segment(path)
+        result_ = _test_section(path)
         if result_ != 0:
             result = result_
         print()

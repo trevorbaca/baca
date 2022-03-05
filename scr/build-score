@@ -2,8 +2,8 @@
 import baca
 
 if __name__ == "__main__":
-    arguments = baca.build.arguments("--debug-segments")
+    arguments = baca.build.arguments("--debug-sections")
     baca.build.build_score(
         baca.build.directory(),
-        debug_segments=arguments.debug_segments,
+        debug_sections=arguments.debug_sections,
     )

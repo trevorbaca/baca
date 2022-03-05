@@ -359,7 +359,8 @@ def get_measure_profile_metadata(path) -> typing.Tuple[int, int, list]:
     Returns tuple of three metadata: first measure number; measure count; list of fermata
     measure numbers.
     """
-    if path.parent.parent.name == "segments":
+    # if path.parent.parent.name == "segments":
+    if path.parent.parent.name == "sections":
         string = "first_measure_number"
         first_measure_number = get_metadatum(path.parent, string)
         time_signatures = get_metadatum(path.parent, "time_signatures")
@@ -374,7 +375,8 @@ def get_measure_profile_metadata(path) -> typing.Tuple[int, int, list]:
         measure_count = 0
         fermata_measure_numbers = []
         contents_directory = get_contents_directory(path)
-        segments_directory = contents_directory / "segments"
+        # segments_directory = contents_directory / "segments"
+        segments_directory = contents_directory / "sections"
         segment_directories = list(sorted(segments_directory.glob("*")))
         for segment_directory in segment_directories:
             if not segment_directory.is_dir():

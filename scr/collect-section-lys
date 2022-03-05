@@ -8,5 +8,5 @@ if __name__ == "__main__":
     directory = os.getcwd()
     directory = pathlib.Path(directory)
     assert directory.parent.name == "builds", repr(directory)
-    _segments_directory = directory / "_segments"
-    baca.build.collect_segment_lys(_segments_directory)
+    _sections_directory = directory / "_sections"
+    baca.build.collect_section_lys(_sections_directory)

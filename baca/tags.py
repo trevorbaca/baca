@@ -278,7 +278,7 @@ def clef_color_tags(path=None):
         Segment:
 
         >>> import pathlib
-        >>> path = pathlib.Path("etude", "segments", "_")
+        >>> path = pathlib.Path("etude", "sections", "_")
         >>> for tag in baca.tags.clef_color_tags(path=path):
         ...     tag
         ...
@@ -293,9 +293,9 @@ def clef_color_tags(path=None):
 
     ..  container:: example
 
-        Segments:
+        Sections:
 
-        >>> path = pathlib.Path("etude", "segments")
+        >>> path = pathlib.Path("etude", "sections")
         >>> for tag in baca.tags.clef_color_tags(path=path):
         ...     tag
         ...
@@ -337,7 +337,7 @@ def clef_color_tags(path=None):
         REDUNDANT_CLEF_COLOR,
         REDUNDANT_CLEF_REDRAW_COLOR,
     ]
-    if path and path.parent.name != "segments" and path.name != "segments":
+    if path and path.parent.name != "sections" and path.name != "sections":
         tags.append(REAPPLIED_CLEF)
     return tags
 
@@ -644,7 +644,7 @@ def persistent_indicator_color_expression_tags(path=None):
 
         Segment:
 
-        >>> path = pathlib.Path("etude", "segments", "_")
+        >>> path = pathlib.Path("etude", "sections", "_")
         >>> tags = baca.tags.persistent_indicator_color_expression_tags(path)
         >>> for tag in tags:
         ...     tag
@@ -697,9 +697,9 @@ def persistent_indicator_color_expression_tags(path=None):
 
     ..  container:: example
 
-        Segments:
+        Sections:
 
-        >>> path = pathlib.Path("etude", "segments")
+        >>> path = pathlib.Path("etude", "sections")
         >>> tags = baca.tags.persistent_indicator_color_expression_tags(path)
         >>> for tag in tags:
         ...     tag
@@ -840,7 +840,7 @@ def persistent_indicator_color_suppression_tags(path=None):
         Segment:
 
         >>> import pathlib
-        >>> path = pathlib.Path("etude", "segments", "_")
+        >>> path = pathlib.Path("etude", "sections", "_")
         >>> tags = baca.tags.persistent_indicator_color_suppression_tags(path)
         >>> for tag in tags:
         ...     tag
@@ -1000,7 +1000,7 @@ def staff_lines_color_tags(path=None):
         Segment:
 
         >>> import pathlib
-        >>> path = pathlib.Path("etude", "segments", "_")
+        >>> path = pathlib.Path("etude", "sections", "_")
         >>> for tag in baca.tags.staff_lines_color_tags(path):
         ...     tag
         ...
@@ -1027,7 +1027,7 @@ def staff_lines_color_tags(path=None):
         REAPPLIED_STAFF_LINES_COLOR,
         REDUNDANT_STAFF_LINES_COLOR,
     ]
-    if path and path.parent.name != "segments":
+    if path and path.parent.name != "sections":
         tags.append(REAPPLIED_STAFF_LINES)
     return tags
 
@@ -1050,7 +1050,7 @@ def time_signature_color_tags(path=None):
         Segment:
 
         >>> import pathlib
-        >>> path = pathlib.Path("etude", "segments", "_")
+        >>> path = pathlib.Path("etude", "sections", "_")
         >>> for tag in baca.tags.time_signature_color_tags():
         ...     tag
         ...
@@ -1076,7 +1076,7 @@ def time_signature_color_tags(path=None):
         REAPPLIED_TIME_SIGNATURE_COLOR,
         REDUNDANT_TIME_SIGNATURE_COLOR,
     ]
-    if path and path.parent.name != "segments":
+    if path and path.parent.name != "sections":
         tags.append(REAPPLIED_TIME_SIGNATURE)
     return tags
 

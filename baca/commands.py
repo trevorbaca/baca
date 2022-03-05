@@ -1950,9 +1950,11 @@ def previous_metadata(path: str):
     # because Travis isn't configured for scores-directory calculations
     music_py = pathlib.Path(path)
     segment = pathlib.Path(music_py).parent
-    assert segment.parent.name == "segments", repr(segment)
+    # assert segment.parent.name == "segments", repr(segment)
+    assert segment.parent.name == "sections", repr(segment)
     segments = segment.parent
-    assert segments.name == "segments", repr(segments)
+    # assert segments.name == "segments", repr(segments)
+    assert segments.name == "sections", repr(segments)
     paths = list(sorted(segments.glob("*")))
     paths = [_ for _ in paths if not _.name.startswith(".")]
     paths = [_ for _ in paths if _.is_dir()]
