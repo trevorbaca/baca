@@ -2,7 +2,6 @@
 Array.
 """
 import copy
-import dataclasses
 import numbers
 import typing
 
@@ -2014,112 +2013,6 @@ class PitchArrayColumn:
             return 0
 
 
-@dataclasses.dataclass(slots=True)
-class PitchArrayList(abjad.TypedList):
-    """
-    Pitch array list.
-
-    ..  container:: example
-
-        A pitch array list:
-
-        >>> array_1 = baca.array.PitchArray([
-        ...   [1, (2, 1), ([-2, -1.5], 2)],
-        ...   [(7, 2), (6, 1), 1],
-        ... ])
-
-        >>> array_2 = baca.array.PitchArray([
-        ...   [1, 1, 1],
-        ...   [1, 1, 1],
-        ... ])
-
-        >>> arrays = [array_1, array_2]
-        >>> arrays = baca.array.PitchArrayList(arrays)
-
-        >>> arrays
-        PitchArrayList(items=[PitchArray(rows=(PitchArrayRow(cells=(PitchArrayCell(width=1), PitchArrayCell(pitches="d'", width=1), PitchArrayCell(pitches="bf bqf", width=2))), PitchArrayRow(cells=(PitchArrayCell(pitches="g'", width=2), PitchArrayCell(pitches="fs'", width=1), PitchArrayCell(width=1))))), PitchArray(rows=(PitchArrayRow(cells=(PitchArrayCell(width=1), PitchArrayCell(width=1), PitchArrayCell(width=1))), PitchArrayRow(cells=(PitchArrayCell(width=1), PitchArrayCell(width=1), PitchArrayCell(width=1)))))], item_class=None, keep_sorted=False)
-
-    """
-
-    def to_score(self) -> abjad.Score:
-        r"""
-        Makes score from pitch arrays.
-
-        ..  container:: example
-
-            >>> array_1 = baca.array.PitchArray([
-            ...   [1, (2, 1), ([-2, -1.5], 2)],
-            ...   [(7, 2), (6, 1), 1],
-            ... ])
-
-            >>> array_2 = baca.array.PitchArray([
-            ...   [1, 1, 1],
-            ...   [1, 1, 1],
-            ... ])
-
-            >>> arrays = [array_1, array_2]
-            >>> arrays = baca.array.PitchArrayList(arrays)
-
-            >>> score = arrays.to_score()
-            >>> abjad.show(score) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context StaffGroup = "Staff_Group"
-                    <<
-                        \context Staff = "Staff"
-                        {
-                            {
-                                \time 4/8
-                                r8
-                                d'8
-                                <bf bqf>4
-                            }
-                            {
-                                \time 3/8
-                                r8
-                                r8
-                                r8
-                            }
-                        }
-                        \context Staff = "Staff"
-                        {
-                            {
-                                \time 4/8
-                                g'4
-                                fs'8
-                                r8
-                            }
-                            {
-                                \time 3/8
-                                r8
-                                r8
-                                r8
-                            }
-                        }
-                    >>
-                >>
-
-        Creates one staff per pitch-array row.
-        """
-        score = abjad.Score(name="Score")
-        staff_group = abjad.StaffGroup(name="Staff_Group")
-        score.append(staff_group)
-        number_staves = self[0].depth
-        staff = abjad.Staff(name="Staff")
-        staves = abjad.mutate.copy(staff, number_staves)
-        staff_group.extend(staves)
-        for pitch_array in self:
-            measures = pitch_array.to_measures()
-            for staff, measure in zip(staves, measures):
-                staff.append(measure)
-        return score
-
-
 class PitchArrayRow:
     """
     Pitch array row.
@@ -2846,3 +2739,79 @@ class PitchArrayRow:
         if self.parent_array is not None:
             self.parent_array.remove_row(self)
         return self
+
+
+def pitch_arrays_to_score(pitch_arrays) -> abjad.Score:
+    r"""
+    Makes score from pitch arrays.
+
+    ..  container:: example
+
+        >>> array_1 = baca.array.PitchArray([
+        ...   [1, (2, 1), ([-2, -1.5], 2)],
+        ...   [(7, 2), (6, 1), 1],
+        ... ])
+
+        >>> array_2 = baca.array.PitchArray([
+        ...   [1, 1, 1],
+        ...   [1, 1, 1],
+        ... ])
+
+        >>> arrays = [array_1, array_2]
+        >>> score = baca.array.pitch_arrays_to_score(arrays)
+        >>> abjad.show(score) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context StaffGroup = "Staff_Group"
+                <<
+                    \context Staff = "Staff"
+                    {
+                        {
+                            \time 4/8
+                            r8
+                            d'8
+                            <bf bqf>4
+                        }
+                        {
+                            \time 3/8
+                            r8
+                            r8
+                            r8
+                        }
+                    }
+                    \context Staff = "Staff"
+                    {
+                        {
+                            \time 4/8
+                            g'4
+                            fs'8
+                            r8
+                        }
+                        {
+                            \time 3/8
+                            r8
+                            r8
+                            r8
+                        }
+                    }
+                >>
+            >>
+
+    """
+    score = abjad.Score(name="Score")
+    staff_group = abjad.StaffGroup(name="Staff_Group")
+    score.append(staff_group)
+    number_staves = pitch_arrays[0].depth
+    staff = abjad.Staff(name="Staff")
+    staves = abjad.mutate.copy(staff, number_staves)
+    staff_group.extend(staves)
+    for pitch_array in pitch_arrays:
+        measures = pitch_array.to_measures()
+        for staff, measure in zip(staves, measures):
+            staff.append(measure)
+    return score
