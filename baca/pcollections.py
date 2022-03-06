@@ -177,9 +177,8 @@ class ArpeggiationSpacingSpecifier:
                     pitches = _to_tightly_spaced_pitches_ascending(pitch_classes)
                 else:
                     pitches = _to_tightly_spaced_pitches_descending(pitch_classes)
-                collection_: CollectionTyping
                 if isinstance(pitch_class_collection, abjad.Set):
-                    collection_ = PitchSet(items=pitches)
+                    collection_ = abjad.PitchSet(items=pitches)
                 else:
                     collection_ = PitchSegment(items=pitches)
                 collections_.append(collection_)
@@ -598,7 +597,7 @@ class ChordalSpacingSpecifier:
                 pitch_classes.append(bass)
             pitches = _to_tightly_spaced_pitches_descending(pitch_classes)
         if isinstance(original_collection, abjad.Set):
-            return PitchSet(pitches)
+            return abjad.PitchSet(pitches)
         else:
             return PitchSegment(pitches)
 
@@ -615,7 +614,7 @@ def _to_baca_collection(collection):
         PitchClassSegment,
         abjad.PitchClassSet,
         PitchSegment,
-        PitchSet,
+        abjad.PitchSet,
     )
     if isinstance(collection, baca_prototype):
         pass
@@ -630,9 +629,9 @@ def _to_baca_collection(collection):
     elif isinstance(collection, abjad.PitchSegment):
         collection = PitchSegment(items=collection, item_class=collection.item_class)
     elif isinstance(collection, abjad.PitchSet):
-        collection = PitchSet(items=collection, item_class=collection.item_class)
+        collection = abjad.PitchSet(items=collection, item_class=collection.item_class)
     elif isinstance(collection, abjad.PitchSet):
-        collection = PitchSet(items=collection, item_class=collection.item_class)
+        collection = abjad.PitchSet(items=collection, item_class=collection.item_class)
     else:
         raise TypeError(collection)
     assert isinstance(collection, baca_prototype)
@@ -1754,175 +1753,6 @@ class PitchClassSegment(abjad.PitchClassSegment):
         """
         return list(self)
 
-    def space_down(self, bass=None, semitones=None, soprano=None):
-        r"""
-        Spaces segment down.
-
-        ..  container:: example
-
-            >>> segment = baca.PitchClassSegment([10, 11, 5, 6, 7])
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> voice = lilypond_file["Voice"]
-                >>> string = abjad.lilypond(voice)
-                >>> print(string)
-                \context Voice = "Voice"
-                {
-                    bf'8
-                    b'8
-                    f'8
-                    fs'8
-                    g'8
-                    \bar "|."
-                    \override Score.BarLine.transparent = ##f
-                }
-
-            >>> segment.space_down(bass=6, soprano=7)
-            PitchSegment(items=[19, 17, 11, 10, 6], item_class=NumberedPitch)
-
-            >>> segment = segment.space_down(bass=6, soprano=7)
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                \with
-                {
-                    \override BarLine.stencil = ##f
-                    \override Rest.transparent = ##t
-                    \override SpanBar.stencil = ##f
-                    \override TimeSignature.stencil = ##f
-                }
-                <<
-                    \context PianoStaff = "Piano_Staff"
-                    <<
-                        \context Staff = "Treble_Staff"
-                        {
-                            \clef "treble"
-                            g''1 * 1/8
-                            f''1 * 1/8
-                            b'1 * 1/8
-                            bf'1 * 1/8
-                            fs'1 * 1/8
-                        }
-                        \context Staff = "Bass_Staff"
-                        {
-                            \clef "bass"
-                            r1 * 1/8
-                            r1 * 1/8
-                            r1 * 1/8
-                            r1 * 1/8
-                            r1 * 1/8
-                        }
-                    >>
-                >>
-
-        Returns pitch segment.
-        """
-        specifier = ChordalSpacingSpecifier(
-            bass=bass,
-            direction=abjad.Down,
-            minimum_semitones=semitones,
-            soprano=soprano,
-        )
-        segments = specifier([self])
-        assert len(segments) == 1, repr(segments)
-        segment = segments[0]
-        if not isinstance(segment, PitchSegment):
-            raise TypeError(f"pitch segment only: {segment!r}.")
-        return segment
-
-    def space_up(self, bass=None, semitones=None, soprano=None):
-        r"""
-        Spaces segment up.
-
-        ..  container:: example
-
-            >>> segment = baca.PitchClassSegment([10, 11, 5, 6, 7])
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> voice = lilypond_file["Voice"]
-                >>> string = abjad.lilypond(voice)
-                >>> print(string)
-                \context Voice = "Voice"
-                {
-                    bf'8
-                    b'8
-                    f'8
-                    fs'8
-                    g'8
-                    \bar "|."
-                    \override Score.BarLine.transparent = ##f
-                }
-
-            >>> segment.space_up(bass=6, soprano=7)
-            PitchSegment(items=[6, 10, 11, 17, 19], item_class=NumberedPitch)
-
-            >>> segment = segment.space_up(bass=6, soprano=7)
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                \with
-                {
-                    \override BarLine.stencil = ##f
-                    \override Rest.transparent = ##t
-                    \override SpanBar.stencil = ##f
-                    \override TimeSignature.stencil = ##f
-                }
-                <<
-                    \context PianoStaff = "Piano_Staff"
-                    <<
-                        \context Staff = "Treble_Staff"
-                        {
-                            \clef "treble"
-                            fs'1 * 1/8
-                            bf'1 * 1/8
-                            b'1 * 1/8
-                            f''1 * 1/8
-                            g''1 * 1/8
-                        }
-                        \context Staff = "Bass_Staff"
-                        {
-                            \clef "bass"
-                            r1 * 1/8
-                            r1 * 1/8
-                            r1 * 1/8
-                            r1 * 1/8
-                            r1 * 1/8
-                        }
-                    >>
-                >>
-
-        Returns pitch segment.
-        """
-        specifier = ChordalSpacingSpecifier(
-            bass=bass,
-            direction=abjad.Up,
-            minimum_semitones=semitones,
-            soprano=soprano,
-        )
-        segments = specifier([self])
-        assert len(segments) == 1, repr(segments)
-        segment = segments[0]
-        assert isinstance(segment, PitchSegment)
-        return segment
-
 
 @dataclasses.dataclass
 class PitchSegment(abjad.PitchSegment):
@@ -2204,7 +2034,7 @@ class PitchSegment(abjad.PitchSegment):
 
         Returns pitch set.
         """
-        return PitchSet(items=self, item_class=self.item_class)
+        return abjad.PitchSet(items=self, item_class=self.item_class)
 
     def soprano_to_octave(self, n=4):
         r"""
@@ -2293,298 +2123,6 @@ class PitchSegment(abjad.PitchSegment):
         pitches = abjad.iterate.pitches(selection)
         segment = PitchSegment.from_pitches(pitches)
         return dataclasses.replace(self, items=segment)
-
-    def space_down(self, bass=None, semitones=None, soprano=None):
-        r"""
-        Spaces pitch segment down.
-
-        ..  container:: example
-
-            >>> segment = baca.PitchSegment([12, 14, 21, 22])
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \clef "treble"
-                        c''1 * 1/8
-                        d''1 * 1/8
-                        a''1 * 1/8
-                        bf''1 * 1/8
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \clef "bass"
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                    }
-                >>
-
-            >>> segment.space_down(bass=0)
-            PitchSegment(items=[14, 10, 9, 0], item_class=NumberedPitch)
-
-            >>> segment = segment.space_down(bass=0)
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \clef "treble"
-                        d''1 * 1/8
-                        bf'1 * 1/8
-                        a'1 * 1/8
-                        c'1 * 1/8
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \clef "bass"
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                    }
-                >>
-
-        ..  container:: example
-
-            With 2 in bass:
-
-            >>> segment = baca.PitchSegment([12, 14, 21, 22])
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \clef "treble"
-                        c''1 * 1/8
-                        d''1 * 1/8
-                        a''1 * 1/8
-                        bf''1 * 1/8
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \clef "bass"
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                    }
-                >>
-
-            >>> segment.space_down(bass=2)
-            PitchSegment(items=[12, 10, 9, 2], item_class=NumberedPitch)
-
-            >>> segment = segment.space_down(bass=2)
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \clef "treble"
-                        c''1 * 1/8
-                        bf'1 * 1/8
-                        a'1 * 1/8
-                        d'1 * 1/8
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \clef "bass"
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                    }
-                >>
-
-        Returns new pitch segment.
-        """
-        specifier = ChordalSpacingSpecifier(
-            bass=bass,
-            direction=abjad.Down,
-            minimum_semitones=semitones,
-            soprano=soprano,
-        )
-        result = specifier([self])
-        assert isinstance(result, list), repr(result)
-        assert len(result) == 1, repr(result)
-        segment = result[0]
-        return segment
-
-    def space_up(self, bass=None, semitones=None, soprano=None):
-        r"""
-        Spaces pitch segment up.
-
-        ..  container:: example
-
-            >>> segment = baca.PitchSegment([12, 14, 21, 22])
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \clef "treble"
-                        c''1 * 1/8
-                        d''1 * 1/8
-                        a''1 * 1/8
-                        bf''1 * 1/8
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \clef "bass"
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                    }
-                >>
-
-            >>> segment.space_up(bass=0)
-            PitchSegment(items=[0, 2, 9, 10], item_class=NumberedPitch)
-
-            >>> segment = segment.space_up(bass=0)
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \clef "treble"
-                        c'1 * 1/8
-                        d'1 * 1/8
-                        a'1 * 1/8
-                        bf'1 * 1/8
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \clef "bass"
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                    }
-                >>
-
-        ..  container:: example
-
-            With 2 in bass:
-
-            >>> segment = baca.PitchSegment([12, 14, 21, 22])
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \clef "treble"
-                        c''1 * 1/8
-                        d''1 * 1/8
-                        a''1 * 1/8
-                        bf''1 * 1/8
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \clef "bass"
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                    }
-                >>
-
-            >>> segment.space_up(bass=2)
-            PitchSegment(items=[2, 9, 10, 12], item_class=NumberedPitch)
-
-            >>> segment = segment.space_up(bass=2)
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \clef "treble"
-                        d'1 * 1/8
-                        a'1 * 1/8
-                        bf'1 * 1/8
-                        c''1 * 1/8
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \clef "bass"
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                    }
-                >>
-
-        Returns new pitch segment.
-        """
-        specifier = ChordalSpacingSpecifier(
-            bass=bass,
-            direction=abjad.Up,
-            minimum_semitones=semitones,
-            soprano=soprano,
-        )
-        result = specifier([self])
-        assert isinstance(result, list), repr(result)
-        assert len(result) == 1, repr(result)
-        segment = result[0]
-        return segment
 
     def split(self, pitch=0):
         r"""
@@ -2697,360 +2235,6 @@ class PitchSegment(abjad.PitchSegment):
         upper = dataclasses.replace(self, items=upper)
         lower = dataclasses.replace(self, items=lower)
         return upper, lower
-
-
-class PitchSet(abjad.PitchSet):
-    r"""
-    Pitch set.
-
-    ..  container:: example
-
-        Initializes set:
-
-        ..  container:: example
-
-            >>> setting = baca.PitchSet([-2, -1.5, 6, 7, -1.5, 7])
-            >>> lilypond_file = abjad.illustrate(setting)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                <<
-                    \context PianoStaff = "Piano_Staff"
-                    <<
-                        \context Staff = "Treble_Staff"
-                        {
-                            \context Voice = "Treble_Voice"
-                            {
-                                <fs' g'>1
-                            }
-                        }
-                        \context Staff = "Bass_Staff"
-                        {
-                            \context Voice = "Bass_Voice"
-                            {
-                                <bf bqf>1
-                            }
-                        }
-                    >>
-                >>
-
-    """
-
-    ### CLASS VARIABLES ###
-
-    __slots__ = ()
-
-    ### SPECIAL METHODS ###
-
-    def __eq__(self, argument):
-        """
-        Is true when segment equals ``argument``.
-
-        ..  container:: example
-
-            Works with Abjad pitch sets:
-
-            >>> set_1 = abjad.PitchSet([0, 1, 2, 3])
-            >>> set_2 = baca.PitchSet([0, 1, 2, 3])
-
-            >>> set_1 == set_2
-            True
-
-            >>> set_2 == set_1
-            True
-
-        """
-        if not issubclass(type(argument), type(self)) and not issubclass(
-            type(self), type(argument)
-        ):
-            return False
-        return self.items == argument.items
-
-    ### PUBLIC METHODS ###
-
-    def space_down(self, bass=None, semitones=None, soprano=None):
-        r"""
-        Spaces pitch set down.
-
-        ..  container:: example
-
-            >>> setting = baca.PitchSet([12, 14, 21, 22])
-            >>> lilypond_file = abjad.illustrate(setting)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \context Voice = "Treble_Voice"
-                        {
-                            <c'' d'' a'' bf''>1
-                        }
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \context Voice = "Bass_Voice"
-                        {
-                            s1
-                        }
-                    }
-                >>
-
-            >>> setting.space_down(bass=0)
-            PitchSet(items=[0, 9, 10, 14], item_class=abjad.NumberedPitch)
-
-            >>> setting = setting.space_down(bass=0)
-            >>> lilypond_file = abjad.illustrate(setting)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \context Voice = "Treble_Voice"
-                        {
-                            <c' a' bf' d''>1
-                        }
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \context Voice = "Bass_Voice"
-                        {
-                            s1
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            With 2 in bass:
-
-            >>> setting = baca.PitchSet([12, 14, 21, 22])
-            >>> lilypond_file = abjad.illustrate(setting)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \context Voice = "Treble_Voice"
-                        {
-                            <c'' d'' a'' bf''>1
-                        }
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \context Voice = "Bass_Voice"
-                        {
-                            s1
-                        }
-                    }
-                >>
-
-            >>> setting.space_down(bass=2)
-            PitchSet(items=[2, 9, 10, 12], item_class=abjad.NumberedPitch)
-
-            >>> setting = setting.space_down(bass=2)
-            >>> lilypond_file = abjad.illustrate(setting)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \context Voice = "Treble_Voice"
-                        {
-                            <d' a' bf' c''>1
-                        }
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \context Voice = "Bass_Voice"
-                        {
-                            s1
-                        }
-                    }
-                >>
-
-        Returns new pitch set.
-        """
-        specifier = ChordalSpacingSpecifier(
-            bass=bass,
-            direction=abjad.Down,
-            minimum_semitones=semitones,
-            soprano=soprano,
-        )
-        result = specifier([self])
-        assert isinstance(result, list), repr(result)
-        assert len(result) == 1, repr(result)
-        segment = result[0]
-        return segment
-
-    def space_up(self, bass=None, semitones=None, soprano=None):
-        r"""
-        Spaces pitch set up.
-
-        ..  container:: example
-
-            >>> setting = baca.PitchSet([12, 14, 21, 22])
-            >>> lilypond_file = abjad.illustrate(setting)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \context Voice = "Treble_Voice"
-                        {
-                            <c'' d'' a'' bf''>1
-                        }
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \context Voice = "Bass_Voice"
-                        {
-                            s1
-                        }
-                    }
-                >>
-
-            >>> setting.space_up(bass=0)
-            PitchSet(items=[0, 2, 9, 10], item_class=abjad.NumberedPitch)
-
-            >>> setting = setting.space_up(bass=0)
-            >>> lilypond_file = abjad.illustrate(setting)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \context Voice = "Treble_Voice"
-                        {
-                            <c' d' a' bf'>1
-                        }
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \context Voice = "Bass_Voice"
-                        {
-                            s1
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            With 2 in bass:
-
-            >>> setting = baca.PitchSet([12, 14, 21, 22])
-            >>> lilypond_file = abjad.illustrate(setting)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \context Voice = "Treble_Voice"
-                        {
-                            <c'' d'' a'' bf''>1
-                        }
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \context Voice = "Bass_Voice"
-                        {
-                            s1
-                        }
-                    }
-                >>
-
-            >>> setting.space_up(bass=2)
-            PitchSet(items=[2, 9, 10, 12], item_class=abjad.NumberedPitch)
-
-            >>> setting = setting.space_up(bass=2)
-            >>> lilypond_file = abjad.illustrate(setting)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \context Voice = "Treble_Voice"
-                        {
-                            <d' a' bf' c''>1
-                        }
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \context Voice = "Bass_Voice"
-                        {
-                            s1
-                        }
-                    }
-                >>
-
-        Returns new pitch segment.
-        """
-        specifier = ChordalSpacingSpecifier(
-            bass=bass,
-            direction=abjad.Up,
-            minimum_semitones=semitones,
-            soprano=soprano,
-        )
-        result = specifier([self])
-        assert isinstance(result, list), repr(result)
-        assert len(result) == 1, repr(result)
-        segment = result[0]
-        return segment
-
-
-CollectionTyping = typing.Union[PitchSet, PitchSegment]
 
 
 @dataclasses.dataclass(slots=True)
@@ -3513,8 +2697,8 @@ def remove_duplicate_pitch_classes(collections, level=-1):
     collections_ = []
     if level == 1:
         for collection in collections:
-            items: typing.List[CollectionTyping] = []
-            known_pitch_classes: typing.List[CollectionTyping] = []
+            items = []
+            known_pitch_classes = []
             for item in collection:
                 pitch_class = pitch_class_class(item)
                 if pitch_class in known_pitch_classes:
@@ -3562,10 +2746,10 @@ def remove_duplicates(collections, level=-1):
 
     Set ``level`` to 0, 1 or -1.
     """
-    collections_: typing.List[CollectionTyping] = []
+    collections_ = []
     if level == 0:
         collections_ = []
-        known_items: typing.List[CollectionTyping] = []
+        known_items = []
         for collection in collections:
             if collection in known_items:
                 continue
@@ -3706,3 +2890,670 @@ def remove_repeats(collections, level=-1):
     else:
         raise ValueError(f"level must be 0, 1 or -1: {level!r}.")
     return collections_
+
+
+
+def space_down(collection, bass=None, semitones=None, soprano=None):
+    r"""
+    Spaces collection down.
+
+    ..  container:: example
+
+        >>> segment = baca.PitchClassSegment([10, 11, 5, 6, 7])
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> voice = lilypond_file["Voice"]
+            >>> string = abjad.lilypond(voice)
+            >>> print(string)
+            \context Voice = "Voice"
+            {
+                bf'8
+                b'8
+                f'8
+                fs'8
+                g'8
+                \bar "|."
+                \override Score.BarLine.transparent = ##f
+            }
+
+        >>> baca.pcollections.space_down(segment, bass=6, soprano=7)
+        PitchSegment(items=[19, 17, 11, 10, 6], item_class=NumberedPitch)
+
+        >>> segment = baca.pcollections.space_down(segment, bass=6, soprano=7)
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            \with
+            {
+                \override BarLine.stencil = ##f
+                \override Rest.transparent = ##t
+                \override SpanBar.stencil = ##f
+                \override TimeSignature.stencil = ##f
+            }
+            <<
+                \context PianoStaff = "Piano_Staff"
+                <<
+                    \context Staff = "Treble_Staff"
+                    {
+                        \clef "treble"
+                        g''1 * 1/8
+                        f''1 * 1/8
+                        b'1 * 1/8
+                        bf'1 * 1/8
+                        fs'1 * 1/8
+                    }
+                    \context Staff = "Bass_Staff"
+                    {
+                        \clef "bass"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
+                >>
+            >>
+
+    ..  container:: example
+
+        >>> segment = baca.PitchSegment([12, 14, 21, 22])
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \clef "treble"
+                    c''1 * 1/8
+                    d''1 * 1/8
+                    a''1 * 1/8
+                    bf''1 * 1/8
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \clef "bass"
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                }
+            >>
+
+        >>> baca.pcollections.space_down(segment, bass=0)
+        PitchSegment(items=[14, 10, 9, 0], item_class=NumberedPitch)
+
+        >>> segment = baca.pcollections.space_down(segment, bass=0)
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \clef "treble"
+                    d''1 * 1/8
+                    bf'1 * 1/8
+                    a'1 * 1/8
+                    c'1 * 1/8
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \clef "bass"
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                }
+            >>
+
+    ..  container:: example
+
+        With 2 in bass:
+
+        >>> segment = baca.PitchSegment([12, 14, 21, 22])
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \clef "treble"
+                    c''1 * 1/8
+                    d''1 * 1/8
+                    a''1 * 1/8
+                    bf''1 * 1/8
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \clef "bass"
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                }
+            >>
+
+        >>> baca.pcollections.space_down(segment, bass=2)
+        PitchSegment(items=[12, 10, 9, 2], item_class=NumberedPitch)
+
+        >>> segment = baca.pcollections.space_down(segment, bass=2)
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \clef "treble"
+                    c''1 * 1/8
+                    bf'1 * 1/8
+                    a'1 * 1/8
+                    d'1 * 1/8
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \clef "bass"
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                }
+            >>
+
+
+    ..  container:: example
+
+        >>> set_ = abjad.PitchSet([12, 14, 21, 22])
+        >>> lilypond_file = abjad.illustrate(set_)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \context Voice = "Treble_Voice"
+                    {
+                        <c'' d'' a'' bf''>1
+                    }
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \context Voice = "Bass_Voice"
+                    {
+                        s1
+                    }
+                }
+            >>
+
+        >>> baca.pcollections.space_down(set_, bass=0)
+        PitchSet(items=[0, 9, 10, 14], item_class=abjad.NumberedPitch)
+
+        >>> set_ = baca.pcollections.space_down(set_, bass=0)
+        >>> lilypond_file = abjad.illustrate(set_)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \context Voice = "Treble_Voice"
+                    {
+                        <c' a' bf' d''>1
+                    }
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \context Voice = "Bass_Voice"
+                    {
+                        s1
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        With 2 in bass:
+
+        >>> set_ = abjad.PitchSet([12, 14, 21, 22])
+        >>> lilypond_file = abjad.illustrate(set_)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \context Voice = "Treble_Voice"
+                    {
+                        <c'' d'' a'' bf''>1
+                    }
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \context Voice = "Bass_Voice"
+                    {
+                        s1
+                    }
+                }
+            >>
+
+        >>> baca.pcollections.space_down(set_, bass=2)
+        PitchSet(items=[2, 9, 10, 12], item_class=abjad.NumberedPitch)
+
+        >>> set_ = baca.pcollections.space_down(set_, bass=2)
+        >>> lilypond_file = abjad.illustrate(set_)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \context Voice = "Treble_Voice"
+                    {
+                        <d' a' bf' c''>1
+                    }
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \context Voice = "Bass_Voice"
+                    {
+                        s1
+                    }
+                }
+            >>
+
+    Returns new collection.
+    """
+    specifier = ChordalSpacingSpecifier(
+        bass=bass,
+        direction=abjad.Down,
+        minimum_semitones=semitones,
+        soprano=soprano,
+    )
+    result = specifier([collection])
+    assert len(result) == 1, repr(result)
+    collection_ = result[0]
+    return collection_
+
+
+def space_up(collection, bass=None, semitones=None, soprano=None):
+    r"""
+    Spaces collection up.
+
+    ..  container:: example
+
+        >>> segment = baca.PitchClassSegment([10, 11, 5, 6, 7])
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> voice = lilypond_file["Voice"]
+            >>> string = abjad.lilypond(voice)
+            >>> print(string)
+            \context Voice = "Voice"
+            {
+                bf'8
+                b'8
+                f'8
+                fs'8
+                g'8
+                \bar "|."
+                \override Score.BarLine.transparent = ##f
+            }
+
+        >>> baca.pcollections.space_up(segment, bass=6, soprano=7)
+        PitchSegment(items=[6, 10, 11, 17, 19], item_class=NumberedPitch)
+
+        >>> segment = baca.pcollections.space_up(segment, bass=6, soprano=7)
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            \with
+            {
+                \override BarLine.stencil = ##f
+                \override Rest.transparent = ##t
+                \override SpanBar.stencil = ##f
+                \override TimeSignature.stencil = ##f
+            }
+            <<
+                \context PianoStaff = "Piano_Staff"
+                <<
+                    \context Staff = "Treble_Staff"
+                    {
+                        \clef "treble"
+                        fs'1 * 1/8
+                        bf'1 * 1/8
+                        b'1 * 1/8
+                        f''1 * 1/8
+                        g''1 * 1/8
+                    }
+                    \context Staff = "Bass_Staff"
+                    {
+                        \clef "bass"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
+                >>
+            >>
+
+    ..  container:: example
+
+        >>> segment = baca.PitchSegment([12, 14, 21, 22])
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \clef "treble"
+                    c''1 * 1/8
+                    d''1 * 1/8
+                    a''1 * 1/8
+                    bf''1 * 1/8
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \clef "bass"
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                }
+            >>
+
+        >>> baca.pcollections.space_up(segment, bass=0)
+        PitchSegment(items=[0, 2, 9, 10], item_class=NumberedPitch)
+
+        >>> segment = baca.pcollections.space_up(segment, bass=0)
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \clef "treble"
+                    c'1 * 1/8
+                    d'1 * 1/8
+                    a'1 * 1/8
+                    bf'1 * 1/8
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \clef "bass"
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                }
+            >>
+
+    ..  container:: example
+
+        With 2 in bass:
+
+        >>> segment = baca.PitchSegment([12, 14, 21, 22])
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \clef "treble"
+                    c''1 * 1/8
+                    d''1 * 1/8
+                    a''1 * 1/8
+                    bf''1 * 1/8
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \clef "bass"
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                }
+            >>
+
+        >>> baca.pcollections.space_up(segment, bass=2)
+        PitchSegment(items=[2, 9, 10, 12], item_class=NumberedPitch)
+
+        >>> segment = baca.pcollections.space_up(segment, bass=2)
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \clef "treble"
+                    d'1 * 1/8
+                    a'1 * 1/8
+                    bf'1 * 1/8
+                    c''1 * 1/8
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \clef "bass"
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                }
+            >>
+
+    ..  container:: example
+
+        >>> setting = abjad.PitchSet([12, 14, 21, 22])
+        >>> lilypond_file = abjad.illustrate(setting)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \context Voice = "Treble_Voice"
+                    {
+                        <c'' d'' a'' bf''>1
+                    }
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \context Voice = "Bass_Voice"
+                    {
+                        s1
+                    }
+                }
+            >>
+
+        >>> baca.pcollections.space_up(setting, bass=0)
+        PitchSet(items=[0, 2, 9, 10], item_class=abjad.NumberedPitch)
+
+        >>> setting = baca.pcollections.space_up(setting, bass=0)
+        >>> lilypond_file = abjad.illustrate(setting)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \context Voice = "Treble_Voice"
+                    {
+                        <c' d' a' bf'>1
+                    }
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \context Voice = "Bass_Voice"
+                    {
+                        s1
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        With 2 in bass:
+
+        >>> setting = abjad.PitchSet([12, 14, 21, 22])
+        >>> lilypond_file = abjad.illustrate(setting)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \context Voice = "Treble_Voice"
+                    {
+                        <c'' d'' a'' bf''>1
+                    }
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \context Voice = "Bass_Voice"
+                    {
+                        s1
+                    }
+                }
+            >>
+
+        >>> baca.pcollections.space_up(setting, bass=2)
+        PitchSet(items=[2, 9, 10, 12], item_class=abjad.NumberedPitch)
+
+        >>> setting = baca.pcollections.space_up(setting, bass=2)
+        >>> lilypond_file = abjad.illustrate(setting)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \context Voice = "Treble_Voice"
+                    {
+                        <d' a' bf' c''>1
+                    }
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \context Voice = "Bass_Voice"
+                    {
+                        s1
+                    }
+                }
+            >>
+
+
+    Returns new collection.
+    """
+    specifier = ChordalSpacingSpecifier(
+        bass=bass,
+        direction=abjad.Up,
+        minimum_semitones=semitones,
+        soprano=soprano,
+    )
+    result = specifier([collection])
+    assert len(result) == 1, repr(result)
+    collection_ = result[0]
+    return collection_
