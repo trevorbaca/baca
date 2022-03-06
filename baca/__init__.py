@@ -35,7 +35,14 @@ from .memento import *
 from .overrides import *
 from .parts import *
 from .path import *
-from .pcollections import *
+from .pcollections import (
+    ArpeggiationSpacingSpecifier,
+    ChordalSpacingSpecifier,
+    HarmonicSeries,
+    Partial,
+    Registration,
+    RegistrationComponent,
+)
 from .piecewise import *
 from .rhythmcommands import *
 from .scoping import *

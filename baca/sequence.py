@@ -1333,8 +1333,8 @@ def accumulate(sequence, operands=None, count=None):
 
         Accumulates identity operator:
 
-        >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
-        >>> collection_2 = baca.PitchClassSegment([4, 5])
+        >>> collection_1 = abjad.PitchClassSegment([0, 1, 2, 3])
+        >>> collection_2 = abjad.PitchClassSegment([4, 5])
         >>> sequence = [collection_1, collection_2]
         >>> for item in baca.sequence.accumulate(sequence):
         ...     item
@@ -1345,10 +1345,12 @@ def accumulate(sequence, operands=None, count=None):
 
         Accumulates alpha:
 
-        >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
-        >>> collection_2 = baca.PitchClassSegment([4, 5])
+        >>> collection_1 = abjad.PitchClassSegment([0, 1, 2, 3])
+        >>> collection_2 = abjad.PitchClassSegment([4, 5])
         >>> sequence = [collection_1, collection_2]
-        >>> for item in baca.sequence.accumulate(sequence, [lambda _: _.alpha()]):
+        >>> for item in baca.sequence.accumulate(
+        ...     sequence, [lambda _: baca.pcollections.alpha(_)]
+        ... ):
         ...     item
         ...
         [PitchClassSegment(items=[0, 1, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 5], item_class=NumberedPitchClass)]
@@ -1358,8 +1360,8 @@ def accumulate(sequence, operands=None, count=None):
 
         Accumulates transposition:
 
-        >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
-        >>> collection_2 = baca.PitchClassSegment([4, 5])
+        >>> collection_1 = abjad.PitchClassSegment([0, 1, 2, 3])
+        >>> collection_2 = abjad.PitchClassSegment([4, 5])
 
         >>> sequence = [collection_1, collection_2]
         >>> for item in baca.sequence.accumulate(sequence, [lambda _: _.transpose(n=3)]):
@@ -1374,12 +1376,13 @@ def accumulate(sequence, operands=None, count=None):
 
         Accumulates alpha followed by transposition:
 
-        >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
-        >>> collection_2 = baca.PitchClassSegment([4, 5])
+        >>> collection_1 = abjad.PitchClassSegment([0, 1, 2, 3])
+        >>> collection_2 = abjad.PitchClassSegment([4, 5])
 
         >>> sequence = [collection_1, collection_2]
         >>> for item in baca.sequence.accumulate(
-        ...     sequence, [lambda _: _.alpha(), lambda _: _.transpose(n=3)]
+        ...     sequence,
+        ...     [lambda _: baca.pcollections.alpha(_), lambda _: _.transpose(n=3)]
         ... ):
         ...     item
         ...
@@ -1400,8 +1403,8 @@ def accumulate(sequence, operands=None, count=None):
 
         Accumulates permutation:
 
-        >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
-        >>> collection_2 = baca.PitchClassSegment([4, 5])
+        >>> collection_1 = abjad.PitchClassSegment([0, 1, 2, 3])
+        >>> collection_2 = abjad.PitchClassSegment([4, 5])
 
         >>> row = [10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11]
         >>> sequence = [collection_1, collection_2]
@@ -1433,8 +1436,8 @@ def accumulate(sequence, operands=None, count=None):
 
         Accumulates permutation followed by transposition:
 
-        >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
-        >>> collection_2 = baca.PitchClassSegment([4, 5])
+        >>> collection_1 = abjad.PitchClassSegment([0, 1, 2, 3])
+        >>> collection_2 = abjad.PitchClassSegment([4, 5])
 
         >>> row = [10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11]
         >>> sequence = [collection_1, collection_2]
@@ -1521,8 +1524,8 @@ def boustrophedon(sequence, count=2):
         Iterates collections boustrophedon:
 
         >>> collections = [
-        ...     baca.PitchClassSegment([1, 2, 3]),
-        ...     baca.PitchClassSegment([4, 5, 6]),
+        ...     abjad.PitchClassSegment([1, 2, 3]),
+        ...     abjad.PitchClassSegment([4, 5, 6]),
         ... ]
         >>> sequence = collections
 
@@ -1557,7 +1560,7 @@ def boustrophedon(sequence, count=2):
 
         Iterates mixed items boustrophedon:
 
-        >>> collection = baca.PitchClassSegment([1, 2, 3])
+        >>> collection = abjad.PitchClassSegment([1, 2, 3])
         >>> sequence = [collection, 4, 5]
         >>> for item in baca.sequence.boustrophedon(sequence, count=3):
         ...     item
@@ -1807,9 +1810,9 @@ def helianthate(sequence, n=0, m=0):
 
         Helianthates list of collections:
 
-        >>> J = baca.PitchClassSegment(items=[0, 2, 4])
-        >>> K = baca.PitchClassSegment(items=[5, 6])
-        >>> L = baca.PitchClassSegment(items=[7, 9, 11])
+        >>> J = abjad.PitchClassSegment(items=[0, 2, 4])
+        >>> K = abjad.PitchClassSegment(items=[5, 6])
+        >>> L = abjad.PitchClassSegment(items=[7, 9, 11])
         >>> sequence = [J, K, L]
         >>> sequence = baca.sequence.helianthate(sequence, n=-1, m=1)
         >>> for collection in sequence:

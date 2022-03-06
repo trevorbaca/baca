@@ -44,9 +44,9 @@ class ArpeggiationSpacingSpecifier:
         ... )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> collections = [baca.PitchSegment(_) for _ in collections]
-        >>> collections = [baca.PitchClassSegment(_) for _ in collections]
-        >>> collections = [_.arpeggiate_up() for _ in collections]
+        >>> collections = [abjad.PitchSegment(_) for _ in collections]
+        >>> collections = [abjad.PitchClassSegment(_) for _ in collections]
+        >>> collections = [baca.pcollections.arpeggiate_up(_) for _ in collections]
         >>> selection = stack(collections)
 
         >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -98,8 +98,8 @@ class ArpeggiationSpacingSpecifier:
         ... )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> collections = [baca.PitchClassSegment(_) for _ in collections]
-        >>> collections = [_.arpeggiate_down() for _ in collections]
+        >>> collections = [abjad.PitchClassSegment(_) for _ in collections]
+        >>> collections = [baca.pcollections.arpeggiate_down(_) for _ in collections]
         >>> selection = stack(collections)
 
         >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -151,11 +151,11 @@ class ArpeggiationSpacingSpecifier:
         if self.pattern is not None:
             assert isinstance(self.pattern, abjad.Pattern), repr(self.pattern)
 
-    def __call__(self, collections=None) -> typing.Union["PitchSegment", None]:
+    def __call__(self, collections=None) -> typing.Union[abjad.PitchSegment, None]:
         if collections is None:
             return None
         if collections == []:
-            return PitchSegment(item_class=abjad.NumberedPitch)
+            return abjad.PitchSegment(item_class=abjad.NumberedPitch)
         if not isinstance(collections, list):
             collections = list(collections)
         pitch_class_collections = [
@@ -180,7 +180,7 @@ class ArpeggiationSpacingSpecifier:
                 if isinstance(pitch_class_collection, abjad.Set):
                     collection_ = abjad.PitchSet(items=pitches)
                 else:
-                    collection_ = PitchSegment(items=pitches)
+                    collection_ = abjad.PitchSegment(items=pitches)
                 collections_.append(collection_)
             else:
                 collections_.append(collections[i])
@@ -221,7 +221,7 @@ def _to_tightly_spaced_pitches_descending(pitch_classes):
             pitch = abjad.NumberedPitch((pitch_class, octave))
             assert pitch <= pitches[-1]
             pitches.append(pitch)
-    collection = PitchSegment(pitches)
+    collection = abjad.PitchSegment(pitches)
     while collection[-1].octave.number < 4:
         collection = collection.transpose(n=12)
     return collection
@@ -599,7 +599,7 @@ class ChordalSpacingSpecifier:
         if isinstance(original_collection, abjad.Set):
             return abjad.PitchSet(pitches)
         else:
-            return PitchSegment(pitches)
+            return abjad.PitchSegment(pitches)
 
 
 def _to_baca_collection(collection):
@@ -611,15 +611,15 @@ def _to_baca_collection(collection):
     )
     assert isinstance(collection, abjad_prototype), repr(collection)
     baca_prototype = (
-        PitchClassSegment,
+        abjad.PitchClassSegment,
         abjad.PitchClassSet,
-        PitchSegment,
+        abjad.PitchSegment,
         abjad.PitchSet,
     )
     if isinstance(collection, baca_prototype):
         pass
     elif isinstance(collection, abjad.PitchClassSegment):
-        collection = PitchClassSegment(
+        collection = abjad.PitchClassSegment(
             items=collection, item_class=collection.item_class
         )
     elif isinstance(collection, abjad.PitchClassSet):
@@ -627,7 +627,9 @@ def _to_baca_collection(collection):
             items=collection, item_class=collection.item_class
         )
     elif isinstance(collection, abjad.PitchSegment):
-        collection = PitchSegment(items=collection, item_class=collection.item_class)
+        collection = abjad.PitchSegment(
+            items=collection, item_class=collection.item_class
+        )
     elif isinstance(collection, abjad.PitchSet):
         collection = abjad.PitchSet(items=collection, item_class=collection.item_class)
     elif isinstance(collection, abjad.PitchSet):
@@ -935,1308 +937,6 @@ class Partial:
         return deviation
 
 
-class PitchClassSegment(abjad.PitchClassSegment):
-    r"""
-    Pitch-class segment.
-
-    ..  container:: example
-
-        Initializes segment:
-
-        ..  container:: example
-
-            >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-            >>> segment = baca.PitchClassSegment(items=items)
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> voice = lilypond_file["Voice"]
-                >>> string = abjad.lilypond(voice)
-                >>> print(string)
-                \context Voice = "Voice"
-                {
-                    bf'8
-                    bqf'8
-                    fs'8
-                    g'8
-                    bqf'8
-                    g'8
-                    \bar "|."
-                    \override Score.BarLine.transparent = ##f
-                }
-
-    """
-
-    ### CLASS VARIABLES ###
-
-    __slots__ = ()
-
-    ### SPECIAL METHODS ###
-
-    def __eq__(self, argument):
-        """
-        Is true when segment equals ``argument``.
-
-        ..  container:: example
-
-            Works with Abjad pitch-class segments:
-
-            >>> segment_1 = abjad.PitchClassSegment([0, 1, 2, 3])
-            >>> segment_2 = baca.PitchClassSegment([0, 1, 2, 3])
-
-            >>> segment_1 == segment_2
-            True
-
-            >>> segment_2 == segment_1
-            True
-
-        """
-        if not issubclass(type(argument), type(self)) and not issubclass(
-            type(self), type(argument)
-        ):
-            return False
-        return self.items == argument.items
-
-    ### PUBLIC METHODS ###
-
-    def alpha(self):
-        r"""
-        Gets alpha transform of segment.
-
-        ..  container:: example
-
-            Example segment:
-
-            >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-            >>> J = baca.PitchClassSegment(items=items)
-
-            >>> lilypond_file = abjad.illustrate(J)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  container:: example
-
-            Gets alpha transform of segment:
-
-            ..  container:: example
-
-                >>> J.alpha()
-                PitchClassSegment(items=[11, 11.5, 7, 6, 11.5, 6], item_class=NumberedPitchClass)
-
-                >>> segment = J.alpha()
-                >>> lilypond_file = abjad.illustrate(segment)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-                ..  docs::
-
-                    >>> voice = lilypond_file["Voice"]
-                    >>> string = abjad.lilypond(voice)
-                    >>> print(string)
-                    \context Voice = "Voice"
-                    {
-                        b'8
-                        bqs'8
-                        g'8
-                        fs'8
-                        bqs'8
-                        fs'8
-                        \bar "|."
-                        \override Score.BarLine.transparent = ##f
-                    }
-
-        ..  container:: example
-
-            Gets alpha transform of alpha transform of segment:
-
-            ..  container:: example
-
-                >>> J.alpha().alpha()
-                PitchClassSegment(items=[10, 10.5, 6, 7, 10.5, 7], item_class=NumberedPitchClass)
-
-                >>> segment = J.alpha().alpha()
-                >>> lilypond_file = abjad.illustrate(segment)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-                ..  docs::
-
-                    >>> voice = lilypond_file["Voice"]
-                    >>> string = abjad.lilypond(voice)
-                    >>> print(string)
-                    \context Voice = "Voice"
-                    {
-                        bf'8
-                        bqf'8
-                        fs'8
-                        g'8
-                        bqf'8
-                        g'8
-                        \bar "|."
-                        \override Score.BarLine.transparent = ##f
-                    }
-
-                >>> segment == J
-                True
-
-        ..  container:: example
-
-            Returns pitch-class segment:
-
-            >>> isinstance(segment, baca.PitchClassSegment)
-            True
-
-        """
-        numbers = []
-        for pc in self:
-            pc = abs(float(pc.number))
-            is_integer = True
-            if not abjad.math.is_integer_equivalent_number(pc):
-                is_integer = False
-                fraction_part = pc - int(pc)
-                pc = int(pc)
-            if abs(pc) % 2 == 0:
-                number = (abs(pc) + 1) % 12
-            else:
-                number = abs(pc) - 1
-            if not is_integer:
-                number += fraction_part
-            else:
-                number = int(number)
-            numbers.append(number)
-        return type(self)(items=numbers)
-
-    def arpeggiate_down(self):
-        r"""
-        Arpeggiates pitch-class segment down.
-
-        ..  container:: example
-
-            >>> segment = baca.PitchClassSegment([6, 0, 4, 5, 8])
-
-            >>> segment.arpeggiate_down()
-            PitchSegment(items=[42, 36, 28, 17, 8], item_class=NumberedPitch)
-
-            >>> lilypond_file = abjad.illustrate(segment.arpeggiate_down())
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \clef "treble"
-                        fs''''1 * 1/8
-                        c''''1 * 1/8
-                        e'''1 * 1/8
-                        f''1 * 1/8
-                        af'1 * 1/8
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \clef "bass"
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                    }
-                >>
-
-        Returns pitch segment.
-        """
-        specifier = ArpeggiationSpacingSpecifier(direction=abjad.Down)
-        result = specifier([self])
-        assert len(result) == 1
-        segment = result[0]
-        assert isinstance(segment, PitchSegment), repr(segment)
-        return segment
-
-    def arpeggiate_up(self):
-        r"""
-        Arpeggiates pitch-class segment up.
-
-        ..  container:: example
-
-            >>> segment = baca.PitchClassSegment([6, 0, 4, 5, 8])
-
-            >>> segment.arpeggiate_up()
-            PitchSegment(items=[6, 12, 16, 17, 20], item_class=NumberedPitch)
-
-            >>> lilypond_file = abjad.illustrate(segment.arpeggiate_up())
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \clef "treble"
-                        fs'1 * 1/8
-                        c''1 * 1/8
-                        e''1 * 1/8
-                        f''1 * 1/8
-                        af''1 * 1/8
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \clef "bass"
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                    }
-                >>
-
-        Returns pitch segment.
-        """
-        specifier = ArpeggiationSpacingSpecifier(direction=abjad.Up)
-        result = specifier([self])
-        assert len(result) == 1
-        segment = result[0]
-        assert isinstance(segment, PitchSegment), repr(segment)
-        return segment
-
-    def chord(self):
-        r"""
-        Changes segment to set.
-
-        ..  container:: example
-
-            >>> segment = baca.PitchClassSegment([-2, -1.5, 6, 7])
-
-            >>> segment.chord()
-            PitchClassSet(items=[6, 7, 10, 10.5], item_class=abjad.NumberedPitchClass)
-
-            >>> lilypond_file = abjad.illustrate(segment.chord())
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> voice = lilypond_file["Voice"]
-                >>> string = abjad.lilypond(voice)
-                >>> print(string)
-                \context Voice = "Voice"
-                {
-                    <fs' g' bf' bqf'>1
-                }
-
-        Returns pitch-class set.
-        """
-        return abjad.PitchClassSet(items=self, item_class=self.item_class)
-
-    def get_matching_transforms(
-        self,
-        segment_2,
-        inversion=False,
-        multiplication=False,
-        retrograde=False,
-        rotation=False,
-        transposition=False,
-    ):
-        r"""
-        Gets transforms of segment that match ``segment_2``.
-
-        ..  container:: example
-
-            Example segments:
-
-            >>> items = [-2, -1, 6, 7, -1, 7]
-            >>> segment_1 = baca.PitchClassSegment(items=items)
-            >>> lilypond_file = abjad.illustrate(segment_1)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            >>> items = [9, 2, 1, 6, 2, 6]
-            >>> segment_2 = baca.PitchClassSegment(items=items)
-            >>> lilypond_file = abjad.illustrate(segment_2)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  container:: example
-
-            Gets matching transforms:
-
-            >>> transforms = segment_1.get_matching_transforms(
-            ...     segment_2,
-            ...     inversion=True,
-            ...     multiplication=True,
-            ...     retrograde=True,
-            ...     rotation=False,
-            ...     transposition=True,
-            ...     )
-            >>> for operator, transform in transforms:
-            ...     compound = "".join(operator)
-            ...     print(compound, str(transform))
-            ...
-            M5T11 PC<9, 2, 1, 6, 2, 6>
-            M7T1I PC<9, 2, 1, 6, 2, 6>
-
-            >>> transforms = segment_2.get_matching_transforms(
-            ...     segment_1,
-            ...     inversion=True,
-            ...     multiplication=True,
-            ...     retrograde=True,
-            ...     rotation=False,
-            ...     transposition=True,
-            ...     )
-            >>> for operator, transform in transforms:
-            ...     compound = "".join(operator)
-            ...     print(compound, str(transform))
-            ...
-            M5T5 PC<10, 11, 6, 7, 11, 7>
-            M7T7I PC<10, 11, 6, 7, 11, 7>
-
-        ..  container:: example
-
-            No matching transforms. Segments of differing lengths never transform into
-            each other:
-
-            >>> segment_2 = baca.PitchClassSegment(items=[0, 1, 2])
-            >>> segment_2.get_matching_transforms(
-            ...     segment_1,
-            ...     inversion=True,
-            ...     multiplication=True,
-            ...     retrograde=True,
-            ...     rotation=False,
-            ...     transposition=True,
-            ... )
-            []
-
-        """
-        result = []
-        if not len(self) == len(segment_2):
-            return result
-        transforms = self.get_transforms(
-            inversion=inversion,
-            multiplication=multiplication,
-            retrograde=retrograde,
-            rotation=rotation,
-            transposition=transposition,
-        )
-        for operator, transform in transforms:
-            if transform == segment_2:
-                result.append((operator, transform))
-        return result
-
-    def get_transforms(
-        self,
-        inversion=False,
-        multiplication=False,
-        retrograde=False,
-        rotation=False,
-        show_identity_operators=False,
-        transposition=False,
-    ):
-        """
-        Applies transform strings.
-
-        ..  container:: example
-
-            >>> items = [-2, -1, 6, 7, -1, 7]
-            >>> J = baca.PitchClassSegment(items=items)
-            >>> lilypond_file = abjad.illustrate(J)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            >>> pairs = J.get_transforms(
-            ...     inversion=True,
-            ...     multiplication=True,
-            ...     retrograde=True,
-            ...     transposition=True,
-            ... )
-
-            >>> for rank, (list_, transform) in enumerate(pairs, start=1):
-            ...     compound = "".join(list_)
-            ...     string = "{:3}:{:>9}(J): {!s}"
-            ...     string = string.format(rank, compound, transform)
-            ...     print(string)
-            1:     M1T0(J): PC<10, 11, 6, 7, 11, 7>
-            2:     M1T1(J): PC<11, 0, 7, 8, 0, 8>
-            3:     M1T2(J): PC<0, 1, 8, 9, 1, 9>
-            4:     M1T3(J): PC<1, 2, 9, 10, 2, 10>
-            5:     M1T4(J): PC<2, 3, 10, 11, 3, 11>
-            6:     M1T5(J): PC<3, 4, 11, 0, 4, 0>
-            7:     M1T6(J): PC<4, 5, 0, 1, 5, 1>
-            8:     M1T7(J): PC<5, 6, 1, 2, 6, 2>
-            9:     M1T8(J): PC<6, 7, 2, 3, 7, 3>
-            10:     M1T9(J): PC<7, 8, 3, 4, 8, 4>
-            11:    M1T10(J): PC<8, 9, 4, 5, 9, 5>
-            12:    M1T11(J): PC<9, 10, 5, 6, 10, 6>
-            13:    M1T0I(J): PC<2, 1, 6, 5, 1, 5>
-            14:    M1T1I(J): PC<3, 2, 7, 6, 2, 6>
-            15:    M1T2I(J): PC<4, 3, 8, 7, 3, 7>
-            16:    M1T3I(J): PC<5, 4, 9, 8, 4, 8>
-            17:    M1T4I(J): PC<6, 5, 10, 9, 5, 9>
-            18:    M1T5I(J): PC<7, 6, 11, 10, 6, 10>
-            19:    M1T6I(J): PC<8, 7, 0, 11, 7, 11>
-            20:    M1T7I(J): PC<9, 8, 1, 0, 8, 0>
-            21:    M1T8I(J): PC<10, 9, 2, 1, 9, 1>
-            22:    M1T9I(J): PC<11, 10, 3, 2, 10, 2>
-            23:   M1T10I(J): PC<0, 11, 4, 3, 11, 3>
-            24:   M1T11I(J): PC<1, 0, 5, 4, 0, 4>
-            25:     M5T0(J): PC<2, 7, 6, 11, 7, 11>
-            26:     M5T1(J): PC<7, 0, 11, 4, 0, 4>
-            27:     M5T2(J): PC<0, 5, 4, 9, 5, 9>
-            28:     M5T3(J): PC<5, 10, 9, 2, 10, 2>
-            29:     M5T4(J): PC<10, 3, 2, 7, 3, 7>
-            30:     M5T5(J): PC<3, 8, 7, 0, 8, 0>
-            31:     M5T6(J): PC<8, 1, 0, 5, 1, 5>
-            32:     M5T7(J): PC<1, 6, 5, 10, 6, 10>
-            33:     M5T8(J): PC<6, 11, 10, 3, 11, 3>
-            34:     M5T9(J): PC<11, 4, 3, 8, 4, 8>
-            35:    M5T10(J): PC<4, 9, 8, 1, 9, 1>
-            36:    M5T11(J): PC<9, 2, 1, 6, 2, 6>
-            37:    M5T0I(J): PC<10, 5, 6, 1, 5, 1>
-            38:    M5T1I(J): PC<3, 10, 11, 6, 10, 6>
-            39:    M5T2I(J): PC<8, 3, 4, 11, 3, 11>
-            40:    M5T3I(J): PC<1, 8, 9, 4, 8, 4>
-            41:    M5T4I(J): PC<6, 1, 2, 9, 1, 9>
-            42:    M5T5I(J): PC<11, 6, 7, 2, 6, 2>
-            43:    M5T6I(J): PC<4, 11, 0, 7, 11, 7>
-            44:    M5T7I(J): PC<9, 4, 5, 0, 4, 0>
-            45:    M5T8I(J): PC<2, 9, 10, 5, 9, 5>
-            46:    M5T9I(J): PC<7, 2, 3, 10, 2, 10>
-            47:   M5T10I(J): PC<0, 7, 8, 3, 7, 3>
-            48:   M5T11I(J): PC<5, 0, 1, 8, 0, 8>
-            49:     M7T0(J): PC<10, 5, 6, 1, 5, 1>
-            50:     M7T1(J): PC<5, 0, 1, 8, 0, 8>
-            51:     M7T2(J): PC<0, 7, 8, 3, 7, 3>
-            52:     M7T3(J): PC<7, 2, 3, 10, 2, 10>
-            53:     M7T4(J): PC<2, 9, 10, 5, 9, 5>
-            54:     M7T5(J): PC<9, 4, 5, 0, 4, 0>
-            55:     M7T6(J): PC<4, 11, 0, 7, 11, 7>
-            56:     M7T7(J): PC<11, 6, 7, 2, 6, 2>
-            57:     M7T8(J): PC<6, 1, 2, 9, 1, 9>
-            58:     M7T9(J): PC<1, 8, 9, 4, 8, 4>
-            59:    M7T10(J): PC<8, 3, 4, 11, 3, 11>
-            60:    M7T11(J): PC<3, 10, 11, 6, 10, 6>
-            61:    M7T0I(J): PC<2, 7, 6, 11, 7, 11>
-            62:    M7T1I(J): PC<9, 2, 1, 6, 2, 6>
-            63:    M7T2I(J): PC<4, 9, 8, 1, 9, 1>
-            64:    M7T3I(J): PC<11, 4, 3, 8, 4, 8>
-            65:    M7T4I(J): PC<6, 11, 10, 3, 11, 3>
-            66:    M7T5I(J): PC<1, 6, 5, 10, 6, 10>
-            67:    M7T6I(J): PC<8, 1, 0, 5, 1, 5>
-            68:    M7T7I(J): PC<3, 8, 7, 0, 8, 0>
-            69:    M7T8I(J): PC<10, 3, 2, 7, 3, 7>
-            70:    M7T9I(J): PC<5, 10, 9, 2, 10, 2>
-            71:   M7T10I(J): PC<0, 5, 4, 9, 5, 9>
-            72:   M7T11I(J): PC<7, 0, 11, 4, 0, 4>
-            73:    M11T0(J): PC<2, 1, 6, 5, 1, 5>
-            74:    M11T1(J): PC<1, 0, 5, 4, 0, 4>
-            75:    M11T2(J): PC<0, 11, 4, 3, 11, 3>
-            76:    M11T3(J): PC<11, 10, 3, 2, 10, 2>
-            77:    M11T4(J): PC<10, 9, 2, 1, 9, 1>
-            78:    M11T5(J): PC<9, 8, 1, 0, 8, 0>
-            79:    M11T6(J): PC<8, 7, 0, 11, 7, 11>
-            80:    M11T7(J): PC<7, 6, 11, 10, 6, 10>
-            81:    M11T8(J): PC<6, 5, 10, 9, 5, 9>
-            82:    M11T9(J): PC<5, 4, 9, 8, 4, 8>
-            83:   M11T10(J): PC<4, 3, 8, 7, 3, 7>
-            84:   M11T11(J): PC<3, 2, 7, 6, 2, 6>
-            85:   M11T0I(J): PC<10, 11, 6, 7, 11, 7>
-            86:   M11T1I(J): PC<9, 10, 5, 6, 10, 6>
-            87:   M11T2I(J): PC<8, 9, 4, 5, 9, 5>
-            88:   M11T3I(J): PC<7, 8, 3, 4, 8, 4>
-            89:   M11T4I(J): PC<6, 7, 2, 3, 7, 3>
-            90:   M11T5I(J): PC<5, 6, 1, 2, 6, 2>
-            91:   M11T6I(J): PC<4, 5, 0, 1, 5, 1>
-            92:   M11T7I(J): PC<3, 4, 11, 0, 4, 0>
-            93:   M11T8I(J): PC<2, 3, 10, 11, 3, 11>
-            94:   M11T9I(J): PC<1, 2, 9, 10, 2, 10>
-            95:  M11T10I(J): PC<0, 1, 8, 9, 1, 9>
-            96:  M11T11I(J): PC<11, 0, 7, 8, 0, 8>
-            97:    RM1T0(J): PC<7, 11, 7, 6, 11, 10>
-            98:    RM1T1(J): PC<8, 0, 8, 7, 0, 11>
-            99:    RM1T2(J): PC<9, 1, 9, 8, 1, 0>
-            100:    RM1T3(J): PC<10, 2, 10, 9, 2, 1>
-            101:    RM1T4(J): PC<11, 3, 11, 10, 3, 2>
-            102:    RM1T5(J): PC<0, 4, 0, 11, 4, 3>
-            103:    RM1T6(J): PC<1, 5, 1, 0, 5, 4>
-            104:    RM1T7(J): PC<2, 6, 2, 1, 6, 5>
-            105:    RM1T8(J): PC<3, 7, 3, 2, 7, 6>
-            106:    RM1T9(J): PC<4, 8, 4, 3, 8, 7>
-            107:   RM1T10(J): PC<5, 9, 5, 4, 9, 8>
-            108:   RM1T11(J): PC<6, 10, 6, 5, 10, 9>
-            109:   RM1T0I(J): PC<5, 1, 5, 6, 1, 2>
-            110:   RM1T1I(J): PC<6, 2, 6, 7, 2, 3>
-            111:   RM1T2I(J): PC<7, 3, 7, 8, 3, 4>
-            112:   RM1T3I(J): PC<8, 4, 8, 9, 4, 5>
-            113:   RM1T4I(J): PC<9, 5, 9, 10, 5, 6>
-            114:   RM1T5I(J): PC<10, 6, 10, 11, 6, 7>
-            115:   RM1T6I(J): PC<11, 7, 11, 0, 7, 8>
-            116:   RM1T7I(J): PC<0, 8, 0, 1, 8, 9>
-            117:   RM1T8I(J): PC<1, 9, 1, 2, 9, 10>
-            118:   RM1T9I(J): PC<2, 10, 2, 3, 10, 11>
-            119:  RM1T10I(J): PC<3, 11, 3, 4, 11, 0>
-            120:  RM1T11I(J): PC<4, 0, 4, 5, 0, 1>
-            121:    RM5T0(J): PC<11, 7, 11, 6, 7, 2>
-            122:    RM5T1(J): PC<4, 0, 4, 11, 0, 7>
-            123:    RM5T2(J): PC<9, 5, 9, 4, 5, 0>
-            124:    RM5T3(J): PC<2, 10, 2, 9, 10, 5>
-            125:    RM5T4(J): PC<7, 3, 7, 2, 3, 10>
-            126:    RM5T5(J): PC<0, 8, 0, 7, 8, 3>
-            127:    RM5T6(J): PC<5, 1, 5, 0, 1, 8>
-            128:    RM5T7(J): PC<10, 6, 10, 5, 6, 1>
-            129:    RM5T8(J): PC<3, 11, 3, 10, 11, 6>
-            130:    RM5T9(J): PC<8, 4, 8, 3, 4, 11>
-            131:   RM5T10(J): PC<1, 9, 1, 8, 9, 4>
-            132:   RM5T11(J): PC<6, 2, 6, 1, 2, 9>
-            133:   RM5T0I(J): PC<1, 5, 1, 6, 5, 10>
-            134:   RM5T1I(J): PC<6, 10, 6, 11, 10, 3>
-            135:   RM5T2I(J): PC<11, 3, 11, 4, 3, 8>
-            136:   RM5T3I(J): PC<4, 8, 4, 9, 8, 1>
-            137:   RM5T4I(J): PC<9, 1, 9, 2, 1, 6>
-            138:   RM5T5I(J): PC<2, 6, 2, 7, 6, 11>
-            139:   RM5T6I(J): PC<7, 11, 7, 0, 11, 4>
-            140:   RM5T7I(J): PC<0, 4, 0, 5, 4, 9>
-            141:   RM5T8I(J): PC<5, 9, 5, 10, 9, 2>
-            142:   RM5T9I(J): PC<10, 2, 10, 3, 2, 7>
-            143:  RM5T10I(J): PC<3, 7, 3, 8, 7, 0>
-            144:  RM5T11I(J): PC<8, 0, 8, 1, 0, 5>
-            145:    RM7T0(J): PC<1, 5, 1, 6, 5, 10>
-            146:    RM7T1(J): PC<8, 0, 8, 1, 0, 5>
-            147:    RM7T2(J): PC<3, 7, 3, 8, 7, 0>
-            148:    RM7T3(J): PC<10, 2, 10, 3, 2, 7>
-            149:    RM7T4(J): PC<5, 9, 5, 10, 9, 2>
-            150:    RM7T5(J): PC<0, 4, 0, 5, 4, 9>
-            151:    RM7T6(J): PC<7, 11, 7, 0, 11, 4>
-            152:    RM7T7(J): PC<2, 6, 2, 7, 6, 11>
-            153:    RM7T8(J): PC<9, 1, 9, 2, 1, 6>
-            154:    RM7T9(J): PC<4, 8, 4, 9, 8, 1>
-            155:   RM7T10(J): PC<11, 3, 11, 4, 3, 8>
-            156:   RM7T11(J): PC<6, 10, 6, 11, 10, 3>
-            157:   RM7T0I(J): PC<11, 7, 11, 6, 7, 2>
-            158:   RM7T1I(J): PC<6, 2, 6, 1, 2, 9>
-            159:   RM7T2I(J): PC<1, 9, 1, 8, 9, 4>
-            160:   RM7T3I(J): PC<8, 4, 8, 3, 4, 11>
-            161:   RM7T4I(J): PC<3, 11, 3, 10, 11, 6>
-            162:   RM7T5I(J): PC<10, 6, 10, 5, 6, 1>
-            163:   RM7T6I(J): PC<5, 1, 5, 0, 1, 8>
-            164:   RM7T7I(J): PC<0, 8, 0, 7, 8, 3>
-            165:   RM7T8I(J): PC<7, 3, 7, 2, 3, 10>
-            166:   RM7T9I(J): PC<2, 10, 2, 9, 10, 5>
-            167:  RM7T10I(J): PC<9, 5, 9, 4, 5, 0>
-            168:  RM7T11I(J): PC<4, 0, 4, 11, 0, 7>
-            169:   RM11T0(J): PC<5, 1, 5, 6, 1, 2>
-            170:   RM11T1(J): PC<4, 0, 4, 5, 0, 1>
-            171:   RM11T2(J): PC<3, 11, 3, 4, 11, 0>
-            172:   RM11T3(J): PC<2, 10, 2, 3, 10, 11>
-            173:   RM11T4(J): PC<1, 9, 1, 2, 9, 10>
-            174:   RM11T5(J): PC<0, 8, 0, 1, 8, 9>
-            175:   RM11T6(J): PC<11, 7, 11, 0, 7, 8>
-            176:   RM11T7(J): PC<10, 6, 10, 11, 6, 7>
-            177:   RM11T8(J): PC<9, 5, 9, 10, 5, 6>
-            178:   RM11T9(J): PC<8, 4, 8, 9, 4, 5>
-            179:  RM11T10(J): PC<7, 3, 7, 8, 3, 4>
-            180:  RM11T11(J): PC<6, 2, 6, 7, 2, 3>
-            181:  RM11T0I(J): PC<7, 11, 7, 6, 11, 10>
-            182:  RM11T1I(J): PC<6, 10, 6, 5, 10, 9>
-            183:  RM11T2I(J): PC<5, 9, 5, 4, 9, 8>
-            184:  RM11T3I(J): PC<4, 8, 4, 3, 8, 7>
-            185:  RM11T4I(J): PC<3, 7, 3, 2, 7, 6>
-            186:  RM11T5I(J): PC<2, 6, 2, 1, 6, 5>
-            187:  RM11T6I(J): PC<1, 5, 1, 0, 5, 4>
-            188:  RM11T7I(J): PC<0, 4, 0, 11, 4, 3>
-            189:  RM11T8I(J): PC<11, 3, 11, 10, 3, 2>
-            190:  RM11T9I(J): PC<10, 2, 10, 9, 2, 1>
-            191: RM11T10I(J): PC<9, 1, 9, 8, 1, 0>
-            192: RM11T11I(J): PC<8, 0, 8, 7, 0, 11>
-
-        """
-        lists = []
-        if transposition:
-            for n in range(12):
-                lists.append([f"T{n}"])
-        else:
-            lists.append(["T0"])
-        if inversion:
-            lists = lists + [_[:] + ["I"] for _ in lists]
-
-        if multiplication:
-            lists = (
-                [["M1"] + _[:] for _ in lists]
-                + [["M5"] + _[:] for _ in lists]
-                + [["M7"] + _[:] for _ in lists]
-                + [["M11"] + _[:] for _ in lists]
-            )
-        if retrograde:
-            lists = lists + [["R"] + _[:] for _ in lists]
-        if rotation:
-            lists_ = []
-            for n in range(len(self)):
-                lists_.extend([f"r{n}"] + _[:] for _ in lists)
-            lists = lists_
-        pairs = []
-        for list_ in lists:
-            transform = self
-            for string in reversed(list_):
-                if string == "I":
-                    transform = transform.invert()
-                elif string.startswith("T"):
-                    n = int(string.removeprefix("T"))
-                    transform = transform.transpose(n=n)
-                elif string.startswith("M"):
-                    n = int(string.removeprefix("M"))
-                    transform = transform.multiply(n=n)
-                elif string == "R":
-                    transform = transform.retrograde()
-                else:
-                    assert string.startswith("r")
-                    n = int(string.removeprefix("r"))
-                    transform = transform.rotate(n=n)
-            pairs.append((list_, transform))
-        return pairs
-
-    def has_duplicates(self):
-        r"""
-        Is true when pitch-class segment has duplicates.
-
-        ..  container:: example
-
-            >>> items = [-2, -1.5, 6, 7]
-            >>> segment = baca.PitchClassSegment(items=items)
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> voice = lilypond_file["Voice"]
-                >>> string = abjad.lilypond(voice)
-                >>> print(string)
-                \context Voice = "Voice"
-                {
-                    bf'8
-                    bqf'8
-                    fs'8
-                    g'8
-                    \bar "|."
-                    \override Score.BarLine.transparent = ##f
-                }
-
-            >>> segment.has_duplicates()
-            False
-
-        ..  container:: example
-
-            >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-            >>> segment = baca.PitchClassSegment(items=items)
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> voice = lilypond_file["Voice"]
-                >>> string = abjad.lilypond(voice)
-                >>> print(string)
-                \context Voice = "Voice"
-                {
-                    bf'8
-                    bqf'8
-                    fs'8
-                    g'8
-                    bqf'8
-                    g'8
-                    \bar "|."
-                    \override Score.BarLine.transparent = ##f
-                }
-
-            >>> segment.has_duplicates()
-            True
-
-        Returns true or false.
-        """
-        return not len(set(self)) == len(self)
-
-    def has_repeats(self):
-        r"""
-        Is true when pitch-class segment has repeats.
-
-        ..  container:: example
-
-            >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-            >>> segment = baca.PitchClassSegment(items=items)
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> voice = lilypond_file["Voice"]
-                >>> string = abjad.lilypond(voice)
-                >>> print(string)
-                \context Voice = "Voice"
-                {
-                    bf'8
-                    bqf'8
-                    fs'8
-                    g'8
-                    bqf'8
-                    g'8
-                    \bar "|."
-                    \override Score.BarLine.transparent = ##f
-                }
-
-            >>> segment.has_repeats()
-            False
-
-        ..  container:: example
-
-            >>> items = [-2, -1.5, 6, 7, 7]
-            >>> segment = baca.PitchClassSegment(items=items)
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> voice = lilypond_file["Voice"]
-                >>> string = abjad.lilypond(voice)
-                >>> print(string)
-                \context Voice = "Voice"
-                {
-                    bf'8
-                    bqf'8
-                    fs'8
-                    g'8
-                    g'8
-                    \bar "|."
-                    \override Score.BarLine.transparent = ##f
-                }
-
-            >>> segment.has_repeats()
-            True
-
-        Returns true or false.
-        """
-        previous_item = None
-        for item in self:
-            if item == previous_item:
-                return True
-            previous_item = item
-        return False
-
-    def sequence(self):
-        r"""
-        Changes pitch-class segment into a sequence.
-
-        ..  container:: example
-
-            >>> segment = baca.PitchClassSegment([10, 11, 5, 6, 7])
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> voice = lilypond_file["Voice"]
-                >>> string = abjad.lilypond(voice)
-                >>> print(string)
-                \context Voice = "Voice"
-                {
-                    bf'8
-                    b'8
-                    f'8
-                    fs'8
-                    g'8
-                    \bar "|."
-                    \override Score.BarLine.transparent = ##f
-                }
-
-            >>> segment.sequence()
-            [NumberedPitchClass(10), NumberedPitchClass(11), NumberedPitchClass(5), NumberedPitchClass(6), NumberedPitchClass(7)]
-
-        Returns sequence.
-        """
-        return list(self)
-
-
-@dataclasses.dataclass
-class PitchSegment(abjad.PitchSegment):
-    r"""
-    Pitch segment.
-
-    ..  container:: example
-
-        Initializes segment:
-
-        ..  container:: example
-
-            >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-            >>> segment = baca.PitchSegment(items=items)
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \clef "treble"
-                        r1 * 1/8
-                        r1 * 1/8
-                        fs'1 * 1/8
-                        g'1 * 1/8
-                        r1 * 1/8
-                        g'1 * 1/8
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \clef "bass"
-                        bf1 * 1/8
-                        bqf1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        bqf1 * 1/8
-                        r1 * 1/8
-                    }
-                >>
-
-    """
-
-    def __repr__(self) -> str:
-        """
-        Gets repr.
-        """
-        if self.item_class is abjad.NamedPitch:
-            contents = " ".join([str(_) for _ in self])
-            contents = '"' + contents + '"'
-        else:
-            contents = ", ".join([str(_) for _ in self])
-            contents = "[" + contents + "]"
-        return f"{type(self).__name__}(items={contents}, item_class={self.item_class.__name__})"
-
-    def _to_selection(self):
-        maker = abjad.NoteMaker()
-        return maker(self, [(1, 4)])
-
-    ### PUBLIC METHODS ###
-
-    def bass_to_octave(self, n=4):
-        r"""
-        Octave-transposes segment to bass in octave ``n``.
-
-        ..  container:: example
-
-            >>> segment = baca.PitchSegment([-2, -1.5, 6, 7, -1.5, 7])
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \clef "treble"
-                        r1 * 1/8
-                        r1 * 1/8
-                        fs'1 * 1/8
-                        g'1 * 1/8
-                        r1 * 1/8
-                        g'1 * 1/8
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \clef "bass"
-                        bf1 * 1/8
-                        bqf1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        bqf1 * 1/8
-                        r1 * 1/8
-                    }
-                >>
-
-            >>> segment.bass_to_octave(n=4)
-            PitchSegment(items=[10, 10.5, 18, 19, 10.5, 19], item_class=NumberedPitch)
-
-            >>> segment = segment.bass_to_octave(n=4)
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \clef "treble"
-                        bf'1 * 1/8
-                        bqf'1 * 1/8
-                        fs''1 * 1/8
-                        g''1 * 1/8
-                        bqf'1 * 1/8
-                        g''1 * 1/8
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \clef "bass"
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                    }
-                >>
-
-        Returns new segment.
-        """
-        from .commandclasses import RegisterToOctaveCommand
-
-        # TODO: remove reference to RegisterToOctaveCommand;
-        #       implement as segment-only operation
-        command = RegisterToOctaveCommand(anchor=abjad.Down, octave_number=n)
-        selection = self._to_selection()
-        command([selection])
-        pitches = abjad.iterate.pitches(selection)
-        segment = PitchSegment.from_pitches(pitches)
-        return dataclasses.replace(self, items=segment)
-
-    def center_to_octave(self, n=4):
-        r"""
-        Octave-transposes segment to center in octave ``n``.
-
-        ..  container:: example
-
-            >>> segment = baca.PitchSegment([-2, -1.5, 6, 7, -1.5, 7])
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \clef "treble"
-                        r1 * 1/8
-                        r1 * 1/8
-                        fs'1 * 1/8
-                        g'1 * 1/8
-                        r1 * 1/8
-                        g'1 * 1/8
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \clef "bass"
-                        bf1 * 1/8
-                        bqf1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        bqf1 * 1/8
-                        r1 * 1/8
-                    }
-                >>
-
-            >>> segment.center_to_octave(n=3)
-            PitchSegment(items=[-14, -13.5, -6, -5, -13.5, -5], item_class=NumberedPitch)
-
-            >>> segment = segment.center_to_octave(n=3)
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \clef "treble"
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \clef "bass"
-                        bf,1 * 1/8
-                        bqf,1 * 1/8
-                        fs1 * 1/8
-                        g1 * 1/8
-                        bqf,1 * 1/8
-                        g1 * 1/8
-                    }
-                >>
-
-        Returns new segment.
-        """
-        from .commandclasses import RegisterToOctaveCommand
-
-        # TODO: remove reference to RegisterToOctaveCommand;
-        #       implement as segment-only operation
-        command = RegisterToOctaveCommand(anchor=abjad.Center, octave_number=n)
-        selection = self._to_selection()
-        command([selection])
-        pitches = abjad.iterate.pitches(selection)
-        segment = PitchSegment.from_pitches(pitches)
-        return dataclasses.replace(self, items=segment)
-
-    def chord(self):
-        r"""
-        Changes segment to set.
-
-        ..  container:: example
-
-            >>> segment = baca.PitchSegment([-2, -1.5, 6, 7])
-
-            >>> segment.chord()
-            PitchSet(items=[-2, -1.5, 6, 7], item_class=abjad.NumberedPitch)
-
-            >>> lilypond_file = abjad.illustrate(segment.chord())
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \context Voice = "Treble_Voice"
-                        {
-                            <fs' g'>1
-                        }
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \context Voice = "Bass_Voice"
-                        {
-                            <bf bqf>1
-                        }
-                    }
-                >>
-
-        Returns pitch set.
-        """
-        return abjad.PitchSet(items=self, item_class=self.item_class)
-
-    def soprano_to_octave(self, n=4):
-        r"""
-        Octave-transposes segment to soprano in octave ``n``.
-
-        ..  container:: example
-
-            >>> segment = baca.PitchSegment([-2, -1.5, 6, 7, -1.5, 7])
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \clef "treble"
-                        r1 * 1/8
-                        r1 * 1/8
-                        fs'1 * 1/8
-                        g'1 * 1/8
-                        r1 * 1/8
-                        g'1 * 1/8
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \clef "bass"
-                        bf1 * 1/8
-                        bqf1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        bqf1 * 1/8
-                        r1 * 1/8
-                    }
-                >>
-
-            >>> segment.soprano_to_octave(n=3)
-            PitchSegment(items=[-14, -13.5, -6, -5, -13.5, -5], item_class=NumberedPitch)
-
-            >>> segment = segment.soprano_to_octave(n=3)
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \clef "treble"
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \clef "bass"
-                        bf,1 * 1/8
-                        bqf,1 * 1/8
-                        fs1 * 1/8
-                        g1 * 1/8
-                        bqf,1 * 1/8
-                        g1 * 1/8
-                    }
-                >>
-
-        Returns new segment.
-        """
-        from .commandclasses import RegisterToOctaveCommand
-
-        # TODO: remove reference to RegisterToOctaveCommand;
-        #       implement as segment-only operation
-        command = RegisterToOctaveCommand(anchor=abjad.Up, octave_number=n)
-        selection = self._to_selection()
-        command([selection])
-        pitches = abjad.iterate.pitches(selection)
-        segment = PitchSegment.from_pitches(pitches)
-        return dataclasses.replace(self, items=segment)
-
-    def split(self, pitch=0):
-        r"""
-        Splits segment at ``pitch``.
-
-        ..  container:: example
-
-            >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-            >>> segment = baca.PitchSegment(items=items)
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \clef "treble"
-                        r1 * 1/8
-                        r1 * 1/8
-                        fs'1 * 1/8
-                        g'1 * 1/8
-                        r1 * 1/8
-                        g'1 * 1/8
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \clef "bass"
-                        bf1 * 1/8
-                        bqf1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        bqf1 * 1/8
-                        r1 * 1/8
-                    }
-                >>
-
-            >>> upper, lower = segment.split(pitch=0)
-
-            >>> upper
-            PitchSegment(items=[6, 7, 7], item_class=NumberedPitch)
-
-            >>> lilypond_file = abjad.illustrate(upper)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \clef "treble"
-                        fs'1 * 1/8
-                        g'1 * 1/8
-                        g'1 * 1/8
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \clef "bass"
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                    }
-                >>
-
-            >>> lower
-            PitchSegment(items=[-2, -1.5, -1.5], item_class=NumberedPitch)
-
-            >>> lilypond_file = abjad.illustrate(lower)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> staff_group = lilypond_file["Piano_Staff"]
-                >>> string = abjad.lilypond(staff_group)
-                >>> print(string)
-                \context PianoStaff = "Piano_Staff"
-                <<
-                    \context Staff = "Treble_Staff"
-                    {
-                        \clef "treble"
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                    }
-                    \context Staff = "Bass_Staff"
-                    {
-                        \clef "bass"
-                        bf1 * 1/8
-                        bqf1 * 1/8
-                        bqf1 * 1/8
-                    }
-                >>
-
-        Returns upper, lower segments.
-        """
-        upper, lower = [], []
-        for pitch_ in self:
-            if pitch_ < pitch:
-                lower.append(pitch_)
-            else:
-                upper.append(pitch_)
-        upper = dataclasses.replace(self, items=upper)
-        lower = dataclasses.replace(self, items=lower)
-        return upper, lower
-
-
 @dataclasses.dataclass(slots=True)
 class Registration:
     """
@@ -2384,6 +1084,749 @@ def accumulate_and_repartition(segments, ratios, counts):
     return groups
 
 
+def alpha(collection):
+    r"""
+    Gets alpha transform of collection.
+
+    ..  container:: example
+
+        Example segment:
+
+        >>> items = [-2, -1.5, 6, 7, -1.5, 7]
+        >>> J = abjad.PitchClassSegment(items=items)
+
+        >>> lilypond_file = abjad.illustrate(J)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  container:: example
+
+        Gets alpha transform of segment:
+
+        >>> segment = baca.pcollections.alpha(J)
+        >>> segment
+        PitchClassSegment(items=[11, 11.5, 7, 6, 11.5, 6], item_class=NumberedPitchClass)
+
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> voice = lilypond_file["Voice"]
+            >>> string = abjad.lilypond(voice)
+            >>> print(string)
+            \context Voice = "Voice"
+            {
+                b'8
+                bqs'8
+                g'8
+                fs'8
+                bqs'8
+                fs'8
+                \bar "|."
+                \override Score.BarLine.transparent = ##f
+            }
+
+    ..  container:: example
+
+        Gets alpha transform of alpha transform of segment:
+
+        >>> segment = baca.pcollections.alpha(J)
+        >>> segment = baca.pcollections.alpha(segment)
+        >>> segment
+        PitchClassSegment(items=[10, 10.5, 6, 7, 10.5, 7], item_class=NumberedPitchClass)
+
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> voice = lilypond_file["Voice"]
+            >>> string = abjad.lilypond(voice)
+            >>> print(string)
+            \context Voice = "Voice"
+            {
+                bf'8
+                bqf'8
+                fs'8
+                g'8
+                bqf'8
+                g'8
+                \bar "|."
+                \override Score.BarLine.transparent = ##f
+            }
+
+        >>> segment == J
+        True
+
+    """
+    numbers = []
+    for pc in collection:
+        pc = abs(float(pc.number))
+        is_integer = True
+        if not abjad.math.is_integer_equivalent_number(pc):
+            is_integer = False
+            fraction_part = pc - int(pc)
+            pc = int(pc)
+        if abs(pc) % 2 == 0:
+            number = (abs(pc) + 1) % 12
+        else:
+            number = abs(pc) - 1
+        if not is_integer:
+            number += fraction_part
+        else:
+            number = int(number)
+        numbers.append(number)
+    return type(collection)(items=numbers)
+
+
+def arpeggiate_down(collection):
+    r"""
+    Arpeggiates collection down.
+
+    ..  container:: example
+
+        >>> segment = abjad.PitchClassSegment([6, 0, 4, 5, 8])
+        >>> segment = baca.pcollections.arpeggiate_down(segment)
+        >>> segment
+        PitchSegment(items=[42, 36, 28, 17, 8], item_class=NumberedPitch)
+
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \clef "treble"
+                    fs''''1 * 1/8
+                    c''''1 * 1/8
+                    e'''1 * 1/8
+                    f''1 * 1/8
+                    af'1 * 1/8
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \clef "bass"
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                }
+            >>
+
+    Returns new collection.
+    """
+    specifier = ArpeggiationSpacingSpecifier(direction=abjad.Down)
+    result = specifier([collection])
+    assert len(result) == 1
+    segment = result[0]
+    assert isinstance(segment, abjad.PitchSegment), repr(segment)
+    return segment
+
+
+def arpeggiate_up(collection):
+    r"""
+    Arpeggiates collection up.
+
+    ..  container:: example
+
+        >>> segment = abjad.PitchClassSegment([6, 0, 4, 5, 8])
+        >>> segment = baca.pcollections.arpeggiate_up(segment)
+        >>> segment
+        PitchSegment(items=[6, 12, 16, 17, 20], item_class=NumberedPitch)
+
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \clef "treble"
+                    fs'1 * 1/8
+                    c''1 * 1/8
+                    e''1 * 1/8
+                    f''1 * 1/8
+                    af''1 * 1/8
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \clef "bass"
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                }
+            >>
+
+    Returns new collection.
+    """
+    specifier = ArpeggiationSpacingSpecifier(direction=abjad.Up)
+    result = specifier([collection])
+    assert len(result) == 1
+    segment = result[0]
+    assert isinstance(segment, abjad.PitchSegment), repr(segment)
+    return segment
+
+
+def bass_to_octave(collection, n=4):
+    r"""
+    Octave-transposes collection to bass in octave ``n``.
+
+    ..  container:: example
+
+        >>> segment = abjad.PitchSegment([-2, -1.5, 6, 7, -1.5, 7])
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \clef "treble"
+                    r1 * 1/8
+                    r1 * 1/8
+                    fs'1 * 1/8
+                    g'1 * 1/8
+                    r1 * 1/8
+                    g'1 * 1/8
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \clef "bass"
+                    bf1 * 1/8
+                    bqf1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                    bqf1 * 1/8
+                    r1 * 1/8
+                }
+            >>
+
+        >>> baca.pcollections.bass_to_octave(segment, n=4)
+        PitchSegment(items=[10, 10.5, 18, 19, 10.5, 19], item_class=NumberedPitch)
+
+        >>> segment = baca.pcollections.bass_to_octave(segment, n=4)
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \clef "treble"
+                    bf'1 * 1/8
+                    bqf'1 * 1/8
+                    fs''1 * 1/8
+                    g''1 * 1/8
+                    bqf'1 * 1/8
+                    g''1 * 1/8
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \clef "bass"
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                }
+            >>
+
+    Returns new collection.
+    """
+    from .commandclasses import RegisterToOctaveCommand
+
+    # TODO: remove reference to RegisterToOctaveCommand;
+    #       implement as segment-only operation
+    command = RegisterToOctaveCommand(anchor=abjad.Down, octave_number=n)
+    selection = [abjad.Note(_, (1, 4)) for _ in collection]
+    command([selection])
+    pitches = abjad.iterate.pitches(selection)
+    segment = abjad.PitchSegment.from_pitches(pitches)
+    return dataclasses.replace(collection, items=segment)
+
+
+def center_to_octave(collection, n=4):
+    r"""
+    Octave-transposes collection to center in octave ``n``.
+
+    ..  container:: example
+
+        >>> segment = abjad.PitchSegment([-2, -1.5, 6, 7, -1.5, 7])
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \clef "treble"
+                    r1 * 1/8
+                    r1 * 1/8
+                    fs'1 * 1/8
+                    g'1 * 1/8
+                    r1 * 1/8
+                    g'1 * 1/8
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \clef "bass"
+                    bf1 * 1/8
+                    bqf1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                    bqf1 * 1/8
+                    r1 * 1/8
+                }
+            >>
+
+        >>> baca.pcollections.center_to_octave(segment, n=3)
+        PitchSegment(items=[-14, -13.5, -6, -5, -13.5, -5], item_class=NumberedPitch)
+
+        >>> segment = baca.pcollections.center_to_octave(segment, n=3)
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \clef "treble"
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \clef "bass"
+                    bf,1 * 1/8
+                    bqf,1 * 1/8
+                    fs1 * 1/8
+                    g1 * 1/8
+                    bqf,1 * 1/8
+                    g1 * 1/8
+                }
+            >>
+
+    Returns new collection.
+    """
+    from .commandclasses import RegisterToOctaveCommand
+
+    # TODO: remove reference to RegisterToOctaveCommand;
+    #       implement as segment-only operation
+    command = RegisterToOctaveCommand(anchor=abjad.Center, octave_number=n)
+    selection = [abjad.Note(_, (1, 4)) for _ in collection]
+    command([selection])
+    pitches = abjad.iterate.pitches(selection)
+    segment = abjad.PitchSegment.from_pitches(pitches)
+    return dataclasses.replace(collection, items=segment)
+
+
+def get_matching_transforms(
+    collection,
+    segment_2,
+    inversion=False,
+    multiplication=False,
+    retrograde=False,
+    rotation=False,
+    transposition=False,
+):
+    r"""
+    Gets transforms of ``collection`` that match ``segment_2``.
+
+    ..  container:: example
+
+        Example segments:
+
+        >>> items = [-2, -1, 6, 7, -1, 7]
+        >>> segment_1 = abjad.PitchClassSegment(items=items)
+        >>> lilypond_file = abjad.illustrate(segment_1)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        >>> items = [9, 2, 1, 6, 2, 6]
+        >>> segment_2 = abjad.PitchClassSegment(items=items)
+        >>> lilypond_file = abjad.illustrate(segment_2)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  container:: example
+
+        Gets matching transforms:
+
+        >>> transforms = baca.pcollections.get_matching_transforms(
+        ...     segment_1,
+        ...     segment_2,
+        ...     inversion=True,
+        ...     multiplication=True,
+        ...     retrograde=True,
+        ...     rotation=False,
+        ...     transposition=True,
+        ...     )
+        >>> for operator, transform in transforms:
+        ...     compound = "".join(operator)
+        ...     print(compound, str(transform))
+        ...
+        M5T11 PC<9, 2, 1, 6, 2, 6>
+        M7T1I PC<9, 2, 1, 6, 2, 6>
+
+        >>> transforms = baca.pcollections.get_matching_transforms(
+        ...     segment_2,
+        ...     segment_1,
+        ...     inversion=True,
+        ...     multiplication=True,
+        ...     retrograde=True,
+        ...     rotation=False,
+        ...     transposition=True,
+        ...     )
+        >>> for operator, transform in transforms:
+        ...     compound = "".join(operator)
+        ...     print(compound, str(transform))
+        ...
+        M5T5 PC<10, 11, 6, 7, 11, 7>
+        M7T7I PC<10, 11, 6, 7, 11, 7>
+
+    ..  container:: example
+
+        No matching transforms. Segments of differing lengths never transform into
+        each other:
+
+        >>> segment_2 = abjad.PitchClassSegment(items=[0, 1, 2])
+        >>> baca.pcollections.get_matching_transforms(
+        ...     segment_2,
+        ...     segment_1,
+        ...     inversion=True,
+        ...     multiplication=True,
+        ...     retrograde=True,
+        ...     rotation=False,
+        ...     transposition=True,
+        ... )
+        []
+
+    """
+    result = []
+    if not len(collection) == len(segment_2):
+        return result
+    transforms = get_transforms(
+        collection,
+        inversion=inversion,
+        multiplication=multiplication,
+        retrograde=retrograde,
+        rotation=rotation,
+        transposition=transposition,
+    )
+    for operator, transform in transforms:
+        if transform == segment_2:
+            result.append((operator, transform))
+    return result
+
+
+def get_transforms(
+    collection,
+    inversion=False,
+    multiplication=False,
+    retrograde=False,
+    rotation=False,
+    show_identity_operators=False,
+    transposition=False,
+):
+    """
+    Applies transform strings.
+
+    ..  container:: example
+
+        >>> items = [-2, -1, 6, 7, -1, 7]
+        >>> J = abjad.PitchClassSegment(items=items)
+        >>> lilypond_file = abjad.illustrate(J)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        >>> pairs = baca.pcollections.get_transforms(
+        ...     J,
+        ...     inversion=True,
+        ...     multiplication=True,
+        ...     retrograde=True,
+        ...     transposition=True,
+        ... )
+
+        >>> for rank, (list_, transform) in enumerate(pairs, start=1):
+        ...     compound = "".join(list_)
+        ...     string = "{:3}:{:>9}(J): {!s}"
+        ...     string = string.format(rank, compound, transform)
+        ...     print(string)
+        1:     M1T0(J): PC<10, 11, 6, 7, 11, 7>
+        2:     M1T1(J): PC<11, 0, 7, 8, 0, 8>
+        3:     M1T2(J): PC<0, 1, 8, 9, 1, 9>
+        4:     M1T3(J): PC<1, 2, 9, 10, 2, 10>
+        5:     M1T4(J): PC<2, 3, 10, 11, 3, 11>
+        6:     M1T5(J): PC<3, 4, 11, 0, 4, 0>
+        7:     M1T6(J): PC<4, 5, 0, 1, 5, 1>
+        8:     M1T7(J): PC<5, 6, 1, 2, 6, 2>
+        9:     M1T8(J): PC<6, 7, 2, 3, 7, 3>
+        10:     M1T9(J): PC<7, 8, 3, 4, 8, 4>
+        11:    M1T10(J): PC<8, 9, 4, 5, 9, 5>
+        12:    M1T11(J): PC<9, 10, 5, 6, 10, 6>
+        13:    M1T0I(J): PC<2, 1, 6, 5, 1, 5>
+        14:    M1T1I(J): PC<3, 2, 7, 6, 2, 6>
+        15:    M1T2I(J): PC<4, 3, 8, 7, 3, 7>
+        16:    M1T3I(J): PC<5, 4, 9, 8, 4, 8>
+        17:    M1T4I(J): PC<6, 5, 10, 9, 5, 9>
+        18:    M1T5I(J): PC<7, 6, 11, 10, 6, 10>
+        19:    M1T6I(J): PC<8, 7, 0, 11, 7, 11>
+        20:    M1T7I(J): PC<9, 8, 1, 0, 8, 0>
+        21:    M1T8I(J): PC<10, 9, 2, 1, 9, 1>
+        22:    M1T9I(J): PC<11, 10, 3, 2, 10, 2>
+        23:   M1T10I(J): PC<0, 11, 4, 3, 11, 3>
+        24:   M1T11I(J): PC<1, 0, 5, 4, 0, 4>
+        25:     M5T0(J): PC<2, 7, 6, 11, 7, 11>
+        26:     M5T1(J): PC<7, 0, 11, 4, 0, 4>
+        27:     M5T2(J): PC<0, 5, 4, 9, 5, 9>
+        28:     M5T3(J): PC<5, 10, 9, 2, 10, 2>
+        29:     M5T4(J): PC<10, 3, 2, 7, 3, 7>
+        30:     M5T5(J): PC<3, 8, 7, 0, 8, 0>
+        31:     M5T6(J): PC<8, 1, 0, 5, 1, 5>
+        32:     M5T7(J): PC<1, 6, 5, 10, 6, 10>
+        33:     M5T8(J): PC<6, 11, 10, 3, 11, 3>
+        34:     M5T9(J): PC<11, 4, 3, 8, 4, 8>
+        35:    M5T10(J): PC<4, 9, 8, 1, 9, 1>
+        36:    M5T11(J): PC<9, 2, 1, 6, 2, 6>
+        37:    M5T0I(J): PC<10, 5, 6, 1, 5, 1>
+        38:    M5T1I(J): PC<3, 10, 11, 6, 10, 6>
+        39:    M5T2I(J): PC<8, 3, 4, 11, 3, 11>
+        40:    M5T3I(J): PC<1, 8, 9, 4, 8, 4>
+        41:    M5T4I(J): PC<6, 1, 2, 9, 1, 9>
+        42:    M5T5I(J): PC<11, 6, 7, 2, 6, 2>
+        43:    M5T6I(J): PC<4, 11, 0, 7, 11, 7>
+        44:    M5T7I(J): PC<9, 4, 5, 0, 4, 0>
+        45:    M5T8I(J): PC<2, 9, 10, 5, 9, 5>
+        46:    M5T9I(J): PC<7, 2, 3, 10, 2, 10>
+        47:   M5T10I(J): PC<0, 7, 8, 3, 7, 3>
+        48:   M5T11I(J): PC<5, 0, 1, 8, 0, 8>
+        49:     M7T0(J): PC<10, 5, 6, 1, 5, 1>
+        50:     M7T1(J): PC<5, 0, 1, 8, 0, 8>
+        51:     M7T2(J): PC<0, 7, 8, 3, 7, 3>
+        52:     M7T3(J): PC<7, 2, 3, 10, 2, 10>
+        53:     M7T4(J): PC<2, 9, 10, 5, 9, 5>
+        54:     M7T5(J): PC<9, 4, 5, 0, 4, 0>
+        55:     M7T6(J): PC<4, 11, 0, 7, 11, 7>
+        56:     M7T7(J): PC<11, 6, 7, 2, 6, 2>
+        57:     M7T8(J): PC<6, 1, 2, 9, 1, 9>
+        58:     M7T9(J): PC<1, 8, 9, 4, 8, 4>
+        59:    M7T10(J): PC<8, 3, 4, 11, 3, 11>
+        60:    M7T11(J): PC<3, 10, 11, 6, 10, 6>
+        61:    M7T0I(J): PC<2, 7, 6, 11, 7, 11>
+        62:    M7T1I(J): PC<9, 2, 1, 6, 2, 6>
+        63:    M7T2I(J): PC<4, 9, 8, 1, 9, 1>
+        64:    M7T3I(J): PC<11, 4, 3, 8, 4, 8>
+        65:    M7T4I(J): PC<6, 11, 10, 3, 11, 3>
+        66:    M7T5I(J): PC<1, 6, 5, 10, 6, 10>
+        67:    M7T6I(J): PC<8, 1, 0, 5, 1, 5>
+        68:    M7T7I(J): PC<3, 8, 7, 0, 8, 0>
+        69:    M7T8I(J): PC<10, 3, 2, 7, 3, 7>
+        70:    M7T9I(J): PC<5, 10, 9, 2, 10, 2>
+        71:   M7T10I(J): PC<0, 5, 4, 9, 5, 9>
+        72:   M7T11I(J): PC<7, 0, 11, 4, 0, 4>
+        73:    M11T0(J): PC<2, 1, 6, 5, 1, 5>
+        74:    M11T1(J): PC<1, 0, 5, 4, 0, 4>
+        75:    M11T2(J): PC<0, 11, 4, 3, 11, 3>
+        76:    M11T3(J): PC<11, 10, 3, 2, 10, 2>
+        77:    M11T4(J): PC<10, 9, 2, 1, 9, 1>
+        78:    M11T5(J): PC<9, 8, 1, 0, 8, 0>
+        79:    M11T6(J): PC<8, 7, 0, 11, 7, 11>
+        80:    M11T7(J): PC<7, 6, 11, 10, 6, 10>
+        81:    M11T8(J): PC<6, 5, 10, 9, 5, 9>
+        82:    M11T9(J): PC<5, 4, 9, 8, 4, 8>
+        83:   M11T10(J): PC<4, 3, 8, 7, 3, 7>
+        84:   M11T11(J): PC<3, 2, 7, 6, 2, 6>
+        85:   M11T0I(J): PC<10, 11, 6, 7, 11, 7>
+        86:   M11T1I(J): PC<9, 10, 5, 6, 10, 6>
+        87:   M11T2I(J): PC<8, 9, 4, 5, 9, 5>
+        88:   M11T3I(J): PC<7, 8, 3, 4, 8, 4>
+        89:   M11T4I(J): PC<6, 7, 2, 3, 7, 3>
+        90:   M11T5I(J): PC<5, 6, 1, 2, 6, 2>
+        91:   M11T6I(J): PC<4, 5, 0, 1, 5, 1>
+        92:   M11T7I(J): PC<3, 4, 11, 0, 4, 0>
+        93:   M11T8I(J): PC<2, 3, 10, 11, 3, 11>
+        94:   M11T9I(J): PC<1, 2, 9, 10, 2, 10>
+        95:  M11T10I(J): PC<0, 1, 8, 9, 1, 9>
+        96:  M11T11I(J): PC<11, 0, 7, 8, 0, 8>
+        97:    RM1T0(J): PC<7, 11, 7, 6, 11, 10>
+        98:    RM1T1(J): PC<8, 0, 8, 7, 0, 11>
+        99:    RM1T2(J): PC<9, 1, 9, 8, 1, 0>
+        100:    RM1T3(J): PC<10, 2, 10, 9, 2, 1>
+        101:    RM1T4(J): PC<11, 3, 11, 10, 3, 2>
+        102:    RM1T5(J): PC<0, 4, 0, 11, 4, 3>
+        103:    RM1T6(J): PC<1, 5, 1, 0, 5, 4>
+        104:    RM1T7(J): PC<2, 6, 2, 1, 6, 5>
+        105:    RM1T8(J): PC<3, 7, 3, 2, 7, 6>
+        106:    RM1T9(J): PC<4, 8, 4, 3, 8, 7>
+        107:   RM1T10(J): PC<5, 9, 5, 4, 9, 8>
+        108:   RM1T11(J): PC<6, 10, 6, 5, 10, 9>
+        109:   RM1T0I(J): PC<5, 1, 5, 6, 1, 2>
+        110:   RM1T1I(J): PC<6, 2, 6, 7, 2, 3>
+        111:   RM1T2I(J): PC<7, 3, 7, 8, 3, 4>
+        112:   RM1T3I(J): PC<8, 4, 8, 9, 4, 5>
+        113:   RM1T4I(J): PC<9, 5, 9, 10, 5, 6>
+        114:   RM1T5I(J): PC<10, 6, 10, 11, 6, 7>
+        115:   RM1T6I(J): PC<11, 7, 11, 0, 7, 8>
+        116:   RM1T7I(J): PC<0, 8, 0, 1, 8, 9>
+        117:   RM1T8I(J): PC<1, 9, 1, 2, 9, 10>
+        118:   RM1T9I(J): PC<2, 10, 2, 3, 10, 11>
+        119:  RM1T10I(J): PC<3, 11, 3, 4, 11, 0>
+        120:  RM1T11I(J): PC<4, 0, 4, 5, 0, 1>
+        121:    RM5T0(J): PC<11, 7, 11, 6, 7, 2>
+        122:    RM5T1(J): PC<4, 0, 4, 11, 0, 7>
+        123:    RM5T2(J): PC<9, 5, 9, 4, 5, 0>
+        124:    RM5T3(J): PC<2, 10, 2, 9, 10, 5>
+        125:    RM5T4(J): PC<7, 3, 7, 2, 3, 10>
+        126:    RM5T5(J): PC<0, 8, 0, 7, 8, 3>
+        127:    RM5T6(J): PC<5, 1, 5, 0, 1, 8>
+        128:    RM5T7(J): PC<10, 6, 10, 5, 6, 1>
+        129:    RM5T8(J): PC<3, 11, 3, 10, 11, 6>
+        130:    RM5T9(J): PC<8, 4, 8, 3, 4, 11>
+        131:   RM5T10(J): PC<1, 9, 1, 8, 9, 4>
+        132:   RM5T11(J): PC<6, 2, 6, 1, 2, 9>
+        133:   RM5T0I(J): PC<1, 5, 1, 6, 5, 10>
+        134:   RM5T1I(J): PC<6, 10, 6, 11, 10, 3>
+        135:   RM5T2I(J): PC<11, 3, 11, 4, 3, 8>
+        136:   RM5T3I(J): PC<4, 8, 4, 9, 8, 1>
+        137:   RM5T4I(J): PC<9, 1, 9, 2, 1, 6>
+        138:   RM5T5I(J): PC<2, 6, 2, 7, 6, 11>
+        139:   RM5T6I(J): PC<7, 11, 7, 0, 11, 4>
+        140:   RM5T7I(J): PC<0, 4, 0, 5, 4, 9>
+        141:   RM5T8I(J): PC<5, 9, 5, 10, 9, 2>
+        142:   RM5T9I(J): PC<10, 2, 10, 3, 2, 7>
+        143:  RM5T10I(J): PC<3, 7, 3, 8, 7, 0>
+        144:  RM5T11I(J): PC<8, 0, 8, 1, 0, 5>
+        145:    RM7T0(J): PC<1, 5, 1, 6, 5, 10>
+        146:    RM7T1(J): PC<8, 0, 8, 1, 0, 5>
+        147:    RM7T2(J): PC<3, 7, 3, 8, 7, 0>
+        148:    RM7T3(J): PC<10, 2, 10, 3, 2, 7>
+        149:    RM7T4(J): PC<5, 9, 5, 10, 9, 2>
+        150:    RM7T5(J): PC<0, 4, 0, 5, 4, 9>
+        151:    RM7T6(J): PC<7, 11, 7, 0, 11, 4>
+        152:    RM7T7(J): PC<2, 6, 2, 7, 6, 11>
+        153:    RM7T8(J): PC<9, 1, 9, 2, 1, 6>
+        154:    RM7T9(J): PC<4, 8, 4, 9, 8, 1>
+        155:   RM7T10(J): PC<11, 3, 11, 4, 3, 8>
+        156:   RM7T11(J): PC<6, 10, 6, 11, 10, 3>
+        157:   RM7T0I(J): PC<11, 7, 11, 6, 7, 2>
+        158:   RM7T1I(J): PC<6, 2, 6, 1, 2, 9>
+        159:   RM7T2I(J): PC<1, 9, 1, 8, 9, 4>
+        160:   RM7T3I(J): PC<8, 4, 8, 3, 4, 11>
+        161:   RM7T4I(J): PC<3, 11, 3, 10, 11, 6>
+        162:   RM7T5I(J): PC<10, 6, 10, 5, 6, 1>
+        163:   RM7T6I(J): PC<5, 1, 5, 0, 1, 8>
+        164:   RM7T7I(J): PC<0, 8, 0, 7, 8, 3>
+        165:   RM7T8I(J): PC<7, 3, 7, 2, 3, 10>
+        166:   RM7T9I(J): PC<2, 10, 2, 9, 10, 5>
+        167:  RM7T10I(J): PC<9, 5, 9, 4, 5, 0>
+        168:  RM7T11I(J): PC<4, 0, 4, 11, 0, 7>
+        169:   RM11T0(J): PC<5, 1, 5, 6, 1, 2>
+        170:   RM11T1(J): PC<4, 0, 4, 5, 0, 1>
+        171:   RM11T2(J): PC<3, 11, 3, 4, 11, 0>
+        172:   RM11T3(J): PC<2, 10, 2, 3, 10, 11>
+        173:   RM11T4(J): PC<1, 9, 1, 2, 9, 10>
+        174:   RM11T5(J): PC<0, 8, 0, 1, 8, 9>
+        175:   RM11T6(J): PC<11, 7, 11, 0, 7, 8>
+        176:   RM11T7(J): PC<10, 6, 10, 11, 6, 7>
+        177:   RM11T8(J): PC<9, 5, 9, 10, 5, 6>
+        178:   RM11T9(J): PC<8, 4, 8, 9, 4, 5>
+        179:  RM11T10(J): PC<7, 3, 7, 8, 3, 4>
+        180:  RM11T11(J): PC<6, 2, 6, 7, 2, 3>
+        181:  RM11T0I(J): PC<7, 11, 7, 6, 11, 10>
+        182:  RM11T1I(J): PC<6, 10, 6, 5, 10, 9>
+        183:  RM11T2I(J): PC<5, 9, 5, 4, 9, 8>
+        184:  RM11T3I(J): PC<4, 8, 4, 3, 8, 7>
+        185:  RM11T4I(J): PC<3, 7, 3, 2, 7, 6>
+        186:  RM11T5I(J): PC<2, 6, 2, 1, 6, 5>
+        187:  RM11T6I(J): PC<1, 5, 1, 0, 5, 4>
+        188:  RM11T7I(J): PC<0, 4, 0, 11, 4, 3>
+        189:  RM11T8I(J): PC<11, 3, 11, 10, 3, 2>
+        190:  RM11T9I(J): PC<10, 2, 10, 9, 2, 1>
+        191: RM11T10I(J): PC<9, 1, 9, 8, 1, 0>
+        192: RM11T11I(J): PC<8, 0, 8, 7, 0, 11>
+
+    """
+    lists = []
+    if transposition:
+        for n in range(12):
+            lists.append([f"T{n}"])
+    else:
+        lists.append(["T0"])
+    if inversion:
+        lists = lists + [_[:] + ["I"] for _ in lists]
+
+    if multiplication:
+        lists = (
+            [["M1"] + _[:] for _ in lists]
+            + [["M5"] + _[:] for _ in lists]
+            + [["M7"] + _[:] for _ in lists]
+            + [["M11"] + _[:] for _ in lists]
+        )
+    if retrograde:
+        lists = lists + [["R"] + _[:] for _ in lists]
+    if rotation:
+        lists_ = []
+        for n in range(len(collection)):
+            lists_.extend([f"r{n}"] + _[:] for _ in lists)
+        lists = lists_
+    pairs = []
+    for list_ in lists:
+        transform = collection
+        for string in reversed(list_):
+            if string == "I":
+                transform = transform.invert()
+            elif string.startswith("T"):
+                n = int(string.removeprefix("T"))
+                transform = transform.transpose(n=n)
+            elif string.startswith("M"):
+                n = int(string.removeprefix("M"))
+                transform = transform.multiply(n=n)
+            elif string == "R":
+                transform = transform.retrograde()
+            else:
+                assert string.startswith("r")
+                n = int(string.removeprefix("r"))
+                transform = transform.rotate(n=n)
+        pairs.append((list_, transform))
+    return pairs
+
+
 def has_duplicate_pitch_classes(collections, level=-1) -> bool:
     """
     Is true when collections have duplicate pitch-classes at ``level``.
@@ -2391,7 +1834,7 @@ def has_duplicate_pitch_classes(collections, level=-1) -> bool:
     ..  container:: example
 
         >>> collections = [[4, 5, 7], [15, 16, 17, 19]]
-        >>> collections = [baca.PitchSegment(_) for _ in collections]
+        >>> collections = [abjad.PitchSegment(_) for _ in collections]
 
         >>> baca.pcollections.has_duplicate_pitch_classes(collections, level=1)
         False
@@ -2425,13 +1868,13 @@ def has_duplicate_pitch_classes(collections, level=-1) -> bool:
 
 
 def has_duplicates(collections, level=-1) -> bool:
-    """
+    r"""
     Is true when collections have duplicates at ``level``.
 
     ..  container:: example
 
         >>> collections = [[16, 17], [13], [16, 17]]
-        >>> collections = [baca.PitchSegment(_) for _ in collections]
+        >>> collections = [abjad.PitchSegment(_) for _ in collections]
 
         >>> baca.pcollections.has_duplicates(collections, level=0)
         True
@@ -2445,7 +1888,7 @@ def has_duplicates(collections, level=-1) -> bool:
     ..  container:: example
 
         >>> collections = [[16, 17], [14, 20, 14]]
-        >>> collections = [baca.PitchSegment(_) for _ in collections]
+        >>> collections = [abjad.PitchSegment(_) for _ in collections]
 
         >>> baca.pcollections.has_duplicates(collections, level=0)
         False
@@ -2459,7 +1902,7 @@ def has_duplicates(collections, level=-1) -> bool:
     ..  container:: example
 
         >>> collections = [[16, 17], [14, 20], [14]]
-        >>> collections = [baca.PitchSegment(_) for _ in collections]
+        >>> collections = [abjad.PitchSegment(_) for _ in collections]
 
         >>> baca.pcollections.has_duplicates(collections, level=0)
         False
@@ -2468,6 +1911,58 @@ def has_duplicates(collections, level=-1) -> bool:
         False
 
         >>> baca.pcollections.has_duplicates(collections, level=-1)
+        True
+
+    ..  container:: example
+
+        >>> items = [-2, -1.5, 6, 7]
+        >>> segment = abjad.PitchClassSegment(items=items)
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> voice = lilypond_file["Voice"]
+            >>> string = abjad.lilypond(voice)
+            >>> print(string)
+            \context Voice = "Voice"
+            {
+                bf'8
+                bqf'8
+                fs'8
+                g'8
+                \bar "|."
+                \override Score.BarLine.transparent = ##f
+            }
+
+        >>> baca.pcollections.has_duplicates([segment])
+        False
+
+    ..  container:: example
+
+        >>> items = [-2, -1.5, 6, 7, -1.5, 7]
+        >>> segment = abjad.PitchClassSegment(items=items)
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> voice = lilypond_file["Voice"]
+            >>> string = abjad.lilypond(voice)
+            >>> print(string)
+            \context Voice = "Voice"
+            {
+                bf'8
+                bqf'8
+                fs'8
+                g'8
+                bqf'8
+                g'8
+                \bar "|."
+                \override Score.BarLine.transparent = ##f
+            }
+
+        >>> baca.pcollections.has_duplicates([segment])
         True
 
     Set ``level`` to 0, 1 or -1.
@@ -2504,7 +1999,7 @@ def has_repeat_pitch_classes(collections, level=-1) -> bool:
     ..  container:: example
 
         >>> collections = [[4, 5, 4, 5], [17, 18]]
-        >>> collections = [baca.PitchSegment(_) for _ in collections]
+        >>> collections = [abjad.PitchSegment(_) for _ in collections]
 
         >>> baca.pcollections.has_repeat_pitch_classes(collections, level=1)
         False
@@ -2538,13 +2033,13 @@ def has_repeat_pitch_classes(collections, level=-1) -> bool:
 
 
 def has_repeats(collections, level=-1) -> bool:
-    """
+    r"""
     Is true when collections have repeats at ``level``.
 
     ..  container:: example
 
         >>> collections = [[4, 5], [4, 5]]
-        >>> collections = [baca.PitchSegment(_) for _ in collections]
+        >>> collections = [abjad.PitchSegment(_) for _ in collections]
 
         >>> baca.pcollections.has_repeats(collections, level=0)
         True
@@ -2558,7 +2053,7 @@ def has_repeats(collections, level=-1) -> bool:
     ..  container:: example
 
         >>> collections = [[4, 5], [18, 18], [4, 5]]
-        >>> collections = [baca.PitchSegment(_) for _ in collections]
+        >>> collections = [abjad.PitchSegment(_) for _ in collections]
 
         >>> baca.pcollections.has_repeats(collections, level=0)
         False
@@ -2572,7 +2067,7 @@ def has_repeats(collections, level=-1) -> bool:
     ..  container:: example
 
         >>> collections = [[4, 5], [5, 18], [4, 5]]
-        >>> collections = [baca.PitchSegment(_) for _ in collections]
+        >>> collections = [abjad.PitchSegment(_) for _ in collections]
 
         >>> baca.pcollections.has_repeats(collections, level=0)
         False
@@ -2581,6 +2076,59 @@ def has_repeats(collections, level=-1) -> bool:
         False
 
         >>> baca.pcollections.has_repeats(collections, level=-1)
+        True
+
+    ..  container:: example
+
+        >>> items = [-2, -1.5, 6, 7, -1.5, 7]
+        >>> segment = abjad.PitchClassSegment(items=items)
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> voice = lilypond_file["Voice"]
+            >>> string = abjad.lilypond(voice)
+            >>> print(string)
+            \context Voice = "Voice"
+            {
+                bf'8
+                bqf'8
+                fs'8
+                g'8
+                bqf'8
+                g'8
+                \bar "|."
+                \override Score.BarLine.transparent = ##f
+            }
+
+        >>> baca.pcollections.has_repeats([segment])
+        False
+
+    ..  container:: example
+
+        >>> items = [-2, -1.5, 6, 7, 7]
+        >>> segment = abjad.PitchClassSegment(items=items)
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> voice = lilypond_file["Voice"]
+            >>> string = abjad.lilypond(voice)
+            >>> print(string)
+            \context Voice = "Voice"
+            {
+                bf'8
+                bqf'8
+                fs'8
+                g'8
+                g'8
+                \bar "|."
+                \override Score.BarLine.transparent = ##f
+            }
+
+        >>> baca.pcollections.has_repeats([segment])
         True
 
     Set ``level`` to 0, 1 or -1.
@@ -2617,7 +2165,7 @@ def read(collections, counts=None, check=None):
     ..  container:: example
 
         >>> collections = [[5, 12, 14, 18, 17], [16, 17, 19]]
-        >>> collections = [baca.PitchSegment(_) for _ in collections]
+        >>> collections = [abjad.PitchSegment(_) for _ in collections]
 
         >>> for collection in baca.pcollections.read(collections, [3, 3, 3, 5, 5, 5]):
         ...     collection
@@ -2634,7 +2182,7 @@ def read(collections, counts=None, check=None):
         Raises exception on inexact read:
 
         >>> collections = [[5, 12, 14, 18, 17], [16, 17, 19]]
-        >>> collections = [baca.PitchSegment(_) for _ in collections]
+        >>> collections = [abjad.PitchSegment(_) for _ in collections]
 
         >>> len(abjad.sequence.join(collections)[0])
         8
@@ -2683,7 +2231,7 @@ def remove_duplicate_pitch_classes(collections, level=-1):
     ..  container:: example
 
         >>> collections = [[4, 5, 7], [16, 17, 16, 18]]
-        >>> collections = [baca.PitchSegment(_) for _ in collections]
+        >>> collections = [abjad.PitchSegment(_) for _ in collections]
 
         >>> baca.pcollections.remove_duplicate_pitch_classes(collections, level=1)
         [PitchSegment(items=[4, 5, 7], item_class=NumberedPitch), PitchSegment(items=[16, 17, 18], item_class=NumberedPitch)]
@@ -2733,7 +2281,7 @@ def remove_duplicates(collections, level=-1):
     ..  container:: example
 
         >>> collections = [[16, 17, 16], [13, 14, 16], [16, 17, 16]]
-        >>> collections = [baca.PitchSegment(_) for _ in collections]
+        >>> collections = [abjad.PitchSegment(_) for _ in collections]
 
         >>> baca.pcollections.remove_duplicates(collections, level=0)
         [PitchSegment(items=[16, 17, 16], item_class=NumberedPitch), PitchSegment(items=[13, 14, 16], item_class=NumberedPitch)]
@@ -2790,7 +2338,7 @@ def remove_repeat_pitch_classes(collections, level=-1):
     ..  container:: example
 
         >>> collections = [[4, 4, 4, 5], [17, 18]]
-        >>> collections = [baca.PitchSegment(_) for _ in collections]
+        >>> collections = [abjad.PitchSegment(_) for _ in collections]
 
         >>> baca.pcollections.remove_repeat_pitch_classes(collections, level=1)
         [PitchSegment(items=[4, 5], item_class=NumberedPitch), PitchSegment(items=[17, 18], item_class=NumberedPitch)]
@@ -2843,7 +2391,7 @@ def remove_repeats(collections, level=-1):
     ..  container:: example
 
         >>> collections = [[4, 5], [4, 5], [5, 7, 7]]
-        >>> collections = [baca.PitchSegment(_) for _ in collections]
+        >>> collections = [abjad.PitchSegment(_) for _ in collections]
 
         >>> baca.pcollections.remove_repeats(collections, level=0)
         [PitchSegment(items=[4, 5], item_class=NumberedPitch), PitchSegment(items=[5, 7, 7], item_class=NumberedPitch)]
@@ -2892,6 +2440,94 @@ def remove_repeats(collections, level=-1):
     return collections_
 
 
+def soprano_to_octave(collection, n=4):
+    r"""
+    Octave-transposes collection to soprano in octave ``n``.
+
+    ..  container:: example
+
+        >>> segment = abjad.PitchSegment([-2, -1.5, 6, 7, -1.5, 7])
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \clef "treble"
+                    r1 * 1/8
+                    r1 * 1/8
+                    fs'1 * 1/8
+                    g'1 * 1/8
+                    r1 * 1/8
+                    g'1 * 1/8
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \clef "bass"
+                    bf1 * 1/8
+                    bqf1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                    bqf1 * 1/8
+                    r1 * 1/8
+                }
+            >>
+
+        >>> baca.pcollections.soprano_to_octave(segment, n=3)
+        PitchSegment(items=[-14, -13.5, -6, -5, -13.5, -5], item_class=NumberedPitch)
+
+        >>> segment = baca.pcollections.soprano_to_octave(segment, n=3)
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \clef "treble"
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \clef "bass"
+                    bf,1 * 1/8
+                    bqf,1 * 1/8
+                    fs1 * 1/8
+                    g1 * 1/8
+                    bqf,1 * 1/8
+                    g1 * 1/8
+                }
+            >>
+
+    Returns new segment.
+    """
+    from .commandclasses import RegisterToOctaveCommand
+
+    # TODO: remove reference to RegisterToOctaveCommand;
+    #       implement as segment-only operation
+    command = RegisterToOctaveCommand(anchor=abjad.Up, octave_number=n)
+    selection = [abjad.Note(_, (1, 4)) for _ in collection]
+    command([selection])
+    pitches = abjad.iterate.pitches(selection)
+    segment = abjad.PitchSegment.from_pitches(pitches)
+    return dataclasses.replace(collection, items=segment)
+
 
 def space_down(collection, bass=None, semitones=None, soprano=None):
     r"""
@@ -2899,7 +2535,7 @@ def space_down(collection, bass=None, semitones=None, soprano=None):
 
     ..  container:: example
 
-        >>> segment = baca.PitchClassSegment([10, 11, 5, 6, 7])
+        >>> segment = abjad.PitchClassSegment([10, 11, 5, 6, 7])
         >>> lilypond_file = abjad.illustrate(segment)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2965,7 +2601,7 @@ def space_down(collection, bass=None, semitones=None, soprano=None):
 
     ..  container:: example
 
-        >>> segment = baca.PitchSegment([12, 14, 21, 22])
+        >>> segment = abjad.PitchSegment([12, 14, 21, 22])
         >>> lilypond_file = abjad.illustrate(segment)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3030,7 +2666,7 @@ def space_down(collection, bass=None, semitones=None, soprano=None):
 
         With 2 in bass:
 
-        >>> segment = baca.PitchSegment([12, 14, 21, 22])
+        >>> segment = abjad.PitchSegment([12, 14, 21, 22])
         >>> lilypond_file = abjad.illustrate(segment)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3232,7 +2868,7 @@ def space_up(collection, bass=None, semitones=None, soprano=None):
 
     ..  container:: example
 
-        >>> segment = baca.PitchClassSegment([10, 11, 5, 6, 7])
+        >>> segment = abjad.PitchClassSegment([10, 11, 5, 6, 7])
         >>> lilypond_file = abjad.illustrate(segment)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3298,7 +2934,7 @@ def space_up(collection, bass=None, semitones=None, soprano=None):
 
     ..  container:: example
 
-        >>> segment = baca.PitchSegment([12, 14, 21, 22])
+        >>> segment = abjad.PitchSegment([12, 14, 21, 22])
         >>> lilypond_file = abjad.illustrate(segment)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3363,7 +2999,7 @@ def space_up(collection, bass=None, semitones=None, soprano=None):
 
         With 2 in bass:
 
-        >>> segment = baca.PitchSegment([12, 14, 21, 22])
+        >>> segment = abjad.PitchSegment([12, 14, 21, 22])
         >>> lilypond_file = abjad.illustrate(segment)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3557,3 +3193,116 @@ def space_up(collection, bass=None, semitones=None, soprano=None):
     assert len(result) == 1, repr(result)
     collection_ = result[0]
     return collection_
+
+
+def split(collection, pitch=0):
+    r"""
+    Splits collection at ``pitch``.
+
+    ..  container:: example
+
+        >>> items = [-2, -1.5, 6, 7, -1.5, 7]
+        >>> segment = abjad.PitchSegment(items=items)
+        >>> lilypond_file = abjad.illustrate(segment)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \clef "treble"
+                    r1 * 1/8
+                    r1 * 1/8
+                    fs'1 * 1/8
+                    g'1 * 1/8
+                    r1 * 1/8
+                    g'1 * 1/8
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \clef "bass"
+                    bf1 * 1/8
+                    bqf1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                    bqf1 * 1/8
+                    r1 * 1/8
+                }
+            >>
+
+        >>> upper, lower = baca.pcollections.split(segment, pitch=0)
+
+        >>> upper
+        PitchSegment(items=[6, 7, 7], item_class=NumberedPitch)
+
+        >>> lilypond_file = abjad.illustrate(upper)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \clef "treble"
+                    fs'1 * 1/8
+                    g'1 * 1/8
+                    g'1 * 1/8
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \clef "bass"
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                }
+            >>
+
+        >>> lower
+        PitchSegment(items=[-2, -1.5, -1.5], item_class=NumberedPitch)
+
+        >>> lilypond_file = abjad.illustrate(lower)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> staff_group = lilypond_file["Piano_Staff"]
+            >>> string = abjad.lilypond(staff_group)
+            >>> print(string)
+            \context PianoStaff = "Piano_Staff"
+            <<
+                \context Staff = "Treble_Staff"
+                {
+                    \clef "treble"
+                    r1 * 1/8
+                    r1 * 1/8
+                    r1 * 1/8
+                }
+                \context Staff = "Bass_Staff"
+                {
+                    \clef "bass"
+                    bf1 * 1/8
+                    bqf1 * 1/8
+                    bqf1 * 1/8
+                }
+            >>
+
+    Returns upper, lower collections.
+    """
+    upper, lower = [], []
+    for pitch_ in collection:
+        if pitch_ < pitch:
+            lower.append(pitch_)
+        else:
+            upper.append(pitch_)
+    upper = dataclasses.replace(collection, items=upper)
+    lower = dataclasses.replace(collection, items=lower)
+    return upper, lower
