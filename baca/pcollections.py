@@ -45,7 +45,7 @@ class ArpeggiationSpacingSpecifier:
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> collections = [abjad.NumberedPitchSegment(_) for _ in collections]
-        >>> collections = [abjad.PitchClassSegment(_) for _ in collections]
+        >>> collections = [abjad.NumberedPitchClassSegment(_) for _ in collections]
         >>> collections = [baca.pcollections.arpeggiate_up(_) for _ in collections]
         >>> selection = stack(collections)
 
@@ -98,7 +98,7 @@ class ArpeggiationSpacingSpecifier:
         ... )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> collections = [abjad.PitchClassSegment(_) for _ in collections]
+        >>> collections = [abjad.NumberedPitchClassSegment(_) for _ in collections]
         >>> collections = [baca.pcollections.arpeggiate_down(_) for _ in collections]
         >>> selection = stack(collections)
 
@@ -1055,7 +1055,7 @@ def alpha(collection):
         Example segment:
 
         >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-        >>> J = abjad.PitchClassSegment(items=items)
+        >>> J = abjad.NumberedPitchClassSegment(items=items)
 
         >>> lilypond_file = abjad.illustrate(J)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1066,7 +1066,7 @@ def alpha(collection):
 
         >>> segment = baca.pcollections.alpha(J)
         >>> segment
-        PitchClassSegment(items=[11, 11.5, 7, 6, 11.5, 6], item_class=NumberedPitchClass)
+        NumberedPitchClassSegment([11, 11.5, 7, 6, 11.5, 6])
 
         >>> lilypond_file = abjad.illustrate(segment)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1095,7 +1095,7 @@ def alpha(collection):
         >>> segment = baca.pcollections.alpha(J)
         >>> segment = baca.pcollections.alpha(segment)
         >>> segment
-        PitchClassSegment(items=[10, 10.5, 6, 7, 10.5, 7], item_class=NumberedPitchClass)
+        NumberedPitchClassSegment([10, 10.5, 6, 7, 10.5, 7])
 
         >>> lilypond_file = abjad.illustrate(segment)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1147,7 +1147,7 @@ def arpeggiate_down(collection):
 
     ..  container:: example
 
-        >>> segment = abjad.PitchClassSegment([6, 0, 4, 5, 8])
+        >>> segment = abjad.NumberedPitchClassSegment([6, 0, 4, 5, 8])
         >>> segment = baca.pcollections.arpeggiate_down(segment)
         >>> segment
         NumberedPitchSegment([42, 36, 28, 17, 8])
@@ -1198,7 +1198,7 @@ def arpeggiate_up(collection):
 
     ..  container:: example
 
-        >>> segment = abjad.PitchClassSegment([6, 0, 4, 5, 8])
+        >>> segment = abjad.NumberedPitchClassSegment([6, 0, 4, 5, 8])
         >>> segment = baca.pcollections.arpeggiate_up(segment)
         >>> segment
         NumberedPitchSegment([6, 12, 16, 17, 20])
@@ -1440,12 +1440,12 @@ def get_matching_transforms(
         Example segments:
 
         >>> items = [-2, -1, 6, 7, -1, 7]
-        >>> segment_1 = abjad.PitchClassSegment(items=items)
+        >>> segment_1 = abjad.NumberedPitchClassSegment(items=items)
         >>> lilypond_file = abjad.illustrate(segment_1)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         >>> items = [9, 2, 1, 6, 2, 6]
-        >>> segment_2 = abjad.PitchClassSegment(items=items)
+        >>> segment_2 = abjad.NumberedPitchClassSegment(items=items)
         >>> lilypond_file = abjad.illustrate(segment_2)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1490,7 +1490,7 @@ def get_matching_transforms(
         No matching transforms. Segments of differing lengths never transform into
         each other:
 
-        >>> segment_2 = abjad.PitchClassSegment(items=[0, 1, 2])
+        >>> segment_2 = abjad.NumberedPitchClassSegment(items=[0, 1, 2])
         >>> baca.pcollections.get_matching_transforms(
         ...     segment_2,
         ...     segment_1,
@@ -1535,7 +1535,7 @@ def get_transforms(
     ..  container:: example
 
         >>> items = [-2, -1, 6, 7, -1, 7]
-        >>> J = abjad.PitchClassSegment(items=items)
+        >>> J = abjad.NumberedPitchClassSegment(items=items)
         >>> lilypond_file = abjad.illustrate(J)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1880,7 +1880,7 @@ def has_duplicates(collections, level=-1) -> bool:
     ..  container:: example
 
         >>> items = [-2, -1.5, 6, 7]
-        >>> segment = abjad.PitchClassSegment(items=items)
+        >>> segment = abjad.NumberedPitchClassSegment(items=items)
         >>> lilypond_file = abjad.illustrate(segment)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1905,7 +1905,7 @@ def has_duplicates(collections, level=-1) -> bool:
     ..  container:: example
 
         >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-        >>> segment = abjad.PitchClassSegment(items=items)
+        >>> segment = abjad.NumberedPitchClassSegment(items=items)
         >>> lilypond_file = abjad.illustrate(segment)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2045,7 +2045,7 @@ def has_repeats(collections, level=-1) -> bool:
     ..  container:: example
 
         >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-        >>> segment = abjad.PitchClassSegment(items=items)
+        >>> segment = abjad.NumberedPitchClassSegment(items=items)
         >>> lilypond_file = abjad.illustrate(segment)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2072,7 +2072,7 @@ def has_repeats(collections, level=-1) -> bool:
     ..  container:: example
 
         >>> items = [-2, -1.5, 6, 7, 7]
-        >>> segment = abjad.PitchClassSegment(items=items)
+        >>> segment = abjad.NumberedPitchClassSegment(items=items)
         >>> lilypond_file = abjad.illustrate(segment)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2499,7 +2499,7 @@ def space_down(collection, bass=None, semitones=None, soprano=None):
 
     ..  container:: example
 
-        >>> segment = abjad.PitchClassSegment([10, 11, 5, 6, 7])
+        >>> segment = abjad.NumberedPitchClassSegment([10, 11, 5, 6, 7])
         >>> lilypond_file = abjad.illustrate(segment)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2832,7 +2832,7 @@ def space_up(collection, bass=None, semitones=None, soprano=None):
 
     ..  container:: example
 
-        >>> segment = abjad.PitchClassSegment([10, 11, 5, 6, 7])
+        >>> segment = abjad.NumberedPitchClassSegment([10, 11, 5, 6, 7])
         >>> lilypond_file = abjad.illustrate(segment)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 

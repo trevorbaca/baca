@@ -1333,51 +1333,51 @@ def accumulate(sequence, operands=None, count=None):
 
         Accumulates identity operator:
 
-        >>> collection_1 = abjad.PitchClassSegment([0, 1, 2, 3])
-        >>> collection_2 = abjad.PitchClassSegment([4, 5])
+        >>> collection_1 = abjad.NumberedPitchClassSegment([0, 1, 2, 3])
+        >>> collection_2 = abjad.NumberedPitchClassSegment([4, 5])
         >>> sequence = [collection_1, collection_2]
         >>> for item in baca.sequence.accumulate(sequence):
         ...     item
         ...
-        [PitchClassSegment(items=[0, 1, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 5], item_class=NumberedPitchClass)]
+        [NumberedPitchClassSegment([0, 1, 2, 3]), NumberedPitchClassSegment([4, 5])]
 
     ..  container:: example
 
         Accumulates alpha:
 
-        >>> collection_1 = abjad.PitchClassSegment([0, 1, 2, 3])
-        >>> collection_2 = abjad.PitchClassSegment([4, 5])
+        >>> collection_1 = abjad.NumberedPitchClassSegment([0, 1, 2, 3])
+        >>> collection_2 = abjad.NumberedPitchClassSegment([4, 5])
         >>> sequence = [collection_1, collection_2]
         >>> for item in baca.sequence.accumulate(
         ...     sequence, [lambda _: baca.pcollections.alpha(_)]
         ... ):
         ...     item
         ...
-        [PitchClassSegment(items=[0, 1, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 5], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[1, 0, 3, 2], item_class=NumberedPitchClass), PitchClassSegment(items=[5, 4], item_class=NumberedPitchClass)]
+        [NumberedPitchClassSegment([0, 1, 2, 3]), NumberedPitchClassSegment([4, 5])]
+        [NumberedPitchClassSegment([1, 0, 3, 2]), NumberedPitchClassSegment([5, 4])]
 
     ..  container:: example
 
         Accumulates transposition:
 
-        >>> collection_1 = abjad.PitchClassSegment([0, 1, 2, 3])
-        >>> collection_2 = abjad.PitchClassSegment([4, 5])
+        >>> collection_1 = abjad.NumberedPitchClassSegment([0, 1, 2, 3])
+        >>> collection_2 = abjad.NumberedPitchClassSegment([4, 5])
 
         >>> sequence = [collection_1, collection_2]
         >>> for item in baca.sequence.accumulate(sequence, [lambda _: _.transpose(n=3)]):
         ...     item
         ...
-        [PitchClassSegment(items=[0, 1, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 5], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[3, 4, 5, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[7, 8], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[6, 7, 8, 9], item_class=NumberedPitchClass), PitchClassSegment(items=[10, 11], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[9, 10, 11, 0], item_class=NumberedPitchClass), PitchClassSegment(items=[1, 2], item_class=NumberedPitchClass)]
+        [NumberedPitchClassSegment([0, 1, 2, 3]), NumberedPitchClassSegment([4, 5])]
+        [NumberedPitchClassSegment([3, 4, 5, 6]), NumberedPitchClassSegment([7, 8])]
+        [NumberedPitchClassSegment([6, 7, 8, 9]), NumberedPitchClassSegment([10, 11])]
+        [NumberedPitchClassSegment([9, 10, 11, 0]), NumberedPitchClassSegment([1, 2])]
 
     ..  container:: example
 
         Accumulates alpha followed by transposition:
 
-        >>> collection_1 = abjad.PitchClassSegment([0, 1, 2, 3])
-        >>> collection_2 = abjad.PitchClassSegment([4, 5])
+        >>> collection_1 = abjad.NumberedPitchClassSegment([0, 1, 2, 3])
+        >>> collection_2 = abjad.NumberedPitchClassSegment([4, 5])
 
         >>> sequence = [collection_1, collection_2]
         >>> for item in baca.sequence.accumulate(
@@ -1386,58 +1386,58 @@ def accumulate(sequence, operands=None, count=None):
         ... ):
         ...     item
         ...
-        [PitchClassSegment(items=[0, 1, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 5], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[1, 0, 3, 2], item_class=NumberedPitchClass), PitchClassSegment(items=[5, 4], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[4, 3, 6, 5], item_class=NumberedPitchClass), PitchClassSegment(items=[8, 7], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[5, 2, 7, 4], item_class=NumberedPitchClass), PitchClassSegment(items=[9, 6], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[8, 5, 10, 7], item_class=NumberedPitchClass), PitchClassSegment(items=[0, 9], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[9, 4, 11, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[1, 8], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[0, 7, 2, 9], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 11], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[1, 6, 3, 8], item_class=NumberedPitchClass), PitchClassSegment(items=[5, 10], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[4, 9, 6, 11], item_class=NumberedPitchClass), PitchClassSegment(items=[8, 1], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[5, 8, 7, 10], item_class=NumberedPitchClass), PitchClassSegment(items=[9, 0], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[8, 11, 10, 1], item_class=NumberedPitchClass), PitchClassSegment(items=[0, 3], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[9, 10, 11, 0], item_class=NumberedPitchClass), PitchClassSegment(items=[1, 2], item_class=NumberedPitchClass)]
+        [NumberedPitchClassSegment([0, 1, 2, 3]), NumberedPitchClassSegment([4, 5])]
+        [NumberedPitchClassSegment([1, 0, 3, 2]), NumberedPitchClassSegment([5, 4])]
+        [NumberedPitchClassSegment([4, 3, 6, 5]), NumberedPitchClassSegment([8, 7])]
+        [NumberedPitchClassSegment([5, 2, 7, 4]), NumberedPitchClassSegment([9, 6])]
+        [NumberedPitchClassSegment([8, 5, 10, 7]), NumberedPitchClassSegment([0, 9])]
+        [NumberedPitchClassSegment([9, 4, 11, 6]), NumberedPitchClassSegment([1, 8])]
+        [NumberedPitchClassSegment([0, 7, 2, 9]), NumberedPitchClassSegment([4, 11])]
+        [NumberedPitchClassSegment([1, 6, 3, 8]), NumberedPitchClassSegment([5, 10])]
+        [NumberedPitchClassSegment([4, 9, 6, 11]), NumberedPitchClassSegment([8, 1])]
+        [NumberedPitchClassSegment([5, 8, 7, 10]), NumberedPitchClassSegment([9, 0])]
+        [NumberedPitchClassSegment([8, 11, 10, 1]), NumberedPitchClassSegment([0, 3])]
+        [NumberedPitchClassSegment([9, 10, 11, 0]), NumberedPitchClassSegment([1, 2])]
 
     ..  container:: example
 
         Accumulates permutation:
 
-        >>> collection_1 = abjad.PitchClassSegment([0, 1, 2, 3])
-        >>> collection_2 = abjad.PitchClassSegment([4, 5])
+        >>> collection_1 = abjad.NumberedPitchClassSegment([0, 1, 2, 3])
+        >>> collection_2 = abjad.NumberedPitchClassSegment([4, 5])
 
         >>> row = abjad.TwelveToneRow([10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11])
         >>> sequence = [collection_1, collection_2]
         >>> for item in baca.sequence.accumulate(sequence, [lambda _: row(_)]):
         ...     item
         ...
-        [PitchClassSegment(items=[0, 1, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 5], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[10, 0, 2, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[8, 7], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[4, 10, 2, 5], item_class=NumberedPitchClass), PitchClassSegment(items=[1, 3], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[8, 4, 2, 7], item_class=NumberedPitchClass), PitchClassSegment(items=[0, 6], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[1, 8, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[10, 5], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[0, 1, 2, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 7], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[10, 0, 2, 5], item_class=NumberedPitchClass), PitchClassSegment(items=[8, 3], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[4, 10, 2, 7], item_class=NumberedPitchClass), PitchClassSegment(items=[1, 6], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[8, 4, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[0, 5], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[1, 8, 2, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[10, 7], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[0, 1, 2, 5], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 3], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[10, 0, 2, 7], item_class=NumberedPitchClass), PitchClassSegment(items=[8, 6], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[4, 10, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[1, 5], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[8, 4, 2, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[0, 7], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[1, 8, 2, 5], item_class=NumberedPitchClass), PitchClassSegment(items=[10, 3], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[0, 1, 2, 7], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 6], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[10, 0, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[8, 5], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[4, 10, 2, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[1, 7], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[8, 4, 2, 5], item_class=NumberedPitchClass), PitchClassSegment(items=[0, 3], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[1, 8, 2, 7], item_class=NumberedPitchClass), PitchClassSegment(items=[10, 6], item_class=NumberedPitchClass)]
+        [NumberedPitchClassSegment([0, 1, 2, 3]), NumberedPitchClassSegment([4, 5])]
+        [NumberedPitchClassSegment([10, 0, 2, 6]), NumberedPitchClassSegment([8, 7])]
+        [NumberedPitchClassSegment([4, 10, 2, 5]), NumberedPitchClassSegment([1, 3])]
+        [NumberedPitchClassSegment([8, 4, 2, 7]), NumberedPitchClassSegment([0, 6])]
+        [NumberedPitchClassSegment([1, 8, 2, 3]), NumberedPitchClassSegment([10, 5])]
+        [NumberedPitchClassSegment([0, 1, 2, 6]), NumberedPitchClassSegment([4, 7])]
+        [NumberedPitchClassSegment([10, 0, 2, 5]), NumberedPitchClassSegment([8, 3])]
+        [NumberedPitchClassSegment([4, 10, 2, 7]), NumberedPitchClassSegment([1, 6])]
+        [NumberedPitchClassSegment([8, 4, 2, 3]), NumberedPitchClassSegment([0, 5])]
+        [NumberedPitchClassSegment([1, 8, 2, 6]), NumberedPitchClassSegment([10, 7])]
+        [NumberedPitchClassSegment([0, 1, 2, 5]), NumberedPitchClassSegment([4, 3])]
+        [NumberedPitchClassSegment([10, 0, 2, 7]), NumberedPitchClassSegment([8, 6])]
+        [NumberedPitchClassSegment([4, 10, 2, 3]), NumberedPitchClassSegment([1, 5])]
+        [NumberedPitchClassSegment([8, 4, 2, 6]), NumberedPitchClassSegment([0, 7])]
+        [NumberedPitchClassSegment([1, 8, 2, 5]), NumberedPitchClassSegment([10, 3])]
+        [NumberedPitchClassSegment([0, 1, 2, 7]), NumberedPitchClassSegment([4, 6])]
+        [NumberedPitchClassSegment([10, 0, 2, 3]), NumberedPitchClassSegment([8, 5])]
+        [NumberedPitchClassSegment([4, 10, 2, 6]), NumberedPitchClassSegment([1, 7])]
+        [NumberedPitchClassSegment([8, 4, 2, 5]), NumberedPitchClassSegment([0, 3])]
+        [NumberedPitchClassSegment([1, 8, 2, 7]), NumberedPitchClassSegment([10, 6])]
 
     ..  container:: example
 
         Accumulates permutation followed by transposition:
 
-        >>> collection_1 = abjad.PitchClassSegment([0, 1, 2, 3])
-        >>> collection_2 = abjad.PitchClassSegment([4, 5])
+        >>> collection_1 = abjad.NumberedPitchClassSegment([0, 1, 2, 3])
+        >>> collection_2 = abjad.NumberedPitchClassSegment([4, 5])
 
         >>> row = abjad.TwelveToneRow([10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11])
         >>> sequence = [collection_1, collection_2]
@@ -1446,22 +1446,22 @@ def accumulate(sequence, operands=None, count=None):
         ... ):
         ...     item
         ...
-        [PitchClassSegment(items=[0, 1, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 5], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[10, 0, 2, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[8, 7], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[1, 3, 5, 9], item_class=NumberedPitchClass), PitchClassSegment(items=[11, 10], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[0, 6, 7, 9], item_class=NumberedPitchClass), PitchClassSegment(items=[11, 4], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[3, 9, 10, 0], item_class=NumberedPitchClass), PitchClassSegment(items=[2, 7], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[6, 9, 4, 10], item_class=NumberedPitchClass), PitchClassSegment(items=[2, 3], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[9, 0, 7, 1], item_class=NumberedPitchClass), PitchClassSegment(items=[5, 6], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[9, 10, 3, 0], item_class=NumberedPitchClass), PitchClassSegment(items=[7, 5], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[0, 1, 6, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[10, 8], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[10, 0, 5, 6], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 1], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[1, 3, 8, 9], item_class=NumberedPitchClass), PitchClassSegment(items=[7, 4], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[0, 6, 1, 9], item_class=NumberedPitchClass), PitchClassSegment(items=[3, 8], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[3, 9, 4, 0], item_class=NumberedPitchClass), PitchClassSegment(items=[6, 11], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[6, 9, 8, 10], item_class=NumberedPitchClass), PitchClassSegment(items=[5, 11], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[9, 0, 11, 1], item_class=NumberedPitchClass), PitchClassSegment(items=[8, 2], item_class=NumberedPitchClass)]
-        [PitchClassSegment(items=[9, 10, 11, 0], item_class=NumberedPitchClass), PitchClassSegment(items=[1, 2], item_class=NumberedPitchClass)]
+        [NumberedPitchClassSegment([0, 1, 2, 3]), NumberedPitchClassSegment([4, 5])]
+        [NumberedPitchClassSegment([10, 0, 2, 6]), NumberedPitchClassSegment([8, 7])]
+        [NumberedPitchClassSegment([1, 3, 5, 9]), NumberedPitchClassSegment([11, 10])]
+        [NumberedPitchClassSegment([0, 6, 7, 9]), NumberedPitchClassSegment([11, 4])]
+        [NumberedPitchClassSegment([3, 9, 10, 0]), NumberedPitchClassSegment([2, 7])]
+        [NumberedPitchClassSegment([6, 9, 4, 10]), NumberedPitchClassSegment([2, 3])]
+        [NumberedPitchClassSegment([9, 0, 7, 1]), NumberedPitchClassSegment([5, 6])]
+        [NumberedPitchClassSegment([9, 10, 3, 0]), NumberedPitchClassSegment([7, 5])]
+        [NumberedPitchClassSegment([0, 1, 6, 3]), NumberedPitchClassSegment([10, 8])]
+        [NumberedPitchClassSegment([10, 0, 5, 6]), NumberedPitchClassSegment([4, 1])]
+        [NumberedPitchClassSegment([1, 3, 8, 9]), NumberedPitchClassSegment([7, 4])]
+        [NumberedPitchClassSegment([0, 6, 1, 9]), NumberedPitchClassSegment([3, 8])]
+        [NumberedPitchClassSegment([3, 9, 4, 0]), NumberedPitchClassSegment([6, 11])]
+        [NumberedPitchClassSegment([6, 9, 8, 10]), NumberedPitchClassSegment([5, 11])]
+        [NumberedPitchClassSegment([9, 0, 11, 1]), NumberedPitchClassSegment([8, 2])]
+        [NumberedPitchClassSegment([9, 10, 11, 0]), NumberedPitchClassSegment([1, 2])]
 
     Returns sequence of accumulated sequences.
 
@@ -1524,8 +1524,8 @@ def boustrophedon(sequence, count=2):
         Iterates collections boustrophedon:
 
         >>> collections = [
-        ...     abjad.PitchClassSegment([1, 2, 3]),
-        ...     abjad.PitchClassSegment([4, 5, 6]),
+        ...     abjad.NumberedPitchClassSegment([1, 2, 3]),
+        ...     abjad.NumberedPitchClassSegment([4, 5, 6]),
         ... ]
         >>> sequence = collections
 
@@ -1535,42 +1535,42 @@ def boustrophedon(sequence, count=2):
         >>> for collection in baca.sequence.boustrophedon(sequence, count=1):
         ...     collection
         ...
-        PitchClassSegment(items=[1, 2, 3], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[4, 5, 6], item_class=NumberedPitchClass)
+        NumberedPitchClassSegment([1, 2, 3])
+        NumberedPitchClassSegment([4, 5, 6])
 
         >>> for collection in baca.sequence.boustrophedon(sequence, count=2):
         ...     collection
         ...
-        PitchClassSegment(items=[1, 2, 3], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[4, 5, 6], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[5, 4], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[3, 2, 1], item_class=NumberedPitchClass)
+        NumberedPitchClassSegment([1, 2, 3])
+        NumberedPitchClassSegment([4, 5, 6])
+        NumberedPitchClassSegment([5, 4])
+        NumberedPitchClassSegment([3, 2, 1])
 
         >>> for collection in baca.sequence.boustrophedon(sequence, count=3):
         ...     collection
         ...
-        PitchClassSegment(items=[1, 2, 3], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[4, 5, 6], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[5, 4], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[3, 2, 1], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[2, 3], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[4, 5, 6], item_class=NumberedPitchClass)
+        NumberedPitchClassSegment([1, 2, 3])
+        NumberedPitchClassSegment([4, 5, 6])
+        NumberedPitchClassSegment([5, 4])
+        NumberedPitchClassSegment([3, 2, 1])
+        NumberedPitchClassSegment([2, 3])
+        NumberedPitchClassSegment([4, 5, 6])
 
     ..  container:: example
 
         Iterates mixed items boustrophedon:
 
-        >>> collection = abjad.PitchClassSegment([1, 2, 3])
+        >>> collection = abjad.NumberedPitchClassSegment([1, 2, 3])
         >>> sequence = [collection, 4, 5]
         >>> for item in baca.sequence.boustrophedon(sequence, count=3):
         ...     item
         ...
-        PitchClassSegment(items=[1, 2, 3], item_class=NumberedPitchClass)
+        NumberedPitchClassSegment([1, 2, 3])
         4
         5
         4
-        PitchClassSegment(items=[3, 2, 1], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[2, 3], item_class=NumberedPitchClass)
+        NumberedPitchClassSegment([3, 2, 1])
+        NumberedPitchClassSegment([2, 3])
         4
         5
 
@@ -1810,32 +1810,32 @@ def helianthate(sequence, n=0, m=0):
 
         Helianthates list of collections:
 
-        >>> J = abjad.PitchClassSegment(items=[0, 2, 4])
-        >>> K = abjad.PitchClassSegment(items=[5, 6])
-        >>> L = abjad.PitchClassSegment(items=[7, 9, 11])
+        >>> J = abjad.NumberedPitchClassSegment(items=[0, 2, 4])
+        >>> K = abjad.NumberedPitchClassSegment(items=[5, 6])
+        >>> L = abjad.NumberedPitchClassSegment(items=[7, 9, 11])
         >>> sequence = [J, K, L]
         >>> sequence = baca.sequence.helianthate(sequence, n=-1, m=1)
         >>> for collection in sequence:
         ...     collection
         ...
-        PitchClassSegment(items=[0, 2, 4], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[5, 6], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[7, 9, 11], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[6, 5], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[11, 7, 9], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[4, 0, 2], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[9, 11, 7], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[2, 4, 0], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[5, 6], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[0, 2, 4], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[6, 5], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[7, 9, 11], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[5, 6], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[11, 7, 9], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[4, 0, 2], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[9, 11, 7], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[2, 4, 0], item_class=NumberedPitchClass)
-        PitchClassSegment(items=[6, 5], item_class=NumberedPitchClass)
+        NumberedPitchClassSegment([0, 2, 4])
+        NumberedPitchClassSegment([5, 6])
+        NumberedPitchClassSegment([7, 9, 11])
+        NumberedPitchClassSegment([6, 5])
+        NumberedPitchClassSegment([11, 7, 9])
+        NumberedPitchClassSegment([4, 0, 2])
+        NumberedPitchClassSegment([9, 11, 7])
+        NumberedPitchClassSegment([2, 4, 0])
+        NumberedPitchClassSegment([5, 6])
+        NumberedPitchClassSegment([0, 2, 4])
+        NumberedPitchClassSegment([6, 5])
+        NumberedPitchClassSegment([7, 9, 11])
+        NumberedPitchClassSegment([5, 6])
+        NumberedPitchClassSegment([11, 7, 9])
+        NumberedPitchClassSegment([4, 0, 2])
+        NumberedPitchClassSegment([9, 11, 7])
+        NumberedPitchClassSegment([2, 4, 0])
+        NumberedPitchClassSegment([6, 5])
 
     ..  container:: example
 

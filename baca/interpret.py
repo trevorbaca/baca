@@ -1445,7 +1445,7 @@ def _color_octaves(score):
         if not pitches:
             continue
         pitch_classes = [_.pitch_class for _ in pitches]
-        if _pcollections.has_duplicates([abjad.PitchClassSegment(pitch_classes)]):
+        if _pcollections.has_duplicates([abjad.NamedPitchClassSegment(pitch_classes)]):
             color = True
             for pleaf in pleaves:
                 if abjad.get.has_indicator(pleaf, _const.ALLOW_OCTAVE):
