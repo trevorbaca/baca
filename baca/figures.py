@@ -2689,6 +2689,10 @@ class FigureAccumulator:
         prototype = (
             list,
             str,
+            abjad.NamedPitchClassSegment,
+            abjad.NamedPitchSegment,
+            abjad.NumberedPitchClassSegment,
+            abjad.NumberedPitchSegment,
             abjad.Segment,
             abjad.Set,
         )
@@ -3655,7 +3659,14 @@ def _add_rest_affixes(
 
 
 def _coerce_collections(collections):
-    prototype = (abjad.Segment, abjad.Set)
+    prototype = (
+        abjad.NamedPitchClassSegment,
+        abjad.NamedPitchSegment,
+        abjad.NumberedPitchClassSegment,
+        abjad.NumberedPitchSegment,
+        abjad.Segment,
+        abjad.Set,
+    )
     if isinstance(collections, prototype):
         return [collections]
     return collections
