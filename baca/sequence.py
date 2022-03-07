@@ -1406,9 +1406,9 @@ def accumulate(sequence, operands=None, count=None):
         >>> collection_1 = abjad.PitchClassSegment([0, 1, 2, 3])
         >>> collection_2 = abjad.PitchClassSegment([4, 5])
 
-        >>> row = [10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11]
+        >>> row = abjad.TwelveToneRow([10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11])
         >>> sequence = [collection_1, collection_2]
-        >>> for item in baca.sequence.accumulate(sequence, [lambda _: _.permute(row)]):
+        >>> for item in baca.sequence.accumulate(sequence, [lambda _: row(_)]):
         ...     item
         ...
         [PitchClassSegment(items=[0, 1, 2, 3], item_class=NumberedPitchClass), PitchClassSegment(items=[4, 5], item_class=NumberedPitchClass)]
@@ -1439,10 +1439,10 @@ def accumulate(sequence, operands=None, count=None):
         >>> collection_1 = abjad.PitchClassSegment([0, 1, 2, 3])
         >>> collection_2 = abjad.PitchClassSegment([4, 5])
 
-        >>> row = [10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11]
+        >>> row = abjad.TwelveToneRow([10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11])
         >>> sequence = [collection_1, collection_2]
         >>> for item in baca.sequence.accumulate(
-        ...     sequence, [lambda _: _.permute(row), lambda _: _.transpose(n=3)],
+        ...     sequence, [lambda _: row(_), lambda _: _.transpose(n=3)],
         ... ):
         ...     item
         ...
