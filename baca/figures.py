@@ -668,8 +668,8 @@ class LMR:
             assert 0 <= self.right_length, repr(self.right_length)
         self.right_reversed = bool(self.right_reversed)
 
-    def __call__(self, sequence: typing.Union[list, abjad.Segment] = None):
-        assert isinstance(sequence, (list, abjad.Segment)), repr(sequence)
+    def __call__(self, sequence=None):
+        assert isinstance(sequence, list), repr(sequence)
         top_lengths = self._get_top_lengths(len(sequence))
         top_parts = abjad.sequence.partition_by_counts(
             list(sequence), top_lengths, cyclic=False, overhang=abjad.Exact
@@ -1486,10 +1486,9 @@ class Acciaccatura:
         assert isinstance(self.lmr, LMR), repr(self.lmr)
 
     def __call__(
-        self, collection: typing.Union[list, abjad.Segment] = None
+        self, collection: list = None
     ) -> typing.Tuple[typing.List[typing.Optional[abjad.BeforeGraceContainer]], list]:
-        prototype = (list, abjad.Segment)
-        assert isinstance(collection, prototype), repr(collection)
+        assert isinstance(collection, list), repr(collection)
         segment_parts = self.lmr(collection)
         segment_parts = [_ for _ in segment_parts if _]
         collection = [_[-1] for _ in segment_parts]
@@ -2693,7 +2692,6 @@ class FigureAccumulator:
             abjad.NamedPitchSegment,
             abjad.NumberedPitchClassSegment,
             abjad.NumberedPitchSegment,
-            abjad.Segment,
             abjad.Set,
         )
         if not isinstance(collections, prototype):
@@ -3664,7 +3662,6 @@ def _coerce_collections(collections):
         abjad.NamedPitchSegment,
         abjad.NumberedPitchClassSegment,
         abjad.NumberedPitchSegment,
-        abjad.Segment,
         abjad.Set,
     )
     if isinstance(collections, prototype):
