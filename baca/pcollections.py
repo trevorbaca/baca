@@ -548,7 +548,6 @@ class ChordalSpacingSpecifier:
             pitch_classes = [abjad.NumberedPitchClass(_) for _ in collection]
             pitch_classes.sort()
         else:
-            # pitch_classes = list(collection.to_numbered_pitch_classes())
             pitch_classes = [abjad.NumberedPitchClass(_) for _ in collection]
         bass, soprano, outer = None, None, []
         if self.bass is not None:
@@ -688,17 +687,11 @@ class HarmonicSeries:
 
     """
 
-    ### CLASS VARIABLES ###
-
     __slots__ = ("_fundamental",)
-
-    ### INITIALIZER ###
 
     def __init__(self, fundamental: typing.Union[str, abjad.NamedPitch] = "C1") -> None:
         fundamental = abjad.NamedPitch(fundamental)
         self._fundamental = fundamental
-
-    ### PUBLIC PROPERTIES ###
 
     @property
     def fundamental(self) -> abjad.NamedPitch:
@@ -712,8 +705,6 @@ class HarmonicSeries:
 
         """
         return self._fundamental
-
-    ### PUBLIC METHODS ###
 
     def partial(self, n: int) -> "Partial":
         """
@@ -1328,7 +1319,6 @@ def bass_to_octave(collection, n=4):
     selection = [abjad.Note(_, (1, 4)) for _ in collection]
     command([selection])
     pitches = abjad.iterate.pitches(selection)
-    # segment = abjad.NumberedPitchSegment.from_pitches(pitches)
     segment = abjad.NumberedPitchSegment(pitches)
     return dataclasses.replace(collection, items=segment)
 
@@ -1418,7 +1408,6 @@ def center_to_octave(collection, n=4):
     selection = [abjad.Note(_, (1, 4)) for _ in collection]
     command([selection])
     pitches = abjad.iterate.pitches(selection)
-    # segment = abjad.NumberedPitchSegment.from_pitches(pitches)
     segment = abjad.NumberedPitchSegment(pitches)
     return dataclasses.replace(collection, items=segment)
 
@@ -1808,7 +1797,6 @@ def has_duplicate_pitch_classes(collections, level=-1) -> bool:
 
     Set ``level`` to 1 or -1.
     """
-    # pitch_class_class = collections._get_pitch_class_class()
     pitch_class_class = abjad.NumberedPitchClass
     if level == 1:
         for collection in collections:
@@ -1973,7 +1961,6 @@ def has_repeat_pitch_classes(collections, level=-1) -> bool:
 
     Set ``level`` to 0 or -1.
     """
-    # pitch_class_class = collections._get_pitch_class_class()
     pitch_class_class = abjad.NumberedPitchClass
     if level == 1:
         for collection in collections:
@@ -2159,9 +2146,7 @@ def read(collections, counts=None, check=None):
     counts = list(counts)
     assert all(isinstance(_, int) for _ in counts), repr(counts)
     source_collection_type = type(collections[0])
-    # collection = abjad.sequence.join(collections)[0]
     collection = abjad.sequence.join([_.items for _ in collections])[0]
-    # source_collection_type = type(collection)
     source = abjad.CyclicTuple(collection)
     i = 0
     collections_ = []
@@ -2184,6 +2169,47 @@ def read(collections, counts=None, check=None):
             message = f"call reads {result_item_count} items;"
             message += f" not a multiple of {self_item_count} items."
             raise ValueError(message)
+    return result
+
+
+def register_pcs(pitches, pcs):
+    """
+    Registers ``pcs`` by ``pitches``.
+
+    ..  container:: example
+
+        >>> pitches = [10, 19, 20, 23, 24, 26, 27, 29, 30, 33, 37, 40]
+        >>> pitches = [abjad.NumberedPitch(_) for _ in pitches]
+        >>> pcs = [10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11]
+        >>> pcs = [abjad.NumberedPitchClass(_) for _ in pcs]
+        >>> pitches = baca.pcollections.register_pcs(pitches, pcs)
+        >>> for _ in pitches: _
+        NumberedPitch(10)
+        NumberedPitch(24)
+        NumberedPitch(26)
+        NumberedPitch(30)
+        NumberedPitch(20)
+        NumberedPitch(19)
+        NumberedPitch(29)
+        NumberedPitch(27)
+        NumberedPitch(37)
+        NumberedPitch(33)
+        NumberedPitch(40)
+        NumberedPitch(23)
+
+    """
+    prototype = (abjad.NumberedPitch, abjad.NamedPitch)
+    assert all(isinstance(_, prototype) for _ in pitches), repr(pitches)
+    pitches = list(pitches)
+    prototype = (abjad.NumberedPitchClass, abjad.NamedPitchClass)
+    assert all(isinstance(_, prototype) for _ in pcs), repr(pcs)
+    pcs = list(pcs)
+    reference_pcs = [_.pitch_class for _ in pitches]
+    result = []
+    for pc in pcs:
+        index = reference_pcs.index(pc)
+        pitch = pitches[index]
+        result.append(pitch)
     return result
 
 
@@ -2311,7 +2337,6 @@ def remove_repeat_pitch_classes(collections, level=-1):
 
     Set ``level`` to 1 or -1.
     """
-    # pitch_class_class = collections._get_pitch_class_class()
     pitch_class_class = abjad.NamedPitchClass
     collections_ = []
     if level == 1:
@@ -2324,7 +2349,6 @@ def remove_repeat_pitch_classes(collections, level=-1):
                 items.append(item)
                 previous_pitch_class = pitch_class
             if items:
-                # collection_ = collections._initialize_collection(items)
                 collection_ = type(collection)(items)
                 collections_.append(collection_)
     elif level == -1:
@@ -2338,12 +2362,10 @@ def remove_repeat_pitch_classes(collections, level=-1):
                 items.append(item)
                 previous_pitch_class = pitch_class
             if items:
-                # collection_ = collections._initialize_collection(items)
                 collection_ = type(collection)(items)
                 collections_.append(collection_)
     else:
         raise ValueError(f"level must be 1 or -1: {level!r}.")
-    # return dataclasses.replace(collections, collections=collections_)
     return collections_
 
 
@@ -2488,7 +2510,6 @@ def soprano_to_octave(collection, n=4):
     selection = [abjad.Note(_, (1, 4)) for _ in collection]
     command([selection])
     pitches = abjad.iterate.pitches(selection)
-    # segment = abjad.NumberedPitchSegment.from_pitches(pitches)
     segment = abjad.NumberedPitchSegment(pitches)
     return dataclasses.replace(collection, items=segment)
 
