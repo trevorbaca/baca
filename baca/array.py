@@ -2769,7 +2769,7 @@ def pitch_arrays_to_score(pitch_arrays) -> abjad.Score:
             <<
                 \context StaffGroup = "Staff_Group"
                 <<
-                    \context Staff = "Staff"
+                    \context Staff = "Staff_1"
                     {
                         {
                             \time 4/8
@@ -2784,7 +2784,7 @@ def pitch_arrays_to_score(pitch_arrays) -> abjad.Score:
                             r8
                         }
                     }
-                    \context Staff = "Staff"
+                    \context Staff = "Staff_2"
                     {
                         {
                             \time 4/8
@@ -2806,9 +2806,10 @@ def pitch_arrays_to_score(pitch_arrays) -> abjad.Score:
     score = abjad.Score(name="Score")
     staff_group = abjad.StaffGroup(name="Staff_Group")
     score.append(staff_group)
-    number_staves = pitch_arrays[0].depth
-    staff = abjad.Staff(name="Staff")
-    staves = abjad.mutate.copy(staff, number_staves)
+    staves = []
+    for i in range(pitch_arrays[0].depth):
+        staff = abjad.Staff(name=f"Staff_{i + 1}")
+        staves.append(staff)
     staff_group.extend(staves)
     for pitch_array in pitch_arrays:
         measures = pitch_array.to_measures()
