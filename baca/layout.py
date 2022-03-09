@@ -162,8 +162,8 @@ class LBSD:
     Line-break system details.
     """
 
-    y_offset: int = None
-    alignment_distances: tuple = None
+    y_offset: int
+    alignment_distances: tuple
 
     def _get_lilypond_format_bundle(self, component=None):
         bundle = abjad.LilyPondFormatBundle()

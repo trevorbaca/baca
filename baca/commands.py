@@ -135,9 +135,9 @@ def assign_parts(
 def bcps(
     bcps,
     *tweaks: abjad.IndexedTweakManager,
-    bow_change_tweaks: abjad.IndexedTweakManagers = None,
+    bow_change_tweaks: abjad.IndexedTweakManagers = (),
     final_spanner: bool = False,
-    helper: typing.Callable = None,
+    helper: typing.Callable = lambda x, y: x,
     selector=_selectors.leaves(),
 ) -> _commandclasses.BCPCommand:
     r"""

@@ -399,20 +399,18 @@ class BCPCommand(_scoping.Command):
 
     """
 
-    bcps: typing.Sequence[abjad.IntegerPair] = None
-    bow_change_tweaks: abjad.IndexedTweakManagers = None
+    bcps: typing.Sequence[abjad.IntegerPair] = ()
+    bow_change_tweaks: abjad.IndexedTweakManagers = ()
     final_spanner: bool = False
-    helper: typing.Callable = None
-    tweaks: abjad.IndexedTweakManagers = None
+    helper: typing.Callable = lambda x, y: x
+    tweaks: abjad.IndexedTweakManagers = ()
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
-        if self.bcps is None:
-            _validate_bcps(self.bcps)
+        _validate_bcps(self.bcps)
         _scoping.validate_indexed_tweaks(self.bow_change_tweaks)
         self.final_spanner = bool(self.final_spanner)
-        if self.helper is not None:
-            assert callable(self.helper), repr(self.helper)
+        assert callable(self.helper), repr(self.helper)
         _scoping.validate_indexed_tweaks(self.tweaks)
 
     __repr__ = _scoping.Command.__repr__
@@ -425,15 +423,12 @@ class BCPCommand(_scoping.Command):
         if self.selector:
             argument = self.selector(argument)
         bcps_ = list(self.bcps)
-        if self.helper:
-            bcps_ = self.helper(bcps_, argument)
+        bcps_ = self.helper(bcps_, argument)
         bcps = abjad.CyclicTuple(bcps_)
         lts = _select.lts(argument)
-        assert isinstance(lts, list)
         add_right_text_to_me = None
         if not self.final_spanner:
             rest_count, nonrest_count = 0, 0
-            lt: abjad.LogicalTie
             for lt in reversed(lts):
                 if _is_rest(lt.head):
                     rest_count += 1
@@ -666,13 +661,11 @@ class ContainerCommand(_scoping.Command):
 
     """
 
-    identifier: str = None
+    identifier: str | None = None
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
-        if self.identifier is not None:
-            if not isinstance(self.identifier, str):
-                raise Exception(f"identifier must be string (not {self.identifier!r}).")
+        assert isinstance(self.identifier, str), repr(self.identifier)
 
     def _call(self, argument=None) -> None:
         if argument is None:
@@ -686,8 +679,8 @@ class ContainerCommand(_scoping.Command):
         else:
             identifier = f"%*% {self.identifier}"
         container = abjad.Container(identifier=identifier)
-        components = abjad.select.leaves(argument)
-        components = abjad.select.top(components)
+        leaves = abjad.select.leaves(argument)
+        components = abjad.select.top(leaves)
         abjad.mutate.wrap(components, container)
 
     def _mutates_score(self):
@@ -707,7 +700,7 @@ class DetachCommand(_scoping.Command):
 
     """
 
-    arguments: typing.Sequence[typing.Any] = None
+    arguments: typing.Sequence[typing.Any] = ()
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
@@ -736,13 +729,13 @@ class GlissandoCommand(_scoping.Command):
     allow_ties: bool = False
     hide_middle_note_heads: bool = False
     hide_middle_stems: bool = False
-    hide_stem_selector: typing.Callable = None
+    hide_stem_selector: typing.Callable | None = None
     left_broken: bool = False
     parenthesize_repeats: bool = False
     right_broken: bool = False
     right_broken_show_next: bool = False
-    selector: typing.Any = _selectors.tleaves()
-    tweaks: abjad.IndexedTweakManagers = None
+    selector: typing.Callable = _selectors.tleaves()
+    tweaks: abjad.IndexedTweakManagers = ()
     zero_padding: bool = False
 
     def __post_init__(self):
@@ -783,7 +776,7 @@ class GlobalFermataCommand(_scoping.Command):
     Global fermata command.
     """
 
-    description: str = None
+    description: str = ""
 
     description_to_command = {
         "short": "shortfermata",
@@ -861,12 +854,12 @@ class IndicatorCommand(_scoping.Command):
     Indicator command.
     """
 
-    indicators: typing.List[typing.Any] = None
-    context: str = None
+    indicators: typing.Sequence = ()
+    context: str | None = None
     do_not_test: bool = False
-    predicate: typing.Callable = None
+    predicate: typing.Callable | None = None
     redundant: bool = False
-    tweaks: abjad.IndexedTweakManagers = None
+    tweaks: abjad.IndexedTweakManagers = ()
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
@@ -975,9 +968,9 @@ class MetronomeMarkCommand(_scoping.Command):
     Metronome mark command.
     """
 
-    key: str | _indicators.Accelerando | _indicators.Ritardando = None
+    key: str | _indicators.Accelerando | _indicators.Ritardando | None = None
     redundant: bool = False
-    selector: typing.Any = _selectors.leaf(0)
+    selector: typing.Callable = _selectors.leaf(0)
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
@@ -1025,15 +1018,14 @@ class PartAssignmentCommand(_scoping.Command):
     Part assignment command.
     """
 
-    part_assignment: _parts.PartAssignment = None
+    part_assignment: _parts.PartAssignment | None = None
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
-        if self.part_assignment is not None:
-            if not isinstance(self.part_assignment, _parts.PartAssignment):
-                message = "part_assignment must be part assignment"
-                message += f" (not {self.part_assignment!r})."
-                raise Exception(message)
+        if not isinstance(self.part_assignment, _parts.PartAssignment):
+            message = "part_assignment must be part assignment"
+            message += f" (not {self.part_assignment!r})."
+            raise Exception(message)
 
     __repr__ = _scoping.Command.__repr__
 
@@ -1049,19 +1041,21 @@ class PartAssignmentCommand(_scoping.Command):
         if voice is not None and self.part_assignment is not None:
             assert isinstance(voice, abjad.Voice)
             section = self.part_assignment.section or "ZZZ"
+            assert voice.name is not None
             if not voice.name.startswith(section):
                 message = f"{voice.name} does not allow"
                 message += f" {self.part_assignment.section} part assignment:"
                 message += f"\n  {self.part_assignment}"
                 raise Exception(message)
+        assert self.part_assignment is not None
         section, token = self.part_assignment.section, self.part_assignment.token
         if token is None:
             identifier = f"%*% PartAssignment({section!r})"
         else:
             identifier = f"%*% PartAssignment({section!r}, {token!r})"
         container = abjad.Container(identifier=identifier)
-        components = abjad.select.leaves(argument)
-        components = abjad.select.top(argument)
+        leaves = abjad.select.leaves(argument)
+        components = abjad.select.top(leaves)
         abjad.mutate.wrap(components, container)
 
     def _mutates_score(self):
@@ -1167,7 +1161,7 @@ class AccidentalAdjustmentCommand(_scoping.Command):
                 note_heads = [pleaf.note_head]
             else:
                 assert isinstance(pleaf, abjad.Chord)
-                note_heads = pleaf.note_heads
+                note_heads = list(pleaf.note_heads)
             for note_head in note_heads:
                 assert note_head is not None
                 if not self.tag:
@@ -1796,7 +1790,7 @@ class ClusterCommand(_scoping.Command):
     """
 
     hide_flat_markup: bool = False
-    selector: typing.Any = _selectors.plts()
+    selector: typing.Callable = _selectors.plts()
     start_pitch: typing.Any = None
     widths: typing.Any = None
 
@@ -1926,7 +1920,7 @@ class ColorFingeringCommand(_scoping.Command):
     """
 
     numbers: typing.Any = None
-    tweaks: abjad.IndexedTweakManagers = None
+    tweaks: abjad.IndexedTweakManagers = ()
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
@@ -1981,7 +1975,7 @@ class DiatonicClusterCommand(_scoping.Command):
     """
 
     widths: typing.Any = None
-    selector: typing.Any = _selectors.plts()
+    selector: typing.Callable = _selectors.plts()
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
@@ -2309,10 +2303,11 @@ class OctaveDisplacementCommand(_scoping.Command):
             for pleaf in plt:
                 if isinstance(pleaf, abjad.Note):
                     pitch = pleaf.written_pitch
+                    assert isinstance(pitch, abjad.NamedPitch)
                     pitch += interval
                     pleaf.written_pitch = pitch
                 elif isinstance(pleaf, abjad.Chord):
-                    pitches = abjad.NumberedPitchSegment(
+                    pitches = abjad.NamedPitchSegment(
                         [_ + interval for _ in pleaf.written_pitches]
                     )
                     pleaf.written_pitches = pitches
@@ -2706,8 +2701,8 @@ class PitchCommand(_scoping.Command):
     cyclic: bool = False
     do_not_transpose: bool = False
     ignore_incomplete: bool = False
-    persist: str = None
-    pitches: typing.Union[typing.Sequence, Loop] = None
+    persist: str | None = None
+    pitches: typing.Union[typing.Sequence, Loop] = ()
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
@@ -2722,8 +2717,7 @@ class PitchCommand(_scoping.Command):
         self._mutated_score = False
         if self.persist is not None:
             assert isinstance(self.persist, str), repr(self.persist)
-        if self.pitches is not None:
-            self.pitches = _coerce_pitches(self.pitches)
+        self.pitches = _coerce_pitches(self.pitches)
         self._state = {}
 
     __repr__ = _scoping.Command.__repr__
@@ -4549,7 +4543,7 @@ class StaffPositionCommand(_scoping.Command):
     allow_repitch: bool = False
     exact: bool = False
     mock: bool = False
-    selector: typing.Any = _selectors.plts()
+    selector: typing.Callable = _selectors.plts()
     set_chord_pitches_equal: bool = False
 
     def __post_init__(self):
@@ -4632,11 +4626,11 @@ class StaffPositionInterpolationCommand(_scoping.Command):
     Staff position interpolation command.
     """
 
-    start: typing.Union[int, str, abjad.NamedPitch, abjad.StaffPosition] = None
-    stop: typing.Union[int, str, abjad.NamedPitch, abjad.StaffPosition] = None
+    start: int | str | abjad.NamedPitch | abjad.StaffPosition | None = None
+    stop: int | str | abjad.NamedPitch | abjad.StaffPosition | None = None
     mock: bool = False
     pitches_instead_of_staff_positions: bool = False
-    selector: typing.Any = _selectors.plts()
+    selector: typing.Callable = _selectors.plts()
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
@@ -4710,6 +4704,7 @@ class StaffPositionInterpolationCommand(_scoping.Command):
         if isinstance(self.start, abjad.NamedPitch):
             start_pitch = self.start
         else:
+            assert isinstance(self.start, abjad.StaffPosition)
             clef = abjad.get.effective(
                 plts[0],
                 abjad.Clef,
@@ -4721,6 +4716,7 @@ class StaffPositionInterpolationCommand(_scoping.Command):
         if isinstance(self.stop, abjad.NamedPitch):
             stop_pitch = self.stop
         else:
+            assert isinstance(self.stop, abjad.StaffPosition)
             clef = abjad.get.effective(
                 plts[0],
                 abjad.Clef,
@@ -5524,17 +5520,23 @@ def interpolate_pitches(
 
 
 def interpolate_staff_positions(
-    start: typing.Union[int, abjad.StaffPosition],
-    stop: typing.Union[int, abjad.StaffPosition],
+    start: int | float | abjad.StaffPosition,
+    stop: int | float | abjad.StaffPosition,
     selector=_selectors.plts(exclude=_const.HIDDEN),
     *,
     mock: bool = False,
 ) -> StaffPositionInterpolationCommand:
-    r"""
+    """
     Interpolates from ``start`` staff position to ``stop`` staff position.
     """
-    start_ = abjad.StaffPosition(start)
-    stop_ = abjad.StaffPosition(stop)
+    if isinstance(start, abjad.StaffPosition):
+        start_ = start
+    else:
+        start_ = abjad.StaffPosition(start)
+    if isinstance(stop, abjad.StaffPosition):
+        stop_ = stop
+    else:
+        stop_ = abjad.StaffPosition(stop)
     return StaffPositionInterpolationCommand(
         start=start_, stop=stop_, mock=mock, selector=selector
     )

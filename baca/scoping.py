@@ -376,8 +376,10 @@ class Scope:
 
     """
 
+    # TODO: reverse order of parameters; make voice_name mandatory
+
     measures: typings.SliceTyping = (1, -1)
-    voice_name: str = None
+    voice_name: str | None = None
 
     def __post_init__(self):
         if isinstance(self.measures, int):
@@ -389,8 +391,7 @@ class Scope:
         assert start != 0, repr(start)
         assert isinstance(stop, int), repr(stop)
         assert stop != 0, repr(stop)
-        if self.voice_name is not None:
-            assert isinstance(self.voice_name, str), repr(self.voice_name)
+        assert isinstance(self.voice_name, str), repr(self.voice_name)
 
 
 @dataclasses.dataclass(slots=True)
@@ -626,17 +627,17 @@ class Command:
     map: typing.Any = None
     match: typings.Indices = None
     measures: typings.SliceTyping = None
-    scope: ScopeTyping = None
-    selector: typing.Any = None
+    scope: ScopeTyping | None = None
+    selector: typing.Callable | None = None
     tag_measure_number: bool = False
-    tags: typing.List[typing.Optional[abjad.Tag]] = None
+    tags: typing.List[typing.Optional[abjad.Tag]] = dataclasses.field(
+        default_factory=list
+    )
 
     def __post_init__(self):
         self._runtime = {}
-        if self.selector is not None and not callable(self.selector):
-            message = "selector must be callable:\n"
-            message += f"   {repr(self.selector)}"
-            raise Exception(message)
+        if self.selector is not None:
+            assert callable(self.selector)
         self.tags = list(self.tags or [])
         assert _validate_tags(self.tags)
         self._initialize_tags(self.tags)
@@ -649,12 +650,6 @@ class Command:
         if self.map is not None:
             assert callable(self.map)
             argument = self.map(argument)
-            if (
-                hasattr(self.map, "_is_singular_get_item")
-                and self.map._is_singular_get_item()
-            ):
-                raise Exception("ASDF")
-                argument = [argument]
             for subargument in argument:
                 self._call(argument=subargument)
         else:
@@ -782,7 +777,7 @@ class Suite:
 
     """
 
-    commands: typing.Sequence["CommandTyping"] = None
+    commands: typing.Sequence["CommandTyping"] = ()
     keywords: dict | None = None
 
     def __post_init__(self):
@@ -1059,6 +1054,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
     result = []
     assert all(isinstance(_, (Command, Suite)) for _ in commands), repr(commands)
     for item in commands:
+        item_: Command | Suite
         if isinstance(item, Command):
             item_ = dataclasses.replace(item, **keywords)
         else:

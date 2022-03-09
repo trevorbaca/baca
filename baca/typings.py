@@ -7,7 +7,7 @@ import abjad
 
 IntegerList = typing.List[int]
 
-Indices = typing.Union[int, abjad.IntegerPair, IntegerList]
+Indices = int | abjad.IntegerPair | IntegerList | None
 
 HorizontalAlignmentTyping = typing.Union[abjad.Number, abjad.HorizontalAlignment]
 
@@ -37,4 +37,4 @@ ScopeTyping = typing.Union[
     typing.Tuple[typing.List[str], typing.Tuple[int, int]],
 ]
 
-SliceTyping = typing.Union[int, abjad.IntegerPair]
+SliceTyping = int | abjad.IntegerPair | None

@@ -26,23 +26,25 @@ class OverrideCommand(_scoping.Command):
     """
 
     after: bool = False
-    allowlist: typing.Tuple[type] = None
-    attribute: str = None
-    blocklist: typing.Tuple[type] = None
-    context: str = None
-    grob: str = None
-    selector: typing.Any = _selectors.leaves()
+    allowlist: tuple[type, ...] = ()
+    attribute: str | None = None
+    blocklist: tuple[type, ...] = ()
+    context: str | None = None
+    grob: str | None = None
+    selector: typing.Callable = _selectors.leaves()
     value: typing.Any = None
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
         self.after = bool(self.after)
         if self.allowlist is not None:
+            self.allowlist = tuple(self.allowlist)
             assert isinstance(self.allowlist, tuple), repr(self.allowlist)
             assert all(issubclass(_, abjad.Leaf) for _ in self.allowlist)
         if self.attribute is not None:
             assert isinstance(self.attribute, str), repr(self.attribute)
         if self.blocklist is not None:
+            self.blocklist = tuple(self.blocklist)
             assert isinstance(self.blocklist, tuple), repr(self.blocklist)
             assert all(issubclass(_, abjad.Leaf) for _ in self.blocklist)
         if self.context is not None:
@@ -1181,7 +1183,7 @@ def hairpin_start_shift(
     Shifts hairpin start dynamic to left by width of dynamic.
     """
     dynamic = abjad.Dynamic(dynamic)
-    width = dynamic._to_width[dynamic.name]
+    width = dynamic._to_width[str(dynamic.name)]
     extra_offset_x = -width
     hairpin_shorten_left = width - 1.25
     suite = _scoping.suite(
@@ -4247,13 +4249,12 @@ def text_script_color(
         Exception: MultimeasureRest is forbidden.
 
     """
-    if allow_mmrests is True:
-        blocklist = None
-    else:
-        blocklist = (abjad.MultimeasureRest,)
+    blocklist = []
+    if allow_mmrests is not True:
+        blocklist.append(abjad.MultimeasureRest)
     return OverrideCommand(
         attribute="color",
-        blocklist=blocklist,
+        blocklist=tuple(blocklist),
         value=color,
         grob="TextScript",
         selector=selector,
@@ -4382,13 +4383,12 @@ def text_script_down(
         Exception: MultimeasureRest is forbidden.
 
     """
-    if allow_mmrests is True:
-        blocklist = None
-    else:
-        blocklist = (abjad.MultimeasureRest,)
+    blocklist = []
+    if allow_mmrests is not True:
+        blocklist.append(abjad.MultimeasureRest)
     return OverrideCommand(
         attribute="direction",
-        blocklist=blocklist,
+        blocklist=tuple(blocklist),
         value=abjad.Down,
         grob="TextScript",
         selector=selector,
@@ -4435,13 +4435,12 @@ def text_script_extra_offset(
         Exception: MultimeasureRest is forbidden.
 
     """
-    if allow_mmrests is True:
-        blocklist = None
-    else:
-        blocklist = (abjad.MultimeasureRest,)
+    blocklist = []
+    if allow_mmrests is not True:
+        blocklist.append(abjad.MultimeasureRest)
     return OverrideCommand(
         attribute="extra_offset",
-        blocklist=blocklist,
+        blocklist=tuple(blocklist),
         value=f"#'({pair[0]} . {pair[1]})",
         grob="TextScript",
         selector=selector,
@@ -4458,13 +4457,12 @@ def text_script_font_size(
     """
     Overrides text script font size.
     """
-    if allow_mmrests is True:
-        blocklist = None
-    else:
-        blocklist = (abjad.MultimeasureRest,)
+    blocklist = []
+    if allow_mmrests is not True:
+        blocklist.append(abjad.MultimeasureRest)
     return OverrideCommand(
         attribute="font_size",
-        blocklist=blocklist,
+        blocklist=tuple(blocklist),
         value=n,
         grob="TextScript",
         selector=selector,
@@ -4594,13 +4592,12 @@ def text_script_padding(
         Exception: MultimeasureRest is forbidden.
 
     """
-    if allow_mmrests is True:
-        blocklist = None
-    else:
-        blocklist = (abjad.MultimeasureRest,)
+    blocklist = []
+    if allow_mmrests is not True:
+        blocklist.append(abjad.MultimeasureRest)
     return OverrideCommand(
         attribute="padding",
-        blocklist=blocklist,
+        blocklist=tuple(blocklist),
         value=n,
         grob="TextScript",
         selector=selector,
@@ -4617,13 +4614,12 @@ def text_script_parent_alignment_x(
     """
     Overrides text script parent-alignment-X.
     """
-    if allow_mmrests is True:
-        blocklist = None
-    else:
-        blocklist = (abjad.MultimeasureRest,)
+    blocklist = []
+    if allow_mmrests is not True:
+        blocklist.append(abjad.MultimeasureRest)
     return OverrideCommand(
         attribute="parent_alignment_X",
-        blocklist=blocklist,
+        blocklist=tuple(blocklist),
         grob="TextScript",
         selector=selector,
         tags=[_scoping.site(_frame())],
@@ -4640,13 +4636,12 @@ def text_script_self_alignment_x(
     """
     Overrides text script self-alignment-X.
     """
-    if allow_mmrests is True:
-        blocklist = None
-    else:
-        blocklist = (abjad.MultimeasureRest,)
+    blocklist = []
+    if allow_mmrests is not True:
+        blocklist.append(abjad.MultimeasureRest)
     return OverrideCommand(
         attribute="self_alignment_X",
-        blocklist=blocklist,
+        blocklist=tuple(blocklist),
         grob="TextScript",
         selector=selector,
         tags=[_scoping.site(_frame())],
@@ -4776,13 +4771,12 @@ def text_script_staff_padding(
         Exception: MultimeasureRest is forbidden.
 
     """
-    if allow_mmrests is True:
-        blocklist = None
-    else:
-        blocklist = (abjad.MultimeasureRest,)
+    blocklist = []
+    if allow_mmrests is not True:
+        blocklist.append(abjad.MultimeasureRest)
     return OverrideCommand(
         attribute="staff_padding",
-        blocklist=blocklist,
+        blocklist=tuple(blocklist),
         value=n,
         grob="TextScript",
         selector=selector,
@@ -4911,13 +4905,12 @@ def text_script_up(
         Exception: MultimeasureRest is forbidden.
 
     """
-    if allow_mmrests is True:
-        blocklist = None
-    else:
-        blocklist = (abjad.MultimeasureRest,)
+    blocklist = []
+    if allow_mmrests is not True:
+        blocklist.append(abjad.MultimeasureRest)
     return OverrideCommand(
         attribute="direction",
-        blocklist=blocklist,
+        blocklist=tuple(blocklist),
         grob="TextScript",
         selector=selector,
         tags=[_scoping.site(_frame())],
@@ -4934,13 +4927,12 @@ def text_script_x_offset(
     """
     Overrides text script X-offset.
     """
-    if allow_mmrests is True:
-        blocklist = None
-    else:
-        blocklist = (abjad.MultimeasureRest,)
+    blocklist = []
+    if allow_mmrests is not True:
+        blocklist.append(abjad.MultimeasureRest)
     return OverrideCommand(
         attribute="X_offset",
-        blocklist=blocklist,
+        blocklist=tuple(blocklist),
         grob="TextScript",
         selector=selector,
         tags=[_scoping.site(_frame())],
@@ -4957,13 +4949,12 @@ def text_script_y_offset(
     """
     Overrides text script Y-offset.
     """
-    if allow_mmrests is True:
-        blocklist = None
-    else:
-        blocklist = (abjad.MultimeasureRest,)
+    blocklist = []
+    if allow_mmrests is not True:
+        blocklist.append(abjad.MultimeasureRest)
     return OverrideCommand(
         attribute="Y_offset",
-        blocklist=blocklist,
+        blocklist=tuple(blocklist),
         grob="TextScript",
         selector=selector,
         tags=[_scoping.site(_frame())],

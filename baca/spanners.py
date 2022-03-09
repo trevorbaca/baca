@@ -23,7 +23,7 @@ class SpannerIndicatorCommand(_scoping.Command):
     right_broken: bool = False
     start_indicator: typing.Any = None
     stop_indicator: typing.Any = None
-    tweaks: abjad.IndexedTweakManagers = None
+    tweaks: abjad.IndexedTweakManagers = ()
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
@@ -470,16 +470,16 @@ def slur(
 
     """
     if phrasing_slur is True:
-        start_slur = start_slur or abjad.StartPhrasingSlur()
-        stop_slur = stop_slur or abjad.StopPhrasingSlur()
+        start_slur_ = start_slur or abjad.StartPhrasingSlur()
+        stop_slur_ = stop_slur or abjad.StopPhrasingSlur()
     else:
-        start_slur = start_slur or abjad.StartSlur()
-        stop_slur = stop_slur or abjad.StopSlur()
+        start_slur_ = start_slur or abjad.StartSlur()
+        stop_slur_ = stop_slur or abjad.StopSlur()
     return SpannerIndicatorCommand(
         map=map,
         selector=selector,
-        start_indicator=start_slur,
-        stop_indicator=stop_slur,
+        start_indicator=start_slur_,
+        stop_indicator=stop_slur_,
         tags=[_scoping.site(_frame())],
         tweaks=tweaks,
     )

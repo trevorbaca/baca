@@ -100,15 +100,15 @@ class PiecewiseCommand(_scoping.Command):
 
     autodetect_right_padding: bool = False
     bookend: typing.Union[bool, int] = False
-    bundles: typing.List[Bundle] = None
+    bundles: typing.Sequence[Bundle] = ()
     final_piece_spanner: typing.Any = None
     leak_spanner_stop: bool = False
     left_broken: bool = False
     pieces: typing.Any = _selectors.leaves()
     remove_length_1_spanner_start: bool = False
     right_broken: typing.Any = None
-    selector: typing.Any = _selectors.leaves()
-    tweaks: abjad.IndexedTweakManagers = None
+    selector: typing.Callable = _selectors.leaves()
+    tweaks: abjad.IndexedTweakManagers = ()
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)

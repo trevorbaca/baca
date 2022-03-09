@@ -84,8 +84,8 @@ class Accelerando:
     """
 
     hide: bool = False
-    markup: abjad.Markup = None
-    tweaks: abjad.TweakInterface = None
+    markup: abjad.Markup | None = None
+    tweaks: abjad.TweakInterface | None = None
 
     _is_dataclass = True
     context = "Score"
@@ -397,8 +397,8 @@ class Ritardando:
     """
 
     hide: bool = False
-    markup: abjad.Markup = None
-    tweaks: abjad.TweakInterface = None
+    markup: abjad.Markup | None = None
+    tweaks: abjad.TweakInterface | None = None
 
     def __post_init__(self):
         self.hide = bool(self.hide)

@@ -2578,8 +2578,7 @@ def start_markup(
         string = rf"\markup \column {{ {line_1} {line_2} {line_3} }}"
         start_markup = abjad.StartMarkup(markup=string)
     elif isinstance(argument, abjad.Markup):
-        markup = abjad.Markup(argument)
-        start_markup = abjad.StartMarkup(markup=markup)
+        start_markup = abjad.StartMarkup(markup=argument)
     elif isinstance(argument, abjad.StartMarkup):
         start_markup = argument
     else:

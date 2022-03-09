@@ -151,7 +151,11 @@ class ArpeggiationSpacingSpecifier:
         if self.pattern is not None:
             assert isinstance(self.pattern, abjad.Pattern), repr(self.pattern)
 
-    def __call__(self, collections=None) -> abjad.NumberedPitchSegment | None:
+    def __call__(
+        self, collections=None
+    ) -> abjad.NumberedPitchSegment | list[
+        abjad.NumberedPitchSegment | abjad.PitchSet
+    ] | None:
         if collections is None:
             return None
         if collections == []:
@@ -177,6 +181,7 @@ class ArpeggiationSpacingSpecifier:
                     pitches = _to_tightly_spaced_pitches_ascending(pitch_classes)
                 else:
                     pitches = _to_tightly_spaced_pitches_descending(pitch_classes)
+                collection_: abjad.PitchSet | abjad.NumberedPitchSegment
                 if isinstance(pitch_class_collection, abjad.Set):
                     collection_ = abjad.PitchSet(items=pitches)
                 else:
@@ -849,7 +854,7 @@ class Partial:
 
     """
 
-    fundamental: typing.Union[str, abjad.NamedPitch] = "C1"
+    fundamental: abjad.NamedPitch = abjad.NamedPitch("C1")
     number: int = 1
 
     def __post_init__(self):

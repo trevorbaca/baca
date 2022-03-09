@@ -633,17 +633,17 @@ class LMR:
 
     """
 
-    left_counts: typing.Sequence[int] = None
+    left_counts: typing.Sequence[int] = ()
     left_cyclic: bool = False
-    left_length: int = None
+    left_length: int = 0
     left_reversed: bool = False
-    middle_counts: typing.Sequence[int] = None
+    middle_counts: typing.Sequence[int] = ()
     middle_cyclic: bool = False
     middle_reversed: bool = False
-    priority: abjad.HorizontalAlignment = None
-    right_counts: typing.Sequence[int] = None
+    priority: abjad.HorizontalAlignment | None = None
+    right_counts: typing.Sequence[int] = ()
     right_cyclic: bool = False
-    right_length: int = None
+    right_length: int = 0
     right_reversed: bool = False
 
     def __post_init__(self):
@@ -768,11 +768,6 @@ class LMR:
 class Acciaccatura:
     r"""
     Acciaccatura.
-
-    ..  container:: example
-
-        >>> baca.Acciaccatura()
-        Acciaccatura(durations=[Duration(1, 16)], lmr=LMR(left_counts=None, left_cyclic=False, left_length=None, left_reversed=False, middle_counts=None, middle_cyclic=False, middle_reversed=False, priority=None, right_counts=None, right_cyclic=False, right_length=None, right_reversed=False))
 
     ..  container:: example
 
@@ -1522,19 +1517,14 @@ class Anchor:
     """
     Anchor.
 
-    ..  container:: example
-
-        >>> baca.Anchor()
-        Anchor(figure_name=None, local_selector=None, remote_selector=None, remote_voice_name=None, use_remote_stop_offset=False)
-
     ``use_remote_stop_offset`` is true when contribution anchors to remote selection stop
     offset; otherwise anchors to remote selection start offset.
     """
 
-    figure_name: str = None
-    local_selector: typing.Any = None
-    remote_selector: typing.Any = None
-    remote_voice_name: str = None
+    figure_name: str | None = None
+    local_selector: typing.Callable | None = None
+    remote_selector: typing.Callable | None = None
+    remote_voice_name: str | None = None
     use_remote_stop_offset: bool = False
 
     def __post_init__(self):
@@ -1544,10 +1534,8 @@ class Anchor:
             raise TypeError(f"must be callable: {self.local_selector!r}.")
         if self.remote_selector is not None and not callable(self.remote_selector):
             raise TypeError(f"must be callable: {self.remote_selector!r}.")
-        if self.remote_voice_name is not None and not isinstance(
-            self.remote_voice_name, str
-        ):
-            raise TypeError(f"must be string: {self.remote_voice_name!r}.")
+        if self.remote_voice_name is not None:
+            assert isinstance(self.remote_voice_name, str), repr(self.remote_voice_name)
         self.use_remote_stop_offset = bool(self.use_remote_stop_offset)
 
 
@@ -1685,8 +1673,8 @@ class Imbrication:
         selected_logical_ties = None
         if self.selector is not None:
             selection = self.selector(container)
-            selected_logical_ties = abjad.iterate.logical_ties(selection, pitched=True)
-            selected_logical_ties = list(selected_logical_ties)
+            generator = abjad.iterate.logical_ties(selection, pitched=True)
+            selected_logical_ties = list(generator)
         original_logical_ties = abjad.select.logical_ties(original_container)
         logical_ties = abjad.select.logical_ties(container)
         pairs = zip(logical_ties, original_logical_ties)
@@ -1738,6 +1726,7 @@ class Imbrication:
                     skip = abjad.Skip(duration)
                     abjad.mutate.replace(leaf, [skip])
         if not self.allow_unused_pitches and not cursor.is_exhausted:
+            assert cursor.position is not None
             current, total = cursor.position - 1, len(cursor)
             raise Exception(f"{cursor!r} used only {current} of {total} pitches.")
         self._call_commands(container)
@@ -2956,9 +2945,7 @@ class FigureAccumulator:
                 assert isinstance(selection, abjad.Timespan)
                 skip = abjad.Skip(1, multiplier=selection.duration)
                 fused_selection.append(skip)
-        fused_selection = abjad.Selection(fused_selection)
-        selection = fused_selection
-        assert isinstance(selection, abjad.Selection), repr(selection)
+        selection = abjad.Selection(fused_selection)
         return selection
 
     def populate_commands(self, command_accumulator):
@@ -2976,20 +2963,17 @@ class FigureAccumulator:
 
 @dataclasses.dataclass(slots=True)
 class Contribution:
-    """
-    Contribution.
-    """
 
     voice_to_selection: typing.Dict[str, abjad.Selection]
-    anchor: Anchor = None
-    figure_name: str = None
+    anchor: Anchor | None = None
+    figure_name: str | None = None
     hide_time_signature: bool | None = None
-    time_signature: abjad.TimeSignature = None
+    time_signature: abjad.TimeSignature | None = None
 
     def __post_init__(self):
         assert isinstance(self.voice_to_selection, dict), repr(self.voice_to_selection)
-        if self.anchor is not None and not isinstance(self.anchor, Anchor):
-            raise TypeError(f"anchor only: {self.anchor!r}.")
+        if self.anchor is not None:
+            assert isinstance(self.anchor, Anchor), repr(self.anchor)
         if self.figure_name is not None:
             self.figure_name = str(self.figure_name)
         if self.hide_time_signature is not None:
@@ -3190,7 +3174,7 @@ class Nest:
     """
 
     treatments: typing.Sequence[typing.Union[int, str]]
-    lmr: LMR = None
+    lmr: LMR | None = None
 
     def __post_init__(self):
         assert isinstance(self.treatments, (list, tuple))
@@ -3259,11 +3243,6 @@ class Nest:
 class RestAffix:
     r"""
     Rest affix.
-
-    ..  container:: example
-
-        >>> baca.RestAffix()
-        RestAffix(pattern=None, prefix=None, skips_instead_of_rests=False, suffix=None)
 
     ..  container:: example
 
@@ -3597,14 +3576,14 @@ class RestAffix:
 
     """
 
-    pattern: abjad.Pattern = None
-    prefix: typing.Sequence[int] = None
+    pattern: abjad.Pattern | None = None
+    prefix: typing.Sequence[int] = ()
     skips_instead_of_rests: bool = False
-    suffix: typing.Sequence[int] = None
+    suffix: typing.Sequence[int] = ()
 
     def __post_init__(self):
-        if self.pattern is not None and not isinstance(self.pattern, abjad.Pattern):
-            raise TypeError(f"pattern or none: {self.pattern!r}.")
+        if self.pattern is not None:
+            assert isinstance(self.pattern, abjad.Pattern)
         if self.prefix is not None:
             assert all(isinstance(_, int) for _ in self.prefix)
         self.skips_instead_of_rests = bool(self.skips_instead_of_rests)
@@ -5817,15 +5796,15 @@ class FigureMaker:
     """
 
     talea: rmakers.Talea
-    acciaccatura: Acciaccatura = None
-    affix: RestAffix = None
+    acciaccatura: Acciaccatura | None = None
+    affix: RestAffix | None = None
     restart_talea: bool = False
-    signature: int = None
-    spelling: rmakers.Spelling = None
-    treatments: typing.Sequence = None
-    _next_attack: int | None = dataclasses.field(init=False, repr=False)
-    _next_segment: int | None = dataclasses.field(init=False, repr=False)
-    _state: dict = dataclasses.field(init=False, repr=False)
+    signature: int | None = None
+    spelling: rmakers.Spelling | None = None
+    treatments: typing.Sequence = ()
+    _next_attack: int = dataclasses.field(default=0, init=False, repr=False)
+    _next_segment: int = dataclasses.field(default=0, init=False, repr=False)
+    _state: dict = dataclasses.field(default_factory=dict, init=False, repr=False)
 
     _state_variables = ("_next_attack", "_next_segment")
 
@@ -5833,19 +5812,13 @@ class FigureMaker:
         if self.acciaccatura is not None:
             assert isinstance(self.acciaccatura, Acciaccatura), repr(self.acciaccatura)
         if self.affix is not None:
-            if not isinstance(self.affix, RestAffix):
-                message = "must be rest affix:\n   {repr(self.affix)}"
-                raise Exception(message)
-        self._next_attack = 0
-        self._next_segment = 0
+            assert isinstance(self.affix, RestAffix), repr(self.affix)
         self.restart_talea = bool(self.restart_talea)
         if self.signature is not None:
             assert isinstance(self.signature, int), repr(self.signature)
         if self.spelling is not None:
-            assert isinstance(self.spelling, rmakers.Spelling)
-        self._state = {}
-        if not isinstance(self.talea, rmakers.Talea):
-            raise TypeError(f"must be talea: {self.talea!r}.")
+            assert isinstance(self.spelling, rmakers.Spelling), repr(self.spelling)
+        assert isinstance(self.talea, rmakers.Talea), repr(self.talea)
         if self.treatments is not None:
             self._check_treatments(self.treatments)
 
@@ -6198,7 +6171,7 @@ class Assignment:
     """
 
     maker: FigureMaker
-    pattern: abjad.Pattern = None
+    pattern: abjad.Pattern | None = None
 
     def __post_init__(self):
         assert isinstance(self.maker, FigureMaker)
@@ -7965,17 +7938,17 @@ def imbricate(
 
 def lmr(
     *,
-    left_counts: typing.Sequence[int] = None,
+    left_counts: typing.Sequence[int] = (),
     left_cyclic: bool = False,
-    left_length: int = None,
+    left_length: int = 0,
     left_reversed: bool = False,
-    middle_counts: typing.Sequence[int] = None,
+    middle_counts: typing.Sequence[int] = (),
     middle_cyclic: bool = False,
     middle_reversed: bool = False,
-    priority: abjad.HorizontalAlignment = None,
-    right_counts: typing.Sequence[int] = None,
+    priority: abjad.HorizontalAlignment | None = None,
+    right_counts: typing.Sequence[int] = (),
     right_cyclic: bool = False,
-    right_length: int = None,
+    right_length: int = 0,
     right_reversed: bool = False,
 ) -> LMR:
     """
@@ -8133,7 +8106,7 @@ def figure(
     restart_talea: bool = False,
     signature: int = None,
     spelling: rmakers.Spelling = None,
-    treatments: typing.Sequence = None,
+    treatments: typing.Sequence = (),
 ) -> FigureMaker:
     """
     Makes figure-maker.

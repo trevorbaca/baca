@@ -764,11 +764,10 @@ class PaddedTuple:
     Padded tuples return a value for any integer index.
     """
 
-    items: typing.Sequence | None = None
+    items: typing.Sequence = ()
     pad: int = 1
 
     def __post_init__(self):
-        self.items = self.items or ()
         self.items = tuple(self.items)
         assert isinstance(self.pad, int), repr(self.pad)
         assert 1 <= self.pad, repr(self.pad)
