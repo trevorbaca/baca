@@ -6,7 +6,7 @@ from . import array
 from . import build
 from . import const
 
-# from . import math
+from . import math
 from . import jobs
 from . import score
 from . import select
@@ -48,10 +48,6 @@ from .rhythmcommands import *
 from .scoping import *
 from .select import *
 from .spanners import *
-
-del math
-from . import math
-
 
 if sys.version_info[:2] < (3, 10):
     raise ImportError("Requires Python 3.10 or later")

@@ -1,9 +1,9 @@
 """
-Figure-maker.
+Figures.
 """
 import copy
 import dataclasses
-import math
+import math as python_math
 import typing
 from inspect import currentframe as _frame
 
@@ -3696,7 +3696,7 @@ def _make_tuplet_with_extra_count(leaf_selection, extra_count, denominator):
         extra_count %= contents_count
     elif extra_count < 0:
         extra_count = abs(extra_count)
-        extra_count %= math.ceil(contents_count / 2.0)
+        extra_count %= python_math.ceil(contents_count / 2.0)
         extra_count *= -1
     new_contents_count = contents_count + extra_count
     tuplet_multiplier = abjad.Multiplier(new_contents_count, contents_count)

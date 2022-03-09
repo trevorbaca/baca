@@ -40,6 +40,9 @@ isort-reformat:
 	--use-parentheses \
 	baca scr
 
+mypy:
+	mypy baca
+
 pytest:
 	pytest baca
 	find . \( -path '*/__pycache__/*' -o -name __pycache__ \) -delete
@@ -58,9 +61,11 @@ check:
 	make black-check
 	make flake8
 	make isort-check
+	make mypy
 
 test:
 	make black-check
 	make flake8
 	make isort-check
+	make mypy
 	make pytest
