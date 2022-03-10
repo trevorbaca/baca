@@ -2909,7 +2909,7 @@ class FigureAccumulator:
             figure_name_markup,
             leaf,
             deactivate=True,
-            tag=_tags.FIGURE_NAME,
+            tag=_tags.FIGURE_LABEL,
         )
 
     def _make_voice_dictionary(self):

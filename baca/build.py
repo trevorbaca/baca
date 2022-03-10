@@ -236,7 +236,7 @@ def _make_annotation_jobs(directory, *, undo=False):
     jobs = [
         annotation_spanners,
         baca.jobs.show_tag(directory, baca.tags.CLOCK_TIME, undo=undo),
-        baca.jobs.show_tag(directory, baca.tags.FIGURE_NAME, undo=undo),
+        baca.jobs.show_tag(directory, baca.tags.FIGURE_LABEL, undo=undo),
         baca.jobs.show_tag(directory, baca.tags.INVISIBLE_MUSIC_COMMAND, undo=not undo),
         baca.jobs.show_tag(directory, baca.tags.INVISIBLE_MUSIC_COLORING, undo=undo),
         baca.jobs.show_tag(directory, baca.tags.LOCAL_MEASURE_NUMBER, undo=undo),

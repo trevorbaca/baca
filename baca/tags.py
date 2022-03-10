@@ -39,7 +39,7 @@ COLORED_PHRASING_SLUR = abjad.Tag("COLORED_PHRASING_SLUR")
 CLOCK_TIME = abjad.Tag("CLOCK_TIME")
 EMPTY_START_BAR = abjad.Tag("EMPTY_START_BAR")
 FERMATA_MEASURE = abjad.Tag("FERMATA_MEASURE")
-FIGURE_NAME = abjad.Tag("FIGURE_NAME")
+FIGURE_LABEL = abjad.Tag("FIGURE_LABEL")
 HIDDEN = abjad.Tag("HIDDEN")
 HIDE_IN_PARTS = abjad.Tag("HIDE_IN_PARTS")
 INVISIBLE_MUSIC_COLORING = abjad.Tag("INVISIBLE_MUSIC_COLORING")
@@ -352,7 +352,7 @@ def documentation_removal_tags():
         ...     tag
         ...
         Tag('CLOCK_TIME')
-        Tag('FIGURE_NAME')
+        Tag('FIGURE_LABEL')
         Tag('LOCAL_MEASURE_NUMBER')
         Tag('MEASURE_NUMBER')
         Tag('SPACING')
@@ -361,7 +361,7 @@ def documentation_removal_tags():
     """
     return [
         CLOCK_TIME,
-        FIGURE_NAME,
+        FIGURE_LABEL,
         LOCAL_MEASURE_NUMBER,
         MEASURE_NUMBER,
         SPACING,
@@ -547,7 +547,7 @@ def music_annotation_tags():
         >>> for tag in baca.tags.music_annotation_tags():
         ...     tag
         Tag('CLOCK_TIME')
-        Tag('FIGURE_NAME')
+        Tag('FIGURE_LABEL')
         Tag('INVISIBLE_MUSIC_COLORING')
         Tag('LOCAL_MEASURE_NUMBER')
         Tag('MATERIAL_ANNOTATION_SPANNER')
@@ -565,7 +565,7 @@ def music_annotation_tags():
     """
     return [
         CLOCK_TIME,
-        FIGURE_NAME,
+        FIGURE_LABEL,
         INVISIBLE_MUSIC_COLORING,
         LOCAL_MEASURE_NUMBER,
         MATERIAL_ANNOTATION_SPANNER,
