@@ -2664,14 +2664,12 @@ class FigureAccumulator:
         collections: typing.Sequence,
         *commands,
         anchor: Anchor = None,
+        do_not_label: bool = False,
         figure_name: str = "",
-        figure_name_direction=None,
+        figure_label_direction: abjad.VerticalAlignment = None,
         hide_time_signature: bool | None = None,
         signature: int = None,
     ) -> None:
-        """
-        Calls figure-accumulator.
-        """
         assert isinstance(figure_name, str), repr(figure_name)
         voice_name = self._abbreviation(voice_name)
         prototype = (
@@ -2723,7 +2721,10 @@ class FigureAccumulator:
                 imbricated_selections.update(command_(container))
             else:
                 command_(selections)
-        self._label_figure_name_(container, figure_name, figure_name_direction)
+        leaf = abjad.select.leaf(container, 0)
+        abjad.annotate(leaf, "figure_name", figure_name)
+        if not do_not_label:
+            self._label_figure(container, figure_name, figure_label_direction)
         selection = abjad.Selection([container])
         duration = abjad.get.duration(selection)
         if signature is None and maker:
@@ -2749,7 +2750,8 @@ class FigureAccumulator:
         self._cache_figure_name(contribution)
         self._cache_floating_selection(contribution)
         self._cache_time_signature(contribution)
-        self._figure_number += 1
+        if not do_not_label:
+            self._figure_number += 1
 
     def _abbreviation(self, voice_name):
         return self.voice_abbreviations.get(voice_name, voice_name)
@@ -2796,16 +2798,8 @@ class FigureAccumulator:
                 leaf_start_offset = floating_selection.start_offset
                 leaves = abjad.iterate.leaves(floating_selection.annotation)
                 for leaf in leaves:
-                    markup = abjad.get.indicators(leaf, abjad.Markup)
-                    # TODO: remove abjad.Markup._annotation
-                    for markup_ in markup:
-                        if isinstance(
-                            markup_._annotation, str
-                        ) and markup_._annotation.startswith("figure name: "):
-                            figure_name_ = markup_._annotation
-                            figure_name_ = figure_name_.replace("figure name: ", "")
-                            if figure_name_ == figure_name:
-                                return leaf_start_offset
+                    if abjad.get.annotation(leaf, "figure_name") == figure_name:
+                        return leaf_start_offset
                     leaf_duration = abjad.get.duration(leaf)
                     leaf_start_offset += leaf_duration
         raise Exception(f"can not find figure {figure_name!r}.")
@@ -2882,31 +2876,28 @@ class FigureAccumulator:
         start_offset = remote_anchor_offset - local_anchor_offset
         return start_offset
 
-    def _label_figure_name_(self, container, figure_name, figure_name_direction):
+    def _label_figure(self, container, figure_name, figure_label_direction):
         figure_number = self._figure_number
-        original_figure_name = figure_name
         parts = figure_name.split("_")
         if len(parts) == 1:
             body = parts[0]
-            figure_name_string = f'"{body}"'
+            figure_label_string = f'"{body}"'
         elif len(parts) == 2:
             body, subscript = parts
-            figure_name_string = rf'\concat {{ "{body}" \sub {subscript} }}'
+            figure_label_string = rf'\concat {{ "{body}" \sub {subscript} }}'
         else:
             raise Exception(f"unrecognized figure name: {figure_name!r}.")
         string = r"\markup \fontsize #2"
         string += rf" \concat {{ [ \raise #0.25 \fontsize #-2 ({figure_number})"
         if figure_name:
-            string += rf" \hspace #1 {figure_name_string} ] }}"
+            string += rf" \hspace #1 {figure_label_string} ] }}"
         else:
             string += r" ] }"
-        figure_name_markup = abjad.Markup(string, direction=figure_name_direction)
-        abjad.tweak(figure_name_markup).color = "#blue"
-        annotation = f"figure name: {original_figure_name}"
-        figure_name_markup._annotation = annotation
+        figure_label_markup = abjad.Markup(string, direction=figure_label_direction)
+        abjad.tweak(figure_label_markup).color = "#blue"
         leaf = abjad.select.leaf(container, 0)
         abjad.attach(
-            figure_name_markup,
+            figure_label_markup,
             leaf,
             deactivate=True,
             tag=_tags.FIGURE_LABEL,
