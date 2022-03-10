@@ -2887,7 +2887,7 @@ class FigureAccumulator:
             figure_label_string = rf'\concat {{ "{body}" \sub {subscript} }}'
         else:
             raise Exception(f"unrecognized figure name: {figure_name!r}.")
-        string = r"\markup \fontsize #2"
+        string = r"\markup"
         string += rf" \concat {{ [ \raise #0.25 \fontsize #-2 ({figure_number})"
         if figure_name:
             string += rf" \hspace #1 {figure_label_string} ] }}"
@@ -2895,7 +2895,11 @@ class FigureAccumulator:
             string += r" ] }"
         figure_label_markup = abjad.Markup(string, direction=figure_label_direction)
         abjad.tweak(figure_label_markup).color = "#blue"
-        leaf = abjad.select.leaf(container, 0)
+        pleaves = _select.pleaves(container)
+        if pleaves:
+            leaf = pleaves[0]
+        else:
+            leaf = abjad.select.leaf(container, 0)
         abjad.attach(
             figure_label_markup,
             leaf,
