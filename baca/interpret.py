@@ -1546,7 +1546,7 @@ def _find_repeat_pitch_classes(argument):
     for voice in abjad.iterate.components(argument, abjad.Voice):
         if abjad.get.has_indicator(voice, _const.INTERMITTENT):
             continue
-        previous_lt, previous_pcs = None, []
+        previous_lt, previous_pcs = None, abjad.NamedPitchClassSet()
         for lt in abjad.iterate.logical_ties(voice):
             if abjad.get.has_indicator(lt.head, _const.HIDDEN):
                 written_pitches = []
@@ -1556,7 +1556,7 @@ def _find_repeat_pitch_classes(argument):
                 written_pitches = lt.head.written_pitches
             else:
                 written_pitches = []
-            pcs = abjad.PitchClassSet(written_pitches)
+            pcs = abjad.NamedPitchClassSet(written_pitches)
             if abjad.get.has_indicator(
                 lt.head, _const.NOT_YET_PITCHED
             ) or abjad.get.has_indicator(lt.head, _const.ALLOW_REPEAT_PITCH):
