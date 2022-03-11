@@ -2349,11 +2349,11 @@ def _coerce_pitches(pitches):
         if isinstance(item, str) and "<" in item and ">" in item:
             item = item.strip("<")
             item = item.strip(">")
-            item = abjad.PitchSet(item, abjad.NamedPitch)
+            item = abjad.NamedPitchSet(item)
         elif isinstance(item, str):
             item = abjad.NamedPitch(item)
         elif isinstance(item, collections.abc.Iterable):
-            item = abjad.PitchSet(item, abjad.NamedPitch)
+            item = abjad.NamedPitchSet(item)
         else:
             item = abjad.NamedPitch(item)
         items.append(item)

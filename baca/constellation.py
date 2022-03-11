@@ -1856,15 +1856,15 @@ def constellate(generator, range_):
         >>> sets = baca.constellation.constellate(generator, "[C4, C#7]")
         >>> for set_ in sets:
         ...     set_
-        PitchSet(items=[0, 2, 4, 7, 8, 10], item_class=abjad.NumberedPitch)
-        PitchSet(items=[0, 2, 10, 16, 19, 20], item_class=abjad.NumberedPitch)
-        PitchSet(items=[0, 2, 10, 28, 31, 32], item_class=abjad.NumberedPitch)
-        PitchSet(items=[4, 7, 8, 12, 14, 22], item_class=abjad.NumberedPitch)
-        PitchSet(items=[12, 14, 16, 19, 20, 22], item_class=abjad.NumberedPitch)
-        PitchSet(items=[12, 14, 22, 28, 31, 32], item_class=abjad.NumberedPitch)
-        PitchSet(items=[4, 7, 8, 24, 26, 34], item_class=abjad.NumberedPitch)
-        PitchSet(items=[16, 19, 20, 24, 26, 34], item_class=abjad.NumberedPitch)
-        PitchSet(items=[24, 26, 28, 31, 32, 34], item_class=abjad.NumberedPitch)
+        NumberedPitchSet([0, 2, 4, 7, 8, 10])
+        NumberedPitchSet([0, 2, 10, 16, 19, 20])
+        NumberedPitchSet([0, 2, 10, 28, 31, 32])
+        NumberedPitchSet([4, 7, 8, 12, 14, 22])
+        NumberedPitchSet([12, 14, 16, 19, 20, 22])
+        NumberedPitchSet([12, 14, 22, 28, 31, 32])
+        NumberedPitchSet([4, 7, 8, 24, 26, 34])
+        NumberedPitchSet([16, 19, 20, 24, 26, 34])
+        NumberedPitchSet([24, 26, 28, 31, 32, 34])
 
     ..  container:: example
 
@@ -1872,12 +1872,12 @@ def constellate(generator, range_):
         >>> sets = baca.constellation.constellate(generator, "[C4, C#7]")
         >>> for set_ in sets:
         ...     set_
-        PitchSet(items=[4, 7, 8, 11, 15, 17], item_class=abjad.NumberedPitch)
-        PitchSet(items=[4, 8, 11, 19, 27, 29], item_class=abjad.NumberedPitch)
-        PitchSet(items=[7, 15, 16, 17, 20, 23], item_class=abjad.NumberedPitch)
-        PitchSet(items=[16, 19, 20, 23, 27, 29], item_class=abjad.NumberedPitch)
-        PitchSet(items=[7, 15, 17, 28, 32, 35], item_class=abjad.NumberedPitch)
-        PitchSet(items=[19, 27, 28, 29, 32, 35], item_class=abjad.NumberedPitch)
+        NumberedPitchSet([4, 7, 8, 11, 15, 17])
+        NumberedPitchSet([4, 8, 11, 19, 27, 29])
+        NumberedPitchSet([7, 15, 16, 17, 20, 23])
+        NumberedPitchSet([16, 19, 20, 23, 27, 29])
+        NumberedPitchSet([7, 15, 17, 28, 32, 35])
+        NumberedPitchSet([19, 27, 28, 29, 32, 35])
 
     """
     assert isinstance(generator, list), repr(generator)
@@ -1885,7 +1885,7 @@ def constellate(generator, range_):
     transpositions = []
     for part in generator:
         assert isinstance(part, list)
-        part = abjad.PitchSet(part)
+        part = abjad.NumberedPitchSet(part)
         transpositions_ = []
         interval = -12
         while True:
@@ -1910,7 +1910,7 @@ def constellate(generator, range_):
     sets = []
     for sequence in sequences:
         numbers = abjad.sequence.flatten(sequence)
-        set_ = abjad.PitchSet(numbers)
+        set_ = abjad.NumberedPitchSet(numbers)
         sets.append(set_)
     return sets
 
@@ -1920,7 +1920,7 @@ def find_pivot(constellation_a, constellation_b):
     Finds pivot from ``constellation_a`` to ``constellation_b``.
     """
     b_generator = abjad.sequence.flatten(constellation_b.generator)
-    b_generator = abjad.PitchSet(b_generator)
+    b_generator = abjad.NumberedPitchSet(b_generator)
     for set_ in constellation_a:
         if set_ == b_generator:
             return set_
@@ -1972,7 +1972,7 @@ class Constellation:
             >>> generator = [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]]
             >>> constellation = baca.constellation.constellate(generator, "[A0, C8]")
             >>> numbers = [-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11]
-            >>> set_ = abjad.PitchSet(numbers)
+            >>> set_ = abjad.NumberedPitchSet(numbers)
             >>> set_ in constellation
             True
 
@@ -1988,7 +1988,7 @@ class Constellation:
             >>> generator = [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]]
             >>> constellation = baca.constellation.constellate(generator, "[A0, C8]")
             >>> constellation[0]
-            PitchSet(items=[-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11], item_class=abjad.NumberedPitch)
+            NumberedPitchSet([-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11])
 
         """
         return self._sets.__getitem__(argument)
@@ -2074,7 +2074,7 @@ class Constellation:
         constellation_index = self.circuit._constellations.index(self)
         constellation_number = constellation_index + 1
         numbers = [_.number for _ in chord.written_pitches]
-        set_ = abjad.PitchSet(numbers)
+        set_ = abjad.NumberedPitchSet(numbers)
         chord_index = self._sets.index(set_)
         chord_number = chord_index + 1
         string = rf"\markup {{ {constellation_number}-{chord_number} }}"

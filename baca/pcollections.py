@@ -154,7 +154,7 @@ class ArpeggiationSpacingSpecifier:
     def __call__(
         self, collections=None
     ) -> abjad.NumberedPitchSegment | list[
-        abjad.NumberedPitchSegment | abjad.PitchSet
+        abjad.NumberedPitchSegment | abjad.NumberedPitchSet
     ] | None:
         if collections is None:
             return None
@@ -173,7 +173,7 @@ class ArpeggiationSpacingSpecifier:
         for i in range(total_length):
             if pattern.matches_index(i, total_length):
                 pitch_class_collection = pitch_class_collections[i]
-                if isinstance(pitch_class_collection, abjad.Set):
+                if isinstance(pitch_class_collection, (abjad.Set, frozenset)):
                     pitch_classes = list(sorted(pitch_class_collection))
                 else:
                     pitch_classes = list(pitch_class_collection)
@@ -181,9 +181,9 @@ class ArpeggiationSpacingSpecifier:
                     pitches = _to_tightly_spaced_pitches_ascending(pitch_classes)
                 else:
                     pitches = _to_tightly_spaced_pitches_descending(pitch_classes)
-                collection_: abjad.PitchSet | abjad.NumberedPitchSegment
-                if isinstance(pitch_class_collection, abjad.Set):
-                    collection_ = abjad.PitchSet(items=pitches)
+                collection_: abjad.NumberedPitchSet | abjad.NumberedPitchSegment
+                if isinstance(pitch_class_collection, (abjad.Set, frozenset)):
+                    collection_ = abjad.NumberedPitchSet(pitches)
                 else:
                     collection_ = abjad.NumberedPitchSegment(pitches)
                 collections_.append(collection_)
@@ -549,7 +549,7 @@ class ChordalSpacingSpecifier:
 
     def _space_collection(self, collection):
         original_collection = collection
-        if isinstance(collection, abjad.Set):
+        if isinstance(collection, (abjad.Set, frozenset)):
             pitch_classes = [abjad.NumberedPitchClass(_) for _ in collection]
             pitch_classes.sort()
         else:
@@ -600,8 +600,8 @@ class ChordalSpacingSpecifier:
             if bass:
                 pitch_classes.append(bass)
             pitches = _to_tightly_spaced_pitches_descending(pitch_classes)
-        if isinstance(original_collection, abjad.Set):
-            return abjad.PitchSet(pitches)
+        if isinstance(original_collection, (abjad.Set, frozenset)):
+            return abjad.NumberedPitchSet(pitches)
         else:
             return abjad.NumberedPitchSegment(pitches)
 
@@ -2720,7 +2720,7 @@ def space_down(collection, bass=None, semitones=None, soprano=None):
 
     ..  container:: example
 
-        >>> set_ = abjad.PitchSet([12, 14, 21, 22])
+        >>> set_ = abjad.NumberedPitchSet([12, 14, 21, 22])
         >>> lilypond_file = abjad.illustrate(set_)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2748,7 +2748,7 @@ def space_down(collection, bass=None, semitones=None, soprano=None):
             >>
 
         >>> baca.pcollections.space_down(set_, bass=0)
-        PitchSet(items=[0, 9, 10, 14], item_class=abjad.NumberedPitch)
+        NumberedPitchSet([0, 9, 10, 14])
 
         >>> set_ = baca.pcollections.space_down(set_, bass=0)
         >>> lilypond_file = abjad.illustrate(set_)
@@ -2781,7 +2781,7 @@ def space_down(collection, bass=None, semitones=None, soprano=None):
 
         With 2 in bass:
 
-        >>> set_ = abjad.PitchSet([12, 14, 21, 22])
+        >>> set_ = abjad.NumberedPitchSet([12, 14, 21, 22])
         >>> lilypond_file = abjad.illustrate(set_)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2809,7 +2809,7 @@ def space_down(collection, bass=None, semitones=None, soprano=None):
             >>
 
         >>> baca.pcollections.space_down(set_, bass=2)
-        PitchSet(items=[2, 9, 10, 12], item_class=abjad.NumberedPitch)
+        NumberedPitchSet([2, 9, 10, 12])
 
         >>> set_ = baca.pcollections.space_down(set_, bass=2)
         >>> lilypond_file = abjad.illustrate(set_)
@@ -3052,7 +3052,7 @@ def space_up(collection, bass=None, semitones=None, soprano=None):
 
     ..  container:: example
 
-        >>> setting = abjad.PitchSet([12, 14, 21, 22])
+        >>> setting = abjad.NumberedPitchSet([12, 14, 21, 22])
         >>> lilypond_file = abjad.illustrate(setting)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3080,7 +3080,7 @@ def space_up(collection, bass=None, semitones=None, soprano=None):
             >>
 
         >>> baca.pcollections.space_up(setting, bass=0)
-        PitchSet(items=[0, 2, 9, 10], item_class=abjad.NumberedPitch)
+        NumberedPitchSet([0, 2, 9, 10])
 
         >>> setting = baca.pcollections.space_up(setting, bass=0)
         >>> lilypond_file = abjad.illustrate(setting)
@@ -3113,7 +3113,7 @@ def space_up(collection, bass=None, semitones=None, soprano=None):
 
         With 2 in bass:
 
-        >>> setting = abjad.PitchSet([12, 14, 21, 22])
+        >>> setting = abjad.NumberedPitchSet([12, 14, 21, 22])
         >>> lilypond_file = abjad.illustrate(setting)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3141,7 +3141,7 @@ def space_up(collection, bass=None, semitones=None, soprano=None):
             >>
 
         >>> baca.pcollections.space_up(setting, bass=2)
-        PitchSet(items=[2, 9, 10, 12], item_class=abjad.NumberedPitch)
+        NumberedPitchSet([2, 9, 10, 12])
 
         >>> setting = baca.pcollections.space_up(setting, bass=2)
         >>> lilypond_file = abjad.illustrate(setting)
