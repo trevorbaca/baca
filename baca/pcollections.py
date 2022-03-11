@@ -173,7 +173,7 @@ class ArpeggiationSpacingSpecifier:
         for i in range(total_length):
             if pattern.matches_index(i, total_length):
                 pitch_class_collection = pitch_class_collections[i]
-                if isinstance(pitch_class_collection, (abjad.Set, frozenset)):
+                if isinstance(pitch_class_collection, frozenset):
                     pitch_classes = list(sorted(pitch_class_collection))
                 else:
                     pitch_classes = list(pitch_class_collection)
@@ -182,7 +182,7 @@ class ArpeggiationSpacingSpecifier:
                 else:
                     pitches = _to_tightly_spaced_pitches_descending(pitch_classes)
                 collection_: abjad.NumberedPitchSet | abjad.NumberedPitchSegment
-                if isinstance(pitch_class_collection, (abjad.Set, frozenset)):
+                if isinstance(pitch_class_collection, frozenset):
                     collection_ = abjad.NumberedPitchSet(pitches)
                 else:
                     collection_ = abjad.NumberedPitchSegment(pitches)
@@ -549,7 +549,7 @@ class ChordalSpacingSpecifier:
 
     def _space_collection(self, collection):
         original_collection = collection
-        if isinstance(collection, (abjad.Set, frozenset)):
+        if isinstance(collection, frozenset):
             pitch_classes = [abjad.NumberedPitchClass(_) for _ in collection]
             pitch_classes.sort()
         else:
@@ -600,7 +600,7 @@ class ChordalSpacingSpecifier:
             if bass:
                 pitch_classes.append(bass)
             pitches = _to_tightly_spaced_pitches_descending(pitch_classes)
-        if isinstance(original_collection, (abjad.Set, frozenset)):
+        if isinstance(original_collection, frozenset):
             return abjad.NumberedPitchSet(pitches)
         else:
             return abjad.NumberedPitchSegment(pitches)

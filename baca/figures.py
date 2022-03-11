@@ -2675,11 +2675,12 @@ class FigureAccumulator:
         prototype = (
             list,
             str,
+            frozenset,
+            set,
             abjad.NamedPitchClassSegment,
             abjad.NamedPitchSegment,
             abjad.NumberedPitchClassSegment,
             abjad.NumberedPitchSegment,
-            abjad.Set,
         )
         if not isinstance(collections, prototype):
             message = "collections must be coerceable:\n"
@@ -3636,7 +3637,8 @@ def _coerce_collections(collections):
         abjad.NamedPitchSegment,
         abjad.NumberedPitchClassSegment,
         abjad.NumberedPitchSegment,
-        abjad.Set,
+        set,
+        frozenset,
     )
     if isinstance(collections, prototype):
         return [collections]
@@ -6049,16 +6051,16 @@ class FigureMaker:
             treatment = 0
         before_grace_containers = None
         if self.acciaccatura is not None:
-            if isinstance(segment, (set, abjad.Set)):
+            if isinstance(segment, (set, frozenset)):
                 message = "decide how to model chords with acciaccatura."
                 raise NotImplementedError(message)
             before_grace_containers, segment = self.acciaccatura(segment)
             assert len(before_grace_containers) == len(segment)
-        if isinstance(segment, (set, abjad.Set)):
+        if isinstance(segment, (set, frozenset)):
             segment = [segment]
         for pitch_expression in segment:
             is_chord = False
-            if isinstance(pitch_expression, (set, abjad.Set)):
+            if isinstance(pitch_expression, (set, frozenset)):
                 is_chord = True
             prototype = abjad.NumberedPitchClass
             if isinstance(pitch_expression, prototype):
