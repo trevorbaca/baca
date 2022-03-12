@@ -2677,8 +2677,8 @@ class FigureAccumulator:
             str,
             frozenset,
             set,
-            abjad.NumberedPitchClassSegment,
-            abjad.NumberedPitchSegment,
+            abjad.PitchClassSegment,
+            abjad.PitchSegment,
         )
         if not isinstance(collections, prototype):
             message = "collections must be coerceable:\n"
@@ -3631,8 +3631,8 @@ def _add_rest_affixes(
 
 def _coerce_collections(collections):
     prototype = (
-        abjad.NumberedPitchClassSegment,
-        abjad.NumberedPitchSegment,
+        abjad.PitchClassSegment,
+        abjad.PitchSegment,
         set,
         frozenset,
     )
