@@ -2307,10 +2307,8 @@ class OctaveDisplacementCommand(_scoping.Command):
                     pitch += interval
                     pleaf.written_pitch = pitch
                 elif isinstance(pleaf, abjad.Chord):
-                    pitches = abjad.NamedPitchSegment(
-                        [_ + interval for _ in pleaf.written_pitches]
-                    )
-                    pleaf.written_pitches = pitches
+                    pitches = [_ + interval for _ in pleaf.written_pitches]
+                    pleaf.written_pitches = tuple(pitches)
                 else:
                     raise TypeError(pleaf)
 
