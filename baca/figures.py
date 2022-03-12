@@ -2677,7 +2677,6 @@ class FigureAccumulator:
             str,
             frozenset,
             set,
-            abjad.NamedPitchClassSegment,
             abjad.NamedPitchSegment,
             abjad.NumberedPitchClassSegment,
             abjad.NumberedPitchSegment,
@@ -3633,7 +3632,6 @@ def _add_rest_affixes(
 
 def _coerce_collections(collections):
     prototype = (
-        abjad.NamedPitchClassSegment,
         abjad.NamedPitchSegment,
         abjad.NumberedPitchClassSegment,
         abjad.NumberedPitchSegment,
