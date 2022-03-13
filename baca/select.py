@@ -954,7 +954,9 @@ def hleaves(argument, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]:
     return abjad.select.leaves(argument, exclude=exclude, grace=False)
 
 
-def lleaf(argument, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
+def lleaf(
+    argument, n: int = 0, *, count: int = 1, exclude: abjad.Strings = None
+) -> abjad.Leaf:
     r"""
     Selects leaf ``n`` from leaves leaked to the left.
 
@@ -1033,10 +1035,10 @@ def lleaf(argument, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
             }
 
     """
-    return lleaves(argument, exclude=exclude)[n]
+    return lleaves(argument, count=count, exclude=exclude)[n]
 
 
-def lleak(argument) -> list[abjad.Leaf]:
+def lleak(argument, count: int = 1) -> list[abjad.Leaf]:
     r"""
     Leaks to the left.
 
@@ -1089,10 +1091,14 @@ def lleak(argument) -> list[abjad.Leaf]:
             }
 
     """
-    return abjad.select.with_previous_leaf(argument)
+    for _ in range(count):
+        argument = abjad.select.with_previous_leaf(argument)
+    return argument
 
 
-def lleaves(argument, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]:
+def lleaves(
+    argument, *, count: int = 1, exclude: abjad.Strings = None
+) -> list[abjad.Leaf]:
     r"""
     Selects leaves, leaked to the left.
 
@@ -1185,9 +1191,10 @@ def lleaves(argument, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]:
             }
 
     """
-    items = abjad.select.leaves(argument, exclude=exclude)
-    items = abjad.select.with_previous_leaf(items)
-    return items
+    leaves = abjad.select.leaves(argument, exclude=exclude)
+    for _ in range(count):
+        leaves = abjad.select.with_previous_leaf(leaves)
+    return leaves
 
 
 def lparts(
@@ -3844,7 +3851,7 @@ def rleaf(argument, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
     return rleaves(argument, exclude=exclude)[n]
 
 
-def rleak(argument, *, grace: bool = None) -> list[abjad.Leaf]:
+def rleak(argument, *, count: int = 1, grace: bool = None) -> list[abjad.Leaf]:
     r"""
     Leaks to the right.
 
@@ -3897,10 +3904,14 @@ def rleak(argument, *, grace: bool = None) -> list[abjad.Leaf]:
             }
 
     """
-    return abjad.select.with_next_leaf(argument, grace=grace)
+    for _ in range(count):
+        argument = abjad.select.with_next_leaf(argument, grace=grace)
+    return argument
 
 
-def rleaves(argument, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]:
+def rleaves(
+    argument, *, count: int = 1, exclude: abjad.Strings = None, grace: bool = None
+) -> list[abjad.Leaf]:
     r"""
     Selects leaves, leaked to the right.
 
@@ -3993,9 +4004,10 @@ def rleaves(argument, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]:
             }
 
     """
-    items = abjad.select.leaves(argument, exclude=exclude)
-    items = abjad.select.with_next_leaf(items)
-    return items
+    leaves = abjad.select.leaves(argument, exclude=exclude, grace=grace)
+    for _ in range(count):
+        leaves = abjad.select.with_next_leaf(leaves, grace=grace)
+    return leaves
 
 
 def rmleaves(
