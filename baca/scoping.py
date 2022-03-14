@@ -435,7 +435,7 @@ class TimelineScope:
             self.scopes = scopes
 
 
-ScopeTyping = Scope | TimelineScope
+ScopeTyping: typing.TypeAlias = Scope | TimelineScope
 
 
 def apply_tweaks(argument, tweaks, i=None, total=None):
@@ -815,7 +815,7 @@ class Suite:
         return f"{type(self).__name__}(commands={self.commands})"
 
 
-CommandTyping = Command | Suite
+CommandTyping: typing.TypeAlias = Command | Suite
 
 
 def chunk(*commands: CommandTyping, **keywords) -> Suite:

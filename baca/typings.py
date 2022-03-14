@@ -5,13 +5,13 @@ import typing
 
 import abjad
 
-IntegerList = list[int]
+IntegerList: typing.TypeAlias = list[int]
 
-Indices = int | abjad.IntegerPair | IntegerList | None
+Indices: typing.TypeAlias = int | abjad.IntegerPair | IntegerList | None
 
-Pair = tuple[typing.Any, typing.Any]
+Pair: typing.TypeAlias = tuple[typing.Any, typing.Any]
 
-ScopeTyping = typing.Union[
+ScopeTyping: typing.TypeAlias = typing.Union[
     str,
     list[str],
     list[tuple[str, int]],
@@ -35,4 +35,4 @@ ScopeTyping = typing.Union[
     tuple[list[str], typing.Tuple[int, int]],
 ]
 
-SliceTyping = int | abjad.IntegerPair | None
+SliceTyping: typing.TypeAlias = int | abjad.IntegerPair | None
