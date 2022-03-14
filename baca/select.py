@@ -4,12 +4,6 @@ import abjad
 
 
 class Selection(abjad.Selection):
-    """
-    Selection.
-    """
-
-    __slots__ = ()
-
     def chead(self, n: int, *, exclude: abjad.Strings = None) -> abjad.Chord:
         return chead(self, n, exclude=exclude)
 
@@ -27,10 +21,6 @@ class Selection(abjad.Selection):
         self, counts: typing.List[int] = [1], *, exclude: abjad.Strings = None
     ) -> "Selection":
         items = cmgroups(self, counts, exclude=exclude)
-        return type(self)(items)
-
-    def enchain(self, counts: typing.Sequence[int]) -> abjad.Selection:
-        items = enchain(self, counts)
         return type(self)(items)
 
     def grace(self, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
@@ -603,7 +593,7 @@ def cmgroups(
     return result_
 
 
-def enchain(argument, counts: typing.Sequence[int]) -> list[abjad.Selection]:
+def enchain(argument, counts: typing.Sequence[int]) -> list[list]:
     r"""
     Enchains items in selection.
 
@@ -629,11 +619,11 @@ def enchain(argument, counts: typing.Sequence[int]) -> list[abjad.Selection]:
         >>> result = baca.select.enchain(result, [5])
         >>> for item in result:
         ...     item
-        Selection(items=[Rest('r16'), Note("bf'16"), Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")])
-        Selection(items=[Chord("<d' e'>4"), Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")])
-        Selection(items=[Chord("<a'' b''>16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
-        Selection(items=[Rest('r16'), Note("bf'16"), Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4")])
-        Selection(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+        [Rest('r16'), Note("bf'16"), Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")]
+        [Chord("<d' e'>4"), Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")]
+        [Chord("<a'' b''>16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')]
+        [Rest('r16'), Note("bf'16"), Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4")]
+        [Chord("<fs' gs'>4"), Chord("<fs' gs'>16")]
 
         >>> for i, selection in enumerate(result):
         ...     if i % 2 == 0:
@@ -719,10 +709,12 @@ def enchain(argument, counts: typing.Sequence[int]) -> list[abjad.Selection]:
             }
 
     """
-    items = abjad.select.partition_by_counts(
+    selections = abjad.select.partition_by_counts(
         argument, counts=counts, cyclic=True, enchain=True, overhang=True
     )
-    return items
+    assert all(isinstance(_, abjad.Selection) for _ in selections)
+    lists_ = [list(_) for _ in selections]
+    return lists_
 
 
 def grace(argument, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:

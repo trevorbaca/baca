@@ -2987,7 +2987,7 @@ class Contribution:
         """
         return self.voice_to_selection.__getitem__(voice_name)
 
-    def __iter__(self) -> typing.Generator:
+    def __iter__(self) -> typing.Iterator[str]:
         """
         Iterates figure contribution.
         """
