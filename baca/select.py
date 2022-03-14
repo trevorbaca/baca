@@ -64,20 +64,6 @@ class Selection(abjad.Selection):
         items = ltleaves(self, exclude=exclude)
         return type(self)(items)
 
-    def ltqrun(self, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
-        return ltqrun(self, n, exclude=exclude)
-
-    def ltqruns(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
-        items = ltqruns(self, exclude=exclude)
-        return type(self)(items)
-
-    def ltrun(self, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
-        return ltrun(self, n, exclude=exclude)
-
-    def ltruns(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
-        items = ltruns(self, exclude=exclude)
-        return type(self)(items)
-
     def lts(
         self, *, exclude: abjad.Strings = None, nontrivial: bool = None
     ) -> abjad.Selection:
@@ -104,13 +90,6 @@ class Selection(abjad.Selection):
 
     def mmrests(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
         items = mmrests(self, exclude=exclude)
-        return type(self)(items)
-
-    def ntrun(self, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
-        return ntrun(self, n, exclude=exclude)
-
-    def ntruns(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
-        items = ntruns(self, exclude=exclude)
         return type(self)(items)
 
     def omgroups(
@@ -180,13 +159,6 @@ class Selection(abjad.Selection):
         items = ptlts(self, exclude=exclude)
         return type(self)(items)
 
-    def qrun(self, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
-        return qrun(self, n, exclude=exclude)
-
-    def qruns(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
-        items = qruns(self, exclude=exclude)
-        return type(self)(items)
-
     def rleaf(self, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
         return rleaf(self, n, exclude=exclude)
 
@@ -200,13 +172,6 @@ class Selection(abjad.Selection):
 
     def rmleaves(self, count: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
         items = rmleaves(self, count, exclude=exclude)
-        return type(self)(items)
-
-    def rrun(self, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
-        return rrun(self, n, exclude=exclude)
-
-    def rruns(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
-        items = rruns(self, exclude=exclude)
         return type(self)(items)
 
     def skip(self, n: int, *, exclude: abjad.Strings = None) -> abjad.Skip:
@@ -416,7 +381,7 @@ def cheads(argument, *, exclude: abjad.Strings = None) -> list[abjad.Chord]:
 
 def clparts(
     argument, counts: typing.Sequence[int], *, exclude: abjad.Strings = None
-) -> list[abjad.Selection]:
+) -> list[list[abjad.Leaf]]:
     r"""
     Selects leaves cyclically partitioned by ``counts`` (with overhang).
 
@@ -442,12 +407,12 @@ def clparts(
         >>> for item in result:
         ...     item
         ...
-        Selection(items=[Rest('r16'), Note("bf'16")])
-        Selection(items=[Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")])
-        Selection(items=[Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")])
-        Selection(items=[Note("d'16"), Chord("<e' fs'>4")])
-        Selection(items=[Chord("<e' fs'>16"), Rest('r16'), Note("bf'16")])
-        Selection(items=[Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+        [Rest('r16'), Note("bf'16")]
+        [Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")]
+        [Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")]
+        [Note("d'16"), Chord("<e' fs'>4")]
+        [Chord("<e' fs'>16"), Rest('r16'), Note("bf'16")]
+        [Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")]
 
         >>> abjad.label.by_selector(result)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -519,15 +484,16 @@ def clparts(
 
     """
     leaves = abjad.select.leaves(argument, exclude=exclude)
-    items = abjad.select.partition_by_counts(
+    selections = abjad.select.partition_by_counts(
         leaves, counts=counts, cyclic=True, overhang=True
     )
-    return items
+    lists_ = [list(_) for _ in selections]
+    return lists_
 
 
 def cmgroups(
     argument, counts: list[int] = [1], *, exclude: abjad.Strings = None
-) -> Selection:
+) -> list[list[abjad.Leaf]]:
     r"""
     Partitions measure-grouped leaves (cyclically).
 
@@ -545,8 +511,8 @@ def cmgroups(
         >>> for item in result:
         ...     item
         ...
-        Selection(items=[Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
-        Selection(items=[Note("g'8"), Note("a'8"), Note("b'8"), Rest('r8')])
+        [Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")]
+        [Note("g'8"), Note("a'8"), Note("b'8"), Rest('r8')]
 
         >>> abjad.label.by_selector(result)
         >>> lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', staff])
@@ -588,9 +554,8 @@ def cmgroups(
     leaves = abjad.select.leaves(argument, exclude=exclude)
     result = abjad.select.group_by_measure(leaves)
     result = abjad.select.partition_by_counts(result, counts, cyclic=True)
-    items = [Selection(abjad.select.flatten(_)) for _ in result]
-    result_ = Selection(items)
-    return result_
+    items = [abjad.select.flatten(_) for _ in result]
+    return items
 
 
 def enchain(argument, counts: typing.Sequence[int]) -> list[list]:
@@ -1191,7 +1156,7 @@ def lleaves(
 
 def lparts(
     argument, counts: typing.Sequence[int], *, exclude: abjad.Strings = None
-) -> list[abjad.Selection]:
+) -> list[list[abjad.Leaf]]:
     r"""
     Selects leaves partitioned by ``counts``.
 
@@ -1217,9 +1182,9 @@ def lparts(
         >>> for item in result:
         ...     item
         ...
-        Selection(items=[Rest('r16'), Note("bf'16")])
-        Selection(items=[Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")])
-        Selection(items=[Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")])
+        [Rest('r16'), Note("bf'16")]
+        [Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")]
+        [Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")]
 
         >>> abjad.label.by_selector(result)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1282,11 +1247,12 @@ def lparts(
 
     """
     leaves = abjad.select.leaves(argument, exclude=exclude)
-    items = abjad.select.partition_by_counts(leaves, counts=counts)
-    return items
+    selections = abjad.select.partition_by_counts(leaves, counts=counts)
+    lists_ = [list(_) for _ in selections]
+    return lists_
 
 
-def lt(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
+def lt(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.LogicalTie:
     r"""
     Selects logical tie ``n``.
 
@@ -1563,7 +1529,9 @@ def ltleaves(argument, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]:
     return items
 
 
-def ltqrun(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
+def ltqrun(
+    argument, n: int, *, exclude: abjad.Strings = None
+) -> list[abjad.LogicalTie]:
     r"""
     Selects logical tie equipitch run ``n``.
 
@@ -1587,7 +1555,7 @@ def ltqrun(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Selectio
 
         >>> result = baca.select.ltqrun(staff, -1)
         >>> result
-        Selection(items=[LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
+        [LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])]
 
         >>> abjad.label.by_selector(result, lone=True)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1645,7 +1613,7 @@ def ltqrun(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Selectio
     return ltqruns(argument, exclude=exclude)[n]
 
 
-def ltqruns(argument, *, exclude: abjad.Strings = None) -> abjad.Selection:
+def ltqruns(argument, *, exclude: abjad.Strings = None) -> list[list[abjad.LogicalTie]]:
     r"""
     Selects logical tie equipitch runs.
 
@@ -1671,12 +1639,12 @@ def ltqruns(argument, *, exclude: abjad.Strings = None) -> abjad.Selection:
         >>> for item in result:
         ...     item
         ...
-        Selection(items=[LogicalTie(items=[Note("c'16")]), LogicalTie(items=[Note("c'16")]), LogicalTie(items=[Note("c'16")])])
-        Selection(items=[LogicalTie(items=[Chord("<d' e'>4"), Chord("<d' e'>16")])])
-        Selection(items=[LogicalTie(items=[Note("d'16")]), LogicalTie(items=[Note("d'16")]), LogicalTie(items=[Note("d'16")])])
-        Selection(items=[LogicalTie(items=[Chord("<e' fs'>4"), Chord("<e' fs'>16")])])
-        Selection(items=[LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")])])
-        Selection(items=[LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
+        [LogicalTie(items=[Note("c'16")]), LogicalTie(items=[Note("c'16")]), LogicalTie(items=[Note("c'16")])]
+        [LogicalTie(items=[Chord("<d' e'>4"), Chord("<d' e'>16")])]
+        [LogicalTie(items=[Note("d'16")]), LogicalTie(items=[Note("d'16")]), LogicalTie(items=[Note("d'16")])]
+        [LogicalTie(items=[Chord("<e' fs'>4"), Chord("<e' fs'>16")])]
+        [LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")])]
+        [LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])]
 
         >>> abjad.label.by_selector(result)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1746,14 +1714,14 @@ def ltqruns(argument, *, exclude: abjad.Strings = None) -> abjad.Selection:
     """
     result_1 = plts(argument, exclude=exclude)
     result_2 = abjad.select.group_by_pitch(result_1)
-    result_3 = [Selection(abjad.select.group_by_contiguity(_)) for _ in result_2]
-    result_4 = Selection(result_3)
+    result_3 = [list(_) for _ in result_2]
+    result_4 = [abjad.select.group_by_contiguity(_) for _ in result_3]
     result_5 = abjad.select.flatten(result_4, depth=1)
-    result_6 = Selection([Selection(_) for _ in result_5])
+    result_6 = [list(_) for _ in result_5]
     return result_6
 
 
-def ltrun(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
+def ltrun(argument, n: int, *, exclude: abjad.Strings = None) -> list[abjad.LogicalTie]:
     r"""
     Selects logical tie run ``n``.
 
@@ -1777,8 +1745,7 @@ def ltrun(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection
 
         >>> result = baca.select.ltrun(staff, -1)
         >>> result
-        Selection(items=[LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")]),
-        LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
+        [LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])]
 
         >>> abjad.label.by_selector(result, lone=True)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1839,7 +1806,7 @@ def ltrun(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection
     return ltruns(argument, exclude=exclude)[n]
 
 
-def ltruns(argument, *, exclude: abjad.Strings = None) -> abjad.Selection:
+def ltruns(argument, *, exclude: abjad.Strings = None) -> list[list[abjad.LogicalTie]]:
     r"""
     Selects logical tie runs.
 
@@ -1865,9 +1832,9 @@ def ltruns(argument, *, exclude: abjad.Strings = None) -> abjad.Selection:
         >>> for item in result:
         ...     item
         ...
-        Selection(items=[LogicalTie(items=[Note("c'16")]), LogicalTie(items=[Note("c'16")]), LogicalTie(items=[Note("c'16")]), LogicalTie(items=[Chord("<d' e'>4"), Chord("<d' e'>16")])])
-        Selection(items=[LogicalTie(items=[Note("d'16")]), LogicalTie(items=[Note("d'16")]), LogicalTie(items=[Note("d'16")]), LogicalTie(items=[Chord("<e' fs'>4"), Chord("<e' fs'>16")])])
-        Selection(items=[LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
+        [LogicalTie(items=[Note("c'16")]), LogicalTie(items=[Note("c'16")]), LogicalTie(items=[Note("c'16")]), LogicalTie(items=[Chord("<d' e'>4"), Chord("<d' e'>16")])]
+        [LogicalTie(items=[Note("d'16")]), LogicalTie(items=[Note("d'16")]), LogicalTie(items=[Note("d'16")]), LogicalTie(items=[Chord("<e' fs'>4"), Chord("<e' fs'>16")])]
+        [LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])]
 
         >>> abjad.label.by_selector(result)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1937,8 +1904,7 @@ def ltruns(argument, *, exclude: abjad.Strings = None) -> abjad.Selection:
     """
     lts = abjad.select.logical_ties(argument, exclude=exclude, pitched=True)
     result = abjad.select.group_by_contiguity(lts)
-    selection = Selection([Selection(_) for _ in result])
-    return selection
+    return [list(_) for _ in result]
 
 
 def lts(
@@ -2062,7 +2028,7 @@ def mgroups(
     counts: typing.Sequence[int] = [1],
     *,
     exclude: abjad.Strings = None,
-) -> Selection:
+) -> list[list[abjad.Leaf]]:
     r"""
     Partitions measure-grouped leaves.
 
@@ -2080,7 +2046,7 @@ def mgroups(
         >>> for item in result:
         ...     item
         ...
-        Selection(items=[Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
+        [Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")]
 
         >>> abjad.label.by_selector(result)
         >>> lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', staff])
@@ -2118,8 +2084,8 @@ def mgroups(
     leaves = abjad.select.leaves(argument, exclude=exclude)
     groups = abjad.select.group_by_measure(leaves)
     parts = abjad.select.partition_by_counts(groups, counts)
-    result_ = Selection(Selection(abjad.select.flatten(_)) for _ in parts)
-    return result_
+    result = [abjad.select.flatten(_) for _ in parts]
+    return result
 
 
 def mleaves(argument, count: int, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]:
@@ -2293,7 +2259,7 @@ def mmrest(
     return mmrest
 
 
-def mmrests(argument, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]:
+def mmrests(argument, *, exclude: abjad.Strings = None) -> list[abjad.MultimeasureRest]:
     r"""
     Selects multimeasure rests.
 
@@ -2342,7 +2308,7 @@ def mmrests(argument, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]:
     return items
 
 
-def ntrun(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
+def ntrun(argument, n: int, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]:
     r"""
     Selects nontrivial run ``n``.
 
@@ -2366,7 +2332,7 @@ def ntrun(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection
 
         >>> result = baca.select.ntrun(staff, -1)
         >>> result
-        Selection(items=[Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+        [Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")]
 
         >>> abjad.label.by_selector(result, lone=True)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2427,7 +2393,7 @@ def ntrun(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection
     return ntruns(argument, exclude=exclude)[n]
 
 
-def ntruns(argument, *, exclude: abjad.Strings = None) -> list[abjad.Selection]:
+def ntruns(argument, *, exclude: abjad.Strings = None) -> list[list[abjad.Leaf]]:
     r"""
     Selects nontrivial runs.
 
@@ -2453,9 +2419,9 @@ def ntruns(argument, *, exclude: abjad.Strings = None) -> list[abjad.Selection]:
         >>> for item in result:
         ...     item
         ...
-        Selection(items=[Note("c'16"), Note("c'16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16")])
-        Selection(items=[Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16")])
-        Selection(items=[Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+        [Note("c'16"), Note("c'16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16")]
+        [Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16")]
+        [Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")]
 
         >>> abjad.label.by_selector(result)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2523,9 +2489,10 @@ def ntruns(argument, *, exclude: abjad.Strings = None) -> list[abjad.Selection]:
             }
 
     """
-    items = abjad.select.runs(argument, exclude=exclude)
-    items = abjad.select.nontrivial(items)
-    return items
+    runs = abjad.select.runs(argument, exclude=exclude)
+    runs = abjad.select.nontrivial(runs)
+    lists_ = [list(_) for _ in runs]
+    return lists_
 
 
 def omgroups(
@@ -2533,7 +2500,7 @@ def omgroups(
     counts: typing.Sequence[int] = [1],
     *,
     exclude: abjad.Strings = None,
-) -> list[Selection]:
+) -> list[list[abjad.Leaf]]:
     r"""
     Partitions measure-grouped leaves (with overhang).
 
@@ -2552,8 +2519,8 @@ def omgroups(
         >>> for item in result:
         ...     item
         ...
-        Selection(items=[Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
-        Selection(items=[Note("g'8"), Note("a'8"), Note("b'8"), Rest('r8'), Note("d''8")])
+        [Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")]
+        [Note("g'8"), Note("a'8"), Note("b'8"), Rest('r8'), Note("d''8")]
 
         >>> abjad.label.by_selector(result)
         >>> lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', staff])
@@ -2596,7 +2563,7 @@ def omgroups(
     result_1 = abjad.select.leaves(argument, exclude=exclude)
     result_2 = abjad.select.group_by_measure(result_1)
     result_3 = abjad.select.partition_by_counts(result_2, counts, overhang=True)
-    return [Selection(abjad.select.flatten(_)) for _ in result_3]
+    return [abjad.select.flatten(_) for _ in result_3]
 
 
 def ompltgroups(
@@ -2604,14 +2571,14 @@ def ompltgroups(
     counts: typing.Sequence[int] = [1],
     *,
     exclude: abjad.Strings = None,
-) -> Selection:
+) -> list[list[abjad.LogicalTie]]:
     """
     Partitions measure-grouped plts (with overhang).
     """
     result_1 = plts(argument, exclude=exclude)
     result_2 = abjad.select.group_by_measure(result_1)
     result_3 = abjad.select.partition_by_counts(result_2, counts, overhang=True)
-    result_4 = Selection(Selection(abjad.select.flatten(_)) for _ in result_3)
+    result_4 = [abjad.select.flatten(_) for _ in result_3]
     return result_4
 
 
@@ -3007,7 +2974,7 @@ def pleaves(
 
 def plt(
     argument, n: int, *, exclude: abjad.Strings = None, grace: bool = None
-) -> abjad.Selection:
+) -> abjad.LogicalTie:
     r"""
     Selects pitched logical tie ``n``.
 
@@ -3284,7 +3251,9 @@ def ptail(
     return ptails(argument, exclude=exclude)[n]
 
 
-def ptails(argument, *, exclude: abjad.Strings = None) -> list:
+def ptails(
+    argument, *, exclude: abjad.Strings = None
+) -> list[abjad.Note | abjad.Chord]:
     r"""
     Selects pitched tails.
 
@@ -3391,7 +3360,7 @@ def ptails(argument, *, exclude: abjad.Strings = None) -> list:
     return list_
 
 
-def ptlt(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
+def ptlt(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.LogicalTie:
     r"""
     Selects pitched trivial logical tie ``n``.
 
@@ -3573,7 +3542,7 @@ def ptlts(argument, *, exclude: abjad.Strings = None) -> list[abjad.LogicalTie]:
     )
 
 
-def qrun(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
+def qrun(argument, n: int, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]:
     r"""
     Selects equipitch run ``n``.
 
@@ -3655,7 +3624,7 @@ def qrun(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
     return qruns(argument, exclude=exclude)[n]
 
 
-def qruns(argument, *, exclude: abjad.Strings = None) -> list:
+def qruns(argument, *, exclude: abjad.Strings = None) -> list[list[abjad.Leaf]]:
     r"""
     Selects equipitch runs.
 
@@ -3756,7 +3725,7 @@ def qruns(argument, *, exclude: abjad.Strings = None) -> list:
     """
     selection = pleaves(argument, exclude=exclude)
     result = abjad.select.group_by_pitch(selection)
-    list_ = [abjad.Selection(abjad.select.group_by_contiguity(_)) for _ in result]
+    list_ = [abjad.select.group_by_contiguity(_) for _ in result]
     result_ = abjad.select.flatten(list_, depth=1)
     return result_
 
@@ -4067,7 +4036,7 @@ def rmleaves(
     return items_
 
 
-def rrun(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
+def rrun(argument, n: int, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]:
     r"""
     Selects run ``n`` (leaked to the right).
 
@@ -4091,7 +4060,7 @@ def rrun(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
 
         >>> result = baca.select.rrun(staff, 1)
         >>> result
-        Selection(items=[Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
+        [Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')]
 
         >>> abjad.label.by_selector(result, lone=True)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -4153,7 +4122,7 @@ def rrun(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
     return rruns(argument, exclude=exclude)[n]
 
 
-def rruns(argument, *, exclude: abjad.Strings = None) -> list[abjad.Selection]:
+def rruns(argument, *, exclude: abjad.Strings = None) -> list[list[abjad.Leaf]]:
     r"""
     Selects runs (leaked to the right).
 
@@ -4179,9 +4148,9 @@ def rruns(argument, *, exclude: abjad.Strings = None) -> list[abjad.Selection]:
         >>> for item in result:
         ...     item
         ...
-        Selection(items=[Note("c'16"), Note("c'16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16"), Rest('r16')])
-        Selection(items=[Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
-        Selection(items=[Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+        [Note("c'16"), Note("c'16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16"), Rest('r16')]
+        [Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')]
+        [Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")]
 
         >>> abjad.label.by_selector(result)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -4252,8 +4221,8 @@ def rruns(argument, *, exclude: abjad.Strings = None) -> list[abjad.Selection]:
 
     """
     result = abjad.select.runs(argument, exclude=exclude)
-    result = [Selection(rleak(_)) for _ in result]
-    return result
+    lists_ = [rleak(_) for _ in result]
+    return lists_
 
 
 def skip(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Skip:
