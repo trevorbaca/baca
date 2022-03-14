@@ -640,7 +640,7 @@ class LMR:
     middle_counts: typing.Sequence[int] = ()
     middle_cyclic: bool = False
     middle_reversed: bool = False
-    priority: abjad.HorizontalAlignment | None = None
+    priority: int | None = None
     right_counts: typing.Sequence[int] = ()
     right_cyclic: bool = False
     right_length: int = 0
@@ -2666,7 +2666,7 @@ class FigureAccumulator:
         anchor: Anchor = None,
         do_not_label: bool = False,
         figure_name: str = "",
-        figure_label_direction: abjad.VerticalAlignment = None,
+        figure_label_direction: int = None,
         hide_time_signature: bool | None = None,
         signature: int = None,
     ) -> None:
@@ -7938,7 +7938,7 @@ def lmr(
     middle_counts: typing.Sequence[int] = (),
     middle_cyclic: bool = False,
     middle_reversed: bool = False,
-    priority: abjad.HorizontalAlignment | None = None,
+    priority: int | None = None,
     right_counts: typing.Sequence[int] = (),
     right_cyclic: bool = False,
     right_length: int = 0,

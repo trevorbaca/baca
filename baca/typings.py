@@ -9,8 +9,6 @@ IntegerList = typing.List[int]
 
 Indices = int | abjad.IntegerPair | IntegerList | None
 
-HorizontalAlignmentTyping = typing.Union[abjad.Number, abjad.HorizontalAlignment]
-
 Pair = typing.Tuple[typing.Any, typing.Any]
 
 ScopeTyping = typing.Union[

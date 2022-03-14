@@ -285,7 +285,7 @@ def quarters(
     sequence,
     *,
     compound: abjad.DurationTyping = None,
-    remainder: abjad.VerticalAlignment = None,
+    remainder: int = None,
 ):
     r"""
     Splits sequence into quarter-note durations.
@@ -717,7 +717,7 @@ def split_divisions(
     *,
     compound: abjad.DurationTyping = None,
     cyclic: bool = False,
-    remainder: abjad.HorizontalAlignment = None,
+    remainder: int = None,
     remainder_fuse_threshold: abjad.DurationTyping = None,
 ):
     r"""

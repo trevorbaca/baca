@@ -142,7 +142,7 @@ class ArpeggiationSpacingSpecifier:
 
     """
 
-    direction: abjad.enums.VerticalAlignment | None = None
+    direction: int | None = None
     pattern: abjad.Pattern | None = None
 
     def __post_init__(self):
@@ -472,7 +472,7 @@ class ChordalSpacingSpecifier:
     """
 
     bass: typing.Any = None
-    direction: typing.Any = None
+    direction: int | None = None
     minimum_semitones: typing.Any = None
     pattern: typing.Any = None
     soprano: typing.Any = None

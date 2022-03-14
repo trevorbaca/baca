@@ -101,7 +101,7 @@ class SpannerIndicatorCommand(_scoping.Command):
 
 def beam(
     *tweaks: abjad.TweakInterface,
-    direction: abjad.VerticalAlignment = None,
+    direction: int = None,
     selector=_selectors.tleaves(),
     start_beam: abjad.StartBeam = None,
     stop_beam: abjad.StopBeam = None,
