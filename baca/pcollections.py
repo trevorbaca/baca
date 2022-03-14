@@ -692,7 +692,7 @@ class HarmonicSeries:
 
     __slots__ = ("_fundamental",)
 
-    def __init__(self, fundamental: typing.Union[str, abjad.NamedPitch] = "C1") -> None:
+    def __init__(self, fundamental: str | abjad.NamedPitch = "C1") -> None:
         fundamental = abjad.NamedPitch(fundamental)
         self._fundamental = fundamental
 
@@ -1803,14 +1803,14 @@ def has_duplicate_pitch_classes(collections, level=-1) -> bool:
     pitch_class_class = abjad.NumberedPitchClass
     if level == 1:
         for collection in collections:
-            known_pitch_classes: typing.List[abjad.PitchClass] = []
+            known_pitch_classes: list[abjad.PitchClass] = []
             for item in collection:
                 pitch_class = pitch_class_class(item)
                 if pitch_class in known_pitch_classes:
                     return True
                 known_pitch_classes.append(pitch_class)
     elif level == -1:
-        known_pitch_classes_: typing.List[abjad.PitchClass] = []
+        known_pitch_classes_: list[abjad.PitchClass] = []
         for collection in collections:
             for item in collection:
                 pitch_class = pitch_class_class(item)

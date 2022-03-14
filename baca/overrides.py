@@ -523,13 +523,13 @@ def clef_extra_offset(
 
 
 def clef_shift(
-    clef: typing.Union[str, abjad.Clef],
+    clef: str | abjad.Clef,
     selector=_selectors.leaf(0),
 ) -> _scoping.Suite:
     """
     Shifts clef to left by width of clef.
     """
-    extra_offset_x: typing.Union[int, float]
+    extra_offset_x: int | float
     if isinstance(clef, str):
         clef = abjad.Clef(clef)
     if isinstance(clef, (int, float)):
@@ -1176,7 +1176,7 @@ def hairpin_shorten_pair(
 
 
 def hairpin_start_shift(
-    dynamic: typing.Union[str, abjad.Dynamic],
+    dynamic: str | abjad.Dynamic,
     selector=_selectors.leaf(0),
 ) -> _scoping.Suite:
     """

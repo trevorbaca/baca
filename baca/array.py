@@ -818,7 +818,7 @@ class PitchArray:
         self._rows.remove(row)
         row._parent_array = None
 
-    def to_measures(self, cell_duration_denominator=8) -> typing.List[abjad.Container]:
+    def to_measures(self, cell_duration_denominator=8) -> list[abjad.Container]:
         r"""
         Changes pitch array  to measures.
 
@@ -2712,7 +2712,7 @@ class PitchArrayRow:
         pair = (self.width, cell_duration_denominator)
         time_signature = abjad.TimeSignature(pair)
         basic_cell_duration = abjad.Duration(1, cell_duration_denominator)
-        measure_pitches: typing.List[typing.Optional[int]] = []
+        measure_pitches: list[int | None] = []
         measure_durations = []
         for cell in self.cells:
             cell_pitches = cell.pitches

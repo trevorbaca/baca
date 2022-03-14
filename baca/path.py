@@ -4,7 +4,6 @@ Path.
 import importlib
 import os
 import pathlib
-import typing
 
 import black
 
@@ -348,7 +347,7 @@ def get_wrapper_directory(path):
     raise Exception(path)
 
 
-def get_measure_profile_metadata(path) -> typing.Tuple[int, int, list]:
+def get_measure_profile_metadata(path) -> tuple[int, int, list]:
     """
     Gets measure profile metadata.
 

@@ -1482,15 +1482,13 @@ class Acciaccatura:
 
     def __call__(
         self, collection: list = None
-    ) -> typing.Tuple[typing.List[typing.Optional[abjad.BeforeGraceContainer]], list]:
+    ) -> tuple[list[abjad.BeforeGraceContainer | None], list]:
         assert isinstance(collection, list), repr(collection)
         segment_parts = self.lmr(collection)
         segment_parts = [_ for _ in segment_parts if _]
         collection = [_[-1] for _ in segment_parts]
         durations = self.durations
-        acciaccatura_containers: typing.List[
-            typing.Union[abjad.BeforeGraceContainer, None]
-        ] = []
+        acciaccatura_containers: list[abjad.BeforeGraceContainer | None] = []
         maker = abjad.LeafMaker()
         for segment_part in segment_parts:
             if len(segment_part) <= 1:
@@ -1550,13 +1548,13 @@ class Coat:
 
     ### INITIALIZER ###
 
-    def __init__(self, argument: typing.Union[int, str, abjad.Pitch]) -> None:
+    def __init__(self, argument: int | str | abjad.Pitch) -> None:
         self._argument = argument
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def argument(self) -> typing.Union[int, str, abjad.Pitch]:
+    def argument(self) -> int | str | abjad.Pitch:
         """
         Gets argument.
         """
@@ -1626,7 +1624,7 @@ class Imbrication:
     def __init__(
         self,
         voice_name: str,
-        segment: typing.List[int] = None,
+        segment: list[int] = None,
         *commands,
         allow_unused_pitches: bool = False,
         by_pitch_class: bool = False,
@@ -1771,7 +1769,7 @@ class Imbrication:
     ### PUBLIC PROPERTIES ###
 
     @property
-    def allow_unused_pitches(self) -> typing.Optional[bool]:
+    def allow_unused_pitches(self) -> bool | None:
         r"""
         Is true when imbrication allows unused pitches.
 
@@ -1972,21 +1970,21 @@ class Imbrication:
         return self._allow_unused_pitches
 
     @property
-    def by_pitch_class(self) -> typing.Optional[bool]:
+    def by_pitch_class(self) -> bool | None:
         """
         Is true when imbrication matches on pitch-class rather than pitch.
         """
         return self._by_pitch_class
 
     @property
-    def commands(self) -> typing.List:
+    def commands(self) -> list:
         """
         Gets commands.
         """
         return list(self._commands)
 
     @property
-    def hocket(self) -> typing.Optional[bool]:
+    def hocket(self) -> bool | None:
         r"""
         Is true when imbrication hockets voices.
 
@@ -2181,7 +2179,7 @@ class Imbrication:
         return self._hocket
 
     @property
-    def segment(self) -> typing.Optional[typing.List[int]]:
+    def segment(self) -> list[int] | None:
         """
         Gets to-be-imbricated segment.
         """
@@ -2415,7 +2413,7 @@ class Imbrication:
         return self._selector
 
     @property
-    def truncate_ties(self) -> typing.Optional[bool]:
+    def truncate_ties(self) -> bool | None:
         r"""
         Is true when imbrication truncates ties.
 
@@ -2653,10 +2651,10 @@ class FigureAccumulator:
         self._voice_names = voice_names
         self._current_offset = abjad.Offset(0)
         self._figure_number = 1
-        self._figure_names: typing.List[str] = []
+        self._figure_names: list[str] = []
         self._floating_selections = self._make_voice_dictionary()
         self._score_stop_offset = abjad.Offset(0)
-        self.time_signatures: typing.List[abjad.TimeSignature] = []
+        self.time_signatures: list[abjad.TimeSignature] = []
 
     def __call__(
         self,
@@ -3167,7 +3165,7 @@ class Nest:
 
     """
 
-    treatments: typing.Sequence[typing.Union[int, str]]
+    treatments: typing.Sequence[int | str]
     lmr: LMR | None = None
 
     def __post_init__(self):
@@ -3586,10 +3584,7 @@ class RestAffix:
 
     def __call__(
         self, collection_index: int, total_collections: int
-    ) -> typing.Tuple[
-        typing.Optional[abjad.IntegerSequence],
-        typing.Optional[abjad.IntegerSequence],
-    ]:
+    ) -> tuple[abjad.IntegerSequence | None, abjad.IntegerSequence | None]:
         if self.pattern is None:
             if collection_index == 0 and collection_index == total_collections - 1:
                 return self.prefix, self.suffix
@@ -5825,7 +5820,7 @@ class FigureMaker:
         collections = _coerce_collections(collections)
         self._state = state or {}
         self._apply_state(state=state)
-        tuplets: typing.List[abjad.Tuplet] = []
+        tuplets: list[abjad.Tuplet] = []
         if not self.restart_talea:
             selection_ = self._make_music(
                 collections,
@@ -5991,7 +5986,7 @@ class FigureMaker:
 
     def _make_music(
         self, collections, collection_index=None, total_collections=None
-    ) -> typing.List[abjad.Tuplet]:
+    ) -> list[abjad.Tuplet]:
         segment_count = len(collections)
         tuplets = []
         if collection_index is None:
@@ -6202,7 +6197,7 @@ class Bind:
                 raise Exception(f"no maker match for collection {i}.")
         assert len(collections) == len(matches)
         groups = abjad.sequence.group_by(matches, lambda _: _.assignment.maker)
-        tuplets: typing.List[abjad.Tuplet] = []
+        tuplets: list[abjad.Tuplet] = []
         for group in groups:
             maker = group[0].assignment.maker
             collections_ = [match.payload for match in group]
@@ -6274,7 +6269,7 @@ def bind(assignments):
     return Bind(assignments)
 
 
-def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
+def coat(pitch: int | str | abjad.Pitch) -> Coat:
     r"""
     Coats ``pitch``.
 
@@ -6803,7 +6798,7 @@ def extend_beam(
 
 def imbricate(
     voice_name: str,
-    segment: typing.List,
+    segment: list,
     *specifiers: typing.Any,
     allow_unused_pitches: bool = False,
     by_pitch_class: bool = False,
@@ -8094,7 +8089,7 @@ def figure(
     counts: abjad.IntegerSequence,
     denominator: int,
     *,
-    acciaccatura: typing.Union[bool, Acciaccatura, LMR] = None,
+    acciaccatura: bool | Acciaccatura | LMR | None = None,
     affix: RestAffix = None,
     restart_talea: bool = False,
     signature: int = None,
@@ -8195,7 +8190,7 @@ def rests_after(counts: typing.Sequence[int]) -> RestAffix:
     return RestAffix(suffix=counts)
 
 
-def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffix:
+def rests_around(prefix: list[int], suffix: list[int]) -> RestAffix:
     r"""
     Makes rests around music.
 
@@ -8467,7 +8462,7 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
     return RestAffix(prefix=prefix, suffix=suffix)
 
 
-def rests_before(counts: typing.List[int]) -> RestAffix:
+def rests_before(counts: list[int]) -> RestAffix:
     r"""
     Makes rests before music.
 
@@ -8559,7 +8554,7 @@ def resume_after(remote_voice_name) -> Anchor:
     )
 
 
-def skips_after(counts: typing.List[int]) -> RestAffix:
+def skips_after(counts: list[int]) -> RestAffix:
     r"""
     Makes skips after music.
 
@@ -8633,7 +8628,7 @@ def skips_after(counts: typing.List[int]) -> RestAffix:
     return RestAffix(skips_instead_of_rests=True, suffix=counts)
 
 
-def skips_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffix:
+def skips_around(prefix: list[int], suffix: list[int]) -> RestAffix:
     r"""
     Makes skips around music.
 
@@ -8708,9 +8703,7 @@ def skips_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
     return RestAffix(prefix=prefix, skips_instead_of_rests=True, suffix=suffix)
 
 
-def skips_before(
-    counts: typing.List[int],
-) -> RestAffix:
+def skips_before(counts: list[int]) -> RestAffix:
     r"""
     Makes skips before music.
 

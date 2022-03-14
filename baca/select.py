@@ -18,7 +18,7 @@ class Selection(abjad.Selection):
         return type(self)(items)
 
     def cmgroups(
-        self, counts: typing.List[int] = [1], *, exclude: abjad.Strings = None
+        self, counts: list[int] = [1], *, exclude: abjad.Strings = None
     ) -> "Selection":
         items = cmgroups(self, counts, exclude=exclude)
         return type(self)(items)
@@ -133,7 +133,7 @@ class Selection(abjad.Selection):
 
     def phead(
         self, n: int, *, exclude: abjad.Strings = None
-    ) -> typing.Union[abjad.Note, abjad.Chord]:
+    ) -> abjad.Note | abjad.Chord:
         return phead(self, n, exclude=exclude)
 
     def pheads(
@@ -144,7 +144,7 @@ class Selection(abjad.Selection):
 
     def pleaf(
         self, n: int, *, exclude: abjad.Strings = None, grace: bool = None
-    ) -> typing.Union[abjad.Note, abjad.Chord]:
+    ) -> abjad.Note | abjad.Chord:
         return pleaf(self, n, exclude=exclude, grace=grace)
 
     def pleaves(
@@ -166,7 +166,7 @@ class Selection(abjad.Selection):
 
     def ptail(
         self, n: int, *, exclude: abjad.Strings = None
-    ) -> typing.Union[abjad.Note, abjad.Chord]:
+    ) -> abjad.Note | abjad.Chord:
         return ptail(self, n, exclude=exclude)
 
     def ptails(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
@@ -526,7 +526,7 @@ def clparts(
 
 
 def cmgroups(
-    argument, counts: typing.List[int] = [1], *, exclude: abjad.Strings = None
+    argument, counts: list[int] = [1], *, exclude: abjad.Strings = None
 ) -> Selection:
     r"""
     Partitions measure-grouped leaves (cyclically).
@@ -2617,7 +2617,7 @@ def ompltgroups(
 
 def phead(
     argument, n: int, *, exclude: abjad.Strings = None
-) -> typing.Union[abjad.Note, abjad.Chord]:
+) -> abjad.Note | abjad.Chord:
     r"""
     Selects pitched head ``n``.
 
@@ -3203,7 +3203,7 @@ def plts(
 
 def ptail(
     argument, n: int, *, exclude: abjad.Strings = None
-) -> typing.Union[abjad.Note, abjad.Chord]:
+) -> abjad.Note | abjad.Chord:
     r"""
     Selects pitched tail ``n``.
 

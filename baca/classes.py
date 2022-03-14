@@ -1013,7 +1013,7 @@ class SchemeManifest:
     ### PUBLIC PROPERTIES ###
 
     @property
-    def dynamics(self) -> typing.List[str]:
+    def dynamics(self) -> list[str]:
         """
         Gets dynamics.
 

@@ -435,7 +435,7 @@ class TimelineScope:
             self.scopes = scopes
 
 
-ScopeTyping = typing.Union[Scope, TimelineScope]
+ScopeTyping = Scope | TimelineScope
 
 
 def apply_tweaks(argument, tweaks, i=None, total=None):
@@ -630,9 +630,7 @@ class Command:
     scope: ScopeTyping | None = None
     selector: typing.Callable | None = None
     tag_measure_number: bool = False
-    tags: typing.List[typing.Optional[abjad.Tag]] = dataclasses.field(
-        default_factory=list
-    )
+    tags: list[abjad.Tag | None] = dataclasses.field(default_factory=list)
 
     def __post_init__(self):
         self._runtime = {}
@@ -720,7 +718,7 @@ class Command:
         return tag
 
     # TODO: replace in favor of self.tag(leaf)
-    def get_tag(self, leaf: abjad.Leaf = None) -> typing.Optional[abjad.Tag]:
+    def get_tag(self, leaf: abjad.Leaf = None) -> abjad.Tag | None:
         """
         Gets tag for ``leaf``.
         """
@@ -817,7 +815,7 @@ class Suite:
         return f"{type(self).__name__}(commands={self.commands})"
 
 
-CommandTyping = typing.Union[Command, Suite]
+CommandTyping = Command | Suite
 
 
 def chunk(*commands: CommandTyping, **keywords) -> Suite:
@@ -1066,7 +1064,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         return suite(*result)
 
 
-_command_typing = typing.Union[Command, Suite]
+_command_typing = Command | Suite
 
 
 def not_mol(command: _command_typing) -> _command_typing:
@@ -1240,7 +1238,7 @@ def suite(*commands: CommandTyping, **keywords) -> Suite:
             'Allegro'
 
     """
-    commands_: typing.List[typing.Union[Command, Suite]] = []
+    commands_: list[Command | Suite] = []
     for item in commands:
         if isinstance(item, (list, tuple)):
             commands_.extend(item)
@@ -1257,7 +1255,7 @@ def suite(*commands: CommandTyping, **keywords) -> Suite:
 
 
 def tag(
-    tags: typing.Union[abjad.Tag, typing.List[abjad.Tag]],
+    tags: abjad.Tag | list[abjad.Tag],
     command: CommandTyping,
     *,
     deactivate: bool = False,

@@ -848,8 +848,8 @@ def dynamic_up(*, selector=_selectors.leaf(0)) -> _commandclasses.IndicatorComma
 
 
 def edition(
-    not_parts: typing.Union[str, abjad.Markup, _commandclasses.IndicatorCommand],
-    only_parts: typing.Union[str, abjad.Markup, _commandclasses.IndicatorCommand],
+    not_parts: str | abjad.Markup | _commandclasses.IndicatorCommand,
+    only_parts: str | abjad.Markup | _commandclasses.IndicatorCommand,
 ) -> _scoping.Suite:
     """
     Makes not-parts / only-parts markup suite.
@@ -973,12 +973,11 @@ def finger_pressure_transition(
 
 
 def flat_glissando(
-    pitch: typing.Union[
-        str,
-        abjad.NamedPitch,
-        abjad.StaffPosition,
-        typing.List[abjad.StaffPosition],
-    ] = None,
+    pitch: str
+    | abjad.NamedPitch
+    | abjad.StaffPosition
+    | list[abjad.StaffPosition]
+    | None = None,
     *tweaks,
     allow_repitch: bool = False,
     do_not_hide_middle_note_heads: bool = False,
@@ -990,7 +989,7 @@ def flat_glissando(
     right_broken_show_next: bool = False,
     rleak: bool = False,
     selector=_selectors.pleaves(),
-    stop_pitch: typing.Union[str, abjad.NamedPitch, abjad.StaffPosition] = None,
+    stop_pitch: str | abjad.NamedPitch | abjad.StaffPosition | None = None,
 ) -> _scoping.Suite:
     """
     Makes flat glissando.
@@ -1010,7 +1009,7 @@ def flat_glissando(
         new_selector = _selector_rleak
     else:
         new_selector = selector
-    commands: typing.List[_scoping.Command] = []
+    commands: list[_scoping.Command] = []
     command = glissando(
         *tweaks,
         allow_repeats=True,
@@ -1690,7 +1689,7 @@ def label(
 
 
 def markup(
-    argument: typing.Union[str, abjad.Markup],
+    argument: str | abjad.Markup,
     *tweaks: abjad.TweakInterface,
     direction=abjad.Up,
     map=None,
@@ -1900,11 +1899,11 @@ def markup(
 
 
 def metronome_mark(
-    key: typing.Union[str, _indicators.Accelerando, _indicators.Ritardando],
+    key: str | _indicators.Accelerando | _indicators.Ritardando,
     selector=_selectors.leaf(0),
     *,
     redundant: bool = False,
-) -> typing.Optional[_commandclasses.MetronomeMarkCommand]:
+) -> _commandclasses.MetronomeMarkCommand | None:
     """
     Attaches metronome mark matching ``key`` metronome mark manifest.
     """

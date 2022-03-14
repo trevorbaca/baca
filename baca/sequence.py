@@ -10,7 +10,7 @@ import abjad
 # TODO: generalize ``indices`` to pattern
 def fuse(
     sequence,
-    counts: typing.List[int] = None,
+    counts: list[int] = None,
     *,
     cyclic: bool = False,
     indices: typing.Sequence[int] = None,
@@ -713,7 +713,7 @@ def ratios(
 
 def split_divisions(
     sequence,
-    durations: typing.List[abjad.DurationTyping],
+    durations: list[abjad.DurationTyping],
     *,
     compound: abjad.DurationTyping = None,
     cyclic: bool = False,

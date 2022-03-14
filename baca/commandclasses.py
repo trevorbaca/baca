@@ -748,7 +748,7 @@ class GlissandoCommand(_scoping.Command):
         if self.selector is not None:
             argument = self.selector(argument)
         leaves = abjad.select.leaves(argument)
-        tweaks_: typing.List[abjad.IndexedTweakManager] = []
+        tweaks_: list[abjad.IndexedTweakManager] = []
         prototype = (abjad.TweakInterface, tuple)
         for tweak in self.tweaks or []:
             assert isinstance(tweak, prototype)
@@ -2700,7 +2700,7 @@ class PitchCommand(_scoping.Command):
     do_not_transpose: bool = False
     ignore_incomplete: bool = False
     persist: str | None = None
-    pitches: typing.Union[typing.Sequence, Loop] = ()
+    pitches: typing.Sequence | Loop = ()
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
@@ -3933,8 +3933,8 @@ class RegisterInterpolationCommand(_scoping.Command):
 
     """
 
-    start_pitch: typing.Union[abjad.Number, abjad.NumberedPitch] = 0
-    stop_pitch: typing.Union[abjad.Number, abjad.NumberedPitch] = 0
+    start_pitch: abjad.Number | abjad.NumberedPitch = 0
+    stop_pitch: abjad.Number | abjad.NumberedPitch = 0
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
@@ -5093,10 +5093,10 @@ def center_to_octave(
 
 
 def clusters(
-    widths: typing.List[int],
+    widths: list[int],
     selector=_selectors.plts(exclude=_const.HIDDEN),
     *,
-    start_pitch: typing.Union[int, str, abjad.NamedPitch] = None,
+    start_pitch: int | str | abjad.NamedPitch | None = None,
 ) -> ClusterCommand:
     """
     Makes clusters with ``widths`` and ``start_pitch``.
@@ -5105,7 +5105,7 @@ def clusters(
 
 
 def color_fingerings(
-    numbers: typing.List[abjad.Number],
+    numbers: list[abjad.Number],
     *tweaks: abjad.IndexedTweakManager,
     selector=_selectors.pheads(exclude=_const.HIDDEN),
 ) -> ColorFingeringCommand:
@@ -5116,7 +5116,7 @@ def color_fingerings(
 
 
 def deviation(
-    deviations: typing.List[abjad.Number],
+    deviations: list[abjad.Number],
     selector=_selectors.plts(exclude=_const.HIDDEN),
 ) -> MicrotoneDeviationCommand:
     """
@@ -5126,7 +5126,7 @@ def deviation(
 
 
 def diatonic_clusters(
-    widths: typing.List[int],
+    widths: list[int],
     selector=_selectors.plts(exclude=_const.HIDDEN),
 ) -> DiatonicClusterCommand:
     """
@@ -5136,7 +5136,7 @@ def diatonic_clusters(
 
 
 def displacement(
-    displacements: typing.List[int],
+    displacements: list[int],
     selector=_selectors.plts(exclude=_const.HIDDEN),
 ) -> OctaveDisplacementCommand:
     r"""
@@ -5353,8 +5353,8 @@ def force_accidental(
 
 
 def interpolate_pitches(
-    start: typing.Union[int, str, abjad.NamedPitch],
-    stop: typing.Union[int, str, abjad.NamedPitch],
+    start: int | str | abjad.NamedPitch,
+    stop: int | str | abjad.NamedPitch,
     selector=_selectors.plts(exclude=_const.HIDDEN),
     *,
     mock: bool = False,
@@ -5564,7 +5564,7 @@ def natural_clusters(
     widths: typing.Sequence[int],
     selector=_selectors.plts(exclude=_const.HIDDEN),
     *,
-    start_pitch: typing.Union[int, str, abjad.NamedPitch] = None,
+    start_pitch: int | str | abjad.NamedPitch | None = None,
 ) -> ClusterCommand:
     """
     Makes natural clusters with ``widths`` and ``start_pitch``.
@@ -5729,7 +5729,7 @@ def register(
     stop: int = None,
     *,
     selector=_selectors.plts(exclude=_const.HIDDEN),
-) -> typing.Union[RegisterCommand, RegisterInterpolationCommand]:
+) -> RegisterCommand | RegisterInterpolationCommand:
     r"""
     Octave-transposes ``selector`` output.
 
@@ -6219,7 +6219,7 @@ def soprano_to_octave(
 
 
 def staff_position(
-    argument: typing.Union[int, list, abjad.StaffPosition],
+    argument: int | list | abjad.StaffPosition,
     selector=_selectors.plts(exclude=_const.HIDDEN),
     *,
     allow_out_of_range: bool = False,

@@ -2,7 +2,6 @@
 Indicator commands.
 """
 import dataclasses
-import typing
 from inspect import currentframe as _frame
 
 import abjad
@@ -471,7 +470,7 @@ def articulation(
 
 
 def articulations(
-    articulations: typing.List,
+    articulations: list,
     selector=_selectors.pheads(exclude=_const.HIDDEN),
 ) -> _commandclasses.IndicatorCommand:
     """
@@ -1396,7 +1395,7 @@ def laissez_vibrer(
 
 
 def literal(
-    string: typing.Union[str, typing.List[str]],
+    string: str | list[str],
     selector=_selectors.leaf(0),
     *,
     format_slot: str = "before",
@@ -1588,7 +1587,7 @@ def margin_markup(
     *,
     alert: _commandclasses.IndicatorCommand = None,
     context: str = "Staff",
-) -> typing.Union[_commandclasses.IndicatorCommand, _scoping.Suite]:
+) -> _commandclasses.IndicatorCommand | _scoping.Suite:
     r"""
     Attaches margin markup.
 
@@ -1798,7 +1797,7 @@ def quadruple_staccato(
 
 
 def rehearsal_mark(
-    argument: typing.Union[int, str],
+    argument: int | str,
     selector=_selectors.leaf(0),
     *tweaks: abjad.TweakInterface,
     font_size: int = 10,
@@ -2546,7 +2545,7 @@ def staff_lines(n: int, selector=_selectors.leaf(0)) -> _scoping.Suite:
 
 
 def start_markup(
-    argument: typing.Union[str, typing.List[str]],
+    argument: str | list[str],
     selector=_selectors.leaf(0),
     *,
     context: str = "Staff",

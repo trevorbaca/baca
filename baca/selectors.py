@@ -1,7 +1,6 @@
 """
 Selectors.
 """
-import typing
 
 import abjad
 
@@ -149,7 +148,7 @@ def leaves(
     reverse: bool = None,
     rleak: bool = False,
     tail: bool = None,
-    trim: typing.Union[bool, int] = None,
+    trim: bool | int | None = None,
 ):
     def selector(argument):
         selection = abjad.select.leaves(
