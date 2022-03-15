@@ -40,8 +40,8 @@ def _unpack_measure_token_list(measure_token_list):
 def _unpack_scope_pair(scopes, abbreviations):
     assert isinstance(scopes, tuple), repr(scopes)
     assert len(scopes) == 2, repr(scopes)
-    assert isinstance(scopes[0], (list, str)), repr(scopes)
-    assert isinstance(scopes[1], (int, list, tuple)), repr(scopes)
+    assert isinstance(scopes[0], list | str), repr(scopes)
+    assert isinstance(scopes[1], int | list | tuple), repr(scopes)
     if isinstance(scopes[0], str):
         voice_names = [scopes[0]]
     else:

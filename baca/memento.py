@@ -48,7 +48,7 @@ class Memento:
             assert isinstance(synthetic_offset, abjad.Offset), repr(synthetic_offset)
         self._synthetic_offset = synthetic_offset
         if value is not None:
-            if not isinstance(value, (int, str, dict)):
+            if not isinstance(value, int | str | dict):
                 assert type(value).__name__ == "PersistentOverride", repr(value)
         self._value = value
 

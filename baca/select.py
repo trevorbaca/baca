@@ -2656,7 +2656,7 @@ def pleaf(
 
     """
     pleaf = pleaves(argument, exclude=exclude, grace=grace)[n]
-    assert isinstance(pleaf, (abjad.Note, abjad.Chord))
+    assert isinstance(pleaf, abjad.Note | abjad.Chord)
     return pleaf
 
 

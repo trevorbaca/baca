@@ -1572,7 +1572,7 @@ def _matches_pitch(pitched_leaf, pitch_object):
         written_pitches = pitched_leaf.written_pitches
     else:
         raise TypeError(pitched_leaf)
-    if isinstance(pitch_object, (int, float)):
+    if isinstance(pitch_object, int | float):
         source = [_.number for _ in written_pitches]
     elif isinstance(pitch_object, abjad.NamedPitch):
         source = written_pitches
@@ -1729,7 +1729,7 @@ class Imbrication:
         selection = abjad.Selection(container)
         if not self.hocket:
             pleaves = _select.pleaves(container)
-            assert isinstance(pleaves, (list, abjad.Selection))
+            assert isinstance(pleaves, list | abjad.Selection)
             for pleaf in pleaves:
                 abjad.attach(_const.ALLOW_OCTAVE, pleaf)
         return {self.voice_name: selection}
@@ -3167,7 +3167,7 @@ class Nest:
     lmr: LMR | None = None
 
     def __post_init__(self):
-        assert isinstance(self.treatments, (list, tuple))
+        assert isinstance(self.treatments, list | tuple)
         for treatment in self.treatments:
             assert _is_treatment(treatment), repr(treatment)
         if self.lmr is not None:
@@ -6040,16 +6040,16 @@ class FigureMaker:
             treatment = 0
         before_grace_containers = None
         if self.acciaccatura is not None:
-            if isinstance(segment, (set, frozenset)):
+            if isinstance(segment, set | frozenset):
                 message = "decide how to model chords with acciaccatura."
                 raise NotImplementedError(message)
             before_grace_containers, segment = self.acciaccatura(segment)
             assert len(before_grace_containers) == len(segment)
-        if isinstance(segment, (set, frozenset)):
+        if isinstance(segment, set | frozenset):
             segment = [segment]
         for pitch_expression in segment:
             is_chord = False
-            if isinstance(pitch_expression, (set, frozenset)):
+            if isinstance(pitch_expression, set | frozenset):
                 is_chord = True
             prototype = abjad.NumberedPitchClass
             if isinstance(pitch_expression, prototype):
@@ -6263,7 +6263,7 @@ def bind(assignments):
     """
     Makes bind.
     """
-    assert isinstance(assignments, (tuple, list))
+    assert isinstance(assignments, tuple | list)
     return Bind(assignments)
 
 

@@ -259,7 +259,7 @@ def _attach_default_indicators(argument):
     for staff__group in staff__groups:
         leaf = None
         voices = abjad.select.components(staff__group, abjad.Voice)
-        assert isinstance(voices, (list, abjad.Selection)), repr(voices)
+        assert isinstance(voices, list | abjad.Selection), repr(voices)
         # find leaf 0 in first nonempty voice
         for voice in voices:
             leaves = []
@@ -958,7 +958,7 @@ def _call_rhythm_commands(
         commands_ = _voice_to_rhythm_commands(commands, voice)
         if not commands_:
             selection = silence_maker(time_signatures)
-            assert isinstance(selection, (list, abjad.Selection)), repr(selection)
+            assert isinstance(selection, list | abjad.Selection), repr(selection)
             voice.extend(selection)
             if append_phantom_measure:
                 container = _make_multimeasure_rest_container(
@@ -1038,7 +1038,7 @@ def _check_all_music_in_part_containers(score):
     indicator = _const.MULTIMEASURE_REST_CONTAINER
     for voice in abjad.iterate.components(score, abjad.Voice):
         for component in voice:
-            if isinstance(component, (abjad.MultimeasureRest, abjad.Skip)):
+            if isinstance(component, abjad.MultimeasureRest | abjad.Skip):
                 continue
             if abjad.get.has_indicator(component, _const.HIDDEN):
                 continue
@@ -1737,7 +1737,7 @@ def _intercalate_silences(
             )
             selections.append(selection)
         selection = timespan.annotation
-        assert isinstance(selection, (list, abjad.Selection)), repr(selection)
+        assert isinstance(selection, list | abjad.Selection), repr(selection)
         selections.append(selection)
         duration = abjad.get.duration(selection)
         previous_stop_offset = start_offset + duration
@@ -1751,7 +1751,7 @@ def _intercalate_silences(
         )
         assert isinstance(selection, abjad.Selection)
         selections.append(selection)
-    assert all(isinstance(_, (list, abjad.Selection)) for _ in selections)
+    assert all(isinstance(_, list | abjad.Selection) for _ in selections)
     return selections, segment_duration
 
 

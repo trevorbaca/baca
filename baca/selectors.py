@@ -165,8 +165,8 @@ def leaves(
 
 
 def leaves_in_each_lt(start=0, stop=None):
-    assert isinstance(start, (int, type(None))), repr(start)
-    assert isinstance(stop, (int, type(None))), repr(stop)
+    assert isinstance(start, int | type(None)), repr(start)
+    assert isinstance(stop, int | type(None)), repr(stop)
 
     def selector(argument):
         selection = _select.lts(argument)
@@ -176,8 +176,8 @@ def leaves_in_each_lt(start=0, stop=None):
 
 
 def leaves_in_each_plt(start=0, stop=None):
-    assert isinstance(start, (int, type(None))), repr(start)
-    assert isinstance(stop, (int, type(None))), repr(stop)
+    assert isinstance(start, int | type(None)), repr(start)
+    assert isinstance(stop, int | type(None)), repr(stop)
 
     def selector(argument):
         selection = _select.plts(argument)
@@ -187,8 +187,8 @@ def leaves_in_each_plt(start=0, stop=None):
 
 
 def leaves_in_each_run(start=0, stop=None):
-    assert isinstance(start, (int, type(None))), repr(start)
-    assert isinstance(stop, (int, type(None))), repr(stop)
+    assert isinstance(start, int | type(None)), repr(start)
+    assert isinstance(stop, int | type(None)), repr(stop)
 
     def selector(argument):
         selection = abjad.select.runs(argument)
@@ -198,8 +198,8 @@ def leaves_in_each_run(start=0, stop=None):
 
 
 def leaves_in_each_tuplet(start=0, stop=None):
-    assert isinstance(start, (int, type(None))), repr(start)
-    assert isinstance(stop, (int, type(None))), repr(stop)
+    assert isinstance(start, int | type(None)), repr(start)
+    assert isinstance(stop, int | type(None)), repr(stop)
 
     def selector(argument):
         selection = abjad.select.tuplets(argument)
@@ -210,8 +210,8 @@ def leaves_in_each_tuplet(start=0, stop=None):
 
 def _leaves_in_get_tuplets(pattern, pair, exclude=False):
     start, stop = pair
-    assert isinstance(start, (int, type(None))), repr(start)
-    assert isinstance(stop, (int, type(None))), repr(stop)
+    assert isinstance(start, int | type(None)), repr(start)
+    assert isinstance(stop, int | type(None)), repr(stop)
 
     def selector(argument):
         selection = abjad.select.tuplets(argument)

@@ -839,7 +839,7 @@ class GlobalFermataCommand(_scoping.Command):
 
 def _token_to_indicators(token):
     result = []
-    if not isinstance(token, (tuple, list)):
+    if not isinstance(token, tuple | list):
         token = [token]
     for item in token:
         if item is None:
@@ -1155,7 +1155,7 @@ class AccidentalAdjustmentCommand(_scoping.Command):
             alternative_tag = self.tag.append(tag)
             primary_tag = alternative_tag.invert_edition_tags()
         pleaves = _select.pleaves(argument)
-        assert isinstance(pleaves, (list, abjad.Selection))
+        assert isinstance(pleaves, list | abjad.Selection)
         for pleaf in pleaves:
             if isinstance(pleaf, abjad.Note):
                 note_heads = [pleaf.note_head]
@@ -2313,7 +2313,7 @@ class OctaveDisplacementCommand(_scoping.Command):
                     raise TypeError(pleaf)
 
     def _is_octave_displacement_vector(self, argument):
-        if isinstance(argument, (tuple, list)):
+        if isinstance(argument, tuple | list):
             if all(isinstance(_, int) for _ in argument):
                 return True
         return False
@@ -2399,7 +2399,7 @@ def _set_lt_pitch(
             for chord in lt:
                 chord.written_pitches = pitch
         else:
-            assert isinstance(lt.head, (abjad.Note, abjad.Rest))
+            assert isinstance(lt.head, abjad.Note | abjad.Rest)
             for leaf in lt:
                 chord = abjad.Chord(
                     pitch,
@@ -2417,7 +2417,7 @@ def _set_lt_pitch(
                 for note_head in chord.note_heads:
                     note_head.written_pitch = pitch
         else:
-            assert isinstance(lt.head, (abjad.Chord, abjad.Rest))
+            assert isinstance(lt.head, abjad.Chord | abjad.Rest)
             for leaf in lt:
                 note = abjad.Note(
                     pitch,
@@ -3013,7 +3013,7 @@ class RegisterCommand(_scoping.Command):
         if self.selector:
             argument = self.selector(argument)
         plts = _select.plts(argument)
-        assert isinstance(plts, (list, abjad.Selection))
+        assert isinstance(plts, list | abjad.Selection)
         for plt in plts:
             for pleaf in plt:
                 if isinstance(pleaf, abjad.Note):
@@ -5657,7 +5657,7 @@ def pitch(
             }
 
     """
-    if isinstance(pitch, (list, tuple)) and len(pitch) == 1:
+    if isinstance(pitch, list | tuple) and len(pitch) == 1:
         raise Exception(f"one-note chord {pitch!r}?")
     if allow_out_of_range not in (None, True, False):
         raise Exception(
@@ -6230,9 +6230,9 @@ def staff_position(
     """
     Makes staff position command; allows repeats.
     """
-    assert isinstance(argument, (int, list, abjad.StaffPosition)), repr(argument)
+    assert isinstance(argument, int | list | abjad.StaffPosition), repr(argument)
     if isinstance(argument, list):
-        assert all(isinstance(_, (int, abjad.StaffPosition)) for _ in argument)
+        assert all(isinstance(_, int | abjad.StaffPosition) for _ in argument)
     return StaffPositionCommand(
         numbers=[argument],
         allow_out_of_range=allow_out_of_range,

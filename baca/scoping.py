@@ -149,7 +149,7 @@ def _indicator_to_key(indicator, manifests):
         key = indicator.line_count
     elif isinstance(indicator, _indicators.StaffLines):
         key = indicator.line_count
-    elif isinstance(indicator, (_indicators.Accelerando, _indicators.Ritardando)):
+    elif isinstance(indicator, _indicators.Accelerando | _indicators.Ritardando):
         key = {"hide": indicator.hide}
     else:
         key = str(indicator)
@@ -304,7 +304,7 @@ def treat_persistent_wrapper(manifests, wrapper, status):
         leaf, abjad.StartHairpin
     ):
         status = "explicit"
-    if isinstance(wrapper.indicator, (abjad.Dynamic, abjad.StartHairpin)):
+    if isinstance(wrapper.indicator, abjad.Dynamic | abjad.StartHairpin):
         color = _status_to_color[status]
         words = [
             f"{status.upper()}_DYNAMIC_COLOR",
@@ -345,7 +345,7 @@ def treat_persistent_wrapper(manifests, wrapper, status):
         existing_deactivate=wrapper.deactivate,
         existing_tag=existing_tag,
     )
-    if isinstance(indicator, (abjad.Instrument, abjad.MarginMarkup)) and not getattr(
+    if isinstance(indicator, abjad.Instrument | abjad.MarginMarkup) and not getattr(
         indicator, "hide", False
     ):
         strings = indicator._get_lilypond_format(context=context)
@@ -384,7 +384,7 @@ class Scope:
     def __post_init__(self):
         if isinstance(self.measures, int):
             self.measures = (self.measures, self.measures)
-        assert isinstance(self.measures, (list, tuple)), repr(self.measures)
+        assert isinstance(self.measures, list | tuple), repr(self.measures)
         assert len(self.measures) == 2, repr(self.measures)
         start, stop = self.measures
         assert isinstance(start, int), repr(start)
@@ -424,7 +424,7 @@ class TimelineScope:
 
     def __post_init__(self):
         if self.scopes is not None:
-            assert isinstance(self.scopes, (tuple, list))
+            assert isinstance(self.scopes, tuple | list)
             scopes_ = []
             for scope in self.scopes:
                 if not isinstance(scope, Scope):
@@ -780,7 +780,7 @@ class Suite:
 
     def __post_init__(self):
         self.commands = self.commands or []
-        assert all(isinstance(_, (Command, Suite)) for _ in self.commands)
+        assert all(isinstance(_, Command | Suite) for _ in self.commands)
         keywords = self.keywords or {}
         commands_ = []
         for item in self.commands:
@@ -1050,7 +1050,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
 
     """
     result = []
-    assert all(isinstance(_, (Command, Suite)) for _ in commands), repr(commands)
+    assert all(isinstance(_, Command | Suite) for _ in commands), repr(commands)
     for item in commands:
         item_: Command | Suite
         if isinstance(item, Command):
@@ -1240,12 +1240,12 @@ def suite(*commands: CommandTyping, **keywords) -> Suite:
     """
     commands_: list[Command | Suite] = []
     for item in commands:
-        if isinstance(item, (list, tuple)):
+        if isinstance(item, list | tuple):
             commands_.extend(item)
         else:
             commands_.append(item)
     for command in commands_:
-        if isinstance(command, (Command, Suite)):
+        if isinstance(command, Command | Suite):
             continue
         message = "\n  Must contain only commands and suites."
         message += f"\n  Not {type(command).__name__}:"
@@ -1276,7 +1276,7 @@ def tag(
         raise Exception(message)
     assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
     assert _validate_tags(tags), repr(tags)
-    if not isinstance(command, (Command, Suite)):
+    if not isinstance(command, Command | Suite):
         raise Exception("can only tag command or suite.")
     if isinstance(command, Suite):
         for command_ in command.commands:

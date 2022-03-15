@@ -520,7 +520,7 @@ def partition_to_avoid_octave_adjacencies(sequence, bigger=abjad.Left):
     result = [[]]
     part = result[-1]
     for number in sequence:
-        assert isinstance(number, (int, float))
+        assert isinstance(number, int | float)
         pc = number % 12
         part_pcs = [_ % 12 for _ in part]
         if pc not in part_pcs:

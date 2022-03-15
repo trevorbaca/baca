@@ -318,7 +318,7 @@ class Cursor:
         assert isinstance(self.source, collections.abc.Iterable), repr(self.source)
         if self.cyclic:
             self.source = abjad.CyclicTuple(self.source)
-        assert isinstance(self.position, (int, type(None))), repr(self.position)
+        assert isinstance(self.position, int | type(None)), repr(self.position)
         self.singletons = bool(self.singletons)
         self.suppress_exception = bool(self.suppress_exception)
 

@@ -76,12 +76,12 @@ class PitchArray:
                         pitch = abjad.NamedPitch(cell)
                         pitches = [pitch]
                         cell = PitchArrayCell(pitches=pitches)
-                    elif isinstance(cell[0], (int, float)):
+                    elif isinstance(cell[0], int | float):
                         pitch_number, width = cell
                         pitch = abjad.NamedPitch(pitch_number)
                         cell = PitchArrayCell(pitches=[pitch], width=width)
                     elif isinstance(cell[0], list):
-                        assert all(isinstance(_, (int, float)) for _ in cell[0])
+                        assert all(isinstance(_, int | float) for _ in cell[0])
                         pitch_numbers, width = cell
                         pitches = [abjad.NamedPitch(_) for _ in pitch_numbers]
                         cell = PitchArrayCell(pitches=pitches, width=width)
@@ -1002,7 +1002,7 @@ class PitchArrayCell:
                     pitches = [pitch]
                 else:
                     raise Exception
-            # assert isinstance(pitches, (tuple, list)), repr(pitches)
+            # assert isinstance(pitches, tuple | list), repr(pitches)
             assert isinstance(pitches, list), repr(pitches)
             pitches = [abjad.NamedPitch(_) for _ in pitches]
             self._pitches = pitches
@@ -1124,7 +1124,7 @@ class PitchArrayCell:
 
     def _parse_pitch_token(self, pitch_token):
         pitches = []
-        if isinstance(pitch_token, (int, float, abjad.NamedPitch)):
+        if isinstance(pitch_token, int | float | abjad.NamedPitch):
             pitch = abjad.NamedPitch(pitch_token)
             pitches.append(pitch)
         elif isinstance(pitch_token, tuple):
@@ -1457,7 +1457,7 @@ class PitchArrayCell:
             return
         if isinstance(pitches, str):
             pitches = pitches.split()
-        assert isinstance(pitches, (tuple, list)), repr(pitches)
+        assert isinstance(pitches, tuple | list), repr(pitches)
         pitches = [abjad.NamedPitch(_) for _ in pitches]
         self._pitches = pitches
 

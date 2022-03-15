@@ -74,7 +74,7 @@ class OverrideCommand(_scoping.Command):
                     raise Exception(f"only {names} (not {violator}) allowed.")
         lilypond_type = self.context
         if lilypond_type is not None:
-            assert isinstance(lilypond_type, (str)), repr(lilypond_type)
+            assert isinstance(lilypond_type, str), repr(lilypond_type)
         if lilypond_type in dir(abjad):
             context = getattr(abjad, lilypond_type)
             assert issubclass(context, abjad.Context), repr(context)
@@ -463,7 +463,7 @@ def beam_positions(
             >>
 
     """
-    if not isinstance(n, (int, float)):
+    if not isinstance(n, int | float):
         message = f"beam position must be number (not {n})."
         raise Exception(message)
     return OverrideCommand(
@@ -532,7 +532,7 @@ def clef_shift(
     extra_offset_x: int | float
     if isinstance(clef, str):
         clef = abjad.Clef(clef)
-    if isinstance(clef, (int, float)):
+    if isinstance(clef, int | float):
         extra_offset_x = clef
     else:
         assert isinstance(clef, abjad.Clef)

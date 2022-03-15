@@ -115,7 +115,7 @@ class PiecewiseCommand(_scoping.Command):
         if self.autodetect_right_padding is not None:
             self.autodetect_right_padding = bool(self.autodetect_right_padding)
         if self.bookend is not None:
-            assert isinstance(self.bookend, (int, bool)), repr(self.bookend)
+            assert isinstance(self.bookend, int | bool), repr(self.bookend)
         bundles_ = None
         if self.bundles is not None:
             bundles_ = abjad.CyclicTuple(self.bundles)
@@ -2818,7 +2818,7 @@ def parse_hairpin_descriptor(
         elif isinstance(left, abjad.Dynamic) and isinstance(right, abjad.Dynamic):
             bundle = Bundle(indicator=left)
             bundles.append(bundle)
-        elif isinstance(left, (abjad.Dynamic, abjad.StopHairpin)) and isinstance(
+        elif isinstance(left, abjad.Dynamic | abjad.StopHairpin) and isinstance(
             right, abjad.StartHairpin
         ):
             bundle = Bundle(indicator=left, spanner_start=right)

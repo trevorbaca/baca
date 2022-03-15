@@ -1688,7 +1688,7 @@ def mark(
     """
     Attaches mark.
     """
-    assert isinstance(argument, (abjad.Markup, str)), repr(argument)
+    assert isinstance(argument, abjad.Markup | str), repr(argument)
     rehearsal_mark = abjad.RehearsalMark(markup=argument)
     return _commandclasses.IndicatorCommand(
         indicators=[rehearsal_mark],
@@ -1806,7 +1806,7 @@ def rehearsal_mark(
     Attaches rehearsal mark.
     """
     assert isinstance(argument, str), repr(argument)
-    assert isinstance(font_size, (int, float)), repr(font_size)
+    assert isinstance(font_size, int | float), repr(font_size)
     string = rf'\baca-rehearsal-mark-markup "{argument}" #{font_size}'
     markup = abjad.Markup(string, direction=abjad.Center)
     return _commandclasses.IndicatorCommand(
