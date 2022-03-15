@@ -1649,9 +1649,7 @@ class Imbrication:
 
     ### SPECIAL METHODS ###
 
-    def __call__(
-        self, container: abjad.Container = None
-    ) -> typing.Dict[str, abjad.Selection]:
+    def __call__(self, container: abjad.Container = None) -> dict[str, abjad.Selection]:
         """
         Calls imbrication on ``container``.
         """
@@ -2956,7 +2954,7 @@ class FigureAccumulator:
 @dataclasses.dataclass(slots=True)
 class Contribution:
 
-    voice_to_selection: typing.Dict[str, abjad.Selection]
+    voice_to_selection: dict[str, abjad.Selection]
     anchor: Anchor | None = None
     figure_name: str | None = None
     hide_time_signature: bool | None = None
