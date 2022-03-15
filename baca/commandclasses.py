@@ -1155,7 +1155,7 @@ class AccidentalAdjustmentCommand(_scoping.Command):
             alternative_tag = self.tag.append(tag)
             primary_tag = alternative_tag.invert_edition_tags()
         pleaves = _select.pleaves(argument)
-        assert isinstance(pleaves, list | abjad.Selection)
+        assert isinstance(pleaves, list)
         for pleaf in pleaves:
             if isinstance(pleaf, abjad.Note):
                 note_heads = [pleaf.note_head]
@@ -3013,7 +3013,7 @@ class RegisterCommand(_scoping.Command):
         if self.selector:
             argument = self.selector(argument)
         plts = _select.plts(argument)
-        assert isinstance(plts, list | abjad.Selection)
+        assert isinstance(plts, list)
         for plt in plts:
             for pleaf in plt:
                 if isinstance(pleaf, abjad.Note):

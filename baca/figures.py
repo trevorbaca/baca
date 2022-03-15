@@ -1729,7 +1729,7 @@ class Imbrication:
         selection = [container]
         if not self.hocket:
             pleaves = _select.pleaves(container)
-            assert isinstance(pleaves, list | abjad.Selection)
+            assert isinstance(pleaves, list)
             for pleaf in pleaves:
                 abjad.attach(_const.ALLOW_OCTAVE, pleaf)
         return {self.voice_name: selection}
@@ -2687,8 +2687,8 @@ class FigureAccumulator:
                 command._voice_name = voice_name_
         command = None
         maker = None
-        selection: list | abjad.Selection
-        selections: list | abjad.Selection
+        selection: list
+        selections: list
         if anchor is not None:
             voice_name_ = self._abbreviation(anchor.remote_voice_name)
             anchor.remote_voice_name = voice_name_
@@ -2735,7 +2735,7 @@ class FigureAccumulator:
         voice_to_selection = {voice_name: selection}
         voice_to_selection.update(imbricated_selections)
         for value in voice_to_selection.values():
-            assert isinstance(value, list | abjad.Selection), repr(value)
+            assert isinstance(value, list), repr(value)
         contribution = Contribution(
             voice_to_selection,
             anchor=anchor,
@@ -2975,7 +2975,7 @@ class Contribution:
                 self.voice_to_selection
             )
             for value in self.voice_to_selection.values():
-                assert isinstance(value, list | abjad.Selection), repr(value)
+                assert isinstance(value, list), repr(value)
 
     def __getitem__(self, voice_name) -> list:
         """
@@ -3173,7 +3173,7 @@ class Nest:
         if self.lmr is not None:
             assert isinstance(self.lmr, LMR), repr(self.lmr)
 
-    def __call__(self, selection: abjad.Selection) -> list[abjad.Tuplet]:
+    def __call__(self, selection) -> list[abjad.Tuplet]:
         treatments = self._get_treatments()
         assert treatments is not None
         tuplets = []
@@ -3181,7 +3181,7 @@ class Nest:
             if isinstance(item, abjad.Tuplet):
                 tuplets.append(item)
             else:
-                assert isinstance(item, list | abjad.Selection), repr(item)
+                assert isinstance(item, list), repr(item)
                 assert len(item) == 1, repr(item)
                 assert isinstance(item[0], abjad.Tuplet), repr(item)
                 tuplet = item[0]
@@ -3193,12 +3193,12 @@ class Nest:
             tuplet_selections = [list(_) for _ in tuplet_selections]
         tuplets = []
         for i, tuplet_selection in enumerate(tuplet_selections):
-            assert isinstance(tuplet_selection, list | abjad.Selection)
+            assert isinstance(tuplet_selection, list)
             treatment = treatments[i]
             if treatment is None:
                 tuplets.extend(tuplet_selection)
             else:
-                assert isinstance(tuplet_selection, list | abjad.Selection)
+                assert isinstance(tuplet_selection, list)
                 for tuplet in tuplet_selection:
                     assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
                 if isinstance(treatment, str):
