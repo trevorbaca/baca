@@ -1027,7 +1027,7 @@ def _call_rhythm_commands(
                 phantom=True,
                 suppress_note=suppress_note,
             )
-            selection = abjad.Selection(container)
+            selection = [container]
             selections.append(selection)
         components = abjad.sequence.flatten(selections, depth=-1)
         voice.extend(components)
@@ -1749,7 +1749,7 @@ def _intercalate_silences(
             segment_duration,
             voice_name,
         )
-        assert isinstance(selection, abjad.Selection)
+        assert isinstance(selection, list | abjad.Selection)
         selections.append(selection)
     assert all(isinstance(_, list | abjad.Selection) for _ in selections)
     return selections, segment_duration
@@ -2193,8 +2193,7 @@ def _make_measure_silences(
                 silence = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
         silences.append(silence)
     assert all(isinstance(_, abjad.Component) for _ in silences)
-    selection = abjad.Selection(silences)
-    return selection
+    return silences
 
 
 def _make_multimeasure_rest_container(
@@ -2546,7 +2545,7 @@ def _scope_to_leaf_selection(
     )
     for selection in selections:
         leaves.extend(selection)
-    selection = abjad.Selection(leaves)
+    selection = leaves
     if not selection:
         message = f"EMPTY SELECTION:\n\n{command}"
         if allow_empty_selections:
@@ -2587,7 +2586,7 @@ def _scope_to_leaf_selections(score, cache, measure_count, scope):
         for measure_number in range(start, stop):
             leaves_ = leaves_by_measure_number.get(measure_number, [])
             leaves.extend(leaves_)
-        leaf_selections.append(abjad.Selection(leaves))
+        leaf_selections.append(leaves)
     return leaf_selections, cache
 
 
@@ -2674,7 +2673,7 @@ def _sort_by_timeline(leaves):
 
     leaves = list(leaves)
     leaves.sort(key=functools.cmp_to_key(compare))
-    return abjad.Selection(leaves)
+    return leaves
 
 
 def _style_fermata_measures(
