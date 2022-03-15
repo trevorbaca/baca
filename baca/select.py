@@ -3,203 +3,6 @@ import typing
 import abjad
 
 
-class Selection(abjad.Selection):
-    def chead(self, n: int, *, exclude: abjad.Strings = None) -> abjad.Chord:
-        return chead(self, n, exclude=exclude)
-
-    def cheads(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
-        items = cheads(self, exclude=exclude)
-        return type(self)(items)
-
-    def clparts(
-        self, counts: typing.Sequence[int], *, exclude: abjad.Strings = None
-    ) -> abjad.Selection:
-        items = clparts(self, counts, exclude=exclude)
-        return type(self)(items)
-
-    def cmgroups(
-        self, counts: list[int] = [1], *, exclude: abjad.Strings = None
-    ) -> "Selection":
-        items = cmgroups(self, counts, exclude=exclude)
-        return type(self)(items)
-
-    def grace(self, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
-        return grace(self, n, exclude=exclude)
-
-    def graces(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
-        items = graces(self, exclude=exclude)
-        return type(self)(items)
-
-    def hleaf(self, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
-        return hleaf(self, n, exclude=exclude)
-
-    def hleaves(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
-        items = hleaves(self, exclude=exclude)
-        return type(self)(items)
-
-    def lleaf(self, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
-        return lleaf(self, n, exclude=exclude)
-
-    def lleak(self) -> abjad.Selection:
-        items = lleak(self)
-        return type(self)(items)
-
-    def lleaves(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
-        items = lleaves(self, exclude=exclude)
-        return type(self)(items)
-
-    def lparts(
-        self, counts: typing.Sequence[int], *, exclude: abjad.Strings = None
-    ) -> abjad.Selection:
-        items = lparts(self, counts, exclude=exclude)
-        return type(self)(items)
-
-    def lt(self, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
-        return lt(self, n, exclude=exclude)
-
-    def ltleaf(self, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
-        return ltleaf(self, n, exclude=exclude)
-
-    def ltleaves(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
-        items = ltleaves(self, exclude=exclude)
-        return type(self)(items)
-
-    def lts(
-        self, *, exclude: abjad.Strings = None, nontrivial: bool = None
-    ) -> abjad.Selection:
-        items = lts(self, exclude=exclude, nontrivial=nontrivial)
-        return type(self)(items)
-
-    def mgroups(
-        self,
-        counts: typing.Sequence[int] = [1],
-        *,
-        exclude: abjad.Strings = None,
-    ) -> "Selection":
-        items = mgroups(self, counts, exclude=exclude)
-        return type(self)(items)
-
-    def mleaves(self, count: int, *, exclude: abjad.Strings = None) -> "Selection":
-        items = mleaves(self, count, exclude=exclude)
-        return type(self)(items)
-
-    def mmrest(
-        self, n: int, *, exclude: abjad.Strings = None
-    ) -> abjad.MultimeasureRest:
-        return mmrest(self, n, exclude=exclude)
-
-    def mmrests(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
-        items = mmrests(self, exclude=exclude)
-        return type(self)(items)
-
-    def omgroups(
-        self,
-        counts: typing.Sequence[int] = [1],
-        *,
-        exclude: abjad.Strings = None,
-    ) -> "Selection":
-        items = omgroups(self, counts, exclude=exclude)
-        return type(self)(items)
-
-    def ompltgroups(
-        self,
-        counts: typing.Sequence[int] = [1],
-        *,
-        exclude: abjad.Strings = None,
-    ) -> "Selection":
-        items = ompltgroups(self, counts, exclude=exclude)
-        return type(self)(items)
-
-    def phead(
-        self, n: int, *, exclude: abjad.Strings = None
-    ) -> abjad.Note | abjad.Chord:
-        return phead(self, n, exclude=exclude)
-
-    def pheads(
-        self, *, exclude: abjad.Strings = None, grace: bool = None
-    ) -> abjad.Selection:
-        items = pheads(self, exclude=exclude, grace=grace)
-        return type(self)(items)
-
-    def pleaf(
-        self, n: int, *, exclude: abjad.Strings = None, grace: bool = None
-    ) -> abjad.Note | abjad.Chord:
-        return pleaf(self, n, exclude=exclude, grace=grace)
-
-    def pleaves(
-        self, *, exclude: abjad.Strings = None, grace: bool = None
-    ) -> abjad.Selection:
-        items = pleaves(self, exclude=exclude, grace=grace)
-        return type(self)(items)
-
-    def plt(
-        self, n: int, *, exclude: abjad.Strings = None, grace: bool = None
-    ) -> abjad.Selection:
-        return plt(self, n, exclude=exclude, grace=grace)
-
-    def plts(
-        self, *, exclude: abjad.Strings = None, grace: bool = None
-    ) -> abjad.Selection:
-        items = plts(self, exclude=exclude, grace=grace)
-        return type(self)(items)
-
-    def ptail(
-        self, n: int, *, exclude: abjad.Strings = None
-    ) -> abjad.Note | abjad.Chord:
-        return ptail(self, n, exclude=exclude)
-
-    def ptails(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
-        items = ptails(self, exclude=exclude)
-        return type(self)(items)
-
-    def ptlt(self, n: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
-        return ptlt(self, n, exclude=exclude)
-
-    def ptlts(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
-        items = ptlts(self, exclude=exclude)
-        return type(self)(items)
-
-    def rleaf(self, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
-        return rleaf(self, n, exclude=exclude)
-
-    def rleak(self, *, grace: bool = None) -> abjad.Selection:
-        items = rleak(self, grace=grace)
-        return type(self)(items)
-
-    def rleaves(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
-        items = rleaves(self, exclude=exclude)
-        return type(self)(items)
-
-    def rmleaves(self, count: int, *, exclude: abjad.Strings = None) -> abjad.Selection:
-        items = rmleaves(self, count, exclude=exclude)
-        return type(self)(items)
-
-    def skip(self, n: int, *, exclude: abjad.Strings = None) -> abjad.Skip:
-        return skip(self, n, exclude=exclude)
-
-    def skips(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
-        items = skips(self, exclude=exclude)
-        return type(self)(items)
-
-    def tleaf(
-        self, n: int = 0, *, exclude: abjad.Strings = None, grace: bool = None
-    ) -> abjad.Leaf:
-        return tleaf(self, n, exclude=exclude, grace=grace)
-
-    def tleaves(
-        self, *, exclude: abjad.Strings = None, grace: bool = None
-    ) -> abjad.Selection:
-        items = tleaves(self, exclude=exclude, grace=grace)
-        return type(self)(items)
-
-    def wleaf(self, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
-        return wleaf(self, n, exclude=exclude)
-
-    def wleaves(self, *, exclude: abjad.Strings = None) -> abjad.Selection:
-        items = wleaves(self, exclude=exclude)
-        return type(self)(items)
-
-
 def chead(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Chord:
     r"""
     Selects chord head ``n`` in ``argument``.
@@ -677,7 +480,6 @@ def enchain(argument, counts: typing.Sequence[int]) -> list[list]:
     selections = abjad.select.partition_by_counts(
         argument, counts=counts, cyclic=True, enchain=True, overhang=True
     )
-    assert all(isinstance(_, abjad.Selection) for _ in selections)
     lists_ = [list(_) for _ in selections]
     return lists_
 
@@ -3355,9 +3157,9 @@ def ptails(
             }
 
     """
-    result = plts(argument, exclude=exclude)
-    list_ = [Selection(_)[-1] for _ in result]
-    return list_
+    plts_ = plts(argument, exclude=exclude)
+    leaves_ = [_[-1] for _ in plts_]
+    return leaves_
 
 
 def ptlt(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.LogicalTie:
@@ -3566,7 +3368,7 @@ def qrun(argument, n: int, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]
 
         >>> result = baca.select.qrun(staff, -1)
         >>> result
-        Selection(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+        [Chord("<fs' gs'>4"), Chord("<fs' gs'>16")]
 
         >>> abjad.label.by_selector(result, lone=True)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -3650,12 +3452,12 @@ def qruns(argument, *, exclude: abjad.Strings = None) -> list[list[abjad.Leaf]]:
         >>> for item in result:
         ...     item
         ...
-        Selection(items=[Note("c'16"), Note("c'16"), Note("c'16")])
-        Selection(items=[Chord("<d' e'>4"), Chord("<d' e'>16")])
-        Selection(items=[Note("d'16"), Note("d'16"), Note("d'16")])
-        Selection(items=[Chord("<e' fs'>4"), Chord("<e' fs'>16")])
-        Selection(items=[Note("e'16"), Note("e'16"), Note("e'16")])
-        Selection(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+        [Note("c'16"), Note("c'16"), Note("c'16")]
+        [Chord("<d' e'>4"), Chord("<d' e'>16")]
+        [Note("d'16"), Note("d'16"), Note("d'16")]
+        [Chord("<e' fs'>4"), Chord("<e' fs'>16")]
+        [Note("e'16"), Note("e'16"), Note("e'16")]
+        [Chord("<fs' gs'>4"), Chord("<fs' gs'>16")]
 
         >>> abjad.label.by_selector(result)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -3723,11 +3525,11 @@ def qruns(argument, *, exclude: abjad.Strings = None) -> list[list[abjad.Leaf]]:
             }
 
     """
-    selection = pleaves(argument, exclude=exclude)
-    result = abjad.select.group_by_pitch(selection)
-    list_ = [abjad.select.group_by_contiguity(_) for _ in result]
-    result_ = abjad.select.flatten(list_, depth=1)
-    return result_
+    pleaves_ = pleaves(argument, exclude=exclude)
+    lists_ = [list(_) for _ in abjad.select.group_by_pitch(pleaves_)]
+    lists_ = [[list(_) for _ in abjad.select.group_by_contiguity(_)] for _ in lists_]
+    lists_ = abjad.select.flatten(lists_, depth=1)
+    return lists_
 
 
 def rleaf(argument, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
