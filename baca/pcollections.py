@@ -815,13 +815,13 @@ def illustrate_harmonic_series(harmonic_series) -> abjad.LilyPondFile:
         staff.append(note)
         deviation = partial.deviation()
         if 0 < deviation:
-            markup = abjad.Markup(rf"\markup +{deviation}", direction=abjad.Up)
-            abjad.attach(markup, note)
+            markup = abjad.Markup(rf"\markup +{deviation}")
+            abjad.attach(markup, note, direction=abjad.Up)
         elif deviation < 0:
-            markup = abjad.Markup(rf"\markup {deviation}", direction=abjad.Up)
-            abjad.attach(markup, note)
-        markup = abjad.Markup(rf"\markup {n}", direction=abjad.Down)
-        abjad.attach(markup, note)
+            markup = abjad.Markup(rf"\markup {deviation}")
+            abjad.attach(markup, note, direction=abjad.Up)
+        markup = abjad.Markup(rf"\markup {n}")
+        abjad.attach(markup, note, direction=abjad.Down)
     notes = abjad.select.notes(staff)
     if notes[0].written_pitch < abjad.NamedPitch("C4"):
         abjad.attach(abjad.Clef("bass"), staff[0])

@@ -19,6 +19,7 @@ class SpannerIndicatorCommand(_scoping.Command):
     """
 
     detach_first: bool = False
+    direction: int | None = None
     left_broken: bool = False
     right_broken: bool = False
     start_indicator: typing.Any = None
@@ -90,7 +91,12 @@ class SpannerIndicatorCommand(_scoping.Command):
         reapplied = _scoping.remove_reapplied_wrappers(leaf, indicator)
         tag_ = self.tag.append(tag)
         wrapper = abjad.attach(
-            indicator, leaf, deactivate=deactivate, tag=tag_, wrapper=True
+            indicator,
+            leaf,
+            deactivate=deactivate,
+            direction=self.direction,
+            tag=tag_,
+            wrapper=True,
         )
         if _scoping.compare_persistent_indicators(indicator, reapplied):
             status = "redundant"
@@ -188,10 +194,11 @@ def beam(
             }
 
     """
-    start_beam = start_beam or abjad.StartBeam(direction=direction)
+    start_beam = start_beam or abjad.StartBeam()
     stop_beam = stop_beam or abjad.StopBeam()
     return SpannerIndicatorCommand(
         detach_first=True,
+        direction=direction,
         selector=selector,
         start_indicator=start_beam,
         stop_indicator=stop_beam,

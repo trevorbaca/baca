@@ -43,10 +43,10 @@ Constellation.
     >>> leaves = abjad.select.leaves(score["Treble_Staff"])
     >>> for i, leaf in enumerate(leaves):
     ...     if 0 < i and i % 12 == 0:
-    ...         strut = abjad.Markup(r"\markup A", direction=abjad.Up)
+    ...         strut = abjad.Markup(r"\markup A")
     ...         abjad.tweak(strut).staff_padding = 22
     ...         abjad.tweak(strut).transparent = True
-    ...         abjad.attach(strut, leaf)
+    ...         abjad.attach(strut, leaf, direction=abjad.Up)
 
     >>> preamble = r'''#(set-global-staff-size 12)
     ...
@@ -2078,8 +2078,8 @@ class Constellation:
         chord_index = self._sets.index(set_)
         chord_number = chord_index + 1
         string = rf"\markup {{ {constellation_number}-{chord_number} }}"
-        markup = abjad.Markup(string, direction=abjad.Up)
-        abjad.attach(markup, chord)
+        markup = abjad.Markup(string)
+        abjad.attach(markup, chord, direction=abjad.Up)
 
 
 class Circuit:

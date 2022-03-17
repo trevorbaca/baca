@@ -1425,7 +1425,7 @@ def _color_not_yet_registered(score):
 
 def _color_octaves(score):
     vertical_moments = abjad.iterate_vertical_moments(score)
-    markup = abjad.Markup(r"\markup OCTAVE", direction=abjad.Up)
+    markup = abjad.Markup(r"\markup OCTAVE")
     abjad.tweak(markup).color = "#red"
     tag = _scoping.site(_frame())
     tag = tag.append(_tags.OCTAVE_COLORING)
@@ -1453,7 +1453,7 @@ def _color_octaves(score):
             if not color:
                 continue
             for pleaf in pleaves:
-                abjad.attach(markup, pleaf, tag=tag)
+                abjad.attach(markup, pleaf, direction=abjad.Up, tag=tag)
                 string = r"\baca-octave-coloring"
                 literal = abjad.LilyPondLiteral(string, format_slot="before")
                 abjad.attach(literal, pleaf, tag=tag)
@@ -1858,7 +1858,7 @@ def _label_duration_multipliers(score):
             n, d = leaf.multiplier.pair
             string = r"\baca-duration-multiplier-markup"
             string += f' #"{n}" #"{d}"'
-            markup = abjad.Markup(string, direction=abjad.Up)
+            markup = abjad.Markup(string)
             tag_ = tag
             if abjad.get.has_indicator(leaf, _const.HIDDEN):
                 tag_ = tag_.append(_tags.HIDDEN)
@@ -1870,7 +1870,7 @@ def _label_duration_multipliers(score):
                 tag_ = tag_.append(_tags.PHANTOM)
             if abjad.get.has_indicator(leaf, _const.REST_VOICE):
                 tag_ = tag_.append(_tags.REST_VOICE)
-            abjad.attach(markup, leaf, deactivate=True, tag=tag_)
+            abjad.attach(markup, leaf, deactivate=True, direction=abjad.Up, tag=tag_)
             already_labeled.add(leaf)
 
 

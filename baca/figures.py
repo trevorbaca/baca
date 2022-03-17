@@ -2889,7 +2889,7 @@ class FigureAccumulator:
             string += rf" \hspace #1 {figure_label_string} ] }}"
         else:
             string += r" ] }"
-        figure_label_markup = abjad.Markup(string, direction=figure_label_direction)
+        figure_label_markup = abjad.Markup(string)
         abjad.tweak(figure_label_markup).color = "#blue"
         pleaves = _select.pleaves(container)
         if pleaves:
@@ -2900,6 +2900,7 @@ class FigureAccumulator:
             figure_label_markup,
             leaf,
             deactivate=True,
+            direction=figure_label_direction,
             tag=_tags.FIGURE_LABEL,
         )
 

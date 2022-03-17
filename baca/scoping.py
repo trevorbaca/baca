@@ -88,9 +88,11 @@ def _attach_latent_indicator_alert(
     string = f"{left}{key}{right}"
     markup_function = _status_to_markup_function[status]
     string = rf'\{markup_function} "{string}"'
-    markup = abjad.Markup(string, direction=abjad.Up)
+    markup = abjad.Markup(string)
     tag = tag.append(site(_frame()))
-    abjad.attach(markup, leaf, deactivate=existing_deactivate, tag=tag)
+    abjad.attach(
+        markup, leaf, deactivate=existing_deactivate, direction=abjad.Up, tag=tag
+    )
 
 
 def _get_key(dictionary, value):

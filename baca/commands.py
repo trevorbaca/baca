@@ -1866,9 +1866,9 @@ def markup(
         message = f"direction must be up or down (not {direction!r})."
         raise Exception(message)
     if isinstance(argument, str):
-        markup = abjad.Markup(argument, direction=direction)
+        markup = abjad.Markup(argument)
     elif isinstance(argument, abjad.Markup):
-        markup = dataclasses.replace(argument, direction=direction)
+        markup = dataclasses.replace(argument)
     else:
         message = "MarkupLibary.__call__():\n"
         message += "  Value of 'argument' must be str or markup.\n"
@@ -1888,6 +1888,7 @@ def markup(
 
     selector = selector or select_phead_0
     return _commandclasses.IndicatorCommand(
+        direction=direction,
         indicators=[markup],
         map=map,
         match=match,

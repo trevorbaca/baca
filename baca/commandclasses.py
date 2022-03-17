@@ -814,10 +814,11 @@ class GlobalFermataCommand(_scoping.Command):
             assert isinstance(leaf, abjad.MultimeasureRest)
             string = rf"\baca-{command}-markup"
             markup = abjad.Markup(string)
-            markup = dataclasses.replace(markup, direction=abjad.Up)
+            markup = dataclasses.replace(markup)
             abjad.attach(
                 markup,
                 leaf,
+                direction=abjad.Up,
                 tag=self.tag.append(_scoping.site(_frame(), self, n=1)),
             )
             literal = abjad.LilyPondLiteral(r"\baca-fermata-measure")
@@ -856,6 +857,7 @@ class IndicatorCommand(_scoping.Command):
 
     indicators: typing.Sequence = ()
     context: str | None = None
+    direction: int | None = None
     do_not_test: bool = False
     predicate: typing.Callable | None = None
     redundant: bool = False
@@ -903,6 +905,7 @@ class IndicatorCommand(_scoping.Command):
                     leaf,
                     context=self.context,
                     deactivate=self.deactivate,
+                    direction=self.direction,
                     do_not_test=self.do_not_test,
                     tag=self.tag.append(_scoping.site(_frame(), self)),
                     wrapper=True,
@@ -1789,6 +1792,7 @@ class ClusterCommand(_scoping.Command):
 
     """
 
+    direction: int | None = abjad.Up
     hide_flat_markup: bool = False
     selector: typing.Callable = _selectors.plts()
     start_pitch: typing.Any = None
@@ -1830,11 +1834,12 @@ class ClusterCommand(_scoping.Command):
         key_cluster = abjad.KeyCluster(include_flat_markup=not self.hide_flat_markup)
         for pleaf in plt:
             chord = abjad.Chord(pitches, pleaf.written_duration)
-            indicators = abjad.detach(object, pleaf)
-            for indicator in indicators:
-                abjad.attach(indicator, chord)
+            wrappers = abjad.get.wrappers(pleaf)
+            abjad.detach(object, pleaf)
+            for wrapper in wrappers:
+                abjad.attach(wrapper, chord, direction=wrapper.direction)
             abjad.mutate.replace(pleaf, chord)
-            abjad.attach(key_cluster, chord)
+            abjad.attach(key_cluster, chord, direction=self.direction)
             abjad.attach(_const.ALLOW_REPEAT_PITCH, chord)
             abjad.detach(_const.NOT_YET_PITCHED, chord)
 
@@ -1919,6 +1924,7 @@ class ColorFingeringCommand(_scoping.Command):
 
     """
 
+    direction: int | None = abjad.Up
     numbers: typing.Any = None
     tweaks: abjad.IndexedTweakManagers = ()
 
@@ -1945,7 +1951,7 @@ class ColorFingeringCommand(_scoping.Command):
             if number != 0:
                 fingering = abjad.ColorFingering(number)
                 _scoping.apply_tweaks(fingering, self.tweaks, i=i, total=total)
-                abjad.attach(fingering, phead)
+                abjad.attach(fingering, phead, direction=self.direction)
 
 
 @dataclasses.dataclass

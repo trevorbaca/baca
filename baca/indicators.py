@@ -2,6 +2,7 @@
 Indciators.
 """
 import dataclasses
+import typing
 
 import abjad
 
@@ -18,7 +19,7 @@ class Accelerando:
         >>> staff = abjad.Staff("c'4 d' e' f'", name="Staff")
         >>> score = abjad.Score([staff], name="Score")
         >>> accelerando = baca.Accelerando()
-        >>> abjad.attach(accelerando, staff[0])
+        >>> abjad.attach(accelerando, staff[0], direction=abjad.Up)
         >>> abjad.show(score) # doctest: +SKIP
 
         ..  docs::
@@ -43,7 +44,7 @@ class Accelerando:
         >>> accelerando = baca.Accelerando()
         >>> abjad.tweak(accelerando).color = "#blue"
         >>> abjad.tweak(accelerando).extra_offset = "#'(0 . 2)"
-        >>> abjad.attach(accelerando, note)
+        >>> abjad.attach(accelerando, note, direction=abjad.Up)
         >>> abjad.show(note) # doctest: +SKIP
 
         ..  docs::
@@ -87,10 +88,11 @@ class Accelerando:
     markup: abjad.Markup | None = None
     tweaks: abjad.TweakInterface | None = None
 
-    _is_dataclass = True
-    context = "Score"
-    parameter = "METRONOME_MARK"
-    persistent = True
+    _is_dataclass: typing.ClassVar[bool] = True
+    context: typing.ClassVar[str] = "Score"
+    directed: typing.ClassVar[bool] = True
+    parameter: typing.ClassVar[str] = "METRONOME_MARK"
+    persistent: typing.ClassVar[bool] = True
 
     def __post_init__(self):
         self.hide = bool(self.hide)
@@ -132,15 +134,14 @@ class Accelerando:
     def _get_lilypond_format(self):
         return str(self)
 
-    def _get_lilypond_format_bundle(self, component=None):
+    def _get_lilypond_format_bundle(self, *, component=None, wrapper=None):
         bundle = abjad.LilyPondFormatBundle()
         if not self.hide:
             if self.tweaks:
                 tweaks = self.tweaks._list_format_contributions()
                 bundle.after.markup.extend(tweaks)
             markup = self._get_markup()
-            markup = dataclasses.replace(markup, direction=abjad.Up)
-            markup_format_pieces = markup._get_format_pieces()
+            markup_format_pieces = markup._get_format_pieces(wrapper=wrapper)
             bundle.after.markup.extend(markup_format_pieces)
         return bundle
 
@@ -304,7 +305,7 @@ class Ritardando:
         >>> staff = abjad.Staff("c'4 d' e' f'", name="Staff")
         >>> score = abjad.Score([staff], name="Score")
         >>> ritardando = baca.Ritardando()
-        >>> abjad.attach(ritardando, staff[0])
+        >>> abjad.attach(ritardando, staff[0], direction=abjad.Up)
         >>> abjad.show(score) # doctest: +SKIP
 
         ..  docs::
@@ -331,7 +332,7 @@ class Ritardando:
         >>> ritardando = baca.Ritardando(markup=markup)
         >>> staff = abjad.Staff("c'4 d' e' f'", name="Staff")
         >>> score = abjad.Score([staff], name="Score")
-        >>> abjad.attach(ritardando, staff[0])
+        >>> abjad.attach(ritardando, staff[0], direction=abjad.Up)
         >>> abjad.show(score) # doctest: +SKIP
 
         ..  docs::
@@ -356,7 +357,7 @@ class Ritardando:
         >>> ritardando = baca.Ritardando()
         >>> abjad.tweak(ritardando).color = "#blue"
         >>> abjad.tweak(ritardando).extra_offset = "#'(0 . 2)"
-        >>> abjad.attach(ritardando, note)
+        >>> abjad.attach(ritardando, note, direction=abjad.Up)
         >>> abjad.show(note) # doctest: +SKIP
 
         ..  docs::
@@ -400,16 +401,16 @@ class Ritardando:
     markup: abjad.Markup | None = None
     tweaks: abjad.TweakInterface | None = None
 
+    _is_dataclass: typing.ClassVar[bool] = True
+    context: typing.ClassVar[str] = "Score"
+    parameter: typing.ClassVar[str] = "METRONOME_MARK"
+    persistent: typing.ClassVar[bool] = True
+
     def __post_init__(self):
         self.hide = bool(self.hide)
         if self.markup is not None:
             assert isinstance(self.markup, abjad.Markup), repr(self.markup)
         self.tweaks = abjad.TweakInterface.set_dataclass_tweaks(self, self.tweaks)
-
-    _is_dataclass = True
-    context = "Score"
-    parameter = "METRONOME_MARK"
-    persistent = True
 
     def __str__(self) -> str:
         r"""
@@ -445,15 +446,15 @@ class Ritardando:
     def _get_lilypond_format(self):
         return str(self)
 
-    def _get_lilypond_format_bundle(self, component=None):
+    def _get_lilypond_format_bundle(self, *, component=None, wrapper=None):
         bundle = abjad.LilyPondFormatBundle()
         if not self.hide:
             if self.tweaks:
                 tweaks = self.tweaks._list_format_contributions()
                 bundle.after.markup.extend(tweaks)
             markup = self._get_markup()
-            markup = dataclasses.replace(markup, direction=abjad.Up)
-            markup_format_pieces = markup._get_format_pieces()
+            markup = dataclasses.replace(markup)
+            markup_format_pieces = markup._get_format_pieces(wrapper=wrapper)
             bundle.after.markup.extend(markup_format_pieces)
         return bundle
 

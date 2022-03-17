@@ -400,8 +400,8 @@ def enchain(argument, counts: typing.Sequence[int]) -> list[list]:
         ...         color, direction = "#blue", abjad.Down
         ...     string = rf'\markup {{ \bold \with-color {color} * }}'
         ...     for leaf in selection:
-        ...         markup = abjad.Markup(string, direction=direction)
-        ...         abjad.attach(markup, leaf)
+        ...         markup = abjad.Markup(string)
+        ...         abjad.attach(markup, leaf, direction=direction)
 
         >>> abjad.override(staff).TextScript.staff_padding = 6
         >>> abjad.show(lilypond_file) # doctest: +SKIP
