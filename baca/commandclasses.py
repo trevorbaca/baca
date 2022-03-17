@@ -857,7 +857,7 @@ class IndicatorCommand(_scoping.Command):
 
     indicators: typing.Sequence = ()
     context: str | None = None
-    direction: int | None = None
+    direction: abjad.VerticalAlignment | None = None
     do_not_test: bool = False
     predicate: typing.Callable | None = None
     redundant: bool = False
@@ -1792,7 +1792,7 @@ class ClusterCommand(_scoping.Command):
 
     """
 
-    direction: int | None = abjad.Up
+    direction: abjad.VerticalAlignment | None = abjad.Up
     hide_flat_markup: bool = False
     selector: typing.Callable = _selectors.plts()
     start_pitch: typing.Any = None
@@ -1924,7 +1924,7 @@ class ColorFingeringCommand(_scoping.Command):
 
     """
 
-    direction: int | None = abjad.Up
+    direction: abjad.VerticalAlignment | None = abjad.Up
     numbers: typing.Any = None
     tweaks: abjad.IndexedTweakManagers = ()
 
