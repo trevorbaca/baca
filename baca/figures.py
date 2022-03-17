@@ -467,7 +467,7 @@ class LMR:
 
         >>> lmr = baca.lmr(
         ...     left_length=2,
-        ...     priority=abjad.Right,
+        ...     priority=abjad.RIGHT,
         ...     right_length=1,
         ... )
 
@@ -659,7 +659,7 @@ class LMR:
         self.middle_cyclic = bool(self.middle_cyclic)
         self.middle_reversed = bool(self.middle_reversed)
         if self.priority is not None:
-            assert self.priority in (abjad.Left, abjad.Right)
+            assert self.priority in (abjad.LEFT, abjad.RIGHT)
         if self.right_counts is not None:
             assert abjad.math.all_are_positive_integers(self.right_counts)
         self.right_cyclic = bool(self.right_cyclic)
@@ -672,7 +672,7 @@ class LMR:
         assert isinstance(sequence, list), repr(sequence)
         top_lengths = self._get_top_lengths(len(sequence))
         top_parts = abjad.sequence.partition_by_counts(
-            list(sequence), top_lengths, cyclic=False, overhang=abjad.Exact
+            list(sequence), top_lengths, cyclic=False, overhang=abjad.EXACT
         )
         parts = []
         left_part, middle_part, right_part = top_parts
@@ -718,7 +718,7 @@ class LMR:
 
     def _get_priority(self):
         if self.priority is None:
-            return abjad.Left
+            return abjad.LEFT
         return self.priority
 
     def _get_top_lengths(self, total_length):
@@ -727,7 +727,7 @@ class LMR:
         middle_length = 0
         right_length = self.right_length or 0
         if left_length and right_length:
-            if self._get_priority() == abjad.Left:
+            if self._get_priority() == abjad.LEFT:
                 left_length = self.left_length or 0
                 left_length = min([left_length, total_length])
                 remaining_length = total_length - left_length
@@ -5503,7 +5503,7 @@ class FigureMaker:
         >>> lilypond_file = abjad.illustrators.selection(selections)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
-        >>> abjad.override(staff).Stem.direction = abjad.Down
+        >>> abjad.override(staff).Stem.direction = abjad.DOWN
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5600,7 +5600,7 @@ class FigureMaker:
         >>> lilypond_file = abjad.illustrators.selection(selections)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
-        >>> abjad.override(staff).Stem.direction = abjad.Down
+        >>> abjad.override(staff).Stem.direction = abjad.DOWN
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5693,7 +5693,7 @@ class FigureMaker:
         >>> lilypond_file = abjad.illustrators.selection(selections)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
-        >>> abjad.override(staff).Stem.direction = abjad.Down
+        >>> abjad.override(staff).Stem.direction = abjad.DOWN
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -5891,9 +5891,9 @@ class FigureMaker:
         for multiplier, leaf in zip(multipliers, leaf_selection):
             leaf.multiplier = multiplier
         if rmakers.FeatherBeamCommand._is_accelerando(leaf_selection):
-            abjad.override(leaf_selection[0]).Beam.grow_direction = abjad.Right
+            abjad.override(leaf_selection[0]).Beam.grow_direction = abjad.RIGHT
         elif rmakers.FeatherBeamCommand._is_ritardando(leaf_selection):
-            abjad.override(leaf_selection[0]).Beam.grow_direction = abjad.Left
+            abjad.override(leaf_selection[0]).Beam.grow_direction = abjad.LEFT
         duration = abjad.get.duration(tuplet)
         notes = abjad.LeafMaker()([0], [duration])
         string = abjad.illustrators.selection_to_score_markup_string(notes)
@@ -8798,7 +8798,7 @@ def stack(*commands) -> Stack:
         >>> lilypond_file = abjad.illustrators.selection(selections)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
-        >>> abjad.override(staff).Stem.direction = abjad.Down
+        >>> abjad.override(staff).Stem.direction = abjad.DOWN
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::

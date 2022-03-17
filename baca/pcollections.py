@@ -147,7 +147,7 @@ class ArpeggiationSpacingSpecifier:
 
     def __post_init__(self):
         if self.direction is not None:
-            assert self.direction in (abjad.Up, abjad.Down), repr(self.direction)
+            assert self.direction in (abjad.UP, abjad.DOWN), repr(self.direction)
         if self.pattern is not None:
             assert isinstance(self.pattern, abjad.Pattern), repr(self.pattern)
 
@@ -167,7 +167,7 @@ class ArpeggiationSpacingSpecifier:
         pattern = self.pattern or abjad.index_all()
         collections_ = []
         total_length = len(collections)
-        direction = self.direction or abjad.Up
+        direction = self.direction or abjad.UP
         for i in range(total_length):
             if pattern.matches_index(i, total_length):
                 pitch_class_collection = pitch_class_collections[i]
@@ -175,7 +175,7 @@ class ArpeggiationSpacingSpecifier:
                     pitch_classes = list(sorted(pitch_class_collection))
                 else:
                     pitch_classes = list(pitch_class_collection)
-                if direction == abjad.Up:
+                if direction == abjad.UP:
                     pitches = _to_tightly_spaced_pitches_ascending(pitch_classes)
                 else:
                     pitches = _to_tightly_spaced_pitches_descending(pitch_classes)
@@ -248,7 +248,7 @@ class ChordalSpacingSpecifier:
 
         >>> specifier = baca.ChordalSpacingSpecifier(
         ...     bass=6,
-        ...     direction=abjad.Down,
+        ...     direction=abjad.DOWN,
         ...     soprano=7,
         ... )
         >>> specifier([[-6, -3, -5, -1, -7]])
@@ -258,7 +258,7 @@ class ChordalSpacingSpecifier:
 
         >>> specifier = baca.ChordalSpacingSpecifier(
         ...     bass=11,
-        ...     direction=abjad.Down,
+        ...     direction=abjad.DOWN,
         ...     soprano=7,
         ... )
         >>> specifier([[-6, -3, -5, -1, -7]])
@@ -390,7 +390,7 @@ class ChordalSpacingSpecifier:
 
         >>> specifier = baca.ChordalSpacingSpecifier(
         ...     bass=6,
-        ...     direction=abjad.Down,
+        ...     direction=abjad.DOWN,
         ...     soprano=7,
         ... )
         >>> specifier([[5, 6, 7, 9, 11]])
@@ -398,7 +398,7 @@ class ChordalSpacingSpecifier:
 
         >>> specifier = baca.ChordalSpacingSpecifier(
         ...     bass=6,
-        ...     direction=abjad.Down,
+        ...     direction=abjad.DOWN,
         ...     minimum_semitones=1,
         ...     soprano=7,
         ... )
@@ -407,7 +407,7 @@ class ChordalSpacingSpecifier:
 
         >>> specifier = baca.ChordalSpacingSpecifier(
         ...     bass=6,
-        ...     direction=abjad.Down,
+        ...     direction=abjad.DOWN,
         ...     minimum_semitones=2,
         ...     soprano=7,
         ... )
@@ -416,7 +416,7 @@ class ChordalSpacingSpecifier:
 
         >>> specifier = baca.ChordalSpacingSpecifier(
         ...     bass=6,
-        ...     direction=abjad.Down,
+        ...     direction=abjad.DOWN,
         ...     minimum_semitones=3,
         ...     soprano=7,
         ... )
@@ -428,42 +428,42 @@ class ChordalSpacingSpecifier:
         Down-directed soprano control:
 
         >>> specifier = baca.ChordalSpacingSpecifier(
-        ...     direction=abjad.Down,
+        ...     direction=abjad.DOWN,
         ...     soprano=None,
         ... )
         >>> specifier([[-6, -3, -5, -1, -7]])
         [PitchSegment([18, 17, 11, 9, 7])]
 
         >>> specifier = baca.ChordalSpacingSpecifier(
-        ...     direction=abjad.Down,
+        ...     direction=abjad.DOWN,
         ...     soprano=6,
         ... )
         >>> specifier([[-6, -3, -5, -1, -7]])
         [PitchSegment([18, 17, 11, 9, 7])]
 
         >>> specifier = baca.ChordalSpacingSpecifier(
-        ...     direction=abjad.Down,
+        ...     direction=abjad.DOWN,
         ...     soprano=5,
         ... )
         >>> specifier([[-6, -3, -5, -1, -7]])
         [PitchSegment([17, 11, 9, 7, 6])]
 
         >>> specifier = baca.ChordalSpacingSpecifier(
-        ...     direction=abjad.Down,
+        ...     direction=abjad.DOWN,
         ...     soprano=11,
         ... )
         >>> specifier([[-6, -3, -5, -1, -7]])
         [PitchSegment([11, 9, 7, 6, 5])]
 
         >>> specifier = baca.ChordalSpacingSpecifier(
-        ...     direction=abjad.Down,
+        ...     direction=abjad.DOWN,
         ...     soprano=9,
         ... )
         >>> specifier([[-6, -3, -5, -1, -7]])
         [PitchSegment([21, 19, 18, 17, 11])]
 
         >>> specifier = baca.ChordalSpacingSpecifier(
-        ...     direction=abjad.Down,
+        ...     direction=abjad.DOWN,
         ...     soprano=7,
         ... )
         >>> specifier([[-6, -3, -5, -1, -7]])
@@ -479,7 +479,7 @@ class ChordalSpacingSpecifier:
 
     def __post_init__(self):
         if self.direction is not None:
-            assert self.direction in (abjad.Up, abjad.Down)
+            assert self.direction in (abjad.UP, abjad.DOWN)
         if self.minimum_semitones is not None:
             assert isinstance(self.minimum_semitones, int)
             assert 1 <= self.minimum_semitones
@@ -569,8 +569,8 @@ class ChordalSpacingSpecifier:
                 inner.append(pitch_class)
         pitch_classes = []
         pitches = []
-        direction = self.direction or abjad.Up
-        if direction is abjad.Up:
+        direction = self.direction or abjad.UP
+        if direction is abjad.UP:
             if bass is not None:
                 pitch_classes.append(bass)
             elif inner:
@@ -816,12 +816,12 @@ def illustrate_harmonic_series(harmonic_series) -> abjad.LilyPondFile:
         deviation = partial.deviation()
         if 0 < deviation:
             markup = abjad.Markup(rf"\markup +{deviation}")
-            abjad.attach(markup, note, direction=abjad.Up)
+            abjad.attach(markup, note, direction=abjad.UP)
         elif deviation < 0:
             markup = abjad.Markup(rf"\markup {deviation}")
-            abjad.attach(markup, note, direction=abjad.Up)
+            abjad.attach(markup, note, direction=abjad.UP)
         markup = abjad.Markup(rf"\markup {n}")
-        abjad.attach(markup, note, direction=abjad.Down)
+        abjad.attach(markup, note, direction=abjad.DOWN)
     notes = abjad.select.notes(staff)
     if notes[0].written_pitch < abjad.NamedPitch("C4"):
         abjad.attach(abjad.Clef("bass"), staff[0])
@@ -1178,7 +1178,7 @@ def arpeggiate_down(collection):
 
     Returns new collection.
     """
-    specifier = ArpeggiationSpacingSpecifier(direction=abjad.Down)
+    specifier = ArpeggiationSpacingSpecifier(direction=abjad.DOWN)
     result = specifier([collection])
     assert len(result) == 1
     segment = result[0]
@@ -1229,7 +1229,7 @@ def arpeggiate_up(collection):
 
     Returns new collection.
     """
-    specifier = ArpeggiationSpacingSpecifier(direction=abjad.Up)
+    specifier = ArpeggiationSpacingSpecifier(direction=abjad.UP)
     result = specifier([collection])
     assert len(result) == 1
     segment = result[0]
@@ -1318,7 +1318,7 @@ def bass_to_octave(collection, n=4):
 
     # TODO: remove reference to RegisterToOctaveCommand;
     #       implement as segment-only operation
-    command = RegisterToOctaveCommand(anchor=abjad.Down, octave_number=n)
+    command = RegisterToOctaveCommand(anchor=abjad.DOWN, octave_number=n)
     selection = [abjad.Note(_, (1, 4)) for _ in collection]
     command([selection])
     pitches = abjad.iterate.pitches(selection)
@@ -1407,7 +1407,7 @@ def center_to_octave(collection, n=4):
 
     # TODO: remove reference to RegisterToOctaveCommand;
     #       implement as segment-only operation
-    command = RegisterToOctaveCommand(anchor=abjad.Center, octave_number=n)
+    command = RegisterToOctaveCommand(anchor=abjad.CENTER, octave_number=n)
     selection = [abjad.Note(_, (1, 4)) for _ in collection]
     command([selection])
     pitches = abjad.iterate.pitches(selection)
@@ -2138,7 +2138,7 @@ def read(collections, counts=None, check=None):
         >>> collections = [[5, 12, 14, 18, 17], [16, 17, 19]]
         >>> collections = [abjad.PitchSegment(_) for _ in collections]
 
-        >>> baca.pcollections.read(collections, [10, 10, 10], check=abjad.Exact)
+        >>> baca.pcollections.read(collections, [10, 10, 10], check=abjad.EXACT)
         Traceback (most recent call last):
             ...
         ValueError: call reads 30 items; not a multiple of 8 items.
@@ -2164,7 +2164,7 @@ def read(collections, counts=None, check=None):
         collections_.append(collection)
         i += count
     result = collections_
-    if check == abjad.Exact:
+    if check == abjad.EXACT:
         self_item_count = len(abjad.sequence.join([_.items for _ in collections])[0])
         result_item_count = len(abjad.sequence.join([_.items for _ in result])[0])
         quotient = result_item_count / self_item_count
@@ -2509,7 +2509,7 @@ def soprano_to_octave(collection, n=4):
 
     # TODO: remove reference to RegisterToOctaveCommand;
     #       implement as segment-only operation
-    command = RegisterToOctaveCommand(anchor=abjad.Up, octave_number=n)
+    command = RegisterToOctaveCommand(anchor=abjad.UP, octave_number=n)
     selection = [abjad.Note(_, (1, 4)) for _ in collection]
     command([selection])
     pitches = abjad.iterate.pitches(selection)
@@ -2840,7 +2840,7 @@ def space_down(collection, bass=None, semitones=None, soprano=None):
     """
     specifier = ChordalSpacingSpecifier(
         bass=bass,
-        direction=abjad.Down,
+        direction=abjad.DOWN,
         minimum_semitones=semitones,
         soprano=soprano,
     )
@@ -3173,7 +3173,7 @@ def space_up(collection, bass=None, semitones=None, soprano=None):
     """
     specifier = ChordalSpacingSpecifier(
         bass=bass,
-        direction=abjad.Up,
+        direction=abjad.UP,
         minimum_semitones=semitones,
         soprano=soprano,
     )

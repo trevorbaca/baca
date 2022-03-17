@@ -140,7 +140,7 @@ class RhythmCommand(_scoping.Command):
         >>> def label_with_durations(music):
         ...     return abjad.label.with_durations(
         ...         music,
-        ...         direction=abjad.Down,
+        ...         direction=abjad.DOWN,
         ...         denominator=16,
         ...     )
         >>> commands(

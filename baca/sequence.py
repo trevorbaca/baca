@@ -854,7 +854,7 @@ def split_divisions(
         ...     divisions,
         ...     [(1, 4)],
         ...     cyclic=True,
-        ...     remainder=abjad.Left,
+        ...     remainder=abjad.LEFT,
         ... )
         >>> for item in divisions:
         ...     item
@@ -903,7 +903,7 @@ def split_divisions(
         ...     divisions,
         ...     [(1, 4)],
         ...     cyclic=True,
-        ...     remainder=abjad.Left,
+        ...     remainder=abjad.LEFT,
         ...     remainder_fuse_threshold=(1, 8),
         ... )
         >>> for item in divisions:
@@ -1011,7 +1011,7 @@ def split_divisions(
 
         >>> def quarters(sequence):
         ...     sequence = [sequence]
-        ...     sequence = baca.sequence.quarters(sequence, remainder=abjad.Left)
+        ...     sequence = baca.sequence.quarters(sequence, remainder=abjad.LEFT)
         ...     sequence = abjad.sequence.flatten(sequence, depth=-1)
         ...     return sequence
 
@@ -1127,7 +1127,7 @@ def split_divisions(
         ...         sequence,
         ...         [(1, 4)],
         ...         cyclic=True,
-        ...         remainder=abjad.Left,
+        ...         remainder=abjad.LEFT,
         ...         remainder_fuse_threshold=(1, 8),
         ...     )
         ...     sequence = abjad.sequence.flatten(sequence, depth=-1)
@@ -1291,7 +1291,7 @@ def split_divisions(
     if cyclic is not None:
         cyclic = bool(cyclic)
     if remainder is not None:
-        assert remainder in (abjad.Left, abjad.Right), repr(remainder)
+        assert remainder in (abjad.LEFT, abjad.RIGHT), repr(remainder)
     if remainder_fuse_threshold is not None:
         remainder_fuse_threshold = abjad.Duration(remainder_fuse_threshold)
     sequence_ = abjad.sequence.split(sequence, durations, cyclic=cyclic, overhang=True)
@@ -1301,7 +1301,7 @@ def split_divisions(
     if sequence_ != without_overhang:
         items = list(sequence_)
         remaining_item = items.pop()
-        if remainder == abjad.Left:
+        if remainder == abjad.LEFT:
             if remainder_fuse_threshold is None:
                 items.insert(0, remaining_item)
             elif sum(remaining_item) <= remainder_fuse_threshold:
@@ -1470,12 +1470,12 @@ def accumulate(sequence, operands=None, count=None):
     Returns sequence of orbit length with ``count`` set to identity.
     """
     if count is None:
-        count = abjad.Exact
+        count = abjad.EXACT
     operands = operands or [lambda _: _]
     if not isinstance(operands, list):
         operands = [operands]
     items = [sequence]
-    if count == abjad.Exact:
+    if count == abjad.EXACT:
         for i in range(1000):
             sequence = items[-1]
             for operand in operands:

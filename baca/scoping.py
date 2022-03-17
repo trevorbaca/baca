@@ -91,7 +91,7 @@ def _attach_latent_indicator_alert(
     markup = abjad.Markup(string)
     tag = tag.append(site(_frame()))
     abjad.attach(
-        markup, leaf, deactivate=existing_deactivate, direction=abjad.Up, tag=tag
+        markup, leaf, deactivate=existing_deactivate, direction=abjad.UP, tag=tag
     )
 
 

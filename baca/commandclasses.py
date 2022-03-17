@@ -818,7 +818,7 @@ class GlobalFermataCommand(_scoping.Command):
             abjad.attach(
                 markup,
                 leaf,
-                direction=abjad.Up,
+                direction=abjad.UP,
                 tag=self.tag.append(_scoping.site(_frame(), self, n=1)),
             )
             literal = abjad.LilyPondLiteral(r"\baca-fermata-measure")
@@ -857,7 +857,7 @@ class IndicatorCommand(_scoping.Command):
 
     indicators: typing.Sequence = ()
     context: str | None = None
-    direction: abjad.VerticalAlignment | None = None
+    direction: abjad.Vertical | None = None
     do_not_test: bool = False
     predicate: typing.Callable | None = None
     redundant: bool = False
@@ -1792,7 +1792,7 @@ class ClusterCommand(_scoping.Command):
 
     """
 
-    direction: abjad.VerticalAlignment | None = abjad.Up
+    direction: abjad.Vertical | None = abjad.UP
     hide_flat_markup: bool = False
     selector: typing.Callable = _selectors.plts()
     start_pitch: typing.Any = None
@@ -1924,7 +1924,7 @@ class ColorFingeringCommand(_scoping.Command):
 
     """
 
-    direction: abjad.VerticalAlignment | None = abjad.Up
+    direction: abjad.Vertical | None = abjad.UP
     numbers: typing.Any = None
     tweaks: abjad.IndexedTweakManagers = ()
 
@@ -3991,7 +3991,7 @@ class RegisterToOctaveCommand(_scoping.Command):
         ...     baca.figure([1], 16),
         ...     rmakers.beam(),
         ...     baca.RegisterToOctaveCommand(
-        ...         anchor=abjad.Down,
+        ...         anchor=abjad.DOWN,
         ...         octave_number=4,
         ...     ),
         ... )
@@ -4022,7 +4022,7 @@ class RegisterToOctaveCommand(_scoping.Command):
         ...     baca.figure([1], 16),
         ...     rmakers.beam(),
         ...     baca.RegisterToOctaveCommand(
-        ...         anchor=abjad.Center,
+        ...         anchor=abjad.CENTER,
         ...         octave_number=4,
         ...     ),
         ... )
@@ -4053,7 +4053,7 @@ class RegisterToOctaveCommand(_scoping.Command):
         ...     baca.figure([1], 16),
         ...     rmakers.beam(),
         ...     baca.RegisterToOctaveCommand(
-        ...         anchor=abjad.Up,
+        ...         anchor=abjad.UP,
         ...         octave_number=4,
         ...     ),
         ... )
@@ -4088,7 +4088,7 @@ class RegisterToOctaveCommand(_scoping.Command):
         ...     baca.figure([1], 16),
         ...     rmakers.beam(),
         ...     baca.RegisterToOctaveCommand(
-        ...         anchor=abjad.Down,
+        ...         anchor=abjad.DOWN,
         ...         octave_number=4,
         ...     ),
         ... )
@@ -4123,7 +4123,7 @@ class RegisterToOctaveCommand(_scoping.Command):
         ...     baca.figure([1], 16),
         ...     rmakers.beam(),
         ...     baca.RegisterToOctaveCommand(
-        ...         anchor=abjad.Center,
+        ...         anchor=abjad.CENTER,
         ...         octave_number=4,
         ...     ),
         ... )
@@ -4158,7 +4158,7 @@ class RegisterToOctaveCommand(_scoping.Command):
         ...     baca.figure([1], 16),
         ...     rmakers.beam(),
         ...     baca.RegisterToOctaveCommand(
-        ...         anchor=abjad.Up,
+        ...         anchor=abjad.UP,
         ...         octave_number=4,
         ...     ),
         ... )
@@ -4197,7 +4197,7 @@ class RegisterToOctaveCommand(_scoping.Command):
         ...     baca.figure([1], 16),
         ...     rmakers.beam(),
         ...     baca.RegisterToOctaveCommand(
-        ...         anchor=abjad.Down,
+        ...         anchor=abjad.DOWN,
         ...         octave_number=4,
         ...     ),
         ... )
@@ -4232,7 +4232,7 @@ class RegisterToOctaveCommand(_scoping.Command):
         ...     baca.figure([1], 16),
         ...     rmakers.beam(),
         ...     baca.RegisterToOctaveCommand(
-        ...         anchor=abjad.Center,
+        ...         anchor=abjad.CENTER,
         ...         octave_number=4,
         ...     ),
         ... )
@@ -4267,7 +4267,7 @@ class RegisterToOctaveCommand(_scoping.Command):
         ...     baca.figure([1], 16),
         ...     rmakers.beam(),
         ...     baca.RegisterToOctaveCommand(
-        ...         anchor=abjad.Up,
+        ...         anchor=abjad.UP,
         ...         octave_number=4,
         ...     ),
         ... )
@@ -4309,7 +4309,7 @@ class RegisterToOctaveCommand(_scoping.Command):
 
         >>> chord = abjad.Chord("<c, d e'>1")
         >>> command = baca.RegisterToOctaveCommand(
-        ...     anchor=abjad.Down,
+        ...     anchor=abjad.DOWN,
         ...     octave_number=5,
         ... )
         >>> command(chord)
@@ -4326,7 +4326,7 @@ class RegisterToOctaveCommand(_scoping.Command):
 
         >>> chord = abjad.Chord("<c, d e'>1")
         >>> command = baca.RegisterToOctaveCommand(
-        ...     anchor=abjad.Center,
+        ...     anchor=abjad.CENTER,
         ...     octave_number=5,
         ... )
         >>> command(chord)
@@ -4343,7 +4343,7 @@ class RegisterToOctaveCommand(_scoping.Command):
 
         >>> chord = abjad.Chord("<c, d e'>1")
         >>> command = baca.RegisterToOctaveCommand(
-        ...     anchor=abjad.Up,
+        ...     anchor=abjad.UP,
         ...     octave_number=5,
         ... )
         >>> command(chord)
@@ -4436,7 +4436,7 @@ class RegisterToOctaveCommand(_scoping.Command):
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
         if self.anchor is not None:
-            prototype = (abjad.Center, abjad.Down, abjad.Up)
+            prototype = (abjad.CENTER, abjad.DOWN, abjad.UP)
             assert self.anchor in prototype, repr(self.anchor)
         if self.octave_number is not None:
             assert isinstance(self.octave_number, int), repr(self.octave_number)
@@ -4468,12 +4468,12 @@ class RegisterToOctaveCommand(_scoping.Command):
                 raise TypeError(leaf)
         pitches = list(set(pitches))
         pitches.sort()
-        anchor = self.anchor or abjad.Down
-        if anchor == abjad.Down:
+        anchor = self.anchor or abjad.DOWN
+        if anchor == abjad.DOWN:
             pitch = pitches[0]
-        elif anchor == abjad.Up:
+        elif anchor == abjad.UP:
             pitch = pitches[-1]
-        elif anchor == abjad.Center:
+        elif anchor == abjad.CENTER:
             soprano = max(pitches)
             bass = min(pitches)
             centroid = (soprano.number + bass.number) / 2.0
@@ -4911,7 +4911,7 @@ def bass_to_octave(
 
     """
     return RegisterToOctaveCommand(
-        anchor=abjad.Down, octave_number=n, selector=selector
+        anchor=abjad.DOWN, octave_number=n, selector=selector
     )
 
 
@@ -5094,7 +5094,7 @@ def center_to_octave(
 
     """
     return RegisterToOctaveCommand(
-        anchor=abjad.Center, octave_number=n, selector=selector
+        anchor=abjad.CENTER, octave_number=n, selector=selector
     )
 
 
@@ -6221,7 +6221,7 @@ def soprano_to_octave(
             >>
 
     """
-    return RegisterToOctaveCommand(anchor=abjad.Up, octave_number=n, selector=selector)
+    return RegisterToOctaveCommand(anchor=abjad.UP, octave_number=n, selector=selector)
 
 
 def staff_position(

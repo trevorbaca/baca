@@ -19,7 +19,7 @@ class Accelerando:
         >>> staff = abjad.Staff("c'4 d' e' f'", name="Staff")
         >>> score = abjad.Score([staff], name="Score")
         >>> accelerando = baca.Accelerando()
-        >>> abjad.attach(accelerando, staff[0], direction=abjad.Up)
+        >>> abjad.attach(accelerando, staff[0], direction=abjad.UP)
         >>> abjad.show(score) # doctest: +SKIP
 
         ..  docs::
@@ -44,7 +44,7 @@ class Accelerando:
         >>> accelerando = baca.Accelerando()
         >>> abjad.tweak(accelerando).color = "#blue"
         >>> abjad.tweak(accelerando).extra_offset = "#'(0 . 2)"
-        >>> abjad.attach(accelerando, note, direction=abjad.Up)
+        >>> abjad.attach(accelerando, note, direction=abjad.UP)
         >>> abjad.show(note) # doctest: +SKIP
 
         ..  docs::
@@ -305,7 +305,7 @@ class Ritardando:
         >>> staff = abjad.Staff("c'4 d' e' f'", name="Staff")
         >>> score = abjad.Score([staff], name="Score")
         >>> ritardando = baca.Ritardando()
-        >>> abjad.attach(ritardando, staff[0], direction=abjad.Up)
+        >>> abjad.attach(ritardando, staff[0], direction=abjad.UP)
         >>> abjad.show(score) # doctest: +SKIP
 
         ..  docs::
@@ -332,7 +332,7 @@ class Ritardando:
         >>> ritardando = baca.Ritardando(markup=markup)
         >>> staff = abjad.Staff("c'4 d' e' f'", name="Staff")
         >>> score = abjad.Score([staff], name="Score")
-        >>> abjad.attach(ritardando, staff[0], direction=abjad.Up)
+        >>> abjad.attach(ritardando, staff[0], direction=abjad.UP)
         >>> abjad.show(score) # doctest: +SKIP
 
         ..  docs::
@@ -357,7 +357,7 @@ class Ritardando:
         >>> ritardando = baca.Ritardando()
         >>> abjad.tweak(ritardando).color = "#blue"
         >>> abjad.tweak(ritardando).extra_offset = "#'(0 . 2)"
-        >>> abjad.attach(ritardando, note, direction=abjad.Up)
+        >>> abjad.attach(ritardando, note, direction=abjad.UP)
         >>> abjad.show(note) # doctest: +SKIP
 
         ..  docs::

@@ -127,7 +127,7 @@ def beam(
         >>> commands(
         ...     "Music_Voice",
         ...     baca.beam(
-        ...         direction=abjad.Down,
+        ...         direction=abjad.DOWN,
         ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitch("C4"),

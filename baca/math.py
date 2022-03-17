@@ -325,7 +325,7 @@ def overwrite_elements(sequence, pairs):
     return result
 
 
-def partition_integer_into_halves(n, bigger=abjad.Left, allow_even=True):
+def partition_integer_into_halves(n, bigger=abjad.LEFT, allow_even=True):
     """
     Partitions ``n`` into halves.
 
@@ -336,20 +336,20 @@ def partition_integer_into_halves(n, bigger=abjad.Left, allow_even=True):
 
         When ``n`` is odd the greater part of pair corresponds to the value of ``bigger``
 
-        >>> baca.math.partition_integer_into_halves(7, bigger=abjad.Left)
+        >>> baca.math.partition_integer_into_halves(7, bigger=abjad.LEFT)
         (4, 3)
 
-        >>> baca.math.partition_integer_into_halves(7, bigger=abjad.Right)
+        >>> baca.math.partition_integer_into_halves(7, bigger=abjad.RIGHT)
         (3, 4)
 
     ..  container:: example
 
         Likewise when ``n`` is even and ``allow_even`` is false:
 
-        >>> baca.math.partition_integer_into_halves(8, bigger=abjad.Left, allow_even=False)
+        >>> baca.math.partition_integer_into_halves(8, bigger=abjad.LEFT, allow_even=False)
         (5, 3)
 
-        >>> baca.math.partition_integer_into_halves(8, bigger=abjad.Right, allow_even=False)
+        >>> baca.math.partition_integer_into_halves(8, bigger=abjad.RIGHT, allow_even=False)
         (3, 5)
 
     ..  container:: example
@@ -360,10 +360,10 @@ def partition_integer_into_halves(n, bigger=abjad.Left, allow_even=True):
         >>> baca.math.partition_integer_into_halves(8)
         (4, 4)
 
-        >>> baca.math.partition_integer_into_halves(8, bigger=abjad.Left)
+        >>> baca.math.partition_integer_into_halves(8, bigger=abjad.LEFT)
         (4, 4)
 
-        >>> baca.math.partition_integer_into_halves(8, bigger=abjad.Right)
+        >>> baca.math.partition_integer_into_halves(8, bigger=abjad.RIGHT)
         (4, 4)
 
     ..  container:: example
@@ -377,7 +377,7 @@ def partition_integer_into_halves(n, bigger=abjad.Left, allow_even=True):
     """
     assert isinstance(n, int), repr(n)
     assert 0 <= n, repr(n)
-    assert bigger in (abjad.Left, abjad.Right), repr(bigger)
+    assert bigger in (abjad.LEFT, abjad.RIGHT), repr(bigger)
     assert allow_even in (True, False), repr(allow_even)
     if n == 0:
         if not allow_even:
@@ -388,7 +388,7 @@ def partition_integer_into_halves(n, bigger=abjad.Left, allow_even=True):
     if smaller_half == bigger_half and not allow_even:
         smaller_half -= 1
         bigger_half += 1
-    if bigger == abjad.Left:
+    if bigger == abjad.LEFT:
         return (bigger_half, smaller_half)
     else:
         return (smaller_half, bigger_half)
@@ -458,7 +458,7 @@ def partition_nested_into_inward_pointing_parts(sequence, target="negative"):
     return result
 
 
-def partition_to_avoid_octave_adjacencies(sequence, bigger=abjad.Left):
+def partition_to_avoid_octave_adjacencies(sequence, bigger=abjad.LEFT):
     """
     Partitions ``sequence`` to avoid octave adjacencies.
 
@@ -467,56 +467,56 @@ def partition_to_avoid_octave_adjacencies(sequence, bigger=abjad.Left):
         No duplicate items:
 
         >>> pitches = [0, 1, 2, 3]
-        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.Left)
+        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.LEFT)
         [(0, 1, 2, 3)]
 
-        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.Right)
+        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.RIGHT)
         [(0, 1, 2, 3)]
 
         All duplicate items:
 
         >>> pitches = [0, 0, 0, 0]
-        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.Left)
+        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.LEFT)
         [(0,), (0,), (0,), (0,)]
 
         >>> pitches = [0, 0, 0, 0]
-        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.Right)
+        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.RIGHT)
         [(0,), (0,), (0,), (0,)]
 
         Duplicates, with odd number of items:
 
         >>> pitches = [0, 1, 0]
-        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.Left)
+        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.LEFT)
         [(0, 1), (0,)]
 
-        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.Right)
+        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.RIGHT)
         [(0,), (1, 0)]
 
         >>> pitches = [0, 1, 2, 3, 0]
-        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.Left)
+        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.LEFT)
         [(0, 1, 2), (3, 0)]
 
-        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.Right)
+        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.RIGHT)
         [(0, 1), (2, 3, 0)]
 
         Duplicates, with even number of items:
 
         >>> pitches = [0, 1, 2, 0]
-        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.Left)
+        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.LEFT)
         [(0, 1), (2, 0)]
 
-        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.Right)
+        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.RIGHT)
         [(0, 1), (2, 0)]
 
         >>> pitches = [0, 1, 2, 3, 4, 0]
-        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.Left)
+        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.LEFT)
         [(0, 1, 2), (3, 4, 0)]
 
-        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.Right)
+        >>> baca.math.partition_to_avoid_octave_adjacencies(pitches, abjad.RIGHT)
         [(0, 1, 2), (3, 4, 0)]
 
     """
-    assert bigger in (abjad.Left, abjad.Right), repr(bigger)
+    assert bigger in (abjad.LEFT, abjad.RIGHT), repr(bigger)
     result = [[]]
     part = result[-1]
     for number in sequence:

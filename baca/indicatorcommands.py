@@ -804,7 +804,7 @@ def down_arpeggio(
 
     """
     return _commandclasses.IndicatorCommand(
-        indicators=[abjad.Arpeggio(direction=abjad.Down)],
+        indicators=[abjad.Arpeggio(direction=abjad.DOWN)],
         selector=selector,
         tags=[_scoping.site(_frame())],
     )
@@ -1810,7 +1810,7 @@ def rehearsal_mark(
     string = rf'\baca-rehearsal-mark-markup "{argument}" #{font_size}'
     markup = abjad.Markup(string)
     return _commandclasses.IndicatorCommand(
-        direction=abjad.Center,
+        direction=abjad.CENTER,
         indicators=[markup],
         selector=selector,
         tags=[_scoping.site(_frame())],
@@ -3146,7 +3146,7 @@ def up_arpeggio(
 
     """
     return _commandclasses.IndicatorCommand(
-        indicators=[abjad.Arpeggio(direction=abjad.Up)],
+        indicators=[abjad.Arpeggio(direction=abjad.UP)],
         selector=selector,
         tags=[_scoping.site(_frame())],
     )

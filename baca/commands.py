@@ -1691,7 +1691,7 @@ def label(
 def markup(
     argument: str | abjad.Markup,
     *tweaks: abjad.TweakInterface,
-    direction=abjad.Up,
+    direction=abjad.UP,
     map=None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
@@ -1862,7 +1862,7 @@ def markup(
             Not ['Allegro', 'ma non troppo'].
 
     """
-    if direction not in (abjad.Down, abjad.Up):
+    if direction not in (abjad.DOWN, abjad.UP):
         message = f"direction must be up or down (not {direction!r})."
         raise Exception(message)
     if isinstance(argument, str):

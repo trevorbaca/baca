@@ -1140,7 +1140,7 @@ def _clean_up_laissez_vibrer_tie_direction(score):
             clef,
         )
         if staff_position == abjad.StaffPosition(0):
-            abjad.override(note).laissez_vibrer_tie.direction = abjad.Up
+            abjad.override(note).laissez_vibrer_tie.direction = abjad.UP
 
 
 def _clean_up_on_beat_grace_containers(score):
@@ -1168,7 +1168,7 @@ def _clean_up_repeat_tie_direction(score):
             )
             if staff_position.number == 0:
                 repeat_tie = abjad.get.indicator(leaf, abjad.RepeatTie)
-                abjad.tweak(repeat_tie).direction = abjad.Up
+                abjad.tweak(repeat_tie).direction = abjad.UP
                 break
 
 
@@ -1453,7 +1453,7 @@ def _color_octaves(score):
             if not color:
                 continue
             for pleaf in pleaves:
-                abjad.attach(markup, pleaf, direction=abjad.Up, tag=tag)
+                abjad.attach(markup, pleaf, direction=abjad.UP, tag=tag)
                 string = r"\baca-octave-coloring"
                 literal = abjad.LilyPondLiteral(string, format_slot="before")
                 abjad.attach(literal, pleaf, tag=tag)
@@ -1870,7 +1870,7 @@ def _label_duration_multipliers(score):
                 tag_ = tag_.append(_tags.PHANTOM)
             if abjad.get.has_indicator(leaf, _const.REST_VOICE):
                 tag_ = tag_.append(_tags.REST_VOICE)
-            abjad.attach(markup, leaf, deactivate=True, direction=abjad.Up, tag=tag_)
+            abjad.attach(markup, leaf, deactivate=True, direction=abjad.UP, tag=tag_)
             already_labeled.add(leaf)
 
 

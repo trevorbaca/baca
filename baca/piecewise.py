@@ -4547,7 +4547,7 @@ def text_spanner(
     original_items = items
     if autodetect_right_padding is not None:
         autodetect_right_padding = bool(autodetect_right_padding)
-    if direction == abjad.Down:
+    if direction == abjad.DOWN:
         shape_to_style = {
             "=>": "dashed-line-with-arrow",
             "=|": "dashed-line-with-up-hook",
@@ -4681,7 +4681,7 @@ def text_spanner(
         )
         # TODO: find some way to make these tweaks explicit to composer
         manager = abjad.tweak(bookended_spanner_start)
-        manager.bound_details__right__stencil_align_dir_y = abjad.Center
+        manager.bound_details__right__stencil_align_dir_y = abjad.CENTER
         if "hook" in style:
             manager.bound_details__right__padding = 1.25
         else:

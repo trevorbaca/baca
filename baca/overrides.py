@@ -795,7 +795,7 @@ def dls_up(
     """
     return OverrideCommand(
         attribute="direction",
-        value=abjad.Up,
+        value=abjad.UP,
         grob="DynamicLineSpanner",
         selector=selector,
         tags=[_scoping.site(_frame())],
@@ -1248,7 +1248,7 @@ def laissez_vibrer_tie_down(
     """
     return OverrideCommand(
         attribute="direction",
-        value=abjad.Down,
+        value=abjad.DOWN,
         grob="LaissezVibrerTie",
         selector=selector,
         tags=[_scoping.site(_frame())],
@@ -1263,7 +1263,7 @@ def laissez_vibrer_tie_up(
     """
     return OverrideCommand(
         attribute="direction",
-        value=abjad.Up,
+        value=abjad.UP,
         grob="LaissezVibrerTie",
         selector=selector,
         tags=[_scoping.site(_frame())],
@@ -2245,7 +2245,7 @@ def rehearsal_mark_down(
     """
     return OverrideCommand(
         attribute="direction",
-        value=abjad.Down,
+        value=abjad.DOWN,
         context=context,
         grob="RehearsalMark",
         selector=selector,
@@ -2418,7 +2418,7 @@ def repeat_tie_down(
     """
     return OverrideCommand(
         attribute="direction",
-        value=abjad.Down,
+        value=abjad.DOWN,
         grob="RepeatTie",
         selector=selector,
         tags=[_scoping.site(_frame())],
@@ -2562,7 +2562,7 @@ def repeat_tie_up(
     """
     return OverrideCommand(
         attribute="direction",
-        value=abjad.Up,
+        value=abjad.UP,
         grob="RepeatTie",
         selector=selector,
         tags=[_scoping.site(_frame())],
@@ -2666,7 +2666,7 @@ def rest_down(
     """
     return OverrideCommand(
         attribute="direction",
-        value=abjad.Down,
+        value=abjad.DOWN,
         grob="Rest",
         selector=selector,
         tags=[_scoping.site(_frame())],
@@ -2951,7 +2951,7 @@ def rest_up(
     """
     return OverrideCommand(
         attribute="direction",
-        value=abjad.Up,
+        value=abjad.UP,
         grob="Rest",
         selector=selector,
         tags=[_scoping.site(_frame())],
@@ -3167,7 +3167,7 @@ def script_down(
     """
     return OverrideCommand(
         attribute="direction",
-        value=abjad.Down,
+        value=abjad.DOWN,
         grob="Script",
         selector=selector,
         tags=[_scoping.site(_frame())],
@@ -3395,7 +3395,7 @@ def script_up(
     """
     return OverrideCommand(
         attribute="direction",
-        value=abjad.Up,
+        value=abjad.UP,
         grob="Script",
         selector=selector,
         tags=[_scoping.site(_frame())],
@@ -3509,7 +3509,7 @@ def slur_down(
     """
     return OverrideCommand(
         attribute="direction",
-        value=abjad.Down,
+        value=abjad.DOWN,
         grob="Slur",
         selector=selector,
         tags=[_scoping.site(_frame())],
@@ -3614,7 +3614,7 @@ def slur_up(
     """
     return OverrideCommand(
         attribute="direction",
-        value=abjad.Up,
+        value=abjad.UP,
         grob="Slur",
         selector=selector,
         tags=[_scoping.site(_frame())],
@@ -3852,7 +3852,7 @@ def stem_down(
     """
     return OverrideCommand(
         attribute="direction",
-        value=abjad.Down,
+        value=abjad.DOWN,
         grob="Stem",
         selector=selector,
         tags=[_scoping.site(_frame())],
@@ -4002,7 +4002,7 @@ def stem_up(
     """
     return OverrideCommand(
         attribute="direction",
-        value=abjad.Up,
+        value=abjad.UP,
         grob="Stem",
         selector=selector,
         tags=[_scoping.site(_frame())],
@@ -4389,7 +4389,7 @@ def text_script_down(
     return OverrideCommand(
         attribute="direction",
         blocklist=tuple(blocklist),
-        value=abjad.Down,
+        value=abjad.DOWN,
         grob="TextScript",
         selector=selector,
         tags=[_scoping.site(_frame())],
@@ -4914,7 +4914,7 @@ def text_script_up(
         grob="TextScript",
         selector=selector,
         tags=[_scoping.site(_frame())],
-        value=abjad.Up,
+        value=abjad.UP,
     )
 
 
@@ -5232,7 +5232,7 @@ def tie_down(
         grob="Tie",
         selector=selector,
         tags=[_scoping.site(_frame())],
-        value=abjad.Down,
+        value=abjad.DOWN,
     )
 
 
@@ -5319,7 +5319,7 @@ def tie_up(
         grob="Tie",
         selector=selector,
         tags=[_scoping.site(_frame())],
-        value=abjad.Up,
+        value=abjad.UP,
     )
 
 
@@ -5618,7 +5618,7 @@ def tuplet_bracket_down(
         grob="TupletBracket",
         selector=selector,
         tags=[_scoping.site(_frame())],
-        value=abjad.Down,
+        value=abjad.DOWN,
     )
 
 
@@ -5943,7 +5943,7 @@ def tuplet_bracket_up(
         grob="TupletBracket",
         selector=selector,
         tags=[_scoping.site(_frame())],
-        value=abjad.Up,
+        value=abjad.UP,
     )
 
 

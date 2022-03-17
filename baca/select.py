@@ -21,7 +21,7 @@ def chead(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Chord:
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -102,7 +102,7 @@ def cheads(argument, *, exclude: abjad.Strings = None) -> list[abjad.Chord]:
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -202,7 +202,7 @@ def clparts(
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -379,7 +379,7 @@ def enchain(argument, counts: typing.Sequence[int]) -> list[list]:
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -395,9 +395,9 @@ def enchain(argument, counts: typing.Sequence[int]) -> list[list]:
 
         >>> for i, selection in enumerate(result):
         ...     if i % 2 == 0:
-        ...         color, direction = "#red", abjad.Up
+        ...         color, direction = "#red", abjad.UP
         ...     else:
-        ...         color, direction = "#blue", abjad.Down
+        ...         color, direction = "#blue", abjad.DOWN
         ...     string = rf'\markup {{ \bold \with-color {color} * }}'
         ...     for leaf in selection:
         ...         markup = abjad.Markup(string)
@@ -733,7 +733,7 @@ def lleaf(
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -875,7 +875,7 @@ def lleaves(
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -976,7 +976,7 @@ def lparts(
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1072,7 +1072,7 @@ def lt(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.LogicalTie:
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1154,7 +1154,7 @@ def ltleaf(argument, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1234,7 +1234,7 @@ def ltleaves(argument, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]:
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1327,7 +1327,7 @@ def ltleaves(argument, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]:
             }
 
     """
-    items = abjad.select.leaves(argument, exclude=exclude, trim=abjad.Left)
+    items = abjad.select.leaves(argument, exclude=exclude, trim=abjad.LEFT)
     return items
 
 
@@ -1351,7 +1351,7 @@ def ltqrun(
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1433,7 +1433,7 @@ def ltqruns(argument, *, exclude: abjad.Strings = None) -> list[list[abjad.Logic
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1541,7 +1541,7 @@ def ltrun(argument, n: int, *, exclude: abjad.Strings = None) -> list[abjad.Logi
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1626,7 +1626,7 @@ def ltruns(argument, *, exclude: abjad.Strings = None) -> list[list[abjad.Logica
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1729,7 +1729,7 @@ def lts(
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2128,7 +2128,7 @@ def ntrun(argument, n: int, *, exclude: abjad.Strings = None) -> list[abjad.Leaf
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2213,7 +2213,7 @@ def ntruns(argument, *, exclude: abjad.Strings = None) -> list[list[abjad.Leaf]]
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2404,7 +2404,7 @@ def phead(
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2487,7 +2487,7 @@ def pheads(
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2595,7 +2595,7 @@ def pleaf(
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2680,7 +2680,7 @@ def pleaves(
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2794,7 +2794,7 @@ def plt(
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2878,7 +2878,7 @@ def plts(
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2990,7 +2990,7 @@ def ptail(
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3073,7 +3073,7 @@ def ptails(
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3180,7 +3180,7 @@ def ptlt(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.LogicalTie
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3261,7 +3261,7 @@ def ptlts(argument, *, exclude: abjad.Strings = None) -> list[abjad.LogicalTie]:
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3362,7 +3362,7 @@ def qrun(argument, n: int, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3444,7 +3444,7 @@ def qruns(argument, *, exclude: abjad.Strings = None) -> list[list[abjad.Leaf]]:
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3550,7 +3550,7 @@ def rleaf(argument, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3692,7 +3692,7 @@ def rleaves(
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3856,7 +3856,7 @@ def rrun(argument, n: int, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3942,7 +3942,7 @@ def rruns(argument, *, exclude: abjad.Strings = None) -> list[list[abjad.Leaf]]:
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4154,7 +4154,7 @@ def tleaf(
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4237,7 +4237,7 @@ def tleaves(
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4353,7 +4353,7 @@ def wleaf(argument, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4427,7 +4427,7 @@ def wleaf(argument, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4509,7 +4509,7 @@ def wleaves(argument, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]:
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> staff = lilypond_file["Staff"]
         >>> abjad.setting(staff).autoBeaming = False
-        >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+        >>> abjad.override(staff).TupletBracket.direction = abjad.UP
         >>> abjad.override(staff).TupletBracket.staff_padding = 3
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
