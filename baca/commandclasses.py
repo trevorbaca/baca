@@ -4593,7 +4593,7 @@ class StaffPositionCommand(_scoping.Command):
                     plt = new_lt
             else:
                 position = abjad.StaffPosition(number)
-                pitch = position.to_pitch(clef)
+                pitch = clef.to_pitch(position)
                 new_lt = _set_lt_pitch(
                     plt,
                     pitch,
@@ -4669,10 +4669,7 @@ class StaffPositionInterpolationCommand(_scoping.Command):
         else:
             start_phead = plts[0].head
             clef = abjad.get.effective(start_phead, abjad.Clef)
-            start_staff_position = abjad.StaffPosition.from_pitch_and_clef(
-                self.start,
-                clef,
-            )
+            start_staff_position = clef.to_staff_position(self.start)
         if isinstance(self.stop, abjad.StaffPosition):
             stop_staff_position = self.stop
         else:
@@ -4682,10 +4679,7 @@ class StaffPositionInterpolationCommand(_scoping.Command):
                 abjad.Clef,
                 default=abjad.Clef("treble"),
             )
-            stop_staff_position = abjad.StaffPosition.from_pitch_and_clef(
-                self.stop,
-                clef,
-            )
+            stop_staff_position = clef.to_staff_position(self.stop)
         unit_distance = abjad.Fraction(
             stop_staff_position.number - start_staff_position.number, count - 1
         )
@@ -4698,7 +4692,7 @@ class StaffPositionInterpolationCommand(_scoping.Command):
                 abjad.Clef,
                 default=abjad.Clef("treble"),
             )
-            pitch = staff_position.to_pitch(clef)
+            pitch = clef.to_pitch(staff_position)
             new_lt = _set_lt_pitch(plt, pitch, allow_repitch=True, mock=self.mock)
             assert new_lt is None, repr(new_lt)
             for leaf in plt:
@@ -4714,7 +4708,7 @@ class StaffPositionInterpolationCommand(_scoping.Command):
                 abjad.Clef,
                 default=abjad.Clef("treble"),
             )
-            start_pitch = self.start.to_pitch(clef)
+            start_pitch = clef.to_pitch(self.start)
         new_lt = _set_lt_pitch(plts[0], start_pitch, allow_repitch=True, mock=self.mock)
         assert new_lt is None, repr(new_lt)
         if isinstance(self.stop, abjad.NamedPitch):
@@ -4726,7 +4720,7 @@ class StaffPositionInterpolationCommand(_scoping.Command):
                 abjad.Clef,
                 default=abjad.Clef("treble"),
             )
-            stop_pitch = self.stop.to_pitch(clef=clef)
+            stop_pitch = clef.to_pitch(self.stop)
         new_lt = _set_lt_pitch(plts[-1], stop_pitch, allow_repitch=True, mock=self.mock)
         assert new_lt is None, repr(new_lt)
 
@@ -5524,8 +5518,8 @@ def interpolate_pitches(
 
 
 def interpolate_staff_positions(
-    start: int | float | abjad.StaffPosition,
-    stop: int | float | abjad.StaffPosition,
+    start: int | abjad.StaffPosition,
+    stop: int | abjad.StaffPosition,
     selector=_selectors.plts(exclude=_const.HIDDEN),
     *,
     mock: bool = False,

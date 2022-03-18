@@ -1135,10 +1135,7 @@ def _clean_up_laissez_vibrer_tie_direction(score):
         if not abjad.get.has_indicator(note, abjad.LaissezVibrer):
             continue
         clef = abjad.get.effective(note, abjad.Clef, default=default)
-        staff_position = abjad.StaffPosition.from_pitch_and_clef(
-            note.written_pitch,
-            clef,
-        )
+        staff_position = clef.to_staff_position(note.written_pitch)
         if staff_position == abjad.StaffPosition(0):
             abjad.override(note).laissez_vibrer_tie.direction = abjad.UP
 
@@ -1163,9 +1160,7 @@ def _clean_up_repeat_tie_direction(score):
         else:
             note_heads = leaf.note_heads
         for note_head in note_heads:
-            staff_position = abjad.StaffPosition.from_pitch_and_clef(
-                note_head.written_pitch, clef
-            )
+            staff_position = clef.to_staff_position(note_head.written_pitch)
             if staff_position.number == 0:
                 repeat_tie = abjad.get.indicator(leaf, abjad.RepeatTie)
                 abjad.tweak(repeat_tie).direction = abjad.UP
