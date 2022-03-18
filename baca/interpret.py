@@ -432,9 +432,9 @@ def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
         if metronome_mark is not None:
             if metric_modulation is not None:
                 if metronome_mark.custom_markup is not None:
-                    left_text = str(metronome_mark._get_markup())
+                    left_text = metronome_mark._get_markup().string
                     left_text = left_text.removeprefix(r"\markup").strip()
-                    modulation = str(metric_modulation._get_markup())
+                    modulation = metric_modulation._get_markup().string
                     modulation = modulation.removeprefix(r"\markup").strip()
                     string = rf"\concat {{ {left_text} \hspace #2 \upright ["
                     string += rf" \line {{ {modulation} }} \hspace #0.5"
@@ -480,11 +480,11 @@ def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
                 left_text += f' {log} {dots} {stem} "{value}"'
         elif accelerando is not None:
             left_text = accelerando._get_markup()
-            string = str(left_text).removeprefix(r"\markup").strip()
+            string = left_text.string.removeprefix(r"\markup").strip()
             left_text = abjad.Markup(string)
         elif ritardando is not None:
             left_text = ritardando._get_markup()
-            string = str(left_text).removeprefix(r"\markup").strip()
+            string = left_text.string.removeprefix(r"\markup").strip()
             left_text = abjad.Markup(string)
         if has_trend:
             style = "dashed-line-with-arrow"

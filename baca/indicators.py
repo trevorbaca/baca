@@ -120,7 +120,7 @@ class Accelerando:
             \markup \bold \italic accelerando
 
         """
-        return str(self._get_markup())
+        return self._get_markup().string
 
     @property
     def _contents_repr_string(self):
@@ -431,7 +431,7 @@ class Ritardando:
             \markup \bold \italic ritardando
 
         """
-        return str(self._get_markup())
+        return self._get_markup().string
 
     @property
     def _contents_repr_string(self):
