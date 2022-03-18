@@ -88,7 +88,6 @@ class Accelerando:
     markup: abjad.Markup | None = None
     tweaks: abjad.TweakInterface | None = None
 
-    _is_dataclass: typing.ClassVar[bool] = True
     context: typing.ClassVar[str] = "Score"
     directed: typing.ClassVar[bool] = True
     parameter: typing.ClassVar[str] = "METRONOME_MARK"
@@ -401,7 +400,6 @@ class Ritardando:
     markup: abjad.Markup | None = None
     tweaks: abjad.TweakInterface | None = None
 
-    _is_dataclass: typing.ClassVar[bool] = True
     context: typing.ClassVar[str] = "Score"
     parameter: typing.ClassVar[str] = "METRONOME_MARK"
     persistent: typing.ClassVar[bool] = True
