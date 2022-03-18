@@ -1018,7 +1018,7 @@ class PitchArrayCell:
         Gets interpreter representation of pitch array cell.
         """
         if self.pitches:
-            pitches = " ".join([str(_) for _ in self.pitches or []])
+            pitches = " ".join([_.name for _ in self.pitches or []])
             return f'PitchArrayCell(pitches="{pitches}", width={self.width})'
         else:
             return f"PitchArrayCell(width={self.width})"
@@ -1084,7 +1084,7 @@ class PitchArrayCell:
     @property
     def _pitch_string(self):
         if self.pitches:
-            return " ".join([str(pitch) for pitch in self.pitches])
+            return " ".join([pitch.name for pitch in self.pitches])
         else:
             return ""
 
@@ -1354,24 +1354,24 @@ class PitchArrayCell:
         elif len(self.pitches) == 1:
             if self.width == 1:
                 return (
-                    str(self.pitches[0].pitch_class),
+                    self.pitches[0].pitch_class.name,
                     self.pitches[0].octave.number,
                 )
             else:
                 return (
-                    (str(self.pitches[0].pitch_class), self.pitches[0].octave.number),
+                    (self.pitches[0].pitch_class.name, self.pitches[0].octave.number),
                     self.width,
                 )
         else:
             if self.width == 1:
                 return [
-                    (str(pitch.pitch_class), pitch.octave.number)
+                    (pitch.pitch_class.name, pitch.octave.number)
                     for pitch in self.pitches
                 ]
             else:
                 return (
                     [
-                        (str(pitch.pitch_class), pitch.octave.number)
+                        (pitch.pitch_class.name, pitch.octave.number)
                         for pitch in self.pitches
                     ],
                     self.width,
