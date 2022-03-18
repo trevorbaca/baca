@@ -315,7 +315,7 @@ def treat_persistent_wrapper(manifests, wrapper, status):
             "_treat_persistent_wrapper(1)",
         ]
         words.extend(existing_tag.editions())
-        words = [str(_) for _ in words]
+        words = [_ if isinstance(_, str) else _.string for _ in words]
         string = ":".join(words)
         tag_ = abjad.Tag(string)
         string = f"#(x11-color '{color})"
@@ -716,7 +716,7 @@ class Command:
         Gets tag.
         """
         # TODO: replace self.get_tag() functionality
-        words = [str(_) for _ in self.tags]
+        words = [_ if isinstance(_, str) else _.string for _ in self.tags]
         string = ":".join(words)
         tag = abjad.Tag(string)
         assert isinstance(tag, abjad.Tag)
@@ -737,7 +737,7 @@ class Command:
                 tag = abjad.Tag(f"MEASURE_{measure_number}")
                 tags.append(tag)
         if tags:
-            words = [str(_) for _ in tags]
+            words = [_.string for _ in tags]
             string = ":".join(words)
             tag = abjad.Tag(string)
             return tag

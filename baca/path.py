@@ -85,7 +85,10 @@ def activate(
             count += count_
             skipped += skipped_
     if name is None:
-        name = str(tag)
+        if isinstance(tag, abjad.Tag):
+            name = tag.string
+        else:
+            name = str(tag)
     if undo:
         adjective = "inactive"
         gerund = "deactivating"
@@ -233,7 +236,7 @@ def extern(
                 dereference = indent + rf"{{ \{name} }}"
                 first_line = finished_variables[name][0]
                 # these 4 lines can be removed after right-side tags:
-                if str(_tags.NOT_TOPMOST) in first_line:
+                if _tags.NOT_TOPMOST.string in first_line:
                     tag_ = tag.append(_tags.NOT_TOPMOST)
                 else:
                     tag_ = tag
@@ -299,7 +302,7 @@ def extern(
             lines.append(variable_line)
         not_topmost_index = None
         for j, line in enumerate(reversed(lines)):
-            if line == f"%! {str(_tags.NOT_TOPMOST)}\n":
+            if line == f"%! {_tags.NOT_TOPMOST.string}\n":
                 not_topmost_index = j
                 break
             if line.isspace():

@@ -509,14 +509,14 @@ def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
         )
         if not tag:
             continue
-        assert "METRONOME_MARK" in str(tag), repr(tag)
+        assert "METRONOME_MARK" in tag.string, repr(tag)
         if (
             isinstance(wrapper.indicator, abjad.MetronomeMark)
             and has_trend
-            and "EXPLICIT" not in str(tag)
+            and "EXPLICIT" not in tag.string
         ):
             words = []
-            for word in str(tag).split(":"):
+            for word in tag.string.split(":"):
                 if "METRONOME_MARK" in word:
                     word = word.replace("DEFAULT", "EXPLICIT")
                     word = word.replace("REAPPLIED", "EXPLICIT")
@@ -579,7 +579,7 @@ def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
                     _tags.METRIC_MODULATION_IS_STRIPPED,
                 ),
             )
-        string = str(tag)
+        string = tag.string
         if "DEFAULT" in string:
             status = "default"
         elif "EXPLICIT" in string:
@@ -620,14 +620,14 @@ def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
         if right_text:
             wrapper = abjad.get.wrapper(skips[-1], abjad.MetronomeMark)
             tag = wrapper.tag
-            string = str(tag)
+            string = tag.string
             if "DEFAULT" in string:
                 status = "default"
             elif "EXPLICIT" in string:
                 status = "explicit"
-            elif "REAPPLIED" in str(tag):
+            elif "REAPPLIED" in tag.string:
                 status = "reapplied"
-            elif "REDUNDANT" in str(tag):
+            elif "REDUNDANT" in tag.string:
                 status = "redundant"
             else:
                 status = None
@@ -1349,7 +1349,7 @@ def _collect_persistent_indicators(
                 raise Exception(f"can not find in manifest:\n\n  {indicator}")
             editions = wrapper.tag.editions()
             if editions:
-                words = [str(_) for _ in editions]
+                words = [_.string for _ in editions]
                 string = ":".join(words)
                 editions = abjad.Tag(string)
             else:
@@ -2479,8 +2479,8 @@ def _reanalyze_reapplied_synthetic_wrappers(score):
                 continue
             if 0 <= wrapper.synthetic_offset:
                 continue
-            if "REAPPLIED" in str(wrapper.tag):
-                string = str(wrapper.tag)
+            if "REAPPLIED" in wrapper.tag.string:
+                string = wrapper.tag.string
                 string = string.replace("REAPPLIED", "EXPLICIT")
                 tag_ = abjad.Tag(string).append(site)
                 wrapper._tag = tag_

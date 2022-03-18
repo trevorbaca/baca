@@ -92,7 +92,7 @@ def _externalize_music_ly(music_ly):
     not_topmost = baca.jobs.Job(
         deactivate=(baca.tags.NOT_TOPMOST, "not topmost"),
         path=music_ly.parent,
-        title=f"Deactivating {str(baca.tags.NOT_TOPMOST)} ...",
+        title=f"Deactivating {baca.tags.NOT_TOPMOST.string} ...",
     )
     messages = not_topmost()
     if messages:

@@ -375,7 +375,7 @@ def handle_edition_tags(path):
         if not_this_directory in tags:
             return True
         for tag in tags:
-            if str(tag).startswith("+"):
+            if tag.string.startswith("+"):
                 return True
         return False
 
@@ -384,7 +384,7 @@ def handle_edition_tags(path):
             if tag in [not_this_edition, not_this_directory]:
                 return False
         for tag in tags:
-            if str(tag).startswith("-"):
+            if tag.string.startswith("-"):
                 return True
         return bool(set(tags) & set([this_edition, this_directory]))
 
@@ -598,9 +598,10 @@ def show_tag(
     """
     if isinstance(tag, str):
         assert match is not None, repr(match)
+        name = tag
     else:
         assert isinstance(tag, abjad.Tag), repr(tag)
-    name = str(tag)
+        name = tag.string
 
     if match is None:
 
