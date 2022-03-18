@@ -34,7 +34,8 @@ class Memento:
         self._context = context
         edition_ = None
         if edition is not None:
-            edition_ = abjad.Tag(edition)
+            assert isinstance(edition, abjad.Tag), repr(edition)
+            edition_ = edition
         self._edition = edition_
         if manifest is not None:
             assert isinstance(manifest, str), repr(manifest)

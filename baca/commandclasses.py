@@ -1184,8 +1184,8 @@ class AccidentalAdjustmentCommand(_scoping.Command):
                         alternative.is_parenthesized = True
                     note_head.alternative = (
                         alternative,
-                        str(alternative_tag),
-                        str(primary_tag),
+                        alternative_tag,
+                        primary_tag,
                     )
 
 

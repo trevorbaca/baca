@@ -145,6 +145,8 @@ def _indicator_to_key(indicator, manifests):
         key = _get_key(manifests["abjad.MetronomeMark"], indicator)
     elif isinstance(indicator, abjad.MarginMarkup):
         key = _get_key(manifests["abjad.MarginMarkup"], indicator)
+    elif isinstance(indicator, abjad.TimeSignature):
+        key = f"{indicator.numerator}/{indicator.denominator}"
     elif isinstance(indicator, _memento.PersistentOverride):
         key = indicator
     elif isinstance(indicator, _indicators.BarExtent):
@@ -526,7 +528,8 @@ def remove_reapplied_wrappers(leaf, indicator):
         if not wrapper.tag:
             continue
         is_reapplied_wrapper = False
-        for word in abjad.Tag(wrapper.tag):
+        assert isinstance(wrapper.tag, abjad.Tag)
+        for word in wrapper.tag:
             if f"REAPPLIED_{stem}" in word or f"DEFAULT_{stem}" in word:
                 is_reapplied_wrapper = True
         if not is_reapplied_wrapper:
@@ -1295,8 +1298,8 @@ def tag(
             tags.sort()
         except TypeError:
             pass
-        tags_ = [abjad.Tag(_) for _ in tags]
-        command.tags.extend(tags_)
+        assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
+        command.tags.extend(tags)
         command.deactivate = deactivate
         command.tag_measure_number = tag_measure_number
     return command

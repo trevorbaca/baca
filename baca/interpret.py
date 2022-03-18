@@ -2504,7 +2504,8 @@ def _remove_redundant_time_signatures(append_phantom_measure, global_skips):
         skips = skips[:-1]
     for skip in skips:
         time_signature = abjad.get.indicator(skip, abjad.TimeSignature)
-        cached_time_signatures.append(str(time_signature))
+        string = f"{time_signature.numerator}/{time_signature.denominator}"
+        cached_time_signatures.append(string)
         if time_signature == previous_time_signature:
             abjad.detach(time_signature, skip)
         else:
@@ -3320,7 +3321,6 @@ def interpreter(
         )
         if append_phantom_measure:
             _style_phantom_measures(score)
-    # _print_timing("Cleanup", timer, print_timing=print_timing)
     dummy_container[:] = []
     return metadata, persist
 
