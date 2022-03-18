@@ -601,3 +601,125 @@ def repeat_subruns_to_length(notes, pairs, history=False):
             total.extend(new_notes)
         notes[index:index] = total
     return notes
+
+
+def list_related_tempos(
+    metronome_mark,
+    maximum_numerator=None,
+    maximum_denominator=None,
+    integer_tempos_only=False,
+) -> list[tuple[abjad.MetronomeMark, abjad.Ratio]]:
+    r"""
+    Lists related tempos.
+
+    ..  container:: example
+
+        Rewrites tempo ``4=58`` by ratios ``n:d`` such that ``1 <= n <= 8`` and ``1 <= d
+        <= 8``.
+
+        >>> pairs = baca.math.list_related_tempos(
+        ...     abjad.MetronomeMark((1, 4), 58),
+        ...     maximum_numerator=8,
+        ...     maximum_denominator=8,
+        ...  )
+
+        >>> for tempo, ratio in pairs:
+        ...     print(f"{tempo}:")
+        ...     print(f"    {ratio!r}")
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(29, 1), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(1, 2))
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(232, 7), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(4, 7))
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(174, 5), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(3, 5))
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(145, 4), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(5, 8))
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(116, 3), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(2, 3))
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(290, 7), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(5, 7))
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(87, 2), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(3, 4))
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(232, 5), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(4, 5))
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(145, 3), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(5, 6))
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(348, 7), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(6, 7))
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(203, 4), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(7, 8))
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(58, 1), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(1, 1))
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(464, 7), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(8, 7))
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(203, 3), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(7, 6))
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(348, 5), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(6, 5))
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(145, 2), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(5, 4))
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(232, 3), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(4, 3))
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(406, 5), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(7, 5))
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(87, 1), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(3, 2))
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(464, 5), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(8, 5))
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(290, 3), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(5, 3))
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(203, 2), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(7, 4))
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(116, 1), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(2, 1))
+
+    ..  container:: example
+
+        Integer-valued tempos only:
+
+        >>> pairs = baca.math.list_related_tempos(
+        ...     abjad.MetronomeMark((1, 4), 58),
+        ...     maximum_numerator=16,
+        ...     maximum_denominator=16,
+        ...     integer_tempos_only=True,
+        ...  )
+
+        >>> for tempo, ratio in pairs:
+        ...     print(f"{tempo}:")
+        ...     print(f"    {ratio!r}")
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(29, 1), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(1, 2))
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(58, 1), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(1, 1))
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(87, 1), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(3, 2))
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(116, 1), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+            Ratio(numbers=(2, 1))
+
+    Constrains ratios such that ``1:2 <= n:d <= 2:1``.
+    """
+    allowable_numerators = range(1, maximum_numerator + 1)
+    allowable_denominators = range(1, maximum_denominator + 1)
+    numbers = [allowable_numerators, allowable_denominators]
+    pairs = abjad.enumerate.outer_product(numbers)
+    multipliers = [abjad.Multiplier(_) for _ in pairs]
+    multipliers = [
+        _ for _ in multipliers if abjad.Fraction(1, 2) <= _ <= abjad.Fraction(2)
+    ]
+    multipliers.sort()
+    multipliers_ = abjad.sequence.remove_repeats(multipliers)
+    pairs = []
+    for multiplier in multipliers_:
+        new_units_per_minute = multiplier * metronome_mark.units_per_minute
+        if integer_tempos_only and not abjad.math.is_integer_equivalent_number(
+            new_units_per_minute
+        ):
+            continue
+        metronome_mark_ = abjad.MetronomeMark(
+            reference_duration=metronome_mark.reference_duration,
+            units_per_minute=new_units_per_minute,
+        )
+        ratio = abjad.Ratio(multiplier.pair)
+        pair = (metronome_mark_, ratio)
+        pairs.append(pair)
+    return pairs
