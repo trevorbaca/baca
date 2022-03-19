@@ -29,7 +29,7 @@ def _also_untagged(segment_directory):
                 if "%@%" not in line:
                     lines.append(line)
         string = "".join(lines)
-        string = abjad.format.remove_tags(string)
+        string = abjad.tag.remove_tags(string)
         parts = []
         for part in tagged.parts:
             if part == os.path.sep:
@@ -177,7 +177,7 @@ def _get_previous_metadata(segment_directory):
 
 def _handle_music_ly_tags_in_section(music_ly):
     text = music_ly.read_text()
-    text = abjad.format.left_shift_tags(text)
+    text = abjad.tag.left_shift_tags(text)
     music_ly.write_text(text)
     for job in (
         baca.jobs.handle_edition_tags(music_ly),
@@ -1139,7 +1139,7 @@ def make_layout_ly(
         text = abjad.lilypond(score, tags=tags)
     text = text.replace("Global_Skips", "Page_Layout")
     text = text.replace("Global.Skips", "Page.Layout")
-    text = abjad.format.left_shift_tags(text)
+    text = abjad.tag.left_shift_tags(text)
     layout_ly = layout_directory / file_name
     lines = []
     # TODO: remove first_page_number embedding
