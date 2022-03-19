@@ -137,7 +137,7 @@ class Accelerando:
         bundle = abjad.LilyPondFormatBundle()
         if not self.hide:
             if self.tweaks:
-                tweaks = self.tweaks._list_format_contributions()
+                tweaks = self.tweaks._list_contributions()
                 bundle.after.markup.extend(tweaks)
             markup = self._get_markup()
             markup_format_pieces = markup._get_format_pieces(wrapper=wrapper)
@@ -448,7 +448,7 @@ class Ritardando:
         bundle = abjad.LilyPondFormatBundle()
         if not self.hide:
             if self.tweaks:
-                tweaks = self.tweaks._list_format_contributions()
+                tweaks = self.tweaks._list_contributions()
                 bundle.after.markup.extend(tweaks)
             markup = self._get_markup()
             markup = dataclasses.replace(markup)
