@@ -88,16 +88,16 @@ class OverrideCommand(_scoping.Command):
         string = abjad.overrides.make_lilypond_override_string(
             grob, attribute, value, context=lilypond_type, once=once
         )
-        format_slot = "before"
+        site = "before"
         if self.after is True:
-            format_slot = "after"
-        literal = abjad.LilyPondLiteral(string, format_slot)
+            site = "after"
+        literal = abjad.LilyPondLiteral(string, site)
         tag = self.get_tag(leaves[0])
-        site = _scoping.site(_frame(), self, n=1)
+        function_name = _scoping.function_name(_frame(), self, n=1)
         if tag:
-            tag = tag.append(site)
+            tag = tag.append(function_name)
         else:
-            tag = site
+            tag = function_name
         abjad.attach(literal, leaves[0], deactivate=self.deactivate, tag=tag)
         if once:
             return
@@ -106,11 +106,11 @@ class OverrideCommand(_scoping.Command):
         )
         literal = abjad.LilyPondLiteral(string, "after")
         tag = self.get_tag(leaves[-1])
-        site = _scoping.site(_frame(), self, n=2)
+        function_name = _scoping.function_name(_frame(), self, n=2)
         if tag:
-            tag = tag.append(site)
+            tag = tag.append(function_name)
         else:
-            tag = site
+            tag = function_name
         abjad.attach(literal, leaves[-1], deactivate=self.deactivate, tag=tag)
 
 
@@ -125,7 +125,7 @@ def accidental_extra_offset(
         attribute="extra_offset",
         grob="Accidental",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=f"#'({pair[0]} . {pair[1]})",
     )
 
@@ -141,7 +141,7 @@ def accidental_font_size(
         attribute="font_size",
         grob="Accidental",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=n,
     )
 
@@ -156,7 +156,7 @@ def accidental_stencil_false(
         attribute="stencil",
         grob="Accidental",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=False,
     )
 
@@ -172,7 +172,7 @@ def accidental_transparent(
         value=True,
         grob="Accidental",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -186,7 +186,7 @@ def accidental_x_extent_false(
         attribute="X_extent",
         grob="Accidental",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=False,
     )
 
@@ -202,7 +202,7 @@ def accidental_x_offset(
         attribute="X_offset",
         grob="Accidental",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=n,
     )
 
@@ -218,7 +218,7 @@ def accidental_y_offset(
         attribute="Y_offset",
         grob="Accidental",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=n,
     )
 
@@ -240,7 +240,7 @@ def bar_line_color(
         context=context,
         grob="BarLine",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -261,7 +261,7 @@ def bar_line_extra_offset(
         context=context,
         grob="BarLine",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -363,7 +363,7 @@ def bar_line_transparent(
         context="Score",
         grob="BarLine",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -386,7 +386,7 @@ def bar_line_x_extent(
         measures=measures,
         grob="BarLine",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -471,7 +471,7 @@ def beam_positions(
         value=f"#'({n} . {n})",
         grob="Beam",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -485,7 +485,7 @@ def beam_stencil_false(
         attribute="stencil",
         grob="Beam",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=False,
     )
 
@@ -501,7 +501,7 @@ def beam_transparent(
         value=True,
         grob="Beam",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -517,7 +517,7 @@ def clef_extra_offset(
         context="Staff",
         grob="Clef",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=f"#'({pair[0]} . {pair[1]})",
     )
 
@@ -541,7 +541,7 @@ def clef_shift(
     suite = _scoping.suite(
         clef_x_extent_false(), clef_extra_offset((extra_offset_x, 0))
     )
-    _scoping.tag(_scoping.site(_frame()), suite)
+    _scoping.tag(_scoping.function_name(_frame()), suite)
     _scoping.tag(_tags.SHIFTED_CLEF, suite, tag_measure_number=True)
     return suite
 
@@ -558,7 +558,7 @@ def clef_whiteout(
         context="Staff",
         grob="Clef",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=n,
     )
 
@@ -574,7 +574,7 @@ def clef_x_extent_false(
         context="Staff",
         grob="Clef",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=False,
     )
 
@@ -591,7 +591,7 @@ def dls_padding(
         value=n,
         grob="DynamicLineSpanner",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -695,7 +695,7 @@ def dls_staff_padding(
         value=n,
         grob="DynamicLineSpanner",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -798,7 +798,7 @@ def dls_up(
         value=abjad.UP,
         grob="DynamicLineSpanner",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -813,7 +813,7 @@ def dots_extra_offset(
         attribute="extra_offset",
         grob="Dots",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=f"#'({pair[0]} . {pair[1]})",
     )
 
@@ -828,7 +828,7 @@ def dots_stencil_false(
         attribute="stencil",
         grob="Dots",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=False,
     )
 
@@ -844,7 +844,7 @@ def dots_transparent(
         value=True,
         grob="Dots",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -858,7 +858,7 @@ def dots_x_extent_false(
         attribute="X_extent",
         grob="Dots",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=False,
     )
 
@@ -875,7 +875,7 @@ def dynamic_text_color(
         value=color,
         grob="DynamicText",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -984,7 +984,7 @@ def dynamic_text_extra_offset(
         value=f"#'({pair[0]} . {pair[1]})",
         grob="DynamicText",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1000,7 +1000,7 @@ def dynamic_text_parent_alignment_x(
         value=n,
         grob="DynamicText",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1016,7 +1016,7 @@ def dynamic_text_self_alignment_x(
         value=n,
         grob="DynamicText",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1031,7 +1031,7 @@ def dynamic_text_stencil_false(
         value=False,
         grob="DynamicText",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1046,7 +1046,7 @@ def dynamic_text_transparent(
         value=True,
         grob="DynamicText",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1061,7 +1061,7 @@ def dynamic_text_x_extent_zero(
         value=(0, 0),
         grob="DynamicText",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1077,7 +1077,7 @@ def dynamic_text_x_offset(
         value=n,
         grob="DynamicText",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1093,7 +1093,7 @@ def dynamic_text_y_offset(
         value=n,
         grob="DynamicText",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1108,7 +1108,7 @@ def flag_extra_offset(
         attribute="extra_offset",
         grob="Flag",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=f"#'({pair[0]} . {pair[1]})",
     )
 
@@ -1123,7 +1123,7 @@ def flag_stencil_false(
         attribute="stencil",
         grob="Flag",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=False,
     )
 
@@ -1139,7 +1139,7 @@ def flag_transparent(
         value=True,
         grob="Flag",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1155,7 +1155,7 @@ def glissando_thickness(
         value=str(n),
         grob="Glissando",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1171,7 +1171,7 @@ def hairpin_shorten_pair(
         value=f"#'({pair[0]} . {pair[1]})",
         grob="Hairpin",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1191,7 +1191,7 @@ def hairpin_start_shift(
         dynamic_text_x_extent_zero(),
         hairpin_shorten_pair((hairpin_shorten_left, 0)),
     )
-    _scoping.tag(_scoping.site(_frame()), suite)
+    _scoping.tag(_scoping.function_name(_frame()), suite)
     return suite
 
 
@@ -1206,7 +1206,7 @@ def hairpin_stencil_false(
         value=False,
         grob="Hairpin",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1221,7 +1221,7 @@ def hairpin_to_barline(
         value=True,
         grob="Hairpin",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1236,7 +1236,7 @@ def hairpin_transparent(
         value=True,
         grob="Hairpin",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1251,7 +1251,7 @@ def laissez_vibrer_tie_down(
         value=abjad.DOWN,
         grob="LaissezVibrerTie",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1266,7 +1266,7 @@ def laissez_vibrer_tie_up(
         value=abjad.UP,
         grob="LaissezVibrerTie",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1347,7 +1347,7 @@ def mmrest_color(
         value=color,
         grob="MultiMeasureRest",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         allowlist=(abjad.MultimeasureRest,),
     )
 
@@ -1363,7 +1363,7 @@ def mmrest_transparent(
         value=True,
         grob="MultiMeasureRest",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         allowlist=(abjad.MultimeasureRest,),
     )
 
@@ -1479,7 +1479,7 @@ def mmrest_text_color(
         value=color,
         grob="MultiMeasureRestText",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         allowlist=(abjad.MultimeasureRest,),
     )
 
@@ -1563,7 +1563,7 @@ def mmrest_text_extra_offset(
         value=f"#'({pair[0]} . {pair[1]})",
         grob="MultiMeasureRestText",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         allowlist=(abjad.MultimeasureRest,),
     )
 
@@ -1647,7 +1647,7 @@ def mmrest_text_padding(
         value=n,
         grob="MultiMeasureRestText",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         allowlist=(abjad.MultimeasureRest,),
     )
 
@@ -1730,7 +1730,7 @@ def mmrest_text_parent_center(
         value=0,
         grob="MultiMeasureRestText",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         allowlist=(abjad.MultimeasureRest,),
     )
 
@@ -1814,7 +1814,7 @@ def mmrest_text_staff_padding(
         value=n,
         grob="MultiMeasureRestText",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         allowlist=(abjad.MultimeasureRest,),
     )
 
@@ -1830,7 +1830,7 @@ def mmrest_text_transparent(
         value=True,
         grob="MultiMeasureRestText",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         allowlist=(abjad.MultimeasureRest,),
     )
 
@@ -1846,7 +1846,7 @@ def no_ledgers(
         value=True,
         grob="NoteHead",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1862,7 +1862,7 @@ def note_column_shift(
         value=n,
         grob="NoteColumn",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1877,7 +1877,7 @@ def note_head_color(
         attribute="color",
         grob="NoteHead",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=color,
     )
 
@@ -1893,7 +1893,7 @@ def note_head_duration_log(
         attribute="duration_log",
         grob="NoteHead",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=n,
     )
 
@@ -1909,7 +1909,7 @@ def note_head_extra_offset(
         attribute="extra_offset",
         grob="NoteHead",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=f"#'({pair[0]} . {pair[1]})",
     )
 
@@ -1925,7 +1925,7 @@ def note_head_font_size(
         attribute="font_size",
         grob="NoteHead",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=n,
     )
 
@@ -1941,7 +1941,7 @@ def note_head_no_ledgers(
         attribute="no_ledgers",
         grob="NoteHead",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=value,
     )
 
@@ -1956,7 +1956,7 @@ def note_head_stencil_false(
         attribute="stencil",
         grob="NoteHead",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=False,
     )
 
@@ -1972,7 +1972,7 @@ def note_head_style(
         attribute="style",
         grob="NoteHead",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=string,
     )
 
@@ -2061,7 +2061,7 @@ def note_head_style_cross(
         value="#'cross",
         grob="NoteHead",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2149,7 +2149,7 @@ def note_head_style_harmonic(
         value="#'harmonic",
         grob="NoteHead",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2164,7 +2164,7 @@ def note_head_style_harmonic_black(
         value="#'harmonic-black",
         grob="NoteHead",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2179,7 +2179,7 @@ def note_head_transparent(
         value=True,
         grob="NoteHead",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2196,7 +2196,7 @@ def note_head_x_extent_zero(
         attribute="X_extent",
         grob="NoteHead",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=(0, 0),
     )
 
@@ -2214,7 +2214,7 @@ def ottava_bracket_shorten_pair(
         value=f"#'({pair[0]} . {pair[1]})",
         grob="OttavaBracket",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2231,7 +2231,7 @@ def ottava_bracket_staff_padding(
         value=n,
         grob="OttavaBracket",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2249,7 +2249,7 @@ def rehearsal_mark_down(
         context=context,
         grob="RehearsalMark",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2268,7 +2268,7 @@ def rehearsal_mark_extra_offset(
         context=context,
         grob="RehearsalMark",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2287,7 +2287,7 @@ def rehearsal_mark_padding(
         context=context,
         grob="RehearsalMark",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2306,7 +2306,7 @@ def rehearsal_mark_self_alignment_x(
         context=context,
         grob="RehearsalMark",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2325,7 +2325,7 @@ def rehearsal_mark_y_offset(
         context=context,
         grob="RehearsalMark",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2421,7 +2421,7 @@ def repeat_tie_down(
         value=abjad.DOWN,
         grob="RepeatTie",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2436,7 +2436,7 @@ def repeat_tie_extra_offset(
         attribute="extra_offset",
         grob="RepeatTie",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=f"#'({pair[0]} . {pair[1]})",
     )
 
@@ -2451,7 +2451,7 @@ def repeat_tie_stencil_false(
         attribute="stencil",
         grob="RepeatTie",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=False,
     )
 
@@ -2467,7 +2467,7 @@ def repeat_tie_transparent(
         value=True,
         grob="RepeatTie",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2565,7 +2565,7 @@ def repeat_tie_up(
         value=abjad.UP,
         grob="RepeatTie",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2581,7 +2581,7 @@ def rest_color(
         value=color,
         grob="Rest",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2669,7 +2669,7 @@ def rest_down(
         value=abjad.DOWN,
         grob="Rest",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2689,7 +2689,7 @@ def rest_extra_offset(
         value=f"#'({pair[0]} . {pair[1]})",
         grob="Rest",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2778,7 +2778,7 @@ def rest_position(
         value=n,
         grob="Rest",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2866,7 +2866,7 @@ def rest_transparent(
         value=True,
         grob="Rest",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2954,7 +2954,7 @@ def rest_up(
         value=abjad.UP,
         grob="Rest",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2972,7 +2972,7 @@ def rest_x_extent_zero(
         attribute="X_extent",
         grob="Rest",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=(0, 0),
     )
 
@@ -3072,7 +3072,7 @@ def script_color(
         value=color,
         grob="Script",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -3170,7 +3170,7 @@ def script_down(
         value=abjad.DOWN,
         grob="Script",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -3268,7 +3268,7 @@ def script_extra_offset(
         value=f"#'({pair[0]} . {pair[1]})",
         grob="Script",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -3284,7 +3284,7 @@ def script_padding(
         value=number,
         grob="Script",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -3300,7 +3300,7 @@ def script_staff_padding(
         value=n,
         grob="Script",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -3398,7 +3398,7 @@ def script_up(
         value=abjad.UP,
         grob="Script",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -3413,7 +3413,7 @@ def script_x_extent_zero(
         value=(0, 0),
         grob="Script",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -3512,7 +3512,7 @@ def slur_down(
         value=abjad.DOWN,
         grob="Slur",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -3617,7 +3617,7 @@ def slur_up(
         value=abjad.UP,
         grob="Slur",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -3638,7 +3638,7 @@ def span_bar_color(
         context=context,
         grob="SpanBar",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -3659,7 +3659,7 @@ def span_bar_extra_offset(
         context=context,
         grob="SpanBar",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -3675,7 +3675,7 @@ def span_bar_transparent(
         context="Score",
         grob="SpanBar",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -3767,7 +3767,7 @@ def stem_color(
         context=context,
         grob="Stem",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -3855,7 +3855,7 @@ def stem_down(
         value=abjad.DOWN,
         grob="Stem",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -3870,7 +3870,7 @@ def stem_extra_offset(
         attribute="extra_offset",
         grob="Stem",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=f"#'({pair[0]} . {pair[1]})",
     )
 
@@ -3885,7 +3885,7 @@ def stem_stencil_false(
         attribute="stencil",
         grob="Stem",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=False,
     )
 
@@ -3901,7 +3901,7 @@ def stem_transparent(
         value=True,
         grob="Stem",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -3916,7 +3916,7 @@ def stem_tremolo_extra_offset(
         attribute="extra_offset",
         grob="StemTremolo",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=f"#'({pair[0]} . {pair[1]})",
     )
 
@@ -4005,7 +4005,7 @@ def stem_up(
         value=abjad.UP,
         grob="Stem",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -4021,7 +4021,7 @@ def strict_note_spacing_off(
         context="Score",
         grob="SpacingSpanner",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -4123,7 +4123,7 @@ def sustain_pedal_staff_padding(
         context=context,
         grob="SustainPedalLineSpanner",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -4258,7 +4258,7 @@ def text_script_color(
         value=color,
         grob="TextScript",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -4392,7 +4392,7 @@ def text_script_down(
         value=abjad.DOWN,
         grob="TextScript",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -4444,7 +4444,7 @@ def text_script_extra_offset(
         value=f"#'({pair[0]} . {pair[1]})",
         grob="TextScript",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -4466,7 +4466,7 @@ def text_script_font_size(
         value=n,
         grob="TextScript",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -4601,7 +4601,7 @@ def text_script_padding(
         value=n,
         grob="TextScript",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -4622,7 +4622,7 @@ def text_script_parent_alignment_x(
         blocklist=tuple(blocklist),
         grob="TextScript",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=n,
     )
 
@@ -4644,7 +4644,7 @@ def text_script_self_alignment_x(
         blocklist=tuple(blocklist),
         grob="TextScript",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=n,
     )
 
@@ -4780,7 +4780,7 @@ def text_script_staff_padding(
         value=n,
         grob="TextScript",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -4913,7 +4913,7 @@ def text_script_up(
         blocklist=tuple(blocklist),
         grob="TextScript",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=abjad.UP,
     )
 
@@ -4935,7 +4935,7 @@ def text_script_x_offset(
         blocklist=tuple(blocklist),
         grob="TextScript",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=n,
     )
 
@@ -4957,7 +4957,7 @@ def text_script_y_offset(
         blocklist=tuple(blocklist),
         grob="TextScript",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=n,
     )
 
@@ -4973,7 +4973,7 @@ def text_spanner_left_padding(
         attribute="bound_details__left__padding",
         grob="TextSpanner",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=n,
     )
 
@@ -4989,7 +4989,7 @@ def text_spanner_right_padding(
         attribute="bound_details__right__padding",
         grob="TextSpanner",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=n,
     )
 
@@ -5095,7 +5095,7 @@ def text_spanner_staff_padding(
         value=n,
         grob="TextSpanner",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -5109,7 +5109,7 @@ def text_spanner_stencil_false(
         attribute="stencil",
         grob="TextSpanner",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=False,
     )
 
@@ -5124,7 +5124,7 @@ def text_spanner_transparent(
         attribute="transparent",
         grob="TextSpanner",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=True,
     )
 
@@ -5140,7 +5140,7 @@ def text_spanner_y_offset(
         attribute="Y_offset",
         grob="TextSpanner",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=n,
     )
 
@@ -5231,7 +5231,7 @@ def tie_down(
         attribute="direction",
         grob="Tie",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=abjad.DOWN,
     )
 
@@ -5318,7 +5318,7 @@ def tie_up(
         attribute="direction",
         grob="Tie",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=abjad.UP,
     )
 
@@ -5408,7 +5408,7 @@ def time_signature_extra_offset(
         context="Score",
         grob="TimeSignature",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=f"#'({pair[0]} . {pair[1]})",
     )
 
@@ -5424,7 +5424,7 @@ def time_signature_stencil_false(
         context="Score",
         grob="TimeSignature",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=False,
     )
 
@@ -5513,7 +5513,7 @@ def time_signature_transparent(
         context="Score",
         grob="TimeSignature",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=True,
     )
 
@@ -5529,7 +5529,7 @@ def trill_spanner_staff_padding(
         attribute="staff_padding",
         grob="TrillSpanner",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=n,
     )
 
@@ -5617,7 +5617,7 @@ def tuplet_bracket_down(
         attribute="direction",
         grob="TupletBracket",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=abjad.DOWN,
     )
 
@@ -5705,7 +5705,7 @@ def tuplet_bracket_extra_offset(
         attribute="extra_offset",
         grob="TupletBracket",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=f"#'({pair[0]} . {pair[1]})",
     )
 
@@ -5721,7 +5721,7 @@ def tuplet_bracket_outside_staff_priority(
         attribute="outside_staff_priority",
         grob="TupletBracket",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=n,
     )
 
@@ -5737,7 +5737,7 @@ def tuplet_bracket_padding(
         attribute="padding",
         grob="TupletBracket",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=n,
     )
 
@@ -5753,7 +5753,7 @@ def tuplet_bracket_shorten_pair(
         attribute="shorten_pair",
         grob="TupletBracket",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=f"#'({pair[0]} . {pair[1]})",
     )
 
@@ -5839,7 +5839,7 @@ def tuplet_bracket_staff_padding(
         attribute="staff_padding",
         grob="TupletBracket",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=n,
     )
 
@@ -5854,7 +5854,7 @@ def tuplet_bracket_transparent(
         attribute="transparent",
         grob="TupletBracket",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=True,
     )
 
@@ -5942,7 +5942,7 @@ def tuplet_bracket_up(
         attribute="direction",
         grob="TupletBracket",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=abjad.UP,
     )
 
@@ -5957,7 +5957,7 @@ def tuplet_number_denominator(
         attribute="text",
         grob="TupletNumber",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value="#tuplet-number::calc-denominator-text",
     )
 
@@ -6045,7 +6045,7 @@ def tuplet_number_extra_offset(
         attribute="extra_offset",
         grob="TupletNumber",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=f"#'({pair[0]} . {pair[1]})",
     )
 
@@ -6062,7 +6062,7 @@ def tuplet_number_text(
         attribute="text",
         grob="TupletNumber",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=markup,
     )
 
@@ -6077,6 +6077,6 @@ def tuplet_number_transparent(
         attribute="transparent",
         grob="TupletNumber",
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         value=True,
     )

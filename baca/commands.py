@@ -303,7 +303,7 @@ def bcps(
         final_spanner=final_spanner,
         helper=helper,
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         tweaks=tweaks,
     )
 
@@ -311,16 +311,16 @@ def bcps(
 def close_volta(
     selector=_selectors.leaf(0),
     *,
-    format_slot: str = "before",
+    site: str = "before",
 ) -> _scoping.Suite:
     """
     Attaches bar line and overrides bar line X-extent.
     """
-    assert format_slot in ("after", "before"), repr(format_slot)
-    after = format_slot == "after"
+    assert site in ("after", "before"), repr(site)
+    after = site == "after"
     # does not require not_mol() tagging, just only_mol() tagging:
     return _scoping.suite(
-        _indicatorcommands.bar_line(":|.", selector, format_slot=format_slot),
+        _indicatorcommands.bar_line(":|.", selector, site=site),
         _scoping.only_mol(
             _overrides.bar_line_x_extent((0, 1.5), selector, after=after)
         ),
@@ -648,7 +648,7 @@ def cross_staff(*, selector=_selectors.phead(0)) -> _commandclasses.IndicatorCom
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r"\crossStaff")],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -659,7 +659,7 @@ def double_volta(
     Attaches bar line and overrides bar line X-extent.
     """
     return _scoping.suite(
-        _indicatorcommands.bar_line(":.|.:", selector, format_slot="before"),
+        _indicatorcommands.bar_line(":.|.:", selector, site="before"),
         _scoping.not_mol(_overrides.bar_line_x_extent((0, 3), selector)),
         _scoping.only_mol(_overrides.bar_line_x_extent((0, 4), selector)),
     )
@@ -752,7 +752,7 @@ def dynamic_down(*, selector=_selectors.leaf(0)) -> _commandclasses.IndicatorCom
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r"\dynamicDown")],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -843,7 +843,7 @@ def dynamic_up(*, selector=_selectors.leaf(0)) -> _commandclasses.IndicatorComma
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r"\dynamicUp")],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -962,7 +962,7 @@ def finger_pressure_transition(
         allow_repeats=True,
         right_broken=right_broken,
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         tweaks=(
             abjad.tweak(2).arrow_length,
             abjad.tweak(0.5).arrow_width,
@@ -1459,7 +1459,7 @@ def glissando(
         right_broken=right_broken,
         right_broken_show_next=right_broken_show_next,
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         tweaks=tweaks,
         zero_padding=zero_padding,
     )
@@ -1480,7 +1480,7 @@ def global_fermata(
     return _commandclasses.GlobalFermataCommand(
         description=description,
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1496,7 +1496,7 @@ def instrument(
     return _commandclasses.InstrumentChangeCommand(
         indicators=[instrument],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1578,7 +1578,7 @@ def invisible_music(
             }
 
     """
-    tag = _scoping.site(_frame(), n=1)
+    tag = _scoping.function_name(_frame(), n=1)
     tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
     command_1 = _commandclasses.IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r"\abjad-invisible-music")],
@@ -1587,7 +1587,7 @@ def invisible_music(
         selector=selector,
         tags=[tag],
     )
-    tag = _scoping.site(_frame(), n=2)
+    tag = _scoping.function_name(_frame(), n=2)
     tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
     command_2 = _commandclasses.IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r"\abjad-invisible-music-coloring")],
@@ -1894,7 +1894,7 @@ def markup(
         match=match,
         measures=measures,
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         tweaks=tweaks,
     )
 
@@ -1925,7 +1925,7 @@ def one_voice(
     return _commandclasses.IndicatorCommand(
         indicators=[literal],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1936,7 +1936,7 @@ def open_volta(
     Attaches bar line and overrides bar line X-extent.
     """
     return _scoping.suite(
-        _indicatorcommands.bar_line(".|:", selector, format_slot="before"),
+        _indicatorcommands.bar_line(".|:", selector, site="before"),
         _scoping.not_mol(_overrides.bar_line_x_extent((0, 2), selector)),
         _scoping.only_mol(_overrides.bar_line_x_extent((0, 3), selector)),
     )
@@ -1986,7 +1986,7 @@ def voice_four(
     return _commandclasses.IndicatorCommand(
         indicators=[literal],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2000,7 +2000,7 @@ def voice_one(
     return _commandclasses.IndicatorCommand(
         indicators=[literal],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2014,7 +2014,7 @@ def voice_three(
     return _commandclasses.IndicatorCommand(
         indicators=[literal],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2028,5 +2028,5 @@ def voice_two(
     return _commandclasses.IndicatorCommand(
         indicators=[literal],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )

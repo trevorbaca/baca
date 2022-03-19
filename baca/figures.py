@@ -1502,7 +1502,7 @@ class Acciaccatura:
             if 1 < len(acciaccatura_container):
                 abjad.beam(
                     acciaccatura_container[:],
-                    tag=_scoping.site(_frame(), self),
+                    tag=_scoping.function_name(_frame(), self),
                 )
             acciaccatura_containers.append(acciaccatura_container)
         assert len(acciaccatura_containers) == len(collection)
@@ -6135,7 +6135,7 @@ class FigureMaker:
         else:
             raise Exception(f"bad time treatment: {treatment!r}.")
         assert isinstance(tuplet, abjad.Tuplet)
-        tag = _scoping.site(_frame(), self)
+        tag = _scoping.function_name(_frame(), self)
         if before_grace_containers is not None:
             logical_ties = abjad.iterate.logical_ties(tuplet)
             pairs = zip(before_grace_containers, logical_ties)

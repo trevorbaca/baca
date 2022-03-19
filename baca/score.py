@@ -42,12 +42,12 @@ def attach_lilypond_tag(tag, context, *, part_manifest=None):
         if part_names and tag_ not in part_names:
             raise Exception(f"not listed in parts manifest: {tag_!r}.")
     literal = abjad.LilyPondLiteral(rf"\tag {tag}", "before")
-    tag = _scoping.site(_frame())
+    tag = _scoping.function_name(_frame())
     abjad.attach(literal, context, tag=tag)
 
 
 def make_global_context():
-    tag = _scoping.site(_frame())
+    tag = _scoping.function_name(_frame())
     global_rests = abjad.Context(
         lilypond_type="GlobalRests",
         name="Global_Rests",
@@ -70,7 +70,7 @@ def make_global_context():
 
 def make_music_context(*contexts):
     contexts = tuple(_ for _ in contexts if _ is not None)
-    tag = _scoping.site(_frame())
+    tag = _scoping.function_name(_frame())
     return abjad.Context(
         contexts,
         lilypond_type="MusicContext",
@@ -83,7 +83,7 @@ def make_music_context(*contexts):
 def make_staff_group(stem, *contexts):
     if not isinstance(stem, str):
         raise Exception(f"stem must be string: {stem!r}.")
-    tag = _scoping.site(_frame())
+    tag = _scoping.function_name(_frame())
     contexts = tuple(_ for _ in contexts if _ is not None)
     if contexts:
         return abjad.StaffGroup(contexts, name=f"{stem}_Staff_Group", tag=tag)

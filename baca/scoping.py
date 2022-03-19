@@ -89,7 +89,7 @@ def _attach_latent_indicator_alert(
     markup_function = _status_to_markup_function[status]
     string = rf'\{markup_function} "{string}"'
     markup = abjad.Markup(string)
-    tag = tag.append(site(_frame()))
+    tag = tag.append(function_name(_frame()))
     abjad.attach(
         markup, leaf, deactivate=existing_deactivate, direction=abjad.UP, tag=tag
     )
@@ -166,7 +166,7 @@ def _set_status_tag(wrapper, status, redraw=None, stem=None):
     prefix = None
     if redraw is True:
         prefix = "redrawn"
-    tag = wrapper.tag.append(site(_frame()))
+    tag = wrapper.tag.append(function_name(_frame()))
     status_tag = _get_tag(status, stem, prefix=prefix)
     tag = tag.append(status_tag)
     wrapper.tag = tag
@@ -230,7 +230,7 @@ def attach_color_literal(
         color = _status_to_color[status]
         string += f" #(x11-color '{color})"
     if redraw:
-        literal = abjad.LilyPondLiteral(string, format_slot="after")
+        literal = abjad.LilyPondLiteral(string, site="after")
     else:
         literal = abjad.LilyPondLiteral(string)
     if getattr(wrapper.indicator, "latent", False):
@@ -255,11 +255,11 @@ def attach_color_literal(
         string = rf"\baca-time-signature-color #'{color}"
         literal = abjad.LilyPondLiteral(string)
     if cancelation is True:
-        tag = site(_frame(), n=1)
+        tag = function_name(_frame(), n=1)
         tag = tag.append(status_tag)
         abjad.attach(literal, wrapper.component, deactivate=True, tag=tag)
     else:
-        tag = site(_frame(), n=2)
+        tag = function_name(_frame(), n=2)
         tag = tag.append(status_tag)
         abjad.attach(
             literal,
@@ -338,7 +338,7 @@ def treat_persistent_wrapper(manifests, wrapper, status):
         wrapper_ = abjad.attach(
             literal,
             wrapper.component,
-            tag=wrapper.tag.append(site(_frame(), n=2)),
+            tag=wrapper.tag.append(function_name(_frame(), n=2)),
             wrapper=True,
         )
         _set_status_tag(wrapper_, status, stem="CLEF")
@@ -353,12 +353,12 @@ def treat_persistent_wrapper(manifests, wrapper, status):
         indicator, "hide", False
     ):
         strings = indicator._get_lilypond_format(context=context)
-        literal = abjad.LilyPondLiteral(strings, format_slot="after")
+        literal = abjad.LilyPondLiteral(strings, site="after")
         stem = to_indicator_stem(indicator)
         wrapper_ = abjad.attach(
             literal,
             leaf,
-            tag=existing_tag.append(site(_frame(), n=3)),
+            tag=existing_tag.append(function_name(_frame(), n=3)),
             wrapper=True,
         )
         _set_status_tag(wrapper_, status, redraw=True, stem=stem)
@@ -845,6 +845,34 @@ def compare_persistent_indicators(indicator_1, indicator_2) -> bool:
     return False
 
 
+def function_name(frame, self=None, *, n=None):
+    """
+    Gets function name from ``frame``.
+    """
+    parts = []
+    path = frame.f_code.co_filename.removesuffix(".py")
+    found_library = False
+    for part in reversed(path.split(os.sep)):
+        parts.append(part)
+        if part == "baca":
+            break
+        if found_library:
+            break
+        if part == "library":
+            found_library = True
+    parts = [_ for _ in parts if _ != "library"]
+    parts.reverse()
+    if parts[0] == "baca":
+        parts.pop()
+    if isinstance(self, str):
+        parts.append(self)
+    elif self is not None:
+        parts.append(type(self).__name__)
+    parts.append(frame.f_code.co_name)
+    string = ".".join(parts) + ("()" if n is None else f"({n})")
+    return abjad.Tag(string)
+
+
 def new(*commands: CommandTyping, **keywords) -> CommandTyping:
     r"""
     Makes new ``commands`` with ``keywords``.
@@ -1196,34 +1224,6 @@ def only_segment(command: _command_typing) -> _command_typing:
     Tags ``command`` with ``+SEGMENT``.
     """
     return tag(_tags.ONLY_SEGMENT, command)
-
-
-def site(frame, self=None, *, n=None):
-    """
-    Makes site from ``frame``.
-    """
-    parts = []
-    path = frame.f_code.co_filename.removesuffix(".py")
-    found_library = False
-    for part in reversed(path.split(os.sep)):
-        parts.append(part)
-        if part == "baca":
-            break
-        if found_library:
-            break
-        if part == "library":
-            found_library = True
-    parts = [_ for _ in parts if _ != "library"]
-    parts.reverse()
-    if parts[0] == "baca":
-        parts.pop()
-    if isinstance(self, str):
-        parts.append(self)
-    elif self is not None:
-        parts.append(type(self).__name__)
-    parts.append(frame.f_code.co_name)
-    string = ".".join(parts) + ("()" if n is None else f"({n})")
-    return abjad.Tag(string)
 
 
 def suite(*commands: CommandTyping, **keywords) -> Suite:

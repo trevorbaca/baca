@@ -454,7 +454,7 @@ class BCPCommand(_scoping.Command):
                 abjad.attach(
                     stop_text_span,
                     lt.head,
-                    tag=self.tag.append(_scoping.site(_frame(), self, n=1)),
+                    tag=self.tag.append(_scoping.function_name(_frame(), self, n=1)),
                 )
                 break
             previous_leaf = abjad.get.leaf(lt.head, -1)
@@ -502,19 +502,19 @@ class BCPCommand(_scoping.Command):
                 abjad.attach(
                     start_text_span,
                     lt.head,
-                    tag=self.tag.append(_scoping.site(_frame(), self, n=2)),
+                    tag=self.tag.append(_scoping.function_name(_frame(), self, n=2)),
                 )
             if 0 < i - 1:
                 abjad.attach(
                     stop_text_span,
                     lt.head,
-                    tag=self.tag.append(_scoping.site(_frame(), self, n=3)),
+                    tag=self.tag.append(_scoping.function_name(_frame(), self, n=3)),
                 )
             if lt is lts[-1] and self.final_spanner:
                 abjad.attach(
                     stop_text_span,
                     next_leaf_after_argument,
-                    tag=self.tag.append(_scoping.site(_frame(), self, n=4)),
+                    tag=self.tag.append(_scoping.function_name(_frame(), self, n=4)),
                 )
             bcp_fraction = abjad.Fraction(*bcp)
             next_bcp_fraction = abjad.Fraction(*bcps[i])
@@ -528,7 +528,9 @@ class BCPCommand(_scoping.Command):
                     abjad.attach(
                         articulation,
                         lt.head,
-                        tag=self.tag.append(_scoping.site(_frame(), self, n=5)),
+                        tag=self.tag.append(
+                            _scoping.function_name(_frame(), self, n=5)
+                        ),
                     )
                 elif bcp_fraction < next_bcp_fraction:
                     articulation = abjad.Articulation("downbow")
@@ -537,7 +539,9 @@ class BCPCommand(_scoping.Command):
                     abjad.attach(
                         articulation,
                         lt.head,
-                        tag=self.tag.append(_scoping.site(_frame(), self, n=6)),
+                        tag=self.tag.append(
+                            _scoping.function_name(_frame(), self, n=6)
+                        ),
                     )
             else:
                 previous_bcp_fraction = abjad.Fraction(*previous_bcp)
@@ -548,7 +552,9 @@ class BCPCommand(_scoping.Command):
                     abjad.attach(
                         articulation,
                         lt.head,
-                        tag=self.tag.append(_scoping.site(_frame(), self, n=7)),
+                        tag=self.tag.append(
+                            _scoping.function_name(_frame(), self, n=7)
+                        ),
                     )
                 elif previous_bcp_fraction > bcp_fraction < next_bcp_fraction:
                     articulation = abjad.Articulation("downbow")
@@ -557,7 +563,9 @@ class BCPCommand(_scoping.Command):
                     abjad.attach(
                         articulation,
                         lt.head,
-                        tag=self.tag.append(_scoping.site(_frame(), self, n=8)),
+                        tag=self.tag.append(
+                            _scoping.function_name(_frame(), self, n=8)
+                        ),
                     )
             previous_bcp = bcp
 
@@ -819,17 +827,17 @@ class GlobalFermataCommand(_scoping.Command):
                 markup,
                 leaf,
                 direction=abjad.UP,
-                tag=self.tag.append(_scoping.site(_frame(), self, n=1)),
+                tag=self.tag.append(_scoping.function_name(_frame(), self, n=1)),
             )
             literal = abjad.LilyPondLiteral(r"\baca-fermata-measure")
             abjad.attach(
                 literal,
                 leaf,
-                tag=self.tag.append(_scoping.site(_frame(), self, n=2)),
+                tag=self.tag.append(_scoping.function_name(_frame(), self, n=2)),
             )
             tag = abjad.Tag(_const.FERMATA_MEASURE)
             tag = tag.append(self.tag)
-            tag = tag.append(_scoping.site(_frame(), self, n=3))
+            tag = tag.append(_scoping.function_name(_frame(), self, n=3))
             abjad.attach(
                 _const.FERMATA_MEASURE,
                 leaf,
@@ -907,7 +915,7 @@ class IndicatorCommand(_scoping.Command):
                     deactivate=self.deactivate,
                     direction=self.direction,
                     do_not_test=self.do_not_test,
-                    tag=self.tag.append(_scoping.site(_frame(), self)),
+                    tag=self.tag.append(_scoping.function_name(_frame(), self)),
                     wrapper=True,
                 )
                 if _scoping.compare_persistent_indicators(indicator, reapplied):
@@ -1154,7 +1162,7 @@ class AccidentalAdjustmentCommand(_scoping.Command):
         if self.tag:
             if not self.tag.only_edition() and not self.tag.not_editions():
                 raise Exception(f"tag must have edition: {self.tag!r}.")
-            tag = _scoping.site(_frame(), self)
+            tag = _scoping.function_name(_frame(), self)
             alternative_tag = self.tag.append(tag)
             primary_tag = alternative_tag.invert_edition_tags()
         pleaves = _select.pleaves(argument)

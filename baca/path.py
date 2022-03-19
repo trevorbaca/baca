@@ -220,8 +220,8 @@ def extern(
             preamble_lines.append(line)
         elif " %*% " in line:
             words = line.split()
-            site = words.index("%*%")
-            name = words[site + 1]
+            index = words.index("%*%")
+            name = words[index + 1]
             # first line in expression:
             if name not in stack:
                 stack[name] = []
@@ -288,8 +288,8 @@ def extern(
         first_line = first_line[count:]
         first_line = f"{name} = {first_line}"
         words = first_line.split()
-        site = words.index("%*%")
-        first_line = " ".join(words[:site])
+        index = words.index("%*%")
+        first_line = " ".join(words[:index])
         first_lines = abjad.tag.double_tag([first_line], tag)
         first_lines = [_ + "\n" for _ in first_lines]
         lines.extend(first_lines)
@@ -314,8 +314,8 @@ def extern(
         last_line = lines[-1]
         assert last_line.startswith("} ") or last_line.startswith(">> ")
         words = last_line.split()
-        site = words.index("%*%")
-        last_line = " ".join(words[:site])
+        index = words.index("%*%")
+        last_line = " ".join(words[:index])
         last_lines = abjad.tag.double_tag([last_line], tag)
         last_lines = [_ + "\n" for _ in last_lines]
         lines[-1:] = last_lines

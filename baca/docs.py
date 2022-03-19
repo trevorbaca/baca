@@ -215,9 +215,9 @@ def make_empty_score(*counts):
         >>
 
     """
-
-    site = "baca.make_configuration_empty_score()"
-    tag = abjad.Tag(site)
+    # TODO: use _scoping.function_name()
+    function_name = "baca.make_configuration_empty_score()"
+    tag = abjad.Tag(function_name)
     global_context = _score.make_global_context()
     single_staff = len(counts) == 1
     single_voice = single_staff and counts[0] == 1

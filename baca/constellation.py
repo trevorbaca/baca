@@ -37,7 +37,7 @@ Constellation.
     ...     r"\override Score.BarLine.stencil = ##t",
     ...     r"\override Score.SpanBar.stencil = ##t",
     ... ):
-    ...     literal = abjad.LilyPondLiteral(string, format_slot="after")
+    ...     literal = abjad.LilyPondLiteral(string, site="after")
     ...     abjad.attach(literal, last_leaf)
 
     >>> leaves = abjad.select.leaves(score["Treble_Staff"])

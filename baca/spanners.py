@@ -52,7 +52,7 @@ class SpannerIndicatorCommand(_scoping.Command):
                     start_indicator,
                     first_leaf,
                     deactivate=self.deactivate,
-                    tag=_scoping.site(_frame(), self, n=1)
+                    tag=_scoping.function_name(_frame(), self, n=1)
                     .append(_tags.SPANNER_START)
                     .append(_tags.LEFT_BROKEN),
                 )
@@ -61,7 +61,9 @@ class SpannerIndicatorCommand(_scoping.Command):
                     start_indicator,
                     first_leaf,
                     deactivate=self.deactivate,
-                    tag=_scoping.site(_frame(), self, n=2).append(_tags.SPANNER_START),
+                    tag=_scoping.function_name(_frame(), self, n=2).append(
+                        _tags.SPANNER_START
+                    ),
                 )
         if self.stop_indicator is not None:
             stop_indicator = self.stop_indicator
@@ -74,7 +76,7 @@ class SpannerIndicatorCommand(_scoping.Command):
                     stop_indicator,
                     final_leaf,
                     deactivate=self.deactivate,
-                    tag=_scoping.site(_frame(), self, n=3)
+                    tag=_scoping.function_name(_frame(), self, n=3)
                     .append(_tags.SPANNER_STOP)
                     .append(_tags.RIGHT_BROKEN),
                 )
@@ -83,7 +85,9 @@ class SpannerIndicatorCommand(_scoping.Command):
                     stop_indicator,
                     final_leaf,
                     deactivate=self.deactivate,
-                    tag=_scoping.site(_frame(), self, n=4).append(_tags.SPANNER_STOP),
+                    tag=_scoping.function_name(_frame(), self, n=4).append(
+                        _tags.SPANNER_STOP
+                    ),
                 )
 
     def _attach_indicator(self, indicator, leaf, deactivate=None, tag=None):
@@ -202,14 +206,14 @@ def beam(
         selector=selector,
         start_indicator=start_beam,
         stop_indicator=stop_beam,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         tweaks=tweaks,
     )
 
 
 def ottava(
     start_ottava: abjad.Ottava = abjad.Ottava(n=1),
-    stop_ottava: abjad.Ottava = abjad.Ottava(n=0, format_slot="after"),
+    stop_ottava: abjad.Ottava = abjad.Ottava(n=0, site="after"),
     *,
     right_broken: bool = False,
     selector=_selectors.tleaves(),
@@ -295,13 +299,13 @@ def ottava(
         selector=selector,
         start_indicator=start_ottava,
         stop_indicator=stop_ottava,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
 def ottava_bassa(
     start_ottava: abjad.Ottava = abjad.Ottava(n=-1),
-    stop_ottava: abjad.Ottava = abjad.Ottava(n=0, format_slot="after"),
+    stop_ottava: abjad.Ottava = abjad.Ottava(n=0, site="after"),
     *,
     selector=_selectors.tleaves(),
 ) -> SpannerIndicatorCommand:
@@ -385,7 +389,7 @@ def ottava_bassa(
         selector=selector,
         start_indicator=start_ottava,
         stop_indicator=stop_ottava,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -487,7 +491,7 @@ def slur(
         selector=selector,
         start_indicator=start_slur_,
         stop_indicator=stop_slur_,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         tweaks=tweaks,
     )
 
@@ -583,7 +587,7 @@ def sustain_pedal(
         selector=selector,
         start_indicator=start_piano_pedal,
         stop_indicator=stop_piano_pedal,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -867,6 +871,6 @@ def trill_spanner(
         selector=selector,
         start_indicator=start_trill_span,
         stop_indicator=stop_trill_span,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         tweaks=tweaks,
     )

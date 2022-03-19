@@ -95,7 +95,7 @@ def accent(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation(">")],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -362,7 +362,7 @@ def alternate_bow_strokes(
     return _commandclasses.IndicatorCommand(
         indicators=indicators,
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         tweaks=tweaks,
     )
 
@@ -450,7 +450,7 @@ def arpeggio(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("arpeggio")],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -465,7 +465,7 @@ def articulation(
     return _commandclasses.IndicatorCommand(
         indicators=[articulation_],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -479,7 +479,7 @@ def articulations(
     return _commandclasses.IndicatorCommand(
         indicators=articulations,
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -487,16 +487,16 @@ def bar_line(
     abbreviation: str = "|",
     selector=_selectors.leaf(0),
     *,
-    format_slot: str = "after",
+    site: str = "after",
 ) -> _commandclasses.IndicatorCommand:
     """
     Attaches bar line.
     """
-    indicator = abjad.BarLine(abbreviation, format_slot=format_slot)
+    indicator = abjad.BarLine(abbreviation, site=site)
     return _commandclasses.IndicatorCommand(
         indicators=[indicator],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -507,12 +507,12 @@ def breathe(
     """
     Attaches breathe command.
     """
-    # TODO: change to abjad.Articulation("breathe", format_slot="after")?
-    breathe = abjad.LilyPondLiteral(r"\breathe", format_slot="after")
+    # TODO: change to abjad.Articulation("breathe", site="after")?
+    breathe = abjad.LilyPondLiteral(r"\breathe", site="after")
     return _commandclasses.IndicatorCommand(
         indicators=[breathe],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         tweaks=tweaks,
     )
 
@@ -603,7 +603,7 @@ def clef(
         indicators=[indicator],
         redundant=redundant,
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -617,7 +617,7 @@ def damp(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("baca-damp")],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         tweaks=tweaks,
     )
 
@@ -631,7 +631,7 @@ def double_flageolet(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("baca-double-flageolet")],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -718,7 +718,7 @@ def double_staccato(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("baca-staccati #2")],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -806,7 +806,7 @@ def down_arpeggio(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.Arpeggio(direction=abjad.DOWN)],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -972,7 +972,7 @@ def down_bow(
     return _commandclasses.IndicatorCommand(
         indicators=[articulation],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         tweaks=tweaks,
     )
 
@@ -1059,7 +1059,7 @@ def espressivo(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("espressivo")],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         tweaks=tweaks,
     )
 
@@ -1145,7 +1145,7 @@ def fermata(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("fermata")],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1230,7 +1230,7 @@ def flageolet(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("flageolet")],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1305,7 +1305,7 @@ def hide_black_note_heads(
         indicators=[literal],
         predicate=lambda _: _.written_duration < abjad.Duration(1, 2),
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1390,7 +1390,7 @@ def laissez_vibrer(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.LaissezVibrer()],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1398,16 +1398,16 @@ def literal(
     string: str | list[str],
     selector=_selectors.leaf(0),
     *,
-    format_slot: str = "before",
+    site: str = "before",
 ) -> _commandclasses.IndicatorCommand:
     """
     Attaches LilyPond literal.
     """
-    literal = abjad.LilyPondLiteral(string, format_slot=format_slot)
+    literal = abjad.LilyPondLiteral(string, site=site)
     return _commandclasses.IndicatorCommand(
         indicators=[literal],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1492,7 +1492,7 @@ def long_fermata(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("longfermata")],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1577,7 +1577,7 @@ def marcato(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("marcato")],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1671,7 +1671,7 @@ def margin_markup(
     command = _commandclasses.IndicatorCommand(
         indicators=[margin_markup],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
     if bool(alert):
         assert isinstance(alert, _commandclasses.IndicatorCommand), repr(alert)
@@ -1693,7 +1693,7 @@ def mark(
     return _commandclasses.IndicatorCommand(
         indicators=[rehearsal_mark],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         tweaks=tweaks,
     )
 
@@ -1779,7 +1779,7 @@ def parenthesize(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r"\parenthesize")],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1792,7 +1792,7 @@ def quadruple_staccato(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("baca-staccati #4")],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1813,7 +1813,7 @@ def rehearsal_mark(
         direction=abjad.CENTER,
         indicators=[markup],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         tweaks=tweaks,
     )
 
@@ -1910,7 +1910,7 @@ def repeat_tie(
         do_not_test=allow_rest,
         indicators=[abjad.RepeatTie()],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -1995,7 +1995,7 @@ def short_fermata(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("shortfermata")],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2008,7 +2008,7 @@ def snap_pizzicato(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("snappizzicato")],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2093,7 +2093,7 @@ def staccatissimo(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("staccatissimo")],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2178,7 +2178,7 @@ def staccato(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("staccato")],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2540,7 +2540,7 @@ def staff_lines(n: int, selector=_selectors.leaf(0)) -> _scoping.Suite:
     command_2 = _commandclasses.IndicatorCommand(
         indicators=[_indicators.StaffLines(n)],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
     return _scoping.suite(command_1, command_2)
 
@@ -2588,7 +2588,7 @@ def start_markup(
     command = _commandclasses.IndicatorCommand(
         indicators=[start_markup],
         selector=selector,
-        tags=[_scoping.site(_frame()), _tags.NOT_PARTS],
+        tags=[_scoping.function_name(_frame()), _tags.NOT_PARTS],
     )
     return command
 
@@ -2676,7 +2676,7 @@ def stem_tremolo(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.StemTremolo(tremolo_flags=tremolo_flags)],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2769,7 +2769,7 @@ def stop_on_string(
         indicators=[articulation],
         map=map,
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2789,7 +2789,7 @@ def stop_trill(
     Eventually it will probably be necessary to model ``\stopTrillSpan`` with a dedicated
     format slot.
     """
-    return literal(r"\stopTrillSpan", format_slot="closing", selector=selector)
+    return literal(r"\stopTrillSpan", site="closing", selector=selector)
 
 
 def stopped(
@@ -2873,7 +2873,7 @@ def stopped(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("stopped")],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -2962,7 +2962,7 @@ def tie(selector) -> _commandclasses.IndicatorCommand:
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.Tie()],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -3047,7 +3047,7 @@ def tenuto(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("tenuto")],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -3060,7 +3060,7 @@ def triple_staccato(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("baca-staccati #3")],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -3148,7 +3148,7 @@ def up_arpeggio(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.Arpeggio(direction=abjad.UP)],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )
 
 
@@ -3239,7 +3239,7 @@ def up_bow(
     return _commandclasses.IndicatorCommand(
         indicators=[articulation],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
         tweaks=tweaks,
     )
 
@@ -3325,5 +3325,5 @@ def very_long_fermata(
     return _commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("verylongfermata")],
         selector=selector,
-        tags=[_scoping.site(_frame())],
+        tags=[_scoping.function_name(_frame())],
     )

@@ -494,7 +494,7 @@ def make_even_divisions(*, measures=None):
             rmakers.even_division([8]),
             rmakers.beam(),
             rmakers.extract_trivial(),
-            tag=_scoping.site(_frame()),
+            tag=_scoping.function_name(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
@@ -524,7 +524,7 @@ def make_fused_tuplet_monads(
             rmakers.extract_trivial(),
             rmakers.force_repeat_tie(),
             preprocessor=lambda _: [sum(_)],
-            tag=_scoping.site(_frame()),
+            tag=_scoping.function_name(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
@@ -633,7 +633,7 @@ def make_notes(
             *specifiers,
             rmakers.rewrite_meter(),
             *repeat_tie_specifier,
-            tag=_scoping.site(_frame()),
+            tag=_scoping.function_name(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
@@ -725,7 +725,7 @@ def make_repeat_tied_notes(
     specifiers_.append(specifier)
     return RhythmCommand(
         rhythm_maker=rmakers.stack(
-            rmakers.note(), *specifiers_, tag=_scoping.site(_frame())
+            rmakers.note(), *specifiers_, tag=_scoping.function_name(_frame())
         ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
@@ -762,7 +762,7 @@ def make_repeated_duration_notes(
             *rewrite_specifiers,
             rmakers.force_repeat_tie(),
             preprocessor=preprocessor,
-            tag=_scoping.site(_frame()),
+            tag=_scoping.function_name(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
@@ -778,7 +778,7 @@ def make_rests(*, measures=None):
         rhythm_maker=rmakers.stack(
             rmakers.note(),
             rmakers.force_rest(_selectors.lts()),
-            tag=_scoping.site(_frame()),
+            tag=_scoping.function_name(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
@@ -803,7 +803,7 @@ def make_single_attack(duration, *, measures=None):
             ),
             rmakers.beam(),
             rmakers.extract_trivial(),
-            tag=_scoping.site(_frame()),
+            tag=_scoping.function_name(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
@@ -821,7 +821,7 @@ def make_tied_notes(*, measures=None):
             rmakers.beam(_selectors.plts()),
             rmakers.tie(_selectors.ptails((None, -1))),
             rmakers.rewrite_meter(),
-            tag=_scoping.site(_frame()),
+            tag=_scoping.function_name(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
@@ -854,7 +854,7 @@ def make_tied_repeated_durations(durations, *, measures=None):
             rmakers.note(),
             *specifiers,
             preprocessor=preprocessor,
-            tag=_scoping.site(_frame()),
+            tag=_scoping.function_name(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
@@ -875,7 +875,7 @@ def music(
     annotation_spanner_text = None
     if annotation_spanner is True:
         annotation_spanner_text = "baca.music() =|"
-    tag = tag or _scoping.site(_frame())
+    tag = tag or _scoping.function_name(_frame())
     if isinstance(argument, str):
         string = f"{{ {argument} }}"
         container = abjad.parse(string)
@@ -928,7 +928,7 @@ def skeleton(
     Makes rhythm command from ``string`` and attaches NOT_YET_PITCHED indicators to
     music.
     """
-    tag = tag or _scoping.site(_frame())
+    tag = tag or _scoping.function_name(_frame())
     if isinstance(argument, str):
         string = f"{{ {argument} }}"
         container = abjad.parse(string)
@@ -961,7 +961,7 @@ def tacet(
     """
     command = _overrides.mmrest_color(color, selector=selector)
     _scoping.tag(_tags.TACET_COLORING, command)
-    _scoping.tag(_scoping.site(_frame()), command)
+    _scoping.tag(_scoping.function_name(_frame()), command)
     command_ = _scoping.new(command, measures=measures)
     assert isinstance(command_, _overrides.OverrideCommand)
     return command_
