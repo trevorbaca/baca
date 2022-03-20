@@ -97,7 +97,8 @@ class Accelerando:
         self.hide = bool(self.hide)
         if self.markup is not None:
             assert isinstance(self.markup, abjad.Markup), repr(self.markup)
-        self.tweaks = abjad.TweakInterface.set_dataclass_tweaks(self, self.tweaks)
+        if self.tweaks:
+            self.tweaks = abjad.overrides.set_dataclass_tweaks(self, self.tweaks)
 
     def __str__(self) -> str:
         r"""
@@ -408,7 +409,8 @@ class Ritardando:
         self.hide = bool(self.hide)
         if self.markup is not None:
             assert isinstance(self.markup, abjad.Markup), repr(self.markup)
-        self.tweaks = abjad.TweakInterface.set_dataclass_tweaks(self, self.tweaks)
+        if self.tweaks:
+            self.tweaks = abjad.overrides.set_dataclass_tweaks(self, self.tweaks)
 
     def __str__(self) -> str:
         r"""
