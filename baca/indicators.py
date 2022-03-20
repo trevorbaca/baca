@@ -98,7 +98,7 @@ class Accelerando:
         if self.markup is not None:
             assert isinstance(self.markup, abjad.Markup), repr(self.markup)
         if self.tweaks:
-            self.tweaks = abjad.overrides.set_dataclass_tweaks(self, self.tweaks)
+            self.tweaks = abjad.overrides.set_tweaks(self, self.tweaks)
 
     def __str__(self) -> str:
         r"""
@@ -410,7 +410,7 @@ class Ritardando:
         if self.markup is not None:
             assert isinstance(self.markup, abjad.Markup), repr(self.markup)
         if self.tweaks:
-            self.tweaks = abjad.overrides.set_dataclass_tweaks(self, self.tweaks)
+            self.tweaks = abjad.overrides.set_tweaks(self, self.tweaks)
 
     def __str__(self) -> str:
         r"""
