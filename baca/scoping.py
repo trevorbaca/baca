@@ -443,8 +443,9 @@ ScopeTyping: typing.TypeAlias = Scope | TimelineScope
 
 
 def apply_tweaks(argument, tweaks, i=None, total=None):
-    if not tweaks:
-        return
+    if all(isinstance(_, str) for _ in tweaks):
+        bundle = abjad.bundle(argument, *tweaks)
+        return bundle
     interface = abjad.tweak(argument)
     for item in tweaks:
         if isinstance(item, tuple):
@@ -460,6 +461,7 @@ def apply_tweaks(argument, tweaks, i=None, total=None):
         tuples = interface_._get_attribute_tuples()
         for attribute, value in tuples:
             setattr(interface, attribute, value)
+    return argument
 
 
 def remove_reapplied_wrappers(leaf, indicator):
@@ -593,6 +595,8 @@ def validate_indexed_tweaks(tweaks):
         return
     assert isinstance(tweaks, tuple), repr(tweaks)
     for tweak in tweaks:
+        if isinstance(tweak, str):
+            continue
         if isinstance(tweak, abjad.TweakInterface):
             continue
         if (

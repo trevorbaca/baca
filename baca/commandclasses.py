@@ -906,8 +906,10 @@ class IndicatorCommand(_scoping.Command):
             indicators = self.indicators[i]
             indicators = _token_to_indicators(indicators)
             for indicator in indicators:
-                _scoping.apply_tweaks(indicator, self.tweaks)
+                # _scoping.apply_tweaks(indicator, self.tweaks)
                 reapplied = _scoping.remove_reapplied_wrappers(leaf, indicator)
+                if self.tweaks:
+                    indicator = _scoping.apply_tweaks(indicator, self.tweaks)
                 wrapper = abjad.attach(
                     indicator,
                     leaf,
