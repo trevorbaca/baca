@@ -1137,7 +1137,7 @@ def _clean_up_laissez_vibrer_tie_direction(score):
         clef = abjad.get.effective(note, abjad.Clef, default=default)
         staff_position = clef.to_staff_position(note.written_pitch)
         if staff_position == abjad.StaffPosition(0):
-            abjad.override(note).laissez_vibrer_tie.direction = abjad.UP
+            abjad.override(note).LaissezVibrerTie.direction = abjad.UP
 
 
 def _clean_up_on_beat_grace_containers(score):
@@ -2810,7 +2810,7 @@ def _style_fermata_measures(
     for measure_number in fermata_measure_empty_overrides:
         measure_index = measure_number - 1
         rest = rests[measure_index]
-        grob = abjad.override(rest).multi_measure_rest_text
+        grob = abjad.override(rest).MultiMeasureRestText
         grob.extra_offset = (0, fermata_extra_offset_y)
 
 

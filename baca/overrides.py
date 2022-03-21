@@ -82,12 +82,19 @@ class OverrideCommand(_scoping.Command):
             lilypond_type = context.lilypond_type
             assert isinstance(lilypond_type, str), repr(lilypond_type)
         grob = self.grob
+        assert isinstance(grob, str)
         attribute = self.attribute
+        assert isinstance(attribute, str)
         value = self.value
         once = bool(len(leaves) == 1)
-        string = abjad.overrides.make_lilypond_override_string(
-            grob, attribute, value, context=lilypond_type, once=once
+        override = abjad.LilyPondOverride(
+            lilypond_type=lilypond_type,
+            grob_name=grob,
+            once=once,
+            property_path=attribute,
+            value=value,
         )
+        string = override.override_string
         site = "before"
         if self.after is True:
             site = "after"
@@ -101,9 +108,13 @@ class OverrideCommand(_scoping.Command):
         abjad.attach(literal, leaves[0], deactivate=self.deactivate, tag=tag)
         if once:
             return
-        string = abjad.overrides.make_lilypond_revert_string(
-            grob, attribute, context=lilypond_type
+        override = abjad.LilyPondOverride(
+            lilypond_type=lilypond_type,
+            grob_name=grob,
+            is_revert=True,
+            property_path=attribute,
         )
+        string = override.revert_string
         literal = abjad.LilyPondLiteral(string, "after")
         tag = self.get_tag(leaves[-1])
         function_name = _scoping.function_name(_frame(), self, n=2)
@@ -6051,19 +6062,19 @@ def tuplet_number_extra_offset(
 
 
 def tuplet_number_text(
-    markup: abjad.Markup,
+    string: str,
     selector=_selectors.leaves(),
 ) -> OverrideCommand:
     """
     Overrides tuplet number text.
     """
-    assert isinstance(markup, abjad.Markup), repr(markup)
+    assert isinstance(string, str), repr(string)
     return OverrideCommand(
         attribute="text",
         grob="TupletNumber",
         selector=selector,
         tags=[_scoping.function_name(_frame())],
-        value=markup,
+        value=string,
     )
 
 

@@ -5897,8 +5897,8 @@ class FigureMaker:
         duration = abjad.get.duration(tuplet)
         notes = abjad.LeafMaker()([0], [duration])
         string = abjad.illustrators.selection_to_score_markup_string(notes)
-        markup = abjad.Markup(rf"\markup \scale #'(0.75 . 0.75) {string}")
-        abjad.override(tuplet).TupletNumber.text = markup
+        string = rf"\markup \scale #'(0.75 . 0.75) {string}"
+        abjad.override(tuplet).TupletNumber.text = string
         return tuplet
 
     @classmethod

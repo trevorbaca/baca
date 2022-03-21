@@ -169,8 +169,8 @@ class PersistentOverride:
 
         >>> override = baca.PersistentOverride(
         ...     attribute="color",
-        ...     grob="note_head",
-        ...     value="red",
+        ...     grob="NoteHead",
+        ...     value="#red",
         ... )
 
         >>> staff = abjad.Staff("c'4 d' e' f'")
@@ -197,8 +197,8 @@ class PersistentOverride:
         >>> override = baca.PersistentOverride(
         ...     after=True,
         ...     attribute="color",
-        ...     grob="note_head",
-        ...     value="red",
+        ...     grob="NoteHead",
+        ...     value="#red",
         ... )
 
         >>> staff = abjad.Staff("c'4 d' e' f'")
@@ -245,13 +245,13 @@ class PersistentOverride:
             lilypond_type = context.lilypond_type
         else:
             lilypond_type = self.context
-        string = abjad.overrides.make_lilypond_override_string(
-            self.grob,
-            self.attribute,
-            self.value,
-            context=lilypond_type,
-            once=False,
+        override = abjad.LilyPondOverride(
+            lilypond_type=lilypond_type,
+            grob_name=self.grob,
+            property_path=self.attribute,
+            value=self.value,
         )
+        string = override.override_string
         return string
 
     def _get_lilypond_format_bundle(self, component=None):
