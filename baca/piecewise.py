@@ -108,7 +108,7 @@ class PiecewiseCommand(_scoping.Command):
     remove_length_1_spanner_start: bool = False
     right_broken: typing.Any = None
     selector: typing.Callable = _selectors.leaves()
-    tweaks: abjad.IndexedTweakManagers = ()
+    tweaks: abjad.IndexedTweakInterfaces = ()
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
@@ -330,7 +330,7 @@ class PiecewiseCommand(_scoping.Command):
 
 def bow_speed_spanner(
     items: str | list,
-    *tweaks: abjad.IndexedTweakManager,
+    *tweaks: abjad.IndexedTweakInterface,
     autodetect_right_padding: bool = True,
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
@@ -371,7 +371,7 @@ def bow_speed_spanner(
 
 
 def circle_bow_spanner(
-    *tweaks: abjad.IndexedTweakManager,
+    *tweaks: abjad.IndexedTweakInterface,
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-circle-bowing-markup",
     map=None,
@@ -415,7 +415,7 @@ def circle_bow_spanner(
 
 def clb_spanner(
     string_number: int,
-    *tweaks: abjad.IndexedTweakManager,
+    *tweaks: abjad.IndexedTweakInterface,
     # NOTE: autodetect default differs from text_spanner():
     autodetect_right_padding: bool = True,
     left_broken: bool = False,
@@ -465,7 +465,7 @@ def clb_spanner(
 
 
 def covered_spanner(
-    *tweaks: abjad.IndexedTweakManager,
+    *tweaks: abjad.IndexedTweakInterface,
     # NOTE: autodetect default differs from text_spanner():
     autodetect_right_padding: bool = True,
     argument: str = r"\baca-covered-markup =|",
@@ -505,7 +505,7 @@ def covered_spanner(
 
 
 def damp_spanner(
-    *tweaks: abjad.IndexedTweakManager,
+    *tweaks: abjad.IndexedTweakInterface,
     # NOTE: autodetect default differs from text_spanner():
     autodetect_right_padding: bool = True,
     left_broken: bool = False,
@@ -2259,7 +2259,7 @@ def hairpin(
 
 
 def half_clt_spanner(
-    *tweaks: abjad.IndexedTweakManager,
+    *tweaks: abjad.IndexedTweakInterface,
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-half-clt-markup",
     map=None,
@@ -2480,10 +2480,10 @@ def make_dynamic(
         Al niente hairpins are special-cased to carry to-barline tweaks:
 
         >>> baca.make_dynamic(">o")
-        StartHairpin(shape='>o', tweaks=TweakInterface(('_literal', False), ('to_barline', True)))
+        StartHairpin(shape='>o', tweaks=TweakInterface(('to_barline', True)))
 
         >>> baca.make_dynamic("|>o")
-        StartHairpin(shape='|>o', tweaks=TweakInterface(('_literal', False), ('to_barline', True)))
+        StartHairpin(shape='|>o', tweaks=TweakInterface(('to_barline', True)))
 
     ..  container:: example exception
 
@@ -2592,7 +2592,7 @@ def make_dynamic(
 
 def material_annotation_spanner(
     items: str | list,
-    *tweaks: abjad.IndexedTweakManager,
+    *tweaks: abjad.IndexedTweakInterface,
     left_broken: bool = False,
     map=None,
     match: typings.Indices = None,
@@ -2627,7 +2627,7 @@ def material_annotation_spanner(
 
 
 def metric_modulation_spanner(
-    *tweaks: abjad.IndexedTweakManager,
+    *tweaks: abjad.IndexedTweakInterface,
     argument: str = r"MM =|",
     autodetect_right_padding: bool = True,
     left_broken: bool = False,
@@ -2740,7 +2740,7 @@ def parse_hairpin_descriptor(
 
         >>> for item in baca.parse_hairpin_descriptor("f >o"):
         ...     item
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=StartHairpin(shape='>o', tweaks=TweakInterface(('_literal', False), ('to_barline', True))), spanner_stop=None)
+        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=StartHairpin(shape='>o', tweaks=TweakInterface(('to_barline', True))), spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("p mp mf f"):
         ...     item
@@ -2824,7 +2824,7 @@ def parse_hairpin_descriptor(
 
 def pitch_annotation_spanner(
     items: str | list,
-    *tweaks: abjad.IndexedTweakManager,
+    *tweaks: abjad.IndexedTweakInterface,
     left_broken: bool = False,
     map=None,
     match: typings.Indices = None,
@@ -2859,7 +2859,7 @@ def pitch_annotation_spanner(
 
 
 def pizzicato_spanner(
-    *tweaks: abjad.IndexedTweakManager,
+    *tweaks: abjad.IndexedTweakInterface,
     # NOTE: autodetect default differs from text_spanner():
     autodetect_right_padding: bool = True,
     left_broken: bool = False,
@@ -2899,7 +2899,7 @@ def pizzicato_spanner(
 
 def rhythm_annotation_spanner(
     items: str | list,
-    *tweaks: abjad.IndexedTweakManager,
+    *tweaks: abjad.IndexedTweakInterface,
     left_broken: bool = False,
     leak_spanner_stop: bool = False,
     map=None,
@@ -2937,7 +2937,7 @@ def rhythm_annotation_spanner(
 
 def scp_spanner(
     items: str | list,
-    *tweaks: abjad.IndexedTweakManager,
+    *tweaks: abjad.IndexedTweakInterface,
     autodetect_right_padding: bool = True,
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
@@ -2978,7 +2978,7 @@ def scp_spanner(
 
 
 def spazzolato_spanner(
-    *tweaks: abjad.IndexedTweakManager,
+    *tweaks: abjad.IndexedTweakInterface,
     # NOTE: autodetect default differs from text_spanner():
     autodetect_right_padding: bool = True,
     items: str | list = r"\baca-spazzolato-markup =|",
@@ -3019,7 +3019,7 @@ def spazzolato_spanner(
 
 def string_number_spanner(
     items: str | list,
-    *tweaks: abjad.IndexedTweakManager,
+    *tweaks: abjad.IndexedTweakInterface,
     autodetect_right_padding: bool = True,
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
@@ -3060,7 +3060,7 @@ def string_number_spanner(
 
 
 def tasto_spanner(
-    *tweaks: abjad.IndexedTweakManager,
+    *tweaks: abjad.IndexedTweakInterface,
     autodetect_right_padding: bool = True,
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
@@ -3102,7 +3102,7 @@ def tasto_spanner(
 
 def text_spanner(
     items: str | list,
-    *tweaks: abjad.IndexedTweakManager,
+    *tweaks: abjad.IndexedTweakInterface,
     autodetect_right_padding: bool = False,
     bookend: bool | int = -1,
     boxed: bool = False,
@@ -4672,12 +4672,12 @@ def text_spanner(
             start_text_span, right_text=right_markup
         )
         # TODO: find some way to make these tweaks explicit to composer
-        manager = abjad.tweak(bookended_spanner_start)
-        manager.bound_details__right__stencil_align_dir_y = abjad.CENTER
+        interface = abjad.tweak(bookended_spanner_start)
+        interface.bound_details__right__stencil_align_dir_y = abjad.CENTER
         if "hook" in style:
-            manager.bound_details__right__padding = 1.25
+            interface.bound_details__right__padding = 1.25
         else:
-            manager.bound_details__right__padding = 0.5
+            interface.bound_details__right__padding = 0.5
         bundle = Bundle(
             bookended_spanner_start=bookended_spanner_start,
             spanner_start=start_text_span,
@@ -4704,7 +4704,7 @@ def text_spanner(
 
 def vibrato_spanner(
     items: str | list,
-    *tweaks: abjad.IndexedTweakManager,
+    *tweaks: abjad.IndexedTweakInterface,
     autodetect_right_padding: bool = True,
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
@@ -4745,7 +4745,7 @@ def vibrato_spanner(
 
 
 def xfb_spanner(
-    *tweaks: abjad.IndexedTweakManager,
+    *tweaks: abjad.IndexedTweakInterface,
     autodetect_right_padding: bool = True,
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,

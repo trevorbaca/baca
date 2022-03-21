@@ -61,7 +61,7 @@ class Accelerando:
         Tweaks can set at initialization:
 
         >>> baca.Accelerando(tweaks=abjad.tweak("#blue").color)
-        Accelerando(hide=False, markup=None, tweaks=TweakInterface(('_literal', False), ('color', '#blue')))
+        Accelerando(hide=False, markup=None, tweaks=TweakInterface(('color', '#blue')))
 
     ..  container:: example
 
@@ -70,11 +70,11 @@ class Accelerando:
         >>> accelerando = baca.Accelerando()
         >>> abjad.tweak(accelerando).color = "#blue"
         >>> accelerando
-        Accelerando(hide=False, markup=None, tweaks=TweakInterface(('_literal', False), ('color', '#blue')))
+        Accelerando(hide=False, markup=None, tweaks=TweakInterface(('color', '#blue')))
 
         >>> import copy
         >>> copy.copy(accelerando)
-        Accelerando(hide=False, markup=None, tweaks=TweakInterface(('_literal', False), ('color', '#blue')))
+        Accelerando(hide=False, markup=None, tweaks=TweakInterface(('color', '#blue')))
 
     Tweak extra-offset to align accelerando markup with other metronome mark spanner
     segments.
@@ -374,7 +374,7 @@ class Ritardando:
         Tweaks can set at initialization:
 
         >>> baca.Ritardando(tweaks=abjad.tweak("#blue").color)
-        Ritardando(hide=False, markup=None, tweaks=TweakInterface(('_literal', False), ('color', '#blue')))
+        Ritardando(hide=False, markup=None, tweaks=TweakInterface(('color', '#blue')))
 
     ..  container:: example
 
@@ -383,11 +383,11 @@ class Ritardando:
         >>> ritardando = baca.Ritardando()
         >>> abjad.tweak(ritardando).color = "#blue"
         >>> ritardando
-        Ritardando(hide=False, markup=None, tweaks=TweakInterface(('_literal', False), ('color', '#blue')))
+        Ritardando(hide=False, markup=None, tweaks=TweakInterface(('color', '#blue')))
 
         >>> import copy
         >>> copy.copy(ritardando)
-        Ritardando(hide=False, markup=None, tweaks=TweakInterface(('_literal', False), ('color', '#blue')))
+        Ritardando(hide=False, markup=None, tweaks=TweakInterface(('color', '#blue')))
 
         Tweak extra-offset to align ritardando markup with other metronome mark spanner
         segments.

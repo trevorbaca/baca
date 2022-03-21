@@ -24,7 +24,7 @@ class SpannerIndicatorCommand(_scoping.Command):
     right_broken: bool = False
     start_indicator: typing.Any = None
     stop_indicator: typing.Any = None
-    tweaks: abjad.IndexedTweakManagers = ()
+    tweaks: abjad.IndexedTweakInterfaces = ()
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)

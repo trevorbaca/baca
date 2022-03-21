@@ -445,32 +445,21 @@ ScopeTyping: typing.TypeAlias = Scope | TimelineScope
 def apply_tweaks(argument, tweaks, i=None, total=None):
     if not tweaks:
         return
-    manager = abjad.tweak(argument)
-    literals = []
+    interface = abjad.tweak(argument)
     for item in tweaks:
         if isinstance(item, tuple):
             assert len(item) == 2
-            manager_, i_ = item
+            interface_, i_ = item
             if 0 <= i_ and i_ != i:
                 continue
             if i_ < 0 and i_ != -(total - i):
                 continue
         else:
-            manager_ = item
-        assert isinstance(manager_, abjad.TweakInterface)
-        literals.append(bool(manager_._literal))
-        if manager_._literal is True:
-            manager._literal = True
-        tuples = manager_._get_attribute_tuples()
+            interface_ = item
+        assert isinstance(interface_, abjad.TweakInterface)
+        tuples = interface_._get_attribute_tuples()
         for attribute, value in tuples:
-            setattr(manager, attribute, value)
-    if True in literals and False in literals:
-        message = "all tweaks must be literal"
-        message += ", or else all tweaks must be nonliteral:\n"
-        strings = [f"    {repr(_)}" for _ in tweaks]
-        string = "\n".join(strings)
-        message += string
-        raise Exception(message)
+            setattr(interface, attribute, value)
 
 
 def remove_reapplied_wrappers(leaf, indicator):

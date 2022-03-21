@@ -400,10 +400,10 @@ class BCPCommand(_scoping.Command):
     """
 
     bcps: typing.Sequence[abjad.IntegerPair] = ()
-    bow_change_tweaks: abjad.IndexedTweakManagers = ()
+    bow_change_tweaks: abjad.IndexedTweakInterfaces = ()
     final_spanner: bool = False
     helper: typing.Callable = lambda x, y: x
-    tweaks: abjad.IndexedTweakManagers = ()
+    tweaks: abjad.IndexedTweakInterfaces = ()
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
@@ -743,7 +743,7 @@ class GlissandoCommand(_scoping.Command):
     right_broken: bool = False
     right_broken_show_next: bool = False
     selector: typing.Callable = _selectors.tleaves()
-    tweaks: abjad.IndexedTweakManagers = ()
+    tweaks: abjad.IndexedTweakInterfaces = ()
     zero_padding: bool = False
 
     def __post_init__(self):
@@ -756,7 +756,7 @@ class GlissandoCommand(_scoping.Command):
         if self.selector is not None:
             argument = self.selector(argument)
         leaves = abjad.select.leaves(argument)
-        tweaks_: list[abjad.IndexedTweakManager] = []
+        tweaks_: list[abjad.IndexedTweakInterface] = []
         prototype = (abjad.TweakInterface, tuple)
         for tweak in self.tweaks or []:
             assert isinstance(tweak, prototype)
@@ -869,7 +869,7 @@ class IndicatorCommand(_scoping.Command):
     do_not_test: bool = False
     predicate: typing.Callable | None = None
     redundant: bool = False
-    tweaks: abjad.IndexedTweakManagers = ()
+    tweaks: abjad.IndexedTweakInterfaces = ()
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
@@ -1934,7 +1934,7 @@ class ColorFingeringCommand(_scoping.Command):
 
     direction: abjad.Vertical | None = abjad.UP
     numbers: typing.Any = None
-    tweaks: abjad.IndexedTweakManagers = ()
+    tweaks: abjad.IndexedTweakInterfaces = ()
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
@@ -5114,7 +5114,7 @@ def clusters(
 
 def color_fingerings(
     numbers: list[abjad.Number],
-    *tweaks: abjad.IndexedTweakManager,
+    *tweaks: abjad.IndexedTweakInterface,
     selector=_selectors.pheads(exclude=_const.HIDDEN),
 ) -> ColorFingeringCommand:
     """

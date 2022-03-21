@@ -134,8 +134,8 @@ def assign_parts(
 
 def bcps(
     bcps,
-    *tweaks: abjad.IndexedTweakManager,
-    bow_change_tweaks: abjad.IndexedTweakManagers = (),
+    *tweaks: abjad.IndexedTweakInterface,
+    bow_change_tweaks: abjad.IndexedTweakInterfaces = (),
     final_spanner: bool = False,
     helper: typing.Callable = lambda x, y: x,
     selector=_selectors.leaves(),
@@ -1076,7 +1076,7 @@ def fractions(items):
 
 
 def glissando(
-    *tweaks: abjad.IndexedTweakManager,
+    *tweaks: abjad.IndexedTweakInterface,
     allow_repeats: bool = False,
     allow_ties: bool = False,
     hide_middle_note_heads: bool = False,
