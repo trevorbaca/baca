@@ -165,12 +165,12 @@ class LBSD:
     y_offset: int
     alignment_distances: tuple
 
-    def _get_lilypond_format_bundle(self, component=None):
-        bundle = abjad.LilyPondFormatBundle()
+    def _get_contributions(self, component=None):
+        contributions = abjad.ContributionsBySite()
         alignment_distances = " ".join(str(_) for _ in self.alignment_distances)
         string = rf"\baca-lbsd #{self.y_offset} #'({alignment_distances})"
-        bundle.before.commands.append(string)
-        return bundle
+        contributions.before.commands.append(string)
+        return contributions
 
 
 @dataclasses.dataclass

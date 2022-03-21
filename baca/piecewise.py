@@ -17,10 +17,7 @@ from . import typings
 
 
 @dataclasses.dataclass(slots=True)
-class Bundle:
-    """
-    Bundle.
-    """
+class _Specifier:
 
     bookended_spanner_start: typing.Any = None
     indicator: typing.Any = None
@@ -28,22 +25,13 @@ class Bundle:
     spanner_stop: typing.Any = None
 
     def __iter__(self) -> typing.Iterator:
-        """
-        Iterates bundle.
-        """
         return iter(self.indicators)
 
     def __len__(self) -> int:
-        """
-        Gets length.
-        """
         return len(self.indicators)
 
     @property
     def indicators(self) -> list:
-        """
-        Gets indicators.
-        """
         result: list = []
         if self.spanner_stop:
             result.append(self.spanner_stop)
@@ -54,29 +42,17 @@ class Bundle:
         return result
 
     def compound(self) -> bool:
-        """
-        Is true when bundle has both indicator and spanner_start.
-        """
         return bool(self.indicator) and bool(self.spanner_start)
 
     def indicator_only(self) -> bool:
-        """
-        Is true when bundle has indicator only.
-        """
         if self.indicator and not self.spanner_start:
             return True
         return False
 
     def simple(self) -> bool:
-        """
-        Is true when bundle has indicator or spanner start but not both.
-        """
         return len(self) == 1
 
     def spanner_start_only(self) -> bool:
-        """
-        Is true when bundle has spanner start only.
-        """
         if not self.indicator and self.spanner_start:
             return True
         return False
@@ -100,7 +76,7 @@ class PiecewiseCommand(_scoping.Command):
 
     autodetect_right_padding: bool = False
     bookend: bool | int = False
-    bundles: typing.Sequence[Bundle] = ()
+    specifiers: typing.Sequence[_Specifier] = ()
     final_piece_spanner: typing.Any = None
     leak_spanner_stop: bool = False
     left_broken: bool = False
@@ -117,9 +93,9 @@ class PiecewiseCommand(_scoping.Command):
         if self.bookend is not None:
             assert isinstance(self.bookend, int | bool), repr(self.bookend)
         bundles_ = None
-        if self.bundles is not None:
-            bundles_ = abjad.CyclicTuple(self.bundles)
-        self.bundles = bundles_
+        if self.specifiers is not None:
+            bundles_ = abjad.CyclicTuple(self.specifiers)
+        self.specifiers = bundles_
         if self.final_piece_spanner not in (None, False):
             assert getattr(self.final_piece_spanner, "spanner_start", False)
         if self.leak_spanner_stop is not None:
@@ -137,7 +113,7 @@ class PiecewiseCommand(_scoping.Command):
     def _call(self, argument=None) -> None:
         if argument is None:
             return
-        if not self.bundles:
+        if not self.specifiers:
             return
         if self.selector is not None:
             assert not isinstance(self.selector, str)
@@ -168,59 +144,59 @@ class PiecewiseCommand(_scoping.Command):
             is_penultimate_piece = i == piece_count - 2
             is_final_piece = i == piece_count - 1
             if is_final_piece and self.right_broken:
-                bundle = Bundle(spanner_start=self.right_broken)
+                specifier = _Specifier(spanner_start=self.right_broken)
                 tag = _scoping.function_name(_frame(), self, n=1)
                 tag = tag.append(_tags.RIGHT_BROKEN)
-                self._attach_indicators(bundle, stop_leaf, i, total_pieces, tag=tag)
+                self._attach_indicators(specifier, stop_leaf, i, total_pieces, tag=tag)
             if bookend_pattern.matches_index(i, piece_count) and 1 < len(piece):
                 should_bookend = True
             else:
                 should_bookend = False
             if is_final_piece and self.final_piece_spanner is False:
                 should_bookend = False
-            bundle = self.bundles[i]
+            specifier = self.specifiers[i]
             if (
                 is_final_piece
                 and self.right_broken
-                and not isinstance(bundle.spanner_start, abjad.StartTextSpan)
+                and not isinstance(specifier.spanner_start, abjad.StartTextSpan)
             ):
                 should_bookend = False
             if is_final_piece and just_backstole_right_text:
-                bundle = dataclasses.replace(bundle, spanner_start=None)
-            next_bundle = self.bundles[i + 1]
-            if should_bookend and bundle.bookended_spanner_start:
-                bundle = dataclasses.replace(
-                    bundle, spanner_start=bundle.bookended_spanner_start
+                specifier = dataclasses.replace(specifier, spanner_start=None)
+            next_bundle = self.specifiers[i + 1]
+            if should_bookend and specifier.bookended_spanner_start:
+                specifier = dataclasses.replace(
+                    specifier, spanner_start=specifier.bookended_spanner_start
                 )
             if (
                 is_penultimate_piece
                 and (len(pieces[-1]) == 1 or self.final_piece_spanner is False)
                 and isinstance(next_bundle.spanner_start, abjad.StartTextSpan)
             ):
-                bundle = dataclasses.replace(
-                    bundle, spanner_start=bundle.bookended_spanner_start
+                specifier = dataclasses.replace(
+                    specifier, spanner_start=specifier.bookended_spanner_start
                 )
                 just_backstole_right_text = True
             if (
                 len(piece) == 1
-                and bundle.compound()
+                and specifier.compound()
                 and self.remove_length_1_spanner_start
             ):
-                bundle = dataclasses.replace(bundle, spanner_start=None)
-            if is_final_piece and bundle.spanner_start:
-                if isinstance(bundle.spanner_start, abjad.StartHairpin):
+                specifier = dataclasses.replace(specifier, spanner_start=None)
+            if is_final_piece and specifier.spanner_start:
+                if isinstance(specifier.spanner_start, abjad.StartHairpin):
                     if self.final_piece_spanner:
-                        bundle = dataclasses.replace(
-                            bundle, spanner_start=self.final_piece_spanner
+                        specifier = dataclasses.replace(
+                            specifier, spanner_start=self.final_piece_spanner
                         )
                     elif self.final_piece_spanner is False:
-                        bundle = dataclasses.replace(bundle, spanner_start=None)
-                elif isinstance(bundle.spanner_start, abjad.StartTextSpan):
+                        specifier = dataclasses.replace(specifier, spanner_start=None)
+                elif isinstance(specifier.spanner_start, abjad.StartTextSpan):
                     if self.final_piece_spanner is False:
-                        bundle = dataclasses.replace(bundle, spanner_start=None)
+                        specifier = dataclasses.replace(specifier, spanner_start=None)
             tag = _scoping.function_name(_frame(), self, n=2)
             if is_first_piece or previous_had_bookend:
-                bundle = dataclasses.replace(bundle, spanner_stop=None)
+                specifier = dataclasses.replace(specifier, spanner_stop=None)
                 if self.left_broken:
                     tag = tag.append(_tags.LEFT_BROKEN)
             if is_final_piece and self.right_broken:
@@ -246,7 +222,7 @@ class PiecewiseCommand(_scoping.Command):
                 # else:
                 #    autodetected_right_padding = 1.25
             self._attach_indicators(
-                bundle,
+                specifier,
                 start_leaf,
                 i,
                 total_pieces,
@@ -258,7 +234,7 @@ class PiecewiseCommand(_scoping.Command):
                 tag = _scoping.function_name(_frame(), self, n=3)
                 if is_final_piece and self.right_broken:
                     tag = tag.append(_tags.RIGHT_BROKEN)
-                if bundle.bookended_spanner_start is not None:
+                if specifier.bookended_spanner_start is not None:
                     next_bundle = dataclasses.replace(next_bundle, spanner_start=None)
                 if next_bundle.compound():
                     next_bundle = dataclasses.replace(next_bundle, spanner_start=None)
@@ -275,16 +251,16 @@ class PiecewiseCommand(_scoping.Command):
                 spanner_stop = dataclasses.replace(next_bundle.spanner_stop)
                 if self.leak_spanner_stop:
                     spanner_stop = dataclasses.replace(spanner_stop, leak=True)
-                bundle = Bundle(spanner_stop=spanner_stop)
+                specifier = _Specifier(spanner_stop=spanner_stop)
                 tag = _scoping.function_name(_frame(), self, n=4)
                 if self.right_broken:
                     tag = tag.append(_tags.RIGHT_BROKEN)
-                self._attach_indicators(bundle, stop_leaf, i, total_pieces, tag=tag)
+                self._attach_indicators(specifier, stop_leaf, i, total_pieces, tag=tag)
             previous_had_bookend = should_bookend
 
     def _attach_indicators(
         self,
-        bundle,
+        specifier,
         leaf,
         i,
         total_pieces,
@@ -293,7 +269,7 @@ class PiecewiseCommand(_scoping.Command):
         tag=None,
     ):
         assert isinstance(tag, abjad.Tag), repr(tag)
-        for indicator in bundle:
+        for indicator in specifier:
             if indicator in (True, False):
                 pass
             else:
@@ -2221,15 +2197,15 @@ def hairpin(
 
     """
     if isinstance(dynamics, str):
-        bundles = parse_hairpin_descriptor(
+        specifiers = parse_hairpin_descriptor(
             dynamics,
             *tweaks,
             forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
         )
     else:
-        bundles = dynamics
-    for item in bundles:
-        assert isinstance(item, Bundle), repr(dynamic)
+        specifiers = dynamics
+    for item in specifiers:
+        assert isinstance(item, _Specifier), repr(dynamic)
     final_hairpin_: bool | abjad.StartHairpin | None = None
     if isinstance(final_hairpin, bool):
         final_hairpin_ = final_hairpin
@@ -2244,7 +2220,7 @@ def hairpin(
         right_broken_ = abjad.LilyPondLiteral(r"\!", site="after")
     return PiecewiseCommand(
         bookend=bookend,
-        bundles=bundles,
+        specifiers=specifiers,
         final_piece_spanner=final_hairpin_,
         left_broken=left_broken,
         match=match,
@@ -2670,7 +2646,7 @@ def parse_hairpin_descriptor(
     descriptor: str,
     *tweaks: abjad.TweakInterface,
     forbid_al_niente_to_bar_line: bool = False,
-) -> list[Bundle]:
+) -> list[_Specifier]:
     r"""
     Parses hairpin descriptor.
 
@@ -2678,100 +2654,100 @@ def parse_hairpin_descriptor(
 
         >>> for item in baca.parse_hairpin_descriptor("f"):
         ...     item
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor('"f"'):
         ...     item
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='"f"', command='\\baca-effort-f', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='"f"', command='\\baca-effort-f', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("niente"):
         ...     item
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='niente', command='\\!', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity(), tweaks=None), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='niente', command='\\!', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity(), tweaks=None), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("<"):
         ...     item
-        Bundle(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='<', tweaks=None), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='<', tweaks=None), spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("< !"):
         ...     item
-        Bundle(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='<', tweaks=None), spanner_stop=None)
-        Bundle(bookended_spanner_start=None, indicator=StopHairpin(leak=False), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='<', tweaks=None), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=StopHairpin(leak=False), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("o<|"):
         ...     item
-        Bundle(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='o<|', tweaks=None), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='o<|', tweaks=None), spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("--"):
         ...     item
-        Bundle(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='--', tweaks=None), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='--', tweaks=None), spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("p < f"):
         ...     item
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=StartHairpin(shape='<', tweaks=None), spanner_stop=None)
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=StartHairpin(shape='<', tweaks=None), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("p <"):
         ...     item
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=StartHairpin(shape='<', tweaks=None), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=StartHairpin(shape='<', tweaks=None), spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("p < !"):
         ...     item
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=StartHairpin(shape='<', tweaks=None), spanner_stop=None)
-        Bundle(bookended_spanner_start=None, indicator=StopHairpin(leak=False), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=StartHairpin(shape='<', tweaks=None), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=StopHairpin(leak=False), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("< f"):
         ...     item
-        Bundle(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='<', tweaks=None), spanner_stop=None)
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='<', tweaks=None), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("o< f"):
         ...     item
-        Bundle(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='o<', tweaks=None), spanner_stop=None)
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='o<', tweaks=None), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("niente o<| f"):
         ...     item
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='niente', command='\\!', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity(), tweaks=None), spanner_start=StartHairpin(shape='o<|', tweaks=None), spanner_stop=None)
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='niente', command='\\!', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity(), tweaks=None), spanner_start=StartHairpin(shape='o<|', tweaks=None), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("f >"):
         ...     item
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=StartHairpin(shape='>', tweaks=None), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=StartHairpin(shape='>', tweaks=None), spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("f >o"):
         ...     item
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=StartHairpin(shape='>o', tweaks=TweakInterface(('to_barline', True))), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=StartHairpin(shape='>o', tweaks=TweakInterface(('to_barline', True))), spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("p mp mf f"):
         ...     item
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=None, spanner_stop=None)
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='mp', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-1, tweaks=None), spanner_start=None, spanner_stop=None)
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='mf', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=1, tweaks=None), spanner_start=None, spanner_stop=None)
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='mp', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-1, tweaks=None), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='mf', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=1, tweaks=None), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("p < f f > p"):
         ...     item
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=StartHairpin(shape='<', tweaks=None), spanner_stop=None)
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=None, spanner_stop=None)
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=StartHairpin(shape='>', tweaks=None), spanner_stop=None)
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=StartHairpin(shape='<', tweaks=None), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=StartHairpin(shape='>', tweaks=None), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("f -- ! > p"):
         ...     item
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=StartHairpin(shape='--', tweaks=None), spanner_stop=None)
-        Bundle(bookended_spanner_start=None, indicator=StopHairpin(leak=False), spanner_start=StartHairpin(shape='>', tweaks=None), spanner_stop=None)
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=None), spanner_start=StartHairpin(shape='--', tweaks=None), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=StopHairpin(leak=False), spanner_start=StartHairpin(shape='>', tweaks=None), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("mf niente o< p"):
         ...     item
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='mf', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=1, tweaks=None), spanner_start=None, spanner_stop=None)
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='niente', command='\\!', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity(), tweaks=None), spanner_start=StartHairpin(shape='o<', tweaks=None), spanner_stop=None)
-        Bundle(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='mf', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=1, tweaks=None), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='niente', command='\\!', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity(), tweaks=None), spanner_start=StartHairpin(shape='o<', tweaks=None), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=None), spanner_start=None, spanner_stop=None)
 
     """
     assert isinstance(descriptor, str), repr(descriptor)
     indicators: list[abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin] = []
-    bundles: list[Bundle] = []
+    specifiers: list[_Specifier] = []
     for string in descriptor.split():
         indicator = make_dynamic(
             string, forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line
@@ -2784,42 +2760,42 @@ def parse_hairpin_descriptor(
         indicators.append(indicator)
     if len(indicators) == 1:
         if isinstance(indicators[0], abjad.StartHairpin):
-            bundle = Bundle(spanner_start=indicators[0])
+            specifier = _Specifier(spanner_start=indicators[0])
         else:
             assert isinstance(indicators[0], abjad.Dynamic)
-            bundle = Bundle(indicator=indicators[0])
-        bundles.append(bundle)
-        return bundles
+            specifier = _Specifier(indicator=indicators[0])
+        specifiers.append(specifier)
+        return specifiers
     if isinstance(indicators[0], abjad.StartHairpin):
         result = indicators.pop(0)
         assert isinstance(result, abjad.StartHairpin)
-        bundle = Bundle(spanner_start=result)
-        bundles.append(bundle)
+        specifier = _Specifier(spanner_start=result)
+        specifiers.append(specifier)
     if len(indicators) == 1:
         if isinstance(indicators[0], abjad.StartHairpin):
-            bundle = Bundle(spanner_start=indicators[0])
+            specifier = _Specifier(spanner_start=indicators[0])
         else:
-            bundle = Bundle(indicator=indicators[0])
-        bundles.append(bundle)
-        return bundles
+            specifier = _Specifier(indicator=indicators[0])
+        specifiers.append(specifier)
+        return specifiers
     for left, right in abjad.sequence.nwise(indicators):
         if isinstance(left, abjad.StartHairpin) and isinstance(
             right, abjad.StartHairpin
         ):
             raise Exception("consecutive start hairpin commands.")
         elif isinstance(left, abjad.Dynamic) and isinstance(right, abjad.Dynamic):
-            bundle = Bundle(indicator=left)
-            bundles.append(bundle)
+            specifier = _Specifier(indicator=left)
+            specifiers.append(specifier)
         elif isinstance(left, abjad.Dynamic | abjad.StopHairpin) and isinstance(
             right, abjad.StartHairpin
         ):
-            bundle = Bundle(indicator=left, spanner_start=right)
-            bundles.append(bundle)
+            specifier = _Specifier(indicator=left, spanner_start=right)
+            specifiers.append(specifier)
     prototype = (abjad.Dynamic, abjad.StopHairpin)
     if indicators and isinstance(indicators[-1], prototype):
-        bundle = Bundle(indicator=indicators[-1])
-        bundles.append(bundle)
-    return bundles
+        specifier = _Specifier(indicator=indicators[-1])
+        specifiers.append(specifier)
+    return specifiers
 
 
 def pitch_annotation_spanner(
@@ -4581,7 +4557,7 @@ def text_spanner(
             else:
                 items_.append(item_)
         items = items_
-    bundles = []
+    specifiers = []
     if len(items) == 1:
         message = f"lone item not yet implemented ({original_items!r})."
         raise NotImplementedError(message)
@@ -4678,16 +4654,16 @@ def text_spanner(
             interface.bound_details__right__padding = 1.25
         else:
             interface.bound_details__right__padding = 0.5
-        bundle = Bundle(
+        specifier = _Specifier(
             bookended_spanner_start=bookended_spanner_start,
             spanner_start=start_text_span,
             spanner_stop=stop_text_span,
         )
-        bundles.append(bundle)
+        specifiers.append(specifier)
     return PiecewiseCommand(
         autodetect_right_padding=autodetect_right_padding,
         bookend=bookend,
-        bundles=bundles,
+        specifiers=specifiers,
         final_piece_spanner=final_piece_spanner,
         leak_spanner_stop=leak_spanner_stop,
         left_broken=left_broken,

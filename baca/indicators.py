@@ -134,16 +134,16 @@ class Accelerando:
     def _get_lilypond_format(self):
         return str(self)
 
-    def _get_lilypond_format_bundle(self, *, component=None, wrapper=None):
-        bundle = abjad.LilyPondFormatBundle()
+    def _get_contributions(self, *, component=None, wrapper=None):
+        contributions = abjad.ContributionsBySite()
         if not self.hide:
             if self.tweaks:
                 tweaks = self.tweaks._list_contributions()
-                bundle.after.markup.extend(tweaks)
+                contributions.after.markup.extend(tweaks)
             markup = self._get_markup()
             markup_format_pieces = markup._get_format_pieces(wrapper=wrapper)
-            bundle.after.markup.extend(markup_format_pieces)
-        return bundle
+            contributions.after.markup.extend(markup_format_pieces)
+        return contributions
 
     def _get_markup(self):
         if self.markup is not None:
@@ -223,22 +223,22 @@ class BarExtent:
             bottom = -line_count_to_bar_extent[self.line_count]
         return (bottom, top)
 
-    def _get_lilypond_format_bundle(self, component=None):
-        bundle = abjad.LilyPondFormatBundle()
+    def _get_contributions(self, component=None):
+        contributions = abjad.ContributionsBySite()
         if self.hide:
-            return bundle
+            return contributions
         bar_extent = self._get_bar_extent(component)
         if bar_extent is None:
-            return bundle
+            return contributions
         bottom, top = bar_extent
         string = r"\override Staff.BarLine.bar-extent = "
         string += f"#'({bottom} . {top})"
         previous = abjad.get.effective(component, BarExtent, n=-1)
         if previous is None or previous.line_count <= self.line_count:
-            bundle.before.commands.append(string)
+            contributions.before.commands.append(string)
         else:
-            bundle.after.commands.append(string)
-        return bundle
+            contributions.after.commands.append(string)
+        return contributions
 
     @staticmethod
     def _staff_is_effectively_bottommost(staff):
@@ -446,17 +446,17 @@ class Ritardando:
     def _get_lilypond_format(self):
         return str(self)
 
-    def _get_lilypond_format_bundle(self, *, component=None, wrapper=None):
-        bundle = abjad.LilyPondFormatBundle()
+    def _get_contributions(self, *, component=None, wrapper=None):
+        contributions = abjad.ContributionsBySite()
         if not self.hide:
             if self.tweaks:
                 tweaks = self.tweaks._list_contributions()
-                bundle.after.markup.extend(tweaks)
+                contributions.after.markup.extend(tweaks)
             markup = self._get_markup()
             markup = dataclasses.replace(markup)
             markup_format_pieces = markup._get_format_pieces(wrapper=wrapper)
-            bundle.after.markup.extend(markup_format_pieces)
-        return bundle
+            contributions.after.markup.extend(markup_format_pieces)
+        return contributions
 
     def _get_markup(self):
         if self.markup is not None:
@@ -525,14 +525,14 @@ class StaffLines:
         strings.append(r"\startStaff")
         return strings
 
-    def _get_lilypond_format_bundle(self, component=None):
-        bundle = abjad.LilyPondFormatBundle()
+    def _get_contributions(self, component=None):
+        contributions = abjad.ContributionsBySite()
         if self.hide:
-            return bundle
+            return contributions
         staff = abjad.get.parentage(component).get(abjad.Staff)
         strings = self._get_lilypond_format(context=staff)
-        bundle.before.commands.extend(strings)
-        return bundle
+        contributions.before.commands.extend(strings)
+        return contributions
 
 
 class SpacingSection:
@@ -634,12 +634,12 @@ class SpacingSection:
         """
         return str(self.duration)
 
-    def _get_lilypond_format_bundle(self, leaf=None):
-        bundle = abjad.LilyPondFormatBundle()
+    def _get_contributions(self, leaf=None):
+        contributions = abjad.ContributionsBySite()
         numerator, denominator = self.duration.pair
         string = rf"\baca-new-spacing-section #{numerator} #{denominator}"
-        bundle.before.commands.append(string)
-        return bundle
+        contributions.before.commands.append(string)
+        return contributions
 
     @staticmethod
     def from_string(string):

@@ -254,13 +254,13 @@ class PersistentOverride:
         string = override.override_string
         return string
 
-    def _get_lilypond_format_bundle(self, component=None):
-        bundle = abjad.LilyPondFormatBundle()
+    def _get_contributions(self, component=None):
+        contributions = abjad.ContributionsBySite()
         if self.hide:
-            return bundle
+            return contributions
         strings = [self._get_lilypond_format()]
         if self.after:
-            bundle.after.commands.extend(strings)
+            contributions.after.commands.extend(strings)
         else:
-            bundle.before.commands.extend(strings)
-        return bundle
+            contributions.before.commands.extend(strings)
+        return contributions
