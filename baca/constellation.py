@@ -44,8 +44,11 @@ Constellation.
     >>> for i, leaf in enumerate(leaves):
     ...     if 0 < i and i % 12 == 0:
     ...         strut = abjad.Markup(r"\markup A")
-    ...         abjad.tweak(strut).staff_padding = 22
-    ...         abjad.tweak(strut).transparent = True
+    ...         abjad.tweaks(
+    ...             strut,
+    ...             r"- \tweak staff-padding 22",
+    ...             r"- \tweak transparent ##t",
+    ...         )
     ...         abjad.attach(strut, leaf, direction=abjad.UP)
 
     >>> preamble = r'''#(set-global-staff-size 12)

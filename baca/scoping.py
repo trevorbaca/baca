@@ -446,8 +446,13 @@ def apply_tweaks(argument, tweaks, i=None, total=None):
     if all(isinstance(_, str) for _ in tweaks):
         bundle = abjad.bundle(argument, *tweaks)
         return bundle
+    tweak_objects = []
     interface = abjad.tweak(argument)
     for item in tweaks:
+        if isinstance(item, abjad.Tweak):
+            # abjad.tweaks(argument, item)
+            tweak_objects.append(item)
+            continue
         if isinstance(item, tuple):
             assert len(item) == 2
             interface_, i_ = item
@@ -461,7 +466,9 @@ def apply_tweaks(argument, tweaks, i=None, total=None):
         tuples = interface_._get_attribute_tuples()
         for attribute, value in tuples:
             setattr(interface, attribute, value)
-    return argument
+    if tweak_objects:
+        argument._tweaks = tuple(tweak_objects)
+    # return argument
 
 
 def remove_reapplied_wrappers(leaf, indicator):
@@ -595,7 +602,7 @@ def validate_indexed_tweaks(tweaks):
         return
     assert isinstance(tweaks, tuple), repr(tweaks)
     for tweak in tweaks:
-        if isinstance(tweak, str):
+        if isinstance(tweak, str | abjad.Tweak):
             continue
         if isinstance(tweak, abjad.TweakInterface):
             continue
