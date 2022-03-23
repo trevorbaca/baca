@@ -443,14 +443,12 @@ ScopeTyping: typing.TypeAlias = Scope | TimelineScope
 
 
 def apply_tweaks(argument, tweaks, i=None, total=None):
-    if all(isinstance(_, str) for _ in tweaks):
-        bundle = abjad.bundle(argument, *tweaks)
-        return bundle
+    if not tweaks:
+        return
     tweak_objects = []
     interface = abjad.tweak(argument)
     for item in tweaks:
         if isinstance(item, abjad.Tweak):
-            # abjad.tweaks(argument, item)
             tweak_objects.append(item)
             continue
         if isinstance(item, tuple):
@@ -462,13 +460,17 @@ def apply_tweaks(argument, tweaks, i=None, total=None):
                 continue
         else:
             interface_ = item
-        assert isinstance(interface_, abjad.TweakInterface)
-        tuples = interface_._get_attribute_tuples()
-        for attribute, value in tuples:
-            setattr(interface, attribute, value)
+        if isinstance(interface_, abjad.TweakInterface):
+            tuples = interface_._get_attribute_tuples()
+            for attribute, value in tuples:
+                setattr(interface, attribute, value)
+        else:
+            assert isinstance(interface_, abjad.Tweak)
+            tweak_objects.append(interface_)
     if tweak_objects:
-        argument._tweaks = tuple(tweak_objects)
-    # return argument
+        # argument._tweaks = tuple(tweak_objects)
+        # argument._tweaks = argument._tweaks + tuple(tweak_objects)
+        abjad.tweaks(argument, *tweak_objects)
 
 
 def remove_reapplied_wrappers(leaf, indicator):
@@ -612,6 +614,12 @@ def validate_indexed_tweaks(tweaks):
             and isinstance(tweak[0], abjad.TweakInterface)
         ):
             continue
+        if (
+            isinstance(tweak, tuple)
+            and len(tweak) == 2
+            and isinstance(tweak[0], abjad.Tweak)
+        ):
+            continue
         raise Exception(tweak)
 
 
@@ -646,9 +654,6 @@ class Command:
         self._initialize_tags(self.tags)
 
     def __call__(self, argument=None, runtime: dict = None) -> None:
-        """
-        Calls command on ``argument``.
-        """
         self._runtime = runtime or {}
         if self.map is not None:
             assert callable(self.map)
@@ -659,9 +664,6 @@ class Command:
             return self._call(argument=argument)
 
     def __repr__(self):
-        """
-        Gets repr.
-        """
         return f"{type(self).__name__}()"
 
     def _call(self, argument=None):
@@ -702,9 +704,6 @@ class Command:
 
     @property
     def runtime(self) -> dict:
-        """
-        Gets segment-commands runtime dictionary.
-        """
         return self._runtime
 
     # TODO: reimplement as method with leaf argument
@@ -712,9 +711,6 @@ class Command:
     # TODO: always return tag (never none) for in-place append
     @property
     def tag(self) -> abjad.Tag:
-        """
-        Gets tag.
-        """
         # TODO: replace self.get_tag() functionality
         words = [_ if isinstance(_, str) else _.string for _ in self.tags]
         string = ":".join(words)
@@ -724,9 +720,6 @@ class Command:
 
     # TODO: replace in favor of self.tag(leaf)
     def get_tag(self, leaf: abjad.Leaf = None) -> abjad.Tag | None:
-        """
-        Gets tag for ``leaf``.
-        """
         tags = self.tags[:]
         if self.tag_measure_number:
             start_offset = abjad.get.timespan(leaf).start_offset

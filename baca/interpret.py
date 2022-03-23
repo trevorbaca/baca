@@ -683,8 +683,10 @@ def _attach_rhythm_annotation_spanner(command, selection):
     color = command.annotation_spanner_color or "#darkyellow"
     command_ = _piecewise.rhythm_annotation_spanner(
         string,
-        abjad.tweak(color).color,
-        abjad.tweak(8).staff_padding,
+        # abjad.tweak(color).color,
+        # abjad.tweak(8).staff_padding,
+        abjad.Tweak(rf"- \tweak color {color}"),
+        abjad.Tweak(r"- \tweak staff-padding 8"),
         leak_spanner_stop=True,
         selector=_selectors.leaves(),
     )

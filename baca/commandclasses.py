@@ -57,8 +57,8 @@ class BCPCommand(_scoping.Command):
         ...     baca.make_even_divisions(),
         ...     baca.bcps(
         ...         [(1, 5), (2, 5)],
-        ...         abjad.tweak("#red").color,
-        ...         abjad.tweak(2.5).staff_padding,
+        ...         abjad.Tweak(r"- \tweak color #red"),
+        ...         abjad.Tweak(r"- \tweak staff-padding 2.5"),
         ...     ),
         ...     baca.pitches("E4 F4"),
         ...     baca.script_staff_padding(5),
@@ -886,6 +886,11 @@ class IndicatorCommand(_scoping.Command):
         self.redundant = bool(self.redundant)
         _scoping.validate_indexed_tweaks(self.tweaks)
 
+    def __copy__(self, *arguments):
+        result = dataclasses.replace(self)
+        result.indicators = copy.deepcopy(self.indicators)
+        return result
+
     __repr__ = _scoping.Command.__repr__
 
     def _call(self, argument=None) -> None:
@@ -909,7 +914,6 @@ class IndicatorCommand(_scoping.Command):
                 # _scoping.apply_tweaks(indicator, self.tweaks)
                 reapplied = _scoping.remove_reapplied_wrappers(leaf, indicator)
                 if self.tweaks:
-                    # indicator = _scoping.apply_tweaks(indicator, self.tweaks)
                     _scoping.apply_tweaks(indicator, self.tweaks)
                 wrapper = abjad.attach(
                     indicator,

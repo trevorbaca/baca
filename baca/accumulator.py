@@ -193,9 +193,6 @@ class CommandAccumulator:
         self.voice_names = voice_names
 
     def __call__(self, scopes, *commands):
-        """
-        Calls command accumulator on ``scopes`` and ``commands``.
-        """
         classes = (list, _scoping.Suite)
         commands_ = abjad.sequence.flatten(list(commands), classes=classes, depth=-1)
         commands = tuple(commands_)

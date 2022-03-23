@@ -1,6 +1,7 @@
 """
 Piecewise.
 """
+import copy
 import dataclasses
 import typing
 from inspect import currentframe as _frame
@@ -109,6 +110,11 @@ class PiecewiseCommand(_scoping.Command):
                 self.remove_length_1_spanner_start
             )
         _scoping.validate_indexed_tweaks(self.tweaks)
+
+    def __copy__(self, *arguments):
+        result = dataclasses.replace(self)
+        result.specifiers = copy.deepcopy(self.specifiers)
+        return result
 
     def _call(self, argument=None) -> None:
         if argument is None:
@@ -280,13 +286,41 @@ class PiecewiseCommand(_scoping.Command):
                 indicator, abjad.StartTextSpan
             ):
                 number = autodetected_right_padding
-                abjad.tweak(
-                    indicator,
+                #                abjad.tweak(
+                #                    indicator,
+                #                    tag=self.tag.append(tag)
+                #                    .append(_tags.AUTODETECT)
+                #                    .append(_tags.SPANNER_START),
+                #                ).bound_details__right__padding = number
+                tweak = abjad.Tweak(
+                    rf"- \tweak bound-details.right.padding {number}",
                     tag=self.tag.append(tag)
                     .append(_tags.AUTODETECT)
                     .append(_tags.SPANNER_START),
-                ).bound_details__right__padding = number
+                )
+                existing = [
+                    _
+                    for _ in indicator._tweaks
+                    if _.attribute() != "bound-details.right.padding"
+                ]
+                indicator._tweaks = tuple(existing)
+                abjad.tweaks(indicator, tweak)
             if self.tweaks and hasattr(indicator, "_tweaks"):
+                for item in self.tweaks:
+                    if isinstance(item, abjad.Tweak):
+                        new_tweak = item
+                    else:
+                        assert isinstance(item, tuple), repr(item)
+                        new_tweak = item[0]
+                    assert isinstance(new_tweak, abjad.Tweak), repr(item)
+                    existing_attributes = [_.attribute() for _ in indicator._tweaks]
+                    if new_tweak.attribute() in existing_attributes:
+                        ee = [
+                            _
+                            for _ in indicator._tweaks
+                            if _.attribute() != new_tweak.attribute()
+                        ]
+                        indicator._tweaks = tuple(ee)
                 _scoping.apply_tweaks(indicator, self.tweaks, i=i, total=total_pieces)
             elif self.tweaks and hasattr(indicator, "tweaks"):
                 _scoping.apply_tweaks(indicator, self.tweaks, i=i, total=total_pieces)
@@ -4020,10 +4054,10 @@ def text_spanner(
         ...     "Music_Voice",
         ...     baca.text_spanner(
         ...         "P -> T ->",
-        ...         (abjad.tweak("#red").color, 0),
-        ...         (abjad.tweak("#blue").color, 1),
-        ...         (abjad.tweak("#green").color, 2),
-        ...         (abjad.tweak("#purple").color, 3),
+        ...         (abjad.Tweak(r"- \tweak color #red"), 0),
+        ...         (abjad.Tweak(r"- \tweak color #blue"), 1),
+        ...         (abjad.Tweak(r"- \tweak color #green"), 2),
+        ...         (abjad.Tweak(r"- \tweak color #purple"), 3),
         ...         final_piece_spanner=False,
         ...         pieces=baca.selectors.plts(),
         ...     ),
@@ -4648,12 +4682,21 @@ def text_spanner(
             start_text_span, right_text=right_markup
         )
         # TODO: find some way to make these tweaks explicit to composer
-        interface = abjad.tweak(bookended_spanner_start)
-        interface.bound_details__right__stencil_align_dir_y = abjad.CENTER
+        # interface.bound_details__right__stencil_align_dir_y = abjad.CENTER
+        abjad.tweaks(
+            bookended_spanner_start,
+            r"- \tweak bound-details.right.stencil-align-dir-y #center",
+        )
         if "hook" in style:
-            interface.bound_details__right__padding = 1.25
+            abjad.tweaks(
+                bookended_spanner_start,
+                r"- \tweak bound-details.right.padding 1.25",
+            )
         else:
-            interface.bound_details__right__padding = 0.5
+            abjad.tweaks(
+                bookended_spanner_start,
+                r"- \tweak bound-details.right.padding 0.5",
+            )
         specifier = _Specifier(
             bookended_spanner_start=bookended_spanner_start,
             spanner_start=start_text_span,
