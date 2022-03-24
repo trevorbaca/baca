@@ -445,32 +445,27 @@ ScopeTyping: typing.TypeAlias = Scope | TimelineScope
 def apply_tweaks(argument, tweaks, i=None, total=None):
     if not tweaks:
         return
-    tweak_objects = []
-    interface = abjad.tweak(argument)
+    if i is not None:
+        assert isinstance(i, int), repr(i)
+    if total is not None:
+        assert isinstance(total, int), repr(total)
     for item in tweaks:
-        if isinstance(item, abjad.Tweak):
-            tweak_objects.append(item)
-            continue
         if isinstance(item, tuple):
             assert len(item) == 2
-            interface_, i_ = item
-            if 0 <= i_ and i_ != i:
+            item, index = item
+            if 0 <= index and index != i:
                 continue
-            if i_ < 0 and i_ != -(total - i):
+            if index < 0 and index != -(total - i):
                 continue
+        if isinstance(item, abjad.Tweak):
+            abjad.tweaks(argument, item)
         else:
-            interface_ = item
-        if isinstance(interface_, abjad.TweakInterface):
-            tuples = interface_._get_attribute_tuples()
+            assert isinstance(item, abjad.TweakInterface)
+            assert hasattr(argument, "tweaks"), repr(argument)
+            interface = abjad.tweak(argument)
+            tuples = item._get_attribute_tuples()
             for attribute, value in tuples:
                 setattr(interface, attribute, value)
-        else:
-            assert isinstance(interface_, abjad.Tweak)
-            tweak_objects.append(interface_)
-    if tweak_objects:
-        # argument._tweaks = tuple(tweak_objects)
-        # argument._tweaks = argument._tweaks + tuple(tweak_objects)
-        abjad.tweaks(argument, *tweak_objects)
 
 
 def remove_reapplied_wrappers(leaf, indicator):
