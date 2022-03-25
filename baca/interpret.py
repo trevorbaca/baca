@@ -683,8 +683,6 @@ def _attach_rhythm_annotation_spanner(command, selection):
     color = command.annotation_spanner_color or "#darkyellow"
     command_ = _piecewise.rhythm_annotation_spanner(
         string,
-        # abjad.tweak(color).color,
-        # abjad.tweak(8).staff_padding,
         abjad.Tweak(rf"- \tweak color {color}"),
         abjad.Tweak(r"- \tweak staff-padding 8"),
         leak_spanner_stop=True,
@@ -706,7 +704,7 @@ def _attach_shadow_tie_indicators(score):
             if abjad.get.has_indicator(pleaf, abjad.Tie):
                 continue
             tie = abjad.Tie()
-            abjad.tweak(tie).stencil = False
+            abjad.tweaks(tie, r"- \tweak stencil ##f")
             abjad.attach(tie, pleaf, tag=tag)
 
 
@@ -1165,7 +1163,7 @@ def _clean_up_repeat_tie_direction(score):
             staff_position = clef.to_staff_position(note_head.written_pitch)
             if staff_position.number == 0:
                 repeat_tie = abjad.get.indicator(leaf, abjad.RepeatTie)
-                abjad.tweak(repeat_tie).direction = abjad.UP
+                abjad.tweaks(repeat_tie, r"- \tweak direction #up")
                 break
 
 

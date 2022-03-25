@@ -286,12 +286,6 @@ class PiecewiseCommand(_scoping.Command):
                 indicator, abjad.StartTextSpan
             ):
                 number = autodetected_right_padding
-                #                abjad.tweak(
-                #                    indicator,
-                #                    tag=self.tag.append(tag)
-                #                    .append(_tags.AUTODETECT)
-                #                    .append(_tags.SPANNER_START),
-                #                ).bound_details__right__padding = number
                 tweak = abjad.Tweak(
                     rf"- \tweak bound-details.right.padding {number}",
                     tag=self.tag.append(tag)
@@ -2587,7 +2581,6 @@ def make_dynamic(
     elif string in known_shapes:
         indicator = abjad.StartHairpin(string)
         if string.endswith(">o") and not forbid_al_niente_to_bar_line:
-            # abjad.tweak(indicator).to_barline = True
             abjad.tweaks(indicator, r"- \tweak to-barline ##t")
     elif string == "!":
         indicator = abjad.StopHairpin()
@@ -2657,8 +2650,6 @@ def metric_modulation_spanner(
     Makes metric modulation spanner.
     """
     # TODO: tag red tweak with METRIC_MODULATION_SPANNER_COLOR
-    # red_tweak = abjad.tweak("#red").color
-    # tweaks = tweaks + (red_tweak,)
     tag = _scoping.function_name(_frame())
     tag = tag.append(_tags.METRIC_MODULATION_SPANNER)
     command = text_spanner(

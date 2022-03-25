@@ -231,15 +231,15 @@ class BCPCommand(_scoping.Command):
 
         >>> command = baca.bcps(
         ...     [(1, 2), (1, 4)],
-        ...     abjad.tweak("#red").color,
+        ...     abjad.Tweak(r"- \tweak color #red"),
         ... )
         >>> command
         BCPCommand()
 
         >>> import copy
         >>> new_command = copy.copy(command)
-        >>> new_command
-        BCPCommand()
+        >>> new_command.tweaks
+        (Tweak(string='- \\tweak color #red', tag=None),)
 
     ..  container:: example
 
