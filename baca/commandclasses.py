@@ -743,23 +743,23 @@ class GlissandoCommand(_scoping.Command):
     right_broken: bool = False
     right_broken_show_next: bool = False
     selector: typing.Callable = _selectors.tleaves()
-    tweaks: abjad.IndexedTweakInterfaces = ()
+    tweaks: typing.Sequence[abjad.Tweak] = ()
     zero_padding: bool = False
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
         _scoping.validate_indexed_tweaks(self.tweaks)
 
-    def _call(self, argument=None) -> None:
+    def _call(self, argument=None):
         if argument is None:
             return
         if self.selector is not None:
             argument = self.selector(argument)
         leaves = abjad.select.leaves(argument)
-        tweaks_: list[abjad.IndexedTweakInterface] = []
-        prototype = (abjad.TweakInterface, tuple)
+        tweaks_ = []
+        prototype = (abjad.Tweak, tuple)
         for tweak in self.tweaks or []:
-            assert isinstance(tweak, prototype)
+            assert isinstance(tweak, prototype), repr(tweak)
             tweaks_.append(tweak)
         abjad.glissando(
             leaves,

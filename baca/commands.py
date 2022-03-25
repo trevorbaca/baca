@@ -964,10 +964,10 @@ def finger_pressure_transition(
         selector=selector,
         tags=[_scoping.function_name(_frame())],
         tweaks=(
-            abjad.tweak(2).arrow_length,
-            abjad.tweak(0.5).arrow_width,
-            abjad.tweak(True).bound_details__right__arrow,
-            abjad.tweak(3).thickness,
+            abjad.Tweak(r"- \tweak arrow-length 2"),
+            abjad.Tweak(r"- \tweak arrow-width 0.5"),
+            abjad.Tweak(r"- \tweak bound-details.right.arrow ##t"),
+            abjad.Tweak(r"- \tweak thickness 3"),
         ),
     )
 
@@ -1076,7 +1076,7 @@ def fractions(items):
 
 
 def glissando(
-    *tweaks: abjad.IndexedTweakInterface,
+    *tweaks: abjad.Tweak,
     allow_repeats: bool = False,
     allow_ties: bool = False,
     hide_middle_note_heads: bool = False,
@@ -1269,7 +1269,7 @@ def glissando(
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.glissando(
-        ...         abjad.tweak("#red").color,
+        ...         abjad.Tweak(r"- \tweak color #red"),
         ...     ),
         ... )
 
@@ -1370,8 +1370,8 @@ def glissando(
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.glissando(
-        ...         (abjad.tweak("#red").color, 0),
-        ...         (abjad.tweak("#red").color, -1),
+        ...         (abjad.Tweak(r"- \tweak color #red"), 0),
+        ...         (abjad.Tweak(r"- \tweak color #red"), -1),
         ...     ),
         ... )
 
