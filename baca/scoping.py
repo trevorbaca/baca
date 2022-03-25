@@ -319,7 +319,14 @@ def treat_persistent_wrapper(manifests, wrapper, status):
         string = ":".join(words)
         tag_ = abjad.Tag(string)
         string = f"#(x11-color '{color})"
-        abjad.tweak(wrapper.indicator, tag=tag_).color = string
+        if isinstance(wrapper.indicator, abjad.StartHairpin):
+            abjad.tweaks(
+                wrapper.indicator, rf"- \tweak color {string}", overwrite=True, tag=tag_
+            )
+        else:
+            abjad.tweaks(
+                wrapper.indicator, rf"- \tweak color {string}", overwrite=True, tag=tag_
+            )
         _set_status_tag(wrapper, status)
         return
     attach_color_literal(wrapper, status, existing_deactivate=wrapper.deactivate)
