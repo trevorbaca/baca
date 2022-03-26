@@ -1,5 +1,5 @@
 """
-Indciators.
+Indicators.
 """
 import dataclasses
 import typing
@@ -42,8 +42,8 @@ class Accelerando:
 
         >>> note = abjad.Note("c'4")
         >>> accelerando = baca.Accelerando()
-        >>> abjad.tweak(accelerando).color = "#blue"
-        >>> abjad.tweak(accelerando).extra_offset = "#'(0 . 2)"
+        >>> abjad.tweaks(accelerando, r"- \tweak color #blue")
+        >>> abjad.tweaks(accelerando, r"- \tweak extra-offset #'(0 . 2)")
         >>> abjad.attach(accelerando, note, direction=abjad.UP)
         >>> abjad.show(note) # doctest: +SKIP
 
@@ -58,23 +58,15 @@ class Accelerando:
 
     ..  container:: example
 
-        Tweaks can set at initialization:
-
-        >>> baca.Accelerando(tweaks=abjad.tweak("#blue").color)
-        Accelerando(hide=False, markup=None, tweaks=TweakInterface(('color', '#blue')))
-
-    ..  container:: example
-
         Tweaks survive copy:
 
         >>> accelerando = baca.Accelerando()
-        >>> abjad.tweak(accelerando).color = "#blue"
-        >>> accelerando
-        Accelerando(hide=False, markup=None, tweaks=TweakInterface(('color', '#blue')))
+        >>> abjad.tweaks(accelerando, r"- \tweak color #blue")
 
         >>> import copy
-        >>> copy.copy(accelerando)
-        Accelerando(hide=False, markup=None, tweaks=TweakInterface(('color', '#blue')))
+        >>> accelerando_2 = copy.copy(accelerando)
+        >>> accelerando_2._tweaks
+        (Tweak(string='- \\tweak color #blue', tag=None),)
 
     Tweak extra-offset to align accelerando markup with other metronome mark spanner
     segments.
@@ -86,19 +78,21 @@ class Accelerando:
 
     hide: bool = False
     markup: abjad.Markup | None = None
-    tweaks: abjad.TweakInterface | None = None
+    _tweaks: tuple[abjad.Tweak, ...] = dataclasses.field(
+        default_factory=tuple, repr=False, compare=False
+    )
 
     context: typing.ClassVar[str] = "Score"
     directed: typing.ClassVar[bool] = True
     parameter: typing.ClassVar[str] = "METRONOME_MARK"
     persistent: typing.ClassVar[bool] = True
+    post_event: typing.ClassVar[bool] = True
 
     def __post_init__(self):
         self.hide = bool(self.hide)
         if self.markup is not None:
             assert isinstance(self.markup, abjad.Markup), repr(self.markup)
-        if self.tweaks:
-            self.tweaks = abjad.overrides.set_tweaks(self, self.tweaks)
+        self._tweaks = tuple(abjad.Tweak(_) for _ in self._tweaks)
 
     def __str__(self) -> str:
         r"""
@@ -137,8 +131,8 @@ class Accelerando:
     def _get_contributions(self, *, component=None, wrapper=None):
         contributions = abjad.ContributionsBySite()
         if not self.hide:
-            if self.tweaks:
-                tweaks = self.tweaks._list_contributions()
+            for tweak in sorted(self._tweaks):
+                tweaks = tweak._list_contributions()
                 contributions.after.markup.extend(tweaks)
             markup = self._get_markup()
             markup_format_pieces = markup._get_format_pieces(wrapper=wrapper)
@@ -355,8 +349,8 @@ class Ritardando:
 
         >>> note = abjad.Note("c'4")
         >>> ritardando = baca.Ritardando()
-        >>> abjad.tweak(ritardando).color = "#blue"
-        >>> abjad.tweak(ritardando).extra_offset = "#'(0 . 2)"
+        >>> abjad.tweaks(ritardando, r"- \tweak color #blue")
+        >>> abjad.tweaks(ritardando, r"- \tweak extra-offset #'(0 . 2)")
         >>> abjad.attach(ritardando, note, direction=abjad.UP)
         >>> abjad.show(note) # doctest: +SKIP
 
@@ -371,23 +365,15 @@ class Ritardando:
 
     ..  container:: example
 
-        Tweaks can set at initialization:
-
-        >>> baca.Ritardando(tweaks=abjad.tweak("#blue").color)
-        Ritardando(hide=False, markup=None, tweaks=TweakInterface(('color', '#blue')))
-
-    ..  container:: example
-
         Tweaks survive copy:
 
         >>> ritardando = baca.Ritardando()
-        >>> abjad.tweak(ritardando).color = "#blue"
-        >>> ritardando
-        Ritardando(hide=False, markup=None, tweaks=TweakInterface(('color', '#blue')))
+        >>> abjad.tweaks(ritardando, r"- \tweak color #blue")
 
         >>> import copy
-        >>> copy.copy(ritardando)
-        Ritardando(hide=False, markup=None, tweaks=TweakInterface(('color', '#blue')))
+        >>> ritardando_2 = copy.copy(ritardando)
+        >>> ritardando_2._tweaks
+        (Tweak(string='- \\tweak color #blue', tag=None),)
 
         Tweak extra-offset to align ritardando markup with other metronome mark spanner
         segments.
@@ -399,18 +385,20 @@ class Ritardando:
 
     hide: bool = False
     markup: abjad.Markup | None = None
-    tweaks: abjad.TweakInterface | None = None
+    _tweaks: tuple[abjad.Tweak, ...] = dataclasses.field(
+        default_factory=tuple, repr=False, compare=False
+    )
 
     context: typing.ClassVar[str] = "Score"
     parameter: typing.ClassVar[str] = "METRONOME_MARK"
     persistent: typing.ClassVar[bool] = True
+    post_event: typing.ClassVar[bool] = True
 
     def __post_init__(self):
         self.hide = bool(self.hide)
         if self.markup is not None:
             assert isinstance(self.markup, abjad.Markup), repr(self.markup)
-        if self.tweaks:
-            self.tweaks = abjad.overrides.set_tweaks(self, self.tweaks)
+        self._tweaks = tuple(abjad.Tweak(_) for _ in self._tweaks)
 
     def __str__(self) -> str:
         r"""
@@ -449,8 +437,8 @@ class Ritardando:
     def _get_contributions(self, *, component=None, wrapper=None):
         contributions = abjad.ContributionsBySite()
         if not self.hide:
-            if self.tweaks:
-                tweaks = self.tweaks._list_contributions()
+            for tweak in sorted(self._tweaks):
+                tweaks = tweak._list_contributions()
                 contributions.after.markup.extend(tweaks)
             markup = self._get_markup()
             markup = dataclasses.replace(markup)
