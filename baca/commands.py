@@ -19,7 +19,7 @@ from . import scoping as _scoping
 from . import select as _select
 from . import selectors as _selectors
 from . import tags as _tags
-from . import typings
+from . import typings as _typings
 
 
 def allow_octaves(*, selector=_selectors.leaves()) -> _commandclasses.IndicatorCommand:
@@ -134,8 +134,8 @@ def assign_parts(
 
 def bcps(
     bcps,
-    *tweaks: abjad.IndexedTweakInterface,
-    bow_change_tweaks: abjad.IndexedTweakInterfaces = (),
+    *tweaks: _typings.IndexedTweak,
+    bow_change_tweaks: typing.Sequence[_typings.IndexedTweak] = (),
     final_spanner: bool = False,
     helper: typing.Callable = lambda x, y: x,
     selector=_selectors.leaves(),
@@ -299,7 +299,7 @@ def bcps(
         final_spanner = bool(final_spanner)
     return _commandclasses.BCPCommand(
         bcps=bcps,
-        bow_change_tweaks=bow_change_tweaks,
+        bow_change_tweaks=tuple(bow_change_tweaks),
         final_spanner=final_spanner,
         helper=helper,
         selector=selector,
@@ -1690,11 +1690,11 @@ def label(
 
 def markup(
     argument: str | abjad.Markup,
-    *tweaks: abjad.TweakInterface,
+    *tweaks: abjad.Tweak,
     direction=abjad.UP,
     map=None,
-    match: typings.Indices = None,
-    measures: typings.SliceTyping = None,
+    match: _typings.Indices = None,
+    measures: _typings.SliceTyping = None,
     selector=_selectors.pleaf(0),
 ) -> _commandclasses.IndicatorCommand:
     r"""

@@ -7,6 +7,8 @@ import abjad
 
 IntegerList: typing.TypeAlias = list[int]
 
+IndexedTweak: typing.TypeAlias = typing.Union[abjad.Tweak, tuple[abjad.Tweak, int]]
+
 Indices: typing.TypeAlias = int | abjad.IntegerPair | IntegerList | None
 
 Pair: typing.TypeAlias = tuple[typing.Any, typing.Any]

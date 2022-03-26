@@ -14,7 +14,7 @@ from . import const as _const
 from . import scoping as _scoping
 from . import selectors as _selectors
 from . import tags as _tags
-from . import typings
+from . import typings as _typings
 
 
 @dataclasses.dataclass(slots=True)
@@ -85,7 +85,7 @@ class PiecewiseCommand(_scoping.Command):
     remove_length_1_spanner_start: bool = False
     right_broken: typing.Any = None
     selector: typing.Callable = _selectors.leaves()
-    tweaks: abjad.IndexedTweakInterfaces = ()
+    tweaks: typing.Sequence[_typings.IndexedTweak] = ()
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
@@ -334,15 +334,15 @@ class PiecewiseCommand(_scoping.Command):
 
 def bow_speed_spanner(
     items: str | list,
-    *tweaks: abjad.IndexedTweakInterface,
+    *tweaks: _typings.IndexedTweak,
     autodetect_right_padding: bool = True,
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
     left_broken_text: str = None,
     map=None,
-    match: typings.Indices = None,
-    measures: typings.SliceTyping = None,
+    match: _typings.Indices = None,
+    measures: _typings.SliceTyping = None,
     pieces=_selectors.group(),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
@@ -375,12 +375,12 @@ def bow_speed_spanner(
 
 
 def circle_bow_spanner(
-    *tweaks: abjad.IndexedTweakInterface,
+    *tweaks: _typings.IndexedTweak,
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-circle-bowing-markup",
     map=None,
-    match: typings.Indices = None,
-    measures: typings.SliceTyping = None,
+    match: _typings.Indices = None,
+    measures: _typings.SliceTyping = None,
     pieces=_selectors.group(),
     qualifier: str = None,
     right_broken: bool = False,
@@ -419,14 +419,14 @@ def circle_bow_spanner(
 
 def clb_spanner(
     string_number: int,
-    *tweaks: abjad.IndexedTweakInterface,
+    *tweaks: _typings.IndexedTweak,
     # NOTE: autodetect default differs from text_spanner():
     autodetect_right_padding: bool = True,
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-clb-markup",
     map=None,
-    match: typings.Indices = None,
-    measures: typings.SliceTyping = None,
+    match: _typings.Indices = None,
+    measures: _typings.SliceTyping = None,
     pieces=_selectors.group(),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
@@ -469,15 +469,15 @@ def clb_spanner(
 
 
 def covered_spanner(
-    *tweaks: abjad.IndexedTweakInterface,
+    *tweaks: _typings.IndexedTweak,
     # NOTE: autodetect default differs from text_spanner():
     autodetect_right_padding: bool = True,
     argument: str = r"\baca-covered-markup =|",
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-covered-markup",
     map=None,
-    match: typings.Indices = None,
-    measures: typings.SliceTyping = None,
+    match: _typings.Indices = None,
+    measures: _typings.SliceTyping = None,
     pieces=_selectors.group(),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
@@ -509,14 +509,14 @@ def covered_spanner(
 
 
 def damp_spanner(
-    *tweaks: abjad.IndexedTweakInterface,
+    *tweaks: _typings.IndexedTweak,
     # NOTE: autodetect default differs from text_spanner():
     autodetect_right_padding: bool = True,
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-damp-markup",
     map=None,
-    match: typings.Indices = None,
-    measures: typings.SliceTyping = None,
+    match: _typings.Indices = None,
+    measures: _typings.SliceTyping = None,
     pieces=_selectors.group(),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
@@ -549,10 +549,10 @@ def damp_spanner(
 
 def dynamic(
     dynamic: str | abjad.Dynamic,
-    *tweaks: abjad.TweakInterface,
+    *tweaks: abjad.Tweak,
     map=None,
-    match: typings.Indices = None,
-    measures: typings.SliceTyping = None,
+    match: _typings.Indices = None,
+    measures: _typings.SliceTyping = None,
     selector=_selectors.phead(0),
     redundant: bool = False,
 ) -> _commandclasses.IndicatorCommand:
@@ -909,14 +909,14 @@ def dynamic(
 
 def hairpin(
     dynamics: str | list,
-    *tweaks: abjad.TweakInterface,
+    *tweaks: abjad.Tweak,
     bookend: bool | int = -1,
     final_hairpin: bool | str | abjad.StartHairpin | None = None,
     forbid_al_niente_to_bar_line: bool = False,
     left_broken: bool = False,
     map=None,
-    match: typings.Indices = None,
-    measures: typings.SliceTyping = None,
+    match: _typings.Indices = None,
+    measures: _typings.SliceTyping = None,
     pieces=_selectors.group(),
     remove_length_1_spanner_start: bool = False,
     right_broken: bool = False,
@@ -2266,12 +2266,12 @@ def hairpin(
 
 
 def half_clt_spanner(
-    *tweaks: abjad.IndexedTweakInterface,
+    *tweaks: _typings.IndexedTweak,
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-half-clt-markup",
     map=None,
-    match: typings.Indices = None,
-    measures: typings.SliceTyping = None,
+    match: _typings.Indices = None,
+    measures: _typings.SliceTyping = None,
     pieces=_selectors.group(),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
@@ -2599,11 +2599,11 @@ def make_dynamic(
 
 def material_annotation_spanner(
     items: str | list,
-    *tweaks: abjad.IndexedTweakInterface,
+    *tweaks: _typings.IndexedTweak,
     left_broken: bool = False,
     map=None,
-    match: typings.Indices = None,
-    measures: typings.SliceTyping = None,
+    match: _typings.Indices = None,
+    measures: _typings.SliceTyping = None,
     pieces=_selectors.group(),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner()
@@ -2634,13 +2634,13 @@ def material_annotation_spanner(
 
 
 def metric_modulation_spanner(
-    *tweaks: abjad.IndexedTweakInterface,
+    *tweaks: _typings.IndexedTweak,
     argument: str = r"MM =|",
     autodetect_right_padding: bool = True,
     left_broken: bool = False,
     map=None,
-    match: typings.Indices = None,
-    measures: typings.SliceTyping = None,
+    match: _typings.Indices = None,
+    measures: _typings.SliceTyping = None,
     pieces=_selectors.group(),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner()
@@ -2673,7 +2673,7 @@ def metric_modulation_spanner(
 
 def parse_hairpin_descriptor(
     descriptor: str,
-    *tweaks: abjad.TweakInterface,
+    *tweaks: abjad.Tweak,
     forbid_al_niente_to_bar_line: bool = False,
 ) -> list[_Specifier]:
     r"""
@@ -2829,11 +2829,11 @@ def parse_hairpin_descriptor(
 
 def pitch_annotation_spanner(
     items: str | list,
-    *tweaks: abjad.IndexedTweakInterface,
+    *tweaks: _typings.IndexedTweak,
     left_broken: bool = False,
     map=None,
-    match: typings.Indices = None,
-    measures: typings.SliceTyping = None,
+    match: _typings.Indices = None,
+    measures: _typings.SliceTyping = None,
     pieces=_selectors.group(),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner()
@@ -2864,14 +2864,14 @@ def pitch_annotation_spanner(
 
 
 def pizzicato_spanner(
-    *tweaks: abjad.IndexedTweakInterface,
+    *tweaks: _typings.IndexedTweak,
     # NOTE: autodetect default differs from text_spanner():
     autodetect_right_padding: bool = True,
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-pizz-markup",
     map=None,
-    match: typings.Indices = None,
-    measures: typings.SliceTyping = None,
+    match: _typings.Indices = None,
+    measures: _typings.SliceTyping = None,
     pieces=_selectors.group(),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
@@ -2904,12 +2904,12 @@ def pizzicato_spanner(
 
 def rhythm_annotation_spanner(
     items: str | list,
-    *tweaks: abjad.IndexedTweakInterface,
+    *tweaks: _typings.IndexedTweak,
     left_broken: bool = False,
     leak_spanner_stop: bool = False,
     map=None,
-    match: typings.Indices = None,
-    measures: typings.SliceTyping = None,
+    match: _typings.Indices = None,
+    measures: _typings.SliceTyping = None,
     pieces=_selectors.group(),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner()
@@ -2942,15 +2942,15 @@ def rhythm_annotation_spanner(
 
 def scp_spanner(
     items: str | list,
-    *tweaks: abjad.IndexedTweakInterface,
+    *tweaks: _typings.IndexedTweak,
     autodetect_right_padding: bool = True,
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
     left_broken_text: str = None,
     map=None,
-    match: typings.Indices = None,
-    measures: typings.SliceTyping = None,
+    match: _typings.Indices = None,
+    measures: _typings.SliceTyping = None,
     pieces=_selectors.group(),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
@@ -2983,15 +2983,15 @@ def scp_spanner(
 
 
 def spazzolato_spanner(
-    *tweaks: abjad.IndexedTweakInterface,
+    *tweaks: _typings.IndexedTweak,
     # NOTE: autodetect default differs from text_spanner():
     autodetect_right_padding: bool = True,
     items: str | list = r"\baca-spazzolato-markup =|",
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-spazz-markup",
     map=None,
-    match: typings.Indices = None,
-    measures: typings.SliceTyping = None,
+    match: _typings.Indices = None,
+    measures: _typings.SliceTyping = None,
     pieces=_selectors.group(),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
@@ -3024,15 +3024,15 @@ def spazzolato_spanner(
 
 def string_number_spanner(
     items: str | list,
-    *tweaks: abjad.IndexedTweakInterface,
+    *tweaks: _typings.IndexedTweak,
     autodetect_right_padding: bool = True,
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
     left_broken_text: str = None,
     map=None,
-    match: typings.Indices = None,
-    measures: typings.SliceTyping = None,
+    match: _typings.Indices = None,
+    measures: _typings.SliceTyping = None,
     pieces=_selectors.group(),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
@@ -3065,15 +3065,15 @@ def string_number_spanner(
 
 
 def tasto_spanner(
-    *tweaks: abjad.IndexedTweakInterface,
+    *tweaks: _typings.IndexedTweak,
     autodetect_right_padding: bool = True,
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
     left_broken_text: str = r"\baca-left-broken-t-markup",
     map=None,
-    match: typings.Indices = None,
-    measures: typings.SliceTyping = None,
+    match: _typings.Indices = None,
+    measures: _typings.SliceTyping = None,
     pieces=_selectors.group(),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
@@ -3107,7 +3107,7 @@ def tasto_spanner(
 
 def text_spanner(
     items: str | list,
-    *tweaks: abjad.IndexedTweakInterface,
+    *tweaks: _typings.IndexedTweak,
     autodetect_right_padding: bool = False,
     bookend: bool | int = -1,
     boxed: bool = False,
@@ -3118,8 +3118,8 @@ def text_spanner(
     left_broken_text: str = None,
     lilypond_id: int | str | None = None,
     map=None,
-    match: typings.Indices = None,
-    measures: typings.SliceTyping = None,
+    match: _typings.Indices = None,
+    measures: _typings.SliceTyping = None,
     pieces=_selectors.group(),
     right_broken: bool = False,
     selector=_selectors.leaves(),
@@ -4718,15 +4718,15 @@ def text_spanner(
 
 def vibrato_spanner(
     items: str | list,
-    *tweaks: abjad.IndexedTweakInterface,
+    *tweaks: _typings.IndexedTweak,
     autodetect_right_padding: bool = True,
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
     left_broken_text: str = None,
     map=None,
-    match: typings.Indices = None,
-    measures: typings.SliceTyping = None,
+    match: _typings.Indices = None,
+    measures: _typings.SliceTyping = None,
     pieces=_selectors.group(),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
@@ -4759,15 +4759,15 @@ def vibrato_spanner(
 
 
 def xfb_spanner(
-    *tweaks: abjad.IndexedTweakInterface,
+    *tweaks: _typings.IndexedTweak,
     autodetect_right_padding: bool = True,
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
     left_broken_text: str = r"\baca-left-broken-xfb-markup",
     map=None,
-    match: typings.Indices = None,
-    measures: typings.SliceTyping = None,
+    match: _typings.Indices = None,
+    measures: _typings.SliceTyping = None,
     pieces=_selectors.group(),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:

@@ -101,7 +101,7 @@ def accent(
 
 def alternate_bow_strokes(
     selector=_selectors.pheads(exclude=_const.HIDDEN),
-    *tweaks: abjad.TweakInterface,
+    *tweaks: abjad.Tweak,
     downbow_first: bool = True,
     full: bool = False,
 ) -> _commandclasses.IndicatorCommand:
@@ -502,7 +502,7 @@ def bar_line(
 
 def breathe(
     selector=_selectors.pleaf(-1, exclude=_const.HIDDEN),
-    *tweaks: abjad.TweakInterface,
+    *tweaks: abjad.Tweak,
 ) -> _commandclasses.IndicatorCommand:
     """
     Attaches breathe command.
@@ -609,7 +609,7 @@ def clef(
 
 def damp(
     selector=_selectors.phead(0, exclude=_const.HIDDEN),
-    *tweaks: abjad.TweakInterface,
+    *tweaks: abjad.Tweak,
 ) -> _commandclasses.IndicatorCommand:
     """
     Attaches damp.
@@ -812,7 +812,7 @@ def down_arpeggio(
 
 def down_bow(
     selector=_selectors.phead(0, exclude=_const.HIDDEN),
-    *tweaks: abjad.TweakInterface,
+    *tweaks: abjad.Tweak,
     full: bool = False,
 ) -> _commandclasses.IndicatorCommand:
     r"""
@@ -979,7 +979,7 @@ def down_bow(
 
 def espressivo(
     selector=_selectors.phead(0, exclude=_const.HIDDEN),
-    *tweaks: abjad.TweakInterface,
+    *tweaks: abjad.Tweak,
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches espressivo.
@@ -1683,7 +1683,7 @@ def margin_markup(
 def mark(
     argument: str,
     selector=_selectors.leaf(0),
-    *tweaks: abjad.TweakInterface,
+    *tweaks: abjad.Tweak,
 ) -> _commandclasses.IndicatorCommand:
     """
     Attaches mark.
@@ -1799,7 +1799,7 @@ def quadruple_staccato(
 def rehearsal_mark(
     argument: int | str,
     selector=_selectors.leaf(0),
-    *tweaks: abjad.TweakInterface,
+    *tweaks: abjad.Tweak,
     font_size: int = 10,
 ) -> _commandclasses.IndicatorCommand:
     """
@@ -3154,7 +3154,7 @@ def up_arpeggio(
 
 def up_bow(
     selector=_selectors.phead(0, exclude=_const.HIDDEN),
-    *tweaks: abjad.TweakInterface,
+    *tweaks: abjad.Tweak,
     full: bool = False,
 ) -> _commandclasses.IndicatorCommand:
     r"""

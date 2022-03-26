@@ -10,6 +10,7 @@ import abjad
 from . import scoping as _scoping
 from . import selectors as _selectors
 from . import tags as _tags
+from . import typings as _typings
 
 
 @dataclasses.dataclass
@@ -24,7 +25,7 @@ class SpannerIndicatorCommand(_scoping.Command):
     right_broken: bool = False
     start_indicator: typing.Any = None
     stop_indicator: typing.Any = None
-    tweaks: abjad.IndexedTweakInterfaces = ()
+    tweaks: tuple[_typings.IndexedTweak, ...] = ()
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
@@ -110,7 +111,7 @@ class SpannerIndicatorCommand(_scoping.Command):
 
 
 def beam(
-    *tweaks: abjad.TweakInterface,
+    *tweaks: abjad.Tweak,
     direction: int = None,
     selector=_selectors.tleaves(),
     start_beam: abjad.StartBeam = None,
@@ -394,7 +395,7 @@ def ottava_bassa(
 
 
 def slur(
-    *tweaks: abjad.TweakInterface,
+    *tweaks: abjad.Tweak,
     map=None,
     phrasing_slur=False,
     selector=_selectors.tleaves(),
@@ -592,7 +593,7 @@ def sustain_pedal(
 
 
 def trill_spanner(
-    *tweaks: abjad.TweakInterface,
+    *tweaks: abjad.Tweak,
     alteration: str = None,
     harmonic: bool = False,
     left_broken: bool = False,

@@ -464,15 +464,8 @@ def apply_tweaks(argument, tweaks, i=None, total=None):
                 continue
             if index < 0 and index != -(total - i):
                 continue
-        if isinstance(item, abjad.Tweak):
-            abjad.tweaks(argument, item)
-        else:
-            assert isinstance(item, abjad.TweakInterface)
-            assert hasattr(argument, "tweaks"), repr(argument)
-            interface = abjad.tweak(argument)
-            tuples = item._get_attribute_tuples()
-            for attribute, value in tuples:
-                setattr(interface, attribute, value)
+        assert isinstance(item, abjad.Tweak), repr(item)
+        abjad.tweaks(argument, item)
 
 
 def remove_reapplied_wrappers(leaf, indicator):
@@ -607,14 +600,6 @@ def validate_indexed_tweaks(tweaks):
     assert isinstance(tweaks, tuple), repr(tweaks)
     for tweak in tweaks:
         if isinstance(tweak, str | abjad.Tweak):
-            continue
-        if isinstance(tweak, abjad.TweakInterface):
-            continue
-        if (
-            isinstance(tweak, tuple)
-            and len(tweak) == 2
-            and isinstance(tweak[0], abjad.TweakInterface)
-        ):
             continue
         if (
             isinstance(tweak, tuple)

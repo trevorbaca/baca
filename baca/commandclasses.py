@@ -18,6 +18,7 @@ from . import scoping as _scoping
 from . import select as _select
 from . import selectors as _selectors
 from . import tags as _tags
+from . import typings as _typings
 
 
 def _is_rest(argument):
@@ -400,10 +401,10 @@ class BCPCommand(_scoping.Command):
     """
 
     bcps: typing.Sequence[abjad.IntegerPair] = ()
-    bow_change_tweaks: abjad.IndexedTweakInterfaces = ()
+    bow_change_tweaks: tuple[_typings.IndexedTweak, ...] = ()
     final_spanner: bool = False
     helper: typing.Callable = lambda x, y: x
-    tweaks: abjad.IndexedTweakInterfaces = ()
+    tweaks: tuple[_typings.IndexedTweak, ...] = ()
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
@@ -869,7 +870,7 @@ class IndicatorCommand(_scoping.Command):
     do_not_test: bool = False
     predicate: typing.Callable | None = None
     redundant: bool = False
-    tweaks: abjad.IndexedTweakInterfaces = ()
+    tweaks: typing.Sequence[_typings.IndexedTweak] = ()
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
@@ -1941,7 +1942,7 @@ class ColorFingeringCommand(_scoping.Command):
 
     direction: abjad.Vertical | None = abjad.UP
     numbers: typing.Any = None
-    tweaks: abjad.IndexedTweakInterfaces = ()
+    tweaks: tuple[_typings.IndexedTweak, ...] = ()
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
@@ -5121,7 +5122,7 @@ def clusters(
 
 def color_fingerings(
     numbers: list[abjad.Number],
-    *tweaks: abjad.IndexedTweakInterface,
+    *tweaks: _typings.IndexedTweak,
     selector=_selectors.pheads(exclude=_const.HIDDEN),
 ) -> ColorFingeringCommand:
     """
