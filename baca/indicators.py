@@ -92,7 +92,8 @@ class Accelerando:
         self.hide = bool(self.hide)
         if self.markup is not None:
             assert isinstance(self.markup, abjad.Markup), repr(self.markup)
-        self._tweaks = tuple(abjad.Tweak(_) for _ in self._tweaks)
+        assert isinstance(self._tweaks, tuple), repr(self._tweaks)
+        assert all(isinstance(_, abjad.Tweak) for _ in self._tweaks)
 
     def __str__(self) -> str:
         r"""
@@ -398,7 +399,8 @@ class Ritardando:
         self.hide = bool(self.hide)
         if self.markup is not None:
             assert isinstance(self.markup, abjad.Markup), repr(self.markup)
-        self._tweaks = tuple(abjad.Tweak(_) for _ in self._tweaks)
+        assert isinstance(self._tweaks, tuple), repr(self._tweaks)
+        assert all(isinstance(_, abjad.Tweak) for _ in self._tweaks)
 
     def __str__(self) -> str:
         r"""
