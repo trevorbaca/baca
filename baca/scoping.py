@@ -320,11 +320,11 @@ def treat_persistent_wrapper(manifests, wrapper, status):
         tag_ = abjad.Tag(string)
         string = f"#(x11-color '{color})"
         if isinstance(wrapper.indicator, abjad.StartHairpin):
-            abjad.tweaks(
+            abjad.tweak(
                 wrapper.indicator, rf"- \tweak color {string}", overwrite=True, tag=tag_
             )
         else:
-            abjad.tweaks(
+            abjad.tweak(
                 wrapper.indicator, rf"- \tweak color {string}", overwrite=True, tag=tag_
             )
         _set_status_tag(wrapper, status)
@@ -465,7 +465,7 @@ def apply_tweaks(argument, tweaks, i=None, total=None):
             if index < 0 and index != -(total - i):
                 continue
         assert isinstance(item, abjad.Tweak), repr(item)
-        abjad.tweaks(argument, item)
+        abjad.tweak(argument, item)
 
 
 def remove_reapplied_wrappers(leaf, indicator):

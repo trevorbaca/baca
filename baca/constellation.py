@@ -44,7 +44,7 @@ Constellation.
     >>> for i, leaf in enumerate(leaves):
     ...     if 0 < i and i % 12 == 0:
     ...         strut = abjad.Markup(r"\markup A")
-    ...         abjad.tweaks(
+    ...         abjad.tweak(
     ...             strut,
     ...             r"- \tweak staff-padding 22",
     ...             r"- \tweak transparent ##t",

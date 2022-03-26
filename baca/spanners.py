@@ -863,7 +863,7 @@ def trill_spanner(
     if harmonic is True:
         string = "#(lambda (grob) (grob-interpret-markup grob"
         string += r' #{ \markup \musicglyph #"noteheads.s0harmonic" #}))'
-        abjad.tweaks(start_trill_span, rf"- \tweak TrillPitchHead.stencil {string}")
+        abjad.tweak(start_trill_span, rf"- \tweak TrillPitchHead.stencil {string}")
     stop_trill_span = stop_trill_span or abjad.StopTrillSpan()
     return SpannerIndicatorCommand(
         left_broken=left_broken,

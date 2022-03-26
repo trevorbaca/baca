@@ -298,7 +298,7 @@ class PiecewiseCommand(_scoping.Command):
                     if _.attribute() != "bound-details.right.padding"
                 ]
                 indicator._tweaks = tuple(existing)
-                abjad.tweaks(indicator, tweak)
+                abjad.tweak(indicator, tweak)
             if self.tweaks and hasattr(indicator, "_tweaks"):
                 for item in self.tweaks:
                     if isinstance(item, abjad.Tweak):
@@ -2581,7 +2581,7 @@ def make_dynamic(
     elif string in known_shapes:
         indicator = abjad.StartHairpin(string)
         if string.endswith(">o") and not forbid_al_niente_to_bar_line:
-            abjad.tweaks(indicator, r"- \tweak to-barline ##t")
+            abjad.tweak(indicator, r"- \tweak to-barline ##t")
     elif string == "!":
         indicator = abjad.StopHairpin()
     elif string == "m":
@@ -4678,17 +4678,17 @@ def text_spanner(
         )
         # TODO: find some way to make these tweaks explicit to composer
         # interface.bound_details__right__stencil_align_dir_y = abjad.CENTER
-        abjad.tweaks(
+        abjad.tweak(
             bookended_spanner_start,
             r"- \tweak bound-details.right.stencil-align-dir-y #center",
         )
         if "hook" in style:
-            abjad.tweaks(
+            abjad.tweak(
                 bookended_spanner_start,
                 r"- \tweak bound-details.right.padding 1.25",
             )
         else:
-            abjad.tweaks(
+            abjad.tweak(
                 bookended_spanner_start,
                 r"- \tweak bound-details.right.padding 0.5",
             )

@@ -704,7 +704,7 @@ def _attach_shadow_tie_indicators(score):
             if abjad.get.has_indicator(pleaf, abjad.Tie):
                 continue
             tie = abjad.Tie()
-            abjad.tweaks(tie, r"- \tweak stencil ##f")
+            abjad.tweak(tie, r"- \tweak stencil ##f")
             abjad.attach(tie, pleaf, tag=tag)
 
 
@@ -1163,7 +1163,7 @@ def _clean_up_repeat_tie_direction(score):
             staff_position = clef.to_staff_position(note_head.written_pitch)
             if staff_position.number == 0:
                 repeat_tie = abjad.get.indicator(leaf, abjad.RepeatTie)
-                abjad.tweaks(repeat_tie, r"- \tweak direction #up")
+                abjad.tweak(repeat_tie, r"- \tweak direction #up")
                 break
 
 
@@ -1421,7 +1421,7 @@ def _color_not_yet_registered(score):
 def _color_octaves(score):
     vertical_moments = abjad.iterate_vertical_moments(score)
     markup = abjad.Markup(r"\markup OCTAVE")
-    abjad.tweaks(markup, r"- \tweak color #red")
+    abjad.tweak(markup, r"- \tweak color #red")
     tag = _scoping.function_name(_frame())
     tag = tag.append(_tags.OCTAVE_COLORING)
     for vertical_moment in vertical_moments:

@@ -42,8 +42,8 @@ class Accelerando:
 
         >>> note = abjad.Note("c'4")
         >>> accelerando = baca.Accelerando()
-        >>> abjad.tweaks(accelerando, r"- \tweak color #blue")
-        >>> abjad.tweaks(accelerando, r"- \tweak extra-offset #'(0 . 2)")
+        >>> abjad.tweak(accelerando, r"- \tweak color #blue")
+        >>> abjad.tweak(accelerando, r"- \tweak extra-offset #'(0 . 2)")
         >>> abjad.attach(accelerando, note, direction=abjad.UP)
         >>> abjad.show(note) # doctest: +SKIP
 
@@ -61,7 +61,7 @@ class Accelerando:
         Tweaks survive copy:
 
         >>> accelerando = baca.Accelerando()
-        >>> abjad.tweaks(accelerando, r"- \tweak color #blue")
+        >>> abjad.tweak(accelerando, r"- \tweak color #blue")
 
         >>> import copy
         >>> accelerando_2 = copy.copy(accelerando)
@@ -349,8 +349,8 @@ class Ritardando:
 
         >>> note = abjad.Note("c'4")
         >>> ritardando = baca.Ritardando()
-        >>> abjad.tweaks(ritardando, r"- \tweak color #blue")
-        >>> abjad.tweaks(ritardando, r"- \tweak extra-offset #'(0 . 2)")
+        >>> abjad.tweak(ritardando, r"- \tweak color #blue")
+        >>> abjad.tweak(ritardando, r"- \tweak extra-offset #'(0 . 2)")
         >>> abjad.attach(ritardando, note, direction=abjad.UP)
         >>> abjad.show(note) # doctest: +SKIP
 
@@ -368,7 +368,7 @@ class Ritardando:
         Tweaks survive copy:
 
         >>> ritardando = baca.Ritardando()
-        >>> abjad.tweaks(ritardando, r"- \tweak color #blue")
+        >>> abjad.tweak(ritardando, r"- \tweak color #blue")
 
         >>> import copy
         >>> ritardando_2 = copy.copy(ritardando)
