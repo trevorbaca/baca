@@ -294,12 +294,12 @@ class PiecewiseCommand(_scoping.Command):
                 )
                 existing = [
                     _
-                    for _ in indicator._tweaks
+                    for _ in indicator.tweaks
                     if _.attribute() != "bound-details.right.padding"
                 ]
-                indicator._tweaks = tuple(existing)
+                indicator.tweaks = tuple(existing)
                 abjad.tweak(indicator, tweak)
-            if self.tweaks and hasattr(indicator, "_tweaks"):
+            if self.tweaks and hasattr(indicator, "tweaks"):
                 for item in self.tweaks:
                     if isinstance(item, abjad.Tweak):
                         new_tweak = item
@@ -307,14 +307,14 @@ class PiecewiseCommand(_scoping.Command):
                         assert isinstance(item, tuple), repr(item)
                         new_tweak = item[0]
                     assert isinstance(new_tweak, abjad.Tweak), repr(item)
-                    existing_attributes = [_.attribute() for _ in indicator._tweaks]
+                    existing_attributes = [_.attribute() for _ in indicator.tweaks]
                     if new_tweak.attribute() in existing_attributes:
                         ee = [
                             _
-                            for _ in indicator._tweaks
+                            for _ in indicator.tweaks
                             if _.attribute() != new_tweak.attribute()
                         ]
-                        indicator._tweaks = tuple(ee)
+                        indicator.tweaks = tuple(ee)
                 _scoping.apply_tweaks(indicator, self.tweaks, i=i, total=total_pieces)
             elif self.tweaks and hasattr(indicator, "tweaks"):
                 _scoping.apply_tweaks(indicator, self.tweaks, i=i, total=total_pieces)
@@ -2311,22 +2311,22 @@ def make_dynamic(
     ..  container:: example
 
         >>> baca.make_dynamic("p")
-        Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+        Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=())
 
         >>> baca.make_dynamic("sffz")
-        Dynamic(name='ff', command='\\baca-sffz', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=3)
+        Dynamic(name='ff', command='\\baca-sffz', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=3, tweaks=())
 
         >>> baca.make_dynamic("niente")
-        Dynamic(name='niente', command='\\!', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity())
+        Dynamic(name='niente', command='\\!', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity(), tweaks=())
 
         >>> baca.make_dynamic("<")
-        StartHairpin(shape='<')
+        StartHairpin(shape='<', tweaks=())
 
         >>> baca.make_dynamic("o<|")
-        StartHairpin(shape='o<|')
+        StartHairpin(shape='o<|', tweaks=())
 
         >>> baca.make_dynamic("appena-udibile")
-        Dynamic(name='appena udibile', command='\\baca-appena-udibile', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=None)
+        Dynamic(name='appena udibile', command='\\baca-appena-udibile', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=None, tweaks=())
 
     ..  container:: example
 
@@ -2340,157 +2340,157 @@ def make_dynamic(
         Ancora dynamics:
 
         >>> baca.make_dynamic("p-ancora")
-        Dynamic(name='p', command='\\baca-p-ancora', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+        Dynamic(name='p', command='\\baca-p-ancora', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=())
 
         >>> baca.make_dynamic("f-ancora")
-        Dynamic(name='f', command='\\baca-f-ancora', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2)
+        Dynamic(name='f', command='\\baca-f-ancora', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=())
 
     ..  container:: example
 
         Composite dynamics:
 
         >>> baca.make_dynamic("pf")
-        Dynamic(name='f', command='\\baca-pf', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=2)
+        Dynamic(name='f', command='\\baca-pf', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=2, tweaks=())
 
         >>> baca.make_dynamic("pff")
-        Dynamic(name='ff', command='\\baca-pff', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=3)
+        Dynamic(name='ff', command='\\baca-pff', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=3, tweaks=())
 
     ..  container:: example
 
         Effort dynamics:
 
         >>> baca.make_dynamic('"p"')
-        Dynamic(name='"p"', command='\\baca-effort-p', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+        Dynamic(name='"p"', command='\\baca-effort-p', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=())
 
         >>> baca.make_dynamic('"f"')
-        Dynamic(name='"f"', command='\\baca-effort-f', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2)
+        Dynamic(name='"f"', command='\\baca-effort-f', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=())
 
     ..  container:: example
 
         Effort dynamics (parenthesized):
 
         >>> baca.make_dynamic('("p")')
-        Dynamic(name='p', command='\\baca-effort-p-parenthesized', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+        Dynamic(name='p', command='\\baca-effort-p-parenthesized', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=())
 
         >>> baca.make_dynamic('("f")')
-        Dynamic(name='f', command='\\baca-effort-f-parenthesized', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2)
+        Dynamic(name='f', command='\\baca-effort-f-parenthesized', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=())
 
     ..  container:: example
 
         Effort dynamics (ancora):
 
         >>> baca.make_dynamic('"p"-ancora')
-        Dynamic(name='p', command='\\baca-effort-ancora-p', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+        Dynamic(name='p', command='\\baca-effort-ancora-p', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=())
 
         >>> baca.make_dynamic('"f"-ancora')
-        Dynamic(name='f', command='\\baca-effort-ancora-f', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2)
+        Dynamic(name='f', command='\\baca-effort-ancora-f', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=())
 
     ..  container:: example
 
         Effort dynamics (sempre):
 
         >>> baca.make_dynamic('"p"-sempre')
-        Dynamic(name='p', command='\\baca-effort-p-sempre', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+        Dynamic(name='p', command='\\baca-effort-p-sempre', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=())
 
         >>> baca.make_dynamic('"f"-sempre')
-        Dynamic(name='f', command='\\baca-effort-f-sempre', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2)
+        Dynamic(name='f', command='\\baca-effort-f-sempre', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=())
 
     ..  container:: example
 
         Sub. effort dynamics:
 
         >>> baca.make_dynamic("p-effort-sub")
-        Dynamic(name='p', command='\\baca-p-effort-sub', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+        Dynamic(name='p', command='\\baca-p-effort-sub', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=())
 
         >>> baca.make_dynamic("f-effort-sub")
-        Dynamic(name='f', command='\\baca-f-effort-sub', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2)
+        Dynamic(name='f', command='\\baca-f-effort-sub', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=())
 
     ..  container:: example
 
         Mezzo:
 
         >>> baca.make_dynamic("m")
-        Dynamic(name='m', command='\\baca-m', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=None)
+        Dynamic(name='m', command='\\baca-m', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=None, tweaks=())
 
     ..  container:: example
 
         Parenthesized dynamics:
 
         >>> baca.make_dynamic("(p)")
-        Dynamic(name='p', command='\\baca-p-parenthesized', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+        Dynamic(name='p', command='\\baca-p-parenthesized', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=())
 
         >>> baca.make_dynamic("(f)")
-        Dynamic(name='f', command='\\baca-f-parenthesized', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2)
+        Dynamic(name='f', command='\\baca-f-parenthesized', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=())
 
     ..  container:: example
 
         Poco scratch dynamics:
 
         >>> baca.make_dynamic("p-poco-scratch")
-        Dynamic(name='p', command='\\baca-p-poco-scratch', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+        Dynamic(name='p', command='\\baca-p-poco-scratch', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=())
 
         >>> baca.make_dynamic("f-poco-scratch")
-        Dynamic(name='f', command='\\baca-f-poco-scratch', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2)
+        Dynamic(name='f', command='\\baca-f-poco-scratch', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=())
 
     ..  container:: example
 
         Possibile dynamics:
 
         >>> baca.make_dynamic("p-poss")
-        Dynamic(name='p', command='\\baca-p-poss', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+        Dynamic(name='p', command='\\baca-p-poss', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=())
 
         >>> baca.make_dynamic("f-poss")
-        Dynamic(name='f', command='\\baca-f-poss', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2)
+        Dynamic(name='f', command='\\baca-f-poss', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=())
 
     ..  container:: example
 
         Scratch dynamics:
 
         >>> baca.make_dynamic("p-scratch")
-        Dynamic(name='p', command='\\baca-p-scratch', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+        Dynamic(name='p', command='\\baca-p-scratch', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=())
 
         >>> baca.make_dynamic("f-scratch")
-        Dynamic(name='f', command='\\baca-f-scratch', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2)
+        Dynamic(name='f', command='\\baca-f-scratch', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=())
 
     ..  container:: example
 
         Sempre dynamics:
 
         >>> baca.make_dynamic("p-sempre")
-        Dynamic(name='p', command='\\baca-p-sempre', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+        Dynamic(name='p', command='\\baca-p-sempre', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=())
 
         >>> baca.make_dynamic("f-sempre")
-        Dynamic(name='f', command='\\baca-f-sempre', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2)
+        Dynamic(name='f', command='\\baca-f-sempre', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=())
 
     ..  container:: example
 
         Subito dynamics:
 
         >>> baca.make_dynamic("p-sub")
-        Dynamic(name='p', command='\\baca-p-sub', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+        Dynamic(name='p', command='\\baca-p-sub', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=())
 
         >>> baca.make_dynamic("f-sub")
-        Dynamic(name='f', command='\\baca-f-sub', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2)
+        Dynamic(name='f', command='\\baca-f-sub', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=())
 
     ..  container:: example
 
         Whiteout dynamics:
 
         >>> baca.make_dynamic("p-whiteout")
-        Dynamic(name='p', command='\\baca-p-whiteout', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+        Dynamic(name='p', command='\\baca-p-whiteout', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=())
 
         >>> baca.make_dynamic("f-whiteout")
-        Dynamic(name='f', command='\\baca-f-whiteout', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2)
+        Dynamic(name='f', command='\\baca-f-whiteout', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=())
 
     ..  container:: example
 
         Al niente hairpins are special-cased to carry to-barline tweaks:
 
         >>> baca.make_dynamic(">o")
-        StartHairpin(shape='>o')
+        StartHairpin(shape='>o', tweaks=(Tweak(string='- \\tweak to-barline ##t', tag=None),))
 
         >>> baca.make_dynamic("|>o")
-        StartHairpin(shape='|>o')
+        StartHairpin(shape='|>o', tweaks=(Tweak(string='- \\tweak to-barline ##t', tag=None),))
 
     ..  container:: example exception
 
@@ -2683,95 +2683,95 @@ def parse_hairpin_descriptor(
 
         >>> for item in baca.parse_hairpin_descriptor("f"):
         ...     item
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=()), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor('"f"'):
         ...     item
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='"f"', command='\\baca-effort-f', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='"f"', command='\\baca-effort-f', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=()), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("niente"):
         ...     item
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='niente', command='\\!', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity()), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='niente', command='\\!', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity(), tweaks=()), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("<"):
         ...     item
-        _Specifier(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='<'), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='<', tweaks=()), spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("< !"):
         ...     item
-        _Specifier(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='<'), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='<', tweaks=()), spanner_stop=None)
         _Specifier(bookended_spanner_start=None, indicator=StopHairpin(leak=False), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("o<|"):
         ...     item
-        _Specifier(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='o<|'), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='o<|', tweaks=()), spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("--"):
         ...     item
-        _Specifier(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='--'), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='--', tweaks=()), spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("p < f"):
         ...     item
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2), spanner_start=StartHairpin(shape='<'), spanner_stop=None)
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=()), spanner_start=StartHairpin(shape='<', tweaks=()), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=()), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("p <"):
         ...     item
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2), spanner_start=StartHairpin(shape='<'), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=()), spanner_start=StartHairpin(shape='<', tweaks=()), spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("p < !"):
         ...     item
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2), spanner_start=StartHairpin(shape='<'), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=()), spanner_start=StartHairpin(shape='<', tweaks=()), spanner_stop=None)
         _Specifier(bookended_spanner_start=None, indicator=StopHairpin(leak=False), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("< f"):
         ...     item
-        _Specifier(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='<'), spanner_stop=None)
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='<', tweaks=()), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=()), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("o< f"):
         ...     item
-        _Specifier(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='o<'), spanner_stop=None)
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=None, spanner_start=StartHairpin(shape='o<', tweaks=()), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=()), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("niente o<| f"):
         ...     item
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='niente', command='\\!', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity()), spanner_start=StartHairpin(shape='o<|'), spanner_stop=None)
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='niente', command='\\!', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity(), tweaks=()), spanner_start=StartHairpin(shape='o<|', tweaks=()), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=()), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("f >"):
         ...     item
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2), spanner_start=StartHairpin(shape='>'), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=()), spanner_start=StartHairpin(shape='>', tweaks=()), spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("f >o"):
         ...     item
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2), spanner_start=StartHairpin(shape='>o'), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=()), spanner_start=StartHairpin(shape='>o', tweaks=(Tweak(string='- \\tweak to-barline ##t', tag=None),)), spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("p mp mf f"):
         ...     item
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2), spanner_start=None, spanner_stop=None)
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='mp', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-1), spanner_start=None, spanner_stop=None)
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='mf', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=1), spanner_start=None, spanner_stop=None)
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=()), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='mp', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-1, tweaks=()), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='mf', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=1, tweaks=()), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=()), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("p < f f > p"):
         ...     item
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2), spanner_start=StartHairpin(shape='<'), spanner_stop=None)
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2), spanner_start=None, spanner_stop=None)
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2), spanner_start=StartHairpin(shape='>'), spanner_stop=None)
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=()), spanner_start=StartHairpin(shape='<', tweaks=()), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=()), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=()), spanner_start=StartHairpin(shape='>', tweaks=()), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=()), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("f -- ! > p"):
         ...     item
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2), spanner_start=StartHairpin(shape='--'), spanner_stop=None)
-        _Specifier(bookended_spanner_start=None, indicator=StopHairpin(leak=False), spanner_start=StartHairpin(shape='>'), spanner_stop=None)
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2, tweaks=()), spanner_start=StartHairpin(shape='--', tweaks=()), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=StopHairpin(leak=False), spanner_start=StartHairpin(shape='>', tweaks=()), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=()), spanner_start=None, spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("mf niente o< p"):
         ...     item
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='mf', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=1), spanner_start=None, spanner_stop=None)
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='niente', command='\\!', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity()), spanner_start=StartHairpin(shape='o<'), spanner_stop=None)
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='mf', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=1, tweaks=()), spanner_start=None, spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='niente', command='\\!', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity(), tweaks=()), spanner_start=StartHairpin(shape='o<', tweaks=()), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2, tweaks=()), spanner_start=None, spanner_stop=None)
 
     """
     assert isinstance(descriptor, str), repr(descriptor)
@@ -2782,9 +2782,7 @@ def parse_hairpin_descriptor(
             string, forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line
         )
         if not isinstance(indicator, abjad.Dynamic):
-            if tweaks and hasattr(indicator, "_tweaks"):
-                _scoping.apply_tweaks(indicator, tweaks)
-            elif tweaks and hasattr(indicator, "tweaks"):
+            if tweaks and hasattr(indicator, "tweaks"):
                 _scoping.apply_tweaks(indicator, tweaks)
         indicators.append(indicator)
     if len(indicators) == 1:

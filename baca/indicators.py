@@ -65,7 +65,7 @@ class Accelerando:
 
         >>> import copy
         >>> accelerando_2 = copy.copy(accelerando)
-        >>> accelerando_2._tweaks
+        >>> accelerando_2.tweaks
         (Tweak(string='- \\tweak color #blue', tag=None),)
 
     Tweak extra-offset to align accelerando markup with other metronome mark spanner
@@ -78,7 +78,7 @@ class Accelerando:
 
     hide: bool = False
     markup: abjad.Markup | None = None
-    _tweaks: tuple[abjad.Tweak, ...] = dataclasses.field(
+    tweaks: tuple[abjad.Tweak, ...] = dataclasses.field(
         default_factory=tuple, repr=False, compare=False
     )
 
@@ -92,8 +92,8 @@ class Accelerando:
         self.hide = bool(self.hide)
         if self.markup is not None:
             assert isinstance(self.markup, abjad.Markup), repr(self.markup)
-        assert isinstance(self._tweaks, tuple), repr(self._tweaks)
-        assert all(isinstance(_, abjad.Tweak) for _ in self._tweaks)
+        assert isinstance(self.tweaks, tuple), repr(self.tweaks)
+        assert all(isinstance(_, abjad.Tweak) for _ in self.tweaks)
 
     def __str__(self) -> str:
         r"""
@@ -132,7 +132,7 @@ class Accelerando:
     def _get_contributions(self, *, component=None, wrapper=None):
         contributions = abjad.ContributionsBySite()
         if not self.hide:
-            for tweak in sorted(self._tweaks):
+            for tweak in sorted(self.tweaks):
                 tweaks = tweak._list_contributions()
                 contributions.after.markup.extend(tweaks)
             markup = self._get_markup()
@@ -373,7 +373,7 @@ class Ritardando:
 
         >>> import copy
         >>> ritardando_2 = copy.copy(ritardando)
-        >>> ritardando_2._tweaks
+        >>> ritardando_2.tweaks
         (Tweak(string='- \\tweak color #blue', tag=None),)
 
         Tweak extra-offset to align ritardando markup with other metronome mark spanner
@@ -386,7 +386,7 @@ class Ritardando:
 
     hide: bool = False
     markup: abjad.Markup | None = None
-    _tweaks: tuple[abjad.Tweak, ...] = dataclasses.field(
+    tweaks: tuple[abjad.Tweak, ...] = dataclasses.field(
         default_factory=tuple, repr=False, compare=False
     )
 
@@ -399,8 +399,8 @@ class Ritardando:
         self.hide = bool(self.hide)
         if self.markup is not None:
             assert isinstance(self.markup, abjad.Markup), repr(self.markup)
-        assert isinstance(self._tweaks, tuple), repr(self._tweaks)
-        assert all(isinstance(_, abjad.Tweak) for _ in self._tweaks)
+        assert isinstance(self.tweaks, tuple), repr(self.tweaks)
+        assert all(isinstance(_, abjad.Tweak) for _ in self.tweaks)
 
     def __str__(self) -> str:
         r"""
@@ -439,7 +439,7 @@ class Ritardando:
     def _get_contributions(self, *, component=None, wrapper=None):
         contributions = abjad.ContributionsBySite()
         if not self.hide:
-            for tweak in sorted(self._tweaks):
+            for tweak in sorted(self.tweaks):
                 tweaks = tweak._list_contributions()
                 contributions.after.markup.extend(tweaks)
             markup = self._get_markup()
