@@ -525,7 +525,9 @@ class BCPCommand(_scoping.Command):
                 if bcp_fraction > next_bcp_fraction:
                     articulation = abjad.Articulation("upbow")
                     if self.bow_change_tweaks:
-                        _scoping.apply_tweaks(articulation, self.bow_change_tweaks)
+                        articulation = _scoping.bundle_tweaks(
+                            articulation, self.bow_change_tweaks
+                        )
                     abjad.attach(
                         articulation,
                         lt.head,
@@ -536,7 +538,9 @@ class BCPCommand(_scoping.Command):
                 elif bcp_fraction < next_bcp_fraction:
                     articulation = abjad.Articulation("downbow")
                     if self.bow_change_tweaks:
-                        _scoping.apply_tweaks(articulation, self.bow_change_tweaks)
+                        articulation = _scoping.bundle_tweaks(
+                            articulation, self.bow_change_tweaks
+                        )
                     abjad.attach(
                         articulation,
                         lt.head,
@@ -549,7 +553,9 @@ class BCPCommand(_scoping.Command):
                 if previous_bcp_fraction < bcp_fraction > next_bcp_fraction:
                     articulation = abjad.Articulation("upbow")
                     if self.bow_change_tweaks:
-                        _scoping.apply_tweaks(articulation, self.bow_change_tweaks)
+                        articulation = _scoping.bundle_tweaks(
+                            articulation, self.bow_change_tweaks
+                        )
                     abjad.attach(
                         articulation,
                         lt.head,
@@ -560,7 +566,9 @@ class BCPCommand(_scoping.Command):
                 elif previous_bcp_fraction > bcp_fraction < next_bcp_fraction:
                     articulation = abjad.Articulation("downbow")
                     if self.bow_change_tweaks:
-                        _scoping.apply_tweaks(articulation, self.bow_change_tweaks)
+                        articulation = _scoping.bundle_tweaks(
+                            articulation, self.bow_change_tweaks
+                        )
                     abjad.attach(
                         articulation,
                         lt.head,

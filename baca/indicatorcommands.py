@@ -348,6 +348,7 @@ def alternate_bow_strokes(
             >>
 
     """
+    indicators: list[abjad.Articulation | abjad.Bundle]
     if downbow_first:
         if full:
             strings = ["baca-full-downbow", "baca-full-upbow"]
@@ -359,11 +360,13 @@ def alternate_bow_strokes(
         else:
             strings = ["upbow", "downbow"]
     indicators = [abjad.Articulation(_) for _ in strings]
+    if tweaks:
+        indicators = [abjad.bundle(_, *tweaks) for _ in indicators]
     return _commandclasses.IndicatorCommand(
         indicators=indicators,
         selector=selector,
         tags=[_scoping.function_name(_frame())],
-        tweaks=tweaks,
+        # tweaks=tweaks,
     )
 
 
@@ -614,11 +617,15 @@ def damp(
     """
     Attaches damp.
     """
+    indicator: abjad.Articulation | abjad.Bundle
+    indicator = abjad.Articulation("baca-damp")
+    if tweaks:
+        indicator = abjad.bundle(indicator, *tweaks)
     return _commandclasses.IndicatorCommand(
-        indicators=[abjad.Articulation("baca-damp")],
+        indicators=[indicator],
         selector=selector,
         tags=[_scoping.function_name(_frame())],
-        tweaks=tweaks,
+        # tweaks=tweaks,
     )
 
 
@@ -965,15 +972,18 @@ def down_bow(
             >>
 
     """
+    indicator: abjad.Articulation | abjad.Bundle
     if full:
-        articulation = abjad.Articulation("baca-full-downbow")
+        indicator = abjad.Articulation("baca-full-downbow")
     else:
-        articulation = abjad.Articulation("downbow")
+        indicator = abjad.Articulation("downbow")
+    if tweaks:
+        indicator = abjad.bundle(indicator, *tweaks)
     return _commandclasses.IndicatorCommand(
-        indicators=[articulation],
+        indicators=[indicator],
         selector=selector,
         tags=[_scoping.function_name(_frame())],
-        tweaks=tweaks,
+        # tweaks=tweaks,
     )
 
 
@@ -1056,11 +1066,15 @@ def espressivo(
             >>
 
     """
+    indicator: abjad.Articulation | abjad.Bundle
+    indicator = abjad.Articulation("espressivo")
+    if tweaks:
+        indicator = abjad.bundle(indicator, *tweaks)
     return _commandclasses.IndicatorCommand(
-        indicators=[abjad.Articulation("espressivo")],
+        indicators=[indicator],
         selector=selector,
         tags=[_scoping.function_name(_frame())],
-        tweaks=tweaks,
+        # tweaks=tweaks,
     )
 
 
@@ -3232,15 +3246,18 @@ def up_bow(
             >>
 
     """
+    indicator: abjad.Articulation | abjad.Bundle
     if full:
-        articulation = abjad.Articulation("baca-full-upbow")
+        indicator = abjad.Articulation("baca-full-upbow")
     else:
-        articulation = abjad.Articulation("upbow")
+        indicator = abjad.Articulation("upbow")
+    if tweaks:
+        indicator = abjad.bundle(indicator, *tweaks)
     return _commandclasses.IndicatorCommand(
-        indicators=[articulation],
+        indicators=[indicator],
         selector=selector,
         tags=[_scoping.function_name(_frame())],
-        tweaks=tweaks,
+        # tweaks=tweaks,
     )
 
 

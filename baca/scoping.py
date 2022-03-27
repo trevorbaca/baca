@@ -468,6 +468,28 @@ def apply_tweaks(argument, tweaks, i=None, total=None):
         abjad.tweak(argument, item)
 
 
+def bundle_tweaks(argument, tweaks, i=None, total=None):
+    if not tweaks:
+        return
+    if i is not None:
+        assert isinstance(i, int), repr(i)
+    if total is not None:
+        assert isinstance(total, int), repr(total)
+    all_tweaks = []
+    for item in tweaks:
+        if isinstance(item, tuple):
+            assert len(item) == 2
+            item, index = item
+            if 0 <= index and index != i:
+                continue
+            if index < 0 and index != -(total - i):
+                continue
+        assert isinstance(item, abjad.Tweak), repr(item)
+        all_tweaks.append(item)
+    bundle = abjad.bundle(argument, *all_tweaks)
+    return bundle
+
+
 def remove_reapplied_wrappers(leaf, indicator):
     if not getattr(indicator, "persistent", False):
         return
