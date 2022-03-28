@@ -1865,15 +1865,18 @@ def markup(
     if direction not in (abjad.DOWN, abjad.UP):
         message = f"direction must be up or down (not {direction!r})."
         raise Exception(message)
+    indicator: abjad.Markup | abjad.Bundle
     if isinstance(argument, str):
-        markup = abjad.Markup(argument)
+        indicator = abjad.Markup(argument)
     elif isinstance(argument, abjad.Markup):
-        markup = dataclasses.replace(argument)
+        indicator = dataclasses.replace(argument)
     else:
         message = "MarkupLibary.__call__():\n"
         message += "  Value of 'argument' must be str or markup.\n"
         message += f"  Not {argument!r}."
         raise Exception(message)
+    if tweaks:
+        indicator = abjad.bundle(indicator, *tweaks)
     if (
         selector is not None
         and not isinstance(selector, str)
@@ -1889,13 +1892,13 @@ def markup(
     selector = selector or select_phead_0
     return _commandclasses.IndicatorCommand(
         direction=direction,
-        indicators=[markup],
+        indicators=[indicator],
         map=map,
         match=match,
         measures=measures,
         selector=selector,
         tags=[_scoping.function_name(_frame())],
-        tweaks=tweaks,
+        # tweaks=tweaks,
     )
 
 

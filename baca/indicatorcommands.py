@@ -1822,13 +1822,16 @@ def rehearsal_mark(
     assert isinstance(argument, str), repr(argument)
     assert isinstance(font_size, int | float), repr(font_size)
     string = rf'\baca-rehearsal-mark-markup "{argument}" #{font_size}'
-    markup = abjad.Markup(string)
+    indicator: abjad.Markup | abjad.Bundle
+    indicator = abjad.Markup(string)
+    if tweaks:
+        indicator = abjad.bundle(indicator, *tweaks)
     return _commandclasses.IndicatorCommand(
         direction=abjad.CENTER,
-        indicators=[markup],
+        indicators=[indicator],
         selector=selector,
         tags=[_scoping.function_name(_frame())],
-        tweaks=tweaks,
+        # tweaks=tweaks,
     )
 
 

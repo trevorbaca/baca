@@ -2890,14 +2890,14 @@ class FigureAccumulator:
         else:
             string += r" ] }"
         figure_label_markup = abjad.Markup(string)
-        abjad.tweak(figure_label_markup, r"- \tweak color #blue")
+        bundle = abjad.bundle(figure_label_markup, r"- \tweak color #blue")
         pleaves = _select.pleaves(container)
         if pleaves:
             leaf = pleaves[0]
         else:
             leaf = abjad.select.leaf(container, 0)
         abjad.attach(
-            figure_label_markup,
+            bundle,
             leaf,
             deactivate=True,
             direction=figure_label_direction,

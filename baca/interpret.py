@@ -1421,7 +1421,7 @@ def _color_not_yet_registered(score):
 def _color_octaves(score):
     vertical_moments = abjad.iterate_vertical_moments(score)
     markup = abjad.Markup(r"\markup OCTAVE")
-    abjad.tweak(markup, r"- \tweak color #red")
+    bundle = abjad.bundle(markup, r"- \tweak color #red")
     tag = _scoping.function_name(_frame())
     tag = tag.append(_tags.OCTAVE_COLORING)
     for vertical_moment in vertical_moments:
@@ -1448,7 +1448,7 @@ def _color_octaves(score):
             if not color:
                 continue
             for pleaf in pleaves:
-                abjad.attach(markup, pleaf, direction=abjad.UP, tag=tag)
+                abjad.attach(bundle, pleaf, direction=abjad.UP, tag=tag)
                 string = r"\baca-octave-coloring"
                 literal = abjad.LilyPondLiteral(string, site="before")
                 abjad.attach(literal, pleaf, tag=tag)
