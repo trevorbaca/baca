@@ -1153,7 +1153,7 @@ r"""
         >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
-        >>> text = abjad.tag.left_shift_tags(text, 89)
+        >>> text = abjad.tag.left_shift_tags(text)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> # lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1306,7 +1306,7 @@ r"""
         >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
-        >>> text = abjad.tag.left_shift_tags(text, 89)
+        >>> text = abjad.tag.left_shift_tags(text)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1346,7 +1346,7 @@ r"""
         >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
-        >>> text = abjad.tag.left_shift_tags(text, 89)
+        >>> text = abjad.tag.left_shift_tags(text)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1469,7 +1469,7 @@ r"""
         >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
-        >>> text = abjad.tag.left_shift_tags(text, 89)
+        >>> text = abjad.tag.left_shift_tags(text)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1632,7 +1632,7 @@ r"""
         >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
-        >>> text = abjad.tag.left_shift_tags(text, 89)
+        >>> text = abjad.tag.left_shift_tags(text)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1672,7 +1672,7 @@ r"""
         >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
-        >>> text = abjad.tag.left_shift_tags(text, 89)
+        >>> text = abjad.tag.left_shift_tags(text)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1802,7 +1802,7 @@ r"""
         >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
-        >>> text = abjad.tag.left_shift_tags(text, 89)
+        >>> text = abjad.tag.left_shift_tags(text)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1981,7 +1981,7 @@ r"""
         >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
-        >>> text = abjad.tag.left_shift_tags(text, 89)
+        >>> text = abjad.tag.left_shift_tags(text)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2168,7 +2168,7 @@ r"""
         >>> tags_ = baca.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
-        >>> text = abjad.tag.left_shift_tags(text, 89)
+        >>> text = abjad.tag.left_shift_tags(text)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2340,7 +2340,7 @@ r"""
         >>> tags_ = baca.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
-        >>> text = abjad.tag.left_shift_tags(text, 89)
+        >>> text = abjad.tag.left_shift_tags(text)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2522,7 +2522,7 @@ r"""
         >>> tags_ = baca.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
-        >>> text = abjad.tag.left_shift_tags(text, 89)
+        >>> text = abjad.tag.left_shift_tags(text)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2709,7 +2709,7 @@ r"""
         >>> tags_ = baca.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
-        >>> text = abjad.tag.left_shift_tags(text, 89)
+        >>> text = abjad.tag.left_shift_tags(text)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2907,7 +2907,7 @@ r"""
         >>> tags_ = baca.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
-        >>> text = abjad.tag.left_shift_tags(text, 89)
+        >>> text = abjad.tag.left_shift_tags(text)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -3118,7 +3118,7 @@ r"""
         >>> tags_ = baca.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
-        >>> text = abjad.tag.left_shift_tags(text, 89)
+        >>> text = abjad.tag.left_shift_tags(text)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -3900,7 +3900,7 @@ r"""
         ...     grob="BarLine",
         ...     value="#'(0 . 0)",
         ... )
-        >>> tag = "baca.bar_extent_persistent"
+        >>> tag = abjad.Tag("baca.bar_extent_persistent")
         >>> command = baca.IndicatorCommand(
         ...     indicators=[override], selector=baca.selectors.leaf(0), tags=[tag]
         ... )
@@ -4056,7 +4056,7 @@ r"""
         ...     grob="BarLine",
         ...     value="#'(0 . 0)",
         ... )
-        >>> tag = "baca.bar_extent_persistent"
+        >>> tag = abjad.Tag("baca.bar_extent_persistent")
         >>> command = baca.IndicatorCommand(
         ...     indicators=[override], selector=baca.selectors.leaf(0), tags=[tag]
         ... )

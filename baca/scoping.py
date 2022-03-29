@@ -550,7 +550,7 @@ def remove_reapplied_wrappers(leaf, indicator):
             continue
         is_reapplied_wrapper = False
         assert isinstance(wrapper.tag, abjad.Tag)
-        for word in wrapper.tag:
+        for word in wrapper.tag.words():
             if f"REAPPLIED_{stem}" in word or f"DEFAULT_{stem}" in word:
                 is_reapplied_wrapper = True
         if not is_reapplied_wrapper:
@@ -638,9 +638,7 @@ def validate_indexed_tweaks(tweaks):
 
 def _validate_tags(tags):
     assert isinstance(tags, list), repr(tags)
-    assert "" not in tags, repr(tags)
-    assert not any(":" in _ for _ in tags), repr(tags)
-    return True
+    assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
 
 
 @dataclasses.dataclass(slots=True)
@@ -663,7 +661,7 @@ class Command:
         if self.selector is not None:
             assert callable(self.selector)
         self.tags = list(self.tags or [])
-        assert _validate_tags(self.tags)
+        _validate_tags(self.tags)
         self._initialize_tags(self.tags)
 
     def __call__(self, argument=None, runtime: dict = None) -> None:
@@ -1286,7 +1284,7 @@ def tag(
         message += f" (not {tags!r})."
         raise Exception(message)
     assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
-    assert _validate_tags(tags), repr(tags)
+    _validate_tags(tags), repr(tags)
     if not isinstance(command, Command | Suite):
         raise Exception("can only tag command or suite.")
     if isinstance(command, Suite):

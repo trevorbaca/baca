@@ -35,7 +35,7 @@ def _activate_tags(score, tags):
             if wrapper.tag is None:
                 continue
             for tag in tags:
-                if tag in wrapper.tag:
+                if tag.string in wrapper.tag.words():
                     wrapper.deactivate = False
                     break
 
@@ -1482,7 +1482,7 @@ def _deactivate_tags(deactivate, score):
             if wrapper.tag is None:
                 continue
             for tag in tags:
-                if tag in wrapper.tag:
+                if tag.string in wrapper.tag.words():
                     wrapper.deactivate = True
                     break
 
@@ -2530,7 +2530,7 @@ def _remove_tags(remove_tags, score):
         for wrapper in abjad.get.wrappers(leaf):
             if wrapper.tag is None:
                 continue
-            for word in wrapper.tag:
+            for word in wrapper.tag.words():
                 if abjad.Tag(word) in remove_tags:
                     abjad.detach(wrapper, leaf)
                     break
@@ -2637,7 +2637,7 @@ def _shift_measure_initial_clefs(
             wrapper = abjad.get.wrapper(leaf, abjad.Clef)
             if wrapper is None or not wrapper.tag:
                 continue
-            if _tags.EXPLICIT_CLEF not in wrapper.tag:
+            if _tags.EXPLICIT_CLEF.string not in wrapper.tag.words():
                 continue
             measure_number = offset_to_measure_number.get(start_offset)
             if measure_number is None:
