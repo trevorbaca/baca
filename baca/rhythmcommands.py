@@ -318,7 +318,7 @@ class RhythmCommand(_scoping.Command):
             rest_prototype = (abjad.MultimeasureRest, abjad.Rest, abjad.Skip)
             for leaf in abjad.iterate.leaves(container):
                 if isinstance(leaf, abjad.Note | abjad.Chord):
-                    abjad.attach(_const.NOT_YET_PITCHED, leaf, tag=None)
+                    abjad.attach(_const.NOT_YET_PITCHED, leaf, tag=abjad.Tag())
                 elif isinstance(leaf, rest_prototype):
                     pass
                 else:
@@ -875,7 +875,7 @@ def music(
     annotation_spanner_text = None
     if annotation_spanner is True:
         annotation_spanner_text = "baca.music() =|"
-    tag = tag or _scoping.function_name(_frame())
+    tag = tag.append(_scoping.function_name(_frame()))
     if isinstance(argument, str):
         string = f"{{ {argument} }}"
         container = abjad.parse(string)
@@ -928,7 +928,7 @@ def skeleton(
     Makes rhythm command from ``string`` and attaches NOT_YET_PITCHED indicators to
     music.
     """
-    tag = tag or _scoping.function_name(_frame())
+    tag = tag.append(_scoping.function_name(_frame()))
     if isinstance(argument, str):
         string = f"{{ {argument} }}"
         container = abjad.parse(string)

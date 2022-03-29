@@ -1175,7 +1175,7 @@ class AccidentalAdjustmentCommand(_scoping.Command):
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        if self.tag:
+        if self.tag.string:
             if not self.tag.only_edition() and not self.tag.not_editions():
                 raise Exception(f"tag must have edition: {self.tag!r}.")
             tag = _scoping.function_name(_frame(), self)
@@ -1191,7 +1191,7 @@ class AccidentalAdjustmentCommand(_scoping.Command):
                 note_heads = list(pleaf.note_heads)
             for note_head in note_heads:
                 assert note_head is not None
-                if not self.tag:
+                if not self.tag.string:
                     if self.cautionary:
                         note_head.is_cautionary = True
                     if self.forced:

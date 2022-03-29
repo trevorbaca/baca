@@ -3967,7 +3967,7 @@ r"""
 
         >>> dictionary = persist["persistent_indicators"]
         >>> dictionary
-        {'Music_Staff': [baca.Memento(context='Music_Voice', edition=None, manifest=None, prototype='baca.PersistentOverride', synthetic_offset=None, value=PersistentOverride(after=False, attribute='bar_extent', context='Staff', grob='BarLine', hide=False, value="#'(0 . 0)")), baca.Memento(context='Music_Voice', edition=None, manifest=None, prototype='baca.StaffLines', synthetic_offset=None, value=1), baca.Memento(context='Music_Voice', edition=Tag('-PARTS'), manifest=None, prototype='baca.BarExtent', synthetic_offset=None, value=1)], 'Score': [baca.Memento(context='Global_Skips', edition=None, manifest=None, prototype='abjad.TimeSignature', synthetic_offset=None, value='3/8')]}
+        {'Music_Staff': [baca.Memento(context='Music_Voice', edition=None, manifest=None, prototype='baca.PersistentOverride', synthetic_offset=None, value=PersistentOverride(after=False, attribute='bar_extent', context='Staff', grob='BarLine', hide=False, value="#'(0 . 0)")), baca.Memento(context='Music_Voice', edition=None, manifest=None, prototype='baca.StaffLines', synthetic_offset=None, value=1), baca.Memento(context='Music_Voice', edition=Tag(string='-PARTS'), manifest=None, prototype='baca.BarExtent', synthetic_offset=None, value=1)], 'Score': [baca.Memento(context='Global_Skips', edition=None, manifest=None, prototype='abjad.TimeSignature', synthetic_offset=None, value='3/8')]}
 
     ..  container:: example
 
