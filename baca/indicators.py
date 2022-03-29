@@ -136,8 +136,10 @@ class Accelerando:
                 tweaks = tweak._list_contributions()
                 contributions.after.markup.extend(tweaks)
             markup = self._get_markup()
-            markup_format_pieces = markup._get_format_pieces(wrapper=wrapper)
-            contributions.after.markup.extend(markup_format_pieces)
+            contributions_ = markup._get_contributions(
+                component=component, wrapper=wrapper
+            )
+            contributions.update(contributions_)
         return contributions
 
     def _get_markup(self):
@@ -443,9 +445,10 @@ class Ritardando:
                 tweaks = tweak._list_contributions()
                 contributions.after.markup.extend(tweaks)
             markup = self._get_markup()
-            markup = dataclasses.replace(markup)
-            markup_format_pieces = markup._get_format_pieces(wrapper=wrapper)
-            contributions.after.markup.extend(markup_format_pieces)
+            contributions_ = markup._get_contributions(
+                component=component, wrapper=wrapper
+            )
+            contributions.update(contributions_)
         return contributions
 
     def _get_markup(self):
