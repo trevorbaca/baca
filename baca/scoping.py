@@ -166,9 +166,13 @@ def _set_status_tag(wrapper, status, redraw=None, stem=None):
     prefix = None
     if redraw is True:
         prefix = "redrawn"
-    tag = wrapper.tag.append(function_name(_frame()))
+    tag = wrapper.tag
+    tag_ = function_name(_frame())
+    if tag_.string not in tag.string:
+        tag = tag.append(tag_)
     status_tag = _get_tag(status, stem, prefix=prefix)
-    tag = tag.append(status_tag)
+    if status_tag.string not in tag.string:
+        tag = tag.append(status_tag)
     wrapper.tag = tag
 
 

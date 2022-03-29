@@ -170,8 +170,9 @@ def _append_tag_to_wrappers(leaf, tag):
         if isinstance(wrapper.indicator, abjad.LilyPondLiteral):
             if wrapper.indicator.argument == "":
                 continue
-        tag_ = wrapper.tag.append(tag)
-        wrapper.tag = tag_
+        if tag.string not in wrapper.tag.string:
+            tag_ = wrapper.tag.append(tag)
+            wrapper.tag = tag_
 
 
 def _apply_breaks(score, spacing):
@@ -2454,7 +2455,8 @@ def _reapply_persistent_indicators(
             function_name = _scoping.function_name(_frame(), n=3)
             tag = edition.append(function_name)
             if isinstance(previous_indicator, abjad.MarginMarkup):
-                tag = tag.append(_tags.NOT_PARTS)
+                if _tags.NOT_PARTS.string not in tag.string:
+                    tag = tag.append(_tags.NOT_PARTS)
             try:
                 wrapper = abjad.attach(
                     previous_indicator,
@@ -2482,7 +2484,16 @@ def _reanalyze_reapplied_synthetic_wrappers(score):
             if "REAPPLIED" in wrapper.tag.string:
                 string = wrapper.tag.string
                 string = string.replace("REAPPLIED", "EXPLICIT")
-                tag_ = abjad.Tag(string).append(function_name)
+                words = string.split(":")
+                if abjad.sequence.has_duplicates(words):
+                    words_ = []
+                    for word in words:
+                        if word not in words_:
+                            words_.append(word)
+                    words = words_
+                string = ":".join(words)
+                tag_ = abjad.Tag(string)
+                tag_ = tag_.append(function_name)
                 wrapper._tag = tag_
                 wrapper._synthetic_offset = None
 
@@ -2821,10 +2832,8 @@ def _style_phantom_measures(score):
     for literal in abjad.get.indicators(skip, abjad.LilyPondLiteral):
         if r"\baca-time-signature-color" in literal.argument:
             abjad.detach(literal, skip)
-    _append_tag_to_wrappers(
-        skip,
-        _scoping.function_name(_frame(), n=1).append(_tags.PHANTOM),
-    )
+    _append_tag_to_wrappers(skip, _scoping.function_name(_frame(), n=1))
+    _append_tag_to_wrappers(skip, _tags.PHANTOM)
     string = r"\baca-time-signature-transparent"
     literal = abjad.LilyPondLiteral(string)
     abjad.attach(
@@ -2847,10 +2856,8 @@ def _style_phantom_measures(score):
             if context.name == "Global_Rests":
                 rest = context[-1]
                 break
-        _append_tag_to_wrappers(
-            rest,
-            _scoping.function_name(_frame(), n=4).append(_tags.PHANTOM),
-        )
+        _append_tag_to_wrappers(rest, _scoping.function_name(_frame(), n=4))
+        _append_tag_to_wrappers(rest, _tags.PHANTOM)
     start_offset = abjad.get.timespan(skip).start_offset
     enumeration = _const.MULTIMEASURE_REST_CONTAINER
     containers = []
@@ -2870,10 +2877,8 @@ def _style_phantom_measures(score):
     ]
     for container in containers:
         for leaf in abjad.select.leaves(container):
-            _append_tag_to_wrappers(
-                leaf,
-                _scoping.function_name(_frame(), n=5).append(_tags.PHANTOM),
-            )
+            _append_tag_to_wrappers(leaf, _scoping.function_name(_frame(), n=5))
+            _append_tag_to_wrappers(leaf, _tags.PHANTOM)
             if not isinstance(leaf, abjad.MultimeasureRest):
                 continue
             if abjad.get.has_indicator(leaf, _const.HIDDEN):
