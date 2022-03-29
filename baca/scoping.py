@@ -470,7 +470,7 @@ def apply_tweaks(argument, tweaks, i=None, total=None):
 
 def bundle_tweaks(argument, tweaks, i=None, total=None):
     if not tweaks:
-        return
+        return argument
     if i is not None:
         assert isinstance(i, int), repr(i)
     if total is not None:

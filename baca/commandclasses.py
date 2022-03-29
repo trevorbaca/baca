@@ -1974,7 +1974,9 @@ class ColorFingeringCommand(_scoping.Command):
             number = self.numbers[i]
             if number != 0:
                 fingering = abjad.ColorFingering(number)
-                _scoping.apply_tweaks(fingering, self.tweaks, i=i, total=total)
+                fingering = _scoping.bundle_tweaks(
+                    fingering, self.tweaks, i=i, total=total
+                )
                 abjad.attach(fingering, phead, direction=self.direction)
 
 

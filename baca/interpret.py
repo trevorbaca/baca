@@ -704,8 +704,8 @@ def _attach_shadow_tie_indicators(score):
             if abjad.get.has_indicator(pleaf, abjad.Tie):
                 continue
             tie = abjad.Tie()
-            abjad.tweak(tie, r"- \tweak stencil ##f")
-            abjad.attach(tie, pleaf, tag=tag)
+            bundle = abjad.bundle(tie, r"- \tweak stencil ##f")
+            abjad.attach(bundle, pleaf, tag=tag)
 
 
 def _attach_sounds_during(score):
@@ -1162,8 +1162,10 @@ def _clean_up_repeat_tie_direction(score):
         for note_head in note_heads:
             staff_position = clef.to_staff_position(note_head.written_pitch)
             if staff_position.number == 0:
-                repeat_tie = abjad.get.indicator(leaf, abjad.RepeatTie)
-                abjad.tweak(repeat_tie, r"- \tweak direction #up")
+                wrapper = abjad.get.indicator(leaf, abjad.RepeatTie, unwrap=False)
+                abjad.detach(wrapper, leaf)
+                bundle = abjad.bundle(wrapper.indicator, r"- \tweak direction #up")
+                abjad.attach(bundle, leaf, tag=wrapper.tag)
                 break
 
 
