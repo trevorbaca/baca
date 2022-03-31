@@ -5059,11 +5059,11 @@ def text_spanner_staff_padding(
                         r8
                         c'16
                         [
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \abjad-dashed-line-with-arrow
                         - \baca-text-spanner-left-text "pont."
                         - \baca-text-spanner-right-text "ord."
-                        - \tweak bound-details.right.padding 0.5
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         d'16
                         ]

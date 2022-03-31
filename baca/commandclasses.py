@@ -110,113 +110,113 @@ class BCPCommand(_scoping.Command):
                         e'8
                         - \downbow
                         [
-                        - \abjad-solid-line-with-arrow
-                        - \baca-bcp-spanner-left-text #1 #5
                         - \tweak color #red
                         - \tweak staff-padding 2.5
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #1 #5
                         \bacaStartTextSpanBCP
                         f'8
                         - \upbow
                         \bacaStopTextSpanBCP
-                        - \abjad-solid-line-with-arrow
-                        - \baca-bcp-spanner-left-text #2 #5
                         - \tweak color #red
                         - \tweak staff-padding 2.5
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #2 #5
                         \bacaStartTextSpanBCP
                         e'8
                         - \downbow
                         \bacaStopTextSpanBCP
-                        - \abjad-solid-line-with-arrow
-                        - \baca-bcp-spanner-left-text #1 #5
                         - \tweak color #red
                         - \tweak staff-padding 2.5
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #1 #5
                         \bacaStartTextSpanBCP
                         f'8
                         - \upbow
                         \bacaStopTextSpanBCP
                         ]
-                        - \abjad-solid-line-with-arrow
-                        - \baca-bcp-spanner-left-text #2 #5
                         - \tweak color #red
                         - \tweak staff-padding 2.5
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #2 #5
                         \bacaStartTextSpanBCP
                         e'8
                         - \downbow
                         \bacaStopTextSpanBCP
                         [
-                        - \abjad-solid-line-with-arrow
-                        - \baca-bcp-spanner-left-text #1 #5
                         - \tweak color #red
                         - \tweak staff-padding 2.5
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #1 #5
                         \bacaStartTextSpanBCP
                         f'8
                         - \upbow
                         \bacaStopTextSpanBCP
-                        - \abjad-solid-line-with-arrow
-                        - \baca-bcp-spanner-left-text #2 #5
                         - \tweak color #red
                         - \tweak staff-padding 2.5
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #2 #5
                         \bacaStartTextSpanBCP
                         e'8
                         - \downbow
                         \bacaStopTextSpanBCP
                         ]
-                        - \abjad-solid-line-with-arrow
-                        - \baca-bcp-spanner-left-text #1 #5
                         - \tweak color #red
                         - \tweak staff-padding 2.5
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #1 #5
                         \bacaStartTextSpanBCP
                         f'8
                         - \upbow
                         \bacaStopTextSpanBCP
                         [
-                        - \abjad-solid-line-with-arrow
-                        - \baca-bcp-spanner-left-text #2 #5
                         - \tweak color #red
                         - \tweak staff-padding 2.5
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #2 #5
                         \bacaStartTextSpanBCP
                         e'8
                         - \downbow
                         \bacaStopTextSpanBCP
-                        - \abjad-solid-line-with-arrow
-                        - \baca-bcp-spanner-left-text #1 #5
                         - \tweak color #red
                         - \tweak staff-padding 2.5
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #1 #5
                         \bacaStartTextSpanBCP
                         f'8
                         - \upbow
                         \bacaStopTextSpanBCP
-                        - \abjad-solid-line-with-arrow
-                        - \baca-bcp-spanner-left-text #2 #5
                         - \tweak color #red
                         - \tweak staff-padding 2.5
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #2 #5
                         \bacaStartTextSpanBCP
                         e'8
                         - \downbow
                         \bacaStopTextSpanBCP
                         ]
-                        - \abjad-solid-line-with-arrow
-                        - \baca-bcp-spanner-left-text #1 #5
                         - \tweak color #red
                         - \tweak staff-padding 2.5
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #1 #5
                         \bacaStartTextSpanBCP
                         f'8
                         - \upbow
                         \bacaStopTextSpanBCP
                         [
-                        - \abjad-solid-line-with-arrow
-                        - \baca-bcp-spanner-left-text #2 #5
                         - \tweak color #red
                         - \tweak staff-padding 2.5
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #2 #5
                         \bacaStartTextSpanBCP
                         e'8
                         - \downbow
                         \bacaStopTextSpanBCP
+                        - \tweak color #red
+                        - \tweak staff-padding 2.5
                         - \abjad-solid-line-with-arrow
                         - \baca-bcp-spanner-left-text #1 #5
                         - \baca-bcp-spanner-right-text #2 #5
-                        - \tweak color #red
-                        - \tweak staff-padding 2.5
                         \bacaStartTextSpanBCP
                         f'8
                         \bacaStopTextSpanBCP
@@ -496,7 +496,7 @@ class BCPCommand(_scoping.Command):
                 style=style,
             )
             if self.tweaks:
-                _scoping.apply_tweaks(start_text_span, self.tweaks)
+                start_text_span = _scoping.bundle_tweaks(start_text_span, self.tweaks)
             if _is_rest(lt.head) and (_is_rest(next_leaf) or next_leaf is None):
                 pass
             else:

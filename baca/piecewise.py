@@ -278,10 +278,23 @@ class PiecewiseCommand(_scoping.Command):
         for indicator in specifier:
             if indicator in (True, False):
                 pass
+            elif isinstance(indicator, abjad.Bundle):
+                pass
             else:
                 indicator = dataclasses.replace(indicator)
-            if not getattr(indicator, "trend", False) and leaf is just_bookended_leaf:
-                continue
+            if isinstance(indicator, abjad.Bundle):
+                if (
+                    not getattr(indicator.indicator, "trend", False)
+                    and leaf is just_bookended_leaf
+                ):
+                    continue
+            else:
+                if (
+                    not getattr(indicator, "trend", False)
+                    and leaf is just_bookended_leaf
+                ):
+                    continue
+            # TODO: duplicate this branch for bundles:
             if autodetected_right_padding is not None and isinstance(
                 indicator, abjad.StartTextSpan
             ):
@@ -292,14 +305,38 @@ class PiecewiseCommand(_scoping.Command):
                     .append(_tags.AUTODETECT)
                     .append(_tags.SPANNER_START),
                 )
-                existing = [
-                    _
-                    for _ in indicator.tweaks
-                    if _.attribute() != "bound-details.right.padding"
-                ]
-                indicator.tweaks = tuple(existing)
-                abjad.tweak(indicator, tweak)
-            if self.tweaks and hasattr(indicator, "tweaks"):
+                #                existing = [
+                #                    _
+                #                    for _ in indicator.tweaks
+                #                    if _.attribute() != "bound-details.right.padding"
+                #                ]
+                #                indicator.tweaks = tuple(existing)
+                #                abjad.tweak(indicator, tweak)
+                indicator = abjad.bundle(indicator, tweak)
+            if self.tweaks and isinstance(indicator, abjad.Bundle):
+                for item in self.tweaks:
+                    if isinstance(item, abjad.Tweak):
+                        new_tweak = item
+                    else:
+                        assert isinstance(item, tuple), repr(item)
+                        new_tweak = item[0]
+                    assert isinstance(new_tweak, abjad.Tweak), repr(item)
+                    existing_attributes = [_.attribute() for _ in indicator.tweaks]
+                    ee = []
+                    if new_tweak.attribute() in existing_attributes:
+                        ee = [
+                            _
+                            for _ in indicator.tweaks
+                            if _.attribute() != new_tweak.attribute()
+                        ]
+                        # indicator.tweaks = tuple(ee)
+                        indicator = _scoping.bundle_tweaks(
+                            indicator, tuple(ee), i=i, total=total_pieces
+                        )
+                indicator = _scoping.bundle_tweaks(
+                    indicator, self.tweaks, i=i, total=total_pieces
+                )
+            elif self.tweaks and hasattr(indicator, "tweaks"):
                 for item in self.tweaks:
                     if isinstance(item, abjad.Tweak):
                         new_tweak = item
@@ -316,13 +353,45 @@ class PiecewiseCommand(_scoping.Command):
                         ]
                         indicator.tweaks = tuple(ee)
                 _scoping.apply_tweaks(indicator, self.tweaks, i=i, total=total_pieces)
+
+            elif self.tweaks and isinstance(indicator, abjad.StartTextSpan):
+                for item in self.tweaks:
+                    if isinstance(item, abjad.Tweak):
+                        new_tweak = item
+                    else:
+                        assert isinstance(item, tuple), repr(item)
+                        new_tweak = item[0]
+                    assert isinstance(new_tweak, abjad.Tweak), repr(item)
+                #                    existing_attributes = [_.attribute() for _ in indicator.tweaks]
+                #                    if new_tweak.attribute() in existing_attributes:
+                #                        ee = [
+                #                            _
+                #                            for _ in indicator.tweaks
+                #                            if _.attribute() != new_tweak.attribute()
+                #                        ]
+                #                        indicator.tweaks = tuple(ee)
+                indicator = _scoping.bundle_tweaks(
+                    indicator, self.tweaks, i=i, total=total_pieces
+                )
+            # TODO: remove this duplicate branch?
             elif self.tweaks and hasattr(indicator, "tweaks"):
+                raise Exception("NEVER GET HERE?")
                 _scoping.apply_tweaks(indicator, self.tweaks, i=i, total=total_pieces)
             reapplied = _scoping.remove_reapplied_wrappers(leaf, indicator)
             tag_ = self.tag.append(tag)
             if getattr(indicator, "spanner_start", None) is True:
                 tag_ = tag_.append(_tags.SPANNER_START)
+            elif (
+                isinstance(indicator, abjad.Bundle)
+                and getattr(indicator.indicator, "spanner_start", None) is True
+            ):
+                tag_ = tag_.append(_tags.SPANNER_START)
             if getattr(indicator, "spanner_stop", None) is True:
+                tag_ = tag_.append(_tags.SPANNER_STOP)
+            elif (
+                isinstance(indicator, abjad.Bundle)
+                and getattr(indicator.indicator, "spanner_stop", None) is True
+            ):
                 tag_ = tag_.append(_tags.SPANNER_STOP)
             wrapper = abjad.attach(indicator, leaf, tag=tag_, wrapper=True)
             if _scoping.compare_persistent_indicators(indicator, reapplied):
@@ -3187,11 +3256,11 @@ def text_spanner(
                         \override TextSpanner.staff-padding = 4.5
                         e'8
                         [
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \abjad-dashed-line-with-arrow
                         - \baca-text-spanner-left-text "pont."
                         - \baca-text-spanner-right-text "ord."
-                        - \tweak bound-details.right.padding 0.5
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         d''8
                         f'8
@@ -3277,11 +3346,11 @@ def text_spanner(
                         \override TextSpanner.staff-padding = 4.5
                         e'8
                         [
+                        - \tweak bound-details.right.padding 1.25
+                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \abjad-dashed-line-with-hook
                         - \baca-text-spanner-left-text "pont."
                         - \tweak bound-details.right.text \markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75 \general-align #Y #1 \upright ord. }
-                        - \tweak bound-details.right.padding 1.25
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         d''8
                         f'8
@@ -3367,11 +3436,11 @@ def text_spanner(
                         \override TextSpanner.staff-padding = 4.5
                         e'8
                         [
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \abjad-solid-line-with-arrow
                         - \baca-text-spanner-left-text "pont."
                         - \baca-text-spanner-right-text "ord."
-                        - \tweak bound-details.right.padding 0.5
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         d''8
                         f'8
@@ -3457,11 +3526,11 @@ def text_spanner(
                         \override TextSpanner.staff-padding = 4.5
                         e'8
                         [
+                        - \tweak bound-details.right.padding 1.25
+                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \abjad-solid-line-with-hook
                         - \baca-text-spanner-left-text "pont."
                         - \tweak bound-details.right.text \markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75 \general-align #Y #1 \upright ord. }
-                        - \tweak bound-details.right.padding 1.25
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         d''8
                         f'8
@@ -3547,11 +3616,11 @@ def text_spanner(
                         \override TextSpanner.staff-padding = 4.5
                         e'8
                         [
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \abjad-invisible-line
                         - \baca-text-spanner-left-text "pont."
                         - \baca-text-spanner-right-text "ord."
-                        - \tweak bound-details.right.padding 0.5
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         d''8
                         f'8
@@ -3673,11 +3742,11 @@ def text_spanner(
                         f''8
                         \stopTextSpan
                         [
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \abjad-invisible-line
                         - \baca-text-spanner-left-text "B"
                         - \baca-text-spanner-right-text "A"
-                        - \tweak bound-details.right.padding 0.5
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         e'8
                         d''8
@@ -3781,11 +3850,11 @@ def text_spanner(
                         f''8
                         \stopTextSpan
                         [
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \abjad-solid-line-with-arrow
                         - \baca-text-spanner-left-text "B"
                         - \baca-text-spanner-right-text "A"
-                        - \tweak bound-details.right.padding 0.5
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         e'8
                         d''8
@@ -3861,11 +3930,11 @@ def text_spanner(
                         \override TextSpanner.staff-padding = 4.5
                         e'8
                         [
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \abjad-invisible-line
                         - \baca-text-spanner-left-text "A"
                         - \baca-text-spanner-right-text "B"
-                        - \tweak bound-details.right.padding 0.5
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         d''8
                         f'8
@@ -3874,11 +3943,11 @@ def text_spanner(
                         ]
                         g'8
                         [
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \abjad-invisible-line
                         - \baca-text-spanner-left-text "B"
                         - \baca-text-spanner-right-text "A"
-                        - \tweak bound-details.right.padding 0.5
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         f''8
                         e'8
@@ -3886,11 +3955,11 @@ def text_spanner(
                         ]
                         d''8
                         [
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \abjad-invisible-line
                         - \baca-text-spanner-left-text "A"
                         - \baca-text-spanner-right-text "B"
-                        - \tweak bound-details.right.padding 0.5
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         f'8
                         e''8
@@ -3899,11 +3968,11 @@ def text_spanner(
                         ]
                         f''8
                         [
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \abjad-invisible-line
                         - \baca-text-spanner-left-text "B"
                         - \baca-text-spanner-right-text "A"
-                        - \tweak bound-details.right.padding 0.5
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         e'8
                         d''8
@@ -3979,11 +4048,11 @@ def text_spanner(
                         \override TextSpanner.staff-padding = 4.5
                         e'8
                         [
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \abjad-solid-line-with-arrow
                         - \baca-text-spanner-left-text "A"
                         - \baca-text-spanner-right-text "B"
-                        - \tweak bound-details.right.padding 0.5
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         d''8
                         f'8
@@ -3992,11 +4061,11 @@ def text_spanner(
                         ]
                         g'8
                         [
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \abjad-solid-line-with-arrow
                         - \baca-text-spanner-left-text "B"
                         - \baca-text-spanner-right-text "A"
-                        - \tweak bound-details.right.padding 0.5
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         f''8
                         e'8
@@ -4004,11 +4073,11 @@ def text_spanner(
                         ]
                         d''8
                         [
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \abjad-solid-line-with-arrow
                         - \baca-text-spanner-left-text "A"
                         - \baca-text-spanner-right-text "B"
-                        - \tweak bound-details.right.padding 0.5
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         f'8
                         e''8
@@ -4017,11 +4086,11 @@ def text_spanner(
                         ]
                         f''8
                         [
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \abjad-solid-line-with-arrow
                         - \baca-text-spanner-left-text "B"
                         - \baca-text-spanner-right-text "A"
-                        - \tweak bound-details.right.padding 0.5
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         e'8
                         d''8
@@ -4102,24 +4171,24 @@ def text_spanner(
                         {
                             \override TextSpanner.staff-padding = 4.5
                             c'2
+                            - \tweak color #red
                             - \abjad-solid-line-with-arrow
                             - \baca-text-spanner-left-text "P"
-                            - \tweak color #red
                             \startTextSpan
                             d'4.
                             \stopTextSpan
+                            - \tweak color #blue
                             - \abjad-solid-line-with-arrow
                             - \baca-text-spanner-left-text "T"
-                            - \tweak color #blue
                             \startTextSpan
                             e'2
                             \stopTextSpan
-                            - \abjad-solid-line-with-arrow
-                            - \baca-text-spanner-left-text "P"
-                            - \baca-text-spanner-right-text "T"
                             - \tweak bound-details.right.padding 0.5
                             - \tweak bound-details.right.stencil-align-dir-y #center
                             - \tweak color #green
+                            - \abjad-solid-line-with-arrow
+                            - \baca-text-spanner-left-text "P"
+                            - \baca-text-spanner-right-text "T"
                             \startTextSpan
                             f'4.
                             \stopTextSpan
@@ -4319,11 +4388,11 @@ def text_spanner(
                         f''8
                         \stopTextSpan
                         [
+                        - \tweak bound-details.right.padding 1.25
+                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \abjad-solid-line-with-hook
                         - \baca-text-spanner-left-text "B"
                         - \tweak bound-details.right.text \markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75 \general-align #Y #1 \upright A }
-                        - \tweak bound-details.right.padding 1.25
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         e'8
                         d''8
@@ -4423,11 +4492,11 @@ def text_spanner(
                         \startTextSpan
                         g'2
                         \stopTextSpan
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \abjad-solid-line-with-arrow
                         - \baca-text-spanner-left-text "T"
                         - \baca-text-spanner-right-text "P"
-                        - \tweak bound-details.right.padding 0.5
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         a'4.
                         \stopTextSpan
@@ -4510,11 +4579,11 @@ def text_spanner(
                             \startTextSpan
                             e'2
                             \stopTextSpan
+                            - \tweak bound-details.right.padding 0.5
+                            - \tweak bound-details.right.stencil-align-dir-y #center
                             - \abjad-solid-line-with-arrow
                             - \baca-text-spanner-left-text "P"
                             - \baca-text-spanner-right-text "T"
-                            - \tweak bound-details.right.padding 0.5
-                            - \tweak bound-details.right.stencil-align-dir-y #center
                             \startTextSpan
                             f'4
                             \stopTextSpan
@@ -4671,22 +4740,35 @@ def text_spanner(
             string = r"\markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75"
             string += rf" \general-align #Y #1 {content_string} }}"
             right_markup = abjad.Markup(string)
+        bookended_spanner_start: abjad.StartTextSpan | abjad.Bundle
         bookended_spanner_start = dataclasses.replace(
             start_text_span, right_text=right_markup
         )
         # TODO: find some way to make these tweaks explicit to composer
         # interface.bound_details__right__stencil_align_dir_y = abjad.CENTER
-        abjad.tweak(
+        #        abjad.tweak(
+        #            bookended_spanner_start,
+        #            r"- \tweak bound-details.right.stencil-align-dir-y #center",
+        #        )
+        bookended_spanner_start = abjad.bundle(
             bookended_spanner_start,
             r"- \tweak bound-details.right.stencil-align-dir-y #center",
         )
         if "hook" in style:
-            abjad.tweak(
+            #            abjad.tweak(
+            #                bookended_spanner_start,
+            #                r"- \tweak bound-details.right.padding 1.25",
+            #            )
+            bookended_spanner_start = abjad.bundle(
                 bookended_spanner_start,
                 r"- \tweak bound-details.right.padding 1.25",
             )
         else:
-            abjad.tweak(
+            #            abjad.tweak(
+            #                bookended_spanner_start,
+            #                r"- \tweak bound-details.right.padding 0.5",
+            #            )
+            bookended_spanner_start = abjad.bundle(
                 bookended_spanner_start,
                 r"- \tweak bound-details.right.padding 0.5",
             )
