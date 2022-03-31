@@ -46,7 +46,15 @@ class SpannerIndicatorCommand(_scoping.Command):
             if self.detach_first:
                 for leaf in abjad.iterate.leaves(argument, grace=False):
                     abjad.detach(type(start_indicator), leaf)
-            _scoping.apply_tweaks(start_indicator, self.tweaks)
+            if isinstance(self.start_indicator, abjad.Bundle):
+                start_indicator = _scoping.bundle_tweaks(
+                    self.start_indicator.indicator,
+                    self.start_indicator.tweaks + self.tweaks,
+                )
+            elif hasattr(start_indicator, "tweaks"):
+                _scoping.apply_tweaks(start_indicator, self.tweaks)
+            else:
+                start_indicator = _scoping.bundle_tweaks(start_indicator, self.tweaks)
             first_leaf = abjad.select.leaf(argument, 0)
             if self.left_broken:
                 self._attach_indicator(
@@ -855,22 +863,24 @@ def trill_spanner(
                 interval = abjad.NamedInterval(alteration)
             except Exception:
                 pass
-    start_trill_span = start_trill_span or abjad.StartTrillSpan()
+    start_trill_span_: abjad.StartTrillSpan | abjad.Bundle
+    start_trill_span_ = start_trill_span or abjad.StartTrillSpan()
     if pitch is not None or interval is not None:
-        start_trill_span = dataclasses.replace(
-            start_trill_span, interval=interval, pitch=pitch
+        start_trill_span_ = dataclasses.replace(
+            start_trill_span_, interval=interval, pitch=pitch
         )
     if harmonic is True:
         string = "#(lambda (grob) (grob-interpret-markup grob"
         string += r' #{ \markup \musicglyph #"noteheads.s0harmonic" #}))'
-        abjad.tweak(start_trill_span, rf"- \tweak TrillPitchHead.stencil {string}")
+        string = rf"- \tweak TrillPitchHead.stencil {string}"
+        start_trill_span_ = abjad.bundle(start_trill_span_, string)
     stop_trill_span = stop_trill_span or abjad.StopTrillSpan()
     return SpannerIndicatorCommand(
         left_broken=left_broken,
         map=map,
         right_broken=right_broken,
         selector=selector,
-        start_indicator=start_trill_span,
+        start_indicator=start_trill_span_,
         stop_indicator=stop_trill_span,
         tags=[_scoping.function_name(_frame())],
         tweaks=tweaks,
