@@ -162,7 +162,7 @@ def _indicator_to_key(indicator, manifests):
 
 def _set_status_tag(wrapper, status, redraw=None, stem=None):
     assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
-    stem = stem or to_indicator_stem(wrapper.indicator)
+    stem = stem or to_indicator_stem(wrapper.unbundle_indicator())
     prefix = None
     if redraw is True:
         prefix = "redrawn"
@@ -275,9 +275,8 @@ def attach_color_literal(
 
 def treat_persistent_wrapper(manifests, wrapper, status):
     assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
-    assert bool(wrapper.indicator.persistent), repr(wrapper)
+    assert bool(wrapper.unbundle_indicator().persistent), repr(wrapper)
     assert isinstance(status, str), repr(status)
-    indicator = wrapper.indicator
     prototype = (
         abjad.Glissando,
         abjad.Ottava,
@@ -296,7 +295,7 @@ def treat_persistent_wrapper(manifests, wrapper, status):
         abjad.StopTrillSpan,
         abjad.Tie,
     )
-    if isinstance(indicator, prototype):
+    if isinstance(wrapper.unbundle_indicator(), prototype):
         return
     context = wrapper._find_correct_effective_context()
     assert isinstance(context, abjad.Context), repr(wrapper)
@@ -304,15 +303,15 @@ def treat_persistent_wrapper(manifests, wrapper, status):
     assert isinstance(leaf, abjad.Leaf), repr(wrapper)
     existing_tag = wrapper.tag
     tempo_trend = (_indicators.Accelerando, _indicators.Ritardando)
-    if isinstance(indicator, abjad.MetronomeMark) and abjad.get.has_indicator(
-        leaf, tempo_trend
-    ):
+    if isinstance(
+        wrapper.unbundle_indicator(), abjad.MetronomeMark
+    ) and abjad.get.has_indicator(leaf, tempo_trend):
         status = "explicit"
-    if isinstance(wrapper.indicator, abjad.Dynamic) and abjad.get.indicators(
+    if isinstance(wrapper.unbundle_indicator(), abjad.Dynamic) and abjad.get.indicators(
         leaf, abjad.StartHairpin
     ):
         status = "explicit"
-    if isinstance(wrapper.indicator, abjad.Dynamic | abjad.StartHairpin):
+    if isinstance(wrapper.unbundle_indicator(), abjad.Dynamic | abjad.StartHairpin):
         color = _status_to_color[status]
         words = [
             f"{status.upper()}_DYNAMIC_COLOR",
@@ -323,7 +322,7 @@ def treat_persistent_wrapper(manifests, wrapper, status):
         string = ":".join(words)
         tag_ = abjad.Tag(string)
         string = f"#(x11-color '{color})"
-        if isinstance(wrapper.indicator, abjad.StartHairpin):
+        if isinstance(wrapper.unbundle_indicator(), abjad.StartHairpin):
             abjad.tweak(
                 wrapper.indicator, rf"- \tweak color {string}", overwrite=True, tag=tag_
             )
@@ -343,7 +342,7 @@ def treat_persistent_wrapper(manifests, wrapper, status):
         existing_deactivate=wrapper.deactivate,
         existing_tag=existing_tag,
     )
-    if isinstance(wrapper.indicator, abjad.Clef):
+    if isinstance(wrapper.unbundle_indicator(), abjad.Clef):
         string = rf"\set {context.lilypond_type}.forceClef = ##t"
         literal = abjad.LilyPondLiteral(string)
         wrapper_ = abjad.attach(
@@ -360,12 +359,12 @@ def treat_persistent_wrapper(manifests, wrapper, status):
         existing_deactivate=wrapper.deactivate,
         existing_tag=existing_tag,
     )
-    if isinstance(indicator, abjad.Instrument | abjad.MarginMarkup) and not getattr(
-        indicator, "hide", False
-    ):
-        strings = indicator._get_lilypond_format(context=context)
+    if isinstance(
+        wrapper.unbundle_indicator(), abjad.Instrument | abjad.MarginMarkup
+    ) and not getattr(wrapper.unbundle_indicator(), "hide", False):
+        strings = wrapper.unbundle_indicator()._get_lilypond_format(context=context)
         literal = abjad.LilyPondLiteral(strings, site="after")
-        stem = to_indicator_stem(indicator)
+        stem = to_indicator_stem(wrapper.unbundle_indicator())
         wrapper_ = abjad.attach(
             literal,
             leaf,
@@ -608,6 +607,7 @@ def to_indicator_stem(indicator) -> str:
         'TEXT_SPANNER'
 
     """
+    assert not isinstance(indicator, abjad.Bundle), repr(indicator)
     assert getattr(indicator, "persistent", False), repr(indicator)
     if isinstance(indicator, abjad.Instrument):
         stem = "INSTRUMENT"

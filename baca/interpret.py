@@ -167,8 +167,8 @@ def _analyze_memento(score, dictionary, context, memento):
 def _append_tag_to_wrappers(leaf, tag):
     assert isinstance(tag, abjad.Tag), repr(tag)
     for wrapper in abjad.get.wrappers(leaf):
-        if isinstance(wrapper.indicator, abjad.LilyPondLiteral):
-            if wrapper.indicator.argument == "":
+        if isinstance(wrapper.unbundle_indicator(), abjad.LilyPondLiteral):
+            if wrapper.unbundle_indicator().argument == "":
                 continue
         if tag.string not in wrapper.tag.string:
             tag_ = wrapper.tag.append(tag)
@@ -512,7 +512,7 @@ def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
             continue
         assert "METRONOME_MARK" in tag.string, repr(tag)
         if (
-            isinstance(wrapper.indicator, abjad.MetronomeMark)
+            isinstance(wrapper.unbundle_indicator(), abjad.MetronomeMark)
             and has_trend
             and "EXPLICIT" not in tag.string
         ):
@@ -525,7 +525,7 @@ def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
                 words.append(word)
             string = ":".join(words)
             new_tag = abjad.Tag(string)
-            indicator = wrapper.indicator
+            indicator = wrapper.unbundle_indicator()
             abjad.detach(wrapper, skip)
             abjad.attach(
                 indicator,
@@ -1165,7 +1165,7 @@ def _clean_up_repeat_tie_direction(score):
             if staff_position.number == 0:
                 wrapper = abjad.get.indicator(leaf, abjad.RepeatTie, unwrap=False)
                 abjad.detach(wrapper, leaf)
-                bundle = abjad.bundle(wrapper.indicator, r"- \tweak direction #up")
+                bundle = abjad.bundle(wrapper.get_item(), r"- \tweak direction #up")
                 abjad.attach(bundle, leaf, tag=wrapper.tag)
                 break
 
@@ -1306,19 +1306,23 @@ def _collect_persistent_indicators(
             omit_with_indicator=_const.PHANTOM,
         )
         for wrapper in dictionary.values():
-            if isinstance(wrapper.indicator, do_not_persist_on_phantom_measure):
+            if isinstance(
+                wrapper.unbundle_indicator(), do_not_persist_on_phantom_measure
+            ):
                 wrappers.append(wrapper)
         dictionary = abjad._inspect._get_persistent_wrappers(
             dependent_wrappers=dependent_wrappers
         )
         for wrapper in dictionary.values():
-            if not isinstance(wrapper.indicator, do_not_persist_on_phantom_measure):
+            if not isinstance(
+                wrapper.unbundle_indicator(), do_not_persist_on_phantom_measure
+            ):
                 wrappers.append(wrapper)
         for wrapper in wrappers:
             leaf = wrapper.component
             parentage = abjad.get.parentage(leaf)
             first_context = parentage.get(abjad.Context)
-            indicator = wrapper.indicator
+            indicator = wrapper.unbundle_indicator()
             if isinstance(indicator, abjad.Glissando):
                 continue
             if isinstance(indicator, abjad.RepeatTie):
@@ -2501,9 +2505,9 @@ def _reanalyze_reapplied_synthetic_wrappers(score):
 def _reanalyze_trending_dynamics(manifests, score):
     for leaf in abjad.iterate.leaves(score):
         for wrapper in abjad.get.wrappers(leaf):
-            if isinstance(wrapper.indicator, abjad.Dynamic) and abjad.get.indicators(
-                leaf, abjad.StartHairpin
-            ):
+            if isinstance(
+                wrapper.unbundle_indicator(), abjad.Dynamic
+            ) and abjad.get.indicators(leaf, abjad.StartHairpin):
                 _scoping.treat_persistent_wrapper(manifests, wrapper, "explicit")
 
 
@@ -2642,7 +2646,7 @@ def _shift_measure_initial_clefs(
             measure_number = offset_to_measure_number.get(start_offset)
             if measure_number is None:
                 continue
-            clef = wrapper.indicator
+            clef = wrapper.unbundle_indicator()
             suite = _overrides.clef_shift(clef, selector=_selectors.leaf(0))
             runtime = _bundle_runtime(
                 offset_to_measure_number=offset_to_measure_number,
@@ -2912,10 +2916,7 @@ def _transpose_score(score):
         abjad.iterpitches.transpose_from_sounding_pitch(pleaf)
 
 
-def _treat_untreated_persistent_wrappers(
-    manifests,
-    score,
-):
+def _treat_untreated_persistent_wrappers(manifests, score):
     dynamic_prototype = (abjad.Dynamic, abjad.StartHairpin)
     tempo_prototype = (
         _indicators.Accelerando,
@@ -2924,22 +2925,22 @@ def _treat_untreated_persistent_wrappers(
     )
     for leaf in abjad.iterate.leaves(score):
         for wrapper in abjad.get.wrappers(leaf):
-            if not getattr(wrapper.indicator, "persistent", False):
+            if not getattr(wrapper.unbundle_indicator(), "persistent", False):
                 continue
             if wrapper.tag and _tags.has_persistence_tag(wrapper.tag):
                 continue
-            if isinstance(wrapper.indicator, abjad.Instrument):
+            if isinstance(wrapper.unbundle_indicator(), abjad.Instrument):
                 prototype = abjad.Instrument
-            elif isinstance(wrapper.indicator, dynamic_prototype):
+            elif isinstance(wrapper.unbundle_indicator(), dynamic_prototype):
                 prototype = dynamic_prototype
-            elif isinstance(wrapper.indicator, tempo_prototype):
+            elif isinstance(wrapper.unbundle_indicator(), tempo_prototype):
                 prototype = tempo_prototype
             else:
-                prototype = type(wrapper.indicator)
+                prototype = type(wrapper.unbundle_indicator())
             # TODO: optimize
             previous_indicator = abjad.get.effective(leaf, prototype, n=-1)
             if _scoping.compare_persistent_indicators(
-                previous_indicator, wrapper.indicator
+                previous_indicator, wrapper.unbundle_indicator()
             ):
                 status = "redundant"
             else:

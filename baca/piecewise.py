@@ -305,13 +305,13 @@ class PiecewiseCommand(_scoping.Command):
                     .append(_tags.AUTODETECT)
                     .append(_tags.SPANNER_START),
                 )
-                #                existing = [
-                #                    _
-                #                    for _ in indicator.tweaks
-                #                    if _.attribute() != "bound-details.right.padding"
-                #                ]
-                #                indicator.tweaks = tuple(existing)
-                #                abjad.tweak(indicator, tweak)
+                # existing = [
+                #     _
+                #     for _ in indicator.tweaks
+                #     if _.attribute() != "bound-details.right.padding"
+                # ]
+                # indicator.tweaks = tuple(existing)
+                # abjad.tweak(indicator, tweak)
                 indicator = abjad.bundle(indicator, tweak)
             if self.tweaks and isinstance(indicator, abjad.Bundle):
                 for item in self.tweaks:
@@ -362,21 +362,17 @@ class PiecewiseCommand(_scoping.Command):
                         assert isinstance(item, tuple), repr(item)
                         new_tweak = item[0]
                     assert isinstance(new_tweak, abjad.Tweak), repr(item)
-                #                    existing_attributes = [_.attribute() for _ in indicator.tweaks]
-                #                    if new_tweak.attribute() in existing_attributes:
-                #                        ee = [
-                #                            _
-                #                            for _ in indicator.tweaks
-                #                            if _.attribute() != new_tweak.attribute()
-                #                        ]
-                #                        indicator.tweaks = tuple(ee)
+                # existing_attributes = [_.attribute() for _ in indicator.tweaks]
+                # if new_tweak.attribute() in existing_attributes:
+                #     ee = [
+                #         _
+                #         for _ in indicator.tweaks
+                #         if _.attribute() != new_tweak.attribute()
+                #     ]
+                #     indicator.tweaks = tuple(ee)
                 indicator = _scoping.bundle_tweaks(
                     indicator, self.tweaks, i=i, total=total_pieces
                 )
-            # TODO: remove this duplicate branch?
-            elif self.tweaks and hasattr(indicator, "tweaks"):
-                raise Exception("NEVER GET HERE?")
-                _scoping.apply_tweaks(indicator, self.tweaks, i=i, total=total_pieces)
             reapplied = _scoping.remove_reapplied_wrappers(leaf, indicator)
             tag_ = self.tag.append(tag)
             if getattr(indicator, "spanner_start", None) is True:
@@ -2373,7 +2369,7 @@ def half_clt_spanner(
 
 def make_dynamic(
     string: str, *, forbid_al_niente_to_bar_line: bool = False
-) -> abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin:
+) -> abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin | abjad.Bundle:
     r"""
     Makes dynamic.
 
@@ -2574,7 +2570,7 @@ def make_dynamic(
     assert isinstance(string, str), repr(string)
     scheme_manifest = _classes.SchemeManifest()
     known_shapes = abjad.StartHairpin("<").known_shapes
-    indicator: abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin
+    indicator: abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin | abjad.Bundle
     if "_" in string:
         raise Exception(f"use hyphens instead of underscores ({string!r}).")
     if string == "niente":
@@ -2844,7 +2840,9 @@ def parse_hairpin_descriptor(
 
     """
     assert isinstance(descriptor, str), repr(descriptor)
-    indicators: list[abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin] = []
+    indicators: list[
+        abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin | abjad.Bundle
+    ] = []
     specifiers: list[_Specifier] = []
     for string in descriptor.split():
         indicator = make_dynamic(
@@ -2887,8 +2885,7 @@ def parse_hairpin_descriptor(
         ):
             specifier = _Specifier(indicator=left, spanner_start=right)
             specifiers.append(specifier)
-    prototype = (abjad.Dynamic, abjad.StopHairpin)
-    if indicators and isinstance(indicators[-1], prototype):
+    if indicators and isinstance(indicators[-1], abjad.Dynamic | abjad.StopHairpin):
         specifier = _Specifier(indicator=indicators[-1])
         specifiers.append(specifier)
     return specifiers
