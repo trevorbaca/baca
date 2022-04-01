@@ -313,10 +313,7 @@ def treat_persistent_wrapper(manifests, wrapper, status):
         status = "explicit"
     if isinstance(wrapper.unbundle_indicator(), abjad.Dynamic | abjad.StartHairpin):
         color = _status_to_color[status]
-        words = [
-            f"{status.upper()}_DYNAMIC_COLOR",
-            "_treat_persistent_wrapper(1)",
-        ]
+        words = [f"{status.upper()}_DYNAMIC_COLOR", function_name(_frame()).string]
         words.extend(existing_tag.editions())
         words = [_ if isinstance(_, str) else _.string for _ in words]
         string = ":".join(words)
