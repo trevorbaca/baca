@@ -42,9 +42,12 @@ class Accelerando:
 
         >>> note = abjad.Note("c'4")
         >>> accelerando = baca.Accelerando()
-        >>> abjad.tweak(accelerando, r"- \tweak color #blue")
-        >>> abjad.tweak(accelerando, r"- \tweak extra-offset #'(0 . 2)")
-        >>> abjad.attach(accelerando, note, direction=abjad.UP)
+        >>> bundle = abjad.bundle(
+        ...     accelerando,
+        ...     r"- \tweak color #blue",
+        ...     r"- \tweak extra-offset #'(0 . 2)",
+        ... )
+        >>> abjad.attach(bundle, note, direction=abjad.UP)
         >>> abjad.show(note) # doctest: +SKIP
 
         ..  docs::
@@ -56,18 +59,6 @@ class Accelerando:
             - \tweak extra-offset #'(0 . 2)
             ^ \markup \large \upright accel.
 
-    ..  container:: example
-
-        Tweaks survive copy:
-
-        >>> accelerando = baca.Accelerando()
-        >>> abjad.tweak(accelerando, r"- \tweak color #blue")
-
-        >>> import copy
-        >>> accelerando_2 = copy.copy(accelerando)
-        >>> accelerando_2.tweaks
-        (Tweak(string='- \\tweak color #blue', tag=None),)
-
     Tweak extra-offset to align accelerando markup with other metronome mark spanner
     segments.
 
@@ -78,9 +69,6 @@ class Accelerando:
 
     hide: bool = False
     markup: abjad.Markup | None = None
-    tweaks: tuple[abjad.Tweak, ...] = dataclasses.field(
-        default_factory=tuple, repr=False, compare=False
-    )
 
     context: typing.ClassVar[str] = "Score"
     directed: typing.ClassVar[bool] = True
@@ -92,8 +80,6 @@ class Accelerando:
         self.hide = bool(self.hide)
         if self.markup is not None:
             assert isinstance(self.markup, abjad.Markup), repr(self.markup)
-        assert isinstance(self.tweaks, tuple), repr(self.tweaks)
-        assert all(isinstance(_, abjad.Tweak) for _ in self.tweaks)
 
     def __str__(self) -> str:
         r"""
@@ -132,9 +118,6 @@ class Accelerando:
     def _get_contributions(self, *, component=None, wrapper=None):
         contributions = abjad.ContributionsBySite()
         if not self.hide:
-            for tweak in sorted(self.tweaks):
-                tweaks = tweak._list_contributions()
-                contributions.after.markup.extend(tweaks)
             markup = self._get_markup()
             contributions_ = markup._get_contributions(
                 component=component, wrapper=wrapper
@@ -352,9 +335,12 @@ class Ritardando:
 
         >>> note = abjad.Note("c'4")
         >>> ritardando = baca.Ritardando()
-        >>> abjad.tweak(ritardando, r"- \tweak color #blue")
-        >>> abjad.tweak(ritardando, r"- \tweak extra-offset #'(0 . 2)")
-        >>> abjad.attach(ritardando, note, direction=abjad.UP)
+        >>> bundle = abjad.bundle(
+        ...     ritardando,
+        ...     r"- \tweak color #blue",
+        ...     r"- \tweak extra-offset #'(0 . 2)",
+        ... )
+        >>> abjad.attach(bundle, note, direction=abjad.UP)
         >>> abjad.show(note) # doctest: +SKIP
 
         ..  docs::
@@ -366,20 +352,8 @@ class Ritardando:
             - \tweak extra-offset #'(0 . 2)
             ^ \markup \large \upright rit.
 
-    ..  container:: example
-
-        Tweaks survive copy:
-
-        >>> ritardando = baca.Ritardando()
-        >>> abjad.tweak(ritardando, r"- \tweak color #blue")
-
-        >>> import copy
-        >>> ritardando_2 = copy.copy(ritardando)
-        >>> ritardando_2.tweaks
-        (Tweak(string='- \\tweak color #blue', tag=None),)
-
-        Tweak extra-offset to align ritardando markup with other metronome mark spanner
-        segments.
+    Tweak extra-offset to align ritardando markup with other metronome mark spanner
+    segments.
 
     Ritardandi format as LilyPond markup.
 
@@ -388,9 +362,6 @@ class Ritardando:
 
     hide: bool = False
     markup: abjad.Markup | None = None
-    tweaks: tuple[abjad.Tweak, ...] = dataclasses.field(
-        default_factory=tuple, repr=False, compare=False
-    )
 
     context: typing.ClassVar[str] = "Score"
     parameter: typing.ClassVar[str] = "METRONOME_MARK"
@@ -401,8 +372,6 @@ class Ritardando:
         self.hide = bool(self.hide)
         if self.markup is not None:
             assert isinstance(self.markup, abjad.Markup), repr(self.markup)
-        assert isinstance(self.tweaks, tuple), repr(self.tweaks)
-        assert all(isinstance(_, abjad.Tweak) for _ in self.tweaks)
 
     def __str__(self) -> str:
         r"""
@@ -441,9 +410,6 @@ class Ritardando:
     def _get_contributions(self, *, component=None, wrapper=None):
         contributions = abjad.ContributionsBySite()
         if not self.hide:
-            for tweak in sorted(self.tweaks):
-                tweaks = tweak._list_contributions()
-                contributions.after.markup.extend(tweaks)
             markup = self._get_markup()
             contributions_ = markup._get_contributions(
                 component=component, wrapper=wrapper
