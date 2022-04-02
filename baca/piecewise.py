@@ -336,7 +336,9 @@ class PiecewiseCommand(_scoping.Command):
                 indicator = _scoping.bundle_tweaks(
                     indicator, self.tweaks, i=i, total=total_pieces
                 )
+            # TODO: remove branch?
             elif self.tweaks and hasattr(indicator, "tweaks"):
+                raise Exception(indicator)
                 for item in self.tweaks:
                     if isinstance(item, abjad.Tweak):
                         new_tweak = item
@@ -353,7 +355,6 @@ class PiecewiseCommand(_scoping.Command):
                         ]
                         indicator.tweaks = tuple(ee)
                 _scoping.apply_tweaks(indicator, self.tweaks, i=i, total=total_pieces)
-
             elif self.tweaks and isinstance(indicator, abjad.StartTextSpan):
                 for item in self.tweaks:
                     if isinstance(item, abjad.Tweak):
@@ -2367,6 +2368,15 @@ def half_clt_spanner(
     return result
 
 
+def _is_maybe_bundled(argument, prototype):
+    if isinstance(argument, prototype):
+        return True
+    if isinstance(argument, abjad.Bundle):
+        if isinstance(argument.indicator, prototype):
+            return True
+    return False
+
+
 def make_dynamic(
     string: str, *, forbid_al_niente_to_bar_line: bool = False
 ) -> abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin | abjad.Bundle:
@@ -2659,6 +2669,8 @@ def make_dynamic(
             failed = True
         if failed:
             raise Exception(f"the string {string!r} initializes no known dynamic.")
+    prototype = (abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin, abjad.Bundle)
+    assert isinstance(indicator, prototype), repr(indicator)
     return indicator
 
 
@@ -2850,42 +2862,47 @@ def parse_hairpin_descriptor(
         )
         if not isinstance(indicator, abjad.Dynamic):
             if tweaks and hasattr(indicator, "tweaks"):
+                assert isinstance(indicator, abjad.StartHairpin), repr(indicator)
                 _scoping.apply_tweaks(indicator, tweaks)
         indicators.append(indicator)
     if len(indicators) == 1:
-        if isinstance(indicators[0], abjad.StartHairpin):
+        if _is_maybe_bundled(indicators[0], abjad.StartHairpin):
             specifier = _Specifier(spanner_start=indicators[0])
         else:
-            assert isinstance(indicators[0], abjad.Dynamic)
+            assert _is_maybe_bundled(indicators[0], abjad.Dynamic)
             specifier = _Specifier(indicator=indicators[0])
         specifiers.append(specifier)
         return specifiers
-    if isinstance(indicators[0], abjad.StartHairpin):
+    if _is_maybe_bundled(indicators[0], abjad.StartHairpin):
         result = indicators.pop(0)
-        assert isinstance(result, abjad.StartHairpin)
+        assert _is_maybe_bundled(result, abjad.StartHairpin)
         specifier = _Specifier(spanner_start=result)
         specifiers.append(specifier)
     if len(indicators) == 1:
-        if isinstance(indicators[0], abjad.StartHairpin):
+        if _is_maybe_bundled(indicators[0], abjad.StartHairpin):
             specifier = _Specifier(spanner_start=indicators[0])
         else:
             specifier = _Specifier(indicator=indicators[0])
         specifiers.append(specifier)
         return specifiers
     for left, right in abjad.sequence.nwise(indicators):
-        if isinstance(left, abjad.StartHairpin) and isinstance(
+        if _is_maybe_bundled(left, abjad.StartHairpin) and _is_maybe_bundled(
             right, abjad.StartHairpin
         ):
             raise Exception("consecutive start hairpin commands.")
-        elif isinstance(left, abjad.Dynamic) and isinstance(right, abjad.Dynamic):
+        elif _is_maybe_bundled(left, abjad.Dynamic) and _is_maybe_bundled(
+            right, abjad.Dynamic
+        ):
             specifier = _Specifier(indicator=left)
             specifiers.append(specifier)
-        elif isinstance(left, abjad.Dynamic | abjad.StopHairpin) and isinstance(
-            right, abjad.StartHairpin
-        ):
+        elif _is_maybe_bundled(
+            left, abjad.Dynamic | abjad.StopHairpin
+        ) and _is_maybe_bundled(right, abjad.StartHairpin):
             specifier = _Specifier(indicator=left, spanner_start=right)
             specifiers.append(specifier)
-    if indicators and isinstance(indicators[-1], abjad.Dynamic | abjad.StopHairpin):
+    if indicators and _is_maybe_bundled(
+        indicators[-1], abjad.Dynamic | abjad.StopHairpin
+    ):
         specifier = _Specifier(indicator=indicators[-1])
         specifiers.append(specifier)
     return specifiers

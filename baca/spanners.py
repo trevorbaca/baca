@@ -51,7 +51,9 @@ class SpannerIndicatorCommand(_scoping.Command):
                     self.start_indicator.indicator,
                     self.start_indicator.tweaks + self.tweaks,
                 )
+            # TODO: remove branch?
             elif hasattr(start_indicator, "tweaks"):
+                raise Exception(start_indicator)
                 _scoping.apply_tweaks(start_indicator, self.tweaks)
             else:
                 start_indicator = _scoping.bundle_tweaks(start_indicator, self.tweaks)

@@ -457,10 +457,8 @@ ScopeTyping: typing.TypeAlias = Scope | TimelineScope
 def apply_tweaks(argument, tweaks, i=None, total=None):
     if not tweaks:
         return
-    if i is not None:
-        assert isinstance(i, int), repr(i)
-    if total is not None:
-        assert isinstance(total, int), repr(total)
+    prototype = (abjad.Dynamic, abjad.StartHairpin)
+    assert isinstance(argument, prototype), repr(argument)
     for item in tweaks:
         if isinstance(item, tuple):
             assert len(item) == 2
@@ -476,10 +474,6 @@ def apply_tweaks(argument, tweaks, i=None, total=None):
 def bundle_tweaks(argument, tweaks, i=None, total=None):
     if not tweaks:
         return argument
-    if i is not None:
-        assert isinstance(i, int), repr(i)
-    if total is not None:
-        assert isinstance(total, int), repr(total)
     all_tweaks = []
     for item in tweaks:
         if isinstance(item, tuple):
