@@ -920,8 +920,6 @@ class IndicatorCommand(_scoping.Command):
             indicators = self.indicators[i]
             indicators = _token_to_indicators(indicators)
             for indicator in indicators:
-                # TODO: maybe restore here:
-                # _scoping.apply_tweaks(indicator, self.tweaks)
                 reapplied = _scoping.remove_reapplied_wrappers(leaf, indicator)
                 if self.tweaks:
                     assert isinstance(self.indicators[0], abjad.Dynamic)

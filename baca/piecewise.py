@@ -294,8 +294,7 @@ class PiecewiseCommand(_scoping.Command):
                     and leaf is just_bookended_leaf
                 ):
                     continue
-            # TODO: duplicate this branch for bundles:
-            if autodetected_right_padding is not None and isinstance(
+            if autodetected_right_padding is not None and _is_maybe_bundled(
                 indicator, abjad.StartTextSpan
             ):
                 number = autodetected_right_padding
@@ -305,14 +304,8 @@ class PiecewiseCommand(_scoping.Command):
                     .append(_tags.AUTODETECT)
                     .append(_tags.SPANNER_START),
                 )
-                # existing = [
-                #     _
-                #     for _ in indicator.tweaks
-                #     if _.attribute() != "bound-details.right.padding"
-                # ]
-                # indicator.tweaks = tuple(existing)
-                # abjad.tweak(indicator, tweak)
-                indicator = abjad.bundle(indicator, tweak)
+                indicator = abjad.bundle(indicator, tweak, overwrite=True)
+            # TODO: collapse these two branches?
             if self.tweaks and isinstance(indicator, abjad.Bundle):
                 for item in self.tweaks:
                     if isinstance(item, abjad.Tweak):
