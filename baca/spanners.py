@@ -46,15 +46,12 @@ class SpannerIndicatorCommand(_scoping.Command):
             if self.detach_first:
                 for leaf in abjad.iterate.leaves(argument, grace=False):
                     abjad.detach(type(start_indicator), leaf)
+            # TODO: collapse following two branches?
             if isinstance(self.start_indicator, abjad.Bundle):
                 start_indicator = _scoping.bundle_tweaks(
                     self.start_indicator.indicator,
                     self.start_indicator.tweaks + self.tweaks,
                 )
-            # TODO: remove branch?
-            elif hasattr(start_indicator, "tweaks"):
-                raise Exception(start_indicator)
-                _scoping.apply_tweaks(start_indicator, self.tweaks)
             else:
                 start_indicator = _scoping.bundle_tweaks(start_indicator, self.tweaks)
             first_leaf = abjad.select.leaf(argument, 0)

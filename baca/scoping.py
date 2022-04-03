@@ -471,7 +471,7 @@ def apply_tweaks(argument, tweaks, i=None, total=None):
         abjad.tweak(argument, item)
 
 
-def bundle_tweaks(argument, tweaks, i=None, total=None):
+def bundle_tweaks(argument, tweaks, i=None, total=None, overwrite=False):
     if not tweaks:
         return argument
     all_tweaks = []
@@ -485,7 +485,7 @@ def bundle_tweaks(argument, tweaks, i=None, total=None):
                 continue
         assert isinstance(item, abjad.Tweak), repr(item)
         all_tweaks.append(item)
-    bundle = abjad.bundle(argument, *all_tweaks)
+    bundle = abjad.bundle(argument, *all_tweaks, overwrite=overwrite)
     return bundle
 
 
