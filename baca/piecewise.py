@@ -59,6 +59,12 @@ class _Specifier:
         return False
 
 
+def _unbundle_indicator(argument):
+    if isinstance(argument, abjad.Bundle):
+        return argument.indicator
+    return argument
+
+
 @dataclasses.dataclass
 class PiecewiseCommand(_scoping.Command):
     """
@@ -276,26 +282,16 @@ class PiecewiseCommand(_scoping.Command):
     ):
         assert isinstance(tag, abjad.Tag), repr(tag)
         for indicator in specifier:
-            if indicator in (True, False):
-                pass
-            elif isinstance(indicator, abjad.Bundle):
-                pass
-            else:
+            if (
+                not getattr(_unbundle_indicator(indicator), "trend", False)
+                and leaf is just_bookended_leaf
+            ):
+                continue
+            if not isinstance(indicator, bool | abjad.Bundle):
                 indicator = dataclasses.replace(indicator)
-            if isinstance(indicator, abjad.Bundle):
-                if (
-                    not getattr(indicator.indicator, "trend", False)
-                    and leaf is just_bookended_leaf
-                ):
-                    continue
-            else:
-                if (
-                    not getattr(indicator, "trend", False)
-                    and leaf is just_bookended_leaf
-                ):
-                    continue
-            if autodetected_right_padding is not None and _is_maybe_bundled(
-                indicator, abjad.StartTextSpan
+            if (
+                _is_maybe_bundled(indicator, abjad.StartTextSpan)
+                and autodetected_right_padding is not None
             ):
                 number = autodetected_right_padding
                 tweak = abjad.Tweak(
@@ -305,8 +301,7 @@ class PiecewiseCommand(_scoping.Command):
                     .append(_tags.SPANNER_START),
                 )
                 indicator = abjad.bundle(indicator, tweak, overwrite=True)
-            # TODO: collapse these two branches?
-            if self.tweaks and isinstance(indicator, abjad.Bundle):
+            if _is_maybe_bundled(indicator, abjad.StartTextSpan) and self.tweaks:
                 for item in self.tweaks:
                     if isinstance(item, abjad.Tweak):
                         new_tweak = item
@@ -314,43 +309,8 @@ class PiecewiseCommand(_scoping.Command):
                         assert isinstance(item, tuple), repr(item)
                         new_tweak = item[0]
                     assert isinstance(new_tweak, abjad.Tweak), repr(item)
-                    existing_attributes = [_.attribute() for _ in indicator.tweaks]
-                    ee = []
-                    if new_tweak.attribute() in existing_attributes:
-                        ee = [
-                            _
-                            for _ in indicator.tweaks
-                            if _.attribute() != new_tweak.attribute()
-                        ]
-                        # indicator.tweaks = tuple(ee)
-                        indicator = _scoping.bundle_tweaks(
-                            indicator,
-                            tuple(ee),
-                            i=i,
-                            total=total_pieces,
-                            overwrite=True,
-                        )
                 indicator = _scoping.bundle_tweaks(
                     indicator, self.tweaks, i=i, total=total_pieces, overwrite=True
-                )
-            elif self.tweaks and isinstance(indicator, abjad.StartTextSpan):
-                for item in self.tweaks:
-                    if isinstance(item, abjad.Tweak):
-                        new_tweak = item
-                    else:
-                        assert isinstance(item, tuple), repr(item)
-                        new_tweak = item[0]
-                    assert isinstance(new_tweak, abjad.Tweak), repr(item)
-                # existing_attributes = [_.attribute() for _ in indicator.tweaks]
-                # if new_tweak.attribute() in existing_attributes:
-                #     ee = [
-                #         _
-                #         for _ in indicator.tweaks
-                #         if _.attribute() != new_tweak.attribute()
-                #     ]
-                #     indicator.tweaks = tuple(ee)
-                indicator = _scoping.bundle_tweaks(
-                    indicator, self.tweaks, i=i, total=total_pieces
                 )
             reapplied = _scoping.remove_reapplied_wrappers(leaf, indicator)
             tag_ = self.tag.append(tag)
