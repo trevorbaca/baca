@@ -773,8 +773,8 @@ def dynamic(
                         e'8
                         - \tweak color #(x11-color 'blue)
                         \p
-                        \<
                         [
+                        \<
                         d''8
                         f'8
                         c''8
@@ -990,8 +990,8 @@ def hairpin(
                         e'8
                         - \tweak color #(x11-color 'blue)
                         \p
-                        \<
                         [
+                        \<
                         d''8
                         f'8
                         e''8
@@ -1079,10 +1079,10 @@ def hairpin(
                         e'8
                         - \tweak color #(x11-color 'blue)
                         \baca-effort-ff
+                        [
                         - \tweak to-barline ##t
                         - \tweak circled-tip ##t
                         \>
-                        [
                         d''8
                         f'8
                         c''8
@@ -1170,9 +1170,9 @@ def hairpin(
                         e'8
                         - \tweak color #(x11-color 'blue)
                         \!
+                        [
                         - \tweak circled-tip ##t
                         \<
-                        [
                         d''8
                         f'8
                         c''8
@@ -1260,9 +1260,9 @@ def hairpin(
                         e'8
                         - \tweak color #(x11-color 'blue)
                         \baca-effort-p
+                        [
                         - \tweak stencil #constante-hairpin
                         \<
-                        [
                         d''8
                         f'8
                         c''8
@@ -1357,9 +1357,9 @@ def hairpin(
                         e'8
                         - \tweak color #(x11-color 'blue)
                         \baca-effort-mp
+                        [
                         - \tweak stencil #abjad-flared-hairpin
                         \<
-                        [
                         d''8
                         f'8
                         c''8
@@ -1373,9 +1373,9 @@ def hairpin(
                         d''8
                         - \tweak color #(x11-color 'blue)
                         \baca-effort-mf
+                        [
                         - \tweak stencil #abjad-flared-hairpin
                         \>
-                        [
                         f'8
                         c''8
                         g'8
@@ -1546,8 +1546,8 @@ def hairpin(
                         e'8
                         - \tweak color #(x11-color 'blue)
                         \p
-                        \<
                         [
+                        \<
                         d''8
                         f'8
                         e''8
@@ -1555,16 +1555,16 @@ def hairpin(
                         g'8
                         - \tweak color #(x11-color 'blue)
                         \f
-                        \>
                         [
+                        \>
                         f''8
                         e'8
                         ]
                         d''8
                         - \tweak color #(x11-color 'blue)
                         \p
-                        \<
                         [
+                        \<
                         f'8
                         e''8
                         g'8
@@ -1572,8 +1572,8 @@ def hairpin(
                         f''8
                         - \tweak color #(x11-color 'blue)
                         \f
-                        \>
                         [
+                        \>
                         e'8
                         d''8
                         \p
@@ -1741,9 +1741,9 @@ def hairpin(
                         e'8
                         - \tweak color #(x11-color 'blue)
                         \p
+                        [
                         - \tweak stencil #constante-hairpin
                         \<
-                        [
                         d''8
                         f'8
                         e''8
@@ -1752,8 +1752,8 @@ def hairpin(
                         g'8
                         - \tweak color #(x11-color 'blue)
                         \f
-                        \>
                         [
+                        \>
                         f''8
                         e'8
                         \p
@@ -1761,9 +1761,9 @@ def hairpin(
                         d''8
                         - \tweak color #(x11-color 'blue)
                         \p
+                        [
                         - \tweak stencil #constante-hairpin
                         \<
-                        [
                         f'8
                         e''8
                         g'8
@@ -1772,8 +1772,8 @@ def hairpin(
                         f''8
                         - \tweak color #(x11-color 'blue)
                         \f
-                        \>
                         [
+                        \>
                         e'8
                         d''8
                         \p
@@ -1928,8 +1928,8 @@ def hairpin(
                     {
                         \override DynamicLineSpanner.staff-padding = 5
                         e'8
-                        \<
                         [
+                        \<
                         d''8
                         f'8
                         c''8
@@ -2118,9 +2118,9 @@ def hairpin(
                         g'8
                         - \tweak color #(x11-color 'blue)
                         \!
+                        [
                         - \tweak circled-tip ##t
                         \<
-                        [
                         f''8
                         e'8
                         ]
@@ -2202,8 +2202,8 @@ def hairpin(
                         e'8
                         - \tweak color #(x11-color 'blue)
                         \baca-mp-parenthesized
-                        \<
                         [
+                        \<
                         d''8
                         f'8
                         e''8

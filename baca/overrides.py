@@ -660,8 +660,8 @@ def dls_staff_padding(
                         r8
                         c'16
                         \p
-                        \<
                         [
+                        \<
                         d'16
                         ]
                         bf'4
@@ -675,8 +675,8 @@ def dls_staff_padding(
                     {
                         fs''16
                         \p
-                        \<
                         [
+                        \<
                         e''16
                         ]
                         ef''4
@@ -763,8 +763,8 @@ def dls_up(
                         r8
                         c'16
                         \p
-                        \<
                         [
+                        \<
                         d'16
                         ]
                         bf'4
@@ -778,8 +778,8 @@ def dls_up(
                     {
                         fs''16
                         \p
-                        \<
                         [
+                        \<
                         e''16
                         ]
                         ef''4
