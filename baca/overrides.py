@@ -2392,8 +2392,8 @@ def repeat_tie_down(
                         b'16
                         [
                         b'16
-                        \repeatTie
                         ]
+                        \repeatTie
                         c''4
                         ~
                         c''16
@@ -2406,11 +2406,11 @@ def repeat_tie_down(
                         b'16
                         [
                         b'16
-                        \repeatTie
                         ]
-                        b'4
                         \repeatTie
+                        b'4
                         ~
+                        \repeatTie
                         b'16
                         \repeatTie
                         r16
@@ -2536,8 +2536,8 @@ def repeat_tie_up(
                         b'16
                         [
                         b'16
-                        \repeatTie
                         ]
+                        \repeatTie
                         c''4
                         ~
                         c''16
@@ -2550,11 +2550,11 @@ def repeat_tie_up(
                         b'16
                         [
                         b'16
-                        \repeatTie
                         ]
-                        b'4
                         \repeatTie
+                        b'4
                         ~
+                        \repeatTie
                         b'16
                         \repeatTie
                         r16

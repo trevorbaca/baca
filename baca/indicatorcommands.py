@@ -1885,8 +1885,8 @@ def repeat_tie(
                         c'16
                         [
                         c'16
-                        \repeatTie
                         ]
+                        \repeatTie
                         bf'4
                         ~
                         bf'16
