@@ -457,23 +457,6 @@ class TimelineScope:
 ScopeTyping: typing.TypeAlias = Scope | TimelineScope
 
 
-def apply_tweaks(argument, tweaks, i=None, total=None):
-    if not tweaks:
-        return
-    prototype = (abjad.Dynamic, abjad.StartHairpin)
-    assert isinstance(argument, prototype), repr(argument)
-    for item in tweaks:
-        if isinstance(item, tuple):
-            assert len(item) == 2
-            item, index = item
-            if 0 <= index and index != i:
-                continue
-            if index < 0 and index != -(total - i):
-                continue
-        assert isinstance(item, abjad.Tweak), repr(item)
-        abjad.tweak(argument, item)
-
-
 def bundle_tweaks(argument, tweaks, i=None, total=None, overwrite=False):
     if not tweaks:
         return argument

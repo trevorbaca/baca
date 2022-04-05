@@ -2594,7 +2594,6 @@ def make_dynamic(
     elif string in known_shapes:
         indicator = abjad.StartHairpin(string)
         if string.endswith(">o") and not forbid_al_niente_to_bar_line:
-            # abjad.tweak(indicator, r"- \tweak to-barline ##t")
             indicator = abjad.bundle(indicator, r"- \tweak to-barline ##t")
     elif string == "!":
         indicator = abjad.StopHairpin()
