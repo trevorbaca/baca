@@ -2409,8 +2409,8 @@ def repeat_tie_down(
                         ]
                         \repeatTie
                         b'4
-                        ~
                         \repeatTie
+                        ~
                         b'16
                         \repeatTie
                         r16
@@ -2553,8 +2553,8 @@ def repeat_tie_up(
                         ]
                         \repeatTie
                         b'4
-                        ~
                         \repeatTie
+                        ~
                         b'16
                         \repeatTie
                         r16
