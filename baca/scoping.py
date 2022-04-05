@@ -318,47 +318,23 @@ def treat_persistent_wrapper(manifests, wrapper, status):
         string = ":".join(words)
         tag_ = abjad.Tag(string)
         string = f"#(x11-color '{color})"
-        # wrapper_indicator = dataclasses.replace(wrapper.unbundle_indicator())
-        if isinstance(wrapper.unbundle_indicator(), abjad.StartHairpin):
-            bundle = abjad.bundle(
-                # wrapper.unbundle_indicator(),
-                # wrapper_indicator,
-                wrapper.indicator,
-                rf"- \tweak color {string}",
-                overwrite=True,
-                tag=tag_,
-            )
-            abjad.detach(wrapper, leaf)
-            wrapper = abjad.attach(
-                bundle,
-                leaf,
-                context=wrapper.context,
-                deactivate=wrapper.deactivate,
-                direction=wrapper.direction,
-                synthetic_offset=wrapper.synthetic_offset,
-                tag=wrapper.tag,
-                wrapper=True,
-            )
-        else:
-            abjad.tweak(
-                wrapper.unbundle_indicator(),
-                # wrapper_indicator,
-                rf"- \tweak color {string}",
-                overwrite=True,
-                tag=tag_,
-            )
-            abjad.detach(wrapper, leaf)
-            wrapper = abjad.attach(
-                # wrapper_indicator,
-                wrapper.indicator,
-                leaf,
-                context=wrapper.context,
-                deactivate=wrapper.deactivate,
-                direction=wrapper.direction,
-                synthetic_offset=wrapper.synthetic_offset,
-                tag=wrapper.tag,
-                wrapper=True,
-            )
+        bundle = abjad.bundle(
+            wrapper.indicator,
+            rf"- \tweak color {string}",
+            overwrite=True,
+            tag=tag_,
+        )
+        abjad.detach(wrapper, leaf)
+        wrapper = abjad.attach(
+            bundle,
+            leaf,
+            context=wrapper.context,
+            deactivate=wrapper.deactivate,
+            direction=wrapper.direction,
+            synthetic_offset=wrapper.synthetic_offset,
+            tag=wrapper.tag,
+            wrapper=True,
+        )
         _set_status_tag(wrapper, status)
         return
     attach_color_literal(wrapper, status, existing_deactivate=wrapper.deactivate)

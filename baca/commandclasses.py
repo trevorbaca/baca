@@ -922,8 +922,7 @@ class IndicatorCommand(_scoping.Command):
             for indicator in indicators:
                 reapplied = _scoping.remove_reapplied_wrappers(leaf, indicator)
                 if self.tweaks:
-                    assert isinstance(self.indicators[0], abjad.Dynamic)
-                    _scoping.apply_tweaks(indicator, self.tweaks)
+                    indicator = _scoping.bundle_tweaks(indicator, self.tweaks)
                 wrapper = abjad.attach(
                     indicator,
                     leaf,

@@ -196,7 +196,6 @@ class PiecewiseCommand(_scoping.Command):
             ):
                 specifier = dataclasses.replace(specifier, spanner_start=None)
             if is_final_piece and specifier.spanner_start:
-                # if isinstance(specifier.spanner_start, abjad.StartHairpin):
                 if _is_maybe_bundled(specifier.spanner_start, abjad.StartHairpin):
                     if self.final_piece_spanner:
                         specifier = dataclasses.replace(
