@@ -170,7 +170,7 @@ class PiecewiseCommand(_scoping.Command):
             if (
                 is_final_piece
                 and self.right_broken
-                and not isinstance(specifier.spanner_start, abjad.StartTextSpan)
+                and not _is_maybe_bundled(specifier.spanner_start, abjad.StartTextSpan)
             ):
                 should_bookend = False
             if is_final_piece and just_backstole_right_text:
@@ -183,7 +183,7 @@ class PiecewiseCommand(_scoping.Command):
             if (
                 is_penultimate_piece
                 and (len(pieces[-1]) == 1 or self.final_piece_spanner is False)
-                and isinstance(next_bundle.spanner_start, abjad.StartTextSpan)
+                and _is_maybe_bundled(next_bundle.spanner_start, abjad.StartTextSpan)
             ):
                 specifier = dataclasses.replace(
                     specifier, spanner_start=specifier.bookended_spanner_start
@@ -196,14 +196,15 @@ class PiecewiseCommand(_scoping.Command):
             ):
                 specifier = dataclasses.replace(specifier, spanner_start=None)
             if is_final_piece and specifier.spanner_start:
-                if isinstance(specifier.spanner_start, abjad.StartHairpin):
+                # if isinstance(specifier.spanner_start, abjad.StartHairpin):
+                if _is_maybe_bundled(specifier.spanner_start, abjad.StartHairpin):
                     if self.final_piece_spanner:
                         specifier = dataclasses.replace(
                             specifier, spanner_start=self.final_piece_spanner
                         )
                     elif self.final_piece_spanner is False:
                         specifier = dataclasses.replace(specifier, spanner_start=None)
-                elif isinstance(specifier.spanner_start, abjad.StartTextSpan):
+                elif _is_maybe_bundled(specifier.spanner_start, abjad.StartTextSpan):
                     if self.final_piece_spanner is False:
                         specifier = dataclasses.replace(specifier, spanner_start=None)
             tag = _scoping.function_name(_frame(), self, n=2)
@@ -2500,10 +2501,10 @@ def make_dynamic(
         Al niente hairpins are special-cased to carry to-barline tweaks:
 
         >>> baca.make_dynamic(">o")
-        StartHairpin(shape='>o')
+        Bundle(indicator=StartHairpin(shape='>o'), tweaks=(Tweak(string='- \\tweak to-barline ##t', tag=None),))
 
         >>> baca.make_dynamic("|>o")
-        StartHairpin(shape='|>o')
+        Bundle(indicator=StartHairpin(shape='|>o'), tweaks=(Tweak(string='- \\tweak to-barline ##t', tag=None),))
 
     ..  container:: example exception
 
@@ -2594,7 +2595,8 @@ def make_dynamic(
     elif string in known_shapes:
         indicator = abjad.StartHairpin(string)
         if string.endswith(">o") and not forbid_al_niente_to_bar_line:
-            abjad.tweak(indicator, r"- \tweak to-barline ##t")
+            # abjad.tweak(indicator, r"- \tweak to-barline ##t")
+            indicator = abjad.bundle(indicator, r"- \tweak to-barline ##t")
     elif string == "!":
         indicator = abjad.StopHairpin()
     elif string == "m":
@@ -2760,7 +2762,7 @@ def parse_hairpin_descriptor(
 
         >>> for item in baca.parse_hairpin_descriptor("f >o"):
         ...     item
-        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2), spanner_start=StartHairpin(shape='>o'), spanner_stop=None)
+        _Specifier(bookended_spanner_start=None, indicator=Dynamic(name='f', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2), spanner_start=Bundle(indicator=StartHairpin(shape='>o'), tweaks=(Tweak(string='- \\tweak to-barline ##t', tag=None),)), spanner_stop=None)
 
         >>> for item in baca.parse_hairpin_descriptor("p mp mf f"):
         ...     item
@@ -2798,10 +2800,8 @@ def parse_hairpin_descriptor(
         indicator = make_dynamic(
             string, forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line
         )
-        if not isinstance(indicator, abjad.Dynamic):
-            if tweaks and hasattr(indicator, "tweaks"):
-                assert isinstance(indicator, abjad.StartHairpin), repr(indicator)
-                _scoping.apply_tweaks(indicator, tweaks)
+        if _is_maybe_bundled(indicator, abjad.StartHairpin):
+            indicator = _scoping.bundle_tweaks(indicator, tweaks, overwrite=True)
         indicators.append(indicator)
     if len(indicators) == 1:
         if _is_maybe_bundled(indicators[0], abjad.StartHairpin):
