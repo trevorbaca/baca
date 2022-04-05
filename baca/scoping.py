@@ -233,7 +233,7 @@ def attach_color_literal(
         color = _status_to_color[status]
         string += f" #(x11-color '{color})"
     if redraw:
-        literal = abjad.LilyPondLiteral(string, site="after")
+        literal = abjad.LilyPondLiteral(string, site="absolute_after")
     else:
         literal = abjad.LilyPondLiteral(string)
     if getattr(wrapper.unbundle_indicator(), "latent", False):
@@ -365,7 +365,7 @@ def treat_persistent_wrapper(manifests, wrapper, status):
         wrapper.unbundle_indicator(), abjad.Instrument | abjad.MarginMarkup
     ) and not getattr(wrapper.unbundle_indicator(), "hide", False):
         strings = wrapper.unbundle_indicator()._get_lilypond_format(context=context)
-        literal = abjad.LilyPondLiteral(strings, site="after")
+        literal = abjad.LilyPondLiteral(strings, site="absolute_after")
         stem = to_indicator_stem(wrapper.unbundle_indicator())
         wrapper_ = abjad.attach(
             literal,
