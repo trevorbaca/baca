@@ -564,8 +564,8 @@ def clef(
                     \times 9/10
                     {
                         \override TupletBracket.staff-padding = 7
-                        \time 11/8
                         \clef "alto"
+                        \time 11/8
                         r8
                         c'16
                         [

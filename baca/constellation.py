@@ -96,8 +96,8 @@ Constellation.
             <<
                 \context Staff = "Treble_Staff"
                 {
-                    \time 1/4
                     \clef "treble"
+                    \time 1/4
                     r4
                     ^ \markup { 1-1 }
                     cs'4

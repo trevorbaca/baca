@@ -5415,8 +5415,8 @@ def interpolate_pitches(
                 {
                     \scaleDurations #'(1 . 1)
                     {
-                        \time 3/2
                         \clef "treble"
+                        \time 3/2
                         ef'16
                         [
                         e'16
@@ -5484,8 +5484,8 @@ def interpolate_pitches(
                     \scaleDurations #'(1 . 1)
                     {
                         \override Glissando.thickness = 3
-                        \time 3/2
                         \clef "treble"
+                        \time 3/2
                         ef'16
                         [
                         \glissando
