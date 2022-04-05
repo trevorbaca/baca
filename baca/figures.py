@@ -2536,8 +2536,8 @@ class Imbrication:
                                 {
                                     \voiceTwo
                                     c'8
-                                    ~
                                     [
+                                    ~
                                     c'32
                                     d'8
                                     ~
@@ -2550,8 +2550,8 @@ class Imbrication:
                                 \scaleDurations #'(1 . 1)
                                 {
                                     fs''8
-                                    ~
                                     [
+                                    ~
                                     fs''32
                                     e''8
                                     ~
@@ -2570,8 +2570,8 @@ class Imbrication:
                                 \scaleDurations #'(1 . 1)
                                 {
                                     a'8
-                                    ~
                                     [
+                                    ~
                                     a'32
                                     ]
                                 }
@@ -4035,8 +4035,8 @@ class FigureMaker:
                     \scaleDurations #'(1 . 1)
                     {
                         a'8
-                        ~
                         [
+                        ~
                         a'32
                         ]
                     }
@@ -4097,8 +4097,8 @@ class FigureMaker:
                     \scaleDurations #'(1 . 1)
                     {
                         a'32
-                        ~
                         [
+                        ~
                         a'8
                         ]
                     }

@@ -4788,8 +4788,8 @@ def bass_to_octave(
                         \time 5/4
                         \abjad-color-music #'green
                         <c d bf>8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'green
                         <c d bf>32
                         ]
@@ -4799,8 +4799,8 @@ def bass_to_octave(
                     {
                         \abjad-color-music #'green
                         f'8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'green
                         f'32
                         ]
@@ -4810,8 +4810,8 @@ def bass_to_octave(
                     {
                         \abjad-color-music #'green
                         <ef' e' fs''>8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'green
                         <ef' e' fs''>32
                         ]
@@ -4821,8 +4821,8 @@ def bass_to_octave(
                     {
                         \abjad-color-music #'green
                         <g af'>8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'green
                         <g af'>32
                         ]
@@ -4832,8 +4832,8 @@ def bass_to_octave(
                     {
                         \abjad-color-music #'green
                         a8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'green
                         a32
                         ]
@@ -4875,8 +4875,8 @@ def bass_to_octave(
                         \time 5/4
                         \abjad-color-music #'red
                         <c d bf>8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'red
                         <c d bf>32
                         ]
@@ -4886,8 +4886,8 @@ def bass_to_octave(
                     {
                         \abjad-color-music #'blue
                         f8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'blue
                         f32
                         ]
@@ -4897,8 +4897,8 @@ def bass_to_octave(
                     {
                         \abjad-color-music #'red
                         <ef e fs'>8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'red
                         <ef e fs'>32
                         ]
@@ -4908,8 +4908,8 @@ def bass_to_octave(
                     {
                         \abjad-color-music #'blue
                         <g af'>8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'blue
                         <g af'>32
                         ]
@@ -4919,8 +4919,8 @@ def bass_to_octave(
                     {
                         \abjad-color-music #'red
                         a8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'red
                         a32
                         ]
@@ -4971,8 +4971,8 @@ def center_to_octave(
                         \time 5/4
                         \abjad-color-music #'green
                         <c, d, bf,>8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'green
                         <c, d, bf,>32
                         ]
@@ -4982,8 +4982,8 @@ def center_to_octave(
                     {
                         \abjad-color-music #'green
                         f8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'green
                         f32
                         ]
@@ -4993,8 +4993,8 @@ def center_to_octave(
                     {
                         \abjad-color-music #'green
                         <ef e fs'>8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'green
                         <ef e fs'>32
                         ]
@@ -5004,8 +5004,8 @@ def center_to_octave(
                     {
                         \abjad-color-music #'green
                         <g, af>8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'green
                         <g, af>32
                         ]
@@ -5015,8 +5015,8 @@ def center_to_octave(
                     {
                         \abjad-color-music #'green
                         a,8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'green
                         a,32
                         ]
@@ -5058,8 +5058,8 @@ def center_to_octave(
                         \time 5/4
                         \abjad-color-music #'red
                         <c d bf>8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'red
                         <c d bf>32
                         ]
@@ -5069,8 +5069,8 @@ def center_to_octave(
                     {
                         \abjad-color-music #'blue
                         f8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'blue
                         f32
                         ]
@@ -5080,8 +5080,8 @@ def center_to_octave(
                     {
                         \abjad-color-music #'red
                         <ef e fs'>8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'red
                         <ef e fs'>32
                         ]
@@ -5091,8 +5091,8 @@ def center_to_octave(
                     {
                         \abjad-color-music #'blue
                         <g, af>8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'blue
                         <g, af>32
                         ]
@@ -5102,8 +5102,8 @@ def center_to_octave(
                     {
                         \abjad-color-music #'red
                         a8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'red
                         a32
                         ]
@@ -6099,8 +6099,8 @@ def soprano_to_octave(
                         \time 5/4
                         \abjad-color-music #'green
                         <c,, d,, bf,,>8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'green
                         <c,, d,, bf,,>32
                         ]
@@ -6110,8 +6110,8 @@ def soprano_to_octave(
                     {
                         \abjad-color-music #'green
                         f,8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'green
                         f,32
                         ]
@@ -6121,8 +6121,8 @@ def soprano_to_octave(
                     {
                         \abjad-color-music #'green
                         <ef, e, fs>8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'green
                         <ef, e, fs>32
                         ]
@@ -6132,8 +6132,8 @@ def soprano_to_octave(
                     {
                         \abjad-color-music #'green
                         <g,, af,>8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'green
                         <g,, af,>32
                         ]
@@ -6143,8 +6143,8 @@ def soprano_to_octave(
                     {
                         \abjad-color-music #'green
                         a,,8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'green
                         a,,32
                         ]
@@ -6186,8 +6186,8 @@ def soprano_to_octave(
                         \time 5/4
                         \abjad-color-music #'red
                         <c d bf>8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'red
                         <c d bf>32
                         ]
@@ -6197,8 +6197,8 @@ def soprano_to_octave(
                     {
                         \abjad-color-music #'blue
                         f8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'blue
                         f32
                         ]
@@ -6208,8 +6208,8 @@ def soprano_to_octave(
                     {
                         \abjad-color-music #'red
                         <ef, e, fs>8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'red
                         <ef, e, fs>32
                         ]
@@ -6219,8 +6219,8 @@ def soprano_to_octave(
                     {
                         \abjad-color-music #'blue
                         <g, af>8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'blue
                         <g, af>32
                         ]
@@ -6230,8 +6230,8 @@ def soprano_to_octave(
                     {
                         \abjad-color-music #'red
                         a8
-                        ~
                         [
+                        ~
                         \abjad-color-music #'red
                         a32
                         ]

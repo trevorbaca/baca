@@ -403,8 +403,8 @@ def arpeggio(
                         \time 5/4
                         <c' d' bf'>8
                         - \arpeggio
-                        ~
                         [
+                        ~
                         <c' d' bf'>32
                         ]
                         r16.
@@ -412,8 +412,8 @@ def arpeggio(
                     \scaleDurations #'(1 . 1)
                     {
                         f''8
-                        ~
                         [
+                        ~
                         f''32
                         ]
                         r16.
@@ -421,8 +421,8 @@ def arpeggio(
                     \scaleDurations #'(1 . 1)
                     {
                         <ef'' e'' fs'''>8
-                        ~
                         [
+                        ~
                         <ef'' e'' fs'''>32
                         ]
                         r16.
@@ -430,8 +430,8 @@ def arpeggio(
                     \scaleDurations #'(1 . 1)
                     {
                         <g' af''>8
-                        ~
                         [
+                        ~
                         <g' af''>32
                         ]
                         r16.
@@ -439,8 +439,8 @@ def arpeggio(
                     \scaleDurations #'(1 . 1)
                     {
                         a'8
-                        ~
                         [
+                        ~
                         a'32
                         ]
                         r16.
@@ -764,8 +764,8 @@ def down_arpeggio(
                         \time 5/4
                         <c' d' bf'>8
                         \arpeggio
-                        ~
                         [
+                        ~
                         <c' d' bf'>32
                         ]
                         r16.
@@ -773,8 +773,8 @@ def down_arpeggio(
                     \scaleDurations #'(1 . 1)
                     {
                         f''8
-                        ~
                         [
+                        ~
                         f''32
                         ]
                         r16.
@@ -782,8 +782,8 @@ def down_arpeggio(
                     \scaleDurations #'(1 . 1)
                     {
                         <ef'' e'' fs'''>8
-                        ~
                         [
+                        ~
                         <ef'' e'' fs'''>32
                         ]
                         r16.
@@ -791,8 +791,8 @@ def down_arpeggio(
                     \scaleDurations #'(1 . 1)
                     {
                         <g' af''>8
-                        ~
                         [
+                        ~
                         <g' af''>32
                         ]
                         r16.
@@ -800,8 +800,8 @@ def down_arpeggio(
                     \scaleDurations #'(1 . 1)
                     {
                         a'8
-                        ~
                         [
+                        ~
                         a'32
                         ]
                         r16.
@@ -3113,8 +3113,8 @@ def up_arpeggio(
                         \time 5/4
                         <c' d' bf'>8
                         \arpeggio
-                        ~
                         [
+                        ~
                         <c' d' bf'>32
                         ]
                         r16.
@@ -3122,8 +3122,8 @@ def up_arpeggio(
                     \scaleDurations #'(1 . 1)
                     {
                         f''8
-                        ~
                         [
+                        ~
                         f''32
                         ]
                         r16.
@@ -3131,8 +3131,8 @@ def up_arpeggio(
                     \scaleDurations #'(1 . 1)
                     {
                         <ef'' e'' fs'''>8
-                        ~
                         [
+                        ~
                         <ef'' e'' fs'''>32
                         ]
                         r16.
@@ -3140,8 +3140,8 @@ def up_arpeggio(
                     \scaleDurations #'(1 . 1)
                     {
                         <g' af''>8
-                        ~
                         [
+                        ~
                         <g' af''>32
                         ]
                         r16.
@@ -3149,8 +3149,8 @@ def up_arpeggio(
                     \scaleDurations #'(1 . 1)
                     {
                         a'8
-                        ~
                         [
+                        ~
                         a'32
                         ]
                         r16.
