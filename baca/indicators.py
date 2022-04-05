@@ -75,6 +75,7 @@ class Accelerando:
     parameter: typing.ClassVar[str] = "METRONOME_MARK"
     persistent: typing.ClassVar[bool] = True
     post_event: typing.ClassVar[bool] = True
+    trend: typing.ClassVar[bool] = True
 
     def __post_init__(self):
         self.hide = bool(self.hide)
@@ -367,6 +368,7 @@ class Ritardando:
     parameter: typing.ClassVar[str] = "METRONOME_MARK"
     persistent: typing.ClassVar[bool] = True
     post_event: typing.ClassVar[bool] = True
+    trend: typing.ClassVar[bool] = True
 
     def __post_init__(self):
         self.hide = bool(self.hide)
