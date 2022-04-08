@@ -16,7 +16,7 @@
            (toward-stem-shift . 0.5)
            ))))
 
-baca-full-downbow = #(make-articulation "bacafulldownbow")
+baca-full-downbow = #(make-articulation 'bacafulldownbow)
 
 #(append! default-script-alist
    (list
@@ -33,7 +33,7 @@ baca-full-downbow = #(make-articulation "bacafulldownbow")
            ))))
 
 baca-stop-on-string-full-downbow = #(
-    make-articulation "bacastoponstringfulldownbow")
+    make-articulation 'bacastoponstringfulldownbow)
 
 #(append! default-script-alist
    (list
@@ -49,7 +49,7 @@ baca-stop-on-string-full-downbow = #(
            (toward-stem-shift . 0.5)
            ))))
 
-baca-full-upbow = #(make-articulation "bacafullupbow")
+baca-full-upbow = #(make-articulation 'bacafullupbow)
 
 #(append! default-script-alist
    (list
@@ -66,7 +66,7 @@ baca-full-upbow = #(make-articulation "bacafullupbow")
            ))))
 
 baca-stop-on-string-full-upbow = #(
-    make-articulation "bacastoponstringfullupbow")
+    make-articulation 'bacastoponstringfullupbow)
 
 #(append! default-script-alist
    (list
@@ -82,7 +82,7 @@ baca-stop-on-string-full-upbow = #(
            (toward-stem-shift . 0.4)
            ))))
 
-baca-stop-on-string = #(make-articulation "bacastoponstring")
+baca-stop-on-string = #(make-articulation 'bacastoponstring)
 
 %%% CIRCLE BOWING ARTICULATIONS %%%
 
@@ -100,7 +100,7 @@ baca-stop-on-string = #(make-articulation "bacastoponstring")
            (toward-stem-shift . -0.75)
            ))))
 
-baca-circle-bowing = #(make-articulation "bacacirclebowing")
+baca-circle-bowing = #(make-articulation 'bacacirclebowing)
 
 %%% DAMP ARTICULATIONS %%%
 
@@ -118,7 +118,7 @@ baca-circle-bowing = #(make-articulation "bacacirclebowing")
            ;;(toward-stem-shift . 0.5)
            ))))
 
-baca-damp = #(make-articulation "bacadamp")
+baca-damp = #(make-articulation 'bacadamp)
 
 %%% DIAMOND ARTICULATIONS %%%
 
@@ -136,7 +136,7 @@ baca-damp = #(make-articulation "bacadamp")
            ;;(toward-stem-shift . 0.5)
            ))))
 
-baca-double-diamond = #(make-articulation "bacadoublediamond")
+baca-double-diamond = #(make-articulation 'bacadoublediamond)
 
 %%% DOUBLE FLAGEOLET ARTICULATION %%%
 
@@ -154,14 +154,14 @@ baca-double-diamond = #(make-articulation "bacadoublediamond")
            ;;(toward-stem-shift . 0.5)
            ))))
 
-baca-double-flageolet = #(make-articulation "bacadoubleflageolet")
+baca-double-flageolet = #(make-articulation 'bacadoubleflageolet)
 
 %%% STACCATO ARTICULATIONS (MULTIPLE) %%%
 
 baca-staccati =
 #(define-music-function (parser location dots) (integer?)
    (let ((script (make-music 'ArticulationEvent
-                             'articulation-type "staccato")))
+                             'articulation-type 'staccato)))
      (set! (ly:music-property script 'tweaks)
            (acons 'stencil
                   (lambda (grob)

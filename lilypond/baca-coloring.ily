@@ -67,7 +67,7 @@ baca-time-signature-color = #(
     (parser location color music)
     (symbol? ly:music?)
     #{
-    \once \override Score.TimeSignature.color = #(x11-color #'color)
+    \once \override Score.TimeSignature.color = #(x11-color color)
     $music
     #}
     )
