@@ -3726,8 +3726,14 @@ class RegisterInterpolationCommand(_scoping.Command):
         >>> stack = baca.stack(
         ...     baca.figure([1], 16),
         ...     rmakers.beam(),
-        ...     baca.color(baca.selectors.tuplet(0), lone=True),
-        ...     baca.register(0, 24, selector=baca.selectors.tuplet(0)),
+        ...     baca.color(
+        ...         lambda _: baca.select.tuplet(_, 0),
+        ...         lone=True,
+        ...     ),
+        ...     baca.register(
+        ...         0, 24,
+        ...         selector=lambda _: baca.select.tuplet(_, 0),
+        ...     ),
         ... )
 
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
@@ -3802,8 +3808,14 @@ class RegisterInterpolationCommand(_scoping.Command):
         >>> stack = baca.stack(
         ...     baca.figure([1], 16),
         ...     rmakers.beam(),
-        ...     baca.color(baca.selectors.tuplet(-1), lone=True),
-        ...     baca.register(0, 24, selector=baca.selectors.tuplet(-1)),
+        ...     baca.color(
+        ...         lambda _: baca.select.tuplet(_, -1),
+        ...         lone=True,
+        ...     ),
+        ...     baca.register(
+        ...         0, 24,
+        ...         selector=lambda _: baca.select.tuplet(_, -1),
+        ...     ),
         ... )
 
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
@@ -3878,10 +3890,12 @@ class RegisterInterpolationCommand(_scoping.Command):
         >>> stack = baca.stack(
         ...     baca.figure([1], 16),
         ...     rmakers.beam(),
-        ...     baca.color(baca.selectors.tuplets()),
+        ...     baca.color(
+        ...         lambda _: abjad.select.tuplets(_)
+        ...     ),
         ...     baca.new(
         ...         baca.register(0, 24),
-        ...         map=baca.selectors.tuplets(),
+        ...         map=lambda _: abjad.select.tuplets(_),
         ...     ),
         ... )
 
@@ -5839,8 +5853,14 @@ def register(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.color(baca.selectors.tuplet(1), lone=True),
-        ...     baca.register(-6, selector=baca.selectors.tuplet(1)),
+        ...     baca.color(
+        ...         lambda _: baca.select.tuplet(_, 1),
+        ...         lone=True,
+        ...     ),
+        ...     baca.register(
+        ...         -6,
+        ...         selector=lambda _: baca.select.tuplet(_, 1),
+        ...     ),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
@@ -5985,8 +6005,14 @@ def register(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.color(baca.selectors.tuplet(1), lone=True),
-        ...     baca.register(-6, 18, selector=baca.selectors.tuplet(1)),
+        ...     baca.color(
+        ...         lambda _: baca.select.tuplet(_, 1),
+        ...         lone=True,
+        ...     ),
+        ...     baca.register(
+        ...         -6, 18,
+        ...         selector=lambda _: baca.select.tuplet(_, 1),
+        ...     ),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])

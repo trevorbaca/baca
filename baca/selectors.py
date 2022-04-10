@@ -62,29 +62,6 @@ def cmgroups(*arguments, **keywords):
     return selector
 
 
-def group():
-    def selector(argument):
-        return abjad.select.group(argument)
-
-    return selector
-
-
-def hleaf(n, exclude=None):
-    def selector(argument):
-        return _select.hleaf(argument, n, exclude=exclude)
-
-    return selector
-
-
-def hleaves(pair=None, exclude=None):
-    def selector(argument):
-        result = _select.hleaves(argument, exclude=exclude)
-        result = _handle_pair(result, pair)
-        return result
-
-    return selector
-
-
 def leaf(n, grace=None):
     def selector(argument):
         return abjad.select.leaf(argument, n, grace=grace)
@@ -533,22 +510,6 @@ def tleaves(pair=None, exclude=None, grace=None, rleak=False):
         result = _handle_pair(result, pair)
         if rleak is True:
             result = abjad.select.with_next_leaf(result)
-        return result
-
-    return selector
-
-
-def tuplet(n):
-    def selector(argument):
-        return abjad.select.tuplet(argument, n)
-
-    return selector
-
-
-def tuplets(pair=None):
-    def selector(argument):
-        result = abjad.select.tuplets(argument)
-        result = _handle_pair(result, pair)
         return result
 
     return selector

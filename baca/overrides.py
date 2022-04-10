@@ -8,6 +8,7 @@ from inspect import currentframe as _frame
 import abjad
 
 from . import scoping as _scoping
+from . import select as _select
 from . import selectors as _selectors
 from . import tags as _tags
 from . import typings
@@ -633,7 +634,7 @@ def dls_staff_padding(
         ...             remove_length_1_spanner_start=True,
         ...             selector=baca.selectors.tleaves(),
         ...             ),
-        ...         map=baca.selectors.tuplets(),
+        ...         map=lambda _: abjad.select.tuplets(_),
         ...         ),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -736,7 +737,7 @@ def dls_up(
         ...             remove_length_1_spanner_start=True,
         ...             selector=baca.selectors.tleaves(),
         ...             ),
-        ...         map=baca.selectors.tuplets(),
+        ...         map=lambda _: abjad.select.tuplets(_),
         ...         ),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -4060,7 +4061,7 @@ def sustain_pedal_staff_padding(
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.sustain_pedal(selector=baca.selectors.rleaves()),
-        ...         map=baca.selectors.tuplets(),
+        ...         map=lambda _: abjad.select.tuplets(_),
         ...     ),
         ...     baca.sustain_pedal_staff_padding(4),
         ...     baca.tuplet_bracket_staff_padding(2),
@@ -5336,7 +5337,7 @@ def tie_up(
 
 def time_signature_extra_offset(
     pair: abjad.NumberPair,
-    selector=_selectors.hleaf(0),
+    selector: typing.Callable = lambda _: _select.hleaf(_, 0),
 ) -> OverrideCommand:
     r"""
     Overrides time signature extra offset.
@@ -5425,7 +5426,7 @@ def time_signature_extra_offset(
 
 
 def time_signature_stencil_false(
-    selector=_selectors.hleaves(),
+    selector: typing.Callable = lambda _: _select.hleaves(_),
 ) -> OverrideCommand:
     """
     Overrides time signature stencil property.
@@ -5441,7 +5442,7 @@ def time_signature_stencil_false(
 
 
 def time_signature_transparent(
-    selector=_selectors.hleaves(),
+    selector: typing.Callable = lambda _: _select.hleaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides time signature transparency.

@@ -3,6 +3,22 @@ import typing
 import abjad
 
 
+def _handle_pair(selection, pair):
+    if isinstance(pair, tuple):
+        if isinstance(pair[0], list):
+            assert len(pair) == 2, repr(pair)
+            indices, period = pair
+            selection = abjad.select.get(selection, indices, period)
+        else:
+            start, stop = pair
+            selection = selection[start:stop]
+    elif isinstance(pair, list):
+        selection = abjad.select.get(selection, pair)
+    elif isinstance(pair, abjad.Pattern):
+        selection = abjad.select.get(selection, pair)
+    return selection
+
+
 def chead(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Chord:
     r"""
     Selects chord head ``n`` in ``argument``.
@@ -4333,6 +4349,16 @@ def tleaves(
     """
     items = abjad.select.leaves(argument, exclude=exclude, grace=grace, trim=True)
     return items
+
+
+def tuplet(argument, n):
+    return abjad.select.tuplet(argument, n)
+
+
+def tuplets(argument, pair=None):
+    result = abjad.select.tuplets(argument)
+    result = _handle_pair(result, pair)
+    return result
 
 
 def wleaf(argument, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
