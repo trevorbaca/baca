@@ -695,7 +695,7 @@ def trill_spanner(
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.trill_spanner(),
-        ...         map=baca.selectors.runs(),
+        ...         map=lambda _: baca.select.runs(_),
         ...     ),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )

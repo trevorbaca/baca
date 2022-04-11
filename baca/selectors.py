@@ -479,37 +479,8 @@ def rmleaves(count, exclude=None):
     return selector
 
 
-def run(n):
-    def selector(argument):
-        return abjad.select.run(argument, n)
-
-    return selector
-
-
-def runs(pair=None, exclude=None, rleak=False):
-    def selector(argument):
-        result = abjad.select.runs(argument, exclude=exclude)
-        result = _handle_pair(result, pair)
-        if rleak is True:
-            result = abjad.select.with_next_leaf(result)
-        return result
-
-    return selector
-
-
 def skip(n):
     def selector(argument):
         return _select.skip(argument, n)
 
     return selector
-
-
-# def tleaves(pair=None, exclude=None, grace=None, rleak=False):
-#    def selector(argument):
-#        result = _select.tleaves(argument, exclude=exclude, grace=grace)
-#        result = _handle_pair(result, pair)
-#        if rleak is True:
-#            result = abjad.select.with_next_leaf(result)
-#        return result
-#
-#    return selector

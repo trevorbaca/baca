@@ -4043,6 +4043,14 @@ def rruns(argument, *, exclude: abjad.Strings = None) -> list[list[abjad.Leaf]]:
     return lists_
 
 
+def runs(argument, *, exclude=None, rleak=False):
+    result = abjad.select.runs(argument, exclude=exclude)
+    # result = _handle_pair(result, pair)
+    if rleak is True:
+        result = abjad.select.with_next_leaf(result)
+    return result
+
+
 def skip(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Skip:
     r"""
     Selects skip ``n``.
