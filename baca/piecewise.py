@@ -12,6 +12,7 @@ from . import classes as _classes
 from . import commandclasses as _commandclasses
 from . import const as _const
 from . import scoping as _scoping
+from . import select as _select
 from . import selectors as _selectors
 from . import tags as _tags
 from . import typings as _typings
@@ -2622,7 +2623,7 @@ def material_annotation_spanner(
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner()
-    selector=_selectors.rleaves(),
+    selector=lambda _: _select.rleaves(_),
 ) -> PiecewiseCommand:
     """
     Makes material annotation spanner.
@@ -2659,7 +2660,7 @@ def metric_modulation_spanner(
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner()
-    selector=_selectors.rleaves(),
+    selector=lambda _: _select.rleaves(_),
 ) -> PiecewiseCommand:
     """
     Makes metric modulation spanner.
@@ -2854,7 +2855,7 @@ def pitch_annotation_spanner(
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner()
-    selector=_selectors.rleaves(),
+    selector=lambda _: _select.rleaves(_),
 ) -> PiecewiseCommand:
     """
     Makes pitch annotation spanner.
@@ -2930,7 +2931,7 @@ def rhythm_annotation_spanner(
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner()
-    selector=_selectors.rleaves(),
+    selector=lambda _: _select.rleaves(_),
 ) -> PiecewiseCommand:
     """
     Makes rhythm command spanner.
@@ -4163,8 +4164,8 @@ def text_spanner(
         ...     baca.text_spanner(
         ...         r"\baca-damp-markup =|",
         ...         bookend=False,
-        ...         selector=baca.selectors.rmleaves(2),
-        ...         ),
+        ...         selector=lambda _: baca.select.rmleaves(_, 2),
+        ...     ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner_staff_padding(4.5),

@@ -4060,7 +4060,7 @@ def sustain_pedal_staff_padding(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.new(
-        ...         baca.sustain_pedal(selector=baca.selectors.rleaves()),
+        ...         baca.sustain_pedal(selector=lambda _: baca.select.rleaves(_)),
         ...         map=lambda _: abjad.select.tuplets(_),
         ...     ),
         ...     baca.sustain_pedal_staff_padding(4),

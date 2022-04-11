@@ -463,22 +463,6 @@ def rleak_runs(start=0, stop=None):
     return selector
 
 
-def rleaves(pair=None):
-    def selector(argument):
-        result = _select.rleaves(argument)
-        result = _handle_pair(result, pair)
-        return result
-
-    return selector
-
-
-def rmleaves(count, exclude=None):
-    def selector(argument):
-        return _select.rmleaves(argument, count, exclude=exclude)
-
-    return selector
-
-
 def skip(n):
     def selector(argument):
         return _select.skip(argument, n)
