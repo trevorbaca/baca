@@ -3548,6 +3548,10 @@ def qruns(argument, *, exclude: abjad.Strings = None) -> list[list[abjad.Leaf]]:
     return lists_
 
 
+def rest(argument, n: int):
+    return abjad.select.rest(argument, n)
+
+
 def rleaf(argument, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
     r"""
     Selects leaf ``n`` from leaves leaked to the right.
@@ -3686,6 +3690,14 @@ def rleak(argument, *, count: int = 1, grace: bool = None) -> list[abjad.Leaf]:
     for _ in range(count):
         argument = abjad.select.with_next_leaf(argument, grace=grace)
     return argument
+
+
+def rleak_runs(argument, start=0, stop=None):
+    selection = abjad.select.runs(argument)
+    if start != 0 or stop is not None:
+        selection = selection[start:stop]
+    runs = [rleaves(_) for _ in selection]
+    return runs
 
 
 def rleaves(

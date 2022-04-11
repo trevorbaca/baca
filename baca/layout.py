@@ -182,7 +182,7 @@ class PageSpecifier:
     systems: list
 
 
-def select_skip(n):
+def make_skip_selector(n):
     def selector(argument):
         return _select.skip(argument, n)
 
@@ -213,14 +213,7 @@ def breaks(*page_specifiers):
             y_offset = system.y_offset
             alignment_distances = system.distances
             assert 0 <= skip_index
-
-            # selector = _selectors.skip(skip_index)
-
-            # def selector(argument):
-            #     return _select.skip(argument, skip_index)
-
-            selector = select_skip(skip_index)
-
+            selector = make_skip_selector(skip_index)
             if j == 0:
                 literal = abjad.LilyPondLiteral(r"\pageBreak")
             else:

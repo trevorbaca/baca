@@ -2583,7 +2583,7 @@ def repeat_tie_up(
 
 def rest_color(
     color: str,
-    selector=_selectors.rest(0),
+    selector=lambda _: _select.rest(_, 0),
 ) -> OverrideCommand:
     """
     Overrides rest extra offset.
@@ -2598,7 +2598,7 @@ def rest_color(
 
 
 def rest_down(
-    selector=_selectors.rests(),
+    selector=lambda _: abjad.select.rests(_),
 ) -> OverrideCommand:
     r"""
     Overrides rest direction.
@@ -2687,7 +2687,7 @@ def rest_down(
 
 def rest_extra_offset(
     pair: abjad.NumberPair,
-    selector=_selectors.rest(0),
+    selector=lambda _: _select.rest(_, 0),
 ) -> OverrideCommand:
     """
     Overrides rest extra offset.
@@ -2707,7 +2707,7 @@ def rest_extra_offset(
 
 def rest_position(
     n: abjad.Number,
-    selector=_selectors.rests(),
+    selector=lambda _: abjad.select.rests(_),
 ) -> OverrideCommand:
     r"""
     Overrides rest position.
@@ -2795,7 +2795,7 @@ def rest_position(
 
 
 def rest_transparent(
-    selector=_selectors.rests(),
+    selector=lambda _: abjad.select.rests(_),
 ) -> OverrideCommand:
     r"""
     Overrides rest transparency.
@@ -2883,7 +2883,7 @@ def rest_transparent(
 
 
 def rest_up(
-    selector=_selectors.rests(),
+    selector=lambda _: abjad.select.rests(_),
 ) -> OverrideCommand:
     r"""
     Overrides rest direction.
@@ -2971,7 +2971,7 @@ def rest_up(
 
 
 def rest_x_extent_zero(
-    selector=_selectors.rest(0),
+    selector=lambda _: _select.rest(_, 0),
 ) -> OverrideCommand:
     """
     Overrides rest X-extent.

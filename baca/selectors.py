@@ -427,44 +427,11 @@ def qruns(*arguments, **keywords):
     return selector
 
 
-def rest(n):
-    def selector(argument):
-        return abjad.select.rest(argument, n)
-
-    return selector
-
-
-def rests(pair=None):
-    def selector(argument):
-        result = abjad.select.rests(argument)
-        result = _handle_pair(result, pair)
-        return result
-
-    return selector
-
-
 def rleaf(n=0, *, exclude: abjad.Strings = None):
     assert isinstance(n, int), repr(n)
 
     def selector(argument):
         selection = _select.rleaf(argument, n=n, exclude=exclude)
         return selection
-
-    return selector
-
-
-def rleak_runs(start=0, stop=None):
-    def selector(argument):
-        selection = abjad.select.runs(argument)
-        if start != 0 or stop is not None:
-            selection = selection[start:stop]
-        return [_select.rleaves(_) for _ in selection]
-
-    return selector
-
-
-def skip(n):
-    def selector(argument):
-        return _select.skip(argument, n)
 
     return selector
