@@ -504,12 +504,12 @@ def skip(n):
     return selector
 
 
-def tleaves(pair=None, exclude=None, grace=None, rleak=False):
-    def selector(argument):
-        result = _select.tleaves(argument, exclude=exclude, grace=grace)
-        result = _handle_pair(result, pair)
-        if rleak is True:
-            result = abjad.select.with_next_leaf(result)
-        return result
-
-    return selector
+# def tleaves(pair=None, exclude=None, grace=None, rleak=False):
+#    def selector(argument):
+#        result = _select.tleaves(argument, exclude=exclude, grace=grace)
+#        result = _handle_pair(result, pair)
+#        if rleak is True:
+#            result = abjad.select.with_next_leaf(result)
+#        return result
+#
+#    return selector

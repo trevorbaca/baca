@@ -8,6 +8,7 @@ from inspect import currentframe as _frame
 import abjad
 
 from . import scoping as _scoping
+from . import select as _select
 from . import selectors as _selectors
 from . import tags as _tags
 from . import typings as _typings
@@ -113,7 +114,7 @@ class SpannerIndicatorCommand(_scoping.Command):
 def beam(
     *tweaks: abjad.Tweak,
     direction: int = None,
-    selector=_selectors.tleaves(),
+    selector=lambda _: _select.tleaves(_),
     start_beam: abjad.StartBeam = None,
     stop_beam: abjad.StopBeam = None,
 ) -> SpannerIndicatorCommand:
@@ -217,7 +218,7 @@ def ottava(
     stop_ottava: abjad.Ottava = abjad.Ottava(n=0, site="after"),
     *,
     right_broken: bool = False,
-    selector=_selectors.tleaves(),
+    selector=lambda _: _select.tleaves(_),
 ) -> SpannerIndicatorCommand:
     r"""
     Attaches ottava indicators.
@@ -308,7 +309,7 @@ def ottava_bassa(
     start_ottava: abjad.Ottava = abjad.Ottava(n=-1),
     stop_ottava: abjad.Ottava = abjad.Ottava(n=0, site="after"),
     *,
-    selector=_selectors.tleaves(),
+    selector=lambda _: _select.tleaves(_),
 ) -> SpannerIndicatorCommand:
     r"""
     Attaches ottava bassa indicators.
@@ -398,7 +399,7 @@ def slur(
     *tweaks: abjad.Tweak,
     map=None,
     phrasing_slur=False,
-    selector=_selectors.tleaves(),
+    selector=lambda _: _select.tleaves(_),
     start_slur: abjad.StartSlur = None,
     stop_slur: abjad.StopSlur = None,
 ) -> SpannerIndicatorCommand:
@@ -599,7 +600,7 @@ def trill_spanner(
     left_broken: bool = False,
     map=None,
     right_broken: bool = False,
-    selector=_selectors.tleaves(rleak=True),
+    selector=lambda _: _select.tleaves(_, rleak=True),
     start_trill_span: abjad.StartTrillSpan = None,
     stop_trill_span: abjad.StopTrillSpan = None,
 ) -> SpannerIndicatorCommand:

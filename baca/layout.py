@@ -31,7 +31,6 @@ from . import commandclasses as _commandclasses
 from . import indicators as _indicators
 from . import scoping as _scoping
 from . import select as _select
-from . import selectors as _selectors
 from . import tags as _tags
 
 magic_lilypond_eol_adjustment = abjad.Multiplier(35, 24)
@@ -183,6 +182,13 @@ class PageSpecifier:
     systems: list
 
 
+def select_skip(n):
+    def selector(argument):
+        return _select.skip(argument, n)
+
+    return selector
+
+
 def breaks(*page_specifiers):
     """
     Makes break measure map.
@@ -207,7 +213,14 @@ def breaks(*page_specifiers):
             y_offset = system.y_offset
             alignment_distances = system.distances
             assert 0 <= skip_index
-            selector = _selectors.skip(skip_index)
+
+            # selector = _selectors.skip(skip_index)
+
+            # def selector(argument):
+            #     return _select.skip(argument, skip_index)
+
+            selector = select_skip(skip_index)
+
             if j == 0:
                 literal = abjad.LilyPondLiteral(r"\pageBreak")
             else:

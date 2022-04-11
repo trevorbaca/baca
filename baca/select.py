@@ -4234,7 +4234,11 @@ def tleaf(
 
 
 def tleaves(
-    argument, *, exclude: abjad.Strings = None, grace: bool = None
+    argument,
+    *,
+    exclude: abjad.Strings = None,
+    grace: bool = None,
+    rleak: bool = False,
 ) -> list[abjad.Leaf]:
     r"""
     Selects trimmed leaves.
@@ -4348,6 +4352,8 @@ def tleaves(
 
     """
     items = abjad.select.leaves(argument, exclude=exclude, grace=grace, trim=True)
+    if rleak is True:
+        items = abjad.select.with_next_leaf(items)
     return items
 
 

@@ -751,7 +751,7 @@ class GlissandoCommand(_scoping.Command):
     parenthesize_repeats: bool = False
     right_broken: bool = False
     right_broken_show_next: bool = False
-    selector: typing.Callable = _selectors.tleaves()
+    selector: typing.Callable = lambda _: _select.tleaves(_)
     tweaks: typing.Sequence[abjad.Tweak] = ()
     zero_padding: bool = False
 

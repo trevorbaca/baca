@@ -871,7 +871,7 @@ def edition(
 
 def finger_pressure_transition(
     *,
-    selector=_selectors.tleaves(),
+    selector=lambda _: _select.tleaves(_),
     right_broken: bool = False,
 ) -> _commandclasses.GlissandoCommand:
     r"""
@@ -1086,7 +1086,7 @@ def glissando(
     map=None,
     right_broken: bool = False,
     right_broken_show_next: bool = False,
-    selector=_selectors.tleaves(),
+    selector=lambda _: _select.tleaves(_),
     style: str = None,
     zero_padding: bool = False,
 ) -> _commandclasses.GlissandoCommand:
