@@ -10,6 +10,7 @@ from . import commandclasses as _commandclasses
 from . import const as _const
 from . import indicators as _indicators
 from . import scoping as _scoping
+from . import select as _select
 from . import selectors as _selectors
 from . import tags as _tags
 
@@ -1322,7 +1323,7 @@ def hide_black_note_heads(
 
 
 def laissez_vibrer(
-    selector=_selectors.ptail(0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.ptail(_, 0, exclude=_const.HIDDEN),
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches laissez vibrer.
@@ -2913,7 +2914,7 @@ def tie(selector) -> _commandclasses.IndicatorCommand:
         ...             2,
         ...             selector=baca.selectors.plt(0),
         ...         ),
-        ...         baca.tie(baca.selectors.ptail(0)),
+        ...         baca.tie(lambda _: baca.select.ptail(_, 0)),
         ...     ),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )

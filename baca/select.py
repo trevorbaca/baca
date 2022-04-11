@@ -3069,6 +3069,17 @@ def ptail(
     return ptails(argument, exclude=exclude)[n]
 
 
+def ptail_in_each_tuplet(argument, n, pair=None):
+    assert isinstance(n, int), repr(n)
+    if pair is None:
+        start, stop = None, None
+    else:
+        start, stop = pair
+    selection = abjad.select.tuplets(argument)[start:stop]
+    result = [ptail(_, n) for _ in selection]
+    return result
+
+
 def ptails(
     argument, *, exclude: abjad.Strings = None
 ) -> list[abjad.Note | abjad.Chord]:

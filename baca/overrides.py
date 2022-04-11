@@ -2362,7 +2362,7 @@ def repeat_tie_down(
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.repeat_tie(selector=baca.selectors.pleaves((1, None))),
-        ...         map=baca.selectors.qruns(),
+        ...         map=lambda _: baca.select.qruns(_),
         ...     ),
         ...     baca.repeat_tie_down(),
         ...     baca.stem_up(),
@@ -2506,7 +2506,7 @@ def repeat_tie_up(
         ...         baca.repeat_tie(
         ...             selector=baca.selectors.pleaves((1, None)),
         ...         ),
-        ...         map=baca.selectors.qruns(),
+        ...         map=lambda _: baca.select.qruns(_),
         ...     ),
         ...     baca.repeat_tie_up(),
         ...     baca.stem_down(),

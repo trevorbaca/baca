@@ -390,48 +390,48 @@ def plts(pair=None, *, exclude=None, grace=None, lleak=None, omit=None, rleak=No
     return selector
 
 
-def ptail(n, *, exclude=None):
-    def selector(argument):
-        return _select.ptail(argument, n, exclude=exclude)
-
-    return selector
-
-
-def ptail_in_each_tuplet(n, pair=None):
-    assert isinstance(n, int), repr(n)
-    if pair is None:
-        start, stop = None, None
-    else:
-        start, stop = pair
-
-    def selector(argument):
-        selection = abjad.select.tuplets(argument)[start:stop]
-        return [_select.ptail(_, n) for _ in selection]
-
-    return selector
+# def ptail(n, *, exclude=None):
+#    def selector(argument):
+#        return _select.ptail(argument, n, exclude=exclude)
+#
+#    return selector
 
 
-def ptails(pair=None, exclude=None):
-    def selector(argument):
-        result = _select.ptails(argument, exclude=exclude)
-        result = _handle_pair(result, pair)
-        return result
-
-    return selector
-
-
-def qruns(*arguments, **keywords):
-    def selector(argument):
-        return _select.qruns(argument, *arguments, **keywords)
-
-    return selector
+# def ptail_in_each_tuplet(n, pair=None):
+#    assert isinstance(n, int), repr(n)
+#    if pair is None:
+#        start, stop = None, None
+#    else:
+#        start, stop = pair
+#
+#    def selector(argument):
+#        selection = abjad.select.tuplets(argument)[start:stop]
+#        return [_select.ptail(_, n) for _ in selection]
+#
+#    return selector
 
 
-def rleaf(n=0, *, exclude: abjad.Strings = None):
-    assert isinstance(n, int), repr(n)
+# def ptails(pair=None, exclude=None):
+#    def selector(argument):
+#        result = _select.ptails(argument, exclude=exclude)
+#        result = _handle_pair(result, pair)
+#        return result
+#
+#    return selector
 
-    def selector(argument):
-        selection = _select.rleaf(argument, n=n, exclude=exclude)
-        return selection
 
-    return selector
+# def qruns(*arguments, **keywords):
+#    def selector(argument):
+#        return _select.qruns(argument, *arguments, **keywords)
+#
+#    return selector
+
+
+# def rleaf(n=0, *, exclude: abjad.Strings = None):
+#    assert isinstance(n, int), repr(n)
+#
+#    def selector(argument):
+#        selection = _select.rleaf(argument, n=n, exclude=exclude)
+#        return selection
+#
+#    return selector

@@ -11,6 +11,7 @@ from abjadext import rmakers
 from . import const as _const
 from . import overrides as _overrides
 from . import scoping as _scoping
+from . import select as _select
 from . import selectors as _selectors
 from . import sequence as _sequence
 from . import tags as _tags
@@ -819,7 +820,7 @@ def make_tied_notes(*, measures=None):
         rhythm_maker=rmakers.stack(
             rmakers.note(),
             rmakers.beam(_selectors.plts()),
-            rmakers.tie(_selectors.ptails((None, -1))),
+            rmakers.tie(lambda _: _select.ptails(_)[:-1]),
             rmakers.rewrite_meter(),
             tag=_scoping.function_name(_frame()),
         ),
