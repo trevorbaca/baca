@@ -2209,7 +2209,7 @@ class Imbrication:
             ...         [2, 18, 16, 15],
             ...         baca.accent(selector=baca.selectors.pheads()),
             ...         rmakers.beam_groups(beam_rests=True),
-            ...         selector=baca.selectors.plts((-9, None)),
+            ...         selector=lambda _: baca.select.plts(_)[-9:],
             ...     ),
             ...     baca.staccato(selector=baca.selectors.pheads()),
             ... )

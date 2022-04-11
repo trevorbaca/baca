@@ -1192,8 +1192,8 @@ def glissando(
         ...     "Music_Voice",
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.make_even_divisions(),
-        ...     baca.glissando(selector=baca.selectors.plts((None, 2))),
-        ...     baca.glissando(selector=baca.selectors.plts((-2, None))),
+        ...     baca.glissando(selector=lambda _: baca.select.plts(_)[:2]),
+        ...     baca.glissando(selector=lambda _: baca.select.plts(_)[-2:]),
         ... )
 
         >>> _, _ = baca.interpreter(

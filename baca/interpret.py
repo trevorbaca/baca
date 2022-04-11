@@ -2610,7 +2610,7 @@ def _set_intermittent_to_staff_position_zero(score):
                     pleaves.append(pleaf)
     command = _commandclasses.staff_position(
         0,
-        _selectors.plts(),
+        lambda _: _select.plts(_),
         set_chord_pitches_equal=True,
     )
     command(pleaves)
@@ -2624,7 +2624,7 @@ def _set_not_yet_pitched_to_staff_position_zero(score):
         pleaves.append(pleaf)
     command = _commandclasses.staff_position(
         0,
-        _selectors.plts(),
+        lambda _: _select.plts(_),
         set_chord_pitches_equal=True,
     )
     command(pleaves)

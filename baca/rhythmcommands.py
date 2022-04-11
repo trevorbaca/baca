@@ -120,7 +120,7 @@ class RhythmCommand(_scoping.Command):
         ...     rmakers.force_rest(
         ...         baca.selectors.lts(),
         ...     ),
-        ...     rmakers.beam(baca.selectors.plts()),
+        ...     rmakers.beam(lambda _: baca.select.plts(_)),
         ... )
         >>> talea_command = rmakers.stack(
         ...     rmakers.talea([3, 4], 16),
@@ -715,7 +715,7 @@ def make_repeat_tied_notes(
 
     """
     specifiers_ = list(specifiers)
-    specifier = rmakers.beam(_selectors.plts())
+    specifier = rmakers.beam(lambda _: _select.plts(_))
     specifiers_.append(specifier)
     specifier = rmakers.repeat_tie(_selectors.pheads((1, None)))
     specifiers_.append(specifier)
@@ -819,7 +819,7 @@ def make_tied_notes(*, measures=None):
     return RhythmCommand(
         rhythm_maker=rmakers.stack(
             rmakers.note(),
-            rmakers.beam(_selectors.plts()),
+            rmakers.beam(lambda _: _select.plts(_)),
             rmakers.tie(lambda _: _select.ptails(_)[:-1]),
             rmakers.rewrite_meter(),
             tag=_scoping.function_name(_frame()),

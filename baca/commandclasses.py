@@ -1817,7 +1817,7 @@ class ClusterCommand(_scoping.Command):
 
     direction: abjad.Vertical | None = abjad.UP
     hide_flat_markup: bool = False
-    selector: typing.Callable = _selectors.plts()
+    selector: typing.Callable = lambda _: _select.plts(_)
     start_pitch: typing.Any = None
     widths: typing.Any = None
 
@@ -2006,7 +2006,7 @@ class DiatonicClusterCommand(_scoping.Command):
     """
 
     widths: typing.Any = None
-    selector: typing.Callable = _selectors.plts()
+    selector: typing.Callable = lambda _: _select.plts(_)
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
@@ -4586,7 +4586,7 @@ class StaffPositionCommand(_scoping.Command):
     allow_repitch: bool = False
     exact: bool = False
     mock: bool = False
-    selector: typing.Callable = _selectors.plts()
+    selector: typing.Callable = lambda _: _select.plts(_)
     set_chord_pitches_equal: bool = False
 
     def __post_init__(self):
@@ -4673,7 +4673,7 @@ class StaffPositionInterpolationCommand(_scoping.Command):
     stop: int | str | abjad.NamedPitch | abjad.StaffPosition | None = None
     mock: bool = False
     pitches_instead_of_staff_positions: bool = False
-    selector: typing.Callable = _selectors.plts()
+    selector: typing.Callable = lambda _: _select.plts(_)
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
@@ -4766,7 +4766,7 @@ class StaffPositionInterpolationCommand(_scoping.Command):
 
 def bass_to_octave(
     n: int,
-    selector=_selectors.plts(exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
 ) -> RegisterToOctaveCommand:
     r"""
     Octave-transposes music.
@@ -4780,7 +4780,10 @@ def bass_to_octave(
         ...     baca.figure([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.bass_to_octave(3),
-        ...     baca.color(baca.selectors.plts(), lone=True),
+        ...     baca.color(
+        ...         lambda _: baca.select.plts(_),
+        ...         lone=True,
+        ...     ),
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
 
@@ -4865,9 +4868,9 @@ def bass_to_octave(
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.bass_to_octave(3),
-        ...         map=baca.selectors.plts(),
+        ...         map=lambda _: baca.select.plts(_),
         ...     ),
-        ...     baca.color(baca.selectors.plts()),
+        ...     baca.color(lambda _: baca.select.plts(_)),
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
 
@@ -4950,7 +4953,7 @@ def bass_to_octave(
 
 def center_to_octave(
     n: int,
-    selector=_selectors.plts(exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
 ) -> RegisterToOctaveCommand:
     r"""
     Octave-transposes music.
@@ -4963,7 +4966,10 @@ def center_to_octave(
         ...     baca.figure([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.center_to_octave(3),
-        ...     baca.color(baca.selectors.plts(), lone=True),
+        ...     baca.color(
+        ...         lambda _: baca.select.plts(_),
+        ...         lone=True,
+        ...     ),
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
 
@@ -5048,9 +5054,9 @@ def center_to_octave(
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.center_to_octave(3),
-        ...         map=baca.selectors.plts(),
+        ...         map=lambda _: baca.select.plts(_),
         ...     ),
-        ...     baca.color(baca.selectors.plts()),
+        ...     baca.color(lambda _: baca.select.plts(_)),
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
 
@@ -5133,7 +5139,7 @@ def center_to_octave(
 
 def clusters(
     widths: list[int],
-    selector=_selectors.plts(exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
     *,
     start_pitch: int | str | abjad.NamedPitch | None = None,
 ) -> ClusterCommand:
@@ -5156,7 +5162,7 @@ def color_fingerings(
 
 def deviation(
     deviations: list[abjad.Number],
-    selector=_selectors.plts(exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
 ) -> MicrotoneDeviationCommand:
     """
     Sets microtone ``deviations``.
@@ -5166,7 +5172,7 @@ def deviation(
 
 def diatonic_clusters(
     widths: list[int],
-    selector=_selectors.plts(exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
 ) -> DiatonicClusterCommand:
     """
     Makes diatonic clusters with ``widths``.
@@ -5176,7 +5182,7 @@ def diatonic_clusters(
 
 def displacement(
     displacements: list[int],
-    selector=_selectors.plts(exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
 ) -> OctaveDisplacementCommand:
     r"""
     Octave-displaces ``selector`` output.
@@ -5394,7 +5400,7 @@ def force_accidental(
 def interpolate_pitches(
     start: int | str | abjad.NamedPitch,
     stop: int | str | abjad.NamedPitch,
-    selector=_selectors.plts(exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
     *,
     mock: bool = False,
 ) -> StaffPositionInterpolationCommand:
@@ -5559,7 +5565,7 @@ def interpolate_pitches(
 def interpolate_staff_positions(
     start: int | abjad.StaffPosition,
     stop: int | abjad.StaffPosition,
-    selector=_selectors.plts(exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
     *,
     mock: bool = False,
 ) -> StaffPositionInterpolationCommand:
@@ -5590,7 +5596,7 @@ def levine_multiphonic(n: int) -> abjad.Markup:
 def loop(
     items: typing.Sequence,
     intervals: typing.Sequence,
-    selector=_selectors.plts(exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
 ) -> PitchCommand:
     """
     Loops ``items`` at ``intervals``.
@@ -5601,7 +5607,7 @@ def loop(
 
 def natural_clusters(
     widths: typing.Sequence[int],
-    selector=_selectors.plts(exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
     *,
     start_pitch: int | str | abjad.NamedPitch | None = None,
 ) -> ClusterCommand:
@@ -5618,7 +5624,7 @@ def natural_clusters(
 
 def pitch(
     pitch,
-    selector=_selectors.plts(exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
     *,
     allow_out_of_range: bool = False,
     allow_repitch: bool = False,
@@ -5721,7 +5727,7 @@ def pitch(
 
 def pitches(
     pitches,
-    selector=_selectors.plts(exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
     *,
     allow_octaves: bool = False,
     allow_repeats: bool = False,
@@ -5767,7 +5773,7 @@ def register(
     start: int,
     stop: int = None,
     *,
-    selector=_selectors.plts(exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
 ) -> RegisterCommand | RegisterInterpolationCommand:
     r"""
     Octave-transposes ``selector`` output.
@@ -6089,7 +6095,7 @@ def register(
 
 def soprano_to_octave(
     n: int,
-    selector=_selectors.plts(exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
 ) -> RegisterToOctaveCommand:
     r"""
     Octave-transposes music.
@@ -6102,7 +6108,10 @@ def soprano_to_octave(
         >>> stack = baca.stack(
         ...     baca.figure([5, -3], 32),
         ...     rmakers.beam(),
-        ...     baca.color(baca.selectors.plts(), lone=True),
+        ...     baca.color(
+        ...         lambda _: baca.select.plts(_),
+        ...         lone=True,
+        ...     ),
         ...     baca.soprano_to_octave(3),
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
@@ -6188,9 +6197,9 @@ def soprano_to_octave(
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.soprano_to_octave(3),
-        ...         map=baca.selectors.plts(),
+        ...         map=lambda _: baca.select.plts(_),
         ...     ),
-        ...     baca.color(baca.selectors.plts()),
+        ...     baca.color(lambda _: baca.select.plts(_)),
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
 
@@ -6271,7 +6280,7 @@ def soprano_to_octave(
 
 def staff_position(
     argument: int | list | abjad.StaffPosition,
-    selector=_selectors.plts(exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
     *,
     allow_out_of_range: bool = False,
     allow_repitch: bool = False,
@@ -6297,7 +6306,7 @@ def staff_position(
 
 def staff_positions(
     numbers,
-    selector=_selectors.plts(exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
     *,
     allow_out_of_range: bool = False,
     allow_repeats: bool = False,
