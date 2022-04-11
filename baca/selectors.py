@@ -374,17 +374,3 @@ def plt(n):
         return _select.plt(argument, n)
 
     return selector
-
-
-def plts(pair=None, *, exclude=None, grace=None, lleak=None, omit=None, rleak=None):
-    def selector(argument):
-        result = _select.plts(argument, exclude=exclude, grace=grace)
-        result = _handle_pair(result, pair)
-        result = _handle_omit(result, omit)
-        if lleak is True:
-            result = abjad.select.with_previous_leaf(result)
-        if rleak is True:
-            result = abjad.select.with_next_leaf(result)
-        return result
-
-    return selector
