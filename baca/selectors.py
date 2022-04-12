@@ -192,16 +192,3 @@ def lts(pair=None, *, nontrivial=None, omit=False):
         return result
 
     return selector
-
-
-def pleaves(pair=None, exclude=None, grace=None, lleak=False, rleak=False):
-    def selector(argument):
-        result = _select.pleaves(argument, exclude=exclude, grace=grace)
-        result = _handle_pair(result, pair)
-        if lleak is True:
-            result = abjad.select.with_previous_leaf(result)
-        if rleak is True:
-            result = abjad.select.with_next_leaf(result)
-        return result
-
-    return selector
