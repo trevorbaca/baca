@@ -877,7 +877,7 @@ def dots_x_extent_false(
 
 def dynamic_text_color(
     color: str = "#red",
-    selector=_selectors.pleaf(0),
+    selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides dynamic text color.
@@ -893,7 +893,7 @@ def dynamic_text_color(
 
 def dynamic_text_extra_offset(
     pair: abjad.NumberPair,
-    selector=_selectors.pleaf(0),
+    selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     r"""
     Overrides dynamic text extra offset.
@@ -1002,7 +1002,7 @@ def dynamic_text_extra_offset(
 
 def dynamic_text_parent_alignment_x(
     n: abjad.Number,
-    selector=_selectors.pleaf(0),
+    selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides dynamic text parent alignment X to ``n``.
@@ -1018,7 +1018,7 @@ def dynamic_text_parent_alignment_x(
 
 def dynamic_text_self_alignment_x(
     n: abjad.Number,
-    selector=_selectors.pleaf(0),
+    selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides dynamic text self-alignment-X to ``n``.
@@ -1033,7 +1033,7 @@ def dynamic_text_self_alignment_x(
 
 
 def dynamic_text_stencil_false(
-    selector=_selectors.pleaf(0),
+    selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides dynamic text stencil.
@@ -1048,7 +1048,7 @@ def dynamic_text_stencil_false(
 
 
 def dynamic_text_transparent(
-    selector=_selectors.pleaf(0),
+    selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides dynamic text transparency.
@@ -1063,7 +1063,7 @@ def dynamic_text_transparent(
 
 
 def dynamic_text_x_extent_zero(
-    selector=_selectors.pleaf(0),
+    selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides dynamic text X-extent.
@@ -1079,7 +1079,7 @@ def dynamic_text_x_extent_zero(
 
 def dynamic_text_x_offset(
     n: abjad.Number,
-    selector=_selectors.pleaf(0),
+    selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides dynamic text X-extent.
@@ -1095,7 +1095,7 @@ def dynamic_text_x_offset(
 
 def dynamic_text_y_offset(
     n: abjad.Number,
-    selector=_selectors.pleaf(0),
+    selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides dynamic text Y-extent.
@@ -1126,7 +1126,7 @@ def flag_extra_offset(
 
 
 def flag_stencil_false(
-    selector=_selectors.pleaf(0),
+    selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides flag stencil.
@@ -1284,7 +1284,7 @@ def laissez_vibrer_tie_up(
 
 def mmrest_color(
     color: str = "#red",
-    selector=_selectors.mmrests(),
+    selector=lambda _: _select.mmrests(_),
 ) -> OverrideCommand:
     r"""
     Overrides multimeasure rest color.
@@ -1365,7 +1365,7 @@ def mmrest_color(
 
 
 def mmrest_transparent(
-    selector=_selectors.mmrests(),
+    selector=lambda _: _select.mmrests(_),
 ) -> OverrideCommand:
     r"""
     Overrides multimeasure rest transparent.
@@ -1382,7 +1382,7 @@ def mmrest_transparent(
 
 def mmrest_text_color(
     color: str = "#red",
-    selector=_selectors.mmrests(),
+    selector=lambda _: _select.mmrests(_),
 ) -> OverrideCommand:
     r"""
     Overrides multimeasure rest text color.
@@ -1398,7 +1398,7 @@ def mmrest_text_color(
         ...     "Music_Voice",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
-        ...         selector=baca.selectors.mmrest(1),
+        ...         selector=lambda _: baca.select.mmrest(_, 1),
         ...     ),
         ...     baca.mmrest_text_color("#red"),
         ... )
@@ -1498,7 +1498,7 @@ def mmrest_text_color(
 
 def mmrest_text_extra_offset(
     pair: abjad.NumberPair,
-    selector=_selectors.mmrests(),
+    selector=lambda _: _select.mmrests(_),
 ) -> OverrideCommand:
     r"""
     Overrides multimeasure rest text extra offset.
@@ -1514,7 +1514,7 @@ def mmrest_text_extra_offset(
         ...     "Music_Voice",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
-        ...         selector=baca.selectors.mmrest(1),
+        ...         selector=lambda _: baca.select.mmrest(_, 1),
         ...     ),
         ...     baca.mmrest_text_extra_offset((0, 2)),
         ... )
@@ -1582,7 +1582,7 @@ def mmrest_text_extra_offset(
 
 def mmrest_text_padding(
     n: abjad.Number,
-    selector=_selectors.mmrests(),
+    selector=lambda _: _select.mmrests(_),
 ) -> OverrideCommand:
     r"""
     Overrides multimeasure rest text padding.
@@ -1598,7 +1598,7 @@ def mmrest_text_padding(
         ...     "Music_Voice",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
-        ...         selector=baca.selectors.mmrest(1),
+        ...         selector=lambda _: baca.select.mmrest(_, 1),
         ...     ),
         ...     baca.mmrest_text_padding(2),
         ... )
@@ -1665,7 +1665,7 @@ def mmrest_text_padding(
 
 
 def mmrest_text_parent_center(
-    selector=_selectors.mmrests(),
+    selector=lambda _: _select.mmrests(_),
 ) -> OverrideCommand:
     r"""
     Overrides multimeasure rest text parent alignment X to center.
@@ -1681,7 +1681,7 @@ def mmrest_text_parent_center(
         ...     "Music_Voice",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
-        ...         selector=baca.selectors.mmrest(1),
+        ...         selector=lambda _: baca.select.mmrest(_, 1),
         ...     ),
         ...     baca.mmrest_text_parent_center(),
         ... )
@@ -1749,7 +1749,7 @@ def mmrest_text_parent_center(
 
 def mmrest_text_staff_padding(
     n: abjad.Number,
-    selector=_selectors.mmrests(),
+    selector=lambda _: _select.mmrests(_),
 ) -> OverrideCommand:
     r"""
     Overrides multimeasure rest text staff padding.
@@ -1765,7 +1765,7 @@ def mmrest_text_staff_padding(
         ...     "Music_Voice",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
-        ...         selector=baca.selectors.mmrest(1),
+        ...         selector=lambda _: baca.select.mmrest(_, 1),
         ...     ),
         ...     baca.mmrest_text_staff_padding(2),
         ... )
@@ -1832,7 +1832,7 @@ def mmrest_text_staff_padding(
 
 
 def mmrest_text_transparent(
-    selector=_selectors.mmrests(),
+    selector=lambda _: _select.mmrests(_),
 ) -> OverrideCommand:
     """
     Overrides script transparent.
@@ -1912,7 +1912,7 @@ def note_head_duration_log(
 
 def note_head_extra_offset(
     pair: abjad.NumberPair,
-    selector=_selectors.pleaf(0),
+    selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides note-head color.
@@ -1928,7 +1928,7 @@ def note_head_extra_offset(
 
 def note_head_font_size(
     n: abjad.Number,
-    selector=_selectors.pleaf(0),
+    selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides note-head font size.
@@ -1944,7 +1944,7 @@ def note_head_font_size(
 
 def note_head_no_ledgers(
     value: bool,
-    selector=_selectors.pleaf(0),
+    selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides note-head no-ledgers property.
@@ -1959,7 +1959,7 @@ def note_head_no_ledgers(
 
 
 def note_head_stencil_false(
-    selector=_selectors.pleaf(0),
+    selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides note-head stencil.
@@ -1975,7 +1975,7 @@ def note_head_stencil_false(
 
 def note_head_style(
     string: str,
-    selector=_selectors.pleaf(0),
+    selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides note-head style property.
@@ -2196,7 +2196,7 @@ def note_head_transparent(
 
 
 def note_head_x_extent_zero(
-    selector=_selectors.pleaf(0),
+    selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides note-head X-extent.
@@ -2439,7 +2439,7 @@ def repeat_tie_down(
 
 def repeat_tie_extra_offset(
     pair: abjad.NumberPair,
-    selector=_selectors.pleaf(0),
+    selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides repeat tie extra-offset.
@@ -2454,7 +2454,7 @@ def repeat_tie_extra_offset(
 
 
 def repeat_tie_stencil_false(
-    selector=_selectors.pleaf(0),
+    selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides repeat tie stencil.
@@ -3888,7 +3888,7 @@ def stem_extra_offset(
 
 
 def stem_stencil_false(
-    selector=_selectors.pleaf(0),
+    selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides stem stencil.
@@ -5178,7 +5178,7 @@ def tie_down(
         ...     rmakers.beam(),
         ...     baca.stem_up(),
         ...     baca.tie(
-        ...         selector=baca.selectors.pleaf(0),
+        ...         selector=lambda _: baca.select.pleaf(_, 0),
         ...     ),
         ...     baca.tie_down(),
         ...     baca.tuplet_bracket_staff_padding(2),

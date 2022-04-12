@@ -955,7 +955,7 @@ def tacet(
     color="#green",
     *,
     measures=None,
-    selector=_selectors.mmrests(),
+    selector=lambda _: _select.mmrests(_),
 ):
     """
     Colors multimeasure rests.

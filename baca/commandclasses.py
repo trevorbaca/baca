@@ -5323,7 +5323,7 @@ def displacement(
 
 
 def force_accidental(
-    selector=_selectors.pleaf(0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.pleaf(_, 0, exclude=_const.HIDDEN),
 ) -> AccidentalAdjustmentCommand:
     r"""
     Forces accidental.

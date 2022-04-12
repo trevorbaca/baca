@@ -371,7 +371,7 @@ def alternate_bow_strokes(
 
 
 def arpeggio(
-    selector=_selectors.chead(0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.chead(_, 0, exclude=_const.HIDDEN),
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches arpeggio.
@@ -504,7 +504,7 @@ def bar_line(
 
 
 def breathe(
-    selector=_selectors.pleaf(-1, exclude=_const.HIDDEN),
+    selector=lambda _: _select.pleaf(_, -1, exclude=_const.HIDDEN),
     *tweaks: abjad.Tweak,
 ) -> _commandclasses.IndicatorCommand:
     """
@@ -731,7 +731,7 @@ def double_staccato(
 
 
 def down_arpeggio(
-    selector=_selectors.chead(0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.chead(_, 0, exclude=_const.HIDDEN),
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches down-arpeggio.
@@ -1855,7 +1855,7 @@ def repeat_tie(
         ...     baca.chunk(
         ...         baca.pitch(
         ...             0,
-        ...             selector=baca.selectors.plt(1),
+        ...             selector=lambda _: baca.select.plt(_, 1),
         ...         ),
         ...         baca.repeat_tie(
         ...             baca.selectors.phead(1),
@@ -2609,7 +2609,7 @@ def start_markup(
 
 
 def stem_tremolo(
-    selector=_selectors.pleaf(0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.pleaf(_, 0, exclude=_const.HIDDEN),
     *,
     tremolo_flags: int = 32,
 ) -> _commandclasses.IndicatorCommand:
@@ -2717,7 +2717,7 @@ def stop_on_string(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.stop_on_string(
-        ...         selector=baca.selectors.pleaf(-1),
+        ...         selector=lambda _: baca.select.pleaf(_, -1),
         ...     ),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -2912,7 +2912,7 @@ def tie(selector) -> _commandclasses.IndicatorCommand:
         ...     baca.chunk(
         ...         baca.pitch(
         ...             2,
-        ...             selector=baca.selectors.plt(0),
+        ...             selector=lambda _: baca.select.plt(_, 0),
         ...         ),
         ...         baca.tie(lambda _: baca.select.ptail(_, 0)),
         ...     ),
@@ -3080,7 +3080,7 @@ def triple_staccato(
 
 
 def up_arpeggio(
-    selector=_selectors.chead(0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.chead(_, 0, exclude=_const.HIDDEN),
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches up-arpeggio.

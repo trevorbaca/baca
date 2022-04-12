@@ -887,14 +887,14 @@ def finger_pressure_transition(
         >>> commands(
         ...     "Music_Voice",
         ...     baca.finger_pressure_transition(
-        ...         selector=baca.selectors.notes((None, 2)),
+        ...         selector=lambda _: abjad.select.notes(_)[:2],
         ...     ),
         ...     baca.finger_pressure_transition(
-        ...         selector=baca.selectors.notes((2, None)),
+        ...         selector=lambda _: abjad.select.notes(_)[2:],
         ...     ),
         ...     baca.make_notes(),
-        ...     baca.note_head_style_harmonic(selector=baca.selectors.note(0)),
-        ...     baca.note_head_style_harmonic(selector=baca.selectors.note(2)),
+        ...     baca.note_head_style_harmonic(selector=lambda _: abjad.select.note(_, 0)),
+        ...     baca.note_head_style_harmonic(selector=lambda _: abjad.select.note(_, 2)),
         ...     baca.pitch("C5"),
         ... )
 
@@ -1695,7 +1695,7 @@ def markup(
     map=None,
     match: _typings.Indices = None,
     measures: _typings.SliceTyping = None,
-    selector=_selectors.pleaf(0),
+    selector=lambda _: _select.pleaf(_, 0),
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Makes markup and inserts into indicator command.
