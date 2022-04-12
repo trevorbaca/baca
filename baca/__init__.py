@@ -10,7 +10,6 @@ from . import math
 from . import jobs
 from . import score
 from . import select
-from . import selectors
 from . import sequence
 from . import typings
 from .accumulator import (
