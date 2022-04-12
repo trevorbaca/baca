@@ -75,42 +75,6 @@ def leaf_in_each_tuplet(n):
     return selector
 
 
-def leaves(
-    pair=None,
-    *,
-    exclude: abjad.typings.Strings = None,
-    grace: bool = None,
-    head: bool = None,
-    lleak: bool = None,
-    pitched: bool = None,
-    prototype=None,
-    reverse: bool = None,
-    rleak: bool = False,
-    tail: bool = None,
-    trim: bool | int | None = None,
-):
-    def selector(argument):
-        selection = abjad.select.leaves(
-            argument,
-            prototype=prototype,
-            exclude=exclude,
-            grace=grace,
-            head=head,
-            pitched=pitched,
-            reverse=reverse,
-            tail=tail,
-            trim=trim,
-        )
-        selection = _handle_pair(selection, pair)
-        if lleak is True:
-            selection = abjad.select.with_previous_leaf(selection)
-        if rleak is True:
-            selection = abjad.select.with_next_leaf(selection)
-        return selection
-
-    return selector
-
-
 def leaves_in_each_lt(start=0, stop=None):
     assert isinstance(start, int | type(None)), repr(start)
     assert isinstance(stop, int | type(None)), repr(stop)
@@ -182,13 +146,3 @@ def leaves_in_get_tuplets(pattern, pair):
 
 def leaves_in_exclude_tuplets(pattern, pair):
     return _leaves_in_get_tuplets(pattern, pair, exclude=True)
-
-
-def lts(pair=None, *, nontrivial=None, omit=False):
-    def selector(argument):
-        result = _select.lts(argument, nontrivial=nontrivial)
-        result = _handle_pair(result, pair)
-        result = _handle_omit(result, omit)
-        return result
-
-    return selector
