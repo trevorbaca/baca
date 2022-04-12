@@ -9,7 +9,6 @@ import abjad
 
 from . import scoping as _scoping
 from . import select as _select
-from . import selectors as _selectors
 from . import tags as _tags
 from . import typings as _typings
 
@@ -500,7 +499,7 @@ def slur(
 
 def sustain_pedal(
     *,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
     start_piano_pedal: abjad.StartPianoPedal = None,
     stop_piano_pedal: abjad.StopPianoPedal = None,
 ) -> SpannerIndicatorCommand:

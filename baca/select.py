@@ -729,6 +729,40 @@ def hleaves(argument, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]:
     return abjad.select.leaves(argument, exclude=exclude, grace=False)
 
 
+def leaves(
+    argument,
+    pair=None,
+    *,
+    exclude: abjad.typings.Strings = None,
+    grace: bool = None,
+    head: bool = None,
+    lleak: bool = None,
+    pitched: bool = None,
+    prototype=None,
+    reverse: bool = None,
+    rleak: bool = False,
+    tail: bool = None,
+    trim: bool | abjad.enums.Horizontal | None = None,
+):
+    selection = abjad.select.leaves(
+        argument,
+        prototype=prototype,
+        exclude=exclude,
+        grace=grace,
+        head=head,
+        pitched=pitched,
+        reverse=reverse,
+        tail=tail,
+        trim=trim,
+    )
+    selection = _handle_pair(selection, pair)
+    if lleak is True:
+        selection = abjad.select.with_previous_leaf(selection)
+    if rleak is True:
+        selection = abjad.select.with_next_leaf(selection)
+    return selection
+
+
 def lleaf(
     argument, n: int = 0, *, count: int = 1, exclude: abjad.Strings = None
 ) -> abjad.Leaf:

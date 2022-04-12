@@ -19,7 +19,6 @@ from . import piecewise as _piecewise
 from . import rhythmcommands as _rhythmcommands
 from . import scoping as _scoping
 from . import select as _select
-from . import selectors as _selectors
 from . import tags as _tags
 
 
@@ -687,7 +686,7 @@ def _attach_rhythm_annotation_spanner(command, selection):
         abjad.Tweak(rf"- \tweak color {color}"),
         abjad.Tweak(r"- \tweak staff-padding 8"),
         leak_spanner_stop=True,
-        selector=_selectors.leaves(),
+        selector=lambda _: _select.leaves(_),
     )
     command_(leaves)
 
@@ -2647,7 +2646,7 @@ def _shift_measure_initial_clefs(
             if measure_number is None:
                 continue
             clef = wrapper.unbundle_indicator()
-            suite = _overrides.clef_shift(clef, selector=_selectors.leaf(0))
+            suite = _overrides.clef_shift(clef, selector=lambda _: abjad.select.leaf(0))
             runtime = _bundle_runtime(
                 offset_to_measure_number=offset_to_measure_number,
             )
@@ -3108,7 +3107,7 @@ def interpreter(
     voice_metadata = {}
     global_skips = score["Global_Skips"]
     with abjad.Timer() as timer:
-        # temporary hack to make baca.selectors.mleaves() work
+        # temporary hack to make baca.select.mleaves() work
         dummy_container = abjad.Container([score], name="Dummy_Container")
         _make_global_skips(append_phantom_measure, global_skips, time_signatures)
         if attach_nonfirst_empty_start_bar and not first_segment:

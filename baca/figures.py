@@ -16,7 +16,6 @@ from . import const as _const
 from . import rhythmcommands as _rhythmcommands
 from . import scoping as _scoping
 from . import select as _select
-from . import selectors as _selectors
 from . import tags as _tags
 
 
@@ -1790,11 +1789,11 @@ class Imbrication:
             ...     baca.imbricate(
             ...         "Music_Voice_1",
             ...         [2, 19, 9, 18, 16],
-            ...         baca.accent(selector=baca.selectors.pheads()),
+            ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
             ...         rmakers.beam_groups(beam_rests=True),
             ...         allow_unused_pitches=True,
             ...     ),
-            ...     baca.staccato(selector=baca.selectors.pheads()),
+            ...     baca.staccato(selector=lambda _: baca.select.pheads(_)),
             ... )
 
             >>> commands = baca.CommandAccumulator(
@@ -1954,11 +1953,11 @@ class Imbrication:
             ...     baca.imbricate(
             ...         "Music_Voice_1",
             ...         [2, 19, 9, 18, 16],
-            ...         baca.accent(selector=baca.selectors.pheads()),
+            ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
             ...         rmakers.beam_groups(beam_rests=True),
             ...         allow_unused_pitches=False,
             ...     ),
-            ...     baca.staccato(selector=baca.selectors.pheads()),
+            ...     baca.staccato(selector=lambda _: baca.select.pheads(_)),
             ... )
             Traceback (most recent call last):
                 ...
@@ -2006,11 +2005,11 @@ class Imbrication:
             ...     baca.imbricate(
             ...         "Music_Voice_1",
             ...         [2, 19, 9, 18, 16],
-            ...         baca.accent(selector=baca.selectors.pheads()),
+            ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
             ...         rmakers.beam_groups(beam_rests=True),
             ...         hocket=True,
             ...     ),
-            ...     baca.staccato(selector=baca.selectors.pheads()),
+            ...     baca.staccato(selector=lambda _: baca.select.pheads(_)),
             ... )
 
             >>> commands = baca.CommandAccumulator(
@@ -2207,11 +2206,11 @@ class Imbrication:
             ...     baca.imbricate(
             ...         "Music_Voice_1",
             ...         [2, 18, 16, 15],
-            ...         baca.accent(selector=baca.selectors.pheads()),
+            ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
             ...         rmakers.beam_groups(beam_rests=True),
             ...         selector=lambda _: baca.select.plts(_)[-9:],
             ...     ),
-            ...     baca.staccato(selector=baca.selectors.pheads()),
+            ...     baca.staccato(selector=lambda _: baca.select.pheads(_)),
             ... )
 
             >>> commands = baca.CommandAccumulator(
@@ -6437,7 +6436,7 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
         ...     baca.imbricate(
         ...         "Music_Voice_1",
         ...         segment,
-        ...         baca.accent(selector=baca.selectors.pheads()),
+        ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
         ...         rmakers.beam_groups(beam_rests=True),
         ...     ),
         ... )
@@ -6589,7 +6588,7 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
 
 
 def extend_beam(
-    selector=_selectors.leaf(-1),
+    selector=lambda _: abjad.select.leaf(_, -1),
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches RIGHT_BROKEN_BEAM to selector output.
@@ -6609,7 +6608,7 @@ def extend_beam(
         ...     baca.imbricate(
         ...         "Music_Voice_1",
         ...         [2, 10],
-        ...         baca.staccato(selector=baca.selectors.pheads()),
+        ...         baca.staccato(selector=lambda _: baca.select.pheads(_)),
         ...         rmakers.beam_groups(beam_rests=True),
         ...         baca.extend_beam(),
         ...     ),
@@ -6623,7 +6622,7 @@ def extend_beam(
         ...     baca.imbricate(
         ...         "Music_Voice_1",
         ...         [13, 9],
-        ...         baca.staccato(selector=baca.selectors.pheads()),
+        ...         baca.staccato(selector=lambda _: baca.select.pheads(_)),
         ...         rmakers.beam_groups(beam_rests=True),
         ...     ),
         ... )
@@ -7005,14 +7004,14 @@ def imbricate(
         ...         [2, 19, 9],
         ...         rmakers.beam_groups(beam_rests=True),
         ...         baca.beam_positions(6),
-        ...         baca.staccato(selector=baca.selectors.pheads()),
+        ...         baca.staccato(selector=lambda _: baca.select.pheads(_)),
         ...         ),
         ...     baca.imbricate(
         ...         "Music_Voice_3",
         ...         [16, 10, 18],
         ...         rmakers.beam_groups(beam_rests=True),
         ...         baca.beam_positions(8),
-        ...         baca.accent(selector=baca.selectors.pheads()),
+        ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
         ...         ),
         ...     rmakers.beam_groups(),
         ... )
@@ -7226,10 +7225,10 @@ def imbricate(
         ...     baca.imbricate(
         ...         "Music_Voice_1",
         ...         [2, 19, 9, 18, 16],
-        ...         baca.accent(selector=baca.selectors.pheads()),
+        ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
         ...         rmakers.beam_groups(beam_rests=True),
         ...     ),
-        ...     baca.staccato(selector=baca.selectors.pheads()),
+        ...     baca.staccato(selector=lambda _: baca.select.pheads(_)),
         ... )
 
         >>> commands = baca.CommandAccumulator(
@@ -7435,7 +7434,7 @@ def imbricate(
         ...     baca.imbricate(
         ...         "Music_Voice_1",
         ...         segment,
-        ...         baca.accent(selector=baca.selectors.pheads()),
+        ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
         ...         rmakers.beam_groups(beam_rests=True),
         ...     ),
         ... )
@@ -8544,7 +8543,7 @@ def resume_after(remote_voice_name) -> Anchor:
     Resumes music after remote selection.
     """
     return Anchor(
-        remote_selector=_selectors.leaf(-1),
+        remote_selector=lambda _: abjad.select.leaf(_, -1),
         remote_voice_name=remote_voice_name,
         use_remote_stop_offset=True,
     )

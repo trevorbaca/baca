@@ -11,12 +11,11 @@ from . import const as _const
 from . import indicators as _indicators
 from . import scoping as _scoping
 from . import select as _select
-from . import selectors as _selectors
 from . import tags as _tags
 
 
 def accent(
-    selector=_selectors.phead(0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
 ):
     r"""
     Attaches accent.
@@ -101,7 +100,7 @@ def accent(
 
 
 def alternate_bow_strokes(
-    selector=_selectors.pheads(exclude=_const.HIDDEN),
+    selector=lambda _: _select.pheads(_, exclude=_const.HIDDEN),
     *tweaks: abjad.Tweak,
     downbow_first: bool = True,
     full: bool = False,
@@ -459,7 +458,7 @@ def arpeggio(
 
 def articulation(
     articulation: str,
-    selector=_selectors.phead(0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
 ) -> _commandclasses.IndicatorCommand:
     """
     Attaches articulation.
@@ -474,7 +473,7 @@ def articulation(
 
 def articulations(
     articulations: list,
-    selector=_selectors.pheads(exclude=_const.HIDDEN),
+    selector=lambda _: _select.pheads(_, exclude=_const.HIDDEN),
 ) -> _commandclasses.IndicatorCommand:
     """
     Attaches articulations.
@@ -488,7 +487,7 @@ def articulations(
 
 def bar_line(
     abbreviation: str = "|",
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     site: str = "after",
 ) -> _commandclasses.IndicatorCommand:
@@ -524,7 +523,7 @@ def breathe(
 
 def clef(
     clef: str = "treble",
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     redundant: bool = False,
 ) -> _commandclasses.IndicatorCommand:
@@ -613,7 +612,7 @@ def clef(
 
 
 def damp(
-    selector=_selectors.phead(0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
     *tweaks: abjad.Tweak,
 ) -> _commandclasses.IndicatorCommand:
     """
@@ -631,7 +630,7 @@ def damp(
 
 
 def double_flageolet(
-    selector=_selectors.phead(0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
 ) -> _commandclasses.IndicatorCommand:
     """
     Attaches double flageolet.
@@ -644,7 +643,7 @@ def double_flageolet(
 
 
 def double_staccato(
-    selector=_selectors.phead(0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches double-staccato.
@@ -819,7 +818,7 @@ def down_arpeggio(
 
 
 def down_bow(
-    selector=_selectors.phead(0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
     *tweaks: abjad.Tweak,
     full: bool = False,
 ) -> _commandclasses.IndicatorCommand:
@@ -988,7 +987,7 @@ def down_bow(
 
 
 def espressivo(
-    selector=_selectors.phead(0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
     *tweaks: abjad.Tweak,
 ) -> _commandclasses.IndicatorCommand:
     r"""
@@ -1078,7 +1077,7 @@ def espressivo(
 
 
 def fermata(
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches fermata.
@@ -1163,7 +1162,7 @@ def fermata(
 
 
 def flageolet(
-    selector=_selectors.phead(0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches flageolet.
@@ -1248,7 +1247,7 @@ def flageolet(
 
 
 def hide_black_note_heads(
-    selector=_selectors.leaves(exclude=_const.HIDDEN),
+    selector=lambda _: _select.leaves(_, exclude=_const.HIDDEN),
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches note-head stencil false to black note-heads.
@@ -1409,7 +1408,7 @@ def laissez_vibrer(
 
 def literal(
     string: str | list[str],
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     site: str = "before",
 ) -> _commandclasses.IndicatorCommand:
@@ -1425,7 +1424,7 @@ def literal(
 
 
 def long_fermata(
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches long fermata.
@@ -1510,7 +1509,7 @@ def long_fermata(
 
 
 def marcato(
-    selector=_selectors.phead(0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches marcato.
@@ -1596,7 +1595,7 @@ def marcato(
 
 def margin_markup(
     argument: str,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     alert: _commandclasses.IndicatorCommand = None,
     context: str = "Staff",
@@ -1695,7 +1694,7 @@ def margin_markup(
 
 def mark(
     argument: str,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
     *tweaks: abjad.Tweak,
 ) -> _commandclasses.IndicatorCommand:
     """
@@ -1712,7 +1711,7 @@ def mark(
 
 
 def parenthesize(
-    selector=_selectors.phead(0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches LilyPond ``\parenthesize`` command.
@@ -1797,7 +1796,7 @@ def parenthesize(
 
 
 def quadruple_staccato(
-    selector=_selectors.phead(0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
 ) -> _commandclasses.IndicatorCommand:
     """
     Attaches quadruple-staccato.
@@ -1811,7 +1810,7 @@ def quadruple_staccato(
 
 def rehearsal_mark(
     argument: int | str,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
     *tweaks: abjad.Tweak,
     font_size: int = 10,
 ) -> _commandclasses.IndicatorCommand:
@@ -1858,7 +1857,7 @@ def repeat_tie(
         ...             selector=lambda _: baca.select.plt(_, 1),
         ...         ),
         ...         baca.repeat_tie(
-        ...             baca.selectors.phead(1),
+        ...             lambda _: baca.select.phead(_, 1),
         ...         ),
         ...     ),
         ...     baca.tuplet_bracket_staff_padding(2),
@@ -1930,7 +1929,7 @@ def repeat_tie(
 
 
 def short_fermata(
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches short fermata.
@@ -2015,7 +2014,7 @@ def short_fermata(
 
 
 def snap_pizzicato(
-    selector=_selectors.phead(0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
 ) -> _commandclasses.IndicatorCommand:
     """
     Attaches snap pizzicato.
@@ -2028,7 +2027,7 @@ def snap_pizzicato(
 
 
 def staccatissimo(
-    selector=_selectors.phead(0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches staccatissimo.
@@ -2113,7 +2112,7 @@ def staccatissimo(
 
 
 def staccato(
-    selector=_selectors.phead(0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches staccato.
@@ -2197,7 +2196,7 @@ def staccato(
     )
 
 
-def staff_lines(n: int, selector=_selectors.leaf(0)) -> _scoping.Suite:
+def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _scoping.Suite:
     r"""
     Makes staff line command.
 
@@ -2562,7 +2561,7 @@ def staff_lines(n: int, selector=_selectors.leaf(0)) -> _scoping.Suite:
 
 def start_markup(
     argument: str | list[str],
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     context: str = "Staff",
     hcenter_in: abjad.Number = None,
@@ -2696,7 +2695,7 @@ def stem_tremolo(
 
 
 def stop_on_string(
-    selector=_selectors.phead(0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
     *,
     map=None,
 ) -> _commandclasses.IndicatorCommand:
@@ -2789,7 +2788,7 @@ def stop_on_string(
 
 
 def stop_trill(
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches stop trill to closing-slot.
@@ -2808,7 +2807,7 @@ def stop_trill(
 
 
 def stopped(
-    selector=_selectors.phead(0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches stopped +-sign.
@@ -2982,7 +2981,7 @@ def tie(selector) -> _commandclasses.IndicatorCommand:
 
 
 def tenuto(
-    selector=_selectors.phead(0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches tenuto.
@@ -3067,7 +3066,7 @@ def tenuto(
 
 
 def triple_staccato(
-    selector=_selectors.phead(0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
 ) -> _commandclasses.IndicatorCommand:
     """
     Attaches triple-staccato.
@@ -3168,7 +3167,7 @@ def up_arpeggio(
 
 
 def up_bow(
-    selector=_selectors.phead(0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
     *tweaks: abjad.Tweak,
     full: bool = False,
 ) -> _commandclasses.IndicatorCommand:
@@ -3262,7 +3261,7 @@ def up_bow(
 
 
 def very_long_fermata(
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches very long fermata.

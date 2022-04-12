@@ -362,8 +362,8 @@ r"""
         ... )
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.clef("treble", selector=baca.selectors.leaf(0)),
-        ...     baca.clef("treble", selector=baca.selectors.leaf(1)),
+        ...     baca.clef("treble", selector=lambda _: abjad.select.leaf(_, 0)),
+        ...     baca.clef("treble", selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
         >>> _, _ = baca.interpreter(
         ...     score,
@@ -743,7 +743,7 @@ r"""
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.dynamic("f"),
-        ...     baca.dynamic("f", selector=baca.selectors.leaf(1)),
+        ...     baca.dynamic("f", selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -873,7 +873,7 @@ r"""
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.dynamic("sfz"),
-        ...     baca.dynamic("sfz", selector=baca.selectors.leaf(1)),
+        ...     baca.dynamic("sfz", selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -1005,7 +1005,7 @@ r"""
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.dynamic("mf"),
-        ...     baca.dynamic('"mf"', selector=baca.selectors.leaf(1)),
+        ...     baca.dynamic('"mf"', selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -1730,7 +1730,7 @@ r"""
         ...     baca.instrument(instruments["Flute"]),
         ...     baca.new(
         ...         baca.instrument(instruments["Flute"]),
-        ...         map=baca.selectors.leaves((1, 2)),
+        ...         map=lambda _: baca.select.leaves(_)[1:2],
         ...     ),
         ...     baca.make_notes(),
         ... )
@@ -2822,7 +2822,7 @@ r"""
         ...     baca.margin_markup(margin_markups["I+II"]),
         ...     baca.new(
         ...         baca.margin_markup(margin_markups["I+II"]),
-        ...         map=baca.selectors.leaves((1, 2)),
+        ...         map=lambda _: baca.select.leaves(_)[1:2],
         ...     ),
         ...     baca.make_notes(),
         ... )
@@ -3663,7 +3663,7 @@ r"""
         >>> commands(
         ...     "Global_Skips",
         ...     baca.metronome_mark("112"),
-        ...     baca.metronome_mark("112", selector=baca.selectors.leaf(1)),
+        ...     baca.metronome_mark("112", selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
         >>> commands(
         ...     "Music_Voice",
@@ -3902,7 +3902,7 @@ r"""
         ... )
         >>> tag = abjad.Tag("baca.bar_extent_persistent")
         >>> command = baca.IndicatorCommand(
-        ...     indicators=[override], selector=baca.selectors.leaf(0), tags=[tag]
+        ...     indicators=[override], selector=lambda _: abjad.select.leaf(_, 0), tags=[tag]
         ... )
 
         >>> commands(
@@ -4058,7 +4058,7 @@ r"""
         ... )
         >>> tag = abjad.Tag("baca.bar_extent_persistent")
         >>> command = baca.IndicatorCommand(
-        ...     indicators=[override], selector=baca.selectors.leaf(0), tags=[tag]
+        ...     indicators=[override], selector=lambda _: abjad.select.leaf(_, 0), tags=[tag]
         ... )
         >>> commands(
         ...     "Music_Voice",
@@ -4351,7 +4351,7 @@ r"""
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.staff_lines(5),
-        ...     baca.staff_lines(5, selector=baca.selectors.leaf(1)),
+        ...     baca.staff_lines(5, selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -4793,7 +4793,7 @@ r"""
         ...     baca.metronome_mark(baca.Accelerando()),
         ...     baca.metronome_mark(
         ...         baca.Accelerando(),
-        ...         selector=baca.selectors.leaf(1),
+        ...         selector=lambda _: abjad.select.leaf(_, 1),
         ...     ),
         ... )
         >>> commands(

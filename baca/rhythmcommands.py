@@ -12,7 +12,6 @@ from . import const as _const
 from . import overrides as _overrides
 from . import scoping as _scoping
 from . import select as _select
-from . import selectors as _selectors
 from . import sequence as _sequence
 from . import tags as _tags
 
@@ -118,7 +117,7 @@ class RhythmCommand(_scoping.Command):
         >>> note_command = rmakers.stack(
         ...     rmakers.note(),
         ...     rmakers.force_rest(
-        ...         baca.selectors.lts(),
+        ...         lambda _: baca.select.lts(_),
         ...     ),
         ...     rmakers.beam(lambda _: baca.select.plts(_)),
         ... )
@@ -717,7 +716,7 @@ def make_repeat_tied_notes(
     specifiers_ = list(specifiers)
     specifier = rmakers.beam(lambda _: _select.plts(_))
     specifiers_.append(specifier)
-    specifier = rmakers.repeat_tie(_selectors.pheads((1, None)))
+    specifier = rmakers.repeat_tie(lambda _: _select.pheads(_)[1:])
     specifiers_.append(specifier)
     if not do_not_rewrite_meter:
         command = rmakers.rewrite_meter()
@@ -778,7 +777,7 @@ def make_rests(*, measures=None):
     return RhythmCommand(
         rhythm_maker=rmakers.stack(
             rmakers.note(),
-            rmakers.force_rest(_selectors.lts()),
+            rmakers.force_rest(lambda _: _select.lts(_)),
             tag=_scoping.function_name(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
@@ -840,7 +839,7 @@ def make_tied_repeated_durations(durations, *, measures=None):
     elif isinstance(durations, tuple):
         assert len(durations) == 2
         durations = [abjad.Duration(durations)]
-    tie_specifier = rmakers.repeat_tie(_selectors.pheads((1, None)))
+    tie_specifier = rmakers.repeat_tie(lambda _: _select.pheads(_)[1:])
     specifiers.append(tie_specifier)
     tie_specifier = rmakers.force_repeat_tie()
     specifiers.append(tie_specifier)

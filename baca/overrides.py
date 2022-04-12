@@ -9,7 +9,6 @@ import abjad
 
 from . import scoping as _scoping
 from . import select as _select
-from . import selectors as _selectors
 from . import tags as _tags
 from . import typings
 
@@ -32,7 +31,7 @@ class OverrideCommand(_scoping.Command):
     blocklist: tuple[type, ...] = ()
     context: str | None = None
     grob: str | None = None
-    selector: typing.Callable = _selectors.leaves()
+    selector: typing.Callable = lambda _: _select.leaves(_)
     value: typing.Any = None
 
     def __post_init__(self):
@@ -128,7 +127,7 @@ class OverrideCommand(_scoping.Command):
 
 def accidental_extra_offset(
     pair: abjad.NumberPair,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides accidental extra-offset.
@@ -144,7 +143,7 @@ def accidental_extra_offset(
 
 def accidental_font_size(
     n: abjad.Number,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides accidental font size.
@@ -159,7 +158,7 @@ def accidental_font_size(
 
 
 def accidental_stencil_false(
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides accidental stencil.
@@ -174,7 +173,7 @@ def accidental_stencil_false(
 
 
 def accidental_transparent(
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ):
     """
     Overrides accidental transparency on.
@@ -189,7 +188,7 @@ def accidental_transparent(
 
 
 def accidental_x_extent_false(
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides accidental X-extent.
@@ -205,7 +204,7 @@ def accidental_x_extent_false(
 
 def accidental_x_offset(
     n: abjad.Number,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides accidental X-offset.
@@ -221,7 +220,7 @@ def accidental_x_offset(
 
 def accidental_y_offset(
     n: abjad.Number,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides accidental Y-offset.
@@ -237,7 +236,7 @@ def accidental_y_offset(
 
 def bar_line_color(
     color: str,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     after: bool = False,
     context: str = "Score",
@@ -258,7 +257,7 @@ def bar_line_color(
 
 def bar_line_extra_offset(
     pair: abjad.NumberPair,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     after: bool = False,
     context: str = "Score",
@@ -278,7 +277,7 @@ def bar_line_extra_offset(
 
 
 def bar_line_transparent(
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     r"""
     Overrides bar line transparency.
@@ -381,7 +380,7 @@ def bar_line_transparent(
 
 def bar_line_x_extent(
     pair: abjad.NumberPair,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     after: bool = False,
     context: str = "Score",
@@ -404,7 +403,7 @@ def bar_line_x_extent(
 
 def beam_positions(
     n: abjad.Number,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides beam positions.
@@ -488,7 +487,7 @@ def beam_positions(
 
 
 def beam_stencil_false(
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides beam stencil.
@@ -503,7 +502,7 @@ def beam_stencil_false(
 
 
 def beam_transparent(
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides beam transparency.
@@ -519,7 +518,7 @@ def beam_transparent(
 
 def clef_extra_offset(
     pair: abjad.NumberPair,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides clef extra offset.
@@ -536,7 +535,7 @@ def clef_extra_offset(
 
 def clef_shift(
     clef: str | abjad.Clef,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> _scoping.Suite:
     """
     Shifts clef to left by width of clef.
@@ -560,7 +559,7 @@ def clef_shift(
 
 def clef_whiteout(
     n: abjad.Number,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides clef whiteout.
@@ -576,7 +575,7 @@ def clef_whiteout(
 
 
 def clef_x_extent_false(
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides clef x-extent.
@@ -593,7 +592,7 @@ def clef_x_extent_false(
 
 def dls_padding(
     n: abjad.Number,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides dynamic line spanner padding.
@@ -609,7 +608,7 @@ def dls_padding(
 
 def dls_staff_padding(
     n: abjad.Number,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides dynamic line spanner staff padding
@@ -712,7 +711,7 @@ def dls_staff_padding(
 
 
 def dls_up(
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides dynamic line spanner direction.
@@ -816,7 +815,7 @@ def dls_up(
 
 def dots_extra_offset(
     pair: abjad.NumberPair,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides dots extra offset.
@@ -831,7 +830,7 @@ def dots_extra_offset(
 
 
 def dots_stencil_false(
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides dots stencil.
@@ -846,7 +845,7 @@ def dots_stencil_false(
 
 
 def dots_transparent(
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides dots transparency.
@@ -861,7 +860,7 @@ def dots_transparent(
 
 
 def dots_x_extent_false(
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides dots X-extent.
@@ -1111,7 +1110,7 @@ def dynamic_text_y_offset(
 
 def flag_extra_offset(
     pair: abjad.NumberPair,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides flag extra-offset.
@@ -1141,7 +1140,7 @@ def flag_stencil_false(
 
 
 def flag_transparent(
-    selector=_selectors.pleaves(),
+    selector=lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     """
     Overrides flag transparency.
@@ -1157,7 +1156,7 @@ def flag_transparent(
 
 def glissando_thickness(
     n: abjad.Number,
-    selector=_selectors.pleaves(),
+    selector=lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     """
     Overrides glissando thickness.
@@ -1173,7 +1172,7 @@ def glissando_thickness(
 
 def hairpin_shorten_pair(
     pair: abjad.NumberPair,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides hairpin shorten pair.
@@ -1189,7 +1188,7 @@ def hairpin_shorten_pair(
 
 def hairpin_start_shift(
     dynamic: str | abjad.Dynamic,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> _scoping.Suite:
     """
     Shifts hairpin start dynamic to left by width of dynamic.
@@ -1208,7 +1207,7 @@ def hairpin_start_shift(
 
 
 def hairpin_stencil_false(
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides hairpin stencil.
@@ -1223,7 +1222,7 @@ def hairpin_stencil_false(
 
 
 def hairpin_to_barline(
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides hairpin to-barline to true.
@@ -1238,7 +1237,7 @@ def hairpin_to_barline(
 
 
 def hairpin_transparent(
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides hairpin transparency.
@@ -1253,7 +1252,7 @@ def hairpin_transparent(
 
 
 def laissez_vibrer_tie_down(
-    selector=_selectors.pleaves(),
+    selector=lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides laissez-vibrer-tie direction.
@@ -1268,7 +1267,7 @@ def laissez_vibrer_tie_down(
 
 
 def laissez_vibrer_tie_up(
-    selector=_selectors.pleaves(),
+    selector=lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides laissez-vibrer-tie direction.
@@ -1468,9 +1467,12 @@ def mmrest_text_color(
         ...     baca.make_notes(),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
-        ...         selector=baca.selectors.leaf(1),
+        ...         selector=lambda _: abjad.select.leaf(_, 1),
         ...     ),
-        ...     baca.mmrest_text_color("#red", selector=baca.selectors.leaves()),
+        ...     baca.mmrest_text_color(
+        ...         "#red",
+        ...         selector=lambda _: baca.select.leaves(_),
+        ...     ),
         ...     baca.pitches([2, 4]),
         ... )
 
@@ -1848,7 +1850,7 @@ def mmrest_text_transparent(
 
 
 def no_ledgers(
-    selector=_selectors.pleaves(),
+    selector=lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     """
     Overrides note-head no-ledgers.
@@ -1864,7 +1866,7 @@ def no_ledgers(
 
 def note_column_shift(
     n: abjad.Number,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides note column force hshift.
@@ -1880,7 +1882,7 @@ def note_column_shift(
 
 def note_head_color(
     color: str,
-    selector=_selectors.pleaves(),
+    selector=lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     """
     Overrides note-head color.
@@ -1896,7 +1898,7 @@ def note_head_color(
 
 def note_head_duration_log(
     n: int,
-    selector=_selectors.pleaves(),
+    selector=lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     """
     Overrides note-head duration-log property.
@@ -1990,7 +1992,7 @@ def note_head_style(
 
 
 def note_head_style_cross(
-    selector=_selectors.pleaves(),
+    selector=lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides note-head style.
@@ -2078,7 +2080,7 @@ def note_head_style_cross(
 
 
 def note_head_style_harmonic(
-    selector=_selectors.pleaves(),
+    selector=lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides note-head style for ``selector`` output.
@@ -2166,7 +2168,7 @@ def note_head_style_harmonic(
 
 
 def note_head_style_harmonic_black(
-    selector=_selectors.pleaves(),
+    selector=lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides note-head style to harmonic-black.
@@ -2181,7 +2183,7 @@ def note_head_style_harmonic_black(
 
 
 def note_head_transparent(
-    selector=_selectors.pleaves(),
+    selector=lambda _: _select.pleaves(_),
 ):
     """
     Overrides note-head transparency.
@@ -2215,7 +2217,7 @@ def note_head_x_extent_zero(
 
 def ottava_bracket_shorten_pair(
     pair: abjad.NumberPair = (-0.8, -0.6),
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides ottava bracket shorten pair.
@@ -2232,7 +2234,7 @@ def ottava_bracket_shorten_pair(
 
 def ottava_bracket_staff_padding(
     n: abjad.Number,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides ottava bracket staff padding.
@@ -2248,7 +2250,7 @@ def ottava_bracket_staff_padding(
 
 
 def rehearsal_mark_down(
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     context: str = "Score",
 ) -> OverrideCommand:
@@ -2267,7 +2269,7 @@ def rehearsal_mark_down(
 
 def rehearsal_mark_extra_offset(
     pair: abjad.NumberPair,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     context: str = "Score",
 ) -> OverrideCommand:
@@ -2286,7 +2288,7 @@ def rehearsal_mark_extra_offset(
 
 def rehearsal_mark_padding(
     n: abjad.Number,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     context: str = "Score",
 ) -> OverrideCommand:
@@ -2305,7 +2307,7 @@ def rehearsal_mark_padding(
 
 def rehearsal_mark_self_alignment_x(
     n: int,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     context: str = "Score",
 ) -> OverrideCommand:
@@ -2324,7 +2326,7 @@ def rehearsal_mark_self_alignment_x(
 
 def rehearsal_mark_y_offset(
     n: abjad.Number,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     context: str = "Score",
 ) -> OverrideCommand:
@@ -2342,7 +2344,7 @@ def rehearsal_mark_y_offset(
 
 
 def repeat_tie_down(
-    selector=_selectors.pleaves(),
+    selector=lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides repeat tie direction.
@@ -2361,7 +2363,7 @@ def repeat_tie_down(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.new(
-        ...         baca.repeat_tie(selector=baca.selectors.pleaves((1, None))),
+        ...         baca.repeat_tie(selector=lambda _: baca.select.pleaves(_)[1:]),
         ...         map=lambda _: baca.select.qruns(_),
         ...     ),
         ...     baca.repeat_tie_down(),
@@ -2469,7 +2471,7 @@ def repeat_tie_stencil_false(
 
 
 def repeat_tie_transparent(
-    selector=_selectors.pleaves(),
+    selector=lambda _: _select.pleaves(_),
 ):
     """
     Overrides repeat tie transparency.
@@ -2484,7 +2486,7 @@ def repeat_tie_transparent(
 
 
 def repeat_tie_up(
-    selector=_selectors.pleaves(),
+    selector=lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides repeat tie direction.
@@ -2504,7 +2506,7 @@ def repeat_tie_up(
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.repeat_tie(
-        ...             selector=baca.selectors.pleaves((1, None)),
+        ...             selector=lambda _: baca.select.pleaves(_)[1:],
         ...         ),
         ...         map=lambda _: baca.select.qruns(_),
         ...     ),
@@ -2991,7 +2993,7 @@ def rest_x_extent_zero(
 
 def script_color(
     color: str = "#red",
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides script color.
@@ -3009,7 +3011,7 @@ def script_color(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.accent(selector=baca.selectors.pheads()),
+        ...     baca.accent(selector=lambda _: baca.select.pheads(_)),
         ...     baca.script_color("#red"),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -3089,7 +3091,7 @@ def script_color(
 
 
 def script_down(
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides script direction.
@@ -3107,7 +3109,7 @@ def script_down(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.accent(selector=baca.selectors.pheads()),
+        ...     baca.accent(selector=lambda _: baca.select.pheads(_)),
         ...     baca.script_down(),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -3188,7 +3190,7 @@ def script_down(
 
 def script_extra_offset(
     pair: abjad.NumberPair,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     r"""
     Overrides script extra offset.
@@ -3206,8 +3208,11 @@ def script_extra_offset(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.accent(selector=baca.selectors.pheads()),
-        ...     baca.script_extra_offset((-1.5, 0), selector=baca.selectors.leaf(1)),
+        ...     baca.accent(selector=lambda _: baca.select.pheads(_)),
+        ...     baca.script_extra_offset(
+        ...         (-1.5, 0),
+        ...         selector=lambda _: abjad.select.leaf(_, 1),
+        ...     ),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
@@ -3286,7 +3291,7 @@ def script_extra_offset(
 
 def script_padding(
     number: abjad.Number,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides script padding.
@@ -3302,7 +3307,7 @@ def script_padding(
 
 def script_staff_padding(
     n: abjad.Number,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides script staff padding.
@@ -3317,7 +3322,7 @@ def script_staff_padding(
 
 
 def script_up(
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides script direction.
@@ -3335,7 +3340,7 @@ def script_up(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.accent(selector=baca.selectors.pheads()),
+        ...     baca.accent(selector=lambda _: baca.select.pheads(_)),
         ...     baca.script_up(),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -3415,7 +3420,7 @@ def script_up(
 
 
 def script_x_extent_zero(
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides script X-extent.
@@ -3430,7 +3435,7 @@ def script_x_extent_zero(
 
 
 def slur_down(
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides slur direction.
@@ -3529,7 +3534,7 @@ def slur_down(
 
 
 def slur_up(
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides slur direction.
@@ -3635,7 +3640,7 @@ def slur_up(
 
 def span_bar_color(
     color: str,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     after: bool = False,
     context: str = "Score",
@@ -3656,7 +3661,7 @@ def span_bar_color(
 
 def span_bar_extra_offset(
     pair: abjad.NumberPair,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     after: bool = False,
     context: str = "Score",
@@ -3676,7 +3681,7 @@ def span_bar_extra_offset(
 
 
 def span_bar_transparent(
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides span bar transparency.
@@ -3693,7 +3698,7 @@ def span_bar_transparent(
 
 def stem_color(
     color: str = "#red",
-    selector=_selectors.pleaves(),
+    selector=lambda _: _select.pleaves(_),
     *,
     context: str = None,
 ) -> OverrideCommand:
@@ -3784,7 +3789,7 @@ def stem_color(
 
 
 def stem_down(
-    selector=_selectors.pleaves(),
+    selector=lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides stem direction.
@@ -3873,7 +3878,7 @@ def stem_down(
 
 def stem_extra_offset(
     pair: abjad.NumberPair,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides stem extra-offset.
@@ -3903,7 +3908,7 @@ def stem_stencil_false(
 
 
 def stem_transparent(
-    selector=_selectors.pleaves(),
+    selector=lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     """
     Overrides stem transparency.
@@ -3919,7 +3924,7 @@ def stem_transparent(
 
 def stem_tremolo_extra_offset(
     pair: abjad.NumberPair,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides stem tremolo extra-offset.
@@ -3934,7 +3939,7 @@ def stem_tremolo_extra_offset(
 
 
 def stem_up(
-    selector=_selectors.pleaves(),
+    selector=lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides stem direction.
@@ -4022,7 +4027,7 @@ def stem_up(
 
 
 def strict_note_spacing_off(
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides spacing spanner strict note spacing.
@@ -4039,7 +4044,7 @@ def strict_note_spacing_off(
 
 def sustain_pedal_staff_padding(
     n: abjad.Number,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
     *,
     context: str = "Staff",
 ) -> OverrideCommand:
@@ -4141,7 +4146,7 @@ def sustain_pedal_staff_padding(
 
 def text_script_color(
     color: str = "#red",
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
 ) -> OverrideCommand:
@@ -4244,7 +4249,7 @@ def text_script_color(
         ...     "Music_Voice",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
-        ...         selector=baca.selectors.leaf(1),
+        ...         selector=lambda _: abjad.select.leaf(_, 1),
         ...     ),
         ...     baca.text_script_color("#red"),
         ... )
@@ -4275,7 +4280,7 @@ def text_script_color(
 
 
 def text_script_down(
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
 ) -> OverrideCommand:
@@ -4378,7 +4383,7 @@ def text_script_down(
         ...     "Music_Voice",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
-        ...         selector=baca.selectors.leaf(1),
+        ...         selector=lambda _: abjad.select.leaf(_, 1),
         ...     ),
         ...     baca.text_script_down()
         ... )
@@ -4410,7 +4415,7 @@ def text_script_down(
 
 def text_script_extra_offset(
     pair: abjad.NumberPair,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
 ) -> OverrideCommand:
@@ -4430,7 +4435,7 @@ def text_script_extra_offset(
         ...     "Music_Voice",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
-        ...         selector=baca.selectors.leaf(1),
+        ...         selector=lambda _: abjad.select.leaf(_, 1),
         ...     ),
         ...     baca.text_script_extra_offset((0, 2)),
         ... )
@@ -4462,7 +4467,7 @@ def text_script_extra_offset(
 
 def text_script_font_size(
     n: abjad.Number,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
 ) -> OverrideCommand:
@@ -4484,7 +4489,7 @@ def text_script_font_size(
 
 def text_script_padding(
     n: abjad.Number,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
 ) -> OverrideCommand:
@@ -4587,7 +4592,7 @@ def text_script_padding(
         ...     "Music_Voice",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
-        ...         selector=baca.selectors.leaf(1),
+        ...         selector=lambda _: abjad.select.leaf(_, 1),
         ...     ),
         ...     baca.text_script_padding(2),
         ... )
@@ -4619,7 +4624,7 @@ def text_script_padding(
 
 def text_script_parent_alignment_x(
     n: abjad.Number,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
 ) -> OverrideCommand:
@@ -4641,7 +4646,7 @@ def text_script_parent_alignment_x(
 
 def text_script_self_alignment_x(
     n: abjad.Number,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
 ) -> OverrideCommand:
@@ -4663,7 +4668,7 @@ def text_script_self_alignment_x(
 
 def text_script_staff_padding(
     n: abjad.Number,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
 ) -> OverrideCommand:
@@ -4766,7 +4771,7 @@ def text_script_staff_padding(
         ...     "Music_Voice",
         ...     baca.markup(
         ...         r"\baca-boxed-markkup still",
-        ...         selector=baca.selectors.leaf(1),
+        ...         selector=lambda _: abjad.select.leaf(_, 1),
         ...     ),
         ...     baca.text_script_staff_padding(2)
         ... )
@@ -4797,7 +4802,7 @@ def text_script_staff_padding(
 
 
 def text_script_up(
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
 ) -> OverrideCommand:
@@ -4900,7 +4905,7 @@ def text_script_up(
         ...     "Music_Voice",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
-        ...         selector=baca.selectors.leaf(1),
+        ...         selector=lambda _: abjad.select.leaf(_, 1),
         ...     ),
         ...     baca.text_script_up()
         ... )
@@ -4932,7 +4937,7 @@ def text_script_up(
 
 def text_script_x_offset(
     n: abjad.Number,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
 ) -> OverrideCommand:
@@ -4954,7 +4959,7 @@ def text_script_x_offset(
 
 def text_script_y_offset(
     n: abjad.Number,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
 ) -> OverrideCommand:
@@ -4976,7 +4981,7 @@ def text_script_y_offset(
 
 def text_spanner_left_padding(
     n: abjad.Number,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides text spanner left padding.
@@ -4992,7 +4997,7 @@ def text_spanner_left_padding(
 
 def text_spanner_right_padding(
     n: abjad.Number,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides text spanner right padding.
@@ -5008,7 +5013,7 @@ def text_spanner_right_padding(
 
 def text_spanner_staff_padding(
     n: abjad.Number,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides text spanner staff padding.
@@ -5112,7 +5117,7 @@ def text_spanner_staff_padding(
 
 
 def text_spanner_stencil_false(
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides text spanner stencil.
@@ -5127,7 +5132,7 @@ def text_spanner_stencil_false(
 
 
 def text_spanner_transparent(
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides text spanner transparent.
@@ -5143,7 +5148,7 @@ def text_spanner_transparent(
 
 def text_spanner_y_offset(
     n: abjad.Number,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides text spanner Y-offset.
@@ -5158,7 +5163,7 @@ def text_spanner_y_offset(
 
 
 def tie_down(
-    selector=_selectors.pleaves(),
+    selector=lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides tie direction.
@@ -5249,7 +5254,7 @@ def tie_down(
 
 
 def tie_up(
-    selector=_selectors.pleaves(),
+    selector=lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides tie direction.
@@ -5532,7 +5537,7 @@ def time_signature_transparent(
 
 def trill_spanner_staff_padding(
     n: abjad.Number,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides trill spanner staff padding.
@@ -5547,7 +5552,7 @@ def trill_spanner_staff_padding(
 
 
 def tuplet_bracket_down(
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides tuplet bracket direction.
@@ -5636,7 +5641,7 @@ def tuplet_bracket_down(
 
 def tuplet_bracket_extra_offset(
     pair: abjad.NumberPair,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     r"""
     Overrides tuplet bracket extra offset.
@@ -5724,7 +5729,7 @@ def tuplet_bracket_extra_offset(
 
 def tuplet_bracket_outside_staff_priority(
     n: abjad.Number,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides tuplet bracket outside-staff-priority.
@@ -5740,7 +5745,7 @@ def tuplet_bracket_outside_staff_priority(
 
 def tuplet_bracket_padding(
     n: abjad.Number,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides tuplet bracket padding.
@@ -5756,7 +5761,7 @@ def tuplet_bracket_padding(
 
 def tuplet_bracket_shorten_pair(
     pair: abjad.NumberPair,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides tuplet bracket shorten pair.
@@ -5772,7 +5777,7 @@ def tuplet_bracket_shorten_pair(
 
 def tuplet_bracket_staff_padding(
     n: abjad.Number,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides tuplet bracket staff padding.
@@ -5857,7 +5862,7 @@ def tuplet_bracket_staff_padding(
 
 
 def tuplet_bracket_transparent(
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides tuplet bracket transparency.
@@ -5872,7 +5877,7 @@ def tuplet_bracket_transparent(
 
 
 def tuplet_bracket_up(
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides tuplet bracket direction.
@@ -5960,7 +5965,7 @@ def tuplet_bracket_up(
 
 
 def tuplet_number_denominator(
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides tuplet number text.
@@ -5976,7 +5981,7 @@ def tuplet_number_denominator(
 
 def tuplet_number_extra_offset(
     pair: abjad.NumberPair,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     r"""
     Overrides tuplet number extra offset.
@@ -6064,7 +6069,7 @@ def tuplet_number_extra_offset(
 
 def tuplet_number_text(
     string: str,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides tuplet number text.
@@ -6080,7 +6085,7 @@ def tuplet_number_text(
 
 
 def tuplet_number_transparent(
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides tuplet number transparent.

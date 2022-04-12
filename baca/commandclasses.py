@@ -16,7 +16,6 @@ from . import parts as _parts
 from . import pcollections as _pcollections
 from . import scoping as _scoping
 from . import select as _select
-from . import selectors as _selectors
 from . import tags as _tags
 from . import typings as _typings
 
@@ -628,8 +627,14 @@ class ContainerCommand(_scoping.Command):
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(repeat_ties=True),
-        ...     baca.container("ViolinI", selector=baca.selectors.leaves((None, 2))),
-        ...     baca.container("ViolinII", selector=baca.selectors.leaves((2, None))),
+        ...     baca.container(
+        ...         "ViolinI",
+        ...         selector=lambda _: baca.select.leaves(_)[:2],
+        ...     ),
+        ...     baca.container(
+        ...         "ViolinII",
+        ...         selector=lambda _: baca.select.leaves(_)[2:],
+        ...         ),
         ...     baca.pitches("E4 F4"),
         ... )
 
@@ -708,13 +713,6 @@ class ContainerCommand(_scoping.Command):
 class DetachCommand(_scoping.Command):
     """
     Detach command.
-
-    ..  container:: example
-
-        >>> arguments = [abjad.RepeatTie, abjad.Tie]
-        >>> baca.DetachCommand(arguments, baca.selectors.leaves())
-        DetachCommand()
-
     """
 
     arguments: typing.Sequence[typing.Any] = ()
@@ -996,7 +994,7 @@ class MetronomeMarkCommand(_scoping.Command):
 
     key: str | _indicators.Accelerando | _indicators.Ritardando | None = None
     redundant: bool = False
-    selector: typing.Callable = _selectors.leaf(0)
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0)
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
@@ -1108,7 +1106,9 @@ class AccidentalAdjustmentCommand(_scoping.Command):
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.force_accidental(selector=baca.selectors.pleaves((None, 2))),
+        ...     baca.force_accidental(
+        ...         selector=lambda _: baca.select.pleaves(_)[:2],
+        ...     ),
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.pitches("E4 F4"),
         ... )
@@ -5152,7 +5152,7 @@ def clusters(
 def color_fingerings(
     numbers: list[abjad.Number],
     *tweaks: _typings.IndexedTweak,
-    selector=_selectors.pheads(exclude=_const.HIDDEN),
+    selector=lambda _: _select.pheads(_, exclude=_const.HIDDEN),
 ) -> ColorFingeringCommand:
     """
     Adds color fingerings.
@@ -5341,7 +5341,7 @@ def force_accidental(
         ...     "Music_Voice",
         ...     baca.not_parts(
         ...         baca.force_accidental(
-        ...             selector=baca.selectors.pleaves((None, 2)),
+        ...             selector=lambda _: baca.select.pleaves(_)[:2],
         ...         ),
         ...     ),
         ...     baca.make_notes(repeat_ties=True),

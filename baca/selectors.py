@@ -39,11 +39,11 @@ def _handle_pair(selection, pair):
     return selection
 
 
-def leaf(n, grace=None):
-    def selector(argument):
-        return abjad.select.leaf(argument, n, grace=grace)
-
-    return selector
+# def leaf(n, grace=None):
+#   def selector(argument):
+#       return abjad.select.leaf(argument, n, grace=grace)
+#
+#   return selector
 
 
 def leaf_after_each_ptail():
@@ -191,20 +191,20 @@ def leaves_in_exclude_tuplets(pattern, pair):
     return _leaves_in_get_tuplets(pattern, pair, exclude=True)
 
 
-def ltleaves(*arguments, **keywords):
-    def selector(argument):
-        return _select.ltleaves(argument, *arguments, **keywords)
+# def ltleaves(*arguments, **keywords):
+#    def selector(argument):
+#        return _select.ltleaves(argument, *arguments, **keywords)
+#
+#    return selector
 
-    return selector
 
-
-def ltleaves_rleak():
-    def selector(argument):
-        result = _select.ltleaves(argument)
-        result = _select.rleak(result)
-        return result
-
-    return selector
+# def ltleaves_rleak():
+#    def selector(argument):
+#        result = _select.ltleaves(argument)
+#        result = _select.rleak(result)
+#        return result
+#
+#    return selector
 
 
 def lts(pair=None, *, nontrivial=None, omit=False):
@@ -217,11 +217,11 @@ def lts(pair=None, *, nontrivial=None, omit=False):
     return selector
 
 
-def phead(n, exclude=None):
-    def selector(argument):
-        return _select.phead(argument, n, exclude=exclude)
-
-    return selector
+# def phead(n, exclude=None):
+#    def selector(argument):
+#        return _select.phead(argument, n, exclude=exclude)
+#
+#    return selector
 
 
 def pheads(pair=None, exclude=None, grace=None):

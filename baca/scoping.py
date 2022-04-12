@@ -746,7 +746,7 @@ class Suite:
         ...     baca.accent(),
         ...     baca.tenuto(),
         ...     measures=(1, 2),
-        ...     selector=baca.selectors.pleaves(),
+        ...     selector=lambda _: baca.select.pleaves(_),
         ... )
 
         >>> suite
@@ -882,7 +882,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         ...         baca.marcato(),
         ...         baca.slur(),
         ...         baca.staccato(),
-        ...         selector=baca.selectors.leaves((4, -3)),
+        ...         selector=lambda _: baca.select.leaves(_)[4:-3],
         ...     ),
         ...     baca.make_even_divisions(),
         ... )

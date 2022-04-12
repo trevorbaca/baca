@@ -17,12 +17,13 @@ from . import parts as _parts
 from . import path as _path
 from . import scoping as _scoping
 from . import select as _select
-from . import selectors as _selectors
 from . import tags as _tags
 from . import typings as _typings
 
 
-def allow_octaves(*, selector=_selectors.leaves()) -> _commandclasses.IndicatorCommand:
+def allow_octaves(
+    *, selector=lambda _: _select.leaves(_)
+) -> _commandclasses.IndicatorCommand:
     """
     Attaches ALLOW_OCTAVE constant.
     """
@@ -34,7 +35,7 @@ def allow_octaves(*, selector=_selectors.leaves()) -> _commandclasses.IndicatorC
 def assign_parts(
     part_assignment: _parts.PartAssignment,
     *,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> _commandclasses.PartAssignmentCommand:
     r"""
     Inserts ``selector`` output in container and sets part assignment.
@@ -138,7 +139,7 @@ def bcps(
     bow_change_tweaks: typing.Sequence[_typings.IndexedTweak] = (),
     final_spanner: bool = False,
     helper: typing.Callable = lambda x, y: x,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> _commandclasses.BCPCommand:
     r"""
     Makes bow contact point command.
@@ -309,7 +310,7 @@ def bcps(
 
 
 def close_volta(
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     site: str = "before",
 ) -> _scoping.Suite:
@@ -328,7 +329,7 @@ def close_volta(
 
 
 def color(
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
     lone=False,
 ) -> _commandclasses.ColorCommand:
     r"""
@@ -497,7 +498,7 @@ def color(
 def container(
     identifier: str = None,
     *,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> _commandclasses.ContainerCommand:
     r"""
     Makes container with ``identifier`` and extends container with ``selector`` output.
@@ -511,8 +512,14 @@ def container(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.container("ViolinI", selector=baca.selectors.leaves((None, 2))),
-        ...     baca.container("ViolinII", selector=baca.selectors.leaves((2, None))),
+        ...     baca.container(
+        ...         "ViolinI",
+        ...         selector=lambda _: baca.select.leaves(_)[:2],
+        ...     ),
+        ...     baca.container(
+        ...         "ViolinII",
+        ...         selector=lambda _: baca.select.leaves(_)[2:],
+        ...     ),
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.pitches("E4 F4"),
         ... )
@@ -567,7 +574,9 @@ def container(
     return _commandclasses.ContainerCommand(identifier=identifier, selector=selector)
 
 
-def cross_staff(*, selector=_selectors.phead(0)) -> _commandclasses.IndicatorCommand:
+def cross_staff(
+    *, selector=lambda _: _select.phead(_, 0)
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches cross-staff command.
 
@@ -589,7 +598,7 @@ def cross_staff(*, selector=_selectors.phead(0)) -> _commandclasses.IndicatorCom
         ...     ("Music_Voice_2", 1),
         ...     baca.music(abjad.Container("c'4 d' e' f'")[:]),
         ...     baca.cross_staff(
-        ...         selector=baca.selectors.pleaves((-2, None)),
+        ...         selector=lambda _: baca.select.pleaves(_)[-2:],
         ...     ),
         ... )
 
@@ -653,7 +662,7 @@ def cross_staff(*, selector=_selectors.phead(0)) -> _commandclasses.IndicatorCom
 
 
 def double_volta(
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> _scoping.Suite:
     """
     Attaches bar line and overrides bar line X-extent.
@@ -665,7 +674,9 @@ def double_volta(
     )
 
 
-def dynamic_down(*, selector=_selectors.leaf(0)) -> _commandclasses.IndicatorCommand:
+def dynamic_down(
+    *, selector=lambda _: abjad.select.leaf(_, 0)
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches dynamic-down command.
 
@@ -756,7 +767,9 @@ def dynamic_down(*, selector=_selectors.leaf(0)) -> _commandclasses.IndicatorCom
     )
 
 
-def dynamic_up(*, selector=_selectors.leaf(0)) -> _commandclasses.IndicatorCommand:
+def dynamic_up(
+    *, selector=lambda _: abjad.select.leaf(_, 0)
+) -> _commandclasses.IndicatorCommand:
     r"""
     Attaches dynamic-up command.
 
@@ -988,7 +1001,7 @@ def flat_glissando(
     right_broken: bool = False,
     right_broken_show_next: bool = False,
     rleak: bool = False,
-    selector=_selectors.pleaves(),
+    selector=lambda _: _select.pleaves(_),
     stop_pitch: str | abjad.NamedPitch | abjad.StaffPosition | None = None,
 ) -> _scoping.Suite:
     """
@@ -1467,7 +1480,7 @@ def glissando(
 
 def global_fermata(
     description: str = "fermata",
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> _commandclasses.GlobalFermataCommand:
     """
     Attaches global fermata.
@@ -1486,7 +1499,7 @@ def global_fermata(
 
 def instrument(
     instrument: abjad.Instrument,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> _commandclasses.InstrumentChangeCommand:
     """
     Makes instrument change command.
@@ -1501,7 +1514,7 @@ def instrument(
 
 
 def invisible_music(
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     map=None,
 ) -> _scoping.Suite:
@@ -1520,7 +1533,7 @@ def invisible_music(
         >>> commands(
         ...     "Music_Voice",
         ...     baca.invisible_music(
-        ...         selector=baca.selectors.leaves((1, -1)),
+        ...         selector=lambda _: baca.select.leaves(_)[1:-1],
         ...     ),
         ...     baca.make_notes(),
         ...     baca.pitch("C5"),
@@ -1600,7 +1613,7 @@ def invisible_music(
 
 def label(
     callable_,
-    selector=_selectors.leaves(),
+    selector=lambda _: _select.leaves(_),
 ) -> _commandclasses.LabelCommand:
     r"""
     Applies label ``callable_`` to ``selector`` output.
@@ -1904,7 +1917,7 @@ def markup(
 
 def metronome_mark(
     key: str | _indicators.Accelerando | _indicators.Ritardando,
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     redundant: bool = False,
 ) -> _commandclasses.MetronomeMarkCommand | None:
@@ -1919,7 +1932,7 @@ def metronome_mark(
 
 
 def one_voice(
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Makes LilyPond ``\oneVoice`` command.
@@ -1933,7 +1946,7 @@ def one_voice(
 
 
 def open_volta(
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> _scoping.Suite:
     """
     Attaches bar line and overrides bar line X-extent.
@@ -1980,7 +1993,7 @@ def untie(selector) -> _commandclasses.DetachCommand:
 
 
 def voice_four(
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Makes LilyPond ``\voiceFour`` command.
@@ -1994,7 +2007,7 @@ def voice_four(
 
 
 def voice_one(
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Makes LilyPond ``\voiceOne`` command.
@@ -2008,7 +2021,7 @@ def voice_one(
 
 
 def voice_three(
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Makes LilyPond ``\voiceThree`` command.
@@ -2022,7 +2035,7 @@ def voice_three(
 
 
 def voice_two(
-    selector=_selectors.leaf(0),
+    selector=lambda _: abjad.select.leaf(_, 0),
 ) -> _commandclasses.IndicatorCommand:
     r"""
     Makes LilyPond ``\voiceTwo`` command.
