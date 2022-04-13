@@ -7,6 +7,80 @@ from . import memento as _memento
 from . import tags as _tags
 
 
+def _attach_color_literal(
+    wrapper,
+    status,
+    existing_deactivate=None,
+    redraw=False,
+    cancelation=False,
+):
+    assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
+    if getattr(wrapper.unbundle_indicator(), "hide", False) is True:
+        return
+    if isinstance(wrapper.unbundle_indicator(), abjad.Instrument):
+        return
+    if not getattr(wrapper.unbundle_indicator(), "persistent", False):
+        return
+    if getattr(wrapper.unbundle_indicator(), "parameter", None) == "METRONOME_MARK":
+        return
+    if isinstance(wrapper.unbundle_indicator(), _memento.PersistentOverride):
+        return
+    if isinstance(wrapper.unbundle_indicator(), _indicators.BarExtent):
+        return
+    stem = _to_indicator_stem(wrapper.unbundle_indicator())
+    grob = _indicator_to_grob(wrapper.unbundle_indicator())
+    context = wrapper._find_correct_effective_context()
+    assert isinstance(context, abjad.Context), repr(context)
+    string = rf"\override {context.lilypond_type}.{grob}.color ="
+    if cancelation is True:
+        string += " ##f"
+    elif redraw is True:
+        color = _status_to_redraw_color[status]
+        string += f" #(x11-color '{color})"
+    else:
+        string = rf"\once {string}"
+        color = _status_to_color[status]
+        string += f" #(x11-color '{color})"
+    if redraw:
+        literal = abjad.LilyPondLiteral(string, site="absolute_after")
+    else:
+        literal = abjad.LilyPondLiteral(string)
+    if getattr(wrapper.unbundle_indicator(), "latent", False):
+        if redraw:
+            prefix = "redrawn"
+        else:
+            prefix = None
+        if cancelation:
+            suffix = "color_cancellation"
+        else:
+            suffix = "color"
+    else:
+        prefix = None
+        if redraw:
+            suffix = "redraw_color"
+        elif cancelation:
+            suffix = "color_cancellation"
+        else:
+            suffix = "color"
+    status_tag = _get_tag(status, stem, prefix=prefix, suffix=suffix)
+    if isinstance(wrapper.unbundle_indicator(), abjad.TimeSignature):
+        string = rf"\baca-time-signature-color #'{color}"
+        literal = abjad.LilyPondLiteral(string)
+    if cancelation is True:
+        tag = _tags.function_name(_frame(), n=1)
+        tag = tag.append(status_tag)
+        abjad.attach(literal, wrapper.component, deactivate=True, tag=tag)
+    else:
+        tag = _tags.function_name(_frame(), n=2)
+        tag = tag.append(status_tag)
+        abjad.attach(
+            literal,
+            wrapper.component,
+            deactivate=existing_deactivate,
+            tag=tag,
+        )
+
+
 def _attach_color_redraw_literal(
     wrapper, status, existing_deactivate=None, existing_tag=None
 ):
@@ -14,7 +88,7 @@ def _attach_color_redraw_literal(
         return
     if getattr(wrapper.unbundle_indicator(), "hide", False):
         return
-    attach_color_literal(
+    _attach_color_literal(
         wrapper,
         status,
         existing_deactivate=wrapper.deactivate,
@@ -31,7 +105,7 @@ def _attach_color_cancelation_literal(
         return
     if not getattr(wrapper.unbundle_indicator(), "redraw", False):
         return
-    attach_color_literal(
+    _attach_color_literal(
         wrapper,
         status,
         existing_deactivate=wrapper.deactivate,
@@ -189,81 +263,6 @@ _status_to_redraw_color = {
     "reapplied": "OliveDrab",
     "redundant": "DeepPink4",
 }
-
-
-# TODO: make private and rebuild scores
-def attach_color_literal(
-    wrapper,
-    status,
-    existing_deactivate=None,
-    redraw=False,
-    cancelation=False,
-):
-    assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
-    if getattr(wrapper.unbundle_indicator(), "hide", False) is True:
-        return
-    if isinstance(wrapper.unbundle_indicator(), abjad.Instrument):
-        return
-    if not getattr(wrapper.unbundle_indicator(), "persistent", False):
-        return
-    if getattr(wrapper.unbundle_indicator(), "parameter", None) == "METRONOME_MARK":
-        return
-    if isinstance(wrapper.unbundle_indicator(), _memento.PersistentOverride):
-        return
-    if isinstance(wrapper.unbundle_indicator(), _indicators.BarExtent):
-        return
-    stem = _to_indicator_stem(wrapper.unbundle_indicator())
-    grob = _indicator_to_grob(wrapper.unbundle_indicator())
-    context = wrapper._find_correct_effective_context()
-    assert isinstance(context, abjad.Context), repr(context)
-    string = rf"\override {context.lilypond_type}.{grob}.color ="
-    if cancelation is True:
-        string += " ##f"
-    elif redraw is True:
-        color = _status_to_redraw_color[status]
-        string += f" #(x11-color '{color})"
-    else:
-        string = rf"\once {string}"
-        color = _status_to_color[status]
-        string += f" #(x11-color '{color})"
-    if redraw:
-        literal = abjad.LilyPondLiteral(string, site="absolute_after")
-    else:
-        literal = abjad.LilyPondLiteral(string)
-    if getattr(wrapper.unbundle_indicator(), "latent", False):
-        if redraw:
-            prefix = "redrawn"
-        else:
-            prefix = None
-        if cancelation:
-            suffix = "color_cancellation"
-        else:
-            suffix = "color"
-    else:
-        prefix = None
-        if redraw:
-            suffix = "redraw_color"
-        elif cancelation:
-            suffix = "color_cancellation"
-        else:
-            suffix = "color"
-    status_tag = _get_tag(status, stem, prefix=prefix, suffix=suffix)
-    if isinstance(wrapper.unbundle_indicator(), abjad.TimeSignature):
-        string = rf"\baca-time-signature-color #'{color}"
-        literal = abjad.LilyPondLiteral(string)
-    if cancelation is True:
-        tag = _tags.function_name(_frame(), n=1)
-        tag = tag.append(status_tag)
-        abjad.attach(literal, wrapper.component, deactivate=True, tag=tag)
-    else:
-        tag = _tags.function_name(_frame(), n=2)
-        tag = tag.append(status_tag)
-        abjad.attach(
-            literal,
-            wrapper.component,
-            deactivate=existing_deactivate,
-            tag=tag,
-        )
 
 
 def compare_persistent_indicators(indicator_1, indicator_2) -> bool:
@@ -477,7 +476,7 @@ def treat_persistent_wrapper(manifests, wrapper, status):
         )
         _set_status_tag(wrapper, status)
         return
-    attach_color_literal(wrapper, status, existing_deactivate=wrapper.deactivate)
+    _attach_color_literal(wrapper, status, existing_deactivate=wrapper.deactivate)
     _attach_latent_indicator_alert(
         manifests, wrapper, status, existing_deactivate=wrapper.deactivate
     )
