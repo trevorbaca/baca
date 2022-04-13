@@ -4336,11 +4336,6 @@ class RegisterToOctaveCommand(_command.Command):
 
     ..  container:: example
 
-        >>> baca.RegisterToOctaveCommand()
-        RegisterToOctaveCommand()
-
-    ..  container:: example
-
         Bass anchored at octave 5:
 
         >>> chord = abjad.Chord("<c, d e'>1")
@@ -4486,37 +4481,13 @@ class RegisterToOctaveCommand(_command.Command):
             return
         if self.selector:
             argument = self.selector(argument)
-        target_octave_number = self.octave_number or 4
-        current_octave_number = self._get_anchor_octave_number(argument)
-        octave_adjustment = target_octave_number - current_octave_number
+        pitches = abjad.iterate.pitches(argument)
+        octave_adjustment = _pcollections.pitches_to_octave_adjustment(
+            pitches, anchor=self.anchor, octave_number=self.octave_number
+        )
         pleaves = _select.pleaves(argument)
         for pleaf in pleaves:
             self._set_pitch(pleaf, lambda _: _.transpose(n=12 * octave_adjustment))
-
-    def _get_anchor_octave_number(self, argument):
-        pitches = []
-        for leaf in abjad.iterate.leaves(argument, pitched=True):
-            if isinstance(leaf, abjad.Note):
-                pitches.append(leaf.written_pitch)
-            elif isinstance(leaf, abjad.Chord):
-                pitches.extend(leaf.written_pitches)
-            else:
-                raise TypeError(leaf)
-        pitches = list(set(pitches))
-        pitches.sort()
-        anchor = self.anchor or abjad.DOWN
-        if anchor == abjad.DOWN:
-            pitch = pitches[0]
-        elif anchor == abjad.UP:
-            pitch = pitches[-1]
-        elif anchor == abjad.CENTER:
-            soprano = max(pitches)
-            bass = min(pitches)
-            centroid = (soprano.number + bass.number) / 2.0
-            pitch = abjad.NumberedPitch(centroid)
-        else:
-            raise ValueError(anchor)
-        return pitch.octave.number
 
     def _set_pitch(self, leaf, transposition):
         if isinstance(leaf, abjad.Note):

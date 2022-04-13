@@ -1314,15 +1314,10 @@ def bass_to_octave(collection, n=4):
 
     Returns new collection.
     """
-    from .commands import RegisterToOctaveCommand
-
-    # TODO: remove reference to RegisterToOctaveCommand;
-    #       implement as segment-only operation
-    command = RegisterToOctaveCommand(anchor=abjad.DOWN, octave_number=n)
-    selection = [abjad.Note(_, (1, 4)) for _ in collection]
-    command([selection])
-    pitches = abjad.iterate.pitches(selection)
-    segment = abjad.PitchSegment(pitches)
+    octave_adjustment = pitches_to_octave_adjustment(
+        collection, anchor=abjad.DOWN, octave_number=n
+    )
+    segment = collection.transpose(n=12 * octave_adjustment)
     return dataclasses.replace(collection, items=segment)
 
 
@@ -1403,15 +1398,10 @@ def center_to_octave(collection, n=4):
 
     Returns new collection.
     """
-    from .commands import RegisterToOctaveCommand
-
-    # TODO: remove reference to RegisterToOctaveCommand;
-    #       implement as segment-only operation
-    command = RegisterToOctaveCommand(anchor=abjad.CENTER, octave_number=n)
-    selection = [abjad.Note(_, (1, 4)) for _ in collection]
-    command([selection])
-    pitches = abjad.iterate.pitches(selection)
-    segment = abjad.PitchSegment(pitches)
+    octave_adjustment = pitches_to_octave_adjustment(
+        collection, anchor=abjad.CENTER, octave_number=n
+    )
+    segment = collection.transpose(n=12 * octave_adjustment)
     return dataclasses.replace(collection, items=segment)
 
 
@@ -2216,6 +2206,30 @@ def register_pcs(pitches, pcs):
     return result
 
 
+def pitches_to_octave_adjustment(pitches, *, anchor=None, octave_number=4):
+    def _get_anchor_octave_number(pitches, anchor):
+        pitches = list(set(pitches))
+        pitches.sort()
+        anchor = anchor or abjad.DOWN
+        if anchor == abjad.DOWN:
+            pitch = pitches[0]
+        elif anchor == abjad.UP:
+            pitch = pitches[-1]
+        elif anchor == abjad.CENTER:
+            soprano = max(pitches)
+            bass = min(pitches)
+            centroid = (soprano.number + bass.number) / 2.0
+            pitch = abjad.NumberedPitch(centroid)
+        else:
+            raise ValueError(anchor)
+        return pitch.octave.number
+
+    target_octave_number = octave_number
+    current_octave_number = _get_anchor_octave_number(pitches, anchor=anchor)
+    octave_adjustment = target_octave_number - current_octave_number
+    return octave_adjustment
+
+
 def remove_duplicate_pitch_classes(collections, level=-1):
     """
     Removes duplicate pitch-classes at ``level``.
@@ -2505,15 +2519,10 @@ def soprano_to_octave(collection, n=4):
 
     Returns new segment.
     """
-    from .commands import RegisterToOctaveCommand
-
-    # TODO: remove reference to RegisterToOctaveCommand;
-    #       implement as segment-only operation
-    command = RegisterToOctaveCommand(anchor=abjad.UP, octave_number=n)
-    selection = [abjad.Note(_, (1, 4)) for _ in collection]
-    command([selection])
-    pitches = abjad.iterate.pitches(selection)
-    segment = abjad.PitchSegment(pitches)
+    octave_adjustment = pitches_to_octave_adjustment(
+        collection, anchor=abjad.UP, octave_number=n
+    )
+    segment = collection.transpose(n=12 * octave_adjustment)
     return dataclasses.replace(collection, items=segment)
 
 
