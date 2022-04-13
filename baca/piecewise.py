@@ -8,13 +8,255 @@ from inspect import currentframe as _frame
 
 import abjad
 
-from . import classes as _classes
 from . import commandclasses as _commandclasses
 from . import const as _const
 from . import scoping as _scoping
 from . import select as _select
 from . import tags as _tags
 from . import typings as _typings
+
+
+class SchemeManifest:
+    """
+    Scheme manifest.
+
+    New functions defined in ``~/baca/lilypond/baca.ily`` must currently be added here by
+    hand.
+
+    TODO: eliminate duplication. Define custom Scheme functions here (``SchemeManifest``)
+    and teach ``SchemeManifest`` to write ``~/baca/lilypond/baca.ily`` automatically.
+    """
+
+    ### CLASS VARIABLES ###
+
+    _dynamics = (
+        ("baca-appena-udibile", "appena udibile"),
+        ("baca-f-but-accents-sffz", "f"),
+        ("baca-f-sub-but-accents-continue-sffz", "f"),
+        ("baca-ffp", "p"),
+        ("baca-fffp", "p"),
+        ("niente", "niente"),
+        ("baca-p-sub-but-accents-continue-sffz", "p"),
+        #
+        ("baca-pppf", "f"),
+        ("baca-pppff", "ff"),
+        ("baca-pppfff", "fff"),
+        #
+        ("baca-ppf", "f"),
+        ("baca-ppff", "ff"),
+        ("baca-ppfff", "fff"),
+        #
+        ("baca-pf", "f"),
+        ("baca-pff", "ff"),
+        ("baca-pfff", "fff"),
+        #
+        ("baca-ppp-ppp", "ppp"),
+        ("baca-ppp-pp", "pp"),
+        ("baca-ppp-p", "p"),
+        ("baca-ppp-mp", "mp"),
+        ("baca-ppp-mf", "mf"),
+        ("baca-ppp-f", "f"),
+        ("baca-ppp-ff", "ff"),
+        ("baca-ppp-fff", "fff"),
+        #
+        ("baca-pp-ppp", "ppp"),
+        ("baca-pp-pp", "pp"),
+        ("baca-pp-p", "p"),
+        ("baca-pp-mp", "mp"),
+        ("baca-pp-mf", "mf"),
+        ("baca-pp-f", "f"),
+        ("baca-pp-ff", "ff"),
+        ("baca-pp-fff", "fff"),
+        #
+        ("baca-p-ppp", "ppp"),
+        ("baca-p-pp", "pp"),
+        ("baca-p-p", "p"),
+        ("baca-p-mp", "mp"),
+        ("baca-p-mf", "mf"),
+        ("baca-p-f", "f"),
+        ("baca-p-ff", "ff"),
+        ("baca-p-fff", "fff"),
+        #
+        ("baca-mp-ppp", "ppp"),
+        ("baca-mp-pp", "pp"),
+        ("baca-mp-p", "p"),
+        ("baca-mp-mp", "mp"),
+        ("baca-mp-mf", "mf"),
+        ("baca-mp-f", "f"),
+        ("baca-mp-ff", "ff"),
+        ("baca-mp-fff", "fff"),
+        #
+        ("baca-mf-ppp", "ppp"),
+        ("baca-mf-pp", "pp"),
+        ("baca-mf-p", "p"),
+        ("baca-mf-mp", "mp"),
+        ("baca-mf-mf", "mf"),
+        ("baca-mf-f", "f"),
+        ("baca-mf-ff", "ff"),
+        ("baca-mf-fff", "fff"),
+        #
+        ("baca-f-ppp", "ppp"),
+        ("baca-f-pp", "pp"),
+        ("baca-f-p", "p"),
+        ("baca-f-mp", "mp"),
+        ("baca-f-mf", "mf"),
+        ("baca-f-f", "f"),
+        ("baca-f-ff", "ff"),
+        ("baca-f-fff", "fff"),
+        #
+        ("baca-ff-ppp", "ppp"),
+        ("baca-ff-pp", "pp"),
+        ("baca-ff-p", "p"),
+        ("baca-ff-mp", "mp"),
+        ("baca-ff-mf", "mf"),
+        ("baca-ff-f", "f"),
+        ("baca-ff-ff", "ff"),
+        ("baca-ff-fff", "fff"),
+        #
+        ("baca-fff-ppp", "ppp"),
+        ("baca-fff-pp", "pp"),
+        ("baca-fff-p", "p"),
+        ("baca-fff-mp", "mp"),
+        ("baca-fff-mf", "mf"),
+        ("baca-fff-f", "f"),
+        ("baca-fff-ff", "ff"),
+        ("baca-fff-fff", "fff"),
+        #
+        ("baca-sff", "ff"),
+        ("baca-sffp", "p"),
+        ("baca-sffpp", "pp"),
+        ("baca-sfffz", "fff"),
+        ("baca-sffz", "ff"),
+        ("baca-sfpp", "pp"),
+        ("baca-sfz-f", "f"),
+        ("baca-sfz-p", "p"),
+    )
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def dynamics(self) -> list[str]:
+        """
+        Gets dynamics.
+
+        ..  container:: example
+
+            >>> scheme_manifest = baca.SchemeManifest()
+            >>> for dynamic in scheme_manifest.dynamics:
+            ...     dynamic
+            ...
+            'baca-appena-udibile'
+            'baca-f-but-accents-sffz'
+            'baca-f-sub-but-accents-continue-sffz'
+            'baca-ffp'
+            'baca-fffp'
+            'niente'
+            'baca-p-sub-but-accents-continue-sffz'
+            'baca-pppf'
+            'baca-pppff'
+            'baca-pppfff'
+            'baca-ppf'
+            'baca-ppff'
+            'baca-ppfff'
+            'baca-pf'
+            'baca-pff'
+            'baca-pfff'
+            'baca-ppp-ppp'
+            'baca-ppp-pp'
+            'baca-ppp-p'
+            'baca-ppp-mp'
+            'baca-ppp-mf'
+            'baca-ppp-f'
+            'baca-ppp-ff'
+            'baca-ppp-fff'
+            'baca-pp-ppp'
+            'baca-pp-pp'
+            'baca-pp-p'
+            'baca-pp-mp'
+            'baca-pp-mf'
+            'baca-pp-f'
+            'baca-pp-ff'
+            'baca-pp-fff'
+            'baca-p-ppp'
+            'baca-p-pp'
+            'baca-p-p'
+            'baca-p-mp'
+            'baca-p-mf'
+            'baca-p-f'
+            'baca-p-ff'
+            'baca-p-fff'
+            'baca-mp-ppp'
+            'baca-mp-pp'
+            'baca-mp-p'
+            'baca-mp-mp'
+            'baca-mp-mf'
+            'baca-mp-f'
+            'baca-mp-ff'
+            'baca-mp-fff'
+            'baca-mf-ppp'
+            'baca-mf-pp'
+            'baca-mf-p'
+            'baca-mf-mp'
+            'baca-mf-mf'
+            'baca-mf-f'
+            'baca-mf-ff'
+            'baca-mf-fff'
+            'baca-f-ppp'
+            'baca-f-pp'
+            'baca-f-p'
+            'baca-f-mp'
+            'baca-f-mf'
+            'baca-f-f'
+            'baca-f-ff'
+            'baca-f-fff'
+            'baca-ff-ppp'
+            'baca-ff-pp'
+            'baca-ff-p'
+            'baca-ff-mp'
+            'baca-ff-mf'
+            'baca-ff-f'
+            'baca-ff-ff'
+            'baca-ff-fff'
+            'baca-fff-ppp'
+            'baca-fff-pp'
+            'baca-fff-p'
+            'baca-fff-mp'
+            'baca-fff-mf'
+            'baca-fff-f'
+            'baca-fff-ff'
+            'baca-fff-fff'
+            'baca-sff'
+            'baca-sffp'
+            'baca-sffpp'
+            'baca-sfffz'
+            'baca-sffz'
+            'baca-sfpp'
+            'baca-sfz-f'
+            'baca-sfz-p'
+
+        """
+        return [_[0] for _ in self._dynamics]
+
+    ### PUBLIC METHODS ###
+
+    def dynamic_to_steady_state(self, dynamic):
+        """
+        Changes ``dynamic`` to steady state.
+
+        ..  container:: example
+
+            >>> scheme_manifest = baca.SchemeManifest()
+            >>> scheme_manifest.dynamic_to_steady_state("sfz-p")
+            'p'
+
+        Returns string.
+        """
+        for dynamic_, steady_state in self._dynamics:
+            if dynamic_ == dynamic:
+                return steady_state
+            if dynamic_ == "baca-" + dynamic:
+                return steady_state
+        raise KeyError(dynamic)
 
 
 @dataclasses.dataclass(slots=True)
@@ -346,7 +588,7 @@ def bow_speed_spanner(
     left_broken_text: str = None,
     map=None,
     match: _typings.Indices = None,
-    measures: _typings.SliceTyping = None,
+    measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
@@ -384,7 +626,7 @@ def circle_bow_spanner(
     left_broken_text: str | None = r"\baca-left-broken-circle-bowing-markup",
     map=None,
     match: _typings.Indices = None,
-    measures: _typings.SliceTyping = None,
+    measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     qualifier: str = None,
     right_broken: bool = False,
@@ -430,7 +672,7 @@ def clb_spanner(
     left_broken_text: str | None = r"\baca-left-broken-clb-markup",
     map=None,
     match: _typings.Indices = None,
-    measures: _typings.SliceTyping = None,
+    measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
@@ -481,7 +723,7 @@ def covered_spanner(
     left_broken_text: str | None = r"\baca-left-broken-covered-markup",
     map=None,
     match: _typings.Indices = None,
-    measures: _typings.SliceTyping = None,
+    measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
@@ -520,7 +762,7 @@ def damp_spanner(
     left_broken_text: str | None = r"\baca-left-broken-damp-markup",
     map=None,
     match: _typings.Indices = None,
-    measures: _typings.SliceTyping = None,
+    measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
@@ -556,7 +798,7 @@ def dynamic(
     *tweaks: abjad.Tweak,
     map=None,
     match: _typings.Indices = None,
-    measures: _typings.SliceTyping = None,
+    measures: _typings.Slice = None,
     selector=lambda _: _select.phead(_, 0),
     redundant: bool = False,
 ) -> _commandclasses.IndicatorCommand:
@@ -920,7 +1162,7 @@ def hairpin(
     left_broken: bool = False,
     map=None,
     match: _typings.Indices = None,
-    measures: _typings.SliceTyping = None,
+    measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     remove_length_1_spanner_start: bool = False,
     right_broken: bool = False,
@@ -2275,7 +2517,7 @@ def half_clt_spanner(
     left_broken_text: str | None = r"\baca-left-broken-half-clt-markup",
     map=None,
     match: _typings.Indices = None,
-    measures: _typings.SliceTyping = None,
+    measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
@@ -2516,7 +2758,7 @@ def make_dynamic(
 
     """
     assert isinstance(string, str), repr(string)
-    scheme_manifest = _classes.SchemeManifest()
+    scheme_manifest = SchemeManifest()
     known_shapes = abjad.StartHairpin("<").known_shapes
     indicator: abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin | abjad.Bundle
     if "_" in string:
@@ -2618,7 +2860,7 @@ def material_annotation_spanner(
     left_broken: bool = False,
     map=None,
     match: _typings.Indices = None,
-    measures: _typings.SliceTyping = None,
+    measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner()
@@ -2655,7 +2897,7 @@ def metric_modulation_spanner(
     left_broken: bool = False,
     map=None,
     match: _typings.Indices = None,
-    measures: _typings.SliceTyping = None,
+    measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner()
@@ -2850,7 +3092,7 @@ def pitch_annotation_spanner(
     left_broken: bool = False,
     map=None,
     match: _typings.Indices = None,
-    measures: _typings.SliceTyping = None,
+    measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner()
@@ -2888,7 +3130,7 @@ def pizzicato_spanner(
     left_broken_text: str | None = r"\baca-pizz-markup",
     map=None,
     match: _typings.Indices = None,
-    measures: _typings.SliceTyping = None,
+    measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
@@ -2926,7 +3168,7 @@ def rhythm_annotation_spanner(
     leak_spanner_stop: bool = False,
     map=None,
     match: _typings.Indices = None,
-    measures: _typings.SliceTyping = None,
+    measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner()
@@ -2967,7 +3209,7 @@ def scp_spanner(
     left_broken_text: str = None,
     map=None,
     match: _typings.Indices = None,
-    measures: _typings.SliceTyping = None,
+    measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
@@ -3008,7 +3250,7 @@ def spazzolato_spanner(
     left_broken_text: str | None = r"\baca-left-broken-spazz-markup",
     map=None,
     match: _typings.Indices = None,
-    measures: _typings.SliceTyping = None,
+    measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
@@ -3049,7 +3291,7 @@ def string_number_spanner(
     left_broken_text: str = None,
     map=None,
     match: _typings.Indices = None,
-    measures: _typings.SliceTyping = None,
+    measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
@@ -3090,7 +3332,7 @@ def tasto_spanner(
     left_broken_text: str = r"\baca-left-broken-t-markup",
     map=None,
     match: _typings.Indices = None,
-    measures: _typings.SliceTyping = None,
+    measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
@@ -3136,7 +3378,7 @@ def text_spanner(
     lilypond_id: int | str | None = None,
     map=None,
     match: _typings.Indices = None,
-    measures: _typings.SliceTyping = None,
+    measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     selector=lambda _: _select.leaves(_),
@@ -4743,7 +4985,7 @@ def vibrato_spanner(
     left_broken_text: str = None,
     map=None,
     match: _typings.Indices = None,
-    measures: _typings.SliceTyping = None,
+    measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
@@ -4784,7 +5026,7 @@ def xfb_spanner(
     left_broken_text: str = r"\baca-left-broken-xfb-markup",
     map=None,
     match: _typings.Indices = None,
-    measures: _typings.SliceTyping = None,
+    measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:

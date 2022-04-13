@@ -126,7 +126,7 @@ class OverrideCommand(_scoping.Command):
 
 
 def accidental_extra_offset(
-    pair: abjad.NumberPair,
+    pair: tuple[int | float, int | float],
     selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
@@ -142,7 +142,7 @@ def accidental_extra_offset(
 
 
 def accidental_font_size(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
@@ -203,7 +203,7 @@ def accidental_x_extent_false(
 
 
 def accidental_x_offset(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
@@ -219,7 +219,7 @@ def accidental_x_offset(
 
 
 def accidental_y_offset(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
@@ -256,7 +256,7 @@ def bar_line_color(
 
 
 def bar_line_extra_offset(
-    pair: abjad.NumberPair,
+    pair: tuple[int | float, int | float],
     selector=lambda _: abjad.select.leaf(_, 0),
     *,
     after: bool = False,
@@ -379,12 +379,12 @@ def bar_line_transparent(
 
 
 def bar_line_x_extent(
-    pair: abjad.NumberPair,
+    pair: tuple[int | float, int | float],
     selector=lambda _: abjad.select.leaf(_, 0),
     *,
     after: bool = False,
     context: str = "Score",
-    measures: typings.SliceTyping = None,
+    measures: typings.Slice = None,
 ) -> OverrideCommand:
     """
     Overrides bar line X extent.
@@ -402,7 +402,7 @@ def bar_line_x_extent(
 
 
 def beam_positions(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
@@ -517,7 +517,7 @@ def beam_transparent(
 
 
 def clef_extra_offset(
-    pair: abjad.NumberPair,
+    pair: tuple[int | float, int | float],
     selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
@@ -558,7 +558,7 @@ def clef_shift(
 
 
 def clef_whiteout(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
@@ -591,7 +591,7 @@ def clef_x_extent_false(
 
 
 def dls_padding(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
@@ -607,7 +607,7 @@ def dls_padding(
 
 
 def dls_staff_padding(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
@@ -814,7 +814,7 @@ def dls_up(
 
 
 def dots_extra_offset(
-    pair: abjad.NumberPair,
+    pair: tuple[int | float, int | float],
     selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
@@ -891,7 +891,7 @@ def dynamic_text_color(
 
 
 def dynamic_text_extra_offset(
-    pair: abjad.NumberPair,
+    pair: tuple[int | float, int | float],
     selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     r"""
@@ -1000,7 +1000,7 @@ def dynamic_text_extra_offset(
 
 
 def dynamic_text_parent_alignment_x(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
@@ -1016,7 +1016,7 @@ def dynamic_text_parent_alignment_x(
 
 
 def dynamic_text_self_alignment_x(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
@@ -1077,7 +1077,7 @@ def dynamic_text_x_extent_zero(
 
 
 def dynamic_text_x_offset(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
@@ -1093,7 +1093,7 @@ def dynamic_text_x_offset(
 
 
 def dynamic_text_y_offset(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
@@ -1109,7 +1109,7 @@ def dynamic_text_y_offset(
 
 
 def flag_extra_offset(
-    pair: abjad.NumberPair,
+    pair: tuple[int | float, int | float],
     selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
@@ -1155,7 +1155,7 @@ def flag_transparent(
 
 
 def glissando_thickness(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     """
@@ -1171,7 +1171,7 @@ def glissando_thickness(
 
 
 def hairpin_shorten_pair(
-    pair: abjad.NumberPair,
+    pair: tuple[int | float, int | float],
     selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
@@ -1499,7 +1499,7 @@ def mmrest_text_color(
 
 
 def mmrest_text_extra_offset(
-    pair: abjad.NumberPair,
+    pair: tuple[int | float, int | float],
     selector=lambda _: _select.mmrests(_),
 ) -> OverrideCommand:
     r"""
@@ -1583,7 +1583,7 @@ def mmrest_text_extra_offset(
 
 
 def mmrest_text_padding(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.mmrests(_),
 ) -> OverrideCommand:
     r"""
@@ -1750,7 +1750,7 @@ def mmrest_text_parent_center(
 
 
 def mmrest_text_staff_padding(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.mmrests(_),
 ) -> OverrideCommand:
     r"""
@@ -1865,7 +1865,7 @@ def no_ledgers(
 
 
 def note_column_shift(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
@@ -1913,7 +1913,7 @@ def note_head_duration_log(
 
 
 def note_head_extra_offset(
-    pair: abjad.NumberPair,
+    pair: tuple[int | float, int | float],
     selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
@@ -1929,7 +1929,7 @@ def note_head_extra_offset(
 
 
 def note_head_font_size(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
@@ -2216,7 +2216,7 @@ def note_head_x_extent_zero(
 
 
 def ottava_bracket_shorten_pair(
-    pair: abjad.NumberPair = (-0.8, -0.6),
+    pair: tuple[int | float, int | float] = (-0.8, -0.6),
     selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
@@ -2233,7 +2233,7 @@ def ottava_bracket_shorten_pair(
 
 
 def ottava_bracket_staff_padding(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
@@ -2268,7 +2268,7 @@ def rehearsal_mark_down(
 
 
 def rehearsal_mark_extra_offset(
-    pair: abjad.NumberPair,
+    pair: tuple[int | float, int | float],
     selector=lambda _: abjad.select.leaf(_, 0),
     *,
     context: str = "Score",
@@ -2287,7 +2287,7 @@ def rehearsal_mark_extra_offset(
 
 
 def rehearsal_mark_padding(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: abjad.select.leaf(_, 0),
     *,
     context: str = "Score",
@@ -2325,7 +2325,7 @@ def rehearsal_mark_self_alignment_x(
 
 
 def rehearsal_mark_y_offset(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: abjad.select.leaf(_, 0),
     *,
     context: str = "Score",
@@ -2440,7 +2440,7 @@ def repeat_tie_down(
 
 
 def repeat_tie_extra_offset(
-    pair: abjad.NumberPair,
+    pair: tuple[int | float, int | float],
     selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
@@ -2688,7 +2688,7 @@ def rest_down(
 
 
 def rest_extra_offset(
-    pair: abjad.NumberPair,
+    pair: tuple[int | float, int | float],
     selector=lambda _: _select.rest(_, 0),
 ) -> OverrideCommand:
     """
@@ -2708,7 +2708,7 @@ def rest_extra_offset(
 
 
 def rest_position(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: abjad.select.rests(_),
 ) -> OverrideCommand:
     r"""
@@ -3189,7 +3189,7 @@ def script_down(
 
 
 def script_extra_offset(
-    pair: abjad.NumberPair,
+    pair: tuple[int | float, int | float],
     selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     r"""
@@ -3290,7 +3290,7 @@ def script_extra_offset(
 
 
 def script_padding(
-    number: abjad.Number,
+    number: int | float,
     selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
@@ -3306,7 +3306,7 @@ def script_padding(
 
 
 def script_staff_padding(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
@@ -3660,7 +3660,7 @@ def span_bar_color(
 
 
 def span_bar_extra_offset(
-    pair: abjad.NumberPair,
+    pair: tuple[int | float, int | float],
     selector=lambda _: abjad.select.leaf(_, 0),
     *,
     after: bool = False,
@@ -3877,7 +3877,7 @@ def stem_down(
 
 
 def stem_extra_offset(
-    pair: abjad.NumberPair,
+    pair: tuple[int | float, int | float],
     selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
@@ -3923,7 +3923,7 @@ def stem_transparent(
 
 
 def stem_tremolo_extra_offset(
-    pair: abjad.NumberPair,
+    pair: tuple[int | float, int | float],
     selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
@@ -4043,7 +4043,7 @@ def strict_note_spacing_off(
 
 
 def sustain_pedal_staff_padding(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.leaves(_),
     *,
     context: str = "Staff",
@@ -4414,7 +4414,7 @@ def text_script_down(
 
 
 def text_script_extra_offset(
-    pair: abjad.NumberPair,
+    pair: tuple[int | float, int | float],
     selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
@@ -4466,7 +4466,7 @@ def text_script_extra_offset(
 
 
 def text_script_font_size(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
@@ -4488,7 +4488,7 @@ def text_script_font_size(
 
 
 def text_script_padding(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
@@ -4623,7 +4623,7 @@ def text_script_padding(
 
 
 def text_script_parent_alignment_x(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
@@ -4645,7 +4645,7 @@ def text_script_parent_alignment_x(
 
 
 def text_script_self_alignment_x(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
@@ -4667,7 +4667,7 @@ def text_script_self_alignment_x(
 
 
 def text_script_staff_padding(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
@@ -4936,7 +4936,7 @@ def text_script_up(
 
 
 def text_script_x_offset(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
@@ -4958,7 +4958,7 @@ def text_script_x_offset(
 
 
 def text_script_y_offset(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
@@ -4980,7 +4980,7 @@ def text_script_y_offset(
 
 
 def text_spanner_left_padding(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
@@ -4996,7 +4996,7 @@ def text_spanner_left_padding(
 
 
 def text_spanner_right_padding(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
@@ -5012,7 +5012,7 @@ def text_spanner_right_padding(
 
 
 def text_spanner_staff_padding(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
@@ -5147,7 +5147,7 @@ def text_spanner_transparent(
 
 
 def text_spanner_y_offset(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
@@ -5341,7 +5341,7 @@ def tie_up(
 
 
 def time_signature_extra_offset(
-    pair: abjad.NumberPair,
+    pair: tuple[int | float, int | float],
     selector: typing.Callable = lambda _: _select.hleaf(_, 0),
 ) -> OverrideCommand:
     r"""
@@ -5536,7 +5536,7 @@ def time_signature_transparent(
 
 
 def trill_spanner_staff_padding(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
@@ -5640,7 +5640,7 @@ def tuplet_bracket_down(
 
 
 def tuplet_bracket_extra_offset(
-    pair: abjad.NumberPair,
+    pair: tuple[int | float, int | float],
     selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     r"""
@@ -5728,7 +5728,7 @@ def tuplet_bracket_extra_offset(
 
 
 def tuplet_bracket_outside_staff_priority(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
@@ -5744,7 +5744,7 @@ def tuplet_bracket_outside_staff_priority(
 
 
 def tuplet_bracket_padding(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
@@ -5760,7 +5760,7 @@ def tuplet_bracket_padding(
 
 
 def tuplet_bracket_shorten_pair(
-    pair: abjad.NumberPair,
+    pair: tuple[int | float, int | float],
     selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
@@ -5776,7 +5776,7 @@ def tuplet_bracket_shorten_pair(
 
 
 def tuplet_bracket_staff_padding(
-    n: abjad.Number,
+    n: int | float,
     selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
@@ -5980,7 +5980,7 @@ def tuplet_number_denominator(
 
 
 def tuplet_number_extra_offset(
-    pair: abjad.NumberPair,
+    pair: tuple[int | float, int | float],
     selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     r"""

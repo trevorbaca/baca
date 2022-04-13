@@ -10,9 +10,9 @@ from inspect import currentframe as _frame
 import abjad
 from abjadext import rmakers
 
-from . import classes as _classes
 from . import commandclasses as _commandclasses
 from . import const as _const
+from . import cursor as _cursor
 from . import rhythmcommands as _rhythmcommands
 from . import scoping as _scoping
 from . import select as _select
@@ -1471,7 +1471,7 @@ class Acciaccatura:
 
     """
 
-    durations: typing.Sequence[abjad.DurationTyping] = ((1, 16),)
+    durations: typing.Sequence[abjad.typings.Duration] = ((1, 16),)
     lmr: LMR = LMR()
 
     def __post_init__(self):
@@ -1659,7 +1659,7 @@ class Imbrication:
         segment = abjad.sequence.flatten(self.segment, depth=-1)
         if self.by_pitch_class:
             segment = [abjad.NumberedPitchClass(_) for _ in segment]
-        cursor = _classes.Cursor(
+        cursor = _cursor.Cursor(
             singletons=True, source=segment, suppress_exception=True
         )
         pitch_number = cursor.next()
@@ -3581,7 +3581,7 @@ class RestAffix:
 
     def __call__(
         self, collection_index: int, total_collections: int
-    ) -> tuple[abjad.IntegerSequence | None, abjad.IntegerSequence | None]:
+    ) -> tuple[typing.Sequence[int] | None, typing.Sequence[int] | None]:
         if self.pattern is None:
             if collection_index == 0 and collection_index == total_collections - 1:
                 return self.prefix, self.suffix
@@ -8081,7 +8081,7 @@ def nest(treatments: typing.Sequence, *, lmr: LMR = None) -> Nest:
 
 
 def figure(
-    counts: abjad.IntegerSequence,
+    counts: typing.Sequence[int],
     denominator: int,
     *,
     acciaccatura: bool | Acciaccatura | LMR | None = None,

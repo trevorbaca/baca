@@ -2564,7 +2564,7 @@ def start_markup(
     selector=lambda _: abjad.select.leaf(_, 0),
     *,
     context: str = "Staff",
-    hcenter_in: abjad.Number = None,
+    hcenter_in: int | float | None = None,
     literal: bool = False,
 ) -> _commandclasses.IndicatorCommand:
     """

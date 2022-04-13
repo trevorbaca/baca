@@ -399,7 +399,7 @@ class BCPCommand(_scoping.Command):
 
     """
 
-    bcps: typing.Sequence[abjad.IntegerPair] = ()
+    bcps: typing.Sequence[tuple[int, int]] = ()
     bow_change_tweaks: tuple[_typings.IndexedTweak, ...] = ()
     final_spanner: bool = False
     helper: typing.Callable = lambda x, y: x
@@ -3978,8 +3978,8 @@ class RegisterInterpolationCommand(_scoping.Command):
 
     """
 
-    start_pitch: abjad.Number | abjad.NumberedPitch = 0
-    stop_pitch: abjad.Number | abjad.NumberedPitch = 0
+    start_pitch: int | float | abjad.NumberedPitch = 0
+    stop_pitch: int | float | abjad.NumberedPitch = 0
 
     def __post_init__(self):
         _scoping.Command.__post_init__(self)
@@ -5150,7 +5150,7 @@ def clusters(
 
 
 def color_fingerings(
-    numbers: list[abjad.Number],
+    numbers: list[int | float],
     *tweaks: _typings.IndexedTweak,
     selector=lambda _: _select.pheads(_, exclude=_const.HIDDEN),
 ) -> ColorFingeringCommand:
@@ -5161,7 +5161,7 @@ def color_fingerings(
 
 
 def deviation(
-    deviations: list[abjad.Number],
+    deviations: list[int | float],
     selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
 ) -> MicrotoneDeviationCommand:
     """

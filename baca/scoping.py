@@ -397,7 +397,7 @@ class Scope:
 
     # TODO: reverse order of parameters; make voice_name mandatory
 
-    measures: typings.SliceTyping = (1, -1)
+    measures: typings.Slice = (1, -1)
     voice_name: str | None = None
 
     def __post_init__(self):
@@ -452,9 +452,6 @@ class TimelineScope:
             scopes = scopes_
             scopes = tuple(scopes)
             self.scopes = scopes
-
-
-ScopeTyping: typing.TypeAlias = Scope | TimelineScope
 
 
 def bundle_tweaks(argument, tweaks, i=None, total=None, overwrite=False):
@@ -636,8 +633,8 @@ class Command:
     deactivate: bool = False
     map: typing.Any = None
     match: typings.Indices = None
-    measures: typings.SliceTyping = None
-    scope: ScopeTyping | None = None
+    measures: typings.Slice = None
+    scope: Scope | TimelineScope | None = None
     selector: typing.Callable | None = None
     tag_measure_number: bool = False
     tags: list[abjad.Tag | None] = dataclasses.field(default_factory=list)

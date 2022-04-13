@@ -1707,7 +1707,7 @@ def markup(
     direction=abjad.UP,
     map=None,
     match: _typings.Indices = None,
-    measures: _typings.SliceTyping = None,
+    measures: _typings.Slice = None,
     selector=lambda _: _select.pleaf(_, 0),
 ) -> _commandclasses.IndicatorCommand:
     r"""

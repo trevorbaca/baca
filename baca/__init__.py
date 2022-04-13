@@ -16,10 +16,10 @@ from .accumulator import (
     CommandAccumulator,
     segment_accumulation_defaults,
 )
-from .classes import *
 from .commandclasses import *
 from .commands import *
 from .constellation import *
+from .cursor import Cursor
 from .docs import global_context_string
 from .figures import *
 from .indicatorcommands import *

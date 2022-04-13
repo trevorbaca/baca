@@ -19,7 +19,7 @@ def _handle_pair(selection, pair):
     return selection
 
 
-def chead(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Chord:
+def chead(argument, n: int, *, exclude: abjad.typings.Strings = None) -> abjad.Chord:
     r"""
     Selects chord head ``n`` in ``argument``.
 
@@ -100,7 +100,7 @@ def chead(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Chord:
     return cheads(argument, exclude=exclude)[n]
 
 
-def cheads(argument, *, exclude: abjad.Strings = None) -> list[abjad.Chord]:
+def cheads(argument, *, exclude: abjad.typings.Strings = None) -> list[abjad.Chord]:
     r"""
     Selects chord heads in ``argument``.
 
@@ -199,7 +199,7 @@ def cheads(argument, *, exclude: abjad.Strings = None) -> list[abjad.Chord]:
 
 
 def clparts(
-    argument, counts: typing.Sequence[int], *, exclude: abjad.Strings = None
+    argument, counts: typing.Sequence[int], *, exclude: abjad.typings.Strings = None
 ) -> list[list[abjad.Leaf]]:
     r"""
     Selects leaves cyclically partitioned by ``counts`` (with overhang).
@@ -311,7 +311,7 @@ def clparts(
 
 
 def cmgroups(
-    argument, counts: list[int] = [1], *, exclude: abjad.Strings = None
+    argument, counts: list[int] = [1], *, exclude: abjad.typings.Strings = None
 ) -> list[list[abjad.Leaf]]:
     r"""
     Partitions measure-grouped leaves (cyclically).
@@ -500,7 +500,7 @@ def enchain(argument, counts: typing.Sequence[int]) -> list[list]:
     return lists_
 
 
-def grace(argument, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
+def grace(argument, n: int = 0, *, exclude: abjad.typings.Strings = None) -> abjad.Leaf:
     r"""
     Selects grace ``n``.
 
@@ -553,7 +553,7 @@ def grace(argument, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
     return graces(argument, exclude=exclude)[n]
 
 
-def graces(argument, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]:
+def graces(argument, *, exclude: abjad.typings.Strings = None) -> list[abjad.Leaf]:
     r"""
     Selects graces.
 
@@ -615,7 +615,7 @@ def graces(argument, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]:
     return items
 
 
-def hleaf(argument, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
+def hleaf(argument, n: int = 0, *, exclude: abjad.typings.Strings = None) -> abjad.Leaf:
     r"""
     Selects haupt leaf ``n``.
 
@@ -668,7 +668,7 @@ def hleaf(argument, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
     return hleaves(argument, exclude=exclude)[n]
 
 
-def hleaves(argument, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]:
+def hleaves(argument, *, exclude: abjad.typings.Strings = None) -> list[abjad.Leaf]:
     r"""
     Selects haupt leaves.
 
@@ -848,7 +848,7 @@ def leaves_in_exclude_tuplets(argument, pattern, pair):
 
 
 def lleaf(
-    argument, n: int = 0, *, count: int = 1, exclude: abjad.Strings = None
+    argument, n: int = 0, *, count: int = 1, exclude: abjad.typings.Strings = None
 ) -> abjad.Leaf:
     r"""
     Selects leaf ``n`` from leaves leaked to the left.
@@ -990,7 +990,7 @@ def lleak(argument, count: int = 1) -> list[abjad.Leaf]:
 
 
 def lleaves(
-    argument, *, count: int = 1, exclude: abjad.Strings = None
+    argument, *, count: int = 1, exclude: abjad.typings.Strings = None
 ) -> list[abjad.Leaf]:
     r"""
     Selects leaves, leaked to the left.
@@ -1091,7 +1091,7 @@ def lleaves(
 
 
 def lparts(
-    argument, counts: typing.Sequence[int], *, exclude: abjad.Strings = None
+    argument, counts: typing.Sequence[int], *, exclude: abjad.typings.Strings = None
 ) -> list[list[abjad.Leaf]]:
     r"""
     Selects leaves partitioned by ``counts``.
@@ -1188,7 +1188,7 @@ def lparts(
     return lists_
 
 
-def lt(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.LogicalTie:
+def lt(argument, n: int, *, exclude: abjad.typings.Strings = None) -> abjad.LogicalTie:
     r"""
     Selects logical tie ``n``.
 
@@ -1270,7 +1270,9 @@ def lt(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.LogicalTie:
     return lts(argument, exclude=exclude)[n]
 
 
-def ltleaf(argument, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
+def ltleaf(
+    argument, n: int = 0, *, exclude: abjad.typings.Strings = None
+) -> abjad.Leaf:
     r"""
     Selects left-trimmed leaf ``n``.
 
@@ -1350,7 +1352,7 @@ def ltleaf(argument, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf
     return ltleaves(argument, exclude=exclude)[n]
 
 
-def ltleaves(argument, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]:
+def ltleaves(argument, *, exclude: abjad.typings.Strings = None) -> list[abjad.Leaf]:
     r"""
     Selects left-trimmed leaves.
 
@@ -1466,7 +1468,7 @@ def ltleaves(argument, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]:
 
 
 def ltqrun(
-    argument, n: int, *, exclude: abjad.Strings = None
+    argument, n: int, *, exclude: abjad.typings.Strings = None
 ) -> list[abjad.LogicalTie]:
     r"""
     Selects logical tie equipitch run ``n``.
@@ -1549,7 +1551,9 @@ def ltqrun(
     return ltqruns(argument, exclude=exclude)[n]
 
 
-def ltqruns(argument, *, exclude: abjad.Strings = None) -> list[list[abjad.LogicalTie]]:
+def ltqruns(
+    argument, *, exclude: abjad.typings.Strings = None
+) -> list[list[abjad.LogicalTie]]:
     r"""
     Selects logical tie equipitch runs.
 
@@ -1657,7 +1661,9 @@ def ltqruns(argument, *, exclude: abjad.Strings = None) -> list[list[abjad.Logic
     return result_6
 
 
-def ltrun(argument, n: int, *, exclude: abjad.Strings = None) -> list[abjad.LogicalTie]:
+def ltrun(
+    argument, n: int, *, exclude: abjad.typings.Strings = None
+) -> list[abjad.LogicalTie]:
     r"""
     Selects logical tie run ``n``.
 
@@ -1742,7 +1748,9 @@ def ltrun(argument, n: int, *, exclude: abjad.Strings = None) -> list[abjad.Logi
     return ltruns(argument, exclude=exclude)[n]
 
 
-def ltruns(argument, *, exclude: abjad.Strings = None) -> list[list[abjad.LogicalTie]]:
+def ltruns(
+    argument, *, exclude: abjad.typings.Strings = None
+) -> list[list[abjad.LogicalTie]]:
     r"""
     Selects logical tie runs.
 
@@ -1844,7 +1852,7 @@ def ltruns(argument, *, exclude: abjad.Strings = None) -> list[list[abjad.Logica
 
 
 def lts(
-    argument, *, exclude: abjad.Strings = None, nontrivial: bool = None
+    argument, *, exclude: abjad.typings.Strings = None, nontrivial: bool = None
 ) -> list[abjad.LogicalTie]:
     r"""
     Selects logical ties.
@@ -1963,7 +1971,7 @@ def mgroups(
     argument,
     counts: typing.Sequence[int] = [1],
     *,
-    exclude: abjad.Strings = None,
+    exclude: abjad.typings.Strings = None,
 ) -> list[list[abjad.Leaf]]:
     r"""
     Partitions measure-grouped leaves.
@@ -2024,7 +2032,9 @@ def mgroups(
     return result
 
 
-def mleaves(argument, count: int, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]:
+def mleaves(
+    argument, count: int, *, exclude: abjad.typings.Strings = None
+) -> list[abjad.Leaf]:
     r"""
     Selects all leaves in ``count`` measures.
 
@@ -2152,7 +2162,7 @@ def mleaves(argument, count: int, *, exclude: abjad.Strings = None) -> list[abja
 
 
 def mmrest(
-    argument, n: int, *, exclude: abjad.Strings = None
+    argument, n: int, *, exclude: abjad.typings.Strings = None
 ) -> abjad.MultimeasureRest:
     r"""
     Selects multimeasure rest ``n``.
@@ -2195,7 +2205,9 @@ def mmrest(
     return mmrest
 
 
-def mmrests(argument, *, exclude: abjad.Strings = None) -> list[abjad.MultimeasureRest]:
+def mmrests(
+    argument, *, exclude: abjad.typings.Strings = None
+) -> list[abjad.MultimeasureRest]:
     r"""
     Selects multimeasure rests.
 
@@ -2244,7 +2256,9 @@ def mmrests(argument, *, exclude: abjad.Strings = None) -> list[abjad.Multimeasu
     return items
 
 
-def ntrun(argument, n: int, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]:
+def ntrun(
+    argument, n: int, *, exclude: abjad.typings.Strings = None
+) -> list[abjad.Leaf]:
     r"""
     Selects nontrivial run ``n``.
 
@@ -2329,7 +2343,9 @@ def ntrun(argument, n: int, *, exclude: abjad.Strings = None) -> list[abjad.Leaf
     return ntruns(argument, exclude=exclude)[n]
 
 
-def ntruns(argument, *, exclude: abjad.Strings = None) -> list[list[abjad.Leaf]]:
+def ntruns(
+    argument, *, exclude: abjad.typings.Strings = None
+) -> list[list[abjad.Leaf]]:
     r"""
     Selects nontrivial runs.
 
@@ -2435,7 +2451,7 @@ def omgroups(
     argument,
     counts: typing.Sequence[int] = [1],
     *,
-    exclude: abjad.Strings = None,
+    exclude: abjad.typings.Strings = None,
 ) -> list[list[abjad.Leaf]]:
     r"""
     Partitions measure-grouped leaves (with overhang).
@@ -2506,7 +2522,7 @@ def ompltgroups(
     argument,
     counts: typing.Sequence[int] = [1],
     *,
-    exclude: abjad.Strings = None,
+    exclude: abjad.typings.Strings = None,
 ) -> list[list[abjad.LogicalTie]]:
     """
     Partitions measure-grouped plts (with overhang).
@@ -2519,7 +2535,7 @@ def ompltgroups(
 
 
 def phead(
-    argument, n: int, *, exclude: abjad.Strings = None
+    argument, n: int, *, exclude: abjad.typings.Strings = None
 ) -> abjad.Note | abjad.Chord:
     r"""
     Selects pitched head ``n``.
@@ -2602,7 +2618,7 @@ def phead(
 
 
 def pheads(
-    argument, *, exclude: abjad.Strings = None, grace: bool = None
+    argument, *, exclude: abjad.typings.Strings = None, grace: bool = None
 ) -> list[abjad.Note | abjad.Chord]:
     r"""
     Selects pitched heads.
@@ -2710,7 +2726,7 @@ def pheads(
 
 
 def pleaf(
-    argument, n: int, *, exclude: abjad.Strings = None, grace: bool = None
+    argument, n: int, *, exclude: abjad.typings.Strings = None, grace: bool = None
 ) -> abjad.Note | abjad.Chord:
     r"""
     Selects pitched leaf ``n``.
@@ -2795,7 +2811,7 @@ def pleaf(
 
 
 def pleaves(
-    argument, *, exclude: abjad.Strings = None, grace: bool = None
+    argument, *, exclude: abjad.typings.Strings = None, grace: bool = None
 ) -> list[abjad.Leaf]:
     r"""
     Selects pitched leaves.
@@ -2909,7 +2925,7 @@ def pleaves(
 
 
 def plt(
-    argument, n: int, *, exclude: abjad.Strings = None, grace: bool = None
+    argument, n: int, *, exclude: abjad.typings.Strings = None, grace: bool = None
 ) -> abjad.LogicalTie:
     r"""
     Selects pitched logical tie ``n``.
@@ -2993,7 +3009,7 @@ def plt(
 
 
 def plts(
-    argument, *, exclude: abjad.Strings = None, grace: bool = None
+    argument, *, exclude: abjad.typings.Strings = None, grace: bool = None
 ) -> list[abjad.LogicalTie]:
     r"""
     Selects pitched logical ties.
@@ -3105,7 +3121,7 @@ def plts(
 
 
 def ptail(
-    argument, n: int, *, exclude: abjad.Strings = None
+    argument, n: int, *, exclude: abjad.typings.Strings = None
 ) -> abjad.Note | abjad.Chord:
     r"""
     Selects pitched tail ``n``.
@@ -3199,7 +3215,7 @@ def ptail_in_each_tuplet(argument, n, pair=None):
 
 
 def ptails(
-    argument, *, exclude: abjad.Strings = None
+    argument, *, exclude: abjad.typings.Strings = None
 ) -> list[abjad.Note | abjad.Chord]:
     r"""
     Selects pitched tails.
@@ -3307,7 +3323,9 @@ def ptails(
     return leaves_
 
 
-def ptlt(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.LogicalTie:
+def ptlt(
+    argument, n: int, *, exclude: abjad.typings.Strings = None
+) -> abjad.LogicalTie:
     r"""
     Selects pitched trivial logical tie ``n``.
 
@@ -3388,7 +3406,7 @@ def ptlt(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.LogicalTie
     return ptlts(argument, exclude=exclude)[n]
 
 
-def ptlts(argument, *, exclude: abjad.Strings = None) -> list[abjad.LogicalTie]:
+def ptlts(argument, *, exclude: abjad.typings.Strings = None) -> list[abjad.LogicalTie]:
     r"""
     Selects pitched trivial logical ties.
 
@@ -3489,7 +3507,9 @@ def ptlts(argument, *, exclude: abjad.Strings = None) -> list[abjad.LogicalTie]:
     )
 
 
-def qrun(argument, n: int, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]:
+def qrun(
+    argument, n: int, *, exclude: abjad.typings.Strings = None
+) -> list[abjad.Leaf]:
     r"""
     Selects equipitch run ``n``.
 
@@ -3571,7 +3591,7 @@ def qrun(argument, n: int, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]
     return qruns(argument, exclude=exclude)[n]
 
 
-def qruns(argument, *, exclude: abjad.Strings = None) -> list[list[abjad.Leaf]]:
+def qruns(argument, *, exclude: abjad.typings.Strings = None) -> list[list[abjad.Leaf]]:
     r"""
     Selects equipitch runs.
 
@@ -3681,7 +3701,7 @@ def rest(argument, n: int):
     return abjad.select.rest(argument, n)
 
 
-def rleaf(argument, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
+def rleaf(argument, n: int = 0, *, exclude: abjad.typings.Strings = None) -> abjad.Leaf:
     r"""
     Selects leaf ``n`` from leaves leaked to the right.
 
@@ -3830,7 +3850,11 @@ def rleak_runs(argument, start=0, stop=None):
 
 
 def rleaves(
-    argument, *, count: int = 1, exclude: abjad.Strings = None, grace: bool = None
+    argument,
+    *,
+    count: int = 1,
+    exclude: abjad.typings.Strings = None,
+    grace: bool = None,
 ) -> list[abjad.Leaf]:
     r"""
     Selects leaves, leaked to the right.
@@ -3931,7 +3955,7 @@ def rleaves(
 
 
 def rmleaves(
-    argument, count: int, *, exclude: abjad.Strings = None
+    argument, count: int, *, exclude: abjad.typings.Strings = None
 ) -> list[abjad.Leaf]:
     r"""
     Selects all leaves in ``count`` measures, leaked one leaf to the right.
@@ -3995,7 +4019,9 @@ def rmleaves(
     return items_
 
 
-def rrun(argument, n: int, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]:
+def rrun(
+    argument, n: int, *, exclude: abjad.typings.Strings = None
+) -> list[abjad.Leaf]:
     r"""
     Selects run ``n`` (leaked to the right).
 
@@ -4081,7 +4107,7 @@ def rrun(argument, n: int, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]
     return rruns(argument, exclude=exclude)[n]
 
 
-def rruns(argument, *, exclude: abjad.Strings = None) -> list[list[abjad.Leaf]]:
+def rruns(argument, *, exclude: abjad.typings.Strings = None) -> list[list[abjad.Leaf]]:
     r"""
     Selects runs (leaked to the right).
 
@@ -4192,7 +4218,7 @@ def runs(argument, *, exclude=None, rleak=False):
     return result
 
 
-def skip(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Skip:
+def skip(argument, n: int, *, exclude: abjad.typings.Strings = None) -> abjad.Skip:
     r"""
     Selects skip ``n``.
 
@@ -4244,7 +4270,7 @@ def skip(argument, n: int, *, exclude: abjad.Strings = None) -> abjad.Skip:
     return skip
 
 
-def skips(argument, *, exclude: abjad.Strings = None) -> list[abjad.Component]:
+def skips(argument, *, exclude: abjad.typings.Strings = None) -> list[abjad.Component]:
     r"""
     Selects skips.
 
@@ -4300,7 +4326,7 @@ def skips(argument, *, exclude: abjad.Strings = None) -> list[abjad.Component]:
 
 
 def tleaf(
-    argument, n: int = 0, *, exclude: abjad.Strings = None, grace: bool = None
+    argument, n: int = 0, *, exclude: abjad.typings.Strings = None, grace: bool = None
 ) -> abjad.Leaf:
     r"""
     Selects trimmed leaf ``n``.
@@ -4385,7 +4411,7 @@ def tleaf(
 def tleaves(
     argument,
     *,
-    exclude: abjad.Strings = None,
+    exclude: abjad.typings.Strings = None,
     grace: bool = None,
     rleak: bool = False,
 ) -> list[abjad.Leaf]:
@@ -4516,7 +4542,7 @@ def tuplets(argument, pair=None):
     return result
 
 
-def wleaf(argument, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
+def wleaf(argument, n: int = 0, *, exclude: abjad.typings.Strings = None) -> abjad.Leaf:
     r"""
     Selects leaf ``n`` from leaves leaked wide.
 
@@ -4672,7 +4698,7 @@ def wleaf(argument, n: int = 0, *, exclude: abjad.Strings = None) -> abjad.Leaf:
     return wleaves(argument, exclude=exclude)[n]
 
 
-def wleaves(argument, *, exclude: abjad.Strings = None) -> list[abjad.Leaf]:
+def wleaves(argument, *, exclude: abjad.typings.Strings = None) -> list[abjad.Leaf]:
     r"""
     Selects leaves, leaked "wide" (to both the left and right).
 

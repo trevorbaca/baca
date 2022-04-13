@@ -284,7 +284,7 @@ def partition(sequence, counts=None):
 def quarters(
     sequence,
     *,
-    compound: abjad.DurationTyping = None,
+    compound: abjad.typings.Duration = None,
     remainder: int = None,
 ):
     r"""
@@ -379,7 +379,7 @@ def quarters(
 
 def ratios(
     sequence,
-    ratios: typing.Sequence[abjad.RatioTyping],
+    ratios: typing.Sequence[abjad.typings.Ratio],
     *,
     rounded: bool = False,
 ):
@@ -713,12 +713,12 @@ def ratios(
 
 def split_divisions(
     sequence,
-    durations: list[abjad.DurationTyping],
+    durations: list[abjad.typings.Duration],
     *,
-    compound: abjad.DurationTyping = None,
+    compound: abjad.typings.Duration = None,
     cyclic: bool = False,
     remainder: int = None,
-    remainder_fuse_threshold: abjad.DurationTyping = None,
+    remainder_fuse_threshold: abjad.typings.Duration = None,
 ):
     r"""
     Splits sequence divisions by ``durations``.
