@@ -2,6 +2,7 @@
 Memento.
 """
 import dataclasses
+import typing
 
 import abjad
 
@@ -104,7 +105,7 @@ class Memento:
         return self._value
 
 
-@dataclasses.dataclass(slots=True)
+@dataclasses.dataclass(frozen=True, slots=True)
 class PersistentOverride:
     r"""
     Persistent override.
@@ -227,17 +228,17 @@ class PersistentOverride:
     hide: bool = False
     value: str | None = None
 
-    persistent = True
+    persistent: typing.ClassVar[bool] = True
 
     def __post_init__(self):
-        self.after = bool(self.after)
+        assert isinstance(self.after, bool), repr(self.after)
         if self.attribute is not None:
             assert isinstance(self.attribute, str), repr(self.attribute)
         if self.context is not None:
             assert isinstance(self.context, str), repr(self.context)
         if self.grob is not None:
             assert isinstance(self.grob, str), repr(self.grob)
-        self.hide = bool(self.hide)
+        assert isinstance(self.hide, bool), repr(self.hide)
 
     def _get_lilypond_format(self, context=None):
         if isinstance(context, abjad.Context):

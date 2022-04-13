@@ -11,7 +11,7 @@ import abjad
 from . import sequence as _sequence
 
 
-@dataclasses.dataclass(slots=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class ArpeggiationSpacingSpecifier:
     r"""
     Arpeggiation spacing specifier.
@@ -230,7 +230,7 @@ def _to_tightly_spaced_pitches_descending(pitch_classes):
     return collection
 
 
-@dataclasses.dataclass(slots=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class ChordalSpacingSpecifier:
     """
     Chordal spacing specifier.
@@ -840,14 +840,14 @@ def illustrate_harmonic_series(harmonic_series) -> abjad.LilyPondFile:
     return lilypond_file
 
 
-@dataclasses.dataclass(slots=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Partial:
     """
     Partial.
 
     ..  container:: example
 
-        >>> baca.Partial("C1", 7)
+        >>> baca.Partial(abjad.NamedPitch("C1"), 7)
         Partial(fundamental=NamedPitch('c,,'), number=7)
 
     """
@@ -856,7 +856,7 @@ class Partial:
     number: int = 1
 
     def __post_init__(self):
-        self.fundamental = abjad.NamedPitch(self.fundamental)
+        assert isinstance(self.fundamental, abjad.NamedPitch), repr(self.fundamental)
         assert isinstance(self.number, int), repr(self.number)
         assert 1 <= self.number, repr(self.number)
 
@@ -866,7 +866,7 @@ class Partial:
 
         ..  container:: example
 
-            >>> baca.Partial("C1", 7).approximation()
+            >>> baca.Partial(abjad.NamedPitch("C1"), 7).approximation()
             NamedPitch('bf')
 
         """
@@ -879,7 +879,7 @@ class Partial:
 
         ..  container:: example
 
-            >>> baca.Partial("C1", 7).deviation()
+            >>> baca.Partial(abjad.NamedPitch("C1"), 7).deviation()
             -31
 
         """
@@ -893,7 +893,8 @@ class Partial:
         return deviation
 
 
-@dataclasses.dataclass(slots=True)
+# TODO: frozen=True
+@dataclasses.dataclass(order=True, slots=True, unsafe_hash=True)
 class Registration:
     """
     Registration.
@@ -997,7 +998,8 @@ class Registration:
             raise ValueError(f"{pitch!r} not in {self!r}.")
 
 
-@dataclasses.dataclass(slots=True)
+# TODO: frozen=True
+@dataclasses.dataclass(order=True, slots=True, unsafe_hash=True)
 class RegistrationComponent:
     """
     Registration component.

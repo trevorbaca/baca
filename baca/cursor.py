@@ -8,7 +8,8 @@ import typing
 import abjad
 
 
-@dataclasses.dataclass(slots=True)
+# TODO: frozen=True
+@dataclasses.dataclass(order=True, slots=True, unsafe_hash=True)
 class Cursor:
     """
     Cursor.

@@ -120,7 +120,7 @@ class Command:
         return None
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(slots=True)
 class Suite:
     """
     Suite.

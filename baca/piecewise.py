@@ -261,7 +261,7 @@ class SchemeManifest:
         raise KeyError(dynamic)
 
 
-@dataclasses.dataclass(slots=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class _Specifier:
 
     bookended_spanner_start: typing.Any = None

@@ -4,7 +4,8 @@ import typing
 from . import typings as _typings
 
 
-@dataclasses.dataclass(slots=True)
+# TODO: frozen=True
+@dataclasses.dataclass(order=True, slots=True, unsafe_hash=True)
 class Scope:
     """
     Scope.
@@ -38,7 +39,8 @@ class Scope:
         assert isinstance(self.voice_name, str), repr(self.voice_name)
 
 
-@dataclasses.dataclass(slots=True)
+# TODO: frozen=True
+@dataclasses.dataclass(order=True, slots=True, unsafe_hash=True)
 class TimelineScope:
     """
     Timeline scope.

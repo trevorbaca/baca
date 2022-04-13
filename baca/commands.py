@@ -2044,6 +2044,7 @@ class DiatonicClusterCommand(_command.Command):
         return True
 
 
+# TODO: frozen=True
 @dataclasses.dataclass(slots=True)
 class Loop(abjad.CyclicTuple):
     """

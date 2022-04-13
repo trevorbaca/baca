@@ -154,7 +154,7 @@ class SpacingSpecifier:
                 )
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class LBSD:
     """
     Line-break system details.
@@ -171,7 +171,7 @@ class LBSD:
         return contributions
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class PageSpecifier:
     """
     Page specifier.

@@ -81,7 +81,7 @@ class Stack:
         return list(self._commands)
 
 
-@dataclasses.dataclass(slots=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class LMR:
     """
     Left-middle-right.
@@ -647,24 +647,24 @@ class LMR:
     def __post_init__(self):
         if self.left_counts is not None:
             assert abjad.math.all_are_positive_integers(self.left_counts)
-        self.left_cyclic = bool(self.left_cyclic)
+        assert isinstance(self.left_cyclic, bool), repr(self.left_cyclic)
         if self.left_length is not None:
-            self.left_length = int(self.left_length)
+            assert isinstance(self.left_length, int), repr(self.left_length)
             assert 0 <= self.left_length, repr(self.left_length)
-        self.left_reversed = bool(self.left_reversed)
+        assert isinstance(self.left_reversed, bool), repr(self.left_reversed)
         if self.middle_counts is not None:
             assert abjad.math.all_are_positive_integers(self.middle_counts)
-        self.middle_cyclic = bool(self.middle_cyclic)
-        self.middle_reversed = bool(self.middle_reversed)
+        assert isinstance(self.middle_cyclic, bool), repr(self.middle_cyclic)
+        assert isinstance(self.middle_reversed, bool), repr(self.middle_reversed)
         if self.priority is not None:
             assert self.priority in (abjad.LEFT, abjad.RIGHT)
         if self.right_counts is not None:
             assert abjad.math.all_are_positive_integers(self.right_counts)
-        self.right_cyclic = bool(self.right_cyclic)
+        assert isinstance(self.right_cyclic, bool), repr(self.right_cyclic)
         if self.right_length is not None:
-            self.right_length = int(self.right_length)
+            assert isinstance(self.right_length, int), repr(self.right_length)
             assert 0 <= self.right_length, repr(self.right_length)
-        self.right_reversed = bool(self.right_reversed)
+        assert isinstance(self.right_reversed, bool), repr(self.right_reversed)
 
     def __call__(self, sequence=None):
         assert isinstance(sequence, list), repr(sequence)
@@ -762,7 +762,7 @@ class LMR:
         return left_length, middle_length, right_length
 
 
-@dataclasses.dataclass(slots=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Acciaccatura:
     r"""
     Acciaccatura.
@@ -863,7 +863,7 @@ class Acciaccatura:
 
         Eighth-note acciaccaturas:
 
-        >>> specifier = baca.Acciaccatura(durations=[(1, 8)])
+        >>> specifier = baca.Acciaccatura([abjad.Duration(1, 8)])
         >>> stack = baca.stack(
         ...     baca.figure([1], 8, acciaccatura=specifier),
         ...     rmakers.beam(),
@@ -1470,12 +1470,15 @@ class Acciaccatura:
 
     """
 
-    durations: typing.Sequence[abjad.typings.Duration] = ((1, 16),)
+    durations: typing.Sequence[abjad.Duration] = (abjad.Duration(1, 16),)
     lmr: LMR = LMR()
 
     def __post_init__(self):
-        durations_ = [abjad.Duration(_) for _ in self.durations]
-        self.durations = durations_
+        #        durations_ = [abjad.Duration(_) for _ in self.durations]
+        #        self.durations = durations_
+        assert all(isinstance(_, abjad.Duration) for _ in self.durations), repr(
+            self.durations
+        )
         assert isinstance(self.lmr, LMR), repr(self.lmr)
 
     def __call__(
@@ -1508,7 +1511,8 @@ class Acciaccatura:
         return acciaccatura_containers, collection
 
 
-@dataclasses.dataclass(slots=True)
+# TODO: frozen=True
+@dataclasses.dataclass(order=True, slots=True, unsafe_hash=True)
 class Anchor:
     """
     Anchor.
@@ -1532,7 +1536,9 @@ class Anchor:
             raise TypeError(f"must be callable: {self.remote_selector!r}.")
         if self.remote_voice_name is not None:
             assert isinstance(self.remote_voice_name, str), repr(self.remote_voice_name)
-        self.use_remote_stop_offset = bool(self.use_remote_stop_offset)
+        assert isinstance(self.use_remote_stop_offset, bool), repr(
+            self.use_remote_stop_offset
+        )
 
 
 class Coat:
@@ -2689,6 +2695,7 @@ class FigureAccumulator:
         selections: list
         if anchor is not None:
             voice_name_ = self._abbreviation(anchor.remote_voice_name)
+            # TODO: do not assign to frozen object
             anchor.remote_voice_name = voice_name_
         if isinstance(collections, str):
             tuplet = abjad.Tuplet((1, 1), collections, hide=True)
@@ -2950,7 +2957,7 @@ class FigureAccumulator:
             )
 
 
-@dataclasses.dataclass(slots=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Contribution:
 
     voice_to_selection: dict[str, list]
@@ -2964,9 +2971,11 @@ class Contribution:
         if self.anchor is not None:
             assert isinstance(self.anchor, Anchor), repr(self.anchor)
         if self.figure_name is not None:
-            self.figure_name = str(self.figure_name)
+            assert isinstance(self.figure_name, str), repr(self.figure_name)
         if self.hide_time_signature is not None:
-            self.hide_time_signature = bool(self.hide_time_signature)
+            assert isinstance(self.hide_time_signature, bool), repr(
+                self.hide_time_signature
+            )
         if self.time_signature is not None:
             assert isinstance(self.time_signature, abjad.TimeSignature)
         if self.voice_to_selection is not None:
@@ -2990,7 +2999,7 @@ class Contribution:
             yield voice_name
 
 
-@dataclasses.dataclass(slots=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Nest:
     r"""
     Nest.
@@ -3227,7 +3236,7 @@ class Nest:
             return abjad.CyclicTuple(self.treatments)
 
 
-@dataclasses.dataclass(slots=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class RestAffix:
     r"""
     Rest affix.
@@ -3574,7 +3583,9 @@ class RestAffix:
             assert isinstance(self.pattern, abjad.Pattern)
         if self.prefix is not None:
             assert all(isinstance(_, int) for _ in self.prefix)
-        self.skips_instead_of_rests = bool(self.skips_instead_of_rests)
+        assert isinstance(self.skips_instead_of_rests, bool), repr(
+            self.skips_instead_of_rests
+        )
         if self.suffix is not None:
             assert all(isinstance(_, int) for _ in self.suffix)
 
@@ -5797,7 +5808,7 @@ class FigureMaker:
             assert isinstance(self.acciaccatura, Acciaccatura), repr(self.acciaccatura)
         if self.affix is not None:
             assert isinstance(self.affix, RestAffix), repr(self.affix)
-        self.restart_talea = bool(self.restart_talea)
+        assert isinstance(self.restart_talea, bool), repr(self.restart_talea)
         if self.signature is not None:
             assert isinstance(self.signature, int), repr(self.signature)
         if self.spelling is not None:
@@ -6147,7 +6158,7 @@ class FigureMaker:
         return tuplet
 
 
-@dataclasses.dataclass(slots=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Assignment:
     """
     Assignment.
@@ -6162,20 +6173,18 @@ class Assignment:
             assert isinstance(self.pattern, abjad.Pattern)
 
 
-@dataclasses.dataclass(slots=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Bind:
     """
     Bind.
     """
 
-    assignments: typing.Any = None
+    assignments: typing.Sequence[Assignment] = ()
 
     def __post_init__(self):
-        self.assignments = self.assignments or []
         for assignment in self.assignments:
             if not isinstance(assignment, Assignment):
                 raise Exception("must be assignment:\n   {assignment!r}")
-        self.assignments = list(self.assignments)
 
     def __call__(self, collections: typing.Sequence) -> list[abjad.Tuplet]:
         collection_count = len(collections)

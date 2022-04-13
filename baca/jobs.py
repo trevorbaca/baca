@@ -11,7 +11,7 @@ from . import path as _path
 from . import tags as _tags
 
 
-@dataclasses.dataclass(slots=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Job:
     """
     Job.

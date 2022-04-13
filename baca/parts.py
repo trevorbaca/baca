@@ -10,7 +10,8 @@ import abjad
 from . import path as _path
 
 
-@dataclasses.dataclass(slots=True)
+# TODO: frozen=True
+@dataclasses.dataclass(order=True, slots=True, unsafe_hash=True)
 class Part:
     """
     Part.
@@ -149,7 +150,8 @@ class Part:
             return f"{self.section_abbreviation}-{self.member}"
 
 
-@dataclasses.dataclass(slots=True, unsafe_hash=True)
+# TODO: frozen=True
+@dataclasses.dataclass(order=True, slots=True, unsafe_hash=True)
 class PartAssignment:
     """
     Part assignment.
@@ -351,7 +353,8 @@ class PartAssignment:
             return f"baca.{type(self).__name__}({self.section!r})"
 
 
-@dataclasses.dataclass(slots=True)
+# TODO: frozen=True
+@dataclasses.dataclass(order=True, slots=True, unsafe_hash=True)
 class Section:
     """
     Section.

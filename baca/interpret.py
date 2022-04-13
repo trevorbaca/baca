@@ -413,11 +413,14 @@ def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
             metronome_mark.hide = True
             wrapper = abjad.get.wrapper(skip, abjad.MetronomeMark)
         if metric_modulation is not None:
-            # TODO: public hide
+            # TODO: public hide:
+            # TODO: detach / reattach frozen object:
             metric_modulation._hide = True
         if accelerando is not None:
+            # TODO: detach / reattach frozen object:
             accelerando.hide = True
         if ritardando is not None:
+            # TODO: detach / reattach frozen object:
             ritardando.hide = True
         if skip is skips[-1]:
             break

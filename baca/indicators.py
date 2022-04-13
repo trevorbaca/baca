@@ -9,7 +9,8 @@ import abjad
 from . import const as _const
 
 
-@dataclasses.dataclass(slots=True, unsafe_hash=True)
+# TODO: frozen=True
+@dataclasses.dataclass(slots=True, order=True, unsafe_hash=True)
 class Accelerando:
     r"""
     Accelerando.
@@ -78,7 +79,7 @@ class Accelerando:
     trend: typing.ClassVar[bool] = True
 
     def __post_init__(self):
-        self.hide = bool(self.hide)
+        assert isinstance(self.hide, bool), repr(self.hide)
         if self.markup is not None:
             assert isinstance(self.markup, abjad.Markup), repr(self.markup)
 
@@ -132,7 +133,7 @@ class Accelerando:
         return self._default_markup()
 
 
-@dataclasses.dataclass(slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, slots=True, order=True, unsafe_hash=True)
 class BarExtent:
     """
     Bar extent.
@@ -169,14 +170,14 @@ class BarExtent:
     line_count: int
     hide: bool = False
 
-    context = "Staff"
-    persistent = True
+    context: typing.ClassVar[str] = "Staff"
+    persistent: typing.ClassVar[bool] = True
 
     def __post_init__(self):
         if not isinstance(self.line_count, int):
             raise Exception(f"line count must be integer (not {self.line_count!r}).")
         assert 0 <= self.line_count, repr(self.line_count)
-        self.hide = bool(self.hide)
+        assert isinstance(self.hide, bool), repr(self.hide)
 
     def _get_bar_extent(self, component):
         if not isinstance(component, abjad.Leaf):
@@ -274,7 +275,8 @@ class BarExtent:
         return False
 
 
-@dataclasses.dataclass(slots=True, unsafe_hash=True)
+# TODO: frozen=True
+@dataclasses.dataclass(order=True, slots=True, unsafe_hash=True)
 class Ritardando:
     r"""
     Ritardando.
@@ -371,7 +373,7 @@ class Ritardando:
     trend: typing.ClassVar[bool] = True
 
     def __post_init__(self):
-        self.hide = bool(self.hide)
+        assert isinstance(self.hide, bool), repr(self.hide)
         if self.markup is not None:
             assert isinstance(self.markup, abjad.Markup), repr(self.markup)
 
@@ -425,7 +427,7 @@ class Ritardando:
         return self._default_markup()
 
 
-@dataclasses.dataclass(slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class StaffLines:
     """
     Staff lines.
@@ -462,15 +464,14 @@ class StaffLines:
     line_count: int
     hide: bool = False
 
-    context = "Staff"
-    persistent = True
+    context: typing.ClassVar[str] = "Staff"
+    persistent: typing.ClassVar[bool] = True
 
     def __post_init__(self):
         if not isinstance(self.line_count, int):
             raise Exception(f"line count must be integer (not {self.line_count!r}).")
         assert 0 <= self.line_count, repr(self.line_count)
-        if self.hide is not None:
-            self.hide = bool(self.hide)
+        assert isinstance(self.hide, bool), repr(self.hide)
 
     def _get_lilypond_format(self, context=None):
         if isinstance(context, abjad.Context):
