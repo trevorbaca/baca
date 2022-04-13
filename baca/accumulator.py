@@ -3,7 +3,8 @@ import dataclasses
 
 import abjad
 
-from . import scoping as _scoping
+from . import command as _command
+from . import scope as _scope
 
 
 def _initialize_time_signatures(time_signatures):
@@ -71,15 +72,15 @@ def _unpack_scope_pair(scopes, abbreviations):
     voice_names = voice_names_
     for voice_name in voice_names:
         for measure_token in measure_tokens:
-            scope = _scoping.Scope(measures=measure_token, voice_name=voice_name)
+            scope = _scope.Scope(measures=measure_token, voice_name=voice_name)
             scopes_.append(scope)
-    prototype = (_scoping.Scope, _scoping.TimelineScope)
+    prototype = (_scope.Scope, _scope.TimelineScope)
     assert all(isinstance(_, prototype) for _ in scopes_)
     return scopes_
 
 
 def _unpack_scopes(scopes, abbreviations):
-    scope_type = (_scoping.Scope, _scoping.TimelineScope)
+    scope_type = (_scope.Scope, _scope.TimelineScope)
     if isinstance(scopes, str):
         result = abbreviations.get(scopes, scopes)
         if isinstance(result, str):
@@ -89,7 +90,7 @@ def _unpack_scopes(scopes, abbreviations):
             voice_names = result
         scopes__ = []
         for voice_name in voice_names:
-            scope = _scoping.Scope(voice_name=voice_name)
+            scope = _scope.Scope(voice_name=voice_name)
             scopes__.append(scope)
     elif isinstance(scopes, tuple):
         scopes__ = _unpack_scope_pair(scopes, abbreviations)
@@ -110,7 +111,7 @@ def _unpack_scopes(scopes, abbreviations):
     for scope in scopes__:
         if isinstance(scope, str):
             voice_name = abbreviations.get(scope, scope)
-            scope_ = _scoping.Scope(voice_name=voice_name)
+            scope_ = _scope.Scope(voice_name=voice_name)
             scopes_.append(scope_)
         elif isinstance(scope, tuple):
             voice_name, measures = scope
@@ -118,12 +119,10 @@ def _unpack_scopes(scopes, abbreviations):
             if isinstance(measures, list):
                 measures = _unpack_measure_token_list(measures)
                 for measure_token in measures:
-                    scope_ = _scoping.Scope(
-                        measures=measure_token, voice_name=voice_name
-                    )
+                    scope_ = _scope.Scope(measures=measure_token, voice_name=voice_name)
                     scopes_.append(scope_)
             else:
-                scope_ = _scoping.Scope(measures=measures, voice_name=voice_name)
+                scope_ = _scope.Scope(measures=measures, voice_name=voice_name)
                 scopes_.append(scope_)
         else:
             scope_ = scope
@@ -193,20 +192,20 @@ class CommandAccumulator:
         self.voice_names = voice_names
 
     def __call__(self, scopes, *commands):
-        classes = (list, _scoping.Suite)
+        classes = (list, _command.Suite)
         commands_ = abjad.sequence.flatten(list(commands), classes=classes, depth=-1)
         commands = tuple(commands_)
         abbreviations = self.voice_abbreviations
         assert isinstance(abbreviations, dict), repr(abbreviations)
         scopes_ = _unpack_scopes(scopes, abbreviations)
-        scope_type = (_scoping.Scope, _scoping.TimelineScope)
+        scope_type = (_scope.Scope, _scope.TimelineScope)
         assert all(isinstance(_, scope_type) for _ in scopes_), repr(scopes_)
         for command in commands:
             if command is None:
                 continue
             if isinstance(command, list):
                 raise Exception("use baca.suite().")
-            if not isinstance(command, _scoping.Command):
+            if not isinstance(command, _command.Command):
                 message = "\n\nMust be command:"
                 message += f"\n\n{repr(command)}"
                 raise Exception(message)
@@ -214,7 +213,7 @@ class CommandAccumulator:
         for i, current_scope in enumerate(scopes_):
             if self.voice_names and current_scope.voice_name not in self.voice_names:
                 raise Exception(f"unknown voice name {current_scope.voice_name!r}.")
-            if isinstance(current_scope, _scoping.TimelineScope):
+            if isinstance(current_scope, _scope.TimelineScope):
                 for scope_ in current_scope.scopes:
                     if scope_.voice_name in abbreviations:
                         voice_name = abbreviations[scope_.voice_name]
@@ -222,15 +221,15 @@ class CommandAccumulator:
             for command in commands:
                 if command is None:
                     continue
-                assert isinstance(command, _scoping.Command), repr(command)
+                assert isinstance(command, _command.Command), repr(command)
                 if not command._matches_scope_index(scope_count, i):
                     continue
-                if isinstance(command, _scoping.Command):
+                if isinstance(command, _command.Command):
                     commands_ = [command]
                 else:
                     commands_ = command
                 for command_ in commands_:
-                    assert isinstance(command_, _scoping.Command), repr(command_)
+                    assert isinstance(command_, _command.Command), repr(command_)
                     measures = command_.measures
                     if isinstance(measures, int):
                         measures = (measures, measures)

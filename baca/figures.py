@@ -10,11 +10,10 @@ from inspect import currentframe as _frame
 import abjad
 from abjadext import rmakers
 
-from . import commandclasses as _commandclasses
+from . import commands as _commands
 from . import const as _const
 from . import cursor as _cursor
 from . import rhythmcommands as _rhythmcommands
-from . import scoping as _scoping
 from . import select as _select
 from . import tags as _tags
 
@@ -1501,7 +1500,7 @@ class Acciaccatura:
             if 1 < len(acciaccatura_container):
                 abjad.beam(
                     acciaccatura_container[:],
-                    tag=_scoping.function_name(_frame(), self),
+                    tag=_tags.function_name(_frame(), self),
                 )
             acciaccatura_containers.append(acciaccatura_container)
         assert len(acciaccatura_containers) == len(collection)
@@ -6134,7 +6133,7 @@ class FigureMaker:
         else:
             raise Exception(f"bad time treatment: {treatment!r}.")
         assert isinstance(tuplet, abjad.Tuplet)
-        tag = _scoping.function_name(_frame(), self)
+        tag = _tags.function_name(_frame(), self)
         if before_grace_containers is not None:
             logical_ties = abjad.iterate.logical_ties(tuplet)
             pairs = zip(before_grace_containers, logical_ties)
@@ -6589,7 +6588,7 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
 
 def extend_beam(
     selector=lambda _: abjad.select.leaf(_, -1),
-) -> _commandclasses.IndicatorCommand:
+) -> _commands.IndicatorCommand:
     r"""
     Attaches RIGHT_BROKEN_BEAM to selector output.
 
@@ -6786,7 +6785,7 @@ def extend_beam(
             }
 
     """
-    return _commandclasses.IndicatorCommand(
+    return _commands.IndicatorCommand(
         indicators=[_const.RIGHT_BROKEN_BEAM], selector=selector
     )
 

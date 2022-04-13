@@ -215,7 +215,7 @@ def make_empty_score(*counts):
         >>
 
     """
-    # TODO: use _scoping.function_name()
+    # TODO: use _tags.function_name()
     function_name = "baca.make_configuration_empty_score()"
     tag = abjad.Tag(function_name)
     global_context = _score.make_global_context()

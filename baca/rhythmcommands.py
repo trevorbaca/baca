@@ -8,16 +8,23 @@ from inspect import currentframe as _frame
 import abjad
 from abjadext import rmakers
 
+from . import command as _command
 from . import const as _const
-from . import overrides as _overrides
-from . import scoping as _scoping
 from . import select as _select
 from . import sequence as _sequence
 from . import tags as _tags
 
 
+def _tag_components(selection, tag):
+    assert isinstance(tag, abjad.Tag), repr(tag)
+    # TODO: tag attachments
+    for component in abjad.iterate.components(selection):
+        # TODO: do not set private attribute
+        component._tag = tag
+
+
 @dataclasses.dataclass
-class RhythmCommand(_scoping.Command):
+class RhythmCommand(_command.Command):
     r"""
     Rhythm command.
 
@@ -240,7 +247,7 @@ class RhythmCommand(_scoping.Command):
     scope: typing.Any = None
 
     def __post_init__(self):
-        _scoping.Command.__post_init__(self)
+        _command.Command.__post_init__(self)
         if self.annotation_spanner_color is not None:
             assert isinstance(self.annotation_spanner_color, str)
         if self.annotation_spanner_text is not None:
@@ -376,12 +383,14 @@ class TimeSignatureMaker:
         ...     count=5,
         ...     fermata_measures=[5],
         ... )
-        >>> maker.run()
-        [(1, 16), (2, 16), (3, 16), (1, 8), TimeSignature(pair=(1, 4), hide=False, partial=None)]
+        >>> for _ in maker.run(): _
+        (1, 16)
+        (2, 16)
+        (3, 16)
+        (1, 8)
+        TimeSignature(pair=(1, 4), hide=False, partial=None)
 
     """
-
-    ### CLASS VARIABLES ###
 
     __slots__ = (
         "_count",
@@ -389,8 +398,6 @@ class TimeSignatureMaker:
         "_rotation",
         "_time_signatures",
     )
-
-    ### INITIALIZER ###
 
     def __init__(
         self,
@@ -410,8 +417,6 @@ class TimeSignatureMaker:
         self._fermata_measures = fermata_measures
         self._rotation = rotation
 
-    ### PRIVATE METHODS ###
-
     def _normalize_fermata_measures(self):
         fermata_measures = []
         if self.fermata_measures is None:
@@ -425,8 +430,6 @@ class TimeSignatureMaker:
                 fermata_measures.append(self.count - abs(n) + 1)
         fermata_measures.sort()
         return fermata_measures
-
-    ### PUBLIC PROPERTIES ###
 
     @property
     def count(self):
@@ -456,11 +459,9 @@ class TimeSignatureMaker:
         """
         return self._time_signatures
 
-    ### PUBLIC METHODS ###
-
     def run(self):
         """
-        Makes time signatures (without stages).
+        Makes time signatures.
 
         Accounts for fermata measures.
 
@@ -494,7 +495,7 @@ def make_even_divisions(*, measures=None):
             rmakers.even_division([8]),
             rmakers.beam(),
             rmakers.extract_trivial(),
-            tag=_scoping.function_name(_frame()),
+            tag=_tags.function_name(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
@@ -524,7 +525,7 @@ def make_fused_tuplet_monads(
             rmakers.extract_trivial(),
             rmakers.force_repeat_tie(),
             preprocessor=lambda _: [sum(_)],
-            tag=_scoping.function_name(_frame()),
+            tag=_tags.function_name(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
@@ -633,7 +634,7 @@ def make_notes(
             *specifiers,
             rmakers.rewrite_meter(),
             *repeat_tie_specifier,
-            tag=_scoping.function_name(_frame()),
+            tag=_tags.function_name(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
@@ -725,7 +726,7 @@ def make_repeat_tied_notes(
     specifiers_.append(specifier)
     return RhythmCommand(
         rhythm_maker=rmakers.stack(
-            rmakers.note(), *specifiers_, tag=_scoping.function_name(_frame())
+            rmakers.note(), *specifiers_, tag=_tags.function_name(_frame())
         ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
@@ -762,7 +763,7 @@ def make_repeated_duration_notes(
             *rewrite_specifiers,
             rmakers.force_repeat_tie(),
             preprocessor=preprocessor,
-            tag=_scoping.function_name(_frame()),
+            tag=_tags.function_name(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
@@ -778,7 +779,7 @@ def make_rests(*, measures=None):
         rhythm_maker=rmakers.stack(
             rmakers.note(),
             rmakers.force_rest(lambda _: _select.lts(_)),
-            tag=_scoping.function_name(_frame()),
+            tag=_tags.function_name(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
@@ -803,7 +804,7 @@ def make_single_attack(duration, *, measures=None):
             ),
             rmakers.beam(),
             rmakers.extract_trivial(),
-            tag=_scoping.function_name(_frame()),
+            tag=_tags.function_name(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
@@ -821,7 +822,7 @@ def make_tied_notes(*, measures=None):
             rmakers.beam(lambda _: _select.plts(_)),
             rmakers.tie(lambda _: _select.ptails(_)[:-1]),
             rmakers.rewrite_meter(),
-            tag=_scoping.function_name(_frame()),
+            tag=_tags.function_name(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
@@ -854,7 +855,7 @@ def make_tied_repeated_durations(durations, *, measures=None):
             rmakers.note(),
             *specifiers,
             preprocessor=preprocessor,
-            tag=_scoping.function_name(_frame()),
+            tag=_tags.function_name(_frame()),
         ),
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
@@ -875,7 +876,7 @@ def music(
     annotation_spanner_text = None
     if annotation_spanner is True:
         annotation_spanner_text = "baca.music() =|"
-    tag = tag.append(_scoping.function_name(_frame()))
+    tag = tag.append(_tags.function_name(_frame()))
     if isinstance(argument, str):
         string = f"{{ {argument} }}"
         container = abjad.parse(string)
@@ -887,7 +888,7 @@ def music(
         message += f" not {repr(argument)}."
         raise TypeError(message)
     if tag is not None:
-        tag_selection(selection, tag)
+        _tag_components(selection, tag)
     return RhythmCommand(
         rhythm_maker=selection,
         annotation_spanner_color="#darkcyan",
@@ -928,7 +929,7 @@ def skeleton(
     Makes rhythm command from ``string`` and attaches NOT_YET_PITCHED indicators to
     music.
     """
-    tag = tag.append(_scoping.function_name(_frame()))
+    tag = tag.append(_tags.function_name(_frame()))
     if isinstance(argument, str):
         string = f"{{ {argument} }}"
         container = abjad.parse(string)
@@ -940,7 +941,7 @@ def skeleton(
         message += " not {repr(argument)}."
         raise TypeError(message)
     if tag is not None:
-        tag_selection(selection, tag)
+        _tag_components(selection, tag)
     return RhythmCommand(
         rhythm_maker=selection,
         annotation_spanner_color="#darkcyan",
@@ -948,30 +949,3 @@ def skeleton(
         attach_not_yet_pitched=True,
         do_not_check_total_duration=do_not_check_total_duration,
     )
-
-
-def tacet(
-    color="#green",
-    *,
-    measures=None,
-    selector=lambda _: _select.mmrests(_),
-):
-    """
-    Colors multimeasure rests.
-    """
-    command = _overrides.mmrest_color(color, selector=selector)
-    _scoping.tag(_tags.TACET_COLORING, command)
-    _scoping.tag(_scoping.function_name(_frame()), command)
-    command_ = _scoping.new(command, measures=measures)
-    assert isinstance(command_, _overrides.OverrideCommand)
-    return command_
-
-
-def tag_selection(selection, tag):
-    """
-    Tags selection.
-    """
-    assert isinstance(tag, abjad.Tag), repr(tag)
-    # TODO: tag attachments
-    for component in abjad.iterate.components(selection):
-        component._tag = tag

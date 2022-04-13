@@ -7,14 +7,16 @@ from inspect import currentframe as _frame
 
 import abjad
 
-from . import scoping as _scoping
+from . import command as _command
 from . import select as _select
 from . import tags as _tags
+from . import treat as _treat
+from . import tweaks as _tweaks
 from . import typings as _typings
 
 
 @dataclasses.dataclass
-class SpannerIndicatorCommand(_scoping.Command):
+class SpannerIndicatorCommand(_command.Command):
     """
     Spanner indicator command.
     """
@@ -28,11 +30,11 @@ class SpannerIndicatorCommand(_scoping.Command):
     tweaks: tuple[_typings.IndexedTweak, ...] = ()
 
     def __post_init__(self):
-        _scoping.Command.__post_init__(self)
+        _command.Command.__post_init__(self)
         self.detach_first = bool(self.detach_first)
         self.left_broken = bool(self.left_broken)
         self.right_broken = bool(self.right_broken)
-        _scoping.validate_indexed_tweaks(self.tweaks)
+        _tweaks.validate_indexed_tweaks(self.tweaks)
 
     def _call(self, argument=None):
         if argument is None:
@@ -46,14 +48,14 @@ class SpannerIndicatorCommand(_scoping.Command):
             if self.detach_first:
                 for leaf in abjad.iterate.leaves(argument, grace=False):
                     abjad.detach(type(start_indicator), leaf)
-            start_indicator = _scoping.bundle_tweaks(start_indicator, self.tweaks)
+            start_indicator = _tweaks.bundle_tweaks(start_indicator, self.tweaks)
             first_leaf = abjad.select.leaf(argument, 0)
             if self.left_broken:
                 self._attach_indicator(
                     start_indicator,
                     first_leaf,
                     deactivate=self.deactivate,
-                    tag=_scoping.function_name(_frame(), self, n=1)
+                    tag=_tags.function_name(_frame(), self, n=1)
                     .append(_tags.SPANNER_START)
                     .append(_tags.LEFT_BROKEN),
                 )
@@ -62,7 +64,7 @@ class SpannerIndicatorCommand(_scoping.Command):
                     start_indicator,
                     first_leaf,
                     deactivate=self.deactivate,
-                    tag=_scoping.function_name(_frame(), self, n=2).append(
+                    tag=_tags.function_name(_frame(), self, n=2).append(
                         _tags.SPANNER_START
                     ),
                 )
@@ -77,7 +79,7 @@ class SpannerIndicatorCommand(_scoping.Command):
                     stop_indicator,
                     final_leaf,
                     deactivate=self.deactivate,
-                    tag=_scoping.function_name(_frame(), self, n=3)
+                    tag=_tags.function_name(_frame(), self, n=3)
                     .append(_tags.SPANNER_STOP)
                     .append(_tags.RIGHT_BROKEN),
                 )
@@ -86,14 +88,14 @@ class SpannerIndicatorCommand(_scoping.Command):
                     stop_indicator,
                     final_leaf,
                     deactivate=self.deactivate,
-                    tag=_scoping.function_name(_frame(), self, n=4).append(
+                    tag=_tags.function_name(_frame(), self, n=4).append(
                         _tags.SPANNER_STOP
                     ),
                 )
 
     def _attach_indicator(self, indicator, leaf, deactivate=None, tag=None):
         assert isinstance(tag, abjad.Tag), repr(tag)
-        reapplied = _scoping.remove_reapplied_wrappers(leaf, indicator)
+        reapplied = _treat.remove_reapplied_wrappers(leaf, indicator)
         tag_ = self.tag.append(tag)
         wrapper = abjad.attach(
             indicator,
@@ -103,11 +105,9 @@ class SpannerIndicatorCommand(_scoping.Command):
             tag=tag_,
             wrapper=True,
         )
-        if _scoping.compare_persistent_indicators(indicator, reapplied):
+        if _treat.compare_persistent_indicators(indicator, reapplied):
             status = "redundant"
-            _scoping.treat_persistent_wrapper(
-                self.runtime["manifests"], wrapper, status
-            )
+            _treat.treat_persistent_wrapper(self.runtime["manifests"], wrapper, status)
 
 
 def beam(
@@ -207,7 +207,7 @@ def beam(
         selector=selector,
         start_indicator=start_beam,
         stop_indicator=stop_beam,
-        tags=[_scoping.function_name(_frame())],
+        tags=[_tags.function_name(_frame())],
         tweaks=tweaks,
     )
 
@@ -300,7 +300,7 @@ def ottava(
         selector=selector,
         start_indicator=start_ottava,
         stop_indicator=stop_ottava,
-        tags=[_scoping.function_name(_frame())],
+        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -390,7 +390,7 @@ def ottava_bassa(
         selector=selector,
         start_indicator=start_ottava,
         stop_indicator=stop_ottava,
-        tags=[_scoping.function_name(_frame())],
+        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -492,7 +492,7 @@ def slur(
         selector=selector,
         start_indicator=start_slur_,
         stop_indicator=stop_slur_,
-        tags=[_scoping.function_name(_frame())],
+        tags=[_tags.function_name(_frame())],
         tweaks=tweaks,
     )
 
@@ -588,7 +588,7 @@ def sustain_pedal(
         selector=selector,
         start_indicator=start_piano_pedal,
         stop_indicator=stop_piano_pedal,
-        tags=[_scoping.function_name(_frame())],
+        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -874,6 +874,6 @@ def trill_spanner(
         selector=selector,
         start_indicator=start_trill_span_,
         stop_indicator=stop_trill_span,
-        tags=[_scoping.function_name(_frame())],
+        tags=[_tags.function_name(_frame())],
         tweaks=tweaks,
     )

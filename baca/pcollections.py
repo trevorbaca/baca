@@ -1314,7 +1314,7 @@ def bass_to_octave(collection, n=4):
 
     Returns new collection.
     """
-    from .commandclasses import RegisterToOctaveCommand
+    from .commands import RegisterToOctaveCommand
 
     # TODO: remove reference to RegisterToOctaveCommand;
     #       implement as segment-only operation
@@ -1403,7 +1403,7 @@ def center_to_octave(collection, n=4):
 
     Returns new collection.
     """
-    from .commandclasses import RegisterToOctaveCommand
+    from .commands import RegisterToOctaveCommand
 
     # TODO: remove reference to RegisterToOctaveCommand;
     #       implement as segment-only operation
@@ -2505,7 +2505,7 @@ def soprano_to_octave(collection, n=4):
 
     Returns new segment.
     """
-    from .commandclasses import RegisterToOctaveCommand
+    from .commands import RegisterToOctaveCommand
 
     # TODO: remove reference to RegisterToOctaveCommand;
     #       implement as segment-only operation

@@ -27,9 +27,8 @@ from inspect import currentframe as _frame
 
 import abjad
 
-from . import commandclasses as _commandclasses
+from . import commands as _commands
 from . import indicators as _indicators
-from . import scoping as _scoping
 from . import select as _select
 from . import tags as _tags
 
@@ -122,7 +121,7 @@ class SpacingSpecifier:
             abjad.attach(
                 spacing_section,
                 skip,
-                tag=tag.append(_scoping.function_name(_frame(), self, n=1)),
+                tag=tag.append(_tags.function_name(_frame(), self, n=1)),
             )
             if eol_adjusted:
                 multiplier = magic_lilypond_eol_adjustment
@@ -141,7 +140,7 @@ class SpacingSpecifier:
                     skip,
                     context="GlobalSkips",
                     deactivate=True,
-                    tag=tag.append(_scoping.function_name(_frame(), self, n=2)),
+                    tag=tag.append(_tags.function_name(_frame(), self, n=2)),
                 )
             if 0 < measure_index:
                 tag = _tags.SPACING
@@ -151,7 +150,7 @@ class SpacingSpecifier:
                     skip,
                     context="GlobalSkips",
                     deactivate=True,
-                    tag=tag.append(_scoping.function_name(_frame(), self, n=3)),
+                    tag=tag.append(_tags.function_name(_frame(), self, n=3)),
                 )
 
 
@@ -218,12 +217,12 @@ def breaks(*page_specifiers):
                 literal = abjad.LilyPondLiteral(r"\pageBreak")
             else:
                 literal = abjad.LilyPondLiteral(r"\break")
-            command = _commandclasses.IndicatorCommand(
+            command = _commands.IndicatorCommand(
                 indicators=[literal], selector=selector
             )
             alignment_distances = abjad.sequence.flatten(alignment_distances, depth=-1)
             lbsd = LBSD(alignment_distances=alignment_distances, y_offset=y_offset)
-            lbsd_command = _commandclasses.IndicatorCommand(
+            lbsd_command = _commands.IndicatorCommand(
                 indicators=[lbsd], selector=selector
             )
             commands[measure_number] = [command, lbsd_command]

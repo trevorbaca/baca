@@ -16,13 +16,12 @@ from .accumulator import (
     CommandAccumulator,
     segment_accumulation_defaults,
 )
-from .commandclasses import *
+from .command import *
 from .commands import *
 from .constellation import *
 from .cursor import Cursor
 from .docs import global_context_string
 from .figures import *
-from .indicatorcommands import *
 from .indicators import *
 from .interpret import (
     interpreter,
@@ -44,7 +43,7 @@ from .pcollections import (
 )
 from .piecewise import *
 from .rhythmcommands import *
-from .scoping import *
+from .scope import *
 from .select import *
 from .spanners import *
 
