@@ -3121,6 +3121,17 @@ def interpreter(
         _label_measure_numbers(first_measure_number, global_skips)
         _label_stage_numbers(global_skips, stage_markup)
         _label_moment_numbers(global_skips, moment_markup)
+        offset_to_measure_number = _populate_offset_to_measure_number(
+            first_measure_number,
+            global_skips,
+        )
+        if spacing is not None:
+            _apply_spacing(
+                page_layout_profile,
+                score,
+                spacing,
+                do_not_append_phantom_measure=do_not_append_phantom_measure,
+            )
     # _print_timing("Initialization", timer, print_timing=print_timing)
     with abjad.Timer() as timer:
         measure_count = len(time_signatures)
@@ -3143,12 +3154,6 @@ def interpreter(
         "Rhythm commands", timer, print_timing=print_timing, suffix=command_count
     )
     with abjad.Timer() as timer:
-        offset_to_measure_number = _populate_offset_to_measure_number(
-            first_measure_number,
-            global_skips,
-        )
-        _extend_beams(score)
-        _attach_sounds_during(score)
         if first_segment:
             _attach_first_segment_default_indicators(
                 manifests,
@@ -3166,13 +3171,6 @@ def interpreter(
                 previous_persistent_indicators,
                 score,
             )
-        if spacing is not None:
-            _apply_spacing(
-                page_layout_profile,
-                score,
-                spacing,
-                do_not_append_phantom_measure=do_not_append_phantom_measure,
-            )
     # _print_timing("Cleanup", timer, print_timing=print_timing)
     with abjad.Timer() as timer:
         with abjad.ForbidUpdate(component=score, update_on_exit=True):
@@ -3189,6 +3187,8 @@ def interpreter(
                 score,
                 voice_metadata,
             )
+        _extend_beams(score)
+        _attach_sounds_during(score)
     _print_timing(
         "Other commands", timer, print_timing=print_timing, suffix=command_count
     )
