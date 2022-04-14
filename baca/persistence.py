@@ -72,13 +72,25 @@ r"""
                     }
                     \context Voice = "Music_Voice"
                     {
-                        \clef "treble"
-                        \once \override Staff.Clef.color = #(x11-color 'DarkViolet)
-                        %@% \override Staff.Clef.color = ##f
-                        \set Staff.forceClef = ##t
-                        R1 * 3/8
-                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                        \override Staff.Clef.color = #(x11-color 'violet)
+                        <<
+                            \context Voice = "Music_Voice"
+                            {
+                                \abjad-invisible-music-coloring
+                                %@% \abjad-invisible-music
+                                \clef "treble"
+                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet)
+                                %@% \override Staff.Clef.color = ##f
+                                \set Staff.forceClef = ##t
+                                b'1 * 3/8
+                                %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                                \override Staff.Clef.color = #(x11-color 'violet)
+                            }
+                            \context Voice = "Rest_Voice"
+                            {
+                                R1 * 3/8
+                                %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                            }
+                        >>
                         R1 * 3/8
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     }
@@ -153,13 +165,25 @@ r"""
                     }
                     \context Voice = "Music_Voice"
                     {
-                        \clef "treble"
-                        \once \override Staff.Clef.color = #(x11-color 'blue)
-                        %@% \override Staff.Clef.color = ##f
-                        \set Staff.forceClef = ##t
-                        R1 * 3/8
-                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                        \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
+                        <<
+                            \context Voice = "Music_Voice"
+                            {
+                                \abjad-invisible-music-coloring
+                                %@% \abjad-invisible-music
+                                \clef "treble"
+                                \once \override Staff.Clef.color = #(x11-color 'blue)
+                                %@% \override Staff.Clef.color = ##f
+                                \set Staff.forceClef = ##t
+                                b'1 * 3/8
+                                %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
+                            }
+                            \context Voice = "Rest_Voice"
+                            {
+                                R1 * 3/8
+                                %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                            }
+                        >>
                         R1 * 3/8
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     }
@@ -243,13 +267,25 @@ r"""
                     }
                     \context Voice = "Music_Voice"
                     {
-                        \clef "alto"
-                        \once \override Staff.Clef.color = #(x11-color 'blue)
-                        %@% \override Staff.Clef.color = ##f
-                        \set Staff.forceClef = ##t
-                        R1 * 3/8
-                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                        \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
+                        <<
+                            \context Voice = "Music_Voice"
+                            {
+                                \abjad-invisible-music-coloring
+                                %@% \abjad-invisible-music
+                                \clef "alto"
+                                \once \override Staff.Clef.color = #(x11-color 'blue)
+                                %@% \override Staff.Clef.color = ##f
+                                \set Staff.forceClef = ##t
+                                c'1 * 3/8
+                                %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
+                            }
+                            \context Voice = "Rest_Voice"
+                            {
+                                R1 * 3/8
+                                %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                            }
+                        >>
                         R1 * 3/8
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     }
@@ -332,13 +368,25 @@ r"""
                     }
                     \context Voice = "Music_Voice"
                     {
-                        \clef "treble"
-                        \once \override Staff.Clef.color = #(x11-color 'green4)
-                        %@% \override Staff.Clef.color = ##f
-                        \set Staff.forceClef = ##t
-                        R1 * 3/8
-                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                        \override Staff.Clef.color = #(x11-color 'OliveDrab)
+                        <<
+                            \context Voice = "Music_Voice"
+                            {
+                                \abjad-invisible-music-coloring
+                                %@% \abjad-invisible-music
+                                \clef "treble"
+                                \once \override Staff.Clef.color = #(x11-color 'green4)
+                                %@% \override Staff.Clef.color = ##f
+                                \set Staff.forceClef = ##t
+                                b'1 * 3/8
+                                %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                                \override Staff.Clef.color = #(x11-color 'OliveDrab)
+                            }
+                            \context Voice = "Rest_Voice"
+                            {
+                                R1 * 3/8
+                                %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                            }
+                        >>
                         R1 * 3/8
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     }
@@ -417,13 +465,25 @@ r"""
                     }
                     \context Voice = "Music_Voice"
                     {
-                        \clef "treble"
-                        \once \override Staff.Clef.color = #(x11-color 'blue)
-                        %@% \override Staff.Clef.color = ##f
-                        \set Staff.forceClef = ##t
-                        R1 * 3/8
-                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                        \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
+                        <<
+                            \context Voice = "Music_Voice"
+                            {
+                                \abjad-invisible-music-coloring
+                                %@% \abjad-invisible-music
+                                \clef "treble"
+                                \once \override Staff.Clef.color = #(x11-color 'blue)
+                                %@% \override Staff.Clef.color = ##f
+                                \set Staff.forceClef = ##t
+                                b'1 * 3/8
+                                %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
+                            }
+                            \context Voice = "Rest_Voice"
+                            {
+                                R1 * 3/8
+                                %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                            }
+                        >>
                         \clef "treble"
                         \once \override Staff.Clef.color = #(x11-color 'DeepPink1)
                         %@% \override Staff.Clef.color = ##f
@@ -515,13 +575,25 @@ r"""
                     }
                     \context Voice = "Music_Voice"
                     {
-                        \clef "treble"
-                        \once \override Staff.Clef.color = #(x11-color 'DeepPink1)
-                        %@% \override Staff.Clef.color = ##f
-                        \set Staff.forceClef = ##t
-                        R1 * 3/8
-                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                        \override Staff.Clef.color = #(x11-color 'DeepPink4)
+                        <<
+                            \context Voice = "Music_Voice"
+                            {
+                                \abjad-invisible-music-coloring
+                                %@% \abjad-invisible-music
+                                \clef "treble"
+                                \once \override Staff.Clef.color = #(x11-color 'DeepPink1)
+                                %@% \override Staff.Clef.color = ##f
+                                \set Staff.forceClef = ##t
+                                b'1 * 3/8
+                                %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                                \override Staff.Clef.color = #(x11-color 'DeepPink4)
+                            }
+                            \context Voice = "Rest_Voice"
+                            {
+                                R1 * 3/8
+                                %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                            }
+                        >>
                         R1 * 3/8
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     }

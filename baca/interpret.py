@@ -5,7 +5,6 @@ import importlib
 from inspect import currentframe as _frame
 
 import abjad
-from abjadext import rmakers
 
 from . import command as _command
 from . import commands as _commands
@@ -951,21 +950,21 @@ def _call_rhythm_commands(
         time_signatures,
     )
     command_count = 0
-    tag = _tags.function_name(_frame())
-    if skips_instead_of_rests:
-        prototype = abjad.Skip
-    else:
-        prototype = abjad.MultimeasureRest
-    silence_maker = rmakers.multiplied_duration(prototype, tag=tag)
-    segment_duration = None
+    section_duration = None
     for voice in abjad.select.components(score, abjad.Voice):
         assert not len(voice), repr(voice)
         voice_metadata_ = voice_metadata.get(voice.name, {})
         commands_ = _voice_to_rhythm_commands(commands, voice)
+        timespans = []
         if not commands_:
-            selection = silence_maker(time_signatures)
-            assert isinstance(selection, list), repr(selection)
-            voice.extend(selection)
+            components, section_duration = _intercalate_rests(
+                skips_instead_of_rests,
+                time_signatures,
+                timespans,
+                voice.name,
+            )
+            components = abjad.sequence.flatten(components)
+            voice.extend(components)
             if append_phantom_measure:
                 container = _make_multimeasure_rest_container(
                     voice.name,
@@ -976,18 +975,15 @@ def _call_rhythm_commands(
                 )
                 voice.append(container)
             continue
-        timespans = []
         for command in commands_:
-            if command.scope.measures is None:
-                raise Exception(command)
+            assert command.scope.measures, repr(command)
             measures = command.scope.measures
-            result = _get_measure_time_signatures(
+            start_offset, time_signatures_ = _get_measure_time_signatures(
                 measure_count,
                 score,
                 time_signatures,
                 *measures,
             )
-            start_offset, time_signatures_ = result
             previous_segment_voice_metadata = _get_previous_segment_voice_metadata(
                 previous_persist, voice.name
             )
@@ -995,15 +991,15 @@ def _call_rhythm_commands(
                 manifests=manifests,
                 previous_segment_voice_metadata=previous_segment_voice_metadata,
             )
-            selection = None
+            components = None
             try:
-                selection = command._make_selection(time_signatures_, runtime)
+                components = command._make_components(time_signatures_, runtime)
             except Exception:
                 print(f"Interpreting ...\n\n{command}\n")
                 raise
             if attach_rhythm_annotation_spanners:
-                _attach_rhythm_annotation_spanner(command, selection)
-            timespan = abjad.Timespan(start_offset=start_offset, annotation=selection)
+                _attach_rhythm_annotation_spanner(command, components)
+            timespan = abjad.Timespan(start_offset=start_offset, annotation=components)
             timespans.append(timespan)
             if command.persist and command.state:
                 state = command.state
@@ -1015,7 +1011,7 @@ def _call_rhythm_commands(
             voice_metadata[voice.name] = voice_metadata_
         timespans.sort()
         _assert_nonoverlapping_rhythms(timespans, voice.name)
-        selections, segment_duration = _intercalate_silences(
+        components, section_duration = _intercalate_rests(
             skips_instead_of_rests,
             time_signatures,
             timespans,
@@ -1023,7 +1019,7 @@ def _call_rhythm_commands(
         )
         if append_phantom_measure:
             suppress_note = False
-            final_leaf = abjad.get.leaf(selections, -1)
+            final_leaf = abjad.get.leaf(components, -1)
             if isinstance(final_leaf, abjad.MultimeasureRest):
                 suppress_note = True
             container = _make_multimeasure_rest_container(
@@ -1033,11 +1029,10 @@ def _call_rhythm_commands(
                 phantom=True,
                 suppress_note=suppress_note,
             )
-            selection = [container]
-            selections.append(selection)
-        components = abjad.sequence.flatten(selections, depth=-1)
+            components.append(container)
+        components = abjad.sequence.flatten(components, depth=-1)
         voice.extend(components)
-    return command_count, segment_duration
+    return command_count, section_duration
 
 
 def _check_all_music_in_part_containers(score):
@@ -1719,47 +1714,47 @@ def _handle_mutator(score, cache, command):
     return cache
 
 
-def _intercalate_silences(
+def _intercalate_rests(
     skips_instead_of_rests,
     time_signatures,
     timespans,
     voice_name,
 ):
-    selections = []
+    lists = []
     durations = [_.duration for _ in time_signatures]
     measure_start_offsets = abjad.math.cumulative_sums(durations)
-    segment_duration = measure_start_offsets[-1]
+    section_duration = measure_start_offsets[-1]
     previous_stop_offset = abjad.Offset(0)
     for timespan in timespans:
         start_offset = timespan.start_offset
         if start_offset < previous_stop_offset:
             raise Exception("overlapping offsets: {timespan!r}.")
         if previous_stop_offset < start_offset:
-            selection = _make_measure_silences(
+            components = _make_measure_silences(
                 measure_start_offsets,
                 skips_instead_of_rests,
                 previous_stop_offset,
                 start_offset,
                 voice_name,
             )
-            selections.append(selection)
-        selection = timespan.annotation
-        assert isinstance(selection, list), repr(selection)
-        selections.append(selection)
-        duration = abjad.get.duration(selection)
+            lists.append(components)
+        components = timespan.annotation
+        assert isinstance(components, list), repr(timespan)
+        lists.append(components)
+        duration = abjad.get.duration(components)
         previous_stop_offset = start_offset + duration
-    if previous_stop_offset < segment_duration:
-        selection = _make_measure_silences(
+    if previous_stop_offset < section_duration:
+        components = _make_measure_silences(
             measure_start_offsets,
             skips_instead_of_rests,
             previous_stop_offset,
-            segment_duration,
+            section_duration,
             voice_name,
         )
-        assert isinstance(selection, list)
-        selections.append(selection)
-    assert all(isinstance(_, list) for _ in selections)
-    return selections, segment_duration
+        assert isinstance(components, list)
+        lists.append(components)
+    assert all(isinstance(_, list) for _ in lists)
+    return lists, section_duration
 
 
 def _label_clock_time(
@@ -3136,7 +3131,7 @@ def interpreter(
     with abjad.Timer() as timer:
         measure_count = len(time_signatures)
         with abjad.ForbidUpdate(component=score, update_on_exit=True):
-            command_count, segment_duration = _call_rhythm_commands(
+            command_count, section_duration = _call_rhythm_commands(
                 always_make_global_rests,
                 attach_rhythm_annotation_spanners,
                 commands,

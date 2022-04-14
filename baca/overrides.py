@@ -1338,13 +1338,25 @@ def mmrest_color(
                     }
                     \context Voice = "Music_Voice"
                     {
+                        <<
+                            \context Voice = "Music_Voice"
+                            {
+                                \abjad-invisible-music-coloring
+                                %@% \abjad-invisible-music
+                                b'1 * 1/2
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                            }
+                            \context Voice = "Rest_Voice"
+                            {
+                                R1 * 1/2
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                            }
+                        >>
                         \override MultiMeasureRest.color = #(x11-color 'DarkOrchid)
-                        R1 * 4/8
-                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                         R1 * 3/8
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                        R1 * 4/8
-                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
+                        R1 * 1/2
+                        %@% ^ \baca-duration-multiplier-markup #"1" #"2"
                         R1 * 3/8
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                         \revert MultiMeasureRest.color
@@ -1437,14 +1449,26 @@ def mmrest_text_color(
                     }
                     \context Voice = "Music_Voice"
                     {
+                        <<
+                            \context Voice = "Music_Voice"
+                            {
+                                \abjad-invisible-music-coloring
+                                %@% \abjad-invisible-music
+                                b'1 * 1/2
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                            }
+                            \context Voice = "Rest_Voice"
+                            {
+                                R1 * 1/2
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                            }
+                        >>
                         \override MultiMeasureRestText.color = #red
-                        R1 * 4/8
-                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                         R1 * 3/8
-                        ^ \baca-boxed-markup still
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                        R1 * 4/8
-                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
+                        R1 * 1/2
+                        ^ \baca-boxed-markup still
+                        %@% ^ \baca-duration-multiplier-markup #"1" #"2"
                         R1 * 3/8
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                         \revert MultiMeasureRestText.color
@@ -1556,14 +1580,26 @@ def mmrest_text_extra_offset(
                     }
                     \context Voice = "Music_Voice"
                     {
+                        <<
+                            \context Voice = "Music_Voice"
+                            {
+                                \abjad-invisible-music-coloring
+                                %@% \abjad-invisible-music
+                                b'1 * 1/2
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                            }
+                            \context Voice = "Rest_Voice"
+                            {
+                                R1 * 1/2
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                            }
+                        >>
                         \override MultiMeasureRestText.extra-offset = #'(0 . 2)
-                        R1 * 4/8
-                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                         R1 * 3/8
-                        ^ \baca-boxed-markup still
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                        R1 * 4/8
-                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
+                        R1 * 1/2
+                        ^ \baca-boxed-markup still
+                        %@% ^ \baca-duration-multiplier-markup #"1" #"2"
                         R1 * 3/8
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                         \revert MultiMeasureRestText.extra-offset
@@ -1640,14 +1676,26 @@ def mmrest_text_padding(
                     }
                     \context Voice = "Music_Voice"
                     {
+                        <<
+                            \context Voice = "Music_Voice"
+                            {
+                                \abjad-invisible-music-coloring
+                                %@% \abjad-invisible-music
+                                b'1 * 1/2
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                            }
+                            \context Voice = "Rest_Voice"
+                            {
+                                R1 * 1/2
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                            }
+                        >>
                         \override MultiMeasureRestText.padding = 2
-                        R1 * 4/8
-                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                         R1 * 3/8
-                        ^ \baca-boxed-markup still
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                        R1 * 4/8
-                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
+                        R1 * 1/2
+                        ^ \baca-boxed-markup still
+                        %@% ^ \baca-duration-multiplier-markup #"1" #"2"
                         R1 * 3/8
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                         \revert MultiMeasureRestText.padding
@@ -1723,14 +1771,26 @@ def mmrest_text_parent_center(
                     }
                     \context Voice = "Music_Voice"
                     {
+                        <<
+                            \context Voice = "Music_Voice"
+                            {
+                                \abjad-invisible-music-coloring
+                                %@% \abjad-invisible-music
+                                b'1 * 1/2
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                            }
+                            \context Voice = "Rest_Voice"
+                            {
+                                R1 * 1/2
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                            }
+                        >>
                         \override MultiMeasureRestText.parent-alignment-X = 0
-                        R1 * 4/8
-                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                         R1 * 3/8
-                        ^ \baca-boxed-markup still
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                        R1 * 4/8
-                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
+                        R1 * 1/2
+                        ^ \baca-boxed-markup still
+                        %@% ^ \baca-duration-multiplier-markup #"1" #"2"
                         R1 * 3/8
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                         \revert MultiMeasureRestText.parent-alignment-X
@@ -1807,14 +1867,26 @@ def mmrest_text_staff_padding(
                     }
                     \context Voice = "Music_Voice"
                     {
+                        <<
+                            \context Voice = "Music_Voice"
+                            {
+                                \abjad-invisible-music-coloring
+                                %@% \abjad-invisible-music
+                                b'1 * 1/2
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                            }
+                            \context Voice = "Rest_Voice"
+                            {
+                                R1 * 1/2
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                            }
+                        >>
                         \override MultiMeasureRestText.staff-padding = 2
-                        R1 * 4/8
-                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                         R1 * 3/8
-                        ^ \baca-boxed-markup still
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                        R1 * 4/8
-                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
+                        R1 * 1/2
+                        ^ \baca-boxed-markup still
+                        %@% ^ \baca-duration-multiplier-markup #"1" #"2"
                         R1 * 3/8
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                         \revert MultiMeasureRestText.staff-padding

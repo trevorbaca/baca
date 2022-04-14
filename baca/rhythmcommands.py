@@ -282,14 +282,11 @@ class RhythmCommand(_command.Command):
         message += f"\n    {rhythm_maker!r}"
         raise Exception(message)
 
-    def _make_selection(
+    def _make_components(
         self,
         time_signatures,
         runtime=None,
     ):
-        """
-        Calls ``RhythmCommand`` on ``time_signatures``.
-        """
         rhythm_maker = self.rhythm_maker
         if isinstance(rhythm_maker, list):
             selection = rhythm_maker
