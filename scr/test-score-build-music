@@ -5,19 +5,17 @@ import sys
 
 import baca
 
-_colors = baca.const.colors
-
 
 def _make_fail_string(string):
-    return f"{_colors.red}FAIL: {string} ...{_colors.end}"
+    return f"{baca.colors.red}FAIL: {string} ...{baca.colors.end}"
 
 
 def _make_file_handling_string(string):
-    return f"{_colors.yellow}{string} ...{_colors.end}"
+    return f"{baca.colors.yellow}{string} ...{baca.colors.end}"
 
 
 def _make_pass_string(string):
-    return f"{_colors.green_bold}PASS: {string} ...{_colors.end}"
+    return f"{baca.colors.green_bold}PASS: {string} ...{baca.colors.end}"
 
 
 def _get_builds():

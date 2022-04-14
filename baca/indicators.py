@@ -6,7 +6,7 @@ import typing
 
 import abjad
 
-from . import const as _const
+from .enums import enums as _enums
 
 
 # TODO: frozen=True
@@ -232,7 +232,7 @@ class BarExtent:
             return True
         empty_prototype = (abjad.MultimeasureRest, abjad.Skip)
         siblings = staff_parent[:-1]
-        tag = _const.REMOVE_ALL_EMPTY_STAVES
+        tag = _enums.REMOVE_ALL_EMPTY_STAVES
         for sibling in siblings:
             if not abjad.get.annotation(sibling, tag):
                 return True
@@ -258,7 +258,7 @@ class BarExtent:
             return True
         empty_prototype = (abjad.MultimeasureRest, abjad.Skip)
         siblings = staff_parent[1:]
-        tag = _const.REMOVE_ALL_EMPTY_STAVES
+        tag = _enums.REMOVE_ALL_EMPTY_STAVES
         for sibling in siblings:
             if not abjad.get.annotation(sibling, tag):
                 return True

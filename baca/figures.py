@@ -11,11 +11,11 @@ import abjad
 from abjadext import rmakers
 
 from . import commands as _commands
-from . import const as _const
 from . import cursor as _cursor
 from . import rhythmcommands as _rhythmcommands
 from . import select as _select
 from . import tags as _tags
+from .enums import enums as _enums
 
 
 class Stack:
@@ -1735,7 +1735,7 @@ class Imbrication:
             pleaves = _select.pleaves(container)
             assert isinstance(pleaves, list)
             for pleaf in pleaves:
-                abjad.attach(_const.ALLOW_OCTAVE, pleaf)
+                abjad.attach(_enums.ALLOW_OCTAVE, pleaf)
         return {self.voice_name: selection}
 
     ### PRIVATE METHODS ###
@@ -6795,7 +6795,7 @@ def extend_beam(
 
     """
     return _commands.IndicatorCommand(
-        indicators=[_const.RIGHT_BROKEN_BEAM], selector=selector
+        indicators=[_enums.RIGHT_BROKEN_BEAM], selector=selector
     )
 
 

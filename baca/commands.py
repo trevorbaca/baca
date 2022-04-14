@@ -12,7 +12,6 @@ from inspect import currentframe as _frame
 import abjad
 
 from . import command as _command
-from . import const as _const
 from . import indicators as _indicators
 from . import overrides as _overrides
 from . import parts as _parts
@@ -23,6 +22,7 @@ from . import tags as _tags
 from . import treat as _treat
 from . import tweaks as _tweaks
 from . import typings as _typings
+from .enums import enums as _enums
 
 
 def _is_rest(argument):
@@ -839,15 +839,15 @@ class GlobalFermataCommand(_command.Command):
                 leaf,
                 tag=self.tag.append(_tags.function_name(_frame(), self, n=2)),
             )
-            tag = abjad.Tag(_const.FERMATA_MEASURE)
+            tag = abjad.Tag(_enums.FERMATA_MEASURE.name)
             tag = tag.append(self.tag)
             tag = tag.append(_tags.function_name(_frame(), self, n=3))
             abjad.attach(
-                _const.FERMATA_MEASURE,
+                _enums.FERMATA_MEASURE,
                 leaf,
                 tag=_tags.FERMATA_MEASURE,
             )
-            abjad.annotate(leaf, _const.FERMATA_DURATION, fermata_duration)
+            abjad.annotate(leaf, _enums.FERMATA_DURATION, fermata_duration)
 
 
 def _token_to_indicators(token):
@@ -1860,8 +1860,8 @@ class ClusterCommand(_command.Command):
                 abjad.attach(wrapper, chord, direction=wrapper.direction)
             abjad.mutate.replace(pleaf, chord)
             abjad.attach(key_cluster, chord, direction=self.direction)
-            abjad.attach(_const.ALLOW_REPEAT_PITCH, chord)
-            abjad.detach(_const.NOT_YET_PITCHED, chord)
+            abjad.attach(_enums.ALLOW_REPEAT_PITCH, chord)
+            abjad.detach(_enums.NOT_YET_PITCHED, chord)
 
     def _make_pitches(self, start_pitch, width):
         pitches = [start_pitch]
@@ -2400,11 +2400,11 @@ def _set_lt_pitch(
     set_chord_pitches_equal=False,
 ):
     new_lt = None
-    already_pitched = _const.ALREADY_PITCHED
+    already_pitched = _enums.ALREADY_PITCHED
     for leaf in lt:
-        abjad.detach(_const.NOT_YET_PITCHED, leaf)
+        abjad.detach(_enums.NOT_YET_PITCHED, leaf)
         if mock is True:
-            abjad.attach(_const.MOCK, leaf)
+            abjad.attach(_enums.MOCK, leaf)
         if allow_repitch:
             continue
         if abjad.get.has_indicator(leaf, already_pitched):
@@ -2781,16 +2781,16 @@ class PitchCommand(_command.Command):
                 plt = new_plt
             if self.allow_octaves:
                 for pleaf in plt:
-                    abjad.attach(_const.ALLOW_OCTAVE, pleaf)
+                    abjad.attach(_enums.ALLOW_OCTAVE, pleaf)
             if self.allow_out_of_range:
                 for pleaf in plt:
-                    abjad.attach(_const.ALLOW_OUT_OF_RANGE, pleaf)
+                    abjad.attach(_enums.ALLOW_OUT_OF_RANGE, pleaf)
             if self.allow_repeats:
                 for pleaf in plt:
-                    abjad.attach(_const.ALLOW_REPEAT_PITCH, pleaf)
+                    abjad.attach(_enums.ALLOW_REPEAT_PITCH, pleaf)
             if self.do_not_transpose is True:
                 for pleaf in plt:
-                    abjad.attach(_const.DO_NOT_TRANSPOSE, pleaf)
+                    abjad.attach(_enums.DO_NOT_TRANSPOSE, pleaf)
             pitches_consumed += 1
         self._state = {}
         pitches_consumed += previous_pitches_consumed
@@ -2815,7 +2815,7 @@ class PitchCommand(_command.Command):
         dictionary = self.runtime.get("previous_segment_voice_metadata", None)
         if not dictionary:
             return 0
-        dictionary = dictionary.get(_const.PITCH, None)
+        dictionary = dictionary.get(_enums.PITCH.name, None)
         if not dictionary:
             return 0
         if dictionary.get("name") != self.persist:
@@ -2827,7 +2827,7 @@ class PitchCommand(_command.Command):
         if self.ignore_incomplete:
             return pitches_consumed
         dictionary = self.runtime["previous_segment_voice_metadata"]
-        dictionary = dictionary.get(_const.RHYTHM, None)
+        dictionary = dictionary.get(_enums.RHYTHM.name, None)
         if dictionary:
             if dictionary.get("incomplete_final_note", False):
                 pitches_consumed -= 1
@@ -2844,7 +2844,7 @@ class PitchCommand(_command.Command):
             'PITCH'
 
         """
-        return _const.PITCH
+        return _enums.PITCH.name
 
     @property
     def state(self):
@@ -3055,7 +3055,7 @@ class RegisterCommand(_command.Command):
                     pleaf.written_pitches = pitches
                 else:
                     raise TypeError(pleaf)
-                abjad.detach(_const.NOT_YET_REGISTERED, pleaf)
+                abjad.detach(_enums.NOT_YET_REGISTERED, pleaf)
 
 
 @dataclasses.dataclass
@@ -4002,7 +4002,7 @@ class RegisterInterpolationCommand(_command.Command):
                     pleaf.written_pitches = written_pitches
                 else:
                     raise TypeError(pleaf)
-                abjad.detach(_const.NOT_YET_REGISTERED, pleaf)
+                abjad.detach(_enums.NOT_YET_REGISTERED, pleaf)
 
     def _get_registration(self, i, length):
         start_pitch = self.start_pitch.number
@@ -4497,7 +4497,7 @@ class RegisterToOctaveCommand(_command.Command):
         elif isinstance(leaf, abjad.Chord):
             pitches = [transposition(_) for _ in leaf.written_pitches]
             leaf.written_pitches = pitches
-        abjad.detach(_const.NOT_YET_REGISTERED, leaf)
+        abjad.detach(_enums.NOT_YET_REGISTERED, leaf)
 
 
 @dataclasses.dataclass
@@ -4614,12 +4614,12 @@ class StaffPositionCommand(_command.Command):
                     plt = new_lt
             plt_count += 1
             for pleaf in plt:
-                abjad.attach(_const.STAFF_POSITION, pleaf)
+                abjad.attach(_enums.STAFF_POSITION, pleaf)
                 if self.allow_out_of_range:
-                    abjad.attach(_const.ALLOW_OUT_OF_RANGE, pleaf)
+                    abjad.attach(_enums.ALLOW_OUT_OF_RANGE, pleaf)
                 if self.allow_repeats:
-                    abjad.attach(_const.ALLOW_REPEAT_PITCH, pleaf)
-                    abjad.attach(_const.DO_NOT_TRANSPOSE, pleaf)
+                    abjad.attach(_enums.ALLOW_REPEAT_PITCH, pleaf)
+                    abjad.attach(_enums.DO_NOT_TRANSPOSE, pleaf)
         if self.exact and plt_count != len(self.numbers):
             message = f"PLT count ({plt_count}) does not match"
             message += f" staff position count ({len(self.numbers)})."
@@ -4704,9 +4704,9 @@ class StaffPositionInterpolationCommand(_command.Command):
             new_lt = _set_lt_pitch(plt, pitch, allow_repitch=True, mock=self.mock)
             assert new_lt is None, repr(new_lt)
             for leaf in plt:
-                abjad.attach(_const.ALLOW_REPEAT_PITCH, leaf)
+                abjad.attach(_enums.ALLOW_REPEAT_PITCH, leaf)
                 if not self.pitches_instead_of_staff_positions:
-                    abjad.attach(_const.STAFF_POSITION, leaf)
+                    abjad.attach(_enums.STAFF_POSITION, leaf)
         if isinstance(self.start, abjad.NamedPitch):
             start_pitch = self.start
         else:
@@ -4735,7 +4735,7 @@ class StaffPositionInterpolationCommand(_command.Command):
 
 def bass_to_octave(
     n: int,
-    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
 ) -> RegisterToOctaveCommand:
     r"""
     Octave-transposes music.
@@ -4922,7 +4922,7 @@ def bass_to_octave(
 
 def center_to_octave(
     n: int,
-    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
 ) -> RegisterToOctaveCommand:
     r"""
     Octave-transposes music.
@@ -5108,7 +5108,7 @@ def center_to_octave(
 
 def clusters(
     widths: list[int],
-    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
     *,
     start_pitch: int | str | abjad.NamedPitch | None = None,
 ) -> ClusterCommand:
@@ -5121,7 +5121,7 @@ def clusters(
 def color_fingerings(
     numbers: list[int | float],
     *tweaks: _typings.IndexedTweak,
-    selector=lambda _: _select.pheads(_, exclude=_const.HIDDEN),
+    selector=lambda _: _select.pheads(_, exclude=_enums.HIDDEN),
 ) -> ColorFingeringCommand:
     """
     Adds color fingerings.
@@ -5131,7 +5131,7 @@ def color_fingerings(
 
 def deviation(
     deviations: list[int | float],
-    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
 ) -> MicrotoneDeviationCommand:
     """
     Sets microtone ``deviations``.
@@ -5141,7 +5141,7 @@ def deviation(
 
 def diatonic_clusters(
     widths: list[int],
-    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
 ) -> DiatonicClusterCommand:
     """
     Makes diatonic clusters with ``widths``.
@@ -5151,7 +5151,7 @@ def diatonic_clusters(
 
 def displacement(
     displacements: list[int],
-    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
 ) -> OctaveDisplacementCommand:
     r"""
     Octave-displaces ``selector`` output.
@@ -5292,7 +5292,7 @@ def displacement(
 
 
 def force_accidental(
-    selector=lambda _: _select.pleaf(_, 0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.pleaf(_, 0, exclude=_enums.HIDDEN),
 ) -> AccidentalAdjustmentCommand:
     r"""
     Forces accidental.
@@ -5369,7 +5369,7 @@ def force_accidental(
 def interpolate_pitches(
     start: int | str | abjad.NamedPitch,
     stop: int | str | abjad.NamedPitch,
-    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
     *,
     mock: bool = False,
 ) -> StaffPositionInterpolationCommand:
@@ -5537,7 +5537,7 @@ _interpolate_pitches_function = interpolate_pitches
 def interpolate_staff_positions(
     start: int | abjad.StaffPosition,
     stop: int | abjad.StaffPosition,
-    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
     *,
     mock: bool = False,
 ) -> StaffPositionInterpolationCommand:
@@ -5571,7 +5571,7 @@ def levine_multiphonic(n: int) -> abjad.Markup:
 def loop(
     items: typing.Sequence,
     intervals: typing.Sequence,
-    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
 ) -> PitchCommand:
     """
     Loops ``items`` at ``intervals``.
@@ -5582,7 +5582,7 @@ def loop(
 
 def natural_clusters(
     widths: typing.Sequence[int],
-    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
     *,
     start_pitch: int | str | abjad.NamedPitch | None = None,
 ) -> ClusterCommand:
@@ -5599,7 +5599,7 @@ def natural_clusters(
 
 def pitch(
     pitch,
-    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
     *,
     allow_out_of_range: bool = False,
     allow_repitch: bool = False,
@@ -5705,7 +5705,7 @@ _pitch_function = pitch
 
 def pitches(
     pitches,
-    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
     *,
     allow_octaves: bool = False,
     allow_repeats: bool = False,
@@ -5751,7 +5751,7 @@ def register(
     start: int,
     stop: int = None,
     *,
-    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
 ) -> RegisterCommand | RegisterInterpolationCommand:
     r"""
     Octave-transposes ``selector`` output.
@@ -6073,7 +6073,7 @@ def register(
 
 def soprano_to_octave(
     n: int,
-    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
 ) -> RegisterToOctaveCommand:
     r"""
     Octave-transposes music.
@@ -6258,7 +6258,7 @@ def soprano_to_octave(
 
 def staff_position(
     argument: int | list | abjad.StaffPosition,
-    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
     *,
     allow_out_of_range: bool = False,
     allow_repitch: bool = False,
@@ -6287,7 +6287,7 @@ _staff_position_function = staff_position
 
 def staff_positions(
     numbers,
-    selector=lambda _: _select.plts(_, exclude=_const.HIDDEN),
+    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
     *,
     allow_out_of_range: bool = False,
     allow_repeats: bool = False,
@@ -6310,7 +6310,7 @@ def staff_positions(
 
 
 def accent(
-    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ):
     r"""
     Attaches accent.
@@ -6395,7 +6395,7 @@ def accent(
 
 
 def alternate_bow_strokes(
-    selector=lambda _: _select.pheads(_, exclude=_const.HIDDEN),
+    selector=lambda _: _select.pheads(_, exclude=_enums.HIDDEN),
     *tweaks: abjad.Tweak,
     downbow_first: bool = True,
     full: bool = False,
@@ -6665,7 +6665,7 @@ def alternate_bow_strokes(
 
 
 def arpeggio(
-    selector=lambda _: _select.chead(_, 0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.chead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches arpeggio.
@@ -6753,7 +6753,7 @@ def arpeggio(
 
 def articulation(
     articulation: str,
-    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     """
     Attaches articulation.
@@ -6768,7 +6768,7 @@ def articulation(
 
 def articulations(
     articulations: list,
-    selector=lambda _: _select.pheads(_, exclude=_const.HIDDEN),
+    selector=lambda _: _select.pheads(_, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     """
     Attaches articulations.
@@ -6801,7 +6801,7 @@ _bar_line_function = bar_line
 
 
 def breathe(
-    selector=lambda _: _select.pleaf(_, -1, exclude=_const.HIDDEN),
+    selector=lambda _: _select.pleaf(_, -1, exclude=_enums.HIDDEN),
     *tweaks: abjad.Tweak,
 ) -> IndicatorCommand:
     """
@@ -6910,7 +6910,7 @@ def clef(
 
 
 def damp(
-    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
     *tweaks: abjad.Tweak,
 ) -> IndicatorCommand:
     """
@@ -6928,7 +6928,7 @@ def damp(
 
 
 def double_flageolet(
-    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     """
     Attaches double flageolet.
@@ -6941,7 +6941,7 @@ def double_flageolet(
 
 
 def double_staccato(
-    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches double-staccato.
@@ -7028,7 +7028,7 @@ def double_staccato(
 
 
 def down_arpeggio(
-    selector=lambda _: _select.chead(_, 0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.chead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches down-arpeggio.
@@ -7116,7 +7116,7 @@ def down_arpeggio(
 
 
 def down_bow(
-    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
     *tweaks: abjad.Tweak,
     full: bool = False,
 ) -> IndicatorCommand:
@@ -7285,7 +7285,7 @@ def down_bow(
 
 
 def espressivo(
-    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
     *tweaks: abjad.Tweak,
 ) -> IndicatorCommand:
     r"""
@@ -7460,7 +7460,7 @@ def fermata(
 
 
 def flageolet(
-    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches flageolet.
@@ -7545,7 +7545,7 @@ def flageolet(
 
 
 def hide_black_note_heads(
-    selector=lambda _: _select.leaves(_, exclude=_const.HIDDEN),
+    selector=lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches note-head stencil false to black note-heads.
@@ -7620,7 +7620,7 @@ def hide_black_note_heads(
 
 
 def laissez_vibrer(
-    selector=lambda _: _select.ptail(_, 0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.ptail(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches laissez vibrer.
@@ -7807,7 +7807,7 @@ def long_fermata(
 
 
 def marcato(
-    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches marcato.
@@ -8009,7 +8009,7 @@ def mark(
 
 
 def parenthesize(
-    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches LilyPond ``\parenthesize`` command.
@@ -8094,7 +8094,7 @@ def parenthesize(
 
 
 def quadruple_staccato(
-    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     """
     Attaches quadruple-staccato.
@@ -8310,7 +8310,7 @@ def short_fermata(
 
 
 def snap_pizzicato(
-    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     """
     Attaches snap pizzicato.
@@ -8323,7 +8323,7 @@ def snap_pizzicato(
 
 
 def staccatissimo(
-    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches staccatissimo.
@@ -8408,7 +8408,7 @@ def staccatissimo(
 
 
 def staccato(
-    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches staccato.
@@ -8904,7 +8904,7 @@ def start_markup(
 
 
 def stem_tremolo(
-    selector=lambda _: _select.pleaf(_, 0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.pleaf(_, 0, exclude=_enums.HIDDEN),
     *,
     tremolo_flags: int = 32,
 ) -> IndicatorCommand:
@@ -8991,7 +8991,7 @@ def stem_tremolo(
 
 
 def stop_on_string(
-    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
     *,
     map=None,
 ) -> IndicatorCommand:
@@ -9103,7 +9103,7 @@ def stop_trill(
 
 
 def stopped(
-    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches stopped +-sign.
@@ -9277,7 +9277,7 @@ def tie(selector) -> IndicatorCommand:
 
 
 def tenuto(
-    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches tenuto.
@@ -9362,7 +9362,7 @@ def tenuto(
 
 
 def triple_staccato(
-    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     """
     Attaches triple-staccato.
@@ -9375,7 +9375,7 @@ def triple_staccato(
 
 
 def up_arpeggio(
-    selector=lambda _: _select.chead(_, 0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.chead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches up-arpeggio.
@@ -9463,7 +9463,7 @@ def up_arpeggio(
 
 
 def up_bow(
-    selector=lambda _: _select.phead(_, 0, exclude=_const.HIDDEN),
+    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
     *tweaks: abjad.Tweak,
     full: bool = False,
 ) -> IndicatorCommand:
@@ -9645,7 +9645,7 @@ def allow_octaves(*, selector=lambda _: _select.leaves(_)) -> IndicatorCommand:
     """
     Attaches ALLOW_OCTAVE constant.
     """
-    return IndicatorCommand(indicators=[_const.ALLOW_OCTAVE], selector=selector)
+    return IndicatorCommand(indicators=[_enums.ALLOW_OCTAVE], selector=selector)
 
 
 def assign_parts(

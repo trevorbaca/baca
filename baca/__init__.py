@@ -4,8 +4,6 @@ import abjad
 
 from . import array
 from . import build
-from . import const
-
 from . import math
 from . import jobs
 from . import score
@@ -21,6 +19,7 @@ from .commands import *
 from .constellation import *
 from .cursor import Cursor
 from .docs import global_context_string
+from .enums import colors, enums
 from .figures import *
 from .indicators import *
 from .interpret import (

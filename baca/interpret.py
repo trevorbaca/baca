@@ -9,7 +9,6 @@ from abjadext import rmakers
 
 from . import command as _command
 from . import commands as _commands
-from . import const as _const
 from . import indicators as _indicators
 from . import layout as _layout
 from . import memento as _memento
@@ -22,6 +21,8 @@ from . import scope as _scope
 from . import select as _select
 from . import tags as _tags
 from . import treat as _treat
+from .enums import colors as _colors
+from .enums import enums as _enums
 
 
 def _activate_tags(score, tags):
@@ -59,7 +60,7 @@ def _add_container_identifiers(score, segment_number):
     except ValueError:
         pass
     for voice in abjad.iterate.components(score, abjad.Voice):
-        if voice._has_indicator(_const.INTERMITTENT):
+        if voice._has_indicator(_enums.INTERMITTENT):
             continue
         contexts.append(voice)
     container_to_part_assignment = {}
@@ -245,7 +246,7 @@ def _attach_default_indicators(argument):
     prototype = (abjad.Score, abjad.Staff, abjad.StaffGroup)
     assert isinstance(argument, prototype), repr(argument)
     wrappers = []
-    tag = _const.REMOVE_ALL_EMPTY_STAVES
+    tag = _enums.REMOVE_ALL_EMPTY_STAVES
     empty_prototype = (abjad.MultimeasureRest, abjad.Skip)
     prototype = (abjad.Staff, abjad.StaffGroup)
     if isinstance(argument, abjad.Score):
@@ -266,7 +267,7 @@ def _attach_default_indicators(argument):
         for voice in voices:
             leaves = []
             for leaf_ in abjad.iterate.leaves(voice):
-                if abjad.get.has_indicator(leaf_, _const.HIDDEN):
+                if abjad.get.has_indicator(leaf_, _enums.HIDDEN):
                     leaves.append(leaf_)
             if not all(isinstance(_, empty_prototype) for _ in leaves):
                 leaf = abjad.get.leaf(voice, 0)
@@ -717,11 +718,11 @@ def _attach_sounds_during(score):
     for voice in abjad.iterate.components(score, abjad.Voice):
         pleaves = []
         for pleaf in _select.pleaves(voice):
-            if abjad.get.has_indicator(pleaf, _const.PHANTOM):
+            if abjad.get.has_indicator(pleaf, _enums.PHANTOM):
                 continue
             pleaves.append(pleaf)
         if bool(pleaves):
-            abjad.attach(_const.SOUNDS_DURING_SEGMENT, voice)
+            abjad.attach(_enums.SOUNDS_DURING_SEGMENT, voice)
 
 
 def _bracket_metric_modulation(metronome_mark, metric_modulation):
@@ -863,7 +864,7 @@ def _calculate_clock_times(
             duration = abjad.get.duration(skip, in_seconds=True)
         else:
             rest = rests[local_measure_index]
-            fermata_duration = abjad.get.annotation(rest, _const.FERMATA_DURATION)
+            fermata_duration = abjad.get.annotation(rest, _enums.FERMATA_DURATION)
             duration = abjad.Duration(fermata_duration)
             clock_times.append(duration)
         start_offset += duration
@@ -1040,12 +1041,12 @@ def _call_rhythm_commands(
 
 
 def _check_all_music_in_part_containers(score):
-    indicator = _const.MULTIMEASURE_REST_CONTAINER
+    indicator = _enums.MULTIMEASURE_REST_CONTAINER
     for voice in abjad.iterate.components(score, abjad.Voice):
         for component in voice:
             if isinstance(component, abjad.MultimeasureRest | abjad.Skip):
                 continue
-            if abjad.get.has_indicator(component, _const.HIDDEN):
+            if abjad.get.has_indicator(component, _enums.HIDDEN):
                 continue
             if abjad.get.has_indicator(component, indicator):
                 continue
@@ -1096,7 +1097,7 @@ def _check_duplicate_part_assignments(dictionary, part_manifest):
 
 
 def _check_persistent_indicators(do_not_require_margin_markup, score):
-    indicator = _const.SOUNDS_DURING_SEGMENT
+    indicator = _enums.SOUNDS_DURING_SEGMENT
     for voice in abjad.iterate.components(score, abjad.Voice):
         if not abjad.get.has_indicator(voice, indicator):
             continue
@@ -1307,7 +1308,7 @@ def _collect_persistent_indicators(
         wrappers = []
         dictionary = abjad._inspect._get_persistent_wrappers(
             dependent_wrappers=dependent_wrappers,
-            omit_with_indicator=_const.PHANTOM,
+            omit_with_indicator=_enums.PHANTOM,
         )
         for wrapper in dictionary.values():
             if isinstance(
@@ -1385,7 +1386,7 @@ def _collect_persistent_indicators(
 
 
 def _color_mock_pitch(score):
-    indicator = _const.MOCK
+    indicator = _enums.MOCK
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.MOCK_COLORING)
     leaves = []
@@ -1399,7 +1400,7 @@ def _color_mock_pitch(score):
 
 
 def _color_not_yet_pitched(score):
-    indicator = _const.NOT_YET_PITCHED
+    indicator = _enums.NOT_YET_PITCHED
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.NOT_YET_PITCHED_COLORING)
     leaves = []
@@ -1409,16 +1410,16 @@ def _color_not_yet_pitched(score):
         string = r"\baca-not-yet-pitched-coloring"
         literal = abjad.LilyPondLiteral(string, site="before")
         tag_ = tag
-        if abjad.get.has_indicator(pleaf, _const.HIDDEN):
+        if abjad.get.has_indicator(pleaf, _enums.HIDDEN):
             tag_ = tag_.append(_tags.HIDDEN)
-        if abjad.get.has_indicator(pleaf, _const.NOTE):
+        if abjad.get.has_indicator(pleaf, _enums.NOTE):
             tag_ = tag_.append(_tags.NOTE)
         abjad.attach(literal, pleaf, tag=tag_)
         leaves.append(pleaf)
 
 
 def _color_not_yet_registered(score):
-    indicator = _const.NOT_YET_REGISTERED
+    indicator = _enums.NOT_YET_REGISTERED
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.NOT_YET_REGISTERED_COLORING)
     for pleaf in abjad.iterate.leaves(score, pitched=True):
@@ -1438,9 +1439,9 @@ def _color_octaves(score):
     for vertical_moment in vertical_moments:
         pleaves, pitches = [], []
         for leaf in vertical_moment.leaves:
-            if abjad.get.has_indicator(leaf, _const.HIDDEN):
+            if abjad.get.has_indicator(leaf, _enums.HIDDEN):
                 continue
-            if abjad.get.has_indicator(leaf, _const.STAFF_POSITION):
+            if abjad.get.has_indicator(leaf, _enums.STAFF_POSITION):
                 continue
             if isinstance(leaf, abjad.Note):
                 pleaves.append(leaf)
@@ -1454,7 +1455,7 @@ def _color_octaves(score):
         if _pcollections.has_duplicates([pitch_classes]):
             color = True
             for pleaf in pleaves:
-                if abjad.get.has_indicator(pleaf, _const.ALLOW_OCTAVE):
+                if abjad.get.has_indicator(pleaf, _enums.ALLOW_OCTAVE):
                     color = False
             if not color:
                 continue
@@ -1499,7 +1500,7 @@ def _error_on_not_yet_pitched(score):
     violators = []
     for voice in abjad.iterate.components(score, abjad.Voice):
         for leaf in abjad.iterate.leaves(voice):
-            if abjad.get.has_indicator(leaf, _const.NOT_YET_PITCHED):
+            if abjad.get.has_indicator(leaf, _enums.NOT_YET_PITCHED):
                 violators.append((voice.name, leaf))
     if violators:
         strings = [f"{len(violators)} leaves not yet pitched ..."]
@@ -1543,18 +1544,18 @@ def _extend_beam(leaf):
 
 def _extend_beams(score):
     for leaf in abjad.iterate.leaves(score):
-        if abjad.get.indicator(leaf, _const.RIGHT_BROKEN_BEAM):
+        if abjad.get.indicator(leaf, _enums.RIGHT_BROKEN_BEAM):
             _extend_beam(leaf)
 
 
 def _find_repeat_pitch_classes(argument):
     violators = []
     for voice in abjad.iterate.components(argument, abjad.Voice):
-        if abjad.get.has_indicator(voice, _const.INTERMITTENT):
+        if abjad.get.has_indicator(voice, _enums.INTERMITTENT):
             continue
         previous_lt, previous_pcs = None, set()
         for lt in abjad.iterate.logical_ties(voice):
-            if abjad.get.has_indicator(lt.head, _const.HIDDEN):
+            if abjad.get.has_indicator(lt.head, _enums.HIDDEN):
                 written_pitches = set()
             elif isinstance(lt.head, abjad.Note):
                 written_pitches = set([lt.head.written_pitch])
@@ -1564,8 +1565,8 @@ def _find_repeat_pitch_classes(argument):
                 written_pitches = set()
             pcs = set(abjad.NamedPitchClass(_) for _ in written_pitches)
             if abjad.get.has_indicator(
-                lt.head, _const.NOT_YET_PITCHED
-            ) or abjad.get.has_indicator(lt.head, _const.ALLOW_REPEAT_PITCH):
+                lt.head, _enums.NOT_YET_PITCHED
+            ) or abjad.get.has_indicator(lt.head, _enums.ALLOW_REPEAT_PITCH):
                 pass
             elif pcs & previous_pcs:
                 if previous_lt not in violators:
@@ -1597,7 +1598,7 @@ def _get_fermata_measure_numbers(first_measure_number, score):
         rests = abjad.select.leaves(context, abjad.MultimeasureRest)
         final_measure_index = len(rests) - 1
         final_measure_index -= 1
-        indicator = _const.FERMATA_MEASURE
+        indicator = _enums.FERMATA_MEASURE
         for measure_index, rest in enumerate(rests):
             if not abjad.get.has_indicator(rest, indicator):
                 continue
@@ -1866,15 +1867,15 @@ def _label_duration_multipliers(score):
             string += f' #"{n}" #"{d}"'
             markup = abjad.Markup(string)
             tag_ = tag
-            if abjad.get.has_indicator(leaf, _const.HIDDEN):
+            if abjad.get.has_indicator(leaf, _enums.HIDDEN):
                 tag_ = tag_.append(_tags.HIDDEN)
-            if abjad.get.has_indicator(leaf, _const.MULTIMEASURE_REST):
+            if abjad.get.has_indicator(leaf, _enums.MULTIMEASURE_REST):
                 tag_ = tag_.append(_tags.MULTIMEASURE_REST)
-            if abjad.get.has_indicator(leaf, _const.NOTE):
+            if abjad.get.has_indicator(leaf, _enums.NOTE):
                 tag_ = tag_.append(_tags.NOTE)
-            if abjad.get.has_indicator(leaf, _const.PHANTOM):
+            if abjad.get.has_indicator(leaf, _enums.PHANTOM):
                 tag_ = tag_.append(_tags.PHANTOM)
-            if abjad.get.has_indicator(leaf, _const.REST_VOICE):
+            if abjad.get.has_indicator(leaf, _enums.REST_VOICE):
                 tag_ = tag_.append(_tags.REST_VOICE)
             abjad.attach(markup, leaf, deactivate=True, direction=abjad.UP, tag=tag_)
             already_labeled.add(leaf)
@@ -2093,7 +2094,7 @@ def _make_global_rests(append_phantom_measure, time_signatures):
     if append_phantom_measure:
         tag = _tags.function_name(_frame(), n=2).append(_tags.PHANTOM)
         rest = abjad.MultimeasureRest(abjad.Duration(1), multiplier=(1, 4), tag=tag)
-        abjad.attach(_const.PHANTOM, rest)
+        abjad.attach(_enums.PHANTOM, rest)
         rests.append(rest)
     return rests
 
@@ -2120,7 +2121,7 @@ def _make_global_skips(
         tag = _tags.function_name(_frame(), n=3)
         tag = tag.append(_tags.PHANTOM)
         skip = abjad.Skip(1, multiplier=(1, 4), tag=tag)
-        abjad.attach(_const.PHANTOM, skip)
+        abjad.attach(_enums.PHANTOM, skip)
         global_skips.append(skip)
         if time_signature != abjad.TimeSignature((1, 4)):
             time_signature = abjad.TimeSignature((1, 4))
@@ -2222,14 +2223,14 @@ def _make_multimeasure_rest_container(
         note_or_rest = _tags.NOTE
         tag = tag.append(_tags.NOTE)
         note = abjad.Note("c'1", multiplier=duration, tag=tag)
-        abjad.attach(_const.NOTE, note)
-        abjad.attach(_const.NOT_YET_PITCHED, note)
+        abjad.attach(_enums.NOTE, note)
+        abjad.attach(_enums.NOT_YET_PITCHED, note)
     else:
         note_or_rest = _tags.MULTIMEASURE_REST
         tag = tag.append(_tags.MULTIMEASURE_REST)
         note = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
-        abjad.attach(_const.MULTIMEASURE_REST, note)
-    abjad.attach(_const.HIDDEN, note)
+        abjad.attach(_enums.MULTIMEASURE_REST, note)
+    abjad.attach(_enums.HIDDEN, note)
     tag = _tags.function_name(_frame(), n=2)
     tag = tag.append(phantom_tag)
     tag = tag.append(note_or_rest)
@@ -2242,23 +2243,23 @@ def _make_multimeasure_rest_container(
     tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
     literal = abjad.LilyPondLiteral(r"\abjad-invisible-music", site="before")
     abjad.attach(literal, note, deactivate=True, tag=tag)
-    abjad.attach(_const.HIDDEN, note)
+    abjad.attach(_enums.HIDDEN, note)
     tag = _tags.function_name(_frame(), n=4)
     tag = tag.append(phantom_tag)
     hidden_note_voice = abjad.Voice([note], name=voice_name, tag=tag)
-    abjad.attach(_const.INTERMITTENT, hidden_note_voice)
+    abjad.attach(_enums.INTERMITTENT, hidden_note_voice)
     tag = _tags.function_name(_frame(), n=5)
     tag = tag.append(phantom_tag)
     tag = tag.append(_tags.REST_VOICE)
     if skips_instead_of_rests:
         tag = tag.append(_tags.SKIP)
         rest = abjad.Skip(1, multiplier=duration, tag=tag)
-        abjad.attach(_const.SKIP, rest)
+        abjad.attach(_enums.SKIP, rest)
     else:
         tag = tag.append(_tags.MULTIMEASURE_REST)
         rest = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
-        abjad.attach(_const.MULTIMEASURE_REST, rest)
-    abjad.attach(_const.REST_VOICE, rest)
+        abjad.attach(_enums.MULTIMEASURE_REST, rest)
+    abjad.attach(_enums.REST_VOICE, rest)
     if "Music_Voice" in voice_name:
         name = voice_name.replace("Music_Voice", "Rest_Voice")
     else:
@@ -2266,7 +2267,7 @@ def _make_multimeasure_rest_container(
     tag = _tags.function_name(_frame(), n=6)
     tag = tag.append(phantom_tag)
     multimeasure_rest_voice = abjad.Voice([rest], name=name, tag=tag)
-    abjad.attach(_const.INTERMITTENT, multimeasure_rest_voice)
+    abjad.attach(_enums.INTERMITTENT, multimeasure_rest_voice)
     tag = _tags.function_name(_frame(), n=7)
     tag = tag.append(phantom_tag)
     container = abjad.Container(
@@ -2274,10 +2275,10 @@ def _make_multimeasure_rest_container(
         simultaneous=True,
         tag=tag,
     )
-    abjad.attach(_const.MULTIMEASURE_REST_CONTAINER, container)
+    abjad.attach(_enums.MULTIMEASURE_REST_CONTAINER, container)
     if phantom is True:
         for component in abjad.iterate.components(container):
-            abjad.attach(_const.PHANTOM, component)
+            abjad.attach(_enums.PHANTOM, component)
     return container
 
 
@@ -2379,8 +2380,8 @@ def _print_timing(title, timer, *, print_timing=False, suffix=None):
         suffix = f" [{suffix}]"
     else:
         suffix = ""
-    string = f"{_const.colors.green_bold}{title}{suffix} {count} {counter}"
-    string += f" ...{_const.colors.end}"
+    string = f"{_colors.green_bold}{title}{suffix} {count} {counter}"
+    string += f" ...{_colors.end}"
     print(string)
 
 
@@ -2608,9 +2609,9 @@ def _scope_to_leaf_selections(score, cache, measure_count, scope):
 def _set_intermittent_to_staff_position_zero(score):
     pleaves = []
     for voice in abjad.iterate.components(score, abjad.Voice):
-        if voice._has_indicator(_const.INTERMITTENT):
+        if voice._has_indicator(_enums.INTERMITTENT):
             for pleaf in abjad.iterate.leaves(voice, pitched=True):
-                if abjad.get.has_indicator(pleaf, _const.NOT_YET_PITCHED):
+                if abjad.get.has_indicator(pleaf, _enums.NOT_YET_PITCHED):
                     pleaves.append(pleaf)
     command = _commands.staff_position(
         0,
@@ -2623,7 +2624,7 @@ def _set_intermittent_to_staff_position_zero(score):
 def _set_not_yet_pitched_to_staff_position_zero(score):
     pleaves = []
     for pleaf in abjad.iterate.leaves(score, pitched=True):
-        if not abjad.get.has_indicator(pleaf, _const.NOT_YET_PITCHED):
+        if not abjad.get.has_indicator(pleaf, _enums.NOT_YET_PITCHED):
             continue
         pleaves.append(pleaf)
     command = _commands.staff_position(
@@ -2710,7 +2711,7 @@ def _style_fermata_measures(
         empty_fermata_measure_start_offsets.append(timespan.start_offset)
     for staff in abjad.iterate.components(score, abjad.Staff):
         for leaf in abjad.iterate.leaves(staff):
-            if abjad.get.has_indicator(leaf, _const.PHANTOM):
+            if abjad.get.has_indicator(leaf, _enums.PHANTOM):
                 continue
             start_offset = abjad.get.timespan(leaf).start_offset
             if start_offset not in fermata_start_offsets:
@@ -2725,7 +2726,7 @@ def _style_fermata_measures(
             previous_staff_lines = abjad.get.effective(leaf, _indicators.StaffLines)
             previous_bar_extent = abjad.get.effective(leaf, _indicators.BarExtent)
             next_leaf = abjad.get.leaf(leaf, 1)
-            if abjad.get.has_indicator(next_leaf, _const.PHANTOM):
+            if abjad.get.has_indicator(next_leaf, _enums.PHANTOM):
                 next_leaf = None
             next_staff_lines = None
             if next_leaf is not None:
@@ -2867,7 +2868,7 @@ def _style_phantom_measures(score):
         _append_tag_to_wrappers(rest, _tags.function_name(_frame(), n=4))
         _append_tag_to_wrappers(rest, _tags.PHANTOM)
     start_offset = abjad.get.timespan(skip).start_offset
-    enumeration = _const.MULTIMEASURE_REST_CONTAINER
+    enumeration = _enums.MULTIMEASURE_REST_CONTAINER
     containers = []
     for container in abjad.select.components(score, abjad.Container):
         if not abjad.get.has_indicator(container, enumeration):
@@ -2889,7 +2890,7 @@ def _style_phantom_measures(score):
             _append_tag_to_wrappers(leaf, _tags.PHANTOM)
             if not isinstance(leaf, abjad.MultimeasureRest):
                 continue
-            if abjad.get.has_indicator(leaf, _const.HIDDEN):
+            if abjad.get.has_indicator(leaf, _enums.HIDDEN):
                 continue
             literal = abjad.LilyPondLiteral(string_1)
             abjad.attach(
@@ -2913,9 +2914,9 @@ def _style_phantom_measures(score):
 
 def _transpose_score(score):
     for pleaf in _select.pleaves(score):
-        if abjad.get.has_indicator(pleaf, _const.DO_NOT_TRANSPOSE):
+        if abjad.get.has_indicator(pleaf, _enums.DO_NOT_TRANSPOSE):
             continue
-        if abjad.get.has_indicator(pleaf, _const.STAFF_POSITION):
+        if abjad.get.has_indicator(pleaf, _enums.STAFF_POSITION):
             continue
         abjad.iterpitches.transpose_from_sounding_pitch(pleaf)
 
@@ -2985,12 +2986,12 @@ def _whitespace_leaves(score):
 
 
 def color_out_of_range_pitches(score):
-    indicator = _const.ALLOW_OUT_OF_RANGE
+    indicator = _enums.ALLOW_OUT_OF_RANGE
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.OUT_OF_RANGE_COLORING)
     for voice in abjad.iterate.components(score, abjad.Voice):
         for pleaf in abjad.iterate.leaves(voice, pitched=True):
-            if abjad.get.has_indicator(pleaf, _const.HIDDEN):
+            if abjad.get.has_indicator(pleaf, _enums.HIDDEN):
                 continue
             if abjad.get.has_indicator(pleaf, indicator):
                 continue
@@ -3283,9 +3284,16 @@ def interpreter(
             _move_global_context(score)
         _clean_up_on_beat_grace_containers(score)
         if check_wellformedness:
-            count, message = abjad.wf.tabulate_wellformedness(score)
+            count, message = abjad.wf.tabulate_wellformedness(
+                score, check_out_of_range_pitches=False
+            )
             if count:
                 raise Exception("\n" + message)
+            violators, total = abjad.wf.check_out_of_range_pitches(
+                score, allow_indicators=(_enums.ALLOW_OUT_OF_RANGE, _enums.HIDDEN)
+            )
+            if violators:
+                raise Exception(f"{len(violators)} /    {total} out of range pitches")
         clock_time_duration = None
         start_clock_time = None
         stop_clock_time = None

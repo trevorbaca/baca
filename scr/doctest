@@ -47,10 +47,10 @@ def _doctest_files(current_directory, files, globals_, report_only_first_failure
         if failure_count_:
             failed_file_paths.append(os.path.relpath(file_))
             error_messages.append(doctest_output)
-            strings = (baca.const.colors.red, "FAILED", baca.const.colors.end)
+            strings = (baca.colors.red, "FAILED", baca.colors.end)
             result_code = "".join(strings)
         else:
-            strings = (baca.const.colors.blue, "OK", baca.const.colors.end)
+            strings = (baca.colors.blue, "OK", baca.colors.end)
             result_code = "".join(strings)
         relative_path = os.path.relpath(file_)
         print(f"{relative_path} {result_code}")

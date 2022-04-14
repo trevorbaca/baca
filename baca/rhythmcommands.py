@@ -9,10 +9,10 @@ import abjad
 from abjadext import rmakers
 
 from . import command as _command
-from . import const as _const
 from . import select as _select
 from . import sequence as _sequence
 from . import tags as _tags
+from .enums import enums as _enums
 
 
 def _tag_components(selection, tag):
@@ -325,7 +325,7 @@ class RhythmCommand(_command.Command):
             rest_prototype = (abjad.MultimeasureRest, abjad.Rest, abjad.Skip)
             for leaf in abjad.iterate.leaves(container):
                 if isinstance(leaf, abjad.Note | abjad.Chord):
-                    abjad.attach(_const.NOT_YET_PITCHED, leaf, tag=abjad.Tag())
+                    abjad.attach(_enums.NOT_YET_PITCHED, leaf, tag=abjad.Tag())
                 elif isinstance(leaf, rest_prototype):
                     pass
                 else:
@@ -337,7 +337,7 @@ class RhythmCommand(_command.Command):
         previous_segment_stop_state = None
         dictionary = runtime.get("previous_segment_voice_metadata")
         if dictionary:
-            previous_segment_stop_state = dictionary.get(_const.RHYTHM)
+            previous_segment_stop_state = dictionary.get(_enums.RHYTHM.name)
             if (
                 previous_segment_stop_state is not None
                 and previous_segment_stop_state.get("name") != self.persist
@@ -346,7 +346,7 @@ class RhythmCommand(_command.Command):
         return previous_segment_stop_state
 
     @property
-    def parameter(self):
+    def parameter(self) -> str:
         """
         Gets persistence parameter.
 
@@ -356,7 +356,7 @@ class RhythmCommand(_command.Command):
             'RHYTHM'
 
         """
-        return _const.RHYTHM
+        return _enums.RHYTHM.name
 
     @property
     def state(self):

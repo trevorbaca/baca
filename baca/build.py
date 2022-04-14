@@ -12,7 +12,6 @@ import types
 
 import abjad
 import baca
-from baca.const import colors as _colors
 
 
 def _also_untagged(segment_directory):
@@ -287,7 +286,7 @@ def _make_segment_clicktrack(lilypond_file, mtime, segment_directory):
     if "Global_Rests" in lilypond_file:
         global_rests = lilypond_file["Global_Rests"]
         for i, rest in enumerate(global_rests):
-            if abjad.get.has_indicator(rest, baca.const.FERMATA_MEASURE):
+            if abjad.get.has_indicator(rest, baca.enums.FERMATA_MEASURE):
                 measure_number = i + 1
                 fermata_measure_numbers.append(measure_number)
     for i, time_signature in enumerate(time_signatures):
@@ -410,27 +409,27 @@ def _print_always(string=""):
 
 
 def _print_error(string):
-    print(_colors.red + string + _colors.end)
+    print(baca.colors.red + string + baca.colors.end)
 
 
 def _print_file_handling(string):
-    print(_colors.yellow + string + _colors.end)
+    print(baca.colors.yellow + string + baca.colors.end)
 
 
 def _print_layout(string):
-    print(_colors.magenta + string + _colors.end)
+    print(baca.colors.magenta + string + baca.colors.end)
 
 
 def _print_main_task(string):
-    print(_colors.blue + string + _colors.end)
+    print(baca.colors.blue + string + baca.colors.end)
 
 
 def _print_success(string):
-    print(_colors.green_bold + string + _colors.end)
+    print(baca.colors.green_bold + string + baca.colors.end)
 
 
 def _print_tags(string):
-    print(_colors.cyan + string + _colors.end)
+    print(baca.colors.cyan + string + baca.colors.end)
 
 
 def _print_timing(title, timer):
