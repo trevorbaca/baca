@@ -943,38 +943,12 @@ def _call_rhythm_commands(
     time_signatures,
     voice_metadata,
 ):
-    _attach_fermatas(
-        always_make_global_rests,
-        append_phantom_measure,
-        score,
-        time_signatures,
-    )
-    command_count = 0
-    section_duration = None
+    command_count, section_duration = 0, None
     for voice in abjad.select.components(score, abjad.Voice):
         assert not len(voice), repr(voice)
         voice_metadata_ = voice_metadata.get(voice.name, {})
         commands_ = _voice_to_rhythm_commands(commands, voice)
         timespans = []
-        if not commands_:
-            components, section_duration = _intercalate_rests(
-                skips_instead_of_rests,
-                time_signatures,
-                timespans,
-                voice.name,
-            )
-            components = abjad.sequence.flatten(components)
-            voice.extend(components)
-            if append_phantom_measure:
-                container = _make_multimeasure_rest_container(
-                    voice.name,
-                    (1, 4),
-                    skips_instead_of_rests,
-                    phantom=True,
-                    suppress_note=True,
-                )
-                voice.append(container)
-            continue
         for command in commands_:
             assert command.scope.measures, repr(command)
             measures = command.scope.measures
@@ -3127,9 +3101,15 @@ def interpreter(
                 spacing,
                 do_not_append_phantom_measure=do_not_append_phantom_measure,
             )
+        _attach_fermatas(
+            always_make_global_rests,
+            append_phantom_measure,
+            score,
+            time_signatures,
+        )
+        measure_count = len(time_signatures)
     # _print_timing("Initialization", timer, print_timing=print_timing)
     with abjad.Timer() as timer:
-        measure_count = len(time_signatures)
         with abjad.ForbidUpdate(component=score, update_on_exit=True):
             command_count, section_duration = _call_rhythm_commands(
                 always_make_global_rests,
