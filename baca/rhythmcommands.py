@@ -2,6 +2,7 @@
 Rhythm commands.
 """
 import dataclasses
+import types
 import typing
 from inspect import currentframe as _frame
 
@@ -270,6 +271,7 @@ class RhythmCommand(_command.Command):
             rmakers.Assignment,
             rmakers.Stack,
             rmakers.Bind,
+            typing.Callable,
         )
         if isinstance(rhythm_maker, prototype):
             return
@@ -302,6 +304,8 @@ class RhythmCommand(_command.Command):
         else:
             if isinstance(self.rhythm_maker, rmakers.Stack):
                 rcommand = self.rhythm_maker
+            elif isinstance(self.rhythm_maker, types.FunctionType):
+                rcommand = self.rhythm_maker
             else:
                 rcommand = rmakers.stack(self.rhythm_maker)
             previous_segment_stop_state = self._previous_segment_stop_state(runtime)
@@ -310,7 +314,11 @@ class RhythmCommand(_command.Command):
                     time_signatures, previous_state=previous_segment_stop_state
                 )
                 self._state = rcommand.maker.state
+            elif isinstance(rcommand, types.FunctionType):
+                selection = rcommand(time_signatures)
+            # TODO: remove this branch?
             else:
+                raise Exception(f"What is {rcommand}?")
                 selection = rcommand(
                     time_signatures,
                     previous_segment_stop_state=previous_segment_stop_state,
@@ -524,6 +532,36 @@ def make_fused_tuplet_monads(
             preprocessor=lambda _: [sum(_)],
             tag=_tags.function_name(_frame()),
         ),
+        annotation_spanner_color="#darkcyan",
+        frame=_frame(),
+        measures=measures,
+    )
+
+
+def _make_flamingo_notes(time_signatures):
+    from . import interpret as _interpret
+
+    silences = []
+    # TODO: eventually update tag:
+    tag = abjad.Tag("baca._make_measure_silences()")
+    for i, time_signature in enumerate(time_signatures):
+        duration = time_signature.duration
+        if i == 0:
+            voice_name = "Change_Me_Voice"
+            silence = _interpret._make_multimeasure_rest_container(
+                voice_name, duration, skips_instead_of_rests=False
+            )
+        else:
+            silence = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
+        silences.append(silence)
+    return silences
+
+
+def make_mmrests(
+    measures=None,
+):
+    return RhythmCommand(
+        rhythm_maker=_make_flamingo_notes,
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
         measures=measures,

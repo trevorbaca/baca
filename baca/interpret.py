@@ -933,6 +933,8 @@ def _call_commands(
 def _call_rhythm_commands(
     always_make_global_rests,
     attach_rhythm_annotation_spanners,
+    call_phantom_measure_append_functions_by_hand,
+    call_rest_intercalation_functions_by_hand,
     commands,
     append_phantom_measure,
     manifests,
@@ -974,6 +976,10 @@ def _call_rhythm_commands(
             for voice_ in abjad.iterate.components(components, abjad.Voice):
                 if voice_.name == "Rhythm_Maker_Music_Voice":
                     voice_.name = command.scope.voice_name
+                elif voice_.name == "Change_Me_Voice":
+                    voice_.name = command.scope.voice_name
+                elif voice_.name == "Change_Me_Rest_Voice":
+                    voice_.name = command.scope.voice_name.replace("Music", "Rest")
             if attach_rhythm_annotation_spanners:
                 _attach_rhythm_annotation_spanner(command, components)
             timespan = abjad.Timespan(start_offset=start_offset, annotation=components)
@@ -988,25 +994,27 @@ def _call_rhythm_commands(
             voice_metadata[voice.name] = voice_metadata_
         timespans.sort()
         _assert_nonoverlapping_rhythms(timespans, voice.name)
-        components, section_duration = _intercalate_rests(
-            skips_instead_of_rests,
-            time_signatures,
-            timespans,
-            voice.name,
-        )
-        if append_phantom_measure:
-            suppress_note = False
-            final_leaf = abjad.get.leaf(components, -1)
-            if isinstance(final_leaf, abjad.MultimeasureRest):
-                suppress_note = True
-            container = _make_multimeasure_rest_container(
-                voice.name,
-                (1, 4),
+        if call_rest_intercalation_functions_by_hand is False:
+            components, section_duration = _intercalate_rests(
                 skips_instead_of_rests,
-                phantom=True,
-                suppress_note=suppress_note,
+                time_signatures,
+                timespans,
+                voice.name,
             )
-            components.append(container)
+        if call_phantom_measure_append_functions_by_hand is False:
+            if append_phantom_measure:
+                suppress_note = False
+                final_leaf = abjad.get.leaf(components, -1)
+                if isinstance(final_leaf, abjad.MultimeasureRest):
+                    suppress_note = True
+                container = _make_multimeasure_rest_container(
+                    voice.name,
+                    (1, 4),
+                    skips_instead_of_rests,
+                    phantom=True,
+                    suppress_note=suppress_note,
+                )
+                components.append(container)
         components = abjad.sequence.flatten(components, depth=-1)
         voice.extend(components)
     return command_count, section_duration
@@ -2996,6 +3004,9 @@ def interpreter(
     append_phantom_measure=False,
     attach_nonfirst_empty_start_bar=False,
     attach_rhythm_annotation_spanners=False,
+    call_phantom_measure_append_functions_by_hand=False,
+    call_reapplication_functions_by_hand=False,
+    call_rest_intercalation_functions_by_hand=False,
     check_persistent_indicators=False,
     check_wellformedness=False,
     clock_time_extra_offset=None,
@@ -3111,6 +3122,8 @@ def interpreter(
             command_count, section_duration = _call_rhythm_commands(
                 always_make_global_rests,
                 attach_rhythm_annotation_spanners,
+                call_phantom_measure_append_functions_by_hand,
+                call_rest_intercalation_functions_by_hand,
                 commands,
                 append_phantom_measure,
                 manifests,
@@ -3125,22 +3138,23 @@ def interpreter(
         "Rhythm commands", timer, print_timing=print_timing, suffix=command_count
     )
     with abjad.Timer() as timer:
-        if first_segment:
-            _attach_first_segment_default_indicators(
-                manifests,
-                score,
-            )
-        if previous_persistent_indicators and not first_segment:
-            _reapply_persistent_indicators(
-                manifests,
-                previous_persistent_indicators,
-                score,
-            )
-            _attach_first_appearance_default_indicators(
-                manifests,
-                previous_persistent_indicators,
-                score,
-            )
+        if call_reapplication_functions_by_hand is False:
+            if first_segment:
+                _attach_first_segment_default_indicators(
+                    manifests,
+                    score,
+                )
+            if previous_persistent_indicators and not first_segment:
+                _reapply_persistent_indicators(
+                    manifests,
+                    previous_persistent_indicators,
+                    score,
+                )
+                _attach_first_appearance_default_indicators(
+                    manifests,
+                    previous_persistent_indicators,
+                    score,
+                )
     # _print_timing("Cleanup", timer, print_timing=print_timing)
     with abjad.Timer() as timer:
         with abjad.ForbidUpdate(component=score, update_on_exit=True):
