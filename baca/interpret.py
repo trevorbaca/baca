@@ -249,18 +249,18 @@ def _attach_default_indicators(argument):
     empty_prototype = (abjad.MultimeasureRest, abjad.Skip)
     prototype = (abjad.Staff, abjad.StaffGroup)
     if isinstance(argument, abjad.Score):
-        staff__groups = list(abjad.select.components(argument, prototype))
+        staff_or_staff_groups = list(abjad.select.components(argument, prototype))
         staves = list(abjad.select.components(argument, abjad.Staff))
     elif isinstance(argument, abjad.Staff):
-        staff__groups = [argument]
+        staff_or_staff_groups = [argument]
         staves = [argument]
     else:
         assert isinstance(argument, abjad.StaffGroup), repr(argument)
-        staff__groups = [argument]
+        staff_or_staff_groups = [argument]
         staves = []
-    for staff__group in staff__groups:
+    for staff_or_staff_group in staff_or_staff_groups:
         leaf = None
-        voices = abjad.select.components(staff__group, abjad.Voice)
+        voices = abjad.select.components(staff_or_staff_group, abjad.Voice)
         assert isinstance(voices, list), repr(voices)
         # find leaf 0 in first nonempty voice
         for voice in voices:
@@ -290,12 +290,12 @@ def _attach_default_indicators(argument):
         instrument = abjad.get.indicator(leaf, abjad.Instrument)
         if instrument is None:
             string = "default_instrument"
-            instrument = abjad.get.annotation(staff__group, string)
+            instrument = abjad.get.annotation(staff_or_staff_group, string)
             if instrument is not None:
                 wrapper = abjad.attach(
                     instrument,
                     leaf,
-                    context=staff__group.lilypond_type,
+                    context=staff_or_staff_group.lilypond_type,
                     tag=_tags.function_name(_frame(), n=1),
                     wrapper=True,
                 )
@@ -303,7 +303,7 @@ def _attach_default_indicators(argument):
         margin_markup = abjad.get.indicator(leaf, abjad.MarginMarkup)
         if margin_markup is None:
             string = "default_margin_markup"
-            margin_markup = abjad.get.annotation(staff__group, string)
+            margin_markup = abjad.get.annotation(staff_or_staff_group, string)
             if margin_markup is not None:
                 wrapper = abjad.attach(
                     margin_markup,
@@ -971,6 +971,9 @@ def _call_rhythm_commands(
             except Exception:
                 print(f"Interpreting ...\n\n{command}\n")
                 raise
+            for voice_ in abjad.iterate.components(components, abjad.Voice):
+                if voice_.name == "Rhythm_Maker_Music_Voice":
+                    voice_.name = command.scope.voice_name
             if attach_rhythm_annotation_spanners:
                 _attach_rhythm_annotation_spanner(command, components)
             timespan = abjad.Timespan(start_offset=start_offset, annotation=components)
@@ -1142,13 +1145,6 @@ def _clean_up_repeat_tie_direction(score):
                 bundle = abjad.bundle(wrapper.get_item(), r"- \tweak direction #up")
                 abjad.attach(bundle, leaf, tag=wrapper.tag)
                 break
-
-
-def _clean_up_rhythm_maker_voice_names(score):
-    for voice in abjad.iterate.components(score, abjad.Voice):
-        if voice.name == "Rhythm_Maker_Music_Voice":
-            outer = abjad.get.parentage(voice).get(abjad.Voice, 1)
-            voice.name = outer.name
 
 
 def _clone_segment_initial_short_instrument_name(score):
@@ -3049,27 +3045,29 @@ def interpreter(
     assert isinstance(score, abjad.Score), repr(score)
     if activate is not None:
         assert all(isinstance(_, abjad.Tag) for _ in activate)
-    assert all_music_in_part_containers in (True, False)
-    assert allow_empty_selections in (True, False)
+    assert isinstance(all_music_in_part_containers, bool)
+    assert isinstance(allow_empty_selections, bool)
     if clock_time_override is not None:
         assert isinstance(clock_time_override, abjad.MetronomeMark)
-    assert color_octaves in (True, False)
-    assert check_wellformedness in (True, False)
+    assert isinstance(color_octaves, bool)
+    assert isinstance(check_wellformedness, bool)
     if deactivate is not None:
         assert all(isinstance(_, abjad.Tag) for _ in deactivate)
-    assert do_not_require_margin_markup in (True, False)
-    assert final_segment in (True, False)
+    assert isinstance(do_not_require_margin_markup, bool)
+    assert isinstance(final_segment, bool)
     first_measure_number = _adjust_first_measure_number(
         first_measure_number,
         previous_metadata,
     )
-    assert first_segment in (True, False)
-    assert force_nonnatural_accidentals in (True, False)
+    assert isinstance(first_segment, bool)
+    assert isinstance(force_nonnatural_accidentals, bool)
+    global_skips = score["Global_Skips"]
     manifests = {
         "abjad.Instrument": instruments,
         "abjad.MarginMarkup": margin_markups,
         "abjad.MetronomeMark": metronome_marks,
     }
+    measure_count = len(time_signatures)
     metadata = dict(metadata or {})
     if parts_metric_modulation_multiplier is not None:
         assert isinstance(parts_metric_modulation_multiplier, tuple)
@@ -3077,10 +3075,10 @@ def interpreter(
     persist = dict(persist or {})
     previous_metadata = dict(previous_metadata or {})
     previous_persist = dict(previous_persist or {})
-    assert transpose_score in (True, False)
-    assert treat_untreated_persistent_wrappers in (True, False)
+    previous_persistent_indicators = previous_persist.get("persistent_indicators")
+    assert isinstance(transpose_score, bool)
+    assert isinstance(treat_untreated_persistent_wrappers, bool)
     voice_metadata = {}
-    global_skips = score["Global_Skips"]
     with abjad.Timer() as timer:
         # temporary hack to make baca.select.mleaves() work
         dummy_container = abjad.Container([score], name="Dummy_Container")
@@ -3107,7 +3105,6 @@ def interpreter(
             score,
             time_signatures,
         )
-        measure_count = len(time_signatures)
     # _print_timing("Initialization", timer, print_timing=print_timing)
     with abjad.Timer() as timer:
         with abjad.ForbidUpdate(component=score, update_on_exit=True):
@@ -3124,7 +3121,6 @@ def interpreter(
                 time_signatures,
                 voice_metadata,
             )
-            _clean_up_rhythm_maker_voice_names(score)
     _print_timing(
         "Rhythm commands", timer, print_timing=print_timing, suffix=command_count
     )
@@ -3134,7 +3130,6 @@ def interpreter(
                 manifests,
                 score,
             )
-        previous_persistent_indicators = previous_persist.get("persistent_indicators")
         if previous_persistent_indicators and not first_segment:
             _reapply_persistent_indicators(
                 manifests,
