@@ -972,13 +972,19 @@ def _call_rhythm_commands(
             except Exception:
                 print(f"Interpreting ...\n\n{command}\n")
                 raise
-            for voice_ in abjad.iterate.components(components, abjad.Voice):
+            for voice_ in abjad.select.components(components, abjad.Voice):
                 if voice_.name == "Rhythm_Maker_Music_Voice":
                     voice_.name = command.scope.voice_name
                 elif voice_.name == "Change_Me_Voice":
                     voice_.name = command.scope.voice_name
                 elif voice_.name == "Change_Me_Rest_Voice":
-                    voice_.name = command.scope.voice_name.replace("Music", "Rest")
+                    scope_voice_name = command.scope.voice_name
+                    if "Music_Voice" in scope_voice_name:
+                        foo = scope_voice_name.replace("Music_Voice", "Rest_Voice")
+                    else:
+                        assert "Voice" in scope_voice_name
+                        foo = scope_voice_name.replace("Voice", "Rest_Voice")
+                    voice_.name = foo
             if attach_rhythm_annotation_spanners:
                 _attach_rhythm_annotation_spanner(command, components)
             timespan = abjad.Timespan(start_offset=start_offset, annotation=components)
@@ -2998,7 +3004,6 @@ def interpreter(
     append_phantom_measure=False,
     attach_nonfirst_empty_start_bar=False,
     attach_rhythm_annotation_spanners=False,
-    call_attach_first_segment_default_indicators_by_hand=False,
     call_phantom_measure_append_functions_by_hand=False,
     call_reapplication_functions_by_hand=False,
     call_rest_intercalation_functions_by_hand=False,
@@ -3140,12 +3145,6 @@ def interpreter(
         "Rhythm commands", timer, print_timing=print_timing, suffix=command_count
     )
     with abjad.Timer() as timer:
-        if first_segment:
-            if call_attach_first_segment_default_indicators_by_hand is False:
-                _attach_first_segment_default_indicators(
-                    manifests,
-                    score,
-                )
         if call_reapplication_functions_by_hand is False:
             if previous_persistent_indicators and not first_segment:
                 _reapply_persistent_indicators(

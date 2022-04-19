@@ -22,6 +22,10 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> commands(
+        ...     "Music_Voice",
+        ...     baca.attach_first_segment_default_indicators(),
+        ... )
 
         >>> _, _ = baca.interpreter(
         ...     score,
@@ -1160,6 +1164,7 @@ r"""
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
+        ...     baca.attach_first_segment_default_indicators(),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -2169,6 +2174,7 @@ r"""
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
+        ...     baca.attach_first_segment_default_indicators(),
         ... )
 
         >>> _, _ = baca.interpreter(
