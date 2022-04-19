@@ -43,7 +43,7 @@ def _validate_bcps(bcps):
         assert len(bcp) == 2, repr(bcp)
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(slots=True)
 class BCPCommand(_command.Command):
     r"""
     Bow contact point command.
@@ -589,7 +589,7 @@ class BCPCommand(_command.Command):
         return r"\bacaStopTextSpanBCP"
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(slots=True)
 class ColorCommand(_command.Command):
     """
     Color command.
@@ -609,7 +609,7 @@ class ColorCommand(_command.Command):
         abjad.label.by_selector(argument, self.selector, lone=self.lone)
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(slots=True)
 class ContainerCommand(_command.Command):
     r"""
     Container command.
@@ -706,7 +706,7 @@ class ContainerCommand(_command.Command):
         return True
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(slots=True)
 class DetachCommand(_command.Command):
     """
     Detach command.
@@ -731,7 +731,47 @@ class DetachCommand(_command.Command):
                 abjad.detach(argument, leaf)
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(slots=True)
+class GenericCommand(_command.Command):
+
+    function: typing.Callable = lambda _: _
+    name: str = ""
+
+    def __post_init__(self):
+        assert callable(self.function), repr(self.function)
+        _command.Command.__post_init__(self)
+
+    def _call(self, argument=None) -> None:
+        if argument is None:
+            return
+        assert self.selector is not None
+        argument = self.selector(argument)
+        self.function(argument, runtime=self._runtime)
+
+
+def attach_first_segment_default_indicators(
+    *, selector=lambda _: _select.leaves(_)
+) -> GenericCommand:
+    from . import interpret as _interpret
+
+    def foo(argument, *, runtime=None):
+        manifests = runtime["manifests"]
+        leaf = abjad.select.leaf(argument, 0)
+        parentage = abjad.get.parentage(leaf)
+        staff_or_staff_groups = []
+        for component in parentage:
+            if isinstance(component, abjad.Staff | abjad.StaffGroup):
+                staff_or_staff_groups.append(component)
+        # breakpoint()
+        for context in staff_or_staff_groups:
+            _interpret._attach_first_segment_default_indicators(manifests, context)
+
+    command = GenericCommand(function=foo, selector=selector)
+    command.name = "attach_default_indicators"
+    return command
+
+
+@dataclasses.dataclass(slots=True)
 class GlissandoCommand(_command.Command):
     """
     Glissando command.
@@ -782,7 +822,7 @@ class GlissandoCommand(_command.Command):
         )
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(slots=True)
 class GlobalFermataCommand(_command.Command):
     """
     Global fermata command.
@@ -861,7 +901,7 @@ def _token_to_indicators(token):
     return result
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(slots=True)
 class IndicatorCommand(_command.Command):
     """
     Indicator command.
@@ -935,7 +975,7 @@ class IndicatorCommand(_command.Command):
                     )
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(slots=True)
 class InstrumentChangeCommand(IndicatorCommand):
     """
     Instrument change command.
@@ -959,10 +999,10 @@ class InstrumentChangeCommand(IndicatorCommand):
                     message = f"{staff.name} does not allow instrument:\n"
                     message += f"  {instrument}"
                     raise Exception(message)
-        super()._call(argument)
+        IndicatorCommand._call(self, argument)
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(slots=True)
 class LabelCommand(_command.Command):
     """
     Label command.
@@ -983,7 +1023,7 @@ class LabelCommand(_command.Command):
         self.callable_(argument)
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(slots=True)
 class MetronomeMarkCommand(_command.Command):
     """
     Metronome mark command.
@@ -1033,7 +1073,7 @@ class MetronomeMarkCommand(_command.Command):
             )
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(slots=True)
 class PartAssignmentCommand(_command.Command):
     """
     Part assignment command.
@@ -1084,7 +1124,7 @@ class PartAssignmentCommand(_command.Command):
         return False
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(slots=True)
 class AccidentalAdjustmentCommand(_command.Command):
     r"""
     Accidental adjustment command.
@@ -1209,7 +1249,7 @@ class AccidentalAdjustmentCommand(_command.Command):
                     )
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(slots=True)
 class ClusterCommand(_command.Command):
     r"""
     Cluster command.
@@ -1876,7 +1916,7 @@ class ClusterCommand(_command.Command):
         return True
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(slots=True)
 class ColorFingeringCommand(_command.Command):
     r"""
     Color fingering command.
@@ -1976,7 +2016,7 @@ class ColorFingeringCommand(_command.Command):
                 abjad.attach(fingering, phead, direction=self.direction)
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(slots=True)
 class DiatonicClusterCommand(_command.Command):
     r"""
     Diatonic cluster command.
@@ -2109,7 +2149,7 @@ class Loop(abjad.CyclicTuple):
         return pitch
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(slots=True)
 class MicrotoneDeviationCommand(_command.Command):
     r"""
     Microtone deviation command.
@@ -2225,7 +2265,7 @@ class MicrotoneDeviationCommand(_command.Command):
             abjad.attach(annotation, pleaf)
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(slots=True)
 class OctaveDisplacementCommand(_command.Command):
     r"""
     Octave displacement command.
@@ -2458,7 +2498,7 @@ def _set_lt_pitch(
     return new_lt
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(slots=True)
 class PitchCommand(_command.Command):
     r"""
     Pitch command.
@@ -2854,7 +2894,7 @@ class PitchCommand(_command.Command):
         return self._state
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(slots=True)
 class RegisterCommand(_command.Command):
     r"""
     Register command.
@@ -3058,7 +3098,7 @@ class RegisterCommand(_command.Command):
                 abjad.detach(_enums.NOT_YET_REGISTERED, pleaf)
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(slots=True)
 class RegisterInterpolationCommand(_command.Command):
     r"""
     Register interpolation command.
@@ -4015,7 +4055,7 @@ class RegisterInterpolationCommand(_command.Command):
         return _pcollections.Registration([("[A0, C8]", current_pitch)])
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(slots=True)
 class RegisterToOctaveCommand(_command.Command):
     r"""
     Register-to-octave command.
@@ -4500,7 +4540,7 @@ class RegisterToOctaveCommand(_command.Command):
         abjad.detach(_enums.NOT_YET_REGISTERED, leaf)
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(slots=True)
 class StaffPositionCommand(_command.Command):
     r"""
     Staff position command.
@@ -4632,7 +4672,7 @@ class StaffPositionCommand(_command.Command):
         return self._mutated_score
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(slots=True)
 class StaffPositionInterpolationCommand(_command.Command):
     """
     Staff position interpolation command.

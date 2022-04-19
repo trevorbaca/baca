@@ -25,9 +25,12 @@ class Command:
     selector: typing.Callable | None = None
     tag_measure_number: bool = False
     tags: list[abjad.Tag | None] = dataclasses.field(default_factory=list)
+    _mutated_score: bool = dataclasses.field(default=False, init=False, repr=False)
+    _runtime: dict = dataclasses.field(default_factory=dict, init=False, repr=False)
+    _state: dict = dataclasses.field(default_factory=dict, init=False, repr=False)
+    _tags: list[abjad.Tag] = dataclasses.field(init=False, repr=False)
 
     def __post_init__(self):
-        self._runtime = {}
         if self.selector is not None:
             assert callable(self.selector)
         self.tags = list(self.tags or [])

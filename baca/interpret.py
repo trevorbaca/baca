@@ -893,8 +893,7 @@ def _call_commands(
     command_count = 0
     for command in commands:
         assert isinstance(command, _command.Command)
-        if isinstance(command, _rhythmcommands.RhythmCommand):
-            continue
+        assert not isinstance(command, _rhythmcommands.RhythmCommand)
         command_count += 1
         selection, cache = _scope_to_leaf_selection(
             score,
@@ -2104,7 +2103,6 @@ def _make_global_skips(
 def _make_lilypond_file(
     include_layout_ly,
     includes,
-    midi,
     preamble,
     score,
 ):
@@ -2140,9 +2138,6 @@ def _make_lilypond_file(
         abjad.attach(literal, container, tag=None)
         lilypond_file["score"].items[:] = [container]
         lilypond_file["score"].items.append("")
-    if midi:
-        block = abjad.Block("midi")
-        lilypond_file["score"].items.append(block)
     return lilypond_file
 
 
@@ -2936,8 +2931,7 @@ def _update_score_one_time(score):
 def _voice_to_rhythm_commands(commands, voice):
     commands_ = []
     for command in commands:
-        if not isinstance(command, _rhythmcommands.RhythmCommand):
-            continue
+        assert isinstance(command, _rhythmcommands.RhythmCommand)
         if command.scope.voice_name == voice.name:
             commands_.append(command)
     return commands_
@@ -3004,6 +2998,7 @@ def interpreter(
     append_phantom_measure=False,
     attach_nonfirst_empty_start_bar=False,
     attach_rhythm_annotation_spanners=False,
+    call_attach_first_segment_default_indicators_by_hand=False,
     call_phantom_measure_append_functions_by_hand=False,
     call_reapplication_functions_by_hand=False,
     call_rest_intercalation_functions_by_hand=False,
@@ -3032,8 +3027,6 @@ def interpreter(
     margin_markups=None,
     metadata=None,
     metronome_marks=None,
-    # TODO: remove midi keyword because unused?
-    midi=False,
     moment_markup=None,
     move_global_context=False,
     page_layout_profile=None,
@@ -3090,6 +3083,15 @@ def interpreter(
     assert isinstance(transpose_score, bool)
     assert isinstance(treat_untreated_persistent_wrappers, bool)
     voice_metadata = {}
+    default_indicator_commands, other_commands, rhythm_commands = [], [], []
+    for command in commands:
+        if isinstance(command, _rhythmcommands.RhythmCommand):
+            rhythm_commands.append(command)
+        elif getattr(command, "name", None) == "attach_default_indicators":
+            default_indicator_commands.append(command)
+        else:
+            other_commands.append(command)
+    other_commands[0:0] = default_indicator_commands
     with abjad.Timer() as timer:
         # temporary hack to make baca.select.mleaves() work
         dummy_container = abjad.Container([score], name="Dummy_Container")
@@ -3124,7 +3126,7 @@ def interpreter(
                 attach_rhythm_annotation_spanners,
                 call_phantom_measure_append_functions_by_hand,
                 call_rest_intercalation_functions_by_hand,
-                commands,
+                rhythm_commands,
                 append_phantom_measure,
                 manifests,
                 measure_count,
@@ -3138,12 +3140,13 @@ def interpreter(
         "Rhythm commands", timer, print_timing=print_timing, suffix=command_count
     )
     with abjad.Timer() as timer:
-        if call_reapplication_functions_by_hand is False:
-            if first_segment:
+        if first_segment:
+            if call_attach_first_segment_default_indicators_by_hand is False:
                 _attach_first_segment_default_indicators(
                     manifests,
                     score,
                 )
+        if call_reapplication_functions_by_hand is False:
             if previous_persistent_indicators and not first_segment:
                 _reapply_persistent_indicators(
                     manifests,
@@ -3163,7 +3166,7 @@ def interpreter(
                 allow_empty_selections,
                 allows_instrument,
                 cache,
-                commands,
+                other_commands,
                 measure_count,
                 offset_to_measure_number,
                 manifests,
@@ -3334,7 +3337,6 @@ def make_lilypond_file(
     includes=None,
     local_measure_number_extra_offset=None,
     measure_number_extra_offset=None,
-    midi=False,
     preamble=None,
     spacing_extra_offset=None,
     stage_number_extra_offset=None,
@@ -3359,7 +3361,6 @@ def make_lilypond_file(
     lilypond_file = _make_lilypond_file(
         include_layout_ly,
         includes,
-        midi,
         preamble,
         score,
     )

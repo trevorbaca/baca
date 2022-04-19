@@ -45,13 +45,9 @@ mypy:
 
 pytest:
 	pytest baca
-	find . \( -path '*/__pycache__/*' -o -name __pycache__ \) -delete
-	find . \( -path '*/.pytest_cache/*' -o -name __pycache__ \) -delete
 
 pytest-x:
 	pytest -x baca
-	find . \( -path '*/__pycache__/*' -o -name __pycache__ \) -delete
-	find . \( -path '*/.pytest_cache/*' -o -name __pycache__ \) -delete
 
 reformat:
 	make black-reformat

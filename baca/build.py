@@ -954,7 +954,6 @@ def interpret_segment(
     *,
     first_segment=False,
     interpreter=None,
-    midi=False,
     **keywords,
 ):
     segment_directory = pathlib.Path(os.getcwd())
@@ -981,7 +980,6 @@ def interpret_segment(
             **keywords,
             first_segment=first_segment,
             metadata=metadata,
-            midi=midi,
             persist=persist,
             previous_metadata=previous_metadata,
             previous_persist=previous_persist,
