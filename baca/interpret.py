@@ -1279,7 +1279,7 @@ def _collect_persistent_indicators(
     for name, dependent_wrappers in name_to_wrappers.items():
         mementos = []
         wrappers = []
-        dictionary = abjad._inspect._get_persistent_wrappers(
+        dictionary = abjad._getlib._get_persistent_wrappers(
             dependent_wrappers=dependent_wrappers,
             omit_with_indicator=_enums.PHANTOM,
         )
@@ -1288,7 +1288,7 @@ def _collect_persistent_indicators(
                 wrapper.unbundle_indicator(), do_not_persist_on_phantom_measure
             ):
                 wrappers.append(wrapper)
-        dictionary = abjad._inspect._get_persistent_wrappers(
+        dictionary = abjad._getlib._get_persistent_wrappers(
             dependent_wrappers=dependent_wrappers
         )
         for wrapper in dictionary.values():
@@ -2929,7 +2929,7 @@ def _treat_untreated_persistent_wrappers(manifests, score):
 def _update_score_one_time(score):
     is_forbidden_to_update = score._is_forbidden_to_update
     score._is_forbidden_to_update = False
-    abjad._update._update_now(score, offsets=True)
+    abjad._updatelib._update_now(score, offsets=True)
     score._is_forbidden_to_update = is_forbidden_to_update
 
 
