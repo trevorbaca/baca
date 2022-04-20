@@ -749,12 +749,41 @@ class GenericCommand(_command.Command):
         self.function(argument, runtime=self._runtime)
 
 
-def attach_first_segment_default_indicators(
+def _attach_first_segment_default_indicators(manifests, staff_or_staff_group):
+    from . import interpret as _interpret
+
+    for wrapper in _interpret._attach_default_indicators(staff_or_staff_group):
+        _treat.treat_persistent_wrapper(manifests, wrapper, "default")
+
+
+def attach_first_appearance_default_indicators(
     *, selector=lambda _: _select.leaves(_)
 ) -> GenericCommand:
     from . import interpret as _interpret
 
-    def foo(argument, *, runtime=None):
+    def function(argument, *, runtime=None):
+        manifests = runtime["manifests"]
+        previous_persistent_indicators = runtime["previous_persistent_indicators"]
+        leaf = abjad.select.leaf(argument, 0)
+        parentage = abjad.get.parentage(leaf)
+        staff_or_staff_groups = []
+        for component in parentage:
+            if isinstance(component, abjad.Staff | abjad.StaffGroup):
+                if component.name not in previous_persistent_indicators:
+                    staff_or_staff_groups.append(component)
+        for staff_or_staff_group in staff_or_staff_groups:
+            for wrapper in _interpret._attach_default_indicators(staff_or_staff_group):
+                _treat.treat_persistent_wrapper(manifests, wrapper, "default")
+
+    command = GenericCommand(function=function, selector=selector)
+    command.name = "attach_first_apperance_default_indicators"
+    return command
+
+
+def attach_first_segment_default_indicators(
+    *, selector=lambda _: _select.leaves(_)
+) -> GenericCommand:
+    def function(argument, *, runtime=None):
         manifests = runtime["manifests"]
         leaf = abjad.select.leaf(argument, 0)
         parentage = abjad.get.parentage(leaf)
@@ -762,12 +791,11 @@ def attach_first_segment_default_indicators(
         for component in parentage:
             if isinstance(component, abjad.Staff | abjad.StaffGroup):
                 staff_or_staff_groups.append(component)
-        # breakpoint()
-        for context in staff_or_staff_groups:
-            _interpret._attach_first_segment_default_indicators(manifests, context)
+        for staff_or_staff_group in staff_or_staff_groups:
+            _attach_first_segment_default_indicators(manifests, staff_or_staff_group)
 
-    command = GenericCommand(function=foo, selector=selector)
-    command.name = "attach_default_indicators"
+    command = GenericCommand(function=function, selector=selector)
+    command.name = "attach_first_segment_default_indicators"
     return command
 
 

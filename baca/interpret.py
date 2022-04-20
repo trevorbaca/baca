@@ -232,31 +232,33 @@ def _assert_nonoverlapping_rhythms(rhythms, voice):
         previous_stop_offset = stop_offset
 
 
-def _attach_default_indicators(argument):
+# TODO: rename argument to staff_or_staff_group
+def _attach_default_indicators(context):
     """
-    Attaches defaults to all staff and staff group contexts in ``argument`` when
-    ``argument`` is a score.
+    Attaches defaults to all staff and staff group contexts in ``context`` when
+    ``context`` is a score.
 
-    Attaches defaults to ``argument`` (without iterating ``argument``) when ``argument``
+    Attaches defaults to ``context`` (without iterating ``context``) when ``context``
     is a staff or staff group.
 
     Returns list of one wrapper for every indicator attached.
     """
+    assert not isinstance(context, abjad.Score), repr(context)
     prototype = (abjad.Score, abjad.Staff, abjad.StaffGroup)
-    assert isinstance(argument, prototype), repr(argument)
+    assert isinstance(context, prototype), repr(context)
     wrappers = []
     tag = _enums.REMOVE_ALL_EMPTY_STAVES
     empty_prototype = (abjad.MultimeasureRest, abjad.Skip)
     prototype = (abjad.Staff, abjad.StaffGroup)
-    if isinstance(argument, abjad.Score):
-        staff_or_staff_groups = list(abjad.select.components(argument, prototype))
-        staves = list(abjad.select.components(argument, abjad.Staff))
-    elif isinstance(argument, abjad.Staff):
-        staff_or_staff_groups = [argument]
-        staves = [argument]
+    if isinstance(context, abjad.Score):
+        staff_or_staff_groups = abjad.select.components(context, prototype)
+        staves = abjad.select.components(context, abjad.Staff)
+    elif isinstance(context, abjad.Staff):
+        staff_or_staff_groups = [context]
+        staves = [context]
     else:
-        assert isinstance(argument, abjad.StaffGroup), repr(argument)
-        staff_or_staff_groups = [argument]
+        assert isinstance(context, abjad.StaffGroup), repr(context)
+        staff_or_staff_groups = [context]
         staves = []
     for staff_or_staff_group in staff_or_staff_groups:
         leaf = None
@@ -348,24 +350,6 @@ def _attach_fermatas(
         time_signatures,
     )
     context.extend(rests)
-
-
-def _attach_first_appearance_default_indicators(
-    manifests,
-    previous_persistent_indicators,
-    score,
-):
-    staff_or_staff_group = (abjad.Staff, abjad.StaffGroup)
-    for staff_or_staff_group in abjad.iterate.components(score, staff_or_staff_group):
-        if staff_or_staff_group.name in previous_persistent_indicators:
-            continue
-        for wrapper in _attach_default_indicators(staff_or_staff_group):
-            _treat.treat_persistent_wrapper(manifests, wrapper, "default")
-
-
-def _attach_first_segment_default_indicators(manifests, score):
-    for wrapper in _attach_default_indicators(score):
-        _treat.treat_persistent_wrapper(manifests, wrapper, "default")
 
 
 def _attach_nonfirst_empty_start_bar(global_skips):
@@ -798,6 +782,7 @@ def _bundle_runtime(
     margin_markups=None,
     metronome_marks=None,
     offset_to_measure_number=None,
+    previous_persistent_indicators=None,
     previous_segment_voice_metadata=None,
 ):
     runtime = {}
@@ -807,6 +792,7 @@ def _bundle_runtime(
     runtime["margin_markups"] = margin_markups
     runtime["metronome_marks"] = metronome_marks
     runtime["offset_to_measure_number"] = offset_to_measure_number or {}
+    runtime["previous_persistent_indicators"] = previous_persistent_indicators
     runtime["previous_segment_voice_metadata"] = previous_segment_voice_metadata
     return runtime
 
@@ -906,10 +892,12 @@ def _call_commands(
         previous_segment_voice_metadata = _get_previous_segment_voice_metadata(
             previous_persist, voice_name
         )
+        previous_persistent_indicators = previous_persist.get("persistent_indicators")
         runtime = _bundle_runtime(
             allows_instrument=allows_instrument,
             manifests=manifests,
             offset_to_measure_number=offset_to_measure_number,
+            previous_persistent_indicators=previous_persistent_indicators,
             previous_segment_voice_metadata=previous_segment_voice_metadata,
         )
         try:
@@ -3005,7 +2993,6 @@ def interpreter(
     attach_nonfirst_empty_start_bar=False,
     attach_rhythm_annotation_spanners=False,
     call_phantom_measure_append_functions_by_hand=False,
-    call_reapplication_functions_by_hand=False,
     call_rest_intercalation_functions_by_hand=False,
     check_persistent_indicators=False,
     check_wellformedness=False,
@@ -3092,7 +3079,10 @@ def interpreter(
     for command in commands:
         if isinstance(command, _rhythmcommands.RhythmCommand):
             rhythm_commands.append(command)
-        elif getattr(command, "name", None) == "attach_default_indicators":
+        elif getattr(command, "name", None) in (
+            "attach_first_segment_default_indicators",
+            "attach_first_apperance_default_indicators",
+        ):
             default_indicator_commands.append(command)
         else:
             other_commands.append(command)
@@ -3145,18 +3135,12 @@ def interpreter(
         "Rhythm commands", timer, print_timing=print_timing, suffix=command_count
     )
     with abjad.Timer() as timer:
-        if call_reapplication_functions_by_hand is False:
-            if previous_persistent_indicators and not first_segment:
-                _reapply_persistent_indicators(
-                    manifests,
-                    previous_persistent_indicators,
-                    score,
-                )
-                _attach_first_appearance_default_indicators(
-                    manifests,
-                    previous_persistent_indicators,
-                    score,
-                )
+        if previous_persistent_indicators and not first_segment:
+            _reapply_persistent_indicators(
+                manifests,
+                previous_persistent_indicators,
+                score,
+            )
     # _print_timing("Cleanup", timer, print_timing=print_timing)
     with abjad.Timer() as timer:
         with abjad.ForbidUpdate(component=score, update_on_exit=True):
